@@ -5,6 +5,7 @@ from __future__ import annotations
 import dataclasses
 import hashlib
 import json
+import re
 from collections.abc import Mapping, Sequence
 from typing import Any
 
@@ -40,6 +41,9 @@ FORBIDDEN_RUNTIME_KEYS = frozenset(
         "fixed_action_sequence",
         "literal_coordinate_table",
     }
+)
+FORBIDDEN_RUNTIME_KEY_TOKENS = frozenset(
+    re.sub(r"[^a-z0-9]", "", key.casefold()) for key in FORBIDDEN_RUNTIME_KEYS
 )
 
 
@@ -251,10 +255,20 @@ def validate_record(record: CompiledRecord) -> list[str]:
 
     if record.transition is not None and not _confidence_valid(record.transition.confidence):
         failures.append("transition confidence outside [0,1]")
+    hypothesis_ids = [item.hypothesis_id for item in record.hypotheses]
+    if len(hypothesis_ids) != len(set(hypothesis_ids)):
+        failures.append("duplicate hypothesis_id")
     for hypothesis in record.hypotheses:
         if not _confidence_valid(hypothesis.confidence):
             failures.append(f"hypothesis confidence outside [0,1]: {hypothesis.hypothesis_id}")
+
+    candidate_ids = [item.candidate_id for item in record.candidates]
+    if len(candidate_ids) != len(set(candidate_ids)):
+        failures.append("duplicate candidate_id")
+    known_candidates = set(candidate_ids)
     for closure in record.closures:
+        if closure.candidate_id not in known_candidates:
+            failures.append(f"closure candidate missing: {closure.candidate_id}")
         if closure.status not in CLOSURE_STATUSES:
             failures.append(f"invalid closure status: {closure.candidate_id}")
         if not _confidence_valid(closure.confidence):
@@ -273,9 +287,9 @@ def _forbidden_runtime_paths(value: Any, path: str = "$") -> list[str]:
     failures: list[str] = []
     if isinstance(value, Mapping):
         for key, item in value.items():
-            normalized = str(key).casefold()
+            normalized = re.sub(r"[^a-z0-9]", "", str(key).casefold())
             child_path = f"{path}.{key}"
-            if normalized in FORBIDDEN_RUNTIME_KEYS:
+            if normalized in FORBIDDEN_RUNTIME_KEY_TOKENS:
                 failures.append(child_path)
             failures.extend(_forbidden_runtime_paths(item, child_path))
     elif isinstance(value, Sequence) and not isinstance(
@@ -336,6 +350,7 @@ __all__ = [
     "CLOSURE_STATUSES",
     "EVIDENCE_STATES",
     "FORBIDDEN_RUNTIME_KEYS",
+    "FORBIDDEN_RUNTIME_KEY_TOKENS",
     "SCHEMA_VERSION",
     "TERMINAL_STATES",
     "canonical_json",
