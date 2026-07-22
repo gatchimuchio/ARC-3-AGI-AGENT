@@ -38,7 +38,11 @@ class CheckpointManager:
             "signature": observation.signature,
             "levels_completed": observation.levels_completed,
             "terminal_state": observation.terminal_state,
+            "visible_progress": observation.visible_progress,
+            "visible_effects": observation.visible_effects,
+            "available_actions": observation.available_actions,
             "action_count": observation.action_count,
+            "max_actions": observation.max_actions,
         }
         digest = hashlib.sha256(
             json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
