@@ -52,7 +52,7 @@ class VerificationResult:
     hazard_status: str
     commitment_status: str
     reason_codes: tuple[str, ...]
-    safe_checkpoint: bool = False
+    evidence_checkpoint_eligible: bool = False
 
 
 def verify_progress(
@@ -124,7 +124,7 @@ def verify_rendered_transition(
             hazard_status="SUSPEND",
             commitment_status="SUSPEND",
             reason_codes=tuple(f"INVALID_{failure}" for failure in failures),
-            safe_checkpoint=False,
+            evidence_checkpoint_eligible=False,
         )
 
     progress_status, progress_reason = verify_progress(before, after)
@@ -137,7 +137,11 @@ def verify_rendered_transition(
 
     if "FAIL" in {hazard_status, terminal_status, commitment_status}:
         status = "FAIL"
-    elif progress_status == "PASS" and commitment_status == "PASS":
+    elif (
+        progress_status == "PASS"
+        and commitment_status == "PASS"
+        and terminal_status in {"PASS", "PENDING"}
+    ):
         status = "PASS"
     else:
         status = "SUSPEND"
@@ -149,7 +153,9 @@ def verify_rendered_transition(
         hazard_status=hazard_status,
         commitment_status=commitment_status,
         reason_codes=reasons,
-        safe_checkpoint=(status == "PASS" and hazard_status != "FAIL"),
+        evidence_checkpoint_eligible=(
+            status == "PASS" and hazard_status == "CLEAR_RENDERED_ONLY"
+        ),
     )
 
 
