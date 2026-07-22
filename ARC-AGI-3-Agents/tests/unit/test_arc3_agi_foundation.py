@@ -74,6 +74,8 @@ class ProtocolTests(unittest.TestCase):
             command_id="cmd-1",
             decision_id="decision-1",
             status="EMIT",
+            candidate_id="c1",
+            closure_signature="closure:1",
             allow_memory_write=True,
             allow_external_emit=True,
         )
@@ -87,6 +89,11 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(lifecycle.transition("FRAME"), "FRAME")
         with self.assertRaises(ValueError):
             lifecycle.transition("ACT")
+
+        stopped = TrinityLifecycle("SUSPEND")
+        self.assertEqual(stopped.transition("STOP"), "STOP")
+        with self.assertRaises(ValueError):
+            stopped.transition("REFRAME")
 
 
 class SchemaTests(unittest.TestCase):
@@ -167,7 +174,7 @@ class SchemaTests(unittest.TestCase):
                 {
                     "entry_id": "entry:1",
                     "runtime_identity_free": True,
-                    "selectors": {"game_id": "ls20"},
+                    "selectors": {"replayIndex": 3},
                     "payload": {"effect": "MOVED"},
                     "support": 1,
                     "confidence": 0.8,
@@ -217,14 +224,23 @@ class VerificationTests(unittest.TestCase):
         )
         result = verify_rendered_transition(before, progressed, 1, ())
         self.assertEqual(result.status, "PASS")
-        self.assertTrue(result.safe_checkpoint)
+        self.assertTrue(result.evidence_checkpoint_eligible)
 
         failed = self.observation(
             "failed", state="GAME_OVER", effects=("HAZARD",), action_count=1
         )
         failure_result = verify_rendered_transition(before, failed, 1, ("MOVED",))
         self.assertEqual(failure_result.status, "FAIL")
-        self.assertFalse(failure_result.safe_checkpoint)
+        self.assertFalse(failure_result.evidence_checkpoint_eligible)
+
+    def test_unknown_terminal_does_not_close_even_with_progress(self) -> None:
+        before = self.observation("before")
+        after = self.observation(
+            "after", levels=1, state="UNKNOWN", action_count=1
+        )
+        result = verify_rendered_transition(before, after, 1, ())
+        self.assertEqual(result.status, "SUSPEND")
+        self.assertFalse(result.evidence_checkpoint_eligible)
 
     def test_checkpoint_manager_is_bounded(self) -> None:
         manager = CheckpointManager(max_checkpoints=2)
