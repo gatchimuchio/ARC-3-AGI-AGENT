@@ -194,6 +194,10 @@ class HDSDecision:
             failures.append("HDS_REASON_CODE_EMPTY")
         if self.allow_external_emit and self.status not in {"PASS", "EMIT", "PROBE"}:
             failures.append("EXTERNAL_EMIT_NOT_COMPATIBLE_WITH_STATUS")
+        if self.allow_external_emit and not self.candidate_id:
+            failures.append("EXTERNAL_EMIT_CANDIDATE_MISSING")
+        if self.allow_external_emit and not self.closure_signature:
+            failures.append("EXTERNAL_EMIT_CLOSURE_MISSING")
         if self.allow_memory_write and self.status in {"REJECT", "STOP"}:
             failures.append("MEMORY_WRITE_NOT_COMPATIBLE_WITH_STATUS")
         return tuple(sorted(set(failures)))
@@ -213,6 +217,8 @@ class MemoryDirective:
 
     def validate(self, decision: HDSDecision) -> tuple[str, ...]:
         failures: list[str] = []
+        if decision.validate():
+            failures.append("HDS_DECISION_INVALID")
         if not self.command_id.strip():
             failures.append("MEMORY_COMMAND_ID_MISSING")
         if self.command_id != decision.command_id:
@@ -246,6 +252,8 @@ class EmissionDirective:
 
     def validate(self, decision: HDSDecision) -> tuple[str, ...]:
         failures: list[str] = []
+        if decision.validate():
+            failures.append("HDS_DECISION_INVALID")
         if self.command_id != decision.command_id:
             failures.append("EMISSION_COMMAND_MISMATCH")
         if self.decision_id != decision.decision_id:
@@ -285,7 +293,7 @@ _STAGE_TRANSITIONS = {
     "COMPUTE": {"JUDGE", "RECOMPUTE", "SUSPEND", "STOP"},
     "JUDGE": {"SUSPEND", "STOP", "RECOMPUTE", "ACT", "UPDATE_MEMORY"},
     "SUSPEND": {"RECOMPUTE", "STOP", "REFRAME"},
-    "STOP": {"REFRAME"},
+    "STOP": set(),
     "RECOMPUTE": {"COMPUTE", "SUSPEND", "STOP"},
     "ACT": {"OBSERVE_RESULT", "STOP"},
     "OBSERVE_RESULT": {"UPDATE_MEMORY", "REFRAME", "STOP"},
@@ -299,6 +307,12 @@ class TrinityLifecycle:
     """Bounded state machine for one HDS-compute-memory control cycle."""
 
     stage: str = "BOOT"
+
+    def __post_init__(self) -> None:
+        normalized = str(self.stage).upper().strip()
+        if normalized not in TRINITY_STAGES:
+            raise ValueError(f"unknown initial Trinity stage: {self.stage}")
+        self.stage = normalized
 
     def transition(self, target: str) -> str:
         normalized = str(target).upper().strip()
