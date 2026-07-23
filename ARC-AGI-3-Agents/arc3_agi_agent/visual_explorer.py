@@ -12,6 +12,7 @@ from __future__ import annotations
 from collections import Counter, deque
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
+from math import gcd
 from typing import Literal
 
 from .schema import digest_object, forbidden_runtime_paths
@@ -301,6 +302,22 @@ class VisualAction:
     y: int | None = None
     evidence: tuple[str, ...] = ()
 
+    @property
+    def prototype_key(self) -> str:
+        """Return a position-independent rendered affordance class."""
+
+        explicit = next(
+            (
+                item
+                for item in self.evidence
+                if item.startswith(
+                    ("component-prototype:", "operator-prototype:")
+                )
+            ),
+            None,
+        )
+        return explicit or f"action-prototype:{self.action_id}:{self.group}"
+
     def step(self) -> dict[str, int]:
         step = {"action_id": self.action_id}
         if self.action_id == 6:
@@ -394,6 +411,21 @@ def analyze_scene(
                     "point": (x, y),
                 }
             )[:20]
+            component_scale = gcd(component.width, component.height)
+            prototype = "component-prototype:" + digest_object(
+                {
+                    "color": component.color,
+                    "normalized_width": component.width // component_scale,
+                    "normalized_height": component.height // component_scale,
+                    "fill_milli": round(
+                        1000
+                        * component.area
+                        / (component.width * component.height)
+                    ),
+                    "rectangular": component.rectangular,
+                    "group": group,
+                }
+            )[:20]
             candidates.append(
                 VisualAction(
                     key=key,
@@ -404,6 +436,7 @@ def analyze_scene(
                     evidence=(
                         "rendered-connected-component",
                         f"component-group:{group}",
+                        prototype,
                     ),
                 )
             )
@@ -478,10 +511,59 @@ class DeterministicVisualExplorer:
     status_mask: frozenset[Point] = frozenset()
     previous_signature: str = ""
     previous_action_key: str = ""
+    semantic_pending_signature: str = ""
+    semantic_pending_action: VisualAction | None = None
     level_epoch: int = 0
     transition_count: int = 0
     failure_count: int = 0
     memory_read_count: int = 0
+    prototype_outcomes: dict[str, dict[str, int]] = field(
+        default_factory=dict
+    )
+    progress_prototypes: dict[str, int] = field(default_factory=dict)
+
+    def _record_prototype(
+        self,
+        action: VisualAction,
+        outcome: Outcome,
+        *,
+        progress: bool = False,
+    ) -> None:
+        counts = self.prototype_outcomes.setdefault(
+            action.prototype_key,
+            {},
+        )
+        counts[outcome] = counts.get(outcome, 0) + 1
+        if progress:
+            self.progress_prototypes[action.prototype_key] = (
+                self.progress_prototypes.get(action.prototype_key, 0) + 1
+            )
+
+    def _prototype_priority(self, action: VisualAction) -> tuple[int, int]:
+        prototype = action.prototype_key
+        progress_count = self.progress_prototypes.get(prototype, 0)
+        counts = self.prototype_outcomes.get(prototype, {})
+        transition_count = counts.get("TRANSITION", 0)
+        total = sum(counts.values())
+        if progress_count:
+            return (0, -progress_count)
+        if transition_count:
+            return (1, -transition_count)
+        if not total:
+            return (2, 0)
+        return (3, total)
+
+    def _ordered_untested(self, node: _Node) -> tuple[VisualAction, ...]:
+        order_index = {key: index for index, key in enumerate(node.order)}
+        return tuple(
+            sorted(
+                node.untested(),
+                key=lambda action: (
+                    *self._prototype_priority(action),
+                    order_index[action.key],
+                ),
+            )
+        )
 
     def reset_level(self, scene: VisualScene) -> None:
         self.nodes.clear()
@@ -489,6 +571,8 @@ class DeterministicVisualExplorer:
         self.status_mask = scene.status_mask
         self.previous_signature = ""
         self.previous_action_key = ""
+        self.semantic_pending_signature = ""
+        self.semantic_pending_action = None
         self.level_epoch += 1
         self._ensure_node(scene)
 
@@ -517,10 +601,38 @@ class DeterministicVisualExplorer:
         """Commit the pending action's visible outcome to passive state."""
 
         if level_progress:
+            action = self.semantic_pending_action
+            if action is None:
+                source = self.nodes.get(self.previous_signature)
+                if source is not None:
+                    action = source.actions.get(self.previous_action_key)
+            if action is not None:
+                self._record_prototype(
+                    action,
+                    "TRANSITION",
+                    progress=True,
+                )
             self.reset_level(scene)
             return
         if not self.initial_signature:
             self.reset_level(scene)
+            return
+
+        if (
+            self.semantic_pending_signature
+            and self.semantic_pending_action is not None
+        ):
+            action = self.semantic_pending_action
+            if terminal_state == "GAME_OVER":
+                self.failure_count += 1
+                self._record_prototype(action, "HAZARD")
+            elif scene.signature == self.semantic_pending_signature:
+                self._record_prototype(action, "NO_CHANGE")
+            else:
+                self.transition_count += 1
+                self._record_prototype(action, "TRANSITION")
+            self.semantic_pending_signature = ""
+            self.semantic_pending_action = None
             return
 
         self._ensure_node(scene)
@@ -533,13 +645,25 @@ class DeterministicVisualExplorer:
             source.outcomes[self.previous_action_key] = "HAZARD"
             source.targets.pop(self.previous_action_key, None)
             self.failure_count += 1
+            self._record_prototype(
+                source.actions[self.previous_action_key],
+                "HAZARD",
+            )
         elif scene.signature == self.previous_signature:
             source.outcomes[self.previous_action_key] = "NO_CHANGE"
             source.targets.pop(self.previous_action_key, None)
+            self._record_prototype(
+                source.actions[self.previous_action_key],
+                "NO_CHANGE",
+            )
         else:
             source.outcomes[self.previous_action_key] = "TRANSITION"
             source.targets[self.previous_action_key] = scene.signature
             self.transition_count += 1
+            self._record_prototype(
+                source.actions[self.previous_action_key],
+                "TRANSITION",
+            )
         self.previous_signature = ""
         self.previous_action_key = ""
 
@@ -552,6 +676,17 @@ class DeterministicVisualExplorer:
 
         if not source_signature:
             raise ValueError("hazard source signature is required")
+        if self.semantic_pending_action is not None:
+            self.failure_count += 1
+            self._record_prototype(
+                self.semantic_pending_action,
+                "HAZARD",
+            )
+            self.semantic_pending_signature = ""
+            self.semantic_pending_action = None
+            self.previous_signature = ""
+            self.previous_action_key = ""
+            return
         node = self.nodes.get(source_signature)
         if node is None:
             node = _Node(
@@ -566,6 +701,7 @@ class DeterministicVisualExplorer:
             self.failure_count += 1
         node.outcomes[action.key] = "HAZARD"
         node.targets.pop(action.key, None)
+        self._record_prototype(action, "HAZARD")
         if not self.initial_signature:
             self.initial_signature = source_signature
         self.previous_signature = ""
@@ -586,6 +722,15 @@ class DeterministicVisualExplorer:
     ) -> bool:
         """Record a semantic proposal as pending without selecting authority."""
 
+        if any(
+            item.startswith("operator-prototype:")
+            for item in action.evidence
+        ):
+            self.semantic_pending_signature = scene.signature
+            self.semantic_pending_action = action
+            self.previous_signature = ""
+            self.previous_action_key = ""
+            return True
         node = self._ensure_node(scene)
         if node.outcomes.get(action.key) in {"NO_CHANGE", "HAZARD"}:
             return False
@@ -600,7 +745,7 @@ class DeterministicVisualExplorer:
         signature: str,
     ) -> tuple[VisualAction | None, int | None]:
         node = self.nodes[signature]
-        untested = node.untested()
+        untested = self._ordered_untested(node)
         if untested:
             return untested[0], 0
 
@@ -610,7 +755,7 @@ class DeterministicVisualExplorer:
         while queue:
             current, distance = queue.popleft()
             current_node = self.nodes[current]
-            if distance > 0 and current_node.untested():
+            if distance > 0 and self._ordered_untested(current_node):
                 return first_action[current], distance
             for key in current_node.order:
                 if current_node.outcomes.get(key) != "TRANSITION":
@@ -688,10 +833,34 @@ class DeterministicVisualExplorer:
             "status_mask": [list(point) for point in sorted(self.status_mask)],
             "previous_signature": self.previous_signature,
             "previous_action_key": self.previous_action_key,
+            "semantic_pending_signature": self.semantic_pending_signature,
+            "semantic_pending_action": (
+                None
+                if self.semantic_pending_action is None
+                else {
+                    "key": self.semantic_pending_action.key,
+                    "action_id": self.semantic_pending_action.action_id,
+                    "group": self.semantic_pending_action.group,
+                    "x": self.semantic_pending_action.x,
+                    "y": self.semantic_pending_action.y,
+                    "evidence": list(
+                        self.semantic_pending_action.evidence
+                    ),
+                }
+            ),
             "level_epoch": self.level_epoch,
             "transition_count": self.transition_count,
             "failure_count": self.failure_count,
             "memory_read_count": self.memory_read_count,
+            "prototype_outcomes": {
+                prototype: dict(sorted(counts.items()))
+                for prototype, counts in sorted(
+                    self.prototype_outcomes.items()
+                )
+            },
+            "progress_prototypes": dict(
+                sorted(self.progress_prototypes.items())
+            ),
             "nodes": {
                 signature: {
                     "order": list(node.order),
@@ -752,6 +921,9 @@ class DeterministicVisualExplorer:
             status_mask=frozenset(mask),
             previous_signature=str(value.get("previous_signature", "")),
             previous_action_key=str(value.get("previous_action_key", "")),
+            semantic_pending_signature=str(
+                value.get("semantic_pending_signature", "")
+            ),
             level_epoch=_payload_int(
                 value.get("level_epoch", 0),
                 "level_epoch",
@@ -769,6 +941,89 @@ class DeterministicVisualExplorer:
                 "memory_read_count",
             ),
         )
+        raw_semantic_pending = value.get("semantic_pending_action")
+        if raw_semantic_pending is not None:
+            if not isinstance(raw_semantic_pending, Mapping):
+                raise ValueError(
+                    "visual explorer semantic pending action invalid"
+                )
+            raw_semantic_evidence = raw_semantic_pending.get(
+                "evidence",
+                (),
+            )
+            if (
+                not isinstance(raw_semantic_evidence, Sequence)
+                or isinstance(
+                    raw_semantic_evidence,
+                    (str, bytes, bytearray),
+                )
+            ):
+                raise ValueError(
+                    "visual explorer semantic pending evidence invalid"
+                )
+            explorer.semantic_pending_action = VisualAction(
+                key=str(raw_semantic_pending.get("key", "")),
+                action_id=_payload_int(
+                    raw_semantic_pending.get("action_id"),
+                    "semantic_pending_action.action_id",
+                ),
+                group=_payload_int(
+                    raw_semantic_pending.get("group"),
+                    "semantic_pending_action.group",
+                ),
+                x=(
+                    None
+                    if raw_semantic_pending.get("x") is None
+                    else _payload_int(
+                        raw_semantic_pending.get("x"),
+                        "semantic_pending_action.x",
+                    )
+                ),
+                y=(
+                    None
+                    if raw_semantic_pending.get("y") is None
+                    else _payload_int(
+                        raw_semantic_pending.get("y"),
+                        "semantic_pending_action.y",
+                    )
+                ),
+                evidence=tuple(
+                    str(item) for item in raw_semantic_evidence
+                ),
+            )
+        raw_prototype_outcomes = value.get("prototype_outcomes", {})
+        raw_progress_prototypes = value.get("progress_prototypes", {})
+        if not isinstance(raw_prototype_outcomes, Mapping) or not isinstance(
+            raw_progress_prototypes,
+            Mapping,
+        ):
+            raise ValueError("visual explorer prototype state invalid")
+        explorer.prototype_outcomes = {
+            str(prototype): {
+                str(outcome): _payload_int(
+                    count,
+                    "prototype_outcome_count",
+                )
+                for outcome, count in (
+                    _mapping.items()
+                    if isinstance(_mapping, Mapping)
+                    else ()
+                )
+            }
+            for prototype, _mapping in raw_prototype_outcomes.items()
+        }
+        if any(
+            not isinstance(counts, Mapping)
+            for counts in raw_prototype_outcomes.values()
+        ):
+            raise ValueError("visual explorer prototype counts invalid")
+        explorer.progress_prototypes = {
+            str(prototype): _payload_int(
+                count,
+                "progress_prototype_count",
+            )
+            for prototype, count in raw_progress_prototypes.items()
+        }
         raw_nodes = value.get("nodes", {})
         if not isinstance(raw_nodes, Mapping):
             raise ValueError("visual explorer nodes invalid")

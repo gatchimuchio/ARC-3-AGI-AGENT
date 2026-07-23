@@ -48,6 +48,9 @@ class P10SampleAgentReport:
     instruction_query_digests: tuple[str, ...]
     decision_statuses: tuple[str, ...]
     verification_statuses: tuple[str, ...]
+    emitted_steps: tuple[tuple[dict[str, object], ...], ...]
+    emitted_provenance: tuple[tuple[str, ...], ...]
+    emitted_level_counts: tuple[int, ...]
     trace_digests: tuple[str, ...]
     trace_events: tuple[tuple[dict[str, object], ...], ...]
     rollback_decision_ids: tuple[str, ...]
@@ -183,6 +186,29 @@ class P10SampleAgent(Agent):
             )
             for reset in self.search_resets
         )
+        emitted_steps: list[tuple[dict[str, object], ...]] = []
+        emitted_provenance: list[tuple[str, ...]] = []
+        emitted_level_counts: list[int] = []
+        for cycle in self.cycles:
+            emission_result = cycle.kernel_result.emission_result
+            if emission_result is None:
+                continue
+            selected = next(
+                (
+                    candidate
+                    for candidate in cycle.kernel_result.candidates
+                    if candidate.candidate_id
+                    == emission_result.candidate_id
+                ),
+                None,
+            )
+            if selected is None:
+                raise RuntimeError("P10_REPORT_EMITTED_CANDIDATE_MISSING")
+            emitted_steps.append(
+                tuple(dict(step) for step in selected.steps)
+            )
+            emitted_provenance.append(selected.provenance)
+            emitted_level_counts.append(emission_result.levels_completed)
         return P10SampleAgentReport(
             game_id=self.game_id,
             instruction_variant=self.runtime.instruction_variant,
@@ -229,6 +255,9 @@ class P10SampleAgent(Agent):
                 for cycle in self.cycles
                 if cycle.verification is not None
             ),
+            emitted_steps=tuple(emitted_steps),
+            emitted_provenance=tuple(emitted_provenance),
+            emitted_level_counts=tuple(emitted_level_counts),
             trace_digests=tuple(
                 cycle.kernel_result.trace_digest for cycle in self.cycles
             ),

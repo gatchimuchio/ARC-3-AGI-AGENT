@@ -30,11 +30,13 @@ from .visual_explorer import (
 )
 
 VISUAL_EXPLORER_MEMORY_FORMAT = "arc3-p10-visual-memory-v1"
-VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v3"
+VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v7"
 VISUAL_RUNTIME_MEMORY_TARGET = "visual-runtime-state"
 
 
-def _latest_explorer(memory: MemorySnapshot) -> DeterministicVisualExplorer:
+def _latest_visual_state(
+    memory: MemorySnapshot,
+) -> tuple[DeterministicVisualExplorer, SemanticPlannerState]:
     for entry in sorted(memory.entries, key=lambda item: item.version, reverse=True):
         payload = entry.payload
         if payload.get("format") != VISUAL_EXPLORER_MEMORY_FORMAT:
@@ -42,22 +44,18 @@ def _latest_explorer(memory: MemorySnapshot) -> DeterministicVisualExplorer:
         raw_explorer = payload.get("visual_explorer")
         if not isinstance(raw_explorer, dict):
             raise ValueError("visual explorer memory payload invalid")
-        return DeterministicVisualExplorer.from_payload(raw_explorer)
-    return DeterministicVisualExplorer()
-
-
-def _latest_semantic_planner(memory: MemorySnapshot) -> SemanticPlannerState:
-    for entry in sorted(memory.entries, key=lambda item: item.version, reverse=True):
-        payload = entry.payload
-        if payload.get("format") != VISUAL_EXPLORER_MEMORY_FORMAT:
-            continue
         raw_planner = payload.get("semantic_planner")
-        if raw_planner is None:
-            continue
-        if not isinstance(raw_planner, dict):
+        if raw_planner is not None and not isinstance(raw_planner, dict):
             raise ValueError("semantic planner memory payload invalid")
-        return SemanticPlannerState.from_payload(raw_planner)
-    return SemanticPlannerState()
+        return (
+            DeterministicVisualExplorer.from_payload(raw_explorer),
+            (
+                SemanticPlannerState()
+                if raw_planner is None
+                else SemanticPlannerState.from_payload(raw_planner)
+            ),
+        )
+    return DeterministicVisualExplorer(), SemanticPlannerState()
 
 
 def compile_visual_failure_payload(
@@ -95,10 +93,12 @@ def compile_visual_failure_payload(
         y=y,
         evidence=("observed-irreversible-failure",),
     )
-    explorer = _latest_explorer(memory)
+    explorer, semantic_planner = _latest_visual_state(memory)
     explorer.record_hazard(raw_source, action)
-    semantic_planner = _latest_semantic_planner(memory)
-    semantic_planner.invalidate_active_plan()
+    target_hazard = semantic_planner.record_target_hazard()
+    semantic_planner.invalidate_active_plan(
+        block=target_hazard is not False
+    )
     return {
         "format": VISUAL_EXPLORER_MEMORY_FORMAT,
         "input_memory_digest": memory.digest,
@@ -132,7 +132,7 @@ def prepare_visual_search_reset(
 
     if terminal_state != "NOT_FINISHED":
         return None
-    explorer = _latest_explorer(memory)
+    explorer, semantic_planner = _latest_visual_state(memory)
     fixed_mask = explorer.status_mask or None
     scene = analyze_scene(
         rendered_grid,
@@ -155,7 +155,7 @@ def prepare_visual_search_reset(
         "operator_version": VISUAL_OPERATOR_VERSION,
         "scene_signature": scene.signature,
         "search_reset_reason": decision.reason,
-        "semantic_planner": _latest_semantic_planner(memory).to_payload(),
+        "semantic_planner": semantic_planner.to_payload(),
         "visual_explorer": explorer.to_payload(),
     }
     evidence_signature = "search-frontier:" + digest_object(memory_payload)
@@ -393,7 +393,7 @@ class P10VisualCompute(PureLLMCompute):
         if not observation.rendered_layers:
             raise ValueError("P10 rendered observation missing")
 
-        explorer = _latest_explorer(memory)
+        explorer, semantic_planner = _latest_visual_state(memory)
         progress = "LEVEL_PROGRESS" in observation.visible_effects
         fixed_mask = (
             None
@@ -410,7 +410,6 @@ class P10VisualCompute(PureLLMCompute):
             terminal_state=observation.terminal_state,
             level_progress=progress,
         )
-        semantic_planner = _latest_semantic_planner(memory)
         if progress:
             semantic_planner.reset_after_progress()
         terminal = observation.terminal_state in {"WIN", "GAME_OVER"}

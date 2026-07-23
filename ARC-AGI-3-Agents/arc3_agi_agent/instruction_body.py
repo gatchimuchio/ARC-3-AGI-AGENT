@@ -1411,7 +1411,7 @@ def load_default_parametric_instruction_body() -> ParametricInstructionBody:
 
 @functools.lru_cache(maxsize=1)
 def load_p10_symbolic_instruction_body() -> SymbolicInstructionBody:
-    body = load_instruction_body(_bundle_path("p10_p_a_symbolic_v2.json"))
+    body = load_instruction_body(_bundle_path("p10_p_a_symbolic_v4.json"))
     if not isinstance(body, SymbolicInstructionBody):
         raise TypeError("P10 symbolic bundle has wrong format")
     return body
@@ -1419,7 +1419,7 @@ def load_p10_symbolic_instruction_body() -> SymbolicInstructionBody:
 
 @functools.lru_cache(maxsize=1)
 def load_p10_parametric_instruction_body() -> ParametricInstructionBody:
-    body = load_instruction_body(_bundle_path("p10_p_b_parametric_v2.json"))
+    body = load_instruction_body(_bundle_path("p10_p_b_parametric_v4.json"))
     if not isinstance(body, ParametricInstructionBody):
         raise TypeError("P10 parametric bundle has wrong format")
     return body
@@ -1427,7 +1427,7 @@ def load_p10_parametric_instruction_body() -> ParametricInstructionBody:
 
 @functools.lru_cache(maxsize=1)
 def load_p10_hybrid_instruction_body() -> ParametricInstructionBody:
-    body = load_instruction_body(_bundle_path("p10_hybrid_v1.json"))
+    body = load_instruction_body(_bundle_path("p10_hybrid_v3.json"))
     if not isinstance(body, ParametricInstructionBody):
         raise TypeError("P10 hybrid bundle has wrong format")
     return body

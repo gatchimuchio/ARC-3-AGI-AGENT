@@ -33,6 +33,7 @@ from arc3_agi_agent.roles import (
     DeterministicWorldModel,
     Layer0FunctionalLoss,
 )
+from arc3_agi_agent.schema import digest_object
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 MEMORY_FIXTURES = (
@@ -114,6 +115,21 @@ def raw_observation() -> dict[str, object]:
 
 
 class StandaloneMemoryOperationTests(unittest.TestCase):
+    def test_snapshot_digest_is_cached_without_changing_canonical_value(
+        self,
+    ) -> None:
+        snapshot = MemorySnapshot(version=0, entries=())
+        expected = digest_object(
+            {
+                "version": 0,
+                "entries": (),
+                "archive_entries": (),
+            }
+        )
+
+        self.assertEqual(snapshot.digest, expected)
+        self.assertIs(snapshot.digest, snapshot.digest)
+
     def test_all_storage_operations_have_distinct_working_semantics(self) -> None:
         memory = PassiveMemory(max_entries=8)
         observed_operations: set[str] = set()

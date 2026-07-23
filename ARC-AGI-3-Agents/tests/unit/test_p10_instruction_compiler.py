@@ -16,7 +16,11 @@ from arc3_agi_agent.p10_instruction_compiler import (
     P10_COMPILER_SEED,
     compile_p10_instruction_bodies,
 )
-from arc3_agi_agent.semantic_operators import RELATION_TOGGLE_OPERATOR
+from arc3_agi_agent.semantic_operators import (
+    OBJECT_TARGET_CONTROL_OPERATOR,
+    RELATION_TOGGLE_OPERATOR,
+    SYMBOLIC_REWRITE_OPERATOR,
+)
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 BUNDLE_DIR = PACKAGE_ROOT / "arc3_agi_agent" / "bundles"
@@ -44,12 +48,20 @@ class P10InstructionCompilerTests(unittest.TestCase):
         self.assertEqual(hybrid.validate(), ())
         self.assertEqual(
             tuple(item.operator_id for item in symbolic.operator_instructions),
-            (RELATION_TOGGLE_OPERATOR,),
+            (
+                OBJECT_TARGET_CONTROL_OPERATOR,
+                RELATION_TOGGLE_OPERATOR,
+                SYMBOLIC_REWRITE_OPERATOR,
+            ),
         )
         self.assertEqual(parametric.operator_instructions, ())
         self.assertEqual(
             tuple(item.operator_id for item in hybrid.operator_instructions),
-            (RELATION_TOGGLE_OPERATOR,),
+            (
+                OBJECT_TARGET_CONTROL_OPERATOR,
+                RELATION_TOGGLE_OPERATOR,
+                SYMBOLIC_REWRITE_OPERATOR,
+            ),
         )
         self.assertNotEqual(symbolic.digest(), hybrid.digest())
         self.assertNotEqual(parametric.digest(), hybrid.digest())
@@ -62,9 +74,9 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 output_dir=output_dir,
             )
             for filename in (
-                "p10_p_a_symbolic_v2.json",
-                "p10_p_b_parametric_v2.json",
-                "p10_hybrid_v1.json",
+                "p10_p_a_symbolic_v4.json",
+                "p10_p_b_parametric_v4.json",
+                "p10_hybrid_v3.json",
                 "p10_manifest.json",
             ):
                 self.assertEqual(

@@ -82,10 +82,29 @@ class MemorySnapshot:
     version: int
     entries: tuple[MemoryEntry, ...]
     archive_entries: tuple[MemoryEntry, ...] = ()
+    _digest_value: str = field(
+        init=False,
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self,
+            "_digest_value",
+            digest_object(
+                {
+                    "version": self.version,
+                    "entries": self.entries,
+                    "archive_entries": self.archive_entries,
+                }
+            ),
+        )
 
     @property
     def digest(self) -> str:
-        return digest_object(self)
+        return self._digest_value
 
 
 @dataclass(frozen=True, slots=True)

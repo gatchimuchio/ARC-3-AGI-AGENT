@@ -14,13 +14,17 @@ from .instruction_body import (
     seal_instruction_bundle,
 )
 from .schema import canonical_json, digest_object
-from .semantic_operators import RELATION_TOGGLE_OPERATOR
+from .semantic_operators import (
+    OBJECT_TARGET_CONTROL_OPERATOR,
+    RELATION_TOGGLE_OPERATOR,
+    SYMBOLIC_REWRITE_OPERATOR,
+)
 
-P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v1"
+P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v3"
 P10_COMPILER_SEED = 0
-P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v2"
-P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v2"
-P10_HYBRID_VERSION = "p10-hybrid-v1"
+P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v4"
+P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v4"
+P10_HYBRID_VERSION = "p10-hybrid-v3"
 
 
 def _file_digest(path: Path) -> str:
@@ -85,6 +89,99 @@ def relation_toggle_instruction_mapping() -> dict[str, object]:
         "provenance": [
             "compiled-identity-free-transition-evidence",
             "compiled-rendered-relation-evidence",
+        ],
+    }
+
+
+def object_target_control_instruction_mapping() -> dict[str, object]:
+    """Return P material for a rendered object-target control primitive."""
+
+    return {
+        "operator_id": OBJECT_TARGET_CONTROL_OPERATOR,
+        "action_id": 6,
+        "detector": "rendered four-corner targets and compact controls",
+        "transform": "single-step goal-displacement control with reobservation",
+        "parameters": {
+            "left_control_color": 8,
+            "right_control_color": 14,
+            "state_excluded_colors": [3, 4, 5],
+            "minimum_control_area": 8,
+            "maximum_control_area": 16,
+            "goal_to_corner_width_ratio": 2,
+            "target_corner_stride_ratio": 3,
+            "paired_far_tolerance_in_corner_widths": 12,
+            "near_tolerance_in_corner_widths": 3,
+            "far_tolerance_in_corner_widths": 15,
+            "vertical_far_tolerance_in_corner_widths": 27,
+            "minimum_guided_cost_per_goal": 4,
+            "maximum_search_states": 4096,
+            "maximum_control_cycle_steps": 32,
+            "minimum_model_observations_per_action": 2,
+            "maximum_model_plan_depth": 12,
+            "maximum_mechanism_slots": 96,
+            "minimum_dense_model_slots": 32,
+        },
+        "preconditions": [
+            "ACTION6_AVAILABLE",
+            "RENDERED_TARGET_MARKER",
+            "RENDERED_COMPACT_CONTROL",
+        ],
+        "falsification_conditions": [
+            "target marker detector does not close",
+            "selected control does not move a rendered goal",
+            "goal displacement does not reduce a current-frame mismatch",
+        ],
+        "provenance": [
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-single-step-transition-evidence",
+        ],
+    }
+
+
+def symbolic_rewrite_instruction_mapping() -> dict[str, object]:
+    """Return P material for visible example-driven symbol rewriting."""
+
+    return {
+        "operator_id": SYMBOLIC_REWRITE_OPERATOR,
+        "action_id": 2,
+        "detector": (
+            "rendered bordered symbol rows with relation connectors "
+            "and selector"
+        ),
+        "transform": (
+            "bounded visible rewrite plus observed editable-node "
+            "constraint solve"
+        ),
+        "parameters": {
+            "tile_size": 7,
+            "symbol_color": 5,
+            "connector_color": 3,
+            "selector_color": 0,
+            "cycle_size": 7,
+            "decrement_action": 1,
+            "increment_action": 2,
+            "previous_action": 3,
+            "next_action": 4,
+            "minimum_border_count": 23,
+            "maximum_rewrite_depth": 2,
+            "maximum_intermediate_candidates": 4096,
+            "maximum_output_tokens": 64,
+        },
+        "preconditions": [
+            "DIRECTIONAL_ACTIONS_AVAILABLE",
+            "RENDERED_SYMBOL_TILE_ROWS",
+            "RENDERED_REWRITE_CONNECTOR",
+            "RENDERED_SELECTOR",
+        ],
+        "falsification_conditions": [
+            "symbol row detector does not close",
+            "visible connector rules cannot rewrite the source",
+            "selector action does not expose a bounded cycle",
+            "editable rule constraints have no verified solution",
+        ],
+        "provenance": [
+            "compiled-identity-free-symbol-relation-evidence",
+            "compiled-visible-rewrite-and-cycle-evidence",
         ],
     }
 
@@ -156,19 +253,23 @@ def compile_p10_instruction_bodies(
         raise ValueError("P10 instruction compiler seed is fixed at 0")
     base_symbolic = _load(base_bundle_dir / "p_a_symbolic_v1.json")
     base_parametric = _load(base_bundle_dir / "p_b_parametric_v1.json")
-    operator = relation_toggle_instruction_mapping()
+    operators = [
+        relation_toggle_instruction_mapping(),
+        object_target_control_instruction_mapping(),
+        symbolic_rewrite_instruction_mapping(),
+    ]
     bundles = {
         "P-A": (
-            "p10_p_a_symbolic_v2.json",
+            "p10_p_a_symbolic_v4.json",
             _upgrade(
                 base_symbolic,
                 body_version=P10_SYMBOLIC_VERSION,
                 variant="P-A",
-                operator_instructions=[operator],
+                operator_instructions=operators,
             ),
         ),
         "P-B": (
-            "p10_p_b_parametric_v2.json",
+            "p10_p_b_parametric_v4.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_PARAMETRIC_VERSION,
@@ -177,12 +278,12 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "hybrid": (
-            "p10_hybrid_v1.json",
+            "p10_hybrid_v3.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_HYBRID_VERSION,
                 variant="hybrid",
-                operator_instructions=[operator],
+                operator_instructions=operators,
             ),
         ),
     }
@@ -245,5 +346,7 @@ __all__ = [
     "P10_SYMBOLIC_VERSION",
     "compile_p10_instruction_bodies",
     "main",
+    "object_target_control_instruction_mapping",
     "relation_toggle_instruction_mapping",
+    "symbolic_rewrite_instruction_mapping",
 ]
