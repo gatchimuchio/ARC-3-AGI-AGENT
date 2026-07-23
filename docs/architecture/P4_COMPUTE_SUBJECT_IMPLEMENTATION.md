@@ -1,8 +1,8 @@
-# P2 命令形保持体・情報体形成 実装指示書
+# P4 計算主体C・命令形保持体P 実装指示書
 
-- phase: `P2_INSTRUCTION_BODY_FORMATION`
-- state: current
-- predecessor: `P1_SAMPLE_EXECUTION_KERNEL` complete
+- phase: `P4_COMPUTE_SUBJECT_IMPLEMENTATION`
+- state: blocked until P3 evidence compiler completes
+- predecessor: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
 - runtime scope: bundled official ARC-AGI-3 samples / `OperationMode.OFFLINE`
 - official / competition connection: prohibited until later phase
 - benchmark claim: none
@@ -47,7 +47,7 @@ P1を「純粋LLM計算主体の完成」と扱ってはならない。P1は、`
 
 ---
 
-## 1. P2の目的
+## 1. P4の目的
 
 公式sampleから、Layer-0が実際に計算へ使用する命令形保持体 `P` を形成し、次を実装証明する。
 
@@ -57,7 +57,7 @@ P  = L0が計算する知識・能力・関係・規則・パラメータの情�
 C  = Execute(L0, P)
 ```
 
-P2では、単なる設定ファイル、ログ置場、辞書、候補一覧を `P` と呼んではならない。
+P4では、単なる設定ファイル、ログ置場、辞書、候補一覧を `P` と呼んではならない。
 
 `P`は、現在入力・文脈・記憶引用に応じて、Layer-0が内容依存で参照・選択・合成し、仮説・予測・候補生成を変化させる実行可能な情報体でなければならない。
 
@@ -357,9 +357,9 @@ remove HDS     -> acceptance / authority / stopping loss
 
 ---
 
-## 8. P2完了条件
+## 8. P4完了条件
 
-以下をすべて満たすまでP2を完了としない。
+以下をすべて満たすまでP4を完了としない。
 
 - `InstructionBody`実体と拡張contractが存在する
 - P-A記号・規則グラフ型がsampleから生成される
@@ -375,13 +375,14 @@ remove HDS     -> acceptance / authority / stopping loss
 - 保持済みsampleのOFFLINE経路でPが実際に使用される
 - official API / competition / Kaggleへ接続していない
 
-P2完了後にのみ、全sample game / 全level攻略フェーズへ進む。
+P4完了後にのみ、P5のHDS判断主体J単独実装へ進む。全sample
+game / 全level攻略はP9の全8部分集合証明後、P10で開始する。
 
 ---
 
 ## 9. 非目的・禁止
 
-- P2中の全183 level攻略完了
+- P4中の全183 level攻略完了
 - 公式ARC API接続
 - `OperationMode.COMPETITION`
 - Kaggle Notebook / CLI / MCP / submission
@@ -399,7 +400,7 @@ P2完了後にのみ、全sample game / 全level攻略フェーズへ進む。
 ```text
 1. 現状分類
    - P1 execution mechanism complete
-   - P2 instruction body state
+   - P4 instruction body state
 
 2. P-A
    - schema
@@ -445,4 +446,4 @@ P2完了後にのみ、全sample game / 全level攻略フェーズへ進む。
    - official connection
 ```
 
-結果が不足する場合は、`P2 complete`と書かず、未完了または`SUSPEND`とする。
+結果が不足する場合は、`P4 complete`と書かず、未完了または`SUSPEND`とする。

@@ -8,11 +8,12 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 
 - P0: `RESTART_FOUNDATION` — 完了
 - P1: `SAMPLE_EXECUTION_MECHANISM` — 完了
-- 現在フェーズ: `P2_INSTRUCTION_BODY_FORMATION`
+- P2: `AGI_MINIMUM_THREE_AUDIT` — 完了
+- 現在フェーズ: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
-- 命令形保持体 `P`: **未完成・現在実装対象**
+- 命令形保持体 `P`: **未完成・P4実装対象**
 - ベンチマーク状態: **未確定**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -69,9 +70,15 @@ ARC-AGI-3-Agents/
 environment_files/            公式環境資産。runtime答え選択には使用しない
 docs/
   architecture/
+    AGI_MINIMUM_THREE_SPEC.md
+    AGI_OBLIGATION_GRAPH.json
+    AGI_TRACEABILITY_MATRIX.md
+    AGI_CLAIM_REGISTRY.md
+    AGI_TEST_MATRIX.md
+    AGI_CURRENT_IMPLEMENTATION_AUDIT.md
     SYSTEM_ARCHITECTURE.md
     P1_SAMPLE_EXECUTION_KERNEL.md
-    P2_INSTRUCTION_BODY_FORMATION.md
+    P4_COMPUTE_SUBJECT_IMPLEMENTATION.md
   roadmap/ROADMAP.md
   migration/
   references/
@@ -101,24 +108,22 @@ vendor/wheels/                既存ベンダーwheel
 
 P1の閉包範囲は [`docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md`](docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md) に固定しています。
 
-## P2の現在作業
+## P2根本監査とP3の現在作業
 
-P2では、ニューラルネットワークの重み・接続・活性化条件に相当する、**Layer-0が実際に計算へ使う情報体**を形成します。
+P2ではG1〜G5、C/J/M、L0/P、environment、compiler、P0/J0/M0、
+全8部分集合を一対一で監査し、未実装を完成扱いしないclaim/test境界を固定しました。
 
-実装対象:
+- [`AGI最小三構成仕様`](docs/architecture/AGI_MINIMUM_THREE_SPEC.md)
+- [`現行実装根本監査`](docs/architecture/AGI_CURRENT_IMPLEMENTATION_AUDIT.md)
+- [`義務graph`](docs/architecture/AGI_OBLIGATION_GRAPH.json)
 
-- `InstructionBody` interface / contract
-- P-A: sampleから生成する記号・規則グラフ
-- P-B: sample trajectoryから学習する小型パラメトリック／ニューラル情報体
-- sample trajectory collector / identity-free dataset
-- rule compiler / parameter trainer
-- P version / digest / provenance
-- 同一Layer-0へのP-A / P-B swap
-- Pなしcompute拒否
-- P / M分離
-- 六責任 + P removal audit
+現在のP3では、ARC3解析証拠とrendered sample trajectoryを、identity-freeな
+observation / transition / effect / hazard / progress / contradiction corpus、
+HDS Frame fixture、memory lifecycle fixtureへ変換します。
 
-詳細指示は [`docs/architecture/P2_INSTRUCTION_BODY_FORMATION.md`](docs/architecture/P2_INSTRUCTION_BODY_FORMATION.md) を参照してください。
+P-A/P-BとCの実装仕様は
+[`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md)
+へ再分類しています。
 
 ## 設計上の固定境界
 
@@ -149,17 +154,22 @@ python sample_main.py --all-samples --max-actions 1
 
 1. P0: 再起動基盤 — 完了
 2. P1: Layer-0実行機構・OFFLINE sample経路 — 完了
-3. P2: 命令形保持体Pの形成・接続 — 現在
-4. P3: 全sample game / 全level完全攻略
-5. P4: local完成状態・P/J0/M0・回帰・再現性固定
-6. P5: 公式ARC実行環境へ接続
-7. P6: Kaggle CLI / 公式MCP提出経路
-8. P7: 全gateとユーザー許可後に実提出
-9. P8: 公式評価結果を用いた最適化
+3. P2: AGI最小三構成仕様・根本監査 — 完了
+4. P3: ARC3実証素材compiler — 現在
+5. P4: 計算主体C
+6. P5: 判断主体J
+7. P6: 記憶主体M
+8. P7: 二主体接続監査
+9. P8: 三主体二周期循環
+10. P9: 全8部分集合証明
+11. P10: 全sample game / 全level完全攻略
+12. P11: release state固定
 
-P2とP3では公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出、leaderboard scoreによる採否を禁止します。
+P11完了前は公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出を禁止します。
 
-[`docs/roadmap/ROADMAP.md`](docs/roadmap/ROADMAP.md) が現行ロードマップの正本です。
+現行ロードマップ全文の正本は
+[`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)
+です。
 
 ## Git運用
 

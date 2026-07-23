@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
-- 版: `v0.3-instruction-body`
-- 状態: `P1_SAMPLE_EXECUTION_MECHANISM` complete / `P2_INSTRUCTION_BODY_FORMATION` current
+- 版: `v0.4-minimum-three-audit`
+- 状態: `P2_AGI_MINIMUM_THREE_AUDIT` complete / `P3_ARC3_EVIDENCE_MATERIAL_COMPILER` current
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -205,7 +205,10 @@ Layer-0 execution mechanism
 + HDS / M / OFFLINE environment loop
 ```
 
-P2で固定知識をコードからPへ分離します。
+P3で実証素材を形成し、P4で固定知識をコードからPへ分離します。
+
+P2の根本監査結果は、`AGI_MINIMUM_THREE_SPEC.md`、
+`AGI_OBLIGATION_GRAPH.json`、`AGI_CURRENT_IMPLEMENTATION_AUDIT.md`に固定しています。
 
 ## 5. ARC-native Layer-0責任
 
@@ -320,12 +323,13 @@ Arcade(OperationMode.OFFLINE)
 5. 許可のないexternal emitを拒否する
 6. action結果を再観測してHDSへ返す
 7. hidden stateを観測事実として記録しない
-8. `OperationMode.OFFLINE`以外ではP2 runnerを起動しない
+8. `OperationMode.OFFLINE`以外ではP3〜P10のsample runnerを起動しない
 9. game/task/level identityをPまたはpolicyへ渡さない
 
 ## 9. 学習と版間コンパイル
 
-P2ではsample環境を情報体形成装置として使用します。
+P3ではsample環境と解析証拠をidentity-freeな実証素材へ変換し、
+P4ではその素材から命令形保持体を形成します。
 
 ```text
 before observation
@@ -384,13 +388,19 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 ## 12. フェーズ境界
 
 - P0: 基盤・契約 — 完了
-- P1: Layer-0実行機構・OFFLINE経路 — 完了
-- P2: 命令形保持体Pの形成・接続 — 現在
-- P3: 全sample完全攻略
-- P4: local完成状態の固定
-- P5: 公式ARC接続
-- P6: Kaggle CLI / MCP提出経路
-- P7: 実提出
-- P8: 公式結果最適化
+- P1: Layer-0実行機構・OFFLINE経路 — 完了・再分類
+- P2: AGI最小三構成仕様・根本監査 — 完了
+- P3: ARC3実証素材compiler — 現在
+- P4: 計算主体C・P-A/P-B
+- P5: 判断主体J
+- P6: 記憶主体M
+- P7: 二主体接続監査
+- P8: 三主体二周期循環
+- P9: 全8部分集合証明
+- P10: 全sample完全攻略
+- P11: release state固定
+- P12〜P14: current request外
 
-P2の詳細完了条件は `P2_INSTRUCTION_BODY_FORMATION.md` を参照します。
+現行順序は
+`docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
+P4の計算主体実装条件は`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`を参照します。

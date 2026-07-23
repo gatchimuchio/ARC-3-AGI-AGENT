@@ -21,7 +21,7 @@ arc3-p1-samples --all-samples --max-actions 1
 
 この入口は保持済み公式sampleを `OperationMode.OFFLINE` だけで各1 action実行し、
 HDS承認、外部放出、再観測、context / passive memory更新、次判断までを検査します。
-独立した命令形保持体`P`は未接続であり、P2のinstruction-body形成やP3の攻略実績には
+独立した命令形保持体`P`は未接続であり、P4の計算主体形成やP10の攻略実績には
 加算しません。
 
 ## 検証

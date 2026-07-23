@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0.0",
+  "artifact_type": "agi_minimum_three_obligation_graph",
+  "phase": "P2_AGI_MINIMUM_THREE_AUDIT",
+  "normative_roadmap": "docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md",
+  "subjects": [
+    {
+      "id": "C",
+      "name": "compute_subject",
+      "owns": ["G1"],
+      "requires": ["L0", "P"],
+      "must_not_own": ["G2", "G3"]
+    },
+    {
+      "id": "J",
+      "name": "hds_judgment_subject",
+      "owns": ["G2"],
+      "requires": ["HDS_FRAME"],
+      "must_not_own": ["G1", "G3"]
+    },
+    {
+      "id": "M",
+      "name": "mutable_memory_subject",
+      "owns": ["G3"],
+      "requires": ["VERSION_STORE", "ACTIVE_ARCHIVE"],
+      "must_not_own": ["G1", "G2"]
+    }
+  ],
+  "obligations": [
+    {
+      "id": "G1",
+      "name": "generative_computation",
+      "owner": "C",
+      "current_status": "PARTIAL",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/roles.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_arc3_agi_kernel.py::TrinityAuthorityTests::test_full_set_establishes_one_authorized_cycle"
+      ],
+      "gaps": ["P is absent", "counter-hypotheses and predictions are not first-class outputs"]
+    },
+    {
+      "id": "G2",
+      "name": "judgment",
+      "owner": "J",
+      "current_status": "PARTIAL",
+      "implementation_paths": ["ARC-AGI-3-Agents/arc3_agi_agent/kernel.py::HDSController"],
+      "test_evidence": [
+        "tests/unit/test_arc3_agi_kernel.py::TrinityAuthorityTests::test_hazard_veto_precedes_unknown_state_and_exhausted_budget"
+      ],
+      "gaps": ["no standalone HDS Frame fixture API", "rollback decision is not operational"]
+    },
+    {
+      "id": "G3",
+      "name": "mutable_retention",
+      "owner": "M",
+      "current_status": "PARTIAL",
+      "implementation_paths": ["ARC-AGI-3-Agents/arc3_agi_agent/memory.py::PassiveMemory"],
+      "test_evidence": [
+        "tests/unit/test_arc3_agi_kernel.py::TrinityAuthorityTests::test_memory_is_passive_and_rejects_unapproved_write"
+      ],
+      "gaps": [
+        "REVISE MERGE SPLIT REPLACE INVALIDATE REINDEX ROLLBACK ARCHIVE QUERY are not implemented as distinct operations",
+        "no version conflict detection",
+        "no active/archive separation"
+      ]
+    },
+    {
+      "id": "G4",
+      "name": "temporal_experience_causality",
+      "owner": "TRINITY",
+      "current_status": "UNSUPPORTED",
+      "implementation_paths": [],
+      "test_evidence": [],
+      "gaps": ["no controlled M-only two-cycle causal test"]
+    },
+    {
+      "id": "G5",
+      "name": "closed_loop",
+      "owner": "TRINITY",
+      "current_status": "PARTIAL",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/sample_runtime.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_offline_sample_runtime.py::OfflineSampleRuntimeTests::test_hds_emits_then_reobserves_into_persistent_state"
+      ],
+      "gaps": ["future computation is not yet causally altered by M", "rollback path is absent"]
+    }
+  ],
+  "elements": [
+    {"id": "L0", "current_status": "PARTIAL", "next_phase": "P4"},
+    {"id": "P", "current_status": "UNSUPPORTED", "next_phase": "P4"},
+    {"id": "C", "current_status": "UNSUPPORTED", "next_phase": "P4"},
+    {"id": "J", "current_status": "PARTIAL", "next_phase": "P5"},
+    {"id": "M", "current_status": "PARTIAL", "next_phase": "P6"},
+    {"id": "ENVIRONMENT_BOUNDARY", "current_status": "SUPPORTED", "next_phase": "P10"},
+    {"id": "LEARNING_COMPILER", "current_status": "UNSUPPORTED", "next_phase": "P3"},
+    {"id": "P0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
+    {"id": "J0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
+    {"id": "M0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
+    {"id": "EXTERNAL_EMISSION", "current_status": "SUPPORTED", "next_phase": "P8"},
+    {"id": "MEMORY_WRITE", "current_status": "PARTIAL", "next_phase": "P6"},
+    {"id": "HDS_FRAME", "current_status": "PARTIAL", "next_phase": "P5"},
+    {"id": "CYCLE_TRANSITION", "current_status": "PARTIAL", "next_phase": "P8"},
+    {"id": "STOPPING", "current_status": "SUPPORTED", "next_phase": "P5"},
+    {"id": "ROLLBACK", "current_status": "UNSUPPORTED", "next_phase": "P5"}
+  ],
+  "edges": [
+    {"from": "L0", "to": "C", "relation": "execution_mechanism_of"},
+    {"from": "P", "to": "C", "relation": "instruction_body_of"},
+    {"from": "J", "to": "C", "relation": "commands_and_judges"},
+    {"from": "M", "to": "C", "relation": "provides_bounded_view"},
+    {"from": "C", "to": "J", "relation": "proposes"},
+    {"from": "J", "to": "M", "relation": "authorizes_mutation"},
+    {"from": "C", "to": "M", "relation": "executes_authorized_mutation"},
+    {"from": "J", "to": "ENVIRONMENT_BOUNDARY", "relation": "authorizes_emission"},
+    {"from": "C", "to": "ENVIRONMENT_BOUNDARY", "relation": "executes_authorized_emission"},
+    {"from": "ENVIRONMENT_BOUNDARY", "to": "J", "relation": "returns_observed_result"},
+    {"from": "M", "to": "LEARNING_COMPILER", "relation": "provides_admitted_experience"},
+    {"from": "LEARNING_COMPILER", "to": "P0", "relation": "builds"},
+    {"from": "LEARNING_COMPILER", "to": "J0", "relation": "builds"},
+    {"from": "LEARNING_COMPILER", "to": "M0", "relation": "builds"}
+  ],
+  "pair_failure_witnesses": {
+    "C+J": "NO_PERSISTENT_EXPERIENCE_CAUSALITY",
+    "C+M": "NO_JUDGMENT_OR_AUTHORIZATION",
+    "J+M": "NO_GENERATIVE_COMPUTATION"
+  },
+  "subset_expectations": [
+    {"members": [], "G1": "FAIL", "G2": "FAIL", "G3": "FAIL", "G4": "FAIL", "G5": "FAIL", "overall": "FAIL"},
+    {"members": ["C"], "G1": "PASS", "G2": "FAIL", "G3": "FAIL", "G4": "FAIL", "G5": "FAIL", "overall": "FAIL"},
+    {"members": ["J"], "G1": "FAIL", "G2": "PASS", "G3": "FAIL", "G4": "FAIL", "G5": "FAIL", "overall": "FAIL"},
+    {"members": ["M"], "G1": "FAIL", "G2": "FAIL", "G3": "PASS", "G4": "FAIL", "G5": "FAIL", "overall": "FAIL"},
+    {"members": ["C", "J"], "G1": "PASS", "G2": "PASS", "G3": "FAIL", "G4": "FAIL", "G5": "PARTIAL", "overall": "FAIL"},
+    {"members": ["C", "M"], "G1": "PASS", "G2": "FAIL", "G3": "PASS", "G4": "FAIL", "G5": "FAIL", "overall": "FAIL"},
+    {"members": ["J", "M"], "G1": "FAIL", "G2": "PASS", "G3": "PASS", "G4": "FAIL", "G5": "FAIL", "overall": "FAIL"},
+    {"members": ["C", "J", "M"], "G1": "PASS", "G2": "PASS", "G3": "PASS", "G4": "PASS", "G5": "PASS", "overall": "PASS"}
+  ],
+  "current_claims": [
+    {"id": "CLAIM_P0_FOUNDATION", "status": "SUPPORTED", "primary_test": "tests/unit/test_arc3_agi_foundation.py"},
+    {"id": "CLAIM_P1_EXECUTION_MECHANISM", "status": "SUPPORTED", "primary_test": "tests/integration/test_offline_sample_runner.py"},
+    {"id": "CLAIM_C_COMPLETE", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_J_STANDALONE", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_M_STANDALONE", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_TWO_CYCLE_CAUSALITY", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_MINIMUM_THREE", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_SAMPLE_COMPLETE", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_RELEASE_STATE_FIXED", "status": "UNSUPPORTED", "primary_test": null}
+  ]
+}

@@ -26,7 +26,8 @@ P1では、現行 `roles.py` の固定規則を使用して仮説・候補を生
 C = Execute(L0, P)
 ```
 
-命令形保持体Pの形成・接続は `P2_INSTRUCTION_BODY_FORMATION.md` の対象である。
+命令形保持体Pの形成・接続は
+`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`の対象である。
 
 ## Work contract
 

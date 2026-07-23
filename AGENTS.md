@@ -8,65 +8,73 @@
 
 1. ユーザーの現在の明示指示
 2. 本 `AGENTS.md`
-3. `docs/architecture/SYSTEM_ARCHITECTURE.md`
-4. `docs/roadmap/ROADMAP.md`
-5. 当該work blockのFrameSpec・manifest・検証結果
-6. `docs/migration/` と `docs/references/`
-7. 旧リポジトリのコード・分析・履歴
+3. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
+4. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
+5. `docs/architecture/SYSTEM_ARCHITECTURE.md`
+6. `docs/roadmap/ROADMAP.md`
+7. 当該work blockのFrameSpec・manifest・検証結果
+8. `docs/migration/` と `docs/references/`
+9. 旧リポジトリのコード・分析・履歴
 
 旧リポジトリの `next_*`、古いscore、個別artifact、絶対パス、旧branch名は命令ではありません。
 
 ## 2. 現在のフェーズ
 
-現在は `P2_INSTRUCTION_BODY_FORMATION` です。
+現在は `P3_ARC3_EVIDENCE_MATERIAL_COMPILER` です。
 
-`P1_SAMPLE_EXECUTION_KERNEL` は完了しています。ただしP1で完成したのは、六つのLayer-0実行責任、HDS権限、受動memory、OFFLINE sample接続であり、純粋LLM計算主体全体ではありません。
+`P2_AGI_MINIMUM_THREE_AUDIT` は完了しています。P2で完成したのは仕様、
+義務graph、traceability、claim/test registry、現行実装gapのaccountingです。
+P2はruntime能力、命令形保持体P、C/J/M単独成立、最小三構成を完成させて
+いません。
 
-現行 `PureLLMCompute` は、`roles.py` に埋め込まれた固定規則を直接実行しています。Layer-0が参照・選択・合成して計算する独立命令形保持体 `P` は未実装です。
-
-したがって現行分類は次です。
+現行分類は次です。
 
 ```text
-P1 complete:
+P0 complete:
+  restart foundation
+
+P1 complete / reclassified:
   Layer-0 execution mechanism
-  HDS / Memory authority loop
+  integrated HDS / provisional passive-memory authority loop
   OFFLINE sample action / re-observation path
 
-P2 current:
-  executable instruction body P
-  sample-derived information body formation
-  L0 / P / M separation
-  P-A symbolic body / P-B parametric body swap
+P2 complete:
+  minimum-three functional specification
+  obligation / claim / test / traceability audit
+  implementation gaps and absolute order
+
+P3 current:
+  analysis evidence accounting
+  identity-free normalized corpus
+  C / J / M fixture separation
+  provenance and holdout manifests
 ```
 
-### P2で許可される作業
+### P3で許可される作業
 
-- `InstructionBody`実体と拡張contract
-- sample trajectoryのidentity-free収集・正規化
-- P-A記号・規則グラフ型情報体
-- P-B小型パラメトリック／ニューラル型情報体
-- information-body compiler、version、digest、provenance
-- `PureLLMCompute`を `P` 必須にするrefactor
-- `roles.py`内の固定知識・候補値をPへ移す作業
-- 同一Layer-0へのP-A / P-B swap試験
-- 六責任に加えたP除去監査
-- 保持済みsampleの`OperationMode.OFFLINE`経路でPが使用されることの検証
+- 旧ARC3解析証拠の読取り専用inventory
+- current official sampleのrendered trajectory収集
+- observation / transition / effect / hazard / progress / contradiction正規化
+- HDS Frame fixture生成
+- memory lifecycle fixture生成
+- source identityを証拠層だけに保持するprovenance manifest
+- runtime corpusからidentity、replay、answer、literal、hidden-state情報を除去する水平引き算
+- game family / structure family / action-mechanism holdout
+- dataset accounting、determinism、identity-free、contamination試験
 
-### P2で禁止される作業
+### P3で禁止される作業
 
-- 全sample game / 全levelの完全攻略を完了扱いすること
-- 公式ARC API接続、`OperationMode.COMPETITION`
-- Kaggle向け分岐、Notebook、CLI / MCP提出
-- 旧runtimeの一括コピー
-- task/game/level別ルータの再導入
-- replay、固定action列、answer map、literal座標の情報体化
-- source / hidden stateのruntime利用
-- runtime中の無監査P自己更新
+- P-A/P-BまたはC/J/Mを完成扱いすること
+- 全sample game / 全level攻略
+- 公式ARC API、`OperationMode.COMPETITION`
+- Kaggle向け分岐、Notebook、CLI / MCP、submission
+- 旧`analysis/`または旧runtimeの一括コピー
+- task/game/level ID、replay、固定action列、answer map、literal座標をruntime fixtureへ残すこと
+- source / hidden stateをruntime計算素材へ残すこと
 - scoreを根拠にした局所最適化
-- parameter数、学習データ数、情報体の存在だけによる能力主張
-- 「AGI完成」「満点対応」「汎化済み」といった未検証主張
+- 「AGI完成」「最小三構成証明済み」「汎化済み」といった未検証主張
 
-詳細指示は `docs/architecture/P2_INSTRUCTION_BODY_FORMATION.md` を正本とします。
+P3の正本は新ロードマップのP3節と、P2監査成果物のdependency chainです。
 
 ## 3. 1 work blockの必須契約
 
@@ -91,7 +99,10 @@ Mc  : 同一性、境界、採否、停止、rollback、完了条件
 - HDS判断: `PASS` / `HOLD` / `SUSPEND` / `REJECT` / `ROLLBACK`
 - 次工程へ進む条件
 
-文書追加だけでruntime能力が変わらない場合は実装前進と記録しません。P2では、`P`が実際の計算結果を変え、OFFLINE sample経路で参照されることを要求します。
+文書追加だけでruntime能力が変わらない場合は実装前進と記録しません。
+ただしP2は明示的な仕様・根本監査phaseであり、機械検証可能なaccountingを
+成果とします。P3では、manifestにaccountingされた再生成可能なdatasetと
+fixtureが実際に生成されることを要求します。
 
 ## 4. 最小構成と非対称権限
 
@@ -192,55 +203,73 @@ Pは最終採否、memory確定、external emit権限を持ちません。
 
 P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 
-### P2: Instruction Body Formation — 現在
+### P2: Minimum Three Specification and Root Audit — 完了
 
-- InstructionBody contractと実体
-- P-A記号・規則グラフ
-- P-Bパラメトリック／ニューラル情報体
-- sample trajectoryからの再現可能なcompile / training
-- 同一Layer-0でのswap
-- Pなしcompute拒否
-- P / M分離
-- 六責任 + Pの除去監査
+- G1〜G5、C/J/M、L0/P、external boundaryを固定
+- obligation graph、traceability、claim registry、test matrixを生成
+- 未実装・過剰claim・実装順序をaccounting
+- validatorが全監査成果物と8 subset期待値を検証
 
-### P3: Complete Sample Solving
+### P3: ARC3 Evidence Material Compiler — 現在
 
-- 全sample game / 全levelを完了
-- GAME_OVER、timeout、無限loop、max-action停止を解消
-- ID、replay、answer mapへ依存せず同一条件で再現
-- 実行log、失敗signature、判断根拠、状態更新を保存
+- 全解析証拠をmanifestでaccounting
+- identity-free observation/transition/effect/hazard/progress/contradiction corpus
+- C/J/M fixture分離
+- provenanceとholdout contamination検査
 
-### P4: Freeze and Regression Audit
+### P4: Compute Subject C
 
-- P3完了状態の依存、Python、command、初期状態、P version、M initial state、budgetを固定
-- 成功判定、log、packaging、determinism、regressionを固定
-- 公式接続差分を導入する前にlocal完成状態へ戻せるようにする
+- P-A記号規則graph、P-B実学習parameter body
+- 同一L0でのswap、Pなしcompute拒否
+- C standalone G1とL0六責任+P removal
 
-### P5: Official ARC Connection
+### P5: Judgment Subject J
 
-- P3とP4の完了後だけ開始
-- `OFFLINE`との差分を列挙し、Kaggle相当REST環境をlocal再現
-- session、cookie、scorecard、reset、single-make制約を検証
-- 基本エージェント設計を作り直さず`COMPETITION`へ接続
+- standalone HDS Frame API
+- C/Mなしの採否、SUSPEND、STOP、rollback、write/emit許可
+- JがG1/G3を代行しないこと
 
-### P6: Kaggle Submission Paths
+### P6: Memory Subject M
 
-- Kaggle CLIとKaggle公式MCPの二経路
-- 同一Notebook version、output、messageを照合
-- secretをGitへ保存しない
-- ユーザーの明示許可なしに実提出しない
+- 全memory operation、query、version conflict、snapshot
+- active/archive分離、rollback
+- MがG1/G2を代行しないこと
 
-### P7: Actual Submission
+### P7: Pairwise Subject Audit
 
-- P3〜P6の全gateとユーザーの明示指示を満たした場合だけ実行
-- 同一Notebook versionを重複提出しない
-- submission、score、error、commit、package digestを保存
+- `{C,J}` -> `NO_PERSISTENT_EXPERIENCE_CAUSALITY`
+- `{C,M}` -> `NO_JUDGMENT_OR_AUTHORIZATION`
+- `{J,M}` -> `NO_GENERATIVE_COMPUTATION`
 
-### P8: Official-result Optimization
+### P8: Three-subject Two-cycle Trinity
 
-- P7の公式評価結果を用いる
-- leaderboard scoreだけで責任境界を削除しない
-- ユーザーの明示的phase切替後だけ開始
+- commandからresult再判断までの三主体循環
+- cycle 1のM更新がcycle 2のC/Jを変える
+- P-only/J-only/M-only因果分離
+
+### P9: Eight-subset Minimum Certificate
+
+- `{}`から`{C,J,M}`まで全8 subsetを有限列挙
+- full setだけPASS、機能等価物漏れ0
+
+### P10: Complete ARC3 Sample Solving
+
+- P9 PASS後だけ開始
+- 全sample game/all level、error 0、再現可能
+- ID/replay/answer/literal/source-state非依存
+
+### P11: Release-state Freeze
+
+- code/dependency/P0/J0/M0/dataset/compiler/seed/budgetを固定
+- 全sample証拠、package digest、regression suiteを固定
+
+### P12〜P14: current request外
+
+- P12 official ARC connection
+- P13 Kaggle submission paths
+- P14 actual submission / official-result optimization
+
+P11完了前にP12以降へ進まない。
 
 ## 9. 検証規約
 
@@ -257,15 +286,23 @@ python -m unittest discover -s tests/integration \
 python sample_main.py --all-samples --max-actions 1
 ```
 
-P2では上記に加え、次を必須とします。
+P2 audit:
 
-- P schema / digest / provenance validation
-- P-A / P-B swap test
-- P removal witness
-- P / M update-boundary test
-- training / compilation reproducibility
-- identity-free training-data audit
-- OFFLINE sample traceでP queryが記録されること
+```bash
+python -m pytest -q tests/unit/test_agi_minimum_three_audit.py
+```
+
+P3では次を追加する。
+
+- source evidence accounting
+- deterministic compiler rerun
+- provenance round trip
+- runtime identity-free audit
+- C/J/M fixture separation
+- family/mechanism holdout contamination audit
+
+P4以降の固定test IDと反証条件は
+`docs/architecture/AGI_TEST_MATRIX.md`を正本とする。
 
 未実行の検証を `PASS` と書いてはいけません。環境不足、依存不足、credential不足、製品回帰を区別します。
 
