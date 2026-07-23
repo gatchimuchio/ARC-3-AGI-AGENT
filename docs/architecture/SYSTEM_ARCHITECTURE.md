@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
-- 版: `v0.2-sample-runtime`
-- 状態: `P1_SAMPLE_EXECUTION_KERNEL` complete / P2 not started
+- 版: `v0.3-instruction-body`
+- 状態: `P1_SAMPLE_EXECUTION_MECHANISM` complete / `P2_INSTRUCTION_BODY_FORMATION` current
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -9,42 +9,123 @@
 
 未知のARC-AGI-3環境に対し、観測可能な情報だけから状態・仮説・候補を構成し、HDSが閉包条件を満たす行動だけを許可し、結果によって記憶と判断を更新する閉ループを実装します。
 
-本書が定義するのは「AGIである」という形而上学的認定ではなく、ARC3に必要な最小認知エージェントの**機能責任・権限・検証境界**です。
+本書が定義するのは「AGIである」という形而上学的認定ではなく、ARC3に必要な最小認知エージェントの機能責任・情報保持・権限・検証境界です。
 
-## 2. 三主体の非対称構造
+## 2. 最小構成
 
 ```text
-                     +----------------------+
-Observation -------->| Pure-LLM Compute C   |
-Memory view -------->| hypothesis/proposal  |
-HDS command -------->| authorized execution |
-                     +----------+-----------+
-                                |
-                                v
-                     +----------------------+
-                     | HDS Judgment J       |
-                     | frame / model /      |
-                     | closure / authority  |
-                     +----+------------+----+
-                          |            |
-             MEMORY_WRITE |            | EXTERNAL_EMIT
-                          v            v
-                 +---------------+  +----------------+
-                 | Passive M     |  | Environment    |
-                 | versioned     |  | adapter        |
-                 | evidence state|  | action/result  |
-                 +---------------+  +----------------+
+C = Execute(L0, P)
+
+AGI Kernel = Trinity(C, J, M)
 ```
 
-### 2.1 Pure-LLM計算主体 `C`
+- `L0`: 入力表現、状態条件付け、選択的参照、多段変換、候補化、出力放出を行う機能機構
+- `P`: 知識、能力、関係、変換規則、パラメータ、候補生成傾向を保持する命令形情報体
+- `C`: `L0 + P` によって成立するPure-LLM計算主体
+- `J`: HDS判断主体
+- `M`: HDSが引用する現行判断根拠の受動記憶主体
+
+`L0`だけでは、何をどのように計算するかを保持できません。`P`を欠いた状態は計算機能の器であり、Pure-LLM計算主体の完成ではありません。
+
+## 3. 非対称Trinity構造
+
+```text
+Observation / Context / M view
+              |
+              v
+      +-------------------+
+      | Layer-0 Executor  |
+      | executes P        |
+      +---------+---------+
+                |
+                v
+      +-------------------+
+      | Instruction Body P|
+      | rules / graph /   |
+      | parameters        |
+      +---------+---------+
+                |
+                v
+      +-------------------+
+      | Compute C         |
+      | hypothesis /      |
+      | prediction /      |
+      | candidate prior   |
+      +---------+---------+
+                |
+                v
+      +-------------------+
+      | HDS Judgment J    |
+      | accept / reject / |
+      | SUSPEND / STOP    |
+      +-----+---------+---+
+            |         |
+MEMORY_WRITE|         |EXTERNAL_EMIT
+            v         v
+      +-----------+ +-------------+
+      | Passive M | | Environment |
+      +-----------+ +-------------+
+```
+
+### 3.1 Layer-0実行機構 `L0`
 
 責務:
 
-- 観測の表現化
-- 関係・遷移・反対仮説の計算
-- 複数候補と予測効果の提案
-- 記憶変更案と外部出力案の生成
-- HDSが許可したwrite/emit機構の実行
+- 観測の安定記号化
+- 文脈状態への条件付け
+- Pのaddressableな領域を選択的に参照
+- Pの規則・グラフ・パラメータを多段変換へ使用
+- 仮説・予測・候補priorを型付き出力へ変換
+- HDS承認済みwrite / emitの機械的実行
+
+`L0`は、知識や能力そのものをハードコードする場所ではありません。
+
+### 3.2 命令形保持体 `P`
+
+責務:
+
+- knowledge / capability / relation
+- conditional transform
+- transition tendency
+- action-effect prediction
+- goal / hazard relation
+- candidate prior
+- uncertainty formation
+- composition procedure
+
+Pの必要条件:
+
+- addressable
+- state-dependent
+- composable
+- executable by Layer-0
+- deterministic under fixed state
+- runtime identity-free
+- versioned / digestable / provenance-traceable
+- Layer-0コードを変更せず交換可能
+
+Pは最終採否権、記憶確定権、外部放出権を持ちません。
+
+### 3.3 Pure-LLM計算主体 `C`
+
+```text
+C_t = Execute(L0, P^v, X_t, Q_t, R_t)
+```
+
+- `P^v`: version `v` の命令形保持体
+- `X_t`: 現在観測
+- `Q_t`: HDS計算要求
+- `R_t`: Mからの引用
+
+出力:
+
+- representations
+- hypotheses / counter-hypotheses
+- transition / effect predictions
+- candidate priors / candidate proposals
+- uncertainty
+- falsification conditions
+- memory update proposals
 
 禁止権限:
 
@@ -52,20 +133,23 @@ HDS command -------->| authorized execution |
 - 記憶を無断確定する
 - 外部行動を無断放出する
 - 最上位目的を変更する
+- Pを無監査で更新する
 
-### 2.2 HDS判断主体 `J`
+### 3.4 HDS判断主体 `J`
 
 唯一権限:
 
 - 計算命令と入力範囲の発行
+- P / Mの参照範囲指定
 - 候補の採用・拒否・保留
 - `PASS` / `PROBE` / `SUSPEND` / `STOP` / `ROLLBACK`
 - `MEMORY_WRITE` と `EXTERNAL_EMIT` の許可
 - 再観測・再計算・停止条件の決定
+- P再コンパイル候補の採否
 
-HDS自身は記憶を書かず、環境へ直接actionを送信しません。判断と機械的実行を分離します。
+HDS自身は記憶を書かず、環境へ直接actionを送信しません。
 
-### 2.3 記憶主体 `M`
+### 3.5 記憶主体 `M`
 
 責務:
 
@@ -80,28 +164,95 @@ ADD REVISE MERGE SPLIT REPLACE INVALIDATE
 DELETE REINDEX ROLLBACK ARCHIVE
 ```
 
-記憶は受動状態です。HDS許可を伴う実行面以外から更新しません。
+Mはruntime経験を保持します。Pは明示的compilerによってのみ更新します。
 
-## 3. ARC-native Layer-0責任
+```text
+runtime experience
+  -> HDS judgment
+  -> M revision
+  -> repeated evidence / contradiction / ablation
+  -> explicit compiler
+  -> P^(v+1)
+```
 
-LLM Layer-0仕様の方法論を、ARCエージェントの機能責任へ変換します。LLMの六役割をそのままARCの存在論として主張するものではありません。
+## 4. P1の実装と再分類
 
-| ARC責任 | 実行責務 | 除去した場合の観測可能な喪失 |
+P1で次は成立しています。
+
+- 六つのARC-native実行責任
+- HDS command capabilityとsingle-use consume
+- HDS-only write / emit directive
+- bounded context / passive memory
+- OFFLINE sample action / re-observation
+- full setと六つのsingle-callable removal
+- 保持済み25ゲームの1-action no-network smoke
+
+しかし現行経路は次です。
+
+```text
+PureLLMCompute
+  -> DeterministicWorldModel.transform
+  -> DeterministicCandidateSurface.generate
+```
+
+`roles.py`の手書き仮説、固定confidence、固定candidate metricが、情報内容をコード内に保持しています。
+
+したがってP1は、Pure-LLM計算主体の完成ではなく、次の完成です。
+
+```text
+Layer-0 execution mechanism
++ provisional embedded seed rules
++ HDS / M / OFFLINE environment loop
+```
+
+P2で固定知識をコードからPへ分離します。
+
+## 5. ARC-native Layer-0責任
+
+LLM Layer-0仕様の責任分離・除去監査方法をARCへ射影します。
+
+| ARC責任 | 機構としての実行責務 | Pから受け取る情報 |
 |---|---|---|
-| `SYMBOL_SPACE` | frame、object、region、relation、control、action、effectを安定記号へ変換 | 入力状態やaction語彙を比較できない |
-| `CONTEXT_STATE` | bounded episode、action/effect、仮説、失敗、budgetを保持 | 時系列条件付けが消え、同じ誤行動を反復する |
-| `TRANSFORM_OR_WORLD_MODEL` | 競合する状態・遷移・因果仮説を更新 | 現在入力のlookup以上に適応できない |
-| `CANDIDATE_SURFACE` | 複数action、probe、plan、reobserve、rollback、SUSPENDを提示 | 代替比較のない固定actionになる |
-| `FITTING_OR_SUCCESS_CRITERION` | progress、goal、hazard、情報利得、不確実性、rollback costを評価 | 候補の採否・停止を根拠づけられない |
-| `EMISSION_INTERFACE` | available action・座標・閉包許可を確認し、結果を返す | 内部計算が安全な外部行動へ接続しない |
+| `SYMBOL_SPACE` | frame、object、relation、action、effectを安定記号へ変換 | symbol vocabulary / feature composition |
+| `CONTEXT_STATE` | bounded episode、action/effect、仮説、budgetを保持 | retrieval selectors / state relevance |
+| `TRANSFORM_OR_WORLD_MODEL` | 状態・遷移計算を実行 | rule graph / transition parameters |
+| `CANDIDATE_SURFACE` | 比較可能な候補面を構成 | candidate prior / action-effect relations |
+| `FITTING_OR_SUCCESS_CRITERION` | progress、hazard、情報利得、不確実性を評価 | learned estimates / goal-hazard relations |
+| `EMISSION_INTERFACE` | HDS承認済みactionを放出し結果を返す | Pから権限は受け取らない |
 
-適合条件はラベルの存在ではなく、callableな実装、状態境界、除去時の機能喪失です。
+適合条件はラベルの存在ではなく、callable実装、P参照、状態境界、除去時の機能喪失です。
 
-## 4. 型付き情報流
+## 6. 最初の命令形保持体
 
-### 4.1 Observation IR
+### 6.1 P-A 記号・規則グラフ型
 
 保持対象:
+
+- object / feature / role nodes
+- relation edges
+- action / effect / transition primitives
+- precondition / goal / hazard
+- support / contradiction / confidence
+- falsifier / applicability / composition
+
+### 6.2 P-B パラメトリック／ニューラル型
+
+sample trajectoryから学習し、最低限次を出力します。
+
+- action-conditioned effect prediction
+- progress likelihood
+- hazard likelihood
+- information-gain estimate
+- uncertainty
+- candidate prior
+
+小型、再現可能、Kaggle可搬、保存・再読込可能であることを要求します。
+
+P-A / P-Bは同じ `InstructionBody` 契約で交換します。
+
+## 7. 型付き情報流
+
+### 7.1 Observation IR
 
 - frame / structural / mechanic signature
 - dimensions / available actions
@@ -109,28 +260,28 @@ LLM Layer-0仕様の方法論を、ARCエージェントの機能責任へ変換
 - phase hypotheses / feature tokens
 - terminal state
 
-### 4.2 Transition IR
+### 7.2 InstructionBody Query
 
-保持対象:
+入力:
 
-- before / after signature
-- action class
-- visible effects
-- progress / hazard evidence
-- no-effect / delayed-visibility
-- confidence
+- HDS ComputeRequest
+- ObservationIR
+- ContextSnapshot
+- MemorySnapshot
 
-### 4.3 Hypothesis IR
+出力:
 
-各仮説は最低限、claim、prediction、falsification condition、support、contradiction、confidence、lifecycleを持ちます。
+- retrieved body regions
+- representations
+- hypothesis / counter-hypothesis material
+- predictions
+- candidate priors
+- uncertainty / falsifier
+- body version / digest / provenance
 
-### 4.4 Candidate IR
+### 7.3 Hypothesis / Candidate / Closure IR
 
-候補はactionだけではなく、precondition、仮説別expected effects、progress、information gain、risk、repetition cost、rollback cost、provenance、falsifierを持ちます。
-
-### 4.5 Closure IR
-
-候補ごとに次を固定します。
+Pの出力をLayer-0が型へ変換し、候補ごとに次を固定します。
 
 ```text
 W := (X, R, Mc)
@@ -142,104 +293,104 @@ W := (X, R, Mc)
 
 `X`、`R`、`Mc` が閉じない場合、強制actionではなく `SUSPEND` または有界probeを返します。
 
-## 5. 実行サイクル
+## 8. 実行サイクル
 
 ```text
 Arcade(OperationMode.OFFLINE)
- -> rendered FrameDataRaw
- -> identity-free observation adapter
- -> SELF_CHECK / FRAME / RETRIEVE / COMPUTE
+ -> rendered observation
+ -> SYMBOL_SPACE / CONTEXT_STATE
+ -> HDS ComputeRequest
+ -> L0 selects and executes P
+ -> hypotheses / predictions / candidates
+ -> FITTING closure proposals
  -> HDS JUDGE
-    -> authorized ACT
-    -> OFFLINE environment step
-    -> OBSERVE_RESULT
-    -> rendered transition verification
-    -> context / passive memory
-    -> next HDS cycle
-    -> SUSPEND / REJECT / STOP
+ -> authorized ACT
+ -> OFFLINE environment step
+ -> OBSERVE_RESULT / verifier
+ -> HDS-authorized M update
+ -> next cycle
 ```
 
 必須不変条件:
 
 1. HDS commandなしに計算を開始しない
-2. HDS判断なしにproposalをactionへ変換しない
-3. 許可のないmemory writeを拒否する
-4. 許可のないexternal emitを拒否する
-5. action結果を再観測してHDSへ返す
-6. hidden stateを観測事実として記録しない
-7. `OperationMode.OFFLINE`以外ではP1 runnerを起動しない
-8. game/task/level identityをaction policyへ渡さない
+2. Pなしに仮説・候補を生成しない
+3. HDS判断なしにproposalをactionへ変換しない
+4. 許可のないM writeを拒否する
+5. 許可のないexternal emitを拒否する
+6. action結果を再観測してHDSへ返す
+7. hidden stateを観測事実として記録しない
+8. `OperationMode.OFFLINE`以外ではP2 runnerを起動しない
+9. game/task/level identityをPまたはpolicyへ渡さない
 
-P1の実装入口は`ARC-AGI-3-Agents/sample_main.py`です。既存の
-HTTP / online runnerはP1入口として使用せず、変更もしません。sample agentの
-`choose_action`、`take_action`、`do_action_request`はdirect bypassを拒否し、
-実際の`environment.step`はHDS capabilityを再検証する
-`OfflineArcadeEmissionInterface`からだけ呼び出します。この境界はmodeラベルに
-加えて`LocalEnvironmentWrapper`実体も要求します。
+## 9. 学習と版間コンパイル
 
-## 6. 検証と停止
+P2ではsample環境を情報体形成装置として使用します。
 
-検証軸:
+```text
+before observation
++ action
++ after observation
++ visible effect
++ terminal / progress / hazard
++ HDS / verifier result
+=
+identity-free transition record
+```
 
-- 進捗: level増加、WIN、明示的visible progress
-- 終端: `RUNNING` / `NOT_FINISHED` / `WIN` / `GAME_OVER` / `UNKNOWN`
-- 危険: GAME_OVER、明示的hazard effect、不可逆失敗
-- commitment: action availability、expected effect、progress commit
-- provenance: 観測・推論・引用・runtime生成の分離
+コンパイル:
 
-`NO_HAZARD_OBSERVED` は「危険が存在しない証明」ではありません。現在のrendered evidenceに危険が観測されていないという限定状態です。
+```text
+trajectory
+ -> normalize
+ -> subtract task-local / literal information
+ -> positive / negative / hazard contrast
+ -> P-A graph compile
+ -> P-B parameter training
+ -> versioned bundle
+```
 
-## 7. Closure Phase Ψの扱い
+同一入力・同一seed・同一dataset digestから同一P bundleを再生成できなければなりません。
 
-Closure Phase Ψは内部実体として仮定せず、固定条件・反復・摂動下で残る外部signature residualとして測定します。
+## 10. 除去監査
 
-ARC3では例えば次を観測候補とします。
+既存六責任に加えてPを独立監査します。
 
-- 未観測条件での停止一貫性
-- 反証後の仮説更新一貫性
-- 危険境界でのaction veto
-- 同型状態に対する閉包判断の保存
-- task名や位置が変わっても維持される責任境界
+| 削除対象 | 予測される喪失 |
+|---|---|
+| Layer-0各責任 | 対応する実行機能の喪失 |
+| `P` | 実行可能な知識・関係・変換・予測能力の喪失 |
+| `M` | 経験継続・現行根拠引用の喪失 |
+| `J` | 採否・停止・write / emit権限の喪失 |
 
-単発成功、能力上昇、score上昇だけをClosure Phase Ψの証拠にしません。
+P removal witness:
 
-## 8. 設計上の禁止
+```text
+INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
+```
 
-- 旧 `my_agent.py` のgame-ID routerを標準coreへ移植しない
-- replayや既知解答をcandidate generatorへ混ぜない
-- 分析artifact数を知識量・進捗の代理にしない
-- 推論仮説をhidden world stateとして確定しない
-- HDSをログ用ラベルや常時true gateにしない
-- memoryを無制限追記ログにしない
-- checkpointを環境状態の復元保証と誤認しない
+## 11. 現在の禁止
 
-## 9. P0基盤とP1 sample実行kernel
+- 旧 `my_agent.py` のgame-ID router
+- replayや既知解答のPへの混入
+- task / game / level identityによるselector
+- source / hidden stateのruntime使用
+- Pのruntime無監査自己更新
+- HDSを迂回したP更新・action放出
+- 学習データ件数・parameter数を能力証明にすること
+- sample完全攻略前の公式接続
+- Kaggle提出経路の前倒し実行
 
-- 本書、ロードマップ、移植台帳、参照mapが存在する
-- protocol、IR、schema、verification、checkpointが独立import可能
-- 単体試験が外部APIなしで決定論的に通る
-- 旧runtimeが新標準経路へ未接続である
-- benchmarkや汎化能力を未検証のまま主張していない
+## 12. フェーズ境界
 
-P1では、この基盤上に次を追加済みです。
+- P0: 基盤・契約 — 完了
+- P1: Layer-0実行機構・OFFLINE経路 — 完了
+- P2: 命令形保持体Pの形成・接続 — 現在
+- P3: 全sample完全攻略
+- P4: local完成状態の固定
+- P5: 公式ARC接続
+- P6: Kaggle CLI / MCP提出経路
+- P7: 実提出
+- P8: 公式結果最適化
 
-- 六責任のcallable dependency
-- HDS command capabilityとsingle-use consume
-- Pure-LLMによる複数仮説・候補proposal
-- `W=(X,R,Mc)` と十評価軸によるclosure proposal
-- HDSだけが発行するwrite / emit directive
-- 受動memoryとin-memory emission adapter
-- full setと六つのsingle-callable removal
-- repository-wide unit gateとinstallable package boundary
-- `FrameDataRaw`からidentity-free observationへの変換
-- HDS承認済みactionだけを通す`OFFLINE` sample emission
-- action後のrendered再観測と保守的transition verification
-- persistent bounded context / passive memoryを次cycleへ反映
-- 保持済み25ゲームすべての1-action offline smoke
-
-1-action smokeは、sample local pathで実行核が動くことだけを証明します。
-全183 levelの攻略、GAME_OVER / timeout / max-actionの解消、完全再現性は
-P2の完了条件であり、P1の成功数へ混同しません。
-
-P1の実装境界、固定failure witness、OFFLINE接続範囲は
-[`P1_SAMPLE_EXECUTION_KERNEL.md`](P1_SAMPLE_EXECUTION_KERNEL.md)を正本とします。
+P2の詳細完了条件は `P2_INSTRUCTION_BODY_FORMATION.md` を参照します。
