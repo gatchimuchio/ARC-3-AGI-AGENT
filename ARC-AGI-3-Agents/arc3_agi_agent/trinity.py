@@ -83,6 +83,8 @@ class ControlledTrinityProbe:
     predictions_digest: str
     candidates_digest: str
     output_proposals_digest: str
+    hypothesis_count: int
+    candidate_count: int
     judgment_digest: str
     judgment_status: str
     selected_candidate_id: str
@@ -120,6 +122,10 @@ class ControlledTrinityProbe:
             failures.append("TRINITY_PROBE_MEMORY_CITATION_MISMATCH")
         if self.memory_version < 0:
             failures.append("TRINITY_PROBE_MEMORY_VERSION_INVALID")
+        if self.hypothesis_count < 2:
+            failures.append("TRINITY_PROBE_HYPOTHESIS_COUNT_INVALID")
+        if self.candidate_count < 2:
+            failures.append("TRINITY_PROBE_CANDIDATE_COUNT_INVALID")
         failures.extend(
             f"TRINITY_PROBE_RUNTIME_IDENTITY_FORBIDDEN:{path}"
             for path in forbidden_runtime_paths(
@@ -372,6 +378,8 @@ def _controlled_probe(
         predictions_digest=digest_object(proposal.predictions),
         candidates_digest=digest_object(proposal.candidates),
         output_proposals_digest=digest_object(proposal.output_proposals),
+        hypothesis_count=len(proposal.hypotheses),
+        candidate_count=len(proposal.candidates),
         judgment_digest=standalone.digest,
         judgment_status=standalone.status,
         selected_candidate_id=standalone.selected_candidate_id or "",

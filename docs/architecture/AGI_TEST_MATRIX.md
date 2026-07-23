@@ -1,7 +1,7 @@
 # AGI最小三構成 Test Matrix
 
-- current phase: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
-- last completed phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
+- current phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
+- last completed phase: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
 - current executable regression gates:
   `test_agi_minimum_three_audit.py`,
   `test_evidence_compiler.py`,
@@ -11,7 +11,8 @@
   `test_judgment_subject_p5.py`,
   `test_memory_subject_p6.py`,
   `test_pairwise_subject_p7.py`,
-  `test_trinity_two_cycle_p8.py`
+  `test_trinity_two_cycle_p8.py`,
+  `test_minimum_three_certificate_p9.py`
 
 ## 現行証拠
 
@@ -39,13 +40,14 @@
 | `T-P7-PAIR-JM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | `test_pairwise_subject_p7.py` | J/M実機能後にC生成計算が固有witnessでFAIL | 実装・実行済み |
 | `T-P8-TWO-CYCLE` | `CLAIM_TWO_CYCLE_CAUSALITY` | `test_trinity_two_cycle_p8.py` | cycle 1 post-Mをcycle 2が引用しbehavioral delta | 実装・実行済み |
 | `T-P8-PJM-ISOLATION` | `CLAIM_CAUSAL_ATTRIBUTION` | `test_trinity_two_cycle_p8.py` | P/J/M一因子だけを変え、固有出力だけが変化 | 実装・実行済み |
+| `T-P9-EIGHT-SUBSETS` | `CLAIM_MINIMUM_THREE` | `test_minimum_three_certificate_p9.py` | 8 subsetを重複なく実行しproper subset 7件FAIL、full set 1件PASS | 実装・実行済み |
+| `T-P9-EQUIVALENT-LEAK` | no functional equivalent | `test_minimum_three_certificate_p9.py` | 欠落C/J/Mの生成・判断・保持出力、field、fallback代行が0 | 実装・実行済み |
+| `T-P9-CERTIFICATE-REBUILD` | `CLAIM_MINIMUM_THREE` | `test_minimum_three_certificate_p9.py` | 5 artifactの内容・digest・再生成byteが一致 | 実装・実行済み |
 
 ## 後続phaseの固定試験
 
 | Test ID | Primary claim | Phase | 必須反証条件 |
 |---|---|---|---|
-| `T-P9-EIGHT-SUBSETS` | `CLAIM_MINIMUM_THREE` | P9 | proper subset PASSまたはfull set FAILでFAIL |
-| `T-P9-EQUIVALENT-LEAK` | no functional equivalent | P9 | fallback/global callback/answer fixture代行でFAIL |
 | `T-P10-ALL-SAMPLES` | `CLAIM_SAMPLE_COMPLETE` | P10 | 未完level、error、GAME_OVER、timeout、max-action停止でFAIL |
 | `T-P10-DETERMINISM` | sample reproducibility | P10 | 同一release stateでtrace/result差があればFAIL |
 | `T-P11-REBUILD` | `CLAIM_RELEASE_STATE_FIXED` | P11 | P0/J0/M0/dataset/compiler/package digest差でFAIL |

@@ -23,8 +23,8 @@
 | P6 | 記憶主体Mの単独実装 | 完了 |
 | P7 | 二主体接続監査 | 完了 |
 | P8 | 三主体Trinity循環 | 完了 |
-| P9 | 全8部分集合監査 | 現在 |
-| P10 | ARC3全sample完全攻略 | 未開始 |
+| P9 | 全8部分集合監査 | 完了 |
+| P10 | ARC3全sample完全攻略 | 現在 |
 | P11 | 完成状態固定 | 未開始 |
 | P12 | 公式ARC環境接続 | current request外 |
 | P13 | Kaggle提出経路 | current request外 |
@@ -32,15 +32,16 @@
 
 ## 現在のphase gate
 
-P9では次だけを行う。
+P10では次だけを行う。
 
-- `{}`から`{C,J,M}`まで全8 subsetを有限列挙
-- proper subset 7件FAIL、full set 1件PASS
-- single removal 3件、pair failure 3件、G1〜G5をcertificate化
-- fallback/global callback/fixture answer等の機能等価物漏れ0
-- certificate/result/witness/obligation graphを機械可読artifactへ固定
+- 保持済みOFFLINE sampleの全game / 全level攻略
+- identity-free P0候補、M0候補、ARC3用HDS Frameの形成
+- P-A / P-B / hybridの同一条件比較
+- failureのM保持と明示的compilerによる次版P形成
+- error、GAME_OVER、timeout、無限loop、max-action停止の解消
+- 全trace保存と同一release条件での再現確認
 
-P9ではsample攻略、公式接続、Kaggle作業を実行・完了扱いしない。
+P10ではrelease state固定、公式接続、Kaggle作業を実行・完了扱いしない。
 
 ## 監査正本
 

@@ -37,6 +37,7 @@ agentops = [
 arc3-p1-samples = "sample_main:main"
 arc3-compile-evidence = "arc3_agi_agent.evidence_compiler:main"
 arc3-compile-instruction-bodies = "arc3_agi_agent.instruction_compiler:main"
+arc3-build-minimum-certificate = "arc3_agi_agent.certificate:main"
 
 [build-system]
 requires = ["setuptools>=77"]

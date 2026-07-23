@@ -11,7 +11,8 @@ P5ではtyped HDS Frameとstandalone Jを実装し、integrated HDSも同じ判�
 接続しました。P6では全15 storage operation、version、snapshot、rollback、
 active/archiveを持つstandalone Mを実装しました。P7では三pairの固有不足を
 実行監査しました。P8ではfull二周期TrinityとP/J/M因果分離を実証しました。
-現在phaseはP9です。
+P9では全8 subsetを実行し、full setだけがPASSするcertificateを固定しました。
+現在phaseはP10です。
 
 ## 現在の実行入口
 
@@ -74,6 +75,10 @@ P7 pair監査証拠は
 P8二周期因果証拠は
 [`../docs/architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md`](../docs/architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md)
 を参照してください。
+
+P9最小三構成証拠は
+[`../docs/architecture/P9_MINIMUM_THREE_CERTIFICATE.md`](../docs/architecture/P9_MINIMUM_THREE_CERTIFICATE.md)
+と[`../certificates/p9`](../certificates/p9)を参照してください。
 
 ## 検証
 

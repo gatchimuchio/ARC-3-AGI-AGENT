@@ -273,3 +273,17 @@ P8完了時点で`F-P2-005`を是正した。
 
 `F-P2-006`の全8 subset部分は未解決である。P8 HDS判断は`PASS`、
 次phaseは`P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`とする。
+
+## 13. P9 disposition
+
+P9完了時点で`F-P2-006`の全8 subset部分を是正した。
+
+- 空集合、single 3件、pair 3件、full Trinityを固定順序で実行
+- proper subset 7件FAIL、full set 1件PASS
+- single removal 3件、pair failure 3件を固有witnessへ対応
+- 欠落主体fieldと欠落主体固有出力の機能等価物漏れ0
+- certificate、subset、witness、obligation graph、conformance reportを生成
+- 同一入力・同一graphから5 artifactをbyte一致で再生成
+
+`F-P2-010`の全sample攻略と`F-P2-008`のrelease freezeは未解決である。
+P9 HDS判断は`PASS`、次phaseは`P10_COMPLETE_ARC3_SAMPLE_SOLVING`とする。

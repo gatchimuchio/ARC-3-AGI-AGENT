@@ -1,7 +1,7 @@
 # AGI最小三構成 Claim Registry
 
-- current phase: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
-- last completed phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
+- current phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
+- last completed phase: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
 - rule: 実装path、実行test、除去証人が揃わないclaimを`SUPPORTED`にしない
 
 | Claim ID | 主張 | 状態 | primary evidence | 反証・不足 | 次phase |
@@ -21,18 +21,17 @@
 | `CLAIM_PAIRWISE_INSUFFICIENCY` | 三pairが固有witnessでAGI義務を閉じない | `SUPPORTED` | `test_pairwise_subject_p7.py` | full Trinity・G4・全8 subsetは含まない | 回帰 |
 | `CLAIM_TWO_CYCLE_CAUSALITY` | cycle 1のM更新がcycle 2のC/Jを変える | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 全8 subset・sample攻略は含まない | 回帰 |
 | `CLAIM_CAUSAL_ATTRIBUTION` | P-only/J-only/M-only変更の効果を個別帰属できる | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 観測済みP-A/P-Bとsynthetic Frame条件の範囲 | 回帰 |
-| `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `UNSUPPORTED` | なし | executable subset certificateなし | P9 |
+| `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `SUPPORTED` | `test_minimum_three_certificate_p9.py`, `certificates/p9/` | G1〜G5定義域内の構成最小性。sample攻略・未知task汎化は含まない | 回帰 |
 | `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略する | `UNSUPPORTED` | なし | 現在は25 game各1 action経路だけ | P10 |
 | `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | なし | P-B holdout BCEは退行なしだが、未知sample構造の攻略証明ではない | P10 |
 | `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `UNSUPPORTED` | なし | release manifestとfull regressionなし | P11 |
-| `CLAIM_OFFICIAL_READY` | COMPETITION/Kaggleへ進める | `REJECTED` | なし | P9〜P11未完、current request外 | P12以降 |
+| `CLAIM_OFFICIAL_READY` | COMPETITION/Kaggleへ進める | `REJECTED` | なし | P10〜P11未完、current request外 | P12以降 |
 
 ## 禁止claim
 
 次の表現は、対応claimが`SUPPORTED`になるまで使用しない。
 
 - AGI完成
-- 最小三構成を証明済み
 - 二周期学習成立済み
 - 全sample攻略済み
 - 汎化済み

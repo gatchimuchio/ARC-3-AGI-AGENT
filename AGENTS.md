@@ -20,11 +20,11 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` です。
+現在は `P10_COMPLETE_ARC3_SAMPLE_SOLVING` です。
 
-`P8_THREE_SUBJECT_TWO_CYCLE_TRINITY` は完了しています。full二周期authority
-loop、cycle 1 M更新からcycle 2 C/Jへの因果、P-only/J-only/M-only分離を
-実行証明しました。P8は全8 subset最小certificateを完成させていません。
+`P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
+full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
+決定論的certificateへ固定しました。P9は全sample攻略を証明していません。
 
 現行分類は次です。
 
@@ -79,37 +79,40 @@ P8 complete:
   cycle-1 M update causally changes cycle-2 C or J
   controlled P-only / J-only / M-only attribution
 
-P9 current:
+P9 complete:
   finite enumeration of all eight C/J/M subsets
   full set PASS and seven proper subsets FAIL
   zero functional-equivalent responsibility leaks
+
+P10 current:
+  complete all retained OFFLINE sample games and levels
+  deterministic identity-free traces
+  explicit P version updates and M-to-future-decision causality
 ```
 
-### P9で許可される作業
+### P10で許可される作業
 
-- `{}`、single 3件、pair 3件、full Trinityの全8 subset実行
-- G1〜G5の期待/実測結果、固定witness、single removalの統合
-- class `None`だけでなくfallback/global callback/fixture代行の漏れ監査
-- certificate JSON、subset enumeration、removal witnesses、obligation graph、
-  conformance reportの生成・再生成検証
-- P8までを含む既存回帰
+- 保持済みOFFLINE sampleの全game / 全level実行
+- ARC3解析素材からidentity-free P初期構成とM初期状態を形成
+- ARC3目的・境界・停止・rollback条件を持つHDS Frame設定
+- P-A / P-B / hybridの同一条件比較
+- failure evidenceのM保持と、明示的compilerによる次版P形成
+- timeout、GAME_OVER、無限loop、max-action停止の原因分類と是正
+- 全実行trace、level完了証拠、同一条件再実行証拠の保存
+- P9までを含む既存回帰
 
-### P9で禁止される作業
+### P10で禁止される作業
 
-- proper subsetをPASSにするため欠落主体責任を代行すること
-- metadata削除だけでsubsetをFAILさせること
-- 実行していないsubset/certificate fieldをPASSにすること
-- 全sample game / 全level攻略
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
 - task/game/level ID、replay、固定action列、answer map、literal座標をruntime fixtureへ残すこと
 - source / hidden stateをruntime計算素材へ残すこと
 - scoreを根拠にした局所最適化
-- P9 certificate成立前の「最小三構成証明済み」
+- P10全level証拠成立前のrelease state固定
 - 「全sample攻略済み」「汎化済み」といった未検証主張
 
-P9の正本は新ロードマップのP9節、P2 obligation/subset/test matrix、
-P4〜P8の実装証拠である。
+P10の正本は新ロードマップのP10節、P9 certificate、P3 dataset/P4 P bundle、
+P5 J/P6 M/P8 Trinityの実装証拠である。
 
 ## 3. 1 work blockの必須契約
 
@@ -283,14 +286,13 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - cycle 1のM更新がcycle 2のC/Jを変える
 - P-only/J-only/M-only因果分離
 
-### P9: Eight-subset Minimum Certificate — 現在
+### P9: Eight-subset Minimum Certificate — 完了
 
 - `{}`から`{C,J,M}`まで全8 subsetを有限列挙
 - full setだけPASS、機能等価物漏れ0
 
-### P10: Complete ARC3 Sample Solving
+### P10: Complete ARC3 Sample Solving — 現在
 
-- P9 PASS後だけ開始
 - 全sample game/all level、error 0、再現可能
 - ID/replay/answer/literal/source-state非依存
 

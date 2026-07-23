@@ -15,7 +15,8 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - P6: `MEMORY_SUBJECT_M` — 完了
 - P7: `PAIRWISE_SUBJECT_AUDIT` — 完了
 - P8: `THREE_SUBJECT_TWO_CYCLE_TRINITY` — 完了
-- 現在フェーズ: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
+- P9: `EIGHT_SUBSET_MINIMUM_CERTIFICATE` — 完了
+- 現在フェーズ: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -23,6 +24,7 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - 計算主体 `C`: standalone G1を実装・除去監査済み
 - 判断主体 `J`: typed Frameによるstandalone G2を実装・除去監査済み
 - 記憶主体 `M`: 全15操作を持つstandalone G3を実装・除去監査済み
+- 最小三構成証明: 全8 subset中full setだけPASS、機能等価物漏れ0
 - ベンチマーク状態: **未確定**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -154,7 +156,10 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 です。P8ではfull Trinity二周期因果とP/J/M別の因果分離を検証しました。
 完了証拠は
 [`P8_TRINITY_TWO_CYCLE_CAUSALITY.md`](docs/architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md)
-です。現在のP9では全8 subsetを有限列挙し、最小三構成certificateを生成します。
+です。P9では全8 subsetを有限列挙し、最小三構成certificateを
+[`certificates/p9`](certificates/p9)へ固定しました。完了証拠は
+[`P9_MINIMUM_THREE_CERTIFICATE.md`](docs/architecture/P9_MINIMUM_THREE_CERTIFICATE.md)
+です。現在のP10では保持済みOFFLINE sampleの全game / 全level攻略を行います。
 
 ## 設計上の固定境界
 
@@ -192,8 +197,8 @@ python sample_main.py --all-samples --max-actions 1
 7. P6: 記憶主体M — 完了
 8. P7: 二主体接続監査 — 完了
 9. P8: 三主体二周期循環 — 完了
-10. P9: 全8部分集合証明 — 現在
-11. P10: 全sample game / 全level完全攻略
+10. P9: 全8部分集合証明 — 完了
+11. P10: 全sample game / 全level完全攻略 — 現在
 12. P11: release state固定
 
 P11完了前は公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出を禁止します。
