@@ -1,15 +1,44 @@
-import pytest
+import subprocess
+import sys
+import textwrap
+from pathlib import Path
+from unittest.mock import Mock, patch
 
-from agents.structs import (
+import numpy as np
+import pytest
+from arcengine import (
     ActionInput,
-    Card,
     FrameData,
+    FrameDataRaw,
     GameAction,
     GameState,
-    Scorecard,
 )
+
+from agents import AVAILABLE_AGENTS
 from agents.templates.langgraph_random_agent import LangGraphRandom
 from agents.templates.random_agent import Random
+
+
+def make_random_agent(arc_env: Mock | None = None) -> Random:
+    return Random(
+        card_id="test-card",
+        game_id="test-game",
+        agent_name="test-agent",
+        ROOT_URL="https://example.com",
+        record=False,
+        arc_env=arc_env or Mock(),
+    )
+
+
+def make_langgraph_random_agent(arc_env: Mock | None = None) -> LangGraphRandom:
+    return LangGraphRandom(
+        card_id="test-card",
+        game_id="test-game",
+        agent_name="test-agent",
+        ROOT_URL="https://example.com",
+        record=False,
+        arc_env=arc_env or Mock(),
+    )
 
 
 @pytest.mark.unit
@@ -25,7 +54,7 @@ class TestGameActionCore:
             ),
         ],
     )
-    def test_action_init(self, action, data, expected):
+    def test_action_data_validation(self, action, data, expected):
         action.set_data(data)
 
         assert action.action_data.game_id == expected["game_id"]
@@ -34,27 +63,27 @@ class TestGameActionCore:
             assert action.action_data.y == expected["y"]
 
     @pytest.mark.parametrize(
-        "action,invalid_data",
+        "invalid_data",
         [
-            (GameAction.ACTION6, {"game_id": "test", "x": -1, "y": 0}),
-            (GameAction.ACTION6, {"game_id": "test", "x": 0, "y": 64}),
-            (GameAction.ACTION6, {"x": "not_a_number", "y": 10}),
+            {"game_id": "test", "x": -1, "y": 0},
+            {"game_id": "test", "x": 0, "y": 64},
+            {"x": "not_a_number", "y": 10},
         ],
     )
-    def test_coordinate_validation(self, action, invalid_data):
+    def test_coordinate_validation(self, invalid_data):
         with pytest.raises(Exception):
-            action.set_data(invalid_data)
+            GameAction.ACTION6.set_data(invalid_data)
 
     @pytest.mark.parametrize(
         "action_id,expected",
         [
             (0, GameAction.RESET),
             (6, GameAction.ACTION6),
+            (7, GameAction.ACTION7),
         ],
     )
     def test_action_from_id(self, action_id, expected):
-        action = GameAction.from_id(action_id)
-        assert action == expected
+        assert GameAction.from_id(action_id) == expected
 
         with pytest.raises(ValueError):
             GameAction.from_id(999)
@@ -64,11 +93,11 @@ class TestGameActionCore:
         [
             ("RESET", GameAction.RESET),
             ("action6", GameAction.ACTION6),
+            ("Action7", GameAction.ACTION7),
         ],
     )
     def test_action_from_name(self, action_name, expected):
-        action = GameAction.from_name(action_name)
-        assert action == expected
+        assert GameAction.from_name(action_name) == expected
 
         with pytest.raises(ValueError):
             GameAction.from_name("INVALID_ACTION")
@@ -79,8 +108,8 @@ class TestGameActionCore:
 
         assert GameAction.RESET in simple_actions
         assert GameAction.ACTION1 in simple_actions
+        assert GameAction.ACTION7 in simple_actions
         assert GameAction.ACTION6 in complex_actions
-
         assert GameAction.RESET.is_simple()
         assert not GameAction.RESET.is_complex()
         assert GameAction.ACTION6.is_complex()
@@ -105,117 +134,87 @@ class TestActionInput:
         assert action_input.data["x"] == 10
         assert action_input.reasoning["tokens"] == 50
 
-    def test_reasoning_json_validation(self):
+    def test_reasoning_must_be_json_serializable(self):
         action_input = ActionInput(reasoning={"key": "value", "number": 42})
         assert action_input.reasoning["key"] == "value"
 
         with pytest.raises(Exception):
-            ActionInput(reasoning=lambda x: x)  # Functions are not JSON serializable
+            ActionInput(reasoning=lambda value: value)
 
 
 @pytest.mark.unit
-class TestCard:
-    def test_card_init(self):
-        card = Card(game_id="test-game")
-        assert card.game_id == "test-game"
-        assert card.total_plays == 0
-        assert not card.started
-        assert card.score is None
-        assert card.high_score == 0
-        assert card.idx == -1
+class TestLazyAgentRegistry:
+    def test_package_import_does_not_require_optional_agent_stacks(self):
+        script = textwrap.dedent(
+            """
+            import builtins
+            import sys
 
-        card = Card(
-            game_id="test-game",
-            total_plays=2,
-            scores=[10, 15],
-            states=[GameState.GAME_OVER, GameState.WIN],
-            actions=[50, 30],
-            resets=[1, 0],
+            blocked = {"langchain", "langgraph", "langsmith", "openai", "smolagents"}
+            real_import = builtins.__import__
+
+            def guarded_import(name, *args, **kwargs):
+                if name.partition(".")[0] in blocked:
+                    raise AssertionError(f"optional dependency imported: {name}")
+                return real_import(name, *args, **kwargs)
+
+            builtins.__import__ = guarded_import
+            import agents
+            from agents.recorder import Recorder
+
+            assert Recorder is agents.Recorder
+            assert not blocked.intersection(
+                name.partition(".")[0] for name in sys.modules
+            )
+            """
         )
 
-        assert card.started
-        assert card.score == 15
-        assert card.high_score == 15
-        assert card.state == GameState.WIN
-        assert card.action_count == 30
-        assert card.total_actions == 80
-        assert card.idx == 1
-
-
-@pytest.mark.unit
-class TestScorecard:
-    def test_scorecard_init(self):
-        scorecard = Scorecard(card_id="test-card", api_key="test-key")
-        assert scorecard.card_id == "test-card"
-
-        card1 = Card(
-            game_id="game1",
-            total_plays=2,
-            scores=[10, 20],
-            states=[GameState.GAME_OVER, GameState.WIN],
-        )
-        card2 = Card(
-            game_id="game2", total_plays=1, scores=[15], states=[GameState.GAME_OVER]
+        result = subprocess.run(
+            [sys.executable, "-c", script],
+            cwd=Path(__file__).resolve().parents[2],
+            capture_output=True,
+            text=True,
+            check=False,
         )
 
-        scorecard.cards = {"game1": card1, "game2": card2}
+        assert result.returncode == 0, result.stderr
 
-        assert scorecard.won == 1
-        assert scorecard.played == 2
-        assert scorecard.total_actions == 0
+    def test_random_agent_is_loaded_without_optional_agent_imports(self):
+        assert "random" in AVAILABLE_AGENTS
+        assert AVAILABLE_AGENTS["random"] is Random
 
-        all_cards = scorecard.get()
-        assert len(all_cards) == 2
-        assert "game1" in all_cards
-        assert "game2" in all_cards
-
-        specific_card = scorecard.get("game1")
-        assert "game1" in specific_card
-
-        json_data = scorecard.get_json_for("game1")
-        assert "won" in json_data
-        assert "played" in json_data
-        assert "cards" in json_data
-        assert json_data["cards"]["game1"]["game_id"] == "game1"
+        with pytest.raises(KeyError):
+            AVAILABLE_AGENTS["missing-agent"]
 
 
 @pytest.mark.unit
 class TestRandomAgent:
     def test_agent_init(self):
-        agent = Random(
-            card_id="test-card",
-            game_id="test-game",
-            agent_name="test-agent",
-            ROOT_URL="https://example.com",
-            record=False,
-        )
+        agent = make_random_agent()
 
         assert agent.game_id == "test-game"
         assert agent.card_id == "test-card"
         assert agent.MAX_ACTIONS == 80
         assert agent.action_counter == 0
+        assert agent.arc_env is not None
+        assert agent.name == "test-game.random.80"
 
-        name = agent.name
-        assert "test-game" in name
-        assert "random" in name
-        assert "80" in name
-
-    def test_agent_action_logic(self, sample_frame):
-        agent = Random(
-            card_id="test-card",
-            game_id="test-game",
-            agent_name="test-agent",
-            ROOT_URL="https://example.com",
-            record=False,
-        )
+    def test_agent_action_and_stop_logic(self, sample_frame):
+        agent = make_random_agent()
 
         sample_frame.state = GameState.NOT_PLAYED
-        action = agent.choose_action([sample_frame], sample_frame)
-        assert action == GameAction.RESET
+        assert agent.choose_action([sample_frame], sample_frame) == GameAction.RESET
+
+        sample_frame.state = GameState.GAME_OVER
+        assert agent.choose_action([sample_frame], sample_frame) == GameAction.RESET
 
         sample_frame.state = GameState.NOT_FINISHED
-        action = agent.choose_action([sample_frame], sample_frame)
-        assert action != GameAction.RESET
+        with patch(
+            "agents.templates.random_agent.random.choice",
+            return_value=GameAction.ACTION1,
+        ):
+            action = agent.choose_action([sample_frame], sample_frame)
+        assert action == GameAction.ACTION1
         assert isinstance(action, GameAction)
 
         sample_frame.state = GameState.WIN
@@ -223,62 +222,66 @@ class TestRandomAgent:
 
         sample_frame.state = GameState.NOT_FINISHED
         assert agent.is_done([sample_frame], sample_frame) is False
+
+    def test_environment_frame_conversion_and_action_request(self):
+        arc_env = Mock()
+        raw = FrameDataRaw(
+            game_id="test-game",
+            state=GameState.NOT_FINISHED,
+            levels_completed=2,
+            win_levels=5,
+            available_actions=[1, 6],
+        )
+        raw.frame = [np.array([[1, 2], [3, 4]], dtype=np.uint8)]
+        arc_env.step.return_value = raw
+        agent = make_random_agent(arc_env)
+        GameAction.ACTION1.set_data({"game_id": "test-game"})
+
+        frame = agent.do_action_request(GameAction.ACTION1)
+
+        assert frame.game_id == "test-game"
+        assert frame.frame == [[[1, 2], [3, 4]]]
+        assert frame.levels_completed == 2
+        assert frame.win_levels == 5
+        assert frame.available_actions == [1, 6]
+        arc_env.step.assert_called_once_with(
+            GameAction.ACTION1,
+            data={"game_id": "test-game"},
+            reasoning={},
+        )
 
 
 @pytest.mark.unit
 class TestLangGraphRandomAgent:
     def test_agent_init(self):
-        agent = LangGraphRandom(
-            card_id="test-card",
-            game_id="test-game",
-            agent_name="test-agent",
-            ROOT_URL="https://example.com",
-            record=False,
-        )
+        agent = make_langgraph_random_agent()
 
         assert agent.game_id == "test-game"
         assert agent.card_id == "test-card"
         assert agent.MAX_ACTIONS == 80
         assert agent.action_counter == 0
-
-        # Test that workflow is properly initialized
         assert agent.workflow is not None
-
-        name = agent.name
-        assert "test-game" in name
-        assert "langgraphrandom" in name.lower()
-        assert "80" in name
+        assert agent.name == "test-game.langgraphrandom.80"
 
     def test_agent_action_logic(self, sample_frame):
-        agent = LangGraphRandom(
-            card_id="test-card",
-            game_id="test-game",
-            agent_name="test-agent",
-            ROOT_URL="https://example.com",
-            record=False,
-        )
+        agent = make_langgraph_random_agent()
 
-        # NOT_PLAYED state -> RESET
         sample_frame.state = GameState.NOT_PLAYED
-        action = agent.choose_action([sample_frame], sample_frame)
-        assert action == GameAction.RESET
+        assert agent.choose_action([sample_frame], sample_frame) == GameAction.RESET
 
-        # GAME_OVER state -> RESET
         sample_frame.state = GameState.GAME_OVER
-        action = agent.choose_action([sample_frame], sample_frame)
-        assert action == GameAction.RESET
+        assert agent.choose_action([sample_frame], sample_frame) == GameAction.RESET
 
-        # active game state -> random action (not RESET)
         sample_frame.state = GameState.NOT_FINISHED
-        action = agent.choose_action([sample_frame], sample_frame)
-        assert action != GameAction.RESET
-        assert isinstance(action, GameAction)
+        with patch(
+            "agents.templates.langgraph_random_agent.random.choice",
+            return_value=GameAction.ACTION1,
+        ):
+            action = agent.choose_action([sample_frame], sample_frame)
+        assert action == GameAction.ACTION1
 
         sample_frame.state = GameState.WIN
         assert agent.is_done([sample_frame], sample_frame) is True
-
-        sample_frame.state = GameState.NOT_FINISHED
-        assert agent.is_done([sample_frame], sample_frame) is False
 
 
 @pytest.mark.unit
@@ -288,25 +291,30 @@ class TestFrameData:
             game_id="test",
             frame=[[[1, 2], [3, 4]]],
             state=GameState.NOT_FINISHED,
-            score=10,
+            levels_completed=10,
+            win_levels=20,
+            available_actions=[1, 6, 7],
         )
 
         assert frame.game_id == "test"
-        assert frame.score == 10
+        assert frame.levels_completed == 10
+        assert frame.win_levels == 20
+        assert frame.available_actions == [1, 6, 7]
         assert frame.state == GameState.NOT_FINISHED
         assert not frame.is_empty()
 
-        frame = FrameData()
-        assert frame.game_id == ""
-        assert frame.frame == []
-        assert frame.state == GameState.NOT_PLAYED
-        assert frame.score == 0
-        assert frame.is_empty()
-        assert frame.guid is None
-        assert frame.full_reset is False
+        empty = FrameData()
+        assert empty.game_id == ""
+        assert empty.frame == []
+        assert empty.state == GameState.NOT_PLAYED
+        assert empty.levels_completed == 0
+        assert empty.win_levels == 0
+        assert empty.is_empty()
+        assert empty.guid is None
+        assert empty.full_reset is False
 
     @pytest.mark.parametrize(
-        "score,should_pass",
+        "levels_completed,should_pass",
         [
             (0, True),
             (254, True),
@@ -314,19 +322,20 @@ class TestFrameData:
             (255, False),
         ],
     )
-    def test_score_validation(self, score, should_pass):
+    def test_level_count_validation(self, levels_completed, should_pass):
         if should_pass:
-            frame = FrameData(score=score)
-            assert frame.score == score
+            frame = FrameData(levels_completed=levels_completed)
+            assert frame.levels_completed == levels_completed
         else:
             with pytest.raises(Exception):
-                FrameData(score=score)
+                FrameData(levels_completed=levels_completed)
 
-    def test_frame_2(self):
+    def test_action_input_and_serialization(self):
         action_input = ActionInput(
-            id=GameAction.ACTION1, data={"game_id": "test"}, reasoning={"model": "test"}
+            id=GameAction.ACTION1,
+            data={"game_id": "test"},
+            reasoning={"model": "test"},
         )
-
         frame = FrameData(
             game_id="test",
             action_input=action_input,
@@ -344,13 +353,17 @@ class TestFrameData:
         assert json_data["guid"] == "test-guid-123"
         assert json_data["full_reset"] is True
 
-    def test_frame_3(self):
+    def test_complex_frame_shape_is_preserved(self):
         complex_frame = [
             [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
             [[9, 8, 7], [6, 5, 4], [3, 2, 1]],
         ]
 
-        frame = FrameData(game_id="complex-test", frame=complex_frame, score=50)
+        frame = FrameData(
+            game_id="complex-test",
+            frame=complex_frame,
+            levels_completed=50,
+        )
 
         assert frame.frame == complex_frame
         assert not frame.is_empty()

@@ -6,8 +6,8 @@ ARC Prize 2026 / ARC-AGI-3 向けの、**未知環境を観測し、仮説を更
 
 ## 現在の状態
 
-- フェーズ: `P1_EXECUTABLE_KERNEL`
-- 実装状態: 独立Layer-0 kernel実装済み。P1完了判定は全unit gateで`SUSPEND`
+- フェーズ: `P1_EXECUTABLE_KERNEL`（完了、P2未開始）
+- 実装状態: 独立Layer-0 kernel、除去監査、repository-wide unit gateが`PASS`
 - ベンチマーク状態: **未確定**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -82,18 +82,17 @@ P1の閉包範囲と未実装範囲は
 
 ```bash
 cd ARC-AGI-3-Agents
-python -m compileall -q arc3_agi_agent
-python -m unittest discover -s tests/unit -p "test_arc3_agi_*.py" -v
-python -m pytest -q --confcutdir=tests/unit \
-  tests/unit/test_arc3_agi_foundation.py \
-  tests/unit/test_arc3_agi_kernel.py
+python -m compileall -q arc3_agi_agent agents tests/unit
+python -m unittest discover -s tests/unit -p "test_*.py" -v
+python -m pytest -q tests/unit
+ruff check arc3_agi_agent agents/__init__.py agents/recorder.py tests/conftest.py tests/unit
 ```
 
 ## 作業順
 
 1. P0: 再起動基盤と権限境界を固定する — 完了
-2. P1: 独立Layer-0 kernelと除去監査を閉じる — 実装済み、全unit gate待ち
-3. P2: HDS–計算–記憶の複数循環、rollback、再観測を閉じる
+2. P1: 独立Layer-0 kernelと除去監査を閉じる — 完了
+3. P2: HDS–計算–記憶の複数循環、rollback、再観測を閉じる — 未開始
 4. P3: 公式runnerへ汎用コアを統合する
 5. 同一条件benchmarkを再確立する
 6. アーキテクチャ完成後にのみ最適化へ進む

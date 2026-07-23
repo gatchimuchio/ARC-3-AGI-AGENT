@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
 - 版: `v0.1-restart`
-- 状態: `P1_EXECUTABLE_KERNEL`
+- 状態: `P1_EXECUTABLE_KERNEL` complete / P2 not started
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -209,7 +209,7 @@ ARC3では例えば次を観測候補とします。
 - 旧runtimeが新標準経路へ未接続である
 - benchmarkや汎化能力を未検証のまま主張していない
 
-P1では、この基盤上に次を追加します。
+P1では、この基盤上に次を追加済みです。
 
 - 六責任のcallable dependency
 - HDS command capabilityとsingle-use consume
@@ -218,6 +218,7 @@ P1では、この基盤上に次を追加します。
 - HDSだけが発行するwrite / emit directive
 - 受動memoryとin-memory emission adapter
 - full setと六つのsingle-callable removal
+- repository-wide unit gateとinstallable package boundary
 
 P1の実装境界、固定failure witness、未接続範囲は
 [`P1_EXECUTABLE_KERNEL.md`](P1_EXECUTABLE_KERNEL.md)を正本とします。

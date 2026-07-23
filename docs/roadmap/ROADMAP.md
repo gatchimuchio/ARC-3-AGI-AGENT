@@ -28,7 +28,7 @@
 - unit testsがPASS
 - score主張を行わない
 
-## P1 — Executable Kernel（現在・完了判定SUSPEND）
+## P1 — Executable Kernel（完了）
 
 目的:
 
@@ -66,12 +66,12 @@
 
 公式runner接続、live environment action、複数循環の実環境rollbackはP1へ含めません。
 
-独立kernelの対象試験は通過していますが、repository-wide unit gateは
-既存のofficial-agent試験が参照する`agents.structs`欠落とoptional dependencyの
-eager importにより収集不能です。P1完了候補への昇格は、この既存gateを別差分で
-修復して全unit suiteを再実行した後に行います。
+repository-wide unit harnessは現行`arcengine` / `Arcade` APIへ整合し、
+optional agent dependencyのeager importを除去しました。全unit suite、
+compile、ruff、package buildを通過し、P1完了ゲートは`PASS`です。
+公式runnerのaction-selectionは変更していません。
 
-## P2 — HDS–Compute–Memory Closed Loop
+## P2 — HDS–Compute–Memory Closed Loop（未開始）
 
 目的:
 

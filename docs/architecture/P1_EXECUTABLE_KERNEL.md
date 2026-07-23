@@ -1,7 +1,7 @@
 # P1 Executable Kernel 実装境界
 
 - phase: `P1_EXECUTABLE_KERNEL`
-- state: implementation closed / completion gate `SUSPEND`
+- state: complete / HDS judgment `PASS`
 - runtime scope: independent / offline / deterministic
 - official runner: not connected
 - benchmark claim: none
@@ -127,6 +127,9 @@ invalid output is separately rejected as a nonfunctional implementation.
 - identity-key rejection across snake_case, camelCase, and PascalCase
 - deterministic candidate order, closure, digest, and trace
 - full-set and six single-role removal audit
+- current `arcengine` / `Arcade` APIに整合したrepository-wide unit harness
+- optional agent dependencyを選択時まで読み込まないlazy import boundary
+- `agents`と`arc3_agi_agent`を明示的に含むinstallable package
 
 ## Not closed in P1
 
@@ -137,41 +140,37 @@ invalid output is separately rejected as a nonfunctional implementation.
 - persistent memory backend
 - benchmark re-establishment or score improvement
 - hidden-task generalization evidence
-- repository-wide unit gate repair for the pre-existing `agents.structs` and
-  eager optional-dependency collection failures
 
 ## Validation
 
-P1独立kernel:
+P1 completion gate:
 
 ```bash
-python -m compileall -q ARC-AGI-3-Agents/arc3_agi_agent
+python -m compileall -q \
+  ARC-AGI-3-Agents/arc3_agi_agent \
+  ARC-AGI-3-Agents/agents \
+  ARC-AGI-3-Agents/tests/unit
 
-python -m unittest discover \
-  -s ARC-AGI-3-Agents/tests/unit \
-  -p "test_arc3_agi_*.py" \
-  -v
-
-python -m pytest -q --confcutdir=ARC-AGI-3-Agents/tests/unit \
-  ARC-AGI-3-Agents/tests/unit/test_arc3_agi_foundation.py \
-  ARC-AGI-3-Agents/tests/unit/test_arc3_agi_kernel.py
-
-git diff --check
-```
-
-Repository-wide completion gate:
-
-```bash
 python -m unittest discover \
   -s ARC-AGI-3-Agents/tests/unit \
   -p "test_*.py" \
   -v
 
 python -m pytest -q ARC-AGI-3-Agents/tests/unit
+
+ruff check \
+  ARC-AGI-3-Agents/arc3_agi_agent \
+  ARC-AGI-3-Agents/agents/__init__.py \
+  ARC-AGI-3-Agents/agents/recorder.py \
+  ARC-AGI-3-Agents/tests/conftest.py \
+  ARC-AGI-3-Agents/tests/unit
+
+git diff --check
 ```
 
-後者は現在のHEADで、P1外の`tests/unit/test_core.py`、
-`tests/unit/test_swarm.py`、`tests/conftest.py`が参照する
-`agents.structs`の欠落と、`agents/__init__.py`によるoptional dependencyの
-eager importで収集停止します。この既存障害をP1実装へ混入して修復せず、
-完了判定を`SUSPEND`に保持します。
+2026-07-23の完了監査では、`unittest` 30件、`pytest` 84件、
+compile、ruff、`uv sync --locked`、editable install、isolated wheel buildが
+すべて通過しました。
+full setと六つのsingle-role removal、権限拒否、task identity-free、
+決定性の各証拠はunit suite内で実行されています。公式runnerの
+action-selection実装は変更していません。

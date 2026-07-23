@@ -2,6 +2,7 @@ import json
 import os
 import uuid
 from datetime import datetime, timezone
+from threading import Lock
 from typing import Any, Optional
 
 RECORDING_SUFFIX = ".recording.jsonl"
@@ -18,6 +19,7 @@ class Recorder:
     ) -> None:
         self.guid = self.get_guid(filename) if filename else (guid or str(uuid.uuid4()))
         self.prefix: str = prefix
+        self._write_lock = Lock()
         recordings_dir = get_recordings_dir()
         self.filename = (
             os.path.join(recordings_dir, filename)
@@ -40,9 +42,10 @@ class Recorder:
         event["timestamp"] = datetime.now(timezone.utc).isoformat()
         event["data"] = data
 
-        with open(self.filename, "a", encoding="utf-8") as f:
-            json.dump(event, f)
-            f.write("\n")
+        encoded_event = f"{json.dumps(event)}\n"
+        with self._write_lock:
+            with open(self.filename, "a", encoding="utf-8") as f:
+                f.write(encoded_event)
 
     def get(self) -> list[dict[str, Any]]:
         """

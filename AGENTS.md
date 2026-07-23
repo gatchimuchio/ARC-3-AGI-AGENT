@@ -18,7 +18,8 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P1_EXECUTABLE_KERNEL` です。
+`P1_EXECUTABLE_KERNEL`は完了しています。P2は未開始です。
+ユーザーが次フェーズを明示するまでは、P1境界の監査・回帰修正だけを行います。
 
 許可される作業:
 
@@ -119,21 +120,33 @@ HDS command
 - 各責任に除去証人がある
 - HDS未承認の計算・write・emitが拒否される
 
-### P2: Generic Integration
+### P2: HDS–Compute–Memory Closed Loop
+
+- 複数循環のcommand、再観測、再計算、SUSPEND、STOPを閉じる
+- stale observation、version conflict、rollback境界を機械検証する
+- P1の非対称権限を維持する
+
+### P3: Generic Integration
 
 - 公式runnerで汎用coreがprimary candidate sourceになる
 - task/replay/ID依存なしで起動・停止・再観測できる
 - 同一条件の回帰評価を行う
 
-### P3: Benchmark Closure
+### P4: Architecture Completion Audit
+
+- six-role removal、Trinity独立性、禁止入力、rollback、emissionを再監査する
+- 未閉包項目をbounded `SUSPEND`として列挙する
+
+### P5: Benchmark Re-establishment
 
 - 評価条件、seed、budget、初期状態、artifact digestを固定する
 - previous/current/deltaと全副作用を報告する
 - scoreだけでアーキテクチャ適合を証明しない
 
-### P4: Optimization
+### Post-P5: Optimization
 
-ユーザーが明示的にphaseを切り替えた後だけ開始します。
+アーキテクチャ完成監査後、ユーザーが明示的にphaseを切り替えた場合だけ
+開始します。
 
 ## 8. 検証規約
 
@@ -141,11 +154,10 @@ HDS command
 
 ```bash
 cd ARC-AGI-3-Agents
-python -m compileall -q arc3_agi_agent
-python -m unittest discover -s tests/unit -p "test_arc3_agi_*.py" -v
-python -m pytest -q --confcutdir=tests/unit \
-  tests/unit/test_arc3_agi_foundation.py \
-  tests/unit/test_arc3_agi_kernel.py
+python -m compileall -q arc3_agi_agent agents tests/unit
+python -m unittest discover -s tests/unit -p "test_*.py" -v
+python -m pytest -q tests/unit
+ruff check arc3_agi_agent agents/__init__.py agents/recorder.py tests/conftest.py tests/unit
 ```
 
 runtime接続以後は、対象試験に加えてoffline、deterministic、禁止入力、secret、rollback、emission gate、同一条件benchmarkを検査します。
