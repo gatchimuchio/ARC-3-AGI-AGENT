@@ -124,7 +124,7 @@ P2では、ニューラルネットワークの重み・接続・活性化条件
 
 - ARC実行時に game/task/level ID、replay index、固定action列、answer map、literal座標表、source/hidden stateを使用しない。
 - Pは計算素材を保持するが、採否・記憶確定・外部放出を独断で行わない。
-- HDSは命令・採否・SUSPEND・停止・rollback・`MEMORY_WRITE`・`EXTERNAL_EMIT`許可の唯一主体とする。
+- HDSは命令・採否・SUSPEND・停止・rollback・`MEMORY_WRITE`・`EXTERNAL_EMIT`許可の唯一主体とし、各command / directiveをsingle-useかつ発行実体へ束縛する。
 - Mは受動的共有状態とし、許可済み命令以外で自己更新しない。
 - PとMを混同しない。Mはruntime更新、Pは明示的compilerで版更新する。
 - 観測されていない機構は事実へ昇格せず、仮説または `SUSPEND` として保持する。
@@ -138,6 +138,7 @@ cd ARC-AGI-3-Agents
 python -m compileall -q arc3_agi_agent agents tests/unit
 python -m unittest discover -s tests/unit -p "test_*.py" -v
 python -m pytest -q tests/unit
+python -m mypy arc3_agi_agent
 ruff check arc3_agi_agent agents/__init__.py agents/recorder.py tests/conftest.py tests/unit
 python -m unittest discover -s tests/integration \
   -p "test_offline_sample_runner.py" -v

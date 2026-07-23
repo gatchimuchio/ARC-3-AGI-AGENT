@@ -84,6 +84,8 @@ class Layer0SampleAgent(Agent):
                 self.action_counter += 1
                 current = cycle.after_frame
                 self.append_frame(self._convert_raw_frame_data(current))
+                if self.final_status == "STOP":
+                    break
             else:
                 raise RuntimeError("OFFLINE_SAMPLE_CYCLE_BOUND_EXCEEDED")
         finally:

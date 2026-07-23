@@ -43,6 +43,8 @@ class ProtocolTests(unittest.TestCase):
             command_id="cmd-1",
             operation="LLM_COMPUTE",
             observation_signature="frame:abc",
+            context_signature="context:abc",
+            memory_signature="memory:abc",
             feature_tokens=("object_relation",),
         )
         self.assertEqual(request.validate(contract), ())

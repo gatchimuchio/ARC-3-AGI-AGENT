@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from dataclasses import dataclass, replace
+from dataclasses import dataclass
 
 from .kernel import Layer0Components, Layer0Kernel
 from .protocol import LAYER0_ROOTS
@@ -68,7 +68,8 @@ def run_required_removal_audit(
 
     for role in LAYER0_ROOTS:
         field_name = _COMPONENT_FIELDS[role]
-        components = replace(Layer0Components(), **{field_name: None})
+        components = Layer0Components()
+        setattr(components, field_name, None)
         try:
             Layer0Kernel(components).run_cycle(raw_observation)
         except Layer0FunctionalLoss as exc:

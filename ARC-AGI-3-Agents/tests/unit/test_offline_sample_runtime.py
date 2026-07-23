@@ -158,6 +158,35 @@ class OfflineSampleRuntimeTests(unittest.TestCase):
         self.assertEqual(runtime.context_state.snapshot().actions_used, 2)
         self.assertEqual(stopped.kernel_result.decision.status, "STOP")
 
+    def test_sample_agent_stops_after_a_post_emission_win(self) -> None:
+        before = frame([[0, 0], [0, 1]], available_actions=[1, 2])
+        after = frame(
+            [[0, 1], [0, 1]],
+            available_actions=[1, 2],
+            levels_completed=3,
+            state=GameState.WIN,
+        )
+        environment = FakeOfflineEnvironment(before, after)
+        agent = Layer0SampleAgent(
+            card_id="local-card",
+            game_id="external-report-identity",
+            agent_name="layer0sample",
+            ROOT_URL="",
+            record=False,
+            arc_env=environment,
+            operation_mode=OperationMode.OFFLINE,
+            max_actions=2,
+        )
+
+        agent.main()
+        report = agent.report()
+
+        self.assertEqual(len(environment.calls), 1)
+        self.assertEqual(report.actions, 1)
+        self.assertEqual(report.final_status, "STOP")
+        self.assertEqual(report.decision_statuses, ("EMIT",))
+        self.assertEqual(report.memory_version, 0)
+
     def test_action6_coordinates_come_from_current_dimensions(self) -> None:
         before = frame(
             [[0, 0, 0, 0, 0, 0] for _ in range(4)],

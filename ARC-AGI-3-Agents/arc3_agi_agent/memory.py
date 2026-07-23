@@ -77,12 +77,16 @@ class PassiveMemory:
         failures = list(directive.validate(decision))
         if executor != "pure-llm":
             failures.append("MEMORY_EXECUTOR_NOT_PURE_LLM")
+        payload_digest = digest_object(dict(payload))
+        if directive.payload_digest != payload_digest:
+            failures.append("MEMORY_PAYLOAD_MISMATCH")
         forbidden = forbidden_runtime_paths(payload)
         failures.extend(
             f"MEMORY_RUNTIME_IDENTITY_FORBIDDEN:{path}" for path in forbidden
         )
         if failures:
             raise AuthorityViolation(";".join(sorted(set(failures))))
+        directive.consume(decision)
 
         self._version += 1
         if directive.operation == "DELETE":

@@ -106,7 +106,11 @@ class DeterministicSymbolSpace:
                 {
                     int(action)
                     for action in action_values
-                    if isinstance(action, int) and 1 <= int(action) <= 7
+                    if (
+                        isinstance(action, int)
+                        and not isinstance(action, bool)
+                        and 1 <= int(action) <= 7
+                    )
                 }
             )
         )
@@ -210,7 +214,9 @@ class DeterministicWorldModel:
             if observation.visible_effects
             else "VISIBLE_STATE_CHANGE"
         )
-        support = (f"observation:{observation.frame_signature}",)
+        support: tuple[str, ...] = (
+            f"observation:{observation.frame_signature}",
+        )
         if context.previous_observation is not None:
             support += (
                 f"previous:{context.previous_observation.frame_signature}",
@@ -404,7 +410,11 @@ def _candidate_action_id(candidate: CandidateIR) -> int | None:
     if not candidate.steps:
         return None
     value = candidate.steps[0].get("action_id")
-    return int(value) if isinstance(value, int) else None
+    return (
+        int(value)
+        if isinstance(value, int) and not isinstance(value, bool)
+        else None
+    )
 
 
 @dataclass(frozen=True, slots=True)

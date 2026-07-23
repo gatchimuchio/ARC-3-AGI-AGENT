@@ -50,6 +50,10 @@ Mc:
   unique single-role removal witnesses
   HDS-only command/judgment/authorization
   capability-backed HDS decision/directive provenance
+  observation / context / memory-bound compute command
+  one decision per command
+  single-use write / emit directives
+  candidate, frame, payload, and result provenance binding
   passive memory
   unavailable or unclosed action rejection
   STOP terminality
@@ -103,18 +107,26 @@ action budget
 ## Asymmetric Trinity
 
 ```text
-HDS issues a single-use compute capability
+HDS issues a single-use compute capability bound to observation / context / memory
   -> Layer-0 mechanism executes provisional embedded rules
   -> fitting constructs closure proposals
-  -> HDS accepts, rejects, suspends, or stops
-  -> execution surface performs only HDS directives
-  -> passive memory and emission boundary apply authorized operations
-  -> HDS observes the result
+  -> HDS accepts, rejects, suspends, or stops exactly once
+  -> HDS binds a single-use emit directive to candidate / closure / frame
+  -> execution surface performs only that HDS directive
+  -> emission boundary binds its one-shot receipt to result content and provenance
+  -> HDS observes and validates the result
+  -> HDS binds a single-use memory directive to the judged payload
+  -> passive memory applies the authorized operation once
+  -> HDS verifies context / memory updates and alone finalizes PASS
 ```
 
-HDS does not mutate memory or invoke the environment adapter directly。
-Memory exposes no autonomous compute/update path。
-Execution calls the OFFLINE adapter only with a capability-backed HDS directive。The sample agent's direct action methods always reject。
+HDS does not mutate memory or invoke the environment adapter directly.
+Memory exposes no autonomous compute/update path.
+The execution surface calls the OFFLINE adapter only with a capability-backed
+HDS directive. Copying or reusing a directive, replacing the judged candidate
+or frame, changing the approved memory payload, tampering with the observed
+result, or returning a result without its content-bound execution receipt is
+rejected. The sample agent's direct action methods always reject.
 
 ## Required trace
 
@@ -161,10 +173,20 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - conservative `SUSPEND`, hazard veto, and STOP terminality
 - candidate ID、closure signature、action availability、HDS permission gates
 - HDS-authorized passive-memory mutation
-- capability-backed HDS authorization
-- HDS-side closure revalidation
-- identity-key rejection across common naming forms
-- deterministic candidate order、closure、digest、trace
+- authority labelsだけでは通らないHDS capability検証
+- compute commandを発行時のobservation / context / memoryへ束縛
+- judgment inputを発行時observationと正規conditioned contextへ束縛
+- controllerが発行したcompute command実体だけを受理
+- 一つのcompute commandから一つのdecisionだけを発行
+- emit / memory directiveを発行実体へ所有者束縛し、copy / replayを拒否
+- memory writeをjudged payload digestとemission再観測へ束縛
+- emitをjudged candidate content、closure、frameへ束縛
+- result contentへ束縛したreceipt、command、decision、candidate、closure、frameを照合した結果再観測
+- emission、context、memoryの実結果を再照合したHDS-only cycle finalization
+- HDS側でclosure field、fit score、hazard、terminal、budget、actionを再検証
+- hazard / `GAME_OVER` vetoをunknown state・budget停止より優先
+- identity-key rejection across snake_case, camelCase, and PascalCase
+- deterministic candidate order, closure, digest, and trace
 - full-set and six single-role removal audit
 - bundled sample observation to identity-free IR
 - `OperationMode.OFFLINE` fixed
@@ -214,6 +236,8 @@ python -m unittest discover \
 
 python -m pytest -q ARC-AGI-3-Agents/tests/unit
 
+python -m mypy ARC-AGI-3-Agents/arc3_agi_agent
+
 python -m unittest discover \
   -s ARC-AGI-3-Agents/tests/integration \
   -p "test_offline_sample_runner.py" \
@@ -236,3 +260,44 @@ git diff --check
 2026-07-23のsample接続監査では、保持済み25ゲームを各1 actionだけ実行し、25/25でHDS承認、OFFLINE step、再観測、context / memory更新、次HDS判断が成立した。全25件のrendered transition判定は、level progress未観測のため正規出力`SUSPEND`で、`FAIL`は0件であった。
 
 この結果はP1実行経路の証拠であり、Pure-LLM計算主体、P形成、sample攻略の証拠ではない。
+
+## 2026-07-23 権限境界の再監査
+
+初回実装を攻撃的に再実行し、次の不適合をbase commit上で再現して是正した。
+
+| Pre-fix witness | Correction | Post-fix result |
+|---|---|---|
+| command発行後にobservationを差し替えてcomputeできた | observation / context / memory snapshotをcommandへ束縛 | `HDS_COMMAND_*_MISMATCH`で拒否 |
+| Pythonの`True`がaction 1へ正規化された | `bool`をinput / candidate / directiveの全境界で非action化 | boolean actionを候補採用・放出しない |
+| kernel自身がcycle statusを`PASS`へ設定していた | HDSがemission / context / memory実結果を再照合してfinalize | HDS以外に最終`PASS`設定経路なし |
+| 同じemit directiveで2 actionを実行できた | directiveをone-shot grantへ変更 | 2回目を`EXTERNAL_EMIT_DIRECTIVE_ALREADY_CONSUMED`で拒否 |
+| 同じmemory directiveでversionが1から2へ進んだ | payload digest束縛とone-shot consume | 2回目を拒否しversion 1を維持 |
+| receiptのない偽`EmissionResult`をHDSが受理した | resultへ完全なprovenanceとexecution receiptを要求 | `EMISSION_RESULT_AUTHORIZATION_RECEIPT_INVALID`で拒否 |
+| 正規resultのreceiptを改変コピーへ流用できた | receiptを全result contentのdigestへ一回だけ束縛 | visible effect / terminal改変をreceipt不一致で拒否 |
+| directiveコピーが元grantを先に消費できた | grantをHDS発行directive objectへ所有者束縛 | emit / memoryともcopyを環境操作・write前に拒否 |
+| 同じcompute commandから複数decisionを発行できた | command所有権とjudged stateをHDS内で保持 | `HDS_COMMAND_ALREADY_JUDGED`で拒否 |
+| budget枯渇が`GAME_OVER` / hazardを覆い隠した | hazard vetoをunknown / budget判定より優先 | `HAZARD_ACTION_VETO`を保持 |
+| emission後のhazardを最終`PASS`としてmemoryへ書けた | HDSがemission resultを再判断し、hazard時はwriteせず`REJECT` | memory version 0とfailure evidenceを維持 |
+| P1 packageに型エラーが5件残っていた | callable cast、tuple型、removal mutationを明示 | `mypy arc3_agi_agent`合格 |
+
+同一最終差分に対する再監査gate:
+
+- Python: `3.12.13`
+- compile: 合格
+- unit `unittest`: 52件合格
+- unit `pytest`: 106件合格
+- repository `pytest`: 108件合格
+- `mypy arc3_agi_agent`: 16 source files合格
+- `ruff`: 合格
+- OFFLINE integration: 2件合格
+- full set: `PASS`
+- six single-role removals: 固定した六つの固有failure witnessで全件`FAIL`
+- same-input determinism: candidate / closure / trace / digest一致
+- OFFLINE sample smoke: 25/25完了、error 0、各1 action、memory version 1
+- transition verification: 25/25が保守的`SUSPEND`、`FAIL` 0
+- network guard: request / socketを強制失敗させた状態でintegration合格
+- wheel: sample agent / runtime / adapter / CLIと`arc3-p1-samples` entry pointを確認
+- wheel SHA-256: `bd8fa3edec8ad981d9ab09a673799edf00aba847ffd5542575b9adb51f6ec8c1`
+
+このgateはP1 execution mechanismの回帰証拠である。独立した命令形保持体`P`、
+P-A / P-B、`C = Execute(L0, P)`、sample攻略、汎化性能の証拠ではない。

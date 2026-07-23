@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass, field
 from math import isfinite
-from typing import Any
+from typing import Any, cast
 
 from .adapters.in_memory import EmissionResult, InMemoryEmissionInterface
 from .context import BoundedContextState, ContextSnapshot
@@ -20,6 +20,7 @@ from .protocol import (
     HDSDecision,
     MemoryDirective,
     TrinityLifecycle,
+    _SingleUseAuthorization,
 )
 from .roles import (
     ACTION_MODES,
@@ -69,6 +70,23 @@ class ComputeProposal:
 
 
 @dataclass(frozen=True, slots=True)
+class _ComputeBinding:
+    observation: ObservationIR
+    context: ContextSnapshot
+    memory: MemorySnapshot
+
+
+@dataclass(frozen=True, slots=True)
+class _DecisionBinding:
+    proposal_digest: str
+    hypotheses_digest: str
+    observation_signature: str
+    memory_target: str
+    memory_payload_digest: str
+    candidate_digest: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class KernelTraceEvent:
     index: int
     stage: str
@@ -96,7 +114,37 @@ class HDSController:
     """Sole command, judgment, stopping, write, and emission authority."""
 
     _issued: dict[str, bool] = field(default_factory=dict, init=False)
+    _commands: dict[str, AuthorizedComputeCommand] = field(
+        default_factory=dict,
+        init=False,
+    )
+    _compute_bindings: dict[str, _ComputeBinding] = field(
+        default_factory=dict,
+        init=False,
+    )
     _decisions: dict[str, HDSDecision] = field(default_factory=dict, init=False)
+    _decision_bindings: dict[str, _DecisionBinding] = field(
+        default_factory=dict,
+        init=False,
+    )
+    _judged_commands: set[str] = field(default_factory=set, init=False)
+    _memory_directives: dict[str, MemoryDirective] = field(
+        default_factory=dict,
+        init=False,
+    )
+    _emission_directives: dict[str, EmissionDirective] = field(
+        default_factory=dict,
+        init=False,
+    )
+    _observed_emissions: dict[str, EmissionResult] = field(
+        default_factory=dict,
+        init=False,
+    )
+    _emission_outcomes: dict[str, str] = field(
+        default_factory=dict,
+        init=False,
+    )
+    _finalized_decisions: set[str] = field(default_factory=set, init=False)
     _counter: int = field(default=0, init=False)
 
     def _issue_decision(
@@ -110,7 +158,10 @@ class HDSController:
         closure_signature: str = "",
         allow_memory_write: bool = False,
         allow_external_emit: bool = False,
+        binding: _DecisionBinding,
     ) -> HDSDecision:
+        if command_id in self._judged_commands:
+            raise AuthorityViolation("HDS_COMMAND_ALREADY_JUDGED")
         decision = HDSDecision(
             command_id=command_id,
             decision_id=decision_id,
@@ -126,6 +177,8 @@ class HDSController:
         if failures:
             raise AuthorityViolation(";".join(failures))
         self._decisions[decision_id] = decision
+        self._decision_bindings[decision_id] = binding
+        self._judged_commands.add(command_id)
         return decision
 
     def _require_issued_decision(self, decision: HDSDecision) -> None:
@@ -139,6 +192,7 @@ class HDSController:
         self,
         observation: ObservationIR,
         context: ContextSnapshot,
+        memory: MemorySnapshot,
     ) -> AuthorizedComputeCommand:
         self._counter += 1
         command_id = "command:" + digest_object(
@@ -146,21 +200,37 @@ class HDSController:
                 "counter": self._counter,
                 "observation": observation.frame_signature,
                 "context": context.digest,
+                "memory": memory.digest,
             }
         )[:20]
         request = ComputeRequest(
             command_id=command_id,
             operation="LLM_COMPUTE",
             observation_signature=observation.frame_signature,
+            context_signature=context.digest,
+            memory_signature=memory.digest,
             feature_tokens=observation.feature_tokens,
         )
         failures = request.validate(DEFAULT_INSTRUCTION_BODY_CONTRACT)
         if failures:
             raise AuthorityViolation(";".join(failures))
         self._issued[command_id] = False
-        return AuthorizedComputeCommand(request, _HDS_COMMAND_CAPABILITY)
+        command = AuthorizedComputeCommand(request, _HDS_COMMAND_CAPABILITY)
+        self._commands[command_id] = command
+        self._compute_bindings[command_id] = _ComputeBinding(
+            observation=observation,
+            context=context,
+            memory=memory,
+        )
+        return command
 
-    def consume_compute(self, command: AuthorizedComputeCommand | None) -> ComputeRequest:
+    def consume_compute(
+        self,
+        command: AuthorizedComputeCommand | None,
+        observation: ObservationIR,
+        context: ContextSnapshot,
+        memory: MemorySnapshot,
+    ) -> ComputeRequest:
         if command is None or not isinstance(command, AuthorizedComputeCommand):
             raise AuthorityViolation("HDS_COMMAND_REQUIRED")
         if not command.is_hds_authorized():
@@ -171,8 +241,20 @@ class HDSController:
         command_id = command.request.command_id
         if command_id not in self._issued:
             raise AuthorityViolation("HDS_COMMAND_NOT_ISSUED")
+        if self._commands.get(command_id) is not command:
+            raise AuthorityViolation("HDS_COMMAND_NOT_OWNED_BY_CONTROLLER")
         if self._issued[command_id]:
             raise AuthorityViolation("HDS_COMMAND_ALREADY_CONSUMED")
+        binding = self._compute_bindings[command_id]
+        input_failures: list[str] = []
+        if observation != binding.observation:
+            input_failures.append("HDS_COMMAND_OBSERVATION_MISMATCH")
+        if context != binding.context:
+            input_failures.append("HDS_COMMAND_CONTEXT_MISMATCH")
+        if memory != binding.memory:
+            input_failures.append("HDS_COMMAND_MEMORY_MISMATCH")
+        if input_failures:
+            raise AuthorityViolation(";".join(input_failures))
         self._issued[command_id] = True
         return command.request
 
@@ -187,7 +269,7 @@ class HDSController:
         action_id: int | None = None
         if candidate.steps:
             value = candidate.steps[0].get("action_id")
-            if isinstance(value, int):
+            if isinstance(value, int) and not isinstance(value, bool):
                 action_id = value
         if (
             candidate.mode not in ACTION_MODES
@@ -334,10 +416,42 @@ class HDSController:
         ):
             raise AuthorityViolation("HDS_COMMAND_CAPABILITY_INVALID")
         command_id = command.request.command_id
+        if self._commands.get(command_id) is not command:
+            raise AuthorityViolation("HDS_COMMAND_NOT_OWNED_BY_CONTROLLER")
         if not self._issued.get(command_id, False):
             raise AuthorityViolation("HDS_COMMAND_NOT_CONSUMED")
+        if command_id in self._judged_commands:
+            raise AuthorityViolation("HDS_COMMAND_ALREADY_JUDGED")
         if proposal.command_id != command_id:
             raise AuthorityViolation("PROPOSAL_COMMAND_MISMATCH")
+        compute_binding = self._compute_bindings[command_id]
+        if observation != compute_binding.observation:
+            raise AuthorityViolation("HDS_JUDGMENT_OBSERVATION_MISMATCH")
+        initial_context = compute_binding.context
+        if (
+            context.current_observation != observation
+            or context.previous_observation != initial_context.previous_observation
+            or context.action_history != initial_context.action_history
+            or context.effect_history != initial_context.effect_history
+            or context.failures != initial_context.failures
+            or context.action_budget != initial_context.action_budget
+            or context.actions_used != initial_context.actions_used
+            or context.hypotheses != proposal.hypotheses
+            or context.open_items
+            or context.version != initial_context.version + 1
+        ):
+            raise AuthorityViolation("HDS_JUDGMENT_CONTEXT_MISMATCH")
+
+        memory_payload = proposal.memory_proposal.payload()
+        if len(memory_payload) != len(proposal.memory_proposal.payload_items):
+            raise AuthorityViolation("MEMORY_PROPOSAL_DUPLICATE_KEYS")
+        base_binding = _DecisionBinding(
+            proposal_digest=proposal.digest,
+            hypotheses_digest=digest_object(proposal.hypotheses),
+            observation_signature=observation.frame_signature,
+            memory_target=proposal.memory_proposal.target,
+            memory_payload_digest=digest_object(memory_payload),
+        )
 
         candidate_by_id = {
             candidate.candidate_id: candidate for candidate in proposal.candidates
@@ -350,23 +464,13 @@ class HDSController:
         }
         decision_id = "decision:" + digest_object(decision_seed)[:20]
 
-        if observation.terminal_state == "WIN" or context.remaining_actions == 0:
+        if observation.terminal_state == "WIN":
             return self._issue_decision(
                 command_id=command_id,
                 decision_id=decision_id,
                 status="STOP",
-                reason_codes=(
-                    "TERMINAL_WIN"
-                    if observation.terminal_state == "WIN"
-                    else "ACTION_BUDGET_EXHAUSTED",
-                ),
-            )
-        if observation.terminal_state == "UNKNOWN":
-            return self._issue_decision(
-                command_id=command_id,
-                decision_id=decision_id,
-                status="SUSPEND",
-                reason_codes=("TERMINAL_UNOBSERVED",),
+                reason_codes=("TERMINAL_WIN",),
+                binding=base_binding,
             )
         hazard_observed = observation.terminal_state == "GAME_OVER" or any(
             effect in HAZARD_EFFECTS for effect in observation.visible_effects
@@ -377,6 +481,23 @@ class HDSController:
                 decision_id=decision_id,
                 status="REJECT",
                 reason_codes=("HAZARD_ACTION_VETO",),
+                binding=base_binding,
+            )
+        if observation.terminal_state == "UNKNOWN":
+            return self._issue_decision(
+                command_id=command_id,
+                decision_id=decision_id,
+                status="SUSPEND",
+                reason_codes=("TERMINAL_UNOBSERVED",),
+                binding=base_binding,
+            )
+        if context.remaining_actions == 0:
+            return self._issue_decision(
+                command_id=command_id,
+                decision_id=decision_id,
+                status="STOP",
+                reason_codes=("ACTION_BUDGET_EXHAUSTED",),
+                binding=base_binding,
             )
 
         selectable: list[tuple[CandidateIR, ClosureIR]] = []
@@ -418,6 +539,14 @@ class HDSController:
                 closure_signature=digest_object(closure),
                 allow_memory_write=True,
                 allow_external_emit=True,
+                binding=_DecisionBinding(
+                    proposal_digest=base_binding.proposal_digest,
+                    hypotheses_digest=base_binding.hypotheses_digest,
+                    observation_signature=base_binding.observation_signature,
+                    memory_target=base_binding.memory_target,
+                    memory_payload_digest=base_binding.memory_payload_digest,
+                    candidate_digest=digest_object(candidate),
+                ),
             )
 
         action_closures = tuple(
@@ -454,6 +583,7 @@ class HDSController:
             decision_id=decision_id,
             status="REJECT" if rejected else "SUSPEND",
             reason_codes=reasons or ("NO_CLOSED_ACTION_CANDIDATE",),
+            binding=base_binding,
         )
 
     def memory_directive(
@@ -464,15 +594,38 @@ class HDSController:
         self._require_issued_decision(decision)
         if not decision.allow_memory_write:
             raise AuthorityViolation("MEMORY_WRITE_NOT_AUTHORIZED")
-        return MemoryDirective(
+        if (
+            decision.allow_external_emit
+            and decision.decision_id not in self._observed_emissions
+        ):
+            raise AuthorityViolation("MEMORY_WRITE_REQUIRES_EMISSION_OBSERVATION")
+        if self._emission_outcomes.get(decision.decision_id) != "PASS":
+            raise AuthorityViolation("MEMORY_WRITE_REQUIRES_HDS_RESULT_PASS")
+        if decision.decision_id in self._memory_directives:
+            raise AuthorityViolation("MEMORY_DIRECTIVE_ALREADY_ISSUED")
+        binding = self._decision_bindings[decision.decision_id]
+        payload = proposal.payload()
+        payload_digest = digest_object(payload)
+        if len(payload) != len(proposal.payload_items):
+            raise AuthorityViolation("MEMORY_PROPOSAL_DUPLICATE_KEYS")
+        if proposal.target != binding.memory_target:
+            raise AuthorityViolation("MEMORY_PROPOSAL_TARGET_MISMATCH")
+        if payload_digest != binding.memory_payload_digest:
+            raise AuthorityViolation("MEMORY_PROPOSAL_PAYLOAD_MISMATCH")
+        directive = MemoryDirective(
             command_id=decision.command_id,
             decision_id=decision.decision_id,
             operation="ADD",
             target=proposal.target,
             lifecycle="PROPOSED",
             evidence_signature=decision.closure_signature,
+            payload_digest=payload_digest,
             _capability=_HDS_AUTHORIZATION_CAPABILITY,
+            _authorization=_SingleUseAuthorization("MEMORY_WRITE"),
         )
+        directive.bind_owner()
+        self._memory_directives[decision.decision_id] = directive
+        return directive
 
     def emission_directive(
         self,
@@ -482,14 +635,20 @@ class HDSController:
         self._require_issued_decision(decision)
         if not decision.allow_external_emit:
             raise AuthorityViolation("EXTERNAL_EMIT_NOT_AUTHORIZED")
+        if decision.decision_id in self._emission_directives:
+            raise AuthorityViolation("EMISSION_DIRECTIVE_ALREADY_ISSUED")
         if candidate.candidate_id != decision.candidate_id:
             raise AuthorityViolation("HDS_SELECTED_CANDIDATE_MISMATCH")
-        if not candidate.steps or not isinstance(
-            candidate.steps[0].get("action_id"), int
-        ):
+        binding = self._decision_bindings[decision.decision_id]
+        if digest_object(candidate) != binding.candidate_digest:
+            raise AuthorityViolation("HDS_SELECTED_CANDIDATE_CONTENT_MISMATCH")
+        if not candidate.steps or "action_id" not in candidate.steps[0]:
             raise AuthorityViolation("EMISSION_ACTION_MISSING")
-        action_id = int(candidate.steps[0]["action_id"])
-        return EmissionDirective(
+        action_value = candidate.steps[0]["action_id"]
+        if isinstance(action_value, bool) or not isinstance(action_value, int):
+            raise AuthorityViolation("EMISSION_ACTION_INVALID")
+        action_id = action_value
+        directive = EmissionDirective(
             command_id=decision.command_id,
             decision_id=decision.decision_id,
             action_id=action_id,
@@ -501,29 +660,160 @@ class HDSController:
             ),
             candidate_id=candidate.candidate_id,
             closure_signature=decision.closure_signature,
+            observation_signature=binding.observation_signature,
             _capability=_HDS_AUTHORIZATION_CAPABILITY,
+            _authorization=_SingleUseAuthorization("EXTERNAL_EMIT"),
         )
+        directive.bind_owner()
+        self._emission_directives[decision.decision_id] = directive
+        return directive
 
     def observe_emission_result(
         self,
         decision: HDSDecision,
+        directive: EmissionDirective,
+        candidate: CandidateIR,
+        observation: ObservationIR,
         result: EmissionResult,
     ) -> str:
         self._require_issued_decision(decision)
         failures: list[str] = []
         if not decision.allow_external_emit:
             failures.append("HDS_EMISSION_OBSERVATION_NOT_AUTHORIZED")
-        if result.candidate_id != decision.candidate_id:
-            failures.append("HDS_EMISSION_RESULT_CANDIDATE_MISMATCH")
+        if self._emission_directives.get(decision.decision_id) is not directive:
+            failures.append("HDS_EMISSION_DIRECTIVE_NOT_OWNED")
+        if decision.decision_id in self._observed_emissions:
+            failures.append("HDS_EMISSION_RESULT_ALREADY_OBSERVED")
+        binding = self._decision_bindings[decision.decision_id]
+        if digest_object(candidate) != binding.candidate_digest:
+            failures.append("HDS_EMISSION_RESULT_CANDIDATE_CONTENT_MISMATCH")
+        failures.extend(result.validate(directive, decision, candidate, observation))
         if failures:
             raise AuthorityViolation(";".join(sorted(set(failures))))
+        self._observed_emissions[decision.decision_id] = result
         return "hds-observation:" + digest_object(
             {
+                "command_id": decision.command_id,
                 "decision_id": decision.decision_id,
+                "directive_signature": result.directive_signature,
                 "result_signature": result.result_signature,
                 "status": result.status,
             }
         )[:20]
+
+    def judge_emission_result(
+        self,
+        decision: HDSDecision,
+        result: EmissionResult,
+    ) -> str:
+        """Classify the observed effect before any memory write is allowed."""
+
+        self._require_issued_decision(decision)
+        if self._observed_emissions.get(decision.decision_id) is not result:
+            raise AuthorityViolation("HDS_EMISSION_RESULT_NOT_OBSERVED")
+        if decision.decision_id in self._emission_outcomes:
+            raise AuthorityViolation("HDS_EMISSION_RESULT_ALREADY_JUDGED")
+        hazard_observed = result.terminal_state == "GAME_OVER" or any(
+            effect in HAZARD_EFFECTS for effect in result.visible_effects
+        )
+        if hazard_observed:
+            outcome = "REJECT"
+        elif result.terminal_state == "WIN":
+            outcome = "STOP"
+        else:
+            outcome = "PASS"
+        self._emission_outcomes[decision.decision_id] = outcome
+        return outcome
+
+    def finalize_cycle(
+        self,
+        decision: HDSDecision,
+        emission_result: EmissionResult,
+        memory_result: MemoryMutationResult | None,
+        context: ContextSnapshot,
+        memory: MemorySnapshot,
+    ) -> str:
+        """Issue the final PASS only after authorized effects are observable."""
+
+        self._require_issued_decision(decision)
+        failures: list[str] = []
+        if decision.decision_id in self._finalized_decisions:
+            failures.append("HDS_CYCLE_ALREADY_FINALIZED")
+        observed_result = self._observed_emissions.get(decision.decision_id)
+        if observed_result is not emission_result:
+            failures.append("HDS_EMISSION_RESULT_NOT_OBSERVED")
+        outcome = self._emission_outcomes.get(decision.decision_id)
+        if outcome is None:
+            failures.append("HDS_EMISSION_RESULT_NOT_JUDGED")
+            outcome = "REJECT"
+
+        compute_binding = self._compute_bindings[decision.command_id]
+        initial_context = compute_binding.context
+        decision_binding = self._decision_bindings[decision.decision_id]
+        expected_effects = emission_result.visible_effects or (
+            "EMIT_PENDING_REOBSERVATION",
+        )
+        action_prefix = context.action_history[:-1]
+        effect_prefix = context.effect_history[:-1]
+        action_history_matches = (
+            not action_prefix
+            or action_prefix
+            == initial_context.action_history[-len(action_prefix) :]
+        )
+        effect_history_matches = (
+            not effect_prefix
+            or effect_prefix
+            == initial_context.effect_history[-len(effect_prefix) :]
+        )
+        if (
+            context.current_observation != compute_binding.observation
+            or context.previous_observation != initial_context.previous_observation
+            or context.actions_used != initial_context.actions_used + 1
+            or context.action_budget != initial_context.action_budget
+            or not context.action_history
+            or context.action_history[-1] != emission_result.action_id
+            or not action_history_matches
+            or not context.effect_history
+            or context.effect_history[-1] != expected_effects
+            or not effect_history_matches
+            or context.failures != initial_context.failures
+            or digest_object(context.hypotheses)
+            != decision_binding.hypotheses_digest
+            or context.open_items
+            or context.version != initial_context.version + 2
+        ):
+            failures.append("HDS_CONTEXT_UPDATE_NOT_OBSERVED")
+
+        if outcome == "PASS" and decision.allow_memory_write:
+            directive = self._memory_directives.get(decision.decision_id)
+            if directive is None:
+                failures.append("HDS_MEMORY_DIRECTIVE_NOT_ISSUED")
+            elif not directive.is_consumed:
+                failures.append("HDS_MEMORY_DIRECTIVE_NOT_CONSUMED")
+            if memory_result is None:
+                failures.append("HDS_MEMORY_RESULT_REQUIRED")
+            elif directive is not None:
+                if (
+                    memory_result.target != directive.target
+                    or memory_result.operation != directive.operation
+                    or memory_result.version != memory.version
+                    or memory_result.snapshot_digest != memory.digest
+                    or memory.version != compute_binding.memory.version + 1
+                ):
+                    failures.append("HDS_MEMORY_RESULT_MISMATCH")
+        elif outcome == "PASS":
+            if memory_result is not None:
+                failures.append("HDS_MEMORY_RESULT_NOT_AUTHORIZED")
+        else:
+            if memory_result is not None:
+                failures.append("HDS_MEMORY_RESULT_AFTER_REJECTION")
+            if memory != compute_binding.memory:
+                failures.append("HDS_MEMORY_CHANGED_AFTER_REJECTION")
+
+        if failures:
+            raise AuthorityViolation(";".join(sorted(set(failures))))
+        self._finalized_decisions.add(decision.decision_id)
+        return outcome
 
 
 @dataclass(frozen=True, slots=True)
@@ -542,7 +832,12 @@ class PureLLMCompute:
         world_model: object,
         candidate_surface: object,
     ) -> ComputeProposal:
-        request = hds.consume_compute(command)
+        request = hds.consume_compute(
+            command,
+            observation,
+            context,
+            memory,
+        )
         transform = getattr(world_model, "transform", None)
         generate = getattr(candidate_surface, "generate", None)
         if not callable(transform) or not callable(generate):
@@ -597,12 +892,15 @@ class PureLLMCompute:
         emit = getattr(interface, "emit", None)
         if not callable(emit):
             raise TypeError("emission interface must be callable")
-        return emit(
-            directive,
-            decision,
-            candidate,
-            observation,
-            executor=self.executor,
+        return cast(
+            EmissionResult,
+            emit(
+                directive,
+                decision,
+                candidate,
+                observation,
+                executor=self.executor,
+            ),
         )
 
 
@@ -655,7 +953,7 @@ class Layer0Kernel:
                 stage=stage,
                 removed=False,
             )
-        return method
+        return cast(Callable[..., Any], method)
 
     @staticmethod
     def _output_loss(role: str, stage: str) -> Layer0FunctionalLoss:
@@ -737,7 +1035,11 @@ class Layer0Kernel:
             memory=memory_view.digest,
         )
         lifecycle.transition("COMPUTE")
-        command = self.components.hds.issue_compute(observation, context)
+        command = self.components.hds.issue_compute(
+            observation,
+            context,
+            memory_view,
+        )
         record(
             lifecycle.stage,
             "HDS",
@@ -896,6 +1198,9 @@ class Layer0Kernel:
             lifecycle.transition("OBSERVE_RESULT")
             hds_observation = self.components.hds.observe_emission_result(
                 decision,
+                emission_directive,
+                candidate,
+                observation,
                 emission_result,
             )
             record(
@@ -904,8 +1209,37 @@ class Layer0Kernel:
                 "EMISSION_RESULT_OBSERVED",
                 result=hds_observation,
             )
+            result_outcome = self.components.hds.judge_emission_result(
+                decision,
+                emission_result,
+            )
+            record(
+                lifecycle.stage,
+                "HDS",
+                "EMISSION_RESULT_JUDGED",
+                status=result_outcome,
+            )
+            record_emission = self._method(
+                "CONTEXT_STATE",
+                self.components.context_state,
+                "record_emission",
+                stage="OBSERVE_RESULT",
+            )
+            context = record_emission(
+                emission_result.action_id,
+                emission_result.visible_effects
+                or ("EMIT_PENDING_REOBSERVATION",),
+            )
+            if not isinstance(context, ContextSnapshot):
+                raise self._output_loss("CONTEXT_STATE", "OBSERVE_RESULT")
+            record(
+                lifecycle.stage,
+                "CONTEXT_STATE",
+                "EMISSION_RESULT_RECORDED",
+                context=context.digest,
+            )
 
-            if decision.allow_memory_write:
+            if result_outcome == "PASS" and decision.allow_memory_write:
                 memory_directive = self.components.hds.memory_directive(
                     decision,
                     proposal.memory_proposal,
@@ -923,21 +1257,25 @@ class Layer0Kernel:
                     "AUTHORIZED_MEMORY_WRITE_EXECUTED",
                     memory_version=memory_result.version,
                 )
-                record_emission = self._method(
-                    "CONTEXT_STATE",
-                    self.components.context_state,
-                    "record_emission",
-                    stage="UPDATE_MEMORY",
-                )
-                context = record_emission(
-                    emission_result.action_id,
-                    emission_result.visible_effects
-                    or ("EMIT_PENDING_REOBSERVATION",),
-                )
-                if not isinstance(context, ContextSnapshot):
-                    raise self._output_loss("CONTEXT_STATE", "UPDATE_MEMORY")
                 lifecycle.transition("REFRAME")
-            status = "PASS"
+            else:
+                lifecycle.transition("REFRAME")
+            status = self.components.hds.finalize_cycle(
+                decision,
+                emission_result,
+                memory_result,
+                context,
+                self.components.memory.view(),
+            )
+            if status == "STOP":
+                lifecycle.transition("STOP")
+                self._stopped = True
+            record(
+                lifecycle.stage,
+                "HDS",
+                "CYCLE_FINALIZED",
+                status=status,
+            )
         elif decision.status == "STOP":
             lifecycle.transition("STOP")
             self._stopped = True

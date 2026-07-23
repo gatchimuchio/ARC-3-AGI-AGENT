@@ -15,7 +15,11 @@ from ..ir import CandidateIR, ObservationIR
 from ..protocol import AuthorityViolation, EmissionDirective, HDSDecision
 from ..sample_observation import SampleFrameAdapter
 from ..schema import digest_object
-from .in_memory import EmissionResult, validate_authorized_emission
+from .in_memory import (
+    EmissionResult,
+    emission_result_signature,
+    validate_authorized_emission,
+)
 
 
 @dataclass(slots=True)
@@ -61,7 +65,7 @@ class OfflineArcadeEmissionInterface:
         if self._before is None:
             raise AuthorityViolation("OFFLINE_SAMPLE_OBSERVATION_NOT_BOUND")
 
-        action_id = validate_authorized_emission(
+        action_id, receipt = validate_authorized_emission(
             directive,
             decision,
             candidate,
@@ -85,22 +89,42 @@ class OfflineArcadeEmissionInterface:
             raise RuntimeError("OFFLINE_SAMPLE_STEP_FAILED")
         self._after = raw
         visible_effects = self.frame_adapter.visible_effects(raw, self._before)
+        status = "EMITTED_OFFLINE_SAMPLE"
+        directive_signature = digest_object(directive)
+        terminal_state = str(raw.state.value).upper()
+        result_observation_signature = "offline-observation:" + digest_object(
+            self.frame_adapter.runtime_observation(raw, self._before)
+        )
+        result_signature = emission_result_signature(
+            candidate_id=candidate.candidate_id,
+            action_id=action_id,
+            status=status,
+            command_id=directive.command_id,
+            decision_id=directive.decision_id,
+            closure_signature=directive.closure_signature,
+            observation_signature=observation.frame_signature,
+            result_observation_signature=result_observation_signature,
+            directive_signature=directive_signature,
+            visible_effects=visible_effects,
+            terminal_state=terminal_state,
+            levels_completed=raw.levels_completed,
+        )
+        directive.bind_receipt(receipt, result_signature)
         return EmissionResult(
             candidate_id=candidate.candidate_id,
             action_id=action_id,
-            status="EMITTED_OFFLINE_SAMPLE",
-            result_signature="offline-emission:"
-            + digest_object(
-                {
-                    "action_id": action_id,
-                    "after": self.frame_adapter.signature(raw),
-                    "before": self.frame_adapter.signature(self._before),
-                    "decision": decision.decision_id,
-                }
-            )[:20],
+            status=status,
+            result_signature=result_signature,
+            command_id=directive.command_id,
+            decision_id=directive.decision_id,
+            closure_signature=directive.closure_signature,
+            observation_signature=observation.frame_signature,
+            result_observation_signature=result_observation_signature,
+            directive_signature=directive_signature,
             visible_effects=visible_effects,
-            terminal_state=str(raw.state.value).upper(),
+            terminal_state=terminal_state,
             levels_completed=raw.levels_completed,
+            _authorization_receipt=receipt,
         )
 
 
