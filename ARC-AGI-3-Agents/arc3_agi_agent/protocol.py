@@ -423,6 +423,7 @@ class MemoryDirective:
     target: str
     lifecycle: str
     evidence_signature: str
+    expected_version: int = -1
     payload_digest: str = ""
     authority: str = "hds-only"
     _capability: object | None = field(
@@ -462,6 +463,12 @@ class MemoryDirective:
             failures.append("MEMORY_LIFECYCLE_INVALID")
         if not _is_nonempty_text(self.evidence_signature):
             failures.append("MEMORY_EVIDENCE_MISSING")
+        if (
+            isinstance(self.expected_version, bool)
+            or not isinstance(self.expected_version, int)
+            or self.expected_version < 0
+        ):
+            failures.append("MEMORY_EXPECTED_VERSION_INVALID")
         if not _is_nonempty_text(self.payload_digest):
             failures.append("MEMORY_PAYLOAD_DIGEST_MISSING")
         if self.authority != "hds-only":

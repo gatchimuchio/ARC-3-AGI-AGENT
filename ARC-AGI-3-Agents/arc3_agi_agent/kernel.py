@@ -33,7 +33,12 @@ from .judgment import (
     JudgmentCandidate,
     StandaloneJudgmentDecision,
 )
-from .memory import MemoryMutationResult, MemorySnapshot, PassiveMemory
+from .memory import (
+    MEMORY_SUBJECT_REMOVAL_WITNESS,
+    MemoryMutationResult,
+    MemorySnapshot,
+    PassiveMemory,
+)
 from .protocol import (
     _HDS_AUTHORIZATION_CAPABILITY,
     DEFAULT_INSTRUCTION_BODY_CONTRACT,
@@ -797,6 +802,9 @@ class HDSController:
             target=proposal.target,
             lifecycle="PROPOSED",
             evidence_signature=decision.closure_signature,
+            expected_version=self._compute_bindings[
+                decision.command_id
+            ].memory.version,
             payload_digest=payload_digest,
             _capability=_HDS_AUTHORIZATION_CAPABILITY,
             _authorization=_SingleUseAuthorization("MEMORY_WRITE"),
@@ -1209,7 +1217,7 @@ class Layer0Components:
     )
     hds: HDSController = field(default_factory=HDSController)
     compute: PureLLMCompute | None = field(default_factory=PureLLMCompute)
-    memory: PassiveMemory = field(default_factory=PassiveMemory)
+    memory: PassiveMemory | None = field(default_factory=PassiveMemory)
 
 
 class Layer0Kernel:
@@ -1316,7 +1324,15 @@ class Layer0Kernel:
         )
 
         lifecycle.transition("RETRIEVE")
-        memory_view = self.components.memory.view()
+        memory_subject = self.components.memory
+        if memory_subject is None:
+            raise Layer0FunctionalLoss(
+                "MEMORY_SUBJECT",
+                MEMORY_SUBJECT_REMOVAL_WITNESS,
+                stage="RETRIEVE",
+                removed=True,
+            )
+        memory_view = memory_subject.view()
         record(
             lifecycle.stage,
             "MEMORY",
@@ -1589,7 +1605,7 @@ class Layer0Kernel:
                     memory_directive,
                     decision,
                     proposal.memory_proposal,
-                    self.components.memory,
+                    memory_subject,
                 )
                 record(
                     lifecycle.stage,
@@ -1605,7 +1621,7 @@ class Layer0Kernel:
                 emission_result,
                 memory_result,
                 context,
-                self.components.memory.view(),
+                memory_subject.view(),
             )
             if status == "STOP":
                 lifecycle.transition("STOP")

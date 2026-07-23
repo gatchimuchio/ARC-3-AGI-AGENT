@@ -20,11 +20,12 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P6_MEMORY_SUBJECT_M` です。
+現在は `P7_PAIRWISE_SUBJECT_AUDIT` です。
 
-`P5_JUDGMENT_SUBJECT_J` は完了しています。P5で完成したのは、typed HDS Frame、
-C/P/Mなしのstandalone G2判断、integrated HDSとの共通判断core、J除去監査です。
-P5はstandalone M、pair、Trinity、最小三構成を完成させていません。
+`P6_MEMORY_SUBJECT_M` は完了しています。P6で完成したのは、versioned M、
+全15 storage operation、active/archive、conflict/snapshot/rollback/query、
+HDS-authorized runtime adapter、M除去監査です。P6はpair、Trinity、G4、
+最小三構成を完成させていません。
 
 現行分類は次です。
 
@@ -62,39 +63,44 @@ P5 complete:
   memory-write / external-emit authorization proposal
   J removal and non-substitution audit
 
-P6 current:
+P6 complete:
   standalone versioned memory subject M
   full operation vocabulary
   active / archive separation
   conflict / snapshot / rollback / deterministic query
   HDS-authorized runtime mutation boundary
+
+P7 current:
+  executable C+J, C+M, J+M pair harnesses
+  fixed unique insufficiency witness per pair
+  no missing-subject responsibility substitution
 ```
 
-### P6で許可される作業
+### P7で許可される作業
 
-- ADD/REVISE/MERGE/SPLIT/REPLACE/INVALIDATE/DELETE/REINDEX/ROLLBACK/ARCHIVE
-- READ/QUERY/VERSION/SNAPSHOT/PROVENANCE
-- current purpose/state、hypothesis、support、contradiction、failure、evidence、
-  lifecycle、unresolved item、provenance、version、rollback referenceの保持
-- storage単独APIとHDS許可済みruntime adapterの分離
-- optimistic version conflict、active/archive、snapshot、指定版rollback
+- `{C,J}`の一周期計算・判断・action許可とM非存在監査
+- `{C,M}`の計算・memory read/update proposalとJ非存在監査
+- `{J,M}`の外部candidate判断・保持とC非存在監査
+- pairごとの固有witness、責任非代行、機能等価fallback不在の検査
+- P6を含む既存回帰
 
-### P6で禁止される作業
+### P7で禁止される作業
 
-- Mによる仮説/candidate生成、採否、許可、external emit
-- Mによる自律mutation開始
-- 追記専用storageでoperation意味論を代行すること
-- pair、Trinity、minimum certificateを完了扱いすること
+- full Trinity二周期因果を完了扱いすること
+- 全8 subset certificateを完了扱いすること
+- Mなしでpersistent experienceを捏造すること
+- Jなしでwrite/emitを許可すること
+- Cなしで仮説/candidate/outputを生成すること
 - 全sample game / 全level攻略
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
 - task/game/level ID、replay、固定action列、answer map、literal座標をruntime fixtureへ残すこと
 - source / hidden stateをruntime計算素材へ残すこと
 - scoreを根拠にした局所最適化
-- 「AGI完成」「最小三構成証明済み」「汎化済み」といった未検証主張
+- 「AGI完成」「最小三構成証明済み」「二周期学習済み」といった未検証主張
 
-P6の正本は新ロードマップのP6節、P3 memory lifecycle fixture、
-P2 obligation/test matrixです。
+P7の正本は新ロードマップのP7節、P2 obligation/test matrix、
+P4/P5/P6 standalone実装証拠である。
 
 ## 3. 1 work blockの必須契約
 
@@ -250,13 +256,13 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - C/Mなしの採否、SUSPEND、STOP、rollback、write/emit許可
 - JがG1/G3を代行しないこと
 
-### P6: Memory Subject M — 現在
+### P6: Memory Subject M — 完了
 
 - 全memory operation、query、version conflict、snapshot
 - active/archive分離、rollback
 - MがG1/G2を代行しないこと
 
-### P7: Pairwise Subject Audit
+### P7: Pairwise Subject Audit — 現在
 
 - `{C,J}` -> `NO_PERSISTENT_EXPERIENCE_CAUSALITY`
 - `{C,M}` -> `NO_JUDGMENT_OR_AUTHORIZATION`
@@ -344,6 +350,12 @@ P6では次を追加する。
 - active/archive分離、同一query決定性
 - unauthorized runtime mutation拒否
 - MのG1/G2非代行とremoval witness
+
+P7では次を追加する。
+
+- C+J / C+M / J+Mの実行可能pair harness
+- 各pairの固定・固有failure witness
+- 欠落主体の責任非代行とfunctional-equivalent leak検査
 
 P4以降の固定test IDと反証条件は
 `docs/architecture/AGI_TEST_MATRIX.md`を正本とする。

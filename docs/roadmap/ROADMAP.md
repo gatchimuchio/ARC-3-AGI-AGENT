@@ -20,8 +20,8 @@
 | P3 | ARC3実証素材コンパイラ | 完了 |
 | P4 | 計算主体Cの単独実装 | 完了 |
 | P5 | HDS判断主体Jの単独実装 | 完了 |
-| P6 | 記憶主体Mの単独実装 | 現在 |
-| P7 | 二主体接続監査 | 未開始 |
+| P6 | 記憶主体Mの単独実装 | 完了 |
+| P7 | 二主体接続監査 | 現在 |
 | P8 | 三主体Trinity循環 | 未開始 |
 | P9 | 全8部分集合監査 | 未開始 |
 | P10 | ARC3全sample完全攻略 | 未開始 |
@@ -32,17 +32,16 @@
 
 ## 現在のphase gate
 
-P6では次だけを行う。
+P7では次だけを行う。
 
-- 全memory operationの独立意味論
-- optimistic version conflict、snapshot、指定版rollback
-- active/currentとarchiveの分離
-- deterministic READ/QUERY/VERSION/PROVENANCE
-- HDS未許可runtime mutation拒否とM除去監査
+- `{C,J}`一周期成立と`NO_PERSISTENT_EXPERIENCE_CAUSALITY`
+- `{C,M}`計算・保持成立と`NO_JUDGMENT_OR_AUTHORIZATION`
+- `{J,M}`外部candidate判断・保持成立と`NO_GENERATIVE_COMPUTATION`
+- 三witnessの一意性
+- 欠落主体の責任を他主体・fallbackが代行しないこと
 
-P6ではMが仮説/candidate、採否、許可、external actionを生成・実行せず、
-自律mutationを開始しない。sample攻略、公式接続、Kaggle作業を実行・
-完了扱いしない。
+P7ではfull Trinity、二周期因果、全8 subset、sample攻略、公式接続、
+Kaggle作業を実行・完了扱いしない。
 
 ## 監査正本
 

@@ -1,14 +1,15 @@
 # AGI最小三構成 Test Matrix
 
-- current phase: `P6_MEMORY_SUBJECT_M`
-- last completed phase: `P5_JUDGMENT_SUBJECT_J`
+- current phase: `P7_PAIRWISE_SUBJECT_AUDIT`
+- last completed phase: `P6_MEMORY_SUBJECT_M`
 - current executable regression gates:
   `test_agi_minimum_three_audit.py`,
   `test_evidence_compiler.py`,
   `test_p3_evidence_dataset.py`,
   `test_instruction_body_compiler.py`,
   `test_compute_subject_p4.py`,
-  `test_judgment_subject_p5.py`
+  `test_judgment_subject_p5.py`,
+  `test_memory_subject_p6.py`
 
 ## 現行証拠
 
@@ -29,13 +30,13 @@
 | `T-P4-L0-P-REMOVAL` | C必要性 | `test_compute_subject_p4.py` | L0六責任/P/Cの8除去が固有FAIL | 実装・実行済み |
 | `T-P5-J-STANDALONE` | `CLAIM_J_STANDALONE` | `test_judgment_subject_p5.py` | C/P/Mなしで全判断statusと非effect境界 | 実装・実行済み |
 | `T-P5-HDS-FRAME` | HDS適合 | `test_judgment_subject_p5.py` | 676 fixture、X/R/Mc、hazard、budget、rollback、除去 | 実装・実行済み |
+| `T-P6-M-OPERATIONS` | `CLAIM_M_STANDALONE` | `test_memory_subject_p6.py` | 全15操作、687 fixture、G1/G2非代行、M除去 | 実装・実行済み |
+| `T-P6-M-VERSION` | M version/rollback/archive | `test_memory_subject_p6.py` | stale拒否、指定版rollback、active/archive分離、query決定性 | 実装・実行済み |
 
 ## 後続phaseの固定試験
 
 | Test ID | Primary claim | Phase | 必須反証条件 |
 |---|---|---|---|
-| `T-P6-M-OPERATIONS` | `CLAIM_M_STANDALONE` | P6 | 必須operationいずれかの意味論欠落でFAIL |
-| `T-P6-M-VERSION` | M version/rollback/archive | P6 | stale version受理、rollback不一致、archive混入でFAIL |
 | `T-P7-PAIR-CJ` | `CLAIM_PAIRWISE_INSUFFICIENCY` | P7 | witnessが`NO_PERSISTENT_EXPERIENCE_CAUSALITY`以外ならFAIL |
 | `T-P7-PAIR-CM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | P7 | witnessが`NO_JUDGMENT_OR_AUTHORIZATION`以外ならFAIL |
 | `T-P7-PAIR-JM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | P7 | witnessが`NO_GENERATIVE_COMPUTATION`以外ならFAIL |

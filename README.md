@@ -12,13 +12,15 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - P3: `ARC3_EVIDENCE_MATERIAL_COMPILER` — 完了
 - P4: `COMPUTE_SUBJECT_C` — 完了
 - P5: `JUDGMENT_SUBJECT_J` — 完了
-- 現在フェーズ: `P6_MEMORY_SUBJECT_M`
+- P6: `MEMORY_SUBJECT_M` — 完了
+- 現在フェーズ: `P7_PAIRWISE_SUBJECT_AUDIT`
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
 - 命令形保持体 `P`: P-A/P-Bを実装済み
 - 計算主体 `C`: standalone G1を実装・除去監査済み
 - 判断主体 `J`: typed Frameによるstandalone G2を実装・除去監査済み
+- 記憶主体 `M`: 全15操作を持つstandalone G3を実装・除去監査済み
 - ベンチマーク状態: **未確定**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -87,6 +89,8 @@ docs/
     P1_SAMPLE_EXECUTION_KERNEL.md
     P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md
     P4_COMPUTE_SUBJECT_IMPLEMENTATION.md
+    P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md
+    P6_MEMORY_SUBJECT_IMPLEMENTATION.md
   roadmap/ROADMAP.md
   migration/
   references/
@@ -116,7 +120,7 @@ vendor/wheels/                既存ベンダーwheel
 
 P1の閉包範囲は [`docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md`](docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md) に固定しています。
 
-## P2根本監査・P3実証素材・P4計算主体
+## P2根本監査からP6単独主体まで
 
 P2ではG1〜G5、C/J/M、L0/P、environment、compiler、P0/J0/M0、
 全8部分集合を一対一で監査し、未実装を完成扱いしないclaim/test境界を固定しました。
@@ -137,7 +141,10 @@ standalone Cを実装しました。実装・完了証拠は
 [`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md)
 です。P5ではP3 HDS Frame fixtureからstandalone Jを実装しました。完了証拠は
 [`P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md)
-です。現在のP6ではfull mutable memory Mを実装します。
+です。P6では全memory operation、version conflict、snapshot、rollback、
+active/archive、deterministic queryを持つstandalone Mを実装しました。完了証拠は
+[`P6_MEMORY_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P6_MEMORY_SUBJECT_IMPLEMENTATION.md)
+です。現在のP7では三つの二主体構成を固有failure witnessで監査します。
 
 ## 設計上の固定境界
 
@@ -172,8 +179,8 @@ python sample_main.py --all-samples --max-actions 1
 4. P3: ARC3実証素材compiler — 完了
 5. P4: 計算主体C — 完了
 6. P5: 判断主体J — 完了
-7. P6: 記憶主体M — 現在
-8. P7: 二主体接続監査
+7. P6: 記憶主体M — 完了
+8. P7: 二主体接続監査 — 現在
 9. P8: 三主体二周期循環
 10. P9: 全8部分集合証明
 11. P10: 全sample game / 全level完全攻略

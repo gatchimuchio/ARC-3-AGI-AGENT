@@ -233,3 +233,17 @@ P5完了時点で`F-P2-003`を是正した。
 
 `F-P2-004`以降は未解決である。P5 HDS判断は`PASS`、次phaseは
 `P6_MEMORY_SUBJECT_M`とする。
+
+## 10. P6 disposition
+
+P6完了時点で`F-P2-004`を是正した。
+
+- mutation 10種とread 5種を異なるstorage意味論として実装
+- optimistic version conflict、snapshot history、指定版rollback
+- active/archive分離、deterministic query、provenance ledger
+- HDS owner-bound runtime adapterでpayload/version/single-useを検証
+- 687/687 P3 memory lifecycle fixture適合
+- MがG1/G2を代行しないこととM除去固有witnessを検証
+
+`F-P2-005`と`F-P2-006`は未解決である。P6 HDS判断は`PASS`、次phaseは
+`P7_PAIRWISE_SUBJECT_AUDIT`とする。
