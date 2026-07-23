@@ -1,7 +1,7 @@
 # AGI最小三構成 Test Matrix
 
-- current phase: `P7_PAIRWISE_SUBJECT_AUDIT`
-- last completed phase: `P6_MEMORY_SUBJECT_M`
+- current phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
+- last completed phase: `P7_PAIRWISE_SUBJECT_AUDIT`
 - current executable regression gates:
   `test_agi_minimum_three_audit.py`,
   `test_evidence_compiler.py`,
@@ -9,7 +9,8 @@
   `test_instruction_body_compiler.py`,
   `test_compute_subject_p4.py`,
   `test_judgment_subject_p5.py`,
-  `test_memory_subject_p6.py`
+  `test_memory_subject_p6.py`,
+  `test_pairwise_subject_p7.py`
 
 ## 現行証拠
 
@@ -32,14 +33,14 @@
 | `T-P5-HDS-FRAME` | HDS適合 | `test_judgment_subject_p5.py` | 676 fixture、X/R/Mc、hazard、budget、rollback、除去 | 実装・実行済み |
 | `T-P6-M-OPERATIONS` | `CLAIM_M_STANDALONE` | `test_memory_subject_p6.py` | 全15操作、687 fixture、G1/G2非代行、M除去 | 実装・実行済み |
 | `T-P6-M-VERSION` | M version/rollback/archive | `test_memory_subject_p6.py` | stale拒否、指定版rollback、active/archive分離、query決定性 | 実装・実行済み |
+| `T-P7-PAIR-CJ` | `CLAIM_PAIRWISE_INSUFFICIENCY` | `test_pairwise_subject_p7.py` | C/J実機能後にM/G3/G4だけが固有witnessでFAIL | 実装・実行済み |
+| `T-P7-PAIR-CM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | `test_pairwise_subject_p7.py` | C/M実機能後にJ判断・許可が固有witnessでFAIL | 実装・実行済み |
+| `T-P7-PAIR-JM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | `test_pairwise_subject_p7.py` | J/M実機能後にC生成計算が固有witnessでFAIL | 実装・実行済み |
 
 ## 後続phaseの固定試験
 
 | Test ID | Primary claim | Phase | 必須反証条件 |
 |---|---|---|---|
-| `T-P7-PAIR-CJ` | `CLAIM_PAIRWISE_INSUFFICIENCY` | P7 | witnessが`NO_PERSISTENT_EXPERIENCE_CAUSALITY`以外ならFAIL |
-| `T-P7-PAIR-CM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | P7 | witnessが`NO_JUDGMENT_OR_AUTHORIZATION`以外ならFAIL |
-| `T-P7-PAIR-JM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | P7 | witnessが`NO_GENERATIVE_COMPUTATION`以外ならFAIL |
 | `T-P8-TWO-CYCLE` | `CLAIM_TWO_CYCLE_CAUSALITY` | P8 | M update除去後もcycle 2差が残ればFAIL |
 | `T-P8-PJM-ISOLATION` | `CLAIM_CAUSAL_ATTRIBUTION` | P8 | hidden global state、複数変数同時変更でFAIL |
 | `T-P9-EIGHT-SUBSETS` | `CLAIM_MINIMUM_THREE` | P9 | proper subset PASSまたはfull set FAILでFAIL |

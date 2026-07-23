@@ -21,8 +21,8 @@
 | P4 | 計算主体Cの単独実装 | 完了 |
 | P5 | HDS判断主体Jの単独実装 | 完了 |
 | P6 | 記憶主体Mの単独実装 | 完了 |
-| P7 | 二主体接続監査 | 現在 |
-| P8 | 三主体Trinity循環 | 未開始 |
+| P7 | 二主体接続監査 | 完了 |
+| P8 | 三主体Trinity循環 | 現在 |
 | P9 | 全8部分集合監査 | 未開始 |
 | P10 | ARC3全sample完全攻略 | 未開始 |
 | P11 | 完成状態固定 | 未開始 |
@@ -32,16 +32,15 @@
 
 ## 現在のphase gate
 
-P7では次だけを行う。
+P8では次だけを行う。
 
-- `{C,J}`一周期成立と`NO_PERSISTENT_EXPERIENCE_CAUSALITY`
-- `{C,M}`計算・保持成立と`NO_JUDGMENT_OR_AUTHORIZATION`
-- `{J,M}`外部candidate判断・保持成立と`NO_GENERATIVE_COMPUTATION`
-- 三witnessの一意性
-- 欠落主体の責任を他主体・fallbackが代行しないこと
+- J commandからC compute、J judge、許可済みeffect、result再判断までの一周期
+- cycle 1のHDS許可済みM更新がcycle 2のC/Jを変える二周期因果
+- P-only、J-only、M-onlyのcontrolled causal isolation
+- hidden global state不在、write/emit越境不在
 
-P7ではfull Trinity、二周期因果、全8 subset、sample攻略、公式接続、
-Kaggle作業を実行・完了扱いしない。
+P8では全8 subset certificate、sample攻略、公式接続、Kaggle作業を
+実行・完了扱いしない。
 
 ## 監査正本
 

@@ -247,3 +247,16 @@ P6完了時点で`F-P2-004`を是正した。
 
 `F-P2-005`と`F-P2-006`は未解決である。P6 HDS判断は`PASS`、次phaseは
 `P7_PAIRWISE_SUBJECT_AUDIT`とする。
+
+## 11. P7 disposition
+
+P7完了時点で`F-P2-006`のpair部分を是正した。
+
+- `{C,J}`、`{C,M}`、`{J,M}`が各自の成立責任を実行
+- 各pairが欠落主体の責任でだけFAIL
+- 固定witness三種の重複0
+- missing-subject field/fallback、runtime write越境、生成代行0
+- 同一pair instanceの再実行でevidence一致
+
+`F-P2-005`と`F-P2-006`の全8 subset部分は未解決である。P7 HDS判断は
+`PASS`、次phaseは`P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`とする。

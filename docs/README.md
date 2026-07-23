@@ -11,6 +11,7 @@
 - [`architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`](architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md): P4のP-A/P-B・計算主体C実装仕様と完了証拠
 - [`architecture/P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md`](architecture/P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md): P5のtyped HDS Frame・standalone J実装と完了証拠
 - [`architecture/P6_MEMORY_SUBJECT_IMPLEMENTATION.md`](architecture/P6_MEMORY_SUBJECT_IMPLEMENTATION.md): P6のversioned M・全storage operation・authority境界の完了証拠
+- [`architecture/P7_PAIRWISE_SUBJECT_AUDIT.md`](architecture/P7_PAIRWISE_SUBJECT_AUDIT.md): P7の三pair実行・固有不足witness・非代行監査
 - [`roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md): P0〜P14の全文正本
 - [`roadmap/ROADMAP.md`](roadmap/ROADMAP.md): 現行phase状態の索引
 - [`migration/`](migration/): 旧資産の採用・隔離・拒否・再配置記録

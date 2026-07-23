@@ -20,12 +20,12 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P7_PAIRWISE_SUBJECT_AUDIT` です。
+現在は `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY` です。
 
-`P6_MEMORY_SUBJECT_M` は完了しています。P6で完成したのは、versioned M、
-全15 storage operation、active/archive、conflict/snapshot/rollback/query、
-HDS-authorized runtime adapter、M除去監査です。P6はpair、Trinity、G4、
-最小三構成を完成させていません。
+`P7_PAIRWISE_SUBJECT_AUDIT` は完了しています。三pairは各成立責任を実行後、
+`NO_PERSISTENT_EXPERIENCE_CAUSALITY`、`NO_JUDGMENT_OR_AUTHORIZATION`、
+`NO_GENERATIVE_COMPUTATION`の固有witnessでFAILします。P7はfull Trinity、
+G4、全8 subsetを完成させていません。
 
 現行分類は次です。
 
@@ -70,37 +70,41 @@ P6 complete:
   conflict / snapshot / rollback / deterministic query
   HDS-authorized runtime mutation boundary
 
-P7 current:
+P7 complete:
   executable C+J, C+M, J+M pair harnesses
   fixed unique insufficiency witness per pair
   no missing-subject responsibility substitution
+
+P8 current:
+  full C/J/M command-compute-judge-effect-result cycle
+  cycle-1 M update causally changes cycle-2 C or J
+  controlled P-only / J-only / M-only attribution
 ```
 
-### P7で許可される作業
+### P8で許可される作業
 
-- `{C,J}`の一周期計算・判断・action許可とM非存在監査
-- `{C,M}`の計算・memory read/update proposalとJ非存在監査
-- `{J,M}`の外部candidate判断・保持とC非存在監査
-- pairごとの固有witness、責任非代行、機能等価fallback不在の検査
-- P6を含む既存回帰
+- HDS command→C compute→J judge→許可済みwrite/emit→result observation→J再判断
+- cycle 1のM更新をcycle 2のC/Jが明示引用する二周期試験
+- Pだけ、J Frameだけ、Mだけを変更する三つの因果分離試験
+- hidden global state、authority越境、同時複数変数変更のnegative test
+- P7までを含む既存回帰
 
-### P7で禁止される作業
+### P8で禁止される作業
 
-- full Trinity二周期因果を完了扱いすること
 - 全8 subset certificateを完了扱いすること
-- Mなしでpersistent experienceを捏造すること
-- Jなしでwrite/emitを許可すること
-- Cなしで仮説/candidate/outputを生成すること
+- contextやhidden globalだけの差をM因果と呼ぶこと
+- P/J/Mを同時変更して単独因果と呼ぶこと
+- 未承認write/emit、replay済みcapabilityの再利用
 - 全sample game / 全level攻略
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
 - task/game/level ID、replay、固定action列、answer map、literal座標をruntime fixtureへ残すこと
 - source / hidden stateをruntime計算素材へ残すこと
 - scoreを根拠にした局所最適化
-- 「AGI完成」「最小三構成証明済み」「二周期学習済み」といった未検証主張
+- 「AGI完成」「最小三構成証明済み」「全sample攻略済み」といった未検証主張
 
-P7の正本は新ロードマップのP7節、P2 obligation/test matrix、
-P4/P5/P6 standalone実装証拠である。
+P8の正本は新ロードマップのP8節、P2 obligation/test matrix、
+P4〜P7の実装証拠である。
 
 ## 3. 1 work blockの必須契約
 
@@ -262,13 +266,13 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - active/archive分離、rollback
 - MがG1/G2を代行しないこと
 
-### P7: Pairwise Subject Audit — 現在
+### P7: Pairwise Subject Audit — 完了
 
 - `{C,J}` -> `NO_PERSISTENT_EXPERIENCE_CAUSALITY`
 - `{C,M}` -> `NO_JUDGMENT_OR_AUTHORIZATION`
 - `{J,M}` -> `NO_GENERATIVE_COMPUTATION`
 
-### P8: Three-subject Two-cycle Trinity
+### P8: Three-subject Two-cycle Trinity — 現在
 
 - commandからresult再判断までの三主体循環
 - cycle 1のM更新がcycle 2のC/Jを変える
@@ -356,6 +360,13 @@ P7では次を追加する。
 - C+J / C+M / J+Mの実行可能pair harness
 - 各pairの固定・固有failure witness
 - 欠落主体の責任非代行とfunctional-equivalent leak検査
+
+P8では次を追加する。
+
+- full C/J/M一周期authority trace
+- M updateを介した二周期behavioral delta
+- P-only / J-only / M-only controlled causal isolation
+- hidden-global-state不在とwrite/emit越境negative test
 
 P4以降の固定test IDと反証条件は
 `docs/architecture/AGI_TEST_MATRIX.md`を正本とする。

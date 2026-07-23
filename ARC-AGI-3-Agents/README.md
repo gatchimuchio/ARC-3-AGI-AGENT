@@ -9,7 +9,8 @@ identity-freeなC/J/M fixtureを生成済みです。P4では共通`InstructionB
 P-A記号規則graph、P-B学習済みsigmoid matrix、standalone Cを実装しました。
 P5ではtyped HDS Frameとstandalone Jを実装し、integrated HDSも同じ判断coreへ
 接続しました。P6では全15 storage operation、version、snapshot、rollback、
-active/archiveを持つstandalone Mを実装しました。現在phaseはP7です。
+active/archiveを持つstandalone Mを実装しました。P7では三pairの固有不足を
+実行監査しました。現在phaseはP8です。
 
 ## 現在の実行入口
 
@@ -63,6 +64,10 @@ J/Mの単独実装証拠は
 [`../docs/architecture/P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md`](../docs/architecture/P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md)
 と
 [`../docs/architecture/P6_MEMORY_SUBJECT_IMPLEMENTATION.md`](../docs/architecture/P6_MEMORY_SUBJECT_IMPLEMENTATION.md)
+を参照してください。
+
+P7 pair監査証拠は
+[`../docs/architecture/P7_PAIRWISE_SUBJECT_AUDIT.md`](../docs/architecture/P7_PAIRWISE_SUBJECT_AUDIT.md)
 を参照してください。
 
 ## 検証

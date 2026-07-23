@@ -1,7 +1,7 @@
 # AGI最小三構成 Traceability Matrix
 
-- current phase: `P7_PAIRWISE_SUBJECT_AUDIT`
-- last completed phase: `P6_MEMORY_SUBJECT_M`
+- current phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
+- last completed phase: `P7_PAIRWISE_SUBJECT_AUDIT`
 - graph: `AGI_OBLIGATION_GRAPH.json`
 - status vocabulary: `SUPPORTED | PARTIAL | UNSUPPORTED | REJECTED`
 
@@ -66,3 +66,10 @@ identity-free P3 fixtures -> J/M implementation -> P0/J0/M0
 7. P9で全8部分集合を有限列挙する。
 8. P10で初めて全sample攻略を開始する。
 9. P11でrelease stateを固定する。
+
+## P7 pairwise disposition
+
+`pairwise.py`は三つのproper pairを実行し、各pairの成立責任を観測した後だけ
+固定witnessを返す。結果は`{C,J}=G3/G4 FAIL`、`{C,M}=G2 FAIL`、
+`{J,M}=G1 FAIL`で、witness重複0、functional-equivalent leak 0である。
+詳細証拠は`P7_PAIRWISE_SUBJECT_AUDIT.md`を正本とする。

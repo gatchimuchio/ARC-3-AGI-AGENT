@@ -1,7 +1,7 @@
 # AGI最小三構成 Claim Registry
 
-- current phase: `P7_PAIRWISE_SUBJECT_AUDIT`
-- last completed phase: `P6_MEMORY_SUBJECT_M`
+- current phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
+- last completed phase: `P7_PAIRWISE_SUBJECT_AUDIT`
 - rule: 実装path、実行test、除去証人が揃わないclaimを`SUPPORTED`にしない
 
 | Claim ID | 主張 | 状態 | primary evidence | 反証・不足 | 次phase |
@@ -18,7 +18,7 @@
 | `CLAIM_C_COMPLETE` | `C=Execute(L0,P)`がG1を単独で満たす | `SUPPORTED` | `test_compute_subject_p4.py` | G2/G3/G4、sample攻略、汎化は含まない | 回帰 |
 | `CLAIM_J_STANDALONE` | C/P/MなしでHDS FrameからG2を満たす | `SUPPORTED` | `test_judgment_subject_p5.py` | G1/G3/G4、effect実行、sample攻略は含まない | 回帰 |
 | `CLAIM_M_STANDALONE` | C/Jなしで全memory operationを満たす | `SUPPORTED` | `test_memory_subject_p6.py` | G1/G2/G4、pair、sample攻略は含まない | 回帰 |
-| `CLAIM_PAIRWISE_INSUFFICIENCY` | 三pairが固有witnessでAGI義務を閉じない | `UNSUPPORTED` | なし | pair harnessなし | P7 |
+| `CLAIM_PAIRWISE_INSUFFICIENCY` | 三pairが固有witnessでAGI義務を閉じない | `SUPPORTED` | `test_pairwise_subject_p7.py` | full Trinity・G4・全8 subsetは含まない | 回帰 |
 | `CLAIM_TWO_CYCLE_CAUSALITY` | cycle 1のM更新がcycle 2のC/Jを変える | `UNSUPPORTED` | なし | M-only controlled causal testなし | P8 |
 | `CLAIM_CAUSAL_ATTRIBUTION` | P-only/J-only/M-only変更の効果を個別帰属できる | `UNSUPPORTED` | なし | causal isolation harnessなし | P8 |
 | `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `UNSUPPORTED` | なし | executable subset certificateなし | P9 |
