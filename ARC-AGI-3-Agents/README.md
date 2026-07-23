@@ -10,7 +10,8 @@ P-A記号規則graph、P-B学習済みsigmoid matrix、standalone Cを実装し�
 P5ではtyped HDS Frameとstandalone Jを実装し、integrated HDSも同じ判断coreへ
 接続しました。P6では全15 storage operation、version、snapshot、rollback、
 active/archiveを持つstandalone Mを実装しました。P7では三pairの固有不足を
-実行監査しました。現在phaseはP8です。
+実行監査しました。P8ではfull二周期TrinityとP/J/M因果分離を実証しました。
+現在phaseはP9です。
 
 ## 現在の実行入口
 
@@ -68,6 +69,10 @@ J/Mの単独実装証拠は
 
 P7 pair監査証拠は
 [`../docs/architecture/P7_PAIRWISE_SUBJECT_AUDIT.md`](../docs/architecture/P7_PAIRWISE_SUBJECT_AUDIT.md)
+を参照してください。
+
+P8二周期因果証拠は
+[`../docs/architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md`](../docs/architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md)
 を参照してください。
 
 ## 検証

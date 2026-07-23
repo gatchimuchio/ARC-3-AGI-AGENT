@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
 - 版: `v0.7-judgment-subject`
-- 状態: `P7_PAIRWISE_SUBJECT_AUDIT` complete / `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY` current
+- 状態: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY` complete / `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` current
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -396,13 +396,13 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P5: 判断主体J — 完了
 - P6: 記憶主体M — 完了
 - P7: 二主体接続監査 — 完了
-- P8: 三主体二周期循環 — 現在
-- P9: 全8部分集合証明
+- P8: 三主体二周期循環 — 完了
+- P9: 全8部分集合証明 — 現在
 - P10: 全sample完全攻略
 - P11: release state固定
 - P12〜P14: current request外
 
 現行順序は
 `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
-P4〜P7の完了証拠は各phase実装文書を参照します。P8はロードマップP8節と
-P2 G4/cycle test定義を正本とします。
+P4〜P8の完了証拠は各phase実装文書を参照します。P9はロードマップP9節と
+P2 subset expectation / certificate条件を正本とします。

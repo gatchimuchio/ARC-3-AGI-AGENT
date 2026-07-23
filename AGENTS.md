@@ -20,12 +20,11 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY` です。
+現在は `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` です。
 
-`P7_PAIRWISE_SUBJECT_AUDIT` は完了しています。三pairは各成立責任を実行後、
-`NO_PERSISTENT_EXPERIENCE_CAUSALITY`、`NO_JUDGMENT_OR_AUTHORIZATION`、
-`NO_GENERATIVE_COMPUTATION`の固有witnessでFAILします。P7はfull Trinity、
-G4、全8 subsetを完成させていません。
+`P8_THREE_SUBJECT_TWO_CYCLE_TRINITY` は完了しています。full二周期authority
+loop、cycle 1 M更新からcycle 2 C/Jへの因果、P-only/J-only/M-only分離を
+実行証明しました。P8は全8 subset最小certificateを完成させていません。
 
 現行分類は次です。
 
@@ -75,36 +74,42 @@ P7 complete:
   fixed unique insufficiency witness per pair
   no missing-subject responsibility substitution
 
-P8 current:
+P8 complete:
   full C/J/M command-compute-judge-effect-result cycle
   cycle-1 M update causally changes cycle-2 C or J
   controlled P-only / J-only / M-only attribution
+
+P9 current:
+  finite enumeration of all eight C/J/M subsets
+  full set PASS and seven proper subsets FAIL
+  zero functional-equivalent responsibility leaks
 ```
 
-### P8で許可される作業
+### P9で許可される作業
 
-- HDS command→C compute→J judge→許可済みwrite/emit→result observation→J再判断
-- cycle 1のM更新をcycle 2のC/Jが明示引用する二周期試験
-- Pだけ、J Frameだけ、Mだけを変更する三つの因果分離試験
-- hidden global state、authority越境、同時複数変数変更のnegative test
-- P7までを含む既存回帰
+- `{}`、single 3件、pair 3件、full Trinityの全8 subset実行
+- G1〜G5の期待/実測結果、固定witness、single removalの統合
+- class `None`だけでなくfallback/global callback/fixture代行の漏れ監査
+- certificate JSON、subset enumeration、removal witnesses、obligation graph、
+  conformance reportの生成・再生成検証
+- P8までを含む既存回帰
 
-### P8で禁止される作業
+### P9で禁止される作業
 
-- 全8 subset certificateを完了扱いすること
-- contextやhidden globalだけの差をM因果と呼ぶこと
-- P/J/Mを同時変更して単独因果と呼ぶこと
-- 未承認write/emit、replay済みcapabilityの再利用
+- proper subsetをPASSにするため欠落主体責任を代行すること
+- metadata削除だけでsubsetをFAILさせること
+- 実行していないsubset/certificate fieldをPASSにすること
 - 全sample game / 全level攻略
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
 - task/game/level ID、replay、固定action列、answer map、literal座標をruntime fixtureへ残すこと
 - source / hidden stateをruntime計算素材へ残すこと
 - scoreを根拠にした局所最適化
-- 「AGI完成」「最小三構成証明済み」「全sample攻略済み」といった未検証主張
+- P9 certificate成立前の「最小三構成証明済み」
+- 「全sample攻略済み」「汎化済み」といった未検証主張
 
-P8の正本は新ロードマップのP8節、P2 obligation/test matrix、
-P4〜P7の実装証拠である。
+P9の正本は新ロードマップのP9節、P2 obligation/subset/test matrix、
+P4〜P8の実装証拠である。
 
 ## 3. 1 work blockの必須契約
 
@@ -272,13 +277,13 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - `{C,M}` -> `NO_JUDGMENT_OR_AUTHORIZATION`
 - `{J,M}` -> `NO_GENERATIVE_COMPUTATION`
 
-### P8: Three-subject Two-cycle Trinity — 現在
+### P8: Three-subject Two-cycle Trinity — 完了
 
 - commandからresult再判断までの三主体循環
 - cycle 1のM更新がcycle 2のC/Jを変える
 - P-only/J-only/M-only因果分離
 
-### P9: Eight-subset Minimum Certificate
+### P9: Eight-subset Minimum Certificate — 現在
 
 - `{}`から`{C,J,M}`まで全8 subsetを有限列挙
 - full setだけPASS、機能等価物漏れ0
@@ -367,6 +372,13 @@ P8では次を追加する。
 - M updateを介した二周期behavioral delta
 - P-only / J-only / M-only controlled causal isolation
 - hidden-global-state不在とwrite/emit越境negative test
+
+P9では次を追加する。
+
+- 全8 subsetの有限・重複なし列挙
+- full setだけPASSするmachine-readable certificate
+- single/pair removal witnessとG1〜G5実測の整合
+- functional-equivalent leak 0とcertificate deterministic rebuild
 
 P4以降の固定test IDと反証条件は
 `docs/architecture/AGI_TEST_MATRIX.md`を正本とする。

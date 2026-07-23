@@ -1,8 +1,8 @@
 {
   "schema_version": "1.1.0",
   "artifact_type": "agi_minimum_three_obligation_graph",
-  "phase": "P8_THREE_SUBJECT_TWO_CYCLE_TRINITY",
-  "last_completed_phase": "P7_PAIRWISE_SUBJECT_AUDIT",
+  "phase": "P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE",
+  "last_completed_phase": "P8_THREE_SUBJECT_TWO_CYCLE_TRINITY",
   "normative_roadmap": "docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md",
   "subjects": [
     {
@@ -78,24 +78,30 @@
       "id": "G4",
       "name": "temporal_experience_causality",
       "owner": "TRINITY",
-      "current_status": "UNSUPPORTED",
-      "implementation_paths": [],
-      "test_evidence": [],
-      "gaps": ["no controlled M-only two-cycle causal test"]
+      "current_status": "SUPPORTED",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/trinity.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py"
+      ],
+      "test_evidence": [
+        "tests/unit/test_trinity_two_cycle_p8.py"
+      ],
+      "gaps": []
     },
     {
       "id": "G5",
       "name": "closed_loop",
       "owner": "TRINITY",
-      "current_status": "PARTIAL",
+      "current_status": "SUPPORTED",
       "implementation_paths": [
         "ARC-AGI-3-Agents/arc3_agi_agent/sample_runtime.py",
         "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py"
       ],
       "test_evidence": [
-        "tests/unit/test_offline_sample_runtime.py::OfflineSampleRuntimeTests::test_hds_emits_then_reobserves_into_persistent_state"
+        "tests/unit/test_offline_sample_runtime.py::OfflineSampleRuntimeTests::test_hds_emits_then_reobserves_into_persistent_state",
+        "tests/unit/test_trinity_two_cycle_p8.py"
       ],
-      "gaps": ["future computation is not yet causally altered by M", "rollback path is absent"]
+      "gaps": []
     }
   ],
   "elements": [
@@ -112,7 +118,7 @@
     {"id": "EXTERNAL_EMISSION", "current_status": "SUPPORTED", "next_phase": "P8"},
     {"id": "MEMORY_WRITE", "current_status": "SUPPORTED", "next_phase": "P8"},
     {"id": "HDS_FRAME", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
-    {"id": "CYCLE_TRANSITION", "current_status": "PARTIAL", "next_phase": "P8"},
+    {"id": "CYCLE_TRANSITION", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "STOPPING", "current_status": "SUPPORTED", "next_phase": "P5"},
     {"id": "ROLLBACK", "current_status": "PARTIAL", "next_phase": "P8"}
   ],
@@ -156,7 +162,8 @@
     {"id": "CLAIM_J_STANDALONE", "status": "SUPPORTED", "primary_test": "tests/unit/test_judgment_subject_p5.py"},
     {"id": "CLAIM_M_STANDALONE", "status": "SUPPORTED", "primary_test": "tests/unit/test_memory_subject_p6.py"},
     {"id": "CLAIM_PAIRWISE_INSUFFICIENCY", "status": "SUPPORTED", "primary_test": "tests/unit/test_pairwise_subject_p7.py"},
-    {"id": "CLAIM_TWO_CYCLE_CAUSALITY", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_TWO_CYCLE_CAUSALITY", "status": "SUPPORTED", "primary_test": "tests/unit/test_trinity_two_cycle_p8.py"},
+    {"id": "CLAIM_CAUSAL_ATTRIBUTION", "status": "SUPPORTED", "primary_test": "tests/unit/test_trinity_two_cycle_p8.py"},
     {"id": "CLAIM_MINIMUM_THREE", "status": "UNSUPPORTED", "primary_test": null},
     {"id": "CLAIM_SAMPLE_COMPLETE", "status": "UNSUPPORTED", "primary_test": null},
     {"id": "CLAIM_RELEASE_STATE_FIXED", "status": "UNSUPPORTED", "primary_test": null}

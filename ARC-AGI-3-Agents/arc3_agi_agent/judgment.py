@@ -141,6 +141,76 @@ class HDSMc:
 
 
 @dataclass(frozen=True, slots=True)
+class HDSFramePolicy:
+    """Versionable J-side policy used by the integrated Frame adapter."""
+
+    policy_id: str = "hds-frame-policy:default-v1"
+    purpose: str = "select-safe-closed-action-candidate"
+    boundary: str = "rendered-observation-only"
+    acceptance_criteria: tuple[str, ...] = ("W_X_R_MC_CLOSED",)
+    rejection_criteria: tuple[str, ...] = (
+        "hazard",
+        "contradiction",
+        "closure-invalid",
+    )
+    stop_on: tuple[str, ...] = (
+        "terminal-win",
+        "hazard",
+        "budget-exhaustion",
+    )
+    additional_stopping_conditions: tuple[str, ...] = ()
+    max_risk: float = 1.0
+    allow_memory_write: bool = True
+    allow_external_emit: bool = True
+
+    @property
+    def digest(self) -> str:
+        return digest_object(self)
+
+    def validate(self) -> tuple[str, ...]:
+        failures: list[str] = []
+        for name, value in (
+            ("ID", self.policy_id),
+            ("PURPOSE", self.purpose),
+            ("BOUNDARY", self.boundary),
+        ):
+            if not isinstance(value, str) or not value.strip():
+                failures.append(f"HDS_FRAME_POLICY_{name}_MISSING")
+        for name, values, required in (
+            ("ACCEPTANCE", self.acceptance_criteria, True),
+            ("REJECTION", self.rejection_criteria, True),
+            ("STOP", self.stop_on, True),
+            (
+                "ADDITIONAL_STOPPING",
+                self.additional_stopping_conditions,
+                False,
+            ),
+        ):
+            if not _text_tuple_valid(values) or (required and not values):
+                failures.append(f"HDS_FRAME_POLICY_{name}_INVALID")
+        if (
+            isinstance(self.max_risk, bool)
+            or not isinstance(self.max_risk, (int, float))
+            or not math.isfinite(float(self.max_risk))
+            or not 0.0 <= float(self.max_risk) <= 1.0
+        ):
+            failures.append("HDS_FRAME_POLICY_MAX_RISK_INVALID")
+        if not isinstance(self.allow_memory_write, bool):
+            failures.append("HDS_FRAME_POLICY_MEMORY_FLAG_INVALID")
+        if not isinstance(self.allow_external_emit, bool):
+            failures.append("HDS_FRAME_POLICY_EMIT_FLAG_INVALID")
+        serializable = dataclasses.asdict(self)
+        failures.extend(
+            f"HDS_FRAME_POLICY_RUNTIME_IDENTITY_FORBIDDEN:{path}"
+            for path in (
+                *forbidden_runtime_paths(serializable),
+                *_forbidden_value_paths(serializable),
+            )
+        )
+        return tuple(sorted(set(failures)))
+
+
+@dataclass(frozen=True, slots=True)
 class JudgmentCandidate:
     candidate_id: str
     predicted_outcomes: tuple[str, ...]
@@ -589,6 +659,7 @@ class StandaloneJudgmentHarness:
 
 __all__ = [
     "HDSFrame",
+    "HDSFramePolicy",
     "HDSJudgmentSubject",
     "HDSMc",
     "HDSR",

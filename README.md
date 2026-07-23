@@ -14,7 +14,8 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - P5: `JUDGMENT_SUBJECT_J` — 完了
 - P6: `MEMORY_SUBJECT_M` — 完了
 - P7: `PAIRWISE_SUBJECT_AUDIT` — 完了
-- 現在フェーズ: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
+- P8: `THREE_SUBJECT_TWO_CYCLE_TRINITY` — 完了
+- 現在フェーズ: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -93,6 +94,7 @@ docs/
     P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md
     P6_MEMORY_SUBJECT_IMPLEMENTATION.md
     P7_PAIRWISE_SUBJECT_AUDIT.md
+    P8_TRINITY_TWO_CYCLE_CAUSALITY.md
   roadmap/ROADMAP.md
   migration/
   references/
@@ -149,7 +151,10 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 です。P7では三つの二主体構成を実行し、固有failure witnessと責任非代行を
 監査しました。完了証拠は
 [`P7_PAIRWISE_SUBJECT_AUDIT.md`](docs/architecture/P7_PAIRWISE_SUBJECT_AUDIT.md)
-です。現在のP8ではfull Trinity二周期因果とP/J/M別の因果分離を検証します。
+です。P8ではfull Trinity二周期因果とP/J/M別の因果分離を検証しました。
+完了証拠は
+[`P8_TRINITY_TWO_CYCLE_CAUSALITY.md`](docs/architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md)
+です。現在のP9では全8 subsetを有限列挙し、最小三構成certificateを生成します。
 
 ## 設計上の固定境界
 
@@ -186,8 +191,8 @@ python sample_main.py --all-samples --max-actions 1
 6. P5: 判断主体J — 完了
 7. P6: 記憶主体M — 完了
 8. P7: 二主体接続監査 — 完了
-9. P8: 三主体二周期循環 — 現在
-10. P9: 全8部分集合証明
+9. P8: 三主体二周期循環 — 完了
+10. P9: 全8部分集合証明 — 現在
 11. P10: 全sample game / 全level完全攻略
 12. P11: release state固定
 

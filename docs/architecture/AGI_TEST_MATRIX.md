@@ -1,7 +1,7 @@
 # AGI最小三構成 Test Matrix
 
-- current phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
-- last completed phase: `P7_PAIRWISE_SUBJECT_AUDIT`
+- current phase: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
+- last completed phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
 - current executable regression gates:
   `test_agi_minimum_three_audit.py`,
   `test_evidence_compiler.py`,
@@ -10,7 +10,8 @@
   `test_compute_subject_p4.py`,
   `test_judgment_subject_p5.py`,
   `test_memory_subject_p6.py`,
-  `test_pairwise_subject_p7.py`
+  `test_pairwise_subject_p7.py`,
+  `test_trinity_two_cycle_p8.py`
 
 ## 現行証拠
 
@@ -36,13 +37,13 @@
 | `T-P7-PAIR-CJ` | `CLAIM_PAIRWISE_INSUFFICIENCY` | `test_pairwise_subject_p7.py` | C/J実機能後にM/G3/G4だけが固有witnessでFAIL | 実装・実行済み |
 | `T-P7-PAIR-CM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | `test_pairwise_subject_p7.py` | C/M実機能後にJ判断・許可が固有witnessでFAIL | 実装・実行済み |
 | `T-P7-PAIR-JM` | `CLAIM_PAIRWISE_INSUFFICIENCY` | `test_pairwise_subject_p7.py` | J/M実機能後にC生成計算が固有witnessでFAIL | 実装・実行済み |
+| `T-P8-TWO-CYCLE` | `CLAIM_TWO_CYCLE_CAUSALITY` | `test_trinity_two_cycle_p8.py` | cycle 1 post-Mをcycle 2が引用しbehavioral delta | 実装・実行済み |
+| `T-P8-PJM-ISOLATION` | `CLAIM_CAUSAL_ATTRIBUTION` | `test_trinity_two_cycle_p8.py` | P/J/M一因子だけを変え、固有出力だけが変化 | 実装・実行済み |
 
 ## 後続phaseの固定試験
 
 | Test ID | Primary claim | Phase | 必須反証条件 |
 |---|---|---|---|
-| `T-P8-TWO-CYCLE` | `CLAIM_TWO_CYCLE_CAUSALITY` | P8 | M update除去後もcycle 2差が残ればFAIL |
-| `T-P8-PJM-ISOLATION` | `CLAIM_CAUSAL_ATTRIBUTION` | P8 | hidden global state、複数変数同時変更でFAIL |
 | `T-P9-EIGHT-SUBSETS` | `CLAIM_MINIMUM_THREE` | P9 | proper subset PASSまたはfull set FAILでFAIL |
 | `T-P9-EQUIVALENT-LEAK` | no functional equivalent | P9 | fallback/global callback/answer fixture代行でFAIL |
 | `T-P10-ALL-SAMPLES` | `CLAIM_SAMPLE_COMPLETE` | P10 | 未完level、error、GAME_OVER、timeout、max-action停止でFAIL |

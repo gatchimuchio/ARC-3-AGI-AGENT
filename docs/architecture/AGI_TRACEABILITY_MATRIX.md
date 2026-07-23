@@ -1,7 +1,7 @@
 # AGI最小三構成 Traceability Matrix
 
-- current phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
-- last completed phase: `P7_PAIRWISE_SUBJECT_AUDIT`
+- current phase: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
+- last completed phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
 - graph: `AGI_OBLIGATION_GRAPH.json`
 - status vocabulary: `SUPPORTED | PARTIAL | UNSUPPORTED | REJECTED`
 
@@ -24,7 +24,7 @@
 | external emission | HDS承認済みactionの機械的実行 | owner-bound single-use directive → signed result | environment stateは外部、receiptはdirective | HDS許可必須 | `in_memory.py`, `offline_arcade.py`, `kernel.py::execute_emission` | copy/replay/tamper/forged label拒否 | C/Jからのdirect step禁止 | P1範囲で`SUPPORTED` |
 | memory write | HDS承認済みmutationの機械的実行 | bound directive + payload + expected version → mutation result | M | HDS許可必須、Cが実行 | `memory.py::apply_authorized` | payload/target/version/single-use/observation gate | J direct write、M self-write禁止 | authority adapterは`SUPPORTED`; pair/Trinity接続はP7/P8 |
 | HDS Frame | purpose/X/R/Mc/evidence/risk/unknownsを閉じる判断入力 | supplied fixture/proposal → deterministic decision | J | G2全権限 | `judgment.py::HDSFrame`, integrated Frame adapter | 676 fixture、missing X/R/Mc、hazard、budget、contradiction、rollback | Jは入力candidateを選ぶだけで生成しない | P5範囲で`SUPPORTED` |
-| cycle transition | command→compute→judge→act→observe→write→rejudge | cycle t state → cycle t+1 state | C/J/Mが各固有stateを所有 | stageごとのauthority invariant | `kernel.py`, `sample_runtime.py` | one-action re-observation、next judgment input | hidden global stateで差を作らない | M-only因果未証明で`PARTIAL` |
+| cycle transition | command→compute→judge→act→observe→write→rejudge | cycle t state → cycle t+1 state | C/J/Mが各固有stateを所有 | stageごとのauthority invariant | `kernel.py`, `trinity.py`, `sample_runtime.py` | two full cycles、M citation、P/J/M isolation | hidden global stateで差を作らない | P8範囲でG4/G5 `SUPPORTED` |
 | stopping | 未閉包、hazard、budget、WINで停止/保留する | Frame/result → REOBSERVE/SUSPEND/STOP/REJECT | J | Jのみ | `HDSJudgmentSubject`, `judge_emission_result` | hazard priority、terminal、budget、missing closure | environmentやCのsilent stopを判断扱いしない | `SUPPORTED` |
 | rollback | Jが条件を判定しM/実行状態を指定版へ戻す | contradiction/failure/version ref → rollback decision/result | Jが許可、Mが版を保持、Cが実行 | Jのみ許可 | `judgment.py`, `memory.py::ROLLBACK` | J condition/reference、M指定版復元試験 | exception retryをrollbackと呼ばない | JとMの単体は実装済み、integrated接続はP8で`PARTIAL` |
 
@@ -51,7 +51,6 @@ OFFLINE rendered frame
 欠落している必須edge:
 
 ```text
-M revision -> later C/J behavioral delta
 identity-free P3 fixtures -> J/M implementation -> P0/J0/M0
 ```
 
@@ -73,3 +72,11 @@ identity-free P3 fixtures -> J/M implementation -> P0/J0/M0
 固定witnessを返す。結果は`{C,J}=G3/G4 FAIL`、`{C,M}=G2 FAIL`、
 `{J,M}=G1 FAIL`で、witness重複0、functional-equivalent leak 0である。
 詳細証拠は`P7_PAIRWISE_SUBJECT_AUDIT.md`を正本とする。
+
+## P8 Trinity disposition
+
+`trinity.py`は二つのfull authority cycleとP/J/M一因子比較を実行する。
+cycle 2はcycle 1 post-write Mのversion/digestを明示引用し、M-onlyでC prediction、
+P-onlyでC output、J-onlyでJ decision/authorizationだけが変化する。
+同一input replay一致、hidden-global delta 0、authority violation 0である。
+詳細証拠は`P8_TRINITY_TWO_CYCLE_CAUSALITY.md`を正本とする。

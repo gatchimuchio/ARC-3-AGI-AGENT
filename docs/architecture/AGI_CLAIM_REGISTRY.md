@@ -1,7 +1,7 @@
 # AGI最小三構成 Claim Registry
 
-- current phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
-- last completed phase: `P7_PAIRWISE_SUBJECT_AUDIT`
+- current phase: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
+- last completed phase: `P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`
 - rule: 実装path、実行test、除去証人が揃わないclaimを`SUPPORTED`にしない
 
 | Claim ID | 主張 | 状態 | primary evidence | 反証・不足 | 次phase |
@@ -19,8 +19,8 @@
 | `CLAIM_J_STANDALONE` | C/P/MなしでHDS FrameからG2を満たす | `SUPPORTED` | `test_judgment_subject_p5.py` | G1/G3/G4、effect実行、sample攻略は含まない | 回帰 |
 | `CLAIM_M_STANDALONE` | C/Jなしで全memory operationを満たす | `SUPPORTED` | `test_memory_subject_p6.py` | G1/G2/G4、pair、sample攻略は含まない | 回帰 |
 | `CLAIM_PAIRWISE_INSUFFICIENCY` | 三pairが固有witnessでAGI義務を閉じない | `SUPPORTED` | `test_pairwise_subject_p7.py` | full Trinity・G4・全8 subsetは含まない | 回帰 |
-| `CLAIM_TWO_CYCLE_CAUSALITY` | cycle 1のM更新がcycle 2のC/Jを変える | `UNSUPPORTED` | なし | M-only controlled causal testなし | P8 |
-| `CLAIM_CAUSAL_ATTRIBUTION` | P-only/J-only/M-only変更の効果を個別帰属できる | `UNSUPPORTED` | なし | causal isolation harnessなし | P8 |
+| `CLAIM_TWO_CYCLE_CAUSALITY` | cycle 1のM更新がcycle 2のC/Jを変える | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 全8 subset・sample攻略は含まない | 回帰 |
+| `CLAIM_CAUSAL_ATTRIBUTION` | P-only/J-only/M-only変更の効果を個別帰属できる | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 観測済みP-A/P-Bとsynthetic Frame条件の範囲 | 回帰 |
 | `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `UNSUPPORTED` | なし | executable subset certificateなし | P9 |
 | `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略する | `UNSUPPORTED` | なし | 現在は25 game各1 action経路だけ | P10 |
 | `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | なし | P-B holdout BCEは退行なしだが、未知sample構造の攻略証明ではない | P10 |

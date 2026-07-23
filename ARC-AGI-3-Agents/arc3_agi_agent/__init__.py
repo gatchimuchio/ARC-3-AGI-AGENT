@@ -41,6 +41,7 @@ from .judgment import (
     JUDGMENT_STATUSES,
     JUDGMENT_SUBJECT_REMOVAL_WITNESS,
     HDSFrame,
+    HDSFramePolicy,
     HDSJudgmentSubject,
     HDSMc,
     JudgmentCandidate,
@@ -124,6 +125,13 @@ from .schema import (
     validate_record,
     validate_runtime_bundle,
 )
+from .trinity import (
+    CausalIsolationCase,
+    ControlledTrinityProbe,
+    TrinityCycleEvidence,
+    TrinityTwoCycleReport,
+    run_trinity_two_cycle_audit,
+)
 from .verification import (
     RenderedObservation,
     VerificationResult,
@@ -134,6 +142,7 @@ __all__ = [
     "ALL_MEMORY_OPERATIONS",
     "ActionPredictionIR",
     "CandidateIR",
+    "CausalIsolationCase",
     "AuthorityViolation",
     "BoundedContextState",
     "Checkpoint",
@@ -146,6 +155,7 @@ __all__ = [
     "ComputeJudgmentPair",
     "ComputeMemoryPair",
     "ComputeSubjectRemovalAuditReport",
+    "ControlledTrinityProbe",
     "DEFAULT_INSTRUCTION_BODY_CONTRACT",
     "DeterministicCandidateSurface",
     "DeterministicSuccessCriterion",
@@ -156,6 +166,7 @@ __all__ = [
     "EntityIR",
     "HDSDecision",
     "HDSFrame",
+    "HDSFramePolicy",
     "HDSJudgmentSubject",
     "HDSMc",
     "HDSR",
@@ -216,7 +227,9 @@ __all__ = [
     "StandaloneJudgmentHarness",
     "StandaloneMemoryHarness",
     "TransitionIR",
+    "TrinityCycleEvidence",
     "TrinityLifecycle",
+    "TrinityTwoCycleReport",
     "VerificationResult",
     "canonical_json",
     "digest_object",
@@ -235,6 +248,7 @@ __all__ = [
     "verify_rendered_transition",
     "run_compute_subject_removal_audit",
     "run_pairwise_subject_audit",
+    "run_trinity_two_cycle_audit",
     "run_required_removal_audit",
     "ContextSnapshot",
 ]

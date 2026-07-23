@@ -293,8 +293,8 @@ P4 Compute Subject C                                complete
 P5 Judgment Subject J                               complete
 P6 Memory Subject M                                 complete
 P7 Pairwise Subject Audit                           complete
-P8 Three-subject Two-cycle Trinity                  current
-P9 Eight-subset Minimum Certificate                 blocked by P8
+P8 Three-subject Two-cycle Trinity                  complete
+P9 Eight-subset Minimum Certificate                 current
 P10 Complete ARC3 Sample Solving                    blocked by P9
 P11 Release-state Freeze                            blocked by P10
 P12 Official ARC Connection                        out of current request

@@ -260,3 +260,16 @@ P7完了時点で`F-P2-006`のpair部分を是正した。
 
 `F-P2-005`と`F-P2-006`の全8 subset部分は未解決である。P7 HDS判断は
 `PASS`、次phaseは`P8_THREE_SUBJECT_TWO_CYCLE_TRINITY`とする。
+
+## 12. P8 disposition
+
+P8完了時点で`F-P2-005`を是正した。
+
+- full command/compute/judge/emit/observe/rejudge/write/finalizeを二周期実行
+- cycle 2がcycle 1 post-write M version/digestを引用
+- M-onlyでmemory-dependent predictionが変化
+- P-onlyでC output、J-onlyでJ decision/authorizationだけが変化
+- same-input replay一致、hidden global delta 0、authority越境0
+
+`F-P2-006`の全8 subset部分は未解決である。P8 HDS判断は`PASS`、
+次phaseは`P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`とする。

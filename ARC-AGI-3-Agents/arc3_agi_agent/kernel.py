@@ -28,6 +28,7 @@ from .judgment import (
     HDSX,
     JUDGMENT_SUBJECT_REMOVAL_WITNESS,
     HDSFrame,
+    HDSFramePolicy,
     HDSJudgmentSubject,
     HDSMc,
     JudgmentCandidate,
@@ -94,6 +95,8 @@ class ComputeProposal:
     hypotheses: tuple[HypothesisIR, ...]
     candidates: tuple[CandidateIR, ...]
     memory_proposal: MemoryProposal
+    memory_view_digest: str = ""
+    memory_view_version: int = 0
     predictions: tuple[ActionPredictionIR, ...] = ()
     output_proposals: tuple[OutputProposalIR, ...] = ()
     uncertainty: float = 1.0
@@ -150,6 +153,8 @@ class KernelResult:
     instruction_body_version: str
     instruction_body_digest: str
     instruction_query_digest: str
+    compute_memory_digest: str
+    compute_memory_version: int
 
 
 @dataclass(slots=True)
@@ -196,6 +201,7 @@ class HDSController:
     judgment_subject: HDSJudgmentSubject | None = field(
         default_factory=HDSJudgmentSubject,
     )
+    frame_policy: HDSFramePolicy = field(default_factory=HDSFramePolicy)
 
     def _issue_decision(
         self,
@@ -471,6 +477,11 @@ class HDSController:
         observation: ObservationIR,
         context: ContextSnapshot,
     ) -> HDSFrame:
+        policy_failures = self.frame_policy.validate()
+        if policy_failures:
+            raise AuthorityViolation(
+                "HDS_FRAME_POLICY_INVALID:" + ",".join(policy_failures)
+            )
         candidate_by_id = {
             candidate.candidate_id: candidate for candidate in proposal.candidates
         }
@@ -590,7 +601,7 @@ class HDSController:
                     "context": context.digest,
                 }
             )[:24],
-            purpose="select-safe-closed-action-candidate",
+            purpose=self.frame_policy.purpose,
             x=HDSX(
                 targets=("current-rendered-observation",),
                 candidate_ids=candidate_ids,
@@ -608,23 +619,15 @@ class HDSController:
             mc=HDSMc(
                 identity="integrated-closure:"
                 + digest_object((proposal.digest, closures))[:24],
-                boundary="rendered-observation-only",
-                acceptance_criteria=("W_X_R_MC_CLOSED",),
-                rejection_criteria=(
-                    "hazard",
-                    "contradiction",
-                    "closure-invalid",
-                ),
-                stop_on=(
-                    "terminal-win",
-                    "hazard",
-                    "budget-exhaustion",
-                ),
-                max_risk=1.0,
-                allow_memory_write=True,
-                allow_external_emit=True,
+                boundary=self.frame_policy.boundary,
+                acceptance_criteria=self.frame_policy.acceptance_criteria,
+                rejection_criteria=self.frame_policy.rejection_criteria,
+                stop_on=self.frame_policy.stop_on,
+                max_risk=self.frame_policy.max_risk,
+                allow_memory_write=self.frame_policy.allow_memory_write,
+                allow_external_emit=self.frame_policy.allow_external_emit,
             ),
-            observation_boundary="rendered-observation-only",
+            observation_boundary=self.frame_policy.boundary,
             candidates=tuple(judgment_candidates),
             evidence=tuple(sorted(evidence)),
             counter_evidence=tuple(sorted(counter_evidence)),
@@ -635,7 +638,14 @@ class HDSController:
             hazard=hazard_observed,
             budget=context.remaining_actions,
             unknowns=unknowns,
-            stopping_conditions=terminal_stop,
+            stopping_conditions=tuple(
+                sorted(
+                    {
+                        *terminal_stop,
+                        *self.frame_policy.additional_stopping_conditions,
+                    }
+                )
+            ),
             observation_available=True,
         )
 
@@ -664,6 +674,11 @@ class HDSController:
         compute_binding = self._compute_bindings[command_id]
         if observation != compute_binding.observation:
             raise AuthorityViolation("HDS_JUDGMENT_OBSERVATION_MISMATCH")
+        if (
+            proposal.memory_view_digest != compute_binding.memory.digest
+            or proposal.memory_view_version != compute_binding.memory.version
+        ):
+            raise AuthorityViolation("PROPOSAL_MEMORY_CITATION_MISMATCH")
         initial_context = compute_binding.context
         if (
             context.current_observation != observation
@@ -1065,6 +1080,8 @@ class PureLLMCompute:
                 ("instruction_body_digest", query.body_digest),
                 ("instruction_body_version", query.body_version),
                 ("instruction_query_digest", query.query_digest),
+                ("input_memory_digest", memory.digest),
+                ("input_memory_version", memory.version),
                 ("observation_signature", observation.frame_signature),
             ),
         )
@@ -1101,6 +1118,8 @@ class PureLLMCompute:
             hypotheses=hypotheses,
             candidates=candidates,
             memory_proposal=memory_proposal,
+            memory_view_digest=memory.digest,
+            memory_view_version=memory.version,
             predictions=query.predictions,
             output_proposals=output_proposals,
             uncertainty=query.uncertainty,
@@ -1660,6 +1679,8 @@ class Layer0Kernel:
             instruction_body_version=proposal.instruction_body_version,
             instruction_body_digest=proposal.instruction_body_digest,
             instruction_query_digest=proposal.instruction_query_digest,
+            compute_memory_digest=proposal.memory_view_digest,
+            compute_memory_version=proposal.memory_view_version,
         )
 
 
