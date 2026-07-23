@@ -1,0 +1,39 @@
+{
+  "artifact_type": "agi_removal_witnesses",
+  "schema_version": "1.0.0",
+  "witnesses": [
+    {
+      "evidence_digest": "8f4dd5c7ed9f1bef22cd35306aede1705f9383d01cb9faee47acb39ba60a10d7",
+      "failure_witness": "NO_PERSISTENT_EXPERIENCE_CAUSALITY",
+      "functional_equivalent_substitution": false,
+      "overall": "FAIL",
+      "remaining_members": [
+        "C",
+        "J"
+      ],
+      "removed_subject": "M"
+    },
+    {
+      "evidence_digest": "f67e436e2d513c91a27bd260c9445ec1883a1334e2b9b45564fba2441c117f5d",
+      "failure_witness": "NO_JUDGMENT_OR_AUTHORIZATION",
+      "functional_equivalent_substitution": false,
+      "overall": "FAIL",
+      "remaining_members": [
+        "C",
+        "M"
+      ],
+      "removed_subject": "J"
+    },
+    {
+      "evidence_digest": "7431d708bfef656a94b80b9c34615f90219c207273db1025878c432c4f6fc034",
+      "failure_witness": "NO_GENERATIVE_COMPUTATION",
+      "functional_equivalent_substitution": false,
+      "overall": "FAIL",
+      "remaining_members": [
+        "J",
+        "M"
+      ],
+      "removed_subject": "C"
+    }
+  ]
+}

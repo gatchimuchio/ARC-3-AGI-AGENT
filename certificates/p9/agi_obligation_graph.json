@@ -1,0 +1,322 @@
+{
+  "artifact_type": "agi_minimum_three_measured_obligation_graph",
+  "edges": [
+    {
+      "from": "L0",
+      "relation": "execution_mechanism_of",
+      "to": "C"
+    },
+    {
+      "from": "P",
+      "relation": "instruction_body_of",
+      "to": "C"
+    },
+    {
+      "from": "J",
+      "relation": "commands_and_judges",
+      "to": "C"
+    },
+    {
+      "from": "M",
+      "relation": "provides_bounded_view",
+      "to": "C"
+    },
+    {
+      "from": "C",
+      "relation": "proposes",
+      "to": "J"
+    },
+    {
+      "from": "J",
+      "relation": "authorizes_mutation",
+      "to": "M"
+    },
+    {
+      "from": "C",
+      "relation": "executes_authorized_mutation",
+      "to": "M"
+    },
+    {
+      "from": "J",
+      "relation": "authorizes_emission",
+      "to": "ENVIRONMENT_BOUNDARY"
+    },
+    {
+      "from": "C",
+      "relation": "executes_authorized_emission",
+      "to": "ENVIRONMENT_BOUNDARY"
+    },
+    {
+      "from": "ENVIRONMENT_BOUNDARY",
+      "relation": "returns_observed_result",
+      "to": "J"
+    },
+    {
+      "from": "M",
+      "relation": "provides_admitted_experience",
+      "to": "LEARNING_COMPILER"
+    },
+    {
+      "from": "LEARNING_COMPILER",
+      "relation": "builds",
+      "to": "P0"
+    },
+    {
+      "from": "LEARNING_COMPILER",
+      "relation": "builds",
+      "to": "J0"
+    },
+    {
+      "from": "LEARNING_COMPILER",
+      "relation": "builds",
+      "to": "M0"
+    }
+  ],
+  "measured_subsets": [
+    {
+      "evidence_digest": "b12336779c543119cabaf56527772adcbf6271002fbdb3d9ed07fa92719fb17f",
+      "members": [],
+      "obligations": {
+        "G1": "FAIL",
+        "G2": "FAIL",
+        "G3": "FAIL",
+        "G4": "FAIL",
+        "G5": "FAIL"
+      },
+      "overall": "FAIL"
+    },
+    {
+      "evidence_digest": "d2bd8503536e95905315da9f8203ba06e37995983029c1861f25fb92457658d0",
+      "members": [
+        "C"
+      ],
+      "obligations": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "FAIL",
+        "G4": "FAIL",
+        "G5": "FAIL"
+      },
+      "overall": "FAIL"
+    },
+    {
+      "evidence_digest": "42895010c47ff7760d705b7bd33aa5c735e4a47d87938239476f1e57eb63631c",
+      "members": [
+        "J"
+      ],
+      "obligations": {
+        "G1": "FAIL",
+        "G2": "PASS",
+        "G3": "FAIL",
+        "G4": "FAIL",
+        "G5": "FAIL"
+      },
+      "overall": "FAIL"
+    },
+    {
+      "evidence_digest": "9c74e1a2f96f5daaf780e62c01cb71addec0c7689e7e1428bf17e728341a59b4",
+      "members": [
+        "M"
+      ],
+      "obligations": {
+        "G1": "FAIL",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "FAIL",
+        "G5": "FAIL"
+      },
+      "overall": "FAIL"
+    },
+    {
+      "evidence_digest": "8f4dd5c7ed9f1bef22cd35306aede1705f9383d01cb9faee47acb39ba60a10d7",
+      "members": [
+        "C",
+        "J"
+      ],
+      "obligations": {
+        "G1": "PASS",
+        "G2": "PASS",
+        "G3": "FAIL",
+        "G4": "FAIL",
+        "G5": "PARTIAL"
+      },
+      "overall": "FAIL"
+    },
+    {
+      "evidence_digest": "f67e436e2d513c91a27bd260c9445ec1883a1334e2b9b45564fba2441c117f5d",
+      "members": [
+        "C",
+        "M"
+      ],
+      "obligations": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "FAIL",
+        "G5": "FAIL"
+      },
+      "overall": "FAIL"
+    },
+    {
+      "evidence_digest": "7431d708bfef656a94b80b9c34615f90219c207273db1025878c432c4f6fc034",
+      "members": [
+        "J",
+        "M"
+      ],
+      "obligations": {
+        "G1": "FAIL",
+        "G2": "PASS",
+        "G3": "PASS",
+        "G4": "FAIL",
+        "G5": "FAIL"
+      },
+      "overall": "FAIL"
+    },
+    {
+      "evidence_digest": "0484b57bad90d4e7a1793656843000db8c392a260225727d764022ebdbb35cbb",
+      "members": [
+        "C",
+        "J",
+        "M"
+      ],
+      "obligations": {
+        "G1": "PASS",
+        "G2": "PASS",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "PASS"
+      },
+      "overall": "PASS"
+    }
+  ],
+  "obligations": [
+    {
+      "current_status": "SUPPORTED",
+      "gaps": [],
+      "id": "G1",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/roles.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/instruction_body.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/instruction_compiler.py"
+      ],
+      "name": "generative_computation",
+      "owner": "C",
+      "test_evidence": [
+        "tests/unit/test_compute_subject_p4.py",
+        "tests/unit/test_instruction_body_compiler.py",
+        "tests/unit/test_minimum_three_certificate_p9.py"
+      ]
+    },
+    {
+      "current_status": "SUPPORTED",
+      "gaps": [],
+      "id": "G2",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/judgment.py::HDSJudgmentSubject",
+        "ARC-AGI-3-Agents/arc3_agi_agent/judgment_fixtures.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py::HDSController"
+      ],
+      "name": "judgment",
+      "owner": "J",
+      "test_evidence": [
+        "tests/unit/test_judgment_subject_p5.py",
+        "tests/unit/test_minimum_three_certificate_p9.py"
+      ]
+    },
+    {
+      "current_status": "SUPPORTED",
+      "gaps": [],
+      "id": "G3",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/memory.py::PassiveMemory",
+        "ARC-AGI-3-Agents/arc3_agi_agent/memory_fixtures.py"
+      ],
+      "name": "mutable_retention",
+      "owner": "M",
+      "test_evidence": [
+        "tests/unit/test_memory_subject_p6.py",
+        "tests/unit/test_minimum_three_certificate_p9.py"
+      ]
+    },
+    {
+      "current_status": "SUPPORTED",
+      "gaps": [],
+      "id": "G4",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/trinity.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py"
+      ],
+      "name": "temporal_experience_causality",
+      "owner": "TRINITY",
+      "test_evidence": [
+        "tests/unit/test_trinity_two_cycle_p8.py",
+        "tests/unit/test_minimum_three_certificate_p9.py"
+      ]
+    },
+    {
+      "current_status": "SUPPORTED",
+      "gaps": [],
+      "id": "G5",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/sample_runtime.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py"
+      ],
+      "name": "closed_loop",
+      "owner": "TRINITY",
+      "test_evidence": [
+        "tests/unit/test_offline_sample_runtime.py::OfflineSampleRuntimeTests::test_hds_emits_then_reobserves_into_persistent_state",
+        "tests/unit/test_trinity_two_cycle_p8.py",
+        "tests/unit/test_minimum_three_certificate_p9.py"
+      ]
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source_projection_digest": "d6c66909182acdf3be51f053f9b39c0aff2c31cd84f5eb50ca2b30497e62fe6f",
+  "subjects": [
+    {
+      "id": "C",
+      "must_not_own": [
+        "G2",
+        "G3"
+      ],
+      "name": "compute_subject",
+      "owns": [
+        "G1"
+      ],
+      "requires": [
+        "L0",
+        "P"
+      ]
+    },
+    {
+      "id": "J",
+      "must_not_own": [
+        "G1",
+        "G3"
+      ],
+      "name": "hds_judgment_subject",
+      "owns": [
+        "G2"
+      ],
+      "requires": [
+        "HDS_FRAME"
+      ]
+    },
+    {
+      "id": "M",
+      "must_not_own": [
+        "G1",
+        "G2"
+      ],
+      "name": "mutable_memory_subject",
+      "owns": [
+        "G3"
+      ],
+      "requires": [
+        "VERSION_STORE",
+        "ACTIVE_ARCHIVE"
+      ]
+    }
+  ]
+}

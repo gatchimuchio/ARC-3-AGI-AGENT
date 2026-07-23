@@ -1,0 +1,29 @@
+{
+  "artifact_count": 5,
+  "artifact_digests": {
+    "agi_conformance_report.md": "e08aa8029f6e824a09e7661bd7bfa384a7f13edf36291cafb57f7f9296703e87",
+    "agi_obligation_graph.json": "a897a9079832a86762382e9a7c24ae520ed68ea7717c5a5afcd53429ad11cb7f",
+    "agi_removal_witnesses.json": "4e2de0ac279be2be0942c21c6f39754d33476b3de7815bdd13931d4657cfe3d8",
+    "agi_subset_enumeration.json": "c35ef67e246022acdedec8d414e699cecf4b5a3e856b856ee9d8af7abf69c7fb"
+  },
+  "artifact_type": "agi_minimum_three_certificate",
+  "audit_digest": "6885c1c0a64471a656e5a557a6344d1287d3bcdb3eff7df3b1650921559fbc4f",
+  "conclusion": "C, J, and M or their functional equivalents are jointly necessary under the defined G1-G5 class; only the full set passes",
+  "content_digest": "dd40f060b663ef7066c1e25fc41edc5aa2f4c6e678c3d5a61a139df0d8671425",
+  "definition_scope": "functional-obligations-G1-through-G5",
+  "full_set_pass": true,
+  "functional_equivalent_leak_count": 0,
+  "non_claims": [
+    "unknown-task generalization",
+    "all-sample completion",
+    "official evaluation performance"
+  ],
+  "pair_subset_fail_count": 3,
+  "proper_subset_fail_count": 7,
+  "proper_subset_pass_count": 0,
+  "schema_version": "1.0.0",
+  "single_removal_fail_count": 3,
+  "subject_count": 3,
+  "subset_count": 8,
+  "two_cycle_causality_pass": true
+}
