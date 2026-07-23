@@ -1,11 +1,32 @@
-# P1 Sample Execution Kernel 実装境界
+# P1 Sample Execution Mechanism 実装境界
 
-- phase: `P1_SAMPLE_EXECUTION_KERNEL`
+- phase: `P1_SAMPLE_EXECUTION_MECHANISM`
 - state: complete / HDS judgment `PASS`
 - runtime scope: bundled official samples / offline / bounded
 - sample runner: `ARC-AGI-3-Agents/sample_main.py`
 - online / competition runner: not connected or changed
 - benchmark claim: none
+- Pure-LLM compute subject claim: **not closed because instruction body P is not yet independent**
+
+## 0. 再分類
+
+P1で完成したのは次である。
+
+```text
+Layer-0 execution mechanism
++ HDS / Memory authority loop
++ OFFLINE sample action / re-observation path
+```
+
+P1では、現行 `roles.py` の固定規則を使用して仮説・候補を生成している。Layer-0が参照・選択・合成して実行する独立命令形保持体 `P` はまだ存在しない。
+
+したがって、P1は次を証明していない。
+
+```text
+C = Execute(L0, P)
+```
+
+命令形保持体Pの形成・接続は `P2_INSTRUCTION_BODY_FORMATION.md` の対象である。
 
 ## Work contract
 
@@ -18,7 +39,7 @@ X:
 
 R:
   symbolization -> bounded context
-  HDS command -> Pure-LLM hypotheses/candidates
+  HDS command -> provisional embedded-rule computation
   fitting -> W=(X,R,Mc)
   HDS judgment -> authorized OFFLINE step
   rendered result -> HDS observation / verifier
@@ -40,6 +61,8 @@ Mc:
 
 非目的:
 
+- 命令形保持体Pの完成
+- Pure-LLM計算主体全体の完成
 - 保持済みsampleの全level攻略
 - 既存HTTP / online runnerのaction-selection変更
 - 公式ARC API / `OperationMode.COMPETITION`
@@ -55,12 +78,14 @@ Mc:
 |---|---|---|
 | `SYMBOL_SPACE` | `DeterministicSymbolSpace.encode` | `ObservationIR` |
 | `CONTEXT_STATE` | `BoundedContextState.ingest/condition/record_emission` | `ContextSnapshot` |
-| `TRANSFORM_OR_WORLD_MODEL` | `DeterministicWorldModel.transform` | competing `HypothesisIR` |
-| `CANDIDATE_SURFACE` | `DeterministicCandidateSurface.generate` | action/probe/reobserve/SUSPEND/STOP/rollback/plan |
+| `TRANSFORM_OR_WORLD_MODEL` | `DeterministicWorldModel.transform` | provisional competing `HypothesisIR` |
+| `CANDIDATE_SURFACE` | `DeterministicCandidateSurface.generate` | provisional action/probe/control candidates |
 | `FITTING_OR_SUCCESS_CRITERION` | `DeterministicSuccessCriterion.evaluate` | `ClosureIR` with `X/R/Mc` |
-| `EMISSION_INTERFACE` | `InMemoryEmissionInterface.emit` / `OfflineArcadeEmissionInterface.emit` | authorized `EmissionResult` / rendered sample result |
+| `EMISSION_INTERFACE` | `InMemoryEmissionInterface.emit` / `OfflineArcadeEmissionInterface.emit` | authorized result / rendered sample result |
 
-Fittingは次の軸を各action候補へ記録します。
+`TRANSFORM_OR_WORLD_MODEL`と`CANDIDATE_SURFACE`はP1では機構と固定seed情報が混在している。P2でmechanismとinstruction bodyを分離する。
+
+Fittingは次の軸を各action候補へ記録する。
 
 ```text
 progress
@@ -79,18 +104,17 @@ action budget
 
 ```text
 HDS issues a single-use compute capability
-  -> Pure-LLM computes hypotheses and candidates
+  -> Layer-0 mechanism executes provisional embedded rules
   -> fitting constructs closure proposals
   -> HDS accepts, rejects, suspends, or stops
-  -> Pure-LLM executes only HDS directives
+  -> execution surface performs only HDS directives
   -> passive memory and emission boundary apply authorized operations
   -> HDS observes the result
 ```
 
-HDS does not mutate memory or invoke the environment adapter directly.
-Memory exposes no autonomous compute/update path.
-Pure-LLM execution calls the OFFLINE adapter only with a capability-backed HDS
-directive. The sample agent's direct action methods always reject.
+HDS does not mutate memory or invoke the environment adapter directly。
+Memory exposes no autonomous compute/update path。
+Execution calls the OFFLINE adapter only with a capability-backed HDS directive。The sample agent's direct action methods always reject。
 
 ## Required trace
 
@@ -101,7 +125,7 @@ FRAME / SYMBOL_SPACE
 CONTEXT_STATE update
 passive memory read
 HDS compute command
-Pure-LLM hypothesis/candidate proposal
+provisional hypothesis/candidate proposal
 FITTING closure proposal
 HDS decision / closure revalidation
 authorized OFFLINE environment step
@@ -122,51 +146,60 @@ REFRAME, SUSPEND, REJECT, or STOP
 | `FITTING_OR_SUCCESS_CRITERION` | `FITTING_OR_SUCCESS_CRITERION_REMOVED_NO_CLOSURE_BASIS` |
 | `EMISSION_INTERFACE` | `EMISSION_INTERFACE_REMOVED_NO_AUTHORIZED_BOUNDARY` |
 
-`run_required_removal_audit` replaces the actual callable dependency with
-`None`. It does not remove a role label from metadata. A missing callable or
-invalid output is separately rejected as a nonfunctional implementation.
+`run_required_removal_audit` replaces the actual callable dependency with `None`。It does not remove a role label from metadata。A missing callable or invalid output is separately rejected as a nonfunctional implementation。
+
+P removal witnessはP2で追加する。
+
+```text
+INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
+```
 
 ## Closed in P1
 
-- one independent HDS-controlled cycle
-- multiple competing hypotheses and candidate modes
+- one independent HDS-controlled execution cycle
+- multiple provisional hypotheses and candidate modes
 - conservative `SUSPEND`, hazard veto, and STOP terminality
-- candidate ID, closure signature, action availability, and HDS permission gates
+- candidate ID、closure signature、action availability、HDS permission gates
 - HDS-authorized passive-memory mutation
-- authority labelsだけでは通らないHDS capability検証
-- HDS側でclosure field、fit score、hazard、terminal、budget、actionを再検証
-- identity-key rejection across snake_case, camelCase, and PascalCase
-- deterministic candidate order, closure, digest, and trace
+- capability-backed HDS authorization
+- HDS-side closure revalidation
+- identity-key rejection across common naming forms
+- deterministic candidate order、closure、digest、trace
 - full-set and six single-role removal audit
-- bundled sample observationをtask identity-free IRへ変換
-- `OperationMode.OFFLINE`以外のP1起動を事前拒否
-- modeラベルだけでなく`LocalEnvironmentWrapper`実体を要求
-- HDS承認済みactionだけをlocal sample `step`へ放出
-- ACTION6座標を現在frame寸法から動的に生成
-- actual rendered effectsをcontextへ格納
-- action後の再観測と次HDS判断
-- 保持済み25ゲームすべての1-action / no-network smoke
-- optional frame recordingとtrace / decision digestを含むJSON report
-- current `arcengine` / `Arcade` APIに整合したrepository-wide unit harness
-- optional agent dependencyを選択時まで読み込まないlazy import boundary
-- `agents`と`arc3_agi_agent`を明示的に含むinstallable package
+- bundled sample observation to identity-free IR
+- `OperationMode.OFFLINE` fixed
+- `LocalEnvironmentWrapper` requirement
+- HDS-authorized local sample `step`
+- dynamic ACTION6 coordinates from current frame dimensions
+- actual rendered effects into context
+- action-result re-observation and next HDS judgment
+- bundled 25-game one-action / no-network smoke
+- optional recording and JSON report
+- repository-wide unit harness
+- installable sample agent / runtime / adapter / CLI
 
 ## Not closed in P1
 
-- 全sample game / 全183 levelの攻略
-- GAME_OVER、timeout、無限loop、max-action停止の全解消
-- sample完全攻略の再現性・regression固定
+- independent executable instruction body `P`
+- P-A symbolic / rule graph body
+- P-B parametric / neural body
+- same-Layer-0 instruction-body swap
+- sample-derived rule compile / parameter training
+- P / M version and update-boundary separation
+- P removal audit
+- full sample game / all 183 level solving
+- GAME_OVER、timeout、infinite-loop、max-action resolution
+- complete-sample reproducibility / regression freeze
 - official API / competition connection
 - Kaggle Notebook / CLI / MCP / submission
 - environment rollback guarantee
-- multi-cycle stale-frame/version-conflict handling
 - persistent memory backend
 - benchmark re-establishment or score improvement
 - hidden-task generalization evidence
 
 ## Validation
 
-P1 completion gate:
+P1 regression gate:
 
 ```bash
 python -m compileall -q \
@@ -190,9 +223,6 @@ python ARC-AGI-3-Agents/sample_main.py \
   --all-samples \
   --max-actions 1
 
-# editable / wheel install後
-arc3-p1-samples --all-samples --max-actions 1
-
 ruff check \
   ARC-AGI-3-Agents/arc3_agi_agent \
   ARC-AGI-3-Agents/agents/__init__.py \
@@ -203,15 +233,6 @@ ruff check \
 git diff --check
 ```
 
-2026-07-23のsample接続監査では、保持済み25ゲームを各1 actionだけ実行し、
-25/25でHDS承認、OFFLINE step、再観測、context / memory更新、次HDS判断が
-成立しました。全25件のrendered transition判定は、level progressを未観測のため
-正規出力`SUSPEND`で、`FAIL`は0件です。integration testは
-`requests.Session.request`を強制失敗させ、network利用がないことを同時に
-検査します。
+2026-07-23のsample接続監査では、保持済み25ゲームを各1 actionだけ実行し、25/25でHDS承認、OFFLINE step、再観測、context / memory更新、次HDS判断が成立した。全25件のrendered transition判定は、level progress未観測のため正規出力`SUSPEND`で、`FAIL`は0件であった。
 
-この結果はP1経路の証拠であり、P2のlevel攻略数へ加算しません。同一差分の
-完了監査では、`unittest` 40件、`pytest` 96件（25-game integrationを含む）、
-compile、ruff、`git diff --check`、isolated wheel buildがすべて通過しました。
-wheelにはsample agent / runtime / adapter / CLIと`arc3-p1-samples` entry pointが
-含まれます。
+この結果はP1実行経路の証拠であり、Pure-LLM計算主体、P形成、sample攻略の証拠ではない。
