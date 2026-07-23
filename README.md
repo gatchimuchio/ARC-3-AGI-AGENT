@@ -37,20 +37,25 @@ ARC-AGI-3 の未知タスクに対して、次の閉ループを実行できる�
 ```text
 ARC-AGI-3-Agents/             公式エージェント基盤
   arc3_agi_agent/             新しい汎用コアの責任境界
+  README.md                   このrepo向けのP1 OFFLINE実行手順
+  UPSTREAM_README.md          公式基盤の原README（参照専用）
   sample_main.py              P1専用OFFLINE sample runner
   agents/templates/           HDS制御sample agent
   tests/unit/                 契約・IR・検証器の単体試験
   tests/integration/          保持済みsampleのOFFLINE境界試験
 environment_files/            公式環境資産。解析・再現用であり、実行時ルーティングには使用しない
 docs/
+  README.md                   文書索引と権威順序
   architecture/               現行アーキテクチャ正本
   roadmap/                    段階ゲート
   migration/                  旧資産の棚卸しと移植記録
-  references/                 参照仕様と引用位置
-AGI_Trinity_Blueprint_v0_1.md 上位設計資料
+  references/                 上位設計資料、参照仕様、引用位置
+vendor/wheels/                既存ベンダーwheel（実行時・設計上の正本ではない）
 ```
 
-ルート直下の wheel 群は現時点では既存のベンダー資産です。依存管理へ再統合するまでは、設計正本・実行時入力・ソースコードとして扱いません。
+ベンダーwheelの扱いは
+[`vendor/wheels/README.md`](vendor/wheels/README.md) に固定しています。依存関係の
+正本は `ARC-AGI-3-Agents/pyproject.toml` と `uv.lock` です。
 
 ## 基盤とP1 sample実行kernel
 
@@ -76,7 +81,7 @@ AGI_Trinity_Blueprint_v0_1.md 上位設計資料
 action-selection pathは変更していません。
 
 P1の閉包範囲と未実装範囲は
-[`docs/architecture/P1_EXECUTABLE_KERNEL.md`](docs/architecture/P1_EXECUTABLE_KERNEL.md)
+[`docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md`](docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md)
 に固定しています。
 
 ## 設計上の固定境界
@@ -120,6 +125,13 @@ leaderboard scoreによる採否を禁止します。1-action smokeはP1の経�
 sample level攻略実績ではありません。
 
 [`docs/roadmap/ROADMAP.md`](docs/roadmap/ROADMAP.md) が現行ロードマップの正本です。
+
+## Git運用
+
+本リポジトリはローカル・リモートとも `main` だけを継続利用します。ユーザーが
+明示的に方針を変更しない限り、作業branchやPRは作成せず、検証済みの限定差分を
+`main`へ直接commit / pushします。詳細な安全境界は [`AGENTS.md`](AGENTS.md) を
+参照してください。
 
 ## 参照と来歴
 

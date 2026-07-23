@@ -90,7 +90,18 @@ FITTING_OR_SUCCESS_CRITERION
 EMISSION_INTERFACE
 ```
 
-## 4. 引用規則
+## 4. リポジトリ内の上位参照資料
+
+- [`AGI_Trinity_Blueprint_v0_1.md`](AGI_Trinity_Blueprint_v0_1.md)
+  - Pure-LLM計算主体、HDS判断主体、記憶更新保持主体の分離
+- [`HDS_FRAMEWORK_rev3_1a_INTERNAL.md`](HDS_FRAMEWORK_rev3_1a_INTERNAL.md)
+  - HDS判断・停止・保留・更新境界の内部参照仕様
+
+これらはアーキテクチャ上の参照資料です。現在フェーズ、実行許可、Git操作、
+検証結果は、現在のユーザー指示、root `AGENTS.md`、現行architecture / roadmap、
+実行証拠を優先します。
+
+## 5. 引用規則
 
 - 参照commitを固定する
 - source-derived factと新repoでの設計判断を分ける

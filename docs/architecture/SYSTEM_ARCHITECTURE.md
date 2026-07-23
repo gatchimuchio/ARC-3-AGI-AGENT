@@ -242,4 +242,4 @@ P1では、この基盤上に次を追加済みです。
 P2の完了条件であり、P1の成功数へ混同しません。
 
 P1の実装境界、固定failure witness、OFFLINE接続範囲は
-[`P1_EXECUTABLE_KERNEL.md`](P1_EXECUTABLE_KERNEL.md)を正本とします。
+[`P1_SAMPLE_EXECUTION_KERNEL.md`](P1_SAMPLE_EXECUTION_KERNEL.md)を正本とします。

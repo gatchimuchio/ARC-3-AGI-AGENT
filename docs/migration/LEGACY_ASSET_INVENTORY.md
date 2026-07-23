@@ -111,13 +111,13 @@ Quarantine資産は、新実装とのA/B比較や失敗署名抽出には利用�
 
 ### wheel群
 
-ルート直下のwheel群はベンダー資産として `HOLD` します。
+旧ルート直下の31 wheelは `vendor/wheels/` へ内容変更なしで再配置し、
+`RELOCATED_NON_AUTHORITATIVE` とします。
 
-理由:
-
-- binary moveは内容同一性と依存lockの監査が必要
-- 現PRの目的はアーキテクチャ基盤であり、依存物再配置を混ぜない
-- 将来、`vendor/wheels/` または外部artifact管理へ移す別PRを作る
+- binary blob IDを移動前後で照合する
+- 依存関係の正本は `ARC-AGI-3-Agents/pyproject.toml` と `uv.lock`
+- wheelは設計正本、solver入力、runtime routing情報として使用しない
+- 更新・削除は依存lockと取得元・hashを同時監査する別work blockで行う
 
 ## 8. 次回移植候補
 

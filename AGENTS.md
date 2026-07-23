@@ -195,7 +195,11 @@ python sample_main.py --all-samples --max-actions 1
 
 ## 9. Git境界
 
+- ローカル・リモートの継続branchは`main`だけとする
+- ユーザーが明示的に方針を変更しない限り、作業branchとPRを作成しない
+- branch操作やpushの前に`origin/main`を取得し、local/remote差分を確認する
+- 関連gateを通し、ユーザーがcommit / pushを許可した場合だけ`main`へ直接反映する
+- main-only運用を、無関係な変更の混入や検証省略の理由にしない
 - 無関係な既存変更をstage・削除・整形しない
 - `reset --hard`、`clean -fd`、force pushを行わない
-- 1 PRは1つの段階目的に限定する
-- migration PRでは旧runtimeの機能追加やscore調整を混ぜない
+- migration整理では旧runtimeの機能追加やscore調整を混ぜない
