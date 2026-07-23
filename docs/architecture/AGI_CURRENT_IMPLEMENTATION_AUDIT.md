@@ -183,3 +183,23 @@ P2はruntime capabilityを増やすphaseではなく、未実装と証拠境界�
 - `test_agi_minimum_three_audit.py`: accountingと過剰claim禁止を実行検証
 
 上記validatorがPASSした時点で、HDS判断は`PASS`、次phaseは`P3_ARC3_EVIDENCE_MATERIAL_COMPILER`とする。
+
+## 7. P3 disposition
+
+P3完了時点で`F-P2-007`のうち、次を是正した。
+
+- 730/730 source accounting、parse error 0
+- identity-free observation/transition/effect/hazard/progress/contradiction corpus
+- C/J/M fixture分離
+- source/record双方向provenance
+- family/structure/action-mechanism holdout
+- runtime identity/source filename漏洩0
+- fixed seedによる全12生成物のbyte再現
+
+実装・証拠は
+[`P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md`](P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md)
+を正本とする。
+
+`F-P2-007`全体をCLOSEDとはしない。versioned P0/J0/M0を形成するlearning compilerは
+P4/P5/P6/P11へ残るため、machine statusは`PARTIAL`である。P3 HDS判断は`PASS`、
+次phaseは`P4_COMPUTE_SUBJECT_C`とする。

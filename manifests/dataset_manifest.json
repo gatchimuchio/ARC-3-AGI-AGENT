@@ -1,0 +1,53 @@
+{
+  "category_counts": {
+    "contradictions": 466,
+    "effects": 638,
+    "hazards": 583,
+    "hds_frames": 676,
+    "memory_lifecycles": 687,
+    "observations": 653,
+    "progress": 663,
+    "transitions": 681
+  },
+  "compiler_seed": 0,
+  "compiler_version": "arc3-evidence-compiler-v1",
+  "fixture_sets": {
+    "C": [
+      "observations",
+      "transitions",
+      "effects",
+      "hazards",
+      "progress",
+      "contradictions"
+    ],
+    "J": [
+      "hds_frames"
+    ],
+    "M": [
+      "memory_lifecycles"
+    ]
+  },
+  "output_hashes": {
+    "datasets/contradictions/records.jsonl": "d6fffe6f89c70f10d5055d215389b92d1d33104994d0a8b632526a7d463f4732",
+    "datasets/effects/records.jsonl": "914df7a0938bed1f710c89e9ee3693f240536583ae1d00714ba847230cefe552",
+    "datasets/hazards/records.jsonl": "3f51f78766c8e1662515c5f6e792028a4453678918f90ce244539ef4c8507e34",
+    "datasets/hds_frames/records.jsonl": "fa89d0f33fdca9197baeb1f5297fdba0fd7e2f7dc4f8765673859302d02bfcd5",
+    "datasets/holdout_families/manifest.json": "fb32cf6e1847b36f1a310783ecf6535dbb3f3340c42c406d08562e11eab1fbfd",
+    "datasets/memory_lifecycles/records.jsonl": "2f1e43e40d31ab47d9f15133094e8c0c3ec7d8acb62aa986c4c63aad52d45573",
+    "datasets/observations/records.jsonl": "28d1afec0e343cda2b403316c17e3254e7b78cc30379b24540f731678dbfd82f",
+    "datasets/progress/records.jsonl": "b0a994f983863b02bd62dec3212bc80db1a14a3139207658212ada88b83659b7",
+    "datasets/transitions/records.jsonl": "42cd7a204921ffd58beefa157675836adf57e7088de1ff79eb6ec3336dc6dbe4",
+    "manifests/identity_free_audit.json": "c693a18e5e8d1b024437ae9291d8cf14fe96387face2ad59c1be6fa17b6e7478"
+  },
+  "provenance_runtime_use": "FORBIDDEN",
+  "runtime_identity_free": true,
+  "runtime_record_count": 5047,
+  "schema_version": "arc3-evidence-dataset-manifest-v1",
+  "source_accounted_count": 730,
+  "source_file_count": 730,
+  "source_inventory_digest": "7f3afe283d53d6cc6d1486bdd5ef407cb2fb193d41cabd155c09189bca9192a7",
+  "source_materialized_count": 705,
+  "source_no_runtime_material_count": 25,
+  "source_parse_error_count": 0,
+  "source_revision": "96f3d2deebc7c05c07e7c817f131a2a5136f5822+working-tree-content-manifest"
+}

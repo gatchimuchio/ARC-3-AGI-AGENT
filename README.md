@@ -9,7 +9,8 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - P0: `RESTART_FOUNDATION` — 完了
 - P1: `SAMPLE_EXECUTION_MECHANISM` — 完了
 - P2: `AGI_MINIMUM_THREE_AUDIT` — 完了
-- 現在フェーズ: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
+- P3: `ARC3_EVIDENCE_MATERIAL_COMPILER` — 完了
+- 現在フェーズ: `P4_COMPUTE_SUBJECT_C`
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -60,7 +61,7 @@ ARC-AGI-3 の未知タスクに対して、次の閉ループを実行できる�
 
 ```text
 ARC-AGI-3-Agents/
-  arc3_agi_agent/             Layer-0 / HDS / M / sample runtime
+  arc3_agi_agent/             Layer-0 / HDS / M / sample runtime / evidence compiler
   README.md                   OFFLINE実行手順
   UPSTREAM_README.md          公式基盤の原README（参照専用）
   sample_main.py              OFFLINE sample runner
@@ -68,6 +69,8 @@ ARC-AGI-3-Agents/
   tests/unit/                 契約・IR・機構の単体試験
   tests/integration/          sample OFFLINE境界試験
 environment_files/            公式環境資産。runtime答え選択には使用しない
+datasets/                     P3 identity-free C/J/M fixture
+manifests/                    P3 dataset/provenance/identity audit
 docs/
   architecture/
     AGI_MINIMUM_THREE_SPEC.md
@@ -78,6 +81,7 @@ docs/
     AGI_CURRENT_IMPLEMENTATION_AUDIT.md
     SYSTEM_ARCHITECTURE.md
     P1_SAMPLE_EXECUTION_KERNEL.md
+    P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md
     P4_COMPUTE_SUBJECT_IMPLEMENTATION.md
   roadmap/ROADMAP.md
   migration/
@@ -108,7 +112,7 @@ vendor/wheels/                既存ベンダーwheel
 
 P1の閉包範囲は [`docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md`](docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md) に固定しています。
 
-## P2根本監査とP3の現在作業
+## P2根本監査・P3実証素材とP4の現在作業
 
 P2ではG1〜G5、C/J/M、L0/P、environment、compiler、P0/J0/M0、
 全8部分集合を一対一で監査し、未実装を完成扱いしないclaim/test境界を固定しました。
@@ -117,13 +121,17 @@ P2ではG1〜G5、C/J/M、L0/P、environment、compiler、P0/J0/M0、
 - [`現行実装根本監査`](docs/architecture/AGI_CURRENT_IMPLEMENTATION_AUDIT.md)
 - [`義務graph`](docs/architecture/AGI_OBLIGATION_GRAPH.json)
 
-現在のP3では、ARC3解析証拠とrendered sample trajectoryを、identity-freeな
+P3では730/730 sourceをaccountingし、5,047件のidentity-free
 observation / transition / effect / hazard / progress / contradiction corpus、
-HDS Frame fixture、memory lifecycle fixtureへ変換します。
+HDS Frame fixture、memory lifecycle fixtureへ変換しました。source identity漏洩は
+0件、全12生成物の再buildはbyte一致です。完了証拠は
+[`P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md`](docs/architecture/P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md)
+に固定しています。
 
-P-A/P-BとCの実装仕様は
+現在のP4では、このfixtureをruntime identity-free境界内で使用し、P-A/P-Bと
+standalone Cを実装します。実装仕様は
 [`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md)
-へ再分類しています。
+です。
 
 ## 設計上の固定境界
 
@@ -155,8 +163,8 @@ python sample_main.py --all-samples --max-actions 1
 1. P0: 再起動基盤 — 完了
 2. P1: Layer-0実行機構・OFFLINE sample経路 — 完了
 3. P2: AGI最小三構成仕様・根本監査 — 完了
-4. P3: ARC3実証素材compiler — 現在
-5. P4: 計算主体C
+4. P3: ARC3実証素材compiler — 完了
+5. P4: 計算主体C — 現在
 6. P5: 判断主体J
 7. P6: 記憶主体M
 8. P7: 二主体接続監査

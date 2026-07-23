@@ -1,7 +1,8 @@
 {
-  "schema_version": "1.0.0",
+  "schema_version": "1.1.0",
   "artifact_type": "agi_minimum_three_obligation_graph",
-  "phase": "P2_AGI_MINIMUM_THREE_AUDIT",
+  "phase": "P4_COMPUTE_SUBJECT_C",
+  "last_completed_phase": "P3_ARC3_EVIDENCE_MATERIAL_COMPILER",
   "normative_roadmap": "docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md",
   "subjects": [
     {
@@ -98,7 +99,7 @@
     {"id": "J", "current_status": "PARTIAL", "next_phase": "P5"},
     {"id": "M", "current_status": "PARTIAL", "next_phase": "P6"},
     {"id": "ENVIRONMENT_BOUNDARY", "current_status": "SUPPORTED", "next_phase": "P10"},
-    {"id": "LEARNING_COMPILER", "current_status": "UNSUPPORTED", "next_phase": "P3"},
+    {"id": "LEARNING_COMPILER", "current_status": "PARTIAL", "next_phase": "P4"},
     {"id": "P0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
     {"id": "J0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
     {"id": "M0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
@@ -143,6 +144,7 @@
   "current_claims": [
     {"id": "CLAIM_P0_FOUNDATION", "status": "SUPPORTED", "primary_test": "tests/unit/test_arc3_agi_foundation.py"},
     {"id": "CLAIM_P1_EXECUTION_MECHANISM", "status": "SUPPORTED", "primary_test": "tests/integration/test_offline_sample_runner.py"},
+    {"id": "CLAIM_P3_EVIDENCE_COMPILER", "status": "SUPPORTED", "primary_test": "tests/unit/test_p3_evidence_dataset.py"},
     {"id": "CLAIM_C_COMPLETE", "status": "UNSUPPORTED", "primary_test": null},
     {"id": "CLAIM_J_STANDALONE", "status": "UNSUPPORTED", "primary_test": null},
     {"id": "CLAIM_M_STANDALONE", "status": "UNSUPPORTED", "primary_test": null},

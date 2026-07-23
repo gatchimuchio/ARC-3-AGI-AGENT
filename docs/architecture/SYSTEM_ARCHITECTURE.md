@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
-- 版: `v0.4-minimum-three-audit`
-- 状態: `P2_AGI_MINIMUM_THREE_AUDIT` complete / `P3_ARC3_EVIDENCE_MATERIAL_COMPILER` current
+- 版: `v0.5-evidence-material`
+- 状態: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER` complete / `P4_COMPUTE_SUBJECT_C` current
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -390,8 +390,8 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P0: 基盤・契約 — 完了
 - P1: Layer-0実行機構・OFFLINE経路 — 完了・再分類
 - P2: AGI最小三構成仕様・根本監査 — 完了
-- P3: ARC3実証素材compiler — 現在
-- P4: 計算主体C・P-A/P-B
+- P3: ARC3実証素材compiler — 完了
+- P4: 計算主体C・P-A/P-B — 現在
 - P5: 判断主体J
 - P6: 記憶主体M
 - P7: 二主体接続監査

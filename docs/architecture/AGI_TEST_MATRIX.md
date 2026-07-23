@@ -1,7 +1,11 @@
 # AGI最小三構成 Test Matrix
 
-- phase: `P2_AGI_MINIMUM_THREE_AUDIT`
-- current executable gate: `test_agi_minimum_three_audit.py`
+- current phase: `P4_COMPUTE_SUBJECT_C`
+- last completed phase: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
+- current executable regression gates:
+  `test_agi_minimum_three_audit.py`,
+  `test_evidence_compiler.py`,
+  `test_p3_evidence_dataset.py`
 
 ## 現行証拠
 
@@ -13,13 +17,14 @@
 | `T-P1-M-PASSIVE` | `CLAIM_M_PASSIVE_PATH` | unauthorized/payload/single-use memory tests | HDS許可なしのmutationが不能 | 実装済み |
 | `T-P1-OFFLINE` | `CLAIM_OFFLINE_ENVIRONMENT_BOUNDARY` | integration + sample runtime tests | OFFLINE限定、no-network、結果再観測 | 実装済み |
 | `T-P2-AUDIT-GRAPH` | `CLAIM_P2_ROOT_AUDIT` | `test_agi_minimum_three_audit.py` | G1〜G5、全要素、全8 subset、claim証拠がaccountingされる | 本phaseで追加 |
+| `T-P3-DATASET-ACCOUNTING` | `CLAIM_P3_EVIDENCE_COMPILER` | `test_p3_evidence_dataset.py` | 730/730 source、parse error 0、provenance往復、C/J/M fixture分離 | 実装・実行済み |
+| `T-P3-HOLDOUT-CONTAMINATION` | `CLAIM_P3_EVIDENCE_COMPILER` | `test_p3_evidence_dataset.py` | family/structure/action-mechanism groupが単一splitだけへ属する | 実装・実行済み |
+| `T-P3-COMPILER-DETERMINISM` | `CLAIM_P3_EVIDENCE_COMPILER` | `test_evidence_compiler.py` + full rebuild | seed 0で全12出力がbyte一致 | 実装・実行済み |
 
 ## 後続phaseの固定試験
 
 | Test ID | Primary claim | Phase | 必須反証条件 |
 |---|---|---|---|
-| `T-P3-DATASET-ACCOUNTING` | identity-free evidence corpus | P3 | source recordの欠落、重複、provenance断絶でFAIL |
-| `T-P3-HOLDOUT-CONTAMINATION` | holdout分離 | P3 | 同一source/trajectory familyのtrain/holdout混入でFAIL |
 | `T-P4-P-SCHEMA` | `CLAIM_P_IMPLEMENTED` | P4 | schema/version/digest/provenance/identity違反で拒否 |
 | `T-P4-P-SWAP` | P-A/P-B交換 | P4 | L0変更、同一結果、authority変化でFAIL |
 | `T-P4-C-STANDALONE` | `CLAIM_C_COMPLETE` | P4 | J/M呼出し、採否、write、emitがあればFAIL |

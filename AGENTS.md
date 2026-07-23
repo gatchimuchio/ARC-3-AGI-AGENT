@@ -20,12 +20,12 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P3_ARC3_EVIDENCE_MATERIAL_COMPILER` です。
+現在は `P4_COMPUTE_SUBJECT_C` です。
 
-`P2_AGI_MINIMUM_THREE_AUDIT` は完了しています。P2で完成したのは仕様、
-義務graph、traceability、claim/test registry、現行実装gapのaccountingです。
-P2はruntime能力、命令形保持体P、C/J/M単独成立、最小三構成を完成させて
-いません。
+`P3_ARC3_EVIDENCE_MATERIAL_COMPILER` は完了しています。P3で完成したのは
+730 sourceのaccounting、identity-free C/J/M fixture、provenance、holdout、
+deterministic rebuildです。P3は命令形保持体P、C/J/M単独成立、最小三構成を
+完成させていません。
 
 現行分類は次です。
 
@@ -43,38 +43,48 @@ P2 complete:
   obligation / claim / test / traceability audit
   implementation gaps and absolute order
 
-P3 current:
+P3 complete:
   analysis evidence accounting
   identity-free normalized corpus
   C / J / M fixture separation
   provenance and holdout manifests
+
+P4 current:
+  P-A symbolic / rule-graph instruction body
+  P-B learned-parameter instruction body
+  common instruction-body contract and swap
+  standalone compute subject C
+  L0 six-responsibility plus P removal audit
 ```
 
-### P3で許可される作業
+### P4で許可される作業
 
-- 旧ARC3解析証拠の読取り専用inventory
-- current official sampleのrendered trajectory収集
-- observation / transition / effect / hazard / progress / contradiction正規化
-- HDS Frame fixture生成
-- memory lifecycle fixture生成
-- source identityを証拠層だけに保持するprovenance manifest
-- runtime corpusからidentity、replay、answer、literal、hidden-state情報を除去する水平引き算
-- game family / structure family / action-mechanism holdout
-- dataset accounting、determinism、identity-free、contamination試験
+- P-Aの記号・規則graph、検索、合成、状態条件付け、候補素材生成
+- P-Bの実データ学習、parameter artifact、inference adapter
+- P-A/P-B共通schema、version、digest、provenance、identity-free検査
+- Layer-0から共通interfaceだけを介したP-A/P-B交換
+- C単独の仮説、反対仮説、予測、候補、memory/output proposal生成
+- Cが採否、memory確定、external emitを行えないnegative test
+- L0六責任とPそれぞれのsingle-removal witness
+- P3 runtime corpusだけを使用する学習・fixture入力
 
-### P3で禁止される作業
+### P4で禁止される作業
 
-- P-A/P-BまたはC/J/Mを完成扱いすること
+- provenance manifest、source path、game/task/level identityをruntimeへ渡すこと
+- `roles.py`固定規則をPの機能等価fallbackとして残すこと
+- Cに最終採否、SUSPEND/STOP、rollback許可、memory確定、external emitを行わせること
+- standalone J/M、pair、Trinity、minimum certificateを完了扱いすること
 - 全sample game / 全level攻略
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
-- 旧`analysis/`または旧runtimeの一括コピー
 - task/game/level ID、replay、固定action列、answer map、literal座標をruntime fixtureへ残すこと
 - source / hidden stateをruntime計算素材へ残すこと
 - scoreを根拠にした局所最適化
 - 「AGI完成」「最小三構成証明済み」「汎化済み」といった未検証主張
 
-P3の正本は新ロードマップのP3節と、P2監査成果物のdependency chainです。
+P4の正本は新ロードマップのP4節、
+`docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`、
+P3 runtime dataset、P2 obligation/test matrixです。
 
 ## 3. 1 work blockの必須契約
 
@@ -100,9 +110,10 @@ Mc  : 同一性、境界、採否、停止、rollback、完了条件
 - 次工程へ進む条件
 
 文書追加だけでruntime能力が変わらない場合は実装前進と記録しません。
-ただしP2は明示的な仕様・根本監査phaseであり、機械検証可能なaccountingを
-成果とします。P3では、manifestにaccountingされた再生成可能なdatasetと
-fixtureが実際に生成されることを要求します。
+ただしP2は明示的な仕様・根本監査phase、P3は実証素材compiler phaseであり、
+それぞれ機械検証可能なaccountingと再生成可能datasetを成果とします。P4では
+文書やfixture追加だけでなく、共通interfaceで交換可能なP-A/P-BとC standalone
+runtimeが実際に動作することを要求します。
 
 ## 4. 最小構成と非対称権限
 
@@ -210,14 +221,14 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - 未実装・過剰claim・実装順序をaccounting
 - validatorが全監査成果物と8 subset期待値を検証
 
-### P3: ARC3 Evidence Material Compiler — 現在
+### P3: ARC3 Evidence Material Compiler — 完了
 
 - 全解析証拠をmanifestでaccounting
 - identity-free observation/transition/effect/hazard/progress/contradiction corpus
 - C/J/M fixture分離
 - provenanceとholdout contamination検査
 
-### P4: Compute Subject C
+### P4: Compute Subject C — 現在
 
 - P-A記号規則graph、P-B実学習parameter body
 - 同一L0でのswap、Pなしcompute拒否
@@ -292,7 +303,7 @@ P2 audit:
 python -m pytest -q tests/unit/test_agi_minimum_three_audit.py
 ```
 
-P3では次を追加する。
+P3回帰では次を追加する。
 
 - source evidence accounting
 - deterministic compiler rerun
@@ -300,6 +311,14 @@ P3では次を追加する。
 - runtime identity-free audit
 - C/J/M fixture separation
 - family/mechanism holdout contamination audit
+
+P4では次を追加する。
+
+- P schema/version/digest/provenance/identity gate
+- P-A/P-B実データ形成と共通interface swap
+- C standalone G1
+- C authority negative test
+- L0六責任+P removal audit
 
 P4以降の固定test IDと反証条件は
 `docs/architecture/AGI_TEST_MATRIX.md`を正本とする。

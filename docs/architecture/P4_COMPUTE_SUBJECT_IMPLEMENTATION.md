@@ -1,8 +1,9 @@
 # P4 計算主体C・命令形保持体P 実装指示書
 
 - phase: `P4_COMPUTE_SUBJECT_IMPLEMENTATION`
-- state: blocked until P3 evidence compiler completes
+- state: `CURRENT`
 - predecessor: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
+- predecessor gate: `PASS`
 - runtime scope: bundled official ARC-AGI-3 samples / `OperationMode.OFFLINE`
 - official / competition connection: prohibited until later phase
 - benchmark claim: none

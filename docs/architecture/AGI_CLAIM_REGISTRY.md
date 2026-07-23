@@ -1,6 +1,7 @@
 # AGI最小三構成 Claim Registry
 
-- phase: `P2_AGI_MINIMUM_THREE_AUDIT`
+- current phase: `P4_COMPUTE_SUBJECT_C`
+- last completed phase: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
 - rule: 実装path、実行test、除去証人が揃わないclaimを`SUPPORTED`にしない
 
 | Claim ID | 主張 | 状態 | primary evidence | 反証・不足 | 次phase |
@@ -12,6 +13,7 @@
 | `CLAIM_OFFLINE_ENVIRONMENT_BOUNDARY` | non-OFFLINE、未承認step、network経路を拒否する | `SUPPORTED` | `test_offline_sample_runner.py`, `test_offline_sample_runtime.py` | 全level攻略を含まない | P10 |
 | `CLAIM_M_PASSIVE_PATH` | 未承認mutationを拒否し、承認済みADD-like更新を保持する | `SUPPORTED` | `test_memory_is_passive_and_rejects_unapproved_write` | full G3ではない | P6 |
 | `CLAIM_P2_ROOT_AUDIT` | 全設計要素、claim、test、gap、順序がaccountingされる | `SUPPORTED` | `test_agi_minimum_three_audit.py` | runtime能力増加のclaimではない | P3 |
+| `CLAIM_P3_EVIDENCE_COMPILER` | 全730 sourceをaccountingし、identity-free C/J/M fixture、provenance、holdoutを決定的に生成する | `SUPPORTED` | `test_evidence_compiler.py`, `test_p3_evidence_dataset.py` | P0/J0/M0、P-A/P-B、汎化性能は含まない | 回帰 |
 | `CLAIM_P_IMPLEMENTED` | executable instruction body Pが存在する | `UNSUPPORTED` | なし | interface、P-A、P-B、compilerがない | P4 |
 | `CLAIM_C_COMPLETE` | `C=Execute(L0,P)`がG1を単独で満たす | `UNSUPPORTED` | なし | P不在、counter-hypothesis/prediction/output proposal不足 | P4 |
 | `CLAIM_J_STANDALONE` | C/MなしでHDS FrameからG2を満たす | `UNSUPPORTED` | なし | standalone Frame API/fixture suiteなし | P5 |
@@ -21,7 +23,7 @@
 | `CLAIM_CAUSAL_ATTRIBUTION` | P-only/J-only/M-only変更の効果を個別帰属できる | `UNSUPPORTED` | なし | causal isolation harnessなし | P8 |
 | `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `UNSUPPORTED` | なし | executable subset certificateなし | P9 |
 | `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略する | `UNSUPPORTED` | なし | 現在は25 game各1 action経路だけ | P10 |
-| `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | なし | holdout corpus/metricsなし | P3/P10 |
+| `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | なし | holdout corpusはP3で生成済みだが、Cとholdout性能測定は未実装 | P4/P10 |
 | `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `UNSUPPORTED` | なし | release manifestとfull regressionなし | P11 |
 | `CLAIM_OFFICIAL_READY` | COMPETITION/Kaggleへ進める | `REJECTED` | なし | P9〜P11未完、current request外 | P12以降 |
 

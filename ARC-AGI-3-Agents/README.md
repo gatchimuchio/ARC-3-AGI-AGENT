@@ -1,8 +1,12 @@
-# ARC-AGI-3 Agents — P1 OFFLINE実行パッケージ
+# ARC-AGI-3 Agents — P1実行核 / P3証拠compilerパッケージ
 
 このディレクトリはARC-AGI-3公式agent基盤に、本リポジトリの
 P1 Layer-0 execution mechanismを統合した実行パッケージです。公式基盤の原READMEは
 [`UPSTREAM_README.md`](UPSTREAM_README.md) に参照用として保存しています。
+
+P3では`arc3_agi_agent.evidence_compiler`を追加し、730件の解析・metadata sourceから
+identity-freeなC/J/M fixtureを生成済みです。現在phaseはP4であり、P-A/P-Bと
+standalone Cはこの後に実装します。
 
 ## 現在の実行入口
 
@@ -23,6 +27,21 @@ arc3-p1-samples --all-samples --max-actions 1
 HDS承認、外部放出、再観測、context / passive memory更新、次判断までを検査します。
 独立した命令形保持体`P`は未接続であり、P4の計算主体形成やP10の攻略実績には
 加算しません。
+
+P3 compilerのinstalled entry point:
+
+```bash
+arc3-compile-evidence \
+  --analysis-dir /path/to/analysis \
+  --environment-dir ../environment_files \
+  --output-dir ../datasets \
+  --manifest-dir ../manifests \
+  --source-revision "<revision>+working-tree-content-manifest"
+```
+
+生成済みdatasetの境界と再現証拠は
+[`../docs/architecture/P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md`](../docs/architecture/P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md)
+を参照してください。
 
 ## 検証
 

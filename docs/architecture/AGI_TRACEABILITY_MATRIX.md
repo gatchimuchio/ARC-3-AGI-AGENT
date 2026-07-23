@@ -1,6 +1,7 @@
 # AGI最小三構成 Traceability Matrix
 
-- phase: `P2_AGI_MINIMUM_THREE_AUDIT`
+- current phase: `P4_COMPUTE_SUBJECT_C`
+- last completed phase: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
 - graph: `AGI_OBLIGATION_GRAPH.json`
 - status vocabulary: `SUPPORTED | PARTIAL | UNSUPPORTED | REJECTED`
 
@@ -16,7 +17,7 @@
 | `J` | HDS Frameを閉包し採否・停止・許可を決めるG2 owner | purpose/X/R/Mc/evidence/risk/budget → decision/directives | Jがdecision stateを所有・更新 | command、accept/reject、SUSPEND/STOP/rollback、write/emit許可 | `kernel.py::HDSController`; integrated cycleから呼出 | command/decision/directive攻撃試験、hazard veto、STOP試験 | Cがdecisionを作る、Mが許可する経路は禁止 | integrated authorityは`PARTIAL`; C/Mなしのstandalone Frame API未実装 |
 | `M` | 経験・現行根拠を改訂可能に保持するG3 owner | authorized operation + expected version + payload → new snapshot/version | Mがactive/archive/versionを所有。mutationはCがJ指令下で実行 | 自律mutation・判断・計算不可 | `memory.py::PassiveMemory` | unauthorized write拒否、single-use payload binding | Pをruntime Mとして更新、Jがstorageを持つことは禁止 | ADD/DELETE相当のみ。全操作、conflict、rollback、archive、query未実装で`PARTIAL` |
 | environment boundary | 主体外の観測・作用機構 | authorized action → rendered result | environmentが外部stateを所有 | 判断不可。HDS directiveなしstep不可 | `adapters/offline_arcade.py`, `sample_runtime.py` | integration no-network、forged directive、non-OFFLINE拒否 | direct `environment.step` fallback禁止 | P10までOFFLINE限定。現経路は`SUPPORTED` |
-| learning compiler | 解析/trace/Mからidentity-free P0/J0/M0を明示生成 | provenance-bearing evidence → versioned bundles | compiler outputが各初期状態を所有 | runtime自律実行不可。HDS採択対象 | 現行実装なし | P3でmanifest/reproducibility/identity-free/holdout試験 | raw logやruntime callbackをcompiler代行にしない | `UNSUPPORTED` |
+| learning compiler | 解析/trace/Mからidentity-free P0/J0/M0を明示生成 | provenance-bearing evidence → normalized fixtures、将来はversioned bundles | P3 datasetはcompilerが所有。P0/J0/M0は未形成 | runtime自律実行不可。provenanceはruntime使用禁止 | `evidence_compiler.py` → `datasets/`, `manifests/` | `test_evidence_compiler.py`, `test_p3_evidence_dataset.py`; 12-file byte rebuild | raw logやruntime callbackをcompiler代行にしない | evidence material段階は`PARTIAL`; P0/J0/M0 bundle形成はP4/P5/P6/P11 |
 | `P0` | 起動時の命令形保持体初期版 | compiled bundle → runtime P | P bundle | explicit version adoptionのみ | なし | P11でdigest rebuild試験 | code内seedをP0と呼ばない | `UNSUPPORTED` |
 | `J0` | 起動時purpose/boundary/stopping/rollback条件 | release bundle → initial HDS state | J | Jだけがdecisionを更新 | なし | P11でrebuild試験 | config labelだけでJ0としない | `UNSUPPORTED` |
 | `M0` | identity-free active/archive初期状態 | release bundle → initial memory snapshot | M | HDS承認済みmutationだけ | なし | P11でsnapshot/digest試験 | raw analysis identity混入禁止 | `UNSUPPORTED` |
@@ -52,7 +53,7 @@ OFFLINE rendered frame
 PureLLMCompute -> InstructionBody.query
 M revision -> later C/J behavioral delta
 J rollback authorization -> M rollback execution
-analysis evidence -> identity-free compiler -> P0/J0/M0
+identity-free P3 fixtures -> P-A/P-B/J/M implementation -> P0/J0/M0
 ```
 
 ## P3以降の確定順序
