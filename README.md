@@ -6,8 +6,10 @@ ARC Prize 2026 / ARC-AGI-3 向けの、**未知環境を観測し、仮説を更
 
 ## 現在の状態
 
-- フェーズ: `P1_EXECUTABLE_KERNEL`（完了、P2未開始）
-- 実装状態: 独立Layer-0 kernel、除去監査、repository-wide unit gateが`PASS`
+- フェーズ: `P1_SAMPLE_EXECUTION_KERNEL`（完了、P2未開始）
+- 実装状態: Layer-0 kernel、非対称Trinity、除去監査、OFFLINE sample agent
+- P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
+- transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
 - ベンチマーク状態: **未確定**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -35,7 +37,10 @@ ARC-AGI-3 の未知タスクに対して、次の閉ループを実行できる�
 ```text
 ARC-AGI-3-Agents/             公式エージェント基盤
   arc3_agi_agent/             新しい汎用コアの責任境界
+  sample_main.py              P1専用OFFLINE sample runner
+  agents/templates/           HDS制御sample agent
   tests/unit/                 契約・IR・検証器の単体試験
+  tests/integration/          保持済みsampleのOFFLINE境界試験
 environment_files/            公式環境資産。解析・再現用であり、実行時ルーティングには使用しない
 docs/
   architecture/               現行アーキテクチャ正本
@@ -47,7 +52,7 @@ AGI_Trinity_Blueprint_v0_1.md 上位設計資料
 
 ルート直下の wheel 群は現時点では既存のベンダー資産です。依存管理へ再統合するまでは、設計正本・実行時入力・ソースコードとして扱いません。
 
-## 基盤とP1実行kernel
+## 基盤とP1 sample実行kernel
 
 `ARC-AGI-3-Agents/arc3_agi_agent/` に、次を独立モジュールとして配置します。
 
@@ -61,9 +66,15 @@ AGI_Trinity_Blueprint_v0_1.md 上位設計資料
 - `roles.py`: 六つのARC-native Layer-0責任のcallable実装
 - `kernel.py`: HDS commandから結果再観測までの決定的な一循環
 - `audit.py`: full setと六つのsingle-role callable removal
-- `adapters/in_memory.py`: 公式runnerへ接続しない権限検証用emission境界
+- `adapters/in_memory.py`: 権限単体検証用emission境界
+- `sample_observation.py`: game/task/level IDを渡さないrendered observation adapter
+- `adapters/offline_arcade.py`: HDS承認済みactionだけを許す`OFFLINE`境界
+- `sample_runtime.py`: action結果の再観測、検証、context / memory更新
 
-これらはまだ ARC-AGI-3 の標準 action-selection path へ接続していません。
+`agents/templates/layer0_sample_agent.py`と`sample_main.py`が、保持済み公式sampleを
+`OperationMode.OFFLINE`に固定して実行します。標準online runnerの
+action-selection pathは変更していません。
+
 P1の閉包範囲と未実装範囲は
 [`docs/architecture/P1_EXECUTABLE_KERNEL.md`](docs/architecture/P1_EXECUTABLE_KERNEL.md)
 に固定しています。
@@ -86,16 +97,27 @@ python -m compileall -q arc3_agi_agent agents tests/unit
 python -m unittest discover -s tests/unit -p "test_*.py" -v
 python -m pytest -q tests/unit
 ruff check arc3_agi_agent agents/__init__.py agents/recorder.py tests/conftest.py tests/unit
+python -m unittest discover -s tests/integration \
+  -p "test_offline_sample_runner.py" -v
+python sample_main.py --all-samples --max-actions 1
+# editable / wheel install後は同じ入口を次でも実行可能
+arc3-p1-samples --all-samples --max-actions 1
 ```
 
 ## 作業順
 
 1. P0: 再起動基盤と権限境界を固定する — 完了
-2. P1: 独立Layer-0 kernelと除去監査を閉じる — 完了
-3. P2: HDS–計算–記憶の複数循環、rollback、再観測を閉じる — 未開始
-4. P3: 公式runnerへ汎用コアを統合する
-5. 同一条件benchmarkを再確立する
-6. アーキテクチャ完成後にのみ最適化へ進む
+2. P1: sample上のLayer-0 / Trinity実行核を閉じる — 完了
+3. P2: 全sample game / 全levelを完全攻略する — 未開始
+4. P3: local完成状態、依存、回帰、再現性を固定する
+5. P4: 公式ARC実行環境へ接続する
+6. P5: Kaggle CLI / 公式MCP提出経路を構築する
+7. P6: 全gateとユーザー許可後に実提出する
+8. P7: 公式評価結果を用いて最適化する
+
+P1とP2では公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出、
+leaderboard scoreによる採否を禁止します。1-action smokeはP1の経路証拠であり、
+sample level攻略実績ではありません。
 
 [`docs/roadmap/ROADMAP.md`](docs/roadmap/ROADMAP.md) が現行ロードマップの正本です。
 

@@ -18,19 +18,23 @@
 
 ## 2. 現在のフェーズ
 
-`P1_EXECUTABLE_KERNEL`は完了しています。P2は未開始です。
+`P1_SAMPLE_EXECUTION_KERNEL`は完了しています。P2は未開始です。
 ユーザーが次フェーズを明示するまでは、P1境界の監査・回帰修正だけを行います。
 
 許可される作業:
 
-- 六つのARC-native責任をcallableにする独立kernel
+- 六つのARC-native責任をcallableにするkernel
 - HDS command、候補採否、SUSPEND、STOP、write、emit境界
-- bounded context、受動memory、in-memory emission adapter
+- bounded context、受動memory、in-memory / OFFLINE sample emission adapter
 - 決定論的なfull-set試験、除去試験、権限拒否試験
-- 公式runnerを変更しないP1監査
+- 保持済み公式sampleを`OperationMode.OFFLINE`だけで実行するP1監査
+- sample observationから再観測、context、memory、次判断までの有界循環
 
 禁止される作業:
 
+- P2の全sample game / 全level攻略
+- 公式ARC API接続、`OperationMode.COMPETITION`
+- Kaggle向け分岐、Notebook、CLI / MCP提出
 - 旧runtimeの一括コピー
 - task/game/level別ルータの再導入
 - replay、固定action列、answer map、literal座標の汎用能力化
@@ -114,39 +118,53 @@ HDS command
 - 単体試験が決定論的に通る
 - benchmark改善は要求しない
 
-### P1: Executable Kernel
+### P1: Sample Execution Kernel
 
 - 六つのARC-native責任がcallableになる
 - 各責任に除去証人がある
 - HDS未承認の計算・write・emitが拒否される
+- 保持済みsampleを`OFFLINE`で実行し、結果を再観測する
+- 状態更新が次のHDS判断へ入力される
+- 標準online runner、公式API、Kaggle経路を変更しない
 
-### P2: HDS–Compute–Memory Closed Loop
+### P2: Complete Sample Solving
 
-- 複数循環のcommand、再観測、再計算、SUSPEND、STOPを閉じる
-- stale observation、version conflict、rollback境界を機械検証する
-- P1の非対称権限を維持する
+- 全sample game / 全levelを完了する
+- GAME_OVER、timeout、無限loop、max-action停止を解消する
+- ID、replay、answer mapへ依存せず、同一条件で再現する
+- 実行log、失敗signature、判断根拠、状態更新を保存する
 
-### P3: Generic Integration
+### P3: Freeze and Regression Audit
 
-- 公式runnerで汎用coreがprimary candidate sourceになる
-- task/replay/ID依存なしで起動・停止・再観測できる
-- 同一条件の回帰評価を行う
+- P2完了状態の依存、Python、command、初期状態、budgetを固定する
+- 成功判定、log、packaging、determinism、regressionを固定する
+- 公式接続差分を導入する前にlocal完成状態へ戻せるようにする
 
-### P4: Architecture Completion Audit
+### P4: Official ARC Connection
 
-- six-role removal、Trinity独立性、禁止入力、rollback、emissionを再監査する
-- 未閉包項目をbounded `SUSPEND`として列挙する
+- P2とP3の完了後だけ開始する
+- `OFFLINE`との差分を列挙し、Kaggle相当REST環境をlocal再現する
+- session、cookie、scorecard、reset、single-make制約を検証する
+- 基本エージェント設計を作り直さず`COMPETITION`へ接続する
 
-### P5: Benchmark Re-establishment
+### P5: Kaggle Submission Paths
 
-- 評価条件、seed、budget、初期状態、artifact digestを固定する
-- previous/current/deltaと全副作用を報告する
-- scoreだけでアーキテクチャ適合を証明しない
+- Kaggle CLIとKaggle公式MCPの二経路を構築する
+- 同一Notebook version、output、messageを照合する
+- secretをGitへ保存しない
+- ユーザーの明示許可なしに実提出しない
 
-### Post-P5: Optimization
+### P6: Actual Submission
 
-アーキテクチャ完成監査後、ユーザーが明示的にphaseを切り替えた場合だけ
-開始します。
+- P2〜P5の全gateとユーザーの明示指示を満たした場合だけ実行する
+- 同一Notebook versionを重複提出しない
+- submission、score、error、commit、package digestを保存する
+
+### P7: Official-result Optimization
+
+- P6の公式評価結果を用いる
+- leaderboard scoreだけで責任境界を削除しない
+- ユーザーの明示的phase切替後だけ開始する
 
 ## 8. 検証規約
 
@@ -161,6 +179,17 @@ ruff check arc3_agi_agent agents/__init__.py agents/recorder.py tests/conftest.p
 ```
 
 runtime接続以後は、対象試験に加えてoffline、deterministic、禁止入力、secret、rollback、emission gate、同一条件benchmarkを検査します。
+
+P1のsample実行gate:
+
+```bash
+cd ARC-AGI-3-Agents
+python -m unittest discover -s tests/integration \
+  -p "test_offline_sample_runner.py" -v
+python sample_main.py --all-samples --max-actions 1
+```
+
+この1-action smokeはP1の実行経路証拠であり、P2のlevel攻略数へ加算しません。
 
 未実行の検証を `PASS` と書いてはいけません。環境不足、依存不足、credential不足、製品回帰を区別します。
 

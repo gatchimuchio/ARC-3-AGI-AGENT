@@ -42,6 +42,10 @@ _EXPORT_IMPORTS: Final[dict[str, tuple[str, str]]] = {
         ".templates.langgraph_random_agent",
         "LangGraphRandom",
     ),
+    "Layer0SampleAgent": (
+        ".templates.layer0_sample_agent",
+        "Layer0SampleAgent",
+    ),
     "LLM": (".templates.llm_agents", "LLM"),
     "FastLLM": (".templates.llm_agents", "FastLLM"),
     "ReasoningLLM": (".templates.llm_agents", "ReasoningLLM"),
@@ -137,6 +141,7 @@ __all__ = [
     "LangGraphRandom",
     "LangGraphTextOnly",
     "LangGraphThinking",
+    "Layer0SampleAgent",
     "MultiModalLLM",
     "Playback",
     "Random",

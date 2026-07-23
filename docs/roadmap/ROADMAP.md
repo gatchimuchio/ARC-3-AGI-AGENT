@@ -28,193 +28,184 @@
 - unit testsがPASS
 - score主張を行わない
 
-## P1 — Executable Kernel（完了）
+## P1 — Sample Execution Kernel（完了）
 
 目的:
 
-- 六つのARC-native Layer-0責任をcallableな最小kernelとして閉じる
+- 保持済みARC-AGI-3公式sampleのlocal実行経路で、六つのLayer-0責任、
+  HDS判断主体、Pure-LLM計算主体、受動memoryを実動agentとして閉じる
 
 実装:
 
-1. `SYMBOL_SPACE`: raw frameとdeltaの正規化
-2. `CONTEXT_STATE`: bounded state store
-3. `TRANSFORM_OR_WORLD_MODEL`: 複数仮説・反証更新
-4. `CANDIDATE_SURFACE`: 複数候補とprovenance
-5. `FITTING_OR_SUCCESS_CRITERION`: progress/risk/information/uncertainty
-6. `EMISSION_INTERFACE`: available action・HDS gate・feedback
-
-必須試験:
-
-- 六役割full-set trace
-- 各single-role removal witness
-- HDS commandなしcompute拒否
-- 未承認memory write / external emit拒否
-- invalid lifecycle transition拒否
+1. `SYMBOL_SPACE`: rendered frameとdeltaのidentity-free正規化
+2. `CONTEXT_STATE`: bounded episode state
+3. `TRANSFORM_OR_WORLD_MODEL`: 複数仮説と反証条件
+4. `CANDIDATE_SURFACE`: action / probe / control候補とprovenance
+5. `FITTING_OR_SUCCESS_CRITERION`: `W=(X,R,Mc)`と十評価軸
+6. `EMISSION_INTERFACE`: HDS gate、action availability、OFFLINE step、feedback
+7. action後のrendered再観測、transition verification、次cycleへの状態反映
 
 完了ゲート:
 
-- `kernel_complete=true`
-- role labelではなく機能喪失を観測できる
-- offline / deterministic
+- full setと六つのsingle-callable removalが固有証人を出す
+- HDS commandなしcompute、未承認write / emit、direct stepを拒否する
+- `OperationMode.OFFLINE`以外をP1入口で拒否する
+- game/task/level ID、replay、固定列、answer map、literal座標表をpolicyへ渡さない
+- 保持済み25ゲームすべてで1 actionのHDS循環と再観測が成立する
+- network requestを発生させない
+- compile、unit、integration、lint、package gateが通る
 
-現行実装:
+現行入口:
 
-- `roles.py`、`context.py`、`memory.py`、`kernel.py`
-- `adapters/in_memory.py`
-- `audit.py`
-- `test_arc3_agi_kernel.py`
+```bash
+cd ARC-AGI-3-Agents
+python sample_main.py --all-samples --max-actions 1
+```
 
-公式runner接続、live environment action、複数循環の実環境rollbackはP1へ含めません。
+このsmokeは実行経路だけの証拠であり、level攻略数、完全攻略、汎化scoreではありません。
+既存のHTTP / online runnerのaction-selectionは変更しません。
 
-repository-wide unit harnessは現行`arcengine` / `Arcade` APIへ整合し、
-optional agent dependencyのeager importを除去しました。全unit suite、
-compile、ruff、package buildを通過し、P1完了ゲートは`PASS`です。
-公式runnerのaction-selectionは変更していません。
-
-## P2 — HDS–Compute–Memory Closed Loop（未開始）
+## P2 — Complete Sample Solving（未開始）
 
 目的:
 
-- 非対称三主体を一つの実行traceで閉じる
-
-実装:
-
-- HDS command envelope
-- observation/memory view制限
-- proposal、counter-hypothesis、closure decision
-- versioned memory directive
-- reobserve / recompute / suspend / stop / rollback
-- external emit authorization
-
-必須試験:
-
-- stale observation
-- version conflict
-- contradiction accumulation
-- budget exhaustion
-- candidate rejection
-- reobservation
-- rollback boundary
-- final emission veto
+- P1実行核を使い、全sample game / 全levelを完全攻略する
 
 完了ゲート:
 
-- commandから結果再観測まで一貫したtraceが残る
-- 権限越境が機械的に拒否される
+- 全sample levelを完了する
+- 全gameでerrorがない
+- `GAME_OVER`、timeout、無限loop、max-action停止を解消する
+- 固定ID、replay暗記、answer mapだけへ依存しない
+- 同一条件で再現できる
+- 実行log、失敗signature、判断根拠を保存できる
+- 状態更新が次の判断へ実際に反映される
 
-## P3 — Generic Solver Integration
+P2完了前に公式環境へ接続しません。
+
+## P3 — Freeze and Reproducibility Audit
 
 目的:
 
-- 独立kernelを公式 `ARC-AGI-3-Agents` runnerのprimary汎用coreへ接続する
-
-統合順:
-
-1. environment adapter
-2. observation normalization
-3. context / passive memory
-4. hypothesis/world-model ensemble
-5. candidate generation
-6. closure/verifier/rollback
-7. emission and feedback
-
-隔離:
-
-- task-specific policy
-- replay
-- literal action sequence
-- source-assisted route
-
-完了ゲート:
-
-- task/game/level IDなしで起動・停止・再観測できる
-- 複数候補をHDSが比較・拒否できる
-- 汎用coreを外して旧routerへ暗黙fallbackしない
-
-## P4 — Architecture Completion Audit
-
-必須監査:
-
-- six-role functional removal
-- HDS authority / Trinity independence
-- no autonomous memory / no autonomous output
-- runtime identity / replay / literal dependency
-- candidate / verifier / rollback / emission integration
-- deterministic / offline / packaging
-- evidence provenance and SUSPEND behavior
-
-完了ゲート:
-
-- `maximum_agent_complete=true`
-- 未閉包項目がbounded `SUSPEND`として列挙される
-- task-specific経路が標準coreから除去またはquarantineされる
-
-## P5 — Benchmark Re-establishment
-
-目的:
-
-- 新リポジトリの同一条件baselineを確立する
+- sample完全攻略状態をrelease candidateとして固定する
 
 固定項目:
 
-- code commit
-- dependency lock
-- dataset/environment digest
-- seed
-- action budget
-- memory initial state
-- evaluation command
-- machine/runtime条件
+- dependencyとPython version
+- 実行command、初期状態、設定値、action budget
+- 成功判定、log形式、packaging形式
+- deterministic条件、regression suite
+- 全sample完了証拠
 
-報告:
+完了ゲート:
 
-- completed levels
-- score formulaとscore
-- errors
-- GAME_OVER
-- maxed-out
-- NOT_FINISHED
-- elapsed time / action count
-- artifact digest
+- 公式環境との差分導入後もlocal完成状態へ戻せる
+- 同一条件regressionが再現可能である
 
-過去の `46/183`、`97/183`、`6/183` は新baselineへ自動継承しません。
-
-## P6 — Capability Expansion
-
-優先順:
-
-- 観測・object permanence
-- delayed visibility / stale frame
-- spatial/topological model
-- symbolic/relational model
-- phase/timer/resource model
-- multi-step bounded planning
-- counterfactual probes
-- failure compression and reopen conditions
-- cross-task memory compilation
-
-各能力は少なくとも二つの異なるtask familyで転用可能性を検証します。
-
-## P7 — Optimization
+## P4 — Official ARC Runtime Connection
 
 開始条件:
 
-- P4完了
-- P5 baseline固定
-- ユーザーの明示許可
+- P2とP3が完了している
+
+実施順:
+
+1. sample完成版を凍結する
+2. ARC Toolkit versionを固定する
+3. `OperationMode.OFFLINE`との差分を列挙する
+4. `listen_and_serve(competition_mode=True)`でKaggle相当REST環境をlocal再現する
+5. session、cookie、scorecard、reset、single-make制約を検証する
+6. `OperationMode.COMPETITION`へ接続する
+7. 全gameを一回だけ作成する制約で確認する
+8. 公式接続差分によるfailureだけを抽出する
+
+P4で基本agent設計を作り直しません。
+
+## P5 — Kaggle Submission Paths
+
+目的:
+
+- 同一Notebook version、同一output、同一messageを使う二経路を構築する
+
+経路A — Kaggle CLI:
+
+```bash
+kaggle --version
+kaggle auth login
+kaggle competitions list --group entered
+kaggle competitions submit \
+  <COMPETITION_SLUG> \
+  -k <KAGGLE_USERNAME>/<NOTEBOOK_SLUG> \
+  -v <NOTEBOOK_VERSION> \
+  -f <OUTPUT_FILE> \
+  -m "<SUBMISSION_MESSAGE>"
+kaggle competitions submissions <COMPETITION_SLUG> -v
+```
+
+経路B — Kaggle公式MCP:
+
+```toml
+[mcp_servers.kaggle]
+url = "https://www.kaggle.com/mcp"
+bearer_token_env_var = "KAGGLE_API_TOKEN"
+required = true
+default_tools_approval_mode = "writes"
+tool_timeout_sec = 120
+```
+
+- 接続時のtool schemaを正本とする
+- `save_notebook`と`create_code_competition_submission`の実在・引数を再取得する
+- CLIとMCPのNotebook version、output、messageを照合する
+- secretをGitへ保存しない
+- ユーザーの明示許可なしに実提出しない
+
+完了ゲート:
+
+- 認証、competition参加、rules受諾が確認できる
+- Notebook update / buildと必須output生成が成功する
+- CLI commandとMCP toolが構成でき、同一対象を指す
+- submission statusを取得できる
+
+## P6 — Actual Kaggle Submission
+
+開始条件:
+
+- sample完全攻略と回帰がPASS
+- 公式接続がPASS
+- Notebook buildとoutput検証がPASS
+- CLI / MCP両経路がPASS
+- ユーザーが実提出を明示指示している
+
+規則:
+
+- CLIまたはMCPを主経路、他方を代替経路にする
+- 同一Notebook versionを重複提出しない
+- competition / Notebook slug、version、output、message、timestamp、status、
+  public score、error、経路、Git SHA、package digestを保存する
+
+## P7 — Official-result Optimization
+
+開始条件:
+
+- P6の公式評価結果がある
+- ユーザーがphase切替を明示している
 
 対象:
 
-- search budget
-- candidate ordering
-- thresholds
-- action efficiency
-- memory retrieval
-- runtime performance
+- search budget、candidate ordering、threshold
+- action efficiency、memory retrieval、runtime performance
 
 禁止:
 
-- task ID patch
-- replay memorization
-- benchmark leakage
-- scoreだけを根拠とした責任境界の削除
+- task ID patch、replay暗記、benchmark leakage
+- leaderboard scoreだけを根拠とした責任境界の削除
+
+## P1 / P2共通禁止
+
+- 公式API接続、`OperationMode.COMPETITION`
+- Kaggle向けcode分岐、Notebook都合による設計変更
+- Kaggle CLI / MCP提出
+- leaderboard scoreによる採否
+- sample未完状態での公式評価
+
+P4〜P6の工程を本書へ記録することは、工程の前倒し実行を意味しません。

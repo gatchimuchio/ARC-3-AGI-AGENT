@@ -257,6 +257,22 @@ def _candidate_id(
     return f"candidate:{mode.casefold()}:{digest}"
 
 
+def _action_step(
+    action_id: int,
+    observation: ObservationIR,
+    *,
+    limit: int | None = None,
+) -> dict[str, int]:
+    step = {"action_id": action_id}
+    if limit is not None:
+        step["limit"] = limit
+    if action_id == 6:
+        height, width = observation.dimensions or (64, 64)
+        step["x"] = min(63, max(0, width // 2))
+        step["y"] = min(63, max(0, height // 2))
+    return step
+
+
 @dataclass(frozen=True, slots=True)
 class DeterministicCandidateSurface:
     """Produce a bounded, comparable action/control/plan candidate surface."""
@@ -282,7 +298,7 @@ class DeterministicCandidateSurface:
                 CandidateIR(
                     candidate_id=_candidate_id("ACTION", observation, primary),
                     mode="ACTION",
-                    steps=({"action_id": primary},),
+                    steps=(_action_step(primary, observation),),
                     preconditions=(f"ACTION{primary}_AVAILABLE",),
                     expected_effects_by_hypothesis=expected,
                     expected_progress=0.5,
@@ -301,7 +317,13 @@ class DeterministicCandidateSurface:
                 CandidateIR(
                     candidate_id=_candidate_id("BOUNDED_PROBE", observation, probe),
                     mode="BOUNDED_PROBE",
-                    steps=({"action_id": probe, "limit": 1},),
+                    steps=(
+                        _action_step(
+                            probe,
+                            observation,
+                            limit=1,
+                        ),
+                    ),
                     preconditions=(
                         f"ACTION{probe}_AVAILABLE",
                         "ACTION_BUDGET_REMAINING",

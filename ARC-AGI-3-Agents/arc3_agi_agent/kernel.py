@@ -205,6 +205,15 @@ class HDSController:
             and "ACTION_BUDGET_REMAINING" not in candidate.preconditions
         ):
             return False
+        if action_id == 6:
+            step = candidate.steps[0]
+            if any(
+                isinstance(step.get(axis), bool)
+                or not isinstance(step.get(axis), int)
+                or not 0 <= int(step[axis]) <= 63
+                for axis in ("x", "y")
+            ):
+                return False
 
         bounded_metrics = (
             candidate.expected_progress,
@@ -922,7 +931,8 @@ class Layer0Kernel:
                 )
                 context = record_emission(
                     emission_result.action_id,
-                    ("EMIT_PENDING_REOBSERVATION",),
+                    emission_result.visible_effects
+                    or ("EMIT_PENDING_REOBSERVATION",),
                 )
                 if not isinstance(context, ContextSnapshot):
                     raise self._output_loss("CONTEXT_STATE", "UPDATE_MEMORY")

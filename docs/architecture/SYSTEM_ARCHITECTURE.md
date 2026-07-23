@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
-- 版: `v0.1-restart`
-- 状態: `P1_EXECUTABLE_KERNEL` complete / P2 not started
+- 版: `v0.2-sample-runtime`
+- 状態: `P1_SAMPLE_EXECUTION_KERNEL` complete / P2 not started
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -145,15 +145,18 @@ W := (X, R, Mc)
 ## 5. 実行サイクル
 
 ```text
-BOOT
- -> SELF_CHECK
- -> FRAME
- -> RETRIEVE
- -> COMPUTE
- -> JUDGE
-    -> ACT -> OBSERVE_RESULT -> UPDATE_MEMORY -> REFRAME
-    -> SUSPEND -> RECOMPUTE / REFRAME / STOP
-    -> STOP
+Arcade(OperationMode.OFFLINE)
+ -> rendered FrameDataRaw
+ -> identity-free observation adapter
+ -> SELF_CHECK / FRAME / RETRIEVE / COMPUTE
+ -> HDS JUDGE
+    -> authorized ACT
+    -> OFFLINE environment step
+    -> OBSERVE_RESULT
+    -> rendered transition verification
+    -> context / passive memory
+    -> next HDS cycle
+    -> SUSPEND / REJECT / STOP
 ```
 
 必須不変条件:
@@ -164,6 +167,15 @@ BOOT
 4. 許可のないexternal emitを拒否する
 5. action結果を再観測してHDSへ返す
 6. hidden stateを観測事実として記録しない
+7. `OperationMode.OFFLINE`以外ではP1 runnerを起動しない
+8. game/task/level identityをaction policyへ渡さない
+
+P1の実装入口は`ARC-AGI-3-Agents/sample_main.py`です。既存の
+HTTP / online runnerはP1入口として使用せず、変更もしません。sample agentの
+`choose_action`、`take_action`、`do_action_request`はdirect bypassを拒否し、
+実際の`environment.step`はHDS capabilityを再検証する
+`OfflineArcadeEmissionInterface`からだけ呼び出します。この境界はmodeラベルに
+加えて`LocalEnvironmentWrapper`実体も要求します。
 
 ## 6. 検証と停止
 
@@ -201,7 +213,7 @@ ARC3では例えば次を観測候補とします。
 - memoryを無制限追記ログにしない
 - checkpointを環境状態の復元保証と誤認しない
 
-## 9. P0基盤とP1独立kernel
+## 9. P0基盤とP1 sample実行kernel
 
 - 本書、ロードマップ、移植台帳、参照mapが存在する
 - protocol、IR、schema、verification、checkpointが独立import可能
@@ -219,6 +231,15 @@ P1では、この基盤上に次を追加済みです。
 - 受動memoryとin-memory emission adapter
 - full setと六つのsingle-callable removal
 - repository-wide unit gateとinstallable package boundary
+- `FrameDataRaw`からidentity-free observationへの変換
+- HDS承認済みactionだけを通す`OFFLINE` sample emission
+- action後のrendered再観測と保守的transition verification
+- persistent bounded context / passive memoryを次cycleへ反映
+- 保持済み25ゲームすべての1-action offline smoke
 
-P1の実装境界、固定failure witness、未接続範囲は
+1-action smokeは、sample local pathで実行核が動くことだけを証明します。
+全183 levelの攻略、GAME_OVER / timeout / max-actionの解消、完全再現性は
+P2の完了条件であり、P1の成功数へ混同しません。
+
+P1の実装境界、固定failure witness、OFFLINE接続範囲は
 [`P1_EXECUTABLE_KERNEL.md`](P1_EXECUTABLE_KERNEL.md)を正本とします。
