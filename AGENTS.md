@@ -20,12 +20,12 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P4_COMPUTE_SUBJECT_C` です。
+現在は `P5_JUDGMENT_SUBJECT_J` です。
 
-`P3_ARC3_EVIDENCE_MATERIAL_COMPILER` は完了しています。P3で完成したのは
-730 sourceのaccounting、identity-free C/J/M fixture、provenance、holdout、
-deterministic rebuildです。P3は命令形保持体P、C/J/M単独成立、最小三構成を
-完成させていません。
+`P4_COMPUTE_SUBJECT_C` は完了しています。P4で完成したのは、共通契約で交換可能な
+P-A/P-B、`C=Execute(L0,P)`のstandalone G1、P/Cを含む除去監査、OFFLINE sample
+経路でのP照会です。P4はstandalone J/M、pair、Trinity、最小三構成を完成させて
+いません。
 
 現行分類は次です。
 
@@ -49,31 +49,37 @@ P3 complete:
   C / J / M fixture separation
   provenance and holdout manifests
 
-P4 current:
+P4 complete:
   P-A symbolic / rule-graph instruction body
   P-B learned-parameter instruction body
   common instruction-body contract and swap
   standalone compute subject C
-  L0 six-responsibility plus P removal audit
+  L0 six-responsibility plus P/C removal audit
+
+P5 current:
+  standalone typed HDS Frame
+  deterministic judgment without C/P/M
+  accept / reject / reobserve / SUSPEND / STOP / rollback
+  memory-write / external-emit authorization proposal
+  J removal and non-substitution audit
 ```
 
-### P4で許可される作業
+### P5で許可される作業
 
-- P-Aの記号・規則graph、検索、合成、状態条件付け、候補素材生成
-- P-Bの実データ学習、parameter artifact、inference adapter
-- P-A/P-B共通schema、version、digest、provenance、identity-free検査
-- Layer-0から共通interfaceだけを介したP-A/P-B交換
-- C単独の仮説、反対仮説、予測、候補、memory/output proposal生成
-- Cが採否、memory確定、external emitを行えないnegative test
-- L0六責任とPそれぞれのsingle-removal witness
-- P3 runtime corpusだけを使用する学習・fixture入力
+- P3 HDS Frame fixtureを用いるstandalone J API
+- purpose、X、R、Mc、観測境界、candidate、予測結果、証拠、反証、risk、hazard、
+  budget、unknown、停止条件のtyped Frame
+- compute request、accept、reject、reobserve、SUSPEND、STOP、rollback判断
+- memory-write / external-emit authorizationのproposal
+- X/R/Mc欠落、hazard、証拠不足、budget枯渇、contradictionの決定的試験
+- J除去で採否・停止・許可が失われる固有witness
 
-### P4で禁止される作業
+### P5で禁止される作業
 
-- provenance manifest、source path、game/task/level identityをruntimeへ渡すこと
-- `roles.py`固定規則をPの機能等価fallbackとして残すこと
-- Cに最終採否、SUSPEND/STOP、rollback許可、memory確定、external emitを行わせること
-- standalone J/M、pair、Trinity、minimum certificateを完了扱いすること
+- Jによる仮説生成、candidate生成、P参照
+- Jによるmemory実書込み、external action実行
+- M参照をstandalone Jの必須入力にすること
+- standalone M、pair、Trinity、minimum certificateを完了扱いすること
 - 全sample game / 全level攻略
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
@@ -82,9 +88,8 @@ P4 current:
 - scoreを根拠にした局所最適化
 - 「AGI完成」「最小三構成証明済み」「汎化済み」といった未検証主張
 
-P4の正本は新ロードマップのP4節、
-`docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`、
-P3 runtime dataset、P2 obligation/test matrixです。
+P5の正本は新ロードマップのP5節、P3 HDS Frame fixture、
+P2 obligation/test matrixです。
 
 ## 3. 1 work blockの必須契約
 
@@ -228,13 +233,13 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - C/J/M fixture分離
 - provenanceとholdout contamination検査
 
-### P4: Compute Subject C — 現在
+### P4: Compute Subject C — 完了
 
 - P-A記号規則graph、P-B実学習parameter body
 - 同一L0でのswap、Pなしcompute拒否
-- C standalone G1とL0六責任+P removal
+- C standalone G1とL0六責任+P/C removal
 
-### P5: Judgment Subject J
+### P5: Judgment Subject J — 現在
 
 - standalone HDS Frame API
 - C/Mなしの採否、SUSPEND、STOP、rollback、write/emit許可
@@ -319,6 +324,13 @@ P4では次を追加する。
 - C standalone G1
 - C authority negative test
 - L0六責任+P removal audit
+
+P5では次を追加する。
+
+- standalone typed HDS Frame
+- X/R/Mc欠落、hazard、evidence、budget、contradiction、rollback判断
+- J authority negative test
+- J removal / non-substitution audit
 
 P4以降の固定test IDと反証条件は
 `docs/architecture/AGI_TEST_MATRIX.md`を正本とする。

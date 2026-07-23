@@ -289,8 +289,8 @@ P0 Clean Restart Foundation                         complete
 P1 Execution Mechanism Foundation                   complete / reclassified
 P2 Minimum Three Specification and Root Audit       complete
 P3 ARC3 Evidence Material Compiler                  complete
-P4 Compute Subject C                                current
-P5 Judgment Subject J                               blocked by P4
+P4 Compute Subject C                                complete
+P5 Judgment Subject J                               current
 P6 Memory Subject M                                 blocked by P5
 P7 Pairwise Subject Audit                           blocked by P6
 P8 Three-subject Two-cycle Trinity                  blocked by P7

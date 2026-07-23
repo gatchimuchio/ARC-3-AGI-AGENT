@@ -71,6 +71,32 @@ class HypothesisIR:
 
 
 @dataclass(frozen=True, slots=True)
+class ActionPredictionIR:
+    action_id: int
+    predicted_effects: tuple[str, ...]
+    progress_likelihood: float
+    hazard_likelihood: float
+    information_gain: float
+    candidate_prior: float
+    uncertainty: float
+    evidence_refs: tuple[str, ...] = ()
+    instruction_refs: tuple[str, ...] = ()
+    preconditions: tuple[str, ...] = ()
+    falsification_conditions: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True, slots=True)
+class OutputProposalIR:
+    proposal_id: str
+    proposal_type: str
+    payload_items: tuple[tuple[str, object], ...]
+    provenance: tuple[str, ...] = ()
+
+    def payload(self) -> dict[str, object]:
+        return dict(self.payload_items)
+
+
+@dataclass(frozen=True, slots=True)
 class CandidateIR:
     candidate_id: str
     mode: str
@@ -136,6 +162,7 @@ class KnowledgeIndexEntry:
 
 
 __all__ = [
+    "ActionPredictionIR",
     "CandidateIR",
     "ClosureIR",
     "CompiledRecord",
@@ -144,6 +171,7 @@ __all__ = [
     "KnowledgeIndexEntry",
     "MechanicRuleIR",
     "ObservationIR",
+    "OutputProposalIR",
     "ProofObligationIR",
     "TransitionIR",
 ]

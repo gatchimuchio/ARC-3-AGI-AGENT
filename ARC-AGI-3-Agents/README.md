@@ -1,12 +1,13 @@
-# ARC-AGI-3 Agents — P1実行核 / P3証拠compilerパッケージ
+# ARC-AGI-3 Agents — P1実行核 / P3証拠compiler / P4計算主体
 
 このディレクトリはARC-AGI-3公式agent基盤に、本リポジトリの
 P1 Layer-0 execution mechanismを統合した実行パッケージです。公式基盤の原READMEは
 [`UPSTREAM_README.md`](UPSTREAM_README.md) に参照用として保存しています。
 
 P3では`arc3_agi_agent.evidence_compiler`を追加し、730件の解析・metadata sourceから
-identity-freeなC/J/M fixtureを生成済みです。現在phaseはP4であり、P-A/P-Bと
-standalone Cはこの後に実装します。
+identity-freeなC/J/M fixtureを生成済みです。P4では共通`InstructionBody`契約、
+P-A記号規則graph、P-B学習済みsigmoid matrix、standalone Cを実装しました。
+現在phaseはP5です。
 
 ## 現在の実行入口
 
@@ -25,8 +26,8 @@ arc3-p1-samples --all-samples --max-actions 1
 
 この入口は保持済み公式sampleを `OperationMode.OFFLINE` だけで各1 action実行し、
 HDS承認、外部放出、再観測、context / passive memory更新、次判断までを検査します。
-独立した命令形保持体`P`は未接続であり、P4の計算主体形成やP10の攻略実績には
-加算しません。
+独立した命令形保持体P-Aが全cycleで照会されます。この1-action回帰はP4の
+実行経路証拠ですが、P10の攻略実績には加算しません。
 
 P3 compilerのinstalled entry point:
 
@@ -41,6 +42,19 @@ arc3-compile-evidence \
 
 生成済みdatasetの境界と再現証拠は
 [`../docs/architecture/P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md`](../docs/architecture/P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md)
+を参照してください。
+
+P4 instruction-body compilerのinstalled entry point:
+
+```bash
+arc3-compile-instruction-bodies \
+  --dataset-dir ../datasets \
+  --dataset-manifest ../manifests/dataset_manifest.json \
+  --output-dir arc3_agi_agent/bundles
+```
+
+P4 bundleとC単独証拠は
+[`../docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`](../docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md)
 を参照してください。
 
 ## 検証

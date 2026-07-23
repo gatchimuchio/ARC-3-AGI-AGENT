@@ -103,6 +103,20 @@ class OfflineSampleRuntimeTests(unittest.TestCase):
         stopped = runtime.run_cycle(after, action_count=1)
 
         self.assertEqual(emitted.kernel_result.status, "PASS")
+        self.assertEqual(
+            emitted.kernel_result.instruction_body_format,
+            "symbolic-rule-graph",
+        )
+        self.assertEqual(
+            emitted.kernel_result.instruction_body_version,
+            "p-a-symbolic-v1",
+        )
+        self.assertTrue(emitted.kernel_result.instruction_body_digest)
+        self.assertTrue(emitted.kernel_result.instruction_query_digest)
+        self.assertIn(
+            "INSTRUCTION_BODY_QUERY_EXECUTED",
+            {event.operation for event in emitted.kernel_result.trace},
+        )
         self.assertIs(emitted.after_frame, after)
         self.assertIsNotNone(emitted.verification)
         self.assertEqual(emitted.verification.status, "PASS")
@@ -186,6 +200,11 @@ class OfflineSampleRuntimeTests(unittest.TestCase):
         self.assertEqual(report.final_status, "STOP")
         self.assertEqual(report.decision_statuses, ("EMIT",))
         self.assertEqual(report.memory_version, 0)
+        self.assertEqual(
+            report.instruction_body_formats,
+            ("symbolic-rule-graph",),
+        )
+        self.assertEqual(report.instruction_body_versions, ("p-a-symbolic-v1",))
 
     def test_action6_coordinates_come_from_current_dimensions(self) -> None:
         before = frame(

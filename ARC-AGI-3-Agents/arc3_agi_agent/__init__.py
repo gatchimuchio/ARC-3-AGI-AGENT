@@ -1,10 +1,27 @@
 """ARC-3 executable kernel with explicit HDS-controlled responsibility seams."""
 
 from .adapters import EmissionResult, InMemoryEmissionInterface
-from .audit import RemovalAuditCase, RemovalAuditReport, run_required_removal_audit
+from .audit import (
+    ComputeSubjectRemovalAuditReport,
+    RemovalAuditCase,
+    RemovalAuditReport,
+    run_compute_subject_removal_audit,
+    run_required_removal_audit,
+)
 from .checkpoint import Checkpoint, CheckpointManager
 from .context import BoundedContextState, ContextSnapshot
+from .instruction_body import (
+    INSTRUCTION_BODY_REMOVAL_WITNESS,
+    InstructionBody,
+    InstructionQueryResult,
+    ParametricInstructionBody,
+    SymbolicInstructionBody,
+    load_default_parametric_instruction_body,
+    load_default_symbolic_instruction_body,
+    load_instruction_body,
+)
 from .ir import (
+    ActionPredictionIR,
     CandidateIR,
     ClosureIR,
     CompiledRecord,
@@ -13,10 +30,12 @@ from .ir import (
     KnowledgeIndexEntry,
     MechanicRuleIR,
     ObservationIR,
+    OutputProposalIR,
     ProofObligationIR,
     TransitionIR,
 )
 from .kernel import (
+    COMPUTE_SUBJECT_REMOVAL_WITNESS,
     HDSController,
     KernelResult,
     Layer0Components,
@@ -65,6 +84,7 @@ from .verification import (
 )
 
 __all__ = [
+    "ActionPredictionIR",
     "CandidateIR",
     "AuthorityViolation",
     "BoundedContextState",
@@ -74,6 +94,8 @@ __all__ = [
     "CompiledRecord",
     "ComputeRequest",
     "ComputeResult",
+    "COMPUTE_SUBJECT_REMOVAL_WITNESS",
+    "ComputeSubjectRemovalAuditReport",
     "DEFAULT_INSTRUCTION_BODY_CONTRACT",
     "DeterministicCandidateSurface",
     "DeterministicSuccessCriterion",
@@ -87,6 +109,9 @@ __all__ = [
     "HDSController",
     "InMemoryEmissionInterface",
     "InstructionBodyContract",
+    "INSTRUCTION_BODY_REMOVAL_WITNESS",
+    "InstructionBody",
+    "InstructionQueryResult",
     "KnowledgeIndexEntry",
     "KernelResult",
     "Layer0Components",
@@ -98,6 +123,8 @@ __all__ = [
     "MemorySnapshot",
     "MemoryDirective",
     "ObservationIR",
+    "OutputProposalIR",
+    "ParametricInstructionBody",
     "ProofObligationIR",
     "PureLLMCompute",
     "PassiveMemory",
@@ -106,17 +133,22 @@ __all__ = [
     "RemovalAuditReport",
     "RenderedObservation",
     "SCHEMA_VERSION",
+    "SymbolicInstructionBody",
     "TransitionIR",
     "TrinityLifecycle",
     "VerificationResult",
     "canonical_json",
     "digest_object",
     "forbidden_runtime_paths",
+    "load_default_parametric_instruction_body",
+    "load_default_symbolic_instruction_body",
+    "load_instruction_body",
     "record_from_dict",
     "record_to_dict",
     "validate_record",
     "validate_runtime_bundle",
     "verify_rendered_transition",
+    "run_compute_subject_removal_audit",
     "run_required_removal_audit",
     "ContextSnapshot",
 ]

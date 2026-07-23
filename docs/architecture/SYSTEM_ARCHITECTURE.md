@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
-- 版: `v0.5-evidence-material`
-- 状態: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER` complete / `P4_COMPUTE_SUBJECT_C` current
+- 版: `v0.6-compute-subject`
+- 状態: `P4_COMPUTE_SUBJECT_C` complete / `P5_JUDGMENT_SUBJECT_J` current
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -205,7 +205,8 @@ Layer-0 execution mechanism
 + HDS / M / OFFLINE environment loop
 ```
 
-P3で実証素材を形成し、P4で固定知識をコードからPへ分離します。
+P3で実証素材を形成し、P4で固定知識をコードからPへ分離しました。P-A/P-Bは
+共通`InstructionBody`契約で交換でき、`PureLLMCompute`はPなしでは動作しません。
 
 P2の根本監査結果は、`AGI_MINIMUM_THREE_SPEC.md`、
 `AGI_OBLIGATION_GRAPH.json`、`AGI_CURRENT_IMPLEMENTATION_AUDIT.md`に固定しています。
@@ -391,8 +392,8 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P1: Layer-0実行機構・OFFLINE経路 — 完了・再分類
 - P2: AGI最小三構成仕様・根本監査 — 完了
 - P3: ARC3実証素材compiler — 完了
-- P4: 計算主体C・P-A/P-B — 現在
-- P5: 判断主体J
+- P4: 計算主体C・P-A/P-B — 完了
+- P5: 判断主体J — 現在
 - P6: 記憶主体M
 - P7: 二主体接続監査
 - P8: 三主体二周期循環
@@ -403,4 +404,5 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 
 現行順序は
 `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
-P4の計算主体実装条件は`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`を参照します。
+P4の完了証拠は`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`を参照します。P5は
+ロードマップP5節とP3 HDS Frame fixtureを正本とします。

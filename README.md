@@ -10,11 +10,13 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - P1: `SAMPLE_EXECUTION_MECHANISM` — 完了
 - P2: `AGI_MINIMUM_THREE_AUDIT` — 完了
 - P3: `ARC3_EVIDENCE_MATERIAL_COMPILER` — 完了
-- 現在フェーズ: `P4_COMPUTE_SUBJECT_C`
+- P4: `COMPUTE_SUBJECT_C` — 完了
+- 現在フェーズ: `P5_JUDGMENT_SUBJECT_J`
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
-- 命令形保持体 `P`: **未完成・P4実装対象**
+- 命令形保持体 `P`: P-A/P-Bを実装済み
+- 計算主体 `C`: standalone G1を実装・除去監査済み
 - ベンチマーク状態: **未確定**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -35,8 +37,8 @@ AGI Kernel = Trinity(C, J, M)
 - `M`: HDSが引用する現行判断根拠の受動記憶主体
 
 P1で完成したのは、`L0`側の実行責任、HDS / M権限、OFFLINE sample経路です。
-
-現行 `PureLLMCompute` は `roles.py` の手書き規則を直接実行しており、独立した `P` をまだ使用していません。したがってP1をPure-LLM計算主体完成とは扱いません。
+P4で、P3素材からP-A記号規則graphとP-B学習済みparameter bodyを形成し、
+`PureLLMCompute`が共通interfaceでPを実行するstandalone Cを閉じました。
 
 ## 最上位目的
 
@@ -112,7 +114,7 @@ vendor/wheels/                既存ベンダーwheel
 
 P1の閉包範囲は [`docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md`](docs/architecture/P1_SAMPLE_EXECUTION_KERNEL.md) に固定しています。
 
-## P2根本監査・P3実証素材とP4の現在作業
+## P2根本監査・P3実証素材・P4計算主体
 
 P2ではG1〜G5、C/J/M、L0/P、environment、compiler、P0/J0/M0、
 全8部分集合を一対一で監査し、未実装を完成扱いしないclaim/test境界を固定しました。
@@ -128,10 +130,10 @@ HDS Frame fixture、memory lifecycle fixtureへ変換しました。source ident
 [`P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md`](docs/architecture/P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md)
 に固定しています。
 
-現在のP4では、このfixtureをruntime identity-free境界内で使用し、P-A/P-Bと
-standalone Cを実装します。実装仕様は
+P4では、このfixtureをruntime identity-free境界内で使用し、P-A/P-Bと
+standalone Cを実装しました。実装・完了証拠は
 [`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md)
-です。
+です。現在のP5ではP3 HDS Frame fixtureからstandalone Jを実装します。
 
 ## 設計上の固定境界
 
@@ -164,8 +166,8 @@ python sample_main.py --all-samples --max-actions 1
 2. P1: Layer-0実行機構・OFFLINE sample経路 — 完了
 3. P2: AGI最小三構成仕様・根本監査 — 完了
 4. P3: ARC3実証素材compiler — 完了
-5. P4: 計算主体C — 現在
-6. P5: 判断主体J
+5. P4: 計算主体C — 完了
+6. P5: 判断主体J — 現在
 7. P6: 記憶主体M
 8. P7: 二主体接続監査
 9. P8: 三主体二周期循環

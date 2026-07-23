@@ -1,11 +1,12 @@
 # P4 計算主体C・命令形保持体P 実装指示書
 
 - phase: `P4_COMPUTE_SUBJECT_IMPLEMENTATION`
-- state: `CURRENT`
+- state: `COMPLETE`
 - predecessor: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
 - predecessor gate: `PASS`
 - runtime scope: bundled official ARC-AGI-3 samples / `OperationMode.OFFLINE`
 - official / competition connection: prohibited until later phase
+- successor: `P5_JUDGMENT_SUBJECT_J`
 - benchmark claim: none
 
 ## 0. 現状監査
@@ -448,3 +449,61 @@ game / 全level攻略はP9の全8部分集合証明後、P10で開始する。
 ```
 
 結果が不足する場合は、`P4 complete`と書かず、未完了または`SUSPEND`とする。
+
+---
+
+## 11. 完了証拠（2026-07-23）
+
+HDS判断: `PASS`
+
+### P-A
+
+- format: `symbolic-rule-graph`
+- version: `p-a-symbolic-v1`
+- graph: 21 nodes / 7 edges / 7 action rules
+- content digest:
+  `sha256-decimal:061467752463442905112848972582770278545407933726140802225436193305820092171858`
+- bundle SHA-256:
+  `feca68b67e80f0325a79d5f35be0adbf2ce749066abd1c503ba1a619b112171f`
+
+### P-B
+
+- format: `parametric-sigmoid-matrix`
+- version: `p-b-parametric-v1`
+- architecture: 12 identity-free features × 6 sigmoid heads
+- parameter: 72 / 72 non-zero trained weights
+- examples: train 5,018 / validation 312 / holdout 405
+- BCE: train `0.693147181 -> 0.220763586`
+- BCE: validation `0.227625351`
+- BCE: holdout `0.693147181 -> 0.238558444`
+- content digest:
+  `sha256-decimal:063748466360764868803781633776294754303076777578612338993158639053037752827320`
+- bundle SHA-256:
+  `5ecc09d9a23dc0fadb56d7fbcc7e8328b02157c34bd1f286fd3398541d2d43cd`
+
+### 分離・実行証拠
+
+- `InstructionBody`共通interfaceだけでP-A/P-Bを交換し、同一入力では各々決定的、
+  P差によってprediction/proposalが変化した。
+- `roles.py`はPが返した仮説・prediction・controlを実行するmechanismへ縮退し、
+  固定仮説・固定candidate metric fallbackを除去した。
+- standalone Cはhypothesis、counter-hypothesis、prediction、candidate、
+  memory proposal、output proposal、uncertainty、provenanceを生成するが、採否、
+  write、emitを行わない。
+- M更新後もP version/digestは不変で、P更新はseed 0のexplicit compilerだけに
+  分離した。
+- L0六責任、P、Cの8 single-removalはすべて固有witnessでFAILし、代行0件。
+- 25/25 OFFLINE sampleの全cycleにP-A body/query digestが存在し、error 0。
+
+### 実行検証
+
+- `compileall`: PASS
+- `unittest discover tests/unit`: 89 PASS
+- `pytest tests/unit`: 143 PASS
+- strict mypy: 19 source PASS
+- ruff: PASS
+- integration: 2 PASS
+- `sample_main.py --all-samples --max-actions 1`: 25/25 complete、error 0
+- P compiler Windows/Linux改行差を除去し、3 bundle artifactのbyte rebuild: PASS
+
+P4はsample攻略・汎化・standalone J/M・最小三構成を主張しない。次phaseはP5。

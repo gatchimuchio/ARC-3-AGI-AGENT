@@ -1,8 +1,8 @@
 {
   "schema_version": "1.1.0",
   "artifact_type": "agi_minimum_three_obligation_graph",
-  "phase": "P4_COMPUTE_SUBJECT_C",
-  "last_completed_phase": "P3_ARC3_EVIDENCE_MATERIAL_COMPILER",
+  "phase": "P5_JUDGMENT_SUBJECT_J",
+  "last_completed_phase": "P4_COMPUTE_SUBJECT_C",
   "normative_roadmap": "docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md",
   "subjects": [
     {
@@ -32,15 +32,18 @@
       "id": "G1",
       "name": "generative_computation",
       "owner": "C",
-      "current_status": "PARTIAL",
+      "current_status": "SUPPORTED",
       "implementation_paths": [
         "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py",
-        "ARC-AGI-3-Agents/arc3_agi_agent/roles.py"
+        "ARC-AGI-3-Agents/arc3_agi_agent/roles.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/instruction_body.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/instruction_compiler.py"
       ],
       "test_evidence": [
-        "tests/unit/test_arc3_agi_kernel.py::TrinityAuthorityTests::test_full_set_establishes_one_authorized_cycle"
+        "tests/unit/test_compute_subject_p4.py",
+        "tests/unit/test_instruction_body_compiler.py"
       ],
-      "gaps": ["P is absent", "counter-hypotheses and predictions are not first-class outputs"]
+      "gaps": []
     },
     {
       "id": "G2",
@@ -93,13 +96,13 @@
     }
   ],
   "elements": [
-    {"id": "L0", "current_status": "PARTIAL", "next_phase": "P4"},
-    {"id": "P", "current_status": "UNSUPPORTED", "next_phase": "P4"},
-    {"id": "C", "current_status": "UNSUPPORTED", "next_phase": "P4"},
+    {"id": "L0", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
+    {"id": "P", "current_status": "SUPPORTED", "next_phase": "P11"},
+    {"id": "C", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "J", "current_status": "PARTIAL", "next_phase": "P5"},
     {"id": "M", "current_status": "PARTIAL", "next_phase": "P6"},
     {"id": "ENVIRONMENT_BOUNDARY", "current_status": "SUPPORTED", "next_phase": "P10"},
-    {"id": "LEARNING_COMPILER", "current_status": "PARTIAL", "next_phase": "P4"},
+    {"id": "LEARNING_COMPILER", "current_status": "PARTIAL", "next_phase": "P11"},
     {"id": "P0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
     {"id": "J0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
     {"id": "M0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
@@ -145,7 +148,8 @@
     {"id": "CLAIM_P0_FOUNDATION", "status": "SUPPORTED", "primary_test": "tests/unit/test_arc3_agi_foundation.py"},
     {"id": "CLAIM_P1_EXECUTION_MECHANISM", "status": "SUPPORTED", "primary_test": "tests/integration/test_offline_sample_runner.py"},
     {"id": "CLAIM_P3_EVIDENCE_COMPILER", "status": "SUPPORTED", "primary_test": "tests/unit/test_p3_evidence_dataset.py"},
-    {"id": "CLAIM_C_COMPLETE", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_P_IMPLEMENTED", "status": "SUPPORTED", "primary_test": "tests/unit/test_instruction_body_compiler.py"},
+    {"id": "CLAIM_C_COMPLETE", "status": "SUPPORTED", "primary_test": "tests/unit/test_compute_subject_p4.py"},
     {"id": "CLAIM_J_STANDALONE", "status": "UNSUPPORTED", "primary_test": null},
     {"id": "CLAIM_M_STANDALONE", "status": "UNSUPPORTED", "primary_test": null},
     {"id": "CLAIM_TWO_CYCLE_CAUSALITY", "status": "UNSUPPORTED", "primary_test": null},

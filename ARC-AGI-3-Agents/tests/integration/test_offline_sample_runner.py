@@ -43,6 +43,16 @@ class OfflineSampleRunnerIntegrationTests(unittest.TestCase):
             self.assertEqual(report["decision_statuses"], ("EMIT", "STOP"))
             self.assertEqual(report["verification_statuses"], ("SUSPEND",))
             self.assertGreaterEqual(len(report["trace_digests"]), 2)
+            self.assertEqual(
+                set(report["instruction_body_formats"]),
+                {"symbolic-rule-graph"},
+            )
+            self.assertEqual(
+                set(report["instruction_body_versions"]),
+                {"p-a-symbolic-v1"},
+            )
+            self.assertTrue(all(report["instruction_body_digests"]))
+            self.assertTrue(all(report["instruction_query_digests"]))
 
     def test_recording_is_written_without_leaking_directory_state(self) -> None:
         environments = Path(__file__).resolve().parents[3] / "environment_files"

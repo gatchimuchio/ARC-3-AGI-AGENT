@@ -27,6 +27,10 @@ class SampleAgentReport:
     context_actions_used: int
     previous_observation_present: bool
     trace_digests: tuple[str, ...]
+    instruction_body_formats: tuple[str, ...]
+    instruction_body_versions: tuple[str, ...]
+    instruction_body_digests: tuple[str, ...]
+    instruction_query_digests: tuple[str, ...]
     decision_statuses: tuple[str, ...]
     verification_statuses: tuple[str, ...]
 
@@ -111,6 +115,22 @@ class Layer0SampleAgent(Agent):
             previous_observation_present=context.previous_observation is not None,
             trace_digests=tuple(
                 cycle.kernel_result.trace_digest for cycle in self.cycles
+            ),
+            instruction_body_formats=tuple(
+                cycle.kernel_result.instruction_body_format
+                for cycle in self.cycles
+            ),
+            instruction_body_versions=tuple(
+                cycle.kernel_result.instruction_body_version
+                for cycle in self.cycles
+            ),
+            instruction_body_digests=tuple(
+                cycle.kernel_result.instruction_body_digest
+                for cycle in self.cycles
+            ),
+            instruction_query_digests=tuple(
+                cycle.kernel_result.instruction_query_digest
+                for cycle in self.cycles
             ),
             decision_statuses=tuple(
                 cycle.kernel_result.decision.status for cycle in self.cycles

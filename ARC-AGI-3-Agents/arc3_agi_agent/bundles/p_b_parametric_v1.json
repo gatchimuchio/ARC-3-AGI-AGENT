@@ -1,0 +1,303 @@
+{
+  "body_version": "p-b-parametric-v1",
+  "compile": {
+    "compiler_version": "arc3-instruction-compiler-v1",
+    "dataset_digest": "dataset:08618649261469065471232195148399022895639623897210",
+    "holdout_record_digest": "holdout-records:0613974447328363805363795467359126452283",
+    "method": "full-batch-multi-head-sigmoid-gradient-descent",
+    "metrics": {
+      "baseline_holdout_bce": 0.693147181,
+      "baseline_train_bce": 0.693147181,
+      "epochs": 120,
+      "holdout_example_count": 405,
+      "l2": 0.001,
+      "learning_rate": 0.2,
+      "trained_holdout_bce": 0.238558444,
+      "trained_train_bce": 0.220763586,
+      "trained_validation_bce": 0.227625351,
+      "training_example_count": 5018,
+      "validation_example_count": 312
+    },
+    "seed": 0,
+    "training_record_digest": "training-records:1129830788703287225920590850451807103920"
+  },
+  "content_digest": "sha256-decimal:063748466360764868803781633776294754303076777578612338993158639053037752827320",
+  "contract": {
+    "addressable": true,
+    "body_version": "p-b-parametric-v1",
+    "bound": true,
+    "compile_contract": [
+      "identity-free-input",
+      "deterministic-seed",
+      "content-addressed-output"
+    ],
+    "composable": true,
+    "content_digest": "sha256-decimal:063748466360764868803781633776294754303076777578612338993158639053037752827320",
+    "deterministic_under_fixed_state": true,
+    "executable_by_layer0": true,
+    "format_id": "parametric-sigmoid-matrix",
+    "hds_authority": "command-judge-accept-reject-suspend-rollback-stop-and-authorize",
+    "input_contract": [
+      "compute-request",
+      "observation",
+      "bounded-context",
+      "optional-memory-view"
+    ],
+    "layer0_roots": [
+      "SYMBOL_SPACE",
+      "CONTEXT_STATE",
+      "TRANSFORM_OR_WORLD_MODEL",
+      "CANDIDATE_SURFACE",
+      "FITTING_OR_SUCCESS_CRITERION",
+      "EMISSION_INTERFACE"
+    ],
+    "memory_authority": "passive-state-hds-authorized-write-only",
+    "output_contract": [
+      "representations",
+      "rules-or-parameters",
+      "hypotheses",
+      "counter-hypotheses",
+      "predictions",
+      "candidate-priors",
+      "uncertainty",
+      "falsification-conditions",
+      "provenance"
+    ],
+    "provenance_digest": "evidence-provenance:02340096078148855766703513961259289644777195912289",
+    "pure_llm_authority": "compute-and-propose-only",
+    "removal_witnesses": [
+      "without-symbol-space-no-reusable-input-alphabet",
+      "without-context-state-no-cross-observation-conditioning",
+      "without-transform-no-bounded-transition-hypothesis",
+      "without-candidate-surface-no-comparable-proposals",
+      "without-success-criterion-no-verifiable-closure",
+      "without-emission-interface-no-external-action-boundary"
+    ],
+    "runtime_identity_free": true,
+    "schema_version": "arc3-instruction-body-v1",
+    "state_contract": [
+      "immutable-body",
+      "explicit-compile-only",
+      "version-bound"
+    ],
+    "state_dependent": true,
+    "version": "arc3-restart-protocol-v2"
+  },
+  "format_id": "parametric-sigmoid-matrix",
+  "payload": {
+    "control_profiles": [
+      {
+        "expected_progress": 0.0,
+        "expected_risk": 0.0,
+        "falsification_conditions": [
+          "observation channel unavailable"
+        ],
+        "information_gain": 1.0,
+        "mode": "REOBSERVE",
+        "preconditions": [
+          "OBSERVATION_CHANNEL_AVAILABLE"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.0,
+        "rollback_cost": 0.0
+      },
+      {
+        "expected_progress": 0.0,
+        "expected_risk": 0.0,
+        "falsification_conditions": [
+          "all closure terms become observed"
+        ],
+        "information_gain": 1.0,
+        "mode": "SUSPEND",
+        "preconditions": [
+          "OPEN_PROOF_OBLIGATION"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.0,
+        "rollback_cost": 0.0
+      },
+      {
+        "expected_progress": 0.171009772,
+        "expected_risk": 0.862106406,
+        "falsification_conditions": [
+          "safe bounded work remains"
+        ],
+        "information_gain": 0.0,
+        "mode": "STOP",
+        "preconditions": [
+          "TERMINAL_OR_BUDGET_BOUNDARY"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.0,
+        "rollback_cost": 0.0
+      },
+      {
+        "expected_progress": 0.0,
+        "expected_risk": 0.892106406,
+        "falsification_conditions": [
+          "no reversible checkpoint exists"
+        ],
+        "information_gain": 0.949239957,
+        "mode": "ROLLBACK",
+        "preconditions": [
+          "REVERSIBLE_FAILURE_EVIDENCE"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.0,
+        "rollback_cost": 0.862106406
+      },
+      {
+        "expected_progress": 0.364006515,
+        "expected_risk": 0.862106406,
+        "falsification_conditions": [
+          "no bounded plan can be grounded"
+        ],
+        "information_gain": 0.979239957,
+        "mode": "PLAN",
+        "preconditions": [
+          "MULTIPLE_HYPOTHESES_AVAILABLE"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.2,
+        "rollback_cost": 0.431053203
+      }
+    ],
+    "model": {
+      "action_falsification_conditions": [
+        "action unavailable",
+        "held-out rendered effect contradicts prediction"
+      ],
+      "action_preconditions": [
+        "ACTION{action_id}_AVAILABLE",
+        "RENDERED_OBSERVATION_PRESENT"
+      ],
+      "activation": "sigmoid",
+      "architecture": "identity-free-feature-vector-to-six-sigmoid-heads",
+      "feature_names": [
+        "bias",
+        "action-id-scaled",
+        "available-action-fraction",
+        "entity-present",
+        "relation-present",
+        "visible-effect-present",
+        "previous-observation-present",
+        "action-history-fraction",
+        "memory-entry-fraction",
+        "failure-present",
+        "active-terminal",
+        "structural-present"
+      ],
+      "heads": [
+        "effect",
+        "progress",
+        "hazard",
+        "information_gain",
+        "candidate_prior",
+        "uncertainty"
+      ],
+      "holdout_record_count": 163,
+      "parameter_count": 72,
+      "parameter_digest": "parameter-matrix:0499650903169445590056516945518769723640",
+      "training_record_count": 1402,
+      "weights": [
+        [
+          0.472460226839,
+          0.273153413644,
+          0.361779706,
+          0.232574553011,
+          0.366844315421,
+          0.887108200253,
+          0.457278869654,
+          0.472460226839,
+          0.296111892944,
+          0.270526921548,
+          0.37887385485,
+          0.468180441933
+        ],
+        [
+          -0.232006980644,
+          -0.092806557155,
+          -0.125722677751,
+          -0.029922633323,
+          -0.042454523691,
+          -0.225662742796,
+          -0.206216344927,
+          -0.232006980644,
+          -0.025098801628,
+          -0.177079535046,
+          -0.102751368014,
+          -0.223905559431
+        ],
+        [
+          -0.064325514229,
+          -0.00933139743,
+          -0.306751429687,
+          0.517354600694,
+          0.474133330212,
+          -0.138371111172,
+          -0.111316570578,
+          -0.064325514229,
+          0.710931161679,
+          2.218073654176,
+          0.129369080541,
+          0.036363034764
+        ],
+        [
+          0.354262551807,
+          0.179304486207,
+          0.251441072598,
+          0.158089696991,
+          0.13509836042,
+          0.305233207257,
+          0.354237363758,
+          0.354262551807,
+          0.241682915275,
+          0.515343523022,
+          0.568111559426,
+          0.32411715849
+        ],
+        [
+          0.098051516258,
+          0.043258096104,
+          0.28021648383,
+          -0.233509549716,
+          -0.189209653072,
+          0.25024722378,
+          0.144954343266,
+          0.098051516258,
+          -0.370685445388,
+          -1.698715080682,
+          -0.02321449137,
+          0.01685665608
+        ],
+        [
+          0.694146799842,
+          0.346241417385,
+          0.475547167828,
+          0.179825829978,
+          0.282870934091,
+          0.662466688087,
+          0.671589614085,
+          0.694146799842,
+          0.304950576007,
+          0.531673656928,
+          0.605381132856,
+          0.672516941343
+        ]
+      ]
+    }
+  },
+  "provenance_digest": "evidence-provenance:02340096078148855766703513961259289644777195912289",
+  "runtime_identity_free": true,
+  "schema_version": "arc3-instruction-body-v1"
+}

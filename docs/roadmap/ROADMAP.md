@@ -18,8 +18,8 @@
 | P1 | Execution Mechanism Foundation | 完了・再分類 |
 | P2 | AGI最小三構成仕様・根本監査 | 完了 |
 | P3 | ARC3実証素材コンパイラ | 完了 |
-| P4 | 計算主体Cの単独実装 | 現在 |
-| P5 | HDS判断主体Jの単独実装 | 未開始 |
+| P4 | 計算主体Cの単独実装 | 完了 |
+| P5 | HDS判断主体Jの単独実装 | 現在 |
 | P6 | 記憶主体Mの単独実装 | 未開始 |
 | P7 | 二主体接続監査 | 未開始 |
 | P8 | 三主体Trinity循環 | 未開始 |
@@ -32,18 +32,17 @@
 
 ## 現在のphase gate
 
-P4では次だけを行う。
+P5では次だけを行う。
 
-- P-A記号・規則graph型instruction body
-- P-B実学習parameter型instruction body
-- P-A/P-B共通interface、schema、version、digest、provenance
-- 同一Layer-0によるP-A/P-B交換実行
-- C単独のhypothesis/counter-hypothesis/prediction/candidate proposal
-- L0六責任とPの除去監査
+- typed HDS Frameとstandalone判断API
+- C/P/Mなしのaccept/reject/reobserve/SUSPEND/STOP/rollback
+- memory-write / external-emit authorization proposal
+- X/R/Mc、hazard、evidence、budget、contradictionの適合試験
+- J除去・機能等価物監査
 
-P4ではJの最終判断、Mの確定mutation、external emit、sample攻略、公式接続、
-Kaggle作業を実行・完了扱いしない。P3 provenance manifestをruntime入力へ
-渡してはならない。
+P5ではJが仮説/candidateを生成せず、Mを保持せず、memory確定mutationや
+external actionを実行しない。sample攻略、公式接続、Kaggle作業を実行・
+完了扱いしない。
 
 ## 監査正本
 

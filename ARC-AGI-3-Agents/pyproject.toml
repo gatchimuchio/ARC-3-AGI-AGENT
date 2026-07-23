@@ -36,6 +36,7 @@ agentops = [
 [project.scripts]
 arc3-p1-samples = "sample_main:main"
 arc3-compile-evidence = "arc3_agi_agent.evidence_compiler:main"
+arc3-compile-instruction-bodies = "arc3_agi_agent.instruction_compiler:main"
 
 [build-system]
 requires = ["setuptools>=77"]
@@ -49,6 +50,9 @@ include = [
     "agents*",
     "arc3_agi_agent*",
 ]
+
+[tool.setuptools.package-data]
+arc3_agi_agent = ["bundles/*.json"]
 
 [tool.mypy]
 strict = true

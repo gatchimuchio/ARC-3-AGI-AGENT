@@ -9,7 +9,20 @@ from typing import Any, cast
 
 from .adapters.in_memory import EmissionResult, InMemoryEmissionInterface
 from .context import BoundedContextState, ContextSnapshot
-from .ir import CandidateIR, ClosureIR, HypothesisIR, ObservationIR
+from .instruction_body import (
+    INSTRUCTION_BODY_REMOVAL_WITNESS,
+    InstructionBody,
+    InstructionQueryResult,
+    load_default_symbolic_instruction_body,
+)
+from .ir import (
+    ActionPredictionIR,
+    CandidateIR,
+    ClosureIR,
+    HypothesisIR,
+    ObservationIR,
+    OutputProposalIR,
+)
 from .memory import MemoryMutationResult, MemorySnapshot, PassiveMemory
 from .protocol import (
     _HDS_AUTHORIZATION_CAPABILITY,
@@ -35,6 +48,9 @@ from .schema import digest_object
 from .verification import HAZARD_EFFECTS
 
 _HDS_COMMAND_CAPABILITY = object()
+COMPUTE_SUBJECT_REMOVAL_WITNESS = (
+    "COMPUTE_SUBJECT_REMOVED_NO_G1_HYPOTHESIS_PREDICTION_OR_PROPOSAL"
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -63,6 +79,14 @@ class ComputeProposal:
     hypotheses: tuple[HypothesisIR, ...]
     candidates: tuple[CandidateIR, ...]
     memory_proposal: MemoryProposal
+    predictions: tuple[ActionPredictionIR, ...] = ()
+    output_proposals: tuple[OutputProposalIR, ...] = ()
+    uncertainty: float = 1.0
+    provenance: tuple[str, ...] = ()
+    instruction_body_format: str = ""
+    instruction_body_version: str = ""
+    instruction_body_digest: str = ""
+    instruction_query_digest: str = ""
 
     @property
     def digest(self) -> str:
@@ -107,6 +131,10 @@ class KernelResult:
     trace_digest: str
     memory_result: MemoryMutationResult | None
     emission_result: EmissionResult | None
+    instruction_body_format: str
+    instruction_body_version: str
+    instruction_body_digest: str
+    instruction_query_digest: str
 
 
 @dataclass(slots=True)
@@ -822,6 +850,132 @@ class PureLLMCompute:
 
     executor: str = "pure-llm"
 
+    def _compute_from_request(
+        self,
+        request: ComputeRequest,
+        observation: ObservationIR,
+        context: ContextSnapshot,
+        memory: MemorySnapshot,
+        world_model: object,
+        candidate_surface: object,
+        instruction_body: InstructionBody,
+    ) -> ComputeProposal:
+        body_failures = instruction_body.validate()
+        if body_failures:
+            raise ValueError(";".join(body_failures))
+        query = instruction_body.query(
+            request,
+            observation,
+            context,
+            memory,
+        )
+        if not isinstance(query, InstructionQueryResult):
+            raise TypeError("instruction body query must return InstructionQueryResult")
+        query_failures = query.validate(observation)
+        if query_failures:
+            raise ValueError(";".join(query_failures))
+
+        transform = getattr(world_model, "transform", None)
+        generate = getattr(candidate_surface, "generate", None)
+        if not callable(transform) or not callable(generate):
+            raise TypeError("compute dependencies must be callable")
+        hypotheses = transform(
+            observation,
+            context,
+            memory,
+            query,
+        )
+        candidates = generate(
+            observation,
+            context,
+            hypotheses,
+            query,
+        )
+        memory_target = "cycle:" + digest_object(
+            {
+                "command_id": request.command_id,
+                "observation": observation.frame_signature,
+                "instruction_query": query.query_digest,
+            }
+        )[:20]
+        memory_proposal = MemoryProposal(
+            target=memory_target,
+            payload_items=(
+                ("candidate_count", len(candidates)),
+                ("command_id", request.command_id),
+                ("hypothesis_count", len(hypotheses)),
+                ("instruction_body_digest", query.body_digest),
+                ("instruction_body_version", query.body_version),
+                ("instruction_query_digest", query.query_digest),
+                ("observation_signature", observation.frame_signature),
+            ),
+        )
+        output_proposals = tuple(
+            OutputProposalIR(
+                proposal_id="output-proposal:"
+                + digest_object(
+                    {
+                        "query": query.query_digest,
+                        "action_id": prediction.action_id,
+                    }
+                )[:20],
+                proposal_type="action-effect-proposal",
+                payload_items=(
+                    ("action_id", prediction.action_id),
+                    ("candidate_prior", prediction.candidate_prior),
+                    ("predicted_effects", prediction.predicted_effects),
+                    ("uncertainty", prediction.uncertainty),
+                ),
+                provenance=tuple(
+                    sorted(
+                        {
+                            query.query_digest,
+                            *query.provenance,
+                            *prediction.instruction_refs,
+                        }
+                    )
+                ),
+            )
+            for prediction in query.predictions
+        )
+        return ComputeProposal(
+            command_id=request.command_id,
+            hypotheses=hypotheses,
+            candidates=candidates,
+            memory_proposal=memory_proposal,
+            predictions=query.predictions,
+            output_proposals=output_proposals,
+            uncertainty=query.uncertainty,
+            provenance=query.provenance,
+            instruction_body_format=query.body_format,
+            instruction_body_version=query.body_version,
+            instruction_body_digest=query.body_digest,
+            instruction_query_digest=query.query_digest,
+        )
+
+    def compute_standalone(
+        self,
+        request: ComputeRequest,
+        observation: ObservationIR,
+        context: ContextSnapshot,
+        instruction_body: InstructionBody,
+        world_model: object,
+        candidate_surface: object,
+        memory: MemorySnapshot | None = None,
+    ) -> ComputeProposal:
+        """Prove G1 without invoking J, mutating M, or emitting externally."""
+
+        memory_view = memory or MemorySnapshot(version=0, entries=())
+        return self._compute_from_request(
+            request,
+            observation,
+            context,
+            memory_view,
+            world_model,
+            candidate_surface,
+            instruction_body,
+        )
+
     def compute(
         self,
         command: AuthorizedComputeCommand | None,
@@ -831,6 +985,7 @@ class PureLLMCompute:
         memory: MemorySnapshot,
         world_model: object,
         candidate_surface: object,
+        instruction_body: InstructionBody,
     ) -> ComputeProposal:
         request = hds.consume_compute(
             command,
@@ -838,33 +993,14 @@ class PureLLMCompute:
             context,
             memory,
         )
-        transform = getattr(world_model, "transform", None)
-        generate = getattr(candidate_surface, "generate", None)
-        if not callable(transform) or not callable(generate):
-            raise TypeError("compute dependencies must be callable")
-
-        hypotheses = transform(observation, context, memory)
-        candidates = generate(observation, context, hypotheses)
-        memory_target = "cycle:" + digest_object(
-            {
-                "command_id": request.command_id,
-                "observation": observation.frame_signature,
-            }
-        )[:20]
-        memory_proposal = MemoryProposal(
-            target=memory_target,
-            payload_items=(
-                ("candidate_count", len(candidates)),
-                ("command_id", request.command_id),
-                ("hypothesis_count", len(hypotheses)),
-                ("observation_signature", observation.frame_signature),
-            ),
-        )
-        return ComputeProposal(
-            command_id=request.command_id,
-            hypotheses=hypotheses,
-            candidates=candidates,
-            memory_proposal=memory_proposal,
+        return self._compute_from_request(
+            request,
+            observation,
+            context,
+            memory,
+            world_model,
+            candidate_surface,
+            instruction_body,
         )
 
     def execute_memory(
@@ -912,6 +1048,9 @@ class Layer0Components:
     candidate_surface: object | None = field(
         default_factory=DeterministicCandidateSurface
     )
+    instruction_body: object | None = field(
+        default_factory=load_default_symbolic_instruction_body
+    )
     success_criterion: object | None = field(
         default_factory=DeterministicSuccessCriterion
     )
@@ -919,7 +1058,7 @@ class Layer0Components:
         default_factory=InMemoryEmissionInterface
     )
     hds: HDSController = field(default_factory=HDSController)
-    compute: PureLLMCompute = field(default_factory=PureLLMCompute)
+    compute: PureLLMCompute | None = field(default_factory=PureLLMCompute)
     memory: PassiveMemory = field(default_factory=PassiveMemory)
 
 
@@ -1035,6 +1174,45 @@ class Layer0Kernel:
             memory=memory_view.digest,
         )
         lifecycle.transition("COMPUTE")
+        compute_subject = self.components.compute
+        if compute_subject is None:
+            raise Layer0FunctionalLoss(
+                "COMPUTE_SUBJECT",
+                COMPUTE_SUBJECT_REMOVAL_WITNESS,
+                stage="COMPUTE",
+                removed=True,
+            )
+        instruction_body = self.components.instruction_body
+        if instruction_body is None:
+            raise Layer0FunctionalLoss(
+                "INSTRUCTION_BODY",
+                INSTRUCTION_BODY_REMOVAL_WITNESS,
+                stage="COMPUTE",
+                removed=True,
+            )
+        if not isinstance(instruction_body, InstructionBody):
+            raise Layer0FunctionalLoss(
+                "INSTRUCTION_BODY",
+                "INSTRUCTION_BODY_CONTRACT_MISSING",
+                stage="COMPUTE",
+                removed=False,
+            )
+        instruction_failures = instruction_body.validate()
+        if instruction_failures:
+            raise Layer0FunctionalLoss(
+                "INSTRUCTION_BODY",
+                "INSTRUCTION_BODY_INVALID:" + ",".join(instruction_failures),
+                stage="COMPUTE",
+                removed=False,
+            )
+        record(
+            lifecycle.stage,
+            "INSTRUCTION_BODY",
+            "INSTRUCTION_BODY_BOUND",
+            body_digest=instruction_body.digest(),
+            body_format=instruction_body.format_id,
+            body_version=instruction_body.body_version,
+        )
         command = self.components.hds.issue_compute(
             observation,
             context,
@@ -1060,7 +1238,7 @@ class Layer0Kernel:
             stage="COMPUTE",
         )
         del world_method, candidate_method
-        proposal = self.components.compute.compute(
+        proposal = compute_subject.compute(
             command,
             self.components.hds,
             observation,
@@ -1068,6 +1246,7 @@ class Layer0Kernel:
             memory_view,
             self.components.world_model,
             self.components.candidate_surface,
+            instruction_body,
         )
         if (
             not isinstance(proposal.hypotheses, tuple)
@@ -1096,6 +1275,13 @@ class Layer0Kernel:
             candidates=len(proposal.candidates),
             hypotheses=len(proposal.hypotheses),
             proposal=proposal.digest,
+        )
+        record(
+            lifecycle.stage,
+            "INSTRUCTION_BODY",
+            "INSTRUCTION_BODY_QUERY_EXECUTED",
+            body_digest=proposal.instruction_body_digest,
+            query=proposal.instruction_query_digest,
         )
 
         condition = self._method(
@@ -1179,7 +1365,7 @@ class Layer0Kernel:
                 candidate,
             )
             lifecycle.transition("ACT")
-            emission_result = self.components.compute.execute_emission(
+            emission_result = compute_subject.execute_emission(
                 emission_directive,
                 decision,
                 candidate,
@@ -1245,7 +1431,7 @@ class Layer0Kernel:
                     proposal.memory_proposal,
                 )
                 lifecycle.transition("UPDATE_MEMORY")
-                memory_result = self.components.compute.execute_memory(
+                memory_result = compute_subject.execute_memory(
                     memory_directive,
                     decision,
                     proposal.memory_proposal,
@@ -1300,11 +1486,16 @@ class Layer0Kernel:
             trace_digest=digest_object(trace),
             memory_result=memory_result,
             emission_result=emission_result,
+            instruction_body_format=proposal.instruction_body_format,
+            instruction_body_version=proposal.instruction_body_version,
+            instruction_body_digest=proposal.instruction_body_digest,
+            instruction_query_digest=proposal.instruction_query_digest,
         )
 
 
 __all__ = [
     "AuthorizedComputeCommand",
+    "COMPUTE_SUBJECT_REMOVAL_WITNESS",
     "ComputeProposal",
     "HDSController",
     "KernelResult",

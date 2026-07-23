@@ -6,7 +6,8 @@
 - sample runner: `ARC-AGI-3-Agents/sample_main.py`
 - online / competition runner: not connected or changed
 - benchmark claim: none
-- Pure-LLM compute subject claim: **not closed because instruction body P is not yet independent**
+- Pure-LLM compute subject claim at P1: **not closed**
+- superseded status: P4で独立Pとstandalone Cを実装済み
 
 ## 0. 再分類
 

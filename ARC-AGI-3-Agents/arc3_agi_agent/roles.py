@@ -6,6 +6,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 
 from .context import ContextSnapshot
+from .instruction_body import InstructionQueryResult
 from .ir import CandidateIR, ClosureIR, EntityIR, HypothesisIR, ObservationIR
 from .memory import MemorySnapshot
 from .schema import TERMINAL_STATES, digest_object, forbidden_runtime_paths
@@ -186,7 +187,7 @@ class DeterministicSymbolSpace:
 
 @dataclass(frozen=True, slots=True)
 class DeterministicWorldModel:
-    """Generate competing, falsifiable hypotheses without hidden-state claims."""
+    """Execute P-provided hypothesis material without embedded task knowledge."""
 
     role: str = "TRANSFORM_OR_WORLD_MODEL"
 
@@ -195,69 +196,31 @@ class DeterministicWorldModel:
         observation: ObservationIR,
         context: ContextSnapshot,
         memory: MemorySnapshot,
+        instruction_material: InstructionQueryResult,
     ) -> tuple[HypothesisIR, ...]:
-        if not observation.frame_signature:
+        del context, memory
+        if (
+            not observation.frame_signature
+            or not isinstance(instruction_material, InstructionQueryResult)
+            or instruction_material.validate(observation)
+        ):
             return ()
-
-        basis = {
-            "observation": observation.frame_signature,
-            "previous": (
-                context.previous_observation.frame_signature
-                if context.previous_observation is not None
-                else ""
-            ),
-            "memory": memory.digest,
-        }
-        suffix = digest_object(basis)[:12]
-        visible_prediction = (
-            observation.visible_effects[0]
-            if observation.visible_effects
-            else "VISIBLE_STATE_CHANGE"
-        )
-        support: tuple[str, ...] = (
-            f"observation:{observation.frame_signature}",
-        )
-        if context.previous_observation is not None:
-            support += (
-                f"previous:{context.previous_observation.frame_signature}",
-            )
-
-        return (
-            HypothesisIR(
-                hypothesis_id=f"hypothesis:transition:{suffix}",
-                hypothesis_type="rendered-transition",
-                claims=("an available action may change rendered state",),
-                predictions=(visible_prediction,),
-                falsification_conditions=(
-                    "same rendered signature after bounded action",
-                ),
-                support=support,
-                confidence=0.55,
-                state="PROPOSED",
-            ),
-            HypothesisIR(
-                hypothesis_id=f"hypothesis:stasis:{suffix}",
-                hypothesis_type="counter-hypothesis",
-                claims=("an available action may have no immediately visible effect",),
-                predictions=("NO_VISIBLE_CHANGE",),
-                falsification_conditions=("visible effect follows bounded action",),
-                support=support,
-                confidence=0.45,
-                state="PROPOSED",
-            ),
-        )
+        return instruction_material.hypotheses
 
 
 def _candidate_id(
     mode: str,
     observation: ObservationIR,
     action_id: int | None = None,
+    *,
+    instruction_digest: str = "",
 ) -> str:
     digest = digest_object(
         {
             "mode": mode,
             "observation": observation.frame_signature,
             "action_id": action_id,
+            "instruction": instruction_digest,
         }
     )[:12]
     return f"candidate:{mode.casefold()}:{digest}"
@@ -281,7 +244,7 @@ def _action_step(
 
 @dataclass(frozen=True, slots=True)
 class DeterministicCandidateSurface:
-    """Produce a bounded, comparable action/control/plan candidate surface."""
+    """Convert P-provided priors and controls into typed candidates."""
 
     role: str = "CANDIDATE_SURFACE"
 
@@ -290,119 +253,166 @@ class DeterministicCandidateSurface:
         observation: ObservationIR,
         context: ContextSnapshot,
         hypotheses: tuple[HypothesisIR, ...],
+        instruction_material: InstructionQueryResult,
     ) -> tuple[CandidateIR, ...]:
+        if (
+            not isinstance(instruction_material, InstructionQueryResult)
+            or instruction_material.validate(observation)
+        ):
+            return ()
         expected = {
             hypothesis.hypothesis_id: hypothesis.predictions
             for hypothesis in hypotheses
         }
-        actions = observation.available_actions
         candidates: list[CandidateIR] = []
-
-        if actions:
-            primary = actions[0]
+        prediction_by_action = {
+            item.action_id: item for item in instruction_material.predictions
+        }
+        for action_id in observation.available_actions:
+            prediction = prediction_by_action.get(action_id)
+            if prediction is None:
+                continue
+            expected_progress = min(
+                1.0,
+                max(
+                    0.0,
+                    (prediction.progress_likelihood + prediction.candidate_prior)
+                    / 2.0,
+                ),
+            )
+            repetition_cost = min(
+                1.0,
+                context.action_history.count(action_id) / 4.0,
+            )
             candidates.append(
                 CandidateIR(
-                    candidate_id=_candidate_id("ACTION", observation, primary),
+                    candidate_id=_candidate_id(
+                        "ACTION",
+                        observation,
+                        action_id,
+                        instruction_digest=instruction_material.query_digest,
+                    ),
                     mode="ACTION",
-                    steps=(_action_step(primary, observation),),
-                    preconditions=(f"ACTION{primary}_AVAILABLE",),
+                    steps=(_action_step(action_id, observation),),
+                    preconditions=prediction.preconditions,
                     expected_effects_by_hypothesis=expected,
-                    expected_progress=0.5,
-                    expected_information_gain=0.4,
-                    expected_risk=0.2,
-                    rollback_cost=0.2,
-                    provenance=("current-observation", "world-model"),
+                    expected_progress=expected_progress,
+                    expected_information_gain=prediction.information_gain,
+                    expected_risk=prediction.hazard_likelihood,
+                    repetition_cost=repetition_cost,
+                    rollback_cost=prediction.hazard_likelihood / 2.0,
+                    provenance=tuple(
+                        sorted(
+                            {
+                                instruction_material.query_digest,
+                                *instruction_material.provenance,
+                                *prediction.instruction_refs,
+                            }
+                        )
+                    ),
                     falsification_conditions=(
-                        "action unavailable",
-                        "observed effect contradicts every hypothesis",
+                        prediction.falsification_conditions
                     ),
                 )
             )
-            probe = actions[1] if len(actions) > 1 else primary
+
+        if instruction_material.predictions:
+            probe_prediction = sorted(
+                instruction_material.predictions,
+                key=lambda item: (
+                    -item.information_gain,
+                    item.hazard_likelihood,
+                    item.action_id,
+                ),
+            )[0]
+            probe_action = probe_prediction.action_id
             candidates.append(
                 CandidateIR(
-                    candidate_id=_candidate_id("BOUNDED_PROBE", observation, probe),
+                    candidate_id=_candidate_id(
+                        "BOUNDED_PROBE",
+                        observation,
+                        probe_action,
+                        instruction_digest=instruction_material.query_digest,
+                    ),
                     mode="BOUNDED_PROBE",
                     steps=(
                         _action_step(
-                            probe,
+                            probe_action,
                             observation,
                             limit=1,
                         ),
                     ),
-                    preconditions=(
-                        f"ACTION{probe}_AVAILABLE",
-                        "ACTION_BUDGET_REMAINING",
+                    preconditions=tuple(
+                        sorted(
+                            {
+                                *probe_prediction.preconditions,
+                                "ACTION_BUDGET_REMAINING",
+                            }
+                        )
                     ),
                     expected_effects_by_hypothesis=expected,
-                    expected_progress=0.3,
-                    expected_information_gain=0.7,
-                    expected_risk=0.15,
-                    rollback_cost=0.1,
-                    provenance=("current-observation", "world-model"),
-                    falsification_conditions=(
-                        "action unavailable",
-                        "probe budget exhausted",
+                    expected_progress=probe_prediction.progress_likelihood,
+                    expected_information_gain=probe_prediction.information_gain,
+                    expected_risk=probe_prediction.hazard_likelihood,
+                    repetition_cost=min(
+                        1.0,
+                        context.action_history.count(probe_action) / 4.0,
+                    ),
+                    rollback_cost=probe_prediction.hazard_likelihood / 2.0,
+                    provenance=tuple(
+                        sorted(
+                            {
+                                instruction_material.query_digest,
+                                *instruction_material.provenance,
+                                *probe_prediction.instruction_refs,
+                            }
+                        )
+                    ),
+                    falsification_conditions=tuple(
+                        sorted(
+                            {
+                                *probe_prediction.falsification_conditions,
+                                "probe budget exhausted",
+                            }
+                        )
                     ),
                 )
             )
 
-        candidates.extend(
-            (
+        for control in instruction_material.controls:
+            step: dict[str, object] = {"operation": control.mode}
+            if control.mode == "PLAN":
+                step["horizon"] = 2
+            candidates.append(
                 CandidateIR(
-                    candidate_id=_candidate_id("REOBSERVE", observation),
-                    mode="REOBSERVE",
-                    steps=({"operation": "REOBSERVE"},),
-                    preconditions=("OBSERVATION_CHANNEL_AVAILABLE",),
-                    expected_information_gain=0.5,
-                    expected_risk=0.0,
-                    provenance=("current-observation",),
-                    falsification_conditions=("observation channel unavailable",),
-                ),
-                CandidateIR(
-                    candidate_id=_candidate_id("SUSPEND", observation),
-                    mode="SUSPEND",
-                    steps=({"operation": "SUSPEND"},),
-                    preconditions=("OPEN_PROOF_OBLIGATION",),
-                    expected_risk=0.0,
-                    provenance=("closure-policy",),
-                    falsification_conditions=("all closure terms become observed",),
-                ),
-                CandidateIR(
-                    candidate_id=_candidate_id("STOP", observation),
-                    mode="STOP",
-                    steps=({"operation": "STOP"},),
-                    preconditions=("TERMINAL_OR_BUDGET_BOUNDARY",),
-                    expected_risk=0.0,
-                    provenance=("stopping-policy",),
-                    falsification_conditions=("safe bounded work remains",),
-                ),
-                CandidateIR(
-                    candidate_id=_candidate_id("ROLLBACK", observation),
-                    mode="ROLLBACK",
-                    steps=({"operation": "ROLLBACK"},),
-                    preconditions=("REVERSIBLE_FAILURE_EVIDENCE",),
-                    expected_risk=0.1,
-                    rollback_cost=0.3,
-                    provenance=("context-failure-evidence",),
-                    falsification_conditions=("no reversible checkpoint exists",),
-                ),
-                CandidateIR(
-                    candidate_id=_candidate_id("PLAN", observation),
-                    mode="PLAN",
-                    steps=({"operation": "PLAN", "horizon": 2},),
-                    preconditions=("MULTIPLE_HYPOTHESES_AVAILABLE",),
-                    expected_effects_by_hypothesis=expected,
-                    expected_progress=0.4,
-                    expected_information_gain=0.4,
-                    expected_risk=0.1,
-                    repetition_cost=0.1,
-                    rollback_cost=0.2,
-                    provenance=("world-model", "bounded-planning"),
-                    falsification_conditions=("no bounded plan can be grounded",),
-                ),
+                    candidate_id=_candidate_id(
+                        control.mode,
+                        observation,
+                        instruction_digest=instruction_material.query_digest,
+                    ),
+                    mode=control.mode,
+                    steps=(step,),
+                    preconditions=control.preconditions,
+                    expected_effects_by_hypothesis=(
+                        expected if control.mode == "PLAN" else {}
+                    ),
+                    expected_progress=control.expected_progress,
+                    expected_information_gain=control.information_gain,
+                    expected_risk=control.expected_risk,
+                    repetition_cost=control.repetition_cost,
+                    rollback_cost=control.rollback_cost,
+                    provenance=tuple(
+                        sorted(
+                            {
+                                instruction_material.query_digest,
+                                *instruction_material.provenance,
+                                *control.provenance,
+                            }
+                        )
+                    ),
+                    falsification_conditions=control.falsification_conditions,
+                )
             )
-        )
         return tuple(candidates)
 
 

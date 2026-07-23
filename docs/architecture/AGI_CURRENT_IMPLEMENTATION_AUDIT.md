@@ -5,6 +5,8 @@
 - roadmap source SHA-256: `742d8237c2472fe63680b0006053b7de71e6fbb0cfc98bc6f1200bae4c77000b`
 - roadmap repository LF SHA-256: `bd4e7545fcb6a6c25483ed86bfbedfa44f1ee731af687ed87806e2c6d98ad09b`
 - conclusion: P0/P1の限定claimだけがSUPPORTED。AGI最小三構成claimは未成立
+- document status: P2時点の監査snapshot。現行phase/statusはobligation graphと
+  claim registryを正本とする
 
 ## 1. Work-block FrameSpec
 
@@ -203,3 +205,17 @@ P3完了時点で`F-P2-007`のうち、次を是正した。
 `F-P2-007`全体をCLOSEDとはしない。versioned P0/J0/M0を形成するlearning compilerは
 P4/P5/P6/P11へ残るため、machine statusは`PARTIAL`である。P3 HDS判断は`PASS`、
 次phaseは`P4_COMPUTE_SUBJECT_C`とする。
+
+## 8. P4 disposition
+
+P4完了時点で`F-P2-001`と`F-P2-002`を是正した。
+
+- query可能・versioned・digest/provenance付きのP-A/P-Bを形成
+- P3 C fixtureからP-Bを実学習し、holdout BCEをbaseline未満に維持
+- `roles.py`の固定仮説/metricを除去し、P materialの実行mechanismへ縮退
+- standalone CでG1を閉じ、J/M/write/emitの代行がないことをnegative test
+- L0六責任/P/Cの8 single-removalを固有witnessで検証
+- 25/25 OFFLINE sample cycleでP queryを観測
+
+`F-P2-003`以降は未解決である。P4 HDS判断は`PASS`、次phaseは
+`P5_JUDGMENT_SUBJECT_J`とする。

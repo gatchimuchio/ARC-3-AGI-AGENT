@@ -126,6 +126,45 @@ class InstructionBodyContract:
     """Immutable execution contract; mutable judgment memory is not this body."""
 
     version: str = PROTOCOL_VERSION
+    format_id: str = "arc3-executable-instruction-body"
+    schema_version: str = "arc3-instruction-body-v1"
+    body_version: str = "UNBOUND"
+    content_digest: str = "UNBOUND"
+    addressable: bool = True
+    state_dependent: bool = True
+    composable: bool = True
+    executable_by_layer0: bool = True
+    deterministic_under_fixed_state: bool = True
+    runtime_identity_free: bool = True
+    provenance_digest: str = "UNBOUND"
+    input_contract: tuple[str, ...] = (
+        "compute-request",
+        "observation",
+        "bounded-context",
+        "optional-memory-view",
+    )
+    state_contract: tuple[str, ...] = (
+        "immutable-body",
+        "explicit-compile-only",
+        "version-bound",
+    )
+    output_contract: tuple[str, ...] = (
+        "representations",
+        "rules-or-parameters",
+        "hypotheses",
+        "counter-hypotheses",
+        "predictions",
+        "candidate-priors",
+        "uncertainty",
+        "falsification-conditions",
+        "provenance",
+    )
+    compile_contract: tuple[str, ...] = (
+        "identity-free-input",
+        "deterministic-seed",
+        "content-addressed-output",
+    )
+    bound: bool = False
     layer0_roots: tuple[str, ...] = LAYER0_ROOTS
     pure_llm_authority: str = "compute-and-propose-only"
     hds_authority: str = (
@@ -145,6 +184,50 @@ class InstructionBodyContract:
         failures: list[str] = []
         if not _is_nonempty_text(self.version):
             failures.append("PROTOCOL_VERSION_MISSING")
+        for field_name, value in (
+            ("FORMAT_ID", self.format_id),
+            ("SCHEMA_VERSION", self.schema_version),
+            ("BODY_VERSION", self.body_version),
+            ("CONTENT_DIGEST", self.content_digest),
+            ("PROVENANCE_DIGEST", self.provenance_digest),
+        ):
+            if not _is_nonempty_text(value):
+                failures.append(f"INSTRUCTION_BODY_{field_name}_MISSING")
+        required_properties = (
+            ("ADDRESSABLE", self.addressable),
+            ("STATE_DEPENDENT", self.state_dependent),
+            ("COMPOSABLE", self.composable),
+            ("EXECUTABLE_BY_LAYER0", self.executable_by_layer0),
+            (
+                "DETERMINISTIC_UNDER_FIXED_STATE",
+                self.deterministic_under_fixed_state,
+            ),
+            ("RUNTIME_IDENTITY_FREE", self.runtime_identity_free),
+        )
+        failures.extend(
+            f"INSTRUCTION_BODY_{name}_REQUIRED"
+            for name, enabled in required_properties
+            if enabled is not True
+        )
+        for field_name, values in (
+            ("INPUT_CONTRACT", self.input_contract),
+            ("STATE_CONTRACT", self.state_contract),
+            ("OUTPUT_CONTRACT", self.output_contract),
+            ("COMPILE_CONTRACT", self.compile_contract),
+        ):
+            if not isinstance(values, tuple) or not values or any(
+                not _is_nonempty_text(item) for item in values
+            ):
+                failures.append(f"INSTRUCTION_BODY_{field_name}_INVALID")
+        if self.bound and any(
+            value == "UNBOUND"
+            for value in (
+                self.body_version,
+                self.content_digest,
+                self.provenance_digest,
+            )
+        ):
+            failures.append("INSTRUCTION_BODY_BOUND_METADATA_MISSING")
         if self.layer0_roots != LAYER0_ROOTS:
             failures.append("LAYER0_ROOT_SET_INVALID")
         if len(self.removal_witnesses) != len(LAYER0_ROOTS):
@@ -162,6 +245,22 @@ class InstructionBodyContract:
     def to_dict(self) -> dict[str, object]:
         return {
             "version": self.version,
+            "format_id": self.format_id,
+            "schema_version": self.schema_version,
+            "body_version": self.body_version,
+            "content_digest": self.content_digest,
+            "addressable": self.addressable,
+            "state_dependent": self.state_dependent,
+            "composable": self.composable,
+            "executable_by_layer0": self.executable_by_layer0,
+            "deterministic_under_fixed_state": self.deterministic_under_fixed_state,
+            "runtime_identity_free": self.runtime_identity_free,
+            "provenance_digest": self.provenance_digest,
+            "input_contract": list(self.input_contract),
+            "state_contract": list(self.state_contract),
+            "output_contract": list(self.output_contract),
+            "compile_contract": list(self.compile_contract),
+            "bound": self.bound,
             "layer0_roots": list(self.layer0_roots),
             "pure_llm_authority": self.pure_llm_authority,
             "hds_authority": self.hds_authority,

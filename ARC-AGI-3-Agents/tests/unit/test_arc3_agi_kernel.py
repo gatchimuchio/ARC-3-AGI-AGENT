@@ -93,6 +93,7 @@ def authorized_cycle() -> tuple[object, ...]:
         memory,
         components.world_model,
         components.candidate_surface,
+        components.instruction_body,
     )
     context = components.context_state.condition(proposal.hypotheses)
     closures = components.success_criterion.evaluate(
@@ -191,6 +192,7 @@ class TrinityAuthorityTests(unittest.TestCase):
                 memory,
                 components.world_model,
                 components.candidate_surface,
+                components.instruction_body,
             )
 
         command = components.hds.issue_compute(observation, context, memory)
@@ -207,6 +209,7 @@ class TrinityAuthorityTests(unittest.TestCase):
                 memory,
                 components.world_model,
                 components.candidate_surface,
+                components.instruction_body,
             )
         changed_raw = valid_raw_observation()
         changed_raw["frame"] = [[1, 1], [1, 0]]
@@ -223,6 +226,7 @@ class TrinityAuthorityTests(unittest.TestCase):
                 memory,
                 components.world_model,
                 components.candidate_surface,
+                components.instruction_body,
             )
         with self.assertRaisesRegex(
             AuthorityViolation,
@@ -236,6 +240,7 @@ class TrinityAuthorityTests(unittest.TestCase):
                 memory,
                 components.world_model,
                 components.candidate_surface,
+                components.instruction_body,
             )
         with self.assertRaisesRegex(
             AuthorityViolation,
@@ -249,6 +254,7 @@ class TrinityAuthorityTests(unittest.TestCase):
                 replace(memory, version=memory.version + 1),
                 components.world_model,
                 components.candidate_surface,
+                components.instruction_body,
             )
         components.compute.compute(
             command,
@@ -258,6 +264,7 @@ class TrinityAuthorityTests(unittest.TestCase):
             memory,
             components.world_model,
             components.candidate_surface,
+            components.instruction_body,
         )
         with self.assertRaisesRegex(
             AuthorityViolation,
@@ -271,6 +278,7 @@ class TrinityAuthorityTests(unittest.TestCase):
                 memory,
                 components.world_model,
                 components.candidate_surface,
+                components.instruction_body,
             )
 
     def test_memory_is_passive_and_rejects_unapproved_write(self) -> None:
@@ -503,6 +511,7 @@ class TrinityAuthorityTests(unittest.TestCase):
             memory,
             components.world_model,
             components.candidate_surface,
+            components.instruction_body,
         )
         context = components.context_state.condition(proposal.hypotheses)
         closures = components.success_criterion.evaluate(
@@ -547,6 +556,7 @@ class TrinityAuthorityTests(unittest.TestCase):
             memory,
             components.world_model,
             components.candidate_surface,
+            components.instruction_body,
         )
         context = components.context_state.condition(proposal.hypotheses)
         closures = components.success_criterion.evaluate(
@@ -595,6 +605,7 @@ class TrinityAuthorityTests(unittest.TestCase):
             memory,
             components.world_model,
             components.candidate_surface,
+            components.instruction_body,
         )
         original = next(
             item
@@ -651,6 +662,7 @@ class TrinityAuthorityTests(unittest.TestCase):
             memory,
             components.world_model,
             components.candidate_surface,
+            components.instruction_body,
         )
         conditioned = components.context_state.condition(proposal.hypotheses)
         closures = components.success_criterion.evaluate(
@@ -1193,16 +1205,24 @@ class ClosureTests(unittest.TestCase):
         self.observation = self.components.symbol_space.encode(valid_raw_observation())
         self.context_store = BoundedContextState()
         self.context = self.context_store.ingest(self.observation)
-        self.hypotheses = self.components.world_model.transform(
+        memory = self.components.memory.view()
+        command = self.components.hds.issue_compute(
             self.observation,
             self.context,
-            self.components.memory.view(),
+            memory,
         )
-        self.candidates = self.components.candidate_surface.generate(
+        proposal = self.components.compute.compute(
+            command,
+            self.components.hds,
             self.observation,
             self.context,
-            self.hypotheses,
+            memory,
+            self.components.world_model,
+            self.components.candidate_surface,
+            self.components.instruction_body,
         )
+        self.hypotheses = proposal.hypotheses
+        self.candidates = proposal.candidates
         self.criterion = DeterministicSuccessCriterion()
 
     def test_missing_x_r_or_mc_suspends(self) -> None:

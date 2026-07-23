@@ -1,11 +1,13 @@
 # AGI最小三構成 Test Matrix
 
-- current phase: `P4_COMPUTE_SUBJECT_C`
-- last completed phase: `P3_ARC3_EVIDENCE_MATERIAL_COMPILER`
+- current phase: `P5_JUDGMENT_SUBJECT_J`
+- last completed phase: `P4_COMPUTE_SUBJECT_C`
 - current executable regression gates:
   `test_agi_minimum_three_audit.py`,
   `test_evidence_compiler.py`,
-  `test_p3_evidence_dataset.py`
+  `test_p3_evidence_dataset.py`,
+  `test_instruction_body_compiler.py`,
+  `test_compute_subject_p4.py`
 
 ## 現行証拠
 
@@ -20,15 +22,15 @@
 | `T-P3-DATASET-ACCOUNTING` | `CLAIM_P3_EVIDENCE_COMPILER` | `test_p3_evidence_dataset.py` | 730/730 source、parse error 0、provenance往復、C/J/M fixture分離 | 実装・実行済み |
 | `T-P3-HOLDOUT-CONTAMINATION` | `CLAIM_P3_EVIDENCE_COMPILER` | `test_p3_evidence_dataset.py` | family/structure/action-mechanism groupが単一splitだけへ属する | 実装・実行済み |
 | `T-P3-COMPILER-DETERMINISM` | `CLAIM_P3_EVIDENCE_COMPILER` | `test_evidence_compiler.py` + full rebuild | seed 0で全12出力がbyte一致 | 実装・実行済み |
+| `T-P4-P-SCHEMA` | `CLAIM_P_IMPLEMENTED` | `test_instruction_body_compiler.py` | schema/version/digest/provenance/identity違反を拒否 | 実装・実行済み |
+| `T-P4-P-SWAP` | P-A/P-B交換 | `test_compute_subject_p4.py` | 同一L0で交換、各決定的、P差で結果差 | 実装・実行済み |
+| `T-P4-C-STANDALONE` | `CLAIM_C_COMPLETE` | `test_compute_subject_p4.py` | G1出力を生成しJ/M/write/emitを行わない | 実装・実行済み |
+| `T-P4-L0-P-REMOVAL` | C必要性 | `test_compute_subject_p4.py` | L0六責任/P/Cの8除去が固有FAIL | 実装・実行済み |
 
 ## 後続phaseの固定試験
 
 | Test ID | Primary claim | Phase | 必須反証条件 |
 |---|---|---|---|
-| `T-P4-P-SCHEMA` | `CLAIM_P_IMPLEMENTED` | P4 | schema/version/digest/provenance/identity違反で拒否 |
-| `T-P4-P-SWAP` | P-A/P-B交換 | P4 | L0変更、同一結果、authority変化でFAIL |
-| `T-P4-C-STANDALONE` | `CLAIM_C_COMPLETE` | P4 | J/M呼出し、採否、write、emitがあればFAIL |
-| `T-P4-L0-P-REMOVAL` | C必要性 | P4 | L0六責任またはP除去後もG1が残ればFAIL |
 | `T-P5-J-STANDALONE` | `CLAIM_J_STANDALONE` | P5 | C/P/M参照、仮説/候補生成、実write/emitでFAIL |
 | `T-P5-HDS-FRAME` | HDS適合 | P5 | X/R/Mc欠落非SUSPEND、hazard非veto、budget非STOPでFAIL |
 | `T-P6-M-OPERATIONS` | `CLAIM_M_STANDALONE` | P6 | 必須operationいずれかの意味論欠落でFAIL |
