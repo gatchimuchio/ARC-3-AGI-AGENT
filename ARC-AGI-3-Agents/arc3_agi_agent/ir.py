@@ -20,6 +20,7 @@ class ObservationIR:
     mechanic_signature: str
     dimensions: tuple[int, int] | None
     available_actions: tuple[int, ...]
+    visible_effects: tuple[str, ...] = ()
     entities: tuple[EntityIR, ...] = ()
     relations: tuple[str, ...] = ()
     resources: tuple[str, ...] = ()

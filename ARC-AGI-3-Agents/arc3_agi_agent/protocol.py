@@ -8,7 +8,7 @@ memory, or an environment adapter.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Mapping
 
 PROTOCOL_VERSION = "arc3-restart-protocol-v1"
@@ -52,6 +52,12 @@ MEMORY_LIFECYCLES = frozenset(
         "SEALED",
     }
 )
+
+_HDS_AUTHORIZATION_CAPABILITY = object()
+
+
+class AuthorityViolation(PermissionError):
+    """Raised when computation, mutation, or emission crosses the HDS boundary."""
 
 
 @dataclass(frozen=True, slots=True)
@@ -179,6 +185,15 @@ class HDSDecision:
     allow_memory_write: bool = False
     allow_external_emit: bool = False
     authority: str = "hds-only"
+    _capability: object | None = field(
+        default=None,
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
+
+    def is_hds_authorized(self) -> bool:
+        return self._capability is _HDS_AUTHORIZATION_CAPABILITY
 
     def validate(self) -> tuple[str, ...]:
         failures: list[str] = []
@@ -190,6 +205,8 @@ class HDSDecision:
             failures.append("HDS_DECISION_STATUS_INVALID")
         if self.authority != "hds-only":
             failures.append("HDS_DECISION_AUTHORITY_INVALID")
+        if not self.is_hds_authorized():
+            failures.append("HDS_DECISION_NOT_ISSUED_BY_HDS")
         if any(not str(code).strip() for code in self.reason_codes):
             failures.append("HDS_REASON_CODE_EMPTY")
         if self.allow_external_emit and self.status not in {"PASS", "EMIT", "PROBE"}:
@@ -214,6 +231,12 @@ class MemoryDirective:
     lifecycle: str
     evidence_signature: str
     authority: str = "hds-only"
+    _capability: object | None = field(
+        default=None,
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
 
     def validate(self, decision: HDSDecision) -> tuple[str, ...]:
         failures: list[str] = []
@@ -235,6 +258,8 @@ class MemoryDirective:
             failures.append("MEMORY_EVIDENCE_MISSING")
         if self.authority != "hds-only":
             failures.append("MEMORY_DIRECTIVE_AUTHORITY_INVALID")
+        if self._capability is not _HDS_AUTHORIZATION_CAPABILITY:
+            failures.append("MEMORY_DIRECTIVE_NOT_ISSUED_BY_HDS")
         if not decision.allow_memory_write:
             failures.append("MEMORY_WRITE_NOT_AUTHORIZED")
         return tuple(sorted(set(failures)))
@@ -248,7 +273,15 @@ class EmissionDirective:
     decision_id: str
     action_id: int
     reasoning_digest: str
+    candidate_id: str = ""
+    closure_signature: str = ""
     authority: str = "hds-only"
+    _capability: object | None = field(
+        default=None,
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
 
     def validate(self, decision: HDSDecision) -> tuple[str, ...]:
         failures: list[str] = []
@@ -262,8 +295,18 @@ class EmissionDirective:
             failures.append("EMISSION_ACTION_INVALID")
         if not self.reasoning_digest.strip():
             failures.append("EMISSION_REASONING_DIGEST_MISSING")
+        if not self.candidate_id:
+            failures.append("EMISSION_CANDIDATE_MISSING")
+        elif self.candidate_id != decision.candidate_id:
+            failures.append("EMISSION_CANDIDATE_MISMATCH")
+        if not self.closure_signature:
+            failures.append("EMISSION_CLOSURE_MISSING")
+        elif self.closure_signature != decision.closure_signature:
+            failures.append("EMISSION_CLOSURE_MISMATCH")
         if self.authority != "hds-only":
             failures.append("EMISSION_DIRECTIVE_AUTHORITY_INVALID")
+        if self._capability is not _HDS_AUTHORIZATION_CAPABILITY:
+            failures.append("EMISSION_DIRECTIVE_NOT_ISSUED_BY_HDS")
         if not decision.allow_external_emit:
             failures.append("EXTERNAL_EMIT_NOT_AUTHORIZED")
         return tuple(sorted(set(failures)))
@@ -330,6 +373,7 @@ __all__ = [
     "COMPUTE_OPERATIONS",
     "DECISION_STATUSES",
     "DEFAULT_INSTRUCTION_BODY_CONTRACT",
+    "AuthorityViolation",
     "EmissionDirective",
     "ComputeRequest",
     "ComputeResult",

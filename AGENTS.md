@@ -18,14 +18,15 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P0_RESTART_FOUNDATION` です。
+現在は `P1_EXECUTABLE_KERNEL` です。
 
 許可される作業:
 
-- 目的、責任境界、型、状態所有者、停止条件の固定
-- 旧資産の棚卸しと小単位の選別移植
-- 決定論的な単体試験、除去試験、権限拒否試験
-- 公式基盤を変更しない独立コアの構築
+- 六つのARC-native責任をcallableにする独立kernel
+- HDS command、候補採否、SUSPEND、STOP、write、emit境界
+- bounded context、受動memory、in-memory emission adapter
+- 決定論的なfull-set試験、除去試験、権限拒否試験
+- 公式runnerを変更しないP1監査
 
 禁止される作業:
 
@@ -59,7 +60,7 @@ Mc  : 同一性、境界、採否、停止、rollback、完了条件
 - HDS判断: `PASS` / `HOLD` / `SUSPEND` / `REJECT` / `ROLLBACK`
 - 次工程へ進む条件
 
-文書追加だけでruntime能力が変わらない場合は、実装前進と記録しません。ただしP0では、責任境界を閉じる文書・型・試験を基盤成果として扱えます。
+文書追加だけでruntime能力が変わらない場合は、実装前進と記録しません。P0の文書・型・試験は閉じた基盤であり、P1ではcallableな循環と機能除去証拠を要求します。
 
 ## 4. 非対称権限
 
@@ -140,8 +141,11 @@ HDS command
 
 ```bash
 cd ARC-AGI-3-Agents
-python -m compileall arc3_agi_agent
-python -m pytest tests/unit/test_arc3_agi_foundation.py
+python -m compileall -q arc3_agi_agent
+python -m unittest discover -s tests/unit -p "test_arc3_agi_*.py" -v
+python -m pytest -q --confcutdir=tests/unit \
+  tests/unit/test_arc3_agi_foundation.py \
+  tests/unit/test_arc3_agi_kernel.py
 ```
 
 runtime接続以後は、対象試験に加えてoffline、deterministic、禁止入力、secret、rollback、emission gate、同一条件benchmarkを検査します。

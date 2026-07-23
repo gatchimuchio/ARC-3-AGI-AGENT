@@ -49,7 +49,11 @@ FORBIDDEN_RUNTIME_KEY_TOKENS = frozenset(
 
 def _jsonable(value: Any) -> Any:
     if dataclasses.is_dataclass(value):
-        return {key: _jsonable(item) for key, item in dataclasses.asdict(value).items()}
+        return {
+            item.name: _jsonable(getattr(value, item.name))
+            for item in dataclasses.fields(value)
+            if item.metadata.get("serialize", True)
+        }
     if isinstance(value, Mapping):
         return {str(key): _jsonable(item) for key, item in value.items()}
     if isinstance(value, (tuple, list)):
@@ -129,6 +133,9 @@ def record_from_dict(data: Mapping[str, Any]) -> CompiledRecord:
         dimensions=dimensions,
         available_actions=tuple(
             int(item) for item in observation_data.get("available_actions", [])
+        ),
+        visible_effects=tuple(
+            str(item) for item in observation_data.get("visible_effects", [])
         ),
         entities=tuple(
             _entity_from_dict(item) for item in observation_data.get("entities", [])
@@ -300,6 +307,12 @@ def _forbidden_runtime_paths(value: Any, path: str = "$") -> list[str]:
     return failures
 
 
+def forbidden_runtime_paths(value: Any) -> tuple[str, ...]:
+    """Return deterministic paths whose keys violate the identity-free boundary."""
+
+    return tuple(sorted(set(_forbidden_runtime_paths(value))))
+
+
 def validate_runtime_bundle(bundle: Mapping[str, Any]) -> list[str]:
     failures: list[str] = []
     if bundle.get("schema_version") != SCHEMA_VERSION:
@@ -355,6 +368,7 @@ __all__ = [
     "TERMINAL_STATES",
     "canonical_json",
     "digest_object",
+    "forbidden_runtime_paths",
     "record_from_dict",
     "record_to_dict",
     "validate_record",

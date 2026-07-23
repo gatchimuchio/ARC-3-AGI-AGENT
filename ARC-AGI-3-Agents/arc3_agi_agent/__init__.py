@@ -1,6 +1,9 @@
-"""ARC-3 restart foundation: contracts, IR, schema, and verification."""
+"""ARC-3 executable kernel with explicit HDS-controlled responsibility seams."""
 
+from .adapters import EmissionResult, InMemoryEmissionInterface
+from .audit import RemovalAuditCase, RemovalAuditReport, run_required_removal_audit
 from .checkpoint import Checkpoint, CheckpointManager
+from .context import BoundedContextState, ContextSnapshot
 from .ir import (
     CandidateIR,
     ClosureIR,
@@ -13,20 +16,43 @@ from .ir import (
     ProofObligationIR,
     TransitionIR,
 )
+from .kernel import (
+    HDSController,
+    KernelResult,
+    Layer0Components,
+    Layer0Kernel,
+    PureLLMCompute,
+)
+from .memory import (
+    MemoryEntry,
+    MemoryMutationResult,
+    MemorySnapshot,
+    PassiveMemory,
+)
 from .protocol import (
     DEFAULT_INSTRUCTION_BODY_CONTRACT,
-    EmissionDirective,
+    AuthorityViolation,
     ComputeRequest,
     ComputeResult,
+    EmissionDirective,
     HDSDecision,
     InstructionBodyContract,
     MemoryDirective,
     TrinityLifecycle,
 )
+from .roles import (
+    ROLE_FAILURE_REASONS,
+    DeterministicCandidateSurface,
+    DeterministicSuccessCriterion,
+    DeterministicSymbolSpace,
+    DeterministicWorldModel,
+    Layer0FunctionalLoss,
+)
 from .schema import (
     SCHEMA_VERSION,
     canonical_json,
     digest_object,
+    forbidden_runtime_paths,
     record_from_dict,
     record_to_dict,
     validate_record,
@@ -40,6 +66,8 @@ from .verification import (
 
 __all__ = [
     "CandidateIR",
+    "AuthorityViolation",
+    "BoundedContextState",
     "Checkpoint",
     "CheckpointManager",
     "ClosureIR",
@@ -47,16 +75,35 @@ __all__ = [
     "ComputeRequest",
     "ComputeResult",
     "DEFAULT_INSTRUCTION_BODY_CONTRACT",
+    "DeterministicCandidateSurface",
+    "DeterministicSuccessCriterion",
+    "DeterministicSymbolSpace",
+    "DeterministicWorldModel",
+    "EmissionResult",
     "EmissionDirective",
     "EntityIR",
     "HDSDecision",
     "HypothesisIR",
+    "HDSController",
+    "InMemoryEmissionInterface",
     "InstructionBodyContract",
     "KnowledgeIndexEntry",
+    "KernelResult",
+    "Layer0Components",
+    "Layer0FunctionalLoss",
+    "Layer0Kernel",
     "MechanicRuleIR",
+    "MemoryEntry",
+    "MemoryMutationResult",
+    "MemorySnapshot",
     "MemoryDirective",
     "ObservationIR",
     "ProofObligationIR",
+    "PureLLMCompute",
+    "PassiveMemory",
+    "ROLE_FAILURE_REASONS",
+    "RemovalAuditCase",
+    "RemovalAuditReport",
     "RenderedObservation",
     "SCHEMA_VERSION",
     "TransitionIR",
@@ -64,9 +111,12 @@ __all__ = [
     "VerificationResult",
     "canonical_json",
     "digest_object",
+    "forbidden_runtime_paths",
     "record_from_dict",
     "record_to_dict",
     "validate_record",
     "validate_runtime_bundle",
     "verify_rendered_transition",
+    "run_required_removal_audit",
+    "ContextSnapshot",
 ]

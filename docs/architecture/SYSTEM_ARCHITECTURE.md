@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
 - 版: `v0.1-restart`
-- 状態: `P0_RESTART_FOUNDATION`
+- 状態: `P1_EXECUTABLE_KERNEL`
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -201,10 +201,23 @@ ARC3では例えば次を観測候補とします。
 - memoryを無制限追記ログにしない
 - checkpointを環境状態の復元保証と誤認しない
 
-## 9. P0完了条件
+## 9. P0基盤とP1独立kernel
 
 - 本書、ロードマップ、移植台帳、参照mapが存在する
 - protocol、IR、schema、verification、checkpointが独立import可能
 - 単体試験が外部APIなしで決定論的に通る
 - 旧runtimeが新標準経路へ未接続である
 - benchmarkや汎化能力を未検証のまま主張していない
+
+P1では、この基盤上に次を追加します。
+
+- 六責任のcallable dependency
+- HDS command capabilityとsingle-use consume
+- Pure-LLMによる複数仮説・候補proposal
+- `W=(X,R,Mc)` と十評価軸によるclosure proposal
+- HDSだけが発行するwrite / emit directive
+- 受動memoryとin-memory emission adapter
+- full setと六つのsingle-callable removal
+
+P1の実装境界、固定failure witness、未接続範囲は
+[`P1_EXECUTABLE_KERNEL.md`](P1_EXECUTABLE_KERNEL.md)を正本とします。

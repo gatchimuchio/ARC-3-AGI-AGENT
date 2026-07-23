@@ -7,7 +7,7 @@
 - score最適化: アーキテクチャ完成後、ユーザーの明示切替後のみ
 - 旧資産: 証拠として保持し、active runtimeへは選別移植
 
-## P0 — Restart Foundation（現在）
+## P0 — Restart Foundation（完了）
 
 目的:
 
@@ -28,7 +28,7 @@
 - unit testsがPASS
 - score主張を行わない
 
-## P1 — Executable Kernel
+## P1 — Executable Kernel（現在・完了判定SUSPEND）
 
 目的:
 
@@ -56,6 +56,20 @@
 - `kernel_complete=true`
 - role labelではなく機能喪失を観測できる
 - offline / deterministic
+
+現行実装:
+
+- `roles.py`、`context.py`、`memory.py`、`kernel.py`
+- `adapters/in_memory.py`
+- `audit.py`
+- `test_arc3_agi_kernel.py`
+
+公式runner接続、live environment action、複数循環の実環境rollbackはP1へ含めません。
+
+独立kernelの対象試験は通過していますが、repository-wide unit gateは
+既存のofficial-agent試験が参照する`agents.structs`欠落とoptional dependencyの
+eager importにより収集不能です。P1完了候補への昇格は、この既存gateを別差分で
+修復して全unit suiteを再実行した後に行います。
 
 ## P2 — HDS–Compute–Memory Closed Loop
 

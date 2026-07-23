@@ -6,8 +6,8 @@ ARC Prize 2026 / ARC-AGI-3 向けの、**未知環境を観測し、仮説を更
 
 ## 現在の状態
 
-- フェーズ: `P0_RESTART_FOUNDATION`
-- 実装状態: 契約・IR・検証境界の初期移植
+- フェーズ: `P1_EXECUTABLE_KERNEL`
+- 実装状態: 独立Layer-0 kernel実装済み。P1完了判定は全unit gateで`SUSPEND`
 - ベンチマーク状態: **未確定**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -47,7 +47,7 @@ AGI_Trinity_Blueprint_v0_1.md 上位設計資料
 
 ルート直下の wheel 群は現時点では既存のベンダー資産です。依存管理へ再統合するまでは、設計正本・実行時入力・ソースコードとして扱いません。
 
-## 初期移植した責任境界
+## 基盤とP1実行kernel
 
 `ARC-AGI-3-Agents/arc3_agi_agent/` に、次を独立モジュールとして配置します。
 
@@ -56,8 +56,17 @@ AGI_Trinity_Blueprint_v0_1.md 上位設計資料
 - `schema.py`: 決定論的シリアライズ、digest、runtime identity-free検査
 - `verification.py`: 進捗・終端・危険・期待効果の保守的検証
 - `checkpoint.py`: 証拠専用の有界checkpoint保持
+- `context.py`: 現在・直前観測、履歴、budget、未閉包項目のbounded context
+- `memory.py`: HDS許可なしでは変更できない受動memory
+- `roles.py`: 六つのARC-native Layer-0責任のcallable実装
+- `kernel.py`: HDS commandから結果再観測までの決定的な一循環
+- `audit.py`: full setと六つのsingle-role callable removal
+- `adapters/in_memory.py`: 公式runnerへ接続しない権限検証用emission境界
 
-これらはまだ ARC-AGI-3 の標準 action-selection path へ接続していません。接続前に責任分離、除去証人、HDS未承認操作の拒否を検証します。
+これらはまだ ARC-AGI-3 の標準 action-selection path へ接続していません。
+P1の閉包範囲と未実装範囲は
+[`docs/architecture/P1_EXECUTABLE_KERNEL.md`](docs/architecture/P1_EXECUTABLE_KERNEL.md)
+に固定しています。
 
 ## 設計上の固定境界
 
@@ -73,19 +82,21 @@ AGI_Trinity_Blueprint_v0_1.md 上位設計資料
 
 ```bash
 cd ARC-AGI-3-Agents
-python -m compileall arc3_agi_agent
-python -m pytest tests/unit/test_arc3_agi_foundation.py
+python -m compileall -q arc3_agi_agent
+python -m unittest discover -s tests/unit -p "test_arc3_agi_*.py" -v
+python -m pytest -q --confcutdir=tests/unit \
+  tests/unit/test_arc3_agi_foundation.py \
+  tests/unit/test_arc3_agi_kernel.py
 ```
 
 ## 作業順
 
-1. 再起動基盤と権限境界を固定する
-2. 観測・IR・記憶の決定論的経路を実装する
-3. HDS–計算–記憶の閉ループを成立させる
-4. 複数候補、検証、rollback、再観測を接続する
-5. 公式runnerへ汎用コアを統合する
-6. 同一条件benchmarkを再確立する
-7. アーキテクチャ完成後にのみ最適化へ進む
+1. P0: 再起動基盤と権限境界を固定する — 完了
+2. P1: 独立Layer-0 kernelと除去監査を閉じる — 実装済み、全unit gate待ち
+3. P2: HDS–計算–記憶の複数循環、rollback、再観測を閉じる
+4. P3: 公式runnerへ汎用コアを統合する
+5. 同一条件benchmarkを再確立する
+6. アーキテクチャ完成後にのみ最適化へ進む
 
 [`docs/roadmap/ROADMAP.md`](docs/roadmap/ROADMAP.md) が現行ロードマップの正本です。
 

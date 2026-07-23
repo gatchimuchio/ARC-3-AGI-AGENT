@@ -15,8 +15,8 @@ from arc3_agi_agent.ir import (
 )
 from arc3_agi_agent.protocol import (
     DEFAULT_INSTRUCTION_BODY_CONTRACT,
-    EmissionDirective,
     ComputeRequest,
+    EmissionDirective,
     HDSDecision,
     MemoryDirective,
     TrinityLifecycle,
@@ -47,7 +47,7 @@ class ProtocolTests(unittest.TestCase):
         )
         self.assertEqual(request.validate(contract), ())
 
-    def test_memory_and_emission_require_explicit_hds_permission(self) -> None:
+    def test_hds_labels_and_flags_do_not_grant_authority(self) -> None:
         denied = HDSDecision(
             command_id="cmd-1",
             decision_id="decision-1",
@@ -66,6 +66,8 @@ class ProtocolTests(unittest.TestCase):
             decision_id="decision-1",
             action_id=1,
             reasoning_digest="digest:1",
+            candidate_id="c1",
+            closure_signature="closure:1",
         )
         self.assertIn("MEMORY_WRITE_NOT_AUTHORIZED", memory.validate(denied))
         self.assertIn("EXTERNAL_EMIT_NOT_AUTHORIZED", emission.validate(denied))
@@ -79,9 +81,18 @@ class ProtocolTests(unittest.TestCase):
             allow_memory_write=True,
             allow_external_emit=True,
         )
-        self.assertEqual(allowed.validate(), ())
-        self.assertEqual(memory.validate(allowed), ())
-        self.assertEqual(emission.validate(allowed), ())
+        self.assertIn(
+            "HDS_DECISION_NOT_ISSUED_BY_HDS",
+            allowed.validate(),
+        )
+        self.assertIn(
+            "MEMORY_DIRECTIVE_NOT_ISSUED_BY_HDS",
+            memory.validate(allowed),
+        )
+        self.assertIn(
+            "EMISSION_DIRECTIVE_NOT_ISSUED_BY_HDS",
+            emission.validate(allowed),
+        )
 
     def test_lifecycle_rejects_invalid_transition(self) -> None:
         lifecycle = TrinityLifecycle()
