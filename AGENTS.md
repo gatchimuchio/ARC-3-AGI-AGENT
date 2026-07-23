@@ -20,12 +20,11 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P5_JUDGMENT_SUBJECT_J` です。
+現在は `P6_MEMORY_SUBJECT_M` です。
 
-`P4_COMPUTE_SUBJECT_C` は完了しています。P4で完成したのは、共通契約で交換可能な
-P-A/P-B、`C=Execute(L0,P)`のstandalone G1、P/Cを含む除去監査、OFFLINE sample
-経路でのP照会です。P4はstandalone J/M、pair、Trinity、最小三構成を完成させて
-いません。
+`P5_JUDGMENT_SUBJECT_J` は完了しています。P5で完成したのは、typed HDS Frame、
+C/P/Mなしのstandalone G2判断、integrated HDSとの共通判断core、J除去監査です。
+P5はstandalone M、pair、Trinity、最小三構成を完成させていません。
 
 現行分類は次です。
 
@@ -56,30 +55,36 @@ P4 complete:
   standalone compute subject C
   L0 six-responsibility plus P/C removal audit
 
-P5 current:
+P5 complete:
   standalone typed HDS Frame
   deterministic judgment without C/P/M
   accept / reject / reobserve / SUSPEND / STOP / rollback
   memory-write / external-emit authorization proposal
   J removal and non-substitution audit
+
+P6 current:
+  standalone versioned memory subject M
+  full operation vocabulary
+  active / archive separation
+  conflict / snapshot / rollback / deterministic query
+  HDS-authorized runtime mutation boundary
 ```
 
-### P5で許可される作業
+### P6で許可される作業
 
-- P3 HDS Frame fixtureを用いるstandalone J API
-- purpose、X、R、Mc、観測境界、candidate、予測結果、証拠、反証、risk、hazard、
-  budget、unknown、停止条件のtyped Frame
-- compute request、accept、reject、reobserve、SUSPEND、STOP、rollback判断
-- memory-write / external-emit authorizationのproposal
-- X/R/Mc欠落、hazard、証拠不足、budget枯渇、contradictionの決定的試験
-- J除去で採否・停止・許可が失われる固有witness
+- ADD/REVISE/MERGE/SPLIT/REPLACE/INVALIDATE/DELETE/REINDEX/ROLLBACK/ARCHIVE
+- READ/QUERY/VERSION/SNAPSHOT/PROVENANCE
+- current purpose/state、hypothesis、support、contradiction、failure、evidence、
+  lifecycle、unresolved item、provenance、version、rollback referenceの保持
+- storage単独APIとHDS許可済みruntime adapterの分離
+- optimistic version conflict、active/archive、snapshot、指定版rollback
 
-### P5で禁止される作業
+### P6で禁止される作業
 
-- Jによる仮説生成、candidate生成、P参照
-- Jによるmemory実書込み、external action実行
-- M参照をstandalone Jの必須入力にすること
-- standalone M、pair、Trinity、minimum certificateを完了扱いすること
+- Mによる仮説/candidate生成、採否、許可、external emit
+- Mによる自律mutation開始
+- 追記専用storageでoperation意味論を代行すること
+- pair、Trinity、minimum certificateを完了扱いすること
 - 全sample game / 全level攻略
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
@@ -88,7 +93,7 @@ P5 current:
 - scoreを根拠にした局所最適化
 - 「AGI完成」「最小三構成証明済み」「汎化済み」といった未検証主張
 
-P5の正本は新ロードマップのP5節、P3 HDS Frame fixture、
+P6の正本は新ロードマップのP6節、P3 memory lifecycle fixture、
 P2 obligation/test matrixです。
 
 ## 3. 1 work blockの必須契約
@@ -239,13 +244,13 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - 同一L0でのswap、Pなしcompute拒否
 - C standalone G1とL0六責任+P/C removal
 
-### P5: Judgment Subject J — 現在
+### P5: Judgment Subject J — 完了
 
 - standalone HDS Frame API
 - C/Mなしの採否、SUSPEND、STOP、rollback、write/emit許可
 - JがG1/G3を代行しないこと
 
-### P6: Memory Subject M
+### P6: Memory Subject M — 現在
 
 - 全memory operation、query、version conflict、snapshot
 - active/archive分離、rollback
@@ -331,6 +336,14 @@ P5では次を追加する。
 - X/R/Mc欠落、hazard、evidence、budget、contradiction、rollback判断
 - J authority negative test
 - J removal / non-substitution audit
+
+P6では次を追加する。
+
+- 全memory operationの独立意味論
+- stale version拒否、snapshot、指定版rollback
+- active/archive分離、同一query決定性
+- unauthorized runtime mutation拒否
+- MのG1/G2非代行とremoval witness
 
 P4以降の固定test IDと反証条件は
 `docs/architecture/AGI_TEST_MATRIX.md`を正本とする。

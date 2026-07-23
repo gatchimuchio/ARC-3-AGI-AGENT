@@ -1,7 +1,7 @@
 # ARC-3 AGI Agent システムアーキテクチャ
 
-- 版: `v0.6-compute-subject`
-- 状態: `P4_COMPUTE_SUBJECT_C` complete / `P5_JUDGMENT_SUBJECT_J` current
+- 版: `v0.7-judgment-subject`
+- 状態: `P5_JUDGMENT_SUBJECT_J` complete / `P6_MEMORY_SUBJECT_M` current
 - 対象: ARC-AGI-3 汎用エージェント
 - 非対象: task別解答表、replay再生器、既知問題ルータ、score最適化
 
@@ -393,8 +393,8 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P2: AGI最小三構成仕様・根本監査 — 完了
 - P3: ARC3実証素材compiler — 完了
 - P4: 計算主体C・P-A/P-B — 完了
-- P5: 判断主体J — 現在
-- P6: 記憶主体M
+- P5: 判断主体J — 完了
+- P6: 記憶主体M — 現在
 - P7: 二主体接続監査
 - P8: 三主体二周期循環
 - P9: 全8部分集合証明
@@ -404,5 +404,5 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 
 現行順序は
 `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
-P4の完了証拠は`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`を参照します。P5は
-ロードマップP5節とP3 HDS Frame fixtureを正本とします。
+P4/P5の完了証拠は各phase実装文書を参照します。P6はロードマップP6節と
+P3 memory lifecycle fixtureを正本とします。

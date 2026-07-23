@@ -23,6 +23,16 @@ from .ir import (
     ObservationIR,
     OutputProposalIR,
 )
+from .judgment import (
+    HDSR,
+    HDSX,
+    JUDGMENT_SUBJECT_REMOVAL_WITNESS,
+    HDSFrame,
+    HDSJudgmentSubject,
+    HDSMc,
+    JudgmentCandidate,
+    StandaloneJudgmentDecision,
+)
 from .memory import MemoryMutationResult, MemorySnapshot, PassiveMemory
 from .protocol import (
     _HDS_AUTHORIZATION_CAPABILITY,
@@ -173,7 +183,14 @@ class HDSController:
         init=False,
     )
     _finalized_decisions: set[str] = field(default_factory=set, init=False)
+    _standalone_judgments: dict[str, StandaloneJudgmentDecision] = field(
+        default_factory=dict,
+        init=False,
+    )
     _counter: int = field(default=0, init=False)
+    judgment_subject: HDSJudgmentSubject | None = field(
+        default_factory=HDSJudgmentSubject,
+    )
 
     def _issue_decision(
         self,
@@ -187,6 +204,7 @@ class HDSController:
         allow_memory_write: bool = False,
         allow_external_emit: bool = False,
         binding: _DecisionBinding,
+        standalone_judgment: StandaloneJudgmentDecision,
     ) -> HDSDecision:
         if command_id in self._judged_commands:
             raise AuthorityViolation("HDS_COMMAND_ALREADY_JUDGED")
@@ -206,8 +224,19 @@ class HDSController:
             raise AuthorityViolation(";".join(failures))
         self._decisions[decision_id] = decision
         self._decision_bindings[decision_id] = binding
+        self._standalone_judgments[decision_id] = standalone_judgment
         self._judged_commands.add(command_id)
         return decision
+
+    def standalone_judgment(
+        self,
+        decision: HDSDecision,
+    ) -> StandaloneJudgmentDecision:
+        self._require_issued_decision(decision)
+        judgment = self._standalone_judgments.get(decision.decision_id)
+        if judgment is None:
+            raise AuthorityViolation("HDS_STANDALONE_JUDGMENT_MISSING")
+        return judgment
 
     def _require_issued_decision(self, decision: HDSDecision) -> None:
         failures = list(decision.validate())
@@ -430,6 +459,181 @@ class HDSController:
             and closure.confidence == 0.9
         )
 
+    def _judgment_frame(
+        self,
+        proposal: ComputeProposal,
+        closures: tuple[ClosureIR, ...],
+        observation: ObservationIR,
+        context: ContextSnapshot,
+    ) -> HDSFrame:
+        candidate_by_id = {
+            candidate.candidate_id: candidate for candidate in proposal.candidates
+        }
+        action_closures = tuple(
+            closure
+            for closure in closures
+            if candidate_by_id.get(closure.candidate_id) is not None
+            and candidate_by_id[closure.candidate_id].mode in ACTION_MODES
+        )
+        judgment_candidates: list[JudgmentCandidate] = []
+        evidence: set[str] = set()
+        counter_evidence: set[str] = set()
+        for closure in action_closures:
+            candidate = candidate_by_id[closure.candidate_id]
+            revalidated = self._closure_revalidated(
+                candidate,
+                closure,
+                observation,
+                context,
+                proposal.hypotheses,
+            )
+            reason_codes = closure.reason_codes
+            if closure.status == "PASS" and not revalidated:
+                reason_codes = tuple(
+                    sorted(
+                        {
+                            *reason_codes,
+                            "HDS_CLOSURE_REVALIDATION_FAILED",
+                        }
+                    )
+                )
+            if closure.status == "PASS" and revalidated:
+                evidence.update(reason_codes)
+            else:
+                counter_evidence.update(reason_codes)
+            fit_value = closure.mc.get("fit_score", -2.0)
+            fit_score = (
+                float(fit_value)
+                if isinstance(fit_value, (int, float))
+                and not isinstance(fit_value, bool)
+                and isfinite(float(fit_value))
+                else -2.0
+            )
+            normalized_score = min(1.0, max(0.0, (fit_score + 2.0) / 3.5))
+            risk_value = candidate.expected_risk
+            risk = (
+                float(risk_value)
+                if isinstance(risk_value, (int, float))
+                and not isinstance(risk_value, bool)
+                and isfinite(float(risk_value))
+                and 0.0 <= float(risk_value) <= 1.0
+                else 1.0
+            )
+            predicted_outcomes = tuple(
+                sorted(
+                    {
+                        outcome
+                        for outcomes in (
+                            candidate.expected_effects_by_hypothesis.values()
+                        )
+                        for outcome in outcomes
+                        if isinstance(outcome, str) and outcome
+                    }
+                )
+            )
+            judgment_candidates.append(
+                JudgmentCandidate(
+                    candidate_id=candidate.candidate_id,
+                    predicted_outcomes=predicted_outcomes
+                    or ("prediction-missing",),
+                    evidence_refs=reason_codes
+                    if closure.status == "PASS" and revalidated
+                    else (),
+                    counter_evidence_refs=reason_codes
+                    if closure.status != "PASS" or not revalidated
+                    else (),
+                    preconditions=candidate.preconditions
+                    or ("candidate-precondition-missing",),
+                    falsification_conditions=candidate.falsification_conditions
+                    or ("candidate-falsifier-missing",),
+                    score=normalized_score,
+                    risk=risk,
+                    hazard=False,
+                    admissible=closure.status == "PASS" and revalidated,
+                    rejected=closure.status == "REJECT",
+                    reversible=candidate.rollback_cost < 1.0,
+                    rollback_reference=(
+                        "candidate-checkpoint:" + candidate.candidate_id
+                        if candidate.rollback_cost < 1.0
+                        else None
+                    ),
+                    reason_codes=reason_codes,
+                )
+            )
+        candidate_ids = tuple(
+            candidate.candidate_id for candidate in judgment_candidates
+        )
+        terminal_stop = (
+            ("TERMINAL_WIN",)
+            if observation.terminal_state == "WIN"
+            else ()
+        )
+        hazard_observed = observation.terminal_state == "GAME_OVER" or any(
+            effect in HAZARD_EFFECTS for effect in observation.visible_effects
+        )
+        unknowns = (
+            ("terminal-state-unobserved",)
+            if observation.terminal_state == "UNKNOWN"
+            else ()
+        )
+        return HDSFrame(
+            frame_id="integrated-frame:"
+            + digest_object(
+                {
+                    "proposal": proposal.digest,
+                    "closures": closures,
+                    "context": context.digest,
+                }
+            )[:24],
+            purpose="select-safe-closed-action-candidate",
+            x=HDSX(
+                targets=("current-rendered-observation",),
+                candidate_ids=candidate_ids,
+                observation_scope=(
+                    "rendered-frame",
+                    "available-actions",
+                    "bounded-context",
+                ),
+            ),
+            r=HDSR(
+                relations=("candidate-evaluated-under-W-X-R-Mc",),
+                evidence_links=tuple(sorted(evidence)),
+                counter_evidence_links=tuple(sorted(counter_evidence)),
+            ),
+            mc=HDSMc(
+                identity="integrated-closure:"
+                + digest_object((proposal.digest, closures))[:24],
+                boundary="rendered-observation-only",
+                acceptance_criteria=("W_X_R_MC_CLOSED",),
+                rejection_criteria=(
+                    "hazard",
+                    "contradiction",
+                    "closure-invalid",
+                ),
+                stop_on=(
+                    "terminal-win",
+                    "hazard",
+                    "budget-exhaustion",
+                ),
+                max_risk=1.0,
+                allow_memory_write=True,
+                allow_external_emit=True,
+            ),
+            observation_boundary="rendered-observation-only",
+            candidates=tuple(judgment_candidates),
+            evidence=tuple(sorted(evidence)),
+            counter_evidence=tuple(sorted(counter_evidence)),
+            risk=max(
+                (candidate.risk for candidate in judgment_candidates),
+                default=0.0,
+            ),
+            hazard=hazard_observed,
+            budget=context.remaining_actions,
+            unknowns=unknowns,
+            stopping_conditions=terminal_stop,
+            observation_available=True,
+        )
+
     def judge(
         self,
         command: AuthorizedComputeCommand,
@@ -492,126 +696,72 @@ class HDSController:
         }
         decision_id = "decision:" + digest_object(decision_seed)[:20]
 
-        if observation.terminal_state == "WIN":
-            return self._issue_decision(
-                command_id=command_id,
-                decision_id=decision_id,
-                status="STOP",
-                reason_codes=("TERMINAL_WIN",),
-                binding=base_binding,
+        subject = self.judgment_subject
+        if subject is None:
+            raise Layer0FunctionalLoss(
+                "JUDGMENT_SUBJECT",
+                JUDGMENT_SUBJECT_REMOVAL_WITNESS,
+                stage="JUDGE",
+                removed=True,
             )
-        hazard_observed = observation.terminal_state == "GAME_OVER" or any(
-            effect in HAZARD_EFFECTS for effect in observation.visible_effects
+        frame = self._judgment_frame(
+            proposal,
+            closures,
+            observation,
+            context,
         )
-        if hazard_observed:
-            return self._issue_decision(
-                command_id=command_id,
-                decision_id=decision_id,
-                status="REJECT",
-                reason_codes=("HAZARD_ACTION_VETO",),
-                binding=base_binding,
-            )
-        if observation.terminal_state == "UNKNOWN":
-            return self._issue_decision(
-                command_id=command_id,
-                decision_id=decision_id,
-                status="SUSPEND",
-                reason_codes=("TERMINAL_UNOBSERVED",),
-                binding=base_binding,
-            )
-        if context.remaining_actions == 0:
-            return self._issue_decision(
-                command_id=command_id,
-                decision_id=decision_id,
-                status="STOP",
-                reason_codes=("ACTION_BUDGET_EXHAUSTED",),
-                binding=base_binding,
-            )
-
-        selectable: list[tuple[CandidateIR, ClosureIR]] = []
-        for closure in closures:
-            candidate = candidate_by_id.get(closure.candidate_id)
-            if (
-                candidate is not None
-                and candidate.mode in ACTION_MODES
-                and closure.status == "PASS"
-                and self._closure_revalidated(
-                    candidate,
-                    closure,
-                    observation,
-                    context,
-                    proposal.hypotheses,
-                )
-            ):
-                selectable.append((candidate, closure))
-        selected = (
-            sorted(
-                selectable,
-                key=lambda item: (
-                    -float(item[1].mc.get("fit_score", 0.0)),
-                    item[0].candidate_id,
-                ),
-            )[0]
-            if selectable
+        standalone = subject.judge(frame)
+        status_map = {
+            "ACCEPT": "EMIT",
+            "REJECT": "REJECT",
+            "REOBSERVE": "SUSPEND",
+            "SUSPEND": "SUSPEND",
+            "COMPUTE_REQUEST": "SUSPEND",
+            "STOP": "STOP",
+            "ROLLBACK": "ROLLBACK",
+        }
+        status = status_map[standalone.status]
+        selected_candidate = (
+            candidate_by_id.get(standalone.selected_candidate_id)
+            if standalone.selected_candidate_id is not None
             else None
         )
-
-        if selected is not None:
-            candidate, closure = selected
-            return self._issue_decision(
-                command_id=command_id,
-                decision_id=decision_id,
-                status="EMIT",
-                reason_codes=closure.reason_codes,
-                candidate_id=candidate.candidate_id,
-                closure_signature=digest_object(closure),
-                allow_memory_write=True,
-                allow_external_emit=True,
-                binding=_DecisionBinding(
-                    proposal_digest=base_binding.proposal_digest,
-                    hypotheses_digest=base_binding.hypotheses_digest,
-                    observation_signature=base_binding.observation_signature,
-                    memory_target=base_binding.memory_target,
-                    memory_payload_digest=base_binding.memory_payload_digest,
-                    candidate_digest=digest_object(candidate),
+        selected_closure = (
+            next(
+                (
+                    closure
+                    for closure in closures
+                    if closure.candidate_id
+                    == standalone.selected_candidate_id
                 ),
+                None,
             )
-
-        action_closures = tuple(
-            closure
-            for closure in closures
-            if candidate_by_id.get(closure.candidate_id) is not None
-            and candidate_by_id[closure.candidate_id].mode in ACTION_MODES
+            if selected_candidate is not None
+            else None
         )
-        rejected = any(closure.status == "REJECT" for closure in action_closures)
-        reason_set = {
-            reason
-            for closure in action_closures
-            for reason in closure.reason_codes
-            if closure.status != "PASS"
-        }
-        if any(
-                closure.status == "PASS"
-                and (
-                    (candidate := candidate_by_id.get(closure.candidate_id)) is None
-                    or not self._closure_revalidated(
-                        candidate,
-                        closure,
-                        observation,
-                        context,
-                        proposal.hypotheses,
-                    )
-                )
-            for closure in action_closures
-        ):
-            reason_set.add("HDS_CLOSURE_REVALIDATION_FAILED")
-        reasons = tuple(sorted(reason_set))
+        binding = base_binding
+        closure_signature = ""
+        if selected_candidate is not None and selected_closure is not None:
+            binding = _DecisionBinding(
+                proposal_digest=base_binding.proposal_digest,
+                hypotheses_digest=base_binding.hypotheses_digest,
+                observation_signature=base_binding.observation_signature,
+                memory_target=base_binding.memory_target,
+                memory_payload_digest=base_binding.memory_payload_digest,
+                candidate_digest=digest_object(selected_candidate),
+            )
+            closure_signature = digest_object(selected_closure)
         return self._issue_decision(
             command_id=command_id,
             decision_id=decision_id,
-            status="REJECT" if rejected else "SUSPEND",
-            reason_codes=reasons or ("NO_CLOSED_ACTION_CANDIDATE",),
-            binding=base_binding,
+            status=status,
+            reason_codes=standalone.reason_codes,
+            candidate_id=standalone.selected_candidate_id,
+            closure_signature=closure_signature,
+            allow_memory_write=standalone.allow_memory_write,
+            allow_external_emit=standalone.allow_external_emit,
+            binding=binding,
+            standalone_judgment=standalone,
         )
 
     def memory_directive(
@@ -1335,11 +1485,15 @@ class Layer0Kernel:
         decision_failures = decision.validate()
         if decision_failures:
             raise AuthorityViolation(";".join(decision_failures))
+        standalone_judgment = self.components.hds.standalone_judgment(decision)
         record(
             lifecycle.stage,
             "HDS",
             "CLOSURE_DECISION",
             decision=decision.decision_id,
+            frame=standalone_judgment.frame_digest,
+            standalone_decision=standalone_judgment.decision_id,
+            standalone_status=standalone_judgment.status,
             status=decision.status,
         )
 

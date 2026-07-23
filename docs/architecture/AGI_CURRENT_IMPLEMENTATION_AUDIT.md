@@ -219,3 +219,17 @@ P4完了時点で`F-P2-001`と`F-P2-002`を是正した。
 
 `F-P2-003`以降は未解決である。P4 HDS判断は`PASS`、次phaseは
 `P5_JUDGMENT_SUBJECT_J`とする。
+
+## 9. P5 disposition
+
+P5完了時点で`F-P2-003`を是正した。
+
+- purpose/X/R/Mc/evidence/risk/budget/unknownを持つtyped HDS Frame
+- C/P/Mなしのstandalone deterministic judgment
+- accept/reject/reobserve/SUSPEND/STOP/ROLLBACK/compute request
+- write/emit authorization判断とeffect capabilityの分離
+- integrated HDSを同一判断coreへ接続し、旧判断fallbackを除去
+- 676/676 P3 HDS Frame fixture適合とJ除去固有witness
+
+`F-P2-004`以降は未解決である。P5 HDS判断は`PASS`、次phaseは
+`P6_MEMORY_SUBJECT_M`とする。

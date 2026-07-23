@@ -19,8 +19,8 @@
 | P2 | AGI最小三構成仕様・根本監査 | 完了 |
 | P3 | ARC3実証素材コンパイラ | 完了 |
 | P4 | 計算主体Cの単独実装 | 完了 |
-| P5 | HDS判断主体Jの単独実装 | 現在 |
-| P6 | 記憶主体Mの単独実装 | 未開始 |
+| P5 | HDS判断主体Jの単独実装 | 完了 |
+| P6 | 記憶主体Mの単独実装 | 現在 |
 | P7 | 二主体接続監査 | 未開始 |
 | P8 | 三主体Trinity循環 | 未開始 |
 | P9 | 全8部分集合監査 | 未開始 |
@@ -32,16 +32,16 @@
 
 ## 現在のphase gate
 
-P5では次だけを行う。
+P6では次だけを行う。
 
-- typed HDS Frameとstandalone判断API
-- C/P/Mなしのaccept/reject/reobserve/SUSPEND/STOP/rollback
-- memory-write / external-emit authorization proposal
-- X/R/Mc、hazard、evidence、budget、contradictionの適合試験
-- J除去・機能等価物監査
+- 全memory operationの独立意味論
+- optimistic version conflict、snapshot、指定版rollback
+- active/currentとarchiveの分離
+- deterministic READ/QUERY/VERSION/PROVENANCE
+- HDS未許可runtime mutation拒否とM除去監査
 
-P5ではJが仮説/candidateを生成せず、Mを保持せず、memory確定mutationや
-external actionを実行しない。sample攻略、公式接続、Kaggle作業を実行・
+P6ではMが仮説/candidate、採否、許可、external actionを生成・実行せず、
+自律mutationを開始しない。sample攻略、公式接続、Kaggle作業を実行・
 完了扱いしない。
 
 ## 監査正本

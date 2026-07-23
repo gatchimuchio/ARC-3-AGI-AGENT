@@ -1,8 +1,8 @@
 {
   "schema_version": "1.1.0",
   "artifact_type": "agi_minimum_three_obligation_graph",
-  "phase": "P5_JUDGMENT_SUBJECT_J",
-  "last_completed_phase": "P4_COMPUTE_SUBJECT_C",
+  "phase": "P6_MEMORY_SUBJECT_M",
+  "last_completed_phase": "P5_JUDGMENT_SUBJECT_J",
   "normative_roadmap": "docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md",
   "subjects": [
     {
@@ -49,12 +49,16 @@
       "id": "G2",
       "name": "judgment",
       "owner": "J",
-      "current_status": "PARTIAL",
-      "implementation_paths": ["ARC-AGI-3-Agents/arc3_agi_agent/kernel.py::HDSController"],
-      "test_evidence": [
-        "tests/unit/test_arc3_agi_kernel.py::TrinityAuthorityTests::test_hazard_veto_precedes_unknown_state_and_exhausted_budget"
+      "current_status": "SUPPORTED",
+      "implementation_paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/judgment.py::HDSJudgmentSubject",
+        "ARC-AGI-3-Agents/arc3_agi_agent/judgment_fixtures.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/kernel.py::HDSController"
       ],
-      "gaps": ["no standalone HDS Frame fixture API", "rollback decision is not operational"]
+      "test_evidence": [
+        "tests/unit/test_judgment_subject_p5.py"
+      ],
+      "gaps": []
     },
     {
       "id": "G3",
@@ -99,7 +103,7 @@
     {"id": "L0", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "P", "current_status": "SUPPORTED", "next_phase": "P11"},
     {"id": "C", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
-    {"id": "J", "current_status": "PARTIAL", "next_phase": "P5"},
+    {"id": "J", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "M", "current_status": "PARTIAL", "next_phase": "P6"},
     {"id": "ENVIRONMENT_BOUNDARY", "current_status": "SUPPORTED", "next_phase": "P10"},
     {"id": "LEARNING_COMPILER", "current_status": "PARTIAL", "next_phase": "P11"},
@@ -108,10 +112,10 @@
     {"id": "M0", "current_status": "UNSUPPORTED", "next_phase": "P11"},
     {"id": "EXTERNAL_EMISSION", "current_status": "SUPPORTED", "next_phase": "P8"},
     {"id": "MEMORY_WRITE", "current_status": "PARTIAL", "next_phase": "P6"},
-    {"id": "HDS_FRAME", "current_status": "PARTIAL", "next_phase": "P5"},
+    {"id": "HDS_FRAME", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "CYCLE_TRANSITION", "current_status": "PARTIAL", "next_phase": "P8"},
     {"id": "STOPPING", "current_status": "SUPPORTED", "next_phase": "P5"},
-    {"id": "ROLLBACK", "current_status": "UNSUPPORTED", "next_phase": "P5"}
+    {"id": "ROLLBACK", "current_status": "PARTIAL", "next_phase": "P6"}
   ],
   "edges": [
     {"from": "L0", "to": "C", "relation": "execution_mechanism_of"},
@@ -150,7 +154,7 @@
     {"id": "CLAIM_P3_EVIDENCE_COMPILER", "status": "SUPPORTED", "primary_test": "tests/unit/test_p3_evidence_dataset.py"},
     {"id": "CLAIM_P_IMPLEMENTED", "status": "SUPPORTED", "primary_test": "tests/unit/test_instruction_body_compiler.py"},
     {"id": "CLAIM_C_COMPLETE", "status": "SUPPORTED", "primary_test": "tests/unit/test_compute_subject_p4.py"},
-    {"id": "CLAIM_J_STANDALONE", "status": "UNSUPPORTED", "primary_test": null},
+    {"id": "CLAIM_J_STANDALONE", "status": "SUPPORTED", "primary_test": "tests/unit/test_judgment_subject_p5.py"},
     {"id": "CLAIM_M_STANDALONE", "status": "UNSUPPORTED", "primary_test": null},
     {"id": "CLAIM_TWO_CYCLE_CAUSALITY", "status": "UNSUPPORTED", "primary_test": null},
     {"id": "CLAIM_MINIMUM_THREE", "status": "UNSUPPORTED", "primary_test": null},

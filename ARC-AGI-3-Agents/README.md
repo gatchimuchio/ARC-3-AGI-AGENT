@@ -7,7 +7,8 @@ P1 Layer-0 execution mechanismを統合した実行パッケージです。公�
 P3では`arc3_agi_agent.evidence_compiler`を追加し、730件の解析・metadata sourceから
 identity-freeなC/J/M fixtureを生成済みです。P4では共通`InstructionBody`契約、
 P-A記号規則graph、P-B学習済みsigmoid matrix、standalone Cを実装しました。
-現在phaseはP5です。
+P5ではtyped HDS Frameとstandalone Jを実装し、integrated HDSも同じ判断coreへ
+接続しました。現在phaseはP6です。
 
 ## 現在の実行入口
 

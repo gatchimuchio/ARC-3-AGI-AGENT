@@ -290,8 +290,8 @@ P1 Execution Mechanism Foundation                   complete / reclassified
 P2 Minimum Three Specification and Root Audit       complete
 P3 ARC3 Evidence Material Compiler                  complete
 P4 Compute Subject C                                complete
-P5 Judgment Subject J                               current
-P6 Memory Subject M                                 blocked by P5
+P5 Judgment Subject J                               complete
+P6 Memory Subject M                                 current
 P7 Pairwise Subject Audit                           blocked by P6
 P8 Three-subject Two-cycle Trinity                  blocked by P7
 P9 Eight-subset Minimum Certificate                 blocked by P8

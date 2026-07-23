@@ -11,12 +11,14 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - P2: `AGI_MINIMUM_THREE_AUDIT` — 完了
 - P3: `ARC3_EVIDENCE_MATERIAL_COMPILER` — 完了
 - P4: `COMPUTE_SUBJECT_C` — 完了
-- 現在フェーズ: `P5_JUDGMENT_SUBJECT_J`
+- P5: `JUDGMENT_SUBJECT_J` — 完了
+- 現在フェーズ: `P6_MEMORY_SUBJECT_M`
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
 - 命令形保持体 `P`: P-A/P-Bを実装済み
 - 計算主体 `C`: standalone G1を実装・除去監査済み
+- 判断主体 `J`: typed Frameによるstandalone G2を実装・除去監査済み
 - ベンチマーク状態: **未確定**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -133,7 +135,9 @@ HDS Frame fixture、memory lifecycle fixtureへ変換しました。source ident
 P4では、このfixtureをruntime identity-free境界内で使用し、P-A/P-Bと
 standalone Cを実装しました。実装・完了証拠は
 [`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md)
-です。現在のP5ではP3 HDS Frame fixtureからstandalone Jを実装します。
+です。P5ではP3 HDS Frame fixtureからstandalone Jを実装しました。完了証拠は
+[`P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P5_JUDGMENT_SUBJECT_IMPLEMENTATION.md)
+です。現在のP6ではfull mutable memory Mを実装します。
 
 ## 設計上の固定境界
 
@@ -167,8 +171,8 @@ python sample_main.py --all-samples --max-actions 1
 3. P2: AGI最小三構成仕様・根本監査 — 完了
 4. P3: ARC3実証素材compiler — 完了
 5. P4: 計算主体C — 完了
-6. P5: 判断主体J — 現在
-7. P6: 記憶主体M
+6. P5: 判断主体J — 完了
+7. P6: 記憶主体M — 現在
 8. P7: 二主体接続監査
 9. P8: 三主体二周期循環
 10. P9: 全8部分集合証明
