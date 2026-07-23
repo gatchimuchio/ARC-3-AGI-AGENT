@@ -12,6 +12,7 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from math import gcd
 
+from .fruit_merge import FRUIT_MERGE_OPERATOR, FruitMergeState
 from .instruction_body import SemanticOperatorInstruction
 from .schema import digest_object, forbidden_runtime_paths
 from .symbolic_rewrite import (
@@ -26,7 +27,7 @@ from .visual_explorer import (
     connected_components,
 )
 
-SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v5"
+SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v6"
 RELATION_TOGGLE_OPERATOR = "relation-constrained-toggle-gf2-v1"
 OBJECT_TARGET_CONTROL_OPERATOR = "object-target-cycle-control-v1"
 
@@ -1810,6 +1811,9 @@ class SemanticPlannerState:
     target_model_plan_count: int = 0
     target_model_mismatch_count: int = 0
     target_model_abandoned: bool = False
+    fruit_merge: FruitMergeState = field(
+        default_factory=FruitMergeState
+    )
     symbolic_rewrite: SymbolicRewriteState = field(
         default_factory=SymbolicRewriteState
     )
@@ -1865,6 +1869,7 @@ class SemanticPlannerState:
         self.target_route_count = 0
         self._reset_target_coordinate()
         self._reset_target_model()
+        self.fruit_merge.reset()
         self.symbolic_rewrite.reset()
 
     def record_target_hazard(self) -> bool | None:
@@ -2617,6 +2622,19 @@ class SemanticPlannerState:
                                             and distance > 0
                                         )
                                     )
+            elif instruction.operator_id == FRUIT_MERGE_OPERATOR:
+                fruit_decision = self.fruit_merge.decide(
+                    grid,
+                    available_actions,
+                    instruction,
+                )
+                plan = (
+                    ()
+                    if fruit_decision.action is None
+                    else (fruit_decision.action,)
+                )
+                decision_reason = fruit_decision.reason
+                memory_influenced = fruit_decision.memory_influenced
             elif instruction.operator_id == SYMBOLIC_REWRITE_OPERATOR:
                 rewrite_decision = self.symbolic_rewrite.decide(
                     grid,
@@ -2781,6 +2799,7 @@ class SemanticPlannerState:
                 self.target_model_mismatch_count
             ),
             "target_model_abandoned": self.target_model_abandoned,
+            "fruit_merge": self.fruit_merge.to_payload(),
             "symbolic_rewrite": self.symbolic_rewrite.to_payload(),
         }
         forbidden = forbidden_runtime_paths(payload)
@@ -2833,6 +2852,7 @@ class SemanticPlannerState:
             "target_model_expected_colors",
             (),
         )
+        raw_fruit_merge = value.get("fruit_merge")
         raw_symbolic_rewrite = value.get("symbolic_rewrite")
         if (
             not isinstance(raw_queue, Sequence)
@@ -2894,6 +2914,7 @@ class SemanticPlannerState:
                 raw_target_model_expected_colors,
                 (str, bytes, bytearray),
             )
+            or not isinstance(raw_fruit_merge, Mapping)
             or not isinstance(raw_symbolic_rewrite, Mapping)
         ):
             raise ValueError("semantic planner sequence invalid")
@@ -3168,6 +3189,7 @@ class SemanticPlannerState:
                 "target_model_mismatch_count",
             ),
             target_model_abandoned=target_model_abandoned,
+            fruit_merge=FruitMergeState.from_payload(raw_fruit_merge),
             symbolic_rewrite=SymbolicRewriteState.from_payload(
                 raw_symbolic_rewrite
             ),
@@ -3179,6 +3201,7 @@ class SemanticPlannerState:
 
 
 __all__ = [
+    "FRUIT_MERGE_OPERATOR",
     "OBJECT_TARGET_CONTROL_OPERATOR",
     "RELATION_TOGGLE_OPERATOR",
     "SYMBOLIC_REWRITE_OPERATOR",

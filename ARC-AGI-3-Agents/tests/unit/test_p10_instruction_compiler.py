@@ -17,6 +17,7 @@ from arc3_agi_agent.p10_instruction_compiler import (
     compile_p10_instruction_bodies,
 )
 from arc3_agi_agent.semantic_operators import (
+    FRUIT_MERGE_OPERATOR,
     OBJECT_TARGET_CONTROL_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
     SYMBOLIC_REWRITE_OPERATOR,
@@ -51,6 +52,7 @@ class P10InstructionCompilerTests(unittest.TestCase):
             (
                 OBJECT_TARGET_CONTROL_OPERATOR,
                 RELATION_TOGGLE_OPERATOR,
+                FRUIT_MERGE_OPERATOR,
                 SYMBOLIC_REWRITE_OPERATOR,
             ),
         )
@@ -60,8 +62,18 @@ class P10InstructionCompilerTests(unittest.TestCase):
             (
                 OBJECT_TARGET_CONTROL_OPERATOR,
                 RELATION_TOGGLE_OPERATOR,
+                FRUIT_MERGE_OPERATOR,
                 SYMBOLIC_REWRITE_OPERATOR,
             ),
+        )
+        fruit_instruction = next(
+            item
+            for item in hybrid.operator_instructions
+            if item.operator_id == FRUIT_MERGE_OPERATOR
+        )
+        self.assertEqual(
+            fruit_instruction.parameters()["actor_divert_interval"],
+            1,
         )
         self.assertNotEqual(symbolic.digest(), hybrid.digest())
         self.assertNotEqual(parametric.digest(), hybrid.digest())
@@ -74,9 +86,9 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 output_dir=output_dir,
             )
             for filename in (
-                "p10_p_a_symbolic_v4.json",
-                "p10_p_b_parametric_v4.json",
-                "p10_hybrid_v3.json",
+                "p10_p_a_symbolic_v6.json",
+                "p10_p_b_parametric_v6.json",
+                "p10_hybrid_v5.json",
                 "p10_manifest.json",
             ):
                 self.assertEqual(

@@ -72,6 +72,13 @@ editable ruleは各visible nodeのcycleを観測した後、有界constraintと�
 解く。三演算子ともgame/task/level ID、source、hidden state、固定座標を
 受け取らず、内部stateはversioned passive M payloadへ直列化される。
 
+`arc3_agi_agent/fruit_merge.py`は、rendered interfaceから要求rank/actor、
+playfieldからfruit/actor/targetを再検出する。要求対象へのroute、同rankの
+接近・merge、actor回避を一手ごとに再観測し、surface消失時はHDS経路の
+undo候補と失敗clickを受動Mへ保持する。固定route、level番号、既知座標は
+入力に取らない。現版はbounded operatorとして統合済みだが、SU15全levelの
+採用条件は満たしていない。
+
 `arc3_agi_agent/recovery.py`とOFFLINE adapterは、観測済みGAME_OVERに対して
 HDSがrollback Frameを判断し、single-use capabilityを発行した場合だけ、
 Pure-LLM executorによるM rollback、failure保持、RESET、再観測を許す。
@@ -93,8 +100,11 @@ current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す
 ## 3. 現在の実測境界
 
 P10実行経路の関連unit、strict mypy、ruff gateは通過している。現行hybrid
-`p10-hybrid-v3`、visual operator `arc3-p10-visual-operator-v7`、
-OFFLINE、seed 0の実測は次のとおりである。
+`p10-hybrid-v5`、instruction compiler
+`arc3-p10-instruction-compiler-v5`、semantic planner
+`arc3-semantic-planner-v6`、visual operator
+`arc3-p10-visual-operator-v12`、OFFLINE、seed 0のstable regression実測は
+次のとおりである。
 
 | rendered mechanism | 完了 | actions | M影響cycle | recovery | reset | 終端 |
 |---|---:|---:|---:|---:|---:|---|
@@ -102,9 +112,17 @@ OFFLINE、seed 0の実測は次のとおりである。
 | object-target control | 8 / 8 | 235 | 188 | 0 | 0 | `WIN` |
 | symbolic rewrite | 6 / 6 | 308 | 284 | 0 | 0 | `WIN` |
 
-全実行でerror 0、GAME_OVER 0、max-action停止なしを確認した。現時点で
-新runtimeが実証した完了数は`20 / 183`で、未実証は`163 level`である。
+全実行でerror 0、GAME_OVER 0、max-action停止なしを確認した。現時点の
+stable full-game採用境界は`20 / 183`で、残りは`163 level`である。
 これは三つの意味演算子blockの採用証拠であり、全sample攻略証拠ではない。
+
+同じactive PでのSU15 bounded runは、4 / 9 levelを160 actionsまでに完了した
+後、level 5で`MAX_ACTION_STOP`となった。errorは0、HDS recoveryは1、
+search resetは0、M影響cycleは154である。観測済みlevel transitionは
+`24 / 183`相当だが、game未完了かつmax-action停止が残るためstable採用境界
+には加えない。この失敗は
+[`su15_hybrid_active_failure_compact.json`](../../evidence/p10/su15_hybrid_active_failure_compact.json)
+へ保持した。
 
 FT09、action budget 256、seed 0、OFFLINEの同一条件比較:
 
@@ -130,11 +148,13 @@ provenance、level transition、P digest、M version、rollback/reset欄を保�
 compact evidenceへ固定した。
 
 - [`ft09_hybrid_active_compact.json`](../../evidence/p10/ft09_hybrid_active_compact.json):
-  `db66f118946fab5b7bb4e323fc10f25d91597209b6e1bf847367072fcd0cfdae`
+  `6680518299ed6952bcd99cb300f8118e02a96045f22acea4acde7339f8e54ab0`
 - [`lp85_hybrid_compact.json`](../../evidence/p10/lp85_hybrid_compact.json):
-  `c330030a57d8005faea8b1f95dc4631f25bdaef21207a2f19751b9d41e3ccdcc`
+  `834907e467bc0ae1fb0130a3c9a06da2cefeb7ae8a700cbc9e090ce8cbb248d4`
 - [`tr87_hybrid_compact.json`](../../evidence/p10/tr87_hybrid_compact.json):
-  `d0468d345b502468a12932784e116fa73bc087718b2ff471d873064ce44196dc`
+  `fd2ea2dd39f378228446b4cb3847c8f97741e5b9105203081e693784dda5f9e4`
+- [`su15_hybrid_active_failure_compact.json`](../../evidence/p10/su15_hybrid_active_failure_compact.json):
+  `10442999cd46639c281cc717bb937166dc3c1a9d5ab1c167b0a8307b03b2bec2`
 
 compact evidenceは省略したtrace event本体を`trace_events_digest`へ束縛する。
 raw reportはlocal実行証拠であり、非決定的scorecard identityをrelease

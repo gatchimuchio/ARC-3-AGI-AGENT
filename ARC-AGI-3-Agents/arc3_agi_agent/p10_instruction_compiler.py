@@ -15,16 +15,17 @@ from .instruction_body import (
 )
 from .schema import canonical_json, digest_object
 from .semantic_operators import (
+    FRUIT_MERGE_OPERATOR,
     OBJECT_TARGET_CONTROL_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
     SYMBOLIC_REWRITE_OPERATOR,
 )
 
-P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v3"
+P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v5"
 P10_COMPILER_SEED = 0
-P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v4"
-P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v4"
-P10_HYBRID_VERSION = "p10-hybrid-v3"
+P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v6"
+P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v6"
+P10_HYBRID_VERSION = "p10-hybrid-v5"
 
 
 def _file_digest(path: Path) -> str:
@@ -186,6 +187,123 @@ def symbolic_rewrite_instruction_mapping() -> dict[str, object]:
     }
 
 
+def fruit_merge_instruction_mapping() -> dict[str, object]:
+    """Return P material for visible goal-aware merging and placement."""
+
+    return {
+        "operator_id": FRUIT_MERGE_OPERATOR,
+        "action_id": 6,
+        "detector": (
+            "rendered interface goal glyphs, square rank entities, "
+            "actor patterns, and irregular target zones"
+        ),
+        "transform": (
+            "single-step equal-rank merge and goal-aware placement "
+            "with mandatory reobservation"
+        ),
+        "parameters": {
+            "click_action": 6,
+            "undo_action": 7,
+            "click_x_origin": 0,
+            "click_y_origin": 10,
+            "click_step": 4,
+            "click_radius": 8,
+            "fruit_move_step": 4,
+            "actor_move_distance": 14,
+            "actor_chase_risk_distance": 24,
+            "actor_divert_interval": 1,
+            "interface_max_y": 9,
+            "playfield_min_y": 10,
+            "playfield_max_y": 62,
+            "target_color": 9,
+            "target_min_side": 8,
+            "target_max_side": 10,
+            "target_min_area": 35,
+            "target_max_area": 80,
+            "rank_specs": [
+                {"rank": 0, "color": 10, "side": 1},
+                {"rank": 1, "color": 6, "side": 2},
+                {"rank": 2, "color": 15, "side": 3},
+                {"rank": 3, "color": 11, "side": 4},
+                {"rank": 4, "color": 12, "side": 5},
+                {"rank": 5, "color": 8, "side": 7},
+                {"rank": 6, "color": 9, "side": 8},
+                {"rank": 7, "color": 7, "side": 9},
+                {"rank": 8, "color": 14, "side": 10},
+            ],
+            "actor_specs": [
+                {
+                    "kind": "actor-pattern-a",
+                    "color": 7,
+                    "width": 5,
+                    "height": 4,
+                    "mask": [
+                        [2, 0],
+                        [1, 1],
+                        [3, 1],
+                        [0, 2],
+                        [4, 2],
+                        [1, 3],
+                        [2, 3],
+                        [3, 3],
+                    ],
+                },
+                {
+                    "kind": "actor-pattern-b",
+                    "color": 14,
+                    "width": 5,
+                    "height": 4,
+                    "mask": [
+                        [2, 0],
+                        [1, 1],
+                        [3, 1],
+                        [0, 2],
+                        [2, 2],
+                        [4, 2],
+                        [1, 3],
+                        [3, 3],
+                    ],
+                },
+                {
+                    "kind": "actor-pattern-c",
+                    "color": 13,
+                    "width": 5,
+                    "height": 4,
+                    "mask": [
+                        [0, 0],
+                        [2, 0],
+                        [4, 0],
+                        [1, 1],
+                        [3, 1],
+                        [0, 2],
+                        [1, 2],
+                        [2, 2],
+                        [3, 2],
+                        [4, 2],
+                        [1, 3],
+                        [2, 3],
+                        [3, 3],
+                    ],
+                },
+            ],
+        },
+        "preconditions": [
+            "ACTION6_AND_ACTION7_AVAILABLE",
+            "RENDERED_GOAL_GLYPHS",
+            "RENDERED_TARGET_ZONES",
+        ],
+        "falsification_conditions": [
+            "goal-aware surface detector does not close",
+            "selected click does not change the rendered surface",
+            "current-frame merge or placement relation is not improved",
+        ],
+        "provenance": [
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-merge-and-placement-evidence",
+        ],
+    }
+
+
 def _upgrade(
     base: dict[str, Any],
     *,
@@ -257,10 +375,11 @@ def compile_p10_instruction_bodies(
         relation_toggle_instruction_mapping(),
         object_target_control_instruction_mapping(),
         symbolic_rewrite_instruction_mapping(),
+        fruit_merge_instruction_mapping(),
     ]
     bundles = {
         "P-A": (
-            "p10_p_a_symbolic_v4.json",
+            "p10_p_a_symbolic_v6.json",
             _upgrade(
                 base_symbolic,
                 body_version=P10_SYMBOLIC_VERSION,
@@ -269,7 +388,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "P-B": (
-            "p10_p_b_parametric_v4.json",
+            "p10_p_b_parametric_v6.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_PARAMETRIC_VERSION,
@@ -278,7 +397,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "hybrid": (
-            "p10_hybrid_v3.json",
+            "p10_hybrid_v5.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_HYBRID_VERSION,
@@ -345,6 +464,7 @@ __all__ = [
     "P10_PARAMETRIC_VERSION",
     "P10_SYMBOLIC_VERSION",
     "compile_p10_instruction_bodies",
+    "fruit_merge_instruction_mapping",
     "main",
     "object_target_control_instruction_mapping",
     "relation_toggle_instruction_mapping",

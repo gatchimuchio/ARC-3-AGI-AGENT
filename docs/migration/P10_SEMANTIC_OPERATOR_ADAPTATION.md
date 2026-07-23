@@ -78,9 +78,9 @@ GF(2)として解く純計算の考え方だけである。旧fileをimportせ�
 
 | variant | operator | 意味 |
 |---|---:|---|
-| P-A | 1 | symbolic body + relation toggle instruction |
+| P-A | 4 | symbolic body + relation/object/rewrite/fruit instructions |
 | P-B | 0 | parametric body、意味演算子除去対照 |
-| hybrid | 1 | parametric body + relation toggle instruction |
+| hybrid | 4 | parametric body + relation/object/rewrite/fruit instructions |
 
 palette、stride、tile size、detector/transform名、precondition、falsifierは
 P bundleへ置く。CはPから渡されたinstructionがなければ計画しない。

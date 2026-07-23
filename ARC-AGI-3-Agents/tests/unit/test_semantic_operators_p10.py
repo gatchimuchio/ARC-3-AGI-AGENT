@@ -485,6 +485,7 @@ class P10SemanticOperatorTests(unittest.TestCase):
             target_initial_state="old-state",
             target_transitions={"old-state": {"control": "next-state"}},
         )
+        planner.fruit_merge.actor_action_count = 2
         planner.symbolic_rewrite.submit_count = 2
 
         decision = planner.decide(
@@ -498,6 +499,7 @@ class P10SemanticOperatorTests(unittest.TestCase):
         self.assertEqual(planner.active_operator, "")
         self.assertEqual(planner.target_initial_state, "")
         self.assertEqual(planner.target_transitions, {})
+        self.assertEqual(planner.fruit_merge.actor_action_count, 0)
         self.assertEqual(planner.symbolic_rewrite.submit_count, 0)
 
     def test_object_target_control_is_single_step_and_position_derived(

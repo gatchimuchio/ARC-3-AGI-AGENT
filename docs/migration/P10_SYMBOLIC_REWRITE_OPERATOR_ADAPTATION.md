@@ -43,8 +43,8 @@ stateは完全に直列化され、P instruction digestが変われば旧state�
 
 ## 4. 実測
 
-OFFLINE、seed 0、action budget 512、hybrid `p10-hybrid-v3`、
-visual operator `arc3-p10-visual-operator-v7`で、対象6 levelを308 actionsで
+OFFLINE、seed 0、action budget 512、hybrid `p10-hybrid-v5`、
+visual operator `arc3-p10-visual-operator-v12`で、対象6 levelを308 actionsで
 完了した。error、GAME_OVER recovery、search reset、max-action停止はいずれも
 0で、Mが次判断へ影響したcycleは284である。
 

@@ -54,31 +54,82 @@ def _terminal_state(frame: FrameDataRaw) -> str:
 
 
 @dataclass(frozen=True, slots=True)
+class SampleFrameProjection:
+    """One immutable, identity-free projection of a rendered frame."""
+
+    layers: tuple[tuple[tuple[int, ...], ...], ...]
+    signature: str
+    dimensions: tuple[int, int] | None
+    available_actions: tuple[int, ...]
+    terminal_state: str
+
+
+@dataclass(frozen=True, slots=True)
 class SampleFrameAdapter:
     """Convert rendered sample state without exposing game or level identity."""
 
-    def signature(self, frame: FrameDataRaw) -> str:
-        return "frame:" + digest_object(_layers(frame))[:20]
+    def project(self, frame: FrameDataRaw) -> SampleFrameProjection:
+        """Materialize expensive rendered facts exactly once per frame use."""
 
-    def dimensions(self, frame: FrameDataRaw) -> tuple[int, int] | None:
-        for layer in _layers(frame):
+        layers = _layers(frame)
+        dimensions: tuple[int, int] | None = None
+        for layer in layers:
             if not layer:
                 continue
             widths = {len(row) for row in layer}
             if len(widths) == 1 and next(iter(widths), 0) > 0:
-                return (len(layer), next(iter(widths)))
-        return None
+                dimensions = (len(layer), next(iter(widths)))
+                break
+        available_actions = tuple(
+            sorted(
+                {
+                    int(action)
+                    for action in frame.available_actions
+                    if isinstance(action, int)
+                    and not isinstance(action, bool)
+                    and 1 <= action <= 7
+                }
+            )
+        )
+        return SampleFrameProjection(
+            layers=layers,
+            signature="frame:" + digest_object(layers)[:20],
+            dimensions=dimensions,
+            available_actions=available_actions,
+            terminal_state=_terminal_state(frame),
+        )
+
+    def signature(
+        self,
+        frame: FrameDataRaw,
+        *,
+        projection: SampleFrameProjection | None = None,
+    ) -> str:
+        return (projection or self.project(frame)).signature
+
+    def dimensions(
+        self,
+        frame: FrameDataRaw,
+        *,
+        projection: SampleFrameProjection | None = None,
+    ) -> tuple[int, int] | None:
+        return (projection or self.project(frame)).dimensions
 
     def visible_effects(
         self,
         current: FrameDataRaw,
         previous: FrameDataRaw | None,
+        *,
+        current_projection: SampleFrameProjection | None = None,
+        previous_projection: SampleFrameProjection | None = None,
     ) -> tuple[str, ...]:
         if previous is None:
             return ()
 
+        current_view = current_projection or self.project(current)
+        previous_view = previous_projection or self.project(previous)
         effects: set[str] = set()
-        if self.signature(current) == self.signature(previous):
+        if current_view.signature == previous_view.signature:
             effects.add("NO_VISIBLE_CHANGE")
         else:
             effects.add("VISIBLE_STATE_CHANGE")
@@ -86,12 +137,15 @@ class SampleFrameAdapter:
             effects.add("LEVEL_PROGRESS")
         if current.full_reset:
             effects.add("FULL_RESET")
-        terminal_state = _terminal_state(current)
+        terminal_state = current_view.terminal_state
         if terminal_state == "WIN":
             effects.update(("LEVEL_PROGRESS", "WIN_TERMINAL"))
         elif terminal_state == "GAME_OVER":
             effects.add("IRREVERSIBLE_FAILURE")
-        if tuple(current.available_actions) != tuple(previous.available_actions):
+        if (
+            current_view.available_actions
+            != previous_view.available_actions
+        ):
             effects.add("ACTION_SURFACE_CHANGE")
         return tuple(sorted(effects))
 
@@ -99,8 +153,17 @@ class SampleFrameAdapter:
         self,
         current: FrameDataRaw,
         previous: FrameDataRaw | None = None,
+        *,
+        current_projection: SampleFrameProjection | None = None,
+        previous_projection: SampleFrameProjection | None = None,
     ) -> dict[str, object]:
-        layers = _layers(current)
+        current_view = current_projection or self.project(current)
+        previous_view = (
+            None
+            if previous is None
+            else previous_projection or self.project(previous)
+        )
+        layers = current_view.layers
         palette = Counter(
             cell for layer in layers for row in layer for cell in row
         )
@@ -120,25 +183,19 @@ class SampleFrameAdapter:
             f"layer:{index - 1}:precedes:layer:{index}"
             for index in range(1, len(layers))
         )
-        available_actions = tuple(
-            sorted(
-                {
-                    int(action)
-                    for action in current.available_actions
-                    if isinstance(action, int)
-                    and not isinstance(action, bool)
-                    and 1 <= action <= 7
-                }
-            )
-        )
-        terminal_state = _terminal_state(current)
-        dimensions = self.dimensions(current)
+        available_actions = current_view.available_actions
+        terminal_state = current_view.terminal_state
         return {
             "frame": layers,
-            "frame_signature": self.signature(current),
-            "dimensions": dimensions,
+            "frame_signature": current_view.signature,
+            "dimensions": current_view.dimensions,
             "available_actions": available_actions,
-            "effects": self.visible_effects(current, previous),
+            "effects": self.visible_effects(
+                current,
+                previous,
+                current_projection=current_view,
+                previous_projection=previous_view,
+            ),
             "objects": objects,
             "relations": relations,
             "resources": (
@@ -165,11 +222,24 @@ class SampleFrameAdapter:
         *,
         action_count: int,
         max_actions: int,
+        current_projection: SampleFrameProjection | None = None,
+        previous_projection: SampleFrameProjection | None = None,
     ) -> RenderedObservation:
-        effects = self.visible_effects(current, previous)
-        terminal_state = _terminal_state(current)
+        current_view = current_projection or self.project(current)
+        previous_view = (
+            None
+            if previous is None
+            else previous_projection or self.project(previous)
+        )
+        effects = self.visible_effects(
+            current,
+            previous,
+            current_projection=current_view,
+            previous_projection=previous_view,
+        )
+        terminal_state = current_view.terminal_state
         return RenderedObservation(
-            signature=self.signature(current),
+            signature=current_view.signature,
             levels_completed=current.levels_completed,
             terminal_state=terminal_state,
             visible_progress=(
@@ -180,20 +250,10 @@ class SampleFrameAdapter:
                 )
             ),
             visible_effects=effects,
-            available_actions=tuple(
-                sorted(
-                    {
-                        int(action)
-                        for action in current.available_actions
-                        if isinstance(action, int)
-                        and not isinstance(action, bool)
-                        and 1 <= action <= 7
-                    }
-                )
-            ),
+            available_actions=current_view.available_actions,
             action_count=action_count,
             max_actions=max_actions,
         )
 
 
-__all__ = ["SampleFrameAdapter"]
+__all__ = ["SampleFrameAdapter", "SampleFrameProjection"]

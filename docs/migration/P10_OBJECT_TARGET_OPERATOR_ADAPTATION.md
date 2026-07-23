@@ -44,8 +44,9 @@ Hungarian assignmentでmechanism対応を構成し、次cycleで再検証する�
 
 ## 4. 実測
 
-OFFLINE、seed 0、action budget 256、P-A
-`p10-p-a-symbolic-v4`で、対象8 levelを235 actionsで完了した。
+OFFLINE、seed 0、action budget 512、hybrid
+`p10-hybrid-v5`、visual operator `arc3-p10-visual-operator-v12`で、
+対象8 levelを235 actionsで再完了した。
 error、GAME_OVER recovery、search reset、max-action停止はいずれも0で、
 Mが次判断へ影響したcycleは188である。
 

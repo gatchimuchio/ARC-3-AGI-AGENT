@@ -13,6 +13,9 @@
 - [`architecture/P6_MEMORY_SUBJECT_IMPLEMENTATION.md`](architecture/P6_MEMORY_SUBJECT_IMPLEMENTATION.md): P6のversioned M・全storage operation・authority境界の完了証拠
 - [`architecture/P7_PAIRWISE_SUBJECT_AUDIT.md`](architecture/P7_PAIRWISE_SUBJECT_AUDIT.md): P7の三pair実行・固有不足witness・非代行監査
 - [`architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md`](architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md): P8のfull二周期循環・M因果・P/J/M分離証拠
+- [`architecture/P9_MINIMUM_THREE_CERTIFICATE.md`](architecture/P9_MINIMUM_THREE_CERTIFICATE.md): P9の全8部分集合・除去証人・最小三構成証明
+- [`architecture/P10_COMPLETE_SAMPLE_SOLVER.md`](architecture/P10_COMPLETE_SAMPLE_SOLVER.md): P10のOFFLINE solver、現行実測境界、失敗証拠
+- [`architecture/AGI_CLAIM_REGISTRY.md`](architecture/AGI_CLAIM_REGISTRY.md): claimごとのSUPPORTED/PARTIAL/REJECTED境界
 - [`roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md): P0〜P14の全文正本
 - [`roadmap/ROADMAP.md`](roadmap/ROADMAP.md): 現行phase状態の索引
 - [`migration/`](migration/): 旧資産の採用・隔離・拒否・再配置記録

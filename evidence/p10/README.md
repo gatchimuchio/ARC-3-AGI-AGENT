@@ -31,12 +31,15 @@ provenance、level transition、P digest、M version、rollback/reset欄を保�
 local scorecard identityと重複するtrace event本体は除外し、event本体全体を
 `trace_events_digest`へ束縛する。
 
-| file | 完了 | actions | content digest |
-|---|---:|---:|---|
-| `ft09_hybrid_active_compact.json` | 6 / 6 | 75 | `db66f118946fab5b7bb4e323fc10f25d91597209b6e1bf847367072fcd0cfdae` |
-| `lp85_hybrid_compact.json` | 8 / 8 | 235 | `c330030a57d8005faea8b1f95dc4631f25bdaef21207a2f19751b9d41e3ccdcc` |
-| `tr87_hybrid_compact.json` | 6 / 6 | 308 | `d0468d345b502468a12932784e116fa73bc087718b2ff471d873064ce44196dc` |
+| file | 完了 | actions | 終端 | content digest |
+|---|---:|---:|---|---|
+| `ft09_hybrid_active_compact.json` | 6 / 6 | 75 | `WIN` | `6680518299ed6952bcd99cb300f8118e02a96045f22acea4acde7339f8e54ab0` |
+| `lp85_hybrid_compact.json` | 8 / 8 | 235 | `WIN` | `834907e467bc0ae1fb0130a3c9a06da2cefeb7ae8a700cbc9e090ce8cbb248d4` |
+| `tr87_hybrid_compact.json` | 6 / 6 | 308 | `WIN` | `fd2ea2dd39f378228446b4cb3847c8f97741e5b9105203081e693784dda5f9e4` |
+| `su15_hybrid_active_failure_compact.json` | 4 / 9 | 160 | `MAX_ACTION_STOP` | `10442999cd46639c281cc717bb937166dc3c1a9d5ab1c167b0a8307b03b2bec2` |
 
-三実行のactive Pは`p10-hybrid-v3`、visual operatorは
-`arc3-p10-visual-operator-v7`である。合計は20 / 183であり、P10は
-`HOLD`のままである。
+現行active Pは`p10-hybrid-v5`、visual operatorは
+`arc3-p10-visual-operator-v12`である。最初の三実行はaction budget 512で
+20 / 20 levelを再完了した。SU15では追加4 levelのtransitionを観測したが、
+budget 160でlevel 5が停止したためstable full-game採用境界は20 / 183、
+P10は`HOLD`のままである。

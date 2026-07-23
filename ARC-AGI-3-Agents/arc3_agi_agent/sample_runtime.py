@@ -11,7 +11,7 @@ from arcengine import FrameDataRaw
 from .adapters.offline_arcade import OfflineArcadeEmissionInterface
 from .context import BoundedContextState
 from .kernel import KernelResult, Layer0Components, Layer0Kernel
-from .sample_observation import SampleFrameAdapter
+from .sample_observation import SampleFrameAdapter, SampleFrameProjection
 from .verification import VerificationResult, verify_rendered_transition
 
 ComponentFactory = Callable[
@@ -46,6 +46,11 @@ class OfflineSampleRuntime:
     _previous_frame: FrameDataRaw | None = field(
         default=None, init=False, repr=False
     )
+    _previous_projection: SampleFrameProjection | None = field(
+        default=None,
+        init=False,
+        repr=False,
+    )
 
     def __post_init__(self) -> None:
         if self.max_actions < 1:
@@ -78,29 +83,37 @@ class OfflineSampleRuntime:
         *,
         action_count: int,
     ) -> SampleCycleResult:
+        current_projection = self.frame_adapter.project(current)
         before = self.frame_adapter.rendered_observation(
             current,
             self._previous_frame,
             action_count=action_count,
             max_actions=self.max_actions,
+            current_projection=current_projection,
+            previous_projection=self._previous_projection,
         )
         raw_observation = self.frame_adapter.runtime_observation(
             current,
             self._previous_frame,
+            current_projection=current_projection,
+            previous_projection=self._previous_projection,
         )
-        self.emission.bind(current)
+        self.emission.bind(current, projection=current_projection)
         kernel_result = self.kernel.run_cycle(raw_observation)
         after_frame = self.emission.last_frame
+        after_projection = self.emission.last_projection
         verification: VerificationResult | None = None
 
         if kernel_result.emission_result is not None:
-            if after_frame is None:
+            if after_frame is None or after_projection is None:
                 raise RuntimeError("OFFLINE_SAMPLE_REOBSERVATION_MISSING")
             after = self.frame_adapter.rendered_observation(
                 after_frame,
                 current,
                 action_count=action_count + 1,
                 max_actions=self.max_actions,
+                current_projection=after_projection,
+                previous_projection=current_projection,
             )
             selected = next(
                 (
@@ -135,6 +148,7 @@ class OfflineSampleRuntime:
                 )
 
         self._previous_frame = current
+        self._previous_projection = current_projection
         return SampleCycleResult(
             kernel_result=kernel_result,
             after_frame=after_frame,
@@ -147,6 +161,9 @@ class OfflineSampleRuntime:
         if not isinstance(failed_frame, FrameDataRaw):
             raise TypeError("OFFLINE_SAMPLE_RECOVERY_FRAME_REQUIRED")
         self._previous_frame = failed_frame
+        self._previous_projection = self.frame_adapter.project(
+            failed_frame
+        )
 
 
 __all__ = [

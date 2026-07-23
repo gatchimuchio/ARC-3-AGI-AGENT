@@ -30,7 +30,7 @@ from .visual_explorer import (
 )
 
 VISUAL_EXPLORER_MEMORY_FORMAT = "arc3-p10-visual-memory-v1"
-VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v7"
+VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v12"
 VISUAL_RUNTIME_MEMORY_TARGET = "visual-runtime-state"
 
 

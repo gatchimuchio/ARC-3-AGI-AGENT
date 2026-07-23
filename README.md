@@ -206,7 +206,9 @@ python p10_main.py --all-samples --max-actions 4096 \
 
 `p10_main.py`は全選択gameが`WIN`に到達した場合だけ終了code 0を返します。
 P-A、P-B、hybridは`--instruction-variant`で同一条件比較できます。
-現在の実証境界はFT09の`6 / 183`であり、P10はまだ`HOLD`です。
+現在のstable full-game実証境界はFT09、LP85、TR87の`20 / 183`です。
+SU15ではさらに4 levelの進捗を観測しましたが、level 5で
+`MAX_ACTION_STOP`となるため採用境界には加えず、P10は`HOLD`です。
 
 ## 絶対順序
 
