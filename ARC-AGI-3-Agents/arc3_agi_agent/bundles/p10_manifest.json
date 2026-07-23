@@ -1,0 +1,32 @@
+{
+  "bundles": {
+    "P-A": {
+      "body_version": "p10-p-a-symbolic-v2",
+      "content_digest": "sha256-decimal:097652888991189401496597701575105874204137325762046707413994357393440046894698",
+      "filename": "p10_p_a_symbolic_v2.json",
+      "format_id": "symbolic-rule-graph",
+      "operator_count": 1,
+      "sha256": "9f8ca38da629d0bdd5ca755aa916060a140d74220c76de92a3634f272fcf4ada"
+    },
+    "P-B": {
+      "body_version": "p10-p-b-parametric-v2",
+      "content_digest": "sha256-decimal:004445851879663250989549234116289440545404092758520006911322662318535420389682",
+      "filename": "p10_p_b_parametric_v2.json",
+      "format_id": "parametric-sigmoid-matrix",
+      "operator_count": 0,
+      "sha256": "3848e9913b1b37ab0c5515ea03d016efcdac53416e26e92e7781b8c806a4f1b5"
+    },
+    "hybrid": {
+      "body_version": "p10-hybrid-v1",
+      "content_digest": "sha256-decimal:065547729432610815952635972771358144150973822553645134247371613752368556236939",
+      "filename": "p10_hybrid_v1.json",
+      "format_id": "parametric-sigmoid-matrix",
+      "operator_count": 1,
+      "sha256": "b5f7f7b1f667187a9563e7812c6c3db7860d8000e83b89f6fe65d18cace5653d"
+    }
+  },
+  "compiler_version": "arc3-p10-instruction-compiler-v1",
+  "runtime_identity_free": true,
+  "schema_version": "arc3-p10-instruction-manifest-v1",
+  "seed": 0
+}

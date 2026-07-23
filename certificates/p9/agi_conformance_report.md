@@ -1,7 +1,7 @@
 # AGI最小三構成 P9 Conformance Report
 
 - schema: `agi-minimum-three-certificate-v1`
-- audit digest: `6885c1c0a64471a656e5a557a6344d1287d3bcdb3eff7df3b1650921559fbc4f`
+- audit digest: `f7a5cebfdb0a47f5be5d30a706e6a0bfef1225441c4ac3d76eae3dd6c2e67af4`
 - full set pass: `true`
 - proper subset pass count: `0`
 - single removal fail count: `3`

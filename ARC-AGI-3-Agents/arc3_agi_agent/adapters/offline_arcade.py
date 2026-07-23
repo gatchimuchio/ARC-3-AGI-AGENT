@@ -20,6 +20,11 @@ from ..recovery import (
 )
 from ..sample_observation import SampleFrameAdapter
 from ..schema import digest_object
+from ..search_reset import (
+    HDSSearchResetDecision,
+    SearchResetDirective,
+    require_search_reset_directive,
+)
 from .in_memory import (
     EmissionResult,
     emission_result_signature,
@@ -164,6 +169,44 @@ class OfflineArcadeEmissionInterface:
         if not isinstance(raw, FrameDataRaw):
             raise RuntimeError("OFFLINE_SAMPLE_RECOVERY_STEP_FAILED")
         self._before = self._after
+        self._after = raw
+        return raw
+
+    def search_reset(
+        self,
+        directive: SearchResetDirective,
+        decision: HDSSearchResetDecision,
+        *,
+        executor: str,
+    ) -> FrameDataRaw:
+        """RESET one active branch only under a single-use HDS capability."""
+
+        if self.operation_mode is not OperationMode.OFFLINE:
+            raise AuthorityViolation("OFFLINE_SAMPLE_MODE_CHANGED")
+        if self._before is None:
+            raise AuthorityViolation("SEARCH_RESET_OBSERVATION_NOT_BOUND")
+        if self._after is not None:
+            raise AuthorityViolation("SEARCH_RESET_REQUIRES_NO_EMISSION_RESULT")
+        if str(self._before.state.value).upper() != "NOT_FINISHED":
+            raise AuthorityViolation("SEARCH_RESET_REQUIRES_ACTIVE_FRAME")
+        if self.frame_adapter.signature(self._before) != decision.observation_signature:
+            raise AuthorityViolation("SEARCH_RESET_OBSERVATION_MISMATCH")
+        require_search_reset_directive(
+            directive,
+            decision,
+            executor=executor,
+        )
+        raw = self.environment.step(
+            GameAction.RESET,
+            data={},
+            reasoning={
+                "authority": "HDS",
+                "search_reset_decision": decision.decision_id,
+                "reset_reference": decision.reset_reference,
+            },
+        )
+        if not isinstance(raw, FrameDataRaw):
+            raise RuntimeError("OFFLINE_SAMPLE_SEARCH_RESET_STEP_FAILED")
         self._after = raw
         return raw
 

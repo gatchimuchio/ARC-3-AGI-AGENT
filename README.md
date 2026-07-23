@@ -194,12 +194,19 @@ python sample_main.py --all-samples --max-actions 1
 
 ```bash
 cd ARC-AGI-3-Agents
-python p10_main.py --game LS20 --max-actions 4096
+python -m arc3_agi_agent.p10_instruction_compiler \
+  --base-bundle-dir arc3_agi_agent/bundles \
+  --output-dir arc3_agi_agent/bundles
+python p10_main.py --game FT09 --max-actions 4096 \
+  --instruction-variant hybrid
 python p10_main.py --all-samples --max-actions 4096 \
+  --instruction-variant hybrid \
   --report ../evidence/p10/run.json
 ```
 
 `p10_main.py`は全選択gameが`WIN`に到達した場合だけ終了code 0を返します。
+P-A、P-B、hybridは`--instruction-variant`で同一条件比較できます。
+現在の実証境界はFT09の`6 / 183`であり、P10はまだ`HOLD`です。
 
 ## 絶対順序
 

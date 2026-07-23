@@ -12,6 +12,7 @@ from typing import Any
 from arc_agi import Arcade, OperationMode  # type: ignore[import-untyped]
 
 from agents.templates.p10_sample_agent import P10SampleAgent
+from arc3_agi_agent.p10_runtime import P10InstructionVariant
 from arc3_agi_agent.protocol import AuthorityViolation
 from sample_main import _default_environments_dir, _resolve_game_ids
 
@@ -22,6 +23,7 @@ def run_p10_offline_samples(
     requested_games: list[str] | None = None,
     all_samples: bool = False,
     max_actions: int = 4096,
+    instruction_variant: P10InstructionVariant = "hybrid",
     record: bool = False,
     recordings_dir: Path | None = None,
 ) -> dict[str, Any]:
@@ -87,6 +89,7 @@ def run_p10_offline_samples(
                         tags=["p10", "offline-sample"],
                         operation_mode=arcade.operation_mode,
                         max_actions=max_actions,
+                        instruction_variant=instruction_variant,
                     )
                     agent.main()
                     reports.append(dataclasses.asdict(agent.report()))
@@ -131,6 +134,7 @@ def run_p10_offline_samples(
         ),
         "error_count": len(errors),
         "max_actions": max_actions,
+        "instruction_variant": instruction_variant,
         "reports": reports,
         "errors": errors,
         "local_scorecard": scorecard,
@@ -149,6 +153,11 @@ def _parser() -> argparse.ArgumentParser:
     selection.add_argument("--game", action="append", dest="games")
     parser.add_argument("--max-actions", type=int, default=4096)
     parser.add_argument(
+        "--instruction-variant",
+        choices=("P-A", "P-B", "hybrid"),
+        default="hybrid",
+    )
+    parser.add_argument(
         "--environments-dir",
         type=Path,
         default=_default_environments_dir(),
@@ -166,6 +175,7 @@ def main() -> int:
         requested_games=args.games,
         all_samples=args.all_samples,
         max_actions=args.max_actions,
+        instruction_variant=args.instruction_variant,
         record=args.record,
         recordings_dir=args.recordings_dir,
     )

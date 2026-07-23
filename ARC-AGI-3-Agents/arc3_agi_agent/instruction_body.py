@@ -227,6 +227,59 @@ class ControlInstruction:
 
 
 @dataclass(frozen=True, slots=True)
+class SemanticOperatorInstruction:
+    """Addressable P material for one identity-free Layer-0 primitive."""
+
+    operator_id: str
+    action_id: int
+    detector: str
+    transform: str
+    parameter_items: tuple[tuple[str, object], ...]
+    preconditions: tuple[str, ...]
+    falsification_conditions: tuple[str, ...]
+    provenance: tuple[str, ...]
+
+    def parameters(self) -> dict[str, object]:
+        return dict(self.parameter_items)
+
+    def validate(self) -> tuple[str, ...]:
+        failures: list[str] = []
+        if not self.operator_id:
+            failures.append("SEMANTIC_OPERATOR_ID_MISSING")
+        if not 1 <= self.action_id <= 7:
+            failures.append("SEMANTIC_OPERATOR_ACTION_INVALID")
+        if not self.detector:
+            failures.append("SEMANTIC_OPERATOR_DETECTOR_MISSING")
+        if not self.transform:
+            failures.append("SEMANTIC_OPERATOR_TRANSFORM_MISSING")
+        if len(self.parameters()) != len(self.parameter_items):
+            failures.append("SEMANTIC_OPERATOR_PARAMETER_DUPLICATE")
+        if any(not key for key, _value in self.parameter_items):
+            failures.append("SEMANTIC_OPERATOR_PARAMETER_KEY_MISSING")
+        if not self.preconditions:
+            failures.append("SEMANTIC_OPERATOR_PRECONDITION_MISSING")
+        if not self.falsification_conditions:
+            failures.append("SEMANTIC_OPERATOR_FALSIFIER_MISSING")
+        if not self.provenance:
+            failures.append("SEMANTIC_OPERATOR_PROVENANCE_MISSING")
+        runtime_identity_surface = {
+            "operator_id": self.operator_id,
+            "action_id": self.action_id,
+            "detector": self.detector,
+            "transform": self.transform,
+            "parameters": self.parameters(),
+            "preconditions": self.preconditions,
+            "falsification_conditions": self.falsification_conditions,
+            "provenance": self.provenance,
+        }
+        failures.extend(
+            f"SEMANTIC_OPERATOR_RUNTIME_IDENTITY_FORBIDDEN:{path}"
+            for path in _runtime_value_failures(runtime_identity_surface)
+        )
+        return tuple(sorted(set(failures)))
+
+
+@dataclass(frozen=True, slots=True)
 class InstructionQueryResult:
     body_format: str
     body_version: str
@@ -240,6 +293,7 @@ class InstructionQueryResult:
     uncertainty: float
     falsification_conditions: tuple[str, ...]
     provenance: tuple[str, ...]
+    operator_instructions: tuple[SemanticOperatorInstruction, ...] = ()
 
     def validate(self, observation: ObservationIR) -> tuple[str, ...]:
         failures: list[str] = []
@@ -297,6 +351,20 @@ class InstructionQueryResult:
             failures.append("QUERY_FALSIFIER_MISSING")
         if not self.provenance:
             failures.append("QUERY_PROVENANCE_MISSING")
+        failures.extend(
+            failure
+            for instruction in self.operator_instructions
+            for failure in instruction.validate()
+        )
+        if len(
+            {item.operator_id for item in self.operator_instructions}
+        ) != len(self.operator_instructions):
+            failures.append("QUERY_SEMANTIC_OPERATOR_DUPLICATE")
+        if any(
+            instruction.action_id not in available
+            for instruction in self.operator_instructions
+        ):
+            failures.append("QUERY_SEMANTIC_OPERATOR_ACTION_UNAVAILABLE")
         return tuple(sorted(set(failures)))
 
 
@@ -588,6 +656,7 @@ class SymbolicInstructionBody:
     edges: tuple[tuple[str, str, str], ...]
     rules: tuple[SymbolicRule, ...]
     control_profiles: tuple[Mapping[str, Any], ...]
+    operator_instructions: tuple[SemanticOperatorInstruction, ...] = ()
 
     @property
     def format_id(self) -> str:
@@ -637,6 +706,15 @@ class SymbolicInstructionBody:
         controls = _controls_from_bundle(self.control_profiles, state_risk=0.0)
         if {item.mode for item in controls} != _CONTROL_MODES:
             failures.append("SYMBOLIC_CONTROL_COVERAGE_INCOMPLETE")
+        failures.extend(
+            failure
+            for instruction in self.operator_instructions
+            for failure in instruction.validate()
+        )
+        if len(
+            {item.operator_id for item in self.operator_instructions}
+        ) != len(self.operator_instructions):
+            failures.append("SYMBOLIC_SEMANTIC_OPERATOR_DUPLICATE")
         return tuple(sorted(set(failures)))
 
     def query(
@@ -715,6 +793,16 @@ class SymbolicInstructionBody:
             self.control_profiles,
             state_risk=state_risk,
         )
+        operator_instructions = tuple(
+            sorted(
+                (
+                    instruction
+                    for instruction in self.operator_instructions
+                    if instruction.action_id in observation.available_actions
+                ),
+                key=lambda item: item.operator_id,
+            )
+        )
         query_seed = {
             "request": request,
             "body": self.digest(),
@@ -725,6 +813,7 @@ class SymbolicInstructionBody:
             ),
             "predictions": ordered_predictions,
             "controls": controls,
+            "operator_instructions": operator_instructions,
         }
         result = InstructionQueryResult(
             body_format=self.format_id,
@@ -736,18 +825,22 @@ class SymbolicInstructionBody:
                 context,
                 memory_view,
             ),
-            retrieved_items=(
-                tuple(
-                    sorted(
-                        {
+            retrieved_items=tuple(
+                sorted(
+                    {
+                        *(
                             ref
                             for prediction in ordered_predictions
                             for ref in prediction.instruction_refs
-                        }
-                    )
+                        ),
+                        *(
+                            instruction.operator_id
+                            for instruction in operator_instructions
+                        ),
+                    }
                 )
-                or ("control-profile-set",)
-            ),
+            )
+            or ("control-profile-set",),
             hypotheses=hypotheses,
             predictions=ordered_predictions,
             controls=controls,
@@ -769,6 +862,7 @@ class SymbolicInstructionBody:
                 or ("new observation enables an action class",)
             ),
             provenance=provenance,
+            operator_instructions=operator_instructions,
         )
         result_failures = result.validate(observation)
         if result_failures:
@@ -814,6 +908,7 @@ class ParametricInstructionBody:
     training_record_count: int
     holdout_record_count: int
     parameter_count: int
+    operator_instructions: tuple[SemanticOperatorInstruction, ...] = ()
 
     @property
     def format_id(self) -> str:
@@ -873,6 +968,15 @@ class ParametricInstructionBody:
         controls = _controls_from_bundle(self.control_profiles, state_risk=0.0)
         if {item.mode for item in controls} != _CONTROL_MODES:
             failures.append("PARAMETRIC_CONTROL_COVERAGE_INCOMPLETE")
+        failures.extend(
+            failure
+            for instruction in self.operator_instructions
+            for failure in instruction.validate()
+        )
+        if len(
+            {item.operator_id for item in self.operator_instructions}
+        ) != len(self.operator_instructions):
+            failures.append("PARAMETRIC_SEMANTIC_OPERATOR_DUPLICATE")
         return tuple(sorted(set(failures)))
 
     def query(
@@ -978,6 +1082,16 @@ class ParametricInstructionBody:
             context,
             memory_view,
         )
+        operator_instructions = tuple(
+            sorted(
+                (
+                    instruction
+                    for instruction in self.operator_instructions
+                    if instruction.action_id in observation.available_actions
+                ),
+                key=lambda item: item.operator_id,
+            )
+        )
         result = InstructionQueryResult(
             body_format=self.format_id,
             body_version=self.body_version,
@@ -1001,7 +1115,17 @@ class ParametricInstructionBody:
                 length=24,
             ),
             representations=representations,
-            retrieved_items=(parameter_ref,),
+            retrieved_items=tuple(
+                sorted(
+                    {
+                        parameter_ref,
+                        *(
+                            instruction.operator_id
+                            for instruction in operator_instructions
+                        ),
+                    }
+                )
+            ),
             hypotheses=hypotheses,
             predictions=ordered_predictions,
             controls=controls,
@@ -1014,6 +1138,7 @@ class ParametricInstructionBody:
                 "held-out hazard rate exceeds predicted likelihood",
             ),
             provenance=provenance,
+            operator_instructions=operator_instructions,
         )
         result_failures = result.validate(observation)
         if result_failures:
@@ -1029,6 +1154,57 @@ def _control_profiles(value: object) -> tuple[Mapping[str, Any], ...]:
     return tuple(_mapping(item, "control profile") for item in value)
 
 
+def _semantic_operator_instructions(
+    value: object,
+) -> tuple[SemanticOperatorInstruction, ...]:
+    if value is None:
+        return ()
+    if not isinstance(value, Sequence) or isinstance(
+        value,
+        (str, bytes, bytearray),
+    ):
+        raise TypeError("operator_instructions must be an array")
+    instructions: list[SemanticOperatorInstruction] = []
+    for raw_value in value:
+        raw = _mapping(raw_value, "operator instruction")
+        parameters = _mapping(
+            raw.get("parameters"),
+            "operator instruction parameters",
+        )
+        instructions.append(
+            SemanticOperatorInstruction(
+                operator_id=str(raw.get("operator_id", "")),
+                action_id=_int(
+                    raw.get("action_id"),
+                    "operator instruction action_id",
+                ),
+                detector=str(raw.get("detector", "")),
+                transform=str(raw.get("transform", "")),
+                parameter_items=tuple(
+                    sorted(
+                        (str(key), copy.deepcopy(item))
+                        for key, item in parameters.items()
+                    )
+                ),
+                preconditions=_tuple_of_text(
+                    raw.get("preconditions"),
+                    "operator instruction preconditions",
+                ),
+                falsification_conditions=_tuple_of_text(
+                    raw.get("falsification_conditions"),
+                    "operator instruction falsification_conditions",
+                ),
+                provenance=_tuple_of_text(
+                    raw.get("provenance"),
+                    "operator instruction provenance",
+                ),
+            )
+        )
+    return tuple(
+        sorted(instructions, key=lambda instruction: instruction.operator_id)
+    )
+
+
 def instruction_body_from_mapping(
     value: Mapping[str, Any],
 ) -> SymbolicInstructionBody | ParametricInstructionBody:
@@ -1037,6 +1213,9 @@ def instruction_body_from_mapping(
     format_id = str(bundle.get("format_id", ""))
     payload = _mapping(bundle.get("payload"), "payload")
     controls = _control_profiles(payload.get("control_profiles"))
+    operator_instructions = _semantic_operator_instructions(
+        payload.get("operator_instructions", ())
+    )
     body: SymbolicInstructionBody | ParametricInstructionBody
 
     if format_id == SYMBOLIC_FORMAT_ID:
@@ -1136,6 +1315,7 @@ def instruction_body_from_mapping(
             edges=edges,
             rules=tuple(rules),
             control_profiles=controls,
+            operator_instructions=operator_instructions,
         )
     elif format_id == PARAMETRIC_FORMAT_ID:
         model = _mapping(payload.get("model"), "payload.model")
@@ -1181,6 +1361,7 @@ def instruction_body_from_mapping(
                 model.get("parameter_count"),
                 "model.parameter_count",
             ),
+            operator_instructions=operator_instructions,
         )
     else:
         raise ValueError("unsupported instruction body format")
@@ -1228,6 +1409,30 @@ def load_default_parametric_instruction_body() -> ParametricInstructionBody:
     return body
 
 
+@functools.lru_cache(maxsize=1)
+def load_p10_symbolic_instruction_body() -> SymbolicInstructionBody:
+    body = load_instruction_body(_bundle_path("p10_p_a_symbolic_v2.json"))
+    if not isinstance(body, SymbolicInstructionBody):
+        raise TypeError("P10 symbolic bundle has wrong format")
+    return body
+
+
+@functools.lru_cache(maxsize=1)
+def load_p10_parametric_instruction_body() -> ParametricInstructionBody:
+    body = load_instruction_body(_bundle_path("p10_p_b_parametric_v2.json"))
+    if not isinstance(body, ParametricInstructionBody):
+        raise TypeError("P10 parametric bundle has wrong format")
+    return body
+
+
+@functools.lru_cache(maxsize=1)
+def load_p10_hybrid_instruction_body() -> ParametricInstructionBody:
+    body = load_instruction_body(_bundle_path("p10_hybrid_v1.json"))
+    if not isinstance(body, ParametricInstructionBody):
+        raise TypeError("P10 hybrid bundle has wrong format")
+    return body
+
+
 __all__ = [
     "INSTRUCTION_BODY_REMOVAL_WITNESS",
     "INSTRUCTION_BODY_SCHEMA_VERSION",
@@ -1245,6 +1450,9 @@ __all__ = [
     "load_default_parametric_instruction_body",
     "load_default_symbolic_instruction_body",
     "load_instruction_body",
+    "load_p10_hybrid_instruction_body",
+    "load_p10_parametric_instruction_body",
+    "load_p10_symbolic_instruction_body",
     "runtime_feature_vector",
     "seal_instruction_bundle",
 ]

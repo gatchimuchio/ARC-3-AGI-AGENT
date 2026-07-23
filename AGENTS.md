@@ -88,6 +88,9 @@ P10 current:
   complete all retained OFFLINE sample games and levels
   deterministic identity-free traces
   explicit P version updates and M-to-future-decision causality
+  first P-compiled rendered relation operator accepted at 6 / 183
+  HDS search reset and bounded working-memory replacement implemented
+  HDS HOLD remains until 183 / 183 evidence
 ```
 
 ### P10で許可される作業

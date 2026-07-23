@@ -155,6 +155,7 @@ class KernelResult:
     instruction_query_digest: str
     compute_memory_digest: str
     compute_memory_version: int
+    memory_influenced_decision: bool = False
 
 
 @dataclass(slots=True)
@@ -802,6 +803,9 @@ class HDSController:
         if decision.decision_id in self._memory_directives:
             raise AuthorityViolation("MEMORY_DIRECTIVE_ALREADY_ISSUED")
         binding = self._decision_bindings[decision.decision_id]
+        compute_memory = self._compute_bindings[
+            decision.command_id
+        ].memory
         payload = proposal.payload()
         payload_digest = digest_object(payload)
         if len(payload) != len(proposal.payload_items):
@@ -813,13 +817,16 @@ class HDSController:
         directive = MemoryDirective(
             command_id=decision.command_id,
             decision_id=decision.decision_id,
-            operation="ADD",
+            operation=(
+                "REPLACE"
+                if proposal.target
+                in {entry.target for entry in compute_memory.entries}
+                else "ADD"
+            ),
             target=proposal.target,
             lifecycle="PROPOSED",
             evidence_signature=decision.closure_signature,
-            expected_version=self._compute_bindings[
-                decision.command_id
-            ].memory.version,
+            expected_version=compute_memory.version,
             payload_digest=payload_digest,
             _capability=_HDS_AUTHORIZATION_CAPABILITY,
             _authorization=_SingleUseAuthorization("MEMORY_WRITE"),
@@ -1630,6 +1637,7 @@ class Layer0Kernel:
                     lifecycle.stage,
                     "PURE_LLM",
                     "AUTHORIZED_MEMORY_WRITE_EXECUTED",
+                    memory_operation=memory_result.operation,
                     memory_version=memory_result.version,
                 )
                 lifecycle.transition("REFRAME")
@@ -1681,6 +1689,12 @@ class Layer0Kernel:
             instruction_query_digest=proposal.instruction_query_digest,
             compute_memory_digest=proposal.memory_view_digest,
             compute_memory_version=proposal.memory_view_version,
+            memory_influenced_decision=bool(
+                proposal.memory_proposal.payload().get(
+                    "memory_influenced_decision",
+                    False,
+                )
+            ),
         )
 
 

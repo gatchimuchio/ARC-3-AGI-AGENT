@@ -12,8 +12,10 @@ from arcengine import FrameData, FrameDataRaw, GameAction, GameState
 
 from arc3_agi_agent.p10_compute import VISUAL_OPERATOR_VERSION
 from arc3_agi_agent.p10_runtime import (
+    P10InstructionVariant,
     P10OfflineSampleRuntime,
     P10RecoveryResult,
+    P10SearchResetResult,
 )
 from arc3_agi_agent.protocol import AuthorityViolation
 from arc3_agi_agent.sample_runtime import SampleCycleResult
@@ -24,8 +26,10 @@ from ..agent import Agent
 @dataclass(frozen=True, slots=True)
 class P10SampleAgentReport:
     game_id: str
+    instruction_variant: P10InstructionVariant
     actions: int
     recoveries: int
+    search_resets: int
     levels_completed: int
     win_levels: int
     terminal_state: str
@@ -33,6 +37,7 @@ class P10SampleAgentReport:
     complete: bool
     max_action_exhausted: bool
     memory_version: int
+    memory_operations: tuple[str, ...]
     context_version: int
     context_actions_used: int
     memory_influenced_cycle_count: int
@@ -48,6 +53,10 @@ class P10SampleAgentReport:
     rollback_decision_ids: tuple[str, ...]
     rollback_memory_versions: tuple[tuple[int, int], ...]
     failure_payload_digests: tuple[str, ...]
+    search_reset_decision_ids: tuple[str, ...]
+    search_reset_memory_versions: tuple[tuple[int, int], ...]
+    search_reset_payload_digests: tuple[str, ...]
+    search_reset_evidence_signatures: tuple[str, ...]
 
 
 class P10SampleAgent(Agent):
@@ -58,6 +67,7 @@ class P10SampleAgent(Agent):
         *args: Any,
         operation_mode: OperationMode,
         max_actions: int = 4096,
+        instruction_variant: P10InstructionVariant = "hybrid",
         **kwargs: Any,
     ) -> None:
         if operation_mode is not OperationMode.OFFLINE:
@@ -71,12 +81,14 @@ class P10SampleAgent(Agent):
         self.frames: list[FrameData] = []
         self.cycles: list[SampleCycleResult] = []
         self.recoveries: list[P10RecoveryResult] = []
+        self.search_resets: list[P10SearchResetResult] = []
         self.final_status = "NOT_STARTED"
         self.max_action_exhausted = False
         self.runtime = P10OfflineSampleRuntime(
             environment=self.arc_env,
             operation_mode=operation_mode,
             max_actions=max_actions,
+            instruction_variant=instruction_variant,
         )
 
     @property
@@ -104,15 +116,32 @@ class P10SampleAgent(Agent):
                 self.cycles.append(cycle)
                 self.final_status = cycle.kernel_result.status
                 if cycle.after_frame is None:
-                    break
+                    search_reset = self.runtime.search_reset(
+                        cycle,
+                        current,
+                        action_count=self.action_counter,
+                    )
+                    if search_reset is None:
+                        break
+                    self.search_resets.append(search_reset)
+                    self.action_counter += 1
+                    current = search_reset.execution.reset_frame
+                    self.append_frame(self._convert_raw_frame_data(current))
+                    self.final_status = "ROLLBACK"
+                    continue
 
                 self.action_counter += 1
                 current = cycle.after_frame
                 self.append_frame(self._convert_raw_frame_data(current))
 
                 if current.state is GameState.GAME_OVER:
+                    if self.action_counter >= self.MAX_ACTIONS:
+                        self.max_action_exhausted = True
+                        self.final_status = "MAX_ACTION_STOP"
+                        break
                     recovered = self.runtime.recover(cycle, current)
                     self.recoveries.append(recovered)
+                    self.action_counter += 1
                     current = recovered.execution.reset_frame
                     self.append_frame(self._convert_raw_frame_data(current))
                     self.final_status = "ROLLBACK"
@@ -137,8 +166,8 @@ class P10SampleAgent(Agent):
             else FrameData(levels_completed=0, win_levels=0)
         )
         memory_influenced = sum(
-            bool(entry.payload.get("memory_influenced_decision"))
-            for entry in snapshot.entries
+            cycle.kernel_result.memory_influenced_decision
+            for cycle in self.cycles
         )
         rollback_versions = tuple(
             (
@@ -147,10 +176,19 @@ class P10SampleAgent(Agent):
             )
             for recovery in self.recoveries
         )
+        search_reset_versions = tuple(
+            (
+                reset.execution.memory_version_before,
+                reset.execution.memory_version_after,
+            )
+            for reset in self.search_resets
+        )
         return P10SampleAgentReport(
             game_id=self.game_id,
+            instruction_variant=self.runtime.instruction_variant,
             actions=self.action_counter,
             recoveries=len(self.recoveries),
+            search_resets=len(self.search_resets),
             levels_completed=int(latest.levels_completed),
             win_levels=int(latest.win_levels),
             terminal_state=str(latest.state.value),
@@ -158,6 +196,11 @@ class P10SampleAgent(Agent):
             complete=latest.state is GameState.WIN,
             max_action_exhausted=self.max_action_exhausted,
             memory_version=snapshot.version,
+            memory_operations=tuple(
+                cycle.kernel_result.memory_result.operation
+                for cycle in self.cycles
+                if cycle.kernel_result.memory_result is not None
+            ),
             context_version=context.version,
             context_actions_used=context.actions_used,
             memory_influenced_cycle_count=memory_influenced,
@@ -204,6 +247,16 @@ class P10SampleAgent(Agent):
             failure_payload_digests=tuple(
                 recovery.failure_payload_digest
                 for recovery in self.recoveries
+            ),
+            search_reset_decision_ids=tuple(
+                reset.reset_decision_id for reset in self.search_resets
+            ),
+            search_reset_memory_versions=search_reset_versions,
+            search_reset_payload_digests=tuple(
+                reset.memory_payload_digest for reset in self.search_resets
+            ),
+            search_reset_evidence_signatures=tuple(
+                reset.evidence_signature for reset in self.search_resets
             ),
         )
 

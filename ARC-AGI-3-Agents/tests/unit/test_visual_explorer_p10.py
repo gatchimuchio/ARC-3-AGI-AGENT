@@ -57,6 +57,23 @@ class VisualExplorerP10Tests(unittest.TestCase):
         self.assertNotIn("game", repr(first).casefold())
         self.assertNotIn("level", repr(first).casefold())
 
+    def test_state_identity_keeps_full_render_while_structure_uses_mask(
+        self,
+    ) -> None:
+        first_grid = tuple(
+            tuple(9 if y == 0 else 0 for _ in range(12))
+            for y in range(12)
+        )
+        second_grid = tuple(
+            tuple(8 if y == 0 else 0 for _ in range(12))
+            for y in range(12)
+        )
+        first = analyze_scene(first_grid, (1,))
+        second = analyze_scene(second_grid, (1,))
+        self.assertNotEqual(first.signature, second.signature)
+        self.assertNotEqual(first.grid_digest, second.grid_digest)
+        self.assertEqual(first.structural_digest, second.structural_digest)
+
     def test_no_change_memory_changes_next_action(self) -> None:
         grid = (
             (0, 0, 0),
@@ -117,6 +134,60 @@ class VisualExplorerP10Tests(unittest.TestCase):
         routed = explorer.decide(first_scene)
         self.assertEqual(routed.reason, "VISUAL_TRANSITION_GRAPH_ROUTE")
         self.assertEqual(routed.frontier_distance, 1)
+
+    def test_disconnected_frontier_requires_reset_but_total_exhaustion_does_not(
+        self,
+    ) -> None:
+        initial = analyze_scene(
+            ((0, 0, 0), (0, 8, 0), (0, 0, 0)),
+            (1, 2),
+        )
+        dead_end = analyze_scene(
+            ((0, 0, 0), (0, 9, 0), (0, 0, 0)),
+            (1,),
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            initial,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        first = explorer.decide(initial)
+        self.assertEqual(first.action, initial.candidates[0])
+        explorer.observe(
+            dead_end,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        explorer.decide(dead_end)
+        explorer.observe(
+            dead_end,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+
+        reset_required = explorer.decide(dead_end)
+        self.assertIsNone(reset_required.action)
+        self.assertEqual(
+            reset_required.reason,
+            "VISUAL_BRANCH_EXHAUSTED_RESET_REQUIRED",
+        )
+
+        explorer.observe(
+            initial,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        second = explorer.decide(initial)
+        self.assertEqual(second.action, initial.candidates[1])
+        explorer.observe(
+            initial,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        exhausted = explorer.decide(initial)
+        self.assertIsNone(exhausted.action)
+        self.assertEqual(exhausted.reason, "VISUAL_FRONTIER_EXHAUSTED")
 
     def test_hazard_is_retained_and_not_reselected(self) -> None:
         grid = (

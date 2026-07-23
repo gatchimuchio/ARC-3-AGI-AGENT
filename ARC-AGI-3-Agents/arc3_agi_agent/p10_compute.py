@@ -18,16 +18,20 @@ from .kernel import ComputeProposal, MemoryProposal, PureLLMCompute
 from .memory import MemorySnapshot
 from .protocol import ComputeRequest
 from .schema import digest_object
+from .search_reset import SEARCH_RESET_REASON
+from .semantic_operators import SemanticPlannerState
 from .visual_explorer import (
     DeterministicVisualExplorer,
     ExplorerDecision,
+    Grid,
     VisualAction,
     VisualScene,
     analyze_scene,
 )
 
 VISUAL_EXPLORER_MEMORY_FORMAT = "arc3-p10-visual-memory-v1"
-VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v1"
+VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v3"
+VISUAL_RUNTIME_MEMORY_TARGET = "visual-runtime-state"
 
 
 def _latest_explorer(memory: MemorySnapshot) -> DeterministicVisualExplorer:
@@ -40,6 +44,20 @@ def _latest_explorer(memory: MemorySnapshot) -> DeterministicVisualExplorer:
             raise ValueError("visual explorer memory payload invalid")
         return DeterministicVisualExplorer.from_payload(raw_explorer)
     return DeterministicVisualExplorer()
+
+
+def _latest_semantic_planner(memory: MemorySnapshot) -> SemanticPlannerState:
+    for entry in sorted(memory.entries, key=lambda item: item.version, reverse=True):
+        payload = entry.payload
+        if payload.get("format") != VISUAL_EXPLORER_MEMORY_FORMAT:
+            continue
+        raw_planner = payload.get("semantic_planner")
+        if raw_planner is None:
+            continue
+        if not isinstance(raw_planner, dict):
+            raise ValueError("semantic planner memory payload invalid")
+        return SemanticPlannerState.from_payload(raw_planner)
+    return SemanticPlannerState()
 
 
 def compile_visual_failure_payload(
@@ -79,6 +97,8 @@ def compile_visual_failure_payload(
     )
     explorer = _latest_explorer(memory)
     explorer.record_hazard(raw_source, action)
+    semantic_planner = _latest_semantic_planner(memory)
+    semantic_planner.invalidate_active_plan()
     return {
         "format": VISUAL_EXPLORER_MEMORY_FORMAT,
         "input_memory_digest": memory.digest,
@@ -86,8 +106,72 @@ def compile_visual_failure_payload(
         "memory_influenced_decision": True,
         "observed_failure_signature": result_signature,
         "operator_version": VISUAL_OPERATOR_VERSION,
+        "semantic_planner": semantic_planner.to_payload(),
         "visual_explorer": explorer.to_payload(),
     }
+
+
+@dataclass(frozen=True, slots=True)
+class VisualSearchResetPreparation:
+    """Identity-free C output consumed by the dedicated HDS reset judge."""
+
+    reason: str
+    evidence_signature: str
+    memory_target: str
+    memory_payload: dict[str, object]
+
+
+def prepare_visual_search_reset(
+    memory: MemorySnapshot,
+    rendered_grid: Grid,
+    available_actions: tuple[int, ...],
+    *,
+    terminal_state: str,
+) -> VisualSearchResetPreparation | None:
+    """Recompute and retain only a proven disconnected-frontier condition."""
+
+    if terminal_state != "NOT_FINISHED":
+        return None
+    explorer = _latest_explorer(memory)
+    fixed_mask = explorer.status_mask or None
+    scene = analyze_scene(
+        rendered_grid,
+        available_actions,
+        fixed_status_mask=fixed_mask,
+    )
+    explorer.observe(
+        scene,
+        terminal_state=terminal_state,
+        level_progress=False,
+    )
+    decision = explorer.decide(scene)
+    if decision.reason != SEARCH_RESET_REASON or decision.action is not None:
+        return None
+    memory_payload: dict[str, object] = {
+        "format": VISUAL_EXPLORER_MEMORY_FORMAT,
+        "input_memory_digest": memory.digest,
+        "input_memory_version": memory.version,
+        "memory_influenced_decision": decision.memory_influenced,
+        "operator_version": VISUAL_OPERATOR_VERSION,
+        "scene_signature": scene.signature,
+        "search_reset_reason": decision.reason,
+        "semantic_planner": _latest_semantic_planner(memory).to_payload(),
+        "visual_explorer": explorer.to_payload(),
+    }
+    evidence_signature = "search-frontier:" + digest_object(memory_payload)
+    memory_target = "visual-search-reset:" + digest_object(
+        {
+            "memory": memory.digest,
+            "scene": scene.signature,
+            "evidence": evidence_signature,
+        }
+    )[:24]
+    return VisualSearchResetPreparation(
+        reason=decision.reason,
+        evidence_signature=evidence_signature,
+        memory_target=memory_target,
+        memory_payload=memory_payload,
+    )
 
 
 def _expected_effects(
@@ -326,16 +410,47 @@ class P10VisualCompute(PureLLMCompute):
             terminal_state=observation.terminal_state,
             level_progress=progress,
         )
-        explorer_decision = (
-            ExplorerDecision(
-                action=None,
-                reason="TERMINAL_OBSERVATION",
-                memory_influenced=bool(memory.entries),
+        semantic_planner = _latest_semantic_planner(memory)
+        if progress:
+            semantic_planner.reset_after_progress()
+        terminal = observation.terminal_state in {"WIN", "GAME_OVER"}
+        semantic_decision = (
+            None
+            if terminal
+            else semantic_planner.decide(
+                observation.rendered_layers[-1],
+                observation.available_actions,
+                query.operator_instructions,
+                source_signature=scene.signature,
+            )
+        )
+        if (
+            semantic_decision is not None
+            and semantic_decision.action is not None
+            and explorer.stage_action(scene, semantic_decision.action)
+        ):
+            explorer_decision = ExplorerDecision(
+                action=semantic_decision.action,
+                reason=semantic_decision.reason,
+                memory_influenced=semantic_decision.memory_influenced,
                 frontier_distance=None,
             )
-            if observation.terminal_state in {"WIN", "GAME_OVER"}
-            else explorer.decide(scene)
-        )
+        else:
+            if (
+                semantic_decision is not None
+                and semantic_decision.action is not None
+            ):
+                semantic_planner.invalidate_active_plan()
+            explorer_decision = (
+                ExplorerDecision(
+                    action=None,
+                    reason="TERMINAL_OBSERVATION",
+                    memory_influenced=bool(memory.entries),
+                    frontier_distance=None,
+                )
+                if terminal
+                else explorer.decide(scene)
+            )
         candidates = cast(
             tuple[CandidateIR, ...],
             generate_visual(
@@ -348,16 +463,8 @@ class P10VisualCompute(PureLLMCompute):
                 explorer_decision,
             ),
         )
-        memory_target = "visual-cycle:" + digest_object(
-            {
-                "command": request.command_id,
-                "observation": observation.frame_signature,
-                "input_memory": memory.digest,
-                "explorer": explorer.digest,
-            }
-        )[:24]
         memory_proposal = MemoryProposal(
-            target=memory_target,
+            target=VISUAL_RUNTIME_MEMORY_TARGET,
             payload_items=(
                 ("format", VISUAL_EXPLORER_MEMORY_FORMAT),
                 ("input_memory_digest", memory.digest),
@@ -368,6 +475,7 @@ class P10VisualCompute(PureLLMCompute):
                 ),
                 ("operator_version", VISUAL_OPERATOR_VERSION),
                 ("scene_signature", scene.signature),
+                ("semantic_planner", semantic_planner.to_payload()),
                 ("visual_explorer", explorer.to_payload()),
             ),
         )
@@ -424,5 +532,8 @@ __all__ = [
     "P10VisualCompute",
     "VISUAL_EXPLORER_MEMORY_FORMAT",
     "VISUAL_OPERATOR_VERSION",
+    "VISUAL_RUNTIME_MEMORY_TARGET",
+    "VisualSearchResetPreparation",
     "compile_visual_failure_payload",
+    "prepare_visual_search_reset",
 ]

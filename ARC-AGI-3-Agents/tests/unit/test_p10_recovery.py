@@ -195,6 +195,59 @@ class P10RecoveryTests(unittest.TestCase):
         self.assertEqual(memory.version, 0)
         self.assertEqual(boundary.calls, 0)
 
+    def test_runtime_replaces_working_memory_without_losing_versioning(
+        self,
+    ) -> None:
+        initial = frame(
+            [
+                [0, 0, 0, 0],
+                [0, 8, 8, 0],
+                [0, 8, 8, 0],
+                [0, 0, 0, 0],
+            ]
+        )
+        after_first = frame(
+            [
+                [0, 0, 0, 0],
+                [0, 9, 9, 0],
+                [0, 9, 9, 0],
+                [0, 0, 0, 0],
+            ]
+        )
+        after_second = frame(
+            [
+                [0, 0, 0, 0],
+                [0, 10, 10, 0],
+                [0, 10, 10, 0],
+                [0, 0, 0, 0],
+            ]
+        )
+        environment = SequencedOfflineEnvironment(
+            [after_first, after_second],
+            initial,
+        )
+        runtime = P10OfflineSampleRuntime(
+            environment=environment,
+            operation_mode=OperationMode.OFFLINE,
+            max_actions=8,
+        )
+
+        first = runtime.run_cycle(initial, action_count=0)
+        second = runtime.run_cycle(after_first, action_count=1)
+
+        assert first.kernel_result.memory_result is not None
+        assert second.kernel_result.memory_result is not None
+        self.assertEqual(first.kernel_result.memory_result.operation, "ADD")
+        self.assertEqual(second.kernel_result.memory_result.operation, "REPLACE")
+        self.assertFalse(first.kernel_result.memory_influenced_decision)
+        self.assertTrue(second.kernel_result.memory_influenced_decision)
+        memory = runtime.components.memory
+        assert memory is not None
+        snapshot = memory.view()
+        self.assertEqual(snapshot.version, 2)
+        self.assertEqual(len(snapshot.entries), 1)
+        self.assertEqual(snapshot.entries[0].operation, "REPLACE")
+
     def test_runtime_rolls_back_then_memory_changes_next_action(self) -> None:
         initial = frame(
             [

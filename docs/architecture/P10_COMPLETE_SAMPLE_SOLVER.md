@@ -55,19 +55,63 @@ versioned payloadへ直列化する。game/task/level IDを入力に取らない
 最新の承認済みMを読み、P10候補とM更新案を生成する。cycle 1のMにより
 cycle 2の候補actionが変わることを単体試験で固定している。
 
+`arc3_agi_agent/p10_instruction_compiler.py`は、P4 predecessorからP-A、
+P-B、hybridをseed 0で決定論的にcompileする。意味演算子のdetector、
+transform、parameter、precondition、falsifierはP-A/hybridだけに入り、
+P-Bからは除去される。P交換時はM内の待機planに記録したinstruction
+digestを照合し、旧P由来queueを無効化する。
+
+`arc3_agi_agent/semantic_operators.py`の最初の演算子は、rendered relation
+tile latticeを検出し、binary制約をGF(2)、ternary制約を循環差分として
+解く。game/task/level ID、source、hidden state、固定座標を受け取らない。
+残planはMが受動保持し、失敗時は署名をblockして同じplanを再実行しない。
+
 `arc3_agi_agent/recovery.py`とOFFLINE adapterは、観測済みGAME_OVERに対して
 HDSがrollback Frameを判断し、single-use capabilityを発行した場合だけ、
 Pure-LLM executorによるM rollback、failure保持、RESET、再観測を許す。
 偽造directiveと二重RESETは拒否する。
 
+`arc3_agi_agent/search_reset.py`はGAME_OVER recoveryと分離されている。
+現在branchから未試行frontierへ到達できず、初期rendered state側にだけ
+frontierが残ることをCが証拠化し、HDSがFrameを閉じた場合だけ、Mを保持して
+環境RESETを1回実行する。RESETごとに新しいsingle-use capabilityを要求する。
+
 `agents/templates/p10_sample_agent.py`と`p10_main.py`は、通常actionとRESETの
 双方を上記権限境界だけから実行し、full trace、P digest、M version、
 rollback decision、完了数をreportする。
 
+作業Mは同一targetへ毎cycle追加しない。初回はHDSが`ADD`、後続は観測時の
+active targetを確認して`REPLACE`を許可する。version/historyは維持しつつ、
+current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す。
+
 ## 3. 現在の実測境界
 
-P10実行経路の単体・型・lint gateは通過している。LS20の1-action smokeでは
-OFFLINE実行、HDS emit、M version 1、trace生成、error 0を確認した。
+P10実行経路の単体・型・lint gateは通過している。hybridのFT09実行では
+OFFLINEで全6 levelを75 actionで完了し、error 0、GAME_OVER 0、recovery 0、
+search reset 0、max-action停止なしを確認した。実際のP versionは
+`p10-hybrid-v1`で、M queueが後続actionを変えたcycleを観測した。
+
+現時点で新runtimeが同一条件で実証した完了数は`6 / 183`である。
+これは最初の演算子blockの採用証拠であり、全sample攻略証拠ではない。
+
+FT09、action budget 256、seed 0、OFFLINEの同一条件比較:
+
+| P variant | P version | 完了 | actions | 終端 |
+|---|---|---:|---:|---|
+| P-A | `p10-p-a-symbolic-v2` | 6 / 6 | 75 | `WIN` |
+| P-B | `p10-p-b-parametric-v2` | 0 / 6 | 256 | `MAX_ACTION_STOP` |
+| hybrid | `p10-hybrid-v1` | 6 / 6 | 75 | `WIN` |
+
+全variantでruntime errorは0だった。P-Bではsemantic operator instructionが
+0件であり、CコードとM内queueを同じままにしても能力が消失した。これは
+当該能力がPの明示内容へ依存することのP10実行証拠である。
+
+全cycle traceを含むscorecard非依存の安定射影は
+[`ft09_variant_comparison.json`](../../evidence/p10/ft09_variant_comparison.json)
+へ保存した。content digestは
+`8d17b068a757ececded6c4f2a7669a57319a12e3194e5c8ca1d9c956f213f473`
+である。game IDは実行結果を同定するevidence fieldにだけ存在し、P、C、
+M、runtime selectorへは入らない。
 
 一方、rendered transition graphだけによる探索は全sample攻略を閉じない。
 G50T level 1の診断では188 action、1 reset、25 visible nodeでfrontierが
@@ -82,8 +126,13 @@ HDS判断は`HOLD`とし、P11へ進めない。
 
 ```bash
 cd ARC-AGI-3-Agents
-python p10_main.py --game LS20 --max-actions 4096
+python -m arc3_agi_agent.p10_instruction_compiler \
+  --base-bundle-dir arc3_agi_agent/bundles \
+  --output-dir arc3_agi_agent/bundles
+python p10_main.py --game FT09 --instruction-variant hybrid \
+  --max-actions 4096
 python p10_main.py --all-samples --max-actions 4096 \
+  --instruction-variant hybrid \
   --report ../evidence/p10/run.json
 ```
 
@@ -102,4 +151,3 @@ router、replay、固定列、literal座標は移植しない。
 3. failureがMへ保持され次判断を変える
 4. source/hidden-state runtime参照が0
 5. 全traceでHDSが最終採否主体である
-

@@ -314,6 +314,7 @@ class VisualAction:
 class VisualScene:
     signature: str
     grid_digest: str
+    structural_digest: str
     width: int
     height: int
     status_mask: frozenset[Point]
@@ -430,10 +431,15 @@ def analyze_scene(
             ),
         )
     )
-    grid_digest = digest_object(normalized)
+    # State identity must cover the complete rendered evidence.  The inferred
+    # status mask is only an object-extraction aid: dropping it from identity
+    # aliases visibly different states and can erase a real phase signal.
+    grid_digest = digest_object(grid)
+    structural_digest = digest_object(normalized)
     return VisualScene(
         signature="visual-state:" + grid_digest[:24],
         grid_digest=grid_digest,
+        structural_digest=structural_digest,
         width=width,
         height=height,
         status_mask=mask,
@@ -565,6 +571,30 @@ class DeterministicVisualExplorer:
         self.previous_signature = ""
         self.previous_action_key = ""
 
+    def known_outcome(
+        self,
+        source_signature: str,
+        action_key: str,
+    ) -> Outcome | None:
+        node = self.nodes.get(source_signature)
+        return None if node is None else node.outcomes.get(action_key)
+
+    def stage_action(
+        self,
+        scene: VisualScene,
+        action: VisualAction,
+    ) -> bool:
+        """Record a semantic proposal as pending without selecting authority."""
+
+        node = self._ensure_node(scene)
+        if node.outcomes.get(action.key) in {"NO_CHANGE", "HAZARD"}:
+            return False
+        node.actions.setdefault(action.key, action)
+        node.order = tuple(dict.fromkeys((*node.order, action.key)))
+        self.previous_signature = scene.signature
+        self.previous_action_key = action.key
+        return True
+
     def _frontier_action(
         self,
         signature: str,
@@ -601,6 +631,18 @@ class DeterministicVisualExplorer:
                 queue.append((target, distance + 1))
         return None, None
 
+    def reset_frontier_available(self, current_signature: str) -> bool:
+        """Return whether RESET can expose a disconnected untested frontier."""
+
+        if (
+            not self.initial_signature
+            or self.initial_signature not in self.nodes
+            or current_signature == self.initial_signature
+        ):
+            return False
+        action, _distance = self._frontier_action(self.initial_signature)
+        return action is not None
+
     def decide(self, scene: VisualScene) -> ExplorerDecision:
         """Choose one candidate; prior observations change future selection."""
 
@@ -615,9 +657,14 @@ class DeterministicVisualExplorer:
         if memory_influenced:
             self.memory_read_count += 1
         if action is None:
+            reset_frontier = self.reset_frontier_available(scene.signature)
             return ExplorerDecision(
                 action=None,
-                reason="VISUAL_FRONTIER_EXHAUSTED",
+                reason=(
+                    "VISUAL_BRANCH_EXHAUSTED_RESET_REQUIRED"
+                    if reset_frontier
+                    else "VISUAL_FRONTIER_EXHAUSTED"
+                ),
                 memory_influenced=memory_influenced,
                 frontier_distance=None,
             )

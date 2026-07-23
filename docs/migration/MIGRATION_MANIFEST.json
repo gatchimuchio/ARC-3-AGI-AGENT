@@ -65,6 +65,20 @@
         "evidence-only semantics retained",
         "bounded retention validated"
       ]
+    },
+    {
+      "source_path": "agent/my_agent.py::_ft09_frame_plan",
+      "source_commit": "96f3d2deebc7c05c07e7c817f131a2a5136f5822",
+      "source_blob_sha": "d32297f2818eb354bff5e3304d9f4b657304c907",
+      "target_path": "ARC-AGI-3-Agents/arc3_agi_agent/semantic_operators.py",
+      "status": "ADAPTED",
+      "changes": [
+        "retained only the rendered relation parser and GF2 solve concept",
+        "moved detector transform and parameters into explicit P bundles",
+        "removed game and level routing fixed coordinates and policy-owned queue",
+        "bound pending plans to the current P instruction digest",
+        "kept HDS as sole memory-write and external-emit authority"
+      ]
     }
   ],
   "quarantined_assets": [
