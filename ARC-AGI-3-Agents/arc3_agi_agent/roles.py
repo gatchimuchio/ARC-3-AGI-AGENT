@@ -11,6 +11,7 @@ from .ir import CandidateIR, ClosureIR, EntityIR, HypothesisIR, ObservationIR
 from .memory import MemorySnapshot
 from .schema import TERMINAL_STATES, digest_object, forbidden_runtime_paths
 from .verification import HAZARD_EFFECTS
+from .visual_explorer import normalized_grid
 
 ROLE_FAILURE_REASONS = {
     "SYMBOL_SPACE": "SYMBOL_SPACE_REMOVED_INPUT_NOT_SYMBOLIZED",
@@ -166,6 +167,16 @@ class DeterministicSymbolSpace:
         terminal_state = str(raw.get("terminal_state", "UNKNOWN")).upper().strip()
         if terminal_state not in TERMINAL_STATES:
             terminal_state = "UNKNOWN"
+        rendered_layers: tuple[tuple[tuple[int, ...], ...], ...] = ()
+        if isinstance(raw_frame, Sequence) and not isinstance(
+            raw_frame,
+            (str, bytes, bytearray),
+        ):
+            rendered_layers = tuple(
+                grid
+                for grid in (normalized_grid(layer) for layer in raw_frame)
+                if grid
+            )
 
         return ObservationIR(
             frame_signature=frame_signature,
@@ -182,6 +193,7 @@ class DeterministicSymbolSpace:
             ),
             feature_tokens=feature_tokens,
             terminal_state=terminal_state,
+            rendered_layers=rendered_layers,
         )
 
 

@@ -74,7 +74,8 @@ ARC-AGI-3-Agents/
   arc3_agi_agent/             Layer-0 / HDS / M / sample runtime / evidence compiler
   README.md                   OFFLINE実行手順
   UPSTREAM_README.md          公式基盤の原README（参照専用）
-  sample_main.py              OFFLINE sample runner
+  sample_main.py              P1 OFFLINE sample runner
+  p10_main.py                 P10 full-trace OFFLINE sample runner
   agents/templates/           HDS制御sample agent
   tests/unit/                 契約・IR・機構の単体試験
   tests/integration/          sample OFFLINE境界試験
@@ -160,6 +161,9 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 [`certificates/p9`](certificates/p9)へ固定しました。完了証拠は
 [`P9_MINIMUM_THREE_CERTIFICATE.md`](docs/architecture/P9_MINIMUM_THREE_CERTIFICATE.md)
 です。現在のP10では保持済みOFFLINE sampleの全game / 全level攻略を行います。
+P10の実装中監査と未閉包境界は
+[`P10_COMPLETE_SAMPLE_SOLVER.md`](docs/architecture/P10_COMPLETE_SAMPLE_SOLVER.md)
+に記録しています。
 
 ## 設計上の固定境界
 
@@ -185,6 +189,17 @@ python -m unittest discover -s tests/integration \
   -p "test_offline_sample_runner.py" -v
 python sample_main.py --all-samples --max-actions 1
 ```
+
+## P10実行入口
+
+```bash
+cd ARC-AGI-3-Agents
+python p10_main.py --game LS20 --max-actions 4096
+python p10_main.py --all-samples --max-actions 4096 \
+  --report ../evidence/p10/run.json
+```
+
+`p10_main.py`は全選択gameが`WIN`に到達した場合だけ終了code 0を返します。
 
 ## 絶対順序
 

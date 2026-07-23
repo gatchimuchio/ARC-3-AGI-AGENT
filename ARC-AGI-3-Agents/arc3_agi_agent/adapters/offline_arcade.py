@@ -13,6 +13,11 @@ from arcengine import FrameDataRaw, GameAction
 
 from ..ir import CandidateIR, ObservationIR
 from ..protocol import AuthorityViolation, EmissionDirective, HDSDecision
+from ..recovery import (
+    HDSRecoveryDecision,
+    RecoveryDirective,
+    require_recovery_directive,
+)
 from ..sample_observation import SampleFrameAdapter
 from ..schema import digest_object
 from .in_memory import (
@@ -126,6 +131,41 @@ class OfflineArcadeEmissionInterface:
             levels_completed=raw.levels_completed,
             _authorization_receipt=receipt,
         )
+
+    def recover(
+        self,
+        directive: RecoveryDirective,
+        decision: HDSRecoveryDecision,
+        *,
+        executor: str,
+    ) -> FrameDataRaw:
+        """Execute RESET only under a single-use HDS rollback capability."""
+
+        if self.operation_mode is not OperationMode.OFFLINE:
+            raise AuthorityViolation("OFFLINE_SAMPLE_MODE_CHANGED")
+        if self._after is None:
+            raise AuthorityViolation("RECOVERY_FAILURE_RESULT_NOT_BOUND")
+        if str(self._after.state.value).upper() != "GAME_OVER":
+            raise AuthorityViolation("RECOVERY_REQUIRES_GAME_OVER_FRAME")
+        require_recovery_directive(
+            directive,
+            decision,
+            executor=executor,
+        )
+        raw = self.environment.step(
+            GameAction.RESET,
+            data={},
+            reasoning={
+                "authority": "HDS",
+                "recovery_decision": decision.decision_id,
+                "rollback_reference": decision.rollback_reference,
+            },
+        )
+        if not isinstance(raw, FrameDataRaw):
+            raise RuntimeError("OFFLINE_SAMPLE_RECOVERY_STEP_FAILED")
+        self._before = self._after
+        self._after = raw
+        return raw
 
 
 __all__ = ["OfflineArcadeEmissionInterface"]

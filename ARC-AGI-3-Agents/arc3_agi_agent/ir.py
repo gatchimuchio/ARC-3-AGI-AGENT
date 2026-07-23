@@ -27,6 +27,12 @@ class ObservationIR:
     phase_hypotheses: tuple[str, ...] = ()
     feature_tokens: tuple[str, ...] = ()
     terminal_state: str = "UNKNOWN"
+    rendered_layers: tuple[tuple[tuple[int, ...], ...], ...] = field(
+        default=(),
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
 
 
 @dataclass(frozen=True, slots=True)

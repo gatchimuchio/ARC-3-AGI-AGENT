@@ -5,8 +5,10 @@ import time
 from abc import ABC, abstractmethod
 from typing import Any, Optional
 
-from arc_agi import EnvironmentWrapper
-from arc_agi.scorecard import EnvironmentScorecard
+from arc_agi import EnvironmentWrapper  # type: ignore[import-untyped]
+from arc_agi.scorecard import (  # type: ignore[import-untyped]
+    EnvironmentScorecard,
+)
 from arcengine import FrameData, FrameDataRaw, GameAction, GameState
 from pydantic import ValidationError
 
@@ -55,7 +57,7 @@ class Agent(ABC):
         self.guid = ""
         self.agent_name = agent_name
         self.tags = tags or []
-        self.frames = [FrameData(levels_completed=0)]
+        self.frames = [FrameData(levels_completed=0, win_levels=0)]
         self._cleanup = True
         if record:
             self.start_recording()
@@ -94,7 +96,7 @@ class Agent(ABC):
 
     @property
     def levels_completed(self) -> int:
-        return self.frames[-1].levels_completed  # type: ignore[no-any-return]
+        return self.frames[-1].levels_completed
 
     @property
     def seconds(self) -> float:
@@ -252,9 +254,9 @@ class Playback(Agent):
         action = GameAction.from_id(action_input["id"])
         data = action_input["data"].copy()
         data["game_id"] = self.game_id
-        action.set_data(data)
         if "reasoning" in action_input and action_input["reasoning"] is not None:
-            action.reasoning = action_input["reasoning"]
+            data["reasoning"] = action_input["reasoning"]
+        action.set_data(data)
 
         logger.debug(
             f"Playback action {self.action_counter}: {action.name} with data {data}"

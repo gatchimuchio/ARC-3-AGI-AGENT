@@ -35,6 +35,7 @@ agentops = [
 
 [project.scripts]
 arc3-p1-samples = "sample_main:main"
+arc3-p10-samples = "p10_main:main"
 arc3-compile-evidence = "arc3_agi_agent.evidence_compiler:main"
 arc3-compile-instruction-bodies = "arc3_agi_agent.instruction_compiler:main"
 arc3-build-minimum-certificate = "arc3_agi_agent.certificate:main"
@@ -44,7 +45,7 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-py-modules = ["sample_main"]
+py-modules = ["p10_main", "sample_main"]
 
 [tool.setuptools.packages.find]
 include = [

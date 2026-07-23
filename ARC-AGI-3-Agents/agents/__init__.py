@@ -7,19 +7,22 @@ only when callers request the corresponding export or registry entry.
 
 from __future__ import annotations
 
-from collections.abc import Iterator, Mapping
+from collections.abc import Callable, Iterator, Mapping
 from importlib import import_module
 from typing import Any, Final
 
 from .recorder import Recorder
 
+_load_dotenv: Callable[[], object] | None
 try:
-    from dotenv import load_dotenv
+    from dotenv import load_dotenv as _dotenv_import
 except ImportError:  # pragma: no cover - dotenv is a declared runtime dependency
-    load_dotenv = None
+    _load_dotenv = None
+else:
+    _load_dotenv = _dotenv_import
 
-if load_dotenv is not None:
-    load_dotenv()
+if _load_dotenv is not None:
+    _load_dotenv()
 
 _EXPORT_IMPORTS: Final[dict[str, tuple[str, str]]] = {
     "Agent": (".agent", "Agent"),
@@ -45,6 +48,10 @@ _EXPORT_IMPORTS: Final[dict[str, tuple[str, str]]] = {
     "Layer0SampleAgent": (
         ".templates.layer0_sample_agent",
         "Layer0SampleAgent",
+    ),
+    "P10SampleAgent": (
+        ".templates.p10_sample_agent",
+        "P10SampleAgent",
     ),
     "LLM": (".templates.llm_agents", "LLM"),
     "FastLLM": (".templates.llm_agents", "FastLLM"),
@@ -143,6 +150,7 @@ __all__ = [
     "LangGraphThinking",
     "Layer0SampleAgent",
     "MultiModalLLM",
+    "P10SampleAgent",
     "Playback",
     "Random",
     "ReasoningAgent",

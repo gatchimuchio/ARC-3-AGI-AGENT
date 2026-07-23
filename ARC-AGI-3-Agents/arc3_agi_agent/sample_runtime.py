@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass, field
 
 from arc_agi import OperationMode  # type: ignore[import-untyped]
@@ -12,6 +13,11 @@ from .context import BoundedContextState
 from .kernel import KernelResult, Layer0Components, Layer0Kernel
 from .sample_observation import SampleFrameAdapter
 from .verification import VerificationResult, verify_rendered_transition
+
+ComponentFactory = Callable[
+    [BoundedContextState, OfflineArcadeEmissionInterface],
+    Layer0Components,
+]
 
 
 @dataclass(frozen=True, slots=True)
@@ -29,6 +35,10 @@ class OfflineSampleRuntime:
     operation_mode: OperationMode
     max_actions: int = 8
     frame_adapter: SampleFrameAdapter = field(default_factory=SampleFrameAdapter)
+    component_factory: ComponentFactory | None = field(
+        default=None,
+        repr=False,
+    )
     context_state: BoundedContextState = field(init=False)
     components: Layer0Components = field(init=False)
     kernel: Layer0Kernel = field(init=False)
@@ -48,10 +58,18 @@ class OfflineSampleRuntime:
         self.context_state = BoundedContextState(
             action_budget=self.max_actions
         )
-        self.components = Layer0Components(
-            context_state=self.context_state,
-            emission_interface=self.emission,
+        self.components = (
+            self.component_factory(self.context_state, self.emission)
+            if self.component_factory is not None
+            else Layer0Components(
+                context_state=self.context_state,
+                emission_interface=self.emission,
+            )
         )
+        if self.components.context_state is not self.context_state:
+            raise ValueError("component factory must retain runtime context")
+        if self.components.emission_interface is not self.emission:
+            raise ValueError("component factory must retain emission boundary")
         self.kernel = Layer0Kernel(self.components)
 
     def run_cycle(
@@ -123,5 +141,16 @@ class OfflineSampleRuntime:
             verification=verification,
         )
 
+    def bind_recovery_observation(self, failed_frame: FrameDataRaw) -> None:
+        """Make an HDS-authorized recovery result the next comparison base."""
 
-__all__ = ["OfflineSampleRuntime", "SampleCycleResult"]
+        if not isinstance(failed_frame, FrameDataRaw):
+            raise TypeError("OFFLINE_SAMPLE_RECOVERY_FRAME_REQUIRED")
+        self._previous_frame = failed_frame
+
+
+__all__ = [
+    "ComponentFactory",
+    "OfflineSampleRuntime",
+    "SampleCycleResult",
+]

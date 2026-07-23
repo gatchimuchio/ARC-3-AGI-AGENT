@@ -97,7 +97,10 @@ class Layer0SampleAgent(Agent):
 
     def report(self) -> SampleAgentReport:
         context = self.runtime.context_state.snapshot()
-        memory = self.runtime.components.memory.view()
+        memory_subject = self.runtime.components.memory
+        if memory_subject is None:
+            raise RuntimeError("P1_MEMORY_SUBJECT_REQUIRED")
+        memory = memory_subject.view()
         latest = (
             self.frames[-1]
             if self.frames

@@ -40,7 +40,7 @@ class NoOpAgentOps:
 
 # Try to import AgentOps library
 try:
-    import agentops as agentops_module
+    import agentops as agentops_module  # type: ignore[import-not-found]
 
     agentops_client = agentops_module
 except ImportError:
