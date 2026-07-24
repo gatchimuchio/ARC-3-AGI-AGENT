@@ -39,8 +39,8 @@ local scorecard identityと重複するtrace event本体は除外し、event本�
 | `su15_hybrid_active_failure_compact.json` | 4 / 9 | 160 | `MAX_ACTION_STOP` | `10442999cd46639c281cc717bb937166dc3c1a9d5ab1c167b0a8307b03b2bec2` |
 
 上記四fileはv14以前のbaseline証拠として保持する。現行active Pは
-`p10-hybrid-v25`であり、HDS採用済みの再現可能なlevel境界は
-34 / 183へ更新された。
+`p10-hybrid-v26`であり、HDS採用済みの再現可能なlevel境界は
+35 / 183へ更新された。
 
 ## P update v14 promotion evidence
 
@@ -183,5 +183,36 @@ active Pは`p10-p-a-symbolic-v26`、`p10-p-b-parametric-v26`、
 
 post-promotion targetは`MAX_ACTION_STOP`で残り2 levelが未完了であり、
 完全な25 game / 183 level reportも存在しない。したがって34 / 183は
+HDS採用済みlevel境界であって、ローカルオラクルのfull scoreではない。
+P10は継続、P11は未開始である。
+
+## P update v21 promotion evidence
+
+`p_update/iteration_21_regression/`をv21の正本証拠directoryとする。
+
+| file | role |
+|---|---|
+| `p10_candidate_compile_trace_v1.json` | 旧29 stable level回帰、target 5→6、同条件再実行、P-B同一入力差分 |
+| `p10_promotion_receipt_v1.json` | HDS PROMOTE判断、single-use directive、previous/active digest |
+| `p_b_learning_dataset_v1.json` | HDS承認済みMから構成した決定論的dataset |
+| `p_b_learning_memory_v1.json` | 学習入力となった受動M snapshot |
+| `p_b_learning_result_v1.json` | parameter差分、holdout gate、attribution |
+| `p10_active_post_promotion_ka59.json` | ACTIVE昇格後の6 / 7、200 actions、error 0 |
+
+候補はrendered selected marker actor、filled shapeと各target obligation、
+hazardで分断された通常移動region、方向別charge band、force portalを現在観測
+だけから構成する。shape配置、transit復帰、actor配置を独立したbounded stage
+として探索し、各queued actionを次のrendered grid digestで再検証する。
+未選択marker roleが存在する次構造は早期fail-closeし、search-state上限は
+原形・反転・90度回転fixtureを閉じる丸め済み安全値2,000へ固定した。
+
+既存29 levelは二回とも同じ完了数を維持し、targetは5 / 7から6 / 7へ
+二回同一に改善した。HDSの全十promotion gateがPASSし、active Pは
+`p10-p-a-symbolic-v27`、`p10-p-b-parametric-v27`、
+`p10-hybrid-v26`、active manifest digestは
+`6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1`。
+
+post-promotion targetは`MAX_ACTION_STOP`で残り1 levelが未完了であり、
+完全な25 game / 183 level reportも存在しない。したがって35 / 183は
 HDS採用済みlevel境界であって、ローカルオラクルのfull scoreではない。
 P10は継続、P11は未開始である。

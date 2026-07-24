@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-v20-occluded-target-route-promotion-v1",
+  "frame_id": "p10-v21-directional-force-route-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -100,6 +100,17 @@
         "occluded-target-representation-has-higher-information-gain"
       ],
       "reopen_condition": "a distinct rendered structure has no derivable semantic relation and a bounded action-order change produces a reproducible positive target delta"
+    },
+    {
+      "hypothesis_id": "H26-direct-fallback-or-static-route",
+      "status": "REJECTED",
+      "reason_codes": [
+        "ordinary-movement-regions-do-not-connect-both-goals",
+        "static-route-cannot-condition-on-rendered-charge-phase",
+        "active-target-remained-five-of-seven",
+        "directional-force-portal-representation-has-higher-information-gain"
+      ],
+      "reopen_condition": "a distinct rendered structure has connected ordinary movement regions and no phase-dependent force transition"
     }
   ]
 }

@@ -108,7 +108,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v20_occluded_target_route_promotion_is_current_control_authority(
+    def test_v21_directional_force_route_promotion_is_current_control_authority(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -123,13 +123,13 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v20-occluded-target-route-promotion-v1",
+            "p10-v21-directional-force-route-promotion-v1",
         )
-        self.assertEqual(frame["self_check"]["stable_completed_levels"], 34)
-        self.assertEqual(capabilities["stable_completed_levels"], 34)
+        self.assertEqual(frame["self_check"]["stable_completed_levels"], 35)
+        self.assertEqual(capabilities["stable_completed_levels"], 35)
         self.assertEqual(
             registry["active_manifest_digest"],
-            "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba",
+            "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
         )
         for variant in ("P-A", "P-B", "hybrid"):
             self.assertEqual(
@@ -144,12 +144,12 @@ class P10DevelopmentControlTests(unittest.TestCase):
             item
             for item in decisions
             if item["decision_id"]
-            == "j-dev:p10-occluded-target-route-probe-v20"
+            == "j-dev:p10-directional-force-state-probe-v21"
         )
         self.assertEqual(route_decision["status"], "PROBE")
         self.assertEqual(
             route_decision["selected_hypothesis"],
-            "H24-rendered-occluded-target-state-representation",
+            "H27-rendered-directional-charge-portal-state",
         )
         promotion = next(
             item

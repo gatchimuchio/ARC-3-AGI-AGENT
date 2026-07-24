@@ -4,54 +4,54 @@
   "candidate_manifest": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_candidate_manifest.json",
   "active": {
     "P-A": {
-      "version": "p10-p-a-symbolic-v26",
-      "content_digest": "sha256-decimal:076670134634257878206894295649487729788373948314018920178948107745073910538199",
+      "version": "p10-p-a-symbolic-v27",
+      "content_digest": "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906",
       "status": "ACTIVE"
     },
     "P-B": {
-      "version": "p10-p-b-parametric-v26",
-      "content_digest": "sha256-decimal:114914870661931881615911209135463899644034713054585218679432490641754642634207",
-      "parameter_digest": "parameter-matrix:0357362521442519224622440024890890722184",
+      "version": "p10-p-b-parametric-v27",
+      "content_digest": "sha256-decimal:114639610541302772791616069098171769181624957051578342119573159698335586069159",
+      "parameter_digest": "parameter-matrix:0597863919089082380345516157650807993886",
       "status": "ACTIVE"
     },
     "hybrid": {
-      "version": "p10-hybrid-v25",
-      "content_digest": "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173",
-      "parameter_digest": "parameter-matrix:0357362521442519224622440024890890722184",
+      "version": "p10-hybrid-v26",
+      "content_digest": "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184",
+      "parameter_digest": "parameter-matrix:0597863919089082380345516157650807993886",
       "status": "ACTIVE"
     }
   },
   "previous_stable": {
-    "manifest_digest": "ed005422ea68a7cc42bad99a10817ba7b6b7ab337bdb8993a750d781fba21c2c",
-    "P-A": "p10-p-a-symbolic-v25",
-    "P-B": "p10-p-b-parametric-v25",
-    "hybrid": "p10-hybrid-v24",
-    "parameter_digest": "parameter-matrix:0453970182480535306915928018062871000657",
+    "manifest_digest": "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba",
+    "P-A": "p10-p-a-symbolic-v26",
+    "P-B": "p10-p-b-parametric-v26",
+    "hybrid": "p10-hybrid-v25",
+    "parameter_digest": "parameter-matrix:0357362521442519224622440024890890722184",
     "status": "PREVIOUS_STABLE"
   },
   "candidate": {
     "P-A": {
-      "version": "p10-p-a-symbolic-v26",
-      "content_digest": "sha256-decimal:076670134634257878206894295649487729788373948314018920178948107745073910538199",
+      "version": "p10-p-a-symbolic-v27",
+      "content_digest": "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906",
       "status": "PROMOTED"
     },
     "P-B": {
-      "version": "p10-p-b-parametric-v26",
-      "content_digest": "sha256-decimal:114914870661931881615911209135463899644034713054585218679432490641754642634207",
-      "parameter_digest": "parameter-matrix:0357362521442519224622440024890890722184",
+      "version": "p10-p-b-parametric-v27",
+      "content_digest": "sha256-decimal:114639610541302772791616069098171769181624957051578342119573159698335586069159",
+      "parameter_digest": "parameter-matrix:0597863919089082380345516157650807993886",
       "status": "PROMOTED"
     },
     "hybrid": {
-      "version": "p10-hybrid-v25",
-      "content_digest": "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173",
-      "parameter_digest": "parameter-matrix:0357362521442519224622440024890890722184",
+      "version": "p10-hybrid-v26",
+      "content_digest": "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184",
+      "parameter_digest": "parameter-matrix:0597863919089082380345516157650807993886",
       "status": "PROMOTED"
     }
   },
   "hds_decision": "PROMOTE",
-  "hds_decision_digest": "16f2f31912a14470d3b5c794bf0a0af5fa5f18de9e4beac6bee2ac05522a6d0f",
-  "promotion_receipt_digest": "3704210c9c5b5b312c7cb051d3a7d9423d09ad93fa15c5406d4f81ef90a519ba",
-  "next_required_transition": "close-the-next-unresolved-layout-after-occluded-target-route",
-  "active_manifest_digest": "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba",
-  "candidate_manifest_digest": "0e633a965479f82819b18858f4641582503c53233a2c7f3611b53027d63f3c90"
+  "hds_decision_digest": "505a3868006db0f281743975462679fdc1218e9a2c4ab41c6c80271bef1e1182",
+  "promotion_receipt_digest": "21daa4b4a2f39245ceb55351294fdda4a27e436f9ccaa6a75f45a91a3d67222a",
+  "next_required_transition": "close-the-next-unresolved-layout-after-directional-force-route",
+  "active_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+  "candidate_manifest_digest": "bbd8ac54935437e5978d643fd780861b9bb029f671e86186d85046ea4462b0d8"
 }

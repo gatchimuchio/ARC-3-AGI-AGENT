@@ -103,9 +103,9 @@ current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す
 ## 3. 現在の実測境界
 
 P10実行経路の関連unit、strict mypy、ruff gateは通過している。現行hybrid
-`p10-hybrid-v25`、instruction compiler
-`arc3-p10-instruction-compiler-v25`、semantic planner
-`arc3-semantic-planner-v10`、visual operator
+`p10-hybrid-v26`、instruction compiler
+`arc3-p10-instruction-compiler-v26`、semantic planner
+`arc3-semantic-planner-v11`、visual operator
 `arc3-p10-visual-operator-v13`、OFFLINE、seed 0のstable regression実測は
 次のとおりである。
 
@@ -120,6 +120,7 @@ P10実行経路の関連unit、strict mypy、ruff gateは通過している。�
 | marker shape-target push | 3 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 | multi-actor shape-target push | 4 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 | occluded-target route | 5 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
+| directional-force multi-obligation route | 6 / 7 | 200 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 
 最初の四blockはerror 0、GAME_OVER 0、max-action停止なしである。
 v16 selectable-object target pushは、previous stableの0 / 7に対してcandidateが
@@ -136,10 +137,14 @@ target 3→4を二回再現して`p10-hybrid-v24`へ昇格した。v20では三�
 intact sideと外側occluderに覆われた一つのmissing runからtargetを再構成し、
 occluder normalへ垂直に進入するbounded routeと、一時的なtarget edge
 unavailabilityで既emit actionを一つだけ進めるqueue検証を合成した。target
-4→5を二回再現して`p10-hybrid-v25`へ昇格した。各更新は既存29 levelを維持し、
-post-promotion v20 active runは5 / 7、192 actions、error 0だった。
-`MAX_ACTION_STOP`で残り2 target levelは未閉包である。現時点の
-HDS採用済み境界は`34 / 183`、残りは`149 level`。これは九つの
+4→5を二回再現して`p10-hybrid-v25`へ昇格した。v21ではrendered charge band
+から方向と位相を復元し、通常移動regionとforce portal、shape/actorの二義務を
+段階化したbounded routeを構成した。未選択marker roleを早期fail-closeし、
+search-state上限を2,000へ固定した上でtarget 5→6を二回再現して
+`p10-hybrid-v26`へ昇格した。各更新は既存29 levelを維持し、
+post-promotion v21 active runは6 / 7、200 actions、error 0だった。
+`MAX_ACTION_STOP`で残り1 target levelは未閉包である。現時点の
+HDS採用済み境界は`35 / 183`、残りは`148 level`。これは十の
 意味演算子blockの限定証拠で、
 全sample攻略証拠またはfull local-oracle scoreではない。
 

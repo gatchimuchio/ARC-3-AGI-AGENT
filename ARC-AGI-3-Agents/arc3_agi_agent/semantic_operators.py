@@ -12,6 +12,11 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from math import gcd
 
+from .directional_force_route import (
+    DIRECTIONAL_FORCE_ROUTE_OPERATOR,
+    directional_force_route_observation_matches,
+    directional_force_route_plan,
+)
 from .fruit_merge import (
     FRUIT_MERGE_CANDIDATE_OPERATOR,
     FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
@@ -70,7 +75,7 @@ from .visual_explorer import (
     connected_components,
 )
 
-SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v10"
+SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v11"
 RELATION_TOGGLE_OPERATOR = "relation-constrained-toggle-gf2-v1"
 OBJECT_TARGET_CONTROL_OPERATOR = "object-target-cycle-control-v1"
 
@@ -2569,6 +2574,24 @@ class SemanticPlannerState:
                 action = self.queue[0]
                 if action.action_id not in available_actions:
                     self.invalidate_active_plan()
+                elif (
+                    self.active_operator
+                    == DIRECTIONAL_FORCE_ROUTE_OPERATOR
+                ):
+                    if directional_force_route_observation_matches(
+                        grid,
+                        current_instruction,
+                        action,
+                    ):
+                        self.queue.pop(0)
+                        self.memory_read_count += 1
+                        return SemanticPlannerDecision(
+                            action=action,
+                            reason=self.active_operator,
+                            memory_influenced=True,
+                            plan_signature=self.active_plan_signature,
+                        )
+                    self.invalidate_active_plan()
                 elif self.active_operator == SELECTABLE_ROUTE_TARGET_OPERATOR:
                     route_status = selectable_route_observation_status(
                         grid,
@@ -2915,6 +2938,12 @@ class SemanticPlannerState:
                 )
             elif instruction.operator_id == OCCLUDED_TARGET_ROUTE_OPERATOR:
                 plan = occluded_target_route_plan(
+                    grid,
+                    available_actions,
+                    instruction,
+                )
+            elif instruction.operator_id == DIRECTIONAL_FORCE_ROUTE_OPERATOR:
+                plan = directional_force_route_plan(
                     grid,
                     available_actions,
                     instruction,
@@ -3509,6 +3538,7 @@ __all__ = [
     "FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR",
     "FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR",
     "FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR",
+    "DIRECTIONAL_FORCE_ROUTE_OPERATOR",
     "OBJECT_TARGET_CONTROL_OPERATOR",
     "MARKER_SHAPE_PUSH_TARGET_OPERATOR",
     "MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR",

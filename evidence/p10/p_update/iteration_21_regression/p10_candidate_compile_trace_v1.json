@@ -1,0 +1,785 @@
+{
+  "active_changed": false,
+  "active_manifest_digest": "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba",
+  "candidate_descriptors": [
+    {
+      "body_digest": "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906",
+      "body_version": "p10-p-a-symbolic-v27",
+      "candidate_id": "candidate:p10-p-a",
+      "compile_directive_digest": "4f564e0ae7c438b00206a654f0fa7e4e6453221620d48b5ff4f4b3f9acf36b56",
+      "deterministic_rebuild_digest": "1ef289927433870405f033d3d5329dcabd34c2a9cefb91c2140db463d0fcf34b",
+      "lifecycle": "CANDIDATE",
+      "manifest_digest": "0ddc1b617a3a3bb91c70b5cc57e320d6f688ae29a3a963cae6272656a359d2a0",
+      "parameter_change_attribution": null,
+      "parameter_digest": null,
+      "predecessor_parameter_digest": null,
+      "proposal_digest": "323355a1f6df0aa283489d8a1cd8f41558fb5dfd7615c36fc975c8e55b1b4a95",
+      "provenance_digest": "p10-evidence-provenance:21b4a3a60a7cd4896e4e56f303c1ff49c2d3824070d3c22adebdf141f3eb1bc5",
+      "rollback_target": "p10-p-a-symbolic-v26",
+      "runtime_identity_free": true,
+      "same_input_candidate_output_digest": null,
+      "same_input_predecessor_output_digest": null,
+      "schema_version": "arc3-p-update-v1",
+      "source_body_digest": "sha256-decimal:076670134634257878206894295649487729788373948314018920178948107745073910538199",
+      "source_body_version": "p10-p-a-symbolic-v26",
+      "target_component": "P-A"
+    },
+    {
+      "body_digest": "sha256-decimal:114639610541302772791616069098171769181624957051578342119573159698335586069159",
+      "body_version": "p10-p-b-parametric-v27",
+      "candidate_id": "candidate:p10-p-b",
+      "compile_directive_digest": "4f564e0ae7c438b00206a654f0fa7e4e6453221620d48b5ff4f4b3f9acf36b56",
+      "deterministic_rebuild_digest": "1ef289927433870405f033d3d5329dcabd34c2a9cefb91c2140db463d0fcf34b",
+      "lifecycle": "CANDIDATE",
+      "manifest_digest": "0ddc1b617a3a3bb91c70b5cc57e320d6f688ae29a3a963cae6272656a359d2a0",
+      "parameter_change_attribution": "full-batch-logistic-gradient-from-HDS-approved-M;train-only-gradient;holdout-selection-gate",
+      "parameter_digest": "parameter-matrix:0597863919089082380345516157650807993886",
+      "predecessor_parameter_digest": "parameter-matrix:0357362521442519224622440024890890722184",
+      "proposal_digest": "323355a1f6df0aa283489d8a1cd8f41558fb5dfd7615c36fc975c8e55b1b4a95",
+      "provenance_digest": "p10-evidence-provenance:86f78c1ad3a8c16e72b0e07ba9503b34efb985fd2b8f78801726edb87f1a246e",
+      "rollback_target": "p10-p-b-parametric-v26",
+      "runtime_identity_free": true,
+      "same_input_candidate_output_digest": "d51772a1f959c8805d71545f0d8e344e8b6508343da4da598724e88585c8a4a6",
+      "same_input_predecessor_output_digest": "5e2d4d18fc1f79d4ca960c82b84c75e7151e6c6c7225e5ee8e4aace3289f508b",
+      "schema_version": "arc3-p-update-v1",
+      "source_body_digest": "sha256-decimal:114914870661931881615911209135463899644034713054585218679432490641754642634207",
+      "source_body_version": "p10-p-b-parametric-v26",
+      "target_component": "P-B"
+    },
+    {
+      "body_digest": "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184",
+      "body_version": "p10-hybrid-v26",
+      "candidate_id": "candidate:p10-hybrid",
+      "compile_directive_digest": "4f564e0ae7c438b00206a654f0fa7e4e6453221620d48b5ff4f4b3f9acf36b56",
+      "deterministic_rebuild_digest": "1ef289927433870405f033d3d5329dcabd34c2a9cefb91c2140db463d0fcf34b",
+      "lifecycle": "CANDIDATE",
+      "manifest_digest": "0ddc1b617a3a3bb91c70b5cc57e320d6f688ae29a3a963cae6272656a359d2a0",
+      "parameter_change_attribution": "full-batch-logistic-gradient-from-HDS-approved-M;train-only-gradient;holdout-selection-gate",
+      "parameter_digest": "parameter-matrix:0597863919089082380345516157650807993886",
+      "predecessor_parameter_digest": "parameter-matrix:0357362521442519224622440024890890722184",
+      "proposal_digest": "323355a1f6df0aa283489d8a1cd8f41558fb5dfd7615c36fc975c8e55b1b4a95",
+      "provenance_digest": "p10-evidence-provenance:9000a0e0bb475b07f33af2f201148132ac0211bcf697f99876e08e0d53256762",
+      "rollback_target": "p10-hybrid-v25",
+      "runtime_identity_free": true,
+      "same_input_candidate_output_digest": "d51772a1f959c8805d71545f0d8e344e8b6508343da4da598724e88585c8a4a6",
+      "same_input_predecessor_output_digest": "5e2d4d18fc1f79d4ca960c82b84c75e7151e6c6c7225e5ee8e4aace3289f508b",
+      "schema_version": "arc3-p-update-v1",
+      "source_body_digest": "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173",
+      "source_body_version": "p10-hybrid-v25",
+      "target_component": "hybrid-P-B"
+    }
+  ],
+  "candidate_lifecycle": "HOLD",
+  "candidate_manifest_digest": "0ddc1b617a3a3bb91c70b5cc57e320d6f688ae29a3a963cae6272656a359d2a0",
+  "candidate_runtime_regression": {
+    "baseline_target_value": 5.0,
+    "candidate_target_value": 6.0,
+    "content_digest": "p10-candidate-runtime-regression:d4d9af9b66ffee6c04a47190f251a1da17f796e553c91882bb97186d3dc93a56",
+    "operation_mode": "offline",
+    "probe_decision": {
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "allow_p_rollback": false,
+      "authority": "hds-p-update-only",
+      "candidate_bundle_digest": "2bca4453516f8aaddca555efd88bcd06097627c5ffbcb91b305c76c66d56a757",
+      "decision_id": "p-update-decision:16510f0edd441dd302d16b88",
+      "evidence_set_digest": null,
+      "proposal_digest": "323355a1f6df0aa283489d8a1cd8f41558fb5dfd7615c36fc975c8e55b1b4a95",
+      "reason_codes": [
+        "candidate-isolated-from-active-manifest",
+        "same-condition-stable-and-target-regression"
+      ],
+      "regression_report_digest": null,
+      "status": "PROBE"
+    },
+    "probe_decision_digest": "c73fe326478394f3ce17d9e8cd9263b7e49dce4343c06e25c493db6eba187ec8",
+    "reproducible": true,
+    "schema_version": "arc3-p10-candidate-runtime-regression-v1",
+    "stable_active": [
+      {
+        "actions": 75,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "70b04a77557b01a9c46167f43c2857ca828d8d65be4838c2af44b494b0ba75e6",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v25"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 80,
+        "operation_mode": "offline",
+        "probe_index": 0,
+        "probe_selector_digest": "980895eb6def93bfb92712632104004b07f75bc1938ccee923254b83da9cc0a5",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:016087f68491a23c516c7040494ec654d80d39104d39aff21d4791893030aa88",
+        "search_resets": 0,
+        "total_levels": 6,
+        "trace_digests_digest": "843ab34d26ee24588355ae571237298cf581b54e95d207aa43b4f639e89cc030"
+      },
+      {
+        "actions": 235,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 8,
+        "emitted_steps_digest": "c5b19ae95a1188dce9dc0faf1b20e9ca0d450c3c82597f1e8548839814b99299",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v25"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 240,
+        "operation_mode": "offline",
+        "probe_index": 1,
+        "probe_selector_digest": "ea89ebac244cbb34632ff1f5ec7553be760a1eff7613586ebec5bc41ad39a59f",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:2206409aa2dab9eb346a01a30013f78344c7b821248af7747ec022c4cf673ecd",
+        "search_resets": 0,
+        "total_levels": 8,
+        "trace_digests_digest": "c5f5a57f9ba44d3f965e500042c5d7fa3744b776ef3f97814b1a97a9c83cd54a"
+      },
+      {
+        "actions": 308,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "4360f66d0054cc88176dbd546b60019557bb31e9611ad5afb0eeaa09344f9a84",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v25"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 312,
+        "operation_mode": "offline",
+        "probe_index": 2,
+        "probe_selector_digest": "e8d7217e54f1321982127a0a63b1c9fc266840b1e031bb00d16d11178c9541d2",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:cbc15e8c74570cf74c15560fd29c91361906e0137853c05942fc575e994c8a71",
+        "search_resets": 0,
+        "total_levels": 6,
+        "trace_digests_digest": "c7c190638dd872c8cdeb548f7bc88756efd0a16eab818b1e1515fc4e83b4e02d"
+      },
+      {
+        "actions": 175,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 9,
+        "emitted_steps_digest": "ce740f9d80b2bf6a1d2a4640389b012df8196d05e5b37ba5a60a80234886ac07",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v25"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 180,
+        "operation_mode": "offline",
+        "probe_index": 3,
+        "probe_selector_digest": "478166f4c6c4dc1ba37f6696c7562a614ca07bac2b62b93af4b388c329814578",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:9f476b1b9cda1e12e2c003a6f2140817f5cceb8ff3559ee44a8e2ab62241510f",
+        "search_resets": 0,
+        "total_levels": 9,
+        "trace_digests_digest": "6bb586a03cc3894ab5e2e6329398af7e1552bb12d319a0d286e50af93e85bf98"
+      }
+    ],
+    "stable_active_value": 29,
+    "stable_candidate_first": [
+      {
+        "actions": 75,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "70b04a77557b01a9c46167f43c2857ca828d8d65be4838c2af44b494b0ba75e6",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 80,
+        "operation_mode": "offline",
+        "probe_index": 0,
+        "probe_selector_digest": "980895eb6def93bfb92712632104004b07f75bc1938ccee923254b83da9cc0a5",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:d41988490e2176c71628238c1e2af42fe62084e609e4c8d3fdb6593d86e64b6c",
+        "search_resets": 0,
+        "total_levels": 6,
+        "trace_digests_digest": "206e580577d346471ea9e5acdb5e41024df71a6e26619bbf965a362473fb4a3a"
+      },
+      {
+        "actions": 235,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 8,
+        "emitted_steps_digest": "c5b19ae95a1188dce9dc0faf1b20e9ca0d450c3c82597f1e8548839814b99299",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 240,
+        "operation_mode": "offline",
+        "probe_index": 1,
+        "probe_selector_digest": "ea89ebac244cbb34632ff1f5ec7553be760a1eff7613586ebec5bc41ad39a59f",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:0d05ddf50c02ca3687a8eeb02179e6bd7bae3f2e75f989e9562a99d6d28eaac6",
+        "search_resets": 0,
+        "total_levels": 8,
+        "trace_digests_digest": "1f8a0ee582cc0dc46c2e015d2cabb6d9b389f57b243e1f1f2cf9f8ee324faec3"
+      },
+      {
+        "actions": 308,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "4360f66d0054cc88176dbd546b60019557bb31e9611ad5afb0eeaa09344f9a84",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 312,
+        "operation_mode": "offline",
+        "probe_index": 2,
+        "probe_selector_digest": "e8d7217e54f1321982127a0a63b1c9fc266840b1e031bb00d16d11178c9541d2",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:05ce7cdc6c2fefa1447a9c9ce524b85b2351a6ad5110298ff8909a4a39fe857c",
+        "search_resets": 0,
+        "total_levels": 6,
+        "trace_digests_digest": "963042ad470188e4e0db65f5601b38ea0ad93ba26e11a12e75c4c7de2f4a3d53"
+      },
+      {
+        "actions": 175,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 9,
+        "emitted_steps_digest": "ce740f9d80b2bf6a1d2a4640389b012df8196d05e5b37ba5a60a80234886ac07",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 180,
+        "operation_mode": "offline",
+        "probe_index": 3,
+        "probe_selector_digest": "478166f4c6c4dc1ba37f6696c7562a614ca07bac2b62b93af4b388c329814578",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:191857fe78db22ebf45ef92d98e27878ac3fc48ff5b9c923e007bb2a14e64134",
+        "search_resets": 0,
+        "total_levels": 9,
+        "trace_digests_digest": "34a0d3b466d6647e97ae6e786ddd0e4eb5d30085aa9b599ec342bef54dcb9a2e"
+      }
+    ],
+    "stable_candidate_second": [
+      {
+        "actions": 75,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "70b04a77557b01a9c46167f43c2857ca828d8d65be4838c2af44b494b0ba75e6",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 80,
+        "operation_mode": "offline",
+        "probe_index": 0,
+        "probe_selector_digest": "980895eb6def93bfb92712632104004b07f75bc1938ccee923254b83da9cc0a5",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:d41988490e2176c71628238c1e2af42fe62084e609e4c8d3fdb6593d86e64b6c",
+        "search_resets": 0,
+        "total_levels": 6,
+        "trace_digests_digest": "206e580577d346471ea9e5acdb5e41024df71a6e26619bbf965a362473fb4a3a"
+      },
+      {
+        "actions": 235,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 8,
+        "emitted_steps_digest": "c5b19ae95a1188dce9dc0faf1b20e9ca0d450c3c82597f1e8548839814b99299",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 240,
+        "operation_mode": "offline",
+        "probe_index": 1,
+        "probe_selector_digest": "ea89ebac244cbb34632ff1f5ec7553be760a1eff7613586ebec5bc41ad39a59f",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:0d05ddf50c02ca3687a8eeb02179e6bd7bae3f2e75f989e9562a99d6d28eaac6",
+        "search_resets": 0,
+        "total_levels": 8,
+        "trace_digests_digest": "1f8a0ee582cc0dc46c2e015d2cabb6d9b389f57b243e1f1f2cf9f8ee324faec3"
+      },
+      {
+        "actions": 308,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "4360f66d0054cc88176dbd546b60019557bb31e9611ad5afb0eeaa09344f9a84",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 312,
+        "operation_mode": "offline",
+        "probe_index": 2,
+        "probe_selector_digest": "e8d7217e54f1321982127a0a63b1c9fc266840b1e031bb00d16d11178c9541d2",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:05ce7cdc6c2fefa1447a9c9ce524b85b2351a6ad5110298ff8909a4a39fe857c",
+        "search_resets": 0,
+        "total_levels": 6,
+        "trace_digests_digest": "963042ad470188e4e0db65f5601b38ea0ad93ba26e11a12e75c4c7de2f4a3d53"
+      },
+      {
+        "actions": 175,
+        "all_complete": true,
+        "complete_game_count": 1,
+        "completed_levels": 9,
+        "emitted_steps_digest": "ce740f9d80b2bf6a1d2a4640389b012df8196d05e5b37ba5a60a80234886ac07",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": false,
+        "max_actions": 180,
+        "operation_mode": "offline",
+        "probe_index": 3,
+        "probe_selector_digest": "478166f4c6c4dc1ba37f6696c7562a614ca07bac2b62b93af4b388c329814578",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:191857fe78db22ebf45ef92d98e27878ac3fc48ff5b9c923e007bb2a14e64134",
+        "search_resets": 0,
+        "total_levels": 9,
+        "trace_digests_digest": "34a0d3b466d6647e97ae6e786ddd0e4eb5d30085aa9b599ec342bef54dcb9a2e"
+      }
+    ],
+    "stable_candidate_value": 29,
+    "stable_non_regression": true,
+    "target_active": [
+      {
+        "actions": 256,
+        "all_complete": false,
+        "complete_game_count": 0,
+        "completed_levels": 5,
+        "emitted_steps_digest": "b288a771655e25365d8712da224e9a39d55d93576205cf4fe64abcb930f74e50",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v25"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": true,
+        "max_actions": 256,
+        "operation_mode": "offline",
+        "probe_index": 0,
+        "probe_selector_digest": "3d986fbe9f52ac74bff68c447d6cf1ab15ffed4acd24ef88dcb71cb0e0417c1f",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:aad0d90a0631f3367bd671a108cf495db39aecf36ab9fec9527c936011dbea15",
+        "search_resets": 0,
+        "total_levels": 7,
+        "trace_digests_digest": "f3323f7241d5359913ddc4a8036a0daced8a91d42b7fac0b72e03a7d5e1404c7"
+      }
+    ],
+    "target_candidate_first": [
+      {
+        "actions": 256,
+        "all_complete": false,
+        "complete_game_count": 0,
+        "completed_levels": 6,
+        "emitted_steps_digest": "b89206edff7b35d6d5a571c7c2052180939a3444f687903e555289cb93a18176",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": true,
+        "max_actions": 256,
+        "operation_mode": "offline",
+        "probe_index": 0,
+        "probe_selector_digest": "3d986fbe9f52ac74bff68c447d6cf1ab15ffed4acd24ef88dcb71cb0e0417c1f",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:4ecd75115585fb0d1694121910902d165903835822abec2ab3ed1030c9377382",
+        "search_resets": 0,
+        "total_levels": 7,
+        "trace_digests_digest": "3c0424d315162685b6dc9a3b61444dcfbb2829cc74fda86dc04f85c536b06cbc"
+      }
+    ],
+    "target_candidate_second": [
+      {
+        "actions": 256,
+        "all_complete": false,
+        "complete_game_count": 0,
+        "completed_levels": 6,
+        "emitted_steps_digest": "b89206edff7b35d6d5a571c7c2052180939a3444f687903e555289cb93a18176",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_variant": "hybrid",
+        "max_action_exhausted": true,
+        "max_actions": 256,
+        "operation_mode": "offline",
+        "probe_index": 0,
+        "probe_selector_digest": "3d986fbe9f52ac74bff68c447d6cf1ab15ffed4acd24ef88dcb71cb0e0417c1f",
+        "recoveries": 0,
+        "run_digest": "p10-regression-run:4ecd75115585fb0d1694121910902d165903835822abec2ab3ed1030c9377382",
+        "search_resets": 0,
+        "total_levels": 7,
+        "trace_digests_digest": "3c0424d315162685b6dc9a3b61444dcfbb2829cc74fda86dc04f85c536b06cbc"
+      }
+    ],
+    "target_improved": true
+  },
+  "compile_decision_digest": "5722ae9e3e0cd60190cf8c80be153a0e006ff6269bb265f939c1730014e6741b",
+  "compile_directive_digest": "4f564e0ae7c438b00206a654f0fa7e4e6453221620d48b5ff4f4b3f9acf36b56",
+  "content_digest": "p10-p-update-workflow:db741df5fdca9cfae35834d1f7792345301dec098f1168c27e2f3635aebf40cc",
+  "dataset_digest": "7eb8555b75ec4cd298355b91a912b2818f5c3ecf8fc0a56c55f04f3a66ead72b",
+  "deterministic_rebuild_digest": "1ef289927433870405f033d3d5329dcabd34c2a9cefb91c2140db463d0fcf34b",
+  "evidence_set": {
+    "approved_memory_refs": [
+      "p-b-learning-memory:4122428fcd5ead8e924c4b2c",
+      "p-b-learning-memory:437940b64ae3fc85c5c79bb3",
+      "p-b-learning-memory:4fa3e45bc1d745792724b958",
+      "p-b-learning-memory:511c4bf85a3e8739b9d72ecd",
+      "p-b-learning-memory:6914613f594bd67506c50876",
+      "p-b-learning-memory:6ba7923466c11dd4b27604c8",
+      "p-b-learning-memory:868c39f938a0f73cea75b429",
+      "p-b-learning-memory:86973fa780639206b3331115",
+      "p-b-learning-memory:a12cd2c003cede6ce2f574ef",
+      "p-b-learning-memory:c1328c1cc6c6e9aa3defb64e",
+      "p-b-learning-memory:c9168077c18757ae7c94e88f",
+      "p-b-learning-memory:e3eae2fa031c5754af313593",
+      "p-b-learning-memory:e9015a6dbb11c270740685a5",
+      "p-b-learning-memory:eba1d7ac796906f8036288db"
+    ],
+    "contradiction_refs": [
+      "contradiction:ordinary-shape-route-cannot-cross-hazard-band"
+    ],
+    "evidence_set_id": "evidence-set:p10-directional-force-route-p-update",
+    "failure_refs": [
+      "failure:remaining-level-force-separated-goal-region-gap"
+    ],
+    "hds_memory_decision_digests": [
+      "hds-decision:decision:0e9df7248a22dfda93e3",
+      "hds-decision:decision:3cb44f0f7511d14ef268",
+      "hds-decision:decision:453e64f25698105cc0e4",
+      "hds-decision:decision:59e5458ad1aa58d23c4a",
+      "hds-decision:decision:5a3073abcc5d8c96951e",
+      "hds-decision:decision:625cd22a97d805837f48",
+      "hds-decision:decision:89dc9e9527fc151693e6",
+      "hds-decision:decision:ad5a5e4aaffeb1f3c403",
+      "hds-decision:decision:b7447309ab9333108880",
+      "hds-decision:decision:c28c035fb10528fb641a",
+      "hds-decision:decision:c4aadb06400be9c7fe9b",
+      "hds-decision:decision:cbcc89bf2fbed262f274",
+      "hds-decision:decision:d38280f194728f4e0e4f",
+      "hds-decision:decision:da99de4d6d281dccf26b"
+    ],
+    "holdout_refs": [
+      "holdout:reflected-layout-phase-and-dynamic-footer"
+    ],
+    "memory_snapshot_digest": "02f31e007949dc9e5d0ab76ba89ff15880932e59a9a239581f862f4fc4114702",
+    "negative_contrast_refs": [
+      "contrast:ambiguous-phase-direction-or-portal-rejected"
+    ],
+    "positive_contrast_refs": [
+      "contrast:edge-charge-normal-connects-separated-regions"
+    ],
+    "proposal_digest": "323355a1f6df0aa283489d8a1cd8f41558fb5dfd7615c36fc975c8e55b1b4a95",
+    "provenance": [
+      "runtime-memory:authorized",
+      "multi-episode-content-addressed-merge",
+      "rendered-directional-force-structure-only"
+    ],
+    "replay_audit_refs": [
+      "audit:no-id-no-replay-no-fixed-sequence"
+    ],
+    "runtime_identity_free": true,
+    "schema_version": "arc3-p-update-v1"
+  },
+  "evidence_set_digest": "d493e6c6e74a319684af6bfb1409947df072e414725e50b333434739c205aafb",
+  "hds_decision": {
+    "allow_p_compile": false,
+    "allow_p_promote": false,
+    "allow_p_rollback": false,
+    "authority": "hds-p-update-only",
+    "candidate_bundle_digest": "2bca4453516f8aaddca555efd88bcd06097627c5ffbcb91b305c76c66d56a757",
+    "decision_id": "p-update-decision:9c9b563296dea6ac97bf6142",
+    "evidence_set_digest": null,
+    "proposal_digest": "323355a1f6df0aa283489d8a1cd8f41558fb5dfd7615c36fc975c8e55b1b4a95",
+    "reason_codes": [
+      "candidate-runtime-regression-complete",
+      "active-P-promotion-not-executed-by-this-command"
+    ],
+    "regression_report_digest": "048effb59fd9ea19805f0e0d1e82cd6acf806b7c0227e94b0bfa49bcc56dc23f",
+    "status": "HOLD"
+  },
+  "hds_decision_digest": "5083a34f3c07592e1243a52b863d66585607d39e9850c4c1c21ea0ef0bb43b8c",
+  "hybrid_regression_report": {
+    "baseline_bundle_digest": "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173",
+    "baseline_target_value": 5.0,
+    "candidate_bundle_digest": "2bca4453516f8aaddca555efd88bcd06097627c5ffbcb91b305c76c66d56a757",
+    "candidate_target_value": 6.0,
+    "catastrophic_forgetting_within_bound": true,
+    "deterministic_rebuild_pass": true,
+    "evidence_refs": [
+      "7eb8555b75ec4cd298355b91a912b2818f5c3ecf8fc0a56c55f04f3a66ead72b",
+      "2eed09ea05d50d11ad04f4bced9b6a374c4a430761b243a82d8b8f6572821f6c",
+      "1ef289927433870405f033d3d5329dcabd34c2a9cefb91c2140db463d0fcf34b",
+      "p10-candidate-runtime-regression:d4d9af9b66ffee6c04a47190f251a1da17f796e553c91882bb97186d3dc93a56"
+    ],
+    "forgetting_measure": 0.0,
+    "hds_boundary_pass": true,
+    "holdout_delta": 0.0005579548868610562,
+    "holdout_non_degradation": true,
+    "identity_free_pass": true,
+    "maximum_forgetting": 0.0,
+    "report_id": "regression:p10-hybrid-runtime-candidate",
+    "reproducible_pass": true,
+    "rollback_pass": true,
+    "schema_digest_provenance_pass": true,
+    "schema_version": "arc3-p-update-v1",
+    "stable_non_regression": true,
+    "stable_regression_delta": 0.0,
+    "target_improved": true,
+    "target_metric": "completed-level-count"
+  },
+  "hybrid_regression_report_digest": "048effb59fd9ea19805f0e0d1e82cd6acf806b7c0227e94b0bfa49bcc56dc23f",
+  "learning_result_digest": "2eed09ea05d50d11ad04f4bced9b6a374c4a430761b243a82d8b8f6572821f6c",
+  "memory_snapshot_digest": "02f31e007949dc9e5d0ab76ba89ff15880932e59a9a239581f862f4fc4114702",
+  "operation_mode": "offline",
+  "p_b_regression_report": {
+    "baseline_bundle_digest": "sha256-decimal:114914870661931881615911209135463899644034713054585218679432490641754642634207",
+    "baseline_target_value": -0.30285997867619696,
+    "candidate_bundle_digest": "453c079b6da021b23933d98f384e41713d829a42eba6fc0d539d3c0f63291fd0",
+    "candidate_target_value": -0.30081879414712576,
+    "catastrophic_forgetting_within_bound": true,
+    "deterministic_rebuild_pass": true,
+    "evidence_refs": [
+      "7eb8555b75ec4cd298355b91a912b2818f5c3ecf8fc0a56c55f04f3a66ead72b",
+      "2eed09ea05d50d11ad04f4bced9b6a374c4a430761b243a82d8b8f6572821f6c",
+      "1ef289927433870405f033d3d5329dcabd34c2a9cefb91c2140db463d0fcf34b"
+    ],
+    "forgetting_measure": 0.0,
+    "hds_boundary_pass": true,
+    "holdout_delta": 0.0005579548868610562,
+    "holdout_non_degradation": true,
+    "identity_free_pass": true,
+    "maximum_forgetting": 0.0,
+    "report_id": "regression:p10-p-b-learning-probe",
+    "reproducible_pass": true,
+    "rollback_pass": true,
+    "schema_digest_provenance_pass": true,
+    "schema_version": "arc3-p-update-v1",
+    "stable_non_regression": false,
+    "stable_regression_delta": 0.0,
+    "target_improved": true,
+    "target_metric": "negative-log-loss-improvement"
+  },
+  "p_b_regression_report_digest": "89fb03f8ed1848ffd775a5ddbd4d6460d0d6b854297f747a8192f7483193acd2",
+  "prior_memory_evidence": [
+    {
+      "filename": "p_b_learning_memory_v1.json",
+      "memory_snapshot_digest": "b36699030b1995b8f80a970dfda415d868b8b7c8bfbb4fe8ad8c9a6860cd7958",
+      "sha256": "2b19bb9fe57ba9791c91fbd348052c297b856a3e03329dc97848cdd913eabd1e"
+    }
+  ],
+  "probe_summaries": [
+    {
+      "actions": 96,
+      "active_instruction_versions": [
+        "p10-hybrid-v25"
+      ],
+      "complete": false,
+      "completed_levels": 3,
+      "learning_kind_counts": {
+        "CONTRADICTION": 3,
+        "EXPERIENCE": 95,
+        "POSITIVE": 95
+      },
+      "max_action_exhausted": true,
+      "memory_snapshot_digest": "b26986205b36936e44c3dd5b65e35ca43db54a3d7302d91c3dd63bb5e646c8bf",
+      "operation_mode": "offline",
+      "probe_digest": "p10-learning-probe:1e6333a8b4bf60924bc13715e25849749a0fe5eb62d885a4dbdef0beaad2759b",
+      "probe_index": 0,
+      "recoveries": 0
+    },
+    {
+      "actions": 75,
+      "active_instruction_versions": [
+        "p10-hybrid-v25"
+      ],
+      "complete": true,
+      "completed_levels": 6,
+      "learning_kind_counts": {
+        "CONTRADICTION": 5,
+        "EXPERIENCE": 73,
+        "POSITIVE": 73
+      },
+      "max_action_exhausted": false,
+      "memory_snapshot_digest": "6a77df88793e15f5971a2569c7458340a9f4757784419ac7d5e320b42983f578",
+      "operation_mode": "offline",
+      "probe_digest": "p10-learning-probe:65f6a372e999ac95664c7e43c4ae0d57e85b5b94e70e38163035096c41ded7fe",
+      "probe_index": 1,
+      "recoveries": 0
+    }
+  ],
+  "promotion_failures": [],
+  "proposal": {
+    "evidence_refs": [
+      "memory:approved-multi-episode-learning",
+      "failure:remaining-level-force-separated-goal-region-gap",
+      "contrast:ordinary-movement-separation-versus-rendered-directional-force-portal"
+    ],
+    "expected_affected_capabilities": [
+      "failure-conditioned-parametric-ranking",
+      "rendered-directional-charge-state",
+      "force-assisted-multi-obligation-region-route"
+    ],
+    "expected_effect": "change-P-B-same-input-compute-and-compile-isolated-directional-force-route-candidate",
+    "expected_unaffected_capabilities": [
+      "stable-rendered-relation-control",
+      "stable-object-target-control",
+      "stable-symbolic-rewrite",
+      "stable-goal-aware-merge",
+      "stable-selectable-object-target-push",
+      "stable-selectable-multi-object-route",
+      "stable-single-actor-shape-target-route",
+      "stable-multi-actor-selection-shape-target-route",
+      "stable-occluded-target-route"
+    ],
+    "falsifiers": [
+      "parameter-digest-unchanged",
+      "same-input-output-unchanged",
+      "holdout-degrades",
+      "stable-capability-regresses"
+    ],
+    "proposal_id": "proposal:p10-directional-force-route-instruction-body-set",
+    "provenance": [
+      "HDS-authorized-runtime-memory",
+      "identity-free-rendered-directional-force-positive-negative-contrast"
+    ],
+    "rollback_target": "p10-active-instruction-body-set",
+    "runtime_identity_free": true,
+    "schema_version": "arc3-p-update-v1",
+    "source_p_digest": "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba",
+    "source_p_version": "p10-active-instruction-body-set",
+    "target_component": "instruction-body-set",
+    "update_type": "symbolic-parametric-composition"
+  },
+  "proposal_digest": "323355a1f6df0aa283489d8a1cd8f41558fb5dfd7615c36fc975c8e55b1b4a95",
+  "same_input_c_probe": {
+    "attribution": "same ParametricInstructionBody query input; P-B weights differ",
+    "candidate_body_digest": "sha256-decimal:114639610541302772791616069098171769181624957051578342119573159698335586069159",
+    "candidate_prediction_digest": "d51772a1f959c8805d71545f0d8e344e8b6508343da4da598724e88585c8a4a6",
+    "changed": true,
+    "context_digest": "0aaf299ec3a50863e7823818125fca5a1b7997c782014a35fcdb29b856e3509e",
+    "memory_digest": "f4c1a48d8de902bee887a9973ad201e342907926353ce0adc17dcf90c3d6b0ab",
+    "observation_digest": "f8dc4659cbd84ec90c94e420efdb1e5a3472a22d46b9bbf58ceb1ed3ef44ca36",
+    "source_body_digest": "sha256-decimal:114914870661931881615911209135463899644034713054585218679432490641754642634207",
+    "source_prediction_digest": "5e2d4d18fc1f79d4ca960c82b84c75e7151e6c6c7225e5ee8e4aace3289f508b"
+  },
+  "schema_version": "arc3-p10-p-update-workflow-v1"
+}

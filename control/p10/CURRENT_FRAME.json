@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-p10-development-frame-v1",
-  "frame_id": "p10-v20-occluded-target-route-promotion-v1",
+  "frame_id": "p10-v21-directional-force-route-promotion-v1",
   "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
   "authority": {
     "document": "docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md",
@@ -9,25 +9,25 @@
   },
   "self_check": {
     "branch": "main",
-    "base_head": "b6440d6fbde81383639b922e4062ceb2b407cf72",
+    "base_head": "fe94a8ab62c402f5abe528e673bf27e05863fba0",
     "dirty_state_preserved": true,
     "operation_mode": "OFFLINE_ONLY",
     "active_p": {
-      "P-A": "p10-p-a-symbolic-v26",
-      "P-B": "p10-p-b-parametric-v26",
-      "hybrid": "p10-hybrid-v25"
+      "P-A": "p10-p-a-symbolic-v27",
+      "P-B": "p10-p-b-parametric-v27",
+      "hybrid": "p10-hybrid-v26"
     },
     "last_promoted_p": {
-      "P-A": "p10-p-a-symbolic-v26",
-      "P-B": "p10-p-b-parametric-v26",
-      "hybrid": "p10-hybrid-v25",
+      "P-A": "p10-p-a-symbolic-v27",
+      "P-B": "p10-p-b-parametric-v27",
+      "hybrid": "p10-hybrid-v26",
       "lifecycle": "PROMOTED"
     },
     "runtime_memory_initial_state": "per-session-passive-memory-version-0",
-    "stable_completed_levels": 34,
+    "stable_completed_levels": 35,
     "retained_level_count": 183,
     "current_full_score": "UNMEASURED_NO_COMPLETE_25_GAME_183_LEVEL_REPORT",
-    "latest_failure_signature": "remaining-level-commit-model-gap-after-occluded-target-route",
+    "latest_failure_signature": "remaining-level-commit-model-gap-after-directional-force-route",
     "stop_conditions": [
       "runtime identity routing detected",
       "HDS authority bypass detected",
@@ -38,24 +38,26 @@
   },
   "X": {
     "observe": [
-      "the first rendered layout after the adopted multi-actor shape-push level",
-      "one selected marker-centered object, a three-sided target outline, and a coherent rendered exterior occluder covering the missing side",
+      "the first rendered layout after the adopted occluded-target route level",
+      "one selected marker actor and one filled shape with separate rendered target obligations",
+      "a normally impassable hazard band, separated movement regions, and synchronously charged directional blocks",
       "active and candidate manifest resolution",
       "same-condition target and stable regression",
       "HDS compile and promotion authority"
     ],
     "change": [
-      "isolated rendered completion of a partially occluded target outline",
-      "bounded single-object route search with target entry perpendicular to the exterior occluder normal",
-      "queued-action reobservation that advances one predicted action during bounded target-edge unavailability",
+      "rendered charge phase and direction reconstruction",
+      "normal-movement region and force-portal derivation",
+      "bounded shape placement, transit return, and actor placement stages",
+      "queued-action expected-grid reobservation and unselected-marker early fail-close",
       "P-A, P-B, and hybrid candidate bodies",
       "machine-readable P10 control artifacts"
     ],
     "evidence_use": [
       "current rendered observation",
       "bounded action-effect history",
-      "v19 post-level failure evidence",
-      "translated and rotated occluded-target, open-outline, ambiguous-role, bounded-search, and transient-frame fixtures",
+      "v20 post-level failure evidence",
+      "original, reflected, rotated, phase-shifted, ambiguous-charge, unselected-marker, and bounded-search fixtures",
       "same-condition active and candidate OFFLINE reports",
       "content-addressed compile and promotion evidence"
     ],
@@ -69,32 +71,32 @@
   },
   "R": {
     "hypotheses": [
-      "H23-direct-fallback-action-order",
-      "H24-rendered-occluded-target-state-representation",
-      "H25-bounded-occlusion-aware-route-composition"
+      "H26-direct-fallback-or-static-route",
+      "H27-rendered-directional-charge-portal-state",
+      "H28-bounded-force-assisted-multi-obligation-composition"
     ],
     "predictions": [
-      "H23 changes fallback action order but cannot derive the hidden target closure relation from rendered geometry",
-      "H24 reconstructs exactly one three-sided target only when its missing run is covered by a coherent exterior non-walkable region",
-      "H25 composes a bounded route that enters perpendicular to the occluder normal and advances at most one predicted queued action while the moving object temporarily occludes a target edge"
+      "H26 reuses ordinary movement or a static route but cannot cross the rendered hazard separation deterministically",
+      "H27 reconstructs synchronized charge phase, force direction, normal regions, and unique force portals from the rendered grid",
+      "H28 composes shape placement, transit return, and actor placement while preserving completed obligations and rejecting additional marker roles"
     ],
     "comparators": [
-      "previous active v25/v25/v24 manifest",
-      "HDS-promoted v26/v26/v25 manifest",
-      "same-condition target at one hundred ninety-two actions",
+      "previous active v26/v26/v25 manifest",
+      "HDS-promoted v27/v27/v26 manifest",
+      "same-condition target at two hundred fifty-six actions",
       "prior twenty-nine stable-level regression",
       "first and second candidate runs"
     ],
-    "expected_state_transition": "thirty-three adopted levels -> thirty-four adopted levels",
-    "falsification_relation": "target remains at four, stable completion drops, occluded-target fixtures fail, or rerun digest changes"
+    "expected_state_transition": "thirty-four adopted levels -> thirty-five adopted levels",
+    "falsification_relation": "target remains at five, stable completion drops, force-route fixtures fail, search bounds are ineffective, or rerun digest changes"
   },
   "Mc": {
     "identity": "generic-double-trinity-P-update-control",
     "boundary": "local OFFLINE control plane and retained sample runtime only",
     "acceptance": [
       "at least three structural hypotheses are represented and judged",
-      "selected object, reconstructed target mask, occluder normal, route, and movement derive from rendered geometry",
-      "candidate target completion improves from four to at least five",
+      "charge phase, force direction, movement regions, force portals, obligations, and route derive from rendered geometry",
+      "candidate target completion improves from five to at least six",
       "twenty-nine adopted levels do not regress",
       "same-condition candidate rerun is identical",
       "all ten P promotion gates pass",
@@ -107,14 +109,14 @@
       "unclassified failure occurs"
     ],
     "rollback": [
-      "restore previous stable v25 v25 v24 manifest",
+      "restore previous stable v26 v26 v25 manifest",
       "retain failed candidate evidence without activation"
     ],
     "completion": [
-      "direct fallback action-order adjustment is rejected after a zero target delta",
-      "the occluded-target route candidate is HDS-promoted after a reproduced four-to-five target delta",
-      "the adopted boundary is thirty-four of one hundred eighty-three",
-      "P10-G remains gated on the other one hundred forty-nine levels"
+      "direct fallback or static routing is rejected because ordinary movement regions remain disconnected",
+      "the directional-force route candidate is HDS-promoted after a reproduced five-to-six target delta",
+      "the adopted boundary is thirty-five of one hundred eighty-three",
+      "P10-G remains gated on the other one hundred forty-eight levels"
     ]
   },
   "non_goals": [
@@ -142,9 +144,9 @@
     "runtime identity scan"
   ],
   "maximum_work_scope": [
-    "identity-free selected-object, partially occluded target, and exterior-occluder representation",
-    "geometry-derived bounded route planning with perpendicular target entry",
-    "queued occluded-target state validation with bounded transient progression",
+    "identity-free actor, shape, goal-region, directional-charge, and force-portal representation",
+    "bounded multi-stage force-assisted obligation planning",
+    "queued expected-grid validation, 2,000-state search bound, and unselected-marker early fail-close",
     "candidate P compile and deterministic regression",
     "HDS promotion and rollback evidence",
     "next unresolved rendered layout observation"

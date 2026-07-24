@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v20-occluded-target-route-promotion-v1",
+  "frame_id": "p10-v21-directional-force-route-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -714,6 +714,98 @@
       "implementation_cost": 3,
       "rollback_cost": 1,
       "generality": 0.9,
+      "information_gain": 0.98,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "PROMOTED_SUPPORT",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H26-direct-fallback-or-static-route",
+      "kind": "H1",
+      "summary": "Reuse ordinary movement, fallback ordering, or a static route without representing rendered directional-force portals.",
+      "predicted_effect": [
+        "ordinary movement remains confined to disconnected regions",
+        "a static route cannot condition crossing on rendered charge phase or force direction"
+      ],
+      "applicability": [
+        "an unresolved layout after the promoted occluded-target route where current semantic operators decline"
+      ],
+      "required_evidence": [
+        "rendered normal-movement connectivity",
+        "same-condition active target baseline",
+        "comparison with a force-state representation"
+      ],
+      "falsifier": [
+        "ordinary movement cannot connect both goal regions",
+        "active target remains at five of seven",
+        "a route would require hidden phase or literal coordinates"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.2,
+      "information_gain": 0.6,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.35,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H27-rendered-directional-charge-portal-state",
+      "kind": "H2",
+      "summary": "Represent synchronized charge phase, force direction, normally connected movement regions, and unique force portals from the current rendered grid.",
+      "predicted_effect": [
+        "charge phase and direction are explicit rendered state rather than hidden timing assumptions",
+        "reflection and quarter-turn preserve the normalized region and portal relation",
+        "ambiguous phase, direction, portal, or additional marker roles fail closed"
+      ],
+      "applicability": [
+        "one selected marker actor, one shape-target obligation, separated goals, a hazard band, and synchronized directional blocks"
+      ],
+      "required_evidence": [
+        "phase-shifted, reflected, and quarter-turn fixtures",
+        "ambiguous-charge and additional-marker rejection fixtures",
+        "identity-free instruction material"
+      ],
+      "falsifier": [
+        "phase or direction requires source state",
+        "more than one transit region or portal assignment is accepted",
+        "an unselected marker role enters the single-actor planner"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.93,
+      "information_gain": 0.97,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.22,
+      "status": "PROMOTED",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H28-bounded-force-assisted-multi-obligation-composition",
+      "kind": "H3",
+      "summary": "Compose force-assisted region entry, shape placement, transit return, actor-region entry, final actor placement, and expected-grid queue validation under H27.",
+      "predicted_effect": [
+        "both rendered obligations close in a bounded stage sequence",
+        "a completed shape obligation is preserved during actor placement",
+        "each queued action is rejected when the rendered predecessor digest differs"
+      ],
+      "applicability": [
+        "stride-aligned rendered movement with unique force portals and one actor plus one movable shape"
+      ],
+      "required_evidence": [
+        "bounded original, reflected, rotated, and phase-shifted closure fixtures",
+        "2,000-state bound and one-state rejection fixture",
+        "same-condition target five-to-six delta and stable non-regression"
+      ],
+      "falsifier": [
+        "a stage exceeds the P search or action bound",
+        "a completed shape is displaced",
+        "target remains at five, stable completion decreases, or rerun differs"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.92,
       "information_gain": 0.98,
       "contamination_risk": 0.0,
       "regression_risk": 0.25,

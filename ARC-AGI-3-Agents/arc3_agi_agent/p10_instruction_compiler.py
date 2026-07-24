@@ -25,6 +25,7 @@ from .p_update import (
 from .protocol import AuthorityViolation
 from .schema import digest_object
 from .semantic_operators import (
+    DIRECTIONAL_FORCE_ROUTE_OPERATOR,
     FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
     MARKER_SHAPE_PUSH_TARGET_OPERATOR,
     MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR,
@@ -37,12 +38,12 @@ from .semantic_operators import (
 )
 from .visual_explorer import GLOBAL_EFFECT_DIVERSIFICATION_POLICY
 
-P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v25"
+P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v26"
 P10_COMPILER_SEED = 0
-P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v26"
-P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v26"
-P10_HYBRID_VERSION = "p10-hybrid-v25"
-P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v25"
+P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v27"
+P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v27"
+P10_HYBRID_VERSION = "p10-hybrid-v26"
+P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v26"
 P10_CANDIDATE_MANIFEST_FILENAME = "p10_candidate_manifest.json"
 
 
@@ -566,6 +567,79 @@ def occluded_target_route_instruction_mapping() -> dict[str, object]:
     }
 
 
+def directional_force_route_instruction_mapping() -> dict[str, object]:
+    """Return P material for rendered directional-force region routing."""
+
+    return {
+        "operator_id": DIRECTIONAL_FORCE_ROUTE_OPERATOR,
+        "action_id": 6,
+        "detector": (
+            "one rendered selected marker actor with no rendered "
+            "unselected marker role, one shape-target obligation, "
+            "separated target regions, a normally impassable band, and "
+            "synchronously charged movable directional blocks"
+        ),
+        "transform": (
+            "infer charge phase and direction from rendered edge bands, "
+            "derive normal-movement regions and force portals, then run "
+            "bounded re-observation-gated searches for shape placement, "
+            "region return, and final actor placement"
+        ),
+        "parameters": {
+            "click_action": 6,
+            "up_action": 1,
+            "down_action": 2,
+            "left_action": 3,
+            "right_action": 4,
+            "selected_marker_color": 0,
+            "unselected_marker_color": 5,
+            "released_marker_color": 4,
+            "marker_divisor": 3,
+            "target_inset": 1,
+            "minimum_pushable_count": 1,
+            "maximum_pushable_count": 1,
+            "minimum_target_side": 3,
+            "maximum_target_side": 16,
+            "minimum_push_steps": 5,
+            "maximum_push_steps": 32,
+            "hazard_color": 15,
+            "force_charge_color": 12,
+            "force_idle_color": 13,
+            "minimum_force_side": 3,
+            "maximum_force_side": 9,
+            "minimum_force_count": 3,
+            "maximum_force_count": 8,
+            "force_expansion_steps": 3,
+            "maximum_search_states": 2000,
+            "maximum_stage_actions": 32,
+        },
+        "preconditions": [
+            "DIRECTIONAL_AND_ACTION6_AVAILABLE",
+            "SINGLE_RENDERED_SELECTED_MARKER_ACTOR",
+            "NO_RENDERED_UNSELECTED_MARKER_ROLE",
+            "ONE_RENDERED_SHAPE_TARGET_OBLIGATION",
+            "SYNCHRONOUS_RENDERED_DIRECTIONAL_CHARGE_BANDS",
+            "FORCE_PORTALS_CONNECT_SEPARATED_GOAL_REGIONS",
+        ],
+        "falsification_conditions": [
+            "charge phase or force direction is ambiguous",
+            "an unselected marker role is rendered",
+            "normal-movement regions or force portals are not unique",
+            "shape and actor goals are not in separated regions",
+            "bounded stage search finds no re-observation action",
+            "a completed shape obligation would be displaced",
+            "stable capability regression decreases",
+        ],
+        "provenance": [
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-charge-band-evidence",
+            "compiled-rendered-region-separation-evidence",
+            "compiled-force-portal-transition-evidence",
+            "compiled-bounded-stage-search-evidence",
+        ],
+    }
+
+
 def marker_shape_push_target_instruction_mapping() -> dict[str, object]:
     """Return P material for actor-mediated rendered shape placement."""
 
@@ -874,10 +948,11 @@ def compile_p10_instruction_bodies(
         marker_shape_push_target_instruction_mapping(),
         multi_actor_shape_push_target_instruction_mapping(),
         occluded_target_route_instruction_mapping(),
+        directional_force_route_instruction_mapping(),
     ]
     bundles = {
         "P-A": (
-            "p10_p_a_symbolic_v26.json",
+            "p10_p_a_symbolic_v27.json",
             _upgrade(
                 base_symbolic,
                 body_version=P10_SYMBOLIC_VERSION,
@@ -889,7 +964,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "P-B": (
-            "p10_p_b_parametric_v26.json",
+            "p10_p_b_parametric_v27.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_PARAMETRIC_VERSION,
@@ -902,7 +977,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "hybrid": (
-            "p10_hybrid_v25.json",
+            "p10_hybrid_v26.json",
             _upgrade(
                 base_hybrid,
                 body_version=P10_HYBRID_VERSION,
@@ -985,6 +1060,7 @@ __all__ = [
     "P10_SYMBOLIC_VERSION",
     "active_p10_manifest_digest",
     "compile_p10_instruction_bodies",
+    "directional_force_route_instruction_mapping",
     "fruit_merge_instruction_mapping",
     "global_effect_diversification_instruction_mapping",
     "main",

@@ -2,42 +2,42 @@
   "activation_authority": "hds-promotion-required",
   "bundles": {
     "P-A": {
-      "body_version": "p10-p-a-symbolic-v26",
-      "content_digest": "sha256-decimal:076670134634257878206894295649487729788373948314018920178948107745073910538199",
-      "filename": "p10_p_a_symbolic_v26.json",
+      "body_version": "p10-p-a-symbolic-v27",
+      "content_digest": "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906",
+      "filename": "p10_p_a_symbolic_v27.json",
       "format_id": "symbolic-rule-graph",
-      "operator_count": 9,
-      "sha256": "91ac079a253782493feee87f4b965319503c1c17caa0ecad2957531c6c83c1aa"
+      "operator_count": 10,
+      "sha256": "bd8eeb8a71b7ff88085453b2d5d65471776be217c8b69158eb1f9a0f537a06f5"
     },
     "P-B": {
-      "body_version": "p10-p-b-parametric-v26",
-      "content_digest": "sha256-decimal:114914870661931881615911209135463899644034713054585218679432490641754642634207",
-      "filename": "p10_p_b_parametric_v26.json",
+      "body_version": "p10-p-b-parametric-v27",
+      "content_digest": "sha256-decimal:114639610541302772791616069098171769181624957051578342119573159698335586069159",
+      "filename": "p10_p_b_parametric_v27.json",
       "format_id": "parametric-sigmoid-matrix",
       "operator_count": 0,
-      "sha256": "caec3df3f2df9f1f6ec2745451795ec93b9b2e7bba57d6dc19576a3dedfaa9d2"
+      "sha256": "c3791df11df4634f5d621a5c8bb14cf0e36ec8b8e9cdb831fb17fa777d2b1362"
     },
     "hybrid": {
-      "body_version": "p10-hybrid-v25",
-      "content_digest": "sha256-decimal:070257481156314068766335518186916270403429387283896192579230948627393063204173",
-      "filename": "p10_hybrid_v25.json",
+      "body_version": "p10-hybrid-v26",
+      "content_digest": "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184",
+      "filename": "p10_hybrid_v26.json",
       "format_id": "parametric-sigmoid-matrix",
-      "operator_count": 9,
-      "sha256": "a518a15f33104f82c150f15599c4f9a4efd3f691280647915e5814f7f08c2776"
+      "operator_count": 10,
+      "sha256": "8d9f48c20bb93430c5ce159f40291419a86be913015ef664853ac3c58d7fe4c8"
     }
   },
-  "compile_decision_digest": "7ed8bb2c1627b70839116dbde88ed950ef3bb6d3dfbb2809955fbc235f235b0e",
-  "compile_directive_digest": "c7626a9ef7d321bbfff78c5002e39d791705f2e2e26f4821ecba504f99768647",
-  "compiler_version": "arc3-p10-instruction-compiler-v25",
-  "evidence_set_digest": "90e6ea25641f3e77598bcb0b622f0ca253a34aebb860a161f81b261acb682c2b",
-  "learning_result_digest": "5d1e00d9aa9da1aa391ff7c1189262290a883820c7e886a81bccd032f55f4a9e",
+  "compile_decision_digest": "5722ae9e3e0cd60190cf8c80be153a0e006ff6269bb265f939c1730014e6741b",
+  "compile_directive_digest": "4f564e0ae7c438b00206a654f0fa7e4e6453221620d48b5ff4f4b3f9acf36b56",
+  "compiler_version": "arc3-p10-instruction-compiler-v26",
+  "evidence_set_digest": "d493e6c6e74a319684af6bfb1409947df072e414725e50b333434739c205aafb",
+  "learning_result_digest": "2eed09ea05d50d11ad04f4bced9b6a374c4a430761b243a82d8b8f6572821f6c",
   "lifecycle": "PROMOTED",
-  "promoted_active_manifest_digest": "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba",
-  "promotion_decision_digest": "16f2f31912a14470d3b5c794bf0a0af5fa5f18de9e4beac6bee2ac05522a6d0f",
-  "promotion_directive_digest": "b5771db346f48c15c0406b306813940e8b397064e8df4b87312f1dc316703d72",
-  "regression_report_digest": "cc761dc22618015612e2013cdc136e382877b871fc93db2659d073fecb21dbcd",
+  "promoted_active_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+  "promotion_decision_digest": "505a3868006db0f281743975462679fdc1218e9a2c4ab41c6c80271bef1e1182",
+  "promotion_directive_digest": "4731efd04002b8084d67c8d45f31af55712084a15d24afa298835a232c96da69",
+  "regression_report_digest": "048effb59fd9ea19805f0e0d1e82cd6acf806b7c0227e94b0bfa49bcc56dc23f",
   "runtime_identity_free": true,
   "schema_version": "arc3-p10-instruction-manifest-v1",
   "seed": 0,
-  "source_manifest_digest": "ed005422ea68a7cc42bad99a10817ba7b6b7ab337bdb8993a750d781fba21c2c"
+  "source_manifest_digest": "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba"
 }
