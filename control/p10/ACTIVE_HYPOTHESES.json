@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v17-selectable-route-promotion-v1",
+  "frame_id": "p10-v18-shape-push-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -440,6 +440,95 @@
         "non-pushed objects cross push-through terrain",
         "state mismatch does not invalidate the queue",
         "target or stable regression fails"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.9,
+      "information_gain": 0.9,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "PROMOTED_SUPPORT",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H17-loosen-existing-route-detector",
+      "kind": "H1",
+      "summary": "Lower the v17 route detector object-count and target-uniqueness constraints so the single controlled actor can reach its rectangular target.",
+      "predicted_effect": [
+        "the controlled actor gains a direct route to its rectangular target",
+        "filled movable shapes and their non-rectangular targets remain outside the state and success model"
+      ],
+      "applicability": [
+        "single marker-controlled actor with a rectangular enclosing target"
+      ],
+      "required_evidence": [
+        "post-level rendered observation",
+        "goal-obligation coverage comparison"
+      ],
+      "falsifier": [
+        "the existing route state represents and closes every non-actor shape obligation without a new role"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.55,
+      "information_gain": 0.7,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.35,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H18-outline-interior-shape-role-representation",
+      "kind": "H2",
+      "summary": "Represent target roles by flood-filled enclosed outline masks and pair them with rendered filled movable masks while preserving the marker-controlled actor as a distinct role.",
+      "predicted_effect": [
+        "rectangular actor goals and non-rectangular movable-shape goals coexist in one identity-free state",
+        "translated copies preserve role and shape-family assignment"
+      ],
+      "applicability": [
+        "one marker-controlled actor, one or more filled movable shapes, and closed one-cell outline targets"
+      ],
+      "required_evidence": [
+        "translated shape-pair fixtures",
+        "ambiguous and open-outline rejection fixtures",
+        "current rendered structure recognition"
+      ],
+      "falsifier": [
+        "an open or multiply assigned outline is accepted",
+        "translation changes the normalized role assignment",
+        "the current rendered structure remains unrecognized"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.9,
+      "information_gain": 0.95,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "PROMOTED",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H19-actor-mediated-impulse-push-composition",
+      "kind": "H3",
+      "summary": "Compose actor free-routing, bounded impulse pushing of shape-family objects, assignment to matching outline goals, and queued transient reobservation under the H18 representation.",
+      "predicted_effect": [
+        "the actor reaches its own target while every movable shape reaches a matching outline target",
+        "multi-frame push transitions consume only the P-bounded reobservation allowance"
+      ],
+      "applicability": [
+        "stride-aligned rendered movement with a single controlled actor and bounded push duration"
+      ],
+      "required_evidence": [
+        "synthetic all-goal closure",
+        "bounded-search and blocked-push fixtures",
+        "transient-frame queue validation",
+        "same-condition positive target delta and stable non-regression"
+      ],
+      "falsifier": [
+        "search exceeds the P state or action bound",
+        "a mismatched rendered state is accepted",
+        "target remains at two completed levels",
+        "stable completion decreases or rerun differs"
       ],
       "implementation_cost": 3,
       "rollback_cost": 1,

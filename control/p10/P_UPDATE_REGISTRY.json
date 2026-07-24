@@ -4,54 +4,54 @@
   "candidate_manifest": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_candidate_manifest.json",
   "active": {
     "P-A": {
-      "version": "p10-p-a-symbolic-v23",
-      "content_digest": "sha256-decimal:053969500032688773296042959906745604484946716115487487977206555352169636751633",
+      "version": "p10-p-a-symbolic-v24",
+      "content_digest": "sha256-decimal:058028972340856984758802925516692165490492610579694348439007033730960206642032",
       "status": "ACTIVE"
     },
     "P-B": {
-      "version": "p10-p-b-parametric-v23",
-      "content_digest": "sha256-decimal:040982281822543373617197723427807250520834639047078453277887096221759513208248",
-      "parameter_digest": "parameter-matrix:0490338599725026584853786521652655726440",
+      "version": "p10-p-b-parametric-v24",
+      "content_digest": "sha256-decimal:055208998719381031091780597038797434681222264512310010431436858418987676397293",
+      "parameter_digest": "parameter-matrix:0321138414575981701927177464092765479629",
       "status": "ACTIVE"
     },
     "hybrid": {
-      "version": "p10-hybrid-v22",
-      "content_digest": "sha256-decimal:035161789520881592500727173594884471274504496367166903823815477891005390768977",
-      "parameter_digest": "parameter-matrix:0490338599725026584853786521652655726440",
+      "version": "p10-hybrid-v23",
+      "content_digest": "sha256-decimal:093714858090139705292480660664975463664215711285269537435183332787179300601926",
+      "parameter_digest": "parameter-matrix:0321138414575981701927177464092765479629",
       "status": "ACTIVE"
     }
   },
   "previous_stable": {
-    "manifest_digest": "4e19e461a7f0d65573782be5e2bddc873ba62d5bfe76ef2f1e42293ac2dd32cc",
-    "P-A": "p10-p-a-symbolic-v22",
-    "P-B": "p10-p-b-parametric-v22",
-    "hybrid": "p10-hybrid-v21",
-    "parameter_digest": "parameter-matrix:0759278394211433978284441602105975724997",
+    "manifest_digest": "8db83a354c334811870bca13f72ea49b329dd35fb11fd77cb3cc92a07d400da3",
+    "P-A": "p10-p-a-symbolic-v23",
+    "P-B": "p10-p-b-parametric-v23",
+    "hybrid": "p10-hybrid-v22",
+    "parameter_digest": "parameter-matrix:0490338599725026584853786521652655726440",
     "status": "PREVIOUS_STABLE"
   },
   "candidate": {
     "P-A": {
-      "version": "p10-p-a-symbolic-v23",
-      "content_digest": "sha256-decimal:053969500032688773296042959906745604484946716115487487977206555352169636751633",
+      "version": "p10-p-a-symbolic-v24",
+      "content_digest": "sha256-decimal:058028972340856984758802925516692165490492610579694348439007033730960206642032",
       "status": "PROMOTED"
     },
     "P-B": {
-      "version": "p10-p-b-parametric-v23",
-      "content_digest": "sha256-decimal:040982281822543373617197723427807250520834639047078453277887096221759513208248",
-      "parameter_digest": "parameter-matrix:0490338599725026584853786521652655726440",
+      "version": "p10-p-b-parametric-v24",
+      "content_digest": "sha256-decimal:055208998719381031091780597038797434681222264512310010431436858418987676397293",
+      "parameter_digest": "parameter-matrix:0321138414575981701927177464092765479629",
       "status": "PROMOTED"
     },
     "hybrid": {
-      "version": "p10-hybrid-v22",
-      "content_digest": "sha256-decimal:035161789520881592500727173594884471274504496367166903823815477891005390768977",
-      "parameter_digest": "parameter-matrix:0490338599725026584853786521652655726440",
+      "version": "p10-hybrid-v23",
+      "content_digest": "sha256-decimal:093714858090139705292480660664975463664215711285269537435183332787179300601926",
+      "parameter_digest": "parameter-matrix:0321138414575981701927177464092765479629",
       "status": "PROMOTED"
     }
   },
   "hds_decision": "PROMOTE",
-  "hds_decision_digest": "1889efa0af9098f1c12e7cfa25dd8bf979d4f815e2cff4168c25411429c90baf",
-  "promotion_receipt_digest": "9aa15e31c7b2756bc0d1f153d7dc620035afb94afb060958c3af190b65b28195",
-  "next_required_transition": "close-the-next-unresolved-selectable-route-layout",
-  "active_manifest_digest": "8db83a354c334811870bca13f72ea49b329dd35fb11fd77cb3cc92a07d400da3",
-  "candidate_manifest_digest": "3dee7e506018dc3713cd2d03cdd099754207bc312f7e1a33ea41469770f84278"
+  "hds_decision_digest": "db7f2fa070cae56c3fbd1ed6f9bff1e89fc8de3f1764f361ac8b750f238d09ce",
+  "promotion_receipt_digest": "799a0594e63cdfb8a00ede2d060d2cc6248703834e741a6a0d96a5d34181a9ed",
+  "next_required_transition": "close-the-next-unresolved-layout-after-shape-push",
+  "active_manifest_digest": "9beb81c420fff3b4bc453edc960300eb5912035a4efe871b57498adabf8d9584",
+  "candidate_manifest_digest": "5cade457151f92c938a5659ca43df2d17e1ac71bd90665cf91386eb92f71f5ed"
 }

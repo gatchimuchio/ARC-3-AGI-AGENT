@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-v17-selectable-route-promotion-v1",
+  "frame_id": "p10-v18-shape-push-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -68,6 +68,16 @@
         "marker-centered-transition-representation-has-higher-information-gain"
       ],
       "reopen_condition": "a distinct rendered structure guarantees disjoint components and fully visible targets throughout every transition"
+    },
+    {
+      "hypothesis_id": "H17-loosen-existing-route-detector",
+      "status": "REJECTED",
+      "reason_codes": [
+        "existing-route-state-models-only-marker-controlled-objects",
+        "visible-filled-shape-and-outline-goal-obligations-remain-unrepresented",
+        "actor-only-routing-cannot-satisfy-the-rendered-completion-relation"
+      ],
+      "reopen_condition": "a distinct rendered structure has exactly one controlled actor target and no additional movable-shape goal obligations"
     }
   ]
 }

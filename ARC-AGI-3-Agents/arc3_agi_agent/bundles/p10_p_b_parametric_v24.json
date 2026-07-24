@@ -1,0 +1,315 @@
+{
+  "body_version": "p10-p-b-parametric-v24",
+  "compile": {
+    "compile_decision_digest": "860fbbe722c01a96f114b6cf6f5bd220017057c74b234b29a01115863bf8e8ab",
+    "compile_directive_digest": "c090fa3b9e9b2db48c11e6519c12428b6e54e1f5268774ba0209e72f01f4887a",
+    "compiler_version": "arc3-p10-instruction-compiler-v23",
+    "evidence_set_digest": "858742d802d8afa2b7a9989bc3fb945523dd7b701eeee4017b3e0bc5aae27626",
+    "learning_result_digest": "03088ae1b56952a311a834da33a4c856e7a5fe5c861270289ac05458de59020f",
+    "method": "hds-authorized-memory-trained-parametric-and-operator-compile",
+    "operator_count": 0,
+    "operator_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "predecessor_content_digest": "sha256-decimal:040982281822543373617197723427807250520834639047078453277887096221759513208248",
+    "predecessor_provenance_digest": "p10-evidence-provenance:4b041f20b64f55a88d82ea1813598554de1a096113693f5dc91982cf98f3893e",
+    "seed": 0,
+    "variant": "P-B"
+  },
+  "content_digest": "sha256-decimal:055208998719381031091780597038797434681222264512310010431436858418987676397293",
+  "contract": {
+    "addressable": true,
+    "body_version": "p10-p-b-parametric-v24",
+    "bound": true,
+    "compile_contract": [
+      "identity-free-input",
+      "deterministic-seed",
+      "content-addressed-output",
+      "explicit-semantic-operator-compile"
+    ],
+    "composable": true,
+    "content_digest": "sha256-decimal:055208998719381031091780597038797434681222264512310010431436858418987676397293",
+    "deterministic_under_fixed_state": true,
+    "executable_by_layer0": true,
+    "format_id": "parametric-sigmoid-matrix",
+    "hds_authority": "command-judge-accept-reject-suspend-rollback-stop-and-authorize",
+    "input_contract": [
+      "compute-request",
+      "observation",
+      "bounded-context",
+      "optional-memory-view"
+    ],
+    "layer0_roots": [
+      "SYMBOL_SPACE",
+      "CONTEXT_STATE",
+      "TRANSFORM_OR_WORLD_MODEL",
+      "CANDIDATE_SURFACE",
+      "FITTING_OR_SUCCESS_CRITERION",
+      "EMISSION_INTERFACE"
+    ],
+    "memory_authority": "passive-state-hds-authorized-write-only",
+    "output_contract": [
+      "representations",
+      "rules-or-parameters",
+      "hypotheses",
+      "counter-hypotheses",
+      "predictions",
+      "candidate-priors",
+      "uncertainty",
+      "falsification-conditions",
+      "provenance",
+      "semantic-operator-instructions"
+    ],
+    "provenance_digest": "p10-evidence-provenance:1eb24329754b7ee21a7f7be5809197d1cac37d54d0959d498a632f783413eb76",
+    "pure_llm_authority": "compute-and-propose-only",
+    "removal_witnesses": [
+      "without-symbol-space-no-reusable-input-alphabet",
+      "without-context-state-no-cross-observation-conditioning",
+      "without-transform-no-bounded-transition-hypothesis",
+      "without-candidate-surface-no-comparable-proposals",
+      "without-success-criterion-no-verifiable-closure",
+      "without-emission-interface-no-external-action-boundary"
+    ],
+    "runtime_identity_free": true,
+    "schema_version": "arc3-instruction-body-v1",
+    "state_contract": [
+      "immutable-body",
+      "explicit-compile-only",
+      "version-bound"
+    ],
+    "state_dependent": true,
+    "version": "arc3-restart-protocol-v2"
+  },
+  "format_id": "parametric-sigmoid-matrix",
+  "payload": {
+    "control_profiles": [
+      {
+        "expected_progress": 0.0,
+        "expected_risk": 0.0,
+        "falsification_conditions": [
+          "observation channel unavailable"
+        ],
+        "information_gain": 1.0,
+        "mode": "REOBSERVE",
+        "preconditions": [
+          "OBSERVATION_CHANNEL_AVAILABLE"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.0,
+        "rollback_cost": 0.0
+      },
+      {
+        "expected_progress": 0.0,
+        "expected_risk": 0.0,
+        "falsification_conditions": [
+          "all closure terms become observed"
+        ],
+        "information_gain": 1.0,
+        "mode": "SUSPEND",
+        "preconditions": [
+          "OPEN_PROOF_OBLIGATION"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.0,
+        "rollback_cost": 0.0
+      },
+      {
+        "expected_progress": 0.171009772,
+        "expected_risk": 0.862106406,
+        "falsification_conditions": [
+          "safe bounded work remains"
+        ],
+        "information_gain": 0.0,
+        "mode": "STOP",
+        "preconditions": [
+          "TERMINAL_OR_BUDGET_BOUNDARY"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.0,
+        "rollback_cost": 0.0
+      },
+      {
+        "expected_progress": 0.0,
+        "expected_risk": 0.892106406,
+        "falsification_conditions": [
+          "no reversible checkpoint exists"
+        ],
+        "information_gain": 0.949239957,
+        "mode": "ROLLBACK",
+        "preconditions": [
+          "REVERSIBLE_FAILURE_EVIDENCE"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.0,
+        "rollback_cost": 0.862106406
+      },
+      {
+        "expected_progress": 0.364006515,
+        "expected_risk": 0.862106406,
+        "falsification_conditions": [
+          "no bounded plan can be grounded"
+        ],
+        "information_gain": 0.979239957,
+        "mode": "PLAN",
+        "preconditions": [
+          "MULTIPLE_HYPOTHESES_AVAILABLE"
+        ],
+        "provenance": [
+          "compiled-control-profile:parametric"
+        ],
+        "repetition_cost": 0.2,
+        "rollback_cost": 0.431053203
+      }
+    ],
+    "model": {
+      "action_falsification_conditions": [
+        "action unavailable",
+        "held-out rendered effect contradicts prediction"
+      ],
+      "action_preconditions": [
+        "ACTION{action_id}_AVAILABLE",
+        "RENDERED_OBSERVATION_PRESENT"
+      ],
+      "activation": "sigmoid",
+      "architecture": "identity-free-feature-vector-to-six-sigmoid-heads",
+      "feature_names": [
+        "bias",
+        "action-id-scaled",
+        "available-action-fraction",
+        "entity-present",
+        "relation-present",
+        "visible-effect-present",
+        "previous-observation-present",
+        "action-history-fraction",
+        "memory-entry-fraction",
+        "failure-present",
+        "active-terminal",
+        "structural-present"
+      ],
+      "heads": [
+        "effect",
+        "progress",
+        "hazard",
+        "information_gain",
+        "candidate_prior",
+        "uncertainty"
+      ],
+      "holdout_record_count": 309,
+      "learning_update": {
+        "attribution": "full-batch-logistic-gradient-from-HDS-approved-M;train-only-gradient;holdout-selection-gate",
+        "candidate_holdout_loss": 0.2646768086001355,
+        "candidate_train_loss": 0.4258634002050983,
+        "changed_parameter_digest": "1ea4bb14b741246a13e37cea67b80a174ba7566a7b313c956462bb39c4571241",
+        "dataset_digest": "f6099a36288ff2febb2375e6800887e6f270d8589036a864e7037f60a0cda5d8",
+        "epochs": 1,
+        "learning_rate": 0.01,
+        "same_input_candidate_output_digest": "df8570ade49a3400be9b477ad2ac26e9025142f04561464030a1c9212195eb1d",
+        "same_input_example_digest": "4dc3bf01ba7e24c91fc84f948128eb253810a534000ec9fce70a60738c9024cf",
+        "same_input_predecessor_output_digest": "96a8ddab159af95ba06f739aafc87688bc74d8c6ed9fb8b3a0ba82c39b4515b7",
+        "source_holdout_loss": 0.26467717529196194,
+        "source_parameter_digest": "parameter-matrix:0490338599725026584853786521652655726440",
+        "source_train_loss": 0.4263597572402784,
+        "trainer_seed": 0
+      },
+      "parameter_count": 72,
+      "parameter_digest": "parameter-matrix:0321138414575981701927177464092765479629",
+      "training_record_count": 1887,
+      "weights": [
+        [
+          0.532078061613,
+          0.324980662989,
+          0.371460760199,
+          0.292192387785,
+          0.381424072541,
+          0.942189098616,
+          0.512359768017,
+          0.52138837222,
+          0.29796830826,
+          0.274787504571,
+          0.438491689624,
+          0.527798276707
+        ],
+        [
+          -0.39168080881,
+          -0.229435114063,
+          -0.157159847359,
+          -0.189596461489,
+          -0.117247511089,
+          -0.376366446412,
+          -0.356920048543,
+          -0.399302132264,
+          -0.031028813581,
+          -0.216139783104,
+          -0.26242519618,
+          -0.383579387597
+        ],
+        [
+          -0.582489062705,
+          -0.453377556252,
+          -0.41583139363,
+          -0.000808947782,
+          0.20588814546,
+          -0.646712371041,
+          -0.619657830447,
+          -0.541769658559,
+          0.688248420072,
+          2.000558066324,
+          -0.388794467935,
+          -0.481800513712
+        ],
+        [
+          0.481486051654,
+          0.289037578534,
+          0.273111107908,
+          0.285313196838,
+          0.169405599809,
+          0.427592347485,
+          0.476596503986,
+          0.463887303346,
+          0.245814788175,
+          0.525140761791,
+          0.695335059273,
+          0.451340658337
+        ],
+        [
+          0.186845997741,
+          0.120121327509,
+          0.309391933229,
+          -0.144715068233,
+          -0.071897757125,
+          0.334767815538,
+          0.229474935024,
+          0.173595823946,
+          -0.363422580233,
+          -1.550850410722,
+          0.065579990113,
+          0.105651137563
+        ],
+        [
+          0.028434923344,
+          -0.224591470658,
+          0.355743887006,
+          -0.48588604652,
+          0.074143427977,
+          0.001593200477,
+          0.010716126475,
+          0.087379102948,
+          0.279545858452,
+          0.379623051192,
+          -0.060330743642,
+          0.006805064845
+        ]
+      ]
+    },
+    "operator_instructions": []
+  },
+  "provenance_digest": "p10-evidence-provenance:1eb24329754b7ee21a7f7be5809197d1cac37d54d0959d498a632f783413eb76",
+  "runtime_identity_free": true,
+  "schema_version": "arc3-instruction-body-v1"
+}

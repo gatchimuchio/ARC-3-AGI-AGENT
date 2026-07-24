@@ -26,6 +26,7 @@ from .protocol import AuthorityViolation
 from .schema import digest_object
 from .semantic_operators import (
     FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+    MARKER_SHAPE_PUSH_TARGET_OPERATOR,
     OBJECT_TARGET_CONTROL_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
     SELECTABLE_PUSH_TARGET_OPERATOR,
@@ -34,12 +35,12 @@ from .semantic_operators import (
 )
 from .visual_explorer import GLOBAL_EFFECT_DIVERSIFICATION_POLICY
 
-P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v22"
+P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v23"
 P10_COMPILER_SEED = 0
-P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v23"
-P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v23"
-P10_HYBRID_VERSION = "p10-hybrid-v22"
-P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v22"
+P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v24"
+P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v24"
+P10_HYBRID_VERSION = "p10-hybrid-v23"
+P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v23"
 P10_CANDIDATE_MANIFEST_FILENAME = "p10_candidate_manifest.json"
 
 
@@ -504,6 +505,65 @@ def selectable_route_target_instruction_mapping() -> dict[str, object]:
     }
 
 
+def marker_shape_push_target_instruction_mapping() -> dict[str, object]:
+    """Return P material for actor-mediated rendered shape placement."""
+
+    return {
+        "operator_id": MARKER_SHAPE_PUSH_TARGET_OPERATOR,
+        "action_id": 6,
+        "detector": (
+            "one rendered marker-controlled actor, filled movable "
+            "shapes, and closed enclosing outline targets"
+        ),
+        "transform": (
+            "derive translation-invariant interior masks, pair shape "
+            "families, and run bounded impulse-push state search with "
+            "reobserved queued-action validation"
+        ),
+        "parameters": {
+            "click_action": 6,
+            "up_action": 1,
+            "down_action": 2,
+            "left_action": 3,
+            "right_action": 4,
+            "selected_marker_color": 0,
+            "unselected_marker_color": 5,
+            "released_marker_color": 4,
+            "marker_divisor": 3,
+            "target_inset": 1,
+            "minimum_pushable_count": 1,
+            "maximum_pushable_count": 8,
+            "minimum_target_side": 3,
+            "maximum_target_side": 16,
+            "minimum_push_steps": 5,
+            "maximum_push_steps": 32,
+            "push_through_color": 15,
+            "maximum_search_states": 200000,
+            "maximum_plan_actions": 192,
+            "maximum_transition_observations": 8,
+        },
+        "preconditions": [
+            "DIRECTIONAL_AND_ACTION6_AVAILABLE",
+            "SINGLE_RENDERED_SELECTED_MARKER_ACTOR",
+            "RENDERED_FILLED_MOVABLE_SHAPES",
+            "CLOSED_ENCLOSING_OUTLINE_TARGETS",
+        ],
+        "falsification_conditions": [
+            "outline interior is open or role assignment is ambiguous",
+            "filled shape and target interior masks do not match",
+            "bounded state search finds no all-obligation plan",
+            "reobserved state differs from the predicted queued state",
+            "stable capability regression decreases",
+        ],
+        "provenance": [
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-outline-interior-evidence",
+            "compiled-bounded-impulse-transition-evidence",
+            "compiled-bounded-state-search-evidence",
+        ],
+    }
+
+
 def _upgrade(
     base: dict[str, Any],
     *,
@@ -689,10 +749,11 @@ def compile_p10_instruction_bodies(
         fruit_merge_instruction_mapping(),
         selectable_push_target_instruction_mapping(),
         selectable_route_target_instruction_mapping(),
+        marker_shape_push_target_instruction_mapping(),
     ]
     bundles = {
         "P-A": (
-            "p10_p_a_symbolic_v23.json",
+            "p10_p_a_symbolic_v24.json",
             _upgrade(
                 base_symbolic,
                 body_version=P10_SYMBOLIC_VERSION,
@@ -704,7 +765,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "P-B": (
-            "p10_p_b_parametric_v23.json",
+            "p10_p_b_parametric_v24.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_PARAMETRIC_VERSION,
@@ -717,7 +778,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "hybrid": (
-            "p10_hybrid_v22.json",
+            "p10_hybrid_v23.json",
             _upgrade(
                 base_hybrid,
                 body_version=P10_HYBRID_VERSION,
@@ -803,6 +864,7 @@ __all__ = [
     "fruit_merge_instruction_mapping",
     "global_effect_diversification_instruction_mapping",
     "main",
+    "marker_shape_push_target_instruction_mapping",
     "object_target_control_instruction_mapping",
     "relation_toggle_instruction_mapping",
     "selectable_push_target_instruction_mapping",

@@ -216,20 +216,23 @@ def _proposal(bundle_dir: Path) -> PUpdateProposal:
         update_type="symbolic-parametric-composition",
         evidence_refs=(
             "memory:approved-multi-episode-learning",
-            "failure:candidate-surface-stagnation",
-            "contrast:visible-progress-versus-no-progress",
+            "failure:remaining-level-commit-model-gap",
+            "contrast:operator-unavailable-versus-shape-role-closure",
         ),
         expected_effect=(
-            "change-P-B-same-input-compute-and-compile-isolated-semantic-candidate"
+            "change-P-B-same-input-compute-and-compile-isolated-shape-push-candidate"
         ),
         expected_affected_capabilities=(
             "failure-conditioned-parametric-ranking",
-            "goal-aware-merge-candidate",
+            "marker-controlled-shape-target-route",
         ),
         expected_unaffected_capabilities=(
             "stable-rendered-relation-control",
             "stable-object-target-control",
             "stable-symbolic-rewrite",
+            "stable-goal-aware-merge",
+            "stable-selectable-object-target-push",
+            "stable-selectable-multi-object-route",
         ),
         falsifiers=(
             "parameter-digest-unchanged",
@@ -240,7 +243,7 @@ def _proposal(bundle_dir: Path) -> PUpdateProposal:
         rollback_target="p10-active-instruction-body-set",
         provenance=(
             "HDS-authorized-runtime-memory",
-            "identity-free-positive-negative-contrast",
+            "identity-free-rendered-shape-positive-negative-contrast",
         ),
     )
 
@@ -266,10 +269,10 @@ def _evidence_set(
         memory_snapshot_digest=memory.digest,
         approved_memory_refs=approved_refs,
         hds_memory_decision_digests=hds_refs,
-        failure_refs=("failure:candidate-surface-stagnation",),
-        contradiction_refs=("contradiction:parametric-effect-mismatch",),
-        positive_contrast_refs=("contrast:visible-progress",),
-        negative_contrast_refs=("contrast:no-visible-progress",),
+        failure_refs=("failure:remaining-level-commit-model-gap",),
+        contradiction_refs=("contradiction:actor-only-route-incomplete",),
+        positive_contrast_refs=("contrast:shape-role-closure",),
+        negative_contrast_refs=("contrast:operator-unavailable",),
         holdout_refs=("holdout:structure-partition",),
         replay_audit_refs=("audit:no-id-no-replay-no-fixed-sequence",),
         provenance=(

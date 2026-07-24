@@ -92,19 +92,21 @@
         "v16 previous stable completed zero of seven at sixty-four actions",
         "v16 geometry-derived candidate completed one of seven twice",
         "v17 previous active completed one of seven at ninety-six actions",
-        "v17 marker-centered route candidate completed two of seven twice"
+        "v17 marker-centered route candidate completed two of seven twice",
+        "v18 marker-shape push candidate completed three of seven twice at one hundred ninety-two actions"
       ],
-      "status": "PARTIALLY_RESOLVED_BY_V17_PROMOTION",
+      "status": "PARTIALLY_RESOLVED_BY_V18_PROMOTION",
       "required_resolution": [
         "reobserve and classify the next unresolved geometry",
-        "close the remaining five levels without identity routing"
+        "close the remaining four levels without identity routing"
       ],
       "resolution_evidence": [
         "translated role fixtures pass",
         "ambiguous roles reject",
         "touching objects remain separated by marker-centered templates",
         "queued actions validate reobserved transition state",
-        "post-promotion active completes two of seven"
+        "closed outline interiors pair with translation-invariant filled shape masks",
+        "post-promotion active completes three of seven"
       ]
     },
     {
@@ -133,6 +135,39 @@
       "evidence": [
         "adopted boundary is thirty-one of one hundred eighty-three",
         "the selectable target remains at two of seven after ninety-six actions"
+      ],
+      "status": "SUPERSEDED_BY_SHAPE_PUSH_PROGRESS",
+      "required_resolution": [
+        "use the post-shape-push failure signature for the next unresolved layout"
+      ]
+    },
+    {
+      "signature": "dynamic-footer-in-transition-terrain-evidence",
+      "structural_condition": "a rendered progress footer changes after every action and is incorrectly included in queued transition terrain evidence",
+      "evidence": [
+        "the first v18 regression remained at two of seven",
+        "recorded stable playfield rows were followed by a non-walkable separator and a changing footer",
+        "near-bottom separator exclusion made terrain evidence invariant to footer progress"
+      ],
+      "status": "RESOLVED_BY_V18_PROMOTION",
+      "falsifier": "a changing footer alters the playable terrain digest or queued observation status"
+    },
+    {
+      "signature": "emitted-transient-action-queue-lag",
+      "structural_condition": "a planned action is emitted during a transient rendered frame but remains at the queue head and is later compared as if it had not been emitted",
+      "evidence": [
+        "recorded v18 action history advanced the environment while queue evidence stayed one action behind",
+        "shape-only optimistic queue advancement converted the bounded target probe from two to three completed levels"
+      ],
+      "status": "RESOLVED_BY_V18_PROMOTION",
+      "falsifier": "an emitted transient action remains queued or a later mismatched stable state is accepted"
+    },
+    {
+      "signature": "remaining-level-commit-model-gap-after-shape-push",
+      "structural_condition": "the promoted marker-shape push capability closes one additional rendered layout but the next level remains outside current bounded semantic closure",
+      "evidence": [
+        "adopted boundary is thirty-two of one hundred eighty-three",
+        "the promoted active target completes three of seven at one hundred ninety-two actions with error zero"
       ],
       "status": "ACTIVE",
       "required_resolution": [

@@ -166,6 +166,68 @@
         "stable-adopted-level-regression-pass",
         "target-completed-level-improvement-reproduced"
       ]
+    },
+    {
+      "decision_id": "j-dev:p10-shape-push-probe-v18",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H18-outline-interior-shape-role-representation",
+      "supporting": [
+        "H19-actor-mediated-impulse-push-composition"
+      ],
+      "rejected": [
+        "H17-loosen-existing-route-detector"
+      ],
+      "reason_codes": [
+        "direct-route-state-omits-visible-non-actor-goal-obligations",
+        "outline-interior-masks-are-rendered-and-translation-invariant",
+        "bounded-impulse-search-is-candidate-only-and-reversible",
+        "highest-next-level-information-gain"
+      ],
+      "maximum_information_gain_next": "prove rendered model closure and a same-condition two-to-three target delta"
+    },
+    {
+      "decision_id": "p-update-decision:fad0d3a9974221c79adb9394",
+      "authority": "hds-p-update-only",
+      "status": "HOLD",
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "allow_p_rollback": false,
+      "decision_digest": "edc4607b28798aee6f827c0b722b4fca0f72587fd9651f6a4477a94fd6c66250",
+      "reason_codes": [
+        "target-two-to-two-no-improvement",
+        "active-manifest-remained-unchanged",
+        "failed-candidate-evidence-retained"
+      ],
+      "evidence_ref": "evidence/p10/p_update/iteration_18_regression/p10_candidate_compile_trace_v1.json"
+    },
+    {
+      "decision_id": "j-dev:p10-shape-push-transition-reobservation-v18",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H19-actor-mediated-impulse-push-composition",
+      "reason_codes": [
+        "dynamic-footer-must-not-enter-playable-terrain-evidence",
+        "transient-frame-action-was-emitted-but-queue-did-not-advance",
+        "candidate-only-correction-is-bounded-and-reversible",
+        "same-condition-target-probe-improved-two-to-three"
+      ],
+      "maximum_information_gain_next": "rerun stable and target conditions twice before promotion"
+    },
+    {
+      "decision_id": "p-update-decision:52c3dd358096a3cada2a3c6f",
+      "authority": "hds-p-update-only",
+      "status": "PROMOTE",
+      "allow_p_compile": false,
+      "allow_p_promote": true,
+      "allow_p_rollback": false,
+      "decision_digest": "db7f2fa070cae56c3fbd1ed6f9bff1e89fc8de3f1764f361ac8b750f238d09ce",
+      "reason_codes": [
+        "all-ten-promotion-gates-pass",
+        "stable-adopted-level-regression-pass",
+        "target-completed-level-improvement-reproduced"
+      ],
+      "evidence_ref": "evidence/p10/p_update/iteration_18_queue_regression/p10_promotion_receipt_v1.json"
     }
   ]
 }

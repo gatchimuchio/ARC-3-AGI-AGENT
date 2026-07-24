@@ -108,7 +108,9 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v17_route_promotion_is_current_control_authority(self) -> None:
+    def test_v18_shape_push_promotion_is_current_control_authority(
+        self,
+    ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
         capabilities = _json(
             CONTROL_DIR / "CAPABILITY_REGISTRY.json"
@@ -121,13 +123,13 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v17-selectable-route-promotion-v1",
+            "p10-v18-shape-push-promotion-v1",
         )
-        self.assertEqual(frame["self_check"]["stable_completed_levels"], 31)
-        self.assertEqual(capabilities["stable_completed_levels"], 31)
+        self.assertEqual(frame["self_check"]["stable_completed_levels"], 32)
+        self.assertEqual(capabilities["stable_completed_levels"], 32)
         self.assertEqual(
             registry["active_manifest_digest"],
-            "8db83a354c334811870bca13f72ea49b329dd35fb11fd77cb3cc92a07d400da3",
+            "9beb81c420fff3b4bc453edc960300eb5912035a4efe871b57498adabf8d9584",
         )
         for variant in ("P-A", "P-B", "hybrid"):
             self.assertEqual(
@@ -138,16 +140,16 @@ class P10DevelopmentControlTests(unittest.TestCase):
                 registry["active"][variant]["content_digest"],
                 active_manifest["bundles"][variant]["content_digest"],
             )
-        route_decision = next(
+        shape_decision = next(
             item
             for item in decisions
             if item["decision_id"]
-            == "j-dev:p10-selectable-multi-object-route-v17"
+            == "j-dev:p10-shape-push-probe-v18"
         )
-        self.assertEqual(route_decision["status"], "PROBE")
+        self.assertEqual(shape_decision["status"], "PROBE")
         self.assertEqual(
-            route_decision["selected_hypothesis"],
-            "H15-marker-centered-transition-state-representation",
+            shape_decision["selected_hypothesis"],
+            "H18-outline-interior-shape-role-representation",
         )
         promotion = next(
             item

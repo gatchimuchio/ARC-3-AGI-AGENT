@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-p10-development-frame-v1",
-  "frame_id": "p10-v17-selectable-route-promotion-v1",
+  "frame_id": "p10-v18-shape-push-promotion-v1",
   "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
   "authority": {
     "document": "docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md",
@@ -9,25 +9,25 @@
   },
   "self_check": {
     "branch": "main",
-    "base_head": "d1d11f41c69154336bfa2d5cc35e946c05a16984",
+    "base_head": "1a6503f5234f6b85e9610bbf513c344e8ca59b64",
     "dirty_state_preserved": true,
     "operation_mode": "OFFLINE_ONLY",
     "active_p": {
-      "P-A": "p10-p-a-symbolic-v23",
-      "P-B": "p10-p-b-parametric-v23",
-      "hybrid": "p10-hybrid-v22"
+      "P-A": "p10-p-a-symbolic-v24",
+      "P-B": "p10-p-b-parametric-v24",
+      "hybrid": "p10-hybrid-v23"
     },
     "last_promoted_p": {
-      "P-A": "p10-p-a-symbolic-v23",
-      "P-B": "p10-p-b-parametric-v23",
-      "hybrid": "p10-hybrid-v22",
+      "P-A": "p10-p-a-symbolic-v24",
+      "P-B": "p10-p-b-parametric-v24",
+      "hybrid": "p10-hybrid-v23",
       "lifecycle": "PROMOTED"
     },
     "runtime_memory_initial_state": "per-session-passive-memory-version-0",
-    "stable_completed_levels": 31,
+    "stable_completed_levels": 32,
     "retained_level_count": 183,
     "current_full_score": "UNMEASURED_NO_COMPLETE_25_GAME_183_LEVEL_REPORT",
-    "latest_failure_signature": "remaining-level-commit-model-gap",
+    "latest_failure_signature": "remaining-level-commit-model-gap-after-shape-push",
     "stop_conditions": [
       "runtime identity routing detected",
       "HDS authority bypass detected",
@@ -38,23 +38,24 @@
   },
   "X": {
     "observe": [
-      "rendered post-transition layouts on the bounded selectable structure",
-      "selectable objects, dimension-matched targets, push terrain, and marker phases",
+      "the first rendered layout after the two adopted selectable-route levels",
+      "one marker-controlled actor, filled movable shapes, and enclosing outline targets",
       "active and candidate manifest resolution",
       "same-condition target and stable regression",
       "HDS compile and promotion authority"
     ],
     "change": [
-      "isolated selectable-object target-route operator",
-      "bounded queued-action reobservation and transient-frame handling",
+      "isolated marker-actor shape-target representation",
+      "bounded actor-mediated impulse-push route search",
+      "queued-action reobservation for multi-frame push transitions",
       "P-A, P-B, and hybrid candidate bodies",
       "machine-readable P10 control artifacts"
     ],
     "evidence_use": [
       "current rendered observation",
       "bounded action-effect history",
-      "v16 post-level failure evidence",
-      "translated, pushing, released-marker, and transient-frame fixtures",
+      "v17 post-level failure evidence",
+      "translated shape-pair, ambiguous-role, bounded-search, and transient-frame fixtures",
       "same-condition active and candidate OFFLINE reports",
       "content-addressed compile and promotion evidence"
     ],
@@ -68,32 +69,32 @@
   },
   "R": {
     "hypotheses": [
-      "H14-direct-component-route-extension",
-      "H15-marker-centered-transition-state-representation",
-      "H16-bounded-push-route-reobservation-composition"
+      "H17-loosen-existing-route-detector",
+      "H18-outline-interior-shape-role-representation",
+      "H19-actor-mediated-impulse-push-composition"
     ],
     "predictions": [
-      "H14 adds route search to the v16 component detector but aliases touching same-color objects",
-      "H15 derives object identity and selection phase from dimension-matched marker-centered templates",
-      "H16 composes selection, bounded push-route search, and queued-action reobservation"
+      "H17 routes the controlled actor to its rectangular ring but leaves non-actor shape obligations unmodeled",
+      "H18 pairs rendered filled masks with translation-invariant enclosed-outline masks and separates actor and pushed roles",
+      "H19 composes free actor routing, bounded fixed-impulse pushing, goal assignment, and transient reobservation"
     ],
     "comparators": [
-      "previous active v22/v22/v21 manifest",
-      "isolated v23/v23/v22 candidate manifest",
-      "same-condition target at ninety-six actions",
+      "previous active v23/v23/v22 manifest",
+      "HDS-promoted v24/v24/v23 manifest",
+      "same-condition target at one hundred ninety-two actions",
       "prior twenty-nine stable-level regression",
       "first and second candidate runs"
     ],
-    "expected_state_transition": "thirty adopted levels -> thirty-one adopted levels",
-    "falsification_relation": "target remains at one, stable completion drops, transition-state fixtures fail, or rerun digest changes"
+    "expected_state_transition": "thirty-one adopted levels -> thirty-two adopted levels",
+    "falsification_relation": "target remains at two, stable completion drops, shape-state fixtures fail, or rerun digest changes"
   },
   "Mc": {
     "identity": "generic-double-trinity-P-update-control",
     "boundary": "local OFFLINE control plane and retained sample runtime only",
     "acceptance": [
       "at least three structural hypotheses are represented and judged",
-      "selection points, object separation, goals, and movement derive from rendered geometry",
-      "candidate target completion improves from one to two",
+      "actor, movable shapes, target masks, goals, and movement derive from rendered geometry",
+      "candidate target completion improves from two to at least three",
       "twenty-nine adopted levels do not regress",
       "same-condition candidate rerun is identical",
       "all ten P promotion gates pass",
@@ -106,14 +107,14 @@
       "unclassified failure occurs"
     ],
     "rollback": [
-      "restore previous stable v22 v22 v21 manifest",
+      "restore previous stable v23 v23 v22 manifest",
       "retain failed candidate evidence without activation"
     ],
     "completion": [
-      "direct connected-component route extension is rejected with bounded evidence",
-      "v17 marker-centered selectable route capability is HDS-promoted",
-      "adopted boundary is thirty-one of one hundred eighty-three",
-      "P10-G remains gated on the other one hundred fifty-two levels"
+      "direct detector loosening is rejected with bounded responsibility evidence",
+      "the shape-push candidate is HDS-promoted after a reproduced two-to-three target delta",
+      "the adopted boundary is thirty-two of one hundred eighty-three",
+      "P10-G remains gated on the other one hundred fifty-one levels"
     ]
   },
   "non_goals": [
@@ -141,9 +142,9 @@
     "runtime identity scan"
   ],
   "maximum_work_scope": [
-    "identity-free marker-centered object and target representation",
-    "geometry-derived bounded selection push and route planning",
-    "queued-action state validation with bounded transient reobservation",
+    "identity-free actor, filled-shape, and outline-target representation",
+    "geometry-derived bounded actor-mediated impulse-push planning",
+    "queued shape-state validation with bounded transient reobservation",
     "candidate P compile and deterministic regression",
     "HDS promotion and rollback evidence",
     "next unresolved rendered layout observation"
