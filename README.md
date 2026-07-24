@@ -25,10 +25,13 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - 判断主体 `J`: typed Frameによるstandalone G2を実装・除去監査済み
 - 記憶主体 `M`: 全15操作を持つstandalone G3を実装・除去監査済み
 - 最小三構成証明: 全8 subset中full setだけPASS、機能等価物漏れ0
-- ベンチマーク状態: **未確定**
+- HDS採用済みlevel境界: **30 / 183**
+- 全25 gameローカルオラクル: **未計測**（完全report未生成）
 - 満点・AGI完成・汎化達成の主張: **なし**
 
-旧資産には `46/183`、`97/183`、`6/183` など異なる条件・時点の数値が混在しているため、新リポジトリでは同一条件の再評価が完了するまで基準値を固定しません。
+旧資産には `46/183`、`97/183`、`6/183` など異なる条件・時点の数値が
+混在している。現行30 / 183は同条件回帰を通した能力blockの採用境界であり、
+25 game / 183 levelの完全reportが揃うまでfull score基準値は固定しない。
 
 ## 最小設計
 
@@ -206,9 +209,11 @@ python p10_main.py --all-samples --max-actions 4096 \
 
 `p10_main.py`は全選択gameが`WIN`に到達した場合だけ終了code 0を返します。
 P-A、P-B、hybridは`--instruction-variant`で同一条件比較できます。
-現在のstable full-game実証境界はFT09、LP85、TR87の`20 / 183`です。
-SU15ではさらに4 levelの進捗を観測しましたが、level 5で
-`MAX_ACTION_STOP`となるため採用境界には加えず、P10は`HOLD`です。
+現行active Pは`p10-p-a-symbolic-v22`、`p10-p-b-parametric-v22`、
+`p10-hybrid-v21`です。同条件二回のtarget比較と既存29 level回帰を経て、
+HDSが採用した再現可能なlevel境界は`30 / 183`です。ただし全25 gameを
+含む完全reportは未生成であり、ローカルオラクルscoreは未計測、
+P10全体は`HOLD`です。
 
 ## 絶対順序
 

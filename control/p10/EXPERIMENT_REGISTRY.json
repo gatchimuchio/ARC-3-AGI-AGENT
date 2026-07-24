@@ -100,6 +100,68 @@
         "full local oracle score"
       ],
       "status": "ENVIRONMENT_TIMEOUT_INCONCLUSIVE"
+    },
+    {
+      "experiment_id": "p10-visible-effect-diversification-v15",
+      "frame_id": "p10-v15-visible-effect-diversification-v1",
+      "selected_hypothesis": "H10-global-visible-effect-diversification",
+      "bounded_change": [
+        "candidate-only novelty-first prototype priority"
+      ],
+      "baseline": "known state-changing prototypes outrank globally unobserved prototypes",
+      "prediction": [
+        "action diversity increases",
+        "at least one of five bounded structures gains a completed level"
+      ],
+      "observed": [
+        "action distributions changed",
+        "all five structures remained at zero completed levels"
+      ],
+      "unchanged": [
+        "active P manifest",
+        "OFFLINE-only phase boundary",
+        "HDS promotion authority"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "benefit as a subroutine under a semantic model"
+      ],
+      "status": "REJECTED_NO_TARGET_DELTA"
+    },
+    {
+      "experiment_id": "p10-selectable-object-target-push-v16",
+      "frame_id": "p10-v16-selectable-push-promotion-v1",
+      "selected_hypothesis": "H11-selectable-object-target-push",
+      "bounded_change": [
+        "rendered structural role detector",
+        "geometry-derived two-object push plan",
+        "candidate-only P compile before HDS promotion"
+      ],
+      "baseline": "previous stable target completed zero of seven at sixty-four actions",
+      "prediction": [
+        "candidate completes at least one target level",
+        "prior twenty-nine levels remain complete",
+        "same-condition rerun is identical"
+      ],
+      "observed": [
+        "candidate completed one of seven at sixty-four actions twice",
+        "prior twenty-nine levels retained exact completion counts",
+        "target selected-field digest matched across reruns",
+        "HDS promoted candidate after all ten gates passed",
+        "post-promotion active target completed one of seven"
+      ],
+      "unchanged": [
+        "OFFLINE-only phase boundary",
+        "runtime identity-free selector contract",
+        "HDS sole promotion authority"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "remaining six levels of the target structure",
+        "complete twenty-five-game report",
+        "full local oracle score"
+      ],
+      "status": "PROMOTED"
     }
   ]
 }

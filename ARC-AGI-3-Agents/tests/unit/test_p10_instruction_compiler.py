@@ -33,6 +33,7 @@ from arc3_agi_agent.semantic_operators import (
     FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
     OBJECT_TARGET_CONTROL_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
+    SELECTABLE_PUSH_TARGET_OPERATOR,
     SYMBOLIC_REWRITE_OPERATOR,
 )
 
@@ -145,6 +146,7 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 RELATION_TOGGLE_OPERATOR,
                 FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
                 SYMBOLIC_REWRITE_OPERATOR,
+                SELECTABLE_PUSH_TARGET_OPERATOR,
             ),
         )
         self.assertEqual(parametric.operator_instructions, ())
@@ -155,6 +157,7 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 RELATION_TOGGLE_OPERATOR,
                 FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
                 SYMBOLIC_REWRITE_OPERATOR,
+                SELECTABLE_PUSH_TARGET_OPERATOR,
             ),
         )
         fruit_instruction = next(
@@ -206,9 +209,9 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 learning_result=_learning_result(),
             )
             for filename in (
-                "p10_p_a_symbolic_v20.json",
-                "p10_p_b_parametric_v20.json",
-                "p10_hybrid_v19.json",
+                "p10_p_a_symbolic_v22.json",
+                "p10_p_b_parametric_v22.json",
+                "p10_hybrid_v21.json",
                 "p10_candidate_manifest.json",
             ):
                 self.assertEqual(
@@ -253,9 +256,9 @@ class P10InstructionCompilerTests(unittest.TestCase):
         self.assertEqual(
             tuple(body.body_version for body in active),
             (
-                "p10-p-a-symbolic-v20",
-                "p10-p-b-parametric-v20",
-                "p10-hybrid-v19",
+                "p10-p-a-symbolic-v22",
+                "p10-p-b-parametric-v22",
+                "p10-hybrid-v21",
             ),
         )
         self.assertTrue(

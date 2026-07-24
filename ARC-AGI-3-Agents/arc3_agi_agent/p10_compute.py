@@ -22,9 +22,11 @@ from .schema import digest_object
 from .search_reset import SEARCH_RESET_REASON
 from .semantic_operators import SemanticPlannerState
 from .visual_explorer import (
+    GLOBAL_EFFECT_DIVERSIFICATION_POLICY,
     DeterministicVisualExplorer,
     ExplorerDecision,
     Grid,
+    PrototypePriorityMode,
     VisualAction,
     VisualScene,
     analyze_scene,
@@ -33,6 +35,20 @@ from .visual_explorer import (
 VISUAL_EXPLORER_MEMORY_FORMAT = "arc3-p10-visual-memory-v1"
 VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v13"
 VISUAL_RUNTIME_MEMORY_TARGET = "visual-runtime-state"
+
+
+def _prototype_priority_mode(
+    instruction_material: InstructionQueryResult,
+) -> PrototypePriorityMode:
+    return (
+        "novelty-first"
+        if any(
+            instruction.operator_id
+            == GLOBAL_EFFECT_DIVERSIFICATION_POLICY
+            for instruction in instruction_material.operator_instructions
+        )
+        else "legacy"
+    )
 
 
 def _latest_visual_state(
@@ -449,7 +465,10 @@ class P10VisualCompute(PureLLMCompute):
                     frontier_distance=None,
                 )
                 if terminal
-                else explorer.decide(scene)
+                else explorer.decide(
+                    scene,
+                    prototype_priority_mode=_prototype_priority_mode(query),
+                )
             )
         candidates = cast(
             tuple[CandidateIR, ...],

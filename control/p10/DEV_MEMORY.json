@@ -91,6 +91,90 @@
         "unresolved goal or actor type",
         "full sample completion not yet demonstrated"
       ]
+    },
+    {
+      "memory_id": "m-dev:p10-visible-effect-diversification-v15",
+      "lifecycle": "REJECTED",
+      "probed_hypothesis": "H10-global-visible-effect-diversification",
+      "held_hypotheses": [
+        "H8-visible-transition-model-port",
+        "H9-structural-state-representation"
+      ],
+      "failure_signatures": [
+        "state-changing-action-prototype-monopoly",
+        "semantic-commit-condition-missing"
+      ],
+      "evidence": [
+        "candidate changed action distributions on bounded diagnostics",
+        "five target structures remained at zero completed levels",
+        "active P was not changed"
+      ],
+      "remaining_falsifiers": [
+        "a semantic model may benefit from diversity as a subroutine"
+      ],
+      "resume_conditions": [
+        "only reopen with a semantic commitment model and positive target delta"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/visual_explorer.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/p10_compute.py",
+        "scratch/p10-v15-probe"
+      ],
+      "applicability": [
+        "diagnosis of prototype-selection monopoly"
+      ],
+      "non_applicability": [
+        "standalone level-solving capability",
+        "active P promotion"
+      ]
+    },
+    {
+      "memory_id": "m-dev:p10-selectable-object-target-push-v16",
+      "lifecycle": "ACTIVE",
+      "accepted_hypothesis": "H11-selectable-object-target-push",
+      "held_hypotheses": [
+        "H12-transition-delta-role-induction",
+        "H13-object-target-route-composition"
+      ],
+      "failure_signatures": [
+        "rendered-selectable-object-target-commit-gap",
+        "remaining-level-commit-model-gap"
+      ],
+      "evidence": [
+        "translated synthetic layouts derive translated click points",
+        "ambiguous structural roles reject without emission",
+        "previous stable target completed zero of seven at sixty-four actions",
+        "candidate completed one of seven at sixty-four actions twice",
+        "twenty-nine adopted levels retained exact completion counts",
+        "HDS promoted v22 v22 v21 after all ten gates passed",
+        "post-promotion active target retained one of seven"
+      ],
+      "remaining_falsifiers": [
+        "post-level layouts do not satisfy the current role detector",
+        "full twenty-five-game report does not complete",
+        "full regression fails",
+        "runtime identity scan finds prohibited routing"
+      ],
+      "resume_conditions": [
+        "record the first post-level rendered layout",
+        "compare H11 H12 and H13 on that structure",
+        "promote only another reproducible positive target delta"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/selectable_push.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_manifest.json",
+        "evidence/p10/p_update/iteration_16_regression/p10_candidate_compile_trace_v1.json",
+        "evidence/p10/p_update/iteration_16_regression/p10_promotion_receipt_v1.json",
+        "evidence/p10/p_update/iteration_16_regression/p10_active_post_promotion_ka59.json"
+      ],
+      "applicability": [
+        "paired selectable border objects with enclosing targets and barrier"
+      ],
+      "non_applicability": [
+        "ambiguous role assignment",
+        "post-transition geometry not yet modeled",
+        "full sample completion not demonstrated"
+      ]
     }
   ]
 }

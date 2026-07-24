@@ -30,6 +30,10 @@ from .fruit_merge import (
 )
 from .instruction_body import SemanticOperatorInstruction
 from .schema import digest_object, forbidden_runtime_paths
+from .selectable_push import (
+    SELECTABLE_PUSH_TARGET_OPERATOR,
+    selectable_push_target_plan,
+)
 from .symbolic_rewrite import (
     SYMBOLIC_REWRITE_OPERATOR,
     SymbolicRewriteState,
@@ -2679,6 +2683,12 @@ class SemanticPlannerState:
                 memory_influenced = (
                     rewrite_decision.memory_influenced
                 )
+            elif instruction.operator_id == SELECTABLE_PUSH_TARGET_OPERATOR:
+                plan = selectable_push_target_plan(
+                    grid,
+                    available_actions,
+                    instruction,
+                )
             else:
                 continue
             if not plan:
@@ -3245,6 +3255,7 @@ __all__ = [
     "FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR",
     "OBJECT_TARGET_CONTROL_OPERATOR",
     "RELATION_TOGGLE_OPERATOR",
+    "SELECTABLE_PUSH_TARGET_OPERATOR",
     "SYMBOLIC_REWRITE_OPERATOR",
     "SEMANTIC_PLANNER_FORMAT",
     "SemanticPlannerDecision",

@@ -364,6 +364,37 @@ class VisualExplorerP10Tests(unittest.TestCase):
             1,
         )
 
+    def test_novelty_first_policy_defers_known_transition(self) -> None:
+        known = VisualAction(
+            key="known-transition",
+            action_id=1,
+            group=0,
+        )
+        unseen = VisualAction(
+            key="unseen-action",
+            action_id=2,
+            group=0,
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.prototype_outcomes[known.prototype_key] = {
+            "TRANSITION": 3,
+        }
+
+        legacy = explorer.decide(
+            manual_scene("visual-state:legacy", (known, unseen))
+        )
+        novelty_first = explorer.decide(
+            manual_scene("visual-state:novelty", (known, unseen)),
+            prototype_priority_mode="novelty-first",
+        )
+
+        self.assertEqual(legacy.action, known)
+        self.assertEqual(novelty_first.action, unseen)
+        self.assertEqual(
+            novelty_first.reason,
+            "VISUAL_UNTESTED_CANDIDATE_NOVELTY_FIRST",
+        )
+
     def test_rejected_result_can_commit_hazard_without_pending_state(
         self,
     ) -> None:

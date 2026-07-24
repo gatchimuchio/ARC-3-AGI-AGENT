@@ -64,7 +64,10 @@ transition model、constraint stateを無効化する。
 `arc3_agi_agent/semantic_operators.py`は、rendered relation tile latticeを
 GF(2)または循環差分で解く演算子と、rendered target/controlの作用対応を
 一手再観測、transition graph、coordinate descent、permutation modelで
-学習する演算子を持つ。
+学習する演算子を持つ。`arc3_agi_agent/selectable_push.py`は、paired
+border object、enclosing target ring、intervening barrierを現在のrendered
+gridから検出し、selection pointと方向別移動回数をgeometryから導出する。
+曖昧なrole、非整列delta、必要action欠落時はplanを返さない。
 
 `arc3_agi_agent/symbolic_rewrite.py`はbordered symbol、connector、source/
 output row、selectorをrenderから検出する。fixed rewriteを直接適用し、
@@ -76,8 +79,8 @@ editable ruleは各visible nodeのcycleを観測した後、有界constraintと�
 playfieldからfruit/actor/targetを再検出する。要求対象へのroute、同rankの
 接近・merge、actor回避を一手ごとに再観測し、surface消失時はHDS経路の
 undo候補と失敗clickを受動Mへ保持する。固定route、level番号、既知座標は
-入力に取らない。現版はbounded operatorとして統合済みだが、SU15全levelの
-採用条件は満たしていない。
+入力に取らない。この能力はv14で9 / 9の同条件再現と既存20 level非回帰を
+経てactive化された。
 
 `arc3_agi_agent/recovery.py`とOFFLINE adapterは、観測済みGAME_OVERに対して
 HDSがrollback Frameを判断し、single-use capabilityを発行した場合だけ、
@@ -100,10 +103,10 @@ current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す
 ## 3. 現在の実測境界
 
 P10実行経路の関連unit、strict mypy、ruff gateは通過している。現行hybrid
-`p10-hybrid-v19`、instruction compiler
-`arc3-p10-instruction-compiler-v19`、semantic planner
+`p10-hybrid-v21`、instruction compiler
+`arc3-p10-instruction-compiler-v21`、semantic planner
 `arc3-semantic-planner-v6`、visual operator
-`arc3-p10-visual-operator-v12`、OFFLINE、seed 0のstable regression実測は
+`arc3-p10-visual-operator-v13`、OFFLINE、seed 0のstable regression実測は
 次のとおりである。
 
 | rendered mechanism | 完了 | actions | M影響cycle | recovery | reset | 終端 |
@@ -111,14 +114,17 @@ P10実行経路の関連unit、strict mypy、ruff gateは通過している。�
 | relation-toggle | 6 / 6 | 75 | 69 | 0 | 0 | `WIN` |
 | object-target control | 8 / 8 | 235 | 188 | 0 | 0 | `WIN` |
 | symbolic rewrite | 6 / 6 | 308 | 284 | 0 | 0 | `WIN` |
+| goal-aware equal-rank merge | 9 / 9 | 175 | 証拠内 | 0 | 0 | `WIN` |
+| selectable-object target push | 1 / 7 | 64 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 
-全実行でerror 0、GAME_OVER 0、max-action停止なしを確認した。さらに
-goal-aware fruit mergeは9 / 9、175 actions、reset 0で二回同一結果となり、
-三つの既存game 20 / 20を維持した。HDSは全十promotion gateを確認して
-`p10-hybrid-v19`をACTIVEへ昇格した。post-promotion active runも9 / 9、
-175 actionsだった。現時点のstable full-game採用境界は`29 / 183`で、
-残りは`154 level`である。これは四つの意味演算子blockの採用証拠であり、
-全sample攻略証拠ではない。
+最初の四blockはerror 0、GAME_OVER 0、max-action停止なしである。
+selectable-object target pushは、previous stableの0 / 7に対してcandidateが
+1 / 7を同条件で二回再現し、既存29 levelを同じactionsで維持した。HDSは
+全十promotion gateを確認して`p10-hybrid-v21`をACTIVEへ昇格した。
+post-promotion active runも1 / 7、64 actions、error 0だったが、
+`MAX_ACTION_STOP`で残り6 levelは未閉包である。現時点のHDS採用済み境界は
+`30 / 183`、残りは`153 level`。これは五つの意味演算子blockの限定証拠で、
+全sample攻略証拠またはfull local-oracle scoreではない。
 
 previous stable PでのSU15 bounded runは、4 / 9 levelを160 actionsまでに
 完了した後、level 5で`MAX_ACTION_STOP`となった。この失敗は
@@ -134,6 +140,13 @@ canonical条件`OFFLINE / hybrid ACTIVE / 450 actions per game`で全25 gameを
 部分値をfull scoreとして扱わない。次のrunはgame単位checkpointとresumeを
 備えた経路で採取し、25 game / 183 levelが一つの検証済みreportへ集約される
 までP10全体のHDS判断は`HOLD`、P11開始は禁止である。
+
+v15では、既知のstate-changing actionより未観測prototypeを優先する
+candidate policyを五つのbounded structureで比較した。action分布は変化したが
+完了levelは全て0のままだったため、semantic commit能力ではないと
+`REJECT`しactive Pへ入れていない。v16では現在rendered geometryだけから
+selectable object / target / barrier roleを閉じるoperatorをcandidate compileし、
+target 0→1、既存29 level非回帰、同条件再実行一致を確認してHDS昇格した。
 
 FT09、action budget 256、seed 0、OFFLINEの同一条件比較:
 

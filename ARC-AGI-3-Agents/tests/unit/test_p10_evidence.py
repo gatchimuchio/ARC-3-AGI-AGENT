@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import unittest
 from pathlib import Path
@@ -27,6 +28,13 @@ ACTIVE_COMPACT_EVIDENCE = {
     "lp85_hybrid_compact.json": (8, 235),
     "tr87_hybrid_compact.json": (6, 308),
 }
+ITERATION_16_EVIDENCE = (
+    REPOSITORY_ROOT
+    / "evidence"
+    / "p10"
+    / "p_update"
+    / "iteration_16_regression"
+)
 
 
 def run(variant: str, completed: int) -> dict[str, object]:
@@ -86,6 +94,62 @@ def run(variant: str, completed: int) -> dict[str, object]:
 
 
 class P10EvidenceTests(unittest.TestCase):
+    def test_iteration_16_promotion_evidence_is_content_bound(self) -> None:
+        trace = json.loads(
+            (
+                ITERATION_16_EVIDENCE
+                / "p10_candidate_compile_trace_v1.json"
+            ).read_text(encoding="utf-8")
+        )
+        claimed_trace_digest = trace.pop("content_digest")
+        self.assertEqual(
+            claimed_trace_digest,
+            "p10-p-update-workflow:" + digest_object(trace),
+        )
+        runtime = trace["candidate_runtime_regression"]
+        self.assertEqual(runtime["stable_active_value"], 29)
+        self.assertEqual(runtime["stable_candidate_value"], 29)
+        self.assertEqual(runtime["baseline_target_value"], 0.0)
+        self.assertEqual(runtime["candidate_target_value"], 1.0)
+        self.assertTrue(runtime["stable_non_regression"])
+        self.assertTrue(runtime["target_improved"])
+        self.assertTrue(runtime["reproducible"])
+        self.assertEqual(trace["promotion_failures"], [])
+
+        receipt = json.loads(
+            (
+                ITERATION_16_EVIDENCE
+                / "p10_promotion_receipt_v1.json"
+            ).read_text(encoding="utf-8")
+        )
+        claimed_receipt_digest = receipt.pop("content_digest")
+        self.assertEqual(
+            claimed_receipt_digest,
+            "p10-promotion-evidence:" + digest_object(receipt),
+        )
+        self.assertEqual(receipt["hds_decision"]["status"], "PROMOTE")
+        self.assertTrue(receipt["hds_decision"]["allow_p_promote"])
+        self.assertEqual(receipt["promotion_failures"], [])
+        self.assertEqual(
+            receipt["after_active_manifest_digest"],
+            "4e19e461a7f0d65573782be5e2bddc873ba62d5bfe76ef2f1e42293ac2dd32cc",
+        )
+
+        active_path = (
+            ITERATION_16_EVIDENCE
+            / "p10_active_post_promotion_ka59.json"
+        )
+        self.assertEqual(
+            hashlib.sha256(active_path.read_bytes()).hexdigest(),
+            "a5028b3aef42edcaf92720430075087dbd64c79c483c8a896c4ee7de0eab3325",
+        )
+        active = json.loads(active_path.read_text(encoding="utf-8"))
+        self.assertEqual(active["operation_mode"], "offline")
+        self.assertEqual(active["completed_levels"], 1)
+        self.assertEqual(active["total_levels"], 7)
+        self.assertEqual(active["error_count"], 0)
+        self.assertFalse(active["all_complete"])
+
     def test_checked_in_ft09_evidence_is_content_bound(self) -> None:
         evidence = json.loads(FT09_EVIDENCE.read_text(encoding="utf-8"))
         claimed_digest = evidence.pop("content_digest")

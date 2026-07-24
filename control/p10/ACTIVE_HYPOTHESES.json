@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-correction-p-lifecycle-separation-v1",
+  "frame_id": "p10-v16-selectable-push-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -190,6 +190,169 @@
       "regression_risk": 0.2,
       "status": "PROMOTED",
       "j_dev_decision": "PROBE_THEN_PROMOTE"
+    },
+    {
+      "hypothesis_id": "H8-visible-transition-model-port",
+      "kind": "H1",
+      "summary": "Port a complete visible transition model before adding a new semantic commitment operator.",
+      "predicted_effect": [
+        "more action effects become predictable",
+        "commit conditions remain unresolved"
+      ],
+      "applicability": [
+        "state-changing structures without semantic closure"
+      ],
+      "required_evidence": [
+        "bounded transition coverage comparison"
+      ],
+      "falsifier": [
+        "transition coverage alone completes a target level"
+      ],
+      "implementation_cost": 4,
+      "rollback_cost": 2,
+      "generality": 0.8,
+      "information_gain": 0.55,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.35,
+      "status": "HOLD",
+      "j_dev_decision": "HOLD"
+    },
+    {
+      "hypothesis_id": "H9-structural-state-representation",
+      "kind": "H2",
+      "summary": "Replace raw visual signatures with explicit structural role and phase representations.",
+      "predicted_effect": [
+        "equivalent rendered states share evidence",
+        "new role induction is required before action selection changes"
+      ],
+      "applicability": [
+        "repeated state changes with unresolved roles"
+      ],
+      "required_evidence": [
+        "cross-layout representation equivalence"
+      ],
+      "falsifier": [
+        "raw signatures already preserve every required role"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 2,
+      "generality": 0.9,
+      "information_gain": 0.7,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.3,
+      "status": "HOLD",
+      "j_dev_decision": "HOLD"
+    },
+    {
+      "hypothesis_id": "H10-global-visible-effect-diversification",
+      "kind": "H3",
+      "summary": "Reorder existing explorer prototypes so verified progress is followed by globally unobserved action effects.",
+      "predicted_effect": [
+        "known changing actions stop monopolizing selection",
+        "at least one bounded diagnostic gains level progress"
+      ],
+      "applicability": [
+        "state-changing exploration with unobserved action prototypes"
+      ],
+      "required_evidence": [
+        "same-condition action-distribution delta",
+        "positive completed-level delta"
+      ],
+      "falsifier": [
+        "action diversity changes without any completed-level delta"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.85,
+      "information_gain": 0.9,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "REJECTED",
+      "j_dev_decision": "PROBE_THEN_REJECT"
+    },
+    {
+      "hypothesis_id": "H11-selectable-object-target-push",
+      "kind": "H1",
+      "summary": "Add a rendered relation operator that identifies selectable objects, enclosing targets, and an intervening barrier.",
+      "predicted_effect": [
+        "selection points and displacement counts derive from geometry",
+        "the bounded target advances from zero to one completed level"
+      ],
+      "applicability": [
+        "paired border objects with paired enclosing targets and barrier"
+      ],
+      "required_evidence": [
+        "translated synthetic layouts",
+        "same-condition target improvement",
+        "stable non-regression",
+        "identical rerun"
+      ],
+      "falsifier": [
+        "role assignment is ambiguous",
+        "target remains at zero",
+        "stable completion decreases",
+        "rerun digest changes"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.85,
+      "information_gain": 0.95,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "PROMOTED",
+      "j_dev_decision": "PROBE_THEN_PROMOTE"
+    },
+    {
+      "hypothesis_id": "H12-transition-delta-role-induction",
+      "kind": "H2",
+      "summary": "Infer movable, selectable, target, and barrier roles from observed transition deltas.",
+      "predicted_effect": [
+        "post-level layouts can update role assignments",
+        "additional probe transitions are required"
+      ],
+      "applicability": [
+        "rendered role layouts that change after progress"
+      ],
+      "required_evidence": [
+        "role-consistent transition-delta traces"
+      ],
+      "falsifier": [
+        "transition deltas do not disambiguate roles"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 2,
+      "generality": 0.9,
+      "information_gain": 0.85,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "HOLD",
+      "j_dev_decision": "HOLD"
+    },
+    {
+      "hypothesis_id": "H13-object-target-route-composition",
+      "kind": "H3",
+      "summary": "Compose existing object-target control and route planning after the selectable relation is detected.",
+      "predicted_effect": [
+        "existing transition learning handles altered target layouts",
+        "selection semantics may remain underdetermined"
+      ],
+      "applicability": [
+        "selectable rendered objects with learned movement"
+      ],
+      "required_evidence": [
+        "candidate composition target comparison"
+      ],
+      "falsifier": [
+        "existing operators cannot preserve selection state"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.8,
+      "information_gain": 0.75,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "HOLD",
+      "j_dev_decision": "HOLD"
     }
   ]
 }

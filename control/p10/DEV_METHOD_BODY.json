@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-method-body-v1",
-  "active_version": "p-dev-v2",
+  "active_version": "p-dev-v3",
   "active_methods": [
     {
       "method_id": "authority-first-bounded-work-block",
@@ -32,6 +32,24 @@
       "promotion_evidence": [
         "P lifecycle isolation work block",
         "terminal actor protection work block"
+      ]
+    },
+    {
+      "method_id": "positive-target-delta-before-expensive-regression",
+      "status": "ACTIVE",
+      "method": [
+        "run the smallest same-condition target comparison first",
+        "reject candidate capability when completed-level delta is zero",
+        "run stable and holdout regressions only after a positive target delta",
+        "require an identical target rerun before HDS promotion"
+      ],
+      "applicability": [
+        "identity-free P10 semantic capability candidates"
+      ],
+      "falsifier": "the ordering hides a stable regression or admits a non-reproducible target improvement",
+      "promotion_evidence": [
+        "terminal actor protection work block",
+        "selectable object target push work block"
       ]
     }
   ],

@@ -4,52 +4,54 @@
   "candidate_manifest": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_candidate_manifest.json",
   "active": {
     "P-A": {
-      "version": "p10-p-a-symbolic-v20",
-      "content_digest": "sha256-decimal:097014787464487548760401532365093780398542921074148160879190377199035539169260",
+      "version": "p10-p-a-symbolic-v22",
+      "content_digest": "sha256-decimal:034398939480026463233475834873970566092565582454663665338759701300195543738929",
       "status": "ACTIVE"
     },
     "P-B": {
-      "version": "p10-p-b-parametric-v20",
-      "content_digest": "sha256-decimal:080125341922255942290504600854984072176052126758625537776617036752222986165404",
-      "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+      "version": "p10-p-b-parametric-v22",
+      "content_digest": "sha256-decimal:061381428001488778353580912444800779188429866050441727662438051954619838309207",
+      "parameter_digest": "parameter-matrix:0759278394211433978284441602105975724997",
       "status": "ACTIVE"
     },
     "hybrid": {
-      "version": "p10-hybrid-v19",
-      "content_digest": "sha256-decimal:029932839304152453399499123316189232302523840921062494333360852553528982847439",
-      "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+      "version": "p10-hybrid-v21",
+      "content_digest": "sha256-decimal:066994342051977983986672939065096673670655525568042520759415532824484458883934",
+      "parameter_digest": "parameter-matrix:0759278394211433978284441602105975724997",
       "status": "ACTIVE"
     }
   },
   "previous_stable": {
-    "manifest_digest": "b40c07e40ad55b03f00ce1f907f3a7e61775ee486bc6127bcc0ff50f71af36aa",
-    "P-A": "p10-p-a-symbolic-v8",
-    "P-B": "p10-p-b-parametric-v8",
-    "hybrid": "p10-hybrid-v7",
-    "parameter_digest": "parameter-matrix:0342609741021629848543099958341045481926",
+    "manifest_digest": "61489a22883c97d44a55852d5a920829dc3f1f9388f3108df94aae532218040a",
+    "P-A": "p10-p-a-symbolic-v20",
+    "P-B": "p10-p-b-parametric-v20",
+    "hybrid": "p10-hybrid-v19",
+    "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
     "status": "PREVIOUS_STABLE"
   },
   "candidate": {
     "P-A": {
-      "version": "p10-p-a-symbolic-v20",
-      "content_digest": "sha256-decimal:097014787464487548760401532365093780398542921074148160879190377199035539169260",
+      "version": "p10-p-a-symbolic-v22",
+      "content_digest": "sha256-decimal:034398939480026463233475834873970566092565582454663665338759701300195543738929",
       "status": "PROMOTED"
     },
     "P-B": {
-      "version": "p10-p-b-parametric-v20",
-      "content_digest": "sha256-decimal:080125341922255942290504600854984072176052126758625537776617036752222986165404",
-      "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+      "version": "p10-p-b-parametric-v22",
+      "content_digest": "sha256-decimal:061381428001488778353580912444800779188429866050441727662438051954619838309207",
+      "parameter_digest": "parameter-matrix:0759278394211433978284441602105975724997",
       "status": "PROMOTED"
     },
     "hybrid": {
-      "version": "p10-hybrid-v19",
-      "content_digest": "sha256-decimal:029932839304152453399499123316189232302523840921062494333360852553528982847439",
-      "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+      "version": "p10-hybrid-v21",
+      "content_digest": "sha256-decimal:066994342051977983986672939065096673670655525568042520759415532824484458883934",
+      "parameter_digest": "parameter-matrix:0759278394211433978284441602105975724997",
       "status": "PROMOTED"
     }
   },
   "hds_decision": "PROMOTE",
-  "hds_decision_digest": "9fc1be17b2f77d5caf9e50dacb249d9f66b244ee21102283492c0ef72d95d0b9",
-  "promotion_receipt_digest": "76c675c6b89f3e1d80e0dc96bd94549732935c5e85275028cb3d1310cfbf1a19",
-  "next_required_transition": "resumable-full-sample-audit"
+  "hds_decision_digest": "e8223fe9369a27858bbcfdb0fcfece0c67a4dfb3b5d8300139abe45bb0620dd0",
+  "promotion_receipt_digest": "09dc1236f58cef3f28c3adb54a74b52c0cd6433dfd51fe6ca8a28800e7714437",
+  "next_required_transition": "generalize-selectable-push-to-reobserved-post-level-layouts",
+  "active_manifest_digest": "4e19e461a7f0d65573782be5e2bddc873ba62d5bfe76ef2f1e42293ac2dd32cc",
+  "candidate_manifest_digest": "a5270e20a6daf7a04566afc139f22d019fcffd41c490cc152763fa8ee2c2b373"
 }

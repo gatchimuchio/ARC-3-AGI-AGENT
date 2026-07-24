@@ -75,6 +75,64 @@
         "partial-run-not-score-authority"
       ],
       "maximum_information_gain_next": "checkpointed-resumable-per-game-audit"
+    },
+    {
+      "decision_id": "j-dev:p10-visible-effect-diversification-probe-v15",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H10-global-visible-effect-diversification",
+      "reason_codes": [
+        "smallest-reversible-causal-probe",
+        "highest-action-distribution-information-gain",
+        "candidate-policy-remains-P-gated"
+      ],
+      "held": [
+        "H8-visible-transition-model-port",
+        "H9-structural-state-representation"
+      ],
+      "maximum_information_gain_next": "same-condition-completed-level-delta-across-bounded-structures"
+    },
+    {
+      "decision_id": "j-dev:p10-visible-effect-diversification-reject-v15",
+      "authority": "development-hds-only",
+      "status": "REJECT",
+      "selected_hypothesis": "H10-global-visible-effect-diversification",
+      "reason_codes": [
+        "action-distribution-changed",
+        "five-bounded-structures-remained-at-zero",
+        "semantic-commit-condition-still-missing"
+      ],
+      "maximum_information_gain_next": "rendered-structural-role-and-target-commit-operator"
+    },
+    {
+      "decision_id": "j-dev:p10-selectable-object-target-push-v16",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H11-selectable-object-target-push",
+      "reason_codes": [
+        "current-rendered-roles-are-structurally-distinct",
+        "geometry-derived-and-identity-free",
+        "smallest-reversible-positive-delta-test"
+      ],
+      "held": [
+        "H12-transition-delta-role-induction",
+        "H13-object-target-route-composition"
+      ],
+      "maximum_information_gain_next": "same-condition-target-delta-before-stable-regression"
+    },
+    {
+      "decision_id": "p-update-decision:e8223fe9369a27858bbcfdb0",
+      "authority": "hds-p-update-only",
+      "status": "PROMOTE",
+      "allow_p_compile": false,
+      "allow_p_promote": true,
+      "allow_p_rollback": false,
+      "decision_digest": "e8223fe9369a27858bbcfdb0fcfece0c67a4dfb3b5d8300139abe45bb0620dd0",
+      "reason_codes": [
+        "all-ten-promotion-gates-pass",
+        "stable-twenty-nine-level-regression-pass",
+        "target-zero-to-one-level-improvement-reproduced"
+      ]
     }
   ]
 }

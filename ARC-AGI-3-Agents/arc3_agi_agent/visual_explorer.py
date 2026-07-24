@@ -20,10 +20,14 @@ from .schema import digest_object, forbidden_runtime_paths
 Grid = tuple[tuple[int, ...], ...]
 Point = tuple[int, int]
 Outcome = Literal["NO_CHANGE", "TRANSITION", "HAZARD"]
+PrototypePriorityMode = Literal["legacy", "novelty-first"]
 
 _OFFSETS4: tuple[Point, ...] = ((-1, 0), (1, 0), (0, -1), (0, 1))
 _NEUTRAL_COLORS = frozenset({0, 1, 2, 3, 4, 5})
 _MASK_VALUE = 0
+GLOBAL_EFFECT_DIVERSIFICATION_POLICY = (
+    "global-visible-effect-diversification-v1"
+)
 
 
 def _payload_int(value: object, field_name: str) -> int:
@@ -539,7 +543,12 @@ class DeterministicVisualExplorer:
                 self.progress_prototypes.get(action.prototype_key, 0) + 1
             )
 
-    def _prototype_priority(self, action: VisualAction) -> tuple[int, int]:
+    def _prototype_priority(
+        self,
+        action: VisualAction,
+        *,
+        mode: PrototypePriorityMode,
+    ) -> tuple[int, int]:
         prototype = action.prototype_key
         progress_count = self.progress_prototypes.get(prototype, 0)
         counts = self.prototype_outcomes.get(prototype, {})
@@ -547,19 +556,35 @@ class DeterministicVisualExplorer:
         total = sum(counts.values())
         if progress_count:
             return (0, -progress_count)
+        if mode == "novelty-first":
+            if not total:
+                return (1, 0)
+            if transition_count:
+                return (2, total)
+            if counts.get("NO_CHANGE", 0):
+                return (3, total)
+            return (4, total)
         if transition_count:
             return (1, -transition_count)
         if not total:
             return (2, 0)
         return (3, total)
 
-    def _ordered_untested(self, node: _Node) -> tuple[VisualAction, ...]:
+    def _ordered_untested(
+        self,
+        node: _Node,
+        *,
+        prototype_priority_mode: PrototypePriorityMode,
+    ) -> tuple[VisualAction, ...]:
         order_index = {key: index for index, key in enumerate(node.order)}
         return tuple(
             sorted(
                 node.untested(),
                 key=lambda action: (
-                    *self._prototype_priority(action),
+                    *self._prototype_priority(
+                        action,
+                        mode=prototype_priority_mode,
+                    ),
                     order_index[action.key],
                 ),
             )
@@ -743,9 +768,14 @@ class DeterministicVisualExplorer:
     def _frontier_action(
         self,
         signature: str,
+        *,
+        prototype_priority_mode: PrototypePriorityMode,
     ) -> tuple[VisualAction | None, int | None]:
         node = self.nodes[signature]
-        untested = self._ordered_untested(node)
+        untested = self._ordered_untested(
+            node,
+            prototype_priority_mode=prototype_priority_mode,
+        )
         if untested:
             return untested[0], 0
 
@@ -755,7 +785,10 @@ class DeterministicVisualExplorer:
         while queue:
             current, distance = queue.popleft()
             current_node = self.nodes[current]
-            if distance > 0 and self._ordered_untested(current_node):
+            if distance > 0 and self._ordered_untested(
+                current_node,
+                prototype_priority_mode=prototype_priority_mode,
+            ):
                 return first_action[current], distance
             for key in current_node.order:
                 if current_node.outcomes.get(key) != "TRANSITION":
@@ -776,7 +809,12 @@ class DeterministicVisualExplorer:
                 queue.append((target, distance + 1))
         return None, None
 
-    def reset_frontier_available(self, current_signature: str) -> bool:
+    def reset_frontier_available(
+        self,
+        current_signature: str,
+        *,
+        prototype_priority_mode: PrototypePriorityMode = "legacy",
+    ) -> bool:
         """Return whether RESET can expose a disconnected untested frontier."""
 
         if (
@@ -785,15 +823,28 @@ class DeterministicVisualExplorer:
             or current_signature == self.initial_signature
         ):
             return False
-        action, _distance = self._frontier_action(self.initial_signature)
+        action, _distance = self._frontier_action(
+            self.initial_signature,
+            prototype_priority_mode=prototype_priority_mode,
+        )
         return action is not None
 
-    def decide(self, scene: VisualScene) -> ExplorerDecision:
+    def decide(
+        self,
+        scene: VisualScene,
+        *,
+        prototype_priority_mode: PrototypePriorityMode = "legacy",
+    ) -> ExplorerDecision:
         """Choose one candidate; prior observations change future selection."""
 
+        if prototype_priority_mode not in {"legacy", "novelty-first"}:
+            raise ValueError("visual explorer prototype priority mode invalid")
         node = self._ensure_node(scene)
         del node
-        action, distance = self._frontier_action(scene.signature)
+        action, distance = self._frontier_action(
+            scene.signature,
+            prototype_priority_mode=prototype_priority_mode,
+        )
         memory_influenced = bool(
             self.transition_count
             or self.failure_count
@@ -802,7 +853,10 @@ class DeterministicVisualExplorer:
         if memory_influenced:
             self.memory_read_count += 1
         if action is None:
-            reset_frontier = self.reset_frontier_available(scene.signature)
+            reset_frontier = self.reset_frontier_available(
+                scene.signature,
+                prototype_priority_mode=prototype_priority_mode,
+            )
             return ExplorerDecision(
                 action=None,
                 reason=(
@@ -818,7 +872,11 @@ class DeterministicVisualExplorer:
         return ExplorerDecision(
             action=action,
             reason=(
-                "VISUAL_UNTESTED_CANDIDATE"
+                (
+                    "VISUAL_UNTESTED_CANDIDATE_NOVELTY_FIRST"
+                    if prototype_priority_mode == "novelty-first"
+                    else "VISUAL_UNTESTED_CANDIDATE"
+                )
                 if distance == 0
                 else "VISUAL_TRANSITION_GRAPH_ROUTE"
             ),
@@ -1101,8 +1159,10 @@ __all__ = [
     "DeterministicVisualExplorer",
     "ExplorerDecision",
     "Grid",
+    "GLOBAL_EFFECT_DIVERSIFICATION_POLICY",
     "Outcome",
     "Point",
+    "PrototypePriorityMode",
     "VisualAction",
     "VisualComponent",
     "VisualScene",

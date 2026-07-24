@@ -28,15 +28,17 @@ from .semantic_operators import (
     FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
     OBJECT_TARGET_CONTROL_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
+    SELECTABLE_PUSH_TARGET_OPERATOR,
     SYMBOLIC_REWRITE_OPERATOR,
 )
+from .visual_explorer import GLOBAL_EFFECT_DIVERSIFICATION_POLICY
 
-P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v19"
+P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v21"
 P10_COMPILER_SEED = 0
-P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v20"
-P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v20"
-P10_HYBRID_VERSION = "p10-hybrid-v19"
-P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v19"
+P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v22"
+P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v22"
+P10_HYBRID_VERSION = "p10-hybrid-v21"
+P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v21"
 P10_CANDIDATE_MANIFEST_FILENAME = "p10_candidate_manifest.json"
 
 
@@ -364,6 +366,89 @@ def fruit_merge_instruction_mapping() -> dict[str, object]:
     }
 
 
+def global_effect_diversification_instruction_mapping() -> dict[str, object]:
+    """Return P material that favors unobserved action-effect prototypes."""
+
+    return {
+        "operator_id": GLOBAL_EFFECT_DIVERSIFICATION_POLICY,
+        "action_id": 1,
+        "detector": (
+            "rendered state changes while one action prototype repeats "
+            "and other available prototypes remain unobserved"
+        ),
+        "transform": (
+            "rank verified progress first, then unobserved prototypes, "
+            "then least-observed visible transitions"
+        ),
+        "parameters": {
+            "priority_mode": "novelty-first",
+            "progress_priority": 0,
+            "unobserved_priority": 1,
+            "transition_priority": 2,
+            "no_change_priority": 3,
+            "hazard_priority": 4,
+        },
+        "preconditions": [
+            "ACTION1_AVAILABLE",
+            "RENDERED_TRANSITION_HISTORY_AVAILABLE",
+        ],
+        "falsification_conditions": [
+            "known transition remains ahead of an unobserved prototype",
+            "verified progress prototype loses first priority",
+            "stable semantic operator behavior changes",
+        ],
+        "provenance": [
+            "compiled-identity-free-visible-effect-evidence",
+            "compiled-candidate-surface-stagnation-evidence",
+        ],
+    }
+
+
+def selectable_push_target_instruction_mapping() -> dict[str, object]:
+    """Return P material for a rendered selectable-object target relation."""
+
+    return {
+        "operator_id": SELECTABLE_PUSH_TARGET_OPERATOR,
+        "action_id": 6,
+        "detector": (
+            "paired rendered border objects, enclosing target rings, "
+            "and an intervening rectangular barrier"
+        ),
+        "transform": (
+            "derive selection points and directional displacement counts "
+            "from current geometry"
+        ),
+        "parameters": {
+            "click_action": 6,
+            "up_action": 1,
+            "down_action": 2,
+            "left_action": 3,
+            "right_action": 4,
+            "required_pair_count": 2,
+            "target_inset": 1,
+            "minimum_block_side": 2,
+            "maximum_block_side": 8,
+            "minimum_barrier_area_ratio": 4,
+        },
+        "preconditions": [
+            "DIRECTIONAL_AND_ACTION6_AVAILABLE",
+            "RENDERED_SELECTABLE_BORDER_OBJECT_PAIR",
+            "RENDERED_ENCLOSING_TARGET_PAIR",
+            "RENDERED_INTERVENING_BARRIER",
+        ],
+        "falsification_conditions": [
+            "structural role assignment is ambiguous",
+            "derived displacement is not aligned to object scale",
+            "planned selection or movement does not change the rendered state",
+            "level progress does not follow the complete relation plan",
+        ],
+        "provenance": [
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-target-contact-evidence",
+        ],
+    }
+
+
 def _upgrade(
     base: dict[str, Any],
     *,
@@ -547,10 +632,11 @@ def compile_p10_instruction_bodies(
         object_target_control_instruction_mapping(),
         symbolic_rewrite_instruction_mapping(),
         fruit_merge_instruction_mapping(),
+        selectable_push_target_instruction_mapping(),
     ]
     bundles = {
         "P-A": (
-            "p10_p_a_symbolic_v20.json",
+            "p10_p_a_symbolic_v22.json",
             _upgrade(
                 base_symbolic,
                 body_version=P10_SYMBOLIC_VERSION,
@@ -562,7 +648,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "P-B": (
-            "p10_p_b_parametric_v20.json",
+            "p10_p_b_parametric_v22.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_PARAMETRIC_VERSION,
@@ -575,7 +661,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "hybrid": (
-            "p10_hybrid_v19.json",
+            "p10_hybrid_v21.json",
             _upgrade(
                 base_hybrid,
                 body_version=P10_HYBRID_VERSION,
@@ -659,8 +745,10 @@ __all__ = [
     "active_p10_manifest_digest",
     "compile_p10_instruction_bodies",
     "fruit_merge_instruction_mapping",
+    "global_effect_diversification_instruction_mapping",
     "main",
     "object_target_control_instruction_mapping",
     "relation_toggle_instruction_mapping",
+    "selectable_push_target_instruction_mapping",
     "symbolic_rewrite_instruction_mapping",
 ]

@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-correction-p-lifecycle-separation-v1",
+  "frame_id": "p10-v16-selectable-push-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -48,6 +48,16 @@
         "does-not-cover-four-frame-chase"
       ],
       "reopen_condition": "a failure is caused by visible ring collision without actor chase"
+    },
+    {
+      "hypothesis_id": "H10-global-visible-effect-diversification",
+      "status": "REJECTED",
+      "reason_codes": [
+        "action-distribution-changed",
+        "zero-completed-level-delta-across-five-structures",
+        "does-not-supply-semantic-commit-condition"
+      ],
+      "reopen_condition": "a new semantic model can use prototype diversity as a bounded subroutine with a positive target delta"
     }
   ]
 }
