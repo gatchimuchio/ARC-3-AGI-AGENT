@@ -80,6 +80,31 @@ P9最小三構成証拠は
 [`../docs/architecture/P9_MINIMUM_THREE_CERTIFICATE.md`](../docs/architecture/P9_MINIMUM_THREE_CERTIFICATE.md)
 と[`../certificates/p9`](../certificates/p9)を参照してください。
 
+## P10ローカルスコアオラクル
+
+P10の全25 game OFFLINE reportは、旧RHAEローカルオラクルから独立移植した
+後処理CLIで採点できます。エージェント実行と採点を分離し、採点時に環境、
+agent、外部APIは実行しません。
+
+```bash
+python p10_main.py \
+  --all-samples \
+  --max-actions 450 \
+  --instruction-variant hybrid \
+  --report ../evidence/p10/p10_all_samples_current.json
+
+python -m arc3_agi_agent.local_score_oracle \
+  --sample-zip /path/to/arc-prize-2026-arc-agi-3.zip \
+  --p10-report ../evidence/p10/p10_all_samples_current.json \
+  --output ../evidence/p10/arc3_local_score_oracle_latest.json \
+  --markdown ../evidence/p10/arc3_local_score_oracle_latest.md
+```
+
+未完了gameがある場合、`p10_main.py`はreportを書いた後に終了code 1を返します。
+オラクルは25 game / 183 levelが揃ったreportだけを受理し、完了levelの
+`level_actions`欠落、sample不一致、非OFFLINE reportを拒否します。RHAE scoreは
+回帰指標であり、汎化証明またはP10完了証明ではありません。
+
 ## 検証
 
 ```bash

@@ -1,0 +1,68 @@
+{
+  "schema_version": "arc3-p10-capability-registry-v1",
+  "stable_completed_levels": 29,
+  "retained_level_count": 183,
+  "capabilities": [
+    {
+      "capability_id": "rendered-relation-toggle",
+      "status": "STABLE",
+      "active_p_versions": [
+        "p10-p-a-symbolic-v20",
+        "p10-hybrid-v19"
+      ],
+      "applicable_structure": "visible relation lattice with bounded action effect",
+      "non_applicable_structure": "unresolved non-lattice relation",
+      "removal_witness": "removing the semantic operator eliminates deterministic closure",
+      "regression_target": "six retained completions"
+    },
+    {
+      "capability_id": "rendered-object-target-control",
+      "status": "STABLE",
+      "active_p_versions": [
+        "p10-p-a-symbolic-v20",
+        "p10-hybrid-v19"
+      ],
+      "applicable_structure": "visible compact controls and target relations",
+      "non_applicable_structure": "underdetermined control effect",
+      "removal_witness": "removing model-guided control eliminates deterministic closure",
+      "regression_target": "eight retained completions"
+    },
+    {
+      "capability_id": "visible-symbolic-rewrite",
+      "status": "STABLE",
+      "active_p_versions": [
+        "p10-p-a-symbolic-v20",
+        "p10-hybrid-v19"
+      ],
+      "applicable_structure": "visible example-driven bounded rewrite",
+      "non_applicable_structure": "unobserved rewrite relation",
+      "removal_witness": "removing rewrite constraints eliminates deterministic closure",
+      "regression_target": "six retained completions"
+    },
+    {
+      "capability_id": "goal-aware-equal-rank-merge",
+      "status": "STABLE",
+      "active_p_versions": [
+        "p10-p-a-symbolic-v20",
+        "p10-hybrid-v19"
+      ],
+      "applicable_structure": "visible equal-rank merge and target placement",
+      "non_applicable_structure": "rendered goal or actor type is unresolved",
+      "removal_witness": "removing terminal actor protection returns the target regression to seven of nine",
+      "regression_target": "nine retained completions plus all prior stable capability evidence"
+    },
+    {
+      "capability_id": "hds-controlled-p-lifecycle",
+      "status": "STABLE",
+      "active_p_versions": [
+        "p10-p-a-symbolic-v20",
+        "p10-p-b-parametric-v20",
+        "p10-hybrid-v19"
+      ],
+      "applicable_structure": "all versioned symbolic parametric and hybrid P updates",
+      "non_applicable_structure": "none established",
+      "removal_witness": "without the control layer no owner-bound compile promotion or rollback exists",
+      "regression_target": "authority negative tests, deterministic rebuild, stable runtime regression, and promotion receipt"
+    }
+  ]
+}

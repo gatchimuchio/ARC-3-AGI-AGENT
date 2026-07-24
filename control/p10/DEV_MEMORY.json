@@ -1,0 +1,96 @@
+{
+  "schema_version": "arc3-development-memory-v1",
+  "bounded_entry_limit": 64,
+  "entries": [
+    {
+      "memory_id": "m-dev:p10-p-lifecycle-isolation-v1",
+      "lifecycle": "SUPERSEDED",
+      "accepted_hypothesis": "H3-isolated-P-update-composition",
+      "rejected_hypotheses": [
+        "H1-direct-existing-HDS-extension",
+        "H2-record-only-representation"
+      ],
+      "failure_signatures": [
+        "active-candidate-manifest-alias",
+        "p-b-version-only-update",
+        "compiler-authority-bypass"
+      ],
+      "evidence": [
+        "active and candidate manifests are now disjoint",
+        "focused tests passed 14 of 14",
+        "mypy passed for the new control modules",
+        "ruff passed for the new control modules"
+      ],
+      "remaining_falsifiers": [
+        "full regression fails",
+        "low-level compiler bypass remains callable",
+        "P-B retraining does not change same-input C output",
+        "candidate target comparison does not improve"
+      ],
+      "resume_conditions": [
+        "bind the compiler to an HDS compile directive",
+        "build a P-B dataset from HDS-approved runtime memory",
+        "run deterministic baseline candidate and holdout comparison"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/development_trinity.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_update.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_manifest.json",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_candidate_manifest.json"
+      ],
+      "applicability": [
+        "versioned P updates with explicit HDS ownership"
+      ],
+      "non_applicability": [
+        "sample capability improvement not yet demonstrated"
+      ]
+    },
+    {
+      "memory_id": "m-dev:p10-terminal-actor-protection-v14",
+      "lifecycle": "ACTIVE",
+      "accepted_hypothesis": "H7-terminal-actor-protection",
+      "rejected_hypotheses": [
+        "H4-terminal-actor-anchor-observation",
+        "H5-farthest-safe-target-assignment",
+        "H6-ring-safe-route-step"
+      ],
+      "failure_signatures": [
+        "candidate-surface-stagnation-after-partial-progress",
+        "four-frame-unselected-actor-chase",
+        "all-samples-wall-clock-timeout-without-checkpoint"
+      ],
+      "evidence": [
+        "target candidate completed nine of nine in 175 actions",
+        "same-condition target rerun selected-field digest matched",
+        "stable candidate completed twenty of twenty with unchanged action counts",
+        "P-B parameter and same-input output digests changed",
+        "HDS promotion receipt activated hybrid v19",
+        "post-promotion active target completed nine of nine in 175 actions"
+      ],
+      "remaining_falsifiers": [
+        "full twenty-five-game report does not complete",
+        "full regression fails",
+        "runtime identity scan finds task routing",
+        "removal audit cannot attribute target closure"
+      ],
+      "resume_conditions": [
+        "collect checkpointed per-game reports",
+        "classify remaining structural failures",
+        "rerun complete all-sample condition before P11"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/fruit_merge.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_manifest.json",
+        "evidence/p10/p_update/iteration_14_regression/p10_candidate_compile_trace_v1.json",
+        "evidence/p10/p_update/iteration_14_regression/p10_promotion_receipt_v1.json"
+      ],
+      "applicability": [
+        "rendered equal-rank merge environments with explicit terminal actor goal"
+      ],
+      "non_applicability": [
+        "unresolved goal or actor type",
+        "full sample completion not yet demonstrated"
+      ]
+    }
+  ]
+}

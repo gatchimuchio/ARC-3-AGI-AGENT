@@ -1,0 +1,105 @@
+{
+  "schema_version": "arc3-p10-development-experiment-registry-v1",
+  "experiments": [
+    {
+      "experiment_id": "p10-p-lifecycle-isolation-probe-v1",
+      "frame_id": "p10-correction-p-lifecycle-separation-v1",
+      "selected_hypothesis": "H3-isolated-P-update-composition",
+      "bounded_change": [
+        "development Trinity data contracts",
+        "runtime P lifecycle data contracts",
+        "manifest-aware active and candidate loaders",
+        "candidate manifest isolation"
+      ],
+      "baseline": "standard loaders resolved the unpromoted v7 v7 v6 bundles",
+      "prediction": [
+        "standard loaders resolve only v6 v6 v5",
+        "unowned compile grant is rejected",
+        "failed promotion gate is rejected",
+        "rollback restores previous stable bundle"
+      ],
+      "observed": [
+        "standard loaders resolve only v6 v6 v5",
+        "unowned compile grant is rejected",
+        "failed promotion gate is rejected",
+        "rollback restores previous stable bundle",
+        "focused tests passed 14 of 14"
+      ],
+      "unchanged": [
+        "stable active bundle bytes",
+        "OFFLINE-only phase boundary",
+        "existing runtime judgment and memory subjects"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "full unit and integration regression",
+        "true P-B training",
+        "full sample score",
+        "candidate target completion"
+      ],
+      "status": "PROBE_PASS"
+    },
+    {
+      "experiment_id": "p10-terminal-actor-protection-v14",
+      "frame_id": "p10-v14-post-promotion-full-sample-audit-v1",
+      "selected_hypothesis": "H7-terminal-actor-protection",
+      "bounded_change": [
+        "rendered goal-aware terminal actor protection",
+        "four bounded transition observations",
+        "candidate-only P compile before HDS promotion"
+      ],
+      "baseline": "previous stable target completed seven of nine in 256 actions",
+      "prediction": [
+        "candidate completes nine of nine",
+        "three stable games remain twenty of twenty",
+        "same-condition rerun is identical",
+        "P-B parameter digest and same-input output change"
+      ],
+      "observed": [
+        "candidate completed nine of nine in 175 actions twice",
+        "three stable games completed twenty of twenty with 75 235 and 308 actions",
+        "stable and target candidate reruns matched",
+        "HDS promoted candidate with all ten gates passing",
+        "post-promotion active target completed nine of nine in 175 actions"
+      ],
+      "unchanged": [
+        "OFFLINE-only phase boundary",
+        "runtime identity-free selector contract",
+        "HDS sole promotion authority"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "complete twenty-five-game report",
+        "full local oracle score"
+      ],
+      "status": "PROMOTED"
+    },
+    {
+      "experiment_id": "p10-all-samples-active-v14-canonical-450-v1",
+      "frame_id": "p10-v14-post-promotion-full-sample-audit-v1",
+      "selected_hypothesis": "H7-terminal-actor-protection",
+      "bounded_change": [],
+      "baseline": "no complete post-promotion twenty-five-game report",
+      "prediction": [
+        "every game terminates within 450 actions",
+        "one complete report supports failure distribution and local oracle"
+      ],
+      "observed": [
+        "external command reached the two-hour timeout",
+        "final report was not written because reporting occurs after the full sequential run"
+      ],
+      "unchanged": [
+        "active manifest",
+        "OFFLINE operation mode",
+        "source tree"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "game-level progress at timeout",
+        "full completion count",
+        "full local oracle score"
+      ],
+      "status": "ENVIRONMENT_TIMEOUT_INCONCLUSIVE"
+    }
+  ]
+}

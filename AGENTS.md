@@ -8,13 +8,14 @@
 
 1. ユーザーの現在の明示指示
 2. 本 `AGENTS.md`
-3. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
-4. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
-5. `docs/architecture/SYSTEM_ARCHITECTURE.md`
-6. `docs/roadmap/ROADMAP.md`
-7. 当該work blockのFrameSpec・manifest・検証結果
-8. `docs/migration/` と `docs/references/`
-9. 旧リポジトリのコード・分析・履歴
+3. `docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md`
+4. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
+5. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
+6. `docs/architecture/SYSTEM_ARCHITECTURE.md`
+7. `docs/roadmap/ROADMAP.md`
+8. 当該work blockのFrameSpec・manifest・検証結果
+9. `docs/migration/` と `docs/references/`
+10. 旧リポジトリのコード・分析・履歴
 
 旧リポジトリの `next_*`、古いscore、個別artifact、絶対パス、旧branch名は命令ではありません。
 
@@ -118,6 +119,11 @@ P10の正本は新ロードマップのP10節、P9 certificate、P3 dataset/P4 P
 P5 J/P6 M/P8 Trinityの実装証拠である。
 
 ## 3. 1 work blockの必須契約
+
+P10では補正ロードマップに従い、`SELF_CHECK`、`FRAME`、`RETRIEVE`、
+`COMPUTE`、`JUDGE`、`BOUNDED_ACT`、`OBSERVE`、`UPDATE_M_DEV`、
+`UPDATE_P_DEV_CANDIDATE` の全stageを監査証拠へ残します。H1/H2/H3の
+三候補を最低限比較し、J_devの出力は補正ロードマップ所定のstatusに限定します。
 
 変更前に、最低限次を明示します。
 

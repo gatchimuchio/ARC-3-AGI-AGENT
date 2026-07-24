@@ -17,7 +17,41 @@ from .instruction_body import SemanticOperatorInstruction
 from .schema import digest_object, forbidden_runtime_paths
 from .visual_explorer import Grid, Point, VisualAction
 
-FRUIT_MERGE_OPERATOR = "rendered-goal-aware-fruit-merge-v1"
+FRUIT_MERGE_OPERATOR = "rendered-goal-aware-fruit-merge-v2"
+FRUIT_MERGE_CANDIDATE_OPERATOR = "rendered-goal-aware-fruit-merge-v3"
+FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v4"
+)
+FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v5"
+)
+FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v6"
+)
+FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v7"
+)
+FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v8"
+)
+FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v9"
+)
+FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v10"
+)
+FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v11"
+)
+FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v12"
+)
+FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v13"
+)
+FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR = (
+    "rendered-goal-aware-fruit-merge-v14"
+)
 FRUIT_MERGE_STATE_FORMAT = "arc3-fruit-merge-state-v2"
 
 _OFFSETS4: tuple[Point, ...] = ((-1, 0), (1, 0), (0, -1), (0, 1))
@@ -57,6 +91,8 @@ class _FruitParameters:
     actor_move_distance: int
     actor_chase_risk_distance: int
     actor_divert_interval: int
+    actor_fruit_rank_delta: int
+    maximum_transition_observations: int
     interface_max_y: int
     playfield_min_y: int
     playfield_max_y: int
@@ -67,13 +103,28 @@ class _FruitParameters:
     target_max_area: int
     rank_specs: tuple[_RankSpec, ...]
     actor_specs: tuple[_ActorSpec, ...]
+    actor_merge_chain: tuple[str, ...]
 
     @classmethod
     def from_instruction(
         cls,
         instruction: SemanticOperatorInstruction,
     ) -> _FruitParameters | None:
-        if instruction.operator_id != FRUIT_MERGE_OPERATOR:
+        if instruction.operator_id not in {
+            FRUIT_MERGE_OPERATOR,
+            FRUIT_MERGE_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+            FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+        }:
             return None
         raw = instruction.parameters()
 
@@ -96,6 +147,7 @@ class _FruitParameters:
             "actor_move_distance",
             "actor_chase_risk_distance",
             "actor_divert_interval",
+            "actor_fruit_rank_delta",
             "interface_max_y",
             "playfield_min_y",
             "playfield_max_y",
@@ -108,6 +160,27 @@ class _FruitParameters:
         values = {name: integer(name) for name in integer_names}
         if any(value is None for value in values.values()):
             return None
+        maximum_transition_observations = integer(
+            "maximum_transition_observations"
+        )
+        if (
+            instruction.operator_id
+            in {
+                FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+            }
+            and maximum_transition_observations is None
+        ):
+            return None
+        if maximum_transition_observations is None:
+            maximum_transition_observations = 0
 
         def required(name: str) -> int:
             value = values[name]
@@ -117,11 +190,17 @@ class _FruitParameters:
 
         raw_rank_specs = raw.get("rank_specs")
         raw_actor_specs = raw.get("actor_specs")
+        raw_actor_merge_chain = raw.get("actor_merge_chain")
         if (
             not isinstance(raw_rank_specs, Sequence)
             or isinstance(raw_rank_specs, (str, bytes, bytearray))
             or not isinstance(raw_actor_specs, Sequence)
             or isinstance(raw_actor_specs, (str, bytes, bytearray))
+            or not isinstance(raw_actor_merge_chain, Sequence)
+            or isinstance(
+                raw_actor_merge_chain,
+                (str, bytes, bytearray),
+            )
         ):
             return None
         rank_specs: list[_RankSpec] = []
@@ -202,6 +281,19 @@ class _FruitParameters:
             )
         if len({spec.kind for spec in actor_specs}) != len(actor_specs):
             return None
+        actor_merge_chain = tuple(
+            str(kind).strip() for kind in raw_actor_merge_chain
+        )
+        actor_kinds = {spec.kind for spec in actor_specs}
+        if (
+            not actor_merge_chain
+            or len(set(actor_merge_chain)) != len(actor_merge_chain)
+            or any(
+                not kind or kind not in actor_kinds
+                for kind in actor_merge_chain
+            )
+        ):
+            return None
 
         parameters = cls(
             click_action=required("click_action"),
@@ -216,6 +308,10 @@ class _FruitParameters:
                 "actor_chase_risk_distance"
             ),
             actor_divert_interval=required("actor_divert_interval"),
+            actor_fruit_rank_delta=required("actor_fruit_rank_delta"),
+            maximum_transition_observations=(
+                maximum_transition_observations
+            ),
             interface_max_y=required("interface_max_y"),
             playfield_min_y=required("playfield_min_y"),
             playfield_max_y=required("playfield_max_y"),
@@ -226,6 +322,7 @@ class _FruitParameters:
             target_max_area=required("target_max_area"),
             rank_specs=tuple(sorted(rank_specs, key=lambda item: item.rank)),
             actor_specs=tuple(sorted(actor_specs, key=lambda item: item.kind)),
+            actor_merge_chain=actor_merge_chain,
         )
         if (
             parameters.click_action == parameters.undo_action
@@ -239,6 +336,39 @@ class _FruitParameters:
             or not 1 <= parameters.actor_move_distance <= 32
             or not 1 <= parameters.actor_chase_risk_distance <= 64
             or not 1 <= parameters.actor_divert_interval <= 32
+            or not -8 <= parameters.actor_fruit_rank_delta <= -1
+            or (
+                instruction.operator_id
+                in {
+                    FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+                }
+                and not 1
+                <= parameters.maximum_transition_observations
+                <= 32
+            )
+            or (
+                instruction.operator_id
+                not in {
+                    FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+                }
+                and parameters.maximum_transition_observations != 0
+            )
             or not 0 <= parameters.interface_max_y
             < parameters.playfield_min_y
             <= parameters.playfield_max_y
@@ -637,6 +767,95 @@ def _affected_actors(
     )
 
 
+def _transition_observation_click(
+    surface: _FruitSurface,
+) -> Point | None:
+    """Choose a rendered-lattice click outside every semantic object."""
+
+    semantic_boxes = tuple(
+        (
+            *(fruit.bbox for fruit in surface.fruits),
+            *(actor.bbox for actor in surface.actors),
+            *(target.bbox for target in surface.targets),
+        )
+    )
+    radius_sq = surface.parameters.click_radius**2
+    candidates: list[tuple[int, int, int, Point]] = []
+    for click in _valid_clicks(surface):
+        if (
+            _affected_fruits(surface, click)
+            or _affected_actors(surface, click)
+            or any(
+                _bbox_distance_sq(box, click) <= radius_sq
+                for box in (target.bbox for target in surface.targets)
+            )
+        ):
+            continue
+        minimum_clearance = min(
+            (
+                _bbox_distance_sq(box, click)
+                for box in semantic_boxes
+            ),
+            default=surface.width * surface.width
+            + surface.height * surface.height,
+        )
+        candidates.append(
+            (
+                minimum_clearance,
+                -click[1],
+                -click[0],
+                click,
+            )
+        )
+    return None if not candidates else max(candidates)[-1]
+
+
+def _interface_observation_click(
+    grid: Grid,
+    surface: _FruitSurface,
+) -> Point | None:
+    """Choose a rendered interface-background point with maximal clearance."""
+
+    interface_height = min(
+        len(grid),
+        surface.parameters.interface_max_y + 1,
+    )
+    if interface_height < 1 or not grid or not grid[0]:
+        return None
+    width = min(surface.width, len(grid[0]))
+    colors = Counter(
+        grid[y][x]
+        for y in range(interface_height)
+        for x in range(width)
+    )
+    if not colors:
+        return None
+    background = min(
+        colors,
+        key=lambda color: (-colors[color], color),
+    )
+    foreground = tuple(
+        (x, y)
+        for y in range(interface_height)
+        for x in range(width)
+        if grid[y][x] != background
+    )
+    candidates: list[tuple[int, int, int, Point]] = []
+    for y in range(interface_height):
+        for x in range(width):
+            if grid[y][x] != background:
+                continue
+            clearance = min(
+                (
+                    _distance_sq((x, y), point)
+                    for point in foreground
+                ),
+                default=width * width + interface_height * interface_height,
+            )
+            candidates.append((clearance, x, y, (x, y)))
+    return None if not candidates else max(candidates)[-1]
+
+
 def _moved_fruit_center(
     fruit: _Fruit,
     click: Point,
@@ -739,6 +958,44 @@ def _missing_requirements(
         +missing_ranks,
         +missing_actors,
         occupied,
+    )
+
+
+def _rank_requirements_materialized(
+    surface: _FruitSurface,
+    missing: Counter[int],
+) -> bool:
+    available: Counter[int] = Counter(
+        fruit.rank
+        for fruit in surface.fruits
+        if not any(
+            _inside(fruit.center, target.bbox)
+            for target in surface.targets
+        )
+    )
+    return all(
+        available.get(rank, 0) >= count
+        for rank, count in missing.items()
+        if count > 0
+    )
+
+
+def _actor_requirements_materialized(
+    surface: _FruitSurface,
+    missing: Counter[str],
+) -> bool:
+    available: Counter[str] = Counter(
+        actor.kind
+        for actor in surface.actors
+        if not any(
+            _inside(actor.center, target.bbox)
+            for target in surface.targets
+        )
+    )
+    return all(
+        available.get(kind, 0) >= count
+        for kind, count in missing.items()
+        if count > 0
     )
 
 
@@ -959,12 +1216,274 @@ def _route_required_actor(
     return None if not candidates else min(candidates)[-1]
 
 
+def _merge_actor_candidate(
+    surface: _FruitSurface,
+    missing: Counter[str],
+    blocked_clicks: frozenset[Point],
+) -> tuple[Point, str] | None:
+    chain = surface.parameters.actor_merge_chain
+    chain_index = {kind: index for index, kind in enumerate(chain)}
+    desired_indices = tuple(
+        chain_index[kind]
+        for kind, count in missing.items()
+        if count > 0 and kind in chain_index
+    )
+    if not desired_indices:
+        return None
+
+    def gap(kind: str) -> int | None:
+        source_index = chain_index.get(kind)
+        if source_index is None:
+            return None
+        gaps = tuple(
+            desired_index - source_index
+            for desired_index in desired_indices
+            if desired_index > source_index
+        )
+        return None if not gaps else min(gaps)
+
+    direct: list[tuple[int, int, int, Point]] = []
+    for click in _valid_clicks(surface):
+        if click in blocked_clicks or _affected_fruits(surface, click):
+            continue
+        affected = _affected_actors(surface, click)
+        if len(affected) != 2:
+            continue
+        first = surface.actors[affected[0]]
+        second = surface.actors[affected[1]]
+        source_gap = gap(first.kind)
+        if source_gap is None or first.kind != second.kind:
+            continue
+        direct.append((source_gap, click[1], click[0], click))
+    if direct:
+        return min(direct)[-1], "rendered-equal-kind-actor-merge"
+
+    approach: list[tuple[int, int, int, int, int, Point]] = []
+    for source_index, source in enumerate(surface.actors):
+        source_gap = gap(source.kind)
+        if source_gap is None:
+            continue
+        for destination_index, destination in enumerate(surface.actors):
+            if (
+                source_index == destination_index
+                or source.kind != destination.kind
+            ):
+                continue
+            before = _distance_sq(source.center, destination.center)
+            for click in _valid_clicks(surface):
+                if (
+                    click in blocked_clicks
+                    or _affected_actors(surface, click)
+                    != (source_index,)
+                    or _affected_fruits(surface, click)
+                ):
+                    continue
+                predicted = _moved_actor_center(
+                    source,
+                    click,
+                    surface.parameters.actor_move_distance,
+                    surface,
+                )
+                if any(
+                    _overlap(
+                        _bbox_at(source.bbox, predicted),
+                        fruit.bbox,
+                    )
+                    for fruit in surface.fruits
+                ):
+                    continue
+                after = _distance_sq(predicted, destination.center)
+                if after >= before:
+                    continue
+                approach.append(
+                    (
+                        source_gap,
+                        after,
+                        before,
+                        click[1],
+                        click[0],
+                        click,
+                    )
+                )
+    if not approach:
+        return None
+    return min(approach)[-1], "rendered-equal-kind-actor-approach"
+
+
+def _route_actor_rank_reduction(
+    surface: _FruitSurface,
+    missing: Counter[int],
+    blocked_clicks: frozenset[Point],
+) -> Point | None:
+    delta = surface.parameters.actor_fruit_rank_delta
+    desired = tuple(rank for rank, count in missing.items() if count > 0)
+    candidates: list[tuple[int, int, int, int, int, int, Point]] = []
+    for actor_index, actor in enumerate(surface.actors):
+        for fruit in surface.fruits:
+            reachable = tuple(
+                rank
+                for rank in desired
+                if fruit.rank > rank
+                and (fruit.rank - rank) % abs(delta) == 0
+            )
+            if not reachable:
+                continue
+            target_rank = max(reachable)
+            before = _distance_sq(actor.center, fruit.center)
+            for click in _valid_clicks(surface):
+                if (
+                    click in blocked_clicks
+                    or _affected_actors(surface, click) != (actor_index,)
+                    or _affected_fruits(surface, click)
+                ):
+                    continue
+                predicted = _moved_actor_center(
+                    actor,
+                    click,
+                    surface.parameters.actor_move_distance,
+                    surface,
+                )
+                after = _distance_sq(predicted, fruit.center)
+                if after >= before:
+                    continue
+                candidates.append(
+                    (
+                        fruit.rank - target_rank,
+                        after,
+                        before,
+                        click[1],
+                        click[0],
+                        actor_index,
+                        click,
+                    )
+                )
+    return None if not candidates else min(candidates)[-1]
+
+
+def _wait_for_actor_rank_reduction(
+    surface: _FruitSurface,
+    missing: Counter[int],
+    blocked_clicks: frozenset[Point],
+) -> Point | None:
+    delta = surface.parameters.actor_fruit_rank_delta
+    desired = tuple(rank for rank, count in missing.items() if count > 0)
+    pair_distances = tuple(
+        _distance_sq(actor.center, fruit.center)
+        for actor in surface.actors
+        for fruit in surface.fruits
+        if any(
+            fruit.rank > rank
+            and (fruit.rank - rank) % abs(delta) == 0
+            for rank in desired
+        )
+    )
+    if (
+        not pair_distances
+        or min(pair_distances)
+        > surface.parameters.actor_chase_risk_distance**2
+    ):
+        return None
+    entity_boxes = tuple(
+        fruit.bbox for fruit in surface.fruits
+    ) + tuple(actor.bbox for actor in surface.actors)
+    candidates: list[tuple[int, int, int, Point]] = []
+    for click in _valid_clicks(surface):
+        if (
+            click in blocked_clicks
+            or _affected_fruits(surface, click)
+            or _affected_actors(surface, click)
+        ):
+            continue
+        clearance = min(
+            (_bbox_distance_sq(bbox, click) for bbox in entity_boxes),
+            default=0,
+        )
+        candidates.append((-clearance, click[1], click[0], click))
+    return None if not candidates else min(candidates)[-1]
+
+
 def _actor_risk(surface: _FruitSurface, actor: _Actor) -> int:
     if not surface.fruits:
         return 1 << 30
     return min(
         _distance_sq(actor.center, fruit.center)
         for fruit in surface.fruits
+    )
+
+
+def _terminal_required_actor_at_risk(
+    surface: _FruitSurface,
+    missing: Counter[str],
+) -> bool:
+    """Detect a visible required terminal actor close enough to chase fruit."""
+
+    if not surface.parameters.actor_merge_chain:
+        return False
+    terminal_kind = surface.parameters.actor_merge_chain[-1]
+    if missing.get(terminal_kind, 0) <= 0:
+        return False
+    risk_limit = surface.parameters.actor_chase_risk_distance**2
+    return any(
+        actor.kind == terminal_kind
+        and not any(
+            _inside(actor.center, target.bbox)
+            for target in surface.targets
+        )
+        and _actor_risk(surface, actor) <= risk_limit
+        for actor in surface.actors
+    )
+
+
+def _target_actor_anchor_click(
+    surface: _FruitSurface,
+) -> Point | None:
+    """Anchor a required terminal actor already occupying a target."""
+
+    if not surface.parameters.actor_merge_chain:
+        return None
+    terminal_kind = surface.parameters.actor_merge_chain[-1]
+    required = Counter(dict(surface.required_actors))
+    if required.get(terminal_kind, 0) <= 0:
+        return None
+    candidates: list[tuple[int, int, Point]] = []
+    for actor in surface.actors:
+        if (
+            actor.kind != terminal_kind
+            or not any(
+                _inside(actor.center, target.bbox)
+                for target in surface.targets
+            )
+            or _affected_fruits(surface, actor.center)
+        ):
+            continue
+        candidates.append((actor.center[1], actor.center[0], actor.center))
+    return None if not candidates else min(candidates)[-1]
+
+
+def _protect_required_terminal_actor(
+    surface: _FruitSurface,
+    blocked_clicks: frozenset[Point],
+) -> Point | None:
+    """Move only the rendered required terminal actor away from fruit."""
+
+    if not surface.parameters.actor_merge_chain:
+        return None
+    terminal_kind = surface.parameters.actor_merge_chain[-1]
+    required = Counter(dict(surface.required_actors))
+    if required.get(terminal_kind, 0) <= 0:
+        return None
+    excluded = Counter(
+        {
+            actor.kind: 1
+            for actor in surface.actors
+            if actor.kind != terminal_kind
+        }
+    )
+    return _divert_actor(
+        surface,
+        excluded,
+        blocked_clicks,
+        force=False,
     )
 
 
@@ -976,7 +1495,7 @@ def _divert_actor(
     force: bool,
 ) -> Point | None:
     risk_limit = surface.parameters.actor_chase_risk_distance**2
-    candidates: list[tuple[int, int, int, int, Point]] = []
+    candidates: list[tuple[int, int, int, int, int, Point]] = []
     for actor_index, actor in enumerate(surface.actors):
         if required_actors.get(actor.kind, 0) > 0:
             continue
@@ -1007,6 +1526,7 @@ def _divert_actor(
                 continue
             candidates.append(
                 (
+                    current_risk,
                     -predicted_risk,
                     _distance_sq(
                         predicted,
@@ -1020,6 +1540,29 @@ def _divert_actor(
     return None if not candidates else min(candidates)[-1]
 
 
+def _route_actor_protection_click(
+    surface: _FruitSurface,
+    blocked_clicks: frozenset[Point],
+) -> Point | None:
+    """Move any actor beyond one chase step plus the normal risk margin."""
+
+    protection_distance = (
+        surface.parameters.actor_chase_risk_distance
+        + surface.parameters.actor_move_distance
+    )
+    if all(
+        _actor_risk(surface, actor) > protection_distance**2
+        for actor in surface.actors
+    ):
+        return None
+    return _divert_actor(
+        surface,
+        Counter(),
+        blocked_clicks,
+        force=True,
+    )
+
+
 def _semantic_action(
     surface: _FruitSurface,
     instruction: SemanticOperatorInstruction,
@@ -1027,11 +1570,12 @@ def _semantic_action(
     *,
     reason: str,
 ) -> VisualAction:
+    operator_id = instruction.operator_id
     return VisualAction(
         key="semantic-fruit-merge:"
         + digest_object(
             {
-                "operator": FRUIT_MERGE_OPERATOR,
+                "operator": operator_id,
                 "surface": surface.signature,
                 "click": click,
                 "reason": reason,
@@ -1042,8 +1586,8 @@ def _semantic_action(
         x=click[0],
         y=click[1],
         evidence=(
-            FRUIT_MERGE_OPERATOR,
-            f"operator-prototype:{FRUIT_MERGE_OPERATOR}",
+            operator_id,
+            f"operator-prototype:{operator_id}",
             reason,
             *instruction.provenance,
         ),
@@ -1055,13 +1599,14 @@ def _semantic_undo_action(
     *,
     surface_signature: str,
     undo_action: int,
+    reason: str = "rendered-fruit-surface-loss-undo",
 ) -> VisualAction:
-    reason = "rendered-fruit-surface-loss-undo"
+    operator_id = instruction.operator_id
     return VisualAction(
         key="semantic-fruit-undo:"
         + digest_object(
             {
-                "operator": FRUIT_MERGE_OPERATOR,
+                "operator": operator_id,
                 "surface": surface_signature,
                 "reason": reason,
             }
@@ -1069,8 +1614,50 @@ def _semantic_undo_action(
         action_id=undo_action,
         group=0,
         evidence=(
-            FRUIT_MERGE_OPERATOR,
-            f"operator-prototype:{FRUIT_MERGE_OPERATOR}",
+            operator_id,
+            f"operator-prototype:{operator_id}",
+            reason,
+            *instruction.provenance,
+        ),
+    )
+
+
+def _semantic_transition_observation_action(
+    instruction: SemanticOperatorInstruction,
+    *,
+    surface_signature: str,
+    observation_index: int,
+    observation_action: int,
+    observation_click: Point | None = None,
+) -> VisualAction:
+    reason = "rendered-semantic-effect-observation"
+    operator_id = instruction.operator_id
+    key_payload: dict[str, object] = {
+        "operator": operator_id,
+        "surface": surface_signature,
+        "observation_index": observation_index,
+        "reason": reason,
+    }
+    if observation_click is not None:
+        key_payload["observation_click"] = observation_click
+    return VisualAction(
+        key="semantic-fruit-observe:"
+        + digest_object(key_payload)[:20],
+        action_id=observation_action,
+        group=0,
+        x=(
+            None
+            if observation_click is None
+            else observation_click[0]
+        ),
+        y=(
+            None
+            if observation_click is None
+            else observation_click[1]
+        ),
+        evidence=(
+            operator_id,
+            f"operator-prototype:{operator_id}",
             reason,
             *instruction.provenance,
         ),
@@ -1093,6 +1680,10 @@ class FruitMergeState:
     blocked_clicks: list[Point] = field(default_factory=list)
     undo_pending: bool = False
     abandoned: bool = False
+    pending_effect_click: Point | None = None
+    pending_effect_kind: str = ""
+    pending_effect_observations: int = 0
+    pending_effect_observation_click: Point | None = None
 
     def reset(self) -> None:
         self.instruction_digest = ""
@@ -1107,6 +1698,10 @@ class FruitMergeState:
         self.blocked_clicks.clear()
         self.undo_pending = False
         self.abandoned = False
+        self.pending_effect_click = None
+        self.pending_effect_kind = ""
+        self.pending_effect_observations = 0
+        self.pending_effect_observation_click = None
 
     def _bind(
         self,
@@ -1134,6 +1729,185 @@ class FruitMergeState:
         self.previous_grid_digest = current
         return influenced
 
+    def _clear_pending_effect(self) -> None:
+        self.pending_effect_click = None
+        self.pending_effect_kind = ""
+        self.pending_effect_observations = 0
+        self.pending_effect_observation_click = None
+
+    def _stage_pending_effect(
+        self,
+        surface: _FruitSurface,
+        grid: Grid,
+        click: Point,
+        action_kind: str,
+        reason: str,
+        instruction: SemanticOperatorInstruction,
+    ) -> None:
+        self.pending_effect_click = click
+        self.pending_effect_kind = action_kind
+        self.pending_effect_observations = 0
+        self.pending_effect_observation_click = (
+            _transition_observation_click(surface)
+            if (
+                instruction.operator_id
+                == FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR
+                or (
+                    instruction.operator_id
+                    == FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR
+                    and reason == "rendered-required-fruit-route"
+                )
+            )
+            else (
+                click
+                if (
+                    instruction.operator_id
+                    == FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR
+                )
+                or (
+                    instruction.operator_id
+                    == FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR
+                    and reason == "rendered-required-fruit-route"
+                )
+                or (
+                    instruction.operator_id
+                    == FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR
+                )
+                else None
+            )
+        )
+        if (
+            instruction.operator_id
+            == FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR
+        ):
+            self.pending_effect_observation_click = (
+                _interface_observation_click(grid, surface)
+            )
+        if (
+            instruction.operator_id
+            == FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR
+            and reason == "rendered-required-fruit-route"
+        ):
+            self.pending_effect_observation_click = (
+                _transition_observation_click(surface)
+            )
+        if (
+            instruction.operator_id
+            == FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR
+            and reason == "rendered-required-fruit-route"
+        ):
+            self.pending_effect_observation_click = (
+                _target_actor_anchor_click(surface)
+            )
+
+    def _observe_pending_effect(
+        self,
+        instruction: SemanticOperatorInstruction,
+        parameters: _FruitParameters,
+    ) -> FruitMergeDecision | None:
+        if (
+            instruction.operator_id
+            not in {
+                FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+            }
+            or self.pending_effect_click is None
+            or self.pending_effect_observations
+            >= parameters.maximum_transition_observations
+            or (
+                instruction.operator_id
+                in {
+                    FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                }
+                and self.pending_effect_observation_click is None
+            )
+        ):
+            return None
+        self.pending_effect_observations += 1
+        self.decision_count += 1
+        click_observation = (
+            instruction.operator_id
+            in {
+                FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+            }
+        )
+        return FruitMergeDecision(
+            action=_semantic_transition_observation_action(
+                instruction,
+                surface_signature=self.surface_signature,
+                observation_index=self.pending_effect_observations,
+                observation_action=(
+                    parameters.click_action
+                    if click_observation
+                    else parameters.undo_action
+                ),
+                observation_click=(
+                    self.pending_effect_observation_click
+                    if click_observation
+                    else None
+                ),
+            ),
+            reason=(
+                f"{instruction.operator_id}:"
+                "rendered-semantic-effect-observation"
+            ),
+            memory_influenced=True,
+        )
+
+    def _rollback_pending_effect(
+        self,
+        instruction: SemanticOperatorInstruction,
+        parameters: _FruitParameters,
+        *,
+        reason: str,
+    ) -> FruitMergeDecision:
+        failed_click = self.pending_effect_click or self.last_click
+        failed_kind = self.pending_effect_kind or self.last_action_kind
+        if (
+            failed_click is not None
+            and failed_click not in self.blocked_clicks
+        ):
+            self.blocked_clicks.append(failed_click)
+            self.blocked_clicks = self.blocked_clicks[-64:]
+        self._clear_pending_effect()
+        self.undo_pending = True
+        self.last_action_kind = "undo"
+        self.fruit_action_streak = (
+            parameters.actor_divert_interval
+            if failed_kind == "fruit"
+            else 0
+        )
+        self.decision_count += 1
+        return FruitMergeDecision(
+            action=_semantic_undo_action(
+                instruction,
+                surface_signature=self.surface_signature,
+                undo_action=parameters.undo_action,
+                reason=reason,
+            ),
+            reason=f"{instruction.operator_id}:{reason}",
+            memory_influenced=True,
+        )
+
     def decide(
         self,
         grid: Grid,
@@ -1147,6 +1921,65 @@ class FruitMergeState:
         )
         if surface is None:
             parameters = _FruitParameters.from_instruction(instruction)
+            if (
+                parameters is not None
+                and instruction.operator_id
+                in {
+                    FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR,
+                }
+                and self.pending_effect_click is not None
+                and parameters.undo_action in available_actions
+            ):
+                return self._rollback_pending_effect(
+                    instruction,
+                    parameters,
+                    reason="rendered-fruit-surface-loss-undo",
+                )
+            if (
+                parameters is not None
+                and instruction.operator_id
+                in {
+                    FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+                }
+                and self.pending_effect_click is not None
+                and (
+                    parameters.click_action
+                    if (
+                        instruction.operator_id
+                        in {
+                            FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                            FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                            FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                            FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                            FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                            FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                            FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                        }
+                    )
+                    else parameters.undo_action
+                )
+                in available_actions
+            ):
+                observation = self._observe_pending_effect(
+                    instruction,
+                    parameters,
+                )
+                if observation is not None:
+                    return observation
+                return self._rollback_pending_effect(
+                    instruction,
+                    parameters,
+                    reason="rendered-effect-observation-limit-undo",
+                )
             if (
                 parameters is not None
                 and parameters.undo_action in available_actions
@@ -1174,7 +2007,7 @@ class FruitMergeState:
                         undo_action=parameters.undo_action,
                     ),
                     reason=(
-                        f"{FRUIT_MERGE_OPERATOR}:"
+                        f"{instruction.operator_id}:"
                         "rendered-fruit-surface-loss-undo"
                     ),
                     memory_influenced=True,
@@ -1199,30 +2032,187 @@ class FruitMergeState:
         )
         blocked_clicks = frozenset(self.blocked_clicks)
         empty_targets = _empty_targets(surface, occupied)
-        actor_click = _route_required_actor(
+        ranks_materialized = _rank_requirements_materialized(
+            surface,
+            missing_ranks,
+        )
+        actors_materialized = _actor_requirements_materialized(
             surface,
             missing_actors,
-            empty_targets,
-            blocked_clicks,
         )
-        reason = "rendered-required-actor-route"
-        click = actor_click
-        action_kind = "actor"
+        goals_materialized = (
+            ranks_materialized and actors_materialized
+        )
+        place_mobile_actor_last = (
+            instruction.operator_id
+            in {
+                FRUIT_MERGE_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+            }
+        )
         if (
-            click is None
+            instruction.operator_id
+            in {
+                FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+            }
+            and _terminal_required_actor_at_risk(surface, missing_actors)
+        ):
+            place_mobile_actor_last = False
+        click: Point | None = None
+        reason = ""
+        action_kind = "fruit"
+        if (
+            goals_materialized
+            and (not place_mobile_actor_last or not missing_ranks)
+            and missing_actors
             and surface.actors
-            and self.fruit_action_streak
-            >= surface.parameters.actor_divert_interval
         ):
             click = _divert_actor(
                 surface,
                 Counter(dict(surface.required_actors)),
                 blocked_clicks,
-                force=True,
+                force=False,
             )
-            reason = "rendered-actor-hazard-divert"
+            if click is not None:
+                reason = "rendered-actor-hazard-divert"
+                action_kind = "actor"
+        if (
+            click is None
+            and goals_materialized
+            and (not place_mobile_actor_last or not missing_ranks)
+        ):
+            click = _route_required_actor(
+                surface,
+                missing_actors,
+                empty_targets,
+                blocked_clicks,
+            )
+            reason = "rendered-required-actor-route"
+            if click is not None:
+                action_kind = "actor"
+        if click is None and not ranks_materialized:
+            construction_click = _merge_candidate(
+                surface,
+                missing_ranks,
+                blocked_clicks,
+            )
+            construction_reason = "rendered-equal-rank-merge"
+            if construction_click is None:
+                construction_click = _approach_candidate(
+                    surface,
+                    missing_ranks,
+                    blocked_clicks,
+                )
+                construction_reason = "rendered-equal-rank-approach"
+            if (
+                construction_click is not None
+                and surface.actors
+                and self.fruit_action_streak
+                >= surface.parameters.actor_divert_interval
+            ):
+                click = _divert_actor(
+                    surface,
+                    Counter(dict(surface.required_actors)),
+                    blocked_clicks,
+                    force=True,
+                )
+                if click is not None:
+                    reason = "rendered-actor-hazard-divert"
+                    action_kind = "actor"
+            if click is None and construction_click is not None:
+                click = construction_click
+                reason = construction_reason
+        if click is None and not ranks_materialized:
+            click = _route_actor_rank_reduction(
+                surface,
+                missing_ranks,
+                blocked_clicks,
+            )
+            reason = "rendered-actor-fruit-rank-reduction"
             action_kind = "actor"
-        if click is None:
+        if click is None and not ranks_materialized:
+            click = _wait_for_actor_rank_reduction(
+                surface,
+                missing_ranks,
+                blocked_clicks,
+            )
+            reason = "rendered-actor-chase-rank-reduction"
+            action_kind = "actor"
+        if click is None and ranks_materialized and not actors_materialized:
+            actor_merge = _merge_actor_candidate(
+                surface,
+                missing_actors,
+                blocked_clicks,
+            )
+            if actor_merge is not None:
+                click, reason = actor_merge
+                action_kind = "actor"
+        if (
+            click is None
+            and goals_materialized
+            and surface.actors
+            and self.last_action_kind != "actor"
+        ):
+            click = _divert_actor(
+                surface,
+                Counter(dict(surface.required_actors)),
+                blocked_clicks,
+                force=False,
+            )
+            if (
+                click is None
+                and self.fruit_action_streak
+                >= surface.parameters.actor_divert_interval
+            ):
+                click = _divert_actor(
+                    surface,
+                    Counter(dict(surface.required_actors)),
+                    blocked_clicks,
+                    force=True,
+                )
+            if click is not None:
+                reason = "rendered-actor-hazard-divert"
+                action_kind = "actor"
+        if click is None and goals_materialized:
+            if (
+                instruction.operator_id
+                == FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR
+                and missing_ranks
+                and surface.actors
+            ):
+                click = _route_actor_protection_click(
+                    surface,
+                    blocked_clicks,
+                )
+                if click is not None:
+                    reason = "rendered-actor-hazard-divert"
+                    action_kind = "actor"
+        if click is None and goals_materialized:
+            if (
+                instruction.operator_id
+                == FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR
+                and missing_ranks
+                and surface.actors
+            ):
+                click = _protect_required_terminal_actor(
+                    surface,
+                    blocked_clicks,
+                )
+                if click is not None:
+                    reason = "rendered-actor-hazard-divert"
+                    action_kind = "actor"
+        if click is None and goals_materialized:
             click = _route_required_fruit(
                 surface,
                 missing_ranks,
@@ -1231,23 +2221,7 @@ class FruitMergeState:
             )
             reason = "rendered-required-fruit-route"
             action_kind = "fruit"
-        if click is None:
-            click = _merge_candidate(
-                surface,
-                missing_ranks,
-                blocked_clicks,
-            )
-            reason = "rendered-equal-rank-merge"
-            action_kind = "fruit"
-        if click is None:
-            click = _approach_candidate(
-                surface,
-                missing_ranks,
-                blocked_clicks,
-            )
-            reason = "rendered-equal-rank-approach"
-            action_kind = "fruit"
-        if click is None and surface.actors:
+        if click is None and surface.actors and actors_materialized:
             click = _divert_actor(
                 surface,
                 Counter(dict(surface.required_actors)),
@@ -1257,6 +2231,45 @@ class FruitMergeState:
             reason = "rendered-actor-hazard-divert"
             action_kind = "actor"
         if click is None:
+            if (
+                instruction.operator_id
+                in {
+                    FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR,
+                }
+                and self.pending_effect_click is not None
+            ):
+                return self._rollback_pending_effect(
+                    instruction,
+                    surface.parameters,
+                    reason="rendered-goal-plan-unavailable-undo",
+                )
+            if (
+                instruction.operator_id
+                in {
+                    FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                    FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+                }
+                and self.pending_effect_click is not None
+            ):
+                observation = self._observe_pending_effect(
+                    instruction,
+                    surface.parameters,
+                )
+                if observation is not None:
+                    return observation
+                return self._rollback_pending_effect(
+                    instruction,
+                    surface.parameters,
+                    reason="rendered-effect-observation-limit-undo",
+                )
             return FruitMergeDecision(
                 action=None,
                 reason="FRUIT_MERGE_GOAL_PLAN_UNAVAILABLE",
@@ -1275,6 +2288,30 @@ class FruitMergeState:
             self.fruit_action_streak = 0
         else:
             self.fruit_action_streak += 1
+        if (
+            instruction.operator_id
+            in {
+                FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+                FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+            }
+        ):
+            self._stage_pending_effect(
+                surface,
+                grid,
+                click,
+                action_kind,
+                reason,
+                instruction,
+            )
         return FruitMergeDecision(
             action=_semantic_action(
                 surface,
@@ -1282,7 +2319,7 @@ class FruitMergeState:
                 click,
                 reason=reason,
             ),
-            reason=f"{FRUIT_MERGE_OPERATOR}:{reason}",
+            reason=f"{instruction.operator_id}:{reason}",
             memory_influenced=(
                 influenced
                 or self.observation_count > 0
@@ -1312,6 +2349,22 @@ class FruitMergeState:
             "undo_pending": self.undo_pending,
             "abandoned": self.abandoned,
         }
+        if self.pending_effect_click is not None:
+            if (
+                self.pending_effect_kind not in {"fruit", "actor"}
+                or not 0 <= self.pending_effect_observations <= 32
+            ):
+                raise ValueError("fruit merge pending effect state invalid")
+            pending_effect: dict[str, object] = {
+                "click": list(self.pending_effect_click),
+                "kind": self.pending_effect_kind,
+                "observations": self.pending_effect_observations,
+            }
+            if self.pending_effect_observation_click is not None:
+                pending_effect["observation_click"] = list(
+                    self.pending_effect_observation_click
+                )
+            payload["pending_effect"] = pending_effect
         forbidden = forbidden_runtime_paths(payload)
         if forbidden:
             raise ValueError(
@@ -1338,6 +2391,7 @@ class FruitMergeState:
             raise ValueError("fruit merge action kind invalid")
         raw_last_click = value.get("last_click")
         raw_blocked_clicks = value.get("blocked_clicks", ())
+        raw_pending_effect = value.get("pending_effect")
         last_click: Point | None = None
         if raw_last_click is not None:
             if (
@@ -1376,6 +2430,69 @@ class FruitMergeState:
             )
             if click not in blocked_clicks:
                 blocked_clicks.append(click)
+        pending_effect_click: Point | None = None
+        pending_effect_kind = ""
+        pending_effect_observations = 0
+        pending_effect_observation_click: Point | None = None
+        if raw_pending_effect is not None:
+            if not isinstance(raw_pending_effect, Mapping):
+                raise ValueError("fruit merge pending effect invalid")
+            raw_pending_click = raw_pending_effect.get("click")
+            if (
+                not isinstance(raw_pending_click, Sequence)
+                or isinstance(
+                    raw_pending_click,
+                    (str, bytes, bytearray),
+                )
+                or len(raw_pending_click) != 2
+            ):
+                raise ValueError("fruit merge pending effect click invalid")
+            pending_effect_click = (
+                _payload_int(
+                    raw_pending_click[0],
+                    "pending_effect click x",
+                ),
+                _payload_int(
+                    raw_pending_click[1],
+                    "pending_effect click y",
+                ),
+            )
+            pending_effect_kind = str(raw_pending_effect.get("kind", ""))
+            if pending_effect_kind not in {"fruit", "actor"}:
+                raise ValueError("fruit merge pending effect kind invalid")
+            pending_effect_observations = _payload_int(
+                raw_pending_effect.get("observations", 0),
+                "pending_effect observations",
+            )
+            if not 0 <= pending_effect_observations <= 32:
+                raise ValueError(
+                    "fruit merge pending effect observations invalid"
+                )
+            raw_observation_click = raw_pending_effect.get(
+                "observation_click"
+            )
+            if raw_observation_click is not None:
+                if (
+                    not isinstance(raw_observation_click, Sequence)
+                    or isinstance(
+                        raw_observation_click,
+                        (str, bytes, bytearray),
+                    )
+                    or len(raw_observation_click) != 2
+                ):
+                    raise ValueError(
+                        "fruit merge effect observation click invalid"
+                    )
+                pending_effect_observation_click = (
+                    _payload_int(
+                        raw_observation_click[0],
+                        "effect observation click x",
+                    ),
+                    _payload_int(
+                        raw_observation_click[1],
+                        "effect observation click y",
+                    ),
+                )
         return cls(
             instruction_digest=str(
                 value.get("instruction_digest", "")
@@ -1407,12 +2524,30 @@ class FruitMergeState:
             blocked_clicks=blocked_clicks,
             undo_pending=undo_pending,
             abandoned=abandoned,
+            pending_effect_click=pending_effect_click,
+            pending_effect_kind=pending_effect_kind,
+            pending_effect_observations=pending_effect_observations,
+            pending_effect_observation_click=(
+                pending_effect_observation_click
+            ),
         )
 
 
 __all__ = [
+    "FRUIT_MERGE_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR",
     "FRUIT_MERGE_OPERATOR",
+    "FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR",
     "FRUIT_MERGE_STATE_FORMAT",
+    "FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR",
+    "FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR",
     "FruitMergeDecision",
     "FruitMergeState",
 ]

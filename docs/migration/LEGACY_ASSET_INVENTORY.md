@@ -48,6 +48,7 @@
 | `agent/arc3_ir/schema.py` | `69dfa4e52dde6dccede79162e324c7bfc3f70562` | `.../schema.py` | canonical JSON、digest、runtime検査を移植 |
 | `agent/hds_verifier/verifier.py` | `1bc8563a16bb78d0de4da515d68543aaf7b38ded` | `.../verification.py` | rendered evidence限定を明示し保守化 |
 | `agent/hds_verifier/checkpoint.py` | `5e847a4f9812af614ecfccac521eb1b0e31df25c` | `.../checkpoint.py` | 環境復元ではなく証拠保持として移植 |
+| `scripts/generate_arc3_local_score_oracle.py` | `5a5a77e7ef017c46c4b28581a06240e07ad718e5` | `.../local_score_oracle.py` | RHAE数式を保持し、現P10 report adapter、完全性検査、決定論的score digestへ適応 |
 
 変更原則:
 
@@ -118,6 +119,15 @@ Quarantine資産は、新実装とのA/B比較や失敗署名抽出には利用�
 - 依存関係の正本は `ARC-AGI-3-Agents/pyproject.toml` と `uv.lock`
 - wheelは設計正本、solver入力、runtime routing情報として使用しない
 - 更新・削除は依存lockと取得元・hashを同時監査する別work blockで行う
+
+### 後続の明示ADAPT
+
+ローカルスコアオラクルは初回監査commitには存在しない。ユーザーの明示指示に
+より、旧repo commit
+`62a16b6f930b8f2663d4a07f791314069ca3043b`の上記blobから個別移植した。
+旧agent、旧`public_eval_latest.json` adapter、個人環境の絶対pathは移植して
+いない。新実装はP10 OFFLINE reportとsample ZIPを読み、score artifactを
+生成するだけで、runtime action選択には参加しない。
 
 ## 8. 次回移植候補
 

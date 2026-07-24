@@ -1,0 +1,53 @@
+{
+  "schema_version": "arc3-development-rejected-hypotheses-v1",
+  "frame_id": "p10-correction-p-lifecycle-separation-v1",
+  "hypotheses": [
+    {
+      "hypothesis_id": "H1-direct-existing-HDS-extension",
+      "status": "REJECTED",
+      "reason_codes": [
+        "widens-runtime-judgment-responsibility",
+        "raises-regression-and-rollback-cost",
+        "isolated-composition-exists"
+      ],
+      "reopen_condition": "evidence proves the isolated control layer cannot bind the existing runtime subjects"
+    },
+    {
+      "hypothesis_id": "H2-record-only-representation",
+      "status": "REJECTED",
+      "reason_codes": [
+        "does-not-enforce-runtime-authority",
+        "does-not-close-promotion-or-rollback",
+        "documentation-is-not-runtime-capability"
+      ],
+      "reopen_condition": "none; documentation remains supporting evidence only"
+    },
+    {
+      "hypothesis_id": "H4-terminal-actor-anchor-observation",
+      "status": "REJECTED",
+      "reason_codes": [
+        "diagnostic-only",
+        "does-not-prevent-chase-drift"
+      ],
+      "reopen_condition": "a distinct rendered structure needs anchor diagnosis without policy change"
+    },
+    {
+      "hypothesis_id": "H5-farthest-safe-target-assignment",
+      "status": "REJECTED",
+      "reason_codes": [
+        "assignment-does-not-control-unselected-actor",
+        "lower-information-gain-than-actor-protection"
+      ],
+      "reopen_condition": "a target failure is attributable to assignment while actor placement is already safe"
+    },
+    {
+      "hypothesis_id": "H6-ring-safe-route-step",
+      "status": "REJECTED",
+      "reason_codes": [
+        "current-frame-only",
+        "does-not-cover-four-frame-chase"
+      ],
+      "reopen_condition": "a failure is caused by visible ring collision without actor chase"
+    }
+  ]
+}

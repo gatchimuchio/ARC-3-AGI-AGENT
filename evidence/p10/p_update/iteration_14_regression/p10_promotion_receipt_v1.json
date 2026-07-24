@@ -1,0 +1,59 @@
+{
+  "active_changed": true,
+  "after_active_manifest_digest": "61489a22883c97d44a55852d5a920829dc3f1f9388f3108df94aae532218040a",
+  "before_active_manifest_digest": "b40c07e40ad55b03f00ce1f907f3a7e61775ee486bc6127bcc0ff50f71af36aa",
+  "content_digest": "p10-promotion-evidence:5b876e5142b558bc544991b21091c5670c9a340e6fba12ae23b4d0b02c151c94",
+  "hds_decision": {
+    "allow_p_promote": true,
+    "authority": "hds-p-update-only",
+    "decision_digest": "9fc1be17b2f77d5caf9e50dacb249d9f66b244ee21102283492c0ef72d95d0b9",
+    "decision_id": "p-update-decision:a07348c41629115f6d14cea8",
+    "reason_codes": [
+      "all-ten-promotion-gates-pass",
+      "stable-twenty-level-regression-pass",
+      "target-seven-level-improvement-reproduced"
+    ],
+    "status": "PROMOTE"
+  },
+  "operation_mode": "offline",
+  "promoted_active_descriptor": {
+    "body_digest": "sha256-decimal:029932839304152453399499123316189232302523840921062494333360852553528982847439",
+    "body_version": "p10-hybrid-v19",
+    "candidate_id": "candidate:p10-hybrid",
+    "compile_directive_digest": "73f331dd976965f89e682cb91b9c05ce51e7c93f188fd1f27971a5a60609ff60",
+    "deterministic_rebuild_digest": "8e11c65675bddc30cf01b559a5e9eb1cb3fe9ed3fb060d7032f8d359e49e8ec0",
+    "lifecycle": "ACTIVE",
+    "manifest_digest": "61489a22883c97d44a55852d5a920829dc3f1f9388f3108df94aae532218040a",
+    "parameter_change_attribution": "full-batch-logistic-gradient-from-HDS-approved-M;train-only-gradient;holdout-selection-gate",
+    "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+    "predecessor_parameter_digest": "parameter-matrix:0342609741021629848543099958341045481926",
+    "proposal_digest": "6b593825e2b671d67bd9adc54fb5b51afb53929b0c4ee981653517420539aaed",
+    "provenance_digest": "p10-evidence-provenance:92583abb328f7f20fbb6c84f0dc4858268a22eaa2d2f0f55af2b984055e54061",
+    "rollback_target": "p10-hybrid-v7",
+    "runtime_identity_free": true,
+    "same_input_candidate_output_digest": "f32044b40bd465cc12c2069a3640a165343228bdb6c1d6a42931204a543e1ea1",
+    "same_input_predecessor_output_digest": "0c4ab2a73ec175e5b36c8a6c776bbcc4e07b0edb852a3c8865bb513d8bb1c4e8",
+    "schema_version": "arc3-p-update-v1",
+    "source_body_digest": "sha256-decimal:062276061651321686125635338766663971037166992683135813253163785235734744762118",
+    "source_body_version": "p10-hybrid-v7",
+    "target_component": "hybrid-P-B"
+  },
+  "promotion_directive_digest": "65fc19320c7783ad35e8c917290b63ff01f50f580d442238b2e3b6f94fe4bc6c",
+  "promotion_failures": [],
+  "promotion_receipt": {
+    "decision_digest": "9fc1be17b2f77d5caf9e50dacb249d9f66b244ee21102283492c0ef72d95d0b9",
+    "directive_digest": "65fc19320c7783ad35e8c917290b63ff01f50f580d442238b2e3b6f94fe4bc6c",
+    "previous_active_bundle_digest": "b40c07e40ad55b03f00ce1f907f3a7e61775ee486bc6127bcc0ff50f71af36aa",
+    "previous_stable_bundle_digest": "b40c07e40ad55b03f00ce1f907f3a7e61775ee486bc6127bcc0ff50f71af36aa",
+    "promoted_bundle_digest": "455ecd3c73b64704cee6d42e7cee1fcb7600fcc4e2ea9a52867afe4412dce6df",
+    "proposal_digest": "6b593825e2b671d67bd9adc54fb5b51afb53929b0c4ee981653517420539aaed",
+    "receipt_digest": "76c675c6b89f3e1d80e0dc96bd94549732935c5e85275028cb3d1310cfbf1a19",
+    "receipt_id": "p10-promotion-receipt:0595da1e8b81e2dbd7bf86b1",
+    "registry_digest": "83ba42bf8b16c1f104b70e01da7df033116d64b52aacf679f2d444af3d694669",
+    "schema_version": "arc3-p10-manifest-lifecycle-v1"
+  },
+  "regression_report_digest": "b44b8fd49da6c1db0f1e5b966c2e623bfd6845302d80024bb580f5242eada85b",
+  "schema_version": "arc3-p10-promotion-evidence-v1",
+  "source_trace_digest": "p10-p-update-workflow:fd1223f739ab0d1335a4acc4989438ed63c3eecfeea5dc5cd4638b846c698c00",
+  "source_trace_path": "p10_candidate_compile_trace_v1.json"
+}

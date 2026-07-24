@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import functools
+import hashlib
 import json
 import math
 import re
@@ -908,6 +909,7 @@ class ParametricInstructionBody:
     training_record_count: int
     holdout_record_count: int
     parameter_count: int
+    parameter_digest: str
     operator_instructions: tuple[SemanticOperatorInstruction, ...] = ()
 
     @property
@@ -957,6 +959,11 @@ class ParametricInstructionBody:
             failures.append("PARAMETRIC_WEIGHTS_UNTRAINED")
         if self.parameter_count != len(flattened):
             failures.append("PARAMETRIC_PARAMETER_COUNT_MISMATCH")
+        expected_parameter_digest = (
+            "parameter-matrix:" + _decimal_digest(self.weights, length=40)
+        )
+        if self.parameter_digest != expected_parameter_digest:
+            failures.append("PARAMETRIC_PARAMETER_DIGEST_MISMATCH")
         if not self.action_preconditions:
             failures.append("PARAMETRIC_ACTION_PRECONDITION_MISSING")
         if not self.action_falsification_conditions:
@@ -1361,6 +1368,7 @@ def instruction_body_from_mapping(
                 model.get("parameter_count"),
                 "model.parameter_count",
             ),
+            parameter_digest=str(model.get("parameter_digest", "")),
             operator_instructions=operator_instructions,
         )
     else:
@@ -1393,6 +1401,55 @@ def _bundle_path(filename: str) -> Path:
     return Path(__file__).resolve().parent / "bundles" / filename
 
 
+def _load_p10_manifest_body(
+    manifest_filename: str,
+    variant: str,
+) -> SymbolicInstructionBody | ParametricInstructionBody:
+    manifest_path = _bundle_path(manifest_filename)
+    manifest_value = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if not isinstance(manifest_value, Mapping):
+        raise TypeError("P10 manifest must decode to an object")
+    if manifest_value.get("runtime_identity_free") is not True:
+        raise ValueError("P10 manifest is not runtime identity-free")
+    expected_lifecycles = (
+        ("CANDIDATE", "PROMOTED")
+        if manifest_filename == "p10_candidate_manifest.json"
+        else ("ACTIVE",)
+    )
+    lifecycle = manifest_value.get("lifecycle", "ACTIVE")
+    if lifecycle not in expected_lifecycles:
+        raise ValueError(
+            "P10 manifest lifecycle mismatch:"
+            f"expected={'|'.join(expected_lifecycles)}:actual={lifecycle}"
+        )
+    bundles = manifest_value.get("bundles")
+    if not isinstance(bundles, Mapping):
+        raise TypeError("P10 manifest bundles must be an object")
+    entry = bundles.get(variant)
+    if not isinstance(entry, Mapping):
+        raise KeyError(f"P10 manifest variant missing: {variant}")
+    filename = entry.get("filename")
+    if (
+        not isinstance(filename, str)
+        or not filename
+        or Path(filename).name != filename
+    ):
+        raise ValueError("P10 manifest bundle filename invalid")
+    path = _bundle_path(filename)
+    expected_sha256 = entry.get("sha256")
+    actual_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
+    if expected_sha256 != actual_sha256:
+        raise ValueError(f"P10 manifest bundle sha256 mismatch: {variant}")
+    body = load_instruction_body(path)
+    if entry.get("body_version") != body.body_version:
+        raise ValueError(f"P10 manifest body version mismatch: {variant}")
+    if entry.get("content_digest") != body.digest():
+        raise ValueError(f"P10 manifest content digest mismatch: {variant}")
+    if entry.get("format_id") != body.format_id:
+        raise ValueError(f"P10 manifest format mismatch: {variant}")
+    return body
+
+
 @functools.lru_cache(maxsize=1)
 def load_default_symbolic_instruction_body() -> SymbolicInstructionBody:
     body = load_instruction_body(_bundle_path("p_a_symbolic_v1.json"))
@@ -1411,7 +1468,9 @@ def load_default_parametric_instruction_body() -> ParametricInstructionBody:
 
 @functools.lru_cache(maxsize=1)
 def load_p10_symbolic_instruction_body() -> SymbolicInstructionBody:
-    body = load_instruction_body(_bundle_path("p10_p_a_symbolic_v6.json"))
+    """Load only the HDS-promoted active P-A bundle."""
+
+    body = _load_p10_manifest_body("p10_manifest.json", "P-A")
     if not isinstance(body, SymbolicInstructionBody):
         raise TypeError("P10 symbolic bundle has wrong format")
     return body
@@ -1419,7 +1478,9 @@ def load_p10_symbolic_instruction_body() -> SymbolicInstructionBody:
 
 @functools.lru_cache(maxsize=1)
 def load_p10_parametric_instruction_body() -> ParametricInstructionBody:
-    body = load_instruction_body(_bundle_path("p10_p_b_parametric_v6.json"))
+    """Load only the HDS-promoted active P-B bundle."""
+
+    body = _load_p10_manifest_body("p10_manifest.json", "P-B")
     if not isinstance(body, ParametricInstructionBody):
         raise TypeError("P10 parametric bundle has wrong format")
     return body
@@ -1427,10 +1488,53 @@ def load_p10_parametric_instruction_body() -> ParametricInstructionBody:
 
 @functools.lru_cache(maxsize=1)
 def load_p10_hybrid_instruction_body() -> ParametricInstructionBody:
-    body = load_instruction_body(_bundle_path("p10_hybrid_v5.json"))
+    """Load only the HDS-promoted active hybrid bundle."""
+
+    body = _load_p10_manifest_body("p10_manifest.json", "hybrid")
     if not isinstance(body, ParametricInstructionBody):
         raise TypeError("P10 hybrid bundle has wrong format")
     return body
+
+
+@functools.lru_cache(maxsize=1)
+def load_p10_candidate_symbolic_instruction_body() -> SymbolicInstructionBody:
+    """Load the isolated candidate or its immutable promoted archive."""
+
+    body = _load_p10_manifest_body("p10_candidate_manifest.json", "P-A")
+    if not isinstance(body, SymbolicInstructionBody):
+        raise TypeError("P10 candidate symbolic bundle has wrong format")
+    return body
+
+
+@functools.lru_cache(maxsize=1)
+def load_p10_candidate_parametric_instruction_body() -> ParametricInstructionBody:
+    """Load the isolated candidate or its immutable promoted archive."""
+
+    body = _load_p10_manifest_body("p10_candidate_manifest.json", "P-B")
+    if not isinstance(body, ParametricInstructionBody):
+        raise TypeError("P10 candidate parametric bundle has wrong format")
+    return body
+
+
+@functools.lru_cache(maxsize=1)
+def load_p10_candidate_hybrid_instruction_body() -> ParametricInstructionBody:
+    """Load the isolated candidate or its immutable promoted archive."""
+
+    body = _load_p10_manifest_body("p10_candidate_manifest.json", "hybrid")
+    if not isinstance(body, ParametricInstructionBody):
+        raise TypeError("P10 candidate hybrid bundle has wrong format")
+    return body
+
+
+def clear_p10_instruction_body_caches() -> None:
+    """Invalidate active/candidate loaders after an HDS lifecycle transition."""
+
+    load_p10_symbolic_instruction_body.cache_clear()
+    load_p10_parametric_instruction_body.cache_clear()
+    load_p10_hybrid_instruction_body.cache_clear()
+    load_p10_candidate_symbolic_instruction_body.cache_clear()
+    load_p10_candidate_parametric_instruction_body.cache_clear()
+    load_p10_candidate_hybrid_instruction_body.cache_clear()
 
 
 __all__ = [
@@ -1445,11 +1549,15 @@ __all__ = [
     "SYMBOLIC_FORMAT_ID",
     "SymbolicInstructionBody",
     "SymbolicRule",
+    "clear_p10_instruction_body_caches",
     "instruction_body_from_mapping",
     "instruction_bundle_digest",
     "load_default_parametric_instruction_body",
     "load_default_symbolic_instruction_body",
     "load_instruction_body",
+    "load_p10_candidate_hybrid_instruction_body",
+    "load_p10_candidate_parametric_instruction_body",
+    "load_p10_candidate_symbolic_instruction_body",
     "load_p10_hybrid_instruction_body",
     "load_p10_parametric_instruction_body",
     "load_p10_symbolic_instruction_body",

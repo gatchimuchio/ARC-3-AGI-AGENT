@@ -12,10 +12,16 @@ from arcengine import FrameData, FrameDataRaw, GameAction, GameState
 
 from arc3_agi_agent.p10_compute import VISUAL_OPERATOR_VERSION
 from arc3_agi_agent.p10_runtime import (
+    P10InstructionLifecycle,
     P10InstructionVariant,
     P10OfflineSampleRuntime,
     P10RecoveryResult,
     P10SearchResetResult,
+)
+from arc3_agi_agent.p_update import (
+    CandidatePBundle,
+    HDSPUpdateAuthority,
+    PUpdateDecision,
 )
 from arc3_agi_agent.protocol import AuthorityViolation
 from arc3_agi_agent.sample_runtime import SampleCycleResult
@@ -27,6 +33,7 @@ from ..agent import Agent
 class P10SampleAgentReport:
     game_id: str
     instruction_variant: P10InstructionVariant
+    instruction_lifecycle: P10InstructionLifecycle
     actions: int
     recoveries: int
     search_resets: int
@@ -71,6 +78,10 @@ class P10SampleAgent(Agent):
         operation_mode: OperationMode,
         max_actions: int = 4096,
         instruction_variant: P10InstructionVariant = "hybrid",
+        instruction_lifecycle: P10InstructionLifecycle = "active",
+        p_update_authority: HDSPUpdateAuthority | None = None,
+        p_update_decision: PUpdateDecision | None = None,
+        candidate_bundle: CandidatePBundle | None = None,
         **kwargs: Any,
     ) -> None:
         if operation_mode is not OperationMode.OFFLINE:
@@ -92,6 +103,10 @@ class P10SampleAgent(Agent):
             operation_mode=operation_mode,
             max_actions=max_actions,
             instruction_variant=instruction_variant,
+            instruction_lifecycle=instruction_lifecycle,
+            p_update_authority=p_update_authority,
+            p_update_decision=p_update_decision,
+            candidate_bundle=candidate_bundle,
         )
 
     @property
@@ -212,6 +227,7 @@ class P10SampleAgent(Agent):
         return P10SampleAgentReport(
             game_id=self.game_id,
             instruction_variant=self.runtime.instruction_variant,
+            instruction_lifecycle=self.runtime.instruction_lifecycle,
             actions=self.action_counter,
             recoveries=len(self.recoveries),
             search_resets=len(self.search_resets),

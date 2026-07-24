@@ -1,0 +1,55 @@
+{
+  "schema_version": "arc3-p-update-registry-v1",
+  "active_manifest": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_manifest.json",
+  "candidate_manifest": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_candidate_manifest.json",
+  "active": {
+    "P-A": {
+      "version": "p10-p-a-symbolic-v20",
+      "content_digest": "sha256-decimal:097014787464487548760401532365093780398542921074148160879190377199035539169260",
+      "status": "ACTIVE"
+    },
+    "P-B": {
+      "version": "p10-p-b-parametric-v20",
+      "content_digest": "sha256-decimal:080125341922255942290504600854984072176052126758625537776617036752222986165404",
+      "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+      "status": "ACTIVE"
+    },
+    "hybrid": {
+      "version": "p10-hybrid-v19",
+      "content_digest": "sha256-decimal:029932839304152453399499123316189232302523840921062494333360852553528982847439",
+      "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+      "status": "ACTIVE"
+    }
+  },
+  "previous_stable": {
+    "manifest_digest": "b40c07e40ad55b03f00ce1f907f3a7e61775ee486bc6127bcc0ff50f71af36aa",
+    "P-A": "p10-p-a-symbolic-v8",
+    "P-B": "p10-p-b-parametric-v8",
+    "hybrid": "p10-hybrid-v7",
+    "parameter_digest": "parameter-matrix:0342609741021629848543099958341045481926",
+    "status": "PREVIOUS_STABLE"
+  },
+  "candidate": {
+    "P-A": {
+      "version": "p10-p-a-symbolic-v20",
+      "content_digest": "sha256-decimal:097014787464487548760401532365093780398542921074148160879190377199035539169260",
+      "status": "PROMOTED"
+    },
+    "P-B": {
+      "version": "p10-p-b-parametric-v20",
+      "content_digest": "sha256-decimal:080125341922255942290504600854984072176052126758625537776617036752222986165404",
+      "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+      "status": "PROMOTED"
+    },
+    "hybrid": {
+      "version": "p10-hybrid-v19",
+      "content_digest": "sha256-decimal:029932839304152453399499123316189232302523840921062494333360852553528982847439",
+      "parameter_digest": "parameter-matrix:0111191726717490468109502332939394468650",
+      "status": "PROMOTED"
+    }
+  },
+  "hds_decision": "PROMOTE",
+  "hds_decision_digest": "9fc1be17b2f77d5caf9e50dacb249d9f66b244ee21102283492c0ef72d95d0b9",
+  "promotion_receipt_digest": "76c675c6b89f3e1d80e0dc96bd94549732935c5e85275028cb3d1310cfbf1a19",
+  "next_required_transition": "resumable-full-sample-audit"
+}

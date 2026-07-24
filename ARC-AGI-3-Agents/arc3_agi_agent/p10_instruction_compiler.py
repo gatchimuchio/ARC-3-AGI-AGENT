@@ -6,26 +6,38 @@ import argparse
 import copy
 import hashlib
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
 from .instruction_body import (
+    ParametricInstructionBody,
     instruction_body_from_mapping,
     seal_instruction_bundle,
 )
-from .schema import canonical_json, digest_object
+from .p_b_learning import PBLearningResult
+from .p_update import (
+    HDSPUpdateAuthority,
+    InstructionBodyCompileDirective,
+    PUpdateDecision,
+    parameter_digest,
+)
+from .protocol import AuthorityViolation
+from .schema import digest_object
 from .semantic_operators import (
-    FRUIT_MERGE_OPERATOR,
+    FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
     OBJECT_TARGET_CONTROL_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
     SYMBOLIC_REWRITE_OPERATOR,
 )
 
-P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v5"
+P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v19"
 P10_COMPILER_SEED = 0
-P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v6"
-P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v6"
-P10_HYBRID_VERSION = "p10-hybrid-v5"
+P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v20"
+P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v20"
+P10_HYBRID_VERSION = "p10-hybrid-v19"
+P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v19"
+P10_CANDIDATE_MANIFEST_FILENAME = "p10_candidate_manifest.json"
 
 
 def _file_digest(path: Path) -> str:
@@ -56,6 +68,47 @@ def _write(path: Path, value: object) -> None:
         encoding="utf-8",
         newline="\n",
     )
+
+
+def active_p10_manifest_digest(bundle_dir: Path) -> str:
+    """Digest the exact active manifest used as the compile predecessor."""
+
+    manifest = _load(bundle_dir / "p10_manifest.json")
+    if manifest.get("runtime_identity_free") is not True:
+        raise ValueError("active P10 manifest is not identity-free")
+    if manifest.get("lifecycle", "ACTIVE") != "ACTIVE":
+        raise ValueError("active P10 manifest lifecycle invalid")
+    return digest_object(manifest)
+
+
+def _active_bundle_mapping(
+    bundle_dir: Path,
+    manifest: dict[str, Any],
+    variant: str,
+) -> dict[str, Any]:
+    raw_bundles = manifest.get("bundles")
+    if not isinstance(raw_bundles, dict):
+        raise TypeError("active P10 manifest bundles invalid")
+    raw_entry = raw_bundles.get(variant)
+    if not isinstance(raw_entry, dict):
+        raise KeyError(f"active P10 variant missing: {variant}")
+    filename = raw_entry.get("filename")
+    if (
+        not isinstance(filename, str)
+        or not filename
+        or Path(filename).name != filename
+    ):
+        raise ValueError(f"active P10 filename invalid: {variant}")
+    path = bundle_dir / filename
+    if raw_entry.get("sha256") != _file_digest(path):
+        raise ValueError(f"active P10 sha256 mismatch: {variant}")
+    mapping = _load(path)
+    body = instruction_body_from_mapping(mapping)
+    if raw_entry.get("body_version") != body.body_version:
+        raise ValueError(f"active P10 body version mismatch: {variant}")
+    if raw_entry.get("content_digest") != body.digest():
+        raise ValueError(f"active P10 body digest mismatch: {variant}")
+    return mapping
 
 
 def relation_toggle_instruction_mapping() -> dict[str, object]:
@@ -191,7 +244,7 @@ def fruit_merge_instruction_mapping() -> dict[str, object]:
     """Return P material for visible goal-aware merging and placement."""
 
     return {
-        "operator_id": FRUIT_MERGE_OPERATOR,
+        "operator_id": FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
         "action_id": 6,
         "detector": (
             "rendered interface goal glyphs, square rank entities, "
@@ -212,6 +265,8 @@ def fruit_merge_instruction_mapping() -> dict[str, object]:
             "actor_move_distance": 14,
             "actor_chase_risk_distance": 24,
             "actor_divert_interval": 1,
+            "actor_fruit_rank_delta": -1,
+            "maximum_transition_observations": 4,
             "interface_max_y": 9,
             "playfield_min_y": 10,
             "playfield_max_y": 62,
@@ -286,6 +341,11 @@ def fruit_merge_instruction_mapping() -> dict[str, object]:
                     ],
                 },
             ],
+            "actor_merge_chain": [
+                "actor-pattern-a",
+                "actor-pattern-b",
+                "actor-pattern-c",
+            ],
         },
         "preconditions": [
             "ACTION6_AND_ACTION7_AVAILABLE",
@@ -310,6 +370,10 @@ def _upgrade(
     body_version: str,
     variant: str,
     operator_instructions: list[dict[str, object]],
+    compile_directive_digest: str,
+    compile_decision_digest: str,
+    evidence_set_digest: str,
+    learning_result: PBLearningResult | None = None,
 ) -> dict[str, Any]:
     upgraded = copy.deepcopy(base)
     predecessor_digest = str(upgraded.get("content_digest", ""))
@@ -319,6 +383,12 @@ def _upgrade(
             "predecessor": predecessor_provenance,
             "variant": variant,
             "operators": operator_instructions,
+            "compile_directive": compile_directive_digest,
+            "compile_decision": compile_decision_digest,
+            "evidence_set": evidence_set_digest,
+            "learning": (
+                learning_result.digest if learning_result is not None else None
+            ),
         }
     )
     upgraded["body_version"] = body_version
@@ -347,6 +417,9 @@ def _upgrade(
     )
     upgraded["compile"] = {
         "compiler_version": P10_INSTRUCTION_COMPILER_VERSION,
+        "compile_decision_digest": compile_decision_digest,
+        "compile_directive_digest": compile_directive_digest,
+        "evidence_set_digest": evidence_set_digest,
         "seed": P10_COMPILER_SEED,
         "variant": variant,
         "predecessor_content_digest": predecessor_digest,
@@ -356,6 +429,59 @@ def _upgrade(
         "method": "explicit-versioned-identity-free-operator-compile",
     }
     payload["operator_instructions"] = operator_instructions
+    if learning_result is not None:
+        model = payload.get("model")
+        if not isinstance(model, dict):
+            raise TypeError("parametric model structure invalid")
+        model["weights"] = [
+            list(row) for row in learning_result.candidate_weights
+        ]
+        model["parameter_digest"] = learning_result.candidate_parameter_digest
+        training_count = model.get("training_record_count")
+        holdout_count = model.get("holdout_record_count")
+        if (
+            isinstance(training_count, bool)
+            or not isinstance(training_count, int)
+            or isinstance(holdout_count, bool)
+            or not isinstance(holdout_count, int)
+        ):
+            raise TypeError("parametric model record counts invalid")
+        model["training_record_count"] = (
+            training_count + learning_result.training_example_count
+        )
+        model["holdout_record_count"] = (
+            holdout_count + learning_result.holdout_example_count
+        )
+        model["learning_update"] = {
+            "attribution": learning_result.attribution,
+            "candidate_holdout_loss": learning_result.candidate_holdout_loss,
+            "candidate_train_loss": learning_result.candidate_train_loss,
+            "changed_parameter_digest": digest_object(
+                learning_result.changed_parameters
+            ),
+            "dataset_digest": learning_result.dataset_digest,
+            "epochs": learning_result.epochs,
+            "learning_rate": learning_result.learning_rate,
+            "same_input_candidate_output_digest": (
+                learning_result.candidate_same_input_output_digest
+            ),
+            "same_input_example_digest": (
+                learning_result.same_input_example_digest
+            ),
+            "same_input_predecessor_output_digest": (
+                learning_result.source_same_input_output_digest
+            ),
+            "source_holdout_loss": learning_result.source_holdout_loss,
+            "source_parameter_digest": (
+                learning_result.source_parameter_digest
+            ),
+            "source_train_loss": learning_result.source_train_loss,
+            "trainer_seed": learning_result.seed,
+        }
+        upgraded["compile"]["learning_result_digest"] = learning_result.digest
+        upgraded["compile"]["method"] = (
+            "hds-authorized-memory-trained-parametric-and-operator-compile"
+        )
     return seal_instruction_bundle(upgraded)
 
 
@@ -363,14 +489,59 @@ def compile_p10_instruction_bodies(
     *,
     base_bundle_dir: Path,
     output_dir: Path,
+    compile_directive: InstructionBodyCompileDirective,
+    compile_decision: PUpdateDecision,
+    hds_authority: HDSPUpdateAuthority,
+    learning_result: PBLearningResult,
     seed: int = P10_COMPILER_SEED,
 ) -> dict[str, object]:
-    """Compile three explicit P variants from the frozen P4 predecessors."""
+    """Compile an isolated candidate set from the exact active predecessors."""
 
     if seed != P10_COMPILER_SEED:
         raise ValueError("P10 instruction compiler seed is fixed at 0")
-    base_symbolic = _load(base_bundle_dir / "p_a_symbolic_v1.json")
-    base_parametric = _load(base_bundle_dir / "p_b_parametric_v1.json")
+    if compile_directive.seed != seed:
+        raise AuthorityViolation("P10_COMPILE_DIRECTIVE_SEED_MISMATCH")
+    if compile_directive.target_body_version != P10_CANDIDATE_SET_VERSION:
+        raise AuthorityViolation("P10_COMPILE_TARGET_VERSION_MISMATCH")
+    active_manifest = _load(base_bundle_dir / "p10_manifest.json")
+    source_manifest_digest = active_p10_manifest_digest(base_bundle_dir)
+    if compile_directive.source_p_digest != source_manifest_digest:
+        raise AuthorityViolation("P10_COMPILE_SOURCE_MANIFEST_MISMATCH")
+    learning_failures = learning_result.validate()
+    if learning_failures:
+        raise ValueError(";".join(learning_failures))
+    base_symbolic = _active_bundle_mapping(
+        base_bundle_dir,
+        active_manifest,
+        "P-A",
+    )
+    base_parametric = _active_bundle_mapping(
+        base_bundle_dir,
+        active_manifest,
+        "P-B",
+    )
+    base_hybrid = _active_bundle_mapping(
+        base_bundle_dir,
+        active_manifest,
+        "hybrid",
+    )
+    parametric_body = instruction_body_from_mapping(base_parametric)
+    hybrid_body = instruction_body_from_mapping(base_hybrid)
+    if not isinstance(parametric_body, ParametricInstructionBody):
+        raise TypeError("active P-B body is not parametric")
+    if not isinstance(hybrid_body, ParametricInstructionBody):
+        raise TypeError("active hybrid body is not parametric")
+    active_parameter_digest = parameter_digest(parametric_body.weights)
+    hybrid_parameter_digest = parameter_digest(hybrid_body.weights)
+    if (
+        learning_result.source_parameter_digest != active_parameter_digest
+        or hybrid_parameter_digest != active_parameter_digest
+    ):
+        raise ValueError("P10 learning predecessor parameter digest mismatch")
+    compile_directive.consume(compile_decision, hds_authority)
+    compile_directive_digest = compile_directive.digest
+    compile_decision_digest = compile_decision.digest
+    evidence_set_digest = compile_directive.evidence_set_digest
     operators = [
         relation_toggle_instruction_mapping(),
         object_target_control_instruction_mapping(),
@@ -379,30 +550,41 @@ def compile_p10_instruction_bodies(
     ]
     bundles = {
         "P-A": (
-            "p10_p_a_symbolic_v6.json",
+            "p10_p_a_symbolic_v20.json",
             _upgrade(
                 base_symbolic,
                 body_version=P10_SYMBOLIC_VERSION,
                 variant="P-A",
                 operator_instructions=operators,
+                compile_directive_digest=compile_directive_digest,
+                compile_decision_digest=compile_decision_digest,
+                evidence_set_digest=evidence_set_digest,
             ),
         ),
         "P-B": (
-            "p10_p_b_parametric_v6.json",
+            "p10_p_b_parametric_v20.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_PARAMETRIC_VERSION,
                 variant="P-B",
                 operator_instructions=[],
+                compile_directive_digest=compile_directive_digest,
+                compile_decision_digest=compile_decision_digest,
+                evidence_set_digest=evidence_set_digest,
+                learning_result=learning_result,
             ),
         ),
         "hybrid": (
-            "p10_hybrid_v5.json",
+            "p10_hybrid_v19.json",
             _upgrade(
-                base_parametric,
+                base_hybrid,
                 body_version=P10_HYBRID_VERSION,
                 variant="hybrid",
                 operator_instructions=operators,
+                compile_directive_digest=compile_directive_digest,
+                compile_decision_digest=compile_decision_digest,
+                evidence_set_digest=evidence_set_digest,
+                learning_result=learning_result,
             ),
         ),
     }
@@ -424,17 +606,27 @@ def compile_p10_instruction_bodies(
     manifest: dict[str, object] = {
         "schema_version": "arc3-p10-instruction-manifest-v1",
         "compiler_version": P10_INSTRUCTION_COMPILER_VERSION,
+        "compile_decision_digest": compile_decision_digest,
+        "compile_directive_digest": compile_directive_digest,
+        "evidence_set_digest": evidence_set_digest,
         "seed": seed,
         "runtime_identity_free": True,
+        "lifecycle": "CANDIDATE",
+        "activation_authority": "hds-promotion-required",
+        "source_manifest_digest": source_manifest_digest,
+        "learning_result_digest": learning_result.digest,
         "bundles": manifest_bundles,
     }
-    _write(output_dir / "p10_manifest.json", manifest)
+    _write(output_dir / P10_CANDIDATE_MANIFEST_FILENAME, manifest)
     return manifest
 
 
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Compile explicit P10 P-A, P-B, and hybrid bundles."
+        description=(
+            "Validate P10 compile arguments. Candidate generation requires "
+            "an in-process HDS-owned compile directive."
+        )
     )
     parser.add_argument("--base-bundle-dir", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -443,14 +635,13 @@ def _parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
-    args = _parser().parse_args()
-    manifest = compile_p10_instruction_bodies(
-        base_bundle_dir=args.base_bundle_dir,
-        output_dir=args.output_dir,
-        seed=args.seed,
+    _parser().parse_args()
+    print(
+        "P10_COMPILE_REQUIRES_HDS_OWNED_DIRECTIVE:"
+        "use the P update workflow API",
+        file=sys.stderr,
     )
-    print(canonical_json(manifest))
-    return 0
+    return 2
 
 
 if __name__ == "__main__":
@@ -458,11 +649,14 @@ if __name__ == "__main__":
 
 
 __all__ = [
+    "P10_CANDIDATE_MANIFEST_FILENAME",
+    "P10_CANDIDATE_SET_VERSION",
     "P10_COMPILER_SEED",
     "P10_HYBRID_VERSION",
     "P10_INSTRUCTION_COMPILER_VERSION",
     "P10_PARAMETRIC_VERSION",
     "P10_SYMBOLIC_VERSION",
+    "active_p10_manifest_digest",
     "compile_p10_instruction_bodies",
     "fruit_merge_instruction_mapping",
     "main",

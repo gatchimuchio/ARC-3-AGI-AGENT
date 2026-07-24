@@ -16,6 +16,7 @@ from .instruction_body import InstructionBody, InstructionQueryResult
 from .ir import CandidateIR, HypothesisIR, ObservationIR, OutputProposalIR
 from .kernel import ComputeProposal, MemoryProposal, PureLLMCompute
 from .memory import MemorySnapshot
+from .p_b_learning import update_p_b_learning_memory
 from .protocol import ComputeRequest
 from .schema import digest_object
 from .search_reset import SEARCH_RESET_REASON
@@ -30,7 +31,7 @@ from .visual_explorer import (
 )
 
 VISUAL_EXPLORER_MEMORY_FORMAT = "arc3-p10-visual-memory-v1"
-VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v12"
+VISUAL_OPERATOR_VERSION = "arc3-p10-visual-operator-v13"
 VISUAL_RUNTIME_MEMORY_TARGET = "visual-runtime-state"
 
 
@@ -473,6 +474,20 @@ class P10VisualCompute(PureLLMCompute):
                     explorer_decision.memory_influenced,
                 ),
                 ("operator_version", VISUAL_OPERATOR_VERSION),
+                (
+                    "p_b_learning",
+                    update_p_b_learning_memory(
+                        memory,
+                        observation,
+                        context,
+                        query,
+                        selected_action_id=(
+                            explorer_decision.action.action_id
+                            if explorer_decision.action is not None
+                            else None
+                        ),
+                    ),
+                ),
                 ("scene_signature", scene.signature),
                 ("semantic_planner", semantic_planner.to_payload()),
                 ("visual_explorer", explorer.to_payload()),

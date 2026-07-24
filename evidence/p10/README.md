@@ -38,8 +38,27 @@ local scorecard identityと重複するtrace event本体は除外し、event本�
 | `tr87_hybrid_compact.json` | 6 / 6 | 308 | `WIN` | `fd2ea2dd39f378228446b4cb3847c8f97741e5b9105203081e693784dda5f9e4` |
 | `su15_hybrid_active_failure_compact.json` | 4 / 9 | 160 | `MAX_ACTION_STOP` | `10442999cd46639c281cc717bb937166dc3c1a9d5ab1c167b0a8307b03b2bec2` |
 
-現行active Pは`p10-hybrid-v5`、visual operatorは
-`arc3-p10-visual-operator-v12`である。最初の三実行はaction budget 512で
-20 / 20 levelを再完了した。SU15では追加4 levelのtransitionを観測したが、
-budget 160でlevel 5が停止したためstable full-game採用境界は20 / 183、
-P10は`HOLD`のままである。
+上記四fileはv14以前のbaseline証拠として保持する。現行active Pは
+`p10-hybrid-v19`であり、stable採用境界は29 / 183へ更新された。
+
+## P update v14 promotion evidence
+
+`p_update/iteration_14_regression/`をv14の正本証拠directoryとする。
+
+| file | role |
+|---|---|
+| `p10_candidate_compile_trace_v1.json` | HDS-approved MからのP-B学習、同一入力C差分、stable/target二回回帰 |
+| `p10_promotion_receipt_v1.json` | HDS PROMOTE判断、single-use directive、previous/active digest |
+| `p_b_learning_dataset_v1.json` | HDS承認済みMから構成した決定論的dataset |
+| `p_b_learning_memory_v1.json` | 学習入力となった受動M snapshot |
+| `p_b_learning_result_v1.json` | parameter差分、holdout比較、attribution |
+| `p10_active_post_promotion_su15.json` | ACTIVE昇格後の9 / 9、175 actions、reset 0 |
+
+候補はstable 20 / 20を維持し、targetをprevious stableの7 / 9から9 / 9へ
+改善した。同条件二回のselected-field digestは一致し、HDSの全十promotion
+gateがPASSした。中間iterationのraw reportとsuperseded bundleは正本へ
+含めず、`M_dev`の無制限追記を避ける。
+
+全25 gameのcanonical 450-action逐次runは外部commandの7200秒timeoutに達し、
+完了reportを生成できなかった。この失敗はP10 agentのmax-action停止と分離し、
+full scoreおよび183 / 183の証拠には使用しない。P10全体は`HOLD`である。

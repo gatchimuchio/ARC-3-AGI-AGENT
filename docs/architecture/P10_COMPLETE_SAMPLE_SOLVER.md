@@ -100,8 +100,8 @@ current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す
 ## 3. 現在の実測境界
 
 P10実行経路の関連unit、strict mypy、ruff gateは通過している。現行hybrid
-`p10-hybrid-v5`、instruction compiler
-`arc3-p10-instruction-compiler-v5`、semantic planner
+`p10-hybrid-v19`、instruction compiler
+`arc3-p10-instruction-compiler-v19`、semantic planner
 `arc3-semantic-planner-v6`、visual operator
 `arc3-p10-visual-operator-v12`、OFFLINE、seed 0のstable regression実測は
 次のとおりである。
@@ -112,17 +112,28 @@ P10実行経路の関連unit、strict mypy、ruff gateは通過している。�
 | object-target control | 8 / 8 | 235 | 188 | 0 | 0 | `WIN` |
 | symbolic rewrite | 6 / 6 | 308 | 284 | 0 | 0 | `WIN` |
 
-全実行でerror 0、GAME_OVER 0、max-action停止なしを確認した。現時点の
-stable full-game採用境界は`20 / 183`で、残りは`163 level`である。
-これは三つの意味演算子blockの採用証拠であり、全sample攻略証拠ではない。
+全実行でerror 0、GAME_OVER 0、max-action停止なしを確認した。さらに
+goal-aware fruit mergeは9 / 9、175 actions、reset 0で二回同一結果となり、
+三つの既存game 20 / 20を維持した。HDSは全十promotion gateを確認して
+`p10-hybrid-v19`をACTIVEへ昇格した。post-promotion active runも9 / 9、
+175 actionsだった。現時点のstable full-game採用境界は`29 / 183`で、
+残りは`154 level`である。これは四つの意味演算子blockの採用証拠であり、
+全sample攻略証拠ではない。
 
-同じactive PでのSU15 bounded runは、4 / 9 levelを160 actionsまでに完了した
-後、level 5で`MAX_ACTION_STOP`となった。errorは0、HDS recoveryは1、
-search resetは0、M影響cycleは154である。観測済みlevel transitionは
-`24 / 183`相当だが、game未完了かつmax-action停止が残るためstable採用境界
-には加えない。この失敗は
+previous stable PでのSU15 bounded runは、4 / 9 levelを160 actionsまでに
+完了した後、level 5で`MAX_ACTION_STOP`となった。この失敗は
 [`su15_hybrid_active_failure_compact.json`](../../evidence/p10/su15_hybrid_active_failure_compact.json)
-へ保持した。
+へ保持した。v14ではrendered goal、required actor type、actor-fruit距離だけ
+からterminal actor protectionを再導出し、fruit placement前にactorを安全な
+anchorへ移動して四遷移を再観測する。game/task/level ID、固定座標、replayは
+runtime入力に使わない。
+
+canonical条件`OFFLINE / hybrid ACTIVE / 450 actions per game`で全25 gameを
+逐次実行したが、外部commandの7200秒timeoutへ到達し、最終reportは生成
+されなかった。これはagentのmax-action停止とは別の検証環境失敗であり、
+部分値をfull scoreとして扱わない。次のrunはgame単位checkpointとresumeを
+備えた経路で採取し、25 game / 183 levelが一つの検証済みreportへ集約される
+までP10全体のHDS判断は`HOLD`、P11開始は禁止である。
 
 FT09、action budget 256、seed 0、OFFLINEの同一条件比較:
 
@@ -181,9 +192,22 @@ python p10_main.py --game FT09 --instruction-variant hybrid \
 python p10_main.py --all-samples --max-actions 4096 \
   --instruction-variant hybrid \
   --report ../evidence/p10/run.json
+
+python -m arc3_agi_agent.local_score_oracle \
+  --sample-zip /path/to/arc-prize-2026-arc-agi-3.zip \
+  --p10-report ../evidence/p10/run.json \
+  --output ../evidence/p10/arc3_local_score_oracle_latest.json \
+  --markdown ../evidence/p10/arc3_local_score_oracle_latest.md
 ```
 
 `p10_main.py`は全選択gameが`WIN`でない限り終了code 1を返す。
+`local_score_oracle`は旧repo
+`scripts/generate_arc3_local_score_oracle.py`のRHAE数式だけを個別ADAPTし、
+P10 reportのagent traceとlocal scorecardから25 game分のlevel action数を
+fail-closedで射影する。採点器は環境やagentを実行せず、公式APIにも接続しない。
+RHAE scoreは同一条件回帰指標であり、183/183、identity-free、M因果、全traceの
+P10完了gateを代替しない。現時点では移植機能だけを検証しており、現行agentの
+全25 game score artifactはまだ生成していない。
 
 ## 5. 次の採否gate
 

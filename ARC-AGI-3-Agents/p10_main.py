@@ -12,7 +12,15 @@ from typing import Any
 from arc_agi import Arcade, OperationMode  # type: ignore[import-untyped]
 
 from agents.templates.p10_sample_agent import P10SampleAgent
-from arc3_agi_agent.p10_runtime import P10InstructionVariant
+from arc3_agi_agent.p10_runtime import (
+    P10InstructionLifecycle,
+    P10InstructionVariant,
+)
+from arc3_agi_agent.p_update import (
+    CandidatePBundle,
+    HDSPUpdateAuthority,
+    PUpdateDecision,
+)
 from arc3_agi_agent.protocol import AuthorityViolation
 from sample_main import _default_environments_dir, _resolve_game_ids
 
@@ -24,6 +32,10 @@ def run_p10_offline_samples(
     all_samples: bool = False,
     max_actions: int = 4096,
     instruction_variant: P10InstructionVariant = "hybrid",
+    instruction_lifecycle: P10InstructionLifecycle = "active",
+    p_update_authority: HDSPUpdateAuthority | None = None,
+    p_update_decision: PUpdateDecision | None = None,
+    candidate_bundle: CandidatePBundle | None = None,
     record: bool = False,
     recordings_dir: Path | None = None,
 ) -> dict[str, Any]:
@@ -38,6 +50,13 @@ def run_p10_offline_samples(
         raise ValueError("max_actions must be positive")
     if os.getenv("OPERATION_MODE", "").strip().casefold() == "competition":
         raise AuthorityViolation("COMPETITION_MODE_ENV_FORBIDDEN_DURING_P10")
+    if instruction_lifecycle != "active" and not (
+        instruction_lifecycle == "candidate"
+        and p_update_authority is not None
+        and p_update_decision is not None
+        and candidate_bundle is not None
+    ):
+        raise AuthorityViolation("P10_CANDIDATE_PROBE_HDS_AUTHORIZATION_REQUIRED")
 
     output_dir = (
         recordings_dir.resolve()
@@ -60,7 +79,9 @@ def run_p10_offline_samples(
     if not game_ids:
         raise ValueError("select --all-samples or at least one --game")
 
-    card_id = arcade.open_scorecard(tags=["p10", "offline-sample"])
+    card_id = arcade.open_scorecard(
+        tags=["p10", "offline-sample", f"p-{instruction_lifecycle}"]
+    )
     reports: list[dict[str, Any]] = []
     errors: list[dict[str, str]] = []
     scorecard: dict[str, Any] | None = None
@@ -90,6 +111,10 @@ def run_p10_offline_samples(
                         operation_mode=arcade.operation_mode,
                         max_actions=max_actions,
                         instruction_variant=instruction_variant,
+                        instruction_lifecycle=instruction_lifecycle,
+                        p_update_authority=p_update_authority,
+                        p_update_decision=p_update_decision,
+                        candidate_bundle=candidate_bundle,
                     )
                     agent.main()
                     reports.append(dataclasses.asdict(agent.report()))
@@ -135,6 +160,7 @@ def run_p10_offline_samples(
         "error_count": len(errors),
         "max_actions": max_actions,
         "instruction_variant": instruction_variant,
+        "instruction_lifecycle": instruction_lifecycle,
         "reports": reports,
         "errors": errors,
         "local_scorecard": scorecard,

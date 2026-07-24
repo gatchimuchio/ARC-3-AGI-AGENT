@@ -13,6 +13,9 @@ from .adapters.offline_arcade import OfflineArcadeEmissionInterface
 from .context import BoundedContextState
 from .instruction_body import (
     InstructionBody,
+    load_p10_candidate_hybrid_instruction_body,
+    load_p10_candidate_parametric_instruction_body,
+    load_p10_candidate_symbolic_instruction_body,
     load_p10_hybrid_instruction_body,
     load_p10_parametric_instruction_body,
     load_p10_symbolic_instruction_body,
@@ -24,6 +27,8 @@ from .p10_compute import (
     compile_visual_failure_payload,
     prepare_visual_search_reset,
 )
+from .p_update import CandidatePBundle, HDSPUpdateAuthority, PUpdateDecision
+from .protocol import AuthorityViolation
 from .recovery import (
     HDSRecoveryController,
     PureLLMRecoveryExecutor,
@@ -40,6 +45,47 @@ from .visual_explorer import last_rendered_grid
 
 _RESET_ACTION_ID = 0
 P10InstructionVariant = Literal["P-A", "P-B", "hybrid"]
+P10InstructionLifecycle = Literal["active", "candidate"]
+
+
+def _candidate_component(variant: P10InstructionVariant) -> str:
+    return {
+        "P-A": "P-A",
+        "P-B": "P-B",
+        "hybrid": "hybrid-P-B",
+    }[variant]
+
+
+def _validate_candidate_probe_authorization(
+    *,
+    instruction_variant: P10InstructionVariant,
+    authority: HDSPUpdateAuthority | None,
+    decision: PUpdateDecision | None,
+    candidate_bundle: CandidatePBundle | None,
+) -> CandidatePBundle:
+    if authority is None or decision is None or candidate_bundle is None:
+        raise AuthorityViolation("P10_CANDIDATE_PROBE_HDS_AUTHORIZATION_REQUIRED")
+    failures = [
+        *decision.validate(),
+        *candidate_bundle.validate(),
+    ]
+    if not decision.is_owned_by(authority):
+        failures.append("P10_CANDIDATE_PROBE_DECISION_NOT_HDS_OWNED")
+    if decision.status != "PROBE":
+        failures.append("P10_CANDIDATE_PROBE_DECISION_STATUS_INVALID")
+    if decision.proposal_digest != candidate_bundle.proposal_digest:
+        failures.append("P10_CANDIDATE_PROBE_PROPOSAL_MISMATCH")
+    if decision.candidate_bundle_digest != candidate_bundle.digest:
+        failures.append("P10_CANDIDATE_PROBE_BUNDLE_MISMATCH")
+    if candidate_bundle.lifecycle != "CANDIDATE":
+        failures.append("P10_CANDIDATE_PROBE_LIFECYCLE_INVALID")
+    if candidate_bundle.target_component != _candidate_component(
+        instruction_variant
+    ):
+        failures.append("P10_CANDIDATE_PROBE_COMPONENT_MISMATCH")
+    if failures:
+        raise AuthorityViolation(";".join(sorted(set(failures))))
+    return candidate_bundle
 
 
 def _p10_components(
@@ -47,14 +93,30 @@ def _p10_components(
     emission: OfflineArcadeEmissionInterface,
     *,
     instruction_variant: P10InstructionVariant,
+    instruction_lifecycle: P10InstructionLifecycle,
+    candidate_bundle: CandidatePBundle | None,
 ) -> Layer0Components:
     instruction_body: InstructionBody
-    if instruction_variant == "P-A":
-        instruction_body = load_p10_symbolic_instruction_body()
-    elif instruction_variant == "P-B":
-        instruction_body = load_p10_parametric_instruction_body()
+    if instruction_lifecycle == "candidate":
+        if instruction_variant == "P-A":
+            instruction_body = load_p10_candidate_symbolic_instruction_body()
+        elif instruction_variant == "P-B":
+            instruction_body = load_p10_candidate_parametric_instruction_body()
+        else:
+            instruction_body = load_p10_candidate_hybrid_instruction_body()
+        if candidate_bundle is None:
+            raise AuthorityViolation("P10_CANDIDATE_PROBE_BUNDLE_REQUIRED")
+        if instruction_body.body_version != candidate_bundle.body_version:
+            raise AuthorityViolation("P10_CANDIDATE_PROBE_VERSION_MISMATCH")
+        if instruction_body.digest() != candidate_bundle.body_digest:
+            raise AuthorityViolation("P10_CANDIDATE_PROBE_DIGEST_MISMATCH")
     else:
-        instruction_body = load_p10_hybrid_instruction_body()
+        if instruction_variant == "P-A":
+            instruction_body = load_p10_symbolic_instruction_body()
+        elif instruction_variant == "P-B":
+            instruction_body = load_p10_parametric_instruction_body()
+        else:
+            instruction_body = load_p10_hybrid_instruction_body()
     return Layer0Components(
         context_state=context,
         candidate_surface=P10VisualCandidateSurface(),
@@ -87,6 +149,19 @@ class P10OfflineSampleRuntime:
     operation_mode: OperationMode
     max_actions: int = 4096
     instruction_variant: P10InstructionVariant = "hybrid"
+    instruction_lifecycle: P10InstructionLifecycle = "active"
+    p_update_authority: HDSPUpdateAuthority | None = field(
+        default=None,
+        repr=False,
+    )
+    p_update_decision: PUpdateDecision | None = field(
+        default=None,
+        repr=False,
+    )
+    candidate_bundle: CandidatePBundle | None = field(
+        default=None,
+        repr=False,
+    )
     runtime: OfflineSampleRuntime = field(init=False)
     recovery_controller: HDSRecoveryController = field(
         default_factory=HDSRecoveryController,
@@ -110,6 +185,24 @@ class P10OfflineSampleRuntime:
     def __post_init__(self) -> None:
         if self.instruction_variant not in {"P-A", "P-B", "hybrid"}:
             raise ValueError("P10_INSTRUCTION_VARIANT_INVALID")
+        if self.instruction_lifecycle not in {"active", "candidate"}:
+            raise ValueError("P10_INSTRUCTION_LIFECYCLE_INVALID")
+        if self.instruction_lifecycle == "candidate":
+            self.candidate_bundle = _validate_candidate_probe_authorization(
+                instruction_variant=self.instruction_variant,
+                authority=self.p_update_authority,
+                decision=self.p_update_decision,
+                candidate_bundle=self.candidate_bundle,
+            )
+        elif any(
+            item is not None
+            for item in (
+                self.p_update_authority,
+                self.p_update_decision,
+                self.candidate_bundle,
+            )
+        ):
+            raise AuthorityViolation("P10_ACTIVE_RUNTIME_REJECTS_PROBE_BINDING")
         self.runtime = OfflineSampleRuntime(
             environment=self.environment,
             operation_mode=self.operation_mode,
@@ -117,6 +210,8 @@ class P10OfflineSampleRuntime:
             component_factory=functools.partial(
                 _p10_components,
                 instruction_variant=self.instruction_variant,
+                instruction_lifecycle=self.instruction_lifecycle,
+                candidate_bundle=self.candidate_bundle,
             ),
         )
 
@@ -305,6 +400,7 @@ class P10OfflineSampleRuntime:
 
 
 __all__ = [
+    "P10InstructionLifecycle",
     "P10InstructionVariant",
     "P10OfflineSampleRuntime",
     "P10RecoveryResult",

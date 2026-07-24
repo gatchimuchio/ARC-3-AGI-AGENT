@@ -1,0 +1,80 @@
+{
+  "schema_version": "arc3-p10-decision-log-v1",
+  "decisions": [
+    {
+      "decision_id": "j-dev:p10-p-lifecycle-isolation-v1",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H3-isolated-P-update-composition",
+      "reason_codes": [
+        "connects-to-double-trinity-objective",
+        "highest-authority-boundary-information-gain",
+        "generic-and-reversible",
+        "lower-regression-risk-than-direct-judgment-extension"
+      ],
+      "rejected": [
+        "H1-direct-existing-HDS-extension",
+        "H2-record-only-representation"
+      ],
+      "maximum_information_gain_next": "prove real P-B update from HDS-approved runtime memory",
+      "lifecycle": "SUPERSEDED_BY_EXECUTED_WORKFLOW"
+    },
+    {
+      "decision_id": "j-runtime:p10-existing-candidate-hold-v1",
+      "authority": "hds-p-update-only",
+      "status": "HOLD",
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "allow_p_rollback": false,
+      "reason_codes": [
+        "candidate-was-not-created-by-the-new-HDS-compile-contract",
+        "P-B-parameter-digest-unchanged",
+        "promotion-regression-gates-unclosed"
+      ],
+      "lifecycle": "HISTORICAL"
+    },
+    {
+      "decision_id": "j-dev:p10-terminal-actor-protection-v14",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H7-terminal-actor-protection",
+      "reason_codes": [
+        "highest-rendered-transition-information-gain",
+        "bounded-four-observation-window",
+        "identity-free-goal-and-distance-contract",
+        "reversible-candidate-only-change"
+      ],
+      "rejected": [
+        "H4-terminal-actor-anchor-observation",
+        "H5-farthest-safe-target-assignment",
+        "H6-ring-safe-route-step"
+      ],
+      "maximum_information_gain_next": "same-condition-target-and-stable-regression"
+    },
+    {
+      "decision_id": "p-update-decision:a07348c41629115f6d14cea8",
+      "authority": "hds-p-update-only",
+      "status": "PROMOTE",
+      "allow_p_compile": false,
+      "allow_p_promote": true,
+      "allow_p_rollback": false,
+      "decision_digest": "9fc1be17b2f77d5caf9e50dacb249d9f66b244ee21102283492c0ef72d95d0b9",
+      "reason_codes": [
+        "all-ten-promotion-gates-pass",
+        "stable-twenty-level-regression-pass",
+        "target-seven-to-nine-improvement-reproduced"
+      ]
+    },
+    {
+      "decision_id": "j-dev:p10-full-sample-timeout-v1",
+      "authority": "development-hds-only",
+      "status": "HOLD",
+      "reason_codes": [
+        "two-hour-external-command-timeout",
+        "no-complete-twenty-five-game-report",
+        "partial-run-not-score-authority"
+      ],
+      "maximum_information_gain_next": "checkpointed-resumable-per-game-audit"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "lifecycle": "PREVIOUS_STABLE",
+  "manifest": {
+    "bundles": {
+      "P-A": {
+        "body_version": "p10-p-a-symbolic-v8",
+        "content_digest": "sha256-decimal:006788607632226507963255796881120779172255235420979691092691154189232483066590",
+        "filename": "p10_p_a_symbolic_v8.json",
+        "format_id": "symbolic-rule-graph",
+        "operator_count": 4,
+        "sha256": "be9965f0a683cec8196c0c21dc946b389a4ae5153c001b037779bee2e977ca8c"
+      },
+      "P-B": {
+        "body_version": "p10-p-b-parametric-v8",
+        "content_digest": "sha256-decimal:102976035203286629398294860795152227482027920139858189186329499035104615506923",
+        "filename": "p10_p_b_parametric_v8.json",
+        "format_id": "parametric-sigmoid-matrix",
+        "operator_count": 0,
+        "sha256": "e27be19762fe9e627815ce8fcae3f72f682afff990f3a78ace8a1accd31baf87"
+      },
+      "hybrid": {
+        "body_version": "p10-hybrid-v7",
+        "content_digest": "sha256-decimal:062276061651321686125635338766663971037166992683135813253163785235734744762118",
+        "filename": "p10_hybrid_v7.json",
+        "format_id": "parametric-sigmoid-matrix",
+        "operator_count": 4,
+        "sha256": "85b13b1deebecd94fcbdb4ff4acff742c61c05f943e80e28871408b7ec994d50"
+      }
+    },
+    "compiler_version": "arc3-p10-instruction-compiler-v7",
+    "lifecycle": "ACTIVE",
+    "previous_stable_manifest_digest": "52ef3b5aec7aa598e6a24eaa53a8a5108098911c8a49b511b21c1fad72953438",
+    "promotion_decision_digest": "a9396752bb46d2505b44463e4f8df2ada3ef4f9e62e38bdd3b95eb64ef0e2590",
+    "promotion_directive_digest": "53db790d786866f1a551ead6bbb42cf848dffb712e26840b1e61909d3798f947",
+    "regression_report_digest": "e719bf3eaa57e3644384adbd62ed9c06ba85beda2ddceb79dbae743e95c392eb",
+    "runtime_identity_free": true,
+    "schema_version": "arc3-p10-instruction-manifest-v1",
+    "seed": 0,
+    "source_candidate_manifest_digest": "b7483a027fc3fd18cc6a27ee3fd9f6e1ae90ea607403133359ade85531a8f3a2"
+  },
+  "manifest_digest": "b40c07e40ad55b03f00ce1f907f3a7e61775ee486bc6127bcc0ff50f71af36aa",
+  "runtime_identity_free": true,
+  "schema_version": "arc3-p10-manifest-lifecycle-v1"
+}

@@ -4,7 +4,19 @@ import unittest
 
 import arc3_agi_agent.fruit_merge as fruit
 from arc3_agi_agent.fruit_merge import (
+    FRUIT_MERGE_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR,
     FRUIT_MERGE_OPERATOR,
+    FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+    FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
     FruitMergeState,
 )
 from arc3_agi_agent.instruction_body import SemanticOperatorInstruction
@@ -15,6 +27,7 @@ from arc3_agi_agent.semantic_operators import SemanticPlannerState
 def instruction(
     *,
     target_max_area: int = 80,
+    operator_id: str = FRUIT_MERGE_OPERATOR,
 ) -> SemanticOperatorInstruction:
     actor_masks: list[dict[str, object]] = [
         {
@@ -32,7 +45,23 @@ def instruction(
                 [2, 3],
                 [3, 3],
             ],
-        }
+        },
+        {
+            "kind": "actor-b",
+            "color": 14,
+            "width": 5,
+            "height": 4,
+            "mask": [
+                [2, 0],
+                [1, 1],
+                [3, 1],
+                [0, 2],
+                [2, 2],
+                [4, 2],
+                [1, 3],
+                [3, 3],
+            ],
+        },
     ]
     parameters: dict[str, object] = {
         "click_action": 6,
@@ -45,6 +74,7 @@ def instruction(
         "actor_move_distance": 14,
         "actor_chase_risk_distance": 24,
         "actor_divert_interval": 1,
+        "actor_fruit_rank_delta": -1,
         "interface_max_y": 9,
         "playfield_min_y": 10,
         "playfield_max_y": 62,
@@ -60,9 +90,22 @@ def instruction(
             {"rank": 3, "color": 11, "side": 4},
         ],
         "actor_specs": actor_masks,
+        "actor_merge_chain": ["actor-a", "actor-b"],
     }
+    if operator_id in {
+        FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+        FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+        FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+        FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+        FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+        FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+        FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+        FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+        FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
+    }:
+        parameters["maximum_transition_observations"] = 2
     return SemanticOperatorInstruction(
-        operator_id=FRUIT_MERGE_OPERATOR,
+        operator_id=operator_id,
         action_id=6,
         detector="rendered goal glyphs, fruits, actors, and targets",
         transform="single-step merge and target placement",
@@ -198,6 +241,464 @@ class P10FruitMergeTests(unittest.TestCase):
         self.assertEqual(state.fruit_action_streak, 1)
         self.assertEqual(state.blocked_clicks, [state.last_click])
 
+    def test_candidate_observes_multi_frame_effect_before_bounded_undo(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+        )
+        state = FruitMergeState()
+        initial = state.decide(fruit_grid(), (6, 7), candidate)
+        missing = tuple(
+            tuple(2 for _ in range(64)) for _ in range(64)
+        )
+
+        first = state.decide(missing, (6, 7), candidate)
+        restored = FruitMergeState.from_payload(state.to_payload())
+        second = restored.decide(missing, (6, 7), candidate)
+        bounded_undo = restored.decide(missing, (6, 7), candidate)
+
+        self.assertIsNotNone(initial.action)
+        self.assertIsNotNone(first.action)
+        self.assertIsNotNone(second.action)
+        self.assertIsNotNone(bounded_undo.action)
+        assert first.action is not None
+        assert second.action is not None
+        assert bounded_undo.action is not None
+        self.assertEqual(first.action.action_id, 7)
+        self.assertEqual(second.action.action_id, 7)
+        self.assertIn("effect-observation", first.reason)
+        self.assertIn("effect-observation", second.reason)
+        self.assertIn("observation-limit-undo", bounded_undo.reason)
+        assert initial.action is not None
+        self.assertEqual(
+            restored.blocked_clicks,
+            [(initial.action.x, initial.action.y)],
+        )
+
+    def test_safe_observation_candidate_uses_nonsemantic_click(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+        )
+        grid = fruit_grid()
+        surface = fruit._surface_from_grid(grid, (6, 7), candidate)
+        self.assertIsNotNone(surface)
+        assert surface is not None
+        state = FruitMergeState()
+        state.decide(grid, (6, 7), candidate)
+        missing = tuple(
+            tuple(2 for _ in range(64)) for _ in range(64)
+        )
+
+        observation = state.decide(missing, (6, 7), candidate)
+
+        self.assertIsNotNone(observation.action)
+        assert observation.action is not None
+        self.assertEqual(observation.action.action_id, 6)
+        self.assertIsNotNone(observation.action.x)
+        self.assertIsNotNone(observation.action.y)
+        assert observation.action.x is not None
+        assert observation.action.y is not None
+        click = (observation.action.x, observation.action.y)
+        self.assertEqual(fruit._affected_fruits(surface, click), ())
+        self.assertEqual(fruit._affected_actors(surface, click), ())
+        self.assertTrue(
+            all(
+                fruit._bbox_distance_sq(target.bbox, click)
+                > surface.parameters.click_radius**2
+                for target in surface.targets
+            )
+        )
+
+    def test_candidate_retains_semantic_ownership_during_partial_effect(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR,
+        )
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        actor_mask = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        for x, y in actor_mask:
+            rows[2 + y][4 + x] = 7
+            rows[24 + y][24 + x] = 7
+        for y in range(40, 49):
+            for x in range(20, 29):
+                if y in {40, 41, 47, 48} or x in {20, 21, 27, 28}:
+                    rows[y][x] = 9
+        complete_surface = tuple(tuple(row) for row in rows)
+        partial_rows = [list(row) for row in complete_surface]
+        for x, y in actor_mask:
+            partial_rows[24 + y][24 + x] = 2
+        partial_surface = tuple(tuple(row) for row in partial_rows)
+        state = FruitMergeState()
+
+        staged = state.decide(complete_surface, (6, 7), candidate)
+        observation = state.decide(partial_surface, (6, 7), candidate)
+
+        self.assertIsNotNone(staged.action)
+        self.assertIsNotNone(observation.action)
+        assert observation.action is not None
+        self.assertEqual(observation.action.action_id, 7)
+        self.assertIn("effect-observation", observation.reason)
+        self.assertEqual(state.blocked_clicks, [])
+
+    def test_no_plan_candidate_rolls_back_and_blocks_staged_action(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_NO_PLAN_ROLLBACK_CANDIDATE_OPERATOR,
+        )
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        actor_mask = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        for x, y in actor_mask:
+            rows[2 + y][4 + x] = 7
+            rows[24 + y][24 + x] = 7
+        for y in range(40, 49):
+            for x in range(20, 29):
+                if y in {40, 41, 47, 48} or x in {20, 21, 27, 28}:
+                    rows[y][x] = 9
+        complete_surface = tuple(tuple(row) for row in rows)
+        partial_rows = [list(row) for row in complete_surface]
+        for x, y in actor_mask:
+            partial_rows[24 + y][24 + x] = 2
+        partial_surface = tuple(tuple(row) for row in partial_rows)
+        state = FruitMergeState()
+
+        staged = state.decide(complete_surface, (6, 7), candidate)
+        rollback = state.decide(partial_surface, (6, 7), candidate)
+
+        self.assertIsNotNone(staged.action)
+        self.assertIsNotNone(rollback.action)
+        assert staged.action is not None
+        assert rollback.action is not None
+        self.assertEqual(rollback.action.action_id, 7)
+        self.assertIn("goal-plan-unavailable-undo", rollback.reason)
+        self.assertEqual(
+            state.blocked_clicks,
+            [(staged.action.x, staged.action.y)],
+        )
+        self.assertIsNone(state.pending_effect_click)
+
+    def test_repeat_pending_candidate_advances_same_semantic_intent(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_REPEAT_PENDING_CANDIDATE_OPERATOR,
+        )
+        state = FruitMergeState()
+        staged = state.decide(fruit_grid(), (6, 7), candidate)
+        missing = tuple(
+            tuple(2 for _ in range(64)) for _ in range(64)
+        )
+
+        repeated = state.decide(missing, (6, 7), candidate)
+
+        self.assertIsNotNone(staged.action)
+        self.assertIsNotNone(repeated.action)
+        assert staged.action is not None
+        assert repeated.action is not None
+        self.assertEqual(repeated.action.action_id, 6)
+        self.assertEqual(
+            (repeated.action.x, repeated.action.y),
+            (staged.action.x, staged.action.y),
+        )
+        self.assertIn("effect-observation", repeated.reason)
+        self.assertEqual(state.blocked_clicks, [])
+
+    def test_route_continuation_candidate_repeats_only_route_intent(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_ROUTE_CONTINUATION_CANDIDATE_OPERATOR,
+        )
+        missing = tuple(
+            tuple(2 for _ in range(64)) for _ in range(64)
+        )
+        route_state = FruitMergeState()
+        route = route_state.decide(
+            fruit_grid(merged=True),
+            (6, 7),
+            candidate,
+        )
+        continuation = route_state.decide(missing, (6, 7), candidate)
+        merge_state = FruitMergeState()
+        merge = merge_state.decide(fruit_grid(), (6, 7), candidate)
+        rollback = merge_state.decide(missing, (6, 7), candidate)
+
+        self.assertIsNotNone(route.action)
+        self.assertIsNotNone(continuation.action)
+        self.assertIsNotNone(merge.action)
+        self.assertIsNotNone(rollback.action)
+        assert route.action is not None
+        assert continuation.action is not None
+        assert rollback.action is not None
+        self.assertIn("required-fruit-route", route.reason)
+        self.assertEqual(continuation.action.action_id, 6)
+        self.assertEqual(
+            (continuation.action.x, continuation.action.y),
+            (route.action.x, route.action.y),
+        )
+        self.assertIn("effect-observation", continuation.reason)
+        self.assertEqual(rollback.action.action_id, 7)
+        self.assertIn("observation-limit-undo", rollback.reason)
+
+    def test_interface_observation_candidate_uses_rendered_background(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_INTERFACE_OBSERVATION_CANDIDATE_OPERATOR,
+        )
+        grid = fruit_grid()
+        state = FruitMergeState()
+        staged = state.decide(grid, (6, 7), candidate)
+        missing = tuple(
+            tuple(2 for _ in range(64)) for _ in range(64)
+        )
+
+        observation = state.decide(missing, (6, 7), candidate)
+
+        self.assertIsNotNone(staged.action)
+        self.assertIsNotNone(observation.action)
+        assert staged.action is not None
+        assert observation.action is not None
+        self.assertEqual(observation.action.action_id, 6)
+        self.assertIsNotNone(observation.action.x)
+        self.assertIsNotNone(observation.action.y)
+        assert observation.action.x is not None
+        assert observation.action.y is not None
+        self.assertLessEqual(observation.action.y, 9)
+        self.assertEqual(
+            grid[observation.action.y][observation.action.x],
+            2,
+        )
+        self.assertNotEqual(
+            (observation.action.x, observation.action.y),
+            (staged.action.x, staged.action.y),
+        )
+        self.assertIn("effect-observation", observation.reason)
+
+    def test_route_safe_observation_candidate_uses_empty_playfield(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_ROUTE_SAFE_OBSERVATION_CANDIDATE_OPERATOR,
+        )
+        grid = fruit_grid(merged=True)
+        surface = fruit._surface_from_grid(grid, (6, 7), candidate)
+        self.assertIsNotNone(surface)
+        assert surface is not None
+        state = FruitMergeState()
+        route = state.decide(grid, (6, 7), candidate)
+        missing = tuple(
+            tuple(2 for _ in range(64)) for _ in range(64)
+        )
+
+        observation = state.decide(missing, (6, 7), candidate)
+
+        self.assertIsNotNone(route.action)
+        self.assertIsNotNone(observation.action)
+        assert route.action is not None
+        assert observation.action is not None
+        self.assertIn("required-fruit-route", route.reason)
+        self.assertEqual(observation.action.action_id, 6)
+        self.assertIsNotNone(observation.action.x)
+        self.assertIsNotNone(observation.action.y)
+        assert observation.action.x is not None
+        assert observation.action.y is not None
+        click = (observation.action.x, observation.action.y)
+        self.assertGreaterEqual(observation.action.y, 10)
+        self.assertNotEqual(
+            click,
+            (route.action.x, route.action.y),
+        )
+        self.assertEqual(fruit._affected_fruits(surface, click), ())
+        self.assertEqual(fruit._affected_actors(surface, click), ())
+
+    def test_route_actor_diversion_candidate_moves_actor_from_fruit(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_ROUTE_ACTOR_DIVERSION_CANDIDATE_OPERATOR,
+        )
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        actor_mask = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        for x, y in actor_mask:
+            rows[16 + y][20 + x] = 7
+            rows[2 + y][40 + x] = 7
+        for y in range(40, 49):
+            for x in range(20, 29):
+                if y in {40, 41, 47, 48} or x in {20, 21, 27, 28}:
+                    rows[y][x] = 9
+        grid = tuple(tuple(row) for row in rows)
+        surface = fruit._surface_from_grid(grid, (6, 7), candidate)
+        self.assertIsNotNone(surface)
+        assert surface is not None
+        diversion = FruitMergeState().decide(grid, (6, 7), candidate)
+
+        self.assertIsNotNone(diversion.action)
+        assert diversion.action is not None
+        self.assertIn("actor-hazard-divert", diversion.reason)
+        self.assertEqual(diversion.action.action_id, 6)
+        self.assertIsNotNone(diversion.action.x)
+        self.assertIsNotNone(diversion.action.y)
+        assert diversion.action.x is not None
+        assert diversion.action.y is not None
+        click = (diversion.action.x, diversion.action.y)
+        affected = fruit._affected_actors(surface, click)
+        self.assertEqual(len(affected), 1)
+        self.assertEqual(fruit._affected_fruits(surface, click), ())
+        actor = surface.actors[affected[0]]
+        predicted = fruit._moved_actor_center(
+            actor,
+            click,
+            surface.parameters.actor_move_distance,
+            surface,
+        )
+        current_risk = min(
+            fruit._distance_sq(actor.center, item.center)
+            for item in surface.fruits
+        )
+        predicted_risk = min(
+            fruit._distance_sq(predicted, item.center)
+            for item in surface.fruits
+        )
+        self.assertGreater(predicted_risk, current_risk)
+
+    def test_target_actor_anchor_advances_route_transition_in_place(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=FRUIT_MERGE_TARGET_ACTOR_ANCHOR_CANDIDATE_OPERATOR,
+        )
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        actor_b = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (2, 2),
+            (4, 2),
+            (1, 3),
+            (3, 3),
+        )
+        for y in range(40, 49):
+            for x in range(20, 29):
+                if y in {40, 41, 47, 48} or x in {20, 21, 27, 28}:
+                    rows[y][x] = 9
+        for offset_x, offset_y in actor_b:
+            rows[2 + offset_y][40 + offset_x] = 14
+            rows[42 + offset_y][22 + offset_x] = 14
+        grid = tuple(tuple(row) for row in rows)
+        surface = fruit._surface_from_grid(grid, (6, 7), candidate)
+        self.assertIsNotNone(surface)
+        assert surface is not None
+        state = FruitMergeState()
+
+        route = state.decide(grid, (6, 7), candidate)
+        missing = tuple(tuple(2 for _ in range(64)) for _ in range(64))
+        observation = state.decide(missing, (6, 7), candidate)
+
+        self.assertIsNotNone(route.action)
+        self.assertIn("required-fruit-route", route.reason)
+        self.assertIsNotNone(observation.action)
+        assert observation.action is not None
+        self.assertEqual(observation.action.action_id, 6)
+        click = (observation.action.x, observation.action.y)
+        target_actor = next(
+            actor
+            for actor in surface.actors
+            if actor.kind == "actor-b"
+        )
+        self.assertEqual(click, target_actor.center)
+        self.assertEqual(fruit._affected_fruits(surface, click), ())
+        self.assertIn("effect-observation", observation.reason)
+
+    def test_terminal_actor_is_protected_before_required_fruit_route(
+        self,
+    ) -> None:
+        candidate = instruction(
+            operator_id=(
+                FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR
+            ),
+        )
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        actor_b = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (2, 2),
+            (4, 2),
+            (1, 3),
+            (3, 3),
+        )
+        for offset_x, offset_y in actor_b:
+            rows[2 + offset_y][40 + offset_x] = 14
+            rows[30 + offset_y][28 + offset_x] = 14
+        for y in range(40, 49):
+            for x in range(20, 29):
+                if y in {40, 41, 47, 48} or x in {20, 21, 27, 28}:
+                    rows[y][x] = 9
+        grid = tuple(tuple(row) for row in rows)
+        surface = fruit._surface_from_grid(grid, (6, 7), candidate)
+        self.assertIsNotNone(surface)
+        assert surface is not None
+
+        decision = FruitMergeState().decide(grid, (6, 7), candidate)
+
+        self.assertIsNotNone(decision.action)
+        self.assertIn("actor-hazard-divert", decision.reason)
+        assert decision.action is not None
+        assert decision.action.x is not None
+        assert decision.action.y is not None
+        click = (decision.action.x, decision.action.y)
+        affected = fruit._affected_actors(surface, click)
+        self.assertEqual(len(affected), 1)
+        actor = surface.actors[affected[0]]
+        self.assertEqual(actor.kind, "actor-b")
+        predicted = fruit._moved_actor_center(
+            actor,
+            click,
+            surface.parameters.actor_move_distance,
+            surface,
+        )
+        self.assertGreater(
+            min(
+                fruit._distance_sq(predicted, item.center)
+                for item in surface.fruits
+            ),
+            fruit._actor_risk(surface, actor),
+        )
+
     def test_semantic_planner_preserves_passive_operator_state(self) -> None:
         planner = SemanticPlannerState()
         first = planner.decide(
@@ -301,7 +802,7 @@ class P10FruitMergeTests(unittest.TestCase):
             (3, 3),
         )
         for offset_x, offset_y in mask:
-            rows[20 + offset_y][30 + offset_x] = 7
+            rows[50 + offset_y][50 + offset_x] = 7
         grid = tuple(tuple(row) for row in rows)
         state = FruitMergeState()
 
@@ -328,6 +829,315 @@ class P10FruitMergeTests(unittest.TestCase):
             periodic.action.step(),
             alternative.action.step(),
         )
+
+    def test_at_risk_actor_is_diverted_before_fruit_route(self) -> None:
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        mask = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        for offset_x, offset_y in mask:
+            rows[20 + offset_y][18 + offset_x] = 7
+
+        grid = tuple(tuple(row) for row in rows)
+        state = FruitMergeState()
+
+        decision = state.decide(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+        next_decision = state.decide(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+
+        self.assertIsNotNone(decision.action)
+        self.assertIn("actor-hazard-divert", decision.reason)
+        self.assertIsNotNone(next_decision.action)
+        self.assertIn("required-fruit-route", next_decision.reason)
+
+    def test_diversion_prioritizes_actor_nearest_to_fruit(self) -> None:
+        rows = [list(row) for row in fruit_grid()]
+        mask = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        for actor_x in (30, 50):
+            for offset_x, offset_y in mask:
+                rows[20 + offset_y][actor_x + offset_x] = 7
+        grid = tuple(tuple(row) for row in rows)
+        surface = fruit._surface_from_grid(grid, (6, 7), instruction())
+        self.assertIsNotNone(surface)
+        assert surface is not None
+        state = FruitMergeState()
+        state.decide(grid, (6, 7), instruction())
+        state.fruit_action_streak = 1
+
+        decision = state.decide(grid, (6, 7), instruction())
+
+        self.assertIsNotNone(decision.action)
+        assert decision.action is not None
+        assert decision.action.x is not None
+        assert decision.action.y is not None
+        affected = fruit._affected_actors(
+            surface,
+            (decision.action.x, decision.action.y),
+        )
+        self.assertEqual(affected, (0,))
+        self.assertLess(
+            fruit._actor_risk(surface, surface.actors[0]),
+            fruit._actor_risk(surface, surface.actors[1]),
+        )
+
+    def test_actor_routes_toward_higher_rank_fruit_for_reduction(
+        self,
+    ) -> None:
+        rows = [list(row) for row in fruit_grid()]
+        rows[20][10] = 2
+        rows[20][16] = 2
+        for y in range(20, 24):
+            for x in range(24, 28):
+                rows[y][x] = 11
+        mask = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        for offset_x, offset_y in mask:
+            rows[20 + offset_y][4 + offset_x] = 7
+        grid = tuple(tuple(row) for row in rows)
+        surface = fruit._surface_from_grid(grid, (6, 7), instruction())
+        self.assertIsNotNone(surface)
+        assert surface is not None
+        before = fruit._distance_sq(
+            surface.actors[0].center,
+            surface.fruits[0].center,
+        )
+
+        decision = FruitMergeState().decide(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+
+        self.assertIsNotNone(decision.action)
+        assert decision.action is not None
+        assert decision.action.x is not None
+        assert decision.action.y is not None
+        self.assertIn("actor-fruit-rank-reduction", decision.reason)
+        predicted = fruit._moved_actor_center(
+            surface.actors[0],
+            (decision.action.x, decision.action.y),
+            surface.parameters.actor_move_distance,
+            surface,
+        )
+        self.assertLess(
+            fruit._distance_sq(predicted, surface.fruits[0].center),
+            before,
+        )
+
+    def test_near_actor_uses_empty_click_to_continue_rank_reduction(
+        self,
+    ) -> None:
+        rows = [list(row) for row in fruit_grid()]
+        rows[20][10] = 2
+        rows[20][16] = 2
+        for y in range(20, 24):
+            for x in range(24, 28):
+                rows[y][x] = 11
+        mask = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        for offset_x, offset_y in mask:
+            rows[20 + offset_y][16 + offset_x] = 7
+        grid = tuple(tuple(row) for row in rows)
+        surface = fruit._surface_from_grid(grid, (6, 7), instruction())
+        self.assertIsNotNone(surface)
+        assert surface is not None
+
+        decision = FruitMergeState().decide(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+
+        self.assertIsNotNone(decision.action)
+        assert decision.action is not None
+        assert decision.action.x is not None
+        assert decision.action.y is not None
+        click = (decision.action.x, decision.action.y)
+        self.assertIn("actor-chase-rank-reduction", decision.reason)
+        self.assertEqual(fruit._affected_actors(surface, click), ())
+        self.assertEqual(fruit._affected_fruits(surface, click), ())
+
+    def test_missing_inventory_is_merged_before_higher_rank_reduction(
+        self,
+    ) -> None:
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        for y in range(4, 6):
+            for x in range(34, 36):
+                rows[y][x] = 6
+        for y in range(40, 49):
+            for x in range(20, 29):
+                if y in {40, 41, 47, 48} or x in {20, 21, 27, 28}:
+                    rows[y][x] = 9
+        rows[20][16] = 10
+        rows[20][22] = 10
+        for y in range(20, 24):
+            for x in range(40, 44):
+                rows[y][x] = 11
+        mask = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        for offset_x, offset_y in mask:
+            rows[50 + offset_y][50 + offset_x] = 7
+        grid = tuple(tuple(row) for row in rows)
+
+        decision = FruitMergeState().decide(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+
+        self.assertIsNotNone(decision.action)
+        self.assertIn("equal-rank-merge", decision.reason)
+
+    def test_lower_kind_actors_are_merged_before_target_placement(
+        self,
+    ) -> None:
+        rows = [[2] * 64 for _ in range(64)]
+        actor_a = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        actor_b = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (2, 2),
+            (4, 2),
+            (1, 3),
+            (3, 3),
+        )
+        for offset_x, offset_y in actor_b:
+            rows[2 + offset_y][40 + offset_x] = 14
+        for actor_x in (10, 26):
+            for offset_x, offset_y in actor_a:
+                rows[20 + offset_y][actor_x + offset_x] = 7
+        for y in range(40, 49):
+            for x in range(40, 49):
+                if y in {40, 41, 47, 48} or x in {40, 41, 47, 48}:
+                    rows[y][x] = 9
+        grid = tuple(tuple(row) for row in rows)
+
+        decision = FruitMergeState().decide(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+
+        self.assertIsNotNone(decision.action)
+        self.assertIn("equal-kind-actor", decision.reason)
+
+    def test_nonrequired_actor_is_diverted_during_actor_placement(
+        self,
+    ) -> None:
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        actor_a = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (4, 2),
+            (1, 3),
+            (2, 3),
+            (3, 3),
+        )
+        actor_b = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (2, 2),
+            (4, 2),
+            (1, 3),
+            (3, 3),
+        )
+        for offset_x, offset_y in actor_b:
+            rows[2 + offset_y][40 + offset_x] = 14
+            rows[30 + offset_y][30 + offset_x] = 14
+        for offset_x, offset_y in actor_a:
+            rows[20 + offset_y][13 + offset_x] = 7
+        for y in range(40, 49):
+            for x in range(20, 29):
+                if y in {40, 41, 47, 48} or x in {20, 21, 27, 28}:
+                    rows[y][x] = 9
+        grid = tuple(tuple(row) for row in rows)
+        surface = fruit._surface_from_grid(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+        self.assertIsNotNone(surface)
+        assert surface is not None
+
+        decision = FruitMergeState().decide(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+
+        self.assertIsNotNone(decision.action)
+        assert decision.action is not None
+        assert decision.action.x is not None
+        assert decision.action.y is not None
+        self.assertIn("actor-hazard-divert", decision.reason)
+        affected = fruit._affected_actors(
+            surface,
+            (decision.action.x, decision.action.y),
+        )
+        self.assertEqual(len(affected), 1)
+        self.assertEqual(surface.actors[affected[0]].kind, "actor-a")
 
     def test_actor_requirement_is_detected_from_interface_pattern(
         self,
@@ -363,6 +1173,58 @@ class P10FruitMergeTests(unittest.TestCase):
         assert surface is not None
         self.assertEqual(surface.required_actors, (("actor-a", 1),))
         self.assertEqual(len(surface.actors), 1)
+
+    def test_candidate_places_fruit_before_mobile_required_actor(
+        self,
+    ) -> None:
+        rows = [list(row) for row in fruit_grid(merged=True)]
+        actor_b = (
+            (2, 0),
+            (1, 1),
+            (3, 1),
+            (0, 2),
+            (2, 2),
+            (4, 2),
+            (1, 3),
+            (3, 3),
+        )
+        for offset_x, offset_y in actor_b:
+            rows[2 + offset_y][40 + offset_x] = 14
+            rows[30 + offset_y][28 + offset_x] = 14
+        for y in range(40, 49):
+            for x in range(20, 29):
+                if y in {40, 41, 47, 48} or x in {20, 21, 27, 28}:
+                    rows[y][x] = 9
+        grid = tuple(tuple(row) for row in rows)
+
+        active = FruitMergeState().decide(
+            grid,
+            (6, 7),
+            instruction(),
+        )
+        candidate = FruitMergeState().decide(
+            grid,
+            (6, 7),
+            instruction(operator_id=FRUIT_MERGE_CANDIDATE_OPERATOR),
+        )
+        terminal_actor_first = FruitMergeState().decide(
+            grid,
+            (6, 7),
+            instruction(
+                operator_id=(
+                    FRUIT_MERGE_TERMINAL_ACTOR_FIRST_CANDIDATE_OPERATOR
+                )
+            ),
+        )
+
+        self.assertIn("required-actor-route", active.reason)
+        self.assertIn("required-fruit-route", candidate.reason)
+        self.assertIsNotNone(candidate.action)
+        self.assertIn(
+            "required-actor-route",
+            terminal_actor_first.reason,
+        )
+        self.assertIsNotNone(terminal_actor_first.action)
 
 
 if __name__ == "__main__":

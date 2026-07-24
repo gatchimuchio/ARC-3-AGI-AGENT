@@ -1,0 +1,39 @@
+{
+  "schema_version": "arc3-development-method-body-v1",
+  "active_version": "p-dev-v2",
+  "active_methods": [
+    {
+      "method_id": "authority-first-bounded-work-block",
+      "status": "ACTIVE",
+      "applicability": [
+        "repository implementation and audit blocks"
+      ],
+      "falsifier": "a work block proceeds after authority phase or dirty-state inconsistency",
+      "promotion_evidence": [
+        "repository AGENTS contract",
+        "multiple prior P10 work blocks"
+      ]
+    },
+    {
+      "method_id": "three-hypothesis-isolated-lifecycle-probe",
+      "status": "ACTIVE",
+      "method": [
+        "generate at least three structural hypotheses",
+        "select the smallest reversible falsifiable candidate by information gain",
+        "isolate candidate from active state",
+        "compare target stable and identical rerun evidence",
+        "allow only HDS to promote"
+      ],
+      "applicability": [
+        "P update control",
+        "identity-free semantic capability development"
+      ],
+      "falsifier": "a selected candidate is promoted without target improvement stable non-regression and reproducibility",
+      "promotion_evidence": [
+        "P lifecycle isolation work block",
+        "terminal actor protection work block"
+      ]
+    }
+  ],
+  "candidates": []
+}

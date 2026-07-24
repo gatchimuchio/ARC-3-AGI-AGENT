@@ -1,0 +1,195 @@
+{
+  "schema_version": "arc3-development-hypotheses-v1",
+  "frame_id": "p10-correction-p-lifecycle-separation-v1",
+  "hypotheses": [
+    {
+      "hypothesis_id": "H1-direct-existing-HDS-extension",
+      "kind": "H1",
+      "summary": "Add P mutation flags and compiler state directly to the existing runtime judgment subject.",
+      "predicted_effect": [
+        "required flags become available",
+        "existing judgment module gains compile and persistence coupling"
+      ],
+      "applicability": [
+        "runtime P lifecycle"
+      ],
+      "required_evidence": [
+        "existing judgment ownership tests",
+        "runtime regression"
+      ],
+      "falsifier": [
+        "the extension remains responsibility-isolated without widening J runtime"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 3,
+      "generality": 0.55,
+      "information_gain": 0.45,
+      "contamination_risk": 0.1,
+      "regression_risk": 0.55,
+      "status": "REJECTED"
+    },
+    {
+      "hypothesis_id": "H2-record-only-representation",
+      "kind": "H2",
+      "summary": "Represent the correction only as documents and registries.",
+      "predicted_effect": [
+        "operator intent becomes auditable",
+        "runtime compile promotion and rollback remain unenforced"
+      ],
+      "applicability": [
+        "development evidence organization"
+      ],
+      "required_evidence": [
+        "management artifact validation"
+      ],
+      "falsifier": [
+        "documents alone prevent an unowned active P mutation"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.35,
+      "information_gain": 0.2,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.05,
+      "status": "REJECTED"
+    },
+    {
+      "hypothesis_id": "H3-isolated-P-update-composition",
+      "kind": "H3",
+      "summary": "Compose a separate HDS-owned P update control layer with the existing judgment memory and compiler subjects.",
+      "predicted_effect": [
+        "active candidate and previous-stable slots remain disjoint",
+        "compile promotion and rollback require exact HDS-owned grants",
+        "existing runtime judgment responsibilities remain unchanged"
+      ],
+      "applicability": [
+        "symbolic parametric and hybrid instruction-body updates",
+        "offline development and runtime learning loops"
+      ],
+      "required_evidence": [
+        "negative authority tests",
+        "promotion gate test",
+        "rollback restoration test",
+        "full regression"
+      ],
+      "falsifier": [
+        "an unowned directive succeeds",
+        "candidate becomes active before promotion",
+        "stable P cannot be restored"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.9,
+      "information_gain": 0.9,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.15,
+      "status": "PROMOTED_METHOD",
+      "j_dev_decision": "PROMOTE"
+    },
+    {
+      "hypothesis_id": "H4-terminal-actor-anchor-observation",
+      "kind": "H4",
+      "summary": "Observe the required actor anchor during merge animations without changing placement policy.",
+      "predicted_effect": [
+        "actor chase drift becomes explicit",
+        "existing placement can still lose the required actor"
+      ],
+      "applicability": [
+        "rendered merge animation"
+      ],
+      "required_evidence": [
+        "transition recording"
+      ],
+      "falsifier": [
+        "observation alone closes the target"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.6,
+      "information_gain": 0.7,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.1,
+      "status": "REJECTED"
+    },
+    {
+      "hypothesis_id": "H5-farthest-safe-target-assignment",
+      "kind": "H5",
+      "summary": "Assign fruit to the rendered target farthest from the required terminal actor.",
+      "predicted_effect": [
+        "fruit placement moves away from the actor",
+        "four-frame chase can still displace the actor"
+      ],
+      "applicability": [
+        "multiple rendered targets"
+      ],
+      "required_evidence": [
+        "target assignment comparison"
+      ],
+      "falsifier": [
+        "assignment alone closes the target"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.65,
+      "information_gain": 0.65,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.15,
+      "status": "REJECTED"
+    },
+    {
+      "hypothesis_id": "H6-ring-safe-route-step",
+      "kind": "H6",
+      "summary": "Avoid currently rendered animation rings while routing fruit.",
+      "predicted_effect": [
+        "immediate ring collisions decrease",
+        "future unselected actor motion remains unprotected"
+      ],
+      "applicability": [
+        "visible animation ring"
+      ],
+      "required_evidence": [
+        "bounded route comparison"
+      ],
+      "falsifier": [
+        "ring avoidance alone closes the target"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.7,
+      "information_gain": 0.75,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "REJECTED"
+    },
+    {
+      "hypothesis_id": "H7-terminal-actor-protection",
+      "kind": "H7",
+      "summary": "Move the rendered required terminal actor to a safe anchor before fruit placement and reobserve four bounded transitions.",
+      "predicted_effect": [
+        "required actor remains outside the fruit chase path",
+        "target closes without fixed identity or coordinates"
+      ],
+      "applicability": [
+        "rendered equal-rank merge with explicit terminal actor goal"
+      ],
+      "required_evidence": [
+        "target completion",
+        "stable non-regression",
+        "identical rerun"
+      ],
+      "falsifier": [
+        "target remains incomplete",
+        "stable completion decreases",
+        "rerun digest changes"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.85,
+      "information_gain": 0.95,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "PROMOTED",
+      "j_dev_decision": "PROBE_THEN_PROMOTE"
+    }
+  ]
+}

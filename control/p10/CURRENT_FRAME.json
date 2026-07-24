@@ -1,0 +1,149 @@
+{
+  "schema_version": "arc3-p10-development-frame-v1",
+  "frame_id": "p10-v14-post-promotion-full-sample-audit-v1",
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "authority": {
+    "document": "docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md",
+    "source_sha256_crlf": "4de320cf04d73083fb2832e8dc22b3c8c98c90c236c58d54951a6d26a7d383dc",
+    "repository_sha256_lf": "fa56f68b7457dcc1cfc073a55d19bdf942cd440df33df89f300c80ee80b4e226"
+  },
+  "self_check": {
+    "branch": "main",
+    "base_head": "71b8ec2f210e16869465388ba58386e2c2e68295",
+    "dirty_state_preserved": true,
+    "operation_mode": "OFFLINE_ONLY",
+    "active_p": {
+      "P-A": "p10-p-a-symbolic-v20",
+      "P-B": "p10-p-b-parametric-v20",
+      "hybrid": "p10-hybrid-v19"
+    },
+    "last_promoted_p": {
+      "P-A": "p10-p-a-symbolic-v20",
+      "P-B": "p10-p-b-parametric-v20",
+      "hybrid": "p10-hybrid-v19",
+      "lifecycle": "PROMOTED"
+    },
+    "runtime_memory_initial_state": "per-session-passive-memory-version-0",
+    "stable_completed_levels": 29,
+    "retained_level_count": 183,
+    "current_full_score": "UNMEASURED_FULL_25_GAME_REPORT_TIMEOUT",
+    "latest_failure_signature": "all-samples-wall-clock-timeout-without-checkpoint",
+    "stop_conditions": [
+      "runtime identity routing detected",
+      "HDS authority bypass detected",
+      "stable active P overwritten by a candidate",
+      "official API or competition path reached",
+      "unclassified regression"
+    ]
+  },
+  "X": {
+    "observe": [
+      "active and candidate manifest resolution",
+      "HDS compile promotion and rollback authority",
+      "development hypothesis lifecycle",
+      "changed P-B parameters and same-input C output",
+      "promoted rendered terminal actor protection",
+      "full-sample wall-clock and checkpoint behavior"
+    ],
+    "change": [
+      "isolated development Trinity contracts",
+      "isolated runtime P update lifecycle",
+      "active candidate and previous-stable representation",
+      "machine-readable P10 control artifacts"
+    ],
+    "evidence_use": [
+      "committed active bundle digests",
+      "content-addressed candidate and promotion digests",
+      "stable compact completion evidence",
+      "structural failure evidence",
+      "focused unit and static validation"
+    ],
+    "evidence_exclude": [
+      "source or hidden environment state",
+      "task identity as runtime routing input",
+      "replay or fixed action sequences",
+      "official scorecard and Kaggle state"
+    ]
+  },
+  "R": {
+    "hypotheses": [
+      "H4-terminal-actor-anchor-observation",
+      "H5-farthest-safe-target-assignment",
+      "H6-ring-safe-route-step",
+      "H7-terminal-actor-protection"
+    ],
+    "predictions": [
+      "H4 can expose chase drift but does not prevent it",
+      "H5 changes fruit assignment but does not protect the terminal actor",
+      "H6 avoids visible rings but does not cover four-frame chase motion",
+      "H7 moves the required terminal actor to a rendered-safe anchor before fruit placement"
+    ],
+    "comparators": [
+      "previous stable active manifest",
+      "isolated v14 candidate manifest",
+      "same-condition target and three stable regressions",
+      "first and second candidate runs"
+    ],
+    "expected_state_transition": "seven of nine target levels -> nine of nine without stable regression",
+    "falsification_relation": "target fails, stable completion drops, or rerun digest changes"
+  },
+  "Mc": {
+    "identity": "generic-double-trinity-P-update-control",
+    "boundary": "local OFFLINE control plane and retained sample runtime only",
+    "acceptance": [
+      "at least three structural hypotheses are represented and judged",
+      "active loaders resolve the HDS-promoted bundle",
+      "compile promotion and rollback grants are HDS-owned and single-use",
+      "all ten promotion gates are executable",
+      "target and stable regressions pass twice deterministically"
+    ],
+    "stop": [
+      "candidate is activated without HDS promotion",
+      "version-only P-B is represented as learned",
+      "unowned decision authorizes compile promotion or rollback"
+    ],
+    "rollback": [
+      "restore previous stable v8 v8 v7 manifest",
+      "retain failed candidate evidence without activation"
+    ],
+    "completion": [
+      "P10-A baseline is fixed",
+      "P10-B development Trinity is executable",
+      "P10-C runtime P update contract is executable",
+      "P10-D through P10-F closed by real P-B learning, deterministic regression, and HDS promotion",
+      "P10-G remains gated on twenty-five-game one-hundred-eighty-three-level completion"
+    ]
+  },
+  "non_goals": [
+    "P11 start",
+    "official ARC or Kaggle connection",
+    "competition mode"
+  ],
+  "evidence_boundary": [
+    "current repository content",
+    "retained OFFLINE sample evidence",
+    "deterministic local tests"
+  ],
+  "falsifiers": [
+    "an unpromoted candidate aliases active",
+    "manual PUpdateDecision can authorize a directive",
+    "promotion succeeds with one failed gate",
+    "rollback cannot restore previous stable P"
+  ],
+  "regression_line": [
+    "full unit suite",
+    "integration suite",
+    "mypy strict",
+    "ruff",
+    "compileall",
+    "runtime identity scan"
+  ],
+  "maximum_work_scope": [
+    "double-Trinity control contract",
+    "P lifecycle separation",
+    "P-B retraining seam",
+    "closed-loop proof artifacts",
+    "identity-free terminal actor protection",
+    "resumable full-sample evidence collection"
+  ]
+}

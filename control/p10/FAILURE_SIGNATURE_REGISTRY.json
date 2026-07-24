@@ -1,0 +1,77 @@
+{
+  "schema_version": "arc3-p10-failure-signature-registry-v1",
+  "failures": [
+    {
+      "signature": "active-candidate-manifest-alias",
+      "structural_condition": "a standard runtime loader resolves an unpromoted bundle",
+      "evidence": [
+        "pre-correction active manifest referenced candidate versions"
+      ],
+      "status": "RESOLVED_IN_PROBE",
+      "falsifier": "standard runtime loader returns any candidate digest"
+    },
+    {
+      "signature": "p-b-version-only-update",
+      "structural_condition": "body version changes while parameter digest and same-input output remain unchanged",
+      "evidence": [
+        "parametric stable and candidate parameter digests are identical"
+      ],
+      "status": "RESOLVED_BY_V14_PROMOTION",
+      "required_resolution": [
+        "HDS-approved memory dataset",
+        "changed parameter digest",
+        "changed same-input C output",
+        "attribution and holdout evidence"
+      ],
+      "resolution_evidence": [
+        "candidate and predecessor parameter digests differ",
+        "same-input C output digests differ",
+        "holdout loss improved under the HDS-approved learning gate"
+      ]
+    },
+    {
+      "signature": "candidate-surface-stagnation-after-partial-progress",
+      "structural_condition": "visible progress is achieved but bounded actions repeat without closing actor placement or diversion",
+      "evidence": [
+        "retained compact failure evidence",
+        "candidate diagnostic partial completion"
+      ],
+      "status": "RESOLVED_BY_V14_PROMOTION",
+      "falsifier": "same-condition candidate completes all levels without stable regression",
+      "resolution_evidence": [
+        "target completed nine of nine twice in 175 actions",
+        "stable regression remained twenty of twenty"
+      ]
+    },
+    {
+      "signature": "compiler-authority-bypass",
+      "structural_condition": "a compile output can be staged without an HDS-owned single-use grant",
+      "evidence": [
+        "legacy P10 compiler remains a low-level unbound path"
+      ],
+      "status": "RESOLVED_BY_CONTROLLED_COMPILE",
+      "required_resolution": [
+        "bind candidate compile adapter to InstructionBodyCompileDirective",
+        "negative bypass test"
+      ],
+      "resolution_evidence": [
+        "single-use HDS compile directive is required by the P update workflow",
+        "promotion requires an independent HDS promotion directive"
+      ]
+    },
+    {
+      "signature": "all-samples-wall-clock-timeout-without-checkpoint",
+      "structural_condition": "a sequential all-sample run exceeds the external command lifetime before writing its final report",
+      "evidence": [
+        "canonical 450-action active run timed out after 7200 seconds",
+        "no complete report was written"
+      ],
+      "status": "ACTIVE",
+      "required_resolution": [
+        "checkpoint each completed game",
+        "resume without replaying completed games",
+        "assemble and validate one complete twenty-five-game report"
+      ]
+    }
+  ]
+}
