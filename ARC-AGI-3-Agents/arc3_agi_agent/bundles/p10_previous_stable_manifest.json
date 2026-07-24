@@ -3,42 +3,42 @@
   "manifest": {
     "bundles": {
       "P-A": {
-        "body_version": "p10-p-a-symbolic-v24",
-        "content_digest": "sha256-decimal:058028972340856984758802925516692165490492610579694348439007033730960206642032",
-        "filename": "p10_p_a_symbolic_v24.json",
+        "body_version": "p10-p-a-symbolic-v25",
+        "content_digest": "sha256-decimal:065722052566738718989864294328847092855085135233616115238892678326422090543996",
+        "filename": "p10_p_a_symbolic_v25.json",
         "format_id": "symbolic-rule-graph",
-        "operator_count": 7,
-        "sha256": "b8b0acb0ff9f7ffa2d0902d51ac5feb146ad361f31baf4444ba1571eaff532ee"
+        "operator_count": 8,
+        "sha256": "512ba420dde4b97cc597f3b1a452f7b90d5445103dae46ea3b4fa7a3d02d5cb7"
       },
       "P-B": {
-        "body_version": "p10-p-b-parametric-v24",
-        "content_digest": "sha256-decimal:055208998719381031091780597038797434681222264512310010431436858418987676397293",
-        "filename": "p10_p_b_parametric_v24.json",
+        "body_version": "p10-p-b-parametric-v25",
+        "content_digest": "sha256-decimal:038480617535942750660383453114751029779347759980646336585467030801983738119179",
+        "filename": "p10_p_b_parametric_v25.json",
         "format_id": "parametric-sigmoid-matrix",
         "operator_count": 0,
-        "sha256": "6e0ca86e1080a933f512fe28b62a2c5c2d4d5b7f8aae25c093dbe095da34d3ce"
+        "sha256": "194b54c04cf58af0a80572747ad8d5a0c4a46da5caa7d07984cb88d7ebdac223"
       },
       "hybrid": {
-        "body_version": "p10-hybrid-v23",
-        "content_digest": "sha256-decimal:093714858090139705292480660664975463664215711285269537435183332787179300601926",
-        "filename": "p10_hybrid_v23.json",
+        "body_version": "p10-hybrid-v24",
+        "content_digest": "sha256-decimal:000775791022643019397770494198732669533727778711374798189545855529643559381202",
+        "filename": "p10_hybrid_v24.json",
         "format_id": "parametric-sigmoid-matrix",
-        "operator_count": 7,
-        "sha256": "3435c207f0e9b5d788397301b5d5de1b8b5e10d65c089aa1fe49226543534151"
+        "operator_count": 8,
+        "sha256": "eb349c778ced91427357d5c9d29a8e7fd04e6d000185eb60165840402572ea1f"
       }
     },
-    "compiler_version": "arc3-p10-instruction-compiler-v23",
+    "compiler_version": "arc3-p10-instruction-compiler-v24",
     "lifecycle": "ACTIVE",
-    "previous_stable_manifest_digest": "8db83a354c334811870bca13f72ea49b329dd35fb11fd77cb3cc92a07d400da3",
-    "promotion_decision_digest": "db7f2fa070cae56c3fbd1ed6f9bff1e89fc8de3f1764f361ac8b750f238d09ce",
-    "promotion_directive_digest": "ab26dcd76a9e3501c16be305429a9063aabc31579d30df4c35d63621e3186a35",
-    "regression_report_digest": "e1148c09d504eb8570a1f380283623d806c80abcb0153cfb6a67052fa4ca48e4",
+    "previous_stable_manifest_digest": "9beb81c420fff3b4bc453edc960300eb5912035a4efe871b57498adabf8d9584",
+    "promotion_decision_digest": "fa8b87d4fb39a44a9b96a92731992badf767423cab1ab2f5fa6a473843a4ac37",
+    "promotion_directive_digest": "353ddb87d2c566926b15e95aee9c0110661e3d8b18def0eac2a00462b499278b",
+    "regression_report_digest": "e0fac7262c69ffe5f5417d131ee98a3967abac07803f369dcfe3a07095997d09",
     "runtime_identity_free": true,
     "schema_version": "arc3-p10-instruction-manifest-v1",
     "seed": 0,
-    "source_candidate_manifest_digest": "96639058b29ffc9566add0b00b60de4054fb25f537ac50cb4f58999f21c8d306"
+    "source_candidate_manifest_digest": "9afd55159396b3b6ec7406c79fabb1bf2ad8acb1f118e3ef203e5b94a1282d73"
   },
-  "manifest_digest": "9beb81c420fff3b4bc453edc960300eb5912035a4efe871b57498adabf8d9584",
+  "manifest_digest": "ed005422ea68a7cc42bad99a10817ba7b6b7ab337bdb8993a750d781fba21c2c",
   "runtime_identity_free": true,
   "schema_version": "arc3-p10-manifest-lifecycle-v1"
 }

@@ -33,6 +33,7 @@ from arc3_agi_agent.semantic_operators import (
     FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
     MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR,
     OBJECT_TARGET_CONTROL_OPERATOR,
+    OCCLUDED_TARGET_ROUTE_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
     SELECTABLE_PUSH_TARGET_OPERATOR,
     SELECTABLE_ROUTE_TARGET_OPERATOR,
@@ -148,6 +149,7 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 MARKER_SHAPE_PUSH_TARGET_OPERATOR,
                 MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR,
                 OBJECT_TARGET_CONTROL_OPERATOR,
+                OCCLUDED_TARGET_ROUTE_OPERATOR,
                 RELATION_TOGGLE_OPERATOR,
                 FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
                 SYMBOLIC_REWRITE_OPERATOR,
@@ -162,6 +164,7 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 MARKER_SHAPE_PUSH_TARGET_OPERATOR,
                 MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR,
                 OBJECT_TARGET_CONTROL_OPERATOR,
+                OCCLUDED_TARGET_ROUTE_OPERATOR,
                 RELATION_TOGGLE_OPERATOR,
                 FRUIT_MERGE_TERMINAL_ACTOR_PROTECTION_CANDIDATE_OPERATOR,
                 SYMBOLIC_REWRITE_OPERATOR,
@@ -218,9 +221,9 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 learning_result=_learning_result(),
             )
             for filename in (
-                "p10_p_a_symbolic_v25.json",
-                "p10_p_b_parametric_v25.json",
-                "p10_hybrid_v24.json",
+                "p10_p_a_symbolic_v26.json",
+                "p10_p_b_parametric_v26.json",
+                "p10_hybrid_v25.json",
                 "p10_candidate_manifest.json",
             ):
                 self.assertEqual(
@@ -265,9 +268,9 @@ class P10InstructionCompilerTests(unittest.TestCase):
         self.assertEqual(
             tuple(body.body_version for body in active),
             (
-                "p10-p-a-symbolic-v25",
-                "p10-p-b-parametric-v25",
-                "p10-hybrid-v24",
+                "p10-p-a-symbolic-v26",
+                "p10-p-b-parametric-v26",
+                "p10-hybrid-v25",
             ),
         )
         self.assertTrue(

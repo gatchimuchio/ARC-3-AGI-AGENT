@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-method-body-v1",
-  "active_version": "p-dev-v3",
+  "active_version": "p-dev-v4",
   "active_methods": [
     {
       "method_id": "authority-first-bounded-work-block",
@@ -34,7 +34,8 @@
         "terminal actor protection work block",
         "selectable multi-object route work block",
         "marker shape-push work block",
-        "multi-actor shape-push work block"
+        "multi-actor shape-push work block",
+        "occluded-target route work block"
       ]
     },
     {
@@ -55,7 +56,27 @@
         "selectable object target push work block",
         "selectable multi-object route work block",
         "marker shape-push work block",
-        "multi-actor shape-push work block"
+        "multi-actor shape-push work block",
+        "occluded-target route work block"
+      ]
+    },
+    {
+      "method_id": "rendered-temporary-unavailability-queue-audit",
+      "status": "ACTIVE",
+      "method": [
+        "bind every queued action to rendered predecessor and expected successor evidence",
+        "classify each reobservation as MATCH UNAVAILABLE or MISMATCH",
+        "on bounded UNAVAILABLE advance exactly one already emitted predicted action",
+        "on MISMATCH or exhausted unavailability reset the semantic queue and reobserve"
+      ],
+      "applicability": [
+        "rendered multi-frame transitions where the moving object can temporarily occlude a semantic anchor"
+      ],
+      "falsifier": "an unavailable observation advances more than one action repeats an emitted action or accepts a stable mismatch",
+      "promotion_evidence": [
+        "occluded-target route work block",
+        "translated and rotated queue fixtures",
+        "same-condition four-to-five target delta"
       ]
     }
   ],

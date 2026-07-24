@@ -103,9 +103,9 @@ current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す
 ## 3. 現在の実測境界
 
 P10実行経路の関連unit、strict mypy、ruff gateは通過している。現行hybrid
-`p10-hybrid-v24`、instruction compiler
-`arc3-p10-instruction-compiler-v24`、semantic planner
-`arc3-semantic-planner-v9`、visual operator
+`p10-hybrid-v25`、instruction compiler
+`arc3-p10-instruction-compiler-v25`、semantic planner
+`arc3-semantic-planner-v10`、visual operator
 `arc3-p10-visual-operator-v13`、OFFLINE、seed 0のstable regression実測は
 次のとおりである。
 
@@ -119,6 +119,7 @@ P10実行経路の関連unit、strict mypy、ruff gateは通過している。�
 | selectable multi-object route | 2 / 7 | 96 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 | marker shape-target push | 3 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 | multi-actor shape-target push | 4 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
+| occluded-target route | 5 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 
 最初の四blockはerror 0、GAME_OVER 0、max-action停止なしである。
 v16 selectable-object target pushは、previous stableの0 / 7に対してcandidateが
@@ -131,10 +132,14 @@ v18ではclosed-outline interior、filled-shape family、bounded actor-mediated
 impulse push、dynamic footer除外、transient queue advancementを合成して
 target 2→3を再現し、`p10-hybrid-v23`へ昇格した。v19ではmultiple marker
 actor、selected index、観測由来click、recursive actor-mediated pushを合成し、
-target 3→4を二回再現して`p10-hybrid-v24`へ昇格した。両更新とも既存29 level
-を維持し、post-promotion v19 active runは4 / 7、192 actions、error 0だった。
-`MAX_ACTION_STOP`で残り3 target levelは未閉包である。現時点の
-HDS採用済み境界は`33 / 183`、残りは`150 level`。これは八つの
+target 3→4を二回再現して`p10-hybrid-v24`へ昇格した。v20では三つの
+intact sideと外側occluderに覆われた一つのmissing runからtargetを再構成し、
+occluder normalへ垂直に進入するbounded routeと、一時的なtarget edge
+unavailabilityで既emit actionを一つだけ進めるqueue検証を合成した。target
+4→5を二回再現して`p10-hybrid-v25`へ昇格した。各更新は既存29 levelを維持し、
+post-promotion v20 active runは5 / 7、192 actions、error 0だった。
+`MAX_ACTION_STOP`で残り2 target levelは未閉包である。現時点の
+HDS採用済み境界は`34 / 183`、残りは`149 level`。これは九つの
 意味演算子blockの限定証拠で、
 全sample攻略証拠またはfull local-oracle scoreではない。
 

@@ -286,6 +286,51 @@
         "full local oracle score"
       ],
       "status": "PROMOTED"
+    },
+    {
+      "experiment_id": "p10-occluded-target-route-v20",
+      "frame_id": "p10-v20-occluded-target-route-promotion-v1",
+      "selected_hypothesis": "H24-rendered-occluded-target-state-representation",
+      "supporting_hypothesis": "H25-bounded-occlusion-aware-route-composition",
+      "rejected_hypothesis": "H23-direct-fallback-action-order",
+      "bounded_change": [
+        "unique three-sided target reconstruction from rendered geometry",
+        "coherent exterior occluder and missing-run validation",
+        "bounded single-object A-star route with perpendicular target entry",
+        "rendered queued-state evidence and bounded target-edge unavailability",
+        "candidate-only P compile before HDS promotion"
+      ],
+      "baseline": "previous active target completed four of seven at one hundred ninety-two actions",
+      "prediction": [
+        "candidate completes at least five target levels",
+        "prior twenty-nine stable levels remain complete",
+        "same-condition candidate rerun is identical",
+        "translation, rotation, open-outline, ambiguity, blocked-search, and transient bounds remain closed"
+      ],
+      "observed": [
+        "direct fallback ordering and the first static route candidate each remained four of seven and were rejected",
+        "an exterior staging refinement remained four of seven and was rejected",
+        "recorded rendered observations isolated temporary target-edge unavailability after emitted movement",
+        "bounded one-action queue progression converted the target preflight from four to five with error zero",
+        "candidate completed five of seven at one hundred ninety-two actions twice",
+        "prior twenty-nine levels retained exact completion without errors twice",
+        "all ten promotion gates passed",
+        "HDS promoted the candidate",
+        "post-promotion active completed five of seven with error zero"
+      ],
+      "unchanged": [
+        "OFFLINE-only phase boundary",
+        "runtime identity-free selector contract",
+        "HDS sole promotion authority",
+        "previous stable rollback manifest"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "remaining two levels of the bounded target structure",
+        "complete twenty-five-game report",
+        "full local oracle score"
+      ],
+      "status": "PROMOTED"
     }
   ]
 }

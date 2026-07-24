@@ -35,6 +35,12 @@ from .multi_actor_shape_push import (
     multi_actor_shape_push_target_plan,
     multi_actor_shape_push_transition_observation_limit,
 )
+from .occluded_target_route import (
+    OCCLUDED_TARGET_ROUTE_OPERATOR,
+    occluded_target_route_observation_status,
+    occluded_target_route_plan,
+    occluded_target_route_transition_observation_limit,
+)
 from .schema import digest_object, forbidden_runtime_paths
 from .selectable_push import (
     SELECTABLE_PUSH_TARGET_OPERATOR,
@@ -64,7 +70,7 @@ from .visual_explorer import (
     connected_components,
 )
 
-SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v9"
+SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v10"
 RELATION_TOGGLE_OPERATOR = "relation-constrained-toggle-gf2-v1"
 OBJECT_TARGET_CONTROL_OPERATOR = "object-target-cycle-control-v1"
 
@@ -1812,6 +1818,7 @@ class SemanticPlannerState:
     selectable_route_wait_count: int = 0
     shape_push_wait_count: int = 0
     multi_shape_push_wait_count: int = 0
+    occluded_route_wait_count: int = 0
     target_initial_state: str = ""
     target_pending_state: str = ""
     target_pending_action: str = ""
@@ -1867,6 +1874,7 @@ class SemanticPlannerState:
         self.selectable_route_wait_count = 0
         self.shape_push_wait_count = 0
         self.multi_shape_push_wait_count = 0
+        self.occluded_route_wait_count = 0
 
     def _reset_target_coordinate(
         self,
@@ -2687,6 +2695,47 @@ class SemanticPlannerState:
                             plan_signature=self.active_plan_signature,
                         )
                     self.invalidate_active_plan()
+                elif self.active_operator == OCCLUDED_TARGET_ROUTE_OPERATOR:
+                    occluded_route_status = (
+                        occluded_target_route_observation_status(
+                            grid,
+                            current_instruction,
+                            action,
+                        )
+                    )
+                    if occluded_route_status == "MATCH":
+                        self.occluded_route_wait_count = 0
+                        self.queue.pop(0)
+                        self.memory_read_count += 1
+                        return SemanticPlannerDecision(
+                            action=action,
+                            reason=self.active_operator,
+                            memory_influenced=True,
+                            plan_signature=self.active_plan_signature,
+                        )
+                    observation_limit = (
+                        occluded_target_route_transition_observation_limit(
+                            current_instruction
+                        )
+                    )
+                    if (
+                        occluded_route_status == "UNAVAILABLE"
+                        and self.occluded_route_wait_count
+                        < observation_limit
+                    ):
+                        self.occluded_route_wait_count += 1
+                        self.queue.pop(0)
+                        self.memory_read_count += 1
+                        return SemanticPlannerDecision(
+                            action=action,
+                            reason=(
+                                f"{self.active_operator}:"
+                                "transition-reobserve"
+                            ),
+                            memory_influenced=True,
+                            plan_signature=self.active_plan_signature,
+                        )
+                    self.invalidate_active_plan()
                 else:
                     self.queue.pop(0)
                     self.memory_read_count += 1
@@ -2864,6 +2913,12 @@ class SemanticPlannerState:
                     available_actions,
                     instruction,
                 )
+            elif instruction.operator_id == OCCLUDED_TARGET_ROUTE_OPERATOR:
+                plan = occluded_target_route_plan(
+                    grid,
+                    available_actions,
+                    instruction,
+                )
             else:
                 continue
             if not plan:
@@ -2935,6 +2990,9 @@ class SemanticPlannerState:
             "shape_push_wait_count": self.shape_push_wait_count,
             "multi_shape_push_wait_count": (
                 self.multi_shape_push_wait_count
+            ),
+            "occluded_route_wait_count": (
+                self.occluded_route_wait_count
             ),
             "target_initial_state": self.target_initial_state,
             "target_pending_state": self.target_pending_state,
@@ -3332,6 +3390,10 @@ class SemanticPlannerState:
                 value.get("multi_shape_push_wait_count", 0),
                 "multi_shape_push_wait_count",
             ),
+            occluded_route_wait_count=_payload_int(
+                value.get("occluded_route_wait_count", 0),
+                "occluded_route_wait_count",
+            ),
             target_initial_state=str(
                 value.get("target_initial_state", "")
             ),
@@ -3450,6 +3512,7 @@ __all__ = [
     "OBJECT_TARGET_CONTROL_OPERATOR",
     "MARKER_SHAPE_PUSH_TARGET_OPERATOR",
     "MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR",
+    "OCCLUDED_TARGET_ROUTE_OPERATOR",
     "RELATION_TOGGLE_OPERATOR",
     "SELECTABLE_PUSH_TARGET_OPERATOR",
     "SELECTABLE_ROUTE_TARGET_OPERATOR",

@@ -210,7 +210,7 @@ def collect_p10_learning_memory(
 def _proposal(bundle_dir: Path) -> PUpdateProposal:
     return PUpdateProposal(
         proposal_id=(
-            "proposal:p10-multi-actor-shape-instruction-body-set"
+            "proposal:p10-occluded-target-route-instruction-body-set"
         ),
         source_p_version="p10-active-instruction-body-set",
         source_p_digest=active_p10_manifest_digest(bundle_dir),
@@ -218,20 +218,20 @@ def _proposal(bundle_dir: Path) -> PUpdateProposal:
         update_type="symbolic-parametric-composition",
         evidence_refs=(
             "memory:approved-multi-episode-learning",
-            "failure:remaining-level-multi-actor-selection-push-gap",
+            "failure:remaining-level-partially-occluded-target-route-gap",
             (
-                "contrast:single-actor-shape-model-versus-"
-                "multi-actor-selection-closure"
+                "contrast:open-outline-versus-"
+                "exterior-occluder-supported-outline-completion"
             ),
         ),
         expected_effect=(
             "change-P-B-same-input-compute-and-compile-isolated-"
-            "multi-actor-shape-candidate"
+            "occluded-target-route-candidate"
         ),
         expected_affected_capabilities=(
             "failure-conditioned-parametric-ranking",
-            "multiple-marker-actor-selection",
-            "actor-mediated-recursive-shape-push",
+            "partial-outline-target-completion",
+            "phase-normalized-selected-object-route",
         ),
         expected_unaffected_capabilities=(
             "stable-rendered-relation-control",
@@ -241,6 +241,7 @@ def _proposal(bundle_dir: Path) -> PUpdateProposal:
             "stable-selectable-object-target-push",
             "stable-selectable-multi-object-route",
             "stable-single-actor-shape-target-route",
+            "stable-multi-actor-selection-shape-target-route",
         ),
         falsifiers=(
             "parameter-digest-unchanged",
@@ -252,7 +253,7 @@ def _proposal(bundle_dir: Path) -> PUpdateProposal:
         provenance=(
             "HDS-authorized-runtime-memory",
             (
-                "identity-free-rendered-multi-actor-shape-"
+                "identity-free-rendered-three-side-target-"
                 "positive-negative-contrast"
             ),
         ),
@@ -276,31 +277,32 @@ def _evidence_set(
     )
     return PUpdateEvidenceSet(
         evidence_set_id=(
-            "evidence-set:p10-multi-actor-shape-p-update"
+            "evidence-set:p10-occluded-target-route-p-update"
         ),
         proposal_digest=proposal.digest,
         memory_snapshot_digest=memory.digest,
         approved_memory_refs=approved_refs,
         hds_memory_decision_digests=hds_refs,
         failure_refs=(
-            "failure:remaining-level-multi-actor-selection-push-gap",
+            "failure:remaining-level-partially-occluded-target-route-gap",
         ),
         contradiction_refs=(
-            "contradiction:single-actor-shape-model-incomplete",
+            "contradiction:complete-outline-only-route-model-incomplete",
         ),
         positive_contrast_refs=(
-            "contrast:multi-actor-selection-shape-role-closure",
+            "contrast:three-intact-sides-plus-exterior-occluder",
         ),
         negative_contrast_refs=(
-            "contrast:single-actor-shape-operator-unavailable",
+            "contrast:open-or-ambiguous-missing-side-rejected",
         ),
         holdout_refs=(
-            "holdout:translated-layout-and-dynamic-footer",
+            "holdout:translated-rotated-layout-and-dynamic-footer",
         ),
         replay_audit_refs=("audit:no-id-no-replay-no-fixed-sequence",),
         provenance=(
             "runtime-memory:authorized",
             "multi-episode-content-addressed-merge",
+            "rendered-occlusion-structure-only",
         ),
     )
 
@@ -318,8 +320,8 @@ def _compile_authorization(
         proposal,
         status="COMPILE",
         reason_codes=(
-            "approved-memory-contains-multi-actor-contrasts",
-            "identity-free-and-structural-holdout-partitioned",
+            "approved-memory-contains-rendered-occlusion-contrasts",
+            "identity-free-translation-rotation-holdout-partitioned",
         ),
         evidence_set=evidence_set,
     )

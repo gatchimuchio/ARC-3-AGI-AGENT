@@ -29,6 +29,7 @@ from .semantic_operators import (
     MARKER_SHAPE_PUSH_TARGET_OPERATOR,
     MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR,
     OBJECT_TARGET_CONTROL_OPERATOR,
+    OCCLUDED_TARGET_ROUTE_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
     SELECTABLE_PUSH_TARGET_OPERATOR,
     SELECTABLE_ROUTE_TARGET_OPERATOR,
@@ -36,12 +37,12 @@ from .semantic_operators import (
 )
 from .visual_explorer import GLOBAL_EFFECT_DIVERSIFICATION_POLICY
 
-P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v24"
+P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v25"
 P10_COMPILER_SEED = 0
-P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v25"
-P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v25"
-P10_HYBRID_VERSION = "p10-hybrid-v24"
-P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v24"
+P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v26"
+P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v26"
+P10_HYBRID_VERSION = "p10-hybrid-v25"
+P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v25"
 P10_CANDIDATE_MANIFEST_FILENAME = "p10_candidate_manifest.json"
 
 
@@ -506,6 +507,65 @@ def selectable_route_target_instruction_mapping() -> dict[str, object]:
     }
 
 
+def occluded_target_route_instruction_mapping() -> dict[str, object]:
+    """Return P material for a uniquely occluded rendered target route."""
+
+    return {
+        "operator_id": OCCLUDED_TARGET_ROUTE_OPERATOR,
+        "action_id": 6,
+        "detector": (
+            "one rendered selected marker object and one target outline "
+            "whose single contiguous missing side is covered by a coherent "
+            "non-walkable region extending outside the inferred outline"
+        ),
+        "transform": (
+            "complete the uniquely implied target side from the three "
+            "intact sides, infer object scale and traversable terrain, then "
+            "run bounded observation-state search that enters the target "
+            "perpendicular to the exterior occluder normal"
+        ),
+        "parameters": {
+            "click_action": 6,
+            "up_action": 1,
+            "down_action": 2,
+            "left_action": 3,
+            "right_action": 4,
+            "selected_marker_color": 0,
+            "unselected_marker_color": 5,
+            "released_marker_color": 4,
+            "marker_divisor": 3,
+            "target_inset": 1,
+            "minimum_object_side": 3,
+            "maximum_object_side": 12,
+            "maximum_missing_border_cells": 12,
+            "maximum_search_states": 200000,
+            "maximum_plan_actions": 128,
+            "maximum_transition_observations": 12,
+        },
+        "preconditions": [
+            "DIRECTIONAL_AND_ACTION6_AVAILABLE",
+            "SINGLE_RENDERED_SELECTED_MARKER_OBJECT",
+            "UNIQUE_THREE_SIDE_TARGET_COMPLETION",
+            "COHERENT_EXTERIOR_OCCLUDER",
+        ],
+        "falsification_conditions": [
+            "the missing outline side is open rather than occluded",
+            "target completion or selected object role is ambiguous",
+            "target displacement is not aligned to inferred object scale",
+            "bounded rendered-state search finds no perpendicular route",
+            "reobserved state differs from the predicted queued state",
+            "stable capability regression decreases",
+        ],
+        "provenance": [
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-three-side-completion-evidence",
+            "compiled-rendered-occluder-continuity-evidence",
+            "compiled-occluder-perpendicular-entry-evidence",
+            "compiled-bounded-state-search-evidence",
+        ],
+    }
+
+
 def marker_shape_push_target_instruction_mapping() -> dict[str, object]:
     """Return P material for actor-mediated rendered shape placement."""
 
@@ -813,10 +873,11 @@ def compile_p10_instruction_bodies(
         selectable_route_target_instruction_mapping(),
         marker_shape_push_target_instruction_mapping(),
         multi_actor_shape_push_target_instruction_mapping(),
+        occluded_target_route_instruction_mapping(),
     ]
     bundles = {
         "P-A": (
-            "p10_p_a_symbolic_v25.json",
+            "p10_p_a_symbolic_v26.json",
             _upgrade(
                 base_symbolic,
                 body_version=P10_SYMBOLIC_VERSION,
@@ -828,7 +889,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "P-B": (
-            "p10_p_b_parametric_v25.json",
+            "p10_p_b_parametric_v26.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_PARAMETRIC_VERSION,
@@ -841,7 +902,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "hybrid": (
-            "p10_hybrid_v24.json",
+            "p10_hybrid_v25.json",
             _upgrade(
                 base_hybrid,
                 body_version=P10_HYBRID_VERSION,
@@ -929,6 +990,7 @@ __all__ = [
     "main",
     "marker_shape_push_target_instruction_mapping",
     "multi_actor_shape_push_target_instruction_mapping",
+    "occluded_target_route_instruction_mapping",
     "object_target_control_instruction_mapping",
     "relation_toggle_instruction_mapping",
     "selectable_push_target_instruction_mapping",

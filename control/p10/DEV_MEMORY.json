@@ -342,6 +342,63 @@
         "route beyond the P search or action bound",
         "full sample completion not demonstrated"
       ]
+    },
+    {
+      "memory_id": "m-dev:p10-occluded-target-route-v20",
+      "lifecycle": "ACTIVE",
+      "accepted_hypothesis": "H24-rendered-occluded-target-state-representation",
+      "supporting_hypotheses": [
+        "H25-bounded-occlusion-aware-route-composition"
+      ],
+      "rejected_hypotheses": [
+        "H23-direct-fallback-action-order"
+      ],
+      "failure_signatures": [
+        "remaining-level-commit-model-gap-after-multi-actor-shape-push",
+        "remaining-level-commit-model-gap-after-occluded-target-route"
+      ],
+      "evidence": [
+        "three intact sides plus one contiguous occluder-covered missing run uniquely reconstruct a rendered target without source or hidden state",
+        "translated and rotated fixtures preserve the normalized target relation",
+        "open outlines, ambiguous targets, incoherent occlusion, blocked routes, and search overflow fail closed",
+        "a direct route remained four of seven because the moving object temporarily made a target edge unavailable and the emitted action stayed at the queue head",
+        "bounded one-action queue progression during UNAVAILABLE converted the target result from four to five",
+        "candidate target completed five of seven at one hundred ninety-two actions twice",
+        "prior twenty-nine stable levels retained exact completion without errors twice",
+        "HDS promoted v26 v26 v25 after all ten gates passed",
+        "post-promotion active target retained five of seven with error zero"
+      ],
+      "remaining_falsifiers": [
+        "the next unresolved layout is outside the promoted occluded-target representation",
+        "full twenty-five-game report does not complete",
+        "full regression fails",
+        "runtime identity scan finds prohibited routing",
+        "removal audit cannot attribute the four-to-five delta"
+      ],
+      "resume_conditions": [
+        "record the first unresolved layout after the promoted occluded-target route level",
+        "compare fresh H1 H2 and H3 structural hypotheses",
+        "promote only another reproduced positive target delta",
+        "keep P11 gated until all one hundred eighty-three levels complete"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/occluded_target_route.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/semantic_operators.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_manifest.json",
+        "evidence/p10/p_update/iteration_20_regression/p10_candidate_compile_trace_v1.json",
+        "evidence/p10/p_update/iteration_20_regression/p10_promotion_receipt_v1.json",
+        "evidence/p10/p_update/iteration_20_regression/p10_active_post_promotion_ka59.json"
+      ],
+      "applicability": [
+        "one selected marker-centered object and one uniquely reconstructable partially occluded rectangular target",
+        "axis-aligned bounded movement with rendered reobservation"
+      ],
+      "non_applicability": [
+        "open or ambiguous target geometry",
+        "incoherent occlusion or multiple selected objects",
+        "route beyond the P search, action, or transient-observation bound",
+        "full sample completion not demonstrated"
+      ]
     }
   ]
 }

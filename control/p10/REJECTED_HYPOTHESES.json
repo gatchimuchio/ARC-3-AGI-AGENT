@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-v19-multi-actor-shape-promotion-v1",
+  "frame_id": "p10-v20-occluded-target-route-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -89,6 +89,17 @@
         "multi-actor-representation-has-higher-information-gain"
       ],
       "reopen_condition": "a distinct rendered structure has multiple actor-like objects but no selection transition and no actor-to-actor push obligation"
+    },
+    {
+      "hypothesis_id": "H23-direct-fallback-action-order",
+      "status": "REJECTED",
+      "reason_codes": [
+        "same-condition-target-preflight-remained-four-of-seven",
+        "fallback-order-does-not-represent-the-rendered-target-closure-relation",
+        "oscillation-does-not-supply-a-bounded-commit-condition",
+        "occluded-target-representation-has-higher-information-gain"
+      ],
+      "reopen_condition": "a distinct rendered structure has no derivable semantic relation and a bounded action-order change produces a reproducible positive target delta"
     }
   ]
 }

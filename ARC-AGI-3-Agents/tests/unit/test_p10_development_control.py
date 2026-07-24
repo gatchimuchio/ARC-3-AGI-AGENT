@@ -108,7 +108,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v19_multi_actor_shape_promotion_is_current_control_authority(
+    def test_v20_occluded_target_route_promotion_is_current_control_authority(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -123,13 +123,13 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v19-multi-actor-shape-promotion-v1",
+            "p10-v20-occluded-target-route-promotion-v1",
         )
-        self.assertEqual(frame["self_check"]["stable_completed_levels"], 33)
-        self.assertEqual(capabilities["stable_completed_levels"], 33)
+        self.assertEqual(frame["self_check"]["stable_completed_levels"], 34)
+        self.assertEqual(capabilities["stable_completed_levels"], 34)
         self.assertEqual(
             registry["active_manifest_digest"],
-            "ed005422ea68a7cc42bad99a10817ba7b6b7ab337bdb8993a750d781fba21c2c",
+            "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba",
         )
         for variant in ("P-A", "P-B", "hybrid"):
             self.assertEqual(
@@ -140,16 +140,16 @@ class P10DevelopmentControlTests(unittest.TestCase):
                 registry["active"][variant]["content_digest"],
                 active_manifest["bundles"][variant]["content_digest"],
             )
-        shape_decision = next(
+        route_decision = next(
             item
             for item in decisions
             if item["decision_id"]
-            == "j-dev:p10-multi-actor-shape-probe-v19"
+            == "j-dev:p10-occluded-target-route-probe-v20"
         )
-        self.assertEqual(shape_decision["status"], "PROBE")
+        self.assertEqual(route_decision["status"], "PROBE")
         self.assertEqual(
-            shape_decision["selected_hypothesis"],
-            "H21-multi-actor-selection-shape-state-representation",
+            route_decision["selected_hypothesis"],
+            "H24-rendered-occluded-target-state-representation",
         )
         promotion = next(
             item

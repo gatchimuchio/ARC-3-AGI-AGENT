@@ -49,6 +49,13 @@ ITERATION_19_EVIDENCE = (
     / "p_update"
     / "iteration_19_regression"
 )
+ITERATION_20_EVIDENCE = (
+    REPOSITORY_ROOT
+    / "evidence"
+    / "p10"
+    / "p_update"
+    / "iteration_20_regression"
+)
 
 
 def run(variant: str, completed: int) -> dict[str, object]:
@@ -108,6 +115,67 @@ def run(variant: str, completed: int) -> dict[str, object]:
 
 
 class P10EvidenceTests(unittest.TestCase):
+    def test_iteration_20_promotion_evidence_is_content_bound(self) -> None:
+        trace = json.loads(
+            (
+                ITERATION_20_EVIDENCE
+                / "p10_candidate_compile_trace_v1.json"
+            ).read_text(encoding="utf-8")
+        )
+        claimed_trace_digest = trace.pop("content_digest")
+        self.assertEqual(
+            claimed_trace_digest,
+            "p10-p-update-workflow:" + digest_object(trace),
+        )
+        runtime = trace["candidate_runtime_regression"]
+        self.assertEqual(runtime["stable_active_value"], 29)
+        self.assertEqual(runtime["stable_candidate_value"], 29)
+        self.assertEqual(runtime["baseline_target_value"], 4.0)
+        self.assertEqual(runtime["candidate_target_value"], 5.0)
+        self.assertTrue(runtime["stable_non_regression"])
+        self.assertTrue(runtime["target_improved"])
+        self.assertTrue(runtime["reproducible"])
+        self.assertEqual(trace["promotion_failures"], [])
+
+        receipt = json.loads(
+            (
+                ITERATION_20_EVIDENCE
+                / "p10_promotion_receipt_v1.json"
+            ).read_text(encoding="utf-8")
+        )
+        claimed_receipt_digest = receipt.pop("content_digest")
+        self.assertEqual(
+            claimed_receipt_digest,
+            "p10-promotion-evidence:" + digest_object(receipt),
+        )
+        self.assertEqual(receipt["hds_decision"]["status"], "PROMOTE")
+        self.assertTrue(receipt["hds_decision"]["allow_p_promote"])
+        self.assertEqual(receipt["promotion_failures"], [])
+        self.assertEqual(
+            receipt["after_active_manifest_digest"],
+            "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba",
+        )
+
+        active_path = (
+            ITERATION_20_EVIDENCE
+            / "p10_active_post_promotion_ka59.json"
+        )
+        self.assertEqual(
+            hashlib.sha256(active_path.read_bytes()).hexdigest(),
+            "0b7e4d9436d4aa930ef0eb09b75513ee07c046e396ad8d2af17da171bf4bbd92",
+        )
+        active = json.loads(active_path.read_text(encoding="utf-8"))
+        self.assertEqual(active["operation_mode"], "offline")
+        self.assertEqual(active["instruction_lifecycle"], "active")
+        self.assertEqual(active["completed_levels"], 5)
+        self.assertEqual(active["total_levels"], 7)
+        self.assertEqual(active["error_count"], 0)
+        self.assertFalse(active["all_complete"])
+        self.assertEqual(
+            set(active["reports"][0]["instruction_body_versions"]),
+            {"p10-hybrid-v25"},
+        )
+
     def test_iteration_19_promotion_evidence_is_content_bound(self) -> None:
         trace = json.loads(
             (

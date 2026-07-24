@@ -89,8 +89,8 @@ P10 current:
   complete all retained OFFLINE sample games and levels
   deterministic identity-free traces
   explicit P version updates and M-to-future-decision causality
-  eight P-compiled rendered semantic operators are active
-  reproducible HDS-adopted boundary is 33 / 183
+  nine P-compiled rendered semantic operators are active
+  reproducible HDS-adopted boundary is 34 / 183
   complete local-oracle report remains unmeasured
   HDS search reset and bounded working-memory replacement implemented
   HDS HOLD remains until 183 / 183 evidence

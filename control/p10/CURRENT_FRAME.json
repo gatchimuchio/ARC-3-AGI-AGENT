@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-p10-development-frame-v1",
-  "frame_id": "p10-v19-multi-actor-shape-promotion-v1",
+  "frame_id": "p10-v20-occluded-target-route-promotion-v1",
   "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
   "authority": {
     "document": "docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md",
@@ -9,25 +9,25 @@
   },
   "self_check": {
     "branch": "main",
-    "base_head": "d0d70ba7d8b140185bb66615592b1400057d0f94",
+    "base_head": "b6440d6fbde81383639b922e4062ceb2b407cf72",
     "dirty_state_preserved": true,
     "operation_mode": "OFFLINE_ONLY",
     "active_p": {
-      "P-A": "p10-p-a-symbolic-v25",
-      "P-B": "p10-p-b-parametric-v25",
-      "hybrid": "p10-hybrid-v24"
+      "P-A": "p10-p-a-symbolic-v26",
+      "P-B": "p10-p-b-parametric-v26",
+      "hybrid": "p10-hybrid-v25"
     },
     "last_promoted_p": {
-      "P-A": "p10-p-a-symbolic-v25",
-      "P-B": "p10-p-b-parametric-v25",
-      "hybrid": "p10-hybrid-v24",
+      "P-A": "p10-p-a-symbolic-v26",
+      "P-B": "p10-p-b-parametric-v26",
+      "hybrid": "p10-hybrid-v25",
       "lifecycle": "PROMOTED"
     },
     "runtime_memory_initial_state": "per-session-passive-memory-version-0",
-    "stable_completed_levels": 33,
+    "stable_completed_levels": 34,
     "retained_level_count": 183,
     "current_full_score": "UNMEASURED_NO_COMPLETE_25_GAME_183_LEVEL_REPORT",
-    "latest_failure_signature": "remaining-level-commit-model-gap-after-multi-actor-shape-push",
+    "latest_failure_signature": "remaining-level-commit-model-gap-after-occluded-target-route",
     "stop_conditions": [
       "runtime identity routing detected",
       "HDS authority bypass detected",
@@ -38,24 +38,24 @@
   },
   "X": {
     "observe": [
-      "the first rendered layout after the adopted single-actor shape-push level",
-      "multiple marker-controlled actors, one filled movable shape, enclosing outline targets, and a push-through separator",
+      "the first rendered layout after the adopted multi-actor shape-push level",
+      "one selected marker-centered object, a three-sided target outline, and a coherent rendered exterior occluder covering the missing side",
       "active and candidate manifest resolution",
       "same-condition target and stable regression",
       "HDS compile and promotion authority"
     ],
     "change": [
-      "isolated multi-actor selection and shape-target representation",
-      "bounded selected-actor and recursive actor-mediated impulse-push search",
-      "queued-action reobservation for selection and multi-frame push transitions",
+      "isolated rendered completion of a partially occluded target outline",
+      "bounded single-object route search with target entry perpendicular to the exterior occluder normal",
+      "queued-action reobservation that advances one predicted action during bounded target-edge unavailability",
       "P-A, P-B, and hybrid candidate bodies",
       "machine-readable P10 control artifacts"
     ],
     "evidence_use": [
       "current rendered observation",
       "bounded action-effect history",
-      "v18 post-level failure evidence",
-      "translated multi-actor, dynamic-footer, ambiguous-role, bounded-search, and transient-frame fixtures",
+      "v19 post-level failure evidence",
+      "translated and rotated occluded-target, open-outline, ambiguous-role, bounded-search, and transient-frame fixtures",
       "same-condition active and candidate OFFLINE reports",
       "content-addressed compile and promotion evidence"
     ],
@@ -69,32 +69,32 @@
   },
   "R": {
     "hypotheses": [
-      "H20-loosen-single-actor-shape-detector",
-      "H21-multi-actor-selection-shape-state-representation",
-      "H22-recursive-actor-mediated-push-composition"
+      "H23-direct-fallback-action-order",
+      "H24-rendered-occluded-target-state-representation",
+      "H25-bounded-occlusion-aware-route-composition"
     ],
     "predictions": [
-      "H20 accepts multiple actors without representing which actor is selected and cannot authorize click transitions",
-      "H21 represents multiple marker actors, the selected index, interchangeable shape families, and rendered selection points",
-      "H22 composes actor selection, free routing, recursive actor-to-actor and actor-to-shape pushing, goal assignment, and bounded transient reobservation"
+      "H23 changes fallback action order but cannot derive the hidden target closure relation from rendered geometry",
+      "H24 reconstructs exactly one three-sided target only when its missing run is covered by a coherent exterior non-walkable region",
+      "H25 composes a bounded route that enters perpendicular to the occluder normal and advances at most one predicted queued action while the moving object temporarily occludes a target edge"
     ],
     "comparators": [
-      "previous active v24/v24/v23 manifest",
-      "HDS-promoted v25/v25/v24 manifest",
+      "previous active v25/v25/v24 manifest",
+      "HDS-promoted v26/v26/v25 manifest",
       "same-condition target at one hundred ninety-two actions",
       "prior twenty-nine stable-level regression",
       "first and second candidate runs"
     ],
-    "expected_state_transition": "thirty-two adopted levels -> thirty-three adopted levels",
-    "falsification_relation": "target remains at three, stable completion drops, multi-actor state fixtures fail, or rerun digest changes"
+    "expected_state_transition": "thirty-three adopted levels -> thirty-four adopted levels",
+    "falsification_relation": "target remains at four, stable completion drops, occluded-target fixtures fail, or rerun digest changes"
   },
   "Mc": {
     "identity": "generic-double-trinity-P-update-control",
     "boundary": "local OFFLINE control plane and retained sample runtime only",
     "acceptance": [
       "at least three structural hypotheses are represented and judged",
-      "actors, selected state, movable shapes, target masks, goals, clicks, and movement derive from rendered geometry",
-      "candidate target completion improves from three to at least four",
+      "selected object, reconstructed target mask, occluder normal, route, and movement derive from rendered geometry",
+      "candidate target completion improves from four to at least five",
       "twenty-nine adopted levels do not regress",
       "same-condition candidate rerun is identical",
       "all ten P promotion gates pass",
@@ -107,14 +107,14 @@
       "unclassified failure occurs"
     ],
     "rollback": [
-      "restore previous stable v24 v24 v23 manifest",
+      "restore previous stable v25 v25 v24 manifest",
       "retain failed candidate evidence without activation"
     ],
     "completion": [
-      "single-actor detector loosening is rejected with bounded responsibility evidence",
-      "the multi-actor shape candidate is HDS-promoted after a reproduced three-to-four target delta",
-      "the adopted boundary is thirty-three of one hundred eighty-three",
-      "P10-G remains gated on the other one hundred fifty levels"
+      "direct fallback action-order adjustment is rejected after a zero target delta",
+      "the occluded-target route candidate is HDS-promoted after a reproduced four-to-five target delta",
+      "the adopted boundary is thirty-four of one hundred eighty-three",
+      "P10-G remains gated on the other one hundred forty-nine levels"
     ]
   },
   "non_goals": [
@@ -142,9 +142,9 @@
     "runtime identity scan"
   ],
   "maximum_work_scope": [
-    "identity-free multiple-actor, selected-state, filled-shape, and outline-target representation",
-    "geometry-derived bounded selection and recursive actor-mediated impulse-push planning",
-    "queued multi-actor shape-state validation with bounded transient reobservation",
+    "identity-free selected-object, partially occluded target, and exterior-occluder representation",
+    "geometry-derived bounded route planning with perpendicular target entry",
+    "queued occluded-target state validation with bounded transient progression",
     "candidate P compile and deterministic regression",
     "HDS promotion and rollback evidence",
     "next unresolved rendered layout observation"

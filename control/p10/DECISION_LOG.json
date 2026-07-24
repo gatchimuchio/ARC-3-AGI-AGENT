@@ -273,6 +273,52 @@
         "target-completed-level-improvement-reproduced"
       ],
       "evidence_ref": "evidence/p10/p_update/iteration_19_regression/p10_promotion_receipt_v1.json"
+    },
+    {
+      "decision_id": "j-dev:p10-occluded-target-route-probe-v20",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H24-rendered-occluded-target-state-representation",
+      "supporting_hypothesis": "H25-bounded-occlusion-aware-route-composition",
+      "rejected_hypothesis": "H23-direct-fallback-action-order",
+      "reason_codes": [
+        "direct-fallback-order-remained-four-of-seven",
+        "three-intact-sides-and-one-covered-missing-run-derive-a-unique-target",
+        "target-reconstruction-is-translation-and-rotation-invariant",
+        "open-ambiguous-and-incoherent-targets-fail-closed",
+        "candidate-only-change-is-bounded-and-reversible"
+      ],
+      "maximum_information_gain_next": "audit emitted-action progression during temporary target-edge unavailability"
+    },
+    {
+      "decision_id": "j-dev:p10-occlusion-aware-queue-transition-v20",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H25-bounded-occlusion-aware-route-composition",
+      "reason_codes": [
+        "direct-and-exterior-staging-route-refinements-remained-four-of-seven",
+        "rendered-target-edge-became-temporarily-unavailable-after-emitted-movement",
+        "unavailable-state-advances-exactly-one-predicted-queued-action",
+        "stable-mismatch-and-exhausted-transient-bound-reset-the-queue",
+        "same-condition-target-regression-improved-four-to-five-twice",
+        "prior-twenty-nine-stable-levels-did-not-regress"
+      ],
+      "maximum_information_gain_next": "record and model the next unresolved rendered layout"
+    },
+    {
+      "decision_id": "p-update-decision:76e33e9863573d8f9d12399f",
+      "authority": "hds-p-update-only",
+      "status": "PROMOTE",
+      "allow_p_compile": false,
+      "allow_p_promote": true,
+      "allow_p_rollback": false,
+      "decision_digest": "16f2f31912a14470d3b5c794bf0a0af5fa5f18de9e4beac6bee2ac05522a6d0f",
+      "reason_codes": [
+        "all-ten-promotion-gates-pass",
+        "stable-adopted-level-regression-pass",
+        "target-completed-level-improvement-reproduced"
+      ],
+      "evidence_ref": "evidence/p10/p_update/iteration_20_regression/p10_promotion_receipt_v1.json"
     }
   ]
 }

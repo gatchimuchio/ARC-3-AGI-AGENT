@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v19-multi-actor-shape-promotion-v1",
+  "frame_id": "p10-v20-occluded-target-route-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -625,6 +625,96 @@
       "rollback_cost": 1,
       "generality": 0.92,
       "information_gain": 0.94,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "PROMOTED_SUPPORT",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H23-direct-fallback-action-order",
+      "kind": "H1",
+      "summary": "Change the existing fallback action order without adding a rendered representation for the partially occluded target.",
+      "predicted_effect": [
+        "a different bounded exploratory path may reach the target by chance",
+        "the planner still cannot derive the target closure relation or an admissible entry direction"
+      ],
+      "applicability": [
+        "an unresolved rendered layout reached only after all existing semantic operators decline"
+      ],
+      "required_evidence": [
+        "same-condition bounded target preflight",
+        "comparison with a geometry-derived target representation"
+      ],
+      "falsifier": [
+        "completed target levels remain at four",
+        "action-order change oscillates without a rendered commit relation"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.15,
+      "information_gain": 0.55,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.3,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H24-rendered-occluded-target-state-representation",
+      "kind": "H2",
+      "summary": "Reconstruct exactly one target from three intact outline sides and one contiguous missing run only when a coherent rendered exterior non-walkable region covers that run.",
+      "predicted_effect": [
+        "the target remains derivable from the current render without source or hidden state",
+        "translation and rotation preserve the normalized selected-object, target, and occluder relation",
+        "open or ambiguous outlines fail closed"
+      ],
+      "applicability": [
+        "one selected marker-centered object and one uniquely reconstructable partially occluded rectangular target"
+      ],
+      "required_evidence": [
+        "translated and rotated target fixtures",
+        "open-outline and ambiguous-target rejection fixtures",
+        "identity-free instruction mapping"
+      ],
+      "falsifier": [
+        "more than one target reconstruction is accepted",
+        "an uncovered missing side is accepted",
+        "translation or rotation changes the normalized relation"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.91,
+      "information_gain": 0.96,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "PROMOTED",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H25-bounded-occlusion-aware-route-composition",
+      "kind": "H3",
+      "summary": "Compose bounded single-object routing, perpendicular target entry, rendered queue evidence, and one-step queue progression while the moving object temporarily makes a target edge unavailable.",
+      "predicted_effect": [
+        "the route avoids traversing the occluder-aligned target interior before the goal",
+        "a temporarily unavailable target edge does not repeat the already emitted action",
+        "a stable mismatch or an exhausted transient bound still rejects the queue"
+      ],
+      "applicability": [
+        "axis-aligned rendered movement with a uniquely reconstructed target and a bounded transient occlusion interval"
+      ],
+      "required_evidence": [
+        "bounded route closure and blocked-route fixtures",
+        "queued MATCH, UNAVAILABLE, MISMATCH, and serialization fixtures",
+        "same-condition positive target delta and stable non-regression"
+      ],
+      "falsifier": [
+        "a direct geometric route remains at four completed levels",
+        "an unavailable observation repeats the queued action or advances more than once",
+        "target remains at four, stable completion decreases, or rerun differs"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.9,
+      "information_gain": 0.98,
       "contamination_risk": 0.0,
       "regression_risk": 0.25,
       "status": "PROMOTED_SUPPORT",
