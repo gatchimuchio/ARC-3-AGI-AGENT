@@ -35,6 +35,13 @@ ITERATION_16_EVIDENCE = (
     / "p_update"
     / "iteration_16_regression"
 )
+ITERATION_17_EVIDENCE = (
+    REPOSITORY_ROOT
+    / "evidence"
+    / "p10"
+    / "p_update"
+    / "iteration_17_regression"
+)
 
 
 def run(variant: str, completed: int) -> dict[str, object]:
@@ -94,6 +101,62 @@ def run(variant: str, completed: int) -> dict[str, object]:
 
 
 class P10EvidenceTests(unittest.TestCase):
+    def test_iteration_17_promotion_evidence_is_content_bound(self) -> None:
+        trace = json.loads(
+            (
+                ITERATION_17_EVIDENCE
+                / "p10_candidate_compile_trace_v1.json"
+            ).read_text(encoding="utf-8")
+        )
+        claimed_trace_digest = trace.pop("content_digest")
+        self.assertEqual(
+            claimed_trace_digest,
+            "p10-p-update-workflow:" + digest_object(trace),
+        )
+        runtime = trace["candidate_runtime_regression"]
+        self.assertEqual(runtime["stable_active_value"], 29)
+        self.assertEqual(runtime["stable_candidate_value"], 29)
+        self.assertEqual(runtime["baseline_target_value"], 1.0)
+        self.assertEqual(runtime["candidate_target_value"], 2.0)
+        self.assertTrue(runtime["stable_non_regression"])
+        self.assertTrue(runtime["target_improved"])
+        self.assertTrue(runtime["reproducible"])
+        self.assertEqual(trace["promotion_failures"], [])
+
+        receipt = json.loads(
+            (
+                ITERATION_17_EVIDENCE
+                / "p10_promotion_receipt_v1.json"
+            ).read_text(encoding="utf-8")
+        )
+        claimed_receipt_digest = receipt.pop("content_digest")
+        self.assertEqual(
+            claimed_receipt_digest,
+            "p10-promotion-evidence:" + digest_object(receipt),
+        )
+        self.assertEqual(receipt["hds_decision"]["status"], "PROMOTE")
+        self.assertTrue(receipt["hds_decision"]["allow_p_promote"])
+        self.assertEqual(receipt["promotion_failures"], [])
+        self.assertEqual(
+            receipt["after_active_manifest_digest"],
+            "8db83a354c334811870bca13f72ea49b329dd35fb11fd77cb3cc92a07d400da3",
+        )
+
+        active_path = (
+            ITERATION_17_EVIDENCE
+            / "p10_active_post_promotion_ka59.json"
+        )
+        self.assertEqual(
+            hashlib.sha256(active_path.read_bytes()).hexdigest(),
+            "080ff6e7c90a1fd2a988c9a948c41e0082c5e08e8075f8224a7d40267e005332",
+        )
+        active = json.loads(active_path.read_text(encoding="utf-8"))
+        self.assertEqual(active["operation_mode"], "offline")
+        self.assertEqual(active["completed_levels"], 2)
+        self.assertEqual(active["total_levels"], 7)
+        self.assertEqual(active["error_count"], 0)
+        self.assertFalse(active["all_complete"])
+
     def test_iteration_16_promotion_evidence_is_content_bound(self) -> None:
         trace = json.loads(
             (

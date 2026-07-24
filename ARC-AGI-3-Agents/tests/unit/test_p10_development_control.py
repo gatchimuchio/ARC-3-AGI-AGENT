@@ -108,6 +108,56 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
+    def test_v17_route_promotion_is_current_control_authority(self) -> None:
+        frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
+        capabilities = _json(
+            CONTROL_DIR / "CAPABILITY_REGISTRY.json"
+        )
+        registry = _json(CONTROL_DIR / "P_UPDATE_REGISTRY.json")
+        active_manifest = _json(BUNDLE_DIR / "p10_manifest.json")
+        decisions = _json(CONTROL_DIR / "DECISION_LOG.json")[
+            "decisions"
+        ]
+
+        self.assertEqual(
+            frame["frame_id"],
+            "p10-v17-selectable-route-promotion-v1",
+        )
+        self.assertEqual(frame["self_check"]["stable_completed_levels"], 31)
+        self.assertEqual(capabilities["stable_completed_levels"], 31)
+        self.assertEqual(
+            registry["active_manifest_digest"],
+            "8db83a354c334811870bca13f72ea49b329dd35fb11fd77cb3cc92a07d400da3",
+        )
+        for variant in ("P-A", "P-B", "hybrid"):
+            self.assertEqual(
+                registry["active"][variant]["version"],
+                active_manifest["bundles"][variant]["body_version"],
+            )
+            self.assertEqual(
+                registry["active"][variant]["content_digest"],
+                active_manifest["bundles"][variant]["content_digest"],
+            )
+        route_decision = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-selectable-multi-object-route-v17"
+        )
+        self.assertEqual(route_decision["status"], "PROBE")
+        self.assertEqual(
+            route_decision["selected_hypothesis"],
+            "H15-marker-centered-transition-state-representation",
+        )
+        promotion = next(
+            item
+            for item in decisions
+            if item.get("decision_digest")
+            == registry["hds_decision_digest"]
+        )
+        self.assertEqual(promotion["status"], "PROMOTE")
+        self.assertTrue(promotion["allow_p_promote"])
+
     def test_v14_hypotheses_and_hds_promotion_are_recorded(self) -> None:
         hypotheses = _json(CONTROL_DIR / "ACTIVE_HYPOTHESES.json")[
             "hypotheses"

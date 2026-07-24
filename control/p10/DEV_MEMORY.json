@@ -130,7 +130,7 @@
     },
     {
       "memory_id": "m-dev:p10-selectable-object-target-push-v16",
-      "lifecycle": "ACTIVE",
+      "lifecycle": "SUPERSEDED",
       "accepted_hypothesis": "H11-selectable-object-target-push",
       "held_hypotheses": [
         "H12-transition-delta-role-induction",
@@ -173,6 +173,59 @@
       "non_applicability": [
         "ambiguous role assignment",
         "post-transition geometry not yet modeled",
+        "full sample completion not demonstrated"
+      ]
+    },
+    {
+      "memory_id": "m-dev:p10-selectable-multi-object-route-v17",
+      "lifecycle": "ACTIVE",
+      "accepted_hypothesis": "H15-marker-centered-transition-state-representation",
+      "supporting_hypotheses": [
+        "H16-bounded-push-route-reobservation-composition"
+      ],
+      "rejected_hypotheses": [
+        "H14-direct-component-route-extension"
+      ],
+      "failure_signatures": [
+        "connected-same-color-object-alias",
+        "transient-route-observation-gap",
+        "remaining-level-commit-model-gap"
+      ],
+      "evidence": [
+        "translated layouts preserve action sequence while translating click points",
+        "touching same-color objects remain separate under marker-centered templates",
+        "released-marker and bounded transient-frame fixtures pass",
+        "previous active target completed one of seven at ninety-six actions",
+        "candidate completed two of seven at ninety-six actions twice",
+        "prior twenty-nine stable levels retained exact completion and action counts",
+        "HDS promoted v23 v23 v22 after all ten gates passed",
+        "post-promotion active target retained two of seven with error zero"
+      ],
+      "remaining_falsifiers": [
+        "the next unresolved layout is outside the unique dimension-matched representation",
+        "full twenty-five-game report does not complete",
+        "full regression fails",
+        "runtime identity scan finds prohibited routing"
+      ],
+      "resume_conditions": [
+        "record the next unresolved rendered layout",
+        "compare fresh H1 H2 and H3 structural hypotheses",
+        "promote only another reproducible positive target delta"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/selectable_route.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/semantic_operators.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_manifest.json",
+        "evidence/p10/p_update/iteration_17_regression/p10_candidate_compile_trace_v1.json",
+        "evidence/p10/p_update/iteration_17_regression/p10_promotion_receipt_v1.json",
+        "evidence/p10/p_update/iteration_17_regression/p10_active_post_promotion_ka59.json"
+      ],
+      "applicability": [
+        "four-to-eight marker-centered rendered objects with unique dimension-matched targets and bounded push terrain"
+      ],
+      "non_applicability": [
+        "ambiguous object or target assignment",
+        "route beyond the P search or action bound",
         "full sample completion not demonstrated"
       ]
     }

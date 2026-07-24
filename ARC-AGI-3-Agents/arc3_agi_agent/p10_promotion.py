@@ -152,8 +152,8 @@ def promote_p10_candidate_from_trace(
         status="PROMOTE",
         reason_codes=(
             "all-ten-promotion-gates-pass",
-            "stable-twenty-nine-level-regression-pass",
-            "target-zero-to-one-level-improvement-reproduced",
+            "stable-adopted-level-regression-pass",
+            "target-completed-level-improvement-reproduced",
         ),
         candidate_bundle=candidate,
         regression_report=regression,

@@ -103,9 +103,9 @@ current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す
 ## 3. 現在の実測境界
 
 P10実行経路の関連unit、strict mypy、ruff gateは通過している。現行hybrid
-`p10-hybrid-v21`、instruction compiler
-`arc3-p10-instruction-compiler-v21`、semantic planner
-`arc3-semantic-planner-v6`、visual operator
+`p10-hybrid-v22`、instruction compiler
+`arc3-p10-instruction-compiler-v22`、semantic planner
+`arc3-semantic-planner-v7`、visual operator
 `arc3-p10-visual-operator-v13`、OFFLINE、seed 0のstable regression実測は
 次のとおりである。
 
@@ -116,14 +116,18 @@ P10実行経路の関連unit、strict mypy、ruff gateは通過している。�
 | symbolic rewrite | 6 / 6 | 308 | 284 | 0 | 0 | `WIN` |
 | goal-aware equal-rank merge | 9 / 9 | 175 | 証拠内 | 0 | 0 | `WIN` |
 | selectable-object target push | 1 / 7 | 64 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
+| selectable multi-object route | 2 / 7 | 96 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 
 最初の四blockはerror 0、GAME_OVER 0、max-action停止なしである。
-selectable-object target pushは、previous stableの0 / 7に対してcandidateが
-1 / 7を同条件で二回再現し、既存29 levelを同じactionsで維持した。HDSは
-全十promotion gateを確認して`p10-hybrid-v21`をACTIVEへ昇格した。
-post-promotion active runも1 / 7、64 actions、error 0だったが、
-`MAX_ACTION_STOP`で残り6 levelは未閉包である。現時点のHDS採用済み境界は
-`30 / 183`、残りは`153 level`。これは五つの意味演算子blockの限定証拠で、
+v16 selectable-object target pushは、previous stableの0 / 7に対してcandidateが
+1 / 7を同条件で二回再現し、既存29 levelを同じactionsで維持した。v17では
+marker-centered object表現、released-marker位相、bounded push-route search、
+queued-action再観測を合成し、previous activeの1 / 7に対してcandidateが
+2 / 7を96 actionsで二回再現した。既存29 levelの完了数とactionsは不変だった。
+HDSは全十promotion gateを確認して`p10-hybrid-v22`をACTIVEへ昇格した。
+post-promotion active runも2 / 7、96 actions、error 0だったが、
+`MAX_ACTION_STOP`で残り5 levelは未閉包である。現時点のHDS採用済み境界は
+`31 / 183`、残りは`152 level`。これは六つの意味演算子blockの限定証拠で、
 全sample攻略証拠またはfull local-oracle scoreではない。
 
 previous stable PでのSU15 bounded runは、4 / 9 levelを160 actionsまでに
@@ -147,6 +151,10 @@ candidate policyを五つのbounded structureで比較した。action分布は�
 `REJECT`しactive Pへ入れていない。v16では現在rendered geometryだけから
 selectable object / target / barrier roleを閉じるoperatorをcandidate compileし、
 target 0→1、既存29 level非回帰、同条件再実行一致を確認してHDS昇格した。
+v17では、touching same-color objectをconnected componentとして扱う直接拡張を
+`REJECT`し、target dimensionから導くmarker-centered templateでobjectを分離した。
+selection、push可能route search、予測state付きqueue、最大8 transient frameの
+再観測を一つのP演算子へcompileし、target 1→2を再現してHDS昇格した。
 
 FT09、action budget 256、seed 0、OFFLINEの同一条件比較:
 
@@ -167,7 +175,7 @@ FT09、action budget 256、seed 0、OFFLINEの同一条件比較:
 である。game IDは実行結果を同定するevidence fieldにだけ存在し、P、C、
 M、runtime selectorへは入らない。
 
-現行Pの三実行は、各cycleのtrace digest、trace-event root、実emit、
+v14以前のstable実行は、各cycleのtrace digest、trace-event root、実emit、
 provenance、level transition、P digest、M version、rollback/reset欄を保持する
 compact evidenceへ固定した。
 

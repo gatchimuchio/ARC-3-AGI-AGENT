@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-v16-selectable-push-promotion-v1",
+  "frame_id": "p10-v17-selectable-route-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -58,6 +58,16 @@
         "does-not-supply-semantic-commit-condition"
       ],
       "reopen_condition": "a new semantic model can use prototype diversity as a bounded subroutine with a positive target delta"
+    },
+    {
+      "hypothesis_id": "H14-direct-component-route-extension",
+      "status": "REJECTED",
+      "reason_codes": [
+        "touching-same-color-objects-collapse-into-one-component",
+        "partially-occupied-target-rings-are-not-stable-state-anchors",
+        "marker-centered-transition-representation-has-higher-information-gain"
+      ],
+      "reopen_condition": "a distinct rendered structure guarantees disjoint components and fully visible targets throughout every transition"
     }
   ]
 }

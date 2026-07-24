@@ -29,16 +29,17 @@ from .semantic_operators import (
     OBJECT_TARGET_CONTROL_OPERATOR,
     RELATION_TOGGLE_OPERATOR,
     SELECTABLE_PUSH_TARGET_OPERATOR,
+    SELECTABLE_ROUTE_TARGET_OPERATOR,
     SYMBOLIC_REWRITE_OPERATOR,
 )
 from .visual_explorer import GLOBAL_EFFECT_DIVERSIFICATION_POLICY
 
-P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v21"
+P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v22"
 P10_COMPILER_SEED = 0
-P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v22"
-P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v22"
-P10_HYBRID_VERSION = "p10-hybrid-v21"
-P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v21"
+P10_SYMBOLIC_VERSION = "p10-p-a-symbolic-v23"
+P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v23"
+P10_HYBRID_VERSION = "p10-hybrid-v22"
+P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v22"
 P10_CANDIDATE_MANIFEST_FILENAME = "p10_candidate_manifest.json"
 
 
@@ -449,6 +450,60 @@ def selectable_push_target_instruction_mapping() -> dict[str, object]:
     }
 
 
+def selectable_route_target_instruction_mapping() -> dict[str, object]:
+    """Return P material for rendered multi-object selection and routing."""
+
+    return {
+        "operator_id": SELECTABLE_ROUTE_TARGET_OPERATOR,
+        "action_id": 6,
+        "detector": (
+            "rendered selectable border objects and uniquely "
+            "dimension-matched target rings"
+        ),
+        "transform": (
+            "infer object scale and traversable terrain, then run bounded "
+            "observation-state search with reobserved action validation"
+        ),
+        "parameters": {
+            "click_action": 6,
+            "up_action": 1,
+            "down_action": 2,
+            "left_action": 3,
+            "right_action": 4,
+            "selected_marker_color": 0,
+            "unselected_marker_color": 5,
+            "released_marker_color": 4,
+            "push_through_color": 15,
+            "target_inset": 1,
+            "minimum_object_count": 4,
+            "maximum_object_count": 8,
+            "minimum_push_steps": 5,
+            "maximum_push_steps": 32,
+            "maximum_search_states": 200000,
+            "maximum_plan_actions": 128,
+            "maximum_transition_observations": 8,
+        },
+        "preconditions": [
+            "DIRECTIONAL_AND_ACTION6_AVAILABLE",
+            "RENDERED_SELECTABLE_BORDER_OBJECTS",
+            "UNIQUE_DIMENSION_MATCHED_TARGET_RINGS",
+            "SINGLE_RENDERED_SELECTION_MARKER",
+        ],
+        "falsification_conditions": [
+            "object or target role assignment is ambiguous",
+            "target displacement is not aligned to inferred object scale",
+            "bounded observation-state search finds no plan",
+            "reobserved state differs from the predicted queued-action state",
+            "stable capability regression decreases",
+        ],
+        "provenance": [
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-transition-delta-evidence",
+            "compiled-bounded-state-search-evidence",
+        ],
+    }
+
+
 def _upgrade(
     base: dict[str, Any],
     *,
@@ -633,10 +688,11 @@ def compile_p10_instruction_bodies(
         symbolic_rewrite_instruction_mapping(),
         fruit_merge_instruction_mapping(),
         selectable_push_target_instruction_mapping(),
+        selectable_route_target_instruction_mapping(),
     ]
     bundles = {
         "P-A": (
-            "p10_p_a_symbolic_v22.json",
+            "p10_p_a_symbolic_v23.json",
             _upgrade(
                 base_symbolic,
                 body_version=P10_SYMBOLIC_VERSION,
@@ -648,7 +704,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "P-B": (
-            "p10_p_b_parametric_v22.json",
+            "p10_p_b_parametric_v23.json",
             _upgrade(
                 base_parametric,
                 body_version=P10_PARAMETRIC_VERSION,
@@ -661,7 +717,7 @@ def compile_p10_instruction_bodies(
             ),
         ),
         "hybrid": (
-            "p10_hybrid_v21.json",
+            "p10_hybrid_v22.json",
             _upgrade(
                 base_hybrid,
                 body_version=P10_HYBRID_VERSION,
@@ -750,5 +806,6 @@ __all__ = [
     "object_target_control_instruction_mapping",
     "relation_toggle_instruction_mapping",
     "selectable_push_target_instruction_mapping",
+    "selectable_route_target_instruction_mapping",
     "symbolic_rewrite_instruction_mapping",
 ]

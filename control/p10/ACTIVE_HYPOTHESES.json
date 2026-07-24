@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v16-selectable-push-promotion-v1",
+  "frame_id": "p10-v17-selectable-route-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -353,6 +353,102 @@
       "regression_risk": 0.25,
       "status": "HOLD",
       "j_dev_decision": "HOLD"
+    },
+    {
+      "hypothesis_id": "H14-direct-component-route-extension",
+      "kind": "H1",
+      "summary": "Extend the v16 connected-component object detector directly with bounded route search.",
+      "predicted_effect": [
+        "existing selectable roles gain multi-step routing",
+        "touching same-color objects remain distinguishable"
+      ],
+      "applicability": [
+        "post-transition selectable layouts"
+      ],
+      "required_evidence": [
+        "touching-object detection fixture",
+        "same-condition target comparison"
+      ],
+      "falsifier": [
+        "same-color objects merge into one rendered component",
+        "partially occupied targets disappear from role detection"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.6,
+      "information_gain": 0.8,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H15-marker-centered-transition-state-representation",
+      "kind": "H2",
+      "summary": "Represent each object with a dimension-derived marker-centered template and bind queued actions to reobserved transition state.",
+      "predicted_effect": [
+        "touching same-color objects remain separable",
+        "selected, unselected, and released marker phases remain observable",
+        "partially obscured target rings do not erase object-state validation"
+      ],
+      "applicability": [
+        "four-to-eight rendered objects with unique dimension-matched targets"
+      ],
+      "required_evidence": [
+        "translated and touching-object fixtures",
+        "released-marker and transient-frame fixtures",
+        "same-condition target improvement",
+        "stable non-regression",
+        "identical rerun"
+      ],
+      "falsifier": [
+        "object assignment is ambiguous",
+        "queued state mismatch is accepted",
+        "target remains at one",
+        "stable completion decreases",
+        "rerun digest changes"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.9,
+      "information_gain": 0.95,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "PROMOTED",
+      "j_dev_decision": "PROBE"
+    },
+    {
+      "hypothesis_id": "H16-bounded-push-route-reobservation-composition",
+      "kind": "H3",
+      "summary": "Compose selection, bounded push-capable route search, and queued-action reobservation under the H15 representation.",
+      "predicted_effect": [
+        "multiple objects reach dimension-matched targets",
+        "push-through terrain is crossed only by pushed objects",
+        "transient rendered frames are bounded before fail-closed invalidation"
+      ],
+      "applicability": [
+        "rendered multi-object target layouts with inferred movement stride"
+      ],
+      "required_evidence": [
+        "all-target synthetic closure",
+        "push asymmetry fixture",
+        "bounded search and transient observation fixtures",
+        "target and stable runtime regression"
+      ],
+      "falsifier": [
+        "search exceeds the P bound",
+        "non-pushed objects cross push-through terrain",
+        "state mismatch does not invalidate the queue",
+        "target or stable regression fails"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.9,
+      "information_gain": 0.9,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "PROMOTED_SUPPORT",
+      "j_dev_decision": "PASS"
     }
   ]
 }

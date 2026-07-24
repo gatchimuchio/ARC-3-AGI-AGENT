@@ -1,0 +1,1286 @@
+{
+  "content_digest": "p-b-learning-memory-evidence:dc3d97b23ab710e354fd227556aa2b1e02ddd9afe799d8dedcfe39656f1c2980",
+  "entries": [
+    {
+      "archived": false,
+      "created_version": 1,
+      "evidence_signature": "082ba07d9da145bccbf80347168da6cea3949ff8838ee5de145083a9a335c066",
+      "index_terms": [
+        "p-b-learning",
+        "hds-authorized",
+        "identity-free"
+      ],
+      "lifecycle": "ACTIVE",
+      "operation": "MERGE",
+      "payload": {
+        "p_b_learning": {
+          "buffer_limit": 128,
+          "examples": [
+            {
+              "evidence_kinds": [
+                "CONTRADICTION",
+                "EXPERIENCE",
+                "FAILURE",
+                "NEGATIVE"
+              ],
+              "evidence_refs": [
+                "NO_VISIBLE_CHANGE",
+                "OFFLINE_VERIFICATION:UNCOMMITTED_RENDERED_CHANGE,GAME_OVER,GAME_OVER_HAZARD,TERMINAL_DIVERGENCE",
+                "P10_ROLLBACK:emission-result:3abbaf70f9503651f85abf92ff83e2053089a5df7a6d9f34af9108b6809e83d7",
+                "observed-result:frame:eeb1f7de764e182149cd"
+              ],
+              "example_id": "p-b-example:84608aaf8aead795955f1549",
+              "feature_vector": [
+                1.0,
+                0.8571428571428571,
+                0.42857142857142855,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                1.0,
+                0.03125,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.9
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "CONTRADICTION",
+                "EXPERIENCE",
+                "FAILURE",
+                "NEGATIVE"
+              ],
+              "evidence_refs": [
+                "NO_VISIBLE_CHANGE",
+                "OFFLINE_VERIFICATION:UNCOMMITTED_RENDERED_CHANGE,GAME_OVER,GAME_OVER_HAZARD,TERMINAL_DIVERGENCE",
+                "P10_ROLLBACK:emission-result:3abbaf70f9503651f85abf92ff83e2053089a5df7a6d9f34af9108b6809e83d7",
+                "observed-result:frame:eeb1f7de764e182149cd"
+              ],
+              "example_id": "p-b-example:d36a710337a9ca88fef9cb8f",
+              "feature_vector": [
+                1.0,
+                0.8571428571428571,
+                0.42857142857142855,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                1.0,
+                0.0625,
+                1.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.9
+              ]
+            }
+          ],
+          "pending": {
+            "action_id": 6,
+            "feature_vector": [
+              1.0,
+              0.8571428571428571,
+              0.42857142857142855,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              1.0,
+              0.0625,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "observation_signature": "frame:eeb1f7de764e182149cd",
+            "predictions": [
+              1.0,
+              0.055268,
+              0.143923,
+              0.985137,
+              0.406791,
+              0.485748
+            ],
+            "structural_signature": "structure:4def335102e8ea643cfc"
+          },
+          "runtime_identity_free": true,
+          "schema_version": "arc3-p-b-learning-v1"
+        },
+        "source_memory_snapshot_digest": "ed5567eac6c709da448d52df66aa3a6cef92d54fe4c1b32d5c9014ac3d8c2e2c"
+      },
+      "provenance": [
+        "082ba07d9da145bccbf80347168da6cea3949ff8838ee5de145083a9a335c066",
+        "hds-command:command:853ddd85c40303cf720e",
+        "hds-decision:decision:d38280f194728f4e0e4f",
+        "source-memory-snapshot:8cbabbf9fce2d11f1d8819282ae5fe0490aead1d89161dcaa387f99b234a0b05",
+        "source-memory-snapshot:e32614d246202ef6ae7fedae9423bc22d426c9fa0c3015595b5c218e47ecc5bf",
+        "source-memory-snapshot:ed5567eac6c709da448d52df66aa3a6cef92d54fe4c1b32d5c9014ac3d8c2e2c"
+      ],
+      "supersedes_version": null,
+      "target": "p-b-learning-memory:0991377e2b1a3dff77858e81",
+      "valid": true,
+      "version": 1
+    },
+    {
+      "archived": false,
+      "created_version": 2,
+      "evidence_signature": "b818ffded29fcea3728d10015c228bf9da0811ca1aca781b4992344a8e91eb9e",
+      "index_terms": [
+        "p-b-learning",
+        "hds-authorized",
+        "identity-free"
+      ],
+      "lifecycle": "ACTIVE",
+      "operation": "MERGE",
+      "payload": {
+        "p_b_learning": {
+          "buffer_limit": 128,
+          "examples": [
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:0953aed453d9b5124e9d"
+              ],
+              "example_id": "p-b-example:1e485fc74309dd62a5e756c8",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "HOLDOUT",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            }
+          ],
+          "pending": {
+            "action_id": 1,
+            "feature_vector": [
+              1.0,
+              0.14285714285714285,
+              0.7142857142857143,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0625,
+              0.03125,
+              0.0,
+              1.0,
+              1.0
+            ],
+            "observation_signature": "frame:0953aed453d9b5124e9d",
+            "predictions": [
+              1.0,
+              0.106342,
+              0.043417,
+              0.956765,
+              0.735681,
+              0.434172
+            ],
+            "structural_signature": "structure:dba0f5b71c03a84ff8ff"
+          },
+          "runtime_identity_free": true,
+          "schema_version": "arc3-p-b-learning-v1"
+        },
+        "source_memory_snapshot_digest": "ed5567eac6c709da448d52df66aa3a6cef92d54fe4c1b32d5c9014ac3d8c2e2c"
+      },
+      "provenance": [
+        "b818ffded29fcea3728d10015c228bf9da0811ca1aca781b4992344a8e91eb9e",
+        "hds-command:command:5dab934cb901fc7e95ff",
+        "hds-decision:decision:ad5a5e4aaffeb1f3c403",
+        "source-memory-snapshot:1d5e950724d9cd89b247a1c66c829729101b9863317d896d71252812bae61a0a",
+        "source-memory-snapshot:82978dec04c84dd310d25f6a30e6760540b98b24797b22b425ed3e187e62098a",
+        "source-memory-snapshot:ed5567eac6c709da448d52df66aa3a6cef92d54fe4c1b32d5c9014ac3d8c2e2c"
+      ],
+      "supersedes_version": null,
+      "target": "p-b-learning-memory:5245e14d757bafeeb490fe63",
+      "valid": true,
+      "version": 2
+    },
+    {
+      "archived": false,
+      "created_version": 3,
+      "evidence_signature": "70fb8fe4a689ca1640c262204ac1d8c517e91da384d6252e8136357609130c54",
+      "index_terms": [
+        "p-b-learning",
+        "hds-authorized",
+        "identity-free"
+      ],
+      "lifecycle": "ACTIVE",
+      "operation": "MERGE",
+      "payload": {
+        "p_b_learning": {
+          "buffer_limit": 128,
+          "examples": [
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:37a051adccd9e776d76a"
+              ],
+              "example_id": "p-b-example:1e472bfdf92af70d57aa8344",
+              "feature_vector": [
+                1.0,
+                0.8571428571428571,
+                0.14285714285714285,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            }
+          ],
+          "pending": {
+            "action_id": 6,
+            "feature_vector": [
+              1.0,
+              0.8571428571428571,
+              0.14285714285714285,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0625,
+              0.03125,
+              0.0,
+              1.0,
+              1.0
+            ],
+            "observation_signature": "frame:37a051adccd9e776d76a",
+            "predictions": [
+              1.0,
+              0.099499,
+              0.039975,
+              0.95879,
+              0.717562,
+              0.347851
+            ],
+            "structural_signature": "structure:d4deb7f8b44faf714446"
+          },
+          "runtime_identity_free": true,
+          "schema_version": "arc3-p-b-learning-v1"
+        },
+        "source_memory_snapshot_digest": "ed5567eac6c709da448d52df66aa3a6cef92d54fe4c1b32d5c9014ac3d8c2e2c"
+      },
+      "provenance": [
+        "70fb8fe4a689ca1640c262204ac1d8c517e91da384d6252e8136357609130c54",
+        "hds-command:command:975da7744e75d0da0544",
+        "hds-decision:decision:625cd22a97d805837f48",
+        "source-memory-snapshot:82978dec04c84dd310d25f6a30e6760540b98b24797b22b425ed3e187e62098a",
+        "source-memory-snapshot:b81eec0ca94c883a279ebd78158b0afca5a3e3d14a9f10a2960f529e93c8c168",
+        "source-memory-snapshot:ed5567eac6c709da448d52df66aa3a6cef92d54fe4c1b32d5c9014ac3d8c2e2c"
+      ],
+      "supersedes_version": null,
+      "target": "p-b-learning-memory:a9230139bcea9465f56ffc84",
+      "valid": true,
+      "version": 3
+    },
+    {
+      "archived": false,
+      "created_version": 4,
+      "evidence_signature": "e33c754ab9a01bda4835c15e8f22f384e15de0a1cffb11925265f5cad8dda003",
+      "index_terms": [
+        "p-b-learning",
+        "hds-authorized",
+        "identity-free"
+      ],
+      "lifecycle": "ACTIVE",
+      "operation": "MERGE",
+      "payload": {
+        "p_b_learning": {
+          "buffer_limit": 128,
+          "examples": [
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:37a051adccd9e776d76a"
+              ],
+              "example_id": "p-b-example:1e472bfdf92af70d57aa8344",
+              "feature_vector": [
+                1.0,
+                0.8571428571428571,
+                0.14285714285714285,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            }
+          ],
+          "pending": {
+            "action_id": 6,
+            "feature_vector": [
+              1.0,
+              0.8571428571428571,
+              0.14285714285714285,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0625,
+              0.03125,
+              0.0,
+              1.0,
+              1.0
+            ],
+            "observation_signature": "frame:37a051adccd9e776d76a",
+            "predictions": [
+              1.0,
+              0.099499,
+              0.039975,
+              0.95879,
+              0.717562,
+              0.347851
+            ],
+            "structural_signature": "structure:d4deb7f8b44faf714446"
+          },
+          "runtime_identity_free": true,
+          "schema_version": "arc3-p-b-learning-v1"
+        },
+        "source_memory_snapshot_digest": "5b594b0691d44ea96afa28da215e4b87cd6d4dd1c6e80b9190a0ada3b663ad10"
+      },
+      "provenance": [
+        "e33c754ab9a01bda4835c15e8f22f384e15de0a1cffb11925265f5cad8dda003",
+        "hds-command:command:08d208a7444be098e177",
+        "hds-decision:decision:453e64f25698105cc0e4",
+        "source-memory-snapshot:5b594b0691d44ea96afa28da215e4b87cd6d4dd1c6e80b9190a0ada3b663ad10",
+        "source-memory-snapshot:b5d777b43bf900a6647bdc99d148c040ad89a168e4b1c6c6e88b62e0be4af1b5"
+      ],
+      "supersedes_version": null,
+      "target": "p-b-learning-memory:cfb8c5416030b2b2003c93a6",
+      "valid": true,
+      "version": 4
+    },
+    {
+      "archived": false,
+      "created_version": 5,
+      "evidence_signature": "cb5d8df075c83322a126a4d0c945061b37d247797ee5b4c40cc8e16cbcdf8861",
+      "index_terms": [
+        "p-b-learning",
+        "hds-authorized",
+        "identity-free"
+      ],
+      "lifecycle": "ACTIVE",
+      "operation": "MERGE",
+      "payload": {
+        "p_b_learning": {
+          "buffer_limit": 128,
+          "examples": [
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:29dda2d2a8cf0821493b"
+              ],
+              "example_id": "p-b-example:cdbd7877011fedc121fda731",
+              "feature_vector": [
+                1.0,
+                0.8571428571428571,
+                0.14285714285714285,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            }
+          ],
+          "pending": {
+            "action_id": 6,
+            "feature_vector": [
+              1.0,
+              0.8571428571428571,
+              0.14285714285714285,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              0.0625,
+              0.03125,
+              0.0,
+              1.0,
+              1.0
+            ],
+            "observation_signature": "frame:29dda2d2a8cf0821493b",
+            "predictions": [
+              1.0,
+              0.099499,
+              0.039975,
+              0.95879,
+              0.717562,
+              0.347851
+            ],
+            "structural_signature": "structure:340b7633e68258ee132d"
+          },
+          "runtime_identity_free": true,
+          "schema_version": "arc3-p-b-learning-v1"
+        },
+        "source_memory_snapshot_digest": "5b594b0691d44ea96afa28da215e4b87cd6d4dd1c6e80b9190a0ada3b663ad10"
+      },
+      "provenance": [
+        "cb5d8df075c83322a126a4d0c945061b37d247797ee5b4c40cc8e16cbcdf8861",
+        "hds-command:command:8f91216acd0e07bba4c9",
+        "hds-decision:decision:3cb44f0f7511d14ef268",
+        "source-memory-snapshot:5b594b0691d44ea96afa28da215e4b87cd6d4dd1c6e80b9190a0ada3b663ad10",
+        "source-memory-snapshot:8cc2109fa81c8e3262d5d18f4868f6df7b565ab58566f37ec88a88eef52f3268"
+      ],
+      "supersedes_version": null,
+      "target": "p-b-learning-memory:db0563a877df9f7fc7fcb27d",
+      "valid": true,
+      "version": 5
+    },
+    {
+      "archived": false,
+      "created_version": 6,
+      "evidence_signature": "c8c83e647b14f9e7b26f3b4758deb9ba4b664922ed93ef8bcf3e67c6365f8795",
+      "index_terms": [
+        "p-b-learning",
+        "hds-authorized",
+        "identity-free"
+      ],
+      "lifecycle": "ACTIVE",
+      "operation": "MERGE",
+      "payload": {
+        "p_b_learning": {
+          "buffer_limit": 128,
+          "examples": [
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:0953aed453d9b5124e9d"
+              ],
+              "example_id": "p-b-example:1e485fc74309dd62a5e756c8",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "HOLDOUT",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:0cfd1479825ae334b685"
+              ],
+              "example_id": "p-b-example:33a00d3464eb403c6e502826",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.0625,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:865c94d84116678afc50"
+              ],
+              "example_id": "p-b-example:e08dc9da30a831d392d7d0cb",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.125,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:1fb72323bd1f54e5c966"
+              ],
+              "example_id": "p-b-example:40cbb86ff2fc99350decadc1",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.1875,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "HOLDOUT",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "CONTRADICTION",
+                "EXPERIENCE",
+                "NEGATIVE"
+              ],
+              "evidence_refs": [
+                "NO_VISIBLE_CHANGE",
+                "observed-result:frame:1fb72323bd1f54e5c966"
+              ],
+              "example_id": "p-b-example:8cbd48b33a1095dfcb265569",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.25,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.9
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:a137c3f14566fd16c062"
+              ],
+              "example_id": "p-b-example:98ee4864486ecdfceb9134c2",
+              "feature_vector": [
+                1.0,
+                0.2857142857142857,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.3125,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:d5e01f9e0171a59b4f81"
+              ],
+              "example_id": "p-b-example:02f6de397102a4e837b5b193",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.375,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:763a8da6810066c5e7b7"
+              ],
+              "example_id": "p-b-example:69b6b3a5098ae6d51e83ec5e",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.4375,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:2f14ab6f17d19086f7c7"
+              ],
+              "example_id": "p-b-example:1937f95acdf80ed5e03ee5f4",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.5,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "CONTRADICTION",
+                "EXPERIENCE",
+                "NEGATIVE"
+              ],
+              "evidence_refs": [
+                "NO_VISIBLE_CHANGE",
+                "observed-result:frame:2f14ab6f17d19086f7c7"
+              ],
+              "example_id": "p-b-example:26b31d671f2c495cbbc35c67",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.5625,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.9
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:30dd0e59a5d09df23771"
+              ],
+              "example_id": "p-b-example:27fde2a7b44060fd4dd65ac1",
+              "feature_vector": [
+                1.0,
+                0.2857142857142857,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.625,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:25a58caa4c5d3b752fc8"
+              ],
+              "example_id": "p-b-example:d07a1a22ce50ea9c58e94186",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.6875,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "CONTRADICTION",
+                "EXPERIENCE",
+                "NEGATIVE"
+              ],
+              "evidence_refs": [
+                "NO_VISIBLE_CHANGE",
+                "observed-result:frame:25a58caa4c5d3b752fc8"
+              ],
+              "example_id": "p-b-example:55f48b19ff998f8d4889aba4",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.75,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.9
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:955cdf2d567f8fa93611"
+              ],
+              "example_id": "p-b-example:c0cbea64d8ed68233e6d462c",
+              "feature_vector": [
+                1.0,
+                0.2857142857142857,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.8125,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:f49cb30ccf0ae41ffd43"
+              ],
+              "example_id": "p-b-example:fee6292c244c24295d9027df",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.875,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "CONTRADICTION",
+                "EXPERIENCE",
+                "NEGATIVE"
+              ],
+              "evidence_refs": [
+                "NO_VISIBLE_CHANGE",
+                "observed-result:frame:f49cb30ccf0ae41ffd43"
+              ],
+              "example_id": "p-b-example:0b1b3669bbb63c638c8d76f9",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                0.9375,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.9
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:7be7d3fd28e467870a4b"
+              ],
+              "example_id": "p-b-example:206c602e5c292027ce64ea9c",
+              "feature_vector": [
+                1.0,
+                0.2857142857142857,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                1.0,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "EXPERIENCE",
+                "POSITIVE"
+              ],
+              "evidence_refs": [
+                "VISIBLE_STATE_CHANGE",
+                "observed-result:frame:a73c5858b7d8c3f00f36"
+              ],
+              "example_id": "p-b-example:14b609ddfdb48dfa9f3aed31",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                1.0,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "HOLDOUT",
+              "targets": [
+                1.0,
+                0.0,
+                0.0,
+                1.0,
+                0.7,
+                0.4
+              ]
+            },
+            {
+              "evidence_kinds": [
+                "CONTRADICTION",
+                "EXPERIENCE",
+                "NEGATIVE"
+              ],
+              "evidence_refs": [
+                "NO_VISIBLE_CHANGE",
+                "observed-result:frame:a73c5858b7d8c3f00f36"
+              ],
+              "example_id": "p-b-example:7eaa1c0e26da03a0ecc6e880",
+              "feature_vector": [
+                1.0,
+                0.14285714285714285,
+                0.7142857142857143,
+                1.0,
+                0.0,
+                1.0,
+                1.0,
+                1.0,
+                0.03125,
+                0.0,
+                1.0,
+                1.0
+              ],
+              "runtime_identity_free": true,
+              "schema_version": "arc3-p-b-learning-v1",
+              "split": "TRAIN",
+              "targets": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.9
+              ]
+            }
+          ],
+          "pending": {
+            "action_id": 2,
+            "feature_vector": [
+              1.0,
+              0.2857142857142857,
+              0.7142857142857143,
+              1.0,
+              0.0,
+              1.0,
+              1.0,
+              1.0,
+              0.03125,
+              0.0,
+              1.0,
+              1.0
+            ],
+            "observation_signature": "frame:a73c5858b7d8c3f00f36",
+            "predictions": [
+              1.0,
+              0.073413,
+              0.024966,
+              0.97272,
+              0.769362,
+              0.446368
+            ],
+            "structural_signature": "structure:9a775958c1c74fcbbe4d"
+          },
+          "runtime_identity_free": true,
+          "schema_version": "arc3-p-b-learning-v1"
+        },
+        "source_memory_snapshot_digest": "ed5567eac6c709da448d52df66aa3a6cef92d54fe4c1b32d5c9014ac3d8c2e2c"
+      },
+      "provenance": [
+        "c8c83e647b14f9e7b26f3b4758deb9ba4b664922ed93ef8bcf3e67c6365f8795",
+        "hds-command:command:667a34d31d0beb0c4122",
+        "hds-decision:decision:0e9df7248a22dfda93e3",
+        "source-memory-snapshot:404306a91c093d163597bc1e32093b1216111cd11a4eebefdc78aa6c2aa7b0a1",
+        "source-memory-snapshot:8cbabbf9fce2d11f1d8819282ae5fe0490aead1d89161dcaa387f99b234a0b05",
+        "source-memory-snapshot:ed5567eac6c709da448d52df66aa3a6cef92d54fe4c1b32d5c9014ac3d8c2e2c"
+      ],
+      "supersedes_version": null,
+      "target": "p-b-learning-memory:e0096030b51430b91ad558d1",
+      "valid": true,
+      "version": 6
+    }
+  ],
+  "memory_snapshot_digest": "28634c12ff080d710caae324ff3ec19af5da703294fd5fa0fa2548f412a60334",
+  "memory_version": 6,
+  "runtime_identity_free": true,
+  "schema_version": "arc3-p-b-learning-memory-evidence-v1"
+}

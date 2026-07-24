@@ -133,6 +133,39 @@
         "stable-twenty-nine-level-regression-pass",
         "target-zero-to-one-level-improvement-reproduced"
       ]
+    },
+    {
+      "decision_id": "j-dev:p10-selectable-multi-object-route-v17",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H15-marker-centered-transition-state-representation",
+      "reason_codes": [
+        "touching-objects-require-marker-centered-separation",
+        "transition-state-evidence-is-rendered-and-identity-free",
+        "highest-bounded-target-information-gain",
+        "candidate-only-change-is-reversible"
+      ],
+      "rejected": [
+        "H14-direct-component-route-extension"
+      ],
+      "supporting": [
+        "H16-bounded-push-route-reobservation-composition"
+      ],
+      "maximum_information_gain_next": "same-condition-one-to-two-target-delta-before-stable-regression"
+    },
+    {
+      "decision_id": "p-update-decision:1ce85d6169df27a156d11a6f",
+      "authority": "hds-p-update-only",
+      "status": "PROMOTE",
+      "allow_p_compile": false,
+      "allow_p_promote": true,
+      "allow_p_rollback": false,
+      "decision_digest": "1889efa0af9098f1c12e7cfa25dd8bf979d4f815e2cff4168c25411429c90baf",
+      "reason_codes": [
+        "all-ten-promotion-gates-pass",
+        "stable-adopted-level-regression-pass",
+        "target-completed-level-improvement-reproduced"
+      ]
     }
   ]
 }

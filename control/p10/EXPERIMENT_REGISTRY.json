@@ -162,6 +162,45 @@
         "full local oracle score"
       ],
       "status": "PROMOTED"
+    },
+    {
+      "experiment_id": "p10-selectable-multi-object-route-v17",
+      "frame_id": "p10-v17-selectable-route-promotion-v1",
+      "selected_hypothesis": "H15-marker-centered-transition-state-representation",
+      "supporting_hypothesis": "H16-bounded-push-route-reobservation-composition",
+      "bounded_change": [
+        "marker-centered object representation derived from target dimensions",
+        "released-marker phase and queued-action state evidence",
+        "bounded multi-object selection push and route search",
+        "candidate-only P compile before HDS promotion"
+      ],
+      "baseline": "previous active target completed one of seven at ninety-six actions",
+      "prediction": [
+        "candidate completes at least two target levels",
+        "prior twenty-nine stable levels remain complete",
+        "same-condition candidate rerun is identical",
+        "touching objects and transient frames remain bounded"
+      ],
+      "observed": [
+        "candidate completed two of seven at ninety-six actions twice",
+        "prior twenty-nine levels retained exact completion and action counts",
+        "target selected-field digest matched across reruns",
+        "touching-object, released-marker, push, and transient-frame fixtures passed",
+        "HDS promoted candidate after all ten gates passed",
+        "post-promotion active target completed two of seven with error zero"
+      ],
+      "unchanged": [
+        "OFFLINE-only phase boundary",
+        "runtime identity-free selector contract",
+        "HDS sole promotion authority"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "remaining five levels of the target structure",
+        "complete twenty-five-game report",
+        "full local oracle score"
+      ],
+      "status": "PROMOTED"
     }
   ]
 }

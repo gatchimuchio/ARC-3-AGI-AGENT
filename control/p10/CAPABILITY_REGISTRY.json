@@ -1,14 +1,14 @@
 {
   "schema_version": "arc3-p10-capability-registry-v1",
-  "stable_completed_levels": 30,
+  "stable_completed_levels": 31,
   "retained_level_count": 183,
   "capabilities": [
     {
       "capability_id": "rendered-relation-toggle",
       "status": "STABLE",
       "active_p_versions": [
-        "p10-p-a-symbolic-v22",
-        "p10-hybrid-v21"
+        "p10-p-a-symbolic-v23",
+        "p10-hybrid-v22"
       ],
       "applicable_structure": "visible relation lattice with bounded action effect",
       "non_applicable_structure": "unresolved non-lattice relation",
@@ -19,8 +19,8 @@
       "capability_id": "rendered-object-target-control",
       "status": "STABLE",
       "active_p_versions": [
-        "p10-p-a-symbolic-v22",
-        "p10-hybrid-v21"
+        "p10-p-a-symbolic-v23",
+        "p10-hybrid-v22"
       ],
       "applicable_structure": "visible compact controls and target relations",
       "non_applicable_structure": "underdetermined control effect",
@@ -31,8 +31,8 @@
       "capability_id": "visible-symbolic-rewrite",
       "status": "STABLE",
       "active_p_versions": [
-        "p10-p-a-symbolic-v22",
-        "p10-hybrid-v21"
+        "p10-p-a-symbolic-v23",
+        "p10-hybrid-v22"
       ],
       "applicable_structure": "visible example-driven bounded rewrite",
       "non_applicable_structure": "unobserved rewrite relation",
@@ -43,8 +43,8 @@
       "capability_id": "goal-aware-equal-rank-merge",
       "status": "STABLE",
       "active_p_versions": [
-        "p10-p-a-symbolic-v22",
-        "p10-hybrid-v21"
+        "p10-p-a-symbolic-v23",
+        "p10-hybrid-v22"
       ],
       "applicable_structure": "visible equal-rank merge and target placement",
       "non_applicable_structure": "rendered goal or actor type is unresolved",
@@ -55,9 +55,9 @@
       "capability_id": "hds-controlled-p-lifecycle",
       "status": "STABLE",
       "active_p_versions": [
-        "p10-p-a-symbolic-v22",
-        "p10-p-b-parametric-v22",
-        "p10-hybrid-v21"
+        "p10-p-a-symbolic-v23",
+        "p10-p-b-parametric-v23",
+        "p10-hybrid-v22"
       ],
       "applicable_structure": "all versioned symbolic parametric and hybrid P updates",
       "non_applicable_structure": "none established",
@@ -68,13 +68,25 @@
       "capability_id": "rendered-selectable-object-target-push",
       "status": "STABLE_BOUNDED",
       "active_p_versions": [
-        "p10-p-a-symbolic-v22",
-        "p10-hybrid-v21"
+        "p10-p-a-symbolic-v23",
+        "p10-hybrid-v22"
       ],
       "applicable_structure": "paired rendered border objects, enclosing target rings, and an intervening rectangular barrier",
       "non_applicable_structure": "ambiguous roles or layouts requiring post-transition replanning",
       "removal_witness": "previous stable remains at zero of seven while the promoted operator completes one of seven",
       "regression_target": "one retained completion plus the prior twenty-nine stable levels"
+    },
+    {
+      "capability_id": "rendered-selectable-multi-object-route",
+      "status": "STABLE_BOUNDED",
+      "active_p_versions": [
+        "p10-p-a-symbolic-v23",
+        "p10-hybrid-v22"
+      ],
+      "applicable_structure": "four-to-eight marker-centered rendered objects with unique dimension-matched targets, inferred stride, and bounded push terrain",
+      "non_applicable_structure": "ambiguous object assignment, non-unique target dimensions, or a route beyond the P search and action bounds",
+      "removal_witness": "previous stable remains at one of seven while the promoted operator completes two of seven",
+      "regression_target": "two retained target completions plus the prior twenty-nine stable levels"
     }
   ]
 }

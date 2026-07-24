@@ -89,31 +89,55 @@
       "signature": "rendered-selectable-object-target-commit-gap",
       "structural_condition": "paired selectable rendered objects must cross a barrier and enter paired enclosing targets",
       "evidence": [
-        "previous stable completed zero of seven at sixty-four actions",
-        "geometry-derived candidate completed one of seven twice"
+        "v16 previous stable completed zero of seven at sixty-four actions",
+        "v16 geometry-derived candidate completed one of seven twice",
+        "v17 previous active completed one of seven at ninety-six actions",
+        "v17 marker-centered route candidate completed two of seven twice"
       ],
-      "status": "PARTIALLY_RESOLVED_BY_V16_PROMOTION",
+      "status": "PARTIALLY_RESOLVED_BY_V17_PROMOTION",
       "required_resolution": [
-        "reobserve and classify post-level geometry",
-        "close the remaining six levels without identity routing"
+        "reobserve and classify the next unresolved geometry",
+        "close the remaining five levels without identity routing"
       ],
       "resolution_evidence": [
         "translated role fixtures pass",
         "ambiguous roles reject",
-        "post-promotion active completes one of seven"
+        "touching objects remain separated by marker-centered templates",
+        "queued actions validate reobserved transition state",
+        "post-promotion active completes two of seven"
       ]
+    },
+    {
+      "signature": "connected-same-color-object-alias",
+      "structural_condition": "touching same-color rendered objects collapse into one connected component",
+      "evidence": [
+        "direct v16 component extension could not preserve four object roles",
+        "dimension-derived marker-centered templates separated the objects"
+      ],
+      "status": "RESOLVED_BY_V17_PROMOTION",
+      "falsifier": "a unique marker-centered object family is still merged or multiply assigned"
+    },
+    {
+      "signature": "transient-route-observation-gap",
+      "structural_condition": "a push transition temporarily obscures target rings or renders an intermediate object phase",
+      "evidence": [
+        "full target-family reconstruction was unavailable during a push transition",
+        "P-bounded queued-state reobservation retained the plan and later matched"
+      ],
+      "status": "RESOLVED_BY_V17_PROMOTION",
+      "falsifier": "a mismatch is accepted or an unavailable state exceeds the P observation bound"
     },
     {
       "signature": "remaining-level-commit-model-gap",
       "structural_condition": "an active bounded semantic operator completes an initial level but does not yet close subsequent rendered layouts",
       "evidence": [
-        "adopted boundary is thirty of one hundred eighty-three",
-        "the selectable target remains at one of seven after sixty-four actions"
+        "adopted boundary is thirty-one of one hundred eighty-three",
+        "the selectable target remains at two of seven after ninety-six actions"
       ],
       "status": "ACTIVE",
       "required_resolution": [
-        "record the first post-level rendered layout",
-        "compare direct capability, representation, and composition hypotheses",
+        "record the next unresolved rendered layout",
+        "compare at least one direct capability, representation, and composition hypothesis",
         "require another reproducible positive target delta"
       ]
     }

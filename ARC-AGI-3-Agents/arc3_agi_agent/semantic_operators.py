@@ -34,6 +34,12 @@ from .selectable_push import (
     SELECTABLE_PUSH_TARGET_OPERATOR,
     selectable_push_target_plan,
 )
+from .selectable_route import (
+    SELECTABLE_ROUTE_TARGET_OPERATOR,
+    selectable_route_observation_status,
+    selectable_route_target_plan,
+    selectable_route_transition_observation_limit,
+)
 from .symbolic_rewrite import (
     SYMBOLIC_REWRITE_OPERATOR,
     SymbolicRewriteState,
@@ -46,7 +52,7 @@ from .visual_explorer import (
     connected_components,
 )
 
-SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v6"
+SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v7"
 RELATION_TOGGLE_OPERATOR = "relation-constrained-toggle-gf2-v1"
 OBJECT_TARGET_CONTROL_OPERATOR = "object-target-cycle-control-v1"
 
@@ -1791,6 +1797,7 @@ class SemanticPlannerState:
     blocked_plan_signatures: set[str] = field(default_factory=set)
     plan_count: int = 0
     memory_read_count: int = 0
+    selectable_route_wait_count: int = 0
     target_initial_state: str = ""
     target_pending_state: str = ""
     target_pending_action: str = ""
@@ -1843,6 +1850,7 @@ class SemanticPlannerState:
         self.active_instruction_digest = ""
         self.active_plan_signature = ""
         self.source_signature = ""
+        self.selectable_route_wait_count = 0
 
     def _reset_target_coordinate(
         self,
@@ -2534,10 +2542,49 @@ class SemanticPlannerState:
             ):
                 self.invalidate_active_plan()
             else:
-                action = self.queue.pop(0)
+                action = self.queue[0]
                 if action.action_id not in available_actions:
                     self.invalidate_active_plan()
+                elif self.active_operator == SELECTABLE_ROUTE_TARGET_OPERATOR:
+                    route_status = selectable_route_observation_status(
+                        grid,
+                        current_instruction,
+                        action,
+                    )
+                    if route_status == "MATCH":
+                        self.selectable_route_wait_count = 0
+                        self.queue.pop(0)
+                        self.memory_read_count += 1
+                        return SemanticPlannerDecision(
+                            action=action,
+                            reason=self.active_operator,
+                            memory_influenced=True,
+                            plan_signature=self.active_plan_signature,
+                        )
+                    observation_limit = (
+                        selectable_route_transition_observation_limit(
+                            current_instruction
+                        )
+                    )
+                    if (
+                        route_status == "UNAVAILABLE"
+                        and self.selectable_route_wait_count
+                        < observation_limit
+                    ):
+                        self.selectable_route_wait_count += 1
+                        self.memory_read_count += 1
+                        return SemanticPlannerDecision(
+                            action=action,
+                            reason=(
+                                f"{self.active_operator}:"
+                                "transition-reobserve"
+                            ),
+                            memory_influenced=True,
+                            plan_signature=self.active_plan_signature,
+                        )
+                    self.invalidate_active_plan()
                 else:
+                    self.queue.pop(0)
                     self.memory_read_count += 1
                     return SemanticPlannerDecision(
                         action=action,
@@ -2689,6 +2736,12 @@ class SemanticPlannerState:
                     available_actions,
                     instruction,
                 )
+            elif instruction.operator_id == SELECTABLE_ROUTE_TARGET_OPERATOR:
+                plan = selectable_route_target_plan(
+                    grid,
+                    available_actions,
+                    instruction,
+                )
             else:
                 continue
             if not plan:
@@ -2754,6 +2807,9 @@ class SemanticPlannerState:
             )[-64:],
             "plan_count": self.plan_count,
             "memory_read_count": self.memory_read_count,
+            "selectable_route_wait_count": (
+                self.selectable_route_wait_count
+            ),
             "target_initial_state": self.target_initial_state,
             "target_pending_state": self.target_pending_state,
             "target_pending_action": self.target_pending_action,
@@ -3138,6 +3194,10 @@ class SemanticPlannerState:
                 value.get("memory_read_count", 0),
                 "memory_read_count",
             ),
+            selectable_route_wait_count=_payload_int(
+                value.get("selectable_route_wait_count", 0),
+                "selectable_route_wait_count",
+            ),
             target_initial_state=str(
                 value.get("target_initial_state", "")
             ),
@@ -3256,6 +3316,7 @@ __all__ = [
     "OBJECT_TARGET_CONTROL_OPERATOR",
     "RELATION_TOGGLE_OPERATOR",
     "SELECTABLE_PUSH_TARGET_OPERATOR",
+    "SELECTABLE_ROUTE_TARGET_OPERATOR",
     "SYMBOLIC_REWRITE_OPERATOR",
     "SEMANTIC_PLANNER_FORMAT",
     "SemanticPlannerDecision",
