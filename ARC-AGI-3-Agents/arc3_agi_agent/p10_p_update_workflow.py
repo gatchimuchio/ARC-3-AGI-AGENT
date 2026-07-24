@@ -209,22 +209,29 @@ def collect_p10_learning_memory(
 
 def _proposal(bundle_dir: Path) -> PUpdateProposal:
     return PUpdateProposal(
-        proposal_id="proposal:p10-approved-memory-instruction-body-set",
+        proposal_id=(
+            "proposal:p10-multi-actor-shape-instruction-body-set"
+        ),
         source_p_version="p10-active-instruction-body-set",
         source_p_digest=active_p10_manifest_digest(bundle_dir),
         target_component="instruction-body-set",
         update_type="symbolic-parametric-composition",
         evidence_refs=(
             "memory:approved-multi-episode-learning",
-            "failure:remaining-level-commit-model-gap",
-            "contrast:operator-unavailable-versus-shape-role-closure",
+            "failure:remaining-level-multi-actor-selection-push-gap",
+            (
+                "contrast:single-actor-shape-model-versus-"
+                "multi-actor-selection-closure"
+            ),
         ),
         expected_effect=(
-            "change-P-B-same-input-compute-and-compile-isolated-shape-push-candidate"
+            "change-P-B-same-input-compute-and-compile-isolated-"
+            "multi-actor-shape-candidate"
         ),
         expected_affected_capabilities=(
             "failure-conditioned-parametric-ranking",
-            "marker-controlled-shape-target-route",
+            "multiple-marker-actor-selection",
+            "actor-mediated-recursive-shape-push",
         ),
         expected_unaffected_capabilities=(
             "stable-rendered-relation-control",
@@ -233,6 +240,7 @@ def _proposal(bundle_dir: Path) -> PUpdateProposal:
             "stable-goal-aware-merge",
             "stable-selectable-object-target-push",
             "stable-selectable-multi-object-route",
+            "stable-single-actor-shape-target-route",
         ),
         falsifiers=(
             "parameter-digest-unchanged",
@@ -243,7 +251,10 @@ def _proposal(bundle_dir: Path) -> PUpdateProposal:
         rollback_target="p10-active-instruction-body-set",
         provenance=(
             "HDS-authorized-runtime-memory",
-            "identity-free-rendered-shape-positive-negative-contrast",
+            (
+                "identity-free-rendered-multi-actor-shape-"
+                "positive-negative-contrast"
+            ),
         ),
     )
 
@@ -264,16 +275,28 @@ def _evidence_set(
         )
     )
     return PUpdateEvidenceSet(
-        evidence_set_id="evidence-set:p10-multi-episode-p-update",
+        evidence_set_id=(
+            "evidence-set:p10-multi-actor-shape-p-update"
+        ),
         proposal_digest=proposal.digest,
         memory_snapshot_digest=memory.digest,
         approved_memory_refs=approved_refs,
         hds_memory_decision_digests=hds_refs,
-        failure_refs=("failure:remaining-level-commit-model-gap",),
-        contradiction_refs=("contradiction:actor-only-route-incomplete",),
-        positive_contrast_refs=("contrast:shape-role-closure",),
-        negative_contrast_refs=("contrast:operator-unavailable",),
-        holdout_refs=("holdout:structure-partition",),
+        failure_refs=(
+            "failure:remaining-level-multi-actor-selection-push-gap",
+        ),
+        contradiction_refs=(
+            "contradiction:single-actor-shape-model-incomplete",
+        ),
+        positive_contrast_refs=(
+            "contrast:multi-actor-selection-shape-role-closure",
+        ),
+        negative_contrast_refs=(
+            "contrast:single-actor-shape-operator-unavailable",
+        ),
+        holdout_refs=(
+            "holdout:translated-layout-and-dynamic-footer",
+        ),
         replay_audit_refs=("audit:no-id-no-replay-no-fixed-sequence",),
         provenance=(
             "runtime-memory:authorized",
@@ -295,8 +318,8 @@ def _compile_authorization(
         proposal,
         status="COMPILE",
         reason_codes=(
-            "approved-memory-contains-required-contrasts",
-            "identity-free-and-holdout-partitioned",
+            "approved-memory-contains-multi-actor-contrasts",
+            "identity-free-and-structural-holdout-partitioned",
         ),
         evidence_set=evidence_set,
     )

@@ -103,9 +103,9 @@ current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す
 ## 3. 現在の実測境界
 
 P10実行経路の関連unit、strict mypy、ruff gateは通過している。現行hybrid
-`p10-hybrid-v22`、instruction compiler
-`arc3-p10-instruction-compiler-v22`、semantic planner
-`arc3-semantic-planner-v7`、visual operator
+`p10-hybrid-v24`、instruction compiler
+`arc3-p10-instruction-compiler-v24`、semantic planner
+`arc3-semantic-planner-v9`、visual operator
 `arc3-p10-visual-operator-v13`、OFFLINE、seed 0のstable regression実測は
 次のとおりである。
 
@@ -117,6 +117,8 @@ P10実行経路の関連unit、strict mypy、ruff gateは通過している。�
 | goal-aware equal-rank merge | 9 / 9 | 175 | 証拠内 | 0 | 0 | `WIN` |
 | selectable-object target push | 1 / 7 | 64 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 | selectable multi-object route | 2 / 7 | 96 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
+| marker shape-target push | 3 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
+| multi-actor shape-target push | 4 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 
 最初の四blockはerror 0、GAME_OVER 0、max-action停止なしである。
 v16 selectable-object target pushは、previous stableの0 / 7に対してcandidateが
@@ -125,9 +127,15 @@ marker-centered object表現、released-marker位相、bounded push-route search
 queued-action再観測を合成し、previous activeの1 / 7に対してcandidateが
 2 / 7を96 actionsで二回再現した。既存29 levelの完了数とactionsは不変だった。
 HDSは全十promotion gateを確認して`p10-hybrid-v22`をACTIVEへ昇格した。
-post-promotion active runも2 / 7、96 actions、error 0だったが、
-`MAX_ACTION_STOP`で残り5 levelは未閉包である。現時点のHDS採用済み境界は
-`31 / 183`、残りは`152 level`。これは六つの意味演算子blockの限定証拠で、
+v18ではclosed-outline interior、filled-shape family、bounded actor-mediated
+impulse push、dynamic footer除外、transient queue advancementを合成して
+target 2→3を再現し、`p10-hybrid-v23`へ昇格した。v19ではmultiple marker
+actor、selected index、観測由来click、recursive actor-mediated pushを合成し、
+target 3→4を二回再現して`p10-hybrid-v24`へ昇格した。両更新とも既存29 level
+を維持し、post-promotion v19 active runは4 / 7、192 actions、error 0だった。
+`MAX_ACTION_STOP`で残り3 target levelは未閉包である。現時点の
+HDS採用済み境界は`33 / 183`、残りは`150 level`。これは八つの
+意味演算子blockの限定証拠で、
 全sample攻略証拠またはfull local-oracle scoreではない。
 
 previous stable PでのSU15 bounded runは、4 / 9 levelを160 actionsまでに
@@ -155,6 +163,11 @@ v17では、touching same-color objectをconnected componentとして扱う直�
 `REJECT`し、target dimensionから導くmarker-centered templateでobjectを分離した。
 selection、push可能route search、予測state付きqueue、最大8 transient frameの
 再観測を一つのP演算子へcompileし、target 1→2を再現してHDS昇格した。
+v18ではsingle controlled actorとfilled movable shapeを別roleとして表し、
+closed outline interiorとのshape-family assignmentとbounded impulse pushを
+compileした。v19ではsingle-actor detectorの直接緩和を`REJECT`し、multiple
+marker actorのselected state、rendered center click、actor-to-actor /
+actor-to-shape recursive pushを一つのbounded operatorへcompileした。
 
 FT09、action budget 256、seed 0、OFFLINEの同一条件比較:
 

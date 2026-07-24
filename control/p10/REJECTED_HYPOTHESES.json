@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-v18-shape-push-promotion-v1",
+  "frame_id": "p10-v19-multi-actor-shape-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -78,6 +78,17 @@
         "actor-only-routing-cannot-satisfy-the-rendered-completion-relation"
       ],
       "reopen_condition": "a distinct rendered structure has exactly one controlled actor target and no additional movable-shape goal obligations"
+    },
+    {
+      "hypothesis_id": "H20-loosen-single-actor-shape-detector",
+      "status": "REJECTED",
+      "reason_codes": [
+        "single-actor-state-has-no-selected-actor-index",
+        "direct-loosening-cannot-authorize-observation-derived-click-transitions",
+        "actor-to-actor-push-obligation-remains-unrepresented",
+        "multi-actor-representation-has-higher-information-gain"
+      ],
+      "reopen_condition": "a distinct rendered structure has multiple actor-like objects but no selection transition and no actor-to-actor push obligation"
     }
   ]
 }

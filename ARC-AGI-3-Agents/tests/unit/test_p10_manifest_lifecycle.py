@@ -31,7 +31,7 @@ SOURCE_TRACE = (
     / "evidence"
     / "p10"
     / "p_update"
-    / "iteration_18_queue_regression"
+    / "iteration_19_regression"
     / "p10_candidate_compile_trace_v1.json"
 )
 
@@ -97,7 +97,7 @@ class P10ManifestLifecycleTests(unittest.TestCase):
             self.assertEqual(promoted["lifecycle"], "ACTIVE")
             self.assertEqual(
                 promoted["bundles"]["hybrid"]["body_version"],
-                "p10-hybrid-v23",
+                "p10-hybrid-v24",
             )
             self.assertEqual(candidate_archive["lifecycle"], "PROMOTED")
             self.assertTrue(

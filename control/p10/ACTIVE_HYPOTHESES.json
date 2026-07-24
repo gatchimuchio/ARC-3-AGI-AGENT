@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v18-shape-push-promotion-v1",
+  "frame_id": "p10-v19-multi-actor-shape-promotion-v1",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -534,6 +534,97 @@
       "rollback_cost": 1,
       "generality": 0.9,
       "information_gain": 0.9,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "PROMOTED_SUPPORT",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H20-loosen-single-actor-shape-detector",
+      "kind": "H1",
+      "summary": "Allow the single-actor shape operator to accept more than one rendered marker actor without adding selected-actor state or click transitions.",
+      "predicted_effect": [
+        "the existing detector reaches the layout",
+        "the planner cannot distinguish or switch the controlled actor and leaves actor-to-actor pushing unmodeled"
+      ],
+      "applicability": [
+        "multiple marker actors rendered beside shape-target obligations"
+      ],
+      "required_evidence": [
+        "post-level rendered observation",
+        "selected-marker transition probe",
+        "responsibility coverage comparison"
+      ],
+      "falsifier": [
+        "the single-actor state already represents selection and closes actor-to-actor push obligations"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.45,
+      "information_gain": 0.75,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.45,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H21-multi-actor-selection-shape-state-representation",
+      "kind": "H2",
+      "summary": "Represent multiple rendered marker actors, the selected actor, non-selectable shape families, enclosing target interiors, and observation-derived actor selection points.",
+      "predicted_effect": [
+        "selection changes are explicit state transitions rather than hidden control assumptions",
+        "translated layouts preserve actor, shape-family, target, and click relations"
+      ],
+      "applicability": [
+        "two or more marker actors with exactly one rendered selected marker and balanced closed-outline target families"
+      ],
+      "required_evidence": [
+        "selected and released marker transition fixtures",
+        "translated multi-actor layout fixtures",
+        "ambiguous actor, missing pushable, and search-bound rejection fixtures"
+      ],
+      "falsifier": [
+        "selection state is ambiguous or accepted without exactly one selected actor",
+        "translation changes the normalized state or action sequence",
+        "the current rendered structure remains unrecognized"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.92,
+      "information_gain": 0.97,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "PROMOTED",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H22-recursive-actor-mediated-push-composition",
+      "kind": "H3",
+      "summary": "Compose actor selection, free routing, recursive actor-to-actor and actor-to-shape impulse pushing, interchangeable goal assignment, and bounded queued reobservation under H21.",
+      "predicted_effect": [
+        "one actor can push another through rendered push terrain before control transfers",
+        "the transferred actor can close the remaining shape-target obligation",
+        "multi-frame transitions consume only the P-bounded observation allowance"
+      ],
+      "applicability": [
+        "stride-aligned rendered movement with bounded recursive push chains and observable marker selection"
+      ],
+      "required_evidence": [
+        "synthetic all-obligation closure with at least two selection actions",
+        "coherent predecessor and terrain-transition validation",
+        "bounded transient queue serialization",
+        "same-condition positive target delta and stable non-regression"
+      ],
+      "falsifier": [
+        "search exceeds the P state or action bound",
+        "a mismatched rendered state is accepted",
+        "target remains at three completed levels",
+        "stable completion decreases or rerun differs"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.92,
+      "information_gain": 0.94,
       "contamination_risk": 0.0,
       "regression_risk": 0.25,
       "status": "PROMOTED_SUPPORT",

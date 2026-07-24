@@ -39,8 +39,8 @@ local scorecard identityと重複するtrace event本体は除外し、event本�
 | `su15_hybrid_active_failure_compact.json` | 4 / 9 | 160 | `MAX_ACTION_STOP` | `10442999cd46639c281cc717bb937166dc3c1a9d5ab1c167b0a8307b03b2bec2` |
 
 上記四fileはv14以前のbaseline証拠として保持する。現行active Pは
-`p10-hybrid-v22`であり、HDS採用済みの再現可能なlevel境界は
-31 / 183へ更新された。
+`p10-hybrid-v24`であり、HDS採用済みの再現可能なlevel境界は
+33 / 183へ更新された。
 
 ## P update v14 promotion evidence
 
@@ -108,3 +108,52 @@ digestは一致し、HDSの全十promotion gateがPASSした。active Pは
 post-promotion targetは`MAX_ACTION_STOP`で残り5 levelが未完了であり、
 完全な25 game / 183 level reportも存在しない。したがって31 / 183は
 HDS採用済みlevel境界であって、ローカルオラクルのfull scoreではない。
+
+## P update v18 promotion evidence
+
+`p_update/iteration_18_queue_regression/`をv18の正本promotion証拠directory
+とする。`p_update/iteration_18_regression/`はtarget 2→2でHOLDされた
+先行候補の反証証拠として保持する。
+
+| file | role |
+|---|---|
+| `p10_candidate_compile_trace_v1.json` | 旧29 stable level回帰、target 2→3、同条件再実行、P-B同一入力差分 |
+| `p10_promotion_receipt_v1.json` | HDS PROMOTE判断、single-use directive、previous/active digest |
+| `p_b_learning_dataset_v1.json` | HDS承認済みMから構成した決定論的dataset |
+| `p_b_learning_memory_v1.json` | 学習入力となった受動M snapshot |
+| `p_b_learning_result_v1.json` | parameter差分、holdout gate、attribution |
+| `p10_active_post_promotion_ka59.json` | ACTIVE昇格後の3 / 7、192 actions、error 0 |
+
+closed-outline interiorとfilled-shape family、bounded actor-mediated impulse
+push、dynamic footer除外、transient queue advancementを候補に限定して導入した。
+候補は既存29 levelを維持し、targetを2 / 7から3 / 7へ二回同一に改善した。
+HDS昇格後のactive Pは`p10-p-a-symbolic-v24`、
+`p10-p-b-parametric-v24`、`p10-hybrid-v23`、active manifest digestは
+`9beb81c420fff3b4bc453edc960300eb5912035a4efe871b57498adabf8d9584`。
+
+## P update v19 promotion evidence
+
+`p_update/iteration_19_regression/`をv19の正本証拠directoryとする。
+
+| file | role |
+|---|---|
+| `p10_candidate_compile_trace_v1.json` | 旧29 stable level回帰、target 3→4、同条件再実行、P-B同一入力差分 |
+| `p10_promotion_receipt_v1.json` | HDS PROMOTE判断、single-use directive、previous/active digest |
+| `p_b_learning_dataset_v1.json` | HDS承認済みMから構成した決定論的dataset |
+| `p_b_learning_memory_v1.json` | 学習入力となった受動M snapshot |
+| `p_b_learning_result_v1.json` | parameter差分、holdout gate、attribution |
+| `p10_active_post_promotion_ka59.json` | ACTIVE昇格後の4 / 7、192 actions、error 0 |
+
+候補は複数marker actor、selected actor index、観測由来click point、
+interchangeable shape family、recursive actor-mediated pushを明示状態として
+追加した。既存29 levelはactive/candidateで同じ完了数を維持し、targetは
+3 / 7から4 / 7へ改善した。candidate二回のcompact reportは完全一致し、
+HDSの全十promotion gateがPASSした。active Pは
+`p10-p-a-symbolic-v25`、`p10-p-b-parametric-v25`、
+`p10-hybrid-v24`、active manifest digestは
+`ed005422ea68a7cc42bad99a10817ba7b6b7ab337bdb8993a750d781fba21c2c`。
+
+post-promotion targetは`MAX_ACTION_STOP`で残り3 levelが未完了であり、
+完全な25 game / 183 level reportも存在しない。したがって33 / 183は
+HDS採用済みlevel境界であって、ローカルオラクルのfull scoreではない。
+P10は継続、P11は未開始である。

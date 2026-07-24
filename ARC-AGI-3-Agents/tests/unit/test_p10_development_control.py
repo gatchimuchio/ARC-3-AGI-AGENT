@@ -108,7 +108,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v18_shape_push_promotion_is_current_control_authority(
+    def test_v19_multi_actor_shape_promotion_is_current_control_authority(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -123,13 +123,13 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v18-shape-push-promotion-v1",
+            "p10-v19-multi-actor-shape-promotion-v1",
         )
-        self.assertEqual(frame["self_check"]["stable_completed_levels"], 32)
-        self.assertEqual(capabilities["stable_completed_levels"], 32)
+        self.assertEqual(frame["self_check"]["stable_completed_levels"], 33)
+        self.assertEqual(capabilities["stable_completed_levels"], 33)
         self.assertEqual(
             registry["active_manifest_digest"],
-            "9beb81c420fff3b4bc453edc960300eb5912035a4efe871b57498adabf8d9584",
+            "ed005422ea68a7cc42bad99a10817ba7b6b7ab337bdb8993a750d781fba21c2c",
         )
         for variant in ("P-A", "P-B", "hybrid"):
             self.assertEqual(
@@ -144,12 +144,12 @@ class P10DevelopmentControlTests(unittest.TestCase):
             item
             for item in decisions
             if item["decision_id"]
-            == "j-dev:p10-shape-push-probe-v18"
+            == "j-dev:p10-multi-actor-shape-probe-v19"
         )
         self.assertEqual(shape_decision["status"], "PROBE")
         self.assertEqual(
             shape_decision["selected_hypothesis"],
-            "H18-outline-interior-shape-role-representation",
+            "H21-multi-actor-selection-shape-state-representation",
         )
         promotion = next(
             item

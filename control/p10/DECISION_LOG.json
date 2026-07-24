@@ -228,6 +228,51 @@
         "target-completed-level-improvement-reproduced"
       ],
       "evidence_ref": "evidence/p10/p_update/iteration_18_queue_regression/p10_promotion_receipt_v1.json"
+    },
+    {
+      "decision_id": "j-dev:p10-multi-actor-shape-probe-v19",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H21-multi-actor-selection-shape-state-representation",
+      "supporting_hypothesis": "H22-recursive-actor-mediated-push-composition",
+      "rejected_hypothesis": "H20-loosen-single-actor-shape-detector",
+      "reason_codes": [
+        "single-actor-state-cannot-represent-rendered-selection",
+        "selection-clicks-derive-from-current-rendered-actor-centers",
+        "shape-and-target-families-remain-translation-invariant",
+        "candidate-only-change-is-bounded-and-reversible",
+        "same-condition-target-preflight-improved-three-to-four"
+      ],
+      "maximum_information_gain_next": "run stable and target conditions twice before promotion"
+    },
+    {
+      "decision_id": "j-dev:p10-recursive-push-transition-v19",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H22-recursive-actor-mediated-push-composition",
+      "reason_codes": [
+        "rendered-selected-actor-cannot-cross-separator-without-mediated-push",
+        "actor-to-actor-and-actor-to-shape-obligations-compose-in-one-bounded-state",
+        "queued-observation-validation-fails-closed-after-twelve-transient-observations",
+        "same-condition-target-regression-improved-three-to-four-twice",
+        "prior-twenty-nine-stable-levels-did-not-regress"
+      ],
+      "maximum_information_gain_next": "record and model the next unresolved rendered layout"
+    },
+    {
+      "decision_id": "p-update-decision:a052847148342a027c541bc3",
+      "authority": "hds-p-update-only",
+      "status": "PROMOTE",
+      "allow_p_compile": false,
+      "allow_p_promote": true,
+      "allow_p_rollback": false,
+      "decision_digest": "fa8b87d4fb39a44a9b96a92731992badf767423cab1ab2f5fa6a473843a4ac37",
+      "reason_codes": [
+        "all-ten-promotion-gates-pass",
+        "stable-adopted-level-regression-pass",
+        "target-completed-level-improvement-reproduced"
+      ],
+      "evidence_ref": "evidence/p10/p_update/iteration_19_regression/p10_promotion_receipt_v1.json"
     }
   ]
 }

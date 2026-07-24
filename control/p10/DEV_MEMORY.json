@@ -285,6 +285,63 @@
         "unbounded or non-axis-aligned push dynamics",
         "full sample completion not demonstrated"
       ]
+    },
+    {
+      "memory_id": "m-dev:p10-multi-actor-shape-push-v19",
+      "lifecycle": "ACTIVE",
+      "accepted_hypothesis": "H21-multi-actor-selection-shape-state-representation",
+      "supporting_hypotheses": [
+        "H22-recursive-actor-mediated-push-composition"
+      ],
+      "rejected_hypotheses": [
+        "H20-loosen-single-actor-shape-detector"
+      ],
+      "failure_signatures": [
+        "remaining-level-commit-model-gap-after-shape-push",
+        "remaining-level-commit-model-gap-after-multi-actor-shape-push"
+      ],
+      "evidence": [
+        "bounded HDS probes showed that selecting the second rendered actor changes marker state while clicking the non-selectable shape does not",
+        "synthetic closure requires at least two observation-derived actor selection actions",
+        "translated layouts preserve movement actions and translate click points without literal routing",
+        "dynamic footer changes do not alter the derived plan",
+        "missing actors, missing pushables, search overflow, incoherent predecessors, and exhausted transient observations fail closed",
+        "candidate target completed four of seven at one hundred ninety-two actions twice",
+        "prior twenty-nine stable levels retained exact completion without errors",
+        "HDS promoted v25 v25 v24 after all ten gates passed",
+        "post-promotion active target retained four of seven with error zero"
+      ],
+      "remaining_falsifiers": [
+        "the next unresolved layout is outside the promoted multi-actor shape representation",
+        "full twenty-five-game report does not complete",
+        "full regression fails",
+        "runtime identity scan finds prohibited routing",
+        "removal audit cannot attribute the three-to-four delta"
+      ],
+      "resume_conditions": [
+        "record the first unresolved layout after the promoted multi-actor shape level",
+        "compare fresh H1 H2 and H3 structural hypotheses",
+        "promote only another reproduced positive target delta",
+        "keep P11 gated until all one hundred eighty-three levels complete"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/multi_actor_shape_push.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/semantic_operators.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/p10_manifest.json",
+        "evidence/p10/p_update/iteration_19_regression/p10_candidate_compile_trace_v1.json",
+        "evidence/p10/p_update/iteration_19_regression/p10_promotion_receipt_v1.json",
+        "evidence/p10/p_update/iteration_19_regression/p10_active_post_promotion_ka59.json"
+      ],
+      "applicability": [
+        "multiple marker actors with one selected marker and balanced closed-outline target families",
+        "stride-aligned bounded recursive push transitions with rendered reobservation"
+      ],
+      "non_applicability": [
+        "ambiguous selection or no non-actor pushable",
+        "unbalanced target families or non-axis-aligned dynamics",
+        "route beyond the P search or action bound",
+        "full sample completion not demonstrated"
+      ]
     }
   ]
 }

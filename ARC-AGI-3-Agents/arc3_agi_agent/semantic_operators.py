@@ -29,6 +29,12 @@ from .fruit_merge import (
     FruitMergeState,
 )
 from .instruction_body import SemanticOperatorInstruction
+from .multi_actor_shape_push import (
+    MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR,
+    multi_actor_shape_push_observation_status,
+    multi_actor_shape_push_target_plan,
+    multi_actor_shape_push_transition_observation_limit,
+)
 from .schema import digest_object, forbidden_runtime_paths
 from .selectable_push import (
     SELECTABLE_PUSH_TARGET_OPERATOR,
@@ -58,7 +64,7 @@ from .visual_explorer import (
     connected_components,
 )
 
-SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v8"
+SEMANTIC_PLANNER_FORMAT = "arc3-semantic-planner-v9"
 RELATION_TOGGLE_OPERATOR = "relation-constrained-toggle-gf2-v1"
 OBJECT_TARGET_CONTROL_OPERATOR = "object-target-cycle-control-v1"
 
@@ -1805,6 +1811,7 @@ class SemanticPlannerState:
     memory_read_count: int = 0
     selectable_route_wait_count: int = 0
     shape_push_wait_count: int = 0
+    multi_shape_push_wait_count: int = 0
     target_initial_state: str = ""
     target_pending_state: str = ""
     target_pending_action: str = ""
@@ -1859,6 +1866,7 @@ class SemanticPlannerState:
         self.source_signature = ""
         self.selectable_route_wait_count = 0
         self.shape_push_wait_count = 0
+        self.multi_shape_push_wait_count = 0
 
     def _reset_target_coordinate(
         self,
@@ -2635,6 +2643,50 @@ class SemanticPlannerState:
                             plan_signature=self.active_plan_signature,
                         )
                     self.invalidate_active_plan()
+                elif (
+                    self.active_operator
+                    == MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR
+                ):
+                    multi_shape_status = (
+                        multi_actor_shape_push_observation_status(
+                            grid,
+                            current_instruction,
+                            action,
+                        )
+                    )
+                    if multi_shape_status == "MATCH":
+                        self.multi_shape_push_wait_count = 0
+                        self.queue.pop(0)
+                        self.memory_read_count += 1
+                        return SemanticPlannerDecision(
+                            action=action,
+                            reason=self.active_operator,
+                            memory_influenced=True,
+                            plan_signature=self.active_plan_signature,
+                        )
+                    observation_limit = (
+                        multi_actor_shape_push_transition_observation_limit(
+                            current_instruction
+                        )
+                    )
+                    if (
+                        multi_shape_status == "UNAVAILABLE"
+                        and self.multi_shape_push_wait_count
+                        < observation_limit
+                    ):
+                        self.multi_shape_push_wait_count += 1
+                        self.queue.pop(0)
+                        self.memory_read_count += 1
+                        return SemanticPlannerDecision(
+                            action=action,
+                            reason=(
+                                f"{self.active_operator}:"
+                                "transition-reobserve"
+                            ),
+                            memory_influenced=True,
+                            plan_signature=self.active_plan_signature,
+                        )
+                    self.invalidate_active_plan()
                 else:
                     self.queue.pop(0)
                     self.memory_read_count += 1
@@ -2803,6 +2855,15 @@ class SemanticPlannerState:
                     available_actions,
                     instruction,
                 )
+            elif (
+                instruction.operator_id
+                == MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR
+            ):
+                plan = multi_actor_shape_push_target_plan(
+                    grid,
+                    available_actions,
+                    instruction,
+                )
             else:
                 continue
             if not plan:
@@ -2872,6 +2933,9 @@ class SemanticPlannerState:
                 self.selectable_route_wait_count
             ),
             "shape_push_wait_count": self.shape_push_wait_count,
+            "multi_shape_push_wait_count": (
+                self.multi_shape_push_wait_count
+            ),
             "target_initial_state": self.target_initial_state,
             "target_pending_state": self.target_pending_state,
             "target_pending_action": self.target_pending_action,
@@ -3264,6 +3328,10 @@ class SemanticPlannerState:
                 value.get("shape_push_wait_count", 0),
                 "shape_push_wait_count",
             ),
+            multi_shape_push_wait_count=_payload_int(
+                value.get("multi_shape_push_wait_count", 0),
+                "multi_shape_push_wait_count",
+            ),
             target_initial_state=str(
                 value.get("target_initial_state", "")
             ),
@@ -3381,6 +3449,7 @@ __all__ = [
     "FRUIT_MERGE_TRANSITION_CANDIDATE_OPERATOR",
     "OBJECT_TARGET_CONTROL_OPERATOR",
     "MARKER_SHAPE_PUSH_TARGET_OPERATOR",
+    "MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR",
     "RELATION_TOGGLE_OPERATOR",
     "SELECTABLE_PUSH_TARGET_OPERATOR",
     "SELECTABLE_ROUTE_TARGET_OPERATOR",
