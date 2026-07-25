@@ -1117,6 +1117,41 @@ class Layer0FunctionalTests(unittest.TestCase):
                 kernel.components.context_state.snapshot(),
                 kernel.components.memory.view(),
             )
+        with self.assertRaisesRegex(
+            AuthorityViolation,
+            "HDS_CYCLE_BINDING_STATUS_MISMATCH",
+        ):
+            kernel.components.hds.release_cycle_binding(
+                result.decision,
+                status="SUSPEND",
+            )
+        self.assertEqual(
+            kernel.components.hds.retained_compute_binding_count,
+            1,
+        )
+        release = kernel.components.hds.release_cycle_binding(
+            result.decision,
+            status=result.status,
+        )
+        self.assertTrue(release.startswith("hds-cycle-release:"))
+        self.assertEqual(
+            kernel.components.hds.retained_compute_binding_count,
+            0,
+        )
+        self.assertEqual(
+            kernel.components.hds.standalone_judgment(
+                result.decision
+            ).status,
+            "ACCEPT",
+        )
+        with self.assertRaisesRegex(
+            AuthorityViolation,
+            "HDS_COMPUTE_BINDING_ALREADY_RELEASED",
+        ):
+            kernel.components.hds.release_cycle_binding(
+                result.decision,
+                status=result.status,
+            )
 
     def test_hazard_veto_precedes_unknown_state_and_exhausted_budget(self) -> None:
         unknown_hazard = valid_raw_observation()

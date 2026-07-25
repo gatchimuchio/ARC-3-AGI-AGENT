@@ -16,7 +16,11 @@ from typing import Literal
 from .schema import digest_object, forbidden_runtime_paths
 from .visual_explorer import Grid, VisualAction, VisualComponent, VisualScene
 
-C2_C3_PROBE_FORMAT = "arc3-c2-c3-cross-cutting-probe-v1"
+C2_C3_PROBE_FORMAT = "arc3-c2-c3-cross-cutting-probe-v2"
+C2_C3_LEGACY_PROBE_FORMATS = ("arc3-c2-c3-cross-cutting-probe-v1",)
+C2_C3_MODEL_LIMIT = 512
+C2_C3_CONTEXT_LIMIT_PER_ACTION = 512
+C2_C3_CONTRAST_RECORD_LIMIT = 512
 C2_C3_CAPABILITY_IDS = (
     "C2_visible_effect_transition_model",
     "C3_commit_boundary_predictor",
@@ -34,6 +38,13 @@ PredictionStatus = Literal[
     "TRANSITION_ONLY_LIKELY",
     "NO_VISIBLE_COMMIT_LIKELY",
     "UNKNOWN",
+]
+ContrastRole = Literal["POSITIVE", "NEGATIVE", "HAZARD"]
+ReobserveObligation = Literal[
+    "REOBSERVE_COMMIT_STATE",
+    "SUSPEND_AND_REQUEST_ROLLBACK",
+    "REOBSERVE_BEFORE_CONTINUATION",
+    "WAIT_REOBSERVE_OR_REPLAN",
 ]
 
 
@@ -266,6 +277,26 @@ def _boundary_label(
     return "NO_VISIBLE_COMMIT"
 
 
+def _contrast_role(label: BoundaryLabel) -> ContrastRole:
+    if label == "COMMIT":
+        return "POSITIVE"
+    if label == "HAZARD":
+        return "HAZARD"
+    return "NEGATIVE"
+
+
+def _reobserve_obligation(
+    label: BoundaryLabel,
+) -> ReobserveObligation:
+    if label == "COMMIT":
+        return "REOBSERVE_COMMIT_STATE"
+    if label == "HAZARD":
+        return "SUSPEND_AND_REQUEST_ROLLBACK"
+    if label == "TRANSITION_NO_COMMIT":
+        return "REOBSERVE_BEFORE_CONTINUATION"
+    return "WAIT_REOBSERVE_OR_REPLAN"
+
+
 @dataclass(frozen=True, slots=True)
 class VisibleTransitionEvidence:
     """One rendered pre/post contrast produced without task identity."""
@@ -306,6 +337,91 @@ class VisibleTransitionEvidence:
         if forbidden:
             raise ValueError(
                 "C2_C3_TRANSITION_IDENTITY_FORBIDDEN:"
+                + ",".join(forbidden)
+            )
+        return payload
+
+
+@dataclass(frozen=True, slots=True)
+class TransitionContrastRecord:
+    """Bounded row for independent cross-context development audit."""
+
+    ordinal: int
+    source_structure_class: str
+    target_structure_class: str
+    action_prototype: str
+    action_class: str
+    effect_classes: tuple[str, ...]
+    changed_cell_milli: int
+    component_added: int
+    component_removed: int
+    component_moved: int
+    terminal_state: str
+    progress_observed: bool
+    observed_boundary: BoundaryLabel
+    predicted_boundary: BoundaryLabel
+    contrast_role: ContrastRole
+    reobserve_obligation: ReobserveObligation
+    transition_digest: str
+
+    @classmethod
+    def from_evidence(
+        cls,
+        evidence: VisibleTransitionEvidence,
+        *,
+        ordinal: int,
+    ) -> TransitionContrastRecord:
+        predicted = _boundary_label(
+            effects=evidence.effect_classes,
+            terminal_state=evidence.terminal_state,
+            progress_observed=evidence.progress_observed,
+        )
+        return cls(
+            ordinal=ordinal,
+            source_structure_class=evidence.source.structure_class,
+            target_structure_class=evidence.target.structure_class,
+            action_prototype=evidence.action_prototype,
+            action_class=evidence.action_class,
+            effect_classes=evidence.effect_classes,
+            changed_cell_milli=evidence.changed_cell_milli,
+            component_added=evidence.component_added,
+            component_removed=evidence.component_removed,
+            component_moved=evidence.component_moved,
+            terminal_state=evidence.terminal_state,
+            progress_observed=evidence.progress_observed,
+            observed_boundary=evidence.boundary_label,
+            predicted_boundary=predicted,
+            contrast_role=_contrast_role(evidence.boundary_label),
+            reobserve_obligation=_reobserve_obligation(
+                evidence.boundary_label
+            ),
+            transition_digest=evidence.digest,
+        )
+
+    def to_payload(self) -> dict[str, object]:
+        payload = {
+            "ordinal": self.ordinal,
+            "source_structure_class": self.source_structure_class,
+            "target_structure_class": self.target_structure_class,
+            "action_prototype": self.action_prototype,
+            "action_class": self.action_class,
+            "effect_classes": list(self.effect_classes),
+            "changed_cell_milli": self.changed_cell_milli,
+            "component_added": self.component_added,
+            "component_removed": self.component_removed,
+            "component_moved": self.component_moved,
+            "terminal_state": self.terminal_state,
+            "progress_observed": self.progress_observed,
+            "observed_boundary": self.observed_boundary,
+            "predicted_boundary": self.predicted_boundary,
+            "contrast_role": self.contrast_role,
+            "reobserve_obligation": self.reobserve_obligation,
+            "transition_digest": self.transition_digest,
+        }
+        forbidden = forbidden_runtime_paths(payload)
+        if forbidden:
+            raise ValueError(
+                "C2_C3_CONTRAST_IDENTITY_FORBIDDEN:"
                 + ",".join(forbidden)
             )
         return payload
@@ -467,6 +583,13 @@ class C2C3CapabilityProbe:
         default_factory=dict
     )
     global_contexts: dict[str, set[str]] = field(default_factory=dict)
+    contrast_records: list[TransitionContrastRecord] = field(
+        default_factory=list
+    )
+    model_overflow_count: int = 0
+    context_overflow_count: int = 0
+    contrast_overflow_count: int = 0
+    overflow_digest_chain: str = ""
     transition_digest_chain: str = ""
     last_evidence: VisibleTransitionEvidence | None = None
 
@@ -503,17 +626,26 @@ class C2C3CapabilityProbe:
             evidence.action_prototype,
         )
         global_key = _global_key(evidence.action_class)
-        self.exact_boundary_models.setdefault(
-            exact_key,
-            Counter(),
-        )[evidence.boundary_label] += 1
+        exact_counts = self.exact_boundary_models.get(exact_key)
+        if exact_counts is None:
+            if len(self.exact_boundary_models) < C2_C3_MODEL_LIMIT:
+                exact_counts = Counter()
+                self.exact_boundary_models[exact_key] = exact_counts
+            else:
+                self.model_overflow_count += 1
+        if exact_counts is not None:
+            exact_counts[evidence.boundary_label] += 1
         self.global_boundary_models.setdefault(
             global_key,
             Counter(),
         )[evidence.boundary_label] += 1
-        self.global_contexts.setdefault(global_key, set()).add(
-            evidence.source.structure_class
-        )
+        contexts = self.global_contexts.setdefault(global_key, set())
+        if evidence.source.structure_class in contexts:
+            pass
+        elif len(contexts) < C2_C3_CONTEXT_LIMIT_PER_ACTION:
+            contexts.add(evidence.source.structure_class)
+        else:
+            self.context_overflow_count += 1
         self.effect_counts.update(evidence.effect_classes)
         self.boundary_counts[evidence.boundary_label] += 1
         self.observation_count += 1
@@ -524,6 +656,31 @@ class C2C3CapabilityProbe:
                 "ordinal": self.observation_count,
             }
         )
+        if len(self.contrast_records) < C2_C3_CONTRAST_RECORD_LIMIT:
+            self.contrast_records.append(
+                TransitionContrastRecord.from_evidence(
+                    evidence,
+                    ordinal=self.observation_count,
+                )
+            )
+        else:
+            self.contrast_overflow_count += 1
+        if (
+            self.model_overflow_count
+            or self.context_overflow_count
+            or self.contrast_overflow_count
+        ):
+            self.overflow_digest_chain = digest_object(
+                {
+                    "previous": self.overflow_digest_chain,
+                    "transition": evidence.digest,
+                    "model_overflow_count": self.model_overflow_count,
+                    "context_overflow_count": self.context_overflow_count,
+                    "contrast_overflow_count": (
+                        self.contrast_overflow_count
+                    ),
+                }
+            )
         self.last_evidence = evidence
         return evidence
 
@@ -560,6 +717,13 @@ class C2C3CapabilityProbe:
             "memory_write_authority": False,
             "external_emit_authority": False,
             "runtime_p_promotion_authority": False,
+            "retention_limits": {
+                "exact_model_count": C2_C3_MODEL_LIMIT,
+                "context_count_per_action": (
+                    C2_C3_CONTEXT_LIMIT_PER_ACTION
+                ),
+                "contrast_record_count": C2_C3_CONTRAST_RECORD_LIMIT,
+            },
             "observation_count": self.observation_count,
             "fault_count": self.fault_count,
             "fault_counts": dict(sorted(self.fault_counts.items())),
@@ -581,6 +745,13 @@ class C2C3CapabilityProbe:
                 key: len(contexts)
                 for key, contexts in sorted(self.global_contexts.items())
             },
+            "contrast_records": [
+                record.to_payload() for record in self.contrast_records
+            ],
+            "model_overflow_count": self.model_overflow_count,
+            "context_overflow_count": self.context_overflow_count,
+            "contrast_overflow_count": self.contrast_overflow_count,
+            "overflow_digest_chain": self.overflow_digest_chain,
             "transition_digest_chain": self.transition_digest_chain,
             "last_evidence": (
                 None
@@ -649,10 +820,17 @@ def visual_action_from_emission(
 __all__ = [
     "BoundaryLabel",
     "C2_C3_CAPABILITY_IDS",
+    "C2_C3_CONTRAST_RECORD_LIMIT",
+    "C2_C3_CONTEXT_LIMIT_PER_ACTION",
+    "C2_C3_LEGACY_PROBE_FORMATS",
+    "C2_C3_MODEL_LIMIT",
     "C2_C3_PROBE_FORMAT",
     "C2C3CapabilityProbe",
     "CommitBoundaryPrediction",
+    "ContrastRole",
     "PredictionStatus",
+    "ReobserveObligation",
+    "TransitionContrastRecord",
     "VisibleStateAbstraction",
     "VisibleTransitionEvidence",
     "observe_visible_transition",

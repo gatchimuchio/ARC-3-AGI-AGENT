@@ -7,6 +7,10 @@ from arc_agi import OperationMode
 from arc_agi.local_wrapper import LocalEnvironmentWrapper
 from arcengine import FrameDataRaw, GameAction, GameState
 
+from agents.templates.p10_sample_agent import (
+    P10CycleAuditRecord,
+    P10SampleAgent,
+)
 from arc3_agi_agent.adapters.in_memory import EmissionResult
 from arc3_agi_agent.ir import CandidateIR
 from arc3_agi_agent.memory import PassiveMemory
@@ -49,6 +53,7 @@ class SequencedOfflineEnvironment(LocalEnvironmentWrapper):
     ) -> None:
         self.action_results = list(action_results)
         self.reset_result = reset_result
+        self._last_response = reset_result
         self.calls: list[GameAction] = []
 
     def step(
@@ -61,10 +66,12 @@ class SequencedOfflineEnvironment(LocalEnvironmentWrapper):
         del data, reasoning
         self.calls.append(action)
         if action is GameAction.RESET:
+            self._last_response = self.reset_result
             return self.reset_result
         if not self.action_results:
             raise AssertionError("unexpected action")
-        return self.action_results.pop(0)
+        self._last_response = self.action_results.pop(0)
+        return self._last_response
 
 
 class RecoveryBoundary:
@@ -255,6 +262,59 @@ class P10RecoveryTests(unittest.TestCase):
         self.assertEqual(
             memory.max_history_snapshots,
             P10_MEMORY_HISTORY_LIMIT,
+        )
+        self.assertEqual(
+            runtime.components.hds.retained_compute_binding_count,
+            0,
+        )
+
+    def test_agent_retains_compact_cycle_audit_and_latest_frame_only(
+        self,
+    ) -> None:
+        initial = frame(
+            [
+                [0, 0, 0, 0],
+                [0, 8, 8, 0],
+                [0, 8, 8, 0],
+                [0, 0, 0, 0],
+            ]
+        )
+        complete = frame(
+            [
+                [0, 0, 0, 0],
+                [0, 9, 9, 0],
+                [0, 9, 9, 0],
+                [0, 0, 0, 0],
+            ],
+            state=GameState.WIN,
+            levels_completed=3,
+            win_levels=3,
+        )
+        environment = SequencedOfflineEnvironment([complete], initial)
+        agent = P10SampleAgent(
+            card_id="local-card",
+            game_id="external-report-identity",
+            agent_name="p10sample",
+            ROOT_URL="",
+            record=False,
+            arc_env=environment,
+            operation_mode=OperationMode.OFFLINE,
+            max_actions=2,
+        )
+
+        agent.main()
+        report = agent.report()
+
+        self.assertEqual(len(agent.frames), 1)
+        self.assertEqual(len(agent.cycles), 1)
+        self.assertIsInstance(agent.cycles[0], P10CycleAuditRecord)
+        self.assertEqual(report.actions, 1)
+        self.assertEqual(report.levels_completed, 3)
+        self.assertEqual(report.terminal_state, "WIN")
+        self.assertEqual(len(report.trace_events), 1)
+        self.assertEqual(
+            agent.runtime.components.hds.retained_compute_binding_count,
+            0,
         )
 
     def test_runtime_rolls_back_then_memory_changes_next_action(self) -> None:

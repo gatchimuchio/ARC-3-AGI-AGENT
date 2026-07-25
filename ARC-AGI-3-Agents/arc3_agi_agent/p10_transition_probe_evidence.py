@@ -12,6 +12,7 @@ from typing import Any
 
 from .cross_cutting_transition import (
     C2_C3_CAPABILITY_IDS,
+    C2_C3_LEGACY_PROBE_FORMATS,
     C2_C3_PROBE_FORMAT,
 )
 from .p10_evidence import build_p10_compact_run_evidence
@@ -80,7 +81,10 @@ def build_c2_c3_probe_audit(
         probe = report.get("development_transition_probe")
         if not isinstance(probe, Mapping):
             raise ValueError("C2_C3_PROBE_PAYLOAD_MISSING")
-        if probe.get("format") != C2_C3_PROBE_FORMAT:
+        if probe.get("format") not in (
+            C2_C3_PROBE_FORMAT,
+            *C2_C3_LEGACY_PROBE_FORMATS,
+        ):
             raise ValueError("C2_C3_PROBE_FORMAT_INVALID")
         raw_capabilities = probe.get("capability_ids")
         probe_contract_valid = probe_contract_valid and (

@@ -22,7 +22,9 @@ EXPECTED_LEVEL_COUNT = 183
 EXPECTED_MAX_ACTIONS = 450
 _TIME_PATTERN = re.compile(
     r"^elapsed=(?P<elapsed>[0-9]+(?:\.[0-9]+)?) "
-    r"max_rss_kb=(?P<rss>[0-9]+)$",
+    r"max_rss_kb=(?P<rss>[0-9]+)"
+    r"(?: swaps=(?P<swaps>[0-9]+))?"
+    r"(?: exit=(?P<exit>[0-9]+))?$",
     re.MULTILINE,
 )
 
@@ -131,16 +133,23 @@ def _resource_rows(
     complete = True
     for game_id in game_ids:
         candidates: list[tuple[Path, re.Match[str]]] = []
+        executed_logs = 0
         for directory in log_dirs:
-            path = directory / f"{game_id}.log"
-            if not path.is_file():
-                continue
-            text = path.read_text(encoding="utf-8")
-            match = _TIME_PATTERN.search(text)
-            if match is None or '"status": "EXECUTED"' not in text:
-                continue
-            candidates.append((path, match))
-        if not candidates:
+            worker_path = directory / f"{game_id}.log"
+            if worker_path.is_file():
+                worker_text = worker_path.read_text(encoding="utf-8")
+                if '"status": "EXECUTED"' in worker_text:
+                    executed_logs += 1
+                worker_match = _TIME_PATTERN.search(worker_text)
+                if worker_match is not None:
+                    candidates.append((worker_path, worker_match))
+            timing_path = directory / f"{game_id}.time.log"
+            if timing_path.is_file():
+                timing_text = timing_path.read_text(encoding="utf-8")
+                timing_match = _TIME_PATTERN.search(timing_text)
+                if timing_match is not None:
+                    candidates.append((timing_path, timing_match))
+        if not candidates or executed_logs != 1:
             complete = False
             continue
         if len(candidates) != 1:
@@ -151,6 +160,16 @@ def _resource_rows(
                 "game_id": game_id,
                 "elapsed_wall_seconds": float(match.group("elapsed")),
                 "maximum_rss_kb": int(match.group("rss")),
+                "swaps": (
+                    None
+                    if match.group("swaps") is None
+                    else int(match.group("swaps"))
+                ),
+                "exit_code": (
+                    None
+                    if match.group("exit") is None
+                    else int(match.group("exit"))
+                ),
                 "log_sha256": _sha256(path),
             }
         )
@@ -231,6 +250,22 @@ def build_standard_budget_audit(
         )
         if resource_rows
         else None
+    )
+    worker_swap_count = sum(
+        _integer(row["swaps"], "resource swaps")
+        for row in resource_rows
+        if row["swaps"] is not None
+    )
+    worker_swap_measurement_complete = all(
+        row["swaps"] is not None for row in resource_rows
+    )
+    worker_nonzero_exit_count = sum(
+        _integer(row["exit_code"], "resource exit code") != 0
+        for row in resource_rows
+        if row["exit_code"] is not None
+    )
+    worker_exit_measurement_complete = all(
+        row["exit_code"] is not None for row in resource_rows
     )
     compact_summary = _mapping(
         compact.get("summary"),
@@ -343,6 +378,12 @@ def build_standard_budget_audit(
             == EXPECTED_LEVEL_COUNT
         ),
         "resource_logs_cover_every_game": resource_logs_complete,
+        "worker_swap_measurement_is_zero_when_present": (
+            worker_swap_count == 0
+        ),
+        "worker_exit_codes_are_zero_when_present": (
+            worker_nonzero_exit_count == 0
+        ),
         "active_p_is_unchanged": (
             conditions.get("active_manifest_digest")
             == "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1"
@@ -413,6 +454,14 @@ def build_standard_budget_audit(
             "observed_parallel_peak_swap_mb": (
                 observed_parallel_peak_swap_mb
             ),
+            "worker_swap_measurement_complete": (
+                worker_swap_measurement_complete
+            ),
+            "worker_swap_count": worker_swap_count,
+            "worker_exit_measurement_complete": (
+                worker_exit_measurement_complete
+            ),
+            "worker_nonzero_exit_count": worker_nonzero_exit_count,
             "sum_worker_elapsed_seconds": round(
                 sum(
                     _floating(
@@ -433,6 +482,10 @@ def build_standard_budget_audit(
                 )
                 > 1024 * 1024
             ),
+            "worker_swap_detected": worker_swap_count > 0,
+            "worker_nonzero_exit_detected": (
+                worker_nonzero_exit_count > 0
+            ),
             "rows": resource_rows,
         },
         "checks": checks,
@@ -441,13 +494,17 @@ def build_standard_budget_audit(
             "checkpoint_resume_status": "PASS",
             "resource_worker_completion_status": "PASS",
             "resource_headroom_status": (
-                "FAIL_HIGH_WATER"
+                "FAIL_HIGH_WATER_OR_SWAP"
                 if max_resource is not None
-                and _integer(
-                    max_resource["maximum_rss_kb"],
-                    "maximum worker RSS",
+                and (
+                    _integer(
+                        max_resource["maximum_rss_kb"],
+                        "maximum worker RSS",
+                    )
+                    > 1024 * 1024
+                    or worker_swap_count > 0
+                    or worker_nonzero_exit_count > 0
                 )
-                > 1024 * 1024
                 else "PASS"
             ),
             "capability_progress_status": "NOT_CLAIMED",
@@ -481,11 +538,15 @@ def build_standard_budget_audit(
                 }
             ]
             if max_resource is not None
-            and _integer(
-                max_resource["maximum_rss_kb"],
-                "maximum worker RSS",
+            and (
+                _integer(
+                    max_resource["maximum_rss_kb"],
+                    "maximum worker RSS",
+                )
+                > 1024 * 1024
+                or worker_swap_count > 0
+                or worker_nonzero_exit_count > 0
             )
-            > 1024 * 1024
             else []
         ),
     }

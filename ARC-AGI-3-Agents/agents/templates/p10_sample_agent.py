@@ -30,6 +30,25 @@ from ..agent import Agent
 
 
 @dataclass(frozen=True, slots=True)
+class P10CycleAuditRecord:
+    """Compact complete report material for one already-closed cycle."""
+
+    memory_operation: str | None
+    memory_influenced_decision: bool
+    instruction_body_format: str
+    instruction_body_version: str
+    instruction_body_digest: str
+    instruction_query_digest: str
+    decision_status: str
+    verification_status: str | None
+    emitted_steps: tuple[dict[str, object], ...]
+    emitted_provenance: tuple[str, ...]
+    emitted_level_count: int | None
+    trace_digest: str
+    trace_events: tuple[dict[str, object], ...]
+
+
+@dataclass(frozen=True, slots=True)
 class P10SampleAgentReport:
     game_id: str
     instruction_variant: P10InstructionVariant
@@ -94,7 +113,7 @@ class P10SampleAgent(Agent):
         self.MAX_ACTIONS = max_actions
         self.action_counter = 0
         self.frames: list[FrameData] = []
-        self.cycles: list[SampleCycleResult] = []
+        self.cycles: list[P10CycleAuditRecord] = []
         self.recoveries: list[P10RecoveryResult] = []
         self.search_resets: list[P10SearchResetResult] = []
         self.final_status = "NOT_STARTED"
@@ -114,6 +133,62 @@ class P10SampleAgent(Agent):
     def name(self) -> str:
         return f"{super().name}.{self.MAX_ACTIONS}"
 
+    def append_frame(self, frame: FrameData) -> None:
+        """Record when requested, but retain only the latest rendered frame."""
+
+        super().append_frame(frame)
+        if len(self.frames) > 1:
+            del self.frames[:-1]
+
+    @staticmethod
+    def _audit_cycle(cycle: SampleCycleResult) -> P10CycleAuditRecord:
+        result = cycle.kernel_result
+        emission = result.emission_result
+        emitted_steps: tuple[dict[str, object], ...] = ()
+        emitted_provenance: tuple[str, ...] = ()
+        emitted_level_count: int | None = None
+        if emission is not None:
+            selected = next(
+                (
+                    candidate
+                    for candidate in result.candidates
+                    if candidate.candidate_id == emission.candidate_id
+                ),
+                None,
+            )
+            if selected is None:
+                raise RuntimeError(
+                    "P10_REPORT_EMITTED_CANDIDATE_MISSING"
+                )
+            emitted_steps = tuple(dict(step) for step in selected.steps)
+            emitted_provenance = selected.provenance
+            emitted_level_count = emission.levels_completed
+        return P10CycleAuditRecord(
+            memory_operation=(
+                None
+                if result.memory_result is None
+                else result.memory_result.operation
+            ),
+            memory_influenced_decision=result.memory_influenced_decision,
+            instruction_body_format=result.instruction_body_format,
+            instruction_body_version=result.instruction_body_version,
+            instruction_body_digest=result.instruction_body_digest,
+            instruction_query_digest=result.instruction_query_digest,
+            decision_status=result.decision.status,
+            verification_status=(
+                None
+                if cycle.verification is None
+                else cycle.verification.status
+            ),
+            emitted_steps=emitted_steps,
+            emitted_provenance=emitted_provenance,
+            emitted_level_count=emitted_level_count,
+            trace_digest=result.trace_digest,
+            trace_events=tuple(
+                dataclasses.asdict(event) for event in result.trace
+            ),
+        )
+
     def main(self) -> None:
         """Run actions and RESET only through capability-checked boundaries."""
 
@@ -132,7 +207,7 @@ class P10SampleAgent(Agent):
                     current,
                     action_count=self.action_counter,
                 )
-                self.cycles.append(cycle)
+                self.cycles.append(self._audit_cycle(cycle))
                 self.final_status = cycle.kernel_result.status
                 if cycle.after_frame is None:
                     search_reset = self.runtime.search_reset(
@@ -185,7 +260,7 @@ class P10SampleAgent(Agent):
             else FrameData(levels_completed=0, win_levels=0)
         )
         memory_influenced = sum(
-            cycle.kernel_result.memory_influenced_decision
+            cycle.memory_influenced_decision
             for cycle in self.cycles
         )
         rollback_versions = tuple(
@@ -202,29 +277,6 @@ class P10SampleAgent(Agent):
             )
             for reset in self.search_resets
         )
-        emitted_steps: list[tuple[dict[str, object], ...]] = []
-        emitted_provenance: list[tuple[str, ...]] = []
-        emitted_level_counts: list[int] = []
-        for cycle in self.cycles:
-            emission_result = cycle.kernel_result.emission_result
-            if emission_result is None:
-                continue
-            selected = next(
-                (
-                    candidate
-                    for candidate in cycle.kernel_result.candidates
-                    if candidate.candidate_id
-                    == emission_result.candidate_id
-                ),
-                None,
-            )
-            if selected is None:
-                raise RuntimeError("P10_REPORT_EMITTED_CANDIDATE_MISSING")
-            emitted_steps.append(
-                tuple(dict(step) for step in selected.steps)
-            )
-            emitted_provenance.append(selected.provenance)
-            emitted_level_counts.append(emission_result.levels_completed)
         return P10SampleAgentReport(
             game_id=self.game_id,
             instruction_variant=self.runtime.instruction_variant,
@@ -240,50 +292,58 @@ class P10SampleAgent(Agent):
             max_action_exhausted=self.max_action_exhausted,
             memory_version=snapshot.version,
             memory_operations=tuple(
-                cycle.kernel_result.memory_result.operation
+                cycle.memory_operation
                 for cycle in self.cycles
-                if cycle.kernel_result.memory_result is not None
+                if cycle.memory_operation is not None
             ),
             context_version=context.version,
             context_actions_used=context.actions_used,
             memory_influenced_cycle_count=memory_influenced,
             visual_operator_version=VISUAL_OPERATOR_VERSION,
             instruction_body_formats=tuple(
-                cycle.kernel_result.instruction_body_format
+                cycle.instruction_body_format
                 for cycle in self.cycles
             ),
             instruction_body_versions=tuple(
-                cycle.kernel_result.instruction_body_version
+                cycle.instruction_body_version
                 for cycle in self.cycles
             ),
             instruction_body_digests=tuple(
-                cycle.kernel_result.instruction_body_digest
+                cycle.instruction_body_digest
                 for cycle in self.cycles
             ),
             instruction_query_digests=tuple(
-                cycle.kernel_result.instruction_query_digest
+                cycle.instruction_query_digest
                 for cycle in self.cycles
             ),
             decision_statuses=tuple(
-                cycle.kernel_result.decision.status for cycle in self.cycles
+                cycle.decision_status for cycle in self.cycles
             ),
             verification_statuses=tuple(
-                cycle.verification.status
+                cycle.verification_status
                 for cycle in self.cycles
-                if cycle.verification is not None
+                if cycle.verification_status is not None
             ),
-            emitted_steps=tuple(emitted_steps),
-            emitted_provenance=tuple(emitted_provenance),
-            emitted_level_counts=tuple(emitted_level_counts),
+            emitted_steps=tuple(
+                cycle.emitted_steps
+                for cycle in self.cycles
+                if cycle.emitted_level_count is not None
+            ),
+            emitted_provenance=tuple(
+                cycle.emitted_provenance
+                for cycle in self.cycles
+                if cycle.emitted_level_count is not None
+            ),
+            emitted_level_counts=tuple(
+                cycle.emitted_level_count
+                for cycle in self.cycles
+                if cycle.emitted_level_count is not None
+            ),
             trace_digests=tuple(
-                cycle.kernel_result.trace_digest for cycle in self.cycles
+                cycle.trace_digest for cycle in self.cycles
             ),
             trace_events=tuple(
-                tuple(
-                    dataclasses.asdict(event)
-                    for event in cycle.kernel_result.trace
-                )
-                for cycle in self.cycles
+                cycle.trace_events for cycle in self.cycles
             ),
             rollback_decision_ids=tuple(
                 recovery.rollback_decision_id
@@ -330,4 +390,8 @@ class P10SampleAgent(Agent):
         raise AuthorityViolation("DIRECT_ENVIRONMENT_STEP_FORBIDDEN")
 
 
-__all__ = ["P10SampleAgent", "P10SampleAgentReport"]
+__all__ = [
+    "P10CycleAuditRecord",
+    "P10SampleAgent",
+    "P10SampleAgentReport",
+]

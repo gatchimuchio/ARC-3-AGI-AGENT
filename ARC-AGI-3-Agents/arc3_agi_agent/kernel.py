@@ -250,6 +250,66 @@ class HDSController:
             raise AuthorityViolation("HDS_STANDALONE_JUDGMENT_MISSING")
         return judgment
 
+    @property
+    def retained_compute_binding_count(self) -> int:
+        """Return live full-input bindings, excluding closed-cycle evidence."""
+
+        return len(self._compute_bindings)
+
+    def release_cycle_binding(
+        self,
+        decision: HDSDecision,
+        *,
+        status: str,
+    ) -> str:
+        """Release one closed cycle's heavyweight input binding.
+
+        Decisions, standalone judgment evidence, directives, observed
+        outcomes, and finalized tombstones remain owned by HDS.  Only the
+        full observation/context/memory input tuple is physically released,
+        after the cycle can no longer legally consume it.
+        """
+
+        self._require_issued_decision(decision)
+        if decision.command_id not in self._judged_commands:
+            raise AuthorityViolation("HDS_CYCLE_BINDING_NOT_JUDGED")
+        if decision.allow_external_emit:
+            if decision.decision_id not in self._finalized_decisions:
+                raise AuthorityViolation("HDS_CYCLE_BINDING_NOT_FINALIZED")
+            if self._emission_outcomes.get(decision.decision_id) != status:
+                raise AuthorityViolation(
+                    "HDS_CYCLE_BINDING_STATUS_MISMATCH"
+                )
+        else:
+            if status != decision.status:
+                raise AuthorityViolation(
+                    "HDS_CYCLE_BINDING_STATUS_MISMATCH"
+                )
+            if (
+                decision.decision_id in self._emission_directives
+                or decision.decision_id in self._observed_emissions
+                or decision.decision_id in self._emission_outcomes
+                or decision.decision_id in self._memory_directives
+            ):
+                raise AuthorityViolation(
+                    "HDS_NO_EFFECT_CYCLE_HAS_EFFECT_STATE"
+                )
+        binding = self._compute_bindings.pop(decision.command_id, None)
+        if binding is None:
+            raise AuthorityViolation(
+                "HDS_COMPUTE_BINDING_ALREADY_RELEASED"
+            )
+        return "hds-cycle-release:" + digest_object(
+            {
+                "command_id": decision.command_id,
+                "decision_id": decision.decision_id,
+                "observation": binding.observation.frame_signature,
+                "context": binding.context.digest,
+                "memory": binding.memory.digest,
+                "status": status,
+            }
+        )[:20]
+
     def _require_issued_decision(self, decision: HDSDecision) -> None:
         failures = list(decision.validate())
         if self._decisions.get(decision.decision_id) is not decision:
@@ -944,9 +1004,9 @@ class HDSController:
         """Issue the final PASS only after authorized effects are observable."""
 
         self._require_issued_decision(decision)
-        failures: list[str] = []
         if decision.decision_id in self._finalized_decisions:
-            failures.append("HDS_CYCLE_ALREADY_FINALIZED")
+            raise AuthorityViolation("HDS_CYCLE_ALREADY_FINALIZED")
+        failures: list[str] = []
         observed_result = self._observed_emissions.get(decision.decision_id)
         if observed_result is not emission_result:
             failures.append("HDS_EMISSION_RESULT_NOT_OBSERVED")

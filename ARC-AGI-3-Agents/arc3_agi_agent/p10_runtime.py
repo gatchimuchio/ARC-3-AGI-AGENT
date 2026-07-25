@@ -324,6 +324,12 @@ class P10OfflineSampleRuntime:
                         self.transition_probe.record_fault(
                             "INPUT_REJECTED"
                         )
+        self.components.hds.release_cycle_binding(
+            cycle.kernel_result.decision,
+            status=cycle.kernel_result.status,
+        )
+        if self.components.hds.retained_compute_binding_count:
+            raise RuntimeError("P10_HDS_COMPUTE_BINDING_NOT_RELEASED")
         return cycle
 
     def recover(

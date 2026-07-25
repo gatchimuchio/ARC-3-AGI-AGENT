@@ -3,7 +3,9 @@ from __future__ import annotations
 import unittest
 
 from arc3_agi_agent.cross_cutting_transition import (
+    C2_C3_CONTRAST_RECORD_LIMIT,
     C2C3CapabilityProbe,
+    TransitionContrastRecord,
     VisibleStateAbstraction,
     observe_visible_transition,
 )
@@ -117,6 +119,24 @@ class CrossCuttingTransitionP10Tests(unittest.TestCase):
         self.assertIn("PROGRESS_BOUNDARY", commit.effect_classes)
         self.assertEqual(hazard.boundary_label, "HAZARD")
         self.assertIn("IRREVERSIBLE_HAZARD", hazard.effect_classes)
+        commit_record = TransitionContrastRecord.from_evidence(
+            commit,
+            ordinal=1,
+        )
+        hazard_record = TransitionContrastRecord.from_evidence(
+            hazard,
+            ordinal=2,
+        )
+        self.assertEqual(commit_record.contrast_role, "POSITIVE")
+        self.assertEqual(
+            commit_record.reobserve_obligation,
+            "REOBSERVE_COMMIT_STATE",
+        )
+        self.assertEqual(hazard_record.contrast_role, "HAZARD")
+        self.assertEqual(
+            hazard_record.reobserve_obligation,
+            "SUSPEND_AND_REQUEST_ROLLBACK",
+        )
 
     def test_cross_context_prediction_is_non_authoritative(self) -> None:
         probe = C2C3CapabilityProbe()
@@ -168,10 +188,45 @@ class CrossCuttingTransitionP10Tests(unittest.TestCase):
         self.assertEqual(payload["candidate_tier"], "LOCAL_PROBE")
         self.assertEqual(payload["runtime_decision_use"], "FORBIDDEN")
         self.assertFalse(payload["action_selection_influence"])
+        self.assertEqual(len(payload["contrast_records"]), 1)
+        contrast = payload["contrast_records"][0]
+        self.assertEqual(
+            contrast["observed_boundary"],
+            contrast["predicted_boundary"],
+        )
+        self.assertEqual(contrast["contrast_role"], "NEGATIVE")
+        self.assertEqual(payload["contrast_overflow_count"], 0)
         self.assertEqual(forbidden_runtime_paths(payload), ())
         self.assertFalse(hasattr(probe, "select_action"))
         self.assertFalse(hasattr(probe, "emit"))
         self.assertFalse(hasattr(probe, "promote"))
+
+    def test_contrast_retention_is_explicitly_bounded(self) -> None:
+        probe = C2C3CapabilityProbe()
+        before = _grid()
+        after = _grid(x=2)
+        before_scene = analyze_scene(before, (1, 2, 3, 4))
+        after_scene = analyze_scene(after, (1, 2, 3, 4))
+        for _index in range(C2_C3_CONTRAST_RECORD_LIMIT + 3):
+            probe.observe(
+                before_grid=before,
+                after_grid=after,
+                before_scene=before_scene,
+                after_scene=after_scene,
+                action=_action(),
+                terminal_state="NOT_FINISHED",
+                progress_observed=False,
+            )
+
+        payload = probe.to_payload()
+
+        self.assertEqual(
+            len(payload["contrast_records"]),
+            C2_C3_CONTRAST_RECORD_LIMIT,
+        )
+        self.assertEqual(payload["contrast_overflow_count"], 3)
+        self.assertTrue(payload["overflow_digest_chain"])
+        self.assertEqual(forbidden_runtime_paths(payload), ())
 
     def test_shadow_fault_is_audited_without_authority(self) -> None:
         probe = C2C3CapabilityProbe()

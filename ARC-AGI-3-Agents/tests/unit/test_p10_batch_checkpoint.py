@@ -14,6 +14,7 @@ from arc3_agi_agent.p10_batch_checkpoint import (
     load_game_checkpoint,
     write_game_checkpoint,
 )
+from p10_checkpoint_worker import run_p10_checkpoint_worker
 from p10_main import run_p10_checkpointed_offline_samples
 
 
@@ -99,6 +100,51 @@ def _single_game_result(
 
 
 class P10BatchCheckpointTests(unittest.TestCase):
+    def test_parallel_worker_binds_one_game_to_full_sample_conditions(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            environments = root / "environments"
+            checkpoint_dir = root / "checkpoints"
+            game_ids = ["g00-sample", "g01-sample"]
+            _write_environment_metadata(environments, game_ids)
+            with (
+                patch(
+                    "p10_checkpoint_worker._resolve_p10_batch_game_ids",
+                    return_value=game_ids,
+                ),
+                patch(
+                    "p10_checkpoint_worker.active_p10_manifest_digest",
+                    return_value="active-manifest",
+                ),
+                patch(
+                    "p10_checkpoint_worker.run_p10_offline_samples",
+                    return_value=_single_game_result(game_ids[0]),
+                ) as run,
+            ):
+                executed = run_p10_checkpoint_worker(
+                    environments_dir=environments,
+                    checkpoint_dir=checkpoint_dir,
+                    game_id=game_ids[0],
+                    max_actions=64,
+                )
+                reused = run_p10_checkpoint_worker(
+                    environments_dir=environments,
+                    checkpoint_dir=checkpoint_dir,
+                    game_id=game_ids[0],
+                    max_actions=64,
+                    resume=True,
+                )
+
+        self.assertEqual(executed["status"], "EXECUTED")
+        self.assertEqual(reused["status"], "REUSED")
+        self.assertEqual(
+            executed["conditions_digest"],
+            reused["conditions_digest"],
+        )
+        self.assertEqual(run.call_count, 1)
+
     def test_checkpoint_round_trip_and_oracle_compatible_assembly(
         self,
     ) -> None:
