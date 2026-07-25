@@ -1,0 +1,232 @@
+{
+  "artifact_type": "p10_visual_operator_stable_regression_audit",
+  "checks": {
+    "ft09_behavior_projection_equal": true,
+    "ft09_exit_matches_completion": true,
+    "ft09_fresh_error_count_zero": true,
+    "ka59_behavior_projection_equal": true,
+    "ka59_exit_matches_completion": true,
+    "ka59_fresh_error_count_zero": true,
+    "lp85_behavior_projection_equal": true,
+    "lp85_exit_matches_completion": true,
+    "lp85_fresh_error_count_zero": true,
+    "su15_behavior_projection_equal": true,
+    "su15_exit_matches_completion": true,
+    "su15_fresh_error_count_zero": true,
+    "tr87_behavior_projection_equal": true,
+    "tr87_exit_matches_completion": true,
+    "tr87_fresh_error_count_zero": true
+  },
+  "comparison_contract": {
+    "excluded": [
+      "visual_source_signature because v14 extends state identity with the available-action surface",
+      "visual operator version token",
+      "instruction query tokens body digests and trace digests derived from the changed source signature"
+    ],
+    "exclusion_may_not_hide_action_or_hds_status_change": true,
+    "included": [
+      "emitted action ids and coordinates",
+      "visual action keys",
+      "HDS decision and verification statuses",
+      "level transitions and terminal state",
+      "memory influence counts",
+      "rollback recovery and search-reset behavior",
+      "non-version and non-query visual provenance"
+    ]
+  },
+  "comparisons": [
+    {
+      "actions": 75,
+      "baseline_evidence": {
+        "bytes": 80593,
+        "path": "evidence/p10/ft09_hybrid_active_compact.json",
+        "sha256": "42ab4716c78e82a3d96eb089d17e931fd172eed8aa7cffc9503f7b6ad9ab5ef0"
+      },
+      "baseline_visual_operator_version": "arc3-p10-visual-operator-v12",
+      "behavior_projection_digest": "60c9158f59d349350b2f86e6745e5c5a2253f42d164baa534a205ebcbb595de6",
+      "behavior_projection_equal": true,
+      "complete": true,
+      "completed_levels": 6,
+      "error_count": 0,
+      "fresh_report": {
+        "bytes": 93404,
+        "path": "evidence/p10/development/stable_regression_v14/ft09_max512.compact.json",
+        "sha256": "2f887394401f4e7eb2c2c13ee9f0823fe5570b671c97ed77987d69f6b1b4e947"
+      },
+      "fresh_visual_operator_version": "arc3-p10-visual-operator-v14",
+      "game_id": "ft09-0d8bbf25",
+      "label": "ft09",
+      "memory_influenced_cycle_count": 69,
+      "terminal_state": "WIN",
+      "timing": {
+        "bytes": 38,
+        "elapsed_wall_seconds": 34.71,
+        "exit_code": 0,
+        "maximum_rss_kb": 95160,
+        "path": "evidence/p10/development/stable_regression_v14/ft09_max512.time.log",
+        "sha256": "7ad37b4f60dfa19a08793c6d01e446ac2b649410f1455197a0060557e5a208ea"
+      },
+      "total_levels": 6
+    },
+    {
+      "actions": 235,
+      "baseline_evidence": {
+        "bytes": 275869,
+        "path": "evidence/p10/lp85_hybrid_compact.json",
+        "sha256": "12227ae34b543e0474698b29cb80adee351aebf5209dce4106da7be52ae14aca"
+      },
+      "baseline_visual_operator_version": "arc3-p10-visual-operator-v12",
+      "behavior_projection_digest": "1500c7cd547a2de62cf56c2a703f7108d820a8a180fd6cd44f74fa95752081be",
+      "behavior_projection_equal": true,
+      "complete": true,
+      "completed_levels": 8,
+      "error_count": 0,
+      "fresh_report": {
+        "bytes": 286062,
+        "path": "evidence/p10/development/stable_regression_v14/lp85_max512.compact.json",
+        "sha256": "0c3d90cd9239ac75e5502b561126b1011375096f2fce4792589fc4c0cb7fbd37"
+      },
+      "fresh_visual_operator_version": "arc3-p10-visual-operator-v14",
+      "game_id": "lp85-305b61c3",
+      "label": "lp85",
+      "memory_influenced_cycle_count": 188,
+      "terminal_state": "WIN",
+      "timing": {
+        "bytes": 40,
+        "elapsed_wall_seconds": 130.75,
+        "exit_code": 0,
+        "maximum_rss_kb": 130688,
+        "path": "evidence/p10/development/stable_regression_v14/lp85_max512.time.log",
+        "sha256": "3ebf8d54329cea39478af4cdd5706b16fbd27b0da959a7c8f3ea05b82da701b8"
+      },
+      "total_levels": 8
+    },
+    {
+      "actions": 308,
+      "baseline_evidence": {
+        "bytes": 344771,
+        "path": "evidence/p10/tr87_hybrid_compact.json",
+        "sha256": "caa4a1f869f2af7209c1e04ed48bbc8bf07e93031aa361f3355e74034810beb9"
+      },
+      "baseline_visual_operator_version": "arc3-p10-visual-operator-v12",
+      "behavior_projection_digest": "7985fe251d6cdf284bf578602e4b6194e2678ede2e3bb583ec750bc9d7fb87c0",
+      "behavior_projection_equal": true,
+      "complete": true,
+      "completed_levels": 6,
+      "error_count": 0,
+      "fresh_report": {
+        "bytes": 372936,
+        "path": "evidence/p10/development/stable_regression_v14/tr87_max512.compact.json",
+        "sha256": "ebec5a7e22a60ab9df6a7c1d25a236ee83e035f47aa592086a688d4537ca6b23"
+      },
+      "fresh_visual_operator_version": "arc3-p10-visual-operator-v14",
+      "game_id": "tr87-cd924810",
+      "label": "tr87",
+      "memory_influenced_cycle_count": 284,
+      "terminal_state": "WIN",
+      "timing": {
+        "bytes": 40,
+        "elapsed_wall_seconds": 143.01,
+        "exit_code": 0,
+        "maximum_rss_kb": 160516,
+        "path": "evidence/p10/development/stable_regression_v14/tr87_max512.time.log",
+        "sha256": "12952451ef1b464f4b1b5b8810c291cd1ac183408472a7026175c082688abd1e"
+      },
+      "total_levels": 6
+    },
+    {
+      "actions": 175,
+      "baseline_evidence": {
+        "bytes": 1370258,
+        "path": "evidence/p10/p_update/iteration_14_regression/p10_active_post_promotion_su15.json",
+        "sha256": "79b7277cad4688f3dfb17cfa598e6d867c119adc3e2c1cf49018675ddd854c05"
+      },
+      "baseline_visual_operator_version": "arc3-p10-visual-operator-v13",
+      "behavior_projection_digest": "bf150cfd9ab37f476fc546987439b4ad0827714d9d38bb47ab05c9491540eae3",
+      "behavior_projection_equal": true,
+      "complete": true,
+      "completed_levels": 9,
+      "error_count": 0,
+      "fresh_report": {
+        "bytes": 223883,
+        "path": "evidence/p10/development/stable_regression_v14/su15_max256.compact.json",
+        "sha256": "5cb4d69065c60453451e23469086b9af708abbcee987a2fb39ec87a3b16a34ab"
+      },
+      "fresh_visual_operator_version": "arc3-p10-visual-operator-v14",
+      "game_id": "su15-1944f8ab",
+      "label": "su15",
+      "memory_influenced_cycle_count": 164,
+      "terminal_state": "WIN",
+      "timing": {
+        "bytes": 40,
+        "elapsed_wall_seconds": 111.97,
+        "exit_code": 0,
+        "maximum_rss_kb": 181260,
+        "path": "evidence/p10/development/stable_regression_v14/su15_max256.time.log",
+        "sha256": "f95caac7b2c1f29d63a161df72b5b5f1080a2ca074f29f4f9a4acbd9bf22c28a"
+      },
+      "total_levels": 9
+    },
+    {
+      "actions": 200,
+      "baseline_evidence": {
+        "bytes": 1846740,
+        "path": "evidence/p10/p_update/iteration_21_regression/p10_active_post_promotion_ka59.json",
+        "sha256": "c62255320609042e0aa59b5769132480388f51e44ec85ca48bc51922dc8bef3e"
+      },
+      "baseline_visual_operator_version": "arc3-p10-visual-operator-v13",
+      "behavior_projection_digest": "426f727516edc6e8b1b46da9ee288036f77cadf16ad404d04a78b1a72bab9803",
+      "behavior_projection_equal": true,
+      "complete": false,
+      "completed_levels": 6,
+      "error_count": 0,
+      "fresh_report": {
+        "bytes": 529638,
+        "path": "evidence/p10/development/stable_regression_v14/ka59_max200.compact.json",
+        "sha256": "58dfc4e6d5cef96e06e836b12e07ed3907e1620d9a732415da303fd4c914a232"
+      },
+      "fresh_visual_operator_version": "arc3-p10-visual-operator-v14",
+      "game_id": "ka59-38d34dbb",
+      "label": "ka59",
+      "memory_influenced_cycle_count": 182,
+      "terminal_state": "NOT_FINISHED",
+      "timing": {
+        "bytes": 78,
+        "elapsed_wall_seconds": 188.53,
+        "exit_code": 1,
+        "maximum_rss_kb": 158656,
+        "path": "evidence/p10/development/stable_regression_v14/ka59_max200.time.log",
+        "sha256": "e46d952312baa8d0a07a795034b6e8829fa6e40040eb0f8af3336dc04dcc1f2f"
+      },
+      "total_levels": 7
+    }
+  ],
+  "content_digest": "arc3_p10_stable_regression_audit:e6953818cff613854f347ae3907cbe4ae1b34d653ee269a241e5b8267055a55a",
+  "development_only": true,
+  "fixed_conditions": {
+    "active_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+    "instruction_lifecycle": "active",
+    "instruction_variant": "hybrid",
+    "operation_mode": "offline",
+    "runtime_source_inventory_digest": "8ade5406134a6ff077934da8dc44eae979d9046dcfb1ca1e33a329c5acbd259b"
+  },
+  "hds_judgment": {
+    "capability_progress_status": "NOT_CLAIMED",
+    "p11_status": "GATED",
+    "runtime_p_compile_authorized": false,
+    "runtime_p_promotion_authorized": false,
+    "score_progress_status": "NOT_CLAIMED",
+    "stable_regression_status": "PASS",
+    "visual_operator_v14_behavioral_equivalence": "PASS"
+  },
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-p10-stable-regression-audit-v1",
+  "summary": {
+    "action_count": 993,
+    "behavior_projection_match_count": 5,
+    "comparison_count": 5,
+    "completed_levels": 35,
+    "error_count": 0
+  }
+}

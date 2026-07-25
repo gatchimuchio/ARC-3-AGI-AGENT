@@ -21,7 +21,7 @@ class P10TransitionProbeEvidenceTests(unittest.TestCase):
             / "evidence"
             / "p10"
             / "development"
-            / "c2_c3_local_probe_all25_max1"
+            / "c2_c3_local_probe_all25_max1_v14"
         )
         cls.audit = json.loads(
             (
@@ -123,7 +123,10 @@ class P10TransitionProbeEvidenceTests(unittest.TestCase):
         self.assertEqual(conditions["instruction_lifecycle"], "active")
         self.assertEqual(conditions["max_actions"], 1)
         self.assertEqual(conditions["arc_agi_version"], "0.9.8")
-        self.assertTrue(conditions["runtime_source_inventory_digest"])
+        self.assertEqual(
+            conditions["runtime_source_inventory_digest"],
+            "8ade5406134a6ff077934da8dc44eae979d9046dcfb1ca1e33a329c5acbd259b",
+        )
         self.assertTrue(conditions["environment_inventory_digest"])
 
         index = json.loads(

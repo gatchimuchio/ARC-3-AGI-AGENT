@@ -1,0 +1,290 @@
+{
+  "artifact_type": "p10_standard_budget_all25_audit",
+  "checks": {
+    "active_p_is_unchanged": true,
+    "all_25_games_and_183_levels_are_represented": true,
+    "all_checkpoint_payloads_are_valid": true,
+    "checkpoint_conditions_digest_is_valid": true,
+    "checkpoint_index_is_content_bound": true,
+    "compact_evidence_is_content_bound_and_matches_raw": true,
+    "exact_condition_resume_reused_25_executed_zero": true,
+    "oracle_is_bound_to_raw_report_and_183_level_zip": true,
+    "raw_report_is_offline_active_hybrid": true,
+    "resource_logs_cover_every_game": true,
+    "runtime_errors_are_zero": true,
+    "standard_budget_is_450": true,
+    "transition_probe_action_influence_is_zero": true,
+    "transition_probe_faults_are_zero": true
+  },
+  "content_digest": "arc3_p10_standard_budget_all25_audit:ae1c4f59ff59e7b79a66ee817b45b6581a230c30829fc1802220ba2e143a9c2b",
+  "development_only": true,
+  "failure_signatures": [
+    {
+      "classification": "RESOURCE_HEADROOM_FAILURE",
+      "failure_id": "high-water-runtime-allocation-on-standard-budget",
+      "falsifier": "same-condition worker completes below the one-gibibyte high-water threshold without swap",
+      "game_id": "sb26-7fbdac44",
+      "maximum_rss_kb": 1666868
+    }
+  ],
+  "fixed_conditions": {
+    "active_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+    "arc_agi_version": "0.9.8",
+    "conditions_digest": "723a0c221fa1764393972a1bb51bcb043eab7a10aa4c4ab77cc16fba9e98d554",
+    "environment_inventory_digest": "4ba5b09ccd490559b6a234ada4cd0cedbaa6d2d9dc8fac1553b352014187a5e6",
+    "game_ids": [
+      "ar25-0c556536",
+      "bp35-0a0ad940",
+      "cd82-fb555c5d",
+      "cn04-2fe56bfb",
+      "dc22-fdcac232",
+      "ft09-0d8bbf25",
+      "g50t-5849a774",
+      "ka59-38d34dbb",
+      "lf52-271a04aa",
+      "lp85-305b61c3",
+      "ls20-9607627b",
+      "m0r0-492f87ba",
+      "r11l-495a7899",
+      "re86-8af5384d",
+      "s5i5-18d95033",
+      "sb26-7fbdac44",
+      "sc25-635fd71a",
+      "sk48-d8078629",
+      "sp80-589a99af",
+      "su15-1944f8ab",
+      "tn36-ef4dde99",
+      "tr87-cd924810",
+      "tu93-0768757b",
+      "vc33-5430563c",
+      "wa30-ee6fef47"
+    ],
+    "instruction_lifecycle": "active",
+    "instruction_variant": "hybrid",
+    "max_actions": 450,
+    "operation_mode": "offline",
+    "python_version": "3.14.4",
+    "runtime_source_inventory_digest": "8ade5406134a6ff077934da8dc44eae979d9046dcfb1ca1e33a329c5acbd259b",
+    "schema_version": "arc3-p10-batch-conditions-v1"
+  },
+  "hds_judgment": {
+    "capability_progress_status": "NOT_CLAIMED",
+    "checkpoint_resume_status": "PASS",
+    "p10_completion_status": "HOLD",
+    "p11_status": "GATED",
+    "phase_a_standard_measurement_status": "PASS",
+    "resource_headroom_status": "FAIL_HIGH_WATER",
+    "resource_worker_completion_status": "PASS",
+    "runtime_p_compile_authorized": false,
+    "runtime_p_promotion_authorized": false,
+    "score_progress_status": "NOT_CLAIMED"
+  },
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "resource_measurement": {
+    "high_water_exceeded": true,
+    "high_water_threshold_kb": 1048576,
+    "maximum_worker": {
+      "elapsed_wall_seconds": 818.72,
+      "game_id": "sb26-7fbdac44",
+      "log_sha256": "49b5800f39f886a3f01c9472d793563aa391bac3f3dc015e1b47e37d52dfe9fc",
+      "maximum_rss_kb": 1666868
+    },
+    "method": "per-process /usr/bin/time maximum resident set",
+    "observed_parallel_peak_swap_mb": 283,
+    "parallel_worker_limit": 3,
+    "rows": [
+      {
+        "elapsed_wall_seconds": 390.81,
+        "game_id": "ar25-0c556536",
+        "log_sha256": "9503f3a367ae04a9e1fb847f172dfbc4c4ae47ea87fb2fa4435eeec4acb25f97",
+        "maximum_rss_kb": 210952
+      },
+      {
+        "elapsed_wall_seconds": 710.9,
+        "game_id": "bp35-0a0ad940",
+        "log_sha256": "67ab65e233fdbd98eea75b84b39505fb9b18cef1b1cb4f1b3b598a03fdd156a2",
+        "maximum_rss_kb": 429316
+      },
+      {
+        "elapsed_wall_seconds": 414.17,
+        "game_id": "cd82-fb555c5d",
+        "log_sha256": "78b26023470fc0ceb6a418b906bfadc9f526631241dd335cb6c9183b90d35e14",
+        "maximum_rss_kb": 212012
+      },
+      {
+        "elapsed_wall_seconds": 427.99,
+        "game_id": "cn04-2fe56bfb",
+        "log_sha256": "3eff05a87f8abae72ce02194a31a9e1ece008837b25ee5c5f80179e789a9023b",
+        "maximum_rss_kb": 195932
+      },
+      {
+        "elapsed_wall_seconds": 687.57,
+        "game_id": "dc22-fdcac232",
+        "log_sha256": "8b48b9e8ac3114bfc7469cfe05c64d9537da333b027ef1935ca3e65f8f96d147",
+        "maximum_rss_kb": 294452
+      },
+      {
+        "elapsed_wall_seconds": 31.74,
+        "game_id": "ft09-0d8bbf25",
+        "log_sha256": "54a1eecda5e21346336a892c81898ab5352be772885d89e9827f97920edf4608",
+        "maximum_rss_kb": 94832
+      },
+      {
+        "elapsed_wall_seconds": 229.45,
+        "game_id": "g50t-5849a774",
+        "log_sha256": "8a2c281d9a023e54aee002e48cbf634e36923e0411e50b1fe3e395b2ad821548",
+        "maximum_rss_kb": 176824
+      },
+      {
+        "elapsed_wall_seconds": 3421.34,
+        "game_id": "ka59-38d34dbb",
+        "log_sha256": "49952d83373255efc602dbdccd7f808b4e677b0477475822f29a205dac465ba8",
+        "maximum_rss_kb": 273452
+      },
+      {
+        "elapsed_wall_seconds": 844.87,
+        "game_id": "lf52-271a04aa",
+        "log_sha256": "b4bf4e661f035bc6eef63bcea7b1375867f747e3856821490333fa36ff7f4ca7",
+        "maximum_rss_kb": 388428
+      },
+      {
+        "elapsed_wall_seconds": 120.65,
+        "game_id": "lp85-305b61c3",
+        "log_sha256": "b6b6cf1e10c2f485807422b4fac7c76c21f75b8133befd831947402b8a622ae2",
+        "maximum_rss_kb": 130640
+      },
+      {
+        "elapsed_wall_seconds": 210.92,
+        "game_id": "ls20-9607627b",
+        "log_sha256": "408232310391e20cda66178a2e3490c0aa500493d5fbc92be149cc5a60aeb6e1",
+        "maximum_rss_kb": 228864
+      },
+      {
+        "elapsed_wall_seconds": 331.81,
+        "game_id": "m0r0-492f87ba",
+        "log_sha256": "cf6077f1a9b4d265283a612d730106be68e22a8a876da4eaae7c1a511fcab647",
+        "maximum_rss_kb": 199616
+      },
+      {
+        "elapsed_wall_seconds": 366.0,
+        "game_id": "r11l-495a7899",
+        "log_sha256": "ff66c34dce5ff35215f01e9ae5eadcb30e0f0636d42a17fd9b54ccdc6ab8ac81",
+        "maximum_rss_kb": 232840
+      },
+      {
+        "elapsed_wall_seconds": 197.94,
+        "game_id": "re86-8af5384d",
+        "log_sha256": "b4648886b593a21848bf8c30857e7fac3d6635cedaa48ab904af76faf7cae6f3",
+        "maximum_rss_kb": 171372
+      },
+      {
+        "elapsed_wall_seconds": 409.51,
+        "game_id": "s5i5-18d95033",
+        "log_sha256": "df0e7e0b7bc96988ccabc648c020914dfaf35d5a6b6dddcc7e908ec4af5eb1b8",
+        "maximum_rss_kb": 246468
+      },
+      {
+        "elapsed_wall_seconds": 818.72,
+        "game_id": "sb26-7fbdac44",
+        "log_sha256": "49b5800f39f886a3f01c9472d793563aa391bac3f3dc015e1b47e37d52dfe9fc",
+        "maximum_rss_kb": 1666868
+      },
+      {
+        "elapsed_wall_seconds": 436.29,
+        "game_id": "sc25-635fd71a",
+        "log_sha256": "0e652d292236de8e053a0bd3416b1204e2d72daa3d7d7947848ddc39aa67de4b",
+        "maximum_rss_kb": 254136
+      },
+      {
+        "elapsed_wall_seconds": 676.41,
+        "game_id": "sk48-d8078629",
+        "log_sha256": "236ebee06306f68012a806847f46320777db93c4f22c10820c709e45f2d52463",
+        "maximum_rss_kb": 336720
+      },
+      {
+        "elapsed_wall_seconds": 348.02,
+        "game_id": "sp80-589a99af",
+        "log_sha256": "c241ec6d4b2227bccead717f5e940827ddb4de99c58480b45a97a74e344d9c59",
+        "maximum_rss_kb": 181728
+      },
+      {
+        "elapsed_wall_seconds": 106.52,
+        "game_id": "su15-1944f8ab",
+        "log_sha256": "a32a1761148475abae63998f4badd497e8fdd08487582a1538a7c3f176417d78",
+        "maximum_rss_kb": 180628
+      },
+      {
+        "elapsed_wall_seconds": 673.4,
+        "game_id": "tn36-ef4dde99",
+        "log_sha256": "4be24edee4e98b19097d64429d0750eddfb503d41ce659806055f7e8aa01efd9",
+        "maximum_rss_kb": 358888
+      },
+      {
+        "elapsed_wall_seconds": 161.28,
+        "game_id": "tr87-cd924810",
+        "log_sha256": "f34cd8675d2e936b2bac90f15d0820895033b1811419b07eafca263b5a908778",
+        "maximum_rss_kb": 156144
+      },
+      {
+        "elapsed_wall_seconds": 224.14,
+        "game_id": "tu93-0768757b",
+        "log_sha256": "efa95b35cb2b2cf09c912db835f48b322523911a0f21e9db785bc6a4470d2c8d",
+        "maximum_rss_kb": 162144
+      },
+      {
+        "elapsed_wall_seconds": 249.83,
+        "game_id": "vc33-5430563c",
+        "log_sha256": "58d4b90de18a5580792925cdbc28cd02ee7a486c95b64fc18d6bdd3b2fb13694",
+        "maximum_rss_kb": 182076
+      },
+      {
+        "elapsed_wall_seconds": 279.55,
+        "game_id": "wa30-ee6fef47",
+        "log_sha256": "da4823fefe33378381ff64e4a24047d70be1008c4abe9e74595c7786d30f3361",
+        "maximum_rss_kb": 173196
+      }
+    ],
+    "sum_worker_elapsed_seconds": 12769.83
+  },
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-p10-standard-budget-all25-audit-v1",
+  "source_evidence": {
+    "checkpoint_count": 25,
+    "checkpoint_index": {
+      "bytes": 2552,
+      "path": "evidence/p10/development/active_all25_max450_v14/checkpoints/CHECKPOINT_INDEX.json",
+      "sha256": "09eeb294a5e82885c2e08bc6cf898ddc7e32b4d1b7ead6823bebb4cf79e41757"
+    },
+    "checkpoint_inventory_digest": "b40d9523e13e055dc36238785906fce2ba265692fc68f3242c3c0e8406b2e2e9",
+    "compact_evidence": {
+      "bytes": 8906854,
+      "path": "evidence/p10/development/active_all25_max450_v14/p10_all25_active_max450_compact.json",
+      "sha256": "2c9efa43f2b1597e624f60a1f6c03f0cc1763da85386634cb00b46c4e0c3befe"
+    },
+    "local_score_oracle": {
+      "bytes": 24762,
+      "path": "evidence/p10/arc3_local_score_oracle_latest.json",
+      "sha256": "40f7983afcdb2bb76884238375abd322b020ba0da085eeeec560fd17205340c9"
+    },
+    "raw_report": {
+      "bytes": 76615999,
+      "path": "evidence/p10/development/active_all25_max450_v14/p10_all25_active_max450_raw.json",
+      "sha256": "b26bb0e29b6b20fb04bd3dbfd4cf8de026d5e4c2ba4be7fa09bace06e2c90485"
+    },
+    "sample_zip_sha256": "c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d505de2b1ec61d645"
+  },
+  "summary": {
+    "action_count": 10243,
+    "complete_game_count": 4,
+    "completed_levels": 35,
+    "completion_rate_percent": 19.12568306,
+    "error_count": 0,
+    "game_count": 25,
+    "level_count": 183,
+    "max_action_exhausted_count": 21,
+    "official_rhae_score_percent": 18.821945363,
+    "probe_fault_count": 0,
+    "remaining_levels": 148,
+    "score_digest": "9f214c1825f8ee0f52b1ef6a323b778971ce03e03a3733338d2323a9b0ebb238"
+  }
+}

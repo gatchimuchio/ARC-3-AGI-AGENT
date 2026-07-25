@@ -407,6 +407,44 @@
       ],
       "evidence_ref": "evidence/p10/development/c2_c3_local_probe_all25_max1/C2_C3_LOCAL_PROBE_AUDIT.json",
       "maximum_information_gain_next": "repeat boundary predictions across multiple structures under checkpointed standard-budget evidence"
+    },
+    {
+      "decision_id": "j-dev:p10-bounded-runtime-memory-v22b",
+      "authority": "development-hds-only",
+      "status": "PASS",
+      "selected_hypothesis": "H34-bounded-history-window-and-frontier-composition",
+      "rejected_hypotheses": [
+        "H32-increase-budget-or-parallelism-with-unbounded-retention",
+        "H33-drop-history-or-candidate-tail-without-obligations"
+      ],
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "unbounded-history-and-frontier-retention-is-a-resource-failure-not-a-capability-failure",
+        "default-p6-history-contract-remains-full",
+        "p10-retains-base-current-and-explicit-level-rollback-snapshots",
+        "candidate-tail-remains-reachable-through-deterministic-paging",
+        "node-and-active-action-storage-are-bounded",
+        "same-game-maximum-budget-report-now-completes-with-lower-rss",
+        "all-twenty-five-max-one-shadow-probe-retains-zero-action-influence",
+        "full-standard-budget-aggregate-completed-with-thirty-five-of-one-hundred-eighty-three-and-zero-runtime-errors",
+        "local-standard-oracle-measured-18.821945363-percent-rhae",
+        "five-retained-stable-routes-match-their-hds-admitted-behavior-projections",
+        "sb26-worker-exceeded-one-gibibyte-rss-and-remains-a-resource-headroom-failure"
+      ],
+      "evidence_ref": "evidence/p10/development/P10_BOUNDED_RUNTIME_MEMORY_V14_AUDIT.json",
+      "supporting_evidence": [
+        "evidence/p10/development/c2_c3_local_probe_all25_max1_v14/C2_C3_LOCAL_PROBE_AUDIT.json",
+        "evidence/p10/development/P10_ACTIVE_ALL25_MAX450_V14_AUDIT.json",
+        "evidence/p10/development/P10_V14_STABLE_REGRESSION_AUDIT.json",
+        "evidence/p10/arc3_local_score_oracle_latest.json",
+        "ARC-AGI-3-Agents/tests/unit/test_memory_subject_p6.py",
+        "ARC-AGI-3-Agents/tests/unit/test_p10_recovery.py",
+        "ARC-AGI-3-Agents/tests/unit/test_visual_explorer_p10.py",
+        "docs/architecture/P10_COMPLETE_SAMPLE_SOLVER.md"
+      ],
+      "maximum_information_gain_next": "eliminate the sb26 evidence high-water allocation without weakening audit obligations, then collect cross-context C2 C3 contrasts without changing Runtime P"
     }
   ]
 }

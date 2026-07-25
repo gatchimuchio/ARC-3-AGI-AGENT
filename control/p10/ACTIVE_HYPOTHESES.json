@@ -909,6 +909,103 @@
       "regression_risk": 0.08,
       "status": "LOCAL_PROBE_ACCEPTED",
       "j_dev_decision": "PASS_LOCAL_PROBE"
+    },
+    {
+      "hypothesis_id": "H32-increase-budget-or-parallelism-with-unbounded-retention",
+      "kind": "H1",
+      "summary": "Increase wall-clock allowance or worker parallelism without changing the unbounded per-cycle memory history and rendered frontier representation.",
+      "predicted_effect": [
+        "short games may checkpoint sooner",
+        "long games retain the same superlinear serialization cost and memory growth",
+        "parallel workers multiply the resource hazard"
+      ],
+      "applicability": [
+        "standard-budget measurement only"
+      ],
+      "required_evidence": [
+        "single-game maximum-budget resource profile",
+        "comparison against bounded retention"
+      ],
+      "falsifier": [
+        "the original BP35 worker does not complete after thirty-five minutes and reaches approximately 1.37 GB RSS",
+        "parallel execution reduces available memory without changing per-game retention"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.1,
+      "information_gain": 0.25,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.8,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H33-drop-history-or-candidate-tail-without-obligations",
+      "kind": "H2",
+      "summary": "Delete historical snapshots or truncate rendered candidates without preserving the HDS rollback anchor and deterministic access to candidates beyond the first window.",
+      "predicted_effect": [
+        "resident memory decreases",
+        "level rollback may target a missing snapshot",
+        "candidate truncation creates an unreachable observation-derived tail"
+      ],
+      "applicability": [
+        "none unless rollback and candidate completeness obligations are restored"
+      ],
+      "required_evidence": [
+        "rollback survival under compaction",
+        "candidate pagination beyond the retained window",
+        "default P6 history non-regression"
+      ],
+      "falsifier": [
+        "a protected level checkpoint disappears",
+        "candidate sixty-five cannot be selected",
+        "default PassiveMemory stops retaining full history"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 2,
+      "generality": 0.2,
+      "information_gain": 0.55,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.95,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H34-bounded-history-window-and-frontier-composition",
+      "kind": "H3",
+      "summary": "Compose P10-only three-snapshot physical retention, an explicit level rollback anchor, action-surface state identity, deterministic sixty-four-action paging, and a thirty-two-node observation LRU.",
+      "predicted_effect": [
+        "active M version digest provenance and HDS authority remain unchanged",
+        "default P6 memory retains every snapshot",
+        "P10 keeps base current and level rollback snapshots only",
+        "all rendered candidates remain eventually reachable without storing every action object",
+        "maximum-budget workers complete without memory exhaustion"
+      ],
+      "applicability": [
+        "identity-free P10 rendered exploration and standard-budget measurement"
+      ],
+      "required_evidence": [
+        "bounded and default history unit tests",
+        "nonzero level-checkpoint rollback test",
+        "candidate pagination and node-LRU round-trip tests",
+        "strict identity and authority regression",
+        "same-game twenty and four-hundred-fifty-action resource comparison"
+      ],
+      "falsifier": [
+        "retention changes active view version digest or provenance",
+        "rollback anchor is pruned",
+        "candidate sixty-five is unreachable",
+        "node or active-action bounds are exceeded",
+        "BP35 maximum-budget worker again exhausts time or memory"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.94,
+      "information_gain": 0.95,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.25,
+      "status": "RUNTIME_INFRASTRUCTURE_ACCEPTED",
+      "j_dev_decision": "PASS"
     }
   ]
 }

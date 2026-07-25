@@ -355,12 +355,14 @@ class PassiveMemory:
     """Storage subject that mutates only when an explicit caller invokes an API."""
 
     max_entries: int = 32
+    max_history_snapshots: int | None = None
     _entries: dict[str, MemoryEntry] = field(default_factory=dict, init=False)
     _order: list[str] = field(default_factory=list, init=False)
     _archive: dict[str, MemoryEntry] = field(default_factory=dict, init=False)
     _archive_order: list[str] = field(default_factory=list, init=False)
     _version: int = field(default=0, init=False)
     _history: dict[int, MemorySnapshot] = field(default_factory=dict, init=False)
+    _rollback_snapshot_version: int = field(default=0, init=False)
     _provenance: list[MemoryProvenanceEvent] = field(
         default_factory=list,
         init=False,
@@ -369,11 +371,61 @@ class PassiveMemory:
     def __post_init__(self) -> None:
         if self.max_entries < 1:
             raise ValueError("max_entries must be positive")
+        if self.max_history_snapshots is not None and (
+            isinstance(self.max_history_snapshots, bool)
+            or not isinstance(self.max_history_snapshots, int)
+            or self.max_history_snapshots < 3
+        ):
+            raise ValueError("max_history_snapshots must be at least 3")
         self._history[0] = self.view()
 
     @property
     def version(self) -> int:
         return self._version
+
+    @property
+    def retained_snapshot_versions(self) -> tuple[int, ...]:
+        """Expose retained rollback material without exposing mutable storage."""
+
+        return tuple(sorted(self._history))
+
+    def retain_rollback_snapshot(self, version: int) -> None:
+        """Retain one explicit rollback anchor under a bounded storage policy.
+
+        Retention changes neither active memory, version, digest, nor
+        provenance.  It only selects which already-authorized historical
+        snapshot survives physical compaction.
+        """
+
+        if (
+            isinstance(version, bool)
+            or not isinstance(version, int)
+            or version < 0
+        ):
+            raise MemoryOperationError(
+                "MEMORY_ROLLBACK_RETENTION_VERSION_INVALID"
+            )
+        if version not in self._history:
+            raise MemoryOperationError(
+                f"MEMORY_ROLLBACK_RETENTION_VERSION_NOT_FOUND:{version}"
+            )
+        self._rollback_snapshot_version = version
+        self._prune_history()
+
+    def _prune_history(self) -> None:
+        limit = self.max_history_snapshots
+        if limit is None:
+            return
+        protected = {
+            0,
+            self._version,
+            self._rollback_snapshot_version,
+        }
+        for version in tuple(sorted(self._history)):
+            if len(self._history) <= limit:
+                break
+            if version not in protected:
+                del self._history[version]
 
     def view(self) -> MemorySnapshot:
         entries = tuple(
@@ -528,6 +580,7 @@ class PassiveMemory:
             self._archive_order.append(oldest)
         after = self.view()
         self._history[self._version] = after
+        self._prune_history()
         self._provenance.append(
             MemoryProvenanceEvent(
                 version=self._version,

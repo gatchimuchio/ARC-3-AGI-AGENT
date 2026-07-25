@@ -1,0 +1,560 @@
+{
+  "artifact_type": "arc3_c2_c3_local_probe_audit",
+  "candidate_tier": "LOCAL_PROBE",
+  "capability_ids": [
+    "C2_visible_effect_transition_model",
+    "C3_commit_boundary_predictor"
+  ],
+  "checks": {
+    "action_selection_influence_absent": true,
+    "all_25_environments_reported": true,
+    "all_probe_rows_nonempty": true,
+    "checkpoint_conditions_digest_valid": true,
+    "checkpoint_rows_match_reported_games": true,
+    "checkpointed_execution_present": true,
+    "compact_matches_raw_report": true,
+    "error_count_zero": true,
+    "instruction_lifecycle_active": true,
+    "max_actions_one": true,
+    "memory_emit_promotion_authority_absent": true,
+    "one_action_and_probe_per_game": true,
+    "operation_mode_offline": true,
+    "probe_contract_valid": true,
+    "probe_fault_count_zero": true,
+    "reported_games_match_checkpoint_conditions": true
+  },
+  "content_digest": "arc3_c2_c3_local_probe_audit:dbf6af1b5fcbdc3334e21a4fe08e25a5cc6159206ef444675cb20be42b231e5a",
+  "development_only": true,
+  "hds_judgment": {
+    "cluster_stable_status": "HOLD",
+    "composable_status": "HOLD",
+    "local_probe_status": "PASS",
+    "reason": "All 25 first transitions were observed without policy influence, but one transition per game is not sufficient for positive/negative cluster closure.",
+    "runtime_p_promotion_authorized": false,
+    "score_claim_authorized": false
+  },
+  "rows": [
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "ar25-0c556536",
+      "observation_count": 1,
+      "transition_digest_chain": "d8c293c40883f6b1906b3895186fea12162fec23d8c4daff72eec4fb3a7d9f88"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "bp35-0a0ad940",
+      "observation_count": 1,
+      "transition_digest_chain": "a66829f6dec793c41dd8dcc851e91ff091b7f330023b2c08b3d08da6454a0cc8"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "cd82-fb555c5d",
+      "observation_count": 1,
+      "transition_digest_chain": "d5a53d82566712b47b223bb3804e2b7702d75e90eeb04e2b8d33af7f37bb89c3"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "cn04-2fe56bfb",
+      "observation_count": 1,
+      "transition_digest_chain": "b1f748fddc046eec1130fbbd51ccf29e2d7f81d1c4b6b41bbace31dd0ad56d47"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "dc22-fdcac232",
+      "observation_count": 1,
+      "transition_digest_chain": "a0fbcbd26f8067ab935704ecf8415f9f14e994b3c0c96755baa71ca97562ed10"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "ft09-0d8bbf25",
+      "observation_count": 1,
+      "transition_digest_chain": "a8012ea4d46e9fafcc1da15bda0f4342cb91925d7664d39eac8efcc294716b05"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "NO_VISIBLE_COMMIT": 1
+      },
+      "effect_counts": {
+        "NO_VISIBLE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "g50t-5849a774",
+      "observation_count": 1,
+      "transition_digest_chain": "c1768e232eb037744473987b6935a724e24d1d30b21e039974ece37656eead4c"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "ka59-38d34dbb",
+      "observation_count": 1,
+      "transition_digest_chain": "bf1451812502f29bc864536eec48a6eb4437f9f049daef7ebabedba8d3f36c88"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "NO_VISIBLE_COMMIT": 1
+      },
+      "effect_counts": {
+        "NO_VISIBLE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "lf52-271a04aa",
+      "observation_count": 1,
+      "transition_digest_chain": "bb88073abce7de91bc3ce27cbd6acf1a46a116492e7e91d751e8c050ce74a3e9"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_MOTION": 1,
+        "REGIONAL_REDRAW": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "lp85-305b61c3",
+      "observation_count": 1,
+      "transition_digest_chain": "6e7c163fbe272ec80052f4f91975f189a4bb544ee0cf3b97db87ddb55266387f"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "ls20-9607627b",
+      "observation_count": 1,
+      "transition_digest_chain": "cbc4ac61b330fe84ca58a8e21ddce7fa97748f5ef606dd403a145cb57fe3a3c4"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "m0r0-492f87ba",
+      "observation_count": 1,
+      "transition_digest_chain": "b4e696a18f39e48712984673a8c45bae0fffea9848387a5717baf119c198ff1d"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "r11l-495a7899",
+      "observation_count": 1,
+      "transition_digest_chain": "d37d4a97178ecce9dd7728786095c6c2142438c8f5089c7fd03ddc8dc1d2ffba"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "re86-8af5384d",
+      "observation_count": 1,
+      "transition_digest_chain": "1d69268fc2e60ed7b1d4dd1b056640efc4036c34baa29a8656d9e579a97b3189"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "s5i5-18d95033",
+      "observation_count": 1,
+      "transition_digest_chain": "096f231b280c4730dcf04a0207b98412e6592a9ca768c1b30cc65701e57dad66"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "sb26-7fbdac44",
+      "observation_count": 1,
+      "transition_digest_chain": "b2f0ef4577184cc32e88aeb13ba2cffc9c2c68aeaaf92ca8d83360928b243fc5"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "NO_VISIBLE_COMMIT": 1
+      },
+      "effect_counts": {
+        "NO_VISIBLE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "sc25-635fd71a",
+      "observation_count": 1,
+      "transition_digest_chain": "d88d0d9c9fd82864c3fb414feb115396d4c61f00c217c9e1713916e200bee07a"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "sk48-d8078629",
+      "observation_count": 1,
+      "transition_digest_chain": "2e8af953743019df1705b46c366de5df31cfe357c13096745334d25bbdf445bc"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "sp80-589a99af",
+      "observation_count": 1,
+      "transition_digest_chain": "40775e478604c9daac2edffac368021eb23a3cb33d828e1a8fb6778d968f61d7"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "su15-1944f8ab",
+      "observation_count": 1,
+      "transition_digest_chain": "1683eb2a954cc9e4550f3dac07f4a4d7259c09d55d62aacb4a2b5b3e762d3ca4"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "tn36-ef4dde99",
+      "observation_count": 1,
+      "transition_digest_chain": "9e79dc25e060113377649e9e3ac9ed2b17c41499977c5b146b1b6e3508240990"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "tr87-cd924810",
+      "observation_count": 1,
+      "transition_digest_chain": "245bf41bfcb40b3af25ea474a7b519210f0506b241ea7d5921f85481a1e77368"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "LOCAL_PIXEL_DELTA": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "tu93-0768757b",
+      "observation_count": 1,
+      "transition_digest_chain": "ee2f30d580f9c658f2f943b742b0f4e950c08cd22f712989b76c010e9b5208d5"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 1,
+        "COMPONENT_APPEAR": 1,
+        "COMPONENT_DISAPPEAR": 1,
+        "COMPONENT_MOTION": 1,
+        "REGIONAL_REDRAW": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "vc33-5430563c",
+      "observation_count": 1,
+      "transition_digest_chain": "814b32dbe286d642493e76b1adbf532b266ce35eb20cb7ba09e8eb931c1c77f5"
+    },
+    {
+      "action_selection_influence": false,
+      "actions": 1,
+      "boundary_counts": {
+        "TRANSITION_NO_COMMIT": 1
+      },
+      "effect_counts": {
+        "COMPONENT_MOTION": 1,
+        "LOCAL_PIXEL_DELTA": 1,
+        "STRUCTURAL_CHANGE": 1,
+        "VISIBLE_STATE_CHANGE": 1
+      },
+      "fault_count": 0,
+      "game_id": "wa30-ee6fef47",
+      "observation_count": 1,
+      "transition_digest_chain": "f845e8b1bec051db7bb323bbfb91b8d703ac1a00a3e06e51b2dee5e81754c5d6"
+    }
+  ],
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-c2-c3-local-probe-audit-v1",
+  "source_evidence": {
+    "compact_content_digest": "dd9584831beb3e1b4e1b17d012f9fb08086495e3e6d8a866f8890250f71fea05",
+    "compact_evidence_sha256": "5bcbf15c2c034937ef8e3d03d5ee2b3a665391b148039d6a673305f00210700f",
+    "conditions": {
+      "active_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+      "arc_agi_version": "0.9.8",
+      "conditions_digest": "1cb23c290b76719cea2047fcef038c0f75ffd7a2429df2c147d585a0bc717966",
+      "environment_inventory_digest": "4ba5b09ccd490559b6a234ada4cd0cedbaa6d2d9dc8fac1553b352014187a5e6",
+      "game_ids": [
+        "ar25-0c556536",
+        "bp35-0a0ad940",
+        "cd82-fb555c5d",
+        "cn04-2fe56bfb",
+        "dc22-fdcac232",
+        "ft09-0d8bbf25",
+        "g50t-5849a774",
+        "ka59-38d34dbb",
+        "lf52-271a04aa",
+        "lp85-305b61c3",
+        "ls20-9607627b",
+        "m0r0-492f87ba",
+        "r11l-495a7899",
+        "re86-8af5384d",
+        "s5i5-18d95033",
+        "sb26-7fbdac44",
+        "sc25-635fd71a",
+        "sk48-d8078629",
+        "sp80-589a99af",
+        "su15-1944f8ab",
+        "tn36-ef4dde99",
+        "tr87-cd924810",
+        "tu93-0768757b",
+        "vc33-5430563c",
+        "wa30-ee6fef47"
+      ],
+      "instruction_lifecycle": "active",
+      "instruction_variant": "hybrid",
+      "max_actions": 1,
+      "operation_mode": "offline",
+      "python_version": "3.14.4",
+      "runtime_source_inventory_digest": "8ade5406134a6ff077934da8dc44eae979d9046dcfb1ca1e33a329c5acbd259b",
+      "schema_version": "arc3-p10-batch-conditions-v1"
+    },
+    "raw_report_sha256": "95b9cfcfe34a4b4d849dd92e6cfca36743afdab7487dd102841aa5c3472daf0c"
+  },
+  "summary": {
+    "action_count": 25,
+    "boundary_counts": {
+      "NO_VISIBLE_COMMIT": 3,
+      "TRANSITION_NO_COMMIT": 22
+    },
+    "completed_levels": 0,
+    "effect_counts": {
+      "ACTION_SURFACE_CHANGE": 10,
+      "COMPONENT_APPEAR": 16,
+      "COMPONENT_DISAPPEAR": 16,
+      "COMPONENT_MOTION": 16,
+      "LOCAL_PIXEL_DELTA": 20,
+      "NO_VISIBLE_CHANGE": 3,
+      "REGIONAL_REDRAW": 2,
+      "STRUCTURAL_CHANGE": 21,
+      "VISIBLE_STATE_CHANGE": 22
+    },
+    "error_count": 0,
+    "fault_count": 0,
+    "game_count": 25,
+    "observation_count": 25,
+    "total_levels": 183
+  }
+}

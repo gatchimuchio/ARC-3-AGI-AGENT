@@ -86,6 +86,12 @@ importしない。詳細は
 `arc3_agi_agent/visual_explorer.py`は、rendered gridから同色連結成分、
 status候補、単純action、観測由来click候補を形成し、遷移・無変化・hazardを
 versioned payloadへ直列化する。game/task/level IDを入力に取らない。
+visual operator v14では、同一renderでもavailable actionが異なる状態を
+aliasしない。active nodeを観測LRU 32件、各nodeのactive actionを64件に固定し、
+64件を超える観測由来候補は既試行outcomeを除外しながら決定論的に次windowへ
+送る。遷移先nodeのeviction時は参照edgeを未試行へ戻すため、dangling targetや
+到達不能な固定先を残さない。payload v1は読取り可能だが、次writeは明示的な
+bounded v2となる。
 
 `arc3_agi_agent/p10_compute.py`はP1 kernelを変更せず、HDS commandの配下で
 最新の承認済みMを読み、P10候補とM更新案を生成する。cycle 1のMにより
@@ -147,16 +153,20 @@ P promotionへ一切影響しない。
 
 作業Mは同一targetへ毎cycle追加しない。初回はHDSが`ADD`、後続は観測時の
 active targetを確認して`REPLACE`を許可する。version/historyは維持しつつ、
-current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す。
+current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す。P6の
+標準`PassiveMemory()`は全snapshotを保持する。P10 runtimeだけは物理保持を
+base version 0、現行version、明示的level rollback anchorの最大3 snapshotへ
+制限する。retention変更はactive view、version、digest、provenanceを変更せず、
+HDSが許可したwriteやrollbackの意味論を代行しない。
 
 ## 3. 現在の実測境界
 
 P10実行経路の関連unit、strict mypy、ruff gateは通過している。現行hybrid
 `p10-hybrid-v26`、instruction compiler
 `arc3-p10-instruction-compiler-v26`、semantic planner
-`arc3-semantic-planner-v11`、visual operator
-`arc3-p10-visual-operator-v13`、OFFLINE、seed 0のstable regression実測は
-次のとおりである。
+`arc3-semantic-planner-v11`がvisual operator
+`arc3-p10-visual-operator-v13`までにHDS採用された時点の、OFFLINE、seed 0
+stable regression実測は次のとおりである。
 
 | rendered mechanism | 完了 | actions | M影響cycle | recovery | reset | 終端 |
 |---|---:|---:|---:|---:|---:|---|
@@ -170,6 +180,16 @@ P10実行経路の関連unit、strict mypy、ruff gateは通過している。�
 | multi-actor shape-target push | 4 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 | occluded-target route | 5 / 7 | 192 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
 | directional-force multi-obligation route | 6 / 7 | 200 | 証拠内 | 0 | 0 | `MAX_ACTION_STOP` |
+
+visual operator v14ではFT09、LP85、TR87、SU15、KA59を独立再実行した。
+それぞれ`6/6・75`、`8/8・235`、`6/6・308`、`9/9・175`、
+`6/7・200`、合計35 level / 993 actions、error 0である。available-action
+surfaceをstate identityへ加えたためsource signature、query、trace digestは
+変わるが、それらから導かれるtokenだけを除外した行動射影では、実emit action、
+HDS decision/verification、level transition、M影響、rollback/recoveryが
+5/5で旧HDS採用証拠と一致した。機械可読な比較正本は
+[`P10_V14_STABLE_REGRESSION_AUDIT.json`](../../evidence/p10/development/P10_V14_STABLE_REGRESSION_AUDIT.json)
+である。
 
 最初の四blockはerror 0、GAME_OVER 0、max-action停止なしである。
 v16 selectable-object target pushは、previous stableの0 / 7に対してcandidateが
@@ -195,7 +215,7 @@ post-promotion v21 active runは6 / 7、200 actions、error 0だった。
 `MAX_ACTION_STOP`で残り1 target levelは未閉包である。現時点の
 HDS採用済み境界は`35 / 183`、残りは`148 level`。これは十の
 意味演算子blockの限定証拠で、
-全sample攻略証拠またはfull local-oracle scoreではない。
+全sample攻略証拠ではない。
 
 previous stable PでのSU15 bounded runは、4 / 9 levelを160 actionsまでに
 完了した後、level 5で`MAX_ACTION_STOP`となった。この失敗は
@@ -205,21 +225,55 @@ previous stable PでのSU15 bounded runは、4 / 9 levelを160 actionsまでに
 anchorへ移動して四遷移を再観測する。game/task/level ID、固定座標、replayは
 runtime入力に使わない。
 
-canonical条件`OFFLINE / hybrid ACTIVE / 450 actions per game`で全25 gameを
-逐次実行したが、外部commandの7200秒timeoutへ到達し、最終reportは生成
-されなかった。これはagentのmax-action停止とは別の検証環境失敗であり、
-部分値をfull scoreとして扱わない。次のrunはgame単位checkpointとresumeを
-備えた経路で採取し、25 game / 183 levelが一つの検証済みreportへ集約される
-までP10全体のHDS判断は`HOLD`、P11開始は禁止である。
+visual operator v14以前は、canonical条件
+`OFFLINE / hybrid ACTIVE / 450 actions per game`で全25 gameを逐次実行した
+外部commandが7200秒timeoutへ到達し、最終reportを生成できなかった。この
+履歴失敗を受けてgame単位checkpoint、exact-condition resume、有界保持を
+導入した。v14では25/25 worker report、183 level表現、10,243 actions、
+error/probe fault 0を一つのcontent-bound aggregateへ固定し、resumeは
+25 reused / 0 executedだった。完了は35 / 183、complete gameは4 / 25である。
+添付ZIPの183 level定義へ束縛したローカル標準オラクルのRHAE scoreは
+`18.821945363%`で、score digestは
+`9f214c1825f8ee0f52b1ef6a323b778971ce03e03a3733338d2323a9b0ebb238`
+である。これは現行baselineの実測値であり、能力進歩またはP10完了ではない。
+正本は
+[`P10_ACTIVE_ALL25_MAX450_V14_AUDIT.json`](../../evidence/p10/development/P10_ACTIVE_ALL25_MAX450_V14_AUDIT.json)
+と
+[`arc3_local_score_oracle_latest.json`](../../evidence/p10/arc3_local_score_oracle_latest.json)
+である。
+
+全workerはreportを生成したが、SB26は最大RSS 1,666,868 KB、三worker並列計測
+ではpeak swap 283 MBだった。したがってworker completionは`PASS`でも、
+一GiB閾値のresource headroomは`FAIL_HIGH_WATER`である。trace・provenance・
+rollback・failure visibilityを削らずにこの高水位を解消するまで、資源監査を
+閉じない。P10全体は`HOLD`、P11開始は禁止である。
 
 checkpoint/resume実装後、`OFFLINE / hybrid ACTIVE / max-actions 1`で25 gameを
 分割実行した。25/25 report、error 0、checkpoint 25件、resume時の再実行0を
 確認した。C2/C3 shadow probeは25 transitionを記録し、visible transition
 22、no-visible-change 3、action選択影響0だった。これは計測経路と
 `LOCAL_PROBE`の証拠であり、level completion、local score、CLUSTER_STABLE、
-Runtime P promotionの証拠ではない。正本は
+Runtime P promotionの証拠ではない。visual operator v13時点の正本は
 [`C2_C3_LOCAL_PROBE_AUDIT.json`](../../evidence/p10/development/c2_c3_local_probe_all25_max1/C2_C3_LOCAL_PROBE_AUDIT.json)
 である。
+
+visual operator v14の導入前、BP35を20 action実行した時点でM historyは21
+snapshot、保持payloadは約11.36 MB、current payloadは約862 KB、visual
+explorerは18 node / 3,591 actionに増加した。450-action workerは35分を超え、
+RSS約1.37 GBで未完了だった。v14の同一20-action診断ではhistoryを
+`0 / 19 / 20`の3 snapshot、保持payload約0.97 MB、current payload約495 KB、
+18 node / 1,088 actionへ制限した。BP35 450-actionは6分41秒、最大RSS約430 MB、
+swap 0、runtime error 0でreport生成まで完走した。ただし結果は0 / 9、
+`MAX_ACTION_STOP`であり、これは資源枯渇の是正証拠であって能力・score進歩では
+ない。比較条件、raw hash、保持量、HDS判断は
+[`P10_BOUNDED_RUNTIME_MEMORY_V14_AUDIT.json`](../../evidence/p10/development/P10_BOUNDED_RUNTIME_MEMORY_V14_AUDIT.json)
+へ固定した。
+
+新runtime sourceに束縛したC2/C3 max-actions-one再取得も25/25、error/fault 0、
+visible 22、no-visible 3、action influence 0、exact-condition resume
+25 reused / 0 executedである。正本は
+[`C2_C3_LOCAL_PROBE_AUDIT.json`](../../evidence/p10/development/c2_c3_local_probe_all25_max1_v14/C2_C3_LOCAL_PROBE_AUDIT.json)
+であり、旧directoryはvisual operator v13時点の履歴証拠として保持する。
 
 v15では、既知のstate-changing actionより未観測prototypeを優先する
 candidate policyを五つのbounded structureで比較した。action分布は変化したが
@@ -256,7 +310,8 @@ FT09、action budget 256、seed 0、OFFLINEの同一条件比較:
 である。game IDは実行結果を同定するevidence fieldにだけ存在し、P、C、
 M、runtime selectorへは入らない。
 
-v14以前のstable実行は、各cycleのtrace digest、trace-event root、実emit、
+P10 iteration v14以前のstable実行は、各cycleのtrace digest、
+trace-event root、実emit、
 provenance、level transition、P digest、M version、rollback/reset欄を保持する
 compact evidenceへ固定した。
 

@@ -10,7 +10,10 @@ from arcengine import FrameDataRaw, GameAction, GameState
 from arc3_agi_agent.adapters.in_memory import EmissionResult
 from arc3_agi_agent.ir import CandidateIR
 from arc3_agi_agent.memory import PassiveMemory
-from arc3_agi_agent.p10_runtime import P10OfflineSampleRuntime
+from arc3_agi_agent.p10_runtime import (
+    P10_MEMORY_HISTORY_LIMIT,
+    P10OfflineSampleRuntime,
+)
 from arc3_agi_agent.protocol import AuthorityViolation
 from arc3_agi_agent.recovery import (
     HDSRecoveryController,
@@ -24,12 +27,14 @@ def frame(
     values: list[list[int]],
     *,
     state: GameState = GameState.NOT_FINISHED,
+    levels_completed: int = 0,
+    win_levels: int = 3,
 ) -> FrameDataRaw:
     result = FrameDataRaw(
         game_id="external-test-identity",
         state=state,
-        levels_completed=0,
-        win_levels=3,
+        levels_completed=levels_completed,
+        win_levels=win_levels,
         available_actions=[1, 2, 6],
     )
     result.frame = [np.asarray(values, dtype=np.int8)]
@@ -247,6 +252,10 @@ class P10RecoveryTests(unittest.TestCase):
         self.assertEqual(snapshot.version, 2)
         self.assertEqual(len(snapshot.entries), 1)
         self.assertEqual(snapshot.entries[0].operation, "REPLACE")
+        self.assertEqual(
+            memory.max_history_snapshots,
+            P10_MEMORY_HISTORY_LIMIT,
+        )
 
     def test_runtime_rolls_back_then_memory_changes_next_action(self) -> None:
         initial = frame(
@@ -320,6 +329,54 @@ class P10RecoveryTests(unittest.TestCase):
             third.kernel_result.emission_result.action_id,
             failed_action,
         )
+
+    def test_level_checkpoint_survives_bounded_history_compaction(self) -> None:
+        initial = frame([[0, 0], [0, 8]])
+        progressed = frame(
+            [[0, 0], [0, 9]],
+            levels_completed=1,
+        )
+        safe = frame(
+            [[0, 0], [0, 9]],
+            levels_completed=1,
+        )
+        failed = frame(
+            [[9, 9], [9, 9]],
+            state=GameState.GAME_OVER,
+            levels_completed=1,
+        )
+        reset = frame(
+            [[0, 0], [0, 9]],
+            levels_completed=1,
+        )
+        environment = SequencedOfflineEnvironment(
+            [progressed, safe, failed],
+            reset,
+        )
+        runtime = P10OfflineSampleRuntime(
+            environment=environment,
+            operation_mode=OperationMode.OFFLINE,
+            max_actions=8,
+        )
+
+        runtime.run_cycle(initial, action_count=0)
+        runtime.run_cycle(progressed, action_count=1)
+        failed_cycle = runtime.run_cycle(safe, action_count=2)
+        memory = runtime.components.memory
+        assert memory is not None
+
+        self.assertEqual(runtime.level_checkpoint_version, 1)
+        self.assertIn(1, memory.retained_snapshot_versions)
+        self.assertEqual(failed_cycle.after_frame, failed)
+
+        recovered = runtime.recover(failed_cycle, failed)
+
+        assert recovered.execution.rollback_result is not None
+        self.assertEqual(
+            recovered.execution.rollback_result.rollback_to_version,
+            1,
+        )
+        self.assertIn(1, memory.retained_snapshot_versions)
 
 
 if __name__ == "__main__":

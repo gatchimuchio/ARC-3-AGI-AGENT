@@ -1,0 +1,541 @@
+{
+  "conditions_digest": "1cb23c290b76719cea2047fcef038c0f75ffd7a2429df2c147d585a0bc717966",
+  "content_digest": "be55dac26fe32142577b2a11e53890ed70e0a1fddfce3bd1f754921e9d73ec80",
+  "game_id": "wa30-ee6fef47",
+  "schema_version": "arc3-p10-batch-checkpoint-v1",
+  "single_game_report": {
+    "all_complete": false,
+    "complete_game_count": 0,
+    "completed_count": 1,
+    "completed_levels": 0,
+    "environment_count": 1,
+    "error_count": 0,
+    "errors": [],
+    "instruction_lifecycle": "active",
+    "instruction_variant": "hybrid",
+    "local_scorecard": {
+      "api_key": null,
+      "card_id": "9b98148d-d34d-412d-aefb-9a20d4ca411c",
+      "competition_mode": null,
+      "environments": [
+        {
+          "actions": 1,
+          "completed": false,
+          "id": "wa30-ee6fef47",
+          "level_count": 9,
+          "levels_completed": 0,
+          "resets": 0,
+          "runs": [
+            {
+              "actions": 1,
+              "completed": false,
+              "guid": "c5a8f343-9676-4a49-940e-ac51d9a346eb",
+              "id": null,
+              "level_actions": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "level_baseline_actions": [
+                71,
+                119,
+                183,
+                98,
+                368,
+                68,
+                79,
+                442,
+                415
+              ],
+              "level_scores": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "levels_completed": 0,
+              "message": null,
+              "number_of_environments": null,
+              "number_of_levels": null,
+              "resets": 0,
+              "score": 0.0,
+              "state": "NOT_FINISHED"
+            }
+          ],
+          "score": 0.0
+        }
+      ],
+      "opaque": null,
+      "score": 0.0,
+      "source_url": null,
+      "tags": [
+        "p10",
+        "offline-sample",
+        "p-active"
+      ],
+      "tags_scores": [
+        {
+          "actions": 1,
+          "completed": null,
+          "guid": null,
+          "id": "keyboard",
+          "level_actions": null,
+          "level_baseline_actions": null,
+          "level_scores": null,
+          "levels_completed": 0,
+          "message": null,
+          "number_of_environments": 1,
+          "number_of_levels": 9,
+          "resets": null,
+          "score": 0.0,
+          "state": null
+        }
+      ],
+      "total_actions": 1,
+      "total_environments": 1,
+      "total_environments_completed": 0,
+      "total_levels": 9,
+      "total_levels_completed": 0
+    },
+    "max_actions": 1,
+    "operation_mode": "offline",
+    "phase": "P10",
+    "reports": [
+      {
+        "actions": 1,
+        "complete": false,
+        "context_actions_used": 1,
+        "context_version": 3,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:01a94d5979f2b2a31f4d3276": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 8,
+            "component_added": 0,
+            "component_moved": 2,
+            "component_removed": 0,
+            "effect_classes": [
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1"
+              ],
+              "component_count": 12,
+              "rendered_signature": "visual-state:0ee0a448e28bbb8dd41e195a",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:750:rect:0:twins:2:count:3",
+                "shape:1x1:fill:972:rect:0:twins:0:count:1",
+                "shape:3x1:fill:583:rect:0:twins:0:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "b2c894b2c8a9059f1e7e37cb5054fddef210f299261ad8e6eb5750d56802119b",
+              "structure_class": "structure-class:2e4f0c3a04d669df4df7b6e9"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1"
+              ],
+              "component_count": 12,
+              "rendered_signature": "visual-state:740426dc43eea5e17377cc9d",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:750:rect:0:twins:2:count:3",
+                "shape:1x1:fill:972:rect:0:twins:0:count:1",
+                "shape:3x1:fill:583:rect:0:twins:0:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "103a223ea933d6cc98067e6137cefce034459ae2239c01c7aa188fd7fe7c60c7",
+              "structure_class": "structure-class:2e4f0c3a04d669df4df7b6e9"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "f845e8b1bec051db7bb323bbfb91b8d703ac1a00a3e06e51b2dee5e81754c5d6"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:071660350022156068361562"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:0ee0a448e28bbb8dd41e195a"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "wa30-ee6fef47",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests": [
+          "query:071660350022156068361562"
+        ],
+        "instruction_variant": "hybrid",
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_operations": [
+          "ADD"
+        ],
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_digests": [
+          "f182809b8e61ab1c0a0b35ad6993125f3842f9940122425702b41b022af4cd6f"
+        ],
+        "trace_events": [
+          [
+            {
+              "actor": "HDS",
+              "details": [],
+              "index": 0,
+              "operation": "KERNEL_SELF_CHECK",
+              "stage": "SELF_CHECK"
+            },
+            {
+              "actor": "HDS",
+              "details": [],
+              "index": 1,
+              "operation": "OBSERVATION_ACCEPTED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "SYMBOL_SPACE",
+              "details": [
+                [
+                  "observation",
+                  "frame:bbe050061820a5ed92b3"
+                ]
+              ],
+              "index": 2,
+              "operation": "OBSERVATION_SYMBOLIZED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "CONTEXT_STATE",
+              "details": [
+                [
+                  "context",
+                  "34f8a630e6251d7465fe3a75a62bdb2623228864b99c712ecf03e29d0aa6becf"
+                ]
+              ],
+              "index": 3,
+              "operation": "EPISODE_CONTEXT_UPDATED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "MEMORY",
+              "details": [
+                [
+                  "memory",
+                  "f4c1a48d8de902bee887a9973ad201e342907926353ce0adc17dcf90c3d6b0ab"
+                ]
+              ],
+              "index": 4,
+              "operation": "PASSIVE_MEMORY_READ",
+              "stage": "RETRIEVE"
+            },
+            {
+              "actor": "INSTRUCTION_BODY",
+              "details": [
+                [
+                  "body_digest",
+                  "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+                ],
+                [
+                  "body_format",
+                  "parametric-sigmoid-matrix"
+                ],
+                [
+                  "body_version",
+                  "p10-hybrid-v26"
+                ]
+              ],
+              "index": 5,
+              "operation": "INSTRUCTION_BODY_BOUND",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "command",
+                  "command:c37623ea1f03b5c1bcbd"
+                ]
+              ],
+              "index": 6,
+              "operation": "COMPUTE_COMMAND_ISSUED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "candidates",
+                  "2"
+                ],
+                [
+                  "hypotheses",
+                  "2"
+                ],
+                [
+                  "proposal",
+                  "14855389da553acbf013bd2457c1eb878656ae76b69d68799cbba4065f8c716a"
+                ]
+              ],
+              "index": 7,
+              "operation": "HYPOTHESES_AND_CANDIDATES_PROPOSED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "INSTRUCTION_BODY",
+              "details": [
+                [
+                  "body_digest",
+                  "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+                ],
+                [
+                  "query",
+                  "query:071660350022156068361562"
+                ]
+              ],
+              "index": 8,
+              "operation": "INSTRUCTION_BODY_QUERY_EXECUTED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "FITTING_OR_SUCCESS_CRITERION",
+              "details": [
+                [
+                  "closures",
+                  "7cb7ea11d73466440425abb8c35afc9ecd7d737d4d43b1f6597749501f142b83"
+                ]
+              ],
+              "index": 9,
+              "operation": "CLOSURE_PROPOSALS_CONSTRUCTED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "decision",
+                  "decision:bdc4f89b2b255fe355e6"
+                ],
+                [
+                  "frame",
+                  "0369f5cae7a1e2b0bdb9fdd7e0061806c598fe1f4e388ab281def0f6f9499f11"
+                ],
+                [
+                  "standalone_decision",
+                  "judgment:e1c07ff739c2c0df8fa40371"
+                ],
+                [
+                  "standalone_status",
+                  "ACCEPT"
+                ],
+                [
+                  "status",
+                  "EMIT"
+                ]
+              ],
+              "index": 10,
+              "operation": "CLOSURE_DECISION",
+              "stage": "JUDGE"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "result",
+                  "emission-result:d47d6e8dffb2a606bc27381fd43911bb3ba762d42dadb2002f2c25a826b70a50"
+                ]
+              ],
+              "index": 11,
+              "operation": "AUTHORIZED_EXTERNAL_EMIT_EXECUTED",
+              "stage": "ACT"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "result",
+                  "hds-observation:f21b29c9084b38fb8b7d"
+                ]
+              ],
+              "index": 12,
+              "operation": "EMISSION_RESULT_OBSERVED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 13,
+              "operation": "EMISSION_RESULT_JUDGED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "CONTEXT_STATE",
+              "details": [
+                [
+                  "context",
+                  "84b134e5dc4d716f761dcda55c42900a46f8987b446513e0bd30d9fd4464cd8a"
+                ]
+              ],
+              "index": 14,
+              "operation": "EMISSION_RESULT_RECORDED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "memory_operation",
+                  "ADD"
+                ],
+                [
+                  "memory_version",
+                  "1"
+                ]
+              ],
+              "index": 15,
+              "operation": "AUTHORIZED_MEMORY_WRITE_EXECUTED",
+              "stage": "UPDATE_MEMORY"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 16,
+              "operation": "CYCLE_FINALIZED",
+              "stage": "REFRAME"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 17,
+              "operation": "CYCLE_BOUNDARY",
+              "stage": "REFRAME"
+            }
+          ]
+        ],
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 9
+      }
+    ],
+    "total_levels": 9
+  },
+  "stable_report_digest": "ef1d36af6327f60a53548fe243ebdd7764ccabe49c8703425317599fbc216aef"
+}

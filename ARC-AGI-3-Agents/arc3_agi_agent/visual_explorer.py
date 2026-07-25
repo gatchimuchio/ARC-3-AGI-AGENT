@@ -28,6 +28,10 @@ _MASK_VALUE = 0
 GLOBAL_EFFECT_DIVERSIFICATION_POLICY = (
     "global-visible-effect-diversification-v1"
 )
+VISUAL_EXPLORER_FORMAT = "arc3-visual-explorer-v2"
+_LEGACY_VISUAL_EXPLORER_FORMAT = "arc3-visual-explorer-v1"
+VISUAL_EXPLORER_MAX_NODES = 32
+VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE = 64
 
 
 def _payload_int(value: object, field_name: str) -> int:
@@ -373,6 +377,7 @@ def analyze_scene(
 
     if not grid:
         raise ValueError("rendered grid is required")
+    action_surface = tuple(sorted(set(available_actions)))
     height = len(grid)
     width = len(grid[0])
     mask = status_mask(grid) if fixed_status_mask is None else fixed_status_mask
@@ -386,7 +391,7 @@ def analyze_scene(
         key=lambda item: (item[1], -item[0]),
     )
     candidates: list[VisualAction] = []
-    if 6 in available_actions:
+    if 6 in action_surface:
         click_components = sorted(
             components,
             key=lambda component: (
@@ -444,7 +449,7 @@ def analyze_scene(
                     ),
                 )
             )
-    for action_id in available_actions:
+    for action_id in action_surface:
         if action_id == 6 or not 1 <= action_id <= 7:
             continue
         candidates.append(
@@ -468,13 +473,18 @@ def analyze_scene(
             ),
         )
     )
-    # State identity must cover the complete rendered evidence.  The inferred
-    # status mask is only an object-extraction aid: dropping it from identity
-    # aliases visibly different states and can erase a real phase signal.
+    # State identity covers both the full render and its visible action
+    # surface.  The inferred status mask remains only an extraction aid.
     grid_digest = digest_object(grid)
     structural_digest = digest_object(normalized)
+    state_digest = digest_object(
+        {
+            "grid": grid,
+            "available_actions": action_surface,
+        }
+    )
     return VisualScene(
-        signature="visual-state:" + grid_digest[:24],
+        signature="visual-state:" + state_digest[:24],
         grid_digest=grid_digest,
         structural_digest=structural_digest,
         width=width,
@@ -511,6 +521,7 @@ class DeterministicVisualExplorer:
     """Learn a rendered transition graph and select the next safe frontier."""
 
     nodes: dict[str, _Node] = field(default_factory=dict)
+    node_lru: list[str] = field(default_factory=list)
     initial_signature: str = ""
     status_mask: frozenset[Point] = frozenset()
     previous_signature: str = ""
@@ -592,6 +603,7 @@ class DeterministicVisualExplorer:
 
     def reset_level(self, scene: VisualScene) -> None:
         self.nodes.clear()
+        self.node_lru.clear()
         self.initial_signature = scene.signature
         self.status_mask = scene.status_mask
         self.previous_signature = ""
@@ -601,20 +613,163 @@ class DeterministicVisualExplorer:
         self.level_epoch += 1
         self._ensure_node(scene)
 
+    def _touch_node(self, signature: str) -> None:
+        if signature in self.node_lru:
+            self.node_lru.remove(signature)
+        self.node_lru.append(signature)
+
+    def _protected_signatures(
+        self,
+        extra: tuple[str, ...] = (),
+    ) -> set[str]:
+        return {
+            signature
+            for signature in (
+                self.initial_signature,
+                self.previous_signature,
+                self.semantic_pending_signature,
+                *extra,
+            )
+            if signature
+        }
+
+    def _remove_node(self, signature: str) -> None:
+        self.nodes.pop(signature, None)
+        if signature in self.node_lru:
+            self.node_lru.remove(signature)
+        for node in self.nodes.values():
+            for key, target in tuple(node.targets.items()):
+                if target != signature:
+                    continue
+                node.targets.pop(key, None)
+                if node.outcomes.get(key) == "TRANSITION":
+                    node.outcomes.pop(key, None)
+
+    def _prune_nodes(self, *, protect: tuple[str, ...] = ()) -> None:
+        protected = self._protected_signatures(protect)
+        while len(self.nodes) > VISUAL_EXPLORER_MAX_NODES:
+            victim = next(
+                (
+                    signature
+                    for signature in self.node_lru
+                    if signature not in protected
+                ),
+                None,
+            )
+            if victim is None:
+                raise ValueError("visual explorer protected node set exceeds limit")
+            self._remove_node(victim)
+
+    def _compact_node(
+        self,
+        signature: str,
+        candidates: tuple[VisualAction, ...] = (),
+    ) -> _Node:
+        node = self.nodes[signature]
+        candidate_map = {candidate.key: candidate for candidate in candidates}
+        candidate_order = tuple(candidate.key for candidate in candidates)
+        working_actions = dict(node.actions)
+        for key, action in candidate_map.items():
+            if node.outcomes.get(key) not in {"NO_CHANGE", "HAZARD"}:
+                working_actions[key] = action
+
+        for key, target in tuple(node.targets.items()):
+            if (
+                node.outcomes.get(key) != "TRANSITION"
+                or key not in working_actions
+                or target not in self.nodes
+            ):
+                node.targets.pop(key, None)
+                if node.outcomes.get(key) == "TRANSITION":
+                    node.outcomes.pop(key, None)
+
+        base_order = tuple(
+            dict.fromkeys(
+                (
+                    *node.order,
+                    *candidate_order,
+                    *sorted(working_actions),
+                )
+            )
+        )
+        transition_keys = tuple(
+            key
+            for key in base_order
+            if (
+                key in working_actions
+                and node.outcomes.get(key) == "TRANSITION"
+                and key in node.targets
+            )
+        )
+        untested_current = tuple(
+            key
+            for key in candidate_order
+            if key in working_actions and key not in node.outcomes
+        )
+        untested_retained = tuple(
+            key
+            for key in base_order
+            if key in working_actions and key not in node.outcomes
+        )
+        preferred = list(
+            dict.fromkeys(
+                (*transition_keys, *untested_current, *untested_retained)
+            )
+        )
+        pending_key = (
+            self.previous_action_key
+            if self.previous_signature == signature
+            else ""
+        )
+        selected = preferred[:VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE]
+        if (
+            pending_key
+            and pending_key in working_actions
+            and pending_key not in selected
+        ):
+            if selected:
+                selected[-1] = pending_key
+            else:
+                selected.append(pending_key)
+            selected = list(dict.fromkeys(selected))
+
+        selected_set = set(selected)
+        for key in transition_keys:
+            if key in selected_set:
+                continue
+            node.targets.pop(key, None)
+            node.outcomes.pop(key, None)
+        node.actions = {
+            key: working_actions[key]
+            for key in selected
+        }
+        node.order = tuple(selected)
+        return node
+
+    def _assert_bounds(self) -> None:
+        if len(self.nodes) > VISUAL_EXPLORER_MAX_NODES:
+            raise ValueError("visual explorer node limit exceeded")
+        if len(self.node_lru) != len(set(self.node_lru)) or set(
+            self.node_lru
+        ) != set(self.nodes):
+            raise ValueError("visual explorer node LRU invalid")
+        if any(
+            len(node.actions) > VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE
+            for node in self.nodes.values()
+        ):
+            raise ValueError("visual explorer action limit exceeded")
+
     def _ensure_node(self, scene: VisualScene) -> _Node:
         node = self.nodes.get(scene.signature)
-        action_map = {candidate.key: candidate for candidate in scene.candidates}
-        order = tuple(candidate.key for candidate in scene.candidates)
         if node is None:
-            node = _Node(actions=action_map, order=order)
+            node = _Node(actions={}, order=())
             self.nodes[scene.signature] = node
-            return node
-        for key, action in action_map.items():
-            node.actions.setdefault(key, action)
-        node.order = tuple(
-            dict.fromkeys((*node.order, *order))
+        self._touch_node(scene.signature)
+        self._prune_nodes(protect=(scene.signature,))
+        return self._compact_node(
+            scene.signature,
+            scene.candidates,
         )
-        return node
 
     def observe(
         self,
@@ -663,34 +818,35 @@ class DeterministicVisualExplorer:
         self._ensure_node(scene)
         if not self.previous_signature or not self.previous_action_key:
             return
-        source = self.nodes.get(self.previous_signature)
+        source_signature = self.previous_signature
+        action_key = self.previous_action_key
+        source = self.nodes.get(source_signature)
         if source is None:
             raise ValueError("previous visual state missing")
+        action = source.actions.get(action_key)
+        if action is None:
+            raise ValueError("previous visual action missing")
         if terminal_state == "GAME_OVER":
-            source.outcomes[self.previous_action_key] = "HAZARD"
-            source.targets.pop(self.previous_action_key, None)
+            source.outcomes[action_key] = "HAZARD"
+            source.targets.pop(action_key, None)
             self.failure_count += 1
-            self._record_prototype(
-                source.actions[self.previous_action_key],
-                "HAZARD",
-            )
-        elif scene.signature == self.previous_signature:
-            source.outcomes[self.previous_action_key] = "NO_CHANGE"
-            source.targets.pop(self.previous_action_key, None)
-            self._record_prototype(
-                source.actions[self.previous_action_key],
-                "NO_CHANGE",
-            )
+            self._record_prototype(action, "HAZARD")
+        elif scene.signature == source_signature:
+            source.outcomes[action_key] = "NO_CHANGE"
+            source.targets.pop(action_key, None)
+            self._record_prototype(action, "NO_CHANGE")
         else:
-            source.outcomes[self.previous_action_key] = "TRANSITION"
-            source.targets[self.previous_action_key] = scene.signature
+            source.outcomes[action_key] = "TRANSITION"
+            source.targets[action_key] = scene.signature
             self.transition_count += 1
-            self._record_prototype(
-                source.actions[self.previous_action_key],
-                "TRANSITION",
-            )
+            self._record_prototype(action, "TRANSITION")
         self.previous_signature = ""
         self.previous_action_key = ""
+        self._compact_node(
+            source_signature,
+            scene.candidates if scene.signature == source_signature else (),
+        )
+        self._prune_nodes(protect=(scene.signature,))
 
     def record_hazard(
         self,
@@ -722,6 +878,8 @@ class DeterministicVisualExplorer:
         else:
             node.actions.setdefault(action.key, action)
             node.order = tuple(dict.fromkeys((*node.order, action.key)))
+        self._touch_node(source_signature)
+        self._prune_nodes(protect=(source_signature,))
         if node.outcomes.get(action.key) != "HAZARD":
             self.failure_count += 1
         node.outcomes[action.key] = "HAZARD"
@@ -731,6 +889,7 @@ class DeterministicVisualExplorer:
             self.initial_signature = source_signature
         self.previous_signature = ""
         self.previous_action_key = ""
+        self._compact_node(source_signature)
 
     def known_outcome(
         self,
@@ -759,10 +918,14 @@ class DeterministicVisualExplorer:
         node = self._ensure_node(scene)
         if node.outcomes.get(action.key) in {"NO_CHANGE", "HAZARD"}:
             return False
-        node.actions.setdefault(action.key, action)
+        node.actions[action.key] = action
         node.order = tuple(dict.fromkeys((*node.order, action.key)))
         self.previous_signature = scene.signature
         self.previous_action_key = action.key
+        self._compact_node(
+            scene.signature,
+            (*scene.candidates, action),
+        )
         return True
 
     def _frontier_action(
@@ -885,8 +1048,12 @@ class DeterministicVisualExplorer:
         )
 
     def to_payload(self) -> dict[str, object]:
+        self._assert_bounds()
         payload: dict[str, object] = {
-            "format": "arc3-visual-explorer-v1",
+            "format": VISUAL_EXPLORER_FORMAT,
+            "max_nodes": VISUAL_EXPLORER_MAX_NODES,
+            "max_actions_per_node": VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE,
+            "node_lru": list(self.node_lru),
             "initial_signature": self.initial_signature,
             "status_mask": [list(point) for point in sorted(self.status_mask)],
             "previous_signature": self.previous_signature,
@@ -952,8 +1119,18 @@ class DeterministicVisualExplorer:
         cls,
         value: Mapping[str, object],
     ) -> DeterministicVisualExplorer:
-        if value.get("format") != "arc3-visual-explorer-v1":
+        payload_format = value.get("format")
+        if payload_format not in {
+            VISUAL_EXPLORER_FORMAT,
+            _LEGACY_VISUAL_EXPLORER_FORMAT,
+        }:
             raise ValueError("visual explorer payload format invalid")
+        if payload_format == VISUAL_EXPLORER_FORMAT and (
+            value.get("max_nodes") != VISUAL_EXPLORER_MAX_NODES
+            or value.get("max_actions_per_node")
+            != VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE
+        ):
+            raise ValueError("visual explorer payload bounds invalid")
         mask_value = value.get("status_mask", ())
         if not isinstance(mask_value, Sequence) or isinstance(
             mask_value, (str, bytes, bytearray)
@@ -1148,6 +1325,36 @@ class DeterministicVisualExplorer:
                     for key, target in raw_targets.items()
                 },
             )
+        raw_node_lru = value.get("node_lru", ())
+        if not isinstance(raw_node_lru, Sequence) or isinstance(
+            raw_node_lru,
+            (str, bytes, bytearray),
+        ):
+            raise ValueError("visual explorer node LRU invalid")
+        node_lru = tuple(str(item) for item in raw_node_lru)
+        if len(node_lru) != len(set(node_lru)):
+            raise ValueError("visual explorer node LRU duplicate")
+        if any(signature not in explorer.nodes for signature in node_lru):
+            raise ValueError("visual explorer node LRU target missing")
+        explorer.node_lru = [
+            *node_lru,
+            *(
+                signature
+                for signature in sorted(explorer.nodes)
+                if signature not in node_lru
+            ),
+        ]
+        for signature in tuple(explorer.node_lru):
+            explorer._compact_node(signature)
+        explorer._prune_nodes()
+        if explorer.previous_signature:
+            previous = explorer.nodes.get(explorer.previous_signature)
+            if (
+                previous is None
+                or explorer.previous_action_key not in previous.actions
+            ):
+                raise ValueError("visual explorer pending action invalid")
+        explorer._assert_bounds()
         return explorer
 
     @property
@@ -1163,6 +1370,9 @@ __all__ = [
     "Outcome",
     "Point",
     "PrototypePriorityMode",
+    "VISUAL_EXPLORER_FORMAT",
+    "VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE",
+    "VISUAL_EXPLORER_MAX_NODES",
     "VisualAction",
     "VisualComponent",
     "VisualScene",

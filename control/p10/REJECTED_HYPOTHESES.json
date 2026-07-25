@@ -122,6 +122,26 @@
         "ka59-remaining-level-is-a-composition-test"
       ],
       "reopen_condition": "only if all-task reconciliation proves the unresolved mechanism is unique and no reusable capability cluster can represent it"
+    },
+    {
+      "hypothesis_id": "H32-increase-budget-or-parallelism-with-unbounded-retention",
+      "status": "REJECTED",
+      "reason_codes": [
+        "does-not-remove-superlinear-history-serialization",
+        "multiplies-memory-hazard-across-workers",
+        "thirty-five-minute-bp35-worker-remained-incomplete"
+      ],
+      "reopen_condition": "none; parallelism may be used only after each isolated worker is resource-bounded"
+    },
+    {
+      "hypothesis_id": "H33-drop-history-or-candidate-tail-without-obligations",
+      "status": "REJECTED",
+      "reason_codes": [
+        "can-delete-hds-rollback-material",
+        "can-make-observation-derived-candidates-unreachable",
+        "weakens-p6-history-contract"
+      ],
+      "reopen_condition": "only with explicit rollback-anchor retention, deterministic candidate pagination, and default P6 non-regression"
     }
   ]
 }

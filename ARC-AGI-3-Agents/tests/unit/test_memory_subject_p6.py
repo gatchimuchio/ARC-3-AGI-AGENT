@@ -368,6 +368,96 @@ class StandaloneMemoryOperationTests(unittest.TestCase):
 
         self.assertEqual(memory.view(), before)
 
+    def test_default_history_retains_every_snapshot(self) -> None:
+        memory = PassiveMemory()
+        for index in range(6):
+            apply(
+                memory,
+                mutation(
+                    memory,
+                    "ADD" if index == 0 else "REVISE",
+                    "experience:bounded-history",
+                    payload={"support": index + 1},
+                ),
+            )
+
+        self.assertIsNone(memory.max_history_snapshots)
+        self.assertEqual(memory.retained_snapshot_versions, tuple(range(7)))
+        self.assertTrue(
+            all(memory.snapshot(version).version == version for version in range(7))
+        )
+
+    def test_bounded_history_keeps_base_current_and_rollback_anchor(
+        self,
+    ) -> None:
+        memory = PassiveMemory(max_history_snapshots=3)
+        apply(
+            memory,
+            mutation(
+                memory,
+                "ADD",
+                "experience:bounded-history",
+                payload={"support": 1},
+            ),
+        )
+        apply(
+            memory,
+            mutation(
+                memory,
+                "REVISE",
+                "experience:bounded-history",
+                payload={"support": 2},
+            ),
+        )
+        active_before_retention = memory.view()
+        provenance_before_retention = memory.provenance()
+
+        memory.retain_rollback_snapshot(2)
+
+        self.assertEqual(memory.view(), active_before_retention)
+        self.assertEqual(memory.provenance(), provenance_before_retention)
+        for support in range(3, 9):
+            apply(
+                memory,
+                mutation(
+                    memory,
+                    "REVISE",
+                    "experience:bounded-history",
+                    payload={"support": support},
+                ),
+            )
+
+        self.assertEqual(memory.retained_snapshot_versions, (0, 2, 8))
+        self.assertEqual(memory.snapshot(2).entries[0].payload["support"], 2)
+        with self.assertRaisesRegex(
+            MemoryOperationError,
+            "MEMORY_SNAPSHOT_VERSION_NOT_FOUND:1",
+        ):
+            memory.snapshot(1)
+
+        rollback = apply(
+            memory,
+            mutation(
+                memory,
+                "ROLLBACK",
+                "memory-state",
+                rollback_version=2,
+            ),
+        )
+
+        self.assertEqual(rollback.rollback_to_version, 2)
+        self.assertEqual(memory.view().entries[0].payload["support"], 2)
+        self.assertEqual(memory.retained_snapshot_versions, (0, 2, 9))
+
+    def test_bounded_history_configuration_fails_closed(self) -> None:
+        for invalid in (True, 0, 1, 2):
+            with self.subTest(invalid=invalid):
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "max_history_snapshots must be at least 3",
+                ):
+                    PassiveMemory(max_history_snapshots=invalid)  # type: ignore[arg-type]
+
     def test_query_is_deterministic_and_active_archive_are_separate(self) -> None:
         memory = PassiveMemory(max_entries=1)
         apply(

@@ -260,6 +260,45 @@
         "demonstrate composition regression removal and authority audits before any Runtime P compile"
       ],
       "falsifier": "shadow recording changes an action or the effect and boundary relation does not transfer across independent structures"
+    },
+    {
+      "signature": "unbounded-p10-history-and-visual-frontier-retention",
+      "structural_condition": "every authorized working-memory replacement keeps a full growing explorer payload in every historical snapshot while every rendered state retains its complete candidate surface",
+      "evidence": [
+        "BP35 at twenty actions retained twenty-one snapshots and approximately 11.36 MB of history payload",
+        "the current payload was approximately 862 KB with eighteen nodes and 3,591 action objects",
+        "the original four-hundred-fifty-action worker exceeded thirty-five minutes and approximately 1.37 GB RSS without a checkpoint"
+      ],
+      "status": "RESOLVED_BY_VISUAL_OPERATOR_V14",
+      "required_resolution": [],
+      "resolution_evidence": [
+        "default PassiveMemory retains full history while P10 alone retains base current and level rollback snapshots",
+        "nonzero level rollback survives bounded compaction",
+        "candidate sixty-five is selected through deterministic paging",
+        "node LRU remains at or below thirty-two and active actions remain at or below sixty-four per node",
+        "twenty-action history payload decreased to approximately 0.97 MB",
+        "the same BP35 four-hundred-fifty-action run produced a report in six minutes forty-one seconds at approximately 430 MB maximum RSS with swap zero"
+      ],
+      "falsifier": "a protected rollback snapshot disappears, an observation-derived candidate becomes unreachable, or a maximum-budget isolated worker again exhausts memory"
+    },
+    {
+      "signature": "high-water-runtime-allocation-on-standard-budget",
+      "structural_condition": "a standard-budget worker materializes or retains enough trace and runtime evidence to exceed one GiB resident memory even though bounded history and rendered-frontier storage allow the worker to finish",
+      "evidence": [
+        "all twenty-five max-actions-four-hundred-fifty workers completed report generation with zero runtime errors",
+        "sb26 reached 1,666,868 KB maximum RSS",
+        "the three-worker measurement observed 283 MB peak swap",
+        "the final aggregate retained 76,615,999 raw bytes and 8,906,854 compact bytes"
+      ],
+      "status": "ACTIVE_RESOURCE_HEADROOM_FAILURE",
+      "required_resolution": [
+        "attribute the high-water allocation without using task game or level identity in Runtime P",
+        "persist full trace provenance failure rollback and emission evidence without an unbounded in-memory report",
+        "complete the same standard-budget worker below 1,048,576 KB RSS without swap",
+        "prove compact and persisted evidence remains content-bound to the same behavioral report"
+      ],
+      "resolution_evidence": [],
+      "falsifier": "the same-condition sb26 worker completes below the one-GiB threshold without swap and produces a content-bound behaviorally equivalent report"
     }
   ]
 }

@@ -1,0 +1,4522 @@
+{
+  "compact_run": {
+    "all_complete": false,
+    "complete_game_count": 0,
+    "completed_count": 25,
+    "completed_levels": 0,
+    "environment_count": 25,
+    "error_count": 0,
+    "errors": [],
+    "instruction_variant": "hybrid",
+    "max_actions": 1,
+    "operation_mode": "offline",
+    "phase": "P10",
+    "reports": [
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:e786166afe54a592de39197d": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 27,
+            "component_added": 2,
+            "component_moved": 7,
+            "component_removed": 1,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:1",
+                "action:6:group:1:count:2",
+                "action:6:group:2:count:3",
+                "action:6:group:3:count:6",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 12,
+              "rendered_signature": "visual-state:5bb9aac728733b2d0f3b7dc0",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:4:count:5",
+                "shape:1x1:fill:31:rect:0:twins:0:count:1",
+                "shape:1x1:fill:494:rect:0:twins:0:count:1",
+                "shape:1x1:fill:556:rect:0:twins:0:count:2",
+                "shape:1x21:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x2:fill:952:rect:0:twins:0:count:1",
+                "shape:1x2:fill:976:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "8921f66c0672061fe3a21f1d23261068af3518463e05e262da9d9b52a18ff1e8",
+              "structure_class": "structure-class:272655a91dec3e94d48f6425"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:1",
+                "action:6:group:1:count:2",
+                "action:6:group:2:count:3",
+                "action:6:group:3:count:7",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 13,
+              "rendered_signature": "visual-state:aea8d580d65a8a8cbd17be9d",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:4:count:5",
+                "shape:1x1:fill:31:rect:0:twins:0:count:1",
+                "shape:1x1:fill:494:rect:0:twins:0:count:1",
+                "shape:1x1:fill:556:rect:0:twins:0:count:2",
+                "shape:1x21:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x2:fill:952:rect:0:twins:0:count:1",
+                "shape:1x2:fill:976:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "7ce529469caf5cdf238ca14bb2c0316d9f8eee9d4960fce43c4a3979383a3c62",
+              "structure_class": "structure-class:50e063f84d6bde90d7938836"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "d8c293c40883f6b1906b3895186fea12162fec23d8c4daff72eec4fb3a7d9f88"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:105952706036966649742595"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:5bb9aac728733b2d0f3b7dc0"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "ar25-0c556536",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:105952706036966649742595"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "f57fe535f131e462ee047e9e4dfb852294a69b2f7decb7e9f04ee1ee6e11ed18"
+        ],
+        "trace_events_digest": "1c64f080c4cf6200f590db4237bd629156aa546cd43ac7b212df5275f772c8ac",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 8
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:d4c457cb78f3734e57b3050f": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:a7ecb2515399fc366943748f": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:a7ecb2515399fc366943748f": 1
+          },
+          "last_evidence": {
+            "action_class": "action:3",
+            "action_prototype": "action-prototype:3:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 16,
+            "component_added": 4,
+            "component_moved": 0,
+            "component_removed": 2,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:9",
+                "action:6:group:2:count:2",
+                "action:6:group:3:count:178",
+                "action:6:group:4:count:1",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 190,
+              "rendered_signature": "visual-state:9311a2dfe325113516ded599",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:125:count:126",
+                "shape:1x1:fill:1000:rect:1:twins:51:count:52",
+                "shape:1x1:fill:468:rect:0:twins:0:count:1",
+                "shape:1x1:fill:840:rect:0:twins:6:count:7",
+                "shape:1x1:fill:851:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x2:fill:750:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "aea4ebe14eab621413a050382a7f179fe379a150faad14a85addcd944e3703ef",
+              "structure_class": "structure-class:5c8a034f902e150042ec8d28"
+            },
+            "target": {
+              "action_surface": [
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:9",
+                "action:6:group:2:count:3",
+                "action:6:group:3:count:179",
+                "action:6:group:4:count:1",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 192,
+              "rendered_signature": "visual-state:77b0caedeb724ff052daea2b",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:125:count:126",
+                "shape:1x1:fill:1000:rect:1:twins:51:count:52",
+                "shape:1x1:fill:470:rect:0:twins:0:count:1",
+                "shape:1x1:fill:840:rect:0:twins:6:count:7",
+                "shape:1x1:fill:848:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x2:fill:750:rect:0:twins:0:count:1",
+                "shape:63x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "80b0f8efd8a968e88fb8deeba14bfc9895f67d950163ae9d0b96862013dce531",
+              "structure_class": "structure-class:d2a09db3d95290efac6fcba0"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "a66829f6dec793c41dd8dcc851e91ff091b7f330023b2c08b3d08da6454a0cc8"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:036004024508379002230581"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 3,
+              "visual_action_key": "simple:3",
+              "visual_source_signature": "visual-state:adccbbf1a353dc0a91507885"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "bp35-0a0ad940",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:036004024508379002230581"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "c0621e679b868a6da01915f94c4b4b1f9e593db4f192dd1dad5136e9532d0ff7"
+        ],
+        "trace_events_digest": "d8c1531944cdcc45bfff7c0759152951d1e97e1ca4f706a783abbfda3a663198",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 9
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:8ba85f6aedc1cda17dfb24fb": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 0,
+            "component_added": 2,
+            "component_moved": 0,
+            "component_removed": 2,
+            "effect_classes": [
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:8",
+                "action:6:group:3:count:4"
+              ],
+              "component_count": 15,
+              "rendered_signature": "visual-state:dcf28631278d33ad9e2208f5",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:4",
+                "shape:1x1:fill:210:rect:0:twins:0:count:1",
+                "shape:1x1:fill:238:rect:0:twins:0:count:1",
+                "shape:1x1:fill:609:rect:0:twins:0:count:1",
+                "shape:1x1:fill:640:rect:0:twins:1:count:2",
+                "shape:1x1:fill:891:rect:0:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:5x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:867:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "ad51bb6d8d02333e63f3d29d40da18a9f7c10a2b66ff8d96b65bdac685456756",
+              "structure_class": "structure-class:c250b0f0d2f47fee73efa2d5"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:8",
+                "action:6:group:3:count:4"
+              ],
+              "component_count": 15,
+              "rendered_signature": "visual-state:98be78688508b5d2c50f0747",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:4",
+                "shape:1x1:fill:210:rect:0:twins:0:count:1",
+                "shape:1x1:fill:238:rect:0:twins:0:count:1",
+                "shape:1x1:fill:609:rect:0:twins:0:count:1",
+                "shape:1x1:fill:640:rect:0:twins:1:count:2",
+                "shape:1x1:fill:875:rect:0:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:5x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:867:rect:0:twins:0:count:1",
+                "shape:63x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "bc5806b35847468e3d0a9fc1cd9aef02ab03241ef16422ed523e5b8df135eac1",
+              "structure_class": "structure-class:365265d83b6b916563675152"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "d5a53d82566712b47b223bb3804e2b7702d75e90eeb04e2b8d33af7f37bb89c3"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:068967836338320250542902"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:dcf28631278d33ad9e2208f5"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "cd82-fb555c5d",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:068967836338320250542902"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "a9053cb948d640e279ada6286af0dcb6fdb9ac695a6d91cf604096c1a4915c9a"
+        ],
+        "trace_events_digest": "cb39e8be257da760439bbe08322b459dfd9c385e9b7dafef1de91c6ab86fcd5e",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:48b5663bb206fabb2125b44b": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 35,
+            "component_added": 0,
+            "component_moved": 3,
+            "component_removed": 0,
+            "effect_classes": [
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:6",
+                "action:6:group:1:count:1",
+                "action:6:group:2:count:1",
+                "action:6:group:3:count:1"
+              ],
+              "component_count": 9,
+              "rendered_signature": "visual-state:2acfb2fe003b8559b9f8a44c",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:600:rect:0:twins:0:count:1",
+                "shape:1x1:fill:904:rect:0:twins:0:count:1",
+                "shape:1x2:fill:762:rect:0:twins:0:count:1",
+                "shape:1x5:fill:1000:rect:1:twins:0:count:1",
+                "shape:32x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "079e71b2ff96a6ff63329e320fac9bcec6345733d3d3e4fa26ebfbf32ab4ab7e",
+              "structure_class": "structure-class:753ee3ca5e4fe8e727d8acba"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:6",
+                "action:6:group:1:count:1",
+                "action:6:group:2:count:1",
+                "action:6:group:3:count:1"
+              ],
+              "component_count": 9,
+              "rendered_signature": "visual-state:bab7e6c32cec4484400539be",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:600:rect:0:twins:0:count:1",
+                "shape:1x1:fill:904:rect:0:twins:0:count:1",
+                "shape:1x2:fill:762:rect:0:twins:0:count:1",
+                "shape:1x5:fill:1000:rect:1:twins:0:count:1",
+                "shape:32x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "1151eb2a1aee7ff653297d91f18826ef7d1ad989816281181bd2c3007e5c749c",
+              "structure_class": "structure-class:753ee3ca5e4fe8e727d8acba"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "b1f748fddc046eec1130fbbd51ccf29e2d7f81d1c4b6b41bbace31dd0ad56d47"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:013329968806691911687524"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:2acfb2fe003b8559b9f8a44c"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "cn04-2fe56bfb",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:013329968806691911687524"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "4a61ab451bd052cf23c1bc94378217b31a58c980f2cdb995f01b3769d01ab631"
+        ],
+        "trace_events_digest": "33d4f7165a7d25cf2639165c11f63a20a5056897525700a173bdd4f5b6edd883",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:5a3b4a95a22bb3a2e1840797": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 2,
+            "component_added": 2,
+            "component_moved": 1,
+            "component_removed": 2,
+            "effect_classes": [
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:7",
+                "action:6:group:1:count:16",
+                "action:6:group:2:count:8",
+                "action:6:group:3:count:9"
+              ],
+              "component_count": 40,
+              "rendered_signature": "visual-state:bf629a5743e559e10d3a3ec6",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:6",
+                "shape:1x1:fill:1000:rect:1:twins:10:count:11",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:1000:rect:1:twins:7:count:8",
+                "shape:1x1:fill:845:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:1:count:2",
+                "shape:2x1:fill:381:rect:0:twins:1:count:2",
+                "shape:2x1:fill:723:rect:0:twins:0:count:2",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:7x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "3882264d7cb6462eb124e8cfc3c3920d25a499167b2b0436cf62c1d753e12d4a",
+              "structure_class": "structure-class:48b6c6ad92f458f377745a96"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:7",
+                "action:6:group:1:count:16",
+                "action:6:group:2:count:8",
+                "action:6:group:3:count:9"
+              ],
+              "component_count": 40,
+              "rendered_signature": "visual-state:346c3f9560d393982e724063",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:6",
+                "shape:1x1:fill:1000:rect:1:twins:10:count:11",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:1000:rect:1:twins:7:count:8",
+                "shape:1x1:fill:845:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:1:count:2",
+                "shape:2x1:fill:381:rect:0:twins:1:count:2",
+                "shape:2x1:fill:723:rect:0:twins:0:count:2",
+                "shape:63x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:902:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "228294ea1ec0d408165fc37085a490341ec169705039887ff3cc30c84d58bd55",
+              "structure_class": "structure-class:95d6467c86088e8a31f0fde8"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "a0fbcbd26f8067ab935704ecf8415f9f14e994b3c0c96755baa71ca97562ed10"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:007699799184760813277748"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:bf629a5743e559e10d3a3ec6"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "dc22-fdcac232",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:007699799184760813277748"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "c3d277ec6928ead6f496fa43df58a63723d23ede129b050ff8db821b1096fb06"
+        ],
+        "trace_events_digest": "072bbb52840ed3ae292e8699f00435d32e30ee7908c697ce3122105614f3d689",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:9e47cd528f45c38087d849de": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:983db22667a9e92b817fa4d5": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:983db22667a9e92b817fa4d5": 1
+          },
+          "last_evidence": {
+            "action_class": "action:6",
+            "action_prototype": "operator-prototype:relation-constrained-toggle-gf2-v1",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 9,
+            "component_added": 3,
+            "component_moved": 15,
+            "component_removed": 2,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:6:group:0:count:36",
+                "action:6:group:1:count:27",
+                "action:6:group:3:count:1",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 65,
+              "rendered_signature": "visual-state:a5b1a82f7da66997ba3dba80",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:11:count:12",
+                "shape:1x1:fill:1000:rect:1:twins:19:count:20",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:1000:rect:1:twins:5:count:6",
+                "shape:1x1:fill:1000:rect:1:twins:6:count:7",
+                "shape:1x1:fill:536:rect:0:twins:0:count:1",
+                "shape:1x1:fill:551:rect:0:twins:0:count:1",
+                "shape:1x1:fill:556:rect:0:twins:3:count:4",
+                "shape:1x2:fill:1000:rect:1:twins:2:count:2",
+                "shape:1x2:fill:1000:rect:1:twins:4:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:2:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:4:count:4",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "cec94416c20fb0d527eb34df73ac35eb03ffc873c6b4fbec68bb0af9e6a05ba9",
+              "structure_class": "structure-class:7c240c02f63bd3d29e6fb1a9"
+            },
+            "target": {
+              "action_surface": [
+                "action:6:group:0:count:36",
+                "action:6:group:1:count:27",
+                "action:6:group:2:count:1",
+                "action:6:group:3:count:1",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 66,
+              "rendered_signature": "visual-state:07b02baee6fe0fe5e95c4972",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:12:count:13",
+                "shape:1x1:fill:1000:rect:1:twins:18:count:19",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:1000:rect:1:twins:5:count:6",
+                "shape:1x1:fill:1000:rect:1:twins:6:count:7",
+                "shape:1x1:fill:536:rect:0:twins:0:count:1",
+                "shape:1x1:fill:551:rect:0:twins:0:count:1",
+                "shape:1x1:fill:556:rect:0:twins:3:count:4",
+                "shape:1x2:fill:1000:rect:1:twins:2:count:2",
+                "shape:1x2:fill:1000:rect:1:twins:4:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:2:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:4:count:4",
+                "shape:62x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "58f000f02800c1e1368d5ef2e817630665053fe8f4bb314935205a85b24f11bb",
+              "structure_class": "structure-class:05735090169d5402eb806431"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "a8012ea4d46e9fafcc1da15bda0f4342cb91925d7664d39eac8efcc294716b05"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "arc3-p10-visual-operator-v14",
+            "compiled-identity-free-transition-evidence",
+            "compiled-rendered-relation-evidence",
+            "dynamic-gf2-plan",
+            "operator-prototype:relation-constrained-toggle-gf2-v1",
+            "query:000029250975349952312985",
+            "relation-constrained-toggle-gf2-v1",
+            "rendered-relation-grid"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 6,
+              "visual_action_key": "semantic-toggle:2db535064a44bbcb0572",
+              "visual_source_signature": "visual-state:a5b1a82f7da66997ba3dba80",
+              "x": 38,
+              "y": 38
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "ft09-0d8bbf25",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:000029250975349952312985"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "218116828638f39e5a74a16ea25a139ab60cbf3f5c2da8767aea72c7b0b92948"
+        ],
+        "trace_events_digest": "4e27782e2e46f68b9fac1385c7ac4c11555aaa3c14126012e77f065c0ca28102",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "NO_VISIBLE_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "NO_VISIBLE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:678943c1f0164731de4aa897": {
+              "NO_VISIBLE_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "NO_VISIBLE_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "NO_VISIBLE_COMMIT",
+            "changed_cell_milli": 0,
+            "component_added": 0,
+            "component_moved": 0,
+            "component_removed": 0,
+            "effect_classes": [
+              "NO_VISIBLE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1"
+              ],
+              "component_count": 13,
+              "rendered_signature": "visual-state:713022fbb28aaf3e74ba39d0",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:5",
+                "shape:1x1:fill:388:rect:0:twins:0:count:1",
+                "shape:1x1:fill:463:rect:0:twins:0:count:1",
+                "shape:1x1:fill:662:rect:0:twins:0:count:1",
+                "shape:1x1:fill:697:rect:0:twins:0:count:1",
+                "shape:1x1:fill:86:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:0:count:1",
+                "shape:1x1:fill:960:rect:0:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "06fbfce849f4f4f914452a7fd011597dc0698003fea6564373022bf3092da4fd",
+              "structure_class": "structure-class:69aa29715abb9b62c4810216"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1"
+              ],
+              "component_count": 13,
+              "rendered_signature": "visual-state:713022fbb28aaf3e74ba39d0",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:5",
+                "shape:1x1:fill:388:rect:0:twins:0:count:1",
+                "shape:1x1:fill:463:rect:0:twins:0:count:1",
+                "shape:1x1:fill:662:rect:0:twins:0:count:1",
+                "shape:1x1:fill:697:rect:0:twins:0:count:1",
+                "shape:1x1:fill:86:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:0:count:1",
+                "shape:1x1:fill:960:rect:0:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "06fbfce849f4f4f914452a7fd011597dc0698003fea6564373022bf3092da4fd",
+              "structure_class": "structure-class:69aa29715abb9b62c4810216"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "c1768e232eb037744473987b6935a724e24d1d30b21e039974ece37656eead4c"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:099600217692693832416060"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:713022fbb28aaf3e74ba39d0"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "g50t-5849a774",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:099600217692693832416060"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "aa08dfd946c126a0f8c49e60dad321c6f4997d06352a42bcadb7bb30374bc0b2"
+        ],
+        "trace_events_digest": "3a1d19dcdfd3fdab7f52acf94f0860fbc489e3603e07269fd4a48ab9dcb36ae2",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 7
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:49d5cd0c53bd57678975a4dd": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:75c5936f8ddebee83c949072": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:75c5936f8ddebee83c949072": 1
+          },
+          "last_evidence": {
+            "action_class": "action:4",
+            "action_prototype": "operator-prototype:selectable-object-target-push-v1",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 5,
+            "component_added": 2,
+            "component_moved": 4,
+            "component_removed": 1,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:7",
+                "action:6:group:3:count:3",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 14,
+              "rendered_signature": "visual-state:bc7f2bf81dd727e1c2c5ca34",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:640:rect:0:twins:1:count:2",
+                "shape:1x1:fill:767:rect:0:twins:1:count:1",
+                "shape:1x1:fill:806:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:1:count:2",
+                "shape:1x1:fill:921:rect:0:twins:1:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "8f355addc0e4303bee484cacd4f07c010becc6e73985741b16647aa1f7b31829",
+              "structure_class": "structure-class:f657ace07b8c0e9c55379246"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:8",
+                "action:6:group:3:count:3",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 15,
+              "rendered_signature": "visual-state:8cf257000886ae6727e51b44",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:640:rect:0:twins:1:count:2",
+                "shape:1x1:fill:806:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:1:count:2",
+                "shape:1x1:fill:892:rect:0:twins:0:count:1",
+                "shape:1x1:fill:921:rect:0:twins:0:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "df2806b3b8eb31e452e8dc7cca8fe29a5cb2cb4c16a105990d4ecb1d3a64c924",
+              "structure_class": "structure-class:34aef89c6c353e73888d1dc4"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "bf1451812502f29bc864536eec48a6eb4437f9f049daef7ebabedba8d3f36c88"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "arc3-p10-visual-operator-v14",
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-target-contact-evidence",
+            "operator-prototype:selectable-object-target-push-v1",
+            "query:035067490713467602331810",
+            "rendered-selectable-object-target-relation",
+            "selectable-object-target-push-v1"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 4,
+              "visual_action_key": "semantic-selectable-push:e4d7750c3dcf965b2ad0",
+              "visual_source_signature": "visual-state:bc7f2bf81dd727e1c2c5ca34"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "ka59-38d34dbb",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:035067490713467602331810"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "d38f455276e2bd3cf37b234b49780fafa2a952a7dacf657d72ce44c74a4fcd2b"
+        ],
+        "trace_events_digest": "c7ebb9c8452824a64932e207ecb845244142c29af4d7d893997652c454966f4b",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 7
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "NO_VISIBLE_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "NO_VISIBLE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:b2dc7dfe41ea2a6a8e2e6366": {
+              "NO_VISIBLE_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "NO_VISIBLE_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "NO_VISIBLE_COMMIT",
+            "changed_cell_milli": 0,
+            "component_added": 0,
+            "component_moved": 0,
+            "component_removed": 0,
+            "effect_classes": [
+              "NO_VISIBLE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:5",
+                "action:6:group:1:count:28",
+                "action:6:group:2:count:2",
+                "action:6:group:3:count:24",
+                "action:6:group:4:count:1",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 60,
+              "rendered_signature": "visual-state:28b6e7ad940cfd23ae976408",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:20:count:21",
+                "shape:1x1:fill:1000:rect:1:twins:27:count:28",
+                "shape:1x1:fill:374:rect:0:twins:0:count:1",
+                "shape:1x1:fill:641:rect:0:twins:0:count:1",
+                "shape:1x1:fill:750:rect:0:twins:4:count:5",
+                "shape:1x1:fill:89:rect:0:twins:0:count:1",
+                "shape:1x2:fill:72:rect:0:twins:0:count:1",
+                "shape:23x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:63x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "db993df07fc97d26209faf8f18ad213b1fa12c3f9c67ae67c7e83532a0288811",
+              "structure_class": "structure-class:0bfb8beb35b6255e269688a4"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:5",
+                "action:6:group:1:count:28",
+                "action:6:group:2:count:2",
+                "action:6:group:3:count:24",
+                "action:6:group:4:count:1",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 60,
+              "rendered_signature": "visual-state:28b6e7ad940cfd23ae976408",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:20:count:21",
+                "shape:1x1:fill:1000:rect:1:twins:27:count:28",
+                "shape:1x1:fill:374:rect:0:twins:0:count:1",
+                "shape:1x1:fill:641:rect:0:twins:0:count:1",
+                "shape:1x1:fill:750:rect:0:twins:4:count:5",
+                "shape:1x1:fill:89:rect:0:twins:0:count:1",
+                "shape:1x2:fill:72:rect:0:twins:0:count:1",
+                "shape:23x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:63x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "db993df07fc97d26209faf8f18ad213b1fa12c3f9c67ae67c7e83532a0288811",
+              "structure_class": "structure-class:0bfb8beb35b6255e269688a4"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "bb88073abce7de91bc3ce27cbd6acf1a46a116492e7e91d751e8c050ce74a3e9"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:094341177143570058411106"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:66fd2c41c3b4316a97163df0"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "lf52-271a04aa",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:094341177143570058411106"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "dee4671506d8f50da08b64147d8f03e561e2d7cc374ae468a12718fbeaf31ec7"
+        ],
+        "trace_events_digest": "66ffbe822a00cf8a87515ef19b121d9c69d67a2c1fc57b42eb1b17ddfac99953",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 10
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_MOTION": 1,
+            "REGIONAL_REDRAW": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:d49e252d5b06b62b84df1c9f": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:983db22667a9e92b817fa4d5": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:983db22667a9e92b817fa4d5": 1
+          },
+          "last_evidence": {
+            "action_class": "action:6",
+            "action_prototype": "operator-prototype:object-target-cycle-control-v1",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 72,
+            "component_added": 0,
+            "component_moved": 20,
+            "component_removed": 0,
+            "effect_classes": [
+              "COMPONENT_MOTION",
+              "REGIONAL_REDRAW",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:6:group:0:count:19",
+                "action:6:group:1:count:9",
+                "action:6:group:3:count:12"
+              ],
+              "component_count": 40,
+              "rendered_signature": "visual-state:334f74429b0bfa38b5a1c1b3",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:20",
+                "shape:1x1:fill:820:rect:0:twins:0:count:1",
+                "shape:1x1:fill:833:rect:0:twins:0:count:2",
+                "shape:1x2:fill:1000:rect:1:twins:1:count:1",
+                "shape:1x64:fill:1000:rect:1:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:1:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:7:count:8",
+                "shape:4x1:fill:961:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "07232b8fe39589abab171b9c747eba57cf18220c6e2c6eece07a5ad8382453b4",
+              "structure_class": "structure-class:11bc10d9adfac717a24c970e"
+            },
+            "target": {
+              "action_surface": [
+                "action:6:group:0:count:19",
+                "action:6:group:1:count:9",
+                "action:6:group:3:count:12"
+              ],
+              "component_count": 40,
+              "rendered_signature": "visual-state:21a6cc45b185951708b93382",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:20",
+                "shape:1x1:fill:820:rect:0:twins:0:count:1",
+                "shape:1x1:fill:833:rect:0:twins:0:count:2",
+                "shape:1x2:fill:1000:rect:1:twins:1:count:1",
+                "shape:1x64:fill:1000:rect:1:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:1:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:7:count:8",
+                "shape:4x1:fill:961:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "d4a31d6b2c871baa07ac4c449c2ed0fbc9e25c3b6fe088ca9213be8e730dbce3",
+              "structure_class": "structure-class:11bc10d9adfac717a24c970e"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "6e7c163fbe272ec80052f4f91975f189a4bb544ee0cf3b97db87ddb55266387f"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "arc3-p10-visual-operator-v14",
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-single-step-transition-evidence",
+            "object-target-cycle-control-v1",
+            "operator-prototype:object-target-cycle-control-v1",
+            "query:113070905661812837734717",
+            "rendered-goal-displacement",
+            "rendered-target-marker",
+            "single-step-reobservation-required"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 6,
+              "visual_action_key": "semantic-object-target:da645d43c2f07400f96f",
+              "visual_source_signature": "visual-state:334f74429b0bfa38b5a1c1b3",
+              "x": 4,
+              "y": 32
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "lp85-305b61c3",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:113070905661812837734717"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "a95a28e9ff5f40507ecb8dbe0487cc4db50ddb6e0d06e8840a5ee2b2a1ec640b"
+        ],
+        "trace_events_digest": "a1aa497245e195a099027ac2191d876321d6cd97b62366c640c6b751b2d4f52e",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 8
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:6b35adcd827a38ebaaaef676": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 13,
+            "component_added": 2,
+            "component_moved": 2,
+            "component_removed": 1,
+            "effect_classes": [
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1"
+              ],
+              "component_count": 20,
+              "rendered_signature": "visual-state:9b0099a371aecf4377e5edec",
+              "shape_multiset": [
+                "shape:13x1:fill:538:rect:0:twins:0:count:1",
+                "shape:1x13:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:0:count:3",
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:531:rect:0:twins:0:count:1",
+                "shape:1x1:fill:556:rect:0:twins:0:count:2",
+                "shape:1x1:fill:613:rect:0:twins:0:count:1",
+                "shape:1x1:fill:667:rect:0:twins:0:count:1",
+                "shape:1x1:fill:750:rect:0:twins:0:count:1",
+                "shape:1x1:fill:760:rect:0:twins:0:count:1",
+                "shape:1x1:fill:878:rect:0:twins:0:count:1",
+                "shape:21x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "f74e5d307005ffdcb1cdf09277426eb9aa593ed0a446c63054e35d31480c2232",
+              "structure_class": "structure-class:268ee67713f141bc86295f20"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1"
+              ],
+              "component_count": 21,
+              "rendered_signature": "visual-state:fdb5354217820e4bf963f40e",
+              "shape_multiset": [
+                "shape:13x1:fill:538:rect:0:twins:0:count:1",
+                "shape:1x13:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:0:count:3",
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:531:rect:0:twins:0:count:1",
+                "shape:1x1:fill:556:rect:0:twins:0:count:2",
+                "shape:1x1:fill:613:rect:0:twins:0:count:1",
+                "shape:1x1:fill:667:rect:0:twins:0:count:1",
+                "shape:1x1:fill:750:rect:0:twins:0:count:1",
+                "shape:1x1:fill:760:rect:0:twins:0:count:1",
+                "shape:1x1:fill:878:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:0:count:1",
+                "shape:20x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:2x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "69c7e8acba60be892cc852b920188190af8446c46f9072b0a68128bb53b27026",
+              "structure_class": "structure-class:185d516be6823abf8e55f93d"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "cbc4ac61b330fe84ca58a8e21ddce7fa97748f5ef606dd403a145cb57fe3a3c4"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:019167482938377562029506"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:9b0099a371aecf4377e5edec"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "ls20-9607627b",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:019167482938377562029506"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "9e6b201d810f401974b3c363c528d060841108d24feffdbdbdef659e61c14082"
+        ],
+        "trace_events_digest": "98196cdc26861bad0589167802d3240dfdfe4488000d3d52d25f495b7b96b385",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 7
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:ea9514616441eb2d0cb88060": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 24,
+            "component_added": 0,
+            "component_moved": 2,
+            "component_removed": 0,
+            "effect_classes": [
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:2",
+                "action:6:group:2:count:2",
+                "action:6:group:3:count:2",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 7,
+              "rendered_signature": "visual-state:6692cfe59a28dd804e48530c",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:589:rect:0:twins:0:count:1",
+                "shape:1x1:fill:652:rect:0:twins:0:count:1",
+                "shape:1x1:fill:655:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:1:count:2"
+              ],
+              "structural_signature": "b22aaedae8b84f8bd6cd7bd8f3415e5dd6c237e5fbc75bd928bd19a4bd77ef1a",
+              "structure_class": "structure-class:af86df0a94e34aea9659792c"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:2",
+                "action:6:group:2:count:2",
+                "action:6:group:3:count:2",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 7,
+              "rendered_signature": "visual-state:de31e732d5b093617ba64db4",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:589:rect:0:twins:0:count:1",
+                "shape:1x1:fill:652:rect:0:twins:0:count:1",
+                "shape:1x1:fill:655:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:1:count:2"
+              ],
+              "structural_signature": "fe87444d46b23897acbb00c3c76ab08e7dc45645cb62f7a4b14b6c6045684381",
+              "structure_class": "structure-class:af86df0a94e34aea9659792c"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "b4e696a18f39e48712984673a8c45bae0fffea9848387a5717baf119c198ff1d"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:079872015468016744362805"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:6692cfe59a28dd804e48530c"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "m0r0-492f87ba",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:079872015468016744362805"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "8a1d7432713bb830c70f4e066763f5df41ad350b1a4cb2e40f67aaf4d1759433"
+        ],
+        "trace_events_digest": "52be4de25c50dc9dcd644b60ce24b120b1519db6327d283ceb2834a14b05b5e5",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:38767f905e745bbd60bd7444": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:983db22667a9e92b817fa4d5": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:983db22667a9e92b817fa4d5": 1
+          },
+          "last_evidence": {
+            "action_class": "action:6",
+            "action_prototype": "component-prototype:e8c22a0bba7f0a9b1f62",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 16,
+            "component_added": 3,
+            "component_moved": 9,
+            "component_removed": 11,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:6:group:0:count:1",
+                "action:6:group:1:count:5",
+                "action:6:group:2:count:15",
+                "action:6:group:3:count:16",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 38,
+              "rendered_signature": "visual-state:add9891658f8ef4825d6ffcb",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:10:count:11",
+                "shape:1x1:fill:1000:rect:1:twins:13:count:14",
+                "shape:1x1:fill:440:rect:0:twins:0:count:1",
+                "shape:1x1:fill:480:rect:0:twins:0:count:2",
+                "shape:1x1:fill:591:rect:0:twins:0:count:1",
+                "shape:1x1:fill:744:rect:0:twins:0:count:1",
+                "shape:1x1:fill:800:rect:0:twins:0:count:1",
+                "shape:1x1:fill:823:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x64:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:471:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "130ccc591dbbae50cc3698a6746ac101dcfa7a83f87135ae411ed7e863358d1f",
+              "structure_class": "structure-class:10d1180f2bc152b9cb775d75"
+            },
+            "target": {
+              "action_surface": [
+                "action:6:group:0:count:1",
+                "action:6:group:1:count:5",
+                "action:6:group:2:count:15",
+                "action:6:group:3:count:9"
+              ],
+              "component_count": 30,
+              "rendered_signature": "visual-state:deb3900173a809dd9b5d94ba",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:13:count:14",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:440:rect:0:twins:0:count:1",
+                "shape:1x1:fill:480:rect:0:twins:0:count:2",
+                "shape:1x1:fill:591:rect:0:twins:0:count:1",
+                "shape:1x1:fill:744:rect:0:twins:0:count:1",
+                "shape:1x1:fill:800:rect:0:twins:0:count:1",
+                "shape:1x1:fill:826:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x63:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:471:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "2a256c4cd646fdba3212cf5a9f56421b1ea1c0b19fda526baa90eac494dd241c",
+              "structure_class": "structure-class:47be151b33c558f8684b772c"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "d37d4a97178ecce9dd7728786095c6c2142438c8f5089c7fd03ddc8dc1d2ffba"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "component-group:0",
+            "component-prototype:e8c22a0bba7f0a9b1f62",
+            "query:104108715052015732311683",
+            "rendered-connected-component"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 6,
+              "visual_action_key": "click:595ef1933e69c355cd44",
+              "visual_source_signature": "visual-state:add9891658f8ef4825d6ffcb",
+              "x": 17,
+              "y": 46
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "r11l-495a7899",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:104108715052015732311683"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "537045470936db33732a35885383fef4778d8791e921e4a0789467d3ab44ce25"
+        ],
+        "trace_events_digest": "e7dc73083d79c14902b1b8988321296d31918c0ff5821fe52273e2ff14875b2c",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:723d10f31c6723d8b54ec8db": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 15,
+            "component_added": 2,
+            "component_moved": 5,
+            "component_removed": 1,
+            "effect_classes": [
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1"
+              ],
+              "component_count": 24,
+              "rendered_signature": "visual-state:2c5d0fe17d95ec7b315ec921",
+              "shape_multiset": [
+                "shape:13x1:fill:1000:rect:1:twins:3:count:2",
+                "shape:1x13:fill:1000:rect:1:twins:3:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:8",
+                "shape:1x1:fill:85:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:7:count:8",
+                "shape:1x1:fill:958:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "a0f84edb158766ca88cb16fd0a0c12897dd94c3543bf1ff00a75b4e4f8e5fd6d",
+              "structure_class": "structure-class:0427bf1826e3a0b03920dd1e"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1"
+              ],
+              "component_count": 25,
+              "rendered_signature": "visual-state:d0736579111dda9fae1ce62b",
+              "shape_multiset": [
+                "shape:13x1:fill:1000:rect:1:twins:3:count:2",
+                "shape:1x13:fill:1000:rect:1:twins:3:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:8",
+                "shape:1x1:fill:85:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:7:count:8",
+                "shape:1x1:fill:958:rect:0:twins:0:count:1",
+                "shape:63x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "8298f871d126b2747d54c74466626b66c8426ea60260a66ff8f05b8add1ef32b",
+              "structure_class": "structure-class:3cdf5c3caa1d5ef77e9e575c"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "1d69268fc2e60ed7b1d4dd1b056640efc4036c34baa29a8656d9e579a97b3189"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:059856463638617098885530"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:2c5d0fe17d95ec7b315ec921"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "re86-8af5384d",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:059856463638617098885530"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "9e8d5135ee761500c0b02b1d2b897cf764c89afc3ca9c0ebf2d97d5a77c73178"
+        ],
+        "trace_events_digest": "c26a4e93c84d479eb98fe75cc4347086b680244e36e48e8aa4b5168feffba1f6",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 8
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:c0ede4bff914a1ed0a920942": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:983db22667a9e92b817fa4d5": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:983db22667a9e92b817fa4d5": 1
+          },
+          "last_evidence": {
+            "action_class": "action:6",
+            "action_prototype": "component-prototype:a48c00ad460e834fb914",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 0,
+            "component_added": 2,
+            "component_moved": 0,
+            "component_removed": 1,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:6:group:0:count:6",
+                "action:6:group:1:count:6",
+                "action:6:group:2:count:10",
+                "action:6:group:3:count:8"
+              ],
+              "component_count": 30,
+              "rendered_signature": "visual-state:7791217345610adfb10a887d",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:9:count:10",
+                "shape:1x1:fill:396:rect:0:twins:1:count:2",
+                "shape:1x1:fill:720:rect:0:twins:3:count:4",
+                "shape:1x1:fill:778:rect:0:twins:1:count:4",
+                "shape:1x1:fill:933:rect:0:twins:0:count:1",
+                "shape:1x1:fill:941:rect:0:twins:0:count:1",
+                "shape:1x2:fill:958:rect:0:twins:0:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:1:count:1",
+                "shape:1x5:fill:1000:rect:1:twins:1:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:1:count:1",
+                "shape:5x1:fill:1000:rect:1:twins:1:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "de18665f5baffce5d8405222c253f59f0c2a66e7f6a1a0ef06f8ff09eb72219d",
+              "structure_class": "structure-class:25ed7da24a0416645a0d1f60"
+            },
+            "target": {
+              "action_surface": [
+                "action:6:group:0:count:6",
+                "action:6:group:1:count:6",
+                "action:6:group:2:count:10",
+                "action:6:group:3:count:9"
+              ],
+              "component_count": 31,
+              "rendered_signature": "visual-state:8f29e1878bb4bce56f5d5cb6",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:9:count:10",
+                "shape:1x1:fill:396:rect:0:twins:1:count:2",
+                "shape:1x1:fill:720:rect:0:twins:3:count:4",
+                "shape:1x1:fill:778:rect:0:twins:1:count:4",
+                "shape:1x1:fill:933:rect:0:twins:0:count:1",
+                "shape:1x1:fill:941:rect:0:twins:0:count:1",
+                "shape:1x2:fill:958:rect:0:twins:0:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:1:count:1",
+                "shape:1x5:fill:1000:rect:1:twins:1:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:1:count:1",
+                "shape:5x1:fill:1000:rect:1:twins:1:count:1",
+                "shape:63x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "a74c67d0bf4d3c5e5880225cabbe28eae8ea9ae7132b03d790869b3cdc380011",
+              "structure_class": "structure-class:a367e62920160372f14f91aa"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "096f231b280c4730dcf04a0207b98412e6592a9ca768c1b30cc65701e57dad66"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "component-group:0",
+            "component-prototype:a48c00ad460e834fb914",
+            "query:004996061434462241163528",
+            "rendered-connected-component"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 6,
+              "visual_action_key": "click:f1ccca942320e0d374f5",
+              "visual_source_signature": "visual-state:7791217345610adfb10a887d",
+              "x": 30,
+              "y": 10
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "s5i5-18d95033",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:004996061434462241163528"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "7232207c3309ff49728576b2f59873c08e06a9ffd021dcdc84bf9f2bc6e90ee7"
+        ],
+        "trace_events_digest": "dcc8d3294ffbc09ec0963a9d555bebc0bbbcd6b2f77255425675c19ef748f8b4",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 8
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:55f598e6b9dcea58c66b8990": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:57ee4e82d04bd76ba975eeec": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:57ee4e82d04bd76ba975eeec": 1
+          },
+          "last_evidence": {
+            "action_class": "action:5",
+            "action_prototype": "action-prototype:5:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 0,
+            "component_added": 2,
+            "component_moved": 0,
+            "component_removed": 1,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:9",
+                "action:6:group:1:count:14",
+                "action:6:group:3:count:3",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 26,
+              "rendered_signature": "visual-state:d4e80c0dfa5e0c242cb35c2e",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:4",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:8",
+                "shape:1x1:fill:556:rect:0:twins:0:count:4",
+                "shape:1x1:fill:556:rect:0:twins:3:count:4",
+                "shape:1x1:fill:843:rect:0:twins:0:count:1",
+                "shape:2x1:fill:257:rect:0:twins:0:count:1",
+                "shape:3x1:fill:379:rect:0:twins:0:count:1",
+                "shape:3x1:fill:923:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:900:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "8cc17052ea2038b2a490b9e2c224d25ed1ec8a167f5f28bc0b0f2abe01ac3f01",
+              "structure_class": "structure-class:d2df7aa982398630b9ebe379"
+            },
+            "target": {
+              "action_surface": [
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:9",
+                "action:6:group:1:count:14",
+                "action:6:group:3:count:4",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 27,
+              "rendered_signature": "visual-state:f2763a0c75c5fb4d4f2c693b",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:5",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:8",
+                "shape:1x1:fill:556:rect:0:twins:0:count:4",
+                "shape:1x1:fill:556:rect:0:twins:3:count:4",
+                "shape:1x1:fill:843:rect:0:twins:0:count:1",
+                "shape:2x1:fill:257:rect:0:twins:0:count:1",
+                "shape:3x1:fill:379:rect:0:twins:0:count:1",
+                "shape:3x1:fill:923:rect:0:twins:0:count:1",
+                "shape:63x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:900:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "8eb87615630af243e009ddea5a1a41e1e1537e82c4f70c9e5bb84398fd44224c",
+              "structure_class": "structure-class:58c5323dcd409bc9f60bff01"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "b2f0ef4577184cc32e88aeb13ba2cffc9c2c68aeaaf92ca8d83360928b243fc5"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:069258879317320787207358"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 5,
+              "visual_action_key": "simple:5",
+              "visual_source_signature": "visual-state:d4e80c0dfa5e0c242cb35c2e"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "sb26-7fbdac44",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:069258879317320787207358"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "1ef1acbef8227ea7ff2f05dc2f6438023befd95fd95a0e7eb2587b95940b9975"
+        ],
+        "trace_events_digest": "fbb92f8c484b056fe9b61242c05b7b526f2c2c446bf9c2acd6f3686d2627a4c7",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 8
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "NO_VISIBLE_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "NO_VISIBLE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:187406327af4bed7ddd4760b": {
+              "NO_VISIBLE_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "NO_VISIBLE_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "NO_VISIBLE_COMMIT",
+            "changed_cell_milli": 0,
+            "component_added": 0,
+            "component_moved": 0,
+            "component_removed": 0,
+            "effect_classes": [
+              "NO_VISIBLE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:8",
+                "action:6:group:1:count:13",
+                "action:6:group:3:count:1",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 23,
+              "rendered_signature": "visual-state:9130b41fb1eb7a4d94cd85ed",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:8",
+                "shape:1x1:fill:1000:rect:1:twins:4:count:5",
+                "shape:1x1:fill:360:rect:0:twins:0:count:1",
+                "shape:1x1:fill:467:rect:0:twins:0:count:1",
+                "shape:1x1:fill:720:rect:0:twins:0:count:1",
+                "shape:1x1:fill:750:rect:0:twins:0:count:1",
+                "shape:1x1:fill:871:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x32:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:864:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "7c9985300a76af3872a284180443032791967e78577ccb59a7dc52f999519497",
+              "structure_class": "structure-class:5be5a644f98e2855f4f2440c"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:8",
+                "action:6:group:1:count:13",
+                "action:6:group:3:count:1",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 23,
+              "rendered_signature": "visual-state:9130b41fb1eb7a4d94cd85ed",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:8",
+                "shape:1x1:fill:1000:rect:1:twins:4:count:5",
+                "shape:1x1:fill:360:rect:0:twins:0:count:1",
+                "shape:1x1:fill:467:rect:0:twins:0:count:1",
+                "shape:1x1:fill:720:rect:0:twins:0:count:1",
+                "shape:1x1:fill:750:rect:0:twins:0:count:1",
+                "shape:1x1:fill:871:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x32:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:864:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "7c9985300a76af3872a284180443032791967e78577ccb59a7dc52f999519497",
+              "structure_class": "structure-class:5be5a644f98e2855f4f2440c"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "d88d0d9c9fd82864c3fb414feb115396d4c61f00c217c9e1713916e200bee07a"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:104070936832988913626254"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:9130b41fb1eb7a4d94cd85ed"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "sc25-635fd71a",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:104070936832988913626254"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "d9a345838cb9847db78a9ab3151983630eef24e8f6fa1403569c7c5c46779b1e"
+        ],
+        "trace_events_digest": "9d386d8506165f7b36867fe38f240fad2ba023f2d252581c1742b18b911dafb1",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:0ec1e1973e99d5d66dc491ef": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 23,
+            "component_added": 2,
+            "component_moved": 13,
+            "component_removed": 2,
+            "effect_classes": [
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:10",
+                "action:6:group:1:count:13",
+                "action:6:group:3:count:22",
+                "action:6:group:4:count:1",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 46,
+              "rendered_signature": "visual-state:8dbf9bce754a4ab7f7f5f2ea",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:1:count:8",
+                "shape:1x1:fill:1000:rect:1:twins:11:count:12",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:1000:rect:1:twins:7:count:8",
+                "shape:1x1:fill:500:rect:0:twins:1:count:2",
+                "shape:1x1:fill:667:rect:0:twins:1:count:2",
+                "shape:1x1:fill:711:rect:0:twins:0:count:1",
+                "shape:1x1:fill:750:rect:0:twins:1:count:2",
+                "shape:1x1:fill:933:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:2:count:3",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:850:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+              "structure_class": "structure-class:b4967e3541da7eb38b9339f1"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:10",
+                "action:6:group:1:count:13",
+                "action:6:group:3:count:22",
+                "action:6:group:4:count:1",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 46,
+              "rendered_signature": "visual-state:999802449a3d7a859f17c238",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:1:count:10",
+                "shape:1x1:fill:1000:rect:1:twins:11:count:12",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:1000:rect:1:twins:7:count:8",
+                "shape:1x1:fill:500:rect:0:twins:1:count:2",
+                "shape:1x1:fill:667:rect:0:twins:1:count:2",
+                "shape:1x1:fill:712:rect:0:twins:0:count:1",
+                "shape:1x1:fill:750:rect:0:twins:1:count:2",
+                "shape:1x1:fill:933:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:1:count:2",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:850:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "c40f87083cbf5fe8087e68da6c32b0fb19f2c4e78e023d18a2244d201ef979f9",
+              "structure_class": "structure-class:660bdeafb3f5ca6a99f95ceb"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "2e8af953743019df1705b46c366de5df31cfe357c13096745334d25bbdf445bc"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:016187333881316817652132"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:8dbf9bce754a4ab7f7f5f2ea"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "sk48-d8078629",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:016187333881316817652132"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "b7c5df11853cb027e785f9fd2ef18457751976668e103bdc0e75faca75f00252"
+        ],
+        "trace_events_digest": "83e0da5196d077bce627813eabddef0b6a4d81e4a1fb712891437badb0bf0239",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 8
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:6317e2006a486e15775952e1": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 40,
+            "component_added": 0,
+            "component_moved": 1,
+            "component_removed": 0,
+            "effect_classes": [
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:4",
+                "action:6:group:1:count:1",
+                "action:6:group:3:count:2",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 8,
+              "rendered_signature": "visual-state:9427d40347dcc15fc0f894ac",
+              "shape_multiset": [
+                "shape:16x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:833:rect:0:twins:1:count:2",
+                "shape:1x1:fill:929:rect:0:twins:0:count:1",
+                "shape:5x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "cea932141de5dcdcbaee3958636e2eb2306d8f00b2a7cc2538ba8d804f963734",
+              "structure_class": "structure-class:e0363c9a70429b41cb36c5b5"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:4",
+                "action:6:group:1:count:1",
+                "action:6:group:3:count:2",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 8,
+              "rendered_signature": "visual-state:b4c0a8d04cf7f562644c555b",
+              "shape_multiset": [
+                "shape:16x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:833:rect:0:twins:1:count:2",
+                "shape:1x1:fill:929:rect:0:twins:0:count:1",
+                "shape:5x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "2b3525677a7b0cc69a1d4f36d2020d2573c9132025eb285ce1d6722dded06fba",
+              "structure_class": "structure-class:e0363c9a70429b41cb36c5b5"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "40775e478604c9daac2edffac368021eb23a3cb33d828e1a8fb6778d968f61d7"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:086006635759138703316200"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:9427d40347dcc15fc0f894ac"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "sp80-589a99af",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:086006635759138703316200"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "00c11bc45e1046a65f04452564ad625291b1575a7e1208bbd08b2b3a9deb08cd"
+        ],
+        "trace_events_digest": "685e883c038515f08a46f43861bda0eba83d277501aca17883e8279c703aa53f",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:8c92c049a09cf9a7b0d71cc8": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:983db22667a9e92b817fa4d5": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:983db22667a9e92b817fa4d5": 1
+          },
+          "last_evidence": {
+            "action_class": "action:6",
+            "action_prototype": "operator-prototype:rendered-goal-aware-fruit-merge-v14",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 6,
+            "component_added": 2,
+            "component_moved": 2,
+            "component_removed": 3,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:2",
+                "action:6:group:3:count:22",
+                "action:6:group:4:count:1",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 28,
+              "rendered_signature": "visual-state:0ac082e70c6bdf049e7f64a2",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:19:count:20",
+                "shape:1x1:fill:556:rect:0:twins:0:count:1",
+                "shape:1x1:fill:728:rect:0:twins:0:count:1",
+                "shape:1x1:fill:970:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:986:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "e04c9e9cd2bdb08059068a08a978791e5772f5fa4433ac90d22453b8ce96c82e",
+              "structure_class": "structure-class:67e6d2b52e5383bee78fdd09"
+            },
+            "target": {
+              "action_surface": [
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:1",
+                "action:6:group:3:count:22",
+                "action:6:group:4:count:1",
+                "action:7:group:3:count:1"
+              ],
+              "component_count": 27,
+              "rendered_signature": "visual-state:a9fb24bc41b3d7666d8c47b3",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:19:count:20",
+                "shape:1x1:fill:728:rect:0:twins:0:count:1",
+                "shape:1x1:fill:954:rect:0:twins:0:count:1",
+                "shape:62x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:986:rect:0:twins:0:count:1"
+              ],
+              "structural_signature": "923270f2f4a1681d775013764a855d23895381897eb533b966a71767804bbf9e",
+              "structure_class": "structure-class:42ddc803f976e12028b9c3a5"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "1683eb2a954cc9e4550f3dac07f4a4d7259c09d55d62aacb4a2b5b3e762d3ca4"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "arc3-p10-visual-operator-v14",
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-merge-and-placement-evidence",
+            "operator-prototype:rendered-goal-aware-fruit-merge-v14",
+            "query:082752774072133711893667",
+            "rendered-goal-aware-fruit-merge-v14",
+            "rendered-goal-aware-fruit-merge-v14:rendered-required-fruit-route",
+            "rendered-required-fruit-route"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 6,
+              "visual_action_key": "semantic-fruit-merge:dddcec60ad031a7799f5",
+              "visual_source_signature": "visual-state:0ac082e70c6bdf049e7f64a2",
+              "x": 8,
+              "y": 54
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "su15-1944f8ab",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:082752774072133711893667"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "24648cc910921cc4c37e1b22e83b69592d854eacc7ec5f01630c4c56ec2a29b9"
+        ],
+        "trace_events_digest": "4167f8106849490ce098f571b87078544f824292ef8871914ea517cfa83cf85e",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 9
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:0f90d3e82c9489eca75bdf1b": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:983db22667a9e92b817fa4d5": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:983db22667a9e92b817fa4d5": 1
+          },
+          "last_evidence": {
+            "action_class": "action:6",
+            "action_prototype": "component-prototype:cd6fb60c2cb8a3ac2fc6",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 0,
+            "component_added": 2,
+            "component_moved": 0,
+            "component_removed": 1,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:71",
+                "action:6:group:3:count:14"
+              ],
+              "component_count": 88,
+              "rendered_signature": "visual-state:d7fdfa7acb280217458c3c91",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:1000:rect:1:twins:31:count:32",
+                "shape:1x1:fill:1000:rect:1:twins:32:count:33",
+                "shape:1x1:fill:216:rect:0:twins:0:count:1",
+                "shape:1x1:fill:533:rect:0:twins:0:count:1",
+                "shape:1x1:fill:594:rect:0:twins:0:count:1",
+                "shape:1x1:fill:852:rect:0:twins:0:count:1",
+                "shape:1x1:fill:875:rect:0:twins:0:count:2",
+                "shape:1x1:fill:938:rect:0:twins:1:count:2",
+                "shape:1x3:fill:1000:rect:1:twins:3:count:2",
+                "shape:1x3:fill:1000:rect:1:twins:5:count:3",
+                "shape:2x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:3:count:2",
+                "shape:3x1:fill:1000:rect:1:twins:5:count:3",
+                "shape:61x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "4a349be70fce6261807bf20a47aa87532b273698641f7a9621e9041ce4cd61af",
+              "structure_class": "structure-class:45aa27931dc4e5ecf1ef0b38"
+            },
+            "target": {
+              "action_surface": [
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:71",
+                "action:6:group:3:count:15"
+              ],
+              "component_count": 89,
+              "rendered_signature": "visual-state:24146249d36b280878923bcf",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:1000:rect:1:twins:31:count:32",
+                "shape:1x1:fill:1000:rect:1:twins:32:count:33",
+                "shape:1x1:fill:216:rect:0:twins:0:count:1",
+                "shape:1x1:fill:533:rect:0:twins:0:count:1",
+                "shape:1x1:fill:594:rect:0:twins:0:count:1",
+                "shape:1x1:fill:852:rect:0:twins:0:count:1",
+                "shape:1x1:fill:875:rect:0:twins:0:count:2",
+                "shape:1x1:fill:938:rect:0:twins:1:count:2",
+                "shape:1x3:fill:1000:rect:1:twins:3:count:2",
+                "shape:1x3:fill:1000:rect:1:twins:5:count:3",
+                "shape:2x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:3:count:2",
+                "shape:3x1:fill:1000:rect:1:twins:5:count:3",
+                "shape:60x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "01035ce466e5ecd942a8a25644d51a12bdc1f16a1210f8ef8adda852a3ea70fc",
+              "structure_class": "structure-class:422b3642a670a7b87357976e"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "9e79dc25e060113377649e9e3ac9ed2b17c41499977c5b146b1b6e3508240990"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "component-group:0",
+            "component-prototype:cd6fb60c2cb8a3ac2fc6",
+            "query:101726629363413858048772",
+            "rendered-connected-component"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 6,
+              "visual_action_key": "click:9748ad60331bb1d5f907",
+              "visual_source_signature": "visual-state:d7fdfa7acb280217458c3c91",
+              "x": 31,
+              "y": 14
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "tn36-ef4dde99",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:101726629363413858048772"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "b8cc8965a4a52ad0b5bdcac3bb4be01d65156e44230fba66b9dd33a84862e871"
+        ],
+        "trace_events_digest": "8d466e2168bfc1aa0f89e56821ed447a2c858896fc6d475ec16800d4c615480d",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 7
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:a589ad1d63c87e01330cc352": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:927fea9a90b69ac09e33fef0": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:927fea9a90b69ac09e33fef0": 1
+          },
+          "last_evidence": {
+            "action_class": "action:2",
+            "action_prototype": "operator-prototype:rendered-symbolic-rewrite-v1",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 4,
+            "component_added": 4,
+            "component_moved": 15,
+            "component_removed": 3,
+            "effect_classes": [
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1"
+              ],
+              "component_count": 64,
+              "rendered_signature": "visual-state:59eaaf0818cc0bebf69506d3",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:8:count:9",
+                "shape:1x1:fill:440:rect:0:twins:3:count:4",
+                "shape:1x1:fill:490:rect:0:twins:0:count:1",
+                "shape:1x1:fill:520:rect:0:twins:1:count:2",
+                "shape:1x1:fill:531:rect:0:twins:0:count:1",
+                "shape:1x1:fill:556:rect:0:twins:1:count:2",
+                "shape:1x1:fill:560:rect:0:twins:1:count:2",
+                "shape:1x1:fill:571:rect:0:twins:0:count:1",
+                "shape:1x1:fill:600:rect:0:twins:8:count:9",
+                "shape:1x1:fill:633:rect:0:twins:0:count:1",
+                "shape:1x1:fill:640:rect:0:twins:1:count:2",
+                "shape:1x1:fill:653:rect:0:twins:1:count:2",
+                "shape:1x1:fill:680:rect:0:twins:0:count:1",
+                "shape:1x1:fill:694:rect:0:twins:2:count:3",
+                "shape:1x1:fill:722:rect:0:twins:0:count:1",
+                "shape:1x1:fill:735:rect:0:twins:0:count:1",
+                "shape:1x1:fill:760:rect:0:twins:1:count:2",
+                "shape:1x1:fill:776:rect:0:twins:1:count:2",
+                "shape:1x1:fill:778:rect:0:twins:1:count:2",
+                "shape:2x1:fill:700:rect:0:twins:1:count:2",
+                "shape:2x1:fill:728:rect:0:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:5:count:6",
+                "shape:5x1:fill:576:rect:0:twins:0:count:1",
+                "shape:5x1:fill:735:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "bbcba46391a88249ec370c38e1cd4f6aa319c8d28ff313cf66625ccac8e5ec3c",
+              "structure_class": "structure-class:d599ba123bc1330945b8d539"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1"
+              ],
+              "component_count": 65,
+              "rendered_signature": "visual-state:208532b90cf73c0dcbff34f4",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:9:count:10",
+                "shape:1x1:fill:440:rect:0:twins:3:count:4",
+                "shape:1x1:fill:490:rect:0:twins:0:count:1",
+                "shape:1x1:fill:520:rect:0:twins:1:count:2",
+                "shape:1x1:fill:531:rect:0:twins:0:count:1",
+                "shape:1x1:fill:556:rect:0:twins:2:count:3",
+                "shape:1x1:fill:560:rect:0:twins:0:count:1",
+                "shape:1x1:fill:571:rect:0:twins:0:count:1",
+                "shape:1x1:fill:600:rect:0:twins:8:count:9",
+                "shape:1x1:fill:633:rect:0:twins:0:count:1",
+                "shape:1x1:fill:640:rect:0:twins:1:count:2",
+                "shape:1x1:fill:653:rect:0:twins:1:count:2",
+                "shape:1x1:fill:680:rect:0:twins:0:count:1",
+                "shape:1x1:fill:694:rect:0:twins:2:count:3",
+                "shape:1x1:fill:722:rect:0:twins:0:count:1",
+                "shape:1x1:fill:735:rect:0:twins:0:count:1",
+                "shape:1x1:fill:760:rect:0:twins:2:count:3",
+                "shape:1x1:fill:776:rect:0:twins:1:count:2",
+                "shape:1x1:fill:778:rect:0:twins:1:count:2",
+                "shape:2x1:fill:700:rect:0:twins:1:count:2",
+                "shape:2x1:fill:728:rect:0:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:5:count:6",
+                "shape:5x1:fill:547:rect:0:twins:0:count:1",
+                "shape:5x1:fill:735:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "f7f7244cb9e97f758febf244385312d210bc861a6b0ca28bfc5b5123edf008c1",
+              "structure_class": "structure-class:ba0713a4296e9e81dabc95d6"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "245bf41bfcb40b3af25ea474a7b519210f0506b241ea7d5921f85481a1e77368"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "arc3-p10-visual-operator-v14",
+            "compiled-identity-free-symbol-relation-evidence",
+            "compiled-visible-rewrite-and-cycle-evidence",
+            "operator-prototype:rendered-symbolic-rewrite-v1",
+            "query:104814781593860221250135",
+            "rendered-output-symbol-mismatch",
+            "rendered-symbol-tile-rules",
+            "rendered-symbolic-rewrite-v1",
+            "rendered-symbolic-rewrite-v1:output-cycle",
+            "single-step-reobservation-required"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 2,
+              "visual_action_key": "semantic-rewrite-action:2",
+              "visual_source_signature": "visual-state:59eaaf0818cc0bebf69506d3"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "tr87-cd924810",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:104814781593860221250135"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "5e23eabe7a5d00a5bd72fc1dcb829d82353fa7810a5d0c7a44653c0560f09850"
+        ],
+        "trace_events_digest": "972942ec9c9c8c1a0ae5979d76a340848e671cf138d3250296e4a8a5bf7d52a0",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 6
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "LOCAL_PIXEL_DELTA": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:82f6565eded27736aa29cab9": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 0,
+            "component_added": 0,
+            "component_moved": 0,
+            "component_removed": 0,
+            "effect_classes": [
+              "LOCAL_PIXEL_DELTA",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1"
+              ],
+              "component_count": 68,
+              "rendered_signature": "visual-state:78958cbe4eda6a040f320337",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:3",
+                "shape:1x1:fill:1000:rect:1:twins:28:count:29",
+                "shape:1x1:fill:1000:rect:1:twins:31:count:32",
+                "shape:1x1:fill:850:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "d2c92681e88014e14f1e05616b3dca2ce49e1b2d36ed9591248ea091971d6bc3",
+              "structure_class": "structure-class:4084db357763686f3f33c085"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1"
+              ],
+              "component_count": 68,
+              "rendered_signature": "visual-state:6724e0d0011b28db4db6dddb",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:3",
+                "shape:1x1:fill:1000:rect:1:twins:28:count:29",
+                "shape:1x1:fill:1000:rect:1:twins:31:count:32",
+                "shape:1x1:fill:850:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:0:count:1",
+                "shape:3x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "d2c92681e88014e14f1e05616b3dca2ce49e1b2d36ed9591248ea091971d6bc3",
+              "structure_class": "structure-class:4084db357763686f3f33c085"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "ee2f30d580f9c658f2f943b742b0f4e950c08cd22f712989b76c010e9b5208d5"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:011868904037065032840106"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:78958cbe4eda6a040f320337"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "tu93-0768757b",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:011868904037065032840106"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "dd7245670f21d3af5b404d94184a4f9dc908ad143eccdf848c2ebc03f46be8eb"
+        ],
+        "trace_events_digest": "5ec241fa83df2c867456178487ce6f5ffe9bd8c979818051f67701c541f39682",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 9
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "REGIONAL_REDRAW": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:b79c9be6a02446933a301366": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:983db22667a9e92b817fa4d5": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:983db22667a9e92b817fa4d5": 1
+          },
+          "last_evidence": {
+            "action_class": "action:6",
+            "action_prototype": "component-prototype:fa4392c680ec0bb572b2",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 65,
+            "component_added": 4,
+            "component_moved": 2,
+            "component_removed": 3,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "REGIONAL_REDRAW",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:6:group:0:count:4",
+                "action:6:group:1:count:4",
+                "action:6:group:3:count:1",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 10,
+              "rendered_signature": "visual-state:bfe7dc449a72f35421d13042",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:667:rect:0:twins:0:count:1",
+                "shape:1x1:fill:788:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x2:fill:958:rect:0:twins:0:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:0:count:1",
+                "shape:2x1:fill:509:rect:0:twins:0:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "d568b6a87f7f953e8424972bc6b07aa8f2c96ba24fdc37dc4805aff990584c49",
+              "structure_class": "structure-class:9a11d90ddee5dc0ae03424e7"
+            },
+            "target": {
+              "action_surface": [
+                "action:6:group:0:count:4",
+                "action:6:group:1:count:4",
+                "action:6:group:3:count:2",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 11,
+              "rendered_signature": "visual-state:15bcbf4f088d1216f150d622",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:667:rect:0:twins:0:count:1",
+                "shape:1x1:fill:737:rect:0:twins:0:count:1",
+                "shape:1x2:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x4:fill:938:rect:0:twins:0:count:1",
+                "shape:2x1:fill:569:rect:0:twins:0:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:6x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "d4a38ab9c423088f368d12af4e27899670c4dbbf0770217ca3159aaccfddb3d1",
+              "structure_class": "structure-class:708b5d55650fa2f474cbd91c"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "814b32dbe286d642493e76b1adbf532b266ce35eb20cb7ba09e8eb931c1c77f5"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "component-group:0",
+            "component-prototype:fa4392c680ec0bb572b2",
+            "query:100816565000760688907423",
+            "rendered-connected-component"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 6,
+              "visual_action_key": "click:b00e619e1c19ac4177a6",
+              "visual_source_signature": "visual-state:bfe7dc449a72f35421d13042",
+              "x": 61,
+              "y": 25
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "vc33-5430563c",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:100816565000760688907423"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "851ebfaff599dc9f627cf7e729195312cd6c794ead5d15ab9fba9ded192dd692"
+        ],
+        "trace_events_digest": "b471f2ffefda94d7aa9b00e7637973cc273dd4f6d43757922a097d8b67ce5e3c",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 7
+      },
+      {
+        "actions": 1,
+        "complete": false,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:01a94d5979f2b2a31f4d3276": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 8,
+            "component_added": 0,
+            "component_moved": 2,
+            "component_removed": 0,
+            "effect_classes": [
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1"
+              ],
+              "component_count": 12,
+              "rendered_signature": "visual-state:0ee0a448e28bbb8dd41e195a",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:750:rect:0:twins:2:count:3",
+                "shape:1x1:fill:972:rect:0:twins:0:count:1",
+                "shape:3x1:fill:583:rect:0:twins:0:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "b2c894b2c8a9059f1e7e37cb5054fddef210f299261ad8e6eb5750d56802119b",
+              "structure_class": "structure-class:2e4f0c3a04d669df4df7b6e9"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1"
+              ],
+              "component_count": 12,
+              "rendered_signature": "visual-state:740426dc43eea5e17377cc9d",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:750:rect:0:twins:2:count:3",
+                "shape:1x1:fill:972:rect:0:twins:0:count:1",
+                "shape:3x1:fill:583:rect:0:twins:0:count:1",
+                "shape:4x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:5x1:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "103a223ea933d6cc98067e6137cefce034459ae2239c01c7aa188fd7fe7c60c7",
+              "structure_class": "structure-class:2e4f0c3a04d669df4df7b6e9"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "f845e8b1bec051db7bb323bbfb91b8d703ac1a00a3e06e51b2dee5e81754c5d6"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v14",
+            "available-action-surface",
+            "query:071660350022156068361562"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:0ee0a448e28bbb8dd41e195a"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "wa30-ee6fef47",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_query_digests": [
+          "query:071660350022156068361562"
+        ],
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_cycle_count": 1,
+        "trace_digests": [
+          "f182809b8e61ab1c0a0b35ad6993125f3842f9940122425702b41b022af4cd6f"
+        ],
+        "trace_events_digest": "78e2a75d80e8cc8999971c9f159276fab3029da742f03ee3f78c8d866d98d8fa",
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v14",
+        "win_levels": 9
+      }
+    ],
+    "total_levels": 183
+  },
+  "conditions": {
+    "environment_count": 25,
+    "game_ids": [
+      "ar25-0c556536",
+      "bp35-0a0ad940",
+      "cd82-fb555c5d",
+      "cn04-2fe56bfb",
+      "dc22-fdcac232",
+      "ft09-0d8bbf25",
+      "g50t-5849a774",
+      "ka59-38d34dbb",
+      "lf52-271a04aa",
+      "lp85-305b61c3",
+      "ls20-9607627b",
+      "m0r0-492f87ba",
+      "r11l-495a7899",
+      "re86-8af5384d",
+      "s5i5-18d95033",
+      "sb26-7fbdac44",
+      "sc25-635fd71a",
+      "sk48-d8078629",
+      "sp80-589a99af",
+      "su15-1944f8ab",
+      "tn36-ef4dde99",
+      "tr87-cd924810",
+      "tu93-0768757b",
+      "vc33-5430563c",
+      "wa30-ee6fef47"
+    ],
+    "instruction_variant": "hybrid",
+    "max_actions": 1,
+    "total_levels": 183
+  },
+  "content_digest": "dd9584831beb3e1b4e1b17d012f9fb08086495e3e6d8a866f8890250f71fea05",
+  "operation_mode": "offline",
+  "schema_version": "arc3-p10-compact-run-evidence-v1",
+  "summary": {
+    "action_count": 25,
+    "all_complete": false,
+    "compact_run_digest": "6ca58340bd641cd6d5959163d068ea26264c297d35ff482e859e0ddef7ef1698",
+    "complete_game_count": 0,
+    "completed_levels": 0,
+    "error_count": 0,
+    "max_action_exhausted_count": 25
+  }
+}

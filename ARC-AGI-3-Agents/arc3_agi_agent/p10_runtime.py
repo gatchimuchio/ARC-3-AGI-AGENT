@@ -25,6 +25,7 @@ from .instruction_body import (
     load_p10_symbolic_instruction_body,
 )
 from .kernel import Layer0Components
+from .memory import PassiveMemory
 from .p10_compute import (
     P10VisualCandidateSurface,
     P10VisualCompute,
@@ -48,6 +49,7 @@ from .search_reset import (
 from .visual_explorer import analyze_scene, last_rendered_grid
 
 _RESET_ACTION_ID = 0
+P10_MEMORY_HISTORY_LIMIT = 3
 P10InstructionVariant = Literal["P-A", "P-B", "hybrid"]
 P10InstructionLifecycle = Literal["active", "candidate"]
 
@@ -127,6 +129,9 @@ def _p10_components(
         instruction_body=instruction_body,
         emission_interface=emission,
         compute=P10VisualCompute(),
+        memory=PassiveMemory(
+            max_history_snapshots=P10_MEMORY_HISTORY_LIMIT,
+        ),
     )
 
 
@@ -241,6 +246,7 @@ class P10OfflineSampleRuntime:
         if memory is None:
             raise RuntimeError("P10_MEMORY_SUBJECT_REQUIRED")
         if current.levels_completed > self._observed_progress_count:
+            memory.retain_rollback_snapshot(memory.version)
             self.level_checkpoint_version = memory.version
             self._observed_progress_count = current.levels_completed
         cycle = self.runtime.run_cycle(
@@ -480,6 +486,7 @@ class P10OfflineSampleRuntime:
 
 
 __all__ = [
+    "P10_MEMORY_HISTORY_LIMIT",
     "P10InstructionLifecycle",
     "P10InstructionVariant",
     "P10OfflineSampleRuntime",

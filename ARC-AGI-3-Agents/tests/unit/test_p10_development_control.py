@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 from typing import Any
 
+from arc3_agi_agent.schema import digest_object
+
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 CONTROL_DIR = REPOSITORY_ROOT / "control" / "p10"
 BUNDLE_DIR = (
@@ -183,6 +185,131 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertFalse(probe["allow_action_influence"])
         self.assertFalse(probe["allow_p_compile"])
         self.assertFalse(probe["allow_p_promote"])
+
+    def test_v22b_bounded_runtime_memory_is_infrastructure_only(
+        self,
+    ) -> None:
+        hypotheses = _json(CONTROL_DIR / "ACTIVE_HYPOTHESES.json")[
+            "hypotheses"
+        ]
+        by_id = {item["hypothesis_id"]: item for item in hypotheses}
+        decisions = _json(CONTROL_DIR / "DECISION_LOG.json")["decisions"]
+        experiments = _json(CONTROL_DIR / "EXPERIMENT_REGISTRY.json")[
+            "experiments"
+        ]
+        resource_audit = _json(
+            REPOSITORY_ROOT
+            / "evidence"
+            / "p10"
+            / "development"
+            / "P10_BOUNDED_RUNTIME_MEMORY_V14_AUDIT.json"
+        )
+
+        self.assertEqual(
+            by_id[
+                "H32-increase-budget-or-parallelism-with-unbounded-retention"
+            ]["status"],
+            "REJECTED",
+        )
+        self.assertEqual(
+            by_id[
+                "H33-drop-history-or-candidate-tail-without-obligations"
+            ]["status"],
+            "REJECTED",
+        )
+        self.assertEqual(
+            by_id[
+                "H34-bounded-history-window-and-frontier-composition"
+            ]["status"],
+            "RUNTIME_INFRASTRUCTURE_ACCEPTED",
+        )
+        decision = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-bounded-runtime-memory-v22b"
+        )
+        self.assertEqual(decision["status"], "PASS")
+        self.assertFalse(decision["allow_action_influence"])
+        self.assertFalse(decision["allow_p_compile"])
+        self.assertFalse(decision["allow_p_promote"])
+        experiment = next(
+            item
+            for item in experiments
+            if item["experiment_id"]
+            == "p10-bounded-runtime-memory-v22b"
+        )
+        self.assertEqual(
+            experiment["status"],
+            "PASS_WORKER_COMPLETION_FAIL_RESOURCE_HEADROOM_P_UNCHANGED",
+        )
+        audit_body = dict(resource_audit)
+        claimed_digest = audit_body.pop("content_digest")
+        self.assertEqual(
+            claimed_digest,
+            "arc3_p10_bounded_runtime_memory_audit:"
+            + digest_object(audit_body),
+        )
+        self.assertTrue(
+            resource_audit["semantic_obligations"][
+                "default_p6_history_remains_unbounded"
+            ]
+        )
+        self.assertFalse(
+            resource_audit["semantic_obligations"]["active_p_changed"]
+        )
+        self.assertEqual(
+            resource_audit["hds_judgment"]["score_progress_status"],
+            "NOT_CLAIMED",
+        )
+        self.assertEqual(
+            resource_audit["hds_judgment"][
+                "full_all_25_standard_budget_status"
+            ],
+            "PASS_REPORT_GENERATION",
+        )
+        self.assertEqual(
+            resource_audit["hds_judgment"]["resource_headroom_status"],
+            "FAIL_HIGH_WATER",
+        )
+
+    def test_v14_standard_budget_and_stable_regression_audits_are_bound(
+        self,
+    ) -> None:
+        evidence_dir = REPOSITORY_ROOT / "evidence" / "p10" / "development"
+        standard = _json(
+            evidence_dir / "P10_ACTIVE_ALL25_MAX450_V14_AUDIT.json"
+        )
+        regression = _json(
+            evidence_dir / "P10_V14_STABLE_REGRESSION_AUDIT.json"
+        )
+        for prefix, audit in (
+            ("arc3_p10_standard_budget_all25_audit:", standard),
+            ("arc3_p10_stable_regression_audit:", regression),
+        ):
+            body = dict(audit)
+            claimed = body.pop("content_digest")
+            self.assertEqual(claimed, prefix + digest_object(body))
+
+        self.assertTrue(all(standard["checks"].values()))
+        self.assertEqual(standard["summary"]["completed_levels"], 35)
+        self.assertEqual(
+            standard["summary"]["official_rhae_score_percent"],
+            18.821945363,
+        )
+        self.assertEqual(
+            standard["hds_judgment"]["resource_headroom_status"],
+            "FAIL_HIGH_WATER",
+        )
+        self.assertTrue(all(regression["checks"].values()))
+        self.assertEqual(
+            regression["summary"]["behavior_projection_match_count"],
+            5,
+        )
+        self.assertEqual(
+            regression["hds_judgment"]["stable_regression_status"],
+            "PASS",
+        )
 
     def test_v14_hypotheses_and_hds_promotion_are_recorded(self) -> None:
         hypotheses = _json(CONTROL_DIR / "ACTIVE_HYPOTHESES.json")[

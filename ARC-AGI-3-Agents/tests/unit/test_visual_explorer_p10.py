@@ -3,6 +3,9 @@ from __future__ import annotations
 import unittest
 
 from arc3_agi_agent.visual_explorer import (
+    VISUAL_EXPLORER_FORMAT,
+    VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE,
+    VISUAL_EXPLORER_MAX_NODES,
     DeterministicVisualExplorer,
     VisualAction,
     VisualScene,
@@ -126,6 +129,19 @@ class VisualExplorerP10Tests(unittest.TestCase):
         self.assertNotEqual(first.signature, second.signature)
         self.assertNotEqual(first.grid_digest, second.grid_digest)
         self.assertEqual(first.structural_digest, second.structural_digest)
+
+    def test_state_identity_includes_the_rendered_action_surface(self) -> None:
+        grid = (
+            (0, 0, 0),
+            (0, 8, 0),
+            (0, 0, 0),
+        )
+
+        first = analyze_scene(grid, (1,))
+        second = analyze_scene(grid, (1, 2))
+
+        self.assertEqual(first.grid_digest, second.grid_digest)
+        self.assertNotEqual(first.signature, second.signature)
 
     def test_no_change_memory_changes_next_action(self) -> None:
         grid = (
@@ -432,6 +448,171 @@ class VisualExplorerP10Tests(unittest.TestCase):
         )
         self.assertEqual(restored.digest, explorer.digest)
         self.assertEqual(restored.decide(scene), explorer.decide(scene))
+
+    def test_legacy_payload_reads_and_rewrites_as_bounded_v2(self) -> None:
+        scene = manual_scene(
+            "visual-state:legacy-payload",
+            (VisualAction(key="advance", action_id=1, group=0),),
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        legacy = explorer.to_payload()
+        legacy["format"] = "arc3-visual-explorer-v1"
+        legacy.pop("max_nodes")
+        legacy.pop("max_actions_per_node")
+        legacy.pop("node_lru")
+
+        restored = DeterministicVisualExplorer.from_payload(legacy)
+
+        self.assertEqual(
+            restored.to_payload()["format"],
+            VISUAL_EXPLORER_FORMAT,
+        )
+        self.assertEqual(restored.decide(scene), explorer.decide(scene))
+
+    def test_bounded_payload_rejects_bound_drift(self) -> None:
+        scene = manual_scene("visual-state:bound-drift", ())
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        payload = explorer.to_payload()
+        payload["max_nodes"] = VISUAL_EXPLORER_MAX_NODES + 1
+
+        with self.assertRaisesRegex(
+            ValueError,
+            "visual explorer payload bounds invalid",
+        ):
+            DeterministicVisualExplorer.from_payload(payload)
+
+    def test_action_window_pages_beyond_the_first_bounded_slice(self) -> None:
+        candidates = tuple(
+            VisualAction(
+                key=f"candidate-{index:03d}",
+                action_id=1,
+                group=0,
+            )
+            for index in range(VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE + 7)
+        )
+        scene = manual_scene("visual-state:paged-actions", candidates)
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        selected: list[str] = []
+
+        for _ in range(VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE + 1):
+            decision = explorer.decide(scene)
+            self.assertIsNotNone(decision.action)
+            assert decision.action is not None
+            selected.append(decision.action.key)
+            explorer.observe(
+                scene,
+                terminal_state="NOT_FINISHED",
+                level_progress=False,
+            )
+            self.assertLessEqual(
+                len(explorer.nodes[scene.signature].actions),
+                VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE,
+            )
+
+        self.assertEqual(len(set(selected)), len(selected))
+        self.assertIn(
+            candidates[VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE].key,
+            selected,
+        )
+
+    def test_node_lru_is_bounded_and_round_trip_is_deterministic(self) -> None:
+        scenes = tuple(
+            manual_scene(
+                f"visual-state:bounded-{index:03d}",
+                (
+                    VisualAction(
+                        key=f"advance-{index:03d}",
+                        action_id=1,
+                        group=0,
+                    ),
+                ),
+            )
+            for index in range(VISUAL_EXPLORER_MAX_NODES + 9)
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scenes[0],
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        for index, scene in enumerate(scenes[:-1]):
+            decision = explorer.decide(scene)
+            self.assertIsNotNone(decision.action)
+            explorer.observe(
+                scenes[index + 1],
+                terminal_state="NOT_FINISHED",
+                level_progress=False,
+            )
+
+        self.assertLessEqual(len(explorer.nodes), VISUAL_EXPLORER_MAX_NODES)
+        self.assertIn(explorer.initial_signature, explorer.nodes)
+        self.assertTrue(
+            all(
+                len(node.actions) <= VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE
+                for node in explorer.nodes.values()
+            )
+        )
+        restored = DeterministicVisualExplorer.from_payload(
+            explorer.to_payload()
+        )
+        self.assertEqual(restored.digest, explorer.digest)
+        self.assertLessEqual(len(restored.nodes), VISUAL_EXPLORER_MAX_NODES)
+
+    def test_evicted_transition_target_reopens_source_action(self) -> None:
+        scenes = tuple(
+            manual_scene(
+                f"visual-state:eviction-{index:03d}",
+                (
+                    VisualAction(
+                        key=f"advance-{index:03d}",
+                        action_id=1,
+                        group=0,
+                    ),
+                ),
+            )
+            for index in range(VISUAL_EXPLORER_MAX_NODES + 4)
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scenes[0],
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        first_action = scenes[0].candidates[0]
+
+        for index, scene in enumerate(scenes[:-1]):
+            decision = explorer.decide(scene)
+            self.assertIsNotNone(decision.action)
+            explorer.observe(
+                scenes[index + 1],
+                terminal_state="NOT_FINISHED",
+                level_progress=False,
+            )
+
+        self.assertNotIn(scenes[1].signature, explorer.nodes)
+        self.assertIsNone(
+            explorer.known_outcome(
+                scenes[0].signature,
+                first_action.key,
+            )
+        )
+        reopened = explorer.decide(scenes[0])
+        self.assertEqual(reopened.action, first_action)
 
     def test_semantic_action_uses_compact_pending_state(self) -> None:
         first_scene = manual_scene("visual-state:first", ())

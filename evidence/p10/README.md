@@ -40,6 +40,69 @@ modelとC3 Commit boundary predictorのshadow-only `LOCAL_PROBE`証拠である�
 max-actions 1のためcompleted levelは0である。このdirectoryを35/183更新、
 full local score、CLUSTER_STABLE、COMPOSABLE、全sample攻略の証拠に使わない。
 
+### visual operator v14での再取得
+
+`development/c2_c3_local_probe_all25_max1_v14/`は、有界memory/
+visual-explorer実装後にruntime source inventoryを取り直した現行正本である。
+旧directoryはv13時点の履歴証拠として保持し、現行checkpointへ再利用しない。
+
+- condition digest:
+  `1cb23c290b76719cea2047fcef038c0f75ffd7a2429df2c147d585a0bc717966`
+- runtime source inventory:
+  `8ade5406134a6ff077934da8dc44eae979d9046dcfb1ca1e33a329c5acbd259b`
+- report: 25 / 25
+- error / probe fault: 0 / 0
+- visible / no-visible: 22 / 3
+- action-selection influence: 0
+- resume: 25 reused / 0 executed
+- HDS: `LOCAL_PROBE PASS`、`CLUSTER_STABLE HOLD`、`COMPOSABLE HOLD`
+
+| artifact | SHA-256 |
+|---|---|
+| raw report | `95b9cfcfe34a4b4d849dd92e6cfca36743afdab7487dd102841aa5c3472daf0c` |
+| compact evidence | `5bcbf15c2c034937ef8e3d03d5ee2b3a665391b148039d6a673305f00210700f` |
+| LOCAL_PROBE audit | `37013f4cc797094c3a6eed71f0f972a4ce54bfd28c14c125a253d1a084046058` |
+| resume index | `f616efb9761ee5000dc982af4422a32bdab1ee3a4b0697f577739be9ceab8094` |
+
+max-actions-oneはscore証拠ではない。v14のBP35 450-action診断は6分41秒、
+最大RSS約430 MB、swap 0でreportを生成し、旧workerの35分超・約1.37 GB
+未完了を解消した。一方で0 / 9、`MAX_ACTION_STOP`、error 0であり、
+能力境界は改善していない。機械可読な比較正本は
+[`development/P10_BOUNDED_RUNTIME_MEMORY_V14_AUDIT.json`](development/P10_BOUNDED_RUNTIME_MEMORY_V14_AUDIT.json)
+で、content digestは
+`arc3_p10_bounded_runtime_memory_audit:f1d6ceba849ecb96c1372369940b69e6254a4afff9131217fd93c70bdb8e3179`
+である。
+
+### visual operator v14標準budgetと回帰
+
+`OFFLINE / hybrid ACTIVE / max-actions 450`のcheckpoint aggregateは、
+25 / 25 report、35 / 183 completed level、4 complete game、10,243 actions、
+error/probe fault 0である。exact-condition resumeは25 reused / 0 executed。
+添付ZIPの25 game / 183 levelへ束縛したローカル標準オラクルは
+RHAE `18.821945363%`を返した。
+
+| artifact | content digest |
+|---|---|
+| all-25 standard-budget audit | `arc3_p10_standard_budget_all25_audit:ae1c4f59ff59e7b79a66ee817b45b6581a230c30829fc1802220ba2e143a9c2b` |
+| stable-regression audit | `arc3_p10_stable_regression_audit:e6953818cff613854f347ae3907cbe4ae1b34d653ee269a241e5b8267055a55a` |
+| local score result SHA-256 | `40f7983afcdb2bb76884238375abd322b020ba0da085eeeec560fd17205340c9` |
+
+standard-budget監査は
+[`development/P10_ACTIVE_ALL25_MAX450_V14_AUDIT.json`](development/P10_ACTIVE_ALL25_MAX450_V14_AUDIT.json)、
+回帰監査は
+[`development/P10_V14_STABLE_REGRESSION_AUDIT.json`](development/P10_V14_STABLE_REGRESSION_AUDIT.json)、
+score正本は
+[`arc3_local_score_oracle_latest.json`](arc3_local_score_oracle_latest.json)
+である。FT09、LP85、TR87、SU15、KA59の行動射影は旧HDS採用証拠と5/5一致した。
+標準budgetの76 MB raw reportと82 MB checkpoint payloadはローカル保持し、
+tracked compact/index/auditへSHA-256で束縛する。stable regressionのraw
+reportも`scratch/`へ保持し、tracked compact証拠を比較正本とする。
+
+SB26 workerは最大RSS 1,666,868 KB、並列計測peak swapは283 MBだったため、
+worker completionは`PASS`でもresource headroomは`FAIL_HIGH_WATER`である。
+このbaselineはscore・能力改善を示さず、Runtime Pは未変更、P10/P11は
+`HOLD / GATED`のままである。
+
 ## `ft09_variant_comparison.json`
 
 - schema: `arc3-p10-execution-evidence-v1`
