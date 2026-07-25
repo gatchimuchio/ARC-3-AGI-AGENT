@@ -1,15 +1,15 @@
 {
   "schema_version": "arc3-p10-development-frame-v1",
-  "frame_id": "p10-v23-transition-predictive-audit-v2",
+  "frame_id": "p10-v24-c2-c10-candidate-intervention",
   "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
   "authority": {
     "document": "docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md",
     "source_sha256": "113ac0516e500679792e57fbc73f21ad078d19929ae39c11ff185ac1f9a353ef",
-    "repository_sha256_lf": "26228d78b30399bec5a9963eaa7a64481c1ca09c9de9d067346bc151c4b1e7cb"
+    "repository_sha256_lf": "2d71353f5976cce73c216e1c1b8df2f7083c971b100a6a31d8d8f820924b922a"
   },
   "self_check": {
     "branch": "main",
-    "base_head": "d1891a14d547578a77614a0e919e23cc35106c4f",
+    "base_head": "8463806eca82b1e446e33cfeda2db9f02b34c112",
     "dirty_state_preserved": true,
     "operation_mode": "OFFLINE_ONLY",
     "active_p": {
@@ -34,7 +34,7 @@
       "source": "evidence/p10/development/c2_c3_transition_all25_max450_v2/arc3_local_score_oracle.json",
       "score_digest": "9f214c1825f8ee0f52b1ef6a323b778971ce03e03a3733338d2323a9b0ebb238"
     },
-    "latest_failure_signature": "non-circular-commit-boundary-predictor-gap",
+    "latest_failure_signature": "same-rendered-action-hidden-context-ambiguity",
     "stop_conditions": [
       "runtime identity routing detected",
       "HDS authority bypass detected",
@@ -60,6 +60,8 @@
       "identity-free C2/C3 visible-effect and commit-boundary shadow probe",
       "non-circular held-out and prequential C3 prediction audit",
       "one-step visible causal-context C10 contrast audit",
+      "C2 C10 removal and held-out composition audit",
+      "HDS-isolated candidate P-A double intervention and byte restoration",
       "HDS closed-cycle heavy input-binding release with retained tombstones",
       "P10-only bounded physical history with an explicit level rollback anchor",
       "action-surface state identity, deterministic candidate paging, and bounded observation LRU",
@@ -75,6 +77,7 @@
       "positive and negative rendered transition contrasts",
       "held-out pre-action prediction confusion matrices",
       "same-rendered-state/action outcome ambiguity and preceding visible context",
+      "candidate active and removal-control completion comparisons",
       "content-addressed development artifacts and checkpoint conditions"
     ],
     "evidence_exclude": [
@@ -126,10 +129,11 @@
       "SB26 behavior-equivalent 1666868 KB to 110792 KB retention comparison",
       "all twenty-five worker exit swap and resident-memory logs",
       "C3 leave-one-game-out and within-game prequential confusion matrices",
-      "C10 eighty-one same-frame/action ambiguity groups"
+      "C10 eighty-one same-frame/action ambiguity groups",
+      "C2 C10 prequential removal controls and twenty-eight intervention runs"
     ],
-    "expected_state_transition": "resource-headroom failure -> behavior-equivalent bounded retention; circular C3 claim -> explicit C2 stable observer plus C3 predictive HOLD; C10 closed timer surface -> materially new visible-context LOCAL_PROBE",
-    "falsification_relation": "provenance drifts, row accounting differs from one hundred eighty-three, checkpoint conditions can be mixed, shadow evidence influences an action, active P changes, deterministic rebuild differs, a rollback anchor is pruned, candidate sixty-five is unreachable, any worker exceeds one GiB or swaps, post-action truth receives predictive credit, or a weak held-out predictor is promoted"
+    "expected_state_transition": "resource-headroom failure -> behavior-equivalent bounded retention; circular C3 claim -> explicit C2 stable observer plus C3 predictive HOLD; C10 closed timer surface -> CLUSTER_STABLE and COMPOSABLE visible-context capability; zero completion delta -> candidate Runtime P REJECT",
+    "falsification_relation": "provenance drifts, row accounting differs from one hundred eighty-three, checkpoint conditions can be mixed, shadow evidence influences an action, active P changes, deterministic rebuild differs, a rollback anchor is pruned, candidate sixty-five is unreachable, any worker exceeds one GiB or swaps, post-action truth receives predictive credit, a zero-delta candidate is retained, or a weak held-out predictor is promoted"
   },
   "Mc": {
     "identity": "generic-double-trinity-P-update-control",
@@ -146,6 +150,8 @@
       "all twenty-five standard-budget workers complete and aggregate without runtime errors",
       "all measured worker exit codes and swap counts are zero and maximum RSS stays below one GiB",
       "C2 and C3 tier judgments are separated by non-circular predictive evidence",
+      "C10 and C2 C10 tier judgments pass non-circular removal and held-out controls",
+      "a zero-delta candidate is rejected and its slot restored byte-for-byte",
       "active P versions digests and adopted completion remain unchanged",
       "only HDS may advance LOCAL_PROBE to CLUSTER_STABLE COMPOSABLE compile or promotion"
     ],
@@ -174,8 +180,9 @@
       "bounded runtime retention is classified as infrastructure and not score or capability progress",
       "the standard-budget aggregate is measured at thirty-five of one hundred eighty-three and 18.821945363 percent local RHAE",
       "the sb26 high-water allocation is resolved with behavior equality and 110792 KB RSS",
-      "C10 one-step visible causal context reopens LOCAL_PROBE only",
-      "C2 C3 work-block CLUSTER_STABLE COMPOSABLE and Runtime P promotion remain on HOLD",
+      "C10 one-step visible causal context reaches CLUSTER_STABLE",
+      "C2 plus C10 reaches COMPOSABLE while C2 plus C3 remains HOLD",
+      "the C2 plus C10 Runtime P candidate is rejected at zero target delta",
       "the adopted boundary remains thirty-five of one hundred eighty-three",
       "P10 and P11 remain gated"
     ]
@@ -215,7 +222,9 @@
     "per-game resident-memory high-water audit",
     "shadow action-influence audit",
     "non-circular held-out prediction audit",
-    "C10 one-step visible-context contrast audit"
+    "C10 one-step visible-context contrast audit",
+    "C2 C10 removal composition audit",
+    "active candidate double-run intervention and candidate-slot restoration audit"
   ],
   "maximum_work_scope": [
     "field-level salvage and deterministic compilation of all 183 task-aware rows",
@@ -225,7 +234,8 @@
     "P10 physical-history and rendered-frontier resource bounding without logical-memory or P changes",
     "bounded standard-budget evidence persistence below the one-GiB worker high-water threshold",
     "cross-context positive negative and hazard contrast collection",
-    "one-step visible causal-context LOCAL_PROBE without policy influence",
-    "no candidate P compile until CLUSTER_STABLE and COMPOSABLE evidence exists"
+    "one-step visible causal-context CLUSTER_STABLE and COMPOSABLE evidence",
+    "HDS-isolated candidate compile only after the composition gate",
+    "automatic candidate rejection and restoration on zero completion delta"
   ]
 }

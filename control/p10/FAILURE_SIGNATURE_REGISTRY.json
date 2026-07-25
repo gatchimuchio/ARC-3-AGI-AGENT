@@ -335,16 +335,24 @@
       "structural_condition": "the same rendered frame and same action can produce different visible outcomes because the visible causal history is not represented in the state-action key",
       "evidence": [
         "eighty-one ambiguous same-frame same-action groups occur across three games",
-        "the immediately preceding visible action effect and boundary separates eighty of eighty-one groups",
-        "the old timer and path-length selector surface remains closed negative"
+        "the previous action prototype and coarse visible outcome separate eighty of eighty-one groups",
+        "prequential ambiguous accuracy improves from 291 to 658 per mille",
+        "removing the C2 coarse outcome lowers accuracy to 581 per mille",
+        "held-out mechanism support is positive in two of two games",
+        "the old timer and path-length selector surface remains closed negative",
+        "the bounded candidate intervention leaves discovery and held-out completion at zero"
       ],
-      "status": "ACTIVE_C10_LOCAL_PROBE",
-      "required_resolution": [
-        "test a bounded one-step visible-context intervention against unchanged-policy and timer-only controls",
-        "demonstrate progress and hazard separation",
-        "demonstrate cross-game cluster stability composition and removal before Runtime P compile"
+      "status": "RESOLVED_CAPABILITY_POLICY_REJECTED",
+      "required_resolution": [],
+      "resolution_evidence": [
+        "C10 passes the non-circular CLUSTER_STABLE gate",
+        "C2 plus C10 passes the COMPOSABLE removal and held-out gate",
+        "all twenty-eight intervention runs are reproducible and error-free",
+        "stable completion is non-regressive at twenty-nine",
+        "target completion delta is zero",
+        "HDS rejects the runtime candidate while retaining the capability evidence",
+        "active P remains unchanged and the candidate slot is restored"
       ],
-      "resolution_evidence": [],
       "falsifier": "the separator requires identity replay path suffix source or hidden state or fails under a bounded intervention"
     }
   ]

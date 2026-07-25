@@ -55,9 +55,10 @@ The host-wide residual value is informational; no measured worker swapped.
 - C2 post-action visible-effect observer: `CLUSTER_STABLE / PASS`
 - C3 non-circular boundary predictor: `LOCAL_PROBE / HOLD`
 - C2+C3 work block: `HOLD`
-- C10 materially new one-step visible-context probe: `LOCAL_PROBE / PASS`
-- C10 cluster stability and composability: `HOLD`
-- Runtime P compile / promotion: not authorized
+- C10 one-step visible-context predictor: `CLUSTER_STABLE / PASS`
+- C2+C10 removal and held-out composition: `COMPOSABLE / PASS`
+- C2+C10 candidate P-A intervention: `REJECT` (`0 -> 0` target levels)
+- Runtime P promotion: not authorized
 
 The stored transition field named `predicted_boundary` is recomputed from the
 same post-action evidence as the observed label. The v2 predictive audit gives
@@ -77,7 +78,15 @@ Git retains:
 - the content-bound checkpoint index;
 - all worker and resource logs;
 - the full `SB26` checkpoint required by the retention/removal audit;
-- local-oracle, standard-budget, C2/C3, C10, and retention judgments.
+- local-oracle, standard-budget, C2/C3, C10, C2+C10 composition, and
+  retention judgments.
+
+The isolated candidate intervention and rejected candidate archive are stored
+in `../c2_c10_candidate_intervention_v1/`. The candidate was run twice on
+four stable, one discovery, and two held-out conditions. Both active and
+candidate runs were reproducible and error-free; stable completion remained
+`29 -> 29`, while discovery/held-out completion remained `0 -> 0`. HDS
+restored the prior candidate slot byte-for-byte and left active P unchanged.
 
 Raw report SHA-256:
 `4da99e99398371e5d28d61fc804eddbec1d87aae8dc30548bf3d773bbff1ed8c`.

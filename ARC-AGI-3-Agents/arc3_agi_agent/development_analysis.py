@@ -792,7 +792,8 @@ def _build_coverage(
                 "NON_CIRCULAR_PREDICTOR_LOCAL_PROBE_HOLD"
             ),
             "C10_phase_timer_unlock_model": (
-                "ONE_STEP_VISIBLE_CAUSAL_CONTEXT_LOCAL_PROBE"
+                "ONE_STEP_VISIBLE_CAUSAL_CONTEXT_COMPOSABLE_"
+                "RUNTIME_INTERVENTION_REJECTED"
             ),
         }.get(capability_id, "NOT_CLUSTER_VALIDATED")
         rows.append(
@@ -965,7 +966,7 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
     for rank, row in enumerate(remaining, start=2):
         capability_id = str(row["capability_id"])
         current_tier = (
-            "LOCAL_PROBE"
+            "COMPOSABLE"
             if capability_id == "C10_phase_timer_unlock_model"
             else "NOT_STARTED"
         )
@@ -976,10 +977,25 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     "c2_c3_transition_all25_max450_v2/"
                     "C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json"
                 ),
-                "materially_new_observable_variable": (
-                    "previous visible action/effect/boundary causal context"
+                "composition_audit": (
+                    "evidence/p10/development/"
+                    "c2_c3_transition_all25_max450_v2/"
+                    "C2_C10_COMPOSITION_REMOVAL_AUDIT.json"
                 ),
-                "cluster_stable_status": "HOLD",
+                "candidate_intervention_audit": (
+                    "evidence/p10/development/"
+                    "c2_c10_candidate_intervention_v1/"
+                    "C2_C10_CANDIDATE_INTERVENTION_AUDIT.json"
+                ),
+                "materially_new_observable_variable": (
+                    "previous visible action prototype plus coarse visible "
+                    "outcome causal context"
+                ),
+                "cluster_stable_status": "PASS",
+                "composable_status": "PASS",
+                "candidate_intervention_status": "REJECT",
+                "candidate_target_completion_delta": 0,
+                "active_manifest_changed": False,
                 "runtime_p_promotion_authorized": False,
             }
             if capability_id == "C10_phase_timer_unlock_model"

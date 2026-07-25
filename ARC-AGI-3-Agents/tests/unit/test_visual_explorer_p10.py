@@ -5,6 +5,7 @@ import unittest
 from arc3_agi_agent.visual_explorer import (
     VISUAL_EXPLORER_FORMAT,
     VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE,
+    VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE,
     VISUAL_EXPLORER_MAX_NODES,
     DeterministicVisualExplorer,
     VisualAction,
@@ -410,6 +411,173 @@ class VisualExplorerP10Tests(unittest.TestCase):
             novelty_first.reason,
             "VISUAL_UNTESTED_CANDIDATE_NOVELTY_FIRST",
         )
+
+    def test_one_step_context_reopens_no_change_once_per_context(
+        self,
+    ) -> None:
+        scene = manual_scene(
+            "visual-state:context-reopen",
+            (
+                VisualAction(key="first", action_id=1, group=0),
+                VisualAction(key="second", action_id=2, group=0),
+            ),
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+
+        first = explorer.decide(
+            scene,
+            causal_context_mode="one-step-visible",
+        )
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        second = explorer.decide(
+            scene,
+            causal_context_mode="one-step-visible",
+        )
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        third = explorer.decide(
+            scene,
+            causal_context_mode="one-step-visible",
+        )
+
+        self.assertIsNotNone(first.action)
+        self.assertIsNotNone(second.action)
+        self.assertIsNotNone(third.action)
+        assert first.action is not None
+        assert second.action is not None
+        assert third.action is not None
+        self.assertEqual(first.action.key, "first")
+        self.assertEqual(second.action.key, "second")
+        self.assertEqual(third.action.key, "first")
+        self.assertEqual(
+            second.reason,
+            "VISUAL_CONTEXT_UNTESTED_CANDIDATE",
+        )
+
+    def test_one_step_context_never_reopens_global_hazard(self) -> None:
+        scene = manual_scene(
+            "visual-state:context-hazard",
+            (
+                VisualAction(key="hazard", action_id=1, group=0),
+                VisualAction(key="safe", action_id=2, group=0),
+            ),
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        first = explorer.decide(
+            scene,
+            causal_context_mode="one-step-visible",
+        )
+        assert first.action is not None
+        self.assertEqual(first.action.key, "hazard")
+        explorer.observe(
+            scene,
+            terminal_state="GAME_OVER",
+            level_progress=False,
+        )
+
+        second = explorer.decide(
+            scene,
+            causal_context_mode="one-step-visible",
+        )
+
+        assert second.action is not None
+        self.assertEqual(second.action.key, "safe")
+
+    def test_one_step_context_round_trip_and_bound(self) -> None:
+        scene = manual_scene(
+            "visual-state:context-round-trip",
+            (VisualAction(key="first", action_id=1, group=0),),
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        explorer.decide(
+            scene,
+            causal_context_mode="one-step-visible",
+        )
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        for index in range(
+            VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE + 2
+        ):
+            explorer.causal_context_token = f"causal-context:{index:02d}"
+            explorer.decide(
+                scene,
+                causal_context_mode="one-step-visible",
+            )
+            explorer.observe(
+                scene,
+                terminal_state="NOT_FINISHED",
+                level_progress=False,
+            )
+
+        payload = explorer.to_payload()
+        restored = DeterministicVisualExplorer.from_payload(payload)
+
+        self.assertEqual(restored.to_payload(), payload)
+        node = next(iter(restored.nodes.values()))
+        self.assertLessEqual(
+            len(node.context_outcomes),
+            VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE,
+        )
+        self.assertGreater(restored.context_eviction_count, 0)
+
+    def test_disabled_context_keeps_active_payload_shape_unchanged(
+        self,
+    ) -> None:
+        scene = manual_scene(
+            "visual-state:active-payload-shape",
+            (VisualAction(key="advance", action_id=1, group=0),),
+        )
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        explorer.decide(scene)
+        explorer.observe(
+            scene,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+
+        payload = explorer.to_payload()
+
+        for key in (
+            "causal_context_extension_format",
+            "max_contexts_per_node",
+            "causal_context_token",
+            "pending_causal_context_token",
+            "context_eviction_count",
+        ):
+            self.assertNotIn(key, payload)
+        node = next(iter(payload["nodes"].values()))
+        self.assertNotIn("context_order", node)
+        self.assertNotIn("context_outcomes", node)
 
     def test_rejected_result_can_commit_hazard_without_pending_state(
         self,

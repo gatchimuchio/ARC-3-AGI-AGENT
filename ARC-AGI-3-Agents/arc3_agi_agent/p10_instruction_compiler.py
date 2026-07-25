@@ -6,6 +6,7 @@ import argparse
 import copy
 import hashlib
 import json
+import shutil
 import sys
 from pathlib import Path
 from typing import Any
@@ -36,7 +37,10 @@ from .semantic_operators import (
     SELECTABLE_ROUTE_TARGET_OPERATOR,
     SYMBOLIC_REWRITE_OPERATOR,
 )
-from .visual_explorer import GLOBAL_EFFECT_DIVERSIFICATION_POLICY
+from .visual_explorer import (
+    GLOBAL_EFFECT_DIVERSIFICATION_POLICY,
+    ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY,
+)
 
 P10_INSTRUCTION_COMPILER_VERSION = "arc3-p10-instruction-compiler-v26"
 P10_COMPILER_SEED = 0
@@ -45,6 +49,10 @@ P10_PARAMETRIC_VERSION = "p10-p-b-parametric-v27"
 P10_HYBRID_VERSION = "p10-hybrid-v26"
 P10_CANDIDATE_SET_VERSION = "p10-candidate-set-v26"
 P10_CANDIDATE_MANIFEST_FILENAME = "p10_candidate_manifest.json"
+P10_C2_C10_COMPILER_VERSION = "arc3-p10-c2-c10-symbolic-compiler-v1"
+P10_C2_C10_CANDIDATE_SET_VERSION = "p10-candidate-set-c2-c10-v1"
+P10_C2_C10_SYMBOLIC_VERSION = "p10-p-a-symbolic-c2-c10-v1"
+P10_C2_C10_SYMBOLIC_FILENAME = "p10_p_a_symbolic_c2_c10_v1.json"
 
 
 def _file_digest(path: Path) -> str:
@@ -405,6 +413,55 @@ def global_effect_diversification_instruction_mapping() -> dict[str, object]:
         "provenance": [
             "compiled-identity-free-visible-effect-evidence",
             "compiled-candidate-surface-stagnation-evidence",
+        ],
+    }
+
+
+def one_step_visible_causal_context_instruction_mapping(
+) -> dict[str, object]:
+    """Return bounded C2+C10 candidate material for contextual exploration."""
+
+    return {
+        "operator_id": ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY,
+        "action_id": 1,
+        "detector": (
+            "same rendered state and action have context-dependent visible "
+            "outcomes under bounded passive session memory"
+        ),
+        "transform": (
+            "bind current state and action to the immediately preceding "
+            "visible action prototype and coarse observed outcome, then "
+            "test each bounded context-action pair at most once"
+        ),
+        "parameters": {
+            "history_depth": 1,
+            "maximum_contexts_per_rendered_node": 16,
+            "coarse_outcomes": [
+                "TRANSITION",
+                "NO_CHANGE",
+                "HAZARD",
+            ],
+            "global_hazard_block": True,
+            "prediction_before_update": True,
+            "timer_selector": False,
+            "path_length_selector": False,
+        },
+        "preconditions": [
+            "ACTION1_AVAILABLE",
+            "RENDERED_TRANSITION_HISTORY_AVAILABLE",
+            "HDS_ACCEPTED_PREVIOUS_VISIBLE_OUTCOME_AVAILABLE",
+        ],
+        "falsification_conditions": [
+            "current or future outcome enters the prediction key",
+            "external identity enters runtime state",
+            "context memory exceeds its declared bound",
+            "a known hazard is retried under another context",
+            "stable semantic operator behavior changes",
+        ],
+        "provenance": [
+            "compiled-c2-visible-effect-observer-evidence",
+            "compiled-c10-prequential-context-evidence",
+            "compiled-c2-c10-removal-and-heldout-evidence",
         ],
     }
 
@@ -770,6 +827,10 @@ def _upgrade(
     compile_decision_digest: str,
     evidence_set_digest: str,
     learning_result: PBLearningResult | None = None,
+    compiler_version: str = P10_INSTRUCTION_COMPILER_VERSION,
+    compile_method: str = (
+        "explicit-versioned-identity-free-operator-compile"
+    ),
 ) -> dict[str, Any]:
     upgraded = copy.deepcopy(base)
     predecessor_digest = str(upgraded.get("content_digest", ""))
@@ -812,7 +873,7 @@ def _upgrade(
         )
     )
     upgraded["compile"] = {
-        "compiler_version": P10_INSTRUCTION_COMPILER_VERSION,
+        "compiler_version": compiler_version,
         "compile_decision_digest": compile_decision_digest,
         "compile_directive_digest": compile_directive_digest,
         "evidence_set_digest": evidence_set_digest,
@@ -822,7 +883,7 @@ def _upgrade(
         "predecessor_provenance_digest": predecessor_provenance,
         "operator_count": len(operator_instructions),
         "operator_digest": digest_object(operator_instructions),
-        "method": "explicit-versioned-identity-free-operator-compile",
+        "method": compile_method,
     }
     payload["operator_instructions"] = operator_instructions
     if learning_result is not None:
@@ -879,6 +940,133 @@ def _upgrade(
             "hds-authorized-memory-trained-parametric-and-operator-compile"
         )
     return seal_instruction_bundle(upgraded)
+
+
+def compile_p10_c2_c10_symbolic_candidate(
+    *,
+    base_bundle_dir: Path,
+    output_dir: Path,
+    compile_directive: InstructionBodyCompileDirective,
+    compile_decision: PUpdateDecision,
+    hds_authority: HDSPUpdateAuthority,
+    composition_audit_digest: str,
+    seed: int = P10_COMPILER_SEED,
+) -> dict[str, object]:
+    """Compile only the COMPOSABLE C2+C10 contract into candidate P-A."""
+
+    if seed != P10_COMPILER_SEED:
+        raise ValueError("P10 C2+C10 compiler seed is fixed at 0")
+    if compile_directive.seed != seed:
+        raise AuthorityViolation("P10_C2_C10_DIRECTIVE_SEED_MISMATCH")
+    if (
+        compile_directive.target_body_version
+        != P10_C2_C10_CANDIDATE_SET_VERSION
+    ):
+        raise AuthorityViolation("P10_C2_C10_TARGET_VERSION_MISMATCH")
+    if not composition_audit_digest.startswith(
+        "arc3_p10_c2_c10_composition_audit:"
+    ):
+        raise ValueError("P10_C2_C10_COMPOSITION_AUDIT_DIGEST_INVALID")
+
+    active_manifest = _load(base_bundle_dir / "p10_manifest.json")
+    source_manifest_digest = active_p10_manifest_digest(base_bundle_dir)
+    if compile_directive.source_p_digest != source_manifest_digest:
+        raise AuthorityViolation("P10_C2_C10_SOURCE_MANIFEST_MISMATCH")
+
+    base_symbolic = _active_bundle_mapping(
+        base_bundle_dir,
+        active_manifest,
+        "P-A",
+    )
+    # Validate every reused active entry before binding it into the candidate
+    # manifest. Only P-A receives a new body.
+    for variant in ("P-B", "hybrid"):
+        _active_bundle_mapping(base_bundle_dir, active_manifest, variant)
+
+    payload = base_symbolic.get("payload")
+    if not isinstance(payload, dict):
+        raise TypeError("active symbolic payload invalid")
+    raw_operators = payload.get("operator_instructions")
+    if not isinstance(raw_operators, list) or not all(
+        isinstance(item, dict) for item in raw_operators
+    ):
+        raise TypeError("active symbolic operator instructions invalid")
+    operator_ids = tuple(
+        str(item.get("operator_id", "")) for item in raw_operators
+    )
+    if ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY in operator_ids:
+        raise ValueError("P10_C2_C10_OPERATOR_ALREADY_ACTIVE")
+
+    compile_directive.consume(compile_decision, hds_authority)
+    compile_directive_digest = compile_directive.digest
+    compile_decision_digest = compile_decision.digest
+    evidence_set_digest = compile_directive.evidence_set_digest
+    operators = [
+        *copy.deepcopy(raw_operators),
+        one_step_visible_causal_context_instruction_mapping(),
+    ]
+    candidate_mapping = _upgrade(
+        base_symbolic,
+        body_version=P10_C2_C10_SYMBOLIC_VERSION,
+        variant="P-A",
+        operator_instructions=operators,
+        compile_directive_digest=compile_directive_digest,
+        compile_decision_digest=compile_decision_digest,
+        evidence_set_digest=evidence_set_digest,
+        compiler_version=P10_C2_C10_COMPILER_VERSION,
+        compile_method=(
+            "hds-authorized-composable-c2-c10-symbolic-candidate-compile"
+        ),
+    )
+
+    candidate_path = output_dir / P10_C2_C10_SYMBOLIC_FILENAME
+    _write(candidate_path, candidate_mapping)
+    candidate_body = instruction_body_from_mapping(candidate_mapping)
+    p_a_entry: dict[str, object] = {
+        "filename": P10_C2_C10_SYMBOLIC_FILENAME,
+        "format_id": candidate_body.format_id,
+        "body_version": candidate_body.body_version,
+        "content_digest": candidate_body.digest(),
+        "sha256": _file_digest(candidate_path),
+        "operator_count": len(operators),
+    }
+
+    raw_active_bundles = active_manifest.get("bundles")
+    if not isinstance(raw_active_bundles, dict):
+        raise TypeError("active P10 manifest bundles invalid")
+    manifest_bundles: dict[str, object] = {"P-A": p_a_entry}
+    for variant in ("P-B", "hybrid"):
+        raw_entry = raw_active_bundles.get(variant)
+        if not isinstance(raw_entry, dict):
+            raise TypeError(f"active P10 manifest entry invalid: {variant}")
+        entry = copy.deepcopy(raw_entry)
+        filename = entry.get("filename")
+        if not isinstance(filename, str):
+            raise TypeError(f"active P10 filename invalid: {variant}")
+        source_path = base_bundle_dir / filename
+        reused_path = output_dir / filename
+        if source_path.resolve() != reused_path.resolve():
+            reused_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source_path, reused_path)
+        manifest_bundles[variant] = entry
+
+    manifest: dict[str, object] = {
+        "schema_version": "arc3-p10-instruction-manifest-v1",
+        "compiler_version": P10_C2_C10_COMPILER_VERSION,
+        "compile_decision_digest": compile_decision_digest,
+        "compile_directive_digest": compile_directive_digest,
+        "evidence_set_digest": evidence_set_digest,
+        "seed": seed,
+        "runtime_identity_free": True,
+        "lifecycle": "CANDIDATE",
+        "activation_authority": "hds-promotion-required",
+        "source_manifest_digest": source_manifest_digest,
+        "candidate_target_component": "P-A",
+        "composition_audit_digest": composition_audit_digest,
+        "bundles": manifest_bundles,
+    }
+    _write(output_dir / P10_CANDIDATE_MANIFEST_FILENAME, manifest)
+    return manifest
 
 
 def compile_p10_instruction_bodies(
@@ -1051,6 +1239,10 @@ if __name__ == "__main__":
 
 
 __all__ = [
+    "P10_C2_C10_CANDIDATE_SET_VERSION",
+    "P10_C2_C10_COMPILER_VERSION",
+    "P10_C2_C10_SYMBOLIC_FILENAME",
+    "P10_C2_C10_SYMBOLIC_VERSION",
     "P10_CANDIDATE_MANIFEST_FILENAME",
     "P10_CANDIDATE_SET_VERSION",
     "P10_COMPILER_SEED",
@@ -1060,6 +1252,7 @@ __all__ = [
     "P10_SYMBOLIC_VERSION",
     "active_p10_manifest_digest",
     "compile_p10_instruction_bodies",
+    "compile_p10_c2_c10_symbolic_candidate",
     "directional_force_route_instruction_mapping",
     "fruit_merge_instruction_mapping",
     "global_effect_diversification_instruction_mapping",
@@ -1068,6 +1261,7 @@ __all__ = [
     "multi_actor_shape_push_target_instruction_mapping",
     "occluded_target_route_instruction_mapping",
     "object_target_control_instruction_mapping",
+    "one_step_visible_causal_context_instruction_mapping",
     "relation_toggle_instruction_mapping",
     "selectable_push_target_instruction_mapping",
     "selectable_route_target_instruction_mapping",

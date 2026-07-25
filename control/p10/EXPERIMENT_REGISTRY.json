@@ -580,6 +580,45 @@
         "C2 C3 C10 composability and removal evidence"
       ],
       "status": "C2_CLUSTER_STABLE_C3_HOLD_C10_LOCAL_PROBE_P_UNCHANGED"
+    },
+    {
+      "experiment_id": "p10-c2-c10-candidate-intervention-v24",
+      "frame_id": "p10-v24-c2-c10-candidate-intervention",
+      "selected_hypothesis": "H40-one-step-visible-causal-context",
+      "bounded_change": [
+        "compile only candidate P-A with a bounded one-step visible causal context",
+        "keep active P-A P-B and hybrid unchanged",
+        "compare four stable one discovery and two held-out conditions twice per lifecycle",
+        "restore the prior candidate slot on a non-positive completion result"
+      ],
+      "baseline": "active P-A completes twenty-nine stable levels and zero discovery or held-out target levels under the seven retained conditions",
+      "prediction": [
+        "candidate stable completion does not decrease",
+        "candidate target completion increases",
+        "both active and candidate reruns are identical",
+        "active manifest remains unchanged"
+      ],
+      "observed": [
+        "all twenty-eight runs completed with zero runtime errors",
+        "active and candidate reruns are identical",
+        "stable completion remained twenty-nine",
+        "discovery and held-out completion remained zero",
+        "target completion delta is zero",
+        "active manifest remained unchanged",
+        "HDS rejected the candidate and restored the candidate slot byte-for-byte"
+      ],
+      "unchanged": [
+        "OFFLINE-only phase boundary",
+        "HDS sole authority",
+        "active P versions and digests",
+        "thirty-five adopted levels",
+        "local standard-oracle score"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "remaining one hundred forty-eight level closure"
+      ],
+      "status": "CLUSTER_STABLE_COMPOSABLE_RUNTIME_INTERVENTION_REJECTED"
     }
   ]
 }

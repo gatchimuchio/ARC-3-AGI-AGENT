@@ -10,7 +10,7 @@
       "test_id": "COMPOSE-KA59-REMAINING-BOUNDARY"
     }
   ],
-  "content_digest": "arc3_p10_capability_build_queue:ed23c100d8c7e3711b6d1e74202ced3e199d455d55d2232b94c1a750d6d2917a",
+  "content_digest": "arc3_p10_capability_build_queue:c5484bc13d5fcaed2ffca473511a2f3c83129ae10669aaad1dc7ed27632ecb14",
   "development_only": true,
   "hds_gate": {
     "reason": "Queue construction authorizes development probes, not runtime promotion or a score claim.",
@@ -504,12 +504,18 @@
         "frontier_count": 9,
         "total_link_count": 44
       },
-      "current_tier": "LOCAL_PROBE",
+      "current_tier": "COMPOSABLE",
       "dedicated_level_operator_allowed": false,
       "implementation_evidence": {
+        "active_manifest_changed": false,
         "audit": "evidence/p10/development/c2_c3_transition_all25_max450_v2/C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json",
-        "cluster_stable_status": "HOLD",
-        "materially_new_observable_variable": "previous visible action/effect/boundary causal context",
+        "candidate_intervention_audit": "evidence/p10/development/c2_c10_candidate_intervention_v1/C2_C10_CANDIDATE_INTERVENTION_AUDIT.json",
+        "candidate_intervention_status": "REJECT",
+        "candidate_target_completion_delta": 0,
+        "cluster_stable_status": "PASS",
+        "composable_status": "PASS",
+        "composition_audit": "evidence/p10/development/c2_c3_transition_all25_max450_v2/C2_C10_COMPOSITION_REMOVAL_AUDIT.json",
+        "materially_new_observable_variable": "previous visible action prototype plus coarse visible outcome causal context",
         "runtime_p_promotion_authorized": false
       },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",

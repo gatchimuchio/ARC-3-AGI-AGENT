@@ -529,6 +529,39 @@
       ],
       "evidence_ref": "evidence/p10/development/c2_c3_transition_all25_max450_v2/C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json",
       "maximum_information_gain_next": "compare one-step visible-context action binding against unchanged-policy and timer-only controls without active P mutation"
+    },
+    {
+      "decision_id": "j-dev:p10-c2-c10-candidate-intervention-v24",
+      "authority": "development-hds-only",
+      "status": "REJECT",
+      "selected_hypothesis": "H40-one-step-visible-causal-context",
+      "tier_decisions": {
+        "LOCAL_PROBE": "PASS",
+        "C10_CLUSTER_STABLE": "PASS",
+        "C2_C10_COMPOSABLE": "PASS",
+        "CANDIDATE_P_A_INTERVENTION": "REJECT",
+        "ALL_SAMPLE_CANDIDATE_REGRESSION": "NOT_AUTHORIZED",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "prequential-ambiguous-accuracy-improves-from-291-to-658-per-mille",
+        "remove-c2-outcome-control-decreases-accuracy-to-581-per-mille",
+        "held-out-mechanism-support-two-of-two",
+        "active-and-candidate-double-runs-reproducible",
+        "stable-completion-nonregression-29-to-29",
+        "candidate-target-completion-delta-zero",
+        "active-manifest-unchanged",
+        "candidate-slot-restored-byte-for-byte"
+      ],
+      "evidence_ref": "evidence/p10/development/c2_c10_candidate_intervention_v1/C2_C10_CANDIDATE_INTERVENTION_AUDIT.json",
+      "supporting_evidence": [
+        "evidence/p10/development/c2_c3_transition_all25_max450_v2/C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json",
+        "evidence/p10/development/c2_c3_transition_all25_max450_v2/C2_C10_COMPOSITION_REMOVAL_AUDIT.json"
+      ],
+      "maximum_information_gain_next": "close or reclassify the next coverage-ranked capability surface and test only materially new observable variables"
     }
   ]
 }

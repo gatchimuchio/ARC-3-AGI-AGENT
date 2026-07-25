@@ -250,9 +250,15 @@ target contact、selection delta、bottom tick、required capabilityとの差分
 - C3 leave-one-game-out recall:
   COMMIT 0/1000、HAZARD 47/1000、TRANSITION 945/1000、
   NO_VISIBLE 0/1000
-- C10 one-step visible causal-context contrast: `LOCAL_PROBE`
+- C10 one-step visible causal-context predictor: `CLUSTER_STABLE`
 - C10同一frame/actionのoutcome ambiguity: 3 game、81 group
 - C10一段context separator: 80 / 81 group
+- C10非循環prequential ambiguous accuracy: 291→658 / 1000
+- C2 coarse outcome除去control: 658→581 / 1000
+- C2+C10 composition: `COMPOSABLE`
+- candidate P-A intervention:
+  stable 29→29、discovery/held-out 0→0、二巡一致、error 0
+- candidate P-A HDS decision: `REJECT`
 - action selection influence: 0
 - worker resource: 25/25 exit 0、swap 0、最大RSS 143852 KB
 - local standard oracle: 35 / 183、RHAE 18.821945363%
@@ -263,13 +269,15 @@ target contact、selection delta、bottom tick、required capabilityとの差分
   - C2 observer CLUSTER_STABLE: `PASS`
   - C3 predictor CLUSTER_STABLE: `HOLD`
   - C2+C3 work block CLUSTER_STABLE: `HOLD`
-  - C10 CLUSTER_STABLE: `HOLD`
-  - COMPOSABLE: `HOLD`
+  - C10 CLUSTER_STABLE: `PASS`
+  - C2+C10 COMPOSABLE: `PASS`
+  - C2+C10 Runtime intervention: `REJECT`
   - Runtime P promotion: `HOLD`
   - P10全体: `HOLD`
   - P11開始: 禁止
 
 post-action effect、terminal、progressから再計算したboundaryはC3の予測証拠へ
 数えない。C3はheld-out action前に利用可能なsource structure、action
-prototype、action classだけで評価する。標準runとC10 contrastも計測・
-反証証拠であり、score進歩、Runtime P promotion、全sample攻略の証拠ではない。
+prototype、action classだけで評価する。C10のcluster/composition PASSは
+再利用可能な観測・予測契約の証拠であり、completion delta 0でREJECTされた
+runtime policyの採用、score進歩、全sample攻略の証拠ではない。

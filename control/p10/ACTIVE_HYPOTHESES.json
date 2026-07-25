@@ -1157,15 +1157,16 @@
       "predicted_effect": [
         "old timer and path-length selectors remain rejected",
         "same rendered state and action can be separated without identity",
-        "progress and hazard utility remain unproven until a bounded intervention"
+        "a bounded intervention decides whether the separator changes completion"
       ],
       "applicability": [
         "development-only C10 shadow contrast"
       ],
       "required_evidence": [
         "same-frame and same-action differing outcomes",
-        "cross-game one-step context separation",
-        "future progress hazard and removal controls"
+        "prequential one-step context prediction",
+        "held-out mechanism and C2 C10 removal controls",
+        "same-condition active candidate completion intervention"
       ],
       "falsifier": [
         "the separator requires game identity replay suffix or hidden state",
@@ -1177,8 +1178,8 @@
       "information_gain": 0.94,
       "contamination_risk": 0.0,
       "regression_risk": 0.12,
-      "status": "LOCAL_PROBE_ACCEPTED",
-      "j_dev_decision": "PASS_LOCAL_PROBE"
+      "status": "COMPOSABLE_POLICY_REJECTED",
+      "j_dev_decision": "PASS_COMPOSABLE_REJECT_RUNTIME"
     }
   ]
 }

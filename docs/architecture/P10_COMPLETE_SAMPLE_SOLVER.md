@@ -295,11 +295,24 @@ within-game prequentialもCOMMIT recall 0のためHOLDを変更しない。
 
 C10の旧timer/path-length surfaceはclosed negativeのまま維持する。新たに、
 同一rendered frame・同一actionでoutcomeが異なる81 groupを3 gameで観測し、
-直前のvisible action/effect/boundary tokenが80 groupを分離した。これは
-materially newな一段可視因果文脈の`LOCAL_PROBE`再開根拠だが、progress/
-hazard separator、CLUSTER_STABLE、COMPOSABLE、Runtime P compileの根拠ではない。
+直前action prototypeとC2 coarse visible outcomeだけを用いるpredict-before-
+update learnerは80 groupを分離した。曖昧357 transitionのaccuracyは
+baseline 291/1000から658/1000へ上がり、coarse outcome除去時は581/1000、
+all-transition deltaは+13/1000、held-out mechanismは2/2正だった。固定した
+cross-game outcome label転用は-59/1000のnegative controlとして除外した。
+この非循環・除去・held-out証拠によりC10を`CLUSTER_STABLE`、C2+C10を
+`COMPOSABLE`とした。
+
+HDSが候補P-Aだけをcompileし、stable 4、discovery 1、held-out 2条件をactive/
+candidateで各2回実行した。全28 runはerror 0、active/candidateとも二巡一致、
+stable completionは29→29だったが、discovery/held-out completionは0→0で
+positive deltaがなかった。最終判断は`REJECT`であり、active manifestは不変、
+候補slotはbyte復元、候補bodyはarchiveへ移した。したがってall-25 regression、
+promotion、score progressは認可しない。
 正本は
 [`c2_c3_transition_all25_max450_v2`](../../evidence/p10/development/c2_c3_transition_all25_max450_v2)
+と
+[`c2_c10_candidate_intervention_v1`](../../evidence/p10/development/c2_c10_candidate_intervention_v1)
 に置く。
 
 v15では、既知のstate-changing actionより未観測prototypeを優先する

@@ -21,6 +21,7 @@ Grid = tuple[tuple[int, ...], ...]
 Point = tuple[int, int]
 Outcome = Literal["NO_CHANGE", "TRANSITION", "HAZARD"]
 PrototypePriorityMode = Literal["legacy", "novelty-first"]
+CausalContextMode = Literal["disabled", "one-step-visible"]
 
 _OFFSETS4: tuple[Point, ...] = ((-1, 0), (1, 0), (0, -1), (0, 1))
 _NEUTRAL_COLORS = frozenset({0, 1, 2, 3, 4, 5})
@@ -28,10 +29,27 @@ _MASK_VALUE = 0
 GLOBAL_EFFECT_DIVERSIFICATION_POLICY = (
     "global-visible-effect-diversification-v1"
 )
+ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY = (
+    "one-step-visible-causal-context-v1"
+)
 VISUAL_EXPLORER_FORMAT = "arc3-visual-explorer-v2"
 _LEGACY_VISUAL_EXPLORER_FORMAT = "arc3-visual-explorer-v1"
 VISUAL_EXPLORER_MAX_NODES = 32
 VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE = 64
+VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE = 16
+_INITIAL_CAUSAL_CONTEXT = "causal-context:initial"
+
+
+def _causal_context_token(
+    action: VisualAction,
+    outcome: Outcome,
+) -> str:
+    return "causal-context:" + digest_object(
+        {
+            "action_prototype": action.prototype_key,
+            "visible_outcome": outcome,
+        }
+    )[:24]
 
 
 def _payload_int(value: object, field_name: str) -> int:
@@ -501,6 +519,10 @@ class _Node:
     order: tuple[str, ...]
     outcomes: dict[str, Outcome] = field(default_factory=dict)
     targets: dict[str, str] = field(default_factory=dict)
+    context_outcomes: dict[str, dict[str, Outcome]] = field(
+        default_factory=dict
+    )
+    context_order: list[str] = field(default_factory=list)
 
     def untested(self) -> tuple[VisualAction, ...]:
         return tuple(
@@ -536,6 +558,9 @@ class DeterministicVisualExplorer:
         default_factory=dict
     )
     progress_prototypes: dict[str, int] = field(default_factory=dict)
+    causal_context_token: str = ""
+    pending_causal_context_token: str = ""
+    context_eviction_count: int = 0
 
     def _record_prototype(
         self,
@@ -581,16 +606,55 @@ class DeterministicVisualExplorer:
             return (2, 0)
         return (3, total)
 
+    def _context_row(
+        self,
+        node: _Node,
+        context_token: str,
+    ) -> dict[str, Outcome]:
+        if not context_token:
+            raise ValueError("causal context token is required")
+        if context_token in node.context_order:
+            node.context_order.remove(context_token)
+        node.context_order.append(context_token)
+        row = node.context_outcomes.setdefault(context_token, {})
+        while (
+            len(node.context_order)
+            > VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE
+        ):
+            victim = node.context_order.pop(0)
+            node.context_outcomes.pop(victim, None)
+            self.context_eviction_count += 1
+        return row
+
     def _ordered_untested(
         self,
         node: _Node,
         *,
         prototype_priority_mode: PrototypePriorityMode,
+        causal_context_mode: CausalContextMode = "disabled",
+        causal_context_token: str = "",
     ) -> tuple[VisualAction, ...]:
+        if causal_context_mode not in {"disabled", "one-step-visible"}:
+            raise ValueError("visual explorer causal context mode invalid")
+        if causal_context_mode == "one-step-visible":
+            context_outcomes = node.context_outcomes.get(
+                causal_context_token,
+                {},
+            )
+            untested = tuple(
+                node.actions[key]
+                for key in node.order
+                if (
+                    node.outcomes.get(key) != "HAZARD"
+                    and key not in context_outcomes
+                )
+            )
+        else:
+            untested = node.untested()
         order_index = {key: index for index, key in enumerate(node.order)}
         return tuple(
             sorted(
-                node.untested(),
+                untested,
                 key=lambda action: (
                     *self._prototype_priority(
                         action,
@@ -610,6 +674,8 @@ class DeterministicVisualExplorer:
         self.previous_action_key = ""
         self.semantic_pending_signature = ""
         self.semantic_pending_action = None
+        self.causal_context_token = ""
+        self.pending_causal_context_token = ""
         self.level_epoch += 1
         self._ensure_node(scene)
 
@@ -670,7 +736,10 @@ class DeterministicVisualExplorer:
         candidate_order = tuple(candidate.key for candidate in candidates)
         working_actions = dict(node.actions)
         for key, action in candidate_map.items():
-            if node.outcomes.get(key) not in {"NO_CHANGE", "HAZARD"}:
+            if (
+                node.context_outcomes
+                or node.outcomes.get(key) not in {"NO_CHANGE", "HAZARD"}
+            ):
                 working_actions[key] = action
 
         for key, target in tuple(node.targets.items()):
@@ -711,9 +780,23 @@ class DeterministicVisualExplorer:
             for key in base_order
             if key in working_actions and key not in node.outcomes
         )
+        contextual_current = (
+            tuple(
+                key
+                for key in base_order
+                if key in working_actions
+            )
+            if node.context_outcomes
+            else ()
+        )
         preferred = list(
             dict.fromkeys(
-                (*transition_keys, *untested_current, *untested_retained)
+                (
+                    *transition_keys,
+                    *contextual_current,
+                    *untested_current,
+                    *untested_retained,
+                )
             )
         )
         pending_key = (
@@ -744,6 +827,19 @@ class DeterministicVisualExplorer:
             for key in selected
         }
         node.order = tuple(selected)
+        for context_token, outcomes in tuple(
+            node.context_outcomes.items()
+        ):
+            node.context_outcomes[context_token] = {
+                key: outcome
+                for key, outcome in outcomes.items()
+                if key in selected_set
+            }
+        node.context_order = [
+            token
+            for token in node.context_order
+            if token in node.context_outcomes
+        ]
         return node
 
     def _assert_bounds(self) -> None:
@@ -758,6 +854,18 @@ class DeterministicVisualExplorer:
             for node in self.nodes.values()
         ):
             raise ValueError("visual explorer action limit exceeded")
+        if any(
+            len(node.context_outcomes)
+            > VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE
+            or len(node.context_order) != len(set(node.context_order))
+            or set(node.context_order) != set(node.context_outcomes)
+            or any(
+                not set(outcomes).issubset(node.actions)
+                for outcomes in node.context_outcomes.values()
+            )
+            for node in self.nodes.values()
+        ):
+            raise ValueError("visual explorer causal context state invalid")
 
     def _ensure_node(self, scene: VisualScene) -> _Node:
         node = self.nodes.get(scene.signature)
@@ -770,6 +878,26 @@ class DeterministicVisualExplorer:
             scene.signature,
             scene.candidates,
         )
+
+    def _commit_causal_context_outcome(
+        self,
+        *,
+        source: _Node,
+        action: VisualAction,
+        outcome: Outcome,
+    ) -> None:
+        if not self.pending_causal_context_token:
+            return
+        context_row = self._context_row(
+            source,
+            self.pending_causal_context_token,
+        )
+        context_row[action.key] = outcome
+        self.causal_context_token = _causal_context_token(
+            action,
+            outcome,
+        )
+        self.pending_causal_context_token = ""
 
     def observe(
         self,
@@ -813,6 +941,7 @@ class DeterministicVisualExplorer:
                 self._record_prototype(action, "TRANSITION")
             self.semantic_pending_signature = ""
             self.semantic_pending_action = None
+            self.pending_causal_context_token = ""
             return
 
         self._ensure_node(scene)
@@ -827,19 +956,27 @@ class DeterministicVisualExplorer:
         if action is None:
             raise ValueError("previous visual action missing")
         if terminal_state == "GAME_OVER":
+            outcome: Outcome = "HAZARD"
             source.outcomes[action_key] = "HAZARD"
             source.targets.pop(action_key, None)
             self.failure_count += 1
             self._record_prototype(action, "HAZARD")
         elif scene.signature == source_signature:
+            outcome = "NO_CHANGE"
             source.outcomes[action_key] = "NO_CHANGE"
             source.targets.pop(action_key, None)
             self._record_prototype(action, "NO_CHANGE")
         else:
+            outcome = "TRANSITION"
             source.outcomes[action_key] = "TRANSITION"
             source.targets[action_key] = scene.signature
             self.transition_count += 1
             self._record_prototype(action, "TRANSITION")
+        self._commit_causal_context_outcome(
+            source=source,
+            action=action,
+            outcome=outcome,
+        )
         self.previous_signature = ""
         self.previous_action_key = ""
         self._compact_node(
@@ -867,6 +1004,7 @@ class DeterministicVisualExplorer:
             self.semantic_pending_action = None
             self.previous_signature = ""
             self.previous_action_key = ""
+            self.pending_causal_context_token = ""
             return
         node = self.nodes.get(source_signature)
         if node is None:
@@ -885,6 +1023,11 @@ class DeterministicVisualExplorer:
         node.outcomes[action.key] = "HAZARD"
         node.targets.pop(action.key, None)
         self._record_prototype(action, "HAZARD")
+        self._commit_causal_context_outcome(
+            source=node,
+            action=action,
+            outcome="HAZARD",
+        )
         if not self.initial_signature:
             self.initial_signature = source_signature
         self.previous_signature = ""
@@ -933,11 +1076,15 @@ class DeterministicVisualExplorer:
         signature: str,
         *,
         prototype_priority_mode: PrototypePriorityMode,
+        causal_context_mode: CausalContextMode = "disabled",
+        causal_context_token: str = "",
     ) -> tuple[VisualAction | None, int | None]:
         node = self.nodes[signature]
         untested = self._ordered_untested(
             node,
             prototype_priority_mode=prototype_priority_mode,
+            causal_context_mode=causal_context_mode,
+            causal_context_token=causal_context_token,
         )
         if untested:
             return untested[0], 0
@@ -977,6 +1124,8 @@ class DeterministicVisualExplorer:
         current_signature: str,
         *,
         prototype_priority_mode: PrototypePriorityMode = "legacy",
+        causal_context_mode: CausalContextMode = "disabled",
+        causal_context_token: str = "",
     ) -> bool:
         """Return whether RESET can expose a disconnected untested frontier."""
 
@@ -989,6 +1138,8 @@ class DeterministicVisualExplorer:
         action, _distance = self._frontier_action(
             self.initial_signature,
             prototype_priority_mode=prototype_priority_mode,
+            causal_context_mode=causal_context_mode,
+            causal_context_token=causal_context_token,
         )
         return action is not None
 
@@ -997,16 +1148,29 @@ class DeterministicVisualExplorer:
         scene: VisualScene,
         *,
         prototype_priority_mode: PrototypePriorityMode = "legacy",
+        causal_context_mode: CausalContextMode = "disabled",
     ) -> ExplorerDecision:
         """Choose one candidate; prior observations change future selection."""
 
         if prototype_priority_mode not in {"legacy", "novelty-first"}:
             raise ValueError("visual explorer prototype priority mode invalid")
+        if causal_context_mode not in {
+            "disabled",
+            "one-step-visible",
+        }:
+            raise ValueError("visual explorer causal context mode invalid")
         node = self._ensure_node(scene)
-        del node
+        context_token = ""
+        if causal_context_mode == "one-step-visible":
+            if not self.causal_context_token:
+                self.causal_context_token = _INITIAL_CAUSAL_CONTEXT
+            context_token = self.causal_context_token
+            self._context_row(node, context_token)
         action, distance = self._frontier_action(
             scene.signature,
             prototype_priority_mode=prototype_priority_mode,
+            causal_context_mode=causal_context_mode,
+            causal_context_token=context_token,
         )
         memory_influenced = bool(
             self.transition_count
@@ -1019,6 +1183,8 @@ class DeterministicVisualExplorer:
             reset_frontier = self.reset_frontier_available(
                 scene.signature,
                 prototype_priority_mode=prototype_priority_mode,
+                causal_context_mode=causal_context_mode,
+                causal_context_token=context_token,
             )
             return ExplorerDecision(
                 action=None,
@@ -1032,13 +1198,18 @@ class DeterministicVisualExplorer:
             )
         self.previous_signature = scene.signature
         self.previous_action_key = action.key
+        self.pending_causal_context_token = context_token
         return ExplorerDecision(
             action=action,
             reason=(
                 (
-                    "VISUAL_UNTESTED_CANDIDATE_NOVELTY_FIRST"
-                    if prototype_priority_mode == "novelty-first"
-                    else "VISUAL_UNTESTED_CANDIDATE"
+                    "VISUAL_CONTEXT_UNTESTED_CANDIDATE"
+                    if causal_context_mode == "one-step-visible"
+                    else (
+                        "VISUAL_UNTESTED_CANDIDATE_NOVELTY_FIRST"
+                        if prototype_priority_mode == "novelty-first"
+                        else "VISUAL_UNTESTED_CANDIDATE"
+                    )
                 )
                 if distance == 0
                 else "VISUAL_TRANSITION_GRAPH_ROUTE"
@@ -1102,10 +1273,46 @@ class DeterministicVisualExplorer:
                     },
                     "outcomes": dict(sorted(node.outcomes.items())),
                     "targets": dict(sorted(node.targets.items())),
+                    **(
+                        {
+                            "context_order": list(node.context_order),
+                            "context_outcomes": {
+                                context: dict(sorted(outcomes.items()))
+                                for context, outcomes in sorted(
+                                    node.context_outcomes.items()
+                                )
+                            },
+                        }
+                        if node.context_outcomes
+                        else {}
+                    ),
                 }
                 for signature, node in sorted(self.nodes.items())
             },
         }
+        if (
+            self.causal_context_token
+            or self.pending_causal_context_token
+            or self.context_eviction_count
+            or any(node.context_outcomes for node in self.nodes.values())
+        ):
+            payload.update(
+                {
+                    "causal_context_extension_format": (
+                        "arc3-one-step-visible-causal-context-v1"
+                    ),
+                    "max_contexts_per_node": (
+                        VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE
+                    ),
+                    "causal_context_token": self.causal_context_token,
+                    "pending_causal_context_token": (
+                        self.pending_causal_context_token
+                    ),
+                    "context_eviction_count": (
+                        self.context_eviction_count
+                    ),
+                }
+            )
         forbidden = forbidden_runtime_paths(payload)
         if forbidden:
             raise ValueError(
@@ -1151,6 +1358,18 @@ class DeterministicVisualExplorer:
                 )
             )
 
+        context_extension = value.get(
+            "causal_context_extension_format"
+        )
+        if context_extension is not None and (
+            context_extension
+            != "arc3-one-step-visible-causal-context-v1"
+            or value.get("max_contexts_per_node")
+            != VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE
+        ):
+            raise ValueError(
+                "visual explorer causal context extension invalid"
+            )
         explorer = cls(
             initial_signature=str(value.get("initial_signature", "")),
             status_mask=frozenset(mask),
@@ -1175,7 +1394,27 @@ class DeterministicVisualExplorer:
                 value.get("memory_read_count", 0),
                 "memory_read_count",
             ),
+            causal_context_token=str(
+                value.get("causal_context_token", "")
+            ),
+            pending_causal_context_token=str(
+                value.get("pending_causal_context_token", "")
+            ),
+            context_eviction_count=_payload_int(
+                value.get("context_eviction_count", 0),
+                "context_eviction_count",
+            ),
         )
+        if context_extension is None and any(
+            (
+                explorer.causal_context_token,
+                explorer.pending_causal_context_token,
+                explorer.context_eviction_count,
+            )
+        ):
+            raise ValueError(
+                "visual explorer causal context extension missing"
+            )
         raw_semantic_pending = value.get("semantic_pending_action")
         if raw_semantic_pending is not None:
             if not isinstance(raw_semantic_pending, Mapping):
@@ -1303,11 +1542,22 @@ class DeterministicVisualExplorer:
             raw_order = raw_node.get("order", ())
             raw_outcomes = raw_node.get("outcomes", {})
             raw_targets = raw_node.get("targets", {})
+            raw_context_order = raw_node.get("context_order", ())
+            raw_context_outcomes = raw_node.get(
+                "context_outcomes",
+                {},
+            )
             if (
                 not isinstance(raw_order, Sequence)
                 or isinstance(raw_order, (str, bytes, bytearray))
                 or not isinstance(raw_outcomes, Mapping)
                 or not isinstance(raw_targets, Mapping)
+                or not isinstance(raw_context_order, Sequence)
+                or isinstance(
+                    raw_context_order,
+                    (str, bytes, bytearray),
+                )
+                or not isinstance(raw_context_outcomes, Mapping)
             ):
                 raise ValueError("visual explorer node fields invalid")
             outcomes: dict[str, Outcome] = {}
@@ -1316,6 +1566,34 @@ class DeterministicVisualExplorer:
                 if normalized not in {"NO_CHANGE", "TRANSITION", "HAZARD"}:
                     raise ValueError("visual explorer outcome invalid")
                 outcomes[str(key)] = normalized  # type: ignore[assignment]
+            context_outcomes: dict[
+                str,
+                dict[str, Outcome],
+            ] = {}
+            for raw_context, raw_context_row in (
+                raw_context_outcomes.items()
+            ):
+                if not isinstance(raw_context_row, Mapping):
+                    raise ValueError(
+                        "visual explorer causal context row invalid"
+                    )
+                context_row: dict[str, Outcome] = {}
+                for key, outcome in raw_context_row.items():
+                    normalized = str(outcome)
+                    if normalized not in {
+                        "NO_CHANGE",
+                        "TRANSITION",
+                        "HAZARD",
+                    }:
+                        raise ValueError(
+                            "visual explorer causal outcome invalid"
+                        )
+                    context_row[str(key)] = normalized  # type: ignore[assignment]
+                context_outcomes[str(raw_context)] = context_row
+            if context_outcomes and context_extension is None:
+                raise ValueError(
+                    "visual explorer causal context extension missing"
+                )
             explorer.nodes[str(raw_signature)] = _Node(
                 actions=actions,
                 order=tuple(str(item) for item in raw_order),
@@ -1324,6 +1602,12 @@ class DeterministicVisualExplorer:
                     str(key): str(target)
                     for key, target in raw_targets.items()
                 },
+                context_outcomes=context_outcomes,
+                context_order=(
+                    [str(item) for item in raw_context_order]
+                    if context_outcomes
+                    else []
+                ),
             )
         raw_node_lru = value.get("node_lru", ())
         if not isinstance(raw_node_lru, Sequence) or isinstance(
@@ -1354,6 +1638,13 @@ class DeterministicVisualExplorer:
                 or explorer.previous_action_key not in previous.actions
             ):
                 raise ValueError("visual explorer pending action invalid")
+        if explorer.pending_causal_context_token and (
+            not explorer.previous_signature
+            or not explorer.previous_action_key
+        ):
+            raise ValueError(
+                "visual explorer pending causal context invalid"
+            )
         explorer._assert_bounds()
         return explorer
 
@@ -1363,15 +1654,18 @@ class DeterministicVisualExplorer:
 
 
 __all__ = [
+    "CausalContextMode",
     "DeterministicVisualExplorer",
     "ExplorerDecision",
     "Grid",
     "GLOBAL_EFFECT_DIVERSIFICATION_POLICY",
+    "ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY",
     "Outcome",
     "Point",
     "PrototypePriorityMode",
     "VISUAL_EXPLORER_FORMAT",
     "VISUAL_EXPLORER_MAX_ACTIONS_PER_NODE",
+    "VISUAL_EXPLORER_MAX_CONTEXTS_PER_NODE",
     "VISUAL_EXPLORER_MAX_NODES",
     "VisualAction",
     "VisualComponent",

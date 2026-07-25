@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any
 
 from arc3_agi_agent.instruction_body import (
+    InstructionBody,
+    instruction_body_from_mapping,
     load_p10_candidate_hybrid_instruction_body,
     load_p10_candidate_parametric_instruction_body,
     load_p10_candidate_symbolic_instruction_body,
@@ -16,14 +18,19 @@ from arc3_agi_agent.instruction_body import (
     load_p10_symbolic_instruction_body,
 )
 from arc3_agi_agent.p10_instruction_compiler import (
+    P10_C2_C10_CANDIDATE_SET_VERSION,
+    P10_C2_C10_SYMBOLIC_FILENAME,
     P10_CANDIDATE_SET_VERSION,
     P10_COMPILER_SEED,
     active_p10_manifest_digest,
+    compile_p10_c2_c10_symbolic_candidate,
     compile_p10_instruction_bodies,
 )
 from arc3_agi_agent.p_b_learning import PBLearningResult
 from arc3_agi_agent.p_update import (
     HDSPUpdateAuthority,
+    InstructionBodyCompileDirective,
+    PUpdateDecision,
     PUpdateEvidenceSet,
     PUpdateProposal,
     parameter_digest,
@@ -41,6 +48,9 @@ from arc3_agi_agent.semantic_operators import (
     SYMBOLIC_REWRITE_OPERATOR,
 )
 from arc3_agi_agent.shape_push import MARKER_SHAPE_PUSH_TARGET_OPERATOR
+from arc3_agi_agent.visual_explorer import (
+    ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY,
+)
 
 PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 BUNDLE_DIR = PACKAGE_ROOT / "arc3_agi_agent" / "bundles"
@@ -86,8 +96,8 @@ def _learning_result() -> PBLearningResult:
 
 def _compile_authorization() -> tuple[
     HDSPUpdateAuthority,
-    object,
-    object,
+    PUpdateDecision,
+    InstructionBodyCompileDirective,
 ]:
     source_digest = active_p10_manifest_digest(BUNDLE_DIR)
     proposal = PUpdateProposal(
@@ -130,6 +140,57 @@ def _compile_authorization() -> tuple[
         evidence,
         decision,
         target_body_version=P10_CANDIDATE_SET_VERSION,
+        seed=P10_COMPILER_SEED,
+    )
+    return hds, decision, directive
+
+
+def _c2_c10_compile_authorization() -> tuple[
+    HDSPUpdateAuthority,
+    PUpdateDecision,
+    InstructionBodyCompileDirective,
+]:
+    source_digest = active_p10_manifest_digest(BUNDLE_DIR)
+    proposal = PUpdateProposal(
+        proposal_id="proposal:c2-c10-symbolic",
+        source_p_version="p10-active-set",
+        source_p_digest=source_digest,
+        target_component="P-A",
+        update_type="symbolic-capability-composition",
+        evidence_refs=("evidence:c2-c10-composable",),
+        expected_effect="bounded-visible-context-reopens-safe-action",
+        expected_affected_capabilities=("causal-context-exploration",),
+        expected_unaffected_capabilities=("active-runtime-manifest",),
+        falsifiers=("stable-regression-decreases",),
+        rollback_target="p10-p-a-symbolic-v27",
+        provenance=("development-memory:hds-accepted",),
+    )
+    evidence = PUpdateEvidenceSet(
+        evidence_set_id="evidence-set:c2-c10-composable",
+        proposal_digest=proposal.digest,
+        memory_snapshot_digest="memory-snapshot:c2-c10-composable",
+        approved_memory_refs=("memory:c2-observer", "memory:c10-context"),
+        hds_memory_decision_digests=("hds-decision:c2-c10",),
+        failure_refs=("failure:context-ambiguity",),
+        contradiction_refs=("contradiction:action-only-prediction",),
+        positive_contrast_refs=("contrast:full-composition",),
+        negative_contrast_refs=("contrast:remove-c2", "contrast:remove-c10"),
+        holdout_refs=("holdout:mechanism-transfer",),
+        replay_audit_refs=("audit:identity-free",),
+        provenance=("development-evidence:content-addressed",),
+    )
+    hds = HDSPUpdateAuthority()
+    decision = hds.decide(
+        proposal,
+        status="COMPILE",
+        reason_codes=("c2-c10-composable-pass",),
+        evidence_set=evidence,
+    )
+    directive = hds.issue_compile_directive(
+        proposal,
+        evidence,
+        decision,
+        target_body_version=P10_C2_C10_CANDIDATE_SET_VERSION,
         seed=P10_COMPILER_SEED,
     )
     return hds, decision, directive
@@ -257,12 +318,12 @@ class P10InstructionCompilerTests(unittest.TestCase):
             self.assertEqual(entry["sha256"], _sha256(path))
 
     def test_runtime_loaders_resolve_promoted_active_and_archive(self) -> None:
-        active = (
+        active: tuple[InstructionBody, ...] = (
             load_p10_symbolic_instruction_body(),
             load_p10_parametric_instruction_body(),
             load_p10_hybrid_instruction_body(),
         )
-        candidate = (
+        candidate: tuple[InstructionBody, ...] = (
             load_p10_candidate_symbolic_instruction_body(),
             load_p10_candidate_parametric_instruction_body(),
             load_p10_candidate_hybrid_instruction_body(),
@@ -299,6 +360,109 @@ class P10InstructionCompilerTests(unittest.TestCase):
                     hds_authority=hds,
                     learning_result=_learning_result(),
                     seed=1,
+                )
+
+    def test_c2_c10_compiler_changes_only_candidate_p_a(self) -> None:
+        active_manifest_before = (
+            BUNDLE_DIR / "p10_manifest.json"
+        ).read_bytes()
+        active = _json(BUNDLE_DIR / "p10_manifest.json")
+        active_bundles = active.get("bundles")
+        if not isinstance(active_bundles, dict):
+            raise TypeError("active manifest bundles invalid")
+        active_files_before = {
+            str(entry["filename"]): (
+                BUNDLE_DIR / str(entry["filename"])
+            ).read_bytes()
+            for entry in active_bundles.values()
+            if isinstance(entry, dict)
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            hds, decision, directive = _c2_c10_compile_authorization()
+            manifest = compile_p10_c2_c10_symbolic_candidate(
+                base_bundle_dir=BUNDLE_DIR,
+                output_dir=output,
+                compile_directive=directive,
+                compile_decision=decision,
+                hds_authority=hds,
+                composition_audit_digest=(
+                    "arc3_p10_c2_c10_composition_audit:unit"
+                ),
+            )
+            candidate = instruction_body_from_mapping(
+                _json(output / P10_C2_C10_SYMBOLIC_FILENAME)
+            )
+            operator_ids = tuple(
+                item.operator_id for item in candidate.operator_instructions
+            )
+
+            self.assertTrue(directive.consumed)
+            self.assertEqual(manifest["lifecycle"], "CANDIDATE")
+            self.assertEqual(manifest["candidate_target_component"], "P-A")
+            self.assertEqual(
+                operator_ids.count(ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY),
+                1,
+            )
+            self.assertNotIn(
+                ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY,
+                tuple(
+                    item.operator_id
+                    for item in load_p10_symbolic_instruction_body()
+                    .operator_instructions
+                ),
+            )
+            manifest_bundles = manifest.get("bundles")
+            if not isinstance(manifest_bundles, dict):
+                raise TypeError("candidate manifest bundles invalid")
+            for variant in ("P-B", "hybrid"):
+                self.assertEqual(
+                    manifest_bundles[variant],
+                    active_bundles[variant],
+                )
+
+        self.assertEqual(
+            (BUNDLE_DIR / "p10_manifest.json").read_bytes(),
+            active_manifest_before,
+        )
+        for filename, content in active_files_before.items():
+            self.assertEqual((BUNDLE_DIR / filename).read_bytes(), content)
+
+    def test_c2_c10_compiler_is_byte_deterministic(self) -> None:
+        with (
+            tempfile.TemporaryDirectory() as first_temporary,
+            tempfile.TemporaryDirectory() as second_temporary,
+        ):
+            outputs = (Path(first_temporary), Path(second_temporary))
+            for output in outputs:
+                hds, decision, directive = _c2_c10_compile_authorization()
+                compile_p10_c2_c10_symbolic_candidate(
+                    base_bundle_dir=BUNDLE_DIR,
+                    output_dir=output,
+                    compile_directive=directive,
+                    compile_decision=decision,
+                    hds_authority=hds,
+                    composition_audit_digest=(
+                        "arc3_p10_c2_c10_composition_audit:unit"
+                    ),
+                )
+            active_bundles = _json(
+                BUNDLE_DIR / "p10_manifest.json"
+            )["bundles"]
+            reused_filenames = tuple(
+                str(active_bundles[variant]["filename"])
+                for variant in ("P-B", "hybrid")
+            )
+            compared = (
+                P10_C2_C10_SYMBOLIC_FILENAME,
+                *reused_filenames,
+                "p10_candidate_manifest.json",
+            )
+            for filename in compared:
+                self.assertEqual(
+                    (outputs[0] / filename).read_bytes(),
+                    (outputs[1] / filename).read_bytes(),
+                    filename,
                 )
 
 

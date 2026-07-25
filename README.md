@@ -30,7 +30,7 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
   **CONFIRMED 26 / PARTIAL 1 / STALE 9 / UNOBSERVED 147**
 - P10開発単位: **全タスク解析からのcapability cluster**
 - C2/C3: **C2 observerはCLUSTER_STABLE、C3 predictorはLOCAL_PROBE / HOLD**
-- C10: **一段可視因果文脈をLOCAL_PROBEで再開、CLUSTER_STABLE / COMPOSABLE HOLD**
+- C10: **一段可視因果文脈はCLUSTER_STABLE / COMPOSABLE、Runtime介入はREJECT**
 - all-25 standard run: **25/25 report、183 level、error 0、resume再実行0**
 - worker resource: **最大RSS 143852 KB、25/25 swap 0・exit 0**
 - 全25 gameローカルオラクル: **35 / 183、RHAE 18.821945363%**

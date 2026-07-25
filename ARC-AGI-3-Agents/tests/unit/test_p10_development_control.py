@@ -105,7 +105,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v23_control_preserves_v21_active_p(
+    def test_v24_control_preserves_v21_active_p(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -120,7 +120,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v23-transition-predictive-audit-v2",
+            "p10-v24-c2-c10-candidate-intervention",
         )
         self.assertEqual(frame["self_check"]["stable_completed_levels"], 35)
         self.assertEqual(capabilities["stable_completed_levels"], 35)
@@ -273,7 +273,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
             "FAIL_HIGH_WATER",
         )
 
-    def test_v23_resource_and_predictive_judgments_are_bound(
+    def test_v24_resource_predictive_and_causal_judgments_are_bound(
         self,
     ) -> None:
         evidence_dir = (
@@ -295,11 +295,24 @@ class P10DevelopmentControlTests(unittest.TestCase):
         temporal = _json(
             evidence_dir / "C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json"
         )
+        composition = _json(
+            evidence_dir / "C2_C10_COMPOSITION_REMOVAL_AUDIT.json"
+        )
+        intervention = _json(
+            REPOSITORY_ROOT
+            / "evidence"
+            / "p10"
+            / "development"
+            / "c2_c10_candidate_intervention_v1"
+            / "C2_C10_CANDIDATE_INTERVENTION_AUDIT.json"
+        )
         for prefix, audit in (
             ("arc3_p10_runtime_retention_audit:", retention),
             ("arc3_p10_standard_budget_all25_audit:", standard),
             ("arc3_c2_c3_predictive_cluster_audit:", predictive),
             ("arc3_c10_temporal_causal_contrast_audit:", temporal),
+            ("arc3_p10_c2_c10_composition_audit:", composition),
+            ("arc3_p10_c2_c10_candidate_intervention:", intervention),
         ):
             body = dict(audit)
             claimed = body.pop("content_digest")
@@ -354,7 +367,22 @@ class P10DevelopmentControlTests(unittest.TestCase):
         )
         self.assertEqual(
             temporal["hds_judgment"]["cluster_stable_status"],
-            "HOLD",
+            "PASS",
+        )
+        self.assertEqual(
+            composition["hds_judgment"]["composable_status"],
+            "PASS",
+        )
+        self.assertEqual(
+            intervention["hds_judgment"]["status"],
+            "REJECT",
+        )
+        self.assertFalse(
+            intervention["hds_judgment"]["allow_p_promote"]
+        )
+        self.assertFalse(intervention["active_manifest_changed"])
+        self.assertFalse(
+            intervention["hds_judgment"]["candidate_slot_retained"]
         )
 
         hypotheses = _json(
@@ -375,7 +403,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         )
         self.assertEqual(
             by_id["H40-one-step-visible-causal-context"]["status"],
-            "LOCAL_PROBE_ACCEPTED",
+            "COMPOSABLE_POLICY_REJECTED",
         )
         decisions = _json(
             CONTROL_DIR / "DECISION_LOG.json"
@@ -401,6 +429,27 @@ class P10DevelopmentControlTests(unittest.TestCase):
         )
         self.assertFalse(c2_c3["allow_p_compile"])
         self.assertFalse(c2_c3["allow_p_promote"])
+        c2_c10 = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-c2-c10-candidate-intervention-v24"
+        )
+        self.assertEqual(c2_c10["status"], "REJECT")
+        self.assertEqual(
+            c2_c10["tier_decisions"]["C10_CLUSTER_STABLE"],
+            "PASS",
+        )
+        self.assertEqual(
+            c2_c10["tier_decisions"]["C2_C10_COMPOSABLE"],
+            "PASS",
+        )
+        self.assertEqual(
+            c2_c10["tier_decisions"]["CANDIDATE_P_A_INTERVENTION"],
+            "REJECT",
+        )
+        self.assertFalse(c2_c10["allow_p_compile"])
+        self.assertFalse(c2_c10["allow_p_promote"])
 
     def test_v14_standard_budget_and_stable_regression_audits_are_bound(
         self,

@@ -23,6 +23,8 @@ from .search_reset import SEARCH_RESET_REASON
 from .semantic_operators import SemanticPlannerState
 from .visual_explorer import (
     GLOBAL_EFFECT_DIVERSIFICATION_POLICY,
+    ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY,
+    CausalContextMode,
     DeterministicVisualExplorer,
     ExplorerDecision,
     Grid,
@@ -48,6 +50,20 @@ def _prototype_priority_mode(
             for instruction in instruction_material.operator_instructions
         )
         else "legacy"
+    )
+
+
+def _causal_context_mode(
+    instruction_material: InstructionQueryResult,
+) -> CausalContextMode:
+    return (
+        "one-step-visible"
+        if any(
+            instruction.operator_id
+            == ONE_STEP_VISIBLE_CAUSAL_CONTEXT_POLICY
+            for instruction in instruction_material.operator_instructions
+        )
+        else "disabled"
     )
 
 
@@ -161,7 +177,14 @@ def prepare_visual_search_reset(
         terminal_state=terminal_state,
         level_progress=False,
     )
-    decision = explorer.decide(scene)
+    decision = explorer.decide(
+        scene,
+        causal_context_mode=(
+            "one-step-visible"
+            if explorer.causal_context_token
+            else "disabled"
+        ),
+    )
     if decision.reason != SEARCH_RESET_REASON or decision.action is not None:
         return None
     memory_payload: dict[str, object] = {
@@ -468,6 +491,7 @@ class P10VisualCompute(PureLLMCompute):
                 else explorer.decide(
                     scene,
                     prototype_priority_mode=_prototype_priority_mode(query),
+                    causal_context_mode=_causal_context_mode(query),
                 )
             )
         candidates = cast(

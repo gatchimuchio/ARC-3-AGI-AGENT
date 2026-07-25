@@ -1,0 +1,1131 @@
+{
+  "active_manifest_changed": false,
+  "active_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+  "artifact_type": "arc3_p10_c2_c10_candidate_intervention",
+  "candidate_archive": {
+    "body_filename": "p10_p_a_symbolic_c2_c10_v1.json",
+    "body_sha256": "6d3c0498ae44c019e1be1c155c0086fb2320daa6096d95dea62799448de802ca",
+    "manifest_filename": "p10_candidate_manifest_c2_c10_v1.json",
+    "manifest_sha256": "7fe2a8d9d45a2eb3ffc963ad8dfd50f9641f3379e48df92d6822709e70e1576d"
+  },
+  "candidate_descriptor": {
+    "body_digest": "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414",
+    "body_version": "p10-p-a-symbolic-c2-c10-v1",
+    "candidate_id": "candidate:p10-c2-c10-symbolic-context",
+    "compile_directive_digest": "a2ea7d5d069ebd2ef35412e6bc3af492c7a95ffc86f1f9613313b065d512e544",
+    "deterministic_rebuild_digest": "57d1b7b506a5bde34f9956602c8d12ab5cb728d42ed459820f6f2e428a167f60",
+    "lifecycle": "CANDIDATE",
+    "manifest_digest": "38bb20e084efc527c3198a887a035bc37f34e1ce4034b6e50bd80511e8147631",
+    "parameter_change_attribution": null,
+    "parameter_digest": null,
+    "predecessor_parameter_digest": null,
+    "proposal_digest": "e1b47f72618ab600a25793d9c3afc2cdcbe2fb99f26caed44a82abffa77d2f9b",
+    "provenance_digest": "p10-evidence-provenance:cc27465bc7c3523cd950ae84bdbcd64b943758d74f33ddfcaef964df56c0ab77",
+    "rollback_target": "p10-p-a-symbolic-v27",
+    "runtime_identity_free": true,
+    "same_input_candidate_output_digest": null,
+    "same_input_predecessor_output_digest": null,
+    "schema_version": "arc3-p-update-v1",
+    "source_body_digest": "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906",
+    "source_body_version": "p10-p-a-symbolic-v27",
+    "target_component": "P-A"
+  },
+  "candidate_descriptor_digest": "b19026445e87317bbbdb6f4f496eda1f2e783fe45f01e0c9c604f11eeab6985f",
+  "candidate_manifest": {
+    "activation_authority": "hds-promotion-required",
+    "bundles": {
+      "P-A": {
+        "body_version": "p10-p-a-symbolic-c2-c10-v1",
+        "content_digest": "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414",
+        "filename": "p10_p_a_symbolic_c2_c10_v1.json",
+        "format_id": "symbolic-rule-graph",
+        "operator_count": 11,
+        "sha256": "6d3c0498ae44c019e1be1c155c0086fb2320daa6096d95dea62799448de802ca"
+      },
+      "P-B": {
+        "body_version": "p10-p-b-parametric-v27",
+        "content_digest": "sha256-decimal:114639610541302772791616069098171769181624957051578342119573159698335586069159",
+        "filename": "p10_p_b_parametric_v27.json",
+        "format_id": "parametric-sigmoid-matrix",
+        "operator_count": 0,
+        "sha256": "c3791df11df4634f5d621a5c8bb14cf0e36ec8b8e9cdb831fb17fa777d2b1362"
+      },
+      "hybrid": {
+        "body_version": "p10-hybrid-v26",
+        "content_digest": "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184",
+        "filename": "p10_hybrid_v26.json",
+        "format_id": "parametric-sigmoid-matrix",
+        "operator_count": 10,
+        "sha256": "8d9f48c20bb93430c5ce159f40291419a86be913015ef664853ac3c58d7fe4c8"
+      }
+    },
+    "candidate_target_component": "P-A",
+    "compile_decision_digest": "8d64310280ec0038a3cb5458769807dd4b140c6f2bb1696dc76d356c03164cc4",
+    "compile_directive_digest": "a2ea7d5d069ebd2ef35412e6bc3af492c7a95ffc86f1f9613313b065d512e544",
+    "compiler_version": "arc3-p10-c2-c10-symbolic-compiler-v1",
+    "composition_audit_digest": "arc3_p10_c2_c10_composition_audit:6f1142071df7ac32470dddacfbce1d6349a4091e9b584b887d7d548ea8e02f68",
+    "evidence_set_digest": "579b00c64bf02c927cd90113b748145cab17eb7a76841b4ffa3d1e45a67740a1",
+    "lifecycle": "CANDIDATE",
+    "runtime_identity_free": true,
+    "schema_version": "arc3-p10-instruction-manifest-v1",
+    "seed": 0,
+    "source_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1"
+  },
+  "candidate_manifest_digest": "38bb20e084efc527c3198a887a035bc37f34e1ce4034b6e50bd80511e8147631",
+  "compile_decision": {
+    "allow_p_compile": true,
+    "allow_p_promote": false,
+    "allow_p_rollback": false,
+    "authority": "hds-p-update-only",
+    "candidate_bundle_digest": null,
+    "decision_id": "p-update-decision:00e626a74fd56c771e52280d",
+    "evidence_set_digest": "579b00c64bf02c927cd90113b748145cab17eb7a76841b4ffa3d1e45a67740a1",
+    "proposal_digest": "e1b47f72618ab600a25793d9c3afc2cdcbe2fb99f26caed44a82abffa77d2f9b",
+    "reason_codes": [
+      "c2-c10-composable-removal-gate-pass",
+      "candidate-p-a-only",
+      "active-p-remains-unchanged"
+    ],
+    "regression_report_digest": null,
+    "status": "COMPILE"
+  },
+  "compile_decision_digest": "8d64310280ec0038a3cb5458769807dd4b140c6f2bb1696dc76d356c03164cc4",
+  "compile_directive_digest": "a2ea7d5d069ebd2ef35412e6bc3af492c7a95ffc86f1f9613313b065d512e544",
+  "compiler_version": "arc3-p10-c2-c10-symbolic-compiler-v1",
+  "composition_audit_digest": "arc3_p10_c2_c10_composition_audit:6f1142071df7ac32470dddacfbce1d6349a4091e9b584b887d7d548ea8e02f68",
+  "content_digest": "arc3_p10_c2_c10_candidate_intervention:a00caa01fa471dc99992b47c22e17696590ab5830276b571b9867375652553f3",
+  "deterministic_rebuild_digest": "57d1b7b506a5bde34f9956602c8d12ab5cb728d42ed459820f6f2e428a167f60",
+  "development_only": true,
+  "evaluation": {
+    "active_errors_zero": true,
+    "active_manifest_unchanged": true,
+    "active_reproducible": true,
+    "baseline_held_out_completed": 0,
+    "baseline_stable_completed": 29,
+    "baseline_target_completed": 0,
+    "bounded_positive": false,
+    "candidate_errors_zero": true,
+    "candidate_held_out_completed": 0,
+    "candidate_reproducible": true,
+    "candidate_stable_completed": 29,
+    "candidate_target_completed": 0,
+    "held_out_completion_delta": 0,
+    "held_out_non_degradation": true,
+    "stable_completion_delta": 0,
+    "stable_non_regression": true,
+    "target_completion_delta": 0,
+    "target_improved": false
+  },
+  "evidence_set": {
+    "approved_memory_refs": [
+      "arc3_p10_c2_c10_composition_audit:6f1142071df7ac32470dddacfbce1d6349a4091e9b584b887d7d548ea8e02f68",
+      "arc3_c10_temporal_causal_contrast_audit:701569aa5a95e48bda8d53af2869e9cac8e0e12ab9276bbca4976e35e19012bb",
+      "arc3_c2_c3_predictive_cluster_audit:f9df9e96eb2da106ae87fc39d28929b16a7224ff0e31117e17c60c2c831ee91c"
+    ],
+    "contradiction_refs": [
+      "contradiction:action-only-context-removal:12e9f12eb9edbaf53a8c97848c117d3baf4c19502f7d8c4b9053261d275699f8"
+    ],
+    "evidence_set_id": "evidence-set:c2-c10-symbolic-context",
+    "failure_refs": [
+      "failure:visible-context-ambiguity:12e9f12eb9edbaf53a8c97848c117d3baf4c19502f7d8c4b9053261d275699f8"
+    ],
+    "hds_memory_decision_digests": [
+      "hds-memory-decision:8ac5c50c43c4f46b687816012a82b8255ea5705f5dad894cbee97d30a49827c2"
+    ],
+    "holdout_refs": [
+      "holdout:mechanism-transfer:12e9f12eb9edbaf53a8c97848c117d3baf4c19502f7d8c4b9053261d275699f8"
+    ],
+    "memory_snapshot_digest": "development-memory-snapshot:ba7a18c0867d0e4b9495e94a4c4fe9ebdeb30d81a3e09aa138a22a7472eea067",
+    "negative_contrast_refs": [
+      "contrast:remove-c2:12e9f12eb9edbaf53a8c97848c117d3baf4c19502f7d8c4b9053261d275699f8",
+      "contrast:remove-c10:12e9f12eb9edbaf53a8c97848c117d3baf4c19502f7d8c4b9053261d275699f8"
+    ],
+    "positive_contrast_refs": [
+      "contrast:c2-c10-full:12e9f12eb9edbaf53a8c97848c117d3baf4c19502f7d8c4b9053261d275699f8"
+    ],
+    "proposal_digest": "e1b47f72618ab600a25793d9c3afc2cdcbe2fb99f26caed44a82abffa77d2f9b",
+    "provenance": [
+      "arc3_p10_c2_c10_composition_audit:6f1142071df7ac32470dddacfbce1d6349a4091e9b584b887d7d548ea8e02f68"
+    ],
+    "replay_audit_refs": [
+      "audit:runtime-identity-free-boundary:2ebce31f01d480f7d533e92fe2faaec91b37ead57fa29e73c0f21cf384e51db1"
+    ],
+    "runtime_identity_free": true,
+    "schema_version": "arc3-p-update-v1"
+  },
+  "evidence_set_digest": "579b00c64bf02c927cd90113b748145cab17eb7a76841b4ffa3d1e45a67740a1",
+  "hds_judgment": {
+    "allow_p_compile": false,
+    "allow_p_promote": false,
+    "allow_p_rollback": false,
+    "authority": "hds-p-update-only",
+    "bounded_all_sample_regression_authorized": false,
+    "candidate_bundle_digest": "b19026445e87317bbbdb6f4f496eda1f2e783fe45f01e0c9c604f11eeab6985f",
+    "candidate_slot_retained": false,
+    "decision_id": "p-update-decision:36013f746791df0437c534e2",
+    "evidence_set_digest": null,
+    "proposal_digest": "e1b47f72618ab600a25793d9c3afc2cdcbe2fb99f26caed44a82abffa77d2f9b",
+    "reason_codes": [
+      "bounded-intervention-promotion-gate-failed",
+      "target_improved",
+      "bounded_positive",
+      "active-p-remains-unchanged"
+    ],
+    "regression_report_digest": null,
+    "runtime_p_promotion_authorized": false,
+    "score_progress_claim_authorized": false,
+    "status": "REJECT"
+  },
+  "instruction_variant": "P-A",
+  "operation_mode": "offline",
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "probe_decision": {
+    "allow_p_compile": false,
+    "allow_p_promote": false,
+    "allow_p_rollback": false,
+    "authority": "hds-p-update-only",
+    "candidate_bundle_digest": "b19026445e87317bbbdb6f4f496eda1f2e783fe45f01e0c9c604f11eeab6985f",
+    "decision_id": "p-update-decision:fdab1465c6b1b0611779f3dc",
+    "evidence_set_digest": null,
+    "proposal_digest": "e1b47f72618ab600a25793d9c3afc2cdcbe2fb99f26caed44a82abffa77d2f9b",
+    "reason_codes": [
+      "candidate-isolated-from-active-manifest",
+      "same-condition-active-removal-control",
+      "stable-discovery-held-out-double-run"
+    ],
+    "regression_report_digest": null,
+    "status": "PROBE"
+  },
+  "probe_decision_digest": "1a35c329a680481e53934b43e8af65f82b5229c69991648f9240ee52405873ac",
+  "probe_specs": [
+    {
+      "cohort": "stable",
+      "environment_selector": "ft09-0d8bbf25",
+      "max_actions": 450
+    },
+    {
+      "cohort": "stable",
+      "environment_selector": "lp85-305b61c3",
+      "max_actions": 450
+    },
+    {
+      "cohort": "stable",
+      "environment_selector": "su15-1944f8ab",
+      "max_actions": 450
+    },
+    {
+      "cohort": "stable",
+      "environment_selector": "tr87-cd924810",
+      "max_actions": 450
+    },
+    {
+      "cohort": "discovery",
+      "environment_selector": "cd82-fb555c5d",
+      "max_actions": 450
+    },
+    {
+      "cohort": "held-out",
+      "environment_selector": "g50t-5849a774",
+      "max_actions": 450
+    },
+    {
+      "cohort": "held-out",
+      "environment_selector": "sc25-635fd71a",
+      "max_actions": 450
+    }
+  ],
+  "proposal": {
+    "evidence_refs": [
+      "arc3_p10_c2_c10_composition_audit:6f1142071df7ac32470dddacfbce1d6349a4091e9b584b887d7d548ea8e02f68",
+      "arc3_c10_temporal_causal_contrast_audit:701569aa5a95e48bda8d53af2869e9cac8e0e12ab9276bbca4976e35e19012bb",
+      "arc3_c2_c3_predictive_cluster_audit:f9df9e96eb2da106ae87fc39d28929b16a7224ff0e31117e17c60c2c831ee91c"
+    ],
+    "expected_affected_capabilities": [
+      "visible-effect-context-exploration"
+    ],
+    "expected_effect": "bounded-visible-context-reopens-nonhazard-action",
+    "expected_unaffected_capabilities": [
+      "active-runtime-manifest",
+      "parametric-instruction-body",
+      "hybrid-instruction-body",
+      "global-hazard-block"
+    ],
+    "falsifiers": [
+      "target-completion-does-not-increase",
+      "stable-completion-decreases",
+      "candidate-rerun-differs",
+      "active-manifest-changes"
+    ],
+    "proposal_id": "proposal:c2-c10-symbolic-context",
+    "provenance": [
+      "arc3_p10_c2_c10_composition_audit:6f1142071df7ac32470dddacfbce1d6349a4091e9b584b887d7d548ea8e02f68",
+      "development-memory:hds-accepted-composition"
+    ],
+    "rollback_target": "p10-p-a-symbolic-v27",
+    "runtime_identity_free": true,
+    "schema_version": "arc3-p-update-v1",
+    "source_p_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+    "source_p_version": "p10-p-a-symbolic-v27",
+    "target_component": "P-A",
+    "update_type": "symbolic-capability-composition"
+  },
+  "proposal_digest": "e1b47f72618ab600a25793d9c3afc2cdcbe2fb99f26caed44a82abffa77d2f9b",
+  "removal_controls": {
+    "active_p_a_without_c10": true,
+    "fixed_result_label_transfer_used": false,
+    "remove_c2_predictive_evidence_digest": "12e9f12eb9edbaf53a8c97848c117d3baf4c19502f7d8c4b9053261d275699f8",
+    "timer_or_path_selector_used": false
+  },
+  "runs": {
+    "active_first": [
+      {
+        "actions": 75,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "d1c80bbcfd2b29a89419e8c755495c78433ac858fe1ecb1cce29ebbc851aa029",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "91f16fa52a36650865f148cfb67d0d40816cc5040fc0eb4608bc8b3c36c2d9b3",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:d1609ad790ef838873b451f4efdef81c91d7e205144f97184000d1f2a104e326",
+        "search_resets": 0,
+        "selector_digest": "1805c7c82d471b3daa97674172fbe08e7be176b4e1ef37d45df9c4b319c834c5",
+        "total_levels": 6,
+        "trace_digests_digest": "05335d0be2333054d74208c520612e79a859a17ae8a3f36648718bb522ddbc7c",
+        "transition_probe_digest": "b3b3abaca2bf930288914503079df5432f1558c29dffceeaa535479b043a2d8e"
+      },
+      {
+        "actions": 235,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 8,
+        "emitted_steps_digest": "8df9ce6529d0f10c42878e35d5b24b7ee2ad1b23d62b75dc462328db6c10ccc7",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "835b597023f921259f12daa95c81347f6d39ab33c6c91333d85d4586d10b97f2",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:d6d73220f8120339f2bd35f30b88084ada8d13eb3e68e5250a55da42a73bdb87",
+        "search_resets": 0,
+        "selector_digest": "513bd7df4c84f5d87554dd764aa6555faea125dfb5911f04ad0754f3ab02cc70",
+        "total_levels": 8,
+        "trace_digests_digest": "f946c7a52a8350731b4396759ac4486069bfe0563d8f9bd3fe0d1a0e05d04368",
+        "transition_probe_digest": "27eaa9dd8f476b17ea46f82963a27ffd79456892f09f8510d9541c81f54666d3"
+      },
+      {
+        "actions": 175,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 9,
+        "emitted_steps_digest": "2fecadca4d47ea46f3f3e0f451282c32e658dda8cbb3a7c9d7256357c2c15e8a",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "cb476585e606ded4e300e7b07e9c7c3d21d2425903e7a5391bba32f1fcce9618",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:3207a6315543205886dea97c8c1b5ea27bf793af7d08d5a4c83c904d38a67d24",
+        "search_resets": 0,
+        "selector_digest": "c56b1f9d85895d984dc356e7b0495afc630abf9a0628eace223f9eb3facab739",
+        "total_levels": 9,
+        "trace_digests_digest": "e7dfbee89c940e17add7d099a49d743a26c4e4359194c749d2710d316db3e4f4",
+        "transition_probe_digest": "a0b3b3d4f0b70f8597b03741b43823ea79816d83c176fc7e422798400b5b0ed0"
+      },
+      {
+        "actions": 308,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "b08fdcfe79d2fdc06e164e169c9a0a2319317aafaa53199ede917f0ecc09fd3e",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "20d5613a57689317908384ff132ea0a744c45da7282791aa0f24f1b811771cfc",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:ea3cfd8de92548296014def8160f7eab19fec6d5cc46aa145d425c08325d4772",
+        "search_resets": 0,
+        "selector_digest": "a522e59cae2d625b92acab7bd0a226a1bbebbc59e16d4345b4a9fdce7ec05662",
+        "total_levels": 6,
+        "trace_digests_digest": "419ea3ebd97ded5c80d81d7a45c3e937b427e97050c3abdd8af95f63fb49d2be",
+        "transition_probe_digest": "fa9c7d2b544e36e3fa937fb07425ec4f4d0afb5b6d552a1d568484e68c41f564"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "discovery",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "977c072e017c19a809fa4fe4c3f77ad3aba5d343e75960ec48d778fd78fb3c07",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "d541cf3a337741a2b3e723f7195ae07a79b40508778caf8304095e1b082e5860",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 4,
+        "run_digest": "p10-c2-c10-intervention-run:661b5d154b630363f46f710334b07a01a5550ae698e4e76bb45dd455250e85db",
+        "search_resets": 0,
+        "selector_digest": "32bea2c9ff48cf08c81a6fa726df0959dd4bef3beb790fbe29de03b8f3af9065",
+        "total_levels": 6,
+        "trace_digests_digest": "fad77fa0124bd793691a94a41fb3da88a5f6c3e6d623357db6bf98954adc6533",
+        "transition_probe_digest": "f9395f7b491f102fe38529ea08e4418b6ed4c75b76033ff2cce250765f45e87b"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "held-out",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "ecc13c84c5c48040188cb22a06d354c82156eabec4f33038c62381e3a079e2aa",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "3643cf659763bc37a378a0628194c8b01302f5ea3b1895ca60c06bc95d9fc904",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 3,
+        "run_digest": "p10-c2-c10-intervention-run:e29cbb19bbae2534e7debc71b4ebc808ac2442a2997d1fbef0eef6f8769aec77",
+        "search_resets": 0,
+        "selector_digest": "59532195277e80b6fab7099ee2c59f8ca5ed4be592552a050f034f07d68a8d03",
+        "total_levels": 7,
+        "trace_digests_digest": "275e987e2a452c44ce4e550966fc1ead356717fb858fbcc99b9fdeb57935a249",
+        "transition_probe_digest": "566f7037066b8d5a0097cd35fc9d7ca56dc359824c65a81b4026e8ff30863d25"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "held-out",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "9cd3f68d967f35a56c549fd12d716d0b3c302f215641b88a5d1b81bea0b1c1f6",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "964016ceb20677caf989160cdca8b236ed9628efd6fd074059010557a7a67d43",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 8,
+        "run_digest": "p10-c2-c10-intervention-run:079a40ffdd7991f2b908839e946d529f0bdb4f5edb38773c6500cf8aa58b6fd1",
+        "search_resets": 0,
+        "selector_digest": "91c9231d4be0cfbc93e2e2e0f94b0baaa931daefed1095c59e06f84422b8435a",
+        "total_levels": 6,
+        "trace_digests_digest": "e3d6bf50047a0539a5786c46b772a72933d170fef415034fe6eeaf5aa0db0538",
+        "transition_probe_digest": "37554be544bbbfbdd7a26facbdbfc8993514e0909a1d0b4708b92a91bfec7a58"
+      }
+    ],
+    "active_second": [
+      {
+        "actions": 75,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "d1c80bbcfd2b29a89419e8c755495c78433ac858fe1ecb1cce29ebbc851aa029",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "91f16fa52a36650865f148cfb67d0d40816cc5040fc0eb4608bc8b3c36c2d9b3",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:d1609ad790ef838873b451f4efdef81c91d7e205144f97184000d1f2a104e326",
+        "search_resets": 0,
+        "selector_digest": "1805c7c82d471b3daa97674172fbe08e7be176b4e1ef37d45df9c4b319c834c5",
+        "total_levels": 6,
+        "trace_digests_digest": "05335d0be2333054d74208c520612e79a859a17ae8a3f36648718bb522ddbc7c",
+        "transition_probe_digest": "b3b3abaca2bf930288914503079df5432f1558c29dffceeaa535479b043a2d8e"
+      },
+      {
+        "actions": 235,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 8,
+        "emitted_steps_digest": "8df9ce6529d0f10c42878e35d5b24b7ee2ad1b23d62b75dc462328db6c10ccc7",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "835b597023f921259f12daa95c81347f6d39ab33c6c91333d85d4586d10b97f2",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:d6d73220f8120339f2bd35f30b88084ada8d13eb3e68e5250a55da42a73bdb87",
+        "search_resets": 0,
+        "selector_digest": "513bd7df4c84f5d87554dd764aa6555faea125dfb5911f04ad0754f3ab02cc70",
+        "total_levels": 8,
+        "trace_digests_digest": "f946c7a52a8350731b4396759ac4486069bfe0563d8f9bd3fe0d1a0e05d04368",
+        "transition_probe_digest": "27eaa9dd8f476b17ea46f82963a27ffd79456892f09f8510d9541c81f54666d3"
+      },
+      {
+        "actions": 175,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 9,
+        "emitted_steps_digest": "2fecadca4d47ea46f3f3e0f451282c32e658dda8cbb3a7c9d7256357c2c15e8a",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "cb476585e606ded4e300e7b07e9c7c3d21d2425903e7a5391bba32f1fcce9618",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:3207a6315543205886dea97c8c1b5ea27bf793af7d08d5a4c83c904d38a67d24",
+        "search_resets": 0,
+        "selector_digest": "c56b1f9d85895d984dc356e7b0495afc630abf9a0628eace223f9eb3facab739",
+        "total_levels": 9,
+        "trace_digests_digest": "e7dfbee89c940e17add7d099a49d743a26c4e4359194c749d2710d316db3e4f4",
+        "transition_probe_digest": "a0b3b3d4f0b70f8597b03741b43823ea79816d83c176fc7e422798400b5b0ed0"
+      },
+      {
+        "actions": 308,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "b08fdcfe79d2fdc06e164e169c9a0a2319317aafaa53199ede917f0ecc09fd3e",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "20d5613a57689317908384ff132ea0a744c45da7282791aa0f24f1b811771cfc",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:ea3cfd8de92548296014def8160f7eab19fec6d5cc46aa145d425c08325d4772",
+        "search_resets": 0,
+        "selector_digest": "a522e59cae2d625b92acab7bd0a226a1bbebbc59e16d4345b4a9fdce7ec05662",
+        "total_levels": 6,
+        "trace_digests_digest": "419ea3ebd97ded5c80d81d7a45c3e937b427e97050c3abdd8af95f63fb49d2be",
+        "transition_probe_digest": "fa9c7d2b544e36e3fa937fb07425ec4f4d0afb5b6d552a1d568484e68c41f564"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "discovery",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "977c072e017c19a809fa4fe4c3f77ad3aba5d343e75960ec48d778fd78fb3c07",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "d541cf3a337741a2b3e723f7195ae07a79b40508778caf8304095e1b082e5860",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 4,
+        "run_digest": "p10-c2-c10-intervention-run:661b5d154b630363f46f710334b07a01a5550ae698e4e76bb45dd455250e85db",
+        "search_resets": 0,
+        "selector_digest": "32bea2c9ff48cf08c81a6fa726df0959dd4bef3beb790fbe29de03b8f3af9065",
+        "total_levels": 6,
+        "trace_digests_digest": "fad77fa0124bd793691a94a41fb3da88a5f6c3e6d623357db6bf98954adc6533",
+        "transition_probe_digest": "f9395f7b491f102fe38529ea08e4418b6ed4c75b76033ff2cce250765f45e87b"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "held-out",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "ecc13c84c5c48040188cb22a06d354c82156eabec4f33038c62381e3a079e2aa",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "3643cf659763bc37a378a0628194c8b01302f5ea3b1895ca60c06bc95d9fc904",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 3,
+        "run_digest": "p10-c2-c10-intervention-run:e29cbb19bbae2534e7debc71b4ebc808ac2442a2997d1fbef0eef6f8769aec77",
+        "search_resets": 0,
+        "selector_digest": "59532195277e80b6fab7099ee2c59f8ca5ed4be592552a050f034f07d68a8d03",
+        "total_levels": 7,
+        "trace_digests_digest": "275e987e2a452c44ce4e550966fc1ead356717fb858fbcc99b9fdeb57935a249",
+        "transition_probe_digest": "566f7037066b8d5a0097cd35fc9d7ca56dc359824c65a81b4026e8ff30863d25"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "held-out",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "9cd3f68d967f35a56c549fd12d716d0b3c302f215641b88a5d1b81bea0b1c1f6",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:054551498351876634289167921442893039886292811342190395558502807957291718354906"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-v27"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests_digest": "964016ceb20677caf989160cdca8b236ed9628efd6fd074059010557a7a67d43",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 8,
+        "run_digest": "p10-c2-c10-intervention-run:079a40ffdd7991f2b908839e946d529f0bdb4f5edb38773c6500cf8aa58b6fd1",
+        "search_resets": 0,
+        "selector_digest": "91c9231d4be0cfbc93e2e2e0f94b0baaa931daefed1095c59e06f84422b8435a",
+        "total_levels": 6,
+        "trace_digests_digest": "e3d6bf50047a0539a5786c46b772a72933d170fef415034fe6eeaf5aa0db0538",
+        "transition_probe_digest": "37554be544bbbfbdd7a26facbdbfc8993514e0909a1d0b4708b92a91bfec7a58"
+      }
+    ],
+    "candidate_first": [
+      {
+        "actions": 75,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "d1c80bbcfd2b29a89419e8c755495c78433ac858fe1ecb1cce29ebbc851aa029",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "b612f244dd3fc5d5b7fee4c2da63b8ad72319c9eb9e6e13da71348dd35d638c2",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:773a3cf70fc232719e3451363821a60c4fa126237ca9104314ded3f5f88dbc53",
+        "search_resets": 0,
+        "selector_digest": "1805c7c82d471b3daa97674172fbe08e7be176b4e1ef37d45df9c4b319c834c5",
+        "total_levels": 6,
+        "trace_digests_digest": "a16232968267dc074ede15072d54031a63e300fa2f67776181353d2c888aca01",
+        "transition_probe_digest": "b3b3abaca2bf930288914503079df5432f1558c29dffceeaa535479b043a2d8e"
+      },
+      {
+        "actions": 235,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 8,
+        "emitted_steps_digest": "8df9ce6529d0f10c42878e35d5b24b7ee2ad1b23d62b75dc462328db6c10ccc7",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "faadd221d4c25e2321a2a7c44b3be8bf9f4ceccf415211fc5f1250d2cfb3f28b",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:dcd5102b2385394f477f86b217e236405d06bed34ac2a7628f8c214e4346b46e",
+        "search_resets": 0,
+        "selector_digest": "513bd7df4c84f5d87554dd764aa6555faea125dfb5911f04ad0754f3ab02cc70",
+        "total_levels": 8,
+        "trace_digests_digest": "2925d73e20de12bf6432df4ff0365e9fe3830d04b3ba59c43e07fd19860cc045",
+        "transition_probe_digest": "27eaa9dd8f476b17ea46f82963a27ffd79456892f09f8510d9541c81f54666d3"
+      },
+      {
+        "actions": 175,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 9,
+        "emitted_steps_digest": "2fecadca4d47ea46f3f3e0f451282c32e658dda8cbb3a7c9d7256357c2c15e8a",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "b96ea606c6bdb8c2a5ff2280b312fde718715926b1d5a1ca5d8f9230ad2f4eee",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:d214b506b711a3aba84d01ba19e19efea78c848c779708f33f83ed4cc8b6afe7",
+        "search_resets": 0,
+        "selector_digest": "c56b1f9d85895d984dc356e7b0495afc630abf9a0628eace223f9eb3facab739",
+        "total_levels": 9,
+        "trace_digests_digest": "59beebbbebe018285820b84e2cae9e92cac2b9d0910d68aa5537f0c68765a5b1",
+        "transition_probe_digest": "a0b3b3d4f0b70f8597b03741b43823ea79816d83c176fc7e422798400b5b0ed0"
+      },
+      {
+        "actions": 308,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "b08fdcfe79d2fdc06e164e169c9a0a2319317aafaa53199ede917f0ecc09fd3e",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "44b5e47fd67a92a00968fa21c5711127c9918cb21e0635b418b74c9b585c7c75",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:7e4b41304b5cc1fa9e1f4bbda727a905de034a9ffaccfff82afa36cd7034542f",
+        "search_resets": 0,
+        "selector_digest": "a522e59cae2d625b92acab7bd0a226a1bbebbc59e16d4345b4a9fdce7ec05662",
+        "total_levels": 6,
+        "trace_digests_digest": "dcce9bdaf0862bd5bfcf00041f5c5d01063805bdad83e93c03a76fc8b2803961",
+        "transition_probe_digest": "fa9c7d2b544e36e3fa937fb07425ec4f4d0afb5b6d552a1d568484e68c41f564"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "discovery",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "385477b2be7a7bae74499aa024a698009e74b59eb6b49bba2008f0ce5e1f9ff8",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "05ae4bb67ec3d7614fcacc729875df63e2d2e7db06c512839c18441bef6ea9e2",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 4,
+        "run_digest": "p10-c2-c10-intervention-run:753425da07260f47524e76fef6cbd0a45a631116f40c06533f0afb3aac14dd27",
+        "search_resets": 0,
+        "selector_digest": "32bea2c9ff48cf08c81a6fa726df0959dd4bef3beb790fbe29de03b8f3af9065",
+        "total_levels": 6,
+        "trace_digests_digest": "10141206a5469059e30113e3e55569e3b14abb5eb1eb6aa2bd860b2854eabae1",
+        "transition_probe_digest": "a9e98235a76f42fb78ed50ceda34846bc45130fdd6386d8f6a396bab2c0b79e0"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "held-out",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "696f4edf208ef2cc39b69e0fcaf76d022ba838f2e710ec923676144546aae16d",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "97e431720f5ca4fe9bb9397a425a23426f2e0e1888c279425ac899fca0111cce",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 3,
+        "run_digest": "p10-c2-c10-intervention-run:4a42c82e7426b9e76800cda2747e27dea912ae903ce20b7429b930b8dec3b0e9",
+        "search_resets": 0,
+        "selector_digest": "59532195277e80b6fab7099ee2c59f8ca5ed4be592552a050f034f07d68a8d03",
+        "total_levels": 7,
+        "trace_digests_digest": "3b59040e3e0c5acdd5b4ad26b852688893669195bc65f302712c5cec80968ef7",
+        "transition_probe_digest": "7deb193097833346f5673a819b94505b72477a53e591e059c71bd237856790a6"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "held-out",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "40873d16f9339a56659b3102ea4c623d590790aca3f6e75cc67f7f759d3d3435",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "e035bf55ff4e7eb2dad129209cced73cab6505f573fd5031b44c4f8a2b33ad96",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 8,
+        "run_digest": "p10-c2-c10-intervention-run:6eef329b0a6126192149f943fd56c61b2ef680ba616fe43bddad04c6a473f31b",
+        "search_resets": 0,
+        "selector_digest": "91c9231d4be0cfbc93e2e2e0f94b0baaa931daefed1095c59e06f84422b8435a",
+        "total_levels": 6,
+        "trace_digests_digest": "48e60b32a9f0f8ecaa215045aa911aa1adff108dcd4dd5a4011d9993b6efea47",
+        "transition_probe_digest": "7e9aee2b1d418c88fa975f691b3d7a0582b26145f1223deb89e851e223e8fe35"
+      }
+    ],
+    "candidate_second": [
+      {
+        "actions": 75,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "d1c80bbcfd2b29a89419e8c755495c78433ac858fe1ecb1cce29ebbc851aa029",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "b612f244dd3fc5d5b7fee4c2da63b8ad72319c9eb9e6e13da71348dd35d638c2",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:773a3cf70fc232719e3451363821a60c4fa126237ca9104314ded3f5f88dbc53",
+        "search_resets": 0,
+        "selector_digest": "1805c7c82d471b3daa97674172fbe08e7be176b4e1ef37d45df9c4b319c834c5",
+        "total_levels": 6,
+        "trace_digests_digest": "a16232968267dc074ede15072d54031a63e300fa2f67776181353d2c888aca01",
+        "transition_probe_digest": "b3b3abaca2bf930288914503079df5432f1558c29dffceeaa535479b043a2d8e"
+      },
+      {
+        "actions": 235,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 8,
+        "emitted_steps_digest": "8df9ce6529d0f10c42878e35d5b24b7ee2ad1b23d62b75dc462328db6c10ccc7",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "faadd221d4c25e2321a2a7c44b3be8bf9f4ceccf415211fc5f1250d2cfb3f28b",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:dcd5102b2385394f477f86b217e236405d06bed34ac2a7628f8c214e4346b46e",
+        "search_resets": 0,
+        "selector_digest": "513bd7df4c84f5d87554dd764aa6555faea125dfb5911f04ad0754f3ab02cc70",
+        "total_levels": 8,
+        "trace_digests_digest": "2925d73e20de12bf6432df4ff0365e9fe3830d04b3ba59c43e07fd19860cc045",
+        "transition_probe_digest": "27eaa9dd8f476b17ea46f82963a27ffd79456892f09f8510d9541c81f54666d3"
+      },
+      {
+        "actions": 175,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 9,
+        "emitted_steps_digest": "2fecadca4d47ea46f3f3e0f451282c32e658dda8cbb3a7c9d7256357c2c15e8a",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "b96ea606c6bdb8c2a5ff2280b312fde718715926b1d5a1ca5d8f9230ad2f4eee",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:d214b506b711a3aba84d01ba19e19efea78c848c779708f33f83ed4cc8b6afe7",
+        "search_resets": 0,
+        "selector_digest": "c56b1f9d85895d984dc356e7b0495afc630abf9a0628eace223f9eb3facab739",
+        "total_levels": 9,
+        "trace_digests_digest": "59beebbbebe018285820b84e2cae9e92cac2b9d0910d68aa5537f0c68765a5b1",
+        "transition_probe_digest": "a0b3b3d4f0b70f8597b03741b43823ea79816d83c176fc7e422798400b5b0ed0"
+      },
+      {
+        "actions": 308,
+        "all_complete": true,
+        "cohort": "stable",
+        "complete_game_count": 1,
+        "completed_levels": 6,
+        "emitted_steps_digest": "b08fdcfe79d2fdc06e164e169c9a0a2319317aafaa53199ede917f0ecc09fd3e",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "44b5e47fd67a92a00968fa21c5711127c9918cb21e0635b418b74c9b585c7c75",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": false,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 0,
+        "run_digest": "p10-c2-c10-intervention-run:7e4b41304b5cc1fa9e1f4bbda727a905de034a9ffaccfff82afa36cd7034542f",
+        "search_resets": 0,
+        "selector_digest": "a522e59cae2d625b92acab7bd0a226a1bbebbc59e16d4345b4a9fdce7ec05662",
+        "total_levels": 6,
+        "trace_digests_digest": "dcce9bdaf0862bd5bfcf00041f5c5d01063805bdad83e93c03a76fc8b2803961",
+        "transition_probe_digest": "fa9c7d2b544e36e3fa937fb07425ec4f4d0afb5b6d552a1d568484e68c41f564"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "discovery",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "385477b2be7a7bae74499aa024a698009e74b59eb6b49bba2008f0ce5e1f9ff8",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "05ae4bb67ec3d7614fcacc729875df63e2d2e7db06c512839c18441bef6ea9e2",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 4,
+        "run_digest": "p10-c2-c10-intervention-run:753425da07260f47524e76fef6cbd0a45a631116f40c06533f0afb3aac14dd27",
+        "search_resets": 0,
+        "selector_digest": "32bea2c9ff48cf08c81a6fa726df0959dd4bef3beb790fbe29de03b8f3af9065",
+        "total_levels": 6,
+        "trace_digests_digest": "10141206a5469059e30113e3e55569e3b14abb5eb1eb6aa2bd860b2854eabae1",
+        "transition_probe_digest": "a9e98235a76f42fb78ed50ceda34846bc45130fdd6386d8f6a396bab2c0b79e0"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "held-out",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "696f4edf208ef2cc39b69e0fcaf76d022ba838f2e710ec923676144546aae16d",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "97e431720f5ca4fe9bb9397a425a23426f2e0e1888c279425ac899fca0111cce",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 3,
+        "run_digest": "p10-c2-c10-intervention-run:4a42c82e7426b9e76800cda2747e27dea912ae903ce20b7429b930b8dec3b0e9",
+        "search_resets": 0,
+        "selector_digest": "59532195277e80b6fab7099ee2c59f8ca5ed4be592552a050f034f07d68a8d03",
+        "total_levels": 7,
+        "trace_digests_digest": "3b59040e3e0c5acdd5b4ad26b852688893669195bc65f302712c5cec80968ef7",
+        "transition_probe_digest": "7deb193097833346f5673a819b94505b72477a53e591e059c71bd237856790a6"
+      },
+      {
+        "actions": 450,
+        "all_complete": false,
+        "cohort": "held-out",
+        "complete_game_count": 0,
+        "completed_levels": 0,
+        "emitted_steps_digest": "40873d16f9339a56659b3102ea4c623d590790aca3f6e75cc67f7f759d3d3435",
+        "error_count": 0,
+        "errors_digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "final_status": "MAX_ACTION_STOP",
+        "instruction_body_digests": [
+          "sha256-decimal:110745132961707266009462930395625485057838441663831101027387175863387142175414"
+        ],
+        "instruction_body_versions": [
+          "p10-p-a-symbolic-c2-c10-v1"
+        ],
+        "instruction_lifecycle": "candidate",
+        "instruction_query_digests_digest": "e035bf55ff4e7eb2dad129209cced73cab6505f573fd5031b44c4f8a2b33ad96",
+        "instruction_variant": "P-A",
+        "max_action_exhausted": true,
+        "max_actions": 450,
+        "operation_mode": "offline",
+        "recoveries": 8,
+        "run_digest": "p10-c2-c10-intervention-run:6eef329b0a6126192149f943fd56c61b2ef680ba616fe43bddad04c6a473f31b",
+        "search_resets": 0,
+        "selector_digest": "91c9231d4be0cfbc93e2e2e0f94b0baaa931daefed1095c59e06f84422b8435a",
+        "total_levels": 6,
+        "trace_digests_digest": "48e60b32a9f0f8ecaa215045aa911aa1adff108dcd4dd5a4011d9993b6efea47",
+        "transition_probe_digest": "7e9aee2b1d418c88fa975f691b3d7a0582b26145f1223deb89e851e223e8fe35"
+      }
+    ]
+  },
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-p10-c2-c10-candidate-intervention-v1"
+}

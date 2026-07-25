@@ -123,6 +123,106 @@ class P10SearchResetTests(unittest.TestCase):
         self.assertNotIn("game_id", repr(prepared.memory_payload))
         self.assertNotIn("level_id", repr(prepared.memory_payload))
 
+    def test_preparation_preserves_candidate_causal_context_mode(
+        self,
+    ) -> None:
+        initial_grid = (
+            (0, 0, 0),
+            (0, 8, 0),
+            (0, 0, 0),
+        )
+        dead_grid = (
+            (0, 0, 0),
+            (0, 9, 0),
+            (0, 0, 0),
+        )
+        initial = analyze_scene(initial_grid, (1, 2))
+        dead = analyze_scene(dead_grid, (1,))
+        explorer = DeterministicVisualExplorer()
+        explorer.observe(
+            initial,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        explorer.decide(
+            initial,
+            causal_context_mode="one-step-visible",
+        )
+        explorer.observe(
+            initial,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        explorer.decide(
+            initial,
+            causal_context_mode="one-step-visible",
+        )
+        explorer.observe(
+            dead,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        explorer.decide(
+            dead,
+            causal_context_mode="one-step-visible",
+        )
+        explorer.observe(
+            dead,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        explorer.decide(
+            dead,
+            causal_context_mode="one-step-visible",
+        )
+        explorer.observe(
+            dead,
+            terminal_state="NOT_FINISHED",
+            level_progress=False,
+        )
+        stalled = explorer.decide(
+            dead,
+            causal_context_mode="one-step-visible",
+        )
+        self.assertEqual(stalled.reason, SEARCH_RESET_REASON)
+
+        memory = PassiveMemory()
+        memory.execute_storage(
+            MemoryOperation(
+                operation="ADD",
+                target="visual-cycle:causal-context-branch",
+                expected_version=0,
+                lifecycle="ACTIVE",
+                evidence_signature="rendered-transition:causal-context",
+                payload_items=tuple(
+                    sorted(
+                        {
+                            "format": VISUAL_EXPLORER_MEMORY_FORMAT,
+                            "operator_version": VISUAL_OPERATOR_VERSION,
+                            "visual_explorer": explorer.to_payload(),
+                        }.items()
+                    )
+                ),
+                provenance=("rendered-transition",),
+            )
+        )
+
+        prepared = prepare_visual_search_reset(
+            memory.view(),
+            dead_grid,
+            (1,),
+            terminal_state="NOT_FINISHED",
+        )
+
+        self.assertIsNotNone(prepared)
+        assert prepared is not None
+        retained = prepared.memory_payload["visual_explorer"]
+        assert isinstance(retained, dict)
+        self.assertEqual(
+            retained["causal_context_extension_format"],
+            "arc3-one-step-visible-causal-context-v1",
+        )
+
     def test_controller_executor_retains_memory_without_rollback(self) -> None:
         memory = PassiveMemory()
         controller = HDSSearchResetController()

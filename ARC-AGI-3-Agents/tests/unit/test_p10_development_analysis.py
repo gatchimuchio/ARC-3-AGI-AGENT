@@ -201,7 +201,24 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
             queue["queue"][1]["capability_ids"],
             ["C10_phase_timer_unlock_model"],
         )
-        self.assertEqual(queue["queue"][1]["current_tier"], "LOCAL_PROBE")
+        self.assertEqual(queue["queue"][1]["current_tier"], "COMPOSABLE")
+        self.assertEqual(
+            queue["queue"][1]["implementation_evidence"][
+                "candidate_intervention_status"
+            ],
+            "REJECT",
+        )
+        self.assertEqual(
+            queue["queue"][1]["implementation_evidence"][
+                "candidate_target_completion_delta"
+            ],
+            0,
+        )
+        self.assertFalse(
+            queue["queue"][1]["implementation_evidence"][
+                "active_manifest_changed"
+            ]
+        )
         self.assertTrue(
             all(
                 item["current_tier"] == "NOT_STARTED"
