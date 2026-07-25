@@ -16,8 +16,8 @@ def _contrast_record(
     ordinal: int,
     game_index: int,
     boundary: str,
+    action_id: int,
 ) -> dict[str, object]:
-    action = f"action:{((game_index + ordinal) % 3) + 1}"
     if boundary == "COMMIT":
         effects = [
             "VISIBLE_STATE_CHANGE",
@@ -41,7 +41,7 @@ def _contrast_record(
     elif boundary == "TRANSITION_NO_COMMIT":
         redraw = (
             "REGIONAL_REDRAW"
-            if game_index % 2
+            if (game_index + ordinal) % 2
             else "GLOBAL_REDRAW"
         )
         effects = [
@@ -62,13 +62,13 @@ def _contrast_record(
     return {
         "ordinal": ordinal,
         "source_structure_class": (
-            f"structure-class:{game_index:02d}{ordinal:02d}"
+            f"structure-class:{game_index:02d}{ordinal:03d}"
         ),
         "target_structure_class": (
-            f"structure-class:{game_index:02d}{ordinal + 1:02d}"
+            f"structure-class:{game_index:02d}{ordinal + 1:03d}"
         ),
-        "action_prototype": action.replace("action:", "prototype:"),
-        "action_class": action,
+        "action_prototype": f"prototype:{action_id}",
+        "action_class": f"action:{action_id}",
         "effect_classes": effects,
         "changed_cell_milli": (
             0 if boundary == "NO_VISIBLE_COMMIT" else 100
@@ -85,33 +85,56 @@ def _contrast_record(
         "contrast_role": role,
         "reobserve_obligation": obligation,
         "transition_digest": (
-            f"visible-transition:{game_index:02d}{ordinal:02d}"
+            f"visible-transition:{game_index:02d}{ordinal:03d}"
         ),
     }
 
 
-def _report() -> dict[str, object]:
-    game_ids = [f"g{index:02d}-sample" for index in range(25)]
-    reports: list[dict[str, object]] = []
+def _records(
+    *,
+    game_index: int,
+    predictive: bool,
+) -> list[dict[str, object]]:
     boundaries = (
         "COMMIT",
         "HAZARD",
         "TRANSITION_NO_COMMIT",
         "NO_VISIBLE_COMMIT",
     )
-    for game_index, game_id in enumerate(game_ids):
-        records = [
-            _contrast_record(
-                ordinal=ordinal,
-                game_index=game_index,
-                boundary=boundary,
+    records: list[dict[str, object]] = []
+    repetitions = 5 if predictive else 1
+    ordinal = 0
+    for _repetition in range(repetitions):
+        for boundary_index, boundary in enumerate(boundaries, start=1):
+            ordinal += 1
+            records.append(
+                _contrast_record(
+                    ordinal=ordinal,
+                    game_index=game_index,
+                    boundary=boundary,
+                    action_id=(
+                        boundary_index
+                        if predictive
+                        else ((game_index + ordinal) % 3) + 1
+                    ),
+                )
             )
-            for ordinal, boundary in enumerate(boundaries, start=1)
-        ]
+    return records
+
+
+def _report(*, predictive: bool = False) -> dict[str, object]:
+    game_ids = [f"g{index:02d}-sample" for index in range(25)]
+    reports: list[dict[str, object]] = []
+    for game_index, game_id in enumerate(game_ids):
+        records = _records(
+            game_index=game_index,
+            predictive=predictive,
+        )
+        count = len(records)
         reports.append(
             {
                 "game_id": game_id,
-                "actions": 4,
+                "actions": count,
                 "recoveries": 0,
                 "search_resets": 0,
                 "levels_completed": 0,
@@ -120,22 +143,27 @@ def _report() -> dict[str, object]:
                 "final_status": "PASS",
                 "complete": False,
                 "max_action_exhausted": False,
-                "memory_version": 4,
-                "memory_influenced_cycle_count": 3,
+                "memory_version": count,
+                "memory_influenced_cycle_count": max(0, count - 1),
                 "visual_operator_version": (
                     "arc3-p10-visual-operator-v14"
                 ),
-                "instruction_body_formats": ["p10"],
-                "instruction_body_versions": ["v1"],
-                "instruction_body_digests": ["body"],
-                "instruction_query_digests": ["query"],
-                "decision_statuses": ["ACCEPT"],
-                "verification_statuses": ["PASS"],
-                "emitted_steps": [[{"action_id": 1}]],
-                "emitted_provenance": [["synthetic"]],
-                "emitted_level_counts": [0],
-                "trace_digests": ["trace"],
-                "trace_events": [[]],
+                "instruction_body_formats": ["p10"] * count,
+                "instruction_body_versions": ["v1"] * count,
+                "instruction_body_digests": ["body"] * count,
+                "instruction_query_digests": ["query"] * count,
+                "decision_statuses": ["ACCEPT"] * count,
+                "verification_statuses": ["PASS"] * count,
+                "emitted_steps": [
+                    [{"action_id": index + 1}]
+                    for index in range(count)
+                ],
+                "emitted_provenance": [["synthetic"]] * count,
+                "emitted_level_counts": [0] * count,
+                "trace_digests": [
+                    f"trace:{index}" for index in range(count)
+                ],
+                "trace_events": [[] for _index in range(count)],
                 "rollback_decision_ids": [],
                 "rollback_memory_versions": [],
                 "failure_payload_digests": [],
@@ -155,7 +183,7 @@ def _report() -> dict[str, object]:
                     "memory_write_authority": False,
                     "external_emit_authority": False,
                     "runtime_p_promotion_authority": False,
-                    "observation_count": 4,
+                    "observation_count": count,
                     "fault_count": 0,
                     "model_overflow_count": 0,
                     "context_overflow_count": 0,
@@ -198,7 +226,7 @@ def _report() -> dict[str, object]:
 
 
 class P10TransitionClusterAuditTests(unittest.TestCase):
-    def test_cross_context_contrasts_reach_cluster_stable_only(self) -> None:
+    def test_post_action_labels_do_not_fake_predictive_stability(self) -> None:
         raw = _report()
         compact = build_p10_compact_run_evidence(raw)
 
@@ -209,25 +237,61 @@ class P10TransitionClusterAuditTests(unittest.TestCase):
             compact_evidence_sha256="compact",
         )
 
-        self.assertTrue(all(audit["checks"].values()))
-        self.assertEqual(audit["candidate_tier"], "CLUSTER_STABLE")
+        self.assertTrue(all(audit["integrity_checks"].values()))
+        self.assertTrue(all(audit["c2_observer_checks"].values()))
+        self.assertFalse(all(audit["c3_predictive_checks"].values()))
+        self.assertEqual(audit["candidate_tier"], "LOCAL_PROBE")
+        tiers = audit["capability_tiers"]
         self.assertEqual(
-            audit["summary"]["contrast_record_count"],
-            100,
+            tiers["C2_visible_effect_transition_model"],
+            "CLUSTER_STABLE",
         )
+        self.assertEqual(
+            tiers["C3_commit_boundary_predictor"],
+            "LOCAL_PROBE",
+        )
+        judgment = audit["hds_judgment"]
+        self.assertEqual(
+            judgment["c2_cluster_stable_observer_status"],
+            "PASS",
+        )
+        self.assertEqual(
+            judgment["c3_cluster_stable_predictor_status"],
+            "HOLD",
+        )
+        self.assertEqual(judgment["cluster_stable_status"], "HOLD")
+        self.assertFalse(judgment["runtime_p_compile_authorized"])
+
+    def test_repeated_held_out_causal_mapping_can_pass_predictive_gate(
+        self,
+    ) -> None:
+        raw = _report(predictive=True)
+        compact = build_p10_compact_run_evidence(raw)
+
+        audit = build_c2_c3_cluster_audit(
+            raw_report=raw,
+            raw_report_sha256="raw",
+            compact_evidence=compact,
+            compact_evidence_sha256="compact",
+        )
+
+        self.assertTrue(all(audit["integrity_checks"].values()))
+        self.assertTrue(all(audit["c2_observer_checks"].values()))
+        self.assertTrue(all(audit["c3_predictive_checks"].values()))
+        self.assertEqual(audit["candidate_tier"], "CLUSTER_STABLE")
         judgment = audit["hds_judgment"]
         self.assertEqual(judgment["cluster_stable_status"], "PASS")
         self.assertEqual(judgment["composable_status"], "HOLD")
         self.assertFalse(judgment["runtime_p_compile_authorized"])
-        self.assertFalse(judgment["runtime_p_promotion_authorized"])
         body = copy.deepcopy(audit)
         claimed = body.pop("content_digest")
         self.assertEqual(
             claimed,
-            "arc3_c2_c3_cluster_stable_audit:" + digest_object(body),
+            "arc3_c2_c3_predictive_cluster_audit:"
+            + digest_object(body),
         )
 
-    def test_semantic_prediction_drift_fails_closed(self) -> None:
+    def test_post_action_semantic_drift_fails_integrity(self) -> None:
         raw = _report()
         reports = raw["reports"]
         assert isinstance(reports, list)
@@ -240,7 +304,7 @@ class P10TransitionClusterAuditTests(unittest.TestCase):
 
         with self.assertRaisesRegex(
             ValueError,
-            "all_record_semantics_recomputed",
+            "all_post_action_semantics_recomputed",
         ):
             build_c2_c3_cluster_audit(
                 raw_report=raw,

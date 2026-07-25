@@ -242,19 +242,34 @@ target contact、selection delta、bottom tick、required capabilityとの差分
 - 四正本: 実装・生成済み
 - 183行再照合: 実装済み
 - per-game checkpoint/resume/集約: 実装済み
-- C2/C3横断shadow probe: `LOCAL_PROBE`
-- all-25 first-transition probe: 25/25、error 0
-- probe effect: 22 visible transition、3 no-visible-change
+- all-25 standard-budget probe: 25/25、183 level、error/fault 0
+- exact-condition resume: 25 reused / 0 executed
+- C2 post-action visible-effect observer: `CLUSTER_STABLE`
+- C3 non-circular boundary predictor: `LOCAL_PROBE / HOLD`
+- C3 leave-one-game-out: coverage 1000/1000、accuracy 748/1000
+- C3 leave-one-game-out recall:
+  COMMIT 0/1000、HAZARD 47/1000、TRANSITION 945/1000、
+  NO_VISIBLE 0/1000
+- C10 one-step visible causal-context contrast: `LOCAL_PROBE`
+- C10同一frame/actionのoutcome ambiguity: 3 game、81 group
+- C10一段context separator: 80 / 81 group
 - action selection influence: 0
+- worker resource: 25/25 exit 0、swap 0、最大RSS 143852 KB
+- local standard oracle: 35 / 183、RHAE 18.821945363%
 - Runtime P変更: なし
 - active P version変更: なし
 - HDS:
   - LOCAL_PROBE: `PASS`
-  - CLUSTER_STABLE: `HOLD`
+  - C2 observer CLUSTER_STABLE: `PASS`
+  - C3 predictor CLUSTER_STABLE: `HOLD`
+  - C2+C3 work block CLUSTER_STABLE: `HOLD`
+  - C10 CLUSTER_STABLE: `HOLD`
   - COMPOSABLE: `HOLD`
   - Runtime P promotion: `HOLD`
   - P10全体: `HOLD`
   - P11開始: 禁止
 
-max-actions 1のall-25 probeは計測経路とshadow能力の証拠であり、score、
-35/183更新、全sample攻略の証拠ではない。
+post-action effect、terminal、progressから再計算したboundaryはC3の予測証拠へ
+数えない。C3はheld-out action前に利用可能なsource structure、action
+prototype、action classだけで評価する。標準runとC10 contrastも計測・
+反証証拠であり、score進歩、Runtime P promotion、全sample攻略の証拠ではない。

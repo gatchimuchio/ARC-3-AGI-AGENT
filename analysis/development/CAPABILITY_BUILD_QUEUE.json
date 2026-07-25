@@ -10,7 +10,7 @@
       "test_id": "COMPOSE-KA59-REMAINING-BOUNDARY"
     }
   ],
-  "content_digest": "arc3_p10_capability_build_queue:904dca316013a5c72319f8ee1fac22dbc9d410e0198c71dc18a4993df65e9b97",
+  "content_digest": "arc3_p10_capability_build_queue:ed23c100d8c7e3711b6d1e74202ced3e199d455d55d2232b94c1a750d6d2917a",
   "development_only": true,
   "hds_gate": {
     "reason": "Queue construction authorizes development probes, not runtime promotion or a score claim.",
@@ -467,7 +467,13 @@
       "dedicated_level_operator_allowed": false,
       "implementation_evidence": {
         "action_selection_influence": false,
+        "c3_hds_status": "HOLD",
+        "capability_tiers": {
+          "C2_visible_effect_transition_model": "CLUSTER_STABLE",
+          "C3_commit_boundary_predictor": "LOCAL_PROBE"
+        },
         "code": "ARC-AGI-3-Agents/arc3_agi_agent/cross_cutting_transition.py",
+        "predictive_audit": "evidence/p10/development/c2_c3_transition_all25_max450_v2/C2_C3_PREDICTIVE_CLUSTER_AUDIT.json",
         "runtime_p_promotion_authorized": false,
         "shadow_report_field": "development_transition_probe",
         "tests": "ARC-AGI-3-Agents/tests/unit/test_cross_cutting_transition_p10.py"
@@ -498,8 +504,14 @@
         "frontier_count": 9,
         "total_link_count": 44
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "audit": "evidence/p10/development/c2_c3_transition_all25_max450_v2/C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json",
+        "cluster_stable_status": "HOLD",
+        "materially_new_observable_variable": "previous visible action/effect/boundary causal context",
+        "runtime_p_promotion_authorized": false
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 2,
       "selection_basis": "remaining capability coverage",

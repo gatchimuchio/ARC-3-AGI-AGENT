@@ -1,6 +1,6 @@
 {
   "artifact_type": "arc3_p10_capability_coverage_matrix",
-  "content_digest": "arc3_p10_capability_coverage_matrix:ab4446febd724140a52908e2861b679cdb37a0623f9c2d5503ee4ac17186fbfb",
+  "content_digest": "arc3_p10_capability_coverage_matrix:89383488e3e17a2a6e2fde055ef19d2f925f36094c6e2325fb563e77ac61d301",
   "coverage_semantics": "Counts are development links and overlap across capabilities; they must never be added as distinct solvable levels.",
   "development_only": true,
   "rows": [
@@ -415,7 +415,7 @@
           }
         ]
       },
-      "current_implementation_status": "CROSS_CUTTING_LOCAL_PROBE_IMPLEMENTED_NOT_CLUSTER_STABLE",
+      "current_implementation_status": "POST_ACTION_OBSERVER_CLUSTER_STABLE",
       "failure_signature_counts": {
         "F10_stale_frame_no_verifier": 1,
         "F2_local_delta_no_commit": 1,
@@ -1018,7 +1018,7 @@
           }
         ]
       },
-      "current_implementation_status": "CROSS_CUTTING_LOCAL_PROBE_IMPLEMENTED_NOT_CLUSTER_STABLE",
+      "current_implementation_status": "NON_CIRCULAR_PREDICTOR_LOCAL_PROBE_HOLD",
       "failure_signature_counts": {
         "F10_stale_frame_no_verifier": 1,
         "F2_local_delta_no_commit": 1,
@@ -1419,7 +1419,7 @@
           }
         ]
       },
-      "current_implementation_status": "NOT_CLUSTER_VALIDATED",
+      "current_implementation_status": "ONE_STEP_VISIBLE_CAUSAL_CONTEXT_LOCAL_PROBE",
       "failure_signature_counts": {
         "F10_stale_frame_no_verifier": 1,
         "F4_hazard_only_no_progress": 2,

@@ -105,7 +105,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v22_all_task_compilation_preserves_v21_active_p(
+    def test_v23_control_preserves_v21_active_p(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -120,7 +120,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v22-all-task-capability-compilation-v1",
+            "p10-v23-transition-predictive-audit-v2",
         )
         self.assertEqual(frame["self_check"]["stable_completed_levels"], 35)
         self.assertEqual(capabilities["stable_completed_levels"], 35)
@@ -272,6 +272,135 @@ class P10DevelopmentControlTests(unittest.TestCase):
             resource_audit["hds_judgment"]["resource_headroom_status"],
             "FAIL_HIGH_WATER",
         )
+
+    def test_v23_resource_and_predictive_judgments_are_bound(
+        self,
+    ) -> None:
+        evidence_dir = (
+            REPOSITORY_ROOT
+            / "evidence"
+            / "p10"
+            / "development"
+            / "c2_c3_transition_all25_max450_v2"
+        )
+        retention = _json(
+            evidence_dir / "P10_RUNTIME_RETENTION_AUDIT.json"
+        )
+        standard = _json(
+            evidence_dir / "P10_STANDARD_BUDGET_AUDIT.json"
+        )
+        predictive = _json(
+            evidence_dir / "C2_C3_PREDICTIVE_CLUSTER_AUDIT.json"
+        )
+        temporal = _json(
+            evidence_dir / "C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json"
+        )
+        for prefix, audit in (
+            ("arc3_p10_runtime_retention_audit:", retention),
+            ("arc3_p10_standard_budget_all25_audit:", standard),
+            ("arc3_c2_c3_predictive_cluster_audit:", predictive),
+            ("arc3_c10_temporal_causal_contrast_audit:", temporal),
+        ):
+            body = dict(audit)
+            claimed = body.pop("content_digest")
+            self.assertEqual(claimed, prefix + digest_object(body))
+
+        self.assertTrue(all(retention["checks"].values()))
+        self.assertEqual(
+            retention["fresh"]["timing"]["maximum_rss_kb"],
+            110792,
+        )
+        self.assertEqual(
+            retention["hds_judgment"]["resource_headroom_status"],
+            "PASS",
+        )
+        self.assertTrue(all(standard["checks"].values()))
+        self.assertEqual(
+            standard["resource_measurement"]["maximum_worker"][
+                "maximum_rss_kb"
+            ],
+            143852,
+        )
+        self.assertEqual(
+            standard["resource_measurement"]["worker_swap_count"],
+            0,
+        )
+        self.assertEqual(standard["summary"]["completed_levels"], 35)
+        self.assertTrue(all(predictive["c2_observer_checks"].values()))
+        self.assertFalse(
+            all(predictive["c3_predictive_checks"].values())
+        )
+        self.assertEqual(
+            predictive["hds_judgment"][
+                "c2_cluster_stable_observer_status"
+            ],
+            "PASS",
+        )
+        self.assertEqual(
+            predictive["hds_judgment"][
+                "c3_cluster_stable_predictor_status"
+            ],
+            "HOLD",
+        )
+        self.assertEqual(
+            temporal["summary"][
+                "ambiguous_same_frame_action_group_count"
+            ],
+            81,
+        )
+        self.assertEqual(
+            temporal["summary"]["one_step_separable_group_count"],
+            80,
+        )
+        self.assertEqual(
+            temporal["hds_judgment"]["cluster_stable_status"],
+            "HOLD",
+        )
+
+        hypotheses = _json(
+            CONTROL_DIR / "ACTIVE_HYPOTHESES.json"
+        )["hypotheses"]
+        by_id = {item["hypothesis_id"]: item for item in hypotheses}
+        self.assertEqual(
+            by_id["H37-hds-closed-cycle-heavy-binding-release"][
+                "status"
+            ],
+            "RUNTIME_INFRASTRUCTURE_ACCEPTED",
+        )
+        self.assertEqual(
+            by_id["H38-credit-post-action-boundary-as-prediction"][
+                "status"
+            ],
+            "REJECTED",
+        )
+        self.assertEqual(
+            by_id["H40-one-step-visible-causal-context"]["status"],
+            "LOCAL_PROBE_ACCEPTED",
+        )
+        decisions = _json(
+            CONTROL_DIR / "DECISION_LOG.json"
+        )["decisions"]
+        c2_c3 = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-c2-c3-predictive-tier-v23"
+        )
+        self.assertEqual(c2_c3["status"], "HOLD")
+        self.assertEqual(
+            c2_c3["tier_decisions"][
+                "C2_OBSERVER_CLUSTER_STABLE"
+            ],
+            "PASS",
+        )
+        self.assertEqual(
+            c2_c3["tier_decisions"][
+                "C3_PREDICTOR_CLUSTER_STABLE"
+            ],
+            "HOLD",
+        )
+        self.assertFalse(c2_c3["allow_p_compile"])
+        self.assertFalse(c2_c3["allow_p_promote"])
 
     def test_v14_standard_budget_and_stable_regression_audits_are_bound(
         self,

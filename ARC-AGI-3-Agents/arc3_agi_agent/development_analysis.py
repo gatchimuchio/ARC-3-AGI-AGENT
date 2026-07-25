@@ -784,15 +784,17 @@ def _build_coverage(
             raise ValueError(
                 f"CAPABILITY_BLOCKED_COUNT_MISMATCH:{capability_id}"
             )
-        current_status = (
-            "CROSS_CUTTING_LOCAL_PROBE_IMPLEMENTED_NOT_CLUSTER_STABLE"
-            if capability_id
-            in {
-                "C2_visible_effect_transition_model",
-                "C3_commit_boundary_predictor",
-            }
-            else "NOT_CLUSTER_VALIDATED"
-        )
+        current_status = {
+            "C2_visible_effect_transition_model": (
+                "POST_ACTION_OBSERVER_CLUSTER_STABLE"
+            ),
+            "C3_commit_boundary_predictor": (
+                "NON_CIRCULAR_PREDICTOR_LOCAL_PROBE_HOLD"
+            ),
+            "C10_phase_timer_unlock_model": (
+                "ONE_STEP_VISIBLE_CAUSAL_CONTEXT_LOCAL_PROBE"
+            ),
+        }.get(capability_id, "NOT_CLUSTER_VALIDATED")
         rows.append(
             {
                 "capability_id": capability_id,
@@ -922,6 +924,18 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     "test_cross_cutting_transition_p10.py"
                 ),
                 "shadow_report_field": "development_transition_probe",
+                "predictive_audit": (
+                    "evidence/p10/development/"
+                    "c2_c3_transition_all25_max450_v2/"
+                    "C2_C3_PREDICTIVE_CLUSTER_AUDIT.json"
+                ),
+                "capability_tiers": {
+                    "C2_visible_effect_transition_model": (
+                        "CLUSTER_STABLE"
+                    ),
+                    "C3_commit_boundary_predictor": "LOCAL_PROBE",
+                },
+                "c3_hds_status": "HOLD",
                 "action_selection_influence": False,
                 "runtime_p_promotion_authorized": False,
             },
@@ -950,6 +964,27 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
     )
     for rank, row in enumerate(remaining, start=2):
         capability_id = str(row["capability_id"])
+        current_tier = (
+            "LOCAL_PROBE"
+            if capability_id == "C10_phase_timer_unlock_model"
+            else "NOT_STARTED"
+        )
+        implementation_evidence = (
+            {
+                "audit": (
+                    "evidence/p10/development/"
+                    "c2_c3_transition_all25_max450_v2/"
+                    "C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json"
+                ),
+                "materially_new_observable_variable": (
+                    "previous visible action/effect/boundary causal context"
+                ),
+                "cluster_stable_status": "HOLD",
+                "runtime_p_promotion_authorized": False,
+            }
+            if capability_id == "C10_phase_timer_unlock_model"
+            else None
+        )
         queue.append(
             {
                 "rank": rank,
@@ -964,7 +999,12 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     "total_link_count": int(row["total_link_count"]),
                 },
                 "candidate_tiers": list(PROMOTION_TIERS),
-                "current_tier": "NOT_STARTED",
+                "current_tier": current_tier,
+                **(
+                    {"implementation_evidence": implementation_evidence}
+                    if implementation_evidence is not None
+                    else {}
+                ),
                 "promotion_gate": (
                     "Require reusable positive/negative evidence and "
                     "identity-free composition before Runtime P compile."

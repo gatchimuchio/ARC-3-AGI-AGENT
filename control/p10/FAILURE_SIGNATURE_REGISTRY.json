@@ -251,13 +251,20 @@
         "C2 links twenty-one frontier and eighty-six blocked rows",
         "C3 links nineteen frontier and seventy-eight blocked rows",
         "C2 and C3 overlap ninety-seven rows and cover a one-hundred-seven-row union",
-        "all-twenty-five first-transition shadow evidence contains twenty-two visible transitions and three no-visible transitions"
+        "all-twenty-five first-transition shadow evidence contains twenty-two visible transitions and three no-visible transitions",
+        "standard-budget evidence contains ten thousand one hundred fourteen bounded transition contrasts",
+        "C2 post-action effect and obligation checks pass across games and structures",
+        "C3 leave-one-game-out rare-boundary recall remains insufficient"
       ],
-      "status": "ACTIVE_LOCAL_PROBE",
+      "status": "PARTIALLY_RESOLVED_C2_ACTIVE_C3",
       "required_resolution": [
-        "collect reproducible positive negative and hazard contrasts across multiple games and structures",
         "demonstrate cluster-stable boundary prediction without task identity",
         "demonstrate composition regression removal and authority audits before any Runtime P compile"
+      ],
+      "resolution_evidence": [
+        "C2 visible and no-visible effects transfer across multiple games",
+        "C2 positive negative hazard and reobserve rollback obligations are recomputed without action influence",
+        "C2 post-action observer is HDS-admitted at CLUSTER_STABLE"
       ],
       "falsifier": "shadow recording changes an action or the effect and boundary relation does not transfer across independent structures"
     },
@@ -290,15 +297,55 @@
         "the three-worker measurement observed 283 MB peak swap",
         "the final aggregate retained 76,615,999 raw bytes and 8,906,854 compact bytes"
       ],
-      "status": "ACTIVE_RESOURCE_HEADROOM_FAILURE",
+      "status": "RESOLVED_BY_HDS_CLOSED_CYCLE_BINDING_RELEASE",
+      "required_resolution": [],
+      "resolution_evidence": [
+        "only the finalized cycle full observation context and memory binding is released",
+        "HDS decisions directives outcomes tombstones traces rollback failure and emission projections remain retained",
+        "same-condition SB26 behavior projection is exactly equal",
+        "SB26 maximum RSS decreased from 1,666,868 KB to 110,792 KB with swap zero",
+        "all twenty-five workers exited zero with swap zero and maximum RSS 143,852 KB",
+        "compact evidence checkpoint index and standard-budget audit remain content-bound"
+      ],
+      "falsifier": "the same-condition sb26 worker completes below the one-GiB threshold without swap and produces a content-bound behaviorally equivalent report"
+    },
+    {
+      "signature": "non-circular-commit-boundary-predictor-gap",
+      "structural_condition": "post-action effect classification is stable but source structure and action information available before a held-out action do not predict rare commit hazard and no-visible boundaries reliably",
+      "evidence": [
+        "leave-one-game-out coverage is 1000 per mille and accuracy is 748 per mille",
+        "leave-one-game-out COMMIT recall is zero",
+        "leave-one-game-out HAZARD recall is 47 per mille",
+        "leave-one-game-out NO_VISIBLE recall is zero",
+        "within-game prequential COMMIT recall is zero",
+        "post-action predicted_boundary receives no predictive credit"
+      ],
+      "status": "ACTIVE_C3_LOCAL_PROBE_HOLD",
       "required_resolution": [
-        "attribute the high-water allocation without using task game or level identity in Runtime P",
-        "persist full trace provenance failure rollback and emission evidence without an unbounded in-memory report",
-        "complete the same standard-budget worker below 1,048,576 KB RSS without swap",
-        "prove compact and persisted evidence remains content-bound to the same behavioral report"
+        "introduce a new identity-free observable variable available before the predicted decision",
+        "pass held-out coverage accuracy and every-boundary recall thresholds",
+        "retain zero action influence until cluster stability is independently demonstrated",
+        "complete composition regression removal and authority audits before Runtime P compile"
       ],
       "resolution_evidence": [],
-      "falsifier": "the same-condition sb26 worker completes below the one-GiB threshold without swap and produces a content-bound behaviorally equivalent report"
+      "falsifier": "a non-circular predictor passes held-out and prequential thresholds for every boundary without identity replay source or hidden state"
+    },
+    {
+      "signature": "same-rendered-action-hidden-context-ambiguity",
+      "structural_condition": "the same rendered frame and same action can produce different visible outcomes because the visible causal history is not represented in the state-action key",
+      "evidence": [
+        "eighty-one ambiguous same-frame same-action groups occur across three games",
+        "the immediately preceding visible action effect and boundary separates eighty of eighty-one groups",
+        "the old timer and path-length selector surface remains closed negative"
+      ],
+      "status": "ACTIVE_C10_LOCAL_PROBE",
+      "required_resolution": [
+        "test a bounded one-step visible-context intervention against unchanged-policy and timer-only controls",
+        "demonstrate progress and hazard separation",
+        "demonstrate cross-game cluster stability composition and removal before Runtime P compile"
+      ],
+      "resolution_evidence": [],
+      "falsifier": "the separator requires identity replay path suffix source or hidden state or fails under a bounded intervention"
     }
   ]
 }

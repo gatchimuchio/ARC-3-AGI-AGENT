@@ -1,15 +1,15 @@
 {
   "schema_version": "arc3-p10-development-frame-v1",
-  "frame_id": "p10-v22-all-task-capability-compilation-v1",
+  "frame_id": "p10-v23-transition-predictive-audit-v2",
   "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
   "authority": {
     "document": "docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md",
     "source_sha256": "113ac0516e500679792e57fbc73f21ad078d19929ae39c11ff185ac1f9a353ef",
-    "repository_sha256_lf": "7317a896bf0d1ec5819e059f5f2cbea667f9ec7a8053e60768717e2153ecf4ef"
+    "repository_sha256_lf": "26228d78b30399bec5a9963eaa7a64481c1ca09c9de9d067346bc151c4b1e7cb"
   },
   "self_check": {
     "branch": "main",
-    "base_head": "0ec2b9dd812e58671af37e98ae80f1d62e0a6f3c",
+    "base_head": "d1891a14d547578a77614a0e919e23cc35106c4f",
     "dirty_state_preserved": true,
     "operation_mode": "OFFLINE_ONLY",
     "active_p": {
@@ -31,10 +31,10 @@
       "value": 18.821945363,
       "completed_levels": 35,
       "total_levels": 183,
-      "source": "evidence/p10/arc3_local_score_oracle_latest.json",
+      "source": "evidence/p10/development/c2_c3_transition_all25_max450_v2/arc3_local_score_oracle.json",
       "score_digest": "9f214c1825f8ee0f52b1ef6a323b778971ce03e03a3733338d2323a9b0ebb238"
     },
-    "latest_failure_signature": "high-water-runtime-allocation-on-standard-budget",
+    "latest_failure_signature": "non-circular-commit-boundary-predictor-gap",
     "stop_conditions": [
       "runtime identity routing detected",
       "HDS authority bypass detected",
@@ -58,6 +58,9 @@
       "coverage-first capability build queue",
       "per-game atomic checkpoint, exact-condition resume, and deterministic aggregation",
       "identity-free C2/C3 visible-effect and commit-boundary shadow probe",
+      "non-circular held-out and prequential C3 prediction audit",
+      "one-step visible causal-context C10 contrast audit",
+      "HDS closed-cycle heavy input-binding release with retained tombstones",
       "P10-only bounded physical history with an explicit level rollback anchor",
       "action-surface state identity, deterministic candidate paging, and bounded observation LRU",
       "machine-readable P10 control and development-analysis artifacts"
@@ -70,6 +73,8 @@
       "all-25 max-actions-one shadow-probe report and resume evidence",
       "all-25 max-actions-450 checkpoint aggregate and local score-oracle result",
       "positive and negative rendered transition contrasts",
+      "held-out pre-action prediction confusion matrices",
+      "same-rendered-state/action outcome ambiguity and preceding visible context",
       "content-addressed development artifacts and checkpoint conditions"
     ],
     "evidence_exclude": [
@@ -87,7 +92,13 @@
       "H31-coverage-first-c2-c3-cross-cutting-shadow-probe",
       "H32-increase-budget-or-parallelism-with-unbounded-retention",
       "H33-drop-history-or-candidate-tail-without-obligations",
-      "H34-bounded-history-window-and-frontier-composition"
+      "H34-bounded-history-window-and-frontier-composition",
+      "H35-increase-machine-or-parallelism",
+      "H36-truncate-audit-trace-or-provenance",
+      "H37-hds-closed-cycle-heavy-binding-release",
+      "H38-credit-post-action-boundary-as-prediction",
+      "H39-held-out-pre-action-boundary-audit",
+      "H40-one-step-visible-causal-context"
     ],
     "predictions": [
       "H29 can add one more local closure but continues linear operator proliferation and erases cross-task relations",
@@ -95,7 +106,13 @@
       "H31 exposes reusable visible-effect and commit-boundary evidence across many structures without changing action selection or active P",
       "H32 leaves superlinear retention intact and multiplies its memory hazard under parallelism",
       "H33 lowers memory only by weakening rollback or candidate-reachability obligations",
-      "H34 bounds physical retention while preserving logical memory authority rollback and complete deterministic candidate access"
+      "H34 bounds physical retention while preserving logical memory authority rollback and complete deterministic candidate access",
+      "H35 changes machine capacity without removing the retained heavy HDS cycle binding",
+      "H36 lowers memory by deleting required trace or provenance evidence",
+      "H37 releases only closed-cycle full input bindings while retaining HDS decisions directives outcomes tombstones and report projections",
+      "H38 produces a circular perfect label because it reads the post-action truth fields",
+      "H39 exposes real C3 transfer weakness with held-out and prequential prediction",
+      "H40 explains repeated same-frame/action outcome ambiguity with one-step visible causal context"
     ],
     "comparators": [
       "unchanged HDS-promoted v27/v27/v26 active manifest",
@@ -105,10 +122,14 @@
       "all-25 first-transition probe and exact-condition zero-replay resume",
       "all-25 max-actions-450 aggregate at 35 of 183 and 18.821945363 percent local RHAE",
       "same-game twenty-action and four-hundred-fifty-action resource profiles",
-      "default-history rollback pagination and LRU regression tests"
+      "default-history rollback pagination and LRU regression tests",
+      "SB26 behavior-equivalent 1666868 KB to 110792 KB retention comparison",
+      "all twenty-five worker exit swap and resident-memory logs",
+      "C3 leave-one-game-out and within-game prequential confusion matrices",
+      "C10 eighty-one same-frame/action ambiguity groups"
     ],
-    "expected_state_transition": "per-level operator loop -> all-task capability-cluster development while adopted completion remains thirty-five",
-    "falsification_relation": "provenance drifts, row accounting differs from one hundred eighty-three, coverage counts drift, checkpoint conditions can be mixed, shadow evidence influences an action, active P changes, deterministic rebuild differs, a rollback anchor is pruned, candidate sixty-five is unreachable, bounded maximum-budget execution again exhausts memory, or retained evidence requires an unbounded high-water allocation"
+    "expected_state_transition": "resource-headroom failure -> behavior-equivalent bounded retention; circular C3 claim -> explicit C2 stable observer plus C3 predictive HOLD; C10 closed timer surface -> materially new visible-context LOCAL_PROBE",
+    "falsification_relation": "provenance drifts, row accounting differs from one hundred eighty-three, checkpoint conditions can be mixed, shadow evidence influences an action, active P changes, deterministic rebuild differs, a rollback anchor is pruned, candidate sixty-five is unreachable, any worker exceeds one GiB or swaps, post-action truth receives predictive credit, or a weak held-out predictor is promoted"
   },
   "Mc": {
     "identity": "generic-double-trinity-P-update-control",
@@ -119,10 +140,12 @@
       "all 183 rows retain the required task-aware development fields",
       "reconciliation totals equal 183 and capability counts are deterministic",
       "checkpoint reuse requires an exact condition digest",
-      "all twenty-five sample games produce one shadow observation with zero runtime influence",
+      "all twenty-five sample games produce bounded full-budget shadow contrasts with zero runtime influence",
       "default P6 memory keeps full history while P10 keeps base current and explicit rollback snapshots",
       "all observation-derived candidates remain deterministically reachable under bounded storage",
       "all twenty-five standard-budget workers complete and aggregate without runtime errors",
+      "all measured worker exit codes and swap counts are zero and maximum RSS stays below one GiB",
+      "C2 and C3 tier judgments are separated by non-circular predictive evidence",
       "active P versions digests and adopted completion remain unchanged",
       "only HDS may advance LOCAL_PROBE to CLUSTER_STABLE COMPOSABLE compile or promotion"
     ],
@@ -147,18 +170,20 @@
     "completion": [
       "per-level dedicated operator continuation is rejected as the P10 development unit",
       "task-aware analysis survives until the final runtime compilation boundary",
-      "C2 and C3 shadow evidence is accepted only at LOCAL_PROBE",
+      "C2 post-action observer is accepted at CLUSTER_STABLE while C3 predictor remains LOCAL_PROBE HOLD",
       "bounded runtime retention is classified as infrastructure and not score or capability progress",
       "the standard-budget aggregate is measured at thirty-five of one hundred eighty-three and 18.821945363 percent local RHAE",
-      "the sb26 high-water allocation remains an active resource failure",
-      "CLUSTER_STABLE COMPOSABLE and Runtime P promotion remain on HOLD",
+      "the sb26 high-water allocation is resolved with behavior equality and 110792 KB RSS",
+      "C10 one-step visible causal context reopens LOCAL_PROBE only",
+      "C2 C3 work-block CLUSTER_STABLE COMPOSABLE and Runtime P promotion remain on HOLD",
       "the adopted boundary remains thirty-five of one hundred eighty-three",
       "P10 and P11 remain gated"
     ]
   },
   "non_goals": [
     "active P update from LOCAL_PROBE",
-    "score claim from max-actions-one evidence",
+    "score progress claim from unchanged standard-budget evidence",
+    "crediting a post-action recomputation as C3 prediction",
     "dedicated operator for the remaining KA59 level",
     "P11 start",
     "official ARC or Kaggle connection",
@@ -188,7 +213,9 @@
     "checkpoint exact-condition resume audit",
     "all-25 standard-budget aggregate and local-oracle binding audit",
     "per-game resident-memory high-water audit",
-    "shadow action-influence audit"
+    "shadow action-influence audit",
+    "non-circular held-out prediction audit",
+    "C10 one-step visible-context contrast audit"
   ],
   "maximum_work_scope": [
     "field-level salvage and deterministic compilation of all 183 task-aware rows",
@@ -198,6 +225,7 @@
     "P10 physical-history and rendered-frontier resource bounding without logical-memory or P changes",
     "bounded standard-budget evidence persistence below the one-GiB worker high-water threshold",
     "cross-context positive negative and hazard contrast collection",
+    "one-step visible causal-context LOCAL_PROBE without policy influence",
     "no candidate P compile until CLUSTER_STABLE and COMPOSABLE evidence exists"
   ]
 }

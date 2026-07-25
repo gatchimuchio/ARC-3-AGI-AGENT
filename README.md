@@ -29,14 +29,17 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - 現行183行再照合:
   **CONFIRMED 26 / PARTIAL 1 / STALE 9 / UNOBSERVED 147**
 - P10開発単位: **全タスク解析からのcapability cluster**
-- C2/C3: **LOCAL_PROBE PASS、CLUSTER_STABLE / COMPOSABLE HOLD**
-- all-25 checkpoint smoke: **25/25 report、error 0、resume再実行0**
-- 全25 gameローカルオラクル: **未計測**（完全report未生成）
+- C2/C3: **C2 observerはCLUSTER_STABLE、C3 predictorはLOCAL_PROBE / HOLD**
+- C10: **一段可視因果文脈をLOCAL_PROBEで再開、CLUSTER_STABLE / COMPOSABLE HOLD**
+- all-25 standard run: **25/25 report、183 level、error 0、resume再実行0**
+- worker resource: **最大RSS 143852 KB、25/25 swap 0・exit 0**
+- 全25 gameローカルオラクル: **35 / 183、RHAE 18.821945363%**
 - 満点・AGI完成・汎化達成の主張: **なし**
 
 旧資産には `46/183`、`97/183`、`6/183` など異なる条件・時点の数値が
 混在している。現行35 / 183は同条件回帰を通した能力blockの採用境界であり、
-25 game / 183 levelの完全reportが揃うまでfull score基準値は固定しない。
+完全reportと添付ZIPへ束縛した現行full score基準値はRHAE
+`18.821945363%`である。これは回帰指標であり、能力進歩やP10完了ではない。
 
 ## 最小設計
 
@@ -234,8 +237,9 @@ P-A、P-B、hybridは`--instruction-variant`で同一条件比較できます。
 現行active Pは`p10-p-a-symbolic-v27`、`p10-p-b-parametric-v27`、
 `p10-hybrid-v26`です。同条件二回のtarget比較と既存29 level回帰を経て、
 HDSが採用した再現可能なlevel境界は`35 / 183`です。ただし全25 gameを
-含む完全reportは未生成であり、ローカルオラクルscoreは未計測、
-P10全体は`HOLD`です。
+含む標準budget完全reportは25/25・183 level・error 0で生成済みです。
+添付ZIPへ束縛したローカルオラクルは35 / 183、RHAE
+`18.821945363%`です。21 gameがmax-action停止のためP10全体は`HOLD`です。
 
 開発用分析台帳の再生成:
 

@@ -52,8 +52,11 @@ P10では次だけを行う。
 - 全trace保存と同一release条件での再現確認
 
 現行境界はactive P `v27 / v27 / v26`、HDS採用済み`35 / 183`である。
-C2/C3 shadow能力は`LOCAL_PROBE`だけをPASSとし、score、active P、
-`CLUSTER_STABLE`、`COMPOSABLE`、P11開始はすべてHOLDである。
+C2の事後visible-effect observerだけを`CLUSTER_STABLE`、C3の非循環predictorを
+`LOCAL_PROBE / HOLD`とする。C10は一段可視因果文脈で`LOCAL_PROBE`を再開した。
+C2+C3 work block、C10の`CLUSTER_STABLE`、`COMPOSABLE`、score進歩、
+active P変更、P11開始はすべてHOLDである。現行標準オラクルは
+`35 / 183`、RHAE `18.821945363%`である。
 
 P10ではrelease state固定、公式接続、Kaggle作業を実行・完了扱いしない。
 

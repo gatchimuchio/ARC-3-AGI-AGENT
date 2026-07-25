@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-v22-all-task-capability-compilation-v1",
+  "frame_id": "p10-v23-transition-predictive-audit-v2",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -142,6 +142,36 @@
         "weakens-p6-history-contract"
       ],
       "reopen_condition": "only with explicit rollback-anchor retention, deterministic candidate pagination, and default P6 non-regression"
+    },
+    {
+      "hypothesis_id": "H35-increase-machine-or-parallelism",
+      "status": "REJECTED",
+      "reason_codes": [
+        "does-not-release-the-retained-hds-cycle-binding",
+        "postpones-rather-than-removes-the-high-water-allocation",
+        "parallel-workers-multiply-the-same-resource-hazard"
+      ],
+      "reopen_condition": "none; machine capacity is not a substitute for bounded runtime ownership"
+    },
+    {
+      "hypothesis_id": "H36-truncate-audit-trace-or-provenance",
+      "status": "REJECTED",
+      "reason_codes": [
+        "weakens-behavioral-equivalence-evidence",
+        "breaks-removal-and-authority-audit-obligations",
+        "resource-headroom-was-restored-without-truncation"
+      ],
+      "reopen_condition": "none; required trace provenance rollback failure and emission evidence must remain auditable"
+    },
+    {
+      "hypothesis_id": "H38-credit-post-action-boundary-as-prediction",
+      "status": "REJECTED",
+      "reason_codes": [
+        "reads-the-same-post-action-effect-and-progress-fields-as-the-truth-label",
+        "produces-a-circular-perfect-result",
+        "cannot-inform-a-held-out-action"
+      ],
+      "reopen_condition": "none; post-action recomputation may be an integrity check but never prospective C3 evidence"
     }
   ]
 }

@@ -445,6 +445,90 @@
         "docs/architecture/P10_COMPLETE_SAMPLE_SOLVER.md"
       ],
       "maximum_information_gain_next": "eliminate the sb26 evidence high-water allocation without weakening audit obligations, then collect cross-context C2 C3 contrasts without changing Runtime P"
+    },
+    {
+      "decision_id": "j-dev:p10-closed-cycle-retention-v23",
+      "authority": "development-hds-only",
+      "status": "PASS",
+      "selected_hypothesis": "H37-hds-closed-cycle-heavy-binding-release",
+      "rejected_hypotheses": [
+        "H35-increase-machine-or-parallelism",
+        "H36-truncate-audit-trace-or-provenance"
+      ],
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "sb26-behavior-projection-equal",
+        "sb26-rss-decreased-from-1666868-to-110792-kb",
+        "all-twenty-five-worker-exits-zero",
+        "all-twenty-five-worker-swaps-zero",
+        "maximum-worker-rss-143852-kb",
+        "required-audit-evidence-retained",
+        "active-p-and-score-unchanged"
+      ],
+      "evidence_ref": "evidence/p10/development/c2_c3_transition_all25_max450_v2/P10_RUNTIME_RETENTION_AUDIT.json",
+      "supporting_evidence": [
+        "evidence/p10/development/c2_c3_transition_all25_max450_v2/P10_STANDARD_BUDGET_AUDIT.json",
+        "evidence/p10/development/c2_c3_transition_all25_max450_v2/resource_logs",
+        "ARC-AGI-3-Agents/tests/unit/test_arc3_agi_kernel.py",
+        "ARC-AGI-3-Agents/tests/unit/test_p10_runtime_retention_audit.py"
+      ],
+      "maximum_information_gain_next": "separate C2 observation from non-circular C3 prediction"
+    },
+    {
+      "decision_id": "j-dev:p10-c2-c3-predictive-tier-v23",
+      "authority": "development-hds-only",
+      "status": "HOLD",
+      "selected_hypothesis": "H39-held-out-pre-action-boundary-audit",
+      "rejected_hypothesis": "H38-credit-post-action-boundary-as-prediction",
+      "tier_decisions": {
+        "LOCAL_PROBE": "PASS",
+        "C2_OBSERVER_CLUSTER_STABLE": "PASS",
+        "C3_PREDICTOR_CLUSTER_STABLE": "HOLD",
+        "WORK_BLOCK_CLUSTER_STABLE": "HOLD",
+        "COMPOSABLE": "HOLD",
+        "RUNTIME_P_COMPILE": "HOLD",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "c2-cross-game-effect-and-obligation-contrasts-pass",
+        "post-action-recomputed-boundary-receives-no-predictive-credit",
+        "c3-held-out-accuracy-748-per-mille",
+        "c3-held-out-commit-recall-zero",
+        "c3-held-out-hazard-recall-47-per-mille",
+        "c3-held-out-no-visible-recall-zero",
+        "c3-prequential-commit-recall-zero"
+      ],
+      "evidence_ref": "evidence/p10/development/c2_c3_transition_all25_max450_v2/C2_C3_PREDICTIVE_CLUSTER_AUDIT.json",
+      "maximum_information_gain_next": "test a new identity-free visible causal-context feature without compiling Runtime P"
+    },
+    {
+      "decision_id": "j-dev:p10-c10-visible-context-local-probe-v23",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H40-one-step-visible-causal-context",
+      "tier_decisions": {
+        "LOCAL_PROBE": "PASS",
+        "CLUSTER_STABLE": "HOLD",
+        "COMPOSABLE": "HOLD",
+        "RUNTIME_P_COMPILE": "HOLD",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "legacy-timer-and-path-length-surface-remains-closed-negative",
+        "same-frame-same-action-outcome-ambiguity-occurs-in-three-games",
+        "one-step-visible-context-separates-eighty-of-eighty-one-groups",
+        "progress-and-hazard-utility-remain-unproven"
+      ],
+      "evidence_ref": "evidence/p10/development/c2_c3_transition_all25_max450_v2/C10_TEMPORAL_CAUSAL_CONTRAST_AUDIT.json",
+      "maximum_information_gain_next": "compare one-step visible-context action binding against unchanged-policy and timer-only controls without active P mutation"
     }
   ]
 }

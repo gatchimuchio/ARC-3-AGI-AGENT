@@ -190,10 +190,22 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
             ["LOCAL_PROBE", "CLUSTER_STABLE", "COMPOSABLE"],
         )
         self.assertEqual(first["current_tier"], "LOCAL_PROBE")
+        self.assertEqual(
+            first["implementation_evidence"]["capability_tiers"],
+            {
+                "C2_visible_effect_transition_model": "CLUSTER_STABLE",
+                "C3_commit_boundary_predictor": "LOCAL_PROBE",
+            },
+        )
+        self.assertEqual(
+            queue["queue"][1]["capability_ids"],
+            ["C10_phase_timer_unlock_model"],
+        )
+        self.assertEqual(queue["queue"][1]["current_tier"], "LOCAL_PROBE")
         self.assertTrue(
             all(
                 item["current_tier"] == "NOT_STARTED"
-                for item in queue["queue"][1:]
+                for item in queue["queue"][2:]
             )
         )
         self.assertTrue(

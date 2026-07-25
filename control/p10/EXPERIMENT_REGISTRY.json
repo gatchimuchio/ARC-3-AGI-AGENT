@@ -494,6 +494,92 @@
         "remaining one hundred forty-eight level closure"
       ],
       "status": "PASS_WORKER_COMPLETION_FAIL_RESOURCE_HEADROOM_P_UNCHANGED"
+    },
+    {
+      "experiment_id": "p10-closed-cycle-retention-all25-v23",
+      "frame_id": "p10-v23-transition-predictive-audit-v2",
+      "selected_hypothesis": "H37-hds-closed-cycle-heavy-binding-release",
+      "supporting_hypothesis": "H34-bounded-history-window-and-frontier-composition",
+      "rejected_hypothesis": [
+        "H35-increase-machine-or-parallelism",
+        "H36-truncate-audit-trace-or-provenance"
+      ],
+      "bounded_change": [
+        "release only a judged and finalized HDS cycle full input binding",
+        "retain decisions directives outcomes tombstones traces rollback failure and emission evidence",
+        "freeze closed cycles into compact report records",
+        "retain only the latest rendered frame in the agent"
+      ],
+      "baseline": "SB26 active hybrid max-actions 450 produced the same behavioral report at 1,666,868 KB maximum RSS",
+      "prediction": [
+        "SB26 behavioral projection remains equal",
+        "fresh SB26 maximum RSS remains below 1,048,576 KB",
+        "all twenty-five workers exit zero without worker swap",
+        "active P and score remain unchanged"
+      ],
+      "observed": [
+        "SB26 behavior projection is exactly equal after excluding development-only shadow telemetry",
+        "fresh SB26 maximum RSS is 110,792 KB with swap zero",
+        "all twenty-five workers exited zero and reported swap zero",
+        "maximum worker RSS is 143,852 KB",
+        "all twenty-five checkpoints resumed with zero execution",
+        "score remains thirty-five of one hundred eighty-three and 18.821945363 percent RHAE"
+      ],
+      "unchanged": [
+        "OFFLINE-only phase boundary",
+        "HDS sole authority",
+        "required audit evidence",
+        "active P versions and digests",
+        "thirty-five adopted levels"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "remaining one hundred forty-eight level closure"
+      ],
+      "status": "PASS_RESOURCE_HEADROOM_BEHAVIOR_EQUAL_P_UNCHANGED"
+    },
+    {
+      "experiment_id": "p10-c2-c3-c10-predictive-audit-v23",
+      "frame_id": "p10-v23-transition-predictive-audit-v2",
+      "selected_hypothesis": "H39-held-out-pre-action-boundary-audit",
+      "supporting_hypothesis": "H40-one-step-visible-causal-context",
+      "rejected_hypothesis": [
+        "H38-credit-post-action-boundary-as-prediction"
+      ],
+      "bounded_change": [
+        "separate C2 post-action observation from C3 prospective prediction",
+        "evaluate C3 with leave-one-game-out and within-game prequential controls",
+        "audit same-frame same-action outcome ambiguity against one-step visible context",
+        "leave action selection active P memory emission and promotion unchanged"
+      ],
+      "baseline": "the old audit recomputed predicted and observed boundaries from the same post-action effect terminal and progress fields",
+      "prediction": [
+        "C2 effect classification may transfer across games",
+        "C3 rare commit and hazard boundaries may fail held-out recall",
+        "one-step visible context may reopen C10 without reviving timer or path-length selectors"
+      ],
+      "observed": [
+        "C2 post-action observer passes every cross-game and cross-structure check",
+        "C3 leave-one-game-out coverage is 1000 per mille and accuracy is 748 per mille",
+        "C3 leave-one-game-out COMMIT and NO_VISIBLE recall are zero and HAZARD recall is 47 per mille",
+        "C3 within-game prequential COMMIT recall is zero",
+        "eighty-one same-frame same-action ambiguity groups occur across three games",
+        "one-step visible context separates eighty of eighty-one groups",
+        "action influence and Runtime P changes remain zero"
+      ],
+      "unchanged": [
+        "C2 C3 work-block promotion gate",
+        "legacy C10 timer and path-length closed-negative status",
+        "active P versions and thirty-five adopted levels",
+        "P11 gate"
+      ],
+      "new_regressions": [],
+      "unobserved": [
+        "C3 cluster-stable rare-boundary prediction",
+        "C10 intervention progress and hazard separation",
+        "C2 C3 C10 composability and removal evidence"
+      ],
+      "status": "C2_CLUSTER_STABLE_C3_HOLD_C10_LOCAL_PROBE_P_UNCHANGED"
     }
   ]
 }

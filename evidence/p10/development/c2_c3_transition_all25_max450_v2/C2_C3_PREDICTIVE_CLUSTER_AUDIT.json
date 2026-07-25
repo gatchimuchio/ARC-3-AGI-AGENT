@@ -1,0 +1,954 @@
+{
+  "artifact_type": "arc3_c2_c3_predictive_cluster_audit",
+  "c2_observer_checks": {
+    "all_boundaries_have_cross_structure_support": true,
+    "positive_negative_hazard_contrast_cross_game": true,
+    "reobserve_and_rollback_obligations_recomputed": true,
+    "required_local_effect_classes_cross_game": true,
+    "visible_and_no_visible_effects_cross_game": true
+  },
+  "c3_predictive_checks": {
+    "all_boundaries_have_training_game_support": true,
+    "leave_one_game_out_accuracy": false,
+    "leave_one_game_out_all_boundary_recall": false,
+    "leave_one_game_out_coverage": true,
+    "post_action_recomputed_label_not_counted_as_prediction": true,
+    "within_game_prequential_accuracy": true,
+    "within_game_prequential_all_boundary_recall": false,
+    "within_game_prequential_coverage": true
+  },
+  "candidate_tier": "LOCAL_PROBE",
+  "capability_ids": [
+    "C2_visible_effect_transition_model",
+    "C3_commit_boundary_predictor"
+  ],
+  "capability_tiers": {
+    "C2_visible_effect_transition_model": "CLUSTER_STABLE",
+    "C3_commit_boundary_predictor": "LOCAL_PROBE"
+  },
+  "content_digest": "arc3_c2_c3_predictive_cluster_audit:f9df9e96eb2da106ae87fc39d28929b16a7224ff0e31117e17c60c2c831ee91c",
+  "cross_context_support": {
+    "boundaries": {
+      "COMMIT": {
+        "game_count": 5,
+        "observations": 35,
+        "structure_count": 35
+      },
+      "HAZARD": {
+        "game_count": 21,
+        "observations": 128,
+        "structure_count": 24
+      },
+      "NO_VISIBLE_COMMIT": {
+        "game_count": 12,
+        "observations": 1956,
+        "structure_count": 177
+      },
+      "TRANSITION_NO_COMMIT": {
+        "game_count": 24,
+        "observations": 7995,
+        "structure_count": 1052
+      }
+    },
+    "effects": {
+      "ACTION_SURFACE_CHANGE": {
+        "game_count": 18,
+        "observations": 861
+      },
+      "COMPONENT_APPEAR": {
+        "game_count": 24,
+        "observations": 4278
+      },
+      "COMPONENT_DISAPPEAR": {
+        "game_count": 24,
+        "observations": 4278
+      },
+      "COMPONENT_MOTION": {
+        "game_count": 21,
+        "observations": 3668
+      },
+      "GLOBAL_REDRAW": {
+        "game_count": 4,
+        "observations": 22
+      },
+      "IRREVERSIBLE_HAZARD": {
+        "game_count": 21,
+        "observations": 128
+      },
+      "LOCAL_PIXEL_DELTA": {
+        "game_count": 24,
+        "observations": 7879
+      },
+      "NO_VISIBLE_CHANGE": {
+        "game_count": 12,
+        "observations": 1982
+      },
+      "PROGRESS_BOUNDARY": {
+        "game_count": 5,
+        "observations": 35
+      },
+      "REGIONAL_REDRAW": {
+        "game_count": 5,
+        "observations": 231
+      },
+      "STRUCTURAL_CHANGE": {
+        "game_count": 24,
+        "observations": 5934
+      },
+      "VISIBLE_STATE_CHANGE": {
+        "game_count": 24,
+        "observations": 8132
+      },
+      "WIN_TERMINAL": {
+        "game_count": 4,
+        "observations": 4
+      }
+    }
+  },
+  "development_only": true,
+  "hds_judgment": {
+    "c2_cluster_stable_observer_status": "PASS",
+    "c3_cluster_stable_predictor_status": "HOLD",
+    "cluster_stable_status": "HOLD",
+    "composable_status": "HOLD",
+    "local_probe_status": "PASS",
+    "next_bounded_experiment": "add an identity-free visible causal-context feature and repeat held-out prediction before any Runtime P compile",
+    "reason_codes": [
+      "C2_POST_ACTION_OBSERVER_CROSS_GAME_STABLE",
+      "C3_NON_CIRCULAR_PREDICTOR_INSUFFICIENT",
+      "C2_C3_COMPOSITION_AND_REMOVAL_NOT_PROVEN"
+    ],
+    "runtime_p_compile_authorized": false,
+    "runtime_p_promotion_authorized": false,
+    "score_progress_claim_authorized": false
+  },
+  "integrity_checks": {
+    "action_selection_influence_absent": true,
+    "all_25_environments_reported": true,
+    "all_observations_have_contrast_records": true,
+    "all_post_action_semantics_recomputed": true,
+    "bounded_retention_overflow_zero": true,
+    "capability_ids_exact": true,
+    "checkpoint_conditions_digest_valid": true,
+    "checkpoint_conditions_present": true,
+    "compact_content_digest_valid": true,
+    "compact_matches_raw_report": true,
+    "error_count_zero": true,
+    "instruction_lifecycle_active": true,
+    "memory_emit_promotion_authority_absent": true,
+    "operation_mode_offline": true,
+    "probe_fault_count_zero": true,
+    "probe_format_v2": true,
+    "probe_runtime_use_forbidden": true,
+    "probe_tier_local": true,
+    "reported_games_match_checkpoint_conditions": true,
+    "runtime_identity_absent": true,
+    "standard_budget_450": true
+  },
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "prediction_contract": {
+    "available_before_held_out_action": [
+      "rendered source structure class",
+      "action prototype",
+      "action class"
+    ],
+    "forbidden_prediction_inputs": [
+      "target structure class",
+      "post-action effect classes",
+      "terminal state",
+      "progress observed",
+      "observed boundary",
+      "task game or level identity"
+    ],
+    "leave_one_game_out_model": "exact source-structure plus action-prototype majority, then global action-class majority",
+    "stored_predicted_boundary_predictive_credit": "NONE",
+    "stored_predicted_boundary_semantics": "post-action recomputation retained for telemetry integrity",
+    "within_game_model": "same model updated only after each prediction"
+  },
+  "predictive_evaluation": {
+    "leave_one_game_out": {
+      "accuracy_milli": 748,
+      "confusion_matrix": {
+        "COMMIT": {
+          "COMMIT": 0,
+          "HAZARD": 0,
+          "NO_VISIBLE_COMMIT": 0,
+          "TRANSITION_NO_COMMIT": 35
+        },
+        "HAZARD": {
+          "COMMIT": 0,
+          "HAZARD": 6,
+          "NO_VISIBLE_COMMIT": 0,
+          "TRANSITION_NO_COMMIT": 122
+        },
+        "NO_VISIBLE_COMMIT": {
+          "COMMIT": 0,
+          "HAZARD": 0,
+          "NO_VISIBLE_COMMIT": 0,
+          "TRANSITION_NO_COMMIT": 1956
+        },
+        "TRANSITION_NO_COMMIT": {
+          "COMMIT": 0,
+          "HAZARD": 438,
+          "NO_VISIBLE_COMMIT": 0,
+          "TRANSITION_NO_COMMIT": 7555
+        }
+      },
+      "correct_count": 7561,
+      "coverage_milli": 1000,
+      "exact_model_match_count": 0,
+      "global_model_match_count": 10112,
+      "macro_recall_milli": 248,
+      "no_model_match_count": 2,
+      "prediction_count": 10112,
+      "recall_milli_by_boundary": {
+        "COMMIT": 0,
+        "HAZARD": 47,
+        "NO_VISIBLE_COMMIT": 0,
+        "TRANSITION_NO_COMMIT": 945
+      },
+      "support_by_boundary": {
+        "COMMIT": 35,
+        "HAZARD": 128,
+        "NO_VISIBLE_COMMIT": 1956,
+        "TRANSITION_NO_COMMIT": 7995
+      },
+      "total_count": 10114,
+      "unknown_count": 2
+    },
+    "within_game_prequential": {
+      "accuracy_milli": 879,
+      "confusion_matrix": {
+        "COMMIT": {
+          "COMMIT": 0,
+          "HAZARD": 0,
+          "NO_VISIBLE_COMMIT": 0,
+          "TRANSITION_NO_COMMIT": 34
+        },
+        "HAZARD": {
+          "COMMIT": 0,
+          "HAZARD": 63,
+          "NO_VISIBLE_COMMIT": 16,
+          "TRANSITION_NO_COMMIT": 44
+        },
+        "NO_VISIBLE_COMMIT": {
+          "COMMIT": 0,
+          "HAZARD": 2,
+          "NO_VISIBLE_COMMIT": 1076,
+          "TRANSITION_NO_COMMIT": 810
+        },
+        "TRANSITION_NO_COMMIT": {
+          "COMMIT": 0,
+          "HAZARD": 0,
+          "NO_VISIBLE_COMMIT": 277,
+          "TRANSITION_NO_COMMIT": 7471
+        }
+      },
+      "correct_count": 8610,
+      "coverage_milli": 968,
+      "exact_model_match_count": 8783,
+      "global_model_match_count": 1277,
+      "macro_recall_milli": 494,
+      "no_model_match_count": 54,
+      "prediction_count": 9793,
+      "recall_milli_by_boundary": {
+        "COMMIT": 0,
+        "HAZARD": 492,
+        "NO_VISIBLE_COMMIT": 550,
+        "TRANSITION_NO_COMMIT": 934
+      },
+      "support_by_boundary": {
+        "COMMIT": 35,
+        "HAZARD": 128,
+        "NO_VISIBLE_COMMIT": 1956,
+        "TRANSITION_NO_COMMIT": 7995
+      },
+      "total_count": 10114,
+      "unknown_count": 321
+    }
+  },
+  "rows": [
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 4,
+        "NO_VISIBLE_COMMIT": 142,
+        "TRANSITION_NO_COMMIT": 300
+      },
+      "contrast_records": 446,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 18,
+        "COMPONENT_APPEAR": 45,
+        "COMPONENT_DISAPPEAR": 45,
+        "COMPONENT_MOTION": 304,
+        "IRREVERSIBLE_HAZARD": 4,
+        "LOCAL_PIXEL_DELTA": 304,
+        "NO_VISIBLE_CHANGE": 142,
+        "STRUCTURAL_CHANGE": 304,
+        "VISIBLE_STATE_CHANGE": 304
+      },
+      "faults": 0,
+      "game_id": "ar25-0c556536",
+      "observations": 446,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 25,
+        "TRANSITION_NO_COMMIT": 400
+      },
+      "contrast_records": 425,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 194,
+        "COMPONENT_APPEAR": 373,
+        "COMPONENT_DISAPPEAR": 373,
+        "COMPONENT_MOTION": 229,
+        "IRREVERSIBLE_HAZARD": 25,
+        "LOCAL_PIXEL_DELTA": 299,
+        "REGIONAL_REDRAW": 126,
+        "STRUCTURAL_CHANGE": 391,
+        "VISIBLE_STATE_CHANGE": 425
+      },
+      "faults": 0,
+      "game_id": "bp35-0a0ad940",
+      "observations": 425,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 4,
+        "NO_VISIBLE_COMMIT": 161,
+        "TRANSITION_NO_COMMIT": 281
+      },
+      "contrast_records": 446,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 4,
+        "COMPONENT_APPEAR": 285,
+        "COMPONENT_DISAPPEAR": 285,
+        "COMPONENT_MOTION": 8,
+        "IRREVERSIBLE_HAZARD": 4,
+        "LOCAL_PIXEL_DELTA": 285,
+        "NO_VISIBLE_CHANGE": 161,
+        "STRUCTURAL_CHANGE": 285,
+        "VISIBLE_STATE_CHANGE": 285
+      },
+      "faults": 0,
+      "game_id": "cd82-fb555c5d",
+      "observations": 446,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 5,
+        "NO_VISIBLE_COMMIT": 119,
+        "TRANSITION_NO_COMMIT": 321
+      },
+      "contrast_records": 445,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 11,
+        "COMPONENT_APPEAR": 28,
+        "COMPONENT_DISAPPEAR": 28,
+        "COMPONENT_MOTION": 256,
+        "IRREVERSIBLE_HAZARD": 5,
+        "LOCAL_PIXEL_DELTA": 321,
+        "NO_VISIBLE_CHANGE": 124,
+        "STRUCTURAL_CHANGE": 267,
+        "VISIBLE_STATE_CHANGE": 321
+      },
+      "faults": 0,
+      "game_id": "cn04-2fe56bfb",
+      "observations": 445,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 3,
+        "NO_VISIBLE_COMMIT": 112,
+        "TRANSITION_NO_COMMIT": 332
+      },
+      "contrast_records": 447,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 3,
+        "COMPONENT_APPEAR": 224,
+        "COMPONENT_DISAPPEAR": 224,
+        "COMPONENT_MOTION": 227,
+        "IRREVERSIBLE_HAZARD": 3,
+        "LOCAL_PIXEL_DELTA": 335,
+        "NO_VISIBLE_CHANGE": 112,
+        "STRUCTURAL_CHANGE": 335,
+        "VISIBLE_STATE_CHANGE": 335
+      },
+      "faults": 0,
+      "game_id": "dc22-fdcac232",
+      "observations": 447,
+      "overflow": 0
+    },
+    {
+      "actions": 75,
+      "boundary_counts": {
+        "COMMIT": 6,
+        "TRANSITION_NO_COMMIT": 69
+      },
+      "contrast_records": 75,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 17,
+        "COMPONENT_APPEAR": 74,
+        "COMPONENT_DISAPPEAR": 74,
+        "COMPONENT_MOTION": 73,
+        "GLOBAL_REDRAW": 5,
+        "LOCAL_PIXEL_DELTA": 70,
+        "PROGRESS_BOUNDARY": 6,
+        "STRUCTURAL_CHANGE": 75,
+        "VISIBLE_STATE_CHANGE": 75,
+        "WIN_TERMINAL": 1
+      },
+      "faults": 0,
+      "game_id": "ft09-0d8bbf25",
+      "observations": 75,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 3,
+        "NO_VISIBLE_COMMIT": 216,
+        "TRANSITION_NO_COMMIT": 228
+      },
+      "contrast_records": 447,
+      "effect_counts": {
+        "COMPONENT_APPEAR": 35,
+        "COMPONENT_DISAPPEAR": 35,
+        "COMPONENT_MOTION": 28,
+        "IRREVERSIBLE_HAZARD": 3,
+        "LOCAL_PIXEL_DELTA": 228,
+        "NO_VISIBLE_CHANGE": 219,
+        "STRUCTURAL_CHANGE": 43,
+        "VISIBLE_STATE_CHANGE": 228
+      },
+      "faults": 0,
+      "game_id": "g50t-5849a774",
+      "observations": 447,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "COMMIT": 6,
+        "HAZARD": 1,
+        "TRANSITION_NO_COMMIT": 442
+      },
+      "contrast_records": 449,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 282,
+        "COMPONENT_APPEAR": 407,
+        "COMPONENT_DISAPPEAR": 407,
+        "COMPONENT_MOTION": 161,
+        "GLOBAL_REDRAW": 6,
+        "IRREVERSIBLE_HAZARD": 1,
+        "LOCAL_PIXEL_DELTA": 443,
+        "PROGRESS_BOUNDARY": 6,
+        "STRUCTURAL_CHANGE": 449,
+        "VISIBLE_STATE_CHANGE": 449
+      },
+      "faults": 0,
+      "game_id": "ka59-38d34dbb",
+      "observations": 449,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 6,
+        "NO_VISIBLE_COMMIT": 438
+      },
+      "contrast_records": 444,
+      "effect_counts": {
+        "IRREVERSIBLE_HAZARD": 6,
+        "NO_VISIBLE_CHANGE": 444
+      },
+      "faults": 0,
+      "game_id": "lf52-271a04aa",
+      "observations": 444,
+      "overflow": 0
+    },
+    {
+      "actions": 235,
+      "boundary_counts": {
+        "COMMIT": 8,
+        "TRANSITION_NO_COMMIT": 227
+      },
+      "contrast_records": 235,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 22,
+        "COMPONENT_APPEAR": 45,
+        "COMPONENT_DISAPPEAR": 45,
+        "COMPONENT_MOTION": 232,
+        "GLOBAL_REDRAW": 6,
+        "LOCAL_PIXEL_DELTA": 165,
+        "PROGRESS_BOUNDARY": 8,
+        "REGIONAL_REDRAW": 64,
+        "STRUCTURAL_CHANGE": 233,
+        "VISIBLE_STATE_CHANGE": 235,
+        "WIN_TERMINAL": 1
+      },
+      "faults": 0,
+      "game_id": "lp85-305b61c3",
+      "observations": 235,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 2,
+        "NO_VISIBLE_COMMIT": 136,
+        "TRANSITION_NO_COMMIT": 310
+      },
+      "contrast_records": 448,
+      "effect_counts": {
+        "COMPONENT_APPEAR": 312,
+        "COMPONENT_DISAPPEAR": 312,
+        "COMPONENT_MOTION": 312,
+        "IRREVERSIBLE_HAZARD": 2,
+        "LOCAL_PIXEL_DELTA": 312,
+        "NO_VISIBLE_CHANGE": 136,
+        "STRUCTURAL_CHANGE": 312,
+        "VISIBLE_STATE_CHANGE": 312
+      },
+      "faults": 0,
+      "game_id": "ls20-9607627b",
+      "observations": 448,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 2,
+        "NO_VISIBLE_COMMIT": 128,
+        "TRANSITION_NO_COMMIT": 318
+      },
+      "contrast_records": 448,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 5,
+        "COMPONENT_APPEAR": 13,
+        "COMPONENT_DISAPPEAR": 13,
+        "COMPONENT_MOTION": 256,
+        "IRREVERSIBLE_HAZARD": 2,
+        "LOCAL_PIXEL_DELTA": 318,
+        "NO_VISIBLE_CHANGE": 130,
+        "STRUCTURAL_CHANGE": 261,
+        "VISIBLE_STATE_CHANGE": 318
+      },
+      "faults": 0,
+      "game_id": "m0r0-492f87ba",
+      "observations": 448,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 7,
+        "TRANSITION_NO_COMMIT": 436
+      },
+      "contrast_records": 443,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 39,
+        "COMPONENT_APPEAR": 411,
+        "COMPONENT_DISAPPEAR": 411,
+        "COMPONENT_MOTION": 24,
+        "IRREVERSIBLE_HAZARD": 7,
+        "LOCAL_PIXEL_DELTA": 443,
+        "STRUCTURAL_CHANGE": 411,
+        "VISIBLE_STATE_CHANGE": 443
+      },
+      "faults": 0,
+      "game_id": "r11l-495a7899",
+      "observations": 443,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 4,
+        "NO_VISIBLE_COMMIT": 105,
+        "TRANSITION_NO_COMMIT": 337
+      },
+      "contrast_records": 446,
+      "effect_counts": {
+        "COMPONENT_APPEAR": 274,
+        "COMPONENT_DISAPPEAR": 274,
+        "COMPONENT_MOTION": 281,
+        "IRREVERSIBLE_HAZARD": 4,
+        "LOCAL_PIXEL_DELTA": 341,
+        "NO_VISIBLE_CHANGE": 105,
+        "STRUCTURAL_CHANGE": 289,
+        "VISIBLE_STATE_CHANGE": 341
+      },
+      "faults": 0,
+      "game_id": "re86-8af5384d",
+      "observations": 446,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 8,
+        "TRANSITION_NO_COMMIT": 434
+      },
+      "contrast_records": 442,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 34,
+        "COMPONENT_APPEAR": 68,
+        "COMPONENT_DISAPPEAR": 68,
+        "COMPONENT_MOTION": 16,
+        "IRREVERSIBLE_HAZARD": 8,
+        "LOCAL_PIXEL_DELTA": 442,
+        "STRUCTURAL_CHANGE": 68,
+        "VISIBLE_STATE_CHANGE": 442
+      },
+      "faults": 0,
+      "game_id": "s5i5-18d95033",
+      "observations": 442,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 6,
+        "TRANSITION_NO_COMMIT": 438
+      },
+      "contrast_records": 444,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 13,
+        "COMPONENT_APPEAR": 444,
+        "COMPONENT_DISAPPEAR": 444,
+        "IRREVERSIBLE_HAZARD": 6,
+        "LOCAL_PIXEL_DELTA": 444,
+        "STRUCTURAL_CHANGE": 444,
+        "VISIBLE_STATE_CHANGE": 444
+      },
+      "faults": 0,
+      "game_id": "sb26-7fbdac44",
+      "observations": 444,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 8,
+        "NO_VISIBLE_COMMIT": 133,
+        "TRANSITION_NO_COMMIT": 301
+      },
+      "contrast_records": 442,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 31,
+        "COMPONENT_APPEAR": 249,
+        "COMPONENT_DISAPPEAR": 249,
+        "COMPONENT_MOTION": 7,
+        "IRREVERSIBLE_HAZARD": 8,
+        "LOCAL_PIXEL_DELTA": 301,
+        "NO_VISIBLE_CHANGE": 141,
+        "STRUCTURAL_CHANGE": 250,
+        "VISIBLE_STATE_CHANGE": 301
+      },
+      "faults": 0,
+      "game_id": "sc25-635fd71a",
+      "observations": 442,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 2,
+        "NO_VISIBLE_COMMIT": 143,
+        "TRANSITION_NO_COMMIT": 303
+      },
+      "contrast_records": 448,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 8,
+        "COMPONENT_APPEAR": 299,
+        "COMPONENT_DISAPPEAR": 299,
+        "COMPONENT_MOTION": 301,
+        "IRREVERSIBLE_HAZARD": 2,
+        "LOCAL_PIXEL_DELTA": 305,
+        "NO_VISIBLE_CHANGE": 143,
+        "STRUCTURAL_CHANGE": 305,
+        "VISIBLE_STATE_CHANGE": 305
+      },
+      "faults": 0,
+      "game_id": "sk48-d8078629",
+      "observations": 448,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 13,
+        "TRANSITION_NO_COMMIT": 423
+      },
+      "contrast_records": 436,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 27,
+        "COMPONENT_APPEAR": 41,
+        "COMPONENT_DISAPPEAR": 41,
+        "COMPONENT_MOTION": 214,
+        "IRREVERSIBLE_HAZARD": 13,
+        "LOCAL_PIXEL_DELTA": 436,
+        "STRUCTURAL_CHANGE": 238,
+        "VISIBLE_STATE_CHANGE": 436
+      },
+      "faults": 0,
+      "game_id": "sp80-589a99af",
+      "observations": 436,
+      "overflow": 0
+    },
+    {
+      "actions": 175,
+      "boundary_counts": {
+        "COMMIT": 9,
+        "TRANSITION_NO_COMMIT": 166
+      },
+      "contrast_records": 175,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 80,
+        "COMPONENT_APPEAR": 175,
+        "COMPONENT_DISAPPEAR": 175,
+        "COMPONENT_MOTION": 169,
+        "LOCAL_PIXEL_DELTA": 162,
+        "PROGRESS_BOUNDARY": 9,
+        "REGIONAL_REDRAW": 13,
+        "STRUCTURAL_CHANGE": 175,
+        "VISIBLE_STATE_CHANGE": 175,
+        "WIN_TERMINAL": 1
+      },
+      "faults": 0,
+      "game_id": "su15-1944f8ab",
+      "observations": 175,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 7,
+        "TRANSITION_NO_COMMIT": 436
+      },
+      "contrast_records": 443,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 30,
+        "COMPONENT_APPEAR": 75,
+        "COMPONENT_DISAPPEAR": 75,
+        "IRREVERSIBLE_HAZARD": 7,
+        "LOCAL_PIXEL_DELTA": 443,
+        "STRUCTURAL_CHANGE": 75,
+        "VISIBLE_STATE_CHANGE": 443
+      },
+      "faults": 0,
+      "game_id": "tn36-ef4dde99",
+      "observations": 443,
+      "overflow": 0
+    },
+    {
+      "actions": 308,
+      "boundary_counts": {
+        "COMMIT": 6,
+        "TRANSITION_NO_COMMIT": 302
+      },
+      "contrast_records": 308,
+      "effect_counts": {
+        "COMPONENT_APPEAR": 240,
+        "COMPONENT_DISAPPEAR": 240,
+        "COMPONENT_MOTION": 244,
+        "GLOBAL_REDRAW": 5,
+        "LOCAL_PIXEL_DELTA": 302,
+        "PROGRESS_BOUNDARY": 6,
+        "REGIONAL_REDRAW": 1,
+        "STRUCTURAL_CHANGE": 308,
+        "VISIBLE_STATE_CHANGE": 308,
+        "WIN_TERMINAL": 1
+      },
+      "faults": 0,
+      "game_id": "tr87-cd924810",
+      "observations": 308,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 8,
+        "TRANSITION_NO_COMMIT": 434
+      },
+      "contrast_records": 442,
+      "effect_counts": {
+        "COMPONENT_APPEAR": 32,
+        "COMPONENT_DISAPPEAR": 32,
+        "IRREVERSIBLE_HAZARD": 8,
+        "LOCAL_PIXEL_DELTA": 442,
+        "STRUCTURAL_CHANGE": 32,
+        "VISIBLE_STATE_CHANGE": 442
+      },
+      "faults": 0,
+      "game_id": "tu93-0768757b",
+      "observations": 442,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 8,
+        "TRANSITION_NO_COMMIT": 434
+      },
+      "contrast_records": 442,
+      "effect_counts": {
+        "ACTION_SURFACE_CHANGE": 43,
+        "COMPONENT_APPEAR": 68,
+        "COMPONENT_DISAPPEAR": 68,
+        "COMPONENT_MOTION": 27,
+        "IRREVERSIBLE_HAZARD": 8,
+        "LOCAL_PIXEL_DELTA": 415,
+        "REGIONAL_REDRAW": 27,
+        "STRUCTURAL_CHANGE": 68,
+        "VISIBLE_STATE_CHANGE": 442
+      },
+      "faults": 0,
+      "game_id": "vc33-5430563c",
+      "observations": 442,
+      "overflow": 0
+    },
+    {
+      "actions": 450,
+      "boundary_counts": {
+        "HAZARD": 2,
+        "NO_VISIBLE_COMMIT": 123,
+        "TRANSITION_NO_COMMIT": 323
+      },
+      "contrast_records": 448,
+      "effect_counts": {
+        "COMPONENT_APPEAR": 61,
+        "COMPONENT_DISAPPEAR": 61,
+        "COMPONENT_MOTION": 299,
+        "IRREVERSIBLE_HAZARD": 2,
+        "LOCAL_PIXEL_DELTA": 323,
+        "NO_VISIBLE_CHANGE": 125,
+        "STRUCTURAL_CHANGE": 316,
+        "VISIBLE_STATE_CHANGE": 323
+      },
+      "faults": 0,
+      "game_id": "wa30-ee6fef47",
+      "observations": 448,
+      "overflow": 0
+    }
+  ],
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-c2-c3-predictive-cluster-audit-v2",
+  "source_evidence": {
+    "compact_content_digest": "e4b899735600a8411e025cfff34a91b81cfb150cd1620bbe526b0777be33027e",
+    "compact_evidence_sha256": "4704259a42f80dec8caa708227038a7084b8b51141e2da18bad96c4c133cd2d0",
+    "conditions": {
+      "active_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+      "arc_agi_version": "0.9.8",
+      "conditions_digest": "f64f05f732c50117e9b57ee2ba9d3e30c8484ab5b972da25ddeaed72647b19f9",
+      "environment_inventory_digest": "4ba5b09ccd490559b6a234ada4cd0cedbaa6d2d9dc8fac1553b352014187a5e6",
+      "game_ids": [
+        "ar25-0c556536",
+        "bp35-0a0ad940",
+        "cd82-fb555c5d",
+        "cn04-2fe56bfb",
+        "dc22-fdcac232",
+        "ft09-0d8bbf25",
+        "g50t-5849a774",
+        "ka59-38d34dbb",
+        "lf52-271a04aa",
+        "lp85-305b61c3",
+        "ls20-9607627b",
+        "m0r0-492f87ba",
+        "r11l-495a7899",
+        "re86-8af5384d",
+        "s5i5-18d95033",
+        "sb26-7fbdac44",
+        "sc25-635fd71a",
+        "sk48-d8078629",
+        "sp80-589a99af",
+        "su15-1944f8ab",
+        "tn36-ef4dde99",
+        "tr87-cd924810",
+        "tu93-0768757b",
+        "vc33-5430563c",
+        "wa30-ee6fef47"
+      ],
+      "instruction_lifecycle": "active",
+      "instruction_variant": "hybrid",
+      "max_actions": 450,
+      "operation_mode": "offline",
+      "python_version": "3.14.4",
+      "runtime_source_inventory_digest": "2fe055f44870a6916700102d81cdf034f2aa621a583c9ee337837e0ec882eecd",
+      "schema_version": "arc3-p10-batch-conditions-v1"
+    },
+    "raw_report_sha256": "4da99e99398371e5d28d61fc804eddbec1d87aae8dc30548bf3d773bbff1ed8c"
+  },
+  "summary": {
+    "action_count": 10243,
+    "boundary_counts": {
+      "COMMIT": 35,
+      "HAZARD": 128,
+      "NO_VISIBLE_COMMIT": 1956,
+      "TRANSITION_NO_COMMIT": 7995
+    },
+    "completed_levels": 35,
+    "contrast_record_count": 10114,
+    "contrast_role_counts": {
+      "HAZARD": 128,
+      "NEGATIVE": 9951,
+      "POSITIVE": 35
+    },
+    "effect_counts": {
+      "ACTION_SURFACE_CHANGE": 861,
+      "COMPONENT_APPEAR": 4278,
+      "COMPONENT_DISAPPEAR": 4278,
+      "COMPONENT_MOTION": 3668,
+      "GLOBAL_REDRAW": 22,
+      "IRREVERSIBLE_HAZARD": 128,
+      "LOCAL_PIXEL_DELTA": 7879,
+      "NO_VISIBLE_CHANGE": 1982,
+      "PROGRESS_BOUNDARY": 35,
+      "REGIONAL_REDRAW": 231,
+      "STRUCTURAL_CHANGE": 5934,
+      "VISIBLE_STATE_CHANGE": 8132,
+      "WIN_TERMINAL": 4
+    },
+    "error_count": 0,
+    "fault_count": 0,
+    "game_count": 25,
+    "observation_count": 10114,
+    "overflow_count": 0,
+    "total_levels": 183
+  },
+  "thresholds": {
+    "leave_one_game_out": {
+      "minimum_accuracy_milli": 750,
+      "minimum_coverage_milli": 900,
+      "minimum_recall_milli_each_boundary": 500
+    },
+    "minimum_boundary_game_support": {
+      "COMMIT": 3,
+      "HAZARD": 3,
+      "NO_VISIBLE_COMMIT": 3,
+      "TRANSITION_NO_COMMIT": 3
+    },
+    "required_effect_game_support": {
+      "COMPONENT_MOTION": 3,
+      "GLOBAL_REDRAW": 2,
+      "LOCAL_PIXEL_DELTA": 3,
+      "NO_VISIBLE_CHANGE": 3,
+      "REGIONAL_REDRAW": 2,
+      "VISIBLE_STATE_CHANGE": 3
+    },
+    "within_game_prequential": {
+      "minimum_accuracy_milli": 800,
+      "minimum_coverage_milli": 800,
+      "minimum_recall_milli_each_boundary": 400
+    }
+  }
+}

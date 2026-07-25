@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v22-all-task-capability-compilation-v1",
+  "frame_id": "p10-v23-transition-predictive-audit-v2",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -1006,6 +1006,179 @@
       "regression_risk": 0.25,
       "status": "RUNTIME_INFRASTRUCTURE_ACCEPTED",
       "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H35-increase-machine-or-parallelism",
+      "kind": "H1",
+      "summary": "Treat the SB26 high-water allocation as a machine-capacity problem and add more memory or parallel workers.",
+      "predicted_effect": [
+        "the retained full-cycle HDS input graph remains live",
+        "larger machines postpone rather than remove the allocation",
+        "parallel workers multiply the same hazard"
+      ],
+      "applicability": [
+        "control comparator only"
+      ],
+      "required_evidence": [
+        "same-source per-worker resident-memory profile"
+      ],
+      "falsifier": [
+        "the same behavior completes below one GiB only after the retained binding is released"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.05,
+      "information_gain": 0.2,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.7,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H36-truncate-audit-trace-or-provenance",
+      "kind": "H2",
+      "summary": "Reduce resident memory by deleting trace, provenance, rollback, failure, or emission evidence.",
+      "predicted_effect": [
+        "resident memory may decrease",
+        "behavioral and authority comparison becomes inconclusive",
+        "removal and replay audits lose required evidence"
+      ],
+      "applicability": [
+        "none"
+      ],
+      "required_evidence": [
+        "complete retained-field comparison"
+      ],
+      "falsifier": [
+        "resource headroom is restored while every required audit projection remains equal"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 2,
+      "generality": 0.1,
+      "information_gain": 0.1,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.98,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H37-hds-closed-cycle-heavy-binding-release",
+      "kind": "H3",
+      "summary": "Release only the full observation context and memory binding after HDS has judged, executed, reobserved, and finalized a cycle.",
+      "predicted_effect": [
+        "decisions directives outcomes tombstones and report projections remain auditable",
+        "duplicate or premature release fails closed",
+        "same SB26 behavior completes below one GiB without worker swap"
+      ],
+      "applicability": [
+        "closed P10 HDS cycles after final status reconciliation"
+      ],
+      "required_evidence": [
+        "negative authority tests",
+        "same-game behavior projection equality",
+        "all-twenty-five resource logs",
+        "full unit and integration regression"
+      ],
+      "falsifier": [
+        "one retained behavior field changes",
+        "a live cycle can be released",
+        "any standard-budget worker exceeds one GiB or swaps"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.92,
+      "information_gain": 0.98,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.18,
+      "status": "RUNTIME_INFRASTRUCTURE_ACCEPTED",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H38-credit-post-action-boundary-as-prediction",
+      "kind": "H1",
+      "summary": "Treat the telemetry boundary recomputed from post-action effect, terminal, and progress fields as a C3 prediction.",
+      "predicted_effect": [
+        "apparent prediction is perfect by construction",
+        "held-out action selection receives no prospective information",
+        "C3 tier is falsely promoted"
+      ],
+      "applicability": [
+        "none"
+      ],
+      "required_evidence": [
+        "input-field causality audit"
+      ],
+      "falsifier": [
+        "the label can be produced before the held-out action without reading its outcome"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.0,
+      "information_gain": 0.05,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.99,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H39-held-out-pre-action-boundary-audit",
+      "kind": "H2",
+      "summary": "Evaluate C3 only from source structure and action information available before a held-out action.",
+      "predicted_effect": [
+        "leave-one-game-out transfer weakness becomes measurable",
+        "within-game prequential adaptation remains separately visible",
+        "valid weak models produce HDS HOLD rather than an integrity exception"
+      ],
+      "applicability": [
+        "development-only C3 tier judgment"
+      ],
+      "required_evidence": [
+        "all-twenty-five standard-budget contrasts",
+        "confusion matrices and per-boundary recall",
+        "synthetic positive and leakage-negative tests"
+      ],
+      "falsifier": [
+        "post-action truth enters a predictive feature",
+        "weak rare-boundary recall is reported as cluster stable"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.96,
+      "information_gain": 0.99,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.05,
+      "status": "AUDIT_METHOD_ACCEPTED",
+      "j_dev_decision": "PASS"
+    },
+    {
+      "hypothesis_id": "H40-one-step-visible-causal-context",
+      "kind": "H3",
+      "summary": "Use the immediately preceding visible action effect and boundary as a new observable context for same-frame action ambiguity.",
+      "predicted_effect": [
+        "old timer and path-length selectors remain rejected",
+        "same rendered state and action can be separated without identity",
+        "progress and hazard utility remain unproven until a bounded intervention"
+      ],
+      "applicability": [
+        "development-only C10 shadow contrast"
+      ],
+      "required_evidence": [
+        "same-frame and same-action differing outcomes",
+        "cross-game one-step context separation",
+        "future progress hazard and removal controls"
+      ],
+      "falsifier": [
+        "the separator requires game identity replay suffix or hidden state",
+        "the context does not reproduce under intervention"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.88,
+      "information_gain": 0.94,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.12,
+      "status": "LOCAL_PROBE_ACCEPTED",
+      "j_dev_decision": "PASS_LOCAL_PROBE"
     }
   ]
 }

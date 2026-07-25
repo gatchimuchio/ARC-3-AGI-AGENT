@@ -147,9 +147,11 @@ digestへ束縛する。各gameを独立scorecardで実行してatomic checkpoin
 `arc3_agi_agent/cross_cutting_transition.py`はC2/C3の横断候補である。rendered
 pre/post stateを、no-change、local/regional/global redraw、component
 motion/appear/disappear、action-surface change、progress、hazardへ分類し、
-commit/hazard/transition-only/no-visible-commitを分離する。現時点では
-`LOCAL_PROBE`のshadow telemetryであり、action選択、M write、external emit、
-P promotionへ一切影響しない。
+commit/hazard/transition-only/no-visible-commitを分離する。各game最大512件の
+contrastをbounded telemetryへ保持するが、action選択、M write、external
+emit、P promotionへ一切影響しない。post-action fieldを予測証拠へ流用せず、
+held-out action前のsource structure / action prototype / action classだけを
+使う非循環監査を別に持つ。
 
 作業Mは同一targetへ毎cycle追加しない。初回はHDSが`ADD`、後続は観測時の
 active targetを確認して`REPLACE`を許可する。version/historyは維持しつつ、
@@ -158,6 +160,12 @@ current snapshotの重複増大を防ぎ、各cycleのtraceはreport側へ残す
 base version 0、現行version、明示的level rollback anchorの最大3 snapshotへ
 制限する。retention変更はactive view、version、digest、provenanceを変更せず、
 HDSが許可したwriteやrollbackの意味論を代行しない。
+
+P10 runtimeはcycleをHDS判断・effect実行・結果再観測・finalizeまで閉じた後、
+full observation/context/memory input bindingだけを明示的に解放する。decision、
+directive、judgment、outcome、finalized tombstone、traceは保持する。agent report
+側も閉cycleを必要な監査射影へ凍結し、過去のfull kernel objectとrendered frame
+を保持し続けない。二重解放、未判断、未finalize、status不一致はfail closedする。
 
 ## 3. 現在の実測境界
 
@@ -242,11 +250,13 @@ error/probe fault 0を一つのcontent-bound aggregateへ固定し、resumeは
 [`arc3_local_score_oracle_latest.json`](../../evidence/p10/arc3_local_score_oracle_latest.json)
 である。
 
-全workerはreportを生成したが、SB26は最大RSS 1,666,868 KB、三worker並列計測
-ではpeak swap 283 MBだった。したがってworker completionは`PASS`でも、
-一GiB閾値のresource headroomは`FAIL_HIGH_WATER`である。trace・provenance・
-rollback・failure visibilityを削らずにこの高水位を解消するまで、資源監査を
-閉じない。P10全体は`HOLD`、P11開始は禁止である。
+旧runではSB26が最大RSS 1,666,868 KB、三worker並列計測でhost-wide peak swap
+283 MBとなり、resource headroomは`FAIL_HIGH_WATER`だった。closed-cycleの
+heavy binding解放後、同一SB26行動射影を維持したまま最大RSSは110,792 KB、
+swap 0となった。全25 workerもexit 0、swap 0、最大RSS 143,852 KBであり、
+resource headroomとworker completionは`PASS`へ更新した。host-wide residual
+swap 279 MBは情報値で、worker swapとは分離している。これは資源失敗の是正で
+あり、能力・score進歩ではない。P10全体は`HOLD`、P11開始は禁止である。
 
 checkpoint/resume実装後、`OFFLINE / hybrid ACTIVE / max-actions 1`で25 gameを
 分割実行した。25/25 report、error 0、checkpoint 25件、resume時の再実行0を
@@ -274,6 +284,23 @@ visible 22、no-visible 3、action influence 0、exact-condition resume
 25 reused / 0 executedである。正本は
 [`C2_C3_LOCAL_PROBE_AUDIT.json`](../../evidence/p10/development/c2_c3_local_probe_all25_max1_v14/C2_C3_LOCAL_PROBE_AUDIT.json)
 であり、旧directoryはvisual operator v13時点の履歴証拠として保持する。
+
+同じruntime sourceでmax-actions 450を全25 gameへ適用し、10,243 action、
+10,114 transition contrast、error/fault/overflow 0を得た。C2のpost-action
+effect observerは複数game・複数structureで必要contrastを満たし
+`CLUSTER_STABLE`とした。一方、C3のleave-one-game-outはcoverage 1000/1000、
+accuracy 748/1000でもCOMMIT recall 0、HAZARD recall 47/1000、
+NO_VISIBLE recall 0であり、work blockは`LOCAL_PROBE / HOLD`である。
+within-game prequentialもCOMMIT recall 0のためHOLDを変更しない。
+
+C10の旧timer/path-length surfaceはclosed negativeのまま維持する。新たに、
+同一rendered frame・同一actionでoutcomeが異なる81 groupを3 gameで観測し、
+直前のvisible action/effect/boundary tokenが80 groupを分離した。これは
+materially newな一段可視因果文脈の`LOCAL_PROBE`再開根拠だが、progress/
+hazard separator、CLUSTER_STABLE、COMPOSABLE、Runtime P compileの根拠ではない。
+正本は
+[`c2_c3_transition_all25_max450_v2`](../../evidence/p10/development/c2_c3_transition_all25_max450_v2)
+に置く。
 
 v15では、既知のstate-changing actionより未観測prototypeを優先する
 candidate policyを五つのbounded structureで比較した。action分布は変化したが
