@@ -801,6 +801,9 @@ def _build_coverage(
             "C12_layout_mode_commit_discriminator": (
                 "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
             ),
+            "C1_rendered_affordance_objectizer": (
+                "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
+            ),
             "C5_stale_settle_frame_controller": (
                 "BOUNDED_OLD_ACTION_REPLAY_LOCAL_PROBE_REJECTED"
             ),
@@ -983,6 +986,7 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                 in {
                     "C7_target_contact_boundary_verifier",
                     "C12_layout_mode_commit_discriminator",
+                    "C1_rendered_affordance_objectizer",
                     "C5_stale_settle_frame_controller",
                 }
                 else "NOT_STARTED"
@@ -1094,6 +1098,39 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                 "same_surface_retry_authorized": False,
                 "runtime_p_promotion_authorized": False,
             }
+        elif capability_id == "C1_rendered_affordance_objectizer":
+            work_status = "CLOSED_NEGATIVE"
+            implementation_evidence = {
+                "admission_audit": (
+                    "evidence/p10/development/"
+                    "c1_rendered_affordance_closed_negative_v1/"
+                    "C1_CLOSED_NEGATIVE_ADMISSION_AUDIT.json"
+                ),
+                "retained_legacy_source": (
+                    "evidence/p10/development/"
+                    "c1_rendered_affordance_closed_negative_v1/"
+                    "LEGACY_C1_RENDERED_AFFORDANCE_"
+                    "OBJECTIZER_CAPABILITY.json"
+                ),
+                "retained_source_sha256": (
+                    "45b044ab0332e010bec6fd11461beab7dacb7a90eaff49e"
+                    "ca149c6a62611d3db"
+                ),
+                "target_count": 2,
+                "total_probe_count": 1768,
+                "changed_probe_count": 1720,
+                "task_aware_prefix_probe_count": 48,
+                "task_aware_prefix_progress_count": 2,
+                "non_prefix_candidate_count": 1720,
+                "non_prefix_progress_count": 0,
+                "progress_separator_variable_count": 0,
+                "hazard_separator_variable_count": 0,
+                "promotion_eligible_variable_count": 0,
+                "negative_only": True,
+                "task_aware_prefix_progress_quarantined": True,
+                "same_surface_retry_authorized": False,
+                "runtime_p_promotion_authorized": False,
+            }
         elif capability_id == "C5_stale_settle_frame_controller":
             work_status = "LOCAL_AXIS_CLOSED_NEGATIVE"
             implementation_evidence = {
@@ -1148,7 +1185,7 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
             "selection_policy": {
                 "primary": "coverage before next-level order",
                 "next_unembedded_work_block": (
-                    "WB-C1_rendered_affordance_objectizer"
+                    "WB-C14_symbolic_relation_commit_model"
                 ),
                 "forbidden": [
                     "one Python operator per unresolved level",
@@ -1194,11 +1231,12 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     "runtime promotion or a score claim."
                 ),
                 "next_work_block_id": (
-                    "WB-C1_rendered_affordance_objectizer"
+                    "WB-C14_symbolic_relation_commit_model"
                 ),
                 "closed_negative_work_blocks": [
                     "WB-C7_target_contact_boundary_verifier",
                     "WB-C12_layout_mode_commit_discriminator",
+                    "WB-C1_rendered_affordance_objectizer",
                     "WB-C5_stale_settle_frame_controller:"
                     "bounded-old-action-replay-axis",
                 ],

@@ -178,6 +178,12 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
             ],
             "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
         )
+        self.assertEqual(
+            status_by_capability[
+                "C1_rendered_affordance_objectizer"
+            ],
+            "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
+        )
 
     def test_queue_starts_with_cross_cutting_c2_c3_not_level_operator(
         self,
@@ -271,6 +277,33 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
                 "same_surface_retry_authorized"
             ]
         )
+        c1 = queue["queue"][4]
+        self.assertEqual(
+            c1["capability_ids"],
+            ["C1_rendered_affordance_objectizer"],
+        )
+        self.assertEqual(c1["current_tier"], "LOCAL_PROBE")
+        self.assertEqual(c1["work_status"], "CLOSED_NEGATIVE")
+        self.assertEqual(
+            c1["implementation_evidence"]["total_probe_count"],
+            1768,
+        )
+        self.assertEqual(
+            c1["implementation_evidence"][
+                "non_prefix_progress_count"
+            ],
+            0,
+        )
+        self.assertTrue(
+            c1["implementation_evidence"][
+                "task_aware_prefix_progress_quarantined"
+            ]
+        )
+        self.assertFalse(
+            c1["implementation_evidence"][
+                "same_surface_retry_authorized"
+            ]
+        )
         c5 = next(
             item
             for item in queue["queue"]
@@ -296,6 +329,7 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
                 not in {
                     ("C7_target_contact_boundary_verifier",),
                     ("C12_layout_mode_commit_discriminator",),
+                    ("C1_rendered_affordance_objectizer",),
                     ("C5_stale_settle_frame_controller",),
                 }
             )
@@ -319,10 +353,14 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
         self.assertFalse(composition["same_axis_retry_authorized"])
         self.assertEqual(
             queue["hds_gate"]["next_work_block_id"],
-            "WB-C1_rendered_affordance_objectizer",
+            "WB-C14_symbolic_relation_commit_model",
         )
         self.assertIn(
             "WB-C12_layout_mode_commit_discriminator",
+            queue["hds_gate"]["closed_negative_work_blocks"],
+        )
+        self.assertIn(
+            "WB-C1_rendered_affordance_objectizer",
             queue["hds_gate"]["closed_negative_work_blocks"],
         )
 

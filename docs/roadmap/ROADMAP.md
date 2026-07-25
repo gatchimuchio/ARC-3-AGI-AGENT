@@ -64,8 +64,12 @@ C5 bounded-old-action-replay候補も、8回発火してtarget delta 0だった�
 変更しない。C12の凍結layout-mode二surfaceも合計388 probeでprogress、
 GAME_OVER、separatorが0だったため`LOCAL_PROBE / CLOSED_NEGATIVE`とした。
 contract mismatch、public replay bootstrap、stale score fieldはquarantineし、
-Runtime Pへ入れない。次の未埋込high-support work blockは
-`WB-C1_rendered_affordance_objectizer`。現行標準オラクルは
+Runtime Pへ入れない。C1の凍結rendered-affordance objectizerも、48件の
+task-aware prefixにだけprogress 2があり、残る1,720 candidateはvisible
+change 1,720 / progress 0 / GAME_OVER 0 / separator 0だった。prefix、
+identity、literal座標、stale scoreをquarantineして同一surfaceを閉じた。
+次の未埋込high-support work blockは
+`WB-C14_symbolic_relation_commit_model`。現行標準オラクルは
 `35 / 183`、RHAE `18.821945363%`で、P11開始はHOLDである。
 
 P10ではrelease state固定、公式接続、Kaggle作業を実行・完了扱いしない。

@@ -33,8 +33,9 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - C10: **一段可視因果文脈はCLUSTER_STABLE / COMPOSABLE、Runtime介入はREJECT**
 - C7: **凍結target-contact probeはLOCAL_PROBE / CLOSED_NEGATIVE（負の証拠限定）**
 - C12: **凍結layout-mode 2 surfaceはLOCAL_PROBE / CLOSED_NEGATIVE（負の証拠限定）**
+- C1: **凍結rendered-affordance surfaceはLOCAL_PROBE / CLOSED_NEGATIVE（prefix隔離）**
 - C5: **bounded-old-action-replay軸はLOCAL_PROBE / CLOSED_NEGATIVE_AXIS**
-- 次work block: **WB-C1_rendered_affordance_objectizer**
+- 次work block: **WB-C14_symbolic_relation_commit_model**
 - all-25 standard run: **25/25 report、183 level、error 0、resume再実行0**
 - worker resource: **最大RSS 143852 KB、25/25 swap 0・exit 0**
 - 全25 gameローカルオラクル: **35 / 183、RHAE 18.821945363%**
@@ -251,8 +252,12 @@ score、採用境界を変更していません。C12の二つの凍結layout-mo
 合計388 probe / 226 visible changeに対してprogress、GAME_OVER、
 progress/hazard/promotion separator、positive pre-action variableがすべて0
 だったため、contract mismatchとpublic replay bootstrapをquarantineして
+negative-onlyで閉じました。C1の凍結objectizerも、進捗2件がpublic replayと
+task-aware policyの48 prefix probeに限られ、1,720 non-prefix candidateは
+visible change 1,720に対してprogress 0、GAME_OVER 0、separator 0でした。
+identity、literal座標、prefix、stale scoreをquarantineし、同じsurfaceを
 negative-onlyで閉じました。次の選択済みwork blockは
-`WB-C1_rendered_affordance_objectizer`です。
+`WB-C14_symbolic_relation_commit_model`です。
 
 開発用分析台帳の再生成:
 

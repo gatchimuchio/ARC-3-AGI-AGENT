@@ -1,0 +1,94 @@
+{
+  "admission_scope": {
+    "admitted_for_negative_surface_closure": true,
+    "admitted_for_positive_generalization_claim": false,
+    "admitted_for_runtime_compile": false,
+    "admitted_for_runtime_promotion": false,
+    "literal_coordinates_quarantined": true,
+    "same_rendered_affordance_surface_retry_has_new_information": false,
+    "stale_public_score_fields_quarantined": true,
+    "task_aware_prefix_progress_quarantined": true,
+    "task_game_level_identity_quarantined": true
+  },
+  "artifact_type": "arc3_p10_c1_closed_negative_admission",
+  "capability_id": "C1_rendered_affordance_objectizer",
+  "content_digest": "arc3_p10_c1_closed_negative_admission:47adf3d1f4758c93f9ec0aeebe500608c38706d1f7f9a758b143b3e8039adb75",
+  "development_only": true,
+  "hds_judgment": {
+    "authority": "development-hds-only",
+    "causal_result": "CLOSED_NEGATIVE",
+    "current_tier": "LOCAL_PROBE",
+    "next_work_block_id": "WB-C14_symbolic_relation_commit_model",
+    "reason_codes": [
+      "frozen-source-sha-and-bytes-match",
+      "two-task-aware-prefix-progress-records-quarantined",
+      "1720-non-prefix-candidates-zero-progress",
+      "zero-hazard-separators",
+      "zero-promotion-eligible-variables",
+      "stale-score-fields-quarantined",
+      "select-next-unembedded-high-support-capability"
+    ],
+    "runtime_p_compile_authorized": false,
+    "runtime_p_promotion_authorized": false,
+    "same_surface_retry_authorized": false,
+    "score_progress_claim_authorized": false,
+    "status": "REJECT",
+    "work_block_status": "CLOSED_NEGATIVE"
+  },
+  "negative_checks": {
+    "all_1768_probes_accounted": true,
+    "analysis_only_public_scope": true,
+    "capability_id_matches": true,
+    "error_free_harness": true,
+    "forbidden_inputs_all_absent": true,
+    "global_support_variables_all_negative": true,
+    "legacy_decision_closed_negative": true,
+    "no_game_over_or_hazard_signature": true,
+    "no_promotion_variable_observed": true,
+    "non_prefix_candidates_have_zero_progress": true,
+    "per_game_support_variables_all_negative": true,
+    "prefix_only_progress_is_explicit": true,
+    "stale_public_score_fields_explicit": true,
+    "two_target_contracts_complete": true,
+    "visible_change_counts_retained": true
+  },
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "retained_measurements": {
+    "changed_probe_count": 1720,
+    "error_count": 0,
+    "hazard_separator_variable_count": 0,
+    "non_prefix_candidate_count": 1720,
+    "non_prefix_changed_count": 1720,
+    "non_prefix_progress_count": 0,
+    "prefix_probe_count": 48,
+    "prefix_progress_count": 2,
+    "progress_separator_variable_count": 0,
+    "promotion_eligible_variable_count": 0,
+    "quarantined_stale_score_fields": {
+      "public_total_levels": 76,
+      "public_total_win_levels": 183
+    },
+    "reusable_hazard_separator_variable_count": 0,
+    "support_variable_count": 27,
+    "target_count": 2,
+    "total_game_over_count": 0,
+    "total_probe_count": 1768
+  },
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-p10-c1-closed-negative-admission-v1",
+  "source_checks": {
+    "descriptor_kind_analysis": true,
+    "descriptor_materialized": true,
+    "source_bytes_match_frozen_manifest": true,
+    "source_json_matches_loaded_mapping": true,
+    "source_sha256_matches_frozen_manifest": true
+  },
+  "source_evidence": {
+    "bytes": 672431,
+    "frozen_source_path": "analysis/c1_rendered_affordance_objectizer_capability_latest.json",
+    "record_id_count": 8,
+    "retained_copy_filename": "LEGACY_C1_RENDERED_AFFORDANCE_OBJECTIZER_CAPABILITY.json",
+    "sensitive_path_count": 4,
+    "sha256": "45b044ab0332e010bec6fd11461beab7dacb7a90eaff49eca149c6a62611d3db"
+  }
+}

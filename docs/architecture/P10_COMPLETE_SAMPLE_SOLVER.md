@@ -348,8 +348,18 @@ Runtime P入力、positive generalization、score進歩には使わない。正�
 [`c12_layout_mode_closed_negative_v1`](../../evidence/p10/development/c12_layout_mode_closed_negative_v1)
 である。
 
+C1 rendered-affordance objectizerは、P3 provenanceに一致するlegacy harnessを
+実行せずnegative-onlyで移植した。2 target / 1,768 probeのうちprogress 2は、
+BP35 public replay 40 actionとLF52 task-aware policy 8 actionのprefixに限られる。
+この48 probeはidentityとliteral座標を含むため正例から隔離した。残る1,720
+non-prefix candidateは全てvisible changeを生じたが、progress 0、
+GAME_OVER 0、27 support variableのprogress/hazard/reusable-hazard/promotion
+separatorは全て0だった。正本は
+[`c1_rendered_affordance_closed_negative_v1`](../../evidence/p10/development/c1_rendered_affordance_closed_negative_v1)
+である。
+
 coverage順の次の未埋込work blockは
-`WB-C1_rendered_affordance_objectizer`。C7とC12の同一surface、C5の
+`WB-C14_symbolic_relation_commit_model`。C1、C7、C12の同一surface、C5の
 bounded-old-action-replay軸は再試行しない。active P、標準score、35/183境界は
 変更せず、P11はGATEDのままである。
 

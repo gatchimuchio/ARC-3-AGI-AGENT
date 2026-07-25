@@ -14,15 +14,16 @@
       "test_id": "COMPOSE-KA59-REMAINING-BOUNDARY"
     }
   ],
-  "content_digest": "arc3_p10_capability_build_queue:db42a9b5a73bc5c0ac5ad50004654f7145fe1058a7a5da6025e8b76f2360daf6",
+  "content_digest": "arc3_p10_capability_build_queue:0a201cf664b8c3f4ee9a6b98a25c4bc8d08b70b60031430893e699cef3be412b",
   "development_only": true,
   "hds_gate": {
     "closed_negative_work_blocks": [
       "WB-C7_target_contact_boundary_verifier",
       "WB-C12_layout_mode_commit_discriminator",
+      "WB-C1_rendered_affordance_objectizer",
       "WB-C5_stale_settle_frame_controller:bounded-old-action-replay-axis"
     ],
-    "next_work_block_id": "WB-C1_rendered_affordance_objectizer",
+    "next_work_block_id": "WB-C14_symbolic_relation_commit_model",
     "reason": "Queue construction authorizes development probes, not runtime promotion or a score claim.",
     "status": "HOLD"
   },
@@ -633,13 +634,32 @@
         "frontier_count": 2,
         "total_link_count": 17
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/c1_rendered_affordance_closed_negative_v1/C1_CLOSED_NEGATIVE_ADMISSION_AUDIT.json",
+        "changed_probe_count": 1720,
+        "hazard_separator_variable_count": 0,
+        "negative_only": true,
+        "non_prefix_candidate_count": 1720,
+        "non_prefix_progress_count": 0,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "retained_legacy_source": "evidence/p10/development/c1_rendered_affordance_closed_negative_v1/LEGACY_C1_RENDERED_AFFORDANCE_OBJECTIZER_CAPABILITY.json",
+        "retained_source_sha256": "45b044ab0332e010bec6fd11461beab7dacb7a90eaff49eca149c6a62611d3db",
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "target_count": 2,
+        "task_aware_prefix_probe_count": 48,
+        "task_aware_prefix_progress_count": 2,
+        "task_aware_prefix_progress_quarantined": true,
+        "total_probe_count": 1768
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 5,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C1_rendered_affordance_objectizer",
-      "work_status": "PENDING"
+      "work_status": "CLOSED_NEGATIVE"
     },
     {
       "candidate_tiers": [
@@ -838,7 +858,7 @@
       "KA59-only tunnel vision",
       "runtime identity before output compilation"
     ],
-    "next_unembedded_work_block": "WB-C1_rendered_affordance_objectizer",
+    "next_unembedded_work_block": "WB-C14_symbolic_relation_commit_model",
     "primary": "coverage before next-level order",
     "runtime_compile_boundary": "Only a COMPOSABLE candidate may be horizontally subtracted into identity-free Runtime P."
   }

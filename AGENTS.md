@@ -96,9 +96,10 @@ P10 current:
   explicit P version updates and M-to-future-decision causality
   ten P-compiled rendered semantic operators are active
   reproducible HDS-adopted boundary is 35 / 183
-  C2/C3 cross-cutting shadow probe is LOCAL_PROBE only
+  C2 observer is CLUSTER_STABLE; C3 predictor is LOCAL_PROBE / HOLD
+  C1, C7, C12 and the bounded C5 replay axis are closed negative
   per-game checkpoint/resume and oracle-compatible aggregation are implemented
-  complete local-oracle report remains unmeasured
+  complete local-oracle report is measured at 35 / 183
   HDS search reset and bounded working-memory replacement implemented
   HDS HOLD remains until 183 / 183 evidence
 ```

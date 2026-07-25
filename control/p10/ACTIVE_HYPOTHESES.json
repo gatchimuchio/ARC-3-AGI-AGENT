@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v26-c12-layout-mode-closed-negative-audit",
+  "frame_id": "p10-v27-c1-rendered-affordance-closed-negative-audit",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -1351,12 +1351,102 @@
       ],
       "falsifier": [
         "the representation is only a layout hash task identity or coordinate table",
-        "the proposed objects do not improve any prospective structural distinction"
+        "the task-aware prefix supplies the only progress records",
+        "non-prefix candidates have zero progress and no promotion separator"
       ],
       "implementation_cost": 3,
       "rollback_cost": 1,
       "generality": 0.92,
       "information_gain": 0.84,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.16,
+      "status": "CLOSED_NEGATIVE",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H47-promote-task-aware-prefix-progress",
+      "kind": "H1",
+      "summary": "Treat the one BP35 replay completion and one LF52 task-aware policy completion as reusable positive C1 objectizer evidence.",
+      "predicted_effect": [
+        "two observed progress records become positive objectizer support",
+        "the frozen C1 surface can advance without a new probe"
+      ],
+      "applicability": [
+        "development-only frozen C1 prefix records"
+      ],
+      "required_evidence": [
+        "identity-free derivation of both prefix decisions",
+        "cross-structure non-prefix positive support",
+        "absence of literal-coordinate or replay dependence"
+      ],
+      "falsifier": [
+        "the records come from a public replay or task-aware fixed policy",
+        "all non-prefix candidates remain at zero progress"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.08,
+      "information_gain": 0.22,
+      "contamination_risk": 0.99,
+      "regression_risk": 0.8,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H48-promote-visible-change-without-progress",
+      "kind": "H2",
+      "summary": "Promote the C1 objectizer because all one thousand seven hundred twenty non-prefix candidates produce visible changes.",
+      "predicted_effect": [
+        "visible object and affordance changes become a positive capability separator",
+        "the C1 surface advances beyond LOCAL_PROBE without completion evidence"
+      ],
+      "applicability": [
+        "development-only frozen C1 non-prefix candidates"
+      ],
+      "required_evidence": [
+        "progress or reusable hazard separation",
+        "promotion-eligible support variables",
+        "prospective action distinction rather than post-action change alone"
+      ],
+      "falsifier": [
+        "non-prefix progress remains zero",
+        "all support variables remain promotion-ineligible"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.35,
+      "information_gain": 0.4,
+      "contamination_risk": 0.25,
+      "regression_risk": 0.68,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H49-symbolic-relation-commit-model",
+      "kind": "H3",
+      "summary": "Advance to C14 and test identity-free symbolic relations that prospectively bind rendered roles to commit obligations.",
+      "predicted_effect": [
+        "relations distinguish candidate obligations before action emission",
+        "the surface is materially different from raw object presence or visible change",
+        "cross-structure positive and negative contrasts can be evaluated without task identity"
+      ],
+      "applicability": [
+        "coverage-ranked C14 symbolic-relation structures in Development Analysis Memory"
+      ],
+      "required_evidence": [
+        "P3-provenance-exact C14 legacy evidence accounting",
+        "prospective relation and commit contrasts across multiple structures",
+        "identity-free removal and composition audits before Runtime P compile"
+      ],
+      "falsifier": [
+        "the relation is only a task identifier replay suffix or literal coordinate",
+        "the relation is measured only after the action outcome",
+        "the same frozen C1 surface is retried under a new name"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.94,
+      "information_gain": 0.88,
       "contamination_risk": 0.0,
       "regression_risk": 0.16,
       "status": "UNOBSERVED_SELECTED_NEXT",

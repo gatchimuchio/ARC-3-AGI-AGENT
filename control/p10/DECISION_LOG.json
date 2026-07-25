@@ -667,6 +667,43 @@
         "evidence/p10/development/c12_layout_mode_closed_negative_v1/LEGACY_LAYOUT_MODE_DISCRIMINATOR_HARNESS.json"
       ],
       "maximum_information_gain_next": "do not retry either frozen layout-mode surface; run WB-C1_rendered_affordance_objectizer"
+    },
+    {
+      "decision_id": "j-dev:p10-c1-rendered-affordance-negative-admission-v27",
+      "authority": "development-hds-only",
+      "status": "REJECT",
+      "selected_hypothesis": "H46-rendered-affordance-objectizer",
+      "rejected_hypotheses": [
+        "H47-promote-task-aware-prefix-progress",
+        "H48-promote-visible-change-without-progress"
+      ],
+      "held_hypothesis": "H49-symbolic-relation-commit-model",
+      "tier_decisions": {
+        "FROZEN_SOURCE_ADMISSION": "PASS_NEGATIVE_ONLY",
+        "LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "CLUSTER_STABLE": "REJECT",
+        "COMPOSABLE": "REJECT",
+        "RUNTIME_P_COMPILE": "HOLD",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "p3-provenance-exact-source-retained",
+        "two-targets-and-one-thousand-seven-hundred-sixty-eight-probes-accounted",
+        "two-task-aware-prefix-progress-records-quarantined",
+        "one-thousand-seven-hundred-twenty-non-prefix-visible-changes-zero-progress",
+        "game-over-count-zero",
+        "progress-hazard-and-promotion-separators-zero",
+        "identity-literal-coordinate-and-stale-score-fields-quarantined",
+        "positive-generalization-claim-rejected"
+      ],
+      "evidence_ref": "evidence/p10/development/c1_rendered_affordance_closed_negative_v1/C1_CLOSED_NEGATIVE_ADMISSION_AUDIT.json",
+      "supporting_evidence": [
+        "evidence/p10/development/c1_rendered_affordance_closed_negative_v1/LEGACY_C1_RENDERED_AFFORDANCE_OBJECTIZER_CAPABILITY.json"
+      ],
+      "maximum_information_gain_next": "do not retry the frozen C1 objectizer surface; run WB-C14_symbolic_relation_commit_model"
     }
   ]
 }

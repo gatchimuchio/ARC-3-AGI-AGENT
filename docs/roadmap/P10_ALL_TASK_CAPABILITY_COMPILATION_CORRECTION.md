@@ -272,8 +272,13 @@ target contact、selection delta、bottom tick、required capabilityとの差分
 - C12 auxiliary frozen layout-mode harness:
   5 target、176 probe、86 visible change、positive pre-action variable 0
 - C12 HDS decision: `LOCAL_PROBE / CLOSED_NEGATIVE`
+- C1 frozen rendered-affordance harness:
+  2 target、1,768 probe、1,720 visible change、prefix progress 2
+- C1 non-prefix candidate:
+  1,720 probe、1,720 visible change、progress/GAME_OVER/separator 0
+- C1 HDS decision: `LOCAL_PROBE / CLOSED_NEGATIVE`
 - next unembedded work block:
-  `WB-C1_rendered_affordance_objectizer`
+  `WB-C14_symbolic_relation_commit_model`
 - action selection influence: 0
 - worker resource: 25/25 exit 0、swap 0、最大RSS 143852 KB
 - local standard oracle: 35 / 183、RHAE 18.821945363%
@@ -290,6 +295,7 @@ target contact、selection delta、bottom tick、required capabilityとの差分
   - C7 same target-contact surface retry: `REJECT`
   - C5 bounded-old-action-replay axis retry: `REJECT`
   - C12 same layout-mode surfaces retry: `REJECT`
+  - C1 same rendered-affordance surface retry: `REJECT`
   - Runtime P promotion: `HOLD`
   - P10全体: `HOLD`
   - P11開始: 禁止
@@ -305,4 +311,8 @@ generalizationへ転用しない。C5 candidateは実際に8回発火したがta
 には、新しいvisible successor obligation stateが必要である。C12のprimary
 contract mismatch、auxiliary public replay bootstrap、両sourceのstale score
 fieldもquarantineする。合計388 probeで正のseparatorが0の同一layout-mode
-surfaceは再試行せず、C1のidentity-free rendered object/affordanceへ進む。
+surfaceは再試行しない。C1で観測されたprogress 2はBP35 public replayとLF52
+task-aware policyの48 prefix probeだけにあり、Runtime Pの正例にはしない。
+1,720 non-prefix candidateは全てvisible changeを生じたがprogress 0、
+GAME_OVER 0で、27 support variableのseparatorは全て0だった。同じC1
+surfaceも再試行せず、C14のprospective symbolic relationへ進む。
