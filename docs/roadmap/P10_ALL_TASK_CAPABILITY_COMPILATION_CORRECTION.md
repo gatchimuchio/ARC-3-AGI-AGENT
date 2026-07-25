@@ -277,8 +277,15 @@ target contact、selection delta、bottom tick、required capabilityとの差分
 - C1 non-prefix candidate:
   1,720 probe、1,720 visible change、progress/GAME_OVER/separator 0
 - C1 HDS decision: `LOCAL_PROBE / CLOSED_NEGATIVE`
+- remaining frozen capability surfaces:
+  C14、C8、C4、C6、C9、C11、C13の7能力、21 target、
+  2,199 probe、565 visible change、progress 0
+- C11 raw hazard observations:
+  GAME_OVER 5、hazard/reusable-hazard separator 0
+- remaining frozen HDS decision:
+  7能力すべて`LOCAL_PROBE / CLOSED_NEGATIVE / NEGATIVE_ONLY`
 - next unembedded work block:
-  `WB-C14_symbolic_relation_commit_model`
+  `WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER`
 - action selection influence: 0
 - worker resource: 25/25 exit 0、swap 0、最大RSS 143852 KB
 - local standard oracle: 35 / 183、RHAE 18.821945363%
@@ -296,6 +303,8 @@ target contact、selection delta、bottom tick、required capabilityとの差分
   - C5 bounded-old-action-replay axis retry: `REJECT`
   - C12 same layout-mode surfaces retry: `REJECT`
   - C1 same rendered-affordance surface retry: `REJECT`
+  - remaining 7 frozen surfaces retry: `REJECT`
+  - visible changeまたはraw GAME_OVERだけのpromotion: `REJECT`
   - Runtime P promotion: `HOLD`
   - P10全体: `HOLD`
   - P11開始: 禁止
@@ -315,4 +324,10 @@ surfaceは再試行しない。C1で観測されたprogress 2はBP35 public repl
 task-aware policyの48 prefix probeだけにあり、Runtime Pの正例にはしない。
 1,720 non-prefix candidateは全てvisible changeを生じたがprogress 0、
 GAME_OVER 0で、27 support variableのseparatorは全て0だった。同じC1
-surfaceも再試行せず、C14のprospective symbolic relationへ進む。
+surfaceも再試行しない。さらにC14、C8、C4、C6、C9、C11、C13の凍結済み
+7 surfaceをP3 provenanceへ束縛して再監査した。合計2,199 probeのprogressは
+0で、C11のGAME_OVER 5にもreusable hazard separatorはないため、全て
+negative-onlyで閉じる。C5の既閉包replay軸を含むstrict queueを解決し、
+次は旧surfaceの別名再試行ではなく、rendered pre-action relationとvisible
+successor obligationを生成する
+`WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER`へ進む。

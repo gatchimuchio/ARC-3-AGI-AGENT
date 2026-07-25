@@ -358,10 +358,22 @@ separatorは全て0だった。正本は
 [`c1_rendered_affordance_closed_negative_v1`](../../evidence/p10/development/c1_rendered_affordance_closed_negative_v1)
 である。
 
+残る凍結済みC14、C8、C4、C6、C9、C11、C13も、P3 provenanceに一致する
+原典を実行せずnegative-onlyで移植した。合計21 target / 2,199 probe /
+565 visible changeに対してprogressは0だった。C11にはGAME_OVERが5件あるが、
+hazard separatorとreusable-hazard separatorはいずれも0であり、raw terminal
+countを予測器へ昇格させない。7能力すべてを
+`LOCAL_PROBE / CLOSED_NEGATIVE / NEGATIVE_ONLY`とし、C5既閉包軸を含む
+strict queueを解決した。正本は
+[`remaining_frozen_negative_surfaces_v1`](../../evidence/p10/development/remaining_frozen_negative_surfaces_v1)
+である。
+
 coverage順の次の未埋込work blockは
-`WB-C14_symbolic_relation_commit_model`。C1、C7、C12の同一surface、C5の
-bounded-old-action-replay軸は再試行しない。active P、標準score、35/183境界は
-変更せず、P11はGATEDのままである。
+`WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER`。閉包済み各surfaceとC5の
+bounded-old-action-replay軸は再試行せず、rendered pre-action relationと
+visible successor obligationだけを新情報とする。KA59は既存multi-actor、
+directional-force、obligation能力のcomposition witnessに限定し、専用operatorを
+作らない。active P、標準score、35/183境界は変更せず、P11はGATEDのままである。
 
 v15では、既知のstate-changing actionより未観測prototypeを優先する
 candidate policyを五つのbounded structureで比較した。action分布は変化したが

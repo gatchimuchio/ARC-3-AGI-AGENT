@@ -872,6 +872,65 @@
         "active P compile or promotion",
         "P11 phase transition"
       ]
+    },
+    {
+      "memory_id": "m-dev:p10-remaining-frozen-negative-v28",
+      "lifecycle": "ACTIVE_CLOSED_NEGATIVE",
+      "probed_hypotheses": [
+        "H49-symbolic-relation-commit-model",
+        "H50-promote-frozen-visible-change",
+        "H51-promote-c11-game-over-as-hazard"
+      ],
+      "held_hypothesis": "H52-prospective-obligation-relation-compiler",
+      "rejected_hypotheses": [
+        "H49-symbolic-relation-commit-model",
+        "H50-promote-frozen-visible-change",
+        "H51-promote-c11-game-over-as-hazard"
+      ],
+      "failure_signatures": [
+        "remaining-frozen-capability-surfaces-zero-progress-or-reusable-separator",
+        "raw-game-over-without-reusable-hazard-separator"
+      ],
+      "evidence": [
+        "seven retained source byte streams match P3 provenance for 9,725,344 total bytes",
+        "C14 C8 C4 C6 C9 C11 and C13 account twenty-one targets and two thousand one hundred ninety-nine probes",
+        "five hundred sixty-five probes visibly change while total progress remains zero",
+        "C11 contains five raw GAME_OVER observations and zero hazard or reusable-hazard separators",
+        "all promotion-eligible variable counts remain zero",
+        "the previously closed C5 bounded-old-action-replay axis is retained at strict queue rank ten",
+        "HDS admits negative conclusions only and rejects all positive promotion claims",
+        "active P score and the thirty-five-level adoption boundary remain unchanged"
+      ],
+      "remaining_falsifiers": [
+        "a retained source byte count digest or recomputed measurement differs",
+        "a frozen surface is retried without materially new prospective state",
+        "raw GAME_OVER or post-action change is used as a pre-action separator",
+        "task level identity replay or literal coordinates enter Runtime P",
+        "active P or score changes without a positive HDS-admitted intervention"
+      ],
+      "resume_conditions": [
+        "do not retry C14 C8 C4 C6 C9 C11 C13 or the C5 predecessor-replay axis",
+        "select WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER as the next work block",
+        "derive prospective relation and successor-obligation variables from rendered pre-action state",
+        "use KA59 only as a composition witness for existing capabilities and never add a dedicated level operator",
+        "retain C2 at CLUSTER_STABLE C3 at LOCAL_PROBE HOLD and C10 at COMPOSABLE with its runtime policy rejected",
+        "keep P11 gated until all one hundred eighty-three levels complete"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/p10_remaining_frozen_negative_audit.py",
+        "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+        "analysis/development/CAPABILITY_BUILD_QUEUE.json",
+        "analysis/development/CAPABILITY_COVERAGE_MATRIX.json"
+      ],
+      "applicability": [
+        "P10 development-only retry suppression and prospective work-block selection"
+      ],
+      "non_applicability": [
+        "runtime action routing",
+        "score progress",
+        "active P compile or promotion",
+        "P11 phase transition"
+      ]
     }
   ]
 }

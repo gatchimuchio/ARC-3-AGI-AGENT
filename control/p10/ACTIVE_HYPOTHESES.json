@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v27-c1-rendered-affordance-closed-negative-audit",
+  "frame_id": "p10-v28-remaining-frozen-negative-catalog",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -1449,6 +1449,96 @@
       "information_gain": 0.88,
       "contamination_risk": 0.0,
       "regression_risk": 0.16,
+      "status": "CLOSED_NEGATIVE",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H50-promote-frozen-visible-change",
+      "kind": "H1",
+      "summary": "Promote the remaining frozen capability surfaces because five hundred sixty-five probes visibly changed the rendered frame.",
+      "predicted_effect": [
+        "visible change alone becomes positive support for seven capabilities",
+        "the frozen surfaces advance beyond LOCAL_PROBE without completion evidence"
+      ],
+      "applicability": [
+        "development-only frozen C14 C8 C4 C6 C9 C11 and C13 probes"
+      ],
+      "required_evidence": [
+        "progress or reusable hazard separation",
+        "promotion-eligible support variables",
+        "prospective action distinction rather than post-action change alone"
+      ],
+      "falsifier": [
+        "all two thousand one hundred ninety-nine probes have zero progress",
+        "all promotion and reusable hazard separator counts remain zero"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.3,
+      "information_gain": 0.2,
+      "contamination_risk": 0.3,
+      "regression_risk": 0.7,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H51-promote-c11-game-over-as-hazard",
+      "kind": "H2",
+      "summary": "Treat five raw C11 GAME_OVER observations as a reusable hazard separator and promote the route verifier.",
+      "predicted_effect": [
+        "raw terminal failures become a reusable prospective route signal",
+        "C11 advances beyond LOCAL_PROBE without a separating variable"
+      ],
+      "applicability": [
+        "development-only frozen C11 route-terminal probes"
+      ],
+      "required_evidence": [
+        "a pre-action variable that separates reusable hazards",
+        "cross-structure positive and negative hazard contrast",
+        "identity-free held-out verification"
+      ],
+      "falsifier": [
+        "hazard and reusable-hazard separator counts are zero",
+        "GAME_OVER is observed without a prospective separating variable"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.24,
+      "information_gain": 0.25,
+      "contamination_risk": 0.18,
+      "regression_risk": 0.74,
+      "status": "REJECTED",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H52-prospective-obligation-relation-compiler",
+      "kind": "H3",
+      "summary": "Compile identity-free rendered relations into prospective successor obligations before selecting or emitting an action.",
+      "predicted_effect": [
+        "candidate roles and relations predict the next obligation before action emission",
+        "the new surface differs materially from frozen post-action change and replay surfaces",
+        "the compiler can compose existing multi-actor directional-force and obligation capabilities"
+      ],
+      "applicability": [
+        "cross-structure rendered states with unresolved successor obligations",
+        "KA59 only as a composition witness and never as a dedicated operator target"
+      ],
+      "required_evidence": [
+        "prospective pre-action relation and successor-obligation labels",
+        "cross-structure positive negative and hazard contrasts",
+        "identity-free removal and composition audits before Runtime P compile"
+      ],
+      "falsifier": [
+        "the compiler routes on game task or level identity",
+        "the relation is reconstructed only from post-action truth",
+        "the implementation is a renamed replay or per-level operator"
+      ],
+      "implementation_cost": 4,
+      "rollback_cost": 1,
+      "generality": 0.97,
+      "information_gain": 0.93,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.18,
       "status": "UNOBSERVED_SELECTED_NEXT",
       "j_dev_decision": "HOLD"
     }

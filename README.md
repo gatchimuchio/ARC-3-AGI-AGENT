@@ -34,8 +34,10 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - C7: **凍結target-contact probeはLOCAL_PROBE / CLOSED_NEGATIVE（負の証拠限定）**
 - C12: **凍結layout-mode 2 surfaceはLOCAL_PROBE / CLOSED_NEGATIVE（負の証拠限定）**
 - C1: **凍結rendered-affordance surfaceはLOCAL_PROBE / CLOSED_NEGATIVE（prefix隔離）**
+- C14/C8/C4/C6/C9/C11/C13:
+  **凍結7 surfaceはLOCAL_PROBE / CLOSED_NEGATIVE（2,199 probe、progress 0）**
 - C5: **bounded-old-action-replay軸はLOCAL_PROBE / CLOSED_NEGATIVE_AXIS**
-- 次work block: **WB-C14_symbolic_relation_commit_model**
+- 次work block: **WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER**
 - all-25 standard run: **25/25 report、183 level、error 0、resume再実行0**
 - worker resource: **最大RSS 143852 KB、25/25 swap 0・exit 0**
 - 全25 gameローカルオラクル: **35 / 183、RHAE 18.821945363%**
@@ -256,8 +258,12 @@ negative-onlyで閉じました。C1の凍結objectizerも、進捗2件がpublic
 task-aware policyの48 prefix probeに限られ、1,720 non-prefix candidateは
 visible change 1,720に対してprogress 0、GAME_OVER 0、separator 0でした。
 identity、literal座標、prefix、stale scoreをquarantineし、同じsurfaceを
-negative-onlyで閉じました。次の選択済みwork blockは
-`WB-C14_symbolic_relation_commit_model`です。
+negative-onlyで閉じました。さらにC14/C8/C4/C6/C9/C11/C13の凍結7
+surfaceをP3 provenanceへ束縛して監査し、21 target / 2,199 probe /
+565 visible changeに対してprogress 0、C11のGAME_OVER 5にも
+reusable-hazard separator 0であることを固定しました。全てnegative-onlyで
+閉じ、C5の既閉包replay軸を含むstrict queueを解決しています。次の選択済み
+work blockは`WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER`です。
 
 開発用分析台帳の再生成:
 

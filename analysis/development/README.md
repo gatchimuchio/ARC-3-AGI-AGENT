@@ -18,8 +18,8 @@ artifacts.
 |---|---|
 | `LEGACY_LEVEL_ANALYSIS_LEDGER.json` | `8b9c7ba1874cf3599fea0e945760674caac4a1cfcef1de8ce377cb7fb0028877` |
 | `ANALYSIS_RECONCILIATION_MATRIX.json` | `91718f62d700b4deccc8e426096429df37b74db081cdf3170e62277ce66a7ec2` |
-| `CAPABILITY_COVERAGE_MATRIX.json` | `e56791e983ac7b4663ab663647eab1bb453760e2250b3e2050e2b0541b9a50d4` |
-| `CAPABILITY_BUILD_QUEUE.json` | `d593b91e99c24c7185bf667668cbe305b3e5e5be64482bb449fb4b8dfa8f92eb` |
+| `CAPABILITY_COVERAGE_MATRIX.json` | `546892e74ff5f287ff0f010896601e4456553dc3173dae19e34f597e771a0ba9` |
+| `CAPABILITY_BUILD_QUEUE.json` | `6a0d11ce3664627f603f0c872389c659c5918faa2a3fcdc445a88d2f5f49c91e` |
 
 Current reconciliation totals:
 
@@ -39,12 +39,20 @@ Current queue decisions:
 - C10: `COMPOSABLE`, Runtime P intervention `REJECT`
 - C7: `LOCAL_PROBE / CLOSED_NEGATIVE`
 - C12: `LOCAL_PROBE / CLOSED_NEGATIVE`
+- C1: `LOCAL_PROBE / CLOSED_NEGATIVE`
+- C14, C8, C4, C6, C9, C11, C13:
+  `LOCAL_PROBE / CLOSED_NEGATIVE / NEGATIVE_ONLY`
 - C5 bounded-old-action-replay axis:
   `LOCAL_PROBE / CLOSED_NEGATIVE_AXIS`
 - next unembedded work block:
-  `WB-C1_rendered_affordance_objectizer`
+  `WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER`
 
-C7, C12, and C5 are negative-only development conclusions. They do not
+The seven newly closed frozen surfaces contain 21 targets and 2,199 probes:
+565 visible changes, zero progress, and five raw `GAME_OVER` observations.
+The raw hazard observations do not form a reusable hazard separator. See
+`evidence/p10/development/remaining_frozen_negative_surfaces_v1/`.
+
+All closed-negative conclusions are development accounting only. They do not
 authorize Runtime P compilation, promotion, score progress, or P11 entry.
 
 ## Deterministic rebuild

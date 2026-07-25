@@ -23,7 +23,7 @@
 | `CLAIM_CAUSAL_ATTRIBUTION` | P-only/J-only/M-only変更の効果を個別帰属できる | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 観測済みP-A/P-Bとsynthetic Frame条件の範囲 | 回帰 |
 | `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `SUPPORTED` | `test_minimum_three_certificate_p9.py`, `certificates/p9/` | G1〜G5定義域内の構成最小性。sample攻略・未知task汎化は含まない | 回帰 |
 | `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略する | `PARTIAL` | FT09 6/6、LP85 8/8、TR87 6/6、SU15 9/9、directional-force route 6/7、全25 game / 183 level標準report | 採用済みlevel境界は35/183。残り148 levelと21 gameのmax-action停止が未閉包 | P10 |
-| `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | C2 observerのcross-game contrastとC10のheld-out mechanism support | C3はLOCAL_PROBE/HOLD、C1・C7・C12・C5候補はclosed-negativeで、未知sample構造の攻略証明はない | P10 |
+| `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | C2 observerのcross-game contrastとC10のheld-out mechanism support | C3はLOCAL_PROBE/HOLD。C1・C7・C12・C14・C8・C4・C6・C9・C11・C13とC5候補軸はclosed-negativeで、未知sample構造の攻略証明はない | P10 |
 | `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `UNSUPPORTED` | なし | release manifestとfull regressionなし | P11 |
 | `CLAIM_OFFICIAL_READY` | COMPETITION/Kaggleへ進める | `REJECTED` | なし | P10〜P11未完、current request外 | P12以降 |
 

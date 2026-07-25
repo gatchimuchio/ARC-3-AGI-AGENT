@@ -82,6 +82,133 @@ VALID_RECONCILIATION_STATUSES = (
 
 PROMOTION_TIERS = ("LOCAL_PROBE", "CLUSTER_STABLE", "COMPOSABLE")
 
+_REMAINING_FROZEN_NEGATIVE_ROOT = (
+    "evidence/p10/development/"
+    "remaining_frozen_negative_surfaces_v1/"
+)
+_REMAINING_FROZEN_NEGATIVE_CATALOG_DIGEST = (
+    "arc3_p10_remaining_frozen_negative_catalog:"
+    "c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd"
+)
+_REMAINING_FROZEN_NEGATIVE_EVIDENCE: dict[
+    str,
+    dict[str, object],
+] = {
+    "C14_symbolic_relation_commit_model": {
+        "admission_filename": (
+            "C14_SYMBOLIC_RELATION_CLOSED_NEGATIVE_AUDIT.json"
+        ),
+        "source_filename": (
+            "LEGACY_C14_SYMBOLIC_RELATION_COMMIT_MODEL_CAPABILITY.json"
+        ),
+        "source_sha256": (
+            "42f54f520657729bb7f6f274ef80072f82e96dc8a9b0a25359504521e327d682"
+        ),
+        "source_bytes": 2546144,
+        "target_count": 3,
+        "total_probe_count": 252,
+        "changed_probe_count": 180,
+        "total_game_over_count": 0,
+    },
+    "C8_helper_handoff_state_model": {
+        "admission_filename": (
+            "C8_HELPER_HANDOFF_CLOSED_NEGATIVE_AUDIT.json"
+        ),
+        "source_filename": (
+            "LEGACY_C8_HELPER_HANDOFF_STATE_MODEL_CAPABILITY.json"
+        ),
+        "source_sha256": (
+            "99435e9fffaa34cb05af15c0a09a13bf26692b5cd39a9dad6e3990a9c1be67b9"
+        ),
+        "source_bytes": 2462929,
+        "target_count": 3,
+        "total_probe_count": 203,
+        "changed_probe_count": 131,
+        "total_game_over_count": 0,
+    },
+    "C4_hazard_rollback_verifier": {
+        "admission_filename": (
+            "C4_HAZARD_ROLLBACK_CLOSED_NEGATIVE_AUDIT.json"
+        ),
+        "source_filename": (
+            "LEGACY_C4_HAZARD_ROLLBACK_VERIFIER_CAPABILITY.json"
+        ),
+        "source_sha256": (
+            "7367c7fd6bf51ffcc703155d3099dfd147416f2d9511dd3e36fe93f925745bad"
+        ),
+        "source_bytes": 870199,
+        "target_count": 8,
+        "total_probe_count": 77,
+        "changed_probe_count": 77,
+        "total_game_over_count": 0,
+    },
+    "C6_action_channel_emitter_model": {
+        "admission_filename": (
+            "C6_ACTION_CHANNEL_CLOSED_NEGATIVE_AUDIT.json"
+        ),
+        "source_filename": (
+            "LEGACY_C6_ACTION_CHANNEL_EMITTER_MODEL_CAPABILITY.json"
+        ),
+        "source_sha256": (
+            "34398b12dab4dc036a14b5c1e6868cb45e51c8ba980014e3745d045784c00446"
+        ),
+        "source_bytes": 233920,
+        "target_count": 2,
+        "total_probe_count": 20,
+        "changed_probe_count": 20,
+        "total_game_over_count": 0,
+    },
+    "C9_token_slot_submission_verifier": {
+        "admission_filename": (
+            "C9_TOKEN_SLOT_SUBMISSION_CLOSED_NEGATIVE_AUDIT.json"
+        ),
+        "source_filename": (
+            "LEGACY_C9_TOKEN_SLOT_SUBMISSION_VERIFIER_CAPABILITY.json"
+        ),
+        "source_sha256": (
+            "b088aea9c794ec6946bc3c64086e9882b51aa887b1c27a7af0259322d71fb5ab"
+        ),
+        "source_bytes": 1968107,
+        "target_count": 2,
+        "total_probe_count": 154,
+        "changed_probe_count": 61,
+        "total_game_over_count": 0,
+    },
+    "C11_route_terminal_reachability_verifier": {
+        "admission_filename": (
+            "C11_ROUTE_TERMINAL_CLOSED_NEGATIVE_AUDIT.json"
+        ),
+        "source_filename": (
+            "LEGACY_C11_ROUTE_TERMINAL_REACHABILITY_"
+            "VERIFIER_CAPABILITY.json"
+        ),
+        "source_sha256": (
+            "f6e898e8269ef327c62aa928014ab07f2fb918c11d37b90e830c872e81b5fc34"
+        ),
+        "source_bytes": 1421416,
+        "target_count": 2,
+        "total_probe_count": 96,
+        "changed_probe_count": 0,
+        "total_game_over_count": 5,
+    },
+    "C13_support_bridge_slider_model": {
+        "admission_filename": (
+            "C13_SUPPORT_BRIDGE_SLIDER_CLOSED_NEGATIVE_AUDIT.json"
+        ),
+        "source_filename": (
+            "LEGACY_C13_SUPPORT_BRIDGE_SLIDER_MODEL_CAPABILITY.json"
+        ),
+        "source_sha256": (
+            "6d3c68296a5642e53f4564bc2f3a96d5a2b89fff3a93025de4aa5a21ca9c826a"
+        ),
+        "source_bytes": 222629,
+        "target_count": 1,
+        "total_probe_count": 1397,
+        "changed_probe_count": 96,
+        "total_game_over_count": 0,
+    },
+}
+
 
 class LegacySourceDriftError(ValueError):
     """Raised when a legacy source no longer matches the frozen P3 manifest."""
@@ -804,6 +931,14 @@ def _build_coverage(
             "C1_rendered_affordance_objectizer": (
                 "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
             ),
+            **{
+                frozen_capability_id: (
+                    "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
+                )
+                for frozen_capability_id in (
+                    _REMAINING_FROZEN_NEGATIVE_EVIDENCE
+                )
+            },
             "C5_stale_settle_frame_controller": (
                 "BOUNDED_OLD_ACTION_REPLAY_LOCAL_PROBE_REJECTED"
             ),
@@ -988,6 +1123,7 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     "C12_layout_mode_commit_discriminator",
                     "C1_rendered_affordance_objectizer",
                     "C5_stale_settle_frame_controller",
+                    *_REMAINING_FROZEN_NEGATIVE_EVIDENCE,
                 }
                 else "NOT_STARTED"
             )
@@ -1131,6 +1267,53 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                 "same_surface_retry_authorized": False,
                 "runtime_p_promotion_authorized": False,
             }
+        elif capability_id in _REMAINING_FROZEN_NEGATIVE_EVIDENCE:
+            work_status = (
+                "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
+            )
+            frozen = _REMAINING_FROZEN_NEGATIVE_EVIDENCE[
+                capability_id
+            ]
+            admission_filename = str(frozen["admission_filename"])
+            source_filename = str(frozen["source_filename"])
+            implementation_evidence = {
+                "catalog": (
+                    _REMAINING_FROZEN_NEGATIVE_ROOT
+                    + "REMAINING_FROZEN_NEGATIVE_CATALOG.json"
+                ),
+                "catalog_content_digest": (
+                    _REMAINING_FROZEN_NEGATIVE_CATALOG_DIGEST
+                ),
+                "admission_audit": (
+                    _REMAINING_FROZEN_NEGATIVE_ROOT
+                    + admission_filename
+                ),
+                "retained_legacy_source": (
+                    _REMAINING_FROZEN_NEGATIVE_ROOT
+                    + source_filename
+                ),
+                "retained_source_sha256": frozen["source_sha256"],
+                "retained_source_bytes": frozen["source_bytes"],
+                "target_count": frozen["target_count"],
+                "total_probe_count": frozen["total_probe_count"],
+                "changed_probe_count": frozen["changed_probe_count"],
+                "total_progress_count": 0,
+                "total_game_over_count": (
+                    frozen["total_game_over_count"]
+                ),
+                "progress_separator_variable_count": 0,
+                "reusable_hazard_separator_variable_count": 0,
+                "promotion_eligible_variable_count": 0,
+                "negative_only": True,
+                "same_surface_retry_authorized": False,
+                "runtime_p_compile_authorized": False,
+                "runtime_p_promotion_authorized": False,
+                "score_progress_claim_authorized": False,
+                "raw_game_over_is_not_reusable_separator": (
+                    capability_id
+                    == "C11_route_terminal_reachability_verifier"
+                ),
+            }
         elif capability_id == "C5_stale_settle_frame_controller":
             work_status = "LOCAL_AXIS_CLOSED_NEGATIVE"
             implementation_evidence = {
@@ -1185,7 +1368,7 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
             "selection_policy": {
                 "primary": "coverage before next-level order",
                 "next_unembedded_work_block": (
-                    "WB-C14_symbolic_relation_commit_model"
+                    "WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER"
                 ),
                 "forbidden": [
                     "one Python operator per unresolved level",
@@ -1231,14 +1414,28 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     "runtime promotion or a score claim."
                 ),
                 "next_work_block_id": (
-                    "WB-C14_symbolic_relation_commit_model"
+                    "WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER"
+                ),
+                "remaining_frozen_negative_catalog": (
+                    _REMAINING_FROZEN_NEGATIVE_ROOT
+                    + "REMAINING_FROZEN_NEGATIVE_CATALOG.json"
+                ),
+                "remaining_frozen_negative_catalog_digest": (
+                    _REMAINING_FROZEN_NEGATIVE_CATALOG_DIGEST
                 ),
                 "closed_negative_work_blocks": [
                     "WB-C7_target_contact_boundary_verifier",
                     "WB-C12_layout_mode_commit_discriminator",
                     "WB-C1_rendered_affordance_objectizer",
+                    "WB-C14_symbolic_relation_commit_model",
+                    "WB-C8_helper_handoff_state_model",
+                    "WB-C4_hazard_rollback_verifier",
+                    "WB-C6_action_channel_emitter_model",
                     "WB-C5_stale_settle_frame_controller:"
                     "bounded-old-action-replay-axis",
+                    "WB-C9_token_slot_submission_verifier",
+                    "WB-C11_route_terminal_reachability_verifier",
+                    "WB-C13_support_bridge_slider_model",
                 ],
             },
         },

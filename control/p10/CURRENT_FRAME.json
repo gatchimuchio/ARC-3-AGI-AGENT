@@ -1,15 +1,15 @@
 {
   "schema_version": "arc3-p10-development-frame-v1",
-  "frame_id": "p10-v27-c1-rendered-affordance-closed-negative-audit",
+  "frame_id": "p10-v28-remaining-frozen-negative-catalog",
   "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
   "authority": {
     "document": "docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md",
     "source_sha256": "113ac0516e500679792e57fbc73f21ad078d19929ae39c11ff185ac1f9a353ef",
-    "repository_sha256_lf": "3db6bb43ac9be6530aff38591e76f74f8cd68046ce89e08fba1c2c97d86d6b7e"
+    "repository_sha256_lf": "905eb78dcc9b80f960e924c2db435ee1597dee50ae230ca34c36526ad119f4a8"
   },
   "self_check": {
     "branch": "main",
-    "base_head": "072b2ee1926ca9ff5d4c345f22d63cdc8cf7cbc9",
+    "base_head": "1d0f1d27ef42d7fc599a227d0b52f2d6e7bff0cc",
     "dirty_state_preserved": true,
     "operation_mode": "OFFLINE_ONLY",
     "active_p": {
@@ -34,7 +34,7 @@
       "source": "evidence/p10/development/c2_c3_transition_all25_max450_v2/arc3_local_score_oracle.json",
       "score_digest": "9f214c1825f8ee0f52b1ef6a323b778971ce03e03a3733338d2323a9b0ebb238"
     },
-    "latest_failure_signature": "rendered-affordance-non-prefix-probes-zero-progress",
+    "latest_failure_signature": "remaining-frozen-capability-surfaces-zero-progress-or-reusable-separator",
     "stop_conditions": [
       "runtime identity routing detected",
       "HDS authority bypass detected",
@@ -54,7 +54,8 @@
       "P3-provenance-exact frozen C7 target-contact evidence",
       "candidate-only directional successor transition traces",
       "P3-provenance-exact primary and auxiliary C12 layout-mode evidence",
-      "P3-provenance-exact C1 rendered-affordance objectizer evidence"
+      "P3-provenance-exact C1 rendered-affordance objectizer evidence",
+      "P3-provenance-exact frozen C14 C8 C4 C6 C9 C11 and C13 capability evidence"
     ],
     "change": [
       "field-level salvage of task-aware legacy analysis into development-only memory",
@@ -76,7 +77,10 @@
       "two-source negative-only C12 admission with contract replay and stale-score quarantine",
       "coverage-queue advancement to the distinct C1 rendered-affordance surface",
       "negative-only C1 admission with task-aware prefix progress quarantine",
-      "coverage-queue advancement to the distinct C14 symbolic-relation surface"
+      "coverage-queue advancement to the distinct C14 symbolic-relation surface",
+      "negative-only admission of seven remaining frozen capability surfaces",
+      "strict queue closure including the previously closed C5 replay axis",
+      "selection of a materially new prospective obligation relation compiler"
     ],
     "evidence_use": [
       "current rendered observation",
@@ -93,7 +97,8 @@
       "C7 frozen probe counts and provenance-bound negative admission",
       "directional-settle composition intervention activation and failure audits",
       "C12 primary and auxiliary frozen counts and provenance-bound negative admission",
-      "C1 frozen prefix and non-prefix counts with provenance-bound negative admission"
+      "C1 frozen prefix and non-prefix counts with provenance-bound negative admission",
+      "seven frozen source digests and twenty-one-target two-thousand-one-hundred-ninety-nine-probe negative catalog"
     ],
     "evidence_exclude": [
       "source or hidden environment state",
@@ -125,7 +130,10 @@
       "H46-rendered-affordance-objectizer",
       "H47-promote-task-aware-prefix-progress",
       "H48-promote-visible-change-without-progress",
-      "H49-symbolic-relation-commit-model"
+      "H49-symbolic-relation-commit-model",
+      "H50-promote-frozen-visible-change",
+      "H51-promote-c11-game-over-as-hazard",
+      "H52-prospective-obligation-relation-compiler"
     ],
     "predictions": [
       "H29 can add one more local closure but continues linear operator proliferation and erases cross-task relations",
@@ -148,7 +156,10 @@
       "H46 tests materially new identity-free rendered objects and affordances instead of retrying raw layout hashes",
       "H47 would misclassify one public-replay and one task-aware-policy completion as reusable objectizer support",
       "H48 would treat visible change alone as positive support despite zero non-prefix progress and zero separators",
-      "H49 tests symbolic relations and prospective commit obligations rather than retrying the closed objectizer surface"
+      "H49 tests the frozen C14 symbolic-relation surface and closes negative at zero progress and zero reusable separator",
+      "H50 incorrectly treats five hundred sixty-five visible changes as positive progress evidence",
+      "H51 incorrectly treats five raw C11 GAME_OVER outcomes as a reusable hazard separator",
+      "H52 builds materially new pre-action rendered relations and successor obligations without identity replay"
     ],
     "comparators": [
       "unchanged HDS-promoted v27/v27/v26 active manifest",
@@ -167,10 +178,11 @@
       "C7 seven-target two-hundred-eighty-eight-probe frozen artifact and negative-only rebuild",
       "FT09 and KA59 active candidate double runs with eight bounded replay activations",
       "C12 primary two-hundred-twelve-probe and auxiliary one-hundred-seventy-six-probe frozen artifacts",
-      "C1 two-target one-thousand-seven-hundred-sixty-eight-probe frozen artifact"
+      "C1 two-target one-thousand-seven-hundred-sixty-eight-probe frozen artifact",
+      "seven remaining frozen artifacts totaling twenty-one targets two thousand one hundred ninety-nine probes and 9,725,344 bytes"
     ],
-    "expected_state_transition": "resource-headroom failure -> behavior-equivalent bounded retention; circular C3 claim -> explicit C2 stable observer plus C3 predictive HOLD; C10 closed timer surface -> CLUSTER_STABLE and COMPOSABLE visible-context capability; zero completion delta -> candidate Runtime P REJECT; C7 zero separators -> negative-only CLOSED_NEGATIVE; bounded old-action replay activation with zero delta -> CLOSED_NEGATIVE_AXIS; C12 three-hundred-eighty-eight zero-progress probes -> negative-only CLOSED_NEGATIVE; C1 task-aware prefix progress quarantined plus one-thousand-seven-hundred-twenty non-prefix zero-progress probes -> negative-only CLOSED_NEGATIVE and advance to C14",
-    "falsification_relation": "provenance drifts, row accounting differs from one hundred eighty-three, checkpoint conditions can be mixed, shadow evidence influences an action, active P changes, deterministic rebuild differs, a rollback anchor is pruned, candidate sixty-five is unreachable, any worker exceeds one GiB or swaps, post-action truth receives predictive credit, a zero-delta candidate is retained, a weak held-out predictor is promoted, a contract-mismatched C7 or C12 artifact supports a positive claim, replay-bootstrapped auxiliary evidence enters runtime, C1 prefix progress or identity-bearing coordinates enter Runtime P, or any closed surface is retried without new visible state"
+    "expected_state_transition": "resource-headroom failure -> behavior-equivalent bounded retention; circular C3 claim -> explicit C2 stable observer plus C3 predictive HOLD; C10 closed timer surface -> CLUSTER_STABLE and COMPOSABLE visible-context capability; zero completion delta -> candidate Runtime P REJECT; C7 zero separators -> negative-only CLOSED_NEGATIVE; bounded old-action replay activation with zero delta -> CLOSED_NEGATIVE_AXIS; C12 three-hundred-eighty-eight zero-progress probes -> negative-only CLOSED_NEGATIVE; C1 task-aware prefix progress quarantined plus one-thousand-seven-hundred-twenty non-prefix zero-progress probes -> negative-only CLOSED_NEGATIVE; seven remaining frozen surfaces at zero progress and zero reusable separator -> negative-only CLOSED_NEGATIVE catalog and select a prospective obligation relation compiler",
+    "falsification_relation": "provenance drifts, row accounting differs from one hundred eighty-three, checkpoint conditions can be mixed, shadow evidence influences an action, active P changes, deterministic rebuild differs, a rollback anchor is pruned, candidate sixty-five is unreachable, any worker exceeds one GiB or swaps, post-action truth receives predictive credit, a zero-delta candidate is retained, a weak held-out predictor is promoted, a contract-mismatched frozen artifact supports a positive claim, replay-bootstrapped evidence enters runtime, C1 prefix progress identity-bearing coordinates raw GAME_OVER or visible change enters Runtime P as positive evidence, or any closed surface is retried without new prospective state"
   },
   "Mc": {
     "identity": "generic-double-trinity-P-update-control",
@@ -194,6 +206,9 @@
       "closed-negative surfaces record explicit reopen conditions and advance the queue",
       "both frozen C12 sources match P3 provenance and are admitted only for negative conclusions",
       "the frozen C1 source matches P3 provenance and its task-aware prefix progress is quarantined from positive support",
+      "all seven remaining frozen sources match P3 provenance and are admitted only for negative conclusions",
+      "raw C11 GAME_OVER observations remain distinct from reusable hazard separation",
+      "the strict frozen-surface queue advances only to a materially new prospective work block",
       "active P versions digests and adopted completion remain unchanged",
       "only HDS may advance LOCAL_PROBE to CLUSTER_STABLE COMPOSABLE compile or promotion"
     ],
@@ -211,6 +226,8 @@
       "the same C7 or predecessor-replay surface is retried without a materially new variable",
       "either frozen C12 layout-mode surface is retried without a materially new rendered variable",
       "the frozen C1 objectizer surface is retried or its prefix progress is promoted without a materially new relation variable",
+      "any of the seven remaining frozen surfaces or the C5 predecessor-replay axis is retried without materially new prospective state",
+      "raw GAME_OVER or visible change is promoted without a reusable pre-action separator",
       "unclassified failure occurs"
     ],
     "rollback": [
@@ -234,7 +251,9 @@
       "the bounded-old-directional-action replay axis is rejected after eight activations and zero target delta",
       "C12 is closed negative after three hundred eighty-eight zero-progress probes with contract mismatch replay bootstrap and stale score fields quarantined",
       "C1 is closed negative after quarantining two task-aware prefix progress records and observing zero progress in one thousand seven hundred twenty non-prefix candidates",
-      "WB-C14_symbolic_relation_commit_model is selected next",
+      "C14 C8 C4 C6 C9 C11 and C13 are closed negative after two thousand one hundred ninety-nine zero-progress probes with zero reusable-hazard separators",
+      "the previously closed C5 replay axis is retained in strict queue order",
+      "WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER is selected next",
       "the adopted boundary remains thirty-five of one hundred eighty-three",
       "P10 and P11 remain gated"
     ]
@@ -248,6 +267,8 @@
     "retry of predecessor directional-action replay without a new visible successor state",
     "retry of either frozen C12 layout-mode surface",
     "retry of the frozen C1 objectizer surface or promotion of its task-aware prefix records",
+    "retry of C14 C8 C4 C6 C9 C11 C13 or the C5 predecessor-replay axis without materially new prospective state",
+    "promotion of visible change or raw GAME_OVER without a reusable pre-action separator",
     "P11 start",
     "official ARC or Kaggle connection",
     "competition mode"
@@ -286,7 +307,8 @@
     "C7 provenance-bound negative-only admission audit",
     "directional-settle composition activation failure and crash-recovery audits",
     "C12 two-source provenance-bound negative-only admission audit",
-    "C1 provenance-bound prefix-quarantined negative-only admission audit"
+    "C1 provenance-bound prefix-quarantined negative-only admission audit",
+    "seven-source provenance-bound remaining frozen negative catalog audit"
   ],
   "maximum_work_scope": [
     "field-level salvage and deterministic compilation of all 183 task-aware rows",
@@ -303,6 +325,7 @@
     "bounded candidate-only directional successor intervention without active P mutation",
     "negative-only migration of two P3-provenance-exact legacy C12 artifacts",
     "negative-only migration of one P3-provenance-exact legacy C1 artifact",
-    "advance to WB-C14 after closed-negative C1 rendered-affordance surface"
+    "negative-only migration of seven P3-provenance-exact remaining frozen capability artifacts",
+    "advance to WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER after strict frozen-surface closure"
   ]
 }

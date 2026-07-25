@@ -97,7 +97,9 @@ P10 current:
   ten P-compiled rendered semantic operators are active
   reproducible HDS-adopted boundary is 35 / 183
   C2 observer is CLUSTER_STABLE; C3 predictor is LOCAL_PROBE / HOLD
-  C1, C7, C12 and the bounded C5 replay axis are closed negative
+  C1, C7, C12, C14, C8, C4, C6, C9, C11, C13 and the bounded
+  C5 replay axis are closed negative
+  the next work block is WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER
   per-game checkpoint/resume and oracle-compatible aggregation are implemented
   complete local-oracle report is measured at 35 / 183
   HDS search reset and bounded working-memory replacement implemented

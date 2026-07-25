@@ -105,7 +105,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v27_control_preserves_v21_active_p(
+    def test_v28_control_preserves_v21_active_p(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -120,7 +120,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v27-c1-rendered-affordance-closed-negative-audit",
+            "p10-v28-remaining-frozen-negative-catalog",
         )
         self.assertEqual(frame["self_check"]["stable_completed_levels"], 35)
         self.assertEqual(capabilities["stable_completed_levels"], 35)
@@ -894,7 +894,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
             by_hypothesis[
                 "H49-symbolic-relation-commit-model"
             ]["status"],
-            "UNOBSERVED_SELECTED_NEXT",
+            "CLOSED_NEGATIVE",
         )
 
         rejected = {
@@ -971,6 +971,150 @@ class P10DevelopmentControlTests(unittest.TestCase):
             "select WB-C14_symbolic_relation_commit_model "
             "as the next coverage-ranked work block",
             memory["resume_conditions"],
+        )
+
+    def test_v28_remaining_frozen_negative_catalog_is_bound(
+        self,
+    ) -> None:
+        evidence_dir = (
+            REPOSITORY_ROOT
+            / "evidence"
+            / "p10"
+            / "development"
+            / "remaining_frozen_negative_surfaces_v1"
+        )
+        catalog = _json(
+            evidence_dir / "REMAINING_FROZEN_NEGATIVE_CATALOG.json"
+        )
+        body = dict(catalog)
+        claimed = body.pop("content_digest")
+        self.assertEqual(
+            claimed,
+            "arc3_p10_remaining_frozen_negative_catalog:"
+            + digest_object(body),
+        )
+        self.assertEqual(catalog["summary"]["target_count"], 21)
+        self.assertEqual(catalog["summary"]["probe_count"], 2199)
+        self.assertEqual(catalog["summary"]["changed_probe_count"], 565)
+        self.assertEqual(catalog["summary"]["progress_count"], 0)
+        self.assertEqual(catalog["summary"]["game_over_count"], 5)
+        self.assertFalse(
+            catalog["hds_judgment"]["runtime_p_compile_authorized"]
+        )
+
+        hypotheses = _json(
+            CONTROL_DIR / "ACTIVE_HYPOTHESES.json"
+        )["hypotheses"]
+        by_id = {item["hypothesis_id"]: item for item in hypotheses}
+        self.assertEqual(
+            by_id["H49-symbolic-relation-commit-model"]["status"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertEqual(
+            by_id["H50-promote-frozen-visible-change"]["status"],
+            "REJECTED",
+        )
+        self.assertEqual(
+            by_id["H51-promote-c11-game-over-as-hazard"]["status"],
+            "REJECTED",
+        )
+        self.assertEqual(
+            by_id[
+                "H52-prospective-obligation-relation-compiler"
+            ]["status"],
+            "UNOBSERVED_SELECTED_NEXT",
+        )
+
+        rejected = {
+            item["hypothesis_id"]
+            for item in _json(
+                CONTROL_DIR / "REJECTED_HYPOTHESES.json"
+            )["hypotheses"]
+        }
+        self.assertTrue(
+            {
+                "H49-symbolic-relation-commit-model",
+                "H50-promote-frozen-visible-change",
+                "H51-promote-c11-game-over-as-hazard",
+            }
+            <= rejected
+        )
+
+        decision = next(
+            item
+            for item in _json(
+                CONTROL_DIR / "DECISION_LOG.json"
+            )["decisions"]
+            if item["decision_id"]
+            == "j-dev:p10-remaining-frozen-negative-catalog-v28"
+        )
+        self.assertEqual(
+            decision["selected_hypothesis"],
+            "H52-prospective-obligation-relation-compiler",
+        )
+        self.assertFalse(decision["allow_action_influence"])
+        self.assertFalse(decision["allow_p_compile"])
+        self.assertFalse(decision["allow_p_promote"])
+
+        capability_ids = {
+            "C14-symbolic-relation-commit-model",
+            "C8-helper-handoff-state-model",
+            "C4-hazard-rollback-verifier",
+            "C6-action-channel-emitter-model",
+            "C9-token-slot-submission-verifier",
+            "C11-route-terminal-reachability-verifier",
+            "C13-support-bridge-slider-model",
+        }
+        capabilities = {
+            item["capability_id"]: item
+            for item in _json(
+                CONTROL_DIR / "CAPABILITY_REGISTRY.json"
+            )["capabilities"]
+        }
+        for capability_id in capability_ids:
+            with self.subTest(capability=capability_id):
+                self.assertEqual(
+                    capabilities[capability_id]["status"],
+                    "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
+                )
+                self.assertFalse(
+                    capabilities[capability_id]["runtime_admitted"]
+                )
+
+        failures = {
+            item["signature"]
+            for item in _json(
+                CONTROL_DIR / "FAILURE_SIGNATURE_REGISTRY.json"
+            )["failures"]
+        }
+        self.assertIn(
+            "remaining-frozen-capability-surfaces-zero-progress-or-reusable-separator",
+            failures,
+        )
+        self.assertIn(
+            "raw-game-over-without-reusable-hazard-separator",
+            failures,
+        )
+
+        memory_ids = {
+            item["memory_id"]
+            for item in _json(CONTROL_DIR / "DEV_MEMORY.json")[
+                "entries"
+            ]
+        }
+        self.assertIn(
+            "m-dev:p10-remaining-frozen-negative-v28",
+            memory_ids,
+        )
+        experiment_ids = {
+            item["experiment_id"]
+            for item in _json(
+                CONTROL_DIR / "EXPERIMENT_REGISTRY.json"
+            )["experiments"]
+        }
+        self.assertIn(
+            "p10-remaining-frozen-negative-catalog-v28",
+            experiment_ids,
         )
 
     def test_v14_standard_budget_and_stable_regression_audits_are_bound(

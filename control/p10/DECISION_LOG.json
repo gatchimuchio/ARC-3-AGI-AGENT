@@ -704,6 +704,55 @@
         "evidence/p10/development/c1_rendered_affordance_closed_negative_v1/LEGACY_C1_RENDERED_AFFORDANCE_OBJECTIZER_CAPABILITY.json"
       ],
       "maximum_information_gain_next": "do not retry the frozen C1 objectizer surface; run WB-C14_symbolic_relation_commit_model"
+    },
+    {
+      "decision_id": "j-dev:p10-remaining-frozen-negative-catalog-v28",
+      "authority": "development-hds-only",
+      "status": "NEGATIVE_ACCOUNTING_ACCEPTED_SELECTED_NEXT",
+      "selected_hypothesis": "H52-prospective-obligation-relation-compiler",
+      "rejected_hypotheses": [
+        "H49-symbolic-relation-commit-model",
+        "H50-promote-frozen-visible-change",
+        "H51-promote-c11-game-over-as-hazard"
+      ],
+      "tier_decisions": {
+        "FROZEN_SOURCE_ADMISSION": "PASS_NEGATIVE_ONLY",
+        "C14_LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "C8_LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "C4_LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "C6_LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "C5_PREVIOUS_AXIS": "CLOSED_NEGATIVE_AXIS",
+        "C9_LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "C11_LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "C13_LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "CLUSTER_STABLE": "REJECT",
+        "COMPOSABLE": "REJECT",
+        "RUNTIME_P_COMPILE": "HOLD",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "seven-p3-provenance-exact-sources-retained",
+        "twenty-one-targets-and-two-thousand-one-hundred-ninety-nine-probes-accounted",
+        "five-hundred-sixty-five-visible-changes-zero-progress",
+        "five-raw-game-over-with-zero-reusable-hazard-separators",
+        "promotion-eligible-variable-count-zero",
+        "same-frozen-surface-retries-have-no-new-information",
+        "active-manifest-score-and-adopted-boundary-unchanged"
+      ],
+      "evidence_ref": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+      "supporting_evidence": [
+        "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C14_SYMBOLIC_RELATION_CLOSED_NEGATIVE_AUDIT.json",
+        "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C8_HELPER_HANDOFF_CLOSED_NEGATIVE_AUDIT.json",
+        "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C4_HAZARD_ROLLBACK_CLOSED_NEGATIVE_AUDIT.json",
+        "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C6_ACTION_CHANNEL_CLOSED_NEGATIVE_AUDIT.json",
+        "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C9_TOKEN_SLOT_SUBMISSION_CLOSED_NEGATIVE_AUDIT.json",
+        "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C11_ROUTE_TERMINAL_CLOSED_NEGATIVE_AUDIT.json",
+        "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C13_SUPPORT_BRIDGE_SLIDER_CLOSED_NEGATIVE_AUDIT.json"
+      ],
+      "maximum_information_gain_next": "build WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER from rendered pre-action relations and successor obligations without task identity replay or a dedicated KA59 operator"
     }
   ]
 }

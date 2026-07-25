@@ -14,17 +14,26 @@
       "test_id": "COMPOSE-KA59-REMAINING-BOUNDARY"
     }
   ],
-  "content_digest": "arc3_p10_capability_build_queue:0a201cf664b8c3f4ee9a6b98a25c4bc8d08b70b60031430893e699cef3be412b",
+  "content_digest": "arc3_p10_capability_build_queue:7c126e96713a540964712ed3e4017329b6a3466082e8330ff52292778da53ef3",
   "development_only": true,
   "hds_gate": {
     "closed_negative_work_blocks": [
       "WB-C7_target_contact_boundary_verifier",
       "WB-C12_layout_mode_commit_discriminator",
       "WB-C1_rendered_affordance_objectizer",
-      "WB-C5_stale_settle_frame_controller:bounded-old-action-replay-axis"
+      "WB-C14_symbolic_relation_commit_model",
+      "WB-C8_helper_handoff_state_model",
+      "WB-C4_hazard_rollback_verifier",
+      "WB-C6_action_channel_emitter_model",
+      "WB-C5_stale_settle_frame_controller:bounded-old-action-replay-axis",
+      "WB-C9_token_slot_submission_verifier",
+      "WB-C11_route_terminal_reachability_verifier",
+      "WB-C13_support_bridge_slider_model"
     ],
-    "next_work_block_id": "WB-C14_symbolic_relation_commit_model",
+    "next_work_block_id": "WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER",
     "reason": "Queue construction authorizes development probes, not runtime promotion or a score claim.",
+    "remaining_frozen_negative_catalog": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+    "remaining_frozen_negative_catalog_digest": "arc3_p10_remaining_frozen_negative_catalog:c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd",
     "status": "HOLD"
   },
   "queue": [
@@ -675,13 +684,35 @@
         "frontier_count": 3,
         "total_link_count": 15
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C14_SYMBOLIC_RELATION_CLOSED_NEGATIVE_AUDIT.json",
+        "catalog": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+        "catalog_content_digest": "arc3_p10_remaining_frozen_negative_catalog:c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd",
+        "changed_probe_count": 180,
+        "negative_only": true,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "raw_game_over_is_not_reusable_separator": false,
+        "retained_legacy_source": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/LEGACY_C14_SYMBOLIC_RELATION_COMMIT_MODEL_CAPABILITY.json",
+        "retained_source_bytes": 2546144,
+        "retained_source_sha256": "42f54f520657729bb7f6f274ef80072f82e96dc8a9b0a25359504521e327d682",
+        "reusable_hazard_separator_variable_count": 0,
+        "runtime_p_compile_authorized": false,
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "score_progress_claim_authorized": false,
+        "target_count": 3,
+        "total_game_over_count": 0,
+        "total_probe_count": 252,
+        "total_progress_count": 0
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 6,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C14_symbolic_relation_commit_model",
-      "work_status": "PENDING"
+      "work_status": "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
     },
     {
       "candidate_tiers": [
@@ -697,13 +728,35 @@
         "frontier_count": 3,
         "total_link_count": 14
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C8_HELPER_HANDOFF_CLOSED_NEGATIVE_AUDIT.json",
+        "catalog": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+        "catalog_content_digest": "arc3_p10_remaining_frozen_negative_catalog:c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd",
+        "changed_probe_count": 131,
+        "negative_only": true,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "raw_game_over_is_not_reusable_separator": false,
+        "retained_legacy_source": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/LEGACY_C8_HELPER_HANDOFF_STATE_MODEL_CAPABILITY.json",
+        "retained_source_bytes": 2462929,
+        "retained_source_sha256": "99435e9fffaa34cb05af15c0a09a13bf26692b5cd39a9dad6e3990a9c1be67b9",
+        "reusable_hazard_separator_variable_count": 0,
+        "runtime_p_compile_authorized": false,
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "score_progress_claim_authorized": false,
+        "target_count": 3,
+        "total_game_over_count": 0,
+        "total_probe_count": 203,
+        "total_progress_count": 0
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 7,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C8_helper_handoff_state_model",
-      "work_status": "PENDING"
+      "work_status": "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
     },
     {
       "candidate_tiers": [
@@ -719,13 +772,35 @@
         "frontier_count": 3,
         "total_link_count": 13
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C4_HAZARD_ROLLBACK_CLOSED_NEGATIVE_AUDIT.json",
+        "catalog": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+        "catalog_content_digest": "arc3_p10_remaining_frozen_negative_catalog:c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd",
+        "changed_probe_count": 77,
+        "negative_only": true,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "raw_game_over_is_not_reusable_separator": false,
+        "retained_legacy_source": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/LEGACY_C4_HAZARD_ROLLBACK_VERIFIER_CAPABILITY.json",
+        "retained_source_bytes": 870199,
+        "retained_source_sha256": "7367c7fd6bf51ffcc703155d3099dfd147416f2d9511dd3e36fe93f925745bad",
+        "reusable_hazard_separator_variable_count": 0,
+        "runtime_p_compile_authorized": false,
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "score_progress_claim_authorized": false,
+        "target_count": 8,
+        "total_game_over_count": 0,
+        "total_probe_count": 77,
+        "total_progress_count": 0
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 8,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C4_hazard_rollback_verifier",
-      "work_status": "PENDING"
+      "work_status": "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
     },
     {
       "candidate_tiers": [
@@ -741,13 +816,35 @@
         "frontier_count": 2,
         "total_link_count": 10
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C6_ACTION_CHANNEL_CLOSED_NEGATIVE_AUDIT.json",
+        "catalog": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+        "catalog_content_digest": "arc3_p10_remaining_frozen_negative_catalog:c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd",
+        "changed_probe_count": 20,
+        "negative_only": true,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "raw_game_over_is_not_reusable_separator": false,
+        "retained_legacy_source": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/LEGACY_C6_ACTION_CHANNEL_EMITTER_MODEL_CAPABILITY.json",
+        "retained_source_bytes": 233920,
+        "retained_source_sha256": "34398b12dab4dc036a14b5c1e6868cb45e51c8ba980014e3745d045784c00446",
+        "reusable_hazard_separator_variable_count": 0,
+        "runtime_p_compile_authorized": false,
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "score_progress_claim_authorized": false,
+        "target_count": 2,
+        "total_game_over_count": 0,
+        "total_probe_count": 20,
+        "total_progress_count": 0
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 9,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C6_action_channel_emitter_model",
-      "work_status": "PENDING"
+      "work_status": "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
     },
     {
       "candidate_tiers": [
@@ -795,13 +892,35 @@
         "frontier_count": 2,
         "total_link_count": 8
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C9_TOKEN_SLOT_SUBMISSION_CLOSED_NEGATIVE_AUDIT.json",
+        "catalog": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+        "catalog_content_digest": "arc3_p10_remaining_frozen_negative_catalog:c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd",
+        "changed_probe_count": 61,
+        "negative_only": true,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "raw_game_over_is_not_reusable_separator": false,
+        "retained_legacy_source": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/LEGACY_C9_TOKEN_SLOT_SUBMISSION_VERIFIER_CAPABILITY.json",
+        "retained_source_bytes": 1968107,
+        "retained_source_sha256": "b088aea9c794ec6946bc3c64086e9882b51aa887b1c27a7af0259322d71fb5ab",
+        "reusable_hazard_separator_variable_count": 0,
+        "runtime_p_compile_authorized": false,
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "score_progress_claim_authorized": false,
+        "target_count": 2,
+        "total_game_over_count": 0,
+        "total_probe_count": 154,
+        "total_progress_count": 0
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 11,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C9_token_slot_submission_verifier",
-      "work_status": "PENDING"
+      "work_status": "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
     },
     {
       "candidate_tiers": [
@@ -817,13 +936,35 @@
         "frontier_count": 2,
         "total_link_count": 7
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C11_ROUTE_TERMINAL_CLOSED_NEGATIVE_AUDIT.json",
+        "catalog": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+        "catalog_content_digest": "arc3_p10_remaining_frozen_negative_catalog:c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd",
+        "changed_probe_count": 0,
+        "negative_only": true,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "raw_game_over_is_not_reusable_separator": true,
+        "retained_legacy_source": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/LEGACY_C11_ROUTE_TERMINAL_REACHABILITY_VERIFIER_CAPABILITY.json",
+        "retained_source_bytes": 1421416,
+        "retained_source_sha256": "f6e898e8269ef327c62aa928014ab07f2fb918c11d37b90e830c872e81b5fc34",
+        "reusable_hazard_separator_variable_count": 0,
+        "runtime_p_compile_authorized": false,
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "score_progress_claim_authorized": false,
+        "target_count": 2,
+        "total_game_over_count": 5,
+        "total_probe_count": 96,
+        "total_progress_count": 0
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 12,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C11_route_terminal_reachability_verifier",
-      "work_status": "PENDING"
+      "work_status": "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
     },
     {
       "candidate_tiers": [
@@ -839,13 +980,35 @@
         "frontier_count": 1,
         "total_link_count": 4
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/C13_SUPPORT_BRIDGE_SLIDER_CLOSED_NEGATIVE_AUDIT.json",
+        "catalog": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/REMAINING_FROZEN_NEGATIVE_CATALOG.json",
+        "catalog_content_digest": "arc3_p10_remaining_frozen_negative_catalog:c05d9cba55cceb6db08fdac380c40f2cc0fd28bf73e767ae20524f005a17fbfd",
+        "changed_probe_count": 96,
+        "negative_only": true,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "raw_game_over_is_not_reusable_separator": false,
+        "retained_legacy_source": "evidence/p10/development/remaining_frozen_negative_surfaces_v1/LEGACY_C13_SUPPORT_BRIDGE_SLIDER_MODEL_CAPABILITY.json",
+        "retained_source_bytes": 222629,
+        "retained_source_sha256": "6d3c68296a5642e53f4564bc2f3a96d5a2b89fff3a93025de4aa5a21ca9c826a",
+        "reusable_hazard_separator_variable_count": 0,
+        "runtime_p_compile_authorized": false,
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "score_progress_claim_authorized": false,
+        "target_count": 1,
+        "total_game_over_count": 0,
+        "total_probe_count": 1397,
+        "total_progress_count": 0
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 13,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C13_support_bridge_slider_model",
-      "work_status": "PENDING"
+      "work_status": "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
     }
   ],
   "runtime_use": "FORBIDDEN",
@@ -858,7 +1021,7 @@
       "KA59-only tunnel vision",
       "runtime identity before output compilation"
     ],
-    "next_unembedded_work_block": "WB-C14_symbolic_relation_commit_model",
+    "next_unembedded_work_block": "WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER",
     "primary": "coverage before next-level order",
     "runtime_compile_boundary": "Only a COMPOSABLE candidate may be horizontally subtracted into identity-free Runtime P."
   }

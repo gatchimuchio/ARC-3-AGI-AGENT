@@ -184,6 +184,20 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
             ],
             "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
         )
+        for capability_id in (
+            "C14_symbolic_relation_commit_model",
+            "C8_helper_handoff_state_model",
+            "C4_hazard_rollback_verifier",
+            "C6_action_channel_emitter_model",
+            "C9_token_slot_submission_verifier",
+            "C11_route_terminal_reachability_verifier",
+            "C13_support_bridge_slider_model",
+        ):
+            with self.subTest(capability_status=capability_id):
+                self.assertEqual(
+                    status_by_capability[capability_id],
+                    "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
+                )
 
     def test_queue_starts_with_cross_cutting_c2_c3_not_level_operator(
         self,
@@ -321,18 +335,53 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
             ],
             8,
         )
+        newly_closed = {
+            "C14_symbolic_relation_commit_model": (252, 180, 0),
+            "C8_helper_handoff_state_model": (203, 131, 0),
+            "C4_hazard_rollback_verifier": (77, 77, 0),
+            "C6_action_channel_emitter_model": (20, 20, 0),
+            "C9_token_slot_submission_verifier": (154, 61, 0),
+            "C11_route_terminal_reachability_verifier": (96, 0, 5),
+            "C13_support_bridge_slider_model": (1397, 96, 0),
+        }
+        for capability_id, expected in newly_closed.items():
+            with self.subTest(capability=capability_id):
+                item = next(
+                    row
+                    for row in queue["queue"]
+                    if row["capability_ids"] == [capability_id]
+                )
+                evidence = item["implementation_evidence"]
+                self.assertEqual(item["current_tier"], "LOCAL_PROBE")
+                self.assertEqual(
+                    item["work_status"],
+                    "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
+                )
+                self.assertEqual(
+                    (
+                        evidence["total_probe_count"],
+                        evidence["changed_probe_count"],
+                        evidence["total_game_over_count"],
+                    ),
+                    expected,
+                )
+                self.assertEqual(evidence["total_progress_count"], 0)
+                self.assertFalse(
+                    evidence["same_surface_retry_authorized"]
+                )
+                self.assertFalse(
+                    evidence["runtime_p_promotion_authorized"]
+                )
+        c11 = next(
+            row
+            for row in queue["queue"]
+            if row["capability_ids"]
+            == ["C11_route_terminal_reachability_verifier"]
+        )
         self.assertTrue(
-            all(
-                item["current_tier"] == "NOT_STARTED"
-                for item in queue["queue"][2:]
-                if tuple(item["capability_ids"])
-                not in {
-                    ("C7_target_contact_boundary_verifier",),
-                    ("C12_layout_mode_commit_discriminator",),
-                    ("C1_rendered_affordance_objectizer",),
-                    ("C5_stale_settle_frame_controller",),
-                }
-            )
+            c11["implementation_evidence"][
+                "raw_game_over_is_not_reusable_separator"
+            ]
         )
         self.assertTrue(
             all(
@@ -353,7 +402,7 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
         self.assertFalse(composition["same_axis_retry_authorized"])
         self.assertEqual(
             queue["hds_gate"]["next_work_block_id"],
-            "WB-C14_symbolic_relation_commit_model",
+            "WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER",
         )
         self.assertIn(
             "WB-C12_layout_mode_commit_discriminator",
@@ -361,6 +410,10 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
         )
         self.assertIn(
             "WB-C1_rendered_affordance_objectizer",
+            queue["hds_gate"]["closed_negative_work_blocks"],
+        )
+        self.assertIn(
+            "WB-C13_support_bridge_slider_model",
             queue["hds_gate"]["closed_negative_work_blocks"],
         )
 
