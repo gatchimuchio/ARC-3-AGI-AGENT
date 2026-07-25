@@ -18,8 +18,8 @@ artifacts.
 |---|---|
 | `LEGACY_LEVEL_ANALYSIS_LEDGER.json` | `8b9c7ba1874cf3599fea0e945760674caac4a1cfcef1de8ce377cb7fb0028877` |
 | `ANALYSIS_RECONCILIATION_MATRIX.json` | `91718f62d700b4deccc8e426096429df37b74db081cdf3170e62277ce66a7ec2` |
-| `CAPABILITY_COVERAGE_MATRIX.json` | `3ecea5dfbef69601342b9263144f5dc2fd888b2f98b184937e9c859c336642c6` |
-| `CAPABILITY_BUILD_QUEUE.json` | `66b1dcae35d99518137564153d1383bab7e74fe24faa9cffa84933e0aaac8342` |
+| `CAPABILITY_COVERAGE_MATRIX.json` | `67cbdf9d98d8f70040565a312b7c2d64c6bbedb7c76d7ee16d4813011ba6baa9` |
+| `CAPABILITY_BUILD_QUEUE.json` | `fa2f1a3340657c9f59fbf315b3e8aa8e608be1de293f58b58dee0d442539a692` |
 
 Current reconciliation totals:
 
@@ -31,6 +31,20 @@ STALE                     9
 UNOBSERVED              147
 TOTAL                   183
 ```
+
+Current queue decisions:
+
+- C2: `CLUSTER_STABLE`
+- C3: `LOCAL_PROBE / HOLD`
+- C10: `COMPOSABLE`, Runtime P intervention `REJECT`
+- C7: `LOCAL_PROBE / CLOSED_NEGATIVE`
+- C5 bounded-old-action-replay axis:
+  `LOCAL_PROBE / CLOSED_NEGATIVE_AXIS`
+- next unembedded work block:
+  `WB-C12_layout_mode_commit_discriminator`
+
+C7 and C5 are negative-only development conclusions. They do not authorize
+Runtime P compilation, promotion, score progress, or P11 entry.
 
 ## Deterministic rebuild
 

@@ -315,3 +315,33 @@ post-promotion targetは`MAX_ACTION_STOP`で残り1 levelが未完了であり�
 完全な25 game / 183 level reportも存在しない。したがって35 / 183は
 HDS採用済みlevel境界であって、ローカルオラクルのfull scoreではない。
 P10は継続、P11は未開始である。
+
+## C7 negative-only移植とdirectional-settle反証
+
+P3 provenanceで凍結済みのC7 harnessを
+[`c7_target_contact_closed_negative_v1`](development/c7_target_contact_closed_negative_v1)
+へ移植した。sourceはmanifest記録のSHA-256
+`cf52951e7bc4c85aa29a2bff217f298b558fc5d3dad6312c3bde1c8575883032`
+および2,232,464 bytesと一致する。7 target、288 probe、228 visible change、
+63 contact gainに対し、progress/hazard/promotion separatorは全て0だった。
+legacy contract-spec mismatchは明示quarantineし、同じtarget-contact surfaceを
+繰り返さないための負の証拠にだけ採用する。HDSは
+`REJECT / CLOSED_NEGATIVE`、Runtime P compile/promotion/score claimは不許可。
+
+KA59 remaining-boundary compositionでは、既存multi-actor、
+directional-force、obligation capabilityへ、進捗後の旧actionを最大8回だけ
+再観測する候補を合成した。FT09は6/6を維持したが、KA59はactive/candidate
+とも6/7、220 actionsでdelta 0だった。candidateはaction 194–201で旧actionを
+8回再送した後、action 202でgeneric fallbackへ戻ったため、候補発火不足ではなく
+因果仮説の反証である。HDSは`REJECT / CLOSED_NEGATIVE`、active manifest不変、
+candidate slot復元、all-sample regression不許可とした。正本は
+[`directional_settle_composition_v1`](development/directional_settle_composition_v1)
+に置く。
+
+capability queueではC7を`LOCAL_PROBE / CLOSED_NEGATIVE`、C5の
+bounded-old-action-replay軸を`LOCAL_PROBE / CLOSED_NEGATIVE_AXIS`とし、
+次の未埋込high-support work blockを
+`WB-C12_layout_mode_commit_discriminator`へ進める。KA59の同一軸を再試行する
+場合は、旧action replayではなく新しいvisible successor obligation stateが
+必要である。active scoreは変更しておらず、35/183、RHAE
+18.821945363%のままである。

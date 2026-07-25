@@ -1,6 +1,6 @@
 {
   "artifact_type": "arc3_p10_capability_coverage_matrix",
-  "content_digest": "arc3_p10_capability_coverage_matrix:1a30167412a7c0b190802bd498ebef20c575120154fdeba79c9753ac957aa1b2",
+  "content_digest": "arc3_p10_capability_coverage_matrix:7dd844484abb2bc7ef6fc708a3c193cc5fa793d856f863c6cd20c586fc167951",
   "coverage_semantics": "Counts are development links and overlap across capabilities; they must never be added as distinct solvable levels.",
   "development_only": true,
   "rows": [
@@ -1719,7 +1719,7 @@
           }
         ]
       },
-      "current_implementation_status": "NOT_CLUSTER_VALIDATED",
+      "current_implementation_status": "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
       "failure_signature_counts": {
         "F2_local_delta_no_commit": 1,
         "F5_target_contact_no_boundary": 3,
@@ -2859,7 +2859,7 @@
           }
         ]
       },
-      "current_implementation_status": "NOT_CLUSTER_VALIDATED",
+      "current_implementation_status": "BOUNDED_OLD_ACTION_REPLAY_LOCAL_PROBE_REJECTED",
       "failure_signature_counts": {
         "F10_stale_frame_no_verifier": 1,
         "F7_phase_tick_no_unlock": 1

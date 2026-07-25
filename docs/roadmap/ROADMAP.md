@@ -53,10 +53,17 @@ P10では次だけを行う。
 
 現行境界はactive P `v27 / v27 / v26`、HDS採用済み`35 / 183`である。
 C2の事後visible-effect observerだけを`CLUSTER_STABLE`、C3の非循環predictorを
-`LOCAL_PROBE / HOLD`とする。C10は一段可視因果文脈で`LOCAL_PROBE`を再開した。
-C2+C3 work block、C10の`CLUSTER_STABLE`、`COMPOSABLE`、score進歩、
-active P変更、P11開始はすべてHOLDである。現行標準オラクルは
-`35 / 183`、RHAE `18.821945363%`である。
+`LOCAL_PROBE / HOLD`とする。C10は一段可視因果文脈で
+`CLUSTER_STABLE`、C2+C10は`COMPOSABLE`へ到達したが、Runtime P候補の
+target completion deltaが0だったためHDSは`REJECT`した。
+
+C7 target-contact harnessは凍結済み288 probeを負の証拠に限定して移植し、
+`LOCAL_PROBE / CLOSED_NEGATIVE`とした。KA59 remaining-boundaryへ適用した
+C5 bounded-old-action-replay候補も、8回発火してtarget delta 0だったため
+`LOCAL_PROBE / CLOSED_NEGATIVE_AXIS`である。active P、score、35/183境界は
+変更しない。次の未埋込high-support work blockは
+`WB-C12_layout_mode_commit_discriminator`。現行標準オラクルは
+`35 / 183`、RHAE `18.821945363%`で、P11開始はHOLDである。
 
 P10ではrelease state固定、公式接続、Kaggle作業を実行・完了扱いしない。
 

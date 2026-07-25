@@ -22,8 +22,11 @@ from arc3_agi_agent.p10_instruction_compiler import (
     P10_C2_C10_SYMBOLIC_FILENAME,
     P10_CANDIDATE_SET_VERSION,
     P10_COMPILER_SEED,
+    P10_DIRECTIONAL_SETTLE_CANDIDATE_SET_VERSION,
+    P10_DIRECTIONAL_SETTLE_HYBRID_FILENAME,
     active_p10_manifest_digest,
     compile_p10_c2_c10_symbolic_candidate,
+    compile_p10_directional_settle_hybrid_candidate,
     compile_p10_instruction_bodies,
 )
 from arc3_agi_agent.p_b_learning import PBLearningResult
@@ -191,6 +194,57 @@ def _c2_c10_compile_authorization() -> tuple[
         evidence,
         decision,
         target_body_version=P10_C2_C10_CANDIDATE_SET_VERSION,
+        seed=P10_COMPILER_SEED,
+    )
+    return hds, decision, directive
+
+
+def _directional_settle_compile_authorization() -> tuple[
+    HDSPUpdateAuthority,
+    PUpdateDecision,
+    InstructionBodyCompileDirective,
+]:
+    source_digest = active_p10_manifest_digest(BUNDLE_DIR)
+    proposal = PUpdateProposal(
+        proposal_id="proposal:directional-settle-hybrid",
+        source_p_version="p10-active-set",
+        source_p_digest=source_digest,
+        target_component="hybrid-P-B",
+        update_type="transition-parameter",
+        evidence_refs=("evidence:directional-settle-composable",),
+        expected_effect="bounded-post-progress-reobservation",
+        expected_affected_capabilities=("directional-force-obligation",),
+        expected_unaffected_capabilities=("active-runtime-manifest",),
+        falsifiers=("stable-regression-decreases",),
+        rollback_target="p10-hybrid-v26",
+        provenance=("development-memory:hds-accepted",),
+    )
+    evidence = PUpdateEvidenceSet(
+        evidence_set_id="evidence-set:directional-settle-composable",
+        proposal_digest=proposal.digest,
+        memory_snapshot_digest="memory-snapshot:directional-settle",
+        approved_memory_refs=("memory:c2-observer", "memory:c5-settle"),
+        hds_memory_decision_digests=("hds-decision:directional-settle",),
+        failure_refs=("failure:stale-transition-frame",),
+        contradiction_refs=("contradiction:parseable-successor",),
+        positive_contrast_refs=("contrast:bounded-settle",),
+        negative_contrast_refs=("contrast:no-settle",),
+        holdout_refs=("holdout:reflected-and-rotated-structure",),
+        replay_audit_refs=("audit:identity-free",),
+        provenance=("development-evidence:content-addressed",),
+    )
+    hds = HDSPUpdateAuthority()
+    decision = hds.decide(
+        proposal,
+        status="COMPILE",
+        reason_codes=("directional-settle-composition-probe",),
+        evidence_set=evidence,
+    )
+    directive = hds.issue_compile_directive(
+        proposal,
+        evidence,
+        decision,
+        target_body_version=P10_DIRECTIONAL_SETTLE_CANDIDATE_SET_VERSION,
         seed=P10_COMPILER_SEED,
     )
     return hds, decision, directive
@@ -455,6 +509,122 @@ class P10InstructionCompilerTests(unittest.TestCase):
             )
             compared = (
                 P10_C2_C10_SYMBOLIC_FILENAME,
+                *reused_filenames,
+                "p10_candidate_manifest.json",
+            )
+            for filename in compared:
+                self.assertEqual(
+                    (outputs[0] / filename).read_bytes(),
+                    (outputs[1] / filename).read_bytes(),
+                    filename,
+                )
+
+    def test_directional_settle_compiler_changes_only_candidate_hybrid(
+        self,
+    ) -> None:
+        active_manifest_before = (
+            BUNDLE_DIR / "p10_manifest.json"
+        ).read_bytes()
+        active = _json(BUNDLE_DIR / "p10_manifest.json")
+        active_bundles = active.get("bundles")
+        if not isinstance(active_bundles, dict):
+            raise TypeError("active manifest bundles invalid")
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            hds, decision, directive = (
+                _directional_settle_compile_authorization()
+            )
+            manifest = compile_p10_directional_settle_hybrid_candidate(
+                base_bundle_dir=BUNDLE_DIR,
+                output_dir=output,
+                compile_directive=directive,
+                compile_decision=decision,
+                hds_authority=hds,
+                composition_audit_digest=(
+                    "arc3_p10_directional_settle_composition_audit:unit"
+                ),
+                maximum_transition_observations=8,
+            )
+            candidate = instruction_body_from_mapping(
+                _json(output / P10_DIRECTIONAL_SETTLE_HYBRID_FILENAME)
+            )
+            directional = next(
+                item
+                for item in candidate.operator_instructions
+                if item.operator_id == DIRECTIONAL_FORCE_ROUTE_OPERATOR
+            )
+
+            self.assertTrue(directive.consumed)
+            self.assertEqual(manifest["lifecycle"], "CANDIDATE")
+            self.assertEqual(
+                manifest["candidate_target_component"],
+                "hybrid-P-B",
+            )
+            self.assertEqual(
+                directional.parameters()[
+                    "maximum_transition_observations"
+                ],
+                8,
+            )
+            manifest_bundles = manifest.get("bundles")
+            if not isinstance(manifest_bundles, dict):
+                raise TypeError("candidate manifest bundles invalid")
+            for variant in ("P-A", "P-B"):
+                self.assertEqual(
+                    manifest_bundles[variant],
+                    active_bundles[variant],
+                )
+            self.assertNotEqual(
+                manifest_bundles["hybrid"],
+                active_bundles["hybrid"],
+            )
+
+        self.assertEqual(
+            (BUNDLE_DIR / "p10_manifest.json").read_bytes(),
+            active_manifest_before,
+        )
+        active_directional = next(
+            item
+            for item in load_p10_hybrid_instruction_body()
+            .operator_instructions
+            if item.operator_id == DIRECTIONAL_FORCE_ROUTE_OPERATOR
+        )
+        self.assertNotIn(
+            "maximum_transition_observations",
+            active_directional.parameters(),
+        )
+
+    def test_directional_settle_compiler_is_byte_deterministic(
+        self,
+    ) -> None:
+        with (
+            tempfile.TemporaryDirectory() as first_temporary,
+            tempfile.TemporaryDirectory() as second_temporary,
+        ):
+            outputs = (Path(first_temporary), Path(second_temporary))
+            for output in outputs:
+                hds, decision, directive = (
+                    _directional_settle_compile_authorization()
+                )
+                compile_p10_directional_settle_hybrid_candidate(
+                    base_bundle_dir=BUNDLE_DIR,
+                    output_dir=output,
+                    compile_directive=directive,
+                    compile_decision=decision,
+                    hds_authority=hds,
+                    composition_audit_digest=(
+                        "arc3_p10_directional_settle_composition_audit:unit"
+                    ),
+                )
+            active_bundles = _json(
+                BUNDLE_DIR / "p10_manifest.json"
+            )["bundles"]
+            reused_filenames = tuple(
+                str(active_bundles[variant]["filename"])
+                for variant in ("P-A", "P-B")
+            )
+            compared = (
+                P10_DIRECTIONAL_SETTLE_HYBRID_FILENAME,
                 *reused_filenames,
                 "p10_candidate_manifest.json",
             )

@@ -105,7 +105,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v24_control_preserves_v21_active_p(
+    def test_v25_control_preserves_v21_active_p(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -120,7 +120,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v24-c2-c10-candidate-intervention",
+            "p10-v25-c7-c5-closed-negative-audit",
         )
         self.assertEqual(frame["self_check"]["stable_completed_levels"], 35)
         self.assertEqual(capabilities["stable_completed_levels"], 35)
@@ -450,6 +450,201 @@ class P10DevelopmentControlTests(unittest.TestCase):
         )
         self.assertFalse(c2_c10["allow_p_compile"])
         self.assertFalse(c2_c10["allow_p_promote"])
+
+    def test_v25_c7_and_directional_settle_closed_negative_are_bound(
+        self,
+    ) -> None:
+        evidence_root = (
+            REPOSITORY_ROOT / "evidence" / "p10" / "development"
+        )
+        c7_dir = evidence_root / "c7_target_contact_closed_negative_v1"
+        settle_dir = (
+            evidence_root / "directional_settle_composition_v1"
+        )
+        c7 = _json(c7_dir / "C7_CLOSED_NEGATIVE_ADMISSION_AUDIT.json")
+        composition = _json(
+            settle_dir / "DIRECTIONAL_SETTLE_COMPOSITION_AUDIT.json"
+        )
+        intervention = _json(
+            settle_dir
+            / "DIRECTIONAL_SETTLE_CANDIDATE_INTERVENTION_AUDIT.json"
+        )
+        failure = _json(
+            settle_dir / "DIRECTIONAL_SETTLE_FAILURE_AUDIT.json"
+        )
+        for prefix, audit in (
+            ("arc3_p10_c7_closed_negative_admission:", c7),
+            (
+                "arc3_p10_directional_settle_composition_audit:",
+                composition,
+            ),
+            (
+                "arc3_p10_directional_settle_candidate_intervention:",
+                intervention,
+            ),
+            (
+                "arc3_p10_directional_settle_failure_audit:",
+                failure,
+            ),
+        ):
+            body = dict(audit)
+            claimed = body.pop("content_digest")
+            self.assertEqual(claimed, prefix + digest_object(body))
+
+        retained_c7 = (
+            c7_dir
+            / "LEGACY_C7_TARGET_CONTACT_BOUNDARY_CAPABILITY.json"
+        )
+        self.assertEqual(
+            hashlib.sha256(retained_c7.read_bytes()).hexdigest(),
+            c7["source_evidence"]["sha256"],
+        )
+        self.assertEqual(
+            c7["retained_measurements"][
+                "progress_separator_variable_count"
+            ],
+            0,
+        )
+        self.assertEqual(
+            c7["hds_judgment"]["causal_result"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertFalse(
+            c7["hds_judgment"]["same_surface_retry_authorized"]
+        )
+
+        self.assertEqual(
+            intervention["hds_judgment"]["status"],
+            "REJECT",
+        )
+        self.assertIn(
+            "failed-evaluation-check-target-improved",
+            intervention["hds_judgment"]["reason_codes"],
+        )
+        self.assertNotIn(
+            "target_improved",
+            intervention["hds_judgment"]["reason_codes"],
+        )
+        self.assertFalse(
+            intervention["hds_judgment"]["candidate_slot_retained"]
+        )
+        self.assertEqual(
+            failure["failure_signature"]["bounded_replay_count"],
+            8,
+        )
+        self.assertEqual(
+            failure["failure_signature"][
+                "generic_fallback_action_ordinal"
+            ],
+            202,
+        )
+        self.assertEqual(
+            failure["hds_judgment"]["causal_result"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertFalse(
+            failure["hds_judgment"][
+                "same_candidate_retry_authorized"
+            ]
+        )
+
+        hypotheses = _json(
+            CONTROL_DIR / "ACTIVE_HYPOTHESES.json"
+        )["hypotheses"]
+        by_hypothesis = {
+            item["hypothesis_id"]: item for item in hypotheses
+        }
+        self.assertEqual(
+            by_hypothesis[
+                "H41-reuse-legacy-target-contact-surface"
+            ]["status"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertEqual(
+            by_hypothesis[
+                "H42-bounded-old-directional-action-replay"
+            ]["status"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertEqual(
+            by_hypothesis[
+                "H43-visible-successor-obligation-composition"
+            ]["status"],
+            "UNOBSERVED_HOLD",
+        )
+
+        decisions = _json(
+            CONTROL_DIR / "DECISION_LOG.json"
+        )["decisions"]
+        c7_decision = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-c7-target-contact-negative-admission-v25"
+        )
+        settle_decision = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-directional-settle-candidate-v25"
+        )
+        self.assertEqual(c7_decision["status"], "REJECT")
+        self.assertEqual(
+            c7_decision["tier_decisions"]["LOCAL_PROBE"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertEqual(settle_decision["status"], "REJECT")
+        self.assertEqual(
+            settle_decision["tier_decisions"][
+                "EXISTING_CAPABILITY_COMPOSITION"
+            ],
+            "PASS",
+        )
+        self.assertFalse(settle_decision["allow_p_promote"])
+
+        capabilities = _json(
+            CONTROL_DIR / "CAPABILITY_REGISTRY.json"
+        )["capabilities"]
+        by_capability = {
+            item["capability_id"]: item for item in capabilities
+        }
+        self.assertEqual(
+            by_capability[
+                "C7-target-contact-boundary-verifier"
+            ]["status"],
+            "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
+        )
+        self.assertEqual(
+            by_capability[
+                "C5-stale-settle-frame-controller"
+            ]["status"],
+            "LOCAL_PROBE_CLOSED_NEGATIVE_AXIS",
+        )
+        self.assertFalse(
+            by_capability[
+                "C7-target-contact-boundary-verifier"
+            ]["runtime_admitted"]
+        )
+        self.assertFalse(
+            by_capability[
+                "C5-stale-settle-frame-controller"
+            ]["runtime_admitted"]
+        )
+
+        memory_entries = _json(
+            CONTROL_DIR / "DEV_MEMORY.json"
+        )["entries"]
+        memory = next(
+            item
+            for item in memory_entries
+            if item["memory_id"]
+            == "m-dev:p10-c7-c5-closed-negative-v25"
+        )
+        self.assertIn(
+            "select WB-C12_layout_mode_commit_discriminator "
+            "as the next coverage-ranked work block",
+            memory["resume_conditions"],
+        )
 
     def test_v14_standard_budget_and_stable_regression_audits_are_bound(
         self,

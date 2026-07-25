@@ -795,6 +795,12 @@ def _build_coverage(
                 "ONE_STEP_VISIBLE_CAUSAL_CONTEXT_COMPOSABLE_"
                 "RUNTIME_INTERVENTION_REJECTED"
             ),
+            "C7_target_contact_boundary_verifier": (
+                "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
+            ),
+            "C5_stale_settle_frame_controller": (
+                "BOUNDED_OLD_ACTION_REPLAY_LOCAL_PROBE_REJECTED"
+            ),
         }.get(capability_id, "NOT_CLUSTER_VALIDATED")
         rows.append(
             {
@@ -968,10 +974,21 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
         current_tier = (
             "COMPOSABLE"
             if capability_id == "C10_phase_timer_unlock_model"
-            else "NOT_STARTED"
+            else (
+                "LOCAL_PROBE"
+                if capability_id
+                in {
+                    "C7_target_contact_boundary_verifier",
+                    "C5_stale_settle_frame_controller",
+                }
+                else "NOT_STARTED"
+            )
         )
-        implementation_evidence = (
-            {
+        implementation_evidence: dict[str, Any] | None = None
+        work_status = "PENDING"
+        if capability_id == "C10_phase_timer_unlock_model":
+            work_status = "RUNTIME_INTERVENTION_REJECTED"
+            implementation_evidence = {
                 "audit": (
                     "evidence/p10/development/"
                     "c2_c3_transition_all25_max450_v2/"
@@ -998,9 +1015,54 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                 "active_manifest_changed": False,
                 "runtime_p_promotion_authorized": False,
             }
-            if capability_id == "C10_phase_timer_unlock_model"
-            else None
-        )
+        elif capability_id == "C7_target_contact_boundary_verifier":
+            work_status = "CLOSED_NEGATIVE"
+            implementation_evidence = {
+                "admission_audit": (
+                    "evidence/p10/development/"
+                    "c7_target_contact_closed_negative_v1/"
+                    "C7_CLOSED_NEGATIVE_ADMISSION_AUDIT.json"
+                ),
+                "retained_legacy_source": (
+                    "evidence/p10/development/"
+                    "c7_target_contact_closed_negative_v1/"
+                    "LEGACY_C7_TARGET_CONTACT_BOUNDARY_CAPABILITY.json"
+                ),
+                "retained_source_sha256": (
+                    "cf52951e7bc4c85aa29a2bff217f298b558fc5d3dad6312"
+                    "c3bde1c8575883032"
+                ),
+                "target_count": 7,
+                "total_probe_count": 288,
+                "changed_probe_count": 228,
+                "contact_gain_probe_count": 63,
+                "progress_separator_variable_count": 0,
+                "hazard_separator_variable_count": 0,
+                "promotion_eligible_variable_count": 0,
+                "negative_only": True,
+                "same_surface_retry_authorized": False,
+                "runtime_p_promotion_authorized": False,
+            }
+        elif capability_id == "C5_stale_settle_frame_controller":
+            work_status = "LOCAL_AXIS_CLOSED_NEGATIVE"
+            implementation_evidence = {
+                "candidate_intervention_audit": (
+                    "evidence/p10/development/"
+                    "directional_settle_composition_v1/"
+                    "DIRECTIONAL_SETTLE_CANDIDATE_INTERVENTION_AUDIT.json"
+                ),
+                "failure_audit": (
+                    "evidence/p10/development/"
+                    "directional_settle_composition_v1/"
+                    "DIRECTIONAL_SETTLE_FAILURE_AUDIT.json"
+                ),
+                "candidate_intervention_status": "REJECT",
+                "bounded_old_action_replay_count": 8,
+                "target_completion_delta": 0,
+                "same_axis_retry_authorized": False,
+                "active_manifest_changed": False,
+                "runtime_p_promotion_authorized": False,
+            }
         queue.append(
             {
                 "rank": rank,
@@ -1016,6 +1078,7 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                 },
                 "candidate_tiers": list(PROMOTION_TIERS),
                 "current_tier": current_tier,
+                "work_status": work_status,
                 **(
                     {"implementation_evidence": implementation_evidence}
                     if implementation_evidence is not None
@@ -1033,6 +1096,9 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
         {
             "selection_policy": {
                 "primary": "coverage before next-level order",
+                "next_unembedded_work_block": (
+                    "WB-C12_layout_mode_commit_discriminator"
+                ),
                 "forbidden": [
                     "one Python operator per unresolved level",
                     "operator count as progress",
@@ -1057,6 +1123,17 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     ),
                     "new_dedicated_operator_allowed": False,
                     "runtime_promotion_authorized": False,
+                    "current_status": "CLOSED_NEGATIVE_AXIS",
+                    "failure_audit": (
+                        "evidence/p10/development/"
+                        "directional_settle_composition_v1/"
+                        "DIRECTIONAL_SETTLE_FAILURE_AUDIT.json"
+                    ),
+                    "same_axis_retry_authorized": False,
+                    "required_next_variable": (
+                        "parseable visible successor obligation state, "
+                        "not predecessor action replay"
+                    ),
                 }
             ],
             "hds_gate": {
@@ -1065,6 +1142,14 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     "Queue construction authorizes development probes, not "
                     "runtime promotion or a score claim."
                 ),
+                "next_work_block_id": (
+                    "WB-C12_layout_mode_commit_discriminator"
+                ),
+                "closed_negative_work_blocks": [
+                    "WB-C7_target_contact_boundary_verifier",
+                    "WB-C5_stale_settle_frame_controller:"
+                    "bounded-old-action-replay-axis",
+                ],
             },
         },
     )

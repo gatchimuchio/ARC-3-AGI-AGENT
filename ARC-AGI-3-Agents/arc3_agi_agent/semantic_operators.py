@@ -14,8 +14,10 @@ from math import gcd
 
 from .directional_force_route import (
     DIRECTIONAL_FORCE_ROUTE_OPERATOR,
-    directional_force_route_observation_matches,
+    directional_force_route_observation_status,
     directional_force_route_plan,
+    directional_force_route_successor_observation_status,
+    directional_force_route_transition_observation_limit,
 )
 from .fruit_merge import (
     FRUIT_MERGE_CANDIDATE_OPERATOR,
@@ -1824,6 +1826,11 @@ class SemanticPlannerState:
     shape_push_wait_count: int = 0
     multi_shape_push_wait_count: int = 0
     occluded_route_wait_count: int = 0
+    directional_force_wait_count: int = 0
+    directional_force_pending_action: VisualAction | None = None
+    directional_force_pending_instruction_digest: str = ""
+    directional_force_pending_limit: int = 0
+    directional_force_post_progress_pending: bool = False
     target_initial_state: str = ""
     target_pending_state: str = ""
     target_pending_action: str = ""
@@ -1870,7 +1877,39 @@ class SemanticPlannerState:
         default_factory=SymbolicRewriteState
     )
 
-    def _clear_active_plan(self) -> None:
+    def _clear_directional_force_transition(self) -> None:
+        self.directional_force_wait_count = 0
+        self.directional_force_pending_action = None
+        self.directional_force_pending_instruction_digest = ""
+        self.directional_force_pending_limit = 0
+        self.directional_force_post_progress_pending = False
+
+    def _stage_directional_force_transition(
+        self,
+        instruction: SemanticOperatorInstruction,
+        action: VisualAction,
+    ) -> None:
+        observation_limit = (
+            directional_force_route_transition_observation_limit(
+                instruction
+            )
+        )
+        if observation_limit == 0:
+            self._clear_directional_force_transition()
+            return
+        self.directional_force_wait_count = 0
+        self.directional_force_pending_action = action
+        self.directional_force_pending_instruction_digest = (
+            digest_object(instruction)
+        )
+        self.directional_force_pending_limit = observation_limit
+        self.directional_force_post_progress_pending = False
+
+    def _clear_active_plan(
+        self,
+        *,
+        preserve_directional_force_transition: bool = False,
+    ) -> None:
         self.queue.clear()
         self.active_operator = ""
         self.active_instruction_digest = ""
@@ -1880,6 +1919,8 @@ class SemanticPlannerState:
         self.shape_push_wait_count = 0
         self.multi_shape_push_wait_count = 0
         self.occluded_route_wait_count = 0
+        if not preserve_directional_force_transition:
+            self._clear_directional_force_transition()
 
     def _reset_target_coordinate(
         self,
@@ -1912,7 +1953,19 @@ class SemanticPlannerState:
         self.target_model_abandoned = False
 
     def reset_after_progress(self) -> None:
-        self._clear_active_plan()
+        preserve_directional_force_transition = (
+            self.active_operator == DIRECTIONAL_FORCE_ROUTE_OPERATOR
+            and self.directional_force_pending_action is not None
+            and self.directional_force_pending_limit > 0
+        )
+        self._clear_active_plan(
+            preserve_directional_force_transition=(
+                preserve_directional_force_transition
+            )
+        )
+        if preserve_directional_force_transition:
+            self.directional_force_wait_count = 0
+            self.directional_force_post_progress_pending = True
         self.target_initial_state = ""
         self.target_pending_state = ""
         self.target_pending_action = ""
@@ -2540,6 +2593,53 @@ class SemanticPlannerState:
         *,
         source_signature: str,
     ) -> SemanticPlannerDecision:
+        if self.directional_force_post_progress_pending:
+            pending_instruction = next(
+                (
+                    instruction
+                    for instruction in operator_instructions
+                    if (
+                        instruction.operator_id
+                        == DIRECTIONAL_FORCE_ROUTE_OPERATOR
+                        and digest_object(instruction)
+                        == (
+                            self.directional_force_pending_instruction_digest
+                        )
+                    )
+                ),
+                None,
+            )
+            pending_action = self.directional_force_pending_action
+            if (
+                pending_instruction is None
+                or pending_action is None
+                or pending_action.action_id not in available_actions
+            ):
+                self._clear_directional_force_transition()
+            else:
+                transition_status = (
+                    directional_force_route_successor_observation_status(
+                        grid,
+                        pending_instruction,
+                        pending_action,
+                    )
+                )
+                if (
+                    transition_status in {"MATCH", "UNAVAILABLE"}
+                    and self.directional_force_wait_count
+                    < self.directional_force_pending_limit
+                ):
+                    self.directional_force_wait_count += 1
+                    self.memory_read_count += 1
+                    return SemanticPlannerDecision(
+                        action=pending_action,
+                        reason=(
+                            f"{DIRECTIONAL_FORCE_ROUTE_OPERATOR}:"
+                            "post-progress-transition-reobserve"
+                        ),
+                        memory_influenced=True,
+                    )
+                self._clear_directional_force_transition()
         if self.active_operator:
             active_instruction = next(
                 (
@@ -2578,16 +2678,45 @@ class SemanticPlannerState:
                     self.active_operator
                     == DIRECTIONAL_FORCE_ROUTE_OPERATOR
                 ):
-                    if directional_force_route_observation_matches(
-                        grid,
-                        current_instruction,
-                        action,
-                    ):
+                    force_status = (
+                        directional_force_route_observation_status(
+                            grid,
+                            current_instruction,
+                            action,
+                        )
+                    )
+                    if force_status == "MATCH":
+                        self.directional_force_wait_count = 0
                         self.queue.pop(0)
+                        self._stage_directional_force_transition(
+                            current_instruction,
+                            action,
+                        )
                         self.memory_read_count += 1
                         return SemanticPlannerDecision(
                             action=action,
                             reason=self.active_operator,
+                            memory_influenced=True,
+                            plan_signature=self.active_plan_signature,
+                        )
+                    observation_limit = (
+                        directional_force_route_transition_observation_limit(
+                            current_instruction
+                        )
+                    )
+                    if (
+                        force_status == "UNAVAILABLE"
+                        and self.directional_force_wait_count
+                        < observation_limit
+                    ):
+                        self.directional_force_wait_count += 1
+                        self.memory_read_count += 1
+                        return SemanticPlannerDecision(
+                            action=action,
+                            reason=(
+                                f"{self.active_operator}:"
+                                "transition-reobserve"
+                            ),
                             memory_influenced=True,
                             plan_signature=self.active_plan_signature,
                         )
@@ -2970,6 +3099,11 @@ class SemanticPlannerState:
             self.plan_count += 1
             action = plan[0]
             self.queue = list(plan[1:])
+            if operator_id == DIRECTIONAL_FORCE_ROUTE_OPERATOR:
+                self._stage_directional_force_transition(
+                    instruction,
+                    action,
+                )
             if target_surface is not None:
                 self._stage_target_action(target_surface, action)
             if memory_influenced:
@@ -3110,6 +3244,38 @@ class SemanticPlannerState:
             "fruit_merge": self.fruit_merge.to_payload(),
             "symbolic_rewrite": self.symbolic_rewrite.to_payload(),
         }
+        if self.directional_force_pending_action is not None:
+            if (
+                not self.directional_force_pending_instruction_digest
+                or self.directional_force_pending_limit < 1
+                or self.directional_force_wait_count < 0
+                or self.directional_force_wait_count
+                > self.directional_force_pending_limit
+            ):
+                raise ValueError(
+                    "semantic planner directional transition invalid"
+                )
+            pending_action = self.directional_force_pending_action
+            payload["directional_force_transition"] = {
+                "wait_count": self.directional_force_wait_count,
+                "instruction_digest": (
+                    self.directional_force_pending_instruction_digest
+                ),
+                "observation_limit": (
+                    self.directional_force_pending_limit
+                ),
+                "post_progress_pending": (
+                    self.directional_force_post_progress_pending
+                ),
+                "action": {
+                    "key": pending_action.key,
+                    "action_id": pending_action.action_id,
+                    "group": pending_action.group,
+                    "x": pending_action.x,
+                    "y": pending_action.y,
+                    "evidence": list(pending_action.evidence),
+                },
+            }
         forbidden = forbidden_runtime_paths(payload)
         if forbidden:
             raise ValueError(
@@ -3159,6 +3325,9 @@ class SemanticPlannerState:
         raw_target_model_expected_colors = value.get(
             "target_model_expected_colors",
             (),
+        )
+        raw_directional_force_transition = value.get(
+            "directional_force_transition"
         )
         raw_fruit_merge = value.get("fruit_merge")
         raw_symbolic_rewrite = value.get("symbolic_rewrite")
@@ -3224,6 +3393,13 @@ class SemanticPlannerState:
             )
             or not isinstance(raw_fruit_merge, Mapping)
             or not isinstance(raw_symbolic_rewrite, Mapping)
+            or (
+                raw_directional_force_transition is not None
+                and not isinstance(
+                    raw_directional_force_transition,
+                    Mapping,
+                )
+            )
         ):
             raise ValueError("semantic planner sequence invalid")
         target_coordinate_phase = str(
@@ -3389,6 +3565,87 @@ class SemanticPlannerState:
                     evidence=tuple(str(item) for item in raw_evidence),
                 )
             )
+        directional_force_pending_action: VisualAction | None = None
+        directional_force_wait_count = 0
+        directional_force_pending_instruction_digest = ""
+        directional_force_pending_limit = 0
+        directional_force_post_progress_pending = False
+        if isinstance(raw_directional_force_transition, Mapping):
+            raw_action = raw_directional_force_transition.get("action")
+            if not isinstance(raw_action, Mapping):
+                raise ValueError(
+                    "semantic planner directional action invalid"
+                )
+            raw_evidence = raw_action.get("evidence", ())
+            post_progress_pending = raw_directional_force_transition.get(
+                "post_progress_pending",
+                False,
+            )
+            if (
+                not isinstance(raw_evidence, Sequence)
+                or isinstance(raw_evidence, (str, bytes, bytearray))
+                or not isinstance(post_progress_pending, bool)
+            ):
+                raise ValueError(
+                    "semantic planner directional transition invalid"
+                )
+            directional_force_wait_count = _payload_int(
+                raw_directional_force_transition.get("wait_count"),
+                "directional_force_wait_count",
+            )
+            directional_force_pending_limit = _payload_int(
+                raw_directional_force_transition.get(
+                    "observation_limit"
+                ),
+                "directional_force_pending_limit",
+            )
+            directional_force_pending_instruction_digest = str(
+                raw_directional_force_transition.get(
+                    "instruction_digest",
+                    "",
+                )
+            )
+            if (
+                directional_force_wait_count < 0
+                or not 1 <= directional_force_pending_limit <= 64
+                or directional_force_wait_count
+                > directional_force_pending_limit
+                or not directional_force_pending_instruction_digest
+            ):
+                raise ValueError(
+                    "semantic planner directional transition invalid"
+                )
+            directional_force_pending_action = VisualAction(
+                key=str(raw_action.get("key", "")),
+                action_id=_payload_int(
+                    raw_action.get("action_id"),
+                    "directional_force_action_id",
+                ),
+                group=_payload_int(
+                    raw_action.get("group"),
+                    "directional_force_action_group",
+                ),
+                x=(
+                    None
+                    if raw_action.get("x") is None
+                    else _payload_int(
+                        raw_action.get("x"),
+                        "directional_force_action_x",
+                    )
+                ),
+                y=(
+                    None
+                    if raw_action.get("y") is None
+                    else _payload_int(
+                        raw_action.get("y"),
+                        "directional_force_action_y",
+                    )
+                ),
+                evidence=tuple(str(item) for item in raw_evidence),
+            )
+            directional_force_post_progress_pending = (
+                post_progress_pending
+            )
         return cls(
             queue=queue,
             active_operator=str(value.get("active_operator", "")),
@@ -3422,6 +3679,21 @@ class SemanticPlannerState:
             occluded_route_wait_count=_payload_int(
                 value.get("occluded_route_wait_count", 0),
                 "occluded_route_wait_count",
+            ),
+            directional_force_wait_count=(
+                directional_force_wait_count
+            ),
+            directional_force_pending_action=(
+                directional_force_pending_action
+            ),
+            directional_force_pending_instruction_digest=(
+                directional_force_pending_instruction_digest
+            ),
+            directional_force_pending_limit=(
+                directional_force_pending_limit
+            ),
+            directional_force_post_progress_pending=(
+                directional_force_post_progress_pending
             ),
             target_initial_state=str(
                 value.get("target_initial_state", "")

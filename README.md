@@ -31,6 +31,9 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - P10開発単位: **全タスク解析からのcapability cluster**
 - C2/C3: **C2 observerはCLUSTER_STABLE、C3 predictorはLOCAL_PROBE / HOLD**
 - C10: **一段可視因果文脈はCLUSTER_STABLE / COMPOSABLE、Runtime介入はREJECT**
+- C7: **凍結target-contact probeはLOCAL_PROBE / CLOSED_NEGATIVE（負の証拠限定）**
+- C5: **bounded-old-action-replay軸はLOCAL_PROBE / CLOSED_NEGATIVE_AXIS**
+- 次work block: **WB-C12_layout_mode_commit_discriminator**
 - all-25 standard run: **25/25 report、183 level、error 0、resume再実行0**
 - worker resource: **最大RSS 143852 KB、25/25 swap 0・exit 0**
 - 全25 gameローカルオラクル: **35 / 183、RHAE 18.821945363%**
@@ -240,6 +243,11 @@ HDSが採用した再現可能なlevel境界は`35 / 183`です。ただし全25
 含む標準budget完全reportは25/25・183 level・error 0で生成済みです。
 添付ZIPへ束縛したローカルオラクルは35 / 183、RHAE
 `18.821945363%`です。21 gameがmax-action停止のためP10全体は`HOLD`です。
+C7の凍結probeは正の進捗を示さず、legacy contract-spec mismatchを含むため
+negative-onlyで閉じました。C5の進捗後旧directional action再送候補も実際に
+8回発火しましたがtarget delta 0でHDS `REJECT`です。いずれもactive P、
+score、採用境界を変更していません。次の選択済みwork blockは
+`WB-C12_layout_mode_commit_discriminator`です。
 
 開発用分析台帳の再生成:
 

@@ -698,6 +698,67 @@
         "score progress",
         "active P compile or promotion"
       ]
+    },
+    {
+      "memory_id": "m-dev:p10-c7-c5-closed-negative-v25",
+      "lifecycle": "ACTIVE_CLOSED_NEGATIVE",
+      "probed_hypotheses": [
+        "H41-reuse-legacy-target-contact-surface",
+        "H42-bounded-old-directional-action-replay"
+      ],
+      "held_hypothesis": "H43-visible-successor-obligation-composition",
+      "rejected_hypotheses": [
+        "H41-reuse-legacy-target-contact-surface",
+        "H42-bounded-old-directional-action-replay"
+      ],
+      "failure_signatures": [
+        "target-contact-probe-has-no-progress-or-hazard-separator",
+        "bounded-old-direction-replay-exhausted-then-generic-fallback"
+      ],
+      "evidence": [
+        "the frozen C7 source matches P3 provenance at 2,232,464 bytes and SHA-256 cf52951e7bc4c85aa29a2bff217f298b558fc5d3dad6312c3bde1c8575883032",
+        "C7 accounts seven targets and two hundred eighty-eight probes with two hundred twenty-eight visible changes and sixty-three contact gains",
+        "C7 progress hazard promotion and reusable-hazard separators remain zero",
+        "the C7 contract-spec mismatch is quarantined and only negative conclusions are admitted",
+        "the directional-settle composition and HDS-isolation gate passes",
+        "the candidate activates exactly eight bounded predecessor-action replays after progress",
+        "active and candidate double runs retain FT09 six of six and KA59 six of seven with zero errors",
+        "the replay exhausts without progress and returns to the unchanged generic fallback",
+        "HDS rejects both positive policy claims",
+        "active P score and the thirty-five-level adoption boundary remain unchanged",
+        "the directional candidate slot is restored byte-for-byte after rejection and interruption"
+      ],
+      "remaining_falsifiers": [
+        "a retained C7 count or source digest differs",
+        "a same-axis replay retry is mislabeled as materially new evidence",
+        "a development-only negative artifact enters runtime routing",
+        "active P or score changes without a positive HDS-admitted intervention"
+      ],
+      "resume_conditions": [
+        "do not retry the frozen C7 target-contact surface",
+        "do not retry predecessor directional-action replay",
+        "select WB-C12_layout_mode_commit_discriminator as the next coverage-ranked work block",
+        "reopen KA59 composition only after a materially new visible successor-obligation state exists",
+        "retain C2 at CLUSTER_STABLE C3 at LOCAL_PROBE HOLD and C10 at COMPOSABLE with its runtime policy rejected",
+        "keep P11 gated until all one hundred eighty-three levels complete"
+      ],
+      "related_artifacts": [
+        "evidence/p10/development/c7_target_contact_closed_negative_v1/C7_CLOSED_NEGATIVE_ADMISSION_AUDIT.json",
+        "evidence/p10/development/c7_target_contact_closed_negative_v1/LEGACY_C7_TARGET_CONTACT_BOUNDARY_CAPABILITY.json",
+        "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_COMPOSITION_AUDIT.json",
+        "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_CANDIDATE_INTERVENTION_AUDIT.json",
+        "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_FAILURE_AUDIT.json",
+        "analysis/development/CAPABILITY_BUILD_QUEUE.json"
+      ],
+      "applicability": [
+        "P10 development-only closed-negative memory and retry suppression"
+      ],
+      "non_applicability": [
+        "runtime action routing",
+        "score progress",
+        "active P compile or promotion",
+        "P11 phase transition"
+      ]
     }
   ]
 }

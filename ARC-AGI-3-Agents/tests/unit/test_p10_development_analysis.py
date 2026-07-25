@@ -219,10 +219,54 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
                 "active_manifest_changed"
             ]
         )
+        c7 = queue["queue"][2]
+        self.assertEqual(
+            c7["capability_ids"],
+            ["C7_target_contact_boundary_verifier"],
+        )
+        self.assertEqual(c7["current_tier"], "LOCAL_PROBE")
+        self.assertEqual(c7["work_status"], "CLOSED_NEGATIVE")
+        self.assertEqual(
+            c7["implementation_evidence"]["total_probe_count"],
+            288,
+        )
+        self.assertEqual(
+            c7["implementation_evidence"][
+                "progress_separator_variable_count"
+            ],
+            0,
+        )
+        self.assertFalse(
+            c7["implementation_evidence"][
+                "same_surface_retry_authorized"
+            ]
+        )
+        c5 = next(
+            item
+            for item in queue["queue"]
+            if item["capability_ids"]
+            == ["C5_stale_settle_frame_controller"]
+        )
+        self.assertEqual(c5["current_tier"], "LOCAL_PROBE")
+        self.assertEqual(
+            c5["work_status"],
+            "LOCAL_AXIS_CLOSED_NEGATIVE",
+        )
+        self.assertEqual(
+            c5["implementation_evidence"][
+                "bounded_old_action_replay_count"
+            ],
+            8,
+        )
         self.assertTrue(
             all(
                 item["current_tier"] == "NOT_STARTED"
                 for item in queue["queue"][2:]
+                if tuple(item["capability_ids"])
+                not in {
+                    ("C7_target_contact_boundary_verifier",),
+                    ("C5_stale_settle_frame_controller",),
+                }
             )
         )
         self.assertTrue(
@@ -237,6 +281,15 @@ class P10DevelopmentAnalysisTests(unittest.TestCase):
             "COMPOSE-KA59-REMAINING-BOUNDARY",
         )
         self.assertFalse(composition["new_dedicated_operator_allowed"])
+        self.assertEqual(
+            composition["current_status"],
+            "CLOSED_NEGATIVE_AXIS",
+        )
+        self.assertFalse(composition["same_axis_retry_authorized"])
+        self.assertEqual(
+            queue["hds_gate"]["next_work_block_id"],
+            "WB-C12_layout_mode_commit_discriminator",
+        )
 
     def test_runtime_modules_do_not_import_development_analysis_artifacts(
         self,

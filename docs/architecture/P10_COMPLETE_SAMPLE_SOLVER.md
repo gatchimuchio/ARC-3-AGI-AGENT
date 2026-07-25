@@ -315,6 +315,33 @@ promotion、score progressは認可しない。
 [`c2_c10_candidate_intervention_v1`](../../evidence/p10/development/c2_c10_candidate_intervention_v1)
 に置く。
 
+C7 target-contact boundaryは、P3 provenanceに一致するlegacy harnessを
+negative-onlyで移植した。7 target / 288 probeのうち228でvisible change、
+63でcontact gainを観測したが、progress、hazard、promotion separatorはいずれも
+0だった。legacy contract-spec mismatchをquarantineしたまま、同じsurfaceを
+再試行しない証拠にだけ採用する。Runtime P入力、positive generalization、
+score進歩には使わない。正本は
+[`c7_target_contact_closed_negative_v1`](../../evidence/p10/development/c7_target_contact_closed_negative_v1)
+である。
+
+KA59 remaining-boundaryには新しい専用operatorを作らず、既存multi-actor、
+directional-force、obligationとC5 settle controlを合成した。候補は進捗後に
+旧directional actionを最大8回再送するparameterだけをcandidate hybridへ
+追加し、active既定値を0に保った。FT09は6/6を維持したが、KA59は
+active/candidateとも6/7、220 actions、error 0だった。candidate traceでは
+action 194–201に旧action replayが実際に発火し、progress 0のままaction 202で
+generic fallbackへ戻った。HDSは候補を`REJECT / CLOSED_NEGATIVE`とし、
+candidate slotを復元した。失敗は未発火ではなく因果仮説の否定であり、次の
+KA59 composition仮説には新しいvisible successor obligation stateのparseが
+必要である。正本は
+[`directional_settle_composition_v1`](../../evidence/p10/development/directional_settle_composition_v1)
+である。
+
+coverage順の次の未埋込work blockは
+`WB-C12_layout_mode_commit_discriminator`。C7の同一surfaceとC5の
+bounded-old-action-replay軸は再試行しない。active P、標準score、
+35/183境界は変更せず、P11はGATEDのままである。
+
 v15では、既知のstate-changing actionより未観測prototypeを優先する
 candidate policyを五つのbounded structureで比較した。action分布は変化したが
 完了levelは全て0のままだったため、semantic commit能力ではないと

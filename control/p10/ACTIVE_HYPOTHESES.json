@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v23-transition-predictive-audit-v2",
+  "frame_id": "p10-v25-c7-c5-closed-negative-audit",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -1180,6 +1180,97 @@
       "regression_risk": 0.12,
       "status": "COMPOSABLE_POLICY_REJECTED",
       "j_dev_decision": "PASS_COMPOSABLE_REJECT_RUNTIME"
+    },
+    {
+      "hypothesis_id": "H41-reuse-legacy-target-contact-surface",
+      "kind": "H1",
+      "summary": "Reuse the frozen C7 target-contact probe surface as a positive progress and hazard discriminator.",
+      "predicted_effect": [
+        "target contact gain separates progress from unchanged probes",
+        "the same surface transfers across the seven retained target structures",
+        "a positive separator can advance beyond LOCAL_PROBE"
+      ],
+      "applicability": [
+        "development-only C7 frozen legacy probe admission"
+      ],
+      "required_evidence": [
+        "P3 provenance-exact retained source",
+        "positive progress and hazard separators",
+        "contract-spec conformance"
+      ],
+      "falsifier": [
+        "progress and hazard separators remain zero",
+        "the retained probe reports a contract-spec mismatch"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.45,
+      "information_gain": 0.72,
+      "contamination_risk": 0.35,
+      "regression_risk": 0.08,
+      "status": "CLOSED_NEGATIVE",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H42-bounded-old-directional-action-replay",
+      "kind": "H2",
+      "summary": "After confirmed progress, replay the predecessor directional action for a bounded number of successor observations.",
+      "predicted_effect": [
+        "the existing multi-actor directional-force obligation composition remains active",
+        "the successor transition closes without a level-specific operator",
+        "target completion increases while stable completion is unchanged"
+      ],
+      "applicability": [
+        "candidate-only directional-force transition state after confirmed progress"
+      ],
+      "required_evidence": [
+        "candidate activation trace",
+        "same-condition active and candidate double runs",
+        "positive target completion delta",
+        "candidate-slot byte restoration on rejection"
+      ],
+      "falsifier": [
+        "the bounded replay activates but target completion delta remains zero",
+        "the replay exhausts and returns to the unchanged generic fallback"
+      ],
+      "implementation_cost": 2,
+      "rollback_cost": 1,
+      "generality": 0.58,
+      "information_gain": 0.86,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.18,
+      "status": "CLOSED_NEGATIVE",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H43-visible-successor-obligation-composition",
+      "kind": "H3",
+      "summary": "Parse the new visible successor obligation and recompose the existing multi-actor, directional-force, and obligation capabilities instead of replaying the predecessor action.",
+      "predicted_effect": [
+        "the successor state selects a newly justified existing capability transition",
+        "no task identity fixed coordinate replay or dedicated level operator is required",
+        "the same state contract can be tested across a capability cluster"
+      ],
+      "applicability": [
+        "only a newly observed rendered successor-obligation state"
+      ],
+      "required_evidence": [
+        "a visible successor state variable absent from the rejected replay axis",
+        "cross-structure positive and negative controls",
+        "composition and removal audits before Runtime P compile"
+      ],
+      "falsifier": [
+        "the proposed state is only task identity or predecessor replay",
+        "the state cannot separate the failed successor from stable transitions"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.9,
+      "information_gain": 0.78,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.2,
+      "status": "UNOBSERVED_HOLD",
+      "j_dev_decision": "HOLD"
     }
   ]
 }

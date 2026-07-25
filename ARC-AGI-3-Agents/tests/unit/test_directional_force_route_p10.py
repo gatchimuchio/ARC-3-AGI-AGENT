@@ -11,12 +11,16 @@ from arc3_agi_agent.directional_force_route import (
     _stage,
     _transition,
     directional_force_route_observation_matches,
+    directional_force_route_observation_status,
     directional_force_route_plan,
+    directional_force_route_successor_observation_status,
+    directional_force_route_transition_observation_limit,
 )
 from arc3_agi_agent.instruction_body import SemanticOperatorInstruction
 from arc3_agi_agent.p10_instruction_compiler import (
     directional_force_route_instruction_mapping,
 )
+from arc3_agi_agent.semantic_operators import SemanticPlannerState
 
 
 def _instruction(
@@ -303,6 +307,153 @@ class DirectionalForceRouteTests(unittest.TestCase):
                 instruction,
                 replace(plan[1], action_id=7),
             )
+        )
+
+    def test_transition_status_and_limit_are_candidate_bounded(
+        self,
+    ) -> None:
+        active_instruction = _instruction()
+        candidate_instruction = _instruction(
+            maximum_transition_observations=2
+        )
+        parameters = _DirectionalForceParameters.from_instruction(
+            candidate_instruction
+        )
+        self.assertIsNotNone(parameters)
+        assert parameters is not None
+        model = _force_route_model(_force_grid(), parameters)
+        self.assertIsNotNone(model)
+        assert model is not None
+        plan = directional_force_route_plan(
+            _force_grid(),
+            (1, 2, 3, 4, 6),
+            candidate_instruction,
+        )
+        self.assertTrue(plan)
+        first = plan[0]
+        successor = _transition(
+            model,
+            model.initial_state,
+            first.action_id,
+        )
+        successor_grid = _render_state(model, successor)
+        transient = [list(row) for row in successor_grid]
+        transient[1][1] = 5
+
+        self.assertEqual(
+            directional_force_route_transition_observation_limit(
+                active_instruction
+            ),
+            0,
+        )
+        self.assertEqual(
+            directional_force_route_transition_observation_limit(
+                candidate_instruction
+            ),
+            2,
+        )
+        self.assertFalse(
+            any(
+                item.startswith("directional-force-successor-grid:")
+                for item in directional_force_route_plan(
+                    _force_grid(),
+                    (1, 2, 3, 4, 6),
+                    active_instruction,
+                )[0].evidence
+            )
+        )
+        self.assertEqual(
+            directional_force_route_successor_observation_status(
+                successor_grid,
+                candidate_instruction,
+                first,
+            ),
+            "MATCH",
+        )
+        self.assertEqual(
+            directional_force_route_successor_observation_status(
+                tuple(tuple(row) for row in transient),
+                candidate_instruction,
+                first,
+            ),
+            "UNAVAILABLE",
+        )
+        self.assertEqual(
+            directional_force_route_successor_observation_status(
+                _force_grid(phase=1),
+                candidate_instruction,
+                first,
+            ),
+            "MISMATCH",
+        )
+        self.assertEqual(
+            directional_force_route_observation_status(
+                _force_grid(),
+                candidate_instruction,
+                first,
+            ),
+            "MATCH",
+        )
+
+    def test_post_progress_transition_reobserve_is_bounded_and_serialized(
+        self,
+    ) -> None:
+        instruction = _instruction(maximum_transition_observations=2)
+        planner = SemanticPlannerState()
+        first = planner.decide(
+            _force_grid(),
+            (1, 2, 3, 4, 6),
+            (instruction,),
+            source_signature="rendered-force-state",
+        )
+        self.assertIsNotNone(first.action)
+        assert first.action is not None
+        planner.reset_after_progress()
+        parameters = _DirectionalForceParameters.from_instruction(
+            instruction
+        )
+        self.assertIsNotNone(parameters)
+        assert parameters is not None
+        model = _force_route_model(_force_grid(), parameters)
+        self.assertIsNotNone(model)
+        assert model is not None
+        successor = _transition(
+            model,
+            model.initial_state,
+            first.action.action_id,
+        )
+        transient = [list(row) for row in _render_state(model, successor)]
+        transient[1][1] = 5
+        transient_grid = tuple(tuple(row) for row in transient)
+
+        reobserve_one = planner.decide(
+            transient_grid,
+            (1, 2, 3, 4, 6),
+            (instruction,),
+            source_signature="transient-one",
+        )
+        self.assertEqual(reobserve_one.action, first.action)
+        self.assertIn("post-progress-transition-reobserve", reobserve_one.reason)
+        payload = planner.to_payload()
+        self.assertIn("directional_force_transition", payload)
+        planner = SemanticPlannerState.from_payload(payload)
+        reobserve_two = planner.decide(
+            transient_grid,
+            (1, 2, 3, 4, 6),
+            (instruction,),
+            source_signature="transient-two",
+        )
+        self.assertEqual(reobserve_two.action, first.action)
+        exhausted = planner.decide(
+            transient_grid,
+            (1, 2, 3, 4, 6),
+            (instruction,),
+            source_signature="transient-three",
+        )
+        self.assertIsNone(exhausted.action)
+        self.assertNotIn(
+            "directional_force_transition",
+            planner.to_payload(),
         )
 
     def test_ambiguous_charge_and_search_bound_fail_closed(self) -> None:

@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-v23-transition-predictive-audit-v2",
+  "frame_id": "p10-v25-c7-c5-closed-negative-audit",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -172,6 +172,30 @@
         "cannot-inform-a-held-out-action"
       ],
       "reopen_condition": "none; post-action recomputation may be an integrity check but never prospective C3 evidence"
+    },
+    {
+      "hypothesis_id": "H41-reuse-legacy-target-contact-surface",
+      "status": "REJECTED",
+      "reason_codes": [
+        "progress-separator-zero",
+        "hazard-separator-zero",
+        "promotion-separator-zero",
+        "legacy-contract-spec-mismatch",
+        "positive-generalization-claim-unauthorized"
+      ],
+      "reopen_condition": "only a materially new target-contact variable with a positive cross-structure progress or hazard separator may open a new hypothesis; the frozen surface itself is closed"
+    },
+    {
+      "hypothesis_id": "H42-bounded-old-directional-action-replay",
+      "status": "REJECTED",
+      "reason_codes": [
+        "candidate-activated-eight-times",
+        "target-completion-delta-zero",
+        "bounded-replay-exhausted",
+        "unchanged-generic-fallback-resumed",
+        "same-axis-retry-has-no-new-information"
+      ],
+      "reopen_condition": "none for predecessor-action replay; resume the composition only after a new visible successor-obligation state is identified"
     }
   ]
 }

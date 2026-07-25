@@ -1,0 +1,149 @@
+{
+  "artifact_type": "arc3_p10_directional_settle_closed_negative",
+  "candidate_tier": "LOCAL_PROBE_REJECTED",
+  "capability_cluster": "multi-actor-directional-force-obligation-composition",
+  "causal_interpretation": {
+    "candidate_activation_confirmed": true,
+    "candidate_parameter_exhausted": true,
+    "old_action_replay_is_not_missing_capability": true,
+    "remaining_gap": "parse and compose the new visible obligation state; do not replay the predecessor action",
+    "same_candidate_retry_has_new_information": false
+  },
+  "content_digest": "arc3_p10_directional_settle_failure_audit:61eac5c738790f378dfffb566c9f6fff1bb55a588749afc31df8a6137158ecab",
+  "development_only": true,
+  "failure_signature": {
+    "bounded_replay_count": 8,
+    "bounded_replay_first_action_ordinal": 194,
+    "bounded_replay_last_action_ordinal": 201,
+    "completion_after": 6,
+    "completion_before": 6,
+    "failure_window": [
+      {
+        "action_id": 4,
+        "action_ordinal": 193,
+        "level_count": 6,
+        "provenance_digest": "3592774e68e1202d1ae4a4a0c2a72904113b86880ec5d289484166bc38145d9a",
+        "role": "progress-boundary",
+        "step_digest": "8bd8bca74720d7d47c6c0a0bc8f71457a21d6733cb6b96f63ca713078471c850"
+      },
+      {
+        "action_id": 4,
+        "action_ordinal": 194,
+        "level_count": 6,
+        "provenance_digest": "de71d1ef028037e5cf8b0ac2af31a9709e8585704c38ccc002413055d2410761",
+        "role": "bounded-old-action-replay",
+        "step_digest": "b27eb222f5e46077d435350e2888d0c089b3842744cbf9c4ba4f49d728addae3"
+      },
+      {
+        "action_id": 4,
+        "action_ordinal": 195,
+        "level_count": 6,
+        "provenance_digest": "8fbc8e134f36513074b015dc5374925ebda15a8281e46e9908061804a15161c3",
+        "role": "bounded-old-action-replay",
+        "step_digest": "1bb1f0408249ccce154d255c628d6d5fc17ea097d7ef7b1d9e1b907c0ca4412d"
+      },
+      {
+        "action_id": 4,
+        "action_ordinal": 196,
+        "level_count": 6,
+        "provenance_digest": "30bf4c5219dc4f70dcc3460c016ea083299d19c5e8ae8efd45a8760b03196b4b",
+        "role": "bounded-old-action-replay",
+        "step_digest": "a24304679760ae0015c77089ea6c9a4030c4bdde7e2a9fb654a0f70fc19d99fd"
+      },
+      {
+        "action_id": 4,
+        "action_ordinal": 197,
+        "level_count": 6,
+        "provenance_digest": "16f3c145f858ebc8d9de6004a4e516825c34b07b44d3033ee6a897baf8488b90",
+        "role": "bounded-old-action-replay",
+        "step_digest": "055928d2f24e6dde5810e5a6ec1d31f40b0d25622933f41c021a56677f9aceae"
+      },
+      {
+        "action_id": 4,
+        "action_ordinal": 198,
+        "level_count": 6,
+        "provenance_digest": "8c86c9f9c8cddb78066ad24a8eeb05b211f4c7cc1e5c8f50006e1493e666047b",
+        "role": "bounded-old-action-replay",
+        "step_digest": "39c00bfeb0d7ab60a7d7205240762b4f6c1f4a6797d9d60872f5f85389b5f186"
+      },
+      {
+        "action_id": 4,
+        "action_ordinal": 199,
+        "level_count": 6,
+        "provenance_digest": "91949171d97199176c2682f5dc74ee97d1d168e18a8b649878aa669d96eb539e",
+        "role": "bounded-old-action-replay",
+        "step_digest": "2179cf0559e8baf5fcf84afc5d9e549d76192d3a5e6e4558e81e1b0fd7e56091"
+      },
+      {
+        "action_id": 4,
+        "action_ordinal": 200,
+        "level_count": 6,
+        "provenance_digest": "9810545120050afe50718fa64d9aa036d47d7f2e7d2967dc83226475c167fb2f",
+        "role": "bounded-old-action-replay",
+        "step_digest": "dc0a7999900319d1404367533ac66ddea98d633cea1d4450612dc5e8c49de60c"
+      },
+      {
+        "action_id": 4,
+        "action_ordinal": 201,
+        "level_count": 6,
+        "provenance_digest": "f4c292d6e0fa73ed674c6b1a16e4ca31b5004f39030c884dab8de0ce74d00f1e",
+        "role": "bounded-old-action-replay",
+        "step_digest": "a17fbe349f548400fb8868f07b1db6cbd59e73016662b3b9ada7ed686237f8b0"
+      },
+      {
+        "action_id": 1,
+        "action_ordinal": 202,
+        "level_count": 6,
+        "provenance_digest": "1c39eb0c41fb36d04288f8189676b076b410b1cb5a6ff4e903f74ffe1006e9b3",
+        "role": "generic-fallback",
+        "step_digest": "eeccce796fcc9fd116ad47f7213b330db9d1d856db166d58a745f91829d7924c"
+      }
+    ],
+    "generic_fallback_action_ordinal": 202,
+    "id": "bounded-old-direction-replay-exhausted-then-generic-fallback",
+    "progress_boundary_action_ordinal": 193,
+    "target_completion_delta": 0
+  },
+  "hds_judgment": {
+    "active_p_mutation_authorized": false,
+    "all_sample_regression_authorized": false,
+    "authority": "development-hds-only",
+    "causal_result": "CLOSED_NEGATIVE",
+    "next_cluster_analysis_authorized": true,
+    "reason_codes": [
+      "candidate-activation-observed",
+      "bounded-old-action-replay-exhausted",
+      "target-completion-delta-zero",
+      "stable-non-regression-does-not-offset-no-gain",
+      "candidate-slot-restored"
+    ],
+    "runtime_p_promotion_authorized": false,
+    "same_candidate_retry_authorized": false,
+    "score_progress_claim_authorized": false,
+    "status": "REJECT"
+  },
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-p10-directional-settle-failure-audit-v1",
+  "source_evidence": {
+    "candidate_compact_content_digest": "d48c25d63895ebe41624f5ffdab3069fd45671f491790e986533877f2e4938f1",
+    "candidate_trace_digest": "8060c7272a5be2768ac92f4295871b2f8aed6da5004e5b92108bfe5f22f9567b",
+    "intervention_content_digest": "arc3_p10_directional_settle_candidate_intervention:d3d6b42db423eb00632acf7f40582e99555c686719839f7c04d8eaba81110a17"
+  },
+  "trace_checks": {
+    "bounded_replay_activated": true,
+    "bounded_replay_count_matches_parameter": true,
+    "bounded_replay_repeats_boundary_action": true,
+    "bounded_replay_reuses_boundary_visual_action": true,
+    "candidate_operator_version_bound": true,
+    "candidate_provenance_matches_intervention_digest": true,
+    "candidate_run_max_action_exhausted": true,
+    "candidate_steps_match_intervention_digest": true,
+    "candidate_trace_matches_intervention_actions": true,
+    "candidate_trace_matches_intervention_completion": true,
+    "fallback_is_generic_untested_candidate": true,
+    "fallback_occurs_immediately_after_bound": true,
+    "no_progress_after_bounded_replay": true,
+    "progress_boundary_directional": true
+  }
+}

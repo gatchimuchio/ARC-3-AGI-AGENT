@@ -11,7 +11,7 @@ from __future__ import annotations
 import json
 from collections import Counter, deque
 from dataclasses import dataclass
-from typing import TypeAlias
+from typing import Literal, TypeAlias
 
 from .instruction_body import SemanticOperatorInstruction
 from .schema import digest_object
@@ -32,6 +32,11 @@ DIRECTIONAL_FORCE_ROUTE_OPERATOR = (
 
 RoutePositions: TypeAlias = tuple[Position, ...]
 Direction: TypeAlias = tuple[int, int]
+DirectionalForceObservationStatus: TypeAlias = Literal[
+    "MATCH",
+    "UNAVAILABLE",
+    "MISMATCH",
+]
 
 
 @dataclass(frozen=True, slots=True)
@@ -62,6 +67,7 @@ class _DirectionalForceParameters:
     force_expansion_steps: int
     maximum_search_states: int
     maximum_stage_actions: int
+    maximum_transition_observations: int
 
     @classmethod
     def from_instruction(
@@ -105,6 +111,18 @@ class _DirectionalForceParameters:
             if isinstance(value, bool) or not isinstance(value, int):
                 return None
             parsed[name] = value
+        maximum_transition_observations = raw.get(
+            "maximum_transition_observations",
+            0,
+        )
+        if (
+            isinstance(maximum_transition_observations, bool)
+            or not isinstance(maximum_transition_observations, int)
+        ):
+            return None
+        parsed["maximum_transition_observations"] = (
+            maximum_transition_observations
+        )
         actions = {
             parsed["up_action"],
             parsed["down_action"],
@@ -155,6 +173,9 @@ class _DirectionalForceParameters:
             or parsed["force_expansion_steps"] < 1
             or parsed["maximum_search_states"] < 1
             or parsed["maximum_stage_actions"] < 1
+            or not 0
+            <= parsed["maximum_transition_observations"]
+            <= 64
         ):
             return None
         return cls(**parsed)
@@ -1210,6 +1231,15 @@ def _visual_action(
         stage=stage,
         stage_plan=stage_plan,
     )
+    successor_evidence: tuple[str, ...] = ()
+    if model.parameters.maximum_transition_observations:
+        successor = _transition(model, state, action_id)
+        successor_evidence = (
+            "directional-force-successor-grid:"
+            + digest_object(
+                _render_state(model, successor)[:observation_height]
+            ),
+        )
     return VisualAction(
         key="semantic-directional-force:"
         + digest_object(
@@ -1241,6 +1271,7 @@ def _visual_action(
                 separators=(",", ":"),
                 sort_keys=True,
             ),
+            *successor_evidence,
             *instruction.provenance,
         ),
     )
@@ -1292,15 +1323,16 @@ def directional_force_route_plan(
     return tuple(actions)
 
 
-def directional_force_route_observation_matches(
+def _directional_force_observation_status(
     grid: Grid,
     instruction: SemanticOperatorInstruction,
     action: VisualAction,
-) -> bool:
-    """Validate one queued action against its rendered expected state."""
-
-    if _DirectionalForceParameters.from_instruction(instruction) is None:
-        return False
+    *,
+    digest_prefix: str,
+) -> DirectionalForceObservationStatus:
+    parameters = _DirectionalForceParameters.from_instruction(instruction)
+    if parameters is None:
+        return "MISMATCH"
     actions = tuple(
         item.removeprefix("directional-force-current-action:")
         for item in action.evidence
@@ -1312,26 +1344,93 @@ def directional_force_route_observation_matches(
         if item.startswith("directional-force-height:")
     )
     digests = tuple(
-        item.removeprefix("directional-force-expected-grid:")
+        item.removeprefix(digest_prefix)
         for item in action.evidence
-        if item.startswith("directional-force-expected-grid:")
+        if item.startswith(digest_prefix)
     )
     if len(actions) != 1 or len(heights) != 1 or len(digests) != 1:
-        return False
+        return "MISMATCH"
     try:
         expected_action = int(actions[0])
         height = int(heights[0])
     except ValueError:
-        return False
+        return "MISMATCH"
+    if expected_action != action.action_id or not 0 < height <= len(grid):
+        return "MISMATCH"
+    if digest_object(tuple(grid[:height])) == digests[0]:
+        return "MATCH"
     return (
-        expected_action == action.action_id
-        and 0 < height <= len(grid)
-        and digest_object(tuple(grid[:height])) == digests[0]
+        "UNAVAILABLE"
+        if _force_route_model(grid, parameters) is None
+        else "MISMATCH"
+    )
+
+
+def directional_force_route_observation_status(
+    grid: Grid,
+    instruction: SemanticOperatorInstruction,
+    action: VisualAction,
+) -> DirectionalForceObservationStatus:
+    """Classify a queued action against its rendered expected state."""
+
+    return _directional_force_observation_status(
+        grid,
+        instruction,
+        action,
+        digest_prefix="directional-force-expected-grid:",
+    )
+
+
+def directional_force_route_successor_observation_status(
+    grid: Grid,
+    instruction: SemanticOperatorInstruction,
+    action: VisualAction,
+) -> DirectionalForceObservationStatus:
+    """Classify the rendered state after one emitted force-route action."""
+
+    return _directional_force_observation_status(
+        grid,
+        instruction,
+        action,
+        digest_prefix="directional-force-successor-grid:",
+    )
+
+
+def directional_force_route_observation_matches(
+    grid: Grid,
+    instruction: SemanticOperatorInstruction,
+    action: VisualAction,
+) -> bool:
+    """Validate one queued action against its rendered expected state."""
+
+    return (
+        directional_force_route_observation_status(
+            grid,
+            instruction,
+            action,
+        )
+        == "MATCH"
+    )
+
+
+def directional_force_route_transition_observation_limit(
+    instruction: SemanticOperatorInstruction,
+) -> int:
+    """Return the P-bounded transient-frame observation limit."""
+
+    parameters = _DirectionalForceParameters.from_instruction(instruction)
+    return (
+        0
+        if parameters is None
+        else parameters.maximum_transition_observations
     )
 
 
 __all__ = [
     "DIRECTIONAL_FORCE_ROUTE_OPERATOR",
     "directional_force_route_observation_matches",
+    "directional_force_route_observation_status",
     "directional_force_route_plan",
+    "directional_force_route_successor_observation_status",
+    "directional_force_route_transition_observation_limit",
 ]

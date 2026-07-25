@@ -2,17 +2,26 @@
   "artifact_type": "arc3_p10_capability_build_queue",
   "composition_tests": [
     {
+      "current_status": "CLOSED_NEGATIVE_AXIS",
+      "failure_audit": "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_FAILURE_AUDIT.json",
       "game_id": "ka59-38d34dbb",
       "level": 7,
       "new_dedicated_operator_allowed": false,
       "purpose": "Test composition of existing multi-actor, directional-force, and obligation capabilities.",
+      "required_next_variable": "parseable visible successor obligation state, not predecessor action replay",
       "runtime_promotion_authorized": false,
+      "same_axis_retry_authorized": false,
       "test_id": "COMPOSE-KA59-REMAINING-BOUNDARY"
     }
   ],
-  "content_digest": "arc3_p10_capability_build_queue:c5484bc13d5fcaed2ffca473511a2f3c83129ae10669aaad1dc7ed27632ecb14",
+  "content_digest": "arc3_p10_capability_build_queue:5f672ef4d14950b98e21451a8599d74966c57e1055be7def1cab79fa08994bd4",
   "development_only": true,
   "hds_gate": {
+    "closed_negative_work_blocks": [
+      "WB-C7_target_contact_boundary_verifier",
+      "WB-C5_stale_settle_frame_controller:bounded-old-action-replay-axis"
+    ],
+    "next_work_block_id": "WB-C12_layout_mode_commit_discriminator",
     "reason": "Queue construction authorizes development probes, not runtime promotion or a score claim.",
     "status": "HOLD"
   },
@@ -521,7 +530,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 2,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C10_phase_timer_unlock_model"
+      "work_block_id": "WB-C10_phase_timer_unlock_model",
+      "work_status": "RUNTIME_INTERVENTION_REJECTED"
     },
     {
       "candidate_tiers": [
@@ -537,12 +547,28 @@
         "frontier_count": 7,
         "total_link_count": 38
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/c7_target_contact_closed_negative_v1/C7_CLOSED_NEGATIVE_ADMISSION_AUDIT.json",
+        "changed_probe_count": 228,
+        "contact_gain_probe_count": 63,
+        "hazard_separator_variable_count": 0,
+        "negative_only": true,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "retained_legacy_source": "evidence/p10/development/c7_target_contact_closed_negative_v1/LEGACY_C7_TARGET_CONTACT_BOUNDARY_CAPABILITY.json",
+        "retained_source_sha256": "cf52951e7bc4c85aa29a2bff217f298b558fc5d3dad6312c3bde1c8575883032",
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false,
+        "target_count": 7,
+        "total_probe_count": 288
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 3,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C7_target_contact_boundary_verifier"
+      "work_block_id": "WB-C7_target_contact_boundary_verifier",
+      "work_status": "CLOSED_NEGATIVE"
     },
     {
       "candidate_tiers": [
@@ -563,7 +589,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 4,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C12_layout_mode_commit_discriminator"
+      "work_block_id": "WB-C12_layout_mode_commit_discriminator",
+      "work_status": "PENDING"
     },
     {
       "candidate_tiers": [
@@ -584,7 +611,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 5,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C1_rendered_affordance_objectizer"
+      "work_block_id": "WB-C1_rendered_affordance_objectizer",
+      "work_status": "PENDING"
     },
     {
       "candidate_tiers": [
@@ -605,7 +633,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 6,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C14_symbolic_relation_commit_model"
+      "work_block_id": "WB-C14_symbolic_relation_commit_model",
+      "work_status": "PENDING"
     },
     {
       "candidate_tiers": [
@@ -626,7 +655,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 7,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C8_helper_handoff_state_model"
+      "work_block_id": "WB-C8_helper_handoff_state_model",
+      "work_status": "PENDING"
     },
     {
       "candidate_tiers": [
@@ -647,7 +677,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 8,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C4_hazard_rollback_verifier"
+      "work_block_id": "WB-C4_hazard_rollback_verifier",
+      "work_status": "PENDING"
     },
     {
       "candidate_tiers": [
@@ -668,7 +699,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 9,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C6_action_channel_emitter_model"
+      "work_block_id": "WB-C6_action_channel_emitter_model",
+      "work_status": "PENDING"
     },
     {
       "candidate_tiers": [
@@ -684,12 +716,23 @@
         "frontier_count": 2,
         "total_link_count": 8
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "active_manifest_changed": false,
+        "bounded_old_action_replay_count": 8,
+        "candidate_intervention_audit": "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_CANDIDATE_INTERVENTION_AUDIT.json",
+        "candidate_intervention_status": "REJECT",
+        "failure_audit": "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_FAILURE_AUDIT.json",
+        "runtime_p_promotion_authorized": false,
+        "same_axis_retry_authorized": false,
+        "target_completion_delta": 0
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 10,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C5_stale_settle_frame_controller"
+      "work_block_id": "WB-C5_stale_settle_frame_controller",
+      "work_status": "LOCAL_AXIS_CLOSED_NEGATIVE"
     },
     {
       "candidate_tiers": [
@@ -710,7 +753,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 11,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C9_token_slot_submission_verifier"
+      "work_block_id": "WB-C9_token_slot_submission_verifier",
+      "work_status": "PENDING"
     },
     {
       "candidate_tiers": [
@@ -731,7 +775,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 12,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C11_route_terminal_reachability_verifier"
+      "work_block_id": "WB-C11_route_terminal_reachability_verifier",
+      "work_status": "PENDING"
     },
     {
       "candidate_tiers": [
@@ -752,7 +797,8 @@
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 13,
       "selection_basis": "remaining capability coverage",
-      "work_block_id": "WB-C13_support_bridge_slider_model"
+      "work_block_id": "WB-C13_support_bridge_slider_model",
+      "work_status": "PENDING"
     }
   ],
   "runtime_use": "FORBIDDEN",
@@ -765,6 +811,7 @@
       "KA59-only tunnel vision",
       "runtime identity before output compilation"
     ],
+    "next_unembedded_work_block": "WB-C12_layout_mode_commit_discriminator",
     "primary": "coverage before next-level order",
     "runtime_compile_boundary": "Only a COMPOSABLE candidate may be horizontally subtracted into identity-free Runtime P."
   }

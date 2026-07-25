@@ -53,6 +53,18 @@ P10_C2_C10_COMPILER_VERSION = "arc3-p10-c2-c10-symbolic-compiler-v1"
 P10_C2_C10_CANDIDATE_SET_VERSION = "p10-candidate-set-c2-c10-v1"
 P10_C2_C10_SYMBOLIC_VERSION = "p10-p-a-symbolic-c2-c10-v1"
 P10_C2_C10_SYMBOLIC_FILENAME = "p10_p_a_symbolic_c2_c10_v1.json"
+P10_DIRECTIONAL_SETTLE_COMPILER_VERSION = (
+    "arc3-p10-directional-settle-hybrid-compiler-v1"
+)
+P10_DIRECTIONAL_SETTLE_CANDIDATE_SET_VERSION = (
+    "p10-candidate-set-directional-settle-v1"
+)
+P10_DIRECTIONAL_SETTLE_HYBRID_VERSION = (
+    "p10-hybrid-directional-settle-v1"
+)
+P10_DIRECTIONAL_SETTLE_HYBRID_FILENAME = (
+    "p10_hybrid_directional_settle_v1.json"
+)
 
 
 def _file_digest(path: Path) -> str:
@@ -624,10 +636,13 @@ def occluded_target_route_instruction_mapping() -> dict[str, object]:
     }
 
 
-def directional_force_route_instruction_mapping() -> dict[str, object]:
+def directional_force_route_instruction_mapping(
+    *,
+    maximum_transition_observations: int | None = None,
+) -> dict[str, object]:
     """Return P material for rendered directional-force region routing."""
 
-    return {
+    mapping: dict[str, object] = {
         "operator_id": DIRECTIONAL_FORCE_ROUTE_OPERATOR,
         "action_id": 6,
         "detector": (
@@ -695,6 +710,45 @@ def directional_force_route_instruction_mapping() -> dict[str, object]:
             "compiled-bounded-stage-search-evidence",
         ],
     }
+    if maximum_transition_observations is not None:
+        if (
+            isinstance(maximum_transition_observations, bool)
+            or not 1 <= maximum_transition_observations <= 64
+        ):
+            raise ValueError(
+                "directional force transition observation limit invalid"
+            )
+        parameters = mapping["parameters"]
+        falsification_conditions = mapping["falsification_conditions"]
+        provenance = mapping["provenance"]
+        if (
+            not isinstance(parameters, dict)
+            or not isinstance(falsification_conditions, list)
+            or not isinstance(provenance, list)
+        ):
+            raise TypeError("directional force instruction mapping invalid")
+        parameters["maximum_transition_observations"] = (
+            maximum_transition_observations
+        )
+        mapping["transform"] = (
+            str(mapping["transform"])
+            + ", preserve the last rendered force action across a confirmed "
+            "progress boundary, and use it only as a bounded observation "
+            "step while the successor frame is unavailable"
+        )
+        falsification_conditions.extend(
+            (
+                "the post-progress observation loop exceeds its compiled bound",
+                "a parseable stable successor is treated as a transient frame",
+            )
+        )
+        provenance.extend(
+            (
+                "compiled-c2-visible-successor-evidence",
+                "compiled-c5-bounded-settle-controller-evidence",
+            )
+        )
+    return mapping
 
 
 def marker_shape_push_target_instruction_mapping() -> dict[str, object]:
@@ -1069,6 +1123,170 @@ def compile_p10_c2_c10_symbolic_candidate(
     return manifest
 
 
+def compile_p10_directional_settle_hybrid_candidate(
+    *,
+    base_bundle_dir: Path,
+    output_dir: Path,
+    compile_directive: InstructionBodyCompileDirective,
+    compile_decision: PUpdateDecision,
+    hds_authority: HDSPUpdateAuthority,
+    composition_audit_digest: str,
+    maximum_transition_observations: int = 8,
+    seed: int = P10_COMPILER_SEED,
+) -> dict[str, object]:
+    """Compile a bounded directional-settle composition into candidate hybrid."""
+
+    if seed != P10_COMPILER_SEED:
+        raise ValueError("P10 directional-settle compiler seed is fixed at 0")
+    if compile_directive.seed != seed:
+        raise AuthorityViolation(
+            "P10_DIRECTIONAL_SETTLE_DIRECTIVE_SEED_MISMATCH"
+        )
+    if (
+        compile_directive.target_body_version
+        != P10_DIRECTIONAL_SETTLE_CANDIDATE_SET_VERSION
+    ):
+        raise AuthorityViolation(
+            "P10_DIRECTIONAL_SETTLE_TARGET_VERSION_MISMATCH"
+        )
+    if not composition_audit_digest.startswith(
+        "arc3_p10_directional_settle_composition_audit:"
+    ):
+        raise ValueError(
+            "P10_DIRECTIONAL_SETTLE_COMPOSITION_AUDIT_DIGEST_INVALID"
+        )
+    if (
+        isinstance(maximum_transition_observations, bool)
+        or not 1 <= maximum_transition_observations <= 64
+    ):
+        raise ValueError(
+            "P10_DIRECTIONAL_SETTLE_OBSERVATION_LIMIT_INVALID"
+        )
+
+    active_manifest = _load(base_bundle_dir / "p10_manifest.json")
+    source_manifest_digest = active_p10_manifest_digest(base_bundle_dir)
+    if compile_directive.source_p_digest != source_manifest_digest:
+        raise AuthorityViolation(
+            "P10_DIRECTIONAL_SETTLE_SOURCE_MANIFEST_MISMATCH"
+        )
+
+    base_hybrid = _active_bundle_mapping(
+        base_bundle_dir,
+        active_manifest,
+        "hybrid",
+    )
+    for variant in ("P-A", "P-B"):
+        _active_bundle_mapping(base_bundle_dir, active_manifest, variant)
+    payload = base_hybrid.get("payload")
+    if not isinstance(payload, dict):
+        raise TypeError("active hybrid payload invalid")
+    raw_operators = payload.get("operator_instructions")
+    if not isinstance(raw_operators, list) or not all(
+        isinstance(item, dict) for item in raw_operators
+    ):
+        raise TypeError("active hybrid operator instructions invalid")
+    active_directional = directional_force_route_instruction_mapping()
+    matching_indices = tuple(
+        index
+        for index, item in enumerate(raw_operators)
+        if item.get("operator_id") == DIRECTIONAL_FORCE_ROUTE_OPERATOR
+    )
+    if matching_indices != (len(raw_operators) - 1,):
+        raise ValueError(
+            "P10_DIRECTIONAL_SETTLE_ACTIVE_OPERATOR_CARDINALITY_INVALID"
+        )
+    if raw_operators[matching_indices[0]] != active_directional:
+        raise ValueError(
+            "P10_DIRECTIONAL_SETTLE_ACTIVE_OPERATOR_DRIFT"
+        )
+
+    compile_directive.consume(compile_decision, hds_authority)
+    compile_directive_digest = compile_directive.digest
+    compile_decision_digest = compile_decision.digest
+    evidence_set_digest = compile_directive.evidence_set_digest
+    operators = copy.deepcopy(raw_operators)
+    operators[matching_indices[0]] = (
+        directional_force_route_instruction_mapping(
+            maximum_transition_observations=(
+                maximum_transition_observations
+            )
+        )
+    )
+    candidate_mapping = _upgrade(
+        base_hybrid,
+        body_version=P10_DIRECTIONAL_SETTLE_HYBRID_VERSION,
+        variant="hybrid",
+        operator_instructions=operators,
+        compile_directive_digest=compile_directive_digest,
+        compile_decision_digest=compile_decision_digest,
+        evidence_set_digest=evidence_set_digest,
+        compiler_version=P10_DIRECTIONAL_SETTLE_COMPILER_VERSION,
+        compile_method=(
+            "hds-authorized-directional-force-obligation-settle-"
+            "composition-candidate-compile"
+        ),
+    )
+
+    candidate_path = (
+        output_dir / P10_DIRECTIONAL_SETTLE_HYBRID_FILENAME
+    )
+    _write(candidate_path, candidate_mapping)
+    candidate_body = instruction_body_from_mapping(candidate_mapping)
+    hybrid_entry: dict[str, object] = {
+        "filename": P10_DIRECTIONAL_SETTLE_HYBRID_FILENAME,
+        "format_id": candidate_body.format_id,
+        "body_version": candidate_body.body_version,
+        "content_digest": candidate_body.digest(),
+        "sha256": _file_digest(candidate_path),
+        "operator_count": len(operators),
+    }
+
+    raw_active_bundles = active_manifest.get("bundles")
+    if not isinstance(raw_active_bundles, dict):
+        raise TypeError("active P10 manifest bundles invalid")
+    manifest_bundles: dict[str, object] = {}
+    for variant in ("P-A", "P-B"):
+        raw_entry = raw_active_bundles.get(variant)
+        if not isinstance(raw_entry, dict):
+            raise TypeError(
+                f"active P10 manifest entry invalid: {variant}"
+            )
+        entry = copy.deepcopy(raw_entry)
+        filename = entry.get("filename")
+        if not isinstance(filename, str):
+            raise TypeError(
+                f"active P10 filename invalid: {variant}"
+            )
+        source_path = base_bundle_dir / filename
+        reused_path = output_dir / filename
+        if source_path.resolve() != reused_path.resolve():
+            reused_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(source_path, reused_path)
+        manifest_bundles[variant] = entry
+    manifest_bundles["hybrid"] = hybrid_entry
+
+    manifest: dict[str, object] = {
+        "schema_version": "arc3-p10-instruction-manifest-v1",
+        "compiler_version": P10_DIRECTIONAL_SETTLE_COMPILER_VERSION,
+        "compile_decision_digest": compile_decision_digest,
+        "compile_directive_digest": compile_directive_digest,
+        "evidence_set_digest": evidence_set_digest,
+        "seed": seed,
+        "runtime_identity_free": True,
+        "lifecycle": "CANDIDATE",
+        "activation_authority": "hds-promotion-required",
+        "source_manifest_digest": source_manifest_digest,
+        "candidate_target_component": "hybrid-P-B",
+        "composition_audit_digest": composition_audit_digest,
+        "maximum_transition_observations": (
+            maximum_transition_observations
+        ),
+        "bundles": manifest_bundles,
+    }
+    _write(output_dir / P10_CANDIDATE_MANIFEST_FILENAME, manifest)
+    return manifest
+
+
 def compile_p10_instruction_bodies(
     *,
     base_bundle_dir: Path,
@@ -1246,6 +1464,10 @@ __all__ = [
     "P10_CANDIDATE_MANIFEST_FILENAME",
     "P10_CANDIDATE_SET_VERSION",
     "P10_COMPILER_SEED",
+    "P10_DIRECTIONAL_SETTLE_CANDIDATE_SET_VERSION",
+    "P10_DIRECTIONAL_SETTLE_COMPILER_VERSION",
+    "P10_DIRECTIONAL_SETTLE_HYBRID_FILENAME",
+    "P10_DIRECTIONAL_SETTLE_HYBRID_VERSION",
     "P10_HYBRID_VERSION",
     "P10_INSTRUCTION_COMPILER_VERSION",
     "P10_PARAMETRIC_VERSION",
@@ -1253,6 +1475,7 @@ __all__ = [
     "active_p10_manifest_digest",
     "compile_p10_instruction_bodies",
     "compile_p10_c2_c10_symbolic_candidate",
+    "compile_p10_directional_settle_hybrid_candidate",
     "directional_force_route_instruction_mapping",
     "fruit_merge_instruction_mapping",
     "global_effect_diversification_instruction_mapping",

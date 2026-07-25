@@ -562,6 +562,73 @@
         "evidence/p10/development/c2_c3_transition_all25_max450_v2/C2_C10_COMPOSITION_REMOVAL_AUDIT.json"
       ],
       "maximum_information_gain_next": "close or reclassify the next coverage-ranked capability surface and test only materially new observable variables"
+    },
+    {
+      "decision_id": "j-dev:p10-c7-target-contact-negative-admission-v25",
+      "authority": "development-hds-only",
+      "status": "REJECT",
+      "selected_hypothesis": "H41-reuse-legacy-target-contact-surface",
+      "tier_decisions": {
+        "LEGACY_EVIDENCE_ADMISSION": "PASS_NEGATIVE_ONLY",
+        "LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "CLUSTER_STABLE": "REJECT",
+        "COMPOSABLE": "REJECT",
+        "RUNTIME_P_COMPILE": "HOLD",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "p3-provenance-exact-source-retained",
+        "seven-targets-and-two-hundred-eighty-eight-probes-accounted",
+        "two-hundred-twenty-eight-visible-changes",
+        "sixty-three-contact-gains",
+        "progress-hazard-and-promotion-separators-zero",
+        "legacy-contract-spec-mismatch-quarantined",
+        "positive-generalization-claim-rejected"
+      ],
+      "evidence_ref": "evidence/p10/development/c7_target_contact_closed_negative_v1/C7_CLOSED_NEGATIVE_ADMISSION_AUDIT.json",
+      "supporting_evidence": [
+        "evidence/p10/development/c7_target_contact_closed_negative_v1/LEGACY_C7_TARGET_CONTACT_BOUNDARY_CAPABILITY.json"
+      ],
+      "maximum_information_gain_next": "do not retry the frozen target-contact surface; continue to the next coverage-ranked capability"
+    },
+    {
+      "decision_id": "j-dev:p10-directional-settle-candidate-v25",
+      "authority": "development-hds-only",
+      "status": "REJECT",
+      "selected_hypothesis": "H42-bounded-old-directional-action-replay",
+      "held_hypothesis": "H43-visible-successor-obligation-composition",
+      "tier_decisions": {
+        "EXISTING_CAPABILITY_COMPOSITION": "PASS",
+        "CANDIDATE_COMPILE_ISOLATION": "PASS",
+        "ACTIVE_CANDIDATE_DOUBLE_RUN": "PASS",
+        "BOUNDED_REPLAY_INTERVENTION": "REJECT",
+        "ALL_SAMPLE_CANDIDATE_REGRESSION": "NOT_AUTHORIZED",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "multi-actor-directional-force-obligation-composition-audit-pass",
+        "candidate-activated-eight-bounded-replays",
+        "active-and-candidate-double-runs-reproducible",
+        "stable-completion-nonregression-six-to-six",
+        "target-completion-six-to-six",
+        "candidate-target-completion-delta-zero",
+        "replay-exhausted-before-unchanged-generic-fallback",
+        "active-manifest-unchanged",
+        "candidate-slot-restored-byte-for-byte"
+      ],
+      "evidence_ref": "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_CANDIDATE_INTERVENTION_AUDIT.json",
+      "supporting_evidence": [
+        "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_COMPOSITION_AUDIT.json",
+        "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_FAILURE_AUDIT.json",
+        "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_CANDIDATE_TARGET_COMPACT.json"
+      ],
+      "maximum_information_gain_next": "run WB-C12_layout_mode_commit_discriminator; reopen KA59 composition only with a materially new visible successor-obligation state"
     }
   ]
 }
