@@ -1,15 +1,15 @@
 {
   "schema_version": "arc3-p10-development-frame-v1",
-  "frame_id": "p10-v25-c7-c5-closed-negative-audit",
+  "frame_id": "p10-v26-c12-layout-mode-closed-negative-audit",
   "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
   "authority": {
     "document": "docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md",
     "source_sha256": "113ac0516e500679792e57fbc73f21ad078d19929ae39c11ff185ac1f9a353ef",
-    "repository_sha256_lf": "82cdd425472e6ce2eed0102171b34df2f6d14ce55131bd5d00bc537c7de40707"
+    "repository_sha256_lf": "f2ea7b8a1a0a65a9d47ec6eba2487416096dd7ded1339ed29b035278bd01238d"
   },
   "self_check": {
     "branch": "main",
-    "base_head": "4c7ad8adeb4eeaea6d567a1eee299e24d54ceb3a",
+    "base_head": "883b3bfdbf905b53e7cd95418893e4ab192dec81",
     "dirty_state_preserved": true,
     "operation_mode": "OFFLINE_ONLY",
     "active_p": {
@@ -34,7 +34,7 @@
       "source": "evidence/p10/development/c2_c3_transition_all25_max450_v2/arc3_local_score_oracle.json",
       "score_digest": "9f214c1825f8ee0f52b1ef6a323b778971ce03e03a3733338d2323a9b0ebb238"
     },
-    "latest_failure_signature": "bounded-old-direction-replay-exhausted-then-generic-fallback",
+    "latest_failure_signature": "layout-mode-probes-zero-progress-no-hazard-separator",
     "stop_conditions": [
       "runtime identity routing detected",
       "HDS authority bypass detected",
@@ -52,7 +52,8 @@
       "rendered pre-action and post-action observations from every retained sample game",
       "active manifest, environment inventory, and exact checkpoint conditions",
       "P3-provenance-exact frozen C7 target-contact evidence",
-      "candidate-only directional successor transition traces"
+      "candidate-only directional successor transition traces",
+      "P3-provenance-exact primary and auxiliary C12 layout-mode evidence"
     ],
     "change": [
       "field-level salvage of task-aware legacy analysis into development-only memory",
@@ -70,7 +71,9 @@
       "machine-readable P10 control and development-analysis artifacts",
       "negative-only C7 admission with contract mismatch quarantine",
       "crash-safe directional-settle candidate workflow with byte restoration",
-      "closed-negative retry suppression and capability-queue advancement"
+      "closed-negative retry suppression and capability-queue advancement",
+      "two-source negative-only C12 admission with contract replay and stale-score quarantine",
+      "coverage-queue advancement to the distinct C1 rendered-affordance surface"
     ],
     "evidence_use": [
       "current rendered observation",
@@ -85,7 +88,8 @@
       "candidate active and removal-control completion comparisons",
       "content-addressed development artifacts and checkpoint conditions",
       "C7 frozen probe counts and provenance-bound negative admission",
-      "directional-settle composition intervention activation and failure audits"
+      "directional-settle composition intervention activation and failure audits",
+      "C12 primary and auxiliary frozen counts and provenance-bound negative admission"
     ],
     "evidence_exclude": [
       "source or hidden environment state",
@@ -111,7 +115,10 @@
       "H40-one-step-visible-causal-context",
       "H41-reuse-legacy-target-contact-surface",
       "H42-bounded-old-directional-action-replay",
-      "H43-visible-successor-obligation-composition"
+      "H43-visible-successor-obligation-composition",
+      "H44-reuse-primary-layout-mode-commit-surface",
+      "H45-reuse-auxiliary-layout-mode-replay-surface",
+      "H46-rendered-affordance-objectizer"
     ],
     "predictions": [
       "H29 can add one more local closure but continues linear operator proliferation and erases cross-task relations",
@@ -128,7 +135,10 @@
       "H40 explains repeated same-frame/action outcome ambiguity with one-step visible causal context",
       "H41 would turn contact gain into progress or hazard separation if the frozen C7 surface were reusable",
       "H42 would close the successor transition if bounded predecessor directional-action replay were the missing state",
-      "H43 requires a materially new visible successor-obligation state before recomposing existing capabilities"
+      "H43 requires a materially new visible successor-obligation state before recomposing existing capabilities",
+      "H44 would turn primary layout-vector changes into progress or hazard separation if the frozen C12 surface were reusable",
+      "H45 would expose a positive pre-action layout variable if the replay-bootstrapped auxiliary surface carried reusable information",
+      "H46 tests materially new identity-free rendered objects and affordances instead of retrying raw layout hashes"
     ],
     "comparators": [
       "unchanged HDS-promoted v27/v27/v26 active manifest",
@@ -145,10 +155,11 @@
       "C10 eighty-one same-frame/action ambiguity groups",
       "C2 C10 prequential removal controls and twenty-eight intervention runs",
       "C7 seven-target two-hundred-eighty-eight-probe frozen artifact and negative-only rebuild",
-      "FT09 and KA59 active candidate double runs with eight bounded replay activations"
+      "FT09 and KA59 active candidate double runs with eight bounded replay activations",
+      "C12 primary two-hundred-twelve-probe and auxiliary one-hundred-seventy-six-probe frozen artifacts"
     ],
-    "expected_state_transition": "resource-headroom failure -> behavior-equivalent bounded retention; circular C3 claim -> explicit C2 stable observer plus C3 predictive HOLD; C10 closed timer surface -> CLUSTER_STABLE and COMPOSABLE visible-context capability; zero completion delta -> candidate Runtime P REJECT; C7 zero separators -> negative-only CLOSED_NEGATIVE; bounded old-action replay activation with zero delta -> CLOSED_NEGATIVE_AXIS and advance to C12",
-    "falsification_relation": "provenance drifts, row accounting differs from one hundred eighty-three, checkpoint conditions can be mixed, shadow evidence influences an action, active P changes, deterministic rebuild differs, a rollback anchor is pruned, candidate sixty-five is unreachable, any worker exceeds one GiB or swaps, post-action truth receives predictive credit, a zero-delta candidate is retained, a weak held-out predictor is promoted, a contract-mismatched C7 artifact supports a positive claim, or the predecessor-replay axis is retried without new visible state"
+    "expected_state_transition": "resource-headroom failure -> behavior-equivalent bounded retention; circular C3 claim -> explicit C2 stable observer plus C3 predictive HOLD; C10 closed timer surface -> CLUSTER_STABLE and COMPOSABLE visible-context capability; zero completion delta -> candidate Runtime P REJECT; C7 zero separators -> negative-only CLOSED_NEGATIVE; bounded old-action replay activation with zero delta -> CLOSED_NEGATIVE_AXIS; C12 three-hundred-eighty-eight zero-progress probes -> negative-only CLOSED_NEGATIVE and advance to C1",
+    "falsification_relation": "provenance drifts, row accounting differs from one hundred eighty-three, checkpoint conditions can be mixed, shadow evidence influences an action, active P changes, deterministic rebuild differs, a rollback anchor is pruned, candidate sixty-five is unreachable, any worker exceeds one GiB or swaps, post-action truth receives predictive credit, a zero-delta candidate is retained, a weak held-out predictor is promoted, a contract-mismatched C7 or C12 artifact supports a positive claim, replay-bootstrapped auxiliary evidence enters runtime, or any closed surface is retried without new visible state"
   },
   "Mc": {
     "identity": "generic-double-trinity-P-update-control",
@@ -170,6 +181,7 @@
       "the frozen C7 source matches P3 provenance and is admitted only for negative conclusions",
       "the directional candidate activation is demonstrated rather than inferred",
       "closed-negative surfaces record explicit reopen conditions and advance the queue",
+      "both frozen C12 sources match P3 provenance and are admitted only for negative conclusions",
       "active P versions digests and adopted completion remain unchanged",
       "only HDS may advance LOCAL_PROBE to CLUSTER_STABLE COMPOSABLE compile or promotion"
     ],
@@ -185,6 +197,7 @@
       "stable completion decreases",
       "negative-only development evidence enters runtime routing",
       "the same C7 or predecessor-replay surface is retried without a materially new variable",
+      "either frozen C12 layout-mode surface is retried without a materially new rendered variable",
       "unclassified failure occurs"
     ],
     "rollback": [
@@ -206,7 +219,8 @@
       "the C2 plus C10 Runtime P candidate is rejected at zero target delta",
       "C7 is closed negative with its contract mismatch quarantined and no positive claim",
       "the bounded-old-directional-action replay axis is rejected after eight activations and zero target delta",
-      "WB-C12_layout_mode_commit_discriminator is selected next",
+      "C12 is closed negative after three hundred eighty-eight zero-progress probes with contract mismatch replay bootstrap and stale score fields quarantined",
+      "WB-C1_rendered_affordance_objectizer is selected next",
       "the adopted boundary remains thirty-five of one hundred eighty-three",
       "P10 and P11 remain gated"
     ]
@@ -218,6 +232,7 @@
     "dedicated operator for the remaining KA59 level",
     "retry of the frozen C7 target-contact surface",
     "retry of predecessor directional-action replay without a new visible successor state",
+    "retry of either frozen C12 layout-mode surface",
     "P11 start",
     "official ARC or Kaggle connection",
     "competition mode"
@@ -254,7 +269,8 @@
     "C2 C10 removal composition audit",
     "active candidate double-run intervention and candidate-slot restoration audit",
     "C7 provenance-bound negative-only admission audit",
-    "directional-settle composition activation failure and crash-recovery audits"
+    "directional-settle composition activation failure and crash-recovery audits",
+    "C12 two-source provenance-bound negative-only admission audit"
   ],
   "maximum_work_scope": [
     "field-level salvage and deterministic compilation of all 183 task-aware rows",
@@ -269,6 +285,7 @@
     "automatic candidate rejection and restoration on zero completion delta",
     "negative-only migration of one P3-provenance-exact legacy C7 artifact",
     "bounded candidate-only directional successor intervention without active P mutation",
-    "advance to WB-C12 after closed-negative C7 and C5 axes"
+    "negative-only migration of two P3-provenance-exact legacy C12 artifacts",
+    "advance to WB-C1 after closed-negative C12 layout-mode surfaces"
   ]
 }

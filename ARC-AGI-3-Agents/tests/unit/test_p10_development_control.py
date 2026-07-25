@@ -105,7 +105,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v25_control_preserves_v21_active_p(
+    def test_v26_control_preserves_v21_active_p(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -120,7 +120,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v25-c7-c5-closed-negative-audit",
+            "p10-v26-c12-layout-mode-closed-negative-audit",
         )
         self.assertEqual(frame["self_check"]["stable_completed_levels"], 35)
         self.assertEqual(capabilities["stable_completed_levels"], 35)
@@ -642,6 +642,167 @@ class P10DevelopmentControlTests(unittest.TestCase):
         )
         self.assertIn(
             "select WB-C12_layout_mode_commit_discriminator "
+            "as the next coverage-ranked work block",
+            memory["resume_conditions"],
+        )
+
+    def test_v26_c12_layout_mode_closed_negative_is_bound(
+        self,
+    ) -> None:
+        evidence_dir = (
+            REPOSITORY_ROOT
+            / "evidence"
+            / "p10"
+            / "development"
+            / "c12_layout_mode_closed_negative_v1"
+        )
+        audit = _json(
+            evidence_dir / "C12_CLOSED_NEGATIVE_ADMISSION_AUDIT.json"
+        )
+        body = dict(audit)
+        claimed = body.pop("content_digest")
+        self.assertEqual(
+            claimed,
+            "arc3_p10_c12_closed_negative_admission:"
+            + digest_object(body),
+        )
+
+        primary = evidence_dir / (
+            "LEGACY_C12_LAYOUT_MODE_COMMIT_"
+            "DISCRIMINATOR_CAPABILITY.json"
+        )
+        auxiliary = evidence_dir / (
+            "LEGACY_LAYOUT_MODE_DISCRIMINATOR_HARNESS.json"
+        )
+        self.assertEqual(
+            hashlib.sha256(primary.read_bytes()).hexdigest(),
+            audit["source_evidence"]["primary"]["sha256"],
+        )
+        self.assertEqual(
+            hashlib.sha256(auxiliary.read_bytes()).hexdigest(),
+            audit["source_evidence"]["auxiliary"]["sha256"],
+        )
+        retained = audit["retained_measurements"]
+        self.assertEqual(retained["combined_probe_count"], 388)
+        self.assertEqual(retained["combined_changed_probe_count"], 226)
+        self.assertEqual(retained["combined_progress_count"], 0)
+        self.assertEqual(retained["combined_game_over_count"], 0)
+        self.assertEqual(
+            retained["promotion_eligible_variable_count"],
+            0,
+        )
+        self.assertEqual(
+            retained["quarantined_stale_primary_score_fields"][
+                "public_total_levels"
+            ],
+            76,
+        )
+        self.assertTrue(
+            audit["admission_scope"][
+                "stale_public_score_fields_quarantined"
+            ]
+        )
+        self.assertEqual(
+            audit["hds_judgment"]["causal_result"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertFalse(
+            audit["hds_judgment"]["same_surface_retry_authorized"]
+        )
+        self.assertEqual(
+            audit["hds_judgment"]["next_work_block_id"],
+            "WB-C1_rendered_affordance_objectizer",
+        )
+
+        hypotheses = _json(
+            CONTROL_DIR / "ACTIVE_HYPOTHESES.json"
+        )["hypotheses"]
+        by_hypothesis = {
+            item["hypothesis_id"]: item for item in hypotheses
+        }
+        self.assertEqual(
+            by_hypothesis[
+                "H44-reuse-primary-layout-mode-commit-surface"
+            ]["status"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertEqual(
+            by_hypothesis[
+                "H45-reuse-auxiliary-layout-mode-replay-surface"
+            ]["status"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertEqual(
+            by_hypothesis[
+                "H46-rendered-affordance-objectizer"
+            ]["status"],
+            "UNOBSERVED_SELECTED_NEXT",
+        )
+
+        rejected = {
+            item["hypothesis_id"]
+            for item in _json(
+                CONTROL_DIR / "REJECTED_HYPOTHESES.json"
+            )["hypotheses"]
+        }
+        self.assertTrue(
+            {
+                "H44-reuse-primary-layout-mode-commit-surface",
+                "H45-reuse-auxiliary-layout-mode-replay-surface",
+            }
+            <= rejected
+        )
+
+        decisions = _json(
+            CONTROL_DIR / "DECISION_LOG.json"
+        )["decisions"]
+        decision = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-c12-layout-mode-negative-admission-v26"
+        )
+        self.assertEqual(decision["status"], "REJECT")
+        self.assertEqual(
+            decision["tier_decisions"]["LOCAL_PROBE"],
+            "CLOSED_NEGATIVE",
+        )
+        self.assertFalse(decision["allow_p_compile"])
+        self.assertFalse(decision["allow_p_promote"])
+
+        capabilities = _json(
+            CONTROL_DIR / "CAPABILITY_REGISTRY.json"
+        )["capabilities"]
+        capability = next(
+            item
+            for item in capabilities
+            if item["capability_id"]
+            == "C12-layout-mode-commit-discriminator"
+        )
+        self.assertEqual(
+            capability["status"],
+            "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY",
+        )
+        self.assertFalse(capability["runtime_admitted"])
+
+        failures = _json(
+            CONTROL_DIR / "FAILURE_SIGNATURE_REGISTRY.json"
+        )["failures"]
+        self.assertIn(
+            "layout-mode-probes-zero-progress-no-hazard-separator",
+            {item["signature"] for item in failures},
+        )
+
+        memory = next(
+            item
+            for item in _json(
+                CONTROL_DIR / "DEV_MEMORY.json"
+            )["entries"]
+            if item["memory_id"]
+            == "m-dev:p10-c12-closed-negative-v26"
+        )
+        self.assertIn(
+            "select WB-C1_rendered_affordance_objectizer "
             "as the next coverage-ranked work block",
             memory["resume_conditions"],
         )

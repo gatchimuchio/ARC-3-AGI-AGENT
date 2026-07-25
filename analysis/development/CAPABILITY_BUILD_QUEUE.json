@@ -14,14 +14,15 @@
       "test_id": "COMPOSE-KA59-REMAINING-BOUNDARY"
     }
   ],
-  "content_digest": "arc3_p10_capability_build_queue:5f672ef4d14950b98e21451a8599d74966c57e1055be7def1cab79fa08994bd4",
+  "content_digest": "arc3_p10_capability_build_queue:db42a9b5a73bc5c0ac5ad50004654f7145fe1058a7a5da6025e8b76f2360daf6",
   "development_only": true,
   "hds_gate": {
     "closed_negative_work_blocks": [
       "WB-C7_target_contact_boundary_verifier",
+      "WB-C12_layout_mode_commit_discriminator",
       "WB-C5_stale_settle_frame_controller:bounded-old-action-replay-axis"
     ],
-    "next_work_block_id": "WB-C12_layout_mode_commit_discriminator",
+    "next_work_block_id": "WB-C1_rendered_affordance_objectizer",
     "reason": "Queue construction authorizes development probes, not runtime promotion or a score claim.",
     "status": "HOLD"
   },
@@ -584,13 +585,39 @@
         "frontier_count": 5,
         "total_link_count": 29
       },
-      "current_tier": "NOT_STARTED",
+      "current_tier": "LOCAL_PROBE",
       "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "admission_audit": "evidence/p10/development/c12_layout_mode_closed_negative_v1/C12_CLOSED_NEGATIVE_ADMISSION_AUDIT.json",
+        "auxiliary_changed_probe_count": 86,
+        "auxiliary_public_replay_bootstrap_quarantined": true,
+        "auxiliary_target_count": 5,
+        "auxiliary_total_probe_count": 176,
+        "combined_changed_probe_count": 226,
+        "combined_game_over_count": 0,
+        "combined_probe_count": 388,
+        "combined_progress_count": 0,
+        "hazard_separator_variable_count": 0,
+        "legacy_contract_spec_mismatch_quarantined": true,
+        "negative_only": true,
+        "primary_changed_probe_count": 140,
+        "primary_layout_mode_changed_probe_count": 104,
+        "primary_target_count": 5,
+        "primary_total_probe_count": 212,
+        "progress_separator_variable_count": 0,
+        "promotion_eligible_variable_count": 0,
+        "retained_auxiliary_legacy_source": "evidence/p10/development/c12_layout_mode_closed_negative_v1/LEGACY_LAYOUT_MODE_DISCRIMINATOR_HARNESS.json",
+        "retained_auxiliary_source_sha256": "bb9ce326f52709ad9395c1a7db959c520f8b634750265f735db5edda827479fd",
+        "retained_primary_legacy_source": "evidence/p10/development/c12_layout_mode_closed_negative_v1/LEGACY_C12_LAYOUT_MODE_COMMIT_DISCRIMINATOR_CAPABILITY.json",
+        "retained_primary_source_sha256": "3ca11339393f4c4410974e676cf163099a2da36030d869dd10c45d5c4364df40",
+        "runtime_p_promotion_authorized": false,
+        "same_surface_retry_authorized": false
+      },
       "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
       "rank": 4,
       "selection_basis": "remaining capability coverage",
       "work_block_id": "WB-C12_layout_mode_commit_discriminator",
-      "work_status": "PENDING"
+      "work_status": "CLOSED_NEGATIVE"
     },
     {
       "candidate_tiers": [
@@ -811,7 +838,7 @@
       "KA59-only tunnel vision",
       "runtime identity before output compilation"
     ],
-    "next_unembedded_work_block": "WB-C12_layout_mode_commit_discriminator",
+    "next_unembedded_work_block": "WB-C1_rendered_affordance_objectizer",
     "primary": "coverage before next-level order",
     "runtime_compile_boundary": "Only a COMPOSABLE candidate may be horizontally subtracted into identity-free Runtime P."
   }

@@ -337,10 +337,21 @@ KA59 composition仮説には新しいvisible successor obligation stateのparse�
 [`directional_settle_composition_v1`](../../evidence/p10/development/directional_settle_composition_v1)
 である。
 
+C12 layout-mode commit discriminatorは、P3 provenanceに一致する二つの
+legacy harnessを実行せずnegative-onlyで移植した。primaryは5 target /
+212 probe / 140 visible change / 104 layout-mode change、auxiliaryは
+5 target / 176 probe / 86 visible changeだったが、合計progress 0、
+GAME_OVER 0、progress/hazard/promotion separator 0、positive pre-action
+variable 0だった。primary contract-spec mismatch、auxiliary public replay
+bootstrap、stale score fieldをquarantineし、同じsurfaceを再試行しない。
+Runtime P入力、positive generalization、score進歩には使わない。正本は
+[`c12_layout_mode_closed_negative_v1`](../../evidence/p10/development/c12_layout_mode_closed_negative_v1)
+である。
+
 coverage順の次の未埋込work blockは
-`WB-C12_layout_mode_commit_discriminator`。C7の同一surfaceとC5の
-bounded-old-action-replay軸は再試行しない。active P、標準score、
-35/183境界は変更せず、P11はGATEDのままである。
+`WB-C1_rendered_affordance_objectizer`。C7とC12の同一surface、C5の
+bounded-old-action-replay軸は再試行しない。active P、標準score、35/183境界は
+変更せず、P11はGATEDのままである。
 
 v15では、既知のstate-changing actionより未観測prototypeを優先する
 candidate policyを五つのbounded structureで比較した。action分布は変化したが

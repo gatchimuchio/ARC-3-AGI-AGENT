@@ -400,6 +400,28 @@
         "same-axis retries are unauthorized"
       ],
       "falsifier": "a byte-distinct candidate on the same predecessor-replay axis supplies no new observable state but is treated as new information"
+    },
+    {
+      "signature": "layout-mode-probes-zero-progress-no-hazard-separator",
+      "structural_condition": "two frozen layout-mode surfaces produce visible layout changes but never separate progress hazard promotion or a positive pre-action variable",
+      "evidence": [
+        "both retained sources match P3 provenance exactly",
+        "the primary source accounts five targets and two hundred twelve probes",
+        "the auxiliary source accounts five targets and one hundred seventy-six probes",
+        "two hundred twenty-six combined probes produce a visible change",
+        "all three hundred eighty-eight probes produce zero progress and zero GAME_OVER",
+        "progress hazard promotion and positive pre-action separators are zero",
+        "the primary contract mismatch and auxiliary public replay bootstrap are explicit"
+      ],
+      "status": "CLOSED_NEGATIVE_NEGATIVE_ONLY",
+      "required_resolution": [],
+      "resolution_evidence": [
+        "both sources are retained without execution as negative development evidence",
+        "the contract mismatch replay bootstrap and stale score fields are quarantined",
+        "HDS rejects CLUSTER_STABLE COMPOSABLE Runtime P compile and positive generalization claims",
+        "the capability queue advances to a materially different rendered-affordance surface"
+      ],
+      "falsifier": "either retained byte stream or any recomputed count differs from the content-bound admission audit"
     }
   ]
 }

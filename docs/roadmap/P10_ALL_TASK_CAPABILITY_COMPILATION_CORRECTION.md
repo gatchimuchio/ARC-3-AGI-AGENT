@@ -266,8 +266,14 @@ target contact、selection delta、bottom tick、required capabilityとの差分
 - C5 bounded-old-action-replay intervention:
   stable 6→6、target 6→6、旧action replay 8回、二巡一致、error 0
 - C5 replay-axis HDS decision: `LOCAL_PROBE / CLOSED_NEGATIVE_AXIS`
+- C12 primary frozen layout-mode harness:
+  5 target、212 probe、140 visible change、104 layout-mode change、
+  progress/GAME_OVER/separator 0
+- C12 auxiliary frozen layout-mode harness:
+  5 target、176 probe、86 visible change、positive pre-action variable 0
+- C12 HDS decision: `LOCAL_PROBE / CLOSED_NEGATIVE`
 - next unembedded work block:
-  `WB-C12_layout_mode_commit_discriminator`
+  `WB-C1_rendered_affordance_objectizer`
 - action selection influence: 0
 - worker resource: 25/25 exit 0、swap 0、最大RSS 143852 KB
 - local standard oracle: 35 / 183、RHAE 18.821945363%
@@ -283,6 +289,7 @@ target contact、selection delta、bottom tick、required capabilityとの差分
   - C2+C10 Runtime intervention: `REJECT`
   - C7 same target-contact surface retry: `REJECT`
   - C5 bounded-old-action-replay axis retry: `REJECT`
+  - C12 same layout-mode surfaces retry: `REJECT`
   - Runtime P promotion: `HOLD`
   - P10全体: `HOLD`
   - P11開始: 禁止
@@ -295,4 +302,7 @@ runtime policyの採用、score進歩、全sample攻略の証拠ではない。
 C7 legacy contract-spec mismatchはnegative-only quarantineとし、positive
 generalizationへ転用しない。C5 candidateは実際に8回発火したがtarget deltaが
 0だったため、同じ旧action replayを再試行しない。KA59 compositionを再開する
-には、新しいvisible successor obligation stateが必要である。
+には、新しいvisible successor obligation stateが必要である。C12のprimary
+contract mismatch、auxiliary public replay bootstrap、両sourceのstale score
+fieldもquarantineする。合計388 probeで正のseparatorが0の同一layout-mode
+surfaceは再試行せず、C1のidentity-free rendered object/affordanceへ進む。

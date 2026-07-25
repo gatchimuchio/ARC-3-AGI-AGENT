@@ -340,8 +340,28 @@ candidate slot復元、all-sample regression不許可とした。正本は
 
 capability queueではC7を`LOCAL_PROBE / CLOSED_NEGATIVE`、C5の
 bounded-old-action-replay軸を`LOCAL_PROBE / CLOSED_NEGATIVE_AXIS`とし、
-次の未埋込high-support work blockを
-`WB-C12_layout_mode_commit_discriminator`へ進める。KA59の同一軸を再試行する
-場合は、旧action replayではなく新しいvisible successor obligation stateが
-必要である。active scoreは変更しておらず、35/183、RHAE
-18.821945363%のままである。
+KA59の同一軸を再試行する場合は、旧action replayではなく新しいvisible
+successor obligation stateが必要である。
+
+## C12 layout-mode二surfaceのnegative-only閉包
+
+P3 provenanceで凍結済みのprimary C12 harnessとauxiliary layout-mode harnessを
+[`c12_layout_mode_closed_negative_v1`](development/c12_layout_mode_closed_negative_v1)
+へbyte-exactで保持した。primaryは1,700,713 bytes、SHA-256
+`3ca11339393f4c4410974e676cf163099a2da36030d869dd10c45d5c4364df40`、
+auxiliaryは185,866 bytes、SHA-256
+`bb9ce326f52709ad9395c1a7db959c520f8b634750265f735db5edda827479fd`
+である。
+
+primaryは5 target / 212 probe / 140 visible change /
+104 layout-mode change、auxiliaryは5 target / 176 probe /
+86 visible changeだった。合計388 probeに対してprogress 0、GAME_OVER 0、
+progress/hazard/promotion separator 0、positive pre-action variable 0である。
+primary contract-spec mismatch、auxiliary public replay bootstrap、stale score
+fieldをquarantineした。HDSは`REJECT / CLOSED_NEGATIVE`、same-surface retry、
+Runtime P compile/promotion、score claimをすべて不許可とした。
+
+capability queueではC12を`LOCAL_PROBE / CLOSED_NEGATIVE`として閉じ、次の
+未埋込high-support work blockを
+`WB-C1_rendered_affordance_objectizer`へ進める。active scoreは変更しておらず、
+35/183、RHAE 18.821945363%のままである。

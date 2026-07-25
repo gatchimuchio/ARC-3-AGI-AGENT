@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-rejected-hypotheses-v1",
-  "frame_id": "p10-v25-c7-c5-closed-negative-audit",
+  "frame_id": "p10-v26-c12-layout-mode-closed-negative-audit",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -196,6 +196,30 @@
         "same-axis-retry-has-no-new-information"
       ],
       "reopen_condition": "none for predecessor-action replay; resume the composition only after a new visible successor-obligation state is identified"
+    },
+    {
+      "hypothesis_id": "H44-reuse-primary-layout-mode-commit-surface",
+      "status": "REJECTED",
+      "reason_codes": [
+        "two-hundred-twelve-probes-zero-progress",
+        "progress-separator-zero",
+        "hazard-separator-zero",
+        "promotion-separator-zero",
+        "legacy-contract-spec-mismatch"
+      ],
+      "reopen_condition": "none for the frozen primary surface; only a materially new rendered variable may open a new hypothesis"
+    },
+    {
+      "hypothesis_id": "H45-reuse-auxiliary-layout-mode-replay-surface",
+      "status": "REJECTED",
+      "reason_codes": [
+        "one-hundred-seventy-six-probes-zero-progress",
+        "positive-pre-action-variable-zero",
+        "public-replay-bootstrap-quarantined",
+        "layout-mode-gate-failed",
+        "same-surface-retry-has-no-new-information"
+      ],
+      "reopen_condition": "none for the replay-bootstrapped auxiliary surface; require a new identity-free rendered variable"
     }
   ]
 }

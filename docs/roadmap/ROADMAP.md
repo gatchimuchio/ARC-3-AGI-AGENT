@@ -61,8 +61,11 @@ C7 target-contact harnessは凍結済み288 probeを負の証拠に限定して�
 `LOCAL_PROBE / CLOSED_NEGATIVE`とした。KA59 remaining-boundaryへ適用した
 C5 bounded-old-action-replay候補も、8回発火してtarget delta 0だったため
 `LOCAL_PROBE / CLOSED_NEGATIVE_AXIS`である。active P、score、35/183境界は
-変更しない。次の未埋込high-support work blockは
-`WB-C12_layout_mode_commit_discriminator`。現行標準オラクルは
+変更しない。C12の凍結layout-mode二surfaceも合計388 probeでprogress、
+GAME_OVER、separatorが0だったため`LOCAL_PROBE / CLOSED_NEGATIVE`とした。
+contract mismatch、public replay bootstrap、stale score fieldはquarantineし、
+Runtime Pへ入れない。次の未埋込high-support work blockは
+`WB-C1_rendered_affordance_objectizer`。現行標準オラクルは
 `35 / 183`、RHAE `18.821945363%`で、P11開始はHOLDである。
 
 P10ではrelease state固定、公式接続、Kaggle作業を実行・完了扱いしない。

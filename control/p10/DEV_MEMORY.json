@@ -759,6 +759,61 @@
         "active P compile or promotion",
         "P11 phase transition"
       ]
+    },
+    {
+      "memory_id": "m-dev:p10-c12-closed-negative-v26",
+      "lifecycle": "ACTIVE_CLOSED_NEGATIVE",
+      "probed_hypotheses": [
+        "H44-reuse-primary-layout-mode-commit-surface",
+        "H45-reuse-auxiliary-layout-mode-replay-surface"
+      ],
+      "held_hypothesis": "H46-rendered-affordance-objectizer",
+      "rejected_hypotheses": [
+        "H44-reuse-primary-layout-mode-commit-surface",
+        "H45-reuse-auxiliary-layout-mode-replay-surface"
+      ],
+      "failure_signatures": [
+        "layout-mode-probes-zero-progress-no-hazard-separator"
+      ],
+      "evidence": [
+        "the primary frozen C12 source matches P3 provenance at 1,700,713 bytes and SHA-256 3ca11339393f4c4410974e676cf163099a2da36030d869dd10c45d5c4364df40",
+        "the auxiliary frozen layout source matches P3 provenance at 185,866 bytes and SHA-256 bb9ce326f52709ad9395c1a7db959c520f8b634750265f735db5edda827479fd",
+        "the primary source accounts five targets two hundred twelve probes and one hundred forty visible changes",
+        "the auxiliary source accounts five targets one hundred seventy-six probes and eighty-six visible changes",
+        "combined progress GAME_OVER progress hazard promotion and positive pre-action separator counts remain zero",
+        "the primary contract mismatch auxiliary public replay bootstrap and stale score fields are quarantined",
+        "HDS rejects both positive layout-mode claims and admits negative conclusions only",
+        "active P score and the thirty-five-level adoption boundary remain unchanged"
+      ],
+      "remaining_falsifiers": [
+        "a retained C12 count source size or digest differs",
+        "a closed layout-mode surface is retried without a new rendered variable",
+        "a replay-bootstrapped or stale-score artifact enters runtime routing",
+        "active P or score changes without a positive HDS-admitted intervention"
+      ],
+      "resume_conditions": [
+        "do not retry either frozen layout-mode surface",
+        "select WB-C1_rendered_affordance_objectizer as the next coverage-ranked work block",
+        "require identity-free rendered object and affordance variables rather than raw layout hashes",
+        "retain C2 at CLUSTER_STABLE C3 at LOCAL_PROBE HOLD and C10 at COMPOSABLE with its runtime policy rejected",
+        "keep P11 gated until all one hundred eighty-three levels complete"
+      ],
+      "related_artifacts": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/p10_c12_closed_negative_audit.py",
+        "evidence/p10/development/c12_layout_mode_closed_negative_v1/C12_CLOSED_NEGATIVE_ADMISSION_AUDIT.json",
+        "evidence/p10/development/c12_layout_mode_closed_negative_v1/LEGACY_C12_LAYOUT_MODE_COMMIT_DISCRIMINATOR_CAPABILITY.json",
+        "evidence/p10/development/c12_layout_mode_closed_negative_v1/LEGACY_LAYOUT_MODE_DISCRIMINATOR_HARNESS.json",
+        "analysis/development/CAPABILITY_BUILD_QUEUE.json"
+      ],
+      "applicability": [
+        "P10 development-only C12 closed-negative memory and retry suppression"
+      ],
+      "non_applicability": [
+        "runtime action routing",
+        "score progress",
+        "active P compile or promotion",
+        "P11 phase transition"
+      ]
     }
   ]
 }

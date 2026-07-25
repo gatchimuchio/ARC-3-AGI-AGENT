@@ -629,6 +629,44 @@
         "evidence/p10/development/directional_settle_composition_v1/DIRECTIONAL_SETTLE_CANDIDATE_TARGET_COMPACT.json"
       ],
       "maximum_information_gain_next": "run WB-C12_layout_mode_commit_discriminator; reopen KA59 composition only with a materially new visible successor-obligation state"
+    },
+    {
+      "decision_id": "j-dev:p10-c12-layout-mode-negative-admission-v26",
+      "authority": "development-hds-only",
+      "status": "REJECT",
+      "selected_hypotheses": [
+        "H44-reuse-primary-layout-mode-commit-surface",
+        "H45-reuse-auxiliary-layout-mode-replay-surface"
+      ],
+      "held_hypothesis": "H46-rendered-affordance-objectizer",
+      "tier_decisions": {
+        "FROZEN_SOURCE_ADMISSION": "PASS_NEGATIVE_ONLY",
+        "LOCAL_PROBE": "CLOSED_NEGATIVE",
+        "CLUSTER_STABLE": "REJECT",
+        "COMPOSABLE": "REJECT",
+        "RUNTIME_P_COMPILE": "HOLD",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "two-p3-provenance-exact-sources-retained",
+        "five-primary-targets-and-two-hundred-twelve-probes-accounted",
+        "five-auxiliary-targets-and-one-hundred-seventy-six-probes-accounted",
+        "two-hundred-twenty-six-combined-visible-changes",
+        "three-hundred-eighty-eight-combined-probes-zero-progress",
+        "progress-hazard-and-promotion-separators-zero",
+        "legacy-contract-spec-mismatch-quarantined",
+        "auxiliary-public-replay-bootstrap-quarantined",
+        "positive-generalization-claim-rejected"
+      ],
+      "evidence_ref": "evidence/p10/development/c12_layout_mode_closed_negative_v1/C12_CLOSED_NEGATIVE_ADMISSION_AUDIT.json",
+      "supporting_evidence": [
+        "evidence/p10/development/c12_layout_mode_closed_negative_v1/LEGACY_C12_LAYOUT_MODE_COMMIT_DISCRIMINATOR_CAPABILITY.json",
+        "evidence/p10/development/c12_layout_mode_closed_negative_v1/LEGACY_LAYOUT_MODE_DISCRIMINATOR_HARNESS.json"
+      ],
+      "maximum_information_gain_next": "do not retry either frozen layout-mode surface; run WB-C1_rendered_affordance_objectizer"
     }
   ]
 }

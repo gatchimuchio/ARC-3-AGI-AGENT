@@ -798,6 +798,9 @@ def _build_coverage(
             "C7_target_contact_boundary_verifier": (
                 "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
             ),
+            "C12_layout_mode_commit_discriminator": (
+                "LOCAL_PROBE_CLOSED_NEGATIVE_NEGATIVE_ONLY"
+            ),
             "C5_stale_settle_frame_controller": (
                 "BOUNDED_OLD_ACTION_REPLAY_LOCAL_PROBE_REJECTED"
             ),
@@ -979,6 +982,7 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                 if capability_id
                 in {
                     "C7_target_contact_boundary_verifier",
+                    "C12_layout_mode_commit_discriminator",
                     "C5_stale_settle_frame_controller",
                 }
                 else "NOT_STARTED"
@@ -1043,6 +1047,53 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                 "same_surface_retry_authorized": False,
                 "runtime_p_promotion_authorized": False,
             }
+        elif capability_id == "C12_layout_mode_commit_discriminator":
+            work_status = "CLOSED_NEGATIVE"
+            implementation_evidence = {
+                "admission_audit": (
+                    "evidence/p10/development/"
+                    "c12_layout_mode_closed_negative_v1/"
+                    "C12_CLOSED_NEGATIVE_ADMISSION_AUDIT.json"
+                ),
+                "retained_primary_legacy_source": (
+                    "evidence/p10/development/"
+                    "c12_layout_mode_closed_negative_v1/"
+                    "LEGACY_C12_LAYOUT_MODE_COMMIT_"
+                    "DISCRIMINATOR_CAPABILITY.json"
+                ),
+                "retained_primary_source_sha256": (
+                    "3ca11339393f4c4410974e676cf163099a2da36030d86"
+                    "9dd10c45d5c4364df40"
+                ),
+                "retained_auxiliary_legacy_source": (
+                    "evidence/p10/development/"
+                    "c12_layout_mode_closed_negative_v1/"
+                    "LEGACY_LAYOUT_MODE_DISCRIMINATOR_HARNESS.json"
+                ),
+                "retained_auxiliary_source_sha256": (
+                    "bb9ce326f52709ad9395c1a7db959c520f8b634750265"
+                    "f735db5edda827479fd"
+                ),
+                "primary_target_count": 5,
+                "primary_total_probe_count": 212,
+                "primary_changed_probe_count": 140,
+                "primary_layout_mode_changed_probe_count": 104,
+                "auxiliary_target_count": 5,
+                "auxiliary_total_probe_count": 176,
+                "auxiliary_changed_probe_count": 86,
+                "combined_probe_count": 388,
+                "combined_changed_probe_count": 226,
+                "combined_progress_count": 0,
+                "combined_game_over_count": 0,
+                "progress_separator_variable_count": 0,
+                "hazard_separator_variable_count": 0,
+                "promotion_eligible_variable_count": 0,
+                "negative_only": True,
+                "legacy_contract_spec_mismatch_quarantined": True,
+                "auxiliary_public_replay_bootstrap_quarantined": True,
+                "same_surface_retry_authorized": False,
+                "runtime_p_promotion_authorized": False,
+            }
         elif capability_id == "C5_stale_settle_frame_controller":
             work_status = "LOCAL_AXIS_CLOSED_NEGATIVE"
             implementation_evidence = {
@@ -1097,7 +1148,7 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
             "selection_policy": {
                 "primary": "coverage before next-level order",
                 "next_unembedded_work_block": (
-                    "WB-C12_layout_mode_commit_discriminator"
+                    "WB-C1_rendered_affordance_objectizer"
                 ),
                 "forbidden": [
                     "one Python operator per unresolved level",
@@ -1143,10 +1194,11 @@ def _build_queue(coverage: Mapping[str, Any]) -> dict[str, Any]:
                     "runtime promotion or a score claim."
                 ),
                 "next_work_block_id": (
-                    "WB-C12_layout_mode_commit_discriminator"
+                    "WB-C1_rendered_affordance_objectizer"
                 ),
                 "closed_negative_work_blocks": [
                     "WB-C7_target_contact_boundary_verifier",
+                    "WB-C12_layout_mode_commit_discriminator",
                     "WB-C5_stale_settle_frame_controller:"
                     "bounded-old-action-replay-axis",
                 ],

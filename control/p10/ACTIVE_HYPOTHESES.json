@@ -1,6 +1,6 @@
 {
   "schema_version": "arc3-development-hypotheses-v1",
-  "frame_id": "p10-v25-c7-c5-closed-negative-audit",
+  "frame_id": "p10-v26-c12-layout-mode-closed-negative-audit",
   "hypotheses": [
     {
       "hypothesis_id": "H1-direct-existing-HDS-extension",
@@ -1270,6 +1270,96 @@
       "contamination_risk": 0.0,
       "regression_risk": 0.2,
       "status": "UNOBSERVED_HOLD",
+      "j_dev_decision": "HOLD"
+    },
+    {
+      "hypothesis_id": "H44-reuse-primary-layout-mode-commit-surface",
+      "kind": "H1",
+      "summary": "Reuse the frozen primary C12 layout-mode commit surface as a positive progress or hazard discriminator.",
+      "predicted_effect": [
+        "visible layout-vector and layout-mode changes separate progress from cosmetic redraws",
+        "the same separator transfers across five retained target structures",
+        "a positive separator advances beyond LOCAL_PROBE"
+      ],
+      "applicability": [
+        "development-only primary C12 frozen legacy probe admission"
+      ],
+      "required_evidence": [
+        "P3 provenance-exact retained source",
+        "positive progress or reusable hazard separators",
+        "contract-spec conformance"
+      ],
+      "falsifier": [
+        "all probes remain layout effects with zero progress and hazard separators",
+        "the retained probe reports a contract-spec mismatch"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.48,
+      "information_gain": 0.76,
+      "contamination_risk": 0.35,
+      "regression_risk": 0.08,
+      "status": "CLOSED_NEGATIVE",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H45-reuse-auxiliary-layout-mode-replay-surface",
+      "kind": "H2",
+      "summary": "Reuse the broader frozen layout-mode harness as a positive pre-action discriminator.",
+      "predicted_effect": [
+        "large redraw and layout-transition classes expose a reusable positive pre-action variable",
+        "the auxiliary surface resolves ambiguity left by the primary C12 harness",
+        "the result remains valid without replay bootstrap"
+      ],
+      "applicability": [
+        "development-only auxiliary frozen layout-mode harness"
+      ],
+      "required_evidence": [
+        "P3 provenance-exact retained source",
+        "positive pre-action variable across retained structures",
+        "replay-independent contrast"
+      ],
+      "falsifier": [
+        "positive pre-action variable count remains zero",
+        "the harness depends on quarantined public replay bootstrap"
+      ],
+      "implementation_cost": 1,
+      "rollback_cost": 1,
+      "generality": 0.42,
+      "information_gain": 0.68,
+      "contamination_risk": 0.5,
+      "regression_risk": 0.08,
+      "status": "CLOSED_NEGATIVE",
+      "j_dev_decision": "REJECT"
+    },
+    {
+      "hypothesis_id": "H46-rendered-affordance-objectizer",
+      "kind": "H3",
+      "summary": "Build an identity-free rendered-affordance objectizer for C1 before revisiting any closed layout-mode surface.",
+      "predicted_effect": [
+        "rendered structures are represented as reusable objects and affordances before action selection",
+        "object relations expose a materially new variable absent from raw layout hashes",
+        "the capability can be tested across the C1 coverage cluster without task identity"
+      ],
+      "applicability": [
+        "coverage-ranked C1 rendered structures with development identity removed only at Runtime P compilation"
+      ],
+      "required_evidence": [
+        "positive and negative cross-structure objectization contrasts",
+        "identity-free rendered inputs",
+        "removal and composition audits before Runtime P compile"
+      ],
+      "falsifier": [
+        "the representation is only a layout hash task identity or coordinate table",
+        "the proposed objects do not improve any prospective structural distinction"
+      ],
+      "implementation_cost": 3,
+      "rollback_cost": 1,
+      "generality": 0.92,
+      "information_gain": 0.84,
+      "contamination_risk": 0.0,
+      "regression_risk": 0.16,
+      "status": "UNOBSERVED_SELECTED_NEXT",
       "j_dev_decision": "HOLD"
     }
   ]
