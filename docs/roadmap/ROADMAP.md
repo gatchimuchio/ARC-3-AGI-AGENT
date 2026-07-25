@@ -10,6 +10,11 @@
 
 本索引はphase状態だけを保持し、正本本文を重複しない。
 
+P10の現行開発単位と証拠境界は、次の補正正本を追加適用する。
+
+- [`P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`](P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md)
+- source attachment SHA-256: `113ac0516e500679792e57fbc73f21ad078d19929ae39c11ff185ac1f9a353ef`
+
 ## 現在状態
 
 | Phase | 名称 | 状態 |
@@ -35,11 +40,20 @@
 P10では次だけを行う。
 
 - 保持済みOFFLINE sampleの全game / 全level攻略
+- P3 provenanceに拘束した全705 analysis sourceと183行の開発分析記憶
+- mechanics / failure / blocker / capability coverage単位の横断開発
+- task-aware Development Memoryからidentity-free Runtime Pへのlate subtraction
+- game単位checkpoint、exact-condition resume、oracle互換集約
+- `LOCAL_PROBE -> CLUSTER_STABLE -> COMPOSABLE`のHDS段階判定
 - identity-free P0候補、M0候補、ARC3用HDS Frameの形成
 - P-A / P-B / hybridの同一条件比較
 - failureのM保持と明示的compilerによる次版P形成
 - error、GAME_OVER、timeout、無限loop、max-action停止の解消
 - 全trace保存と同一release条件での再現確認
+
+現行境界はactive P `v27 / v27 / v26`、HDS採用済み`35 / 183`である。
+C2/C3 shadow能力は`LOCAL_PROBE`だけをPASSとし、score、active P、
+`CLUSTER_STABLE`、`COMPOSABLE`、P11開始はすべてHOLDである。
 
 P10ではrelease state固定、公式接続、Kaggle作業を実行・完了扱いしない。
 

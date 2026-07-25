@@ -1,0 +1,753 @@
+{
+  "artifact_type": "arc3_p10_capability_build_queue",
+  "composition_tests": [
+    {
+      "game_id": "ka59-38d34dbb",
+      "level": 7,
+      "new_dedicated_operator_allowed": false,
+      "purpose": "Test composition of existing multi-actor, directional-force, and obligation capabilities.",
+      "runtime_promotion_authorized": false,
+      "test_id": "COMPOSE-KA59-REMAINING-BOUNDARY"
+    }
+  ],
+  "content_digest": "arc3_p10_capability_build_queue:904dca316013a5c72319f8ee1fac22dbc9d410e0198c71dc18a4993df65e9b97",
+  "development_only": true,
+  "hds_gate": {
+    "reason": "Queue construction authorizes development probes, not runtime promotion or a score claim.",
+    "status": "HOLD"
+  },
+  "queue": [
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C2_visible_effect_transition_model",
+        "C3_commit_boundary_predictor"
+      ],
+      "coverage": {
+        "c2_link_count": 107,
+        "c3_link_count": 97,
+        "overlap_count": 97,
+        "union_level_count": 107,
+        "union_level_refs": [
+          {
+            "game_id": "ar25-0c556536",
+            "level": 3
+          },
+          {
+            "game_id": "ar25-0c556536",
+            "level": 4
+          },
+          {
+            "game_id": "ar25-0c556536",
+            "level": 5
+          },
+          {
+            "game_id": "ar25-0c556536",
+            "level": 6
+          },
+          {
+            "game_id": "ar25-0c556536",
+            "level": 7
+          },
+          {
+            "game_id": "ar25-0c556536",
+            "level": 8
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "level": 2
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "level": 3
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "level": 4
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "level": 5
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "level": 6
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "level": 7
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "level": 8
+          },
+          {
+            "game_id": "bp35-0a0ad940",
+            "level": 9
+          },
+          {
+            "game_id": "cd82-fb555c5d",
+            "level": 3
+          },
+          {
+            "game_id": "cd82-fb555c5d",
+            "level": 4
+          },
+          {
+            "game_id": "cd82-fb555c5d",
+            "level": 5
+          },
+          {
+            "game_id": "cd82-fb555c5d",
+            "level": 6
+          },
+          {
+            "game_id": "cn04-2fe56bfb",
+            "level": 2
+          },
+          {
+            "game_id": "cn04-2fe56bfb",
+            "level": 3
+          },
+          {
+            "game_id": "cn04-2fe56bfb",
+            "level": 4
+          },
+          {
+            "game_id": "cn04-2fe56bfb",
+            "level": 5
+          },
+          {
+            "game_id": "cn04-2fe56bfb",
+            "level": 6
+          },
+          {
+            "game_id": "dc22-fdcac232",
+            "level": 4
+          },
+          {
+            "game_id": "dc22-fdcac232",
+            "level": 5
+          },
+          {
+            "game_id": "dc22-fdcac232",
+            "level": 6
+          },
+          {
+            "game_id": "g50t-5849a774",
+            "level": 2
+          },
+          {
+            "game_id": "g50t-5849a774",
+            "level": 3
+          },
+          {
+            "game_id": "g50t-5849a774",
+            "level": 4
+          },
+          {
+            "game_id": "g50t-5849a774",
+            "level": 5
+          },
+          {
+            "game_id": "g50t-5849a774",
+            "level": 6
+          },
+          {
+            "game_id": "g50t-5849a774",
+            "level": 7
+          },
+          {
+            "game_id": "ka59-38d34dbb",
+            "level": 2
+          },
+          {
+            "game_id": "ka59-38d34dbb",
+            "level": 3
+          },
+          {
+            "game_id": "ka59-38d34dbb",
+            "level": 4
+          },
+          {
+            "game_id": "ka59-38d34dbb",
+            "level": 5
+          },
+          {
+            "game_id": "ka59-38d34dbb",
+            "level": 6
+          },
+          {
+            "game_id": "ka59-38d34dbb",
+            "level": 7
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 2
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 3
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 4
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 5
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 6
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 7
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 8
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 9
+          },
+          {
+            "game_id": "lf52-271a04aa",
+            "level": 10
+          },
+          {
+            "game_id": "lp85-305b61c3",
+            "level": 5
+          },
+          {
+            "game_id": "lp85-305b61c3",
+            "level": 6
+          },
+          {
+            "game_id": "lp85-305b61c3",
+            "level": 7
+          },
+          {
+            "game_id": "lp85-305b61c3",
+            "level": 8
+          },
+          {
+            "game_id": "ls20-9607627b",
+            "level": 2
+          },
+          {
+            "game_id": "ls20-9607627b",
+            "level": 3
+          },
+          {
+            "game_id": "ls20-9607627b",
+            "level": 4
+          },
+          {
+            "game_id": "ls20-9607627b",
+            "level": 5
+          },
+          {
+            "game_id": "ls20-9607627b",
+            "level": 6
+          },
+          {
+            "game_id": "ls20-9607627b",
+            "level": 7
+          },
+          {
+            "game_id": "m0r0-492f87ba",
+            "level": 2
+          },
+          {
+            "game_id": "m0r0-492f87ba",
+            "level": 3
+          },
+          {
+            "game_id": "m0r0-492f87ba",
+            "level": 4
+          },
+          {
+            "game_id": "m0r0-492f87ba",
+            "level": 5
+          },
+          {
+            "game_id": "m0r0-492f87ba",
+            "level": 6
+          },
+          {
+            "game_id": "r11l-495a7899",
+            "level": 2
+          },
+          {
+            "game_id": "r11l-495a7899",
+            "level": 3
+          },
+          {
+            "game_id": "r11l-495a7899",
+            "level": 4
+          },
+          {
+            "game_id": "r11l-495a7899",
+            "level": 5
+          },
+          {
+            "game_id": "r11l-495a7899",
+            "level": 6
+          },
+          {
+            "game_id": "re86-8af5384d",
+            "level": 6
+          },
+          {
+            "game_id": "re86-8af5384d",
+            "level": 7
+          },
+          {
+            "game_id": "re86-8af5384d",
+            "level": 8
+          },
+          {
+            "game_id": "s5i5-18d95033",
+            "level": 7
+          },
+          {
+            "game_id": "s5i5-18d95033",
+            "level": 8
+          },
+          {
+            "game_id": "sc25-635fd71a",
+            "level": 3
+          },
+          {
+            "game_id": "sc25-635fd71a",
+            "level": 4
+          },
+          {
+            "game_id": "sc25-635fd71a",
+            "level": 5
+          },
+          {
+            "game_id": "sc25-635fd71a",
+            "level": 6
+          },
+          {
+            "game_id": "sk48-d8078629",
+            "level": 2
+          },
+          {
+            "game_id": "sk48-d8078629",
+            "level": 3
+          },
+          {
+            "game_id": "sk48-d8078629",
+            "level": 4
+          },
+          {
+            "game_id": "sk48-d8078629",
+            "level": 5
+          },
+          {
+            "game_id": "sk48-d8078629",
+            "level": 6
+          },
+          {
+            "game_id": "sk48-d8078629",
+            "level": 7
+          },
+          {
+            "game_id": "sk48-d8078629",
+            "level": 8
+          },
+          {
+            "game_id": "sp80-589a99af",
+            "level": 3
+          },
+          {
+            "game_id": "sp80-589a99af",
+            "level": 4
+          },
+          {
+            "game_id": "sp80-589a99af",
+            "level": 5
+          },
+          {
+            "game_id": "sp80-589a99af",
+            "level": 6
+          },
+          {
+            "game_id": "tn36-ef4dde99",
+            "level": 2
+          },
+          {
+            "game_id": "tn36-ef4dde99",
+            "level": 3
+          },
+          {
+            "game_id": "tn36-ef4dde99",
+            "level": 4
+          },
+          {
+            "game_id": "tn36-ef4dde99",
+            "level": 5
+          },
+          {
+            "game_id": "tn36-ef4dde99",
+            "level": 6
+          },
+          {
+            "game_id": "tn36-ef4dde99",
+            "level": 7
+          },
+          {
+            "game_id": "tu93-0768757b",
+            "level": 6
+          },
+          {
+            "game_id": "tu93-0768757b",
+            "level": 7
+          },
+          {
+            "game_id": "tu93-0768757b",
+            "level": 8
+          },
+          {
+            "game_id": "tu93-0768757b",
+            "level": 9
+          },
+          {
+            "game_id": "vc33-5430563c",
+            "level": 4
+          },
+          {
+            "game_id": "vc33-5430563c",
+            "level": 5
+          },
+          {
+            "game_id": "vc33-5430563c",
+            "level": 6
+          },
+          {
+            "game_id": "vc33-5430563c",
+            "level": 7
+          },
+          {
+            "game_id": "wa30-ee6fef47",
+            "level": 4
+          },
+          {
+            "game_id": "wa30-ee6fef47",
+            "level": 5
+          },
+          {
+            "game_id": "wa30-ee6fef47",
+            "level": 6
+          },
+          {
+            "game_id": "wa30-ee6fef47",
+            "level": 7
+          },
+          {
+            "game_id": "wa30-ee6fef47",
+            "level": 8
+          },
+          {
+            "game_id": "wa30-ee6fef47",
+            "level": 9
+          }
+        ]
+      },
+      "current_tier": "LOCAL_PROBE",
+      "dedicated_level_operator_allowed": false,
+      "implementation_evidence": {
+        "action_selection_influence": false,
+        "code": "ARC-AGI-3-Agents/arc3_agi_agent/cross_cutting_transition.py",
+        "runtime_p_promotion_authorized": false,
+        "shadow_report_field": "development_transition_probe",
+        "tests": "ARC-AGI-3-Agents/tests/unit/test_cross_cutting_transition_p10.py"
+      },
+      "promotion_gate": "No Runtime P compile before cross-game CLUSTER_STABLE evidence and identity-free COMPOSABLE verification.",
+      "rank": 1,
+      "required_contracts": [
+        "rendered pre/post state abstraction",
+        "visible local-effect classification",
+        "positive/negative transition contrast",
+        "progress/commit/hazard boundary prediction",
+        "HDS reobserve and rollback obligations"
+      ],
+      "selection_basis": "maximum cross-game structural coverage",
+      "work_block_id": "WB-C2-C3-VISIBLE-EFFECT-COMMIT"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C10_phase_timer_unlock_model"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 35,
+        "frontier_count": 9,
+        "total_link_count": 44
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 2,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C10_phase_timer_unlock_model"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C7_target_contact_boundary_verifier"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 31,
+        "frontier_count": 7,
+        "total_link_count": 38
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 3,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C7_target_contact_boundary_verifier"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C12_layout_mode_commit_discriminator"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 24,
+        "frontier_count": 5,
+        "total_link_count": 29
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 4,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C12_layout_mode_commit_discriminator"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C1_rendered_affordance_objectizer"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 15,
+        "frontier_count": 2,
+        "total_link_count": 17
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 5,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C1_rendered_affordance_objectizer"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C14_symbolic_relation_commit_model"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 12,
+        "frontier_count": 3,
+        "total_link_count": 15
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 6,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C14_symbolic_relation_commit_model"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C8_helper_handoff_state_model"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 11,
+        "frontier_count": 3,
+        "total_link_count": 14
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 7,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C8_helper_handoff_state_model"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C4_hazard_rollback_verifier"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 10,
+        "frontier_count": 3,
+        "total_link_count": 13
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 8,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C4_hazard_rollback_verifier"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C6_action_channel_emitter_model"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 8,
+        "frontier_count": 2,
+        "total_link_count": 10
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 9,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C6_action_channel_emitter_model"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C5_stale_settle_frame_controller"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 6,
+        "frontier_count": 2,
+        "total_link_count": 8
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 10,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C5_stale_settle_frame_controller"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C9_token_slot_submission_verifier"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 6,
+        "frontier_count": 2,
+        "total_link_count": 8
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 11,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C9_token_slot_submission_verifier"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C11_route_terminal_reachability_verifier"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 5,
+        "frontier_count": 2,
+        "total_link_count": 7
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 12,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C11_route_terminal_reachability_verifier"
+    },
+    {
+      "candidate_tiers": [
+        "LOCAL_PROBE",
+        "CLUSTER_STABLE",
+        "COMPOSABLE"
+      ],
+      "capability_ids": [
+        "C13_support_bridge_slider_model"
+      ],
+      "coverage": {
+        "blocked_inherited_level_count": 3,
+        "frontier_count": 1,
+        "total_link_count": 4
+      },
+      "current_tier": "NOT_STARTED",
+      "dedicated_level_operator_allowed": false,
+      "promotion_gate": "Require reusable positive/negative evidence and identity-free composition before Runtime P compile.",
+      "rank": 13,
+      "selection_basis": "remaining capability coverage",
+      "work_block_id": "WB-C13_support_bridge_slider_model"
+    }
+  ],
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-p10-development-analysis-v1",
+  "selection_policy": {
+    "forbidden": [
+      "one Python operator per unresolved level",
+      "operator count as progress",
+      "stale-score file-wide rejection",
+      "KA59-only tunnel vision",
+      "runtime identity before output compilation"
+    ],
+    "primary": "coverage before next-level order",
+    "runtime_compile_boundary": "Only a COMPOSABLE candidate may be horizontally subtracted into identity-free Runtime P."
+  }
+}

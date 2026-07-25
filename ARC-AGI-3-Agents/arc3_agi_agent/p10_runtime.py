@@ -11,6 +11,10 @@ from arcengine import FrameDataRaw
 
 from .adapters.offline_arcade import OfflineArcadeEmissionInterface
 from .context import BoundedContextState
+from .cross_cutting_transition import (
+    C2C3CapabilityProbe,
+    visual_action_from_emission,
+)
 from .instruction_body import (
     InstructionBody,
     load_p10_candidate_hybrid_instruction_body,
@@ -41,7 +45,7 @@ from .search_reset import (
     PureLLMSearchResetExecutor,
     SearchResetExecutionResult,
 )
-from .visual_explorer import last_rendered_grid
+from .visual_explorer import analyze_scene, last_rendered_grid
 
 _RESET_ACTION_ID = 0
 P10InstructionVariant = Literal["P-A", "P-B", "hybrid"]
@@ -181,6 +185,10 @@ class P10OfflineSampleRuntime:
     )
     level_checkpoint_version: int = field(default=0, init=False)
     _observed_progress_count: int = field(default=0, init=False)
+    transition_probe: C2C3CapabilityProbe = field(
+        default_factory=C2C3CapabilityProbe,
+        init=False,
+    )
 
     def __post_init__(self) -> None:
         if self.instruction_variant not in {"P-A", "P-B", "hybrid"}:
@@ -235,10 +243,82 @@ class P10OfflineSampleRuntime:
         if current.levels_completed > self._observed_progress_count:
             self.level_checkpoint_version = memory.version
             self._observed_progress_count = current.levels_completed
-        return self.runtime.run_cycle(
+        cycle = self.runtime.run_cycle(
             current,
             action_count=action_count,
         )
+        emission = cycle.kernel_result.emission_result
+        after = cycle.after_frame
+        if emission is not None and after is not None:
+            selected = next(
+                (
+                    candidate
+                    for candidate in cycle.kernel_result.candidates
+                    if candidate.candidate_id == emission.candidate_id
+                ),
+                None,
+            )
+            if selected is None or not selected.steps:
+                self.transition_probe.record_fault("CANDIDATE_MISSING")
+            else:
+                before_grid = last_rendered_grid(current.frame)
+                after_grid = last_rendered_grid(after.frame)
+                if not before_grid or not after_grid:
+                    self.transition_probe.record_fault("FRAME_MISSING")
+                else:
+                    before_actions = tuple(
+                        sorted(
+                            {
+                                int(action)
+                                for action in current.available_actions
+                                if isinstance(action, int)
+                                and not isinstance(action, bool)
+                                and 1 <= action <= 7
+                            }
+                        )
+                    )
+                    after_actions = tuple(
+                        sorted(
+                            {
+                                int(action)
+                                for action in after.available_actions
+                                if isinstance(action, int)
+                                and not isinstance(action, bool)
+                                and 1 <= action <= 7
+                            }
+                        )
+                    )
+                    try:
+                        before_scene = analyze_scene(
+                            before_grid,
+                            before_actions,
+                        )
+                        after_scene = analyze_scene(
+                            after_grid,
+                            after_actions,
+                        )
+                        action = visual_action_from_emission(
+                            candidate_id=selected.candidate_id,
+                            step=selected.steps[0],
+                            provenance=selected.provenance,
+                        )
+                        self.transition_probe.observe(
+                            before_grid=before_grid,
+                            after_grid=after_grid,
+                            before_scene=before_scene,
+                            after_scene=after_scene,
+                            action=action,
+                            terminal_state=str(after.state.value),
+                            progress_observed=(
+                                after.levels_completed
+                                > current.levels_completed
+                            ),
+                        )
+                    except (TypeError, ValueError):
+                        self.transition_probe.record_fault(
+                            "INPUT_REJECTED"
+                        )
+        return cycle
 
     def recover(
         self,

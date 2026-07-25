@@ -187,8 +187,7 @@ def compact_p10_run(value: Mapping[str, object]) -> dict[str, object]:
             (str, bytes, bytearray),
         ):
             raise TypeError("P10_TRACE_EVENTS_INVALID")
-        compact_reports.append(
-            {
+        compact_report: dict[str, object] = {
                 "game_id": str(report.get("game_id", "")),
                 "actions": _integer(report.get("actions"), "actions"),
                 "recoveries": _integer(
@@ -277,8 +276,15 @@ def compact_p10_run(value: Mapping[str, object]) -> dict[str, object]:
                 "search_reset_evidence_signatures": copy.deepcopy(
                     report.get("search_reset_evidence_signatures", ())
                 ),
-            }
-        )
+        }
+        transition_probe = report.get("development_transition_probe")
+        if transition_probe is not None:
+            if not isinstance(transition_probe, Mapping):
+                raise TypeError("P10_TRANSITION_PROBE_INVALID")
+            compact_report["development_transition_probe"] = (
+                copy.deepcopy(dict(transition_probe))
+            )
+        compact_reports.append(compact_report)
     return {
         field: copy.deepcopy(stable[field])
         for field in _TOP_LEVEL_FIELDS

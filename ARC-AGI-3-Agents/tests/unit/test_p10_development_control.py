@@ -11,12 +11,6 @@ CONTROL_DIR = REPOSITORY_ROOT / "control" / "p10"
 BUNDLE_DIR = (
     REPOSITORY_ROOT / "ARC-AGI-3-Agents" / "arc3_agi_agent" / "bundles"
 )
-AUTHORITY_PATH = (
-    REPOSITORY_ROOT
-    / "docs"
-    / "roadmap"
-    / "ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md"
-)
 REQUIRED_CONTROL_FILES = frozenset(
     {
         "CURRENT_FRAME.json",
@@ -50,10 +44,11 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
     def test_repository_authority_copy_digest_is_fixed(self) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
+        authority_path = REPOSITORY_ROOT / frame["authority"]["document"]
         expected = frame["authority"]["repository_sha256_lf"]
 
         self.assertEqual(
-            hashlib.sha256(AUTHORITY_PATH.read_bytes()).hexdigest(),
+            hashlib.sha256(authority_path.read_bytes()).hexdigest(),
             expected,
         )
 
@@ -108,7 +103,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
         self.assertEqual(candidate["status"], "PROMOTED")
         self.assertEqual(registry["hds_decision"], "PROMOTE")
 
-    def test_v21_directional_force_route_promotion_is_current_control_authority(
+    def test_v22_all_task_compilation_preserves_v21_active_p(
         self,
     ) -> None:
         frame = _json(CONTROL_DIR / "CURRENT_FRAME.json")
@@ -123,7 +118,7 @@ class P10DevelopmentControlTests(unittest.TestCase):
 
         self.assertEqual(
             frame["frame_id"],
-            "p10-v21-directional-force-route-promotion-v1",
+            "p10-v22-all-task-capability-compilation-v1",
         )
         self.assertEqual(frame["self_check"]["stable_completed_levels"], 35)
         self.assertEqual(capabilities["stable_completed_levels"], 35)
@@ -159,6 +154,35 @@ class P10DevelopmentControlTests(unittest.TestCase):
         )
         self.assertEqual(promotion["status"], "PROMOTE")
         self.assertTrue(promotion["allow_p_promote"])
+
+        strategy = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-all-task-capability-strategy-v22"
+        )
+        self.assertEqual(
+            strategy["selected_hypothesis"],
+            "H30-restore-task-aware-development-memory-and-late-subtraction",
+        )
+        self.assertEqual(
+            strategy["rejected_hypothesis"],
+            "H29-continue-per-level-dedicated-operator-loop",
+        )
+        probe = next(
+            item
+            for item in decisions
+            if item["decision_id"]
+            == "j-dev:p10-c2-c3-shadow-tier-v22"
+        )
+        self.assertEqual(probe["tier_decisions"]["LOCAL_PROBE"], "PASS")
+        self.assertEqual(
+            probe["tier_decisions"]["CLUSTER_STABLE"],
+            "HOLD",
+        )
+        self.assertFalse(probe["allow_action_influence"])
+        self.assertFalse(probe["allow_p_compile"])
+        self.assertFalse(probe["allow_p_promote"])
 
     def test_v14_hypotheses_and_hds_promotion_are_recorded(self) -> None:
         hypotheses = _json(CONTROL_DIR / "ACTIVE_HYPOTHESES.json")[

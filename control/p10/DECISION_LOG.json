@@ -364,6 +364,49 @@
         "target-completed-level-improvement-reproduced"
       ],
       "evidence_ref": "evidence/p10/p_update/iteration_21_regression/p10_promotion_receipt_v1.json"
+    },
+    {
+      "decision_id": "j-dev:p10-all-task-capability-strategy-v22",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H30-restore-task-aware-development-memory-and-late-subtraction",
+      "supporting_hypothesis": "H31-coverage-first-c2-c3-cross-cutting-shadow-probe",
+      "rejected_hypothesis": "H29-continue-per-level-dedicated-operator-loop",
+      "reason_codes": [
+        "all-seven-hundred-five-sources-match-p3-provenance",
+        "all-one-hundred-eighty-three-task-aware-rows-compile",
+        "field-level-salvage-preserves-cross-task-relations",
+        "late-subtraction-keeps-runtime-identity-free",
+        "c2-c3-union-covers-one-hundred-seven-rows",
+        "per-level-operator-loop-has-lower-information-gain"
+      ],
+      "maximum_information_gain_next": "collect reproducible cross-game C2 C3 positive negative and hazard contrasts"
+    },
+    {
+      "decision_id": "j-dev:p10-c2-c3-shadow-tier-v22",
+      "authority": "development-hds-only",
+      "status": "PROBE",
+      "selected_hypothesis": "H31-coverage-first-c2-c3-cross-cutting-shadow-probe",
+      "tier_decisions": {
+        "LOCAL_PROBE": "PASS",
+        "CLUSTER_STABLE": "HOLD",
+        "COMPOSABLE": "HOLD",
+        "RUNTIME_P_COMPILE": "HOLD",
+        "RUNTIME_P_PROMOTION": "HOLD"
+      },
+      "allow_action_influence": false,
+      "allow_p_compile": false,
+      "allow_p_promote": false,
+      "reason_codes": [
+        "all-twenty-five-first-transitions-recorded",
+        "twenty-two-visible-and-three-no-visible-contrasts",
+        "zero-errors",
+        "zero-action-influence",
+        "exact-condition-resume-reused-twenty-five-and-executed-zero",
+        "cluster-stability-and-composition-remain-unproven"
+      ],
+      "evidence_ref": "evidence/p10/development/c2_c3_local_probe_all25_max1/C2_C3_LOCAL_PROBE_AUDIT.json",
+      "maximum_information_gain_next": "repeat boundary predictions across multiple structures under checkpointed standard-budget evidence"
     }
   ]
 }

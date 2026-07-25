@@ -66,11 +66,15 @@
         "canonical 450-action active run timed out after 7200 seconds",
         "no complete report was written"
       ],
-      "status": "ACTIVE",
+      "status": "MEASUREMENT_PATH_RESOLVED_FULL_REPORT_PENDING",
       "required_resolution": [
-        "checkpoint each completed game",
-        "resume without replaying completed games",
         "assemble and validate one complete twenty-five-game report"
+      ],
+      "resolution_evidence": [
+        "per-game checkpoints are written atomically",
+        "condition manifest lifecycle variant action budget environment and ordered game set are digest-bound",
+        "all-twenty-five max-actions-one smoke completed with error zero",
+        "exact-condition resume reused twenty-five checkpoints and executed zero games"
       ]
     },
     {
@@ -216,13 +220,46 @@
         "the promoted active target completes six of seven at two hundred actions with error zero",
         "the additional unselected marker role makes the single-actor directional-force operator fail closed"
       ],
-      "status": "ACTIVE",
+      "status": "DEFERRED_TO_CAPABILITY_COMPOSITION_TEST",
       "required_resolution": [
-        "record the next unresolved rendered layout",
-        "compare at least one direct capability, representation, and composition hypothesis",
-        "require another reproducible positive target delta",
-        "bound the maximum-budget fallback cost before promotion"
+        "test composition of multi-actor directional-force and obligation capabilities",
+        "revalidate only the unmatched state variables target contact selection delta and bottom tick when composition fails",
+        "do not add a dedicated level operator"
       ]
+    },
+    {
+      "signature": "development-relational-evidence-erasure-at-ingress",
+      "structural_condition": "task identity is removed before mechanics failures blockers and capability links can be compared across the full development corpus",
+      "evidence": [
+        "the prior loop began from one unresolved anonymized layout",
+        "the P3-accounted analysis contains one hundred eighty-three task-aware rows and seven hundred five source artifacts"
+      ],
+      "status": "RESOLVED_BY_V22_DEVELOPMENT_COMPILER",
+      "required_resolution": [],
+      "resolution_evidence": [
+        "Legacy Evidence retains source identity and provenance",
+        "Development Analysis Memory retains required task-aware fields for all one hundred eighty-three rows",
+        "identity subtraction is deferred to the Development Memory to Runtime P boundary",
+        "all development artifacts declare runtime use forbidden"
+      ],
+      "falsifier": "runtime imports or routes on a development analysis artifact"
+    },
+    {
+      "signature": "cross-cutting-visible-effect-commit-boundary-gap",
+      "structural_condition": "many frontier and blocked rows require reusable rendered transition effects and commit boundaries that no current cross-context model exposes",
+      "evidence": [
+        "C2 links twenty-one frontier and eighty-six blocked rows",
+        "C3 links nineteen frontier and seventy-eight blocked rows",
+        "C2 and C3 overlap ninety-seven rows and cover a one-hundred-seven-row union",
+        "all-twenty-five first-transition shadow evidence contains twenty-two visible transitions and three no-visible transitions"
+      ],
+      "status": "ACTIVE_LOCAL_PROBE",
+      "required_resolution": [
+        "collect reproducible positive negative and hazard contrasts across multiple games and structures",
+        "demonstrate cluster-stable boundary prediction without task identity",
+        "demonstrate composition regression removal and authority audits before any Runtime P compile"
+      ],
+      "falsifier": "shadow recording changes an action or the effect and boundary relation does not transfer across independent structures"
     }
   ]
 }

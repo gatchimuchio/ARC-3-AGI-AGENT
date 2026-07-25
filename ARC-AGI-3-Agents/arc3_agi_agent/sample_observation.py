@@ -5,7 +5,6 @@ from __future__ import annotations
 from collections import Counter
 from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import cast
 
 from arcengine import FrameDataRaw
 
@@ -49,7 +48,7 @@ def _layers(frame: FrameDataRaw) -> tuple[tuple[tuple[int, ...], ...], ...]:
 
 
 def _terminal_state(frame: FrameDataRaw) -> str:
-    state = cast(str, frame.state.value).upper()
+    state = frame.state.value.upper()
     return state if state in _SUPPORTED_TERMINAL_STATES else "UNKNOWN"
 
 

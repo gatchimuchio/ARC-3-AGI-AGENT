@@ -44,6 +44,8 @@ arc3-p10-promote-candidate = "arc3_agi_agent.p10_promotion:main"
 arc3-p10-probe-candidate = "arc3_agi_agent.p10_candidate_probe:main"
 arc3-build-p10-variant-evidence = "arc3_agi_agent.p10_evidence:main"
 arc3-local-score-oracle = "arc3_agi_agent.local_score_oracle:main"
+arc3-compile-development-analysis = "arc3_agi_agent.development_analysis:main"
+arc3-build-c2-c3-probe-audit = "arc3_agi_agent.p10_transition_probe_evidence:main"
 arc3-build-minimum-certificate = "arc3_agi_agent.certificate:main"
 
 [build-system]

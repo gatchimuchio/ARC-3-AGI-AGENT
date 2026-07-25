@@ -45,6 +45,42 @@ regression:
   P0〜P9 unit / integration / certificate、strict mypy、ruff、compileall
 ```
 
+## 1.1 現行三層開発境界
+
+P10の現行開発単位は、個別level operatorではなくcapability clusterである。
+
+```text
+A Legacy Evidence
+  705 analysis JSONをpath / SHA-256 / revisionで凍結
+  identity、level関係、source参照を開発証拠として保持
+
+B Development Analysis Memory
+  25 game / 183 levelをmechanics、state、effect、failure、
+  capability、blocker、current statusで検索可能に保持
+
+C Runtime P
+  COMPOSABLEまで反証された能力だけをidentity-freeへcompile
+```
+
+四正本は[`analysis/development`](../../analysis/development)に置く。すべて
+`development_only`かつ`runtime_use: FORBIDDEN`であり、active runtimeから
+importしない。詳細は
+[`P10全タスク能力cluster補正`](../roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md)
+を参照する。
+
+現行active evidenceとの再照合は次である。
+
+| status | count |
+|---|---:|
+| `CONFIRMED` | 26 |
+| `PARTIALLY_CONFIRMED` | 1 |
+| `CONTRADICTED` | 0 |
+| `STALE` | 9 |
+| `UNOBSERVED` | 147 |
+
+35 completionは維持するが、旧bounded-suspendのまま現行で完了した9行は、
+旧field再検証まで`STALE`とする。
+
 ## 2. 現在の実装ブロック
 
 `arc3_agi_agent/visual_explorer.py`は、rendered gridから同色連結成分、
@@ -95,6 +131,19 @@ frontierが残ることをCが証拠化し、HDSがFrameを閉じた場合だけ
 `agents/templates/p10_sample_agent.py`と`p10_main.py`は、通常actionとRESETの
 双方を上記権限境界だけから実行し、full trace、P digest、M version、
 rollback decision、完了数をreportする。
+
+`arc3_agi_agent/p10_batch_checkpoint.py`はmax-actions、P variant/lifecycle、
+active manifest digest、environment code/metadata inventory、P10 runtime
+source inventory、Python、ARC Toolkit version、game集合を一つのcondition
+digestへ束縛する。各gameを独立scorecardで実行してatomic checkpointを閉じ、
+完全一致した条件だけをresumeし、local oracle互換scorecardへ集約する。
+
+`arc3_agi_agent/cross_cutting_transition.py`はC2/C3の横断候補である。rendered
+pre/post stateを、no-change、local/regional/global redraw、component
+motion/appear/disappear、action-surface change、progress、hazardへ分類し、
+commit/hazard/transition-only/no-visible-commitを分離する。現時点では
+`LOCAL_PROBE`のshadow telemetryであり、action選択、M write、external emit、
+P promotionへ一切影響しない。
 
 作業Mは同一targetへ毎cycle追加しない。初回はHDSが`ADD`、後続は観測時の
 active targetを確認して`REPLACE`を許可する。version/historyは維持しつつ、
@@ -162,6 +211,15 @@ canonical条件`OFFLINE / hybrid ACTIVE / 450 actions per game`で全25 gameを
 部分値をfull scoreとして扱わない。次のrunはgame単位checkpointとresumeを
 備えた経路で採取し、25 game / 183 levelが一つの検証済みreportへ集約される
 までP10全体のHDS判断は`HOLD`、P11開始は禁止である。
+
+checkpoint/resume実装後、`OFFLINE / hybrid ACTIVE / max-actions 1`で25 gameを
+分割実行した。25/25 report、error 0、checkpoint 25件、resume時の再実行0を
+確認した。C2/C3 shadow probeは25 transitionを記録し、visible transition
+22、no-visible-change 3、action選択影響0だった。これは計測経路と
+`LOCAL_PROBE`の証拠であり、level completion、local score、CLUSTER_STABLE、
+Runtime P promotionの証拠ではない。正本は
+[`C2_C3_LOCAL_PROBE_AUDIT.json`](../../evidence/p10/development/c2_c3_local_probe_all25_max1/C2_C3_LOCAL_PROBE_AUDIT.json)
+である。
 
 v15では、既知のstate-changing actionより未観測prototypeを優先する
 candidate policyを五つのbounded structureで比較した。action分布は変化したが

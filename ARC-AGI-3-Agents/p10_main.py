@@ -12,6 +12,17 @@ from typing import Any
 from arc_agi import Arcade, OperationMode  # type: ignore[import-untyped]
 
 from agents.templates.p10_sample_agent import P10SampleAgent
+from arc3_agi_agent.p10_batch_checkpoint import (
+    assemble_checkpointed_report,
+    build_batch_conditions,
+    checkpoint_path,
+    load_game_checkpoint,
+    write_checkpoint_index,
+    write_game_checkpoint,
+)
+from arc3_agi_agent.p10_instruction_compiler import (
+    active_p10_manifest_digest,
+)
 from arc3_agi_agent.p10_runtime import (
     P10InstructionLifecycle,
     P10InstructionVariant,
@@ -167,6 +178,123 @@ def run_p10_offline_samples(
     }
 
 
+def _resolve_p10_batch_game_ids(
+    *,
+    environments_dir: Path,
+    requested_games: list[str] | None,
+    all_samples: bool,
+    recordings_dir: Path | None,
+) -> list[str]:
+    output_dir = (
+        recordings_dir.resolve()
+        if recordings_dir is not None
+        else environments_dir.resolve().parent / "recordings"
+    )
+    arcade = Arcade(
+        operation_mode=OperationMode.OFFLINE,
+        environments_dir=str(environments_dir.resolve()),
+        recordings_dir=str(output_dir),
+    )
+    if arcade.operation_mode is not OperationMode.OFFLINE:
+        raise AuthorityViolation("OFFLINE_SAMPLE_MODE_NOT_EFFECTIVE")
+    return _resolve_game_ids(
+        arcade,
+        requested_games,
+        all_samples=all_samples,
+    )
+
+
+def run_p10_checkpointed_offline_samples(
+    *,
+    environments_dir: Path,
+    checkpoint_dir: Path,
+    requested_games: list[str] | None = None,
+    all_samples: bool = False,
+    max_actions: int = 4096,
+    instruction_variant: P10InstructionVariant = "hybrid",
+    instruction_lifecycle: P10InstructionLifecycle = "active",
+    resume: bool = False,
+    record: bool = False,
+    recordings_dir: Path | None = None,
+) -> dict[str, Any]:
+    """Run one isolated scorecard per game and checkpoint every result."""
+
+    if instruction_lifecycle != "active":
+        raise AuthorityViolation(
+            "P10_CHECKPOINTED_MEASUREMENT_REQUIRES_ACTIVE_P"
+        )
+    environments_dir = environments_dir.resolve()
+    game_ids = _resolve_p10_batch_game_ids(
+        environments_dir=environments_dir,
+        requested_games=requested_games,
+        all_samples=all_samples,
+        recordings_dir=recordings_dir,
+    )
+    if not game_ids:
+        raise ValueError("select --all-samples or at least one --game")
+    bundle_dir = Path(__file__).resolve().parent / "arc3_agi_agent" / "bundles"
+    conditions = build_batch_conditions(
+        environments_dir=environments_dir,
+        game_ids=game_ids,
+        max_actions=max_actions,
+        instruction_variant=instruction_variant,
+        instruction_lifecycle=instruction_lifecycle,
+        active_manifest_digest=active_p10_manifest_digest(bundle_dir),
+    )
+    checkpoint_dir = checkpoint_dir.resolve()
+    checkpoint_dir.mkdir(parents=True, exist_ok=True)
+    completed: list[str] = []
+    reused: list[str] = []
+    for game_id in game_ids:
+        existing = load_game_checkpoint(
+            checkpoint_dir=checkpoint_dir,
+            conditions=conditions,
+            game_id=game_id,
+        )
+        if existing is not None:
+            if not resume:
+                raise FileExistsError(
+                    "P10_CHECKPOINT_EXISTS_USE_RESUME:"
+                    + str(checkpoint_path(checkpoint_dir, game_id))
+                )
+            completed.append(game_id)
+            reused.append(game_id)
+            write_checkpoint_index(
+                checkpoint_dir=checkpoint_dir,
+                conditions=conditions,
+                completed_game_ids=completed,
+                reused_game_ids=reused,
+            )
+            continue
+        result = run_p10_offline_samples(
+            environments_dir=environments_dir,
+            requested_games=[game_id],
+            max_actions=max_actions,
+            instruction_variant=instruction_variant,
+            instruction_lifecycle=instruction_lifecycle,
+            record=record,
+            recordings_dir=recordings_dir,
+        )
+        write_game_checkpoint(
+            checkpoint_dir=checkpoint_dir,
+            conditions=conditions,
+            game_id=game_id,
+            result=result,
+        )
+        completed.append(game_id)
+        write_checkpoint_index(
+            checkpoint_dir=checkpoint_dir,
+            conditions=conditions,
+            completed_game_ids=completed,
+            reused_game_ids=reused,
+        )
+    return assemble_checkpointed_report(
+        checkpoint_dir=checkpoint_dir,
+        conditions=conditions,
+        reused_game_ids=reused,
+    )
+
+
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
@@ -190,21 +318,49 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--record", action="store_true")
     parser.add_argument("--recordings-dir", type=Path)
+    parser.add_argument(
+        "--checkpoint-dir",
+        type=Path,
+        help=(
+            "Persist one OFFLINE result per game and assemble an "
+            "oracle-compatible report."
+        ),
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Reuse only checkpoints with exactly matching conditions.",
+    )
     parser.add_argument("--report", type=Path)
     return parser
 
 
 def main() -> int:
     args = _parser().parse_args()
-    result = run_p10_offline_samples(
-        environments_dir=args.environments_dir,
-        requested_games=args.games,
-        all_samples=args.all_samples,
-        max_actions=args.max_actions,
-        instruction_variant=args.instruction_variant,
-        record=args.record,
-        recordings_dir=args.recordings_dir,
-    )
+    if args.resume and args.checkpoint_dir is None:
+        raise ValueError("--resume requires --checkpoint-dir")
+    if args.checkpoint_dir is not None:
+        result = run_p10_checkpointed_offline_samples(
+            environments_dir=args.environments_dir,
+            checkpoint_dir=args.checkpoint_dir,
+            requested_games=args.games,
+            all_samples=args.all_samples,
+            max_actions=args.max_actions,
+            instruction_variant=args.instruction_variant,
+            resume=args.resume,
+            record=args.record,
+            recordings_dir=args.recordings_dir,
+        )
+    else:
+        result = run_p10_offline_samples(
+            environments_dir=args.environments_dir,
+            requested_games=args.games,
+            all_samples=args.all_samples,
+            max_actions=args.max_actions,
+            instruction_variant=args.instruction_variant,
+            record=args.record,
+            recordings_dir=args.recordings_dir,
+        )
     encoded = json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True)
     print(encoded)
     if args.report is not None:

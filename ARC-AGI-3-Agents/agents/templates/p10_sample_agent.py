@@ -67,6 +67,7 @@ class P10SampleAgentReport:
     search_reset_memory_versions: tuple[tuple[int, int], ...]
     search_reset_payload_digests: tuple[str, ...]
     search_reset_evidence_signatures: tuple[str, ...]
+    development_transition_probe: dict[str, object]
 
 
 class P10SampleAgent(Agent):
@@ -302,6 +303,9 @@ class P10SampleAgent(Agent):
             ),
             search_reset_evidence_signatures=tuple(
                 reset.evidence_signature for reset in self.search_resets
+            ),
+            development_transition_probe=(
+                self.runtime.transition_probe.to_payload()
             ),
         )
 

@@ -4,6 +4,42 @@
 保存する。sample/game識別子は結果を同定する監査metadataに限り許可し、
 P bundle、C selector、M payload、runtime routingには使用しない。
 
+## Development capability evidence
+
+`development/c2_c3_local_probe_all25_max1/`は、C2 Visible effect transition
+modelとC3 Commit boundary predictorのshadow-only `LOCAL_PROBE`証拠である。
+
+- mode: `OFFLINE`
+- lifecycle: `ACTIVE`
+- max-actions: 1
+- game report: 25 / 25
+- error: 0
+- checkpoint: 25
+- exact-condition resume: 25 reused / 0 executed
+- transition observation: 25
+- visible transition: 22
+- no-visible commit: 3
+- action-selection influence: 0
+- shadow probe fault: 0
+- Runtime P promotion: `HOLD`
+- condition digest:
+  `6e85e433f42f992b20705968c30a1594a60a91ab7068e69ce187253e7102e296`
+
+| artifact | SHA-256 |
+|---|---|
+| raw report | `e5859d50efd090e23a795fff51d32e7d7b2ad72a402043de4167f874aa62f1c7` |
+| compact evidence | `1c4c3062d1a5654b7dd0792f31b14e49aff6254f4e5720669ae421d98fac5de5` |
+| LOCAL_PROBE audit | `9d3000ba55228c17fe07bf2b34a308e5eed590354a0caaf0688a4a55b08071d2` |
+| resume index | `fbd9e627c3f93fc9c29112b45581e3a538e2992b1c2c678c14d5291be2b5d5f4` |
+
+`p10_all25_active_max1_raw.json`はscorecardを含む原report、
+`p10_all25_active_max1_compact.json`はscorecard identityを除くcontent-bound
+射影、`C2_C3_LOCAL_PROBE_AUDIT.json`はHDS境界を含む監査正本である。
+`checkpoints/`はgame単位のresume証拠である。
+
+max-actions 1のためcompleted levelは0である。このdirectoryを35/183更新、
+full local score、CLUSTER_STABLE、COMPOSABLE、全sample攻略の証拠に使わない。
+
 ## `ft09_variant_comparison.json`
 
 - schema: `arc3-p10-execution-evidence-v1`

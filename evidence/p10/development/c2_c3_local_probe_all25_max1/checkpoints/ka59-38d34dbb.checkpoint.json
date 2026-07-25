@@ -1,0 +1,552 @@
+{
+  "conditions_digest": "6e85e433f42f992b20705968c30a1594a60a91ab7068e69ce187253e7102e296",
+  "content_digest": "6636b6301814f5a9870740621429a1b72a65ff3688f893e0981a755d0087594d",
+  "game_id": "ka59-38d34dbb",
+  "schema_version": "arc3-p10-batch-checkpoint-v1",
+  "single_game_report": {
+    "all_complete": false,
+    "complete_game_count": 0,
+    "completed_count": 1,
+    "completed_levels": 0,
+    "environment_count": 1,
+    "error_count": 0,
+    "errors": [],
+    "instruction_lifecycle": "active",
+    "instruction_variant": "hybrid",
+    "local_scorecard": {
+      "api_key": null,
+      "card_id": "6283c69c-d497-4f32-ae5e-fc08beefbfc0",
+      "competition_mode": null,
+      "environments": [
+        {
+          "actions": 1,
+          "completed": false,
+          "id": "ka59-38d34dbb",
+          "level_count": 7,
+          "levels_completed": 0,
+          "resets": 0,
+          "runs": [
+            {
+              "actions": 1,
+              "completed": false,
+              "guid": "9a5e9c59-709e-401b-be07-2f6e54d45362",
+              "id": null,
+              "level_actions": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "level_baseline_actions": [
+                28,
+                109,
+                51,
+                51,
+                33,
+                132,
+                326
+              ],
+              "level_scores": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "levels_completed": 0,
+              "message": null,
+              "number_of_environments": null,
+              "number_of_levels": null,
+              "resets": 0,
+              "score": 0.0,
+              "state": "NOT_FINISHED"
+            }
+          ],
+          "score": 0.0
+        }
+      ],
+      "opaque": null,
+      "score": 0.0,
+      "source_url": null,
+      "tags": [
+        "p10",
+        "offline-sample",
+        "p-active"
+      ],
+      "tags_scores": [
+        {
+          "actions": 1,
+          "completed": null,
+          "guid": null,
+          "id": "keyboard_click",
+          "level_actions": null,
+          "level_baseline_actions": null,
+          "level_scores": null,
+          "levels_completed": 0,
+          "message": null,
+          "number_of_environments": 1,
+          "number_of_levels": 7,
+          "resets": null,
+          "score": 0.0,
+          "state": null
+        }
+      ],
+      "total_actions": 1,
+      "total_environments": 1,
+      "total_environments_completed": 0,
+      "total_levels": 7,
+      "total_levels_completed": 0
+    },
+    "max_actions": 1,
+    "operation_mode": "offline",
+    "phase": "P10",
+    "reports": [
+      {
+        "actions": 1,
+        "complete": false,
+        "context_actions_used": 1,
+        "context_version": 3,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "ACTION_SURFACE_CHANGE": 1,
+            "COMPONENT_APPEAR": 1,
+            "COMPONENT_DISAPPEAR": 1,
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:49d5cd0c53bd57678975a4dd": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:75c5936f8ddebee83c949072": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:75c5936f8ddebee83c949072": 1
+          },
+          "last_evidence": {
+            "action_class": "action:4",
+            "action_prototype": "operator-prototype:selectable-object-target-push-v1",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 5,
+            "component_added": 2,
+            "component_moved": 4,
+            "component_removed": 1,
+            "effect_classes": [
+              "ACTION_SURFACE_CHANGE",
+              "COMPONENT_APPEAR",
+              "COMPONENT_DISAPPEAR",
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:7",
+                "action:6:group:3:count:3",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 14,
+              "rendered_signature": "visual-state:a5391f47a4b5f63feb8af396",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:2:count:3",
+                "shape:1x1:fill:640:rect:0:twins:1:count:2",
+                "shape:1x1:fill:767:rect:0:twins:1:count:1",
+                "shape:1x1:fill:806:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:1:count:2",
+                "shape:1x1:fill:921:rect:0:twins:1:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "8f355addc0e4303bee484cacd4f07c010becc6e73985741b16647aa1f7b31829",
+              "structure_class": "structure-class:f657ace07b8c0e9c55379246"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:6:group:0:count:3",
+                "action:6:group:1:count:8",
+                "action:6:group:3:count:3",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 15,
+              "rendered_signature": "visual-state:11be7d22f7ec58f55b5fa489",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:0:count:2",
+                "shape:1x1:fill:1000:rect:1:twins:3:count:4",
+                "shape:1x1:fill:640:rect:0:twins:1:count:2",
+                "shape:1x1:fill:806:rect:0:twins:0:count:1",
+                "shape:1x1:fill:889:rect:0:twins:1:count:2",
+                "shape:1x1:fill:892:rect:0:twins:0:count:1",
+                "shape:1x1:fill:921:rect:0:twins:0:count:1",
+                "shape:1x3:fill:1000:rect:1:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:0:count:1"
+              ],
+              "structural_signature": "df2806b3b8eb31e452e8dc7cca8fe29a5cb2cb4c16a105990d4ecb1d3a64c924",
+              "structure_class": "structure-class:34aef89c6c353e73888d1dc4"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "bc72294db58acbdf46dea29d78d2c16a7b186efbaa7066b9db5562a1e6a7cb60"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "arc3-p10-visual-operator-v13",
+            "compiled-identity-free-object-relation-evidence",
+            "compiled-rendered-target-contact-evidence",
+            "operator-prototype:selectable-object-target-push-v1",
+            "query:035067490713467602331810",
+            "rendered-selectable-object-target-relation",
+            "selectable-object-target-push-v1"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 4,
+              "visual_action_key": "semantic-selectable-push:e4d7750c3dcf965b2ad0",
+              "visual_source_signature": "visual-state:a5391f47a4b5f63feb8af396"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "ka59-38d34dbb",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests": [
+          "query:035067490713467602331810"
+        ],
+        "instruction_variant": "hybrid",
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_operations": [
+          "ADD"
+        ],
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_digests": [
+          "311bd5c67ea5d5f4b1e85f626f82957f0708332106576762dde70574ae8ad44f"
+        ],
+        "trace_events": [
+          [
+            {
+              "actor": "HDS",
+              "details": [],
+              "index": 0,
+              "operation": "KERNEL_SELF_CHECK",
+              "stage": "SELF_CHECK"
+            },
+            {
+              "actor": "HDS",
+              "details": [],
+              "index": 1,
+              "operation": "OBSERVATION_ACCEPTED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "SYMBOL_SPACE",
+              "details": [
+                [
+                  "observation",
+                  "frame:c6e3165b1670eaf3fb38"
+                ]
+              ],
+              "index": 2,
+              "operation": "OBSERVATION_SYMBOLIZED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "CONTEXT_STATE",
+              "details": [
+                [
+                  "context",
+                  "d0846e3ca4d2ed9cd9b1bce30f089667233103562b4a6f3eac7a74fdf0a20926"
+                ]
+              ],
+              "index": 3,
+              "operation": "EPISODE_CONTEXT_UPDATED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "MEMORY",
+              "details": [
+                [
+                  "memory",
+                  "f4c1a48d8de902bee887a9973ad201e342907926353ce0adc17dcf90c3d6b0ab"
+                ]
+              ],
+              "index": 4,
+              "operation": "PASSIVE_MEMORY_READ",
+              "stage": "RETRIEVE"
+            },
+            {
+              "actor": "INSTRUCTION_BODY",
+              "details": [
+                [
+                  "body_digest",
+                  "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+                ],
+                [
+                  "body_format",
+                  "parametric-sigmoid-matrix"
+                ],
+                [
+                  "body_version",
+                  "p10-hybrid-v26"
+                ]
+              ],
+              "index": 5,
+              "operation": "INSTRUCTION_BODY_BOUND",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "command",
+                  "command:4d5a2b1c047c7f433a90"
+                ]
+              ],
+              "index": 6,
+              "operation": "COMPUTE_COMMAND_ISSUED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "candidates",
+                  "2"
+                ],
+                [
+                  "hypotheses",
+                  "2"
+                ],
+                [
+                  "proposal",
+                  "e0d6694f022e1e8bcf048464d1f2acc03585c1f0ee5d58f4a452136eeac448d9"
+                ]
+              ],
+              "index": 7,
+              "operation": "HYPOTHESES_AND_CANDIDATES_PROPOSED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "INSTRUCTION_BODY",
+              "details": [
+                [
+                  "body_digest",
+                  "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+                ],
+                [
+                  "query",
+                  "query:035067490713467602331810"
+                ]
+              ],
+              "index": 8,
+              "operation": "INSTRUCTION_BODY_QUERY_EXECUTED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "FITTING_OR_SUCCESS_CRITERION",
+              "details": [
+                [
+                  "closures",
+                  "277e2259eef185f3e79d1a4e20a2d30a698b0f5dca6fb880fae9ba99b215e01c"
+                ]
+              ],
+              "index": 9,
+              "operation": "CLOSURE_PROPOSALS_CONSTRUCTED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "decision",
+                  "decision:612f4c00af6a9fff37d5"
+                ],
+                [
+                  "frame",
+                  "bc92a647bdf954354b4e715036214b113a12e35a939dbaf686ec77d53fae1c9e"
+                ],
+                [
+                  "standalone_decision",
+                  "judgment:1a6159f659e46a38ff5d72cf"
+                ],
+                [
+                  "standalone_status",
+                  "ACCEPT"
+                ],
+                [
+                  "status",
+                  "EMIT"
+                ]
+              ],
+              "index": 10,
+              "operation": "CLOSURE_DECISION",
+              "stage": "JUDGE"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "result",
+                  "emission-result:310ed003d117c9128a28b600fe98c2a116439c2db0b8d3b285998fa97465b950"
+                ]
+              ],
+              "index": 11,
+              "operation": "AUTHORIZED_EXTERNAL_EMIT_EXECUTED",
+              "stage": "ACT"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "result",
+                  "hds-observation:8cd82683baac2c5e0da6"
+                ]
+              ],
+              "index": 12,
+              "operation": "EMISSION_RESULT_OBSERVED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 13,
+              "operation": "EMISSION_RESULT_JUDGED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "CONTEXT_STATE",
+              "details": [
+                [
+                  "context",
+                  "e44941e35f77b44867ea8dfa4e0fe68ccfe8528bc276010d55fb23c542785c9e"
+                ]
+              ],
+              "index": 14,
+              "operation": "EMISSION_RESULT_RECORDED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "memory_operation",
+                  "ADD"
+                ],
+                [
+                  "memory_version",
+                  "1"
+                ]
+              ],
+              "index": 15,
+              "operation": "AUTHORIZED_MEMORY_WRITE_EXECUTED",
+              "stage": "UPDATE_MEMORY"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 16,
+              "operation": "CYCLE_FINALIZED",
+              "stage": "REFRAME"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 17,
+              "operation": "CYCLE_BOUNDARY",
+              "stage": "REFRAME"
+            }
+          ]
+        ],
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v13",
+        "win_levels": 7
+      }
+    ],
+    "total_levels": 7
+  },
+  "stable_report_digest": "9a1c1cdc7874a4694478c98542b6cfe7a4ee4908c10a3f776409f107253b706b"
+}

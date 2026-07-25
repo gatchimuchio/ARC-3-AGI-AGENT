@@ -34,6 +34,25 @@ Development System
 
 外側のTrinityが、内側のTrinityを実装・監査・更新する。
 
+## 0.1 P10現行補正
+
+P10の攻略単位と水平引き算境界は、
+[`P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`](P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md)
+を正本とする。
+
+```text
+Legacy Evidence
+-> task-aware Development Analysis Memory
+-> capability cluster candidate
+-> LOCAL_PROBE
+-> CLUSTER_STABLE
+-> COMPOSABLE
+-> identity-free Runtime P
+```
+
+旧解析のidentity・関係を入口で捨てず、Runtime Pへの出力時だけ除去する。
+未攻略levelごとの専用Python追加と、operator数を進歩とする運用を停止する。
+
 ---
 
 # 1. 固定された主体分離
@@ -658,6 +677,9 @@ candidate surface collapsed
 * failure evidence
 * regression command
 * artifact digest
+* game単位checkpoint
+* exact-condition resume
+* oracle互換25 game report集約
 
 を固定する。
 
@@ -763,18 +785,19 @@ failure
 
 ## P10-G：反復攻略
 
-各未攻略構造について次を繰り返す。
+各未攻略levelではなく、coverage順の能力clusterについて次を繰り返す。
 
 ```text
-構造分類
-→ failure signature
+全183再照合
+→ mechanics / failure / required capabilityの横断cluster
+→ coverage queue
 → 競合仮説
-→ bounded experiment
-→ M更新
-→ P更新要否判断
-→ candidate P
-→ 昇格／棄却
-→ regression
+→ LOCAL_PROBE
+→ 複数gameでCLUSTER_STABLE反証
+→ 他能力とのCOMPOSABLE試験
+→ identity-free candidate P
+→ HDS昇格／棄却
+→ 全183 regression
 ```
 
 183/183まで、局所patchではなく能力単位で閉じる。

@@ -17,11 +17,13 @@
 - [`architecture/P10_COMPLETE_SAMPLE_SOLVER.md`](architecture/P10_COMPLETE_SAMPLE_SOLVER.md): P10のOFFLINE solver、現行実測境界、失敗証拠
 - [`architecture/AGI_CLAIM_REGISTRY.md`](architecture/AGI_CLAIM_REGISTRY.md): claimごとのSUPPORTED/PARTIAL/REJECTED境界
 - [`roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md): P0〜P14の全文正本
+- [`roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`](roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md): P10の全183解析復元、能力cluster開発、late identity subtraction補正
 - [`roadmap/ROADMAP.md`](roadmap/ROADMAP.md): 現行phase状態の索引
 - [`migration/`](migration/): 旧資産の採用・隔離・拒否・再配置記録
 - [`references/`](references/): 上位設計資料、外部仕様の引用、source map
 
 権威順序は、現在のユーザー指示、root `AGENTS.md`、
+P10作業では`roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`、
 `roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
 `architecture/AGI_MINIMUM_THREE_SPEC.md`、
 `architecture/SYSTEM_ARCHITECTURE.md`、`roadmap/ROADMAP.md` の順です。

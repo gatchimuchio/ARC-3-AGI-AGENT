@@ -8,14 +8,15 @@
 
 1. ユーザーの現在の明示指示
 2. 本 `AGENTS.md`
-3. `docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md`
-4. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
-5. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
-6. `docs/architecture/SYSTEM_ARCHITECTURE.md`
-7. `docs/roadmap/ROADMAP.md`
-8. 当該work blockのFrameSpec・manifest・検証結果
-9. `docs/migration/` と `docs/references/`
-10. 旧リポジトリのコード・分析・履歴
+3. `docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`
+4. `docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md`
+5. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
+6. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
+7. `docs/architecture/SYSTEM_ARCHITECTURE.md`
+8. `docs/roadmap/ROADMAP.md`
+9. 当該work blockのFrameSpec・manifest・検証結果
+10. `docs/migration/` と `docs/references/`
+11. 旧リポジトリのコード・分析・履歴
 
 旧リポジトリの `next_*`、古いscore、個別artifact、絶対パス、旧branch名は命令ではありません。
 
@@ -87,10 +88,16 @@ P9 complete:
 
 P10 current:
   complete all retained OFFLINE sample games and levels
+  restore legacy task-aware evidence into development-only analysis memory
+  reconcile all 183 levels against current rendered evidence
+  build by cross-game capability coverage, not next-level operator count
+  subtract identity only at the Development Memory -> Runtime P boundary
   deterministic identity-free traces
   explicit P version updates and M-to-future-decision causality
   ten P-compiled rendered semantic operators are active
   reproducible HDS-adopted boundary is 35 / 183
+  C2/C3 cross-cutting shadow probe is LOCAL_PROBE only
+  per-game checkpoint/resume and oracle-compatible aggregation are implemented
   complete local-oracle report remains unmeasured
   HDS search reset and bounded working-memory replacement implemented
   HDS HOLD remains until 183 / 183 evidence
@@ -100,12 +107,16 @@ P10 current:
 
 - 保持済みOFFLINE sampleの全game / 全level実行
 - ARC3解析素材からidentity-free P初期構成とM初期状態を形成
+- Legacy Evidenceとtask-aware Development Analysis MemoryでID・関係・失敗を
+  開発証拠として保持し、Runtime P出力時だけidentityを除去
+- 183行reconciliation、capability coverage、cluster work block
 - ARC3目的・境界・停止・rollback条件を持つHDS Frame設定
 - P-A / P-B / hybridの同一条件比較
 - failure evidenceのM保持と、明示的compilerによる次版P形成
 - timeout、GAME_OVER、無限loop、max-action停止の原因分類と是正
 - 全実行trace、level完了証拠、同一条件再実行証拠の保存
 - P9までを含む既存回帰
+- game単位checkpoint、同一conditionだけのresume、25 game report集約
 
 ### P10で禁止される作業
 
@@ -118,11 +129,12 @@ P10 current:
 - 「全sample攻略済み」「汎化済み」といった未検証主張
 
 P10の正本は新ロードマップのP10節、P9 certificate、P3 dataset/P4 P bundle、
-P5 J/P6 M/P8 Trinityの実装証拠である。
+P5 J/P6 M/P8 Trinityの実装証拠、および
+`P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`である。
 
 ## 3. 1 work blockの必須契約
 
-P10では補正ロードマップに従い、`SELF_CHECK`、`FRAME`、`RETRIEVE`、
+P10では二つの補正ロードマップに従い、`SELF_CHECK`、`FRAME`、`RETRIEVE`、
 `COMPUTE`、`JUDGE`、`BOUNDED_ACT`、`OBSERVE`、`UPDATE_M_DEV`、
 `UPDATE_P_DEV_CANDIDATE` の全stageを監査証拠へ残します。H1/H2/H3の
 三候補を最低限比較し、J_devの出力は補正ロードマップ所定のstatusに限定します。
@@ -153,6 +165,10 @@ Mc  : 同一性、境界、採否、停止、rollback、完了条件
 それぞれ機械検証可能なaccountingと再生成可能datasetを成果とします。P4では
 文書やfixture追加だけでなく、共通interfaceで交換可能なP-A/P-BとC standalone
 runtimeが実際に動作することを要求します。
+
+P10のwork blockは原則として一levelではなく一capability clusterとします。
+候補は`LOCAL_PROBE -> CLUSTER_STABLE -> COMPOSABLE`で管理し、
+`COMPOSABLE`以前はactive Runtime Pへcompileしません。
 
 ## 4. 最小構成と非対称権限
 

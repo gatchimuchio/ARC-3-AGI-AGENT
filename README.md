@@ -26,6 +26,11 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - 記憶主体 `M`: 全15操作を持つstandalone G3を実装・除去監査済み
 - 最小三構成証明: 全8 subset中full setだけPASS、機能等価物漏れ0
 - HDS採用済みlevel境界: **35 / 183**
+- 現行183行再照合:
+  **CONFIRMED 26 / PARTIAL 1 / STALE 9 / UNOBSERVED 147**
+- P10開発単位: **全タスク解析からのcapability cluster**
+- C2/C3: **LOCAL_PROBE PASS、CLUSTER_STABLE / COMPOSABLE HOLD**
+- all-25 checkpoint smoke: **25/25 report、error 0、resume再実行0**
 - 全25 gameローカルオラクル: **未計測**（完全report未生成）
 - 満点・AGI完成・汎化達成の主張: **なし**
 
@@ -146,6 +151,14 @@ HDS Frame fixture、memory lifecycle fixtureへ変換しました。source ident
 [`P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md`](docs/architecture/P3_ARC3_EVIDENCE_MATERIAL_COMPILER.md)
 に固定しています。
 
+P3のidentity-free corpusはRuntime P向けfixtureとして維持する。P10では別に、
+P3 provenanceで凍結した705 analysis JSONからidentityとlevel関係を保持した
+development-only台帳を復元する。水平引き算は開発入口ではなく、
+COMPOSABLE能力をRuntime Pへcompileする出力境界で行う。四正本は
+[`analysis/development`](analysis/development)、補正仕様は
+[`P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`](docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md)
+である。
+
 P4では、このfixtureをruntime identity-free境界内で使用し、P-A/P-Bと
 standalone Cを実装しました。実装・完了証拠は
 [`P4_COMPUTE_SUBJECT_IMPLEMENTATION.md`](docs/architecture/P4_COMPUTE_SUBJECT_IMPLEMENTATION.md)
@@ -204,16 +217,40 @@ python p10_main.py --game FT09 --max-actions 4096 \
   --instruction-variant hybrid
 python p10_main.py --all-samples --max-actions 4096 \
   --instruction-variant hybrid \
+  --checkpoint-dir ../evidence/p10/full-active/checkpoints \
+  --report ../evidence/p10/run.json
+python p10_main.py --all-samples --max-actions 4096 \
+  --instruction-variant hybrid \
+  --checkpoint-dir ../evidence/p10/full-active/checkpoints \
+  --resume \
   --report ../evidence/p10/run.json
 ```
 
 `p10_main.py`は全選択gameが`WIN`に到達した場合だけ終了code 0を返します。
+checkpointはmax-actions、variant/lifecycle、active P manifest、environment
+code/metadata inventory、P10 runtime source inventory、Python、ARC Toolkit
+version、game集合が完全一致する場合だけ再利用されます。
 P-A、P-B、hybridは`--instruction-variant`で同一条件比較できます。
 現行active Pは`p10-p-a-symbolic-v27`、`p10-p-b-parametric-v27`、
 `p10-hybrid-v26`です。同条件二回のtarget比較と既存29 level回帰を経て、
 HDSが採用した再現可能なlevel境界は`35 / 183`です。ただし全25 gameを
 含む完全reportは未生成であり、ローカルオラクルscoreは未計測、
 P10全体は`HOLD`です。
+
+開発用分析台帳の再生成:
+
+```bash
+cd ARC-AGI-3-Agents
+python -m arc3_agi_agent.development_analysis \
+  --legacy-repository-root \
+    /mnt/c/Users/mzcum/ARC-Layer-0-Functional-Compliance-main \
+  --repository-root .. \
+  --output-dir ../analysis/development
+```
+
+全705 legacy analysis sourceはP3 provenanceのbyte数とSHA-256に一致しない
+限りfail closedする。
+生成物は開発専用であり、runtime入力に使用しない。
 
 ## 絶対順序
 

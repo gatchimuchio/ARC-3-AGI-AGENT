@@ -1,0 +1,534 @@
+{
+  "conditions_digest": "6e85e433f42f992b20705968c30a1594a60a91ab7068e69ce187253e7102e296",
+  "content_digest": "9438589739bec86ee6dc411128d96621dfecce44bf29f7be6e9b265d9e5c7c64",
+  "game_id": "m0r0-492f87ba",
+  "schema_version": "arc3-p10-batch-checkpoint-v1",
+  "single_game_report": {
+    "all_complete": false,
+    "complete_game_count": 0,
+    "completed_count": 1,
+    "completed_levels": 0,
+    "environment_count": 1,
+    "error_count": 0,
+    "errors": [],
+    "instruction_lifecycle": "active",
+    "instruction_variant": "hybrid",
+    "local_scorecard": {
+      "api_key": null,
+      "card_id": "05abf72a-4b1b-4e6f-9d50-168bbc509e3e",
+      "competition_mode": null,
+      "environments": [
+        {
+          "actions": 1,
+          "completed": false,
+          "id": "m0r0-492f87ba",
+          "level_count": 6,
+          "levels_completed": 0,
+          "resets": 0,
+          "runs": [
+            {
+              "actions": 1,
+              "completed": false,
+              "guid": "6ad64fa8-9bb9-4d54-9657-770a5216accc",
+              "id": null,
+              "level_actions": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "level_baseline_actions": [
+                30,
+                111,
+                203,
+                26,
+                500,
+                237
+              ],
+              "level_scores": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "levels_completed": 0,
+              "message": null,
+              "number_of_environments": null,
+              "number_of_levels": null,
+              "resets": 0,
+              "score": 0.0,
+              "state": "NOT_FINISHED"
+            }
+          ],
+          "score": 0.0
+        }
+      ],
+      "opaque": null,
+      "score": 0.0,
+      "source_url": null,
+      "tags": [
+        "p10",
+        "offline-sample",
+        "p-active"
+      ],
+      "tags_scores": [
+        {
+          "actions": 1,
+          "completed": null,
+          "guid": null,
+          "id": "keyboard_click",
+          "level_actions": null,
+          "level_baseline_actions": null,
+          "level_scores": null,
+          "levels_completed": 0,
+          "message": null,
+          "number_of_environments": 1,
+          "number_of_levels": 6,
+          "resets": null,
+          "score": 0.0,
+          "state": null
+        }
+      ],
+      "total_actions": 1,
+      "total_environments": 1,
+      "total_environments_completed": 0,
+      "total_levels": 6,
+      "total_levels_completed": 0
+    },
+    "max_actions": 1,
+    "operation_mode": "offline",
+    "phase": "P10",
+    "reports": [
+      {
+        "actions": 1,
+        "complete": false,
+        "context_actions_used": 1,
+        "context_version": 3,
+        "decision_statuses": [
+          "EMIT"
+        ],
+        "development_transition_probe": {
+          "action_selection_influence": false,
+          "boundary_counts": {
+            "TRANSITION_NO_COMMIT": 1
+          },
+          "candidate_tier": "LOCAL_PROBE",
+          "capability_ids": [
+            "C2_visible_effect_transition_model",
+            "C3_commit_boundary_predictor"
+          ],
+          "effect_counts": {
+            "COMPONENT_MOTION": 1,
+            "LOCAL_PIXEL_DELTA": 1,
+            "STRUCTURAL_CHANGE": 1,
+            "VISIBLE_STATE_CHANGE": 1
+          },
+          "exact_boundary_models": {
+            "transition-model:ea9514616441eb2d0cb88060": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "external_emit_authority": false,
+          "fault_count": 0,
+          "fault_counts": {},
+          "format": "arc3-c2-c3-cross-cutting-probe-v1",
+          "global_boundary_models": {
+            "global-action-model:21c631512cdc03a78e566b89": {
+              "TRANSITION_NO_COMMIT": 1
+            }
+          },
+          "global_context_support": {
+            "global-action-model:21c631512cdc03a78e566b89": 1
+          },
+          "last_evidence": {
+            "action_class": "action:1",
+            "action_prototype": "action-prototype:1:0",
+            "boundary_label": "TRANSITION_NO_COMMIT",
+            "changed_cell_milli": 24,
+            "component_added": 0,
+            "component_moved": 2,
+            "component_removed": 0,
+            "effect_classes": [
+              "COMPONENT_MOTION",
+              "LOCAL_PIXEL_DELTA",
+              "STRUCTURAL_CHANGE",
+              "VISIBLE_STATE_CHANGE"
+            ],
+            "progress_observed": false,
+            "source": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:2",
+                "action:6:group:2:count:2",
+                "action:6:group:3:count:2",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 7,
+              "rendered_signature": "visual-state:bb1341069e852a7c58ff55ef",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:589:rect:0:twins:0:count:1",
+                "shape:1x1:fill:652:rect:0:twins:0:count:1",
+                "shape:1x1:fill:655:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:1:count:2"
+              ],
+              "structural_signature": "b22aaedae8b84f8bd6cd7bd8f3415e5dd6c237e5fbc75bd928bd19a4bd77ef1a",
+              "structure_class": "structure-class:af86df0a94e34aea9659792c"
+            },
+            "target": {
+              "action_surface": [
+                "action:1:group:0:count:1",
+                "action:2:group:0:count:1",
+                "action:3:group:0:count:1",
+                "action:4:group:0:count:1",
+                "action:5:group:0:count:1",
+                "action:6:group:0:count:2",
+                "action:6:group:2:count:2",
+                "action:6:group:3:count:2",
+                "action:6:group:4:count:1"
+              ],
+              "component_count": 7,
+              "rendered_signature": "visual-state:aa1d055e5e0a56c51a270d49",
+              "shape_multiset": [
+                "shape:1x1:fill:1000:rect:1:twins:1:count:2",
+                "shape:1x1:fill:589:rect:0:twins:0:count:1",
+                "shape:1x1:fill:652:rect:0:twins:0:count:1",
+                "shape:1x1:fill:655:rect:0:twins:0:count:1",
+                "shape:64x1:fill:1000:rect:1:twins:1:count:2"
+              ],
+              "structural_signature": "fe87444d46b23897acbb00c3c76ab08e7dc45645cb62f7a4b14b6c6045684381",
+              "structure_class": "structure-class:af86df0a94e34aea9659792c"
+            },
+            "terminal_state": "NOT_FINISHED"
+          },
+          "memory_write_authority": false,
+          "observation_count": 1,
+          "runtime_decision_use": "FORBIDDEN",
+          "runtime_p_promotion_authority": false,
+          "transition_digest_chain": "f35c777fef15c90fae47c23636da67a691d9d85daca868b430d5e7d69dde418e"
+        },
+        "emitted_level_counts": [
+          0
+        ],
+        "emitted_provenance": [
+          [
+            "VISUAL_UNTESTED_CANDIDATE",
+            "arc3-p10-visual-operator-v13",
+            "available-action-surface",
+            "query:079872015468016744362805"
+          ]
+        ],
+        "emitted_steps": [
+          [
+            {
+              "action_id": 1,
+              "visual_action_key": "simple:1",
+              "visual_source_signature": "visual-state:bb1341069e852a7c58ff55ef"
+            }
+          ]
+        ],
+        "failure_payload_digests": [],
+        "final_status": "MAX_ACTION_STOP",
+        "game_id": "m0r0-492f87ba",
+        "instruction_body_digests": [
+          "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+        ],
+        "instruction_body_formats": [
+          "parametric-sigmoid-matrix"
+        ],
+        "instruction_body_versions": [
+          "p10-hybrid-v26"
+        ],
+        "instruction_lifecycle": "active",
+        "instruction_query_digests": [
+          "query:079872015468016744362805"
+        ],
+        "instruction_variant": "hybrid",
+        "levels_completed": 0,
+        "max_action_exhausted": true,
+        "memory_influenced_cycle_count": 0,
+        "memory_operations": [
+          "ADD"
+        ],
+        "memory_version": 1,
+        "recoveries": 0,
+        "rollback_decision_ids": [],
+        "rollback_memory_versions": [],
+        "search_reset_decision_ids": [],
+        "search_reset_evidence_signatures": [],
+        "search_reset_memory_versions": [],
+        "search_reset_payload_digests": [],
+        "search_resets": 0,
+        "terminal_state": "NOT_FINISHED",
+        "trace_digests": [
+          "5fd4780f441eb0cf864016f5563213b86b01b5d4e449dc198ba21fc073b3a687"
+        ],
+        "trace_events": [
+          [
+            {
+              "actor": "HDS",
+              "details": [],
+              "index": 0,
+              "operation": "KERNEL_SELF_CHECK",
+              "stage": "SELF_CHECK"
+            },
+            {
+              "actor": "HDS",
+              "details": [],
+              "index": 1,
+              "operation": "OBSERVATION_ACCEPTED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "SYMBOL_SPACE",
+              "details": [
+                [
+                  "observation",
+                  "frame:2b38675eafab4c67b180"
+                ]
+              ],
+              "index": 2,
+              "operation": "OBSERVATION_SYMBOLIZED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "CONTEXT_STATE",
+              "details": [
+                [
+                  "context",
+                  "040cbd71fe752b3b66eafee31fd588e63b4e31b83f1a09de870bfed7c595769b"
+                ]
+              ],
+              "index": 3,
+              "operation": "EPISODE_CONTEXT_UPDATED",
+              "stage": "FRAME"
+            },
+            {
+              "actor": "MEMORY",
+              "details": [
+                [
+                  "memory",
+                  "f4c1a48d8de902bee887a9973ad201e342907926353ce0adc17dcf90c3d6b0ab"
+                ]
+              ],
+              "index": 4,
+              "operation": "PASSIVE_MEMORY_READ",
+              "stage": "RETRIEVE"
+            },
+            {
+              "actor": "INSTRUCTION_BODY",
+              "details": [
+                [
+                  "body_digest",
+                  "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+                ],
+                [
+                  "body_format",
+                  "parametric-sigmoid-matrix"
+                ],
+                [
+                  "body_version",
+                  "p10-hybrid-v26"
+                ]
+              ],
+              "index": 5,
+              "operation": "INSTRUCTION_BODY_BOUND",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "command",
+                  "command:a73370a61a559023f760"
+                ]
+              ],
+              "index": 6,
+              "operation": "COMPUTE_COMMAND_ISSUED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "candidates",
+                  "2"
+                ],
+                [
+                  "hypotheses",
+                  "2"
+                ],
+                [
+                  "proposal",
+                  "5fdb0d2660b595a9884c0004f3445cb1472f87d1de3e17377fbaf5e7cab01d95"
+                ]
+              ],
+              "index": 7,
+              "operation": "HYPOTHESES_AND_CANDIDATES_PROPOSED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "INSTRUCTION_BODY",
+              "details": [
+                [
+                  "body_digest",
+                  "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184"
+                ],
+                [
+                  "query",
+                  "query:079872015468016744362805"
+                ]
+              ],
+              "index": 8,
+              "operation": "INSTRUCTION_BODY_QUERY_EXECUTED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "FITTING_OR_SUCCESS_CRITERION",
+              "details": [
+                [
+                  "closures",
+                  "976f330b999dc24acc0264e1d79ddafd70c5b11fb9339d89ac9df4bf532e72bc"
+                ]
+              ],
+              "index": 9,
+              "operation": "CLOSURE_PROPOSALS_CONSTRUCTED",
+              "stage": "COMPUTE"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "decision",
+                  "decision:772eec87dad10d2173c7"
+                ],
+                [
+                  "frame",
+                  "94cc26d7697ccda2ee958f14974fa64f63811e924623fb395d1e3a5a54f9ebe6"
+                ],
+                [
+                  "standalone_decision",
+                  "judgment:1001a5be2aea6264c18c13e9"
+                ],
+                [
+                  "standalone_status",
+                  "ACCEPT"
+                ],
+                [
+                  "status",
+                  "EMIT"
+                ]
+              ],
+              "index": 10,
+              "operation": "CLOSURE_DECISION",
+              "stage": "JUDGE"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "result",
+                  "emission-result:01b5e729bfc2198833af26d6eca73bf042966dde5983b017e0aaf40f1c36a4d0"
+                ]
+              ],
+              "index": 11,
+              "operation": "AUTHORIZED_EXTERNAL_EMIT_EXECUTED",
+              "stage": "ACT"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "result",
+                  "hds-observation:6b03d754102567ba204a"
+                ]
+              ],
+              "index": 12,
+              "operation": "EMISSION_RESULT_OBSERVED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 13,
+              "operation": "EMISSION_RESULT_JUDGED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "CONTEXT_STATE",
+              "details": [
+                [
+                  "context",
+                  "61f86e4db6dfe672cb50f18144421d78487107e159f4de991fa1fd5a89486d09"
+                ]
+              ],
+              "index": 14,
+              "operation": "EMISSION_RESULT_RECORDED",
+              "stage": "OBSERVE_RESULT"
+            },
+            {
+              "actor": "PURE_LLM",
+              "details": [
+                [
+                  "memory_operation",
+                  "ADD"
+                ],
+                [
+                  "memory_version",
+                  "1"
+                ]
+              ],
+              "index": 15,
+              "operation": "AUTHORIZED_MEMORY_WRITE_EXECUTED",
+              "stage": "UPDATE_MEMORY"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 16,
+              "operation": "CYCLE_FINALIZED",
+              "stage": "REFRAME"
+            },
+            {
+              "actor": "HDS",
+              "details": [
+                [
+                  "status",
+                  "PASS"
+                ]
+              ],
+              "index": 17,
+              "operation": "CYCLE_BOUNDARY",
+              "stage": "REFRAME"
+            }
+          ]
+        ],
+        "verification_statuses": [
+          "SUSPEND"
+        ],
+        "visual_operator_version": "arc3-p10-visual-operator-v13",
+        "win_levels": 6
+      }
+    ],
+    "total_levels": 6
+  },
+  "stable_report_digest": "76a2bed1af824a461a8b0c3315ddd12d7ebbc8642212f9231e55f1e6683a30f6"
+}
