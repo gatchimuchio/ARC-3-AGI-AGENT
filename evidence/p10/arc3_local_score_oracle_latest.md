@@ -9,7 +9,7 @@
 - game over: 0
 - maxed out: 0
 - not finished: 0
-- score digest: 26f8e6fd9a1fb54df17b1b7bb77095319c28bfc42f7f0d73a61486ce26c46da7
+- score digest: 327aacf48e6d14580449b2d55ba364c48fdb61ce065da1c997aa1267309b11ed
 
 Scoring authority: https://docs.arcprize.org/methodology
 
