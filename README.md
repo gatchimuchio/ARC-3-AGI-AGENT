@@ -22,7 +22,9 @@ P10の現行戦略は
 - P8: `THREE_SUBJECT_TWO_CYCLE_TRINITY` — 完了
 - P9: `EIGHT_SUBSET_MINIMUM_CERTIFICATE` — 完了
 - P10: `COMPLETE_ARC3_SAMPLE_SOLVING` — 完了
-- 現在フェーズ: `P11_RELEASE_STATE_FREEZE`
+- P11: `RELEASE_STATE_FREEZE` — 完了
+- 現在フェーズ: なし
+- P12: `OFFICIAL_ARC_CONNECTION` — 未開始・current request外
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -99,6 +101,12 @@ P10の現行戦略は
   **独立測定2回がSHA-256・byte単位で一致**
 - 水平減算: **S0〜S5 PASS、S6 MEASURED**
 - 汎化claim: **MEASURED_NOT_PROVEN**
+- P11固定回帰: **7/7 PASS、tracked secret finding 0**
+- P11 code: **`dca7be72c82389334ed2c3d585ec3c90c2b53914`**
+- reproducible wheel:
+  **二回byte一致、SHA-256 `79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6`**
+- P11 release digest:
+  **`arc3_p11_release_state:70ffdd4395d0f50b312c002b226bd8c92ec1818597e913a72310dd1739177848`**
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な
@@ -250,7 +258,10 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 [`P10_COMPLETE_SAMPLE_SOLVER.md`](docs/architecture/P10_COMPLETE_SAMPLE_SOLVER.md)
 および
 [`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
-に記録しています。現在のP11では、能力を変更せずrelease stateを固定します。
+に記録しています。P11では能力を変更せず、P0/J0/M0、code、dependency、
+environment、回帰、再現可能wheelを
+[`P11_RELEASE_STATE.json`](analysis/release/P11_RELEASE_STATE.json)へ固定しました。
+P12以降は未開始です。
 
 ## 設計上の固定境界
 
@@ -359,9 +370,10 @@ python -m arc3_agi_agent.development_analysis \
 9. P8: 三主体二周期循環 — 完了
 10. P9: 全8部分集合証明 — 完了
 11. P10: 全sample game / 全level完全攻略 — 完了
-12. P11: release state固定 — 現在
+12. P11: release state固定 — 完了
 
-P11完了前は公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出を禁止します。
+P12以降は未開始です。ユーザーの明示的phase開始指示なしに、公式API、
+`OperationMode.COMPETITION`、Kaggle分岐・提出へ進みません。
 
 現行ロードマップ全文の正本は
 [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)

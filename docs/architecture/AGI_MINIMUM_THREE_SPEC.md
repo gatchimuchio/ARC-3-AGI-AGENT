@@ -296,10 +296,10 @@ P7 Pairwise Subject Audit                           complete
 P8 Three-subject Two-cycle Trinity                  complete
 P9 Eight-subset Minimum Certificate                 complete
 P10 Complete ARC3 Sample Solving                    complete
-P11 Release-state Freeze                            current
+P11 Release-state Freeze                            complete
 P12 Official ARC Connection                        out of current request
 P13 Kaggle Paths                                    out of current request
 P14 Submission and Official-result Optimization    out of current request
 ```
 
-後続phaseの存在を理由に現在phaseを飛ばさない。
+P12以降は未開始であり、ユーザーの明示的phase開始指示なしに進めない。

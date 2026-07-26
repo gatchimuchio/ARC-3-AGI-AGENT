@@ -1,8 +1,8 @@
 {
-  "schema_version": "1.2.0",
+  "schema_version": "1.3.0",
   "artifact_type": "agi_minimum_three_obligation_graph",
-  "phase": "P11_RELEASE_STATE_FREEZE",
-  "last_completed_phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "phase": "P11_RELEASE_STATE_FREEZE_COMPLETE",
+  "last_completed_phase": "P11_RELEASE_STATE_FREEZE",
   "normative_roadmap": "docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md",
   "subjects": [
     {
@@ -111,15 +111,15 @@
   ],
   "elements": [
     {"id": "L0", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
-    {"id": "P", "current_status": "SUPPORTED", "next_phase": "P11"},
+    {"id": "P", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "C", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "J", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "M", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
-    {"id": "ENVIRONMENT_BOUNDARY", "current_status": "SUPPORTED", "next_phase": "P10"},
-    {"id": "LEARNING_COMPILER", "current_status": "PARTIAL", "next_phase": "POST_P11_RESEARCH"},
-    {"id": "P0", "current_status": "PARTIAL", "next_phase": "P11"},
-    {"id": "J0", "current_status": "PARTIAL", "next_phase": "P11"},
-    {"id": "M0", "current_status": "PARTIAL", "next_phase": "P11"},
+    {"id": "ENVIRONMENT_BOUNDARY", "current_status": "SUPPORTED", "next_phase": "P12_NOT_STARTED"},
+    {"id": "LEARNING_COMPILER", "current_status": "SUPPORTED", "next_phase": "POST_P11_RESEARCH"},
+    {"id": "P0", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
+    {"id": "J0", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
+    {"id": "M0", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "EXTERNAL_EMISSION", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "MEMORY_WRITE", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
     {"id": "HDS_FRAME", "current_status": "SUPPORTED", "next_phase": "REGRESSION"},
@@ -172,6 +172,6 @@
     {"id": "CLAIM_MINIMUM_THREE", "status": "SUPPORTED", "primary_test": "tests/unit/test_minimum_three_certificate_p9.py"},
     {"id": "CLAIM_SAMPLE_COMPLETE", "status": "SUPPORTED", "primary_test": "tests/unit/test_s5_rendered_policy.py"},
     {"id": "CLAIM_GENERALIZATION", "status": "UNSUPPORTED", "primary_test": null},
-    {"id": "CLAIM_RELEASE_STATE_FIXED", "status": "PARTIAL", "primary_test": null}
+    {"id": "CLAIM_RELEASE_STATE_FIXED", "status": "SUPPORTED", "primary_test": "tests/unit/test_p11_release_state.py"}
   ]
 }

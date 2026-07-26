@@ -1,7 +1,7 @@
 # P11 Release-state Freeze
 
 - phase: `P11_RELEASE_STATE_FREEZE`
-- state: `IN_PROGRESS`
+- state: `COMPLETE`
 - predecessor: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
 - operation mode: `OFFLINE`
 - successor: `P12_OFFICIAL_ARC_CONNECTION`
@@ -97,3 +97,24 @@ analysis/release/P11_RELEASE_STATE.json
 - 未知taskへの汎化は`MEASURED_NOT_PROVEN`。
 - 公式ARC接続、`OperationMode.COMPETITION`、Kaggle、submissionは未実行。
 - P12以降は本依頼のscope外であり、P11中に前倒ししない。
+
+## 6. 固定結果
+
+| 項目 | 固定値 |
+|---|---|
+| code commit | `dca7be72c82389334ed2c3d585ec3c90c2b53914` |
+| code tree | `a62902ca3f7b11bc8ba36d52e533d2142a405b30` |
+| regression | 7/7 PASS |
+| regression digest | `arc3_p11_regression_report:f93d72be7de8982bff0002671d505e3e234809b5aeb90853283eaa0654f92b75` |
+| P0 initial digest | `3b4330dff890310572abfadc42470f1549bb35c2ff351d007bc1557e99c70a62` |
+| J0 initial digest | `2c87595b6ea7c415a9d09b5c5adabefaf2a9e3ad9e9bb339674f9c8c6de2d798` |
+| M0 initial digest | `2c8c4194e7be89117eb1d39de6be98eab87fa5af6a0a6bd369e1fb2dca1a2aff` |
+| sample ZIP SHA-256 | `c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d505de2b1ec61d645` |
+| wheel | `arc_agi_3_agents-0.1.0-py3-none-any.whl` |
+| wheel reproducibility | 二回byte一致 |
+| wheel SHA-256 | `79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6` |
+| release digest | `arc3_p11_release_state:70ffdd4395d0f50b312c002b226bd8c92ec1818597e913a72310dd1739177848` |
+
+packageにはRuntime policy manifest/weightsを含み、S5 training corpus、
+`analysis/`、`environment_files/`を含めない。公式環境readinessと未知task汎化は
+この固定結果から主張しない。

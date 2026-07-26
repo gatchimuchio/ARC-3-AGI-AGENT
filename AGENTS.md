@@ -23,7 +23,8 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P11_RELEASE_STATE_FREEZE` です。
+`P11_RELEASE_STATE_FREEZE` は完了しています。`P12_OFFICIAL_ARC_CONNECTION` は
+未開始かつcurrent request外であり、現在実行中のphaseはありません。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -101,13 +102,19 @@ P10 complete:
   two full S6 reports are byte-identical
   S6 conclusion is MEASURED_NOT_PROVEN; generalization is not claimed
 
-P11 current:
-  freeze code, dependency, Python, P0, J0, M0, dataset, compiler, seed,
-  action budget, regression suite, full-sample evidence, and package digest
-  current block is WB-P11-RELEASE-STATE-FREEZE
+P11 complete:
+  code commit dca7be72c82389334ed2c3d585ec3c90c2b53914
+  code tree a62902ca3f7b11bc8ba36d52e533d2142a405b30
+  Python 3.12.13, uv 0.11.32, setuptools 83.0.0
+  P0, J0, M0, dataset, compiler, seed, action budget are fixed
+  full regression 7 / 7 PASS and tracked secret finding 0
+  two wheels are byte-identical
+  wheel SHA-256 79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6
+  release digest arc3_p11_release_state:
+    70ffdd4395d0f50b312c002b226bd8c92ec1818597e913a72310dd1739177848
 ```
 
-### P11で許可される作業
+### P11で実施・固定した作業
 
 - P10正本の再読・digest検証・同一条件回帰
 - P0/J0/M0の空の初期状態とversion/digest固定
@@ -116,7 +123,7 @@ P11 current:
 - P0〜P10を含むfull unit/integration/static regression
 - tracked secret scan、release manifest、release-state文書の生成
 
-### P11で禁止される作業
+### P12以降を開始するまで禁止される作業
 
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
@@ -323,7 +330,7 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - S1からS5で固定action、座標、ID、source/hiddenを順番に除去
 - S5 rendered-only 183/183、S6七摂動測定、二回byte一致
 
-### P11: Release-state Freeze — 現在
+### P11: Release-state Freeze — 完了
 
 - code/dependency/P0/J0/M0/dataset/compiler/seed/budgetを固定
 - 全sample証拠、package digest、regression suiteを固定
@@ -334,7 +341,7 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - P13 Kaggle submission paths
 - P14 actual submission / official-result optimization
 
-P11完了前にP12以降へ進まない。
+P12以降はユーザーの明示的phase開始指示なしに進めない。
 
 ## 9. 検証規約
 

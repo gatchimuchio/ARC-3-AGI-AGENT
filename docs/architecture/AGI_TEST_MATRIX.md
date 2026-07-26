@@ -1,7 +1,7 @@
 # AGI最小三構成 Test Matrix
 
-- current phase: `P11_RELEASE_STATE_FREEZE`
-- last completed phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
+- current phase: none (`P12_NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE`)
+- last completed phase: `P11_RELEASE_STATE_FREEZE`
 - current executable regression gates:
   `test_agi_minimum_three_audit.py`,
   `test_evidence_compiler.py`,
@@ -51,12 +51,9 @@
 | `T-P10-S5-DETERMINISM` | sample reproducibility | `P10_REPRODUCIBILITY_AUDIT.json` | seed 0の全183 report二回がbyte一致 | 実行済み |
 | `T-P10-S6-MEASUREMENT` | `CLAIM_GENERALIZATION`境界 | `test_s6_generalization.py`, S6 report | 七摂動14,336件、exception 0、二回byte一致、claimは`MEASURED_NOT_PROVEN` | 実装・実行済み |
 | `T-P11-INITIAL-STATE` | P0/J0/M0 | `test_p11_release_state.py` | P digest、J authority count 0、M version/entry 0 | 実装・実行済み |
-
-## 後続phaseの固定試験
-
-| Test ID | Primary claim | Phase | 必須反証条件 |
-|---|---|---|---|
-| `T-P11-REBUILD` | `CLAIM_RELEASE_STATE_FIXED` | P11 | P0/J0/M0/dataset/compiler/package digest差でFAIL |
+| `T-P11-REGRESSION` | `CLAIM_RELEASE_STATE_FIXED` | `P11_REGRESSION_REPORT.json` | compileall、ruff、strict mypy、全unit、全integration、diff、secretの7/7 PASS | 実行済み |
+| `T-P11-PACKAGE` | `CLAIM_RELEASE_STATE_FIXED` | `P11_RELEASE_STATE.json`, `test_p11_release_state.py` | pinned build、wheel二回byte一致、Runtime bundle同梱、corpus/source/analysis非同梱 | 実装・実行済み |
+| `T-P11-REBUILD` | `CLAIM_RELEASE_STATE_FIXED` | `load_p11_release_state` | P0/J0/M0/dataset/compiler/package digest差でFAIL | 実行済み |
 
 ## claim昇格規則
 

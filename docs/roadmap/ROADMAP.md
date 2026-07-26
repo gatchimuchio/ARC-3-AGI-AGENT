@@ -30,7 +30,7 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P8 | 三主体Trinity循環 | 完了 |
 | P9 | 全8部分集合監査 | 完了 |
 | P10 | ARC3全sample完全攻略 | 完了 |
-| P11 | 完成状態固定 | 現在 |
+| P11 | 完成状態固定 | 完了 |
 | P12 | 公式ARC環境接続 | current request外 |
 | P13 | Kaggle提出経路 | current request外 |
 | P14 | 実提出・公式結果最適化 | current request外 |
@@ -48,7 +48,7 @@ P10は完全閉包先行・水平減算の順で閉じた。
 - S6 full rerun: 二回byte-identical
 - S6 claim: `MEASURED_NOT_PROVEN`
 
-P11では次だけを行う。
+P11は次を固定して完了した。
 
 - code commit/tree、dependency lock、Python versionの固定
 - P0/J0/M0、dataset/compiler、seed、action budgetの固定
@@ -56,8 +56,16 @@ P11では次だけを行う。
 - reproducible wheel buildとpackage内容・digest監査
 - 全sample・authority・水平減算・S6証拠のrelease manifestへの束縛
 
-P11ではRuntime P、score、sample能力を変更しない。公式接続、
+- code commit: `dca7be72c82389334ed2c3d585ec3c90c2b53914`
+- regression: 7/7 PASS、tracked secret finding 0
+- wheel: 二回byte一致、SHA-256
+  `79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6`
+- release digest:
+  `arc3_p11_release_state:70ffdd4395d0f50b312c002b226bd8c92ec1818597e913a72310dd1739177848`
+
+P11はRuntime P、score、sample能力を変更していない。公式接続、
 `OperationMode.COMPETITION`、Kaggle作業はP12以降でありcurrent request外。
+現在実行中のphaseはない。
 
 ## 監査正本
 

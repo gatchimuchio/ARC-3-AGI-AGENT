@@ -6,11 +6,12 @@
 > を参照する。
 
 - phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
-- state: `IN_PROGRESS`
+- state: `HISTORICAL_R0_SUPERSEDED`
 - predecessor: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
 - successor: `P11_RELEASE_STATE_FREEZE`
+- successor state: `COMPLETE`
 - operation mode: `OFFLINE` only
-- HDS judgment: `HOLD`
+- HDS judgment: `HISTORICAL_R0_HOLD`
 
 ## 1. Work-block FrameSpec
 

@@ -1,7 +1,7 @@
 # AGI最小三構成 Claim Registry
 
-- current phase: `P11_RELEASE_STATE_FREEZE`
-- last completed phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
+- current phase: none (`P12_NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE`)
+- last completed phase: `P11_RELEASE_STATE_FREEZE`
 - rule: 実装path、実行test、除去証人が揃わないclaimを`SUPPORTED`にしない
 
 | Claim ID | 主張 | 状態 | primary evidence | 反証・不足 | 次phase |
@@ -14,7 +14,7 @@
 | `CLAIM_M_PASSIVE_PATH` | 未承認mutationを拒否し、承認済みmutationを保持する | `SUPPORTED` | `test_memory_is_passive_and_rejects_unapproved_write`, `test_memory_subject_p6.py` | G4やpair/Trinityは含まない | 回帰 |
 | `CLAIM_P2_ROOT_AUDIT` | 全設計要素、claim、test、gap、順序がaccountingされる | `SUPPORTED` | `test_agi_minimum_three_audit.py` | runtime能力増加のclaimではない | P3 |
 | `CLAIM_P3_EVIDENCE_COMPILER` | 全730 sourceをaccountingし、identity-free C/J/M fixture、provenance、holdoutを決定的に生成する | `SUPPORTED` | `test_evidence_compiler.py`, `test_p3_evidence_dataset.py` | P0/J0/M0、P-A/P-B、汎化性能は含まない | 回帰 |
-| `CLAIM_P_IMPLEMENTED` | executable instruction body Pが存在する | `SUPPORTED` | `test_instruction_body_compiler.py` | P-A/P-Bの性能・P0 release固定は含まない | P11 |
+| `CLAIM_P_IMPLEMENTED` | executable instruction body Pが存在する | `SUPPORTED` | `test_instruction_body_compiler.py` | 未知task汎化は含まない | 回帰 |
 | `CLAIM_C_COMPLETE` | `C=Execute(L0,P)`がG1を単独で満たす | `SUPPORTED` | `test_compute_subject_p4.py` | G2/G3/G4、sample攻略、汎化は含まない | 回帰 |
 | `CLAIM_J_STANDALONE` | C/P/MなしでHDS FrameからG2を満たす | `SUPPORTED` | `test_judgment_subject_p5.py` | G1/G3/G4、effect実行、sample攻略は含まない | 回帰 |
 | `CLAIM_M_STANDALONE` | C/Jなしで全memory operationを満たす | `SUPPORTED` | `test_memory_subject_p6.py` | G1/G2/G4、pair、sample攻略は含まない | 回帰 |
@@ -24,7 +24,7 @@
 | `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `SUPPORTED` | `test_minimum_three_certificate_p9.py`, `certificates/p9/` | G1〜G5定義域内の構成最小性。sample攻略・未知task汎化は含まない | 回帰 |
 | `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略する | `SUPPORTED` | `S5_RENDERED_ONLY_CLOSURE_REPORT.json`, `S5_SHORTCUT_AND_AUTHORITY_AUDIT.json`, `test_s5_rendered_policy.py`, `test_s5_rendered_runtime.py` | 保持OFFLINE sample 25 game・183 levelの範囲。未知task汎化は含まない | 回帰 |
 | `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | `S6_PERTURBATION_MEASUREMENT.json`: 七摂動14,336 responseを測定 | semantic ground truthとtransformed environment完了証拠がなく、結論は`MEASURED_NOT_PROVEN` | 後続研究 |
-| `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `PARTIAL` | `p11_release.py`, `p11_regression.py`, `test_p11_release_state.py` | code commit、full regression、reproducible wheel、最終manifest固定待ち | P11 |
+| `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `SUPPORTED` | `P11_RELEASE_STATE.json`, `P11_REGRESSION_REPORT.json`, `test_p11_release_state.py` | code `dca7be72c823...`、OFFLINE sample releaseの範囲 | 回帰 |
 | `CLAIM_OFFICIAL_READY` | COMPETITION/Kaggleへ進める | `REJECTED` | なし | 未評価、P12以降、current request外 | P12以降 |
 
 ## 禁止claim
@@ -33,6 +33,5 @@
 
 - AGI完成
 - 二周期学習成立済み
-- 全sample攻略済み
 - 汎化済み
 - 公式提出可能

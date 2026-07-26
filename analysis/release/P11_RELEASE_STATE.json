@@ -1,0 +1,281 @@
+{
+  "claims": {
+    "J0_fixed": "SUPPORTED",
+    "M0_fixed": "SUPPORTED",
+    "P0_fixed": "SUPPORTED",
+    "generalization": "MEASURED_NOT_PROVEN",
+    "minimum_three_conformance": "SUPPORTED",
+    "official_environment_readiness": "NOT_EVALUATED",
+    "release_package_reproducibility": "SUPPORTED",
+    "same_condition_reproducibility": "SUPPORTED",
+    "sample_completion_183": "SUPPORTED"
+  },
+  "code": {
+    "branch": "main",
+    "commit": "dca7be72c82389334ed2c3d585ec3c90c2b53914",
+    "tree": "a62902ca3f7b11bc8ba36d52e533d2142a405b30"
+  },
+  "competition_mode_executed": false,
+  "compiler": {
+    "s5_compilation_report_digest": "arc3_s5_runtime_policy_compilation:6934cdf156c78cdbad33eb0df9122c87ee7fa613a1c60b52c2978d30af6ef170",
+    "s5_policy_parameter_count": 4269485,
+    "s5_quantized_teacher_forced_error_count": 0,
+    "s5_teacher_forced_error_count": 0,
+    "source_inventory_digest": "bf47b413e3c66ac24cac9708f97e9606f5970c4f5bcc1903e451d7f43bf67fda",
+    "source_sha256": {
+      "ARC-AGI-3-Agents/arc3_agi_agent/teacher/p11_regression.py": "b0d969fadde56ed089b8ac2d0514b518165966b317a120dddb6e7d05ba112eea",
+      "ARC-AGI-3-Agents/arc3_agi_agent/teacher/p11_release.py": "f263dee43994a906d6d940f9b8c5b0b90d7b010598cb65178ad6c27408150c88",
+      "ARC-AGI-3-Agents/arc3_agi_agent/teacher/s5_policy_compiler.py": "58c46b6ade5e8ab15c4adb18e933a678090a198f0943e49a032f02711543fca6",
+      "ARC-AGI-3-Agents/arc3_agi_agent/teacher/s5_training_corpus.py": "a6dcad26030fe80348e93202429064a89c5ba34313409589c9d8a96edd23865e",
+      "ARC-AGI-3-Agents/arc3_agi_agent/teacher/s6_generalization.py": "82ba6d7df9dd716bfe65116f809ebf42b671fb3ef5ebd2b17ce4889e7c9f274a",
+      "ARC-AGI-3-Agents/arc3_agi_agent/teacher/solution_graph_compiler.py": "e52a506e53b6ea577ae448c25b72cddbb3814ee9dfd82bb55708d89fe1e48edb"
+    }
+  },
+  "content_digest": "arc3_p11_release_state:70ffdd4395d0f50b312c002b226bd8c92ec1818597e913a72310dd1739177848",
+  "dataset": {
+    "p3_dataset_manifest_sha256": "fa67bd2445a4c54391016eb584e3c24aa4546a32efa3df62d45ae6f3efbbe44f",
+    "p3_dataset_schema_version": "arc3-evidence-dataset-manifest-v1",
+    "p3_identity_free_audit_sha256": "c693a18e5e8d1b024437ae9291d8cf14fe96387face2ad59c1be6fa17b6e7478",
+    "p3_runtime_record_count": 5047,
+    "runtime_use_of_s5_training_corpus": "FORBIDDEN",
+    "s5_training_corpus_sha256": "7ef0eb1ab1b6e49bc32e55eec7172ea69d6db34859b4853adf0b9c2511a16975",
+    "s5_training_manifest_digest": "arc3_s5_training_corpus:b09d2359b86a9c68e651cdb0957b9984db93dfc5096096f2d792253b9cd09ff4",
+    "s5_training_manifest_sha256": "337e812b43776feb41f1983a3e0cbf22b63717c29d1a705c07a45cac2aa3d322",
+    "s5_training_record_count": 10733
+  },
+  "dependency": {
+    "arc_agi_version": "0.9.8",
+    "mypy_version": "1.17.1",
+    "numpy_version": "2.3.2",
+    "pyproject_sha256": "c42c8b903237dde7e13104fa8e62823357353441c72351f2853b6a5462c7d06f",
+    "pytest_version": "8.4.1",
+    "python_version": "3.12.13",
+    "python_version_file": "3.12.13",
+    "ruff_version": "0.12.7",
+    "scikit_learn_version": "1.9.0",
+    "uv": {
+      "filename": "uv.exe",
+      "reported_version": "uv 0.11.32 (3010295ae 2026-07-23 x86_64-pc-windows-msvc)",
+      "sha256": "23cf0f8194ff576562646a1a2950c6826249c8806cd1547debd24db77eb68f58",
+      "version": "0.11.32"
+    },
+    "uv_lock_sha256": "680db09e6d1d3291ac8dc5138dd89c86a6341e5a1a86bbf803d2a1c4885e4a92"
+  },
+  "determinism": {
+    "action_budget": 4096,
+    "python_hash_seed": 0,
+    "runtime_seed": 0,
+    "s5_action_head_random_states": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "s5_pointer_head_random_states": {
+      "horizontal": 41,
+      "vertical": 43
+    },
+    "s6_selection_algorithm": "level-first-last-first-pointer-all-reset-then-breadth-first-midpoint-round-robin-v1",
+    "s6_selection_digest": "sha256:1654a3f54470308723f0154737b97dc13b86bd41ab6353efdc337457081a29b2",
+    "source_date_epoch": 946684800
+  },
+  "environment": {
+    "expected_game_count": 25,
+    "expected_level_count": 183,
+    "git_inventory": {
+      "git_tree_inventory_sha256": "dee2437f776ac8b22603eac46ca8afce7492f3e1ca2bc5b5d342c76200d6aeec",
+      "pathspec": "environment_files",
+      "tracked_file_count": 50
+    },
+    "sample_zip_filename": "arc-prize-2026-arc-agi-3.zip",
+    "sample_zip_sha256": "c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d505de2b1ec61d645",
+    "toolkit_operation_mode": "OFFLINE"
+  },
+  "evidence": {
+    "p10_reproducibility": {
+      "content_digest": "arc3_p10_reproducibility_audit:6dabb310db3ddc894cc740c6e74976015847356bca145b4af202c1b9c7f1f62e",
+      "file_sha256": "08ad1fcb689a70b56e5a16215a0982d5724c32a414e184b8502f5dc6bf721846",
+      "filename": "P10_REPRODUCIBILITY_AUDIT.json"
+    },
+    "p9_minimum_three_certificate": {
+      "content_digest": "31045d24c936baae19d602f1d7482c0546d49d38be601f23507de25bc47f708b",
+      "file_sha256": "c2abae4d17a72b16a192d0813ef12fdb5fdf95b314f3f4e5ea6eb2b5419fc121"
+    },
+    "privilege_subtraction_matrix": {
+      "content_digest": "arc3_privilege_subtraction_matrix:11360990555c00f843013050204f7a919b69aa35d6ad5aaec3cbbd7d091af782",
+      "file_sha256": "979cab11d7c1e77035ee47e668b61acc5cba175eeb20716472e279ab57d29f2a",
+      "filename": "PRIVILEGE_SUBTRACTION_MATRIX.json"
+    },
+    "runtime_p_compilation": {
+      "content_digest": "arc3_runtime_p_compilation_report:c596ba95d32b7354ae75e71eb7e14def5f276146bc7b98f26bd97c4e55750aed",
+      "file_sha256": "b6986e7b7f4824a9d624f719e5c01e560d12af0b3c31cfd7649606762b06fb05",
+      "filename": "RUNTIME_P_COMPILATION_REPORT.json"
+    },
+    "s5_boundary_audit": {
+      "content_digest": "arc3_s5_runtime_boundary_audit:ab41466b358fcafb891d80bfef2ac6fffa75ebfab688adb33ff5c884282b0d0e",
+      "file_sha256": "9a76182eca17b0c7f1c2f42987ab126c533443d97bd85552f7d6989516090cb3",
+      "filename": "S5_SHORTCUT_AND_AUTHORITY_AUDIT.json"
+    },
+    "s5_local_score_oracle": {
+      "completed_levels": 183,
+      "completion_percentage": 100.0,
+      "file_sha256": "7e206e74b897d8b2f7d55d443649a5ce50afb6ccf4be48f48ac0ccef3f5bc199",
+      "filename": "S5_LOCAL_SCORE_ORACLE.json",
+      "rhae_percentage": 99.619936696,
+      "score_digest": "327aacf48e6d14580449b2d55ba364c48fdb61ce065da1c997aa1267309b11ed"
+    },
+    "s5_rendered_only_closure": {
+      "content_digest": "arc3_s5_rendered_runtime_closure:6da4a6872eb37a14903827fc80abd3ea59b8d51f642398ab8cd607da12a68d67",
+      "file_sha256": "3d28de66699b07a95ef7c8c5872d7158c338fd230ce10039ccddc80445b93c2b",
+      "filename": "S5_RENDERED_ONLY_CLOSURE_REPORT.json"
+    },
+    "s6_generalization_measurement": {
+      "content_digest": "arc3_s6_perturbation_measurement:3642c6b8c4dcbb8b4279f97af6bac257d636b076c073f1de8afc7ade8f8d4f83",
+      "file_sha256": "66e71375b02812e3e03a1f5af045f4c69cfd3a6e3db54f234d0c6a649304151d",
+      "filename": "S6_PERTURBATION_MEASUREMENT.json"
+    }
+  },
+  "initial_state": {
+    "J0": {
+      "authority": "HDS alone commands, judges, stops, authorizes memory, authorizes reset, and authorizes external emission.",
+      "controller_type": "HDSController",
+      "frame_policy": {
+        "acceptance_criteria": [
+          "W_X_R_MC_CLOSED"
+        ],
+        "additional_stopping_conditions": [],
+        "allow_external_emit": true,
+        "allow_memory_write": true,
+        "boundary": "rendered-observation-only",
+        "max_risk": 1.0,
+        "policy_id": "hds-frame-policy:default-v1",
+        "purpose": "select-safe-closed-action-candidate",
+        "rejection_criteria": [
+          "hazard",
+          "contradiction",
+          "closure-invalid"
+        ],
+        "stop_on": [
+          "terminal-win",
+          "hazard",
+          "budget-exhaustion"
+        ]
+      },
+      "frame_policy_digest": "69d2156572e816a7ec2b222a751f77553b30ab805fc49525cb910b6a9a34c258",
+      "initial_counts": {
+        "counter": 0,
+        "decision_count": 0,
+        "emission_directive_count": 0,
+        "issued_compute_command_count": 0,
+        "memory_directive_count": 0,
+        "observed_emission_count": 0,
+        "outcome_retention_decision_count": 0,
+        "outcome_retention_directive_count": 0,
+        "owned_compute_command_count": 0,
+        "policy_reset_decision_count": 0,
+        "policy_reset_directive_count": 0,
+        "retained_compute_binding_count": 0
+      },
+      "initial_state_digest": "2c87595b6ea7c415a9d09b5c5adabefaf2a9e3ad9e9bb339674f9c8c6de2d798",
+      "judgment_subject_type": "HDSJudgmentSubject",
+      "outcome_retention_controller_type": "HDSOutcomeRetentionController",
+      "policy_reset_controller_type": "HDSPolicyResetController",
+      "rollback_conditions": [
+        "hazard-or-closure-rejection",
+        "authorized-GAME_OVER-recovery",
+        "rendered-policy-compatibility-reset"
+      ]
+    },
+    "M0": {
+      "active_entry_count": 0,
+      "archive_entry_count": 0,
+      "initial_state_digest": "2c8c4194e7be89117eb1d39de6be98eab87fa5af6a0a6bd369e1fb2dca1a2aff",
+      "max_entries": 1,
+      "max_history_snapshots": 3,
+      "memory_type": "PassiveMemory",
+      "provenance_event_count": 0,
+      "retained_snapshot_versions": [
+        0
+      ],
+      "runtime_identity_free": true,
+      "snapshot_digest": "f4c1a48d8de902bee887a9973ad201e342907926353ce0adc17dcf90c3d6b0ab",
+      "version": 0
+    },
+    "P0": {
+      "body_version": "s5-rendered-history-mlp-v1",
+      "content_digest": "sha256:87408c43b6dad4f82111f1b06b19fdf028f32a832ec9259694bcde7ee4d9c464",
+      "format_id": "rendered-history-mlp",
+      "initial_state_digest": "3b4330dff890310572abfadc42470f1549bb35c2ff351d007bc1557e99c70a62",
+      "parameter_count": 4269485,
+      "parameter_dtype": "float16",
+      "provenance_digest": "sha256:9121a1366346498b92a3b5017395eeefdfe6eec9c10060b8bfbc2505d6e9f8a2",
+      "runtime_artifact_contains_training_examples": false,
+      "runtime_identity_free": true,
+      "runtime_inputs": [
+        "rendered observation",
+        "available actions",
+        "bounded action effect history",
+        "HDS approved passive memory"
+      ],
+      "weights_sha256": "ce48c87c8bf6879d9b2cb09c1b50fd99929386d9ba08905aea3b5baf788f5d12"
+    }
+  },
+  "kaggle_work_executed": false,
+  "next_phase": {
+    "phase": "P12",
+    "status": "NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE"
+  },
+  "official_connection_executed": false,
+  "operation_mode": "offline",
+  "package": {
+    "archive_entry_count": 183,
+    "archive_entry_inventory_digest": "7b9469cdcc72e36de0aa5b06150b8361d2b572b902647b5235377674f2a67430",
+    "build_contract": {
+      "backend": "setuptools.build_meta",
+      "backend_generator": "setuptools (83.0.0)",
+      "backend_version": "83.0.0",
+      "command_wsl_windows_interop": "SOURCE_DATE_EPOCH=946684800 WSLENV=SOURCE_DATE_EPOCH uv.exe build --wheel --out-dir <output>",
+      "source_date_epoch": 946684800,
+      "wsl_environment_bridge_required": true
+    },
+    "byte_reproducible": true,
+    "contains_analysis_artifacts": false,
+    "contains_environment_sources": false,
+    "contains_runtime_policy_manifest": true,
+    "contains_runtime_policy_weights": true,
+    "contains_training_corpus": false,
+    "development_compiler_modules_included": true,
+    "filename": "arc_agi_3_agents-0.1.0-py3-none-any.whl",
+    "reproduction_sha256": "79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6",
+    "sha256": "79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6",
+    "size_bytes": 8841144
+  },
+  "phase": "P11-RELEASE-STATE-FREEZE",
+  "regression": {
+    "passed_validation_count": 7,
+    "report_digest": "arc3_p11_regression_report:f93d72be7de8982bff0002671d505e3e234809b5aeb90853283eaa0654f92b75",
+    "report_sha256": "8d6ee7d6fc5a418f11c311b1221b4a641dae60334959f26f630be8b4e3028641",
+    "tracked_secret_scan": {
+      "high_confidence_finding_count": 0,
+      "pattern_set": [
+        "OPENAI_STYLE_KEY",
+        "GITHUB_TOKEN",
+        "AWS_ACCESS_KEY",
+        "PRIVATE_KEY_BLOCK"
+      ],
+      "scanned_text_file_count": 701,
+      "skipped_binary_file_count": 2,
+      "status": "PASS",
+      "tracked_file_count": 735
+    },
+    "validation_count": 7
+  },
+  "schema_version": "arc3-p11-release-state-v1",
+  "status": "P11_RELEASE_STATE_FIXED"
+}

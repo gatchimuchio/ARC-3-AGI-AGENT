@@ -1,0 +1,112 @@
+{
+  "branch": "main",
+  "code_commit": "dca7be72c82389334ed2c3d585ec3c90c2b53914",
+  "code_tree": "a62902ca3f7b11bc8ba36d52e533d2142a405b30",
+  "commands": [
+    {
+      "command": [
+        "{PYTHON}",
+        "-m",
+        "compileall",
+        "-q",
+        "arc3_agi_agent",
+        "agents",
+        "tests/unit",
+        "tests/integration"
+      ],
+      "command_id": "COMPILEALL",
+      "return_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "{PYTHON}",
+        "-m",
+        "ruff",
+        "check",
+        "arc3_agi_agent",
+        "agents/__init__.py",
+        "agents/recorder.py",
+        "tests/conftest.py",
+        "tests/unit",
+        "tests/integration"
+      ],
+      "command_id": "RUFF",
+      "return_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "{PYTHON}",
+        "-m",
+        "mypy",
+        "arc3_agi_agent",
+        "--strict"
+      ],
+      "command_id": "MYPY_STRICT",
+      "return_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "{PYTHON}",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/unit",
+        "--basetemp={SCRATCH}/p11-pytest-unit"
+      ],
+      "command_id": "PYTEST_UNIT",
+      "return_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "{PYTHON}",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/integration",
+        "--basetemp={SCRATCH}/p11-pytest-integration"
+      ],
+      "command_id": "PYTEST_INTEGRATION",
+      "return_code": 0,
+      "status": "PASS"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "HEAD"
+      ],
+      "command_id": "GIT_DIFF_CHECK",
+      "return_code": 0,
+      "status": "PASS"
+    }
+  ],
+  "content_digest": "arc3_p11_regression_report:f93d72be7de8982bff0002671d505e3e234809b5aeb90853283eaa0654f92b75",
+  "failed_validation_ids": [],
+  "operation_mode": "offline",
+  "passed_validation_count": 7,
+  "phase": "P11-RELEASE-STATE-REGRESSION",
+  "python_hash_seed": 0,
+  "python_version": "3.12.13",
+  "schema_version": "arc3-p11-regression-report-v1",
+  "status": "PASS",
+  "tracked_secret_scan": {
+    "high_confidence_finding_count": 0,
+    "pattern_set": [
+      "OPENAI_STYLE_KEY",
+      "GITHUB_TOKEN",
+      "AWS_ACCESS_KEY",
+      "PRIVATE_KEY_BLOCK"
+    ],
+    "scanned_text_file_count": 701,
+    "skipped_binary_file_count": 2,
+    "status": "PASS",
+    "tracked_file_count": 735
+  },
+  "uv_lock_sha256": "680db09e6d1d3291ac8dc5138dd89c86a6341e5a1a86bbf803d2a1c4885e4a92",
+  "validation_count": 7
+}

@@ -7,6 +7,7 @@
 - Teacher boundary: `DEVELOPMENT_ONLY`
 - Runtime Student boundary: `RENDERED_ONLY`
 - successor: `P11_RELEASE_STATE_FREEZE`
+- successor state: `COMPLETE`
 
 ## 1. 最上位順序
 
@@ -658,13 +659,14 @@ python -m pytest -q \
   tests/integration/test_teacher_s4_graph.py
 ```
 
-## 8. 次work block
+## 8. 後続状態
 
 ```text
-WB-P11-RELEASE-STATE-FREEZE
+P11_RELEASE_STATE_FREEZE = COMPLETE
+P12_OFFICIAL_ARC_CONNECTION = NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE
 ```
 
-P10-R0〜R6は順序通り閉じた。次はpolicyやscoreを変更せず、code、
+P10-R0〜R6は順序通り閉じた。P11はpolicyやscoreを変更せず、code、
 dependency、Python、P0/J0/M0、dataset、compiler、seed、budget、全sample
-証拠、regression suite、reproducible package digestをP11 release stateへ
-固定する。P11完了前にP12以降へ進まない。
+証拠、regression suite、reproducible package digestをrelease stateへ固定して
+完了した。P12以降は未開始でありcurrent request外である。
