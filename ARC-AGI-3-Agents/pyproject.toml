@@ -52,6 +52,9 @@ arc3-teacher-local-overlay = "arc3_agi_agent.teacher.local_solution_overlay:main
 arc3-teacher-replay = "arc3_agi_agent.teacher.replay_runner:main"
 arc3-compile-solution-graphs = "arc3_agi_agent.teacher.solution_graph_compiler:main"
 arc3-teacher-score-adapter = "arc3_agi_agent.teacher.score_adapter:main"
+arc3-compile-s1-graph = "arc3_agi_agent.teacher.s1_graph_compiler:main"
+arc3-teacher-s1-execute = "arc3_agi_agent.teacher.s1_graph_executor:main"
+arc3-teacher-s1-score-adapter = "arc3_agi_agent.teacher.s1_score_adapter:main"
 
 [build-system]
 requires = ["setuptools>=77"]

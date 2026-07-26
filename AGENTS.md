@@ -95,12 +95,17 @@ P10 current:
   privileged Teacher local-oracle result is RHAE 99.446886157%
   R2 has 183 source-causal solution graphs and 183 success/hazard contrasts
   R3 has 158 source-causal progression edges and an identity-free grammar
-  R2/R3 extraction is complete; fixed-action-free execution is not proven
-  S0 is PASS; S1 through S6 are NOT_RUN
+  R4/S1 state-conditioned Teacher closes 25 / 25 games and 183 / 183 levels
+  S1 executes 10,733 actions with error 0 and strict WIN-distance decrease
+  S1 graph has 11,387 state nodes and 11,383 action edges
+  S1 local-oracle result is RHAE 99.619936696% (+0.173050539 pp vs S0)
+  S1 full graph and closure report are byte-identical across two fresh runs
+  fixed action sequence, replay position, and action ordinal decisions are absent
+  S0 and S1 are PASS; S2 through S6 are NOT_RUN
   Runtime Student P is unchanged and rendered-only 183 / 183 is NOT_PROVEN
   C2/C3 and negative-only probe work are frozen historical evidence
   the current block is
-  WB-S1-FIXED-ACTION-SUBTRACTION-EXECUTOR
+  WB-S2-LITERAL-COORDINATE-SUBTRACTION
 ```
 
 ### P10で許可される作業

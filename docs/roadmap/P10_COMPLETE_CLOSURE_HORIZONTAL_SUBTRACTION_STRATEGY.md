@@ -59,7 +59,7 @@ literal座標、source/hidden stateをRuntimeからimportまたは参照して�
 | stage | 使用条件 | 必須結果 | 現状 |
 |---|---|---:|---|
 | S0 | 全特権を許可 | 183/183 | `PASS` |
-| S1 | 固定action列を禁止 | 183/183 | `NOT_RUN` |
+| S1 | 固定action列を禁止 | 183/183 | `PASS` |
 | S2 | literal座標も禁止 | 183/183 | `NOT_RUN` |
 | S3 | task/game/level ID routingも禁止 | 183/183 | `NOT_RUN` |
 | S4 | source/hidden stateも禁止 | 183/183 | `NOT_RUN` |
@@ -96,6 +96,11 @@ R0の35/183とRHAE 18.821945363%は旧Runtime Studentの回帰値であり、
 | source frame digest mismatch | 542 |
 | local completion | 100% |
 | privileged Teacher RHAE | 99.446886157% |
+| S1 state graph | 11,387 node / 11,383 edge |
+| S1 executable action | 10,733 |
+| S1 privileged Teacher RHAE | 99.619936696% |
+| S1 RHAE delta vs S0 | +0.173050539 percentage point |
+| S1 fixed-action decision dependency | 0 |
 
 Public human trajectory inventoryは25 game、183 level、11,648 recorded action。
 FT09の公開trajectoryは保持サンプルの旧revisionを対象としていたため、既存の
@@ -165,33 +170,77 @@ game/level ID・literal座標を含まないcross-game primitive grammarには�
 183 graphのsource-causal role registryと開発仮説のeffect class分布を分離して
 保持した。
 
-grammarは183 S0 graphから因数分解した構造候補であり、固定actionなしの実行
-能力はまだ証明していない。
+grammarは183 S0 graphから因数分解した構造候補である。固定actionなしの
+S1実行証拠はR4で別に束縛する。
 
 正本:
 
 - `analysis/teacher/INTRA_GAME_PROGRESSION_GRAPH.json`
 - `analysis/teacher/CROSS_GAME_STRUCTURAL_GRAMMAR.json`
 
-### P10-R4 構造実行器 — 未開始
+### P10-R4 構造実行器 — 完了
 
-完了条件:
+S0 compilerだけが`FULL_SOLUTION_CORPUS`を読み、11,574成功遷移を
+11,387 current-state node、11,383 action edgeへ変換した。S1 executorは
+corpusをimportせず、次だけでedgeを選ぶ。
 
-- graphから観測条件付きplanを生成する
-- 固定action列を読まない
-- 全183 levelを同一条件で完了する
-- S1を183/183で閉じる
+- 現在のrendered frame digest
+- available action、level完了数、terminal state
+- S1でまだ許可されるsource/hidden state digest
+- action/effect履歴の固定長4 suffix
+- WINからのreverse-BFS距離
 
-### P10-R5 水平減算 — 未開始
+同一状態に複数edgeがある場合も、全観測targetでWIN距離が厳密に減少する
+actionだけを採用する。`step`、cursor、replay index、action ordinalはgraph
+schemaで禁止し、executor sourceはcorpus依存を持たない。
 
-S1、S2、S3、S4、S5を絶対順序で実行する。
+work block契約:
+
+- `X`: S0成功遷移、保持OFFLINE環境、S1 Teacher packageだけを観測し、
+  state graph、executor、S1証拠だけを変更する。
+- `R`: current-state conditionからgraph nodeを引き、選択edge実行後に再観測し、
+  WIN距離の厳密減少とlevel commitを検証する。
+- `Mc`: 25/25 game、183/183 level、error 0、node miss 0、unexpected target 0、
+  全actionで距離減少の場合だけS1を`PASS`とする。
+- 非目的: literal座標、ID routing、source/hidden state、answer/replay graphの
+  除去、およびRuntime Student Pへの採用。
+- 証拠境界: S1は開発用Teacher証拠でありrendered-only能力ではない。
+- 反証条件: position key、corpus import、距離非減少、未知node/target、
+  `GAME_OVER`、未完levelのいずれか。
+- 回帰線: S0 183/183を維持し、同じOFFLINE sampleでS1も183/183。
+
+結果:
+
+- source transition witness: 11,574
+- state node: 11,387
+- action edge: 11,383
+- branch node: 20
+- merged state node: 110
+- nondeterministic same-action target: 0
+- S1 executable action: 10,733
+- fixed action sequence / replay position / action ordinal decision: 0
+- same-sample local oracle: RHAE 99.619936696%
+- S0 local-oracle delta: +0.173050539 percentage point
+- full graph rerun: byte-identical
+  (`sha256:d3f5685c52fbbc644d47f10c7124cec93950dd5b40c9b30a0f3df4ef88b98223`)
+- full closure rerun: byte-identical
+  (`sha256:7f09a63e7014720bf5b0822a97de6152b76cae8074ce0357409e2498ad60ac90`)
+
+正本:
+
+- `analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json`
+- `analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json`
+
+### P10-R5 水平減算 — S2待機
+
+S1は完了した。次はliteral座標を除去するS2であり、S3以降へ先行しない。
 
 正本:
 
 - `analysis/teacher/PRIVILEGE_SUBTRACTION_MATRIX.json`
 - `analysis/teacher/RUNTIME_P_COMPILATION_REPORT.json`
 
-現状のRuntime P reportは`BLOCKED_BY_UNSUBTRACTED_S0_PRIVILEGES`であり、
+現状のRuntime P reportは`BLOCKED_BY_S2_LITERAL_COORDINATES`であり、
 Runtime P変更・rule採用・graph採用はいずれも0である。
 
 ### P10-R6 汎化試験 — 未開始
@@ -234,6 +283,11 @@ analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json
 analysis/teacher/TEACHER_S0_ORACLE_ADAPTER_REPORT.json
 analysis/teacher/TEACHER_S0_LOCAL_SCORE_ORACLE.json
 analysis/teacher/TEACHER_S0_LOCAL_SCORE_ORACLE.md
+analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json
+analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json
+analysis/teacher/TEACHER_S1_ORACLE_ADAPTER_REPORT.json
+analysis/teacher/TEACHER_S1_LOCAL_SCORE_ORACLE.json
+analysis/teacher/TEACHER_S1_LOCAL_SCORE_ORACLE.md
 ```
 
 ## 7. 再生成・検証
@@ -249,25 +303,42 @@ python -m arc3_agi_agent.teacher.replay_runner \
   --corpus ../analysis/teacher/FULL_SOLUTION_CORPUS.json \
   --output ../analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json
 
+python -m arc3_agi_agent.teacher.s1_graph_compiler \
+  --environments-dir ../environment_files \
+  --corpus ../analysis/teacher/FULL_SOLUTION_CORPUS.json \
+  --output \
+    ../analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json
+
+python -m arc3_agi_agent.teacher.s1_graph_executor \
+  --environments-dir ../environment_files \
+  --policy-graph \
+    ../analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json \
+  --output ../analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json
+
 python -m arc3_agi_agent.teacher.solution_graph_compiler \
   --corpus ../analysis/teacher/FULL_SOLUTION_CORPUS.json \
   --closure-report ../analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json \
   --environments-dir ../environment_files \
   --development-level-ledger \
     ../analysis/development/LEGACY_LEVEL_ANALYSIS_LEDGER.json \
+  --s1-policy-graph \
+    ../analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json \
+  --s1-closure-report \
+    ../analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json \
   --output-dir ../analysis/teacher
 
 python -m pytest -q \
   tests/unit/test_teacher_complete_closure.py \
-  tests/integration/test_teacher_s0_replay.py
+  tests/integration/test_teacher_s0_replay.py \
+  tests/integration/test_teacher_s1_graph.py
 ```
 
 ## 8. 次work block
 
 ```text
-WB-S1-FIXED-ACTION-SUBTRACTION-EXECUTOR
+WB-S2-LITERAL-COORDINATE-SUBTRACTION
 ```
 
-R1〜R3は閉じた。次はsource-causal graphから観測条件付きplanを生成し、
-固定action列を一切読まずにS1を183/183へ閉じる。S1が183/183になる前に
-S2以降へ進まない。
+R1〜R4とS1は閉じた。次はS1 graphのpointer targetをrole-relative selectorへ
+変換し、literal x/yを一切読まずにS2を183/183へ閉じる。S2が183/183に
+なる前にS3以降へ進まない。

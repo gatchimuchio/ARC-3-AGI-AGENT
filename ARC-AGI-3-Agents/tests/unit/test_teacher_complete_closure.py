@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import unittest
+from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
@@ -14,6 +15,18 @@ from arc3_agi_agent.teacher.human_replay_corpus import (
 )
 from arc3_agi_agent.teacher.local_solution_overlay import (
     load_local_override_manifest,
+)
+from arc3_agi_agent.teacher.s1_graph_executor import (
+    S1_CLOSURE_REPORT_DIGEST_PREFIX,
+    load_s1_closure_report,
+)
+from arc3_agi_agent.teacher.s1_graph_schema import (
+    S1_GAME_GRAPH_DIGEST_PREFIX,
+    S1_POLICY_GRAPH_DIGEST_PREFIX,
+    load_s1_policy_graph,
+)
+from arc3_agi_agent.teacher.s1_score_adapter import (
+    S1_SCORE_ADAPTER_DIGEST_PREFIX,
 )
 from arc3_agi_agent.teacher.solution_graph_compiler import (
     CROSS_GAME_GRAMMAR_DIGEST_PREFIX,
@@ -356,7 +369,20 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             matrix["source_or_hidden_state_dependent_count"],
             183,
         )
-        for stage in ("S1", "S2", "S3", "S4", "S5", "S6"):
+        self.assertEqual(
+            matrix["stage_summary"]["S1"]["status"],
+            "PASS",
+        )
+        self.assertEqual(
+            matrix["stage_summary"]["S1"]["completed_levels"],
+            183,
+        )
+        self.assertEqual(matrix["fixed_action_dependent_count"], 0)
+        self.assertEqual(
+            matrix["s0_fixed_action_dependent_count"],
+            183,
+        )
+        for stage in ("S2", "S3", "S4", "S5", "S6"):
             self.assertEqual(
                 matrix["stage_summary"][stage]["status"],
                 "NOT_RUN",
@@ -371,8 +397,157 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             "PASS",
         )
         self.assertEqual(
+            runtime["claims"]["fixed_action_free_183"],
+            "PASS",
+        )
+        self.assertEqual(
+            runtime["claims"]["literal_coordinate_free_183"],
+            "NOT_PROVEN",
+        )
+        self.assertEqual(
+            runtime["compilation"]["first_required_stage"],
+            "S2",
+        )
+        self.assertEqual(
             runtime["claims"]["rendered_only_183"],
             "NOT_PROVEN",
+        )
+
+    def test_s1_graph_is_state_conditioned_and_closes_all_levels(
+        self,
+    ) -> None:
+        graph = load_s1_policy_graph(
+            TEACHER_ANALYSIS
+            / "S1_STATE_CONDITIONED_POLICY_GRAPH.json"
+        )
+        report = load_s1_closure_report(
+            TEACHER_ANALYSIS
+            / "TEACHER_S1_CLOSURE_REPORT.json"
+        )
+        _assert_digest(
+            self,
+            graph,
+            S1_POLICY_GRAPH_DIGEST_PREFIX,
+        )
+        _assert_digest(
+            self,
+            report,
+            S1_CLOSURE_REPORT_DIGEST_PREFIX,
+        )
+
+        self.assertEqual(graph["game_count"], 25)
+        self.assertEqual(graph["level_count"], 183)
+        self.assertEqual(
+            graph["source_transition_witness_count"],
+            11574,
+        )
+        self.assertEqual(graph["strict_progress_game_count"], 25)
+        self.assertEqual(graph["action_effect_history_limit"], 4)
+        self.assertFalse(
+            graph["remaining_privilege_dependencies"][
+                "fixed_action_sequence"
+            ]
+        )
+        self.assertTrue(
+            graph["remaining_privilege_dependencies"][
+                "task_game_identity"
+            ]
+        )
+        self.assertTrue(
+            graph["remaining_privilege_dependencies"][
+                "source_or_hidden_state"
+            ]
+        )
+        self.assertEqual(report["completed_levels"], 183)
+        self.assertEqual(report["error_count"], 0)
+        self.assertTrue(report["all_complete"])
+        self.assertFalse(report["fixed_action_sequence_used"])
+        self.assertFalse(report["decision_uses_replay_position"])
+        self.assertFalse(report["decision_uses_action_ordinal"])
+        self.assertEqual(
+            report["strict_distance_decrease_count"],
+            report["actions_executed"],
+        )
+        self.assertEqual(
+            report["source_policy_graph_digest"],
+            graph["content_digest"],
+        )
+
+        forbidden_node_keys = {
+            "step",
+            "source_step",
+            "cursor",
+            "replay_index",
+            "action_ordinal",
+            "source_order",
+        }
+
+        def collect_keys(value: object) -> set[str]:
+            if isinstance(value, dict):
+                return set(value).union(
+                    *(
+                        collect_keys(item)
+                        for item in value.values()
+                    ),
+                    set(),
+                )
+            if isinstance(value, list):
+                return set().union(
+                    *(collect_keys(item) for item in value),
+                    set(),
+                )
+            return set()
+
+        self.assertEqual(
+            collect_keys(graph).intersection(forbidden_node_keys),
+            set(),
+        )
+        for game in graph["games"]:
+            _assert_digest(
+                self,
+                game,
+                S1_GAME_GRAPH_DIGEST_PREFIX,
+            )
+            self.assertTrue(game["strict_progress_policy"])
+            for node in game["nodes"]:
+                if node["goal_node"]:
+                    self.assertIsNone(
+                        node["selected_action_signature"]
+                    )
+                    continue
+                selected = [
+                    edge
+                    for edge in node["outgoing_edges"]
+                    if edge["action_signature"]
+                    == node["selected_action_signature"]
+                ]
+                self.assertEqual(len(selected), 1)
+                self.assertTrue(
+                    selected[0]["strict_distance_decrease"]
+                )
+                self.assertTrue(
+                    all(
+                        distance < node["distance_to_goal"]
+                        for distance in selected[0][
+                            "target_distance_to_goal"
+                        ]
+                    )
+                )
+
+    def test_s1_executor_has_no_corpus_or_position_dependency(self) -> None:
+        source = (
+            PACKAGE_ROOT / "teacher" / "s1_graph_executor.py"
+        ).read_text(encoding="utf-8")
+        forbidden = (
+            "FULL_SOLUTION_CORPUS",
+            "human_replay_corpus",
+            "source_step",
+            "replay_index",
+            "for raw_action in",
+        )
+        self.assertEqual(
+            [token for token in forbidden if token in source],
+            [],
         )
 
     def test_runtime_package_does_not_import_teacher_artifacts(self) -> None:
@@ -415,6 +590,57 @@ class TeacherCompleteClosureTests(unittest.TestCase):
         self.assertEqual(current["error_count"], 0)
         self.assertFalse(
             current["evaluation_provenance"][
+                "architecture_evidence_eligible"
+            ]
+        )
+
+        s1_adapter = _json(
+            TEACHER_ANALYSIS / "TEACHER_S1_ORACLE_ADAPTER_REPORT.json"
+        )
+        s1_oracle = _json(
+            TEACHER_ANALYSIS / "TEACHER_S1_LOCAL_SCORE_ORACLE.json"
+        )
+        _assert_digest(
+            self,
+            s1_adapter,
+            S1_SCORE_ADAPTER_DIGEST_PREFIX,
+        )
+        s1_current = s1_oracle["current_local_result"]
+        self.assertEqual(s1_current["completed_levels"], 183)
+        self.assertEqual(
+            s1_current["completion_rate_percent"],
+            100.0,
+        )
+        self.assertEqual(
+            s1_current["official_rhae_score_percent"],
+            99.619936696,
+        )
+        self.assertEqual(s1_current["error_count"], 0)
+        self.assertEqual(
+            Decimal(
+                str(s1_current["official_rhae_score_percent"])
+            )
+            - Decimal(str(current["official_rhae_score_percent"])),
+            Decimal("0.173050539"),
+        )
+        self.assertEqual(
+            oracle["source"]["sample_zip_sha256"],
+            "c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d"
+            "505de2b1ec61d645",
+        )
+        self.assertEqual(
+            s1_oracle["source"]["sample_zip_sha256"],
+            oracle["source"]["sample_zip_sha256"],
+        )
+        self.assertEqual(
+            {
+                tuple(report["instruction_body_versions"])
+                for report in s1_adapter["reports"]
+            },
+            {("teacher-s1-graph-v2",)},
+        )
+        self.assertFalse(
+            s1_current["evaluation_provenance"][
                 "architecture_evidence_eligible"
             ]
         )

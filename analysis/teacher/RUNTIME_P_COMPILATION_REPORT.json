@@ -1,11 +1,12 @@
 {
   "claims": {
     "cross_game_structural_factorization": "PASS",
-    "fixed_action_free_183": "NOT_PROVEN",
+    "fixed_action_free_183": "PASS",
     "generalization": "NOT_MEASURED",
     "graph_generation_183": "PASS",
     "identity_free_183": "NOT_PROVEN",
     "intra_game_progression_158": "PASS",
+    "literal_coordinate_free_183": "NOT_PROVEN",
     "rendered_only_183": "NOT_PROVEN",
     "source_causal_semantics_183": "PASS",
     "success_hazard_contrast_183": "PASS_SOURCE_CONTROL_FLOW",
@@ -14,17 +15,20 @@
   "compilation": {
     "adopted_graph_count": 0,
     "emitted_runtime_rule_count": 0,
-    "first_required_stage": "S1",
-    "first_required_work": "Compile source-causal graphs into observation-conditioned plans that reproduce all 183 commits without reading the fixed action sequences.",
+    "first_required_stage": "S2",
+    "first_required_work": "Replace literal pointer coordinates with role-relative target selectors and reproduce all 183 commits under the same OFFLINE regression.",
+    "hds_decision": "PASS_S1_HOLD_RUNTIME_P",
     "runtime_p_modified": false,
-    "status": "BLOCKED_BY_UNSUBTRACTED_S0_PRIVILEGES"
+    "status": "BLOCKED_BY_S2_LITERAL_COORDINATES"
   },
-  "content_digest": "arc3_runtime_p_compilation_report:382b4a6c70852bd2decd3cdae8cbc9d44b31d11652b47718eb04a1b274856ac2",
+  "content_digest": "arc3_runtime_p_compilation_report:0c2969504741d7fa50295d9e7bed2ef59bd1d0a692a98941ba18738af85ae5ff",
   "inputs": {
-    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:13c474e787d2f5fc4f57abcf6b7ee3bd8215d38687142875506405e3cea49864",
+    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:6f6f7364d90367e689139102ec857b083d10320932a1b1de461e86c759cbb3af",
     "intra_game_progression_graph_digest": "arc3_intra_game_progression_graph:b56ef0fda12f043aa8571f85f26c4e515ddfe924f128596d2afc0977e836ebac",
     "level_solution_graph_ledger_digest": "arc3_level_solution_graph_ledger:1dac37c3b78092c31ca151ee7305a40d644c938bf942c6c9d8684cf474e1a281",
-    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:c850723c88b13a079a3af4e8f6606e5305125db70fdd0b9d22e82b5ed299dfd3"
+    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:125eacabbb2843f150a4a75d619a7842f720092d6d8379130ab3ca36994362f6",
+    "s1_closure_report_digest": "arc3_teacher_s1_state_conditioned_closure:f0ca09125c5c188cdd6d85e3cf499d955aeb824fbccda4461515540808763a24",
+    "s1_policy_graph_digest": "arc3_teacher_s1_state_conditioned_policy_graph:3db9d0f4721a5933b320b7b8b1115dd4c745359199aa92901f7ce7e6fc4d82b4"
   },
   "phase": "P10-R4-RUNTIME-P-COMPILATION",
   "runtime_student_target": {
@@ -44,11 +48,15 @@
       "ANSWER_OR_REPLAY"
     ]
   },
-  "schema_version": "arc3-runtime-p-compilation-report-v2",
+  "schema_version": "arc3-runtime-p-compilation-report-v3",
   "teacher_runtime_separation": "ENFORCED_BY_IMPORT_BOUNDARY",
   "teacher_status": {
     "S0_closed_levels": 183,
     "S0_error_count": 0,
+    "S1_actions_executed": 10733,
+    "S1_closed_levels": 183,
+    "S1_error_count": 0,
+    "S1_fixed_action_sequence_used": false,
     "cross_game_source_causal_factorization": "PASS_183_OF_183",
     "intra_game_source_causal_edge_count": 158,
     "solution_graph_count": 183,
