@@ -1545,6 +1545,7 @@ def implicit_replay_audit(
         "generic_learning.py",
         "generic_memory.py",
         "generic_runtime.py",
+        "generic_structural.py",
         "generic_types.py",
     )
     runtime_paths = tuple(
