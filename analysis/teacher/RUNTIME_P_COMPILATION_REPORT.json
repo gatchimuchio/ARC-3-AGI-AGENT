@@ -1,26 +1,30 @@
 {
   "claims": {
+    "cross_game_structural_factorization": "PASS",
     "fixed_action_free_183": "NOT_PROVEN",
     "generalization": "NOT_MEASURED",
     "graph_generation_183": "PASS",
     "identity_free_183": "NOT_PROVEN",
+    "intra_game_progression_158": "PASS",
     "rendered_only_183": "NOT_PROVEN",
+    "source_causal_semantics_183": "PASS",
+    "success_hazard_contrast_183": "PASS_SOURCE_CONTROL_FLOW",
     "teacher_183_closure": "PASS"
   },
   "compilation": {
     "adopted_graph_count": 0,
     "emitted_runtime_rule_count": 0,
     "first_required_stage": "S1",
-    "first_required_work": "Compile observation-conditioned plans that reproduce all 183 commits without reading fixed action sequences.",
+    "first_required_work": "Compile source-causal graphs into observation-conditioned plans that reproduce all 183 commits without reading the fixed action sequences.",
     "runtime_p_modified": false,
     "status": "BLOCKED_BY_UNSUBTRACTED_S0_PRIVILEGES"
   },
-  "content_digest": "arc3_runtime_p_compilation_report:9dbdf46f97c0955086025c86651a3c6ca90b6ecca8b9ca3445d2eed2c9f02188",
+  "content_digest": "arc3_runtime_p_compilation_report:382b4a6c70852bd2decd3cdae8cbc9d44b31d11652b47718eb04a1b274856ac2",
   "inputs": {
-    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:dd6f0519b39a618acd4f374ad51748e5ac795c90e116dae7e108bbbc70388e95",
-    "intra_game_progression_graph_digest": "arc3_intra_game_progression_graph:76703eccee3b1f2a4f23f65d188c4da104dd51659aae87eeaf5aea0c64b36555",
-    "level_solution_graph_ledger_digest": "arc3_level_solution_graph_ledger:5e1b840567893a64822f8d98d88d1446128c7e77b94dd3597783559f459c75dd",
-    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:eaf2556649f8db9b280924d37c8b4223c1ea29d05f402224b879e3144d1f359f"
+    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:13c474e787d2f5fc4f57abcf6b7ee3bd8215d38687142875506405e3cea49864",
+    "intra_game_progression_graph_digest": "arc3_intra_game_progression_graph:b56ef0fda12f043aa8571f85f26c4e515ddfe924f128596d2afc0977e836ebac",
+    "level_solution_graph_ledger_digest": "arc3_level_solution_graph_ledger:1dac37c3b78092c31ca151ee7305a40d644c938bf942c6c9d8684cf474e1a281",
+    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:c850723c88b13a079a3af4e8f6606e5305125db70fdd0b9d22e82b5ed299dfd3"
   },
   "phase": "P10-R4-RUNTIME-P-COMPILATION",
   "runtime_student_target": {
@@ -40,11 +44,15 @@
       "ANSWER_OR_REPLAY"
     ]
   },
-  "schema_version": "arc3-runtime-p-compilation-report-v1",
+  "schema_version": "arc3-runtime-p-compilation-report-v2",
   "teacher_runtime_separation": "ENFORCED_BY_IMPORT_BOUNDARY",
   "teacher_status": {
     "S0_closed_levels": 183,
     "S0_error_count": 0,
-    "solution_graph_count": 183
+    "cross_game_source_causal_factorization": "PASS_183_OF_183",
+    "intra_game_source_causal_edge_count": 158,
+    "solution_graph_count": 183,
+    "source_causal_semantic_complete_count": 183,
+    "success_failure_contrast_complete_count": 183
   }
 }

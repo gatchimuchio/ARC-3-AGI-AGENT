@@ -93,13 +93,14 @@ P10 current:
   R1 privileged development Teacher is 25 / 25 games and 183 / 183 levels
   R1 OFFLINE replay is 11,574 actions, error 0, final WIN for all games
   privileged Teacher local-oracle result is RHAE 99.446886157%
-  R2 has 183 replay-grounded solution graphs; causal semantic labeling remains
-  R3 has 158 intra-game progression edges and an identity-free grammar draft
+  R2 has 183 source-causal solution graphs and 183 success/hazard contrasts
+  R3 has 158 source-causal progression edges and an identity-free grammar
+  R2/R3 extraction is complete; fixed-action-free execution is not proven
   S0 is PASS; S1 through S6 are NOT_RUN
   Runtime Student P is unchanged and rendered-only 183 / 183 is NOT_PROVEN
   C2/C3 and negative-only probe work are frozen historical evidence
   the current block is
-  WB-SOLUTION-GROUNDED-183-CLOSURE-AND-GRAPH-COMPILATION
+  WB-S1-FIXED-ACTION-SUBTRACTION-EXECUTOR
 ```
 
 ### P10で許可される作業

@@ -115,7 +115,7 @@ R11Lを含む`RESET`はrecorded `full_reset: false`を保持するため、当�
 - `analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json`
 - `analysis/teacher/TEACHER_S0_LOCAL_SCORE_ORACLE.json`
 
-### P10-R2 解法グラフ生成 — 進行中
+### P10-R2 解法グラフ生成 — 完了
 
 183 level全てについて、次を持つS0 graphを生成済み。
 
@@ -129,19 +129,41 @@ R11Lを含む`RESET`はrecorded `full_reset: false`を保持するため、当�
 - necessary/sufficient conditions
 - privilege dependencies
 
-現状は全183 graphが成功trajectoryと実行結果へ束縛されている。一方、source
-からのmechanic名、actor/object role、hidden variable、失敗因果の意味付けは
-未完了である。したがって`causal_semantic_complete_count`は0とし、
-R2全体を完了扱いしない。
+2026-07-26に、保持中の25 environment sourceを直接AST解析し、全183 graphへ
+次をcontent-boundで付与した。
+
+- 25 source fileのSHA-256と183 `Level(...)`定義
+- levelごとのsource object family、data、transform
+- `step`から到達可能なaction control-flow
+- 25 `next_level()` goal witness
+- 43 `lose()` hazard witness
+- 20 custom hidden-state exportと5 explicit-none boundary
+- source state、actor/manipuland候補集合、goal/hazard参加状態
+- 実行済み成功trajectoryとsource hazard pathの因果contrast
+
+結果は`causal_semantic_complete_count: 183`、
+`success_failure_contrast_complete_count: 183`である。
+
+sourceは難読化されているため、旧解析のhuman-readable mechanic名をsource fact
+とは扱わない。名称・effect class・semantic state名は
+`DEVELOPMENT_HYPOTHESIS`として直接source evidenceへ束縛し、Runtime ruleには
+採用していない。また、実行していないnegative action列をfailure replayとして
+捏造せず、sourceが定義する`lose()` control pathと実行済み成功pathのcontrast
+だけを主張する。
 
 正本:
 
 - `analysis/teacher/LEVEL_SOLUTION_GRAPH_LEDGER.json`
 
-### P10-R3 構造文法抽出 — 進行中
+### P10-R3 構造文法抽出 — 完了
 
-25 game内のlevel N→N+1差分158 edgeと、game/level ID・literal座標を含まない
-cross-game primitive grammarを生成済み。
+25 game内のlevel N→N+1差分158 edgeについて、action primitiveに加え、
+source object family、causal role、level data、semantic state、goal/hazardの
+差分を抽出した。全158 edgeがsource-causal graphへ束縛されている。
+
+game/level ID・literal座標を含まないcross-game primitive grammarには、
+183 graphのsource-causal role registryと開発仮説のeffect class分布を分離して
+保持した。
 
 grammarは183 S0 graphから因数分解した構造候補であり、固定actionなしの実行
 能力はまだ証明していない。
@@ -230,6 +252,9 @@ python -m arc3_agi_agent.teacher.replay_runner \
 python -m arc3_agi_agent.teacher.solution_graph_compiler \
   --corpus ../analysis/teacher/FULL_SOLUTION_CORPUS.json \
   --closure-report ../analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json \
+  --environments-dir ../environment_files \
+  --development-level-ledger \
+    ../analysis/development/LEGACY_LEVEL_ANALYSIS_LEDGER.json \
   --output-dir ../analysis/teacher
 
 python -m pytest -q \
@@ -240,9 +265,9 @@ python -m pytest -q \
 ## 8. 次work block
 
 ```text
-WB-SOLUTION-GROUNDED-183-CLOSURE-AND-GRAPH-COMPILATION
+WB-S1-FIXED-ACTION-SUBTRACTION-EXECUTOR
 ```
 
-このblockの残作業は、183 graphへsource-grounded object/role/state/goal/hazard
-因果を付与し、成功/失敗contrastを閉じることである。その後だけ
-`WB-S1-FIXED-ACTION-SUBTRACTION-EXECUTOR`へ進む。
+R1〜R3は閉じた。次はsource-causal graphから観測条件付きplanを生成し、
+固定action列を一切読まずにS1を183/183へ閉じる。S1が183/183になる前に
+S2以降へ進まない。

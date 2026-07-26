@@ -29,6 +29,15 @@
 現状はS0 Teacherのみ183/183です。S1〜S6およびrendered-only Runtime
 Studentは未達です。
 
+P10-R2の全183 graphは、保持中25 source fileのSHA-256、183 level定義、
+object/state role、25 goal witness、43 hazard witness、hidden-state boundary、
+実行済み成功pathとsource hazard pathのcontrastへ束縛済みです。
+human-readable mechanic名はsource factではなく開発仮説として分離しています。
+未実行のnegative action列はfailure replayとして主張していません。
+
+P10-R3のgame内差分158/158とcross-game source-causal factorizationも完了して
+います。ただし、固定action列を禁止したS1実行は未実施です。
+
 再生成手順とclaim境界は
 [`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](../../docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
 を参照してください。

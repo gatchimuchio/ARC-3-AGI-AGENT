@@ -34,10 +34,13 @@ P10の現行戦略は
 - R1特権Teacher実行: **25/25 game、183/183 level、11,574 action、error 0**
 - R1特権Teacherローカルオラクル:
   **completion 100%、RHAE 99.446886157%**
-- R2解法graph: **183/183 trajectory-grounded、因果semantic labeling未完**
-- R3level間差分: **25 game、158 progression edge**
+- R2解法graph:
+  **183/183 source-causal semantic完了、success/hazard contrast 183/183**
+- R3level間差分:
+  **25 game、158/158 source-causal progression edge**
 - cross-game grammar:
-  **ID/literal座標なしで抽出済み、固定actionなしの実行証明は未実施**
+  **source-causal graphからID/literal座標なしで因数分解済み、
+  固定actionなしの実行証明は未実施**
 - 水平減算: **S0 PASS、S1〜S6 NOT_RUN**
 - Runtime Student P変更: **なし**
 - rendered-only 183/183・AGI完成・汎化達成の主張: **なし**

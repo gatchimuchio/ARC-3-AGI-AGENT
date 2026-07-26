@@ -22,7 +22,15 @@ from arc3_agi_agent.teacher.solution_graph_compiler import (
     LEVEL_GRAPH_LEDGER_DIGEST_PREFIX,
     PRIVILEGE_MATRIX_DIGEST_PREFIX,
     RUNTIME_P_REPORT_DIGEST_PREFIX,
+    SOURCE_GAME_REGISTRY_ENTRY_DIGEST_PREFIX,
     load_teacher_closure_report,
+)
+from arc3_agi_agent.teacher.source_semantics import (
+    GAME_SOURCE_CONTRACT_DIGEST_PREFIX,
+    LEVEL_SOURCE_CONTRACT_DIGEST_PREFIX,
+    SOURCE_SEMANTICS_DIGEST_PREFIX,
+    compile_source_causal_semantics,
+    source_contract_index,
 )
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -138,7 +146,28 @@ class TeacherCompleteClosureTests(unittest.TestCase):
 
         self.assertEqual(ledger["level_graph_count"], 183)
         self.assertEqual(ledger["fully_replay_grounded_count"], 183)
-        self.assertEqual(ledger["causal_semantic_complete_count"], 0)
+        self.assertEqual(ledger["causal_semantic_complete_count"], 183)
+        self.assertEqual(
+            ledger["success_failure_contrast_complete_count"],
+            183,
+        )
+        self.assertEqual(ledger["source_goal_witness_bound_count"], 183)
+        self.assertEqual(ledger["source_hazard_witness_bound_count"], 183)
+        self.assertEqual(
+            ledger["hidden_state_boundary_bound_count"],
+            183,
+        )
+        self.assertEqual(ledger["source_game_registry_count"], 25)
+        for source_game in ledger[
+            "source_game_causal_contract_registry"
+        ]:
+            body = dict(source_game)
+            claimed = body.pop("registry_entry_digest")
+            self.assertEqual(
+                claimed,
+                SOURCE_GAME_REGISTRY_ENTRY_DIGEST_PREFIX
+                + digest_object(body),
+            )
         self.assertEqual(
             ledger["state_and_level_transition_mismatch_count"],
             0,
@@ -150,6 +179,14 @@ class TeacherCompleteClosureTests(unittest.TestCase):
         self.assertFalse(ledger["strict_source_frame_equivalence"])
         for graph in ledger["graphs"]:
             _assert_digest(self, graph, LEVEL_GRAPH_DIGEST_PREFIX)
+            self.assertTrue(graph["causal_semantic_complete"])
+            self.assertTrue(
+                all(
+                    graph[
+                        "causal_semantic_completion_check"
+                    ].values()
+                )
+            )
             self.assertTrue(graph["solution_trajectory"])
             self.assertIn("goal_predicate", graph)
             self.assertIn("progress_predicate", graph)
@@ -157,6 +194,122 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             self.assertIn("commit_predicate", graph)
             self.assertIn("necessary_conditions", graph)
             self.assertIn("sufficient_conditions", graph)
+            self.assertEqual(
+                graph["success_failure_contrast"]["status"],
+                "SOURCE_CAUSAL_CONTRAST_COMPLETE",
+            )
+            self.assertFalse(
+                graph["success_failure_contrast"][
+                    "negative_execution_observed"
+                ]
+            )
+            self.assertTrue(
+                graph["goal_predicate"]["source_causal_witnesses"]
+            )
+            self.assertTrue(
+                graph["hazard_predicate"]["source_causal_witnesses"]
+            )
+            self.assertIn(
+                graph["hidden_variables"][0]["causal_role_status"],
+                {
+                    "CUSTOM_HIDDEN_STATE_EXPORT_SOURCE_BOUND",
+                    "EXPLICIT_NO_CUSTOM_HIDDEN_STATE_EXPORT",
+                },
+            )
+            self.assertTrue(
+                graph["privilege_dependencies"][
+                    "source_or_hidden_state"
+                ]
+            )
+            source_roles = {
+                role["role"]: role
+                for role in graph["roles"]
+                if role["role"]
+                in {
+                    "ACTOR_OR_MANIPULAND_SET",
+                    "GOAL_STATE_PARTICIPANT_SET",
+                    "HAZARD_STATE_PARTICIPANT_SET",
+                }
+            }
+            self.assertEqual(len(source_roles), 3)
+            for role in source_roles.values():
+                binding = role["binding"]
+                self.assertTrue(
+                    binding["source_object_refs"]
+                    or binding["source_state_symbols"]
+                )
+
+    def test_source_semantics_bind_all_current_environment_sources(
+        self,
+    ) -> None:
+        semantics = compile_source_causal_semantics(
+            environments_dir=REPOSITORY_ROOT / "environment_files",
+            development_level_ledger_path=(
+                REPOSITORY_ROOT
+                / "analysis"
+                / "development"
+                / "LEGACY_LEVEL_ANALYSIS_LEDGER.json"
+            ),
+        )
+        _assert_digest(
+            self,
+            semantics,
+            SOURCE_SEMANTICS_DIGEST_PREFIX,
+        )
+
+        self.assertEqual(semantics["game_count"], 25)
+        self.assertEqual(semantics["level_count"], 183)
+        self.assertEqual(
+            semantics["source_causal_complete_game_count"],
+            25,
+        )
+        self.assertEqual(
+            semantics["source_causal_complete_level_count"],
+            183,
+        )
+        self.assertEqual(semantics["goal_witness_count"], 25)
+        self.assertEqual(semantics["hazard_witness_count"], 43)
+        self.assertEqual(
+            semantics["custom_hidden_state_export_game_count"]
+            + semantics[
+                "explicit_no_custom_hidden_state_export_game_count"
+            ],
+            25,
+        )
+        self.assertEqual(len(source_contract_index(semantics)), 183)
+        for game in semantics["games"]:
+            _assert_digest(
+                self,
+                game,
+                GAME_SOURCE_CONTRACT_DIGEST_PREFIX,
+            )
+            self.assertTrue(game["source_causal_complete"])
+            self.assertTrue(game["goal_witnesses"])
+            self.assertTrue(game["hazard_witnesses"])
+            self.assertEqual(
+                len(game["levels"]),
+                game["level_count"],
+            )
+            for level in game["levels"]:
+                _assert_digest(
+                    self,
+                    level,
+                    LEVEL_SOURCE_CONTRACT_DIGEST_PREFIX,
+                )
+                self.assertTrue(level["object_families"])
+                self.assertTrue(
+                    level["development_mechanic_model"][
+                        "mechanics_id"
+                    ]
+                )
+
+        checked_ledger = _json(
+            TEACHER_ANALYSIS / "LEVEL_SOLUTION_GRAPH_LEDGER.json"
+        )
+        self.assertEqual(
+            checked_ledger["source_causal_semantics_digest"],
+            semantics["content_digest"],
+        )
 
     def test_progression_grammar_and_subtraction_gates_fail_closed(
         self,
@@ -180,15 +333,43 @@ class TeacherCompleteClosureTests(unittest.TestCase):
 
         self.assertEqual(intra["game_count"], 25)
         self.assertEqual(intra["progression_edge_count"], 158)
+        self.assertEqual(
+            intra["source_causal_progression_status"],
+            "COMPLETE_158_OF_158",
+        )
         self.assertTrue(grammar["identity_free_artifact"])
         self.assertFalse(grammar["contains_literal_coordinates"])
+        self.assertEqual(
+            grammar["coverage"][
+                "source_causal_semantic_complete_count"
+            ],
+            183,
+        )
+        self.assertEqual(
+            grammar["proof_status"][
+                "source_causal_semantic_factorization"
+            ],
+            "PASS_183_OF_183",
+        )
         self.assertEqual(matrix["stage_summary"]["S0"]["status"], "PASS")
+        self.assertEqual(
+            matrix["source_or_hidden_state_dependent_count"],
+            183,
+        )
         for stage in ("S1", "S2", "S3", "S4", "S5", "S6"):
             self.assertEqual(
                 matrix["stage_summary"][stage]["status"],
                 "NOT_RUN",
             )
         self.assertFalse(runtime["compilation"]["runtime_p_modified"])
+        self.assertEqual(
+            runtime["claims"]["source_causal_semantics_183"],
+            "PASS",
+        )
+        self.assertEqual(
+            runtime["claims"]["intra_game_progression_158"],
+            "PASS",
+        )
         self.assertEqual(
             runtime["claims"]["rendered_only_183"],
             "NOT_PROVEN",
