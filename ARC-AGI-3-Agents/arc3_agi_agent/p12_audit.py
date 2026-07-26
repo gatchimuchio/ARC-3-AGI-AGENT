@@ -65,6 +65,7 @@ from .s5_runner import (
 )
 from .schema import canonical_json, digest_object
 from .sealed_client import SealedEvaluatorSession
+from .teacher.p11_regression import load_p11_regression_report
 
 P12_AUDIT_VERSION = "arc3-p12-preofficial-audit-v1"
 P11_RELEASE_DIGEST = (
@@ -150,6 +151,8 @@ def _artifact(
     payload: Mapping[str, object],
     code_commit: str,
     code_tree: str,
+    audit_commit: str,
+    audit_tree: str,
     input_artifact_digest: str,
     seed: int,
     budget: Mapping[str, object],
@@ -162,6 +165,7 @@ def _artifact(
         "schema_version": schema_version,
         "audit_version": P12_AUDIT_VERSION,
         "code": {"commit": code_commit, "tree": code_tree},
+        "audit": {"commit": audit_commit, "tree": audit_tree},
         "input_artifact_digest": input_artifact_digest,
         "environment_manifest": _environment_manifest(),
         "seed": seed,
@@ -1786,6 +1790,8 @@ def known_sample_regression_evaluation(
     trace_manifest_path: Path | None,
     score_path: Path | None,
     authority_audit_path: Path | None,
+    frozen_closure_path: Path,
+    frozen_trace_manifest_path: Path,
 ) -> dict[str, object]:
     paths = (
         closure_path,
@@ -1809,6 +1815,32 @@ def known_sample_regression_evaluation(
             trace_file,
             closure_path=closure_file,
         )
+        frozen_closure = load_s5_closure_report(
+            frozen_closure_path.resolve()
+        )
+        frozen_trace = cast_mapping(
+            json.loads(
+                frozen_trace_manifest_path.resolve().read_text(
+                    encoding="utf-8"
+                )
+            )
+        )
+        fresh_trace_filename = trace.get("trace_filename")
+        frozen_trace_filename = frozen_trace.get("trace_filename")
+        if (
+            not isinstance(fresh_trace_filename, str)
+            or Path(fresh_trace_filename).name != fresh_trace_filename
+            or not isinstance(frozen_trace_filename, str)
+            or Path(frozen_trace_filename).name != frozen_trace_filename
+        ):
+            raise ValueError("P12_KNOWN_SAMPLE_TRACE_FILENAME_INVALID")
+        fresh_trace_path = trace_file.parent / fresh_trace_filename
+        frozen_trace_path = (
+            frozen_trace_manifest_path.resolve().parent
+            / frozen_trace_filename
+        )
+        fresh_trace_sha256 = _sha256(fresh_trace_path)
+        frozen_trace_sha256 = _sha256(frozen_trace_path)
         score = cast_mapping(
             json.loads(score_file.read_text(encoding="utf-8"))
         )
@@ -1889,6 +1921,15 @@ def known_sample_regression_evaluation(
                 and authority.get("closure_report_digest")
                 == closure.get("content_digest")
             ),
+            "frozen_baseline_equivalence": (
+                closure.get("content_digest")
+                == frozen_closure.get("content_digest")
+                and trace.get("content_digest")
+                == frozen_trace.get("content_digest")
+                and trace.get("record_stream_digest")
+                == frozen_trace.get("record_stream_digest")
+                and fresh_trace_sha256 == frozen_trace_sha256
+            ),
         }
         status = "PASS" if all(checks.values()) else "FAIL"
         return {
@@ -1923,6 +1964,22 @@ def known_sample_regression_evaluation(
                     )
                 ),
             },
+            "frozen_baseline_equivalence": {
+                "closure_content_digest": closure.get("content_digest"),
+                "frozen_closure_content_digest": frozen_closure.get(
+                    "content_digest"
+                ),
+                "trace_content_digest": trace.get("content_digest"),
+                "frozen_trace_content_digest": frozen_trace.get(
+                    "content_digest"
+                ),
+                "record_stream_digest": trace.get("record_stream_digest"),
+                "frozen_record_stream_digest": frozen_trace.get(
+                    "record_stream_digest"
+                ),
+                "fresh_trace_sha256": fresh_trace_sha256,
+                "frozen_trace_sha256": frozen_trace_sha256,
+            },
             "failed_requirement_ids": (
                 () if status == "PASS" else ("REG-002",)
             ),
@@ -1932,6 +1989,57 @@ def known_sample_regression_evaluation(
             "status": "FAIL",
             "error": f"{type(error).__name__}:{error}",
             "failed_requirement_ids": ("REG-002",),
+        }
+
+
+def post_change_regression_evaluation(
+    *,
+    regression_path: Path | None,
+    audit_commit: str,
+    audit_tree: str,
+) -> dict[str, object]:
+    if regression_path is None:
+        return {
+            "status": "NOT_EVALUATED",
+            "reason": "clean-tree post-change P11 regression required",
+            "failed_requirement_ids": ("REG-003",),
+        }
+    try:
+        report = load_p11_regression_report(regression_path.resolve())
+        secret_scan = cast_mapping(report.get("tracked_secret_scan"))
+        checks = {
+            "status": report.get("status") == "PASS",
+            "audit_commit_binding": report.get("code_commit") == audit_commit,
+            "audit_tree_binding": report.get("code_tree") == audit_tree,
+            "main_branch": report.get("branch") == "main",
+            "offline_mode": report.get("operation_mode") == "offline",
+            "all_validations": (
+                report.get("validation_count") == 7
+                and report.get("passed_validation_count") == 7
+                and report.get("failed_validation_ids") == []
+            ),
+            "tracked_secret_scan": (
+                secret_scan.get("status") == "PASS"
+                and secret_scan.get("high_confidence_finding_count") == 0
+            ),
+        }
+        status = "PASS" if all(checks.values()) else "FAIL"
+        return {
+            "status": status,
+            "checks": checks,
+            "regression_content_digest": report.get("content_digest"),
+            "regression_code_commit": report.get("code_commit"),
+            "regression_code_tree": report.get("code_tree"),
+            "validation_count": report.get("validation_count"),
+            "failed_requirement_ids": (
+                () if status == "PASS" else ("REG-003",)
+            ),
+        }
+    except Exception as error:
+        return {
+            "status": "FAIL",
+            "error": f"{type(error).__name__}:{error}",
+            "failed_requirement_ids": ("REG-003",),
         }
 
 
@@ -1947,6 +2055,8 @@ def generate_p12_artifacts(
     repo_root: Path,
     code_commit: str,
     code_tree: str,
+    audit_commit: str,
+    audit_tree: str,
     execute_whole_game: bool,
     whole_game_budget: int,
     seed: int,
@@ -1954,6 +2064,7 @@ def generate_p12_artifacts(
     known_sample_trace_manifest: Path | None = None,
     known_sample_score: Path | None = None,
     known_sample_authority_audit: Path | None = None,
+    post_change_regression: Path | None = None,
 ) -> dict[str, object]:
     package_dir = repo_root / "ARC-AGI-3-Agents/arc3_agi_agent"
     observed_code_tree = _git(
@@ -1963,6 +2074,25 @@ def generate_p12_artifacts(
     )
     if observed_code_tree != code_tree:
         raise ValueError("P12_CODE_COMMIT_TREE_BINDING_INVALID")
+    observed_audit_tree = _git(
+        repo_root,
+        "rev-parse",
+        f"{audit_commit}^{{tree}}",
+    )
+    if observed_audit_tree != audit_tree:
+        raise ValueError("P12_AUDIT_COMMIT_TREE_BINDING_INVALID")
+    for relative_path in (
+        "ARC-AGI-3-Agents/arc3_agi_agent/p12_audit.py",
+        "ARC-AGI-3-Agents/tools/p12_sealed_evaluator.py",
+    ):
+        frozen_blob = _git(
+            repo_root,
+            "rev-parse",
+            f"{audit_commit}:{relative_path}",
+        )
+        current_blob = _git(repo_root, "hash-object", relative_path)
+        if current_blob != frozen_blob:
+            raise ValueError("P12_AUDIT_WORKTREE_BINDING_INVALID")
     known_sample_paths = tuple(
         path
         for path in (
@@ -1983,6 +2113,10 @@ def generate_p12_artifacts(
         code_commit,
         "--code-tree",
         code_tree,
+        "--audit-commit",
+        audit_commit,
+        "--audit-tree",
+        audit_tree,
         "--whole-game-budget",
         str(whole_game_budget),
         "--seed",
@@ -1995,6 +2129,7 @@ def generate_p12_artifacts(
         ("--known-sample-trace-manifest", known_sample_trace_manifest),
         ("--known-sample-score", known_sample_score),
         ("--known-sample-authority-audit", known_sample_authority_audit),
+        ("--post-change-regression", post_change_regression),
     ):
         if path is not None:
             command_arguments.extend((flag, str(path)))
@@ -2002,12 +2137,24 @@ def generate_p12_artifacts(
     input_digest = "p12-input:" + digest_object(
         {
             "p11": P11_RELEASE_DIGEST,
+            "auditor": _sha256(Path(__file__).resolve()),
+            "sealed_evaluator": _sha256(
+                repo_root
+                / "ARC-AGI-3-Agents/tools/p12_sealed_evaluator.py"
+            ),
             "acceptance": _sha256(
                 repo_root
                 / "docs/architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md"
             ),
             "code": code_commit,
             "tree": code_tree,
+            "audit_commit": audit_commit,
+            "audit_tree": audit_tree,
+            "post_change_regression": (
+                None
+                if post_change_regression is None
+                else _sha256(post_change_regression.resolve())
+            ),
             "known_sample_inputs": tuple(
                 _sha256(path.resolve()) for path in known_sample_paths
             ),
@@ -2024,6 +2171,8 @@ def generate_p12_artifacts(
         payload=ownership_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2041,6 +2190,8 @@ def generate_p12_artifacts(
         payload=s5_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2060,6 +2211,8 @@ def generate_p12_artifacts(
         payload=operational_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2089,6 +2242,8 @@ def generate_p12_artifacts(
         payload=holdout_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2113,6 +2268,8 @@ def generate_p12_artifacts(
         payload=mechanism_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2133,6 +2290,8 @@ def generate_p12_artifacts(
         payload=transformation_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2162,6 +2321,8 @@ def generate_p12_artifacts(
         payload=sealed_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2187,6 +2348,8 @@ def generate_p12_artifacts(
         payload=replay_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2208,6 +2371,8 @@ def generate_p12_artifacts(
         payload=competition_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2230,6 +2395,8 @@ def generate_p12_artifacts(
         payload=learning_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2253,6 +2420,8 @@ def generate_p12_artifacts(
         payload=resource_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2275,12 +2444,22 @@ def generate_p12_artifacts(
         trace_manifest_path=known_sample_trace_manifest,
         score_path=known_sample_score,
         authority_audit_path=known_sample_authority_audit,
+        frozen_closure_path=(
+            repo_root
+            / "analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json"
+        ),
+        frozen_trace_manifest_path=(
+            repo_root
+            / "analysis/runtime/S5_FULL_EXECUTION_TRACE_MANIFEST.json"
+        ),
     )
     known_sample = _artifact(
         schema_version="arc3-p12-known-sample-regression-report-v1",
         payload=known_sample_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2293,7 +2472,44 @@ def generate_p12_artifacts(
                 "P12_KNOWN_SAMPLE_FAILED_REQUIREMENTS",
             )
         ),
-        raw_evidence_pointers=tuple(str(path) for path in known_sample_paths),
+        raw_evidence_pointers=(
+            tuple(str(path) for path in known_sample_paths)
+            + (
+                "analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json",
+                "analysis/runtime/S5_FULL_EXECUTION_TRACE_MANIFEST.json",
+                "analysis/runtime/S5_FULL_EXECUTION_TRACE.jsonl.gz",
+            )
+        ),
+    )
+    post_regression_payload = post_change_regression_evaluation(
+        regression_path=post_change_regression,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
+    )
+    post_regression = _artifact(
+        schema_version="arc3-p12-post-change-regression-binding-v1",
+        payload=post_regression_payload,
+        code_commit=code_commit,
+        code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
+        input_artifact_digest=input_digest,
+        seed=seed,
+        budget=common_budget,
+        command=command,
+        status=str(post_regression_payload["status"]),
+        failed_requirement_ids=tuple(
+            str(item)
+            for item in _as_sequence(
+                post_regression_payload["failed_requirement_ids"],
+                "P12_POST_REGRESSION_FAILED_REQUIREMENTS",
+            )
+        ),
+        raw_evidence_pointers=(
+            ()
+            if post_change_regression is None
+            else (str(post_change_regression),)
+        ),
     )
 
     acceptance: dict[str, bool] = {
@@ -2338,15 +2554,20 @@ def generate_p12_artifacts(
         },
         "REG-001": bool(p11["all_frozen_hashes_unchanged"]),
         "REG-002": known_sample_payload["status"] == "PASS",
+        "REG-003": post_regression_payload["status"] == "PASS",
     }
     acceptance.setdefault("OBS-001", True)
-    acceptance.setdefault("REG-003", True)
     failed = tuple(
         sorted(key for key, passed in acceptance.items() if not passed)
     )
     final_status = "PASS" if not failed else "SUSPEND"
     release_payload = {
         "phase": "P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY",
+        "audit_harness": {
+            "commit": audit_commit,
+            "tree": audit_tree,
+            "source_sha256": _sha256(Path(__file__).resolve()),
+        },
         "known_sample_baseline": {
             "status": "PASS",
             "levels": 183,
@@ -2398,6 +2619,7 @@ def generate_p12_artifacts(
             "learning": learning["content_digest"],
             "resource_package_security": resource_report["content_digest"],
             "known_sample_regression": known_sample["content_digest"],
+            "post_change_regression": post_regression["content_digest"],
         },
     }
     release = _artifact(
@@ -2405,6 +2627,8 @@ def generate_p12_artifacts(
         payload=release_payload,
         code_commit=code_commit,
         code_tree=code_tree,
+        audit_commit=audit_commit,
+        audit_tree=audit_tree,
         input_artifact_digest=input_digest,
         seed=seed,
         budget=common_budget,
@@ -2416,6 +2640,7 @@ def generate_p12_artifacts(
             "analysis/genericity/WHOLE_GAME_HOLDOUT_MANIFEST.json",
             "analysis/genericity/SEALED_CUSTOM_ENV_REPORT.json",
             "analysis/official/COMPETITION_CONTRACT_DRY_RUN.json",
+            "analysis/release/P12_POST_CHANGE_REGRESSION_BINDING_REPORT.json",
         ),
     )
 
@@ -2433,6 +2658,9 @@ def generate_p12_artifacts(
         "analysis/release/RESOURCE_PACKAGE_SECURITY_REPORT.json": resource_report,
         "analysis/release/P12_KNOWN_SAMPLE_REGRESSION_REPORT.json": (
             known_sample
+        ),
+        "analysis/release/P12_POST_CHANGE_REGRESSION_BINDING_REPORT.json": (
+            post_regression
         ),
         "analysis/release/PRE_OFFICIAL_AGI_RELEASE_STATE.json": release,
     }
@@ -2463,6 +2691,8 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--repo-root", type=Path, default=Path(".."))
     parser.add_argument("--code-commit", required=True)
     parser.add_argument("--code-tree", required=True)
+    parser.add_argument("--audit-commit", required=True)
+    parser.add_argument("--audit-tree", required=True)
     parser.add_argument("--execute-whole-game", action="store_true")
     parser.add_argument("--whole-game-budget", type=int, default=128)
     parser.add_argument("--seed", type=int, default=0)
@@ -2470,6 +2700,7 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--known-sample-trace-manifest", type=Path)
     parser.add_argument("--known-sample-score", type=Path)
     parser.add_argument("--known-sample-authority-audit", type=Path)
+    parser.add_argument("--post-change-regression", type=Path)
     return parser
 
 
@@ -2480,6 +2711,8 @@ def main() -> int:
         repo_root=repo_root,
         code_commit=str(arguments.code_commit),
         code_tree=str(arguments.code_tree),
+        audit_commit=str(arguments.audit_commit),
+        audit_tree=str(arguments.audit_tree),
         execute_whole_game=bool(arguments.execute_whole_game),
         whole_game_budget=int(arguments.whole_game_budget),
         seed=int(arguments.seed),
@@ -2491,6 +2724,7 @@ def main() -> int:
         known_sample_authority_audit=(
             arguments.known_sample_authority_audit
         ),
+        post_change_regression=arguments.post_change_regression,
     )
     print(canonical_json(release))
     return 0 if release["status"] == "PASS" else 2

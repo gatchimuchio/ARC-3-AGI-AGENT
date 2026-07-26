@@ -2,6 +2,8 @@
 
 - audit id: `EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1`
 - source package: `ARC3_AGI_監査修正パッケージ_rev1.zip`
+- source package SHA-256:
+  `566506d3de7e60667fcc2d6c7ca061c857702a63652e7f0ed29a4db15b5f328f`
 - scope: frozen P11 known-sample release and the active S5 call path
 - current correction phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
 - official API / Competition / Kaggle: forbidden
