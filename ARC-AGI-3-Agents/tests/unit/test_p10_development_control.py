@@ -73,25 +73,27 @@ class P10DevelopmentControlTests(unittest.TestCase):
             "H3-isolated-P-update-composition",
         )
 
-    def test_promoted_candidate_is_bound_to_active_manifest(self) -> None:
+    def test_unpromoted_candidate_is_isolated_from_active_manifest(
+        self,
+    ) -> None:
         active_manifest = _json(BUNDLE_DIR / "p10_manifest.json")
         candidate_manifest = _json(BUNDLE_DIR / "p10_candidate_manifest.json")
 
         self.assertEqual(
             candidate_manifest["lifecycle"],
-            "PROMOTED",
+            "CANDIDATE",
         )
         self.assertEqual(active_manifest["lifecycle"], "ACTIVE")
-        self.assertEqual(
-            active_manifest["promotion_decision_digest"],
-            candidate_manifest["promotion_decision_digest"],
-        )
-        for variant in ("P-A", "P-B", "hybrid"):
+        for variant in ("P-A", "P-B"):
             self.assertEqual(
                 active_manifest["bundles"][variant]["content_digest"],
                 candidate_manifest["bundles"][variant]["content_digest"],
                 variant,
             )
+        self.assertNotEqual(
+            active_manifest["bundles"]["hybrid"]["content_digest"],
+            candidate_manifest["bundles"]["hybrid"]["content_digest"],
+        )
 
     def test_learned_parametric_candidate_is_promoted(self) -> None:
         registry = _json(CONTROL_DIR / "P_UPDATE_REGISTRY.json")

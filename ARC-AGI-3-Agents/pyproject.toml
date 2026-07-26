@@ -47,6 +47,11 @@ arc3-local-score-oracle = "arc3_agi_agent.local_score_oracle:main"
 arc3-compile-development-analysis = "arc3_agi_agent.development_analysis:main"
 arc3-build-c2-c3-probe-audit = "arc3_agi_agent.p10_transition_probe_evidence:main"
 arc3-build-minimum-certificate = "arc3_agi_agent.certificate:main"
+arc3-teacher-corpus = "arc3_agi_agent.teacher.human_replay_corpus:main"
+arc3-teacher-local-overlay = "arc3_agi_agent.teacher.local_solution_overlay:main"
+arc3-teacher-replay = "arc3_agi_agent.teacher.replay_runner:main"
+arc3-compile-solution-graphs = "arc3_agi_agent.teacher.solution_graph_compiler:main"
+arc3-teacher-score-adapter = "arc3_agi_agent.teacher.score_adapter:main"
 
 [build-system]
 requires = ["setuptools>=77"]

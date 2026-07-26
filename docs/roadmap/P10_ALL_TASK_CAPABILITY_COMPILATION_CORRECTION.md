@@ -1,6 +1,11 @@
 # P10 全タスク解析復元・能力clusterコンパイル補正
 
-- status: `ACTIVE_AUTHORITY`
+> **Historical / superseded:** 本文のC2/C3・negative-only・capability-cluster
+> selectorはR0比較証拠として凍結した。現行P10作業は
+> [`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
+> を正本とし、本文のnext work blockを実行しない。
+
+- status: `HISTORICAL_R0_AUTHORITY`
 - phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
 - source attachment SHA-256:
   `113ac0516e500679792e57fbc73f21ad078d19929ae39c11ff185ac1f9a353ef`

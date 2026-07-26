@@ -4,6 +4,11 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 
 本リポジトリは `gatchimuchio/ARC-Layer-0-Functional-Compliance` の継続改修ではありません。旧リポジトリを証拠・探索資産として凍結し、検証可能な責任境界だけを選別移植するクリーンリスタートです。
 
+P10の現行戦略は
+[`完全閉包先行・水平減算戦略`](docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
+です。以下に残るC2/C3・35/183の記述はR0以前のhistorical Runtime Student
+証拠であり、現行work selectorではありません。
+
 ## 現在の状態
 
 - P0: `RESTART_FOUNDATION` — 完了
@@ -25,28 +30,20 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 - 判断主体 `J`: typed Frameによるstandalone G2を実装・除去監査済み
 - 記憶主体 `M`: 全15操作を持つstandalone G3を実装・除去監査済み
 - 最小三構成証明: 全8 subset中full setだけPASS、機能等価物漏れ0
-- HDS採用済みlevel境界: **35 / 183**
-- 現行183行再照合:
-  **CONFIRMED 26 / PARTIAL 1 / STALE 9 / UNOBSERVED 147**
-- P10開発単位: **全タスク解析からのcapability cluster**
-- C2/C3: **C2 observerはCLUSTER_STABLE、C3 predictorはLOCAL_PROBE / HOLD**
-- C10: **一段可視因果文脈はCLUSTER_STABLE / COMPOSABLE、Runtime介入はREJECT**
-- C7: **凍結target-contact probeはLOCAL_PROBE / CLOSED_NEGATIVE（負の証拠限定）**
-- C12: **凍結layout-mode 2 surfaceはLOCAL_PROBE / CLOSED_NEGATIVE（負の証拠限定）**
-- C1: **凍結rendered-affordance surfaceはLOCAL_PROBE / CLOSED_NEGATIVE（prefix隔離）**
-- C14/C8/C4/C6/C9/C11/C13:
-  **凍結7 surfaceはLOCAL_PROBE / CLOSED_NEGATIVE（2,199 probe、progress 0）**
-- C5: **bounded-old-action-replay軸はLOCAL_PROBE / CLOSED_NEGATIVE_AXIS**
-- 次work block: **WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER**
-- all-25 standard run: **25/25 report、183 level、error 0、resume再実行0**
-- worker resource: **最大RSS 143852 KB、25/25 swap 0・exit 0**
-- 全25 gameローカルオラクル: **35 / 183、RHAE 18.821945363%**
-- 満点・AGI完成・汎化達成の主張: **なし**
+- R0旧Runtime Student比較基準: **35 / 183、RHAE 18.821945363%**
+- R1特権Teacher実行: **25/25 game、183/183 level、11,574 action、error 0**
+- R1特権Teacherローカルオラクル:
+  **completion 100%、RHAE 99.446886157%**
+- R2解法graph: **183/183 trajectory-grounded、因果semantic labeling未完**
+- R3level間差分: **25 game、158 progression edge**
+- cross-game grammar:
+  **ID/literal座標なしで抽出済み、固定actionなしの実行証明は未実施**
+- 水平減算: **S0 PASS、S1〜S6 NOT_RUN**
+- Runtime Student P変更: **なし**
+- rendered-only 183/183・AGI完成・汎化達成の主張: **なし**
 
-旧資産には `46/183`、`97/183`、`6/183` など異なる条件・時点の数値が
-混在している。現行35 / 183は同条件回帰を通した能力blockの採用境界であり、
-完全reportと添付ZIPへ束縛した現行full score基準値はRHAE
-`18.821945363%`である。これは回帰指標であり、能力進歩やP10完了ではない。
+Teacher scoreはID、成功trajectory、固定action、literal座標等を許可したS0の
+開発基準であり、Runtime Student scoreまたは汎化scoreではありません。
 
 ## 最小設計
 
@@ -241,12 +238,13 @@ checkpointはmax-actions、variant/lifecycle、active P manifest、environment
 code/metadata inventory、P10 runtime source inventory、Python、ARC Toolkit
 version、game集合が完全一致する場合だけ再利用されます。
 P-A、P-B、hybridは`--instruction-variant`で同一条件比較できます。
-現行active Pは`p10-p-a-symbolic-v27`、`p10-p-b-parametric-v27`、
+以下はR0で凍結した旧Runtime Student経路です。現行active Pは
+`p10-p-a-symbolic-v27`、`p10-p-b-parametric-v27`、
 `p10-hybrid-v26`です。同条件二回のtarget比較と既存29 level回帰を経て、
 HDSが採用した再現可能なlevel境界は`35 / 183`です。ただし全25 gameを
 含む標準budget完全reportは25/25・183 level・error 0で生成済みです。
 添付ZIPへ束縛したローカルオラクルは35 / 183、RHAE
-`18.821945363%`です。21 gameがmax-action停止のためP10全体は`HOLD`です。
+`18.821945363%`です。21 gameがmax-action停止したR0 historical resultです。
 C7の凍結probeは正の進捗を示さず、legacy contract-spec mismatchを含むため
 negative-onlyで閉じました。C5の進捗後旧directional action再送候補も実際に
 8回発火しましたがtarget delta 0でHDS `REJECT`です。いずれもactive P、
@@ -262,8 +260,12 @@ negative-onlyで閉じました。さらにC14/C8/C4/C6/C9/C11/C13の凍結7
 surfaceをP3 provenanceへ束縛して監査し、21 target / 2,199 probe /
 565 visible changeに対してprogress 0、C11のGAME_OVER 5にも
 reusable-hazard separator 0であることを固定しました。全てnegative-onlyで
-閉じ、C5の既閉包replay軸を含むstrict queueを解決しています。次の選択済み
-work blockは`WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER`です。
+閉じ、C5の既閉包replay軸を含むstrict queueを解決しています。これらは
+historical evidenceとして保持しますが、現行work selectorにはしません。
+
+現行のTeacher再生成、183 graph、水平減算の実行手順は
+[`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
+を参照してください。
 
 開発用分析台帳の再生成:
 

@@ -1,5 +1,10 @@
 # P10 ARC3全sample攻略・実装監査
 
+> **Historical R0 architecture:** 本文の35/183、C2/C3、旧next work blockは
+> 比較基準として保持する。現行のTeacher 183閉包、解法graph、水平減算は
+> [`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](../roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
+> を参照する。
+
 - phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
 - state: `IN_PROGRESS`
 - predecessor: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`

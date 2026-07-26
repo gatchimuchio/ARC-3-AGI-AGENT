@@ -783,7 +783,11 @@ def _atomic_write_text(path: Path, value: str) -> None:
         f".{path.name}.{os.getpid()}.tmp"
     )
     try:
-        temporary.write_text(value, encoding="utf-8")
+        temporary.write_text(
+            value,
+            encoding="utf-8",
+            newline="\n",
+        )
         temporary.replace(path)
     finally:
         temporary.unlink(missing_ok=True)

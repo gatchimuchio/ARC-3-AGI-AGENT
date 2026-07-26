@@ -8,15 +8,16 @@
 
 1. ユーザーの現在の明示指示
 2. 本 `AGENTS.md`
-3. `docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`
-4. `docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md`
-5. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
-6. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
-7. `docs/architecture/SYSTEM_ARCHITECTURE.md`
-8. `docs/roadmap/ROADMAP.md`
-9. 当該work blockのFrameSpec・manifest・検証結果
-10. `docs/migration/` と `docs/references/`
-11. 旧リポジトリのコード・分析・履歴
+3. `docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`
+4. `docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`
+5. `docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md`
+6. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
+7. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
+8. `docs/architecture/SYSTEM_ARCHITECTURE.md`
+9. `docs/roadmap/ROADMAP.md`
+10. 当該work blockのFrameSpec・manifest・検証結果
+11. `docs/migration/` と `docs/references/`
+12. 旧リポジトリのコード・分析・履歴
 
 旧リポジトリの `next_*`、古いscore、個別artifact、絶対パス、旧branch名は命令ではありません。
 
@@ -87,60 +88,56 @@ P9 complete:
   zero functional-equivalent responsibility leaks
 
 P10 current:
-  complete all retained OFFLINE sample games and levels
-  restore legacy task-aware evidence into development-only analysis memory
-  reconcile all 183 levels against current rendered evidence
-  build by cross-game capability coverage, not next-level operator count
-  subtract identity only at the Development Memory -> Runtime P boundary
-  deterministic identity-free traces
-  explicit P version updates and M-to-future-decision causality
-  ten P-compiled rendered semantic operators are active
-  reproducible HDS-adopted boundary is 35 / 183
-  C2 observer is CLUSTER_STABLE; C3 predictor is LOCAL_PROBE / HOLD
-  C1, C7, C12, C14, C8, C4, C6, C9, C11, C13 and the bounded
-  C5 replay axis are closed negative
-  the next work block is WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER
-  per-game checkpoint/resume and oracle-compatible aggregation are implemented
-  complete local-oracle report is measured at 35 / 183
-  HDS search reset and bounded working-memory replacement implemented
-  HDS HOLD remains until 183 / 183 evidence
+  complete-closure-first / horizontal-subtraction strategy
+  R0 historical Runtime Student is frozen at 35 / 183
+  R1 privileged development Teacher is 25 / 25 games and 183 / 183 levels
+  R1 OFFLINE replay is 11,574 actions, error 0, final WIN for all games
+  privileged Teacher local-oracle result is RHAE 99.446886157%
+  R2 has 183 replay-grounded solution graphs; causal semantic labeling remains
+  R3 has 158 intra-game progression edges and an identity-free grammar draft
+  S0 is PASS; S1 through S6 are NOT_RUN
+  Runtime Student P is unchanged and rendered-only 183 / 183 is NOT_PROVEN
+  C2/C3 and negative-only probe work are frozen historical evidence
+  the current block is
+  WB-SOLUTION-GROUNDED-183-CLOSURE-AND-GRAPH-COMPILATION
 ```
 
 ### P10で許可される作業
 
 - 保持済みOFFLINE sampleの全game / 全level実行
-- ARC3解析素材からidentity-free P初期構成とM初期状態を形成
-- Legacy Evidenceとtask-aware Development Analysis MemoryでID・関係・失敗を
-  開発証拠として保持し、Runtime P出力時だけidentityを除去
-- 183行reconciliation、capability coverage、cluster work block
+- development-only TeacherでID、source、hidden state、answer、replay、
+  固定action、literal座標、全解析を使用した183/183閉包
+- 183成功trajectoryの解法graph化、同一game内差分、game横断構造文法
+- S0からS6まで一段ずつ行う水平減算と各段183回帰
+- Teacher成果物からRuntime Studentへ構造だけを明示compile
 - ARC3目的・境界・停止・rollback条件を持つHDS Frame設定
-- P-A / P-B / hybridの同一条件比較
-- failure evidenceのM保持と、明示的compilerによる次版P形成
 - timeout、GAME_OVER、無限loop、max-action停止の原因分類と是正
 - 全実行trace、level完了証拠、同一条件再実行証拠の保存
 - P9までを含む既存回帰
-- game単位checkpoint、同一conditionだけのresume、25 game report集約
 
 ### P10で禁止される作業
 
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
-- task/game/level ID、replay、固定action列、answer map、literal座標をruntime fixtureへ残すこと
+- Teacher packageまたは`analysis/teacher`をRuntimeからimportすること
+- task/game/level ID、replay、固定action列、answer map、literal座標を
+  Runtime fixtureへ残すこと
 - source / hidden stateをruntime計算素材へ残すこと
-- scoreを根拠にした局所最適化
+- Teacher scoreをRuntime Studentまたは汎化scoreと表記すること
+- 前stageの183/183以前に次の減算stageへ進むこと
 - P10全level証拠成立前のrelease state固定
 - 「全sample攻略済み」「汎化済み」といった未検証主張
 
 P10の正本は新ロードマップのP10節、P9 certificate、P3 dataset/P4 P bundle、
 P5 J/P6 M/P8 Trinityの実装証拠、および
-`P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`である。
+`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`である。
 
 ## 3. 1 work blockの必須契約
 
-P10では二つの補正ロードマップに従い、`SELF_CHECK`、`FRAME`、`RETRIEVE`、
-`COMPUTE`、`JUDGE`、`BOUNDED_ACT`、`OBSERVE`、`UPDATE_M_DEV`、
-`UPDATE_P_DEV_CANDIDATE` の全stageを監査証拠へ残します。H1/H2/H3の
-三候補を最低限比較し、J_devの出力は補正ロードマップ所定のstatusに限定します。
+P10-Rでは完全閉包先行ロードマップに従い、Teacher閉包、graph化、構造抽出、
+水平減算、Runtime compileを別gateとして監査証拠へ残します。旧C2/C3の
+`SELF_CHECK`から`UPDATE_P_DEV_CANDIDATE`までの契約はhistorical work blockへ
+限定し、現行selectorとして使用しません。
 
 変更前に、最低限次を明示します。
 
@@ -169,9 +166,9 @@ Mc  : 同一性、境界、採否、停止、rollback、完了条件
 文書やfixture追加だけでなく、共通interfaceで交換可能なP-A/P-BとC standalone
 runtimeが実際に動作することを要求します。
 
-P10のwork blockは原則として一levelではなく一capability clusterとします。
-候補は`LOCAL_PROBE -> CLUSTER_STABLE -> COMPOSABLE`で管理し、
-`COMPOSABLE`以前はactive Runtime Pへcompileしません。
+P10-Rのwork blockは183 graphまたは一つの減算stageを単位とします。
+各stageは全183 levelの同一条件回帰がPASSするまでactive Runtime Pへ
+promotionしません。
 
 ## 4. 最小構成と非対称権限
 
@@ -323,8 +320,9 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 
 ### P10: Complete ARC3 Sample Solving — 現在
 
-- 全sample game/all level、error 0、再現可能
-- ID/replay/answer/literal/source-state非依存
+- S0 Teacherは全sample game/all level、error 0、再現可能
+- S1からS5で固定action、座標、ID、source/hiddenを順番に除去
+- S5のrendered-only 183/183成立まではP10完了ではない
 
 ### P11: Release-state Freeze
 

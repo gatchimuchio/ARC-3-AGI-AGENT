@@ -1,0 +1,50 @@
+{
+  "claims": {
+    "fixed_action_free_183": "NOT_PROVEN",
+    "generalization": "NOT_MEASURED",
+    "graph_generation_183": "PASS",
+    "identity_free_183": "NOT_PROVEN",
+    "rendered_only_183": "NOT_PROVEN",
+    "teacher_183_closure": "PASS"
+  },
+  "compilation": {
+    "adopted_graph_count": 0,
+    "emitted_runtime_rule_count": 0,
+    "first_required_stage": "S1",
+    "first_required_work": "Compile observation-conditioned plans that reproduce all 183 commits without reading fixed action sequences.",
+    "runtime_p_modified": false,
+    "status": "BLOCKED_BY_UNSUBTRACTED_S0_PRIVILEGES"
+  },
+  "content_digest": "arc3_runtime_p_compilation_report:9dbdf46f97c0955086025c86651a3c6ca90b6ecca8b9ca3445d2eed2c9f02188",
+  "inputs": {
+    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:dd6f0519b39a618acd4f374ad51748e5ac795c90e116dae7e108bbbc70388e95",
+    "intra_game_progression_graph_digest": "arc3_intra_game_progression_graph:76703eccee3b1f2a4f23f65d188c4da104dd51659aae87eeaf5aea0c64b36555",
+    "level_solution_graph_ledger_digest": "arc3_level_solution_graph_ledger:5e1b840567893a64822f8d98d88d1446128c7e77b94dd3597783559f459c75dd",
+    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:eaf2556649f8db9b280924d37c8b4223c1ea29d05f402224b879e3144d1f359f"
+  },
+  "phase": "P10-R4-RUNTIME-P-COMPILATION",
+  "runtime_student_target": {
+    "allowed_inputs": [
+      "RENDERED_OBSERVATION",
+      "AVAILABLE_ACTIONS",
+      "ACTION_EFFECT_HISTORY",
+      "PASSIVE_MEMORY",
+      "IDENTITY_FREE_P"
+    ],
+    "forbidden_inputs": [
+      "TEACHER_PACKAGE",
+      "GAME_OR_LEVEL_ID_ROUTING",
+      "FIXED_ACTION_SEQUENCE",
+      "LITERAL_COORDINATE_TABLE",
+      "SOURCE_OR_HIDDEN_STATE",
+      "ANSWER_OR_REPLAY"
+    ]
+  },
+  "schema_version": "arc3-runtime-p-compilation-report-v1",
+  "teacher_runtime_separation": "ENFORCED_BY_IMPORT_BOUNDARY",
+  "teacher_status": {
+    "S0_closed_levels": 183,
+    "S0_error_count": 0,
+    "solution_graph_count": 183
+  }
+}
