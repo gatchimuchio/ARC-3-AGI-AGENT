@@ -136,18 +136,18 @@ analysis/runtime/S5_FULL_EXECUTION_TRACE_MANIFEST.json
 
 | 項目 | 固定値 |
 |---|---|
-| code commit | `dca7be72c82389334ed2c3d585ec3c90c2b53914` |
-| code tree | `a62902ca3f7b11bc8ba36d52e533d2142a405b30` |
+| code commit | `823c51b68d7f1a2570a3c68f8f21a3819c650154` |
+| code tree | `b3b675a24dcecd5080927c9bbf80c77eb7d083f5` |
 | regression | 7/7 PASS |
-| regression digest | `arc3_p11_regression_report:f93d72be7de8982bff0002671d505e3e234809b5aeb90853283eaa0654f92b75` |
+| regression digest | `arc3_p11_regression_report:52b7e68c5314d91e2d7769458b6082d19f87778db5ba1dbf8c5d8cb24ebcef91` |
 | P0 initial digest | `3b4330dff890310572abfadc42470f1549bb35c2ff351d007bc1557e99c70a62` |
 | J0 initial digest | `2c87595b6ea7c415a9d09b5c5adabefaf2a9e3ad9e9bb339674f9c8c6de2d798` |
 | M0 initial digest | `2c8c4194e7be89117eb1d39de6be98eab87fa5af6a0a6bd369e1fb2dca1a2aff` |
 | sample ZIP SHA-256 | `c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d505de2b1ec61d645` |
 | wheel | `arc_agi_3_agents-0.1.0-py3-none-any.whl` |
 | wheel reproducibility | 二回byte一致 |
-| wheel SHA-256 | `79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6` |
-| release digest | `arc3_p11_release_state:70ffdd4395d0f50b312c002b226bd8c92ec1818597e913a72310dd1739177848` |
+| wheel SHA-256 | `a2f7c400753a553b49247ce7627e2b966fd152153b53064e7403e553659e551a` |
+| release digest | `arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c` |
 
 packageにはRuntime policy manifest/weightsを含み、S5 training corpus、
 `analysis/`、`environment_files/`を含めない。公式環境readinessと未知task汎化は

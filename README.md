@@ -105,11 +105,11 @@ P10の現行戦略は
 - 水平減算: **S0〜S5 PASS、S6 MEASURED**
 - 汎化claim: **MEASURED_NOT_PROVEN**
 - P11固定回帰: **7/7 PASS、tracked secret finding 0**
-- P11 code: **`dca7be72c82389334ed2c3d585ec3c90c2b53914`**
+- P11 code: **`823c51b68d7f1a2570a3c68f8f21a3819c650154`**
 - reproducible wheel:
-  **二回byte一致、SHA-256 `79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6`**
+  **二回byte一致、SHA-256 `a2f7c400753a553b49247ce7627e2b966fd152153b53064e7403e553659e551a`**
 - P11 release digest:
-  **`arc3_p11_release_state:70ffdd4395d0f50b312c002b226bd8c92ec1818597e913a72310dd1739177848`**
+  **`arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c`**
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な

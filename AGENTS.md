@@ -105,15 +105,15 @@ P10 complete:
   S6 conclusion is MEASURED_NOT_PROVEN; generalization is not claimed
 
 P11 complete:
-  code commit dca7be72c82389334ed2c3d585ec3c90c2b53914
-  code tree a62902ca3f7b11bc8ba36d52e533d2142a405b30
+  code commit 823c51b68d7f1a2570a3c68f8f21a3819c650154
+  code tree b3b675a24dcecd5080927c9bbf80c77eb7d083f5
   Python 3.12.13, uv 0.11.32, setuptools 83.0.0
   P0, J0, M0, dataset, compiler, seed, action budget are fixed
   full regression 7 / 7 PASS and tracked secret finding 0
   two wheels are byte-identical
-  wheel SHA-256 79a5c0de76efb795bb6025e5fd434f6ce25acc472f76c0d4bb543fd2122699d6
+  wheel SHA-256 a2f7c400753a553b49247ce7627e2b966fd152153b53064e7403e553659e551a
   release digest arc3_p11_release_state:
-    70ffdd4395d0f50b312c002b226bd8c92ec1818597e913a72310dd1739177848
+    e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c
 ```
 
 ### P11で実施・固定した作業
