@@ -41,6 +41,21 @@ from arc3_agi_agent.teacher.s2_graph_schema import (
 from arc3_agi_agent.teacher.s2_score_adapter import (
     S2_SCORE_ADAPTER_DIGEST_PREFIX,
 )
+from arc3_agi_agent.teacher.s3_graph_executor import (
+    S3_CLOSURE_REPORT_DIGEST_PREFIX,
+    load_s3_closure_report,
+)
+from arc3_agi_agent.teacher.s3_graph_schema import (
+    S3_POLICY_GRAPH_DIGEST_PREFIX,
+    identity_literal_values,
+    load_s3_policy_graph,
+)
+from arc3_agi_agent.teacher.s3_graph_schema import (
+    all_mapping_keys as s3_all_mapping_keys,
+)
+from arc3_agi_agent.teacher.s3_score_adapter import (
+    S3_SCORE_ADAPTER_DIGEST_PREFIX,
+)
 from arc3_agi_agent.teacher.solution_graph_compiler import (
     CROSS_GAME_GRAMMAR_DIGEST_PREFIX,
     INTRA_GAME_GRAPH_DIGEST_PREFIX,
@@ -377,6 +392,12 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             ],
             "PASS_183_OF_183",
         )
+        self.assertEqual(
+            grammar["proof_status"][
+                "identity_routing_free_execution"
+            ],
+            "PASS_183_OF_183",
+        )
         self.assertEqual(matrix["stage_summary"]["S0"]["status"], "PASS")
         self.assertEqual(
             matrix["source_or_hidden_state_dependent_count"],
@@ -398,6 +419,14 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             matrix["stage_summary"]["S2"]["completed_levels"],
             183,
         )
+        self.assertEqual(
+            matrix["stage_summary"]["S3"]["status"],
+            "PASS",
+        )
+        self.assertEqual(
+            matrix["stage_summary"]["S3"]["completed_levels"],
+            183,
+        )
         self.assertEqual(matrix["fixed_action_dependent_count"], 0)
         self.assertEqual(
             matrix["s0_fixed_action_dependent_count"],
@@ -408,7 +437,12 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             matrix["s1_literal_coordinate_dependent_count"],
             125,
         )
-        for stage in ("S3", "S4", "S5", "S6"):
+        self.assertEqual(matrix["identity_routing_dependent_count"], 0)
+        self.assertEqual(
+            matrix["s2_identity_routing_dependent_count"],
+            183,
+        )
+        for stage in ("S4", "S5", "S6"):
             self.assertEqual(
                 matrix["stage_summary"][stage]["status"],
                 "NOT_RUN",
@@ -431,8 +465,12 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             "PASS",
         )
         self.assertEqual(
+            runtime["claims"]["identity_routing_free_183"],
+            "PASS",
+        )
+        self.assertEqual(
             runtime["compilation"]["first_required_stage"],
-            "S3",
+            "S4",
         )
         self.assertEqual(
             runtime["claims"]["rendered_only_183"],
@@ -671,6 +709,112 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             [],
         )
 
+    def test_s3_global_graph_has_no_identity_routing_and_closes(
+        self,
+    ) -> None:
+        graph = load_s3_policy_graph(
+            TEACHER_ANALYSIS
+            / "S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json"
+        )
+        report = load_s3_closure_report(
+            TEACHER_ANALYSIS / "TEACHER_S3_CLOSURE_REPORT.json"
+        )
+        _assert_digest(
+            self,
+            graph,
+            S3_POLICY_GRAPH_DIGEST_PREFIX,
+        )
+        _assert_digest(
+            self,
+            report,
+            S3_CLOSURE_REPORT_DIGEST_PREFIX,
+        )
+
+        self.assertEqual(graph["environment_count"], 25)
+        self.assertEqual(graph["level_count"], 183)
+        self.assertEqual(graph["policy_partition_count"], 1)
+        self.assertEqual(graph["identity_routing_key_count"], 0)
+        self.assertEqual(graph["explicit_identity_literal_count"], 0)
+        self.assertEqual(
+            graph["source_transition_witness_count"],
+            10733,
+        )
+        self.assertEqual(graph["state_node_count"], 10758)
+        self.assertEqual(graph["edge_count"], 10733)
+        self.assertEqual(graph["branch_node_count"], 0)
+        self.assertEqual(graph["nondeterministic_action_count"], 0)
+        self.assertEqual(graph["role_selector_witness_count"], 3112)
+        self.assertEqual(identity_literal_values(graph), set())
+        self.assertEqual(
+            s3_all_mapping_keys(graph).intersection(
+                {
+                    "environment_id",
+                    "game_class",
+                    "game_id",
+                    "games",
+                    "level_id",
+                    "levels_completed",
+                    "target_levels",
+                    "task_id",
+                }
+            ),
+            set(),
+        )
+        self.assertEqual(report["completed_levels"], 183)
+        self.assertEqual(report["actions_executed"], 10733)
+        self.assertEqual(report["identity_routing_decision_count"], 0)
+        self.assertEqual(report["policy_partition_count"], 1)
+        self.assertFalse(
+            report["action_selection_receives_environment_identity"]
+        )
+        self.assertFalse(
+            report["decision_uses_task_game_level_identity"]
+        )
+        self.assertFalse(report["decision_uses_level_progress_counter"])
+        self.assertEqual(report["error_count"], 0)
+
+    def test_s3_action_selection_has_no_identity_or_s2_dependency(
+        self,
+    ) -> None:
+        source = (
+            PACKAGE_ROOT / "teacher" / "s3_graph_executor.py"
+        ).read_text(encoding="utf-8")
+        selection_source = source.split(
+            "def execute_s3_global_policy",
+            maxsplit=1,
+        )[1].split(
+            "def _discover_environment_ids",
+            maxsplit=1,
+        )[0]
+        forbidden_selection = (
+            "game_id",
+            "task_id",
+            "level_id",
+            "frame.game_id",
+            "game_graph",
+            "levels_completed",
+        )
+        self.assertEqual(
+            [
+                token
+                for token in forbidden_selection
+                if token in selection_source
+            ],
+            [],
+        )
+        forbidden_module = (
+            "FULL_SOLUTION_CORPUS",
+            "human_replay_corpus",
+            "s1_graph",
+            "s2_graph",
+            "source_pointer",
+            "replay_index",
+        )
+        self.assertEqual(
+            [token for token in forbidden_module if token in source],
+            [],
+        )
+
     def test_runtime_package_does_not_import_teacher_artifacts(self) -> None:
         forbidden = (
             "arc3_agi_agent.teacher",
@@ -805,6 +949,49 @@ class TeacherCompleteClosureTests(unittest.TestCase):
         )
         self.assertFalse(
             s2_current["evaluation_provenance"][
+                "architecture_evidence_eligible"
+            ]
+        )
+
+        s3_adapter = _json(
+            TEACHER_ANALYSIS / "TEACHER_S3_ORACLE_ADAPTER_REPORT.json"
+        )
+        s3_oracle = _json(
+            TEACHER_ANALYSIS / "TEACHER_S3_LOCAL_SCORE_ORACLE.json"
+        )
+        _assert_digest(
+            self,
+            s3_adapter,
+            S3_SCORE_ADAPTER_DIGEST_PREFIX,
+        )
+        s3_current = s3_oracle["current_local_result"]
+        self.assertEqual(s3_current["completed_levels"], 183)
+        self.assertEqual(
+            s3_current["completion_rate_percent"],
+            100.0,
+        )
+        self.assertEqual(
+            s3_current["official_rhae_score_percent"],
+            99.619936696,
+        )
+        self.assertEqual(
+            s3_current["official_rhae_score_percent"],
+            s2_current["official_rhae_score_percent"],
+        )
+        self.assertEqual(s3_current["error_count"], 0)
+        self.assertEqual(
+            s3_oracle["source"]["sample_zip_sha256"],
+            s2_oracle["source"]["sample_zip_sha256"],
+        )
+        self.assertEqual(
+            {
+                tuple(report["instruction_body_versions"])
+                for report in s3_adapter["reports"]
+            },
+            {("teacher-s3-global-identity-free-graph-v1",)},
+        )
+        self.assertFalse(
+            s3_current["evaluation_provenance"][
                 "architecture_evidence_eligible"
             ]
         )

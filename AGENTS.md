@@ -105,12 +105,17 @@ P10 current:
   S2 graph stores zero absolute pointer payloads; error and selector failure are 0
   S2 local-oracle result is RHAE 99.619936696% (delta 0 vs S1)
   S2 full graph and closure report are byte-identical across two fresh runs
+  R5/S3 global Teacher closes 25 / 25 games and 183 / 183 levels
+  S3 uses one global policy partition with identity key/literal/decision count 0
+  S3 executes 10,733 actions with error 0 and strict WIN-distance decrease
+  S3 local-oracle result is RHAE 99.619936696% (delta 0 vs S2)
+  S3 full graph and closure report are byte-identical across two fresh runs
   fixed action sequence, replay position, and action ordinal decisions are absent
-  S0, S1, and S2 are PASS; S3 through S6 are NOT_RUN
+  S0 through S3 are PASS; S4 through S6 are NOT_RUN
   Runtime Student P is unchanged and rendered-only 183 / 183 is NOT_PROVEN
   C2/C3 and negative-only probe work are frozen historical evidence
   the current block is
-  WB-S3-IDENTITY-ROUTING-SUBTRACTION
+  WB-S4-SOURCE-HIDDEN-STATE-SUBTRACTION
 ```
 
 ### P10で許可される作業

@@ -61,7 +61,7 @@ literal座標、source/hidden stateをRuntimeからimportまたは参照して�
 | S0 | 全特権を許可 | 183/183 | `PASS` |
 | S1 | 固定action列を禁止 | 183/183 | `PASS` |
 | S2 | literal座標も禁止 | 183/183 | `PASS` |
-| S3 | task/game/level ID routingも禁止 | 183/183 | `NOT_RUN` |
+| S3 | task/game/level ID routingも禁止 | 183/183 | `PASS` |
 | S4 | source/hidden stateも禁止 | 183/183 | `NOT_RUN` |
 | S5 | rendered observationと履歴のみ | 183/183 | `NOT_RUN` |
 | S6 | 色・回転・反転・配置・個数・順序・未観測合成を摂動 | 汎化測定 | `NOT_RUN` |
@@ -109,6 +109,13 @@ R0の35/183とRHAE 18.821945363%は旧Runtime Studentの回帰値であり、
 | S2 selector failure / error | 0 / 0 |
 | S2 privileged Teacher RHAE | 99.619936696% |
 | S2 RHAE delta vs S1 | 0 percentage point |
+| S3 global policy partition | 1 |
+| S3 identity key / literal / decision | 0 / 0 / 0 |
+| S3 global state graph | 10,758 node / 10,733 edge |
+| S3 branch / nondeterministic action | 0 / 0 |
+| S3 executable action | 10,733 |
+| S3 privileged Teacher RHAE | 99.619936696% |
+| S3 RHAE delta vs S2 | 0 percentage point |
 
 Public human trajectory inventoryは25 game、183 level、11,648 recorded action。
 FT09の公開trajectoryは保持サンプルの旧revisionを対象としていたため、既存の
@@ -239,7 +246,7 @@ work block契約:
 - `analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json`
 - `analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json`
 
-### P10-R5 水平減算 — S2完了・S3待機
+### P10-R5 水平減算 — S2/S3完了・S4待機
 
 S2 compilerだけがS1 graphのpointer targetを観測し、absolute targetを
 target-centred rendered relationへ変換する。S2 graphとexecutorは
@@ -284,10 +291,56 @@ work block契約:
 
 - `analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json`
 - `analysis/teacher/TEACHER_S2_CLOSURE_REPORT.json`
+
+S3 compilerだけがS2のgame別partitionとIDを開発入力として観測し、全成功遷移を
+一つのglobal state/action graphへ統合する。S3 graphはtask/game/level ID、
+game class、level progress counter、game別partition、具体的sample ID literalを
+保持しない。executorのaction選択関数は環境IDを受け取らず、評価harnessだけが
+OFFLINE環境の作成と結果帰属にIDを使用する。
+
+work block契約:
+
+- `X`: S2 graph、保持OFFLINE環境、S3 Teacher packageだけを観測し、
+  global graph/state/executor、S3証拠だけを変更する。
+- `R`: identity-routing-freeなcurrent-state署名をglobal indexから一意に引き、
+  WIN距離を厳密に減らすedgeを選び、一手後に再観測する。
+- `Mc`: 25/25 game、183/183 level、error 0、identity routing decision 0、
+  policy partition 1、graph内identity key/literal 0、全actionでWIN距離減少の
+  場合だけS3を`PASS`とする。
+- 非目的: source/hidden state、answer/replay graphの除去、Runtime Student P採用。
+- 証拠境界: S3は開発用Teacherの明示ID-routing除去証拠であり、
+  source-state-free、rendered-only、汎化能力の証拠ではない。
+- 反証条件: action選択への環境ID入力、game別graph lookup、identity key/literal、
+  未知node/target、距離非減少、`GAME_OVER`、未完levelのいずれか。
+- 回帰線: 同じOFFLINE sampleとlocal oracleでS2の183/183・RHAEを維持する。
+
+結果:
+
+- source transition witness / executable action: 10,733
+- global state node / action edge: 10,758 / 10,733
+- branch / merged / cross-environment merged: 0 / 0 / 0
+- nondeterministic action: 0
+- policy partition: 1
+- identity routing key / explicit ID literal / decision: 0 / 0 / 0
+- action selectionへのenvironment identity入力: false
+- level progress counter decision: false
+- rendered role selector resolution: 3,112
+- selector failure / node miss / unexpected target / error: 0 / 0 / 0 / 0
+- same-sample local oracle: RHAE 99.619936696%
+- S2 local-oracle delta: 0 percentage point
+- full graph rerun: byte-identical
+  (`sha256:b9e733ec99982359eecb92b06f78ded6bbefd1c41d724d823f454fb7300166a6`)
+- full closure rerun: byte-identical
+  (`sha256:297c171685d5754a6ee3907fea18548e03072eb0eb18a6478462bf48b61f422f`)
+
+正本:
+
+- `analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json`
+- `analysis/teacher/TEACHER_S3_CLOSURE_REPORT.json`
 - `analysis/teacher/PRIVILEGE_SUBTRACTION_MATRIX.json`
 - `analysis/teacher/RUNTIME_P_COMPILATION_REPORT.json`
 
-現状のRuntime P reportは`BLOCKED_BY_S3_IDENTITY_ROUTING`であり、
+現状のRuntime P reportは`BLOCKED_BY_S4_SOURCE_HIDDEN_STATE`であり、
 Runtime P変更・rule採用・graph採用はいずれも0である。
 
 ### P10-R6 汎化試験 — 未開始
@@ -340,6 +393,11 @@ analysis/teacher/TEACHER_S2_CLOSURE_REPORT.json
 analysis/teacher/TEACHER_S2_ORACLE_ADAPTER_REPORT.json
 analysis/teacher/TEACHER_S2_LOCAL_SCORE_ORACLE.json
 analysis/teacher/TEACHER_S2_LOCAL_SCORE_ORACLE.md
+analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json
+analysis/teacher/TEACHER_S3_CLOSURE_REPORT.json
+analysis/teacher/TEACHER_S3_ORACLE_ADAPTER_REPORT.json
+analysis/teacher/TEACHER_S3_LOCAL_SCORE_ORACLE.json
+analysis/teacher/TEACHER_S3_LOCAL_SCORE_ORACLE.md
 ```
 
 ## 7. 再生成・検証
@@ -379,6 +437,19 @@ python -m arc3_agi_agent.teacher.s2_graph_executor \
     ../analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json \
   --output ../analysis/teacher/TEACHER_S2_CLOSURE_REPORT.json
 
+python -m arc3_agi_agent.teacher.s3_graph_compiler \
+  --environments-dir ../environment_files \
+  --s2-policy-graph \
+    ../analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json \
+  --output \
+    ../analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json
+
+python -m arc3_agi_agent.teacher.s3_graph_executor \
+  --environments-dir ../environment_files \
+  --policy-graph \
+    ../analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json \
+  --output ../analysis/teacher/TEACHER_S3_CLOSURE_REPORT.json
+
 python -m arc3_agi_agent.teacher.solution_graph_compiler \
   --corpus ../analysis/teacher/FULL_SOLUTION_CORPUS.json \
   --closure-report ../analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json \
@@ -393,6 +464,10 @@ python -m arc3_agi_agent.teacher.solution_graph_compiler \
     ../analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json \
   --s2-closure-report \
     ../analysis/teacher/TEACHER_S2_CLOSURE_REPORT.json \
+  --s3-policy-graph \
+    ../analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json \
+  --s3-closure-report \
+    ../analysis/teacher/TEACHER_S3_CLOSURE_REPORT.json \
   --output-dir ../analysis/teacher
 
 python -m pytest -q \
@@ -400,15 +475,16 @@ python -m pytest -q \
   tests/integration/test_teacher_s0_replay.py \
   tests/integration/test_teacher_s1_graph.py \
   tests/unit/test_teacher_s2_role_selector.py \
-  tests/integration/test_teacher_s2_graph.py
+  tests/integration/test_teacher_s2_graph.py \
+  tests/unit/test_teacher_s3_state.py \
+  tests/integration/test_teacher_s3_graph.py
 ```
 
 ## 8. 次work block
 
 ```text
-WB-S3-IDENTITY-ROUTING-SUBTRACTION
+WB-S4-SOURCE-HIDDEN-STATE-SUBTRACTION
 ```
 
-R1〜R5とS1/S2は閉じた。次はtask/game/level identityをstate matchingと
-routingから除去し、S3を183/183へ閉じる。S3が183/183になる前にS4以降へ
-進まない。
+R1〜R5とS1〜S3は閉じた。次はglobal state matchingからsource/hidden stateを
+除去し、S4を183/183へ閉じる。S4が183/183になる前にS5以降へ進まない。

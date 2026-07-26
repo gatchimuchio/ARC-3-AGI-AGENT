@@ -610,7 +610,7 @@
   },
   "contains_game_or_level_routing": false,
   "contains_literal_coordinates": false,
-  "content_digest": "arc3_cross_game_structural_grammar:d9cd91f0cbf77c89eb31dadbe2f0cdc379574fcac3bc4ea4cb0e6bb1ce187c36",
+  "content_digest": "arc3_cross_game_structural_grammar:eec9310a1a21b558bfa65a044a1c932a15fd26af27f2a252296be557775b86cc",
   "coverage": {
     "distinct_action_primitive_count": 8,
     "distinct_source_causal_role_count": 7,
@@ -619,6 +619,10 @@
     "s2_actions_executed": 10733,
     "s2_completed_levels": 183,
     "s2_role_selector_resolution_count": 3112,
+    "s3_actions_executed": 10733,
+    "s3_completed_levels": 183,
+    "s3_identity_routing_decision_count": 0,
+    "s3_policy_partition_count": 1,
     "source_causal_semantic_complete_count": 183,
     "source_level_graph_count": 183,
     "source_transition_count": 11574
@@ -715,7 +719,7 @@
   },
   "development_only": true,
   "identity_free_artifact": true,
-  "phase": "P10-R3-R5-CROSS-GAME-STRUCTURAL-GRAMMAR",
+  "phase": "P10-R3-R5-S3-CROSS-GAME-STRUCTURAL-GRAMMAR",
   "primitive_registry": [
     {
       "observed_transition_count": 1795,
@@ -800,13 +804,14 @@
     "factorization": "EXTRACTED_FROM_183_SOURCE_CAUSAL_S0_GRAPHS",
     "fixed_action_free_execution": "PASS_183_OF_183",
     "generalization": "NOT_RUN",
+    "identity_routing_free_execution": "PASS_183_OF_183",
     "intra_game_source_causal_delta": "PASS_158_OF_158",
     "literal_coordinate_free_execution": "PASS_183_OF_183",
     "rendered_only_execution": "NOT_RUN",
     "source_causal_semantic_factorization": "PASS_183_OF_183"
   },
   "runtime_use": "FORBIDDEN",
-  "schema_version": "arc3-cross-game-structural-grammar-v4",
+  "schema_version": "arc3-cross-game-structural-grammar-v5",
   "source_causal_role_registry": [
     {
       "level_support_count": 124,
@@ -856,5 +861,7 @@
   "source_s1_closure_report_digest": "arc3_teacher_s1_state_conditioned_closure:f0ca09125c5c188cdd6d85e3cf499d955aeb824fbccda4461515540808763a24",
   "source_s1_policy_graph_digest": "arc3_teacher_s1_state_conditioned_policy_graph:3db9d0f4721a5933b320b7b8b1115dd4c745359199aa92901f7ce7e6fc4d82b4",
   "source_s2_closure_report_digest": "arc3_teacher_s2_role_relative_closure:3a57f1f9171753261342b29a1d9ce6046496c536e82b9bb4cab0b29ca5b4e728",
-  "source_s2_policy_graph_digest": "arc3_teacher_s2_role_relative_policy_graph:16d0ae6e0ad0e8bc4172e0e0e0c3bc4761732791803826153a49a4701f774bc2"
+  "source_s2_policy_graph_digest": "arc3_teacher_s2_role_relative_policy_graph:16d0ae6e0ad0e8bc4172e0e0e0c3bc4761732791803826153a49a4701f774bc2",
+  "source_s3_closure_report_digest": "arc3_teacher_s3_global_identity_free_closure:aed663f7d569660d723223dd23e8bf6b8a603095987420db96e7b822308be7c2",
+  "source_s3_policy_graph_digest": "arc3_teacher_s3_global_identity_free_policy_graph:8d4cd7049407d623201cef14f66cee9fb3f64fcfc2669b2ee6e5c9f9c9073c38"
 }

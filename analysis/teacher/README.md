@@ -35,10 +35,16 @@
 - `TEACHER_S2_ORACLE_ADAPTER_REPORT.json`
 - `TEACHER_S2_LOCAL_SCORE_ORACLE.json`
 - `TEACHER_S2_LOCAL_SCORE_ORACLE.md`
+- `S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json`
+- `TEACHER_S3_CLOSURE_REPORT.json`
+- `TEACHER_S3_ORACLE_ADAPTER_REPORT.json`
+- `TEACHER_S3_LOCAL_SCORE_ORACLE.json`
+- `TEACHER_S3_LOCAL_SCORE_ORACLE.md`
 
-現状はS0、S1、S2 Teacherが183/183です。S3〜S6およびrendered-only
-Runtime Studentは未達です。S2は固定action列とliteral targetを除去しましたが、
-ID、source/hidden、answer/replay graphへの依存を残します。
+現状はS0〜S3 Teacherが183/183です。S4〜S6およびrendered-only Runtime
+Studentは未達です。S3は固定action列、literal target、明示的な
+task/game/level ID routingを除去しましたが、source/hiddenと
+answer/replay graphへの依存を残します。
 
 P10-R2の全183 graphは、保持中25 source fileのSHA-256、183 level定義、
 object/state role、25 goal witness、43 hazard witness、hidden-state boundary、
@@ -66,6 +72,16 @@ target-centred palette relation 26,623件から一意targetを解決します。
 oracleはS1と同じRHAE 99.619936696%です。全25 gameのgraph生成と
 全183 levelのexecutor実行を新規環境で各2回行い、graphとclosure reportは
 いずれもbyte-identicalでした。
+
+P10-R5/S3は25個のS2 game partitionを一つのglobal policy indexへ統合し、
+状態署名とaction選択からgame/task/level identity、level progress counter、
+game別graph routingを除去しました。graph内identity key/literalは0、
+policy partitionは1です。183/183 level、10,733 action、identity-routing
+decision 0、error 0で、標準local oracleはS2と同じRHAE 99.619936696%です。
+評価harnessだけが環境作成と結果帰属にgame IDを使用し、action選択関数は
+受け取りません。source/hiddenとanswer-derived graphはS4以降の残存特権です。
+全global graph生成と全183 levelのexecutor実行を新規環境で各2回行い、
+graphとclosure reportはいずれもbyte-identicalでした。
 
 再生成手順とclaim境界は
 [`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](../../docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
