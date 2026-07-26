@@ -24,10 +24,13 @@ from arc3_agi_agent.p10_instruction_compiler import (
     P10_COMPILER_SEED,
     P10_DIRECTIONAL_SETTLE_CANDIDATE_SET_VERSION,
     P10_DIRECTIONAL_SETTLE_HYBRID_FILENAME,
+    P10_PROSPECTIVE_COMPOSITION_CANDIDATE_SET_VERSION,
+    P10_PROSPECTIVE_COMPOSITION_HYBRID_FILENAME,
     active_p10_manifest_digest,
     compile_p10_c2_c10_symbolic_candidate,
     compile_p10_directional_settle_hybrid_candidate,
     compile_p10_instruction_bodies,
+    compile_p10_prospective_composition_hybrid_candidate,
 )
 from arc3_agi_agent.p_b_learning import PBLearningResult
 from arc3_agi_agent.p_update import (
@@ -250,6 +253,75 @@ def _directional_settle_compile_authorization() -> tuple[
     return hds, decision, directive
 
 
+def _prospective_composition_compile_authorization() -> tuple[
+    HDSPUpdateAuthority,
+    PUpdateDecision,
+    InstructionBodyCompileDirective,
+]:
+    source_digest = active_p10_manifest_digest(BUNDLE_DIR)
+    proposal = PUpdateProposal(
+        proposal_id="proposal:prospective-obligation-composition",
+        source_p_version="p10-active-set",
+        source_p_digest=source_digest,
+        target_component="hybrid-P-B",
+        update_type="transition-parameter",
+        evidence_refs=("evidence:prospective-composition-local-probe",),
+        expected_effect="bounded-all-obligation-composition",
+        expected_affected_capabilities=(
+            "multi-actor-directional-force-composition",
+        ),
+        expected_unaffected_capabilities=("active-runtime-manifest",),
+        falsifiers=(
+            "stable-regression-decreases",
+            "candidate-rebuild-differs",
+        ),
+        rollback_target="p10-hybrid-v26",
+        provenance=("development-memory:hds-accepted-local-probe",),
+    )
+    evidence = PUpdateEvidenceSet(
+        evidence_set_id="evidence-set:prospective-composition",
+        proposal_digest=proposal.digest,
+        memory_snapshot_digest="memory-snapshot:prospective-composition",
+        approved_memory_refs=(
+            "memory:prospective-relation",
+            "memory:multi-actor-force",
+        ),
+        hds_memory_decision_digests=(
+            "hds-decision:prospective-composition",
+        ),
+        failure_refs=("failure:all-obligation-stagnation",),
+        contradiction_refs=("contradiction:transition-mismatch",),
+        positive_contrast_refs=("contrast:full-composition",),
+        negative_contrast_refs=(
+            "contrast:no-force-composition",
+            "contrast:no-obligation-order",
+        ),
+        holdout_refs=("holdout:translated-rendered-structure",),
+        replay_audit_refs=("audit:identity-free-no-replay",),
+        provenance=("development-evidence:content-addressed",),
+    )
+    hds = HDSPUpdateAuthority()
+    decision = hds.decide(
+        proposal,
+        status="COMPILE",
+        reason_codes=(
+            "prospective-composition-local-probe-pass",
+            "candidate-only",
+        ),
+        evidence_set=evidence,
+    )
+    directive = hds.issue_compile_directive(
+        proposal,
+        evidence,
+        decision,
+        target_body_version=(
+            P10_PROSPECTIVE_COMPOSITION_CANDIDATE_SET_VERSION
+        ),
+        seed=P10_COMPILER_SEED,
+    )
+    return hds, decision, directive
+
+
 class P10InstructionCompilerTests(unittest.TestCase):
     def test_candidate_variants_have_explicit_operator_separation(self) -> None:
         symbolic = load_p10_candidate_symbolic_instruction_body()
@@ -350,7 +422,7 @@ class P10InstructionCompilerTests(unittest.TestCase):
                     filename,
                 )
 
-    def test_candidate_manifest_binds_each_variant(self) -> None:
+    def test_staged_candidate_manifest_binds_each_variant(self) -> None:
         manifest = _json(BUNDLE_DIR / "p10_candidate_manifest.json")
         expected_digests = {
             "P-A": load_p10_candidate_symbolic_instruction_body().digest(),
@@ -360,7 +432,7 @@ class P10InstructionCompilerTests(unittest.TestCase):
 
         self.assertEqual(manifest["seed"], P10_COMPILER_SEED)
         self.assertTrue(manifest["runtime_identity_free"])
-        self.assertEqual(manifest["lifecycle"], "PROMOTED")
+        self.assertEqual(manifest["lifecycle"], "CANDIDATE")
         self.assertEqual(
             manifest["activation_authority"],
             "hds-promotion-required",
@@ -371,7 +443,7 @@ class P10InstructionCompilerTests(unittest.TestCase):
             self.assertEqual(entry["content_digest"], expected_digest)
             self.assertEqual(entry["sha256"], _sha256(path))
 
-    def test_runtime_loaders_resolve_promoted_active_and_archive(self) -> None:
+    def test_runtime_loaders_separate_active_and_staged_candidate(self) -> None:
         active: tuple[InstructionBody, ...] = (
             load_p10_symbolic_instruction_body(),
             load_p10_parametric_instruction_body(),
@@ -391,16 +463,17 @@ class P10InstructionCompilerTests(unittest.TestCase):
                 "p10-hybrid-v26",
             ),
         )
-        self.assertTrue(
-            all(
-                active_body.digest() == candidate_body.digest()
-                for active_body, candidate_body in zip(
-                    active,
-                    candidate,
-                    strict=True,
-                )
-            )
+        self.assertEqual(
+            tuple(body.body_version for body in candidate),
+            (
+                "p10-p-a-symbolic-v27",
+                "p10-p-b-parametric-v27",
+                "p10-hybrid-prospective-obligation-composition-v1",
+            ),
         )
+        self.assertEqual(active[0].digest(), candidate[0].digest())
+        self.assertEqual(active[1].digest(), candidate[1].digest())
+        self.assertNotEqual(active[2].digest(), candidate[2].digest())
 
     def test_compiler_rejects_noncanonical_seed(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -634,6 +707,110 @@ class P10InstructionCompilerTests(unittest.TestCase):
                     (outputs[1] / filename).read_bytes(),
                     filename,
                 )
+
+    def test_prospective_composition_compiler_is_isolated_and_deterministic(
+        self,
+    ) -> None:
+        active_manifest_before = (
+            BUNDLE_DIR / "p10_manifest.json"
+        ).read_bytes()
+        active = _json(BUNDLE_DIR / "p10_manifest.json")
+        active_bundles = active.get("bundles")
+        if not isinstance(active_bundles, dict):
+            raise TypeError("active manifest bundles invalid")
+        with (
+            tempfile.TemporaryDirectory() as first_temporary,
+            tempfile.TemporaryDirectory() as second_temporary,
+        ):
+            outputs = (Path(first_temporary), Path(second_temporary))
+            manifests: list[dict[str, object]] = []
+            for output in outputs:
+                hds, decision, directive = (
+                    _prospective_composition_compile_authorization()
+                )
+                manifests.append(
+                    compile_p10_prospective_composition_hybrid_candidate(
+                        base_bundle_dir=BUNDLE_DIR,
+                        output_dir=output,
+                        compile_directive=directive,
+                        compile_decision=decision,
+                        hds_authority=hds,
+                        composition_audit_digest=(
+                            "arc3_p10_prospective_obligation_"
+                            "composition_audit:unit"
+                        ),
+                    )
+                )
+                self.assertTrue(directive.consumed)
+
+            self.assertEqual(manifests[0], manifests[1])
+            manifest = manifests[0]
+            self.assertEqual(manifest["lifecycle"], "CANDIDATE")
+            self.assertEqual(
+                manifest["candidate_target_component"],
+                "hybrid-P-B",
+            )
+            self.assertIs(
+                manifest["historical_directional_settle_reenabled"],
+                False,
+            )
+            candidate = instruction_body_from_mapping(
+                _json(
+                    outputs[0]
+                    / P10_PROSPECTIVE_COMPOSITION_HYBRID_FILENAME
+                )
+            )
+            directional = next(
+                item
+                for item in candidate.operator_instructions
+                if item.operator_id == DIRECTIONAL_FORCE_ROUTE_OPERATOR
+            )
+            parameters = directional.parameters()
+            self.assertEqual(
+                parameters["multi_actor_composition_enabled"],
+                1,
+            )
+            self.assertNotIn(
+                "maximum_transition_observations",
+                parameters,
+            )
+            manifest_bundles = manifest.get("bundles")
+            if not isinstance(manifest_bundles, dict):
+                raise TypeError("candidate manifest bundles invalid")
+            for variant in ("P-A", "P-B"):
+                self.assertEqual(
+                    manifest_bundles[variant],
+                    active_bundles[variant],
+                )
+            compared = (
+                P10_PROSPECTIVE_COMPOSITION_HYBRID_FILENAME,
+                *(
+                    str(active_bundles[variant]["filename"])
+                    for variant in ("P-A", "P-B")
+                ),
+                "p10_candidate_manifest.json",
+            )
+            for filename in compared:
+                self.assertEqual(
+                    (outputs[0] / filename).read_bytes(),
+                    (outputs[1] / filename).read_bytes(),
+                    filename,
+                )
+
+        self.assertEqual(
+            (BUNDLE_DIR / "p10_manifest.json").read_bytes(),
+            active_manifest_before,
+        )
+        active_directional = next(
+            item
+            for item in load_p10_hybrid_instruction_body()
+            .operator_instructions
+            if item.operator_id == DIRECTIONAL_FORCE_ROUTE_OPERATOR
+        )
+        self.assertNotIn(
+            "multi_actor_composition_enabled",
+            active_directional.parameters(),
+        )
 
 
 if __name__ == "__main__":

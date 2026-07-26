@@ -284,6 +284,15 @@ def compact_p10_run(value: Mapping[str, object]) -> dict[str, object]:
             compact_report["development_transition_probe"] = (
                 copy.deepcopy(dict(transition_probe))
             )
+        prospective_probe = report.get(
+            "development_prospective_relation_probe"
+        )
+        if prospective_probe is not None:
+            if not isinstance(prospective_probe, Mapping):
+                raise TypeError("P10_PROSPECTIVE_RELATION_PROBE_INVALID")
+            compact_report[
+                "development_prospective_relation_probe"
+            ] = copy.deepcopy(dict(prospective_probe))
         compact_reports.append(compact_report)
     return {
         field: copy.deepcopy(stable[field])

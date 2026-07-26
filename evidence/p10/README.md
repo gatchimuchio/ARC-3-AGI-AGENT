@@ -4,6 +4,25 @@
 保存する。sample/game識別子は結果を同定する監査metadataに限り許可し、
 P bundle、C selector、M payload、runtime routingには使用しない。
 
+## Prospective obligation relation candidate — paused
+
+`development/prospective_obligation_relation_v1/`は、prospective relation
+observerを全25ゲームのshadow観測から`CLUSTER_STABLE`へ固定し、既存の
+multi-actor / directional-force / obligation構成だけでKA59を6 / 7から
+7 / 7へ二回同一に改善した未昇格候補の証拠である。専用operatorは追加せず、
+active Runtime Pは35 / 183のまま変更していない。
+
+候補の標準budget回帰はユーザー指示により途中停止した。25ゲーム中、
+FT09・AR25・CD82の3 checkpointだけが完了し、BP35・CN04は中断された。
+aggregate reportと候補ローカルオラクルは未生成であるため、36 / 183を
+確定scoreとして扱わず、HDS判断は`HOLD`、promotionは未許可とする。
+max16 raw report、途中checkpoint、worker logのpayloadは`.gitignore`規約
+どおりローカルだけに保持し、remoteへは停止状態・集約監査・SHA-256を保存
+する。別checkoutからの再開時はraw reportとcheckpointを再生成する。
+再開条件・checkpoint digest・停止時点の正確な状態は
+[`development/prospective_obligation_relation_v1/PAUSED_STATE.json`](development/prospective_obligation_relation_v1/PAUSED_STATE.json)
+に固定した。
+
 ## Development capability evidence
 
 `development/c2_c3_local_probe_all25_max1/`は、C2 Visible effect transition

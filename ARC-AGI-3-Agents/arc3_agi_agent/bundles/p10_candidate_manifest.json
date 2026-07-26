@@ -18,26 +18,33 @@
       "sha256": "c3791df11df4634f5d621a5c8bb14cf0e36ec8b8e9cdb831fb17fa777d2b1362"
     },
     "hybrid": {
-      "body_version": "p10-hybrid-v26",
-      "content_digest": "sha256-decimal:050563668479194176978429964247556879539063039008792254803809073746139003067184",
-      "filename": "p10_hybrid_v26.json",
+      "body_version": "p10-hybrid-prospective-obligation-composition-v1",
+      "content_digest": "sha256-decimal:103174729220758125024864891631593403594477059935966825330477305183175825557019",
+      "filename": "p10_hybrid_prospective_obligation_composition_v1.json",
       "format_id": "parametric-sigmoid-matrix",
       "operator_count": 10,
-      "sha256": "8d9f48c20bb93430c5ce159f40291419a86be913015ef664853ac3c58d7fe4c8"
+      "sha256": "3fd9bfcb951c544a2498fcb767a9f45e65b5c85e3947ba15e33378808370c335"
     }
   },
-  "compile_decision_digest": "5722ae9e3e0cd60190cf8c80be153a0e006ff6269bb265f939c1730014e6741b",
-  "compile_directive_digest": "4f564e0ae7c438b00206a654f0fa7e4e6453221620d48b5ff4f4b3f9acf36b56",
-  "compiler_version": "arc3-p10-instruction-compiler-v26",
-  "evidence_set_digest": "d493e6c6e74a319684af6bfb1409947df072e414725e50b333434739c205aafb",
-  "learning_result_digest": "2eed09ea05d50d11ad04f4bced9b6a374c4a430761b243a82d8b8f6572821f6c",
-  "lifecycle": "PROMOTED",
-  "promoted_active_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
-  "promotion_decision_digest": "505a3868006db0f281743975462679fdc1218e9a2c4ab41c6c80271bef1e1182",
-  "promotion_directive_digest": "4731efd04002b8084d67c8d45f31af55712084a15d24afa298835a232c96da69",
-  "regression_report_digest": "048effb59fd9ea19805f0e0d1e82cd6acf806b7c0227e94b0bfa49bcc56dc23f",
+  "candidate_target_component": "hybrid-P-B",
+  "compile_decision_digest": "c369226d9efe115aff662fa6b4061355d9b334f4b09a6637ee096c073d903a51",
+  "compile_directive_digest": "259ca19c1e8067fe6334dabfc2bb4a636321bc80a128958a525e514a395754b3",
+  "compiler_version": "arc3-p10-prospective-obligation-composition-hybrid-compiler-v1",
+  "composition_audit_digest": "arc3_p10_prospective_obligation_composition_audit:e37ccf0853f9b6a1f91f3bb7b15d9109dc79963f0f97a423ea05859e0f7958aa",
+  "composition_parameters": {
+    "composition_manipulator_retention_divisor": 2,
+    "composition_relation_heuristic_weight": 8,
+    "maximum_composition_navigation_states": 400,
+    "maximum_composition_plan_actions": 256,
+    "maximum_composition_relation_candidates": 2,
+    "maximum_composition_search_states": 4096,
+    "maximum_composition_transition_observations": 8
+  },
+  "evidence_set_digest": "95c7e2cdfd8ae9fff79ddaa0f9b1bd7dab26ea940037c79eca21c84acd3aa47c",
+  "historical_directional_settle_reenabled": false,
+  "lifecycle": "CANDIDATE",
   "runtime_identity_free": true,
   "schema_version": "arc3-p10-instruction-manifest-v1",
   "seed": 0,
-  "source_manifest_digest": "66ab43152ef7eb4512679ca4a683a3c4963a2bb8147daaa743fe70f9f9b5ceba"
+  "source_manifest_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1"
 }

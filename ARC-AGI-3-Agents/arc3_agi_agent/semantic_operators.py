@@ -12,6 +12,13 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from math import gcd
 
+from .directional_force_multi_actor import (
+    directional_force_multi_actor_observation_status,
+    directional_force_multi_actor_plan,
+    directional_force_multi_actor_successor_observation_status,
+    directional_force_multi_actor_transition_observation_limit,
+    is_directional_force_multi_actor_action,
+)
 from .directional_force_route import (
     DIRECTIONAL_FORCE_ROUTE_OPERATOR,
     directional_force_route_observation_status,
@@ -1890,7 +1897,11 @@ class SemanticPlannerState:
         action: VisualAction,
     ) -> None:
         observation_limit = (
-            directional_force_route_transition_observation_limit(
+            directional_force_multi_actor_transition_observation_limit(
+                instruction
+            )
+            if is_directional_force_multi_actor_action(action)
+            else directional_force_route_transition_observation_limit(
                 instruction
             )
         )
@@ -2610,20 +2621,50 @@ class SemanticPlannerState:
                 None,
             )
             pending_action = self.directional_force_pending_action
+            pending_multi_instruction = next(
+                (
+                    instruction
+                    for instruction in operator_instructions
+                    if (
+                        instruction.operator_id
+                        == MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR
+                    )
+                ),
+                None,
+            )
             if (
                 pending_instruction is None
                 or pending_action is None
                 or pending_action.action_id not in available_actions
+                or (
+                    is_directional_force_multi_actor_action(
+                        pending_action
+                    )
+                    and pending_multi_instruction is None
+                )
             ):
                 self._clear_directional_force_transition()
             else:
-                transition_status = (
-                    directional_force_route_successor_observation_status(
-                        grid,
-                        pending_instruction,
-                        pending_action,
+                if is_directional_force_multi_actor_action(
+                    pending_action
+                ):
+                    assert pending_multi_instruction is not None
+                    transition_status = (
+                        directional_force_multi_actor_successor_observation_status(
+                            grid,
+                            pending_instruction,
+                            pending_multi_instruction,
+                            pending_action,
+                        )
                     )
-                )
+                else:
+                    transition_status = (
+                        directional_force_route_successor_observation_status(
+                            grid,
+                            pending_instruction,
+                            pending_action,
+                        )
+                    )
                 if (
                     transition_status in {"MATCH", "UNAVAILABLE"}
                     and self.directional_force_wait_count
@@ -2678,13 +2719,38 @@ class SemanticPlannerState:
                     self.active_operator
                     == DIRECTIONAL_FORCE_ROUTE_OPERATOR
                 ):
-                    force_status = (
-                        directional_force_route_observation_status(
-                            grid,
-                            current_instruction,
-                            action,
-                        )
+                    current_multi_instruction = next(
+                        (
+                            instruction
+                            for instruction in operator_instructions
+                            if (
+                                instruction.operator_id
+                                == MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR
+                            )
+                        ),
+                        None,
                     )
+                    if is_directional_force_multi_actor_action(action):
+                        if current_multi_instruction is None:
+                            self.invalidate_active_plan()
+                            force_status = "MISMATCH"
+                        else:
+                            force_status = (
+                                directional_force_multi_actor_observation_status(
+                                    grid,
+                                    current_instruction,
+                                    current_multi_instruction,
+                                    action,
+                                )
+                            )
+                    else:
+                        force_status = (
+                            directional_force_route_observation_status(
+                                grid,
+                                current_instruction,
+                                action,
+                            )
+                        )
                     if force_status == "MATCH":
                         self.directional_force_wait_count = 0
                         self.queue.pop(0)
@@ -2700,7 +2766,11 @@ class SemanticPlannerState:
                             plan_signature=self.active_plan_signature,
                         )
                     observation_limit = (
-                        directional_force_route_transition_observation_limit(
+                        directional_force_multi_actor_transition_observation_limit(
+                            current_instruction
+                        )
+                        if is_directional_force_multi_actor_action(action)
+                        else directional_force_route_transition_observation_limit(
                             current_instruction
                         )
                     )
@@ -2709,7 +2779,16 @@ class SemanticPlannerState:
                         and self.directional_force_wait_count
                         < observation_limit
                     ):
-                        self.directional_force_wait_count += 1
+                        next_wait_count = (
+                            self.directional_force_wait_count + 1
+                        )
+                        if is_directional_force_multi_actor_action(action):
+                            self.queue.pop(0)
+                            self._stage_directional_force_transition(
+                                current_instruction,
+                                action,
+                            )
+                        self.directional_force_wait_count = next_wait_count
                         self.memory_read_count += 1
                         return SemanticPlannerDecision(
                             action=action,
@@ -3072,11 +3151,33 @@ class SemanticPlannerState:
                     instruction,
                 )
             elif instruction.operator_id == DIRECTIONAL_FORCE_ROUTE_OPERATOR:
-                plan = directional_force_route_plan(
-                    grid,
-                    available_actions,
-                    instruction,
+                multi_instruction = next(
+                    (
+                        candidate
+                        for candidate in operator_instructions
+                        if (
+                            candidate.operator_id
+                            == MULTI_ACTOR_SHAPE_PUSH_TARGET_OPERATOR
+                        )
+                    ),
+                    None,
                 )
+                plan = (
+                    ()
+                    if multi_instruction is None
+                    else directional_force_multi_actor_plan(
+                        grid,
+                        available_actions,
+                        instruction,
+                        multi_instruction,
+                    )
+                )
+                if not plan:
+                    plan = directional_force_route_plan(
+                        grid,
+                        available_actions,
+                        instruction,
+                    )
             else:
                 continue
             if not plan:

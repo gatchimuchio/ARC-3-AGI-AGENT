@@ -87,6 +87,7 @@ class P10SampleAgentReport:
     search_reset_payload_digests: tuple[str, ...]
     search_reset_evidence_signatures: tuple[str, ...]
     development_transition_probe: dict[str, object]
+    development_prospective_relation_probe: dict[str, object]
 
 
 class P10SampleAgent(Agent):
@@ -366,6 +367,9 @@ class P10SampleAgent(Agent):
             ),
             development_transition_probe=(
                 self.runtime.transition_probe.to_payload()
+            ),
+            development_prospective_relation_probe=(
+                self.runtime.prospective_relation_probe.to_payload()
             ),
         )
 

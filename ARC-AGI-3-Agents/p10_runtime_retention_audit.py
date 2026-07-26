@@ -91,6 +91,7 @@ def _agent_behavior_projection(
             raise TypeError("P10_RUNTIME_GAME_REPORT_INVALID")
         report = copy.deepcopy(dict(raw))
         report.pop("development_transition_probe", None)
+        report.pop("development_prospective_relation_probe", None)
         reports.append(report)
     stable["reports"] = reports
     return stable
@@ -176,9 +177,13 @@ def build_runtime_retention_audit(
             ),
         },
         "comparison_contract": {
-            "excluded_field": (
-                "development_transition_probe shadow telemetry"
-            ),
+            "excluded_fields": [
+                "development_transition_probe shadow telemetry",
+                (
+                    "development_prospective_relation_probe "
+                    "shadow telemetry"
+                ),
+            ],
             "retained_fields": (
                 "all agent actions, HDS decisions, verification, memory, "
                 "trace, rollback, recovery, and level outcomes"

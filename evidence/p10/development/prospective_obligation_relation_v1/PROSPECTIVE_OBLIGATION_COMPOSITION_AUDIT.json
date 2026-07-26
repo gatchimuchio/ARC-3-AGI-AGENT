@@ -1,0 +1,306 @@
+{
+  "artifact_type": "arc3_p10_prospective_obligation_composition_audit",
+  "candidate_contract": {
+    "capability_ids": [
+      "prospective_rendered_relation_compiler",
+      "visible_successor_obligation_predictor",
+      "multi_actor_selection_and_shape_target",
+      "directional_force_multi_obligation_route"
+    ],
+    "composition_trigger": [
+      "multiple rendered marker-controlled actors",
+      "balanced rendered shape-target obligations",
+      "multiple synchronously charged directional blocks"
+    ],
+    "fixed_action_sequence": false,
+    "literal_coordinate_table": false,
+    "maximum_transition_observations": 8,
+    "new_operator_count": 0,
+    "operator_ids": [
+      "directional-force-multi-obligation-route-v1",
+      "marker-controlled-shape-target-route-v3",
+      "multi-actor-shape-target-route-v4",
+      "object-target-cycle-control-v1",
+      "occluded-selectable-object-target-route-v5",
+      "relation-constrained-toggle-gf2-v1",
+      "rendered-goal-aware-fruit-merge-v14",
+      "rendered-symbolic-rewrite-v1",
+      "selectable-object-target-push-v1",
+      "selectable-object-target-route-v2"
+    ],
+    "search": "bounded relation-event all-obligation search",
+    "successor_verification": "content-bound normalized visible transition",
+    "task_identity": false
+  },
+  "candidate_tier": "COMPOSABLE",
+  "composable_checks": {
+    "active_composition_gate_absent": true,
+    "active_removal_control_is_six_of_seven": true,
+    "both_existing_operator_capabilities_are_active": true,
+    "candidate_bounds_are_finite": true,
+    "candidate_composition_gate_is_one": true,
+    "fixed_route_material_absent": true,
+    "h1_dedicated_operator_rejected": true,
+    "h1_h2_h3_present": true,
+    "h2_shadow_policy_suspended": true,
+    "h3_selected_by_development_hds": true,
+    "historical_directional_settle_not_reenabled": true,
+    "late_identity_subtraction_pass": true,
+    "operator_set_and_count_unchanged": true,
+    "prospective_relation_cluster_stable": true,
+    "task_aware_frontier_reaches_next_level": true
+  },
+  "content_digest": "arc3_p10_prospective_obligation_composition_audit:e37ccf0853f9b6a1f91f3bb7b15d9109dc79963f0f97a423ea05859e0f7958aa",
+  "development_only": true,
+  "hds_judgment": {
+    "active_p_compile_authorized": false,
+    "all_sample_regression_authorized": false,
+    "authority": "development-hds-only",
+    "composable_status": "PASS",
+    "isolated_candidate_compile_authorized": true,
+    "reason_codes": [
+      "H3-existing-capability-composition-selected",
+      "all-game-relation-cluster-stable",
+      "active-composition-removal-control-bound",
+      "operator-set-unchanged",
+      "late-identity-subtraction-pass"
+    ],
+    "runtime_p_promotion_authorized": false,
+    "score_progress_claim_authorized": false,
+    "selected_hypothesis": "H3",
+    "target_probe_authorized": true
+  },
+  "identity_subtraction": {
+    "development_identity_retained": true,
+    "runtime_identity_free": true,
+    "runtime_identity_paths": []
+  },
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "removal_controls": {
+    "historical_directional_settle_reenabled": false,
+    "remove_directional_force_capability": "force phase and directional transition are unavailable",
+    "remove_multi_actor_capability": "joint rendered precondition cannot hold",
+    "remove_prospective_obligation_relation": "joint successor obligations cannot be ranked",
+    "without_composition_gate_completed_levels": 6,
+    "without_composition_gate_total_levels": 7
+  },
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-p10-prospective-obligation-composition-audit-v1",
+  "source_evidence": {
+    "active_compact_digest": "80f1a07d3ed397d0e31b9e4aab5c4690fb35f3a402ea3ace52e60da49bf0694c",
+    "cluster_audit_digest": "arc3_p10_prospective_relation_cluster_audit:4247955ab569ac3e71e2aa9e92775fdfb49627b9cb443a043293a25ba283dc04",
+    "coverage_digest": "arc3_p10_capability_coverage_matrix:d70616e45d510efad67af88742a78f28caf7ec48c155616eb7e1fa733b29d9b0",
+    "current_frontier_row_digest": "7ae5800c843d3082505a7ddc84b6816bd8600890c3a7affd21b63b15896365e4",
+    "development_frontier_row_digest": "440ebdb88e44fa3bae7eaa39ff12b999869ae72c17636abba2e59b67a63ff586",
+    "ledger_digest": "arc3_p10_legacy_level_analysis_ledger:95320a068cdff83498a192a64825213bcece3b0571582a55cfec37795aba16c7",
+    "queue_digest": "arc3_p10_capability_build_queue:7c126e96713a540964712ed3e4017329b6a3466082e8330ff52292778da53ef3",
+    "reconciliation_digest": "arc3_p10_analysis_reconciliation_matrix:0f14e61a7c49f236570c7c8384ac0158f3f1e4ac190cd78dd97a9ef2ef002aa1"
+  },
+  "source_integrity_checks": {
+    "all_development_sources_forbid_runtime_use": true,
+    "cluster_digest_valid": true,
+    "cluster_schema_valid": true,
+    "coverage_digest_valid": true,
+    "ledger_digest_valid": true,
+    "queue_digest_valid": true,
+    "reconciliation_digest_valid": true
+  },
+  "work_block_id": "WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER",
+  "x_r_mc": {
+    "decision": {
+      "authority": "development-hds-only",
+      "decision_digest": "58215505dbb4aabe34e9da608305095e33d8d9aa1d5f32a9736e3fff58acb97e",
+      "decision_id": "dev-decision:5f74450208ccee2ab19a6749",
+      "maximum_information_gain_next": "isolated-candidate-target-and-all-game-regression",
+      "reason_codes": [
+        "dedicated-operator-prohibited",
+        "shadow-predictor-has-no-action-authority",
+        "existing-capability-composition-maximizes-bounded-information-gain"
+      ],
+      "selected_hypothesis_id": "hypothesis:h3-existing-capability-composition",
+      "status": "PROBE"
+    },
+    "frame": {
+      "evidence_boundary": [
+        "task identity remains in development-only source references",
+        "candidate mapping contains rendered relations only"
+      ],
+      "falsifiers": [
+        "historical directional-settle control is re-enabled",
+        "unbounded search or observation",
+        "action sequence is retained"
+      ],
+      "frame_id": "frame:prospective-obligation-composition",
+      "maximum_work_scope": [
+        "one existing-operator composition gate",
+        "one bounded relation-event planner"
+      ],
+      "mc_acceptance": [
+        "H1 H2 H3 compared",
+        "H3 selected by development HDS",
+        "cluster and removal evidence pass",
+        "runtime identity subtraction passes"
+      ],
+      "mc_boundary": "offline retained samples and identity-free Runtime P",
+      "mc_completion": [
+        "target improves reproducibly",
+        "all retained games do not regress",
+        "standard oracle delta is positive"
+      ],
+      "mc_identity": "prospective-obligation-capability-composition",
+      "mc_rollback": [
+        "restore candidate slot byte-for-byte",
+        "retain active manifest unchanged on any failed gate"
+      ],
+      "mc_stop": [
+        "active manifest changes before promotion",
+        "game or level routing reaches Runtime P",
+        "candidate error or stable regression"
+      ],
+      "non_goals": [
+        "dedicated frontier operator",
+        "official environment connection",
+        "competition mode"
+      ],
+      "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+      "r_comparators": [
+        "active composition gate removed",
+        "candidate composition gate enabled",
+        "remove either composed capability"
+      ],
+      "r_expected_transitions": [
+        "six-of-seven active frontier to candidate completion",
+        "no regression outside the joint rendered precondition"
+      ],
+      "r_falsification_relations": [
+        "candidate requires identity routing",
+        "candidate adds a dedicated operator",
+        "candidate fails deterministic rebuild",
+        "candidate does not improve completed levels"
+      ],
+      "r_hypotheses": [
+        "H1 add a dedicated frontier operator",
+        "H2 make the shadow predictor select actions directly",
+        "H3 compose existing multi-actor directional and obligation capabilities"
+      ],
+      "r_predictions": [
+        "H3 changes only the joint capability surface",
+        "H3 retains the operator set and active baseline until promotion"
+      ],
+      "regression_line": [
+        "active all-game standard oracle",
+        "candidate all-game standard oracle",
+        "identical target rerun"
+      ],
+      "schema_version": "arc3-development-trinity-v1",
+      "x_change": [
+        "identity-free composition gate on the existing directional operator",
+        "bounded all-obligation relation-event search",
+        "visible successor verification and re-observation"
+      ],
+      "x_evidence_exclude": [
+        "stale score",
+        "fixed replay or action sequence",
+        "literal coordinate table",
+        "task identity at runtime"
+      ],
+      "x_evidence_use": [
+        "development ledger and reconciliation row",
+        "all-game shadow relation cluster audit",
+        "active compact removal control"
+      ],
+      "x_observe": [
+        "task-aware frontier mechanics and current rendered trace",
+        "shadow prospective relation contrast across retained games",
+        "active multi-actor and directional operator contracts"
+      ]
+    },
+    "frame_digest": "372f990d9700973d0132d8735b71b52a7b697fd7ee3e41d00aad1c5043bc1368",
+    "hypotheses": [
+      {
+        "applicability": [
+          "one development frontier"
+        ],
+        "contamination_risk": 1.0,
+        "falsifiers": [
+          "level-specific routing is required"
+        ],
+        "generality": 0.1,
+        "hypothesis_id": "hypothesis:h1-dedicated-frontier-operator",
+        "implementation_cost": 4,
+        "information_gain": 0.2,
+        "kind": "H1",
+        "predicted_effects": [
+          "local completion may improve"
+        ],
+        "regression_risk": 0.7,
+        "required_evidence": [
+          "dedicated identity-free mechanism"
+        ],
+        "rollback_cost": 3,
+        "status": "REJECTED",
+        "summary": "add a dedicated frontier operator"
+      },
+      {
+        "applicability": [
+          "cross-game relation observations"
+        ],
+        "contamination_risk": 0.6,
+        "falsifiers": [
+          "shadow-only boundary would be crossed"
+        ],
+        "generality": 0.7,
+        "hypothesis_id": "hypothesis:h2-shadow-predictor-policy",
+        "implementation_cost": 3,
+        "information_gain": 0.5,
+        "kind": "H2",
+        "predicted_effects": [
+          "relation prediction affects action choice"
+        ],
+        "regression_risk": 0.8,
+        "required_evidence": [
+          "causal action improvement and HDS authority"
+        ],
+        "rollback_cost": 3,
+        "status": "SUSPENDED",
+        "summary": "allow the shadow relation predictor to select actions"
+      },
+      {
+        "applicability": [
+          "multiple marker-controlled actors",
+          "multiple directional-force blocks",
+          "balanced rendered shape-target obligations"
+        ],
+        "contamination_risk": 0.0,
+        "falsifiers": [
+          "either component can be removed without loss",
+          "target completion does not improve",
+          "stable completion decreases"
+        ],
+        "generality": 0.8,
+        "hypothesis_id": "hypothesis:h3-existing-capability-composition",
+        "implementation_cost": 2,
+        "information_gain": 0.9,
+        "kind": "H3",
+        "predicted_effects": [
+          "joint rendered precondition closes the remaining obligation",
+          "unrelated operator behavior remains unchanged"
+        ],
+        "regression_risk": 0.2,
+        "required_evidence": [
+          "identity-free relation cluster",
+          "active removal control",
+          "candidate target and all-game regression"
+        ],
+        "rollback_cost": 1,
+        "status": "ACTIVE",
+        "summary": "compose existing multi-actor directional and obligation capabilities"
+      }
+    ],
+    "hypothesis_digests": [
+      "aa317523b4961c9351f8709a89f3f5a3661b042790486c6672821646deba57d5",
+      "1de72a007ce79103b3ab19ef4d62dd1dd229bdce9d0321925a4c1acf89ddf089",
+      "e2b57974144d792e2b672388604c39288d97efa998f29af4ae9ec46f04361474"
+    ]
+  }
+}

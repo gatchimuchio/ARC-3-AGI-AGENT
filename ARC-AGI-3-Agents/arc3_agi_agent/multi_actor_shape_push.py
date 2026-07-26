@@ -688,6 +688,7 @@ def _model(
     parameters: _Parameters,
     *,
     walkable_hint: int | None = None,
+    playable_height_hint: int | None = None,
 ) -> _Model | None:
     if not grid or not grid[0]:
         return None
@@ -788,10 +789,18 @@ def _model(
             for goal in goals
         ):
             return None
-    height = _playable_height(
-        grid,
-        walkable_color=walkable,
-    )
+    if playable_height_hint is None:
+        height = _playable_height(
+            grid,
+            walkable_color=walkable,
+        )
+    else:
+        if (
+            isinstance(playable_height_hint, bool)
+            or not 1 <= playable_height_hint <= len(grid)
+        ):
+            return None
+        height = playable_height_hint
     if any(
         y >= height
         for entity in entities

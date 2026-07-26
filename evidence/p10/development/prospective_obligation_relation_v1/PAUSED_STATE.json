@@ -1,0 +1,62 @@
+{
+  "active_runtime": {
+    "active_manifest_content_digest": "6b67437d771d2a31f4c93303dee858f5151120412c2b7cf3ce55061b987aa2e1",
+    "active_manifest_file_sha256": "0b3473dd504a11141e61e0f3b092c4ef865f99c54b4a45bb752da51d76efbc8c",
+    "completed_levels": 35,
+    "local_oracle_rhae_percent": "18.821945363",
+    "sample_levels": 183
+  },
+  "candidate": {
+    "candidate_manifest_content_digest": "839a9428b6d9583c60e0a85a96f5f5bee327f958de17c7403c6a3c52303f7237",
+    "candidate_manifest_file_sha256": "00aa97feb5e6a5f819b6dbafcae6b2eca215051403367bcb98fdaef79f556726",
+    "candidate_score_claim_authorized": false,
+    "lifecycle": "CANDIDATE",
+    "promotion_authorized": false,
+    "target_actions": 326,
+    "target_completed_levels": 7,
+    "target_error_count": 0,
+    "target_total_levels": 7,
+    "target_two_run_reproducible": true,
+    "target_workflow_content_digest": "arc3_p10_prospective_composition_candidate_intervention:c5bb2fa88d920f0e844270d2c5e89087ba72ceca546d5ae6ed2da75f09c463e2"
+  },
+  "hds_status": "HOLD",
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "prospective_relation_evidence": {
+    "active_all25_max16_file_sha256": "e4f6ad451fe685764253713177e45d13fc53674b6d71f56a219d2233b76a7fb9",
+    "active_all25_max16_payload_storage": "LOCAL_ONLY_GITIGNORED",
+    "cluster_audit_content_digest": "arc3_p10_prospective_relation_cluster_audit:4247955ab569ac3e71e2aa9e92775fdfb49627b9cb443a043293a25ba283dc04",
+    "composition_audit_content_digest": "arc3_p10_prospective_obligation_composition_audit:e37ccf0853f9b6a1f91f3bb7b15d9109dc79963f0f97a423ea05859e0f7958aa"
+  },
+  "reason": "USER_REQUESTED_STOP",
+  "regression": {
+    "assembled_report_available": false,
+    "checkpoint_conditions_digest": "aa3941381e00761c41504789528f7f767ab6cd510b5690f27bd94a6b7642104d",
+    "checkpoint_payload_storage": "LOCAL_ONLY_GITIGNORED",
+    "completed_checkpoint_count": 3,
+    "completed_checkpoints": [
+      {
+        "file_sha256": "902af87cf18f585bb4d260fa1c77ecb9832bda5d475b24e04425c0bf7c108a6b",
+        "game_id": "ar25-0c556536"
+      },
+      {
+        "file_sha256": "1f561264bdd82bc1478fc07448a58ddee880f10f0b76081cd6f2d9bec9cf7fd1",
+        "game_id": "cd82-fb555c5d"
+      },
+      {
+        "file_sha256": "644b5439cbb669938e476f34b3c87d9b9b349fd20baa578ee5f9421806b2f805",
+        "game_id": "ft09-0d8bbf25"
+      }
+    ],
+    "interrupted_game_ids": [
+      "bp35-0a0ad940",
+      "cn04-2fe56bfb"
+    ],
+    "local_oracle_available": false,
+    "not_completed_checkpoint_count": 22,
+    "remote_resume_requires_checkpoint_regeneration": true,
+    "standard_game_count": 25,
+    "standard_max_actions": 450
+  },
+  "schema_version": "arc3-p10-prospective-composition-paused-state-v1",
+  "stopped_at": "2026-07-26T09:55:20+09:00"
+}

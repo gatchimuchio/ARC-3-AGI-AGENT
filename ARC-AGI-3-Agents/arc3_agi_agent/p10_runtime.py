@@ -33,6 +33,7 @@ from .p10_compute import (
     prepare_visual_search_reset,
 )
 from .p_update import CandidatePBundle, HDSPUpdateAuthority, PUpdateDecision
+from .prospective_relation import ProspectiveObligationRelationProbe
 from .protocol import AuthorityViolation
 from .recovery import (
     HDSRecoveryController,
@@ -194,6 +195,10 @@ class P10OfflineSampleRuntime:
         default_factory=C2C3CapabilityProbe,
         init=False,
     )
+    prospective_relation_probe: ProspectiveObligationRelationProbe = field(
+        default_factory=ProspectiveObligationRelationProbe,
+        init=False,
+    )
 
     def __post_init__(self) -> None:
         if self.instruction_variant not in {"P-A", "P-B", "hybrid"}:
@@ -266,11 +271,17 @@ class P10OfflineSampleRuntime:
             )
             if selected is None or not selected.steps:
                 self.transition_probe.record_fault("CANDIDATE_MISSING")
+                self.prospective_relation_probe.record_fault(
+                    "CANDIDATE_MISSING"
+                )
             else:
                 before_grid = last_rendered_grid(current.frame)
                 after_grid = last_rendered_grid(after.frame)
                 if not before_grid or not after_grid:
                     self.transition_probe.record_fault("FRAME_MISSING")
+                    self.prospective_relation_probe.record_fault(
+                        "FRAME_MISSING"
+                    )
                 else:
                     before_actions = tuple(
                         sorted(
@@ -308,22 +319,48 @@ class P10OfflineSampleRuntime:
                             step=selected.steps[0],
                             provenance=selected.provenance,
                         )
-                        self.transition_probe.observe(
-                            before_grid=before_grid,
-                            after_grid=after_grid,
-                            before_scene=before_scene,
-                            after_scene=after_scene,
-                            action=action,
-                            terminal_state=str(after.state.value),
-                            progress_observed=(
-                                after.levels_completed
-                                > current.levels_completed
-                            ),
-                        )
                     except (TypeError, ValueError):
                         self.transition_probe.record_fault(
                             "INPUT_REJECTED"
                         )
+                        self.prospective_relation_probe.record_fault(
+                            "INPUT_REJECTED"
+                        )
+                    else:
+                        try:
+                            self.transition_probe.observe(
+                                before_grid=before_grid,
+                                after_grid=after_grid,
+                                before_scene=before_scene,
+                                after_scene=after_scene,
+                                action=action,
+                                terminal_state=str(after.state.value),
+                                progress_observed=(
+                                    after.levels_completed
+                                    > current.levels_completed
+                                ),
+                            )
+                        except (TypeError, ValueError):
+                            self.transition_probe.record_fault(
+                                "INPUT_REJECTED"
+                            )
+                        try:
+                            self.prospective_relation_probe.observe(
+                                before_grid=before_grid,
+                                after_grid=after_grid,
+                                before_scene=before_scene,
+                                after_scene=after_scene,
+                                action=action,
+                                terminal_state=str(after.state.value),
+                                progress_observed=(
+                                    after.levels_completed
+                                    > current.levels_completed
+                                ),
+                            )
+                        except (TypeError, ValueError):
+                            self.prospective_relation_probe.record_fault(
+                                "INPUT_REJECTED"
+                            )
         self.components.hds.release_cycle_binding(
             cycle.kernel_result.decision,
             status=cycle.kernel_result.status,

@@ -1,0 +1,647 @@
+{
+  "aggregate": {
+    "accuracy_delta_milli": 60,
+    "baseline_accuracy_milli": 767,
+    "baseline_correct_prediction_count": 276,
+    "baseline_known_prediction_count": 360,
+    "correct_prediction_count": 283,
+    "fault_count": 0,
+    "game_contrasts": {
+      "NEGATIVE": 6,
+      "POSITIVE": 11,
+      "TIE": 8
+    },
+    "known_prediction_count": 342,
+    "obligation_counts": {
+      "CHANGE_RELATION_OR_WAIT": 62,
+      "FOLLOW_RELATION_DELTA": 235,
+      "REOBSERVE_COMMIT_STATE": 7,
+      "SUSPEND_AND_REQUEST_ROLLBACK": 1,
+      "VERIFY_RELATION_SETTLE": 95
+    },
+    "observation_count": 400,
+    "relation_accuracy_milli": 827,
+    "relation_delta_counts": {
+      "RELATION_CHANGED": 243,
+      "RELATION_STABLE": 157
+    }
+  },
+  "artifact_type": "arc3_p10_prospective_relation_cluster_audit",
+  "candidate_tier": "CLUSTER_STABLE",
+  "cluster_checks": {
+    "all_25_games_reported_once": true,
+    "commit_and_hazard_obligations_observed": true,
+    "every_probe_has_16_observations": true,
+    "known_predictions_cover_at_least_four_fifths": true,
+    "passive_identity_free_boundary_pass": true,
+    "positive_and_negative_relation_deltas_observed": true,
+    "positive_game_contrasts_exceed_negative": true,
+    "probe_faults_zero": true,
+    "relation_accuracy_exceeds_history_only_baseline": true,
+    "source_execution_errors_zero": true,
+    "source_is_active_hybrid_shadow_probe": true,
+    "source_is_p10_offline": true
+  },
+  "content_digest": "arc3_p10_prospective_relation_cluster_audit:4247955ab569ac3e71e2aa9e92775fdfb49627b9cb443a043293a25ba283dc04",
+  "development_only": true,
+  "hds_judgment": {
+    "action_selection_authorized": false,
+    "authority": "development-hds-only",
+    "cluster_stable_status": "PASS",
+    "composition_input_authorized": true,
+    "local_probe_status": "PASS",
+    "memory_write_authorized": false,
+    "reason_codes": [
+      "all-25-shadow-probe-complete",
+      "pre-action-relation-outperforms-history-only-baseline",
+      "passive-identity-free-boundary-pass",
+      "cluster-evidence-may-enter-composition-audit-only"
+    ],
+    "runtime_p_compile_authorized": false,
+    "runtime_p_promotion_authorized": false,
+    "score_progress_claim_authorized": false
+  },
+  "per_game": [
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 733,
+      "baseline_correct_prediction_count": 11,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 13,
+      "fault_count": 0,
+      "game_id": "ar25-0c556536",
+      "identity_paths": [],
+      "known_prediction_count": 14,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 4,
+        "FOLLOW_RELATION_DELTA": 12
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "673187a18b105c7ff29c74351f26686e9fde8f74a5d6d9695c6946bcad3530f4",
+      "relation_accuracy_milli": 929,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 12,
+        "RELATION_STABLE": 4
+      }
+    },
+    {
+      "accuracy_contrast": "TIE",
+      "baseline_accuracy_milli": 800,
+      "baseline_correct_prediction_count": 12,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 12,
+      "fault_count": 0,
+      "game_id": "bp35-0a0ad940",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 13,
+        "SUSPEND_AND_REQUEST_ROLLBACK": 1,
+        "VERIFY_RELATION_SETTLE": 2
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "b955da44abceb959df30e3aadfc4db7e3a1a8955e2422d6a6a118372f5926cba",
+      "relation_accuracy_milli": 800,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 14,
+        "RELATION_STABLE": 2
+      }
+    },
+    {
+      "accuracy_contrast": "NEGATIVE",
+      "baseline_accuracy_milli": 571,
+      "baseline_correct_prediction_count": 8,
+      "baseline_known_prediction_count": 14,
+      "correct_prediction_count": 5,
+      "fault_count": 0,
+      "game_id": "cd82-fb555c5d",
+      "identity_paths": [],
+      "known_prediction_count": 11,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 6,
+        "FOLLOW_RELATION_DELTA": 10
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "97a304407df6fd1b4466d31b3bce642c77c782e4463b0983f3302d463af55ffd",
+      "relation_accuracy_milli": 455,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 10,
+        "RELATION_STABLE": 6
+      }
+    },
+    {
+      "accuracy_contrast": "NEGATIVE",
+      "baseline_accuracy_milli": 643,
+      "baseline_correct_prediction_count": 9,
+      "baseline_known_prediction_count": 14,
+      "correct_prediction_count": 8,
+      "fault_count": 0,
+      "game_id": "cn04-2fe56bfb",
+      "identity_paths": [],
+      "known_prediction_count": 13,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 4,
+        "FOLLOW_RELATION_DELTA": 1,
+        "VERIFY_RELATION_SETTLE": 11
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "a7a362ce564335c1b9194d93320a72f9a82975a5993a250c047e9016c4da83d0",
+      "relation_accuracy_milli": 615,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 1,
+        "RELATION_STABLE": 15
+      }
+    },
+    {
+      "accuracy_contrast": "NEGATIVE",
+      "baseline_accuracy_milli": 714,
+      "baseline_correct_prediction_count": 10,
+      "baseline_known_prediction_count": 14,
+      "correct_prediction_count": 9,
+      "fault_count": 0,
+      "game_id": "dc22-fdcac232",
+      "identity_paths": [],
+      "known_prediction_count": 13,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 4,
+        "FOLLOW_RELATION_DELTA": 12
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "63ec446a42eb2c9adbdddb6af06c0546fe3aa03c9b1431d5ca1f614984f5ee2a",
+      "relation_accuracy_milli": 692,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 12,
+        "RELATION_STABLE": 4
+      }
+    },
+    {
+      "accuracy_contrast": "TIE",
+      "baseline_accuracy_milli": 867,
+      "baseline_correct_prediction_count": 13,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 13,
+      "fault_count": 0,
+      "game_id": "ft09-0d8bbf25",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 14,
+        "REOBSERVE_COMMIT_STATE": 2
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "9e9d18a6b1e71d2f4ef28d1386f21f9a2d75f612e5a3ff7d0aa163849abbc315",
+      "relation_accuracy_milli": 867,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 16
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 308,
+      "baseline_correct_prediction_count": 4,
+      "baseline_known_prediction_count": 13,
+      "correct_prediction_count": 7,
+      "fault_count": 0,
+      "game_id": "g50t-5849a774",
+      "identity_paths": [],
+      "known_prediction_count": 13,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 6,
+        "FOLLOW_RELATION_DELTA": 6,
+        "VERIFY_RELATION_SETTLE": 4
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "f5c472e525dd10c66960b0cbf578cc864eda033f5c8f76bd4ce318245cac3911",
+      "relation_accuracy_milli": 538,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 6,
+        "RELATION_STABLE": 10
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 933,
+      "baseline_correct_prediction_count": 14,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 11,
+      "fault_count": 0,
+      "game_id": "ka59-38d34dbb",
+      "identity_paths": [],
+      "known_prediction_count": 11,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 15,
+        "REOBSERVE_COMMIT_STATE": 1
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "da8ff0920e06848f059744a42d36a6034326dc33a4fdb6f450882f9a82e03228",
+      "relation_accuracy_milli": 1000,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 16
+      }
+    },
+    {
+      "accuracy_contrast": "TIE",
+      "baseline_accuracy_milli": 1000,
+      "baseline_correct_prediction_count": 15,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 15,
+      "fault_count": 0,
+      "game_id": "lf52-271a04aa",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 16
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "e666f18bfa62d8908fc4418a1c191c220b1b2534bd48aa39461cf2444891336e",
+      "relation_accuracy_milli": 1000,
+      "relation_delta_counts": {
+        "RELATION_STABLE": 16
+      }
+    },
+    {
+      "accuracy_contrast": "TIE",
+      "baseline_accuracy_milli": 867,
+      "baseline_correct_prediction_count": 13,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 13,
+      "fault_count": 0,
+      "game_id": "lp85-305b61c3",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 14,
+        "REOBSERVE_COMMIT_STATE": 2
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "61da948c62c0c307f196ea22f2466d4fe7c4b798ef6bb6a9fe57cbc08fc0d15c",
+      "relation_accuracy_milli": 867,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 16
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 733,
+      "baseline_correct_prediction_count": 11,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 11,
+      "fault_count": 0,
+      "game_id": "ls20-9607627b",
+      "identity_paths": [],
+      "known_prediction_count": 14,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 4,
+        "FOLLOW_RELATION_DELTA": 12
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "f98f56e1e8bfcd427434e2e5a3f91dc36f848bcef03eea8d3294c85d0115aa84",
+      "relation_accuracy_milli": 786,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 12,
+        "RELATION_STABLE": 4
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 538,
+      "baseline_correct_prediction_count": 7,
+      "baseline_known_prediction_count": 13,
+      "correct_prediction_count": 8,
+      "fault_count": 0,
+      "game_id": "m0r0-492f87ba",
+      "identity_paths": [],
+      "known_prediction_count": 11,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 4,
+        "FOLLOW_RELATION_DELTA": 9,
+        "VERIFY_RELATION_SETTLE": 3
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "730aa32405afa2293fd65764bc5cf65b1d90045adc2f76a2ccd568503734f908",
+      "relation_accuracy_milli": 727,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 9,
+        "RELATION_STABLE": 7
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 733,
+      "baseline_correct_prediction_count": 11,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 13,
+      "fault_count": 0,
+      "game_id": "r11l-495a7899",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 12,
+        "VERIFY_RELATION_SETTLE": 4
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "36b40df9aa677ed9931fa901d3c8fe9e458c2d08d5d9e5e6404056b5ea105ddd",
+      "relation_accuracy_milli": 867,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 12,
+        "RELATION_STABLE": 4
+      }
+    },
+    {
+      "accuracy_contrast": "TIE",
+      "baseline_accuracy_milli": 933,
+      "baseline_correct_prediction_count": 14,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 14,
+      "fault_count": 0,
+      "game_id": "re86-8af5384d",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 1,
+        "FOLLOW_RELATION_DELTA": 15
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "81fc1a7d29a7535e6b5c81a3bbd056d32f9969e2100ac2adcf14b3d228a25359",
+      "relation_accuracy_milli": 933,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 15,
+        "RELATION_STABLE": 1
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 714,
+      "baseline_correct_prediction_count": 10,
+      "baseline_known_prediction_count": 14,
+      "correct_prediction_count": 13,
+      "fault_count": 0,
+      "game_id": "s5i5-18d95033",
+      "identity_paths": [],
+      "known_prediction_count": 14,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 4,
+        "VERIFY_RELATION_SETTLE": 12
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "23c00729e8b1064b1cc7180752a0d31eb08f5dc2349e9cc32f4b37f67622b05c",
+      "relation_accuracy_milli": 929,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 4,
+        "RELATION_STABLE": 12
+      }
+    },
+    {
+      "accuracy_contrast": "TIE",
+      "baseline_accuracy_milli": 1000,
+      "baseline_correct_prediction_count": 15,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 15,
+      "fault_count": 0,
+      "game_id": "sb26-7fbdac44",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 16
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "371baf196b0950f739f7d074268beea1c178fc5fc6337f4087f6bb84c6afe551",
+      "relation_accuracy_milli": 1000,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 16
+      }
+    },
+    {
+      "accuracy_contrast": "NEGATIVE",
+      "baseline_accuracy_milli": 455,
+      "baseline_correct_prediction_count": 5,
+      "baseline_known_prediction_count": 11,
+      "correct_prediction_count": 3,
+      "fault_count": 0,
+      "game_id": "sc25-635fd71a",
+      "identity_paths": [],
+      "known_prediction_count": 9,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 5,
+        "FOLLOW_RELATION_DELTA": 9,
+        "VERIFY_RELATION_SETTLE": 2
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "a34ed484f36946773a18fb449be8ffbc0b4ca83703d9078bbbffac3724955ce6",
+      "relation_accuracy_milli": 333,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 9,
+        "RELATION_STABLE": 7
+      }
+    },
+    {
+      "accuracy_contrast": "NEGATIVE",
+      "baseline_accuracy_milli": 733,
+      "baseline_correct_prediction_count": 11,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 10,
+      "fault_count": 0,
+      "game_id": "sk48-d8078629",
+      "identity_paths": [],
+      "known_prediction_count": 14,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 4,
+        "FOLLOW_RELATION_DELTA": 12
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "ae4357f0afefbbec4a2d85b8eab9ee9aea29d4f56f247ca12ea7a8fb096e887d",
+      "relation_accuracy_milli": 714,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 12,
+        "RELATION_STABLE": 4
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 929,
+      "baseline_correct_prediction_count": 13,
+      "baseline_known_prediction_count": 14,
+      "correct_prediction_count": 14,
+      "fault_count": 0,
+      "game_id": "sp80-589a99af",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 1,
+        "VERIFY_RELATION_SETTLE": 15
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "83d92868c224510cc6d478220651c9aaeb6f2314e2e56c9547a840f87be7531b",
+      "relation_accuracy_milli": 933,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 1,
+        "RELATION_STABLE": 15
+      }
+    },
+    {
+      "accuracy_contrast": "TIE",
+      "baseline_accuracy_milli": 933,
+      "baseline_correct_prediction_count": 14,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 14,
+      "fault_count": 0,
+      "game_id": "su15-1944f8ab",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 15,
+        "REOBSERVE_COMMIT_STATE": 1
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "1d6fb281bda151715570b623989b31b68a89240fa147e78386fd96a4aacc2493",
+      "relation_accuracy_milli": 933,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 16
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 643,
+      "baseline_correct_prediction_count": 9,
+      "baseline_known_prediction_count": 14,
+      "correct_prediction_count": 13,
+      "fault_count": 0,
+      "game_id": "tn36-ef4dde99",
+      "identity_paths": [],
+      "known_prediction_count": 14,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 5,
+        "VERIFY_RELATION_SETTLE": 11
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "c65e22ad15c0dc8e6b311ee996278312824593635ed8c0f854b560b5dd5ae0d9",
+      "relation_accuracy_milli": 929,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 5,
+        "RELATION_STABLE": 11
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 733,
+      "baseline_correct_prediction_count": 11,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 11,
+      "fault_count": 0,
+      "game_id": "tr87-cd924810",
+      "identity_paths": [],
+      "known_prediction_count": 13,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 12,
+        "REOBSERVE_COMMIT_STATE": 1,
+        "VERIFY_RELATION_SETTLE": 3
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "47f5f7e4c1908629108d678f83a5fc4b5c0547b291815ed4c2bc2d45c0d3fbae",
+      "relation_accuracy_milli": 846,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 13,
+        "RELATION_STABLE": 3
+      }
+    },
+    {
+      "accuracy_contrast": "TIE",
+      "baseline_accuracy_milli": 1000,
+      "baseline_correct_prediction_count": 15,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 15,
+      "fault_count": 0,
+      "game_id": "tu93-0768757b",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "VERIFY_RELATION_SETTLE": 16
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "709465436ca637f2940afac38f4f28a34cbf579391214c6f046999153d655015",
+      "relation_accuracy_milli": 1000,
+      "relation_delta_counts": {
+        "RELATION_STABLE": 16
+      }
+    },
+    {
+      "accuracy_contrast": "POSITIVE",
+      "baseline_accuracy_milli": 714,
+      "baseline_correct_prediction_count": 10,
+      "baseline_known_prediction_count": 14,
+      "correct_prediction_count": 14,
+      "fault_count": 0,
+      "game_id": "vc33-5430563c",
+      "identity_paths": [],
+      "known_prediction_count": 15,
+      "obligation_counts": {
+        "FOLLOW_RELATION_DELTA": 4,
+        "VERIFY_RELATION_SETTLE": 12
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "23b444fdaf7a22e587fd94bc46aff93c31de4296620eeade705d9aaecb22528d",
+      "relation_accuracy_milli": 933,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 4,
+        "RELATION_STABLE": 12
+      }
+    },
+    {
+      "accuracy_contrast": "NEGATIVE",
+      "baseline_accuracy_milli": 733,
+      "baseline_correct_prediction_count": 11,
+      "baseline_known_prediction_count": 15,
+      "correct_prediction_count": 9,
+      "fault_count": 0,
+      "game_id": "wa30-ee6fef47",
+      "identity_paths": [],
+      "known_prediction_count": 13,
+      "obligation_counts": {
+        "CHANGE_RELATION_OR_WAIT": 4,
+        "FOLLOW_RELATION_DELTA": 12
+      },
+      "observation_count": 16,
+      "passive_boundary_pass": true,
+      "probe_digest": "f3be838a8da5f8aed1f26dd6df95875e066e0cb1598ab3315df5b8ecd49705a8",
+      "relation_accuracy_milli": 692,
+      "relation_delta_counts": {
+        "RELATION_CHANGED": 12,
+        "RELATION_STABLE": 4
+      }
+    }
+  ],
+  "phase": "P10_COMPLETE_ARC3_SAMPLE_SOLVING",
+  "runtime_use": "FORBIDDEN",
+  "schema_version": "arc3-p10-prospective-relation-cluster-audit-v1",
+  "source_report": {
+    "bytes": 9366327,
+    "game_count": 25,
+    "max_actions": 16,
+    "sha256": "e4f6ad451fe685764253713177e45d13fc53674b6d71f56a219d2233b76a7fb9"
+  },
+  "work_block_id": "WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER"
+}

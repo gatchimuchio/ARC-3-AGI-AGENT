@@ -34,6 +34,10 @@ def _report(*, probe_format: str) -> dict[str, object]:
                     "format": probe_format,
                     "action_selection_influence": False,
                 },
+                "development_prospective_relation_probe": {
+                    "format": probe_format,
+                    "action_selection_influence": False,
+                },
             }
         ],
         "errors": [],
