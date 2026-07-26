@@ -31,9 +31,10 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P9 | 全8部分集合監査 | 完了 |
 | P10 | ARC3全sample完全攻略 | 完了 |
 | P11 | 完成状態固定 | 完了 |
-| P12 | 公式ARC環境接続 | current request外 |
-| P13 | Kaggle提出経路 | current request外 |
-| P14 | 実提出・公式結果最適化 | current request外 |
+| P12 | Pre-official AGI conformance / genericity | 実行中 |
+| P13 | 公式ARC環境接続 | BLOCKED |
+| P14 | Kaggle提出経路 | 未開始 |
+| P15 | 実提出・公式結果最適化 | 未開始 |
 
 ## 現在のphase gate
 
@@ -65,9 +66,10 @@ P11は次を固定して完了した。
 - release digest:
   `arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c`
 
-P11はRuntime P、score、sample能力を変更していない。公式接続、
-`OperationMode.COMPETITION`、Kaggle作業はP12以降でありcurrent request外。
-現在実行中のphaseはない。
+P11はRuntime P、score、sample能力を変更していない。P11/S5は
+known-sample closure baselineとして凍結する。現在はP12で、operational
+AGI conformance、genericity、Competition contract mock dry-runを実装・反証する。
+公式接続、`OperationMode.COMPETITION`、Kaggle作業はP13以降でありBLOCKED。
 
 ## 監査正本
 
@@ -77,5 +79,8 @@ P11はRuntime P、score、sample能力を変更していない。公式接続、
 - [`AGI_CLAIM_REGISTRY.md`](../architecture/AGI_CLAIM_REGISTRY.md)
 - [`AGI_TEST_MATRIX.md`](../architecture/AGI_TEST_MATRIX.md)
 - [`AGI_CURRENT_IMPLEMENTATION_AUDIT.md`](../architecture/AGI_CURRENT_IMPLEMENTATION_AUDIT.md)
+- [`ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`](../architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md)
+- [`EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md`](../audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md)
+- [`P12_PRE_OFFICIAL_GENERICITY_STRATEGY.md`](P12_PRE_OFFICIAL_GENERICITY_STRATEGY.md)
 
 後続phaseの存在を理由に、現在phaseを飛ばしてはならない。

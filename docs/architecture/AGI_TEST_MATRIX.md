@@ -1,6 +1,6 @@
 # AGI最小三構成 Test Matrix
 
-- current phase: none (`P12_NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE`)
+- current phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
 - last completed phase: `P11_RELEASE_STATE_FREEZE`
 - current executable regression gates:
   `test_agi_minimum_three_audit.py`,

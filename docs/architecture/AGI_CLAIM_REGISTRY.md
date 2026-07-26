@@ -1,6 +1,6 @@
 # AGI最小三構成 Claim Registry
 
-- current phase: none (`P12_NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE`)
+- current phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
 - last completed phase: `P11_RELEASE_STATE_FREEZE`
 - rule: 実装path、実行test、除去証人が揃わないclaimを`SUPPORTED`にしない
 
@@ -22,10 +22,16 @@
 | `CLAIM_TWO_CYCLE_CAUSALITY` | cycle 1のM更新がcycle 2のC/Jを変える | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 全8 subset・sample攻略は含まない | 回帰 |
 | `CLAIM_CAUSAL_ATTRIBUTION` | P-only/J-only/M-only変更の効果を個別帰属できる | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 観測済みP-A/P-Bとsynthetic Frame条件の範囲 | 回帰 |
 | `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `SUPPORTED` | `test_minimum_three_certificate_p9.py`, `certificates/p9/` | G1〜G5定義域内の構成最小性。sample攻略・未知task汎化は含まない | 回帰 |
-| `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略し全cycle traceを保存する | `SUPPORTED` | `S5_RENDERED_ONLY_CLOSURE_REPORT.json`, `S5_FULL_EXECUTION_TRACE_MANIFEST.json`, `S5_SHORTCUT_AND_AUTHORITY_AUDIT.json`, `test_s5_execution_trace.py`, `test_s5_rendered_policy.py`, `test_s5_rendered_runtime.py` | 保持OFFLINE sample 25 game・183 levelの範囲。未知task汎化は含まない | 回帰 |
-| `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | `S6_PERTURBATION_MEASUREMENT.json`: 七摂動14,336 responseを測定 | semantic ground truthとtransformed environment完了証拠がなく、結論は`MEASURED_NOT_PROVEN` | 後続研究 |
+| `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略し全cycle traceを保存する | `SUPPORTED` | `S5_RENDERED_ONLY_CLOSURE_REPORT.json`, `S5_FULL_EXECUTION_TRACE_MANIFEST.json`, `S5_SHORTCUT_AND_AUTHORITY_AUDIT.json` | 保持OFFLINE sample 25 game・183 levelの範囲。未知task汎化は含まない | 回帰 |
+| `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | `S6_PERTURBATION_MEASUREMENT.json`: 七摂動14,336 responseを測定 | semantic ground truthとtransformed environment完了証拠がなく、結論は`MEASURED_NOT_PROVEN` | P12 |
+| `CLAIM_MINIMUM_THREE_STRUCTURAL_CERTIFICATE` | 全8 subsetでfull setのみPASSする構造証明 | `SUPPORTED` | `test_minimum_three_certificate_p9.py`, `certificates/p9/` | fixture/synthetic定義域の構成最小性。S5 operational conformance、sample攻略、未知汎化を含まない | 回帰 |
+| `CLAIM_KNOWN_SAMPLE_CLOSURE` | frozen S5が保持OFFLINE 25 game / 183 levelを閉包し全cycle traceを保存する | `SUPPORTED` | `S5_RENDERED_ONLY_CLOSURE_REPORT.json`, `S5_FULL_EXECUTION_TRACE_MANIFEST.json`, `S5_SHORTCUT_AND_AUTHORITY_AUDIT.json` | known sampleだけ。未知task、AGI完成、公式readyを含まない | 回帰 |
+| `CLAIM_S5_OPERATIONAL_AGI_CONFORMANCE` | active S5 pathがTrinity/HDS/L0/Mのoperational受入を満たす | `SUSPEND` | external audit O-001〜O-018 | 複数model/candidate、J独立採否、semantic M、L0因果ablation不足 | P12 |
+| `CLAIM_GENERICITY` | whole-game/mechanism/transformation/sealed holdoutで未知構造へ適応する | `NOT_EVALUATED` | S6は七摂動14,336 responseの静的測定のみ | executable environment completionとsealed evaluatorが必要 | P12 |
 | `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `SUPPORTED` | `P11_RELEASE_STATE.json`, `P11_REGRESSION_REPORT.json`, `test_p11_release_state.py` | code `823c51b68d7f...`、OFFLINE sample releaseの範囲 | 回帰 |
-| `CLAIM_OFFICIAL_READY` | COMPETITION/Kaggleへ進める | `REJECTED` | なし | 未評価、P12以降、current request外 | P12以降 |
+| `CLAIM_OFFICIAL_COMPATIBILITY` | Competition contractに適合する | `NOT_EVALUATED` | mock dry-run未完了、official未接続 | P12ではmockのみ。actualはP13 | P12/P13 |
+| `CLAIM_OFFICIAL_SCORE` | 公式scoreを取得済み | `NOT_EVALUATED` | なし | 公式接続・提出未実施 | P15 |
+| `CLAIM_PRE_OFFICIAL_AGI_READY` | P13公式接続へ進める | `SUSPEND` | blocking受入未完了 | 全blocking IDの実行PASSとOwner phase許可が必要 | P12 |
 
 ## 禁止claim
 
@@ -35,3 +41,4 @@
 - 二周期学習成立済み
 - 汎化済み
 - 公式提出可能
+- PRE_OFFICIAL_AGI_READY

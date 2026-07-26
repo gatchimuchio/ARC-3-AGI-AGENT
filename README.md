@@ -23,8 +23,16 @@ P10の現行戦略は
 - P9: `EIGHT_SUBSET_MINIMUM_CERTIFICATE` — 完了
 - P10: `COMPLETE_ARC3_SAMPLE_SOLVING` — 完了
 - P11: `RELEASE_STATE_FREEZE` — 完了
-- 現在フェーズ: なし
-- P12: `OFFICIAL_ARC_CONNECTION` — 未開始・current request外
+- 現在フェーズ: P12 `PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
+- P12: 外部監査訂正、operational AGI conformance、genericity、Competition mock dry-run
+- P13: `OFFICIAL_ARC_CONNECTION` — 未開始・BLOCKED
+- P14: Kaggle提出経路 — 未開始
+- P15: 実提出・公式結果最適化 — 未開始
+- P11/S5 183/183のclaim: **known sample closure complete**
+- S5 operational AGI conformance: **SUSPEND**
+- genericity: **NOT_ESTABLISHED**
+- official compatibility: **NOT_EVALUATED**
+- official readiness: **BLOCKED**
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -110,6 +118,11 @@ P10の現行戦略は
   **二回byte一致、SHA-256 `a2f7c400753a553b49247ce7627e2b966fd152153b53064e7403e553659e551a`**
 - P11 release digest:
   **`arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c`**
+
+P11のweights、trace、score、artifact、digestはread-only baselineです。P12では
+S5を汎用化して上書きせず、`KnownSampleStudent`と別の
+`GenericAGIRuntime`を実装・反証します。P12中は公式API、
+`OperationMode.COMPETITION`、Kaggle、submissionを実行しません。
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な
@@ -375,8 +388,8 @@ python -m arc3_agi_agent.development_analysis \
 11. P10: 全sample game / 全level完全攻略 — 完了
 12. P11: release state固定 — 完了
 
-P12以降は未開始です。ユーザーの明示的phase開始指示なしに、公式API、
-`OperationMode.COMPETITION`、Kaggle分岐・提出へ進みません。
+P12は実行中です。blocking受入を全件PASSするまでP13へ進まず、
+公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出を実行しません。
 
 現行ロードマップ全文の正本は
 [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)

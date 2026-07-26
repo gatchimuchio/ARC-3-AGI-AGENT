@@ -2,7 +2,7 @@
 
 - specification: `AGI_MINIMUM_THREE_SPEC`
 - version: `1.0.0`
-- roadmap phase: `P2_AGI_MINIMUM_THREE_AUDIT`
+- roadmap phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
 - proof domain: ARC3を有限・観測可能な実証基盤として用いる機能的AGI
 - normative roadmap: `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
 
@@ -297,9 +297,11 @@ P8 Three-subject Two-cycle Trinity                  complete
 P9 Eight-subset Minimum Certificate                 complete
 P10 Complete ARC3 Sample Solving                    complete
 P11 Release-state Freeze                            complete
-P12 Official ARC Connection                        out of current request
-P13 Kaggle Paths                                    out of current request
-P14 Submission and Official-result Optimization    out of current request
+P12 Pre-official AGI Conformance and Genericity     active
+P13 Official ARC Connection                         blocked
+P14 Kaggle Paths                                    not started
+P15 Submission and Official-result Optimization    not started
 ```
 
-P12以降は未開始であり、ユーザーの明示的phase開始指示なしに進めない。
+P12は`ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`の全blocking requirementを実行証拠で
+閉じる。P13以降は全P12 gateとユーザーの明示的phase開始指示なしに進めない。

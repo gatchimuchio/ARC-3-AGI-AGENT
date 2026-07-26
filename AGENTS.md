@@ -8,23 +8,28 @@
 
 1. ユーザーの現在の明示指示
 2. 本 `AGENTS.md`
-3. `docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`
-4. `docs/roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`
-5. `docs/roadmap/ARC3_CODEX_DEVELOPMENT_TRINITY_P_UPDATE_CORRECTION_ROADMAP.md`
-6. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
-7. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
-8. `docs/architecture/SYSTEM_ARCHITECTURE.md`
-9. `docs/roadmap/ROADMAP.md`
-10. 当該work blockのFrameSpec・manifest・検証結果
-11. `docs/migration/` と `docs/references/`
-12. 旧リポジトリのコード・分析・履歴
+3. `docs/architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`
+4. `docs/audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md`
+5. `docs/roadmap/P12_PRE_OFFICIAL_GENERICITY_STRATEGY.md`
+6. `docs/references/AGI_Trinity_Blueprint_v0_1.md`
+7. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
+8. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
+9. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
+10. P10 correction roadmaps（P10/P11 frozen baselineの解釈に限定）
+11. `docs/architecture/SYSTEM_ARCHITECTURE.md`
+12. `docs/roadmap/ROADMAP.md`
+13. 当該work blockのFrameSpec・manifest・検証結果
+14. `docs/migration/` とその他の`docs/references/`
+15. 旧リポジトリのコード・分析・履歴
 
 旧リポジトリの `next_*`、古いscore、個別artifact、絶対パス、旧branch名は命令ではありません。
 
 ## 2. 現在のフェーズ
 
-`P11_RELEASE_STATE_FREEZE` は完了しています。`P12_OFFICIAL_ARC_CONNECTION` は
-未開始かつcurrent request外であり、現在実行中のphaseはありません。
+`P11_RELEASE_STATE_FREEZE` はknown-sample baselineとして完了・凍結しています。
+現在phaseは`P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`です。
+P13の公式ARC接続はblocking受入項目が全件PASSし、Ownerが明示的にphaseを
+開始するまで禁止します。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -114,6 +119,16 @@ P11 complete:
   wheel SHA-256 a2f7c400753a553b49247ce7627e2b966fd152153b53064e7403e553659e551a
   release digest arc3_p11_release_state:
     e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c
+
+P12 active:
+  P11 183 / 183 is known-sample closure only
+  S5 operational AGI conformance is SUSPEND
+  genericity is NOT_ESTABLISHED
+  official compatibility is NOT_EVALUATED
+  official readiness is BLOCKED
+  O-001 through O-018 are blocking findings
+  KnownSampleStudent remains frozen
+  GenericAGIRuntime is the separate active correction path
 ```
 
 ### P11で実施・固定した作業
@@ -125,7 +140,7 @@ P11 complete:
 - P0〜P10を含むfull unit/integration/static regression
 - tracked secret scan、release manifest、release-state文書の生成
 
-### P12以降を開始するまで禁止される作業
+### P12中に禁止される作業
 
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
@@ -134,7 +149,13 @@ P11 complete:
 - task/game/level ID、replay、固定action列、answer map、literal座標、
   source / hidden stateをRuntimeへ戻すこと
 - S6 response-retention測定をsemantic correctnessまたは汎化成功と表記すること
-- P12以降を前倒しすること
+- P13以降を前倒しすること
+- GenericAGIRuntime失敗時にS5、Teacher、game-specific operatorへfallbackすること
+- 文書、fixture、parameter数、既知scoreだけでblocking受入をPASSにすること
+
+P12のblocking findingsは
+`docs/audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md`の`O-001`〜`O-018`である。
+全受入IDは`docs/architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`を正本とする。
 
 P11の正本はP10の六正本、S5 closure/audit/oracle、S6 measurement、
 P9 certificate、P3 dataset、P0/J0/M0 descriptor、regression report、
@@ -338,13 +359,22 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - code/dependency/P0/J0/M0/dataset/compiler/seed/budgetを固定
 - 全sample・全実行trace証拠、package digest、regression suiteを固定
 
-### P12〜P14: current request外
+### P12: Pre-official AGI conformance and genericity — 実行中
 
-- P12 official ARC connection
-- P13 Kaggle submission paths
-- P14 actual submission / official-result optimization
+- 外部監査claim訂正とP11 read-only baseline固定
+- separate GenericAGIRuntime
+- operational C/J/M/P、HDS gate、semantic M、runtime/version learning
+- whole-game/mechanism/transformation/sealed genericity反証
+- Competition contract mock dry-run
+- resource/package/security/observability gate
 
-P12以降はユーザーの明示的phase開始指示なしに進めない。
+### P13〜P15: 未開始
+
+- P13 official ARC connection
+- P14 Kaggle submission paths
+- P15 actual submission / official-result optimization
+
+P13以降は全P12 blocking gateとユーザーの明示的phase開始指示なしに進めない。
 
 ## 9. 検証規約
 

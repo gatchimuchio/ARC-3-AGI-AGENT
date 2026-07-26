@@ -4,8 +4,8 @@
 - state: `COMPLETE`
 - predecessor: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
 - operation mode: `OFFLINE`
-- successor: `P12_OFFICIAL_ARC_CONNECTION`
-- successor status: `NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE`
+- successor: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
+- successor status: `ACTIVE_WITH_P11_FROZEN`
 
 ## 1. 固定式
 

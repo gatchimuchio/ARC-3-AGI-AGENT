@@ -670,10 +670,12 @@ python -m pytest -q \
 
 ```text
 P11_RELEASE_STATE_FREEZE = COMPLETE
-P12_OFFICIAL_ARC_CONNECTION = NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE
+P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY = ACTIVE
 ```
 
 P10-R0〜R6は順序通り閉じた。P11はpolicyやscoreを変更せず、code、
 dependency、Python、P0/J0/M0、dataset、compiler、seed、budget、全sample
 証拠、regression suite、reproducible package digestをrelease stateへ固定して
-完了した。P12以降は未開始でありcurrent request外である。
+完了した。P12ではP11をknown-sample baselineとして凍結し、separate
+GenericAGIRuntimeのoperational conformanceとgenericityを反証する。
+公式接続はP13以降である。
