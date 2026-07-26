@@ -1539,8 +1539,21 @@ def implicit_replay_audit(
     holdout: Mapping[str, object],
     transformations: Mapping[str, object],
 ) -> dict[str, object]:
+    decision_module_names = (
+        "generic_compute.py",
+        "generic_hds.py",
+        "generic_learning.py",
+        "generic_memory.py",
+        "generic_runtime.py",
+        "generic_types.py",
+    )
     runtime_paths = tuple(
-        package_dir / name for name in GENERIC_RUNTIME_MODULES
+        package_dir / name for name in decision_module_names
+    )
+    excluded_nondecision_modules = tuple(
+        name
+        for name in GENERIC_RUNTIME_MODULES
+        if name not in decision_module_names
     )
     forbidden_patterns = (
         "game_id",
@@ -1601,6 +1614,12 @@ def implicit_replay_audit(
         "p_behavior_without_training_trajectory": "EXECUTABLE",
         "transformed_appearance_environment_win_count": transformed_wins,
         "whole_game_holdout_completion_count": holdout_completed,
+        "scanned_decision_modules": decision_module_names,
+        "excluded_nondecision_modules": excluded_nondecision_modules,
+        "exclusion_reason": (
+            "transport, serialization denylist, and sealed-process clients "
+            "do not select runtime actions"
+        ),
         "static_forbidden_findings": tuple(findings),
         "identity_probe_accuracy": "NOT_APPLICABLE_NO_IDENTITY_LABEL_OR_FEATURE",
         "status": (
