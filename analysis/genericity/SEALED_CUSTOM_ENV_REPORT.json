@@ -1,0 +1,85 @@
+{
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "code_frozen_before_generation": true,
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-sealed-custom-environment-report-v1:42d396cdcc440108ba718c41e4259f9788fa4e99b2550215ccaac32d69f97aaa",
+  "crash_count": 0,
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "evaluator_digest": "c38e91b539ad9d08bfa239d40748cee3c302d87fd67fe6495d7b920f4d2041a3",
+  "evaluator_process_separate": true,
+  "evaluator_source_sha256": "6a9f1a1642a201e12db68a62e46732ce71f61c79f583f1f1e3e2813becdcc750",
+  "failed_requirement_ids": [],
+  "freeze_verification": {
+    "commit_exists": true,
+    "evaluator_absent_from_frozen_commit": true,
+    "performed": true,
+    "runtime_matches_frozen_commit": true
+  },
+  "frozen_code_commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+  "frozen_p_digest": "generic-hybrid-p:389967e821e33a69d9ad898e8b9d04dbf5559fe3ab65c521d5ab020c261645c7",
+  "game_count": 3,
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "p_frozen_before_generation": true,
+  "parameter_tuning_after_result": false,
+  "progress_game_count": 3,
+  "raw_evidence_pointers": [
+    "ARC-AGI-3-Agents/tools/p12_sealed_evaluator.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/sealed_client.py"
+  ],
+  "results": [
+    {
+      "actions": 3,
+      "j_m_full_trace": true,
+      "progress": 3,
+      "sealed_index": 0,
+      "state": "WIN",
+      "trace_digest": "generic-run:759d78154658d69f78c7b705fa8ae04ba438226878c8e16d742991fd2986843e",
+      "valid_action_only": true
+    },
+    {
+      "actions": 4,
+      "j_m_full_trace": true,
+      "progress": 2,
+      "sealed_index": 1,
+      "state": "WIN",
+      "trace_digest": "generic-run:62286dbb2e8702952bd4343e91fe9e31d2e5f386330ae067cf7ac23817d6987b",
+      "valid_action_only": true
+    },
+    {
+      "actions": 3,
+      "j_m_full_trace": true,
+      "progress": 3,
+      "sealed_index": 2,
+      "state": "WIN",
+      "trace_digest": "generic-run:ac3261f39a497cc271ad8206e58b49c3831497854d3d57f9efee98744ca81090",
+      "valid_action_only": true
+    }
+  ],
+  "runtime_source_read": false,
+  "schema_version": "arc3-sealed-custom-environment-report-v1",
+  "sealed_seed": 1839392085,
+  "sealed_seed_derivation": "sha256(frozen_code_commit)[0:8]",
+  "seed": 0,
+  "status": "PASS",
+  "trainer_evaluator_process_separated": true,
+  "win_count": 3
+}

@@ -1,0 +1,258 @@
+{
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-responsibility-ownership-graph-v1:68d0b4cb0edf4cb1330d80c83ff389580eb71ed8abf9189a6ff69f8eeeb74733",
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "failed_requirement_ids": [],
+  "generic_functional_equivalent_leak_count": 0,
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "raw_evidence_pointers": [
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_runtime.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/s5_compute.py"
+  ],
+  "responsibilities": [
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "generic_env.OfflineGenericEnvironment/_parse boundary",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "adapter",
+      "responsibility": "observation_normalization",
+      "s5_path": "sample_observation.SampleFrameAdapter"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "generic_compute.GenericComputeSubject.compute:retrieve",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "C/L0",
+      "responsibility": "selective_state_access",
+      "s5_path": "S5RenderedPolicyBody.predict fixed feature path"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "ParametricRelationalInstructionBody",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "P",
+      "responsibility": "parametric_memory",
+      "s5_path": "S5RenderedPolicyBody"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "represent→retrieve→model→predict→candidate",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "C/L0",
+      "responsibility": "serial_computation",
+      "s5_path": "S5 action head followed by IR materialization"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "GenericComputeSubject",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "C",
+      "responsibility": "hypothesis_generation",
+      "s5_path": "S5 world-model wrapper"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "GenericComputeSubject",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "C",
+      "responsibility": "counter_hypothesis_generation",
+      "s5_path": "S5 world-model wrapper"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "GenericComputeSubject",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "C",
+      "responsibility": "candidate_generation",
+      "s5_path": "S5RenderedCandidateSurface"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "shared action scorer; proposal only",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "P/C",
+      "responsibility": "candidate_scoring",
+      "s5_path": "S5 exact action-surface head"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "HDS",
+      "functional_equivalent_leak": false,
+      "generic_path": "GenericHDSJudgementSubject G00-G15",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "J",
+      "responsibility": "closure",
+      "s5_path": "HDSController"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "HDS",
+      "functional_equivalent_leak": false,
+      "generic_path": "GenericHDSJudgementSubject.judge",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "J",
+      "responsibility": "judgment",
+      "s5_path": "HDSController"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "HDS",
+      "functional_equivalent_leak": false,
+      "generic_path": "GenericHDSJudgementSubject",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "J",
+      "responsibility": "next_question_generation",
+      "s5_path": "not operational in S5"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "generic_runtime.outcome_memory_proposals",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "C",
+      "responsibility": "memory_proposal",
+      "s5_path": "s5_memory_payload action history"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "HDS",
+      "functional_equivalent_leak": false,
+      "generic_path": "SemanticMemory.apply_authorized",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "M under J authorization",
+      "responsibility": "memory_commit",
+      "s5_path": "PassiveMemory.apply_authorized"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "SUBORDINATE",
+      "functional_equivalent_leak": false,
+      "generic_path": "HDSPVersionAuthority proposal/compile",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "version C/compiler",
+      "responsibility": "p_update_proposal",
+      "s5_path": "not active in S5 runtime"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "HDS",
+      "functional_equivalent_leak": false,
+      "generic_path": "GenericSideEffectExecutor",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "mechanical C executor under J authorization",
+      "responsibility": "external_emit",
+      "s5_path": "OfflineArcadeEmissionInterface"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "HDS",
+      "functional_equivalent_leak": false,
+      "generic_path": "GenericHDSJudgementSubject.attribute",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "J",
+      "responsibility": "result_attribution",
+      "s5_path": "S5 visible effect/failure retention"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "HDS",
+      "functional_equivalent_leak": false,
+      "generic_path": "FAILURE_SIGNATURE semantic record",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "C proposal + J authorization + M commit",
+      "responsibility": "failure_update",
+      "s5_path": "bounded failed action history"
+    },
+    {
+      "ablation_witness": "P12 operational suite",
+      "authority": "HDS",
+      "functional_equivalent_leak": false,
+      "generic_path": "HDS decision + single-use rollback authorization",
+      "input": "typed current-cycle state",
+      "output": "typed auditable result",
+      "owner": "J",
+      "responsibility": "stop_rollback",
+      "s5_path": "dedicated S5 reset controller"
+    }
+  ],
+  "responsibility_count": 18,
+  "s5_findings": [
+    "O-001",
+    "O-002",
+    "O-003",
+    "O-004",
+    "O-005",
+    "O-006",
+    "O-007",
+    "O-008",
+    "O-009",
+    "O-010",
+    "O-011",
+    "O-012",
+    "O-013",
+    "O-014",
+    "O-015",
+    "O-016",
+    "O-017",
+    "O-018"
+  ],
+  "schema_version": "arc3-responsibility-ownership-graph-v1",
+  "seed": 0,
+  "status": "PASS",
+  "unassigned_responsibility_count": 0,
+  "unreviewed_duplicate_owner_count": 0
+}

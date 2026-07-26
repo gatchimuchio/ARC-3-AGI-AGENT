@@ -1,0 +1,87 @@
+{
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "blind_regression": {
+    "baseline": {
+      "actions": 3,
+      "completed": 1,
+      "crashes": 0,
+      "identity_leaks": 0,
+      "progress": 2
+    },
+    "candidate": {
+      "actions": 2,
+      "completed": 1,
+      "crashes": 0,
+      "identity_leaks": 0,
+      "progress": 2
+    },
+    "candidate_non_degrading": true,
+    "evaluator_digest": "sealed-transform-evaluator:56573e5cc1114736be47e968a298a4a8fa1042abab450807f77a423e031d3535",
+    "holdout_improved": true,
+    "known_sample_regression_passed": true
+  },
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "candidate": {
+    "body_version": "generic-parametric-relational-v2",
+    "digest": "generic-candidate-p:54a6ac2fa6a022db3a8b75c72060e9a7b9412ee950771b74599b30fa1ac78980",
+    "isolated_from_active": true
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "compile_authorization_id": "generic-p-compile-authorization:08762662e4c2067ca8fd3660",
+  "content_digest": "arc3-runtime-version-learning-report-v1:4eac4ad2b17be6eb91f422095fa886069e2f97d5f4302fecdded02caaf2f6896",
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "failed_requirement_ids": [],
+  "initial_state_digest": "generic-initial-state:7ae3e0cfb89f8718546be6c5999758b024993b323bbb9286d0b3c10c85d9e4fe",
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "promotion": {
+    "active_p_digest": "generic-parametric-p:58882323e24605fecf447a74dd83690fad451c73ea6a80dca56b8c24f07fb63b",
+    "candidate_digest": "generic-candidate-p:54a6ac2fa6a022db3a8b75c72060e9a7b9412ee950771b74599b30fa1ac78980",
+    "decision_id": "generic-p-promotion-decision:1c314639edf74350337ac75b",
+    "promoted_p_digest": "generic-parametric-p:73771182f1ae6c5afdbbc865e3f94a2a41c62cf720417f5f42d81705455bf7c0",
+    "reasons": [
+      "HDS_PROMOTION_GATES_PASSED"
+    ],
+    "rollback_target": "generic-parametric-p:58882323e24605fecf447a74dd83690fad451c73ea6a80dca56b8c24f07fb63b",
+    "status": "PROMOTE"
+  },
+  "proposal": {
+    "active_p_digest": "generic-parametric-p:58882323e24605fecf447a74dd83690fad451c73ea6a80dca56b8c24f07fb63b",
+    "evidence_record_ids": [
+      "procedure:5d14d15eba95c7912b1ab86e",
+      "procedure:9f49f62f0a169d027076e8b7"
+    ],
+    "expected_improvement": "blind holdout action efficiency or completion",
+    "proposal_id": "generic-p-update:7846abd16fafc8b2e971fc48",
+    "rollback_target": "generic-parametric-p:58882323e24605fecf447a74dd83690fad451c73ea6a80dca56b8c24f07fb63b",
+    "target_version": "generic-parametric-relational-v2",
+    "update_scope": "shared-action-effect-bias"
+  },
+  "raw_evidence_pointers": [
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_learning.py"
+  ],
+  "restart_progress": 2,
+  "restart_state": "WIN",
+  "runtime_called_trainer": false,
+  "schema_version": "arc3-runtime-version-learning-report-v1",
+  "seed": 0,
+  "status": "PASS",
+  "training_state": "WIN"
+}

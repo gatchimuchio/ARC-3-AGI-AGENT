@@ -1,0 +1,66 @@
+{
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-implicit-replay-audit-v1:d0c2697c3d0e64b92e1ef284a503ef400c3542d15925ca91ba2b807a6e3aa458",
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "exact_training_frame_retrieval_count": 0,
+  "excluded_nondecision_modules": [
+    "competition_contract.py",
+    "schema.py",
+    "sealed_client.py"
+  ],
+  "exclusion_reason": "transport, serialization denylist, and sealed-process clients do not select runtime actions",
+  "failed_requirement_ids": [],
+  "game_level_probe_feature_present": false,
+  "generic_p_training_frame_count": 0,
+  "identity_probe_accuracy": "NOT_APPLICABLE_NO_IDENTITY_LABEL_OR_FEATURE",
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "near_training_frame_retrieval_count": 0,
+  "p_behavior_without_training_trajectory": "EXECUTABLE",
+  "raw_evidence_pointers": [
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_compute.py",
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_env.py",
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_hds.py",
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_learning.py",
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_memory.py",
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_package.py",
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_runtime.py",
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_types.py"
+  ],
+  "same_render_different_outcome_contrast_executed": true,
+  "scanned_decision_modules": [
+    "generic_compute.py",
+    "generic_hds.py",
+    "generic_learning.py",
+    "generic_memory.py",
+    "generic_runtime.py",
+    "generic_types.py"
+  ],
+  "schema_version": "arc3-implicit-replay-audit-v1",
+  "seed": 0,
+  "static_forbidden_findings": [],
+  "status": "PASS",
+  "training_trajectory_removal_executed": true,
+  "trajectory_position_feature_present": false,
+  "transformed_appearance_environment_win_count": 7,
+  "whole_game_holdout_completion_count": 0
+}

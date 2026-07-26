@@ -59,6 +59,18 @@
 | `T-P11-REGRESSION` | `CLAIM_RELEASE_STATE_FIXED` | `P11_REGRESSION_REPORT.json` | compileall、ruff、strict mypy、全unit、全integration、diff、secretの7/7 PASS | 実行済み |
 | `T-P11-PACKAGE` | `CLAIM_RELEASE_STATE_FIXED` | `P11_RELEASE_STATE.json`, `test_p11_release_state.py` | pinned build、wheel二回byte一致、Runtime bundle同梱、corpus/source/analysis非同梱 | 実装・実行済み |
 | `T-P11-REBUILD` | `CLAIM_RELEASE_STATE_FIXED` | `load_p11_release_state` | P0/J0/M0/dataset/compiler/package digest差でFAIL | 実行済み |
+| `T-P12-OPERATIONAL` | `CLAIM_GENERIC_OPERATIONAL_CONFORMANCE` | `GENERIC_OPERATIONAL_CONFORMANCE_REPORT.json`, P12 unit tests | L0/C/J/M/Trinity/learning/observabilityの全operational check PASS | `PASS` |
+| `T-P12-WHOLE-GAME` | `CLAIM_GENERICITY` | `WHOLE_GAME_HOLDOUT_MANIFEST.json` | 5-foldで25 gameを各一回完全holdoutし、全foldで真のprogress | `SUSPEND`: 25/25実行、完了0、progress 1 game、4/5 fold progress 0 |
+| `T-P12-MECHANISM` | `CLAIM_GENERICITY` | `MECHANISM_HOLDOUT_MANIFEST.json` | 未知mechanismで固定policy超のprogressと仮説更新trace | `PASS` |
+| `T-P12-TRANSFORMATIONS` | `CLAIM_GENERICITY` | `EXECUTABLE_TRANSFORMATION_REPORT.json` | 七変換を実environmentとして完了 | `PASS`: 7/7 |
+| `T-P12-SEALED` | `CLAIM_GENERICITY` | `SEALED_CUSTOM_ENV_REPORT.json`, `p12_sealed_evaluator.py` | runtime/P凍結後、別processのsealed 3 gameで進捗・完了 | `PASS`: 3/3 |
+| `T-P12-IMPLICIT-REPLAY` | `CLAIM_GENERICITY` | `IMPLICIT_REPLAY_AUDIT.json` | identity/source/replay/固定列/座標によるdecision routing 0 | `PASS` |
+| `T-P12-LEARNING` | runtime/version learning | `RUNTIME_VERSION_LEARNING_REPORT.json` | semantic M因果、candidate P、blind holdout、HDS promotion、再起動利用 | `PASS` |
+| `T-P12-COMPETITION-MOCK` | `CLAIM_COMPETITION_MOCK_CONTRACT` | `COMPETITION_CONTRACT_DRY_RUN.json` | `OFF-001`〜`OFF-008`をmockで満たしofficial接続0 | `PASS` |
+| `T-P12-RESOURCE-PACKAGE-SECURITY` | pre-official resource/package/security | `RESOURCE_PACKAGE_SECURITY_REPORT.json` | RSS/latency/packageを測定し、再現package、secret/source/network finding 0 | `PASS` |
+| `T-P12-KNOWN-SAMPLE-REGRESSION` | `CLAIM_KNOWN_SAMPLE_CLOSURE` | `P12_KNOWN_SAMPLE_REGRESSION_REPORT.json` | fresh 25/25・183/183・10,733 actionとfrozen trace/closure byte同一 | `PASS` |
+| `T-P12-POST-CHANGE-REGRESSION` | `CLAIM_RELEASE_STATE_FIXED` | `P12_POST_CHANGE_REGRESSION_REPORT.json`, binding report | runtime/audit固定commitに対し7 gate PASS | `PASS`: 7/7 |
+| `T-P12-RELEASE-GATE` | `CLAIM_PRE_OFFICIAL_AGI_READY` | `PRE_OFFICIAL_AGI_RELEASE_STATE.json` | blocking 57/57 PASS | `SUSPEND`: 56/57、`GEN-001`のみ未成立 |
 
 ## claim昇格規則
 

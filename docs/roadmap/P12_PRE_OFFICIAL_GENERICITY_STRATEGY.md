@@ -112,3 +112,27 @@ next_probe: ...
 rollback_target: P11 frozen release
 next_question: ...
 ```
+
+## 7. Current audited result
+
+- frozen runtime commit/tree:
+  `a2a146976bb25ed84603e9f6b7f534e3b961b58b` /
+  `4f1a245060b57eebc57dab208f96bb06966b1e56`
+- frozen audit commit/tree:
+  `ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912` /
+  `e2244e166766c388d87bf924956414b616c41f1a`
+- acceptance: 57件中56件`PASS`
+- remaining blocker: `GEN-001`
+- whole-game evidence: 25/25 game、完了0、progress 1 game、
+  4/5 fold progress 0、crash/leak/unknown-action/scorecard-close failure 0
+- mechanism holdout、七変換、sealed 3 game、implicit replay audit、
+  Competition mock、learning、resource/package/securityは`PASS`
+- fresh KnownSampleStudent回帰: 25/25 game、183/183 level、
+  10,733 action、error 0、RHAE 99.619936696%、frozen traceとbyte同一
+- P11 release digest:
+  `arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c`
+  は不変
+- final release state:
+  `arc3-pre-official-agi-release-state-v1:a3b410ee1cf1705df81b46875fbbf2980a4e4936a124c3e7fba5d67673456f59`
+
+したがって現行HDS判断は`SUSPEND`であり、P13公式接続は開始しない。

@@ -1,0 +1,88 @@
+{
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "blocking_finding_ids": [
+    "O-001",
+    "O-002",
+    "O-003",
+    "O-004",
+    "O-005",
+    "O-006",
+    "O-007",
+    "O-008",
+    "O-009",
+    "O-010",
+    "O-011",
+    "O-012",
+    "O-013",
+    "O-014",
+    "O-015",
+    "O-016",
+    "O-017",
+    "O-018"
+  ],
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-s5-operational-conformance-report-v1:892504ea154018646feb0b4bb3e2c5fe8a48cf4f72b531558c4f32ee5c958f56",
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "failed_requirement_ids": [
+    "O-001",
+    "O-002",
+    "O-003",
+    "O-004",
+    "O-005",
+    "O-006",
+    "O-007",
+    "O-008",
+    "O-009",
+    "O-010",
+    "O-011",
+    "O-012",
+    "O-013",
+    "O-014",
+    "O-015",
+    "O-016",
+    "O-017",
+    "O-018"
+  ],
+  "findings": {
+    "active_memory_is_semantic": false,
+    "active_memory_max_entries": 1,
+    "candidate_modes_share_same_action": true,
+    "full_hds_stack_operational": false,
+    "policy_preselects_action": true,
+    "sealed_evaluator_executed": false,
+    "semantic_candidate_diversity": false,
+    "whole_game_holdout_executed": false
+  },
+  "frozen_baseline_mutation_authorized": false,
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "known_sample_closure": "PASS",
+  "operational_agi_conformance": "SUSPEND",
+  "raw_evidence_pointers": [
+    "docs/audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md",
+    "analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json"
+  ],
+  "required_correction_path": "GenericAGIRuntime",
+  "runtime": "KnownSampleStudent/S5",
+  "schema_version": "arc3-s5-operational-conformance-report-v1",
+  "seed": 0,
+  "status": "SUSPEND"
+}

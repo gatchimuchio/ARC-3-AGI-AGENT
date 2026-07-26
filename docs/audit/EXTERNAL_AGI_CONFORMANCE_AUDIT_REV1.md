@@ -94,3 +94,26 @@ next_question:
   Can the separate GenericAGIRuntime close every blocking acceptance item
   without mutating or falling back to KnownSampleStudent?
 ```
+
+## 5. Correction execution result
+
+`GenericAGIRuntime`と独立監査器を実装し、受入57件を固定runtime
+commit `a2a146976bb25ed84603e9f6b7f534e3b961b58b`、固定audit commit
+`ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912`で実行した。
+
+- 56/57 requirement: `PASS`
+- `GEN-001`: `SUSPEND`
+- whole-game holdout: 25/25 gameを各一回実行、完了0、progress 1 game、
+  4/5 fold progress 0
+- runtime crash、identity/source leak、unknown-action exception、
+  scorecard close failure: 各0
+- mechanism holdout、七変換、sealed 3 game、implicit replay audit:
+  `PASS`
+- operational C/J/M/P/Trinity/learning、Competition mock、
+  resource/package/security: `PASS`
+- fresh frozen-baseline回帰: 183/183、RHAE 99.619936696%、
+  P11固定hash全件不変
+- official connection / `OperationMode.COMPETITION` / Kaggle: 未実行
+
+よって外部監査の過大claimは是正されたが、genericity完成claimは成立しない。
+`PRE_OFFICIAL_AGI_READY`とP13移行は引き続き`SUSPEND`とする。

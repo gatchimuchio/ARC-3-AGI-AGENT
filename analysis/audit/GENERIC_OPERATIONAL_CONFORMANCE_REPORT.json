@@ -1,0 +1,171 @@
+{
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "checks": {
+    "C-001": true,
+    "C-002": true,
+    "C-003": true,
+    "C-004": true,
+    "J-001": true,
+    "J-002": true,
+    "J-003": true,
+    "J-004": true,
+    "J-005": true,
+    "J-006": true,
+    "J-007": true,
+    "L0-001": true,
+    "L0-002": true,
+    "L0-003": true,
+    "LEARN-001": true,
+    "LEARN-004": true,
+    "M-001": true,
+    "M-002": true,
+    "M-003": true,
+    "M-004": true,
+    "M-005": true,
+    "M-006": true,
+    "OBS-001": true,
+    "P-001": true,
+    "P-002": true,
+    "REG-003": true,
+    "TRI-001": true,
+    "TRI-002": true
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-generic-operational-conformance-report-v1:7b1bf669be81b9d6c5911c1692a6ebdf45e519e1161320374c7654cea5d0b30c",
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "failed_requirement_ids": [],
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "j_only": {
+    "ablations": [
+      [
+        "Counter-Hypothesis",
+        "SUSPEND:G04:M0"
+      ],
+      [
+        "Evidence-Gate",
+        "SUSPEND:G06:M0"
+      ],
+      [
+        "Failure-Update",
+        "PROBE:NONE:M0"
+      ],
+      [
+        "Mc",
+        "HDS_COMPUTE_MC_MISSING"
+      ],
+      [
+        "Projection-Gate",
+        "SUSPEND:G09:M0"
+      ],
+      [
+        "Purpose",
+        "HDS_COMPUTE_PURPOSE_MISSING"
+      ],
+      [
+        "Suspend",
+        "STOP:G06:E301,SUSPEND_CAPABILITY_REMOVED"
+      ]
+    ],
+    "evidence": [
+      "SUSPEND",
+      null
+    ],
+    "information": [
+      "PROBE",
+      "candidate:j-only:information"
+    ],
+    "progress": [
+      "PROBE",
+      "candidate:j-only:progress"
+    ],
+    "risk": [
+      "PROBE",
+      "candidate:j-only:information"
+    ]
+  },
+  "layer0": {
+    "p_removal_witness": "GENERIC_EXECUTABLE_INSTRUCTION_BODY_REQUIRED",
+    "p_swap_changed": true,
+    "retrieval_changed_candidate": true,
+    "semantic_candidate_count": 3,
+    "serial_depth_witness": "GENERIC_EFFECTIVE_SERIAL_DEPTH_REMOVED",
+    "stages": [
+      "represent",
+      "retrieve",
+      "model",
+      "predict",
+      "candidate"
+    ]
+  },
+  "memory": {
+    "active_kinds": [
+      "CONTRADICTION",
+      "COUNTER_HYPOTHESIS",
+      "DECISION_RATIONALE",
+      "HYPOTHESIS",
+      "OPEN_TERM",
+      "PROCEDURE_CAPABILITY",
+      "WORLD_MODEL"
+    ],
+    "lifecycle": {
+      "all_ten_mutations_observed": true,
+      "archive_not_automatically_queried": true,
+      "final_version": 17,
+      "operations": [
+        "ADD",
+        "ADD",
+        "REVISE",
+        "MERGE",
+        "SPLIT",
+        "REPLACE",
+        "REINDEX",
+        "INVALIDATE",
+        "ARCHIVE",
+        "DELETE",
+        "ROLLBACK"
+      ],
+      "provenance_complete": true,
+      "query_observed": true,
+      "receipt_count": 11,
+      "required_mutations_observed": true
+    },
+    "write_ablation_changed": true
+  },
+  "nominal_run": {
+    "actions": 3,
+    "cycles": 3,
+    "memory_version": 18,
+    "no_fallback_used": true,
+    "progress": 2,
+    "state": "WIN",
+    "trace_digest": "generic-run:74d7fbff6251e8c380f0a9d05f2f5b3498975548af823b340b429230fddbace8"
+  },
+  "raw_evidence_pointers": [
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_compute.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_hds.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_memory.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_runtime.py"
+  ],
+  "schema_version": "arc3-generic-operational-conformance-report-v1",
+  "seed": 0,
+  "status": "PASS"
+}

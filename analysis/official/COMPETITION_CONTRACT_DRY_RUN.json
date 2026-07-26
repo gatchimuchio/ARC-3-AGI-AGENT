@@ -1,0 +1,80 @@
+{
+  "act_call_count": 2,
+  "applied_action_count": 1,
+  "applied_reset_count": 1,
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "backoff_delays": [
+    0.01
+  ],
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "checks": {
+    "OFF-001": true,
+    "OFF-002": true,
+    "OFF-003": true,
+    "OFF-004": true,
+    "OFF-005": true,
+    "OFF-006": true,
+    "OFF-007": true,
+    "OFF-008": true
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-competition-contract-dry-run-report-v1:814acb056f4999084f97f19a2e5c430356b87b6e29af456860cb607b75b1d775",
+  "contract_version": "arc3-competition-contract-dry-run-v1",
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "error_400_classifications": [
+    [
+      "GAME_OVER",
+      "COMPETITION_GAME_OVER"
+    ],
+    [
+      "INVALID_ACTION",
+      "COMPETITION_INVALID_ACTION"
+    ],
+    [
+      "REQUEST_ERROR",
+      "COMPETITION_REQUEST_ERROR"
+    ]
+  ],
+  "exactly_once_passed": true,
+  "failed_requirement_ids": [],
+  "inflight_score_forwarded": false,
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "local_source_read": false,
+  "make_counts": [
+    [
+      "orchestration-game-A",
+      1
+    ]
+  ],
+  "official_connection_performed": false,
+  "only_reset_levels_used": false,
+  "operation_mode_competition_used": false,
+  "raw_evidence_pointers": [
+    "ARC-AGI-3-Agents/arc3_agi_agent/competition_contract.py"
+  ],
+  "reset_call_count": 1,
+  "runtime_identity_forwarded": false,
+  "schema_version": "arc3-competition-contract-dry-run-report-v1",
+  "scorecard_count": 1,
+  "seed": 0,
+  "server_failure_suspended": true,
+  "status": "PASS"
+}

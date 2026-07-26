@@ -24,7 +24,7 @@ P10の現行戦略は
 - P10: `COMPLETE_ARC3_SAMPLE_SOLVING` — 完了
 - P11: `RELEASE_STATE_FREEZE` — 完了
 - 現在フェーズ: P12 `PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
-- P12: 外部監査訂正、operational AGI conformance、genericity、Competition mock dry-run
+- P12: 外部監査訂正、operational AGI conformance、genericity、Competition mock dry-run — **56/57 PASS、`GEN-001` SUSPEND**
 - P13: `OFFICIAL_ARC_CONNECTION` — 未開始・BLOCKED
 - P14: Kaggle提出経路 — 未開始
 - P15: 実提出・公式結果最適化 — 未開始
@@ -118,6 +118,22 @@ P10の現行戦略は
   **二回byte一致、SHA-256 `a2f7c400753a553b49247ce7627e2b966fd152153b53064e7403e553659e551a`**
 - P11 release digest:
   **`arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c`**
+- P12 `GenericAGIRuntime` operational conformance:
+  **PASS**（L0/C/J/M/Trinity/learning/observability）
+- P12 whole-game holdout:
+  **25/25 game実行、完了0、真のprogress 1 game、4/5 fold progress 0、
+  crash 0、scorecard close failure 0、unknown-action exception 0**
+- P12 mechanism holdout / executable transformations / sealed evaluator:
+  **PASS / 7/7 PASS / 3/3 PASS**
+- P12 Competition contract mock:
+  **`OFF-001`〜`OFF-008` PASS、公式接続0、competition mode使用0**
+- P12 fresh known-sample回帰:
+  **25/25 game、183/183 level、10,733 action、error 0、
+  RHAE 99.619936696%、frozen closure/trace byte同一**
+- P12 post-change regression:
+  **7/7 PASS、P11固定hash全件不変**
+- P12 final HDS decision:
+  **`SUSPEND`**（57 blocking requirement中56 PASS、`GEN-001`のみ未成立）
 
 P11のweights、trace、score、artifact、digestはread-only baselineです。P12では
 S5を汎用化して上書きせず、`KnownSampleStudent`と別の

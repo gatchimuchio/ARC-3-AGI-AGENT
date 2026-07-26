@@ -1,0 +1,102 @@
+{
+  "all_environment_executed": true,
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-executable-transformation-report-v1:cb5395e9ad80812c0bf2927100aac678a7324fab0f3d847da41f449c2a0bf050",
+  "crash_count": 0,
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "failed_requirement_ids": [],
+  "families": [
+    {
+      "actions": 3,
+      "environment_executed": true,
+      "family": "COLOR",
+      "progress": 2,
+      "state": "WIN",
+      "trace_digest": "generic-run:04606f56cd479ccec9ce2e87a1167c9975574bb373a78b119308ec979e8e0c5c",
+      "valid_action_only": true
+    },
+    {
+      "actions": 3,
+      "environment_executed": true,
+      "family": "ROTATION",
+      "progress": 2,
+      "state": "WIN",
+      "trace_digest": "generic-run:c44f400be6b5ca3d2597fedd0f127f40f442823711fcf15cc15cd76a0d2f8981",
+      "valid_action_only": true
+    },
+    {
+      "actions": 3,
+      "environment_executed": true,
+      "family": "REFLECTION",
+      "progress": 2,
+      "state": "WIN",
+      "trace_digest": "generic-run:b6d6889f289e84e8ce78657fe033f4e1376f6a60a69677a019233ba2b103373a",
+      "valid_action_only": true
+    },
+    {
+      "actions": 3,
+      "environment_executed": true,
+      "family": "LAYOUT",
+      "progress": 2,
+      "state": "WIN",
+      "trace_digest": "generic-run:5392cbcf08f74a473fa96d4edfc877a74dbf7bc174b019d2fbc1595676d93042",
+      "valid_action_only": true
+    },
+    {
+      "actions": 3,
+      "environment_executed": true,
+      "family": "OBJECT_COUNT",
+      "progress": 2,
+      "state": "WIN",
+      "trace_digest": "generic-run:00f0f36567757581ec3f9fc012f6d404dd65ca871df48ea224aa7ca810f5bd1a",
+      "valid_action_only": true
+    },
+    {
+      "actions": 3,
+      "environment_executed": true,
+      "family": "ORDER",
+      "progress": 2,
+      "state": "WIN",
+      "trace_digest": "generic-run:3b9b0ebe6c868083f25550f66040f5ee8c0e23d28e25be538b380afc88f214f5",
+      "valid_action_only": true
+    },
+    {
+      "actions": 3,
+      "environment_executed": true,
+      "family": "UNSEEN_COMPOSITION",
+      "progress": 2,
+      "state": "WIN",
+      "trace_digest": "generic-run:cc25345391050e4d4bc18f8af7cea774f4eaf2cf9ce2e4e660813e02a4217768",
+      "valid_action_only": true
+    }
+  ],
+  "family_count": 7,
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "raw_evidence_pointers": [
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_env.py"
+  ],
+  "schema_version": "arc3-executable-transformation-report-v1",
+  "seed": 0,
+  "status": "PASS",
+  "win_count": 7
+}

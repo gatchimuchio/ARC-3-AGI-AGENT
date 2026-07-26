@@ -1,0 +1,92 @@
+{
+  "api_retry_budget": {
+    "429": 3,
+    "server_or_network": 2
+  },
+  "audit": {
+    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
+    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+  },
+  "audit_version": "arc3-p12-preofficial-audit-v1",
+  "budget": {
+    "sealed_game_count": 3,
+    "synthetic_actions_per_game": 48,
+    "whole_game_actions_per_game": 128
+  },
+  "checks": {
+    "PKG-001": true,
+    "RES-001": true,
+    "RES-002": true,
+    "SEC-001": true
+  },
+  "code": {
+    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+  },
+  "cold_start_seconds": 4.749999789055437e-05,
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-resource-package-security-report-v1:0341a1dfb442117aef18feb9bdf144bb843e7f2c3e38897b0f4bf554a8a51306",
+  "direct_network_egress_findings": [],
+  "environment_manifest": {
+    "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
+    "implementation": "CPython",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13",
+    "python_hash_seed": "UNSET"
+  },
+  "failed_requirement_ids": [],
+  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "model_load_seconds": 4.749999789055437e-05,
+  "package": {
+    "filename": "generic-runtime-a.zip",
+    "forbidden_content_count": 0,
+    "forbidden_member_count": 0,
+    "member_names": [
+      "GENERIC_RUNTIME_MANIFEST.txt",
+      "arc3_agi_agent/__init__.py",
+      "arc3_agi_agent/competition_contract.py",
+      "arc3_agi_agent/generic_compute.py",
+      "arc3_agi_agent/generic_hds.py",
+      "arc3_agi_agent/generic_learning.py",
+      "arc3_agi_agent/generic_memory.py",
+      "arc3_agi_agent/generic_runtime.py",
+      "arc3_agi_agent/generic_types.py",
+      "arc3_agi_agent/schema.py",
+      "arc3_agi_agent/sealed_client.py"
+    ],
+    "package_version": "arc3-generic-runtime-package-v1",
+    "reproducible": true,
+    "sealed_source_included": false,
+    "sha256": "60ef6a0160f98286858792ea1a86337adbe7b6da7962932022165dc9d6907a04",
+    "size_bytes": 45577,
+    "teacher_graph_included": false,
+    "training_examples_included": false
+  },
+  "peak_traced_memory_bytes": 432185,
+  "per_action_latency_seconds": {
+    "p50": 0.09972233333489082,
+    "p95": 0.11092920000373852
+  },
+  "process_rss": {
+    "after": {
+      "current_bytes": 170889216,
+      "method": "GetProcessMemoryInfo",
+      "peak_bytes": 408514560
+    },
+    "before": {
+      "current_bytes": 170696704,
+      "method": "GetProcessMemoryInfo",
+      "peak_bytes": 408514560
+    }
+  },
+  "raw_evidence_pointers": [
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_package.py"
+  ],
+  "runtime_source_access_findings": [],
+  "schema_version": "arc3-resource-package-security-report-v1",
+  "seed": 0,
+  "status": "PASS",
+  "total_runtime_seconds": 2.2287018000060925,
+  "trace_storage_bytes": 490402,
+  "tracked_secret_findings": []
+}
