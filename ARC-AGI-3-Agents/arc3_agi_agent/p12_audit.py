@@ -1158,6 +1158,22 @@ def whole_game_holdout_manifest(
                         "elapsed_seconds": time.perf_counter() - started,
                     }
                 )
+            finally:
+                scorecard_closed = False
+                scorecard_close_error: str | None = None
+                try:
+                    arcade.close_scorecard(scorecard)
+                    scorecard_closed = True
+                except Exception as error:
+                    scorecard_close_error = (
+                        f"{type(error).__name__}:{error}"
+                    )
+                results[-1]["scorecard_closed"] = scorecard_closed
+                if scorecard_close_error is not None:
+                    results[-1]["scorecard_close_error"] = (
+                        scorecard_close_error
+                    )
+                    results[-1]["crash"] = True
             gc.collect()
     fold_results = tuple(
         {
@@ -1205,6 +1221,7 @@ def whole_game_holdout_manifest(
         evaluated
         and not any(bool(item["crash"]) for item in results)
         and not any(bool(item["identity_leak"]) for item in results)
+        and all(bool(item["scorecard_closed"]) for item in results)
         and not any(
             bool(item["unknown_action_surface_exception"])
             for item in results
@@ -1247,6 +1264,9 @@ def whole_game_holdout_manifest(
         "unknown_action_surface_exception_count": sum(
             int(bool(item["unknown_action_surface_exception"]))
             for item in results
+        ),
+        "scorecard_close_failure_count": sum(
+            int(not bool(item.get("scorecard_closed"))) for item in results
         ),
         "holdout_completed_game_count": sum(
             int(item["state"] == "WIN") for item in results
