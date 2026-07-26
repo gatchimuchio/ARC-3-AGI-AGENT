@@ -141,6 +141,13 @@ def _write_test_wheel(path: Path) -> None:
             "arc3_agi_agent/teacher/compiler.py",
             "# development compiler\n",
         )
+        archive.writestr(
+            "arc_agi_3_agents-0.1.0.dist-info/WHEEL",
+            "Wheel-Version: 1.0\n"
+            "Generator: setuptools (83.0.0)\n"
+            "Root-Is-Purelib: true\n"
+            "Tag: py3-none-any\n",
+        )
 
 
 def test_wheel_audit_requires_reproducible_runtime_bundle(
@@ -158,6 +165,10 @@ def test_wheel_audit_requires_reproducible_runtime_bundle(
     assert report["contains_runtime_policy_weights"] is True
     assert report["contains_training_corpus"] is False
     assert report["development_compiler_modules_included"] is True
+    assert (
+        report["build_contract"]["backend_generator"]
+        == "setuptools (83.0.0)"
+    )
 
     reproduction.write_bytes(reproduction.read_bytes() + b"tamper")
     with pytest.raises(ValueError, match="P11_PACKAGE_BYTE_MISMATCH"):

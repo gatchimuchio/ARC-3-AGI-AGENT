@@ -35,6 +35,8 @@ P11_RELEASE_STATE_DIGEST_PREFIX = "arc3_p11_release_state:"
 P11_ACTION_BUDGET = 4096
 P11_RUNTIME_SEED = 0
 P11_SOURCE_DATE_EPOCH = 946_684_800
+P11_BUILD_BACKEND_VERSION = "83.0.0"
+P11_UV_VERSION = "0.11.32"
 
 
 def _write_json(path: Path, value: object) -> None:
@@ -245,6 +247,29 @@ def inspect_reproducible_wheels(
         raise ValueError("P11_PACKAGE_BYTE_MISMATCH")
     with zipfile.ZipFile(primary_path) as archive:
         names = tuple(sorted(archive.namelist()))
+        wheel_metadata_names = tuple(
+            name
+            for name in names
+            if name.endswith(".dist-info/WHEEL")
+        )
+        if len(wheel_metadata_names) != 1:
+            raise ValueError("P11_PACKAGE_WHEEL_METADATA_INVALID")
+        wheel_metadata = archive.read(
+            wheel_metadata_names[0]
+        ).decode("utf-8")
+    generator = next(
+        (
+            line.removeprefix("Generator: ").strip()
+            for line in wheel_metadata.splitlines()
+            if line.startswith("Generator: ")
+        ),
+        "",
+    )
+    expected_generator = (
+        f"setuptools ({P11_BUILD_BACKEND_VERSION})"
+    )
+    if generator != expected_generator:
+        raise ValueError("P11_PACKAGE_BUILD_BACKEND_VERSION_MISMATCH")
     required_suffixes = (
         "arc3_agi_agent/bundles/s5_rendered_policy_v1.json",
         "arc3_agi_agent/bundles/s5_rendered_policy_v1.npz",
@@ -290,12 +315,45 @@ def inspect_reproducible_wheels(
         ),
         "build_contract": {
             "backend": "setuptools.build_meta",
-            "command": (
-                "SOURCE_DATE_EPOCH=946684800 uv build --wheel "
-                "--out-dir <output>"
+            "backend_generator": generator,
+            "backend_version": P11_BUILD_BACKEND_VERSION,
+            "command_wsl_windows_interop": (
+                "SOURCE_DATE_EPOCH=946684800 "
+                "WSLENV=SOURCE_DATE_EPOCH "
+                "uv.exe build --wheel --out-dir <output>"
             ),
             "source_date_epoch": P11_SOURCE_DATE_EPOCH,
+            "wsl_environment_bridge_required": True,
         },
+    }
+
+
+def _uv_descriptor(uv_executable_path: Path) -> dict[str, object]:
+    resolved = uv_executable_path.resolve()
+    if not resolved.is_file():
+        raise ValueError("P11_UV_EXECUTABLE_MISSING")
+    completed = subprocess.run(
+        (str(resolved), "--version"),
+        check=False,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
+    reported = completed.stdout.strip()
+    parts = reported.split()
+    if (
+        completed.returncode != 0
+        or len(parts) < 2
+        or parts[0] != "uv"
+        or parts[1] != P11_UV_VERSION
+    ):
+        raise ValueError("P11_UV_VERSION_MISMATCH")
+    return {
+        "filename": resolved.name,
+        "reported_version": reported,
+        "sha256": _file_sha256(resolved),
+        "version": P11_UV_VERSION,
     }
 
 
@@ -317,6 +375,7 @@ def compile_p11_release_state(
     reproducibility_audit_path: Path,
     primary_wheel_path: Path,
     reproduction_wheel_path: Path,
+    uv_executable_path: Path,
     sample_zip_path: Path,
 ) -> dict[str, Any]:
     """Compile a content-addressed release state from the frozen code tree."""
@@ -442,6 +501,7 @@ def compile_p11_release_state(
         primary_wheel_path,
         reproduction_wheel_path,
     )
+    uv_descriptor = _uv_descriptor(uv_executable_path)
     sample_zip_sha256 = _file_sha256(sample_zip_path)
     if not sample_zip_sha256:
         raise ValueError("P11_RELEASE_SAMPLE_ZIP_DIGEST_MISSING")
@@ -510,6 +570,7 @@ def compile_p11_release_state(
             "pytest_version": importlib.metadata.version("pytest"),
             "mypy_version": importlib.metadata.version("mypy"),
             "ruff_version": importlib.metadata.version("ruff"),
+            "uv": uv_descriptor,
         },
         "initial_state": initial_states,
         "dataset": {
@@ -707,6 +768,11 @@ def main() -> int:
         type=Path,
         required=True,
     )
+    parser.add_argument(
+        "--uv-executable",
+        type=Path,
+        required=True,
+    )
     parser.add_argument("--sample-zip", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -716,6 +782,7 @@ def main() -> int:
         reproducibility_audit_path=args.reproducibility_audit,
         primary_wheel_path=args.primary_wheel,
         reproduction_wheel_path=args.reproduction_wheel,
+        uv_executable_path=args.uv_executable,
         sample_zip_path=args.sample_zip,
     )
     _write_json(args.output, report)
@@ -740,10 +807,12 @@ if __name__ == "__main__":
 
 __all__ = [
     "P11_ACTION_BUDGET",
+    "P11_BUILD_BACKEND_VERSION",
     "P11_RELEASE_STATE_DIGEST_PREFIX",
     "P11_RELEASE_STATE_SCHEMA_VERSION",
     "P11_RUNTIME_SEED",
     "P11_SOURCE_DATE_EPOCH",
+    "P11_UV_VERSION",
     "compile_p11_release_state",
     "inspect_reproducible_wheels",
     "load_p11_release_state",

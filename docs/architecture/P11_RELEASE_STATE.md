@@ -34,7 +34,7 @@ Release State
 | regression | compileall、ruff、strict mypy、全unit、全integration、diff、secret scan |
 | sample evidence | S5 183/183、authority audit、oracle、二回byte一致 |
 | S6 evidence | 七摂動14,336件、二回byte一致、`MEASURED_NOT_PROVEN` |
-| package | fixed epochでwheel二回build、byte一致、内容・digest監査 |
+| package | `uv 0.11.32`、`setuptools 83.0.0`、fixed epochでwheel二回build、byte一致、内容・digest監査 |
 
 ## 3. 初期状態境界
 
@@ -71,6 +71,17 @@ P10 S5/S6 exact rerun audit
   -> P0/J0/M0と全証拠をrelease manifestへ束縛
   -> release manifest test
 ```
+
+WSLからWindows版`uv.exe`を実行する固定build command:
+
+```bash
+SOURCE_DATE_EPOCH=946684800 \
+WSLENV=SOURCE_DATE_EPOCH \
+uv.exe build --wheel --out-dir <output>
+```
+
+`WSLENV`を省くと`SOURCE_DATE_EPOCH`はWindows processへ伝播しないため、
+同一commandとは扱わない。build backendは`setuptools==83.0.0`へ固定する。
 
 正本成果物:
 
