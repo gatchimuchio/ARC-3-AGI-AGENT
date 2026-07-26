@@ -40,11 +40,16 @@
 - `TEACHER_S3_ORACLE_ADAPTER_REPORT.json`
 - `TEACHER_S3_LOCAL_SCORE_ORACLE.json`
 - `TEACHER_S3_LOCAL_SCORE_ORACLE.md`
+- `S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json`
+- `TEACHER_S4_CLOSURE_REPORT.json`
+- `TEACHER_S4_ORACLE_ADAPTER_REPORT.json`
+- `TEACHER_S4_LOCAL_SCORE_ORACLE.json`
+- `TEACHER_S4_LOCAL_SCORE_ORACLE.md`
 
-現状はS0〜S3 Teacherが183/183です。S4〜S6およびrendered-only Runtime
-Studentは未達です。S3は固定action列、literal target、明示的な
-task/game/level ID routingを除去しましたが、source/hiddenと
-answer/replay graphへの依存を残します。
+現状はS0〜S4 Teacherが183/183です。S5〜S6およびrendered-only Runtime
+Studentは未達です。S4は固定action列、literal target、明示的な
+task/game/level ID routing、source/hidden runtime読取を除去しましたが、
+answer/replay由来のexact graphへの依存を残します。
 
 P10-R2の全183 graphは、保持中25 source fileのSHA-256、183 level定義、
 object/state role、25 goal witness、43 hazard witness、hidden-state boundary、
@@ -79,9 +84,23 @@ game別graph routingを除去しました。graph内identity key/literalは0、
 policy partitionは1です。183/183 level、10,733 action、identity-routing
 decision 0、error 0で、標準local oracleはS2と同じRHAE 99.619936696%です。
 評価harnessだけが環境作成と結果帰属にgame IDを使用し、action選択関数は
-受け取りません。source/hiddenとanswer-derived graphはS4以降の残存特権です。
+受け取りません。このS3時点ではsource/hiddenとanswer-derived graphが
+残存特権であり、前者をS4で除去しました。
 全global graph生成と全183 levelのexecutor実行を新規環境で各2回行い、
 graphとclosure reportはいずれもbyte-identicalでした。
+
+P10-R5/S4は、S3 source/hidden読取の副作用をS4へ混入させないため、
+使い捨てS3 mirrorでanswer trajectoryだけを回収し、別のfresh target環境を
+source/hidden未読のまま再実行してgraphを収集します。`ls20`では
+`_get_hidden_state()`がrender制御値を書き換える副作用を持つことを検出し、
+S3 conditionからdigestだけを削る変換を棄却しました。S4 targetの
+source/hidden readは0、graph/runtime decisionも0です。25/25 game、
+183/183 level、10,733 action、error 0で、標準local oracleはS3と同じ
+RHAE 99.619936696%です。graphは10,758 node、10,733 edgeで、
+branch、merge、nondeterministic actionはいずれも0です。全graph再生成と
+全183 level再実行をfresh条件で各2回行い、graphとclosure reportは
+byte-identicalでした。S4 graphはanswer-derived exact graphなので、
+rendered-only Runtime Student Pの成立証拠には使用しません。
 
 再生成手順とclaim境界は
 [`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](../../docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)

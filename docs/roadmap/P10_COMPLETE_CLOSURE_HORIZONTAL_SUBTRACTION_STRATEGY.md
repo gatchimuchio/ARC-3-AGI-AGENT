@@ -62,7 +62,7 @@ literal座標、source/hidden stateをRuntimeからimportまたは参照して�
 | S1 | 固定action列を禁止 | 183/183 | `PASS` |
 | S2 | literal座標も禁止 | 183/183 | `PASS` |
 | S3 | task/game/level ID routingも禁止 | 183/183 | `PASS` |
-| S4 | source/hidden stateも禁止 | 183/183 | `NOT_RUN` |
+| S4 | source/hidden stateも禁止 | 183/183 | `PASS` |
 | S5 | rendered observationと履歴のみ | 183/183 | `NOT_RUN` |
 | S6 | 色・回転・反転・配置・個数・順序・未観測合成を摂動 | 汎化測定 | `NOT_RUN` |
 
@@ -116,6 +116,12 @@ R0の35/183とRHAE 18.821945363%は旧Runtime Studentの回帰値であり、
 | S3 executable action | 10,733 |
 | S3 privileged Teacher RHAE | 99.619936696% |
 | S3 RHAE delta vs S2 | 0 percentage point |
+| S4 target source/hidden read / decision | 0 / 0 |
+| S4 global state graph | 10,758 node / 10,733 edge |
+| S4 branch / merge / nondeterministic action | 0 / 0 / 0 |
+| S4 executable action | 10,733 |
+| S4 privileged Teacher RHAE | 99.619936696% |
+| S4 RHAE delta vs S3 | 0 percentage point |
 
 Public human trajectory inventoryは25 game、183 level、11,648 recorded action。
 FT09の公開trajectoryは保持サンプルの旧revisionを対象としていたため、既存の
@@ -246,7 +252,7 @@ work block契約:
 - `analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json`
 - `analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json`
 
-### P10-R5 水平減算 — S2/S3完了・S4待機
+### P10-R5 水平減算 — S2/S3/S4完了・S5待機
 
 S2 compilerだけがS1 graphのpointer targetを観測し、absolute targetを
 target-centred rendered relationへ変換する。S2 graphとexecutorは
@@ -337,10 +343,66 @@ work block契約:
 
 - `analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json`
 - `analysis/teacher/TEACHER_S3_CLOSURE_REPORT.json`
+
+S4 compilerは、使い捨てS3 mirrorから既証明のanswer trajectoryだけを回収し、
+別に生成したfresh target環境へ同じ構造actionを適用する。target側の状態署名は
+render、available action、terminal、固定長4の観測action/effect履歴だけから
+生成し、environment wrapper、source object、hidden state、identityを
+action selectorへ渡さない。S3 mirrorのconditionはS4 graphへ保存しない。
+
+S3 graphから`source_state_digest`だけを機械的に削除する初期案は棄却した。
+`ls20._get_hidden_state()`がrender制御値を書き換える副作用を持ち、
+hidden読取を除去した正しいS4実行とS3収集時のrenderが367 action目で分岐した
+ためである。fresh target再収集に是正後、`ls20`は7/7 level、472 actionで
+再現した。
+
+work block契約:
+
+- `X`: S3 global graph、保持OFFLINE環境、S4 Teacher packageだけを観測し、
+  source/hidden未読target graph/executor、S4証拠だけを変更する。
+- `R`: disposable mirrorはanswer trajectory回収だけを行い、fresh targetの
+  render/history状態をglobal indexへ登録する。runtime action選択はその
+  observation-only署名からWIN距離を厳密に減らすedgeを選ぶ。
+- `Mc`: 25/25 game、183/183 level、error 0、target source/hidden read 0、
+  source/hidden decision 0、policy partition 1、全actionでWIN距離減少の場合だけ
+  S4を`PASS`とする。
+- 非目的: answer/replay由来exact graphの除去、Runtime Student P採用、S5、
+  perturbation汎化。
+- 証拠境界: S4はsource/hidden runtime依存除去の開発用Teacher証拠であり、
+  rendered-only Runtime Studentまたは汎化能力の証拠ではない。
+- 反証条件: targetでのsource/hidden getter呼出し、graphへのsource key保持、
+  未知node/target、距離非減少、`GAME_OVER`、未完levelのいずれか。
+- 回帰線: 同じOFFLINE sampleとlocal oracleでS3の183/183・RHAEを維持する。
+
+結果:
+
+- source transition witness / executable action: 10,733
+- global state node / action edge: 10,758 / 10,733
+- branch / merge / nondeterministic action: 0 / 0 / 0
+- policy partition: 1
+- identity routing key / source-hidden decision key: 0 / 0
+- target environment source/hidden read: 0
+- action selectionへのenvironment wrapper/source/hidden入力: false
+- rendered role selector resolution: 3,112
+- selector failure / node miss / unexpected target / error: 0 / 0 / 0 / 0
+- same-sample local oracle: RHAE 99.619936696%
+- S3 local-oracle delta: 0 percentage point
+- full graph rerun: byte-identical
+  (`sha256:09fbd408ce7ee34d7598a67f8d8cc8951d60c3a280e80107058db339313954c8`)
+- full closure rerun: byte-identical
+  (`sha256:5b75363a82a1565db79a0369bcabcfe653aa4d77623d06321a92b236489e04f0`)
+
+正本:
+
+- `analysis/teacher/S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json`
+- `analysis/teacher/TEACHER_S4_CLOSURE_REPORT.json`
+- `analysis/teacher/TEACHER_S4_ORACLE_ADAPTER_REPORT.json`
+- `analysis/teacher/TEACHER_S4_LOCAL_SCORE_ORACLE.json`
+- `analysis/teacher/TEACHER_S4_LOCAL_SCORE_ORACLE.md`
 - `analysis/teacher/PRIVILEGE_SUBTRACTION_MATRIX.json`
 - `analysis/teacher/RUNTIME_P_COMPILATION_REPORT.json`
 
-現状のRuntime P reportは`BLOCKED_BY_S4_SOURCE_HIDDEN_STATE`であり、
+現状のRuntime P reportは`BLOCKED_BY_S5_RENDERED_ONLY_RUNTIME_P`であり、
 Runtime P変更・rule採用・graph採用はいずれも0である。
 
 ### P10-R6 汎化試験 — 未開始
@@ -398,6 +460,11 @@ analysis/teacher/TEACHER_S3_CLOSURE_REPORT.json
 analysis/teacher/TEACHER_S3_ORACLE_ADAPTER_REPORT.json
 analysis/teacher/TEACHER_S3_LOCAL_SCORE_ORACLE.json
 analysis/teacher/TEACHER_S3_LOCAL_SCORE_ORACLE.md
+analysis/teacher/S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json
+analysis/teacher/TEACHER_S4_CLOSURE_REPORT.json
+analysis/teacher/TEACHER_S4_ORACLE_ADAPTER_REPORT.json
+analysis/teacher/TEACHER_S4_LOCAL_SCORE_ORACLE.json
+analysis/teacher/TEACHER_S4_LOCAL_SCORE_ORACLE.md
 ```
 
 ## 7. 再生成・検証
@@ -450,6 +517,19 @@ python -m arc3_agi_agent.teacher.s3_graph_executor \
     ../analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json \
   --output ../analysis/teacher/TEACHER_S3_CLOSURE_REPORT.json
 
+python -m arc3_agi_agent.teacher.s4_graph_compiler \
+  --environments-dir ../environment_files \
+  --s3-policy-graph \
+    ../analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json \
+  --output \
+    ../analysis/teacher/S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json
+
+python -m arc3_agi_agent.teacher.s4_graph_executor \
+  --environments-dir ../environment_files \
+  --policy-graph \
+    ../analysis/teacher/S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json \
+  --output ../analysis/teacher/TEACHER_S4_CLOSURE_REPORT.json
+
 python -m arc3_agi_agent.teacher.solution_graph_compiler \
   --corpus ../analysis/teacher/FULL_SOLUTION_CORPUS.json \
   --closure-report ../analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json \
@@ -468,6 +548,10 @@ python -m arc3_agi_agent.teacher.solution_graph_compiler \
     ../analysis/teacher/S3_GLOBAL_IDENTITY_FREE_POLICY_GRAPH.json \
   --s3-closure-report \
     ../analysis/teacher/TEACHER_S3_CLOSURE_REPORT.json \
+  --s4-policy-graph \
+    ../analysis/teacher/S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json \
+  --s4-closure-report \
+    ../analysis/teacher/TEACHER_S4_CLOSURE_REPORT.json \
   --output-dir ../analysis/teacher
 
 python -m pytest -q \
@@ -477,14 +561,18 @@ python -m pytest -q \
   tests/unit/test_teacher_s2_role_selector.py \
   tests/integration/test_teacher_s2_graph.py \
   tests/unit/test_teacher_s3_state.py \
-  tests/integration/test_teacher_s3_graph.py
+  tests/integration/test_teacher_s3_graph.py \
+  tests/unit/test_teacher_s4_state.py \
+  tests/integration/test_teacher_s4_graph.py
 ```
 
 ## 8. 次work block
 
 ```text
-WB-S4-SOURCE-HIDDEN-STATE-SUBTRACTION
+WB-S5-RENDERED-ONLY-RUNTIME-P-COMPILATION
 ```
 
-R1〜R5とS1〜S3は閉じた。次はglobal state matchingからsource/hidden stateを
-除去し、S4を183/183へ閉じる。S4が183/183になる前にS5以降へ進まない。
+R1〜R5とS1〜S4は閉じた。次はanswer-derived exact S4 graphから再利用可能な
+構造をidentity-free Runtime Student Pへcompileし、Teacher package、
+answer/replay graphなしでS5を183/183へ閉じる。S5が183/183になる前に
+S6へ進まない。

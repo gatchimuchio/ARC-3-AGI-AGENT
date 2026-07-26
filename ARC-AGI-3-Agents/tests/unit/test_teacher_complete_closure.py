@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 import json
 import unittest
 from decimal import Decimal
@@ -55,6 +56,24 @@ from arc3_agi_agent.teacher.s3_graph_schema import (
 )
 from arc3_agi_agent.teacher.s3_score_adapter import (
     S3_SCORE_ADAPTER_DIGEST_PREFIX,
+)
+from arc3_agi_agent.teacher.s4_graph_executor import (
+    S4_CLOSURE_REPORT_DIGEST_PREFIX,
+    load_s4_closure_report,
+    select_s4_policy_edge,
+)
+from arc3_agi_agent.teacher.s4_graph_schema import (
+    S4_POLICY_GRAPH_DIGEST_PREFIX,
+    load_s4_policy_graph,
+)
+from arc3_agi_agent.teacher.s4_graph_schema import (
+    all_mapping_keys as s4_all_mapping_keys,
+)
+from arc3_agi_agent.teacher.s4_graph_schema import (
+    identity_literal_values as s4_identity_literal_values,
+)
+from arc3_agi_agent.teacher.s4_score_adapter import (
+    S4_SCORE_ADAPTER_DIGEST_PREFIX,
 )
 from arc3_agi_agent.teacher.solution_graph_compiler import (
     CROSS_GAME_GRAMMAR_DIGEST_PREFIX,
@@ -398,9 +417,19 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             ],
             "PASS_183_OF_183",
         )
+        self.assertEqual(
+            grammar["proof_status"][
+                "source_hidden_state_free_execution"
+            ],
+            "PASS_183_OF_183",
+        )
         self.assertEqual(matrix["stage_summary"]["S0"]["status"], "PASS")
         self.assertEqual(
             matrix["source_or_hidden_state_dependent_count"],
+            0,
+        )
+        self.assertEqual(
+            matrix["s3_source_or_hidden_state_dependent_count"],
             183,
         )
         self.assertEqual(
@@ -427,6 +456,14 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             matrix["stage_summary"]["S3"]["completed_levels"],
             183,
         )
+        self.assertEqual(
+            matrix["stage_summary"]["S4"]["status"],
+            "PASS",
+        )
+        self.assertEqual(
+            matrix["stage_summary"]["S4"]["completed_levels"],
+            183,
+        )
         self.assertEqual(matrix["fixed_action_dependent_count"], 0)
         self.assertEqual(
             matrix["s0_fixed_action_dependent_count"],
@@ -442,7 +479,7 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             matrix["s2_identity_routing_dependent_count"],
             183,
         )
-        for stage in ("S4", "S5", "S6"):
+        for stage in ("S5", "S6"):
             self.assertEqual(
                 matrix["stage_summary"][stage]["status"],
                 "NOT_RUN",
@@ -469,8 +506,16 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             "PASS",
         )
         self.assertEqual(
+            runtime["claims"]["source_hidden_state_free_183"],
+            "PASS",
+        )
+        self.assertEqual(
             runtime["compilation"]["first_required_stage"],
-            "S4",
+            "S5",
+        )
+        self.assertEqual(
+            runtime["compilation"]["status"],
+            "BLOCKED_BY_S5_RENDERED_ONLY_RUNTIME_P",
         )
         self.assertEqual(
             runtime["claims"]["rendered_only_183"],
@@ -815,6 +860,104 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             [],
         )
 
+    def test_s4_graph_has_no_source_or_hidden_state_and_closes(
+        self,
+    ) -> None:
+        graph = load_s4_policy_graph(
+            TEACHER_ANALYSIS
+            / "S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json"
+        )
+        report = load_s4_closure_report(
+            TEACHER_ANALYSIS / "TEACHER_S4_CLOSURE_REPORT.json"
+        )
+        _assert_digest(
+            self,
+            graph,
+            S4_POLICY_GRAPH_DIGEST_PREFIX,
+        )
+        _assert_digest(
+            self,
+            report,
+            S4_CLOSURE_REPORT_DIGEST_PREFIX,
+        )
+
+        self.assertEqual(graph["environment_count"], 25)
+        self.assertEqual(graph["level_count"], 183)
+        self.assertEqual(graph["state_node_count"], 10758)
+        self.assertEqual(graph["edge_count"], 10733)
+        self.assertEqual(graph["branch_node_count"], 0)
+        self.assertEqual(graph["merged_state_node_count"], 0)
+        self.assertEqual(graph["nondeterministic_action_count"], 0)
+        self.assertEqual(graph["role_selector_witness_count"], 3112)
+        self.assertEqual(graph["policy_partition_count"], 1)
+        self.assertEqual(graph["identity_routing_key_count"], 0)
+        self.assertEqual(graph["source_hidden_decision_key_count"], 0)
+        self.assertEqual(
+            graph["target_environment_source_or_hidden_read_count"],
+            0,
+        )
+        self.assertEqual(s4_identity_literal_values(graph), set())
+        self.assertEqual(
+            s4_all_mapping_keys(graph).intersection(
+                {
+                    "current_level_data",
+                    "custom_hidden_state",
+                    "environment_id",
+                    "game_class",
+                    "game_id",
+                    "hidden_state",
+                    "level_id",
+                    "levels_completed",
+                    "source_fields",
+                    "source_state_digest",
+                    "task_id",
+                }
+            ),
+            set(),
+        )
+        self.assertEqual(report["completed_levels"], 183)
+        self.assertEqual(report["actions_executed"], 10733)
+        self.assertEqual(
+            report["strict_distance_decrease_count"],
+            10733,
+        )
+        self.assertEqual(report["role_selector_resolution_count"], 3112)
+        self.assertEqual(report["identity_routing_decision_count"], 0)
+        self.assertEqual(report["source_hidden_decision_count"], 0)
+        self.assertEqual(report["error_count"], 0)
+        self.assertFalse(
+            report["action_selection_receives_environment_wrapper"]
+        )
+        self.assertFalse(
+            report["action_selection_receives_source_or_hidden_state"]
+        )
+        self.assertFalse(
+            report["decision_uses_source_or_hidden_state"]
+        )
+        self.assertTrue(
+            report["remaining_privilege_dependencies"][
+                "answer_or_replay_graph"
+            ]
+        )
+        self.assertFalse(
+            report["remaining_privilege_dependencies"][
+                "rendered_only"
+            ]
+        )
+
+    def test_s4_action_selector_accepts_observation_inputs_only(
+        self,
+    ) -> None:
+        self.assertEqual(
+            set(inspect.signature(select_s4_policy_edge).parameters),
+            {
+                "frame",
+                "action_effect_history",
+                "nodes",
+                "current_rendered_frame_digest",
+            },
+        )
+
     def test_runtime_package_does_not_import_teacher_artifacts(self) -> None:
         forbidden = (
             "arc3_agi_agent.teacher",
@@ -992,6 +1135,49 @@ class TeacherCompleteClosureTests(unittest.TestCase):
         )
         self.assertFalse(
             s3_current["evaluation_provenance"][
+                "architecture_evidence_eligible"
+            ]
+        )
+
+        s4_adapter = _json(
+            TEACHER_ANALYSIS / "TEACHER_S4_ORACLE_ADAPTER_REPORT.json"
+        )
+        s4_oracle = _json(
+            TEACHER_ANALYSIS / "TEACHER_S4_LOCAL_SCORE_ORACLE.json"
+        )
+        _assert_digest(
+            self,
+            s4_adapter,
+            S4_SCORE_ADAPTER_DIGEST_PREFIX,
+        )
+        s4_current = s4_oracle["current_local_result"]
+        self.assertEqual(s4_current["completed_levels"], 183)
+        self.assertEqual(
+            s4_current["completion_rate_percent"],
+            100.0,
+        )
+        self.assertEqual(
+            s4_current["official_rhae_score_percent"],
+            99.619936696,
+        )
+        self.assertEqual(
+            s4_current["official_rhae_score_percent"],
+            s3_current["official_rhae_score_percent"],
+        )
+        self.assertEqual(s4_current["error_count"], 0)
+        self.assertEqual(
+            s4_oracle["source"]["sample_zip_sha256"],
+            s3_oracle["source"]["sample_zip_sha256"],
+        )
+        self.assertEqual(
+            {
+                tuple(report["instruction_body_versions"])
+                for report in s4_adapter["reports"]
+            },
+            {("teacher-s4-source-hidden-free-graph-v1",)},
+        )
+        self.assertFalse(
+            s4_current["evaluation_provenance"][
                 "architecture_evidence_eligible"
             ]
         )

@@ -110,12 +110,17 @@ P10 current:
   S3 executes 10,733 actions with error 0 and strict WIN-distance decrease
   S3 local-oracle result is RHAE 99.619936696% (delta 0 vs S2)
   S3 full graph and closure report are byte-identical across two fresh runs
+  R5/S4 source/hidden-free Teacher closes 25 / 25 games and 183 / 183 levels
+  S4 target environment source/hidden read and decision count are both 0
+  S4 executes 10,733 actions with error 0 and strict WIN-distance decrease
+  S4 local-oracle result is RHAE 99.619936696% (delta 0 vs S3)
+  S4 full graph and closure report are byte-identical across two fresh runs
   fixed action sequence, replay position, and action ordinal decisions are absent
-  S0 through S3 are PASS; S4 through S6 are NOT_RUN
+  S0 through S4 are PASS; S5 and S6 are NOT_RUN
   Runtime Student P is unchanged and rendered-only 183 / 183 is NOT_PROVEN
   C2/C3 and negative-only probe work are frozen historical evidence
   the current block is
-  WB-S4-SOURCE-HIDDEN-STATE-SUBTRACTION
+  WB-S5-RENDERED-ONLY-RUNTIME-P-COMPILATION
 ```
 
 ### P10で許可される作業

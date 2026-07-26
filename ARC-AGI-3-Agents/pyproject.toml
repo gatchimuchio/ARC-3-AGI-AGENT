@@ -61,6 +61,9 @@ arc3-teacher-s2-score-adapter = "arc3_agi_agent.teacher.s2_score_adapter:main"
 arc3-compile-s3-graph = "arc3_agi_agent.teacher.s3_graph_compiler:main"
 arc3-teacher-s3-execute = "arc3_agi_agent.teacher.s3_graph_executor:main"
 arc3-teacher-s3-score-adapter = "arc3_agi_agent.teacher.s3_score_adapter:main"
+arc3-compile-s4-graph = "arc3_agi_agent.teacher.s4_graph_compiler:main"
+arc3-teacher-s4-execute = "arc3_agi_agent.teacher.s4_graph_executor:main"
+arc3-teacher-s4-score-adapter = "arc3_agi_agent.teacher.s4_score_adapter:main"
 
 [build-system]
 requires = ["setuptools>=77"]
