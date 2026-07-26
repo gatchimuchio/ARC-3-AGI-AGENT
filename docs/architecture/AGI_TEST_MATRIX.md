@@ -17,7 +17,10 @@
   `test_s5_execution_trace.py`,
   `test_s5_rendered_runtime.py`,
   `test_s6_generalization.py`,
-  `test_p11_release_state.py`
+  `test_p11_release_state.py`,
+  `test_generic_memory_p12.py`,
+  `test_generic_runtime_p12.py`,
+  `test_genericity_p12.py`
 
 ## 現行証拠
 

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import ctypes
 import gc
 import hashlib
 import json
@@ -18,7 +19,7 @@ import time
 import tracemalloc
 from dataclasses import replace
 from pathlib import Path
-from typing import Mapping, Sequence
+from typing import Any, Mapping, Sequence
 
 from .competition_contract import run_competition_contract_dry_run
 from .generic_compute import (
@@ -143,6 +144,66 @@ def _environment_manifest() -> dict[str, object]:
         "executable_sha256": _sha256(Path(sys.executable)),
         "python_hash_seed": os.getenv("PYTHONHASHSEED", "UNSET"),
     }
+
+
+def _process_rss_bytes() -> dict[str, object]:
+    if sys.platform == "win32":
+        class ProcessMemoryCounters(ctypes.Structure):
+            _fields_ = [
+                ("cb", ctypes.c_ulong),
+                ("page_fault_count", ctypes.c_ulong),
+                ("peak_working_set_size", ctypes.c_size_t),
+                ("working_set_size", ctypes.c_size_t),
+                ("quota_peak_paged_pool_usage", ctypes.c_size_t),
+                ("quota_paged_pool_usage", ctypes.c_size_t),
+                ("quota_peak_non_paged_pool_usage", ctypes.c_size_t),
+                ("quota_non_paged_pool_usage", ctypes.c_size_t),
+                ("pagefile_usage", ctypes.c_size_t),
+                ("peak_pagefile_usage", ctypes.c_size_t),
+            ]
+
+        counters = ProcessMemoryCounters()
+        counters.cb = ctypes.sizeof(ProcessMemoryCounters)
+        libraries: Any = getattr(ctypes, "windll")
+        get_current_process = libraries.kernel32.GetCurrentProcess
+        get_current_process.restype = ctypes.c_void_p
+        get_process_memory_info = libraries.psapi.GetProcessMemoryInfo
+        get_process_memory_info.argtypes = (
+            ctypes.c_void_p,
+            ctypes.POINTER(ProcessMemoryCounters),
+            ctypes.c_ulong,
+        )
+        get_process_memory_info.restype = ctypes.c_int
+        process = get_current_process()
+        measured = get_process_memory_info(
+            process,
+            ctypes.byref(counters),
+            counters.cb,
+        )
+        if not measured:
+            raise OSError("P12_WINDOWS_RSS_MEASUREMENT_FAILED")
+        return {
+            "current_bytes": int(counters.working_set_size),
+            "peak_bytes": int(counters.peak_working_set_size),
+            "method": "GetProcessMemoryInfo",
+        }
+    status_path = Path("/proc/self/status")
+    if status_path.is_file():
+        values: dict[str, int] = {}
+        for line in status_path.read_text(encoding="utf-8").splitlines():
+            if line.startswith(("VmRSS:", "VmHWM:")):
+                key, raw = line.split(":", 1)
+                fields = raw.split()
+                if len(fields) != 2 or fields[1] != "kB":
+                    raise ValueError("P12_PROC_RSS_FORMAT_INVALID")
+                values[key] = int(fields[0]) * 1024
+        if {"VmRSS", "VmHWM"}.issubset(values):
+            return {
+                "current_bytes": values["VmRSS"],
+                "peak_bytes": values["VmHWM"],
+                "method": "/proc/self/status",
+            }
+    raise OSError("P12_RSS_MEASUREMENT_UNAVAILABLE")
 
 
 def _artifact(
@@ -1634,6 +1695,7 @@ def resource_package_security(
 ) -> dict[str, object]:
     action_latencies: list[float] = []
     trace_storage_bytes = 0
+    rss_before = _process_rss_bytes()
     tracemalloc.start()
     cold_started = time.perf_counter()
     body = HybridRelationalInstructionBody()
@@ -1660,6 +1722,7 @@ def resource_package_security(
     p95 = sorted_latencies[p95_index]
     _, peak_memory_bytes = tracemalloc.get_traced_memory()
     tracemalloc.stop()
+    rss_after = _process_rss_bytes()
     with tempfile.TemporaryDirectory(prefix="arc3-p12-package-") as temp:
         first = Path(temp) / "generic-runtime-a.zip"
         second = Path(temp) / "generic-runtime-b.zip"
@@ -1724,6 +1787,9 @@ def resource_package_security(
         "RES-001": bool(action_latencies)
         and model_load_seconds >= 0.0
         and peak_memory_bytes > 0
+        and _as_int(rss_after["current_bytes"], "P12_CURRENT_RSS_BYTES") > 0
+        and _as_int(rss_after["peak_bytes"], "P12_PEAK_RSS_BYTES")
+        >= _as_int(rss_after["current_bytes"], "P12_CURRENT_RSS_BYTES")
         and package.size_bytes > 0,
         "RES-002": all(
             report.final_state == "WIN"
@@ -1748,6 +1814,10 @@ def resource_package_security(
         "per_action_latency_seconds": {"p50": p50, "p95": p95},
         "total_runtime_seconds": total_seconds,
         "peak_traced_memory_bytes": peak_memory_bytes,
+        "process_rss": {
+            "before": rss_before,
+            "after": rss_after,
+        },
         "trace_storage_bytes": trace_storage_bytes,
         "api_retry_budget": {
             "429": 3,

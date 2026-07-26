@@ -8,6 +8,16 @@
 - current correction phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
 - official API / Competition / Kaggle: forbidden
 
+Package内5文書の保持先:
+
+| Source entry | Repository disposition |
+|---|---|
+| `00_ARC3_初回監査訂正と差戻し一覧_rev1.md` | 本監査書のclaim訂正と`O-001`〜`O-018` |
+| `01_ARC3_AGI修正戦略_rev1.md` | `P12_PRE_OFFICIAL_GENERICITY_STRATEGY.md` |
+| `02_Codex実装修正指示書_rev1.md` | `AGENTS.md`、P12実装、machine-readable reports |
+| `03_ARC3_AGI受入仕様書_rev1.md` | `ARC3_AGI_ACCEPTANCE_SPEC_REV1.md` |
+| `ARC3_AGI_監査修正統合版_rev1.md` | authority順序とP12 final gate |
+
 ## 1. 訂正後の主張
 
 ```text
