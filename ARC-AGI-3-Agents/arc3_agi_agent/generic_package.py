@@ -16,6 +16,7 @@ GENERIC_RUNTIME_MODULES = (
     "generic_learning.py",
     "generic_memory.py",
     "generic_runtime.py",
+    "generic_structural.py",
     "generic_types.py",
     "schema.py",
     "sealed_client.py",

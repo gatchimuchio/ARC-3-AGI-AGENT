@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from typing import Sequence
 
 from .generic_memory import MemoryAuthorization, MemoryMutationProposal, MemoryView
+from .generic_structural import infer_relational_rewrite_state
 from .generic_types import (
     GateResult,
     GenericCandidate,
@@ -218,6 +219,11 @@ class GenericHDSJudgementSubject:
         default_factory=dict,
         init=False,
     )
+    _selector_deltas: dict[int, int] = field(
+        default_factory=dict,
+        init=False,
+    )
+    _value_actions: set[int] = field(default_factory=set, init=False)
     _last_question: str = field(
         default="What current relation can safely advance the delegated goal?",
         init=False,
@@ -387,6 +393,58 @@ class GenericHDSJudgementSubject:
             - 0.85 * candidate.expected_risk
             - 0.1 * candidate.uncertainty
         )
+
+    def _relational_rewrite_candidate(
+        self,
+        observation: GenericObservation,
+        candidates: Sequence[GenericCandidate],
+    ) -> GenericCandidate | None:
+        if not observation.rendered_layers:
+            return None
+        state = infer_relational_rewrite_state(
+            observation.rendered_layers[-1]
+        )
+        if state is None or any(
+            item.descriptor.target_role is not None for item in candidates
+        ):
+            return None
+
+        by_action: dict[int, GenericCandidate] = {}
+        for candidate in candidates:
+            by_action.setdefault(candidate.descriptor.action_id, candidate)
+        selected_action: int | None = None
+        if state.selected_matches and not state.all_matches:
+            forward = tuple(
+                action_id
+                for action_id, delta in self._selector_deltas.items()
+                if delta == 1 and action_id in by_action
+            )
+            if forward:
+                selected_action = min(forward)
+        elif not state.selected_matches:
+            available_value_actions = tuple(
+                action_id
+                for action_id in self._value_actions
+                if action_id in by_action
+            )
+            if available_value_actions:
+                selected_action = min(available_value_actions)
+        if selected_action is None:
+            classified = {
+                *self._selector_deltas,
+                *self._value_actions,
+            }
+            selected_action = next(
+                (
+                    candidate.descriptor.action_id
+                    for candidate in candidates
+                    if candidate.descriptor.action_id not in classified
+                ),
+                None,
+            )
+        if selected_action is None:
+            return None
+        return by_action[selected_action]
 
     def judge(
         self,
@@ -565,14 +623,25 @@ class GenericHDSJudgementSubject:
                 if item.status in {"FAIL", "SUSPEND"}
             }
             if not blocking_gate_ids and safe_candidates:
-                selected = max(
+                # Preserve C's deterministic evidence ranking when scores tie.
+                # A digest tie-break makes equivalent novel probes look random
+                # and can repeatedly skip the first role-bound affordance.
+                selected = self._relational_rewrite_candidate(
+                    observation,
                     safe_candidates,
-                    key=lambda item: (
-                        self._candidate_score(item, purpose=frame.purpose),
-                        -item.expected_risk,
-                        item.candidate_id,
-                    ),
                 )
+                if selected is None:
+                    selected = max(
+                        enumerate(safe_candidates),
+                        key=lambda indexed: (
+                            self._candidate_score(
+                                indexed[1],
+                                purpose=frame.purpose,
+                            ),
+                            -indexed[1].expected_risk,
+                            -indexed[0],
+                        ),
+                    )[1]
                 reproduced = has_memory_evidence and (
                     bool(
                     set(selected.provenance).intersection(
@@ -793,11 +862,56 @@ class GenericHDSJudgementSubject:
             category = "FAILURE"
         elif progress_delta > 0 or after.terminal_state == "WIN":
             category = "PROGRESS"
-        elif after.signature == before.signature:
+        elif (
+            after.signature == before.signature
+            or "NO_VISIBLE_CHANGE" in after.visible_effects
+        ):
             category = "NO_EFFECT"
         else:
             category = "VISIBLE_CHANGE"
         effects = set(after.visible_effects)
+        if before.rendered_layers and after.rendered_layers:
+            before_rewrite = infer_relational_rewrite_state(
+                before.rendered_layers[-1]
+            )
+            after_rewrite = infer_relational_rewrite_state(
+                after.rendered_layers[-1]
+            )
+            if (
+                before_rewrite is not None
+                and after_rewrite is not None
+                and before_rewrite.sequence_length
+                == after_rewrite.sequence_length
+            ):
+                action_id = candidate.descriptor.action_id
+                if (
+                    before_rewrite.output_shapes
+                    == after_rewrite.output_shapes
+                    and before_rewrite.selected_index
+                    != after_rewrite.selected_index
+                ):
+                    raw_delta = (
+                        after_rewrite.selected_index
+                        - before_rewrite.selected_index
+                    ) % before_rewrite.sequence_length
+                    delta = (
+                        -1
+                        if raw_delta
+                        == before_rewrite.sequence_length - 1
+                        else raw_delta
+                    )
+                    self._selector_deltas[action_id] = delta
+                    self._value_actions.discard(action_id)
+                    effects.add("STRUCTURAL_SELECTION_CHANGE")
+                elif (
+                    before_rewrite.selected_index
+                    == after_rewrite.selected_index
+                    and before_rewrite.output_shapes
+                    != after_rewrite.output_shapes
+                ):
+                    self._value_actions.add(action_id)
+                    self._selector_deltas.pop(action_id, None)
+                    effects.add("STRUCTURAL_VALUE_CHANGE")
         if progress_delta > 0:
             effects.add("LEVEL_PROGRESS")
         if after.terminal_state == "GAME_OVER":

@@ -99,7 +99,16 @@ def _components(
                     ):
                         visited.add((next_y, next_x))
                         queue.append((next_y, next_x))
-            output.append(tuple(sorted(cells)))
+            ordered_cells = tuple(sorted(cells))
+            if all(
+                cell_y in {0, height - 1}
+                or cell_x in {0, width - 1}
+                for cell_y, cell_x in ordered_cells
+            ):
+                # Border-only components are rendered interface evidence, not
+                # board affordances. They remain observable through effects.
+                continue
+            output.append(ordered_cells)
     output.sort(
         key=lambda item: (
             -len(item),
@@ -141,20 +150,16 @@ def represent_observation(
         centroids.append((centroid_y, centroid_x))
         shape_signature, _, _, _ = _component_shape(cells)
         area = len(cells)
-        target_y, target_x = min(
-            cells,
-            key=lambda item: (
-                (item[0] - centroid_y) ** 2
-                + (item[1] - centroid_x) ** 2,
-                item[0],
-                item[1],
-            ),
-        )
+        # The center of a rendered component is a stronger generic pointer
+        # affordance than an arbitrary colored edge cell.  It also remains
+        # role-relative when the component is hollow or multicolored.
+        target_y = round(centroid_y)
+        target_x = round(centroid_x)
         if area == 1:
             area_bucket = "point"
         elif area <= 4:
             area_bucket = "small"
-        elif area <= 16:
+        elif area <= 64:
             area_bucket = "medium"
         else:
             area_bucket = "large"
@@ -252,6 +257,12 @@ def action_descriptors(
 
     payload_schema = dict(observation.action_payload_schema)
     descriptors: list[ActionDescriptor] = []
+    matrix = (
+        observation.rendered_layers[-1]
+        if observation.rendered_layers
+        else ()
+    )
+    components = _components(matrix)[:32]
     for ordinal, action_id in enumerate(observation.available_actions):
         fields = payload_schema.get(action_id, ())
         if set(fields) == {"x", "y"}:
@@ -260,13 +271,13 @@ def action_descriptors(
                     representation.roles,
                     key=lambda role: (
                         {
-                            "point": 0,
+                            "medium": 0,
                             "small": 1,
-                            "medium": 2,
+                            "point": 2,
                             "large": 3,
                         }.get(role.area_bucket, 4),
+                        role.area_rank,
                         -role.neighbor_count,
-                        -role.area_rank,
                         role.role_id,
                     ),
                 )
@@ -283,22 +294,79 @@ def action_descriptors(
                     target_y=32,
                 ),
             )
+            role_anchors: list[
+                tuple[ObjectRole, tuple[tuple[str, int, int], ...]]
+            ] = []
             for role in targets[:32]:
-                descriptors.append(
-                    ActionDescriptor(
-                        action_id=action_id,
-                        surface_ordinal=ordinal,
-                        semantic_key=(
-                            f"surface:{ordinal}:target:"
-                            + ":".join(role.semantic_tokens())
-                        ),
-                        payload_items=(
-                            ("x", role.target_x),
-                            ("y", role.target_y),
-                        ),
-                        target_role=role.role_id,
-                    )
+                cells = (
+                    components[role.area_rank]
+                    if role.area_rank < len(components)
+                    else ()
                 )
+                if cells:
+                    centroid_y = sum(y for y, _ in cells) / len(cells)
+                    centroid_x = sum(x for _, x in cells) / len(cells)
+                    nearest_y, nearest_x = min(
+                        cells,
+                        key=lambda item: (
+                            (item[0] - centroid_y) ** 2
+                            + (item[1] - centroid_x) ** 2,
+                            item[0],
+                            item[1],
+                        ),
+                    )
+                else:
+                    nearest_x = role.target_x
+                    nearest_y = role.target_y
+                raw_anchors = (
+                    ("center", role.target_x, role.target_y),
+                    ("interior", nearest_x, nearest_y),
+                    ("north", role.target_x, role.target_y - 1),
+                    ("south", role.target_x, role.target_y + 1),
+                    ("west", role.target_x - 1, role.target_y),
+                    ("east", role.target_x + 1, role.target_y),
+                )
+                seen_coordinates: set[tuple[int, int]] = set()
+                role_anchor_values: list[tuple[str, int, int]] = []
+                for anchor_name, target_x, target_y in raw_anchors:
+                    coordinate = (
+                        max(0, min(63, target_x)),
+                        max(0, min(63, target_y)),
+                    )
+                    if coordinate in seen_coordinates:
+                        continue
+                    seen_coordinates.add(coordinate)
+                    role_anchor_values.append(
+                        (anchor_name, coordinate[0], coordinate[1])
+                    )
+                role_anchors.append((role, tuple(role_anchor_values)))
+            max_anchor_count = max(
+                (len(anchors) for _, anchors in role_anchors),
+                default=0,
+            )
+            for anchor_index in range(max_anchor_count):
+                for role_index, (role, anchors) in enumerate(role_anchors):
+                    if anchor_index > 0 and role_index >= 8:
+                        continue
+                    if anchor_index >= len(anchors):
+                        continue
+                    anchor_name, target_x, target_y = anchors[anchor_index]
+                    descriptors.append(
+                        ActionDescriptor(
+                            action_id=action_id,
+                            surface_ordinal=ordinal,
+                            semantic_key=(
+                                f"surface:{ordinal}:target:"
+                                + ":".join(role.semantic_tokens())
+                                + f":anchor:{anchor_name}"
+                            ),
+                            payload_items=(
+                                ("x", target_x),
+                                ("y", target_y),
+                            ),
+                            target_role=role.role_id,
+                        )
+                    )
         else:
             descriptors.append(
                 ActionDescriptor(
@@ -438,11 +506,19 @@ class SymbolicRelationalInstructionBody:
                 descriptor, records
             )
             observed = success + hazard + no_effect + visible_change > 0.0
+            continue_visible_effect = (
+                visible_change > 0.0
+                and hazard == 0.0
+                and no_effect == 0.0
+                and sample_count <= 4.0
+            )
             progress = _bounded(0.15 + 0.75 * success - 0.2 * no_effect)
             risk = _bounded(0.08 + 0.85 * hazard)
             information = _bounded(
                 0.9
                 if not observed
+                else 1.0
+                if continue_visible_effect
                 else (
                     0.2
                     + no_effect * 0.3
@@ -576,6 +652,12 @@ class ParametricRelationalInstructionBody:
             if success + hazard + no_effect + visible_change > 0.0
             else 0.0
         )
+        continue_visible_effect = (
+            visible_change > 0.0
+            and hazard == 0.0
+            and no_effect == 0.0
+            and sample_count <= 4.0
+        )
         ordinal = descriptor.surface_ordinal / max(1, descriptor_count - 1)
         return (
             (
@@ -587,8 +669,7 @@ class ParametricRelationalInstructionBody:
                 hazard,
                 no_effect,
                 max(
-                    visible_change
-                    * min(1.0, 3.0 / max(1.0, sample_count)),
+                    1.0 if continue_visible_effect else 0.0,
                     1.0 - observed,
                 ),
             ),
@@ -862,6 +943,7 @@ class GenericComputeSubject:
             observation,
             goal_tokens=command.goal_tokens,
         )
+        descriptors = action_descriptors(observation, representation)
         stages: list[Layer0StageTrace] = [
             Layer0StageTrace(
                 stage="represent",
@@ -877,6 +959,10 @@ class GenericComputeSubject:
                         *command.goal_tokens,
                         *representation.topology_tokens,
                         *representation.relations,
+                        *(
+                            descriptor.semantic_key
+                            for descriptor in descriptors
+                        ),
                     )
                 )
             )
@@ -893,7 +979,7 @@ class GenericComputeSubject:
                         }
                     )[:24],
                     semantic_tokens=query_tokens,
-                    limit=32,
+                    limit=128,
                 )
             )
             records = memory_query.records
@@ -911,12 +997,15 @@ class GenericComputeSubject:
             )
         )
 
-        descriptors = action_descriptors(observation, representation)
         instruction_result = instruction_body.query(
             representation,
             descriptors,
             records,
         )
+        descriptor_order = {
+            descriptor: index
+            for index, descriptor in enumerate(descriptors)
+        }
         ranked_predictions = tuple(
             sorted(
                 instruction_result.predictions,
@@ -924,7 +1013,7 @@ class GenericComputeSubject:
                     -item.prior,
                     item.hazard_likelihood,
                     -item.information_gain,
-                    item.descriptor.semantic_key,
+                    descriptor_order[item.descriptor],
                 ),
             )
         )

@@ -128,10 +128,49 @@ class SampleFrameAdapter:
         current_view = current_projection or self.project(current)
         previous_view = previous_projection or self.project(previous)
         effects: set[str] = set()
-        if current_view.signature == previous_view.signature:
+        current_render = current_view.layers[-1] if current_view.layers else ()
+        previous_render = (
+            previous_view.layers[-1] if previous_view.layers else ()
+        )
+        if current_render == previous_render:
             effects.add("NO_VISIBLE_CHANGE")
         else:
-            effects.add("VISIBLE_STATE_CHANGE")
+            same_shape = (
+                len(current_render) == len(previous_render)
+                and bool(current_render)
+                and all(
+                    len(current_row) == len(previous_row)
+                    for current_row, previous_row in zip(
+                        current_render,
+                        previous_render,
+                    )
+                )
+            )
+            changed_cells = (
+                tuple(
+                    (vertical, horizontal)
+                    for vertical, (current_row, previous_row) in enumerate(
+                        zip(current_render, previous_render)
+                    )
+                    for horizontal, (current_cell, previous_cell) in enumerate(
+                        zip(current_row, previous_row)
+                    )
+                    if current_cell != previous_cell
+                )
+                if same_shape
+                else ()
+            )
+            height = len(current_render)
+            width = len(current_render[0]) if current_render else 0
+            interface_only = bool(changed_cells) and all(
+                vertical in {0, height - 1}
+                or horizontal in {0, width - 1}
+                for vertical, horizontal in changed_cells
+            )
+            if interface_only:
+                effects.update(("INTERFACE_ONLY_CHANGE", "NO_VISIBLE_CHANGE"))
+            else:
+                effects.add("VISIBLE_STATE_CHANGE")
         if current.levels_completed > previous.levels_completed:
             effects.add("LEVEL_PROGRESS")
         if current.full_reset:

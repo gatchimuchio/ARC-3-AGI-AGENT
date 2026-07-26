@@ -497,7 +497,10 @@ class GenericAGIRuntime:
         selected_hds = (
             self.hds_configuration
             if isinstance(self.hds_configuration, HDSConfiguration)
-            else HDSConfiguration(resource_budget=self.configuration.max_cycles)
+            else HDSConfiguration(
+                resource_budget=self.configuration.max_cycles,
+                stop_after_no_progress=self.configuration.max_cycles,
+            )
         )
         self.memory = SemanticMemory(self.authority_token)
         self.memory.seed_sealed(

@@ -118,6 +118,7 @@ class ObjectRole:
 
     def semantic_tokens(self) -> tuple[str, ...]:
         return (
+            f"role-rank:{self.area_rank}",
             f"area:{self.area_bucket}",
             f"shape:{self.shape_signature}",
             f"vertical:{self.relative_vertical}",
