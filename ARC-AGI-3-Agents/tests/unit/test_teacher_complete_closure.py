@@ -423,6 +423,14 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             ],
             "PASS_183_OF_183",
         )
+        self.assertEqual(
+            grammar["proof_status"]["rendered_only_execution"],
+            "PASS_183_OF_183",
+        )
+        self.assertEqual(
+            grammar["proof_status"]["generalization"],
+            "MEASURED_NOT_PROVEN",
+        )
         self.assertEqual(matrix["stage_summary"]["S0"]["status"], "PASS")
         self.assertEqual(
             matrix["source_or_hidden_state_dependent_count"],
@@ -479,12 +487,24 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             matrix["s2_identity_routing_dependent_count"],
             183,
         )
-        for stage in ("S5", "S6"):
-            self.assertEqual(
-                matrix["stage_summary"][stage]["status"],
-                "NOT_RUN",
-            )
-        self.assertFalse(runtime["compilation"]["runtime_p_modified"])
+        self.assertEqual(
+            matrix["stage_summary"]["S5"]["status"],
+            "PASS",
+        )
+        self.assertEqual(
+            matrix["stage_summary"]["S5"]["completed_levels"],
+            183,
+        )
+        self.assertEqual(
+            matrix["stage_summary"]["S6"]["status"],
+            "MEASURED",
+        )
+        self.assertEqual(
+            matrix["stage_summary"]["S6"]["measurement_count"],
+            14_336,
+        )
+        self.assertEqual(matrix["generalization_proven_count"], 0)
+        self.assertTrue(runtime["compilation"]["runtime_p_modified"])
         self.assertEqual(
             runtime["claims"]["source_causal_semantics_183"],
             "PASS",
@@ -511,15 +531,19 @@ class TeacherCompleteClosureTests(unittest.TestCase):
         )
         self.assertEqual(
             runtime["compilation"]["first_required_stage"],
-            "S5",
+            "P11",
         )
         self.assertEqual(
             runtime["compilation"]["status"],
-            "BLOCKED_BY_S5_RENDERED_ONLY_RUNTIME_P",
+            "ADOPTED_RENDERED_ONLY_RUNTIME_P",
         )
         self.assertEqual(
             runtime["claims"]["rendered_only_183"],
-            "NOT_PROVEN",
+            "PASS_183_OF_183",
+        )
+        self.assertEqual(
+            runtime["claims"]["generalization"],
+            "MEASURED_NOT_PROVEN",
         )
 
     def test_s1_graph_is_state_conditioned_and_closes_all_levels(

@@ -1,4 +1,4 @@
-"""Compile closed S0/S1/S2/S3/S4 evidence into structure artifacts.
+"""Compile closed S0 through S5 evidence into structure artifacts.
 
 The outputs are development artifacts.  They make every remaining privilege
 explicit and therefore must never be imported by the rendered-only Runtime
@@ -25,6 +25,11 @@ from .s3_graph_executor import load_s3_closure_report
 from .s3_graph_schema import load_s3_policy_graph
 from .s4_graph_executor import load_s4_closure_report
 from .s4_graph_schema import load_s4_policy_graph
+from .s6_generalization import (
+    S6_GENERALIZATION_DIGEST_PREFIX,
+    S6_GENERALIZATION_SCHEMA_VERSION,
+    S6_REQUIRED_FAMILIES,
+)
 from .source_semantics import (
     compile_source_causal_semantics,
     source_contract_index,
@@ -37,13 +42,13 @@ INTRA_GAME_GRAPH_SCHEMA_VERSION = (
     "arc3-intra-game-progression-graph-v2"
 )
 CROSS_GAME_GRAMMAR_SCHEMA_VERSION = (
-    "arc3-cross-game-structural-grammar-v6"
+    "arc3-cross-game-structural-grammar-v7"
 )
 PRIVILEGE_MATRIX_SCHEMA_VERSION = (
-    "arc3-privilege-subtraction-matrix-v6"
+    "arc3-privilege-subtraction-matrix-v8"
 )
 RUNTIME_P_REPORT_SCHEMA_VERSION = (
-    "arc3-runtime-p-compilation-report-v6"
+    "arc3-runtime-p-compilation-report-v8"
 )
 
 LEVEL_GRAPH_LEDGER_DIGEST_PREFIX = "arc3_level_solution_graph_ledger:"
@@ -191,6 +196,163 @@ def _without_digest(value: Mapping[str, Any]) -> dict[str, Any]:
     body = dict(value)
     body.pop("content_digest", None)
     return body
+
+
+def _load_digest_report(
+    path: Path,
+    *,
+    digest_prefix: str,
+) -> dict[str, Any]:
+    report = _json_object(path)
+    claimed = report.get("content_digest")
+    actual = digest_prefix + digest_object(_without_digest(report))
+    if claimed != actual:
+        raise ValueError(f"REPORT_CONTENT_DIGEST_INVALID:{path.name}")
+    return report
+
+
+def _s5_evidence_passes(
+    s5_closure_report: Mapping[str, Any] | None,
+    s5_policy_compilation_report: Mapping[str, Any] | None,
+    s5_runtime_audit: Mapping[str, Any] | None,
+) -> bool:
+    evidence = (
+        s5_closure_report,
+        s5_policy_compilation_report,
+        s5_runtime_audit,
+    )
+    if not any(item is not None for item in evidence):
+        return False
+    if not all(item is not None for item in evidence):
+        raise ValueError("S5_EVIDENCE_SET_INCOMPLETE")
+    assert s5_closure_report is not None
+    assert s5_policy_compilation_report is not None
+    assert s5_runtime_audit is not None
+    failures: list[str] = []
+    closure_requirements: Mapping[str, object] = {
+        "all_complete": True,
+        "complete_inventory": True,
+        "environment_count": 25,
+        "completed_environment_count": 25,
+        "completed_levels": 183,
+        "deterministic_seed": 0,
+        "error_count": 0,
+        "hds_stage_decision": "PASS",
+        "next_stage_authorized": True,
+        "runtime_student": True,
+        "operation_mode": "offline",
+    }
+    for key, expected in closure_requirements.items():
+        if s5_closure_report.get(key) != expected:
+            failures.append(f"S5_CLOSURE_INVALID:{key}")
+    if (
+        s5_policy_compilation_report.get("teacher_forced_error_count")
+        != 0
+        or s5_policy_compilation_report.get(
+            "quantized_teacher_forced_error_count"
+        )
+        != 0
+        or s5_policy_compilation_report.get(
+            "runtime_artifact_contains_training_examples"
+        )
+        is not False
+    ):
+        failures.append("S5_POLICY_COMPILATION_NOT_CLOSED")
+    runtime_policy_digest = s5_policy_compilation_report.get(
+        "runtime_policy_digest"
+    )
+    if (
+        runtime_policy_digest
+        != s5_closure_report.get("instruction_body_digest")
+    ):
+        failures.append("S5_POLICY_CLOSURE_DIGEST_MISMATCH")
+    if s5_runtime_audit.get("status") != "PASS":
+        failures.append("S5_RUNTIME_AUDIT_NOT_PASS")
+    if (
+        s5_runtime_audit.get("runtime_policy_digest")
+        != runtime_policy_digest
+    ):
+        failures.append("S5_AUDIT_POLICY_DIGEST_MISMATCH")
+    if (
+        s5_runtime_audit.get("closure_report_digest")
+        != s5_closure_report.get("content_digest")
+    ):
+        failures.append("S5_AUDIT_CLOSURE_DIGEST_MISMATCH")
+    if (
+        s5_runtime_audit.get("policy_compilation_report_digest")
+        != s5_policy_compilation_report.get("content_digest")
+    ):
+        failures.append("S5_AUDIT_COMPILATION_DIGEST_MISMATCH")
+    if failures:
+        raise ValueError(";".join(sorted(set(failures))))
+    return True
+
+
+def _s6_evidence_measured(
+    s6_generalization_report: Mapping[str, Any] | None,
+    s5_policy_compilation_report: Mapping[str, Any] | None,
+) -> bool:
+    if s6_generalization_report is None:
+        return False
+    if s5_policy_compilation_report is None:
+        raise ValueError("S6_REQUIRES_S5_POLICY_COMPILATION")
+    failures: list[str] = []
+    requirements: Mapping[str, object] = {
+        "schema_version": S6_GENERALIZATION_SCHEMA_VERSION,
+        "status": "COMPLETE",
+        "selected_record_count": 2048,
+        "covered_game_count": 25,
+        "covered_level_count": 183,
+        "required_family_count": len(S6_REQUIRED_FAMILIES),
+        "measured_family_count": len(S6_REQUIRED_FAMILIES),
+        "total_measurement_count": (
+            2048 * len(S6_REQUIRED_FAMILIES)
+        ),
+        "baseline_policy_action_error_count": 0,
+        "baseline_policy_pointer_error_count": 0,
+        "baseline_unknown_action_surface_count": 0,
+        "exception_count": 0,
+        "full_environment_completion_executed": False,
+        "semantic_ground_truth_available": False,
+        "generalization_claim": "MEASURED_NOT_PROVEN",
+        "hds_decision": "S6_MEASURED_HOLD_GENERALIZATION_CLAIM",
+    }
+    for key, expected in requirements.items():
+        if s6_generalization_report.get(key) != expected:
+            failures.append(f"S6_REPORT_INVALID:{key}")
+    if (
+        s6_generalization_report.get("source_runtime_policy_digest")
+        != s5_policy_compilation_report.get("runtime_policy_digest")
+    ):
+        failures.append("S6_POLICY_DIGEST_MISMATCH")
+    raw_families = s6_generalization_report.get("families")
+    if not isinstance(raw_families, Sequence) or isinstance(
+        raw_families,
+        (str, bytes, bytearray),
+    ):
+        failures.append("S6_FAMILY_REPORTS_INVALID")
+    else:
+        family_ids: list[str] = []
+        for raw_family in raw_families:
+            if not isinstance(raw_family, Mapping):
+                failures.append("S6_FAMILY_REPORT_INVALID")
+                continue
+            family_ids.append(str(raw_family.get("family_id", "")))
+            if raw_family.get("measurement_count") != 2048:
+                failures.append("S6_FAMILY_MEASUREMENT_COUNT_INVALID")
+            if raw_family.get("exception_count") != 0:
+                failures.append("S6_FAMILY_EXCEPTION_COUNT_NONZERO")
+            if raw_family.get("unknown_action_surface_count") != 0:
+                failures.append("S6_FAMILY_UNKNOWN_SURFACE_NONZERO")
+            if raw_family.get("predicted_unavailable_action_count") != 0:
+                failures.append("S6_FAMILY_UNAVAILABLE_ACTION_NONZERO")
+            if raw_family.get("semantic_correctness") != "NOT_AVAILABLE":
+                failures.append("S6_FAMILY_SEMANTIC_CLAIM_INVALID")
+        if tuple(family_ids) != S6_REQUIRED_FAMILIES:
+            failures.append("S6_FAMILY_INVENTORY_INVALID")
+    if failures:
+        raise ValueError(";".join(sorted(set(failures))))
+    return True
 
 
 def load_teacher_closure_report(path: Path) -> dict[str, Any]:
@@ -1607,8 +1769,10 @@ def compile_cross_game_structural_grammar(
     s3_closure_report: Mapping[str, Any],
     s4_policy_graph: Mapping[str, Any],
     s4_closure_report: Mapping[str, Any],
+    s5_evidence_pass: bool = False,
+    s6_generalization_report: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Bind S0 structure through source/hidden-free S4 execution."""
+    """Bind S0 structure through S5 and measured S6 evidence."""
 
     raw_graphs = _sequence(level_ledger.get("graphs"), "graphs")
     primitive_counts: Counter[str] = Counter()
@@ -1673,7 +1837,11 @@ def compile_cross_game_structural_grammar(
         "schema_version": CROSS_GAME_GRAMMAR_SCHEMA_VERSION,
         "development_only": True,
         "runtime_use": "FORBIDDEN",
-        "phase": "P10-R3-R5-S4-CROSS-GAME-STRUCTURAL-GRAMMAR",
+        "phase": (
+            "P10-R6-CROSS-GAME-STRUCTURAL-GRAMMAR"
+            if s6_generalization_report is not None
+            else "P10-R3-R5-S4-CROSS-GAME-STRUCTURAL-GRAMMAR"
+        ),
         "identity_free_artifact": True,
         "contains_literal_coordinates": False,
         "contains_game_or_level_routing": False,
@@ -1702,6 +1870,11 @@ def compile_cross_game_structural_grammar(
         ),
         "source_s4_closure_report_digest": s4_closure_report.get(
             "content_digest"
+        ),
+        "source_s6_generalization_report_digest": (
+            s6_generalization_report.get("content_digest")
+            if s6_generalization_report is not None
+            else None
         ),
         "primitive_registry": _primitive_registry(primitive_counts),
         "source_causal_role_registry": [
@@ -1818,8 +1991,16 @@ def compile_cross_game_structural_grammar(
             "literal_coordinate_free_execution": "PASS_183_OF_183",
             "identity_routing_free_execution": "PASS_183_OF_183",
             "source_hidden_state_free_execution": "PASS_183_OF_183",
-            "rendered_only_execution": "NOT_RUN",
-            "generalization": "NOT_RUN",
+            "rendered_only_execution": (
+                "PASS_183_OF_183"
+                if s5_evidence_pass
+                else "NOT_RUN"
+            ),
+            "generalization": (
+                "MEASURED_NOT_PROVEN"
+                if s6_generalization_report is not None
+                else "NOT_RUN"
+            ),
         },
     }
     serialized = json.dumps(body, ensure_ascii=False, sort_keys=True)
@@ -1849,9 +2030,24 @@ def compile_privilege_subtraction_matrix(
     s3_closure_report: Mapping[str, Any],
     s4_policy_graph: Mapping[str, Any],
     s4_closure_report: Mapping[str, Any],
+    s5_closure_report: Mapping[str, Any] | None = None,
+    s5_policy_compilation_report: Mapping[str, Any] | None = None,
+    s5_runtime_audit: Mapping[str, Any] | None = None,
+    s6_generalization_report: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Record the exact first failing subtraction stage for every graph."""
 
+    s5_pass = _s5_evidence_passes(
+        s5_closure_report,
+        s5_policy_compilation_report,
+        s5_runtime_audit,
+    )
+    s6_measured = _s6_evidence_measured(
+        s6_generalization_report,
+        s5_policy_compilation_report,
+    )
+    if s6_measured and not s5_pass:
+        raise ValueError("S6_REQUIRES_S5_CLOSURE")
     raw_graphs = _sequence(level_ledger.get("graphs"), "graphs")
     capabilities: list[dict[str, Any]] = []
     literal_count = 0
@@ -1897,6 +2093,17 @@ def compile_privilege_subtraction_matrix(
                     "task_game_level_identity": False,
                     "source_or_hidden_state": False,
                 },
+                "post_s5_dependencies": {
+                    **dict(dependencies),
+                    "fixed_action_sequence": False,
+                    "literal_coordinate": False,
+                    "task_game_level_identity": False,
+                    "source_or_hidden_state": False,
+                    "public_or_local_success_replay": False,
+                    "rendered_only": True,
+                }
+                if s5_pass
+                else None,
                 "stage_results": {
                     "S0": {
                         "status": "PASS",
@@ -1946,24 +2153,87 @@ def compile_privilege_subtraction_matrix(
                         ),
                     },
                     "S5": {
-                        "status": "NOT_RUN",
-                        "blocker": (
-                            "ANSWER_REPLAY_GRAPH_NOT_COMPILED_TO_RUNTIME_P"
+                        "status": "PASS" if s5_pass else "NOT_RUN",
+                        **(
+                            {
+                                "completed_levels": 1,
+                                "evidence_digest": s5_closure_report.get(
+                                    "content_digest"
+                                ),
+                                "runtime_policy_digest": (
+                                    s5_policy_compilation_report.get(
+                                        "runtime_policy_digest"
+                                    )
+                                ),
+                                "runtime_audit_digest": (
+                                    s5_runtime_audit.get("content_digest")
+                                ),
+                            }
+                            if (
+                                s5_pass
+                                and s5_closure_report is not None
+                                and s5_policy_compilation_report is not None
+                                and s5_runtime_audit is not None
+                            )
+                            else {
+                                "blocker": (
+                                    "ANSWER_REPLAY_GRAPH_NOT_COMPILED_TO_"
+                                    "RUNTIME_P"
+                                )
+                            }
                         ),
                     },
                     "S6": {
-                        "status": "NOT_RUN",
-                        "blocker": "S5_183_REQUIRED",
+                        "status": (
+                            "MEASURED" if s6_measured else "NOT_RUN"
+                        ),
+                        **(
+                            {
+                                "evidence_digest": (
+                                    s6_generalization_report.get(
+                                        "content_digest"
+                                    )
+                                ),
+                                "generalization_claim": (
+                                    "MEASURED_NOT_PROVEN"
+                                ),
+                                "semantic_correctness": "NOT_AVAILABLE",
+                            }
+                            if (
+                                s6_measured
+                                and s6_generalization_report is not None
+                            )
+                            else {
+                                "blocker": (
+                                    "S6_PERTURBATION_MEASUREMENT_NOT_RUN"
+                                    if s5_pass
+                                    else "S5_183_REQUIRED"
+                                )
+                            }
+                        ),
                     },
                 },
-                "first_unproven_stage": "S5",
+                "first_unproven_stage": "S6" if s5_pass else "S5",
+                "first_unproven_reason": (
+                    "S6_MEASURED_WITHOUT_SEMANTIC_GROUND_TRUTH"
+                    if s6_measured
+                    else (
+                        "S6_PERTURBATION_MEASUREMENT_NOT_RUN"
+                        if s5_pass
+                        else "S5_183_REQUIRED"
+                    )
+                ),
             }
         )
     body: dict[str, Any] = {
         "schema_version": PRIVILEGE_MATRIX_SCHEMA_VERSION,
         "development_only": True,
         "runtime_use": "FORBIDDEN",
-        "phase": "P10-R5-PRIVILEGE-SUBTRACTION",
+        "phase": (
+            "P10-R6-PRIVILEGE-SUBTRACTION"
+            if s6_measured
+            else "P10-R5-PRIVILEGE-SUBTRACTION"
+        ),
         "source_level_ledger_digest": level_ledger.get("content_digest"),
         "source_closure_digest": closure_report.get("content_digest"),
         "source_s1_policy_graph_digest": s1_policy_graph.get(
@@ -1989,6 +2259,26 @@ def compile_privilege_subtraction_matrix(
         ),
         "source_s4_closure_report_digest": s4_closure_report.get(
             "content_digest"
+        ),
+        "source_s5_closure_report_digest": (
+            s5_closure_report.get("content_digest")
+            if s5_closure_report is not None
+            else None
+        ),
+        "source_s5_policy_compilation_report_digest": (
+            s5_policy_compilation_report.get("content_digest")
+            if s5_policy_compilation_report is not None
+            else None
+        ),
+        "source_s5_runtime_audit_digest": (
+            s5_runtime_audit.get("content_digest")
+            if s5_runtime_audit is not None
+            else None
+        ),
+        "source_s6_generalization_report_digest": (
+            s6_generalization_report.get("content_digest")
+            if s6_generalization_report is not None
+            else None
         ),
         "stage_definitions": list(STAGE_DEFINITIONS),
         "stage_summary": {
@@ -2052,8 +2342,64 @@ def compile_privilege_subtraction_matrix(
                     )
                 ),
             },
-            "S5": {"status": "NOT_RUN", "completed_levels": 0},
-            "S6": {"status": "NOT_RUN", "measurement_count": 0},
+            "S5": {
+                "status": "PASS" if s5_pass else "NOT_RUN",
+                "completed_levels": (
+                    s5_closure_report.get("completed_levels", 0)
+                    if s5_closure_report is not None
+                    else 0
+                ),
+                "required_levels": 183,
+                "actions_executed": (
+                    s5_closure_report.get("actions_executed")
+                    if s5_closure_report is not None
+                    else None
+                ),
+                "runtime_policy_parameter_count": (
+                    s5_policy_compilation_report.get("parameter_count")
+                    if s5_policy_compilation_report is not None
+                    else None
+                ),
+                "runtime_audit_status": (
+                    s5_runtime_audit.get("status")
+                    if s5_runtime_audit is not None
+                    else "NOT_RUN"
+                ),
+            },
+            "S6": {
+                "status": (
+                    "MEASURED" if s6_measured else "NOT_RUN"
+                ),
+                "measurement_count": (
+                    s6_generalization_report.get(
+                        "total_measurement_count",
+                        0,
+                    )
+                    if s6_generalization_report is not None
+                    else 0
+                ),
+                "selected_record_count": (
+                    s6_generalization_report.get(
+                        "selected_record_count",
+                        0,
+                    )
+                    if s6_generalization_report is not None
+                    else 0
+                ),
+                "covered_level_count": (
+                    s6_generalization_report.get(
+                        "covered_level_count",
+                        0,
+                    )
+                    if s6_generalization_report is not None
+                    else 0
+                ),
+                "generalization_claim": (
+                    "MEASURED_NOT_PROVEN"
+                    if s6_measured
+                    else "NOT_MEASURED"
+                ),
+            },
         },
         "capability_count": len(capabilities),
         "s0_fixed_action_dependent_count": len(capabilities),
@@ -2069,7 +2415,13 @@ def compile_privilege_subtraction_matrix(
         "source_causal_semantic_complete_count": (
             level_ledger.get("causal_semantic_complete_count")
         ),
-        "rendered_only_proven_count": 0,
+        "rendered_only_proven_count": (
+            len(capabilities) if s5_pass else 0
+        ),
+        "generalization_measured_level_coverage": (
+            183 if s6_measured else 0
+        ),
+        "generalization_proven_count": 0,
         "capabilities": capabilities,
         "adoption_rule": (
             "A stage advances only after all 183 levels pass the same frozen "
@@ -2099,12 +2451,35 @@ def compile_runtime_p_report(
     s3_closure_report: Mapping[str, Any],
     s4_policy_graph: Mapping[str, Any],
     s4_closure_report: Mapping[str, Any],
+    s5_closure_report: Mapping[str, Any] | None = None,
+    s5_policy_compilation_report: Mapping[str, Any] | None = None,
+    s5_runtime_audit: Mapping[str, Any] | None = None,
+    s6_generalization_report: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
-    """Record S4 closure and hold before rendered-only P compilation."""
+    """Adopt S5 and record S6 without inflating generalization claims."""
 
+    s5_pass = _s5_evidence_passes(
+        s5_closure_report,
+        s5_policy_compilation_report,
+        s5_runtime_audit,
+    )
+    s6_measured = _s6_evidence_measured(
+        s6_generalization_report,
+        s5_policy_compilation_report,
+    )
+    if s6_measured and not s5_pass:
+        raise ValueError("S6_REQUIRES_S5_CLOSURE")
     body: dict[str, Any] = {
         "schema_version": RUNTIME_P_REPORT_SCHEMA_VERSION,
-        "phase": "P10-R5-S4-RUNTIME-P-COMPILATION",
+        "phase": (
+            "P10-R6-GENERALIZATION-MEASUREMENT-COMPILATION"
+            if s6_measured
+            else (
+                "P10-R5-S5-RENDERED-ONLY-RUNTIME-P-COMPILATION"
+                if s5_pass
+                else "P10-R5-S4-RUNTIME-P-COMPILATION"
+            )
+        ),
         "teacher_runtime_separation": "ENFORCED_BY_IMPORT_BOUNDARY",
         "inputs": {
             "level_solution_graph_ledger_digest": level_ledger.get(
@@ -2142,6 +2517,26 @@ def compile_runtime_p_report(
             ),
             "s4_closure_report_digest": s4_closure_report.get(
                 "content_digest"
+            ),
+            "s5_closure_report_digest": (
+                s5_closure_report.get("content_digest")
+                if s5_closure_report is not None
+                else None
+            ),
+            "s5_policy_compilation_report_digest": (
+                s5_policy_compilation_report.get("content_digest")
+                if s5_policy_compilation_report is not None
+                else None
+            ),
+            "s5_runtime_audit_digest": (
+                s5_runtime_audit.get("content_digest")
+                if s5_runtime_audit is not None
+                else None
+            ),
+            "s6_generalization_report_digest": (
+                s6_generalization_report.get("content_digest")
+                if s6_generalization_report is not None
+                else None
             ),
         },
         "teacher_status": {
@@ -2219,6 +2614,57 @@ def compile_runtime_p_report(
             "S4_policy_partition_count": s4_policy_graph.get(
                 "policy_partition_count"
             ),
+            "S5_closed_levels": (
+                s5_closure_report.get("completed_levels")
+                if s5_closure_report is not None
+                else 0
+            ),
+            "S5_error_count": (
+                s5_closure_report.get("error_count")
+                if s5_closure_report is not None
+                else None
+            ),
+            "S5_actions_executed": (
+                s5_closure_report.get("actions_executed")
+                if s5_closure_report is not None
+                else None
+            ),
+            "S5_runtime_policy_parameter_count": (
+                s5_policy_compilation_report.get("parameter_count")
+                if s5_policy_compilation_report is not None
+                else None
+            ),
+            "S5_teacher_forced_error_count": (
+                s5_policy_compilation_report.get(
+                    "teacher_forced_error_count"
+                )
+                if s5_policy_compilation_report is not None
+                else None
+            ),
+            "S5_runtime_audit_status": (
+                s5_runtime_audit.get("status")
+                if s5_runtime_audit is not None
+                else "NOT_RUN"
+            ),
+            "S6_measurement_status": (
+                "MEASURED" if s6_measured else "NOT_RUN"
+            ),
+            "S6_total_measurement_count": (
+                s6_generalization_report.get(
+                    "total_measurement_count",
+                    0,
+                )
+                if s6_generalization_report is not None
+                else 0
+            ),
+            "S6_covered_level_count": (
+                s6_generalization_report.get(
+                    "covered_level_count",
+                    0,
+                )
+                if s6_generalization_report is not None
+                else 0
+            ),
         },
         "runtime_student_target": {
             "allowed_inputs": [
@@ -2237,20 +2683,58 @@ def compile_runtime_p_report(
                 "ANSWER_OR_REPLAY",
             ],
         },
-        "compilation": {
-            "status": "BLOCKED_BY_S5_RENDERED_ONLY_RUNTIME_P",
-            "runtime_p_modified": False,
-            "emitted_runtime_rule_count": 0,
-            "adopted_graph_count": 0,
-            "first_required_stage": "S5",
-            "first_required_work": (
-                "Compile reusable structure from the answer-derived S4 "
-                "graph into identity-free Runtime Student P, then reproduce "
-                "all 183 levels without Teacher graph or answer/replay "
-                "lookup."
-            ),
-            "hds_decision": "PASS_S4_HOLD_RUNTIME_P",
-        },
+        "compilation": (
+            {
+                "status": "ADOPTED_RENDERED_ONLY_RUNTIME_P",
+                "runtime_p_modified": True,
+                "emitted_runtime_rule_count": 0,
+                "runtime_parameter_count": (
+                    s5_policy_compilation_report.get("parameter_count")
+                    if s5_policy_compilation_report is not None
+                    else None
+                ),
+                "adopted_graph_count": 183,
+                "s6_measurement_status": (
+                    "MEASURED" if s6_measured else "NOT_RUN"
+                ),
+                "first_required_stage": (
+                    "P11" if s6_measured else "S6"
+                ),
+                "first_required_work": (
+                    (
+                        "Freeze code, dependency, initial-state, seed, "
+                        "budget, regression, evidence, and package digests."
+                    )
+                    if s6_measured
+                    else (
+                        "Measure color, rotation, reflection, placement, "
+                        "count, order, and unseen-composition "
+                        "perturbations without weakening the "
+                        "rendered-only Runtime boundary."
+                    )
+                ),
+                "hds_decision": (
+                    "S6_MEASURED_HOLD_GENERALIZATION_CLAIM"
+                    if s6_measured
+                    else "PASS_S5_SAME_SAMPLE_HOLD_S6_GENERALIZATION"
+                ),
+            }
+            if s5_pass
+            else {
+                "status": "BLOCKED_BY_S5_RENDERED_ONLY_RUNTIME_P",
+                "runtime_p_modified": False,
+                "emitted_runtime_rule_count": 0,
+                "adopted_graph_count": 0,
+                "first_required_stage": "S5",
+                "first_required_work": (
+                    "Compile reusable structure from the answer-derived S4 "
+                    "graph into identity-free Runtime Student P, then "
+                    "reproduce all 183 levels without Teacher graph or "
+                    "answer/replay lookup."
+                ),
+                "hds_decision": "PASS_S4_HOLD_RUNTIME_P",
+            }
+        ),
         "claims": {
             "teacher_183_closure": "PASS",
             "graph_generation_183": "PASS",
@@ -2262,9 +2746,19 @@ def compile_runtime_p_report(
             "literal_coordinate_free_183": "PASS",
             "identity_routing_free_183": "PASS",
             "source_hidden_state_free_183": "PASS",
-            "generic_identity_free_183": "NOT_PROVEN",
-            "rendered_only_183": "NOT_PROVEN",
-            "generalization": "NOT_MEASURED",
+            "generic_identity_free_183": (
+                "PASS_SAME_SAMPLE_RUNTIME_INTERFACE"
+                if s5_pass
+                else "NOT_PROVEN"
+            ),
+            "rendered_only_183": (
+                "PASS_183_OF_183" if s5_pass else "NOT_PROVEN"
+            ),
+            "generalization": (
+                "MEASURED_NOT_PROVEN"
+                if s6_measured
+                else "NOT_MEASURED"
+            ),
         },
     }
     return {
@@ -2289,6 +2783,10 @@ def compile_solution_structure_artifacts(
     s3_closure_report_path: Path,
     s4_policy_graph_path: Path,
     s4_closure_report_path: Path,
+    s5_closure_report_path: Path | None = None,
+    s5_policy_compilation_report_path: Path | None = None,
+    s5_runtime_audit_path: Path | None = None,
+    s6_generalization_report_path: Path | None = None,
 ) -> dict[str, dict[str, Any]]:
     """Compile all five post-closure canonical structure artifacts."""
 
@@ -2310,6 +2808,58 @@ def compile_solution_structure_artifacts(
     s4_closure_report = load_s4_closure_report(
         s4_closure_report_path
     )
+    s5_paths = (
+        s5_closure_report_path,
+        s5_policy_compilation_report_path,
+        s5_runtime_audit_path,
+    )
+    if any(path is not None for path in s5_paths) and not all(
+        path is not None for path in s5_paths
+    ):
+        raise ValueError("S5_EVIDENCE_PATH_SET_INCOMPLETE")
+    s5_closure_report = (
+        _load_digest_report(
+            s5_closure_report_path,
+            digest_prefix="arc3_s5_rendered_runtime_closure:",
+        )
+        if s5_closure_report_path is not None
+        else None
+    )
+    s5_policy_compilation_report = (
+        _load_digest_report(
+            s5_policy_compilation_report_path,
+            digest_prefix="arc3_s5_runtime_policy_compilation:",
+        )
+        if s5_policy_compilation_report_path is not None
+        else None
+    )
+    s5_runtime_audit = (
+        _load_digest_report(
+            s5_runtime_audit_path,
+            digest_prefix="arc3_s5_runtime_boundary_audit:",
+        )
+        if s5_runtime_audit_path is not None
+        else None
+    )
+    s5_pass = _s5_evidence_passes(
+        s5_closure_report,
+        s5_policy_compilation_report,
+        s5_runtime_audit,
+    )
+    s6_generalization_report = (
+        _load_digest_report(
+            s6_generalization_report_path,
+            digest_prefix=S6_GENERALIZATION_DIGEST_PREFIX,
+        )
+        if s6_generalization_report_path is not None
+        else None
+    )
+    s6_measured = _s6_evidence_measured(
+        s6_generalization_report,
+        s5_policy_compilation_report,
+    )
+    if s6_measured and not s5_pass:
+        raise ValueError("S6_REQUIRES_S5_CLOSURE")
     if (
         s1_policy_graph.get("source_corpus_digest")
         != corpus.get("content_digest")
@@ -2373,6 +2923,8 @@ def compile_solution_structure_artifacts(
         s3_closure_report,
         s4_policy_graph,
         s4_closure_report,
+        s5_pass,
+        s6_generalization_report,
     )
     privilege_matrix = compile_privilege_subtraction_matrix(
         level_ledger,
@@ -2385,6 +2937,10 @@ def compile_solution_structure_artifacts(
         s3_closure_report,
         s4_policy_graph,
         s4_closure_report,
+        s5_closure_report,
+        s5_policy_compilation_report,
+        s5_runtime_audit,
+        s6_generalization_report,
     )
     runtime_p_report = compile_runtime_p_report(
         level_ledger=level_ledger,
@@ -2399,6 +2955,10 @@ def compile_solution_structure_artifacts(
         s3_closure_report=s3_closure_report,
         s4_policy_graph=s4_policy_graph,
         s4_closure_report=s4_closure_report,
+        s5_closure_report=s5_closure_report,
+        s5_policy_compilation_report=s5_policy_compilation_report,
+        s5_runtime_audit=s5_runtime_audit,
+        s6_generalization_report=s6_generalization_report,
     )
     return {
         "level_ledger": level_ledger,
@@ -2429,6 +2989,10 @@ def _parser() -> argparse.ArgumentParser:
     parser.add_argument("--s3-closure-report", type=Path, required=True)
     parser.add_argument("--s4-policy-graph", type=Path, required=True)
     parser.add_argument("--s4-closure-report", type=Path, required=True)
+    parser.add_argument("--s5-closure-report", type=Path)
+    parser.add_argument("--s5-policy-compilation-report", type=Path)
+    parser.add_argument("--s5-runtime-audit", type=Path)
+    parser.add_argument("--s6-generalization-report", type=Path)
     parser.add_argument("--output-dir", type=Path, required=True)
     return parser
 
@@ -2448,6 +3012,14 @@ def main() -> int:
         s3_closure_report_path=args.s3_closure_report,
         s4_policy_graph_path=args.s4_policy_graph,
         s4_closure_report_path=args.s4_closure_report,
+        s5_closure_report_path=args.s5_closure_report,
+        s5_policy_compilation_report_path=(
+            args.s5_policy_compilation_report
+        ),
+        s5_runtime_audit_path=args.s5_runtime_audit,
+        s6_generalization_report_path=(
+            args.s6_generalization_report
+        ),
     )
     for key, filename in OUTPUT_FILENAMES.items():
         _write_json(args.output_dir / filename, artifacts[key])
@@ -2479,6 +3051,12 @@ def main() -> int:
                 "S4_status": artifacts["privilege_matrix"][
                     "stage_summary"
                 ]["S4"]["status"],
+                "S5_status": artifacts["privilege_matrix"][
+                    "stage_summary"
+                ]["S5"]["status"],
+                "S6_status": artifacts["privilege_matrix"][
+                    "stage_summary"
+                ]["S6"]["status"],
                 "runtime_p_status": artifacts["runtime_p_report"][
                     "compilation"
                 ]["status"],

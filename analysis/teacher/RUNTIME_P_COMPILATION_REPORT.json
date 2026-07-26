@@ -2,33 +2,35 @@
   "claims": {
     "cross_game_structural_factorization": "PASS",
     "fixed_action_free_183": "PASS",
-    "generalization": "NOT_MEASURED",
-    "generic_identity_free_183": "NOT_PROVEN",
+    "generalization": "MEASURED_NOT_PROVEN",
+    "generic_identity_free_183": "PASS_SAME_SAMPLE_RUNTIME_INTERFACE",
     "graph_generation_183": "PASS",
     "identity_routing_free_183": "PASS",
     "intra_game_progression_158": "PASS",
     "literal_coordinate_free_183": "PASS",
-    "rendered_only_183": "NOT_PROVEN",
+    "rendered_only_183": "PASS_183_OF_183",
     "source_causal_semantics_183": "PASS",
     "source_hidden_state_free_183": "PASS",
     "success_hazard_contrast_183": "PASS_SOURCE_CONTROL_FLOW",
     "teacher_183_closure": "PASS"
   },
   "compilation": {
-    "adopted_graph_count": 0,
+    "adopted_graph_count": 183,
     "emitted_runtime_rule_count": 0,
-    "first_required_stage": "S5",
-    "first_required_work": "Compile reusable structure from the answer-derived S4 graph into identity-free Runtime Student P, then reproduce all 183 levels without Teacher graph or answer/replay lookup.",
-    "hds_decision": "PASS_S4_HOLD_RUNTIME_P",
-    "runtime_p_modified": false,
-    "status": "BLOCKED_BY_S5_RENDERED_ONLY_RUNTIME_P"
+    "first_required_stage": "P11",
+    "first_required_work": "Freeze code, dependency, initial-state, seed, budget, regression, evidence, and package digests.",
+    "hds_decision": "S6_MEASURED_HOLD_GENERALIZATION_CLAIM",
+    "runtime_p_modified": true,
+    "runtime_parameter_count": 4269485,
+    "s6_measurement_status": "MEASURED",
+    "status": "ADOPTED_RENDERED_ONLY_RUNTIME_P"
   },
-  "content_digest": "arc3_runtime_p_compilation_report:c0a6a19f8432f38c213edd9404de8fa13c60482ab6e05d15b43197df9b11d8f8",
+  "content_digest": "arc3_runtime_p_compilation_report:c596ba95d32b7354ae75e71eb7e14def5f276146bc7b98f26bd97c4e55750aed",
   "inputs": {
-    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:15aea7208178d406c13c66ee31573ef92c584523cd868364c6f6188f91b11348",
+    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:fe3b448431c59b3f549ccacf431c5d1a2d8ca73cc62dc78b56fc3cdf0bcfc579",
     "intra_game_progression_graph_digest": "arc3_intra_game_progression_graph:b56ef0fda12f043aa8571f85f26c4e515ddfe924f128596d2afc0977e836ebac",
     "level_solution_graph_ledger_digest": "arc3_level_solution_graph_ledger:1dac37c3b78092c31ca151ee7305a40d644c938bf942c6c9d8684cf474e1a281",
-    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:c0ac3882fd513e97c9c918dc716fcfa3bfbb116151c99d126803eb6049ea3323",
+    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:11360990555c00f843013050204f7a919b69aa35d6ad5aaec3cbbd7d091af782",
     "s1_closure_report_digest": "arc3_teacher_s1_state_conditioned_closure:f0ca09125c5c188cdd6d85e3cf499d955aeb824fbccda4461515540808763a24",
     "s1_policy_graph_digest": "arc3_teacher_s1_state_conditioned_policy_graph:3db9d0f4721a5933b320b7b8b1115dd4c745359199aa92901f7ce7e6fc4d82b4",
     "s2_closure_report_digest": "arc3_teacher_s2_role_relative_closure:3a57f1f9171753261342b29a1d9ce6046496c536e82b9bb4cab0b29ca5b4e728",
@@ -36,9 +38,13 @@
     "s3_closure_report_digest": "arc3_teacher_s3_global_identity_free_closure:aed663f7d569660d723223dd23e8bf6b8a603095987420db96e7b822308be7c2",
     "s3_policy_graph_digest": "arc3_teacher_s3_global_identity_free_policy_graph:8d4cd7049407d623201cef14f66cee9fb3f64fcfc2669b2ee6e5c9f9c9073c38",
     "s4_closure_report_digest": "arc3_teacher_s4_source_hidden_free_closure:9397d09cf97e1fdc29911946c2d4c9cb030adb4ccb20429c5a8cd68287921b00",
-    "s4_policy_graph_digest": "arc3_teacher_s4_source_hidden_free_policy_graph:f90244d55f56ee213d4b827a4759c10a412385163bafd09823983fcfc49c46a3"
+    "s4_policy_graph_digest": "arc3_teacher_s4_source_hidden_free_policy_graph:f90244d55f56ee213d4b827a4759c10a412385163bafd09823983fcfc49c46a3",
+    "s5_closure_report_digest": "arc3_s5_rendered_runtime_closure:6da4a6872eb37a14903827fc80abd3ea59b8d51f642398ab8cd607da12a68d67",
+    "s5_policy_compilation_report_digest": "arc3_s5_runtime_policy_compilation:6934cdf156c78cdbad33eb0df9122c87ee7fa613a1c60b52c2978d30af6ef170",
+    "s5_runtime_audit_digest": "arc3_s5_runtime_boundary_audit:ab41466b358fcafb891d80bfef2ac6fffa75ebfab688adb33ff5c884282b0d0e",
+    "s6_generalization_report_digest": "arc3_s6_perturbation_measurement:3642c6b8c4dcbb8b4279f97af6bac257d636b076c073f1de8afc7ade8f8d4f83"
   },
-  "phase": "P10-R5-S4-RUNTIME-P-COMPILATION",
+  "phase": "P10-R6-GENERALIZATION-MEASUREMENT-COMPILATION",
   "runtime_student_target": {
     "allowed_inputs": [
       "RENDERED_OBSERVATION",
@@ -56,7 +62,7 @@
       "ANSWER_OR_REPLAY"
     ]
   },
-  "schema_version": "arc3-runtime-p-compilation-report-v6",
+  "schema_version": "arc3-runtime-p-compilation-report-v8",
   "teacher_runtime_separation": "ENFORCED_BY_IMPORT_BOUNDARY",
   "teacher_status": {
     "S0_closed_levels": 183,
@@ -81,6 +87,15 @@
     "S4_policy_partition_count": 1,
     "S4_source_hidden_decision_count": 0,
     "S4_target_source_hidden_read_count": 0,
+    "S5_actions_executed": 10733,
+    "S5_closed_levels": 183,
+    "S5_error_count": 0,
+    "S5_runtime_audit_status": "PASS",
+    "S5_runtime_policy_parameter_count": 4269485,
+    "S5_teacher_forced_error_count": 0,
+    "S6_covered_level_count": 183,
+    "S6_measurement_status": "MEASURED",
+    "S6_total_measurement_count": 14336,
     "cross_game_source_causal_factorization": "PASS_183_OF_183",
     "intra_game_source_causal_edge_count": 158,
     "solution_graph_count": 183,

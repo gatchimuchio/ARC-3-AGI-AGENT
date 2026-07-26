@@ -1,7 +1,7 @@
 # AGI最小三構成 Test Matrix
 
-- current phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
-- last completed phase: `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE`
+- current phase: `P11_RELEASE_STATE_FREEZE`
+- last completed phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
 - current executable regression gates:
   `test_agi_minimum_three_audit.py`,
   `test_evidence_compiler.py`,
@@ -12,7 +12,11 @@
   `test_memory_subject_p6.py`,
   `test_pairwise_subject_p7.py`,
   `test_trinity_two_cycle_p8.py`,
-  `test_minimum_three_certificate_p9.py`
+  `test_minimum_three_certificate_p9.py`,
+  `test_s5_rendered_policy.py`,
+  `test_s5_rendered_runtime.py`,
+  `test_s6_generalization.py`,
+  `test_p11_release_state.py`
 
 ## 現行証拠
 
@@ -43,13 +47,15 @@
 | `T-P9-EIGHT-SUBSETS` | `CLAIM_MINIMUM_THREE` | `test_minimum_three_certificate_p9.py` | 8 subsetを重複なく実行しproper subset 7件FAIL、full set 1件PASS | 実装・実行済み |
 | `T-P9-EQUIVALENT-LEAK` | no functional equivalent | `test_minimum_three_certificate_p9.py` | 欠落C/J/Mの生成・判断・保持出力、field、fallback代行が0 | 実装・実行済み |
 | `T-P9-CERTIFICATE-REBUILD` | `CLAIM_MINIMUM_THREE` | `test_minimum_three_certificate_p9.py` | 5 artifactの内容・digest・再生成byteが一致 | 実装・実行済み |
+| `T-P10-S5-ALL-SAMPLES` | `CLAIM_SAMPLE_COMPLETE` | S5 closure/audit + `test_s5_rendered_policy.py`, `test_s5_rendered_runtime.py` | rendered-only 25/25 game・183/183 level・error 0、shortcut/authority audit PASS | 実装・実行済み |
+| `T-P10-S5-DETERMINISM` | sample reproducibility | `P10_REPRODUCIBILITY_AUDIT.json` | seed 0の全183 report二回がbyte一致 | 実行済み |
+| `T-P10-S6-MEASUREMENT` | `CLAIM_GENERALIZATION`境界 | `test_s6_generalization.py`, S6 report | 七摂動14,336件、exception 0、二回byte一致、claimは`MEASURED_NOT_PROVEN` | 実装・実行済み |
+| `T-P11-INITIAL-STATE` | P0/J0/M0 | `test_p11_release_state.py` | P digest、J authority count 0、M version/entry 0 | 実装・実行済み |
 
 ## 後続phaseの固定試験
 
 | Test ID | Primary claim | Phase | 必須反証条件 |
 |---|---|---|---|
-| `T-P10-ALL-SAMPLES` | `CLAIM_SAMPLE_COMPLETE` | P10 | 未完level、error、GAME_OVER、timeout、max-action停止でFAIL |
-| `T-P10-DETERMINISM` | sample reproducibility | P10 | 同一release stateでtrace/result差があればFAIL |
 | `T-P11-REBUILD` | `CLAIM_RELEASE_STATE_FIXED` | P11 | P0/J0/M0/dataset/compiler/package digest差でFAIL |
 
 ## claim昇格規則

@@ -295,8 +295,8 @@ P6 Memory Subject M                                 complete
 P7 Pairwise Subject Audit                           complete
 P8 Three-subject Two-cycle Trinity                  complete
 P9 Eight-subset Minimum Certificate                 complete
-P10 Complete ARC3 Sample Solving                    current
-P11 Release-state Freeze                            blocked by P10
+P10 Complete ARC3 Sample Solving                    complete
+P11 Release-state Freeze                            current
 P12 Official ARC Connection                        out of current request
 P13 Kaggle Paths                                    out of current request
 P14 Submission and Official-result Optimization    out of current request

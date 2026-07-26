@@ -15,6 +15,7 @@
 - [`architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md`](architecture/P8_TRINITY_TWO_CYCLE_CAUSALITY.md): P8のfull二周期循環・M因果・P/J/M分離証拠
 - [`architecture/P9_MINIMUM_THREE_CERTIFICATE.md`](architecture/P9_MINIMUM_THREE_CERTIFICATE.md): P9の全8部分集合・除去証人・最小三構成証明
 - [`architecture/P10_COMPLETE_SAMPLE_SOLVER.md`](architecture/P10_COMPLETE_SAMPLE_SOLVER.md): P10のOFFLINE solver、現行実測境界、失敗証拠
+- [`architecture/P11_RELEASE_STATE.md`](architecture/P11_RELEASE_STATE.md): P11のP0/J0/M0、再現回帰、package、release manifest固定
 - [`architecture/AGI_CLAIM_REGISTRY.md`](architecture/AGI_CLAIM_REGISTRY.md): claimごとのSUPPORTED/PARTIAL/REJECTED境界
 - [`roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md): P0〜P14の全文正本
 - [`roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`](roadmap/P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md): P10の全183解析復元、能力cluster開発、late identity subtraction補正

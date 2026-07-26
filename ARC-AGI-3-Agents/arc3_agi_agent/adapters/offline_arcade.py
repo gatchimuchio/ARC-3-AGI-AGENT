@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from typing import Any
 
@@ -17,6 +18,11 @@ from ..recovery import (
     HDSRecoveryDecision,
     RecoveryDirective,
     require_recovery_directive,
+)
+from ..s5_authority import (
+    S5PolicyResetDecision,
+    S5PolicyResetDirective,
+    require_s5_policy_reset_directive,
 )
 from ..sample_observation import SampleFrameAdapter, SampleFrameProjection
 from ..schema import digest_object
@@ -249,6 +255,63 @@ class OfflineArcadeEmissionInterface:
         )
         if not isinstance(raw, FrameDataRaw):
             raise RuntimeError("OFFLINE_SAMPLE_SEARCH_RESET_STEP_FAILED")
+        self._after = raw
+        self._after_projection = self.frame_adapter.project(raw)
+        return raw
+
+    def s5_policy_reset(
+        self,
+        directive: S5PolicyResetDirective,
+        decision: S5PolicyResetDecision,
+        *,
+        executor: str,
+    ) -> FrameDataRaw:
+        """Execute one rendered-policy RESET under a dedicated capability."""
+
+        if self.operation_mode is not OperationMode.OFFLINE:
+            raise AuthorityViolation("OFFLINE_SAMPLE_MODE_CHANGED")
+        if self._before is None:
+            raise AuthorityViolation("S5_RESET_OBSERVATION_NOT_BOUND")
+        if self._after is not None:
+            raise AuthorityViolation("S5_RESET_REQUIRES_NO_EMISSION_RESULT")
+        terminal_state = str(self._before.state.value).upper()
+        if terminal_state not in {"GAME_OVER", "NOT_FINISHED"}:
+            raise AuthorityViolation("S5_RESET_STATE_INVALID")
+        if terminal_state != decision.terminal_state:
+            raise AuthorityViolation("S5_RESET_STATE_MISMATCH")
+        if (
+            self.frame_adapter.signature(
+                self._before,
+                projection=self._before_projection,
+            )
+            != decision.observation_signature
+        ):
+            raise AuthorityViolation("S5_RESET_OBSERVATION_MISMATCH")
+        require_s5_policy_reset_directive(
+            directive,
+            decision,
+            executor=executor,
+        )
+        prior_scope = os.environ.get("ONLY_RESET_LEVELS")
+        os.environ["ONLY_RESET_LEVELS"] = "true"
+        try:
+            raw = self.environment.step(
+                GameAction.RESET,
+                data={},
+                reasoning={
+                    "authority": "HDS",
+                    "s5_reset_decision": decision.decision_id,
+                    "reset_reference": decision.reset_reference,
+                    "runtime_identity_routing_used": False,
+                },
+            )
+        finally:
+            if prior_scope is None:
+                os.environ.pop("ONLY_RESET_LEVELS", None)
+            else:
+                os.environ["ONLY_RESET_LEVELS"] = prior_scope
+        if not isinstance(raw, FrameDataRaw):
+            raise RuntimeError("OFFLINE_SAMPLE_S5_RESET_STEP_FAILED")
         self._after = raw
         self._after_projection = self.frame_adapter.project(raw)
         return raw

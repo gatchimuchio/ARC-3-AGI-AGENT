@@ -45,11 +45,14 @@
 - `TEACHER_S4_ORACLE_ADAPTER_REPORT.json`
 - `TEACHER_S4_LOCAL_SCORE_ORACLE.json`
 - `TEACHER_S4_LOCAL_SCORE_ORACLE.md`
+- `S5_RENDERED_POLICY_TRAINING_CORPUS.json`
+- `S5_RENDERED_POLICY_TRAINING_CORPUS.npz`
+- `S5_RUNTIME_P_COMPILATION_REPORT.json`
 
-現状はS0〜S4 Teacherが183/183です。S5〜S6およびrendered-only Runtime
-Studentは未達です。S4は固定action列、literal target、明示的な
-task/game/level ID routing、source/hidden runtime読取を除去しましたが、
-answer/replay由来のexact graphへの依存を残します。
+S0〜S4 TeacherとS5 rendered-only Runtime Studentが183/183です。S4までは
+answer/replay由来のexact graphをdevelopment-onlyで使用します。S5 training
+corpusもdevelopment-onlyかつ`runtime_use: FORBIDDEN`であり、Runtimeへ渡る
+のはtraining exampleを含まないversioned MLP parameter bodyだけです。
 
 P10-R2の全183 graphは、保持中25 source fileのSHA-256、183 level定義、
 object/state role、25 goal witness、43 hazard witness、hidden-state boundary、
@@ -100,7 +103,22 @@ RHAE 99.619936696%です。graphは10,758 node、10,733 edgeで、
 branch、merge、nondeterministic actionはいずれも0です。全graph再生成と
 全183 level再実行をfresh条件で各2回行い、graphとclosure reportは
 byte-identicalでした。S4 graphはanswer-derived exact graphなので、
-rendered-only Runtime Student Pの成立証拠には使用しません。
+単独ではrendered-only Runtime Student Pの成立証拠に使用しません。
+
+P10-R5/S5は10,733 rendered transitionから4,269,485個のfloat16 parameterを
+持つRuntime Pをコンパイルしました。Teacher-forced errorとquantized errorは
+0です。Runtimeはrender、available action、最大16件のaction/effect履歴、
+HDS承認済み受動Mだけを受け取り、Teacher package、training corpus、
+game/task/level routing、replay、固定action列、literal座標表、
+source/hidden stateを参照しません。25/25 game、183/183 level、10,733
+action、error 0、local oracle RHAE 99.619936696%で、seed 0の全実行二回が
+byte-identicalです。Runtime側正本は`analysis/runtime/`に分離しています。
+
+P10-R6/S6は全25 game・183 levelを覆う2,048 recordに七摂動、14,336件を
+適用しました。baseline error、unknown surface、unavailable action、
+exceptionは0、二回のreportはbyte-identicalです。transformed environmentの
+semantic ground truthはないため結論は`MEASURED_NOT_PROVEN`であり、
+汎化成功を主張しません。
 
 再生成手順とclaim境界は
 [`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](../../docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)

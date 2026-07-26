@@ -2,7 +2,7 @@
 
 - phase: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
 - strategy: `COMPLETE_CLOSURE_FIRST_HORIZONTAL_SUBTRACTION`
-- state: `IN_PROGRESS`
+- state: `COMPLETE`
 - operation mode: `OFFLINE` only
 - Teacher boundary: `DEVELOPMENT_ONLY`
 - Runtime Student boundary: `RENDERED_ONLY`
@@ -63,8 +63,8 @@ literal座標、source/hidden stateをRuntimeからimportまたは参照して�
 | S2 | literal座標も禁止 | 183/183 | `PASS` |
 | S3 | task/game/level ID routingも禁止 | 183/183 | `PASS` |
 | S4 | source/hidden stateも禁止 | 183/183 | `PASS` |
-| S5 | rendered observationと履歴のみ | 183/183 | `NOT_RUN` |
-| S6 | 色・回転・反転・配置・個数・順序・未観測合成を摂動 | 汎化測定 | `NOT_RUN` |
+| S5 | rendered observationと履歴のみ | 183/183 | `PASS` |
+| S6 | 色・回転・反転・配置・個数・順序・未観測合成を摂動 | 汎化測定 | `MEASURED_NOT_PROVEN` |
 
 一つ前のstageが183/183でなければ次stageへ進まない。
 
@@ -252,7 +252,7 @@ work block契約:
 - `analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json`
 - `analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json`
 
-### P10-R5 水平減算 — S2/S3/S4完了・S5待機
+### P10-R5 水平減算 — 完了
 
 S2 compilerだけがS1 graphのpointer targetを観測し、absolute targetを
 target-centred rendered relationへ変換する。S2 graphとexecutorは
@@ -402,12 +402,62 @@ work block契約:
 - `analysis/teacher/PRIVILEGE_SUBTRACTION_MATRIX.json`
 - `analysis/teacher/RUNTIME_P_COMPILATION_REPORT.json`
 
-現状のRuntime P reportは`BLOCKED_BY_S5_RENDERED_ONLY_RUNTIME_P`であり、
-Runtime P変更・rule採用・graph採用はいずれも0である。
+S5ではS4成功trajectoryからdevelopment-only training corpusを作り、
+rendered observation、available action、最大16件のaction/effect履歴だけを
+入力とするMLP parameter bodyへコンパイルした。Runtime artifactにはtraining
+frame、label、game ordinal、level progress、answer/replay graphを含めない。
+Runtime側はTeacher package、`analysis/teacher`、environment identity、
+source/hidden stateをimport・参照しない。
 
-### P10-R6 汎化試験 — 未開始
+結果:
 
-S5が183/183になるまで開始しない。
+- game / level: 25/25 / 183/183
+- action / error: 10,733 / 0
+- deterministic seed: 0
+- HDS compute command: 10,733
+- HDS-authorized external emission: 10,691
+- HDS-authorized policy reset: 42
+- GAME_OVER observation / factual retention: 12 / 12
+- pointer payload: 3,112
+- Mが判断へ影響したaction: 10,708
+- Runtime P parameter: 4,269,485 float16
+- Teacher-forced / quantized error: 0 / 0
+- runtime policy digest:
+  `sha256:87408c43b6dad4f82111f1b06b19fdf028f32a832ec9259694bcde7ee4d9c464`
+- local oracle: completion 100%、RHAE 99.619936696%、error 0
+- full S5 rerun SHA-256:
+  `3d28de66699b07a95ef7c8c5872d7158c338fd230ce10039ccddc80445b93c2b`
+- two full S5 reports: byte-identical
+
+`S5_SHORTCUT_AND_AUTHORITY_AUDIT.json`はshortcut、identity、Teacher import、
+HDS command/write/reset/emit境界を検査し`PASS`である。一方、observable
+action surfaceがgame分布のproxyになり得ること、同一renderだけではactionが
+一意でない190 conflict groupがありhistoryが必要なことを残存リスクとして
+保持する。same-sample 183/183は未知構造への汎化証明ではない。
+
+### P10-R6 汎化試験 — 測定完了・汎化未証明
+
+全25 game・183 levelを覆う固定2,048 corpus recordに対し、S5 Pを変更せず
+七摂動、合計14,336 responseを測定した。transformed environmentは実行せず、
+semantic ground truthは利用できないため、指標は元Teacher actionに対する
+response retentionでありcorrectnessではない。
+
+| family | action retention |
+|---|---:|
+| COLOR | 1,019 / 2,048 = 49.755859375% |
+| ROTATION | 1,173 / 2,048 = 57.275390625% |
+| REFLECTION | 1,275 / 2,048 = 62.255859375% |
+| LAYOUT | 1,271 / 2,048 = 62.060546875% |
+| OBJECT_COUNT | 2,010 / 2,048 = 98.14453125% |
+| ORDER | 1,337 / 2,048 = 65.283203125% |
+| UNSEEN_COMPOSITION | 950 / 2,048 = 46.38671875% |
+
+baseline action/pointer error、unknown action surface、unavailable action、
+exceptionはいずれも0。二回のS6 reportはSHA-256
+`66e71375b02812e3e03a1f5af045f4c69cfd3a6e3db54f234d0c6a649304151d`
+でbyte-identicalである。HDS結論は
+`S6_MEASURED_HOLD_GENERALIZATION_CLAIM`、claimは
+`MEASURED_NOT_PROVEN`に固定する。
 
 ## 5. 現行停止対象
 
@@ -465,6 +515,16 @@ analysis/teacher/TEACHER_S4_CLOSURE_REPORT.json
 analysis/teacher/TEACHER_S4_ORACLE_ADAPTER_REPORT.json
 analysis/teacher/TEACHER_S4_LOCAL_SCORE_ORACLE.json
 analysis/teacher/TEACHER_S4_LOCAL_SCORE_ORACLE.md
+analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.json
+analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.npz
+analysis/teacher/S5_RUNTIME_P_COMPILATION_REPORT.json
+analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json
+analysis/runtime/S5_SHORTCUT_AND_AUTHORITY_AUDIT.json
+analysis/runtime/S5_ORACLE_ADAPTER_REPORT.json
+analysis/runtime/S5_LOCAL_SCORE_ORACLE.json
+analysis/runtime/S5_LOCAL_SCORE_ORACLE.md
+analysis/runtime/S6_PERTURBATION_MEASUREMENT.json
+analysis/release/P10_REPRODUCIBILITY_AUDIT.json
 ```
 
 ## 7. 再生成・検証
@@ -530,6 +590,30 @@ python -m arc3_agi_agent.teacher.s4_graph_executor \
     ../analysis/teacher/S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json \
   --output ../analysis/teacher/TEACHER_S4_CLOSURE_REPORT.json
 
+python -m arc3_agi_agent.s5_runner \
+  --environments-dir ../environment_files \
+  --seed 0 --max-actions 4096 \
+  --output ../analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json
+
+python -m arc3_agi_agent.teacher.s5_runtime_audit \
+  --package-dir arc3_agi_agent \
+  --manifest arc3_agi_agent/bundles/s5_rendered_policy_v1.json \
+  --weights arc3_agi_agent/bundles/s5_rendered_policy_v1.npz \
+  --closure-report \
+    ../analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json \
+  --policy-compilation-report \
+    ../analysis/teacher/S5_RUNTIME_P_COMPILATION_REPORT.json \
+  --training-corpus \
+    ../analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.npz \
+  --output ../analysis/runtime/S5_SHORTCUT_AND_AUTHORITY_AUDIT.json
+
+python -m arc3_agi_agent.teacher.s6_generalization \
+  --corpus \
+    ../analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.npz \
+  --corpus-manifest \
+    ../analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.json \
+  --output ../analysis/runtime/S6_PERTURBATION_MEASUREMENT.json
+
 python -m arc3_agi_agent.teacher.solution_graph_compiler \
   --corpus ../analysis/teacher/FULL_SOLUTION_CORPUS.json \
   --closure-report ../analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json \
@@ -552,6 +636,14 @@ python -m arc3_agi_agent.teacher.solution_graph_compiler \
     ../analysis/teacher/S4_SOURCE_HIDDEN_FREE_POLICY_GRAPH.json \
   --s4-closure-report \
     ../analysis/teacher/TEACHER_S4_CLOSURE_REPORT.json \
+  --s5-closure-report \
+    ../analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json \
+  --s5-policy-compilation-report \
+    ../analysis/teacher/S5_RUNTIME_P_COMPILATION_REPORT.json \
+  --s5-runtime-audit \
+    ../analysis/runtime/S5_SHORTCUT_AND_AUTHORITY_AUDIT.json \
+  --s6-generalization-report \
+    ../analysis/runtime/S6_PERTURBATION_MEASUREMENT.json \
   --output-dir ../analysis/teacher
 
 python -m pytest -q \
@@ -569,10 +661,10 @@ python -m pytest -q \
 ## 8. 次work block
 
 ```text
-WB-S5-RENDERED-ONLY-RUNTIME-P-COMPILATION
+WB-P11-RELEASE-STATE-FREEZE
 ```
 
-R1〜R5とS1〜S4は閉じた。次はanswer-derived exact S4 graphから再利用可能な
-構造をidentity-free Runtime Student Pへcompileし、Teacher package、
-answer/replay graphなしでS5を183/183へ閉じる。S5が183/183になる前に
-S6へ進まない。
+P10-R0〜R6は順序通り閉じた。次はpolicyやscoreを変更せず、code、
+dependency、Python、P0/J0/M0、dataset、compiler、seed、budget、全sample
+証拠、regression suite、reproducible package digestをP11 release stateへ
+固定する。P11完了前にP12以降へ進まない。

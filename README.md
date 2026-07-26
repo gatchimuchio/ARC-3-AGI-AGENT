@@ -21,7 +21,8 @@ P10の現行戦略は
 - P7: `PAIRWISE_SUBJECT_AUDIT` — 完了
 - P8: `THREE_SUBJECT_TWO_CYCLE_TRINITY` — 完了
 - P9: `EIGHT_SUBSET_MINIMUM_CERTIFICATE` — 完了
-- 現在フェーズ: `P10_COMPLETE_ARC3_SAMPLE_SOLVING`
+- P10: `COMPLETE_ARC3_SAMPLE_SOLVING` — 完了
+- 現在フェーズ: `P11_RELEASE_STATE_FREEZE`
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -84,15 +85,27 @@ P10の現行戦略は
 - S4決定性:
   **全25 gameのgraph再生成と183 level再実行を各2回行い、
   graph/reportともbyte-identical**
-- 水平減算: **S0〜S4 PASS、S5〜S6 NOT_RUN**
-- Runtime Student P変更: **なし**
-- rendered-only 183/183・AGI完成・汎化達成の主張: **なし**
+- S5 rendered-only Runtime Student:
+  **25/25 game、183/183 level、10,733 action、error 0、seed 0**
+- S5 Runtime P:
+  **4,269,485 float16 parameter、Teacher-forced/quantized error 0/0**
+- S5ローカルオラクル:
+  **completion 100%、RHAE 99.619936696%**
+- S5決定性:
+  **全183 levelの独立実行2回がSHA-256・byte単位で一致**
+- S6摂動測定:
+  **25 game・183 levelを覆う2,048 record、七family・14,336件、exception 0**
+- S6決定性:
+  **独立測定2回がSHA-256・byte単位で一致**
+- 水平減算: **S0〜S5 PASS、S6 MEASURED**
+- 汎化claim: **MEASURED_NOT_PROVEN**
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な
-task/game/level ID routing除去、S4はsource/hidden runtime読取除去までです。
-S4もanswer-derived exact graphへ依存しており、Runtime Student scoreまたは
-汎化scoreではありません。
+task/game/level ID routing除去、S4はsource/hidden runtime読取除去、
+S5はTeacher graphをRuntimeから除去してrender/history parameter bodyだけで
+183/183を再実行した段階です。S6は静的摂動へのresponse retention測定であり、
+transformed environmentのsemantic correctnessまたは汎化成功ではありません。
 
 ## 最小設計
 
@@ -232,10 +245,12 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 です。P9では全8 subsetを有限列挙し、最小三構成certificateを
 [`certificates/p9`](certificates/p9)へ固定しました。完了証拠は
 [`P9_MINIMUM_THREE_CERTIFICATE.md`](docs/architecture/P9_MINIMUM_THREE_CERTIFICATE.md)
-です。現在のP10では保持済みOFFLINE sampleの全game / 全level攻略を行います。
-P10の実装中監査と未閉包境界は
+です。P10では保持済みOFFLINE sampleの全game / 全levelを攻略し、S0〜S5の
+水平減算とS6測定を閉じました。P10の実装・証拠境界は
 [`P10_COMPLETE_SAMPLE_SOLVER.md`](docs/architecture/P10_COMPLETE_SAMPLE_SOLVER.md)
-に記録しています。
+および
+[`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
+に記録しています。現在のP11では、能力を変更せずrelease stateを固定します。
 
 ## 設計上の固定境界
 
@@ -343,8 +358,8 @@ python -m arc3_agi_agent.development_analysis \
 8. P7: 二主体接続監査 — 完了
 9. P8: 三主体二周期循環 — 完了
 10. P9: 全8部分集合証明 — 完了
-11. P10: 全sample game / 全level完全攻略 — 現在
-12. P11: release state固定
+11. P10: 全sample game / 全level完全攻略 — 完了
+12. P11: release state固定 — 現在
 
 P11完了前は公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出を禁止します。
 

@@ -29,53 +29,35 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P7 | 二主体接続監査 | 完了 |
 | P8 | 三主体Trinity循環 | 完了 |
 | P9 | 全8部分集合監査 | 完了 |
-| P10 | ARC3全sample完全攻略 | 現在 |
-| P11 | 完成状態固定 | 未開始 |
+| P10 | ARC3全sample完全攻略 | 完了 |
+| P11 | 完成状態固定 | 現在 |
 | P12 | 公式ARC環境接続 | current request外 |
 | P13 | Kaggle提出経路 | current request外 |
 | P14 | 実提出・公式結果最適化 | current request外 |
 
 ## 現在のphase gate
 
-P10では次だけを行う。
+P10は完全閉包先行・水平減算の順で閉じた。
 
-- 保持済みOFFLINE sampleの全game / 全level攻略
-- P3 provenanceに拘束した全705 analysis sourceと183行の開発分析記憶
-- mechanics / failure / blocker / capability coverage単位の横断開発
-- task-aware Development Memoryからidentity-free Runtime Pへのlate subtraction
-- game単位checkpoint、exact-condition resume、oracle互換集約
-- `LOCAL_PROBE -> CLUSTER_STABLE -> COMPOSABLE`のHDS段階判定
-- identity-free P0候補、M0候補、ARC3用HDS Frameの形成
-- P-A / P-B / hybridの同一条件比較
-- failureのM保持と明示的compilerによる次版P形成
-- error、GAME_OVER、timeout、無限loop、max-action停止の解消
-- 全trace保存と同一release条件での再現確認
+- S0〜S5: 全段`PASS`
+- S5 Runtime Student: 25/25 game、183/183 level、10,733 action、error 0
+- S5入力: rendered observation、available action、bounded history、受動M
+- local oracle: completion 100%、RHAE 99.619936696%
+- S5 full rerun: 二回byte-identical
+- S6: 25 game・183 levelを覆う2,048 record、七摂動14,336 measurement
+- S6 full rerun: 二回byte-identical
+- S6 claim: `MEASURED_NOT_PROVEN`
 
-現行境界はactive P `v27 / v27 / v26`、HDS採用済み`35 / 183`である。
-C2の事後visible-effect observerだけを`CLUSTER_STABLE`、C3の非循環predictorを
-`LOCAL_PROBE / HOLD`とする。C10は一段可視因果文脈で
-`CLUSTER_STABLE`、C2+C10は`COMPOSABLE`へ到達したが、Runtime P候補の
-target completion deltaが0だったためHDSは`REJECT`した。
+P11では次だけを行う。
 
-C7 target-contact harnessは凍結済み288 probeを負の証拠に限定して移植し、
-`LOCAL_PROBE / CLOSED_NEGATIVE`とした。KA59 remaining-boundaryへ適用した
-C5 bounded-old-action-replay候補も、8回発火してtarget delta 0だったため
-`LOCAL_PROBE / CLOSED_NEGATIVE_AXIS`である。active P、score、35/183境界は
-変更しない。C12の凍結layout-mode二surfaceも合計388 probeでprogress、
-GAME_OVER、separatorが0だったため`LOCAL_PROBE / CLOSED_NEGATIVE`とした。
-contract mismatch、public replay bootstrap、stale score fieldはquarantineし、
-Runtime Pへ入れない。C1の凍結rendered-affordance objectizerも、48件の
-task-aware prefixにだけprogress 2があり、残る1,720 candidateはvisible
-change 1,720 / progress 0 / GAME_OVER 0 / separator 0だった。prefix、
-identity、literal座標、stale scoreをquarantineして同一surfaceを閉じた。
-さらにC14/C8/C4/C6/C9/C11/C13の凍結7 surfaceを監査し、21 target /
-2,199 probe / 565 visible changeに対してprogress 0、C11のGAME_OVER 5にも
-reusable-hazard separator 0であることを固定した。全て
-`LOCAL_PROBE / CLOSED_NEGATIVE / NEGATIVE_ONLY`である。次の未埋込work blockは
-`WB-PROSPECTIVE-OBLIGATION-RELATION-COMPILER`。現行標準オラクルは
-`35 / 183`、RHAE `18.821945363%`で、P11開始はHOLDである。
+- code commit/tree、dependency lock、Python versionの固定
+- P0/J0/M0、dataset/compiler、seed、action budgetの固定
+- P0〜P10 full regressionとtracked secret scan
+- reproducible wheel buildとpackage内容・digest監査
+- 全sample・authority・水平減算・S6証拠のrelease manifestへの束縛
 
-P10ではrelease state固定、公式接続、Kaggle作業を実行・完了扱いしない。
+P11ではRuntime P、score、sample能力を変更しない。公式接続、
+`OperationMode.COMPETITION`、Kaggle作業はP12以降でありcurrent request外。
 
 ## 監査正本
 

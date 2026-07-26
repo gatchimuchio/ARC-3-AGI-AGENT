@@ -14,7 +14,7 @@ import json
 import os
 from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from arc_agi import Arcade, OperationMode  # type: ignore[import-untyped]
 from arc_agi.local_wrapper import (  # type: ignore[import-untyped]
@@ -207,6 +207,11 @@ def _emit_preselected_action(
     state_signature: str,
     policy_graph_digest: str,
     edge: Mapping[str, Any],
+    transition_sink: Callable[
+        [FrameDataRaw, Mapping[str, Any], Mapping[str, int]],
+        None,
+    ]
+    | None = None,
 ) -> tuple[FrameDataRaw, bool, str | None]:
     """Emit an already selected action through the OFFLINE adapter."""
 
@@ -244,6 +249,12 @@ def _emit_preselected_action(
     reset_scope = str(action.get("reset_scope", ""))
     if reset_scope not in {"RECORDED_ACTION", "LEVEL_COMPATIBILITY"}:
         raise S4PolicyDivergence("S4_RESET_SCOPE_INVALID")
+    if transition_sink is not None:
+        transition_sink(
+            frame,
+            action,
+            transient_payload,
+        )
     prior_reset_scope = os.environ.get("ONLY_RESET_LEVELS")
     if reset_scope == "LEVEL_COMPATIBILITY":
         os.environ["ONLY_RESET_LEVELS"] = "true"
@@ -278,6 +289,15 @@ def execute_s4_global_policy(
     *,
     environment: LocalEnvironmentWrapper,
     policy_graph: Mapping[str, Any],
+    transition_sink: Callable[
+        [
+            FrameDataRaw,
+            Mapping[str, Any],
+            Mapping[str, int],
+        ],
+        None,
+    ]
+    | None = None,
 ) -> dict[str, Any]:
     """Execute S4 while keeping environment internals outside selection."""
 
@@ -347,6 +367,7 @@ def execute_s4_global_policy(
             state_signature=state_signature,
             policy_graph_digest=policy_graph_digest,
             edge=edge,
+            transition_sink=transition_sink,
         )
         next_rendered_digest = rendered_frame_digest(result)
         action_id = _integer(action.get("action_id"), "action_id")

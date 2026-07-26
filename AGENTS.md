@@ -23,7 +23,7 @@
 
 ## 2. 現在のフェーズ
 
-現在は `P10_COMPLETE_ARC3_SAMPLE_SOLVING` です。
+現在は `P11_RELEASE_STATE_FREEZE` です。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -87,71 +87,49 @@ P9 complete:
   full set PASS and seven proper subsets FAIL
   zero functional-equivalent responsibility leaks
 
-P10 current:
-  complete-closure-first / horizontal-subtraction strategy
-  R0 historical Runtime Student is frozen at 35 / 183
-  R1 privileged development Teacher is 25 / 25 games and 183 / 183 levels
-  R1 OFFLINE replay is 11,574 actions, error 0, final WIN for all games
-  privileged Teacher local-oracle result is RHAE 99.446886157%
-  R2 has 183 source-causal solution graphs and 183 success/hazard contrasts
-  R3 has 158 source-causal progression edges and an identity-free grammar
-  R4/S1 state-conditioned Teacher closes 25 / 25 games and 183 / 183 levels
-  S1 executes 10,733 actions with error 0 and strict WIN-distance decrease
-  S1 graph has 11,387 state nodes and 11,383 action edges
-  S1 local-oracle result is RHAE 99.619936696% (+0.173050539 pp vs S0)
-  S1 full graph and closure report are byte-identical across two fresh runs
-  R5/S2 role-relative Teacher closes 25 / 25 games and 183 / 183 levels
-  S2 executes 10,733 actions and resolves 3,112 pointer targets from render
-  S2 graph stores zero absolute pointer payloads; error and selector failure are 0
-  S2 local-oracle result is RHAE 99.619936696% (delta 0 vs S1)
-  S2 full graph and closure report are byte-identical across two fresh runs
-  R5/S3 global Teacher closes 25 / 25 games and 183 / 183 levels
-  S3 uses one global policy partition with identity key/literal/decision count 0
-  S3 executes 10,733 actions with error 0 and strict WIN-distance decrease
-  S3 local-oracle result is RHAE 99.619936696% (delta 0 vs S2)
-  S3 full graph and closure report are byte-identical across two fresh runs
-  R5/S4 source/hidden-free Teacher closes 25 / 25 games and 183 / 183 levels
-  S4 target environment source/hidden read and decision count are both 0
-  S4 executes 10,733 actions with error 0 and strict WIN-distance decrease
-  S4 local-oracle result is RHAE 99.619936696% (delta 0 vs S3)
-  S4 full graph and closure report are byte-identical across two fresh runs
-  fixed action sequence, replay position, and action ordinal decisions are absent
-  S0 through S4 are PASS; S5 and S6 are NOT_RUN
-  Runtime Student P is unchanged and rendered-only 183 / 183 is NOT_PROVEN
-  C2/C3 and negative-only probe work are frozen historical evidence
-  the current block is
-  WB-S5-RENDERED-ONLY-RUNTIME-P-COMPILATION
+P10 complete:
+  S0 through S5 are PASS in absolute order
+  S5 rendered-only Runtime Student closes 25 / 25 games and 183 / 183 levels
+  S5 executes 10,733 actions with error 0 under deterministic seed 0
+  two full S5 reports are byte-identical
+  Runtime P receives render, available actions, bounded history, and passive M only
+  task/game/level routing, replay, fixed action sequence, literal coordinate
+  table, source state, and hidden state are absent from Runtime P
+  local oracle is completion 100% and RHAE 99.619936696%
+  S6 measures 2,048 records covering 25 games and 183 levels
+  all seven perturbation families execute 14,336 measurements with exception 0
+  two full S6 reports are byte-identical
+  S6 conclusion is MEASURED_NOT_PROVEN; generalization is not claimed
+
+P11 current:
+  freeze code, dependency, Python, P0, J0, M0, dataset, compiler, seed,
+  action budget, regression suite, full-sample evidence, and package digest
+  current block is WB-P11-RELEASE-STATE-FREEZE
 ```
 
-### P10で許可される作業
+### P11で許可される作業
 
-- 保持済みOFFLINE sampleの全game / 全level実行
-- development-only TeacherでID、source、hidden state、answer、replay、
-  固定action、literal座標、全解析を使用した183/183閉包
-- 183成功trajectoryの解法graph化、同一game内差分、game横断構造文法
-- S0からS6まで一段ずつ行う水平減算と各段183回帰
-- Teacher成果物からRuntime Studentへ構造だけを明示compile
-- ARC3目的・境界・停止・rollback条件を持つHDS Frame設定
-- timeout、GAME_OVER、無限loop、max-action停止の原因分類と是正
-- 全実行trace、level完了証拠、同一条件再実行証拠の保存
-- P9までを含む既存回帰
+- P10正本の再読・digest検証・同一条件回帰
+- P0/J0/M0の空の初期状態とversion/digest固定
+- code commit/tree、dependency lock、Python、seed、budgetの固定
+- reproducible wheel build、内容監査、package digest固定
+- P0〜P10を含むfull unit/integration/static regression
+- tracked secret scan、release manifest、release-state文書の生成
 
-### P10で禁止される作業
+### P11で禁止される作業
 
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
+- release固定を理由にRuntime能力・score・policyを変更すること
 - Teacher packageまたは`analysis/teacher`をRuntimeからimportすること
-- task/game/level ID、replay、固定action列、answer map、literal座標を
-  Runtime fixtureへ残すこと
-- source / hidden stateをruntime計算素材へ残すこと
-- Teacher scoreをRuntime Studentまたは汎化scoreと表記すること
-- 前stageの183/183以前に次の減算stageへ進むこと
-- P10全level証拠成立前のrelease state固定
-- 「全sample攻略済み」「汎化済み」といった未検証主張
+- task/game/level ID、replay、固定action列、answer map、literal座標、
+  source / hidden stateをRuntimeへ戻すこと
+- S6 response-retention測定をsemantic correctnessまたは汎化成功と表記すること
+- P12以降を前倒しすること
 
-P10の正本は新ロードマップのP10節、P9 certificate、P3 dataset/P4 P bundle、
-P5 J/P6 M/P8 Trinityの実装証拠、および
-`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`である。
+P11の正本はP10の六正本、S5 closure/audit/oracle、S6 measurement、
+P9 certificate、P3 dataset、P0/J0/M0 descriptor、regression report、
+package audit、および`docs/architecture/P11_RELEASE_STATE.md`である。
 
 ## 3. 1 work blockの必須契約
 
@@ -339,13 +317,13 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - `{}`から`{C,J,M}`まで全8 subsetを有限列挙
 - full setだけPASS、機能等価物漏れ0
 
-### P10: Complete ARC3 Sample Solving — 現在
+### P10: Complete ARC3 Sample Solving — 完了
 
 - S0 Teacherは全sample game/all level、error 0、再現可能
 - S1からS5で固定action、座標、ID、source/hiddenを順番に除去
-- S5のrendered-only 183/183成立まではP10完了ではない
+- S5 rendered-only 183/183、S6七摂動測定、二回byte一致
 
-### P11: Release-state Freeze
+### P11: Release-state Freeze — 現在
 
 - code/dependency/P0/J0/M0/dataset/compiler/seed/budgetを固定
 - 全sample証拠、package digest、regression suiteを固定
