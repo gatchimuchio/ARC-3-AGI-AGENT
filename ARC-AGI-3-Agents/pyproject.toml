@@ -74,6 +74,7 @@ arc3-measure-s6-generalization = "arc3_agi_agent.teacher.s6_generalization:main"
 arc3-audit-p10-reproducibility = "arc3_agi_agent.teacher.p11_regression:reproducibility_main"
 arc3-run-p11-regression = "arc3_agi_agent.teacher.p11_regression:regression_main"
 arc3-freeze-p11-release = "arc3_agi_agent.teacher.p11_release:main"
+arc3-p12-audit = "arc3_agi_agent.p12_audit:main"
 
 [build-system]
 requires = ["setuptools==83.0.0"]

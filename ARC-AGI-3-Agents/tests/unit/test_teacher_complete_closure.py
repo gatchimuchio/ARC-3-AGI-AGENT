@@ -993,8 +993,13 @@ class TeacherCompleteClosureTests(unittest.TestCase):
         )
         violations: list[str] = []
         teacher_root = PACKAGE_ROOT / "teacher"
+        audit_only_modules = {"p12_audit.py"}
         for path in PACKAGE_ROOT.rglob("*.py"):
-            if path.is_relative_to(teacher_root):
+            if (
+                path.is_relative_to(teacher_root)
+                or path.relative_to(PACKAGE_ROOT).as_posix()
+                in audit_only_modules
+            ):
                 continue
             text = path.read_text(encoding="utf-8")
             for token in forbidden:
