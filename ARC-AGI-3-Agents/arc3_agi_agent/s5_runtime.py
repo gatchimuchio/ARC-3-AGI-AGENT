@@ -20,6 +20,8 @@ from .s5_authority import (
     HDSPolicyResetController,
     PureLLMOutcomeRetentionExecutor,
     PureLLMPolicyResetExecutor,
+    S5OutcomeRetentionDecision,
+    S5PolicyResetDecision,
     S5PolicyResetExecution,
 )
 from .s5_compute import (
@@ -99,6 +101,9 @@ class S5StepResult:
     policy_reset: S5PolicyResetExecution | None = None
     outcome_retention: MemoryMutationResult | None = None
     authority_decision_id: str = ""
+    follow_up_authority_decision: (
+        S5OutcomeRetentionDecision | S5PolicyResetDecision | None
+    ) = None
 
 
 @dataclass(slots=True)
@@ -167,7 +172,7 @@ class S5OfflineSampleRuntime:
     def _retain_failed_outcome(
         self,
         cycle: SampleCycleResult,
-    ) -> tuple[MemoryMutationResult, str]:
+    ) -> tuple[MemoryMutationResult, S5OutcomeRetentionDecision]:
         emission = cycle.kernel_result.emission_result
         if emission is None or emission.terminal_state != "GAME_OVER":
             raise ValueError("S5_GAME_OVER_RESULT_REQUIRED")
@@ -247,13 +252,13 @@ class S5OfflineSampleRuntime:
             payload,
             memory,
         )
-        return result, decision.decision_id
+        return result, decision
 
     def _execute_policy_reset(
         self,
         cycle: SampleCycleResult,
         current: FrameDataRaw,
-    ) -> tuple[S5PolicyResetExecution, str]:
+    ) -> tuple[S5PolicyResetExecution, S5PolicyResetDecision]:
         if cycle.kernel_result.emission_result is not None:
             raise ValueError("S5 reset requires no normal emission")
         permitted_status = (
@@ -325,7 +330,7 @@ class S5OfflineSampleRuntime:
             effects,
         )
         self.runtime.bind_recovery_observation(current)
-        return execution, decision.decision_id
+        return execution, decision
 
     def run_cycle(
         self,
@@ -345,25 +350,29 @@ class S5OfflineSampleRuntime:
                 raise RuntimeError("S5_REOBSERVATION_MISSING")
             retention: MemoryMutationResult | None = None
             authority_decision_id = cycle.kernel_result.decision.decision_id
+            follow_up_decision: S5OutcomeRetentionDecision | None = None
             if emission.terminal_state == "GAME_OVER":
-                retention, authority_decision_id = (
+                retention, follow_up_decision = (
                     self._retain_failed_outcome(cycle)
                 )
+                authority_decision_id = follow_up_decision.decision_id
             return S5StepResult(
                 kernel_cycle=cycle,
                 after_frame=after,
                 action_id=emission.action_id,
                 outcome_retention=retention,
                 authority_decision_id=authority_decision_id,
+                follow_up_authority_decision=follow_up_decision,
             )
 
-        reset, decision_id = self._execute_policy_reset(cycle, current)
+        reset, decision = self._execute_policy_reset(cycle, current)
         return S5StepResult(
             kernel_cycle=cycle,
             after_frame=reset.reset_frame,
             action_id=S5_RESET_ACTION_ID,
             policy_reset=reset,
-            authority_decision_id=decision_id,
+            authority_decision_id=decision.decision_id,
+            follow_up_authority_decision=decision,
         )
 
 

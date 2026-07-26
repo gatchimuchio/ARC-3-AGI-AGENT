@@ -44,6 +44,8 @@ P10は完全閉包先行・水平減算の順で閉じた。
 - S5入力: rendered observation、available action、bounded history、受動M
 - local oracle: completion 100%、RHAE 99.619936696%
 - S5 full rerun: 二回byte-identical
+- S5 full execution trace: 全10,733 cycle保存、closure相互検証、
+  trace/manifest二回byte-identical
 - S6: 25 game・183 levelを覆う2,048 record、七摂動14,336 measurement
 - S6 full rerun: 二回byte-identical
 - S6 claim: `MEASURED_NOT_PROVEN`
@@ -54,7 +56,7 @@ P11は次を固定して完了した。
 - P0/J0/M0、dataset/compiler、seed、action budgetの固定
 - P0〜P10 full regressionとtracked secret scan
 - reproducible wheel buildとpackage内容・digest監査
-- 全sample・authority・水平減算・S6証拠のrelease manifestへの束縛
+- 全sample・全実行trace・authority・水平減算・S6証拠のrelease manifestへの束縛
 
 - code commit: `dca7be72c82389334ed2c3d585ec3c90c2b53914`
 - regression: 7/7 PASS、tracked secret finding 0

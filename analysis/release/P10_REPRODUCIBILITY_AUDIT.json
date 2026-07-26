@@ -1,6 +1,15 @@
 {
-  "content_digest": "arc3_p10_reproducibility_audit:6dabb310db3ddc894cc740c6e74976015847356bca145b4af202c1b9c7f1f62e",
+  "content_digest": "arc3_p10_reproducibility_audit:191c3f76fc2bb05e8aef3fb4083ce3627a67e80c8c7cc2caea495156614a13f4",
   "evidence": {
+    "S5_FULL_EXECUTION_TRACE": {
+      "byte_equal": true,
+      "content_digest": "arc3_s5_full_execution_trace_manifest:c1851cf5c25cb5e25f4288be1c0b6bd192f1f6a1e80e9a1e509d95bf5fcdea5f",
+      "manifest_file_sha256": "8cf2baafeed1514e224f5859421f5f818b633720606d46a6695aa7f99434fcd4",
+      "manifest_filename": "S5_FULL_EXECUTION_TRACE_MANIFEST.json",
+      "record_count": 10733,
+      "trace_file_sha256": "719f34950454b4f534c0d9ac9ceca7d3e319454365919d7e52e5a3246af5ae77",
+      "trace_filename": "S5_FULL_EXECUTION_TRACE.jsonl.gz"
+    },
     "S5_RENDERED_ONLY_CLOSURE": {
       "byte_equal": true,
       "content_digest": "arc3_s5_rendered_runtime_closure:6da4a6872eb37a14903827fc80abd3ea59b8d51f642398ab8cd607da12a68d67",
@@ -21,8 +30,9 @@
   "phase": "P10-R6-REPRODUCIBILITY-AUDIT",
   "s5_byte_equal": true,
   "s5_exact_rerun_count": 2,
+  "s5_trace_byte_equal": true,
   "s6_byte_equal": true,
   "s6_exact_rerun_count": 2,
-  "schema_version": "arc3-p10-reproducibility-audit-v1",
+  "schema_version": "arc3-p10-reproducibility-audit-v2",
   "status": "PASS"
 }

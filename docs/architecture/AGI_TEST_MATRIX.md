@@ -14,6 +14,7 @@
   `test_trinity_two_cycle_p8.py`,
   `test_minimum_three_certificate_p9.py`,
   `test_s5_rendered_policy.py`,
+  `test_s5_execution_trace.py`,
   `test_s5_rendered_runtime.py`,
   `test_s6_generalization.py`,
   `test_p11_release_state.py`
@@ -49,6 +50,7 @@
 | `T-P9-CERTIFICATE-REBUILD` | `CLAIM_MINIMUM_THREE` | `test_minimum_three_certificate_p9.py` | 5 artifactの内容・digest・再生成byteが一致 | 実装・実行済み |
 | `T-P10-S5-ALL-SAMPLES` | `CLAIM_SAMPLE_COMPLETE` | S5 closure/audit + `test_s5_rendered_policy.py`, `test_s5_rendered_runtime.py` | rendered-only 25/25 game・183/183 level・error 0、shortcut/authority audit PASS | 実装・実行済み |
 | `T-P10-S5-DETERMINISM` | sample reproducibility | `P10_REPRODUCIBILITY_AUDIT.json` | seed 0の全183 report二回がbyte一致 | 実行済み |
+| `T-P10-S5-FULL-TRACE` | `CLAIM_SAMPLE_COMPLETE` | `S5_FULL_EXECUTION_TRACE.jsonl.gz`, manifest, `test_s5_execution_trace.py` | 全10,733 cycleのC/J/M・kernel eventを保存し、closure側game trace digestと相互検証、二回byte一致 | 実装・実行済み |
 | `T-P10-S6-MEASUREMENT` | `CLAIM_GENERALIZATION`境界 | `test_s6_generalization.py`, S6 report | 七摂動14,336件、exception 0、二回byte一致、claimは`MEASURED_NOT_PROVEN` | 実装・実行済み |
 | `T-P11-INITIAL-STATE` | P0/J0/M0 | `test_p11_release_state.py` | P digest、J authority count 0、M version/entry 0 | 実装・実行済み |
 | `T-P11-REGRESSION` | `CLAIM_RELEASE_STATE_FIXED` | `P11_REGRESSION_REPORT.json` | compileall、ruff、strict mypy、全unit、全integration、diff、secretの7/7 PASS | 実行済み |

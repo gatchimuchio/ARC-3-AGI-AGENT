@@ -93,6 +93,8 @@ P10 complete:
   S5 rendered-only Runtime Student closes 25 / 25 games and 183 / 183 levels
   S5 executes 10,733 actions with error 0 under deterministic seed 0
   two full S5 reports are byte-identical
+  all 10,733 Runtime cycles are stored in a content-bound full trace
+  two full trace streams and manifests are byte-identical
   Runtime P receives render, available actions, bounded history, and passive M only
   task/game/level routing, replay, fixed action sequence, literal coordinate
   table, source state, and hidden state are absent from Runtime P
@@ -329,11 +331,12 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - S0 Teacherは全sample game/all level、error 0、再現可能
 - S1からS5で固定action、座標、ID、source/hiddenを順番に除去
 - S5 rendered-only 183/183、S6七摂動測定、二回byte一致
+- S5全10,733 cycle traceを圧縮JSONLと検証manifestへ保存
 
 ### P11: Release-state Freeze — 完了
 
 - code/dependency/P0/J0/M0/dataset/compiler/seed/budgetを固定
-- 全sample証拠、package digest、regression suiteを固定
+- 全sample・全実行trace証拠、package digest、regression suiteを固定
 
 ### P12〜P14: current request外
 

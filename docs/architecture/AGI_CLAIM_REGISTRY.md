@@ -22,7 +22,7 @@
 | `CLAIM_TWO_CYCLE_CAUSALITY` | cycle 1のM更新がcycle 2のC/Jを変える | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 全8 subset・sample攻略は含まない | 回帰 |
 | `CLAIM_CAUSAL_ATTRIBUTION` | P-only/J-only/M-only変更の効果を個別帰属できる | `SUPPORTED` | `test_trinity_two_cycle_p8.py` | 観測済みP-A/P-Bとsynthetic Frame条件の範囲 | 回帰 |
 | `CLAIM_MINIMUM_THREE` | 全8 subsetでfull setのみPASSする | `SUPPORTED` | `test_minimum_three_certificate_p9.py`, `certificates/p9/` | G1〜G5定義域内の構成最小性。sample攻略・未知task汎化は含まない | 回帰 |
-| `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略する | `SUPPORTED` | `S5_RENDERED_ONLY_CLOSURE_REPORT.json`, `S5_SHORTCUT_AND_AUTHORITY_AUDIT.json`, `test_s5_rendered_policy.py`, `test_s5_rendered_runtime.py` | 保持OFFLINE sample 25 game・183 levelの範囲。未知task汎化は含まない | 回帰 |
+| `CLAIM_SAMPLE_COMPLETE` | 全sample game/all levelを完全攻略し全cycle traceを保存する | `SUPPORTED` | `S5_RENDERED_ONLY_CLOSURE_REPORT.json`, `S5_FULL_EXECUTION_TRACE_MANIFEST.json`, `S5_SHORTCUT_AND_AUTHORITY_AUDIT.json`, `test_s5_execution_trace.py`, `test_s5_rendered_policy.py`, `test_s5_rendered_runtime.py` | 保持OFFLINE sample 25 game・183 levelの範囲。未知task汎化は含まない | 回帰 |
 | `CLAIM_GENERALIZATION` | identity-free holdoutで未知構造へ汎化する | `UNSUPPORTED` | `S6_PERTURBATION_MEASUREMENT.json`: 七摂動14,336 responseを測定 | semantic ground truthとtransformed environment完了証拠がなく、結論は`MEASURED_NOT_PROVEN` | 後続研究 |
 | `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `SUPPORTED` | `P11_RELEASE_STATE.json`, `P11_REGRESSION_REPORT.json`, `test_p11_release_state.py` | code `dca7be72c823...`、OFFLINE sample releaseの範囲 | 回帰 |
 | `CLAIM_OFFICIAL_READY` | COMPETITION/Kaggleへ進める | `REJECTED` | なし | 未評価、P12以降、current request外 | P12以降 |

@@ -520,6 +520,8 @@ analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.json
 analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.npz
 analysis/teacher/S5_RUNTIME_P_COMPILATION_REPORT.json
 analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json
+analysis/runtime/S5_FULL_EXECUTION_TRACE.jsonl.gz
+analysis/runtime/S5_FULL_EXECUTION_TRACE_MANIFEST.json
 analysis/runtime/S5_SHORTCUT_AND_AUTHORITY_AUDIT.json
 analysis/runtime/S5_ORACLE_ADAPTER_REPORT.json
 analysis/runtime/S5_LOCAL_SCORE_ORACLE.json
@@ -594,6 +596,10 @@ python -m arc3_agi_agent.teacher.s4_graph_executor \
 python -m arc3_agi_agent.s5_runner \
   --environments-dir ../environment_files \
   --seed 0 --max-actions 4096 \
+  --trace-jsonl \
+    ../analysis/runtime/S5_FULL_EXECUTION_TRACE.jsonl.gz \
+  --trace-manifest \
+    ../analysis/runtime/S5_FULL_EXECUTION_TRACE_MANIFEST.json \
   --output ../analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json
 
 python -m arc3_agi_agent.teacher.s5_runtime_audit \
@@ -648,6 +654,7 @@ python -m arc3_agi_agent.teacher.solution_graph_compiler \
   --output-dir ../analysis/teacher
 
 python -m pytest -q \
+  tests/unit/test_s5_execution_trace.py \
   tests/unit/test_teacher_complete_closure.py \
   tests/integration/test_teacher_s0_replay.py \
   tests/integration/test_teacher_s1_graph.py \

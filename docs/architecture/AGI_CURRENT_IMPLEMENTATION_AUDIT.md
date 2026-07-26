@@ -287,3 +287,43 @@ P9完了時点で`F-P2-006`の全8 subset部分を是正した。
 
 `F-P2-010`の全sample攻略と`F-P2-008`のrelease freezeは未解決である。
 P9 HDS判断は`PASS`、次phaseは`P10_COMPLETE_ARC3_SAMPLE_SOLVING`とする。
+
+## 14. P10 disposition
+
+P10完了監査で`F-P2-010`の全sample攻略部分を是正した。
+
+- P-A、P-B、hybridを同一条件で比較し、content digest付き証拠へ固定
+- S0からS5まで特権情報を順序通り減算し、各段183/183・error 0
+- S5 Runtime Pはrender、available action、bounded history、受動Mだけを入力
+- task/game/level ID routing、replay、answer map、固定action列、
+  literal座標table、source/hidden stateのRuntime使用0
+- GAME_OVER 12件をHDS rejection、outcome retention、policy resetで回復
+- Mに保持した履歴が10,708件の未来decisionへ因果入力
+- S4安定経験を明示compilerでversioned S5 parameter bodyへ更新
+- seed 0のclosure report、全10,733 cycle traceを二回byte一致で再生成
+- 全cycleのC出力、HDS判断、M/emission結果、kernel eventを圧縮JSONLへ保存し、
+  game別closure trace digestと相互検証
+- S6七摂動14,336件を測定し、結論を`MEASURED_NOT_PROVEN`へ限定
+
+旧S5正本はgame別trace digestだけを保持し、roadmapの「全実行traceを保存」を
+満たしていなかった。P0〜P11再監査でこれをblocking gapとして再開し、
+full trace stream、manifest、tamper/coverage/byte-rerun testを追加した。
+
+P10 HDS判断は、full trace二回再生成とP10 reproducibility auditがPASSした時点で
+`PASS`とする。次phaseは`P11_RELEASE_STATE_FREEZE`である。
+
+## 15. P11 disposition
+
+P11完了時点で`F-P2-008`と`F-P2-010`のrelease固定部分を是正した。
+
+- code commit/tree、Python 3.12.13、dependency lockを固定
+- versioned/digest-bound P0、空のJ0/M0を固定
+- dataset/compiler/seed/action budget/sample ZIPを固定
+- S5 closure、全実行trace、authority、oracle、水平減算、S6証拠を束縛
+- compileall、ruff、strict mypy、全unit/integration、diff、secret scanを固定
+- fixed epochでwheelを二回buildし、byte/content/package digestを固定
+- official connection、competition mode、Kaggleは未実行・P12以降へ保持
+
+P11 HDS判断は、release manifestがcurrent code commitと全証拠を検証し、
+regression 7/7、wheel byte一致を満たした時点で`PASS`とする。
+未知task汎化とofficial readinessは引き続き未主張である。

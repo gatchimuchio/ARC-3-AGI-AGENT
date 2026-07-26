@@ -95,6 +95,9 @@ P10の現行戦略は
   **completion 100%、RHAE 99.619936696%**
 - S5決定性:
   **全183 levelの独立実行2回がSHA-256・byte単位で一致**
+- S5全実行trace:
+  **全10,733 cycleのC出力・HDS判断・M/emission結果・kernel eventを保存し、
+  closure digestと相互検証、独立2回がbyte単位で一致**
 - S6摂動測定:
   **25 game・183 levelを覆う2,048 record、七family・14,336件、exception 0**
 - S6決定性:

@@ -32,7 +32,7 @@ Release State
 | seed | Runtime 0、action head ordinal、pointer 41/43、PYTHONHASHSEED 0 |
 | action budget | 4,096 per environment |
 | regression | compileall、ruff、strict mypy、全unit、全integration、diff、secret scan |
-| sample evidence | S5 183/183、authority audit、oracle、二回byte一致 |
+| sample evidence | S5 183/183、authority audit、oracle、全10,733 cycle trace、二回byte一致 |
 | S6 evidence | 七摂動14,336件、二回byte一致、`MEASURED_NOT_PROVEN` |
 | package | `uv 0.11.32`、`setuptools 83.0.0`、fixed epochでwheel二回build、byte一致、内容・digest監査 |
 
@@ -72,6 +72,38 @@ P10 S5/S6 exact rerun audit
   -> release manifest test
 ```
 
+固定した再現性監査command:
+
+```bash
+python -m arc3_agi_agent.s5_runner \
+  --environments-dir ../environment_files \
+  --seed 0 --max-actions 4096 \
+  --trace-jsonl \
+    ../scratch/s5-full-trace-reproduction/S5_FULL_EXECUTION_TRACE.jsonl.gz \
+  --trace-manifest \
+    ../scratch/s5-full-trace-reproduction/S5_FULL_EXECUTION_TRACE_MANIFEST.json \
+  --output \
+    ../scratch/s5-full-trace-reproduction/S5_RENDERED_ONLY_CLOSURE_REPORT.json
+
+arc3-audit-p10-reproducibility \
+  --s5-primary ../analysis/runtime/S5_RENDERED_ONLY_CLOSURE_REPORT.json \
+  --s5-reproduction \
+    ../scratch/s5-full-trace-reproduction/S5_RENDERED_ONLY_CLOSURE_REPORT.json \
+  --s5-trace-primary-manifest \
+    ../analysis/runtime/S5_FULL_EXECUTION_TRACE_MANIFEST.json \
+  --s5-trace-reproduction-manifest \
+    ../scratch/s5-full-trace-reproduction/S5_FULL_EXECUTION_TRACE_MANIFEST.json \
+  --s6-primary ../analysis/runtime/S6_PERTURBATION_MEASUREMENT.json \
+  --s6-reproduction \
+    ../scratch/s6-repro/S6_PERTURBATION_MEASUREMENT.json \
+  --output ../analysis/release/P10_REPRODUCIBILITY_AUDIT.json
+```
+
+`S5_FULL_EXECUTION_TRACE.jsonl.gz`は全cycleのcanonical JSONLを
+`mtime=0`のgzipへ格納する。manifest loaderは圧縮file SHA、record stream
+digest、連番、kernel trace digest、game別closure trace digest、全183 levelの
+coverageを再計算する。
+
 WSLからWindows版`uv.exe`を実行する固定build command:
 
 ```bash
@@ -89,6 +121,8 @@ uv.exe build --wheel --out-dir <output>
 analysis/release/P10_REPRODUCIBILITY_AUDIT.json
 analysis/release/P11_REGRESSION_REPORT.json
 analysis/release/P11_RELEASE_STATE.json
+analysis/runtime/S5_FULL_EXECUTION_TRACE.jsonl.gz
+analysis/runtime/S5_FULL_EXECUTION_TRACE_MANIFEST.json
 ```
 
 ## 5. 非主張・禁止

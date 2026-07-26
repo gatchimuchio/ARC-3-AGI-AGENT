@@ -14,10 +14,11 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
+from ..s5_runner import load_s5_execution_trace_manifest
 from ..schema import digest_object
 
 P10_REPRODUCIBILITY_AUDIT_SCHEMA_VERSION = (
-    "arc3-p10-reproducibility-audit-v1"
+    "arc3-p10-reproducibility-audit-v2"
 )
 P10_REPRODUCIBILITY_AUDIT_DIGEST_PREFIX = (
     "arc3_p10_reproducibility_audit:"
@@ -91,10 +92,12 @@ def compile_p10_reproducibility_audit(
     *,
     s5_primary_path: Path,
     s5_reproduction_path: Path,
+    s5_trace_primary_manifest_path: Path,
+    s5_trace_reproduction_manifest_path: Path,
     s6_primary_path: Path,
     s6_reproduction_path: Path,
 ) -> dict[str, Any]:
-    """Bind the two exact S5 and S6 reruns into one compact audit."""
+    """Bind exact S5 closure/trace and S6 reruns into one audit."""
 
     evidence: dict[str, dict[str, object]] = {}
     specifications = (
@@ -168,6 +171,77 @@ def compile_p10_reproducibility_audit(
             "primary_filename": primary_path.name,
             "reproduction_filename": reproduction_path.name,
         }
+    primary_trace = load_s5_execution_trace_manifest(
+        s5_trace_primary_manifest_path,
+        closure_path=s5_primary_path,
+    )
+    reproduction_trace = load_s5_execution_trace_manifest(
+        s5_trace_reproduction_manifest_path,
+        closure_path=s5_reproduction_path,
+    )
+    s5_primary = _json_object(s5_primary_path)
+    trace_requirements = {
+        "complete_inventory": True,
+        "all_complete": True,
+        "complete_execution_trace_coverage": True,
+        "environment_count": 25,
+        "completed_levels": 183,
+        "record_count": s5_primary.get("actions_executed"),
+        "deterministic_seed": 0,
+        "max_actions": 4096,
+        "action_selection_receives_environment_identity": False,
+        "runtime_event_contains_environment_identity": False,
+    }
+    trace_failures: list[str] = []
+    for key, expected in trace_requirements.items():
+        if primary_trace.get(key) != expected:
+            trace_failures.append(
+                f"S5_FULL_EXECUTION_TRACE_PRIMARY_INVALID:{key}"
+            )
+        if reproduction_trace.get(key) != expected:
+            trace_failures.append(
+                "S5_FULL_EXECUTION_TRACE_REPRODUCTION_INVALID:"
+                + key
+            )
+    primary_trace_path = (
+        s5_trace_primary_manifest_path.parent
+        / str(primary_trace["trace_filename"])
+    )
+    reproduction_trace_path = (
+        s5_trace_reproduction_manifest_path.parent
+        / str(reproduction_trace["trace_filename"])
+    )
+    primary_manifest_bytes = (
+        s5_trace_primary_manifest_path.read_bytes()
+    )
+    reproduction_manifest_bytes = (
+        s5_trace_reproduction_manifest_path.read_bytes()
+    )
+    primary_trace_bytes = primary_trace_path.read_bytes()
+    reproduction_trace_bytes = reproduction_trace_path.read_bytes()
+    if primary_manifest_bytes != reproduction_manifest_bytes:
+        trace_failures.append(
+            "S5_FULL_EXECUTION_TRACE_MANIFEST_BYTE_MISMATCH"
+        )
+    if primary_trace_bytes != reproduction_trace_bytes:
+        trace_failures.append(
+            "S5_FULL_EXECUTION_TRACE_STREAM_BYTE_MISMATCH"
+        )
+    if trace_failures:
+        raise ValueError(";".join(sorted(set(trace_failures))))
+    evidence["S5_FULL_EXECUTION_TRACE"] = {
+        "byte_equal": True,
+        "content_digest": primary_trace.get("content_digest"),
+        "manifest_file_sha256": hashlib.sha256(
+            primary_manifest_bytes
+        ).hexdigest(),
+        "manifest_filename": s5_trace_primary_manifest_path.name,
+        "trace_file_sha256": hashlib.sha256(
+            primary_trace_bytes
+        ).hexdigest(),
+        "trace_filename": primary_trace_path.name,
+        "record_count": primary_trace.get("record_count"),
+    }
     body: dict[str, Any] = {
         "schema_version": P10_REPRODUCIBILITY_AUDIT_SCHEMA_VERSION,
         "phase": "P10-R6-REPRODUCIBILITY-AUDIT",
@@ -176,6 +250,7 @@ def compile_p10_reproducibility_audit(
         "s5_exact_rerun_count": 2,
         "s6_exact_rerun_count": 2,
         "s5_byte_equal": True,
+        "s5_trace_byte_equal": True,
         "s6_byte_equal": True,
         "generalization_claim": "MEASURED_NOT_PROVEN",
         "next_stage": "P11_RELEASE_STATE",
@@ -198,6 +273,7 @@ def load_p10_reproducibility_audit(path: Path) -> dict[str, Any]:
     if (
         report.get("status") != "PASS"
         or report.get("s5_byte_equal") is not True
+        or report.get("s5_trace_byte_equal") is not True
         or report.get("s6_byte_equal") is not True
         or report.get("generalization_claim")
         != "MEASURED_NOT_PROVEN"
@@ -529,6 +605,16 @@ def reproducibility_main() -> int:
     )
     parser.add_argument("--s5-primary", type=Path, required=True)
     parser.add_argument("--s5-reproduction", type=Path, required=True)
+    parser.add_argument(
+        "--s5-trace-primary-manifest",
+        type=Path,
+        required=True,
+    )
+    parser.add_argument(
+        "--s5-trace-reproduction-manifest",
+        type=Path,
+        required=True,
+    )
     parser.add_argument("--s6-primary", type=Path, required=True)
     parser.add_argument("--s6-reproduction", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
@@ -536,6 +622,12 @@ def reproducibility_main() -> int:
     report = compile_p10_reproducibility_audit(
         s5_primary_path=args.s5_primary,
         s5_reproduction_path=args.s5_reproduction,
+        s5_trace_primary_manifest_path=(
+            args.s5_trace_primary_manifest
+        ),
+        s5_trace_reproduction_manifest_path=(
+            args.s5_trace_reproduction_manifest
+        ),
         s6_primary_path=args.s6_primary,
         s6_reproduction_path=args.s6_reproduction,
     )

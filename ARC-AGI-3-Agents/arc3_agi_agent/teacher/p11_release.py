@@ -22,6 +22,7 @@ from ..s5_authority import (
     HDSPolicyResetController,
 )
 from ..s5_policy import load_s5_rendered_policy_body
+from ..s5_runner import load_s5_execution_trace_manifest
 from ..s5_runtime import S5_MEMORY_HISTORY_SNAPSHOT_LIMIT
 from ..schema import digest_object
 from .p11_regression import (
@@ -30,7 +31,7 @@ from .p11_regression import (
 )
 from .s6_generalization import load_s6_generalization_report
 
-P11_RELEASE_STATE_SCHEMA_VERSION = "arc3-p11-release-state-v1"
+P11_RELEASE_STATE_SCHEMA_VERSION = "arc3-p11-release-state-v2"
 P11_RELEASE_STATE_DIGEST_PREFIX = "arc3_p11_release_state:"
 P11_ACTION_BUDGET = 4096
 P11_RUNTIME_SEED = 0
@@ -406,6 +407,17 @@ def compile_p11_release_state(
         closure_path,
         digest_prefix="arc3_s5_rendered_runtime_closure:",
     )
+    full_trace_manifest_path = (
+        runtime_root / "S5_FULL_EXECUTION_TRACE_MANIFEST.json"
+    )
+    full_trace = load_s5_execution_trace_manifest(
+        full_trace_manifest_path,
+        closure_path=closure_path,
+    )
+    full_trace_path = (
+        full_trace_manifest_path.parent
+        / str(full_trace["trace_filename"])
+    )
     boundary_audit_path = (
         runtime_root / "S5_SHORTCUT_AND_AUTHORITY_AUDIT.json"
     )
@@ -460,6 +472,14 @@ def compile_p11_release_state(
         or closure.get("completed_levels") != 183
         or closure.get("error_count") != 0
         or closure.get("deterministic_seed") != P11_RUNTIME_SEED
+        or full_trace.get("record_count")
+        != closure.get("actions_executed")
+        or full_trace.get("complete_execution_trace_coverage")
+        is not True
+        or reproducibility.get("evidence", {})
+        .get("S5_FULL_EXECUTION_TRACE", {})
+        .get("content_digest")
+        != full_trace.get("content_digest")
         or boundary_audit.get("status") != "PASS"
         or matrix.get("stage_summary", {}).get("S5", {}).get("status")
         != "PASS"
@@ -513,6 +533,9 @@ def compile_p11_release_state(
     if regression.get("uv_lock_sha256") != _file_sha256(uv_lock_path):
         raise ValueError("P11_RELEASE_LOCK_CHANGED_AFTER_REGRESSION")
     compiler_paths = (
+        package_root
+        / "arc3_agi_agent"
+        / "s5_runner.py",
         package_root
         / "arc3_agi_agent"
         / "teacher"
@@ -670,6 +693,20 @@ def compile_p11_release_state(
                 closure_path,
                 closure,
             ),
+            "s5_full_execution_trace": {
+                **_artifact_descriptor(
+                    full_trace_manifest_path,
+                    full_trace,
+                ),
+                "trace_filename": full_trace_path.name,
+                "trace_file_sha256": _file_sha256(full_trace_path),
+                "record_count": full_trace.get("record_count"),
+                "complete_execution_trace_coverage": (
+                    full_trace.get(
+                        "complete_execution_trace_coverage"
+                    )
+                ),
+            },
             "s5_boundary_audit": _artifact_descriptor(
                 boundary_audit_path,
                 boundary_audit,
@@ -707,6 +744,7 @@ def compile_p11_release_state(
             "J0_fixed": "SUPPORTED",
             "M0_fixed": "SUPPORTED",
             "sample_completion_183": "SUPPORTED",
+            "all_execution_traces_persisted": "SUPPORTED",
             "same_condition_reproducibility": "SUPPORTED",
             "release_package_reproducibility": "SUPPORTED",
             "generalization": "MEASURED_NOT_PROVEN",
@@ -739,6 +777,10 @@ def load_p11_release_state(path: Path) -> dict[str, Any]:
         or report.get("competition_mode_executed") is not False
         or report.get("kaggle_work_executed") is not False
         or report.get("claims", {}).get("sample_completion_183")
+        != "SUPPORTED"
+        or report.get("claims", {}).get(
+            "all_execution_traces_persisted"
+        )
         != "SUPPORTED"
         or report.get("claims", {}).get("generalization")
         != "MEASURED_NOT_PROVEN"
