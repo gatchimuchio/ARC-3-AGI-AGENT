@@ -1,0 +1,1350 @@
+{
+  "adapter_version": "arc3-p10-local-score-oracle-v1",
+  "artifact_type": "arc3_local_score_oracle",
+  "current_local_result": {
+    "agent_label": "arc3-agi-agent:p10:teacher-s2-role-relative",
+    "completed_levels": 183,
+    "completion_rate": 1.0,
+    "completion_rate_percent": 100.0,
+    "error_count": 0,
+    "evaluation_provenance": {
+      "architecture_evidence_eligible": false,
+      "architecture_evidence_rule": "local score is a regression metric and does not prove genericity or P10 completion",
+      "instruction_body_digests": [
+        "arc3_teacher_s2_game_policy_graph:15fd4a5a7c1256897acd2dbf8d7b81c36a7c74de80663d42a2a983a73d44922f",
+        "arc3_teacher_s2_game_policy_graph:1cf3bc8803a8ffa69b7b7529b7cf8777b1f20ed1651ba5e109c53d5467a4a220",
+        "arc3_teacher_s2_game_policy_graph:3222f3ced7fad23b6e5466a3f94319ec4e9f2235607ec8de5c39993c02b66401",
+        "arc3_teacher_s2_game_policy_graph:4287c4ccafb7e0c04832ee6e289831d1d5819b445d9a2c556ded9d605887e89d",
+        "arc3_teacher_s2_game_policy_graph:4c81f5f599c1d236bbe5573513e7701a745e8afebc08868a4585f7a5101f48b4",
+        "arc3_teacher_s2_game_policy_graph:4eb02ea116fc58bbfe4f36d802973189b21e770cf3964fc5cee60dcbbafa66e0",
+        "arc3_teacher_s2_game_policy_graph:56cc90d2018eb974ea2b335e1dec8b196017e935aed335b2ee52f9fb8f825e98",
+        "arc3_teacher_s2_game_policy_graph:5b9920cce750dbe4bc1ca364282ef2195257940c302886b207c65ed27437b7a7",
+        "arc3_teacher_s2_game_policy_graph:603e0580e88f82662a771600ede4a2d148487c6c483528cf9b2e85dbc3b8d2ce",
+        "arc3_teacher_s2_game_policy_graph:6533e672d75bc5ee9d66a85affafbdd75d5724bdf1d51cc1f19afbd3911b5df6",
+        "arc3_teacher_s2_game_policy_graph:6be5ab74383364f73af15cbcbcc175706cf53c28edf54a5f7ae09f9ac21f14e7",
+        "arc3_teacher_s2_game_policy_graph:70a8cb1f4e4dffef46a13c69c056c26c31a826964171381d24972d866edb98e4",
+        "arc3_teacher_s2_game_policy_graph:91cff99a4d3c178216dade5a775eaf61b997162d5b27f29f2255a953e885d462",
+        "arc3_teacher_s2_game_policy_graph:96b6eb5b2a762f35b57f08b6b96133630aca0f5718dbd3f58d8394c184797902",
+        "arc3_teacher_s2_game_policy_graph:a282b3fcbcc24d841984fd53fbba391ad3f32b1132b817cd094f697fc36bafb8",
+        "arc3_teacher_s2_game_policy_graph:a59d8f1c989055c1494e6dcad1fd5009fa801061b25e8b064749fae136c3fde4",
+        "arc3_teacher_s2_game_policy_graph:a81f9bc8383d7ddfc972fbdc08c04be9e3591826931d37504b7262e9db451bef",
+        "arc3_teacher_s2_game_policy_graph:d0cf0285f572c6c1424120a1dd8d8d61eb9d94aed36a1ad9867bb97b88b260f2",
+        "arc3_teacher_s2_game_policy_graph:d55d634262cafb08290fe1b43b71faa9167a48fabd49335ea7ad7705c692e434",
+        "arc3_teacher_s2_game_policy_graph:d8d87cd4ad4a71105dbb21133c39380b822edf2d1cc3efd9028954e039d4443b",
+        "arc3_teacher_s2_game_policy_graph:d9932a1c52714f1a3061015b98cee70fd0f2d7dd44d56f3af53af48b88562299",
+        "arc3_teacher_s2_game_policy_graph:e1008e081a71905a670822cde04031606695a8cb4299b8e931d90da4c5df0c68",
+        "arc3_teacher_s2_game_policy_graph:e77b22533ba4cb3270238b87dc7ad6728125d2690e05a6d4d1c56294a305a922",
+        "arc3_teacher_s2_game_policy_graph:f2880a2bb83acf903fd7f594a5fb541d00fc70f429197c5856eca97f7ebda1da",
+        "arc3_teacher_s2_game_policy_graph:fbe7532a8fd61dfadab0c2f9ecda766a10074c064d9a8c5f719bdeb02eafb8f7"
+      ],
+      "instruction_body_versions": [
+        "teacher-s2-role-relative-graph-v1"
+      ],
+      "instruction_variant": "teacher-s2-role-relative",
+      "max_actions": 1107,
+      "mode": "p10-offline",
+      "operation_mode": "offline",
+      "phase": "P10",
+      "visual_operator_versions": [
+        "teacher-s2-render-role-resolution"
+      ]
+    },
+    "game_over_count": 0,
+    "maxed_out_count": 0,
+    "not_finished_count": 0,
+    "official_rhae_score_fraction": 0.996199367,
+    "official_rhae_score_percent": 99.619936696
+  },
+  "games": [
+    {
+      "actions_used": 503,
+      "attempted_level_actions": [
+        32,
+        35,
+        89,
+        38,
+        58,
+        83,
+        115,
+        53
+      ],
+      "baseline_actions": [
+        32,
+        50,
+        75,
+        37,
+        89,
+        159,
+        233,
+        73
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "ar25-0c556536",
+      "game_score_percent": 100.0,
+      "level_count": 8,
+      "level_scores_percent": [
+        100.0,
+        115.0,
+        71.013760889,
+        94.806094183,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 8,
+      "scored_level_actions": [
+        32,
+        35,
+        89,
+        38,
+        58,
+        83,
+        115,
+        53
+      ],
+      "title": "AR25",
+      "weighted_raw_score_percent": 108.674046094
+    },
+    {
+      "actions_used": 524,
+      "attempted_level_actions": [
+        30,
+        47,
+        35,
+        59,
+        32,
+        92,
+        77,
+        53,
+        99
+      ],
+      "baseline_actions": [
+        21,
+        48,
+        44,
+        38,
+        33,
+        87,
+        86,
+        131,
+        163
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "bp35-0a0ad940",
+      "game_score_percent": 100.0,
+      "level_count": 9,
+      "level_scores_percent": [
+        49.0,
+        104.300588502,
+        115.0,
+        41.482332663,
+        106.34765625,
+        89.425803403,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 9,
+      "scored_level_actions": [
+        30,
+        47,
+        35,
+        59,
+        32,
+        92,
+        77,
+        53,
+        99
+      ],
+      "title": "BP35",
+      "weighted_raw_score_percent": 102.151635763
+    },
+    {
+      "actions_used": 124,
+      "attempted_level_actions": [
+        44,
+        6,
+        25,
+        16,
+        17,
+        16
+      ],
+      "baseline_actions": [
+        55,
+        8,
+        41,
+        21,
+        23,
+        23
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "cd82-fb555c5d",
+      "game_score_percent": 100.0,
+      "level_count": 6,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        44,
+        6,
+        25,
+        16,
+        17,
+        16
+      ],
+      "title": "CD82",
+      "weighted_raw_score_percent": 115.0
+    },
+    {
+      "actions_used": 556,
+      "attempted_level_actions": [
+        35,
+        42,
+        85,
+        229,
+        79,
+        86
+      ],
+      "baseline_actions": [
+        29,
+        54,
+        85,
+        300,
+        208,
+        113
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "cn04-2fe56bfb",
+      "game_score_percent": 100.0,
+      "level_count": 6,
+      "level_scores_percent": [
+        68.653061224,
+        115.0,
+        100.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        35,
+        42,
+        85,
+        229,
+        79,
+        86
+      ],
+      "title": "CN04",
+      "weighted_raw_score_percent": 110.650145773
+    },
+    {
+      "actions_used": 598,
+      "attempted_level_actions": [
+        31,
+        64,
+        49,
+        79,
+        158,
+        217
+      ],
+      "baseline_actions": [
+        59,
+        102,
+        67,
+        98,
+        324,
+        578
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "dc22-fdcac232",
+      "game_score_percent": 100.0,
+      "level_count": 6,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        31,
+        64,
+        49,
+        79,
+        158,
+        217
+      ],
+      "title": "DC22",
+      "weighted_raw_score_percent": 115.0
+    },
+    {
+      "actions_used": 75,
+      "attempted_level_actions": [
+        4,
+        7,
+        14,
+        16,
+        21,
+        13
+      ],
+      "baseline_actions": [
+        43,
+        12,
+        23,
+        28,
+        65,
+        37
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "ft09-0d8bbf25",
+      "game_score_percent": 100.0,
+      "level_count": 6,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        4,
+        7,
+        14,
+        16,
+        21,
+        13
+      ],
+      "title": "FT09",
+      "weighted_raw_score_percent": 115.0
+    },
+    {
+      "actions_used": 406,
+      "attempted_level_actions": [
+        109,
+        40,
+        64,
+        31,
+        65,
+        54,
+        43
+      ],
+      "baseline_actions": [
+        78,
+        175,
+        179,
+        230,
+        96,
+        54,
+        67
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "g50t-5849a774",
+      "game_score_percent": 100.0,
+      "level_count": 7,
+      "level_scores_percent": [
+        51.20781079,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        100.0,
+        115.0
+      ],
+      "levels_completed": 7,
+      "scored_level_actions": [
+        109,
+        40,
+        64,
+        31,
+        65,
+        54,
+        43
+      ],
+      "title": "G50T",
+      "weighted_raw_score_percent": 109.507421814
+    },
+    {
+      "actions_used": 337,
+      "attempted_level_actions": [
+        19,
+        44,
+        40,
+        39,
+        33,
+        69,
+        93
+      ],
+      "baseline_actions": [
+        28,
+        109,
+        51,
+        51,
+        33,
+        132,
+        326
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "ka59-38d34dbb",
+      "game_score_percent": 100.0,
+      "level_count": 7,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        100.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 7,
+      "scored_level_actions": [
+        19,
+        44,
+        40,
+        39,
+        33,
+        69,
+        93
+      ],
+      "title": "KA59",
+      "weighted_raw_score_percent": 112.321428571
+    },
+    {
+      "actions_used": 1107,
+      "attempted_level_actions": [
+        10,
+        59,
+        47,
+        54,
+        109,
+        93,
+        171,
+        71,
+        113,
+        380
+      ],
+      "baseline_actions": [
+        32,
+        81,
+        60,
+        71,
+        205,
+        148,
+        244,
+        109,
+        164,
+        225
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "lf52-271a04aa",
+      "game_score_percent": 100.0,
+      "level_count": 10,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        35.058864266
+      ],
+      "levels_completed": 10,
+      "scored_level_actions": [
+        10,
+        59,
+        47,
+        54,
+        109,
+        93,
+        171,
+        71,
+        113,
+        380
+      ],
+      "title": "LF52",
+      "weighted_raw_score_percent": 100.465248048
+    },
+    {
+      "actions_used": 237,
+      "attempted_level_actions": [
+        6,
+        35,
+        20,
+        17,
+        35,
+        30,
+        27,
+        67
+      ],
+      "baseline_actions": [
+        17,
+        38,
+        31,
+        16,
+        41,
+        60,
+        26,
+        159
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "lp85-305b61c3",
+      "game_score_percent": 100.0,
+      "level_count": 8,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        88.581314879,
+        115.0,
+        115.0,
+        92.729766804,
+        115.0
+      ],
+      "levels_completed": 8,
+      "scored_level_actions": [
+        6,
+        35,
+        20,
+        17,
+        35,
+        30,
+        27,
+        67
+      ],
+      "title": "LP85",
+      "weighted_raw_score_percent": 107.734267421
+    },
+    {
+      "actions_used": 472,
+      "attempted_level_actions": [
+        63,
+        46,
+        43,
+        54,
+        56,
+        104,
+        106
+      ],
+      "baseline_actions": [
+        22,
+        123,
+        73,
+        84,
+        96,
+        192,
+        186
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "ls20-9607627b",
+      "game_score_percent": 100.0,
+      "level_count": 7,
+      "level_scores_percent": [
+        12.194507433,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 7,
+      "scored_level_actions": [
+        63,
+        46,
+        43,
+        54,
+        56,
+        104,
+        106
+      ],
+      "title": "LS20",
+      "weighted_raw_score_percent": 111.328375265
+    },
+    {
+      "actions_used": 389,
+      "attempted_level_actions": [
+        23,
+        61,
+        88,
+        13,
+        139,
+        65
+      ],
+      "baseline_actions": [
+        30,
+        111,
+        203,
+        26,
+        500,
+        237
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "m0r0-492f87ba",
+      "game_score_percent": 100.0,
+      "level_count": 6,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        23,
+        61,
+        88,
+        13,
+        139,
+        65
+      ],
+      "title": "M0R0",
+      "weighted_raw_score_percent": 115.0
+    },
+    {
+      "actions_used": 152,
+      "attempted_level_actions": [
+        13,
+        27,
+        30,
+        18,
+        38,
+        26
+      ],
+      "baseline_actions": [
+        22,
+        33,
+        51,
+        26,
+        52,
+        49
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "r11l-495a7899",
+      "game_score_percent": 100.0,
+      "level_count": 6,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        13,
+        27,
+        30,
+        18,
+        38,
+        26
+      ],
+      "title": "R11L",
+      "weighted_raw_score_percent": 115.0
+    },
+    {
+      "actions_used": 1033,
+      "attempted_level_actions": [
+        47,
+        46,
+        60,
+        108,
+        161,
+        167,
+        224,
+        220
+      ],
+      "baseline_actions": [
+        26,
+        42,
+        86,
+        108,
+        189,
+        139,
+        424,
+        241
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "re86-8af5384d",
+      "game_score_percent": 100.0,
+      "level_count": 8,
+      "level_scores_percent": [
+        30.60208239,
+        83.364839319,
+        115.0,
+        100.0,
+        115.0,
+        69.278210047,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 8,
+      "scored_level_actions": [
+        47,
+        46,
+        60,
+        108,
+        161,
+        167,
+        224,
+        220
+      ],
+      "title": "RE86",
+      "weighted_raw_score_percent": 101.611139481
+    },
+    {
+      "actions_used": 504,
+      "attempted_level_actions": [
+        21,
+        45,
+        69,
+        54,
+        162,
+        38,
+        64,
+        51
+      ],
+      "baseline_actions": [
+        20,
+        89,
+        106,
+        54,
+        162,
+        38,
+        86,
+        83
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "s5i5-18d95033",
+      "game_score_percent": 100.0,
+      "level_count": 8,
+      "level_scores_percent": [
+        90.702947846,
+        115.0,
+        115.0,
+        100.0,
+        100.0,
+        100.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 8,
+      "scored_level_actions": [
+        21,
+        45,
+        69,
+        54,
+        162,
+        38,
+        64,
+        51
+      ],
+      "title": "S5I5",
+      "weighted_raw_score_percent": 108.075081885
+    },
+    {
+      "actions_used": 151,
+      "attempted_level_actions": [
+        23,
+        27,
+        15,
+        15,
+        18,
+        19,
+        17,
+        17
+      ],
+      "baseline_actions": [
+        18,
+        28,
+        18,
+        19,
+        31,
+        23,
+        58,
+        18
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "sb26-7fbdac44",
+      "game_score_percent": 100.0,
+      "level_count": 8,
+      "level_scores_percent": [
+        61.247637051,
+        107.544581619,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        112.110726644
+      ],
+      "levels_completed": 8,
+      "scored_level_actions": [
+        23,
+        27,
+        15,
+        15,
+        18,
+        19,
+        17,
+        17
+      ],
+      "title": "SB26",
+      "weighted_raw_score_percent": 112.450628151
+    },
+    {
+      "actions_used": 207,
+      "attempted_level_actions": [
+        32,
+        7,
+        16,
+        34,
+        54,
+        64
+      ],
+      "baseline_actions": [
+        36,
+        6,
+        32,
+        83,
+        143,
+        50
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "sc25-635fd71a",
+      "game_score_percent": 95.62617681,
+      "level_count": 6,
+      "level_scores_percent": [
+        115.0,
+        73.469387755,
+        115.0,
+        115.0,
+        115.0,
+        61.03515625
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        32,
+        7,
+        16,
+        34,
+        54,
+        64
+      ],
+      "title": "SC25",
+      "weighted_raw_score_percent": 95.62617681
+    },
+    {
+      "actions_used": 647,
+      "attempted_level_actions": [
+        37,
+        39,
+        101,
+        74,
+        183,
+        98,
+        67,
+        48
+      ],
+      "baseline_actions": [
+        61,
+        177,
+        101,
+        103,
+        230,
+        181,
+        125,
+        92
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "sk48-d8078629",
+      "game_score_percent": 100.0,
+      "level_count": 8,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        100.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 8,
+      "scored_level_actions": [
+        37,
+        39,
+        101,
+        74,
+        183,
+        98,
+        67,
+        48
+      ],
+      "title": "SK48",
+      "weighted_raw_score_percent": 113.75
+    },
+    {
+      "actions_used": 441,
+      "attempted_level_actions": [
+        41,
+        65,
+        45,
+        90,
+        96,
+        104
+      ],
+      "baseline_actions": [
+        39,
+        58,
+        25,
+        148,
+        96,
+        152
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "sp80-589a99af",
+      "game_score_percent": 94.87224058,
+      "level_count": 6,
+      "level_scores_percent": [
+        90.481856038,
+        79.621301775,
+        30.864197531,
+        115.0,
+        100.0,
+        115.0
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        41,
+        65,
+        45,
+        90,
+        96,
+        104
+      ],
+      "title": "SP80",
+      "weighted_raw_score_percent": 94.87224058
+    },
+    {
+      "actions_used": 216,
+      "attempted_level_actions": [
+        37,
+        15,
+        19,
+        35,
+        36,
+        24,
+        8,
+        26,
+        16
+      ],
+      "baseline_actions": [
+        22,
+        42,
+        26,
+        115,
+        36,
+        31,
+        8,
+        40,
+        41
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "su15-1944f8ab",
+      "game_score_percent": 100.0,
+      "level_count": 9,
+      "level_scores_percent": [
+        35.354273192,
+        115.0,
+        115.0,
+        115.0,
+        100.0,
+        115.0,
+        100.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 9,
+      "scored_level_actions": [
+        37,
+        15,
+        19,
+        35,
+        36,
+        24,
+        8,
+        26,
+        16
+      ],
+      "title": "SU15",
+      "weighted_raw_score_percent": 109.23009496
+    },
+    {
+      "actions_used": 235,
+      "attempted_level_actions": [
+        35,
+        22,
+        19,
+        48,
+        24,
+        30,
+        57
+      ],
+      "baseline_actions": [
+        32,
+        72,
+        26,
+        40,
+        30,
+        55,
+        62
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "tn36-ef4dde99",
+      "game_score_percent": 100.0,
+      "level_count": 7,
+      "level_scores_percent": [
+        83.591836735,
+        115.0,
+        115.0,
+        69.444444444,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 7,
+      "scored_level_actions": [
+        35,
+        22,
+        19,
+        48,
+        24,
+        30,
+        57
+      ],
+      "title": "TN36",
+      "weighted_raw_score_percent": 107.370343375
+    },
+    {
+      "actions_used": 301,
+      "attempted_level_actions": [
+        23,
+        41,
+        41,
+        32,
+        68,
+        96
+      ],
+      "baseline_actions": [
+        54,
+        58,
+        40,
+        45,
+        71,
+        146
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "tr87-cd924810",
+      "game_score_percent": 100.0,
+      "level_count": 6,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        95.181439619,
+        115.0,
+        109.01816609,
+        115.0
+      ],
+      "levels_completed": 6,
+      "scored_level_actions": [
+        23,
+        41,
+        41,
+        32,
+        68,
+        96
+      ],
+      "title": "TR87",
+      "weighted_raw_score_percent": 110.744530919
+    },
+    {
+      "actions_used": 206,
+      "attempted_level_actions": [
+        18,
+        17,
+        28,
+        17,
+        29,
+        30,
+        14,
+        23,
+        30
+      ],
+      "baseline_actions": [
+        19,
+        16,
+        34,
+        42,
+        123,
+        80,
+        14,
+        23,
+        111
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "tu93-0768757b",
+      "game_score_percent": 100.0,
+      "level_count": 9,
+      "level_scores_percent": [
+        111.419753086,
+        88.581314879,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        100.0,
+        100.0,
+        115.0
+      ],
+      "levels_completed": 9,
+      "scored_level_actions": [
+        18,
+        17,
+        28,
+        17,
+        29,
+        30,
+        14,
+        23,
+        30
+      ],
+      "title": "TU93",
+      "weighted_raw_score_percent": 108.746275174
+    },
+    {
+      "actions_used": 338,
+      "attempted_level_actions": [
+        7,
+        15,
+        36,
+        39,
+        88,
+        44,
+        109
+      ],
+      "baseline_actions": [
+        7,
+        18,
+        44,
+        61,
+        131,
+        34,
+        152
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "vc33-5430563c",
+      "game_score_percent": 100.0,
+      "level_count": 7,
+      "level_scores_percent": [
+        100.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        59.710743802,
+        115.0
+      ],
+      "levels_completed": 7,
+      "scored_level_actions": [
+        7,
+        15,
+        36,
+        39,
+        88,
+        44,
+        109
+      ],
+      "title": "VC33",
+      "weighted_raw_score_percent": 102.616587957
+    },
+    {
+      "actions_used": 974,
+      "attempted_level_actions": [
+        46,
+        63,
+        76,
+        98,
+        236,
+        63,
+        54,
+        127,
+        211
+      ],
+      "baseline_actions": [
+        71,
+        119,
+        183,
+        98,
+        368,
+        68,
+        79,
+        442,
+        415
+      ],
+      "completion_ceiling_percent": 100.0,
+      "completion_rate": 1.0,
+      "evaluation_error": "",
+      "evaluation_state": "WIN",
+      "game_id": "wa30-ee6fef47",
+      "game_score_percent": 100.0,
+      "level_count": 9,
+      "level_scores_percent": [
+        115.0,
+        115.0,
+        115.0,
+        100.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0,
+        115.0
+      ],
+      "levels_completed": 9,
+      "scored_level_actions": [
+        46,
+        63,
+        76,
+        98,
+        236,
+        63,
+        54,
+        127,
+        211
+      ],
+      "title": "WA30",
+      "weighted_raw_score_percent": 113.666666667
+    }
+  ],
+  "legacy_source": {
+    "blob": "5a5a77e7ef017c46c4b28581a06240e07ad718e5",
+    "commit": "62a16b6f930b8f2663d4a07f791314069ca3043b",
+    "path": "scripts/generate_arc3_local_score_oracle.py",
+    "repository": "gatchimuchio/ARC-Layer-0-Functional-Compliance"
+  },
+  "oracle": {
+    "baseline_action_total": 17135,
+    "game_count": 25,
+    "level_count": 183,
+    "perfect_completion_levels": 183,
+    "perfect_completion_rate": 1.0,
+    "perfect_score_percent": 100.0
+  },
+  "schema_version": 1,
+  "score_digest": "1913a3b78e88801052f922ccdc789e7bfeb50427b132855d243d5f8b76233539",
+  "scoring_authority": {
+    "full_completion_score_cap_percent": 100.0,
+    "game_formula": "min(weighted_level_average, weighted_completed_level_ceiling)",
+    "level_formula": "min((baseline_actions / ai_actions)^2 * 100, 115)",
+    "methodology_url": "https://docs.arcprize.org/methodology",
+    "per_level_efficiency_cap_percent": 115.0,
+    "toolkit": "arc-agi",
+    "toolkit_version": "0.9.8",
+    "total_formula": "arithmetic_mean(per_game_scores)"
+  },
+  "source": {
+    "p10_report": "C:\\Users\\mzcum\\ARC-3-AGI-AGENT\\analysis\\teacher\\TEACHER_S2_ORACLE_ADAPTER_REPORT.json",
+    "p10_report_sha256": "5c646619a2949ee6bd80910f3d68a1c2c2427d04b15a5bd986fd3ab0c41291b5",
+    "sample_zip": "C:\\Users\\mzcum\\Downloads\\arc-prize-2026-arc-agi-3.zip",
+    "sample_zip_sha256": "c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d505de2b1ec61d645",
+    "scoring_input_digest": "0716652638e3348511cc0790d6506e0ae3f07153d6021ce4f714126b7dc5fb6c"
+  }
+}

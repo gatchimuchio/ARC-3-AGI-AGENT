@@ -21,6 +21,7 @@ from arcengine import FrameDataRaw
 
 from ..protocol import AuthorityViolation
 from ..schema import digest_object
+from .render_state import rendered_frame_digest
 
 S1_STATE_CONDITION_SCHEMA_VERSION = "arc3-teacher-s1-state-condition-v2"
 S1_STATE_SIGNATURE_PREFIX = "arc3_teacher_s1_state:"
@@ -225,21 +226,11 @@ def _available_action_ids(frame: FrameDataRaw) -> list[int]:
     return output
 
 
-def rendered_frame_digest(frame: FrameDataRaw) -> str:
-    frames = list(frame.frame)
-    if not frames:
-        normalized: object = []
-    else:
-        final_frame = frames[-1]
-        normalized = (
-            final_frame.tolist()
-            if hasattr(final_frame, "tolist")
-            else final_frame
-        )
-    return "sha256:" + digest_object(normalized)
-
-
-def _action_condition(game: Any) -> dict[str, object]:
+def _action_condition(
+    game: Any,
+    *,
+    include_pointer_payload: bool = True,
+) -> dict[str, object]:
     raw_action = getattr(game, "_action", None)
     if raw_action is None:
         return {"action_id": None, "action_data": {}}
@@ -251,20 +242,23 @@ def _action_condition(game: Any) -> dict[str, object]:
     if not isinstance(raw_data, Mapping):
         raw_data = {}
     action_data: dict[str, int] = {}
-    for key in ("x", "y"):
-        value = raw_data.get(key)
-        if isinstance(value, int) and not isinstance(value, bool):
-            action_data[key] = value
+    if include_pointer_payload:
+        for key in ("x", "y"):
+            value = raw_data.get(key)
+            if isinstance(value, int) and not isinstance(value, bool):
+                action_data[key] = value
     return {
         "action_id": action_id,
         "action_data": action_data,
     }
 
 
-def source_state_descriptor(
+def source_state_body(
     environment: LocalEnvironmentWrapper,
+    *,
+    include_previous_action_payload: bool = True,
 ) -> dict[str, object]:
-    """Read the current privileged source condition without replay position."""
+    """Read stable privileged source content without replay position."""
 
     if not isinstance(environment, LocalEnvironmentWrapper):
         raise AuthorityViolation("S1_LOCAL_WRAPPER_REQUIRED")
@@ -301,12 +295,15 @@ def source_state_descriptor(
             excluded_source_field_count += 1
             continue
         source_fields[field_name] = normalized
-    body: dict[str, object] = {
+    return {
         "game_class": type(game).__name__,
         "source_fields": source_fields,
         "current_level_data": _normalized_value(level_data),
         "custom_hidden_state": _normalized_value(hidden_state),
-        "previous_environment_action": _action_condition(game),
+        "previous_environment_action": _action_condition(
+            game,
+            include_pointer_payload=include_previous_action_payload,
+        ),
         "excluded_unstable_or_unbounded_source_field_count": (
             excluded_source_field_count
         ),
@@ -317,6 +314,14 @@ def source_state_descriptor(
             "SOURCE_REASONING_METADATA",
         ],
     }
+
+
+def source_state_descriptor(
+    environment: LocalEnvironmentWrapper,
+) -> dict[str, object]:
+    """Read the current privileged source condition without replay position."""
+
+    body = source_state_body(environment)
     return {
         "schema_version": S1_STATE_CONDITION_SCHEMA_VERSION,
         "source_state_digest": (
@@ -424,6 +429,7 @@ __all__ = [
     "S1_STATE_SIGNATURE_PREFIX",
     "S1_ACTION_EFFECT_HISTORY_LIMIT",
     "source_state_descriptor",
+    "source_state_body",
     "rendered_frame_digest",
     "state_condition_descriptor",
     "state_condition_signature",

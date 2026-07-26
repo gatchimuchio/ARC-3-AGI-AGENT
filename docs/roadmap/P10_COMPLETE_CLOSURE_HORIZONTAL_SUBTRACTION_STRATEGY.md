@@ -60,7 +60,7 @@ literal座標、source/hidden stateをRuntimeからimportまたは参照して�
 |---|---|---:|---|
 | S0 | 全特権を許可 | 183/183 | `PASS` |
 | S1 | 固定action列を禁止 | 183/183 | `PASS` |
-| S2 | literal座標も禁止 | 183/183 | `NOT_RUN` |
+| S2 | literal座標も禁止 | 183/183 | `PASS` |
 | S3 | task/game/level ID routingも禁止 | 183/183 | `NOT_RUN` |
 | S4 | source/hidden stateも禁止 | 183/183 | `NOT_RUN` |
 | S5 | rendered observationと履歴のみ | 183/183 | `NOT_RUN` |
@@ -101,6 +101,14 @@ R0の35/183とRHAE 18.821945363%は旧Runtime Studentの回帰値であり、
 | S1 privileged Teacher RHAE | 99.619936696% |
 | S1 RHAE delta vs S0 | +0.173050539 percentage point |
 | S1 fixed-action decision dependency | 0 |
+| S2 role-relative graph | 10,758 node / 10,733 edge |
+| S2 executable action | 10,733 |
+| S2 rendered role resolution | 3,112 |
+| S2 relative relation constraint | 26,623 |
+| S2 stored absolute pointer payload | 0 |
+| S2 selector failure / error | 0 / 0 |
+| S2 privileged Teacher RHAE | 99.619936696% |
+| S2 RHAE delta vs S1 | 0 percentage point |
 
 Public human trajectory inventoryは25 game、183 level、11,648 recorded action。
 FT09の公開trajectoryは保持サンプルの旧revisionを対象としていたため、既存の
@@ -231,16 +239,55 @@ work block契約:
 - `analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json`
 - `analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json`
 
-### P10-R5 水平減算 — S2待機
+### P10-R5 水平減算 — S2完了・S3待機
 
-S1は完了した。次はliteral座標を除去するS2であり、S3以降へ先行しない。
+S2 compilerだけがS1 graphのpointer targetを観測し、absolute targetを
+target-centred rendered relationへ変換する。S2 graphとexecutorは
+`action_data`、absolute x/y、row/column、coordinate、replay position、
+action ordinalを保持しない。環境APIがpointer payloadを要求する時だけ、
+current renderから一意解決したtargetをtransient payloadとして生成する。
+
+work block契約:
+
+- `X`: S1 graph、保持OFFLINE環境、S2 Teacher packageだけを観測し、
+  role selector、S2 graph/executor、S2証拠だけを変更する。
+- `R`: current-state nodeを引き、pointer actionならtarget-centred palette
+  relationをcurrent renderへ照合して一意targetを得て、一手後に再観測する。
+- `Mc`: 25/25 game、183/183 level、error 0、selector failure 0、
+  absolute payload保存0、全actionでWIN距離減少の場合だけS2を`PASS`とする。
+- 非目的: ID routing、source/hidden state、answer/replay graphの除去、
+  Runtime Student Pへの採用。
+- 証拠境界: S2は開発用Teacher証拠でありidentity-freeまたは
+  rendered-only能力ではない。
+- 反証条件: graph内absolute target key、selector曖昧/不一致、未知node/target、
+  距離非減少、`GAME_OVER`、未完levelのいずれか。
+- 回帰線: 同じOFFLINE sampleとlocal oracleでS1の183/183・RHAEを維持する。
+
+結果:
+
+- source transition witness / executable action: 10,733
+- state node / action edge: 10,758 / 10,733
+- branch / merged / nondeterministic action: 0 / 0 / 0
+- rendered role selector resolution: 3,112
+- boundary relationを必要としたselector: 204
+- relative relation constraint: 26,623
+- stored absolute pointer payload: 0
+- selector failure / node miss / unexpected target / error: 0 / 0 / 0 / 0
+- same-sample local oracle: RHAE 99.619936696%
+- S1 local-oracle delta: 0 percentage point
+- full graph rerun: byte-identical
+  (`sha256:082e8b33cb104286ad2f5706fc582e01dd564e2373427d9e0436dc62ee7d1956`)
+- full closure rerun: byte-identical
+  (`sha256:389ead42c459333a2302f180ff9d2fa99d3af51378fdd1ffa102e8dff3c8ff80`)
 
 正本:
 
+- `analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json`
+- `analysis/teacher/TEACHER_S2_CLOSURE_REPORT.json`
 - `analysis/teacher/PRIVILEGE_SUBTRACTION_MATRIX.json`
 - `analysis/teacher/RUNTIME_P_COMPILATION_REPORT.json`
 
-現状のRuntime P reportは`BLOCKED_BY_S2_LITERAL_COORDINATES`であり、
+現状のRuntime P reportは`BLOCKED_BY_S3_IDENTITY_ROUTING`であり、
 Runtime P変更・rule採用・graph採用はいずれも0である。
 
 ### P10-R6 汎化試験 — 未開始
@@ -288,6 +335,11 @@ analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json
 analysis/teacher/TEACHER_S1_ORACLE_ADAPTER_REPORT.json
 analysis/teacher/TEACHER_S1_LOCAL_SCORE_ORACLE.json
 analysis/teacher/TEACHER_S1_LOCAL_SCORE_ORACLE.md
+analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json
+analysis/teacher/TEACHER_S2_CLOSURE_REPORT.json
+analysis/teacher/TEACHER_S2_ORACLE_ADAPTER_REPORT.json
+analysis/teacher/TEACHER_S2_LOCAL_SCORE_ORACLE.json
+analysis/teacher/TEACHER_S2_LOCAL_SCORE_ORACLE.md
 ```
 
 ## 7. 再生成・検証
@@ -315,6 +367,18 @@ python -m arc3_agi_agent.teacher.s1_graph_executor \
     ../analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json \
   --output ../analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json
 
+python -m arc3_agi_agent.teacher.s2_graph_compiler \
+  --environments-dir ../environment_files \
+  --s1-policy-graph \
+    ../analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json \
+  --output ../analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json
+
+python -m arc3_agi_agent.teacher.s2_graph_executor \
+  --environments-dir ../environment_files \
+  --policy-graph \
+    ../analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json \
+  --output ../analysis/teacher/TEACHER_S2_CLOSURE_REPORT.json
+
 python -m arc3_agi_agent.teacher.solution_graph_compiler \
   --corpus ../analysis/teacher/FULL_SOLUTION_CORPUS.json \
   --closure-report ../analysis/teacher/TEACHER_S0_CLOSURE_REPORT.json \
@@ -325,20 +389,26 @@ python -m arc3_agi_agent.teacher.solution_graph_compiler \
     ../analysis/teacher/S1_STATE_CONDITIONED_POLICY_GRAPH.json \
   --s1-closure-report \
     ../analysis/teacher/TEACHER_S1_CLOSURE_REPORT.json \
+  --s2-policy-graph \
+    ../analysis/teacher/S2_ROLE_RELATIVE_POLICY_GRAPH.json \
+  --s2-closure-report \
+    ../analysis/teacher/TEACHER_S2_CLOSURE_REPORT.json \
   --output-dir ../analysis/teacher
 
 python -m pytest -q \
   tests/unit/test_teacher_complete_closure.py \
   tests/integration/test_teacher_s0_replay.py \
-  tests/integration/test_teacher_s1_graph.py
+  tests/integration/test_teacher_s1_graph.py \
+  tests/unit/test_teacher_s2_role_selector.py \
+  tests/integration/test_teacher_s2_graph.py
 ```
 
 ## 8. 次work block
 
 ```text
-WB-S2-LITERAL-COORDINATE-SUBTRACTION
+WB-S3-IDENTITY-ROUTING-SUBTRACTION
 ```
 
-R1〜R4とS1は閉じた。次はS1 graphのpointer targetをrole-relative selectorへ
-変換し、literal x/yを一切読まずにS2を183/183へ閉じる。S2が183/183に
-なる前にS3以降へ進まない。
+R1〜R5とS1/S2は閉じた。次はtask/game/level identityをstate matchingと
+routingから除去し、S3を183/183へ閉じる。S3が183/183になる前にS4以降へ
+進まない。

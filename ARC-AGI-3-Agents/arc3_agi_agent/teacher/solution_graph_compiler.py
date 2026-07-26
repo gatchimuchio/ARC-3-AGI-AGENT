@@ -1,4 +1,4 @@
-"""Compile closed S0/S1 Teacher evidence into structure artifacts.
+"""Compile closed S0/S1/S2 Teacher evidence into structure artifacts.
 
 The outputs are development artifacts.  They make every remaining privilege
 explicit and therefore must never be imported by the rendered-only Runtime
@@ -19,6 +19,8 @@ from .human_replay_corpus import load_full_solution_corpus
 from .replay_runner import TEACHER_CLOSURE_REPORT_DIGEST_PREFIX
 from .s1_graph_executor import load_s1_closure_report
 from .s1_graph_schema import load_s1_policy_graph
+from .s2_graph_executor import load_s2_closure_report
+from .s2_graph_schema import load_s2_policy_graph
 from .source_semantics import (
     compile_source_causal_semantics,
     source_contract_index,
@@ -31,13 +33,13 @@ INTRA_GAME_GRAPH_SCHEMA_VERSION = (
     "arc3-intra-game-progression-graph-v2"
 )
 CROSS_GAME_GRAMMAR_SCHEMA_VERSION = (
-    "arc3-cross-game-structural-grammar-v3"
+    "arc3-cross-game-structural-grammar-v4"
 )
 PRIVILEGE_MATRIX_SCHEMA_VERSION = (
-    "arc3-privilege-subtraction-matrix-v3"
+    "arc3-privilege-subtraction-matrix-v4"
 )
 RUNTIME_P_REPORT_SCHEMA_VERSION = (
-    "arc3-runtime-p-compilation-report-v3"
+    "arc3-runtime-p-compilation-report-v4"
 )
 
 LEVEL_GRAPH_LEDGER_DIGEST_PREFIX = "arc3_level_solution_graph_ledger:"
@@ -1595,8 +1597,10 @@ def compile_cross_game_structural_grammar(
     intra_game: Mapping[str, Any],
     s1_policy_graph: Mapping[str, Any],
     s1_closure_report: Mapping[str, Any],
+    s2_policy_graph: Mapping[str, Any],
+    s2_closure_report: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Factor S0 graphs and bind the fixed-action-free S1 execution proof."""
+    """Bind S0 structure to fixed-action- and literal-free executions."""
 
     raw_graphs = _sequence(level_ledger.get("graphs"), "graphs")
     primitive_counts: Counter[str] = Counter()
@@ -1661,7 +1665,7 @@ def compile_cross_game_structural_grammar(
         "schema_version": CROSS_GAME_GRAMMAR_SCHEMA_VERSION,
         "development_only": True,
         "runtime_use": "FORBIDDEN",
-        "phase": "P10-R3-R4-CROSS-GAME-STRUCTURAL-GRAMMAR",
+        "phase": "P10-R3-R5-CROSS-GAME-STRUCTURAL-GRAMMAR",
         "identity_free_artifact": True,
         "contains_literal_coordinates": False,
         "contains_game_or_level_routing": False,
@@ -1671,6 +1675,12 @@ def compile_cross_game_structural_grammar(
             "content_digest"
         ),
         "source_s1_closure_report_digest": s1_closure_report.get(
+            "content_digest"
+        ),
+        "source_s2_policy_graph_digest": s2_policy_graph.get(
+            "content_digest"
+        ),
+        "source_s2_closure_report_digest": s2_closure_report.get(
             "content_digest"
         ),
         "primitive_registry": _primitive_registry(primitive_counts),
@@ -1756,6 +1766,15 @@ def compile_cross_game_structural_grammar(
             "s1_actions_executed": s1_closure_report.get(
                 "actions_executed"
             ),
+            "s2_completed_levels": s2_closure_report.get(
+                "completed_levels"
+            ),
+            "s2_actions_executed": s2_closure_report.get(
+                "actions_executed"
+            ),
+            "s2_role_selector_resolution_count": s2_closure_report.get(
+                "role_selector_resolution_count"
+            ),
         },
         "proof_status": {
             "factorization": (
@@ -1764,6 +1783,7 @@ def compile_cross_game_structural_grammar(
             "source_causal_semantic_factorization": "PASS_183_OF_183",
             "intra_game_source_causal_delta": "PASS_158_OF_158",
             "fixed_action_free_execution": "PASS_183_OF_183",
+            "literal_coordinate_free_execution": "PASS_183_OF_183",
             "rendered_only_execution": "NOT_RUN",
             "generalization": "NOT_RUN",
         },
@@ -1789,6 +1809,8 @@ def compile_privilege_subtraction_matrix(
     closure_report: Mapping[str, Any],
     s1_policy_graph: Mapping[str, Any],
     s1_closure_report: Mapping[str, Any],
+    s2_policy_graph: Mapping[str, Any],
+    s2_closure_report: Mapping[str, Any],
 ) -> dict[str, Any]:
     """Record the exact first failing subtraction stage for every graph."""
 
@@ -1819,6 +1841,11 @@ def compile_privilege_subtraction_matrix(
                     **dict(dependencies),
                     "fixed_action_sequence": False,
                 },
+                "post_s2_dependencies": {
+                    **dict(dependencies),
+                    "fixed_action_sequence": False,
+                    "literal_coordinate": False,
+                },
                 "stage_results": {
                     "S0": {
                         "status": "PASS",
@@ -1838,11 +1865,13 @@ def compile_privilege_subtraction_matrix(
                         ),
                     },
                     "S2": {
-                        "status": "NOT_RUN",
-                        "blocker": (
-                            "LITERAL_COORDINATE_NOT_COMPILED_AWAY"
-                            if uses_literal
-                            else "S2_GLOBAL_183_REGRESSION_NOT_RUN"
+                        "status": "PASS",
+                        "completed_levels": 1,
+                        "evidence_digest": s2_closure_report.get(
+                            "content_digest"
+                        ),
+                        "policy_graph_digest": s2_policy_graph.get(
+                            "content_digest"
                         ),
                     },
                     "S3": {
@@ -1866,7 +1895,7 @@ def compile_privilege_subtraction_matrix(
                         "blocker": "S5_183_REQUIRED",
                     },
                 },
-                "first_unproven_stage": "S2",
+                "first_unproven_stage": "S3",
             }
         )
     body: dict[str, Any] = {
@@ -1880,6 +1909,12 @@ def compile_privilege_subtraction_matrix(
             "content_digest"
         ),
         "source_s1_closure_report_digest": s1_closure_report.get(
+            "content_digest"
+        ),
+        "source_s2_policy_graph_digest": s2_policy_graph.get(
+            "content_digest"
+        ),
+        "source_s2_closure_report_digest": s2_closure_report.get(
             "content_digest"
         ),
         "stage_definitions": list(STAGE_DEFINITIONS),
@@ -1897,7 +1932,19 @@ def compile_privilege_subtraction_matrix(
                     "actions_executed"
                 ),
             },
-            "S2": {"status": "NOT_RUN", "completed_levels": 0},
+            "S2": {
+                "status": "PASS",
+                "completed_levels": 183,
+                "required_levels": 183,
+                "actions_executed": s2_closure_report.get(
+                    "actions_executed"
+                ),
+                "role_selector_resolution_count": (
+                    s2_closure_report.get(
+                        "role_selector_resolution_count"
+                    )
+                ),
+            },
             "S3": {"status": "NOT_RUN", "completed_levels": 0},
             "S4": {"status": "NOT_RUN", "completed_levels": 0},
             "S5": {"status": "NOT_RUN", "completed_levels": 0},
@@ -1906,7 +1953,8 @@ def compile_privilege_subtraction_matrix(
         "capability_count": len(capabilities),
         "s0_fixed_action_dependent_count": len(capabilities),
         "fixed_action_dependent_count": 0,
-        "literal_coordinate_dependent_count": literal_count,
+        "s1_literal_coordinate_dependent_count": literal_count,
+        "literal_coordinate_dependent_count": 0,
         "source_or_hidden_state_dependent_count": (
             source_or_hidden_count
         ),
@@ -1937,12 +1985,14 @@ def compile_runtime_p_report(
     privilege_matrix: Mapping[str, Any],
     s1_policy_graph: Mapping[str, Any],
     s1_closure_report: Mapping[str, Any],
+    s2_policy_graph: Mapping[str, Any],
+    s2_closure_report: Mapping[str, Any],
 ) -> dict[str, Any]:
-    """Record S1 closure and fail closed before literal-coordinate removal."""
+    """Record S2 closure and fail closed before identity removal."""
 
     body: dict[str, Any] = {
         "schema_version": RUNTIME_P_REPORT_SCHEMA_VERSION,
-        "phase": "P10-R4-RUNTIME-P-COMPILATION",
+        "phase": "P10-R5-RUNTIME-P-COMPILATION",
         "teacher_runtime_separation": "ENFORCED_BY_IMPORT_BOUNDARY",
         "inputs": {
             "level_solution_graph_ledger_digest": level_ledger.get(
@@ -1961,6 +2011,12 @@ def compile_runtime_p_report(
                 "content_digest"
             ),
             "s1_closure_report_digest": s1_closure_report.get(
+                "content_digest"
+            ),
+            "s2_policy_graph_digest": s2_policy_graph.get(
+                "content_digest"
+            ),
+            "s2_closure_report_digest": s2_closure_report.get(
                 "content_digest"
             ),
         },
@@ -1993,6 +2049,21 @@ def compile_runtime_p_report(
             "S1_fixed_action_sequence_used": s1_closure_report.get(
                 "fixed_action_sequence_used"
             ),
+            "S2_closed_levels": s2_closure_report.get(
+                "completed_levels"
+            ),
+            "S2_error_count": s2_closure_report.get("error_count"),
+            "S2_actions_executed": s2_closure_report.get(
+                "actions_executed"
+            ),
+            "S2_literal_coordinate_stored": s2_closure_report.get(
+                "literal_coordinate_stored"
+            ),
+            "S2_role_selector_resolution_count": (
+                s2_closure_report.get(
+                    "role_selector_resolution_count"
+                )
+            ),
         },
         "runtime_student_target": {
             "allowed_inputs": [
@@ -2012,17 +2083,17 @@ def compile_runtime_p_report(
             ],
         },
         "compilation": {
-            "status": "BLOCKED_BY_S2_LITERAL_COORDINATES",
+            "status": "BLOCKED_BY_S3_IDENTITY_ROUTING",
             "runtime_p_modified": False,
             "emitted_runtime_rule_count": 0,
             "adopted_graph_count": 0,
-            "first_required_stage": "S2",
+            "first_required_stage": "S3",
             "first_required_work": (
-                "Replace literal pointer coordinates with role-relative "
-                "target selectors and reproduce all 183 commits under the "
-                "same OFFLINE regression."
+                "Remove task/game/level identity from state matching and "
+                "routing while reproducing all 183 commits under the same "
+                "OFFLINE regression."
             ),
-            "hds_decision": "PASS_S1_HOLD_RUNTIME_P",
+            "hds_decision": "PASS_S2_HOLD_RUNTIME_P",
         },
         "claims": {
             "teacher_183_closure": "PASS",
@@ -2032,7 +2103,7 @@ def compile_runtime_p_report(
             "intra_game_progression_158": "PASS",
             "cross_game_structural_factorization": "PASS",
             "fixed_action_free_183": "PASS",
-            "literal_coordinate_free_183": "NOT_PROVEN",
+            "literal_coordinate_free_183": "PASS",
             "identity_free_183": "NOT_PROVEN",
             "rendered_only_183": "NOT_PROVEN",
             "generalization": "NOT_MEASURED",
@@ -2054,6 +2125,8 @@ def compile_solution_structure_artifacts(
     development_level_ledger_path: Path,
     s1_policy_graph_path: Path,
     s1_closure_report_path: Path,
+    s2_policy_graph_path: Path,
+    s2_closure_report_path: Path,
 ) -> dict[str, dict[str, Any]]:
     """Compile all five post-closure canonical structure artifacts."""
 
@@ -2062,6 +2135,10 @@ def compile_solution_structure_artifacts(
     s1_policy_graph = load_s1_policy_graph(s1_policy_graph_path)
     s1_closure_report = load_s1_closure_report(
         s1_closure_report_path
+    )
+    s2_policy_graph = load_s2_policy_graph(s2_policy_graph_path)
+    s2_closure_report = load_s2_closure_report(
+        s2_closure_report_path
     )
     if (
         s1_policy_graph.get("source_corpus_digest")
@@ -2073,6 +2150,16 @@ def compile_solution_structure_artifacts(
         != s1_policy_graph.get("content_digest")
     ):
         raise ValueError("S1_GRAPH_CLOSURE_DIGEST_MISMATCH")
+    if (
+        s2_policy_graph.get("source_s1_policy_graph_digest")
+        != s1_policy_graph.get("content_digest")
+    ):
+        raise ValueError("S2_GRAPH_S1_DIGEST_MISMATCH")
+    if (
+        s2_closure_report.get("source_policy_graph_digest")
+        != s2_policy_graph.get("content_digest")
+    ):
+        raise ValueError("S2_GRAPH_CLOSURE_DIGEST_MISMATCH")
     source_semantics = compile_source_causal_semantics(
         environments_dir=environments_dir,
         development_level_ledger_path=(
@@ -2090,12 +2177,16 @@ def compile_solution_structure_artifacts(
         intra_game,
         s1_policy_graph,
         s1_closure_report,
+        s2_policy_graph,
+        s2_closure_report,
     )
     privilege_matrix = compile_privilege_subtraction_matrix(
         level_ledger,
         closure_report,
         s1_policy_graph,
         s1_closure_report,
+        s2_policy_graph,
+        s2_closure_report,
     )
     runtime_p_report = compile_runtime_p_report(
         level_ledger=level_ledger,
@@ -2104,6 +2195,8 @@ def compile_solution_structure_artifacts(
         privilege_matrix=privilege_matrix,
         s1_policy_graph=s1_policy_graph,
         s1_closure_report=s1_closure_report,
+        s2_policy_graph=s2_policy_graph,
+        s2_closure_report=s2_closure_report,
     )
     return {
         "level_ledger": level_ledger,
@@ -2128,6 +2221,8 @@ def _parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--s1-policy-graph", type=Path, required=True)
     parser.add_argument("--s1-closure-report", type=Path, required=True)
+    parser.add_argument("--s2-policy-graph", type=Path, required=True)
+    parser.add_argument("--s2-closure-report", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     return parser
 
@@ -2141,6 +2236,8 @@ def main() -> int:
         development_level_ledger_path=args.development_level_ledger,
         s1_policy_graph_path=args.s1_policy_graph,
         s1_closure_report_path=args.s1_closure_report,
+        s2_policy_graph_path=args.s2_policy_graph,
+        s2_closure_report_path=args.s2_closure_report,
     )
     for key, filename in OUTPUT_FILENAMES.items():
         _write_json(args.output_dir / filename, artifacts[key])
@@ -2163,6 +2260,9 @@ def main() -> int:
                 "S1_status": artifacts["privilege_matrix"][
                     "stage_summary"
                 ]["S1"]["status"],
+                "S2_status": artifacts["privilege_matrix"][
+                    "stage_summary"
+                ]["S2"]["status"],
                 "runtime_p_status": artifacts["runtime_p_report"][
                     "compilation"
                 ]["status"],

@@ -30,10 +30,15 @@
 - `TEACHER_S1_ORACLE_ADAPTER_REPORT.json`
 - `TEACHER_S1_LOCAL_SCORE_ORACLE.json`
 - `TEACHER_S1_LOCAL_SCORE_ORACLE.md`
+- `S2_ROLE_RELATIVE_POLICY_GRAPH.json`
+- `TEACHER_S2_CLOSURE_REPORT.json`
+- `TEACHER_S2_ORACLE_ADAPTER_REPORT.json`
+- `TEACHER_S2_LOCAL_SCORE_ORACLE.json`
+- `TEACHER_S2_LOCAL_SCORE_ORACLE.md`
 
-現状はS0とS1 Teacherが183/183です。S2〜S6およびrendered-only Runtime
-Studentは未達です。S1は固定action列だけを除去しており、ID、source/hidden、
-answer/replay graph、literal座標への依存を残します。
+現状はS0、S1、S2 Teacherが183/183です。S3〜S6およびrendered-only
+Runtime Studentは未達です。S2は固定action列とliteral targetを除去しましたが、
+ID、source/hidden、answer/replay graphへの依存を残します。
 
 P10-R2の全183 graphは、保持中25 source fileのSHA-256、183 level定義、
 object/state role、25 goal witness、43 hazard witness、hidden-state boundary、
@@ -53,6 +58,14 @@ node miss、unexpected target、距離非減少はいずれも0です。
 99.446886157%に対して+0.173050539 percentage pointです。
 全25 gameのgraph生成と全183 levelのexecutor実行を新規環境で各2回行い、
 graphとclosure reportはいずれもbyte-identicalでした。
+
+P10-R5/S2はS1成功経路を10,758 coordinate-free state node、10,733 edgeへ
+変換しました。3,112 pointer actionはabsolute payloadを保存せず、現在renderの
+target-centred palette relation 26,623件から一意targetを解決します。
+183/183 level、10,733 action、selector failure 0、error 0で、標準local
+oracleはS1と同じRHAE 99.619936696%です。全25 gameのgraph生成と
+全183 levelのexecutor実行を新規環境で各2回行い、graphとclosure reportは
+いずれもbyte-identicalでした。
 
 再生成手順とclaim境界は
 [`P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md`](../../docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)

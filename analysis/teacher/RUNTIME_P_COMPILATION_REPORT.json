@@ -6,7 +6,7 @@
     "graph_generation_183": "PASS",
     "identity_free_183": "NOT_PROVEN",
     "intra_game_progression_158": "PASS",
-    "literal_coordinate_free_183": "NOT_PROVEN",
+    "literal_coordinate_free_183": "PASS",
     "rendered_only_183": "NOT_PROVEN",
     "source_causal_semantics_183": "PASS",
     "success_hazard_contrast_183": "PASS_SOURCE_CONTROL_FLOW",
@@ -15,22 +15,24 @@
   "compilation": {
     "adopted_graph_count": 0,
     "emitted_runtime_rule_count": 0,
-    "first_required_stage": "S2",
-    "first_required_work": "Replace literal pointer coordinates with role-relative target selectors and reproduce all 183 commits under the same OFFLINE regression.",
-    "hds_decision": "PASS_S1_HOLD_RUNTIME_P",
+    "first_required_stage": "S3",
+    "first_required_work": "Remove task/game/level identity from state matching and routing while reproducing all 183 commits under the same OFFLINE regression.",
+    "hds_decision": "PASS_S2_HOLD_RUNTIME_P",
     "runtime_p_modified": false,
-    "status": "BLOCKED_BY_S2_LITERAL_COORDINATES"
+    "status": "BLOCKED_BY_S3_IDENTITY_ROUTING"
   },
-  "content_digest": "arc3_runtime_p_compilation_report:0c2969504741d7fa50295d9e7bed2ef59bd1d0a692a98941ba18738af85ae5ff",
+  "content_digest": "arc3_runtime_p_compilation_report:6cacd634c8f9b4f17e6072d02f415bc43723ccd078391407ede6c130c0660242",
   "inputs": {
-    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:6f6f7364d90367e689139102ec857b083d10320932a1b1de461e86c759cbb3af",
+    "cross_game_structural_grammar_digest": "arc3_cross_game_structural_grammar:d9cd91f0cbf77c89eb31dadbe2f0cdc379574fcac3bc4ea4cb0e6bb1ce187c36",
     "intra_game_progression_graph_digest": "arc3_intra_game_progression_graph:b56ef0fda12f043aa8571f85f26c4e515ddfe924f128596d2afc0977e836ebac",
     "level_solution_graph_ledger_digest": "arc3_level_solution_graph_ledger:1dac37c3b78092c31ca151ee7305a40d644c938bf942c6c9d8684cf474e1a281",
-    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:125eacabbb2843f150a4a75d619a7842f720092d6d8379130ab3ca36994362f6",
+    "privilege_subtraction_matrix_digest": "arc3_privilege_subtraction_matrix:feb0256cb84f2f208a765663a55588bcb07cc7f78debb49b94dc49e6b69f5728",
     "s1_closure_report_digest": "arc3_teacher_s1_state_conditioned_closure:f0ca09125c5c188cdd6d85e3cf499d955aeb824fbccda4461515540808763a24",
-    "s1_policy_graph_digest": "arc3_teacher_s1_state_conditioned_policy_graph:3db9d0f4721a5933b320b7b8b1115dd4c745359199aa92901f7ce7e6fc4d82b4"
+    "s1_policy_graph_digest": "arc3_teacher_s1_state_conditioned_policy_graph:3db9d0f4721a5933b320b7b8b1115dd4c745359199aa92901f7ce7e6fc4d82b4",
+    "s2_closure_report_digest": "arc3_teacher_s2_role_relative_closure:3a57f1f9171753261342b29a1d9ce6046496c536e82b9bb4cab0b29ca5b4e728",
+    "s2_policy_graph_digest": "arc3_teacher_s2_role_relative_policy_graph:16d0ae6e0ad0e8bc4172e0e0e0c3bc4761732791803826153a49a4701f774bc2"
   },
-  "phase": "P10-R4-RUNTIME-P-COMPILATION",
+  "phase": "P10-R5-RUNTIME-P-COMPILATION",
   "runtime_student_target": {
     "allowed_inputs": [
       "RENDERED_OBSERVATION",
@@ -48,7 +50,7 @@
       "ANSWER_OR_REPLAY"
     ]
   },
-  "schema_version": "arc3-runtime-p-compilation-report-v3",
+  "schema_version": "arc3-runtime-p-compilation-report-v4",
   "teacher_runtime_separation": "ENFORCED_BY_IMPORT_BOUNDARY",
   "teacher_status": {
     "S0_closed_levels": 183,
@@ -57,6 +59,11 @@
     "S1_closed_levels": 183,
     "S1_error_count": 0,
     "S1_fixed_action_sequence_used": false,
+    "S2_actions_executed": 10733,
+    "S2_closed_levels": 183,
+    "S2_error_count": 0,
+    "S2_literal_coordinate_stored": false,
+    "S2_role_selector_resolution_count": 3112,
     "cross_game_source_causal_factorization": "PASS_183_OF_183",
     "intra_game_source_causal_edge_count": 158,
     "solution_graph_count": 183,

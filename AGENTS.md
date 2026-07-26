@@ -100,12 +100,17 @@ P10 current:
   S1 graph has 11,387 state nodes and 11,383 action edges
   S1 local-oracle result is RHAE 99.619936696% (+0.173050539 pp vs S0)
   S1 full graph and closure report are byte-identical across two fresh runs
+  R5/S2 role-relative Teacher closes 25 / 25 games and 183 / 183 levels
+  S2 executes 10,733 actions and resolves 3,112 pointer targets from render
+  S2 graph stores zero absolute pointer payloads; error and selector failure are 0
+  S2 local-oracle result is RHAE 99.619936696% (delta 0 vs S1)
+  S2 full graph and closure report are byte-identical across two fresh runs
   fixed action sequence, replay position, and action ordinal decisions are absent
-  S0 and S1 are PASS; S2 through S6 are NOT_RUN
+  S0, S1, and S2 are PASS; S3 through S6 are NOT_RUN
   Runtime Student P is unchanged and rendered-only 183 / 183 is NOT_PROVEN
   C2/C3 and negative-only probe work are frozen historical evidence
   the current block is
-  WB-S2-LITERAL-COORDINATE-SUBTRACTION
+  WB-S3-IDENTITY-ROUTING-SUBTRACTION
 ```
 
 ### P10で許可される作業

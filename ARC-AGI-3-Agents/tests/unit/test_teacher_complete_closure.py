@@ -28,6 +28,19 @@ from arc3_agi_agent.teacher.s1_graph_schema import (
 from arc3_agi_agent.teacher.s1_score_adapter import (
     S1_SCORE_ADAPTER_DIGEST_PREFIX,
 )
+from arc3_agi_agent.teacher.s2_graph_executor import (
+    S2_CLOSURE_REPORT_DIGEST_PREFIX,
+    load_s2_closure_report,
+)
+from arc3_agi_agent.teacher.s2_graph_schema import (
+    S2_GAME_GRAPH_DIGEST_PREFIX,
+    S2_POLICY_GRAPH_DIGEST_PREFIX,
+    all_mapping_keys,
+    load_s2_policy_graph,
+)
+from arc3_agi_agent.teacher.s2_score_adapter import (
+    S2_SCORE_ADAPTER_DIGEST_PREFIX,
+)
 from arc3_agi_agent.teacher.solution_graph_compiler import (
     CROSS_GAME_GRAMMAR_DIGEST_PREFIX,
     INTRA_GAME_GRAPH_DIGEST_PREFIX,
@@ -377,12 +390,25 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             matrix["stage_summary"]["S1"]["completed_levels"],
             183,
         )
+        self.assertEqual(
+            matrix["stage_summary"]["S2"]["status"],
+            "PASS",
+        )
+        self.assertEqual(
+            matrix["stage_summary"]["S2"]["completed_levels"],
+            183,
+        )
         self.assertEqual(matrix["fixed_action_dependent_count"], 0)
         self.assertEqual(
             matrix["s0_fixed_action_dependent_count"],
             183,
         )
-        for stage in ("S2", "S3", "S4", "S5", "S6"):
+        self.assertEqual(matrix["literal_coordinate_dependent_count"], 0)
+        self.assertEqual(
+            matrix["s1_literal_coordinate_dependent_count"],
+            125,
+        )
+        for stage in ("S3", "S4", "S5", "S6"):
             self.assertEqual(
                 matrix["stage_summary"][stage]["status"],
                 "NOT_RUN",
@@ -402,11 +428,11 @@ class TeacherCompleteClosureTests(unittest.TestCase):
         )
         self.assertEqual(
             runtime["claims"]["literal_coordinate_free_183"],
-            "NOT_PROVEN",
+            "PASS",
         )
         self.assertEqual(
             runtime["compilation"]["first_required_stage"],
-            "S2",
+            "S3",
         )
         self.assertEqual(
             runtime["claims"]["rendered_only_183"],
@@ -550,6 +576,101 @@ class TeacherCompleteClosureTests(unittest.TestCase):
             [],
         )
 
+    def test_s2_graph_has_no_absolute_pointer_payload_and_closes(
+        self,
+    ) -> None:
+        graph = load_s2_policy_graph(
+            TEACHER_ANALYSIS / "S2_ROLE_RELATIVE_POLICY_GRAPH.json"
+        )
+        report = load_s2_closure_report(
+            TEACHER_ANALYSIS / "TEACHER_S2_CLOSURE_REPORT.json"
+        )
+        _assert_digest(
+            self,
+            graph,
+            S2_POLICY_GRAPH_DIGEST_PREFIX,
+        )
+        _assert_digest(
+            self,
+            report,
+            S2_CLOSURE_REPORT_DIGEST_PREFIX,
+        )
+
+        self.assertEqual(graph["game_count"], 25)
+        self.assertEqual(graph["level_count"], 183)
+        self.assertEqual(
+            graph["source_transition_witness_count"],
+            10733,
+        )
+        self.assertEqual(graph["state_node_count"], 10758)
+        self.assertEqual(graph["edge_count"], 10733)
+        self.assertEqual(graph["role_selector_witness_count"], 3112)
+        self.assertEqual(
+            graph["boundary_selector_witness_count"],
+            204,
+        )
+        self.assertEqual(
+            graph["relative_constraint_witness_count"],
+            26623,
+        )
+        self.assertEqual(graph["absolute_pointer_payload_count"], 0)
+        self.assertFalse(
+            graph["remaining_privilege_dependencies"][
+                "literal_coordinate"
+            ]
+        )
+        self.assertEqual(
+            all_mapping_keys(graph).intersection(
+                {
+                    "absolute_horizontal_index",
+                    "absolute_vertical_index",
+                    "action_data",
+                    "column",
+                    "coordinate",
+                    "row",
+                    "x",
+                    "y",
+                }
+            ),
+            set(),
+        )
+        for game in graph["games"]:
+            _assert_digest(
+                self,
+                game,
+                S2_GAME_GRAPH_DIGEST_PREFIX,
+            )
+        self.assertEqual(report["completed_levels"], 183)
+        self.assertEqual(report["actions_executed"], 10733)
+        self.assertEqual(
+            report["role_selector_resolution_count"],
+            3112,
+        )
+        self.assertEqual(
+            report["selector_resolution_failure_count"],
+            0,
+        )
+        self.assertEqual(report["error_count"], 0)
+        self.assertFalse(report["literal_coordinate_stored"])
+        self.assertFalse(report["literal_coordinate_decision_used"])
+
+    def test_s2_executor_has_no_s1_graph_or_corpus_dependency(self) -> None:
+        source = (
+            PACKAGE_ROOT / "teacher" / "s2_graph_executor.py"
+        ).read_text(encoding="utf-8")
+        forbidden = (
+            "FULL_SOLUTION_CORPUS",
+            "human_replay_corpus",
+            "s1_graph",
+            "source_pointer",
+            "replay_index",
+            "action_data",
+        )
+        self.assertEqual(
+            [token for token in forbidden if token in source],
+            [],
+        )
+
     def test_runtime_package_does_not_import_teacher_artifacts(self) -> None:
         forbidden = (
             "arc3_agi_agent.teacher",
@@ -641,6 +762,49 @@ class TeacherCompleteClosureTests(unittest.TestCase):
         )
         self.assertFalse(
             s1_current["evaluation_provenance"][
+                "architecture_evidence_eligible"
+            ]
+        )
+
+        s2_adapter = _json(
+            TEACHER_ANALYSIS / "TEACHER_S2_ORACLE_ADAPTER_REPORT.json"
+        )
+        s2_oracle = _json(
+            TEACHER_ANALYSIS / "TEACHER_S2_LOCAL_SCORE_ORACLE.json"
+        )
+        _assert_digest(
+            self,
+            s2_adapter,
+            S2_SCORE_ADAPTER_DIGEST_PREFIX,
+        )
+        s2_current = s2_oracle["current_local_result"]
+        self.assertEqual(s2_current["completed_levels"], 183)
+        self.assertEqual(
+            s2_current["completion_rate_percent"],
+            100.0,
+        )
+        self.assertEqual(
+            s2_current["official_rhae_score_percent"],
+            99.619936696,
+        )
+        self.assertEqual(
+            s2_current["official_rhae_score_percent"],
+            s1_current["official_rhae_score_percent"],
+        )
+        self.assertEqual(s2_current["error_count"], 0)
+        self.assertEqual(
+            s2_oracle["source"]["sample_zip_sha256"],
+            s1_oracle["source"]["sample_zip_sha256"],
+        )
+        self.assertEqual(
+            {
+                tuple(report["instruction_body_versions"])
+                for report in s2_adapter["reports"]
+            },
+            {("teacher-s2-role-relative-graph-v1",)},
+        )
+        self.assertFalse(
+            s2_current["evaluation_provenance"][
                 "architecture_evidence_eligible"
             ]
         )

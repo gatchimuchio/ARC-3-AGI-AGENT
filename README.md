@@ -52,13 +52,24 @@ P10の現行戦略は
 - S1決定性:
   **全25 gameのgraph再生成と183 level再実行を各2回行い、
   graph/reportともbyte-identical**
-- 水平減算: **S0/S1 PASS、S2〜S6 NOT_RUN**
+- R5/S2 role-relative Teacher:
+  **25/25 game、183/183 level、10,733 action、error 0、
+  rendered role selector 3,112/3,112、selector failure 0**
+- S2 graph:
+  **10,758 state node、10,733 edge、relative constraint 26,623、
+  stored absolute pointer payload 0**
+- S2ローカルオラクル:
+  **completion 100%、RHAE 99.619936696%、S1比 delta 0**
+- S2決定性:
+  **全25 gameのgraph再生成と183 level再実行を各2回行い、
+  graph/reportともbyte-identical**
+- 水平減算: **S0/S1/S2 PASS、S3〜S6 NOT_RUN**
 - Runtime Student P変更: **なし**
 - rendered-only 183/183・AGI完成・汎化達成の主張: **なし**
 
-Teacher scoreはID、成功trajectory、literal座標等を許可した開発基準です。
-S0は固定action列も許可し、S1は固定列だけを除去しています。いずれも
-Runtime Student scoreまたは汎化scoreではありません。
+Teacher scoreはID、成功trajectory、source/hidden等を許可した開発基準です。
+S0は全特権、S1は固定列除去、S2はさらにliteral targetを除去しています。
+いずれもRuntime Student scoreまたは汎化scoreではありません。
 
 ## 最小設計
 
