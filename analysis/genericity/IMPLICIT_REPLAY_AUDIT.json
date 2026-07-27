@@ -1,7 +1,7 @@
 {
   "audit": {
-    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
-    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+    "commit": "23ad7f5d0b56e0b77fe1eda61284d806d32fed6f",
+    "tree": "86364585d542892be84579b117d9716dffbf612f"
   },
   "audit_version": "arc3-p12-preofficial-audit-v1",
   "budget": {
@@ -10,11 +10,11 @@
     "whole_game_actions_per_game": 128
   },
   "code": {
-    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
-    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+    "commit": "42db39dd98ce724a8e44228ebb6637f88c415fc0",
+    "tree": "8728cfeff5f9a97fa60726852a9b64f517e6b14e"
   },
-  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
-  "content_digest": "arc3-implicit-replay-audit-v1:d0c2697c3d0e64b92e1ef284a503ef400c3542d15925ca91ba2b807a6e3aa458",
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit 42db39dd98ce724a8e44228ebb6637f88c415fc0 --code-tree 8728cfeff5f9a97fa60726852a9b64f517e6b14e --audit-commit 23ad7f5d0b56e0b77fe1eda61284d806d32fed6f --audit-tree 86364585d542892be84579b117d9716dffbf612f --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-implicit-replay-audit-v1:ac52e17098f97b9c986b6d9eb815256f0b5a34ee848962aef9bcebf4beb24b92",
   "environment_manifest": {
     "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
     "implementation": "CPython",
@@ -33,7 +33,7 @@
   "game_level_probe_feature_present": false,
   "generic_p_training_frame_count": 0,
   "identity_probe_accuracy": "NOT_APPLICABLE_NO_IDENTITY_LABEL_OR_FEATURE",
-  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "input_artifact_digest": "p12-input:33f76223f6d063632eea1bb87a076f8e42f7456b7fafc235bbc3ca68326bcaa3",
   "near_training_frame_retrieval_count": 0,
   "p_behavior_without_training_trajectory": "EXECUTABLE",
   "raw_evidence_pointers": [
@@ -44,6 +44,7 @@
     "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_memory.py",
     "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_package.py",
     "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_runtime.py",
+    "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_structural.py",
     "ARC-AGI-3-Agents\\arc3_agi_agent\\generic_types.py"
   ],
   "same_render_different_outcome_contrast_executed": true,
@@ -53,6 +54,7 @@
     "generic_learning.py",
     "generic_memory.py",
     "generic_runtime.py",
+    "generic_structural.py",
     "generic_types.py"
   ],
   "schema_version": "arc3-implicit-replay-audit-v1",

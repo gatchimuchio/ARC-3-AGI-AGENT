@@ -30,7 +30,7 @@
     },
     {
       "requirement_id": "GEN-001",
-      "status": "SUSPEND"
+      "status": "PASS"
     },
     {
       "requirement_id": "GEN-002",
@@ -230,28 +230,28 @@
     }
   ],
   "artifact_digests": {
-    "competition": "arc3-competition-contract-dry-run-report-v1:814acb056f4999084f97f19a2e5c430356b87b6e29af456860cb607b75b1d775",
-    "implicit_replay": "arc3-implicit-replay-audit-v1:d0c2697c3d0e64b92e1ef284a503ef400c3542d15925ca91ba2b807a6e3aa458",
-    "known_sample_regression": "arc3-p12-known-sample-regression-report-v1:54e7f539f8ab6bf25a54b6c2a0175a3e0c2ec7dec2f766f3e3452a2eb135c23e",
-    "learning": "arc3-runtime-version-learning-report-v1:4eac4ad2b17be6eb91f422095fa886069e2f97d5f4302fecdded02caaf2f6896",
-    "mechanism": "arc3-mechanism-holdout-manifest-v1:7aa30ae5f392bbbc8b18d92e7f37bd7681aa76c7c8d26467bf840172b7d3305a",
-    "operational": "arc3-generic-operational-conformance-report-v1:7b1bf669be81b9d6c5911c1692a6ebdf45e519e1161320374c7654cea5d0b30c",
-    "ownership": "arc3-responsibility-ownership-graph-v1:68d0b4cb0edf4cb1330d80c83ff389580eb71ed8abf9189a6ff69f8eeeb74733",
-    "post_change_regression": "arc3-p12-post-change-regression-binding-v1:0f0a9cec9181e6d76350758e57d2fe48735e80edc1e0d4c3eeea17297a60ed3d",
-    "resource_package_security": "arc3-resource-package-security-report-v1:0341a1dfb442117aef18feb9bdf144bb843e7f2c3e38897b0f4bf554a8a51306",
-    "s5_conformance": "arc3-s5-operational-conformance-report-v1:892504ea154018646feb0b4bb3e2c5fe8a48cf4f72b531558c4f32ee5c958f56",
-    "sealed": "arc3-sealed-custom-environment-report-v1:42d396cdcc440108ba718c41e4259f9788fa4e99b2550215ccaac32d69f97aaa",
-    "transformations": "arc3-executable-transformation-report-v1:cb5395e9ad80812c0bf2927100aac678a7324fab0f3d847da41f449c2a0bf050",
-    "whole_game": "arc3-whole-game-holdout-manifest-v1:e16b86203c18d06d31a113034a9f485c1d3ac7afa6a6801ef79b78e9b745c62e"
+    "competition": "arc3-competition-contract-dry-run-report-v1:6ea54da02543a69a865f21f2954888fb95b8e1bcce4d6631a9c38355b8122d2a",
+    "implicit_replay": "arc3-implicit-replay-audit-v1:ac52e17098f97b9c986b6d9eb815256f0b5a34ee848962aef9bcebf4beb24b92",
+    "known_sample_regression": "arc3-p12-known-sample-regression-report-v1:02dd3a7b067030491983cb56bac6ef4cff176fb20d6f9939282f4cc5cc4d7ff7",
+    "learning": "arc3-runtime-version-learning-report-v1:9fee62cf0a668ec5f1b6027a9d7de470a71185c25e36c608706052d78d80f69d",
+    "mechanism": "arc3-mechanism-holdout-manifest-v1:d64789283d7d02656e0b3da388c4d903e07e0c7c7e94b7cb9c2b1f4c600d9a1b",
+    "operational": "arc3-generic-operational-conformance-report-v1:9b3a0b486bc3fa024a6918abe331ac7c4a9a94df1dc939701a60c95e8a4156ed",
+    "ownership": "arc3-responsibility-ownership-graph-v1:6dcd7f125e5481a2ec377d4547ba1d15643e4df6355e296e16c295e2f32c941e",
+    "post_change_regression": "arc3-p12-post-change-regression-binding-v1:112f3bb4b8ae762320466eb01755b4339aade078cd941eb2c30870eec1ab1066",
+    "resource_package_security": "arc3-resource-package-security-report-v1:a3d3b76e2321f81e586a67d7a9f6d883a4f848a5c1b49db88b44c1db7e86387f",
+    "s5_conformance": "arc3-s5-operational-conformance-report-v1:6971927860fa063e60bf548add24419b11341be42fdc31590fc7d9a58d762eca",
+    "sealed": "arc3-sealed-custom-environment-report-v1:c7f39b19c5413998394071f4d79d1402a840e069be75697080eaed5d28b9d325",
+    "transformations": "arc3-executable-transformation-report-v1:473f4fd84e1268065eafeb3687a83bdb4ea3148b098f66b6b790f45083c55563",
+    "whole_game": "arc3-whole-game-holdout-manifest-v1:f1d72a89e2af7b6641b19256331ad42739f57037ed5d2b14e126c5f78a53daba"
   },
   "audit": {
-    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
-    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+    "commit": "23ad7f5d0b56e0b77fe1eda61284d806d32fed6f",
+    "tree": "86364585d542892be84579b117d9716dffbf612f"
   },
   "audit_harness": {
-    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
-    "source_sha256": "3fff83c139a785c82817ab0f3d8f1a0f11262cd5fdf4364131d60103cb094337",
-    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+    "commit": "23ad7f5d0b56e0b77fe1eda61284d806d32fed6f",
+    "source_sha256": "4148d648e472917e5b8859a7c91556dd4439b2020c4755458a86ee2bd0711823",
+    "tree": "86364585d542892be84579b117d9716dffbf612f"
   },
   "audit_version": "arc3-p12-preofficial-audit-v1",
   "budget": {
@@ -260,11 +260,11 @@
     "whole_game_actions_per_game": 128
   },
   "code": {
-    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
-    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+    "commit": "42db39dd98ce724a8e44228ebb6637f88c415fc0",
+    "tree": "8728cfeff5f9a97fa60726852a9b64f517e6b14e"
   },
-  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
-  "content_digest": "arc3-pre-official-agi-release-state-v1:a3b410ee1cf1705df81b46875fbbf2980a4e4936a124c3e7fba5d67673456f59",
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit 42db39dd98ce724a8e44228ebb6637f88c415fc0 --code-tree 8728cfeff5f9a97fa60726852a9b64f517e6b14e --audit-commit 23ad7f5d0b56e0b77fe1eda61284d806d32fed6f --audit-tree 86364585d542892be84579b117d9716dffbf612f --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-pre-official-agi-release-state-v1:737979ba94ba8a2e3de2c6e47a433a406110ece5fa42c6d893052c382a997527",
   "environment_manifest": {
     "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
     "implementation": "CPython",
@@ -272,24 +272,17 @@
     "python": "3.12.13",
     "python_hash_seed": "UNSET"
   },
-  "failed_requirement_ids": [
-    "GEN-001"
-  ],
+  "failed_requirement_ids": [],
   "generic_runtime_operational_conformance": "PASS",
   "hds_decision": {
-    "assertion_state": "SUSPEND",
-    "failed_requirement_ids": [
-      "GEN-001"
-    ],
-    "next_probe": "close failed blocking requirements",
+    "assertion_state": "PASS",
+    "failed_requirement_ids": [],
+    "next_probe": "owner phase authorization",
     "next_question": "Are all blocking requirements evidenced without P11 mutation?",
-    "required_information": [
-      "fresh post-change KnownSampleStudent 183/183 regression",
-      "all remaining blocking acceptance evidence"
-    ],
+    "required_information": [],
     "rollback_target": "arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c"
   },
-  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "input_artifact_digest": "p12-input:33f76223f6d063632eea1bb87a076f8e42f7456b7fafc235bbc3ca68326bcaa3",
   "known_sample_baseline": {
     "games": 25,
     "immutability": {
@@ -317,7 +310,7 @@
   "official_connection_authorized": false,
   "official_connection_performed": false,
   "phase": "P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY",
-  "pre_official_agi_ready": false,
+  "pre_official_agi_ready": true,
   "raw_evidence_pointers": [
     "analysis/audit/GENERIC_OPERATIONAL_CONFORMANCE_REPORT.json",
     "analysis/genericity/WHOLE_GAME_HOLDOUT_MANIFEST.json",
@@ -328,5 +321,5 @@
   "s5_operational_conformance": "SUSPEND",
   "schema_version": "arc3-pre-official-agi-release-state-v1",
   "seed": 0,
-  "status": "SUSPEND"
+  "status": "PASS"
 }

@@ -1,7 +1,7 @@
 {
   "audit": {
-    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
-    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+    "commit": "23ad7f5d0b56e0b77fe1eda61284d806d32fed6f",
+    "tree": "86364585d542892be84579b117d9716dffbf612f"
   },
   "audit_version": "arc3-p12-preofficial-audit-v1",
   "budget": {
@@ -10,12 +10,12 @@
     "whole_game_actions_per_game": 128
   },
   "code": {
-    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
-    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+    "commit": "42db39dd98ce724a8e44228ebb6637f88c415fc0",
+    "tree": "8728cfeff5f9a97fa60726852a9b64f517e6b14e"
   },
   "code_frozen_before_generation": true,
-  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
-  "content_digest": "arc3-sealed-custom-environment-report-v1:42d396cdcc440108ba718c41e4259f9788fa4e99b2550215ccaac32d69f97aaa",
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit 42db39dd98ce724a8e44228ebb6637f88c415fc0 --code-tree 8728cfeff5f9a97fa60726852a9b64f517e6b14e --audit-commit 23ad7f5d0b56e0b77fe1eda61284d806d32fed6f --audit-tree 86364585d542892be84579b117d9716dffbf612f --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-sealed-custom-environment-report-v1:c7f39b19c5413998394071f4d79d1402a840e069be75697080eaed5d28b9d325",
   "crash_count": 0,
   "environment_manifest": {
     "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
@@ -24,7 +24,7 @@
     "python": "3.12.13",
     "python_hash_seed": "UNSET"
   },
-  "evaluator_digest": "c38e91b539ad9d08bfa239d40748cee3c302d87fd67fe6495d7b920f4d2041a3",
+  "evaluator_digest": "0549b928ce48f6cb83c21b73e8293f59d877e4b2c5615e79095f170e1512e4b2",
   "evaluator_process_separate": true,
   "evaluator_source_sha256": "6a9f1a1642a201e12db68a62e46732ce71f61c79f583f1f1e3e2813becdcc750",
   "failed_requirement_ids": [],
@@ -34,10 +34,10 @@
     "performed": true,
     "runtime_matches_frozen_commit": true
   },
-  "frozen_code_commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
+  "frozen_code_commit": "42db39dd98ce724a8e44228ebb6637f88c415fc0",
   "frozen_p_digest": "generic-hybrid-p:389967e821e33a69d9ad898e8b9d04dbf5559fe3ab65c521d5ab020c261645c7",
   "game_count": 3,
-  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "input_artifact_digest": "p12-input:33f76223f6d063632eea1bb87a076f8e42f7456b7fafc235bbc3ca68326bcaa3",
   "p_frozen_before_generation": true,
   "parameter_tuning_after_result": false,
   "progress_game_count": 3,
@@ -47,36 +47,36 @@
   ],
   "results": [
     {
-      "actions": 3,
-      "j_m_full_trace": true,
-      "progress": 3,
-      "sealed_index": 0,
-      "state": "WIN",
-      "trace_digest": "generic-run:759d78154658d69f78c7b705fa8ae04ba438226878c8e16d742991fd2986843e",
-      "valid_action_only": true
-    },
-    {
-      "actions": 4,
+      "actions": 2,
       "j_m_full_trace": true,
       "progress": 2,
-      "sealed_index": 1,
+      "sealed_index": 0,
       "state": "WIN",
-      "trace_digest": "generic-run:62286dbb2e8702952bd4343e91fe9e31d2e5f386330ae067cf7ac23817d6987b",
+      "trace_digest": "generic-run:dde6960acaca98411d4d2130bc95bd48638dd52a1e17a1db54c579fb2b968f1a",
       "valid_action_only": true
     },
     {
       "actions": 3,
       "j_m_full_trace": true,
       "progress": 3,
+      "sealed_index": 1,
+      "state": "WIN",
+      "trace_digest": "generic-run:3177e4aa645c47a1c92219b29cdbca8b3f7d5f9b941a9795cd68e3e5b35859c9",
+      "valid_action_only": true
+    },
+    {
+      "actions": 3,
+      "j_m_full_trace": true,
+      "progress": 2,
       "sealed_index": 2,
       "state": "WIN",
-      "trace_digest": "generic-run:ac3261f39a497cc271ad8206e58b49c3831497854d3d57f9efee98744ca81090",
+      "trace_digest": "generic-run:89d72199a936239f20b744356bcf6a086b1958ddf532d9c33774d9551b2b43ba",
       "valid_action_only": true
     }
   ],
   "runtime_source_read": false,
   "schema_version": "arc3-sealed-custom-environment-report-v1",
-  "sealed_seed": 1839392085,
+  "sealed_seed": 3003807288,
   "sealed_seed_derivation": "sha256(frozen_code_commit)[0:8]",
   "seed": 0,
   "status": "PASS",

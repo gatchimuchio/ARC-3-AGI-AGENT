@@ -1,7 +1,7 @@
 {
   "audit": {
-    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
-    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+    "commit": "23ad7f5d0b56e0b77fe1eda61284d806d32fed6f",
+    "tree": "86364585d542892be84579b117d9716dffbf612f"
   },
   "audit_version": "arc3-p12-preofficial-audit-v1",
   "blind_regression": {
@@ -31,16 +31,16 @@
   },
   "candidate": {
     "body_version": "generic-parametric-relational-v2",
-    "digest": "generic-candidate-p:54a6ac2fa6a022db3a8b75c72060e9a7b9412ee950771b74599b30fa1ac78980",
+    "digest": "generic-candidate-p:23fc52f0877bd689f8c70cb488924f2b01d26595d9a578efbcca5d94102a4cd9",
     "isolated_from_active": true
   },
   "code": {
-    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
-    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+    "commit": "42db39dd98ce724a8e44228ebb6637f88c415fc0",
+    "tree": "8728cfeff5f9a97fa60726852a9b64f517e6b14e"
   },
-  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
-  "compile_authorization_id": "generic-p-compile-authorization:08762662e4c2067ca8fd3660",
-  "content_digest": "arc3-runtime-version-learning-report-v1:4eac4ad2b17be6eb91f422095fa886069e2f97d5f4302fecdded02caaf2f6896",
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit 42db39dd98ce724a8e44228ebb6637f88c415fc0 --code-tree 8728cfeff5f9a97fa60726852a9b64f517e6b14e --audit-commit 23ad7f5d0b56e0b77fe1eda61284d806d32fed6f --audit-tree 86364585d542892be84579b117d9716dffbf612f --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "compile_authorization_id": "generic-p-compile-authorization:b5d1ab9532438679f1b3700e",
+  "content_digest": "arc3-runtime-version-learning-report-v1:9fee62cf0a668ec5f1b6027a9d7de470a71185c25e36c608706052d78d80f69d",
   "environment_manifest": {
     "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
     "implementation": "CPython",
@@ -49,13 +49,13 @@
     "python_hash_seed": "UNSET"
   },
   "failed_requirement_ids": [],
-  "initial_state_digest": "generic-initial-state:7ae3e0cfb89f8718546be6c5999758b024993b323bbb9286d0b3c10c85d9e4fe",
-  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "initial_state_digest": "generic-initial-state:d2f56c9884f4abece8eda995c371151b825323068962cf255647a0cff853e180",
+  "input_artifact_digest": "p12-input:33f76223f6d063632eea1bb87a076f8e42f7456b7fafc235bbc3ca68326bcaa3",
   "promotion": {
     "active_p_digest": "generic-parametric-p:58882323e24605fecf447a74dd83690fad451c73ea6a80dca56b8c24f07fb63b",
-    "candidate_digest": "generic-candidate-p:54a6ac2fa6a022db3a8b75c72060e9a7b9412ee950771b74599b30fa1ac78980",
-    "decision_id": "generic-p-promotion-decision:1c314639edf74350337ac75b",
-    "promoted_p_digest": "generic-parametric-p:73771182f1ae6c5afdbbc865e3f94a2a41c62cf720417f5f42d81705455bf7c0",
+    "candidate_digest": "generic-candidate-p:23fc52f0877bd689f8c70cb488924f2b01d26595d9a578efbcca5d94102a4cd9",
+    "decision_id": "generic-p-promotion-decision:33faa18881bbebc7289fa74a",
+    "promoted_p_digest": "generic-parametric-p:5f116dd44144aabfdc19fa9da92ff52083b8334a2984e119aec8431f663bbdb4",
     "reasons": [
       "HDS_PROMOTION_GATES_PASSED"
     ],

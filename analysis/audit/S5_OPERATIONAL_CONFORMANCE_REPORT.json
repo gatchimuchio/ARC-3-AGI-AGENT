@@ -1,7 +1,7 @@
 {
   "audit": {
-    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
-    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+    "commit": "23ad7f5d0b56e0b77fe1eda61284d806d32fed6f",
+    "tree": "86364585d542892be84579b117d9716dffbf612f"
   },
   "audit_version": "arc3-p12-preofficial-audit-v1",
   "blocking_finding_ids": [
@@ -30,11 +30,11 @@
     "whole_game_actions_per_game": 128
   },
   "code": {
-    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
-    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+    "commit": "42db39dd98ce724a8e44228ebb6637f88c415fc0",
+    "tree": "8728cfeff5f9a97fa60726852a9b64f517e6b14e"
   },
-  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
-  "content_digest": "arc3-s5-operational-conformance-report-v1:892504ea154018646feb0b4bb3e2c5fe8a48cf4f72b531558c4f32ee5c958f56",
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit 42db39dd98ce724a8e44228ebb6637f88c415fc0 --code-tree 8728cfeff5f9a97fa60726852a9b64f517e6b14e --audit-commit 23ad7f5d0b56e0b77fe1eda61284d806d32fed6f --audit-tree 86364585d542892be84579b117d9716dffbf612f --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-s5-operational-conformance-report-v1:6971927860fa063e60bf548add24419b11341be42fdc31590fc7d9a58d762eca",
   "environment_manifest": {
     "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
     "implementation": "CPython",
@@ -73,7 +73,7 @@
     "whole_game_holdout_executed": false
   },
   "frozen_baseline_mutation_authorized": false,
-  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "input_artifact_digest": "p12-input:33f76223f6d063632eea1bb87a076f8e42f7456b7fafc235bbc3ca68326bcaa3",
   "known_sample_closure": "PASS",
   "operational_agi_conformance": "SUSPEND",
   "raw_evidence_pointers": [

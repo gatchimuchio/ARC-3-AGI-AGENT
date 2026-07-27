@@ -1,8 +1,8 @@
 {
   "all_environment_executed": true,
   "audit": {
-    "commit": "ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912",
-    "tree": "e2244e166766c388d87bf924956414b616c41f1a"
+    "commit": "23ad7f5d0b56e0b77fe1eda61284d806d32fed6f",
+    "tree": "86364585d542892be84579b117d9716dffbf612f"
   },
   "audit_version": "arc3-p12-preofficial-audit-v1",
   "budget": {
@@ -11,11 +11,11 @@
     "whole_game_actions_per_game": 128
   },
   "code": {
-    "commit": "a2a146976bb25ed84603e9f6b7f534e3b961b58b",
-    "tree": "4f1a245060b57eebc57dab208f96bb06966b1e56"
+    "commit": "42db39dd98ce724a8e44228ebb6637f88c415fc0",
+    "tree": "8728cfeff5f9a97fa60726852a9b64f517e6b14e"
   },
-  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit a2a146976bb25ed84603e9f6b7f534e3b961b58b --code-tree 4f1a245060b57eebc57dab208f96bb06966b1e56 --audit-commit ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912 --audit-tree e2244e166766c388d87bf924956414b616c41f1a --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
-  "content_digest": "arc3-executable-transformation-report-v1:cb5395e9ad80812c0bf2927100aac678a7324fab0f3d847da41f449c2a0bf050",
+  "command": "python -m arc3_agi_agent.p12_audit --repo-root 'C:\\Users\\mzcum\\ARC-3-AGI-AGENT' --code-commit 42db39dd98ce724a8e44228ebb6637f88c415fc0 --code-tree 8728cfeff5f9a97fa60726852a9b64f517e6b14e --audit-commit 23ad7f5d0b56e0b77fe1eda61284d806d32fed6f --audit-tree 86364585d542892be84579b117d9716dffbf612f --whole-game-budget 128 --seed 0 --execute-whole-game --known-sample-closure '..\\scratch\\p12-known-sample-a2a1469\\S5_RENDERED_ONLY_CLOSURE_REPORT.json' --known-sample-trace-manifest '..\\scratch\\p12-known-sample-a2a1469\\S5_FULL_EXECUTION_TRACE_MANIFEST.json' --known-sample-score '..\\scratch\\p12-known-sample-a2a1469\\S5_LOCAL_SCORE_ORACLE.json' --known-sample-authority-audit '..\\scratch\\p12-known-sample-a2a1469\\S5_SHORTCUT_AND_AUTHORITY_AUDIT.json' --post-change-regression '..\\analysis\\release\\P12_POST_CHANGE_REGRESSION_REPORT.json'",
+  "content_digest": "arc3-executable-transformation-report-v1:473f4fd84e1268065eafeb3687a83bdb4ea3148b098f66b6b790f45083c55563",
   "crash_count": 0,
   "environment_manifest": {
     "executable_sha256": "5912d0884b23c0343983a864c6064242391e2265536f50b88624857e353882c9",
@@ -32,7 +32,7 @@
       "family": "COLOR",
       "progress": 2,
       "state": "WIN",
-      "trace_digest": "generic-run:04606f56cd479ccec9ce2e87a1167c9975574bb373a78b119308ec979e8e0c5c",
+      "trace_digest": "generic-run:0d96dc7c5c2e53d53757d4f11531622b053b2c81e0abb5766ea09b304e8f757d",
       "valid_action_only": true
     },
     {
@@ -41,7 +41,7 @@
       "family": "ROTATION",
       "progress": 2,
       "state": "WIN",
-      "trace_digest": "generic-run:c44f400be6b5ca3d2597fedd0f127f40f442823711fcf15cc15cd76a0d2f8981",
+      "trace_digest": "generic-run:99117d7f2d4ef3d3a21bc166e75e306662023de5e855a5a5a9c5f7a25c74a7a6",
       "valid_action_only": true
     },
     {
@@ -50,7 +50,7 @@
       "family": "REFLECTION",
       "progress": 2,
       "state": "WIN",
-      "trace_digest": "generic-run:b6d6889f289e84e8ce78657fe033f4e1376f6a60a69677a019233ba2b103373a",
+      "trace_digest": "generic-run:b50c436e5c5a6177676246a1ac6e2d7bc2321ecf4d01600da7402b5fa383d162",
       "valid_action_only": true
     },
     {
@@ -59,7 +59,7 @@
       "family": "LAYOUT",
       "progress": 2,
       "state": "WIN",
-      "trace_digest": "generic-run:5392cbcf08f74a473fa96d4edfc877a74dbf7bc174b019d2fbc1595676d93042",
+      "trace_digest": "generic-run:1bf95a97c7349b682d76807fe67a97a344b059646ef5a61a7cd7b4e8c8bea069",
       "valid_action_only": true
     },
     {
@@ -68,7 +68,7 @@
       "family": "OBJECT_COUNT",
       "progress": 2,
       "state": "WIN",
-      "trace_digest": "generic-run:00f0f36567757581ec3f9fc012f6d404dd65ca871df48ea224aa7ca810f5bd1a",
+      "trace_digest": "generic-run:9c9c1e47a3edf7a7b171bf4b76a016fd229011766358de03fafc6533e75c8965",
       "valid_action_only": true
     },
     {
@@ -77,7 +77,7 @@
       "family": "ORDER",
       "progress": 2,
       "state": "WIN",
-      "trace_digest": "generic-run:3b9b0ebe6c868083f25550f66040f5ee8c0e23d28e25be538b380afc88f214f5",
+      "trace_digest": "generic-run:071f692c3aa60f52c62486ff9501435343a868718b4289f5bc9049d92b516a78",
       "valid_action_only": true
     },
     {
@@ -86,12 +86,12 @@
       "family": "UNSEEN_COMPOSITION",
       "progress": 2,
       "state": "WIN",
-      "trace_digest": "generic-run:cc25345391050e4d4bc18f8af7cea774f4eaf2cf9ce2e4e660813e02a4217768",
+      "trace_digest": "generic-run:964d636a64e2a608065f5758b659e5f12885c1a7a2aeb68a587510efd9a1fad3",
       "valid_action_only": true
     }
   ],
   "family_count": 7,
-  "input_artifact_digest": "p12-input:3c52ea9d08bad992ea2362873b86ee87911bedabe1f18b831c3d89543336e157",
+  "input_artifact_digest": "p12-input:33f76223f6d063632eea1bb87a076f8e42f7456b7fafc235bbc3ca68326bcaa3",
   "raw_evidence_pointers": [
     "ARC-AGI-3-Agents/arc3_agi_agent/generic_env.py"
   ],
