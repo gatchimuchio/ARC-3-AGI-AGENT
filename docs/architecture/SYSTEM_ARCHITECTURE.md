@@ -398,11 +398,14 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P7: 二主体接続監査 — 完了
 - P8: 三主体二周期循環 — 完了
 - P9: 全8部分集合証明 — 完了
-- P10: 全sample完全攻略 — 現在
-- P11: release state固定
-- P12〜P14: current request外
+- P10: 全sample完全攻略 — 完了
+- P11: release state固定 — 完了
+- P12: pre-official AGI conformance / genericity — 完了
+- P13: 公式ARC接続 — 未開始・Owner明示許可待ち
+- P14〜P15: 未開始
 
 現行順序は
 `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
-P4〜P9の完了証拠は各phase実装文書を参照します。P10はロードマップP10節と
-P9 certificate、P3/P4/P5/P6/P8の実装証拠を正本とします。
+P4〜P9の完了証拠は各phase実装文書を参照します。P10/P11の凍結証拠と
+P12の57/57受入証拠は各phase正本を参照します。P13以降はOwnerの
+明示的phase開始指示なしに進めません。

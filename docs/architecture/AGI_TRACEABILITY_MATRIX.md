@@ -1,7 +1,7 @@
 # AGI最小三構成 Traceability Matrix
 
-- current phase: none (`P12_NOT_STARTED_CURRENT_REQUEST_OUT_OF_SCOPE`)
-- last completed phase: `P11_RELEASE_STATE_FREEZE`
+- current phase: none (`P13_OWNER_AUTHORIZATION_PENDING`)
+- last completed phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
 - graph: `AGI_OBLIGATION_GRAPH.json`
 - status vocabulary: `SUPPORTED | PARTIAL | UNSUPPORTED | REJECTED`
 

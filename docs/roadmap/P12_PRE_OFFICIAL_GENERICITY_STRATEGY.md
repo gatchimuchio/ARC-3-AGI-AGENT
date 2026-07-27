@@ -1,6 +1,6 @@
 # P12 Pre-Official AGI Conformance and Genericity Strategy
 
-- phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
+- phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY` — complete
 - baseline: frozen P11 `KnownSampleStudent`
 - active implementation: separate `GenericAGIRuntime`
 - normative acceptance: `docs/architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`
@@ -116,23 +116,26 @@ next_question: ...
 ## 7. Current audited result
 
 - frozen runtime commit/tree:
-  `a2a146976bb25ed84603e9f6b7f534e3b961b58b` /
-  `4f1a245060b57eebc57dab208f96bb06966b1e56`
+  `42db39dd98ce724a8e44228ebb6637f88c415fc0` /
+  `8728cfeff5f9a97fa60726852a9b64f517e6b14e`
 - frozen audit commit/tree:
-  `ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912` /
-  `e2244e166766c388d87bf924956414b616c41f1a`
-- acceptance: 57件中56件`PASS`
-- remaining blocker: `GEN-001`
-- whole-game evidence: 25/25 game、完了0、progress 1 game、
-  4/5 fold progress 0、crash/leak/unknown-action/scorecard-close failure 0
+  `23ad7f5d0b56e0b77fe1eda61284d806d32fed6f` /
+  `86364585d542892be84579b117d9716dffbf612f`
+- acceptance: 57件中57件`PASS`
+- remaining blocker: 0
+- whole-game evidence: 25/25 game、完了0、全5 foldでprogress各1 game、
+  crash/leak/unknown-action/scorecard-close failure 0
 - mechanism holdout、七変換、sealed 3 game、implicit replay audit、
   Competition mock、learning、resource/package/securityは`PASS`
+- sealed freeze verification:
+  commit存在、evaluator事前不在、runtime一致の3条件すべて`true`
 - fresh KnownSampleStudent回帰: 25/25 game、183/183 level、
   10,733 action、error 0、RHAE 99.619936696%、frozen traceとbyte同一
 - P11 release digest:
   `arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c`
   は不変
 - final release state:
-  `arc3-pre-official-agi-release-state-v1:a3b410ee1cf1705df81b46875fbbf2980a4e4936a124c3e7fba5d67673456f59`
+  `arc3-pre-official-agi-release-state-v1:737979ba94ba8a2e3de2c6e47a433a406110ece5fa42c6d893052c382a997527`
 
-したがって現行HDS判断は`SUSPEND`であり、P13公式接続は開始しない。
+したがってP12の現行HDS判断は`PASS`である。ただしP13公式接続は
+Ownerの明示的phase開始指示待ちで、まだ開始しない。

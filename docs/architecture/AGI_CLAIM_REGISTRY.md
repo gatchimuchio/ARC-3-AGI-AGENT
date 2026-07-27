@@ -28,12 +28,12 @@
 | `CLAIM_KNOWN_SAMPLE_CLOSURE` | frozen S5が保持OFFLINE 25 game / 183 levelを閉包し全cycle traceを保存する | `SUPPORTED` | `S5_RENDERED_ONLY_CLOSURE_REPORT.json`, `S5_FULL_EXECUTION_TRACE_MANIFEST.json`, `S5_SHORTCUT_AND_AUTHORITY_AUDIT.json` | known sampleだけ。未知task、AGI完成、公式readyを含まない | 回帰 |
 | `CLAIM_S5_OPERATIONAL_AGI_CONFORMANCE` | frozen S5 pathがTrinity/HDS/L0/Mのoperational受入を満たす | `SUSPEND` | `S5_OPERATIONAL_CONFORMANCE_REPORT.json` | frozen known-sample path自体には複数model/candidate、J独立採否、semantic M、L0因果ablationがない | 保持 |
 | `CLAIM_GENERIC_OPERATIONAL_CONFORMANCE` | separate `GenericAGIRuntime`がL0/C/J/M/Trinity/learning/observabilityのoperational受入を満たす | `SUPPORTED` | `GENERIC_OPERATIONAL_CONFORMANCE_REPORT.json`, `test_generic_runtime_p12.py`, `test_generic_memory_p12.py` | 未知game完了またはgenericity成立を含まない | 回帰 |
-| `CLAIM_GENERICITY` | whole-game/mechanism/transformation/sealed holdoutで未知構造へ適応する | `UNSUPPORTED` | `WHOLE_GAME_HOLDOUT_MANIFEST.json`: 25/25 game実行、crash/leak/unknown-action 0、完了0、progress 1 gameのみ | 5 fold中4 foldでprogress 0のため`GEN-001`が`SUSPEND`。mechanism、七変換、sealed 3 gameの個別PASSでは代替できない | P12 |
+| `CLAIM_GENERICITY` | whole-game/mechanism/transformation/sealed holdoutで未知構造へ適応する | `SUPPORTED` | 25/25 whole-gameで全5 fold progress各1、mechanism PASS、七変換7/7、freeze後sealed 3/3、crash/leak/unknown-action/close failure 0 | P12受入定義域の進捗証拠。holdout game完了0であり、無限定汎化・公式互換性・公式scoreは含まない | 回帰 |
 | `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `SUPPORTED` | `P11_RELEASE_STATE.json`, `P11_REGRESSION_REPORT.json`, `test_p11_release_state.py` | code `823c51b68d7f...`、OFFLINE sample releaseの範囲 | 回帰 |
 | `CLAIM_COMPETITION_MOCK_CONTRACT` | Competition adapter契約を公式接続なしのmockで満たす | `SUPPORTED` | `COMPETITION_CONTRACT_DRY_RUN.json`: `OFF-001`〜`OFF-008` PASS | 公式API、`OperationMode.COMPETITION`、実scorecardの互換性を含まない | 回帰 |
 | `CLAIM_OFFICIAL_COMPATIBILITY` | 公式Competition contractに実接続で適合する | `NOT_EVALUATED` | mock dry-runはPASS、official connection performedはfalse | actualはP13かつP12全blocking PASS後のみ | P13 |
 | `CLAIM_OFFICIAL_SCORE` | 公式scoreを取得済み | `NOT_EVALUATED` | なし | 公式接続・提出未実施 | P15 |
-| `CLAIM_PRE_OFFICIAL_AGI_READY` | P13公式接続へ進める | `SUSPEND` | `PRE_OFFICIAL_AGI_RELEASE_STATE.json`: 56/57 PASS | `GEN-001`未成立。全blocking IDのPASSとOwner phase許可が必要 | P12 |
+| `CLAIM_PRE_OFFICIAL_AGI_READY` | P13公式接続の前提gateを満たす | `SUPPORTED` | `PRE_OFFICIAL_AGI_RELEASE_STATE.json`: 57/57 PASS、failed ID 0 | P13開始にはOwnerの明示的phase許可が別途必要。公式互換性・公式scoreは未評価 | phase authorization待ち |
 
 ## 禁止claim
 

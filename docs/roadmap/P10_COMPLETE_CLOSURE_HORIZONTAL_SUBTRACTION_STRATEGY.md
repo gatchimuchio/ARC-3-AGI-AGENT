@@ -670,12 +670,14 @@ python -m pytest -q \
 
 ```text
 P11_RELEASE_STATE_FREEZE = COMPLETE
-P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY = ACTIVE
+P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY = COMPLETE
+P13_OFFICIAL_ARC_CONNECTION = AWAITING_OWNER_AUTHORIZATION
 ```
 
 P10-R0〜R6は順序通り閉じた。P11はpolicyやscoreを変更せず、code、
 dependency、Python、P0/J0/M0、dataset、compiler、seed、budget、全sample
 証拠、regression suite、reproducible package digestをrelease stateへ固定して
 完了した。P12ではP11をknown-sample baselineとして凍結し、separate
-GenericAGIRuntimeのoperational conformanceとgenericityを反証する。
-公式接続はP13以降である。
+GenericAGIRuntimeのoperational conformanceとgenericityを反証して、
+blocking受入57/57をPASSした。公式接続は未実行であり、P13のOwner明示許可を
+待つ。

@@ -23,16 +23,19 @@ P10の現行戦略は
 - P9: `EIGHT_SUBSET_MINIMUM_CERTIFICATE` — 完了
 - P10: `COMPLETE_ARC3_SAMPLE_SOLVING` — 完了
 - P11: `RELEASE_STATE_FREEZE` — 完了
-- 現在フェーズ: P12 `PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
-- P12: 外部監査訂正、operational AGI conformance、genericity、Competition mock dry-run — **56/57 PASS、`GEN-001` SUSPEND**
-- P13: `OFFICIAL_ARC_CONNECTION` — 未開始・BLOCKED
+- 現在状態: P12 `PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`完了、
+  P13のOwner明示許可待ち
+- P12: 外部監査訂正、operational AGI conformance、genericity、
+  Competition mock dry-run — **57/57 PASS**
+- P13: `OFFICIAL_ARC_CONNECTION` — 未開始・NOT_AUTHORIZED
 - P14: Kaggle提出経路 — 未開始
 - P15: 実提出・公式結果最適化 — 未開始
 - P11/S5 183/183のclaim: **known sample closure complete**
 - S5 operational AGI conformance: **SUSPEND**
-- genericity: **NOT_ESTABLISHED**
+- genericity: **P12 executable acceptance PASS**
 - official compatibility: **NOT_EVALUATED**
-- official readiness: **BLOCKED**
+- pre-official AGI readiness: **PASS**
+- official connection: **NOT_AUTHORIZED / NOT_PERFORMED**
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -121,7 +124,7 @@ P10の現行戦略は
 - P12 `GenericAGIRuntime` operational conformance:
   **PASS**（L0/C/J/M/Trinity/learning/observability）
 - P12 whole-game holdout:
-  **25/25 game実行、完了0、真のprogress 1 game、4/5 fold progress 0、
+  **25/25 game実行、完了0、全5 foldで真のprogress各1 game、
   crash 0、scorecard close failure 0、unknown-action exception 0**
 - P12 mechanism holdout / executable transformations / sealed evaluator:
   **PASS / 7/7 PASS / 3/3 PASS**
@@ -132,13 +135,21 @@ P10の現行戦略は
   RHAE 99.619936696%、frozen closure/trace byte同一**
 - P12 post-change regression:
   **7/7 PASS、P11固定hash全件不変**
+- P12 runtime freeze:
+  **code `42db39dd98ce724a8e44228ebb6637f88c415fc0` /
+  tree `8728cfeff5f9a97fa60726852a9b64f517e6b14e`**
+- P12 audit freeze:
+  **code `23ad7f5d0b56e0b77fe1eda61284d806d32fed6f` /
+  tree `86364585d542892be84579b117d9716dffbf612f`**
 - P12 final HDS decision:
-  **`SUSPEND`**（57 blocking requirement中56 PASS、`GEN-001`のみ未成立）
+  **`PASS`**（57 blocking requirement中57 PASS、failed ID 0）
+- P12 release digest:
+  **`arc3-pre-official-agi-release-state-v1:737979ba94ba8a2e3de2c6e47a433a406110ece5fa42c6d893052c382a997527`**
 
 P11のweights、trace、score、artifact、digestはread-only baselineです。P12では
 S5を汎用化して上書きせず、`KnownSampleStudent`と別の
-`GenericAGIRuntime`を実装・反証します。P12中は公式API、
-`OperationMode.COMPETITION`、Kaggle、submissionを実行しません。
+`GenericAGIRuntime`を実装・反証しました。P13はOwnerの明示許可待ちであり、
+公式API、`OperationMode.COMPETITION`、Kaggle、submissionは未実行です。
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な
@@ -293,7 +304,7 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 に記録しています。P11では能力を変更せず、P0/J0/M0、code、dependency、
 environment、回帰、再現可能wheelを
 [`P11_RELEASE_STATE.json`](analysis/release/P11_RELEASE_STATE.json)へ固定しました。
-P12以降は未開始です。
+P12は57/57受入PASSで完了しました。P13以降は未開始です。
 
 ## 設計上の固定境界
 
@@ -403,9 +414,10 @@ python -m arc3_agi_agent.development_analysis \
 10. P9: 全8部分集合証明 — 完了
 11. P10: 全sample game / 全level完全攻略 — 完了
 12. P11: release state固定 — 完了
+13. P12: pre-official AGI conformance / genericity — 完了
 
-P12は実行中です。blocking受入を全件PASSするまでP13へ進まず、
-公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出を実行しません。
+P12 blocking受入は57/57 PASSです。P13はOwnerの明示的phase開始指示待ちで、
+公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出は未実行です。
 
 現行ロードマップ全文の正本は
 [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)

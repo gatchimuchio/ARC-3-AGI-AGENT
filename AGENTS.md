@@ -27,9 +27,9 @@
 ## 2. 現在のフェーズ
 
 `P11_RELEASE_STATE_FREEZE` はknown-sample baselineとして完了・凍結しています。
-現在phaseは`P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`です。
-P13の公式ARC接続はblocking受入項目が全件PASSし、Ownerが明示的にphaseを
-開始するまで禁止します。
+`P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`はblocking受入57件を
+全件PASSして完了しました。現在はP13開始のOwner明示許可待ちであり、
+P13の公式ARC接続はまだ開始していません。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -120,15 +120,17 @@ P11 complete:
   release digest arc3_p11_release_state:
     e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c
 
-P12 active:
+P12 complete / P13 transition not authorized:
   P11 183 / 183 is known-sample closure only
   S5 operational AGI conformance is SUSPEND
-  genericity is NOT_ESTABLISHED
+  GenericAGIRuntime operational conformance is PASS
+  P12 executable genericity acceptance is PASS
   official compatibility is NOT_EVALUATED
-  official readiness is BLOCKED
-  O-001 through O-018 are blocking findings
+  pre-official AGI readiness is PASS
+  official connection is NOT_AUTHORIZED and NOT_PERFORMED
+  O-001 through O-018 are closed by separate GenericAGIRuntime evidence
   KnownSampleStudent remains frozen
-  GenericAGIRuntime is the separate active correction path
+  P13 requires an explicit Owner phase-start instruction
 ```
 
 ### P11で実施・固定した作業
@@ -140,7 +142,7 @@ P12 active:
 - P0〜P10を含むfull unit/integration/static regression
 - tracked secret scan、release manifest、release-state文書の生成
 
-### P12中に禁止される作業
+### P13開始許可以前に禁止される作業
 
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
@@ -154,8 +156,9 @@ P12 active:
 - 文書、fixture、parameter数、既知scoreだけでblocking受入をPASSにすること
 
 P12のblocking findingsは
-`docs/audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md`の`O-001`〜`O-018`である。
-全受入IDは`docs/architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`を正本とする。
+`docs/audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md`の`O-001`〜`O-018`であり、
+separate GenericAGIRuntimeの実行証拠で閉じた。全受入IDは
+`docs/architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`を正本とする。
 
 P11の正本はP10の六正本、S5 closure/audit/oracle、S6 measurement、
 P9 certificate、P3 dataset、P0/J0/M0 descriptor、regression report、
@@ -359,7 +362,7 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - code/dependency/P0/J0/M0/dataset/compiler/seed/budgetを固定
 - 全sample・全実行trace証拠、package digest、regression suiteを固定
 
-### P12: Pre-official AGI conformance and genericity — 実行中
+### P12: Pre-official AGI conformance and genericity — 完了
 
 - 外部監査claim訂正とP11 read-only baseline固定
 - separate GenericAGIRuntime
@@ -367,6 +370,8 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - whole-game/mechanism/transformation/sealed genericity反証
 - Competition contract mock dry-run
 - resource/package/security/observability gate
+- blocking受入57/57 PASS、P11固定hash不変
+- official connection未実行、P13 Owner明示許可待ち
 
 ### P13〜P15: 未開始
 

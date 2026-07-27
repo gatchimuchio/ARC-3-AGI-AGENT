@@ -31,8 +31,8 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P9 | 全8部分集合監査 | 完了 |
 | P10 | ARC3全sample完全攻略 | 完了 |
 | P11 | 完成状態固定 | 完了 |
-| P12 | Pre-official AGI conformance / genericity | 実行中 |
-| P13 | 公式ARC環境接続 | BLOCKED |
+| P12 | Pre-official AGI conformance / genericity | 完了 |
+| P13 | 公式ARC環境接続 | 未開始・Owner許可待ち |
 | P14 | Kaggle提出経路 | 未開始 |
 | P15 | 実提出・公式結果最適化 | 未開始 |
 
@@ -67,9 +67,10 @@ P11は次を固定して完了した。
   `arc3_p11_release_state:e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c`
 
 P11はRuntime P、score、sample能力を変更していない。P11/S5は
-known-sample closure baselineとして凍結する。現在はP12で、operational
-AGI conformance、genericity、Competition contract mock dry-runを実装・反証する。
-公式接続、`OperationMode.COMPETITION`、Kaggle作業はP13以降でありBLOCKED。
+known-sample closure baselineとして凍結する。P12はoperational
+AGI conformance、genericity、Competition contract mock dry-runを実装・反証し、
+blocking受入57/57 PASSで完了した。公式接続、`OperationMode.COMPETITION`、
+Kaggle作業は未実行であり、P13のOwner明示許可を待つ。
 
 ## 監査正本
 

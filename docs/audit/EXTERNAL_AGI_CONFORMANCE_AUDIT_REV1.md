@@ -18,7 +18,7 @@ Package内5文書の保持先:
 | `03_ARC3_AGI受入仕様書_rev1.md` | `ARC3_AGI_ACCEPTANCE_SPEC_REV1.md` |
 | `ARC3_AGI_監査修正統合版_rev1.md` | authority順序とP12 final gate |
 
-## 1. 訂正後の主張
+## 1. 初回訂正時の主張
 
 ```text
 MINIMUM_THREE_STRUCTURAL_CERTIFICATE: SUPPORTED
@@ -83,7 +83,7 @@ arc3_p11_release_state:
 e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c
 ```
 
-## 4. HDS disposition
+## 4. 初回HDS disposition
 
 ```text
 assertion_state: SUSPEND
@@ -98,22 +98,26 @@ next_question:
 ## 5. Correction execution result
 
 `GenericAGIRuntime`と独立監査器を実装し、受入57件を固定runtime
-commit `a2a146976bb25ed84603e9f6b7f534e3b961b58b`、固定audit commit
-`ff6d3f6a85c2818c0f751c3b3fdc4f373d72f912`で実行した。
+commit `42db39dd98ce724a8e44228ebb6637f88c415fc0`、固定audit commit
+`23ad7f5d0b56e0b77fe1eda61284d806d32fed6f`で実行した。
 
-- 56/57 requirement: `PASS`
-- `GEN-001`: `SUSPEND`
-- whole-game holdout: 25/25 gameを各一回実行、完了0、progress 1 game、
-  4/5 fold progress 0
+- 57/57 requirement: `PASS`
+- failed requirement: 0
+- whole-game holdout: 25/25 gameを各一回実行、完了0、
+  全5 foldでprogress各1 game
 - runtime crash、identity/source leak、unknown-action exception、
   scorecard close failure: 各0
 - mechanism holdout、七変換、sealed 3 game、implicit replay audit:
   `PASS`
+- sealed freeze: commit存在、evaluator事前不在、runtime一致を全件確認
 - operational C/J/M/P/Trinity/learning、Competition mock、
   resource/package/security: `PASS`
 - fresh frozen-baseline回帰: 183/183、RHAE 99.619936696%、
   P11固定hash全件不変
 - official connection / `OperationMode.COMPETITION` / Kaggle: 未実行
+- final release digest:
+  `arc3-pre-official-agi-release-state-v1:737979ba94ba8a2e3de2c6e47a433a406110ece5fa42c6d893052c382a997527`
 
-よって外部監査の過大claimは是正されたが、genericity完成claimは成立しない。
-`PRE_OFFICIAL_AGI_READY`とP13移行は引き続き`SUSPEND`とする。
+よってP12の実行可能な受入範囲では`PRE_OFFICIAL_AGI_READY`を`PASS`とする。
+これは全holdout game完了、無限定汎化、公式互換性、公式scoreを意味しない。
+P13移行はOwnerの明示的phase開始指示待ちであり、公式接続は未実行である。

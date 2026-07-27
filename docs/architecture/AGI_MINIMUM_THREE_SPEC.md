@@ -297,11 +297,11 @@ P8 Three-subject Two-cycle Trinity                  complete
 P9 Eight-subset Minimum Certificate                 complete
 P10 Complete ARC3 Sample Solving                    complete
 P11 Release-state Freeze                            complete
-P12 Pre-official AGI Conformance and Genericity     active
-P13 Official ARC Connection                         blocked
+P12 Pre-official AGI Conformance and Genericity     complete
+P13 Official ARC Connection                         awaiting Owner authorization
 P14 Kaggle Paths                                    not started
 P15 Submission and Official-result Optimization    not started
 ```
 
-P12は`ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`の全blocking requirementを実行証拠で
-閉じる。P13以降は全P12 gateとユーザーの明示的phase開始指示なしに進めない。
+P12は`ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`の全blocking requirement 57件を
+実行証拠で閉じた。P13以降はユーザーの明示的phase開始指示なしに進めない。
