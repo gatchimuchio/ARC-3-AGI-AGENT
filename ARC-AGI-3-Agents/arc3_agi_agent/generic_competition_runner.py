@@ -31,11 +31,12 @@ def _peak_rss_mb() -> float | None:
     try:
         import resource
 
-        return round(
-            resource.getrusage(resource.RUSAGE_SELF).ru_maxrss  # type: ignore[attr-defined]
-            / 1024,
-            3,
+        getrusage = getattr(resource, "getrusage")
+        usage = getrusage(getattr(resource, "RUSAGE_SELF"))
+        peak_rss = float(
+            getattr(usage, "ru_maxrss")
         )
+        return round(peak_rss / 1024, 3)
     except (ImportError, OSError, ValueError):
         return None
 
@@ -85,6 +86,7 @@ def run_sequential_competition(
 
     completed: list[dict[str, object]] = []
     failures: list[dict[str, object]] = []
+    lifecycle_failures: list[dict[str, object]] = []
     close_result: object | None = None
     close_error: Exception | None = None
     try:
@@ -146,7 +148,22 @@ def run_sequential_competition(
                     }
                 )
             finally:
-                _release_environment(environment)
+                try:
+                    _release_environment(environment)
+                except Exception as error:
+                    logger.exception(
+                        "Sequential environment release failed: index=%s/%s",
+                        game_index + 1,
+                        len(game_ids),
+                    )
+                    lifecycle_failures.append(
+                        {
+                            "game_index": game_index,
+                            "phase": "environment_release",
+                            "error_type": type(error).__name__,
+                            "error_message": str(error)[:1000],
+                        }
+                    )
     finally:
         try:
             close_result = client.close_scorecard(card_id)
@@ -160,12 +177,14 @@ def run_sequential_competition(
         "advertised_game_count": len(game_ids),
         "completed_game_count": len(completed),
         "failed_game_count": len(failures),
+        "lifecycle_failure_count": len(lifecycle_failures),
         "active_agent_peak": 1,
         "scorecard_open_count": 1,
         "scorecard_close_count": 1 if close_error is None else 0,
         "scorecard_closed": close_result is not None,
         "results": completed,
         "failures": failures,
+        "lifecycle_failures": lifecycle_failures,
         "peak_rss_mb": _peak_rss_mb(),
         "runtime_policy_changed": False,
     }
@@ -175,7 +194,7 @@ def run_sequential_competition(
             {
                 key: value
                 for key, value in report.items()
-                if key not in {"results", "failures"}
+                if key not in {"results", "failures", "lifecycle_failures"}
             },
             sort_keys=True,
         ),
@@ -201,7 +220,7 @@ def main() -> int:
             {
                 key: value
                 for key, value in report.items()
-                if key not in {"results", "failures"}
+                if key not in {"results", "failures", "lifecycle_failures"}
             },
             sort_keys=True,
         )

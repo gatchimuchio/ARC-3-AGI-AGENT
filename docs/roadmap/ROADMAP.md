@@ -32,9 +32,9 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P10 | ARC3全sample完全攻略 | 完了 |
 | P11 | 完成状態固定 | 完了 |
 | P12 | Pre-official AGI conformance / genericity | 完了 |
-| P13 | 公式ARC環境接続 | 進行中・逐次ローカルcompetition互換12/12 PASS |
-| P14 | Kaggle提出経路 | version 7公式placeholder gate・逐次候補23/23 PASS |
-| P15 | 実提出・公式結果最適化 | refs 55040966 / 55043205 / 55045360 ERROR・逐次候補は一回再提出許可済み |
+| P13 | 公式ARC環境接続 | 進行中・逐次ローカルcompetition互換12/12 PASS・private位置判定不能 |
+| P14 | Kaggle提出経路 | version 8通常実行PASS・次のzero-byte封じ込め候補25/25 local PASS・Kaggle未実行 |
+| P15 | 実提出・公式結果最適化 | refs 55040966 / 55043205 / 55045360 / 55049227 ERROR・次候補未提出・HDS SUSPEND |
 
 ## 現在のphase gate
 
@@ -70,14 +70,16 @@ P11はRuntime P、score、sample能力を変更していない。P11/S5は
 known-sample closure baselineとして凍結する。P12はoperational
 AGI conformance、genericity、Competition contract mock dry-runを実装・反証し、
 blocking受入57/57 PASSで完了した。P13以降はOwner明示許可により開始し、
-25ゲームの逐次ローカルcompetition互換12/12と、corrective Kaggle Notebook
-version 7通常実行・公式placeholder row/column/type照合をPASSした。実提出APIは
-version 4、5、7から三回呼び、refs `55040966` / `55043205` / `55045360`は
-すべてKaggle system error、scoreなし・episode 0・total bytes 0で終了した。
-version 7も公式formatのまま失敗したためformat単独原因は棄却済みである。
-CPU-heavy runtimeの全ゲーム同時thread競合を一ゲームずつの逐次実行へ是正し、
-25/25、12/12、Notebook 23/23をPASSした。live limitは
-`numAllowedNow=1`で、Ownerは逐次候補の一回再提出を明示許可している。
+25ゲームの逐次ローカルcompetition互換12/12と、Kaggle Notebook
+version 8通常実行・公式placeholder row/column/type照合をPASSした。実提出APIは
+versions 4、5、7、8から四回呼び、refs `55040966` / `55043205` /
+`55045360` / `55049227`はすべてKaggle system error、scoreなし・
+total bytes 0で終了した。version 7でformat単独原因、version 8で
+全ゲーム同時thread競合単独原因を棄却した。episode APIは受理済みrefsにも0を
+返すためgateway位置の根拠にしない。現行HDSはSUSPEND。本日のOwner指定一回提出は
+消費済み。次候補は公式parquetの実行前fallback、private failure telemetry、
+environment release隔離を含み、Notebook 25/25・unit 555/555・integration 8/8・
+64x64負荷監査をPASSした。main固定後のKaggle通常実行を次gateとする。
 
 ## 監査正本
 

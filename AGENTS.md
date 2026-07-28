@@ -30,18 +30,23 @@
 `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`はblocking受入57件を
 全件PASSして完了しました。P13〜P15はOwnerの明示許可により開始済みです。
 現在は25ゲームの逐次ローカルcompetition互換回帰12/12と、逐次runnerを含む
-Kaggle候補のNotebook検証23/23をPASSしています。実提出ref `55040966`
-（version 4）、`55043205`（version 5）、`55045360`（version 7）は、
-いずれもKaggle `ERROR`（system error、scoreなし、episode 0、
-total bytes 0）です。live submission-limitは`numAllowedNow=1`で、
-三件のERRORは現行日次枠へ計上されていません。version 5のplaceholder値とNotebook lifecycleが
+Kaggle Notebook version 8の検証23/23・通常実行COMPLETEまでPASSしています。
+実提出ref `55040966`（version 4）、`55043205`（version 5）、
+`55045360`（version 7）、`55049227`（version 8）は、いずれもKaggle
+`ERROR`（system error、scoreなし、total bytes 0）です。version 5のplaceholder値とNotebook lifecycleが
 公式Pinned Notebookの契約と一致していなかったことは立証済みです。
 過去の受理実績は提出経路が成立した事実の補助証拠に限り、正確なformatや
 公式記載以外の実行時間制約を推定する根拠にはしません。
 version 7も公式formatのまま同じERRORとなったため、format単独原因は棄却済みです。
-公式失敗分類とA/B回帰から、CPU-heavy GenericAGIRuntimeを全ゲーム同時threadで
-動かしたresource contentionを主原因と判定し、一ゲームずつの逐次実行へ是正しました。
-Ownerはこの是正候補を一回再提出するよう明示指示済みです。
+version 8は一ゲームずつの逐次実行へ是正して同じERRORとなったため、
+全ゲーム同時thread競合も十分な根本原因ではありません。episode APIは受理済み
+refsにも0を返すためgateway到達推定に使用しません。KaggleはERROR後にservice枠を
+返却していますが、Owner指定の一日一回はversion 8で消費済みです。現行HDS判断は
+`SUSPEND`であり、本日の追加提出は禁止します。次候補はprivate最初のセルで
+公式Pinned出力とbyte一致する2648-byte parquetをwheel install前に生成し、
+install・payload・runner失敗をtracebackとstatus JSONへ残します。隔離スモーク、
+Notebook 25/25、unit 555/555、integration 8/8、mypy 123 files、
+64x64×128-cycle負荷監査をPASSしていますが、まだKaggleへupload・実提出していません。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -141,15 +146,21 @@ P12 complete / P13 transition authorized:
   hidden-game compatibility is NOT_EVALUATED
   pre-official AGI readiness is PASS
   P13 through P15 are Owner-authorized and in progress
-  Kaggle corrective Notebook version 7 regular run is COMPLETE
-  actual submission API call count is 3
-  submission refs 55040966, 55043205, and 55045360 are ERROR with no score,
-    no episode, and total bytes 0
-  live submission slots available now is 1
+  Kaggle sequential Notebook version 8 normal run is COMPLETE
+  actual submission API call count is 4
+  submission refs 55040966, 55043205, 55045360, and 55049227 are ERROR
+    with no score and total bytes 0
+  episode API count is non-diagnostic; accepted controls also return 0
   format-only root cause is rejected by version 7 failure
-  sequential correction completes 25 / 25 with active_agent_peak 1,
-    local competition checks 12 / 12, and Notebook checks 23 / 23
-  P15 HDS judgment is PASS for one authorized resubmission
+  all-game thread-fan-out-only root cause is rejected by version 8 failure
+  sequential correction completes 25 / 25 locally with active_agent_peak 1,
+    local competition checks 12 / 12, and submitted Notebook checks 23 / 23,
+    but official private rerun is ERROR
+  next zero-byte containment candidate passes Notebook checks 25 / 25,
+    exact pre-execution fallback smoke, unit 555 / 555, integration 8 / 8,
+    mypy 123 files, and synthetic 64x64 x 128-cycle stress
+  next candidate is not uploaded and not submitted
+  P15 HDS judgment is SUSPEND; Owner daily attempt is consumed
   O-001 through O-018 are closed by separate GenericAGIRuntime evidence
   KnownSampleStudent remains frozen
   P13 requires an explicit Owner phase-start instruction
@@ -401,17 +412,19 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 ### P13〜P15: 進行中
 
 - P13 official ARC connection: 逐次ローカルcompetition互換12/12 PASS、
-  実gateway到達はsubmission system errorにより未立証
-- P14 Kaggle submission paths: corrective Notebook version 7通常実行・
-  公式placeholder照合・逐次候補23/23・MCP読取PASS
-- P15 actual submission: ref `55040966`、`55043205`、`55045360`を実行し、
-  いずれもKaggle system error、scoreなし・episode 0・total bytes 0。
-  version 7でformat単独原因を棄却。逐次候補は25/25、12/12をPASSし、
-  Ownerの一回再提出指示を受領済み
+  private rerunのgateway到達・scorecard close位置は公開fieldから判定不能
+- P14 Kaggle submission paths: Notebook version 8通常実行・
+  公式placeholder照合・MCP読取PASS。次のzero-byte封じ込め候補は
+  ローカルNotebook 25/25 PASS、Kaggle通常実行は未実施
+- P15 actual submission: ref `55040966`、`55043205`、`55045360`、
+  `55049227`を実行し、いずれもKaggle system error、scoreなし・total bytes 0。
+  version 7でformat単独原因、version 8でthread競合単独原因を棄却。
+  現行HDSはSUSPEND、本日のOwner指定一回提出は消費済み
 
 P13以降は全P12 blocking gateとユーザーの明示的phase開始指示を満たしている。
-実提出APIは三回呼んだ。live limitでは一枠利用可能で、逐次候補への
-一回再提出はOwnerが明示許可している。別versionの重複提出は行わない。
+実提出APIは四回呼んだ。Kaggle service側はERROR枠を返却したが、
+Owner指定の一日一回を優先し、本日の追加提出は行わない。次の提出には
+mainへ固定した同一候補のKaggle通常実行・source/output round tripを要求する。
 terminal正本は
 `analysis/official/KAGGLE_SUBMISSION_RESULT.json`とする。
 

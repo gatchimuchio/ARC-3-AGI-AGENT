@@ -26,6 +26,12 @@ class _Session:
         self.closed = True
 
 
+class _FailingSession(_Session):
+    def close(self) -> None:
+        super().close()
+        raise RuntimeError("bounded release failure")
+
+
 class _Arcade:
     def __init__(self) -> None:
         self.game_ids = ("hidden-a", "hidden-b", "hidden-c")
@@ -113,6 +119,53 @@ def test_runner_isolates_one_game_and_closes_one_scorecard() -> None:
     assert report["advertised_game_count"] == 3
     assert report["completed_game_count"] == 2
     assert report["failed_game_count"] == 1
+    assert report["lifecycle_failure_count"] == 0
     assert report["active_agent_peak"] == 1
     assert report["scorecard_closed"] is True
     assert report["runtime_policy_changed"] is False
+
+
+def test_runner_records_release_failure_and_continues() -> None:
+    arcade = _Arcade()
+    _Agent.active = 0
+    _Agent.active_peak = 0
+    original_make = arcade.make
+
+    def make_with_one_release_failure(
+        game_id: str,
+        *,
+        scorecard_id: str,
+        save_recording: bool,
+        include_frame_data: bool,
+    ) -> _Environment:
+        environment = original_make(
+            game_id,
+            scorecard_id=scorecard_id,
+            save_recording=save_recording,
+            include_frame_data=include_frame_data,
+        )
+        if game_id == "hidden-a":
+            environment._session = _FailingSession()
+        return environment
+
+    arcade.make = make_with_one_release_failure  # type: ignore[method-assign]
+    report = run_sequential_competition(
+        arcade=arcade,
+        agent_factory=_Agent,
+    )
+
+    assert arcade.make_calls == list(arcade.game_ids)
+    assert arcade.close_calls == 1
+    assert report["completed_game_count"] == 2
+    assert report["failed_game_count"] == 1
+    assert report["lifecycle_failure_count"] == 1
+    lifecycle_failures = report["lifecycle_failures"]
+    assert isinstance(lifecycle_failures, list)
+    assert lifecycle_failures == [
+        {
+            "game_index": 0,
+            "phase": "environment_release",
+            "error_type": "RuntimeError",
+            "error_message": "bounded release failure",
+        }
+    ]

@@ -1,6 +1,6 @@
 {
   "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
-  "build_report_sha256": "568f0bb0e72ff181931937d6bb3c90dfc520bf9f9546da5084f5aaa4a36e11a8",
+  "build_report_sha256": "9ed09551e17f5d072f7bd454a80135ec2055af62f4f7fb8d51906f95577e769a",
   "checks": {
     "NB-001_SOURCE_REBUILD_EXACT": true,
     "NB-002_METADATA_REBUILD_EXACT": true,
@@ -24,7 +24,9 @@
     "NB-020_NO_UNDOCUMENTED_RUNTIME_LIMIT": true,
     "NB-021_NOTEBOOK_FORMAT_MATCHES_OFFICIAL": true,
     "NB-022_SEQUENTIAL_SINGLE_ACTIVE_GAME": true,
-    "NB-023_RESOURCE_LIMITS_NOT_SELF_IMPOSED": true
+    "NB-023_RESOURCE_LIMITS_NOT_SELF_IMPOSED": true,
+    "NB-024_PREEXEC_COLLECTIBLE_FALLBACK": true,
+    "NB-025_FAILURE_VISIBLE_AND_COLLECTIBLE": true
   },
   "compile_failures": [],
   "failed_check_ids": [],
@@ -33,14 +35,30 @@
     "cell_count": 4,
     "id": "tecchannn/arc3-genericagiruntime-p15",
     "path": "kaggle_notebooks/submission.ipynb",
-    "sha256": "616f7bdaae4534155d5f3a738c0056f947e5e985b8c1c51b2be2e174e47f09c7",
-    "size_bytes": 81692
+    "sha256": "dc15b8b363967c300b6c73731f0261e589572da7ae43a11088dc2e2923625c83",
+    "size_bytes": 89096
   },
   "notebook_secret_findings": [],
+  "preexecution_fallback_smoke": {
+    "expected_install_failure_visible": true,
+    "fallback": {
+      "parquet_magic_valid": true,
+      "sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+      "size_bytes": 2648
+    },
+    "install_status": {
+      "error_message": "ARC3 competition wheel bundle is missing during rerun",
+      "error_type": "FileNotFoundError",
+      "schema_version": "arc3-private-install-status-v1",
+      "status": "INSTALL_EXCEPTION"
+    },
+    "passed": true,
+    "returncode": 0
+  },
   "runtime_archive": {
     "action_budget": 128,
-    "archive_sha256": "dce9f43448e9837c5a0bf61a99f46f353228de63e3a1b6ef8ecdf0d238ce33fb",
-    "archive_size_bytes": 51981,
+    "archive_sha256": "c7187a933ece093876a719c9f15082ff3311bed438a4e6f59c186674e297cc92",
+    "archive_size_bytes": 52114,
     "known_sample_policy_included": false,
     "member_names": [
       "ARC3_KAGGLE_RUNTIME_MANIFEST.json",
@@ -59,7 +77,7 @@
       "arc3_agi_agent/verification.py"
     ],
     "module_sha256": {
-      "generic_competition_runner.py": "bddf6b98a5e7859a99e2ae92b817428811d555680212b917d5461c0e0c9a4a17",
+      "generic_competition_runner.py": "885a2f40ca35dcf2bac281a09afea474c0fa8a9f395e498c8f7b02760203aba1",
       "generic_compute.py": "a673a92fd0b40dd987a984ee50b3166d744edc623aec8f2b33d26d9eaed6d711",
       "generic_env.py": "42a999d1118f53cbc6c544a9ef20930cb73ca88c2208e7d659403a8df28aff09",
       "generic_hds.py": "c8e905b29493ea684cba6c4465387963f65b8771376e8cc2dd03e0a0caa7f2f2",
@@ -96,7 +114,7 @@
     "stderr": "",
     "stdout": "WIN:2:True:False"
   },
-  "schema_version": "arc3-kaggle-notebook-validation-v4",
+  "schema_version": "arc3-kaggle-notebook-validation-v5",
   "status": "PASS",
   "submission_api_call_count": 0,
   "tracked_secret_findings": []

@@ -19,6 +19,8 @@ from build_kaggle_submission import (
     AGENT_SOURCE,
     COMPETITION_SLUG,
     DEFAULT_OUTPUT_DIR,
+    OFFICIAL_PLACEHOLDER_PARQUET_SHA256,
+    OFFICIAL_PLACEHOLDER_PARQUET_SIZE,
     PACKAGE_ROOT,
     RUNTIME_MODULES,
     build_metadata,
@@ -128,6 +130,80 @@ def _runtime_import_smoke(runtime_archive: bytes) -> dict[str, object]:
         }
 
 
+def _preexecution_fallback_smoke(
+    install_source: str,
+) -> dict[str, object]:
+    with tempfile.TemporaryDirectory(
+        prefix="arc3-kaggle-fallback-validation-"
+    ) as directory:
+        root = Path(directory)
+        fallback_path = root / "submission.parquet"
+        status_path = root / "arc3_install_status.json"
+        transformed_source = install_source.replace(
+            '"/kaggle/working/submission.parquet"',
+            repr(str(fallback_path)),
+        ).replace(
+            '"/kaggle/working/arc3_install_status.json"',
+            repr(str(status_path)),
+        )
+        script_path = root / "install_cell.py"
+        script_path.write_text(
+            transformed_source,
+            encoding="utf-8",
+            newline="\n",
+        )
+        environment = os.environ.copy()
+        environment["KAGGLE_IS_COMPETITION_RERUN"] = "1"
+        result = subprocess.run(
+            [sys.executable, str(script_path)],
+            cwd=root,
+            env=environment,
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        inspection: dict[str, object] = {}
+        if fallback_path.is_file():
+            fallback_data = fallback_path.read_bytes()
+            inspection = {
+                "size_bytes": len(fallback_data),
+                "sha256": _sha256(fallback_data),
+                "parquet_magic_valid": (
+                    fallback_data[:4] == b"PAR1"
+                    and fallback_data[-4:] == b"PAR1"
+                ),
+            }
+        install_status: dict[str, object] = {}
+        if status_path.is_file():
+            install_status = json.loads(
+                status_path.read_text(encoding="utf-8")
+            )
+        return {
+            "passed": (
+                result.returncode == 0
+                and inspection.get("size_bytes")
+                == OFFICIAL_PLACEHOLDER_PARQUET_SIZE
+                and inspection.get("sha256")
+                == OFFICIAL_PLACEHOLDER_PARQUET_SHA256
+                and inspection.get("parquet_magic_valid") is True
+                and install_status.get("status") == "INSTALL_EXCEPTION"
+                and install_status.get("error_type") == "FileNotFoundError"
+                and "FileNotFoundError" in result.stderr
+                and "ARC3 competition wheel bundle is missing"
+                in result.stderr
+            ),
+            "returncode": result.returncode,
+            "fallback": inspection,
+            "install_status": install_status,
+            "expected_install_failure_visible": (
+                "FileNotFoundError" in result.stderr
+                and "ARC3 competition wheel bundle is missing"
+                in result.stderr
+            ),
+        }
+
+
 def dedent_smoke_command() -> str:
     return (
         "from arc3_agi_agent.generic_compute import "
@@ -189,6 +265,7 @@ def validate(
         "install-official-offline-wheels",
         "",
     )
+    payload_source = cell_sources_by_id.get("verify-runtime-payload", "")
     competition_source = cell_sources_by_id.get(
         "execute-generic-runtime",
         "",
@@ -231,6 +308,7 @@ def validate(
         ]
     )
     tracked_secret_findings = _tracked_secret_findings()
+    fallback_smoke = _preexecution_fallback_smoke(install_source)
     notebook_secret_findings = [
         {
             "pattern": name,
@@ -256,6 +334,14 @@ def validate(
             == _sha256(runtime_archive)
             and build_report.get("agent_sha256")
             == _sha256(AGENT_SOURCE.read_bytes())
+            and build_report.get("preexecution_fallback", {}).get(
+                "sha256"
+            )
+            == OFFICIAL_PLACEHOLDER_PARQUET_SHA256
+            and build_report.get("preexecution_fallback", {}).get(
+                "size_bytes"
+            )
+            == OFFICIAL_PLACEHOLDER_PARQUET_SIZE
             and expected_build_report.get("runtime_archive", {}).get(
                 "archive_sha256"
             )
@@ -299,7 +385,8 @@ def validate(
                     "raise FileNotFoundError",
                 )
             )
-            and "==" not in install_source
+            and '"arc-agi==' not in install_source
+            and '"python-dotenv==' not in install_source
         ),
         "NB-011_GATEWAY_OWNS_RERUN_OUTPUT": (
             "/kaggle/working/submission.parquet"
@@ -403,9 +490,60 @@ def validate(
             and "RLIMIT_AS" not in runner_source
             and "record=True" not in runner_source
         ),
+        "NB-024_PREEXEC_COLLECTIBLE_FALLBACK": (
+            all(
+                marker in install_source
+                for marker in (
+                    "if competition_rerun:",
+                    'Path("/kaggle/working/submission.parquet")',
+                    "fallback_bytes = zlib.decompress(",
+                    "fallback_path.write_bytes(fallback_bytes)",
+                    OFFICIAL_PLACEHOLDER_PARQUET_SHA256,
+                    str(OFFICIAL_PLACEHOLDER_PARQUET_SIZE),
+                )
+            )
+            and cell_ids.index("install-official-offline-wheels")
+            < cell_ids.index("execute-generic-runtime")
+            and fallback_smoke["passed"] is True
+        ),
+        "NB-025_FAILURE_VISIBLE_AND_COLLECTIBLE": (
+            all(
+                all(marker in source for marker in markers)
+                for source, markers in (
+                    (
+                        install_source,
+                        (
+                            '"INSTALL_EXCEPTION"',
+                            "traceback.print_exc()",
+                            '"/kaggle/working/arc3_install_status.json"',
+                        ),
+                    ),
+                    (
+                        payload_source,
+                        (
+                            '"PAYLOAD_EXCEPTION"',
+                            "traceback.print_exc()",
+                            '"/kaggle/working/arc3_payload_status.json"',
+                        ),
+                    ),
+                    (
+                        competition_source,
+                        (
+                            "check=False",
+                            'runtime_status["runner_returncode"]',
+                            '"RUNNER_NONZERO"',
+                            '"BOOTSTRAP_EXCEPTION"',
+                            "traceback.print_exc()",
+                            '"/kaggle/working/arc3_runtime_status.json"',
+                        ),
+                    ),
+                )
+            )
+            and "check=True" not in competition_source
+        ),
     }
     return {
-        "schema_version": "arc3-kaggle-notebook-validation-v4",
+        "schema_version": "arc3-kaggle-notebook-validation-v5",
         "status": "PASS" if all(checks.values()) else "FAIL",
         "checks": checks,
         "failed_check_ids": [
@@ -424,6 +562,7 @@ def validate(
         "agent_sha256": _sha256(AGENT_SOURCE.read_bytes()),
         "compile_failures": compile_failures,
         "runtime_import_smoke": import_smoke,
+        "preexecution_fallback_smoke": fallback_smoke,
         "notebook_secret_findings": notebook_secret_findings,
         "tracked_secret_findings": tracked_secret_findings,
         "submission_api_call_count": 0,

@@ -1,39 +1,44 @@
 {
-  "schema_version": "arc3-kaggle-notebook-run-v3",
-  "status": "PASS",
-  "hds_judgment": "HOLD",
-  "evidence_boundary": "Kaggle normal saved-version execution, source round trip, and exact official placeholder validation only. The competition rerun branch, gateway, hidden games, scorecard closure, official score, and actual submission are not exercised by this evidence.",
+  "schema_version": "arc3-kaggle-notebook-run-v5",
+  "status": "VERSION_8_PRIVATE_ERROR_NEXT_CANDIDATE_LOCAL_PASS_NOT_RUN",
+  "hds_judgment": "SUSPEND",
+  "evidence_boundary": "Historical Kaggle Notebook version 8 normal execution and terminal private submission 55049227, plus the locally generated zero-byte containment candidate. The candidate has not yet been uploaded or run on Kaggle and therefore has no Kaggle version, normal session result, or private score.",
   "notebook": {
     "owner": "tecchannn",
     "slug": "arc3-genericagiruntime-p15",
     "kernel_id": 128841040,
-    "version": 7,
+    "version": 8,
     "url": "https://www.kaggle.com/code/tecchannn/arc3-genericagiruntime-p15",
     "session_status": "COMPLETE",
-    "status_observed_at_utc": "2026-07-28T04:20:07Z",
+    "status_rechecked_at_utc": "2026-07-28T09:26:46Z",
     "is_private": true,
     "language": "python",
     "kernel_type": "notebook",
     "enable_gpu": false,
     "enable_tpu": false,
     "enable_internet": false,
-    "notebook_sha256": "71dae3e42532834543b3a40d2addde6949840558e3b341ba6942c55b2fa1fb6c",
+    "local_source_sha256": "616f7bdaae4534155d5f3a738c0056f947e5e985b8c1c51b2be2e174e47f09c7",
+    "pulled_executed_sha256": "58279b2d46a70120ce79bf961193e86d031d8a62316b1b70234a56ee6fa95acc",
     "metadata_sha256": "fd04c4b40f4ab71c4da908d195fc5e4e6a1487c58262dd4fc817fffb8ef99f5e"
   },
   "payload": {
-    "runtime_archive_sha256": "a24a632a4eb539711fc0ff6d423348ace33c4713953ef8517791df20e4f64ccd",
-    "runtime_archive_size_bytes": 49461,
+    "source_commit": "c60ac41f022f5cc53cf11e14603a4631c9ac5268",
+    "runtime_archive_sha256": "dce9f43448e9837c5a0bf61a99f46f353228de63e3a1b6ef8ecdf0d238ce33fb",
+    "runtime_archive_size_bytes": 51981,
     "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
     "agent_size_bytes": 4697,
     "teacher_included": false,
     "known_sample_policy_included": false,
     "runtime_identity_routing_included": false,
+    "orchestration_mode": "SEQUENTIAL_SINGLE_ACTIVE_GAME",
     "action_budget_per_game": 128
   },
-  "output": {
+  "normal_run_output": {
     "file_name": "submission.parquet",
     "size_bytes": 2648,
     "sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb",
+    "log_sha256": "919dfcb65fe08656132ab017eaf6d2ae97ffd99c41d56a28285ad8a64d1390dd",
+    "log_traceback_or_error_token_count": 0,
     "columns": [
       "row_id",
       "game_id",
@@ -58,35 +63,47 @@
     "downloaded_via_kaggle_cli": true,
     "read_back_with_pyarrow": true
   },
+  "private_rerun": {
+    "submission_ref": 55049227,
+    "created_at_utc": "2026-07-28T08:12:23.727Z",
+    "terminal_observed_at_utc": "2026-07-28T09:12:09Z",
+    "status": "ERROR",
+    "public_score": null,
+    "private_score": null,
+    "total_bytes": 0,
+    "episode_api_count": 0,
+    "error_description": "A system error. Please try resubmitting to resolve the error and contact Kaggle Support if it persists.",
+    "episode_count_interpretation": "NON_DIAGNOSTIC_BECAUSE_ACCEPTED_REFS_53966647_AND_53996483_ALSO_RETURN_ZERO"
+  },
   "official_reference": {
     "owner_slug": "inversion/arc3-sample-submission-random-agent",
     "session_status": "COMPLETE",
     "output_size_bytes": 2648,
     "output_sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
     "row_and_arrow_types_equal": true,
-    "binary_hash_difference_reason": "The official saved run used pyarrow 23.0.1 and version 7 used pyarrow 24.0.0; the row, column order, Arrow types, and byte size are equal."
+    "binary_hash_difference_reason": "The official saved run used pyarrow 23.0.1 and version 8 used pyarrow 24.0.0; the row, column order, Arrow types, and byte size are equal."
   },
   "checks": {
-    "KR-001_SESSION_COMPLETE": true,
+    "KR-001_NORMAL_SESSION_COMPLETE": true,
     "KR-002_RUNTIME_DIGEST_MATCH": true,
     "KR-003_AGENT_DIGEST_MATCH": true,
-    "KR-004_OUTPUT_LISTED_BY_KAGGLE_API": true,
-    "KR-005_OUTPUT_DOWNLOADABLE_BY_KAGGLE_CLI": true,
-    "KR-006_OUTPUT_NONEMPTY": true,
+    "KR-004_NORMAL_OUTPUT_LISTED": true,
+    "KR-005_NORMAL_OUTPUT_DOWNLOADABLE": true,
+    "KR-006_NORMAL_OUTPUT_NONEMPTY": true,
     "KR-007_OUTPUT_COLUMNS_EXACT": true,
     "KR-008_OUTPUT_ARROW_TYPES_EXACT": true,
     "KR-009_OUTPUT_ROW_EXACT": true,
     "KR-010_OFFICIAL_PLACEHOLDER_EQUAL": true,
     "KR-011_SOURCE_ROUND_TRIP_EQUAL": true,
-    "KR-012_NO_SUBMISSION_SIDE_EFFECT": true,
-    "KR-013_NO_RUNTIME_OR_POLICY_CHANGE": true
+    "KR-012_NO_RUNTIME_OR_POLICY_CHANGE": true,
+    "KR-013_SINGLE_SUBMISSION_CALL": true,
+    "KR-014_PRIVATE_RERUN_COMPLETE": false,
+    "KR-015_OFFICIAL_SCORE_RETURNED": false
   },
-  "failed_check_ids": [],
-  "upload_route": {
-    "source": "Kaggle CLI",
-    "competition_source_preserved": true,
-    "submission_route_not_called": true
-  },
+  "failed_check_ids": [
+    "KR-014_PRIVATE_RERUN_COMPLETE",
+    "KR-015_OFFICIAL_SCORE_RETURNED"
+  ],
   "source_round_trip": {
     "cell_sources_equal": true,
     "cell_ids_equal": true,
@@ -94,37 +111,37 @@
     "raw_file_hash_equal": false,
     "raw_hash_difference_reason": "Kaggle normalizes execution fields, outputs, and Notebook metadata when the saved version is pulled."
   },
-  "regular_run_environment": {
+  "normal_run_environment": {
     "competition_source_in_kernel_metadata": true,
     "competition_bundle_mounted": false,
-    "classification": "KAGGLE_REGULAR_RUN_ENVIRONMENT_DIFF",
-    "competition_rerun_behavior": "If KAGGLE_IS_COMPETITION_RERUN is set, a missing official wheel bundle fails closed. If the bundle is mounted, the same official offline installation command is executed."
+    "classification": "KAGGLE_NORMAL_RUN_ENVIRONMENT_DIFF",
+    "competition_rerun_behavior": "If KAGGLE_IS_COMPETITION_RERUN is set, a missing official wheel bundle fails closed. If the bundle is mounted, the official offline installation command is executed."
   },
-  "failed_regular_versions": [
-    {
-      "version": 1,
-      "classification": "MCP_REPEATED_FIELD_NOT_PERSISTED",
-      "submission_created": false
+  "submission_api_call_count": 1,
+  "competition_submission_count_delta": 1,
+  "next_gate": "Version 8 remains rejected. Do not submit again today. After the exact candidate is pushed, create a normal Kaggle version without competition submission and verify source/output round trip before the next daily private attempt.",
+  "next_candidate": {
+    "state": "LOCAL_PASS_NOT_UPLOADED_NOT_SUBMITTED",
+    "notebook_version": null,
+    "notebook_sha256": "dc15b8b363967c300b6c73731f0261e589572da7ae43a11088dc2e2923625c83",
+    "runtime_archive_sha256": "c7187a933ece093876a719c9f15082ff3311bed438a4e6f59c186674e297cc92",
+    "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
+    "normal_kaggle_run": "NOT_RUN",
+    "private_submission": "NOT_RUN",
+    "preexecution_fallback": {
+      "size_bytes": 2648,
+      "sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+      "source": "official pinned Notebook output",
+      "intentional_missing_wheel_smoke": "PASS"
     },
-    {
-      "version": 2,
-      "classification": "MCP_REPEATED_FIELD_NOT_PERSISTED",
-      "submission_created": false
-    },
-    {
-      "version": 3,
-      "classification": "REGULAR_RUN_COMPETITION_BUNDLE_NOT_MOUNTED",
-      "submission_created": false
-    },
-    {
-      "version": 6,
-      "classification": "REGULAR_RUN_COMPETITION_BUNDLE_NOT_MOUNTED",
-      "failure": "No matching distribution found for arc-agi because the official wheel directory was absent.",
-      "submission_created": false
+    "checks": {
+      "notebook_contract": "25/25 PASS",
+      "local_competition": "12/12 PASS",
+      "unit": "555/555 PASS",
+      "integration": "8/8 PASS",
+      "mypy": "123 source files PASS",
+      "ruff": "PASS",
+      "secret_findings": 0
     }
-  ],
-  "supersedes_regular_version": 5,
-  "submission_api_call_count": 0,
-  "competition_submission_count_delta": 0,
-  "next_gate": "Actual submission remains suspended. Version 7 requires explicit user authorization before one competition rerun can test gateway output and official scoring."
+  }
 }

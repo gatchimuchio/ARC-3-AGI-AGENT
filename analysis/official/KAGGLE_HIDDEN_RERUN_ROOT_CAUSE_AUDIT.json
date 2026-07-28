@@ -1,198 +1,230 @@
 {
-  "schema_version": "arc3-kaggle-hidden-rerun-root-cause-audit-v1",
-  "status": "SEQUENTIAL_CORRECTION_LOCALLY_PROVEN_READY_FOR_KAGGLE_VERSION",
-  "hds_judgment": "PASS",
+  "schema_version": "arc3-kaggle-hidden-rerun-root-cause-audit-v3",
+  "status": "ZERO_BYTE_COLLECTION_GAP_CONTAINED_LOCALLY_NOT_OFFICIALLY_VERIFIED",
+  "hds_judgment": "SUSPEND",
   "work_block": {
-    "X": "Kaggle ARC-AGI-3 submission refs 55040966, 55043205, and 55045360; the official debugging guidance; the pinned submission shape; the exact competition bundle; the historical accepted submissions; and concurrent versus sequential local competition-mode runs of GenericAGIRuntime.",
-    "R": "Use the third zero-byte error to reject the format-only explanation, eliminate each published common-error class with direct evidence, reproduce the remaining orchestration bottleneck locally, change only the competition orchestrator from all-game thread fan-out to one active game at a time, and compare identical 128-action runtime behavior.",
-    "Mc": "Accept the correction only if all 25 public games are made exactly once under one scorecard, active_agent_peak is one, runtime behavior matches P12, action/progress accounting is unchanged, no runtime or HTTP error occurs, the scorecard closes, the generated Notebook passes every contract check, and no undocumented runtime or memory limit is introduced.",
+    "X": "Four zero-byte ARC-AGI-3 submissions; official debugging and code requirements; Kaggle discussions 727119, 684969, and 699208; the official pinned Notebook output; historical accepted submissions; public competition-mode runs; and a synthetic 64x64 high-component runtime stress run.",
+    "R": "Separate the hidden private exception from the observable zero-byte collection failure. Preserve the 128-action identity-free AGI policy while creating a byte-identical official placeholder before wheel installation and recording install, payload, runner, and cleanup failures.",
+    "Mc": "Local containment passes only when the first private cell writes the exact official pinned parquet before wheel installation, an intentionally missing wheel bundle remains visible while the cell exits zero, all private phases emit status, the four-cell layout and HDS boundary remain intact, and all regressions pass. Official correction still requires a later private rerun with nonzero collected bytes.",
     "non_goals": [
-      "Do not lower the 128-action budget.",
-      "Do not change GenericAGIRuntime policy or HDS authority.",
-      "Do not restore identity routing, replay, fixed action sequences, literal coordinates, Teacher, source state, or hidden state.",
-      "Do not infer a hidden time limit shorter than the published Notebook limit.",
-      "Do not claim that local public-game success predicts a hidden-game score."
+      "Do not infer the hidden private exception.",
+      "Do not infer a time limit shorter than the published nine hours.",
+      "Do not infer gateway reach from competition_list_episodes.",
+      "Do not lower the 128-action budget or weaken HDS.",
+      "Do not restore identity routing, replay, fixed actions, literal coordinates, Teacher, source state, or hidden state.",
+      "Do not claim an official score before Kaggle returns one."
     ],
-    "evidence_boundary": "Kaggle exposes only the generic terminal error for the three failed private reruns. The causal diagnosis is therefore based on the corrected version 7 falsification result, official failure classes, source-level exclusion, and an exact local listen_and_serve competition-mode A/B run. It identifies the strongest reproduced cause and correction, not an unavailable private traceback.",
-    "falsification_condition": "A Kaggle private rerun of the sequential package again returns ERROR with zero collected bytes, or produces a runtime trace showing that the sequential runner was not reached.",
-    "regression_line": "The GenericAGIRuntime agent source and per-game 128-action policy are unchanged. Only competition orchestration, packaging allowlist, validation, and evidence change."
+    "evidence_boundary": "Kaggle exposes only a generic terminal error and zero collected bytes for version 8. It does not expose private traceback, stderr, native exit status, per-game progress, gateway reach, or scorecard-close state. The exact exception remains unknown. The absence of any pre-execution collectible artifact in the submitted versions is directly auditable and is contained locally by the next candidate.",
+    "regression_line": "GenericAGIRuntime agent source, HDS authority, identity-free boundary, and per-game 128-action policy are unchanged. Only Notebook fail-safe collection, private failure telemetry, and environment release isolation change."
   },
   "submission_observations": [
     {
       "ref": 55040966,
       "notebook_version": 4,
+      "created_at_utc": "2026-07-28T00:24:55.823Z",
       "status": "ERROR",
       "public_score": null,
       "private_score": null,
       "total_bytes": 0,
-      "episode_count": 0
+      "episode_api_count": 0,
+      "error_description": "A system error. Please try resubmitting to resolve the error and contact Kaggle Support if it persists."
     },
     {
       "ref": 55043205,
       "notebook_version": 5,
+      "created_at_utc": "2026-07-28T02:33:21.277Z",
       "status": "ERROR",
       "public_score": null,
       "private_score": null,
       "total_bytes": 0,
-      "episode_count": 0
+      "episode_api_count": 0,
+      "error_description": "A system error. Please try resubmitting to resolve the error and contact Kaggle Support if it persists."
     },
     {
       "ref": 55045360,
       "notebook_version": 7,
       "created_at_utc": "2026-07-28T04:43:31.867Z",
-      "description": "GenericAGIRuntime P15 official-format fix git d71fb08 runtime a24a632a",
       "status": "ERROR",
       "public_score": null,
       "private_score": null,
       "total_bytes": 0,
-      "episode_count": 0,
+      "episode_api_count": 0,
+      "error_description": "A system error. Please try resubmitting to resolve the error and contact Kaggle Support if it persists."
+    },
+    {
+      "ref": 55049227,
+      "notebook_version": 8,
+      "created_at_utc": "2026-07-28T08:12:23.727Z",
+      "status": "ERROR",
+      "public_score": null,
+      "private_score": null,
+      "total_bytes": 0,
+      "episode_api_count": 0,
       "error_description": "A system error. Please try resubmitting to resolve the error and contact Kaggle Support if it persists."
     }
   ],
-  "falsified_hypotheses": {
-    "format_only": {
-      "status": "REJECTED",
-      "evidence": "Notebook version 7 had the official four-code-cell lifecycle, exact placeholder row/columns/types, no custom timeout, and a COMPLETE regular run, but private rerun ref 55045360 still ended ERROR with zero bytes and zero episodes."
+  "episode_api_control": {
+    "accepted_submission_counts": {
+      "53966647": 0,
+      "53996483": 0
     },
-    "undocumented_short_timeout": {
-      "status": "NOT_ASSUMED",
-      "evidence": "The published Notebook limit is used as authority; elapsed failure time is not treated as a hidden limit."
+    "failed_submission_counts": {
+      "55040966": 0,
+      "55043205": 0,
+      "55045360": 0,
+      "55049227": 0
+    },
+    "conclusion": "competition_list_episodes is non-diagnostic for this competition."
+  },
+  "falsified_or_bounded_hypotheses": {
+    "format_only": {
+      "status": "REJECTED_AS_SUFFICIENT_CAUSE",
+      "evidence": "Versions 7 and 8 matched the official four-code-cell lifecycle and exact placeholder contract; both private reruns ended with zero collected bytes."
+    },
+    "all_game_thread_fanout": {
+      "status": "REJECTED_AS_SUFFICIENT_CAUSE",
+      "evidence": "Version 8 used one active game at a time, passed all 25 public games locally, and failed identically."
+    },
+    "episode_zero_means_pre_gateway": {
+      "status": "REJECTED",
+      "evidence": "Both accepted historical submissions also return zero episode API entries."
     },
     "self_imposed_virtual_memory_limit": {
       "status": "REJECTED",
-      "evidence": "No setrlimit or RLIMIT_AS call exists in the Notebook or runtime package. RSS observation does not impose a limit."
+      "evidence": "No setrlimit or RLIMIT_AS call exists in the Notebook or packaged runtime."
+    },
+    "undocumented_short_timeout": {
+      "status": "NOT_SUPPORTED_BY_OFFICIAL_OR_MEASURED_EVIDENCE",
+      "evidence": "The published limit is nine hours. Kaggle staff reported that the ARC3 bespoke runtime setting was corrected for full-limit runs. Public and 64x64 synthetic 110-game projections are 1.94 and 3.08 hours. The observed terminal window is not promoted to a hidden limit."
     }
   },
   "official_common_error_matrix": [
     {
-      "candidate": "wrong endpoint",
-      "disposition": "ELIMINATED",
-      "evidence": "The rerun path uses http://gateway:8001/api/games and the validator forbids external ARC and LLM endpoints."
+      "candidate": "wrong external endpoint",
+      "disposition": "SOURCE_LEVEL_REJECTED",
+      "evidence": "The rerun path uses http://gateway:8001/api/games and external ARC/LLM endpoints are forbidden by validation."
     },
     {
-      "candidate": "GPU required but disabled",
-      "disposition": "ELIMINATED",
-      "evidence": "The runtime imports no GPU framework and the Notebook intentionally declares accelerator none."
+      "candidate": "GPU mismatch",
+      "disposition": "SOURCE_LEVEL_REJECTED",
+      "evidence": "The runtime imports no GPU framework and declares accelerator none."
     },
     {
-      "candidate": "missing attached dataset or dependencies",
-      "disposition": "ELIMINATED",
-      "evidence": "The official competition source is attached, the exact offline wheels are mandatory in rerun, and the packaged runtime import smoke passes."
+      "candidate": "missing dependency or mounted bundle",
+      "disposition": "PRIVATE_EXCEPTION_NOT_OBSERVABLE_ZERO_BYTE_EFFECT_CONTAINED",
+      "evidence": "The exact wheels are required, but private bootstrap output is hidden. The next candidate preserves an official parquet and records install failure before dependency installation."
     },
     {
-      "candidate": "write to read-only /kaggle/input",
-      "disposition": "ELIMINATED",
-      "evidence": "The Notebook reads the mounted bundle and writes only under /kaggle/working; the gateway owns the private submission output."
+      "candidate": "write to read-only input",
+      "disposition": "SOURCE_LEVEL_REJECTED",
+      "evidence": "The Notebook reads /kaggle/input and writes only under /tmp and /kaggle/working."
     },
     {
-      "candidate": "log or disk exhaustion",
-      "disposition": "ELIMINATED_LOCALLY",
-      "evidence": "The concurrent public run produced about 64 KiB client and 256 KiB server logs, recordings are disabled in the correction, and no large working artifact is generated."
-    },
-    {
-      "candidate": "Python exception or invalid game contract",
-      "disposition": "ELIMINATED_ON_PUBLIC_COMPETITION_MODE",
-      "evidence": "The corrected runner completed all 25 public games with zero runtime exceptions, zero HTTP errors, exact behavior accounting, and one closed scorecard."
-    },
-    {
-      "candidate": "native hidden-game crash",
+      "candidate": "Python or native hidden-game exception",
       "disposition": "NOT_OBSERVABLE",
-      "evidence": "Kaggle does not expose private stderr or exit details. No such crash occurs in the exact public competition-mode run."
+      "evidence": "Public execution passes; Kaggle does not expose private traceback, stderr, or native exit status."
     },
     {
-      "candidate": "all-game thread fan-out causing CPU contention and concurrent memory pressure",
-      "disposition": "ROOT_CAUSE_SELECTED",
-      "evidence": "The official Swarm created all agents and started one thread per game. With the CPU-heavy GenericAGIRuntime, the 25-thread public run slowed every agent to 0.05-0.11 fps and kept all agents alive concurrently. The one-active-game correction preserved behavior while restoring 0.69-4.10 fps and closing the scorecard."
+      "candidate": "scorecard close failure",
+      "disposition": "OPEN_PRIVATE_ONLY_RISK",
+      "evidence": "Public close succeeds; private close is not exposed. The fallback remains collectible if close fails."
+    },
+    {
+      "candidate": "end-to-end throughput",
+      "disposition": "BOUNDED_BELOW_PUBLISHED_LIMIT_ON_TWO_LOCAL_PROJECTIONS",
+      "evidence": "Public and high-component synthetic projections are below nine hours. Hidden cost remains unobserved, but throughput is not the strongest evidence-backed explanation."
+    },
+    {
+      "candidate": "no pre-execution collectible artifact",
+      "disposition": "OBSERVED_CONTAINMENT_GAP_CORRECTED_LOCALLY",
+      "evidence": "All four submitted versions depended on gateway completion before submission.parquet existed. The next candidate writes the exact official pinned 2648-byte parquet before wheel installation."
+    },
+    {
+      "candidate": "private exception terminates Notebook collection",
+      "disposition": "VISIBLE_FAILSAFE_PATH_LOCALLY_PROVEN",
+      "evidence": "Install, payload, runner return code, traceback, and release failures are recorded. Private Python failures retain the fallback; normal-run exceptions are still re-raised."
     }
   ],
-  "root_cause": {
-    "classification": "CPU_HEAVY_RUNTIME_ALL_GAME_THREAD_FANOUT_RESOURCE_CONTENTION",
-    "confidence": "HIGH_LOCALLY_REPRODUCED_PRIVATE_TRACE_UNAVAILABLE",
-    "statement": "GenericAGIRuntime was incorrectly routed through the framework's all-games-at-once Swarm. That orchestration is acceptable for the lightweight sample agent but causes severe contention for this CPU-heavy runtime on Kaggle's four-core CPU allocation, keeps all game state and thread stacks live together, and materially increases the chance that the private scorecard never reaches collectible closure.",
-    "why_not_format": "The third submission used the corrected official format and failed identically, so format mismatch is not a sufficient explanation.",
-    "why_not_runtime_limit": "No shorter undocumented limit is assumed; the correction removes contention and concurrent residency rather than reducing the permitted computation."
+  "root_cause_boundary": {
+    "classification": "PRIVATE_EXCEPTION_OPAQUE_ZERO_BYTE_COLLECTION_GAP",
+    "statement": "Version 8 ended before Kaggle collected output. The exact private exception remains hidden, but the submitted Notebook had no collectible artifact until successful gateway/scorecard completion and allowed private bootstrap or runner exceptions to terminate collection. The next candidate independently contains that proven zero-byte failure mode.",
+    "strongest_remaining_risk": "OPAQUE_PRIVATE_RUNTIME_OR_SCORECARD_FAILURE",
+    "why_this_is_not_an_unknown_cause_claim": "The audit does not invent the private exception. It records the terminal boundary, falsifies format-only and thread-only causes, rejects episode-count and hidden-timeout inference, and fixes the directly observable absence of pre-execution output."
   },
-  "correction": {
-    "runner": "arc3_agi_agent.generic_competition_runner",
+  "prior_sequential_evaluation": {
     "orchestration_mode": "SEQUENTIAL_SINGLE_ACTIVE_GAME",
+    "public_game_count": 25,
+    "public_actions": 3200,
+    "public_levels_completed": 5,
     "active_agent_peak": 1,
-    "game_make_count_per_environment": 1,
-    "scorecard_open_count": 1,
-    "scorecard_close_count": 1,
-    "recordings_enabled": false,
-    "per_game_environment_session_released": true,
-    "per_game_failure_isolated_before_scorecard_close": true,
+    "scorecard_closed": true,
+    "local_competition_checks": "12/12 PASS",
+    "official_submission_ref": 55049227,
+    "official_result": "ERROR",
+    "adoption_decision": "RETAIN_RESOURCE_REDUCTION_REJECT_AS_COMPLETE_FIX"
+  },
+  "runtime_stress_evaluation": {
+    "artifact": "analysis/official/KAGGLE_RUNTIME_STRESS_VALIDATION.json",
+    "matrix": "64x64 checkerboard",
+    "roles": 32,
+    "relations": 1110,
+    "cycles": 128,
+    "elapsed_seconds": 100.812563,
+    "linear_110_game_hours": 3.0803838694444443,
+    "official_cpu_limit_hours": 9,
+    "status": "PASS"
+  },
+  "zero_byte_containment_candidate": {
+    "state": "LOCALLY_PROVEN_NOT_UPLOADED_NOT_SUBMITTED",
+    "notebook_sha256": "dc15b8b363967c300b6c73731f0261e589572da7ae43a11088dc2e2923625c83",
+    "runtime_archive_sha256": "c7187a933ece093876a719c9f15082ff3311bed438a4e6f59c186674e297cc92",
+    "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
+    "first_private_cell_before_wheels": true,
+    "fallback_source": "official pinned Notebook normal-run submission.parquet",
+    "fallback_size_bytes": 2648,
+    "fallback_sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+    "fallback_is_dependency_free": true,
+    "intentional_missing_wheel_smoke": "PASS",
+    "private_status_artifacts": [
+      "arc3_install_status.json",
+      "arc3_payload_status.json",
+      "arc3_runtime_status.json"
+    ],
     "runtime_policy_changed": false,
     "action_budget_per_game": 128,
-    "self_imposed_resource_limit": null
+    "official_private_result": "NOT_RUN"
   },
-  "local_ab_comparison": {
-    "concurrent_baseline": {
-      "run_dir": "scratch/p13-competition-full",
-      "active_agent_peak": 25,
-      "wall_seconds": 2603.894,
-      "agent_seconds_min": 1203.8,
-      "agent_seconds_max": 2599.78,
-      "agent_seconds_mean": 2020.9236,
-      "fps_min": 0.05,
-      "fps_max": 0.11,
-      "fps_mean": 0.0656,
-      "runtime_game_count": 25,
-      "runtime_action_count": 3200,
-      "levels_completed": 5
-    },
-    "sequential_correction": {
-      "run_dir": "scratch/p15-sequential-competition-20260728",
-      "client_log_sha256": "21e193b079f4c90e733d2ba031977ee563ac83c1ad9435d289f94bbabada1582",
-      "server_log_sha256": "874e0f9b19f3fdc87c15c59ac7b03c4c00b10d24c33a097652e94281d7f538ea",
-      "active_agent_peak": 1,
-      "wall_seconds": 1585.375,
-      "agent_seconds_min": 31.2,
-      "agent_seconds_max": 186.7,
-      "agent_seconds_mean": 63.23,
-      "fps_min": 0.69,
-      "fps_max": 4.1,
-      "fps_mean": 2.3972,
-      "runtime_game_count": 25,
-      "completed_game_count": 25,
-      "failed_game_count": 0,
-      "runtime_action_count": 3200,
-      "scorecard_total_actions": 3228,
-      "levels_completed": 5,
-      "http_error_count": 0,
-      "scorecard_closed": true,
-      "behavior_match_count": 25,
-      "digest_match_count": 23,
-      "known_wrapper_variance_count": 2
-    },
-    "wall_reduction_seconds": 1018.519,
-    "wall_reduction_percent": 39.115225120531015,
-    "behavior_or_policy_delta": 0
-  },
-  "package_validation": {
-    "notebook_sha256": "616f7bdaae4534155d5f3a738c0056f947e5e985b8c1c51b2be2e174e47f09c7",
-    "runtime_archive_sha256": "dce9f43448e9837c5a0bf61a99f46f353228de63e3a1b6ef8ecdf0d238ce33fb",
-    "notebook_contract_checks": "23/23 PASS",
-    "local_competition_checks": "12/12 PASS",
-    "runtime_import_smoke": "PASS",
-    "tracked_secret_findings": 0,
-    "full_unit_regression": "554/554 PASS",
-    "integration_regression": "2/2 PASS",
+  "validation": {
+    "notebook_contract": "25/25 PASS",
+    "local_competition": "12/12 PASS",
+    "unit": "555/555 PASS",
+    "integration": "8/8 PASS",
     "strict_mypy": "123 source files PASS",
     "ruff": "PASS",
+    "tracked_secret_findings": 0,
     "submission_api_call_count": 0
+  },
+  "submission_control": {
+    "owner_daily_limit": 1,
+    "owner_daily_attempt_consumed": true,
+    "kaggle_refunded_error_slot": true,
+    "additional_submission_authorized_today": false
   },
   "sources": [
     "https://www.kaggle.com/code-competition-debugging",
-    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/727119",
-    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/724841",
-    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/overview/code-requirements",
     "https://www.kaggle.com/code/inversion/arc3-sample-submission-random-agent",
+    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/overview/code-requirements",
+    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/data",
+    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/727119",
+    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/684969",
+    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/699208",
     "https://docs.arcprize.org/toolkit/competition_mode",
     "https://docs.arcprize.org/toolkit/listen_and_serve",
     "analysis/official/KAGGLE_SUBMISSION_RESULT.json",
+    "analysis/official/KAGGLE_NOTEBOOK_RUN.json",
     "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
+    "analysis/official/KAGGLE_RUNTIME_STRESS_VALIDATION.json",
     "analysis/official/LOCAL_COMPETITION_VALIDATION.json"
   ],
-  "next_gate": "Push the exact source tree, create and verify one new Kaggle Notebook version from it, recheck the live submission allowance, and spend exactly one submission call on that version."
+  "next_gate": "Do not submit again today. Push the exact candidate to main, create and inspect a normal Kaggle Notebook version without competition submission, verify source round trip and output, then use at most one newly authorized daily private submission. Require nonzero collected bytes before claiming correction."
 }

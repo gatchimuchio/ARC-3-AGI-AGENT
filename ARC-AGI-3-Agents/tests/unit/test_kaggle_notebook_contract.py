@@ -46,7 +46,20 @@ def test_kaggle_notebook_matches_official_submission_shape() -> None:
     assert "raise FileNotFoundError" in install
     assert '"arc-agi"' in install
     assert '"python-dotenv"' in install
-    assert "==" not in install
+    assert '"arc-agi==' not in install
+    assert '"python-dotenv==' not in install
+    assert "if competition_rerun:" in install
+    assert 'Path("/kaggle/working/submission.parquet")' in install
+    assert "fallback_bytes = zlib.decompress(" in install
+    assert "fallback_path.write_bytes(fallback_bytes)" in install
+    assert BUILDER.OFFICIAL_PLACEHOLDER_PARQUET_SHA256 in install
+    assert str(BUILDER.OFFICIAL_PLACEHOLDER_PARQUET_SIZE) in install
+    assert '"INSTALL_EXCEPTION"' in install
+    assert '"/kaggle/working/arc3_install_status.json"' in install
+
+    payload = sources["verify-runtime-payload"]
+    assert '"PAYLOAD_EXCEPTION"' in payload
+    assert '"/kaggle/working/arc3_payload_status.json"' in payload
 
     competition = sources["execute-generic-runtime"]
     assert "KAGGLE_IS_COMPETITION_RERUN" in competition
@@ -68,6 +81,19 @@ def test_kaggle_notebook_matches_official_submission_shape() -> None:
         keyword.arg != "timeout"
         for keyword in subprocess_calls[0].keywords
     )
+    check_keywords = [
+        keyword
+        for keyword in subprocess_calls[0].keywords
+        if keyword.arg == "check"
+    ]
+    assert len(check_keywords) == 1
+    assert isinstance(check_keywords[0].value, ast.Constant)
+    assert check_keywords[0].value.value is False
+    assert 'runtime_status["runner_returncode"]' in competition
+    assert '"RUNNER_NONZERO"' in competition
+    assert '"BOOTSTRAP_EXCEPTION"' in competition
+    assert "traceback.print_exc()" in competition
+    assert '"/kaggle/working/arc3_runtime_status.json"' in competition
 
     placeholder = sources["write-official-placeholder"]
     assert 'data=[["1_0", "1", True, 1]]' in placeholder

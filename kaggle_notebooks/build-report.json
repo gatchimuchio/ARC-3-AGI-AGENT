@@ -23,12 +23,17 @@
   },
   "metadata_sha256": "fd04c4b40f4ab71c4da908d195fc5e4e6a1487c58262dd4fc817fffb8ef99f5e",
   "notebook_cell_count": 4,
-  "notebook_sha256": "616f7bdaae4534155d5f3a738c0056f947e5e985b8c1c51b2be2e174e47f09c7",
-  "notebook_size_bytes": 81692,
+  "notebook_sha256": "dc15b8b363967c300b6c73731f0261e589572da7ae43a11088dc2e2923625c83",
+  "notebook_size_bytes": 89096,
+  "preexecution_fallback": {
+    "sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+    "size_bytes": 2648,
+    "source": "official pinned Notebook normal-run output"
+  },
   "runtime_archive": {
     "action_budget": 128,
-    "archive_sha256": "dce9f43448e9837c5a0bf61a99f46f353228de63e3a1b6ef8ecdf0d238ce33fb",
-    "archive_size_bytes": 51981,
+    "archive_sha256": "c7187a933ece093876a719c9f15082ff3311bed438a4e6f59c186674e297cc92",
+    "archive_size_bytes": 52114,
     "known_sample_policy_included": false,
     "member_names": [
       "ARC3_KAGGLE_RUNTIME_MANIFEST.json",
@@ -47,7 +52,7 @@
       "arc3_agi_agent/verification.py"
     ],
     "module_sha256": {
-      "generic_competition_runner.py": "bddf6b98a5e7859a99e2ae92b817428811d555680212b917d5461c0e0c9a4a17",
+      "generic_competition_runner.py": "885a2f40ca35dcf2bac281a09afea474c0fa8a9f395e498c8f7b02760203aba1",
       "generic_compute.py": "a673a92fd0b40dd987a984ee50b3166d744edc623aec8f2b33d26d9eaed6d711",
       "generic_env.py": "42a999d1118f53cbc6c544a9ef20930cb73ca88c2208e7d659403a8df28aff09",
       "generic_hds.py": "c8e905b29493ea684cba6c4465387963f65b8771376e8cc2dd03e0a0caa7f2f2",
@@ -78,5 +83,5 @@
     "schema_version": "arc3-kaggle-runtime-package-v1",
     "teacher_included": false
   },
-  "schema_version": "arc3-kaggle-notebook-build-v2"
+  "schema_version": "arc3-kaggle-notebook-build-v3"
 }

@@ -23,6 +23,33 @@ COMPETITION_SLUG = "arc-prize-2026-arc-agi-3"
 DEFAULT_USERNAME = "tecchannn"
 DEFAULT_NOTEBOOK_SLUG = "arc3-genericagiruntime-p15"
 ACTION_BUDGET = 128
+OFFICIAL_PLACEHOLDER_PARQUET_SHA256 = (
+    "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194"
+)
+OFFICIAL_PLACEHOLDER_PARQUET_SIZE = 2648
+OFFICIAL_PLACEHOLDER_PARQUET_ZLIB_B64 = (
+    "eNq9Vl1v4kYUHUiWJG20yka1ZUt5QEhBrZRNsQnpehVVskn5SCG7sBu+2gp5bENMbEOxgThRqj5V"
+    "far6A/pD+tDH/o/uT+ncsXEIbFZaqaqFPPY5d865M3euxWu5LjDrzFNmt8LEGbSL0Aa3hhASuhkG"
+    "MbsMe0DgHSbBJPaO0edrBObg9uwZidlKxsk9HovFEZH4hHk6l3iyEwOJ9wjEBC4mrExG4A9xiMZx"
+    "sRj5sSQaRhq9wYXRxGiH+WxutLkHRnAte3Gbc+b+iSi+B11dCv99DnEJV7s0bJXZRMz2fpxLjIez"
+    "rqnvo8oeuAG00VdtYwFDBPvUcPTusNcFiigR5ImrDccGYuP8Hl9Joz1mm8+hxA4/V2TibJz9if0l"
+    "lj5Oby7vMX9A1osYukU7ZDhhE3yCTyNIdlFrngoVG7M36T9j6d9iixu+qhR/oIT4/QTiH+RPxd6y"
+    "rfSv8ZOVkvBkCtU7+WJRZj1MKFg1Vfgrxv4dS/++ln4X/7iqrKQcObE/r7Px9Cb7xzoJ4hIj1dFV"
+    "l/tn/TZlOrpx3dWG1sR23NTL5Hc/HCRTwWuXcsYSSl9vUw5ZL3lKBTVJEbpnGpbeXcUDs67njygx"
+    "cUxtqBvAOBN75EfEEA8MzQPcNjxVVz2VoM7Esu4Okvd+Yd1WDReI/9ZxocCrrkvkkjMeDq1V2zn6"
+    "IVN6GlbtInjJyHS846NVpwhetoJyqp43NvHEowW+vYMCjw3VG47hNWWZeKyOfVAZ+eqYlBN0psbY"
+    "NYcOoGL2MHMopO7uk1kkD7OH2dQd4rblev1V82XwaeDebX0J17F8KstyTQ6ub2X5SFb6ckGW+3K+"
+    "TzFFecDPYPwm4s9q+eB9rkL5MowKHSFIcWFQgCm8IPHKV2XbmnSKjaOWeD7FpYaHnar5ylRw682s"
+    "X7ZDzJJG2K5bRrFxUx4M+00h45bzZwMsXgu4mQuwrGtiu+B13pSPCefjrN5TmzWzkpfNjm1ZuFjv"
+    "PcZrxQLJoXDTytZzWvGC+Mum3syN2qJ0ReLBa6I3hZnRkDJGS7HAr2xLpmo3Bnqe8l6nVb8kGpk2"
+    "6BdzAi5eS5U8rC93iZuBZkck/g1p1Anm2Gqz4XYK0qTdFEJNncQ2/v+8mrmrlijZLVGn2CN7ZpEa"
+    "9LDY6dF1BP6zNpnbbp339JI1C+NMLEpu2YT6Eb+WklvMv21LU/wRuWnkXGj2ozndkL3wP5DLCDs1"
+    "8Tz/2F5ZE/20nQlyFSy9WCDz65fAYafh4pKggy/BMpptmXqrbmk+0S15EsWzZxbhppoJGDl/RcvU"
+    "7IJvBN4zo1nwNVvKUn2nY2nO+QiLR3Rd1UF1Us0fXZedzMPc7YavidYUg2a+7Fcgzj+TZLkN/RPG"
+    "VcMmy7vQSpocdR69669JP0P71cq1sAkXWpuowGPpfIBJ/vBOGrEK/anMwlC4LijjwqeB9v6lHFkp"
+    "UZBcgdvS+ZGH4C8NyO0FpFSgSSn9+ywjKcWBs98SrSu5SuNrkBzJpwj8aWgWTapd0EWUltcD0qWz"
+    "qS6Q3oqm3POIS47U8Y8Tw3uujUbP6YczGX4Yk8Enk4c/P9EPfb2F0Gvyn/JfSYasXQ=="
+)
 RUNTIME_MODULES = (
     "generic_compute.py",
     "generic_competition_runner.py",
@@ -171,36 +198,113 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
     install_cell = _code_cell(
         dedent(
             """\
+            import base64
+            import hashlib
+            import json
             import os
             import subprocess
             import sys
+            import traceback
+            import zlib
             from pathlib import Path
+
+            competition_rerun = bool(
+                os.getenv("KAGGLE_IS_COMPETITION_RERUN")
+            )
+            install_status = {
+                "schema_version": "arc3-private-install-status-v1",
+                "status": "NOT_STARTED",
+                "error_type": None,
+                "error_message": None,
+            }
+            if competition_rerun:
+                fallback_path = Path("/kaggle/working/submission.parquet")
+                fallback_path.parent.mkdir(parents=True, exist_ok=True)
+                fallback_bytes = zlib.decompress(
+                    base64.b64decode(
+                        "__OFFICIAL_PLACEHOLDER_PARQUET_ZLIB_B64__"
+                    )
+                )
+                assert (
+                    len(fallback_bytes)
+                    == __OFFICIAL_PLACEHOLDER_PARQUET_SIZE__
+                )
+                assert (
+                    hashlib.sha256(fallback_bytes).hexdigest()
+                    == "__OFFICIAL_PLACEHOLDER_PARQUET_SHA256__"
+                )
+                fallback_path.write_bytes(fallback_bytes)
+                print({
+                    "preexecution_fallback": str(fallback_path),
+                    "fallback_size_bytes": fallback_path.stat().st_size,
+                    "fallback_sha256": hashlib.sha256(
+                        fallback_path.read_bytes()
+                    ).hexdigest(),
+                })
 
             wheel_dir = Path(
                 "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels"
             )
-            if wheel_dir.is_dir():
-                subprocess.check_call([
-                    sys.executable,
-                    "-m",
-                    "pip",
-                    "install",
-                    "--no-index",
-                    "--find-links",
-                    str(wheel_dir),
-                    "arc-agi",
-                    "python-dotenv",
-                ])
-            elif os.getenv("KAGGLE_IS_COMPETITION_RERUN"):
-                raise FileNotFoundError(
-                    "ARC3 competition wheel bundle is missing during rerun"
-                )
-            else:
-                print(
-                    "Regular run: competition wheel bundle is not mounted; "
-                    "the official placeholder contract will be validated only"
-                )
+            try:
+                if wheel_dir.is_dir():
+                    subprocess.check_call([
+                        sys.executable,
+                        "-m",
+                        "pip",
+                        "install",
+                        "--no-index",
+                        "--find-links",
+                        str(wheel_dir),
+                        "arc-agi",
+                        "python-dotenv",
+                    ])
+                    install_status["status"] = "COMPLETE"
+                elif os.getenv("KAGGLE_IS_COMPETITION_RERUN"):
+                    raise FileNotFoundError(
+                        "ARC3 competition wheel bundle is missing during rerun"
+                    )
+                else:
+                    install_status["status"] = "NORMAL_RUN_NOT_MOUNTED"
+                    print(
+                        "Regular run: competition wheel bundle is not mounted; "
+                        "the official placeholder contract will be validated only"
+                    )
+            except Exception as error:
+                install_status["status"] = "INSTALL_EXCEPTION"
+                install_status["error_type"] = type(error).__name__
+                install_status["error_message"] = str(error)[:2000]
+                traceback.print_exc()
+                if not competition_rerun:
+                    raise
+            finally:
+                if competition_rerun:
+                    install_status_path = Path(
+                        "/kaggle/working/arc3_install_status.json"
+                    )
+                    try:
+                        install_status_path.write_text(
+                            json.dumps(install_status, sort_keys=True) + "\\n",
+                            encoding="utf-8",
+                        )
+                    except Exception:
+                        traceback.print_exc()
+                    print(
+                        "ARC3 private install status: "
+                        + json.dumps(install_status, sort_keys=True)
+                    )
             """
+        )
+        .replace(
+            "__OFFICIAL_PLACEHOLDER_PARQUET_ZLIB_B64__",
+            OFFICIAL_PLACEHOLDER_PARQUET_ZLIB_B64,
+        )
+        .replace(
+            "__OFFICIAL_PLACEHOLDER_PARQUET_SIZE__",
+            str(OFFICIAL_PLACEHOLDER_PARQUET_SIZE),
+        )
+        .replace(
+            "__OFFICIAL_PLACEHOLDER_PARQUET_SHA256__",
+            OFFICIAL_PLACEHOLDER_PARQUET_SHA256,
         ),
         cell_id="install-official-offline-wheels",
     )
@@ -209,34 +313,79 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
             f"""\
             import base64
             import hashlib
+            import json
+            import os
             import shutil
+            import traceback
             import zipfile
             from pathlib import Path
 
-            runtime_archive = base64.b64decode({archive_b64!r})
-            expected_runtime_sha256 = {archive_digest!r}
-            assert hashlib.sha256(runtime_archive).hexdigest() == expected_runtime_sha256
-            runtime_zip = Path("/tmp/arc3_generic_runtime.zip")
-            runtime_zip.write_bytes(runtime_archive)
+            competition_rerun = bool(
+                os.getenv("KAGGLE_IS_COMPETITION_RERUN")
+            )
+            payload_ready = False
+            payload_status = {{
+                "schema_version": "arc3-private-payload-status-v1",
+                "status": "NOT_STARTED",
+                "error_type": None,
+                "error_message": None,
+            }}
+            try:
+                runtime_archive = base64.b64decode({archive_b64!r})
+                expected_runtime_sha256 = {archive_digest!r}
+                assert (
+                    hashlib.sha256(runtime_archive).hexdigest()
+                    == expected_runtime_sha256
+                )
+                runtime_zip = Path("/tmp/arc3_generic_runtime.zip")
+                runtime_zip.write_bytes(runtime_archive)
 
-            payload_root = Path("/tmp/arc3_generic_payload")
-            if payload_root.exists():
-                shutil.rmtree(payload_root)
-            payload_root.mkdir(parents=True)
-            with zipfile.ZipFile(runtime_zip) as archive:
-                archive.extractall(payload_root)
+                payload_root = Path("/tmp/arc3_generic_payload")
+                if payload_root.exists():
+                    shutil.rmtree(payload_root)
+                payload_root.mkdir(parents=True)
+                with zipfile.ZipFile(runtime_zip) as archive:
+                    archive.extractall(payload_root)
 
-            agent_source = base64.b64decode({agent_b64!r})
-            expected_agent_sha256 = {agent_digest!r}
-            assert hashlib.sha256(agent_source).hexdigest() == expected_agent_sha256
-            agent_path = payload_root / "generic_agi_agent.py"
-            agent_path.write_bytes(agent_source)
-            print({{
-                "runtime_sha256": expected_runtime_sha256,
-                "runtime_size_bytes": len(runtime_archive),
-                "agent_sha256": expected_agent_sha256,
-                "agent_size_bytes": len(agent_source),
-            }})
+                agent_source = base64.b64decode({agent_b64!r})
+                expected_agent_sha256 = {agent_digest!r}
+                assert (
+                    hashlib.sha256(agent_source).hexdigest()
+                    == expected_agent_sha256
+                )
+                agent_path = payload_root / "generic_agi_agent.py"
+                agent_path.write_bytes(agent_source)
+                payload_ready = True
+                payload_status["status"] = "COMPLETE"
+                print({{
+                    "runtime_sha256": expected_runtime_sha256,
+                    "runtime_size_bytes": len(runtime_archive),
+                    "agent_sha256": expected_agent_sha256,
+                    "agent_size_bytes": len(agent_source),
+                }})
+            except Exception as error:
+                payload_status["status"] = "PAYLOAD_EXCEPTION"
+                payload_status["error_type"] = type(error).__name__
+                payload_status["error_message"] = str(error)[:2000]
+                traceback.print_exc()
+                if not competition_rerun:
+                    raise
+            finally:
+                if competition_rerun:
+                    payload_status_path = Path(
+                        "/kaggle/working/arc3_payload_status.json"
+                    )
+                    try:
+                        payload_status_path.write_text(
+                            json.dumps(payload_status, sort_keys=True) + "\\n",
+                            encoding="utf-8",
+                        )
+                    except Exception:
+                        traceback.print_exc()
+                    print(
+                        "ARC3 private payload status: "
+                        + json.dumps(payload_status, sort_keys=True)
+                    )
             """
         ),
         cell_id="verify-runtime-payload",
@@ -245,56 +394,88 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
         dedent(
             """\
             import os
+            import json
             import shutil
             import subprocess
             import sys
             import time
+            import traceback
             import urllib.error
             import urllib.request
             from pathlib import Path
 
             payload_root = Path("/tmp/arc3_generic_payload")
             if os.getenv("KAGGLE_IS_COMPETITION_RERUN"):
-                gateway = "http://gateway:8001/api/games"
-                deadline = time.time() + 600
-                while True:
-                    try:
-                        with urllib.request.urlopen(gateway, timeout=10) as response:
-                            if response.status < 500:
-                                break
-                    except (urllib.error.URLError, TimeoutError):
-                        pass
-                    if time.time() >= deadline:
-                        raise TimeoutError(
-                            "ARC3 competition gateway did not become ready within 600 seconds"
+                runtime_status_path = Path(
+                    "/kaggle/working/arc3_runtime_status.json"
+                )
+                runtime_status = {{
+                    "schema_version": "arc3-private-runtime-status-v1",
+                    "status": "STARTED",
+                    "runner_returncode": None,
+                    "error_type": None,
+                    "error_message": None,
+                }}
+                try:
+                    if not globals().get("payload_ready", False):
+                        raise RuntimeError(
+                            "ARC3 verified runtime payload is unavailable"
                         )
-                    time.sleep(5)
+                    gateway = "http://gateway:8001/api/games"
+                    deadline = time.time() + 600
+                    while True:
+                        try:
+                            with urllib.request.urlopen(
+                                gateway,
+                                timeout=10,
+                            ) as response:
+                                if response.status < 500:
+                                    break
+                        except (urllib.error.URLError, TimeoutError):
+                            pass
+                        if time.time() >= deadline:
+                            raise TimeoutError(
+                                "ARC3 competition gateway did not become ready "
+                                "within 600 seconds"
+                            )
+                        time.sleep(5)
 
-                competition_root = Path(
-                    "/kaggle/input/competitions/arc-prize-2026-arc-agi-3"
-                )
-                framework_src = competition_root / "ARC-AGI-3-Agents"
-                framework_dst = Path("/kaggle/working/ARC-AGI-3-Agents")
-                if framework_dst.exists():
-                    shutil.rmtree(framework_dst)
-                shutil.copytree(
-                    framework_src,
-                    framework_dst,
-                    ignore=shutil.ignore_patterns(
-                        ".git", "__pycache__", ".pytest_cache", ".ruff_cache"
-                    ),
-                )
+                    competition_root = Path(
+                        "/kaggle/input/competitions/arc-prize-2026-arc-agi-3"
+                    )
+                    framework_src = competition_root / "ARC-AGI-3-Agents"
+                    framework_dst = Path(
+                        "/kaggle/working/ARC-AGI-3-Agents"
+                    )
+                    if framework_dst.exists():
+                        shutil.rmtree(framework_dst)
+                    shutil.copytree(
+                        framework_src,
+                        framework_dst,
+                        ignore=shutil.ignore_patterns(
+                            ".git",
+                            "__pycache__",
+                            ".pytest_cache",
+                            ".ruff_cache",
+                        ),
+                    )
 
-                runtime_dst = framework_dst / "arc3_agi_agent"
-                if runtime_dst.exists():
-                    shutil.rmtree(runtime_dst)
-                shutil.copytree(payload_root / "arc3_agi_agent", runtime_dst)
-                shutil.copy2(
-                    payload_root / "generic_agi_agent.py",
-                    framework_dst / "agents" / "templates" / "generic_agi_agent.py",
-                )
+                    runtime_dst = framework_dst / "arc3_agi_agent"
+                    if runtime_dst.exists():
+                        shutil.rmtree(runtime_dst)
+                    shutil.copytree(
+                        payload_root / "arc3_agi_agent",
+                        runtime_dst,
+                    )
+                    shutil.copy2(
+                        payload_root / "generic_agi_agent.py",
+                        framework_dst
+                        / "agents"
+                        / "templates"
+                        / "generic_agi_agent.py",
+                    )
 
-                agents_init = '''from typing import Type
+                    agents_init = '''from typing import Type
             from dotenv import load_dotenv
             from .agent import Agent, Playback
             from .swarm import Swarm
@@ -306,11 +487,11 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                 "genericagi": GenericAGIAgent,
             }
             '''
-                (framework_dst / "agents" / "__init__.py").write_text(
-                    agents_init,
-                    encoding="utf-8",
-                )
-                env_body = '''SCHEME=http
+                    (framework_dst / "agents" / "__init__.py").write_text(
+                        agents_init,
+                        encoding="utf-8",
+                    )
+                    env_body = '''SCHEME=http
             HOST=gateway
             PORT=8001
             ARC_API_KEY=test-key-123
@@ -319,20 +500,54 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
             ENVIRONMENTS_DIR=
             RECORDINGS_DIR=/kaggle/working/server_recording
             '''
-                (framework_dst / ".env").write_text(env_body, encoding="utf-8")
+                    (framework_dst / ".env").write_text(
+                        env_body,
+                        encoding="utf-8",
+                    )
 
-                run_env = os.environ.copy()
-                run_env["MPLBACKEND"] = "agg"
-                subprocess.run(
-                    [
-                        sys.executable,
-                        "-m",
-                        "arc3_agi_agent.generic_competition_runner",
-                    ],
-                    cwd=framework_dst,
-                    env=run_env,
-                    check=True,
-                )
+                    run_env = os.environ.copy()
+                    run_env["MPLBACKEND"] = "agg"
+                    completed_process = subprocess.run(
+                        [
+                            sys.executable,
+                            "-m",
+                            "arc3_agi_agent.generic_competition_runner",
+                        ],
+                        cwd=framework_dst,
+                        env=run_env,
+                        check=False,
+                    )
+                    runtime_status["runner_returncode"] = (
+                        completed_process.returncode
+                    )
+                    runtime_status["status"] = (
+                        "COMPLETE"
+                        if completed_process.returncode == 0
+                        else "RUNNER_NONZERO"
+                    )
+                    if completed_process.returncode != 0:
+                        print(
+                            "ARC3 private runner returned nonzero: "
+                            f"{{completed_process.returncode}}",
+                            file=sys.stderr,
+                        )
+                except Exception as error:
+                    runtime_status["status"] = "BOOTSTRAP_EXCEPTION"
+                    runtime_status["error_type"] = type(error).__name__
+                    runtime_status["error_message"] = str(error)[:2000]
+                    traceback.print_exc()
+                finally:
+                    try:
+                        runtime_status_path.write_text(
+                            json.dumps(runtime_status, sort_keys=True) + "\\n",
+                            encoding="utf-8",
+                        )
+                    except Exception:
+                        traceback.print_exc()
+                    print(
+                        "ARC3 private runtime status: "
+                        + json.dumps(runtime_status, sort_keys=True)
+                    )
             """
         ),
         cell_id="execute-generic-runtime",
@@ -388,9 +603,14 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
         ],
     }
     build_report = {
-        "schema_version": "arc3-kaggle-notebook-build-v2",
+        "schema_version": "arc3-kaggle-notebook-build-v3",
         "competition": COMPETITION_SLUG,
         "action_budget_per_game": ACTION_BUDGET,
+        "preexecution_fallback": {
+            "source": "official pinned Notebook normal-run output",
+            "sha256": OFFICIAL_PLACEHOLDER_PARQUET_SHA256,
+            "size_bytes": OFFICIAL_PLACEHOLDER_PARQUET_SIZE,
+        },
         "runtime_archive": runtime_manifest,
         "agent_sha256": agent_digest,
         "agent_size_bytes": len(agent_data),
