@@ -53,6 +53,10 @@ _EXPORT_IMPORTS: Final[dict[str, tuple[str, str]]] = {
         ".templates.p10_sample_agent",
         "P10SampleAgent",
     ),
+    "GenericAGIAgent": (
+        ".templates.generic_agi_agent",
+        "GenericAGIAgent",
+    ),
     "LLM": (".templates.llm_agents", "LLM"),
     "FastLLM": (".templates.llm_agents", "FastLLM"),
     "ReasoningLLM": (".templates.llm_agents", "ReasoningLLM"),
@@ -86,6 +90,7 @@ _AGENT_IMPORTS: Final[dict[str, tuple[str, str]]] = {
     "smolcodingagent": _EXPORT_IMPORTS["SmolCodingAgent"],
     "smolvisionagent": _EXPORT_IMPORTS["SmolVisionAgent"],
     "multimodalllm": _EXPORT_IMPORTS["MultiModalLLM"],
+    "genericagi": _EXPORT_IMPORTS["GenericAGIAgent"],
 }
 
 
@@ -143,6 +148,7 @@ __all__ = [
     "Agent",
     "FastLLM",
     "GuidedLLM",
+    "GenericAGIAgent",
     "LLM",
     "LangGraphFunc",
     "LangGraphRandom",

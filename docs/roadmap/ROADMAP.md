@@ -32,9 +32,9 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P10 | ARC3全sample完全攻略 | 完了 |
 | P11 | 完成状態固定 | 完了 |
 | P12 | Pre-official AGI conformance / genericity | 完了 |
-| P13 | 公式ARC環境接続 | 未開始・Owner許可待ち |
-| P14 | Kaggle提出経路 | 未開始 |
-| P15 | 実提出・公式結果最適化 | 未開始 |
+| P13 | 公式ARC環境接続 | 進行中・ローカルcompetition互換PASS |
+| P14 | Kaggle提出経路 | 提出前gate PASS |
+| P15 | 実提出・公式結果最適化 | Owner許可済み・一回提出前preflight |
 
 ## 現在のphase gate
 
@@ -69,8 +69,9 @@ P11は次を固定して完了した。
 P11はRuntime P、score、sample能力を変更していない。P11/S5は
 known-sample closure baselineとして凍結する。P12はoperational
 AGI conformance、genericity、Competition contract mock dry-runを実装・反証し、
-blocking受入57/57 PASSで完了した。公式接続、`OperationMode.COMPETITION`、
-Kaggle作業は未実行であり、P13のOwner明示許可を待つ。
+blocking受入57/57 PASSで完了した。P13以降はOwner明示許可により開始し、
+25ゲームのローカルcompetition互換回帰とKaggle Notebook version 4通常実行を
+PASSした。実提出APIはまだ0回であり、一日一回の枠を最終操作に限定する。
 
 ## 監査正本
 

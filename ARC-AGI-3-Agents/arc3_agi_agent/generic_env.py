@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Mapping
+from typing import Any, ClassVar, Mapping
 
+from arc_agi import EnvironmentWrapper  # type: ignore[import-untyped]
 from arc_agi.local_wrapper import (  # type: ignore[import-untyped]
     LocalEnvironmentWrapper,
 )
@@ -204,6 +205,7 @@ class MechanismWorld:
 class OfflineGenericEnvironment:
     """Local sample adapter that never exposes its orchestration identity."""
 
+    _boundary: ClassVar[str] = "GENERIC_OFFLINE"
     environment: Any
     frame_adapter: SampleFrameAdapter = field(default_factory=SampleFrameAdapter)
     _current: FrameDataRaw = field(init=False, repr=False)
@@ -212,10 +214,10 @@ class OfflineGenericEnvironment:
 
     def __post_init__(self) -> None:
         if not isinstance(self.environment, LocalEnvironmentWrapper):
-            raise TypeError("GENERIC_OFFLINE_LOCAL_WRAPPER_REQUIRED")
+            raise TypeError(f"{self._boundary}_LOCAL_WRAPPER_REQUIRED")
         current = self.environment.observation_space
         if not isinstance(current, FrameDataRaw):
-            raise TypeError("GENERIC_OFFLINE_INITIAL_FRAME_REQUIRED")
+            raise TypeError(f"{self._boundary}_INITIAL_FRAME_REQUIRED")
         self._current = current
 
     def _observation(self) -> GenericObservation:
@@ -247,16 +249,18 @@ class OfflineGenericEnvironment:
         request_id: str,
     ) -> GenericObservation:
         if request_id in self._seen_request_ids:
-            raise RuntimeError("GENERIC_OFFLINE_DUPLICATE_REQUEST")
+            raise RuntimeError(f"{self._boundary}_DUPLICATE_REQUEST")
         self._seen_request_ids.add(request_id)
         observation = self._observation()
         if action_id not in observation.available_actions:
-            raise ValueError("GENERIC_OFFLINE_ACTION_UNAVAILABLE")
+            raise ValueError(f"{self._boundary}_ACTION_UNAVAILABLE")
         action = GameAction.from_id(action_id)
         data: dict[str, int] = {}
         if action_id == 6:
             if set(payload) != {"x", "y"}:
-                raise ValueError("GENERIC_OFFLINE_POINTER_PAYLOAD_REQUIRED")
+                raise ValueError(
+                    f"{self._boundary}_POINTER_PAYLOAD_REQUIRED"
+                )
             data = {"x": int(payload["x"]), "y": int(payload["y"])}
         self._previous = self._current
         raw = self.environment.step(
@@ -269,13 +273,13 @@ class OfflineGenericEnvironment:
             },
         )
         if not isinstance(raw, FrameDataRaw):
-            raise RuntimeError("GENERIC_OFFLINE_STEP_FAILED")
+            raise RuntimeError(f"{self._boundary}_STEP_FAILED")
         self._current = raw
         return self._observation()
 
     def reset_level(self, *, request_id: str) -> GenericObservation:
         if request_id in self._seen_request_ids:
-            raise RuntimeError("GENERIC_OFFLINE_DUPLICATE_REQUEST")
+            raise RuntimeError(f"{self._boundary}_DUPLICATE_REQUEST")
         self._seen_request_ids.add(request_id)
         self._previous = self._current
         raw = self.environment.step(
@@ -289,9 +293,28 @@ class OfflineGenericEnvironment:
             },
         )
         if not isinstance(raw, FrameDataRaw):
-            raise RuntimeError("GENERIC_OFFLINE_RESET_FAILED")
+            raise RuntimeError(f"{self._boundary}_RESET_FAILED")
         self._current = raw
         return self._observation()
+
+
+class CompetitionGenericEnvironment(OfflineGenericEnvironment):
+    """Official remote-wrapper adapter with the same identity-free projection."""
+
+    __slots__ = ()
+    _boundary: ClassVar[str] = "GENERIC_COMPETITION"
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.environment, EnvironmentWrapper) or isinstance(
+            self.environment, LocalEnvironmentWrapper
+        ):
+            raise TypeError(
+                "GENERIC_COMPETITION_REMOTE_WRAPPER_REQUIRED"
+            )
+        current = self.environment.observation_space
+        if not isinstance(current, FrameDataRaw):
+            raise TypeError("GENERIC_COMPETITION_INITIAL_FRAME_REQUIRED")
+        self._current = current
 
 
 def transformed_worlds(
@@ -319,6 +342,7 @@ def transformed_worlds(
 __all__ = [
     "GENERIC_ENV_VERSION",
     "TRANSFORMATION_FAMILIES",
+    "CompetitionGenericEnvironment",
     "MechanismWorld",
     "OfflineGenericEnvironment",
     "transformed_worlds",

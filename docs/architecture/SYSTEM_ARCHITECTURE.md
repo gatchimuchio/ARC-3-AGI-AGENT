@@ -401,11 +401,14 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P10: 全sample完全攻略 — 完了
 - P11: release state固定 — 完了
 - P12: pre-official AGI conformance / genericity — 完了
-- P13: 公式ARC接続 — 未開始・Owner明示許可待ち
-- P14〜P15: 未開始
+- P13: 公式ARC接続 — Owner許可済み、ローカルcompetition互換PASS、
+  実gateway rerun待ち
+- P14: Kaggle提出経路 — Notebook version 4通常実行・MCP読取PASS
+- P15: 実提出 — Owner許可済み、一回提出前preflight
 
 現行順序は
 `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
 P4〜P9の完了証拠は各phase実装文書を参照します。P10/P11の凍結証拠と
 P12の57/57受入証拠は各phase正本を参照します。P13以降はOwnerの
-明示的phase開始指示なしに進めません。
+明示的phase開始指示を受けて進行中です。実提出は一日一回のため、
+Notebook・出力・当日履歴・tool schemaを確認後に一回だけ実行します。

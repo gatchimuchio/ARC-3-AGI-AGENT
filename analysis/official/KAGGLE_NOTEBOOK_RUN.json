@@ -1,0 +1,87 @@
+{
+  "schema_version": "arc3-kaggle-notebook-run-v1",
+  "status": "PASS",
+  "hds_judgment": "PASS",
+  "evidence_boundary": "Kaggle regular notebook execution and output validation; no competition submission was created.",
+  "notebook": {
+    "owner": "tecchannn",
+    "slug": "arc3-genericagiruntime-p15",
+    "kernel_id": 128841040,
+    "version": 4,
+    "url": "https://www.kaggle.com/code/tecchannn/arc3-genericagiruntime-p15",
+    "session_status": "COMPLETE",
+    "is_private": true,
+    "language": "python",
+    "kernel_type": "notebook",
+    "enable_gpu": false,
+    "enable_tpu": false,
+    "enable_internet": false,
+    "kaggle_backend_last_run_time": "2026-07-24T23:59:51.372242300Z",
+    "notebook_sha256": "0f39eb6b24507a16691780e0e18cf2e62665868e51ec6b75eaebb2075ef2ef38",
+    "metadata_sha256": "fd04c4b40f4ab71c4da908d195fc5e4e6a1487c58262dd4fc817fffb8ef99f5e"
+  },
+  "payload": {
+    "runtime_archive_sha256": "a24a632a4eb539711fc0ff6d423348ace33c4713953ef8517791df20e4f64ccd",
+    "runtime_archive_size_bytes": 49461,
+    "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
+    "agent_size_bytes": 4697,
+    "compiled_python_sources": 13,
+    "teacher_included": false,
+    "known_sample_policy_included": false,
+    "runtime_identity_routing_included": false
+  },
+  "output": {
+    "file_name": "submission.parquet",
+    "size_bytes": 2701,
+    "sha256": "5e20a6e456396c96d262d94306a634b6bbe0548c0aa0ba40d04e6a7672108837",
+    "columns": [
+      "row_id",
+      "game_id",
+      "end_of_game",
+      "score"
+    ],
+    "regular_run_marker": "dry-run",
+    "downloaded_via_official_mcp": true
+  },
+  "checks": {
+    "KR-001_SESSION_COMPLETE": true,
+    "KR-002_RUNTIME_DIGEST_MATCH": true,
+    "KR-003_AGENT_DIGEST_MATCH": true,
+    "KR-004_ALL_PACKAGED_PYTHON_COMPILES": true,
+    "KR-005_OUTPUT_LISTED_BY_MCP": true,
+    "KR-006_OUTPUT_DOWNLOADABLE_BY_MCP": true,
+    "KR-007_OUTPUT_NONEMPTY": true,
+    "KR-008_OUTPUT_SCHEMA_PRESENT": true,
+    "KR-009_NO_SUBMISSION_SIDE_EFFECT": true
+  },
+  "failed_check_ids": [],
+  "upload_route": {
+    "source": "Kaggle CLI 2.2.4",
+    "reason": "The official MCP save_notebook tool saved notebook text but did not persist the competition data-source repeated field in versions 1 and 2.",
+    "submission_route": "Official Kaggle MCP",
+    "submission_tool_schema_verified": true
+  },
+  "failed_regular_versions": [
+    {
+      "version": 1,
+      "classification": "MCP_REPEATED_FIELD_NOT_PERSISTED",
+      "competition_sources_after_pull": [],
+      "submission_created": false
+    },
+    {
+      "version": 2,
+      "classification": "MCP_REPEATED_FIELD_NOT_PERSISTED",
+      "competition_sources_after_pull": [],
+      "submission_created": false
+    },
+    {
+      "version": 3,
+      "classification": "COMPETITION_RERUN_ONLY_INPUT_NOT_MOUNTED_IN_REGULAR_RUN",
+      "competition_sources_after_pull": [
+        "arc-prize-2026-arc-agi-3"
+      ],
+      "submission_created": false
+    }
+  ],
+  "submission_api_call_count": 0
+}

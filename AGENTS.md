@@ -28,8 +28,9 @@
 
 `P11_RELEASE_STATE_FREEZE` はknown-sample baselineとして完了・凍結しています。
 `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`はblocking受入57件を
-全件PASSして完了しました。現在はP13開始のOwner明示許可待ちであり、
-P13の公式ARC接続はまだ開始していません。
+全件PASSして完了しました。P13〜P15はOwnerの明示許可により開始済みです。
+現在は25ゲームのローカルcompetition互換回帰10/10とKaggle Notebook
+version 4通常実行をPASSし、一日一回の実提出前preflight中です。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -120,14 +121,17 @@ P11 complete:
   release digest arc3_p11_release_state:
     e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c
 
-P12 complete / P13 transition not authorized:
+P12 complete / P13 transition authorized:
   P11 183 / 183 is known-sample closure only
   S5 operational AGI conformance is SUSPEND
   GenericAGIRuntime operational conformance is PASS
   P12 executable genericity acceptance is PASS
-  official compatibility is NOT_EVALUATED
+  local competition compatibility is PASS
+  hidden-game compatibility is NOT_EVALUATED
   pre-official AGI readiness is PASS
-  official connection is NOT_AUTHORIZED and NOT_PERFORMED
+  P13 through P15 are Owner-authorized and in progress
+  Kaggle Notebook version 4 regular run is COMPLETE
+  actual submission API call count is 0
   O-001 through O-018 are closed by separate GenericAGIRuntime evidence
   KnownSampleStudent remains frozen
   P13 requires an explicit Owner phase-start instruction
@@ -142,7 +146,10 @@ P12 complete / P13 transition not authorized:
 - P0〜P10を含むfull unit/integration/static regression
 - tracked secret scan、release manifest、release-state文書の生成
 
-### P13開始許可以前に禁止される作業
+### P13開始許可以前に禁止される作業（historical phase boundary）
+
+この禁止境界はOwnerの明示許可により解除済みです。ただしknown-sample
+fallback、Teacher混入、identity routing禁止はP13以降も継続します。
 
 - 公式ARC API、`OperationMode.COMPETITION`
 - Kaggle向け分岐、Notebook、CLI / MCP、submission
@@ -373,13 +380,15 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - blocking受入57/57 PASS、P11固定hash不変
 - official connection未実行、P13 Owner明示許可待ち
 
-### P13〜P15: 未開始
+### P13〜P15: 進行中
 
-- P13 official ARC connection
-- P14 Kaggle submission paths
-- P15 actual submission / official-result optimization
+- P13 official ARC connection: ローカルcompetition互換10/10 PASS、
+  実gateway rerun待ち
+- P14 Kaggle submission paths: Notebook version 4通常実行・MCP読取PASS
+- P15 actual submission: Owner許可済み、一日一回の一回提出前preflight
 
-P13以降は全P12 blocking gateとユーザーの明示的phase開始指示なしに進めない。
+P13以降は全P12 blocking gateとユーザーの明示的phase開始指示を満たしている。
+実提出APIはNotebook、出力、当日履歴、live tool schemaを確認後に一回だけ呼ぶ。
 
 ## 9. 検証規約
 

@@ -1,0 +1,79 @@
+{
+  "action_budget_per_game": 128,
+  "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
+  "agent_size_bytes": 4697,
+  "competition": "arc-prize-2026-arc-agi-3",
+  "metadata": {
+    "code_file": "submission.ipynb",
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "dataset_sources": [],
+    "enable_gpu": false,
+    "enable_internet": false,
+    "enable_tpu": false,
+    "id": "tecchannn/arc3-genericagiruntime-p15",
+    "is_private": true,
+    "kernel_sources": [],
+    "kernel_type": "notebook",
+    "keywords": [],
+    "language": "python",
+    "model_sources": [],
+    "title": "ARC3 GenericAGIRuntime P15"
+  },
+  "metadata_sha256": "fd04c4b40f4ab71c4da908d195fc5e4e6a1487c58262dd4fc817fffb8ef99f5e",
+  "notebook_cell_count": 4,
+  "notebook_sha256": "0f39eb6b24507a16691780e0e18cf2e62665868e51ec6b75eaebb2075ef2ef38",
+  "notebook_size_bytes": 79931,
+  "runtime_archive": {
+    "action_budget": 128,
+    "archive_sha256": "a24a632a4eb539711fc0ff6d423348ace33c4713953ef8517791df20e4f64ccd",
+    "archive_size_bytes": 49461,
+    "known_sample_policy_included": false,
+    "member_names": [
+      "ARC3_KAGGLE_RUNTIME_MANIFEST.json",
+      "arc3_agi_agent/__init__.py",
+      "arc3_agi_agent/generic_compute.py",
+      "arc3_agi_agent/generic_env.py",
+      "arc3_agi_agent/generic_hds.py",
+      "arc3_agi_agent/generic_memory.py",
+      "arc3_agi_agent/generic_runtime.py",
+      "arc3_agi_agent/generic_structural.py",
+      "arc3_agi_agent/generic_types.py",
+      "arc3_agi_agent/ir.py",
+      "arc3_agi_agent/sample_observation.py",
+      "arc3_agi_agent/schema.py",
+      "arc3_agi_agent/verification.py"
+    ],
+    "module_sha256": {
+      "generic_compute.py": "a673a92fd0b40dd987a984ee50b3166d744edc623aec8f2b33d26d9eaed6d711",
+      "generic_env.py": "42a999d1118f53cbc6c544a9ef20930cb73ca88c2208e7d659403a8df28aff09",
+      "generic_hds.py": "c8e905b29493ea684cba6c4465387963f65b8771376e8cc2dd03e0a0caa7f2f2",
+      "generic_memory.py": "a4d622f6b4051adb65341d2031774118cb40d7feaa9c0fb1cb9b9fde2a2b7de2",
+      "generic_runtime.py": "99ac8d1539797a17bf0c48cd4cd0720bb63e2b1eec7dc4ec5293ac7a7fa91e75",
+      "generic_structural.py": "22558061975ff0a865c6803079a3975c11e8bceabc84cf828413066ec2cba94a",
+      "generic_types.py": "9e39f251f68ea1f0d337b946f8d80329d88f3b06e772e900788ac11306adebc9",
+      "ir.py": "f07784eaa78a8384ea52a0df7462d227beef109c2da98571185774fc9ba6eef9",
+      "sample_observation.py": "0b0cea2c16aef7037812723681d6be8139f1404d78a4162ba66696b90edf89b8",
+      "schema.py": "cb59a8145f5a4592a1cd0866422ce3b865992bddeb318a26044156a485417b15",
+      "verification.py": "32b774a0b8f8e620b17647345ea3949a1e05e33b5d0ab25fd162d356ad2fa4d6"
+    },
+    "runtime_identity_routing_included": false,
+    "runtime_modules": [
+      "generic_compute.py",
+      "generic_env.py",
+      "generic_hds.py",
+      "generic_memory.py",
+      "generic_runtime.py",
+      "generic_structural.py",
+      "generic_types.py",
+      "ir.py",
+      "sample_observation.py",
+      "schema.py",
+      "verification.py"
+    ],
+    "schema_version": "arc3-kaggle-runtime-package-v1",
+    "teacher_included": false
+  },
+  "schema_version": "arc3-kaggle-notebook-build-v1"
+}

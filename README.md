@@ -24,18 +24,20 @@ P10の現行戦略は
 - P10: `COMPLETE_ARC3_SAMPLE_SOLVING` — 完了
 - P11: `RELEASE_STATE_FREEZE` — 完了
 - 現在状態: P12 `PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`完了、
-  P13のOwner明示許可待ち
+  Owner明示許可によりP13〜P15の一回提出work blockを実行中
 - P12: 外部監査訂正、operational AGI conformance、genericity、
   Competition mock dry-run — **57/57 PASS**
-- P13: `OFFICIAL_ARC_CONNECTION` — 未開始・NOT_AUTHORIZED
-- P14: Kaggle提出経路 — 未開始
-- P15: 実提出・公式結果最適化 — 未開始
+- P13: `OFFICIAL_ARC_CONNECTION` — ローカルcompetition互換10/10 PASS、
+  実gateway接続はcompetition rerun待ち
+- P14: Kaggle提出経路 — Notebook version 4 `COMPLETE`、公式MCPの
+  status/output/downloadと提出tool schemaを確認済み
+- P15: 実提出 — Owner許可済み・一日一回の提出枠を未使用で最終preflight中
 - P11/S5 183/183のclaim: **known sample closure complete**
 - S5 operational AGI conformance: **SUSPEND**
 - genericity: **P12 executable acceptance PASS**
-- official compatibility: **NOT_EVALUATED**
+- official compatibility: **LOCAL COMPETITION PASS / HIDDEN NOT_EVALUATED**
 - pre-official AGI readiness: **PASS**
-- official connection: **NOT_AUTHORIZED / NOT_PERFORMED**
+- official connection: **AUTHORIZED / ACTUAL GATEWAY RERUN PENDING**
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -148,8 +150,10 @@ P10の現行戦略は
 
 P11のweights、trace、score、artifact、digestはread-only baselineです。P12では
 S5を汎用化して上書きせず、`KnownSampleStudent`と別の
-`GenericAGIRuntime`を実装・反証しました。P13はOwnerの明示許可待ちであり、
-公式API、`OperationMode.COMPETITION`、Kaggle、submissionは未実行です。
+`GenericAGIRuntime`を実装・反証しました。P13以降はOwnerの明示許可を受け、
+`listen_and_serve(competition_mode=True)`による25ゲーム互換回帰と、
+Kaggle Notebook version 4の通常実行を完了しました。実提出APIはまだ
+呼び出しておらず、一日一回の枠を最終preflight後の一回だけに限定します。
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な
@@ -304,7 +308,8 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 に記録しています。P11では能力を変更せず、P0/J0/M0、code、dependency、
 environment、回帰、再現可能wheelを
 [`P11_RELEASE_STATE.json`](analysis/release/P11_RELEASE_STATE.json)へ固定しました。
-P12は57/57受入PASSで完了しました。P13以降は未開始です。
+P12は57/57受入PASSで完了しました。P13〜P15はOwner明示許可により進行中で、
+ローカルcompetition互換とKaggle Notebook通常実行までPASSしています。
 
 ## 設計上の固定境界
 
@@ -415,9 +420,13 @@ python -m arc3_agi_agent.development_analysis \
 11. P10: 全sample game / 全level完全攻略 — 完了
 12. P11: release state固定 — 完了
 13. P12: pre-official AGI conformance / genericity — 完了
+14. P13: 公式ARC接続 — ローカルcompetition互換PASS、実gateway rerun待ち
+15. P14: Kaggle提出経路 — Notebook version 4通常実行・MCP読取PASS
+16. P15: 実提出 — Owner許可済み・一回提出前preflight
 
-P12 blocking受入は57/57 PASSです。P13はOwnerの明示的phase開始指示待ちで、
-公式API、`OperationMode.COMPETITION`、Kaggle分岐・提出は未実行です。
+P12 blocking受入は57/57 PASSです。P13〜P15はOwnerの明示的phase開始指示に
+より進行中です。`OperationMode.COMPETITION`のローカル公式相当回帰と
+Kaggle Notebook version 4の通常実行はPASSし、実提出はまだ0回です。
 
 現行ロードマップ全文の正本は
 [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)
