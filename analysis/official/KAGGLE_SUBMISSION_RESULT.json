@@ -1,8 +1,8 @@
 {
-  "schema_version": "arc3-kaggle-submission-result-v6",
-  "status": "FOUR_ZERO_BYTE_ERRORS_FAILSAFE_CANDIDATE_LOCALLY_READY_NOT_SUBMITTED",
+  "schema_version": "arc3-kaggle-submission-result-v7",
+  "status": "FOUR_ZERO_BYTE_ERRORS_FAILSAFE_CANDIDATE_KAGGLE_NORMAL_PASS_NOT_SUBMITTED",
   "hds_judgment": "SUSPEND",
-  "evidence_boundary": "Two accepted historical submissions, four failed current submissions, the official pinned Notebook/output, exact version 8 normal and terminal evidence, Kaggle debugging discussions, the public competition-mode run, the 64x64 stress run, and the locally validated zero-byte containment candidate. Kaggle still exposes no private traceback or per-game progress for ref 55049227.",
+  "evidence_boundary": "Two accepted historical submissions, four failed current submissions, the official pinned Notebook/output, exact version 8 normal and terminal evidence, Kaggle debugging discussions, the public competition-mode run, the 64x64 stress run, and the zero-byte containment candidate's successful version 10 Kaggle normal preflight. Kaggle still exposes no private traceback or per-game progress for ref 55049227. Version 10 has not been submitted.",
   "competition": {
     "name": "arc-prize-2026-arc-agi-3",
     "output_file": "submission.parquet",
@@ -190,14 +190,14 @@
     "not_proven": [
       "Kaggle did not expose the private traceback, stderr, native exit status, per-game progress, gateway reach, or scorecard-close state.",
       "The exact exception that terminated version 8 is not known.",
-      "The fail-safe candidate has not completed a normal Kaggle version or private competition rerun.",
+      "The fail-safe candidate completed a normal Kaggle version but has not completed a private competition rerun.",
       "No official score has been returned for the current GenericAGIRuntime submissions."
     ],
     "strongest_measured_remaining_risk": "OPAQUE_PRIVATE_RUNTIME_OR_SCORECARD_FAILURE: the exact exception remains hidden. The next candidate contains the zero-byte outcome but is not an official root-cause proof until a later rerun collects output.",
     "most_specific_failure_boundary": "Version 8 terminated before Kaggle collected submission.parquet. It had no pre-execution artifact and allowed private bootstrap/runner failure to terminate collection. The candidate fixes that observable gap without claiming the hidden exception.",
     "official_gateway_runtime_reached": "NOT_INFERABLE_FROM_EXPOSED_FIELDS",
     "score_interpretation": "No official score was returned for any current submission.",
-    "resubmission_disposition": "SUSPEND_TODAY_CANDIDATE_READY_FOR_NORMAL_NOTEBOOK_RUN"
+    "resubmission_disposition": "SUSPEND_TODAY_VERSION_10_READY_FOR_NEXT_AUTHORIZED_PRIVATE_RERUN"
   },
   "evidence_files": [
     "analysis/official/KAGGLE_OFFICIAL_FORMAT_AUDIT.json",
@@ -220,15 +220,39 @@
     "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/684969",
     "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/699208"
   ],
-  "next_action": "Do not submit again today. Push the exact candidate to main, create one normal Kaggle Notebook version without competition submission, verify source/output round trip, and reserve the next newly authorized daily attempt for that exact version. Require total_bytes > 0 before claiming correction.",
+  "next_action": "Do not submit again today. Exact version 10 is pushed, completed a normal Kaggle run, and passed source/output round trip without a competition submission. Reserve the next newly authorized daily attempt for version 10 and require total_bytes > 0 before claiming correction.",
   "next_candidate": {
-    "state": "LOCAL_VALIDATION_PASS_NOT_UPLOADED_NOT_SUBMITTED",
+    "state": "KAGGLE_VERSION_10_NORMAL_PASS_NOT_SUBMITTED",
     "notebook_owner": "tecchannn",
     "notebook_slug": "arc3-genericagiruntime-p15",
-    "notebook_version": null,
+    "notebook_version": 10,
+    "source_commit": "30c5b6ca3d47f62e676ef0ed11e0f675f05ab855",
     "notebook_sha256": "dc15b8b363967c300b6c73731f0261e589572da7ae43a11088dc2e2923625c83",
     "runtime_archive_sha256": "c7187a933ece093876a719c9f15082ff3311bed438a4e6f59c186674e297cc92",
     "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
+    "normal_kaggle_run": {
+      "status": "COMPLETE",
+      "kernel_session_id": 338555414,
+      "last_run_at_utc": "2026-07-28T10:56:20.687Z",
+      "source_cell_round_trip_equal": true,
+      "source_cell_count": 4,
+      "pulled_source_ellipsis_count": 0,
+      "pulled_notebook_sha256": "0aa1ca847bdcb10aa27783157aba904b6f7d57515695d832b74c2ecec7869df2",
+      "log_sha256": "bf36af77fe8449ec16445cd77e1a64726d49a234fed233b0986d4759c797a818",
+      "log_traceback_or_error_token_count": 0,
+      "output_size_bytes": 2648,
+      "output_sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb",
+      "parquet_magic_head_and_tail": "PAR1",
+      "exact_version_8_validated_output_match": true,
+      "submission_api_call_count": 0
+    },
+    "normal_preflight_transport_incident": {
+      "version": 9,
+      "status": "ERROR",
+      "classification": "UPLOAD_TRANSPORT_TRUNCATION",
+      "candidate_evidence_eligible": false,
+      "private_submission": "NOT_RUN"
+    },
     "preexecution_fallback": {
       "source": "official pinned Notebook normal-run output",
       "size_bytes": 2648,

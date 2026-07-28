@@ -1,9 +1,9 @@
 {
-  "schema_version": "arc3-kaggle-official-format-audit-v4",
-  "status": "FORMAT_PASS_ZERO_BYTE_FAILSAFE_LOCAL_PASS",
+  "schema_version": "arc3-kaggle-official-format-audit-v5",
+  "status": "FORMAT_PASS_FAILSAFE_KAGGLE_NORMAL_PASS_PRIVATE_NOT_RUN",
   "hds_judgment": "SUSPEND",
   "work_block": {
-    "X": "ARC-AGI-3 official pinned Notebook and parquet, two accepted historical submissions, four failed current submissions, exact version 8 evidence, Kaggle debugging discussions, and the local pre-execution fallback candidate.",
+    "X": "ARC-AGI-3 official pinned Notebook and parquet, two accepted historical submissions, four failed current submissions, exact version 8 evidence, Kaggle debugging discussions, and the version 10 pre-execution fallback candidate normal-run evidence.",
     "R": "Keep official format/lifecycle conformance separate from private success. Add only a byte-identical official placeholder before the risky private bootstrap and explicit failure telemetry; do not alter the AGI runtime policy or infer undocumented timing constraints.",
     "Mc": "The candidate passes locally only when it retains four code cells, exact competition source metadata and normal placeholder, writes the official pinned parquet byte-for-byte before wheel installation during private rerun, preserves gateway ownership of successful final output, exposes private failure status, and passes all 25 Notebook checks.",
     "non_goals": [
@@ -13,7 +13,7 @@
       "Do not restore task/game/level routing, replay, fixed action sequences, literal coordinates, Teacher, source state, or hidden state.",
       "Do not describe the pre-execution fallback as an official mandatory requirement; it is a fail-safe supported by observed zero-byte failures and participant evidence."
     ],
-    "evidence_boundary": "The official pinned Notebook defines the public bootstrap and placeholder shape. The pre-execution fallback is not claimed as an official mandate. A participant reports that creating a placeholder before private execution made submissions work, and it directly contains the zero-byte outcome observed in all four current failures. Official verification remains pending.",
+    "evidence_boundary": "The official pinned Notebook defines the public bootstrap and placeholder shape. The pre-execution fallback is not claimed as an official mandate. A participant reports that creating a placeholder before private execution made submissions work, and it directly contains the zero-byte outcome observed in all four current failures. Version 10 passed Kaggle normal execution and source/output round trip; private verification remains pending.",
     "regression_line": "GenericAGIRuntime agent source, HDS authority, identity-free boundary, and 128-action policy remain unchanged; only private fail-safe packaging, failure telemetry, and environment release isolation change."
   },
   "official_pinned_notebook": {
@@ -171,6 +171,8 @@
       "private_rerun": "ERROR"
     },
     "next_failsafe_candidate": {
+      "notebook_version": 10,
+      "source_commit": "30c5b6ca3d47f62e676ef0ed11e0f675f05ab855",
       "cell_layout": "official four-code-cell lifecycle",
       "normal_placeholder_row": [
         "1_0",
@@ -187,7 +189,15 @@
       "runtime_archive_sha256": "c7187a933ece093876a719c9f15082ff3311bed438a4e6f59c186674e297cc92",
       "validator": "25/25 PASS",
       "intentional_missing_wheel_smoke": "PASS",
-      "kaggle_normal_run": "NOT_RUN",
+      "kaggle_normal_run": "COMPLETE",
+      "source_cell_round_trip_equal": true,
+      "pulled_source_ellipsis_count": 0,
+      "normal_log_traceback_or_error_token_count": 0,
+      "normal_output_size_bytes": 2648,
+      "normal_output_sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb",
+      "normal_output_exact_version_8_validated_match": true,
+      "normal_submission_api_call_count": 0,
+      "version_9_transport_incident": "MCP orchestration text truncation; invalid evidence artifact; not submitted",
       "private_rerun": "NOT_RUN"
     }
   },
@@ -203,8 +213,8 @@
     "duration_basis": "The official limit is nine hours, Kaggle staff reported the ARC3 bespoke runtime setting was fixed for full-limit runs, and both local 110-game projections are below nine hours. The approximately 60-minute observed terminal window is not an official timeout.",
     "format_gate_result": "PASS",
     "private_rerun_gate_result": "FAIL",
-    "most_specific_proven_failure_boundary": "Version 8 ended before any parquet was collected. Its exact private exception is hidden, but the prior Notebook had no output before successful gateway closure. The next candidate locally contains that zero-byte path.",
-    "next_gate": "Run the exact candidate as a normal Kaggle Notebook without submission, verify round trip, then wait for one newly authorized daily private attempt."
+    "most_specific_proven_failure_boundary": "Version 8 ended before any parquet was collected. Its exact private exception is hidden, but the prior Notebook had no output before successful gateway closure. Version 10 contains that zero-byte path and passed normal Kaggle execution; private collection remains unverified.",
+    "next_gate": "Wait for one newly authorized daily private attempt and submit exact version 10 once. Require nonzero collected bytes before claiming correction."
   },
   "sources": [
     "https://www.kaggle.com/code-competition-debugging",

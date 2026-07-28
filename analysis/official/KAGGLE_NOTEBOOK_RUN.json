@@ -1,9 +1,10 @@
 {
-  "schema_version": "arc3-kaggle-notebook-run-v5",
-  "status": "VERSION_8_PRIVATE_ERROR_NEXT_CANDIDATE_LOCAL_PASS_NOT_RUN",
+  "schema_version": "arc3-kaggle-notebook-run-v6",
+  "status": "VERSION_8_PRIVATE_ERROR_VERSION_10_FAILSAFE_NORMAL_PASS_NOT_SUBMITTED",
   "hds_judgment": "SUSPEND",
-  "evidence_boundary": "Historical Kaggle Notebook version 8 normal execution and terminal private submission 55049227, plus the locally generated zero-byte containment candidate. The candidate has not yet been uploaded or run on Kaggle and therefore has no Kaggle version, normal session result, or private score.",
+  "evidence_boundary": "Historical Kaggle Notebook version 8 normal execution and terminal private submission 55049227, plus the zero-byte containment candidate's Kaggle normal preflight. Version 9 was an invalid transport artifact because the MCP orchestration path truncated the 89,096-character Notebook text; it was never submitted. The exact local source was transferred without truncation as version 10, whose normal session, source round trip, log, and output passed. Version 10 has not been submitted and therefore has no private result or official score.",
   "notebook": {
+    "evidence_role": "LAST_SUBMITTED_VERSION",
     "owner": "tecchannn",
     "slug": "arc3-genericagiruntime-p15",
     "kernel_id": 128841040,
@@ -119,14 +120,57 @@
   },
   "submission_api_call_count": 1,
   "competition_submission_count_delta": 1,
-  "next_gate": "Version 8 remains rejected. Do not submit again today. After the exact candidate is pushed, create a normal Kaggle version without competition submission and verify source/output round trip before the next daily private attempt.",
+  "normal_preflight_attempts": [
+    {
+      "version": 9,
+      "status": "ERROR",
+      "private_submission": "NOT_RUN",
+      "classification": "UPLOAD_TRANSPORT_TRUNCATION",
+      "evidence": "The MCP orchestration shell result truncated the 89,096-character Notebook source and inserted U+2026 at base64 position 14,287. Kaggle raised ValueError because the base64 string was no longer ASCII. The local source contained zero U+2026 characters.",
+      "candidate_evidence_eligible": false
+    },
+    {
+      "version": 10,
+      "kernel_session_id": 338555414,
+      "last_run_at_utc": "2026-07-28T10:56:20.687Z",
+      "status": "COMPLETE",
+      "private_submission": "NOT_RUN",
+      "source_cell_round_trip_equal": true,
+      "source_cell_count": 4,
+      "pulled_source_ellipsis_count": 0,
+      "local_notebook_sha256": "dc15b8b363967c300b6c73731f0261e589572da7ae43a11088dc2e2923625c83",
+      "pulled_notebook_sha256": "0aa1ca847bdcb10aa27783157aba904b6f7d57515695d832b74c2ecec7869df2",
+      "metadata_sha256": "d0e9c67eead2a906b5940ab77741d75be0fe7e11ecb1109b40bcb2d929f6704b",
+      "log_sha256": "bf36af77fe8449ec16445cd77e1a64726d49a234fed233b0986d4759c797a818",
+      "log_traceback_or_error_token_count": 0,
+      "output": {
+        "file_name": "submission.parquet",
+        "size_bytes": 2648,
+        "sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb",
+        "parquet_magic_head": "PAR1",
+        "parquet_magic_tail": "PAR1",
+        "exact_version_8_validated_output_match": true,
+        "downloaded_via_kaggle_cli": true
+      },
+      "submission_list_latest_ref_after_run": 55049227,
+      "submission_api_call_count": 0
+    }
+  ],
+  "next_gate": "Version 8 remains rejected. Version 10 passed the exact normal Kaggle source/output round trip without a competition submission. Do not submit again today; reserve the next newly authorized daily attempt for exact version 10 and require total_bytes > 0 before claiming correction.",
   "next_candidate": {
-    "state": "LOCAL_PASS_NOT_UPLOADED_NOT_SUBMITTED",
-    "notebook_version": null,
+    "state": "KAGGLE_VERSION_10_NORMAL_PASS_NOT_SUBMITTED",
+    "source_commit": "30c5b6ca3d47f62e676ef0ed11e0f675f05ab855",
+    "notebook_version": 10,
     "notebook_sha256": "dc15b8b363967c300b6c73731f0261e589572da7ae43a11088dc2e2923625c83",
     "runtime_archive_sha256": "c7187a933ece093876a719c9f15082ff3311bed438a4e6f59c186674e297cc92",
     "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
-    "normal_kaggle_run": "NOT_RUN",
+    "normal_kaggle_run": {
+      "status": "COMPLETE",
+      "source_cell_round_trip_equal": true,
+      "log_traceback_or_error_token_count": 0,
+      "output_size_bytes": 2648,
+      "output_sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb"
+    },
     "private_submission": "NOT_RUN",
     "preexecution_fallback": {
       "size_bytes": 2648,
