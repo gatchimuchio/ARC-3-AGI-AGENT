@@ -1,23 +1,23 @@
 {
-  "schema_version": "arc3-kaggle-notebook-run-v2",
+  "schema_version": "arc3-kaggle-notebook-run-v3",
   "status": "PASS",
-  "hds_judgment": "PASS",
-  "evidence_boundary": "Kaggle regular notebook execution and output validation; no competition submission was created.",
+  "hds_judgment": "HOLD",
+  "evidence_boundary": "Kaggle normal saved-version execution, source round trip, and exact official placeholder validation only. The competition rerun branch, gateway, hidden games, scorecard closure, official score, and actual submission are not exercised by this evidence.",
   "notebook": {
     "owner": "tecchannn",
     "slug": "arc3-genericagiruntime-p15",
     "kernel_id": 128841040,
-    "version": 5,
+    "version": 7,
     "url": "https://www.kaggle.com/code/tecchannn/arc3-genericagiruntime-p15",
     "session_status": "COMPLETE",
+    "status_observed_at_utc": "2026-07-28T04:20:07Z",
     "is_private": true,
     "language": "python",
     "kernel_type": "notebook",
     "enable_gpu": false,
     "enable_tpu": false,
     "enable_internet": false,
-    "kaggle_backend_last_run_time": "2026-07-28T02:20:23.573000Z",
-    "notebook_sha256": "185d4db8773df19aa140dec935ddbdd2fbd6a9f953750299d7f6597739544ad1",
+    "notebook_sha256": "71dae3e42532834543b3a40d2addde6949840558e3b341ba6942c55b2fa1fb6c",
     "metadata_sha256": "fd04c4b40f4ab71c4da908d195fc5e4e6a1487c58262dd4fc817fffb8ef99f5e"
   },
   "payload": {
@@ -25,72 +25,106 @@
     "runtime_archive_size_bytes": 49461,
     "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
     "agent_size_bytes": 4697,
-    "compiled_python_sources": 13,
     "teacher_included": false,
     "known_sample_policy_included": false,
-    "runtime_identity_routing_included": false
+    "runtime_identity_routing_included": false,
+    "action_budget_per_game": 128
   },
   "output": {
     "file_name": "submission.parquet",
-    "size_bytes": 2701,
-    "sha256": "5e20a6e456396c96d262d94306a634b6bbe0548c0aa0ba40d04e6a7672108837",
+    "size_bytes": 2648,
+    "sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb",
     "columns": [
       "row_id",
       "game_id",
       "end_of_game",
       "score"
     ],
-    "regular_run_marker": "dry-run",
-    "downloaded_via_kaggle_cli": true
+    "arrow_types": [
+      "string",
+      "string",
+      "bool",
+      "int64"
+    ],
+    "rows": [
+      {
+        "row_id": "1_0",
+        "game_id": "1",
+        "end_of_game": true,
+        "score": 1
+      }
+    ],
+    "official_placeholder_exact_match": true,
+    "downloaded_via_kaggle_cli": true,
+    "read_back_with_pyarrow": true
+  },
+  "official_reference": {
+    "owner_slug": "inversion/arc3-sample-submission-random-agent",
+    "session_status": "COMPLETE",
+    "output_size_bytes": 2648,
+    "output_sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+    "row_and_arrow_types_equal": true,
+    "binary_hash_difference_reason": "The official saved run used pyarrow 23.0.1 and version 7 used pyarrow 24.0.0; the row, column order, Arrow types, and byte size are equal."
   },
   "checks": {
     "KR-001_SESSION_COMPLETE": true,
     "KR-002_RUNTIME_DIGEST_MATCH": true,
     "KR-003_AGENT_DIGEST_MATCH": true,
-    "KR-004_ALL_PACKAGED_PYTHON_COMPILES": true,
-    "KR-005_OUTPUT_LISTED_BY_KAGGLE_API": true,
-    "KR-006_OUTPUT_DOWNLOADABLE_BY_KAGGLE_CLI": true,
-    "KR-007_OUTPUT_NONEMPTY": true,
-    "KR-008_OUTPUT_SCHEMA_PRESENT": true,
-    "KR-009_NO_SUBMISSION_SIDE_EFFECT": true
+    "KR-004_OUTPUT_LISTED_BY_KAGGLE_API": true,
+    "KR-005_OUTPUT_DOWNLOADABLE_BY_KAGGLE_CLI": true,
+    "KR-006_OUTPUT_NONEMPTY": true,
+    "KR-007_OUTPUT_COLUMNS_EXACT": true,
+    "KR-008_OUTPUT_ARROW_TYPES_EXACT": true,
+    "KR-009_OUTPUT_ROW_EXACT": true,
+    "KR-010_OFFICIAL_PLACEHOLDER_EQUAL": true,
+    "KR-011_SOURCE_ROUND_TRIP_EQUAL": true,
+    "KR-012_NO_SUBMISSION_SIDE_EFFECT": true,
+    "KR-013_NO_RUNTIME_OR_POLICY_CHANGE": true
   },
   "failed_check_ids": [],
   "upload_route": {
-    "source": "Kaggle CLI 2.2.4",
-    "reason": "Preserve the competition data-source repeated field and reproduce the known-good version 4 upload route.",
-    "submission_route": "Official Kaggle MCP",
-    "submission_tool_schema_verified": true
+    "source": "Kaggle CLI",
+    "competition_source_preserved": true,
+    "submission_route_not_called": true
   },
   "source_round_trip": {
     "cell_sources_equal": true,
     "cell_ids_equal": true,
-    "notebook_metadata_equal": true,
+    "cell_types_equal": true,
     "raw_file_hash_equal": false,
-    "raw_hash_difference_reason": "Kaggle normalizes execution fields and outputs when the saved version is pulled."
+    "raw_hash_difference_reason": "Kaggle normalizes execution fields, outputs, and Notebook metadata when the saved version is pulled."
+  },
+  "regular_run_environment": {
+    "competition_source_in_kernel_metadata": true,
+    "competition_bundle_mounted": false,
+    "classification": "KAGGLE_REGULAR_RUN_ENVIRONMENT_DIFF",
+    "competition_rerun_behavior": "If KAGGLE_IS_COMPETITION_RERUN is set, a missing official wheel bundle fails closed. If the bundle is mounted, the same official offline installation command is executed."
   },
   "failed_regular_versions": [
     {
       "version": 1,
       "classification": "MCP_REPEATED_FIELD_NOT_PERSISTED",
-      "competition_sources_after_pull": [],
       "submission_created": false
     },
     {
       "version": 2,
       "classification": "MCP_REPEATED_FIELD_NOT_PERSISTED",
-      "competition_sources_after_pull": [],
       "submission_created": false
     },
     {
       "version": 3,
-      "classification": "COMPETITION_RERUN_ONLY_INPUT_NOT_MOUNTED_IN_REGULAR_RUN",
-      "competition_sources_after_pull": [
-        "arc-prize-2026-arc-agi-3"
-      ],
+      "classification": "REGULAR_RUN_COMPETITION_BUNDLE_NOT_MOUNTED",
+      "submission_created": false
+    },
+    {
+      "version": 6,
+      "classification": "REGULAR_RUN_COMPETITION_BUNDLE_NOT_MOUNTED",
+      "failure": "No matching distribution found for arc-agi because the official wheel directory was absent.",
       "submission_created": false
     }
   ],
-  "supersedes_regular_version": 4,
+  "supersedes_regular_version": 5,
   "submission_api_call_count": 0,
-  "competition_submission_count_delta": 0
+  "competition_submission_count_delta": 0,
+  "next_gate": "Actual submission remains suspended. Version 7 requires explicit user authorization before one competition rerun can test gateway output and official scoring."
 }

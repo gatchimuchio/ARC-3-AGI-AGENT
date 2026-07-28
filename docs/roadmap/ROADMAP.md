@@ -33,8 +33,8 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P11 | 完成状態固定 | 完了 |
 | P12 | Pre-official AGI conformance / genericity | 完了 |
 | P13 | 公式ARC環境接続 | 進行中・ローカルcompetition互換PASS |
-| P14 | Kaggle提出経路 | 提出前gate PASS |
-| P15 | 実提出・公式結果最適化 | ref 55040966 ERROR・原因監査中・SUSPEND |
+| P14 | Kaggle提出経路 | version 7公式placeholder gate PASS |
+| P15 | 実提出・公式結果最適化 | refs 55040966 / 55043205 ERROR・version 7未提出・HOLD |
 
 ## 現在のphase gate
 
@@ -70,13 +70,14 @@ P11はRuntime P、score、sample能力を変更していない。P11/S5は
 known-sample closure baselineとして凍結する。P12はoperational
 AGI conformance、genericity、Competition contract mock dry-runを実装・反証し、
 blocking受入57/57 PASSで完了した。P13以降はOwner明示許可により開始し、
-25ゲームのローカルcompetition互換回帰とcorrective Kaggle Notebook version 5
-通常実行をPASSした。実提出APIはversion 4から一回だけ呼び、ref `55040966`は
-Kaggle system error、
-scoreなし・episode 0で終了した。live limitは`numAllowedNow=1`でERRORは
-日次枠へ未計上だが、原因は`AUDIT_INCONCLUSIVE`である。公式templateに揃えた
-corrective Notebook version 5は通常実行COMPLETE・17/17 PASS・未提出であり、
-Ownerの再承認までP15はSUSPENDとする。
+25ゲームのローカルcompetition互換回帰とcorrective Kaggle Notebook version 7
+通常実行・公式placeholder row/column/type照合をPASSした。実提出APIは
+version 4とversion 5から二回呼び、refs `55040966` / `55043205`はいずれも
+Kaggle system error、scoreなし・episode 0・total bytes 0で終了した。
+live limitは`numAllowedNow=1`で両ERRORは日次枠へ未計上。version 5の
+公式format不一致は立証・是正済みだが、非公開rerun logがないため単一原因とは
+断定しない。corrective Notebook version 7は通常実行COMPLETE・21/21 PASS・
+未提出であり、Ownerの再承認までP15はHOLDとする。
 
 ## 監査正本
 

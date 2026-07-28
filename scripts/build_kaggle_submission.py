@@ -152,15 +152,6 @@ def _code_cell(source: str, *, cell_id: str) -> dict[str, object]:
     }
 
 
-def _markdown_cell(source: str, *, cell_id: str) -> dict[str, object]:
-    return {
-        "cell_type": "markdown",
-        "id": cell_id,
-        "metadata": {},
-        "source": source,
-    }
-
-
 def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
     runtime_archive, runtime_manifest = build_runtime_archive()
     agent_data = AGENT_SOURCE.read_bytes()
@@ -182,26 +173,35 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
             import os
             import subprocess
             import sys
+            from pathlib import Path
 
-            if os.getenv("KAGGLE_IS_COMPETITION_RERUN"):
-                wheel_dir = "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels"
+            wheel_dir = Path(
+                "/kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels"
+            )
+            if wheel_dir.is_dir():
                 subprocess.check_call([
                     sys.executable,
                     "-m",
                     "pip",
                     "install",
-                    "--disable-pip-version-check",
                     "--no-index",
                     "--find-links",
-                    wheel_dir,
-                    "arc-agi==0.9.8",
-                    "python-dotenv==1.2.2",
+                    str(wheel_dir),
+                    "arc-agi",
+                    "python-dotenv",
                 ])
+            elif os.getenv("KAGGLE_IS_COMPETITION_RERUN"):
+                raise FileNotFoundError(
+                    "ARC3 competition wheel bundle is missing during rerun"
+                )
             else:
-                print("Regular notebook run: competition-only wheel install skipped")
+                print(
+                    "Regular run: competition wheel bundle is not mounted; "
+                    "the official placeholder contract will be validated only"
+                )
             """
         ),
-        cell_id="install-offline-wheels",
+        cell_id="install-official-offline-wheels",
     )
     payload_cell = _code_cell(
         dedent(
@@ -242,7 +242,7 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
     )
     run_cell = _code_cell(
         dedent(
-            f"""\
+            """\
             import os
             import shutil
             import subprocess
@@ -301,16 +301,15 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
 
             load_dotenv()
 
-            AVAILABLE_AGENTS: dict[str, Type[Agent]] = {{
+            AVAILABLE_AGENTS: dict[str, Type[Agent]] = {
                 "genericagi": GenericAGIAgent,
-            }}
+            }
             '''
                 (framework_dst / "agents" / "__init__.py").write_text(
                     agents_init,
                     encoding="utf-8",
                 )
-                env_body = '''DEBUG=False
-            SCHEME=http
+                env_body = '''SCHEME=http
             HOST=gateway
             PORT=8001
             ARC_API_KEY=test-key-123
@@ -322,79 +321,36 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                 (framework_dst / ".env").write_text(env_body, encoding="utf-8")
 
                 run_env = os.environ.copy()
-                run_env.update({{
-                    "DEBUG": "False",
-                    "SCHEME": "http",
-                    "HOST": "gateway",
-                    "PORT": "8001",
-                    "ARC_API_KEY": "test-key-123",
-                    "ARC_BASE_URL": "http://gateway:8001/",
-                    "OPERATION_MODE": "online",
-                    "ENVIRONMENTS_DIR": "",
-                    "RECORDINGS_DIR": "/kaggle/working/server_recording",
-                    "MPLBACKEND": "agg",
-                    "PYTHONHASHSEED": "0",
-                }})
+                run_env["MPLBACKEND"] = "agg"
                 subprocess.run(
                     [sys.executable, "main.py", "--agent", "genericagi"],
                     cwd=framework_dst,
                     env=run_env,
                     check=True,
-                    timeout=36_000,
                 )
-                submission_path = Path("/kaggle/working/submission.parquet")
-                submission_visible = (
-                    submission_path.is_file()
-                    and submission_path.stat().st_size > 0
-                )
-                print({{
-                    "competition_client_run": "complete",
-                    "gateway_output_ownership": "Kaggle competition gateway",
-                    "submission_visible_to_notebook": submission_visible,
-                    "submission_size_bytes_if_visible": (
-                        submission_path.stat().st_size
-                        if submission_visible
-                        else None
-                    ),
-                    "action_budget_per_game": {ACTION_BUDGET},
-                }})
-            else:
-                import json
-
-                manifest = json.loads(
-                    (
-                        payload_root / "ARC3_KAGGLE_RUNTIME_MANIFEST.json"
-                    ).read_text(encoding="utf-8")
-                )
-                assert manifest["teacher_included"] is False
-                assert manifest["known_sample_policy_included"] is False
-                assert manifest["runtime_identity_routing_included"] is False
-                python_sources = sorted(payload_root.rglob("*.py"))
-                for source_path in python_sources:
-                    compile(
-                        source_path.read_text(encoding="utf-8"),
-                        str(source_path),
-                        "exec",
-                    )
-
-                import pandas as pd
-
-                submission = pd.DataFrame(
-                    data=[["dry-run", "dry-run", True, 0]],
-                    columns=["row_id", "game_id", "end_of_game", "score"],
-                )
-                submission_path = Path("/kaggle/working/submission.parquet")
-                submission.to_parquet(submission_path, index=False)
-                assert submission_path.stat().st_size > 0
-                print({{
-                    "dry_run": "pass",
-                    "compiled_python_sources": len(python_sources),
-                    "runtime_archive_sha256": expected_runtime_sha256,
-                    "submission_size_bytes": submission_path.stat().st_size,
-                }})
             """
         ),
         cell_id="execute-generic-runtime",
+    )
+    placeholder_cell = _code_cell(
+        dedent(
+            """\
+            # Non-rerun mode: produce the official ARC-AGI-3 placeholder.
+            import os
+            import pandas as pd
+
+            if not os.getenv("KAGGLE_IS_COMPETITION_RERUN"):
+                submission = pd.DataFrame(
+                    data=[["1_0", "1", True, 1]],
+                    columns=["row_id", "game_id", "end_of_game", "score"],
+                )
+                submission.to_parquet(
+                    "/kaggle/working/submission.parquet",
+                    index=False,
+                )
+            """
+        ),
+        cell_id="write-official-placeholder",
     )
     notebook: dict[str, object] = {
         "metadata": {
@@ -418,22 +374,16 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
             },
         },
         "nbformat": 4,
-        "nbformat_minor": 5,
+        "nbformat_minor": 4,
         "cells": [
-            _markdown_cell(
-                "# ARC Prize 2026 ARC-AGI-3 GenericAGIRuntime\n\n"
-                "Identity-free C/J/M/P runtime; Teacher, replay, known-sample "
-                "policy, source state, hidden state, and external LLM calls are "
-                "not packaged.",
-                cell_id="runtime-boundary",
-            ),
             install_cell,
             payload_cell,
             run_cell,
+            placeholder_cell,
         ],
     }
     build_report = {
-        "schema_version": "arc3-kaggle-notebook-build-v1",
+        "schema_version": "arc3-kaggle-notebook-build-v2",
         "competition": COMPETITION_SLUG,
         "action_budget_per_game": ACTION_BUDGET,
         "runtime_archive": runtime_manifest,

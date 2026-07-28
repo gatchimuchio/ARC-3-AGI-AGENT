@@ -174,6 +174,28 @@ def validate(
         for cell in cells
         if isinstance(cell, dict)
     ]
+    cell_types = [
+        cell.get("cell_type")
+        for cell in cells
+        if isinstance(cell, dict)
+    ]
+    cell_sources_by_id = {
+        str(cell.get("id")): _cell_source(cell)
+        for cell in cells
+        if isinstance(cell, dict) and isinstance(cell.get("id"), str)
+    }
+    install_source = cell_sources_by_id.get(
+        "install-official-offline-wheels",
+        "",
+    )
+    competition_source = cell_sources_by_id.get(
+        "execute-generic-runtime",
+        "",
+    )
+    placeholder_source = cell_sources_by_id.get(
+        "write-official-placeholder",
+        "",
+    )
     sources = "\n".join(_cell_source(cell) for cell in cells)
     code_sources = [
         _cell_source(cell)
@@ -256,33 +278,32 @@ def validate(
             for marker in (
                 "KAGGLE_IS_COMPETITION_RERUN",
                 "http://gateway:8001/api/games",
-                '"OPERATION_MODE": "online"',
                 "OPERATION_MODE=online",
                 "main.py",
                 "--agent",
                 "genericagi",
             )
         ),
-        "NB-010_OFFLINE_WHEELS_PINNED": all(
-            marker in sources
-            for marker in (
-                "--no-index",
-                "arc_agi_3_wheels",
-                "arc-agi==0.9.8",
-                "python-dotenv==1.2.2",
-            )
-        ),
-        "NB-011_GATEWAY_OUTPUT_NOT_PREEMPTED": (
+        "NB-010_OFFICIAL_OFFLINE_WHEEL_CONTRACT": (
             all(
-                marker in sources
+                marker in install_source
                 for marker in (
-                    "/kaggle/working/submission.parquet",
-                    '"gateway_output_ownership": "Kaggle competition gateway"',
-                    '"submission_visible_to_notebook"',
+                    "--no-index",
+                    "arc_agi_3_wheels",
+                    '"arc-agi"',
+                    '"python-dotenv"',
+                    "if wheel_dir.is_dir()",
+                    'elif os.getenv("KAGGLE_IS_COMPETITION_RERUN")',
+                    "raise FileNotFoundError",
                 )
             )
-            and "did not produce submission.parquet" not in sources
-            and "submission_path.stat().st_size == 0" not in sources
+            and "==" not in install_source
+        ),
+        "NB-011_GATEWAY_OWNS_RERUN_OUTPUT": (
+            "/kaggle/working/submission.parquet"
+            not in competition_source
+            and "to_parquet" not in competition_source
+            and "submission_visible_to_notebook" not in competition_source
         ),
         "NB-012_NO_SUBMISSION_SIDE_EFFECT": not any(
             marker in sources
@@ -325,19 +346,48 @@ def validate(
             )
             and len(set(cell_ids)) == len(cell_ids)
         ),
-        "NB-017_REGULAR_RUN_IS_OFFLINE_DRY_RUN": all(
-            marker in sources
-            for marker in (
-                "Regular notebook run: competition-only wheel install skipped",
-                'if os.getenv("KAGGLE_IS_COMPETITION_RERUN")',
-                'manifest["teacher_included"] is False',
-                'compile(',
-                '"dry_run": "pass"',
+        "NB-017_OFFICIAL_PLACEHOLDER_EXACT": (
+            all(
+                marker in placeholder_source
+                for marker in (
+                    'data=[["1_0", "1", True, 1]]',
+                    'columns=["row_id", "game_id", "end_of_game", "score"]',
+                    'if not os.getenv("KAGGLE_IS_COMPETITION_RERUN")',
+                    '"/kaggle/working/submission.parquet"',
+                    "index=False",
+                )
             )
+            and "dry-run" not in placeholder_source
+        ),
+        "NB-018_OFFICIAL_FOUR_CODE_CELL_LAYOUT": (
+            cell_ids
+            == [
+                "install-official-offline-wheels",
+                "verify-runtime-payload",
+                "execute-generic-runtime",
+                "write-official-placeholder",
+            ]
+            and cell_types == ["code", "code", "code", "code"]
+        ),
+        "NB-019_RERUN_AND_PLACEHOLDER_SEPARATE": (
+            "to_parquet" not in competition_source
+            and "subprocess.run" not in placeholder_source
+            and "KAGGLE_IS_COMPETITION_RERUN" in competition_source
+            and "KAGGLE_IS_COMPETITION_RERUN" in placeholder_source
+        ),
+        "NB-020_NO_UNDOCUMENTED_RUNTIME_LIMIT": (
+            "timeout=36_000" not in competition_source
+            and "timeout=36000" not in competition_source
+            and "MAX_WALL" not in sources
+            and "WALL_TIME" not in sources
+        ),
+        "NB-021_NOTEBOOK_FORMAT_MATCHES_OFFICIAL": (
+            notebook.get("nbformat") == 4
+            and notebook.get("nbformat_minor") == 4
         ),
     }
     return {
-        "schema_version": "arc3-kaggle-notebook-validation-v2",
+        "schema_version": "arc3-kaggle-notebook-validation-v3",
         "status": "PASS" if all(checks.values()) else "FAIL",
         "checks": checks,
         "failed_check_ids": [

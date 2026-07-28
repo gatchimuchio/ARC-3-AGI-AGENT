@@ -1,6 +1,6 @@
 {
   "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
-  "build_report_sha256": "9bef3cf978fce9ef86d4b0e185c4ca70a697679fe0912904c25c3436bd83a1c3",
+  "build_report_sha256": "0aebea782edb655b931d4389621d4612f6f52dbc91003c5134b2a14135174212",
   "checks": {
     "NB-001_SOURCE_REBUILD_EXACT": true,
     "NB-002_METADATA_REBUILD_EXACT": true,
@@ -11,14 +11,18 @@
     "NB-007_CPU_INTERNET_DISABLED": true,
     "NB-008_COMPETITION_SOURCE_EXACT": true,
     "NB-009_GATEWAY_RERUN_CONTRACT": true,
-    "NB-010_OFFLINE_WHEELS_PINNED": true,
-    "NB-011_GATEWAY_OUTPUT_NOT_PREEMPTED": true,
+    "NB-010_OFFICIAL_OFFLINE_WHEEL_CONTRACT": true,
+    "NB-011_GATEWAY_OWNS_RERUN_OUTPUT": true,
     "NB-012_NO_SUBMISSION_SIDE_EFFECT": true,
     "NB-013_NO_EXTERNAL_ARC_OR_LLM_ENDPOINT": true,
     "NB-014_NO_SECRET": true,
     "NB-015_GENERIC_BOUNDARY": true,
     "NB-016_CELL_IDS_UNIQUE": true,
-    "NB-017_REGULAR_RUN_IS_OFFLINE_DRY_RUN": true
+    "NB-017_OFFICIAL_PLACEHOLDER_EXACT": true,
+    "NB-018_OFFICIAL_FOUR_CODE_CELL_LAYOUT": true,
+    "NB-019_RERUN_AND_PLACEHOLDER_SEPARATE": true,
+    "NB-020_NO_UNDOCUMENTED_RUNTIME_LIMIT": true,
+    "NB-021_NOTEBOOK_FORMAT_MATCHES_OFFICIAL": true
   },
   "compile_failures": [],
   "failed_check_ids": [],
@@ -27,8 +31,8 @@
     "cell_count": 4,
     "id": "tecchannn/arc3-genericagiruntime-p15",
     "path": "kaggle_notebooks/submission.ipynb",
-    "sha256": "185d4db8773df19aa140dec935ddbdd2fbd6a9f953750299d7f6597739544ad1",
-    "size_bytes": 80036
+    "sha256": "71dae3e42532834543b3a40d2addde6949840558e3b341ba6942c55b2fa1fb6c",
+    "size_bytes": 78268
   },
   "notebook_secret_findings": [],
   "runtime_archive": {
@@ -87,7 +91,7 @@
     "stderr": "",
     "stdout": "WIN:2:True:False"
   },
-  "schema_version": "arc3-kaggle-notebook-validation-v2",
+  "schema_version": "arc3-kaggle-notebook-validation-v3",
   "status": "PASS",
   "submission_api_call_count": 0,
   "tracked_secret_findings": []

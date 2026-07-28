@@ -29,14 +29,18 @@
 `P11_RELEASE_STATE_FREEZE` はknown-sample baselineとして完了・凍結しています。
 `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`はblocking受入57件を
 全件PASSして完了しました。P13〜P15はOwnerの明示許可により開始済みです。
-現在は25ゲームのローカルcompetition互換回帰10/10とKaggle corrective
-Notebook version 5通常実行をPASSしています。実提出ref `55040966`は
-version 4から一回だけ実行され、
-Kaggle `ERROR`（system error、scoreなし、episode 0）でP15をSUSPENDしています。
-live submission-limitは`numAllowedNow=1`で、このERRORは現行日次枠へ
-計上されていません。原因は上流障害と断定せず`AUDIT_INCONCLUSIVE`とし、
-公式template整合のcorrective Notebook version 5は通常実行COMPLETE・
-未提出です。
+現在は25ゲームのローカルcompetition互換回帰とKaggle corrective
+Notebook version 7通常実行をPASSしています。実提出ref `55040966`
+（version 4）と`55043205`（version 5）は、いずれもKaggle `ERROR`
+（system error、scoreなし、episode 0、total bytes 0）でP15をHOLDしています。
+live submission-limitは`numAllowedNow=1`で、両ERRORは現行日次枠へ
+計上されていません。version 5のplaceholder値とNotebook lifecycleが
+公式Pinned Notebookの契約と一致していなかったことは立証済みです。
+過去の受理実績は提出経路が成立した事実の補助証拠に限り、正確なformatや
+公式記載以外の実行時間制約を推定する根拠にはしません。
+ただし非公開rerun logがないため、それをsystem errorの単一原因とは断定しません。
+corrective Notebook version 7は通常実行COMPLETE、公式placeholderの
+row/column/type完全一致、21/21 PASS、未提出です。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -136,12 +140,14 @@ P12 complete / P13 transition authorized:
   hidden-game compatibility is NOT_EVALUATED
   pre-official AGI readiness is PASS
   P13 through P15 are Owner-authorized and in progress
-  Kaggle corrective Notebook version 5 regular run is COMPLETE
-  actual submission API call count is 1
-  submission ref 55040966 is ERROR with no score and no episode
+  Kaggle corrective Notebook version 7 regular run is COMPLETE
+  actual submission API call count is 2
+  submission refs 55040966 and 55043205 are ERROR with no score,
+    no episode, and total bytes 0
   live submission slots available now is 1
-  corrective Notebook version 5 is COMPLETE, validated 17 / 17, and not submitted
-  P15 HDS judgment is SUSPEND
+  corrective Notebook version 7 matches the official placeholder,
+    is validated 21 / 21, and is not submitted
+  P15 HDS judgment is HOLD
   O-001 through O-018 are closed by separate GenericAGIRuntime evidence
   KnownSampleStudent remains frozen
   P13 requires an explicit Owner phase-start instruction
@@ -394,16 +400,16 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 
 - P13 official ARC connection: ローカルcompetition互換10/10 PASS、
   実gateway到達はsubmission system errorにより未立証
-- P14 Kaggle submission paths: corrective Notebook version 5通常実行・
-  CLI出力取得・MCP読取PASS
-- P15 actual submission: ref `55040966`を一回実行、Kaggle system error、
-  scoreなし・episode 0・再提出0回。ERRORは日次枠へ未計上だが、
-  corrective Notebook version 5通常実行はCOMPLETE。Ownerの再承認まで
-  HDS `SUSPEND`
+- P14 Kaggle submission paths: corrective Notebook version 7通常実行・
+  公式placeholder row/column/type照合・CLI出力取得・MCP読取PASS
+- P15 actual submission: ref `55040966`と`55043205`を実行し、いずれも
+  Kaggle system error、scoreなし・episode 0・total bytes 0。ERRORは
+  日次枠へ未計上。corrective Notebook version 7は通常実行COMPLETE・
+  未提出であり、Ownerの新しい明示許可までHDS `HOLD`
 
 P13以降は全P12 blocking gateとユーザーの明示的phase開始指示を満たしている。
-実提出APIは一回だけ呼んだ。live limitでは一枠利用可能だが、corrective
-Notebook version 5のOwnerによる新しい明示許可なしに再提出しない。
+実提出APIは二回呼んだ。live limitでは一枠利用可能だが、corrective
+Notebook version 7のOwnerによる新しい明示許可なしに再提出しない。
 terminal正本は
 `analysis/official/KAGGLE_SUBMISSION_RESULT.json`とする。
 

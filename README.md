@@ -29,10 +29,12 @@ P10の現行戦略は
   Competition mock dry-run — **57/57 PASS**
 - P13: `OFFICIAL_ARC_CONNECTION` — ローカルcompetition互換10/10 PASS、
   実gateway接続はcompetition rerun待ち
-- P14: Kaggle提出経路 — Notebook version 4 `COMPLETE`、公式MCPの
-  status/output/downloadと提出tool schemaを確認済み
-- P15: 実提出 — ref `55040966`を一回実行、Kaggle `ERROR`
-  （system error、scoreなし、episode 0）、再提出0回、**SUSPEND**
+- P14: Kaggle提出経路 — corrective Notebook version 7 `COMPLETE`、
+  公式placeholderのrow/column/type一致、CLI output取得、MCP提出tool
+  schemaを確認済み
+- P15: 実提出 — ref `55040966`と`55043205`はいずれもKaggle `ERROR`
+  （system error、scoreなし、episode 0、total bytes 0）。
+  version 7は未提出で、**HOLD**
 - P11/S5 183/183のclaim: **known sample closure complete**
 - S5 operational AGI conformance: **SUSPEND**
 - genericity: **P12 executable acceptance PASS**
@@ -153,9 +155,12 @@ P11のweights、trace、score、artifact、digestはread-only baselineです。P
 S5を汎用化して上書きせず、`KnownSampleStudent`と別の
 `GenericAGIRuntime`を実装・反証しました。P13以降はOwnerの明示許可を受け、
 `listen_and_serve(competition_mode=True)`による25ゲーム互換回帰と、
-Kaggle Notebook version 4の通常実行を完了しました。実提出ref `55040966`は
-一回だけ呼び出し、Kaggle system error、scoreなし、episode 0で終了しました。
-同日の再提出は行わず、P15はSUSPENDです。
+Kaggle Notebook version 7の通常実行を完了しました。実提出ref
+`55040966`と`55043205`は、いずれもKaggle system error、scoreなし、
+episode 0、total bytes 0で終了しました。version 5の通常出力が公式
+placeholder契約と不一致だったことを是正し、version 7では公式と同じ
+`1_0 / 1 / true / 1`、列順、Arrow型をKaggle実出力で確認しています。
+ただしversion 7は未提出であり、P15はHOLDです。
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な
@@ -311,8 +316,9 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 environment、回帰、再現可能wheelを
 [`P11_RELEASE_STATE.json`](analysis/release/P11_RELEASE_STATE.json)へ固定しました。
 P12は57/57受入PASSで完了しました。P13〜P15はOwner明示許可により進行中で、
-ローカルcompetition互換とKaggle Notebook通常実行までPASSしています。
-実提出はKaggle system errorでscoreを生成せず、agent実行到達は未立証です。
+ローカルcompetition互換とcorrective Kaggle Notebook version 7の通常実行・
+公式placeholder照合までPASSしています。二回の実提出はKaggle system errorで
+scoreを生成せず、agent実行到達は未立証です。
 
 ## 設計上の固定境界
 
@@ -424,13 +430,14 @@ python -m arc3_agi_agent.development_analysis \
 12. P11: release state固定 — 完了
 13. P12: pre-official AGI conformance / genericity — 完了
 14. P13: 公式ARC接続 — ローカルcompetition互換PASS、実gateway到達は未立証
-15. P14: Kaggle提出経路 — Notebook version 4通常実行・MCP読取PASS
-16. P15: 実提出 — ref `55040966`を一回実行、system errorでSUSPEND
+15. P14: Kaggle提出経路 — Notebook version 7通常実行・公式placeholder照合・MCP読取PASS
+16. P15: 実提出 — refs `55040966` / `55043205`はsystem error、version 7未提出でHOLD
 
 P12 blocking受入は57/57 PASSです。P13〜P15はOwnerの明示的phase開始指示に
 より進行中です。`OperationMode.COMPETITION`のローカル公式相当回帰と
-Kaggle Notebook version 4の通常実行はPASSしました。実提出は一回だけ実行し、
-scoreなし・episode 0のKaggle system errorで終了しました。
+Kaggle Notebook version 7の通常実行はPASSしました。実提出は二回実行し、
+いずれもscoreなし・episode 0・total bytes 0のKaggle system errorで
+終了しました。version 7は未提出です。
 
 現行ロードマップ全文の正本は
 [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)
