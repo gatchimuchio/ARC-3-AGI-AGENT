@@ -402,13 +402,15 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P11: release state固定 — 完了
 - P12: pre-official AGI conformance / genericity — 完了
 - P13: 公式ARC接続 — Owner許可済み、ローカルcompetition互換PASS、
-  実gateway rerun待ち
+  実gateway到達は未立証
 - P14: Kaggle提出経路 — Notebook version 4通常実行・MCP読取PASS
-- P15: 実提出 — Owner許可済み、一回提出前preflight
+- P15: 実提出 — ref `55040966`を一回実行、Kaggle system error、
+  scoreなし・episode 0でHDS `SUSPEND`
 
 現行順序は
 `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
 P4〜P9の完了証拠は各phase実装文書を参照します。P10/P11の凍結証拠と
 P12の57/57受入証拠は各phase正本を参照します。P13以降はOwnerの
-明示的phase開始指示を受けて進行中です。実提出は一日一回のため、
-Notebook・出力・当日履歴・tool schemaを確認後に一回だけ実行します。
+明示的phase開始指示を受けて進行中です。実提出は一回だけ実行済みで、
+同日の追加提出は禁止します。terminal正本は
+`analysis/official/KAGGLE_SUBMISSION_RESULT.json`です。

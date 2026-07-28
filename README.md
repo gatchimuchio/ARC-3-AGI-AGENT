@@ -31,13 +31,14 @@ P10の現行戦略は
   実gateway接続はcompetition rerun待ち
 - P14: Kaggle提出経路 — Notebook version 4 `COMPLETE`、公式MCPの
   status/output/downloadと提出tool schemaを確認済み
-- P15: 実提出 — Owner許可済み・一日一回の提出枠を未使用で最終preflight中
+- P15: 実提出 — ref `55040966`を一回実行、Kaggle `ERROR`
+  （system error、scoreなし、episode 0）、再提出0回、**SUSPEND**
 - P11/S5 183/183のclaim: **known sample closure complete**
 - S5 operational AGI conformance: **SUSPEND**
 - genericity: **P12 executable acceptance PASS**
 - official compatibility: **LOCAL COMPETITION PASS / HIDDEN NOT_EVALUATED**
 - pre-official AGI readiness: **PASS**
-- official connection: **AUTHORIZED / ACTUAL GATEWAY RERUN PENDING**
+- official connection: **AUTHORIZED / ACTUAL GATEWAY REACH NOT EVIDENCED**
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -152,8 +153,9 @@ P11のweights、trace、score、artifact、digestはread-only baselineです。P
 S5を汎用化して上書きせず、`KnownSampleStudent`と別の
 `GenericAGIRuntime`を実装・反証しました。P13以降はOwnerの明示許可を受け、
 `listen_and_serve(competition_mode=True)`による25ゲーム互換回帰と、
-Kaggle Notebook version 4の通常実行を完了しました。実提出APIはまだ
-呼び出しておらず、一日一回の枠を最終preflight後の一回だけに限定します。
+Kaggle Notebook version 4の通常実行を完了しました。実提出ref `55040966`は
+一回だけ呼び出し、Kaggle system error、scoreなし、episode 0で終了しました。
+同日の再提出は行わず、P15はSUSPENDです。
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な
@@ -310,6 +312,7 @@ environment、回帰、再現可能wheelを
 [`P11_RELEASE_STATE.json`](analysis/release/P11_RELEASE_STATE.json)へ固定しました。
 P12は57/57受入PASSで完了しました。P13〜P15はOwner明示許可により進行中で、
 ローカルcompetition互換とKaggle Notebook通常実行までPASSしています。
+実提出はKaggle system errorでscoreを生成せず、agent実行到達は未立証です。
 
 ## 設計上の固定境界
 
@@ -420,13 +423,14 @@ python -m arc3_agi_agent.development_analysis \
 11. P10: 全sample game / 全level完全攻略 — 完了
 12. P11: release state固定 — 完了
 13. P12: pre-official AGI conformance / genericity — 完了
-14. P13: 公式ARC接続 — ローカルcompetition互換PASS、実gateway rerun待ち
+14. P13: 公式ARC接続 — ローカルcompetition互換PASS、実gateway到達は未立証
 15. P14: Kaggle提出経路 — Notebook version 4通常実行・MCP読取PASS
-16. P15: 実提出 — Owner許可済み・一回提出前preflight
+16. P15: 実提出 — ref `55040966`を一回実行、system errorでSUSPEND
 
 P12 blocking受入は57/57 PASSです。P13〜P15はOwnerの明示的phase開始指示に
 より進行中です。`OperationMode.COMPETITION`のローカル公式相当回帰と
-Kaggle Notebook version 4の通常実行はPASSし、実提出はまだ0回です。
+Kaggle Notebook version 4の通常実行はPASSしました。実提出は一回だけ実行し、
+scoreなし・episode 0のKaggle system errorで終了しました。
 
 現行ロードマップ全文の正本は
 [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)

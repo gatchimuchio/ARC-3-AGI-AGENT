@@ -34,7 +34,7 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P12 | Pre-official AGI conformance / genericity | 完了 |
 | P13 | 公式ARC環境接続 | 進行中・ローカルcompetition互換PASS |
 | P14 | Kaggle提出経路 | 提出前gate PASS |
-| P15 | 実提出・公式結果最適化 | Owner許可済み・一回提出前preflight |
+| P15 | 実提出・公式結果最適化 | ref 55040966 system error・SUSPEND |
 
 ## 現在のphase gate
 
@@ -71,7 +71,8 @@ known-sample closure baselineとして凍結する。P12はoperational
 AGI conformance、genericity、Competition contract mock dry-runを実装・反証し、
 blocking受入57/57 PASSで完了した。P13以降はOwner明示許可により開始し、
 25ゲームのローカルcompetition互換回帰とKaggle Notebook version 4通常実行を
-PASSした。実提出APIはまだ0回であり、一日一回の枠を最終操作に限定する。
+PASSした。実提出APIは一回だけ呼び、ref `55040966`はKaggle system error、
+scoreなし・episode 0で終了した。同日の再提出は禁止し、P15はSUSPENDとする。
 
 ## 監査正本
 

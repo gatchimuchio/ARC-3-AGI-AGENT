@@ -1,0 +1,72 @@
+{
+  "schema_version": "arc3-kaggle-submission-result-v1",
+  "status": "ERROR",
+  "hds_judgment": "SUSPEND",
+  "evidence_boundary": "One actual ARC-AGI-3 code-competition submission and its terminal Kaggle status. No hidden-game runtime, episode, or score evidence was returned.",
+  "competition": {
+    "name": "arc-prize-2026-arc-agi-3",
+    "submission_route": "Official Kaggle MCP",
+    "tool": "create_code_competition_submission"
+  },
+  "submission": {
+    "ref": 55040966,
+    "created_at_utc": "2026-07-28T00:24:55.823Z",
+    "terminal_status_observed_at_utc": "2026-07-28T01:13:51Z",
+    "description": "GenericAGIRuntime P15 git 19fadde runtime a24a632a",
+    "file_name": "submission.parquet",
+    "status": "ERROR",
+    "public_score": null,
+    "private_score": null,
+    "score_status": "NOT_RETURNED",
+    "total_bytes": 0,
+    "episode_count": 0,
+    "error_description": "A system error. Please try resubmitting to resolve the error and contact Kaggle Support if it persists."
+  },
+  "candidate": {
+    "git_branch": "main",
+    "git_commit_sha": "19fadde22fa92c66c61e96656dea406d55836a14",
+    "remote_commit_verified_before_submission": true,
+    "notebook_owner": "tecchannn",
+    "notebook_slug": "arc3-genericagiruntime-p15",
+    "notebook_version": 4,
+    "notebook_sha256": "0f39eb6b24507a16691780e0e18cf2e62665868e51ec6b75eaebb2075ef2ef38",
+    "runtime_archive_sha256": "a24a632a4eb539711fc0ff6d423348ace33c4713953ef8517791df20e4f64ccd",
+    "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
+    "regular_run_output_sha256": "5e20a6e456396c96d262d94306a634b6bbe0548c0aa0ba40d04e6a7672108837"
+  },
+  "preflight": {
+    "notebook_regular_run": "PASS",
+    "notebook_validation": "17/17 PASS",
+    "local_competition_validation": "10/10 PASS",
+    "full_unit_regression": "552/552 PASS",
+    "integration_regression": "2/2 PASS",
+    "tracked_secret_findings": 0,
+    "current_day_submission_count_before_call": 0,
+    "live_mcp_submission_schema_verified": true
+  },
+  "submission_control": {
+    "create_submission_call_count": 1,
+    "retry_count": 0,
+    "additional_submission_performed": false,
+    "user_daily_limit": 1,
+    "user_daily_limit_consumed": true
+  },
+  "failure_classification": {
+    "category": "DEPENDENCY_UPSTREAM_FAILURE",
+    "basis": [
+      "Kaggle returned the explicit terminal error text 'A system error'.",
+      "The submission retained total_bytes=0.",
+      "Kaggle returned no simulation episodes."
+    ],
+    "official_gateway_runtime_reached": "NOT_EVIDENCED",
+    "agent_regression": "AUDIT_INCONCLUSIVE",
+    "score_interpretation": "No score was produced; this is not a zero score.",
+    "resubmission_disposition": "FORBIDDEN_TODAY_BY_USER_DAILY_LIMIT"
+  },
+  "evidence_files": [
+    "analysis/official/KAGGLE_NOTEBOOK_RUN.json",
+    "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
+    "analysis/official/LOCAL_COMPETITION_VALIDATION.json"
+  ],
+  "next_action": "Do not resubmit on 2026-07-28. On the next user-authorized submission day, first re-read the terminal record and current Kaggle incident state; do not change the candidate solely on this non-diagnostic system error."
+}

@@ -30,7 +30,8 @@
 `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`はblocking受入57件を
 全件PASSして完了しました。P13〜P15はOwnerの明示許可により開始済みです。
 現在は25ゲームのローカルcompetition互換回帰10/10とKaggle Notebook
-version 4通常実行をPASSし、一日一回の実提出前preflight中です。
+version 4通常実行をPASSしています。実提出ref `55040966`は一回だけ実行され、
+Kaggle `ERROR`（system error、scoreなし、episode 0）でP15をSUSPENDしています。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -131,7 +132,9 @@ P12 complete / P13 transition authorized:
   pre-official AGI readiness is PASS
   P13 through P15 are Owner-authorized and in progress
   Kaggle Notebook version 4 regular run is COMPLETE
-  actual submission API call count is 0
+  actual submission API call count is 1
+  submission ref 55040966 is ERROR with no score and no episode
+  P15 HDS judgment is SUSPEND
   O-001 through O-018 are closed by separate GenericAGIRuntime evidence
   KnownSampleStudent remains frozen
   P13 requires an explicit Owner phase-start instruction
@@ -383,12 +386,14 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 ### P13〜P15: 進行中
 
 - P13 official ARC connection: ローカルcompetition互換10/10 PASS、
-  実gateway rerun待ち
+  実gateway到達はsubmission system errorにより未立証
 - P14 Kaggle submission paths: Notebook version 4通常実行・MCP読取PASS
-- P15 actual submission: Owner許可済み、一日一回の一回提出前preflight
+- P15 actual submission: ref `55040966`を一回実行、Kaggle system error、
+  scoreなし・episode 0・再提出0回、HDS `SUSPEND`
 
 P13以降は全P12 blocking gateとユーザーの明示的phase開始指示を満たしている。
-実提出APIはNotebook、出力、当日履歴、live tool schemaを確認後に一回だけ呼ぶ。
+実提出APIは一回だけ呼び、同日の追加提出を禁止する。terminal正本は
+`analysis/official/KAGGLE_SUBMISSION_RESULT.json`とする。
 
 ## 9. 検証規約
 
