@@ -401,21 +401,20 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P10: 全sample完全攻略 — 完了
 - P11: release state固定 — 完了
 - P12: pre-official AGI conformance / genericity — 完了
-- P13: 公式ARC接続 — Owner許可済み、ローカルcompetition互換PASS、
+- P13: 公式ARC接続 — Owner許可済み、逐次ローカルcompetition互換12/12 PASS、
   実gateway到達は未立証
 - P14: Kaggle提出経路 — corrective Notebook version 7通常実行・
-  公式placeholder row/column/type照合・CLI出力取得・MCP読取PASS
-- P15: 実提出 — refs `55040966` / `55043205`はいずれもKaggle `ERROR`、
-  scoreなし・episode 0・total bytes 0。live limitは一枠利用可能。
-  version 5の公式format不一致は立証・是正済みだが、非公開rerun logがないため
-  単一原因とは断定しない。corrective Notebook version 7は通常実行COMPLETE・
-  21/21 PASS・未提出で、Owner再承認までHDS `HOLD`
+  公式placeholder照合・逐次候補23/23・CLI出力取得・MCP読取PASS
+- P15: 実提出 — refs `55040966` / `55043205` / `55045360`はすべて
+  Kaggle `ERROR`、scoreなし・episode 0・total bytes 0。version 7で
+  format単独原因を棄却し、全ゲーム同時thread競合を逐次化した。
+  逐次候補は25/25、12/12、Notebook 23/23をPASSし、Ownerの一回再提出許可済み
 
 現行順序は
 `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`、
 P4〜P9の完了証拠は各phase実装文書を参照します。P10/P11の凍結証拠と
 P12の57/57受入証拠は各phase正本を参照します。P13以降はOwnerの
-明示的phase開始指示を受けて進行中です。実提出は二回実行済みです。
-live limitは一枠利用可能ですが、corrective Notebook version 7に対する
-Ownerの新しい明示許可なしに再提出しません。terminal正本は
+明示的phase開始指示を受けて進行中です。実提出は三回実行済みです。
+live limitは一枠利用可能で、逐次候補の一回再提出はOwnerが明示許可しています。
+別versionの重複提出は行いません。terminal正本は
 `analysis/official/KAGGLE_SUBMISSION_RESULT.json`です。

@@ -1,6 +1,6 @@
 {
   "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
-  "build_report_sha256": "0aebea782edb655b931d4389621d4612f6f52dbc91003c5134b2a14135174212",
+  "build_report_sha256": "568f0bb0e72ff181931937d6bb3c90dfc520bf9f9546da5084f5aaa4a36e11a8",
   "checks": {
     "NB-001_SOURCE_REBUILD_EXACT": true,
     "NB-002_METADATA_REBUILD_EXACT": true,
@@ -22,7 +22,9 @@
     "NB-018_OFFICIAL_FOUR_CODE_CELL_LAYOUT": true,
     "NB-019_RERUN_AND_PLACEHOLDER_SEPARATE": true,
     "NB-020_NO_UNDOCUMENTED_RUNTIME_LIMIT": true,
-    "NB-021_NOTEBOOK_FORMAT_MATCHES_OFFICIAL": true
+    "NB-021_NOTEBOOK_FORMAT_MATCHES_OFFICIAL": true,
+    "NB-022_SEQUENTIAL_SINGLE_ACTIVE_GAME": true,
+    "NB-023_RESOURCE_LIMITS_NOT_SELF_IMPOSED": true
   },
   "compile_failures": [],
   "failed_check_ids": [],
@@ -31,18 +33,19 @@
     "cell_count": 4,
     "id": "tecchannn/arc3-genericagiruntime-p15",
     "path": "kaggle_notebooks/submission.ipynb",
-    "sha256": "71dae3e42532834543b3a40d2addde6949840558e3b341ba6942c55b2fa1fb6c",
-    "size_bytes": 78268
+    "sha256": "616f7bdaae4534155d5f3a738c0056f947e5e985b8c1c51b2be2e174e47f09c7",
+    "size_bytes": 81692
   },
   "notebook_secret_findings": [],
   "runtime_archive": {
     "action_budget": 128,
-    "archive_sha256": "a24a632a4eb539711fc0ff6d423348ace33c4713953ef8517791df20e4f64ccd",
-    "archive_size_bytes": 49461,
+    "archive_sha256": "dce9f43448e9837c5a0bf61a99f46f353228de63e3a1b6ef8ecdf0d238ce33fb",
+    "archive_size_bytes": 51981,
     "known_sample_policy_included": false,
     "member_names": [
       "ARC3_KAGGLE_RUNTIME_MANIFEST.json",
       "arc3_agi_agent/__init__.py",
+      "arc3_agi_agent/generic_competition_runner.py",
       "arc3_agi_agent/generic_compute.py",
       "arc3_agi_agent/generic_env.py",
       "arc3_agi_agent/generic_hds.py",
@@ -56,6 +59,7 @@
       "arc3_agi_agent/verification.py"
     ],
     "module_sha256": {
+      "generic_competition_runner.py": "bddf6b98a5e7859a99e2ae92b817428811d555680212b917d5461c0e0c9a4a17",
       "generic_compute.py": "a673a92fd0b40dd987a984ee50b3166d744edc623aec8f2b33d26d9eaed6d711",
       "generic_env.py": "42a999d1118f53cbc6c544a9ef20930cb73ca88c2208e7d659403a8df28aff09",
       "generic_hds.py": "c8e905b29493ea684cba6c4465387963f65b8771376e8cc2dd03e0a0caa7f2f2",
@@ -71,6 +75,7 @@
     "runtime_identity_routing_included": false,
     "runtime_modules": [
       "generic_compute.py",
+      "generic_competition_runner.py",
       "generic_env.py",
       "generic_hds.py",
       "generic_memory.py",
@@ -91,7 +96,7 @@
     "stderr": "",
     "stdout": "WIN:2:True:False"
   },
-  "schema_version": "arc3-kaggle-notebook-validation-v3",
+  "schema_version": "arc3-kaggle-notebook-validation-v4",
   "status": "PASS",
   "submission_api_call_count": 0,
   "tracked_secret_findings": []

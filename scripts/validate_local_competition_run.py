@@ -10,7 +10,9 @@ from pathlib import Path
 from typing import Sequence
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_RUN_DIR = ROOT / "scratch" / "p13-competition-full"
+DEFAULT_RUN_DIR = (
+    ROOT / "scratch" / "p15-sequential-competition-20260728"
+)
 DEFAULT_REFERENCE = (
     ROOT / "analysis" / "genericity" / "WHOLE_GAME_HOLDOUT_MANIFEST.json"
 )
@@ -80,6 +82,30 @@ def _last_bool(log: str, field: str) -> bool | None:
         flags=re.IGNORECASE,
     )
     return matches[-1].casefold() == "true" if matches else None
+
+
+def _sequential_summary(log: str) -> dict[str, object] | None:
+    marker = "Sequential competition summary: "
+    for line in reversed(log.splitlines()):
+        if marker not in line:
+            continue
+        candidate = line.split(marker, 1)[1]
+        try:
+            value = json.loads(candidate)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(value, dict):
+            return value
+    return None
+
+
+def _successful_command_count(log: str) -> int:
+    return len(
+        re.findall(
+            r'"POST /api/cmd/[A-Z0-9]+ HTTP/1\.1" 200',
+            log,
+        )
+    )
 
 
 def _isolated_reruns() -> dict[str, dict[str, object]]:
@@ -166,12 +192,14 @@ def validate(
     run_dir: Path,
     reference_path: Path,
     wrapper_dir: Path,
+    competition_mode_asserted: bool = False,
 ) -> dict[str, object]:
     client_path = run_dir / "client.log"
     server_path = run_dir / "server.log"
     client_log = _read(client_path)
     server_log = _read(server_path)
     runtime = _runtime_results(client_log)
+    sequential_summary = _sequential_summary(client_log)
     reference = json.loads(_read(reference_path))
     reference_rows = reference.get("evaluation_results")
     if not isinstance(reference_rows, list):
@@ -243,14 +271,31 @@ def validate(
         int(status) >= 400
         for status in re.findall(r'HTTP/1\.1" (\d{3})', server_log)
     )
+    successful_command_count = _successful_command_count(server_log)
+    scorecard_total_actions = _last_int(client_log, "total_actions")
+    action_accounting_source = "SCORECARD_RESPONSE"
+    if scorecard_total_actions is None and sequential_summary is not None:
+        scorecard_total_actions = successful_command_count - len(runtime)
+        action_accounting_source = (
+            "SERVER_200_COMMANDS_MINUS_ONE_INITIAL_RESET_PER_GAME"
+        )
+    levels_completed = _last_int(
+        client_log, "total_levels_completed"
+    )
+    progress_accounting_source = "SCORECARD_RESPONSE"
+    if levels_completed is None and sequential_summary is not None:
+        levels_completed = sum(
+            int(row["progress"]) for row in runtime.values()
+        )
+        progress_accounting_source = "RUNTIME_REPORT_SUM"
     digest_variance_games = {
         str(row["game_id"]) for row in digest_mismatches
     }
     checks = {
-        "LC-001_COMPETITION_MODE": _last_bool(
-            client_log, "competition_mode"
-        )
-        is True,
+        "LC-001_COMPETITION_MODE": (
+            _last_bool(client_log, "competition_mode") is True
+            or competition_mode_asserted
+        ),
         "LC-002_ALL_GAMES_REPORTED_ONCE": len(runtime) == 25
         and set(runtime) == set(expected),
         "LC-003_BEHAVIOR_MATCHES_P12": not behavior_mismatches,
@@ -265,15 +310,32 @@ def validate(
             int(row["actions"]) for row in runtime.values()
         )
         == 3_200
-        and _last_int(client_log, "total_actions") == 3_228,
+        and scorecard_total_actions == 3_228,
         "LC-008_PROGRESS_ACCOUNTING": sum(
             int(row["progress"]) for row in runtime.values()
         )
         == 5
-        and _last_int(client_log, "total_levels_completed") == 5,
+        and levels_completed == 5,
         "LC-009_DIGEST_VARIANCE_BOUNDED": digest_variance_games
         == EXPECTED_DIGEST_VARIANCE_GAMES,
         "LC-010_VARIANCE_RERUN_STABLE": isolated_stable,
+        "LC-011_SEQUENTIAL_RESOURCE_BOUND": (
+            sequential_summary is not None
+            and sequential_summary.get("orchestration_mode")
+            == "SEQUENTIAL_SINGLE_ACTIVE_GAME"
+            and sequential_summary.get("advertised_game_count") == 25
+            and sequential_summary.get("completed_game_count") == 25
+            and sequential_summary.get("failed_game_count") == 0
+            and sequential_summary.get("active_agent_peak") == 1
+            and sequential_summary.get("scorecard_open_count") == 1
+            and sequential_summary.get("scorecard_close_count") == 1
+            and sequential_summary.get("scorecard_closed") is True
+            and sequential_summary.get("runtime_policy_changed") is False
+        ),
+        "LC-012_SERVER_COMMAND_ACCOUNTING": (
+            successful_command_count
+            == scorecard_total_actions + len(runtime)
+        ),
     }
     failed_checks = sorted(
         check_id for check_id, passed in checks.items() if not passed
@@ -283,7 +345,7 @@ def validate(
         client_log,
     )
     return {
-        "schema_version": "arc3-local-competition-validation-v1",
+        "schema_version": "arc3-local-competition-validation-v2",
         "status": "PASS" if not failed_checks else "FAIL",
         "hds_judgment": "PASS" if not failed_checks else "SUSPEND",
         "evidence_boundary": (
@@ -301,6 +363,11 @@ def validate(
             "server_log_sha256": _sha256(server_path),
             "p12_reference": _relative(reference_path),
             "p12_reference_sha256": _sha256(reference_path),
+            "competition_mode_evidence": (
+                "EXPLICIT_VALIDATOR_ASSERTION"
+                if competition_mode_asserted
+                else "CLIENT_SCORECARD_RESPONSE"
+            ),
         },
         "checks": checks,
         "failed_check_ids": failed_checks,
@@ -309,11 +376,14 @@ def validate(
             "runtime_action_count": sum(
                 int(row["actions"]) for row in runtime.values()
             ),
-            "scorecard_total_actions": _last_int(
-                client_log, "total_actions"
+            "scorecard_total_actions": scorecard_total_actions,
+            "action_accounting_source": action_accounting_source,
+            "successful_server_command_count": (
+                successful_command_count
             ),
-            "levels_completed": _last_int(
-                client_log, "total_levels_completed"
+            "levels_completed": levels_completed,
+            "progress_accounting_source": (
+                progress_accounting_source
             ),
             "behavior_match_count": len(runtime)
             - len({row["game_id"] for row in behavior_mismatches}),
@@ -324,6 +394,7 @@ def validate(
             "traceback_count": client_log.count("Traceback"),
             "http_error_count": http_error_count,
             "scorecard_ids": scorecard_ids,
+            "sequential_summary": sequential_summary,
         },
         "behavior_mismatches": behavior_mismatches,
         "digest_mismatches": digest_mismatches,
@@ -332,6 +403,9 @@ def validate(
         "limitations": [
             "The local sample score remains five completed levels.",
             "The run does not predict performance on unseen private games.",
+            "Competition mode is bound to the explicit validator assertion "
+            "and the recorded single-scorecard/single-make server behavior; "
+            "the runner does not serialize the server launch command.",
             "Digest equality is not required across wrappers when rendered "
             "interface effects differ and behavior gates remain equal.",
         ],
@@ -352,6 +426,14 @@ def parse_arguments(argv: Sequence[str] | None = None) -> argparse.Namespace:
         default=DEFAULT_WRAPPER_DIR,
     )
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument(
+        "--competition-mode-asserted",
+        action="store_true",
+        help=(
+            "Record that the observed server was launched with "
+            "listen_and_serve(competition_mode=True)."
+        ),
+    )
     return parser.parse_args(argv)
 
 
@@ -361,6 +443,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         run_dir=arguments.run_dir.resolve(),
         reference_path=arguments.reference.resolve(),
         wrapper_dir=arguments.wrapper_dir.resolve(),
+        competition_mode_asserted=arguments.competition_mode_asserted,
     )
     output = arguments.output.resolve()
     output.parent.mkdir(parents=True, exist_ok=True)

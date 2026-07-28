@@ -19,6 +19,7 @@ from build_kaggle_submission import (
     AGENT_SOURCE,
     COMPETITION_SLUG,
     DEFAULT_OUTPUT_DIR,
+    PACKAGE_ROOT,
     RUNTIME_MODULES,
     build_metadata,
     build_notebook,
@@ -210,6 +211,9 @@ def validate(
             compile_failures.append(f"{index}:{error}")
 
     runtime_archive, runtime_manifest = build_runtime_archive()
+    runner_source = (PACKAGE_ROOT / "generic_competition_runner.py").read_text(
+        encoding="utf-8"
+    )
     import_smoke = _runtime_import_smoke(runtime_archive)
     archive_members: list[str]
     with tempfile.TemporaryDirectory(
@@ -279,9 +283,7 @@ def validate(
                 "KAGGLE_IS_COMPETITION_RERUN",
                 "http://gateway:8001/api/games",
                 "OPERATION_MODE=online",
-                "main.py",
-                "--agent",
-                "genericagi",
+                "arc3_agi_agent.generic_competition_runner",
             )
         ),
         "NB-010_OFFICIAL_OFFLINE_WHEEL_CONTRACT": (
@@ -385,9 +387,25 @@ def validate(
             notebook.get("nbformat") == 4
             and notebook.get("nbformat_minor") == 4
         ),
+        "NB-022_SEQUENTIAL_SINGLE_ACTIVE_GAME": (
+            "SEQUENTIAL_SINGLE_ACTIVE_GAME" in runner_source
+            and "for game_index, game_id in enumerate(game_ids)"
+            in runner_source
+            and "active_agent_peak" in runner_source
+            and "Thread(" not in runner_source
+            and "Swarm(" not in competition_source
+            and '"main.py"' not in competition_source
+        ),
+        "NB-023_RESOURCE_LIMITS_NOT_SELF_IMPOSED": (
+            "setrlimit" not in sources
+            and "RLIMIT_AS" not in sources
+            and "setrlimit" not in runner_source
+            and "RLIMIT_AS" not in runner_source
+            and "record=True" not in runner_source
+        ),
     }
     return {
-        "schema_version": "arc3-kaggle-notebook-validation-v3",
+        "schema_version": "arc3-kaggle-notebook-validation-v4",
         "status": "PASS" if all(checks.values()) else "FAIL",
         "checks": checks,
         "failed_check_ids": [

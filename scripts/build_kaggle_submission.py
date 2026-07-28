@@ -25,6 +25,7 @@ DEFAULT_NOTEBOOK_SLUG = "arc3-genericagiruntime-p15"
 ACTION_BUDGET = 128
 RUNTIME_MODULES = (
     "generic_compute.py",
+    "generic_competition_runner.py",
     "generic_env.py",
     "generic_hds.py",
     "generic_memory.py",
@@ -323,7 +324,11 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                 run_env = os.environ.copy()
                 run_env["MPLBACKEND"] = "agg"
                 subprocess.run(
-                    [sys.executable, "main.py", "--agent", "genericagi"],
+                    [
+                        sys.executable,
+                        "-m",
+                        "arc3_agi_agent.generic_competition_runner",
+                    ],
                     cwd=framework_dst,
                     env=run_env,
                     check=True,

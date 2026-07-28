@@ -51,6 +51,9 @@ def test_kaggle_notebook_matches_official_submission_shape() -> None:
     competition = sources["execute-generic-runtime"]
     assert "KAGGLE_IS_COMPETITION_RERUN" in competition
     assert "to_parquet" not in competition
+    assert "arc3_agi_agent.generic_competition_runner" in competition
+    assert '"main.py"' not in competition
+    assert '"--agent"' not in competition
     subprocess_calls = [
         node
         for node in ast.walk(ast.parse(competition))
@@ -74,3 +77,4 @@ def test_kaggle_notebook_matches_official_submission_shape() -> None:
     )
     assert "dry-run" not in placeholder
     assert BUILDER.ACTION_BUDGET == 128
+    assert "generic_competition_runner.py" in BUILDER.RUNTIME_MODULES

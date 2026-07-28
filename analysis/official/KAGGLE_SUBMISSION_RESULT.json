@@ -1,8 +1,8 @@
 {
-  "schema_version": "arc3-kaggle-submission-result-v3",
-  "status": "ERROR_FORMAT_CORRECTIVE_VERSION_7_READY_NOT_SUBMITTED",
-  "hds_judgment": "HOLD",
-  "evidence_boundary": "Two accepted historical ARC-AGI-3 submissions, two failed current submissions, their Kaggle terminal objects, the official pinned Notebook and placeholder output, historical repository bootstrap evidence, and corrected Notebook version 7 normal-run output. Kaggle exposed no private rerun log, traceback, or episode for either current failure.",
+  "schema_version": "arc3-kaggle-submission-result-v4",
+  "status": "THREE_ZERO_BYTE_ERRORS_SEQUENTIAL_CORRECTION_READY_NOT_SUBMITTED",
+  "hds_judgment": "PASS",
+  "evidence_boundary": "Two accepted historical ARC-AGI-3 submissions, three failed current submissions, their Kaggle terminal objects, the official pinned Notebook and placeholder output, historical repository bootstrap evidence, corrected Notebook version 7 normal-run and private-rerun result, and the exact sequential local competition-mode correction. Kaggle exposed no private rerun log, traceback, or episode for the current failures.",
   "competition": {
     "name": "arc-prize-2026-arc-agi-3",
     "output_file": "submission.parquet",
@@ -45,6 +45,20 @@
       "created_at_utc": "2026-07-28T02:33:21.277Z",
       "description": "GenericAGIRuntime P15 fix git 5464753 runtime a24a632a",
       "notebook_version": 5,
+      "submission_route": "Kaggle CLI",
+      "status": "ERROR",
+      "public_score": null,
+      "private_score": null,
+      "score_status": "NOT_RETURNED",
+      "total_bytes": 0,
+      "episode_count": 0,
+      "error_description": "A system error. Please try resubmitting to resolve the error and contact Kaggle Support if it persists."
+    },
+    {
+      "ref": 55045360,
+      "created_at_utc": "2026-07-28T04:43:31.867Z",
+      "description": "GenericAGIRuntime P15 official-format fix git d71fb08 runtime a24a632a",
+      "notebook_version": 7,
       "submission_route": "Kaggle CLI",
       "status": "ERROR",
       "public_score": null,
@@ -97,7 +111,7 @@
     "format_nonconformance_proven_as_single_system_error_cause": false
   },
   "corrective_candidate": {
-    "state": "KAGGLE_VERSION_7_COMPLETE_NOT_SUBMITTED",
+    "state": "KAGGLE_VERSION_7_PRIVATE_RERUN_ERROR_SUPERSEDED_BY_LOCAL_SEQUENTIAL_CORRECTION",
     "notebook_owner": "tecchannn",
     "notebook_slug": "arc3-genericagiruntime-p15",
     "notebook_version": 7,
@@ -116,11 +130,29 @@
       "official_arrow_types_equal": true,
       "source_round_trip_equal": true
     },
+    "private_rerun": {
+      "submission_ref": 55045360,
+      "status": "ERROR",
+      "total_bytes": 0,
+      "episode_count": 0,
+      "public_score": null
+    },
+    "sequential_successor": {
+      "state": "LOCAL_PACKAGE_READY_KAGGLE_VERSION_NOT_YET_CREATED",
+      "orchestration_mode": "SEQUENTIAL_SINGLE_ACTIVE_GAME",
+      "active_agent_peak": 1,
+      "notebook_sha256": "616f7bdaae4534155d5f3a738c0056f947e5e985b8c1c51b2be2e174e47f09c7",
+      "runtime_archive_sha256": "dce9f43448e9837c5a0bf61a99f46f353228de63e3a1b6ef8ecdf0d238ce33fb",
+      "runtime_policy_changed": false,
+      "action_budget_per_game": 128,
+      "local_competition_checks": "12/12 PASS",
+      "notebook_checks": "23/23 PASS"
+    },
     "local_validation": {
-      "notebook_checks": "21/21 PASS",
+      "notebook_checks": "23/23 PASS",
       "packaged_runtime_import": "PASS",
-      "focused_regression": "4/4 PASS",
-      "full_unit_regression": "553/553 PASS",
+      "focused_regression": "5/5 PASS",
+      "full_unit_regression": "554/554 PASS",
       "integration_regression": "2/2 PASS",
       "ruff": "PASS",
       "tracked_secret_findings": 0,
@@ -128,39 +160,44 @@
     }
   },
   "submission_control": {
-    "actual_submission_call_count": 2,
-    "version_7_submission_call_count": 0,
-    "additional_submission_performed_in_corrective_work_block": false,
+    "actual_submission_call_count": 3,
+    "version_7_submission_call_count": 1,
+    "additional_submission_performed_in_corrective_work_block": true,
     "user_daily_limit": 1,
-    "live_limit_observed_at_utc": "2026-07-28T04:22:00Z",
+    "live_limit_observed_at_utc": "2026-07-28T08:00:11.846863Z",
     "live_limit_response": {
+      "numToday": 0,
       "numTotal": 2,
-      "numAllowedNow": 1
+      "numAllowedNow": 1,
+      "limitedByTotal": false
     },
-    "interpretation": "Both ERROR submissions were refunded and one live slot remains. Availability is not authorization to consume it."
+    "interpretation": "All three ERROR submissions were refunded and one live slot remains. The user explicitly authorized one resubmission after correction."
   },
   "failure_classification": {
-    "category": "DOCUMENTATION_AND_FORMAT_MISMATCH_WITH_ROOT_CAUSE_NOT_FULLY_PROVEN",
+    "category": "FORMAT_ONLY_CAUSE_REJECTED_CPU_THREAD_FANOUT_CONTENTION_LOCALLY_REPRODUCED",
     "proven": [
-      "Both current submissions ended ERROR with no score and total_bytes=0.",
+      "All three current submissions ended ERROR with no score and total_bytes=0.",
       "The saved version 5 placeholder row differed from the official pinned Notebook contract.",
       "The version 5 validator marked a compile-only normal branch PASS without validating the official placeholder values.",
-      "Corrected version 7 now emits the exact official row, column order, and Arrow types in a COMPLETE Kaggle normal run."
+      "Corrected version 7 now emits the exact official row, column order, and Arrow types in a COMPLETE Kaggle normal run.",
+      "Corrected-format submission ref 55045360 still failed with zero bytes, rejecting format mismatch as a sufficient cause.",
+      "The concurrent public competition-mode run held 25 CPU-heavy agents at 0.05-0.11 fps; the sequential correction completed 25/25 with no errors, active-agent peak 1, unchanged behavior, and one closed scorecard."
     ],
     "not_proven": [
-      "Kaggle did not expose the private rerun traceback, so the placeholder mismatch cannot yet be called the sole cause of either system error.",
+      "Kaggle did not expose the private rerun traceback or native exit status.",
       "No limit shorter than the documented nine hours is assumed.",
-      "Version 7 has not reached the competition gateway and has no official score."
+      "The sequential correction has not yet reached the competition gateway and has no official score."
     ],
-    "probable_failure_boundary": "COMPETITION_RERUN_OR_GATEWAY_OUTPUT_COLLECTION_BEFORE_COLLECTIBLE_PARQUET",
-    "official_gateway_runtime_reached": "NOT_EVIDENCED",
-    "score_interpretation": "The two failed current submissions produced no score; they are not zero-score results.",
-    "resubmission_disposition": "VERSION_7_READY_FOR_EXPLICIT_OWNER_DECISION"
+    "probable_failure_boundary": "CPU_HEAVY_RUNTIME_ALL_GAME_THREAD_FANOUT_BEFORE_SCORECARD_CLOSURE",
+    "official_gateway_runtime_reached": "NOT_EXPOSED_BY_KAGGLE",
+    "score_interpretation": "The three failed current submissions produced no score; they are not zero-score results.",
+    "resubmission_disposition": "SEQUENTIAL_SUCCESSOR_READY_FOR_ONE_AUTHORIZED_SUBMISSION"
   },
   "evidence_files": [
     "analysis/official/KAGGLE_OFFICIAL_FORMAT_AUDIT.json",
     "analysis/official/KAGGLE_NOTEBOOK_RUN.json",
     "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
+    "analysis/official/KAGGLE_HIDDEN_RERUN_ROOT_CAUSE_AUDIT.json",
     "analysis/official/LOCAL_COMPETITION_VALIDATION.json",
     "kaggle_notebooks/build-report.json",
     "kaggle_notebooks/submission.ipynb"
@@ -171,5 +208,5 @@
     "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/727119",
     "https://docs.arcprize.org/toolkit/competition_mode"
   ],
-  "next_action": "Do not submit automatically. After full repository regression and direct main push, request an explicit decision to spend the one available daily slot on Notebook version 7."
+  "next_action": "Complete full repository regression, push the exact source tree to main, create and verify the sequential Kaggle Notebook version, recheck the live limit, and submit that exact version once under the user's explicit authorization."
 }

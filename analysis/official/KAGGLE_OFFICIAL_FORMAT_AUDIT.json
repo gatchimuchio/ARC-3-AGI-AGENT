@@ -1,20 +1,20 @@
 {
-  "schema_version": "arc3-kaggle-official-format-audit-v1",
-  "status": "KAGGLE_REGULAR_FORMAT_PASS_ACTUAL_SUBMISSION_HOLD",
-  "hds_judgment": "HOLD",
+  "schema_version": "arc3-kaggle-official-format-audit-v2",
+  "status": "FORMAT_PASS_FORMAT_ONLY_CAUSE_REJECTED_SEQUENTIAL_CORRECTION_READY",
+  "hds_judgment": "PASS",
   "work_block": {
-    "X": "ARC-AGI-3 official pinned Notebook, its regular-run parquet, two accepted historical submissions, two failed current submissions, and the generated GenericAGIRuntime Notebook.",
+    "X": "ARC-AGI-3 official pinned Notebook, its regular-run parquet, two accepted historical submissions, three failed current submissions, and the generated GenericAGIRuntime Notebook.",
     "R": "Compare only the accepted Notebook/output contract and lifecycle. Historical runtime duration and score are not used to infer undocumented limits or to select the current runtime policy.",
     "Mc": "Accept the correction locally only when the generated Notebook has the official four-code-cell order, requires the official offline wheels whenever the bundle is mounted and fails if they are absent during rerun, keeps competition and placeholder paths separate, emits the exact official placeholder row and columns, leaves competition output to the gateway, adds no runtime limit, and has no secret or submission side effect.",
     "non_goals": [
       "Do not infer a limit shorter than the official nine-hour Notebook limit.",
       "Do not change the 128-action GenericAGIRuntime budget.",
       "Do not restore task/game/level routing, replay, fixed action sequences, literal coordinates, Teacher, source state, or hidden state.",
-      "Do not perform another competition submission in this work block."
+      "Do not submit an unpushed or unverified Notebook version."
     ],
     "evidence_boundary": "The accepted submission records expose status, score, file name, and collected bytes but not their private rerun logs or original private Notebook source. The repository commit immediately following those submissions preserves the same official bootstrap and placeholder contract, but is not claimed to be byte-identical to the submitted private Notebook.",
-    "falsification_condition": "A regular Kaggle version generated from the corrected source fails to produce the exact official placeholder contract, or a later authorized competition rerun still returns zero collected bytes with the corrected contract.",
-    "regression_line": "GenericAGIRuntime package digest and 128-action budget remain unchanged; only the Kaggle Notebook transport/placeholder contract and its validator change."
+    "falsification_condition": "A regular Kaggle version generated from the corrected source fails to produce the exact official placeholder contract, or the sequential correction fails the local competition-mode regression.",
+    "regression_line": "GenericAGIRuntime agent source and 128-action policy remain unchanged; competition orchestration is sequentialized after the official-format-only hypothesis was falsified."
   },
   "official_pinned_notebook": {
     "owner_slug": "inversion/arc3-sample-submission-random-agent",
@@ -92,6 +92,15 @@
       "ref": 55043205,
       "created_at_utc": "2026-07-28T02:33:21.277Z",
       "notebook_version": 5,
+      "status": "ERROR",
+      "file_name": "submission.parquet",
+      "public_score": null,
+      "total_bytes": 0
+    },
+    {
+      "ref": 55045360,
+      "created_at_utc": "2026-07-28T04:43:31.867Z",
+      "notebook_version": 7,
       "status": "ERROR",
       "file_name": "submission.parquet",
       "public_score": null,
@@ -194,11 +203,12 @@
   "findings": {
     "format_nonconformance_proven": true,
     "single_failure_root_cause_proven": false,
-    "reason_single_root_not_proven": "Kaggle did not expose private rerun logs or a traceback for either zero-byte failure.",
+    "format_only_root_cause_rejected": true,
+    "reason_format_only_rejected": "Corrected Notebook version 7 matched the official lifecycle and placeholder contract but submission ref 55045360 still returned the same zero-byte system error.",
     "duration_hypothesis": "WITHDRAWN",
     "duration_basis": "The official code requirements publish a nine-hour CPU/GPU Notebook limit; no shorter limit was found and failure elapsed time is not used as evidence.",
-    "most_specific_proven_failure_boundary": "The failed versions did not yield a collectible gateway result and their saved regular-run placeholder/Notebook contract differed from the official accepted contract.",
-    "next_gate": "Keep actual competition submission suspended until the user explicitly authorizes version 7. A successful competition rerun with nonzero collected bytes is still required to prove that the two prior zero-byte system errors were caused by the corrected format mismatch."
+    "most_specific_proven_failure_boundary": "The official-format rerun still failed before collectible gateway output. The remaining locally reproduced boundary was the CPU-heavy runtime's all-game thread fan-out; sequential execution closed all 25 public environments under one scorecard with unchanged behavior.",
+    "next_gate": "Create a new Kaggle version containing the sequential runner and submit that exact version once after source push and artifact verification."
   },
   "sources": [
     "https://www.kaggle.com/code/inversion/arc3-sample-submission-random-agent",
@@ -206,6 +216,7 @@
     "https://docs.arcprize.org/toolkit/competition_mode",
     "historical repository commit 913e6d0:scripts/build_kaggle_notebook.py",
     "analysis/official/KAGGLE_NOTEBOOK_RUN.json",
-    "analysis/official/KAGGLE_SUBMISSION_RESULT.json"
+    "analysis/official/KAGGLE_SUBMISSION_RESULT.json",
+    "analysis/official/KAGGLE_HIDDEN_RERUN_ROOT_CAUSE_AUDIT.json"
   ]
 }

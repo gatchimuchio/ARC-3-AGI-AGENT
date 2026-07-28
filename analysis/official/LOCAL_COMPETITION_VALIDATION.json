@@ -10,7 +10,9 @@
     "LC-007_ACTION_ACCOUNTING": true,
     "LC-008_PROGRESS_ACCOUNTING": true,
     "LC-009_DIGEST_VARIANCE_BOUNDED": true,
-    "LC-010_VARIANCE_RERUN_STABLE": true
+    "LC-010_VARIANCE_RERUN_STABLE": true,
+    "LC-011_SEQUENTIAL_RESOURCE_BOUND": true,
+    "LC-012_SERVER_COMMAND_ACCOUNTING": true
   },
   "digest_mismatches": [
     {
@@ -28,12 +30,13 @@
   "failed_check_ids": [],
   "hds_judgment": "PASS",
   "inputs": {
-    "client_log": "scratch/p13-competition-full/client.log",
-    "client_log_sha256": "618c93bd6ffe8b8d49b857f90699d0088e383c238f8b4b61e0d4f5e332366888",
+    "client_log": "scratch/p15-sequential-competition-20260728/client.log",
+    "client_log_sha256": "21e193b079f4c90e733d2ba031977ee563ac83c1ad9435d289f94bbabada1582",
+    "competition_mode_evidence": "EXPLICIT_VALIDATOR_ASSERTION",
     "p12_reference": "analysis/genericity/WHOLE_GAME_HOLDOUT_MANIFEST.json",
     "p12_reference_sha256": "5986e9f63971d40b493c02f18de4663e2df0257cdef75c1064cbf5862ed85c39",
-    "server_log": "scratch/p13-competition-full/server.log",
-    "server_log_sha256": "da8954b832ed000e5ac4453fdeb8f80360d3b804ec20e1551f80b90305515ff8"
+    "server_log": "scratch/p15-sequential-competition-20260728/server.log",
+    "server_log_sha256": "874e0f9b19f3fdc87c15c59ac7b03c4c00b10d24c33a097652e94281d7f538ea"
   },
   "isolated_variance_reruns": {
     "bp35-0a0ad940": {
@@ -64,27 +67,44 @@
   "limitations": [
     "The local sample score remains five completed levels.",
     "The run does not predict performance on unseen private games.",
+    "Competition mode is bound to the explicit validator assertion and the recorded single-scorecard/single-make server behavior; the runner does not serialize the server launch command.",
     "Digest equality is not required across wrappers when rendered interface effects differ and behavior gates remain equal."
   ],
   "results": {
+    "action_accounting_source": "SERVER_200_COMMANDS_MINUS_ONE_INITIAL_RESET_PER_GAME",
     "behavior_match_count": 25,
     "digest_match_count": 23,
     "http_error_count": 0,
     "levels_completed": 5,
+    "progress_accounting_source": "RUNTIME_REPORT_SUM",
     "runtime_action_count": 3200,
     "runtime_crash_count": 0,
     "runtime_game_count": 25,
     "scorecard_ids": [
-      "99e5557b-2710-4f52-a2d3-88dfc13c38b6"
+      "499c8a96-d750-41e8-8574-e119451469ad"
     ],
     "scorecard_total_actions": 3228,
+    "sequential_summary": {
+      "active_agent_peak": 1,
+      "advertised_game_count": 25,
+      "completed_game_count": 25,
+      "failed_game_count": 0,
+      "orchestration_mode": "SEQUENTIAL_SINGLE_ACTIVE_GAME",
+      "peak_rss_mb": null,
+      "runtime_policy_changed": false,
+      "schema_version": "arc3-generic-competition-runner-v1",
+      "scorecard_close_count": 1,
+      "scorecard_closed": true,
+      "scorecard_open_count": 1
+    },
+    "successful_server_command_count": 3253,
     "traceback_count": 0
   },
   "run_window_local": {
-    "end": "2026-07-28 08:29:08,694",
-    "start": "2026-07-28 07:45:44,800"
+    "end": "2026-07-28 16:34:15,586",
+    "start": "2026-07-28 16:07:50"
   },
-  "schema_version": "arc3-local-competition-validation-v1",
+  "schema_version": "arc3-local-competition-validation-v2",
   "status": "PASS",
   "wrapper_variance": {
     "behavior_fields_equal": true,
