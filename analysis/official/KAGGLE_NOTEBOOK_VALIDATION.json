@@ -1,6 +1,6 @@
 {
   "agent_sha256": "58304e5f46a25f36abb1c916c8903fff01342d2e35a1445755e317d3f8155f2e",
-  "build_report_sha256": "23e58b510079aeeda2e5128a3fc93dd265d34ffad7feccb3942d52ce9abe09f5",
+  "build_report_sha256": "9bef3cf978fce9ef86d4b0e185c4ca70a697679fe0912904c25c3436bd83a1c3",
   "checks": {
     "NB-001_SOURCE_REBUILD_EXACT": true,
     "NB-002_METADATA_REBUILD_EXACT": true,
@@ -12,7 +12,7 @@
     "NB-008_COMPETITION_SOURCE_EXACT": true,
     "NB-009_GATEWAY_RERUN_CONTRACT": true,
     "NB-010_OFFLINE_WHEELS_PINNED": true,
-    "NB-011_OUTPUT_FAIL_CLOSED": true,
+    "NB-011_GATEWAY_OUTPUT_NOT_PREEMPTED": true,
     "NB-012_NO_SUBMISSION_SIDE_EFFECT": true,
     "NB-013_NO_EXTERNAL_ARC_OR_LLM_ENDPOINT": true,
     "NB-014_NO_SECRET": true,
@@ -27,8 +27,8 @@
     "cell_count": 4,
     "id": "tecchannn/arc3-genericagiruntime-p15",
     "path": "kaggle_notebooks/submission.ipynb",
-    "sha256": "0f39eb6b24507a16691780e0e18cf2e62665868e51ec6b75eaebb2075ef2ef38",
-    "size_bytes": 79931
+    "sha256": "185d4db8773df19aa140dec935ddbdd2fbd6a9f953750299d7f6597739544ad1",
+    "size_bytes": 80036
   },
   "notebook_secret_findings": [],
   "runtime_archive": {
@@ -87,7 +87,7 @@
     "stderr": "",
     "stdout": "WIN:2:True:False"
   },
-  "schema_version": "arc3-kaggle-notebook-validation-v1",
+  "schema_version": "arc3-kaggle-notebook-validation-v2",
   "status": "PASS",
   "submission_api_call_count": 0,
   "tracked_secret_findings": []

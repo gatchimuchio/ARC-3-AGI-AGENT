@@ -1,5 +1,5 @@
 {
-  "schema_version": "arc3-kaggle-notebook-run-v1",
+  "schema_version": "arc3-kaggle-notebook-run-v2",
   "status": "PASS",
   "hds_judgment": "PASS",
   "evidence_boundary": "Kaggle regular notebook execution and output validation; no competition submission was created.",
@@ -7,7 +7,7 @@
     "owner": "tecchannn",
     "slug": "arc3-genericagiruntime-p15",
     "kernel_id": 128841040,
-    "version": 4,
+    "version": 5,
     "url": "https://www.kaggle.com/code/tecchannn/arc3-genericagiruntime-p15",
     "session_status": "COMPLETE",
     "is_private": true,
@@ -16,8 +16,8 @@
     "enable_gpu": false,
     "enable_tpu": false,
     "enable_internet": false,
-    "kaggle_backend_last_run_time": "2026-07-24T23:59:51.372242300Z",
-    "notebook_sha256": "0f39eb6b24507a16691780e0e18cf2e62665868e51ec6b75eaebb2075ef2ef38",
+    "kaggle_backend_last_run_time": "2026-07-28T02:20:23.573000Z",
+    "notebook_sha256": "185d4db8773df19aa140dec935ddbdd2fbd6a9f953750299d7f6597739544ad1",
     "metadata_sha256": "fd04c4b40f4ab71c4da908d195fc5e4e6a1487c58262dd4fc817fffb8ef99f5e"
   },
   "payload": {
@@ -41,15 +41,15 @@
       "score"
     ],
     "regular_run_marker": "dry-run",
-    "downloaded_via_official_mcp": true
+    "downloaded_via_kaggle_cli": true
   },
   "checks": {
     "KR-001_SESSION_COMPLETE": true,
     "KR-002_RUNTIME_DIGEST_MATCH": true,
     "KR-003_AGENT_DIGEST_MATCH": true,
     "KR-004_ALL_PACKAGED_PYTHON_COMPILES": true,
-    "KR-005_OUTPUT_LISTED_BY_MCP": true,
-    "KR-006_OUTPUT_DOWNLOADABLE_BY_MCP": true,
+    "KR-005_OUTPUT_LISTED_BY_KAGGLE_API": true,
+    "KR-006_OUTPUT_DOWNLOADABLE_BY_KAGGLE_CLI": true,
     "KR-007_OUTPUT_NONEMPTY": true,
     "KR-008_OUTPUT_SCHEMA_PRESENT": true,
     "KR-009_NO_SUBMISSION_SIDE_EFFECT": true
@@ -57,9 +57,16 @@
   "failed_check_ids": [],
   "upload_route": {
     "source": "Kaggle CLI 2.2.4",
-    "reason": "The official MCP save_notebook tool saved notebook text but did not persist the competition data-source repeated field in versions 1 and 2.",
+    "reason": "Preserve the competition data-source repeated field and reproduce the known-good version 4 upload route.",
     "submission_route": "Official Kaggle MCP",
     "submission_tool_schema_verified": true
+  },
+  "source_round_trip": {
+    "cell_sources_equal": true,
+    "cell_ids_equal": true,
+    "notebook_metadata_equal": true,
+    "raw_file_hash_equal": false,
+    "raw_hash_difference_reason": "Kaggle normalizes execution fields and outputs when the saved version is pulled."
   },
   "failed_regular_versions": [
     {
@@ -83,5 +90,7 @@
       "submission_created": false
     }
   ],
-  "submission_api_call_count": 0
+  "supersedes_regular_version": 4,
+  "submission_api_call_count": 0,
+  "competition_submission_count_delta": 0
 }

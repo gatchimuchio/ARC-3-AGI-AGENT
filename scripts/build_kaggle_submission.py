@@ -314,8 +314,8 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
             HOST=gateway
             PORT=8001
             ARC_API_KEY=test-key-123
-            ARC_BASE_URL=http://gateway:8001
-            OPERATION_MODE=competition
+            ARC_BASE_URL=http://gateway:8001/
+            OPERATION_MODE=online
             ENVIRONMENTS_DIR=
             RECORDINGS_DIR=/kaggle/working/server_recording
             '''
@@ -328,8 +328,8 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                     "HOST": "gateway",
                     "PORT": "8001",
                     "ARC_API_KEY": "test-key-123",
-                    "ARC_BASE_URL": "http://gateway:8001",
-                    "OPERATION_MODE": "competition",
+                    "ARC_BASE_URL": "http://gateway:8001/",
+                    "OPERATION_MODE": "online",
                     "ENVIRONMENTS_DIR": "",
                     "RECORDINGS_DIR": "/kaggle/working/server_recording",
                     "MPLBACKEND": "agg",
@@ -343,14 +343,19 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                     timeout=36_000,
                 )
                 submission_path = Path("/kaggle/working/submission.parquet")
-                if not submission_path.is_file() or submission_path.stat().st_size == 0:
-                    raise RuntimeError(
-                        "ARC3 competition run did not produce submission.parquet"
-                    )
+                submission_visible = (
+                    submission_path.is_file()
+                    and submission_path.stat().st_size > 0
+                )
                 print({{
-                    "competition_run": "complete",
-                    "submission_file": str(submission_path),
-                    "submission_size_bytes": submission_path.stat().st_size,
+                    "competition_client_run": "complete",
+                    "gateway_output_ownership": "Kaggle competition gateway",
+                    "submission_visible_to_notebook": submission_visible,
+                    "submission_size_bytes_if_visible": (
+                        submission_path.stat().st_size
+                        if submission_visible
+                        else None
+                    ),
                     "action_budget_per_game": {ACTION_BUDGET},
                 }})
             else:

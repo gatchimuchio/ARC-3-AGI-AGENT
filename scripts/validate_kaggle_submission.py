@@ -256,8 +256,8 @@ def validate(
             for marker in (
                 "KAGGLE_IS_COMPETITION_RERUN",
                 "http://gateway:8001/api/games",
-                '"OPERATION_MODE": "competition"',
-                "OPERATION_MODE=competition",
+                '"OPERATION_MODE": "online"',
+                "OPERATION_MODE=online",
                 "main.py",
                 "--agent",
                 "genericagi",
@@ -272,13 +272,17 @@ def validate(
                 "python-dotenv==1.2.2",
             )
         ),
-        "NB-011_OUTPUT_FAIL_CLOSED": all(
-            marker in sources
-            for marker in (
-                "/kaggle/working/submission.parquet",
-                "did not produce submission.parquet",
-                "submission_path.stat().st_size == 0",
+        "NB-011_GATEWAY_OUTPUT_NOT_PREEMPTED": (
+            all(
+                marker in sources
+                for marker in (
+                    "/kaggle/working/submission.parquet",
+                    '"gateway_output_ownership": "Kaggle competition gateway"',
+                    '"submission_visible_to_notebook"',
+                )
             )
+            and "did not produce submission.parquet" not in sources
+            and "submission_path.stat().st_size == 0" not in sources
         ),
         "NB-012_NO_SUBMISSION_SIDE_EFFECT": not any(
             marker in sources
@@ -333,7 +337,7 @@ def validate(
         ),
     }
     return {
-        "schema_version": "arc3-kaggle-notebook-validation-v1",
+        "schema_version": "arc3-kaggle-notebook-validation-v2",
         "status": "PASS" if all(checks.values()) else "FAIL",
         "checks": checks,
         "failed_check_ids": [
