@@ -29,10 +29,10 @@ P10の現行戦略は
   Competition mock dry-run — **57/57 PASS**
 - P13: `OFFICIAL_ARC_CONNECTION` — 逐次ローカルcompetition互換12/12 PASS。
   private rerunのgateway到達・scorecard close位置はKaggle公開fieldから判定不能
-- P14: Kaggle提出経路 — 逐次runnerを含むversion 8を23/23検証し、
-  Kaggle通常実行COMPLETE、公式placeholder照合、CLI output取得、
-  MCP提出tool schema確認済み。次候補はprivate実行前fallbackを含み
-  ローカルNotebook 25/25 PASS、Kaggle通常実行は未実施
+- P14: Kaggle提出経路 — private実行前fallbackを含むversion 10を
+  ローカルNotebook 25/25検証し、Kaggle通常実行COMPLETE、
+  4セルsource round trip、CLI output取得、公式placeholder契約を確認済み。
+  version 10のcompetition submission APIは未使用
 - P15: 実提出 — ref `55040966`、`55043205`、`55045360`、`55049227`は
   すべてKaggle `ERROR`（system error、scoreなし、total bytes 0）。
   version 7でformat単独原因、version 8で全ゲーム同時thread競合単独原因を棄却。
@@ -157,7 +157,7 @@ P11のweights、trace、score、artifact、digestはread-only baselineです。P
 S5を汎用化して上書きせず、`KnownSampleStudent`と別の
 `GenericAGIRuntime`を実装・反証しました。P13以降はOwnerの明示許可を受け、
 `listen_and_serve(competition_mode=True)`による25ゲーム逐次互換回帰と、
-Kaggle Notebook version 8の通常実行を完了しました。実提出ref
+Kaggle Notebook versions 8/10の通常実行を完了しました。実提出ref
 `55040966`、`55043205`、`55045360`、`55049227`は、いずれもKaggle
 system error、scoreなし、total bytes 0で終了しました。version 5の通常出力が
 公式placeholder契約と不一致だったことを是正し、versions 7/8では公式と同じ
@@ -175,6 +175,9 @@ Notebook異常終了へ伝播させていました。次候補は公式Pinned No
 そのものをdigest固定し、private最初のセルでwheel installより前に書きます。
 意図的なwheel欠落でも2648 bytesとSHAを維持してcell return code 0、
 FileNotFoundErrorをtraceback/statusへ保存する隔離スモークをPASSしています。
+この候補はKaggle version 10として通常実行COMPLETE、source 4セル一致、
+traceback/error 0、2648-byte出力回収をPASSしました。version 9はMCP転送時の
+文字列省略で壊れた未提出artifactであり、正本候補には採用していません。
 AGI方策・HDS・identity-free境界・128 action budgetは変更していません。
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
@@ -331,11 +334,12 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 environment、回帰、再現可能wheelを
 [`P11_RELEASE_STATE.json`](analysis/release/P11_RELEASE_STATE.json)へ固定しました。
 P12は57/57受入PASSで完了しました。P13〜P15はOwner明示許可により進行中で、
-逐次ローカルcompetition互換、Kaggle Notebook version 8の通常実行、
+逐次ローカルcompetition互換、Kaggle Notebook versions 8/10の通常実行、
 公式placeholder照合までPASSしています。四回の実提出はKaggle system errorで
 scoreを生成しませんでした。version 7でformat単独原因、version 8でthread
-fan-out単独原因を棄却しました。次候補は25/25 Notebook契約、12/12 local
-competition、555/555 unit、8/8 integrationをPASSしていますが未提出です。
+fan-out単独原因を棄却しました。version 10候補は25/25 Notebook契約、
+12/12 local competition、555/555 unit、8/8 integration、Kaggle通常実行と
+source/output round tripをPASSしていますが、private rerunは未実施です。
 
 ## 設計上の固定境界
 
@@ -447,18 +451,18 @@ python -m arc3_agi_agent.development_analysis \
 12. P11: release state固定 — 完了
 13. P12: pre-official AGI conformance / genericity — 完了
 14. P13: 公式ARC接続 — ローカルcompetition互換PASS、private gateway位置は判定不能
-15. P14: Kaggle提出経路 — version 8通常実行PASS、次候補25/25 local PASS・Kaggle未実行
+15. P14: Kaggle提出経路 — version 10通常実行・source/output round trip PASS、private未実行
 16. P15: 実提出 — refs `55040966` / `55043205` / `55045360` / `55049227`はsystem error、公式scoreなし、HDS SUSPEND
 
 P12 blocking受入は57/57 PASSです。P13〜P15はOwnerの明示的phase開始指示に
 より進行中です。`OperationMode.COMPETITION`のローカル公式相当回帰と
-Kaggle Notebook version 8の通常実行はPASSしました。実提出は四回実行し、
+Kaggle Notebook versions 8/10の通常実行はPASSしました。実提出は四回実行し、
 いずれもscoreなし・total bytes 0のKaggle system errorで終了しました。
 逐次version 8は25/25の公式相当回帰と23/23 Notebook検証をPASSした一方、
 private rerun ref `55049227`はERRORでした。本日のOwner指定一回提出は消費済みで、
-次候補は実行前の公式parquet fallback、失敗telemetry、環境release隔離を含み、
-ローカル全gateをPASSしています。次はmain固定後のKaggle通常実行だけを行い、
-追加提出は次のOwner許可日まで行いません。
+次候補version 10は実行前の公式parquet fallback、失敗telemetry、
+環境release隔離を含み、ローカル全gateとKaggle通常実行・source/output
+round tripをPASSしています。追加提出は次のOwner許可日まで行いません。
 
 現行ロードマップ全文の正本は
 [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)

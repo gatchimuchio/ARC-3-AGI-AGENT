@@ -403,9 +403,9 @@ INSTRUCTION_BODY_REMOVED_NO_EXECUTABLE_KNOWLEDGE_OR_TRANSFORM
 - P12: pre-official AGI conformance / genericity — 完了
 - P13: 公式ARC接続 — Owner許可済み、逐次ローカルcompetition互換12/12 PASS。
   private rerunのgateway到達・scorecard close位置は公開fieldから判定不能
-- P14: Kaggle提出経路 — Notebook version 8通常実行・公式placeholder照合・
-  CLI出力取得・MCP読取PASS。次のzero-byte封じ込め候補は25/25 local PASS、
-  Kaggle通常実行は未実施
+- P14: Kaggle提出経路 — zero-byte封じ込め候補をNotebook version 10として
+  通常実行COMPLETE、公式placeholder契約・4セルsource round trip・
+  CLI出力取得PASS。competition submission APIは未使用
 - P15: 実提出 — refs `55040966` / `55043205` / `55045360` / `55049227`は
   すべてKaggle `ERROR`、scoreなし・total bytes 0。version 7でformat単独原因、
   version 8で全ゲーム同時thread競合単独原因を棄却した。現行HDSはSUSPEND、
@@ -417,7 +417,9 @@ P4〜P9の完了証拠は各phase実装文書を参照します。P10/P11の凍�
 P12の57/57受入証拠は各phase正本を参照します。P13以降はOwnerの
 明示的phase開始指示を受けて進行中です。実提出は四回実行済みです。
 Kaggle service側はERROR枠を返却しましたが、Owner指定の一日一回を優先して
-本日の追加提出は行いません。次候補は実行前の公式parquet fallback、
-private failure telemetry、environment release隔離、64x64負荷監査を含みます。
-main固定後にKaggle通常実行とsource/output round tripを要求します。terminal正本は
+本日の追加提出は行いません。次候補version 10は実行前の公式parquet fallback、
+private failure telemetry、environment release隔離、64x64負荷監査を含み、
+Kaggle通常実行とsource/output round tripをPASSしました。version 9はMCP転送時の
+文字列省略で壊れた未提出artifactとして棄却しています。次のOwner許可日まで
+追加提出は行いません。terminal正本は
 `analysis/official/KAGGLE_SUBMISSION_RESULT.json`です。

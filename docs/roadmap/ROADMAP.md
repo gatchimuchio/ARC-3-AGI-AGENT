@@ -33,7 +33,7 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P11 | 完成状態固定 | 完了 |
 | P12 | Pre-official AGI conformance / genericity | 完了 |
 | P13 | 公式ARC環境接続 | 進行中・逐次ローカルcompetition互換12/12 PASS・private位置判定不能 |
-| P14 | Kaggle提出経路 | version 8通常実行PASS・次のzero-byte封じ込め候補25/25 local PASS・Kaggle未実行 |
+| P14 | Kaggle提出経路 | version 10通常実行・source/output round trip PASS・private未実行 |
 | P15 | 実提出・公式結果最適化 | refs 55040966 / 55043205 / 55045360 / 55049227 ERROR・次候補未提出・HDS SUSPEND |
 
 ## 現在のphase gate
@@ -79,7 +79,10 @@ total bytes 0で終了した。version 7でformat単独原因、version 8で
 返すためgateway位置の根拠にしない。現行HDSはSUSPEND。本日のOwner指定一回提出は
 消費済み。次候補は公式parquetの実行前fallback、private failure telemetry、
 environment release隔離を含み、Notebook 25/25・unit 555/555・integration 8/8・
-64x64負荷監査をPASSした。main固定後のKaggle通常実行を次gateとする。
+64x64負荷監査をPASSした。Kaggle version 10として通常実行COMPLETE、
+source 4セル一致、traceback/error 0、2648-byte出力回収もPASSした。
+version 9はMCP転送時の文字列省略で壊れた未提出artifactとして棄却した。
+次gateは新たにOwner許可された日にversion 10を一回だけprivate rerunすることである。
 
 ## 監査正本
 

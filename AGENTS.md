@@ -29,8 +29,9 @@
 `P11_RELEASE_STATE_FREEZE` はknown-sample baselineとして完了・凍結しています。
 `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`はblocking受入57件を
 全件PASSして完了しました。P13〜P15はOwnerの明示許可により開始済みです。
-現在は25ゲームの逐次ローカルcompetition互換回帰12/12と、逐次runnerを含む
-Kaggle Notebook version 8の検証23/23・通常実行COMPLETEまでPASSしています。
+現在は25ゲームの逐次ローカルcompetition互換回帰12/12、逐次runnerを含む
+Kaggle Notebook version 8の検証23/23・通常実行COMPLETE、および
+zero-byte封じ込めversion 10の検証25/25・通常実行COMPLETEまでPASSしています。
 実提出ref `55040966`（version 4）、`55043205`（version 5）、
 `55045360`（version 7）、`55049227`（version 8）は、いずれもKaggle
 `ERROR`（system error、scoreなし、total bytes 0）です。version 5のplaceholder値とNotebook lifecycleが
@@ -46,7 +47,10 @@ refsにも0を返すためgateway到達推定に使用しません。KaggleはER
 公式Pinned出力とbyte一致する2648-byte parquetをwheel install前に生成し、
 install・payload・runner失敗をtracebackとstatus JSONへ残します。隔離スモーク、
 Notebook 25/25、unit 555/555、integration 8/8、mypy 123 files、
-64x64×128-cycle負荷監査をPASSしていますが、まだKaggleへupload・実提出していません。
+64x64×128-cycle負荷監査をPASSしています。Kaggle version 10として通常実行
+COMPLETE、source 4セル一致、traceback/error 0、2648-byte出力回収もPASSしました。
+version 9はMCP転送時の文字列省略で壊れた未提出artifactとして棄却しています。
+version 10のprivate rerunは未実施です。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -147,6 +151,8 @@ P12 complete / P13 transition authorized:
   pre-official AGI readiness is PASS
   P13 through P15 are Owner-authorized and in progress
   Kaggle sequential Notebook version 8 normal run is COMPLETE
+  Kaggle fail-safe Notebook version 10 normal run and source/output
+    round trip are COMPLETE
   actual submission API call count is 4
   submission refs 55040966, 55043205, 55045360, and 55049227 are ERROR
     with no score and total bytes 0
@@ -159,7 +165,10 @@ P12 complete / P13 transition authorized:
   next zero-byte containment candidate passes Notebook checks 25 / 25,
     exact pre-execution fallback smoke, unit 555 / 555, integration 8 / 8,
     mypy 123 files, and synthetic 64x64 x 128-cycle stress
-  next candidate is not uploaded and not submitted
+  exact candidate is Kaggle Notebook version 10; normal execution,
+    four-cell source round trip, and 2648-byte output collection pass
+  version 9 is a rejected unsubmitted MCP-transfer truncation artifact
+  version 10 is not privately submitted
   P15 HDS judgment is SUSPEND; Owner daily attempt is consumed
   O-001 through O-018 are closed by separate GenericAGIRuntime evidence
   KnownSampleStudent remains frozen
@@ -413,9 +422,9 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 
 - P13 official ARC connection: 逐次ローカルcompetition互換12/12 PASS、
   private rerunのgateway到達・scorecard close位置は公開fieldから判定不能
-- P14 Kaggle submission paths: Notebook version 8通常実行・
-  公式placeholder照合・MCP読取PASS。次のzero-byte封じ込め候補は
-  ローカルNotebook 25/25 PASS、Kaggle通常実行は未実施
+- P14 Kaggle submission paths: zero-byte封じ込め候補をNotebook
+  version 10として通常実行COMPLETE、公式placeholder契約、
+  4セルsource round trip、CLI output取得PASS。competition submission APIは未使用
 - P15 actual submission: ref `55040966`、`55043205`、`55045360`、
   `55049227`を実行し、いずれもKaggle system error、scoreなし・total bytes 0。
   version 7でformat単独原因、version 8でthread競合単独原因を棄却。
@@ -424,7 +433,7 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 P13以降は全P12 blocking gateとユーザーの明示的phase開始指示を満たしている。
 実提出APIは四回呼んだ。Kaggle service側はERROR枠を返却したが、
 Owner指定の一日一回を優先し、本日の追加提出は行わない。次の提出には
-mainへ固定した同一候補のKaggle通常実行・source/output round tripを要求する。
+mainへ固定し通常実行・source/output round tripをPASSしたversion 10だけを使う。
 terminal正本は
 `analysis/official/KAGGLE_SUBMISSION_RESULT.json`とする。
 
