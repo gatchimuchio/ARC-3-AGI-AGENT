@@ -1,0 +1,149 @@
+{
+  "schema_version": "arc3-p16-phase-state-v1",
+  "phase": "P16_CLAIM_THREAT_EVALUATION_REBASELINE",
+  "status": "PASS",
+  "base_commit": "baa03f3ba7648503d5d212d6afe9c956c56984fc",
+  "code": {
+    "commit": null,
+    "tree": null,
+    "binding_state": "UNCOMMITTED_WORKTREE",
+    "baseline_commit": "baa03f3ba7648503d5d212d6afe9c956c56984fc",
+    "baseline_tree": "2ccf7ee55f6932b180cab8040b45c4e7b17c4085"
+  },
+  "runtime_identity": null,
+  "runtime_package_logical_digest": null,
+  "runtime_package_byte_digest": null,
+  "l0_abi_version": null,
+  "p": {
+    "version": null,
+    "logical_digest": null,
+    "package_digest": null
+  },
+  "j": {
+    "implementation_digest": null,
+    "config_digest": null
+  },
+  "m": {
+    "schema_version": null,
+    "initial_logical_digest": null,
+    "final_logical_digest": null,
+    "initial_version": null,
+    "final_version": null
+  },
+  "session_id": null,
+  "session_lineage_digest": null,
+  "authority_session_digest": null,
+  "control_initial_digest": null,
+  "control_final_digest": null,
+  "input_artifact_digest": "a4919f17fc0b433e4072c302a85f19daa5cae7cc77ef6a0b480bbddf5525df4d",
+  "evaluation_role": "DEVELOPMENT_VALIDATION",
+  "evaluation_access_state": "KNOWN_GOVERNANCE_INPUT",
+  "external_execution_contract_digest": null,
+  "environment_manifest": {
+    "platform": "win32",
+    "python": "3.12.13",
+    "pytest": "8.4.1"
+  },
+  "seed": null,
+  "budget": {
+    "phase_scope": "P16_ONLY",
+    "runtime_change_allowed": false
+  },
+  "command": [
+    ".venv/Scripts/python.exe -m pytest -q tests/unit/test_p16_governance_rebaseline.py",
+    ".venv/Scripts/python.exe -m pytest -q tests/unit",
+    ".venv/Scripts/python.exe -m pytest -q --basetemp <repo>/scratch/p16-pytest-temp <seven tmp_path tests>",
+    ".venv/Scripts/python.exe -m pytest -q --basetemp <repo>/scratch/p16-integration-temp tests/integration",
+    ".venv/Scripts/python.exe -m pytest -q --basetemp <repo>/scratch/p16-integration-remaining-temp tests/integration/test_teacher_s3_graph.py tests/integration/test_teacher_s4_graph.py"
+  ],
+  "source_documents": {
+    "specification_path": "docs/architecture/ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2.md",
+    "specification_sha256": "9746e981e504e46b8563aa8a342aa567937762363d66a288ff8235a5c29591c2",
+    "roadmap_path": "docs/roadmap/P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md",
+    "roadmap_sha256": "c8897ce4b379865aea091b04cdf3a1f772a5f3765ef20744998e58d65ba6c687"
+  },
+  "runtime_paths": [
+    {
+      "id": "GENERIC_AGI_RUNTIME_V1",
+      "classification": "ACTIVE_RECONSTRUCTION_TARGET",
+      "entrypoint": "ARC-AGI-3-Agents/arc3_agi_agent/generic_runtime.py::GenericAGIRuntime"
+    },
+    {
+      "id": "S5_KNOWN_SAMPLE_STUDENT",
+      "classification": "HISTORICAL_BASELINE",
+      "entrypoint": "ARC-AGI-3-Agents/arc3_agi_agent/s5_runtime.py"
+    },
+    {
+      "id": "TEACHER_S0_S4",
+      "classification": "DEVELOPMENT_ONLY",
+      "entrypoint": "ARC-AGI-3-Agents/arc3_agi_agent/teacher/"
+    },
+    {
+      "id": "P10_GAME_SPECIFIC_OPERATORS",
+      "classification": "HISTORICAL_DEVELOPMENT",
+      "entrypoint": "ARC-AGI-3-Agents/arc3_agi_agent/p10_runtime.py"
+    }
+  ],
+  "active_runtime_count": 1,
+  "claim_overstatement_count": 0,
+  "rev1_status": "HISTORICAL_NON_BLOCKING",
+  "runtime_changes_performed": false,
+  "gates": {
+    "P16-001": "PASS",
+    "P16-002": "PASS",
+    "P16-003": "PASS",
+    "P16-004": "PASS",
+    "P16-005": "PASS",
+    "P16-006": "PASS"
+  },
+  "failed_requirement_ids": [],
+  "validation": {
+    "p16_governance": {
+      "passed": 9,
+      "failed": 0
+    },
+    "focused_regression": {
+      "passed": 18,
+      "failed": 0
+    },
+    "unit_suite": {
+      "passed_initial": 557,
+      "environment_setup_errors_initial": 7,
+      "failed_assertions_initial": 0,
+      "isolated_temp_rerun_passed": 7,
+      "effective_passed": 564
+    },
+    "integration_suite": {
+      "passed_before_command_timeout": 6,
+      "remaining_extended_rerun_passed": 2,
+      "effective_passed": 8,
+      "failed_assertions": 0
+    },
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "resolved_environment_failures": [
+    {
+      "classification": "environment failure",
+      "cause": "Windows default pytest temp root denied access",
+      "resolution": "rerun affected tests with explicit repository-local basetemp",
+      "result": "7/7 PASS"
+    },
+    {
+      "classification": "environment failure",
+      "cause": "five-minute aggregate integration command timeout",
+      "resolution": "rerun the two unfinished graph integrations with extended timeout",
+      "result": "2/2 PASS"
+    }
+  ],
+  "raw_evidence_pointers": [
+    "docs/audit/ARC3_GENERIC_REAUDIT_REV2.md",
+    "docs/security/IDENTITY_TAINT_THREAT_MODEL.md",
+    "docs/evaluation/EVALUATION_ROLE_REGISTRY_SPEC.md",
+    "docs/official/OFFICIAL_COMPLETION_PREDICATES.md",
+    "ARC-AGI-3-Agents/tests/unit/test_p16_governance_rebaseline.py"
+  ],
+  "next_phase": "P17_A_COGNITIVE_SESSION_AND_STATE_OWNERSHIP",
+  "later_phases_activated": false,
+  "content_digest": "faaac99aae63c9a7c18c6757f86c3646d012854096e2be88356fba3455f025f9"
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": "arc3-p17a-phase-state-v1",
+  "phase": "P17_A_COGNITIVE_SESSION_AND_STATE_OWNERSHIP",
+  "status": "PASS",
+  "base_commit": "baa03f3ba7648503d5d212d6afe9c956c56984fc",
+  "code": {
+    "commit": null,
+    "tree": null,
+    "binding_state": "UNCOMMITTED_WORKTREE"
+  },
+  "runtime_identity": "runtime-identity:57c6184d84ca165951670da8506ed7f2cf7b041e19602e3ad042b5d14c5ef948",
+  "runtime_identity_fields": {
+    "code_tree_digest": "sha256:c9638ea6c8371b2ec05ac7ccd45bdf209c8a0775511a70e47968bdf1d481b462",
+    "l0_abi_version": "arc3-generic-compute-v1",
+    "p_logical_digest": "generic-hybrid-p:389967e821e33a69d9ad898e8b9d04dbf5559fe3ab65c521d5ab020c261645c7",
+    "j_implementation_digest": "sha256:65f79badb370648126ec3957a4cb85a95daf08bf0e53fa116a39ad1928e666e7",
+    "j_config_digest": "hds-config:85d299f00fcfbdab968a87dbe785ced676530a757606775db0a20b20fa9690ab",
+    "m0_logical_digest": "m0:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "adapter_digest": "sha256:42a999d1118f53cbc6c544a9ef20930cb73ca88c2208e7d659403a8df28aff09",
+    "dependency_lock_digest": "sha256:680db09e6d1d3291ac8dc5138dd89c86a6341e5a1a86bbf803d2a1c4885e4a92"
+  },
+  "evaluation_role": "DEVELOPMENT_VALIDATION",
+  "shared_session_count": 1,
+  "per_game_new_memory_count": 0,
+  "per_game_new_p_count": 0,
+  "cross_game_semantic_promotion": "DISABLED",
+  "state_owner_violation_count": 0,
+  "identity_boundary": "PASS",
+  "required_tests": {
+    "test_one_session_per_scorecard": "PASS",
+    "test_runtime_does_not_create_memory": "PASS",
+    "test_runtime_does_not_create_p": "PASS",
+    "test_authority_control_semantic_separation": "PASS",
+    "test_new_scorecard_new_authority": "PASS",
+    "test_old_authorization_rejected": "PASS",
+    "test_episode_overlay_discard_on_exception": "PASS",
+    "test_game_metadata_not_in_decision_context": "PASS"
+  },
+  "gates": {
+    "P17A-001": "PASS",
+    "P17A-002": "PASS",
+    "P17A-003": "PASS",
+    "P17A-004": "PASS",
+    "P17A-005": "PASS",
+    "P17A-006": "PASS"
+  },
+  "failed_requirement_ids": [],
+  "validation": {
+    "focused_p17a_p12_package": {
+      "passed": 25,
+      "failed": 0
+    },
+    "p17a_phase_state_rerun": {
+      "passed": 10,
+      "failed": 0
+    },
+    "unit_suite": {
+      "passed_initial": 571,
+      "current_change_regressions_initial": 1,
+      "targeted_regression_rerun_passed": 1,
+      "final_full_suite_passed": 574,
+      "effective_failed": 0
+    },
+    "mypy_source_files": {
+      "passed": 12,
+      "failed": 0
+    },
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "resolved_regressions": [
+    {
+      "classification": "product regression",
+      "failure": "KAGGLE_RUNTIME_IMPORT_CLOSURE_INCOMPLETE",
+      "cause": "P17-A runtime dependencies were absent from the historical notebook builder allow-list",
+      "resolution": "extend the deterministic allow-list with the imported P17-A modules",
+      "result": "1/1 targeted rerun PASS"
+    }
+  ],
+  "raw_evidence_pointers": [
+    "docs/architecture/P17A_COGNITIVE_SESSION_STATE_OWNERSHIP.md",
+    "ARC-AGI-3-Agents/tests/unit/test_p17a_cognitive_session.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_session.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/authority_state.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/control_state.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/memory_overlay.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/identity_boundary.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/runtime_identity.py"
+  ],
+  "next_phase": "P17_B_EVIDENCE_BINDING_TAINT_SAFE_EPISODE_TRANSACTION",
+  "later_phases_activated": false,
+  "content_digest": "66bfa01685f17a895698b256d43910cf62dd58e42ee2c1373e336e9824b88ef7"
+}

@@ -9,7 +9,16 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Mapping, Protocol, Sequence
 
+from .evidence_binding import (
+    CandidateEvidenceBinding,
+    EvidenceBindingKey,
+    TypedCandidateProvenance,
+)
 from .schema import digest_object
+from .taint import (
+    COORDINATE_PROVENANCE_NONE,
+    validate_coordinate_provenance,
+)
 
 GENERIC_TYPES_VERSION = "arc3-generic-types-v1"
 GENERIC_TERMINAL_STATES = frozenset(
@@ -46,8 +55,24 @@ class GenericObservation:
     progress_count: int = 0
     visible_effects: tuple[str, ...] = ()
     action_payload_schema: tuple[tuple[int, tuple[str, ...]], ...] = ()
+    _validation_cache: tuple[str, ...] | None = field(
+        default=None,
+        init=False,
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
+    _digest_cache: str | None = field(
+        default=None,
+        init=False,
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
 
     def validate(self) -> tuple[str, ...]:
+        if self._validation_cache is not None:
+            return self._validation_cache
         failures: list[str] = []
         if not _text(self.signature):
             failures.append("GENERIC_OBSERVATION_SIGNATURE_MISSING")
@@ -96,10 +121,77 @@ class GenericObservation:
             ):
                 failures.append("GENERIC_RENDER_CELL_INVALID")
                 break
+        result = tuple(sorted(set(failures)))
+        object.__setattr__(self, "_validation_cache", result)
+        return result
+
+    def digest(self) -> str:
+        cached = self._digest_cache
+        if cached is None:
+            cached = "generic-observation:" + digest_object(self)
+            object.__setattr__(
+                self,
+                "_digest_cache",
+                cached,
+            )
+        return cached
+
+
+@dataclass(frozen=True, slots=True)
+class ActionEffectRecord:
+    """One HDS-authorized action and its rendered, episode-local effect.
+
+    The record deliberately contains no environment identity or replay index.
+    It is the bounded passive-memory input used by executable P bodies that
+    need temporal action/effect context.
+    """
+
+    action_id: int
+    payload_items: tuple[tuple[str, int], ...] = ()
+    visible_change: bool = False
+    compatibility_reset: bool = False
+    target_palette: int = 0
+
+    def payload(self) -> dict[str, int]:
+        return dict(self.payload_items)
+
+    def validate(self) -> tuple[str, ...]:
+        failures: list[str] = []
+        if (
+            isinstance(self.action_id, bool)
+            or not isinstance(self.action_id, int)
+            or self.action_id < 0
+        ):
+            failures.append("ACTION_EFFECT_HISTORY_ACTION_INVALID")
+        keys = tuple(key for key, _ in self.payload_items)
+        if keys != tuple(sorted(set(keys))):
+            failures.append("ACTION_EFFECT_HISTORY_PAYLOAD_INVALID")
+        if any(
+            isinstance(value, bool) or not isinstance(value, int)
+            for _, value in self.payload_items
+        ):
+            failures.append("ACTION_EFFECT_HISTORY_PAYLOAD_VALUE_INVALID")
+        if self.action_id == 6:
+            payload = self.payload()
+            if set(payload) != {"x", "y"}:
+                failures.append("ACTION_EFFECT_HISTORY_POINTER_PAYLOAD_INVALID")
+            elif not (
+                0 <= payload["x"] < 64 and 0 <= payload["y"] < 64
+            ):
+                failures.append("ACTION_EFFECT_HISTORY_POINTER_RANGE_INVALID")
+            if not 0 <= self.target_palette < 16:
+                failures.append("ACTION_EFFECT_HISTORY_PALETTE_INVALID")
+        elif self.payload_items or self.target_palette != 0:
+            failures.append("ACTION_EFFECT_HISTORY_NON_POINTER_PAYLOAD_PRESENT")
+        if self.compatibility_reset != (self.action_id == 0):
+            failures.append("ACTION_EFFECT_HISTORY_RESET_SCOPE_INVALID")
         return tuple(sorted(set(failures)))
 
     def digest(self) -> str:
-        return "generic-observation:" + digest_object(self)
+        failures = self.validate()
+        if failures:
+            raise ValueError(";".join(failures))
+        return "action-effect-record:" + digest_object(self)
 
 
 @dataclass(frozen=True, slots=True)
@@ -182,6 +274,8 @@ class ActionDescriptor:
     semantic_key: str
     payload_items: tuple[tuple[str, int], ...] = ()
     target_role: str | None = None
+    coordinate_provenance: str = COORDINATE_PROVENANCE_NONE
+    coordinate_observation_digest: str = ""
 
     def payload(self) -> dict[str, int]:
         return dict(self.payload_items)
@@ -202,6 +296,17 @@ class ActionDescriptor:
             sorted(set(key for key, _ in self.payload_items))
         ):
             failures.append("GENERIC_DESCRIPTOR_PAYLOAD_INVALID")
+        failures.extend(
+            validate_coordinate_provenance(
+                payload_items=self.payload_items,
+                coordinate_provenance=self.coordinate_provenance,
+                coordinate_observation_digest=(
+                    self.coordinate_observation_digest
+                ),
+                current_observation_digest=observation.digest(),
+                rendered_layers=observation.rendered_layers,
+            )
+        )
         return tuple(sorted(set(failures)))
 
 
@@ -277,6 +382,10 @@ class GenericCandidate:
     uncertainty: float
     prediction_refs: tuple[str, ...]
     provenance: tuple[str, ...]
+    evidence_binding_key: EvidenceBindingKey
+    evidence_bindings: tuple[CandidateEvidenceBinding, ...]
+    typed_provenance: TypedCandidateProvenance
+    memory_effects: tuple[str, ...] = ()
 
     def semantic_identity(self) -> tuple[int, tuple[tuple[str, int], ...]]:
         return (self.descriptor.action_id, self.descriptor.payload_items)
@@ -297,6 +406,19 @@ class GenericCandidate:
                 failures.append(f"GENERIC_CANDIDATE_{name}_INVALID")
         if not self.prediction_refs or not self.provenance:
             failures.append("GENERIC_CANDIDATE_PROVENANCE_MISSING")
+        failures.extend(self.evidence_binding_key.validate())
+        for binding in self.evidence_bindings:
+            failures.extend(binding.validate())
+            if binding.key != self.evidence_binding_key:
+                failures.append("GENERIC_CANDIDATE_EVIDENCE_KEY_MISMATCH")
+        failures.extend(self.typed_provenance.validate())
+        if not _sorted_unique_text(self.memory_effects):
+            failures.append("GENERIC_CANDIDATE_MEMORY_EFFECTS_INVALID")
+        binding_refs = tuple(
+            sorted(binding.record_digest for binding in self.evidence_bindings)
+        )
+        if binding_refs != self.typed_provenance.memory_binding_refs:
+            failures.append("GENERIC_CANDIDATE_MEMORY_BINDING_REFS_INVALID")
         return tuple(sorted(set(failures)))
 
 
@@ -335,11 +457,31 @@ class GenericComputeResult:
     instruction_body_format: str
     instruction_body_version: str
     instruction_body_digest: str
+    p_ir_logical_digest: str
+    p_ir_execution_digest: str
+    l0_abi_version: str
     uncertainty: float
     provenance: tuple[str, ...]
+    control_operation: str = ""
+    control_instruction_refs: tuple[str, ...] = ()
+    _digest_cache: str | None = field(
+        default=None,
+        init=False,
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
 
     def digest(self) -> str:
-        return "generic-compute-result:" + digest_object(self)
+        cached = self._digest_cache
+        if cached is None:
+            cached = "generic-compute-result:" + digest_object(self)
+            object.__setattr__(
+                self,
+                "_digest_cache",
+                cached,
+            )
+        return cached
 
     def validate(self, observation: GenericObservation) -> tuple[str, ...]:
         failures: list[str] = []
@@ -378,11 +520,18 @@ class GenericComputeResult:
                 self.instruction_body_format,
                 self.instruction_body_version,
                 self.instruction_body_digest,
+                self.p_ir_logical_digest,
+                self.p_ir_execution_digest,
+                self.l0_abi_version,
             )
         ):
             failures.append("GENERIC_COMPUTE_METADATA_INVALID")
         if not 0.0 <= self.uncertainty <= 1.0:
             failures.append("GENERIC_COMPUTE_UNCERTAINTY_INVALID")
+        if self.control_operation not in {"", "ROLLBACK"}:
+            failures.append("GENERIC_COMPUTE_CONTROL_OPERATION_INVALID")
+        if bool(self.control_operation) != bool(self.control_instruction_refs):
+            failures.append("GENERIC_COMPUTE_CONTROL_PROVENANCE_INVALID")
         return tuple(sorted(set(failures)))
 
 
@@ -488,6 +637,9 @@ class GenericCycleTrace:
     authority_events: tuple[str, ...]
     failure_signatures: tuple[str, ...]
     trace_digest: str
+    runtime_identity_digest: str = ""
+    session_lineage_digest: str = ""
+    decision_context_digest: str = ""
 
 
 @dataclass(frozen=True, slots=True)
@@ -505,10 +657,39 @@ class GenericRunReport:
     memory_final_version: int
     no_fallback_used: bool
     runtime_identity_received: bool
+    runtime_identity_digest: str
+    session_lineage_digest: str
+    episode_handle_digest: str
+    identity_boundary_passed: bool
     failure_signatures: tuple[str, ...]
 
     def digest(self) -> str:
-        return "generic-run:" + digest_object(self)
+        return "generic-run:" + digest_object(
+            {
+                "runtime_version": self.runtime_version,
+                "instruction_body_version": self.instruction_body_version,
+                "initial_observation_digest": (
+                    self.initial_observation_digest
+                ),
+                "final_observation_digest": self.final_observation_digest,
+                "final_state": self.final_state,
+                "progress_count": self.progress_count,
+                "actions_executed": self.actions_executed,
+                "cycle_trace_digests": tuple(
+                    cycle.trace_digest for cycle in self.cycles
+                ),
+                "stop_reason": self.stop_reason,
+                "memory_initial_version": self.memory_initial_version,
+                "memory_final_version": self.memory_final_version,
+                "no_fallback_used": self.no_fallback_used,
+                "runtime_identity_received": self.runtime_identity_received,
+                "runtime_identity_digest": self.runtime_identity_digest,
+                "session_lineage_digest": self.session_lineage_digest,
+                "episode_handle_digest": self.episode_handle_digest,
+                "identity_boundary_passed": self.identity_boundary_passed,
+                "failure_signatures": self.failure_signatures,
+            }
+        )
 
 
 class GenericEnvironment(Protocol):
@@ -529,6 +710,8 @@ class GenericEnvironment(Protocol):
 
 __all__ = [
     "ActionDescriptor",
+    "ActionEffectRecord",
+    "CandidateEvidenceBinding",
     "GENERIC_ASSERTION_STATES",
     "GENERIC_DECISION_OPERATIONS",
     "GENERIC_TERMINAL_STATES",
@@ -549,5 +732,7 @@ __all__ = [
     "ObjectRole",
     "OutcomeAttribution",
     "RelationalRepresentation",
+    "EvidenceBindingKey",
     "SemanticMemoryCitation",
+    "TypedCandidateProvenance",
 ]

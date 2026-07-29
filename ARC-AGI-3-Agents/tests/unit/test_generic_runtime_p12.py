@@ -8,17 +8,38 @@ from arc3_agi_agent.generic_compute import (
 )
 from arc3_agi_agent.generic_env import MechanismWorld
 from arc3_agi_agent.generic_hds import ActionAuthorizationExecutor
-from arc3_agi_agent.generic_runtime import (
-    GenericAGIRuntime,
-    GenericRuntimeConfiguration,
+from arc3_agi_agent.generic_runtime import GenericAGIRuntime
+from arc3_agi_agent.generic_session import (
+    ResourceContract,
+    create_cognitive_session,
 )
 
 
+def _runtime(
+    world: MechanismWorld,
+    body: object,
+    *,
+    max_cycles: int,
+) -> GenericAGIRuntime:
+    if not isinstance(
+        body,
+        (HybridRelationalInstructionBody, ParametricRelationalInstructionBody),
+    ):
+        raise TypeError
+    session = create_cognitive_session(
+        p_bundle=body,
+        resource_contract=ResourceContract(
+            action_budget_per_episode=max_cycles
+        ),
+    )
+    return GenericAGIRuntime(world, session, session.begin_episode())
+
+
 def test_generic_runtime_has_full_serial_trace_and_semantic_candidates() -> None:
-    runtime = GenericAGIRuntime(
+    runtime = _runtime(
         MechanismWorld((11, 29, 47), (1,), required_progress=2),
         HybridRelationalInstructionBody(),
-        GenericRuntimeConfiguration(max_cycles=16),
+        max_cycles=16,
     )
 
     report = runtime.run()
@@ -26,7 +47,8 @@ def test_generic_runtime_has_full_serial_trace_and_semantic_candidates() -> None
 
     assert report.final_state == "WIN"
     assert report.no_fallback_used is True
-    assert report.runtime_identity_received is False
+    assert report.runtime_identity_received is True
+    assert report.identity_boundary_passed is True
     assert tuple(stage.stage for stage in first.compute_result.stages) == (
         "represent",
         "retrieve",
@@ -46,10 +68,10 @@ def test_generic_runtime_has_full_serial_trace_and_semantic_candidates() -> None
 
 
 def test_hds_capabilities_and_compute_commands_are_single_use() -> None:
-    runtime = GenericAGIRuntime(
+    runtime = _runtime(
         MechanismWorld((11, 29), (0,), required_progress=1),
         ParametricRelationalInstructionBody(),
-        GenericRuntimeConfiguration(max_cycles=4),
+        max_cycles=4,
     )
     observation = runtime.environment.observe()
     memory = runtime.memory.view()
@@ -74,7 +96,7 @@ def test_hds_capabilities_and_compute_commands_are_single_use() -> None:
     authorization = runtime.hds.authorize_action(
         decision, candidate, observation
     )
-    executor = ActionAuthorizationExecutor(runtime.authority_token)
+    executor = ActionAuthorizationExecutor(runtime.session.authority)
 
     executor.consume(authorization, decision, candidate, observation)
     with pytest.raises(

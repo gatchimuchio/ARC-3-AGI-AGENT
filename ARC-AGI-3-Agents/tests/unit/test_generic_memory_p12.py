@@ -8,9 +8,10 @@ from arc3_agi_agent.generic_memory import (
     MemoryMutationProposal,
     semantic_record,
 )
-from arc3_agi_agent.generic_runtime import (
-    GenericAGIRuntime,
-    GenericRuntimeConfiguration,
+from arc3_agi_agent.generic_runtime import GenericAGIRuntime
+from arc3_agi_agent.generic_session import (
+    ResourceContract,
+    create_cognitive_session,
 )
 
 
@@ -36,12 +37,22 @@ def _proposal(identifier: str) -> MemoryMutationProposal:
     )
 
 
-def test_semantic_memory_rejects_reuse_and_stale_version() -> None:
-    runtime = GenericAGIRuntime(
-        MechanismWorld((11, 29), (0,), required_progress=1),
-        ParametricRelationalInstructionBody(),
-        GenericRuntimeConfiguration(max_cycles=4),
+def _runtime(*, max_cycles: int) -> GenericAGIRuntime:
+    session = create_cognitive_session(
+        p_bundle=ParametricRelationalInstructionBody(),
+        resource_contract=ResourceContract(
+            action_budget_per_episode=max_cycles
+        ),
     )
+    return GenericAGIRuntime(
+        MechanismWorld((11, 29, 47), (1,), required_progress=2),
+        session,
+        session.begin_episode(),
+    )
+
+
+def test_semantic_memory_rejects_reuse_and_stale_version() -> None:
+    runtime = _runtime(max_cycles=4)
     observation = runtime.environment.observe()
     view = runtime.memory.view()
     frame = runtime.hds.frame(observation, view, remaining_budget=4)
@@ -83,11 +94,7 @@ def test_semantic_memory_rejects_reuse_and_stale_version() -> None:
 
 
 def test_memory_provenance_records_complete_causal_boundary() -> None:
-    runtime = GenericAGIRuntime(
-        MechanismWorld((11, 29, 47), (1,), required_progress=2),
-        ParametricRelationalInstructionBody(),
-        GenericRuntimeConfiguration(max_cycles=8),
-    )
+    runtime = _runtime(max_cycles=8)
 
     report = runtime.run()
 

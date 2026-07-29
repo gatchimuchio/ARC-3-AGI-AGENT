@@ -1,5 +1,11 @@
 # ARC3 AGI 外部適合監査 rev1
 
+> status: `HISTORICAL_NON_BLOCKING`
+>
+> 本監査のP12判定はrev1定義域の歴史的証拠である。P16以降のclaim、
+> threat、evaluation role、completion predicateは
+> `ARC3_GENERIC_REAUDIT_REV2`を正本とする。
+
 - audit id: `EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1`
 - source package: `ARC3_AGI_監査修正パッケージ_rev1.zip`
 - source package SHA-256:

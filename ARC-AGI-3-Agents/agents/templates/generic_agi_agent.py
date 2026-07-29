@@ -9,11 +9,11 @@ from typing import Any
 
 from arcengine import FrameData, FrameDataRaw, GameAction, GameState
 
-from arc3_agi_agent.generic_compute import HybridRelationalInstructionBody
 from arc3_agi_agent.generic_env import CompetitionGenericEnvironment
-from arc3_agi_agent.generic_runtime import (
-    GenericAGIRuntime,
-    GenericRuntimeConfiguration,
+from arc3_agi_agent.generic_runtime import GenericAGIRuntime
+from arc3_agi_agent.generic_session import (
+    CognitiveSession,
+    EpisodeHandle,
 )
 
 from ..agent import Agent
@@ -33,6 +33,9 @@ class GenericAGIAgentReport:
     failure_signatures: tuple[str, ...]
     no_fallback_used: bool
     runtime_identity_received: bool
+    runtime_identity_digest: str
+    session_lineage_digest: str
+    identity_boundary_passed: bool
 
 
 class GenericAGIAgent(Agent):
@@ -43,17 +46,34 @@ class GenericAGIAgent(Agent):
     def __init__(
         self,
         *args: Any,
-        max_actions: int = 128,
+        cognitive_session: CognitiveSession,
+        episode_handle: EpisodeHandle,
+        max_actions: int | None = None,
         **kwargs: Any,
     ) -> None:
+        selected_max_actions = (
+            cognitive_session.resource_contract.action_budget_per_episode
+            if max_actions is None
+            else max_actions
+        )
         if (
-            isinstance(max_actions, bool)
-            or not isinstance(max_actions, int)
-            or not 1 <= max_actions <= 100_000
+            isinstance(selected_max_actions, bool)
+            or not isinstance(selected_max_actions, int)
+            or not 1 <= selected_max_actions <= 100_000
         ):
             raise ValueError("GENERIC_COMPETITION_ACTION_BUDGET_INVALID")
+        if (
+            selected_max_actions
+            != cognitive_session.resource_contract.action_budget_per_episode
+        ):
+            raise ValueError(
+                "GENERIC_COMPETITION_SESSION_BUDGET_MISMATCH"
+            )
+        cognitive_session.require_episode(episode_handle)
         super().__init__(*args, **kwargs)
-        self.MAX_ACTIONS = max_actions
+        self.cognitive_session = cognitive_session
+        self.episode_handle = episode_handle
+        self.MAX_ACTIONS = selected_max_actions
         self.action_counter = 0
         self.frames: list[FrameData] = []
         self.runtime_report: GenericAGIAgentReport | None = None
@@ -71,10 +91,8 @@ class GenericAGIAgent(Agent):
             self.append_frame(self._convert_raw_frame_data(current))
             report = GenericAGIRuntime(
                 environment=CompetitionGenericEnvironment(self.arc_env),
-                instruction_body=HybridRelationalInstructionBody(),
-                configuration=GenericRuntimeConfiguration(
-                    max_cycles=self.MAX_ACTIONS
-                ),
+                session=self.cognitive_session,
+                episode_handle=self.episode_handle,
             ).run()
             self.action_counter = report.actions_executed
             self.runtime_report = GenericAGIAgentReport(
@@ -86,6 +104,9 @@ class GenericAGIAgent(Agent):
                 failure_signatures=report.failure_signatures,
                 no_fallback_used=report.no_fallback_used,
                 runtime_identity_received=report.runtime_identity_received,
+                runtime_identity_digest=report.runtime_identity_digest,
+                session_lineage_digest=report.session_lineage_digest,
+                identity_boundary_passed=report.identity_boundary_passed,
             )
             final_raw = self.arc_env.observation_space
             if isinstance(final_raw, FrameDataRaw):

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections import Counter, deque
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Sequence
 
 from .schema import digest_object
@@ -303,6 +304,7 @@ def _infer_shared_symbol_rewrite(
     return inferred[0][1]
 
 
+@lru_cache(maxsize=1024)
 def infer_relational_rewrite_state(
     matrix: Matrix,
 ) -> RelationalRewriteState | None:

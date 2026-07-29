@@ -1,0 +1,81 @@
+{
+  "schema_version": "arc3-p18-phase-state-v1",
+  "phase": "P18_ATOMIC_EVENT_SOURCED_PERSISTENT_MEMORY",
+  "status": "PASS",
+  "base_commit": "baa03f3ba7648503d5d212d6afe9c956c56984fc",
+  "code": {
+    "commit": null,
+    "tree": null,
+    "binding_state": "UNCOMMITTED_WORKTREE"
+  },
+  "evaluation_role": "DEVELOPMENT_VALIDATION",
+  "metrics": {
+    "lost_event_count": 0,
+    "partial_mutation_count": 0,
+    "restart_digest_match": true,
+    "idempotency_violation_count": 0,
+    "full_copy_snapshot_per_version": false,
+    "canonical_digest": "PASS",
+    "cross_game_semantic_promotion": "DISABLED"
+  },
+  "required_tests": {
+    "test_prepare_has_no_live_side_effect": "PASS",
+    "test_max_active_failure_is_atomic": "PASS",
+    "test_backend_failure_preserves_live_digest": "PASS",
+    "test_event_and_state_atomic_commit": "PASS",
+    "test_idempotent_replay": "PASS",
+    "test_crash_after_prepare": "PASS",
+    "test_crash_during_commit": "PASS",
+    "test_restart_rebuild_from_ledger": "PASS",
+    "test_checkpoint_rebuild": "PASS",
+    "test_schema_migration": "PASS",
+    "test_nan_inf_rejected": "PASS",
+    "test_logical_and_package_digest_separated": "PASS"
+  },
+  "gates": {
+    "P18-001": "PASS",
+    "P18-002": "PASS",
+    "P18-003": "PASS",
+    "P18-004": "PASS",
+    "P18-005": "PASS",
+    "P18-006": "PASS"
+  },
+  "failed_requirement_ids": [],
+  "validation": {
+    "dedicated_p18": {
+      "passed": 12,
+      "failed": 0
+    },
+    "phase_state_content_binding": {
+      "passed": 1,
+      "failed": 0
+    },
+    "focused_p12_p17_p18_regression": {
+      "passed": 39,
+      "failed": 0
+    },
+    "unit_suite": {
+      "passed": 599,
+      "failed": 0
+    },
+    "mypy_source_files": {
+      "passed": 10,
+      "failed": 0
+    },
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "raw_evidence_pointers": [
+    "docs/architecture/P18_ATOMIC_EVENT_SOURCED_MEMORY.md",
+    "ARC-AGI-3-Agents/tests/unit/test_p18_atomic_memory.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/memory_event.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/memory_image.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/memory_backend.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/memory_transaction.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/experience_ledger.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/canonical_artifact.py"
+  ],
+  "next_phase": "P19_TYPED_CAUSAL_MEMORY_CONSOLIDATION_NEGATIVE_TRANSFER",
+  "later_phases_activated": false,
+  "content_digest": "077b5869c0e90eceec0372e7dee4755cbb7668a7e24f809c38b05a99a39ec915"
+}

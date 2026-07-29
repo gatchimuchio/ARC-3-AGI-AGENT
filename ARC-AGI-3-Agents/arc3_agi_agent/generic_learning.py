@@ -8,9 +8,31 @@ from typing import Callable, Sequence
 from .generic_compute import ParametricRelationalInstructionBody
 from .generic_hds import HDSConfiguration
 from .generic_memory import SemanticRecord
+from .p_bundle import PBundle
+from .p_compiler_v2 import EvidenceSelectionManifest, PCompilerV2
 from .schema import digest_object
 
 GENERIC_LEARNING_VERSION = "arc3-generic-version-learning-v1"
+GENERIC_LEARNING_V2_VERSION = "arc3-generic-version-learning-v2"
+
+
+def compile_p_bundle_v2_candidate(
+    *,
+    mode: str,
+    parent: PBundle,
+    evidence: Sequence[SemanticRecord],
+    evidence_manifest: EvidenceSelectionManifest,
+    target_version: str,
+) -> PBundle:
+    """Compile one isolated v2 candidate without mutating the active bundle."""
+
+    return PCompilerV2().compile(
+        mode=mode,
+        parent=parent,
+        records=evidence,
+        evidence_manifest=evidence_manifest,
+        target_version=target_version,
+    )
 
 
 def _payload_count(value: object) -> int:
@@ -376,6 +398,7 @@ class HDSPVersionAuthority:
 __all__ = [
     "CandidatePBundle",
     "GENERIC_LEARNING_VERSION",
+    "GENERIC_LEARNING_V2_VERSION",
     "GenericInitialStateBundle",
     "HDSPVersionAuthority",
     "PCompileAuthorization",
@@ -383,4 +406,5 @@ __all__ = [
     "PUpdateProposal",
     "PVersionRegression",
     "VersionMetric",
+    "compile_p_bundle_v2_candidate",
 ]

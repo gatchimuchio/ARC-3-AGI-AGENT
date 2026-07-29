@@ -4,9 +4,10 @@ from dataclasses import dataclass, field
 from typing import Mapping
 
 from arc3_agi_agent.generic_compute import HybridRelationalInstructionBody
-from arc3_agi_agent.generic_runtime import (
-    GenericAGIRuntime,
-    GenericRuntimeConfiguration,
+from arc3_agi_agent.generic_runtime import GenericAGIRuntime
+from arc3_agi_agent.generic_session import (
+    ResourceContract,
+    create_cognitive_session,
 )
 from arc3_agi_agent.generic_structural import (
     infer_relational_rewrite_state,
@@ -160,10 +161,14 @@ def test_rendered_rewrite_inference_and_effect_learned_control() -> None:
     assert inferred.selected_matches is False
     assert inferred.all_matches is False
 
+    session = create_cognitive_session(
+        p_bundle=HybridRelationalInstructionBody(),
+        resource_contract=ResourceContract(action_budget_per_episode=64),
+    )
     report = GenericAGIRuntime(
         environment=world,
-        instruction_body=HybridRelationalInstructionBody(),
-        configuration=GenericRuntimeConfiguration(max_cycles=64),
+        session=session,
+        episode_handle=session.begin_episode(),
     ).run()
 
     assert report.final_state == "WIN"

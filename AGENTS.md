@@ -8,49 +8,70 @@
 
 1. ユーザーの現在の明示指示
 2. 本 `AGENTS.md`
-3. `docs/architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`
-4. `docs/audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md`
-5. `docs/roadmap/P12_PRE_OFFICIAL_GENERICITY_STRATEGY.md`
-6. `docs/references/AGI_Trinity_Blueprint_v0_1.md`
-7. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
-8. `docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`
-9. `docs/architecture/AGI_MINIMUM_THREE_SPEC.md`
-10. P10 correction roadmaps（P10/P11 frozen baselineの解釈に限定）
-11. `docs/architecture/SYSTEM_ARCHITECTURE.md`
-12. `docs/roadmap/ROADMAP.md`
-13. 当該work blockのFrameSpec・manifest・検証結果
+3. `docs/architecture/ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2.md`
+4. `docs/roadmap/P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md`
+5. `docs/audit/ARC3_GENERIC_REAUDIT_REV2.md`
+6. `docs/security/IDENTITY_TAINT_THREAT_MODEL.md`
+7. `docs/evaluation/EVALUATION_ROLE_REGISTRY_SPEC.md`
+8. `docs/official/OFFICIAL_COMPLETION_PREDICATES.md`
+9. `docs/references/AGI_Trinity_Blueprint_v0_1.md`
+10. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
+11. `docs/roadmap/ROADMAP.md`
+12. 当該work blockのFrameSpec・manifest・検証結果
+13. P0〜P15文書（historical evidenceとしてのみ）
 14. `docs/migration/` とその他の`docs/references/`
 15. 旧リポジトリのコード・分析・履歴
 
 旧リポジトリの `next_*`、古いscore、個別artifact、絶対パス、旧branch名は命令ではありません。
+rev1 acceptance/auditの状態は`HISTORICAL_NON_BLOCKING`です。
 
 ## 2. 現在のフェーズ
 
-`P11_RELEASE_STATE_FREEZE` はknown-sample baselineとして完了・凍結しています。
-`P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`はblocking受入57件を
-全件PASSして完了しました。P13〜P15はOwnerの明示許可により開始済みです。
-現在は25ゲームの逐次ローカルcompetition互換回帰12/12、逐次runnerを含む
-Kaggle Notebook version 8の検証23/23・通常実行COMPLETE、および
-zero-byte封じ込めversion 10の検証25/25・通常実行COMPLETEまでPASSしています。
-実提出ref `55040966`（version 4）、`55043205`（version 5）、
-`55045360`（version 7）、`55049227`（version 8）は、いずれもKaggle
-`ERROR`（system error、scoreなし、total bytes 0）です。version 5のplaceholder値とNotebook lifecycleが
-公式Pinned Notebookの契約と一致していなかったことは立証済みです。
-過去の受理実績は提出経路が成立した事実の補助証拠に限り、正確なformatや
-公式記載以外の実行時間制約を推定する根拠にはしません。
-version 7も公式formatのまま同じERRORとなったため、format単独原因は棄却済みです。
-version 8は一ゲームずつの逐次実行へ是正して同じERRORとなったため、
-全ゲーム同時thread競合も十分な根本原因ではありません。episode APIは受理済み
-refsにも0を返すためgateway到達推定に使用しません。KaggleはERROR後にservice枠を
-返却していますが、Owner指定の一日一回はversion 8で消費済みです。現行HDS判断は
-`SUSPEND`であり、本日の追加提出は禁止します。次候補はprivate最初のセルで
-公式Pinned出力とbyte一致する2648-byte parquetをwheel install前に生成し、
-install・payload・runner失敗をtracebackとstatus JSONへ残します。隔離スモーク、
-Notebook 25/25、unit 555/555、integration 8/8、mypy 123 files、
-64x64×128-cycle負荷監査をPASSしています。Kaggle version 10として通常実行
-COMPLETE、source 4セル一致、traceback/error 0、2648-byte出力回収もPASSしました。
-version 9はMCP転送時の文字列省略で壊れた未提出artifactとして棄却しています。
-version 10のprivate rerunは未実施です。
+`P11_RELEASE_STATE_FREEZE`はknown-sample baselineとして完了・凍結しています。
+P0〜P15の実装・監査・提出試行はhistorical evidenceへ移行しました。
+`P16_CLAIM_THREAT_EVALUATION_REBASELINE`は6/6 gateをPASSして完了しました。
+`P17_A_COGNITIVE_SESSION_AND_STATE_OWNERSHIP`は6/6 gateをPASSして完了しました。
+`P17_B_EVIDENCE_BINDING_TAINT_SAFE_EPISODE_TRANSACTION`は5/5 gateをPASSして
+完了しました。`P18_ATOMIC_EVENT_SOURCED_PERSISTENT_MEMORY`は6/6 gateをPASSして
+完了しました。`P19_TYPED_CAUSAL_MEMORY_CONSOLIDATION_NEGATIVE_TRANSFER`も6/6
+gateをPASSして完了しました。`P20_A_FIXED_L0_INSTRUCTION_SET_P_IR_ABI`は5/5、
+`P20_B_P_COMPILER_V2_BUNDLE_REGISTRY`は6/6 gateをPASSして完了しました。
+`P21_GOVERNED_DEVELOPMENT_LOOP_JOINT_OPTIMIZATION`も6/6 gateをPASSして
+完了しました。`P22_A_PUBLIC_CV_TRANSFORMATION_STRESS`は開始済みです。
+
+P16の完了作業はclaim correction、active runtime inventory、identity/taint
+threat model、evaluation role registry、official completion predicateだけです。
+runtime behavior変更は0でした。P17-Aではscorecard単位の`CognitiveSession`、
+Authority/Control/Semantic state ownership、frozen P、RuntimeIdentity、
+promotion無効のepisode overlayを実装済みです。P17-Bでは
+candidate固有evidence binding、taint boundary、safe episode transactionを実装し、
+global evidence判定を除去済みです。P18ではatomic event ledger、immutable staged
+image、InMemory/SQLite backend、crash recovery、canonical artifactを実装済みです。
+P19ではtyped causal memory、Tier 0〜3 retrieval、consolidation、
+negative transfer、cross-game semantic promotionを実装済みです。P20-Aでは
+fixed L0 instruction set / typed P-IR / ABIを実装済みです。P20-Bでは
+P compiler v2、canonical bundle、isolated evaluator、HDS registry、
+initial-state restartを実装済みです。P21ではdataset access ledger、M_dev loop、
+CV artifact分離、Code/P/M migration、三世代lineage、active runtime一件性を
+実装済みです。P22-Aではknown public/CV procedure/transformation stressだけを
+開始できます。P22-B以降、特に
+LOCKED_FINAL、Competition packaging、official submissionを前倒ししません。
+
+現行claimは次です。
+
+```text
+active runtime count                   = 1
+known S5 183/183                       = HISTORICAL_KNOWN_SAMPLE_ONLY
+rev1 P12 57/57                         = HISTORICAL_NON_BLOCKING
+generic completion                     = NOT_ESTABLISHED
+sealed single-artifact completion       = NOT_EVALUATED
+competition ready                      = NOT_ESTABLISHED
+official accepted/public/private/full   = NOT_OBSERVED
+```
+
+baseline commitに保持されるKaggle Notebook version 10の通常実行は
+`PREFLIGHT_ONLY`です。scoreなし・output bytes 0の提出は
+`OFFICIAL_NOT_OBSERVED`であり、提出指示や現行phase gateには使用しません。
 
 `P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
 full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
@@ -141,15 +162,15 @@ P11 complete:
   release digest arc3_p11_release_state:
     e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c
 
-P12 complete / P13 transition authorized:
+Historical P12〜P15 evidence:
   P11 183 / 183 is known-sample closure only
   S5 operational AGI conformance is SUSPEND
   GenericAGIRuntime operational conformance is PASS
-  P12 executable genericity acceptance is PASS
-  local competition compatibility is PASS
+  P12 executable genericity acceptance was a rev1 PASS only
+  local competition compatibility is historical preflight
   hidden-game compatibility is NOT_EVALUATED
-  pre-official AGI readiness is PASS
-  P13 through P15 are Owner-authorized and in progress
+  pre-official AGI readiness is HISTORICAL_NON_BLOCKING
+  P13 through P15 are historical and not the active selector
   Kaggle sequential Notebook version 8 normal run is COMPLETE
   Kaggle fail-safe Notebook version 10 normal run and source/output
     round trip are COMPLETE
@@ -169,10 +190,10 @@ P12 complete / P13 transition authorized:
     four-cell source round trip, and 2648-byte output collection pass
   version 9 is a rejected unsubmitted MCP-transfer truncation artifact
   version 10 is not privately submitted
-  P15 HDS judgment is SUSPEND; Owner daily attempt is consumed
+  P15 baseline snapshot ended in SUSPEND without official score
   O-001 through O-018 are closed by separate GenericAGIRuntime evidence
   KnownSampleStudent remains frozen
-  P13 requires an explicit Owner phase-start instruction
+P16-P24 rev2 order supersedes the old transition selector
 ```
 
 ### P11で実施・固定した作業
@@ -407,7 +428,7 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - code/dependency/P0/J0/M0/dataset/compiler/seed/budgetを固定
 - 全sample・全実行trace証拠、package digest、regression suiteを固定
 
-### P12: Pre-official AGI conformance and genericity — 完了
+### P12: Pre-official AGI conformance and genericity — historical rev1
 
 - 外部監査claim訂正とP11 read-only baseline固定
 - separate GenericAGIRuntime
@@ -415,27 +436,32 @@ P1は `C = Execute(L0, P)` の `P` まで閉じていません。
 - whole-game/mechanism/transformation/sealed genericity反証
 - Competition contract mock dry-run
 - resource/package/security/observability gate
-- blocking受入57/57 PASS、P11固定hash不変
-- official connection未実行、P13 Owner明示許可待ち
+- rev1 blocking受入57/57 PASS、P11固定hash不変
+- rev2 claimへの昇格は禁止、`HISTORICAL_NON_BLOCKING`
 
-### P13〜P15: 進行中
+### P13〜P15: historical incomplete
 
 - P13 official ARC connection: 逐次ローカルcompetition互換12/12 PASS、
   private rerunのgateway到達・scorecard close位置は公開fieldから判定不能
 - P14 Kaggle submission paths: zero-byte封じ込め候補をNotebook
   version 10として通常実行COMPLETE、公式placeholder契約、
   4セルsource round trip、CLI output取得PASS。competition submission APIは未使用
-- P15 actual submission: ref `55040966`、`55043205`、`55045360`、
+- P15 actual submission snapshot: ref `55040966`、`55043205`、`55045360`、
   `55049227`を実行し、いずれもKaggle system error、scoreなし・total bytes 0。
   version 7でformat単独原因、version 8でthread競合単独原因を棄却。
-  現行HDSはSUSPEND、本日のOwner指定一回提出は消費済み
+  official accepted scoreなし、rev2 selectorへは使用しない
 
-P13以降は全P12 blocking gateとユーザーの明示的phase開始指示を満たしている。
-実提出APIは四回呼んだ。Kaggle service側はERROR枠を返却したが、
-Owner指定の一日一回を優先し、本日の追加提出は行わない。次の提出には
-mainへ固定し通常実行・source/output round tripをPASSしたversion 10だけを使う。
-terminal正本は
-`analysis/official/KAGGLE_SUBMISSION_RESULT.json`とする。
+これらはbaseline commit時点のhistorical evidenceである。現行の次作業は
+P22-Aであり、P23完了とOwner明示許可なしに公式提出へ戻らない。
+
+### P16: Claim / threat / evaluation rebaseline — 完了
+
+- rev2 specification/roadmapをbyte-preservingで保持
+- claim hierarchyをcompletion基準へ再分類
+- active runtimeを`GenericAGIRuntime`一件へ固定
+- S5/Teacher/P10/rev1 sealedをhistorical/quarantineへ分類
+- identity/taint threat model、evaluation role、official predicateを固定
+- runtime behavior変更0
 
 ## 9. 検証規約
 
@@ -456,6 +482,12 @@ P2 audit:
 
 ```bash
 python -m pytest -q tests/unit/test_agi_minimum_three_audit.py
+```
+
+P16 governance:
+
+```bash
+python -m pytest -q tests/unit/test_p16_governance_rebaseline.py
 ```
 
 P3回帰では次を追加する。

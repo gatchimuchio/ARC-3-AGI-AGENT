@@ -21,13 +21,20 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
+from .authority_state import AuthorityState
+from .causal_record import causal_record, is_typed_causal_record
 from .competition_contract import run_competition_contract_dry_run
+from .control_state import ControlState
+from .evidence_binding import build_evidence_binding_key
+from .evidence_policy import evidence_group
 from .generic_compute import (
     ComputeAblation,
     GenericComputeSubject,
     HybridRelationalInstructionBody,
     ParametricRelationalInstructionBody,
     SymbolicRelationalInstructionBody,
+    action_descriptors,
+    represent_observation,
 )
 from .generic_env import (
     MechanismWorld,
@@ -59,7 +66,8 @@ from .generic_runtime import (
     GenericRuntimeAblation,
     GenericRuntimeConfiguration,
 )
-from .generic_types import GenericRunReport
+from .generic_session import ResourceContract, create_cognitive_session
+from .generic_types import GenericEnvironment, GenericRunReport
 from .s5_runner import (
     load_s5_closure_report,
     load_s5_execution_trace_manifest,
@@ -419,6 +427,59 @@ def s5_operational_conformance() -> dict[str, object]:
     }
 
 
+def _new_runtime(
+    environment: GenericEnvironment,
+    instruction_body: (
+        HybridRelationalInstructionBody
+        | ParametricRelationalInstructionBody
+        | SymbolicRelationalInstructionBody
+    ),
+    configuration: GenericRuntimeConfiguration | None = None,
+    *,
+    hds_configuration: HDSConfiguration | None = None,
+    initial_memory_records: tuple[SemanticRecord, ...] = (),
+) -> GenericAGIRuntime:
+    selected_configuration = configuration or GenericRuntimeConfiguration()
+    failures = selected_configuration.validate()
+    if failures:
+        raise ValueError(";".join(failures))
+    cognitive_session = create_cognitive_session(
+        p_bundle=instruction_body,
+        hds_configuration=hds_configuration,
+        initial_memory_records=initial_memory_records,
+        resource_contract=ResourceContract(
+            action_budget_per_episode=selected_configuration.max_cycles,
+            max_memory_updates_per_cycle=(
+                selected_configuration.max_memory_updates_per_cycle
+            ),
+        ),
+    )
+    return GenericAGIRuntime(
+        environment,
+        cognitive_session,
+        cognitive_session.begin_episode(),
+    )
+
+
+def _new_hds_subject(
+    configuration: HDSConfiguration,
+    *,
+    run_id: str,
+) -> tuple[GenericHDSJudgementSubject, SemanticMemory]:
+    session_id = "p12-isolated:" + digest_object(
+        (run_id, configuration)
+    )[:24]
+    authority = AuthorityState(session_id)
+    control = ControlState(session_id)
+    subject = GenericHDSJudgementSubject(
+        authority_state=authority,
+        control_state=control,
+        configuration=configuration,
+        run_id=run_id,
+    )
+    return subject, SemanticMemory(authority)
+
+
 def _run_world(
     body: object,
     *,
@@ -440,7 +501,7 @@ def _run_world(
         ),
     ):
         raise TypeError("P12_GENERIC_INSTRUCTION_BODY_REQUIRED")
-    runtime = GenericAGIRuntime(
+    runtime = _new_runtime(
         environment=MechanismWorld(
             available_actions=actions,
             winning_ordinals=winning,
@@ -620,20 +681,74 @@ def _semantic_memory_seed(
     hazard: int = 0,
     no_effect: int = 0,
 ) -> SemanticRecord:
-    return semantic_record(
-        memory_id="seed-procedure:" + digest_object(semantic_key)[:20],
-        kind="PROCEDURE_CAPABILITY",
+    observation = MechanismWorld(
+        available_actions=(11, 29, 47),
+        winning_ordinals=(0,),
+        required_progress=2,
+    ).observe()
+    representation = represent_observation(
+        observation,
+        goal_tokens=("goal:progress",),
+    )
+    descriptors = action_descriptors(observation, representation)
+    prediction = next(
+        item
+        for item in ParametricRelationalInstructionBody().query(
+            representation,
+            descriptors,
+            (),
+        ).predictions
+        if item.descriptor.semantic_key == semantic_key
+    )
+    binding_key = build_evidence_binding_key(
+        topology_tokens=representation.topology_tokens,
+        relations=representation.relations,
+        descriptor_semantic_key=prediction.descriptor.semantic_key,
+        action_id=prediction.descriptor.action_id,
+        target_role=prediction.descriptor.target_role,
+        payload_fields=tuple(
+            key for key, _ in prediction.descriptor.payload_items
+        ),
+        predicted_effects=prediction.predicted_effects,
+    )
+    groups = tuple(
+        evidence_group(
+            outcome=outcome,
+            normalized_before_pattern_digest=(
+                binding_key.normalized_state_pattern_digest
+            ),
+            action_relation_digest=binding_key.action_relation_digest,
+            normalized_after_effect_digest=f"compiler-effect:{outcome}:{index}",
+            delay_min_steps=0,
+            delay_max_steps=0,
+            episode_nonce=f"compiler-episode:{index % 2}",
+            event_ids=(f"compiler-event:{outcome}:{index}",),
+        )
+        for outcome, count in (
+            ("SUPPORT", success),
+            ("HAZARD", hazard),
+            ("NO_EFFECT", no_effect),
+        )
+        for index in range(count)
+    )
+    return causal_record(
+        kind="ACTION_EFFECT",
+        binding_key=binding_key,
+        scope_class="SESSION_GLOBAL",
         statement="Compiler-authorized reusable action-effect procedure.",
         semantic_tokens=("goal:progress", semantic_key),
-        evidence=("prior environment evidence",),
+        relations=(f"action-relation:{semantic_key}",),
+        applicability_predicates=(
+            "current-legal-action",
+            "normalized-role-topology",
+        ),
+        evidence_groups=groups,
         falsification_condition="new environment evidence contradicts procedure",
         payload={
-            "success_count": success,
-            "hazard_count": hazard,
-            "no_effect_count": no_effect,
+            "progress_count": success,
             "visible_change_count": 0,
         },
-    )
+    ).to_semantic_record()
 
 
 def operational_conformance_suite() -> dict[str, object]:
@@ -662,7 +777,7 @@ def operational_conformance_suite() -> dict[str, object]:
     )
 
     p_removal_witness = ""
-    removal_runtime = GenericAGIRuntime(
+    removal_runtime = _new_runtime(
         MechanismWorld((11, 29), (0,), 1),
         ParametricRelationalInstructionBody(),
         GenericRuntimeConfiguration(max_cycles=2),
@@ -759,9 +874,9 @@ def operational_conformance_suite() -> dict[str, object]:
     )
 
     def j_decision(configuration: HDSConfiguration) -> tuple[str, str | None]:
-        token = object()
-        subject = GenericHDSJudgementSubject(
-            token, configuration=configuration, run_id="j-only"
+        subject, _ = _new_hds_subject(
+            configuration,
+            run_id="j-only",
         )
         local_frame = subject.frame(
             first_cycle.observation,
@@ -826,14 +941,13 @@ def operational_conformance_suite() -> dict[str, object]:
                 f"M{report.memory_final_version}",
             )
         )
-    suspend_subject = GenericHDSJudgementSubject(
-        object(),
-        configuration=HDSConfiguration(evidence_mode="REPRODUCED_ONLY"),
+    suspend_subject, suspend_memory = _new_hds_subject(
+        HDSConfiguration(evidence_mode="REPRODUCED_ONLY"),
         run_id="suspend-ablation",
     )
     suspend_frame = suspend_subject.frame(
         first_cycle.observation,
-        SemanticMemory(object()).view(),
+        suspend_memory.view(),
         remaining_budget=4,
     )
     suspend_removed = suspend_subject.judge(
@@ -849,14 +963,13 @@ def operational_conformance_suite() -> dict[str, object]:
     )
 
     def frame_ablation_witness(ablation: HDSAblation) -> str:
-        subject = GenericHDSJudgementSubject(
-            object(),
-            configuration=HDSConfiguration(),
+        subject, memory = _new_hds_subject(
+            HDSConfiguration(),
             run_id="frame-ablation",
         )
         local_frame = subject.frame(
             first_cycle.observation,
-            SemanticMemory(object()).view(),
+            memory.view(),
             remaining_budget=4,
             ablation=ablation,
         )
@@ -864,7 +977,7 @@ def operational_conformance_suite() -> dict[str, object]:
             subject.issue_compute(
                 local_frame,
                 first_cycle.observation,
-                SemanticMemory(object()).view(),
+                memory.view(),
             )
         except PermissionError as error:
             return str(error)
@@ -897,7 +1010,9 @@ def operational_conformance_suite() -> dict[str, object]:
     )
 
     authority_violation = False
-    fake_compute = GenericComputeSubject(object())
+    fake_compute = GenericComputeSubject(
+        AuthorityState("p12-forged-compute")
+    )
     try:
         fake_compute.compute(
             command=replace(
@@ -967,13 +1082,22 @@ def operational_conformance_suite() -> dict[str, object]:
             and "SUSPEND_CAPABILITY_REMOVED"
             in hds_ablation_results["Suspend"]
         ),
-        "M-001": {
-            "HYPOTHESIS",
-            "COUNTER_HYPOTHESIS",
-            "CONTRADICTION",
-            "PROCEDURE_CAPABILITY",
-            "DECISION_RATIONALE",
-        }.issubset(memory_kinds),
+        "M-001": (
+            {
+                "HYPOTHESIS",
+                "COUNTER_HYPOTHESIS",
+                "CONTRADICTION",
+                "PROCEDURE_CAPABILITY",
+                "DECISION_RATIONALE",
+            }.issubset(memory_kinds)
+            or (
+                "ACTION_EFFECT" in memory_kinds
+                and all(
+                    is_typed_causal_record(record)
+                    for record in nominal_runtime.memory.view().active
+                )
+            )
+        ),
         "M-002": bool(nominal_runtime.memory.view().sealed)
         and not nominal_runtime.memory.query(
             SemanticMemoryQuery(
@@ -1119,7 +1243,7 @@ def whole_game_holdout_manifest(
                 )
                 if not isinstance(raw_environment, LocalEnvironmentWrapper):
                     raise TypeError("P12_LOCAL_ENVIRONMENT_REQUIRED")
-                runtime = GenericAGIRuntime(
+                runtime = _new_runtime(
                     environment=OfflineGenericEnvironment(raw_environment),
                     instruction_body=HybridRelationalInstructionBody(),
                     configuration=GenericRuntimeConfiguration(
@@ -1135,7 +1259,7 @@ def whole_game_holdout_manifest(
                         "progress": report.progress_count,
                         "actions": report.actions_executed,
                         "crash": False,
-                        "identity_leak": report.runtime_identity_received,
+                        "identity_leak": not report.identity_boundary_passed,
                         "unknown_action_surface_exception": False,
                         "trace_digest": report.digest(),
                         "elapsed_seconds": time.perf_counter() - started,
@@ -1346,7 +1470,7 @@ def mechanism_holdout_evaluation() -> dict[str, object]:
 def executable_transformation_evaluation() -> dict[str, object]:
     results: list[dict[str, object]] = []
     for family, world in transformed_worlds(seed=0):
-        runtime = GenericAGIRuntime(
+        runtime = _new_runtime(
             world,
             HybridRelationalInstructionBody(),
             GenericRuntimeConfiguration(max_cycles=32),
@@ -1469,7 +1593,7 @@ def sealed_custom_evaluation(
     ) as session:
         evaluator_digest = session.evaluator_digest
         for index, handle in enumerate(session.handles):
-            runtime = GenericAGIRuntime(
+            runtime = _new_runtime(
                 session.environment(handle),
                 body,
                 GenericRuntimeConfiguration(max_cycles=48),
@@ -1678,7 +1802,7 @@ def version_learning_evaluation() -> dict[str, object]:
             progress=report.progress_count,
             actions=report.actions_executed,
             crashes=0,
-            identity_leaks=int(report.runtime_identity_received),
+            identity_leaks=int(not report.identity_boundary_passed),
         )
 
     regression = authority.blind_regression(
@@ -1696,7 +1820,7 @@ def version_learning_evaluation() -> dict[str, object]:
         j0=HDSConfiguration(),
         memory_records=evidence,
     )
-    restarted = GenericAGIRuntime(
+    restarted = _new_runtime(
         MechanismWorld((401, 505, 609), (1,), required_progress=2),
         initial.p_body,
         GenericRuntimeConfiguration(max_cycles=12),
@@ -1743,7 +1867,7 @@ def resource_package_security(
     total_started = time.perf_counter()
     for _, world in transformed_worlds(seed=13):
         started = time.perf_counter()
-        report = GenericAGIRuntime(
+        report = _new_runtime(
             world,
             body,
             GenericRuntimeConfiguration(max_cycles=32),
@@ -1835,7 +1959,7 @@ def resource_package_security(
             report.final_state == "WIN"
             for _, world in transformed_worlds(seed=14)
             for report in (
-                GenericAGIRuntime(
+                _new_runtime(
                     world,
                     body,
                     GenericRuntimeConfiguration(max_cycles=32),

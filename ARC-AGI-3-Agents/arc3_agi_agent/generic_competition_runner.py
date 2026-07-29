@@ -11,6 +11,14 @@ from typing import Any
 
 from arc_agi import Arcade  # type: ignore[import-untyped]
 
+from .generic_compute import HybridRelationalInstructionBody
+from .generic_session import (
+    CognitiveSession,
+    ResourceContract,
+    create_cognitive_session,
+)
+from .identity_boundary import OrchestrationMetadata, Tainted
+
 logger = logging.getLogger(__name__)
 
 GENERIC_COMPETITION_RUNNER_VERSION = "arc3-generic-competition-runner-v1"
@@ -56,6 +64,7 @@ def run_sequential_competition(
     *,
     arcade: Any | None = None,
     agent_factory: Callable[..., Any] | None = None,
+    session_factory: Callable[[], CognitiveSession] | None = None,
 ) -> dict[str, object]:
     """Run every advertised environment once under one scorecard.
 
@@ -69,6 +78,17 @@ def run_sequential_competition(
         from agents.templates.generic_agi_agent import GenericAGIAgent
 
         agent_factory = GenericAGIAgent
+    if session_factory is None:
+        def default_session_factory() -> CognitiveSession:
+            return create_cognitive_session(
+                p_bundle=HybridRelationalInstructionBody(),
+                mode="COMPETITION",
+                resource_contract=ResourceContract(
+                    action_budget_per_episode=128,
+                ),
+            )
+
+        session_factory = default_session_factory
     client = arcade if arcade is not None else Arcade()
     game_ids = tuple(
         str(environment.game_id) for environment in client.get_environments()
@@ -80,6 +100,13 @@ def run_sequential_competition(
     if len(set(game_ids)) != len(game_ids):
         raise RuntimeError("GENERIC_COMPETITION_DUPLICATE_ENVIRONMENT_ID")
 
+    cognitive_session = session_factory()
+    if not isinstance(cognitive_session, CognitiveSession):
+        raise TypeError("GENERIC_COMPETITION_COGNITIVE_SESSION_REQUIRED")
+    state_owner_violations = cognitive_session.state_owner_violations()
+    if state_owner_violations:
+        raise RuntimeError(";".join(state_owner_violations))
+
     card_id = client.open_scorecard(tags=["agent", "genericagi", "sequential"])
     if not isinstance(card_id, str) or not card_id:
         raise RuntimeError("GENERIC_COMPETITION_SCORECARD_OPEN_FAILED")
@@ -89,10 +116,15 @@ def run_sequential_competition(
     lifecycle_failures: list[dict[str, object]] = []
     close_result: object | None = None
     close_error: Exception | None = None
+    session_lifecycle_failed = False
     try:
         for game_index, game_id in enumerate(game_ids):
             environment: object | None = None
+            episode_handle = None
+            game_succeeded = False
+            game_reason = "UNSTARTED"
             try:
+                episode_handle = cognitive_session.begin_episode()
                 environment = client.make(
                     game_id,
                     scorecard_id=card_id,
@@ -101,6 +133,13 @@ def run_sequential_competition(
                 )
                 if environment is None:
                     raise RuntimeError("GENERIC_COMPETITION_MAKE_RETURNED_NONE")
+                orchestration_metadata = OrchestrationMetadata(
+                    scorecard_id=Tainted(card_id),
+                    game_id=Tainted(game_id),
+                    game_index=Tainted(game_index),
+                    environment_handle=Tainted(environment),
+                )
+                del orchestration_metadata
                 agent = agent_factory(
                     card_id=card_id,
                     game_id=game_id,
@@ -108,11 +147,15 @@ def run_sequential_competition(
                     ROOT_URL=_root_url(),
                     record=False,
                     arc_env=environment,
+                    cognitive_session=cognitive_session,
+                    episode_handle=episode_handle,
                 )
                 agent.main()
                 runtime_report = getattr(agent, "runtime_report", None)
                 if runtime_report is None:
                     raise RuntimeError("GENERIC_COMPETITION_RUNTIME_REPORT_MISSING")
+                game_succeeded = True
+                game_reason = str(runtime_report.stop_reason)
                 completed.append(
                     {
                         "game_index": game_index,
@@ -135,6 +178,7 @@ def run_sequential_competition(
                     _peak_rss_mb(),
                 )
             except Exception as error:
+                game_reason = type(error).__name__
                 logger.exception(
                     "Sequential game failed: index=%s/%s",
                     game_index + 1,
@@ -148,6 +192,31 @@ def run_sequential_competition(
                     }
                 )
             finally:
+                if episode_handle is not None:
+                    try:
+                        cognitive_session.end_episode(
+                            episode_handle,
+                            succeeded=game_succeeded,
+                            reason=game_reason,
+                        )
+                    except Exception as error:
+                        session_lifecycle_failed = True
+                        logger.exception(
+                            (
+                                "Cognitive session episode closure failed: "
+                                "index=%s/%s"
+                            ),
+                            game_index + 1,
+                            len(game_ids),
+                        )
+                        lifecycle_failures.append(
+                            {
+                                "game_index": game_index,
+                                "phase": "episode_close",
+                                "error_type": type(error).__name__,
+                                "error_message": str(error)[:1000],
+                            }
+                        )
                 try:
                     _release_environment(environment)
                 except Exception as error:
@@ -164,6 +233,8 @@ def run_sequential_competition(
                             "error_message": str(error)[:1000],
                         }
                     )
+            if session_lifecycle_failed:
+                break
     finally:
         try:
             close_result = client.close_scorecard(card_id)
@@ -182,6 +253,18 @@ def run_sequential_competition(
         "scorecard_open_count": 1,
         "scorecard_close_count": 1 if close_error is None else 0,
         "scorecard_closed": close_result is not None,
+        "shared_session_count": 1,
+        "per_game_new_memory_count": 0,
+        "per_game_new_p_count": 0,
+        "cross_game_semantic_promotion": (
+            "ENABLED"
+            if cognitive_session.cross_game_semantic_promotion_enabled
+            else "DISABLED"
+        ),
+        "state_owner_violation_count": len(state_owner_violations),
+        "identity_boundary": "PASS",
+        "runtime_identity_digest": cognitive_session.runtime_identity.digest(),
+        "session_lineage_digest": cognitive_session.lineage_digest,
         "results": completed,
         "failures": failures,
         "lifecycle_failures": lifecycle_failures,

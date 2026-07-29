@@ -1,0 +1,95 @@
+{
+  "schema_version": "arc3-p17b-phase-state-v1",
+  "phase": "P17_B_EVIDENCE_BINDING_TAINT_SAFE_EPISODE_TRANSACTION",
+  "status": "PASS",
+  "base_commit": "baa03f3ba7648503d5d212d6afe9c956c56984fc",
+  "code": {
+    "commit": null,
+    "tree": null,
+    "binding_state": "UNCOMMITTED_WORKTREE"
+  },
+  "runtime_identity": "runtime-identity:5a13272198d12d820fe4bea2e32805adbf892a8da54d45da7e2f8305810b8f4f",
+  "runtime_identity_fields": {
+    "code_tree_digest": "sha256:60e55b22a919724f0644fc7fdce1b0e59bce950bff0209c817980295a44c6593",
+    "l0_abi_version": "arc3-generic-compute-v1",
+    "p_logical_digest": "generic-hybrid-p:389967e821e33a69d9ad898e8b9d04dbf5559fe3ab65c521d5ab020c261645c7",
+    "j_implementation_digest": "sha256:9046d64b22ab16a665621329041573105ec3124a5c768c752143114791139a7b",
+    "j_config_digest": "hds-config:bd76623d510ad728c47a54544294a6638d341a0a61ed284cbd3abd369588d41c",
+    "m0_logical_digest": "m0:4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "adapter_digest": "sha256:42a999d1118f53cbc6c544a9ef20930cb73ca88c2208e7d659403a8df28aff09",
+    "dependency_lock_digest": "sha256:680db09e6d1d3291ac8dc5138dd89c86a6341e5a1a86bbf803d2a1c4885e4a92"
+  },
+  "evaluation_role": "DEVELOPMENT_VALIDATION",
+  "metrics": {
+    "unrelated_evidence_false_positive": 0,
+    "candidate_binding_coverage_ppm": 1000000,
+    "failure_overlay_leak": 0,
+    "tainted_decision_input_count": 0,
+    "cross_game_semantic_promotion": "DISABLED"
+  },
+  "required_tests": {
+    "test_unrelated_memory_never_marks_reproduced": "PASS",
+    "test_matching_record_can_mark_reproduced": "PASS",
+    "test_precondition_mismatch_forces_probe": "PASS",
+    "test_effect_mismatch_forces_probe": "PASS",
+    "test_hazard_exact_match_veto": "PASS",
+    "test_probation_never_authorizes_execute": "PASS",
+    "test_failure_rolls_back_episode_overlay": "PASS",
+    "test_game_order_not_visible": "PASS",
+    "test_opaque_handle_not_serializable": "PASS",
+    "test_dynamic_xy_from_render_allowed": "PASS",
+    "test_precomputed_xy_rejected": "PASS"
+  },
+  "gates": {
+    "P17B-001": "PASS",
+    "P17B-002": "PASS",
+    "P17B-003": "PASS",
+    "P17B-004": "PASS",
+    "P17B-005": "PASS"
+  },
+  "failed_requirement_ids": [],
+  "validation": {
+    "dedicated_p17b": {
+      "passed": 12,
+      "failed": 0
+    },
+    "phase_state_content_binding": {
+      "passed": 1,
+      "failed": 0
+    },
+    "p12_operational_rerun": {
+      "passed": 1,
+      "failed": 0
+    },
+    "unit_suite": {
+      "passed": 586,
+      "failed": 0
+    },
+    "mypy_source_files": {
+      "passed": 9,
+      "failed": 0
+    },
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "resolved_regressions": [
+    {
+      "classification": "product regression",
+      "failure": "P12_RETRIEVAL_FIXTURE_MISSING_CANDIDATE_BINDING_KEY",
+      "cause": "historical seed record predated candidate-specific evidence keys",
+      "resolution": "construct the fixture with the runtime evidence-key builder and explicit eligibility counters",
+      "result": "1/1 operational rerun PASS and 586/586 full unit PASS"
+    }
+  ],
+  "raw_evidence_pointers": [
+    "docs/architecture/P17B_EVIDENCE_TAINT_TRANSACTION.md",
+    "ARC-AGI-3-Agents/tests/unit/test_p17b_evidence_taint_transaction.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/evidence_binding.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/decision_context.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/taint.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/episode_transaction.py"
+  ],
+  "next_phase": "P18_ATOMIC_EVENT_SOURCED_PERSISTENT_MEMORY",
+  "later_phases_activated": false,
+  "content_digest": "f6224b54b0b88784e0d54a0fc341f3b06d9051322218ad6a0b01cc48b5be2d82"
+}

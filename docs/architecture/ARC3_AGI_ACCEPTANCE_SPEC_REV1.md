@@ -1,5 +1,12 @@
 # ARC3 AGI 受入仕様 rev1
 
+> status: `HISTORICAL_NON_BLOCKING`
+>
+> P16以降の現行受入は
+> `ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2`を正本とする。
+> 本書の57項目PASSはrev1定義域の歴史的証拠であり、rev2のphase gate、
+> generic completion、sealed single-artifact、official completionを成立させない。
+
 - specification: `ARC3_AGI_ACCEPTANCE_SPEC_REV1`
 - statuses: `PASS | HOLD | SUSPEND | FAIL | NOT_EVALUATED`
 - blocking rule: 一件でも`PASS`以外なら公式接続を禁止する

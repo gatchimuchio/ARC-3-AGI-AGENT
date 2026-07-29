@@ -81,10 +81,21 @@ class _RuntimeReport:
 class _Agent:
     active = 0
     active_peak = 0
+    session_object_ids: list[int] = []
+    memory_object_ids: list[int] = []
+    p_object_ids: list[int] = []
 
     def __init__(self, **kwargs: object) -> None:
         assert kwargs["record"] is False
         self.game_id = str(kwargs["game_id"])
+        cognitive_session = kwargs["cognitive_session"]
+        self.__class__.session_object_ids.append(id(cognitive_session))
+        self.__class__.memory_object_ids.append(
+            id(getattr(cognitive_session, "memory"))
+        )
+        self.__class__.p_object_ids.append(
+            id(getattr(getattr(cognitive_session, "p_bundle"), "body"))
+        )
         self.runtime_report: _RuntimeReport | None = None
 
     def main(self) -> None:
@@ -105,6 +116,9 @@ def test_runner_isolates_one_game_and_closes_one_scorecard() -> None:
     arcade = _Arcade()
     _Agent.active = 0
     _Agent.active_peak = 0
+    _Agent.session_object_ids = []
+    _Agent.memory_object_ids = []
+    _Agent.p_object_ids = []
 
     report = run_sequential_competition(
         arcade=arcade,
@@ -123,12 +137,24 @@ def test_runner_isolates_one_game_and_closes_one_scorecard() -> None:
     assert report["active_agent_peak"] == 1
     assert report["scorecard_closed"] is True
     assert report["runtime_policy_changed"] is False
+    assert len(set(_Agent.session_object_ids)) == 1
+    assert len(set(_Agent.memory_object_ids)) == 1
+    assert len(set(_Agent.p_object_ids)) == 1
+    assert report["shared_session_count"] == 1
+    assert report["per_game_new_memory_count"] == 0
+    assert report["per_game_new_p_count"] == 0
+    assert report["cross_game_semantic_promotion"] == "ENABLED"
+    assert report["state_owner_violation_count"] == 0
+    assert report["identity_boundary"] == "PASS"
 
 
 def test_runner_records_release_failure_and_continues() -> None:
     arcade = _Arcade()
     _Agent.active = 0
     _Agent.active_peak = 0
+    _Agent.session_object_ids = []
+    _Agent.memory_object_ids = []
+    _Agent.p_object_ids = []
     original_make = arcade.make
 
     def make_with_one_release_failure(

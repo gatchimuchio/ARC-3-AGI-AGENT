@@ -7,6 +7,13 @@ from collections import Counter, deque
 from dataclasses import dataclass, field
 from typing import Protocol, Sequence
 
+from .authority_state import AuthorityState
+from .evidence_binding import (
+    TypedCandidateProvenance,
+    bind_candidate_records,
+    build_evidence_binding_key,
+    record_matches_binding_prefix,
+)
 from .generic_memory import (
     SemanticMemoryQuery,
     SemanticMemoryQueryResult,
@@ -14,6 +21,7 @@ from .generic_memory import (
 )
 from .generic_types import (
     ActionDescriptor,
+    ActionEffectRecord,
     GenericCandidate,
     GenericComputeCommand,
     GenericComputeResult,
@@ -24,7 +32,9 @@ from .generic_types import (
     ObjectRole,
     RelationalRepresentation,
 )
+from .p_ir_types import PIRProgram
 from .schema import digest_object
+from .taint import COORDINATE_PROVENANCE_CURRENT_RENDER
 
 GENERIC_COMPUTE_VERSION = "arc3-generic-compute-v1"
 GENERIC_P_REMOVAL_WITNESS = "GENERIC_EXECUTABLE_INSTRUCTION_BODY_REQUIRED"
@@ -262,6 +272,8 @@ def action_descriptors(
         if observation.rendered_layers
         else ()
     )
+    matrix_height = len(matrix) if matrix else 64
+    matrix_width = len(matrix[0]) if matrix else 64
     components = _components(matrix)[:32]
     for ordinal, action_id in enumerate(observation.available_actions):
         fields = payload_schema.get(action_id, ())
@@ -330,8 +342,8 @@ def action_descriptors(
                 role_anchor_values: list[tuple[str, int, int]] = []
                 for anchor_name, target_x, target_y in raw_anchors:
                     coordinate = (
-                        max(0, min(63, target_x)),
-                        max(0, min(63, target_y)),
+                        max(0, min(matrix_width - 1, target_x)),
+                        max(0, min(matrix_height - 1, target_y)),
                     )
                     if coordinate in seen_coordinates:
                         continue
@@ -365,6 +377,10 @@ def action_descriptors(
                                 ("y", target_y),
                             ),
                             target_role=role.role_id,
+                            coordinate_provenance=(
+                                COORDINATE_PROVENANCE_CURRENT_RENDER
+                            ),
+                            coordinate_observation_digest=observation.digest(),
                         )
                     )
         else:
@@ -392,6 +408,8 @@ class InstructionBodyResult:
     predictions: tuple[GenericPrediction, ...]
     query_digest: str
     selected_instruction_refs: tuple[str, ...]
+    control_operation: str = ""
+    control_instruction_refs: tuple[str, ...] = ()
 
 
 class GenericInstructionBody(Protocol):
@@ -410,20 +428,39 @@ class GenericInstructionBody(Protocol):
         representation: RelationalRepresentation,
         descriptors: tuple[ActionDescriptor, ...],
         records: tuple[SemanticRecord, ...],
+        *,
+        observation: GenericObservation | None = None,
+        action_history: tuple[ActionEffectRecord, ...] = (),
     ) -> InstructionBodyResult: ...
 
 
 def _record_statistics(
     descriptor: ActionDescriptor,
     records: Sequence[SemanticRecord],
+    *,
+    representation: RelationalRepresentation,
 ) -> tuple[float, float, float, float, float, tuple[str, ...]]:
     successes = 0.0
     hazards = 0.0
     no_effects = 0.0
     visible_changes = 0.0
     refs: list[str] = []
+    binding_prefix = build_evidence_binding_key(
+        topology_tokens=representation.topology_tokens,
+        relations=representation.relations,
+        descriptor_semantic_key=descriptor.semantic_key,
+        action_id=descriptor.action_id,
+        target_role=descriptor.target_role,
+        payload_fields=tuple(key for key, _ in descriptor.payload_items),
+        # Statistics consume records already emitted by a prediction.  The
+        # action-relation key binds the expected-effect class while the exact
+        # effect set remains isolated in predicted_effect_digest.
+        predicted_effects=("EXPECTED_EFFECT_FAMILY",),
+    )
     for record in records:
         if descriptor.semantic_key not in record.semantic_tokens:
+            continue
+        if not record_matches_binding_prefix(record, binding_prefix):
             continue
         refs.append(record.memory_id)
         payload = record.payload()
@@ -454,6 +491,25 @@ def _record_statistics(
         total,
         tuple(sorted(set(refs))),
     )
+
+
+def _memory_effects(
+    records: Sequence[SemanticRecord],
+    record_ids: set[str],
+) -> tuple[str, ...]:
+    effects: set[str] = set()
+    for record in records:
+        if record.memory_id not in record_ids:
+            continue
+        value = record.payload().get("learned_effects", ())
+        if isinstance(value, (str, bytes)) or not isinstance(value, Sequence):
+            continue
+        effects.update(
+            str(item)
+            for item in value
+            if isinstance(item, str) and item
+        )
+    return tuple(sorted(effects))
 
 
 @dataclass(frozen=True, slots=True)
@@ -492,6 +548,9 @@ class SymbolicRelationalInstructionBody:
         representation: RelationalRepresentation,
         descriptors: tuple[ActionDescriptor, ...],
         records: tuple[SemanticRecord, ...],
+        *,
+        observation: GenericObservation | None = None,
+        action_history: tuple[ActionEffectRecord, ...] = (),
     ) -> InstructionBodyResult:
         predictions: list[GenericPrediction] = []
         for descriptor in descriptors:
@@ -503,7 +562,9 @@ class SymbolicRelationalInstructionBody:
                 sample_count,
                 memory_refs,
             ) = _record_statistics(
-                descriptor, records
+                descriptor,
+                records,
+                representation=representation,
             )
             observed = success + hazard + no_effect + visible_change > 0.0
             continue_visible_effect = (
@@ -645,7 +706,9 @@ class ParametricRelationalInstructionBody:
             sample_count,
             memory_refs,
         ) = _record_statistics(
-            descriptor, records
+            descriptor,
+            records,
+            representation=representation,
         )
         observed = (
             1.0
@@ -681,6 +744,9 @@ class ParametricRelationalInstructionBody:
         representation: RelationalRepresentation,
         descriptors: tuple[ActionDescriptor, ...],
         records: tuple[SemanticRecord, ...],
+        *,
+        observation: GenericObservation | None = None,
+        action_history: tuple[ActionEffectRecord, ...] = (),
     ) -> InstructionBodyResult:
         failures = self.validate()
         if failures:
@@ -820,9 +886,24 @@ class HybridRelationalInstructionBody:
         representation: RelationalRepresentation,
         descriptors: tuple[ActionDescriptor, ...],
         records: tuple[SemanticRecord, ...],
+        *,
+        observation: GenericObservation | None = None,
+        action_history: tuple[ActionEffectRecord, ...] = (),
     ) -> InstructionBodyResult:
-        symbolic = self.symbolic.query(representation, descriptors, records)
-        parametric = self.parametric.query(representation, descriptors, records)
+        symbolic = self.symbolic.query(
+            representation,
+            descriptors,
+            records,
+            observation=observation,
+            action_history=action_history,
+        )
+        parametric = self.parametric.query(
+            representation,
+            descriptors,
+            records,
+            observation=observation,
+            action_history=action_history,
+        )
         symbolic_by_key = {
             item.descriptor.semantic_key: item for item in symbolic.predictions
         }
@@ -899,8 +980,13 @@ class ComputeAblation:
 class GenericComputeSubject:
     """C: executes L0+P but owns no final judgment or side effect."""
 
-    authority_token: object = field(repr=False)
-    _consumed_commands: set[str] = field(default_factory=set, init=False)
+    authority_state: AuthorityState = field(repr=False)
+
+    @property
+    def authority_token(self) -> object:
+        """Compatibility view; capability state remains session-owned."""
+
+        return self.authority_state.live_token
 
     def _require_command(
         self,
@@ -908,15 +994,31 @@ class GenericComputeSubject:
         observation: GenericObservation,
         memory_version: int,
     ) -> None:
-        if command._authority_token is not self.authority_token:
-            raise PermissionError("GENERIC_COMPUTE_COMMAND_NOT_HDS_AUTHORIZED")
-        if command.command_id in self._consumed_commands:
-            raise PermissionError("GENERIC_COMPUTE_COMMAND_REUSED")
+        self.authority_state.require_live_token(
+            command._authority_token,
+            error="GENERIC_COMPUTE_COMMAND_NOT_HDS_AUTHORIZED",
+        )
         if command.observation_signature != observation.signature:
             raise PermissionError("GENERIC_COMPUTE_OBSERVATION_BINDING_INVALID")
         if command.memory_version != memory_version:
             raise RuntimeError("GENERIC_COMPUTE_MEMORY_VERSION_CONFLICT")
-        self._consumed_commands.add(command.command_id)
+        binding_digest = digest_object(
+            {
+                "purpose": command.purpose,
+                "goal_tokens": command.goal_tokens,
+                "required_outputs": command.required_outputs,
+                "observation_signature": command.observation_signature,
+                "memory_version": command.memory_version,
+            }
+        )
+        self.authority_state.consume(
+            command.command_id,
+            kind="HDS_COMPUTE",
+            binding_digest=binding_digest,
+            unknown_error="GENERIC_COMPUTE_COMMAND_NOT_HDS_AUTHORIZED",
+            reused_error="GENERIC_COMPUTE_COMMAND_REUSED",
+            binding_error="GENERIC_COMPUTE_COMMAND_BINDING_INVALID",
+        )
 
     def compute(
         self,
@@ -925,8 +1027,16 @@ class GenericComputeSubject:
         observation: GenericObservation,
         memory: SemanticMemoryReader,
         instruction_body: GenericInstructionBody | None,
+        p_ir_program: PIRProgram | None = None,
+        action_history: tuple[ActionEffectRecord, ...] = (),
         ablation: ComputeAblation | None = None,
     ) -> GenericComputeResult:
+        from .p_ir import compatibility_p_ir_program
+        from .p_ir_interpreter import (
+            FixedL0PIRInterpreter,
+            PIRExecutionContext,
+        )
+
         selected_ablation = ablation or ComputeAblation()
         self._require_command(command, observation, memory.version)
         if instruction_body is None:
@@ -938,19 +1048,47 @@ class GenericComputeSubject:
             )
         if not selected_ablation.effective_serial_depth:
             raise RuntimeError(GENERIC_SERIAL_DEPTH_WITNESS)
-
-        representation = represent_observation(
-            observation,
-            goal_tokens=command.goal_tokens,
+        history_failures = tuple(
+            failure
+            for record in action_history
+            for failure in record.validate()
         )
-        descriptors = action_descriptors(observation, representation)
+        if history_failures:
+            raise ValueError(";".join(sorted(set(history_failures))))
+
+        selected_program = p_ir_program or compatibility_p_ir_program()
+        interpreter = FixedL0PIRInterpreter()
+        representation_execution = interpreter.execute_representation(
+            selected_program,
+            PIRExecutionContext(
+                observation=observation,
+                goal_tokens=command.goal_tokens,
+            ),
+        )
+        representation = representation_execution.representation
         stages: list[Layer0StageTrace] = [
             Layer0StageTrace(
                 stage="represent",
                 input_digest=observation.digest(),
                 output_digest=representation.digest_value,
+                selected_refs=(
+                    selected_program.program_id,
+                    representation_execution.trace.graph_id,
+                    *representation_execution.trace.ordered_node_ids,
+                ),
             )
         ]
+        pre_retrieval_execution = interpreter.execute(
+            selected_program,
+            PIRExecutionContext(
+                observation=observation,
+                goal_tokens=command.goal_tokens,
+            ),
+            representation_execution=representation_execution,
+        )
+        if pre_retrieval_execution.representation != representation:
+            raise RuntimeError("P_IR_REPRESENTATION_REEXECUTION_MISMATCH")
+        preliminary_descriptors = pre_retrieval_execution.action_bindings
 
         query_tokens = tuple(
             sorted(
@@ -961,7 +1099,7 @@ class GenericComputeSubject:
                         *representation.relations,
                         *(
                             descriptor.semantic_key
-                            for descriptor in descriptors
+                            for descriptor in preliminary_descriptors
                         ),
                     )
                 )
@@ -988,6 +1126,18 @@ class GenericComputeSubject:
             records = ()
             memory_query_digest = "semantic-memory-query:ABLATION_DISABLED"
         citations = tuple(record.citation() for record in records)
+        p_ir_execution = interpreter.execute(
+            selected_program,
+            PIRExecutionContext(
+                observation=observation,
+                goal_tokens=command.goal_tokens,
+                memory_records=records,
+            ),
+            representation_execution=representation_execution,
+        )
+        if p_ir_execution.representation != representation:
+            raise RuntimeError("P_IR_REPRESENTATION_REEXECUTION_MISMATCH")
+        descriptors = p_ir_execution.action_bindings
         stages.append(
             Layer0StageTrace(
                 stage="retrieve",
@@ -1001,11 +1151,21 @@ class GenericComputeSubject:
             representation,
             descriptors,
             records,
+            observation=observation,
+            action_history=action_history,
         )
-        descriptor_order = {
+        descriptor_order: dict[ActionDescriptor, int] = {
             descriptor: index
             for index, descriptor in enumerate(descriptors)
         }
+        for prediction in instruction_result.predictions:
+            descriptor_failures = prediction.descriptor.validate(observation)
+            if descriptor_failures:
+                raise ValueError(";".join(descriptor_failures))
+            if prediction.descriptor not in descriptor_order:
+                descriptor_order[prediction.descriptor] = len(
+                    descriptor_order
+                )
         ranked_predictions = tuple(
             sorted(
                 instruction_result.predictions,
@@ -1145,6 +1305,52 @@ class GenericComputeSubject:
 
         candidates: list[GenericCandidate] = []
         for prediction in ranked_predictions:
+            evidence_binding_key = build_evidence_binding_key(
+                topology_tokens=representation.topology_tokens,
+                relations=representation.relations,
+                descriptor_semantic_key=prediction.descriptor.semantic_key,
+                action_id=prediction.descriptor.action_id,
+                target_role=prediction.descriptor.target_role,
+                payload_fields=tuple(
+                    key for key, _ in prediction.descriptor.payload_items
+                ),
+                predicted_effects=prediction.predicted_effects,
+            )
+            evidence_bindings = bind_candidate_records(
+                key=evidence_binding_key,
+                records=records,
+            )
+            prediction_ref = "prediction:" + digest_object(prediction)
+            memory_binding_refs = tuple(
+                sorted(
+                    {
+                        binding.record_digest
+                        for binding in evidence_bindings
+                    }
+                )
+            )
+            counter_evidence_refs = tuple(
+                sorted(
+                    {
+                        binding.record_digest
+                        for binding in evidence_bindings
+                        if (
+                            binding.hazard_count > 0
+                            or binding.contradiction_count > 0
+                            or not binding.precondition_match
+                            or not binding.effect_compatible
+                            or not binding.scope_applicable
+                        )
+                    }
+                )
+            )
+            bound_record_ids = {
+                binding.record_id for binding in evidence_bindings
+            }
+            memory_effects = _memory_effects(
+                records,
+                bound_record_ids,
+            )
             operation = (
                 "ACTION"
                 if prediction.progress_likelihood >= 0.55
@@ -1167,15 +1373,27 @@ class GenericComputeSubject:
                     expected_information_gain=prediction.information_gain,
                     expected_risk=prediction.hazard_likelihood,
                     uncertainty=prediction.uncertainty,
-                    prediction_refs=(
-                        "prediction:" + digest_object(prediction),
-                    ),
+                    prediction_refs=(prediction_ref,),
                     provenance=(
                         instruction_body.digest(),
                         instruction_result.query_digest,
                         representation.digest_value,
+                        p_ir_execution.program_logical_digest,
                         GENERIC_COMPUTE_VERSION,
                     ),
+                    evidence_binding_key=evidence_binding_key,
+                    evidence_bindings=evidence_bindings,
+                    typed_provenance=TypedCandidateProvenance(
+                        p_instruction_refs=tuple(
+                            sorted(set(prediction.instruction_refs))
+                        ),
+                        representation_refs=(representation.digest_value,),
+                        prediction_refs=(prediction_ref,),
+                        memory_binding_refs=memory_binding_refs,
+                        counter_evidence_refs=counter_evidence_refs,
+                        runtime_version=GENERIC_COMPUTE_VERSION,
+                    ),
+                    memory_effects=memory_effects,
                 )
             )
         if not selected_ablation.candidate_diversity:
@@ -1200,11 +1418,20 @@ class GenericComputeSubject:
             instruction_body_format=instruction_body.format_id(),
             instruction_body_version=instruction_body.body_version(),
             instruction_body_digest=instruction_body.digest(),
+            p_ir_logical_digest=p_ir_execution.program_logical_digest,
+            p_ir_execution_digest=p_ir_execution.execution_digest,
+            l0_abi_version=selected_program.l0_abi_version,
             uncertainty=max(item.uncertainty for item in ranked_predictions),
             provenance=(
                 instruction_body.provenance_digest(),
                 memory_query_digest,
+                p_ir_execution.program_logical_digest,
+                p_ir_execution.execution_digest,
                 GENERIC_COMPUTE_VERSION,
+            ),
+            control_operation=instruction_result.control_operation,
+            control_instruction_refs=(
+                instruction_result.control_instruction_refs
             ),
         )
         return result

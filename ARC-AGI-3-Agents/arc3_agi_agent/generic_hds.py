@@ -5,9 +5,20 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Sequence
 
-from .generic_memory import MemoryAuthorization, MemoryMutationProposal, MemoryView
+from .authority_state import AuthorityState
+from .control_state import ControlState
+from .evidence_binding import candidate_hazard_veto, candidate_reproduced
+from .evidence_policy import EvidencePolicy
+from .generic_memory import (
+    ActionHistoryAuthorization,
+    MemoryAuthorization,
+    MemoryMutationProposal,
+    MemoryView,
+    action_history_authorization_binding,
+)
 from .generic_structural import infer_relational_rewrite_state
 from .generic_types import (
+    ActionEffectRecord,
     GateResult,
     GenericCandidate,
     GenericComputeCommand,
@@ -39,12 +50,20 @@ class HDSConfiguration:
     resource_budget: int = 256
     stop_after_no_progress: int = 96
     required_authorities: tuple[str, ...] = (
+        "HDS_ACTION_HISTORY",
         "HDS_COMPUTE",
         "HDS_COMMIT",
+        "HDS_CONTROL_ROLLBACK",
         "HDS_MEMORY_UPDATE",
         "HDS_EXTERNAL_ACTION",
     )
     projection_boundary: str = "MODEL_IS_NOT_WORLD"
+    local_min_support: int = 2
+    session_min_total_support: int = 3
+    session_min_distinct_episode_support: int = 2
+    active_confidence_ppm: int = 800_000
+    max_contradiction_ratio_ppm: int = 100_000
+    max_hazard_for_execute: int = 0
 
     def validate(self) -> tuple[str, ...]:
         failures: list[str] = []
@@ -80,7 +99,22 @@ class HDSConfiguration:
             failures.append("HDS_AUTHORITY_BOUNDARY_MISSING")
         if self.projection_boundary != "MODEL_IS_NOT_WORLD":
             failures.append("HDS_PROJECTION_BOUNDARY_INVALID")
+        failures.extend(self.evidence_policy().validate())
         return tuple(sorted(set(failures)))
+
+    def evidence_policy(self) -> EvidencePolicy:
+        return EvidencePolicy(
+            local_min_support=self.local_min_support,
+            session_min_total_support=self.session_min_total_support,
+            session_min_distinct_episode_support=(
+                self.session_min_distinct_episode_support
+            ),
+            active_confidence_ppm=self.active_confidence_ppm,
+            max_contradiction_ratio_ppm=(
+                self.max_contradiction_ratio_ppm
+            ),
+            max_hazard_for_execute=self.max_hazard_for_execute,
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -122,12 +156,26 @@ class RollbackAuthorization:
     )
 
 
+@dataclass(frozen=True, slots=True)
+class ControlRollbackAuthorization:
+    """Single-use reset capability for a P-proposed, HDS-approved rollback."""
+
+    authorization_id: str
+    decision_id: str
+    observation_signature: str
+    control_instruction_ref: str
+    _authority_token: object = field(
+        repr=False,
+        compare=False,
+        metadata={"serialize": False},
+    )
+
+
 @dataclass(slots=True)
 class ActionAuthorizationExecutor:
     """Mechanical single-use capability check; it owns no selection policy."""
 
-    authority_token: object = field(repr=False)
-    _consumed: set[str] = field(default_factory=set, init=False)
+    authority_state: AuthorityState = field(repr=False)
 
     def consume(
         self,
@@ -136,10 +184,10 @@ class ActionAuthorizationExecutor:
         candidate: GenericCandidate,
         observation: GenericObservation,
     ) -> tuple[int, dict[str, int]]:
-        if authorization._authority_token is not self.authority_token:
-            raise PermissionError("GENERIC_ACTION_AUTHORITY_INVALID")
-        if authorization.authorization_id in self._consumed:
-            raise PermissionError("GENERIC_ACTION_AUTHORIZATION_REUSED")
+        self.authority_state.require_live_token(
+            authorization._authority_token,
+            error="GENERIC_ACTION_AUTHORITY_INVALID",
+        )
         if not decision.external_action_authorized:
             raise PermissionError("GENERIC_ACTION_NOT_HDS_APPROVED")
         if (
@@ -154,7 +202,20 @@ class ActionAuthorizationExecutor:
             raise PermissionError("GENERIC_ACTION_AUTHORIZATION_BINDING_INVALID")
         if candidate.descriptor.action_id not in observation.available_actions:
             raise PermissionError("GENERIC_ACTION_UNAVAILABLE")
-        self._consumed.add(authorization.authorization_id)
+        self.authority_state.consume(
+            authorization.authorization_id,
+            kind="HDS_EXTERNAL_ACTION",
+            binding_digest=_action_binding(
+                decision_id=authorization.decision_id,
+                candidate_id=authorization.candidate_id,
+                observation_signature=authorization.observation_signature,
+                action_id=authorization.action_id,
+                payload_digest=authorization.payload_digest,
+            ),
+            unknown_error="GENERIC_ACTION_AUTHORIZATION_NOT_ISSUED",
+            reused_error="GENERIC_ACTION_AUTHORIZATION_REUSED",
+            binding_error="GENERIC_ACTION_AUTHORIZATION_BINDING_INVALID",
+        )
         return candidate.descriptor.action_id, candidate.descriptor.payload()
 
 
@@ -162,8 +223,7 @@ class ActionAuthorizationExecutor:
 class RollbackAuthorizationExecutor:
     """Consume a failure-bound HDS rollback capability exactly once."""
 
-    authority_token: object = field(repr=False)
-    _consumed: set[str] = field(default_factory=set, init=False)
+    authority_state: AuthorityState = field(repr=False)
 
     def consume(
         self,
@@ -172,10 +232,10 @@ class RollbackAuthorizationExecutor:
         attribution: OutcomeAttribution,
         observation: GenericObservation,
     ) -> str:
-        if authorization._authority_token is not self.authority_token:
-            raise PermissionError("GENERIC_ROLLBACK_AUTHORITY_INVALID")
-        if authorization.authorization_id in self._consumed:
-            raise PermissionError("GENERIC_ROLLBACK_AUTHORIZATION_REUSED")
+        self.authority_state.require_live_token(
+            authorization._authority_token,
+            error="GENERIC_ROLLBACK_AUTHORITY_INVALID",
+        )
         if (
             authorization.decision_id != decision.decision_id
             or authorization.attribution_id != attribution.attribution_id
@@ -185,8 +245,108 @@ class RollbackAuthorizationExecutor:
             or observation.terminal_state != "GAME_OVER"
         ):
             raise PermissionError("GENERIC_ROLLBACK_BINDING_INVALID")
-        self._consumed.add(authorization.authorization_id)
+        self.authority_state.consume(
+            authorization.authorization_id,
+            kind="HDS_ROLLBACK",
+            binding_digest=_rollback_binding(
+                decision_id=authorization.decision_id,
+                attribution_id=authorization.attribution_id,
+                observation_signature=authorization.failed_observation_signature,
+            ),
+            unknown_error="GENERIC_ROLLBACK_AUTHORIZATION_NOT_ISSUED",
+            reused_error="GENERIC_ROLLBACK_AUTHORIZATION_REUSED",
+            binding_error="GENERIC_ROLLBACK_BINDING_INVALID",
+        )
         return authorization.authorization_id
+
+
+@dataclass(slots=True)
+class ControlRollbackAuthorizationExecutor:
+    """Consume an HDS control rollback without treating P as authority."""
+
+    authority_state: AuthorityState = field(repr=False)
+
+    def consume(
+        self,
+        authorization: ControlRollbackAuthorization,
+        decision: GenericHDSDecision,
+        observation: GenericObservation,
+    ) -> str:
+        self.authority_state.require_live_token(
+            authorization._authority_token,
+            error="GENERIC_CONTROL_ROLLBACK_AUTHORITY_INVALID",
+        )
+        if (
+            decision.operation_state != "ROLLBACK"
+            or decision.selected_candidate_id is not None
+            or authorization.decision_id != decision.decision_id
+            or authorization.observation_signature != observation.signature
+            or not authorization.control_instruction_ref
+        ):
+            raise PermissionError("GENERIC_CONTROL_ROLLBACK_BINDING_INVALID")
+        binding = _control_rollback_binding(
+            decision_id=authorization.decision_id,
+            observation_signature=authorization.observation_signature,
+            control_instruction_ref=authorization.control_instruction_ref,
+        )
+        self.authority_state.consume(
+            authorization.authorization_id,
+            kind="HDS_CONTROL_ROLLBACK",
+            binding_digest=binding,
+            unknown_error="GENERIC_CONTROL_ROLLBACK_AUTHORIZATION_NOT_ISSUED",
+            reused_error="GENERIC_CONTROL_ROLLBACK_AUTHORIZATION_REUSED",
+            binding_error="GENERIC_CONTROL_ROLLBACK_BINDING_INVALID",
+        )
+        return authorization.authorization_id
+
+
+def _action_binding(
+    *,
+    decision_id: str,
+    candidate_id: str,
+    observation_signature: str,
+    action_id: int,
+    payload_digest: str,
+) -> str:
+    return digest_object(
+        {
+            "decision": decision_id,
+            "candidate": candidate_id,
+            "observation": observation_signature,
+            "action_id": action_id,
+            "payload_digest": payload_digest,
+        }
+    )
+
+
+def _rollback_binding(
+    *,
+    decision_id: str,
+    attribution_id: str,
+    observation_signature: str,
+) -> str:
+    return digest_object(
+        {
+            "decision": decision_id,
+            "attribution": attribution_id,
+            "observation": observation_signature,
+        }
+    )
+
+
+def _control_rollback_binding(
+    *,
+    decision_id: str,
+    observation_signature: str,
+    control_instruction_ref: str,
+) -> str:
+    return digest_object(
+        {
+            "decision": decision_id,
+            "observation": observation_signature,
+            "control_instruction_ref": control_instruction_ref,
+        }
+    )
 
 
 def _gate(
@@ -209,33 +369,28 @@ def _gate(
 class GenericHDSJudgementSubject:
     """J_hds: sole owner of framing, commit, action, update, and stop."""
 
-    authority_token: object = field(repr=False)
+    authority_state: AuthorityState = field(repr=False)
+    control_state: ControlState = field(repr=False)
     configuration: HDSConfiguration = field(default_factory=HDSConfiguration)
     run_id: str = "generic-run"
-    _cycle_index: int = field(default=0, init=False)
-    _no_progress_count: int = field(default=0, init=False)
-    _issued_commands: set[str] = field(default_factory=set, init=False)
-    _issued_decisions: dict[str, GenericHDSDecision] = field(
-        default_factory=dict,
-        init=False,
-    )
-    _selector_deltas: dict[int, int] = field(
-        default_factory=dict,
-        init=False,
-    )
-    _value_actions: set[int] = field(default_factory=set, init=False)
-    _last_question: str = field(
-        default="What current relation can safely advance the delegated goal?",
-        init=False,
-    )
+
+    def __post_init__(self) -> None:
+        if self.authority_state.session_id != self.control_state.session_id:
+            raise ValueError("HDS_SESSION_STATE_MISMATCH")
+
+    @property
+    def authority_token(self) -> object:
+        """Compatibility view; AuthorityState remains the token owner."""
+
+        return self.authority_state.live_token
 
     @property
     def cycle_index(self) -> int:
-        return self._cycle_index
+        return self.control_state.cycle_index
 
     @property
     def next_question(self) -> str:
-        return self._last_question
+        return self.control_state.next_question
 
     def frame(
         self,
@@ -259,7 +414,7 @@ class GenericHDSJudgementSubject:
             (
                 f"terminal:{observation.terminal_state}",
                 f"remaining-budget:{remaining_budget}",
-                f"no-progress:{self._no_progress_count}",
+                f"no-progress:{self.control_state.no_progress_count}",
                 f"risk-limit:{self.configuration.risk_limit:.6f}",
                 "rollback:on-game-over",
                 "stop:on-win-or-resource-boundary",
@@ -270,7 +425,7 @@ class GenericHDSJudgementSubject:
         x = (
             f"observation:{observation.signature}",
             f"memory-version:{memory.version}",
-            f"cycle:{self._cycle_index}",
+            f"cycle:{self.control_state.cycle_index}",
         )
         r = tuple(
             sorted(
@@ -283,7 +438,7 @@ class GenericHDSJudgementSubject:
         )
         body = {
             "run_id": self.run_id,
-            "cycle": self._cycle_index,
+            "cycle": self.control_state.cycle_index,
             "observation": observation.signature,
             "memory": memory.digest,
             "purpose": purpose,
@@ -312,7 +467,7 @@ class GenericHDSJudgementSubject:
                 "GAME_OVER_REQUIRES_ROLLBACK",
                 "UNCLOSED_REQUIRES_SUSPEND",
             ),
-            cycle_index=self._cycle_index,
+            cycle_index=self.control_state.cycle_index,
         )
 
     def issue_compute(
@@ -329,39 +484,41 @@ class GenericHDSJudgementSubject:
             raise PermissionError("HDS_COMPUTE_FRAME_NOT_CLOSED")
         if frame.resource_budget <= 0:
             raise PermissionError("HDS_COMPUTE_RESOURCE_EXHAUSTED")
-        command_id = "generic-compute-command:" + digest_object(
+        goal_tokens = tuple(
+            sorted(
+                {
+                    f"purpose:{frame.purpose}",
+                    "goal:progress",
+                    "value:information",
+                    "boundary:reversible",
+                }
+            )
+        )
+        required_outputs = (
+            "representations",
+            "hypotheses",
+            "counter_hypotheses",
+            "predictions",
+            "candidates",
+        )
+        binding_digest = digest_object(
             {
-                "frame": frame,
-                "observation": observation.signature,
-                "memory": memory.digest,
-                "question": self._last_question,
+                "purpose": frame.purpose,
+                "goal_tokens": goal_tokens,
+                "required_outputs": required_outputs,
+                "observation_signature": observation.signature,
+                "memory_version": memory.version,
             }
-        )[:24]
-        if command_id in self._issued_commands:
-            raise PermissionError("HDS_COMPUTE_COMMAND_DUPLICATE")
-        self._issued_commands.add(command_id)
+        )
+        command_id = self.authority_state.issue(
+            "HDS_COMPUTE",
+            binding_digest,
+        )
         return GenericComputeCommand(
             command_id=command_id,
             purpose=frame.purpose,
-            goal_tokens=tuple(
-                sorted(
-                    set(
-                        (
-                            f"purpose:{frame.purpose}",
-                            "goal:progress",
-                            "value:information",
-                            "boundary:reversible",
-                        )
-                    )
-                )
-            ),
-            required_outputs=(
-                "representations",
-                "hypotheses",
-                "counter_hypotheses",
-                "predictions",
-                "candidates",
-            ),
+            goal_tokens=goal_tokens,
+            required_outputs=required_outputs,
             observation_signature=observation.signature,
             memory_version=memory.version,
             _authority_token=self.authority_token,
@@ -399,7 +556,10 @@ class GenericHDSJudgementSubject:
         observation: GenericObservation,
         candidates: Sequence[GenericCandidate],
     ) -> GenericCandidate | None:
-        if not observation.rendered_layers:
+        if (
+            not self.control_state.legacy_structural_compatibility
+            or not observation.rendered_layers
+        ):
             return None
         state = infer_relational_rewrite_state(
             observation.rendered_layers[-1]
@@ -415,24 +575,30 @@ class GenericHDSJudgementSubject:
         selected_action: int | None = None
         if state.selected_matches and not state.all_matches:
             forward = tuple(
-                action_id
-                for action_id, delta in self._selector_deltas.items()
-                if delta == 1 and action_id in by_action
+                candidate.descriptor.action_id
+                for candidate in candidates
+                if "STRUCTURAL_SELECTION_DELTA:1"
+                in candidate.memory_effects
             )
             if forward:
                 selected_action = min(forward)
         elif not state.selected_matches:
-            available_value_actions = tuple(
-                action_id
-                for action_id in self._value_actions
-                if action_id in by_action
+            memory_derived_value_candidates = tuple(
+                candidate.descriptor.action_id
+                for candidate in candidates
+                if "STRUCTURAL_VALUE_ACTION" in candidate.memory_effects
             )
-            if available_value_actions:
-                selected_action = min(available_value_actions)
+            if memory_derived_value_candidates:
+                selected_action = min(memory_derived_value_candidates)
         if selected_action is None:
             classified = {
-                *self._selector_deltas,
-                *self._value_actions,
+                candidate.descriptor.action_id
+                for candidate in candidates
+                if any(
+                    effect.startswith("STRUCTURAL_SELECTION_DELTA:")
+                    or effect == "STRUCTURAL_VALUE_ACTION"
+                    for effect in candidate.memory_effects
+                )
             }
             selected_action = next(
                 (
@@ -460,26 +626,33 @@ class GenericHDSJudgementSubject:
             item.model_type in {"counter_hypothesis", "null_model"}
             for item in result.hypotheses
         )
-        has_memory_evidence = any(
-            item.kind
-            in {
-                "ACTION_EFFECT",
-                "FAILURE_SIGNATURE",
-                "PROCEDURE_CAPABILITY",
-                "WORLD_MODEL",
-            }
-            for item in result.memory_citations
+        retrieved_citation_digests = tuple(
+            item.content_digest for item in result.memory_citations
         )
         legal_candidates = tuple(
             item
             for item in result.candidates
             if item.descriptor.action_id in observation.available_actions
         )
+        hazard_vetoed_candidate_ids = {
+            item.candidate_id
+            for item in legal_candidates
+            if candidate_hazard_veto(item.evidence_bindings)
+        }
         safe_candidates = tuple(
             item
             for item in legal_candidates
             if item.expected_risk <= frame.risk_limit
+            and item.candidate_id not in hazard_vetoed_candidate_ids
         )
+        reproduced_candidate_ids = {
+            item.candidate_id
+            for item in safe_candidates
+            if candidate_reproduced(
+                item.evidence_bindings,
+                retrieved_citation_digests=retrieved_citation_digests,
+            )
+        }
         gates: list[GateResult] = []
         gates.append(
             _gate(
@@ -531,7 +704,7 @@ class GenericHDSJudgementSubject:
             )
         )
         evidence_pass = selected_ablation.evidence_gate and (
-            has_memory_evidence
+            bool(reproduced_candidate_ids)
             or self.configuration.evidence_mode != "REPRODUCED_ONLY"
         )
         gates.append(
@@ -568,7 +741,17 @@ class GenericHDSJudgementSubject:
             _gate(
                 "G10",
                 "PASS" if safe_candidates else "SUSPEND",
-                *(("D602",) if not safe_candidates else ()),
+                *(
+                    (
+                        "EVIDENCE_HAZARD_VETO"
+                        if legal_candidates
+                        and hazard_vetoed_candidate_ids
+                        and not safe_candidates
+                        else "D602",
+                    )
+                    if not safe_candidates
+                    else ()
+                ),
                 next_probe="find-lower-risk-candidate",
             )
         )
@@ -608,8 +791,25 @@ class GenericHDSJudgementSubject:
             assertion = "FAIL"
             reasons.append("RESOURCE_LIMIT")
             stop_condition = "RESOURCE_LIMIT"
+        elif result.control_operation == "ROLLBACK":
+            blocking_gate_ids = {
+                item.gate_id
+                for item in gates
+                if item.status in {"FAIL", "SUSPEND"}
+            }
+            if blocking_gate_ids:
+                reasons.extend(
+                    f"{item.gate_id}:{','.join(item.reason_codes)}"
+                    for item in gates
+                    if item.status in {"FAIL", "SUSPEND"}
+                )
+            else:
+                operation = "ROLLBACK"
+                assertion = "PASS"
+                reasons.append("P_PROPOSED_HDS_APPROVED_ROLLBACK")
+                stop_condition = "continue after bounded level rollback"
         elif (
-            self._no_progress_count
+            self.control_state.no_progress_count
             >= self.configuration.stop_after_no_progress
         ):
             operation = "STOP"
@@ -626,14 +826,20 @@ class GenericHDSJudgementSubject:
                 # Preserve C's deterministic evidence ranking when scores tie.
                 # A digest tie-break makes equivalent novel probes look random
                 # and can repeatedly skip the first role-bound affordance.
-                selected = self._relational_rewrite_candidate(
-                    observation,
-                    safe_candidates,
+                selected = (
+                    None
+                    if reproduced_candidate_ids
+                    else self._relational_rewrite_candidate(
+                        observation,
+                        safe_candidates,
+                    )
                 )
                 if selected is None:
                     selected = max(
                         enumerate(safe_candidates),
                         key=lambda indexed: (
+                            indexed[1].candidate_id
+                            in reproduced_candidate_ids,
                             self._candidate_score(
                                 indexed[1],
                                 purpose=frame.purpose,
@@ -642,14 +848,9 @@ class GenericHDSJudgementSubject:
                             -indexed[0],
                         ),
                     )[1]
-                reproduced = has_memory_evidence and (
-                    bool(
-                    set(selected.provenance).intersection(
-                        item.content_digest
-                        for item in result.memory_citations
-                    )
-                    )
-                    or has_memory_evidence
+                reproduced = candidate_reproduced(
+                    selected.evidence_bindings,
+                    retrieved_citation_digests=retrieved_citation_digests,
                 )
                 if (
                     self.configuration.evidence_mode == "REPRODUCED_ONLY"
@@ -659,7 +860,6 @@ class GenericHDSJudgementSubject:
                     reasons.append("EVIDENCE_BOUNDARY_NOT_MET")
                 elif (
                     not reproduced
-                    or selected.operation == "BOUNDED_PROBE"
                     or frame.purpose == "maximize_information"
                 ):
                     operation = "PROBE"
@@ -683,6 +883,7 @@ class GenericHDSJudgementSubject:
         commit_pass = operation in {
             "EXECUTE",
             "PROBE",
+            "ROLLBACK",
             "SUSPEND",
             "STOP",
         }
@@ -700,6 +901,12 @@ class GenericHDSJudgementSubject:
             )
             next_observation = "reobserve rendered state and legal action surface"
             next_probe = selected.descriptor.semantic_key
+        elif operation == "ROLLBACK":
+            next_question = (
+                "Did the single-use rollback restore a safe observable state?"
+            )
+            next_observation = "reobserve the reset level"
+            next_probe = result.control_instruction_refs[0]
         elif operation == "SUSPEND":
             next_question = "What missing evidence can safely close the current frame?"
             next_observation = "obtain required information without external action"
@@ -717,10 +924,10 @@ class GenericHDSJudgementSubject:
                 }
             )
         )
-        decision_id = "hds-decision:" + digest_object(
+        decision_binding = digest_object(
             {
                 "run": self.run_id,
-                "cycle": self._cycle_index,
+                "cycle": self.control_state.cycle_index,
                 "frame": frame,
                 "compute": result.digest(),
                 "operation": operation,
@@ -729,7 +936,11 @@ class GenericHDSJudgementSubject:
                 ),
                 "gates": gates,
             }
-        )[:24]
+        )
+        decision_id = self.authority_state.issue(
+            "HDS_COMMIT",
+            decision_binding,
+        )
         decision = GenericHDSDecision(
             decision_id=decision_id,
             assertion_state=assertion,
@@ -755,8 +966,20 @@ class GenericHDSJudgementSubject:
         decision_failures = decision.validate()
         if decision_failures:
             raise RuntimeError(";".join(decision_failures))
-        self._issued_decisions[decision_id] = decision
-        self._last_question = next_question
+        self.authority_state.register_decision(decision_id, decision)
+        self.authority_state.consume(
+            decision_id,
+            kind="HDS_COMMIT",
+            binding_digest=decision_binding,
+            unknown_error="HDS_DECISION_NOT_ISSUED",
+            reused_error="HDS_DECISION_COMMIT_REUSED",
+            binding_error="HDS_DECISION_BINDING_INVALID",
+        )
+        self.control_state.record_decision(
+            next_question=next_question,
+            pending_probe=next_probe,
+            stop_boundary=stop_condition,
+        )
         return decision
 
     def authorize_action(
@@ -765,29 +988,131 @@ class GenericHDSJudgementSubject:
         candidate: GenericCandidate,
         observation: GenericObservation,
     ) -> ActionAuthorization:
-        issued = self._issued_decisions.get(decision.decision_id)
-        if issued != decision:
-            raise PermissionError("HDS_ACTION_DECISION_NOT_ISSUED")
+        self.authority_state.require_decision(
+            decision.decision_id,
+            decision,
+            error="HDS_ACTION_DECISION_NOT_ISSUED",
+        )
         if (
             not decision.external_action_authorized
             or decision.selected_candidate_id != candidate.candidate_id
         ):
             raise PermissionError("HDS_ACTION_NOT_COMMITTED")
-        return ActionAuthorization(
-            authorization_id="action-authorization:"
-            + digest_object(
-                {
-                    "decision": decision.decision_id,
-                    "candidate": candidate.candidate_id,
-                    "observation": observation.signature,
-                    "payload": candidate.descriptor.payload(),
-                }
-            )[:24],
+        payload_digest = digest_object(candidate.descriptor.payload())
+        binding_digest = _action_binding(
             decision_id=decision.decision_id,
             candidate_id=candidate.candidate_id,
             observation_signature=observation.signature,
             action_id=candidate.descriptor.action_id,
-            payload_digest=digest_object(candidate.descriptor.payload()),
+            payload_digest=payload_digest,
+        )
+        return ActionAuthorization(
+            authorization_id=self.authority_state.issue(
+                "HDS_EXTERNAL_ACTION",
+                binding_digest,
+            ),
+            decision_id=decision.decision_id,
+            candidate_id=candidate.candidate_id,
+            observation_signature=observation.signature,
+            action_id=candidate.descriptor.action_id,
+            payload_digest=payload_digest,
+            _authority_token=self.authority_token,
+        )
+
+    def authorize_action_history(
+        self,
+        decision: GenericHDSDecision,
+        record: ActionEffectRecord,
+        *,
+        before_observation: GenericObservation,
+        after_observation: GenericObservation,
+        history_version: int,
+        selected_candidate: GenericCandidate | None,
+    ) -> ActionHistoryAuthorization:
+        """Authorize one passive-M append after an observed side effect."""
+
+        self.authority_state.require_decision(
+            decision.decision_id,
+            decision,
+            error="HDS_ACTION_HISTORY_DECISION_NOT_ISSUED",
+        )
+        failures = record.validate()
+        if failures:
+            raise ValueError(";".join(failures))
+        if decision.operation_state in {"EXECUTE", "PROBE"}:
+            if (
+                selected_candidate is None
+                or decision.selected_candidate_id
+                != selected_candidate.candidate_id
+                or record.action_id != selected_candidate.descriptor.action_id
+                or record.payload_items
+                != selected_candidate.descriptor.payload_items
+            ):
+                raise PermissionError("HDS_ACTION_HISTORY_ACTION_BINDING_INVALID")
+        elif decision.operation_state == "ROLLBACK":
+            if (
+                selected_candidate is not None
+                or decision.selected_candidate_id is not None
+                or record.action_id != 0
+                or not record.compatibility_reset
+            ):
+                raise PermissionError("HDS_ACTION_HISTORY_ROLLBACK_BINDING_INVALID")
+        else:
+            raise PermissionError("HDS_ACTION_HISTORY_OPERATION_INVALID")
+        record_digest = record.digest()
+        binding = action_history_authorization_binding(
+            decision_id=decision.decision_id,
+            before_observation_signature=before_observation.signature,
+            after_observation_signature=after_observation.signature,
+            expected_version=history_version,
+            record_digest=record_digest,
+        )
+        return ActionHistoryAuthorization(
+            authorization_id=self.authority_state.issue(
+                "HDS_ACTION_HISTORY",
+                binding,
+            ),
+            decision_id=decision.decision_id,
+            before_observation_signature=before_observation.signature,
+            after_observation_signature=after_observation.signature,
+            expected_version=history_version,
+            record_digest=record_digest,
+            _authority_token=self.authority_token,
+        )
+
+    def authorize_control_rollback(
+        self,
+        decision: GenericHDSDecision,
+        result: GenericComputeResult,
+        observation: GenericObservation,
+    ) -> ControlRollbackAuthorization:
+        self.authority_state.require_decision(
+            decision.decision_id,
+            decision,
+            error="HDS_CONTROL_ROLLBACK_DECISION_NOT_ISSUED",
+        )
+        if (
+            decision.operation_state != "ROLLBACK"
+            or decision.selected_candidate_id is not None
+            or result.control_operation != "ROLLBACK"
+            or not result.control_instruction_refs
+            or decision.compute_result_digest != result.digest()
+        ):
+            raise PermissionError("HDS_CONTROL_ROLLBACK_NOT_COMMITTED")
+        instruction_ref = result.control_instruction_refs[0]
+        binding = _control_rollback_binding(
+            decision_id=decision.decision_id,
+            observation_signature=observation.signature,
+            control_instruction_ref=instruction_ref,
+        )
+        return ControlRollbackAuthorization(
+            authorization_id=self.authority_state.issue(
+                "HDS_CONTROL_ROLLBACK",
+                binding,
+            ),
+            decision_id=decision.decision_id,
+            observation_signature=observation.signature,
+            control_instruction_ref=instruction_ref,
             _authority_token=self.authority_token,
         )
 
@@ -798,23 +1123,28 @@ class GenericHDSJudgementSubject:
         *,
         memory_version: int,
     ) -> MemoryAuthorization:
-        issued = self._issued_decisions.get(decision.decision_id)
-        if issued != decision:
-            raise PermissionError("HDS_MEMORY_DECISION_NOT_ISSUED")
+        self.authority_state.require_decision(
+            decision.decision_id,
+            decision,
+            error="HDS_MEMORY_DECISION_NOT_ISSUED",
+        )
         if not decision.memory_update_authorized:
             raise PermissionError("HDS_MEMORY_UPDATE_NOT_AUTHORIZED")
         proposal_failures = proposal.validate()
         if proposal_failures:
             raise ValueError(";".join(proposal_failures))
+        binding_digest = digest_object(
+            {
+                "decision": decision.decision_id,
+                "proposal": proposal,
+                "version": memory_version,
+            }
+        )
         return MemoryAuthorization(
-            authorization_id="memory-authorization:"
-            + digest_object(
-                {
-                    "decision": decision.decision_id,
-                    "proposal": proposal,
-                    "version": memory_version,
-                }
-            )[:24],
+            authorization_id=self.authority_state.issue(
+                "HDS_MEMORY_UPDATE",
+                binding_digest,
+            ),
             decision_id=decision.decision_id,
             expected_version=memory_version,
             proposal_digest=digest_object(proposal),
@@ -827,26 +1157,129 @@ class GenericHDSJudgementSubject:
         attribution: OutcomeAttribution,
         observation: GenericObservation,
     ) -> RollbackAuthorization:
-        issued = self._issued_decisions.get(decision.decision_id)
-        if issued != decision:
-            raise PermissionError("HDS_ROLLBACK_DECISION_NOT_ISSUED")
+        self.authority_state.require_decision(
+            decision.decision_id,
+            decision,
+            error="HDS_ROLLBACK_DECISION_NOT_ISSUED",
+        )
         if (
             attribution.category != "FAILURE"
             or observation.terminal_state != "GAME_OVER"
         ):
             raise PermissionError("HDS_ROLLBACK_FAILURE_REQUIRED")
+        binding_digest = _rollback_binding(
+            decision_id=decision.decision_id,
+            attribution_id=attribution.attribution_id,
+            observation_signature=observation.signature,
+        )
         return RollbackAuthorization(
-            authorization_id="rollback-authorization:"
-            + digest_object(
-                {
-                    "decision": decision.decision_id,
-                    "attribution": attribution.attribution_id,
-                    "observation": observation.signature,
-                }
-            )[:24],
+            authorization_id=self.authority_state.issue(
+                "HDS_ROLLBACK",
+                binding_digest,
+            ),
             decision_id=decision.decision_id,
             attribution_id=attribution.attribution_id,
             failed_observation_signature=observation.signature,
+            _authority_token=self.authority_token,
+        )
+
+    def authorize_overlay_discard(
+        self,
+        proposal: MemoryMutationProposal,
+        *,
+        memory_version: int,
+    ) -> MemoryAuthorization:
+        """Authorize a fail-closed episode-boundary rollback."""
+
+        if not self.control_state.episode_active:
+            raise PermissionError("HDS_EPISODE_DISCARD_ACTIVE_EPISODE_REQUIRED")
+        proposal_failures = proposal.validate()
+        if proposal_failures:
+            raise ValueError(";".join(proposal_failures))
+        if proposal.operation != "ROLLBACK":
+            raise PermissionError("HDS_EPISODE_DISCARD_ROLLBACK_REQUIRED")
+        decision_id = "hds-episode-discard:" + digest_object(
+            {
+                "session": self.run_id,
+                "target_version": proposal.rollback_version,
+                "memory_version": memory_version,
+            }
+        )[:24]
+        binding_digest = digest_object(
+            {
+                "decision": decision_id,
+                "proposal": proposal,
+                "version": memory_version,
+            }
+        )
+        return MemoryAuthorization(
+            authorization_id=self.authority_state.issue(
+                "HDS_MEMORY_UPDATE",
+                binding_digest,
+            ),
+            decision_id=decision_id,
+            expected_version=memory_version,
+            proposal_digest=digest_object(proposal),
+            _authority_token=self.authority_token,
+        )
+
+    def authorize_consolidation(
+        self,
+        proposal: MemoryMutationProposal,
+        *,
+        memory_version: int,
+    ) -> MemoryAuthorization:
+        """Authorize only validated SESSION_GLOBAL typed causal promotion."""
+
+        from .causal_record import causal_record_from_semantic
+
+        if not self.control_state.episode_active:
+            raise PermissionError(
+                "HDS_CONSOLIDATION_ACTIVE_EPISODE_REQUIRED"
+            )
+        proposal_failures = proposal.validate()
+        if proposal_failures:
+            raise ValueError(";".join(proposal_failures))
+        if proposal.operation not in {"ADD", "REVISE", "INVALIDATE"}:
+            raise PermissionError("HDS_CONSOLIDATION_OPERATION_INVALID")
+        if proposal.record is None:
+            raise PermissionError("HDS_CONSOLIDATION_RECORD_REQUIRED")
+        typed = causal_record_from_semantic(
+            proposal.record,
+            policy=self.configuration.evidence_policy(),
+        )
+        if typed.scope_class != "SESSION_GLOBAL":
+            raise PermissionError("HDS_CONSOLIDATION_SCOPE_INVALID")
+        if (
+            typed.state == "ACTIVE"
+            and typed.distinct_episode_support
+            < self.configuration.session_min_distinct_episode_support
+        ):
+            raise PermissionError(
+                "HDS_CONSOLIDATION_INDEPENDENT_SUPPORT_REQUIRED"
+            )
+        decision_id = "hds-consolidation:" + digest_object(
+            {
+                "session": self.run_id,
+                "record": typed.digest(),
+                "memory_version": memory_version,
+            }
+        )[:24]
+        binding_digest = digest_object(
+            {
+                "decision": decision_id,
+                "proposal": proposal,
+                "version": memory_version,
+            }
+        )
+        return MemoryAuthorization(
+            authorization_id=self.authority_state.issue(
+                "HDS_MEMORY_UPDATE",
+                binding_digest,
+            ),
+            decision_id=decision_id,
+            expected_version=memory_version,
+            proposal_digest=digest_object(proposal),
             _authority_token=self.authority_token,
         )
 
@@ -883,7 +1316,6 @@ class GenericHDSJudgementSubject:
                 and before_rewrite.sequence_length
                 == after_rewrite.sequence_length
             ):
-                action_id = candidate.descriptor.action_id
                 if (
                     before_rewrite.output_shapes
                     == after_rewrite.output_shapes
@@ -900,18 +1332,16 @@ class GenericHDSJudgementSubject:
                         == before_rewrite.sequence_length - 1
                         else raw_delta
                     )
-                    self._selector_deltas[action_id] = delta
-                    self._value_actions.discard(action_id)
                     effects.add("STRUCTURAL_SELECTION_CHANGE")
+                    effects.add(f"STRUCTURAL_SELECTION_DELTA:{delta}")
                 elif (
                     before_rewrite.selected_index
                     == after_rewrite.selected_index
                     and before_rewrite.output_shapes
                     != after_rewrite.output_shapes
                 ):
-                    self._value_actions.add(action_id)
-                    self._selector_deltas.pop(action_id, None)
                     effects.add("STRUCTURAL_VALUE_CHANGE")
+                    effects.add("STRUCTURAL_VALUE_ACTION")
         if progress_delta > 0:
             effects.add("LEVEL_PROGRESS")
         if after.terminal_state == "GAME_OVER":
@@ -942,21 +1372,66 @@ class GenericHDSJudgementSubject:
             ),
         )
 
-    def observe_outcome(self, attribution: OutcomeAttribution) -> None:
-        if attribution.category == "PROGRESS":
-            self._no_progress_count = 0
+    def attribute_control_rollback(
+        self,
+        *,
+        before: GenericObservation,
+        after: GenericObservation,
+        result: GenericComputeResult,
+    ) -> OutcomeAttribution:
+        """Attribute one HDS-approved P rollback without fabricating a candidate."""
+
+        if result.control_operation != "ROLLBACK":
+            raise ValueError("HDS_CONTROL_ROLLBACK_RESULT_REQUIRED")
+        if not result.control_instruction_refs:
+            raise ValueError("HDS_CONTROL_ROLLBACK_PROVENANCE_REQUIRED")
+        progress_delta = after.progress_count - before.progress_count
+        if after.terminal_state == "GAME_OVER":
+            category = "FAILURE"
+        elif progress_delta > 0 or after.terminal_state == "WIN":
+            category = "PROGRESS"
+        elif after.signature == before.signature:
+            category = "NO_EFFECT"
         else:
-            self._no_progress_count += 1
-        self._cycle_index += 1
-        self._last_question = (
-            "Which current relation, revised memory, and legal probe should "
-            "be evaluated next?"
+            category = "VISIBLE_CHANGE"
+        effects = {"CONTROL_ROLLBACK", "LEVEL_RESET", *after.visible_effects}
+        if after.signature == before.signature:
+            effects.add("NO_VISIBLE_CHANGE")
+        return OutcomeAttribution(
+            attribution_id="control-rollback-attribution:"
+            + digest_object(
+                {
+                    "before": before.digest(),
+                    "after": after.digest(),
+                    "result": result.digest(),
+                    "category": category,
+                }
+            )[:24],
+            category=category,
+            before_signature=before.signature,
+            after_signature=after.signature,
+            action_semantic_key="control:rollback",
+            visible_effects=tuple(sorted(effects)),
+            progress_delta=progress_delta,
+            terminal_state=after.terminal_state,
+            evidence=(
+                before.digest(),
+                after.digest(),
+                *result.control_instruction_refs,
+            ),
+        )
+
+    def observe_outcome(self, attribution: OutcomeAttribution) -> None:
+        self.control_state.observe_outcome(
+            progress=attribution.category == "PROGRESS"
         )
 
 
 __all__ = [
     "ActionAuthorization",
     "ActionAuthorizationExecutor",
+    "ControlRollbackAuthorization",
+    "ControlRollbackAuthorizationExecutor",
     "GENERIC_HDS_VERSION",
     "HDSAblation",
     "HDSConfiguration",

@@ -1,8 +1,12 @@
-# AGI最小三構成 Claim Registry
+# ARC3 AGI Claim Registry rev2
 
-- current phase: `P12_PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`
-- last completed phase: `P11_RELEASE_STATE_FREEZE`
-- rule: 実装path、実行test、除去証人が揃わないclaimを`SUPPORTED`にしない
+- last completed phase: `P21_GOVERNED_DEVELOPMENT_LOOP_JOINT_OPTIMIZATION`
+- current work block: `P22_A_PUBLIC_CV_TRANSFORMATION_STRESS`（進行中）
+- active runtime: `GenericAGIRuntime` 一件
+- historical boundary: P0〜P15。P11/S5、P12、Kaggle preflightを現行完成claimへ合算しない
+- current authority: `ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2`
+- rule: 実装path、実行test、除去証人、scope、RuntimeIdentityが揃わないclaimを
+  `SUPPORTED`にしない。progress、response retention、crash 0をcompletionと呼ばない
 
 | Claim ID | 主張 | 状態 | primary evidence | 反証・不足 | 次phase |
 |---|---|---|---|---|---|
@@ -27,20 +31,35 @@
 | `CLAIM_MINIMUM_THREE_STRUCTURAL_CERTIFICATE` | 全8 subsetでfull setのみPASSする構造証明 | `SUPPORTED` | `test_minimum_three_certificate_p9.py`, `certificates/p9/` | fixture/synthetic定義域の構成最小性。S5 operational conformance、sample攻略、未知汎化を含まない | 回帰 |
 | `CLAIM_KNOWN_SAMPLE_CLOSURE` | frozen S5が保持OFFLINE 25 game / 183 levelを閉包し全cycle traceを保存する | `SUPPORTED` | `S5_RENDERED_ONLY_CLOSURE_REPORT.json`, `S5_FULL_EXECUTION_TRACE_MANIFEST.json`, `S5_SHORTCUT_AND_AUTHORITY_AUDIT.json` | known sampleだけ。未知task、AGI完成、公式readyを含まない | 回帰 |
 | `CLAIM_S5_OPERATIONAL_AGI_CONFORMANCE` | frozen S5 pathがTrinity/HDS/L0/Mのoperational受入を満たす | `SUSPEND` | `S5_OPERATIONAL_CONFORMANCE_REPORT.json` | frozen known-sample path自体には複数model/candidate、J独立採否、semantic M、L0因果ablationがない | 保持 |
-| `CLAIM_GENERIC_OPERATIONAL_CONFORMANCE` | separate `GenericAGIRuntime`がL0/C/J/M/Trinity/learning/observabilityのoperational受入を満たす | `SUPPORTED` | `GENERIC_OPERATIONAL_CONFORMANCE_REPORT.json`, `test_generic_runtime_p12.py`, `test_generic_memory_p12.py` | 未知game完了またはgenericity成立を含まない | 回帰 |
-| `CLAIM_GENERICITY` | whole-game/mechanism/transformation/sealed holdoutで未知構造へ適応する | `SUPPORTED` | 25/25 whole-gameで全5 fold progress各1、mechanism PASS、七変換7/7、freeze後sealed 3/3、crash/leak/unknown-action/close failure 0 | P12受入定義域の進捗証拠。holdout game完了0であり、無限定汎化・公式互換性・公式scoreは含まない | 回帰 |
+| `CLAIM_GENERIC_OPERATIONAL_CONFORMANCE` | separate `GenericAGIRuntime`がrev1のL0/C/J/M/Trinity/learning/observability受入を満たした | `HISTORICAL_ONLY` | `GENERIC_OPERATIONAL_CONFORMANCE_REPORT.json`, `test_generic_runtime_p12.py`, `test_generic_memory_p12.py` | rev2のcandidate binding、shared session、atomic M、P-IR、未知game完了を含まない | P17〜P22 |
+| `CLAIM_GENERICITY` | whole-game/mechanism/transformation/sealed holdoutで未知構造へ適応する | `HISTORICAL_ONLY` | 25/25 whole-gameで全5 fold progress各1、holdout完了0、旧変換/sealed progress | progressだけでcompletionをPASSにしていたrev1 claim。rev2 generic completion証拠には使わない | P22 |
 | `CLAIM_RELEASE_STATE_FIXED` | P0/J0/M0/code/dependency/environmentから再現できる | `SUPPORTED` | `P11_RELEASE_STATE.json`, `P11_REGRESSION_REPORT.json`, `test_p11_release_state.py` | code `823c51b68d7f...`、OFFLINE sample releaseの範囲 | 回帰 |
-| `CLAIM_COMPETITION_MOCK_CONTRACT` | Competition adapter契約を公式接続なしのmockで満たす | `SUPPORTED` | `COMPETITION_CONTRACT_DRY_RUN.json`: `OFF-001`〜`OFF-008` PASS | 公式API、`OperationMode.COMPETITION`、実scorecardの互換性を含まない | 回帰 |
+| `CLAIM_COMPETITION_MOCK_CONTRACT` | rev1 Competition adapter契約を公式接続なしのmockで満たした | `HISTORICAL_ONLY` | `COMPETITION_CONTRACT_DRY_RUN.json`: `OFF-001`〜`OFF-008` PASS | P23のshared session、exact artifact、資源、official lifecycleを含まない | P23 |
 | `CLAIM_OFFICIAL_COMPATIBILITY` | 公式Competition contractに実接続で適合する | `NOT_EVALUATED` | mock dry-runはPASS、official connection performedはfalse | actualはP13かつP12全blocking PASS後のみ | P13 |
 | `CLAIM_OFFICIAL_SCORE` | 公式scoreを取得済み | `NOT_EVALUATED` | なし | 公式接続・提出未実施 | P15 |
-| `CLAIM_PRE_OFFICIAL_AGI_READY` | P13公式接続の前提gateを満たす | `SUPPORTED` | `PRE_OFFICIAL_AGI_RELEASE_STATE.json`: 57/57 PASS、failed ID 0 | P13開始にはOwnerの明示的phase許可が別途必要。公式互換性・公式scoreは未評価 | phase authorization待ち |
+| `CLAIM_PRE_OFFICIAL_AGI_READY` | rev1 P13公式接続の前提gateを満たした | `HISTORICAL_ONLY` | `PRE_OFFICIAL_AGI_RELEASE_STATE.json`: 57/57 PASS、failed ID 0 | rev2 blocking registryを満たさず、現行phase selectorではない | 参照のみ |
+| `STRUCTURAL_READY` | rev2 C/J/M/P、権限、traceが実装済み | `SUPPORTED` | P17-A〜P21 phase state、architecture docs、unit tests | completion・汎化・official readinessを含まない | P22 |
+| `KNOWN_PUBLIC_REGRESSION` | active generic runtimeだけで公開25 game・183 levelを完遂 | `NOT_EVALUATED` | focused `ft09-0d8bbf25`は6/6 level・75/75 action・failure 0 | 残り24 gameと全数artifact未実行 | P22-A |
+| `MEMORY_CAUSAL` | candidate-bound Mだけの差で未来の計算・判断・行動が変化 | `SUPPORTED` | `test_p22a_compiled_autonomous_policy.py`: 同一renderでbounded Mだけを変えaction 6→3、runtime HDS-authorized append | public全数ablationは未完了 | P22-A |
+| `P_VERSION_LEARNING_CAUSAL` | ExperienceからP-IR候補を昇格し再起動利用 | `SUPPORTED` | P20-B compiler/bundle/restart、P21 governed loop/lineage tests | locked-final成果を含まない | P22/P23 |
+| `CV_PROCEDURE_EVIDENCE` | 分離したfold artifactで開発手順を補助評価 | `NOT_EVALUATED` | rev1 CVはhistorical | rev2 role/access/identityで未実行 | P22-A |
+| `TRANSFORMATION_STRESS_PASS` | 七変換environmentをactive runtimeが完遂 | `NOT_EVALUATED` | rev1 progress測定はhistorical | environment completion証拠なし | P22-A |
+| `SEALED_SINGLE_ARTIFACT_COMPLETE` | 一つの固定artifactが未使用locked evaluatorを一回で完遂 | `NOT_EVALUATED` | rev1 sealedはcontent/result開示済み | rev2 LOCKED_FINAL未作成 | P22-B |
+| `COMPETITION_READY` | exact P22-B artifactが公式lifecycle・資源・package gateを満たす | `NOT_ESTABLISHED` | Notebook通常実行はpreflightのみ | P23未実施 | P23 |
+| `OFFICIAL_RUN_ACCEPTED` | exact artifactの公式runがbytesとscoreを返した | `NOT_OBSERVED` | baseline提出はscoreなし・bytes 0 | accepted official resultなし | P24 |
+| `OFFICIAL_PUBLIC_COMPLETE` | exact artifactのPublic scopeが100% | `NOT_OBSERVED` | なし | official Public scoreなし | P24 |
+| `OFFICIAL_PRIVATE_COMPLETE` | 同一exact artifactのPrivate scopeが100% | `NOT_OBSERVED` | なし | official Private scoreなし | P24 |
+| `OFFICIAL_FULL_COMPLETE` | 同一artifactのPublic/Private両scopeまたはFULL_110が100% | `NOT_OBSERVED` | なし | full official scoreなし | P24 |
 
 ## 禁止claim
 
 次の表現は、対応claimが`SUPPORTED`になるまで使用しない。
 
 - AGI完成
-- 二周期学習成立済み
-- 汎化済み
+- ARC3閉包
+- rev2 memory causality成立済み
+- 汎用自律完遂済み
 - 公式提出可能
 - PRE_OFFICIAL_AGI_READY
+- COMPETITION_READY
+- OFFICIAL_FULL_COMPLETE

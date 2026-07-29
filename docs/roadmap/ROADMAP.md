@@ -4,16 +4,20 @@
 
 現行ロードマップの全文正本は次である。
 
-- [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)
-- source attachment SHA-256: `742d8237c2472fe63680b0006053b7de71e6fbb0cfc98bc6f1200bae4c77000b`
-- repository LF-normalized SHA-256: `bd4e7545fcb6a6c25483ed86bfbedfa44f1ee731af687ed87806e2c6d98ad09b`
+- [`P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md`](P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md)
+- source/repository SHA-256:
+  `c8897ce4b379865aea091b04cdf3a1f772a5f3765ef20744998e58d65ba6c687`
+- upper specification:
+  [`ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2.md`](../architecture/ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2.md)
+- specification SHA-256:
+  `9746e981e504e46b8563aa8a342aa567937762363d66a288ff8235a5c29591c2`
 
 本索引はphase状態だけを保持し、正本本文を重複しない。
 
-P10の現行開発単位と証拠境界は、次の補正正本を追加適用する。
+P0〜P15の旧ロードマップとP10補正はhistorical evidence boundaryとして保持する。
 
+- [`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)
 - [`P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md`](P10_ALL_TASK_CAPABILITY_COMPILATION_CORRECTION.md)
-- source attachment SHA-256: `113ac0516e500679792e57fbc73f21ad078d19929ae39c11ff185ac1f9a353ef`
 
 ## 現在状態
 
@@ -31,12 +35,45 @@ P10の現行開発単位と証拠境界は、次の補正正本を追加適用�
 | P9 | 全8部分集合監査 | 完了 |
 | P10 | ARC3全sample完全攻略 | 完了 |
 | P11 | 完成状態固定 | 完了 |
-| P12 | Pre-official AGI conformance / genericity | 完了 |
-| P13 | 公式ARC環境接続 | 進行中・逐次ローカルcompetition互換12/12 PASS・private位置判定不能 |
-| P14 | Kaggle提出経路 | version 10通常実行・source/output round trip PASS・private未実行 |
-| P15 | 実提出・公式結果最適化 | refs 55040966 / 55043205 / 55045360 / 55049227 ERROR・次候補未提出・HDS SUSPEND |
+| P12 | Pre-official AGI conformance / genericity | historical rev1 complete |
+| P13 | 旧公式ARC環境接続 | historical incomplete |
+| P14 | 旧Kaggle提出経路 | historical preflight |
+| P15 | 旧実提出・結果 | historical incomplete、official scoreなし |
+| P16 | Claim / threat / evaluation rebaseline | 完了・6/6 PASS |
+| P17-A | CognitiveSession / state ownership | 完了・6/6 PASS |
+| P17-B | Evidence binding / taint / overlay rollback | 完了・5/5 PASS |
+| P18 | Atomic event-sourced memory | 完了・6/6 PASS |
+| P19 | Causal memory / consolidation | 完了・6/6 PASS |
+| P20-A | Fixed L0 / typed P-IR | 完了・5/5 PASS |
+| P20-B | P compiler / bundle / registry | 完了・6/6 PASS |
+| P21 | Governed development loop | 完了・6/6 PASS |
+| P22-A | Known public / CV / transformation stress | 進行中・focused public 1/25 PASS |
+| P22-B | Sealed single-artifact final | 未開始 |
+| P23 | Competition session / resource / package | 未開始 |
+| P24 | Official observation | 未開始・Owner許可必須 |
 
 ## 現在のphase gate
+
+最終完了phaseは`P21_GOVERNED_DEVELOPMENT_LOOP_JOINT_OPTIMIZATION`である。
+現行work blockは`P22_A_PUBLIC_CV_TRANSFORMATION_STRESS`である。
+compiled PのGeneric runtime統合とfocused public 1/25はPASSしたが、
+全25 game / 183 level、CV、七変換、memory ablationは未完了である。
+
+```text
+P16-001 claim_overstatement = 0
+P16-002 active_runtime_count = 1
+P16-003 evaluation_role_registry = PASS
+P16-004 identity_taint_threat_model = PASS
+P16-005 completion_predicates = PASS
+P16-006 rev1_status = HISTORICAL_NON_BLOCKING
+```
+
+P20-Aは5/5、P20-Bは6/6 gateをPASSした。P21ではdataset access ledger、
+versioned M_dev、CV artifact分離、Code/P/M migration、三世代lineage、
+active runtime一件性を実装し、6/6 gateをPASSした。
+次に許可されるwork blockはP22-Aのknown public/CV/stress評価だけである。
+
+## Historical evidence boundary
 
 P10は完全閉包先行・水平減算の順で閉じた。
 
@@ -69,20 +106,23 @@ P11は次を固定して完了した。
 P11はRuntime P、score、sample能力を変更していない。P11/S5は
 known-sample closure baselineとして凍結する。P12はoperational
 AGI conformance、genericity、Competition contract mock dry-runを実装・反証し、
-blocking受入57/57 PASSで完了した。P13以降はOwner明示許可により開始し、
+rev1 blocking受入57/57 PASSで完了した。この判定は
+`HISTORICAL_NON_BLOCKING`であり、rev2 generic completionを意味しない。
+P13〜P15ではOwner明示許可により、
 25ゲームの逐次ローカルcompetition互換12/12と、Kaggle Notebook
 version 8通常実行・公式placeholder row/column/type照合をPASSした。実提出APIは
 versions 4、5、7、8から四回呼び、refs `55040966` / `55043205` /
 `55045360` / `55049227`はすべてKaggle system error、scoreなし・
 total bytes 0で終了した。version 7でformat単独原因、version 8で
 全ゲーム同時thread競合単独原因を棄却した。episode APIは受理済みrefsにも0を
-返すためgateway位置の根拠にしない。現行HDSはSUSPEND。本日のOwner指定一回提出は
-消費済み。次候補は公式parquetの実行前fallback、private failure telemetry、
+返すためgateway位置の根拠にしない。当時のHDS snapshotはSUSPENDで、
+official scoreは得られなかった。当時の次候補は公式parquetの実行前fallback、
+private failure telemetry、
 environment release隔離を含み、Notebook 25/25・unit 555/555・integration 8/8・
 64x64負荷監査をPASSした。Kaggle version 10として通常実行COMPLETE、
 source 4セル一致、traceback/error 0、2648-byte出力回収もPASSした。
 version 9はMCP転送時の文字列省略で壊れた未提出artifactとして棄却した。
-次gateは新たにOwner許可された日にversion 10を一回だけprivate rerunすることである。
+これらはP16以降のactive selector、提出指示、`COMPETITION_READY`証拠ではない。
 
 ## 監査正本
 
@@ -95,5 +135,9 @@ version 9はMCP転送時の文字列省略で壊れた未提出artifactとして
 - [`ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`](../architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md)
 - [`EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md`](../audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md)
 - [`P12_PRE_OFFICIAL_GENERICITY_STRATEGY.md`](P12_PRE_OFFICIAL_GENERICITY_STRATEGY.md)
+- [`ARC3_GENERIC_REAUDIT_REV2.md`](../audit/ARC3_GENERIC_REAUDIT_REV2.md)
+- [`IDENTITY_TAINT_THREAT_MODEL.md`](../security/IDENTITY_TAINT_THREAT_MODEL.md)
+- [`EVALUATION_ROLE_REGISTRY_SPEC.md`](../evaluation/EVALUATION_ROLE_REGISTRY_SPEC.md)
+- [`OFFICIAL_COMPLETION_PREDICATES.md`](../official/OFFICIAL_COMPLETION_PREDICATES.md)
 
 後続phaseの存在を理由に、現在phaseを飛ばしてはならない。

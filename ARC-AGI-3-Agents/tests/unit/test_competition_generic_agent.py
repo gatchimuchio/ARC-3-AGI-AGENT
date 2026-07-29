@@ -7,7 +7,12 @@ from arc_agi.local_wrapper import LocalEnvironmentWrapper
 from arcengine import FrameDataRaw, GameAction, GameState
 
 from agents.templates.generic_agi_agent import GenericAGIAgent
+from arc3_agi_agent.generic_compute import HybridRelationalInstructionBody
 from arc3_agi_agent.generic_env import CompetitionGenericEnvironment
+from arc3_agi_agent.generic_session import (
+    ResourceContract,
+    create_cognitive_session,
+)
 from arc3_agi_agent.schema import forbidden_runtime_paths
 
 
@@ -117,6 +122,12 @@ def test_generic_competition_agent_runs_only_generic_runtime() -> None:
         levels_completed=1,
     )
     environment = _FakeCompetitionEnvironment(before, after)
+    session = create_cognitive_session(
+        p_bundle=HybridRelationalInstructionBody(),
+        mode="COMPETITION",
+        resource_contract=ResourceContract(action_budget_per_episode=8),
+    )
+    episode_handle = session.begin_episode()
     agent = GenericAGIAgent(
         card_id="card:test",
         game_id="orchestration-only-identity",
@@ -125,6 +136,8 @@ def test_generic_competition_agent_runs_only_generic_runtime() -> None:
         record=False,
         arc_env=environment,
         max_actions=8,
+        cognitive_session=session,
+        episode_handle=episode_handle,
     )
 
     agent.main()
@@ -134,6 +147,7 @@ def test_generic_competition_agent_runs_only_generic_runtime() -> None:
     assert agent.runtime_report.progress_count == 1
     assert agent.runtime_report.final_state == "WIN"
     assert agent.runtime_report.no_fallback_used is True
-    assert agent.runtime_report.runtime_identity_received is False
+    assert agent.runtime_report.runtime_identity_received is True
+    assert agent.runtime_report.identity_boundary_passed is True
     assert len(environment.calls) == 1
     assert environment.calls[0][2]["authority"] == "HDS"

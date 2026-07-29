@@ -45,6 +45,39 @@ FORBIDDEN_RUNTIME_KEYS = frozenset(
 FORBIDDEN_RUNTIME_KEY_TOKENS = frozenset(
     re.sub(r"[^a-z0-9]", "", key.casefold()) for key in FORBIDDEN_RUNTIME_KEYS
 )
+FORBIDDEN_EXECUTABLE_KEYS = frozenset(
+    {
+        "callable",
+        "code",
+        "command",
+        "eval",
+        "exec",
+        "filesystem",
+        "import",
+        "module",
+        "network",
+        "path",
+        "python",
+        "shell",
+        "subprocess",
+        "url",
+    }
+)
+FORBIDDEN_EXECUTABLE_KEY_TOKENS = frozenset(
+    re.sub(r"[^a-z0-9]", "", key.casefold())
+    for key in FORBIDDEN_EXECUTABLE_KEYS
+)
+_FORBIDDEN_EXECUTABLE_VALUE_PATTERNS = (
+    "__import__",
+    "eval(",
+    "exec(",
+    "open(",
+    "os.system",
+    "subprocess",
+    "socket.",
+    "http://",
+    "https://",
+)
 
 
 def _jsonable(value: Any) -> Any:
@@ -64,6 +97,7 @@ def _jsonable(value: Any) -> Any:
 def canonical_json(value: Any) -> str:
     return json.dumps(
         _jsonable(value),
+        allow_nan=False,
         ensure_ascii=False,
         sort_keys=True,
         separators=(",", ":"),
@@ -310,7 +344,41 @@ def _forbidden_runtime_paths(value: Any, path: str = "$") -> list[str]:
 def forbidden_runtime_paths(value: Any) -> tuple[str, ...]:
     """Return deterministic paths whose keys violate the identity-free boundary."""
 
-    return tuple(sorted(set(_forbidden_runtime_paths(value))))
+    return tuple(sorted(set(_forbidden_runtime_paths(_jsonable(value)))))
+
+
+def _forbidden_executable_paths(value: Any, path: str = "$") -> list[str]:
+    failures: list[str] = []
+    if isinstance(value, Mapping):
+        for key, item in value.items():
+            normalized = re.sub(r"[^a-z0-9]", "", str(key).casefold())
+            child_path = f"{path}.{key}"
+            if normalized in FORBIDDEN_EXECUTABLE_KEY_TOKENS:
+                failures.append(child_path)
+            failures.extend(_forbidden_executable_paths(item, child_path))
+    elif isinstance(value, Sequence) and not isinstance(
+        value, (str, bytes, bytearray)
+    ):
+        for index, item in enumerate(value):
+            failures.extend(
+                _forbidden_executable_paths(item, f"{path}[{index}]")
+            )
+    elif isinstance(value, str):
+        lowered = value.casefold()
+        if any(
+            pattern in lowered
+            for pattern in _FORBIDDEN_EXECUTABLE_VALUE_PATTERNS
+        ):
+            failures.append(path + ":value")
+    return failures
+
+
+def forbidden_executable_paths(value: Any) -> tuple[str, ...]:
+    """Return paths that attempt to introduce arbitrary code or I/O."""
+
+    return tuple(
+        sorted(set(_forbidden_executable_paths(_jsonable(value))))
+    )
 
 
 def validate_runtime_bundle(bundle: Mapping[str, Any]) -> list[str]:
@@ -364,10 +432,13 @@ __all__ = [
     "EVIDENCE_STATES",
     "FORBIDDEN_RUNTIME_KEYS",
     "FORBIDDEN_RUNTIME_KEY_TOKENS",
+    "FORBIDDEN_EXECUTABLE_KEYS",
+    "FORBIDDEN_EXECUTABLE_KEY_TOKENS",
     "SCHEMA_VERSION",
     "TERMINAL_STATES",
     "canonical_json",
     "digest_object",
+    "forbidden_executable_paths",
     "forbidden_runtime_paths",
     "record_from_dict",
     "record_to_dict",

@@ -4,10 +4,12 @@ ARC Prize 2026 / ARC-AGI-3向けの、**未知環境を観測し、命令形保�
 
 本リポジトリは `gatchimuchio/ARC-Layer-0-Functional-Compliance` の継続改修ではありません。旧リポジトリを証拠・探索資産として凍結し、検証可能な責任境界だけを選別移植するクリーンリスタートです。
 
-P10の現行戦略は
-[`完全閉包先行・水平減算戦略`](docs/roadmap/P10_COMPLETE_CLOSURE_HORIZONTAL_SUBTRACTION_STRATEGY.md)
-です。以下に残るC2/C3・35/183の記述はR0以前のhistorical Runtime Student
-証拠であり、現行work selectorではありません。
+現行正本は
+[`ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2`](docs/architecture/ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2.md)
+と
+[`P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2`](docs/roadmap/P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md)
+です。P0〜P15、C2/C3、S5、Kaggle version 10はhistorical evidenceであり、
+現行work selectorや完成claimではありません。
 
 ## 現在の状態
 
@@ -23,26 +25,35 @@ P10の現行戦略は
 - P9: `EIGHT_SUBSET_MINIMUM_CERTIFICATE` — 完了
 - P10: `COMPLETE_ARC3_SAMPLE_SOLVING` — 完了
 - P11: `RELEASE_STATE_FREEZE` — 完了
-- 現在状態: P12 `PRE_OFFICIAL_AGI_CONFORMANCE_AND_GENERICITY`完了、
-  Owner明示許可によりP13〜P15の一回提出work blockを実行中
-- P12: 外部監査訂正、operational AGI conformance、genericity、
-  Competition mock dry-run — **57/57 PASS**
-- P13: `OFFICIAL_ARC_CONNECTION` — 逐次ローカルcompetition互換12/12 PASS。
-  private rerunのgateway到達・scorecard close位置はKaggle公開fieldから判定不能
-- P14: Kaggle提出経路 — private実行前fallbackを含むversion 10を
-  ローカルNotebook 25/25検証し、Kaggle通常実行COMPLETE、
-  4セルsource round trip、CLI output取得、公式placeholder契約を確認済み。
-  version 10のcompetition submission APIは未使用
-- P15: 実提出 — ref `55040966`、`55043205`、`55045360`、`55049227`は
-  すべてKaggle `ERROR`（system error、scoreなし、total bytes 0）。
-  version 7でformat単独原因、version 8で全ゲーム同時thread競合単独原因を棄却。
-  現行HDS判断は **SUSPEND**、本日のOwner指定一回提出は消費済み
-- P11/S5 183/183のclaim: **known sample closure complete**
+- 最終完了phase: P21 `GOVERNED_DEVELOPMENT_LOOP_JOINT_OPTIMIZATION` — **6/6 PASS**
+- 現行work block: P22-A `PUBLIC_CV_TRANSFORMATION_STRESS` — **進行中**
+- P16: claim correction、active runtime一件化、identity/taint threat model、
+  evaluation role registry、official completion predicate
+- P17-A: scorecard単位`CognitiveSession`、Authority/Control/M分離、
+  frozen P、RuntimeIdentity、promotion無効episode overlay
+- P17-B: candidate固有evidence binding、decision taint境界、
+  failure rollback、global evidence bug除去
+- P18: atomic mandatory batch、event ledger、SQLite WAL/recovery、
+  interval checkpoint、canonical artifact
+- P19: typed causal record、Tier 0〜3 retrieval、independent evidence、
+  consolidation、negative transfer、cross-game semantic promotion
+- P20-A: fixed ISA、typed DAG、resource manifest、L0 ABI、
+  deterministic P-IR interpreter
+- P20-B: symbolic/parametric/hybrid compiler、canonical bundle、
+  isolated evaluation、HDS registry、P/J0/M0 restart
+- P21: dataset access ledger、versioned M_dev loop、CV artifact分離、
+  Code/P/M migration、三世代lineage、active runtime一件性
+- P22-A: compiled identity-free Pをactive Generic経路へ統合し、
+  focused public 1/25 gameで6/6 level・75/75 action一致を確認。全数/CV/stressは未完了
+- P22-B以降: 絶対順序で未開始
+- P11/S5 183/183のclaim: **historical known-sample closure only**
 - S5 operational AGI conformance: **SUSPEND**
-- genericity: **P12 executable acceptance PASS**
-- official compatibility: **LOCAL COMPETITION PASS / HIDDEN NOT_EVALUATED**
-- pre-official AGI readiness: **PASS**
-- official connection: **AUTHORIZED / ACTUAL GATEWAY REACH NOT EVIDENCED**
+- P12 genericity/pre-official claim: **HISTORICAL_NON_BLOCKING**
+- generic completion: **NOT_ESTABLISHED**
+- sealed single-artifact completion: **NOT_EVALUATED**
+- competition ready: **NOT_ESTABLISHED**
+- official accepted/public/private/full: **NOT_OBSERVED**
+- Kaggle version 10 normal run: **historical preflight only**
 - P1実装: 六つのLayer-0責任、非対称Trinity、除去監査、OFFLINE sample agent
 - P1実行証拠: 保持済み25ゲームすべてでHDS承認済み1 actionと再観測の経路gateが`PASS`
 - transition判断: 25件すべて保守的`SUSPEND`、`FAIL`なし（攻略実績ではない）
@@ -155,7 +166,8 @@ P10の現行戦略は
 
 P11のweights、trace、score、artifact、digestはread-only baselineです。P12では
 S5を汎用化して上書きせず、`KnownSampleStudent`と別の
-`GenericAGIRuntime`を実装・反証しました。P13以降はOwnerの明示許可を受け、
+`GenericAGIRuntime`を実装・反証しました。以下のP12〜P15記録は
+`HISTORICAL_NON_BLOCKING`です。P13〜P15ではOwnerの明示許可を受け、
 `listen_and_serve(competition_mode=True)`による25ゲーム逐次互換回帰と、
 Kaggle Notebook versions 8/10の通常実行を完了しました。実提出ref
 `55040966`、`55043205`、`55045360`、`55049227`は、いずれもKaggle
@@ -179,6 +191,7 @@ FileNotFoundErrorをtraceback/statusへ保存する隔離スモークをPASSし�
 traceback/error 0、2648-byte出力回収をPASSしました。version 9はMCP転送時の
 文字列省略で壊れた未提出artifactであり、正本候補には採用していません。
 AGI方策・HDS・identity-free境界・128 action budgetは変更していません。
+これらをrev2の`COMPETITION_READY`またはofficial completionへ昇格しません。
 
 Teacher scoreは成功trajectoryと段階ごとの残存特権を許可した開発基準です。
 S0は全特権、S1は固定列除去、S2はliteral target除去、S3は明示的な
@@ -333,13 +346,14 @@ active/archive、deterministic queryを持つstandalone Mを実装しました�
 に記録しています。P11では能力を変更せず、P0/J0/M0、code、dependency、
 environment、回帰、再現可能wheelを
 [`P11_RELEASE_STATE.json`](analysis/release/P11_RELEASE_STATE.json)へ固定しました。
-P12は57/57受入PASSで完了しました。P13〜P15はOwner明示許可により進行中で、
+P12はrev1定義域で57/57受入PASSでした。P13〜P15はhistorical incompleteで、
 逐次ローカルcompetition互換、Kaggle Notebook versions 8/10の通常実行、
 公式placeholder照合までPASSしています。四回の実提出はKaggle system errorで
 scoreを生成しませんでした。version 7でformat単独原因、version 8でthread
 fan-out単独原因を棄却しました。version 10候補は25/25 Notebook契約、
 12/12 local competition、555/555 unit、8/8 integration、Kaggle通常実行と
-source/output round tripをPASSしていますが、private rerunは未実施です。
+source/output round tripをPASSしたhistorical preflightですが、
+official accepted scoreではありません。
 
 ## 設計上の固定境界
 
@@ -449,23 +463,28 @@ python -m arc3_agi_agent.development_analysis \
 10. P9: 全8部分集合証明 — 完了
 11. P10: 全sample game / 全level完全攻略 — 完了
 12. P11: release state固定 — 完了
-13. P12: pre-official AGI conformance / genericity — 完了
-14. P13: 公式ARC接続 — ローカルcompetition互換PASS、private gateway位置は判定不能
-15. P14: Kaggle提出経路 — version 10通常実行・source/output round trip PASS、private未実行
-16. P15: 実提出 — refs `55040966` / `55043205` / `55045360` / `55049227`はsystem error、公式scoreなし、HDS SUSPEND
+13. P12: pre-official AGI conformance / genericity — historical rev1
+14. P13: 旧公式ARC接続 — historical incomplete
+15. P14: 旧Kaggle提出経路 — historical preflight
+16. P15: 旧実提出 — historical incomplete、official scoreなし
+17. P16: claim / threat / evaluation rebaseline — 完了
+18. P17-A: CognitiveSession / state ownership — 完了
+19. P17-B: evidence binding / taint / overlay rollback — 完了
+20. P18: atomic event-sourced memory — 完了
+21. P19: causal memory / consolidation / negative transfer — 完了
+22. P20-A: fixed L0 / typed P-IR — 完了
+23. P20-B: P compiler / bundle / registry — 完了
+24. P21: governed development loop — 完了
+25. P22-A: known public / CV / transformation stress — 進行中
+26. P22-B: sealed single-artifact final
+27. P23: Competition session / resource / packaging
+28. P24: official observation（P23全gate + Owner明示許可）
 
-P12 blocking受入は57/57 PASSです。P13〜P15はOwnerの明示的phase開始指示に
-より進行中です。`OperationMode.COMPETITION`のローカル公式相当回帰と
-Kaggle Notebook versions 8/10の通常実行はPASSしました。実提出は四回実行し、
-いずれもscoreなし・total bytes 0のKaggle system errorで終了しました。
-逐次version 8は25/25の公式相当回帰と23/23 Notebook検証をPASSした一方、
-private rerun ref `55049227`はERRORでした。本日のOwner指定一回提出は消費済みで、
-次候補version 10は実行前の公式parquet fallback、失敗telemetry、
-環境release隔離を含み、ローカル全gateとKaggle通常実行・source/output
-round tripをPASSしています。追加提出は次のOwner許可日まで行いません。
+P12〜P15の結果はhistorical evidenceとしてのみ保持する。現行の次work blockは
+P22-Aだけであり、P22-B以降を前倒ししない。
 
 現行ロードマップ全文の正本は
-[`AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md`](docs/roadmap/AGI_MINIMUM_THREE_IMPLEMENTATION_PROOF_ROADMAP.md)
+[`P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md`](docs/roadmap/P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md)
 です。
 
 ## Git運用
