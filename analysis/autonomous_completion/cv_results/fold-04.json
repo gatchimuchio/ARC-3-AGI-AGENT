@@ -1,0 +1,170 @@
+{
+  "action_budget_per_environment": 64,
+  "actions_executed": 320,
+  "allowed_claim": "CV_PROCEDURE_EVIDENCE",
+  "completed_environment_count": 0,
+  "completed_level_count": 0,
+  "content_digest": "p22-evidence:9b58accf97ca3584333f4c39396a4dad9e5a6ddc4789af924df94799f785c742",
+  "errors": [],
+  "evaluation_role": "CV_HOLDOUT",
+  "execution_count": 5,
+  "failed_requirement_ids": [],
+  "fallback_count": 0,
+  "final_generic_claim": "NOT_AUTHORIZED",
+  "fold_id": "fold-04",
+  "holdout_game_ordinals": [
+    4,
+    9,
+    14,
+    19,
+    24
+  ],
+  "identity_leak_count": 0,
+  "p_logical_digest": "p-logical:81033017519ffd95274345b373c5ff9dbd9f60b653e86201c46801679785ae69",
+  "p_package_digest": "p-physical-package:ecb44aeac9f1960cebdef06921029b72fc04f4c0a3cddfbd5b79a23064a05b69",
+  "reports": [
+    {
+      "actions_executed": 64,
+      "complete": false,
+      "completed_levels": 0,
+      "failure_signatures": [
+        "GENERIC_RESOURCE_LIMIT"
+      ],
+      "final_state": "NOT_FINISHED",
+      "game_id": "dc22-fdcac232",
+      "game_ordinal": 4,
+      "identity_boundary_passed": true,
+      "memory_promoted": false,
+      "no_fallback_used": true,
+      "run_report_digest": "generic-run:5c2d03e8cf98358305c9e83e228d469e58a5a3e253df6f4bffb569724fec7fe3",
+      "stop_reason": "RESOURCE_LIMIT",
+      "trace": {
+        "compressed_sha256": "d9f04b996cbb4981483d2b8d791e23df81a9a6c6a32027debb0ccbd3a2a150c9",
+        "compressed_size_bytes": 58376,
+        "cycle_count": 64,
+        "relative_path": "analysis/autonomous_completion/cv_traces/fold-04/game-00.jsonl.gz",
+        "uncompressed_sha256": "a816947158499e0ebec84dd82f4a3b3c02eff6c87a72669bce6259ab4a67cee8"
+      }
+    },
+    {
+      "actions_executed": 64,
+      "complete": false,
+      "completed_levels": 0,
+      "failure_signatures": [
+        "GENERIC_RESOURCE_LIMIT"
+      ],
+      "final_state": "NOT_FINISHED",
+      "game_id": "lp85-305b61c3",
+      "game_ordinal": 9,
+      "identity_boundary_passed": true,
+      "memory_promoted": false,
+      "no_fallback_used": true,
+      "run_report_digest": "generic-run:5e6ca644e2abca61bd3c2231ad00a5a651cdbf8b6e48bbad8b572cbfc2b8ac5a",
+      "stop_reason": "RESOURCE_LIMIT",
+      "trace": {
+        "compressed_sha256": "7fc15e8a87831d47e453abee9c6dbced5326839d368c7895b6abd9fac2e4655f",
+        "compressed_size_bytes": 43057,
+        "cycle_count": 64,
+        "relative_path": "analysis/autonomous_completion/cv_traces/fold-04/game-01.jsonl.gz",
+        "uncompressed_sha256": "d5b05f6b83fe32e04a2bb53c9f6b50dcb52b5ece3421cb06c7804a7737f1eae0"
+      }
+    },
+    {
+      "actions_executed": 64,
+      "complete": false,
+      "completed_levels": 0,
+      "failure_signatures": [
+        "GENERIC_RESOURCE_LIMIT"
+      ],
+      "final_state": "NOT_FINISHED",
+      "game_id": "s5i5-18d95033",
+      "game_ordinal": 14,
+      "identity_boundary_passed": true,
+      "memory_promoted": false,
+      "no_fallback_used": true,
+      "run_report_digest": "generic-run:35e62d22d73650c6228538272078bd1bf582c09438b4389047c7321fb5806d48",
+      "stop_reason": "RESOURCE_LIMIT",
+      "trace": {
+        "compressed_sha256": "a6ff11be36e638b81e0605fd9b7060839453cb874dfd72a12ba0d329db70bfdc",
+        "compressed_size_bytes": 36631,
+        "cycle_count": 64,
+        "relative_path": "analysis/autonomous_completion/cv_traces/fold-04/game-02.jsonl.gz",
+        "uncompressed_sha256": "477cee1b86cc08b23520bd3a564563aededf00fcebabc341c30cd2eb9e404ec6"
+      }
+    },
+    {
+      "actions_executed": 64,
+      "complete": false,
+      "completed_levels": 0,
+      "failure_signatures": [
+        "GENERIC_GAME_OVER_OBSERVED",
+        "GENERIC_RESOURCE_LIMIT"
+      ],
+      "final_state": "NOT_FINISHED",
+      "game_id": "su15-1944f8ab",
+      "game_ordinal": 19,
+      "identity_boundary_passed": true,
+      "memory_promoted": false,
+      "no_fallback_used": true,
+      "run_report_digest": "generic-run:2b24319151c854774336eab964e992ae4ba039b18faeeeea09f2d6c208ff1616",
+      "stop_reason": "RESOURCE_LIMIT",
+      "trace": {
+        "compressed_sha256": "45316aa785940537f23e4e0d8c07250bbe210d23b0225e8e9e2383021ba697cd",
+        "compressed_size_bytes": 120161,
+        "cycle_count": 64,
+        "relative_path": "analysis/autonomous_completion/cv_traces/fold-04/game-03.jsonl.gz",
+        "uncompressed_sha256": "f31444e4d7c68d2e0f6934dbe1ad6ea1663ba4730c0aaf0f60e9a8067a9d9471"
+      }
+    },
+    {
+      "actions_executed": 64,
+      "complete": false,
+      "completed_levels": 0,
+      "failure_signatures": [
+        "GENERIC_RESOURCE_LIMIT"
+      ],
+      "final_state": "NOT_FINISHED",
+      "game_id": "wa30-ee6fef47",
+      "game_ordinal": 24,
+      "identity_boundary_passed": true,
+      "memory_promoted": false,
+      "no_fallback_used": true,
+      "run_report_digest": "generic-run:771c53b937144bfff67108fc8c3dc9c64aaa7c8a70b4b3bc58a9ad317a280011",
+      "stop_reason": "RESOURCE_LIMIT",
+      "trace": {
+        "compressed_sha256": "a248e1eef5f46602d9a7015c91aa4ac090b58428b1478b68c10eb4edd6434071",
+        "compressed_size_bytes": 57824,
+        "cycle_count": 64,
+        "relative_path": "analysis/autonomous_completion/cv_traces/fold-04/game-04.jsonl.gz",
+        "uncompressed_sha256": "16fed9a77d9b70863bc58c422fdb762dff8c4902f8df0f90f05f79c735fd07c0"
+      }
+    }
+  ],
+  "runtime_identity_digest": "runtime-identity:aca14eba6f443f5a64d6534bca343ff6faaa957cd92712ac7b1f352a46761c69",
+  "same_single_artifact_claim_allowed": false,
+  "schema_version": "arc3-p22-autonomous-evaluator-v1",
+  "status": "PASS",
+  "training_data_completely_separated": true,
+  "training_game_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    10,
+    11,
+    12,
+    13,
+    15,
+    16,
+    17,
+    18,
+    20,
+    21,
+    22,
+    23
+  ]
+}

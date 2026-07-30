@@ -213,6 +213,15 @@ class TraceArtifact:
     compressed_sha256: str
     compressed_size_bytes: int
 
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "relative_path": self.relative_path,
+            "cycle_count": self.cycle_count,
+            "uncompressed_sha256": self.uncompressed_sha256,
+            "compressed_sha256": self.compressed_sha256,
+            "compressed_size_bytes": self.compressed_size_bytes,
+        }
+
 
 class ContentBoundTraceSink:
     """Write one compact but complete logical record for every runtime cycle."""
@@ -669,7 +678,7 @@ def run_known_public_regression(
                             runtime_report.identity_boundary_passed
                         ),
                         "memory_promoted": bool(receipt.promoted),
-                        "trace": trace_artifact,
+                        "trace": trace_artifact.as_dict(),
                     }
                 )
             except Exception as error:
@@ -884,6 +893,13 @@ def run_cv_holdout_fold(
     training_value = fold_value.get("training_game_ordinals")
     if not isinstance(training_value, list):
         raise TypeError("P22_CV_TRAINING_ORDINALS_INVALID")
+    action_budget = _mapping_integer(
+        fold_value,
+        "action_budget_per_environment",
+        error="P22_CV_ACTION_BUDGET_INVALID",
+    )
+    if not 1 <= action_budget <= P22_PUBLIC_ACTION_BUDGET:
+        raise ValueError("P22_CV_ACTION_BUDGET_INVALID")
     holdout_ordinals = tuple(
         int(item)
         for item in holdout_value
@@ -905,7 +921,7 @@ def run_cv_holdout_fold(
     if len(game_ids) != P22_REQUIRED_PUBLIC_GAMES:
         raise RuntimeError("P22_CV_ENVIRONMENT_COUNT_INVALID")
     selected_games = tuple(game_ids[index] for index in holdout_ordinals)
-    session = _session(bundle, action_budget=P22_PUBLIC_ACTION_BUDGET)
+    session = _session(bundle, action_budget=action_budget)
     if session.runtime_identity.digest() != fold_value.get(
         "runtime_identity_digest"
     ):
@@ -970,7 +986,7 @@ def run_cv_holdout_fold(
                             report.identity_boundary_passed
                         ),
                         "memory_promoted": bool(receipt.promoted),
-                        "trace": trace_artifact,
+                        "trace": trace_artifact.as_dict(),
                     }
                 )
             except Exception as error:
@@ -1014,6 +1030,7 @@ def run_cv_holdout_fold(
         "training_data_completely_separated": not set(
             training_value
         ).intersection(holdout_ordinals),
+        "action_budget_per_environment": action_budget,
         "p_logical_digest": bundle.logical_digest(),
         "p_package_digest": bundle.physical_digest(),
         "runtime_identity_digest": session.runtime_identity.digest(),

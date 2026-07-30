@@ -5,21 +5,57 @@ from __future__ import annotations
 import hashlib
 import json
 import tempfile
+from collections import defaultdict
 from pathlib import Path
-from typing import Final
+from typing import Any, Final, TypedDict
 
+import numpy as np
+
+from ..compiled_policy import (
+    COMPILED_POLICY_BODY_VERSION,
+    COMPILED_POLICY_FEATURE_COUNT,
+    COMPILED_POLICY_FORMAT_ID,
+    COMPILED_POLICY_SCHEMA_VERSION,
+    compiled_policy_manifest_digest,
+    load_compiled_autonomous_instruction_body,
+)
 from ..evaluation_registry import EvaluationRegistry
+from ..generic_compute import HybridRelationalInstructionBody
 from ..generic_hds import HDSConfiguration
 from ..p_compiler_v2 import PCompilerV2
 from ..runtime_identity import build_runtime_identity
 from ..schema import digest_object
-from .generic_policy_migration import migrate_identity_free_policy
-from .s5_policy_compiler import compile_s5_rendered_policy
+from .s5_policy_compiler import _feature_matrix, _load_corpus
+from .s5_training_corpus import write_deterministic_npz
 
 P22_CV_COMPILER_VERSION: Final = "arc3-p22-cv-compiler-v1"
 P22_CV_FOLD_COUNT: Final = 5
 P22_CV_GAME_COUNT: Final = 25
-P22_CV_ACTION_BUDGET: Final = 4096
+# CV is procedure evidence, not the 183-level public completion gate.  Keep
+# every holdout execution finite even when a train-only policy makes no
+# progress; the measured completion count remains visible in the result.
+P22_CV_ACTION_BUDGET: Final = 64
+P22_CV_HIDDEN_FEATURES: Final = 64
+
+
+class _HeadReport(TypedDict):
+    head_id: str
+    classes: tuple[int, ...]
+    hidden_feature_count: int
+    selected_feature_digest: str
+    training_record_count: int
+    training_error_count: int
+
+
+class _CVPolicyCompileReport(TypedDict):
+    training_selection_digest: str
+    training_record_count: int
+    training_game_count: int
+    training_error_count: int
+    runtime_artifact_contains_examples: bool
+    runtime_policy_digest: str
+    parameter_count: int
+    head_reports: list[_HeadReport]
 
 
 def deterministic_cv_folds(
@@ -76,6 +112,235 @@ def _write_content_bound(
     return body
 
 
+def _centroid_head(
+    *,
+    features: np.ndarray,
+    labels: np.ndarray,
+    head_id: str,
+) -> tuple[dict[str, np.ndarray], _HeadReport]:
+    classes = np.unique(labels)
+    if len(classes) < 2:
+        raise ValueError("P22_CV_HEAD_CLASS_COUNT_INVALID:" + head_id)
+    variances = np.var(features, axis=0)
+    candidate_indices = np.flatnonzero(variances > 0)
+    if not len(candidate_indices):
+        candidate_indices = np.arange(features.shape[1])
+    ranked = candidate_indices[
+        np.argsort(
+            variances[candidate_indices],
+            kind="stable",
+        )
+    ]
+    selected = np.sort(ranked[-P22_CV_HIDDEN_FEATURES:])
+    hidden_count = len(selected)
+    weight0 = np.zeros(
+        (COMPILED_POLICY_FEATURE_COUNT, hidden_count),
+        dtype=np.float32,
+    )
+    weight0[selected, np.arange(hidden_count)] = 1.0
+    bias0 = np.zeros(hidden_count, dtype=np.float32)
+    projected = features[:, selected]
+    centroids = np.stack(
+        [
+            np.mean(projected[labels == class_value], axis=0)
+            for class_value in classes
+        ]
+    )
+    if len(classes) == 2:
+        weight1 = (
+            2.0 * (centroids[1] - centroids[0])
+        ).reshape(hidden_count, 1)
+        bias1 = np.asarray(
+            [
+                np.dot(centroids[0], centroids[0])
+                - np.dot(centroids[1], centroids[1])
+            ],
+            dtype=np.float32,
+        )
+    else:
+        weight1 = (2.0 * centroids.T).astype(np.float32)
+        bias1 = -np.sum(centroids * centroids, axis=1)
+    arrays = {
+        f"{head_id}_w0": np.asarray(weight0, dtype=np.float16),
+        f"{head_id}_b0": np.asarray(bias0, dtype=np.float16),
+        f"{head_id}_w1": np.asarray(weight1, dtype=np.float16),
+        f"{head_id}_b1": np.asarray(bias1, dtype=np.float16),
+    }
+    quantized_hidden = np.maximum(
+        features @ arrays[f"{head_id}_w0"].astype(np.float32)
+        + arrays[f"{head_id}_b0"].astype(np.float32),
+        0.0,
+    )
+    logits = (
+        quantized_hidden @ arrays[f"{head_id}_w1"].astype(np.float32)
+        + arrays[f"{head_id}_b1"].astype(np.float32)
+    )
+    if logits.shape[1] == 1:
+        predicted = classes[(logits[:, 0] > 0).astype(np.int64)]
+    else:
+        predicted = classes[np.argmax(logits, axis=1)]
+    return arrays, {
+        "head_id": head_id,
+        "classes": tuple(int(item) for item in classes),
+        "hidden_feature_count": hidden_count,
+        "selected_feature_digest": "p22-cv-features:"
+        + digest_object(tuple(int(item) for item in selected)),
+        "training_record_count": len(labels),
+        "training_error_count": int(np.sum(predicted != labels)),
+    }
+
+
+def _compile_cv_policy(
+    *,
+    corpus_path: Path,
+    corpus_manifest_path: Path,
+    output_manifest_path: Path,
+    output_weights_path: Path,
+    training_game_ordinals: tuple[int, ...],
+) -> _CVPolicyCompileReport:
+    arrays, corpus_manifest = _load_corpus(
+        corpus_path,
+        corpus_manifest_path,
+    )
+    selection = np.isin(
+        arrays["game_ordinal"],
+        np.asarray(training_game_ordinals, dtype=np.uint8),
+    )
+    selected_arrays = {
+        name: np.asarray(value[selection])
+        for name, value in arrays.items()
+    }
+    features = _feature_matrix(selected_arrays)
+    actions = selected_arrays["actions"]
+    available = selected_arrays["available"]
+    targets = selected_arrays["targets"]
+    groups: dict[tuple[int, ...], list[int]] = defaultdict(list)
+    for index, row in enumerate(available):
+        groups[
+            tuple(int(item) for item in np.flatnonzero(row))
+        ].append(index)
+    exported: dict[str, np.ndarray] = {}
+    action_heads: list[dict[str, object]] = []
+    head_reports: list[_HeadReport] = []
+    for ordinal, (surface, raw_indices) in enumerate(
+        sorted(groups.items())
+    ):
+        indices = np.asarray(raw_indices, dtype=np.int64)
+        head_id = f"action_{ordinal:02d}"
+        head_arrays, report = _centroid_head(
+            features=features[indices],
+            labels=actions[indices],
+            head_id=head_id,
+        )
+        exported.update(head_arrays)
+        action_heads.append(
+            {
+                "classes": list(report["classes"]),
+                "head_id": head_id,
+                "hidden_units": report["hidden_feature_count"],
+                "record_count": len(indices),
+                "surface": list(surface),
+            }
+        )
+        head_reports.append(report)
+    pointer_indices = np.flatnonzero(targets[:, 0] >= 0)
+    pointer_heads: dict[str, object] = {}
+    for axis, coordinate in ((0, "horizontal"), (1, "vertical")):
+        head_id = f"pointer_{coordinate}"
+        head_arrays, report = _centroid_head(
+            features=features[pointer_indices],
+            labels=targets[pointer_indices, axis],
+            head_id=head_id,
+        )
+        exported.update(head_arrays)
+        pointer_heads[coordinate] = {
+            "classes": list(report["classes"]),
+            "head_id": head_id,
+            "hidden_units": report["hidden_feature_count"],
+            "record_count": len(pointer_indices),
+        }
+        head_reports.append(report)
+    write_deterministic_npz(output_weights_path, exported)
+    weights_sha256 = _sha256(output_weights_path)
+    parameter_count = sum(int(value.size) for value in exported.values())
+    selection_digest = "p22-cv-training-selection:" + digest_object(
+        {
+            "corpus_sha256": corpus_manifest["corpus_sha256"],
+            "training_game_ordinals": training_game_ordinals,
+        }
+    )
+    structural = HybridRelationalInstructionBody()
+    provenance_digest = "generic-policy-provenance:" + digest_object(
+        {
+            "compiler": P22_CV_COMPILER_VERSION,
+            "selection_digest": selection_digest,
+            "structural_body_digest": structural.digest(),
+        }
+    )
+    manifest: dict[str, Any] = {
+        "action_heads": action_heads,
+        "body_version": COMPILED_POLICY_BODY_VERSION,
+        "content_digest": "",
+        "feature_count": COMPILED_POLICY_FEATURE_COUNT,
+        "feature_schema": {
+            "available_action_mask": 8,
+            "bounded_history": 256,
+            "coarse_palette_blocks": 1024,
+            "downsampled_render": 1024,
+            "history_limit": 16,
+            "palette_statistics": 48,
+        },
+        "format_id": COMPILED_POLICY_FORMAT_ID,
+        "frame_dimensions": [64, 64],
+        "migration_version": P22_CV_COMPILER_VERSION,
+        "model_family": "variance-projection-nearest-centroid",
+        "parameter_count": parameter_count,
+        "parameter_dtype": "float16",
+        "pointer_heads": pointer_heads,
+        "provenance_digest": provenance_digest,
+        "runtime_artifact_contains_examples": False,
+        "runtime_identity_free": True,
+        "runtime_inputs": (
+            "rendered observation",
+            "available actions",
+            "bounded HDS-authorized action-effect memory",
+            "passive semantic memory",
+        ),
+        "schema_version": COMPILED_POLICY_SCHEMA_VERSION,
+        "source_parameter_digest": selection_digest,
+        "structural_body_digest": structural.digest(),
+        "weights_sha256": weights_sha256,
+    }
+    manifest["content_digest"] = compiled_policy_manifest_digest(manifest)
+    output_manifest_path.write_text(
+        json.dumps(
+            manifest,
+            ensure_ascii=False,
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    body = load_compiled_autonomous_instruction_body(
+        manifest_path=output_manifest_path,
+        weights_path=output_weights_path,
+    )
+    return {
+        "training_selection_digest": selection_digest,
+        "training_record_count": len(actions),
+        "training_game_count": len(training_game_ordinals),
+        "training_error_count": sum(
+            report["training_error_count"] for report in head_reports
+        ),
+        "runtime_artifact_contains_examples": False,
+        "runtime_policy_digest": body.digest(),
+        "parameter_count": parameter_count,
+        "head_reports": head_reports,
+    }
+
+
 def compile_cv_fold_artifacts(
     *,
     corpus_path: Path,
@@ -117,28 +382,16 @@ def compile_cv_fold_artifacts(
             temporary_dir = Path(temporary)
             source_manifest = temporary_dir / "source.json"
             source_weights = temporary_dir / "source.npz"
-            generic_manifest = temporary_dir / "generic.json"
-            generic_weights = temporary_dir / "generic.npz"
-            compile_report = compile_s5_rendered_policy(
+            compile_report = _compile_cv_policy(
                 corpus_path=corpus_path,
                 corpus_manifest_path=corpus_manifest_path,
                 output_manifest_path=source_manifest,
                 output_weights_path=source_weights,
                 training_game_ordinals=training,
             )
-            migration_report = migrate_identity_free_policy(
-                source_manifest_path=source_manifest,
-                source_weights_path=source_weights,
-                output_manifest_path=generic_manifest,
-                output_weights_path=generic_weights,
-            )
-            from ..compiled_policy import (
-                load_compiled_autonomous_instruction_body,
-            )
-
             body = load_compiled_autonomous_instruction_body(
-                manifest_path=generic_manifest,
-                weights_path=generic_weights,
+                manifest_path=source_manifest,
+                weights_path=source_weights,
             )
             bundle = PCompilerV2().bootstrap(
                 body=body,
@@ -191,19 +444,17 @@ def compile_cv_fold_artifacts(
                 "holdout_game_ordinals": holdout,
                 "training_game_count": len(training),
                 "holdout_game_count": len(holdout),
+                "action_budget_per_environment": P22_CV_ACTION_BUDGET,
                 "training_selection_digest": compile_report[
                     "training_selection_digest"
                 ],
                 "training_record_count": compile_report[
                     "training_record_count"
                 ],
-                "teacher_forced_error_count": compile_report[
-                    "teacher_forced_error_count"
+                "training_error_count": compile_report[
+                    "training_error_count"
                 ],
-                "quantized_teacher_forced_error_count": compile_report[
-                    "quantized_teacher_forced_error_count"
-                ],
-                "runtime_artifact_contains_examples": migration_report[
+                "runtime_artifact_contains_examples": compile_report[
                     "runtime_artifact_contains_examples"
                 ],
                 "artifact_path": package_path.relative_to(
@@ -256,6 +507,7 @@ def compile_cv_fold_artifacts(
         "distinct_p_artifact_count": len(p_digests),
         "distinct_runtime_identity_count": len(runtime_digests),
         "training_data_completely_separated": training_separated,
+        "action_budget_per_environment": P22_CV_ACTION_BUDGET,
         "holdout_execution_status": "PENDING",
         "folds": results,
         "registry_digest": registry.digest(),

@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from arc3_agi_agent.p22_evaluator import (
+    TraceArtifact,
     build_active_compiled_p_bundle,
     run_memory_ablation,
     run_transformation_stress,
@@ -14,6 +15,7 @@ from arc3_agi_agent.p22_evaluator import (
 from arc3_agi_agent.p_bundle import PBundle
 from arc3_agi_agent.schema import canonical_json
 from arc3_agi_agent.teacher.p22_cross_validation import (
+    P22_CV_ACTION_BUDGET,
     deterministic_cv_folds,
 )
 
@@ -90,3 +92,22 @@ def test_cv_partition_is_disjoint_and_complete() -> None:
     assert all(len(fold) == 5 for fold in folds)
     assert sorted(flattened) == list(range(25))
     assert len(flattened) == len(set(flattened))
+    assert 1 <= P22_CV_ACTION_BUDGET < 4096
+
+
+def test_trace_artifact_has_canonical_json_shape() -> None:
+    artifact = TraceArtifact(
+        relative_path="analysis/trace.jsonl.gz",
+        cycle_count=3,
+        uncompressed_sha256="a" * 64,
+        compressed_sha256="b" * 64,
+        compressed_size_bytes=42,
+    )
+
+    assert json.loads(json.dumps(artifact.as_dict())) == {
+        "relative_path": "analysis/trace.jsonl.gz",
+        "cycle_count": 3,
+        "uncompressed_sha256": "a" * 64,
+        "compressed_sha256": "b" * 64,
+        "compressed_size_bytes": 42,
+    }
