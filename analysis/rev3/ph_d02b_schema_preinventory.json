@@ -1,0 +1,160 @@
+{
+  "schema_version": "arc3-rev3-ph-d02b-schema-preinventory-v1",
+  "phase_id": "PH-D02B",
+  "work_block_id": "WB-PH-D02B-SCHEMA-HDS-STATE-APPROVAL",
+  "base_commit": "3b08867576ab0723570733a84e85093a1a0523ab",
+  "inventory_semantics": "PREIMPLEMENTATION_SCHEMA_GAP_INVENTORY_NOT_A_SCHEMA_SET_PASS_CLAIM",
+  "frozen_input_bindings": {
+    "d02a_phase_state_digest": "rev3-d02a-phase-state:ad044d4726bb26c5a097d651704f3e7454a5480173d05711ab21a70d5f137890",
+    "canonical_contract_digest": "hds-canonicalization-contract:bd37cc6aa0f41021448a83358c9db409b3695cdf88b2eb6ab6eec0068c137257",
+    "canonical_test_vector_digest": "hds-canonical-test-vectors:dfc146423c85b33fb7fb484dadeafb1d5071b0265bcdb0fa266fe413bc5e2f7b",
+    "canonical_conformance_digest": "hds-canonicalization-conformance:d24906ab3b99f8d70bdfd2942f38a69454fa11e926fd1d0288b26b4bda68c7f2",
+    "source_payload_access_planned": false,
+    "real_trajectory_normalization_planned": false,
+    "causal_ir_execution_planned": false
+  },
+  "required_schema_inventory": [
+    {"index": 1, "name": "DependencyLock", "filename": "dependency_lock.schema.json", "status": "MISSING"},
+    {"index": 2, "name": "SourceProfile", "filename": "source_profile.schema.json", "status": "PRESENT_PRESERVE"},
+    {"index": 3, "name": "SourceContentManifest", "filename": "source_content_manifest.schema.json", "status": "PRESENT_PRESERVE"},
+    {"index": 4, "name": "AcquisitionRecord", "filename": "acquisition_record.schema.json", "status": "PRESENT_PRESERVE"},
+    {"index": 5, "name": "EnvironmentManifest", "filename": "environment_manifest.schema.json", "status": "PRESENT_PRESERVE"},
+    {"index": 6, "name": "RunManifest", "filename": "run_manifest.schema.json", "status": "PRESENT_PRESERVE"},
+    {"index": 7, "name": "ResourceProfile", "filename": "resource_profile.schema.json", "status": "MISSING"},
+    {"index": 8, "name": "OperatorRegistry", "filename": "operator_registry.schema.json", "status": "MISSING"},
+    {"index": 9, "name": "ARC2TeacherCase", "filename": "arc2_teacher_case.schema.json", "status": "MISSING"},
+    {"index": 10, "name": "ARC3TeacherTrajectory", "filename": "arc3_teacher_trajectory.schema.json", "status": "MISSING"},
+    {"index": 11, "name": "ARC3ActionRecord", "filename": "arc3_action_record.schema.json", "status": "MISSING"},
+    {"index": 12, "name": "RawObservation", "filename": "raw_observation.schema.json", "status": "MISSING"},
+    {"index": 13, "name": "DeterministicDerivation", "filename": "deterministic_derivation.schema.json", "status": "MISSING"},
+    {"index": 14, "name": "InterpretationHypothesis", "filename": "interpretation_hypothesis.schema.json", "status": "MISSING"},
+    {"index": 15, "name": "EvidenceRecord", "filename": "evidence_record.schema.json", "status": "MISSING"},
+    {"index": 16, "name": "DistillationFrame", "filename": "distillation_frame.schema.json", "status": "MISSING"},
+    {"index": 17, "name": "HypothesisIR", "filename": "hypothesis_ir.schema.json", "status": "MISSING"},
+    {"index": 18, "name": "CounterfactualInterventionPlan", "filename": "counterfactual_intervention_plan.schema.json", "status": "MISSING"},
+    {"index": 19, "name": "InterventionResult", "filename": "intervention_result.schema.json", "status": "MISSING"},
+    {"index": 20, "name": "LLMCaptureRecord", "filename": "llm_capture_record.schema.json", "status": "MISSING"},
+    {"index": 21, "name": "ModelRecord", "filename": "model_record.schema.json", "status": "MISSING"},
+    {"index": 22, "name": "GateResult", "filename": "gate_result.schema.json", "status": "MISSING"},
+    {"index": 23, "name": "DecisionRecord", "filename": "decision_record.schema.json", "status": "MISSING"},
+    {"index": 24, "name": "HDSCausalRecord", "filename": "hds_causal_record.schema.json", "status": "MISSING"},
+    {"index": 25, "name": "RuleAtom", "filename": "rule_atom.schema.json", "status": "MISSING"},
+    {"index": 26, "name": "RuleFamily", "filename": "rule_family.schema.json", "status": "MISSING"},
+    {"index": 27, "name": "BoundaryRecord", "filename": "boundary_record.schema.json", "status": "MISSING"},
+    {"index": 28, "name": "CounterexampleRecord", "filename": "counterexample_record.schema.json", "status": "MISSING"},
+    {"index": 29, "name": "FailureSignature", "filename": "failure_signature.schema.json", "status": "MISSING"},
+    {"index": 30, "name": "NormalizationCertificate", "filename": "normalization_certificate.schema.json", "status": "MISSING"},
+    {"index": 31, "name": "PromotionDecision", "filename": "promotion_decision.schema.json", "status": "MISSING"},
+    {"index": 32, "name": "ApprovalRecord", "filename": "approval_record.schema.json", "status": "MISSING"},
+    {"index": 33, "name": "OpenTermRecord", "filename": "open_term_record.schema.json", "status": "MISSING"},
+    {"index": 34, "name": "ClaimRecord", "filename": "claim_record.schema.json", "status": "MISSING"},
+    {"index": 35, "name": "DistillationAudit", "filename": "distillation_audit.schema.json", "status": "MISSING"},
+    {"index": 36, "name": "CoverageReport", "filename": "coverage_report.schema.json", "status": "MISSING"},
+    {"index": 37, "name": "CompletionStateRegistry", "filename": "completion_state_registry.schema.json", "status": "MISSING"},
+    {"index": 38, "name": "FrozenArtifactManifest", "filename": "frozen_artifact_manifest.schema.json", "status": "MISSING"}
+  ],
+  "present_schema_documents": [
+    {
+      "name": "SourceProfile",
+      "path": "distillation/schemas/source_profile.schema.json",
+      "sha256": "c5f7208ef930ab86271a4d7829fb6283e4c3b9ffd80aba62eab4e948b3169e73",
+      "origin_phase": "PH-D01A",
+      "disposition": "PRESERVE_AND_REGISTER"
+    },
+    {
+      "name": "SourceContentManifest",
+      "path": "distillation/schemas/source_content_manifest.schema.json",
+      "sha256": "252508886f21390b3fd728d68f597b57a1cef30ef385c4f5548ba14e8c2cdea8",
+      "origin_phase": "PH-D01B",
+      "disposition": "PRESERVE_AND_REGISTER"
+    },
+    {
+      "name": "AcquisitionRecord",
+      "path": "distillation/schemas/acquisition_record.schema.json",
+      "sha256": "c7dd1e32731ae0a9f88451a582a509ab89c2ddb339313063438fca091b514cf5",
+      "origin_phase": "PH-D01B",
+      "disposition": "PRESERVE_AND_REGISTER"
+    },
+    {
+      "name": "EnvironmentManifest",
+      "path": "distillation/schemas/environment_manifest.schema.json",
+      "sha256": "a4b9280feb7d90dcedea8d55ff82846414d9d7d85c4d40bc44072431713fd271",
+      "origin_phase": "PH-D01B",
+      "disposition": "PRESERVE_AND_REGISTER"
+    },
+    {
+      "name": "RunManifest",
+      "path": "distillation/schemas/run_manifest.schema.json",
+      "sha256": "888c33520b2d5b75bc1f3bab863d55954d4e001a1ac19549af578a2083714bb6",
+      "origin_phase": "PH-D01B",
+      "disposition": "PRESERVE_AND_REGISTER"
+    }
+  ],
+  "accounting": {
+    "authority_required_schema_count": 38,
+    "present_schema_count": 5,
+    "missing_schema_count": 33,
+    "duplicate_schema_name_count": 0,
+    "unexpected_schema_document_count": 0,
+    "schema_registry_module_count": 0,
+    "cross_reference_validator_count": 0,
+    "valid_example_count": 0,
+    "negative_bundle_count": 0,
+    "hds_state_axis_registry_count": 0,
+    "schema_conformance_report_count": 0
+  },
+  "identified_gaps": [
+    {"gap_id": "D02B-GAP-001", "requirement": "exact thirty-eight-name and filename inventory", "current_status": "FIVE_PRESENT_THIRTY_THREE_MISSING"},
+    {"gap_id": "D02B-GAP-002", "requirement": "content-bound schema contract and one-to-one directory binding", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-003", "requirement": "dependency-free schema registry and fail-closed supported-keyword validator", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-004", "requirement": "typed cross-record reference graph and duplicate, dangling, wrong-type rejection", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-005", "requirement": "seven independent HDS state-axis definitions", "current_status": "MISSING_IN_DISTILLATION_SCHEMA_LAYER"},
+    {"gap_id": "D02B-GAP-006", "requirement": "RawObservation, DeterministicDerivation, InterpretationHypothesis origin separation", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-007", "requirement": "MULTI_CAUSAL and SUSPEND without forced single choice", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-008", "requirement": "initial RuleAtom PROPOSED or PROBATION only", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-009", "requirement": "Owner-bound ApprovalRecord and target-state constraints", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-010", "requirement": "CoverageReport and CompletionStateRegistry non-implication", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-011", "requirement": "thirty-eight valid examples and adversarial invalid bundles", "current_status": "MISSING"},
+    {"gap_id": "D02B-GAP-012", "requirement": "DG-00, DG-01, DG-02, and DG-14 conformance evidence", "current_status": "MISSING"}
+  ],
+  "implementation_plan": [
+    "add one machine-readable schema contract that fixes all thirty-eight names, paths, versions, ID fields, digest fields, reference targets, state axes, gates, and phase boundaries",
+    "preserve the five existing schema bytes and add thirty-three closed Draft 2020-12 schema documents",
+    "add one stdlib-only schema registry with stable error codes, supported-keyword validation, ID indexing, typed reference resolution, and semantic bundle checks",
+    "add one valid synthetic instance per schema with PH-D02A content-derived IDs and logical digests",
+    "add explicit negative bundles for every PH-D02B fail-closed boundary",
+    "verify inventory and examples in three independent process/order/hash-seed builds",
+    "rebuild the Scope Guard report and prove finding count remains zero",
+    "verify every PH-D02A result artifact hash remains unchanged",
+    "bind result commit/tree, post-commit regressions, Phase State, and Owner Review Package"
+  ],
+  "dependency_decision": {
+    "runtime_dependencies_added": [],
+    "external_json_schema_dependency_allowed": false,
+    "validator_strategy": "STANDARD_LIBRARY_FAIL_CLOSED_SUPPORTED_JSON_SCHEMA_SUBSET_PLUS_TYPED_REFERENCE_AND_HDS_SEMANTIC_CHECKS",
+    "canonical_identity_strategy": "REUSE_PH_D02A_CONTENT_DERIVED_ID_AND_LOGICAL_CONTENT_DIGEST"
+  },
+  "phase_boundaries": {
+    "schema_contract_started": false,
+    "schema_document_generation_started": false,
+    "ph_d02c_typed_causal_ir_started": false,
+    "interpreter_started": false,
+    "golden_freeze_started": false,
+    "trajectory_normalization_started": false,
+    "candidate_generation_started": false,
+    "rule_promotion_count": 0,
+    "bridge_started": false,
+    "runtime_started": false,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "kaggle_mutation_count": 0
+  },
+  "preexisting_dirty_state": {
+    "path_scope": "analysis/autonomous_completion/**",
+    "file_count": 32,
+    "aggregate_sha256": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "mutation": "NONE",
+    "staging": "NONE"
+  },
+  "content_digest": "rev3-ph-d02b-schema-preinventory:44582f122a012f5cec2b3c35bb432790a4ac440e70a7141e62e9ed12bd35269c"
+}
