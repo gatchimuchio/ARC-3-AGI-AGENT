@@ -1,0 +1,91 @@
+{
+  "schema_version": "arc3-rev3-asset-classification-v1",
+  "phase_id": "PH-R00",
+  "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
+  "classifications": [
+    {
+      "classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "capability_claim": "NOT_ESTABLISHED",
+      "paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/authority_state.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/control_state.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_session.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/runtime_identity.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/identity_boundary.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/evidence_binding.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/episode_transaction.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/experience_ledger.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_memory.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/memory_*.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_ir*.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_bundle.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_compiler_v2.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_registry.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/data_access_ledger.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/evaluation_registry.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/development_loop.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/version_lineage.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/initial_state_compiler.py",
+        "control/p16/P16_PHASE_STATE.json",
+        "control/p17a/P17A_PHASE_STATE.json",
+        "control/p17b/P17B_PHASE_STATE.json",
+        "control/p18/P18_PHASE_STATE.json",
+        "control/p19/P19_PHASE_STATE.json",
+        "control/p20a/P20A_PHASE_STATE.json",
+        "control/p20b/P20B_PHASE_STATE.json",
+        "control/p21/P21_PHASE_STATE.json"
+      ],
+      "required_before_reuse": [
+        "current commit/tree rebind",
+        "current regression",
+        "rev3 import-boundary audit",
+        "distilled-bundle compatibility audit"
+      ]
+    },
+    {
+      "classification": "HISTORICAL_QUARANTINE",
+      "capability_claim": "HISTORICAL_KNOWN_SAMPLE_ONLY",
+      "production_parent_allowed": false,
+      "fallback_allowed": false,
+      "paths": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/s5_*.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/compiled_policy.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/generic_autonomous_policy_v1.json",
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/generic_autonomous_policy_v1.npz",
+        "ARC-AGI-3-Agents/arc3_agi_agent/p22_evaluator.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/teacher/p22_cross_validation.py",
+        "ARC-AGI-3-Agents/p22_main.py",
+        "ARC-AGI-3-Agents/tests/unit/test_p22a_*.py",
+        "analysis/autonomous_completion/**"
+      ],
+      "allowed_uses": [
+        "historical regression",
+        "failure analysis",
+        "teacher compression baseline",
+        "non-generalization witness"
+      ]
+    },
+    {
+      "classification": "HISTORICAL_AUTHORITY",
+      "active_selector": false,
+      "paths": [
+        "docs/architecture/ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2.md",
+        "docs/roadmap/P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md",
+        "docs/audit/ARC3_GENERIC_REAUDIT_REV2.md"
+      ]
+    },
+    {
+      "classification": "REPLACE_AFTER_OWNER_GATES",
+      "paths": [
+        "distillation/",
+        "bridge/",
+        "runtime/"
+      ],
+      "current_state": "NOT_STARTED"
+    }
+  ],
+  "rev3_active_runtime_count": 0,
+  "rev3_active_runtime_capability_claim": "NOT_ESTABLISHED",
+  "historical_fallback_count": 0,
+  "content_digest": "rev3-asset-classification:a4900aaa92c3dcc240f0849d7cccb4f237d22051f5dd4b05e836a5c67b57fa01"
+}

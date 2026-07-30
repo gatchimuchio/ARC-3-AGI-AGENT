@@ -1,0 +1,133 @@
+{
+  "schema_version": "arc3-rev3-work-block-frame-v1",
+  "work_block_id": "WB-PH-R00-STRATEGY-REBASELINE",
+  "phase_id": "PH-R00",
+  "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
+  "base_tree": "d63d26e25758211938cc33d0efe84f50ed096023",
+  "purpose": "Rebind the current committed infrastructure as a pre-distillation baseline and quarantine historical S5 and P22 capability assets from the rev3 production-completion path.",
+  "X": {
+    "targets": [
+      "current committed P16-P21 infrastructure",
+      "historical S5 runtime and compiled policy",
+      "current P22 and CV artifacts",
+      "rev3 authority and phase state"
+    ],
+    "inputs": [
+      "current Git HEAD and tree",
+      "provided rev3 authority documents",
+      "committed P16-P21 phase evidence",
+      "current production package and import graph"
+    ],
+    "observation_scope": "Repository metadata, committed source, tests, manifests, package boundaries, and pre-existing dirty-state inventory.",
+    "change_scope": "Authority documents, PH-R00 governance artifacts, quarantine/import guards, dedicated tests, and evidence only."
+  },
+  "R": {
+    "relations": [
+      "P16-P21 are infrastructure candidates rather than capability-completion proof",
+      "S5 and P22 compiled assets are historical or quarantine-only",
+      "the rev3 production path remains unavailable until an Owner-approved distilled initial-state bundle exists"
+    ],
+    "expected_effects": [
+      "the active strategy selector becomes PH-R00 then Track D, B, A, and E",
+      "historical policy assets cannot be selected as rev3 production parents or fallbacks",
+      "all baseline claims bind only to committed state"
+    ],
+    "comparison": "Compare the pre-change selector, phase bindings, package imports, and asset roles against the post-change rev3 manifests and executable guards."
+  },
+  "Mc": {
+    "identity": "PH-R00 pre-distillation infrastructure baseline",
+    "boundary": "No HDS distillation, Bridge compilation, AGI capability implementation, P22 optimization, locked-final access, or official submission.",
+    "acceptance": [
+      "provided authority documents are retained with verified digests",
+      "current commit and tree are recorded",
+      "P16-P21 are classified as infrastructure candidates",
+      "S5, compiled policy, and P22/CV are classified as historical or quarantine",
+      "rev3 production selection fails closed without approved distilled assets",
+      "dedicated and required regressions are recorded"
+    ],
+    "stop": [
+      "required authority dependency is unavailable",
+      "forbidden data role is accessed",
+      "historical fallback becomes reachable",
+      "baseline regression cannot be classified"
+    ],
+    "rollback": "Revert only PH-R00-owned files to base commit 1eece1f21926be24c7c13608eb81f1d0a3f76614; preserve all pre-existing dirty artifacts.",
+    "completion": "CODEX_SELF_AUDIT_PASS followed by OWNER_REVIEW_REQUIRED; Owner alone may set OWNER_APPROVED_PASS."
+  },
+  "scope": [
+    "authority retention",
+    "live implementation audit",
+    "asset classification",
+    "production import and selection boundary",
+    "baseline evidence bind",
+    "PH-R00 tests and owner-review evidence"
+  ],
+  "non_goals": [
+    "HDS rule distillation",
+    "Rule promotion",
+    "Distillation-to-AGI Bridge",
+    "AGI runtime capability changes",
+    "P22 score improvement",
+    "locked-final evaluation",
+    "competition packaging",
+    "official submission"
+  ],
+  "allowed_files": [
+    "AGENTS.md",
+    ".gitignore",
+    "docs/architecture/AGI_CLAIM_REGISTRY.md",
+    "docs/architecture/AGI三主体統合設計正本_v0_2.md",
+    "docs/architecture/工学的AGI実装仕様書_v0_2.md",
+    "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+    "docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
+    "docs/strategy/**",
+    "docs/references/HDSフレーム_rev3_1_外向け仕様.md",
+    "docs/references/HDS_SelfContained_Prompt_v1_2_utf8bom.txt",
+    "docs/audit/ARC3_現行実装監査_2026-07-30.md",
+    "control/rev3/**",
+    "analysis/rev3/**",
+    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py"
+  ],
+  "forbidden_files": [
+    "analysis/autonomous_completion/**",
+    "analysis/teacher/**",
+    "ARC-AGI-3-Agents/arc3_agi_agent/teacher/**",
+    "ARC-AGI-3-Agents/arc3_agi_agent/compiled_policy.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/s5_runtime.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/p22_evaluator.py",
+    "kaggle/**"
+  ],
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "HISTORICAL_EVIDENCE_MANIFEST"
+  ],
+  "resource_budget": {
+    "network_submission_count": 0,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "maximum_new_runtime_capabilities": 0
+  },
+  "test_contract": [
+    "dedicated PH-R00 governance tests",
+    "focused P16-P21 regression",
+    "type and lint checks for changed source",
+    "full unit and integration regression",
+    "package import-boundary audit",
+    "artifact determinism where generated"
+  ],
+  "stop_condition": "Stop at OWNER_REVIEW_REQUIRED, or SUSPEND if a required authority dependency remains unavailable.",
+  "owner_authority": {
+    "owner": "大平鉄兵",
+    "reserved_decisions": [
+      "OWNER_APPROVED_PASS",
+      "phase promotion",
+      "Rule promotion",
+      "completion claim",
+      "locked-final authorization",
+      "official submission"
+    ]
+  },
+  "open_terms": [],
+  "content_digest": "rev3-work-block-frame:33db7d6a9d0dec9128860383ece3543d78638271184b97e35583484838ae74a8"
+}

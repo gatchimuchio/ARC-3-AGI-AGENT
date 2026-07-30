@@ -1,558 +1,638 @@
-# ARC-3 AGI Agent 実装・監査契約
+# ARC3 Codex 開発運用契約 rev3
 
-このファイルは、本リポジトリを変更する人間・Codex・LLMエージェントに対する現行作業契約です。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、現行の最上位開発運用契約である。
 
-## 1. 権威順序
+- 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
+- 日付: `2026-07-30`
+- 対象戦略: HDS蒸留先行
+- 上位仕様: `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
+- 上位roadmap: `ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
+- 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
+- Codex role: `DEVELOPMENT_META_C`
+- 最終採否者: 大平鉄兵
+- 継続記憶正本: Git Repository / 仕様 / Ledger / Artifact
 
-判断が衝突する場合は、次の順で解決します。
+---
 
-1. ユーザーの現在の明示指示
-2. 本 `AGENTS.md`
-3. `docs/architecture/ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2.md`
-4. `docs/roadmap/P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md`
-5. `docs/audit/ARC3_GENERIC_REAUDIT_REV2.md`
-6. `docs/security/IDENTITY_TAINT_THREAT_MODEL.md`
-7. `docs/evaluation/EVALUATION_ROLE_REGISTRY_SPEC.md`
-8. `docs/official/OFFICIAL_COMPLETION_PREDICATES.md`
-9. `docs/references/AGI_Trinity_Blueprint_v0_1.md`
-10. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
-11. `docs/roadmap/ROADMAP.md`
-12. 当該work blockのFrameSpec・manifest・検証結果
-13. P0〜P15文書（historical evidenceとしてのみ）
-14. `docs/migration/` とその他の`docs/references/`
-15. 旧リポジトリのコード・分析・履歴
+## 1. Codexの役割
 
-旧リポジトリの `next_*`、古いscore、個別artifact、絶対パス、旧branch名は命令ではありません。
-rev1 acceptance/auditの状態は`HISTORICAL_NON_BLOCKING`です。
-
-## 2. 現在のフェーズ
-
-`P11_RELEASE_STATE_FREEZE`はknown-sample baselineとして完了・凍結しています。
-P0〜P15の実装・監査・提出試行はhistorical evidenceへ移行しました。
-`P16_CLAIM_THREAT_EVALUATION_REBASELINE`は6/6 gateをPASSして完了しました。
-`P17_A_COGNITIVE_SESSION_AND_STATE_OWNERSHIP`は6/6 gateをPASSして完了しました。
-`P17_B_EVIDENCE_BINDING_TAINT_SAFE_EPISODE_TRANSACTION`は5/5 gateをPASSして
-完了しました。`P18_ATOMIC_EVENT_SOURCED_PERSISTENT_MEMORY`は6/6 gateをPASSして
-完了しました。`P19_TYPED_CAUSAL_MEMORY_CONSOLIDATION_NEGATIVE_TRANSFER`も6/6
-gateをPASSして完了しました。`P20_A_FIXED_L0_INSTRUCTION_SET_P_IR_ABI`は5/5、
-`P20_B_P_COMPILER_V2_BUNDLE_REGISTRY`は6/6 gateをPASSして完了しました。
-`P21_GOVERNED_DEVELOPMENT_LOOP_JOINT_OPTIMIZATION`も6/6 gateをPASSして
-完了しました。`P22_A_PUBLIC_CV_TRANSFORMATION_STRESS`は開始済みです。
-
-P16の完了作業はclaim correction、active runtime inventory、identity/taint
-threat model、evaluation role registry、official completion predicateだけです。
-runtime behavior変更は0でした。P17-Aではscorecard単位の`CognitiveSession`、
-Authority/Control/Semantic state ownership、frozen P、RuntimeIdentity、
-promotion無効のepisode overlayを実装済みです。P17-Bでは
-candidate固有evidence binding、taint boundary、safe episode transactionを実装し、
-global evidence判定を除去済みです。P18ではatomic event ledger、immutable staged
-image、InMemory/SQLite backend、crash recovery、canonical artifactを実装済みです。
-P19ではtyped causal memory、Tier 0〜3 retrieval、consolidation、
-negative transfer、cross-game semantic promotionを実装済みです。P20-Aでは
-fixed L0 instruction set / typed P-IR / ABIを実装済みです。P20-Bでは
-P compiler v2、canonical bundle、isolated evaluator、HDS registry、
-initial-state restartを実装済みです。P21ではdataset access ledger、M_dev loop、
-CV artifact分離、Code/P/M migration、三世代lineage、active runtime一件性を
-実装済みです。P22-Aではknown public/CV procedure/transformation stressだけを
-開始できます。P22-B以降、特に
-LOCKED_FINAL、Competition packaging、official submissionを前倒ししません。
-
-現行claimは次です。
+Codexは次である。
 
 ```text
-active runtime count                   = 1
-known S5 183/183                       = HISTORICAL_KNOWN_SAMPLE_ONLY
-rev1 P12 57/57                         = HISTORICAL_NON_BLOCKING
-generic completion                     = NOT_ESTABLISHED
-sealed single-artifact completion       = NOT_EVALUATED
-competition ready                      = NOT_ESTABLISHED
-official accepted/public/private/full   = NOT_OBSERVED
+Development Meta-C
+=
+解析器
++ 候補生成器
++ 実装器
++ 試験実行器
++ 証拠生成器
++ 自己監査器
 ```
 
-baseline commitに保持されるKaggle Notebook version 10の通常実行は
-`PREFLIGHT_ONLY`です。scoreなし・output bytes 0の提出は
-`OFFICIAL_NOT_OBSERVED`であり、提出指示や現行phase gateには使用しません。
+Codexは次ではない。
 
-`P9_EIGHT_SUBSET_MINIMUM_CERTIFICATE` は完了しています。全8 subsetを実行し、
-full set 1件だけがPASS、proper subset 7件がFAIL、機能等価物漏れ0であることを
-決定論的certificateへ固定しました。P9は全sample攻略を証明していません。
+- Project Owner
+- Meta-J
+- HDS最終判断主体
+- AGI Runtime
+- RuntimeのJ
+- Rule promotion authority
+- phase promotion authority
+- completion claim authority
+- official submission authority
+- 永続する自律主体
+- repository外に継続する記憶主体
 
-現行分類は次です。
+Codexの状態はsessionをまたいで自然継続しない。  
+前回作業はrepository、phase state、artifact、commit、reportからのみ復元する。
+
+---
+
+## 2. Meta-Trinity
 
 ```text
-P0 complete:
-  restart foundation
-
-P1 complete / reclassified:
-  Layer-0 execution mechanism
-  integrated HDS / provisional passive-memory authority loop
-  OFFLINE sample action / re-observation path
-
-P2 complete:
-  minimum-three functional specification
-  obligation / claim / test / traceability audit
-  implementation gaps and absolute order
-
-P3 complete:
-  analysis evidence accounting
-  identity-free normalized corpus
-  C / J / M fixture separation
-  provenance and holdout manifests
-
-P4 complete:
-  P-A symbolic / rule-graph instruction body
-  P-B learned-parameter instruction body
-  common instruction-body contract and swap
-  standalone compute subject C
-  L0 six-responsibility plus P/C removal audit
-
-P5 complete:
-  standalone typed HDS Frame
-  deterministic judgment without C/P/M
-  accept / reject / reobserve / SUSPEND / STOP / rollback
-  memory-write / external-emit authorization proposal
-  J removal and non-substitution audit
-
-P6 complete:
-  standalone versioned memory subject M
-  full operation vocabulary
-  active / archive separation
-  conflict / snapshot / rollback / deterministic query
-  HDS-authorized runtime mutation boundary
-
-P7 complete:
-  executable C+J, C+M, J+M pair harnesses
-  fixed unique insufficiency witness per pair
-  no missing-subject responsibility substitution
-
-P8 complete:
-  full C/J/M command-compute-judge-effect-result cycle
-  cycle-1 M update causally changes cycle-2 C or J
-  controlled P-only / J-only / M-only attribution
-
-P9 complete:
-  finite enumeration of all eight C/J/M subsets
-  full set PASS and seven proper subsets FAIL
-  zero functional-equivalent responsibility leaks
-
-P10 complete:
-  S0 through S5 are PASS in absolute order
-  S5 rendered-only Runtime Student closes 25 / 25 games and 183 / 183 levels
-  S5 executes 10,733 actions with error 0 under deterministic seed 0
-  two full S5 reports are byte-identical
-  all 10,733 Runtime cycles are stored in a content-bound full trace
-  two full trace streams and manifests are byte-identical
-  Runtime P receives render, available actions, bounded history, and passive M only
-  task/game/level routing, replay, fixed action sequence, literal coordinate
-  table, source state, and hidden state are absent from Runtime P
-  local oracle is completion 100% and RHAE 99.619936696%
-  S6 measures 2,048 records covering 25 games and 183 levels
-  all seven perturbation families execute 14,336 measurements with exception 0
-  two full S6 reports are byte-identical
-  S6 conclusion is MEASURED_NOT_PROVEN; generalization is not claimed
-
-P11 complete:
-  code commit 823c51b68d7f1a2570a3c68f8f21a3819c650154
-  code tree b3b675a24dcecd5080927c9bbf80c77eb7d083f5
-  Python 3.12.13, uv 0.11.32, setuptools 83.0.0
-  P0, J0, M0, dataset, compiler, seed, action budget are fixed
-  full regression 7 / 7 PASS and tracked secret finding 0
-  two wheels are byte-identical
-  wheel SHA-256 a2f7c400753a553b49247ce7627e2b966fd152153b53064e7403e553659e551a
-  release digest arc3_p11_release_state:
-    e7d8ef522f8f0004a63875a7da3cdcc084684388325411a994e751d6e251eb8c
-
-Historical P12〜P15 evidence:
-  P11 183 / 183 is known-sample closure only
-  S5 operational AGI conformance is SUSPEND
-  GenericAGIRuntime operational conformance is PASS
-  P12 executable genericity acceptance was a rev1 PASS only
-  local competition compatibility is historical preflight
-  hidden-game compatibility is NOT_EVALUATED
-  pre-official AGI readiness is HISTORICAL_NON_BLOCKING
-  P13 through P15 are historical and not the active selector
-  Kaggle sequential Notebook version 8 normal run is COMPLETE
-  Kaggle fail-safe Notebook version 10 normal run and source/output
-    round trip are COMPLETE
-  actual submission API call count is 4
-  submission refs 55040966, 55043205, 55045360, and 55049227 are ERROR
-    with no score and total bytes 0
-  episode API count is non-diagnostic; accepted controls also return 0
-  format-only root cause is rejected by version 7 failure
-  all-game thread-fan-out-only root cause is rejected by version 8 failure
-  sequential correction completes 25 / 25 locally with active_agent_peak 1,
-    local competition checks 12 / 12, and submitted Notebook checks 23 / 23,
-    but official private rerun is ERROR
-  next zero-byte containment candidate passes Notebook checks 25 / 25,
-    exact pre-execution fallback smoke, unit 555 / 555, integration 8 / 8,
-    mypy 123 files, and synthetic 64x64 x 128-cycle stress
-  exact candidate is Kaggle Notebook version 10; normal execution,
-    four-cell source round trip, and 2648-byte output collection pass
-  version 9 is a rejected unsubmitted MCP-transfer truncation artifact
-  version 10 is not privately submitted
-  P15 baseline snapshot ended in SUSPEND without official score
-  O-001 through O-018 are closed by separate GenericAGIRuntime evidence
-  KnownSampleStudent remains frozen
-P16-P24 rev2 order supersedes the old transition selector
+Meta-J = 大平鉄兵
+Meta-C = Codex
+Meta-M = Repository / Specs / Ledger / Artifacts
 ```
 
-### P11で実施・固定した作業
+### Meta-Jの専権
 
-- P10正本の再読・digest検証・同一条件回帰
-- P0/J0/M0の空の初期状態とversion/digest固定
-- code commit/tree、dependency lock、Python、seed、budgetの固定
-- reproducible wheel build、内容監査、package digest固定
-- P0〜P10を含むfull unit/integration/static regression
-- tracked secret scan、release manifest、release-state文書の生成
+- 最上位目的
+- Scope
+- 権威順序
+- 定義
+- Rule採否
+- phase遷移
+- Owner Approval
+- claim
+- locked final使用
+- official submission
+- 戦略変更
 
-### P13開始許可以前に禁止される作業（historical phase boundary）
+### Codexの権限
 
-この禁止境界はOwnerの明示許可により解除済みです。ただしknown-sample
-fallback、Teacher混入、identity routing禁止はP13以降も継続します。
+- read
+- inventory
+- static analysis
+- hypothesis proposal
+- code implementation
+- test implementation
+- test execution
+- artifact generation
+- self-audit
+- failure classification
+- owner review package生成
 
-- 公式ARC API、`OperationMode.COMPETITION`
-- Kaggle向け分岐、Notebook、CLI / MCP、submission
-- release固定を理由にRuntime能力・score・policyを変更すること
-- Teacher packageまたは`analysis/teacher`をRuntimeからimportすること
-- task/game/level ID、replay、固定action列、answer map、literal座標、
-  source / hidden stateをRuntimeへ戻すこと
-- S6 response-retention測定をsemantic correctnessまたは汎化成功と表記すること
-- P13以降を前倒しすること
-- GenericAGIRuntime失敗時にS5、Teacher、game-specific operatorへfallbackすること
-- 文書、fixture、parameter数、既知scoreだけでblocking受入をPASSにすること
+### Repositoryの役割
 
-P12のblocking findingsは
-`docs/audit/EXTERNAL_AGI_CONFORMANCE_AUDIT_REV1.md`の`O-001`〜`O-018`であり、
-separate GenericAGIRuntimeの実行証拠で閉じた。全受入IDは
-`docs/architecture/ARC3_AGI_ACCEPTANCE_SPEC_REV1.md`を正本とする。
+- source of truth
+- version lineage
+- evidence
+- failure history
+- approval
+- rollback
+- task handoff
+- context recovery
 
-P11の正本はP10の六正本、S5 closure/audit/oracle、S6 measurement、
-P9 certificate、P3 dataset、P0/J0/M0 descriptor、regression report、
-package audit、および`docs/architecture/P11_RELEASE_STATE.md`である。
+---
 
-## 3. 1 work blockの必須契約
+## 3. 権威順序
 
-P10-Rでは完全閉包先行ロードマップに従い、Teacher閉包、graph化、構造抽出、
-水平減算、Runtime compileを別gateとして監査証拠へ残します。旧C2/C3の
-`SELF_CHECK`から`UPDATE_P_DEV_CANDIDATE`までの契約はhistorical work blockへ
-限定し、現行selectorとして使用しません。
+1. Ownerの現在の明示指示
+2. 本運用契約
+3. `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
+4. `ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
+5. `HDS蒸留仕様書_ARC2_ARC3_rev2.md`
+6. `HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
+7. `AGI三主体統合設計正本_v0_2.md`
+8. `工学的AGI実装仕様書_v0_2.md`
+9. current phase state
+10. current Work Block FrameSpec
+11. committed evidence
+12. historical P0〜P22 artifacts
 
-変更前に、最低限次を明示します。
+下位資料が上位資料と衝突した場合、下位資料を採用しない。  
+不明点を推測で埋めず、Open Termへ記録する。
+
+---
+
+## 4. Active Strategy Selector
 
 ```text
-X   : 対象、入力、観測範囲、変更範囲
-R   : 対象間の関係、状態遷移、期待効果、比較方法
-Mc  : 同一性、境界、採否、停止、rollback、完了条件
-非目的
-証拠境界
-反証条件
-回帰線
+PH-R00
+→ PH-D00A ... PH-D14
+→ PH-B00 ... PH-B06
+→ PH-A00 ... PH-A08
+→ PH-E00 ... PH-E04
 ```
 
-変更後は次を残します。
+Codexはactive phaseより先へ進まない。
 
-- 実装差分
-- 対応する試験
-- 実行したコマンドと結果
-- 未実行項目
-- HDS判断: `PASS` / `HOLD` / `SUSPEND` / `REJECT` / `ROLLBACK`
-- 次工程へ進む条件
-
-文書追加だけでruntime能力が変わらない場合は実装前進と記録しません。
-ただしP2は明示的な仕様・根本監査phase、P3は実証素材compiler phaseであり、
-それぞれ機械検証可能なaccountingと再生成可能datasetを成果とします。P4では
-文書やfixture追加だけでなく、共通interfaceで交換可能なP-A/P-BとC standalone
-runtimeが実際に動作することを要求します。
-
-P10-Rのwork blockは183 graphまたは一つの減算stageを単位とします。
-各stageは全183 levelの同一条件回帰がPASSするまでactive Runtime Pへ
-promotionしません。
-
-## 4. 最小構成と非対称権限
+Hard Gate:
 
 ```text
-C = Execute(L0, P)
-
-HDS command
-  -> Layer-0 executes instruction body P
-  -> Pure-LLM computation / proposal
-  -> HDS judgment
-  -> authorized MEMORY_WRITE or EXTERNAL_EMIT
-  -> result observation
-  -> HDS reevaluation
+HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
 ```
 
-- `L0`: 参照、状態条件付け、変換、候補化、放出を行う実行機構
-- `P`: 知識、能力、関係、変換規則、パラメータ、候補生成傾向を保持する情報体
-- Pure-LLM計算主体 `C`: `L0 + P` の結合
-- HDS: 命令、採否、SUSPEND、停止、rollback、記憶更新許可、外部放出許可
-- Memory `M`: 現行経験・仮説・失敗・証拠を受動保持
-- Environment adapter: HDS許可済みemission以外から直接操作しない
-
-`P`と`M`を混同してはいけません。
+以前にBridge/AGI capability implementationを開始しない。
 
 ```text
-P update = explicit compile / version update
-M update = HDS-authorized runtime revision
+DISTILLED_INITIAL_STATE_BUNDLE_FROZEN
 ```
 
-HDS commandなしの計算、Pなしの仮説生成、未承認write / emitが可能な場合は適合と認めず `SUSPEND` します。
+以前にDistilled AGI Runtimeを開始しない。
 
-## 5. ARC実行時の禁止入力
+---
 
-標準solver coreと命令形保持体Pは次へ依存してはいけません。
+## 5. Phase State
 
-- game/task/level IDによるaction選択
-- replay index lookup
-- 固定action sequence、固定keyboard script
-- answer map、literal coordinate table
-- source state、hidden state、evaluator内部状態
-- ファイル名・task名による暗黙routing
-- 外部API、internet、secret、実行時外部LLM呼出し
+### Codexが設定できる状態
 
-公式環境ソースや既知解答を解析時に読む場合も、runtimeへ移せるのは現在観測・action/effect履歴・再利用可能な遷移・verifier・rollback条件から再導出できる構造だけです。
-
-## 6. 命令形保持体Pの必須境界
-
-Pは次を満たさなければなりません。
-
-- addressable
-- state-dependent
-- composable
-- executable by Layer-0
-- deterministic under fixed state
-- runtime identity-free
-- versioned
-- digestable
-- provenance-traceable
-- swappable without Layer-0 code changes
-
-Pが返せるのは計算素材です。
-
-- representations
-- retrieved rules / parameters
-- hypotheses / counter-hypotheses
-- transition / effect predictions
-- candidate priors
-- uncertainty
-- falsification conditions
-
-Pは最終採否、memory確定、external emit権限を持ちません。
-
-## 7. 移植規則
-
-旧資産は次の4分類で扱います。
-
-- `ADAPT`: 小さく独立し、責任境界と試験を保てるもの
-- `REFERENCE`: 設計・証拠として読むがactive runtimeへ直接入れないもの
-- `QUARANTINE`: 比較・失敗解析専用。標準経路から隔離するもの
-- `REJECT`: 旧前提、重複、汚染、非再現、禁止入力を含むもの
-
-一括ディレクトリコピーは禁止します。各移植には元path、元commit、変更点、試験、残存リスクを記録します。
-
-## 8. 段階ゲート
-
-### P0: Restart Foundation — 完了
-
-- 型、契約、権限、停止、引用元を固定
-- 単体試験が決定論的に通る
-
-### P1: Sample Execution Mechanism — 完了
-
-- 六つのARC-native実行責任がcallable
-- 各責任に除去証人がある
-- HDS未承認compute / write / emitを拒否
-- 保持済みsampleを`OFFLINE`で実行し結果を再観測
-- 状態更新が次のHDS判断へ入力される
-
-P1は `C = Execute(L0, P)` の `P` まで閉じていません。
-
-### P2: Minimum Three Specification and Root Audit — 完了
-
-- G1〜G5、C/J/M、L0/P、external boundaryを固定
-- obligation graph、traceability、claim registry、test matrixを生成
-- 未実装・過剰claim・実装順序をaccounting
-- validatorが全監査成果物と8 subset期待値を検証
-
-### P3: ARC3 Evidence Material Compiler — 完了
-
-- 全解析証拠をmanifestでaccounting
-- identity-free observation/transition/effect/hazard/progress/contradiction corpus
-- C/J/M fixture分離
-- provenanceとholdout contamination検査
-
-### P4: Compute Subject C — 完了
-
-- P-A記号規則graph、P-B実学習parameter body
-- 同一L0でのswap、Pなしcompute拒否
-- C standalone G1とL0六責任+P/C removal
-
-### P5: Judgment Subject J — 完了
-
-- standalone HDS Frame API
-- C/Mなしの採否、SUSPEND、STOP、rollback、write/emit許可
-- JがG1/G3を代行しないこと
-
-### P6: Memory Subject M — 完了
-
-- 全memory operation、query、version conflict、snapshot
-- active/archive分離、rollback
-- MがG1/G2を代行しないこと
-
-### P7: Pairwise Subject Audit — 完了
-
-- `{C,J}` -> `NO_PERSISTENT_EXPERIENCE_CAUSALITY`
-- `{C,M}` -> `NO_JUDGMENT_OR_AUTHORIZATION`
-- `{J,M}` -> `NO_GENERATIVE_COMPUTATION`
-
-### P8: Three-subject Two-cycle Trinity — 完了
-
-- commandからresult再判断までの三主体循環
-- cycle 1のM更新がcycle 2のC/Jを変える
-- P-only/J-only/M-only因果分離
-
-### P9: Eight-subset Minimum Certificate — 完了
-
-- `{}`から`{C,J,M}`まで全8 subsetを有限列挙
-- full setだけPASS、機能等価物漏れ0
-
-### P10: Complete ARC3 Sample Solving — 完了
-
-- S0 Teacherは全sample game/all level、error 0、再現可能
-- S1からS5で固定action、座標、ID、source/hiddenを順番に除去
-- S5 rendered-only 183/183、S6七摂動測定、二回byte一致
-- S5全10,733 cycle traceを圧縮JSONLと検証manifestへ保存
-
-### P11: Release-state Freeze — 完了
-
-- code/dependency/P0/J0/M0/dataset/compiler/seed/budgetを固定
-- 全sample・全実行trace証拠、package digest、regression suiteを固定
-
-### P12: Pre-official AGI conformance and genericity — historical rev1
-
-- 外部監査claim訂正とP11 read-only baseline固定
-- separate GenericAGIRuntime
-- operational C/J/M/P、HDS gate、semantic M、runtime/version learning
-- whole-game/mechanism/transformation/sealed genericity反証
-- Competition contract mock dry-run
-- resource/package/security/observability gate
-- rev1 blocking受入57/57 PASS、P11固定hash不変
-- rev2 claimへの昇格は禁止、`HISTORICAL_NON_BLOCKING`
-
-### P13〜P15: historical incomplete
-
-- P13 official ARC connection: 逐次ローカルcompetition互換12/12 PASS、
-  private rerunのgateway到達・scorecard close位置は公開fieldから判定不能
-- P14 Kaggle submission paths: zero-byte封じ込め候補をNotebook
-  version 10として通常実行COMPLETE、公式placeholder契約、
-  4セルsource round trip、CLI output取得PASS。competition submission APIは未使用
-- P15 actual submission snapshot: ref `55040966`、`55043205`、`55045360`、
-  `55049227`を実行し、いずれもKaggle system error、scoreなし・total bytes 0。
-  version 7でformat単独原因、version 8でthread競合単独原因を棄却。
-  official accepted scoreなし、rev2 selectorへは使用しない
-
-これらはbaseline commit時点のhistorical evidenceである。現行の次作業は
-P22-Aであり、P23完了とOwner明示許可なしに公式提出へ戻らない。
-
-### P16: Claim / threat / evaluation rebaseline — 完了
-
-- rev2 specification/roadmapをbyte-preservingで保持
-- claim hierarchyをcompletion基準へ再分類
-- active runtimeを`GenericAGIRuntime`一件へ固定
-- S5/Teacher/P10/rev1 sealedをhistorical/quarantineへ分類
-- identity/taint threat model、evaluation role、official predicateを固定
-- runtime behavior変更0
-
-## 9. 検証規約
-
-P1回帰:
-
-```bash
-cd ARC-AGI-3-Agents
-python -m compileall -q arc3_agi_agent agents tests/unit
-python -m unittest discover -s tests/unit -p "test_*.py" -v
-python -m pytest -q tests/unit
-ruff check arc3_agi_agent agents/__init__.py agents/recorder.py tests/conftest.py tests/unit
-python -m unittest discover -s tests/integration \
-  -p "test_offline_sample_runner.py" -v
-python sample_main.py --all-samples --max-actions 1
+```text
+NOT_STARTED
+IN_PROGRESS
+CODEX_IMPLEMENTATION_COMPLETE
+CODEX_SELF_AUDIT_PASS
+CODEX_REWORK_REQUIRED
+OWNER_REVIEW_REQUIRED
+SUSPEND
 ```
 
-P2 audit:
+### Ownerだけが設定できる状態
 
-```bash
-python -m pytest -q tests/unit/test_agi_minimum_three_audit.py
+```text
+OWNER_APPROVED_PASS
+OWNER_APPROVED_REWORK
+OWNER_REJECTED
 ```
 
-P16 governance:
+Codexは`PASS`、`COMPLETE`、`PROMOTED`を単独で最終状態にしない。
 
-```bash
-python -m pytest -q tests/unit/test_p16_governance_rebaseline.py
+### phase state必須field
+
+```text
+schema_version
+phase_id
+status
+base_commit
+base_tree
+result_commit
+result_tree
+work_block_id
+spec_digest
+roadmap_digest
+input_manifest_digest
+allowed_data_roles
+changed_files
+commands
+tests
+artifacts
+failed_requirement_ids
+open_terms
+self_audit
+owner_review_required
+content_digest
 ```
 
-P3回帰では次を追加する。
+uncommitted worktreeをphase completion証拠にしない。
 
-- source evidence accounting
-- deterministic compiler rerun
-- provenance round trip
-- runtime identity-free audit
-- C/J/M fixture separation
-- family/mechanism holdout contamination audit
+---
 
-P4では次を追加する。
+## 6. Work Block Protocol
 
-- P schema/version/digest/provenance/identity gate
-- P-A/P-B実データ形成と共通interface swap
-- C standalone G1
-- C authority negative test
-- L0六責任+P removal audit
+一Work Blockは、
 
-P5では次を追加する。
+```text
+一phase
+または
+一blocking failure修正
+```
 
-- standalone typed HDS Frame
-- X/R/Mc欠落、hazard、evidence、budget、contradiction、rollback判断
-- J authority negative test
-- J removal / non-substitution audit
+だけを扱う。
 
-P6では次を追加する。
+### WB-00 Context Recovery
 
-- 全memory operationの独立意味論
-- stale version拒否、snapshot、指定版rollback
-- active/archive分離、同一query決定性
-- unauthorized runtime mutation拒否
-- MのG1/G2非代行とremoval witness
+- repository root
+- branch
+- HEAD
+- tree
+- dirty state
+- current phase
+- current phase state
+- required docs
+- dependency hashes
+- prior owner decisions
 
-P7では次を追加する。
+を確認する。
 
-- C+J / C+M / J+Mの実行可能pair harness
-- 各pairの固定・固有failure witness
-- 欠落主体の責任非代行とfunctional-equivalent leak検査
+不一致なら`SUSPEND_CONTEXT_MISMATCH`。
 
-P8では次を追加する。
+### WB-01 Frame Lock
 
-- full C/J/M一周期authority trace
-- M updateを介した二周期behavioral delta
-- P-only / J-only / M-only controlled causal isolation
-- hidden-global-state不在とwrite/emit越境negative test
+`WorkBlockFrame.json`を作る。
 
-P9では次を追加する。
+必須:
 
-- 全8 subsetの有限・重複なし列挙
-- full setだけPASSするmachine-readable certificate
-- single/pair removal witnessとG1〜G5実測の整合
-- functional-equivalent leak 0とcertificate deterministic rebuild
+```text
+purpose
+X
+R
+Mc
+scope
+non_goals
+allowed_files
+forbidden_files
+allowed_data_roles
+resource_budget
+test_contract
+stop_condition
+owner_authority
+```
 
-P4以降の固定test IDと反証条件は
-`docs/architecture/AGI_TEST_MATRIX.md`を正本とする。
+### WB-02 Inventory
 
-未実行の検証を `PASS` と書いてはいけません。環境不足、依存不足、credential不足、製品回帰を区別します。
+変更前に、
 
-## 10. Git境界
+- current implementation
+- existing tests
+- existing artifact
+- gaps
+- reused modules
+- quarantined modules
 
-- ローカル・リモートの継続branchは`main`だけとする
-- ユーザーが明示的に方針を変更しない限り、作業branchとPRを作成しない
-- branch操作やpushの前に`origin/main`を取得し、local/remote差分を確認する
-- 関連gateを通し、ユーザーがcommit / pushを許可した場合だけ`main`へ直接反映する
-- main-only運用を、無関係な変更の混入や検証省略の理由にしない
-- 無関係な既存変更をstage・削除・整形しない
-- `reset --hard`、`clean -fd`、force pushを行わない
+を列挙する。
+
+### WB-03 Plan
+
+実装前に、最小変更単位と検証順序を固定する。
+
+計画は上位仕様を変更しない。
+
+### WB-04 Implement
+
+- allowed filesだけ変更
+- undocumented compatibility hack禁止
+- fallback追加禁止
+- test weakening禁止
+- scope expansion禁止
+- frozen artifact変更禁止
+
+### WB-05 Validate
+
+順序:
+
+1. dedicated test
+2. focused regression
+3. type/lint
+4. full unit
+5. integration
+6. package/notebook
+7. artifact determinism
+
+必要な範囲だけだが、phase DoDで要求された試験は省略しない。
+
+### WB-06 Self Audit
+
+最低限:
+
+- objective alignment
+- scope
+- authority
+- identity/taint
+- evidence
+- determinism
+- data role
+- claim strength
+- rollback
+- resource
+- historical fallback
+
+### WB-07 Commit Bind
+
+1. code/test/docをcommit
+2. HEAD/tree取得
+3. commit後のrequired tests
+4. phase state生成
+5. phase stateをresult commit/treeへbind
+6. evidence package生成
+
+phase stateを生成した後にコードを変更した場合、stateは失効する。
+
+### WB-08 Owner Review Package
+
+```text
+OWNER_REVIEW_PACKAGE/
+  summary.md
+  phase_state.json
+  changed_files.json
+  commands.json
+  test_results.json
+  artifact_manifest.json
+  failed_requirements.json
+  open_terms.json
+  self_audit.json
+  proposed_next_action.md
+```
+
+### WB-09 Stop
+
+`OWNER_REVIEW_REQUIRED`で停止する。  
+次phaseへ自動進行しない。
+
+---
+
+## 7. HDS蒸留中のCodex
+
+### 許可
+
+- raw evidence正規化
+- deterministic derivation
+- HypothesisIR候補生成
+- counter-hypothesis生成
+- exact fit実行
+- counterfactual intervention
+- cross-case unification
+- boundary/counterexample mining
+- FailureSignature生成
+- promotion candidate生成
+- evidence report
+- Owner review package
+
+### 禁止
+
+- Ruleの自動active化
+- exact fitを因果確定と呼ぶ
+- source codeから正解を抽出
+- S5 MLPを教師因果として扱う
+- live LLM responseを最終artifactへ直接採用
+- case identityをRule triggerへ入れる
+- public corpusをblind evidenceと呼ぶ
+- coverage不足を隠す
+- all SUSPENDでAGI Build Readyを宣言
+
+### LLM capture
+
+LLMを使う場合:
+
+```text
+prompt
+model
+parameters
+request
+raw response
+digest
+```
+
+をfreezeし、後段はdeterministic parse/validate/compileとする。
+
+---
+
+## 8. Bridge中のCodex
+
+### 許可
+
+- approved structure recordのeligibility分類
+- type mapping
+- P-IR/J₀/M₀/probe candidate生成
+- taint audit
+- non-replay audit
+- deterministic package
+- structural tests
+
+### 禁止
+
+- Owner未承認RuleのP格納
+- `LOCAL_EXACT_FIT`のactive P化
+- teacher trajectory格納
+- fixed action sequence
+- exact action-surface head
+- S5 weights reuse
+- unsupported generalization
+- natural languageを無検証opcodeへ変換
+- `OWNER_APPROVED_PASS`設定
+
+---
+
+## 9. AGI構築中のCodex
+
+### 許可
+
+- distilled bundle loader
+- C/J/M/L₀接続
+- online mechanism identification
+- probe loop
+- memory update
+- negative transfer
+- version learning
+- official-like test
+
+### 禁止
+
+- teacher package import
+- S5 fallback
+- current compiled MLP fallback
+- game ID routing
+- exact state lookup
+- runtimeへの開発source同梱
+- Codexによるrun中補正
+- locked finalへの反復アクセス
+- official結果を無断でdevelopment signal化
+
+---
+
+## 10. Data Role Access
+
+| Role | Distillation | Bridge | AGI Dev | Locked | Official |
+|---|---:|---:|---:|---:|---:|
+| `DISTILLATION_SOURCE` | 可 | manifestのみ | 禁止 | 禁止 | 禁止 |
+| `DEVELOPMENT_TRAIN` | 可 | 可 | 可 | 禁止 | 禁止 |
+| `DEVELOPMENT_VALIDATION` | 可 | 可 | 可 | 禁止 | 禁止 |
+| `CV_PROCEDURE` | 評価のみ | 評価のみ | 評価のみ | 禁止 | 禁止 |
+| `LOCKED_FINAL` | 禁止 | 禁止 | 禁止 | 一回 | 禁止 |
+| `OFFICIAL_PUBLIC` | 禁止 | 禁止 | 禁止 | 禁止 | 明示許可 |
+| `OFFICIAL_PRIVATE` | 禁止 | 禁止 | 禁止 | 禁止 | 明示許可 |
+
+アクセスは`DataAccessLedger`へ記録する。
+
+---
+
+## 11. Failure Handling
+
+failureは次へ分類する。
+
+```text
+PRODUCT_FAILURE
+SPEC_FAILURE
+EVIDENCE_FAILURE
+DATA_ROLE_VIOLATION
+IDENTITY_TAINT
+ENVIRONMENT_FAILURE
+RESOURCE_EXHAUSTION
+TOOL_FAILURE
+EXTERNAL_SERVICE_FAILURE
+```
+
+### 原則
+
+- failureを消すために試験を弱めない
+- thresholdを無断で緩めない
+- scopeを狭めてPASSを偽装しない
+- environment failureをproduct PASSに変えない
+- resource exhaustionを能力FAILへ誤帰属しない
+- external service failureをagent能力へ誤帰属しない
+- scoreだけでC/J/M/Pへ帰属しない
+
+### SUSPEND条件
+
+- dependency mismatch
+- source digest mismatch
+- missing approval
+- forbidden data access
+- unresolved spec term
+- required test unavailable
+- evidence不足
+- resource不足
+- branch/HEAD mismatch
+- phase gate未承認
+
+---
+
+## 12. Branch / Commit Discipline
+
+推奨branch:
+
+```text
+phase/<phase-id>-<slug>
+repair/<phase-id>-<failure-id>
+```
+
+commit規律:
+
+1. implementation
+2. tests
+3. docs/artifacts
+4. final evidence bind
+
+大規模phaseでは複数commit可。  
+ただしOwner Review Packageは最終HEAD/treeへbindする。
+
+禁止:
+
+- unrelated refactor
+- generated artifactの手修正
+- force overwrite of frozen baseline
+- history rewrite after owner review
+- phase evidenceをcommit前に最終化
+
+---
+
+## 13. Claim Discipline
+
+Codexが書ける表現:
+
+```text
+IMPLEMENTED
+TESTED
+CODEX_SELF_AUDIT_PASS
+EVIDENCE_GENERATED
+OWNER_REVIEW_REQUIRED
+NOT_ESTABLISHED
+NOT_EVALUATED
+SUSPEND
+```
+
+CodexがOwner承認なしに書けない表現:
+
+```text
+COMPLETED
+CLOSED
+PROMOTED
+GENERIC
+AGI
+OFFICIAL_READY
+OWNER_APPROVED
+```
+
+これらを使う場合は、claim registryの正式IDとOwner ApprovalRecordが必要。
+
+---
+
+## 14. Reporting Template
+
+最終報告は次の順。
+
+```text
+1. Phase / Work Block
+2. Fixed purpose
+3. Base commit/tree
+4. Changed files
+5. What was implemented
+6. Tests and commands
+7. Artifacts and digests
+8. Failures / regressions
+9. Open terms
+10. Self-audit
+11. Claim allowed
+12. Claim prohibited
+13. Owner decisions required
+14. Stop state
+```
+
+誇張、宣伝、一般論で埋めない。
+
+---
+
+## 15. Initial Instruction to Codex
+
+```text
+あなたの役割はDevelopment Meta-Cです。
+Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではありません。
+
+Active phaseはPH-R00です。
+一Work BlockでPH-R00だけを実施してください。
+
+最初に、
+- repository root
+- branch
+- HEAD/tree
+- dirty state
+- required documents
+- current phase state
+を確認してください。
+
+次にWorkBlockFrameを作成し、
+current HEADをPRE_DISTILLATION_INFRASTRUCTURE_BASELINEへrebindしてください。
+
+P16〜P21は基盤候補として保持します。
+S5、current compiled MLP、current P22/CV artifactsはhistorical/quarantineへ分類します。
+production completion pathからS5 dependencyを除外する境界を作ってください。
+
+HDS蒸留、Bridge、AGI能力実装、P22改善、official提出へ進んではいけません。
+
+実装・試験・自己監査・commit bind・Owner Review Package生成後、
+statusをOWNER_REVIEW_REQUIREDとして停止してください。
+OWNER_APPROVED_PASSを自分で設定してはいけません。
+```
+
+---
+
+## 16. 最終固定結論
+
+Codexは、開発を自律的に完遂する主体ではない。
+
+> **Ownerが定めた目的と境界の中で、Repositoryを継続記憶として読み、限定されたWork Blockを実装・検証し、証拠を生成してOwnerへ返すDevelopment Meta-Cである。**
+
+この位置づけを崩さないことで、
+
+```text
+Codexの作業
+```
+
+と、
+
+```text
+AGI Runtimeの自律
+```
+
+を混同しない。

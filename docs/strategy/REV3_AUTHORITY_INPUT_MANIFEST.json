@@ -1,0 +1,74 @@
+{
+  "schema_version": "arc3-rev3-authority-input-manifest-v1",
+  "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
+  "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
+  "inputs": [
+    {
+      "authority_rank": 2,
+      "path": "AGENTS.md",
+      "sha256": "248f3a16577c89d2cac9354a0e471077b59f63141bb177840dc9f13a85745630",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    },
+    {
+      "authority_rank": 3,
+      "path": "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+      "sha256": "feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    },
+    {
+      "authority_rank": 4,
+      "path": "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+      "sha256": "b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    },
+    {
+      "authority_rank": 5,
+      "path": "docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md",
+      "required_name": "HDS蒸留仕様書_ARC2_ARC3_rev2.md",
+      "expected_sha256": "79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93",
+      "sha256": "79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    },
+    {
+      "authority_rank": 6,
+      "path": "docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
+      "required_name": "HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
+      "expected_sha256": "64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
+      "sha256": "64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    },
+    {
+      "authority_rank": 7,
+      "path": "docs/architecture/AGI三主体統合設計正本_v0_2.md",
+      "sha256": "2e553964fd7bfd3bc2221bc3ef70af5742c170ff29481c662bddcc983d10df44",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    },
+    {
+      "authority_rank": 8,
+      "path": "docs/architecture/工学的AGI実装仕様書_v0_2.md",
+      "sha256": "a05160bba4fd2e4541d3b381fc09360bc478e1b6593decc86c299762366206f8",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    },
+    {
+      "authority_rank": 9,
+      "path": "docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md",
+      "sha256": "6f55471c0bb3b2b54d434ac05ac09ee24ef69fda3f2f024e5f762696e822216c",
+      "state": "AVAILABLE_PREEXISTING_EXACT_DIGEST"
+    },
+    {
+      "authority_rank": 10,
+      "path": "docs/references/HDSフレーム_rev3_1_外向け仕様.md",
+      "sha256": "d7cbbf4c981621509e124077ae66cc49bd29b2271fbf94194c6786d2a5a8724a",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    },
+    {
+      "authority_rank": 11,
+      "path": "docs/references/HDS_SelfContained_Prompt_v1_2_utf8bom.txt",
+      "sha256": "33b8a35176a0cc2f18502befb4a53cfbbf378b35e36b911888fa534a8b377b50",
+      "state": "AVAILABLE_BYTE_PRESERVED"
+    }
+  ],
+  "missing_required_authority_count": 0,
+  "phase_effect": "PH_R00_INPUT_SET_CLOSED",
+  "content_digest": "rev3-authority-input-manifest:b3388e4ce73c995cbdd7d8dc8209e1ffbff52f53b7847e4edfcced0e89fd37a4"
+}
