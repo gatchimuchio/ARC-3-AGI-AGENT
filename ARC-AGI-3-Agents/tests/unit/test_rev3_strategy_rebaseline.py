@@ -409,6 +409,92 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     assert transition["hard_gates_crossed"] == []
 
 
+def test_ph_d03a_candidate_preinventory_and_frame_are_content_bound() -> None:
+    preinventory = _json(
+        REPOSITORY_ROOT
+        / "analysis"
+        / "rev3"
+        / "ph_d03a_golden_preinventory.json"
+    )
+    preinventory_body = dict(preinventory)
+    for excluded in preinventory["digest_excluded_fields"]:
+        preinventory_body.pop(str(excluded))
+    assert preinventory["content_digest"] == (
+        "rev3-ph-d03a-golden-preinventory:"
+        + digest_object(preinventory_body)
+    )
+    assert preinventory["content_digest"] == (
+        "rev3-ph-d03a-golden-preinventory:"
+        "102465e690258f967061b70d2023ec9645818c6e68558c01ca6c74a6b7245104"
+    )
+    cases = preinventory["required_case_inventory"]
+    assert len(cases) == 16
+    assert sum(case["domain"] == "ARC2" for case in cases) == 8
+    assert sum(case["domain"] == "ARC3" for case in cases) == 8
+    assert len({case["case_id"] for case in cases}) == 16
+    assert preinventory["required_gate_coverage"] == [
+        f"DG-{index:02d}" for index in range(16)
+    ]
+    approval = preinventory["approval_boundary"]
+    assert approval["existing_content_specific_golden_approval_count"] == 0
+    assert approval["allowed_candidate_state"] == (
+        "PROPOSED_PENDING_OWNER_APPROVAL"
+    )
+    assert approval["owner_recorded_approval_may_be_generated_by_codex"] is (
+        False
+    )
+    assert approval[
+        "golden_expected_artifact_freeze_allowed_without_owner_record"
+    ] is False
+
+    frame = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D03A_WORK_BLOCK_FRAME.json"
+    )
+    frame_body = dict(frame)
+    for excluded in frame["digest_excluded_fields"]:
+        frame_body.pop(str(excluded))
+    assert frame["content_digest"] == (
+        "rev3-work-block-frame:" + digest_object(frame_body)
+    )
+    assert frame["content_digest"] == (
+        "rev3-work-block-frame:"
+        "ce4de522b3e5d269d5f80b260e0b0bf24586f0965207149d2043742c2a7b9132"
+    )
+    assert frame["phase_id"] == "PH-D03A"
+    assert frame["preinventory_digest"] == preinventory["content_digest"]
+    budget = frame["resource_budget"]
+    assert budget["required_arc2_case_count"] == 8
+    assert budget["required_arc3_case_count"] == 8
+    assert budget["required_total_case_count"] == 16
+    assert budget["required_gate_count"] == 16
+    assert budget["owner_approval_generation_count"] == 0
+    assert budget["golden_expected_artifact_freeze_count"] == 0
+    assert budget["sealed_corpus_artifact_count"] == 0
+    assert budget["source_payload_read_count"] == 0
+    assert budget["teacher_trajectory_read_count"] == 0
+    assert budget["real_intervention_execution_count"] == 0
+    assert budget["general_candidate_generation_count"] == 0
+    assert budget["rule_promotion_count"] == 0
+    assert budget["locked_final_access_count"] == 0
+    assert budget["official_access_count"] == 0
+    assert budget["network_submission_count"] == 0
+    assert budget["kaggle_mutation_count"] == 0
+    owner_review = frame["owner_review"]
+    assert owner_review["content_specific_golden_approval_present"] is False
+    assert owner_review[
+        "content_specific_owner_decision_required_for_freeze"
+    ] is True
+    assert owner_review["hard_gate_approval_delegated"] is False
+    assert owner_review["codex_may_generate_owner_recorded_approval"] is False
+    assert owner_review["codex_may_freeze_golden_expectations"] is False
+    assert owner_review[
+        "codex_may_auto_update_approved_expectations"
+    ] is False
+
+
 def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
     state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "D01B_PHASE_STATE.json"
