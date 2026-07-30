@@ -1,0 +1,78 @@
+{
+  "schema_version": "arc3-rev3-owner-review-test-results-v1",
+  "phase_id": "PH-D01A",
+  "result_commit": "e71cdd45b7263c2ec77a8b6008140e2db774d286",
+  "results": [
+    {
+      "suite": "PH_D01A_CHECKED_SOURCE_INVENTORY",
+      "status": "PASS",
+      "source_count": 83,
+      "profile_count": 8,
+      "duplicate_source_assignment_count": 0,
+      "unassigned_admitted_source_count": 0,
+      "unknown_answer_visibility_count": 0,
+      "unknown_split_role_count": 0
+    },
+    {
+      "suite": "PH_D01A_DEDICATED",
+      "status": "PASS",
+      "passed": 20,
+      "failed": 0,
+      "duration_seconds": 21.88
+    },
+    {
+      "suite": "PH_D01A_FOCUSED_DISTILLATION_REV3",
+      "status": "PASS",
+      "passed": 69,
+      "failed": 0,
+      "duration_seconds": 41.51
+    },
+    {
+      "suite": "PH_D01A_CHECKED_SCOPE_GUARD",
+      "status": "PASS",
+      "finding_count": 0,
+      "audited_source_execution_count": 0
+    },
+    {
+      "suite": "FULL_UNIT_POST_RESULT_COMMIT",
+      "status": "PASS",
+      "passed": 702,
+      "failed": 0,
+      "duration_seconds": 369.61
+    },
+    {
+      "suite": "FULL_INTEGRATION_POST_RESULT_COMMIT",
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 462.15
+    },
+    {
+      "suite": "RUFF",
+      "status": "PASS",
+      "version": "0.12.7"
+    },
+    {
+      "suite": "MYPY_STRICT",
+      "status": "PASS",
+      "version": "1.17.1",
+      "checked_source_file_count": 6
+    },
+    {
+      "suite": "COMPILEALL",
+      "status": "PASS"
+    },
+    {
+      "suite": "CANONICAL_SOURCE_REPORT_DETERMINISM",
+      "status": "PASS",
+      "independent_rebuild_count": 3,
+      "byte_identical": true,
+      "sha256": "7081391cc0ef2cc4c834526cb4a57df153dea76e4c4cf0d34e2535b410c06dba"
+    }
+  ],
+  "resolved_pre_result_product_failure_count": 3,
+  "resolved_environment_failure_count": 1,
+  "new_product_regression_count": 0,
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0
+}

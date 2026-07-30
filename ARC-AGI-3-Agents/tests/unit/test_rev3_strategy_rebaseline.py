@@ -526,3 +526,164 @@ def test_d00b_phase_state_and_snapshot_manifest_are_content_bound() -> None:
         == item["sha256"]
         for item in artifact_manifest["artifacts"]
     )
+
+
+def test_d01a_source_inventory_and_phase_state_are_content_bound() -> None:
+    frame = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D01A_WORK_BLOCK_FRAME.json"
+    )
+    frame_body = dict(frame)
+    frame_digest = str(frame_body.pop("content_digest"))
+    assert frame_digest == (
+        "rev3-work-block-frame:" + digest_object(frame_body)
+    )
+    assert frame_digest == (
+        "rev3-work-block-frame:"
+        "c8ba581776540af64fec89f641d28334adc24c77d89d5ad4214e8c7a43ddc4d9"
+    )
+    assert frame["phase_id"] == "PH-D01A"
+    assert frame["resource_budget"]["arc_source_payload_parse_count"] == 0
+    assert frame["resource_budget"][
+        "arc_environment_source_execution_count"
+    ] == 0
+
+    preinventory = _json(
+        REPOSITORY_ROOT
+        / "analysis"
+        / "rev3"
+        / "ph_d01a_source_preinventory.json"
+    )
+    preinventory_body = dict(preinventory)
+    preinventory_digest = str(
+        preinventory_body.pop("content_digest")
+    )
+    assert preinventory_digest == (
+        "rev3-ph-d01a-source-preinventory:"
+        + digest_object(preinventory_body)
+    )
+    assert preinventory_digest == (
+        "rev3-ph-d01a-source-preinventory:"
+        "33fccaaedb4c3eb0a5640176da27577c91a96c14a93d0abc69211bb32e014918"
+    )
+
+    plan = _json(
+        REPOSITORY_ROOT
+        / "distillation"
+        / "input"
+        / "source_inventory_plan.json"
+    )
+    plan_body = dict(plan)
+    plan_digest = str(plan_body.pop("content_digest"))
+    assert plan_digest == (
+        "hds-source-inventory-plan:" + digest_object(plan_body)
+    )
+    assert plan_digest == (
+        "hds-source-inventory-plan:"
+        "ef0394a2389a0fdeec3402c9a7f227a14758964e61fadba25c41422f49ea0215"
+    )
+
+    profile_paths = sorted(
+        (
+            REPOSITORY_ROOT
+            / "distillation"
+            / "profiles"
+            / "source"
+        ).glob("*.json")
+    )
+    assert len(profile_paths) == 8
+    profile_ids: set[str] = set()
+    for path in profile_paths:
+        profile = _json(path)
+        profile_body = dict(profile)
+        profile_digest = str(profile_body.pop("content_digest"))
+        assert profile_digest == (
+            "hds-source-profile:" + digest_object(profile_body)
+        )
+        profile_ids.add(str(profile["profile_id"]))
+    assert len(profile_ids) == 8
+
+    report = _json(
+        REPOSITORY_ROOT
+        / "distillation"
+        / "artifacts"
+        / "reports"
+        / "source_inventory.json"
+    )
+    report_body = dict(report)
+    for excluded in report["digest_excluded_fields"]:
+        report_body.pop(str(excluded))
+    assert report["content_digest"] == (
+        "hds-source-inventory-report:" + digest_object(report_body)
+    )
+    assert report["content_digest"] == (
+        "hds-source-inventory-report:"
+        "ca27293b57737c743020ad19e063b08cd75d0d0c6d6571e67c6b5934c9f67d79"
+    )
+    assert report["phase_exit_claim"] == (
+        "PH_D01A_SOURCE_INVENTORY_PASS"
+    )
+    assert report["source_count"] == 83
+    assert report["profile_count"] == 8
+    assert report["accounting"]["repository_candidate_file_count"] == 151
+    assert report["accounting"]["repository_admitted_source_count"] == 53
+    assert report["accounting"][
+        "repository_excluded_non_source_count"
+    ] == 98
+    assert report["public_evaluation_consumed_source_count"] == 28
+    assert report["policy_weight_admitted_source_count"] == 0
+    assert report["environment_source_non_replay_access_count"] == 0
+    assert report["duplicate_source_assignment_count"] == 0
+    assert report["unassigned_admitted_source_count"] == 0
+    assert report["unknown_answer_visibility_count"] == 0
+    assert report["unknown_split_role_count"] == 0
+    assert report["source_payload_access"] == {
+        "payload_parse_count": 0,
+        "replay_execution_count": 0,
+        "source_execution_count": 0,
+    }
+    assert report["phase_boundaries"]["content_manifest_frozen"] is False
+    assert report["phase_boundaries"][
+        "environment_manifest_frozen"
+    ] is False
+    assert report["phase_boundaries"][
+        "trajectory_normalization_started"
+    ] is False
+
+    phase_state_path = (
+        REPOSITORY_ROOT / "control" / "rev3" / "D01A_PHASE_STATE.json"
+    )
+    phase_state = _json(phase_state_path)
+    phase_state_body = dict(phase_state)
+    phase_state_digest = str(phase_state_body.pop("content_digest"))
+    assert phase_state_digest == (
+        "rev3-d01a-phase-state:" + digest_object(phase_state_body)
+    )
+    assert phase_state["status"] == "CODEX_SELF_AUDIT_PASS"
+    assert phase_state["result_commit"] == (
+        "e71cdd45b7263c2ec77a8b6008140e2db774d286"
+    )
+    assert phase_state["result_tree"] == (
+        "b811529a0aae10c3464282fabda9679113121dbd"
+    )
+    assert phase_state["failed_requirement_ids"] == []
+    invariants = phase_state["phase_invariants"]
+    assert invariants["source_count"] == 83
+    assert invariants["duplicate_source_assignment_count"] == 0
+    assert invariants["unassigned_admitted_source_count"] == 0
+    assert invariants["unknown_answer_visibility_count"] == 0
+    assert invariants["unknown_split_role_count"] == 0
+    assert invariants["policy_weight_admitted_source_count"] == 0
+    assert invariants["source_payload_parse_count"] == 0
+    assert invariants["source_execution_count"] == 0
+    assert invariants["replay_execution_count"] == 0
+    assert invariants["next_phase"] == "PH-D01B"
+    assert invariants["next_phase_started"] is False
+    assert "PH_D01A_SOURCE_INVENTORY_PASS" in phase_state[
+        "claim_allowed"
+    ]
+    assert "ARC3_TEACHER_SOURCE_FROZEN" in phase_state[
+        "claim_prohibited"
+    ]

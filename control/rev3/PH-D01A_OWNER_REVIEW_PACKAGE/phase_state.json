@@ -1,0 +1,383 @@
+{
+  "schema_version": "arc3-rev3-phase-state-v1",
+  "phase_id": "PH-D01A",
+  "status": "CODEX_SELF_AUDIT_PASS",
+  "base_commit": "25a4363fc1dfe78d47106f715db65c36d393210f",
+  "base_tree": "51c7b4f8f057bebbccb1d9852dddc92bda137745",
+  "result_commit": "e71cdd45b7263c2ec77a8b6008140e2db774d286",
+  "result_tree": "b811529a0aae10c3464282fabda9679113121dbd",
+  "work_block_id": "WB-PH-D01A-SOURCE-DIALECT-CONTAMINATION-INVENTORY",
+  "work_block_history": [
+    {
+      "work_block_id": "WB-PH-D01A-SOURCE-DIALECT-CONTAMINATION-INVENTORY",
+      "initial_frame_commit": "9cdefb9f879eba0b4189d89f488297b71bbd4f0c",
+      "effective_frame_commit": "31a6f1eefabee1a19828c024b5619d11a835188f",
+      "result_commit": "e71cdd45b7263c2ec77a8b6008140e2db774d286",
+      "result_tree": "b811529a0aae10c3464282fabda9679113121dbd"
+    }
+  ],
+  "spec_digest": "sha256:feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f",
+  "roadmap_digest": "sha256:b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2",
+  "hds_spec_digest": "sha256:79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93",
+  "hds_roadmap_digest": "sha256:64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
+  "input_manifest_digest": "rev3-authority-input-manifest:ba20118baa128ce18e75ed234079d25cc7c2b84e58f2d285e72732d33506ad05",
+  "allowed_data_roles": [
+    "SOURCE_ADMISSION_METADATA",
+    "DISTRIBUTION_MEMBER_METADATA",
+    "RAW_RECORDING_LOCATOR_METADATA",
+    "REPOSITORY_PATH_MEMBERSHIP_METADATA",
+    "HDS_AUTHORITY_SOURCE",
+    "OWNER_APPROVAL_EVIDENCE",
+    "SYNTHETIC_SOURCE_PROFILE_TEST_FIXTURE"
+  ],
+  "changed_files": [
+    "control/rev3/PH-D01A_WORK_BLOCK_FRAME.json",
+    "analysis/rev3/ph_d01a_source_preinventory.json",
+    "distillation/README.md",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "distillation/artifacts/reports/source_inventory.json",
+    "distillation/input/README.md",
+    "distillation/input/source_inventory_plan.json",
+    "distillation/profiles/source/arc2-evaluation-challenges.json",
+    "distillation/profiles/source/arc2-evaluation-solutions.json",
+    "distillation/profiles/source/arc2-test-challenges.json",
+    "distillation/profiles/source/arc2-training-challenges.json",
+    "distillation/profiles/source/arc2-training-solutions.json",
+    "distillation/profiles/source/arc3-canonical-teacher-trajectories.json",
+    "distillation/profiles/source/arc3-environment-source-bundle.json",
+    "distillation/profiles/source/arc3-raw-teacher-recordings.json",
+    "distillation/schemas/README.md",
+    "distillation/schemas/source_profile.schema.json",
+    "distillation/src/hds_distill/__init__.py",
+    "distillation/src/hds_distill/source_inventory.py",
+    "distillation/tests/unit/test_source_inventory.py"
+  ],
+  "commands": [
+    {
+      "id": "CMD-D01A-001",
+      "purpose": "rebuild and verify the checked metadata-only source inventory",
+      "result": "PH_D01A_SOURCE_INVENTORY_PASS_83"
+    },
+    {
+      "id": "CMD-D01A-002",
+      "purpose": "dedicated source-profile, admission, contamination, drift, and non-access tests",
+      "result": "PASS_20_OF_20"
+    },
+    {
+      "id": "CMD-D01A-003",
+      "purpose": "combined distillation and rev3 focused regression including evidence binding",
+      "result": "PASS_69_OF_69"
+    },
+    {
+      "id": "CMD-D01A-004",
+      "purpose": "finding-free checked live Scope Guard audit",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS"
+    },
+    {
+      "id": "CMD-D01A-005",
+      "purpose": "ruff distillation source and tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D01A-006",
+      "purpose": "strict mypy distillation source and tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D01A-007",
+      "purpose": "compileall distillation source and tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D01A-008",
+      "purpose": "full historical unit post-result-commit regression",
+      "result": "PASS_702_OF_702"
+    },
+    {
+      "id": "CMD-D01A-009",
+      "purpose": "full historical integration post-result-commit regression",
+      "result": "PASS_8_OF_8"
+    },
+    {
+      "id": "CMD-D01A-010",
+      "purpose": "three independent source-inventory rebuilds and checked-report comparison",
+      "result": "PASS_BYTE_IDENTICAL"
+    },
+    {
+      "id": "CMD-D01A-011",
+      "purpose": "exact interpreter and development-tool lock verification",
+      "result": "PASS_PYTHON_3_12_13_RUFF_0_12_7_MYPY_1_17_1_PYTEST_8_4_1"
+    }
+  ],
+  "tests": {
+    "dedicated_source_inventory": {
+      "status": "PASS",
+      "passed": 20,
+      "failed": 0,
+      "duration_seconds": 21.88,
+      "post_result_commit": true
+    },
+    "focused_distillation_and_rev3": {
+      "status": "PASS",
+      "passed": 69,
+      "failed": 0,
+      "duration_seconds": 41.51,
+      "post_result_commit": true
+    },
+    "full_unit": {
+      "status": "PASS",
+      "passed": 702,
+      "failed": 0,
+      "duration_seconds": 369.61,
+      "post_result_commit": true
+    },
+    "integration": {
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 462.15,
+      "post_result_commit": true
+    },
+    "lint": {
+      "status": "PASS",
+      "tool": "ruff",
+      "version": "0.12.7"
+    },
+    "type_check": {
+      "status": "PASS",
+      "mode": "strict",
+      "tool": "mypy",
+      "version": "1.17.1",
+      "checked_source_file_count": 6
+    },
+    "compileall": {
+      "status": "PASS"
+    },
+    "environment_lock": {
+      "status": "PASS",
+      "python": "3.12.13",
+      "runtime_dependency_count": 0
+    },
+    "scope_guard": {
+      "status": "PASS",
+      "finding_count": 0,
+      "audited_source_execution_count": 0,
+      "report_digest": "hds-distillation-scope-audit:c392e1e50593f30f6bc3cfca5fb4d5bf70036e5737c70df2f9da541c3bee23a5"
+    },
+    "source_inventory": {
+      "status": "PASS",
+      "source_count": 83,
+      "profile_count": 8,
+      "report_digest": "hds-source-inventory-report:ca27293b57737c743020ad19e063b08cd75d0d0c6d6571e67c6b5934c9f67d79"
+    },
+    "determinism": {
+      "status": "PASS",
+      "independent_rebuild_count": 3,
+      "byte_identical": true,
+      "checked_report_match": true,
+      "report_sha256": "7081391cc0ef2cc4c834526cb4a57df153dea76e4c4cf0d34e2535b410c06dba"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "control/rev3/PH-D01A_WORK_BLOCK_FRAME.json",
+      "digest": "rev3-work-block-frame:c8ba581776540af64fec89f641d28334adc24c77d89d5ad4214e8c7a43ddc4d9",
+      "sha256": "f646c84b96840514a0270bec23be6ae4c805590e44adf67887d0224eeb0790b3"
+    },
+    {
+      "path": "analysis/rev3/ph_d01a_source_preinventory.json",
+      "digest": "rev3-ph-d01a-source-preinventory:33fccaaedb4c3eb0a5640176da27577c91a96c14a93d0abc69211bb32e014918",
+      "sha256": "df8326fdf1825061fd2c88ca544b5e4e26cce53ea240807f9e3f2815a84ae030"
+    },
+    {
+      "path": "distillation/input/source_inventory_plan.json",
+      "digest": "hds-source-inventory-plan:ef0394a2389a0fdeec3402c9a7f227a14758964e61fadba25c41422f49ea0215",
+      "sha256": "3ab4f5c10426b9aa346ddc863a14c3679e1a8c814359f35f4b3a72641073283e"
+    },
+    {
+      "path": "distillation/artifacts/reports/source_inventory.json",
+      "digest": "hds-source-inventory-report:ca27293b57737c743020ad19e063b08cd75d0d0c6d6571e67c6b5934c9f67d79",
+      "sha256": "7081391cc0ef2cc4c834526cb4a57df153dea76e4c4cf0d34e2535b410c06dba"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "digest": "hds-distillation-scope-audit:c392e1e50593f30f6bc3cfca5fb4d5bf70036e5737c70df2f9da541c3bee23a5",
+      "sha256": "c106e0c56006a211342a065a699840dc23d0793b231def809a5f74d2b150dcfc"
+    },
+    {
+      "path": "distillation/schemas/source_profile.schema.json",
+      "sha256": "c5f7208ef930ab86271a4d7829fb6283e4c3b9ffd80aba62eab4e948b3169e73"
+    },
+    {
+      "path": "distillation/src/hds_distill/source_inventory.py",
+      "sha256": "2dc57574ac1ac58e35493f7d050615922d99353831201299ca8435068f5f6601"
+    },
+    {
+      "path": "distillation/tests/unit/test_source_inventory.py",
+      "sha256": "2d95b746cd9cccbc0f39e305bc34b5f65a56400231251643dc70b9862414b49b"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-evaluation-challenges.json",
+      "digest": "hds-source-profile:f423c04a084d75a230272dbcd343249d513de77ca82a5f1b4e3e91beb3412303",
+      "sha256": "a329c9c3ae8df27ea7ac2fe80b88cd451e965a6d7abacc070a452d38d1b42f95"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-evaluation-solutions.json",
+      "digest": "hds-source-profile:4e14bcec6ada85577f86d90be754ccffc0fea43fd9057b3382487a14b52193df",
+      "sha256": "3c413cec4b555debd2f30950326e79c2b4c8c54136721b0809e53cbb7fb19ee9"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-test-challenges.json",
+      "digest": "hds-source-profile:079fb0b16bd816b39d05fb953b49f7e9df480841f7b3e9afa2490b630ee79504",
+      "sha256": "fd817ae33eccbcfcb25ea97fdf26deeca89f1f53b10a7914e06952d1a6d56144"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-training-challenges.json",
+      "digest": "hds-source-profile:e1d21f75dc700be7a0cdf784678eacf38613c9e391b190bc328a6178e5b251d6",
+      "sha256": "1a800d3beaf1efc3b35f4b8fc013380182e06f0e84840ca7ddc304874d403f99"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-training-solutions.json",
+      "digest": "hds-source-profile:d772e14b8db730b3292eadbbb8d087001da2f54271c1f766cf6423cfaff1c35c",
+      "sha256": "879649e1902de08fe5b3c8ec9aac60d9eb8ff8b1b78de71b684bb82652d99ec6"
+    },
+    {
+      "path": "distillation/profiles/source/arc3-canonical-teacher-trajectories.json",
+      "digest": "hds-source-profile:ac262b83e1973e96f43fb4791223ca1f3c1ba9b4071746cc8269ce9bf425c879",
+      "sha256": "f2ade8771a16931ba4c3d6ac7d6a6bccda747cecb8d0fcc0c3cfb274a8596c04"
+    },
+    {
+      "path": "distillation/profiles/source/arc3-environment-source-bundle.json",
+      "digest": "hds-source-profile:c5ec09f96cb75cdcd6c7d1ef0cf547e99244958ee824d2e30fd1d9547bd2154f",
+      "sha256": "f588c961da5759836162be312d4b42b239d7a223872c506313ee7a24afbd790e"
+    },
+    {
+      "path": "distillation/profiles/source/arc3-raw-teacher-recordings.json",
+      "digest": "hds-source-profile:763263fd5366cbe9dc171936de482044495b2a79c2007a83961d37e2809444f7",
+      "sha256": "b3ea4308aa8b04e141282130872813fbf288966440b45e66dcf484a850b1a88c"
+    }
+  ],
+  "failed_requirement_ids": [],
+  "open_terms": [],
+  "resolved_failures": [
+    {
+      "classification": "PRODUCT_FAILURE",
+      "stage": "PRE_RESULT_COMMIT",
+      "failure": "ruff UP022 finding in source inventory subprocess construction",
+      "resolution": "source modernized to the exact Python 3.12 style contract; post-result lint PASS"
+    },
+    {
+      "classification": "PRODUCT_FAILURE",
+      "stage": "PRE_RESULT_COMMIT",
+      "failure": "three strict mypy errors in source inventory typing",
+      "resolution": "types narrowed without suppressions; post-result strict mypy PASS"
+    },
+    {
+      "classification": "PRODUCT_FAILURE",
+      "stage": "PRE_RESULT_COMMIT",
+      "failure": "duplicated ARC3 environment archive alias prefix exposed by stronger reconciliation",
+      "resolution": "the declarative prefix was corrected, its digest rebound, and all dedicated tests pass"
+    },
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "stage": "POST_RESULT_COMMIT",
+      "failure": "six pytest setup errors caused by Windows temporary-directory permissions",
+      "resolution": "the unchanged suite passed with a unique dedicated basetemp; no product bypass or wrapper was added"
+    }
+  ],
+  "self_audit": {
+    "decision": "CODEX_SELF_AUDIT_PASS",
+    "codex_self_audit_pass": true,
+    "checks": {
+      "objective_alignment": "PASS",
+      "scope": "PASS",
+      "authority": "PASS",
+      "source_admission_closure": "PASS",
+      "identity_and_taint": "PASS",
+      "contamination_disclosure": "PASS",
+      "evidence": "PASS",
+      "determinism": "PASS",
+      "data_role": "PASS",
+      "claim_strength": "PASS",
+      "rollback": "PASS",
+      "resource": "PASS",
+      "historical_fallback": "PASS",
+      "required_validation": "PASS",
+      "source_payload_non_access": "PASS",
+      "environment_source_replay_only": "PASS"
+    },
+    "reason": "The PH-D01A schema, admission plan, eight profiles, compiler, tests, and checked report classify all 83 admitted source locators exactly once and disclose public-evaluation and privileged-environment contamination without reading source payloads. Dedicated, focused, full historical unit, and integration validation pass without source-payload access or downstream-phase activity."
+  },
+  "owner_review_required": false,
+  "owner_review_mode": "CONTINUOUS_AUTHORIZATION_NO_ROUTINE_PAUSE",
+  "owner_decisions_required": [],
+  "owner_authorization": {
+    "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+    "digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+    "hard_gate_approval_delegated": false
+  },
+  "phase_invariants": {
+    "current_head_bound": true,
+    "result_commit_bound": true,
+    "uncommitted_phase_evidence_count": 0,
+    "profile_type_count": 6,
+    "profile_document_count": 8,
+    "source_count": 83,
+    "repository_candidate_file_count": 151,
+    "repository_admitted_source_count": 53,
+    "repository_excluded_non_source_count": 98,
+    "external_arc2_admitted_source_count": 5,
+    "external_raw_recording_admitted_source_count": 25,
+    "public_evaluation_consumed_source_count": 28,
+    "arc3_environment_source_count": 50,
+    "arc3_distribution_alias_count": 50,
+    "duplicate_source_assignment_count": 0,
+    "unassigned_admitted_source_count": 0,
+    "unknown_answer_visibility_count": 0,
+    "unknown_split_role_count": 0,
+    "policy_weight_admitted_source_count": 0,
+    "environment_source_non_replay_access_count": 0,
+    "source_payload_parse_count": 0,
+    "source_execution_count": 0,
+    "replay_execution_count": 0,
+    "content_manifest_frozen": false,
+    "acquisition_manifest_frozen": false,
+    "environment_manifest_frozen": false,
+    "trajectory_normalization_started": false,
+    "causal_ir_started": false,
+    "candidate_generation_started": false,
+    "bridge_implementation_file_count": 0,
+    "runtime_implementation_file_count": 0,
+    "llm_call_count": 0,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "network_submission_count": 0,
+    "kaggle_mutation_count": 0,
+    "preexisting_dirty_file_count": 32,
+    "preexisting_dirty_aggregate_sha256": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "next_phase": "PH-D01B",
+    "next_phase_started": false,
+    "routine_phase_pause_waived": true
+  },
+  "claim_allowed": [
+    "PH_D01A_SOURCE_INVENTORY_PASS",
+    "PH_D01A_CODEX_SELF_AUDIT_PASS"
+  ],
+  "claim_prohibited": [
+    "ARC3_TEACHER_SOURCE_FROZEN",
+    "SOURCE_CONTENT_MANIFEST_FROZEN",
+    "ACQUISITION_MANIFEST_FROZEN",
+    "ENVIRONMENT_MANIFEST_FROZEN",
+    "TRAJECTORY_NORMALIZATION_COMPLETE",
+    "DISTILLATION_IR_EXECUTABLE",
+    "HDS_DISTILLATION_PIPELINE_COMPLETE",
+    "HDS_CORPUS_PROCESSED",
+    "HDS_STRUCTURE_BUNDLE_FROZEN",
+    "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED",
+    "DISTILLED_RUNTIME_STRUCTURAL_READY",
+    "GENERIC",
+    "AGI",
+    "OFFICIAL_READY"
+  ],
+  "content_digest": "rev3-d01a-phase-state:00b10b0b2bdfe27506562a8ed1dd75fa9f3f0d463ee269084b5e26c4d0eab62a"
+}
