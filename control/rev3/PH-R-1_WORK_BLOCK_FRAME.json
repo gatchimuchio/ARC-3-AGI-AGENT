@@ -26,6 +26,18 @@
     "AUTHORITY_ORDER.md",
     "control/rev3/REV3_CURRENT_SELECTOR.json",
     "control/rev3/PH-R-1_WORK_BLOCK_FRAME.json",
+    "control/rev3/PH-R-1_PHASE_STATE.json",
+    "control/rev3/PH-R-1_EVIDENCE_ATTESTATION.json",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/changed_files.json",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/commands.json",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/failed_requirements.json",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/open_terms.json",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/phase_state.json",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/self_audit.json",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/summary.md",
+    "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/test_results.json",
     "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
     "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
     "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
@@ -47,7 +59,7 @@
   "approved_package_sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
   "base_commit": "d5d7b93769089f9de14f752e3678acea7b2198b3",
   "base_tree": "3d4ac0acb130b90d0da284a0507a876dcc284d46",
-  "content_digest": "rev3-work-block-frame:1f67eacd5ac07ead631722a0d661ab70fd031e0267f5f64b49eed743106646d0",
+  "content_digest": "rev3-work-block-frame:a43e974044c78cd7dad517f020eb1810419f03b769051f66711b94362bc100ac",
   "digest_excluded_fields": [
     "content_digest"
   ],
@@ -60,7 +72,7 @@
     "agent/**",
     "kaggle/**"
   ],
-  "frame_revision": 4,
+  "frame_revision": 5,
   "non_goals": [
     "PH-R00 implementation or authorization",
     "HDS distillation",
@@ -102,7 +114,7 @@
   "spec_sha256": "d51334e4709271c4ff3d9b46c6a4d625a25c55a7ee983a25bd6c827992ef3524",
   "status": "FRAME_LOCKED",
   "stop_condition": "OWNER_REVIEW_REQUIRED_WITH_PH_R00_NOT_STARTED",
-  "supersedes_content_digest": "rev3-work-block-frame:ff07a9198402e267712f1f5510032f07941bbfd7555e8caa8279c8491ed06aac",
+  "supersedes_content_digest": "rev3-work-block-frame:1f67eacd5ac07ead631722a0d661ab70fd031e0267f5f64b49eed743106646d0",
   "test_contract": [
     "dedicated PH-R-1 governance tests",
     "focused rev3 regression",
