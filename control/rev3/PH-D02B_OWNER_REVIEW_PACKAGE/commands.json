@@ -1,0 +1,119 @@
+{
+  "schema_version": "arc3-rev3-owner-review-commands-v1",
+  "phase_id": "PH-D02B",
+  "result_commit": "108c5462c2c73bdd95953e9e9b0cbbce68ac5d02",
+  "commands": [
+    {
+      "id": "CMD-D02B-001",
+      "command": "verify checked schema inventory, schema bytes, contract, positive examples, negative cases, typed references, semantic rules, and conformance report",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PH_D02B_SCHEMA_SET_PASS; 38 schemas; 38 valid records; 24 negative cases; DG-00/DG-01/DG-02/DG-14 pass at schema boundary"
+    },
+    {
+      "id": "CMD-D02B-002",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests/unit/test_schema_registry.py -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02b-schema-108c546",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "45 passed in 4.21s"
+    },
+    {
+      "id": "CMD-D02B-003",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02b-distillation-108c546",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "177 passed in 70.17s"
+    },
+    {
+      "id": "CMD-D02B-004",
+      "command": "pytest ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py -q",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "21 passed in 23.83s"
+    },
+    {
+      "id": "CMD-D02B-005",
+      "command": "build_phase_d02b_artifacts and compare all checked bytes",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PH_D02B_ARTIFACT_REBUILD_PASS 42"
+    },
+    {
+      "id": "CMD-D02B-006",
+      "command": "python distillation/src/hds_distill/scope_guard.py --project-root distillation --repository-root . --verify-report distillation/artifacts/reports/distillation_scope_audit.json",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; finding_count=0"
+    },
+    {
+      "id": "CMD-D02B-007",
+      "command": "ruff check distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D02B-008",
+      "command": "ruff format --check distillation/src/hds_distill/schema_registry.py distillation/tests/unit/test_schema_registry.py",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "2 files already formatted"
+    },
+    {
+      "id": "CMD-D02B-009",
+      "command": "mypy --strict --config-file distillation/pyproject.toml distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS; 12 source and test files"
+    },
+    {
+      "id": "CMD-D02B-010",
+      "command": "python -m compileall -q distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D02B-011",
+      "command": "pytest ARC-AGI-3-Agents/tests/unit -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02b-full-unit-108c546",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "709 passed in 455.84s"
+    },
+    {
+      "id": "CMD-D02B-012",
+      "command": "pytest ARC-AGI-3-Agents/tests/integration -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02b-integration-108c546",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "8 passed in 486.80s"
+    },
+    {
+      "id": "CMD-D02B-013",
+      "command": "verify eight canonical PH-D02A implementation and checked-vector SHA-256 values",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "8 frozen artifacts unchanged"
+    },
+    {
+      "id": "CMD-D02B-014",
+      "command": "python --version; ruff --version; mypy --version; pytest --version; verify pre-existing dirty-state aggregate",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "Python 3.12.13; ruff 0.12.7; mypy 1.17.1; pytest 8.4.1; exactly 32 pre-existing files unchanged"
+    },
+    {
+      "id": "CMD-D02B-015",
+      "command": "initial dedicated and full-distillation pytest runs using the inaccessible Windows default temporary root",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 1,
+      "result": "RESOLVED_ENVIRONMENT_FAILURE; 44 passed plus 1 setup error and 153 passed plus 24 setup errors; explicit basetemp reruns passed completely"
+    },
+    {
+      "id": "CMD-D02B-016",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02b-evidence-108c546",
+      "execution_stage": "PRE_EVIDENCE_SNAPSHOT",
+      "exit_code": 0,
+      "result": "214 passed in 112.61s"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "schema_version": "arc3-rev3-owner-review-changed-files-v1",
+  "phase_id": "PH-D02B",
+  "result_commit": "108c5462c2c73bdd95953e9e9b0cbbce68ac5d02",
+  "result_tree": "63e3a2e9e2f1f8953bec7c6294ed8034349f6d9e",
+  "result_commits": [
+    {
+      "commit": "bab4c9b742f5a3b74b20653e17dd4b7532f1cdc3",
+      "tree": "7e4b619d0d12244900923020c7cd057dc6791e53",
+      "purpose": "PH-D02B frame and preimplementation schema inventory"
+    },
+    {
+      "commit": "108c5462c2c73bdd95953e9e9b0cbbce68ac5d02",
+      "tree": "63e3a2e9e2f1f8953bec7c6294ed8034349f6d9e",
+      "purpose": "PH-D02B schema contract, validator, fixtures, checked artifacts, and tests"
+    }
+  ],
+  "changed_file_count": 46,
+  "changed_files": [
+    "analysis/rev3/ph_d02b_schema_preinventory.json",
+    "control/rev3/PH-D02B_WORK_BLOCK_FRAME.json",
+    "distillation/README.md",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "distillation/artifacts/reports/schema_conformance.json",
+    "distillation/artifacts/test_vectors/schema_examples/invalid_schema_bundles.json",
+    "distillation/artifacts/test_vectors/schema_examples/valid_schema_examples.json",
+    "distillation/input/README.md",
+    "distillation/input/schema_contract.json",
+    "distillation/schemas/README.md",
+    "distillation/schemas/approval_record.schema.json",
+    "distillation/schemas/arc2_teacher_case.schema.json",
+    "distillation/schemas/arc3_action_record.schema.json",
+    "distillation/schemas/arc3_teacher_trajectory.schema.json",
+    "distillation/schemas/boundary_record.schema.json",
+    "distillation/schemas/claim_record.schema.json",
+    "distillation/schemas/completion_state_registry.schema.json",
+    "distillation/schemas/counterexample_record.schema.json",
+    "distillation/schemas/counterfactual_intervention_plan.schema.json",
+    "distillation/schemas/coverage_report.schema.json",
+    "distillation/schemas/decision_record.schema.json",
+    "distillation/schemas/dependency_lock.schema.json",
+    "distillation/schemas/deterministic_derivation.schema.json",
+    "distillation/schemas/distillation_audit.schema.json",
+    "distillation/schemas/distillation_frame.schema.json",
+    "distillation/schemas/evidence_record.schema.json",
+    "distillation/schemas/failure_signature.schema.json",
+    "distillation/schemas/frozen_artifact_manifest.schema.json",
+    "distillation/schemas/gate_result.schema.json",
+    "distillation/schemas/hds_causal_record.schema.json",
+    "distillation/schemas/hypothesis_ir.schema.json",
+    "distillation/schemas/interpretation_hypothesis.schema.json",
+    "distillation/schemas/intervention_result.schema.json",
+    "distillation/schemas/llm_capture_record.schema.json",
+    "distillation/schemas/model_record.schema.json",
+    "distillation/schemas/normalization_certificate.schema.json",
+    "distillation/schemas/open_term_record.schema.json",
+    "distillation/schemas/operator_registry.schema.json",
+    "distillation/schemas/promotion_decision.schema.json",
+    "distillation/schemas/raw_observation.schema.json",
+    "distillation/schemas/resource_profile.schema.json",
+    "distillation/schemas/rule_atom.schema.json",
+    "distillation/schemas/rule_family.schema.json",
+    "distillation/src/hds_distill/__init__.py",
+    "distillation/src/hds_distill/schema_registry.py",
+    "distillation/tests/unit/test_schema_registry.py"
+  ],
+  "excluded_preexisting_dirty_state": {
+    "tracked_p22_cv_generated_file_count": 32,
+    "aggregate_sha256_before_and_after_validation": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "mutation": "NONE",
+    "staging": "NONE"
+  }
+}
