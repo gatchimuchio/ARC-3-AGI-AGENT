@@ -62,7 +62,7 @@ def _valid_selection() -> Rev3ProductionSelection:
 
 
 def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
-    assert REV3_ACTIVE_PHASE == "PH-D01B"
+    assert REV3_ACTIVE_PHASE == "PH-D02A"
     assert REV3_PHASE_ORDER[0] == "PH-R00"
     assert REV3_PHASE_ORDER.index("PH-D14") < REV3_PHASE_ORDER.index(
         "PH-B00"
@@ -170,7 +170,7 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     )
     expected = {
         "AGENTS.md": (
-            "fee6b98a2638a7c01c77b81cf10f1a2b22a2228e2b6f1db0857060804c7a336f"
+            "1e9d84f80cff487caf67619d9f44f436459d4e859711e2385f48fbf88ab82393"
         ),
         (
             "docs/strategy/"
@@ -213,19 +213,19 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     claimed = str(body.pop("content_digest"))
     assert claimed == "rev3-authority-input-manifest:" + digest_object(body)
     assert manifest["missing_required_authority_count"] == 0
-    assert manifest["current_phase"] == "PH-D01B"
-    assert manifest["phase_effect"] == "PH_D01B_INPUT_SET_CLOSED"
+    assert manifest["current_phase"] == "PH-D02A"
+    assert manifest["phase_effect"] == "PH_D02A_INPUT_SET_CLOSED"
     assert manifest["phase_transition"] == {
         "path": (
             "control/rev3/PHASE_TRANSITIONS/"
-            "PH-D01A_TO_PH-D01B.json"
+            "PH-D01B_TO_PH-D02A.json"
         ),
         "sha256": (
-            "35a6ec52b77ec2ebb4e77473709444226357465078a35729e58b585218b70190"
+            "613b795cf09eba08cdb9911ea1db4e1b7eea9a9cd5e660c99e2bb8382f469266"
         ),
         "content_digest": (
             "rev3-phase-transition:"
-            "395e4e0090a5e1c67c6e9050f8a104903a21f3f9bb6b1612d69cbeb04c06ed6d"
+            "54ad0fcfaf2a33425f2c2744dbc391461763c35e0f4aae31cf3b6764cd7e1abd"
         ),
     }
     approval = _json(
@@ -310,6 +310,29 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
         "078fc8e6273bc4ab86888f3b51d5db4f48be71e7d1f787f4607706fded305ebe"
     )
     assert transition["to_phase_id"] == "PH-D01B"
+    assert transition["hard_gates_crossed"] == []
+    transition = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PHASE_TRANSITIONS"
+        / "PH-D01B_TO_PH-D02A.json"
+    )
+    transition_body = dict(transition)
+    for excluded in transition["digest_excluded_fields"]:
+        transition_body.pop(excluded)
+    assert transition["content_digest"] == (
+        "rev3-phase-transition:" + digest_object(transition_body)
+    )
+    assert transition["from_phase_state_digest"] == (
+        "rev3-d01b-phase-state:"
+        "68eea37dcce3d09d1e21b1a43ef5d92b091f1960ee5fffb42507c07e0fe25220"
+    )
+    assert transition["from_phase_artifact_manifest_digest"] == (
+        "rev3-d01b-owner-review-artifact-manifest:"
+        "71bb9d735a0b608ded78397e8d1620e0140aa7e27de000df7117ab12ca3069a8"
+    )
+    assert transition["to_phase_id"] == "PH-D02A"
     assert transition["hard_gates_crossed"] == []
 
 

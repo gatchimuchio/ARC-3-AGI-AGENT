@@ -5,7 +5,8 @@ may accept and rejected all historical S5/P22 capability paths as parents,
 active policies, or fallbacks. PH-D00A froze dependencies and authority.
 PH-D00B bootstrapped the isolated distillation scope. PH-D01A inventoried
 source dialect, split, answer visibility, use, and contamination. PH-D01B
-freezes content, acquisition, environment, and run manifests only; none of
+froze content, acquisition, environment, and run manifests. PH-D02A fixes
+canonical serialization and logical/physical digest contracts only; none of
 these phases constructs or activates an AGI runtime.
 """
 
@@ -17,7 +18,7 @@ from typing import Final
 REV3_STRATEGY_ID: Final = (
     "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
 )
-REV3_ACTIVE_PHASE: Final = "PH-D01B"
+REV3_ACTIVE_PHASE: Final = "PH-D02A"
 REV3_PHASE_ORDER: Final = (
     "PH-R00",
     "PH-D00A",

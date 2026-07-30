@@ -124,8 +124,9 @@ PH-R00 [OWNER_APPROVED_PASS]
 → PH-D00A [CODEX_SELF_AUDIT_PASS]
 → PH-D00B [CODEX_SELF_AUDIT_PASS]
 → PH-D01A [CODEX_SELF_AUDIT_PASS]
-→ PH-D01B [ACTIVE]
-→ PH-D02A ... PH-D14
+→ PH-D01B [CODEX_SELF_AUDIT_PASS]
+→ PH-D02A [ACTIVE]
+→ PH-D02B ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
@@ -609,8 +610,10 @@ PH-R00はOwner ApprovalRecordにより採択済みです。
 PH-D00Aは`DEPENDENCY_LOCK_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
 PH-D00Bは`DISTILLATION_SCOPE_GUARD_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
 PH-D01Aは`PH_D01A_SOURCE_INVENTORY_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
-Active phaseはPH-D01Bです。
-一Work BlockでPH-D01Bだけを実施してください。
+PH-D01Bは`PH_D01B_MANIFEST_FREEZE_PASS`、
+`ARC3_TEACHER_SOURCE_FROZEN`かつ`CODEX_SELF_AUDIT_PASS`です。
+Active phaseはPH-D02Aです。
+一Work BlockでPH-D02Aだけを実施してください。
 
 最初に、
 - repository root
@@ -621,31 +624,31 @@ Active phaseはPH-D01Bです。
 - current phase state
 を確認してください。
 
-次にPH-D01B WorkBlockFrameを作成し、PH-D01Aでadmitしたsourceについて、
-内容同一性、取得記録、実行環境、run記録を分離して固定してください。
+次にPH-D02A WorkBlockFrameを作成し、全schema共通の決定論的表現を
+先に固定してください。
 
-成果物は次の四契約です。
+実装対象は次だけです。
 
-- `SourceContentManifest`
-- `AcquisitionRecord`
-- `EnvironmentManifest`
-- `RunManifest`
+- canonical JSON
+- Unicode NFC
+- `confidence_ppm`
+- content-derived ID生成規則
+- ID／digest／timestamp fieldのdigest除外規則
+- logical／physical digest分離
+- canonical NPZ／ZIP packaging
+- raw／canonical trajectory digest分離
+- canonical test vectors
 
-repository-relative POSIX path、file SHA-256／size、directory Merkle root、
-upstream identity、split／answer visibility／development usage／contamination、
-ARC3 wheel hash、Python／OS／dependency lock、source read-only状態、
-environment isolation reportを明示してください。
+Python process、path、timeを変えてもlogical digestが一致し、NaN／Infを拒否し、
+unordered inputを正規化し、canonical test vectorを独立processで3回生成して
+一致することを試験してください。`DG-06`と`DG-07`を証拠へ固定してください。
 
-同一内容を別path／別時刻で取得してもcontent digestが一致し、
-mtime／created_at変更でcontent digestが不変であり、source改変でdownstream bindingが
-fail closedになることを試験してください。ARC3 replay environment hashは、
-admitted environment sourceとwheel／interpreter／dependency stateを完全にbindしてください。
+PH-D02Bの38 schema／HDS state／Approval、PH-D02CのTyped Causal IR／interpreter／
+verifier、trajectory normalization、candidate generation、Rule promotion、
+Bridge実装、AGI Runtime実装、P22改善、locked final、official、Kaggleへ
+PH-D02A内で進んではいけません。
 
-PH-D02Aの全schema共通canonical serialization、trajectory normalization、Causal IR、
-candidate generation、Rule promotion、Bridge実装、AGI Runtime実装、P22改善、
-locked final、official、KaggleへPH-D01B内で進んではいけません。
-
-PH-D01Bの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
+PH-D02Aの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
 現在のOwner連続進行許可に従い、停止せず次の通常phaseを別Work Blockとして開始してください。
 Codex自身がRule採否、hard gate承認、official承認を生成してはいけません。
 ```
