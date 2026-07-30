@@ -11,9 +11,10 @@
 - 日付: `2026-07-31`
 - 状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- PH-R-1状態: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
-- 現在作業: `PH-R00_AUTHORIZATION_PENDING`
-- Phase guard: `PH-R00 = SUSPEND`
+- PH-R-1状態: `OWNER_APPROVED_PASS`
+- 現在作業: `PH-R00_CURRENT_HEAD_REBIND`
+- Active phase: `PH-R00`
+- PH-R00状態: `IN_PROGRESS`
 - 原則: HDS構造データをOwner承認付きでfreezeするまで、AGI能力実装へ進まない
 
 ---
@@ -90,7 +91,7 @@ CODEX_SELF_AUDIT_PASS
 OWNER_REVIEW_REQUIRED
 ```
 
-監査是正はOwnerが対象明示承認し、PH-R-1でstrategyを導入した。PH-R00は別のOwner判断まで`SUSPEND`である。
+監査是正はOwnerが対象明示承認し、PH-R-1でstrategyを導入した。PH-R-1はexact evidenceへbindされたOwner承認で閉じ、PH-R00の対象明示Owner判断も成立している。
 
 ---
 
@@ -99,9 +100,8 @@ OWNER_REVIEW_REQUIRED
 ### Current status
 
 ```text
-CODEX_IMPLEMENTATION_COMPLETE
-OWNER_REVIEW_REQUIRED
-PH-R00_NOT_STARTED
+OWNER_APPROVED_PASS
+PH-R00_IN_PROGRESS
 ```
 
 ### Entry
@@ -126,11 +126,11 @@ PH-R00_NOT_STARTED
 
 ```text
 STRATEGY_INSTALLATION_COMPLETE
-OWNER_REVIEW_REQUIRED
-PH-R00_NOT_STARTED
+OWNER_APPROVED_PASS
+PH-R00_AUTHORIZED
 ```
 
-CodexはPH-R-1の完了だけでPH-R00を開始しない。PH-R00開始には対象を指定したOwner判断が必要である。
+PH-R00開始判断は、PH-R-1のexact evidence、OwnerDecisionCapture、ApprovalRecordへbindされて成立した。
 
 ## PH-R00 — Current HEAD Rebind / Infrastructure Freeze
 
@@ -190,7 +190,7 @@ next_phase = PH-D00A
 owner_approval = required
 ```
 
-Codexは`OWNER_APPROVED_PASS`を設定せず、PH-D00Aを自動開始しない。
+CodexはPH-R00の全DoD、required validation、failed requirement count 0、exact evidence bindを満たした場合だけ、standing authorizationを機械的に適用してPH-D00A entryを記録する。失敗または未証明gateでは停止する。
 
 ---
 

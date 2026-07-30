@@ -17,9 +17,10 @@
 - 日付: `2026-07-31`
 - 仕様状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- PH-R-1状態: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
-- 現在作業: `PH-R00_AUTHORIZATION_PENDING`
-- Phase guard: `PH-R00 = SUSPEND`
+- PH-R-1状態: `OWNER_APPROVED_PASS`
+- 現在作業: `PH-R00_CURRENT_HEAD_REBIND`
+- Active phase: `PH-R00`
+- PH-R00状態: `IN_PROGRESS`
 - 最上位目的: HDSで教師素材から構造データを先に蒸留・凍結し、その成果物だけを長期能力の上流入力として、未知ARC3環境を汎用自律完遂する工学的AGI Instanceを構築する
 
 ---
@@ -60,8 +61,9 @@ AGI能力実装・P22方策最適化・公式提出準備を進めてはなら�
 ```
 
 `OWNER_APPROVED_REV3_CORRECTION`とStrategy InstallationはPH-R-1で成立した。
-ただしPH-R00開始は別の対象明示Owner判断を必要とし、現在
-`OWNER_AUTHORIZED_PH-R00 = NOT_ESTABLISHED`である。
+PH-R00開始の対象明示Owner判断もexact PH-R-1 evidenceへbindされ、
+`OWNER_AUTHORIZED_PH-R00 = ESTABLISHED`である。これはPH-R00だけを許可し、
+HDS蒸留、Bridge、Runtime、外部操作を許可しない。
 
 既に実装されたP16〜P21は廃棄しない。  
 それらは、蒸留成果物を受け取るための**基盤候補**として凍結する。
@@ -1177,11 +1179,11 @@ PRE_DISTILLATION_INFRASTRUCTURE_BASELINE
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = NONE
-Current work = PH-R00_AUTHORIZATION_PENDING
-PH-R-1 = CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED
-PH-R00 = SUSPEND
-PH-R00 Owner authorization = NOT_ESTABLISHED
+Active phase = PH-R00
+Current work = PH-R00_CURRENT_HEAD_REBIND
+PH-R-1 = OWNER_APPROVED_PASS
+PH-R00 = IN_PROGRESS
+PH-R00 Owner authorization = ESTABLISHED
 DistilledInitialStateBundle = NOT_FROZEN
 Runtime activation = SUSPEND
 ```
@@ -1209,7 +1211,7 @@ ApprovalRecord =
 owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8
 ```
 
-この承認範囲は監査是正採択とPH-R-1開始だけであり、PH-R00または将来artifactの採否を含まない。
+この導入承認の範囲は監査是正採択とPH-R-1開始だけである。PH-R00 entryは別のOwnerDecisionCapture／ApprovalRecordへ固定され、将来artifactの事前採択を含まない。
 
 監査前のPH-R00〜PH-D03A state、transition、ApprovalRecord、review packageは削除しないが、`HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE`とする。是正後のphase passまたはactivation根拠へ再利用しない。
 

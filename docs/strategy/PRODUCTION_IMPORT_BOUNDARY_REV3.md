@@ -1,7 +1,10 @@
 # ARC3 rev3 Production Import Boundary
 
 - phase: `PH-R00`
-- boundary version: `arc3-rev3-production-import-boundary-v1`
+- phase status: `IN_PROGRESS`
+- boundary version: `arc3-rev3-production-import-boundary-v2`
+- source commit: `4dbb65c5d45cca3402f326b251c1de6ac4a2e554`
+- source tree: `44ccb73437480daeaab71e6cb3119b5e6bc5d485`
 - active production runtime: none
 - capability claim: `NOT_ESTABLISHED`
 
@@ -82,11 +85,15 @@ Track B/Aでdistilled ABIへ接続する前にcodec境界を再監査する。
 PH-R00ではrev3 active runtimeを0とし、production selectionを上記guard以外から
 成立させないことで、historical dependency countを0に保つ。
 
+PH-R00はこの境界と既存基盤候補の回帰を検証するだけであり、
+`DISTILLED_INITIAL_STATE_BUNDLE`、runtime artifact、Owner approval digestを
+生成しない。したがって、正当なproduction selectionはPH-R00中も成立しない。
+
 ## Negative guarantees
 
 - S5 fallbackを追加しない。
 - compiled policyをdistilled assetと再分類しない。
 - P22 scoreをPH-R00 acceptanceへ使用しない。
-- Owner approvalをCodexが生成しない。
+- Owner判断を推測または事前採択しない。
 - missing digestをdefault値で補わない。
-
+- local notebook buildをofficial実行またはKaggle submissionと扱わない。

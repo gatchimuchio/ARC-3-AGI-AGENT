@@ -1,5 +1,18 @@
 {
-  "active_phase": null,
+  "schema_version": "arc3-rev3-current-authority-manifest-v2",
+  "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
+  "strategy_status": "OWNER_APPROVED",
+  "installation_status": "INSTALLED",
+  "installation_phase_id": "PH-R-1",
+  "installation_phase_status": "OWNER_APPROVED_PASS",
+  "active_phase": "PH-R00",
+  "current_work_class": "PH-R00_CURRENT_HEAD_REBIND",
+  "ph_r00_status": "IN_PROGRESS",
+  "ph_r00_owner_authorization": "ESTABLISHED",
+  "source_binding": {
+    "commit": "4dbb65c5d45cca3402f326b251c1de6ac4a2e554",
+    "tree": "44ccb73437480daeaab71e6cb3119b5e6bc5d485"
+  },
   "approved_correction": {
     "approval_artifact_digest": "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8",
     "decision_capture_digest": "sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd",
@@ -8,21 +21,42 @@
     "target_artifact_digest": "sha256:3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219",
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
-  "content_digest": "rev3-current-authority-manifest:1f88716d99afff197ffdaa13f6611c130ab8b233fd797ac2fff601734bd8c17c",
-  "current_work_class": "PH-R00_AUTHORIZATION_PENDING",
-  "digest_excluded_fields": [
-    "content_digest"
-  ],
+  "phase_entry_approval": {
+    "approval_artifact_digest": "owner-approval-record:fcfc55bcd7e1aa8b28101870cab844679014a6338cb5a7899a379e0241f290c9",
+    "decision_capture_digest": "sha256:bfd1ffe3ed96405b3a4b0d6b3ea8e5dfd146f68c31f6fd0d20ecbc0f5ae70ba0",
+    "from_phase": "PH-R-1",
+    "target_artifact_digest": "sha256:1f03eb8c4ba134803ccb82323fa1cefef59706066f854c64c4f21717b32051a4",
+    "target_evidence_commit": "3fec094d64d599681a5bb7c10ebda8163747dc10",
+    "to_phase": "PH-R00"
+  },
+  "standing_authorization": {
+    "content_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+    "external_irreversible_actions": "EXCLUDED_REQUIRES_SEPARATE_EXPLICIT_EXECUTION_INSTRUCTION"
+  },
+  "current_work_block": {
+    "content_digest": "rev3-work-block-frame:ea74fe814e84b0e3ca99c27360815870eb6804b5b199e2b4af3a606b6c7a80c8",
+    "entry_transition_digest": "rev3-phase-transition:d0501f919c124bfef2f75694323aff0a5809d921630705c031d4131534d8b449",
+    "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json"
+  },
+  "runtime_gate": {
+    "distilled_initial_state_bundle_status": "NOT_FROZEN",
+    "runtime_activation_status": "SUSPEND"
+  },
+  "historical_evidence_policy": {
+    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
+    "eligible_for_current_activation": false,
+    "preserve": true
+  },
   "entries": [
     {
       "path": "AGENTS.md",
       "role": "EXECUTION_CONTROL",
-      "sha256": "a6a22ae9350280390b399ae85e4bc6fac336690580b9140e6f782468be38a9a0"
+      "sha256": "5c91e2e59867a2e70cf406fd9c5cce124885da4cb27f2635a4a4cc1cd6fee015"
     },
     {
       "path": "AUTHORITY_ORDER.md",
       "role": "AUTHORITY_PLANES",
-      "sha256": "79f8331b8ada83f796f208d8483e02bf24a00baff406038307dd467deb2625db"
+      "sha256": "6ea69490bd7e3f29b189147d13ff8e091aca16874ced3b7ecd36a29baf7154f4"
     },
     {
       "path": "docs/architecture/AGI三主体統合設計正本_v0_2.md",
@@ -42,7 +76,7 @@
     {
       "path": "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
       "role": "NORMATIVE_ARC3_STRATEGY",
-      "sha256": "c4bd0da924682c1358609ce9075b1db5045245504d2368139719b88817e51efc"
+      "sha256": "403c8637c01fdcb3e2318f847c38497ac83a10a904f1ee3dcd74b9b68db75ac0"
     },
     {
       "path": "docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md",
@@ -52,7 +86,7 @@
     {
       "path": "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
       "role": "NORMATIVE_ARC3_ROADMAP",
-      "sha256": "76f60950339305a48e0d51e0ca9a4f069fd11716b2744bc6272b0518eb9c2e73"
+      "sha256": "de236c91cbd26dec28382c438625a6961ac7f7213dab8420775cfb6fa1e8324c"
     },
     {
       "path": "docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
@@ -72,7 +106,7 @@
     {
       "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
       "role": "STRATEGY_INDEX",
-      "sha256": "16b782131ac6a6d82adaef30e4c8956cdd225eb1521157dbc865c26d41225ba4"
+      "sha256": "6a75056af73ff34306a4858ab8bcfea248630f0c3a23774c7e0ad75744cad8e5"
     },
     {
       "path": "docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md",
@@ -80,9 +114,29 @@
       "sha256": "59545ccfc71dcfd52c7245b4c17a89559d3cb2e5ab9007e4549effb561189fcd"
     },
     {
+      "path": "docs/strategy/REV3_STRATEGY_REBASELINE.md",
+      "role": "PH_R00_REBASELINE",
+      "sha256": "6dfd42d00bb71ef7b4d19ab5ef76fc6cc526c8f4598d3fc2d88b94a0ede84376"
+    },
+    {
+      "path": "docs/strategy/ASSET_CLASSIFICATION_REV3.json",
+      "role": "PH_R00_ASSET_CLASSIFICATION",
+      "sha256": "6f1a79faad2bb0eb32e4f824b3f395b5e77ef1ab6100a279568c3b7e26f26ed6"
+    },
+    {
+      "path": "docs/strategy/PRODUCTION_IMPORT_BOUNDARY_REV3.md",
+      "role": "PH_R00_PRODUCTION_BOUNDARY",
+      "sha256": "a71f31eba7d0a761d60c68e098cceb3ae946b15169245521e0a887eceed6f0ea"
+    },
+    {
+      "path": "analysis/rev3/pre_distillation_infrastructure_baseline.json",
+      "role": "PH_R00_BASELINE",
+      "sha256": "a3c49d2e5eecca4d8f4b50091f94bb2e3e28fc99e4c25fb0aaffc90ee793cff9"
+    },
+    {
       "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
       "role": "GOVERNANCE_CONTRACT",
-      "sha256": "aec793f956d3c721bc15676863e4d982c47611a046edeb70e162a441e57d3735"
+      "sha256": "407223f5c81e39b1d68cf8ecb239ff4b669aec10105bd360b40117646582f09b"
     },
     {
       "path": "docs/strategy/contracts/HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json",
@@ -131,8 +185,13 @@
     },
     {
       "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json",
-      "role": "GOVERNANCE_SCHEMA",
+      "role": "HISTORICAL_GOVERNANCE_SCHEMA",
       "sha256": "b975b852f10a2b1652bfd74f0398bff24427d3d05f0a736eb35c82864ce868b2"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V4.json",
+      "role": "CURRENT_GOVERNANCE_SCHEMA",
+      "sha256": "82563ba975d92ce0baa55b6a038df1386dde8fc80ce9dfa156644f7acfcff265"
     },
     {
       "path": "docs/strategy/contracts/CLAIM_REGISTRY_REV3.json",
@@ -142,27 +201,87 @@
     {
       "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
       "role": "CURRENT_SELECTOR",
-      "sha256": "9a63f83ccb15b8a50cf865679279e40b56069372b231249b2963241c4a159ea9"
+      "sha256": "8f0a5ba1d228f17711f911288d38e622dc0259a3bcea28526b63a333f783e738"
+    },
+    {
+      "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+      "role": "OWNER_STANDING_AUTHORIZATION",
+      "sha256": "c4bdbe9dac72f2a2148a0217e6c637817a6434854e063e395e4a9abc93c5fcbe"
+    },
+    {
+      "path": "control/rev3/OWNER_DECISION_CAPTURES/PH-R-1_TO_PH-R00_20260731.json",
+      "role": "PHASE_ENTRY_OWNER_DECISION",
+      "sha256": "0cd5740266a0ceb001ac65bb9df534825c52a89e7b2a1e97df6081da1aa7cd54"
+    },
+    {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R-1_TO_PH-R00_20260731.json",
+      "role": "PHASE_ENTRY_OWNER_APPROVAL",
+      "sha256": "84f49b35e19dd0e573e5b16679d6231516ea45cad752aa2035f7cfa634afc971"
+    },
+    {
+      "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
+      "role": "CURRENT_WORK_BLOCK_FRAME",
+      "sha256": "a3d62e8507be806fb3f33d7d0482b733212e7a43c147dee4809ede38686f2b2e"
+    },
+    {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-R-1_TO_PH-R00.json",
+      "role": "CURRENT_PHASE_ENTRY_TRANSITION",
+      "sha256": "eb886c002bcf22d9c5630b6e2541edf41e301a615d14c91be40024cc36aaf56d"
+    },
+    {
+      "path": "control/rev3/PH-R-1_PHASE_STATE.json",
+      "role": "PREDECESSOR_PHASE_STATE",
+      "sha256": "72100efd321cb9ce17f7b1c4ccbc77c23d229c2880ec44f5bd184e6a7b18d6ff"
+    },
+    {
+      "path": "control/rev3/PH-R-1_EVIDENCE_ATTESTATION.json",
+      "role": "PREDECESSOR_EVIDENCE_ATTESTATION",
+      "sha256": "c006e9a105c58598a5c83824af4771d109ae7405ccc2a48604d417ad452c4cce"
+    },
+    {
+      "path": "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "PREDECESSOR_EVIDENCE_PAYLOAD",
+      "sha256": "1f03eb8c4ba134803ccb82323fa1cefef59706066f854c64c4f21717b32051a4"
     },
     {
       "path": "control/rev3/OWNER_DECISION_CAPTURES/REV3_DOC_FIX_TO_PH-R-1_20260731.json",
-      "role": "ENTRY_OWNER_DECISION",
+      "role": "INSTALLATION_ENTRY_OWNER_DECISION",
       "sha256": "a8cf7209cba2b713304d7e8f187f5cb495e653ae4b85fc8b414fcce6f4ad4f54"
     },
     {
       "path": "control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json",
-      "role": "ENTRY_OWNER_APPROVAL",
+      "role": "INSTALLATION_ENTRY_OWNER_APPROVAL",
       "sha256": "ef49853cff3e0aea1f2601a5ecf45ede6ca0f7dee039414e58e6ce8afe15ab26"
     },
     {
       "path": "control/rev3/PH-R-1_WORK_BLOCK_FRAME.json",
-      "role": "WORK_BLOCK_FRAME",
+      "role": "INSTALLATION_WORK_BLOCK_FRAME",
       "sha256": "44564bd8c8bd47304a991aee6224c448aaeb6cf217898e39edc0ea84feae8282"
     },
     {
       "path": "control/rev3/REV3_DOC_FIX_EVIDENCE_ATTESTATION.json",
-      "role": "CORRECTION_EVIDENCE",
+      "role": "CORRECTION_EVIDENCE_ATTESTATION",
       "sha256": "245abb9b38ae66c17375ebaa76945e679ada79d5ad96479c7ef3b17ad19c27af"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "role": "GOVERNANCE_RUNTIME_GUARD",
+      "sha256": "f002d22477588e47394734e325a78a8f7a0584ce6e94bb57db062049cb147543"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "role": "GOVERNANCE_TEST",
+      "sha256": "c283b3b017f7c73dc04f7a7537641aceb2f2d857d202d19d01e317768bb4f435"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+      "role": "GOVERNANCE_TEST",
+      "sha256": "83194ecf757d2febb1da5c73ee97eb7a9e2fd03e16a9ea81cfd2fc959e940168"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_kaggle_notebook_contract.py",
+      "role": "LOCAL_NOTEBOOK_CONTRACT_TEST",
+      "sha256": "95d75a2ed395628eeffd6823732b46e1596b570bdfbc0cad99fbbef6ee1dca4f"
     },
     {
       "path": "scripts/package_rev3_strategy.py",
@@ -172,7 +291,17 @@
     {
       "path": "scripts/validate_rev3_governance.py",
       "role": "GOVERNANCE_TOOL",
-      "sha256": "a68a6e17cf9bd8895356784f78266b3811807b0c4f86e1ff0ce59ccc4cfdb0b6"
+      "sha256": "cc871e04d588dbda277b7379393c61e64f12ca18da85d356a3a835d30da9ebe6"
+    },
+    {
+      "path": "scripts/build_kaggle_submission.py",
+      "role": "LOCAL_NOTEBOOK_BUILD_TOOL",
+      "sha256": "93c803a4656ad0e77fc9aca43892cee7ca022a9d515d9a013061cf764ab04363"
+    },
+    {
+      "path": "scripts/validate_kaggle_submission.py",
+      "role": "LOCAL_NOTEBOOK_VALIDATION_TOOL",
+      "sha256": "d60a7bfbf96ffe423fc25185c20b188e6d27ef54a4ce334c3cfa668a3c93d3f9"
     },
     {
       "path": "artifacts/rev3/arc3_hds_distillation_first_strategy_rev3_corrected.zip",
@@ -180,22 +309,9 @@
       "sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c"
     }
   ],
-  "entry_count": 33,
-  "historical_evidence_policy": {
-    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
-    "eligible_for_current_activation": false,
-    "preserve": true
-  },
-  "installation_phase_id": "PH-R-1",
-  "installation_phase_status": "CODEX_IMPLEMENTATION_COMPLETE",
-  "installation_status": "INSTALLED",
-  "ph_r00_owner_authorization": "NOT_ESTABLISHED",
-  "ph_r00_status": "SUSPEND",
-  "runtime_gate": {
-    "distilled_initial_state_bundle_status": "NOT_FROZEN",
-    "runtime_activation_status": "SUSPEND"
-  },
-  "schema_version": "arc3-rev3-current-authority-manifest-v1",
-  "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
-  "strategy_status": "OWNER_APPROVED"
+  "entry_count": 52,
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-current-authority-manifest:098235d52f00e6451c65f3531e23f89a67ad5fadad91f9aa913d9a7208a10eee"
 }

@@ -19,6 +19,7 @@ from arc3_agi_agent.rev3_governance import (
     REV3_CURRENT_WORK_CLASS,
     REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS,
     REV3_INSTALLATION_STATUS,
+    REV3_PH_R00_OWNER_AUTHORIZATION,
     REV3_PH_R00_STATUS,
     REV3_PH_R1_STATUS,
     REV3_PHASE_ORDER,
@@ -73,10 +74,11 @@ def _valid_selection() -> Rev3ProductionSelection:
 def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
     assert REV3_STRATEGY_STATUS == "OWNER_APPROVED"
     assert REV3_INSTALLATION_STATUS == "INSTALLED"
-    assert REV3_CURRENT_WORK_CLASS == "PH-R00_AUTHORIZATION_PENDING"
-    assert REV3_ACTIVE_PHASE is None
-    assert REV3_PH_R1_STATUS == "CODEX_IMPLEMENTATION_COMPLETE"
-    assert REV3_PH_R00_STATUS == "SUSPEND"
+    assert REV3_CURRENT_WORK_CLASS == "PH-R00_CURRENT_HEAD_REBIND"
+    assert REV3_ACTIVE_PHASE == "PH-R00"
+    assert REV3_PH_R1_STATUS == "OWNER_APPROVED_PASS"
+    assert REV3_PH_R00_STATUS == "IN_PROGRESS"
+    assert REV3_PH_R00_OWNER_AUTHORIZATION == "ESTABLISHED"
     assert REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS == "NOT_FROZEN"
     assert REV3_RUNTIME_ACTIVATION_STATUS == "SUSPEND"
     assert REV3_PHASE_ORDER[0] == "PH-R-1"
@@ -103,10 +105,12 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert selector["strategy_status"] == REV3_STRATEGY_STATUS
     assert selector["installation_status"] == REV3_INSTALLATION_STATUS
     assert selector["current_work_class"] == REV3_CURRENT_WORK_CLASS
-    assert selector["active_phase"] is None
+    assert selector["active_phase"] == REV3_ACTIVE_PHASE
     assert selector["ph_r00_status"] == REV3_PH_R00_STATUS
     assert selector["ph_r1_status"] == REV3_PH_R1_STATUS
-    assert selector["ph_r00_owner_authorization"] == "NOT_ESTABLISHED"
+    assert selector["ph_r00_owner_authorization"] == (
+        REV3_PH_R00_OWNER_AUTHORIZATION
+    )
     assert selector["distilled_initial_state_bundle_status"] == (
         REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS
     )
@@ -279,15 +283,13 @@ def test_ph_r1_schemas_reject_unbound_or_self_referential_state() -> None:
     ] == ["approval_artifact_digest"]
 
     selector_schema = _json(
-        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V3.json"
+        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V4.json"
     )
     assert selector_schema["additionalProperties"] is False
-    assert selector_schema["properties"]["active_phase"]["type"] == (
-        "null"
-    )
+    assert selector_schema["properties"]["active_phase"]["const"] == "PH-R00"
     assert selector_schema["properties"][
         "ph_r00_owner_authorization"
-    ]["const"] == "NOT_ESTABLISHED"
+    ]["const"] == "ESTABLISHED"
 
     standing_schema = _json(
         contract_root / "OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json"
@@ -390,12 +392,12 @@ def test_rev3_corrected_documents_close_audit_findings() -> None:
     )
     assert "Strategy = OWNER_APPROVED" in combined
     assert "Installation = INSTALLED" in combined
-    assert "Current work = PH-R00_AUTHORIZATION_PENDING" in combined
-    assert "PH-R00 Owner authorization = NOT_ESTABLISHED" in combined
+    assert "Current work = PH-R00_CURRENT_HEAD_REBIND" in combined
+    assert "PH-R00 Owner authorization = ESTABLISHED" in combined
     assert "PROPOSED_PENDING_OWNER_APPROVAL" not in combined
     assert "NOT_INSTALLED" not in combined
     for required in (
-        "PH-R00 = SUSPEND",
+        "PH-R00 = IN_PROGRESS",
         "Normative Authority",
         "Execution Control",
         "Implementation Commit",
@@ -1895,7 +1897,8 @@ def test_ph_d02b_artifact_manifest_binds_snapshot_bytes() -> None:
         ) == artifact["sha256"]
 
 
-def test_asset_classification_and_frame_are_content_bound() -> None:
+def test_ph_r00_current_rebind_and_historical_evidence_are_content_bound(
+) -> None:
     classification = _json(
         REPOSITORY_ROOT
         / "docs"
@@ -1912,6 +1915,16 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
     )
     assert classification["rev3_active_runtime_count"] == 0
     assert classification["historical_fallback_count"] == 0
+    assert classification["schema_version"] == (
+        "arc3-rev3-asset-classification-v2"
+    )
+    assert classification["phase_status"] == "IN_PROGRESS"
+    assert classification["source_commit"] == (
+        "4dbb65c5d45cca3402f326b251c1de6ac4a2e554"
+    )
+    assert classification["source_tree"] == (
+        "44ccb73437480daeaab71e6cb3119b5e6bc5d485"
+    )
     classes = {
         item["classification"]: item
         for item in classification["classifications"]
@@ -1933,7 +1946,35 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
     )
     assert "analysis/autonomous_completion/**" in frame["forbidden_files"]
     assert frame["resource_budget"]["official_access_count"] == 0
+    assert frame["resource_budget"]["network_submission_count"] == 0
+    assert frame["resource_budget"]["maximum_new_runtime_capabilities"] == 0
+    assert frame["base_commit"] == classification["source_commit"]
+    assert frame["base_tree"] == classification["source_tree"]
 
+    transition = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PHASE_TRANSITIONS"
+        / "PH-R-1_TO_PH-R00.json"
+    )
+    transition_body = dict(transition)
+    for excluded in transition["digest_excluded_fields"]:
+        transition_body.pop(excluded)
+    assert transition["content_digest"] == (
+        "rev3-phase-transition:" + digest_object(transition_body)
+    )
+    assert transition["from_phase_id"] == "PH-R-1"
+    assert transition["from_phase_status"] == "OWNER_APPROVED_PASS"
+    assert transition["to_phase_id"] == "PH-R00"
+    assert transition["to_phase_status"] == "IN_PROGRESS"
+    assert transition["decision"] == "ENTRY_AUTHORIZED"
+    assert transition["external_irreversible_action_authorized"] is False
+    assert transition["verified_exit_conditions"][
+        "failed_requirement_count"
+    ] == 0
+
+    # The pre-audit rework frame remains historical evidence only.
     rework_frame = _json(
         REPOSITORY_ROOT
         / "control"
@@ -1966,23 +2007,46 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
         "rev3-pre-distillation-baseline:"
         + digest_object(baseline_body)
     )
+    assert baseline["schema_version"] == (
+        "arc3-rev3-pre-distillation-infrastructure-baseline-v2"
+    )
+    assert baseline["status"] == (
+        "CURRENT_HEAD_BOUND_IMPLEMENTATION_VALIDATION_PASS"
+    )
+    assert baseline["source_commit"] == frame["base_commit"]
+    assert baseline["source_tree"] == frame["base_tree"]
     assert baseline["rev3_runtime"]["active_runtime_count"] == 0
-    assert baseline["historical_p22_evidence"][
-        "cv_completed_environment_count"
-    ] == 0
+    assert baseline["historical_capability_assets"][
+        "production_parent_allowed"
+    ] is False
+    assert baseline["historical_capability_assets"][
+        "fallback_allowed"
+    ] is False
     assert baseline["missing_required_authorities"] == []
-    assert baseline["result_commit"] == (
-        "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938"
-    )
-    assert baseline["result_tree"] == (
-        "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9"
-    )
+    assert baseline["preexisting_dirty_state"][
+        "tracked_autonomous_completion_file_count"
+    ] == 32
     assert baseline["failed_requirement_ids"] == []
-    assert baseline["validation"]["full_unit"]["status"] == "PASS"
-    assert baseline["validation"]["notebook_regression"]["status"] == "PASS"
-    assert baseline["validation"]["package"]["status"] == "PASS"
-    assert baseline["validation"]["determinism"]["status"] == "PASS"
+    assert {
+        result["status"]
+        for result in baseline["validation"].values()
+    } == {"PASS"}
+    assert baseline["validation"]["full_unit"]["passed"] == 728
+    assert baseline["validation"]["full_integration"]["passed"] == 8
+    assert baseline["validation"]["package"]["byte_identical"] is True
+    assert baseline["validation"]["notebook_regression"][
+        "validator_checks_passed"
+    ] == 25
+    assert baseline["validation"]["production_import_boundary"][
+        "quarantined_module_intersection"
+    ] == []
+    assert all(
+        item["source_blob_verified"]
+        for item in baseline["preserved_phase_states"]
+    )
 
+    # Every assertion below is about retained pre-audit evidence, never current
+    # activation evidence.
     rework = _json(
         REPOSITORY_ROOT
         / "analysis"
@@ -2008,6 +2072,16 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
     assert rework["forbidden_activity_counts"]["official_access"] == 0
     assert rework["forbidden_activity_counts"]["network_submission"] == 0
 
+    selector = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "REV3_CURRENT_SELECTOR.json"
+    )
+    assert (
+        selector["historical_evidence"]["classification"]
+        == "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
+    )
     phase_state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "R00_PHASE_STATE.json"
     )

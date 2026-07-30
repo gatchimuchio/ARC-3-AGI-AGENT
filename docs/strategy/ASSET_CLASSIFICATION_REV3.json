@@ -1,11 +1,16 @@
 {
-  "schema_version": "arc3-rev3-asset-classification-v1",
+  "schema_version": "arc3-rev3-asset-classification-v2",
   "phase_id": "PH-R00",
-  "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
+  "phase_status": "IN_PROGRESS",
+  "source_commit": "4dbb65c5d45cca3402f326b251c1de6ac4a2e554",
+  "source_tree": "44ccb73437480daeaab71e6cb3119b5e6bc5d485",
+  "work_block_frame_digest": "rev3-work-block-frame:ea74fe814e84b0e3ca99c27360815870eb6804b5b199e2b4af3a606b6c7a80c8",
+  "entry_transition_digest": "rev3-phase-transition:d0501f919c124bfef2f75694323aff0a5809d921630705c031d4131534d8b449",
   "classifications": [
     {
       "classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
       "capability_claim": "NOT_ESTABLISHED",
+      "binding": "SOURCE_COMMIT_TREE",
       "paths": [
         "ARC-AGI-3-Agents/arc3_agi_agent/authority_state.py",
         "ARC-AGI-3-Agents/arc3_agi_agent/control_state.py",
@@ -36,10 +41,11 @@
         "control/p21/P21_PHASE_STATE.json"
       ],
       "required_before_reuse": [
-        "current commit/tree rebind",
-        "current regression",
-        "rev3 import-boundary audit",
-        "distilled-bundle compatibility audit"
+        "PH-R00 implementation commit/tree bind",
+        "current full unit and integration regression",
+        "current local package and notebook regression",
+        "rev3 production import-boundary audit",
+        "future distilled-bundle compatibility audit"
       ]
     },
     {
@@ -71,11 +77,21 @@
       "paths": [
         "docs/architecture/ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2.md",
         "docs/roadmap/P16_P24_GENERIC_AUTONOMOUS_COMPLETION_ROADMAP_REV2.md",
-        "docs/audit/ARC3_GENERIC_REAUDIT_REV2.md"
-      ]
+        "docs/audit/ARC3_GENERIC_REAUDIT_REV2.md",
+        "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+        "control/rev3/D00A_PHASE_STATE.json",
+        "control/rev3/D00B_PHASE_STATE.json",
+        "control/rev3/D01A_PHASE_STATE.json",
+        "control/rev3/D01B_PHASE_STATE.json",
+        "control/rev3/D02A_PHASE_STATE.json",
+        "control/rev3/D02B_PHASE_STATE.json",
+        "control/rev3/D02C_PHASE_STATE.json",
+        "control/rev3/D03A_CANDIDATE_STATE.json"
+      ],
+      "activation_eligible": false
     },
     {
-      "classification": "REPLACE_AFTER_OWNER_GATES",
+      "classification": "FUTURE_AFTER_EXACT_GATES",
       "paths": [
         "distillation/",
         "bridge/",
@@ -87,5 +103,9 @@
   "rev3_active_runtime_count": 0,
   "rev3_active_runtime_capability_claim": "NOT_ESTABLISHED",
   "historical_fallback_count": 0,
-  "content_digest": "rev3-asset-classification:a4900aaa92c3dcc240f0849d7cccb4f237d22051f5dd4b05e836a5c67b57fa01"
+  "current_validation_status": "PRE_IMPLEMENTATION_VALIDATION_PASS",
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-asset-classification:0081333d3ce14601ed1e155d64577dcdf5ff2b43a1050a529807a0ad72437b4a"
 }

@@ -1,109 +1,101 @@
 {
-  "schema_version": "arc3-rev3-pre-distillation-infrastructure-baseline-v1",
+  "schema_version": "arc3-rev3-pre-distillation-infrastructure-baseline-v2",
   "phase_id": "PH-R00",
-  "status": "PRE_DISTILLATION_INFRASTRUCTURE_BASELINE_VALIDATED",
+  "status": "CURRENT_HEAD_BOUND_IMPLEMENTATION_VALIDATION_PASS",
   "repository": "gatchimuchio/ARC-3-AGI-AGENT",
   "branch": "main",
-  "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
-  "base_tree": "d63d26e25758211938cc33d0efe84f50ed096023",
-  "base_commit_subject": "chore: remove GitHub Actions CI [skip ci]",
-  "result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
-  "result_tree": "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9",
+  "source_commit": "4dbb65c5d45cca3402f326b251c1de6ac4a2e554",
+  "source_tree": "44ccb73437480daeaab71e6cb3119b5e6bc5d485",
+  "source_commit_subject": "governance(rev3): approve PH-R1 and establish standing authorization [skip ci]",
+  "work_block_frame": {
+    "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
+    "content_digest": "rev3-work-block-frame:ea74fe814e84b0e3ca99c27360815870eb6804b5b199e2b4af3a606b6c7a80c8"
+  },
+  "entry_transition": {
+    "path": "control/rev3/PHASE_TRANSITIONS/PH-R-1_TO_PH-R00.json",
+    "content_digest": "rev3-phase-transition:d0501f919c124bfef2f75694323aff0a5809d921630705c031d4131534d8b449"
+  },
   "python_version": "3.12.13",
   "dependency_lock": {
     "path": "ARC-AGI-3-Agents/uv.lock",
     "sha256": "680db09e6d1d3291ac8dc5138dd89c86a6341e5a1a86bbf803d2a1c4885e4a92"
   },
-  "authority_manifest_digest": "rev3-authority-input-manifest:b3388e4ce73c995cbdd7d8dc8209e1ffbff52f53b7847e4edfcced0e89fd37a4",
-  "asset_classification_digest": "rev3-asset-classification:a4900aaa92c3dcc240f0849d7cccb4f237d22051f5dd4b05e836a5c67b57fa01",
-  "work_block_frame_digest": "rev3-work-block-frame:33db7d6a9d0dec9128860383ece3543d78638271184b97e35583484838ae74a8",
-  "validation_rework_frame_digest": "rev3-work-block-frame:0afc5447fae19c385eb0c79d1117f741c45dc416a89bdabd2648002f2c698e55",
-  "validation_rework_report_digest": "rev3-r00-validation-rework:d819d7a9c5591b2ceb24f346fbd686adc1d94bf03783b8d9da8ebd83fa9bd61e",
   "preserved_phase_states": [
     {
       "phase": "P16",
       "path": "control/p16/P16_PHASE_STATE.json",
       "sha256": "0e90b11b2beb0ae92f0d5723845c79ddee7784d73e323c3c3750a7dd4e35c6b0",
       "legacy_status": "PASS",
-      "legacy_binding": "UNCOMMITTED_WORKTREE",
-      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE"
+      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "source_blob_verified": true
     },
     {
       "phase": "P17-A",
       "path": "control/p17a/P17A_PHASE_STATE.json",
       "sha256": "8aa4c9931b46fd08e6e88a7be9887e4fb9ce457d46e7f21ebab3c3c4b9a83c19",
       "legacy_status": "PASS",
-      "legacy_binding": "UNCOMMITTED_WORKTREE",
-      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE"
+      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "source_blob_verified": true
     },
     {
       "phase": "P17-B",
       "path": "control/p17b/P17B_PHASE_STATE.json",
       "sha256": "21dffe3f0cd3262e15a76533fff954815abe6e4cce412b7789046830f20f7bc0",
       "legacy_status": "PASS",
-      "legacy_binding": "UNCOMMITTED_WORKTREE",
-      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE"
+      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "source_blob_verified": true
     },
     {
       "phase": "P18",
       "path": "control/p18/P18_PHASE_STATE.json",
       "sha256": "05ba6f3d39e7ed7321b0a1018ca24e02b4998f28603b9c5237effebb166bacdc",
       "legacy_status": "PASS",
-      "legacy_binding": "UNCOMMITTED_WORKTREE",
-      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE"
+      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "source_blob_verified": true
     },
     {
       "phase": "P19",
       "path": "control/p19/P19_PHASE_STATE.json",
       "sha256": "5acdc4fdd955b8582d4342d5cba5552e387acd5ecf9ed3f88d0c8b8cdede1eb8",
       "legacy_status": "PASS",
-      "legacy_binding": "UNCOMMITTED_WORKTREE",
-      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE"
+      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "source_blob_verified": true
     },
     {
       "phase": "P20-A",
       "path": "control/p20a/P20A_PHASE_STATE.json",
       "sha256": "95e18eb24bf6292090383228aac2c59980c3d74549336180c3ee709953afc0b0",
       "legacy_status": "PASS",
-      "legacy_binding": "UNCOMMITTED_WORKTREE",
-      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE"
+      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "source_blob_verified": true
     },
     {
       "phase": "P20-B",
       "path": "control/p20b/P20B_PHASE_STATE.json",
       "sha256": "39cd87808d2617d642ad8b69e8ab1d4063b04c868649b907ef55414d3b9e55f2",
       "legacy_status": "PASS",
-      "legacy_binding": "UNCOMMITTED_WORKTREE",
-      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE"
+      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "source_blob_verified": true
     },
     {
       "phase": "P21",
       "path": "control/p21/P21_PHASE_STATE.json",
       "sha256": "50ad37ccb0f23555114fe475df5255857320f616139949b2056f8a15e52bee16",
       "legacy_status": "PASS",
-      "legacy_binding": "UNCOMMITTED_WORKTREE",
-      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE"
+      "rev3_classification": "PRESERVE_INFRASTRUCTURE_CANDIDATE",
+      "source_blob_verified": true
     }
   ],
-  "historical_p22_evidence": {
-    "role": "HISTORICAL_QUARANTINE",
-    "source": "committed base tree",
-    "cv_fold_count": 5,
-    "cv_holdout_execution_count": 25,
-    "cv_completed_environment_count": 0,
-    "cv_completed_level_count": 0,
-    "cv_distinct_p_artifact_count": 5,
-    "cv_distinct_runtime_identity_count": 5,
-    "transformation_completed_count": 7,
-    "memory_causal_witness_count": 5,
+  "historical_capability_assets": {
+    "classification": "HISTORICAL_QUARANTINE",
+    "production_parent_allowed": false,
+    "fallback_allowed": false,
     "generic_completion_claim": "NOT_ESTABLISHED"
   },
   "preexisting_dirty_state": {
     "excluded_from_baseline": true,
-    "tracked_p22_cv_generated_file_count": 32,
-    "untracked_partial_public_trace_path_count": 1,
-    "untracked_temp_path_count": 26,
-    "mutation_policy": "PRESERVE_UNSTAGED"
+    "tracked_autonomous_completion_file_count": 32,
+    "mutation_policy": "PRESERVE_UNSTAGED_AND_UNMODIFIED"
   },
   "rev3_runtime": {
     "active_runtime_count": 0,
@@ -113,73 +105,97 @@
   },
   "missing_required_authorities": [],
   "validation": {
-    "dedicated_notebook_and_rev3": {
+    "dedicated_ph_r00_governance": {
       "status": "PASS",
-      "passed": 19,
+      "passed": 54,
       "failed": 0,
-      "duration_seconds": 8.32,
-      "post_result_commit": true
+      "evidence_stage": "PRE_IMPLEMENTATION_COMMIT"
     },
-    "focused_p16_p21_regression": {
+    "focused_p16_p21_and_notebook": {
       "status": "PASS",
-      "passed": 112,
+      "passed": 159,
       "failed": 0,
-      "evidence_stage": "PH-R00_INITIAL_RESULT_COMMIT"
+      "duration_seconds": 60.36,
+      "evidence_stage": "PRE_IMPLEMENTATION_COMMIT"
     },
-    "type_check": {
+    "ruff": {
       "status": "PASS",
-      "scope": "validation rework Python source",
-      "mode": "strict"
+      "scope": "PH-R00 changed Python source and tests"
     },
-    "lint": {
+    "mypy_strict": {
       "status": "PASS",
-      "scope": "validation rework Python source and tests"
+      "scope": "rev3_governance.py and validate_rev3_governance.py"
     },
     "full_unit": {
       "status": "PASS",
-      "passed": 687,
+      "passed": 728,
       "failed": 0,
-      "duration_seconds": 252.99,
-      "post_result_commit": true
+      "duration_seconds": 312.92,
+      "evidence_stage": "PRE_IMPLEMENTATION_COMMIT"
     },
-    "integration": {
+    "full_integration": {
       "status": "PASS",
       "passed": 8,
       "failed": 0,
-      "duration_seconds": 394.14,
-      "post_result_commit": true
+      "duration_seconds": 299.84,
+      "evidence_stage": "PRE_IMPLEMENTATION_COMMIT"
     },
     "package": {
       "status": "PASS",
-      "build_tool": "uv 0.11.32",
-      "lock_check": "PASS",
-      "lock_resolved_package_count": 124,
-      "independent_wheel_build_count": 2,
-      "wheel_byte_identical": true,
-      "wheel_sha256": "020f80d9fa653d685d7f98418d9ae0a3e107fe94d71acb6f2a5c52fb47156740",
-      "wheel_size_bytes": 17022489,
+      "python_version": "3.12.13",
+      "build_backend": "setuptools==83.0.0 isolated build",
+      "independent_build_count": 2,
+      "byte_identical": true,
+      "wheel_sha256": "4f57f9afaa4821c79d21da04644c497bcc26e24f8d95f68183caf8ac7e28c6ab",
+      "wheel_size_bytes": 17022896,
       "wheel_member_count": 240,
-      "source_hashes_unchanged": true
+      "unsafe_member_path_count": 0,
+      "resolved_environment_attempt": "fixed project venv has no pip; bundled pinned Python used without repository dependency mutation"
     },
     "notebook_regression": {
       "status": "PASS",
+      "independent_build_count": 2,
+      "byte_identical": true,
       "validator_checks_passed": 25,
       "validator_checks_failed": 0,
-      "runtime_module_count": 37,
-      "quarantined_module_intersection": [],
+      "notebook_sha256": "65b74a1f890ef8102e18e3b201ebc6e33d971629741226654fcb7aedda76ba92",
+      "notebook_size_bytes": 188336,
       "runtime_archive_sha256": "f81f2054bf2b273a118471253504a5339a059f58ba913531af90373613b4c629",
+      "runtime_module_count": 37,
       "runtime_import_smoke": "WIN:2:True:True",
+      "secret_finding_count": 0,
       "submission_api_call_count": 0
+    },
+    "production_import_boundary": {
+      "status": "PASS",
+      "quarantined_module_intersection": [],
+      "runtime_identity_routing_included": false,
+      "teacher_included": false,
+      "known_sample_policy_included": false
     },
     "determinism": {
       "status": "PASS",
-      "independent_process_count": 3,
-      "aggregate_scope": "work block frame, authority manifest, asset classification, and five HDS authority inputs",
-      "aggregate_digest": "983f6291769bae6cb68cd9b0e47a5b8a55c5942f489bf72a98dceb12e2f53106",
-      "runtime_archive_deterministic": true,
-      "wheel_build_deterministic": true
+      "notebook_build_byte_identical": true,
+      "runtime_archive_byte_identical": true,
+      "wheel_build_byte_identical": true
+    },
+    "governance_validator": {
+      "status": "PASS",
+      "check_count": 16,
+      "failure_count": 0
     }
   },
+  "forbidden_activity_counts": {
+    "teacher_source_read": 0,
+    "new_runtime_capability": 0,
+    "locked_final_access": 0,
+    "official_access": 0,
+    "kaggle_mutation": 0,
+    "network_submission": 0
+  },
   "failed_requirement_ids": [],
-  "content_digest": "rev3-pre-distillation-baseline:dd81b5b1f4c3a1e4e7e132bace3c4d426b2c26d1d4267344ad40d4057710c9f3"
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-pre-distillation-baseline:aa7250921425903a4f54c483e508850653f546ea5ded5fb7ec38dbf8755f3fb9"
 }

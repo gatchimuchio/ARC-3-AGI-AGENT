@@ -16,7 +16,7 @@ from zipfile import ZipFile
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SELECTOR_PATH = Path("control/rev3/REV3_CURRENT_SELECTOR.json")
 SELECTOR_SCHEMA_PATH = Path(
-    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json"
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V4.json"
 )
 DECISION_PATH = Path(
     "control/rev3/OWNER_DECISION_CAPTURES/"
@@ -48,8 +48,30 @@ BUILD_READY_PROFILE_PATH = Path(
 STANDING_AUTHORIZATION_SCHEMA_PATH = Path(
     "docs/strategy/contracts/OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json"
 )
+STANDING_AUTHORIZATION_PATH = Path(
+    "control/rev3/OWNER_STANDING_AUTHORIZATIONS/"
+    "CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json"
+)
 DECISION_V2_SCHEMA_PATH = Path(
     "docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V2.json"
+)
+PH_R00_ENTRY_DECISION_PATH = Path(
+    "control/rev3/OWNER_DECISION_CAPTURES/"
+    "PH-R-1_TO_PH-R00_20260731.json"
+)
+PH_R00_ENTRY_APPROVAL_PATH = Path(
+    "control/rev3/OWNER_APPROVAL_RECORDS/"
+    "PH-R-1_TO_PH-R00_20260731.json"
+)
+PH_R00_FRAME_PATH = Path("control/rev3/PH-R00_WORK_BLOCK_FRAME.json")
+PH_R00_TRANSITION_PATH = Path(
+    "control/rev3/PHASE_TRANSITIONS/PH-R-1_TO_PH-R00.json"
+)
+PH_R00_ASSET_CLASSIFICATION_PATH = Path(
+    "docs/strategy/ASSET_CLASSIFICATION_REV3.json"
+)
+PH_R00_BASELINE_PATH = Path(
+    "analysis/rev3/pre_distillation_infrastructure_baseline.json"
 )
 CORRECTION_PACKAGE_PATH = Path(
     "artifacts/rev3/"
@@ -322,12 +344,181 @@ def validate_repository(root: Path) -> dict[str, object]:
                     f"authority_manifest.entries[{index}]:SHA256_MISMATCH"
                 )
 
-    if selector.get("active_phase") is not None:
-        failures.append("selector:ACTIVE_PHASE_FORBIDDEN")
-    if selector.get("ph_r00_owner_authorization") != "NOT_ESTABLISHED":
-        failures.append("selector:PH_R00_AUTHORIZATION_ESCALATED")
+    standing = _load_object(root, STANDING_AUTHORIZATION_PATH)
+    standing_schema = _load_object(
+        root, STANDING_AUTHORIZATION_SCHEMA_PATH
+    )
+    failures.extend(
+        _schema_failures(standing, standing_schema, "standing")
+    )
+    failures.extend(
+        _content_digest_failures(
+            standing,
+            "sha256:",
+            "standing_authorization_content_digest",
+            "standing",
+        )
+    )
+
+    entry_decision = _load_object(root, PH_R00_ENTRY_DECISION_PATH)
+    decision_v2_schema = _load_object(root, DECISION_V2_SCHEMA_PATH)
+    failures.extend(
+        _schema_failures(
+            entry_decision,
+            decision_v2_schema,
+            "ph_r00_entry_decision",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            entry_decision,
+            "sha256:",
+            "owner_decision_content_digest",
+            "ph_r00_entry_decision",
+        )
+    )
+    if (
+        entry_decision.get("standing_authorization_digest")
+        != standing.get("standing_authorization_content_digest")
+    ):
+        failures.append(
+            "ph_r00_entry_decision:STANDING_AUTHORIZATION_MISMATCH"
+        )
+
+    entry_approval = _load_object(root, PH_R00_ENTRY_APPROVAL_PATH)
+    failures.extend(
+        _schema_failures(
+            entry_approval,
+            approval_schema,
+            "ph_r00_entry_approval",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            entry_approval,
+            "owner-approval-record:",
+            "approval_artifact_digest",
+            "ph_r00_entry_approval",
+        )
+    )
+    if (
+        entry_approval.get("owner_decision_capture_digest")
+        != entry_decision.get("owner_decision_content_digest")
+    ):
+        failures.append(
+            "ph_r00_entry_approval:DECISION_DIGEST_MISMATCH"
+        )
+
+    if selector.get("active_phase") != "PH-R00":
+        failures.append("selector:ACTIVE_PHASE_MISMATCH")
+    if selector.get("ph_r00_owner_authorization") != "ESTABLISHED":
+        failures.append("selector:PH_R00_AUTHORIZATION_MISSING")
+    if selector.get("ph_r00_status") != "IN_PROGRESS":
+        failures.append("selector:PH_R00_STATUS_MISMATCH")
     if selector.get("runtime_activation_status") != "SUSPEND":
         failures.append("selector:RUNTIME_ACTIVATION_ESCALATED")
+    selector_entry_approval = selector.get("phase_entry_approval")
+    if not isinstance(selector_entry_approval, dict):
+        failures.append("selector:PH_R00_ENTRY_APPROVAL_MISSING")
+    elif (
+        selector_entry_approval.get("approval_artifact_digest")
+        != entry_approval.get("approval_artifact_digest")
+    ):
+        failures.append("selector:PH_R00_ENTRY_APPROVAL_MISMATCH")
+    selector_standing = selector.get("standing_authorization")
+    if not isinstance(selector_standing, dict):
+        failures.append("selector:STANDING_AUTHORIZATION_MISSING")
+    elif selector_standing.get("content_digest") != standing.get(
+        "standing_authorization_content_digest"
+    ):
+        failures.append("selector:STANDING_AUTHORIZATION_MISMATCH")
+
+    ph_r00_frame = _load_object(root, PH_R00_FRAME_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_r00_frame,
+            "rev3-work-block-frame:",
+            "content_digest",
+            "ph_r00_frame",
+        )
+    )
+    if ph_r00_frame.get("phase_id") != "PH-R00":
+        failures.append("ph_r00_frame:PHASE_MISMATCH")
+    frame_budget = ph_r00_frame.get("resource_budget")
+    if not isinstance(frame_budget, dict):
+        failures.append("ph_r00_frame:RESOURCE_BUDGET_MISSING")
+    else:
+        for field in (
+            "network_submission_count",
+            "locked_final_access_count",
+            "official_access_count",
+            "kaggle_mutation_count",
+            "maximum_new_runtime_capabilities",
+            "teacher_source_read_count",
+        ):
+            if frame_budget.get(field) != 0:
+                failures.append(f"ph_r00_frame:{field}:NONZERO")
+
+    transition = _load_object(root, PH_R00_TRANSITION_PATH)
+    failures.extend(
+        _content_digest_failures(
+            transition,
+            "rev3-phase-transition:",
+            "content_digest",
+            "ph_r00_transition",
+        )
+    )
+    if (
+        transition.get("from_phase_id"),
+        transition.get("to_phase_id"),
+        transition.get("decision"),
+    ) != ("PH-R-1", "PH-R00", "ENTRY_AUTHORIZED"):
+        failures.append("ph_r00_transition:SEQUENCE_MISMATCH")
+    if transition.get("authorization_digest") != entry_approval.get(
+        "approval_artifact_digest"
+    ):
+        failures.append("ph_r00_transition:APPROVAL_MISMATCH")
+    if transition.get("external_irreversible_action_authorized") is not False:
+        failures.append("ph_r00_transition:EXTERNAL_ACTION_AUTHORIZED")
+
+    asset_classification = _load_object(
+        root, PH_R00_ASSET_CLASSIFICATION_PATH
+    )
+    failures.extend(
+        _content_digest_failures(
+            asset_classification,
+            "rev3-asset-classification:",
+            "content_digest",
+            "ph_r00_asset_classification",
+        )
+    )
+    if asset_classification.get("rev3_active_runtime_count") != 0:
+        failures.append("ph_r00_asset_classification:RUNTIME_ACTIVE")
+    if asset_classification.get(
+        "rev3_active_runtime_capability_claim"
+    ) != "NOT_ESTABLISHED":
+        failures.append(
+            "ph_r00_asset_classification:CAPABILITY_OVERCLAIM"
+        )
+
+    baseline = _load_object(root, PH_R00_BASELINE_PATH)
+    failures.extend(
+        _content_digest_failures(
+            baseline,
+            "rev3-pre-distillation-baseline:",
+            "content_digest",
+            "ph_r00_baseline",
+        )
+    )
+    baseline_runtime = baseline.get("rev3_runtime")
+    if not isinstance(baseline_runtime, dict):
+        failures.append("ph_r00_baseline:RUNTIME_BOUNDARY_MISSING")
+    elif (
+        baseline_runtime.get("active_runtime_count") != 0
+        or baseline_runtime.get("active_runtime_capability_claim")
+        != "NOT_ESTABLISHED"
+    ):
+        failures.append("ph_r00_baseline:RUNTIME_OVERCLAIM")
 
     governance = _load_object(root, GOVERNANCE_CONTRACT_PATH)
     governed_selector = governance.get("current_selector")
@@ -390,7 +581,7 @@ def validate_repository(root: Path) -> dict[str, object]:
                 )
 
     return {
-        "check_count": 12,
+        "check_count": 16,
         "failure_count": len(failures),
         "failures": sorted(set(failures)),
         "status": "PASS" if not failures else "FAIL",

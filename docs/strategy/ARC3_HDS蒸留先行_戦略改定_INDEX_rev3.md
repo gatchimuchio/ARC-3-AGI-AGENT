@@ -2,9 +2,10 @@
 
 - Package status: `OWNER_APPROVED`
 - Installation status: `INSTALLED`
-- PH-R-1 status: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
-- Current work class: `PH-R00_AUTHORIZATION_PENDING`
-- `PH-R00`: `SUSPEND`
+- PH-R-1 status: `OWNER_APPROVED_PASS`
+- Current work class: `PH-R00_CURRENT_HEAD_REBIND`
+- Active phase: `PH-R00`
+- `PH-R00`: `IN_PROGRESS`
 - Audit: `docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md`
 - Installation approval: `control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json`
 - Current authority manifest: `docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json`
@@ -78,6 +79,7 @@ S5/P22 compiled policy = historical/quarantine
 - `docs/strategy/contracts/PHASE_STATE_SCHEMA_V2.json`
 - `docs/strategy/contracts/EVIDENCE_COMMIT_ATTESTATION_SCHEMA_V1.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V4.json`
 - `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 
 ## Codex

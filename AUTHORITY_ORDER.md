@@ -3,10 +3,10 @@
 - strategy: `ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3`
 - strategy status: `OWNER_APPROVED`
 - installation status: `INSTALLED`
-- current work class: `PH-R00_AUTHORIZATION_PENDING`
-- active phase: `NONE`
-- `PH-R00`: `SUSPEND`
-- `PH-R-1`: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
+- current work class: `PH-R00_CURRENT_HEAD_REBIND`
+- active phase: `PH-R00`
+- `PH-R00`: `IN_PROGRESS`
+- `PH-R-1`: `OWNER_APPROVED_PASS`
 - installation approval: `owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8`
 - final selector / Meta-J: `大平鉄兵`
 - implementation role / Meta-C: `Codex`
@@ -70,8 +70,9 @@ The earlier interpretation of generic “continue” instructions as PH-R00 acce
 ```text
 REV3 correction evidence（bound）
 → Owner explicit approval for the exact correction artifact（recorded）
-→ PH-R-1 Strategy Installation（implemented）
-→ Owner authorization for PH-R00（NOT_ESTABLISHED）
+→ PH-R-1 Strategy Installation（Owner approved）
+→ Owner authorization for PH-R00（ESTABLISHED）
+→ PH-R00 Current HEAD Rebind（IN_PROGRESS）
 ```
 
-PH-R00の対象明示Owner判断が記録されるまで、PH-R00と全downstream workは停止する。Strategy InstallationまたはOwnerの`全部承認`を、まだ存在しない将来artifactの採否へ拡張しない。Missingまたはmismatched authorityはvisible failureであり、gate緩和やhistorical approval再利用で修復しない。
+現在許可されるのはPH-R00 WorkBlockFrameの範囲だけである。PH-D00AはPH-R00の全DoD、required validation、failed requirement count 0、exact evidence bindが成立した場合に限り、Ownerのstanding authorizationを機械的に適用して開始できる。将来artifactを事前採択せず、各phaseで同じ条件を再評価する。Missingまたはmismatched authorityはvisible failureであり、gate緩和やhistorical approval再利用で修復しない。

@@ -75,10 +75,11 @@ def test_installed_dependency_lock_remains_suspended_fail_closed() -> None:
         / "REV3_CURRENT_SELECTOR.json"
     )
     assert selector["installation_status"] == "INSTALLED"
-    assert selector["ph_r1_status"] == "CODEX_IMPLEMENTATION_COMPLETE"
-    assert selector["current_work_class"] == "PH-R00_AUTHORIZATION_PENDING"
-    assert selector["ph_r00_owner_authorization"] == "NOT_ESTABLISHED"
-    assert selector["ph_r00_status"] == "SUSPEND"
+    assert selector["ph_r1_status"] == "OWNER_APPROVED_PASS"
+    assert selector["active_phase"] == "PH-R00"
+    assert selector["current_work_class"] == "PH-R00_CURRENT_HEAD_REBIND"
+    assert selector["ph_r00_owner_authorization"] == "ESTABLISHED"
+    assert selector["ph_r00_status"] == "IN_PROGRESS"
     assert selector["runtime_activation_status"] == "SUSPEND"
     assert (
         selector["historical_evidence"]["classification"]

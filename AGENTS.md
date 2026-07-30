@@ -1,6 +1,6 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1による導入は、PH-R00、HDS、Bridge、Runtimeの開始許可ではない。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1はOwner承認済みであり、PH-R00だけが現在activeである。PH-R00開始許可は、HDS、Bridge、Runtimeの開始許可ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
 - 日付: `2026-07-31`
@@ -10,9 +10,10 @@
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
 - 契約状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- 現在作業: `PH-R00_AUTHORIZATION_PENDING`
-- Phase guard: `PH-R00 = SUSPEND`
-- PH-R-1: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
+- 現在作業: `PH-R00_CURRENT_HEAD_REBIND`
+- Active phase: `PH-R00`
+- PH-R00: `IN_PROGRESS`
+- PH-R-1: `OWNER_APPROVED_PASS`
 - 導入承認: `owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8`
 - Codex role: `DEVELOPMENT_META_C`
 - 最終採否者: 大平鉄兵
@@ -135,10 +136,11 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = NONE
-Current work = PH-R00_AUTHORIZATION_PENDING
-PH-R-1 = CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED
-PH-R00 = SUSPEND
+Active phase = PH-R00
+Current work = PH-R00_CURRENT_HEAD_REBIND
+PH-R-1 = OWNER_APPROVED_PASS
+PH-R00 = IN_PROGRESS
+PH-R00 Owner authorization = ESTABLISHED
 ```
 
 監査是正後の順序は次であり、PH-R-1までを実装済みとする。
@@ -164,7 +166,7 @@ AND STRATEGY_INSTALLATION_COMPLETE
 AND OWNER_AUTHORIZED_PH-R00
 ```
 
-以前に`PH-R00`を開始しない。現在、前二条件は成立しているが、`OWNER_AUTHORIZED_PH-R00`は`NOT_ESTABLISHED`である。
+以前に`PH-R00`を開始しない。現在は三条件とも成立し、PH-R00だけがactiveである。PH-D00AはPH-R00の全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -715,10 +717,11 @@ Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではあ
 
 rev3 strategyはOWNER_APPROVEDです。
 installationはINSTALLEDです。
-PH-R-1はCODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIREDです。
-PH-R00はSUSPENDです。
-Active phaseはありません。
-現在許可されたwork classはPH-R00_AUTHORIZATION_PENDINGです。
+PH-R-1はOWNER_APPROVED_PASSです。
+PH-R00はIN_PROGRESSです。
+Active phaseはPH-R00です。
+現在許可されたwork classはPH-R00_CURRENT_HEAD_REBINDです。
+PH-R00のOwner authorizationはESTABLISHEDです。
 
 最初に、
 - repository root
@@ -726,22 +729,25 @@ Active phaseはありません。
 - HEAD/tree
 - dirty state
 - required documents
-- current installation evidence
+- PH-R-1 evidence、attestation、approval
+- PH-R00 WorkBlockFrameとphase-entry approval
 を確認してください。
 
 次だけを実施してください。
 
-- PH-R-1 evidence、attestation、Owner Review Packageの検証
-- current authority manifest、selector、schemaの整合性確認
-- 監査前phase evidenceのhistorical/non-authoritative分類維持
-- approved correction packageのbyte-identical再現性確認
-- PH-R00開始に必要な対象明示Owner判断の確認
+- current HEAD/treeへのP16〜P21基盤候補のrebind
+- S5／P22／compiled policy／CVのhistorical quarantine維持
+- production import boundary、selector、authority manifest、schemaの整合性確認
+- full unit／integration／package／notebook local regression
+- deterministic artifact、Implementation Commit、Evidence Commit、attestationの分離
+- PH-R00 DoDとfailed requirement count 0の証明
 
-PH-R00、HDS蒸留、Bridge、AGI Runtime、P22改善、locked final、
+HDS蒸留、Bridge、AGI Runtime、P22改善、locked final、
 official、Kaggleへ進んではいけません。
 
-PH-R-1成果のImplementation Commit、Evidence Commit、attestationを分離してください。
-PH-R00承認は生成せず、OWNER_REVIEW_REQUIREDで停止してください。
+PH-R00成果のImplementation Commit、Evidence Commit、attestationを分離してください。
+全gateがPASSした場合だけstanding authorizationをexact evidenceへ機械的にbindし、
+PH-D00A entryを記録してください。失敗または未証明gateを承認してはいけません。
 ```
 
 ---

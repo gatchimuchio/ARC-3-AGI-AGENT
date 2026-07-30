@@ -49,14 +49,22 @@
       "BundleApprovalRecord"
     ]
   },
+  "active_work_block": {
+    "content_digest": "rev3-work-block-frame:ea74fe814e84b0e3ca99c27360815870eb6804b5b199e2b4af3a606b6c7a80c8",
+    "external_irreversible_actions_authorized": false,
+    "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
+    "phase_id": "PH-R00",
+    "runtime_capability_addition_count": 0,
+    "transition_digest": "rev3-phase-transition:d0501f919c124bfef2f75694323aff0a5809d921630705c031d4131534d8b449"
+  },
   "current_selector": {
-    "active_phase": null,
-    "current_work_class": "PH-R00_AUTHORIZATION_PENDING",
+    "active_phase": "PH-R00",
+    "current_work_class": "PH-R00_CURRENT_HEAD_REBIND",
     "distilled_initial_state_bundle_status": "NOT_FROZEN",
     "installation_status": "INSTALLED",
-    "ph_r00_owner_authorization": "NOT_ESTABLISHED",
-    "ph_r00_status": "SUSPEND",
-    "ph_r1_status": "CODEX_IMPLEMENTATION_COMPLETE",
+    "ph_r00_owner_authorization": "ESTABLISHED",
+    "ph_r00_status": "IN_PROGRESS",
+    "ph_r1_status": "OWNER_APPROVED_PASS",
     "runtime_activation_status": "SUSPEND",
     "strategy_status": "OWNER_APPROVED"
   },
@@ -119,6 +127,14 @@
     "target_artifact_digest": "sha256:3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219",
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
+  "phase_entry_approval": {
+    "approval_artifact_digest": "owner-approval-record:fcfc55bcd7e1aa8b28101870cab844679014a6338cb5a7899a379e0241f290c9",
+    "decision_capture_digest": "sha256:bfd1ffe3ed96405b3a4b0d6b3ea8e5dfd146f68c31f6fd0d20ecbc0f5ae70ba0",
+    "from_phase": "PH-R-1",
+    "target_artifact_digest": "sha256:1f03eb8c4ba134803ccb82323fa1cefef59706066f854c64c4f21717b32051a4",
+    "target_evidence_commit": "3fec094d64d599681a5bb7c10ebda8163747dc10",
+    "to_phase": "PH-R00"
+  },
   "j_boundary": {
     "distillation_may_generate": [
       "domain_hazard_signatures",
@@ -161,7 +177,10 @@
   "owner_decision_policy": {
     "codex_may_capture_mechanically": true,
     "codex_may_generate_decision": false,
-    "schema_ref": "OWNER_DECISION_CAPTURE_SCHEMA_V1.json",
+    "schema_refs": [
+      "OWNER_DECISION_CAPTURE_SCHEMA_V1.json",
+      "OWNER_DECISION_CAPTURE_SCHEMA_V2.json"
+    ],
     "underspecified_instruction_result": "OWNER_DECISION_NOT_ESTABLISHED"
   },
   "pre_audit_evidence_policy": {
@@ -170,6 +189,12 @@
     "eligible_as_current_activation_evidence": false
   },
   "schema_version": "arc3-rev3-governance-contract-v1",
+  "standing_authorization": {
+    "content_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+    "external_irreversible_actions": "EXCLUDED_REQUIRES_SEPARATE_EXPLICIT_EXECUTION_INSTRUCTION",
+    "failure_policy": "NO_APPROVAL_ON_FAILED_OR_UNPROVEN_GATE",
+    "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json"
+  },
   "source_blind_roles": {
     "DISTILLATION_AUDITOR": {
       "allowed": [
