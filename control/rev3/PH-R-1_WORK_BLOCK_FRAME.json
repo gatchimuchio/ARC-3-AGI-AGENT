@@ -5,6 +5,8 @@
     "phase_state_schema",
     "evidence_attestation_schema",
     "approval_record_schema",
+    "standing_authorization_schema",
+    "owner_decision_capture_v2_schema",
     "fail_closed_governance_gate",
     "deterministic_frozen_package_rebuild"
   ],
@@ -34,6 +36,8 @@
     "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json",
     "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
     "docs/strategy/contracts/AGI_BUILD_READY_PROFILE_V1.json",
+    "docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V2.json",
+    "docs/strategy/contracts/OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json",
     "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
     "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
     "scripts/package_rev3_strategy.py",
@@ -42,7 +46,7 @@
   "approved_package_sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
   "base_commit": "d5d7b93769089f9de14f752e3678acea7b2198b3",
   "base_tree": "3d4ac0acb130b90d0da284a0507a876dcc284d46",
-  "content_digest": "rev3-work-block-frame:28c7e8d651312397981dac0e5199c4dbfd58058d84c22fd940d6fceb1b4bad63",
+  "content_digest": "rev3-work-block-frame:ff07a9198402e267712f1f5510032f07941bbfd7555e8caa8279c8491ed06aac",
   "digest_excluded_fields": [
     "content_digest"
   ],
@@ -55,7 +59,7 @@
     "agent/**",
     "kaggle/**"
   ],
-  "frame_revision": 2,
+  "frame_revision": 3,
   "non_goals": [
     "PH-R00 implementation or authorization",
     "HDS distillation",
@@ -90,13 +94,14 @@
     "authority and execution-control status installation",
     "current authority manifest with byte digests",
     "machine-readable governance schemas",
+    "Owner standing authorization contract for conditional exact-bind continuation",
     "production gate remains closed before PH-B06/A08",
     "regression and package reproducibility tests"
   ],
   "spec_sha256": "d51334e4709271c4ff3d9b46c6a4d625a25c55a7ee983a25bd6c827992ef3524",
   "status": "FRAME_LOCKED",
   "stop_condition": "OWNER_REVIEW_REQUIRED_WITH_PH_R00_NOT_STARTED",
-  "supersedes_content_digest": "rev3-work-block-frame:52a68882462927d82c2584ec05c496b474b724a9cbacd503c04b7e319baf42cd",
+  "supersedes_content_digest": "rev3-work-block-frame:28c7e8d651312397981dac0e5199c4dbfd58058d84c22fd940d6fceb1b4bad63",
   "test_contract": [
     "dedicated PH-R-1 governance tests",
     "focused rev3 regression",
