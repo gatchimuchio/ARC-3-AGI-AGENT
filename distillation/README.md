@@ -80,18 +80,34 @@ distillation schemas:
   causal claim;
 - deterministic conformance evidence for DG-03, DG-08, DG-09, and DG-12.
 
+`PH-D03A` adds a non-authoritative Golden conformance candidate layer:
+
+- exactly eight authority-listed ARC2 categories and eight authority-listed
+  ARC3 categories, represented by 16 deterministic synthetic cases;
+- RawObservation, DeterministicDerivation, InterpretationHypothesis, at least
+  two typed HypothesisIR alternatives, exact-fit accounting, a pre-result
+  frozen bounded intervention, InterventionResult, HDSCausalRecord,
+  FailureSignature, GateResult, and ApprovalRecord schema template per case;
+- complete behavioral coverage of DG-00 through DG-15, including explicit
+  resource suspension, unsupported-opcode failure, pending-Owner suspension,
+  and rejection of unapproved commit or promotion;
+- a content-bound candidate set, gate-coverage report, and Owner review
+  request reconstructed byte-identically in three independent processes;
+- only non-authoritative `SCHEMA_TEMPLATE` approvals with `SUSPEND`; no
+  content-specific Owner decision and no Golden expected-artifact freeze.
+
 The compiler hashes source bytes but does not semantically parse, import,
 execute, or replay them. The only network evidence is the already frozen,
 revision-checked, read-only Dataset Viewer capture. Manifest compilation itself
 does not access a network.
 
-PH-D02C executes only checked synthetic typed programs. It does not normalize a
-real trajectory, read teacher/source payloads, freeze the PH-D03 corpus,
-generate or rank candidates, establish a causal mechanism, promote Rules,
-create or simulate Owner approval, process corpus coverage, create a Bridge,
-agent, or runtime, access locked-final or official data, or create submission
-output. Historical runtime canonical helpers are not imported into the
-isolated distillation package.
+PH-D03A executes only checked synthetic typed conformance candidates. It does
+not normalize a real trajectory, read teacher/source payloads, freeze Golden
+expectations, create the Sealed corpus, generate or rank general candidates,
+establish a real causal mechanism, promote Rules, create or simulate Owner
+approval, create a Bridge, agent, or runtime, access locked-final or official
+data, or create submission output. Historical runtime canonical helpers are
+not imported into the isolated distillation package.
 
 Use exactly Python 3.12.13. From the repository root:
 
@@ -103,6 +119,8 @@ PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_schema_registry.py
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_causal_ir.py
+PYTHONPATH=distillation/src python -m pytest \
+  distillation/tests/unit/test_golden_corpus.py
 PYTHONPATH=distillation/src python -m ruff check \
   distillation/src distillation/tests
 PYTHONPATH=distillation/src python -m mypy --strict \
@@ -111,6 +129,8 @@ PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.schema_registry import build_phase_d02b_artifacts; expected=build_phase_d02b_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
 PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.verification import build_phase_d02c_artifacts; expected=build_phase_d02c_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
+PYTHONPATH=distillation/src python -c \
+  "from pathlib import Path; from hds_distill.golden_corpus import build_phase_d03a_candidate_artifacts; expected=build_phase_d03a_candidate_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
 python distillation/src/hds_distill/scope_guard.py \
   --project-root distillation \
   --repository-root . \

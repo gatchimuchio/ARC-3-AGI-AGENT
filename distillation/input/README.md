@@ -60,3 +60,21 @@ both exact opcode inventories, the type/registry/resource/ABI digests, stable
 error codes, and zero downstream activity. Its executable scope is restricted
 to synthetic typed programs; it is not teacher-data evidence or a causal
 mechanism assertion.
+
+`PH-D03A` adds `golden_conformance_contract.json`. It fixes:
+
+- the exact eight ARC2 and eight ARC3 synthetic conformance categories;
+- the eleven required human-auditable artifact classes per case;
+- at least two typed HypothesisIR alternatives per case;
+- complete DG-00 through DG-15 behavioral coverage;
+- stable candidate-corpus validation errors;
+- `PROPOSED_PENDING_OWNER_APPROVAL` as the only allowed candidate state;
+- non-authoritative `SCHEMA_TEMPLATE` / `SUSPEND` ApprovalRecord semantics;
+- zero Golden freeze, Sealed corpus, source/teacher reads, real intervention,
+  causal establishment, general candidate generation, promotion, Bridge,
+  runtime, official, and Kaggle activity.
+
+The contract authorizes deterministic candidate construction and validation
+only. The checked Owner review request contains no decision. A new trusted,
+content-specific Owner ApprovalRecord is required before any provisional
+expectation can be frozen, and approved expectations cannot be auto-updated.

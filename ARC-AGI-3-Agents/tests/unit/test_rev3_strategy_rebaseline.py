@@ -495,6 +495,88 @@ def test_ph_d03a_candidate_preinventory_and_frame_are_content_bound() -> None:
     ] is False
 
 
+def test_ph_d03a_checked_candidates_remain_non_authoritative() -> None:
+    contract = _json(
+        REPOSITORY_ROOT
+        / "distillation"
+        / "input"
+        / "golden_conformance_contract.json"
+    )
+    candidate_set = _json(
+        REPOSITORY_ROOT
+        / "distillation"
+        / "artifacts"
+        / "golden"
+        / "candidate_cases.json"
+    )
+    coverage = _json(
+        REPOSITORY_ROOT
+        / "distillation"
+        / "artifacts"
+        / "reports"
+        / "golden_gate_coverage.json"
+    )
+    review = _json(
+        REPOSITORY_ROOT
+        / "distillation"
+        / "artifacts"
+        / "golden"
+        / "owner_review_request.json"
+    )
+
+    assert contract["content_digest"] == (
+        "hds-golden-conformance-contract:"
+        "7596ae83f79b793e3c125bd3719b884d7e1a5be880e616e948c048714c8b1cf0"
+    )
+    assert candidate_set["content_digest"] == (
+        "hds-golden-candidate-set:"
+        "e59d869a1244fa1735bd0e8b07d16d9b61f607c2976c6165ab47145f12b8a2c1"
+    )
+    assert coverage["content_digest"] == (
+        "hds-golden-gate-coverage:"
+        "6e79e1111a1bb2ac17615be4aefc20ebac51a613f17d37c9d2458d45718a89d7"
+    )
+    assert review["content_digest"] == (
+        "hds-golden-owner-review-request:"
+        "40b39be4d53bd9fe2209853dc595fda16452c7d9b943a32907a3a9bb85284cc6"
+    )
+    assert contract["candidate_state"] == (
+        "PROPOSED_PENDING_OWNER_APPROVAL"
+    )
+    assert candidate_set["case_count"] == 16
+    assert candidate_set["arc2_case_count"] == 8
+    assert candidate_set["arc3_case_count"] == 8
+    assert candidate_set["content_specific_owner_approval_count"] == 0
+    assert candidate_set["golden_frozen_case_count"] == 0
+    assert candidate_set["sealed_case_count"] == 0
+    cases = candidate_set["cases"]
+    assert isinstance(cases, list)
+    assert len(cases) == 16
+    assert all(
+        isinstance(case, dict)
+        and case["candidate_state"]
+        == "PROPOSED_PENDING_OWNER_APPROVAL"
+        and case["approval_record_template"]["approval_mode"]
+        == "SCHEMA_TEMPLATE"
+        and case["approval_record_template"]["authoritative"] is False
+        and case["approval_record_template"]["decision"] == "SUSPEND"
+        and case["provisional_expected_artifact"]["state"]
+        == "PROPOSED_NOT_FROZEN"
+        for case in cases
+    )
+    assert coverage["covered_gate_count"] == 16
+    assert coverage["missing_gate_ids"] == []
+    assert coverage["pass_result_count"] == 15
+    assert coverage["suspend_result_count"] == 1
+    assert coverage["fail_result_count"] == 0
+    assert review["target_count"] == 16
+    assert review["owner_decision_present"] is False
+    assert review["owner_approval_generated"] is False
+    assert review["golden_freeze_started"] is False
+    assert review["sealed_corpus_started"] is False
+    assert review["automatic_expectation_update_allowed"] is False
+
+
 def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
     state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "D01B_PHASE_STATE.json"
