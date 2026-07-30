@@ -126,8 +126,9 @@ PH-R00 [OWNER_APPROVED_PASS]
 → PH-D01A [CODEX_SELF_AUDIT_PASS]
 → PH-D01B [CODEX_SELF_AUDIT_PASS]
 → PH-D02A [CODEX_SELF_AUDIT_PASS]
-→ PH-D02B [ACTIVE]
-→ PH-D02C ... PH-D14
+→ PH-D02B [CODEX_SELF_AUDIT_PASS]
+→ PH-D02C [ACTIVE]
+→ PH-D03A ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
@@ -615,8 +616,10 @@ PH-D01Bは`PH_D01B_MANIFEST_FREEZE_PASS`、
 `ARC3_TEACHER_SOURCE_FROZEN`かつ`CODEX_SELF_AUDIT_PASS`です。
 PH-D02Aは`PH_D02A_CANONICAL_CONTRACT_PASS`かつ
 `CODEX_SELF_AUDIT_PASS`です。
-Active phaseはPH-D02Bです。
-一Work BlockでPH-D02Bだけを実施してください。
+PH-D02Bは`PH_D02B_SCHEMA_SET_PASS`かつ
+`CODEX_SELF_AUDIT_PASS`です。
+Active phaseはPH-D02Cです。
+一Work BlockでPH-D02Cだけを実施してください。
 
 最初に、
 - repository root
@@ -627,36 +630,42 @@ Active phaseはPH-D02Bです。
 - current phase state
 を確認してください。
 
-次にPH-D02B WorkBlockFrameを作成し、HDS蒸留仕様書第8章の38 schemaを
-相互参照可能かつdirectoryと1対1になる形で固定してください。
+次にPH-D02C WorkBlockFrameを作成し、HDS蒸留仕様書第9章のTyped Causal IRを、
+PH-D02B schemaとPH-D02A canonical contractへbindして固定してください。
 
-特に次を先に閉じてください。
+実装対象は次だけです。
 
-- DependencyLock／SourceProfile／ResourceProfile／OperatorRegistry
-- RawObservation／DeterministicDerivation／InterpretationHypothesis
-- EvidenceRecord／DistillationFrame
-- ModelRecord／GateResult／DecisionRecord／HDSCausalRecord
-- RuleAtom／RuleFamily／BoundaryRecord／CounterexampleRecord
-- FailureSignature／NormalizationCertificate／PromotionDecision
-- ApprovalRecord／OpenTermRecord／ClaimRecord／DistillationAudit
-- CoverageReport／CompletionStateRegistry／FrozenArtifactManifest
+- common type system
+- ARC2 opcode registry v1
+- ARC3 opcode registry v1
+- Operator Registry Entry契約
+- executable HypothesisIR contract
+- pure deterministic offline interpreter
+- type checkerとselector cardinality semantics
+- cost model、resource boundary、invalid operation semantics
+- unknown opcode rejection
+- Code／IR ABI
+- answer-copy／identity-routing linter
+- exact comparator interface
+- intervention runner interface
 
-全schemaへ`schema_version`と`content_digest`を持たせ、参照先IDを参照対象schemaで
-定義してください。`assertion_state`、`operation_state`、`adoption_state`、
-`evidence_state`、`mechanism_support_state`、`closure_state`、`update_state`を
-混同せず固定してください。
+valid IR実行、型不一致`IR_TYPE_ERROR`、unknown opcode
+`IR_UNKNOWN_OPCODE`、precondition不成立`IR_PRECONDITION_UNSATISFIED`、
+resource超過`SUSPEND_RESOURCE`、invalid operation明示FAIL、selector 0／1／複数、
+operator順序維持、ABI mismatch拒否を試験してください。
 
-schema一覧とdirectoryの1対1、全例のversion／digest、MULTI_CAUSAL／SUSPENDでの
-単一choice非強制、inferred evidence混入拒否、initial RuleAtomの
-PROPOSED／PROBATION限定、invalid reference ID拒否を試験し、
-`DG-00`、`DG-01`、`DG-02`、`DG-14`を証拠へ固定してください。
+case／task／game ID branch、full input digest lookup、full answer grid literal、
+per-case output座標表、fixed successful action列、source filename routing、
+replay index routingをfail-closedで拒否し、`DG-03`、`DG-08`、`DG-09`、
+`DG-12`を証拠へ固定してください。interpreterを独立processで3回実行し、
+結果digest一致を確認してください。
 
-PH-D02CのTyped Causal IR／interpreter／verifier、Golden freeze、
-trajectory normalization、candidate generation、Rule promotion、Bridge実装、
-AGI Runtime実装、P22改善、locked final、official、KaggleへPH-D02B内で
+PH-D03のGolden／Sealed corpus freeze、real trajectory normalization、
+candidate generation、intervention実行による因果主張、Rule promotion、
+Bridge実装、AGI Runtime実装、P22改善、locked final、official、KaggleへPH-D02C内で
 進んではいけません。
 
-PH-D02Bの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
+PH-D02Cの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
 現在のOwner連続進行許可に従い、停止せず次の通常phaseを別Work Blockとして開始してください。
 Codex自身がRule採否、hard gate承認、official承認を生成してはいけません。
 ```
