@@ -1,0 +1,107 @@
+{
+  "Mc": [
+    "authority_manifest",
+    "installed_selector",
+    "phase_state_schema",
+    "evidence_attestation_schema",
+    "approval_record_schema",
+    "fail_closed_governance_gate",
+    "deterministic_frozen_package_rebuild"
+  ],
+  "R": [
+    "evidence-commit:95c8fb0f1551716191769747d65816e273cf7640",
+    "evidence-payload:3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219",
+    "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8"
+  ],
+  "X": "REV3_STRATEGY_INSTALLED_WITH_NO_ACTIVE_PHASE_AND_PH_R00_SUSPENDED",
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "GOVERNANCE_ARTIFACT",
+    "APPROVED_CORRECTION_PACKAGE"
+  ],
+  "allowed_files": [
+    "AGENTS.md",
+    "AUTHORITY_ORDER.md",
+    "control/rev3/REV3_CURRENT_SELECTOR.json",
+    "control/rev3/PH-R-1_WORK_BLOCK_FRAME.json",
+    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+    "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+    "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+    "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "docs/strategy/contracts/APPROVAL_RECORD_SCHEMA_V1.json",
+    "docs/strategy/contracts/EVIDENCE_COMMIT_ATTESTATION_SCHEMA_V1.json",
+    "docs/strategy/contracts/PHASE_STATE_SCHEMA_V2.json",
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json",
+    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "scripts/package_rev3_strategy.py",
+    "scripts/validate_rev3_governance.py"
+  ],
+  "approved_package_sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
+  "base_commit": "d5d7b93769089f9de14f752e3678acea7b2198b3",
+  "base_tree": "3d4ac0acb130b90d0da284a0507a876dcc284d46",
+  "content_digest": "rev3-work-block-frame:52a68882462927d82c2584ec05c496b474b724a9cbacd503c04b7e319baf42cd",
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "forbidden_files": [
+    "analysis/autonomous_completion/**",
+    "distillation/**",
+    "control/rev3/R00_PHASE_STATE.json",
+    "control/rev3/D*_PHASE_STATE.json",
+    "control/rev3/PHASE_TRANSITIONS/**",
+    "agent/**",
+    "kaggle/**"
+  ],
+  "non_goals": [
+    "PH-R00 implementation or authorization",
+    "HDS distillation",
+    "Bridge or AGI capability implementation",
+    "Rule or bundle promotion",
+    "locked final",
+    "official environment",
+    "Kaggle mutation or submission"
+  ],
+  "owner_authority": {
+    "allowed_transition": "REV3_DOCUMENT_CORRECTION_ONLY_TO_PH-R-1_STRATEGY_INSTALLATION",
+    "approval_artifact_digest": "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8",
+    "approval_record": "control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json",
+    "decision_capture": "control/rev3/OWNER_DECISION_CAPTURES/REV3_DOC_FIX_TO_PH-R-1_20260731.json",
+    "decision_capture_digest": "sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd",
+    "future_phase_approval_scope": "NONE",
+    "owner": "大平鉄兵"
+  },
+  "phase_id": "PH-R-1",
+  "purpose": "Install the Owner-approved corrected rev3 governance contract without starting PH-R00 or any downstream capability phase.",
+  "resource_budget": {
+    "kaggle_mutation_count": 0,
+    "locked_final_access_count": 0,
+    "network_submission_count": 0,
+    "official_access_count": 0,
+    "owner_approval_generation_count": 0,
+    "teacher_source_read_count": 0
+  },
+  "roadmap_sha256": "3d023c48333910b18fab507ae4f2d46ce52faac271d925b08160cd3060f76c90",
+  "schema_version": "arc3-rev3-work-block-frame-v2",
+  "scope": [
+    "authority and execution-control status installation",
+    "current authority manifest with byte digests",
+    "machine-readable governance schemas",
+    "production gate remains closed before PH-B06/A08",
+    "regression and package reproducibility tests"
+  ],
+  "spec_sha256": "d51334e4709271c4ff3d9b46c6a4d625a25c55a7ee983a25bd6c827992ef3524",
+  "status": "FRAME_LOCKED",
+  "stop_condition": "OWNER_REVIEW_REQUIRED_WITH_PH_R00_NOT_STARTED",
+  "test_contract": [
+    "dedicated PH-R-1 governance tests",
+    "focused rev3 regression",
+    "ruff",
+    "mypy --strict",
+    "full unit",
+    "frozen correction package byte reproduction",
+    "JSON schema and digest validation",
+    "git diff --check"
+  ],
+  "work_block_id": "WB-PH-R-1-STRATEGY-INSTALLATION-20260731"
+}
