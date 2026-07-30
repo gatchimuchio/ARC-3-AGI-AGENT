@@ -1,0 +1,185 @@
+{
+  "schema_version": "arc3-rev3-ph-d01b-manifest-preinventory-v1",
+  "phase_id": "PH-D01B",
+  "work_block_id": "WB-PH-D01B-CONTENT-ACQUISITION-ENVIRONMENT-MANIFESTS",
+  "base_commit": "e7d14a12be4fef46854d08bef601f40a2da74941",
+  "inventory_semantics": "PREIMPLEMENTATION_CONTENT_AND_ENVIRONMENT_BINDING_PLAN_NOT_A_FREEZE_CLAIM",
+  "input_source_inventory": {
+    "path": "distillation/artifacts/reports/source_inventory.json",
+    "content_digest": "hds-source-inventory-report:ca27293b57737c743020ad19e063b08cd75d0d0c6d6571e67c6b5934c9f67d79",
+    "sha256": "7081391cc0ef2cc4c834526cb4a57df153dea76e4c4cf0d34e2535b410c06dba",
+    "profile_document_count": 8,
+    "admitted_source_count": 83,
+    "duplicate_source_assignment_count": 0,
+    "unassigned_admitted_source_count": 0
+  },
+  "content_groups": [
+    {
+      "profile_id": "arc2-evaluation-challenges",
+      "source_count": 1,
+      "content_location_class": "PINNED_EXTERNAL_ARCHIVE_MEMBER",
+      "verification": "ARCHIVE_AND_MEMBER_SHA256"
+    },
+    {
+      "profile_id": "arc2-evaluation-solutions",
+      "source_count": 1,
+      "content_location_class": "PINNED_EXTERNAL_ARCHIVE_MEMBER",
+      "verification": "ARCHIVE_AND_MEMBER_SHA256"
+    },
+    {
+      "profile_id": "arc2-test-challenges",
+      "source_count": 1,
+      "content_location_class": "PINNED_EXTERNAL_ARCHIVE_MEMBER",
+      "verification": "ARCHIVE_AND_MEMBER_SHA256"
+    },
+    {
+      "profile_id": "arc2-training-challenges",
+      "source_count": 1,
+      "content_location_class": "PINNED_EXTERNAL_ARCHIVE_MEMBER",
+      "verification": "ARCHIVE_AND_MEMBER_SHA256"
+    },
+    {
+      "profile_id": "arc2-training-solutions",
+      "source_count": 1,
+      "content_location_class": "PINNED_EXTERNAL_ARCHIVE_MEMBER",
+      "verification": "ARCHIVE_AND_MEMBER_SHA256"
+    },
+    {
+      "profile_id": "arc3-canonical-teacher-trajectories",
+      "source_count": 3,
+      "content_location_class": "GIT_TRACKED_REPOSITORY_FILE",
+      "verification": "FILE_SHA256_SIZE_AND_MERKLE"
+    },
+    {
+      "profile_id": "arc3-environment-source-bundle",
+      "source_count": 50,
+      "content_location_class": "GIT_TRACKED_REPOSITORY_FILE_WITH_PINNED_ARCHIVE_ALIAS",
+      "verification": "REPOSITORY_AND_ARCHIVE_ALIAS_BYTE_IDENTITY"
+    },
+    {
+      "profile_id": "arc3-raw-teacher-recordings",
+      "source_count": 25,
+      "content_location_class": "PINNED_EXTERNAL_DATASET_ROW",
+      "verification": "DATASET_REVISION_ROW_IDENTITY_AND_TRAJECTORY_SHA256"
+    }
+  ],
+  "distribution_authority": [
+    {
+      "distribution_id": "arc-prize-2026-arc-agi-2.zip",
+      "authority_sha256": "d00746ef4e06a515ad53bde4dff276dc8ef5a26829a0ebeafc8cf8ba6371abaa",
+      "observed_sha256_match": true,
+      "admitted_member_count": 5
+    },
+    {
+      "distribution_id": "arc-prize-2026-arc-agi-3.zip",
+      "authority_sha256": "c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d505de2b1ec61d645",
+      "observed_sha256_match": true,
+      "environment_alias_member_count": 50,
+      "authority_runtime_wheels": [
+        {
+          "name": "arcengine-0.9.3-py3-none-any.whl",
+          "authority_sha256": "5f9739d6d0055780a4581fd6fe09066bb08775c4c8212c9adcca2eb008aef59c"
+        },
+        {
+          "name": "arc_agi-0.9.8-py3-none-any.whl",
+          "authority_sha256": "aeca1663db342e91cb8fc96cf0c83e2fa39db1640bc1298e80a8d522e3af70f3"
+        }
+      ]
+    }
+  ],
+  "raw_recording_binding": {
+    "dataset_id": "magic-sword/arc_agi_3_public_demo_human_testing",
+    "dataset_repo_sha": "455b7c58eaa9d5ea05f91cd1b5b603121599e758",
+    "config": "default",
+    "split": "train",
+    "selected_row_count": 25,
+    "selected_level_count": 183,
+    "recording_filename_set_sha256": "721665417e5f0ac6a96723525f7664a3980deab6e97ee6a3aaae519690a3793e",
+    "pinned_trajectory_sha256_count": 25,
+    "local_recording_payload_count": 0,
+    "required_resolution": "VERIFY_EACH_PINNED_TRAJECTORY_HASH_AGAINST_REVISION_BOUND_REMOTE_CONTENT_OR_FAIL_CLOSED"
+  },
+  "environment_binding_plan": {
+    "repository_environment_source_file_count": 50,
+    "archive_alias_file_count": 50,
+    "runtime_wheel_count": 2,
+    "python_version": "3.12.13",
+    "os_and_architecture": "CAPTURE_EXACTLY_DURING_IMPLEMENTATION",
+    "dependency_lock": "CAPTURE_EXACTLY_DURING_IMPLEMENTATION",
+    "seed_and_reset_contract": "DECLARE_EXPLICITLY_WITHOUT_REPLAY",
+    "source_access": "READ_ONLY_HASHING_INTERFACE_AND_PRE_POST_NON_MUTATION_PROOF",
+    "network": "DISABLED_EXCEPT_PINNED_DATASET_ACQUISITION",
+    "source_execution_count": 0,
+    "teacher_replay_count": 0
+  },
+  "manifest_separation": {
+    "source_content_manifest_hashes": [
+      "content bytes",
+      "repository-relative POSIX logical paths",
+      "file sizes",
+      "directory Merkle root",
+      "upstream identity",
+      "profile and contamination metadata"
+    ],
+    "acquisition_record_only": [
+      "local path",
+      "acquired_at",
+      "mtime",
+      "actor",
+      "transport",
+      "notes"
+    ],
+    "run_manifest_only": [
+      "command",
+      "started_at",
+      "ended_at",
+      "exit code",
+      "stdout digest",
+      "stderr digest"
+    ],
+    "environment_manifest_hashes": [
+      "source-content manifest digests",
+      "environment source Merkle root",
+      "wheel hashes",
+      "interpreter identity",
+      "OS and architecture",
+      "dependency lock",
+      "seed and reset contract",
+      "isolation contract"
+    ]
+  },
+  "expected_output_accounting": {
+    "source_content_manifest_count": 8,
+    "source_entry_count": 83,
+    "acquisition_record_minimum_count": 3,
+    "environment_manifest_count": 1,
+    "run_manifest_count": 1,
+    "unknown_content_digest_count": 0,
+    "unknown_environment_field_count": 0
+  },
+  "open_risks": [
+    {
+      "risk_id": "D01B-RISK-REMOTE-REVISION-BINDING",
+      "risk": "Dataset Viewer row APIs normally expose the current dataset revision, while the source selection is pinned to a historical repository SHA.",
+      "required_resolution": "Prove returned rows are revision-bound to 455b7c58eaa9d5ea05f91cd1b5b603121599e758 or use a revision-addressed read-only Hub artifact; otherwise PH-D01B must fail closed."
+    },
+    {
+      "risk_id": "D01B-RISK-SOURCE-READONLY-SEMANTICS",
+      "risk": "The repository checkout is user-owned and not globally mounted read-only.",
+      "required_resolution": "Prove the manifest compiler exposes only read operations, performs pre/post byte-identity checks, and does not claim later replay-sandbox enforcement."
+    }
+  ],
+  "phase_boundaries": {
+    "content_manifest_frozen": false,
+    "acquisition_manifest_frozen": false,
+    "environment_manifest_frozen": false,
+    "trajectory_normalization_started": false,
+    "causal_ir_started": false,
+    "candidate_generation_started": false,
+    "bridge_started": false,
+    "runtime_started": false,
+    "official_access_count": 0,
+    "kaggle_mutation_count": 0
+  },
+  "content_digest": "rev3-ph-d01b-manifest-preinventory:be4ebff00ae62900cea26326cc9153481dc3660c588539dcefc53b1f28454ed3"
+}
