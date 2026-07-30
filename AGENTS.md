@@ -123,8 +123,9 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 PH-R00 [OWNER_APPROVED_PASS]
 → PH-D00A [CODEX_SELF_AUDIT_PASS]
 → PH-D00B [CODEX_SELF_AUDIT_PASS]
-→ PH-D01A [ACTIVE]
-→ PH-D01B ... PH-D14
+→ PH-D01A [CODEX_SELF_AUDIT_PASS]
+→ PH-D01B [ACTIVE]
+→ PH-D02A ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
@@ -607,8 +608,9 @@ Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではあ
 PH-R00はOwner ApprovalRecordにより採択済みです。
 PH-D00Aは`DEPENDENCY_LOCK_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
 PH-D00Bは`DISTILLATION_SCOPE_GUARD_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
-Active phaseはPH-D01Aです。
-一Work BlockでPH-D01Aだけを実施してください。
+PH-D01Aは`PH_D01A_SOURCE_INVENTORY_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
+Active phaseはPH-D01Bです。
+一Work BlockでPH-D01Bだけを実施してください。
 
 最初に、
 - repository root
@@ -619,32 +621,31 @@ Active phaseはPH-D01Aです。
 - current phase state
 を確認してください。
 
-次にPH-D01A WorkBlockFrameを作成し、ARC2／ARC3 sourceを配布形式、split、
-answer visibility、development usage、contaminationでinventoryしてください。
-全admitted source fileを、次のいずれか一つのprofileへ分類してください。
+次にPH-D01B WorkBlockFrameを作成し、PH-D01Aでadmitしたsourceについて、
+内容同一性、取得記録、実行環境、run記録を分離して固定してください。
 
-ARC2:
-- `ARC2_KAGGLE_CHALLENGE_SOLUTION`
-- `ARC2_OFFICIAL_TASK_JSON`
-- `ARC2_INTERNAL_NORMALIZED_CORPUS`
+成果物は次の四契約です。
 
-ARC3:
-- `ARC3_ENVIRONMENT_SOURCE_BUNDLE`
-- `ARC3_RAW_TEACHER_RECORDING`
-- `ARC3_CANONICAL_TEACHER_TRAJECTORY`
+- `SourceContentManifest`
+- `AcquisitionRecord`
+- `EnvironmentManifest`
+- `RunManifest`
 
-split roleは`TRAIN_TEACHER`、`PUBLIC_EVALUATION_TEACHER`、
-`PUBLIC_EVALUATION_CONSUMED`、`UNLABELED_TEST`、`REPLAY_ONLY_SOURCE`、
-`SEALED_AUDIT`から選び、answer visibility不明、split role不明を0にしてください。
-evaluation解答使用時はcontaminationを明示し、source policy weightを教師素材へ
-数えないでください。成果物は`profiles/source/*.json`と
-`artifacts/reports/source_inventory.json`です。
+repository-relative POSIX path、file SHA-256／size、directory Merkle root、
+upstream identity、split／answer visibility／development usage／contamination、
+ARC3 wheel hash、Python／OS／dependency lock、source read-only状態、
+environment isolation reportを明示してください。
 
-PH-D01Bのcontent／acquisition／environment manifest freeze、trajectory normalization、
-Causal IR、candidate generation、Bridge実装、AGI Runtime実装、P22改善、
-locked final、official、KaggleへPH-D01A内で進んではいけません。
+同一内容を別path／別時刻で取得してもcontent digestが一致し、
+mtime／created_at変更でcontent digestが不変であり、source改変でdownstream bindingが
+fail closedになることを試験してください。ARC3 replay environment hashは、
+admitted environment sourceとwheel／interpreter／dependency stateを完全にbindしてください。
 
-PH-D01Aの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
+PH-D02Aの全schema共通canonical serialization、trajectory normalization、Causal IR、
+candidate generation、Rule promotion、Bridge実装、AGI Runtime実装、P22改善、
+locked final、official、KaggleへPH-D01B内で進んではいけません。
+
+PH-D01Bの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
 現在のOwner連続進行許可に従い、停止せず次の通常phaseを別Work Blockとして開始してください。
 Codex自身がRule採否、hard gate承認、official承認を生成してはいけません。
 ```

@@ -1,0 +1,47 @@
+{
+  "schema_version": "arc3-rev3-phase-transition-v1",
+  "transition_id": "PH-D01A-TO-PH-D01B-20260730",
+  "from_phase_id": "PH-D01A",
+  "from_phase_status": "CODEX_SELF_AUDIT_PASS",
+  "from_phase_state_path": "control/rev3/D01A_PHASE_STATE.json",
+  "from_phase_state_digest": "rev3-d01a-phase-state:00b10b0b2bdfe27506562a8ed1dd75fa9f3f0d463ee269084b5e26c4d0eab62a",
+  "from_phase_state_sha256": "8609eda37c52fae021c04177c31b48ea08b365182fba1c27de8c742eee739d39",
+  "from_phase_evidence_commit": "9eee596736cc917d399041f875639892efe55f08",
+  "from_phase_evidence_tree": "17fc897081b0cb97c069c6538e952fea5a83a608",
+  "from_phase_artifact_manifest_path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+  "from_phase_artifact_manifest_digest": "rev3-d01a-owner-review-artifact-manifest:078fc8e6273bc4ab86888f3b51d5db4f48be71e7d1f787f4607706fded305ebe",
+  "to_phase_id": "PH-D01B",
+  "decision": "CONTINUE_UNDER_RECORDED_OWNER_AUTHORIZATION",
+  "authorization_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+  "authorization_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+  "verified_exit_conditions": {
+    "source_inventory_pass": true,
+    "admitted_source_count": 83,
+    "profile_document_count": 8,
+    "duplicate_source_assignment_count": 0,
+    "unassigned_admitted_source_count": 0,
+    "unknown_answer_visibility_count": 0,
+    "unknown_split_role_count": 0,
+    "policy_weight_admitted_source_count": 0,
+    "environment_source_non_replay_access_count": 0,
+    "source_payload_access_count": 0,
+    "failed_requirement_count": 0,
+    "full_unit_passed": 702,
+    "full_integration_passed": 8
+  },
+  "hard_gates_crossed": [],
+  "permissions_not_granted": [
+    "Rule or RuleAtom promotion",
+    "HDSStructureBundle approval",
+    "DistilledInitialStateBundle approval",
+    "LOCKED_FINAL access",
+    "official environment access",
+    "Kaggle notebook mutation or submission"
+  ],
+  "phase_order_preserved": true,
+  "digest_excluded_fields": [
+    "content_digest",
+    "transition_id"
+  ],
+  "content_digest": "rev3-phase-transition:395e4e0090a5e1c67c6e9050f8a104903a21f3f9bb6b1612d69cbeb04c06ed6d"
+}
