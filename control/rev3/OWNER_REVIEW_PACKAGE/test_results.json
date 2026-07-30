@@ -1,0 +1,69 @@
+{
+  "schema_version": "arc3-rev3-owner-review-test-results-v1",
+  "phase_id": "PH-R00",
+  "result_commit": "96ed8533b8f5d84800dcdfd694684d5c702a6753",
+  "results": [
+    {
+      "suite": "DEDICATED_REV3",
+      "status": "PASS",
+      "passed": 13,
+      "failed": 0
+    },
+    {
+      "suite": "FOCUSED_P16_P21_AND_REV3_POST_COMMIT",
+      "status": "PASS",
+      "passed": 112,
+      "failed": 0,
+      "duration_seconds": 13.8
+    },
+    {
+      "suite": "FULL_UNIT_POST_COMMIT",
+      "status": "FAIL",
+      "passed": 681,
+      "failed": 1,
+      "duration_seconds": 306.81,
+      "classification": "PRODUCT_REGRESSION",
+      "failed_test": "tests/unit/test_kaggle_notebook_contract.py::test_kaggle_notebook_matches_official_submission_shape",
+      "failure_code": "KAGGLE_RUNTIME_IMPORT_CLOSURE_INCOMPLETE:compiled_policy",
+      "change_origin": "PRE_EXISTING_BASE_TREE"
+    },
+    {
+      "suite": "FULL_INTEGRATION_POST_COMMIT",
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 311.55
+    },
+    {
+      "suite": "RUFF_CHANGED_SOURCE_AND_TEST",
+      "status": "PASS"
+    },
+    {
+      "suite": "MYPY_REV3_GOVERNANCE",
+      "status": "PASS"
+    },
+    {
+      "suite": "COMPILEALL_CHANGED_SOURCE_AND_TEST",
+      "status": "PASS"
+    },
+    {
+      "suite": "ARTIFACT_DETERMINISM",
+      "status": "PASS",
+      "independent_process_count": 3,
+      "aggregate_digest": "983f6291769bae6cb68cd9b0e47a5b8a55c5942f489bf72a98dceb12e2f53106"
+    },
+    {
+      "suite": "SOURCE_IMPORT_AND_PACKAGE_DISCOVERY",
+      "status": "PASS"
+    },
+    {
+      "suite": "WHEEL_BUILD",
+      "status": "ENVIRONMENT_FAILURE",
+      "classification": "ENVIRONMENT_FAILURE",
+      "reason": "uv, pip, build, setuptools, and wheel are unavailable in the project environment"
+    }
+  ],
+  "new_product_regression_count": 0,
+  "declared_preexisting_product_regression_count": 1,
+  "environment_failure_count": 1
+}

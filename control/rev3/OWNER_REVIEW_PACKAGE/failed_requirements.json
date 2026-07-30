@@ -1,0 +1,30 @@
+{
+  "schema_version": "arc3-rev3-owner-review-failed-requirements-v1",
+  "phase_id": "PH-R00",
+  "failed_requirements": [
+    {
+      "id": "R00-NOTEBOOK-REGRESSION-001",
+      "status": "FAIL",
+      "classification": "PRODUCT_REGRESSION",
+      "origin": "PRE_EXISTING_BASE_TREE",
+      "symptom": "KAGGLE_RUNTIME_IMPORT_CLOSURE_INCOMPLETE:compiled_policy",
+      "structural_cause": "The historical notebook package includes p_bundle.py, which imports compiled_policy.py, while the package closure excludes compiled_policy.py.",
+      "affected_scope": "historical Kaggle notebook builder",
+      "unaffected_scope": "rev3 production selection guard and PH-R00 governance artifacts",
+      "prohibited_quick_fix": "Do not add historical compiled_policy or S5 weights to a rev3 production package.",
+      "owner_decision_required": true
+    },
+    {
+      "id": "R00-PACKAGE-BUILD-ENVIRONMENT-001",
+      "status": "SUSPEND",
+      "classification": "ENVIRONMENT_FAILURE",
+      "origin": "PROJECT_ENVIRONMENT",
+      "symptom": "No module named build",
+      "structural_cause": "The project environment provides neither uv nor pip/build/setuptools/wheel.",
+      "affected_scope": "wheel build verification",
+      "unaffected_scope": "source import, package discovery, unit, integration, and digest checks",
+      "repair_requirement": "Restore a lock-consistent package build toolchain before a wheel-build gate is required.",
+      "owner_decision_required": true
+    }
+  ]
+}
