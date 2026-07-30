@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/gatchimuchio/ARC-3-AGI-AGENT/schemas/dependency_lock.schema.json",
+  "title": "HDS DependencyLock v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "authority",
+    "authority_defined",
+    "content_digest",
+    "digest_excluded_fields",
+    "domain",
+    "gates",
+    "hash_algorithm",
+    "hds_dependency_match",
+    "local_dependencies",
+    "manifest_id",
+    "manifest_version",
+    "phase_id",
+    "repository_relative_posix_paths",
+    "schema_version",
+    "source_profile",
+    "unresolved_dependency_count",
+    "upstream_dependencies"
+  ],
+  "properties": {
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority_order_path",
+        "authority_order_sha256",
+        "final_selector",
+        "owner_approval_artifact_digest",
+        "owner_approval_path",
+        "owner_approval_sha256",
+        "promotion_authority"
+      ],
+      "properties": {
+        "authority_order_path": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "authority_order_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "final_selector": {
+          "const": "大平鉄兵"
+        },
+        "owner_approval_artifact_digest": {
+          "pattern": "^owner-approval-record:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "owner_approval_path": {
+          "$ref": "#/$defs/repositoryPath"
+        },
+        "owner_approval_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "promotion_authority": {
+          "const": "OWNER_ONLY"
+        }
+      }
+    },
+    "authority_defined": {
+      "const": true
+    },
+    "content_digest": {
+      "pattern": "^hds-dependency-lock:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "digest_excluded_fields": {
+      "const": [
+        "content_digest",
+        "manifest_id"
+      ]
+    },
+    "domain": {
+      "const": "HDS_AUTHORITY_DEPENDENCIES"
+    },
+    "gates": {
+      "const": [
+        "DG-00",
+        "DG-14"
+      ]
+    },
+    "hash_algorithm": {
+      "const": "sha256"
+    },
+    "hds_dependency_match": {
+      "const": true
+    },
+    "local_dependencies": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dependency_id",
+          "path",
+          "required",
+          "role",
+          "sha256",
+          "size_bytes"
+        ],
+        "properties": {
+          "dependency_id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "path": {
+            "$ref": "#/$defs/repositoryPath"
+          },
+          "required": {
+            "const": true
+          },
+          "role": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "size_bytes": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "manifest_id": {
+      "const": "HDS-DEPENDENCIES-PH-D00A-V1"
+    },
+    "manifest_version": {
+      "const": "1.0.0"
+    },
+    "phase_id": {
+      "const": "PH-D00A"
+    },
+    "repository_relative_posix_paths": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/repositoryPath"
+      }
+    },
+    "schema_version": {
+      "const": "hds-dependency-lock-v1"
+    },
+    "source_profile": {
+      "const": "HDS_CANONICAL_AUTHORITY_LOCK"
+    },
+    "unresolved_dependency_count": {
+      "const": 0
+    },
+    "upstream_dependencies": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "capability_boundary",
+          "commit",
+          "dependency_id",
+          "readme_git_blob",
+          "readme_path",
+          "readme_sha256",
+          "repository",
+          "required",
+          "tree"
+        ],
+        "properties": {
+          "capability_boundary": {
+            "const": "DETERMINISTIC_HDS_TRANSLATION_REFERENCE_ONLY"
+          },
+          "commit": {
+            "$ref": "#/$defs/gitObject"
+          },
+          "dependency_id": {
+            "const": "HDS_BLACK_BOX_TRANSLATOR"
+          },
+          "readme_git_blob": {
+            "$ref": "#/$defs/gitObject"
+          },
+          "readme_path": {
+            "$ref": "#/$defs/repositoryPath"
+          },
+          "readme_sha256": {
+            "$ref": "#/$defs/sha256"
+          },
+          "repository": {
+            "const": "gatchimuchio/HDS-BlackBox-Translator"
+          },
+          "required": {
+            "const": true
+          },
+          "tree": {
+            "$ref": "#/$defs/gitObject"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "gitObject": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "repositoryPath": {
+      "pattern": "^(?!/)(?!.*\\\\)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+      "type": "string"
+    },
+    "sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    }
+  }
+}
