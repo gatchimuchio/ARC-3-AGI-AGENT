@@ -1,0 +1,107 @@
+{
+  "schema_version": "arc3-rev3-owner-review-self-audit-v1",
+  "phase_id": "PH-D01B",
+  "decision": "CODEX_SELF_AUDIT_PASS",
+  "codex_self_audit_pass": true,
+  "checks": [
+    {
+      "id": "OBJECTIVE_ALIGNMENT",
+      "status": "PASS"
+    },
+    {
+      "id": "SCOPE",
+      "status": "PASS"
+    },
+    {
+      "id": "AUTHORITY",
+      "status": "PASS"
+    },
+    {
+      "id": "SOURCE_ADMISSION_BINDING",
+      "status": "PASS"
+    },
+    {
+      "id": "CONTENT_ACQUISITION_RUN_SEPARATION",
+      "status": "PASS"
+    },
+    {
+      "id": "IDENTITY_AND_TAINT",
+      "status": "PASS"
+    },
+    {
+      "id": "CONTAMINATION_DISCLOSURE",
+      "status": "PASS"
+    },
+    {
+      "id": "PATH_AND_TIME_INDEPENDENCE",
+      "status": "PASS"
+    },
+    {
+      "id": "SOURCE_MUTATION_INVALIDATION",
+      "status": "PASS"
+    },
+    {
+      "id": "ENVIRONMENT_COMPLETENESS",
+      "status": "PASS"
+    },
+    {
+      "id": "SOURCE_READ_ONLY_AND_NONMUTATION",
+      "status": "PASS"
+    },
+    {
+      "id": "EVIDENCE",
+      "status": "PASS"
+    },
+    {
+      "id": "DETERMINISM",
+      "status": "PASS"
+    },
+    {
+      "id": "DATA_ROLE",
+      "status": "PASS"
+    },
+    {
+      "id": "CLAIM_STRENGTH",
+      "status": "PASS"
+    },
+    {
+      "id": "ROLLBACK",
+      "status": "PASS"
+    },
+    {
+      "id": "RESOURCE",
+      "status": "PASS"
+    },
+    {
+      "id": "HISTORICAL_FALLBACK",
+      "status": "PASS"
+    },
+    {
+      "id": "REQUIRED_VALIDATION",
+      "status": "PASS"
+    },
+    {
+      "id": "DOWNSTREAM_PHASE_BOUNDARY",
+      "status": "PASS"
+    }
+  ],
+  "reason": "PH-D01B binds all 83 PH-D01A-admitted sources through eight content manifests, eight separate acquisition records, one complete ARC3 environment manifest, and one revision-pinned run record. Dedicated, focused, full unit, integration, static, nonmutation, and three-build determinism evidence passes without semantic source parsing, source execution, replay, downstream causal work, official access, or Kaggle mutation.",
+  "claim_allowed": [
+    "PH_D01B_MANIFEST_FREEZE_PASS",
+    "ARC3_TEACHER_SOURCE_FROZEN",
+    "PH_D01B_CODEX_SELF_AUDIT_PASS"
+  ],
+  "claim_prohibited": [
+    "CANONICAL_SERIALIZATION_COMPLETE",
+    "TRAJECTORY_NORMALIZATION_COMPLETE",
+    "DISTILLATION_IR_EXECUTABLE",
+    "HDS_DISTILLATION_PIPELINE_COMPLETE",
+    "HDS_CORPUS_PROCESSED",
+    "HDS_STRUCTURE_BUNDLE_FROZEN",
+    "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED",
+    "DISTILLED_RUNTIME_STRUCTURAL_READY",
+    "GENERIC",
+    "AGI",
+    "OFFICIAL_READY"
+  ]
+}

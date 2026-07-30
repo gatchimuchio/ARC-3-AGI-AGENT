@@ -1,0 +1,111 @@
+{
+  "schema_version": "arc3-rev3-owner-review-test-results-v1",
+  "phase_id": "PH-D01B",
+  "result_commit": "5c47bb5f1519f07ff74aa61ba6beff7fcc13dc6d",
+  "results": [
+    {
+      "suite": "checked_manifest_freeze",
+      "status": "PASS",
+      "source_content_manifest_count": 8,
+      "source_entry_count": 83,
+      "acquisition_record_count": 8,
+      "environment_manifest_count": 1,
+      "run_manifest_count": 1,
+      "report_digest": "hds-source-manifest-freeze-report:345b0ae96b840bee24d49362704acf4126af5e559d98d3e3f0da9650c73ab48f"
+    },
+    {
+      "suite": "raw_recording_capture",
+      "status": "PASS",
+      "recording_count": 25,
+      "level_count": 183,
+      "trajectory_bytes_hashed": 495947429,
+      "selected_run_api_call_count": 27,
+      "selected_run_transient_retry_count": 0,
+      "dataset_revision_before_after_match": true,
+      "payload_retained": false,
+      "content_digest": "hds-raw-recording-content-capture:9a5c78c26c730115a3f694947318da732eba0b36841bebef07099f95a945ff24"
+    },
+    {
+      "suite": "dedicated_manifest_freeze",
+      "status": "PASS",
+      "passed": 23,
+      "failed": 0,
+      "duration_seconds": 8.6,
+      "post_result_commit": true
+    },
+    {
+      "suite": "focused_distillation_and_rev3",
+      "status": "PASS",
+      "passed": 92,
+      "failed": 0,
+      "duration_seconds": 54.87,
+      "post_result_commit": true
+    },
+    {
+      "suite": "full_unit",
+      "status": "PASS",
+      "passed": 703,
+      "failed": 0,
+      "duration_seconds": 402.62,
+      "post_result_commit": true
+    },
+    {
+      "suite": "integration",
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 454.51,
+      "post_result_commit": true
+    },
+    {
+      "suite": "lint",
+      "status": "PASS",
+      "tool": "ruff",
+      "version": "0.12.7"
+    },
+    {
+      "suite": "type_check",
+      "status": "PASS",
+      "mode": "strict",
+      "tool": "mypy",
+      "version": "1.17.1",
+      "checked_source_file_count": 8
+    },
+    {
+      "suite": "compileall",
+      "status": "PASS"
+    },
+    {
+      "suite": "scope_guard",
+      "status": "PASS",
+      "finding_count": 0,
+      "audited_source_execution_count": 0,
+      "report_digest": "hds-distillation-scope-audit:22510866d8891f1d2e723bbde282976dbd0fef2e8613d3441f3d3d8b38e44808"
+    },
+    {
+      "suite": "environment_lock",
+      "status": "PASS",
+      "python": "3.12.13",
+      "runtime_dependency_count": 97,
+      "environment_source_count": 50,
+      "runtime_wheel_count": 2,
+      "environment_digest": "hds-environment-manifest:c9d5bf601d0fdec28a4a7bb8df722b6954dfed0e29f19ecaf4797485de152754"
+    },
+    {
+      "suite": "determinism",
+      "status": "PASS",
+      "independent_rebuild_count": 3,
+      "artifact_count_per_rebuild": 20,
+      "byte_identical": true,
+      "checked_artifact_match": true,
+      "aggregate_sha256": "a48353aa3904f3917a4cf8669cc0ef2ca860575c8f5c344095dcd9ed4e9a68cb"
+    }
+  ],
+  "resolved_pre_result_product_failure_count": 3,
+  "resolved_external_service_failure_count": 1,
+  "resolved_environment_failure_count": 2,
+  "new_product_regression_count": 0,
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "active_external_service_failure_count": 0
+}

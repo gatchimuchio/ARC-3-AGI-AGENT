@@ -313,6 +313,141 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     assert transition["hard_gates_crossed"] == []
 
 
+def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
+    state_path = (
+        REPOSITORY_ROOT / "control" / "rev3" / "D01B_PHASE_STATE.json"
+    )
+    package_state_path = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D01B_OWNER_REVIEW_PACKAGE"
+        / "phase_state.json"
+    )
+    state = _json(state_path)
+    state_body = dict(state)
+    claimed = str(state_body.pop("content_digest"))
+
+    assert state == _json(package_state_path)
+    assert claimed == "rev3-d01b-phase-state:" + digest_object(state_body)
+    assert state["phase_id"] == "PH-D01B"
+    assert state["status"] == "CODEX_SELF_AUDIT_PASS"
+    assert state["result_commit"] == (
+        "5c47bb5f1519f07ff74aa61ba6beff7fcc13dc6d"
+    )
+    assert state["result_tree"] == (
+        "d64951234d55f2e83330255251c5f11caf562307"
+    )
+    assert state["owner_review_required"] is False
+    assert state["owner_decisions_required"] == []
+    assert state["failed_requirement_ids"] == []
+    assert state["open_terms"] == []
+
+    invariants = state["phase_invariants"]
+    assert invariants["source_content_manifest_count"] == 8
+    assert invariants["source_entry_count"] == 83
+    assert invariants["acquisition_record_count"] == 8
+    assert invariants["environment_manifest_count"] == 1
+    assert invariants["run_manifest_count"] == 1
+    assert invariants["raw_recording_verified_count"] == 25
+    assert invariants["raw_recording_level_count"] == 183
+    assert invariants["arc3_environment_source_count"] == 50
+    assert invariants["arc3_distribution_alias_verified_count"] == 50
+    assert invariants["runtime_wheel_verified_count"] == 2
+    assert invariants["source_payload_parse_count"] == 0
+    assert invariants["source_execution_count"] == 0
+    assert invariants["replay_execution_count"] == 0
+    assert invariants["compiler_network_call_count"] == 0
+    assert invariants["trajectory_normalization_started"] is False
+    assert invariants["canonical_schema_phase_started"] is False
+    assert invariants["causal_ir_started"] is False
+    assert invariants["official_access_count"] == 0
+    assert invariants["kaggle_mutation_count"] == 0
+    assert invariants["preexisting_dirty_file_count"] == 32
+    assert invariants["preexisting_dirty_aggregate_sha256"] == (
+        "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4"
+    )
+    assert invariants["next_phase"] == "PH-D02A"
+    assert invariants["next_phase_started"] is False
+
+    assert state["tests"]["dedicated_manifest_freeze"]["passed"] == 23
+    assert state["tests"]["focused_distillation_and_rev3"]["passed"] == 92
+    assert state["tests"]["full_unit"]["passed"] == 703
+    assert state["tests"]["integration"]["passed"] == 8
+    assert state["tests"]["determinism"]["aggregate_sha256"] == (
+        "a48353aa3904f3917a4cf8669cc0ef2ca860575c8f5c344095dcd9ed4e9a68cb"
+    )
+    assert "PH_D01B_MANIFEST_FREEZE_PASS" in state["claim_allowed"]
+    assert "ARC3_TEACHER_SOURCE_FROZEN" in state["claim_allowed"]
+    assert "TRAJECTORY_NORMALIZATION_COMPLETE" in (
+        state["claim_prohibited"]
+    )
+    assert "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED" in (
+        state["claim_prohibited"]
+    )
+
+    result_commit = str(state["result_commit"])
+    for artifact in state["artifacts"]:
+        path = artifact.get("path")
+        expected_sha256 = artifact.get("sha256")
+        if path is not None and expected_sha256 is not None:
+            assert _git_blob_sha256(result_commit, str(path)) == (
+                expected_sha256
+            )
+
+
+def test_ph_d01b_owner_review_package_is_complete_and_claim_limited(
+) -> None:
+    package_root = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D01B_OWNER_REVIEW_PACKAGE"
+    )
+    required = {
+        "changed_files.json",
+        "commands.json",
+        "failed_requirements.json",
+        "open_terms.json",
+        "phase_state.json",
+        "proposed_next_action.md",
+        "self_audit.json",
+        "summary.md",
+        "test_results.json",
+    }
+    assert required <= {
+        path.name for path in package_root.iterdir() if path.is_file()
+    }
+
+    failed = _json(package_root / "failed_requirements.json")
+    open_terms = _json(package_root / "open_terms.json")
+    self_audit = _json(package_root / "self_audit.json")
+    tests = _json(package_root / "test_results.json")
+    changed = _json(package_root / "changed_files.json")
+
+    assert failed["failed_requirement_count"] == 0
+    assert failed["failed_requirements"] == []
+    assert open_terms["open_terms"] == []
+    assert open_terms["owner_decisions"] == []
+    assert self_audit["decision"] == "CODEX_SELF_AUDIT_PASS"
+    assert self_audit["codex_self_audit_pass"] is True
+    assert tests["active_product_regression_count"] == 0
+    assert tests["active_environment_failure_count"] == 0
+    assert tests["active_external_service_failure_count"] == 0
+    assert changed["changed_file_count"] == 35
+    assert changed["excluded_preexisting_dirty_state"]["mutation"] == "NONE"
+    assert changed["excluded_preexisting_dirty_state"]["staging"] == "NONE"
+
+    summary = (package_root / "summary.md").read_text(encoding="utf-8")
+    next_action = (package_root / "proposed_next_action.md").read_text(
+        encoding="utf-8"
+    )
+    assert "PH_D01B_MANIFEST_FREEZE_PASS" in summary
+    assert "not started" in summary
+    assert "Proceed to `PH-D02A`" in next_action
+    assert "Do not enter PH-D02B" in next_action
+
+
 def test_asset_classification_and_frame_are_content_bound() -> None:
     classification = _json(
         REPOSITORY_ROOT
