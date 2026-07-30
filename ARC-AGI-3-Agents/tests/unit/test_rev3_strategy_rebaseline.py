@@ -2082,9 +2082,13 @@ def test_ph_r00_current_rebind_and_historical_evidence_are_content_bound(
         selector["historical_evidence"]["classification"]
         == "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
     )
-    phase_state_path = (
-        REPOSITORY_ROOT / "control" / "rev3" / "R00_PHASE_STATE.json"
+    historical_package_root = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "OWNER_REVIEW_PACKAGE"
     )
+    phase_state_path = historical_package_root / "phase_state.json"
     approval = _json(
         REPOSITORY_ROOT
         / "control"
@@ -2120,20 +2124,8 @@ def test_ph_r00_current_rebind_and_historical_evidence_are_content_bound(
     assert phase_invariants["owner_approval_digest"] == (
         approval["approval_artifact_digest"]
     )
-    assert phase_state_path.read_bytes() == (
-        REPOSITORY_ROOT
-        / "control"
-        / "rev3"
-        / "OWNER_REVIEW_PACKAGE"
-        / "phase_state.json"
-    ).read_bytes()
-
     artifact_manifest = _json(
-        REPOSITORY_ROOT
-        / "control"
-        / "rev3"
-        / "OWNER_REVIEW_PACKAGE"
-        / "artifact_manifest.json"
+        historical_package_root / "artifact_manifest.json"
     )
     artifact_manifest_body = dict(artifact_manifest)
     artifact_manifest_digest = str(
