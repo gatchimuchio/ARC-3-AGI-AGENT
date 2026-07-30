@@ -4,12 +4,15 @@
 - 対象repository: `gatchimuchio/ARC-3-AGI-AGENT`
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
 - 上位仕様: `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
-- Codex運用正本: `ARC3_AGENTS_Codex開発運用契約_rev3.md`
+- Codex運用正本: root `AGENTS.md`
 - HDS蒸留正本:
   - `HDS蒸留仕様書_ARC2_ARC3_rev2.md`
   - `HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
-- 日付: `2026-07-30`
-- 状態: `ACTIVE_STRATEGY_SELECTOR`
+- 日付: `2026-07-31`
+- 状態: `PROPOSED_PENDING_OWNER_APPROVAL`
+- 導入状態: `NOT_INSTALLED`
+- 現在作業: `REV3_DOCUMENT_CORRECTION_ONLY`
+- Phase guard: `PH-R00 = SUSPEND`
 - 原則: HDS構造データをOwner承認付きでfreezeするまで、AGI能力実装へ進まない
 
 ---
@@ -17,6 +20,10 @@
 ## 0. 全体依存順序
 
 ```text
+REV3-DOC-FIX  Audit Correction
+  ↓ Owner explicit approval
+PH-R-1  Strategy Installation
+  ↓
 PH-R00  Strategy Rebaseline / Infrastructure Freeze
   ↓
 PH-D00A ... PH-D14  HDS Distillation
@@ -29,6 +36,13 @@ PH-E00 ... PH-E04   Evaluation / Competition / Official
 ```
 
 Hard Gate:
+
+```text
+OWNER_APPROVED_REV3_CORRECTION
+AND PH-R-1 STRATEGY_INSTALLATION_COMPLETE
+```
+
+が成立するまで、`PH-R00`以降を開始しない。
 
 ```text
 PH-D14
@@ -48,6 +62,67 @@ AND DISTILLED_INITIAL_STATE_BUNDLE_FROZEN
 
 # Track R — Strategy Rebaseline
 
+## REV3-DOC-FIX — Audit Correction
+
+### 目的
+
+F-01〜F-17を文書・機械可読契約・配布artifactで是正する。Phase実装ではなく、Strategy Installationの前提を閉じる。
+
+### 許可
+
+- authority、Git evidence、artifact layer、M、Bridge、CV、coverage、schema、J、role、Owner capture、claim、evaluator、action surface、package契約の修正
+- 監査前証拠のhistorical/non-authoritative分類
+- deterministic package生成と文書回帰
+
+### 禁止
+
+- PH-R-1またはPH-R00開始
+- HDS蒸留、Bridge、Runtime実装
+- Rule/Phase/Bundle自己承認
+- locked final、official、Kaggle
+
+### Exit
+
+```text
+CODEX_IMPLEMENTATION_COMPLETE
+CODEX_SELF_AUDIT_PASS
+OWNER_REVIEW_REQUIRED
+```
+
+Ownerの対象明示承認までstrategyは`NOT_INSTALLED`、`PH-R00`は`SUSPEND`である。
+
+---
+
+## PH-R-1 — Strategy Installation
+
+### Entry
+
+- `OWNER_APPROVED_REV3_CORRECTION`
+- `OwnerDecisionCapture`が是正artifact digest、evidence commit、許可遷移を一意に指定
+- corrected package manifest/checksum PASS
+
+### 目的
+
+是正済みrev3をroot `AGENTS.md`、current selector、phase state schemaへ導入する。
+
+### 実施
+
+1. normative authorityとexecution controlを固定
+2. corrected contract digestをcurrent authority manifestへ固定
+3. 監査前phase evidenceを`HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE`へ分類
+4. active phaseを未設定のままinstallation evidenceを生成
+5. Owner Review PackageをEvidence Commitへ固定
+
+### Exit
+
+```text
+STRATEGY_INSTALLATION_COMPLETE
+OWNER_REVIEW_REQUIRED
+PH-R00_NOT_STARTED
+```
+
+CodexはPH-R-1の完了だけでPH-R00を開始しない。PH-R00開始には対象を指定したOwner判断が必要である。
+
 ## PH-R00 — Current HEAD Rebind / Infrastructure Freeze
 
 ### 目的
@@ -58,9 +133,9 @@ AND DISTILLED_INITIAL_STATE_BUNDLE_FROZEN
 
 1. current HEAD／treeを固定
 2. full unit／integration／package／notebook regression
-3. phase stateをcommit/treeへ再生成
+3. Implementation CommitとEvidence Commitを分離し、phase stateを`implementation_commit/tree`へbind
 4. current P22、S5、compiled policyをquarantine
-5. active selectorをrev3へ変更
+5. PH-R-1で導入済みselectorとauthority digestを検証
 6. production import boundaryを追加
 7. current auditをbaseline evidenceへ固定
 
@@ -106,7 +181,7 @@ next_phase = PH-D00A
 owner_approval = required
 ```
 
-Codexは`OWNER_APPROVED_PASS`を設定しない。
+Codexは`OWNER_APPROVED_PASS`を設定せず、PH-D00Aを自動開始しない。
 
 ---
 
@@ -155,18 +230,37 @@ runtime/      # read-only reference
 
 ---
 
-## PH-D01A/B — Source Inventory / Manifest Freeze
+## PH-D01A — Primary Source Inventory
 
 ### 目的
 
-raw teacher evidence、trajectory、environment、wheel、seed、splitを固定する。
+raw teacher evidence、trajectory、environment、wheel、seed、splitを列挙し、Primary Teacher Sourceだけをinventory化する。
 
-### rev3追加
+### 必須
 
 - source policy weightsは教師素材に数えない
 - raw trajectoryとS5 corpusの対応関係をprovenanceとして記録
-- source codeはreplay harnessだけが読める
-- public 25はDISTILLATION_SOURCEへ分類
+- public 25は`DISTILLATION_SOURCE`へ分類
+- Derived Distillation EvidenceとGovernance Artifactsをsource inventoryへ入れない
+
+### Exit
+
+`PH_D01A_PRIMARY_SOURCE_INVENTORY_PASS`
+
+---
+
+## PH-D01B — Source Content / Acquisition / Run Manifest Freeze
+
+### 目的
+
+PH-D01AのPrimary Teacher Sourceについてcontent、acquisition、environment、run manifestをdigest固定する。
+
+### 必須
+
+- source codeを読めるのは`REPLAY_HARNESS_MAINTAINER`だけ
+- `DISTILLATION_EXECUTOR`はsource treeをmountしない
+- process identity、checkout digest、mount allowlist、access ledgerを固定
+- SourceContentManifestへ後段生成物を入れない
 
 ### Exit
 
@@ -174,13 +268,43 @@ raw teacher evidence、trajectory、environment、wheel、seed、splitを固定�
 
 ---
 
-## PH-D02A/B/C — Canonical Schema / Typed Causal IR
+## PH-D02A — Canonical Serialization / Digest Contract
 
 ### 目的
 
-構造データの型、digest、IR、interpreterを先に閉じる。
+canonical JSON/JSONL、logical/physical digest、reference ID、versioningを固定する。
 
-### 必須カテゴリ
+### Exit
+
+`PH_D02A_CANONICAL_CONTRACT_PASS`
+
+---
+
+## PH-D02B — Schema Set / Bundle Contract
+
+### 目的
+
+HDS rev2の38 schemaと、`HDSStructureBundleManifest`、`OntologyTypeRecord`、`MechanismAssetRecord`、`ProbeObligationRecord`、`StructureCoverageProfile`、`BundleApprovalRecord`、`StructureBundleMigrationRecord`を固定する。
+
+### 必須
+
+- cross-file reference integrity
+- unknown file rejection
+- partial bundle rejection
+- dependency lock
+- one-to-one HDS schema mapping
+
+### Exit
+
+`PH_D02B_SCHEMA_SET_PASS`
+
+---
+
+## PH-D02C — Typed Causal IR / Interpreter / Verifier ABI
+
+### 目的
+
+次の構造カテゴリを実行可能IRとして固定し、offline interpreter/verifierで検査する。
 
 - representation
 - entity/relation
@@ -199,11 +323,30 @@ raw teacher evidence、trajectory、environment、wheel、seed、splitを固定�
 
 ---
 
-## PH-D03A/B — Golden / Sealed Audit Corpus
+## PH-D03A — Golden Conformance Corpus Candidate
 
 ### 目的
 
-実装適合試験と、期待値変更不能な監査入力を分離する。
+実装適合用Golden candidateを生成し、schema、IR、interpreter、verifierへbindする。一般性証拠またはOwner承認済み期待値とは扱わない。
+
+### Exit
+
+```text
+GOLDEN_CONFORMANCE_CANDIDATE_READY
+OWNER_REVIEW_REQUIRED
+```
+
+---
+
+## PH-D03B — Sealed Audit Corpus Freeze
+
+### Entry
+
+Golden expectationを対象明示した`OwnerDecisionCapture`とApprovalRecordを要求する。
+
+### 目的
+
+承認済み期待値を変更不能なsealed audit inputへfreezeし、Golden candidateと分離する。
 
 ### Exit
 
@@ -263,18 +406,31 @@ raw teacher evidence、trajectory、environment、wheel、seed、splitを固定�
 
 ---
 
-## PH-D07A/B — Exact Fit / Counterfactual
+## PH-D07A — Exact Fit Accounting
 
 ### 目的
 
-観測適合と因果支持を分離する。
+各HypothesisIRの観測適合を計測し、exact fitを因果支持から分離する。
 
 ### Exit
 
-```text
-EXTENSIONAL_FIT_ACCOUNTED
-COUNTERFACTUAL_COVERAGE_REPORTED
-```
+`EXTENSIONAL_FIT_ACCOUNTED`
+
+---
+
+## PH-D07B — Counterfactual Intervention
+
+### Entry
+
+PH-D07Aのfit artifactをDerived Distillation Evidenceとして受理し、Primary Source manifestを変更しない。
+
+### 目的
+
+競合仮説を識別するinterventionを実行し、支持、反証、未識別を記録する。
+
+### Exit
+
+`COUNTERFACTUAL_COVERAGE_REPORTED`
 
 ---
 
@@ -298,18 +454,39 @@ COUNTERFACTUAL_COVERAGE_REPORTED
 
 ---
 
-## PH-D09〜D11 — Normalization / Commonality / Boundary
+## PH-D09 — Lossless Normalization
 
 ### 目的
 
-lossless normalizationと一般化を分離し、横断共通項、near-miss、negative、counterexampleを抽出する。
+意味を変更せず表現差だけを正規化し、NormalizationCertificateを生成する。
 
 ### Exit
 
-```text
-CANONICAL_STRUCTURE_GRAPH_COMPLETE
-BOUNDARY_AND_COUNTEREXAMPLE_AUDIT_COMPLETE
-```
+`LOSSLESS_NORMALIZATION_COMPLETE`
+
+---
+
+## PH-D10 — Cross-Case Commonality
+
+### 目的
+
+正規化済みrecordから横断共通項とRule family候補を抽出する。一般化候補を自動昇格しない。
+
+### Exit
+
+`CANONICAL_STRUCTURE_GRAPH_COMPLETE`
+
+---
+
+## PH-D11 — Boundary / Near-Miss / Counterexample Audit
+
+### 目的
+
+適用境界、near-miss、negative、counterexample、failure signatureを抽出し、D10候補を反証監査する。
+
+### Exit
+
+`BOUNDARY_AND_COUNTEREXAMPLE_AUDIT_COMPLETE`
 
 ---
 
@@ -338,6 +515,8 @@ OWNER_APPROVED
 ```
 
 をOwner承認なしに設定すること。
+
+Owner採否は、対象Rule/RuleFamily digestと許可遷移を特定した`OwnerDecisionCapture`をCodexが機械転記した場合だけApprovalRecordへ変換する。Codexは判断内容を生成しない。
 
 ### Exit
 
@@ -368,6 +547,7 @@ HDSStructureBundleをfreezeし、AGI Build Readyを判定する。
 ```text
 HDSStructureBundle
 CoverageReport
+AGI_BUILD_READY_PROFILE_V1 evaluation
 ClaimLedger
 OpenTermLedger
 TaintReport
@@ -379,8 +559,12 @@ OwnerApprovalRecord
 
 ```text
 HDS_STRUCTURE_BUNDLE_FROZEN
+HDS_STRUCTURE_BUNDLE_SCHEMA_PASS
+AGI_BUILD_READY_PROFILE_V1_PASS
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
 ```
+
+Owner Approvalだけでhard mandatory categoryのminimum evidence、independent case、negative pool、counterfactual coverage、allowed unresolved ratioを迂回しない。
 
 ### 失敗時
 
@@ -408,6 +592,10 @@ Owner承認済みHDSStructureBundleだけをBridge入力として受理する。
 - taint
 - unresolved category accounting
 - source identity隔離
+- unknown file rejection
+- partial bundle rejection
+- cross-reference integrity
+- migration/dependency lock
 
 ### Exit
 
@@ -419,25 +607,35 @@ Owner承認済みHDSStructureBundleだけをBridge入力として受理する。
 
 ### 目的
 
-各構造recordをP₀/J₀/M₀/ProbeCatalogへ分類する。
+各Canonical StructureRecordへ一つのprimary classと、0件以上のtyped projectionを割り当てる。
 
 ### 分類規則
 
 ```text
-P_ELIGIBLE
-J_ELIGIBLE
-M_ACTIVE_ELIGIBLE
-M_PROBATION_ONLY
-PROBE_ONLY
-ARCHIVE_ONLY
-REJECTED
+primary_class:
+  REPRESENTATION
+  MECHANISM
+  BOUNDARY
+  HAZARD
+  FAILURE
+  UNRESOLVED
+  ARCHIVE
+
+target_projections[]:
+  PProjection
+  JDomainProjection
+  MSeedProjection
+  ProbeProjection
 ```
 
 ### DoD
 
-- 全recordが一分類
+- 全recordが一つの`primary_class`
+- `target_projections[]`は複数可、各projectionに独立digest
+- 同一evidence refの重複加点0
+- P/J/M責任重複0
 - unsupported active化0
-- Owner承認なしP_ELIGIBLE 0
+- Owner承認なしPProjection active化0
 
 ### Exit
 
@@ -479,7 +677,7 @@ bridge/probe_mapping.json
 
 ---
 
-## PH-B03 — Compile P₀ / J₀ / M₀ / ProbeCatalog
+## PH-B03 — Compile P₀ / J Domain Profile₀ / M₀ / ProbeCatalog
 
 ### 目的
 
@@ -494,13 +692,18 @@ bridge/probe_mapping.json
 - composition
 - probe/rollback
 
-### J₀
+### J_CORE_OWNER_FROZEN
 
-- HDS Gate
-- evidence threshold
-- hazard veto
-- stop/rollback
+- purpose/value/risk/authority/adoption/global stop
+- Bridgeによる変更禁止
+
+### J_DOMAIN_PROFILE₀
+
+- domain hazard signatures
+- domain-specific probe obligations
+- evidence requirements
 - failure checklist
+- applicability rules
 
 ### M₀
 
@@ -530,6 +733,8 @@ bridge/probe_mapping.json
 - source code dependency
 - game order permutation
 
+legal action mask、payload validation、action availability changeの観測は許可する。禁止するのはaction tupleだけによるpolicy head選択、identity proxy化、固定trajectory選択である。
+
 ### Exit
 
 ```text
@@ -554,7 +759,8 @@ Bridge成果物がfixed L₀上で実行でき、構造的に異なる入力へ�
 - unresolved→probe
 - hazard→veto
 - counter-hypothesis
-- memory citation changes candidate
+- relevant candidate-specific Mの追加・除去・反転で判断が変わる
+- irrelevant/stale/out-of-scope M追加でcandidate/actionが変わらない
 - deterministic rebuild
 
 ### Exit
@@ -567,7 +773,7 @@ Bridge成果物がfixed L₀上で実行でき、構造的に異なる入力へ�
 
 ### 目的
 
-P₀/J₀/M₀/ProbeCatalogをOwnerが採否し、初期bundleをfreezeする。
+P₀/J Core/J Domain Profile₀/M₀/ProbeCatalogをOwnerが採否し、初期bundleをfreezeする。
 
 ### Codex状態
 
@@ -584,7 +790,7 @@ OWNER_APPROVED_PASS
 DISTILLED_INITIAL_STATE_BUNDLE_FROZEN
 ```
 
-Owner承認なしにTrack Aへ進まない。
+Owner承認は対象bundle digestと許可遷移を特定した`OwnerDecisionCapture`からのみ記録する。Codexはdecisionを生成しない。Owner承認なしにTrack Aへ進まない。
 
 ---
 
@@ -621,8 +827,12 @@ CがP₀とMを引用して、state、mechanism、counter-hypothesis、candidate
 
 ```text
 same observation
-+ different M citation
-→ different model/candidate/probe
++ causally eligible candidate-specific Mを追加・除去・反転
+→ model/candidate/ranking/actionの少なくとも一つが変化
+
+same observation
++ irrelevant/stale/out-of-scope Mを追加
+→ candidate/action不変
 ```
 
 ### Exit
@@ -631,11 +841,11 @@ same observation
 
 ---
 
-## PH-A02 — HDS Judgement Subject J₀
+## PH-A02 — HDS Judgement Subject J
 
 ### 目的
 
-蒸留済みboundary/failure/probe資産をHDS Gateへ接続する。
+Owner固定`J_CORE_OWNER_FROZEN`と蒸留済み`J_DOMAIN_PROFILE₀`を合成し、boundary/failure/probe資産をHDS Gateへ接続する。
 
 ### 必須
 
@@ -645,6 +855,7 @@ same observation
 - probe/execute分離
 - unresolved SUSPEND
 - Owner-defined purpose boundary
+- domain profileによるpurpose/risk/authority/global stop変更0
 
 ### Exit
 
@@ -724,7 +935,7 @@ scorecard-scoped Mを安全に再利用する。
 
 ### 目的
 
-Runtime traceとM_devを次版P/J₀/M₀へ再コンパイルする。
+Runtime traceとM_devを次版P/J Domain Profile₀/M₀へ再コンパイルする。J Coreは再コンパイルしない。
 
 ### 制約
 
@@ -745,7 +956,7 @@ Runtime traceとM_devを次版P/J₀/M₀へ再コンパイルする。
 
 ### 目的
 
-一つのartifactへCode/L₀/P/J₀/M₀/Adapter/Resource Contractを固定する。
+一つのartifactへCode/L₀/P/J Core/J Domain Profile₀/M₀/Adapter/Resource Contractを固定する。
 
 ### 必須
 
@@ -820,6 +1031,30 @@ game foldだけでなく機構族holdoutを実行する。
 - composition
 - partial observation
 
+### fold別必須経路
+
+```text
+source split
+→ fold-specific HDS distillation
+→ fold-specific HDSStructureBundle
+→ fold-specific Bridge
+→ fold-specific DistilledInitialStateBundle
+→ fold-specific RuntimeIdentity
+→ held-out-family evaluation
+```
+
+### 必須記録
+
+- `held_out_family`
+- `training_family_set`
+- source split digest
+- structure bundle digest
+- initial bundle digest
+- runtime identity digest
+- `distinct_structure_bundle_count = fold_count`
+- `distinct_initial_bundle_count = fold_count`
+- `distinct_runtime_identity_count = fold_count`
+
 ### Claim
 
 `CV_PROCEDURE_EVIDENCE`のみ。
@@ -845,6 +1080,10 @@ single artifact completionとは呼ばない。
 - no development access
 - no live Codex intervention
 - no live human correction
+- `LockedEvaluatorAuthority`とRuntime実装者の分離
+- `LockedEvaluatorCustodian`とdevelopment roleの分離
+- `OneTimeExecutionTokenIssuer`
+- append-only `ConsumptionLedger`
 
 ### Exit
 
@@ -919,6 +1158,28 @@ OWNER_REJECTED
 
 `PASS`単独を使用しない。
 
+Owner状態の記録には`OwnerDecisionCapture`を必須とする。CodexはOwnerの対象明示判断を機械転記できるが、decisionまたは遷移を生成しない。
+
+Git evidence:
+
+```text
+Implementation Commit
+  code/test/doc
+  ↓
+Evidence Commit
+  phase state/review package
+  target = implementation_commit/tree
+  ↓
+EvidenceCommitAttestation
+  evidence_commit/tree + evidence_payload_digest
+  ↓
+Approval Commit
+  OwnerDecisionCapture/ApprovalRecord
+  target = evidence commit/digest
+```
+
+各commit payloadは自身のcommit/tree hashを要求しない。
+
 ---
 
 # Codex Work Block規則
@@ -931,60 +1192,65 @@ OWNER_REJECTED
 6. 最小sliceを実装
 7. required tests
 8. full regressionが必要なら実行
-9. artifactをcommitへbind
-10. self-audit
-11. Owner Review Package生成
-12. 停止
+9. Implementation Commitを作成
+10. `implementation_commit/tree`へphase stateとartifactをbind
+11. self-auditとOwner Review Packageを生成
+12. Evidence Commitを作成
+13. 後続attestationへ`evidence_commit/tree`を記録
+14. `OWNER_REVIEW_REQUIRED`で停止
 
 Codexは次phaseへ自動進行しない。
 
 ---
 
-# 最初のWork Block
+# 現在のWork Block
 
 ```text
 Phase:
-PH-R00
+REV3-DOC-FIX
 
 目的:
-現行HEADをpre-distillation infrastructure baselineとして再bindし、
-S5/P22方策をactive completion pathから隔離する。
+監査F-01〜F-17を文書、機械可読契約、配布artifactで是正し、
+strategyをPROPOSED_PENDING_OWNER_APPROVAL / NOT_INSTALLED、
+PH-R00をSUSPENDとして固定する。
 
 読む順序:
 1. ユーザーの現在指示
-2. ARC3_AGENTS_Codex開発運用契約_rev3.md
-3. ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md
-4. ARC3_HDS蒸留先行_開発ロードマップ_rev3.md
-5. ARC3_現行実装監査_2026-07-30.md
-6. HDS蒸留仕様書_ARC2_ARC3_rev2.md
-7. HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md
-8. 現行AGENTS.md
-9. current phase state
+2. 2026-07-31 rev3監査報告
+3. root AGENTS.md
+4. ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md
+5. ARC3_HDS蒸留先行_開発ロードマップ_rev3.md
+6. INDEX
+7. AGI/HDS上位正本
 
 実施:
-- HEAD/tree固定
-- phase evidence rebind
-- full regression
-- asset classification
-- production import boundary
-- active selector変更
-- PH-R00 Owner Review Package
+- authority planes
+- non-self-referential Git evidence
+- artifact layer separation
+- relevant-M / irrelevant-M tests
+- canonical record + multi-projection
+- end-to-end family CV
+- coverage/schema/J/role/Owner capture/claim/evaluator/action契約
+- ASCII-safe deterministic package
 
 禁止:
+- PH-R-1開始
+- PH-R00開始
 - HDS蒸留開始
 - AGI能力実装
 - P22改善
 - official提出
-- Rule promotion
-- 次phase着手
+- Rule/Phase/Bundle承認
 
 終了:
 OWNER_REVIEW_REQUIREDで停止。
 ```
 
+Ownerが是正artifactと許可遷移を明示承認した後の次Work Blockは`PH-R-1`である。
+
 ---
 
-# 最終固定結論
+# Owner承認後も維持する固定依存
 
 rev3では、
 

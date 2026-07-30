@@ -4,8 +4,10 @@ import ast
 import hashlib
 import json
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any
+from zipfile import ZipFile
 
 import pytest
 
@@ -14,7 +16,11 @@ from arc3_agi_agent.rev3_governance import (
     FORBIDDEN_PRODUCTION_IMPORT_ROOTS,
     QUARANTINED_RUNTIME_SOURCE_KINDS,
     REV3_ACTIVE_PHASE,
+    REV3_CURRENT_WORK_CLASS,
+    REV3_INSTALLATION_STATUS,
+    REV3_PH_R00_STATUS,
     REV3_PHASE_ORDER,
+    REV3_STRATEGY_STATUS,
     Rev3ProductionSelection,
     audit_rev3_production_imports,
     require_rev3_production_selection,
@@ -62,8 +68,13 @@ def _valid_selection() -> Rev3ProductionSelection:
 
 
 def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
-    assert REV3_ACTIVE_PHASE == "PH-D03A"
-    assert REV3_PHASE_ORDER[0] == "PH-R00"
+    assert REV3_STRATEGY_STATUS == "PROPOSED_PENDING_OWNER_APPROVAL"
+    assert REV3_INSTALLATION_STATUS == "NOT_INSTALLED"
+    assert REV3_CURRENT_WORK_CLASS == "REV3_DOCUMENT_CORRECTION_ONLY"
+    assert REV3_ACTIVE_PHASE is None
+    assert REV3_PH_R00_STATUS == "SUSPEND"
+    assert REV3_PHASE_ORDER[0] == "PH-R-1"
+    assert REV3_PHASE_ORDER[1] == "PH-R00"
     assert REV3_PHASE_ORDER.index("PH-D14") < REV3_PHASE_ORDER.index(
         "PH-B00"
     )
@@ -74,6 +85,182 @@ def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
         "PH-E00"
     )
     assert "PH-D04" not in REV3_PHASE_ORDER
+
+
+def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
+    selector = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "REV3_CURRENT_SELECTOR.json"
+    )
+    assert selector["strategy_status"] == REV3_STRATEGY_STATUS
+    assert selector["installation_status"] == REV3_INSTALLATION_STATUS
+    assert selector["current_work_class"] == REV3_CURRENT_WORK_CLASS
+    assert selector["active_phase"] is None
+    assert selector["ph_r00_status"] == REV3_PH_R00_STATUS
+    assert selector["owner_approval_for_correction"] == "NOT_ESTABLISHED"
+    assert (
+        selector["historical_evidence"]["classification"]
+        == "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
+    )
+    assert not selector["historical_evidence"][
+        "eligible_for_current_activation"
+    ]
+    assert "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json" in (
+        selector["historical_evidence"]["scope"]
+    )
+    assert "scripts/audit_hds_dependencies.py" in (
+        selector["historical_evidence"]["scope"]
+    )
+
+    contract_root = (
+        REPOSITORY_ROOT / "docs" / "strategy" / "contracts"
+    )
+    governance = _json(
+        contract_root / "REV3_GOVERNANCE_CONTRACT_V1.json"
+    )
+    assert governance["git_evidence_model"]["self_reference_policy"] == (
+        "REJECT"
+    )
+    assert governance["owner_decision_policy"][
+        "codex_may_generate_decision"
+    ] is False
+    assert governance["source_blind_roles"]["DISTILLATION_EXECUTOR"][
+        "environment_source_mount"
+    ] is False
+
+    bundle = _json(
+        contract_root / "HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json"
+    )
+    assert bundle["package_policy"]["unknown_file_policy"] == "REJECT"
+    assert bundle["package_policy"]["partial_bundle_policy"] == "REJECT"
+    mechanism = bundle["record_schemas"]["MechanismAssetRecord"]
+    assert mechanism["single_primary_class"]
+    assert mechanism["evidence_scoring"] == (
+        "UNIQUE_EVIDENCE_REF_ONCE_ACROSS_ALL_PROJECTIONS"
+    )
+
+    profile = _json(contract_root / "AGI_BUILD_READY_PROFILE_V1.json")
+    assert profile["profile_status"] == "PROPOSED_PENDING_OWNER_APPROVAL"
+    assert not profile["owner_approval_may_bypass_hard_minimum"]
+    assert all(
+        category["hard_mandatory"]
+        and category["allowed_unresolved_ratio"] == 0.0
+        for category in profile["categories"]
+    )
+
+    cv_contract = _json(
+        contract_root / "MECHANISM_FAMILY_CV_CONTRACT_V1.json"
+    )
+    assert cv_contract["required_global_invariants"][
+        "distinct_runtime_identity_count"
+    ] == "EQUALS_FOLD_COUNT"
+    assert not cv_contract["claim_boundary"][
+        "single_artifact_claim_allowed"
+    ]
+
+
+def test_rev3_strategy_package_is_deterministic_and_ascii_safe(
+    tmp_path: Path,
+) -> None:
+    first = tmp_path / "first.zip"
+    second = tmp_path / "second.zip"
+    script = REPOSITORY_ROOT / "scripts" / "package_rev3_strategy.py"
+    for output in (first, second):
+        subprocess.run(
+            [sys.executable, str(script), "--output", str(output)],
+            cwd=REPOSITORY_ROOT,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+
+    assert first.read_bytes() == second.read_bytes()
+    with ZipFile(first) as archive:
+        names = archive.namelist()
+        assert "MANIFEST.json" in names
+        assert "SHA256SUMS" in names
+        assert all(name.isascii() for name in names)
+        assert len(names) == len(set(names))
+        manifest = json.loads(archive.read("MANIFEST.json"))
+        assert manifest["package_status"] == (
+            "PROPOSED_PENDING_OWNER_APPROVAL"
+        )
+        assert manifest["installation_status"] == "NOT_INSTALLED"
+        assert manifest["entry_count"] == len(names) - 2
+        checksums = archive.read("SHA256SUMS").decode("ascii").splitlines()
+        assert len(checksums) == len(names) - 1
+
+
+def test_rev3_corrected_documents_close_audit_findings() -> None:
+    document_paths = (
+        REPOSITORY_ROOT / "AGENTS.md",
+        REPOSITORY_ROOT
+        / "docs"
+        / "strategy"
+        / "ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+        REPOSITORY_ROOT
+        / "docs"
+        / "roadmap"
+        / "ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+        REPOSITORY_ROOT
+        / "docs"
+        / "strategy"
+        / "ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+        REPOSITORY_ROOT / "AUTHORITY_ORDER.md",
+    )
+    combined = "\n".join(
+        path.read_text(encoding="utf-8") for path in document_paths
+    )
+    for required in (
+        "PROPOSED_PENDING_OWNER_APPROVAL",
+        "NOT_INSTALLED",
+        "PH-R00 = SUSPEND",
+        "Normative Authority",
+        "Execution Control",
+        "Implementation Commit",
+        "Evidence Commit",
+        "OwnerDecisionCapture",
+        "Primary Teacher Source",
+        "Derived Distillation Evidence",
+        "Governance Artifacts",
+        "Relevant Memory Causal Witness",
+        "Irrelevant Memory Invariance",
+        "target_projections",
+        "J_CORE_OWNER_FROZEN",
+        "fold-specific HDSStructureBundle",
+        "LockedEvaluatorCustodian",
+        "legal action mask",
+        "MANIFEST.json",
+        "SHA256SUMS",
+    ):
+        assert required in combined
+
+    roadmap = document_paths[2].read_text(encoding="utf-8")
+    for phase_id in (
+        "PH-D01A",
+        "PH-D01B",
+        "PH-D02A",
+        "PH-D02B",
+        "PH-D02C",
+        "PH-D03A",
+        "PH-D03B",
+        "PH-D07A",
+        "PH-D07B",
+        "PH-D09",
+        "PH-D10",
+        "PH-D11",
+    ):
+        assert f"## {phase_id} " in roadmap
+    for forbidden in (
+        "## PH-D01A/B",
+        "## PH-D02A/B/C",
+        "## PH-D03A/B",
+        "## PH-D07A/B",
+        "## PH-D09〜D11",
+    ):
+        assert forbidden not in roadmap
 
 
 @pytest.mark.parametrize(
@@ -101,7 +288,7 @@ def test_historical_sources_cannot_be_selected_or_used_as_fallback(
     assert "REV3_PRODUCTION_FALLBACK_FORBIDDEN" in selection.validate()
 
 
-def test_distilled_selection_requires_all_content_and_owner_bindings() -> None:
+def test_distilled_selection_requires_bindings_and_installed_strategy() -> None:
     missing = Rev3ProductionSelection(
         source_kind=DISTILLED_RUNTIME_SOURCE_KIND,
         structure_bundle_digest="",
@@ -110,9 +297,11 @@ def test_distilled_selection_requires_all_content_and_owner_bindings() -> None:
         runtime_artifact_digest="",
     )
 
-    assert require_rev3_production_selection(_valid_selection()) == (
-        _valid_selection()
-    )
+    with pytest.raises(
+        PermissionError,
+        match="REV3_STRATEGY_NOT_INSTALLED:NOT_INSTALLED",
+    ):
+        require_rev3_production_selection(_valid_selection())
     with pytest.raises(
         PermissionError,
         match="OWNER_APPROVAL_DIGEST_MISSING_OR_UNBOUND",
@@ -168,7 +357,7 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
         / "strategy"
         / "REV3_AUTHORITY_INPUT_MANIFEST.json"
     )
-    expected = {
+    historical_expected = {
         "AGENTS.md": (
             "7ad183110f39ffda02c6209be85fb1537872b23b018b20f8cea4e22a35313b5a"
         ),
@@ -184,6 +373,20 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
         ): (
             "b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2"
         ),
+    }
+    selector = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "REV3_CURRENT_SELECTOR.json"
+    )
+    for path, expected_digest in historical_expected.items():
+        assert (
+            _git_blob_sha256(selector["audit_baseline_commit"], path)
+            == expected_digest
+        )
+
+    expected = {
         "docs/architecture/AGI三主体統合設計正本_v0_2.md": (
             "2e553964fd7bfd3bc2221bc3ef70af5742c170ff29481c662bddcc983d10df44"
         ),

@@ -1,26 +1,53 @@
 # ARC3 HDS蒸留先行 戦略改定資料 INDEX
 
-## 正本順序
+- Package status: `PROPOSED_PENDING_OWNER_APPROVAL`
+- Installation status: `NOT_INSTALLED`
+- Current work class: `REV3_DOCUMENT_CORRECTION_ONLY`
+- `PH-R00`: `SUSPEND`
+- Audit: `docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md`
 
-1. `ARC3_AGENTS_Codex開発運用契約_rev3.md`
-2. `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
-3. `ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
-4. `HDS蒸留仕様書_ARC2_ARC3_rev2.md`
-5. `HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
-6. `AGI三主体統合設計正本_v0_2.md`
-7. `工学的AGI実装仕様書_v0_2.md`
-8. `ARC3_現行実装監査_2026-07-30.md`
+## 規範権威
 
-## 戦略式
+上位文書は下位文書の意味を制約する。実行制御文書はこの順序を変更できない。
+
+1. Ownerの現在の明示指示
+2. `docs/architecture/AGI三主体統合設計正本_v0_2.md`
+3. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
+4. `docs/architecture/工学的AGI実装仕様書_v0_2.md`
+5. `docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
+6. `docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md`
+7. `docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
+8. `docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
+
+## 実行制御
+
+実行制御は作業対象・順序・停止点だけを決め、規範権威を変更しない。
+
+1. Ownerの現在の明示指示
+2. root `AGENTS.md`
+3. Ownerの明示判断を`OwnerDecisionCapture`で転記した、Owner承認済みPhase State
+4. current `WorkBlockFrame`
+5. committed evidence
+
+過去のphase state、ApprovalRecord、transition、artifact-local `next_*`は履歴証拠であり、current selectorではない。
+
+## 導入順序
 
 ```text
-PH-R00
-→ HDS蒸留
-→ HDSStructureBundle
-→ Bridge
-→ P₀/J₀/M₀
-→ Distilled AGI Runtime
-→ Locked Final
+REV3文書・契約の監査是正
+→ Ownerによる是正内容の明示承認
+→ PH-R-1 Strategy Installation
+→ PH-R00 Current HEAD Infrastructure Freeze
+→ Source-blind HDS Distillation
+→ Schema-bound HDSStructureBundle
+→ Evidence-thresholded Build-Ready Gate
+→ Canonical Record + Multi-Projection Bridge
+→ Owner-frozen J Core + Distilled Domain Profile
+→ P₀ / JDomain₀ / M₀ / ProbeCatalog
+→ Distilled Runtime
+→ Relevant-M Causal Witness + Irrelevant-M Invariance
+→ End-to-End Mechanism-Family CV
+→ Independent Locked Final
 → Official
 ```
 
@@ -29,7 +56,20 @@ PH-R00
 ```text
 P16-P21 = 基盤候補としてfreeze
 S5/P22 compiled policy = historical/quarantine
+監査前rev3 phase evidence = historical/pre-audit/non-authoritative
 ```
+
+既存成果物は削除しない。ただし、監査是正後のOwner承認とStrategy Installationなしに、現在のPhase通過証拠またはactive selectorとして使用しない。
+
+## 機械可読契約
+
+- `control/rev3/REV3_CURRENT_SELECTOR.json`
+- `docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json`
+- `docs/strategy/contracts/HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json`
+- `docs/strategy/contracts/AGI_BUILD_READY_PROFILE_V1.json`
+- `docs/strategy/contracts/MECHANISM_FAMILY_CV_CONTRACT_V1.json`
+- `docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V1.json`
+- `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 
 ## Codex
 
@@ -39,4 +79,4 @@ Owner = Meta-J
 Repository = Meta-M
 ```
 
-CodexはOwner Approval、phase promotion、Rule promotion、completion claimを行わない。
+CodexはOwner判断の内容を生成しない。Ownerの明示判断を`OwnerDecisionCapture`として機械的に転記できるだけであり、Owner Approval、phase promotion、Rule promotion、completion claimを自ら行わない。

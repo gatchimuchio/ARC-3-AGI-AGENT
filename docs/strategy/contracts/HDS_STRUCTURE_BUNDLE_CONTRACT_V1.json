@@ -1,0 +1,213 @@
+{
+  "bundle_schema_version": "hds-structure-bundle-v1",
+  "canonical_serialization": {
+    "encoding": "UTF-8",
+    "json_key_order": "LEXICOGRAPHIC",
+    "json_whitespace": "NONE",
+    "jsonl_order": "RECORD_ID_ASCENDING",
+    "newline": "LF",
+    "unicode_normalization": "NFC"
+  },
+  "cross_reference_integrity": {
+    "dangling_reference_policy": "REJECT",
+    "duplicate_id_policy": "REJECT",
+    "external_reference_policy": "EXPLICIT_DEPENDENCY_LOCK_ONLY",
+    "index_required": true
+  },
+  "digest_contract": {
+    "algorithm": "sha256",
+    "logical_digest_excludes": [
+      "physical_filename",
+      "filesystem_mtime",
+      "zip_metadata",
+      "physical_package_digest"
+    ],
+    "logical_digest_scope": "CANONICAL_RECORD_CONTENT_AND_ORDERED_REFERENCES",
+    "physical_package_digest_scope": "EXACT_DISTRIBUTION_BYTES",
+    "record_content_digest_excludes": [
+      "content_digest"
+    ]
+  },
+  "hds_rev2_schema_mapping": {
+    "BundleApprovalRecord": [
+      "ApprovalRecord"
+    ],
+    "MechanismAssetRecord": [
+      "HypothesisIR",
+      "EvidenceRecord",
+      "HDSCausalRecord",
+      "RuleAtom",
+      "RuleFamily",
+      "BoundaryRecord",
+      "CounterexampleRecord",
+      "FailureSignature",
+      "PromotionDecision"
+    ],
+    "ProbeObligationRecord": [
+      "CounterfactualInterventionPlan",
+      "OpenTermRecord"
+    ],
+    "StructureBundleMigrationRecord": [
+      "NormalizationCertificate",
+      "FrozenArtifactManifest"
+    ],
+    "StructureCoverageProfile": [
+      "CoverageReport",
+      "ClaimRecord",
+      "CompletionStateRegistry"
+    ]
+  },
+  "manifest_required_fields": [
+    "bundle_schema_version",
+    "bundle_id",
+    "source_content_manifest_digest",
+    "dependency_lock_digest",
+    "canonical_serialization",
+    "logical_digest",
+    "physical_package_digest",
+    "required_file_inventory",
+    "record_count_by_type",
+    "cross_reference_index_digest",
+    "coverage_profile_digest",
+    "taint_report_digest",
+    "migration_record_digest",
+    "bundle_approval_record_digest"
+  ],
+  "migration_contract": {
+    "lossless_required_for_in_place_upgrade": true,
+    "required_fields": [
+      "migration_id",
+      "source_bundle_schema_version",
+      "target_bundle_schema_version",
+      "transform_implementation_digest",
+      "lossless",
+      "changed_record_ids",
+      "rollback_procedure",
+      "content_digest"
+    ],
+    "unknown_source_version_policy": "REJECT"
+  },
+  "package_policy": {
+    "partial_bundle_policy": "REJECT",
+    "unknown_file_policy": "REJECT",
+    "unknown_record_type_policy": "REJECT",
+    "unknown_schema_version_policy": "REJECT"
+  },
+  "record_schemas": {
+    "BundleApprovalRecord": {
+      "required_fields": [
+        "bundle_approval_id",
+        "owner_decision_capture_ref",
+        "target_bundle_logical_digest",
+        "target_evidence_commit",
+        "decision",
+        "allowed_transition",
+        "content_digest"
+      ]
+    },
+    "MechanismAssetRecord": {
+      "allowed_projection_types": [
+        "PProjection",
+        "JDomainProjection",
+        "MSeedProjection",
+        "ProbeProjection"
+      ],
+      "evidence_scoring": "UNIQUE_EVIDENCE_REF_ONCE_ACROSS_ALL_PROJECTIONS",
+      "required_fields": [
+        "record_id",
+        "record_version",
+        "domain",
+        "mechanism_type",
+        "primary_class",
+        "target_projections",
+        "hypothesis_ir_ref",
+        "trigger",
+        "preconditions",
+        "predicted_effects",
+        "invariants",
+        "exclusions",
+        "valid_scope",
+        "support_case_refs",
+        "negative_case_refs",
+        "counterexample_refs",
+        "intervention_refs",
+        "evidence_state",
+        "mechanism_support_state",
+        "adoption_state",
+        "closure_boundary",
+        "falsification_procedure",
+        "provenance",
+        "approval_ref",
+        "content_digest"
+      ],
+      "single_primary_class": true
+    },
+    "OntologyTypeRecord": {
+      "required_fields": [
+        "type_id",
+        "type_kind",
+        "schema_version",
+        "definition",
+        "constraints",
+        "content_digest"
+      ],
+      "type_kind_enum": [
+        "ENTITY",
+        "RELATION",
+        "STATE_VARIABLE",
+        "ACTION_SURFACE"
+      ]
+    },
+    "ProbeObligationRecord": {
+      "required_fields": [
+        "probe_obligation_id",
+        "target_open_term_refs",
+        "competing_hypothesis_refs",
+        "required_observation",
+        "safe_intervention",
+        "expected_outcomes_by_hypothesis",
+        "falsification_condition",
+        "stop_condition",
+        "resource_bound",
+        "content_digest"
+      ]
+    },
+    "StructureBundleMigrationRecord": {
+      "required_fields": [
+        "migration_id",
+        "source_bundle_schema_version",
+        "target_bundle_schema_version",
+        "transform_implementation_digest",
+        "lossless",
+        "changed_record_ids",
+        "rollback_procedure",
+        "content_digest"
+      ]
+    },
+    "StructureCoverageProfile": {
+      "required_fields": [
+        "profile_id",
+        "build_ready_profile_digest",
+        "category_results",
+        "unique_evidence_ref_count",
+        "duplicate_evidence_score_count",
+        "hard_mandatory_failure_count",
+        "unresolved_ratio_by_category",
+        "content_digest"
+      ]
+    }
+  },
+  "required_file_patterns": [
+    "manifest.json",
+    "source_manifests/*.json",
+    "ontology/*.json",
+    "mechanisms/*.jsonl",
+    "boundaries/*.jsonl",
+    "failures/*.jsonl",
+    "unresolved/*.jsonl",
+    "evidence/**/*.json",
+    "reports/*.json",
+    "frozen_artifact_manifest.json"
+  ],
+  "schema_version": "hds-structure-bundle-contract-v1"
+}

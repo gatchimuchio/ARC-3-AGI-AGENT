@@ -1,0 +1,25 @@
+{
+  "aliases": [
+    {
+      "external_claim_id": "HDS_DISTILLATION_PIPELINE_COMPLETE",
+      "internal_state_id": "PIPELINE_IMPLEMENTATION_COMPLETE",
+      "internal_state_is_sufficient": false
+    },
+    {
+      "external_claim_id": "HDS_CORPUS_PROCESSED",
+      "internal_state_id": "CORPUS_PROCESSING_COMPLETE",
+      "internal_state_is_sufficient": false
+    },
+    {
+      "external_claim_id": "HDS_STRUCTURE_BUNDLE_FROZEN",
+      "internal_state_id": "FROZEN_ARTIFACT_COMPLETE",
+      "internal_state_is_sufficient": false
+    }
+  ],
+  "claim_issue_policy": {
+    "formal_external_id_required": true,
+    "owner_approval_required_where_declared": true,
+    "unmapped_alias_rejected": true
+  },
+  "schema_version": "arc3-rev3-claim-registry-v1"
+}

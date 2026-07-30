@@ -6,30 +6,38 @@
 - 旧仕様: `ARC3_GENERIC_AUTONOMOUS_COMPLETION_SPEC_REV2`
 - 上位正本:
   - `AGI三主体統合設計正本_v0_2.md`
+  - `HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
   - `工学的AGI実装仕様書_v0_2.md`
-  - `HDSフレーム_rev3_1a_内部用統合仕様.md`
+- 下位依存仕様:
   - `HDS蒸留仕様書_ARC2_ARC3_rev2.md`
 - 現状監査:
   - `ARC3_現行実装監査_2026-07-30.md`
-- 日付: `2026-07-30`
-- 仕様状態: `STRATEGY_REBASELINED_DISTILLATION_FIRST`
+- 是正監査:
+  - `docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md`
+- 日付: `2026-07-31`
+- 仕様状態: `PROPOSED_PENDING_OWNER_APPROVAL`
+- 導入状態: `NOT_INSTALLED`
+- Phase guard: `PH-R00 = SUSPEND`
 - 最上位目的: HDSで教師素材から構造データを先に蒸留・凍結し、その成果物だけを長期能力の上流入力として、未知ARC3環境を汎用自律完遂する工学的AGI Instanceを構築する
 
 ---
 
-## 0. 戦略改定の固定結論
+## 0. 戦略改定の提案結論
 
 旧戦略は、先にAGI Runtimeの一般構造を組み、公開ゲームの軌道圧縮やonline学習によって能力を後から埋める順序だった。
 
 rev3では順序を反転する。
 
 ```text
-教師素材
+Ownerによる是正内容の明示承認
+→ PH-R-1 Strategy Installation
+→ PH-R00 Current HEAD Infrastructure Freeze
+→ 教師素材
 → HDS蒸留
 → 構造データ
 → 証拠・境界・反例付き静的freeze
 → Distillation-to-AGI Bridge
-→ P₀ / J₀ / M₀
+→ P₀ / J_CORE_OWNER_FROZEN / J_DOMAIN_PROFILE₀ / M₀
 → AGI Runtime構築
 → online同定・記憶更新
 → locked evaluation
@@ -39,6 +47,11 @@ rev3では順序を反転する。
 最重要不変条件:
 
 ```text
+OWNER_APPROVED_REV3_CORRECTION
+AND STRATEGY_INSTALLATION_COMPLETE
+になるまで、
+PH-R00以降を開始してはならない。
+
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
 になるまで、
 AGI能力実装・P22方策最適化・公式提出準備を進めてはならない。
@@ -65,7 +78,7 @@ HISTORICAL_KNOWN_SAMPLE_STUDENT
 
 ### 1.1 目的
 
-> 正解付きARC3教師素材から、状態、対象、関係、action-effect、precondition、goal、hazard、順序、遅延、probe、rollback、compositionの構造をHDSで蒸留し、証拠状態・適用範囲・反例・未閉包を明示した構造資産へ変換する。その構造資産をP₀／J₀／M₀へ型付きでコンパイルし、未知ARC3環境で観測・仮説・probe・行動・再観測・記憶更新を自律循環する同一の工学的AGI Instanceを構築する。
+> 正解付きARC3教師素材から、状態、対象、関係、action-effect、precondition、goal、hazard、順序、遅延、probe、rollback、compositionの構造をHDSで蒸留し、証拠状態・適用範囲・反例・未閉包を明示した構造資産へ変換する。その構造資産をP₀／J_DOMAIN_PROFILE₀／M₀へ型付きでコンパイルし、Owner固定のJ Coreと合成して、未知ARC3環境で観測・仮説・probe・行動・再観測・記憶更新を自律循環する同一の工学的AGI Instanceを構築する。
 
 ### 1.2 完成式
 
@@ -78,7 +91,8 @@ AND DISTILLATION_TO_AGI_ABI_FROZEN
 AND DISTILLED_INITIAL_STATE_BUNDLE_FROZEN
 AND SAME_RUNTIME_ARTIFACT
 AND AUTONOMOUS_CLOSED_LOOP
-AND MEMORY_CAUSALITY
+AND RELEVANT_MEMORY_CAUSALITY
+AND IRRELEVANT_MEMORY_INVARIANCE
 AND STRUCTURE_GUIDED_ONLINE_IDENTIFICATION
 AND IDENTITY_FLOW_CONFORMANCE
 AND SEALED_SINGLE_ARTIFACT_COMPLETE
@@ -159,6 +173,31 @@ Runtime autonomy
 
 Runtime artifactへ入れてよいのは、所定のBridge Gateを通過した構造資産だけである。
 
+### 2.4 Authority planes
+
+規範権威と実行制御を分離する。
+
+```text
+Normative Authority:
+Ownerの現在の明示指示
+→ AGI三主体統合設計正本
+→ HDS内部正本
+→ 工学的AGI実装仕様
+→ ARC3 rev3実装仕様
+→ HDS蒸留仕様
+→ ARC3ロードマップ
+→ HDS蒸留ロードマップ
+
+Execution Control:
+Ownerの現在の明示指示
+→ root AGENTS.md
+→ OwnerDecisionCaptureで根拠化されたOwner承認済みPhase State
+→ WorkBlockFrame
+→ committed evidence
+```
+
+Execution ControlはNormative Authorityの定義・責任・安全境界を変更しない。過去のphase state、ApprovalRecord、transition、artifact-local `next_*`は履歴証拠であってcurrent selectorではない。
+
 ---
 
 ## 3. 現行資産の再分類
@@ -234,9 +273,11 @@ Teacher Evidence
 
 ## 4. HDS蒸留入力契約
 
-### 4.1 正本入力
+### 4.1 Artifact layer contract
 
-ARC3蒸留の正本は、MLP weightsではなく次である。
+蒸留artifactを三層へ分離し、後段生成物を`SourceContentManifest`へ入れない。
+
+#### Primary Teacher Source
 
 - raw teacher recording
 - canonical teacher trajectory
@@ -249,8 +290,28 @@ ARC3蒸留の正本は、MLP weightsではなく次である。
 - seed/reset mode
 - environment/runtime digest
 - provenance
-- counterfactual intervention result
-- Owner ApprovalRecord
+
+#### Derived Distillation Evidence
+
+- deterministic derivation
+- exact-fit result
+- counterfactual intervention plan/result
+- normalization certificate
+- counterexample
+- boundary record
+- failure signature
+
+Derived layerは参照したPrimary source digestとderivation implementation digestを必須とし、Primary sourceのfreeze条件にはしない。
+
+#### Governance Artifacts
+
+- PromotionDecision
+- OwnerDecisionCapture
+- ApprovalRecord
+- BundleApprovalRecord
+- EvidenceCommitAttestation
+
+Governance layerは対象artifact digestへbindし、教師観測または因果証拠として加点しない。
 
 ### 4.2 使用禁止入力
 
@@ -280,6 +341,25 @@ OFFICIAL_PRIVATE
 
 公開25ゲームを蒸留に使った時点で、それらはblind finalではない。  
 以後はknown-corpus regressionとして扱う。
+
+### 4.4 Source-blind execution
+
+関数引数だけでなく、role、checkout、process、mountを分離する。
+
+```text
+Replay Harness Maintainer:
+  environment source access = allowed
+  hypothesis generation = forbidden
+
+Distillation Executor:
+  environment source mount = forbidden
+  input = observable API / frozen recording only
+
+Distillation Auditor:
+  input = access ledger / process manifest / artifact digest only
+```
+
+候補生成はsource treeを含まない別checkoutまたは隔離processで行う。process identity、checkout digest、mount allowlist、source access countを`SourceBlindExecutionRecord`へ固定する。同一主体がsource access後に候補生成した場合は`SOURCE_BLIND_NOT_ESTABLISHED`とし、promotion入力へ使わない。
 
 ---
 
@@ -332,6 +412,51 @@ HDSStructureBundle/
   frozen_artifact_manifest.json
 ```
 
+正式な機械可読契約は`docs/strategy/contracts/HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json`とする。
+
+`manifest.json`必須field:
+
+```text
+bundle_schema_version
+bundle_id
+source_content_manifest_digest
+dependency_lock_digest
+canonical_serialization
+logical_digest
+physical_package_digest
+required_file_inventory
+record_count_by_type
+cross_reference_index_digest
+coverage_profile_digest
+taint_report_digest
+migration_record_digest
+bundle_approval_record_digest
+```
+
+bundle record type:
+
+```text
+OntologyTypeRecord
+MechanismAssetRecord
+ProbeObligationRecord
+StructureCoverageProfile
+BundleApprovalRecord
+StructureBundleMigrationRecord
+```
+
+各recordは`schema_version`、stable ID、`content_digest`を持つ。HDS rev2の38 schemaを内包するrecordは`hds_schema_ref`とそのlogical digestを保持し、一対一mappingを契約fileへ固定する。
+
+整合条件:
+
+- canonical JSONはUTF-8、NFC、key sort、余分な空白なし、末尾LFあり
+- JSONLは一record一行で`record_id`昇順
+- logical digestはphysical filename、mtime、ZIP metadataを除外
+- physical package digestは配布bytes全体を対象
+- 全referenceはbundle内indexまたは明示dependencyに解決
+- unknown file、unknown schema version、dangling reference、duplicate ID、部分bundleをfail closedで拒否
+- migrationはsource/target schema、transform digest、lossless判定、rollback pathを必須化
+- dependency lock不一致時は読み込まない
+
 ### 5.2 必須構造カテゴリ
 
 1. observation/representation
@@ -362,6 +487,8 @@ record_id
 record_version
 domain
 mechanism_type
+primary_class
+target_projections
 HypothesisIR
 trigger
 preconditions
@@ -382,6 +509,8 @@ provenance
 approval_ref
 content_digest
 ```
+
+`primary_class`は一件だけ持つ。`target_projections[]`は`PProjection`、`JDomainProjection`、`MSeedProjection`、`ProbeProjection`を複数保持でき、各projectionは独立digestを持つ。同一evidence refはprojection数にかかわらずcoverageまたはscoreへ一度だけ加算する。
 
 ### 5.4 証拠状態
 
@@ -426,13 +555,28 @@ HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
 5. Rule promotionがOwner承認済み
 6. identity/answer-copy finding 0
 7. deterministic rebuild x3一致
-8. required category全てについて、
-   - approved ruleが存在する、または
-   - unresolved mechanismとrequired probe schemaが明示される
-9. CoverageReportをOwnerが採択
-10. `HDS_STRUCTURE_BUNDLE_OWNER_APPROVED`
+8. `AGI_BUILD_READY_PROFILE_V1`の全hard mandatory categoryが個別thresholdを満たす
+9. hard mandatory categoryの`allowed_unresolved_ratio = 0`
+10. unresolved recordは非mandatory categoryに限り、typed `ProbeObligationRecord`とresource boundを持つ
+11. 同一evidenceのcategory間・projection間重複加点0
+12. CoverageReportをOwnerが採択
+13. `HDS_STRUCTURE_BUNDLE_OWNER_APPROVED`
 
 全件SUSPENDでもpipeline処理は完了し得るが、AGI Build Readyにはならない。
+
+機械可読profileは`docs/strategy/contracts/AGI_BUILD_READY_PROFILE_V1.json`で固定する。少なくとも次をhard mandatoryとする。
+
+- observation projection
+- entity/relation
+- state variable
+- action surface/payload
+- precondition
+- action-effect/transition
+- goal/terminal
+- hazard/reset
+- probe/falsification
+
+各categoryは`minimum_evidence_grade`、`minimum_independent_case_count`、`negative_pool_requirement`、`minimum_counterfactual_case_count`、`allowed_unresolved_ratio`を持つ。Owner Approvalだけでhard minimumを迂回できず、変更には仕様改訂と新しいprofile digestが必要である。
 
 ---
 
@@ -446,7 +590,7 @@ HDS構造資産を、Runtimeが実行・引用できる初期能力へ変換す�
 HDSStructureBundle
 → Bridge Compiler
 → P₀
-→ J₀
+→ J_DOMAIN_PROFILE₀
 → M₀
 → ProbeCatalog
 → DistilledInitialStateBundle
@@ -466,16 +610,26 @@ HDSStructureBundle
 - rollback/reset procedure
 - typed parameters
 
-#### J₀
+#### J_CORE_OWNER_FROZEN
 
-- HDS Frame template
-- Gate configuration
-- required evidence policy
-- hazard veto
-- probe/execute threshold
-- promotion/consolidation policy
-- stop/rollback boundary
+- purpose
+- value criteria
+- risk ceiling
+- authority boundary
+- adoption authority
+- global stop policy
+
+`J_CORE_OWNER_FROZEN`は教師corpusまたはBridgeから生成しない。変更にはOwnerの対象明示指示、専用`OwnerDecisionCapture`、新しいApprovalRecordを必要とする。
+
+#### J_DOMAIN_PROFILE₀
+
+- domain hazard signatures
+- domain-specific probe obligations
+- evidence requirements
 - failure checklist
+- applicability rules
+
+Runtime Jは`J_CORE_OWNER_FROZEN + J_DOMAIN_PROFILE₀`で構成し、domain profileがpurpose、risk ceiling、authority、global stopを緩和することを禁止する。
 
 #### M₀
 
@@ -499,7 +653,24 @@ HDSStructureBundle
 
 ### 7.3 資産別昇格先
 
-| 証拠状態 | P₀ | J₀ | M₀ |
+Bridgeは次のcardinalityを採用する。
+
+```text
+Canonical StructureRecord
+  ├── PProjection
+  ├── JDomainProjection
+  ├── MSeedProjection
+  └── ProbeProjection
+```
+
+- canonical recordは一件
+- `primary_class`は一件
+- `target_projections[]`は複数可
+- projectionごとに独立digest
+- evidence refは全projection横断で一度だけscoreへ加算
+- P/J/M間の責任重複とJ Core越権をBridge auditで拒否
+
+| 証拠状態 | P₀ | J_DOMAIN_PROFILE₀ | M₀ |
 |---|---:|---:|---:|
 | `LOCAL_EXACT_FIT` | 禁止 | 禁止 | `PROBATION`のみ |
 | `STRUCTURAL_RECURRENCE` | 原則禁止 | checklist候補 | `PROBATION` |
@@ -525,6 +696,8 @@ HDSStructureBundle
 - unsupported generalization
 - Owner ApprovalRecordなしのactive昇格
 
+available actionsとpayload schemaは正当な観測である。legal action mask、payload validation、action availability changeの観測を許可する。禁止するのは、exact action tupleだけによる専用policy head選択、environment identity proxy化、固定trajectory選択である。
+
 ---
 
 ## 8. DistilledInitialStateBundle
@@ -533,7 +706,8 @@ HDSStructureBundle
 DistilledInitialStateBundle/
   manifest.json
   p_bundle/
-  j0_config.json
+  j_core_owner_frozen.json
+  j_domain_profile_0.json
   m0_snapshot/
   probe_catalog.json
   bridge_report.json
@@ -550,7 +724,8 @@ bundle_version
 parent_structure_bundle_digest
 bridge_compiler_version
 p_logical_digest
-j0_digest
+j_core_digest
+j_domain_profile_digest
 m0_digest
 probe_catalog_digest
 l0_abi_version
@@ -595,15 +770,21 @@ Observation
 → action candidates
 ```
 
-M citationが変われば、
+Mの因果性を次の二試験へ分ける。
 
-- hypothesis set
-- candidate generation
-- candidate ranking
-- predicted effect
-- selected probe/action
+```text
+Relevant Memory Causal Witness:
+  applicabilityを満たすcandidate-specific recordを
+  追加・除去・反転すると、
+  hypothesis / candidate / ranking / predicted effect / action
+  の少なくとも一つが変わる
 
-の少なくとも一つが変わらなければならない。
+Irrelevant Memory Invariance:
+  applicability不一致、無関係scope、stale、またはarchive recordを
+  追加してもcandidateとactionが変わらない
+```
+
+任意のM差で出力変更を要求しない。変化を要求するのは`causally_eligible = true`かつcandidate-specificなcitationだけである。両試験を同じObservation、P、resource budget、random seedで対にして実行する。
 
 ### 9.3 J
 
@@ -638,7 +819,7 @@ Mは、
 
 を保持する。
 
-M更新は未来のC/J/actionを因果的に変える必要がある。
+関連M更新は未来のC/J/actionを因果的に変え、無関係M更新は変えてはならない。
 
 ### 9.5 online mechanism identification
 
@@ -708,10 +889,57 @@ Codexは次を所有しない。
 Codexの詳細運用は、
 
 ```text
-ARC3_AGENTS_Codex開発運用契約_rev3.md
+root AGENTS.md
 ```
 
 を正本とする。
+
+### 11.1 Git evidence model
+
+Git証拠は自己参照を避ける。
+
+```text
+Implementation Commit:
+  implementation_commit
+  implementation_tree
+
+Evidence Commit:
+  phase state
+  Owner Review Package
+  target = implementation_commit/tree
+
+EvidenceCommitAttestation:
+  evidence_commit
+  evidence_tree
+  target = evidence_payload_digest
+
+Approval Commit:
+  OwnerDecisionCapture
+  ApprovalRecord
+  target = evidence_commit + evidence_payload_digest
+```
+
+Evidence payloadは自身を含む`evidence_commit`を要求しない。ApprovalRecordも自身を含む`approval_commit`を要求しない。後続attestationまたはGit refだけが直前commitを記録する。
+
+### 11.2 OwnerDecisionCapture
+
+CodexはOwnerの明示判断を機械的に転記できるが、判断内容を生成できない。
+
+```text
+owner_decision_id
+source_instruction_ref
+source_instruction_digest
+target_artifact_digest
+target_evidence_commit
+allowed_transition
+decision
+reason_codes
+captured_by
+capture_is_mechanical = true
+owner_decision_content_digest
+```
+
+対象artifact、遷移、decisionがOwner指示から一意に得られない場合はrecordを作らず、`OWNER_DECISION_NOT_ESTABLISHED`とする。
 
 ---
 
@@ -748,6 +976,29 @@ foldごとに別artifactとなるため、single-artifact completionではない
 
 holdout familyを蒸留・P buildから除外したartifactで評価する。
 
+各family foldを独立end-to-end branchとして再構築する。
+
+```text
+for each held_out_family:
+  source split
+  → fold-specific HDS distillation
+  → fold-specific HDSStructureBundle
+  → fold-specific Bridge
+  → fold-specific DistilledInitialStateBundle
+  → fold-specific RuntimeIdentity
+  → held-out-family evaluation
+```
+
+各foldは`held_out_family`、`training_family_set`、source split digest、structure bundle digest、initial bundle digest、runtime identity digestを記録する。全foldについて、
+
+```text
+distinct_structure_bundle_count = fold_count
+distinct_initial_bundle_count = fold_count
+distinct_runtime_identity_count = fold_count
+```
+
+を要求する。機械可読契約は`docs/strategy/contracts/MECHANISM_FAMILY_CV_CONTRACT_V1.json`とする。CV結果はprocedure evidenceであり、single-artifact claimへ合算しない。
+
 ### 12.4 Locked final
 
 - independently generated
@@ -756,6 +1007,15 @@ holdout familyを蒸留・P buildから除外したartifactで評価する。
 - one-time execution
 - result開示後CONSUMED
 - developmentへ使った時点でfinal資格喪失
+
+独立主体:
+
+- `LockedEvaluatorAuthority`: evaluator versionと更新を承認
+- `LockedEvaluatorCustodian`: sealed inputと鍵を保管
+- `OneTimeExecutionTokenIssuer`: artifact/evaluator digestへ一回限りtokenを発行
+- `ConsumptionLedgerWriter`:実行、開示、development転用、`CONSUMED`を追記
+
+Runtime実装者、Distillation Executor、Bridge実装者は上記authority/custodianと兼務しない。兼務またはrole ledger欠落時は`INDEPENDENT_LOCKED_FINAL_NOT_ESTABLISHED`とする。
 
 ### 12.5 Official
 
@@ -772,6 +1032,19 @@ OFFICIAL_FULL_COMPLETE
 
 ## 13. Claim Hierarchy rev3
 
+正式IDは本節の`Claim`列に統一する。6章のprocessing stateとの対応は`docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`を正本とし、次へ固定する。
+
+```text
+PIPELINE_IMPLEMENTATION_COMPLETE
+  → HDS_DISTILLATION_PIPELINE_COMPLETE
+CORPUS_PROCESSING_COMPLETE
+  → HDS_CORPUS_PROCESSED
+FROZEN_ARTIFACT_COMPLETE
+  → HDS_STRUCTURE_BUNDLE_FROZEN
+```
+
+左辺はpipeline内部状態、右辺は外部claim IDであり、左辺だけでclaimを発行しない。
+
 | Claim | 意味 | 完成扱い |
 |---|---|---:|
 | `INFRASTRUCTURE_BASELINE_FROZEN` | P16〜P21基盤を現行HEADへbind | しない |
@@ -780,9 +1053,9 @@ OFFICIAL_FULL_COMPLETE
 | `HDS_STRUCTURE_BUNDLE_FROZEN` | 構造資産freeze | しない |
 | `HDS_STRUCTURE_BUNDLE_OWNER_APPROVED` | Ownerがcoverageを採択 | AGI build開始条件 |
 | `DISTILLATION_TO_AGI_ABI_FROZEN` | Bridge契約freeze | しない |
-| `DISTILLED_INITIAL_STATE_BUNDLE_FROZEN` | P₀/J₀/M₀ freeze | しない |
+| `DISTILLED_INITIAL_STATE_BUNDLE_FROZEN` | P₀/J Core/J Domain/M₀ freeze | しない |
 | `DISTILLED_RUNTIME_STRUCTURAL_READY` | active runtimeがdistilled assetsのみ使用 | しない |
-| `MEMORY_CAUSAL_OFFICIAL_LIKE` | official-like環境でM差が未来行動を変える | しない |
+| `MEMORY_CAUSAL_OFFICIAL_LIKE` | relevant Mで判断が変わり、irrelevant Mで不変 | しない |
 | `MECHANISM_IDENTIFICATION_CAUSAL` | probeで競合仮説を識別 | しない |
 | `KNOWN_PUBLIC_REGRESSION` | 既知25ゲーム回帰 | しない |
 | `CV_PROCEDURE_EVIDENCE` | fold別補助証拠 | しない |
@@ -808,6 +1081,9 @@ OFFICIAL_FULL_COMPLETE
 - `DST-007` identity/answer-copy finding 0
 - `DST-008` deterministic rebuild x3
 - `DST-009` Owner approval
+- `DST-010` source-blind process/checkout/mount separation
+- `DST-011` AGI_BUILD_READY_PROFILE_V1 hard minimums
+- `DST-012` bundle schema/cross-reference/unknown-file/partial rejection
 
 ### 14.2 Bridge
 
@@ -819,6 +1095,9 @@ OFFICIAL_FULL_COMPLETE
 - `BRG-006` L₀ ABI PASS
 - `BRG-007` initial bundle deterministic
 - `BRG-008` Owner approval
+- `BRG-009` one primary class + typed multi-projection
+- `BRG-010` evidence duplicate scoring 0
+- `BRG-011` J_CORE_OWNER_FROZEN不変
 
 ### 14.3 Runtime
 
@@ -832,6 +1111,8 @@ OFFICIAL_FULL_COMPLETE
 - `AGI-008` identity leak 0
 - `AGI-009` same runtime artifact
 - `AGI-010` valid SUSPEND/STOP
+- `AGI-011` relevant-M causal witness
+- `AGI-012` irrelevant-M invariance
 
 ### 14.4 Evaluation
 
@@ -840,6 +1121,8 @@ OFFICIAL_FULL_COMPLETE
 - `EVAL-003` mechanism-family holdout
 - `EVAL-004` locked final one-time
 - `EVAL-005` official scope分離
+- `EVAL-006` fold-specific structure/initial/runtime identity
+- `EVAL-007` locked evaluator authority/custodian/token/consumption separation
 
 一件でもblocking requirementがPASS以外なら完成claimを出さない。
 
@@ -849,7 +1132,7 @@ OFFICIAL_FULL_COMPLETE
 
 ### 15.1 Freeze first
 
-現行HEADへ全phase stateを再bindする。
+監査是正内容をOwnerが明示承認し、PH-R-1でStrategy Installationを完了した後に限り、現行HEADへbaselineをbindする。
 
 ```text
 PRE_DISTILLATION_INFRASTRUCTURE_BASELINE
@@ -859,10 +1142,21 @@ PRE_DISTILLATION_INFRASTRUCTURE_BASELINE
 
 ### 15.2 Active selector
 
-`AGENTS.md`のactive selectorを次へ変更する。
+現在のselector:
 
 ```text
-PH-R00
+Strategy = PROPOSED_PENDING_OWNER_APPROVAL
+Installation = NOT_INSTALLED
+Active phase = NONE
+Current work = REV3_DOCUMENT_CORRECTION_ONLY
+PH-R00 = SUSPEND
+```
+
+Owner承認後、PH-R-1が導入するselector候補:
+
+```text
+PH-R-1
+→ PH-R00
 → PH-D00A ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
@@ -870,6 +1164,8 @@ PH-R00
 ```
 
 P22以降の旧selectorはhistoricalへ移す。
+
+監査前のPH-R00〜PH-D03A state、transition、ApprovalRecord、review packageは削除しないが、`HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE`とする。是正後のphase passまたはactivation根拠へ再利用しない。
 
 ### 15.3 Production import boundary
 
@@ -919,7 +1215,7 @@ runtime/
 
 ---
 
-## 17. 最終固定式
+## 17. Owner承認後の固定式
 
 ```text
 HDS Distillation
@@ -940,7 +1236,7 @@ Distilled AGI Initial State
 Bridge(
   HDSStructureBundle
 )
-→ P₀ + J₀ + M₀ + ProbeCatalog
+→ P₀ + J_CORE_OWNER_FROZEN + J_DOMAIN_PROFILE₀ + M₀ + ProbeCatalog
 ```
 
 ```text
@@ -953,6 +1249,8 @@ Trinity(
 )
 + DistilledInitialStateBundle
 + Online Mechanism Identification
++ Relevant-M Causal Witness
++ Irrelevant-M Invariance
 + Governed Development Meta-Trinity
 ```
 

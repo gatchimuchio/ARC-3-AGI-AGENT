@@ -1,0 +1,186 @@
+{
+  "action_surface_boundary": {
+    "allowed": [
+      "legal_action_mask",
+      "payload_validation",
+      "action_availability_change_observation"
+    ],
+    "forbidden": [
+      "exact_action_tuple_as_environment_identity_proxy",
+      "exact_action_tuple_as_fixed_trajectory_selector",
+      "exact_action_tuple_only_policy_head_routing"
+    ]
+  },
+  "artifact_layers": {
+    "derived_distillation_evidence": [
+      "DeterministicDerivation",
+      "ExactFitResult",
+      "CounterfactualInterventionPlan",
+      "InterventionResult",
+      "NormalizationCertificate",
+      "CounterexampleRecord",
+      "BoundaryRecord",
+      "FailureSignature"
+    ],
+    "governance_artifacts": [
+      "PromotionDecision",
+      "OwnerDecisionCapture",
+      "ApprovalRecord",
+      "BundleApprovalRecord",
+      "EvidenceCommitAttestation"
+    ],
+    "primary_teacher_source": [
+      "RawTeacherRecording",
+      "CanonicalTeacherTrajectory",
+      "BeforeAfterRender",
+      "RawActionRecord",
+      "AvailableActions",
+      "TerminalAndProgress",
+      "SeedAndResetMode",
+      "EnvironmentRuntimeDigest",
+      "Provenance"
+    ],
+    "source_manifest_forbidden_types": [
+      "CounterfactualInterventionPlan",
+      "InterventionResult",
+      "PromotionDecision",
+      "OwnerDecisionCapture",
+      "ApprovalRecord",
+      "BundleApprovalRecord"
+    ]
+  },
+  "current_selector": {
+    "active_phase": null,
+    "current_work_class": "REV3_DOCUMENT_CORRECTION_ONLY",
+    "installation_status": "NOT_INSTALLED",
+    "ph_r00_status": "SUSPEND",
+    "strategy_status": "PROPOSED_PENDING_OWNER_APPROVAL"
+  },
+  "execution_control": [
+    "OWNER_CURRENT_EXPLICIT_INSTRUCTION",
+    "ROOT_AGENTS_MD",
+    "OWNER_DECISION_CAPTURE_BACKED_ACTIVE_PHASE_STATE",
+    "CURRENT_WORK_BLOCK_FRAME",
+    "COMMITTED_EVIDENCE"
+  ],
+  "git_evidence_model": {
+    "approval_commit": {
+      "contains": [
+        "OwnerDecisionCapture",
+        "ApprovalRecord"
+      ],
+      "must_not_embed": [
+        "approval_commit"
+      ],
+      "targets": [
+        "evidence_commit",
+        "evidence_payload_digest"
+      ]
+    },
+    "evidence_commit": {
+      "contains": [
+        "PhaseState",
+        "OwnerReviewPackage"
+      ],
+      "must_not_embed": [
+        "evidence_commit",
+        "evidence_tree"
+      ],
+      "targets": [
+        "implementation_commit",
+        "implementation_tree"
+      ]
+    },
+    "evidence_commit_attestation": {
+      "records": [
+        "evidence_commit",
+        "evidence_tree",
+        "evidence_payload_digest"
+      ],
+      "storage": "LATER_COMMIT_OR_DETACHED_ATTESTATION"
+    },
+    "implementation_commit": {
+      "contains": [
+        "implementation",
+        "tests",
+        "documentation"
+      ]
+    },
+    "self_reference_policy": "REJECT"
+  },
+  "j_boundary": {
+    "distillation_may_generate": [
+      "domain_hazard_signatures",
+      "domain_specific_probe_obligations",
+      "evidence_requirements",
+      "failure_checklist",
+      "applicability_rules"
+    ],
+    "j_core_owner_frozen": [
+      "purpose",
+      "value_criteria",
+      "risk_ceiling",
+      "authority_boundary",
+      "adoption_authority",
+      "global_stop_policy"
+    ]
+  },
+  "locked_evaluator_roles": {
+    "incompatible_with_runtime_implementer": [
+      "LOCKED_EVALUATOR_AUTHORITY",
+      "LOCKED_EVALUATOR_CUSTODIAN"
+    ],
+    "required": [
+      "LOCKED_EVALUATOR_AUTHORITY",
+      "LOCKED_EVALUATOR_CUSTODIAN",
+      "ONE_TIME_EXECUTION_TOKEN_ISSUER",
+      "CONSUMPTION_LEDGER_WRITER"
+    ]
+  },
+  "normative_authority": [
+    "OWNER_CURRENT_EXPLICIT_INSTRUCTION",
+    "AGI_THREE_SUBJECT_CANONICAL_DESIGN_V0_2",
+    "HDS_INTERNAL_CANONICAL_REV3_1A",
+    "ENGINEERING_AGI_IMPLEMENTATION_SPEC_V0_2",
+    "ARC3_DISTILLATION_FIRST_SPEC_REV3",
+    "HDS_DISTILLATION_SPEC_REV2",
+    "ARC3_DISTILLATION_FIRST_ROADMAP_REV3",
+    "HDS_DISTILLATION_ROADMAP_REV2"
+  ],
+  "owner_decision_policy": {
+    "codex_may_capture_mechanically": true,
+    "codex_may_generate_decision": false,
+    "schema_ref": "OWNER_DECISION_CAPTURE_SCHEMA_V1.json",
+    "underspecified_instruction_result": "OWNER_DECISION_NOT_ESTABLISHED"
+  },
+  "pre_audit_evidence_policy": {
+    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
+    "delete": false,
+    "eligible_as_current_activation_evidence": false
+  },
+  "schema_version": "arc3-rev3-governance-contract-v1",
+  "source_blind_roles": {
+    "DISTILLATION_AUDITOR": {
+      "allowed": [
+        "access_ledger",
+        "process_manifest",
+        "artifact_digest"
+      ],
+      "environment_source_access": false,
+      "hypothesis_generation": false
+    },
+    "DISTILLATION_EXECUTOR": {
+      "allowed": [
+        "observable_api",
+        "frozen_recording"
+      ],
+      "environment_source_mount": false,
+      "hypothesis_generation": true
+    },
+    "REPLAY_HARNESS_MAINTAINER": {
+      "environment_source_access": true,
+      "hypothesis_generation": false,
+      "replay_harness_maintenance": true
+    }
+  }
+}

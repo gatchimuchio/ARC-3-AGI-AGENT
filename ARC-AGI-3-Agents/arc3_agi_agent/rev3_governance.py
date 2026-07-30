@@ -1,16 +1,9 @@
-"""Fail-closed governance boundary for the rev3 distillation-first strategy.
+"""Fail-closed governance boundary for the proposed rev3 strategy.
 
-PH-R00 defined the only source class that a future rev3 production runtime
-may accept and rejected all historical S5/P22 capability paths as parents,
-active policies, or fallbacks. PH-D00A froze dependencies and authority.
-PH-D00B bootstrapped the isolated distillation scope. PH-D01A inventoried
-source dialect, split, answer visibility, use, and contamination. PH-D01B
-froze content, acquisition, environment, and run manifests. PH-D02A fixes
-canonical serialization and logical/physical digest contracts. PH-D02B fixes
-Evidence, HDS state, approval, and completion schemas. PH-D02C fixes the Typed
-Causal IR, interpreter, and verifier ABI. PH-D03A constructs only proposed
-Golden implementation-conformance cases pending content-specific Owner
-approval; none of these phases constructs or activates an AGI runtime.
+The 2026-07-31 audit suspended PH-R00 and classified the earlier rev3 phase
+evidence as historical and non-authoritative.  The corrected strategy is not
+installed and therefore has no active phase.  Historical S5/P22 capability
+paths remain forbidden as parents, active policies, or fallbacks.
 """
 
 from __future__ import annotations
@@ -21,8 +14,13 @@ from typing import Final
 REV3_STRATEGY_ID: Final = (
     "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
 )
-REV3_ACTIVE_PHASE: Final = "PH-D03A"
+REV3_STRATEGY_STATUS: Final = "PROPOSED_PENDING_OWNER_APPROVAL"
+REV3_INSTALLATION_STATUS: Final = "NOT_INSTALLED"
+REV3_CURRENT_WORK_CLASS: Final = "REV3_DOCUMENT_CORRECTION_ONLY"
+REV3_ACTIVE_PHASE: Final[str | None] = None
+REV3_PH_R00_STATUS: Final = "SUSPEND"
 REV3_PHASE_ORDER: Final = (
+    "PH-R-1",
     "PH-R00",
     "PH-D00A",
     "PH-D00B",
@@ -107,6 +105,10 @@ def _bound_digest(value: str, field_name: str) -> str | None:
     return None
 
 
+def _strategy_is_installed(status: str) -> bool:
+    return status == "INSTALLED"
+
+
 @dataclass(frozen=True, slots=True)
 class Rev3ProductionSelection:
     """Content-bound future production selection.
@@ -148,12 +150,17 @@ class Rev3ProductionSelection:
 def require_rev3_production_selection(
     selection: Rev3ProductionSelection,
 ) -> Rev3ProductionSelection:
-    """Reject every non-distilled or fallback-bearing production selection."""
+    """Reject invalid selections and every selection before installation."""
 
     failures = selection.validate()
     if failures:
         raise PermissionError(
             "REV3_PRODUCTION_SELECTION_REJECTED:" + ",".join(failures)
+        )
+    if not _strategy_is_installed(REV3_INSTALLATION_STATUS):
+        raise PermissionError(
+            "REV3_STRATEGY_NOT_INSTALLED:"
+            f"{REV3_INSTALLATION_STATUS}"
         )
     return selection
 
@@ -179,8 +186,12 @@ __all__ = [
     "FORBIDDEN_PRODUCTION_IMPORT_ROOTS",
     "QUARANTINED_RUNTIME_SOURCE_KINDS",
     "REV3_ACTIVE_PHASE",
+    "REV3_CURRENT_WORK_CLASS",
+    "REV3_INSTALLATION_STATUS",
+    "REV3_PH_R00_STATUS",
     "REV3_PHASE_ORDER",
     "REV3_STRATEGY_ID",
+    "REV3_STRATEGY_STATUS",
     "Rev3ProductionSelection",
     "audit_rev3_production_imports",
     "require_rev3_production_selection",

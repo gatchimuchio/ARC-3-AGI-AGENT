@@ -1,0 +1,91 @@
+{
+  "bypass_policy": "SPEC_REVISION_AND_NEW_PROFILE_DIGEST_REQUIRED",
+  "categories": [
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "observation_projection",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 1,
+      "minimum_evidence_grade": "BOUNDARY_OBSERVED",
+      "minimum_independent_case_count": 3,
+      "negative_pool_requirement": 1
+    },
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "entity_relation",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 1,
+      "minimum_evidence_grade": "BOUNDARY_OBSERVED",
+      "minimum_independent_case_count": 3,
+      "negative_pool_requirement": 1
+    },
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "state_variable",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 1,
+      "minimum_evidence_grade": "COUNTERFACTUAL_SUPPORTED",
+      "minimum_independent_case_count": 3,
+      "negative_pool_requirement": 1
+    },
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "action_surface_payload",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 2,
+      "minimum_evidence_grade": "COUNTERFACTUAL_SUPPORTED",
+      "minimum_independent_case_count": 3,
+      "negative_pool_requirement": 2
+    },
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "precondition",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 2,
+      "minimum_evidence_grade": "COUNTERFACTUAL_SUPPORTED",
+      "minimum_independent_case_count": 3,
+      "negative_pool_requirement": 2
+    },
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "action_effect_transition",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 3,
+      "minimum_evidence_grade": "COUNTERFACTUAL_SUPPORTED",
+      "minimum_independent_case_count": 5,
+      "negative_pool_requirement": 3
+    },
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "goal_terminal",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 2,
+      "minimum_evidence_grade": "COUNTERFACTUAL_SUPPORTED",
+      "minimum_independent_case_count": 3,
+      "negative_pool_requirement": 2
+    },
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "hazard_reset",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 2,
+      "minimum_evidence_grade": "COUNTERFACTUAL_SUPPORTED",
+      "minimum_independent_case_count": 3,
+      "negative_pool_requirement": 2
+    },
+    {
+      "allowed_unresolved_ratio": 0.0,
+      "category_id": "probe_falsification",
+      "hard_mandatory": true,
+      "minimum_counterfactual_case_count": 3,
+      "minimum_evidence_grade": "REPRODUCIBLE_CONTROL",
+      "minimum_independent_case_count": 3,
+      "negative_pool_requirement": 2
+    }
+  ],
+  "duplicate_evidence_score_count_max": 0,
+  "owner_approval_may_bypass_hard_minimum": false,
+  "profile_id": "AGI_BUILD_READY_PROFILE_V1",
+  "profile_status": "PROPOSED_PENDING_OWNER_APPROVAL",
+  "schema_version": "arc3-agi-build-ready-profile-v1"
+}

@@ -67,18 +67,28 @@ def _rebind_digest(
     )
 
 
-def test_live_dependency_lock_satisfies_ph_d00a_dod() -> None:
-    report = AUDITOR.audit_repository(REPOSITORY_ROOT)
+def test_pre_audit_dependency_lock_is_suspended_fail_closed() -> None:
+    selector = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "REV3_CURRENT_SELECTOR.json"
+    )
+    assert selector["installation_status"] == "NOT_INSTALLED"
+    assert selector["ph_r00_status"] == "SUSPEND"
+    assert (
+        selector["historical_evidence"]["classification"]
+        == "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
+    )
 
-    assert report["hds_dependency_match"] is True
-    assert report["authority_defined"] is True
-    assert report["unresolved_dependency_count"] == 0
-    assert report["mismatch_count"] == 0
-    assert report["gates"] == ["DG-00", "DG-14"]
-    assert report == _json(REPORT_PATH)
+    with pytest.raises(
+        AUDITOR.AuditFailure,
+        match="DG00_LOCAL_DEPENDENCY_SHA256_MISMATCH",
+    ):
+        AUDITOR.audit_repository(REPOSITORY_ROOT)
 
 
-def test_cli_verifies_checked_report_without_network_or_arc_data() -> None:
+def test_cli_rejects_historical_checked_report_after_audit_correction() -> None:
     process = subprocess.run(
         [
             sys.executable,
@@ -93,10 +103,11 @@ def test_cli_verifies_checked_report_without_network_or_arc_data() -> None:
         text=True,
     )
 
-    assert process.returncode == 0, process.stderr
-    assert process.stderr == ""
-    assert process.stdout.startswith("DEPENDENCY_LOCK_PASS:")
-    assert "hds-dependency-audit-report:" in process.stdout
+    assert process.returncode == 2
+    assert process.stdout == ""
+    assert process.stderr.startswith(
+        "DEPENDENCY_LOCK_FAIL:DG00_LOCAL_DEPENDENCY_SHA256_MISMATCH:"
+    )
 
 
 @pytest.mark.parametrize(
@@ -111,15 +122,17 @@ def test_phase_artifacts_are_physically_canonical(path: Path) -> None:
     )
 
 
-def test_three_rebuilds_are_byte_identical_to_checked_report() -> None:
-    expected = REPORT_PATH.read_bytes()
-    rebuilt = [
-        (AUDITOR.canonical_json(AUDITOR.audit_repository(REPOSITORY_ROOT)) + "\n")
-        .encode("utf-8")
-        for _ in range(3)
-    ]
+def test_three_live_rebuild_attempts_fail_with_same_suspension_finding() -> None:
+    findings: list[str] = []
+    for _ in range(3):
+        with pytest.raises(AUDITOR.AuditFailure) as captured:
+            AUDITOR.audit_repository(REPOSITORY_ROOT)
+        findings.append(str(captured.value))
 
-    assert rebuilt == [expected, expected, expected]
+    assert len(set(findings)) == 1
+    assert findings[0].startswith(
+        "DG00_LOCAL_DEPENDENCY_SHA256_MISMATCH:"
+    )
 
 
 def test_recomputed_manifest_drift_still_fails_closed(tmp_path: Path) -> None:
@@ -210,10 +223,7 @@ def test_nonempty_dependency_open_term_fails_closed(tmp_path: Path) -> None:
         AUDITOR.AuditFailure,
         match="DG01_OPEN_TERM_LEDGER_NOT_EMPTY",
     ):
-        AUDITOR.audit_repository(
-            REPOSITORY_ROOT,
-            open_term_ledger_path=mutated,
-        )
+        AUDITOR._validate_open_term_ledger(REPOSITORY_ROOT, mutated)
 
 
 def test_schemas_forbid_unknown_fields_and_require_digest() -> None:

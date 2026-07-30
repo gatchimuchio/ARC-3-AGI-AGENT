@@ -1,0 +1,37 @@
+{
+  "active_phase": null,
+  "audit_baseline_commit": "3a7d96755cf6819d36e824fe4b64ae4086f1af98",
+  "audit_report_sha256": "8536f4644fdc56cc71fa5a43699b43894c8f5d2c007ff772d68c29cc4546c1c1",
+  "current_work_class": "REV3_DOCUMENT_CORRECTION_ONLY",
+  "historical_evidence": {
+    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
+    "eligible_for_current_activation": false,
+    "preserve": true,
+    "scope": [
+      "control/rev3/R00_PHASE_STATE.json",
+      "control/rev3/D00A_PHASE_STATE.json",
+      "control/rev3/D00B_PHASE_STATE.json",
+      "control/rev3/D01A_PHASE_STATE.json",
+      "control/rev3/D01B_PHASE_STATE.json",
+      "control/rev3/D02A_PHASE_STATE.json",
+      "control/rev3/D02B_PHASE_STATE.json",
+      "control/rev3/D02C_PHASE_STATE.json",
+      "control/rev3/D03A_CANDIDATE_STATE.json",
+      "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+      "control/rev3/PHASE_TRANSITIONS",
+      "control/rev3/*_OWNER_REVIEW_PACKAGE",
+      "docs/strategy/REV3_STRATEGY_REBASELINE.md",
+      "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json",
+      "artifacts/source_content_manifests/hds_dependencies.json",
+      "artifacts/reports/dependency_audit.json",
+      "scripts/audit_hds_dependencies.py"
+    ]
+  },
+  "installation_status": "NOT_INSTALLED",
+  "next_phase_after_owner_approval": "PH-R-1",
+  "owner_approval_for_correction": "NOT_ESTABLISHED",
+  "ph_r00_status": "SUSPEND",
+  "schema_version": "arc3-rev3-current-selector-v2",
+  "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
+  "strategy_status": "PROPOSED_PENDING_OWNER_APPROVAL"
+}

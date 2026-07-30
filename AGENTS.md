@@ -1,13 +1,17 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、現行の最上位開発運用契約である。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する監査是正中のfail-closed運用guardである。Owner承認まではstrategy導入証拠ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
-- 日付: `2026-07-30`
+- 日付: `2026-07-31`
 - 対象戦略: HDS蒸留先行
 - 上位仕様: `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
 - 上位roadmap: `ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
+- 契約状態: `PROPOSED_PENDING_OWNER_APPROVAL`
+- 導入状態: `NOT_INSTALLED`
+- 現在作業: `REV3_DOCUMENT_CORRECTION_ONLY`
+- Phase guard: `PH-R00 = SUSPEND`
 - Codex role: `DEVELOPMENT_META_C`
 - 最終採否者: 大平鉄兵
 - 継続記憶正本: Git Repository / 仕様 / Ledger / Artifact
@@ -97,53 +101,66 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 
 ---
 
-## 3. 権威順序
+## 3. Authority planes
+
+権威を「規範権威」と「実行制御」に分離する。実行制御は、作業対象・順序・停止点を決めるだけであり、規範権威の意味を変更できない。
+
+### 3.1 Normative Authority
+
+1. Ownerの現在の明示指示
+2. `docs/architecture/AGI三主体統合設計正本_v0_2.md`
+3. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
+4. `docs/architecture/工学的AGI実装仕様書_v0_2.md`
+5. `docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
+6. `docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md`
+7. `docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
+8. `docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
+
+### 3.2 Execution Control
 
 1. Ownerの現在の明示指示
 2. 本運用契約
-3. `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
-4. `ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
-5. `HDS蒸留仕様書_ARC2_ARC3_rev2.md`
-6. `HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
-7. `AGI三主体統合設計正本_v0_2.md`
-8. `工学的AGI実装仕様書_v0_2.md`
-9. current phase state
-10. current Work Block FrameSpec
-11. committed evidence
-12. historical P0〜P22 artifacts
+3. Ownerの明示判断を`OwnerDecisionCapture`で転記した、Owner承認済みactive phase state
+4. current Work Block FrameSpec
+5. committed evidence
 
-下位資料が上位資料と衝突した場合、下位資料を採用しない。  
-不明点を推測で埋めず、Open Termへ記録する。
+過去のphase state、ApprovalRecord、transition、artifact-local `next_*`、P0〜P22 artifactは履歴証拠であり、current task selectorではない。下位資料が上位資料と衝突した場合は採用せず、不明点は推測で埋めずOpen Termへ記録する。
 
 ---
 
 ## 4. Active Strategy Selector
 
 ```text
-PH-R00 [OWNER_APPROVED_PASS]
-→ PH-D00A [CODEX_SELF_AUDIT_PASS]
-→ PH-D00B [CODEX_SELF_AUDIT_PASS]
-→ PH-D01A [CODEX_SELF_AUDIT_PASS]
-→ PH-D01B [CODEX_SELF_AUDIT_PASS]
-→ PH-D02A [CODEX_SELF_AUDIT_PASS]
-→ PH-D02B [CODEX_SELF_AUDIT_PASS]
-→ PH-D02C [CODEX_SELF_AUDIT_PASS]
-→ PH-D03A [ACTIVE]
-→ PH-D03B ... PH-D14
+Strategy = PROPOSED_PENDING_OWNER_APPROVAL
+Installation = NOT_INSTALLED
+Active phase = NONE
+Current work = REV3_DOCUMENT_CORRECTION_ONLY
+PH-R00 = SUSPEND
+```
+
+監査是正後の順序は次である。
+
+```text
+REV3文書・契約の監査是正
+→ Ownerによる是正内容の明示承認
+→ PH-R-1 STRATEGY_INSTALLATION
+→ PH-R00
+→ PH-D00A ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
 ```
 
-Codexはactive phaseより先へ進まない。
-
-PH-R00のOwner決定と通常phaseを連続実行する現在指示は、
-`control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`へ固定する。
-この指示により、各phaseのWork Block、検証、commit bind、証拠生成を省略せず、
-通常のphase境界ではOwner応答待ちのために停止しない。
-これはCodexへのphase採否権移譲ではなく、Ownerが事前に与えた連続進行許可の実行である。
+`control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`を含む監査前のphase evidenceは削除しないが、`HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE`として扱う。監査前文書を対象とした決定、またはOwnerの単なる「続行」をCodexがphase承認へ変換した記録は、是正後仕様のactivation根拠にならない。
 
 Hard Gate:
+
+```text
+OWNER_APPROVED_REV3_CORRECTION
+AND STRATEGY_INSTALLATION_COMPLETE
+```
+
+以前に`PH-R00`を開始しない。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -191,8 +208,8 @@ phase_id
 status
 base_commit
 base_tree
-result_commit
-result_tree
+implementation_commit
+implementation_tree
 work_block_id
 spec_digest
 roadmap_digest
@@ -206,10 +223,49 @@ failed_requirement_ids
 open_terms
 self_audit
 owner_review_required
-content_digest
+evidence_payload_digest
 ```
 
-uncommitted worktreeをphase completion証拠にしない。
+phase stateは、自身を含まない`implementation_commit/tree`へbindする。phase stateとOwner Review Packageを含むGit objectは、後段の`EvidenceCommitAttestation`が`evidence_commit/tree`として記録する。Owner承認はさらに別の`OwnerDecisionCapture`と`approval_commit`へ分離する。
+
+```text
+Implementation Commit
+  code / tests / docs
+  ↓
+Evidence Commit
+  phase state / review package
+  target = implementation_commit/tree
+  ↓
+EvidenceCommitAttestation
+  evidence_commit/tree
+  target = evidence_payload_digest
+  ↓
+Approval Commit
+  OwnerDecisionCapture / ApprovalRecord
+  target = evidence_commit + evidence_payload_digest
+```
+
+commitは自分自身のhashをpayloadへ記録しない。`evidence_commit`はEvidence Commit自身ではなく、後続attestationまたはapproval側に置く。`approval_commit`もApprovalRecord自身へ埋め込まない。uncommitted worktreeをphase completion証拠にしない。
+
+### OwnerDecisionCapture
+
+CodexはOwnerの明示判断を次のrecordへ機械的に転記できる。
+
+```text
+owner_decision_id
+source_instruction_ref
+source_instruction_digest
+target_artifact_digest
+target_evidence_commit
+allowed_transition
+decision
+reason_codes
+captured_by
+capture_is_mechanical = true
+owner_decision_content_digest
+```
+
+Codexは`decision`、`allowed_transition`、`reason_codes`を推測・補完・拡張しない。Owner指示が対象artifactまたは遷移を一意に特定しない場合、recordを生成せず`OWNER_DECISION_NOT_ESTABLISHED`とする。正式schemaは`docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V1.json`で固定する。
 
 ---
 
@@ -324,14 +380,15 @@ owner_authority
 
 ### WB-07 Commit Bind
 
-1. code/test/docをcommit
-2. HEAD/tree取得
-3. commit後のrequired tests
-4. phase state生成
-5. phase stateをresult commit/treeへbind
-6. evidence package生成
+1. code/test/docだけをImplementation Commitへcommit
+2. `implementation_commit/tree`を取得
+3. Implementation Commitに対するrequired testsを実行
+4. phase stateとOwner Review Packageを生成し、`implementation_commit/tree`へbind
+5. phase stateとpackageをEvidence Commitへcommit
+6. `evidence_commit/tree`と`evidence_payload_digest`を後続の`EvidenceCommitAttestation`へ記録
+7. Ownerが明示判断した場合だけ、`OwnerDecisionCapture`とApprovalRecordを別のApproval Commitへcommit
 
-phase stateを生成した後にコードを変更した場合、stateは失効する。
+Implementation Commit後にcode/test/docを変更した場合、phase stateは失効する。Evidence Commit後にevidence payloadを変更した場合、attestationとOwner判断は失効する。
 
 ### WB-08 Owner Review Package
 
@@ -349,16 +406,14 @@ OWNER_REVIEW_PACKAGE/
   proposed_next_action.md
 ```
 
+Packageは`implementation_commit/tree`と`evidence_payload_digest`へbindし、自分自身を含むcommit hashを内部に要求しない。Owner判断はpackageに事前生成せず、後段の`OwnerDecisionCapture`へ分離する。
+
 ### WB-09 Stop
 
 `OWNER_REVIEW_REQUIRED`で停止する。  
 次phaseへ自動進行しない。
 
-ただし、現在のOwner連続進行許可が有効な間は、phase固有のDoD、自己監査、
-commit bind、Owner Review Packageを閉じた後、順序どおり次の通常phaseへ進む。
-Rule／RuleAtom採否、HDSStructureBundle採択、DistilledInitialStateBundle採択、
-`LOCKED_FINAL`、official環境、Kaggle変更・提出はこの例外に含めず、
-対象内容を示したOwner決定で停止する。
+「続行」「連続で作業してよい」は実装継続許可であり、Owner専権のphase採否、Rule採否、HDSStructureBundle採択、DistilledInitialStateBundle採択、`LOCKED_FINAL`、official環境、Kaggle変更・提出を代替しない。各専権判断には、対象artifactと遷移を特定したOwnerの明示判断が必要である。
 
 ---
 
@@ -406,6 +461,19 @@ digest
 
 をfreezeし、後段はdeterministic parse/validate/compileとする。
 
+### Source-blind execution separation
+
+| Role | environment source | replay harness | hypothesis生成 | promotion |
+|---|---:|---:|---:|---:|
+| `REPLAY_HARNESS_MAINTAINER` | 可 | 可 | 禁止 | 禁止 |
+| `DISTILLATION_EXECUTOR` | mount禁止 | observable API / recordingのみ | 可 | 禁止 |
+| `DISTILLATION_AUDITOR` | 禁止 | 禁止 | 禁止 | 禁止 |
+
+- `DISTILLATION_EXECUTOR`はsource treeを含まない別checkoutまたは隔離processで実行する。
+- roleごとにprocess identity、checkout digest、mount allowlist、access ledgerを固定する。
+- 同一Codex sessionがsource access roleとhypothesis generation roleを兼務した出力は`SOURCE_BLIND_NOT_ESTABLISHED`とし、昇格入力へ使わない。
+- Auditorはaccess ledger、artifact digest、process manifestだけを確認する。
+
 ---
 
 ## 8. Bridge中のCodex
@@ -414,7 +482,7 @@ digest
 
 - approved structure recordのeligibility分類
 - type mapping
-- P-IR/J₀/M₀/probe candidate生成
+- P-IR/J_DOMAIN_PROFILE₀/M₀/probe candidate生成
 - taint audit
 - non-replay audit
 - deterministic package
@@ -475,6 +543,17 @@ digest
 
 アクセスは`DataAccessLedger`へ記録する。
 
+available actionとpayload schemaは正当な観測である。legal action mask、payload validation、action availability changeの観測を許可する。一方、exact action tupleだけで専用policy headを選ぶこと、environment identity proxyとして使うこと、固定trajectoryを選ぶことは禁止する。
+
+Locked finalでは次を分離する。
+
+- `LOCKED_EVALUATOR_AUTHORITY`: evaluator versionと更新を承認する。Runtime実装者と兼務しない。
+- `LOCKED_EVALUATOR_CUSTODIAN`: sealed inputと鍵を保管し、内容を開発roleへ開示しない。
+- `ONE_TIME_TOKEN_ISSUER`: artifact/evaluator digestへ一回限りtokenを発行する。
+- `CONSUMPTION_LEDGER_WRITER`:実行・開示・development転用時刻を追記し、`CONSUMED`を記録する。
+
+Codexが上記roleを兼務する場合、その評価は`INDEPENDENT_LOCKED_FINAL_NOT_ESTABLISHED`であり、locked-final claimに使わない。
+
 ---
 
 ## 11. Failure Handling
@@ -520,22 +599,17 @@ EXTERNAL_SERVICE_FAILURE
 
 ## 12. Branch / Commit Discipline
 
-推奨branch:
-
-```text
-phase/<phase-id>-<slug>
-repair/<phase-id>-<failure-id>
-```
+repositoryの公開方法はOwnerの現在指示に従う。現在は`main`へ直接commit/pushし、PRと作業branchを作らない。
 
 commit規律:
 
-1. implementation
-2. tests
-3. docs/artifacts
-4. final evidence bind
+1. Implementation Commit: implementation/test/docだけ
+2. Evidence Commit: phase state/review package、targetはImplementation Commit
+3. EvidenceCommitAttestation: Evidence Commitを後続objectから記録
+4. Approval Commit: OwnerDecisionCapture/ApprovalRecord、Ownerの明示判断がある場合だけ
 
 大規模phaseでは複数commit可。  
-ただしOwner Review Packageは最終HEAD/treeへbindする。
+ただしOwner Review Packageは単一の`implementation_commit/tree`へbindする。
 
 禁止:
 
@@ -544,6 +618,7 @@ commit規律:
 - force overwrite of frozen baseline
 - history rewrite after owner review
 - phase evidenceをcommit前に最終化
+- commitが自分自身のcommit/tree hashをpayloadへ記録する自己参照
 
 ---
 
@@ -609,20 +684,11 @@ OWNER_APPROVED
 あなたの役割はDevelopment Meta-Cです。
 Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではありません。
 
-PH-R00はOwner ApprovalRecordにより採択済みです。
-PH-D00Aは`DEPENDENCY_LOCK_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
-PH-D00Bは`DISTILLATION_SCOPE_GUARD_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
-PH-D01Aは`PH_D01A_SOURCE_INVENTORY_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
-PH-D01Bは`PH_D01B_MANIFEST_FREEZE_PASS`、
-`ARC3_TEACHER_SOURCE_FROZEN`かつ`CODEX_SELF_AUDIT_PASS`です。
-PH-D02Aは`PH_D02A_CANONICAL_CONTRACT_PASS`かつ
-`CODEX_SELF_AUDIT_PASS`です。
-PH-D02Bは`PH_D02B_SCHEMA_SET_PASS`かつ
-`CODEX_SELF_AUDIT_PASS`です。
-PH-D02Cは`PH_D02C_SYNTHETIC_TYPED_IR_PASS`かつ
-`CODEX_SELF_AUDIT_PASS`です。
-Active phaseはPH-D03Aです。
-一Work BlockでPH-D03Aだけを実施してください。
+rev3 strategyはPROPOSED_PENDING_OWNER_APPROVALです。
+installationはNOT_INSTALLEDです。
+PH-R00はSUSPENDです。
+Active phaseはありません。
+現在許可されたwork classはREV3_DOCUMENT_CORRECTION_ONLYです。
 
 最初に、
 - repository root
@@ -630,52 +696,27 @@ Active phaseはPH-D03Aです。
 - HEAD/tree
 - dirty state
 - required documents
-- current phase state
+- current correction state
 を確認してください。
 
-次にPH-D03A WorkBlockFrameを作成し、Golden Conformance Corpusを、
-PH-D02C Typed Causal IR、PH-D02B schema、PH-D02A canonical contractへ
-bindしてください。
+次だけを実施してください。
 
-実装対象は次だけです。
+- F-01〜F-17を解消するrev3文書・機械可読契約の修正
+- 監査前phase evidenceを削除せずhistorical/non-authoritativeへ分類
+- Strategy Installation前状態とPH-R00 SUSPENDの記録
+- ASCII-safe filename、MANIFEST.json、SHA256SUMSを持つ配布artifactの再生成
+- 文書、schema、packageの回帰検証
 
-- Golden corpus contractとcandidate lifecycle
-- ARC2のrecolor、object selection、translation／copy、symmetry、
-  count／relation、composite transform、ambiguous multi-causal、
-  impossible／unsupported opcode case
-- ARC3のsimple action effect、ACTION6 payload、order-observed、delayed effect、
-  GAME_OVER／reset、ambiguous mechanism、counterfactual-supported、
-  resource suspension case
-- 各caseのRawObservation、DeterministicDerivation、複数HypothesisIR、
-  exact-fit result、intervention plan／result、HDS record、
-  expected failure signatures
-- `DG-00`〜`DG-15`の最低一件ずつのcoverage
-- candidate expected artifactとOwner ApprovalRecordの明示分離
-- Goldenが実装適合試験であり一般性証拠ではないことの固定
+PH-R-1、PH-R00、HDS蒸留、Bridge、AGI Runtime、P22改善、locked final、
+official、Kaggleへ進んではいけません。
 
-Golden candidateは全件を現行interpreter／verifierで決定論再構築し、
-case inventory、artifact reference、gate coverage、failure signature、
-resource boundary、identity／answer-copy boundaryを試験してください。
-
-CodexがOwner採否を生成してはいけません。Golden expected artifactは
-`PROPOSED_PENDING_OWNER_APPROVAL`として構築し、内容固有のOwner ApprovalRecord
-なしに`FROZEN`、`APPROVED`、自動更新可能と記録してはいけません。
-既存期待値を変更する場合も新しいOwner ApprovalRecordが必要です。
-
-PH-D03BのSealed corpus freeze、real trajectory normalization、
-一般task candidate generation、実環境interventionによる因果主張、Rule promotion、
-Bridge実装、AGI Runtime実装、P22改善、locked final、official、KaggleへPH-D03A内で
-進んではいけません。
-
-PH-D03A candidateの実装・試験・自己監査・commit bind・Owner Review Package生成後、
-Golden expected artifactの内容固有Owner採否はhard gateとして分離してください。
-Codex自身がGolden期待値承認、Rule採否、hard gate承認、official承認を
-生成してはいけません。
+是正成果をImplementation Commitへ固定し、Evidence Commitを分離してください。
+Owner承認は生成せず、OWNER_REVIEW_REQUIREDで停止してください。
 ```
 
 ---
 
-## 16. 最終固定結論
+## 16. Owner承認後も維持する固定境界
 
 Codexは、開発を自律的に完遂する主体ではない。
 
