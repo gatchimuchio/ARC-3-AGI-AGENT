@@ -50,6 +50,7 @@ SECRET_PATTERNS = (
         re.compile(rb"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
     ),
 )
+RUNTIME_SMOKE_EXPECTED_OUTPUT = "WIN:2:True:True"
 
 
 def _sha256(data: bytes) -> str:
@@ -126,7 +127,7 @@ def _runtime_import_smoke(runtime_archive: bytes) -> dict[str, object]:
             "stdout": result.stdout.strip(),
             "stderr": result.stderr.strip(),
             "passed": result.returncode == 0
-            and result.stdout.strip() == "WIN:2:True:False",
+            and result.stdout.strip() == RUNTIME_SMOKE_EXPECTED_OUTPUT,
         }
 
 
@@ -209,12 +210,16 @@ def dedent_smoke_command() -> str:
         "from arc3_agi_agent.generic_compute import "
         "HybridRelationalInstructionBody\n"
         "from arc3_agi_agent.generic_env import MechanismWorld\n"
-        "from arc3_agi_agent.generic_runtime import "
-        "GenericAGIRuntime, GenericRuntimeConfiguration\n"
+        "from arc3_agi_agent.generic_runtime import GenericAGIRuntime\n"
+        "from arc3_agi_agent.generic_session import "
+        "ResourceContract, create_cognitive_session\n"
+        "session = create_cognitive_session("
+        "p_bundle=HybridRelationalInstructionBody(), "
+        "resource_contract=ResourceContract("
+        "action_budget_per_episode=16))\n"
         "report = GenericAGIRuntime("
         "MechanismWorld((11, 29, 47), (1,), required_progress=2), "
-        "HybridRelationalInstructionBody(), "
-        "GenericRuntimeConfiguration(max_cycles=16)).run()\n"
+        "session, session.begin_episode()).run()\n"
         "print(f'{report.final_state}:{report.progress_count}:'"
         "f'{report.no_fallback_used}:{report.runtime_identity_received}')\n"
     )
@@ -239,6 +244,9 @@ def validate(
         raise ValueError("KAGGLE_NOTEBOOK_ID_INVALID")
     username, notebook_slug = notebook_id.split("/", 1)
     expected_notebook, expected_build_report = build_notebook()
+    expected_runtime_archive = expected_build_report.get("runtime_archive")
+    if not isinstance(expected_runtime_archive, dict):
+        raise TypeError("KAGGLE_EXPECTED_RUNTIME_BUILD_REPORT_INVALID")
     expected_metadata = build_metadata(
         username=username,
         notebook_slug=notebook_slug,
@@ -342,9 +350,7 @@ def validate(
                 "size_bytes"
             )
             == OFFICIAL_PLACEHOLDER_PARQUET_SIZE
-            and expected_build_report.get("runtime_archive", {}).get(
-                "archive_sha256"
-            )
+            and expected_runtime_archive.get("archive_sha256")
             == _sha256(runtime_archive)
         ),
         "NB-004_CODE_COMPILES": not compile_failures,

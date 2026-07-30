@@ -52,7 +52,6 @@ OFFICIAL_PLACEHOLDER_PARQUET_ZLIB_B64 = (
 )
 RUNTIME_MODULES = (
     "authority_state.py",
-    "canonical_artifact.py",
     "causal_record.py",
     "control_state.py",
     "decision_context.py",
@@ -70,31 +69,44 @@ RUNTIME_MODULES = (
     "generic_structural.py",
     "generic_types.py",
     "identity_boundary.py",
-    "initial_state_compiler.py",
     "ir.py",
-    "memory_overlay.py",
     "memory_backend.py",
     "memory_consolidation.py",
     "memory_event.py",
     "memory_image.py",
+    "memory_overlay.py",
     "memory_retrieval.py",
     "memory_transaction.py",
-    "negative_transfer.py",
-    "p_bundle.py",
-    "p_compiler_v2.py",
-    "p_evaluator.py",
     "p_ir.py",
     "p_ir_abi.py",
     "p_ir_interpreter.py",
     "p_ir_resource.py",
     "p_ir_types.py",
     "p_ir_validator.py",
-    "p_registry.py",
     "runtime_identity.py",
     "sample_observation.py",
     "schema.py",
     "taint.py",
     "verification.py",
+)
+RUNTIME_ENTRY_MODULES = (
+    "generic_competition_runner.py",
+    "generic_env.py",
+    "generic_runtime.py",
+    "generic_session.py",
+)
+QUARANTINED_RUNTIME_MODULE_ROOTS = frozenset(
+    {
+        "compiled_policy",
+        "p22_evaluator",
+        "s5_authority",
+        "s5_compute",
+        "s5_policy",
+        "s5_runner",
+        "s5_runtime",
+        "s5_score_adapter",
+        "teacher",
+    }
 )
 FORBIDDEN_RUNTIME_CONTENT = (
     "from .teacher",
@@ -118,32 +130,99 @@ def _zip_info(name: str) -> zipfile.ZipInfo:
     return info
 
 
-def _validate_relative_import_closure() -> None:
+def _local_module_dependencies(path: Path) -> frozenset[str]:
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+    dependencies: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ImportFrom):
+            if node.level == 1:
+                if node.module:
+                    dependencies.add(node.module.split(".", 1)[0])
+                else:
+                    dependencies.update(
+                        alias.name.split(".", 1)[0]
+                        for alias in node.names
+                    )
+            elif (
+                node.level == 0
+                and node.module
+                and node.module.startswith("arc3_agi_agent.")
+            ):
+                dependencies.add(
+                    node.module.removeprefix("arc3_agi_agent.").split(
+                        ".",
+                        1,
+                    )[0]
+                )
+        elif isinstance(node, ast.Import):
+            dependencies.update(
+                alias.name.removeprefix("arc3_agi_agent.").split(".", 1)[
+                    0
+                ]
+                for alias in node.names
+                if alias.name.startswith("arc3_agi_agent.")
+            )
+    return frozenset(dependencies)
+
+
+def _validate_relative_import_closure() -> tuple[str, ...]:
+    if len(set(RUNTIME_MODULES)) != len(RUNTIME_MODULES):
+        raise RuntimeError("KAGGLE_RUNTIME_MODULE_ALLOWLIST_DUPLICATE")
     allowed = {Path(name).stem for name in RUNTIME_MODULES}
+    entries = {Path(name).stem for name in RUNTIME_ENTRY_MODULES}
+    missing_entries = entries - allowed
+    if missing_entries:
+        raise RuntimeError(
+            "KAGGLE_RUNTIME_ENTRY_MODULE_MISSING:"
+            + ",".join(sorted(missing_entries))
+        )
+
+    forbidden_allowed = allowed & QUARANTINED_RUNTIME_MODULE_ROOTS
+    if forbidden_allowed:
+        raise RuntimeError(
+            "KAGGLE_RUNTIME_QUARANTINED_MODULE_ALLOWED:"
+            + ",".join(sorted(forbidden_allowed))
+        )
+
+    dependencies: dict[str, frozenset[str]] = {}
     missing: set[str] = set()
     for name in RUNTIME_MODULES:
         path = PACKAGE_ROOT / name
         if not path.is_file():
             raise FileNotFoundError(path)
-        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
-        for node in ast.walk(tree):
-            if (
-                isinstance(node, ast.ImportFrom)
-                and node.level == 1
-                and node.module
-            ):
-                dependency = node.module.split(".", 1)[0]
-                if dependency not in allowed:
-                    missing.add(dependency)
+        module = path.stem
+        dependencies[module] = _local_module_dependencies(path)
+        missing.update(dependencies[module] - allowed)
     if missing:
         raise RuntimeError(
             "KAGGLE_RUNTIME_IMPORT_CLOSURE_INCOMPLETE:"
             + ",".join(sorted(missing))
         )
 
+    reachable: set[str] = set()
+    pending = list(sorted(entries, reverse=True))
+    while pending:
+        module = pending.pop()
+        if module in reachable:
+            continue
+        reachable.add(module)
+        pending.extend(
+            sorted(dependencies[module] - reachable, reverse=True)
+        )
+
+    extraneous = allowed - reachable
+    if extraneous:
+        raise RuntimeError(
+            "KAGGLE_RUNTIME_ALLOWLIST_EXTRANEOUS:"
+            + ",".join(sorted(extraneous))
+        )
+    return tuple(
+        name for name in RUNTIME_MODULES if Path(name).stem in reachable
+    )
+
 
 def build_runtime_archive() -> tuple[bytes, dict[str, object]]:
-    _validate_relative_import_closure()
+    reachable_modules = _validate_relative_import_closure()
     members: list[tuple[str, bytes]] = [
         (
             "arc3_agi_agent/__init__.py",
@@ -169,7 +248,8 @@ def build_runtime_archive() -> tuple[bytes, dict[str, object]]:
     manifest: dict[str, object] = {
         "schema_version": "arc3-kaggle-runtime-package-v1",
         "action_budget": ACTION_BUDGET,
-        "runtime_modules": list(RUNTIME_MODULES),
+        "runtime_entry_modules": list(RUNTIME_ENTRY_MODULES),
+        "runtime_modules": list(reachable_modules),
         "module_sha256": module_digests,
         "teacher_included": False,
         "known_sample_policy_included": False,
@@ -713,6 +793,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     build_report["notebook_size_bytes"] = len(notebook_data)
     build_report["metadata_sha256"] = _sha256(metadata_data)
     build_report["metadata"] = metadata
+    runtime_archive_report = build_report["runtime_archive"]
+    if not isinstance(runtime_archive_report, dict):
+        raise TypeError("KAGGLE_RUNTIME_BUILD_REPORT_INVALID")
     report_data = (
         json.dumps(build_report, indent=2, sort_keys=True) + "\n"
     ).encode("utf-8")
@@ -722,7 +805,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             {
                 "notebook": str(output_dir / "submission.ipynb"),
                 "notebook_sha256": build_report["notebook_sha256"],
-                "runtime_archive_sha256": build_report["runtime_archive"][
+                "runtime_archive_sha256": runtime_archive_report[
                     "archive_sha256"
                 ],
                 "agent_sha256": build_report["agent_sha256"],

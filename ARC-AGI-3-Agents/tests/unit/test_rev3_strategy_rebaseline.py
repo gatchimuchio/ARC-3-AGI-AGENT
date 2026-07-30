@@ -243,6 +243,26 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
     assert "analysis/autonomous_completion/**" in frame["forbidden_files"]
     assert frame["resource_budget"]["official_access_count"] == 0
 
+    rework_frame = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-R00_VALIDATION_REWORK_FRAME.json"
+    )
+    rework_body = dict(rework_frame)
+    rework_digest = str(rework_body.pop("content_digest"))
+    assert rework_digest == "rev3-work-block-frame:" + digest_object(
+        rework_body
+    )
+    assert rework_frame["base_commit"] == (
+        "8d53dcf82f39c3a38f650d57a1c14324205ed4cc"
+    )
+    assert "analysis/autonomous_completion/**" in rework_frame[
+        "forbidden_files"
+    ]
+    assert rework_frame["resource_budget"]["network_submission_count"] == 0
+    assert rework_frame["resource_budget"]["official_access_count"] == 0
+
     baseline = _json(
         REPOSITORY_ROOT
         / "analysis"
