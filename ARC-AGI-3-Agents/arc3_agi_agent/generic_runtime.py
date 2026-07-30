@@ -143,7 +143,10 @@ def _rendered_changed(
     after: GenericObservation,
 ) -> bool:
     if before.rendered_layers and after.rendered_layers:
-        return before.rendered_layers != after.rendered_layers
+        # Candidate computation and the compiled rendered-policy feature
+        # contract both consume the final composited layer. Interface-only
+        # changes in earlier layers must not contaminate P's bounded history.
+        return before.rendered_layers[-1] != after.rendered_layers[-1]
     return before.signature != after.signature
 
 

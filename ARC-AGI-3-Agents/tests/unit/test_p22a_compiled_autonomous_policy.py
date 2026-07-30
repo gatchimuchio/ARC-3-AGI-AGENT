@@ -19,6 +19,7 @@ from arc3_agi_agent.generic_compute import (
 from arc3_agi_agent.generic_runtime import (
     GenericAGIRuntime,
     GenericRuntimeAblation,
+    _action_effect_record,
 )
 from arc3_agi_agent.generic_session import (
     ResourceContract,
@@ -132,6 +133,53 @@ def _observation(
             if 6 in _surface(arrays, index)
             else ()
         ),
+    )
+
+
+def test_action_effect_history_ignores_non_policy_interface_layers() -> None:
+    board = ((0, 1), (2, 3))
+    before = GenericObservation(
+        signature="before",
+        available_actions=(1,),
+        rendered_layers=(((0, 0), (0, 0)), board),
+        terminal_state="NOT_FINISHED",
+        progress_count=0,
+    )
+    interface_only = GenericObservation(
+        signature="interface-only",
+        available_actions=(1,),
+        rendered_layers=(((1, 0), (0, 0)), board),
+        terminal_state="NOT_FINISHED",
+        progress_count=0,
+    )
+    board_change = GenericObservation(
+        signature="board-change",
+        available_actions=(1,),
+        rendered_layers=(
+            ((1, 0), (0, 0)),
+            ((0, 1), (2, 4)),
+        ),
+        terminal_state="NOT_FINISHED",
+        progress_count=0,
+    )
+
+    assert (
+        _action_effect_record(
+            action_id=1,
+            payload={},
+            before=before,
+            after=interface_only,
+        ).visible_change
+        is False
+    )
+    assert (
+        _action_effect_record(
+            action_id=1,
+            payload={},
+            before=interface_only,
+            after=board_change,
+        ).visible_change
+        is True
     )
 
 
