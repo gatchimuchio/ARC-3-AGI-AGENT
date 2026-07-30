@@ -70,6 +70,13 @@ def _cell_source(cell: object) -> str:
     raise TypeError("KAGGLE_NOTEBOOK_CELL_SOURCE_INVALID")
 
 
+def _report_notebook_path(notebook_path: Path) -> str:
+    try:
+        return notebook_path.relative_to(ROOT).as_posix()
+    except ValueError:
+        return notebook_path.as_posix()
+
+
 def _tracked_secret_findings() -> list[dict[str, object]]:
     result = subprocess.run(
         ["git", "ls-files", "-z"],
@@ -556,7 +563,7 @@ def validate(
             name for name, passed in checks.items() if not passed
         ],
         "notebook": {
-            "path": notebook_path.relative_to(ROOT).as_posix(),
+            "path": _report_notebook_path(notebook_path),
             "id": notebook_id,
             "sha256": _sha256(notebook_data),
             "size_bytes": len(notebook_data),

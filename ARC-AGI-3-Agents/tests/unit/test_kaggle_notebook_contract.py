@@ -162,6 +162,18 @@ def test_kaggle_runtime_archive_import_smoke_uses_current_session_api() -> None:
     assert result["stderr"] == ""
 
 
+def test_kaggle_validator_accepts_external_notebook_report_path() -> None:
+    external_path = (
+        Path(REPOSITORY_ROOT.anchor)
+        / "arc3-external-validation"
+        / "submission.ipynb"
+    )
+
+    assert VALIDATOR._report_notebook_path(
+        external_path
+    ) == external_path.as_posix()
+
+
 def test_kaggle_runtime_allowlist_rejects_extraneous_module(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
