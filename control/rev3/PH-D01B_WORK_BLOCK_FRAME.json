@@ -67,6 +67,7 @@
     "distillation/README.md",
     "distillation/input/README.md",
     "distillation/input/manifest_freeze_plan.json",
+    "distillation/input/raw_recording_content_capture.json",
     "distillation/schemas/README.md",
     "distillation/schemas/source_content_manifest.schema.json",
     "distillation/schemas/acquisition_record.schema.json",
@@ -135,8 +136,8 @@
     "archive_member_content_hash_max_count": 57,
     "repository_source_content_hash_count": 53,
     "remote_recording_content_hash_count": 25,
-    "huggingface_dataset_viewer_read_call_max_count": 64,
-    "huggingface_dataset_viewer_transient_retry_max_count": 32,
+    "huggingface_dataset_viewer_read_call_max_count": 128,
+    "huggingface_dataset_viewer_transient_retry_max_count": 96,
     "source_payload_semantic_parse_count": 0,
     "arc_environment_source_execution_count": 0,
     "teacher_replay_execution_count": 0,
@@ -207,5 +208,5 @@
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-work-block-frame:dce706a5bb8b19a66fbe3259525ae2aa7a93b5c207dce54097247bad3eb92b9f"
+  "content_digest": "rev3-work-block-frame:e6a0ae08024950efd46c69a36a9390ac0fedde70aa2098e5a9731828c5881da1"
 }
