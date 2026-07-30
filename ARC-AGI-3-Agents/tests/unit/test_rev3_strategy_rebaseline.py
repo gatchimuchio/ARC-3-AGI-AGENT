@@ -448,6 +448,50 @@ def test_ph_d01b_owner_review_package_is_complete_and_claim_limited(
     assert "Do not enter PH-D02B" in next_action
 
 
+def test_ph_d01b_artifact_manifest_binds_snapshot_bytes() -> None:
+    manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D01B_OWNER_REVIEW_PACKAGE"
+        / "artifact_manifest.json"
+    )
+    body = dict(manifest)
+    for excluded in manifest["digest_excluded_fields"]:
+        body.pop(excluded)
+
+    assert manifest["content_digest"] == (
+        "rev3-d01b-owner-review-artifact-manifest:"
+        + digest_object(body)
+    )
+    assert manifest["phase_id"] == "PH-D01B"
+    assert manifest["result_commit"] == (
+        "5c47bb5f1519f07ff74aa61ba6beff7fcc13dc6d"
+    )
+    assert manifest["result_tree"] == (
+        "d64951234d55f2e83330255251c5f11caf562307"
+    )
+    assert manifest["snapshot_commit"] == (
+        "eecfa4ad497a0379b5f9808edd7ecd140bcf6929"
+    )
+    assert manifest["snapshot_tree"] == (
+        "512ab7821015fc7cd0a8ddc8428304d86f14cb51"
+    )
+    assert manifest["artifact_count"] == len(manifest["artifacts"]) == 46
+    artifact_paths = [
+        str(artifact["path"]) for artifact in manifest["artifacts"]
+    ]
+    assert artifact_paths == sorted(artifact_paths)
+    assert len(artifact_paths) == len(set(artifact_paths))
+
+    snapshot_commit = str(manifest["snapshot_commit"])
+    for artifact in manifest["artifacts"]:
+        assert _git_blob_sha256(
+            snapshot_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+
 def test_asset_classification_and_frame_are_content_bound() -> None:
     classification = _json(
         REPOSITORY_ROOT
