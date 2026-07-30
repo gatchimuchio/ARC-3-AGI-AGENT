@@ -31,6 +31,32 @@ def _json(path: Path) -> dict[str, Any]:
     return value
 
 
+def _active_compact_fixture() -> dict[str, Any]:
+    """Return the content-bound 6/7 active removal control."""
+
+    body: dict[str, Any] = {
+        "schema_version": "arc3-p10-compact-run-evidence-v1",
+        "operation_mode": "offline",
+        "compact_run": {
+            "error_count": 0,
+            "reports": [
+                {
+                    "game_id": "ka59-38d34dbb",
+                    "levels_completed": 6,
+                    "win_levels": 7,
+                    "actions": 450,
+                    "max_action_exhausted": True,
+                    "error": None,
+                }
+            ],
+        },
+    }
+    return {
+        **body,
+        "content_digest": digest_object(body),
+    }
+
+
 def _kwargs() -> dict[str, object]:
     return {
         "cluster_audit": _json(
@@ -38,12 +64,7 @@ def _kwargs() -> dict[str, object]:
             / "prospective_obligation_relation_v1"
             / "PROSPECTIVE_RELATION_CLUSTER_AUDIT.json"
         ),
-        "active_compact": _json(
-            EVIDENCE_ROOT
-            / "active_all25_max450_v14"
-            / "checkpoints"
-            / "ka59-38d34dbb.checkpoint.json"
-        ),
+        "active_compact": _active_compact_fixture(),
         "ledger": _json(
             DEVELOPMENT_ROOT / "LEGACY_LEVEL_ANALYSIS_LEDGER.json"
         ),
