@@ -1,0 +1,114 @@
+{
+  "schema_version": "arc3-rev3-ph-d00a-dependency-inventory-v1",
+  "phase_id": "PH-D00A",
+  "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-FREEZE",
+  "base_commit": "0e1424fc715fb5901d3a368cd232b8e54036a210",
+  "base_tree": "b1fcb0e64e3d874c37220abb2f8225b56882e9b9",
+  "local_authority_sources": [
+    {
+      "path": "docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md",
+      "size_bytes": 32565,
+      "sha256": "6f55471c0bb3b2b54d434ac05ac09ee24ef69fda3f2f024e5f762696e822216c",
+      "match": true
+    },
+    {
+      "path": "docs/references/HDSフレーム_rev3_1_外向け仕様.md",
+      "size_bytes": 31229,
+      "sha256": "d7cbbf4c981621509e124077ae66cc49bd29b2271fbf94194c6786d2a5a8724a",
+      "match": true
+    },
+    {
+      "path": "docs/references/HDS_SelfContained_Prompt_v1_2_utf8bom.txt",
+      "size_bytes": 9876,
+      "sha256": "33b8a35176a0cc2f18502befb4a53cfbbf378b35e36b911888fa534a8b377b50",
+      "match": true
+    },
+    {
+      "path": "docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md",
+      "size_bytes": 38926,
+      "sha256": "79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93",
+      "match": true
+    },
+    {
+      "path": "docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
+      "size_bytes": 20818,
+      "sha256": "64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
+      "match": true
+    }
+  ],
+  "translator_reference": {
+    "repository": "gatchimuchio/HDS-BlackBox-Translator",
+    "commit": "b501cc77c94048421af8efdb2e866c22b06f7208",
+    "tree": "de5e9e5907efd2d32d22c41d1ef9215867ce9ce5",
+    "readme_path": "README.md",
+    "readme_git_blob": "7f6f9f4b1e2a25a07e25688b5cde24a96bfd2335",
+    "readme_sha256": "a49d75aadce49fcd95576abf06106c03286b8ce38e010e4205cc5e0fc0708e99",
+    "verification": "READ_ONLY_EXACT_COMMIT_GIT_OBJECT_AUDIT",
+    "verified": true
+  },
+  "translator_capability_boundary": {
+    "established": [
+      "deterministic projection of evidence, candidates, policy, PV, and selection into HDS judgment structure",
+      "auditable structured explanation"
+    ],
+    "not_established": [
+      "unknown-mechanism induction",
+      "executable causal hypothesis language",
+      "counterfactual intervention",
+      "unique internal-cause recovery",
+      "automatic RuleAtom promotion"
+    ]
+  },
+  "missing_phase_outputs_before_implementation": [
+    "DEPENDENCY_LOCK.md",
+    "AUTHORITY_ORDER.md",
+    "schemas/dependency_lock.schema.json",
+    "schemas/open_term_record.schema.json",
+    "artifacts/source_content_manifests/hds_dependencies.json",
+    "artifacts/reports/dependency_audit.json",
+    "artifacts/reports/open_term_ledger.json",
+    "scripts/audit_hds_dependencies.py",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py"
+  ],
+  "future_phase_directories_absent": [
+    "distillation",
+    "bridge",
+    "runtime",
+    "config",
+    "tests/golden",
+    "tests/sealed"
+  ],
+  "quarantined_non_inputs": [
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_hds.py",
+      "reason": "historical runtime judgment implementation; not HDS dependency authority"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/s5_authority.py",
+      "reason": "historical S5 runtime authority; quarantined from rev3 production and distillation inputs"
+    },
+    {
+      "path": "datasets/hds_frames/records.jsonl",
+      "reason": "historical derived evidence records; not a canonical HDS authority source"
+    },
+    {
+      "path": "analysis/autonomous_completion/**",
+      "reason": "pre-existing P22/CV generated worktree state; forbidden and untouched"
+    }
+  ],
+  "worktree_boundary": {
+    "preexisting_dirty_p22_cv_file_count": 32,
+    "preexisting_dirty_mutation": "NONE",
+    "preexisting_dirty_staging": "NONE",
+    "unexpected_preimplementation_dirty_file_count": 0
+  },
+  "data_access_counts": {
+    "arc_corpus_file_read": 0,
+    "locked_final": 0,
+    "official": 0,
+    "network_submission": 0,
+    "kaggle_mutation": 0
+  },
+  "inventory_conclusion": "PH-D00A_INPUTS_AVAILABLE_OUTPUTS_NOT_IMPLEMENTED",
+  "content_digest": "rev3-ph-d00a-dependency-inventory:cd7c9d6d7fefdb3f564e0d6ddda29433bd36bfd3735d8cf397745971eb1aa360"
+}
