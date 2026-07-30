@@ -1,6 +1,6 @@
-"""Isolated HDS distillation metadata package.
+"""Isolated HDS source inventory and manifest-freeze package.
 
-PH-D01A exports no solver, agent, runtime, or submission capability.
+PH-D01B exports no solver, agent, runtime, or submission capability.
 """
 
 from __future__ import annotations
