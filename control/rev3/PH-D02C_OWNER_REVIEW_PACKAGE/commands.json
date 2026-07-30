@@ -1,0 +1,140 @@
+{
+  "schema_version": "arc3-rev3-owner-review-commands-v1",
+  "phase_id": "PH-D02C",
+  "result_commit": "fbb36321a7ece68e2692e0c3a81c323b431e87c9",
+  "commands": [
+    {
+      "id": "CMD-D02C-001",
+      "command": "verify checked common type system, ARC2/ARC3 registries, typed IR contract, ABI, exact comparator, bounded intervention runner, stable failure vectors, and conformance report",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PH_D02C_SYNTHETIC_TYPED_IR_PASS; 18 types; 33 ARC2 opcodes; 18 ARC3 opcodes; 51/51 valid vectors; 15/15 invalid vectors; DG-03/DG-08/DG-09/DG-12 pass"
+    },
+    {
+      "id": "CMD-D02C-002",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests/unit/test_causal_ir.py distillation/tests/unit/test_schema_registry.py -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02c-focused-fbb3632",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "87 passed in 109.88s"
+    },
+    {
+      "id": "CMD-D02C-003",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02c-distillation-fbb3632",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "219 passed in 208.21s"
+    },
+    {
+      "id": "CMD-D02C-004",
+      "command": "pytest ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02c-rev3-fbb3632",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "24 passed in 61.35s"
+    },
+    {
+      "id": "CMD-D02C-005",
+      "command": "pytest ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02c-dependency-fbb3632",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "14 passed in 1.46s"
+    },
+    {
+      "id": "CMD-D02C-006",
+      "command": "build_phase_d02b_artifacts plus build_phase_d02c_artifacts and compare all checked bytes",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "ARTIFACTS=51 MISMATCHES=0"
+    },
+    {
+      "id": "CMD-D02C-007",
+      "command": "three independent Python processes rebuild the PH-D02C artifacts",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "3/3 process outputs byte-identical"
+    },
+    {
+      "id": "CMD-D02C-008",
+      "command": "python distillation/src/hds_distill/scope_guard.py --project-root distillation --repository-root . --verify-report distillation/artifacts/reports/distillation_scope_audit.json",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; finding_count=0"
+    },
+    {
+      "id": "CMD-D02C-009",
+      "command": "ruff check distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D02C-010",
+      "command": "ruff format --check on the nine Python files changed by PH-D02C",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "9 files already formatted"
+    },
+    {
+      "id": "CMD-D02C-011",
+      "command": "mypy --strict --config-file distillation/pyproject.toml distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS; 18 source and test files"
+    },
+    {
+      "id": "CMD-D02C-012",
+      "command": "python -m compileall -q distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D02C-013",
+      "command": "pytest ARC-AGI-3-Agents/tests/unit -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02c-full-unit-fbb3632",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "712 passed in 613.66s"
+    },
+    {
+      "id": "CMD-D02C-014",
+      "command": "pytest ARC-AGI-3-Agents/tests/integration -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02c-integration-fbb3632",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "8 passed in 648.57s"
+    },
+    {
+      "id": "CMD-D02C-015",
+      "command": "verify eight canonical PH-D02A artifacts and thirty-six non-refined PH-D02B schemas",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "8 canonical artifacts and 36 non-IR schemas unchanged"
+    },
+    {
+      "id": "CMD-D02C-016",
+      "command": "python --version; ruff --version; mypy --version; pytest --version; verify pre-existing dirty-state aggregate",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "Python 3.12.13; ruff 0.12.7; mypy 1.17.1; pytest 8.4.1; exactly 32 pre-existing files unchanged"
+    },
+    {
+      "id": "CMD-D02C-017",
+      "command": "initial full-distillation run after the final gate-label correction but before refreshing the checked Scope Guard report",
+      "execution_stage": "PRE_RESULT_CORRECTION",
+      "exit_code": 1,
+      "result": "RESOLVED_EVIDENCE_FAILURE; 217 passed and 2 checked-report mismatches; regenerated report remained finding-free and rerun passed 219/219"
+    },
+    {
+      "id": "CMD-D02C-018",
+      "command": "ruff format --check distillation/src distillation/tests",
+      "execution_stage": "NON_GATE_DIAGNOSTIC",
+      "exit_code": 1,
+      "result": "PRE_EXISTING_STYLE_BASELINE; eight historical files outside PH-D02C would reformat; all nine PH-D02C files pass; no gate effect"
+    },
+    {
+      "id": "CMD-D02C-019",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02c-evidence-fbb3632",
+      "execution_stage": "PRE_EVIDENCE_SNAPSHOT",
+      "exit_code": 0,
+      "result": "259 passed in 274.12s"
+    }
+  ]
+}

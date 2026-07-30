@@ -1146,6 +1146,185 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
     )
 
 
+def test_ph_d02c_phase_state_binds_typed_ir_result_and_boundaries() -> None:
+    state_path = (
+        REPOSITORY_ROOT / "control" / "rev3" / "D02C_PHASE_STATE.json"
+    )
+    package_state_path = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D02C_OWNER_REVIEW_PACKAGE"
+        / "phase_state.json"
+    )
+    state = _json(state_path)
+    state_body = dict(state)
+    claimed = str(state_body.pop("content_digest"))
+
+    assert state == _json(package_state_path)
+    assert claimed == "rev3-d02c-phase-state:" + digest_object(state_body)
+    assert state["phase_id"] == "PH-D02C"
+    assert state["status"] == "CODEX_SELF_AUDIT_PASS"
+    assert state["result_commit"] == (
+        "fbb36321a7ece68e2692e0c3a81c323b431e87c9"
+    )
+    assert state["result_tree"] == (
+        "7300c53858f55f0c2ab4af9b523de77efcca0714"
+    )
+    assert state["owner_review_required"] is False
+    assert state["owner_decisions_required"] == []
+    assert state["failed_requirement_ids"] == []
+    assert state["open_terms"] == []
+    assert state["changed_files"] == sorted(state["changed_files"])
+    assert len(state["changed_files"]) == 30
+
+    invariants = state["phase_invariants"]
+    assert invariants["common_type_count"] == 18
+    assert invariants["arc2_opcode_count"] == 33
+    assert invariants["arc3_opcode_count"] == 18
+    assert invariants["total_domain_opcode_count"] == 51
+    assert invariants["operator_metadata_complete_count"] == 51
+    assert invariants["operator_type_resolution_count"] == 51
+    assert invariants["operator_test_vector_count"] == 51
+    assert invariants["valid_ir_vector_count"] == 51
+    assert invariants["valid_ir_vector_pass_count"] == 51
+    assert invariants["invalid_ir_vector_count"] == 15
+    assert invariants["invalid_ir_vector_pass_count"] == 15
+    assert invariants["schema_inventory_count"] == 38
+    assert invariants["refined_schema_count"] == 2
+    assert invariants["unchanged_schema_count"] == 36
+    assert invariants["typed_ir_fail_closed"] is True
+    assert invariants["unknown_opcode_fail_closed"] is True
+    assert invariants["type_mismatch_fail_closed"] is True
+    assert invariants["identity_routing_rejected"] is True
+    assert invariants["answer_copy_rejected"] is True
+    assert invariants["fixed_action_sequence_rejected"] is True
+    assert invariants["ordinary_operator_order_preserved"] is True
+    assert invariants["selector_zero_one_multiple_explicit"] is True
+    assert invariants["causal_overclaim_rejected"] is True
+    assert invariants["resource_overflow_suspends"] is True
+    assert invariants["synthetic_opcode_execution_count"] == 51
+    assert invariants["synthetic_intervention_execution_count"] == 1
+    assert invariants["real_intervention_execution_count"] == 0
+    assert invariants["causal_mechanism_assertion_count"] == 0
+    assert invariants["independent_process_rebuild_count"] == 3
+    assert invariants["deterministic_artifact_count"] == 51
+    assert invariants["deterministic_artifacts_byte_identical"] is True
+    assert invariants["scope_guard_finding_count"] == 0
+    assert invariants["frozen_d02a_artifact_unchanged_count"] == 8
+    assert invariants["source_payload_read_count"] == 0
+    assert invariants["source_execution_count"] == 0
+    assert invariants["real_trajectory_normalization_count"] == 0
+    assert invariants["ph_d02c_typed_causal_ir_started"] is True
+    assert invariants["interpreter_started"] is True
+    assert invariants["verifier_abi_started"] is True
+    assert invariants["golden_freeze_started"] is False
+    assert invariants["sealed_corpus_started"] is False
+    assert invariants["candidate_generation_started"] is False
+    assert invariants["rule_promotion_count"] == 0
+    assert invariants["owner_approval_generated_count"] == 0
+    assert invariants["official_access_count"] == 0
+    assert invariants["kaggle_mutation_count"] == 0
+    assert invariants["preexisting_dirty_file_count"] == 32
+    assert invariants["preexisting_dirty_aggregate_sha256"] == (
+        "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4"
+    )
+    assert invariants["next_phase"] == "PH-D03A"
+    assert invariants["next_phase_started"] is False
+
+    conformance = state["tests"][
+        "typed_causal_ir_contract_and_conformance"
+    ]
+    assert conformance["gates"] == {
+        "DG-03": "PASS_TYPED_EXECUTABLE_IR_AND_STABLE_ERRORS",
+        "DG-08": "PASS_PRIVILEGED_ROUTING_REJECTED",
+        "DG-09": "PASS_PREDICTIVE_SCOPE_NO_CAUSAL_OVERCLAIM",
+        "DG-12": "PASS_RESOURCE_OVERFLOW_SUSPENDS",
+    }
+    assert state["tests"]["dedicated_causal_ir_and_schema"]["passed"] == 87
+    assert state["tests"]["distillation_full"]["passed"] == 219
+    assert state["tests"]["rev3_governance"]["passed"] == 24
+    assert state["tests"]["hds_dependency_audit"]["passed"] == 14
+    assert state["tests"]["full_unit"]["passed"] == 712
+    assert state["tests"]["integration"]["passed"] == 8
+    assert state["tests"]["artifact_rebuild"]["artifact_count"] == 51
+    assert state["tests"]["focused_distillation_rev3_evidence"][
+        "passed"
+    ] == 259
+    assert "PH_D02C_SYNTHETIC_TYPED_IR_PASS" in state["claim_allowed"]
+    assert "GOLDEN_CONFORMANCE_CORPUS_FROZEN" in (
+        state["claim_prohibited"]
+    )
+    assert "CAUSAL_MECHANISM_ESTABLISHED" in state["claim_prohibited"]
+    assert "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED" in (
+        state["claim_prohibited"]
+    )
+
+    result_commit = str(state["result_commit"])
+    for artifact in state["artifacts"]:
+        assert _git_blob_sha256(
+            result_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+
+def test_ph_d02c_owner_review_package_is_complete_and_claim_limited(
+) -> None:
+    package_root = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D02C_OWNER_REVIEW_PACKAGE"
+    )
+    required = {
+        "changed_files.json",
+        "commands.json",
+        "failed_requirements.json",
+        "open_terms.json",
+        "phase_state.json",
+        "proposed_next_action.md",
+        "self_audit.json",
+        "summary.md",
+        "test_results.json",
+    }
+    assert required <= {
+        path.name for path in package_root.iterdir() if path.is_file()
+    }
+
+    failed = _json(package_root / "failed_requirements.json")
+    open_terms = _json(package_root / "open_terms.json")
+    self_audit = _json(package_root / "self_audit.json")
+    tests = _json(package_root / "test_results.json")
+    changed = _json(package_root / "changed_files.json")
+
+    assert failed["failed_requirement_count"] == 0
+    assert failed["failed_requirements"] == []
+    assert open_terms["open_terms"] == []
+    assert open_terms["owner_decisions"] == []
+    assert self_audit["decision"] == "CODEX_SELF_AUDIT_PASS"
+    assert self_audit["codex_self_audit_pass"] is True
+    assert tests["active_product_regression_count"] == 0
+    assert tests["active_environment_failure_count"] == 0
+    assert tests["active_external_service_failure_count"] == 0
+    assert tests["active_tool_failure_count"] == 0
+    assert tests["resolved_evidence_failure_count"] == 1
+    assert tests["resolved_tool_failure_count"] == 1
+    assert tests["non_gate_preexisting_style_baseline_count"] == 1
+    assert changed["changed_file_count"] == 30
+    assert changed["changed_files"] == sorted(changed["changed_files"])
+    assert changed["excluded_preexisting_dirty_state"]["mutation"] == "NONE"
+    assert changed["excluded_preexisting_dirty_state"]["staging"] == "NONE"
+
+    summary = (package_root / "summary.md").read_text(encoding="utf-8")
+    next_action = (package_root / "proposed_next_action.md").read_text(
+        encoding="utf-8"
+    )
+    assert "PH_D02C_SYNTHETIC_TYPED_IR_PASS" in summary
+    assert "not started" in summary
+    assert "Proceed to `PH-D03A`" in next_action
+    assert "does not let Codex fabricate Owner approval" in next_action
+
+
 def test_d00b_phase_state_and_snapshot_manifest_are_content_bound() -> None:
     phase_state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "D00B_PHASE_STATE.json"
