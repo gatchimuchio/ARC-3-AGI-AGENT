@@ -8,8 +8,9 @@ source dialect, split, answer visibility, use, and contamination. PH-D01B
 froze content, acquisition, environment, and run manifests. PH-D02A fixes
 canonical serialization and logical/physical digest contracts. PH-D02B fixes
 Evidence, HDS state, approval, and completion schemas. PH-D02C fixes the Typed
-Causal IR, interpreter, and verifier ABI only; none of these phases constructs
-or activates an AGI runtime.
+Causal IR, interpreter, and verifier ABI. PH-D03A constructs only proposed
+Golden implementation-conformance cases pending content-specific Owner
+approval; none of these phases constructs or activates an AGI runtime.
 """
 
 from __future__ import annotations
@@ -20,7 +21,7 @@ from typing import Final
 REV3_STRATEGY_ID: Final = (
     "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
 )
-REV3_ACTIVE_PHASE: Final = "PH-D02C"
+REV3_ACTIVE_PHASE: Final = "PH-D03A"
 REV3_PHASE_ORDER: Final = (
     "PH-R00",
     "PH-D00A",

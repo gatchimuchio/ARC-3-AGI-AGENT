@@ -127,8 +127,9 @@ PH-R00 [OWNER_APPROVED_PASS]
 → PH-D01B [CODEX_SELF_AUDIT_PASS]
 → PH-D02A [CODEX_SELF_AUDIT_PASS]
 → PH-D02B [CODEX_SELF_AUDIT_PASS]
-→ PH-D02C [ACTIVE]
-→ PH-D03A ... PH-D14
+→ PH-D02C [CODEX_SELF_AUDIT_PASS]
+→ PH-D03A [ACTIVE]
+→ PH-D03B ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
@@ -618,8 +619,10 @@ PH-D02Aは`PH_D02A_CANONICAL_CONTRACT_PASS`かつ
 `CODEX_SELF_AUDIT_PASS`です。
 PH-D02Bは`PH_D02B_SCHEMA_SET_PASS`かつ
 `CODEX_SELF_AUDIT_PASS`です。
-Active phaseはPH-D02Cです。
-一Work BlockでPH-D02Cだけを実施してください。
+PH-D02Cは`PH_D02C_SYNTHETIC_TYPED_IR_PASS`かつ
+`CODEX_SELF_AUDIT_PASS`です。
+Active phaseはPH-D03Aです。
+一Work BlockでPH-D03Aだけを実施してください。
 
 最初に、
 - repository root
@@ -630,44 +633,44 @@ Active phaseはPH-D02Cです。
 - current phase state
 を確認してください。
 
-次にPH-D02C WorkBlockFrameを作成し、HDS蒸留仕様書第9章のTyped Causal IRを、
-PH-D02B schemaとPH-D02A canonical contractへbindして固定してください。
+次にPH-D03A WorkBlockFrameを作成し、Golden Conformance Corpusを、
+PH-D02C Typed Causal IR、PH-D02B schema、PH-D02A canonical contractへ
+bindしてください。
 
 実装対象は次だけです。
 
-- common type system
-- ARC2 opcode registry v1
-- ARC3 opcode registry v1
-- Operator Registry Entry契約
-- executable HypothesisIR contract
-- pure deterministic offline interpreter
-- type checkerとselector cardinality semantics
-- cost model、resource boundary、invalid operation semantics
-- unknown opcode rejection
-- Code／IR ABI
-- answer-copy／identity-routing linter
-- exact comparator interface
-- intervention runner interface
+- Golden corpus contractとcandidate lifecycle
+- ARC2のrecolor、object selection、translation／copy、symmetry、
+  count／relation、composite transform、ambiguous multi-causal、
+  impossible／unsupported opcode case
+- ARC3のsimple action effect、ACTION6 payload、order-observed、delayed effect、
+  GAME_OVER／reset、ambiguous mechanism、counterfactual-supported、
+  resource suspension case
+- 各caseのRawObservation、DeterministicDerivation、複数HypothesisIR、
+  exact-fit result、intervention plan／result、HDS record、
+  expected failure signatures
+- `DG-00`〜`DG-15`の最低一件ずつのcoverage
+- candidate expected artifactとOwner ApprovalRecordの明示分離
+- Goldenが実装適合試験であり一般性証拠ではないことの固定
 
-valid IR実行、型不一致`IR_TYPE_ERROR`、unknown opcode
-`IR_UNKNOWN_OPCODE`、precondition不成立`IR_PRECONDITION_UNSATISFIED`、
-resource超過`SUSPEND_RESOURCE`、invalid operation明示FAIL、selector 0／1／複数、
-operator順序維持、ABI mismatch拒否を試験してください。
+Golden candidateは全件を現行interpreter／verifierで決定論再構築し、
+case inventory、artifact reference、gate coverage、failure signature、
+resource boundary、identity／answer-copy boundaryを試験してください。
 
-case／task／game ID branch、full input digest lookup、full answer grid literal、
-per-case output座標表、fixed successful action列、source filename routing、
-replay index routingをfail-closedで拒否し、`DG-03`、`DG-08`、`DG-09`、
-`DG-12`を証拠へ固定してください。interpreterを独立processで3回実行し、
-結果digest一致を確認してください。
+CodexがOwner採否を生成してはいけません。Golden expected artifactは
+`PROPOSED_PENDING_OWNER_APPROVAL`として構築し、内容固有のOwner ApprovalRecord
+なしに`FROZEN`、`APPROVED`、自動更新可能と記録してはいけません。
+既存期待値を変更する場合も新しいOwner ApprovalRecordが必要です。
 
-PH-D03のGolden／Sealed corpus freeze、real trajectory normalization、
-candidate generation、intervention実行による因果主張、Rule promotion、
-Bridge実装、AGI Runtime実装、P22改善、locked final、official、KaggleへPH-D02C内で
+PH-D03BのSealed corpus freeze、real trajectory normalization、
+一般task candidate generation、実環境interventionによる因果主張、Rule promotion、
+Bridge実装、AGI Runtime実装、P22改善、locked final、official、KaggleへPH-D03A内で
 進んではいけません。
 
-PH-D02Cの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
-現在のOwner連続進行許可に従い、停止せず次の通常phaseを別Work Blockとして開始してください。
-Codex自身がRule採否、hard gate承認、official承認を生成してはいけません。
+PH-D03A candidateの実装・試験・自己監査・commit bind・Owner Review Package生成後、
+Golden expected artifactの内容固有Owner採否はhard gateとして分離してください。
+Codex自身がGolden期待値承認、Rule採否、hard gate承認、official承認を
+生成してはいけません。
 ```
 
 ---
