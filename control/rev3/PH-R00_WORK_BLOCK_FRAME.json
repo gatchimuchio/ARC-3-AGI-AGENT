@@ -1,93 +1,81 @@
 {
-  "schema_version": "arc3-rev3-work-block-frame-v1",
-  "work_block_id": "WB-PH-R00-STRATEGY-REBASELINE",
+  "schema_version": "arc3-rev3-work-block-frame-v2",
+  "work_block_id": "WB-PH-R00-CURRENT-HEAD-REBIND-20260731",
   "phase_id": "PH-R00",
-  "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
-  "base_tree": "d63d26e25758211938cc33d0efe84f50ed096023",
-  "purpose": "Rebind the current committed infrastructure as a pre-distillation baseline and quarantine historical S5 and P22 capability assets from the rev3 production-completion path.",
-  "X": {
-    "targets": [
-      "current committed P16-P21 infrastructure",
-      "historical S5 runtime and compiled policy",
-      "current P22 and CV artifacts",
-      "rev3 authority and phase state"
-    ],
-    "inputs": [
-      "current Git HEAD and tree",
-      "provided rev3 authority documents",
-      "committed P16-P21 phase evidence",
-      "current production package and import graph"
-    ],
-    "observation_scope": "Repository metadata, committed source, tests, manifests, package boundaries, and pre-existing dirty-state inventory.",
-    "change_scope": "Authority documents, PH-R00 governance artifacts, quarantine/import guards, dedicated tests, and evidence only."
-  },
-  "R": {
-    "relations": [
-      "P16-P21 are infrastructure candidates rather than capability-completion proof",
-      "S5 and P22 compiled assets are historical or quarantine-only",
-      "the rev3 production path remains unavailable until an Owner-approved distilled initial-state bundle exists"
-    ],
-    "expected_effects": [
-      "the active strategy selector becomes PH-R00 then Track D, B, A, and E",
-      "historical policy assets cannot be selected as rev3 production parents or fallbacks",
-      "all baseline claims bind only to committed state"
-    ],
-    "comparison": "Compare the pre-change selector, phase bindings, package imports, and asset roles against the post-change rev3 manifests and executable guards."
-  },
-  "Mc": {
-    "identity": "PH-R00 pre-distillation infrastructure baseline",
-    "boundary": "No HDS distillation, Bridge compilation, AGI capability implementation, P22 optimization, locked-final access, or official submission.",
-    "acceptance": [
-      "provided authority documents are retained with verified digests",
-      "current commit and tree are recorded",
-      "P16-P21 are classified as infrastructure candidates",
-      "S5, compiled policy, and P22/CV are classified as historical or quarantine",
-      "rev3 production selection fails closed without approved distilled assets",
-      "dedicated and required regressions are recorded"
-    ],
-    "stop": [
-      "required authority dependency is unavailable",
-      "forbidden data role is accessed",
-      "historical fallback becomes reachable",
-      "baseline regression cannot be classified"
-    ],
-    "rollback": "Revert only PH-R00-owned files to base commit 1eece1f21926be24c7c13608eb81f1d0a3f76614; preserve all pre-existing dirty artifacts.",
-    "completion": "CODEX_SELF_AUDIT_PASS followed by OWNER_REVIEW_REQUIRED; Owner alone may set OWNER_APPROVED_PASS."
-  },
+  "frame_revision": 1,
+  "status": "FRAME_LOCKED",
+  "base_commit": "4dbb65c5d45cca3402f326b251c1de6ac4a2e554",
+  "base_tree": "44ccb73437480daeaab71e6cb3119b5e6bc5d485",
+  "purpose": "Bind the current committed P16-P21 infrastructure as a pre-distillation baseline, quarantine historical capability assets, and prove the local regression and package surface without claiming runtime capability.",
+  "X": "CURRENT_HEAD_INFRASTRUCTURE_BOUND_WITH_RUNTIME_CAPABILITY_NOT_ESTABLISHED",
+  "R": [
+    "evidence-commit:3fec094d64d599681a5bb7c10ebda8163747dc10",
+    "evidence-payload:1f03eb8c4ba134803ccb82323fa1cefef59706066f854c64c4f21717b32051a4",
+    "owner-approval-record:fcfc55bcd7e1aa8b28101870cab844679014a6338cb5a7899a379e0241f290c9",
+    "owner-standing-authorization:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed"
+  ],
+  "Mc": [
+    "current_head_binding",
+    "asset_classification",
+    "production_import_boundary",
+    "pre_distillation_infrastructure_baseline",
+    "selector_phase_entry",
+    "full_regression",
+    "package_and_notebook_regression",
+    "determinism_evidence"
+  ],
   "scope": [
-    "authority retention",
-    "live implementation audit",
-    "asset classification",
-    "production import and selection boundary",
-    "baseline evidence bind",
-    "PH-R00 tests and owner-review evidence"
+    "current committed P16-P21 infrastructure classification",
+    "historical S5 P22 compiled-policy and CV quarantine",
+    "PH-R00 selector and authority-manifest entry",
+    "production import and selection fail-closed boundary",
+    "local full unit integration package and notebook validation",
+    "non-self-referential implementation evidence"
   ],
   "non_goals": [
-    "HDS rule distillation",
-    "Rule promotion",
-    "Distillation-to-AGI Bridge",
-    "AGI runtime capability changes",
-    "P22 score improvement",
-    "locked-final evaluation",
-    "competition packaging",
-    "official submission"
+    "HDS distillation",
+    "Rule or StructureBundle promotion",
+    "Bridge or AGI runtime capability implementation",
+    "P22 score optimization",
+    "locked-final access",
+    "official environment access",
+    "Kaggle mutation or submission"
   ],
   "allowed_files": [
     "AGENTS.md",
-    ".gitignore",
-    "docs/architecture/AGI_CLAIM_REGISTRY.md",
-    "docs/architecture/AGI三主体統合設計正本_v0_2.md",
-    "docs/architecture/工学的AGI実装仕様書_v0_2.md",
+    "AUTHORITY_ORDER.md",
+    "control/rev3/REV3_CURRENT_SELECTOR.json",
+    "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
+    "control/rev3/R00_PHASE_STATE.json",
+    "control/rev3/PH-R00_EVIDENCE_ATTESTATION.json",
+    "control/rev3/PHASE_TRANSITIONS/PH-R-1_TO_PH-R00.json",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/changed_files.json",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/commands.json",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/failed_requirements.json",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/open_terms.json",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/phase_state.json",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/self_audit.json",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/summary.md",
+    "control/rev3/PH-R00_OWNER_REVIEW_PACKAGE/test_results.json",
+    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+    "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
     "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
-    "docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
-    "docs/strategy/**",
-    "docs/references/HDSフレーム_rev3_1_外向け仕様.md",
-    "docs/references/HDS_SelfContained_Prompt_v1_2_utf8bom.txt",
-    "docs/audit/ARC3_現行実装監査_2026-07-30.md",
-    "control/rev3/**",
-    "analysis/rev3/**",
+    "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "docs/strategy/REV3_STRATEGY_REBASELINE.md",
+    "docs/strategy/ASSET_CLASSIFICATION_REV3.json",
+    "docs/strategy/PRODUCTION_IMPORT_BOUNDARY_REV3.md",
+    "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V4.json",
+    "analysis/rev3/pre_distillation_infrastructure_baseline.json",
     "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
-    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py"
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+    "ARC-AGI-3-Agents/tests/unit/test_kaggle_notebook_contract.py",
+    "scripts/validate_rev3_governance.py",
+    "scripts/build_kaggle_submission.py",
+    "scripts/validate_kaggle_submission.py"
   ],
   "forbidden_files": [
     "analysis/autonomous_completion/**",
@@ -100,34 +88,45 @@
   ],
   "allowed_data_roles": [
     "REPOSITORY_METADATA",
-    "HISTORICAL_EVIDENCE_MANIFEST"
+    "HISTORICAL_EVIDENCE_MANIFEST",
+    "LOCAL_PACKAGE_SOURCE",
+    "LOCAL_BUILD_METADATA"
   ],
   "resource_budget": {
     "network_submission_count": 0,
     "locked_final_access_count": 0,
     "official_access_count": 0,
-    "maximum_new_runtime_capabilities": 0
+    "kaggle_mutation_count": 0,
+    "maximum_new_runtime_capabilities": 0,
+    "teacher_source_read_count": 0
   },
   "test_contract": [
     "dedicated PH-R00 governance tests",
-    "focused P16-P21 regression",
-    "type and lint checks for changed source",
-    "full unit and integration regression",
-    "package import-boundary audit",
-    "artifact determinism where generated"
+    "focused P16-P21 and notebook regression",
+    "ruff and mypy strict for changed Python",
+    "full unit",
+    "full integration",
+    "local package build and archive inspection",
+    "local notebook build validation and runtime smoke",
+    "production import-boundary audit",
+    "artifact determinism",
+    "JSON schema digest and git diff validation"
   ],
-  "stop_condition": "Stop at OWNER_REVIEW_REQUIRED, or SUSPEND if a required authority dependency remains unavailable.",
+  "stop_condition": "Apply standing authorization only after all PH-R00 DoD and required validation are PASS with zero failed requirements.",
   "owner_authority": {
     "owner": "大平鉄兵",
-    "reserved_decisions": [
-      "OWNER_APPROVED_PASS",
-      "phase promotion",
-      "Rule promotion",
-      "completion claim",
-      "locked-final authorization",
-      "official submission"
-    ]
+    "standing_authorization_path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+    "standing_authorization_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+    "entry_decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-R-1_TO_PH-R00_20260731.json",
+    "entry_decision_capture_digest": "sha256:bfd1ffe3ed96405b3a4b0d6b3ea8e5dfd146f68c31f6fd0d20ecbc0f5ae70ba0",
+    "entry_approval_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R-1_TO_PH-R00_20260731.json",
+    "entry_approval_digest": "owner-approval-record:fcfc55bcd7e1aa8b28101870cab844679014a6338cb5a7899a379e0241f290c9",
+    "allowed_transition": "PH-R-1_TO_PH-R00"
   },
-  "open_terms": [],
-  "content_digest": "rev3-work-block-frame:33db7d6a9d0dec9128860383ece3543d78638271184b97e35583484838ae74a8"
+  "spec_sha256": "c4bd0da924682c1358609ce9075b1db5045245504d2368139719b88817e51efc",
+  "roadmap_sha256": "76f60950339305a48e0d51e0ca9a4f069fd11716b2744bc6272b0518eb9c2e73",
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-work-block-frame:ea74fe814e84b0e3ca99c27360815870eb6804b5b199e2b4af3a606b6c7a80c8"
 }
