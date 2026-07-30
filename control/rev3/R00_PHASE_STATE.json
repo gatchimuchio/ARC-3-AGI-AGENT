@@ -190,16 +190,20 @@
     "Authorize or deny phase promotion to PH-D00A"
   ],
   "phase_invariants": {
+    "current_head_bound": true,
     "result_commit_bound": true,
+    "uncommitted_phase_evidence_count": 0,
     "active_runtime_capability_claim": "NOT_ESTABLISHED",
+    "quarantined_s5_dependency_in_production": 0,
     "quarantined_s5_dependency_in_rev3_production": 0,
     "historical_fallback_count": 0,
     "missing_required_authority_count": 0,
     "next_phase": "PH-D00A",
     "next_phase_started": false,
+    "owner_approval": "required",
     "locked_final_access_count": 0,
     "official_access_count": 0,
     "network_submission_count": 0
   },
-  "content_digest": "rev3-r00-phase-state:5185c708572dcad9151170268f13562d791b487b3b6295d22ebac9818a799789"
+  "content_digest": "rev3-r00-phase-state:261ae0a0472b131b0b72052f69ca4933ffd07b9489277defd6ef327002f722a6"
 }

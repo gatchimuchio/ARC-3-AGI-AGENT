@@ -332,6 +332,19 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
     assert phase_state["result_tree"] == rework["result_tree"]
     assert phase_state["failed_requirement_ids"] == []
     assert phase_state["self_audit"]["codex_self_audit_pass"] is True
+    phase_invariants = phase_state["phase_invariants"]
+    assert phase_invariants["current_head_bound"] is True
+    assert phase_invariants["uncommitted_phase_evidence_count"] == 0
+    assert (
+        phase_invariants["active_runtime_capability_claim"]
+        == "NOT_ESTABLISHED"
+    )
+    assert phase_invariants[
+        "quarantined_s5_dependency_in_production"
+    ] == 0
+    assert phase_invariants["next_phase"] == "PH-D00A"
+    assert phase_invariants["next_phase_started"] is False
+    assert phase_invariants["owner_approval"] == "required"
     assert phase_state_path.read_bytes() == (
         REPOSITORY_ROOT
         / "control"
