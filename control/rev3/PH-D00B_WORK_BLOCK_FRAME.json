@@ -1,0 +1,132 @@
+{
+  "schema_version": "arc3-rev3-work-block-frame-v1",
+  "work_block_id": "WB-PH-D00B-DISTILLATION-SCOPE-BOOTSTRAP",
+  "phase_id": "PH-D00B",
+  "base_commit": "4f149ea2730568e2af89efef136a696b829c0601",
+  "base_tree": "4f2fd32851d68254955f61b02cd6d232cc2eca1b",
+  "spec_digest": "sha256:feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f",
+  "roadmap_digest": "sha256:b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2",
+  "hds_spec_digest": "sha256:79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93",
+  "hds_roadmap_digest": "sha256:64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
+  "input_manifest_digest": "rev3-authority-input-manifest:083d0ed69db08dff6f0f62a42c3276dd92002a1657b37dde8da4412a4c656c5e",
+  "phase_transition_digest": "rev3-phase-transition:5b66dcacd4b2a62e88166558019dcd5a1dc4cce9419883fd80a141c4cfdbd9f5",
+  "purpose": "Create an isolated, Python-3.12-locked distillation project and a deterministic behavior-based Scope Guard that permits labeled offline interpreter and teacher replay work while failing closed on utilization capabilities.",
+  "X": {
+    "coordinate": "Repository and behavior boundary before any ARC source inventory, Causal IR, hypothesis generation, Bridge, or AGI Runtime implementation",
+    "inputs": [
+      "PH-D00A dependency and authority lock evidence",
+      "rev3 specification and roadmap",
+      "HDS distillation Scope Guard contract",
+      "current repository layout and Python tooling inventory",
+      "recorded Owner continuous-progression authorization"
+    ],
+    "change_scope": "PH-D00B distillation skeleton, scope contract, static auditor, dedicated tests, deterministic audit report, inventory, phase evidence, and semantically empty bridge/read-only runtime boundary only."
+  },
+  "R": {
+    "risk": "A filename blacklist, permissive import boundary, spoofable exemption, or mixed runtime dependency could silently turn the distillation repository into a solver, production agent, network client, or submission generator.",
+    "required_response": "Inspect AST behavior, resolved import provenance, declared entrypoints, project dependencies, and repository boundaries; emit stable findings and fail closed without executing audited source.",
+    "claim_boundary": "DISTILLATION_SCOPE_GUARD_PASS establishes only the D00B repository and behavior boundary. It does not establish corpus coverage, causal correctness, Rule promotion, Bridge readiness, AGI capability, or official readiness."
+  },
+  "Mc": {
+    "mechanism": "An isolated dependency-free Python package, exact Python and development-tool pins, trusted provenance markers for labeled teacher/offline interpreter callables, deterministic AST/import/entrypoint analysis, and canonical JSON evidence.",
+    "owner_authority": "大平鉄兵 remains the sole Rule, promotion, bundle, locked-final, official, and submission decision authority.",
+    "rollback": "Revert PH-D00B-owned commits only; preserve all pre-existing P22/CV worktree changes."
+  },
+  "scope": [
+    "create root SCOPE_LOCK.md",
+    "create isolated distillation input, schemas, src, tests, and artifacts boundaries",
+    "pin Python 3.12.13 and exact ruff, mypy, and pytest versions without runtime dependencies",
+    "create a semantically empty bridge directory and read-only runtime reference directory",
+    "audit Python AST, resolved imports, dynamic imports, entrypoints, and project dependencies without importing audited modules",
+    "reject official ARC API, network access, runtime or production dependency, public unlabeled-task answer callable, identity routing, answer literal or fixed action sequence, and submission artifact generation",
+    "permit provenance-valid labeled teacher replay and offline interpreter callables",
+    "generate deterministic D00B scope audit and review evidence"
+  ],
+  "non_goals": [
+    "PH-D01A source dialect or contamination inventory",
+    "ARC2 or ARC3 corpus access or processing",
+    "Causal IR, HypothesisIR, candidate generation, exact fit, or intervention",
+    "Rule or RuleAtom promotion",
+    "Bridge implementation beyond an empty marker",
+    "AGI Runtime implementation",
+    "P22 or score optimization",
+    "locked-final or official access",
+    "Kaggle notebook mutation or submission",
+    "GitHub Actions workflow creation"
+  ],
+  "allowed_files": [
+    "SCOPE_LOCK.md",
+    "distillation/.python-version",
+    "distillation/README.md",
+    "distillation/pyproject.toml",
+    "distillation/input/README.md",
+    "distillation/schemas/README.md",
+    "distillation/src/hds_distill/__init__.py",
+    "distillation/src/hds_distill/scope_contract.py",
+    "distillation/src/hds_distill/scope_guard.py",
+    "distillation/tests/unit/test_scope_guard.py",
+    "distillation/tests/integration/README.md",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "bridge/.gitkeep",
+    "runtime/REFERENCE_ONLY.md",
+    "analysis/rev3/ph_d00b_scope_inventory.json",
+    "control/rev3/PH-D00B_WORK_BLOCK_FRAME.json",
+    "control/rev3/D00B_PHASE_STATE.json",
+    "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/**"
+  ],
+  "forbidden_files": [
+    "analysis/autonomous_completion/**",
+    "datasets/**",
+    "ARC-AGI-3-Agents/arc3_agi_agent/**",
+    "ARC-AGI-3-Agents/agents/**",
+    "ARC-AGI-3-Agents/*.py",
+    "ARC-AGI-3-Agents/pyproject.toml",
+    "ARC-AGI-3-Agents/uv.lock",
+    "bridge/**/*.py",
+    "runtime/**/*.py",
+    "kaggle_notebooks/**",
+    "notebooks/**",
+    "kaggle/**",
+    ".github/workflows/**"
+  ],
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "HDS_AUTHORITY_SOURCE",
+    "OWNER_APPROVAL_EVIDENCE",
+    "SYNTHETIC_SCOPE_GUARD_TEST_FIXTURE"
+  ],
+  "resource_budget": {
+    "arc_corpus_file_read_count": 0,
+    "llm_call_count": 0,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "network_submission_count": 0,
+    "kaggle_mutation_count": 0,
+    "audited_source_execution_count": 0,
+    "external_network_use": "NONE_AFTER_READ_ONLY_GIT_SYNCHRONIZATION"
+  },
+  "test_contract": [
+    "DG-02 X, R, Mc, scope, layout, dependency, and entrypoint closure are explicit",
+    "DG-09 report and claims distinguish scope closure from causal or capability evidence",
+    "DG-14 Owner-only approval and promotion authority remains unchanged",
+    "the live distillation project and a legitimate solver-named offline interpreter or labeled teacher replay pass",
+    "official ARC API imports and callables fail with stable findings",
+    "network imports, aliases, dynamic imports, and command-launch network behavior fail",
+    "public unlabeled-task answer callables fail, including spoofed local marker attempts",
+    "submission artifact generators, identity routing, answer maps, and fixed action sequences fail",
+    "runtime, production, bridge, and historical ARC package dependencies fail",
+    "undeclared or outside-src entrypoints and boundary code fail",
+    "the auditor never imports or executes audited source",
+    "dedicated tests pass before focused rev3 regression",
+    "ruff, strict mypy, compileall, full unit, and integration regressions pass",
+    "audit report generation is byte-identical across three independent processes"
+  ],
+  "stop_condition": "Suspend on dependency or authority mismatch, an unclassifiable required behavior, required-test unavailability, or any D00B finding in the live tree. Otherwise bind PH-D00B evidence and continue to PH-D01A as a separate Work Block under recorded Owner authorization.",
+  "owner_authority": {
+    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+    "approval_record_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+    "routine_phase_pause_waived": true,
+    "hard_gate_approval_delegated": false
+  },
+  "content_digest": "rev3-work-block-frame:d99cc8df0d8c0eeb6e10cc7710d372c0933bc501e7a2faca3ab48c875ca6aa0e"
+}

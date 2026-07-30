@@ -1,0 +1,152 @@
+{
+  "schema_version": "arc3-rev3-ph-d00b-scope-inventory-v1",
+  "phase_id": "PH-D00B",
+  "work_block_id": "WB-PH-D00B-DISTILLATION-SCOPE-BOOTSTRAP",
+  "base_commit": "4f149ea2730568e2af89efef136a696b829c0601",
+  "base_tree": "4f2fd32851d68254955f61b02cd6d232cc2eca1b",
+  "authority_inputs": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "a734800c467bd5519b12c5b337d8d78fa49763cb9cc3e973c7ee161cf0831e6c"
+    },
+    {
+      "path": "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json",
+      "sha256": "d535f4320ba814bbbd3f012abcec1220679785b7dc95e630a8af3e25a5fb5b23"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+      "sha256": "feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f"
+    },
+    {
+      "path": "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+      "sha256": "b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2"
+    },
+    {
+      "path": "docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md",
+      "sha256": "79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93"
+    },
+    {
+      "path": "docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
+      "sha256": "64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518"
+    }
+  ],
+  "existing_environment": {
+    "windows_python": {
+      "path": "ARC-AGI-3-Agents/.venv/Scripts/python.exe",
+      "version": "3.12.13",
+      "ruff_version": "0.12.7",
+      "mypy_version": "1.17.1",
+      "pytest_version": "8.4.1"
+    },
+    "wsl_python": {
+      "version": "3.14.4",
+      "eligible_for_d00b_validation": false,
+      "reason": "outside the exact Python 3.12.13 lock"
+    },
+    "historical_project": {
+      "pyproject_path": "ARC-AGI-3-Agents/pyproject.toml",
+      "pyproject_sha256": "8a543455e089272327e596c6d1ccd21ab75c78201d8d32558bea0b1bafaa6d60",
+      "lock_path": "ARC-AGI-3-Agents/uv.lock",
+      "lock_sha256": "680db09e6d1d3291ac8dc5138dd89c86a6341e5a1a86bbf803d2a1c4885e4a92",
+      "reuse_as_distillation_environment": false,
+      "reason": "contains official ARC, network, agent, teacher, historical runtime, and submission-adjacent dependencies and entrypoints"
+    }
+  },
+  "preimplementation_layout": {
+    "SCOPE_LOCK.md": "ABSENT",
+    "distillation": "ABSENT",
+    "bridge": "ABSENT",
+    "runtime": "ABSENT",
+    "analysis/runtime": "HISTORICAL_REFERENCE_OUTSIDE_REV3_BOUNDARY",
+    "github_actions_workflow_count": 0
+  },
+  "missing_phase_outputs_before_implementation": [
+    "SCOPE_LOCK.md",
+    "distillation/.python-version",
+    "distillation/README.md",
+    "distillation/pyproject.toml",
+    "distillation/input",
+    "distillation/schemas",
+    "distillation/src/hds_distill",
+    "distillation/tests/unit",
+    "distillation/tests/integration",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "bridge",
+    "runtime"
+  ],
+  "reusable_components": [
+    {
+      "path": "scripts/audit_hds_dependencies.py",
+      "reuse": "canonical JSON and content-digest conventions only",
+      "runtime_dependency": false
+    },
+    {
+      "path": "ARC-AGI-3-Agents/.venv/Scripts/python.exe",
+      "reuse": "validation interpreter and existing exact development tools only",
+      "runtime_dependency": false
+    }
+  ],
+  "quarantined_non_inputs": [
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/**",
+      "reason": "historical runtime and teacher implementation; forbidden as D00B implementation dependency"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/agents/**",
+      "reason": "historical agent implementation; forbidden as D00B implementation dependency"
+    },
+    {
+      "path": "datasets/**",
+      "reason": "ARC corpus access and processing begin no earlier than later phases"
+    },
+    {
+      "path": "analysis/autonomous_completion/**",
+      "reason": "pre-existing P22/CV generated worktree state; forbidden, unstaged, and untouched"
+    },
+    {
+      "path": "kaggle_notebooks/**",
+      "reason": "official and submission path outside D00B"
+    }
+  ],
+  "planned_scope_guard_evidence": {
+    "analysis_modes": [
+      "AST_WITHOUT_MODULE_EXECUTION",
+      "RESOLVED_IMPORT_PROVENANCE",
+      "DECLARED_ENTRYPOINTS",
+      "PROJECT_DEPENDENCIES",
+      "REPOSITORY_BOUNDARY"
+    ],
+    "explicitly_allowed": [
+      "labeled teacher replay",
+      "offline interpreter",
+      "deterministic local report generation"
+    ],
+    "fail_closed_categories": [
+      "official ARC API",
+      "network access",
+      "dynamic import",
+      "public unlabeled-task answer callable",
+      "submission artifact generation",
+      "identity routing",
+      "answer literal or fixed action sequence",
+      "runtime or production dependency",
+      "undeclared entrypoint",
+      "bridge or runtime implementation"
+    ]
+  },
+  "worktree_boundary": {
+    "preexisting_dirty_p22_cv_file_count": 32,
+    "preexisting_dirty_mutation": "NONE",
+    "preexisting_dirty_staging": "NONE",
+    "unexpected_preimplementation_dirty_file_count": 0
+  },
+  "data_access_counts": {
+    "arc_corpus_file_read": 0,
+    "locked_final": 0,
+    "official": 0,
+    "network_submission": 0,
+    "kaggle_mutation": 0
+  },
+  "inventory_conclusion": "PH-D00B_BOUNDARY_ABSENT_IMPLEMENTATION_REQUIRED",
+  "content_digest": "rev3-ph-d00b-scope-inventory:74204c939e9c61bcf01fe74436f6cae2c573cfffff93154da45768a7012b9bca"
+}
