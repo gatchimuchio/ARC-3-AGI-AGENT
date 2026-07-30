@@ -1,0 +1,105 @@
+{
+  "schema_version": "arc3-ph-r1-evidence-payload-manifest-v1",
+  "phase_id": "PH-R-1",
+  "work_block_id": "WB-PH-R-1-STRATEGY-INSTALLATION-20260731",
+  "base_commit": "d5d7b93769089f9de14f752e3678acea7b2198b3",
+  "base_tree": "3d4ac0acb130b90d0da284a0507a876dcc284d46",
+  "implementation_commit": "9ee9d27cf0bb31f6012b11249a0421075689fa21",
+  "implementation_tree": "64267af75e888507b4221c77be6c2954549e4525",
+  "payload_digest_method": "SHA256_OF_THIS_FILE_BYTES_WITH_FINAL_LF",
+  "frame": {
+    "path": "control/rev3/PH-R-1_WORK_BLOCK_FRAME.json",
+    "content_digest": "rev3-work-block-frame:a43e974044c78cd7dad517f020eb1810419f03b769051f66711b94362bc100ac",
+    "sha256": "44564bd8c8bd47304a991aee6224c448aaeb6cf217898e39edc0ea84feae8282"
+  },
+  "authority_manifest": {
+    "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "content_digest": "rev3-current-authority-manifest:1f88716d99afff197ffdaa13f6611c130ab8b233fd797ac2fff601734bd8c17c",
+    "sha256": "8d6d9437cba8456121c6bc2c6eaf42896682994c96c9089f5534b8e2b156befb"
+  },
+  "artifacts": [
+    {
+      "role": "CURRENT_SELECTOR",
+      "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
+      "sha256": "9a63f83ccb15b8a50cf865679279e40b56069372b231249b2963241c4a159ea9"
+    },
+    {
+      "role": "NORMATIVE_STRATEGY",
+      "path": "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+      "sha256": "c4bd0da924682c1358609ce9075b1db5045245504d2368139719b88817e51efc"
+    },
+    {
+      "role": "NORMATIVE_ROADMAP",
+      "path": "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+      "sha256": "76f60950339305a48e0d51e0ca9a4f069fd11716b2744bc6272b0518eb9c2e73"
+    },
+    {
+      "role": "FAIL_CLOSED_RUNTIME_GUARD",
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "sha256": "940e7cbf65a519f1cebca75302fd96703dd270d13360d5cd3bc2824a51e3de06"
+    },
+    {
+      "role": "GOVERNANCE_VALIDATOR",
+      "path": "scripts/validate_rev3_governance.py",
+      "sha256": "a68a6e17cf9bd8895356784f78266b3811807b0c4f86e1ff0ce59ccc4cfdb0b6"
+    },
+    {
+      "role": "STANDING_AUTHORIZATION_SCHEMA",
+      "path": "docs/strategy/contracts/OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json",
+      "sha256": "05a9b0bcddcf47b5d613b7e9d0075f93270d2636f2651db7564750ad09b98ea4"
+    },
+    {
+      "role": "EXACT_BIND_DECISION_SCHEMA",
+      "path": "docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V2.json",
+      "sha256": "6fb7970aa16e470201fb3d354d9f6d9aadafcba9160c676df2303d736f5ab758"
+    },
+    {
+      "role": "APPROVED_CORRECTION_PACKAGE",
+      "path": "artifacts/rev3/arc3_hds_distillation_first_strategy_rev3_corrected.zip",
+      "sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
+      "logical_digest": "sha256:78c32be35c0d78134a8f9e9a9c806a8dda41ef605e4b185bc5f58a381465271d",
+      "size_bytes": 47862
+    }
+  ],
+  "validation": {
+    "full_unit": {
+      "status": "PASS",
+      "passed": 728,
+      "failed": 0,
+      "duration_seconds": 319.19,
+      "tested_commit": "9ee9d27cf0bb31f6012b11249a0421075689fa21"
+    },
+    "focused_post_implementation": {
+      "status": "PASS",
+      "passed": 54,
+      "failed": 0,
+      "duration_seconds": 47.75
+    },
+    "ruff": "PASS",
+    "mypy_strict": "PASS",
+    "governance_validator": {
+      "status": "PASS",
+      "check_count": 12,
+      "failure_count": 0
+    },
+    "package_reproducibility": {
+      "status": "PASS_BYTE_IDENTICAL",
+      "independent_runtime_count": 2,
+      "sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c"
+    },
+    "json_parse": {
+      "status": "PASS",
+      "parsed_file_count": 15
+    },
+    "git_diff_check": "PASS"
+  },
+  "claim": "STRATEGY_INSTALLATION_COMPLETE",
+  "forbidden_claims": [
+    "PH-R00_COMPLETE",
+    "HDS_DISTILLATION_COMPLETE",
+    "AGI_BUILD_READY",
+    "RUNTIME_ACTIVE",
+    "LOCKED_FINAL_COMPLETE",
+    "OFFICIAL_COMPLETE"
+  ]
+}

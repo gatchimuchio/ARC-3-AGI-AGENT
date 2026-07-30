@@ -1,0 +1,148 @@
+{
+  "schema_version": "arc3-phase-state-v2",
+  "phase_id": "PH-R-1",
+  "status": "CODEX_SELF_AUDIT_PASS",
+  "base_commit": "d5d7b93769089f9de14f752e3678acea7b2198b3",
+  "base_tree": "3d4ac0acb130b90d0da284a0507a876dcc284d46",
+  "implementation_commit": "9ee9d27cf0bb31f6012b11249a0421075689fa21",
+  "implementation_tree": "64267af75e888507b4221c77be6c2954549e4525",
+  "work_block_id": "WB-PH-R-1-STRATEGY-INSTALLATION-20260731",
+  "spec_digest": "sha256:c4bd0da924682c1358609ce9075b1db5045245504d2368139719b88817e51efc",
+  "roadmap_digest": "sha256:76f60950339305a48e0d51e0ca9a4f069fd11716b2744bc6272b0518eb9c2e73",
+  "input_manifest_digest": "rev3-current-authority-manifest:1f88716d99afff197ffdaa13f6611c130ab8b233fd797ac2fff601734bd8c17c",
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "GOVERNANCE_ARTIFACT",
+    "APPROVED_CORRECTION_PACKAGE"
+  ],
+  "changed_files": [
+    "AGENTS.md",
+    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "AUTHORITY_ORDER.md",
+    "control/rev3/PH-R-1_WORK_BLOCK_FRAME.json",
+    "control/rev3/REV3_CURRENT_SELECTOR.json",
+    "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+    "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+    "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "docs/strategy/contracts/AGI_BUILD_READY_PROFILE_V1.json",
+    "docs/strategy/contracts/APPROVAL_RECORD_SCHEMA_V1.json",
+    "docs/strategy/contracts/EVIDENCE_COMMIT_ATTESTATION_SCHEMA_V1.json",
+    "docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V2.json",
+    "docs/strategy/contracts/OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json",
+    "docs/strategy/contracts/PHASE_STATE_SCHEMA_V2.json",
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json",
+    "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+    "scripts/package_rev3_strategy.py",
+    "scripts/validate_rev3_governance.py"
+  ],
+  "commands": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/unit -q --basetemp=scratch/ph-r1-final-implementation-unit",
+      "result": "728 passed in 319.19s",
+      "status": "PASS"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/unit/test_rev3_strategy_rebaseline.py tests/unit/test_hds_dependency_audit.py -q --basetemp=scratch/ph-r1-frame-r5",
+      "result": "54 passed in 47.75s",
+      "status": "PASS"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check tests/unit/test_hds_dependency_audit.py tests/unit/test_rev3_strategy_rebaseline.py arc3_agi_agent/rev3_governance.py ../scripts/package_rev3_strategy.py ../scripts/validate_rev3_governance.py",
+      "result": "All checks passed",
+      "status": "PASS"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m mypy --strict arc3_agi_agent/rev3_governance.py ../scripts/package_rev3_strategy.py ../scripts/validate_rev3_governance.py",
+      "result": "Success: no issues found in 3 source files",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 scripts/validate_rev3_governance.py",
+      "result": "12 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 scripts/package_rev3_strategy.py --output scratch/ph-r1-final-package.zip",
+      "result": "47862 bytes; byte-identical SHA-256 f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "result": "no findings",
+      "status": "PASS"
+    }
+  ],
+  "tests": {
+    "full_unit": {
+      "duration_seconds": 319.19,
+      "failed": 0,
+      "passed": 728,
+      "status": "PASS",
+      "tested_commit": "9ee9d27cf0bb31f6012b11249a0421075689fa21"
+    },
+    "focused_regression": {
+      "duration_seconds": 47.75,
+      "failed": 0,
+      "passed": 54,
+      "status": "PASS"
+    },
+    "governance_validator": {
+      "check_count": 12,
+      "failure_count": 0,
+      "status": "PASS"
+    },
+    "json_parse": {
+      "parsed_file_count": 15,
+      "status": "PASS"
+    },
+    "mypy_strict": "PASS",
+    "package_reproducibility": "PASS_BYTE_IDENTICAL",
+    "ruff": "PASS"
+  },
+  "artifacts": [
+    {
+      "path": "control/rev3/PH-R-1_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "EVIDENCE_PAYLOAD_DESCRIPTOR",
+      "sha256": "1f03eb8c4ba134803ccb82323fa1cefef59706066f854c64c4f21717b32051a4"
+    },
+    {
+      "content_digest": "rev3-current-authority-manifest:1f88716d99afff197ffdaa13f6611c130ab8b233fd797ac2fff601734bd8c17c",
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "sha256": "8d6d9437cba8456121c6bc2c6eaf42896682994c96c9089f5534b8e2b156befb"
+    },
+    {
+      "logical_digest": "sha256:78c32be35c0d78134a8f9e9a9c806a8dda41ef605e4b185bc5f58a381465271d",
+      "path": "artifacts/rev3/arc3_hds_distillation_first_strategy_rev3_corrected.zip",
+      "role": "APPROVED_CORRECTION_PACKAGE",
+      "sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c"
+    }
+  ],
+  "failed_requirement_ids": [],
+  "open_terms": [
+    {
+      "blocks_next_phase_entry": true,
+      "id": "PH-R1-OWNER-RESULT-BINDING-001",
+      "resolution": "Bind this exact Evidence Commit through the Owner standing authorization before PH-R00 entry.",
+      "status": "PENDING_APPROVAL_COMMIT"
+    }
+  ],
+  "self_audit": {
+    "authority": "PASS",
+    "claim_strength": "PASS",
+    "data_role": "PASS",
+    "determinism": "PASS",
+    "evidence": "PASS",
+    "historical_fallback": "PASS",
+    "identity_taint": "PASS",
+    "objective_alignment": "PASS",
+    "resource": "PASS",
+    "rollback": "PASS",
+    "scope": "PASS"
+  },
+  "owner_review_required": true,
+  "evidence_payload_digest": "sha256:1f03eb8c4ba134803ccb82323fa1cefef59706066f854c64c4f21717b32051a4"
+}

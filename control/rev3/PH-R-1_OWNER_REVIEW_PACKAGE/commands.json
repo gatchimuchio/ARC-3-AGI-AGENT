@@ -1,0 +1,42 @@
+{
+  "schema_version": "arc3-ph-r1-command-evidence-v1",
+  "phase_id": "PH-R-1",
+  "commands": [
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/unit -q --basetemp=scratch/ph-r1-final-implementation-unit",
+      "result": "728 passed in 319.19s",
+      "status": "PASS"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m pytest tests/unit/test_rev3_strategy_rebaseline.py tests/unit/test_hds_dependency_audit.py -q --basetemp=scratch/ph-r1-frame-r5",
+      "result": "54 passed in 47.75s",
+      "status": "PASS"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m ruff check tests/unit/test_hds_dependency_audit.py tests/unit/test_rev3_strategy_rebaseline.py arc3_agi_agent/rev3_governance.py ../scripts/package_rev3_strategy.py ../scripts/validate_rev3_governance.py",
+      "result": "All checks passed",
+      "status": "PASS"
+    },
+    {
+      "command": ".venv/Scripts/python.exe -m mypy --strict arc3_agi_agent/rev3_governance.py ../scripts/package_rev3_strategy.py ../scripts/validate_rev3_governance.py",
+      "result": "Success: no issues found in 3 source files",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 scripts/validate_rev3_governance.py",
+      "result": "12 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 scripts/package_rev3_strategy.py --output scratch/ph-r1-final-package.zip",
+      "result": "Byte-identical to approved package; SHA-256 f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "result": "No findings",
+      "status": "PASS"
+    }
+  ],
+  "evidence_payload_digest": "sha256:1f03eb8c4ba134803ccb82323fa1cefef59706066f854c64c4f21717b32051a4"
+}
