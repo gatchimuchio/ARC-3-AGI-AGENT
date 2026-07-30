@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -35,6 +36,17 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _git_blob_sha256(commit: str, path: str) -> str:
+    result = subprocess.run(
+        ["git", "show", f"{commit}:{path}"],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    return hashlib.sha256(result.stdout).hexdigest()
+
+
 def _bound(label: str) -> str:
     return label + ":" + hashlib.sha256(label.encode("utf-8")).hexdigest()
 
@@ -50,7 +62,7 @@ def _valid_selection() -> Rev3ProductionSelection:
 
 
 def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
-    assert REV3_ACTIVE_PHASE == "PH-D00A"
+    assert REV3_ACTIVE_PHASE == "PH-D00B"
     assert REV3_PHASE_ORDER[0] == "PH-R00"
     assert REV3_PHASE_ORDER.index("PH-D14") < REV3_PHASE_ORDER.index(
         "PH-B00"
@@ -158,7 +170,7 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     )
     expected = {
         "AGENTS.md": (
-            "c2697a07c2c002680bd11240dcf4960108cdb248ba1e1fa84e44c95ecd18d6c8"
+            "a734800c467bd5519b12c5b337d8d78fa49763cb9cc3e973c7ee161cf0831e6c"
         ),
         (
             "docs/strategy/"
@@ -201,8 +213,8 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     claimed = str(body.pop("content_digest"))
     assert claimed == "rev3-authority-input-manifest:" + digest_object(body)
     assert manifest["missing_required_authority_count"] == 0
-    assert manifest["current_phase"] == "PH-D00A"
-    assert manifest["phase_effect"] == "PH_D00A_INPUT_SET_CLOSED"
+    assert manifest["current_phase"] == "PH-D00B"
+    assert manifest["phase_effect"] == "PH_D00B_INPUT_SET_CLOSED"
     approval = _json(
         REPOSITORY_ROOT
         / "control"
@@ -221,6 +233,25 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     )
     assert approval["next_state"] == "OWNER_APPROVED_PASS"
     assert approval["authorization_scope"]["phase_order_must_be_preserved"]
+    transition = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PHASE_TRANSITIONS"
+        / "PH-D00A_TO_PH-D00B.json"
+    )
+    transition_body = dict(transition)
+    for excluded in transition["digest_excluded_fields"]:
+        transition_body.pop(excluded)
+    assert transition["content_digest"] == (
+        "rev3-phase-transition:" + digest_object(transition_body)
+    )
+    assert transition["from_phase_state_digest"] == (
+        "rev3-d00a-phase-state:"
+        "bb17828cd495884a3e947f5897c4c3dec7f29fdde836889f2199be2c01449369"
+    )
+    assert transition["to_phase_id"] == "PH-D00B"
+    assert transition["hard_gates_crossed"] == []
 
 
 def test_asset_classification_and_frame_are_content_bound() -> None:
@@ -399,6 +430,10 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
     )
     assert artifact_manifest["manifest_excludes_self"] is True
     assert all(
-        _sha256(REPOSITORY_ROOT / item["path"]) == item["sha256"]
+        _git_blob_sha256(
+            str(artifact_manifest["snapshot_commit"]),
+            str(item["path"]),
+        )
+        == item["sha256"]
         for item in artifact_manifest["artifacts"]
     )

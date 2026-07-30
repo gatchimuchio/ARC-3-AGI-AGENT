@@ -121,8 +121,9 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 
 ```text
 PH-R00 [OWNER_APPROVED_PASS]
-→ PH-D00A [ACTIVE]
-→ PH-D00B ... PH-D14
+→ PH-D00A [CODEX_SELF_AUDIT_PASS]
+→ PH-D00B [ACTIVE]
+→ PH-D01A ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
@@ -603,8 +604,9 @@ OWNER_APPROVED
 Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではありません。
 
 PH-R00はOwner ApprovalRecordにより採択済みです。
-Active phaseはPH-D00Aです。
-一Work BlockでPH-D00Aだけを実施してください。
+PH-D00Aは`DEPENDENCY_LOCK_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
+Active phaseはPH-D00Bです。
+一Work BlockでPH-D00Bだけを実施してください。
 
 最初に、
 - repository root
@@ -615,14 +617,20 @@ Active phaseはPH-D00Aです。
 - current phase state
 を確認してください。
 
-次にPH-D00A WorkBlockFrameを作成し、HDS三正本、Translator参照commit、
-権威順序、最終採否者をcontent digestへ固定してください。
-dependency mismatchはfail closedとし、Open Term Ledgerの初期schemaだけを作成してください。
+次にPH-D00B WorkBlockFrameを作成し、蒸留専用namespace、`SCOPE_LOCK.md`、
+Python 3.12環境、input／schemas／src／tests／artifacts分離を固定してください。
+`distillation/`、空の`bridge/`、read-only referenceとしての`runtime/`を分離してください。
 
-PH-D00B、ARC corpus処理、Causal IR、Bridge、AGI Runtime、P22改善、
-locked final、official、KaggleへPH-D00A内で進んではいけません。
+AST、import graph、entrypoint、call behaviorを監査し、official API、network、
+submission output、unlabeled task answer callable、runtime／production依存を
+fail closedで拒否してください。filename文字列だけで判定せず、
+正当なoffline interpreter／teacher replay harnessは許可してください。
 
-PH-D00Aの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
+PH-D01A、ARC corpus処理、Causal IR、candidate generation、Bridge実装、
+AGI Runtime実装、P22改善、locked final、official、KaggleへPH-D00B内で
+進んではいけません。
+
+PH-D00Bの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
 現在のOwner連続進行許可に従い、停止せず次の通常phaseを別Work Blockとして開始してください。
 Codex自身がRule採否、hard gate承認、official承認を生成してはいけません。
 ```
