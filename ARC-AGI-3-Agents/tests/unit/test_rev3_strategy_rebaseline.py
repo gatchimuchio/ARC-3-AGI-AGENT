@@ -743,6 +743,65 @@ def test_ph_d03a_owner_review_package_is_complete_and_claim_limited(
     assert "Sealed Audit Corpus" in next_action
 
 
+def test_ph_d03a_artifact_manifest_binds_candidate_snapshot_bytes(
+) -> None:
+    manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D03A_OWNER_REVIEW_PACKAGE"
+        / "artifact_manifest.json"
+    )
+    body = dict(manifest)
+    for excluded in manifest["digest_excluded_fields"]:
+        body.pop(excluded)
+
+    assert manifest["content_digest"] == (
+        "rev3-d03a-owner-review-artifact-manifest:"
+        + digest_object(body)
+    )
+    assert manifest["content_digest"] == (
+        "rev3-d03a-owner-review-artifact-manifest:"
+        "3d28855f28904a6b2d55f6198269211d45bfadd58c43af8d4f0749f4b4cc7321"
+    )
+    assert manifest["phase_id"] == "PH-D03A"
+    assert manifest["status"] == (
+        "CANDIDATE_ONLY_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL"
+    )
+    assert manifest["phase_pass"] is False
+    assert manifest["owner_decision_present"] is False
+    assert manifest["result_commit"] == (
+        "bfbbe7d7c06f0ad076576de58cc18d5282d82e08"
+    )
+    assert manifest["result_tree"] == (
+        "9e334300defe1bf1f985736065d97920d30623d4"
+    )
+    assert manifest["snapshot_commit"] == (
+        "43650e65172f8cad1f770122fa1666d6e39218aa"
+    )
+    assert manifest["snapshot_tree"] == (
+        "89c34ff992a0840d993c5c9079ad12eb1e7c041d"
+    )
+    assert manifest["manifest_excludes_self"] is True
+    assert manifest["artifact_count"] == len(manifest["artifacts"]) == 26
+    artifact_paths = [
+        str(artifact["path"]) for artifact in manifest["artifacts"]
+    ]
+    assert artifact_paths == sorted(artifact_paths)
+    assert len(artifact_paths) == len(set(artifact_paths))
+    assert (
+        "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/artifact_manifest.json"
+        not in artifact_paths
+    )
+
+    snapshot_commit = str(manifest["snapshot_commit"])
+    for artifact in manifest["artifacts"]:
+        assert _git_blob_sha256(
+            snapshot_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+
 def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
     state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "D01B_PHASE_STATE.json"

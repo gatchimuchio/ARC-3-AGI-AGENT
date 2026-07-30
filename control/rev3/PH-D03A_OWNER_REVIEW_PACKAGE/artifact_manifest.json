@@ -1,0 +1,134 @@
+{
+  "schema_version": "arc3-rev3-owner-review-artifact-manifest-v1",
+  "manifest_id": "PH-D03A-OWNER-REVIEW-ARTIFACTS-V1",
+  "phase_id": "PH-D03A",
+  "status": "CANDIDATE_ONLY_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL",
+  "phase_pass": false,
+  "owner_decision_present": false,
+  "result_commit": "bfbbe7d7c06f0ad076576de58cc18d5282d82e08",
+  "result_tree": "9e334300defe1bf1f985736065d97920d30623d4",
+  "snapshot_commit": "43650e65172f8cad1f770122fa1666d6e39218aa",
+  "snapshot_tree": "89c34ff992a0840d993c5c9079ad12eb1e7c041d",
+  "artifact_count": 26,
+  "manifest_excludes_self": true,
+  "artifacts": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "7ad183110f39ffda02c6209be85fb1537872b23b018b20f8cea4e22a35313b5a"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "sha256": "279d03e8527290c36f5613fe40723d1cbbaaecc17add12dfeb432c1bfb26ce7e"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "sha256": "c9d4e8d74635190db53f58ce061c54b0674599ef3277ebaba5cf9b0d8626afe1"
+    },
+    {
+      "path": "analysis/rev3/ph_d03a_golden_preinventory.json",
+      "sha256": "f5ea0dc257a939efed1a033915d13fda088cca7e97aa5124beae48e7e456002f",
+      "digest": "rev3-ph-d03a-golden-preinventory:102465e690258f967061b70d2023ec9645818c6e68558c01ca6c74a6b7245104"
+    },
+    {
+      "path": "control/rev3/D03A_CANDIDATE_STATE.json",
+      "sha256": "10668e61f8a00f2b77acb5e4924fe45697ef9d3e260ca5bc8fef65dfe8ec8195",
+      "digest": "rev3-d03a-candidate-state:1da229969f24ebe3078a6a134602a92603c2298d312c7c1ef279d3ae13baaeeb"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/candidate_state_ref.json",
+      "sha256": "c7f1a1f48b8d772b3b773a8876e64165ebe52020d0e4fdc149a39fab6d28e70f"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/changed_files.json",
+      "sha256": "de76326c5905b154e9ebd13c9a60569bd1b8581f7e264e37fc7b4aab4fa3eeb3"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/commands.json",
+      "sha256": "be13dde60d03f12ea927b94fe2dce518d4f5eede4cf60aba7fbce0956ba0e690"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/failed_requirements.json",
+      "sha256": "69deb125deb59b2bdddffbf3fe620a32b7d873f90df29b96fc5a1592478bfd15"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/open_terms.json",
+      "sha256": "6d9c6c78ef18b89bc12f6f0d80fa917add04c0bed4f6b66fd262513c47c68246"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+      "sha256": "9c1502fa80409daae6219e5ff607ebf1428db8c2e1fd511261ffd291fce53781"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/self_audit.json",
+      "sha256": "4001cb2dc4a6d93e533a85ca264fce6bab3e58dc24a2ce584d8435c019fa5998"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/summary.md",
+      "sha256": "43b6bd167178f2261ab115e0790d33630718878ecad60d8b676eaa9bb58cc339"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/test_results.json",
+      "sha256": "65a369a9aec22afd597f75fddca290b12ff7c89cd5082e1418134b61d499ad5d"
+    },
+    {
+      "path": "control/rev3/PH-D03A_WORK_BLOCK_FRAME.json",
+      "sha256": "44b6bff70c09e670465f98430b47801a4a49106f44e45cc78e072ea2aebdaa1d",
+      "digest": "rev3-work-block-frame:ce4de522b3e5d269d5f80b260e0b0bf24586f0965207149d2043742c2a7b9132"
+    },
+    {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-D02C_TO_PH-D03A.json",
+      "sha256": "ed95b8f9c432a30c0a1f1980cf298d53fb0a2718ee52eb011152183f096df9cc",
+      "digest": "rev3-phase-transition:ca1c282e9c43f61cc41bd378862b3a0965096ab5e3e9877976dd82395dd93110"
+    },
+    {
+      "path": "distillation/README.md",
+      "sha256": "48b330d08a317542204be003deff97d0174f58571500fac92a6f1fb3da51d5fa"
+    },
+    {
+      "path": "distillation/artifacts/golden/candidate_cases.json",
+      "sha256": "c8262b3a537256e422de28c46e49c7ffb052a0cf8728a31f1a8f27d632161038",
+      "digest": "hds-golden-candidate-set:e59d869a1244fa1735bd0e8b07d16d9b61f607c2976c6165ab47145f12b8a2c1"
+    },
+    {
+      "path": "distillation/artifacts/golden/owner_review_request.json",
+      "sha256": "763e61d09f27992616a223dcee84fe67f4b671a9581a5fcb19571312a2ae5780",
+      "digest": "hds-golden-owner-review-request:40b39be4d53bd9fe2209853dc595fda16452c7d9b943a32907a3a9bb85284cc6"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "sha256": "ac02a4a8fdc6921bb05ae3eef9f2b7090bfade21ee3754dbdaa8fdcc89107949",
+      "digest": "hds-distillation-scope-audit:3d7146b2812fad78195149e76e9e2019b423cd9da0339c11e27b9fef5a888a02"
+    },
+    {
+      "path": "distillation/artifacts/reports/golden_gate_coverage.json",
+      "sha256": "6d5c45d7632f003000852cb1639178e82357c07bcf0ffccedbe16bfb694b3748",
+      "digest": "hds-golden-gate-coverage:6e79e1111a1bb2ac17615be4aefc20ebac51a613f17d37c9d2458d45718a89d7"
+    },
+    {
+      "path": "distillation/input/README.md",
+      "sha256": "d25e32227a3738ef23a5be73c1fe3acc3a032770a299e13b453adf104475328a"
+    },
+    {
+      "path": "distillation/input/golden_conformance_contract.json",
+      "sha256": "fd285d63a4263004824af6c676c7f7e52e599f1e692ac373ca4ee18cf11b6d27",
+      "digest": "hds-golden-conformance-contract:7596ae83f79b793e3c125bd3719b884d7e1a5be880e616e948c048714c8b1cf0"
+    },
+    {
+      "path": "distillation/src/hds_distill/golden_corpus.py",
+      "sha256": "5b794877df5e29dd70fd17dcb18cec3df42a01e9c1122122edcf56bc5edd0ff8"
+    },
+    {
+      "path": "distillation/tests/unit/test_golden_corpus.py",
+      "sha256": "15571c2eb6d7199c7ccd643c79806767f56bd2387c10a801a11f7a6351e05820"
+    },
+    {
+      "path": "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json",
+      "sha256": "ac53162a9df749dc64bb7fbb0e4c21279e36414f2264379898ad1d83870b08ab",
+      "digest": "rev3-authority-input-manifest:aa310f982560074debd3a928b9705fd94d5393b452c0b54095c04b93d49cebd7"
+    }
+  ],
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-d03a-owner-review-artifact-manifest:3d28855f28904a6b2d55f6198269211d45bfadd58c43af8d4f0749f4b4cc7321"
+}
