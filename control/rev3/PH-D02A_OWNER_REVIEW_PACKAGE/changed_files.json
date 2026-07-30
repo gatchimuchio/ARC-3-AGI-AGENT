@@ -1,0 +1,42 @@
+{
+  "schema_version": "arc3-rev3-owner-review-changed-files-v1",
+  "phase_id": "PH-D02A",
+  "result_commit": "5ccde025b70cb462b477b428171a49bf2b857c09",
+  "result_tree": "998c35894efd1ac201fec3877cbd045e3ffce68a",
+  "result_commits": [
+    {
+      "commit": "12b23d017663f060d40d98320be0dafbab160638",
+      "tree": "03803c5b58f730d98e4614179ef9837cb4238e1d",
+      "purpose": "PH-D02A frame and preimplementation canonical-contract inventory"
+    },
+    {
+      "commit": "5ccde025b70cb462b477b428171a49bf2b857c09",
+      "tree": "998c35894efd1ac201fec3877cbd045e3ffce68a",
+      "purpose": "PH-D02A implementation, tests, contracts, and checked artifacts"
+    }
+  ],
+  "changed_file_count": 15,
+  "changed_files": [
+    "analysis/rev3/ph_d02a_canonical_preinventory.json",
+    "control/rev3/PH-D02A_WORK_BLOCK_FRAME.json",
+    "distillation/README.md",
+    "distillation/artifacts/reports/canonicalization_conformance.json",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "distillation/artifacts/test_vectors/canonical_json_v1.json",
+    "distillation/artifacts/test_vectors/canonical_npz_v1.npz",
+    "distillation/artifacts/test_vectors/canonical_test_vectors.json",
+    "distillation/artifacts/test_vectors/canonical_zip_v1.zip",
+    "distillation/input/README.md",
+    "distillation/input/canonicalization_contract.json",
+    "distillation/schemas/README.md",
+    "distillation/src/hds_distill/__init__.py",
+    "distillation/src/hds_distill/canonical.py",
+    "distillation/tests/unit/test_canonical.py"
+  ],
+  "excluded_preexisting_dirty_state": {
+    "tracked_p22_cv_generated_file_count": 32,
+    "aggregate_sha256_before_and_after_validation": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "mutation": "NONE",
+    "staging": "NONE"
+  }
+}

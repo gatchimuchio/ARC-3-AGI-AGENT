@@ -515,6 +515,155 @@ def test_ph_d01b_artifact_manifest_binds_snapshot_bytes() -> None:
         ) == artifact["sha256"]
 
 
+def test_ph_d02a_phase_state_binds_result_and_canonical_contract() -> None:
+    state_path = (
+        REPOSITORY_ROOT / "control" / "rev3" / "D02A_PHASE_STATE.json"
+    )
+    package_state_path = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D02A_OWNER_REVIEW_PACKAGE"
+        / "phase_state.json"
+    )
+    state = _json(state_path)
+    state_body = dict(state)
+    claimed = str(state_body.pop("content_digest"))
+
+    assert state == _json(package_state_path)
+    assert claimed == "rev3-d02a-phase-state:" + digest_object(state_body)
+    assert state["phase_id"] == "PH-D02A"
+    assert state["status"] == "CODEX_SELF_AUDIT_PASS"
+    assert state["result_commit"] == (
+        "5ccde025b70cb462b477b428171a49bf2b857c09"
+    )
+    assert state["result_tree"] == (
+        "998c35894efd1ac201fec3877cbd045e3ffce68a"
+    )
+    assert state["owner_review_required"] is False
+    assert state["owner_decisions_required"] == []
+    assert state["failed_requirement_ids"] == []
+    assert state["open_terms"] == []
+
+    invariants = state["phase_invariants"]
+    assert invariants["canonical_contract_implemented"] is True
+    assert invariants["canonical_json_implemented"] is True
+    assert invariants["unicode_nfc_enforced"] is True
+    assert invariants["explicit_unordered_array_normalization"] is True
+    assert invariants["ordinary_array_order_preserved"] is True
+    assert invariants["confidence_ppm_integer_contract"] is True
+    assert invariants["content_derived_id_full_sha256"] is True
+    assert invariants["explicit_top_level_digest_exclusions"] is True
+    assert invariants["logical_physical_domains_separate"] is True
+    assert invariants["canonical_zip_stored"] is True
+    assert invariants["canonical_npy_npz_dependency_free"] is True
+    assert invariants["raw_canonical_trajectory_domains_separate"] is True
+    assert invariants["independent_process_rebuild_count"] == 3
+    assert invariants["independent_process_byte_identical"] is True
+    assert invariants["nan_infinity_rejected"] is True
+    assert invariants["numpy_interoperability_verified"] is True
+    assert invariants["frozen_d01b_artifact_unchanged_count"] == 40
+    assert invariants["runtime_dependency_added_count"] == 0
+    assert invariants["distillation_source_numpy_import_count"] == 0
+    assert invariants["source_payload_read_count"] == 0
+    assert invariants["source_execution_count"] == 0
+    assert invariants["real_trajectory_normalization_count"] == 0
+    assert invariants["ph_d02b_schema_count"] == 0
+    assert invariants["causal_ir_started"] is False
+    assert invariants["trajectory_normalization_started"] is False
+    assert invariants["candidate_generation_started"] is False
+    assert invariants["rule_promotion_count"] == 0
+    assert invariants["bridge_implementation_file_count"] == 0
+    assert invariants["runtime_implementation_file_count"] == 0
+    assert invariants["official_access_count"] == 0
+    assert invariants["kaggle_mutation_count"] == 0
+    assert invariants["preexisting_dirty_file_count"] == 32
+    assert invariants["preexisting_dirty_aggregate_sha256"] == (
+        "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4"
+    )
+    assert invariants["next_phase"] == "PH-D02B"
+    assert invariants["next_phase_started"] is False
+
+    assert state["tests"]["dedicated_canonical"]["passed"] == 69
+    assert state["tests"]["distillation_full"]["passed"] == 132
+    assert state["tests"]["rev3_governance"]["passed"] == 18
+    assert state["tests"]["full_unit"]["passed"] == 706
+    assert state["tests"]["integration"]["passed"] == 8
+    assert state["tests"]["determinism"]["aggregate_sha256"] == (
+        "5848db9ca5c94280885c5980d65180f88114c1d2c2daf0880958aff20dbcec26"
+    )
+    assert "PH_D02A_CANONICAL_CONTRACT_PASS" in state["claim_allowed"]
+    assert "PH_D02B_SCHEMA_SET_COMPLETE" in state["claim_prohibited"]
+    assert "TRAJECTORY_NORMALIZATION_COMPLETE" in (
+        state["claim_prohibited"]
+    )
+    assert "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED" in (
+        state["claim_prohibited"]
+    )
+
+    result_commit = str(state["result_commit"])
+    for artifact in state["artifacts"]:
+        path = artifact.get("path")
+        expected_sha256 = artifact.get("sha256")
+        if path is not None and expected_sha256 is not None:
+            assert _git_blob_sha256(result_commit, str(path)) == (
+                expected_sha256
+            )
+
+
+def test_ph_d02a_owner_review_package_is_complete_and_claim_limited(
+) -> None:
+    package_root = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D02A_OWNER_REVIEW_PACKAGE"
+    )
+    required = {
+        "changed_files.json",
+        "commands.json",
+        "failed_requirements.json",
+        "open_terms.json",
+        "phase_state.json",
+        "proposed_next_action.md",
+        "self_audit.json",
+        "summary.md",
+        "test_results.json",
+    }
+    assert required <= {
+        path.name for path in package_root.iterdir() if path.is_file()
+    }
+
+    failed = _json(package_root / "failed_requirements.json")
+    open_terms = _json(package_root / "open_terms.json")
+    self_audit = _json(package_root / "self_audit.json")
+    tests = _json(package_root / "test_results.json")
+    changed = _json(package_root / "changed_files.json")
+
+    assert failed["failed_requirement_count"] == 0
+    assert failed["failed_requirements"] == []
+    assert open_terms["open_terms"] == []
+    assert open_terms["owner_decisions"] == []
+    assert self_audit["decision"] == "CODEX_SELF_AUDIT_PASS"
+    assert self_audit["codex_self_audit_pass"] is True
+    assert tests["active_product_regression_count"] == 0
+    assert tests["active_environment_failure_count"] == 0
+    assert tests["active_external_service_failure_count"] == 0
+    assert tests["active_tool_failure_count"] == 0
+    assert changed["changed_file_count"] == 15
+    assert changed["excluded_preexisting_dirty_state"]["mutation"] == "NONE"
+    assert changed["excluded_preexisting_dirty_state"]["staging"] == "NONE"
+
+    summary = (package_root / "summary.md").read_text(encoding="utf-8")
+    next_action = (package_root / "proposed_next_action.md").read_text(
+        encoding="utf-8"
+    )
+    assert "PH_D02A_CANONICAL_CONTRACT_PASS" in summary
+    assert "not started" in summary
+    assert "Proceed to `PH-D02B`" in next_action
+    assert "Do not enter PH-D02C" in next_action
+
+
 def test_asset_classification_and_frame_are_content_bound() -> None:
     classification = _json(
         REPOSITORY_ROOT

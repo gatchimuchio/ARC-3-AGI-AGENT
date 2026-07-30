@@ -1,0 +1,127 @@
+{
+  "schema_version": "arc3-rev3-owner-review-test-results-v1",
+  "phase_id": "PH-D02A",
+  "result_commit": "5ccde025b70cb462b477b428171a49bf2b857c09",
+  "results": [
+    {
+      "suite": "canonical_contract_and_checked_vectors",
+      "status": "PASS",
+      "contract_digest": "hds-canonicalization-contract:bd37cc6aa0f41021448a83358c9db409b3695cdf88b2eb6ab6eec0068c137257",
+      "vector_manifest_digest": "hds-canonical-test-vectors:dfc146423c85b33fb7fb484dadeafb1d5071b0265bcdb0fa266fe413bc5e2f7b",
+      "conformance_digest": "hds-canonicalization-conformance:d24906ab3b99f8d70bdfd2942f38a69454fa11e926fd1d0288b26b4bda68c7f2",
+      "gates": {
+        "DG-06": "PASS",
+        "DG-07": "PASS"
+      }
+    },
+    {
+      "suite": "dedicated_canonical",
+      "status": "PASS",
+      "passed": 69,
+      "failed": 0,
+      "duration_seconds": 1.54,
+      "post_result_commit": true
+    },
+    {
+      "suite": "distillation_full",
+      "status": "PASS",
+      "passed": 132,
+      "failed": 0,
+      "duration_seconds": 50.62,
+      "post_result_commit": true
+    },
+    {
+      "suite": "rev3_governance",
+      "status": "PASS",
+      "passed": 18,
+      "failed": 0,
+      "duration_seconds": 18.99,
+      "post_result_commit": true
+    },
+    {
+      "suite": "focused_distillation_rev3_evidence",
+      "status": "PASS",
+      "passed": 166,
+      "failed": 0,
+      "duration_seconds": 70.99,
+      "pre_evidence_snapshot": true
+    },
+    {
+      "suite": "full_unit",
+      "status": "PASS",
+      "passed": 706,
+      "failed": 0,
+      "duration_seconds": 323.65,
+      "post_result_commit": true
+    },
+    {
+      "suite": "integration",
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 352.63,
+      "post_result_commit": true
+    },
+    {
+      "suite": "lint",
+      "status": "PASS",
+      "tool": "ruff",
+      "version": "0.12.7"
+    },
+    {
+      "suite": "type_check",
+      "status": "PASS",
+      "mode": "strict",
+      "tool": "mypy",
+      "version": "1.17.1",
+      "checked_source_file_count": 10
+    },
+    {
+      "suite": "compileall",
+      "status": "PASS"
+    },
+    {
+      "suite": "scope_guard",
+      "status": "PASS",
+      "finding_count": 0,
+      "audited_source_execution_count": 0,
+      "report_digest": "hds-distillation-scope-audit:939ab207a6613354f095b182e4c0e873a8e6b01e6e7fbd8fb1a8ba303e3b7798"
+    },
+    {
+      "suite": "determinism",
+      "status": "PASS",
+      "independent_process_rebuild_count": 3,
+      "byte_identical": true,
+      "output_size_bytes": 1189,
+      "aggregate_sha256": "5848db9ca5c94280885c5980d65180f88114c1d2c2daf0880958aff20dbcec26"
+    },
+    {
+      "suite": "numpy_interoperability",
+      "status": "PASS",
+      "numpy_version": "2.3.2",
+      "allow_pickle": false,
+      "distillation_source_numpy_import_count": 0
+    },
+    {
+      "suite": "frozen_d01b_artifacts",
+      "status": "PASS",
+      "checked_unchanged_count": 40,
+      "declared_d02a_mutable_document_or_audit_count": 6
+    },
+    {
+      "suite": "environment_lock",
+      "status": "PASS",
+      "python": "3.12.13",
+      "ruff": "0.12.7",
+      "mypy": "1.17.1",
+      "pytest": "8.4.1"
+    }
+  ],
+  "resolved_evidence_failure_count": 1,
+  "resolved_tool_failure_count": 2,
+  "new_product_regression_count": 0,
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "active_external_service_failure_count": 0,
+  "active_tool_failure_count": 0
+}

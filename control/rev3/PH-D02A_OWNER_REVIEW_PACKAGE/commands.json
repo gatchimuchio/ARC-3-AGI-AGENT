@@ -1,0 +1,112 @@
+{
+  "schema_version": "arc3-rev3-owner-review-commands-v1",
+  "phase_id": "PH-D02A",
+  "result_commit": "5ccde025b70cb462b477b428171a49bf2b857c09",
+  "commands": [
+    {
+      "id": "CMD-D02A-001",
+      "command": "verify the checked canonical contract, JSON, ZIP, NPZ, content ID, logical and physical digests, and raw/canonical trajectory digests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PH_D02A_CANONICAL_CONTRACT_PASS"
+    },
+    {
+      "id": "CMD-D02A-002",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests/unit/test_canonical.py -q",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "69 passed in 1.54s"
+    },
+    {
+      "id": "CMD-D02A-003",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests -q",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "132 passed in 50.62s"
+    },
+    {
+      "id": "CMD-D02A-004",
+      "command": "pytest ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py -q",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "18 passed in 18.99s"
+    },
+    {
+      "id": "CMD-D02A-005",
+      "command": "three independent Windows Python processes with distinct cwd, PYTHONHASHSEED, insertion orders, unordered orders, and excluded metadata",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "3 byte-identical outputs; 1189 bytes; sha256 5848db9ca5c94280885c5980d65180f88114c1d2c2daf0880958aff20dbcec26"
+    },
+    {
+      "id": "CMD-D02A-006",
+      "command": "numpy.load canonical_npz_v1.npz with allow_pickle=False and verify names, dtype, shape, and values",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS with NumPy 2.3.2"
+    },
+    {
+      "id": "CMD-D02A-007",
+      "command": "python distillation/src/hds_distill/scope_guard.py --project-root distillation --repository-root . --verify-report distillation/artifacts/reports/distillation_scope_audit.json",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; finding_count=0"
+    },
+    {
+      "id": "CMD-D02A-008",
+      "command": "ruff check distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D02A-009",
+      "command": "mypy --strict --config-file distillation/pyproject.toml distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS; 10 source and test files"
+    },
+    {
+      "id": "CMD-D02A-010",
+      "command": "python -m compileall -q distillation/src distillation/tests",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D02A-011",
+      "command": "pytest ARC-AGI-3-Agents/tests/unit -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02a-full-unit-5ccde02",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "706 passed in 323.65s"
+    },
+    {
+      "id": "CMD-D02A-012",
+      "command": "pytest ARC-AGI-3-Agents/tests/integration -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/pytest-ph-d02a-integration-5ccde02",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "8 passed in 352.63s"
+    },
+    {
+      "id": "CMD-D02A-013",
+      "command": "verify every PH-D01B artifact except the six explicitly mutable D02A documents and audit files",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "40 frozen artifacts unchanged"
+    },
+    {
+      "id": "CMD-D02A-014",
+      "command": "python --version; ruff --version; mypy --version; pytest --version; git status --short",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 124,
+      "result": "all four versions emitted before a 10s shell timeout; split git-state recheck passed with exactly 32 pre-existing files"
+    },
+    {
+      "id": "CMD-D02A-015",
+      "command": "pytest -c distillation/pyproject.toml distillation/tests ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py -q",
+      "execution_stage": "PRE_EVIDENCE_SNAPSHOT",
+      "exit_code": 0,
+      "result": "166 passed in 70.99s"
+    }
+  ]
+}
