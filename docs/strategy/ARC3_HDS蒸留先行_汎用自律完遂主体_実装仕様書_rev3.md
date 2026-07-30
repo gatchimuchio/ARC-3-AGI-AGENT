@@ -15,8 +15,10 @@
 - 是正監査:
   - `docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md`
 - 日付: `2026-07-31`
-- 仕様状態: `PROPOSED_PENDING_OWNER_APPROVAL`
-- 導入状態: `NOT_INSTALLED`
+- 仕様状態: `OWNER_APPROVED`
+- 導入状態: `INSTALLED`
+- PH-R-1状態: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
+- 現在作業: `PH-R00_AUTHORIZATION_PENDING`
 - Phase guard: `PH-R00 = SUSPEND`
 - 最上位目的: HDSで教師素材から構造データを先に蒸留・凍結し、その成果物だけを長期能力の上流入力として、未知ARC3環境を汎用自律完遂する工学的AGI Instanceを構築する
 
@@ -56,6 +58,10 @@ HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
 になるまで、
 AGI能力実装・P22方策最適化・公式提出準備を進めてはならない。
 ```
+
+`OWNER_APPROVED_REV3_CORRECTION`とStrategy InstallationはPH-R-1で成立した。
+ただしPH-R00開始は別の対象明示Owner判断を必要とし、現在
+`OWNER_AUTHORIZED_PH-R00 = NOT_ESTABLISHED`である。
 
 既に実装されたP16〜P21は廃棄しない。  
 それらは、蒸留成果物を受け取るための**基盤候補**として凍結する。
@@ -941,6 +947,30 @@ owner_decision_content_digest
 
 対象artifact、遷移、decisionがOwner指示から一意に得られない場合はrecordを作らず、`OWNER_DECISION_NOT_ESTABLISHED`とする。
 
+### 11.3 OwnerStandingAuthorization
+
+Ownerがroadmap内の必要承認を全て与え、連続実装を明示した場合は、
+`OwnerStandingAuthorization`として機械転記できる。
+
+これはunknown artifactの事前PASSではない。各phaseのrequired DoDが全てPASSし、
+failed requirementが0件で、implementation/evidence commitとpayload digestが
+exact bindされた後だけ、`OwnerDecisionCapture v2`を生成する。
+
+```text
+Standing Owner instruction
+  ↓
+OwnerStandingAuthorization
+  ↓ phase DoD PASS + exact evidence binding
+OwnerDecisionCapture v2
+  ↓
+ApprovalRecord
+  ↓
+next sequential phase
+```
+
+FAIL、未検証、順序違反、digest mismatchでは適用しない。external submission、
+one-time locked access、credential変更、課金・公開は別の明示実行指示を必要とする。
+
 ---
 
 ## 12. Evaluation Governance
@@ -1145,14 +1175,18 @@ PRE_DISTILLATION_INFRASTRUCTURE_BASELINE
 現在のselector:
 
 ```text
-Strategy = PROPOSED_PENDING_OWNER_APPROVAL
-Installation = NOT_INSTALLED
+Strategy = OWNER_APPROVED
+Installation = INSTALLED
 Active phase = NONE
-Current work = REV3_DOCUMENT_CORRECTION_ONLY
+Current work = PH-R00_AUTHORIZATION_PENDING
+PH-R-1 = CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED
 PH-R00 = SUSPEND
+PH-R00 Owner authorization = NOT_ESTABLISHED
+DistilledInitialStateBundle = NOT_FROZEN
+Runtime activation = SUSPEND
 ```
 
-Owner承認後、PH-R-1が導入するselector候補:
+導入済みphase順序:
 
 ```text
 PH-R-1
@@ -1164,6 +1198,18 @@ PH-R-1
 ```
 
 P22以降の旧selectorはhistoricalへ移す。
+
+導入承認は次へ固定する。
+
+```text
+OwnerDecisionCapture =
+sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd
+
+ApprovalRecord =
+owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8
+```
+
+この承認範囲は監査是正採択とPH-R-1開始だけであり、PH-R00または将来artifactの採否を含まない。
 
 監査前のPH-R00〜PH-D03A state、transition、ApprovalRecord、review packageは削除しないが、`HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE`とする。是正後のphase passまたはactivation根拠へ再利用しない。
 
@@ -1187,6 +1233,15 @@ distillation/
 bridge/
 runtime/
 ```
+
+### 15.5 Deterministic distribution package
+
+監査・承認へ渡すZIPは、全entry名をASCII-safeにし、固定timestamp、
+stable sort、固定compressionで再構築可能にする。root entryとして
+`MANIFEST.json`と`SHA256SUMS`を必須化し、前者はsource path、archive
+path、size、SHA-256、logical digestを、後者は全payloadのbyte digestを
+保持する。logical digestとphysical package digestを混同せず、どちらか
+一方でも不一致なら承認対象として受理しない。
 
 を分離する。
 

@@ -1,0 +1,201 @@
+{
+  "active_phase": null,
+  "approved_correction": {
+    "approval_artifact_digest": "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8",
+    "decision_capture_digest": "sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd",
+    "package_logical_digest": "sha256:78c32be35c0d78134a8f9e9a9c806a8dda41ef605e4b185bc5f58a381465271d",
+    "package_sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
+    "target_artifact_digest": "sha256:3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219",
+    "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
+  },
+  "content_digest": "rev3-current-authority-manifest:7c4ed53ff587822c494b3f754b14d2a0e796b664e7dbf1f97adcafe88a047532",
+  "current_work_class": "PH-R00_AUTHORIZATION_PENDING",
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "entries": [
+    {
+      "path": "AGENTS.md",
+      "role": "EXECUTION_CONTROL",
+      "sha256": "a6a22ae9350280390b399ae85e4bc6fac336690580b9140e6f782468be38a9a0"
+    },
+    {
+      "path": "AUTHORITY_ORDER.md",
+      "role": "AUTHORITY_PLANES",
+      "sha256": "79f8331b8ada83f796f208d8483e02bf24a00baff406038307dd467deb2625db"
+    },
+    {
+      "path": "docs/architecture/AGI三主体統合設計正本_v0_2.md",
+      "role": "NORMATIVE_AGI_ARCHITECTURE",
+      "sha256": "2e553964fd7bfd3bc2221bc3ef70af5742c170ff29481c662bddcc983d10df44"
+    },
+    {
+      "path": "docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md",
+      "role": "NORMATIVE_HDS_INTERNAL",
+      "sha256": "6f55471c0bb3b2b54d434ac05ac09ee24ef69fda3f2f024e5f762696e822216c"
+    },
+    {
+      "path": "docs/architecture/工学的AGI実装仕様書_v0_2.md",
+      "role": "NORMATIVE_ENGINEERING_AGI",
+      "sha256": "a05160bba4fd2e4541d3b381fc09360bc478e1b6593decc86c299762366206f8"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+      "role": "NORMATIVE_ARC3_STRATEGY",
+      "sha256": "c4bd0da924682c1358609ce9075b1db5045245504d2368139719b88817e51efc"
+    },
+    {
+      "path": "docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md",
+      "role": "NORMATIVE_HDS_DISTILLATION",
+      "sha256": "79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93"
+    },
+    {
+      "path": "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+      "role": "NORMATIVE_ARC3_ROADMAP",
+      "sha256": "76f60950339305a48e0d51e0ca9a4f069fd11716b2744bc6272b0518eb9c2e73"
+    },
+    {
+      "path": "docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
+      "role": "NORMATIVE_HDS_ROADMAP",
+      "sha256": "64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518"
+    },
+    {
+      "path": "docs/references/HDSフレーム_rev3_1_外向け仕様.md",
+      "role": "HDS_EXTERNAL_REFERENCE",
+      "sha256": "d7cbbf4c981621509e124077ae66cc49bd29b2271fbf94194c6786d2a5a8724a"
+    },
+    {
+      "path": "docs/references/HDS_SelfContained_Prompt_v1_2_utf8bom.txt",
+      "role": "HDS_LOCKED_PROMPT",
+      "sha256": "33b8a35176a0cc2f18502befb4a53cfbbf378b35e36b911888fa534a8b377b50"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+      "role": "STRATEGY_INDEX",
+      "sha256": "16b782131ac6a6d82adaef30e4c8956cdd225eb1521157dbc865c26d41225ba4"
+    },
+    {
+      "path": "docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md",
+      "role": "AUDIT_RESOLUTION",
+      "sha256": "59545ccfc71dcfd52c7245b4c17a89559d3cb2e5ab9007e4549effb561189fcd"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+      "role": "GOVERNANCE_CONTRACT",
+      "sha256": "aec793f956d3c721bc15676863e4d982c47611a046edeb70e162a441e57d3735"
+    },
+    {
+      "path": "docs/strategy/contracts/HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json",
+      "role": "GOVERNANCE_CONTRACT",
+      "sha256": "ce7201eb3549c0d1fce7c4fb63478d0efaadc99a8a54326ee6977a5b0f21a09c"
+    },
+    {
+      "path": "docs/strategy/contracts/AGI_BUILD_READY_PROFILE_V1.json",
+      "role": "GOVERNANCE_CONTRACT",
+      "sha256": "651ccaa8be4eee53126241522215a5c0ff3bcbaa748fe0d07502161f1a832604"
+    },
+    {
+      "path": "docs/strategy/contracts/MECHANISM_FAMILY_CV_CONTRACT_V1.json",
+      "role": "GOVERNANCE_CONTRACT",
+      "sha256": "dfe0f8f6662b4740f3bb2cc6dae9fce31bdb6109e23894230bcabcda2a0a4829"
+    },
+    {
+      "path": "docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V1.json",
+      "role": "GOVERNANCE_SCHEMA",
+      "sha256": "bfe77196b0d26a4f69492c00c918b025dbe47563aa453abd7a74377cde5ae836"
+    },
+    {
+      "path": "docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V2.json",
+      "role": "GOVERNANCE_SCHEMA",
+      "sha256": "6fb7970aa16e470201fb3d354d9f6d9aadafcba9160c676df2303d736f5ab758"
+    },
+    {
+      "path": "docs/strategy/contracts/OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json",
+      "role": "GOVERNANCE_SCHEMA",
+      "sha256": "05a9b0bcddcf47b5d613b7e9d0075f93270d2636f2651db7564750ad09b98ea4"
+    },
+    {
+      "path": "docs/strategy/contracts/APPROVAL_RECORD_SCHEMA_V1.json",
+      "role": "GOVERNANCE_SCHEMA",
+      "sha256": "975dd9937304e884e3fde15627fd0617d5c9ac9b780d04f066f61ca8e31eea34"
+    },
+    {
+      "path": "docs/strategy/contracts/PHASE_STATE_SCHEMA_V2.json",
+      "role": "GOVERNANCE_SCHEMA",
+      "sha256": "dff7abd8ecfcdeb0ff4a861e48b63ad5f8c8809e3c616617adc592eb37aa2229"
+    },
+    {
+      "path": "docs/strategy/contracts/EVIDENCE_COMMIT_ATTESTATION_SCHEMA_V1.json",
+      "role": "GOVERNANCE_SCHEMA",
+      "sha256": "a551d8a8e4375657fe04796b1686494c3f9c447b151ce8ebb68f4346b69078c7"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json",
+      "role": "GOVERNANCE_SCHEMA",
+      "sha256": "b975b852f10a2b1652bfd74f0398bff24427d3d05f0a736eb35c82864ce868b2"
+    },
+    {
+      "path": "docs/strategy/contracts/CLAIM_REGISTRY_REV3.json",
+      "role": "CLAIM_REGISTRY",
+      "sha256": "aea7966cd44c59a0ea5873dd64a359fee81c2c135320cfffd12eec640a4d3e9f"
+    },
+    {
+      "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
+      "role": "CURRENT_SELECTOR",
+      "sha256": "9a63f83ccb15b8a50cf865679279e40b56069372b231249b2963241c4a159ea9"
+    },
+    {
+      "path": "control/rev3/OWNER_DECISION_CAPTURES/REV3_DOC_FIX_TO_PH-R-1_20260731.json",
+      "role": "ENTRY_OWNER_DECISION",
+      "sha256": "a8cf7209cba2b713304d7e8f187f5cb495e653ae4b85fc8b414fcce6f4ad4f54"
+    },
+    {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json",
+      "role": "ENTRY_OWNER_APPROVAL",
+      "sha256": "ef49853cff3e0aea1f2601a5ecf45ede6ca0f7dee039414e58e6ce8afe15ab26"
+    },
+    {
+      "path": "control/rev3/PH-R-1_WORK_BLOCK_FRAME.json",
+      "role": "WORK_BLOCK_FRAME",
+      "sha256": "02b738cf4a094287a0781c83f5ceba39681bb4512830b0624f1ed7e59e97278f"
+    },
+    {
+      "path": "control/rev3/REV3_DOC_FIX_EVIDENCE_ATTESTATION.json",
+      "role": "CORRECTION_EVIDENCE",
+      "sha256": "245abb9b38ae66c17375ebaa76945e679ada79d5ad96479c7ef3b17ad19c27af"
+    },
+    {
+      "path": "scripts/package_rev3_strategy.py",
+      "role": "GOVERNANCE_TOOL",
+      "sha256": "b113db5ef3d83dc8e561bc7a5328eb3ff20e99a12c8ce3c6ac04f8cdfd81396f"
+    },
+    {
+      "path": "scripts/validate_rev3_governance.py",
+      "role": "GOVERNANCE_TOOL",
+      "sha256": "a68a6e17cf9bd8895356784f78266b3811807b0c4f86e1ff0ce59ccc4cfdb0b6"
+    },
+    {
+      "path": "artifacts/rev3/arc3_hds_distillation_first_strategy_rev3_corrected.zip",
+      "role": "APPROVED_CORRECTION_PACKAGE",
+      "sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c"
+    }
+  ],
+  "entry_count": 33,
+  "historical_evidence_policy": {
+    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
+    "eligible_for_current_activation": false,
+    "preserve": true
+  },
+  "installation_phase_id": "PH-R-1",
+  "installation_phase_status": "CODEX_IMPLEMENTATION_COMPLETE",
+  "installation_status": "INSTALLED",
+  "ph_r00_owner_authorization": "NOT_ESTABLISHED",
+  "ph_r00_status": "SUSPEND",
+  "runtime_gate": {
+    "distilled_initial_state_bundle_status": "NOT_FROZEN",
+    "runtime_activation_status": "SUSPEND"
+  },
+  "schema_version": "arc3-rev3-current-authority-manifest-v1",
+  "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
+  "strategy_status": "OWNER_APPROVED"
+}

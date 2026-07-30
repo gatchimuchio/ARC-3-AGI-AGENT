@@ -1,11 +1,13 @@
 # ARC3 rev3 Authority Planes
 
 - strategy: `ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3`
-- strategy status: `PROPOSED_PENDING_OWNER_APPROVAL`
-- installation status: `NOT_INSTALLED`
-- current work class: `REV3_DOCUMENT_CORRECTION_ONLY`
+- strategy status: `OWNER_APPROVED`
+- installation status: `INSTALLED`
+- current work class: `PH-R00_AUTHORIZATION_PENDING`
 - active phase: `NONE`
 - `PH-R00`: `SUSPEND`
+- `PH-R-1`: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
+- installation approval: `owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8`
 - final selector / Meta-J: `大平鉄兵`
 - implementation role / Meta-C: `Codex`
 
@@ -66,10 +68,10 @@ The earlier interpretation of generic “continue” instructions as PH-R00 acce
 ## Current gate
 
 ```text
-REV3 correction evidence
-→ Owner explicit approval for the exact correction artifact
-→ PH-R-1 Strategy Installation
-→ Owner authorization for PH-R00
+REV3 correction evidence（bound）
+→ Owner explicit approval for the exact correction artifact（recorded）
+→ PH-R-1 Strategy Installation（implemented）
+→ Owner authorization for PH-R00（NOT_ESTABLISHED）
 ```
 
-Until these transitions are captured, all PH-R00 and downstream work remains suspended. Missing or mismatched authority is visible failure; it is not repaired by lowering a gate or reusing historical approval.
+PH-R00の対象明示Owner判断が記録されるまで、PH-R00と全downstream workは停止する。Strategy InstallationまたはOwnerの`全部承認`を、まだ存在しない将来artifactの採否へ拡張しない。Missingまたはmismatched authorityはvisible failureであり、gate緩和やhistorical approval再利用で修復しない。

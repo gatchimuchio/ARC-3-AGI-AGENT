@@ -1,0 +1,108 @@
+{
+  "$id": "https://gatchimuchio.invalid/schemas/owner-standing-authorization-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "authorization_decision": {
+      "const": "APPROVE_ALL_REQUIRED_INTERNAL_DEVELOPMENT_TRANSITIONS_CONDITIONED_ON_DOD_PASS"
+    },
+    "authorization_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "authorization_scope": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_binding_policy": {
+          "const": "EXACT_DIGEST_CAPTURE_REQUIRED"
+        },
+        "continuous_work": {
+          "const": true
+        },
+        "external_irreversible_actions": {
+          "const": "EXCLUDED_REQUIRES_SEPARATE_EXPLICIT_EXECUTION_INSTRUCTION"
+        },
+        "phase_ids": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "roadmap_id": {
+          "const": "ARC3_HDS_DISTILLATION_FIRST_ROADMAP_REV3"
+        },
+        "transition_policy": {
+          "const": "SEQUENTIAL_ONLY_AFTER_DOD_PASS"
+        }
+      },
+      "required": [
+        "roadmap_id",
+        "phase_ids",
+        "transition_policy",
+        "artifact_binding_policy",
+        "continuous_work",
+        "external_irreversible_actions"
+      ],
+      "type": "object"
+    },
+    "capture_is_mechanical": {
+      "const": true
+    },
+    "captured_by": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "conditions": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "minItems": 1,
+      "type": "array",
+      "uniqueItems": true
+    },
+    "digest_excluded_fields": {
+      "const": [
+        "standing_authorization_content_digest"
+      ],
+      "type": "array"
+    },
+    "failure_policy": {
+      "const": "NO_APPROVAL_ON_FAILED_OR_UNPROVEN_GATE"
+    },
+    "schema_version": {
+      "const": "arc3-owner-standing-authorization-v1"
+    },
+    "source_instruction_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "source_instruction_ref": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "standing_authorization_content_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "authorization_id",
+    "source_instruction_ref",
+    "source_instruction_digest",
+    "authorization_decision",
+    "authorization_scope",
+    "conditions",
+    "failure_policy",
+    "captured_by",
+    "capture_is_mechanical",
+    "digest_excluded_fields",
+    "standing_authorization_content_digest"
+  ],
+  "title": "OwnerStandingAuthorization",
+  "type": "object"
+}

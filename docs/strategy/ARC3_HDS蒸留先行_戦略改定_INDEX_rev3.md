@@ -1,10 +1,13 @@
 # ARC3 HDS蒸留先行 戦略改定資料 INDEX
 
-- Package status: `PROPOSED_PENDING_OWNER_APPROVAL`
-- Installation status: `NOT_INSTALLED`
-- Current work class: `REV3_DOCUMENT_CORRECTION_ONLY`
+- Package status: `OWNER_APPROVED`
+- Installation status: `INSTALLED`
+- PH-R-1 status: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
+- Current work class: `PH-R00_AUTHORIZATION_PENDING`
 - `PH-R00`: `SUSPEND`
 - Audit: `docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md`
+- Installation approval: `control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json`
+- Current authority manifest: `docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json`
 
 ## 規範権威
 
@@ -59,7 +62,7 @@ S5/P22 compiled policy = historical/quarantine
 監査前rev3 phase evidence = historical/pre-audit/non-authoritative
 ```
 
-既存成果物は削除しない。ただし、監査是正後のOwner承認とStrategy Installationなしに、現在のPhase通過証拠またはactive selectorとして使用しない。
+既存成果物は削除しない。監査是正後のOwner承認とStrategy Installationは成立したが、監査前成果物を現在のPhase通過証拠またはactive selectorとして使用しない。
 
 ## 機械可読契約
 
@@ -69,6 +72,12 @@ S5/P22 compiled policy = historical/quarantine
 - `docs/strategy/contracts/AGI_BUILD_READY_PROFILE_V1.json`
 - `docs/strategy/contracts/MECHANISM_FAMILY_CV_CONTRACT_V1.json`
 - `docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V1.json`
+- `docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V2.json`
+- `docs/strategy/contracts/OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json`
+- `docs/strategy/contracts/APPROVAL_RECORD_SCHEMA_V1.json`
+- `docs/strategy/contracts/PHASE_STATE_SCHEMA_V2.json`
+- `docs/strategy/contracts/EVIDENCE_COMMIT_ATTESTATION_SCHEMA_V1.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json`
 - `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 
 ## Codex

@@ -1,0 +1,141 @@
+{
+  "$id": "https://gatchimuchio.invalid/schemas/phase-state-v2.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_data_roles": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "artifacts": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "base_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "base_tree": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "changed_files": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "commands": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "evidence_payload_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "failed_requirement_ids": {
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "implementation_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "implementation_tree": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "input_manifest_digest": {
+      "pattern": "^[a-z0-9][a-z0-9_.-]*:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "open_terms": {
+      "items": {
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "owner_review_required": {
+      "type": "boolean"
+    },
+    "phase_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "roadmap_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "arc3-phase-state-v2"
+    },
+    "self_audit": {
+      "type": "object"
+    },
+    "spec_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "NOT_STARTED",
+        "IN_PROGRESS",
+        "CODEX_IMPLEMENTATION_COMPLETE",
+        "CODEX_SELF_AUDIT_PASS",
+        "CODEX_REWORK_REQUIRED",
+        "OWNER_REVIEW_REQUIRED",
+        "SUSPEND",
+        "OWNER_APPROVED_PASS",
+        "OWNER_APPROVED_REWORK",
+        "OWNER_REJECTED"
+      ],
+      "type": "string"
+    },
+    "tests": {
+      "type": "object"
+    },
+    "work_block_id": {
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "phase_id",
+    "status",
+    "base_commit",
+    "base_tree",
+    "implementation_commit",
+    "implementation_tree",
+    "work_block_id",
+    "spec_digest",
+    "roadmap_digest",
+    "input_manifest_digest",
+    "allowed_data_roles",
+    "changed_files",
+    "commands",
+    "tests",
+    "artifacts",
+    "failed_requirement_ids",
+    "open_terms",
+    "self_audit",
+    "owner_review_required",
+    "evidence_payload_digest"
+  ],
+  "title": "Rev3PhaseState",
+  "type": "object"
+}

@@ -1,9 +1,10 @@
-"""Fail-closed governance boundary for the proposed rev3 strategy.
+"""Fail-closed governance boundary for the installed rev3 strategy.
 
 The 2026-07-31 audit suspended PH-R00 and classified the earlier rev3 phase
-evidence as historical and non-authoritative.  The corrected strategy is not
-installed and therefore has no active phase.  Historical S5/P22 capability
-paths remain forbidden as parents, active policies, or fallbacks.
+evidence as historical and non-authoritative.  The Owner-approved correction
+is installed, but PH-R00 has not been authorized and no phase is active.
+Historical S5/P22 capability paths remain forbidden as parents, active
+policies, or fallbacks.  Installation alone never activates a runtime.
 """
 
 from __future__ import annotations
@@ -14,11 +15,14 @@ from typing import Final
 REV3_STRATEGY_ID: Final = (
     "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
 )
-REV3_STRATEGY_STATUS: Final = "PROPOSED_PENDING_OWNER_APPROVAL"
-REV3_INSTALLATION_STATUS: Final = "NOT_INSTALLED"
-REV3_CURRENT_WORK_CLASS: Final = "REV3_DOCUMENT_CORRECTION_ONLY"
+REV3_STRATEGY_STATUS: Final = "OWNER_APPROVED"
+REV3_INSTALLATION_STATUS: Final = "INSTALLED"
+REV3_CURRENT_WORK_CLASS: Final = "PH-R00_AUTHORIZATION_PENDING"
 REV3_ACTIVE_PHASE: Final[str | None] = None
+REV3_PH_R1_STATUS: Final = "CODEX_IMPLEMENTATION_COMPLETE"
 REV3_PH_R00_STATUS: Final = "SUSPEND"
+REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS: Final = "NOT_FROZEN"
+REV3_RUNTIME_ACTIVATION_STATUS: Final = "SUSPEND"
 REV3_PHASE_ORDER: Final = (
     "PH-R-1",
     "PH-R00",
@@ -109,6 +113,14 @@ def _strategy_is_installed(status: str) -> bool:
     return status == "INSTALLED"
 
 
+def _bundle_is_frozen(status: str) -> bool:
+    return status == "FROZEN"
+
+
+def _runtime_is_active(status: str) -> bool:
+    return status == "ACTIVE"
+
+
 @dataclass(frozen=True, slots=True)
 class Rev3ProductionSelection:
     """Content-bound future production selection.
@@ -150,7 +162,7 @@ class Rev3ProductionSelection:
 def require_rev3_production_selection(
     selection: Rev3ProductionSelection,
 ) -> Rev3ProductionSelection:
-    """Reject invalid selections and every selection before installation."""
+    """Reject invalid selections and every selection before runtime gates."""
 
     failures = selection.validate()
     if failures:
@@ -161,6 +173,18 @@ def require_rev3_production_selection(
         raise PermissionError(
             "REV3_STRATEGY_NOT_INSTALLED:"
             f"{REV3_INSTALLATION_STATUS}"
+        )
+    if not _bundle_is_frozen(
+        REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS
+    ):
+        raise PermissionError(
+            "REV3_INITIAL_STATE_BUNDLE_NOT_FROZEN:"
+            f"{REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS}"
+        )
+    if not _runtime_is_active(REV3_RUNTIME_ACTIVATION_STATUS):
+        raise PermissionError(
+            "REV3_RUNTIME_ACTIVATION_SUSPENDED:"
+            f"{REV3_RUNTIME_ACTIVATION_STATUS}"
         )
     return selection
 
@@ -187,9 +211,12 @@ __all__ = [
     "QUARANTINED_RUNTIME_SOURCE_KINDS",
     "REV3_ACTIVE_PHASE",
     "REV3_CURRENT_WORK_CLASS",
+    "REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS",
     "REV3_INSTALLATION_STATUS",
+    "REV3_PH_R1_STATUS",
     "REV3_PH_R00_STATUS",
     "REV3_PHASE_ORDER",
+    "REV3_RUNTIME_ACTIVATION_STATUS",
     "REV3_STRATEGY_ID",
     "REV3_STRATEGY_STATUS",
     "Rev3ProductionSelection",

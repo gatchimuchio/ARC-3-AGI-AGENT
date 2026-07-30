@@ -1,0 +1,143 @@
+{
+  "$id": "https://gatchimuchio.invalid/schemas/rev3-current-selector-v3.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "active_phase": {
+      "type": "null"
+    },
+    "audit_baseline_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "audit_report_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "authority_manifest_path": {
+      "const": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json"
+    },
+    "current_work_class": {
+      "const": "PH-R00_AUTHORIZATION_PENDING"
+    },
+    "distilled_initial_state_bundle_status": {
+      "const": "NOT_FROZEN"
+    },
+    "historical_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "const": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
+        },
+        "eligible_for_current_activation": {
+          "const": false
+        },
+        "preserve": {
+          "const": true
+        },
+        "scope": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "classification",
+        "eligible_for_current_activation",
+        "preserve",
+        "scope"
+      ],
+      "type": "object"
+    },
+    "installation_approval": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_artifact_digest": {
+          "pattern": "^owner-approval-record:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "approval_record_path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "decision_capture_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "decision_capture_path": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "target_artifact_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "target_evidence_commit": {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "decision_capture_path",
+        "decision_capture_digest",
+        "approval_record_path",
+        "approval_artifact_digest",
+        "target_evidence_commit",
+        "target_artifact_digest"
+      ],
+      "type": "object"
+    },
+    "installation_status": {
+      "const": "INSTALLED"
+    },
+    "next_phase_after_owner_authorization": {
+      "const": "PH-R00"
+    },
+    "ph_r00_owner_authorization": {
+      "const": "NOT_ESTABLISHED"
+    },
+    "ph_r00_status": {
+      "const": "SUSPEND"
+    },
+    "ph_r1_status": {
+      "const": "CODEX_IMPLEMENTATION_COMPLETE"
+    },
+    "runtime_activation_status": {
+      "const": "SUSPEND"
+    },
+    "schema_version": {
+      "const": "arc3-rev3-current-selector-v3"
+    },
+    "strategy_id": {
+      "const": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
+    },
+    "strategy_status": {
+      "const": "OWNER_APPROVED"
+    }
+  },
+  "required": [
+    "schema_version",
+    "strategy_id",
+    "strategy_status",
+    "installation_status",
+    "ph_r1_status",
+    "active_phase",
+    "current_work_class",
+    "ph_r00_status",
+    "ph_r00_owner_authorization",
+    "next_phase_after_owner_authorization",
+    "distilled_initial_state_bundle_status",
+    "runtime_activation_status",
+    "authority_manifest_path",
+    "installation_approval",
+    "historical_evidence",
+    "audit_baseline_commit",
+    "audit_report_sha256"
+  ],
+  "title": "Rev3CurrentSelector",
+  "type": "object"
+}

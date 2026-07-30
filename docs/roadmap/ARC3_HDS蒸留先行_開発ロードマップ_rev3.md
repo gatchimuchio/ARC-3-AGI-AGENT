@@ -9,9 +9,10 @@
   - `HDS蒸留仕様書_ARC2_ARC3_rev2.md`
   - `HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
 - 日付: `2026-07-31`
-- 状態: `PROPOSED_PENDING_OWNER_APPROVAL`
-- 導入状態: `NOT_INSTALLED`
-- 現在作業: `REV3_DOCUMENT_CORRECTION_ONLY`
+- 状態: `OWNER_APPROVED`
+- 導入状態: `INSTALLED`
+- PH-R-1状態: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
+- 現在作業: `PH-R00_AUTHORIZATION_PENDING`
 - Phase guard: `PH-R00 = SUSPEND`
 - 原則: HDS構造データをOwner承認付きでfreezeするまで、AGI能力実装へ進まない
 
@@ -89,11 +90,19 @@ CODEX_SELF_AUDIT_PASS
 OWNER_REVIEW_REQUIRED
 ```
 
-Ownerの対象明示承認までstrategyは`NOT_INSTALLED`、`PH-R00`は`SUSPEND`である。
+監査是正はOwnerが対象明示承認し、PH-R-1でstrategyを導入した。PH-R00は別のOwner判断まで`SUSPEND`である。
 
 ---
 
 ## PH-R-1 — Strategy Installation
+
+### Current status
+
+```text
+CODEX_IMPLEMENTATION_COMPLETE
+OWNER_REVIEW_REQUIRED
+PH-R00_NOT_STARTED
+```
 
 ### Entry
 
@@ -1160,6 +1169,11 @@ OWNER_REJECTED
 
 Owner状態の記録には`OwnerDecisionCapture`を必須とする。CodexはOwnerの対象明示判断を機械転記できるが、decisionまたは遷移を生成しない。
 
+Ownerが全必要承認と連続進行を明示した場合は、OwnerStandingAuthorizationを
+Approval Commitへ固定できる。各phaseのDoD PASS後、exact evidence digestへ
+`OwnerDecisionCapture v2`を機械bindした場合だけ次のsequential phaseへ進む。
+FAIL、未検証、順序違反では適用しない。不可逆な外部操作は対象外である。
+
 Git evidence:
 
 ```text
@@ -1203,38 +1217,35 @@ Codexは次phaseへ自動進行しない。
 
 ---
 
-# 現在のWork Block
+# 直近のWork Blockと現在停止点
 
 ```text
 Phase:
-REV3-DOC-FIX
+PH-R-1
 
 目的:
-監査F-01〜F-17を文書、機械可読契約、配布artifactで是正し、
-strategyをPROPOSED_PENDING_OWNER_APPROVAL / NOT_INSTALLED、
-PH-R00をSUSPENDとして固定する。
+Owner承認済みrev3 correctionをcurrent authority、selector、schema、
+fail-closed governanceへ導入し、PH-R00を未開始のまま固定する。
 
 読む順序:
 1. ユーザーの現在指示
-2. 2026-07-31 rev3監査報告
-3. root AGENTS.md
-4. ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md
-5. ARC3_HDS蒸留先行_開発ロードマップ_rev3.md
-6. INDEX
+2. OwnerDecisionCapture / ApprovalRecord
+3. PH-R-1 WorkBlockFrame
+4. root AGENTS.md
+5. current authority manifest / selector / schemas
+6. rev3仕様 / roadmap / INDEX
 7. AGI/HDS上位正本
 
 実施:
-- authority planes
-- non-self-referential Git evidence
-- artifact layer separation
-- relevant-M / irrelevant-M tests
-- canonical record + multi-projection
-- end-to-end family CV
-- coverage/schema/J/role/Owner capture/claim/evaluator/action契約
-- ASCII-safe deterministic package
+- Owner approval binding
+- current authority manifest
+- installed selector
+- phase/evidence/approval schemas
+- runtime activation fail-closed guard
+- approved correction packageのbyte-identical再構築
+- Implementation / Evidence / Attestation分離
 
 禁止:
-- PH-R-1開始
 - PH-R00開始
 - HDS蒸留開始
 - AGI能力実装
@@ -1246,7 +1257,7 @@ PH-R00をSUSPENDとして固定する。
 OWNER_REVIEW_REQUIREDで停止。
 ```
 
-Ownerが是正artifactと許可遷移を明示承認した後の次Work Blockは`PH-R-1`である。
+PH-R00 evidence targetと許可遷移を明示したOwner判断が得られた場合だけ、次Work Blockを`PH-R00`とする。
 
 ---
 

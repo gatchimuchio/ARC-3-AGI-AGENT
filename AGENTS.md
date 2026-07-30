@@ -1,6 +1,6 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する監査是正中のfail-closed運用guardである。Owner承認まではstrategy導入証拠ではない。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1による導入は、PH-R00、HDS、Bridge、Runtimeの開始許可ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
 - 日付: `2026-07-31`
@@ -8,10 +8,12 @@
 - 上位仕様: `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
 - 上位roadmap: `ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
-- 契約状態: `PROPOSED_PENDING_OWNER_APPROVAL`
-- 導入状態: `NOT_INSTALLED`
-- 現在作業: `REV3_DOCUMENT_CORRECTION_ONLY`
+- 契約状態: `OWNER_APPROVED`
+- 導入状態: `INSTALLED`
+- 現在作業: `PH-R00_AUTHORIZATION_PENDING`
 - Phase guard: `PH-R00 = SUSPEND`
+- PH-R-1: `CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED`
+- 導入承認: `owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8`
 - Codex role: `DEVELOPMENT_META_C`
 - 最終採否者: 大平鉄兵
 - 継続記憶正本: Git Repository / 仕様 / Ledger / Artifact
@@ -131,19 +133,20 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ## 4. Active Strategy Selector
 
 ```text
-Strategy = PROPOSED_PENDING_OWNER_APPROVAL
-Installation = NOT_INSTALLED
+Strategy = OWNER_APPROVED
+Installation = INSTALLED
 Active phase = NONE
-Current work = REV3_DOCUMENT_CORRECTION_ONLY
+Current work = PH-R00_AUTHORIZATION_PENDING
+PH-R-1 = CODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIRED
 PH-R00 = SUSPEND
 ```
 
-監査是正後の順序は次である。
+監査是正後の順序は次であり、PH-R-1までを実装済みとする。
 
 ```text
 REV3文書・契約の監査是正
 → Ownerによる是正内容の明示承認
-→ PH-R-1 STRATEGY_INSTALLATION
+→ PH-R-1 STRATEGY_INSTALLATION（implemented）
 → PH-R00
 → PH-D00A ... PH-D14
 → PH-B00 ... PH-B06
@@ -158,9 +161,10 @@ Hard Gate:
 ```text
 OWNER_APPROVED_REV3_CORRECTION
 AND STRATEGY_INSTALLATION_COMPLETE
+AND OWNER_AUTHORIZED_PH-R00
 ```
 
-以前に`PH-R00`を開始しない。
+以前に`PH-R00`を開始しない。現在、前二条件は成立しているが、`OWNER_AUTHORIZED_PH-R00`は`NOT_ESTABLISHED`である。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -266,6 +270,27 @@ owner_decision_content_digest
 ```
 
 Codexは`decision`、`allowed_transition`、`reason_codes`を推測・補完・拡張しない。Owner指示が対象artifactまたは遷移を一意に特定しない場合、recordを生成せず`OWNER_DECISION_NOT_ESTABLISHED`とする。正式schemaは`docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V1.json`で固定する。
+
+### OwnerStandingAuthorization
+
+Ownerが、roadmap内の必要承認を全て与え、連続進行を明示した場合、その判断を
+`OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json`へ機械転記できる。
+
+Standing authorizationは、将来artifactへdigestなしのPASSを事前付与するものではない。
+各phaseで次を全て満たした場合だけ、`OWNER_DECISION_CAPTURE_SCHEMA_V2.json`により
+standing authorizationをexact artifactへ適用する。
+
+```text
+required DoD = PASS
+failed requirement count = 0
+exact implementation/evidence commit = bound
+exact evidence payload digest = bound
+sequential predecessor = approved
+```
+
+一件でもFAIL、未検証、digest不一致、順序違反ならcaptureを生成しない。
+Standing authorizationは、external submission、one-time locked access、credential変更、
+課金・公開などの不可逆な外部操作を含まない。それらは別の明示実行指示を必要とする。
 
 ---
 
@@ -410,10 +435,14 @@ Packageは`implementation_commit/tree`と`evidence_payload_digest`へbindし、�
 
 ### WB-09 Stop
 
-`OWNER_REVIEW_REQUIRED`で停止する。  
-次phaseへ自動進行しない。
+通常は`OWNER_REVIEW_REQUIRED`で停止し、次phaseへ自動進行しない。
 
 「続行」「連続で作業してよい」は実装継続許可であり、Owner専権のphase採否、Rule採否、HDSStructureBundle採択、DistilledInitialStateBundle採択、`LOCKED_FINAL`、official環境、Kaggle変更・提出を代替しない。各専権判断には、対象artifactと遷移を特定したOwnerの明示判断が必要である。
+
+ただし、Ownerが「必要な承認を総て承認し、連続で止めない」と明示し、上記
+`OwnerStandingAuthorization`がApproval Commitへ固定された場合は例外とする。
+この場合も各phaseのDoD PASS後にexact digestへ機械bindし、失敗または未証明phaseを
+承認してはならない。不可逆な外部操作はstanding authorizationの対象外である。
 
 ---
 
@@ -684,11 +713,12 @@ OWNER_APPROVED
 あなたの役割はDevelopment Meta-Cです。
 Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではありません。
 
-rev3 strategyはPROPOSED_PENDING_OWNER_APPROVALです。
-installationはNOT_INSTALLEDです。
+rev3 strategyはOWNER_APPROVEDです。
+installationはINSTALLEDです。
+PH-R-1はCODEX_IMPLEMENTATION_COMPLETE / OWNER_REVIEW_REQUIREDです。
 PH-R00はSUSPENDです。
 Active phaseはありません。
-現在許可されたwork classはREV3_DOCUMENT_CORRECTION_ONLYです。
+現在許可されたwork classはPH-R00_AUTHORIZATION_PENDINGです。
 
 最初に、
 - repository root
@@ -696,22 +726,22 @@ Active phaseはありません。
 - HEAD/tree
 - dirty state
 - required documents
-- current correction state
+- current installation evidence
 を確認してください。
 
 次だけを実施してください。
 
-- F-01〜F-17を解消するrev3文書・機械可読契約の修正
-- 監査前phase evidenceを削除せずhistorical/non-authoritativeへ分類
-- Strategy Installation前状態とPH-R00 SUSPENDの記録
-- ASCII-safe filename、MANIFEST.json、SHA256SUMSを持つ配布artifactの再生成
-- 文書、schema、packageの回帰検証
+- PH-R-1 evidence、attestation、Owner Review Packageの検証
+- current authority manifest、selector、schemaの整合性確認
+- 監査前phase evidenceのhistorical/non-authoritative分類維持
+- approved correction packageのbyte-identical再現性確認
+- PH-R00開始に必要な対象明示Owner判断の確認
 
-PH-R-1、PH-R00、HDS蒸留、Bridge、AGI Runtime、P22改善、locked final、
+PH-R00、HDS蒸留、Bridge、AGI Runtime、P22改善、locked final、
 official、Kaggleへ進んではいけません。
 
-是正成果をImplementation Commitへ固定し、Evidence Commitを分離してください。
-Owner承認は生成せず、OWNER_REVIEW_REQUIREDで停止してください。
+PH-R-1成果のImplementation Commit、Evidence Commit、attestationを分離してください。
+PH-R00承認は生成せず、OWNER_REVIEW_REQUIREDで停止してください。
 ```
 
 ---

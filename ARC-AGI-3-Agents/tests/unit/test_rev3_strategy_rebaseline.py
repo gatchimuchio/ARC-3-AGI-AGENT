@@ -17,9 +17,12 @@ from arc3_agi_agent.rev3_governance import (
     QUARANTINED_RUNTIME_SOURCE_KINDS,
     REV3_ACTIVE_PHASE,
     REV3_CURRENT_WORK_CLASS,
+    REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS,
     REV3_INSTALLATION_STATUS,
     REV3_PH_R00_STATUS,
+    REV3_PH_R1_STATUS,
     REV3_PHASE_ORDER,
+    REV3_RUNTIME_ACTIVATION_STATUS,
     REV3_STRATEGY_STATUS,
     Rev3ProductionSelection,
     audit_rev3_production_imports,
@@ -68,11 +71,14 @@ def _valid_selection() -> Rev3ProductionSelection:
 
 
 def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
-    assert REV3_STRATEGY_STATUS == "PROPOSED_PENDING_OWNER_APPROVAL"
-    assert REV3_INSTALLATION_STATUS == "NOT_INSTALLED"
-    assert REV3_CURRENT_WORK_CLASS == "REV3_DOCUMENT_CORRECTION_ONLY"
+    assert REV3_STRATEGY_STATUS == "OWNER_APPROVED"
+    assert REV3_INSTALLATION_STATUS == "INSTALLED"
+    assert REV3_CURRENT_WORK_CLASS == "PH-R00_AUTHORIZATION_PENDING"
     assert REV3_ACTIVE_PHASE is None
+    assert REV3_PH_R1_STATUS == "CODEX_IMPLEMENTATION_COMPLETE"
     assert REV3_PH_R00_STATUS == "SUSPEND"
+    assert REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS == "NOT_FROZEN"
+    assert REV3_RUNTIME_ACTIVATION_STATUS == "SUSPEND"
     assert REV3_PHASE_ORDER[0] == "PH-R-1"
     assert REV3_PHASE_ORDER[1] == "PH-R00"
     assert REV3_PHASE_ORDER.index("PH-D14") < REV3_PHASE_ORDER.index(
@@ -99,7 +105,20 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert selector["current_work_class"] == REV3_CURRENT_WORK_CLASS
     assert selector["active_phase"] is None
     assert selector["ph_r00_status"] == REV3_PH_R00_STATUS
-    assert selector["owner_approval_for_correction"] == "NOT_ESTABLISHED"
+    assert selector["ph_r1_status"] == REV3_PH_R1_STATUS
+    assert selector["ph_r00_owner_authorization"] == "NOT_ESTABLISHED"
+    assert selector["distilled_initial_state_bundle_status"] == (
+        REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS
+    )
+    assert selector["runtime_activation_status"] == (
+        REV3_RUNTIME_ACTIVATION_STATUS
+    )
+    assert selector["installation_approval"][
+        "approval_artifact_digest"
+    ] == (
+        "owner-approval-record:"
+        "32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8"
+    )
     assert (
         selector["historical_evidence"]["classification"]
         == "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
@@ -142,7 +161,12 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     )
 
     profile = _json(contract_root / "AGI_BUILD_READY_PROFILE_V1.json")
-    assert profile["profile_status"] == "PROPOSED_PENDING_OWNER_APPROVAL"
+    assert profile["profile_status"] == (
+        "OWNER_APPROVED_CONTRACT_NOT_YET_EVALUATED"
+    )
+    assert profile["profile_approval_binding"][
+        "evaluation_status"
+    ] == "NOT_EVALUATED"
     assert not profile["owner_approval_may_bypass_hard_minimum"]
     assert all(
         category["hard_mandatory"]
@@ -161,6 +185,134 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     ]
 
 
+def test_ph_r1_owner_decision_and_approval_are_content_bound() -> None:
+    capture = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "OWNER_DECISION_CAPTURES"
+        / "REV3_DOC_FIX_TO_PH-R-1_20260731.json"
+    )
+    capture_body = dict(capture)
+    for excluded in capture["digest_excluded_fields"]:
+        capture_body.pop(str(excluded))
+    assert capture["owner_decision_content_digest"] == (
+        "sha256:" + digest_object(capture_body)
+    )
+    assert capture["source_instruction_digest"] == (
+        "sha256:"
+        + hashlib.sha256("全部承認".encode("utf-8")).hexdigest()
+    )
+    assert capture["target_evidence_commit"] == (
+        "95c8fb0f1551716191769747d65816e273cf7640"
+    )
+    assert capture["target_artifact_digest"] == (
+        "sha256:"
+        "3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219"
+    )
+
+    approval = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "OWNER_APPROVAL_RECORDS"
+        / "REV3_DOC_FIX_TO_PH-R-1_20260731.json"
+    )
+    approval_body = dict(approval)
+    for excluded in approval["digest_excluded_fields"]:
+        approval_body.pop(str(excluded))
+    assert approval["approval_artifact_digest"] == (
+        "owner-approval-record:" + digest_object(approval_body)
+    )
+    assert approval["owner_decision_capture_digest"] == (
+        capture["owner_decision_content_digest"]
+    )
+    assert approval["next_phase_id"] == "PH-R-1"
+    assert approval["next_phase_authorized"] is True
+    assert approval["future_phase_approval_scope"] == "NONE"
+
+    attestation = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "REV3_DOC_FIX_EVIDENCE_ATTESTATION.json"
+    )
+    assert attestation["evidence"]["commit"] == (
+        capture["target_evidence_commit"]
+    )
+    assert attestation["evidence"]["payload_digest"] == (
+        capture["target_artifact_digest"]
+    )
+
+
+def test_ph_r1_schemas_reject_unbound_or_self_referential_state() -> None:
+    contract_root = (
+        REPOSITORY_ROOT / "docs" / "strategy" / "contracts"
+    )
+    phase_schema = _json(contract_root / "PHASE_STATE_SCHEMA_V2.json")
+    assert phase_schema["additionalProperties"] is False
+    assert "evidence_commit" not in phase_schema["properties"]
+    assert "evidence_tree" not in phase_schema["properties"]
+    assert set(
+        (
+            "implementation_commit",
+            "implementation_tree",
+            "evidence_payload_digest",
+        )
+    ).issubset(phase_schema["required"])
+
+    attestation_schema = _json(
+        contract_root / "EVIDENCE_COMMIT_ATTESTATION_SCHEMA_V1.json"
+    )
+    assert attestation_schema["additionalProperties"] is False
+    assert attestation_schema["properties"]["self_reference_avoided"][
+        "const"
+    ] is True
+
+    approval_schema = _json(
+        contract_root / "APPROVAL_RECORD_SCHEMA_V1.json"
+    )
+    assert approval_schema["additionalProperties"] is False
+    assert "approval_commit" not in approval_schema["properties"]
+    assert approval_schema["properties"]["digest_excluded_fields"][
+        "const"
+    ] == ["approval_artifact_digest"]
+
+    selector_schema = _json(
+        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V3.json"
+    )
+    assert selector_schema["additionalProperties"] is False
+    assert selector_schema["properties"]["active_phase"]["type"] == (
+        "null"
+    )
+    assert selector_schema["properties"][
+        "ph_r00_owner_authorization"
+    ]["const"] == "NOT_ESTABLISHED"
+
+    standing_schema = _json(
+        contract_root / "OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json"
+    )
+    assert standing_schema["additionalProperties"] is False
+    scope = standing_schema["properties"]["authorization_scope"]
+    assert scope["properties"]["artifact_binding_policy"]["const"] == (
+        "EXACT_DIGEST_CAPTURE_REQUIRED"
+    )
+    assert scope["properties"]["external_irreversible_actions"][
+        "const"
+    ] == (
+        "EXCLUDED_REQUIRES_SEPARATE_EXPLICIT_EXECUTION_INSTRUCTION"
+    )
+
+    capture_v2 = _json(
+        contract_root / "OWNER_DECISION_CAPTURE_SCHEMA_V2.json"
+    )
+    assert capture_v2["additionalProperties"] is False
+    assert capture_v2["properties"]["decision_basis"]["const"] == (
+        "OWNER_STANDING_AUTHORIZATION"
+    )
+    assert capture_v2["properties"]["gate_status"]["const"] == "PASS"
+
+
 def test_rev3_strategy_package_is_deterministic_and_ascii_safe(
     tmp_path: Path,
 ) -> None:
@@ -177,6 +329,13 @@ def test_rev3_strategy_package_is_deterministic_and_ascii_safe(
         )
 
     assert first.read_bytes() == second.read_bytes()
+    committed = (
+        REPOSITORY_ROOT
+        / "artifacts"
+        / "rev3"
+        / "arc3_hds_distillation_first_strategy_rev3_corrected.zip"
+    )
+    assert first.read_bytes() == committed.read_bytes()
     with ZipFile(first) as archive:
         names = archive.namelist()
         assert "MANIFEST.json" in names
@@ -191,6 +350,22 @@ def test_rev3_strategy_package_is_deterministic_and_ascii_safe(
         assert manifest["entry_count"] == len(names) - 2
         checksums = archive.read("SHA256SUMS").decode("ascii").splitlines()
         assert len(checksums) == len(names) - 1
+
+
+def test_installed_rev3_governance_validator_passes() -> None:
+    script = REPOSITORY_ROOT / "scripts" / "validate_rev3_governance.py"
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+    )
+    report = json.loads(result.stdout)
+    assert report["status"] == "PASS"
+    assert report["failure_count"] == 0
+    assert report["check_count"] >= 12
 
 
 def test_rev3_corrected_documents_close_audit_findings() -> None:
@@ -213,9 +388,13 @@ def test_rev3_corrected_documents_close_audit_findings() -> None:
     combined = "\n".join(
         path.read_text(encoding="utf-8") for path in document_paths
     )
+    assert "Strategy = OWNER_APPROVED" in combined
+    assert "Installation = INSTALLED" in combined
+    assert "Current work = PH-R00_AUTHORIZATION_PENDING" in combined
+    assert "PH-R00 Owner authorization = NOT_ESTABLISHED" in combined
+    assert "PROPOSED_PENDING_OWNER_APPROVAL" not in combined
+    assert "NOT_INSTALLED" not in combined
     for required in (
-        "PROPOSED_PENDING_OWNER_APPROVAL",
-        "NOT_INSTALLED",
         "PH-R00 = SUSPEND",
         "Normative Authority",
         "Execution Control",
@@ -288,7 +467,7 @@ def test_historical_sources_cannot_be_selected_or_used_as_fallback(
     assert "REV3_PRODUCTION_FALLBACK_FORBIDDEN" in selection.validate()
 
 
-def test_distilled_selection_requires_bindings_and_installed_strategy() -> None:
+def test_distilled_selection_requires_bindings_and_runtime_gates() -> None:
     missing = Rev3ProductionSelection(
         source_kind=DISTILLED_RUNTIME_SOURCE_KIND,
         structure_bundle_digest="",
@@ -299,7 +478,7 @@ def test_distilled_selection_requires_bindings_and_installed_strategy() -> None:
 
     with pytest.raises(
         PermissionError,
-        match="REV3_STRATEGY_NOT_INSTALLED:NOT_INSTALLED",
+        match="REV3_INITIAL_STATE_BUNDLE_NOT_FROZEN:NOT_FROZEN",
     ):
         require_rev3_production_selection(_valid_selection())
     with pytest.raises(

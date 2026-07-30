@@ -51,10 +51,14 @@
   },
   "current_selector": {
     "active_phase": null,
-    "current_work_class": "REV3_DOCUMENT_CORRECTION_ONLY",
-    "installation_status": "NOT_INSTALLED",
+    "current_work_class": "PH-R00_AUTHORIZATION_PENDING",
+    "distilled_initial_state_bundle_status": "NOT_FROZEN",
+    "installation_status": "INSTALLED",
+    "ph_r00_owner_authorization": "NOT_ESTABLISHED",
     "ph_r00_status": "SUSPEND",
-    "strategy_status": "PROPOSED_PENDING_OWNER_APPROVAL"
+    "ph_r1_status": "CODEX_IMPLEMENTATION_COMPLETE",
+    "runtime_activation_status": "SUSPEND",
+    "strategy_status": "OWNER_APPROVED"
   },
   "execution_control": [
     "OWNER_CURRENT_EXPLICIT_INSTRUCTION",
@@ -107,6 +111,13 @@
       ]
     },
     "self_reference_policy": "REJECT"
+  },
+  "installation_approval": {
+    "approval_artifact_digest": "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8",
+    "decision_capture_digest": "sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd",
+    "future_phase_approval_scope": "NONE",
+    "target_artifact_digest": "sha256:3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219",
+    "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "j_boundary": {
     "distillation_may_generate": [

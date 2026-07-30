@@ -1,0 +1,84 @@
+{
+  "$id": "https://gatchimuchio.invalid/schemas/approval-record-v1.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approval_artifact_digest": {
+      "pattern": "^owner-approval-record:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "approval_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "approved_transition": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "decision": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "digest_excluded_fields": {
+      "const": [
+        "approval_artifact_digest"
+      ],
+      "type": "array"
+    },
+    "future_phase_approval_scope": {
+      "enum": [
+        "NONE",
+        "EXPLICITLY_LISTED_ONLY"
+      ],
+      "type": "string"
+    },
+    "next_phase_authorized": {
+      "type": "boolean"
+    },
+    "next_phase_id": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "owner_authority": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "owner_decision_capture_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "owner_decision_capture_path": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "arc3-owner-approval-record-v2"
+    },
+    "target_artifact_digest": {
+      "pattern": "^[a-z0-9][a-z0-9_.-]*:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "target_evidence_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "approval_id",
+    "owner_authority",
+    "owner_decision_capture_path",
+    "owner_decision_capture_digest",
+    "target_evidence_commit",
+    "target_artifact_digest",
+    "approved_transition",
+    "decision",
+    "next_phase_id",
+    "next_phase_authorized",
+    "future_phase_approval_scope",
+    "digest_excluded_fields",
+    "approval_artifact_digest"
+  ],
+  "title": "OwnerApprovalRecord",
+  "type": "object"
+}

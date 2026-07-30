@@ -86,6 +86,12 @@
   "duplicate_evidence_score_count_max": 0,
   "owner_approval_may_bypass_hard_minimum": false,
   "profile_id": "AGI_BUILD_READY_PROFILE_V1",
-  "profile_status": "PROPOSED_PENDING_OWNER_APPROVAL",
+  "profile_status": "OWNER_APPROVED_CONTRACT_NOT_YET_EVALUATED",
+  "profile_approval_binding": {
+    "approval_artifact_digest": "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8",
+    "decision_capture_digest": "sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd",
+    "evaluation_status": "NOT_EVALUATED",
+    "future_threshold_bypass_authorized": false
+  },
   "schema_version": "arc3-agi-build-ready-profile-v1"
 }

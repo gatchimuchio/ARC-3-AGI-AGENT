@@ -67,15 +67,19 @@ def _rebind_digest(
     )
 
 
-def test_pre_audit_dependency_lock_is_suspended_fail_closed() -> None:
+def test_installed_dependency_lock_remains_suspended_fail_closed() -> None:
     selector = _json(
         REPOSITORY_ROOT
         / "control"
         / "rev3"
         / "REV3_CURRENT_SELECTOR.json"
     )
-    assert selector["installation_status"] == "NOT_INSTALLED"
+    assert selector["installation_status"] == "INSTALLED"
+    assert selector["ph_r1_status"] == "CODEX_IMPLEMENTATION_COMPLETE"
+    assert selector["current_work_class"] == "PH-R00_AUTHORIZATION_PENDING"
+    assert selector["ph_r00_owner_authorization"] == "NOT_ESTABLISHED"
     assert selector["ph_r00_status"] == "SUSPEND"
+    assert selector["runtime_activation_status"] == "SUSPEND"
     assert (
         selector["historical_evidence"]["classification"]
         == "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"

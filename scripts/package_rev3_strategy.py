@@ -6,10 +6,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import subprocess
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+APPROVED_SOURCE_COMMIT = "3be6aeb67ccb05b55c90bf876c8a16410b8c766e"
 DEFAULT_OUTPUT = (
     REPOSITORY_ROOT
     / "artifacts"
@@ -84,12 +86,24 @@ def _zip_info(name: str) -> ZipInfo:
     return info
 
 
+def _approved_blob(source_name: str) -> bytes:
+    """Read the exact Owner-approved correction source from Git."""
+
+    result = subprocess.run(
+        ["git", "show", f"{APPROVED_SOURCE_COMMIT}:{source_name}"],
+        cwd=REPOSITORY_ROOT,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    return result.stdout
+
+
 def build_package(output: Path) -> dict[str, object]:
     payloads: dict[str, bytes] = {}
     entries: list[dict[str, object]] = []
     for archive_name, source_name in sorted(PACKAGE_INPUTS.items()):
-        source_path = REPOSITORY_ROOT / source_name
-        data = source_path.read_bytes()
+        data = _approved_blob(source_name)
         archive_name.encode("ascii")
         payloads[archive_name] = data
         entries.append(
@@ -142,6 +156,7 @@ def build_package(output: Path) -> dict[str, object]:
         "output": str(output),
         "sha256": _sha256(output.read_bytes()),
         "size_bytes": output.stat().st_size,
+        "source_commit": APPROVED_SOURCE_COMMIT,
     }
 
 
