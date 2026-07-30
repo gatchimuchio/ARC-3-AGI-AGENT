@@ -1,0 +1,135 @@
+{
+  "allowed_claim": "TRANSFORMATION_STRESS_PASS",
+  "budget": 24,
+  "content_digest": "p22-evidence:7f713d0b612344472f4a9b5d0e2d6e7a971bf722c823423f95aa30f63d10a442",
+  "evaluation_role": "DEVELOPMENT_VALIDATION",
+  "failed_requirement_ids": [],
+  "final_generic_claim": "NOT_AUTHORIZED",
+  "p": {
+    "logical_digest": "p-logical:42d1f1a8c89b089965b8b7c19bc481545562b56859f8b7eff57dacdf6095a64e",
+    "package_digest": "p-physical-package:15eb769280f4daccf31f8041b025138831b45b88fd77db0a35280159e553cf80",
+    "version": "p22-generic-autonomous-v1"
+  },
+  "results": [
+    {
+      "actions_executed": 4,
+      "completed": true,
+      "failure_signatures": [],
+      "family": "COLOR",
+      "final_state": "WIN",
+      "memory_promoted": true,
+      "progress_count": 2,
+      "run_report_digest": "generic-run:b39d11d82fa13c8e17dade32cadc433f81bbe5ace64f4b0d01e91ea6a4aedc17",
+      "trace_digests": [
+        "generic-cycle-trace:14cb3b6f2040328dda1f8e47ab934accd98fdb43f51247f659d494d7ae2d2401",
+        "generic-cycle-trace:74fc1cedbcb774a4459bdc1306624404f35d229e7961e0c4a5b772e1c364fd0b",
+        "generic-cycle-trace:d3b78ef27925aebaf036c493932abf6461edadcb9a4c67ade4f27da876dab471",
+        "generic-cycle-trace:5b8f3f03821a68aea5ea0274ba76d9c2a571989554fc5143e5104aa2bbfe448d"
+      ]
+    },
+    {
+      "actions_executed": 4,
+      "completed": true,
+      "failure_signatures": [],
+      "family": "ROTATION",
+      "final_state": "WIN",
+      "memory_promoted": true,
+      "progress_count": 2,
+      "run_report_digest": "generic-run:4879d5af310fcb3b3c54d207e7eb73eea9b1602607a5e800aba61cff2bf46fff",
+      "trace_digests": [
+        "generic-cycle-trace:9563266f32fc4add4485d9f0b9ddc44d4386d8a6275696e00e5be30b5fd723ba",
+        "generic-cycle-trace:abf21c01a2d824dd027f867c33e0dcec375b2b22c2dc84be59e6c29c813b26fd",
+        "generic-cycle-trace:4a0471677ba2a872d7634d609e7784783f2fa50c79706e4fcb09d38ac6785ae3",
+        "generic-cycle-trace:8d725f840195286d90134ed0408a6b8a6f8b82367b7c4bf29aa588bc9a34d62b"
+      ]
+    },
+    {
+      "actions_executed": 4,
+      "completed": true,
+      "failure_signatures": [],
+      "family": "REFLECTION",
+      "final_state": "WIN",
+      "memory_promoted": true,
+      "progress_count": 2,
+      "run_report_digest": "generic-run:510eb594d2bf10ec83e57374bcca7cc8ee270c419fde801854b5192388c4c5aa",
+      "trace_digests": [
+        "generic-cycle-trace:1f4c2913a0ca33ee2cef73603402feeab659fe25b505dd67bf4d313cb69fc1e4",
+        "generic-cycle-trace:0171573a019633fd9c939b6e18c4f8f65bee3f3bf4981775ef209d7f2f194d99",
+        "generic-cycle-trace:ce586790686c8177fd645b406a302f3bc2cb65fa1c343a70dcafaabf826e0963",
+        "generic-cycle-trace:872defdf28c833c099132806d9a963c6dc25373f79dad049cf017044f8575b56"
+      ]
+    },
+    {
+      "actions_executed": 4,
+      "completed": true,
+      "failure_signatures": [],
+      "family": "LAYOUT",
+      "final_state": "WIN",
+      "memory_promoted": true,
+      "progress_count": 2,
+      "run_report_digest": "generic-run:753c85feac3bd74f066fcd3abea2ce0cefdd5eb7e8fe6ae75fc9d0b07f3d6892",
+      "trace_digests": [
+        "generic-cycle-trace:7fd999d0c9e561bcd7374bb6176212e8cad23beba7fe721b5e5fe3e59b05be1d",
+        "generic-cycle-trace:ccff8368abef400e90113eedc07a2f65c183857d3b348908530c8bc7d944cf0d",
+        "generic-cycle-trace:14dbf3bfc28aca76b30b176248b1b609047189b64882ad1f20272c802296ce4f",
+        "generic-cycle-trace:3738b6f6ba060643e1e7f9eae4fd160280be1eb70492c899c8c58e55c701e6cd"
+      ]
+    },
+    {
+      "actions_executed": 4,
+      "completed": true,
+      "failure_signatures": [],
+      "family": "OBJECT_COUNT",
+      "final_state": "WIN",
+      "memory_promoted": true,
+      "progress_count": 2,
+      "run_report_digest": "generic-run:ee188c0606e49e26e5b21f8b16c9e819f654da2ee94feb96b6becf43e0fc83a5",
+      "trace_digests": [
+        "generic-cycle-trace:12bd5a20d2b66af3d57d329296c5e6c71fd59d8fd3e8b4226e9229a82ee888e4",
+        "generic-cycle-trace:76439760af14a2aec7203412460e4fb11c424473f929f2892b52780d133e2c35",
+        "generic-cycle-trace:51ffa16ee8fd5e9a6a806e38d7061ba434e6aa94c289e8cb8612a00090631897",
+        "generic-cycle-trace:d968b51e7d39db2c02cfce8fe1bfb91558b8bbf37c3129b8753cefda9f39d771"
+      ]
+    },
+    {
+      "actions_executed": 2,
+      "completed": true,
+      "failure_signatures": [],
+      "family": "ORDER",
+      "final_state": "WIN",
+      "memory_promoted": true,
+      "progress_count": 2,
+      "run_report_digest": "generic-run:ce2da3220249a345f2934983d333584e885fcef57433e2052605449aeb7ad3f8",
+      "trace_digests": [
+        "generic-cycle-trace:72bfd326a7a0cbf4d429d2062ea356277ceecd1d4e0c5165770a831185cc1ae4",
+        "generic-cycle-trace:804635a9ac7783f99f48bedc91d9b919b8782606d1c7e31bf4d641ce1e47cfb5"
+      ]
+    },
+    {
+      "actions_executed": 4,
+      "completed": true,
+      "failure_signatures": [
+        "GENERIC_GAME_OVER_OBSERVED"
+      ],
+      "family": "UNSEEN_COMPOSITION",
+      "final_state": "WIN",
+      "memory_promoted": true,
+      "progress_count": 2,
+      "run_report_digest": "generic-run:c42b0df21d23a3f81c92029288e038497ea221193da852a39b5e64a2ace6a7e8",
+      "trace_digests": [
+        "generic-cycle-trace:baf384cc4f541c0e48d32632aada827e1397f7cff43eb78ce60d1913a3063261",
+        "generic-cycle-trace:34f51ebeda72cd90d92565c80777ae2e4ef59b5b4304bd4f2f8a45b1ac224c5c",
+        "generic-cycle-trace:2150abaa65bb821867a04e439b12a941fef9f8db239760c24003897ac9053765",
+        "generic-cycle-trace:36525e7b688a813db26d39b9bf5691b4d66d355287c367c7f422d6c36be25c52"
+      ]
+    }
+  ],
+  "runtime_identity": "runtime-identity:61ce5032c12e0d72109f2cd2bd16f417ce7def957f1820d2490e13d853a13001",
+  "schema_version": "arc3-p22-autonomous-evaluator-v1",
+  "seed": 0,
+  "status": "PASS",
+  "transformation_completion": {
+    "completed": 7,
+    "required": 7
+  }
+}

@@ -662,8 +662,12 @@ class GenericRunReport:
     episode_handle_digest: str
     identity_boundary_passed: bool
     failure_signatures: tuple[str, ...]
+    cycle_trace_digests: tuple[str, ...] = ()
 
     def digest(self) -> str:
+        trace_digests = self.cycle_trace_digests or tuple(
+            cycle.trace_digest for cycle in self.cycles
+        )
         return "generic-run:" + digest_object(
             {
                 "runtime_version": self.runtime_version,
@@ -675,9 +679,7 @@ class GenericRunReport:
                 "final_state": self.final_state,
                 "progress_count": self.progress_count,
                 "actions_executed": self.actions_executed,
-                "cycle_trace_digests": tuple(
-                    cycle.trace_digest for cycle in self.cycles
-                ),
+                "cycle_trace_digests": trace_digests,
                 "stop_reason": self.stop_reason,
                 "memory_initial_version": self.memory_initial_version,
                 "memory_final_version": self.memory_final_version,

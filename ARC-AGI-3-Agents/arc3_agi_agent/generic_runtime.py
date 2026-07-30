@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Sequence
+from typing import Protocol, Sequence
 
 from .causal_record import (
     causal_record,
@@ -50,6 +50,21 @@ class GenericRuntimeAblation:
     hds: HDSAblation = field(default_factory=HDSAblation)
     memory_read: bool = True
     memory_write: bool = True
+    rollback: bool = True
+
+    def validate(self) -> tuple[str, ...]:
+        return (
+            ()
+            if all(
+                isinstance(item, bool)
+                for item in (
+                    self.memory_read,
+                    self.memory_write,
+                    self.rollback,
+                )
+            )
+            else ("GENERIC_RUNTIME_ABLATION_FLAG_INVALID",)
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -72,6 +87,25 @@ class GenericRuntimeConfiguration:
         ):
             failures.append("GENERIC_RUNTIME_MEMORY_BUDGET_INVALID")
         return tuple(sorted(set(failures)))
+
+
+class GenericCycleTraceSink(Protocol):
+    def append(self, trace: GenericCycleTrace) -> None: ...
+
+
+@dataclass(slots=True)
+class _TraceCollector:
+    retain_cycle_objects: bool
+    sink: GenericCycleTraceSink | None
+    items: list[GenericCycleTrace] = field(default_factory=list)
+    digests: list[str] = field(default_factory=list)
+
+    def append(self, trace: GenericCycleTrace) -> None:
+        self.digests.append(trace.trace_digest)
+        if self.sink is not None:
+            self.sink.append(trace)
+        if self.retain_cycle_objects:
+            self.items.append(trace)
 
 
 @dataclass(frozen=True, slots=True)
@@ -335,8 +369,21 @@ class GenericAGIRuntime:
     environment: GenericEnvironment
     session: CognitiveSession
     episode_handle: EpisodeHandle = field(repr=False)
+    retain_cycle_objects: bool = True
+    trace_sink: GenericCycleTraceSink | None = field(
+        default=None,
+        repr=False,
+    )
 
     def __post_init__(self) -> None:
+        if (
+            not isinstance(self.retain_cycle_objects, bool)
+            or (
+                not self.retain_cycle_objects
+                and self.trace_sink is None
+            )
+        ):
+            raise ValueError("GENERIC_RUNTIME_TRACE_RETENTION_INVALID")
         self.session.require_episode(self.episode_handle)
         failures = self.configuration.validate()
         if failures:
@@ -474,6 +521,9 @@ class GenericAGIRuntime:
         self.session.require_episode(self.episode_handle)
         self.session.p_bundle.require_unchanged()
         selected_ablation = ablation or GenericRuntimeAblation()
+        ablation_failures = selected_ablation.validate()
+        if ablation_failures:
+            raise ValueError(";".join(ablation_failures))
         observation = self.environment.observe()
         observation_failures = observation.validate()
         if observation_failures:
@@ -481,7 +531,10 @@ class GenericAGIRuntime:
         initial_digest = observation.digest()
         self.session.identity_boundary.require_decision_context(observation)
         initial_memory_version = self.memory.version
-        traces: list[GenericCycleTrace] = []
+        traces = _TraceCollector(
+            retain_cycle_objects=self.retain_cycle_objects,
+            sink=self.trace_sink,
+        )
         failures: list[str] = []
         actions_executed = 0
         stop_reason = "RESOURCE_LIMIT"
@@ -576,6 +629,28 @@ class GenericAGIRuntime:
             authority_events = [command.command_id, decision.decision_id]
             cycle_failures: list[str] = []
             if decision.operation_state == "ROLLBACK":
+                if not selected_ablation.rollback:
+                    cycle_failures.append("GENERIC_ROLLBACK_ABLATED")
+                    failures.extend(cycle_failures)
+                    stop_reason = "ROLLBACK_ABLATED"
+                    traces.append(
+                        self._cycle_trace(
+                            cycle_index=cycle_index,
+                            observation=observation,
+                            frame=frame,
+                            compute_result=compute_result,
+                            decision=decision,
+                            selected_candidate=None,
+                            result_observation=None,
+                            attribution=None,
+                            memory_query_digest=retrieval_stage.output_digest,
+                            memory_update_digests=(),
+                            authority_events=authority_events,
+                            failure_signatures=cycle_failures,
+                            decision_context_digest=decision_context.digest(),
+                        )
+                    )
+                    break
                 control_rollback_authorization = (
                     self.hds.authorize_control_rollback(
                         decision,
@@ -889,28 +964,33 @@ class GenericAGIRuntime:
                     )
             if attribution.category == "FAILURE":
                 cycle_failures.append("GENERIC_GAME_OVER_OBSERVED")
-                rollback = self.hds.authorize_rollback(
-                    decision,
-                    attribution,
-                    result_observation,
-                )
-                authority_events.append(rollback.authorization_id)
-                self.executor.rollback_executor.consume(
-                    rollback,
-                    decision,
-                    attribution,
-                    result_observation,
-                )
-                observation_after_cycle = self.environment.reset_level(
-                    request_id="generic-rollback-request:"
-                    + digest_object(rollback.authorization_id)[:24]
-                )
-                rollback_failures = observation_after_cycle.validate()
-                if rollback_failures:
-                    raise ValueError(";".join(rollback_failures))
-                self.session.identity_boundary.require_decision_context(
-                    observation_after_cycle
-                )
+                if selected_ablation.rollback:
+                    rollback = self.hds.authorize_rollback(
+                        decision,
+                        attribution,
+                        result_observation,
+                    )
+                    authority_events.append(rollback.authorization_id)
+                    self.executor.rollback_executor.consume(
+                        rollback,
+                        decision,
+                        attribution,
+                        result_observation,
+                    )
+                    observation_after_cycle = self.environment.reset_level(
+                        request_id="generic-rollback-request:"
+                        + digest_object(rollback.authorization_id)[:24]
+                    )
+                    rollback_failures = observation_after_cycle.validate()
+                    if rollback_failures:
+                        raise ValueError(";".join(rollback_failures))
+                    self.session.identity_boundary.require_decision_context(
+                        observation_after_cycle
+                    )
+                else:
+                    cycle_failures.append("GENERIC_ROLLBACK_ABLATED")
+                    observation_after_cycle = result_observation
+                    stop_reason = "ROLLBACK_ABLATED"
             else:
                 observation_after_cycle = result_observation
             self.hds.observe_outcome(attribution)
@@ -933,6 +1013,11 @@ class GenericAGIRuntime:
             )
             failures.extend(cycle_failures)
             observation = observation_after_cycle
+            if (
+                attribution.category == "FAILURE"
+                and not selected_ablation.rollback
+            ):
+                break
             if result_observation.terminal_state == "WIN":
                 stop_reason = "GOAL_REACHED"
                 break
@@ -947,7 +1032,7 @@ class GenericAGIRuntime:
             final_state=observation.terminal_state,
             progress_count=highest_progress,
             actions_executed=actions_executed,
-            cycles=tuple(traces),
+            cycles=tuple(traces.items),
             stop_reason=stop_reason,
             memory_initial_version=initial_memory_version,
             memory_final_version=self.memory.version,
@@ -958,6 +1043,7 @@ class GenericAGIRuntime:
             episode_handle_digest=self.episode_handle.handle_digest,
             identity_boundary_passed=True,
             failure_signatures=tuple(sorted(set(failures))),
+            cycle_trace_digests=tuple(traces.digests),
         )
         self.session.ledger.append(
             "RUNTIME_END",
@@ -974,6 +1060,7 @@ class GenericAGIRuntime:
 __all__ = [
     "GENERIC_RUNTIME_VERSION",
     "GenericAGIRuntime",
+    "GenericCycleTraceSink",
     "GenericRuntimeAblation",
     "GenericRuntimeConfiguration",
     "GenericSideEffectExecutor",

@@ -659,31 +659,21 @@ def _load_head(
     )
 
 
-def load_compiled_autonomous_instruction_body(
+def _compiled_body_from_arrays(
     *,
-    manifest_path: Path | None = None,
-    weights_path: Path | None = None,
+    manifest: Mapping[str, Any],
+    manifest_bytes: bytes,
+    arrays: Mapping[str, np.ndarray],
+    weights_sha256: str,
 ) -> CompiledAutonomousInstructionBody:
-    manifest_path = manifest_path or _bundle_path(
-        COMPILED_POLICY_MANIFEST_FILENAME
-    )
-    weights_path = weights_path or _bundle_path(
-        COMPILED_POLICY_WEIGHTS_FILENAME
-    )
-    manifest_bytes = manifest_path.read_bytes()
-    value = json.loads(manifest_bytes.decode("utf-8"))
-    manifest = _mapping(value, "compiled policy manifest")
-    weights_bytes = weights_path.read_bytes()
-    weights_sha256 = hashlib.sha256(weights_bytes).hexdigest()
-    with np.load(weights_path, allow_pickle=False) as loaded:
-        arrays = {
-            name: np.array(loaded[name], copy=True)
-            for name in loaded.files
-        }
+    expected_array_names: set[str] = set()
     action_heads: dict[tuple[int, ...], CompiledDenseHead] = {}
     for raw in _sequence(manifest.get("action_heads"), "action_heads"):
         item = _mapping(raw, "action head")
         head_id = str(item.get("head_id", ""))
+        expected_array_names.update(
+            f"{head_id}_{suffix}" for suffix in ("w0", "b0", "w1", "b1")
+        )
         classes = tuple(
             _integer(entry, "classes[]")
             for entry in _sequence(item.get("classes"), "classes")
@@ -705,6 +695,13 @@ def load_compiled_autonomous_instruction_body(
         "horizontal head",
     )
     vertical_meta = _mapping(pointer.get("vertical"), "vertical head")
+    for metadata in (horizontal_meta, vertical_meta):
+        head_id = str(metadata.get("head_id", ""))
+        expected_array_names.update(
+            f"{head_id}_{suffix}" for suffix in ("w0", "b0", "w1", "b1")
+        )
+    if set(arrays) != expected_array_names:
+        raise ValueError("COMPILED_POLICY_ARTIFACT_ARRAY_SET_INVALID")
     horizontal = _load_head(
         arrays,
         head_id=str(horizontal_meta.get("head_id", "")),
@@ -741,6 +738,56 @@ def load_compiled_autonomous_instruction_body(
     return body
 
 
+def compiled_autonomous_instruction_body_from_artifact(
+    *,
+    manifest_bytes: bytes,
+    tensor_arrays: Mapping[str, np.ndarray],
+) -> CompiledAutonomousInstructionBody:
+    """Rebuild compiled P from its canonical manifest and float16 tensors."""
+
+    value = json.loads(manifest_bytes.decode("utf-8"))
+    manifest = _mapping(value, "compiled policy manifest")
+    arrays = {
+        str(name): np.asarray(array, dtype=np.float16)
+        for name, array in tensor_arrays.items()
+    }
+    return _compiled_body_from_arrays(
+        manifest=manifest,
+        manifest_bytes=manifest_bytes,
+        arrays=arrays,
+        weights_sha256=str(manifest.get("weights_sha256", "")),
+    )
+
+
+def load_compiled_autonomous_instruction_body(
+    *,
+    manifest_path: Path | None = None,
+    weights_path: Path | None = None,
+) -> CompiledAutonomousInstructionBody:
+    manifest_path = manifest_path or _bundle_path(
+        COMPILED_POLICY_MANIFEST_FILENAME
+    )
+    weights_path = weights_path or _bundle_path(
+        COMPILED_POLICY_WEIGHTS_FILENAME
+    )
+    manifest_bytes = manifest_path.read_bytes()
+    value = json.loads(manifest_bytes.decode("utf-8"))
+    manifest = _mapping(value, "compiled policy manifest")
+    weights_bytes = weights_path.read_bytes()
+    weights_sha256 = hashlib.sha256(weights_bytes).hexdigest()
+    with np.load(weights_path, allow_pickle=False) as loaded:
+        arrays = {
+            name: np.array(loaded[name], copy=True)
+            for name in loaded.files
+        }
+    return _compiled_body_from_arrays(
+        manifest=manifest,
+        manifest_bytes=manifest_bytes,
+        arrays=arrays,
+        weights_sha256=weights_sha256,
+    )
+
+
 __all__ = [
     "COMPILED_POLICY_BODY_VERSION",
     "COMPILED_POLICY_FEATURE_COUNT",
@@ -752,6 +799,7 @@ __all__ = [
     "CompiledAutonomousInstructionBody",
     "CompiledDenseHead",
     "CompiledPolicyDecision",
+    "compiled_autonomous_instruction_body_from_artifact",
     "compiled_policy_feature_vector",
     "compiled_policy_manifest_digest",
     "load_compiled_autonomous_instruction_body",

@@ -16,7 +16,10 @@ from arc3_agi_agent.generic_compute import (
     action_descriptors,
     represent_observation,
 )
-from arc3_agi_agent.generic_runtime import GenericAGIRuntime
+from arc3_agi_agent.generic_runtime import (
+    GenericAGIRuntime,
+    GenericRuntimeAblation,
+)
 from arc3_agi_agent.generic_session import (
     ResourceContract,
     create_cognitive_session,
@@ -25,6 +28,8 @@ from arc3_agi_agent.generic_types import (
     ActionEffectRecord,
     GenericObservation,
 )
+from arc3_agi_agent.p_bundle import p_bundle_from_package
+from arc3_agi_agent.p_compiler_v2 import PCompilerV2
 from arc3_agi_agent.s5_policy import (
     S5HistoryRecord,
     load_s5_rendered_policy_body,
@@ -269,6 +274,69 @@ def test_p_proposed_rollback_requires_hds_capability_and_updates_m() -> None:
     session.end_episode(handle, succeeded=False, reason=report.stop_reason)
 
 
+class _TraceSink:
+    def __init__(self) -> None:
+        self.digests: list[str] = []
+
+    def append(self, trace: object) -> None:
+        self.digests.append(str(getattr(trace, "trace_digest")))
+
+
+def test_full_trace_can_stream_without_retaining_cycle_objects() -> None:
+    arrays = _arrays()
+    observation = _observation(
+        arrays,
+        8647,
+        signature="streamed-reset-world:before",
+    )
+    body = load_compiled_autonomous_instruction_body()
+    session = create_cognitive_session(
+        p_bundle=body,
+        resource_contract=ResourceContract(action_budget_per_episode=1),
+    )
+    handle = session.begin_episode()
+    sink = _TraceSink()
+
+    report = GenericAGIRuntime(
+        _ResetOnlyWorld(observation),
+        session,
+        handle,
+        retain_cycle_objects=False,
+        trace_sink=sink,
+    ).run()
+
+    assert report.cycles == ()
+    assert report.cycle_trace_digests == tuple(sink.digests)
+    assert len(report.cycle_trace_digests) == 1
+    assert report.digest().startswith("generic-run:")
+    session.end_episode(handle, succeeded=False, reason=report.stop_reason)
+
+
+def test_rollback_ablation_blocks_hds_control_rollback() -> None:
+    arrays = _arrays()
+    observation = _observation(
+        arrays,
+        8647,
+        signature="rollback-ablation-world:before",
+    )
+    session = create_cognitive_session(
+        p_bundle=load_compiled_autonomous_instruction_body(),
+        resource_contract=ResourceContract(action_budget_per_episode=1),
+    )
+    handle = session.begin_episode()
+    world = _ResetOnlyWorld(observation)
+
+    report = GenericAGIRuntime(world, session, handle).run(
+        ablation=GenericRuntimeAblation(rollback=False)
+    )
+
+    assert world.reset_count == 0
+    assert report.actions_executed == 0
+    assert report.stop_reason == "ROLLBACK_ABLATED"
+    assert "GENERIC_ROLLBACK_ABLATED" in report.failure_signatures
+    session.end_episode(handle, succeeded=False, reason=report.stop_reason)
+
+
 def test_active_generic_modules_do_not_import_legacy_runtime() -> None:
     active_modules = (
         "compiled_policy.py",
@@ -315,3 +383,27 @@ def test_compiled_history_rejects_non_arc_action_ids() -> None:
             (1, 2),
             (ActionEffectRecord(action_id=29),),
         )
+
+
+def test_compiled_policy_is_canonical_p_bundle_roundtrip() -> None:
+    body = load_compiled_autonomous_instruction_body()
+    bundle = PCompilerV2().bootstrap(
+        body=body,
+        version="p22-compiled-autonomous-v1",
+    )
+    payload = bundle.package_bytes()
+    restored = p_bundle_from_package(payload)
+
+    assert bundle.validate() == ()
+    assert any(item.dtype == "f16le" for item in bundle.tensors)
+    assert restored.package_bytes() == payload
+    assert restored.logical_digest() == bundle.logical_digest()
+    assert restored.body.digest() == body.digest()
+    assert set(restored.body.tensor_arrays()) == set(body.tensor_arrays())
+    assert all(
+        np.array_equal(
+            restored.body.tensor_arrays()[name],
+            body.tensor_arrays()[name],
+        )
+        for name in body.tensor_arrays()
+    )

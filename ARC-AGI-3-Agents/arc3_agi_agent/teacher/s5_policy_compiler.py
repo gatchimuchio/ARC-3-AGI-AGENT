@@ -6,7 +6,7 @@ import argparse
 import hashlib
 import json
 from collections import defaultdict
-from collections.abc import Mapping
+from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any, Protocol
 
@@ -205,15 +205,16 @@ def compile_s5_rendered_policy(
     corpus_manifest_path: Path,
     output_manifest_path: Path,
     output_weights_path: Path,
+    training_game_ordinals: Sequence[int] | None = None,
 ) -> dict[str, Any]:
     """Fit deterministic heads and emit no training examples into Runtime P."""
 
     try:
-        import sklearn  # type: ignore[import-untyped]
-        from sklearn.neural_network import (  # type: ignore[import-untyped]
+        import sklearn  # type: ignore[import-not-found]
+        from sklearn.neural_network import (  # type: ignore[import-not-found]
             MLPClassifier,
         )
-        from threadpoolctl import (  # type: ignore[import-untyped]
+        from threadpoolctl import (  # type: ignore[import-not-found]
             threadpool_limits,
         )
     except ImportError as error:
@@ -224,6 +225,41 @@ def compile_s5_rendered_policy(
     arrays, corpus_manifest = _load_corpus(
         corpus_path,
         corpus_manifest_path,
+    )
+    available_ordinals = tuple(
+        int(item) for item in np.unique(arrays["game_ordinal"])
+    )
+    if training_game_ordinals is not None and any(
+        isinstance(item, bool) or not isinstance(item, int)
+        for item in training_game_ordinals
+    ):
+        raise TypeError("S5_POLICY_TRAINING_GAME_SELECTION_INVALID")
+    selected_ordinals = (
+        available_ordinals
+        if training_game_ordinals is None
+        else tuple(
+            sorted({int(item) for item in training_game_ordinals})
+        )
+    )
+    if (
+        not selected_ordinals
+        or any(item not in available_ordinals for item in selected_ordinals)
+    ):
+        raise ValueError("S5_POLICY_TRAINING_GAME_SELECTION_INVALID")
+    if training_game_ordinals is not None:
+        selection_mask = np.isin(
+            arrays["game_ordinal"],
+            np.asarray(selected_ordinals, dtype=np.uint8),
+        )
+        arrays = {
+            name: np.asarray(value[selection_mask])
+            for name, value in arrays.items()
+        }
+    training_selection_digest = "s5-training-selection:" + digest_object(
+        {
+            "corpus_sha256": corpus_manifest["corpus_sha256"],
+            "selected_game_ordinals": selected_ordinals,
+        }
     )
     features = _feature_matrix(arrays)
     actions = arrays["actions"]
@@ -380,12 +416,15 @@ def compile_s5_rendered_policy(
     source_policy_digest = str(
         corpus_manifest["source_policy_digest"]
     )
+    provenance_material = (
+        corpus_sha256
+        + source_policy_digest
+        + f"scikit-learn-{sklearn.__version__}"
+    )
+    if training_game_ordinals is not None:
+        provenance_material += training_selection_digest
     provenance_digest = "sha256:" + hashlib.sha256(
-        (
-            corpus_sha256
-            + source_policy_digest
-            + f"scikit-learn-{sklearn.__version__}"
-        ).encode("utf-8")
+        provenance_material.encode("utf-8")
     ).hexdigest()
     manifest: dict[str, Any] = {
         "action_heads": action_heads,
@@ -421,6 +460,8 @@ def compile_s5_rendered_policy(
             "pointer_record_count": len(pointer_indices),
             "source_policy_digest": source_policy_digest,
             "training_corpus_sha256": corpus_sha256,
+            "training_game_ordinals": list(selected_ordinals),
+            "training_selection_digest": training_selection_digest,
         },
         "weights_sha256": weights_sha256,
     }
@@ -440,6 +481,9 @@ def compile_s5_rendered_policy(
         "source_policy_digest": source_policy_digest,
         "training_corpus_sha256": corpus_sha256,
         "training_record_count": len(actions),
+        "training_game_count": len(selected_ordinals),
+        "training_game_ordinals": list(selected_ordinals),
+        "training_selection_digest": training_selection_digest,
         "pointer_training_record_count": len(pointer_indices),
         "observable_action_surface_head_count": len(action_heads),
         "global_pointer_head_count": 2,

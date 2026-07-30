@@ -8,13 +8,20 @@ import math
 import struct
 import zipfile
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, field, replace
 from typing import Final
+
+import numpy as np
 
 from .canonical_artifact import (
     build_canonical_zip,
     canonical_json_bytes,
     physical_digest,
+)
+from .compiled_policy import (
+    COMPILED_POLICY_FORMAT_ID,
+    CompiledAutonomousInstructionBody,
+    compiled_autonomous_instruction_body_from_artifact,
 )
 from .generic_compute import (
     GenericInstructionBody,
@@ -39,7 +46,9 @@ P_COMPILER_SEMANTICS_VERSION: Final = "arc3-p-compiler-semantics-v2"
 P_BUNDLE_LIFECYCLES: Final = frozenset(
     {"ACTIVE", "CANDIDATE", "PREVIOUS_STABLE", "REJECTED"}
 )
-CANONICAL_TENSOR_DTYPES: Final = frozenset({"i64", "ppm_i64", "u8"})
+CANONICAL_TENSOR_DTYPES: Final = frozenset(
+    {"f16le", "i64", "ppm_i64", "u8"}
+)
 
 
 def _product(values: Sequence[int]) -> int:
@@ -54,7 +63,8 @@ class CanonicalTensor:
     name: str
     dtype: str
     shape: tuple[int, ...]
-    values: tuple[int, ...]
+    values: tuple[int, ...] = ()
+    raw_bytes: bytes = field(default=b"", repr=False)
 
     def validate(self) -> tuple[str, ...]:
         failures: list[str] = []
@@ -72,27 +82,42 @@ class CanonicalTensor:
             )
         ):
             failures.append("P_TENSOR_SHAPE_INVALID")
-        if _product(self.shape) != len(self.values):
-            failures.append("P_TENSOR_VALUE_COUNT_MISMATCH")
-        if any(
-            isinstance(item, bool) or not isinstance(item, int)
-            for item in self.values
-        ):
-            failures.append("P_TENSOR_VALUE_INVALID")
-        if self.dtype == "u8" and any(
-            not 0 <= item <= 255 for item in self.values
-        ):
-            failures.append("P_TENSOR_U8_RANGE_INVALID")
-        if self.dtype in {"i64", "ppm_i64"} and any(
-            not -(2**63) <= item < 2**63 for item in self.values
-        ):
-            failures.append("P_TENSOR_I64_RANGE_INVALID")
+        if self.dtype == "f16le":
+            if self.values:
+                failures.append("P_TENSOR_F16_VALUES_FORBIDDEN")
+            if len(self.raw_bytes) != _product(self.shape) * 2:
+                failures.append("P_TENSOR_BYTE_LENGTH_INVALID")
+            elif any(
+                not math.isfinite(item[0])
+                for item in struct.iter_unpack("<e", self.raw_bytes)
+            ):
+                failures.append("P_TENSOR_NONFINITE_VALUE")
+        else:
+            if self.raw_bytes:
+                failures.append("P_TENSOR_RAW_BYTES_FORBIDDEN")
+            if _product(self.shape) != len(self.values):
+                failures.append("P_TENSOR_VALUE_COUNT_MISMATCH")
+            if any(
+                isinstance(item, bool) or not isinstance(item, int)
+                for item in self.values
+            ):
+                failures.append("P_TENSOR_VALUE_INVALID")
+            if self.dtype == "u8" and any(
+                not 0 <= item <= 255 for item in self.values
+            ):
+                failures.append("P_TENSOR_U8_RANGE_INVALID")
+            if self.dtype in {"i64", "ppm_i64"} and any(
+                not -(2**63) <= item < 2**63 for item in self.values
+            ):
+                failures.append("P_TENSOR_I64_RANGE_INVALID")
         return tuple(sorted(set(failures)))
 
     def canonical_bytes(self) -> bytes:
         failures = self.validate()
         if failures:
             raise ValueError(";".join(failures))
+        if self.dtype == "f16le":
+            return self.raw_bytes
         if self.dtype == "u8":
             return bytes(self.values)
         return struct.pack("<" + "q" * len(self.values), *self.values)
@@ -149,6 +174,29 @@ def tensor_from_floats(
     return tensor
 
 
+def tensor_from_float16_array(
+    *,
+    name: str,
+    value: np.ndarray,
+) -> CanonicalTensor:
+    array = np.asarray(value)
+    if not array.shape or any(int(item) <= 0 for item in array.shape):
+        raise ValueError("P_TENSOR_SHAPE_INVALID")
+    if not np.isfinite(array).all():
+        raise ValueError("P_TENSOR_NONFINITE_VALUE")
+    canonical = np.ascontiguousarray(array, dtype="<f2")
+    tensor = CanonicalTensor(
+        name=name,
+        dtype="f16le",
+        shape=tuple(int(item) for item in canonical.shape),
+        raw_bytes=canonical.tobytes(order="C"),
+    )
+    failures = tensor.validate()
+    if failures:
+        raise ValueError(";".join(failures))
+    return tensor
+
+
 @dataclass(frozen=True, slots=True)
 class InstructionBodyManifest:
     format_id: str
@@ -165,7 +213,13 @@ def instruction_body_manifest(
 ) -> InstructionBodyManifest:
     provenance: tuple[tuple[str, str], ...]
     action_bias_keys: tuple[str, ...]
-    if isinstance(body, SymbolicRelationalInstructionBody):
+    if isinstance(body, CompiledAutonomousInstructionBody):
+        provenance = (
+            ("compiled", body.provenance_digest()),
+            ("structural", body.structural.provenance_digest()),
+        )
+        action_bias_keys = ()
+    elif isinstance(body, SymbolicRelationalInstructionBody):
         provenance = (("symbolic", body.provenance),)
         action_bias_keys = ()
     elif isinstance(body, ParametricRelationalInstructionBody):
@@ -192,6 +246,25 @@ def instruction_body_manifest(
 def instruction_body_tensors(
     body: GenericInstructionBody,
 ) -> tuple[CanonicalTensor, ...]:
+    if isinstance(body, CompiledAutonomousInstructionBody):
+        compiled_tensors = [
+            CanonicalTensor(
+                name="compiled.manifest",
+                dtype="u8",
+                shape=(len(body.serialize()),),
+                values=tuple(body.serialize()),
+            ),
+            *(
+                tensor_from_float16_array(
+                    name="compiled.array." + name,
+                    value=array,
+                )
+                for name, array in body.tensor_arrays().items()
+            ),
+        ]
+        return tuple(
+            sorted(compiled_tensors, key=lambda item: item.name)
+        )
     if isinstance(body, SymbolicRelationalInstructionBody):
         return ()
     parametric = (
@@ -202,7 +275,7 @@ def instruction_body_tensors(
     if not isinstance(parametric, ParametricRelationalInstructionBody):
         raise TypeError("P_BUNDLE_PARAMETRIC_BODY_REQUIRED")
     hidden_rows = len(parametric.hidden_weights)
-    tensors = (
+    parametric_tensors = (
         tensor_from_floats(
             name="parametric.hidden_weights",
             shape=(hidden_rows, 8),
@@ -236,7 +309,7 @@ def instruction_body_tensors(
             ),
         ),
     )
-    return tuple(sorted(tensors, key=lambda item: item.name))
+    return tuple(sorted(parametric_tensors, key=lambda item: item.name))
 
 
 def _float_values(tensor: CanonicalTensor) -> tuple[float, ...]:
@@ -250,6 +323,35 @@ def instruction_body_from_artifact(
     tensors: Sequence[CanonicalTensor],
 ) -> GenericInstructionBody:
     provenance = dict(manifest.provenance_items)
+    if manifest.format_id == COMPILED_POLICY_FORMAT_ID:
+        tensor_map = {item.name: item for item in tensors}
+        manifest_tensor = tensor_map.get("compiled.manifest")
+        if (
+            manifest_tensor is None
+            or manifest_tensor.dtype != "u8"
+            or not manifest_tensor.values
+        ):
+            raise ValueError("P_BUNDLE_COMPILED_MANIFEST_MISSING")
+        prefix = "compiled.array."
+        array_tensors = {
+            name.removeprefix(prefix): tensor
+            for name, tensor in tensor_map.items()
+            if name.startswith(prefix)
+        }
+        if not array_tensors:
+            raise ValueError("P_BUNDLE_COMPILED_TENSOR_MISSING")
+        arrays: dict[str, np.ndarray] = {}
+        for name, tensor in array_tensors.items():
+            if tensor.dtype != "f16le":
+                raise ValueError("P_BUNDLE_COMPILED_TENSOR_DTYPE_INVALID")
+            arrays[name] = np.frombuffer(
+                tensor.canonical_bytes(),
+                dtype="<f2",
+            ).reshape(tensor.shape)
+        return compiled_autonomous_instruction_body_from_artifact(
+            manifest_bytes=manifest_tensor.canonical_bytes(),
+            tensor_arrays=arrays,
+        )
     if manifest.format_id == "generic-symbolic-relational":
         return SymbolicRelationalInstructionBody(
             version=manifest.body_version,
@@ -554,7 +656,12 @@ def _tensor_from_bytes(
     spec: TensorParameterSpec,
     payload: bytes,
 ) -> CanonicalTensor:
-    if spec.dtype == "u8":
+    raw_bytes = b""
+    values: tuple[int, ...]
+    if spec.dtype == "f16le":
+        values = ()
+        raw_bytes = payload
+    elif spec.dtype == "u8":
         values = tuple(payload)
     elif spec.dtype in {"i64", "ppm_i64"}:
         if len(payload) % 8:
@@ -570,6 +677,7 @@ def _tensor_from_bytes(
         dtype=spec.dtype,
         shape=spec.shape,
         values=values,
+        raw_bytes=raw_bytes,
     )
     if (
         tensor.logical_digest() != spec.logical_digest
@@ -744,5 +852,6 @@ __all__ = [
     "instruction_body_manifest",
     "instruction_body_tensors",
     "p_bundle_from_package",
+    "tensor_from_float16_array",
     "tensor_from_floats",
 ]
