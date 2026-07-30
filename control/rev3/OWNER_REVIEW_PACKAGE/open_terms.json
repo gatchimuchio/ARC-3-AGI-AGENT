@@ -2,24 +2,15 @@
   "schema_version": "arc3-rev3-owner-review-open-terms-v1",
   "phase_id": "PH-R00",
   "required_authority_missing_count": 0,
-  "open_terms": [
+  "open_terms": [],
+  "owner_decisions": [
     {
-      "id": "OT-R00-001",
-      "term": "Historical notebook regression disposition",
-      "state": "OWNER_DECISION_REQUIRED",
-      "options": [
-        "Accept as quarantined and non-blocking for PH-D00A",
-        "Authorize a separate notebook remediation work block"
-      ]
+      "id": "OWNER-R00-DECISION",
+      "question": "Approve, require rework, or reject PH-R00."
     },
     {
-      "id": "OT-R00-002",
-      "term": "Package build toolchain timing",
-      "state": "OWNER_DECISION_REQUIRED",
-      "options": [
-        "Restore before PH-D00A",
-        "Defer until the first phase with a wheel-build blocking gate"
-      ]
+      "id": "OWNER-PHASE-PROMOTION",
+      "question": "Authorize or deny the start of PH-D00A."
     }
   ]
 }

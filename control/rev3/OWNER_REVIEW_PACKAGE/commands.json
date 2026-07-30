@@ -1,69 +1,63 @@
 {
   "schema_version": "arc3-rev3-owner-review-commands-v1",
   "phase_id": "PH-R00",
+  "result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
   "commands": [
     {
-      "id": "CMD-R00-001",
-      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest -q --basetemp=<repo-local> <rev3+p16-p21 focused tests>",
+      "id": "CMD-R00-RW-001",
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/unit/test_kaggle_notebook_contract.py tests/unit/test_rev3_strategy_rebaseline.py --basetemp=<repo-local>",
       "execution_stage": "POST_RESULT_COMMIT",
       "exit_code": 0,
-      "result": "112 passed"
+      "result": "19 passed in 8.32s"
     },
     {
-      "id": "CMD-R00-002",
-      "command": "ARC-AGI-3-Agents/.venv/Scripts/ruff.exe check ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
-      "execution_stage": "POST_RESULT_COMMIT",
-      "exit_code": 0,
-      "result": "PASS"
-    },
-    {
-      "id": "CMD-R00-003",
-      "command": "ARC-AGI-3-Agents/.venv/Scripts/mypy.exe ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "id": "CMD-R00-RW-002",
+      "command": ".venv/Scripts/ruff.exe check ../scripts/build_kaggle_submission.py ../scripts/validate_kaggle_submission.py tests/unit/test_kaggle_notebook_contract.py tests/unit/test_rev3_strategy_rebaseline.py",
       "execution_stage": "POST_RESULT_COMMIT",
       "exit_code": 0,
       "result": "PASS"
     },
     {
-      "id": "CMD-R00-004",
-      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m compileall -q ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "id": "CMD-R00-RW-003",
+      "command": ".venv/Scripts/mypy.exe ../scripts/build_kaggle_submission.py ../scripts/validate_kaggle_submission.py",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "PASS_STRICT"
+    },
+    {
+      "id": "CMD-R00-RW-004",
+      "command": ".venv/Scripts/python.exe -m compileall -q ../scripts/build_kaggle_submission.py ../scripts/validate_kaggle_submission.py tests/unit/test_kaggle_notebook_contract.py tests/unit/test_rev3_strategy_rebaseline.py",
       "execution_stage": "POST_RESULT_COMMIT",
       "exit_code": 0,
       "result": "PASS"
     },
     {
-      "id": "CMD-R00-005",
-      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest -q --basetemp=<repo-local> ARC-AGI-3-Agents/tests/unit",
-      "execution_stage": "POST_RESULT_COMMIT",
-      "exit_code": 1,
-      "result": "681 passed, 1 failed in 306.81s"
-    },
-    {
-      "id": "CMD-R00-006",
-      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest -q --basetemp=<repo-local> ARC-AGI-3-Agents/tests/integration",
+      "id": "CMD-R00-RW-005",
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/unit --basetemp=<repo-local>",
       "execution_stage": "POST_RESULT_COMMIT",
       "exit_code": 0,
-      "result": "8 passed in 311.55s"
+      "result": "687 passed in 252.99s"
     },
     {
-      "id": "CMD-R00-007",
-      "command": "three independent Python digest-validation processes",
-      "execution_stage": "PRE_RESULT_COMMIT",
+      "id": "CMD-R00-RW-006",
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/integration --basetemp=<repo-local>",
+      "execution_stage": "POST_RESULT_COMMIT",
       "exit_code": 0,
-      "result": "aggregate digest identical in all three runs"
+      "result": "8 passed in 394.14s"
     },
     {
-      "id": "CMD-R00-008",
-      "command": "PYTHONPATH=ARC-AGI-3-Agents python -c <rev3 source import and setuptools package-discovery audit>",
-      "execution_stage": "PRE_RESULT_COMMIT",
+      "id": "CMD-R00-RW-007",
+      "command": "build_kaggle_submission.py --output-dir <external> && validate_kaggle_submission.py --notebook-dir <external> --report <external>",
+      "execution_stage": "POST_RESULT_COMMIT",
       "exit_code": 0,
-      "result": "SOURCE_IMPORT_AND_PACKAGE_DISCOVERY_PASS"
+      "result": "25 checks passed; runtime smoke WIN:2:True:True; submission API calls 0"
     },
     {
-      "id": "CMD-R00-009",
-      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m build --version",
-      "execution_stage": "PRE_RESULT_COMMIT",
-      "exit_code": 1,
-      "result": "No module named build"
+      "id": "CMD-R00-RW-008",
+      "command": "uv lock --check && SOURCE_DATE_EPOCH=1785388723 uv build --wheel <twice> && wheel archive inspection",
+      "execution_stage": "POST_RESULT_COMMIT",
+      "exit_code": 0,
+      "result": "two byte-identical wheels; sha256 020f80d9fa653d685d7f98418d9ae0a3e107fe94d71acb6f2a5c52fb47156740"
     }
   ]
 }

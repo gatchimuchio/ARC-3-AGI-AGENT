@@ -1,0 +1,159 @@
+{
+  "schema_version": "arc3-rev3-r00-validation-rework-v1",
+  "phase_id": "PH-R00",
+  "work_block_id": "WB-PH-R00-VALIDATION-CLOSURE-REWORK",
+  "status": "CODEX_SELF_AUDIT_PASS",
+  "base_commit": "8d53dcf82f39c3a38f650d57a1c14324205ed4cc",
+  "base_tree": "9ca07e73ea615d77635fb0a93c560ca4d02fd3fa",
+  "result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
+  "result_tree": "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9",
+  "work_block_frame_digest": "rev3-work-block-frame:0afc5447fae19c385eb0c79d1117f741c45dc416a89bdabd2648002f2c698e55",
+  "purpose": "Resolve the two declared PH-R00 validation failures without importing quarantined capability, changing runtime behavior, starting PH-D00A, or accessing an official environment.",
+  "resolved_requirements": [
+    {
+      "id": "R00-NOTEBOOK-REGRESSION-001",
+      "prior_status": "FAIL",
+      "final_status": "PASS",
+      "classification": "PRODUCT_REGRESSION",
+      "root_cause": "The historical runtime allowlist retained unreachable infrastructure modules, including p_bundle.py, whose compiled_policy import made the package closure incomplete.",
+      "correction": "Define four GenericAGIRuntime entry modules, require the allowlist to equal their exact statically reachable local import closure, and fail closed on missing, extraneous, duplicate, or quarantined modules.",
+      "evidence": [
+        "19 of 19 dedicated notebook and rev3 tests pass",
+        "25 of 25 notebook validator checks pass",
+        "runtime import smoke returns WIN:2:True:True",
+        "37 reachable runtime modules and zero quarantined intersections"
+      ]
+    },
+    {
+      "id": "R00-PACKAGE-BUILD-ENVIRONMENT-001",
+      "prior_status": "SUSPEND",
+      "final_status": "PASS",
+      "classification": "ENVIRONMENT_FAILURE",
+      "root_cause": "The project virtual environment did not contain a package build frontend.",
+      "correction": "Use an ephemeral unmanaged uv 0.11.32 installation outside the repository, verify uv.lock before and after the build, fix SOURCE_DATE_EPOCH to the result commit timestamp, and inspect two independently built wheels.",
+      "evidence": [
+        "uv lock --check resolves 124 packages with CPython 3.12.13",
+        "two wheels are byte-identical",
+        "wheel metadata is arc-agi-3-agents 0.1.0 with py3-none-any tag",
+        "wheel has 240 members, includes rev3_governance.py, and excludes tests"
+      ]
+    }
+  ],
+  "implementation": {
+    "runtime_entry_modules": [
+      "generic_competition_runner.py",
+      "generic_env.py",
+      "generic_runtime.py",
+      "generic_session.py"
+    ],
+    "runtime_module_count": 37,
+    "runtime_archive_member_count": 39,
+    "runtime_archive_exact_reachable_closure": true,
+    "quarantined_module_intersection": [],
+    "external_notebook_report_path_supported": true,
+    "runtime_capability_change_count": 0
+  },
+  "validation": {
+    "dedicated_notebook_and_rev3": {
+      "status": "PASS",
+      "passed": 19,
+      "failed": 0,
+      "duration_seconds": 8.32,
+      "post_result_commit": true
+    },
+    "lint": {
+      "status": "PASS",
+      "tool": "ruff",
+      "post_result_commit": true
+    },
+    "type_check": {
+      "status": "PASS",
+      "tool": "mypy --strict",
+      "post_result_commit": true
+    },
+    "compileall": {
+      "status": "PASS",
+      "post_result_commit": true
+    },
+    "full_unit": {
+      "status": "PASS",
+      "passed": 687,
+      "failed": 0,
+      "duration_seconds": 252.99,
+      "post_result_commit": true
+    },
+    "integration": {
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 394.14,
+      "post_result_commit": true
+    },
+    "notebook_contract": {
+      "status": "PASS",
+      "passed_checks": 25,
+      "failed_checks": 0,
+      "notebook_sha256": "65b74a1f890ef8102e18e3b201ebc6e33d971629741226654fcb7aedda76ba92",
+      "agent_sha256": "9407d1ede93ef9ad2adbc31d568043ad29b8d43839c04d1000e37215fb9f0c42",
+      "runtime_archive_sha256": "f81f2054bf2b273a118471253504a5339a059f58ba913531af90373613b4c629",
+      "runtime_import_smoke": "WIN:2:True:True",
+      "submission_api_call_count": 0,
+      "external_path_validation": "PASS"
+    },
+    "package": {
+      "status": "PASS",
+      "tool": "uv 0.11.32 (x86_64-unknown-linux-gnu)",
+      "python_version": "3.12.13",
+      "lock_resolved_package_count": 124,
+      "independent_build_count": 2,
+      "source_date_epoch": 1785388723,
+      "wheel_sha256": "020f80d9fa653d685d7f98418d9ae0a3e107fe94d71acb6f2a5c52fb47156740",
+      "wheel_size_bytes": 17022489,
+      "wheel_member_count": 240,
+      "wheel_tag": "py3-none-any",
+      "wheel_name": "arc-agi-3-agents",
+      "wheel_version": "0.1.0",
+      "byte_identical": true,
+      "rev3_governance_present": true,
+      "tests_present": false,
+      "pyproject_sha256": "8a543455e089272327e596c6d1ccd21ab75c78201d8d32558bea0b1bafaa6d60",
+      "uv_lock_sha256": "680db09e6d1d3291ac8dc5138dd89c86a6341e5a1a86bbf803d2a1c4885e4a92",
+      "source_hashes_unchanged": true
+    }
+  },
+  "non_blocking_execution_incidents": [
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "symptom": "The first full-unit attempt reported 673 passed and 13 setup errors under the Windows global pytest temp root.",
+      "cause": "PermissionError [WinError 5] on the global pytest temp root.",
+      "correction": "Repeat with a repository-local --basetemp.",
+      "final_result": "687 passed"
+    },
+    {
+      "classification": "TOOL_FAILURE",
+      "symptom": "The first foreground integration command exceeded the 180-second tool-call limit after 6 of 8 tests.",
+      "cause": "Tool-call duration limit, not a test assertion failure.",
+      "correction": "Run the same suite as a monitored process with a repository-local --basetemp.",
+      "final_result": "8 passed"
+    }
+  ],
+  "forbidden_activity_counts": {
+    "hds_distillation_started": 0,
+    "bridge_started": 0,
+    "agi_capability_changes": 0,
+    "p22_optimization": 0,
+    "locked_final_access": 0,
+    "official_access": 0,
+    "notebook_publication": 0,
+    "network_submission": 0,
+    "owner_approval_generated_by_codex": 0
+  },
+  "failed_requirement_ids": [],
+  "claim": {
+    "allowed": "PH-R00 validation rework implemented, tested, and evidence generated",
+    "active_runtime_capability": "NOT_ESTABLISHED",
+    "phase_status": "OWNER_REVIEW_REQUIRED",
+    "next_phase_started": false
+  },
+  "content_digest": "rev3-r00-validation-rework:d819d7a9c5591b2ceb24f346fbd686adc1d94bf03783b8d9da8ebd83fa9bd61e"
+}

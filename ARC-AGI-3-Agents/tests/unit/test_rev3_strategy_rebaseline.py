@@ -280,8 +280,83 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
         "cv_completed_environment_count"
     ] == 0
     assert baseline["missing_required_authorities"] == []
-    assert baseline["failed_requirement_ids"] == [
-        "R00-NOTEBOOK-REGRESSION-001",
-        "R00-PACKAGE-BUILD-ENVIRONMENT-001",
-    ]
+    assert baseline["result_commit"] == (
+        "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938"
+    )
+    assert baseline["result_tree"] == (
+        "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9"
+    )
+    assert baseline["failed_requirement_ids"] == []
+    assert baseline["validation"]["full_unit"]["status"] == "PASS"
+    assert baseline["validation"]["notebook_regression"]["status"] == "PASS"
+    assert baseline["validation"]["package"]["status"] == "PASS"
     assert baseline["validation"]["determinism"]["status"] == "PASS"
+
+    rework = _json(
+        REPOSITORY_ROOT
+        / "analysis"
+        / "rev3"
+        / "ph_r00_validation_rework.json"
+    )
+    rework_body = dict(rework)
+    rework_digest = str(rework_body.pop("content_digest"))
+    assert rework_digest == (
+        "rev3-r00-validation-rework:"
+        + digest_object(rework_body)
+    )
+    assert rework["status"] == "CODEX_SELF_AUDIT_PASS"
+    assert rework["failed_requirement_ids"] == []
+    assert rework["implementation"]["runtime_module_count"] == 37
+    assert rework["implementation"]["quarantined_module_intersection"] == []
+    assert rework["validation"]["full_unit"]["passed"] == 687
+    assert rework["validation"]["integration"]["passed"] == 8
+    assert rework["validation"]["notebook_contract"][
+        "passed_checks"
+    ] == 25
+    assert rework["validation"]["package"]["byte_identical"] is True
+    assert rework["forbidden_activity_counts"]["official_access"] == 0
+    assert rework["forbidden_activity_counts"]["network_submission"] == 0
+
+    phase_state_path = (
+        REPOSITORY_ROOT / "control" / "rev3" / "R00_PHASE_STATE.json"
+    )
+    phase_state = _json(phase_state_path)
+    phase_state_body = dict(phase_state)
+    phase_state_digest = str(phase_state_body.pop("content_digest"))
+    assert phase_state_digest == (
+        "rev3-r00-phase-state:"
+        + digest_object(phase_state_body)
+    )
+    assert phase_state["status"] == "OWNER_REVIEW_REQUIRED"
+    assert phase_state["result_commit"] == rework["result_commit"]
+    assert phase_state["result_tree"] == rework["result_tree"]
+    assert phase_state["failed_requirement_ids"] == []
+    assert phase_state["self_audit"]["codex_self_audit_pass"] is True
+    assert phase_state_path.read_bytes() == (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "OWNER_REVIEW_PACKAGE"
+        / "phase_state.json"
+    ).read_bytes()
+
+    artifact_manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "OWNER_REVIEW_PACKAGE"
+        / "artifact_manifest.json"
+    )
+    artifact_manifest_body = dict(artifact_manifest)
+    artifact_manifest_digest = str(
+        artifact_manifest_body.pop("content_digest")
+    )
+    assert artifact_manifest_digest == (
+        "rev3-r00-owner-review-artifact-manifest:"
+        + digest_object(artifact_manifest_body)
+    )
+    assert artifact_manifest["manifest_excludes_self"] is True
+    assert all(
+        _sha256(REPOSITORY_ROOT / item["path"]) == item["sha256"]
+        for item in artifact_manifest["artifacts"]
+    )

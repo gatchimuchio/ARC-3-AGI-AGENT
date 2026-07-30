@@ -1,69 +1,72 @@
 {
   "schema_version": "arc3-rev3-owner-review-test-results-v1",
   "phase_id": "PH-R00",
-  "result_commit": "96ed8533b8f5d84800dcdfd694684d5c702a6753",
+  "result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
   "results": [
     {
-      "suite": "DEDICATED_REV3",
+      "suite": "DEDICATED_NOTEBOOK_AND_REV3_POST_RESULT_COMMIT",
       "status": "PASS",
-      "passed": 13,
-      "failed": 0
-    },
-    {
-      "suite": "FOCUSED_P16_P21_AND_REV3_POST_COMMIT",
-      "status": "PASS",
-      "passed": 112,
+      "passed": 19,
       "failed": 0,
-      "duration_seconds": 13.8
+      "duration_seconds": 8.32
     },
     {
-      "suite": "FULL_UNIT_POST_COMMIT",
-      "status": "FAIL",
-      "passed": 681,
-      "failed": 1,
-      "duration_seconds": 306.81,
-      "classification": "PRODUCT_REGRESSION",
-      "failed_test": "tests/unit/test_kaggle_notebook_contract.py::test_kaggle_notebook_matches_official_submission_shape",
-      "failure_code": "KAGGLE_RUNTIME_IMPORT_CLOSURE_INCOMPLETE:compiled_policy",
-      "change_origin": "PRE_EXISTING_BASE_TREE"
+      "suite": "FULL_UNIT_POST_RESULT_COMMIT",
+      "status": "PASS",
+      "passed": 687,
+      "failed": 0,
+      "duration_seconds": 252.99
     },
     {
-      "suite": "FULL_INTEGRATION_POST_COMMIT",
+      "suite": "FULL_INTEGRATION_POST_RESULT_COMMIT",
       "status": "PASS",
       "passed": 8,
       "failed": 0,
-      "duration_seconds": 311.55
+      "duration_seconds": 394.14
     },
     {
-      "suite": "RUFF_CHANGED_SOURCE_AND_TEST",
-      "status": "PASS"
-    },
-    {
-      "suite": "MYPY_REV3_GOVERNANCE",
-      "status": "PASS"
-    },
-    {
-      "suite": "COMPILEALL_CHANGED_SOURCE_AND_TEST",
-      "status": "PASS"
-    },
-    {
-      "suite": "ARTIFACT_DETERMINISM",
+      "suite": "NOTEBOOK_CONTRACT_EXTERNAL_PATH",
       "status": "PASS",
-      "independent_process_count": 3,
-      "aggregate_digest": "983f6291769bae6cb68cd9b0e47a5b8a55c5942f489bf72a98dceb12e2f53106"
+      "passed": 25,
+      "failed": 0,
+      "runtime_module_count": 37,
+      "quarantined_module_count": 0,
+      "runtime_import_smoke": "WIN:2:True:True",
+      "submission_api_call_count": 0
     },
     {
-      "suite": "SOURCE_IMPORT_AND_PACKAGE_DISCOVERY",
+      "suite": "RUFF_VALIDATION_REWORK",
       "status": "PASS"
     },
     {
-      "suite": "WHEEL_BUILD",
-      "status": "ENVIRONMENT_FAILURE",
-      "classification": "ENVIRONMENT_FAILURE",
-      "reason": "uv, pip, build, setuptools, and wheel are unavailable in the project environment"
+      "suite": "MYPY_PACKAGING_SCRIPTS_STRICT",
+      "status": "PASS"
+    },
+    {
+      "suite": "COMPILEALL_VALIDATION_REWORK",
+      "status": "PASS"
+    },
+    {
+      "suite": "LOCK_CHECK",
+      "status": "PASS",
+      "tool": "uv 0.11.32",
+      "python_version": "3.12.13",
+      "resolved_package_count": 124
+    },
+    {
+      "suite": "WHEEL_BUILD_DETERMINISM",
+      "status": "PASS",
+      "independent_build_count": 2,
+      "byte_identical": true,
+      "sha256": "020f80d9fa653d685d7f98418d9ae0a3e107fe94d71acb6f2a5c52fb47156740",
+      "size_bytes": 17022489,
+      "member_count": 240,
+      "tag": "py3-none-any",
+      "tests_present": false
     }
   ],
   "new_product_regression_count": 0,
-  "declared_preexisting_product_regression_count": 1,
-  "environment_failure_count": 1
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "resolved_requirement_count": 2
 }

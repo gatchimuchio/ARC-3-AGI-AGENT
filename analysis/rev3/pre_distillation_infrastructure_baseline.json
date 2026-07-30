@@ -1,12 +1,14 @@
 {
   "schema_version": "arc3-rev3-pre-distillation-infrastructure-baseline-v1",
   "phase_id": "PH-R00",
-  "status": "PRE_BIND_VALIDATED_WITH_DECLARED_FAILURES",
+  "status": "PRE_DISTILLATION_INFRASTRUCTURE_BASELINE_VALIDATED",
   "repository": "gatchimuchio/ARC-3-AGI-AGENT",
   "branch": "main",
   "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
   "base_tree": "d63d26e25758211938cc33d0efe84f50ed096023",
   "base_commit_subject": "chore: remove GitHub Actions CI [skip ci]",
+  "result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
+  "result_tree": "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9",
   "python_version": "3.12.13",
   "dependency_lock": {
     "path": "ARC-AGI-3-Agents/uv.lock",
@@ -15,6 +17,8 @@
   "authority_manifest_digest": "rev3-authority-input-manifest:b3388e4ce73c995cbdd7d8dc8209e1ffbff52f53b7847e4edfcced0e89fd37a4",
   "asset_classification_digest": "rev3-asset-classification:a4900aaa92c3dcc240f0849d7cccb4f237d22051f5dd4b05e836a5c67b57fa01",
   "work_block_frame_digest": "rev3-work-block-frame:33db7d6a9d0dec9128860383ece3543d78638271184b97e35583484838ae74a8",
+  "validation_rework_frame_digest": "rev3-work-block-frame:0afc5447fae19c385eb0c79d1117f741c45dc416a89bdabd2648002f2c698e55",
+  "validation_rework_report_digest": "rev3-r00-validation-rework:d819d7a9c5591b2ceb24f346fbd686adc1d94bf03783b8d9da8ebd83fa9bd61e",
   "preserved_phase_states": [
     {
       "phase": "P16",
@@ -109,60 +113,73 @@
   },
   "missing_required_authorities": [],
   "validation": {
-    "dedicated_rev3_test": {
+    "dedicated_notebook_and_rev3": {
       "status": "PASS",
-      "passed": 13,
-      "failed": 0
+      "passed": 19,
+      "failed": 0,
+      "duration_seconds": 8.32,
+      "post_result_commit": true
     },
     "focused_p16_p21_regression": {
       "status": "PASS",
       "passed": 112,
-      "failed": 0
+      "failed": 0,
+      "evidence_stage": "PH-R00_INITIAL_RESULT_COMMIT"
     },
     "type_check": {
       "status": "PASS",
-      "scope": "arc3_agi_agent/rev3_governance.py"
+      "scope": "validation rework Python source",
+      "mode": "strict"
     },
     "lint": {
       "status": "PASS",
-      "scope": "rev3 governance source and dedicated test"
+      "scope": "validation rework Python source and tests"
     },
     "full_unit": {
-      "status": "FAIL",
-      "passed": 681,
-      "failed": 1,
-      "classification": "PRODUCT_REGRESSION",
-      "failed_test": "tests/unit/test_kaggle_notebook_contract.py::test_kaggle_notebook_matches_official_submission_shape",
-      "failure_code": "KAGGLE_RUNTIME_IMPORT_CLOSURE_INCOMPLETE:compiled_policy",
-      "change_origin": "PRE_EXISTING_BASE_TREE"
+      "status": "PASS",
+      "passed": 687,
+      "failed": 0,
+      "duration_seconds": 252.99,
+      "post_result_commit": true
     },
     "integration": {
       "status": "PASS",
       "passed": 8,
-      "failed": 0
+      "failed": 0,
+      "duration_seconds": 394.14,
+      "post_result_commit": true
     },
     "package": {
-      "status": "ENVIRONMENT_FAILURE",
-      "source_import_and_package_discovery": "PASS",
-      "wheel_build": "UNAVAILABLE",
-      "reason": "uv, pip, build, setuptools, and wheel are unavailable in the project environment"
+      "status": "PASS",
+      "build_tool": "uv 0.11.32",
+      "lock_check": "PASS",
+      "lock_resolved_package_count": 124,
+      "independent_wheel_build_count": 2,
+      "wheel_byte_identical": true,
+      "wheel_sha256": "020f80d9fa653d685d7f98418d9ae0a3e107fe94d71acb6f2a5c52fb47156740",
+      "wheel_size_bytes": 17022489,
+      "wheel_member_count": 240,
+      "source_hashes_unchanged": true
     },
     "notebook_regression": {
-      "status": "FAIL",
-      "classification": "PRODUCT_REGRESSION",
-      "failure_code": "KAGGLE_RUNTIME_IMPORT_CLOSURE_INCOMPLETE:compiled_policy",
-      "rev3_role": "HISTORICAL_QUARANTINE"
+      "status": "PASS",
+      "validator_checks_passed": 25,
+      "validator_checks_failed": 0,
+      "runtime_module_count": 37,
+      "quarantined_module_intersection": [],
+      "runtime_archive_sha256": "f81f2054bf2b273a118471253504a5339a059f58ba913531af90373613b4c629",
+      "runtime_import_smoke": "WIN:2:True:True",
+      "submission_api_call_count": 0
     },
     "determinism": {
       "status": "PASS",
       "independent_process_count": 3,
       "aggregate_scope": "work block frame, authority manifest, asset classification, and five HDS authority inputs",
-      "aggregate_digest": "983f6291769bae6cb68cd9b0e47a5b8a55c5942f489bf72a98dceb12e2f53106"
+      "aggregate_digest": "983f6291769bae6cb68cd9b0e47a5b8a55c5942f489bf72a98dceb12e2f53106",
+      "runtime_archive_deterministic": true,
+      "wheel_build_deterministic": true
     }
   },
-  "failed_requirement_ids": [
-    "R00-NOTEBOOK-REGRESSION-001",
-    "R00-PACKAGE-BUILD-ENVIRONMENT-001"
-  ],
-  "content_digest": "rev3-pre-distillation-baseline:22c810d62f7e1baa877bf7c99255b2aa3ab5dfafbb52a3a69d796ec3f5346df9"
+  "failed_requirement_ids": [],
+  "content_digest": "rev3-pre-distillation-baseline:dd81b5b1f4c3a1e4e7e132bace3c4d426b2c26d1d4267344ad40d4057710c9f3"
 }

@@ -1,16 +1,32 @@
 {
   "schema_version": "arc3-rev3-owner-review-changed-files-v1",
   "phase_id": "PH-R00",
-  "result_commit": "96ed8533b8f5d84800dcdfd694684d5c702a6753",
-  "result_tree": "c9815358eaca5a89a0a1cf6f5fd0297f0b69179f",
-  "implementation_changed_file_count": 21,
+  "result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
+  "result_tree": "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9",
+  "result_commits": [
+    {
+      "commit": "96ed8533b8f5d84800dcdfd694684d5c702a6753",
+      "purpose": "PH-R00 strategy rebaseline implementation"
+    },
+    {
+      "commit": "c7a53715b5a22d46010fd5468502f47cd9bdb7d4",
+      "purpose": "PH-R00 packaging validation correction"
+    },
+    {
+      "commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
+      "purpose": "external notebook path validation correction"
+    }
+  ],
+  "implementation_changed_file_count": 25,
   "implementation_changed_files": [
     ".gitignore",
     "AGENTS.md",
     "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "ARC-AGI-3-Agents/tests/unit/test_kaggle_notebook_contract.py",
     "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
     "analysis/rev3/pre_distillation_infrastructure_baseline.json",
     "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
+    "control/rev3/PH-R00_VALIDATION_REWORK_FRAME.json",
     "docs/architecture/AGI_CLAIM_REGISTRY.md",
     "docs/architecture/AGI三主体統合設計正本_v0_2.md",
     "docs/architecture/工学的AGI実装仕様書_v0_2.md",
@@ -25,15 +41,27 @@
     "docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md",
     "docs/strategy/PRODUCTION_IMPORT_BOUNDARY_REV3.md",
     "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json",
-    "docs/strategy/REV3_STRATEGY_REBASELINE.md"
+    "docs/strategy/REV3_STRATEGY_REBASELINE.md",
+    "scripts/build_kaggle_submission.py",
+    "scripts/validate_kaggle_submission.py"
+  ],
+  "validation_rework_changed_files": [
+    "scripts/build_kaggle_submission.py",
+    "scripts/validate_kaggle_submission.py",
+    "ARC-AGI-3-Agents/tests/unit/test_kaggle_notebook_contract.py",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "control/rev3/PH-R00_VALIDATION_REWORK_FRAME.json"
   ],
   "excluded_preexisting_dirty_state": {
     "tracked_p22_cv_generated_file_count": 32,
-    "partial_public_trace_path_count": 1,
     "mutation": "NONE",
     "staging": "NONE"
   },
-  "evidence_files_added_after_result_commit": [
+  "evidence_files_added_or_updated_after_result_commit": [
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "analysis/rev3/pre_distillation_infrastructure_baseline.json",
+    "analysis/rev3/ph_r00_validation_rework.json",
+    "docs/audit/ARC3_現行実装監査_2026-07-30.md",
     "control/rev3/R00_PHASE_STATE.json",
     "control/rev3/OWNER_REVIEW_PACKAGE/summary.md",
     "control/rev3/OWNER_REVIEW_PACKAGE/phase_state.json",

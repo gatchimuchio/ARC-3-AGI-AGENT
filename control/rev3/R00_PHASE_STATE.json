@@ -4,137 +4,143 @@
   "status": "OWNER_REVIEW_REQUIRED",
   "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
   "base_tree": "d63d26e25758211938cc33d0efe84f50ed096023",
-  "result_commit": "96ed8533b8f5d84800dcdfd694684d5c702a6753",
-  "result_tree": "c9815358eaca5a89a0a1cf6f5fd0297f0b69179f",
-  "work_block_id": "WB-PH-R00-STRATEGY-REBASELINE",
+  "result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
+  "result_tree": "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9",
+  "work_block_id": "WB-PH-R00-VALIDATION-CLOSURE-REWORK",
+  "work_block_history": [
+    {
+      "work_block_id": "WB-PH-R00-STRATEGY-REBASELINE",
+      "result_commit": "96ed8533b8f5d84800dcdfd694684d5c702a6753",
+      "result_tree": "c9815358eaca5a89a0a1cf6f5fd0297f0b69179f"
+    },
+    {
+      "work_block_id": "WB-PH-R00-VALIDATION-CLOSURE-REWORK",
+      "result_commits": [
+        "c7a53715b5a22d46010fd5468502f47cd9bdb7d4",
+        "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938"
+      ],
+      "result_tree": "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9"
+    }
+  ],
   "spec_digest": "sha256:feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f",
   "roadmap_digest": "sha256:b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2",
   "input_manifest_digest": "rev3-authority-input-manifest:b3388e4ce73c995cbdd7d8dc8209e1ffbff52f53b7847e4edfcced0e89fd37a4",
   "allowed_data_roles": [
     "REPOSITORY_METADATA",
-    "HISTORICAL_EVIDENCE_MANIFEST"
+    "HISTORICAL_EVIDENCE_MANIFEST",
+    "LOCAL_PACKAGE_SOURCE",
+    "LOCAL_BUILD_METADATA"
   ],
   "changed_files": [
-    ".gitignore",
-    "AGENTS.md",
-    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "scripts/build_kaggle_submission.py",
+    "scripts/validate_kaggle_submission.py",
+    "ARC-AGI-3-Agents/tests/unit/test_kaggle_notebook_contract.py",
     "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
-    "analysis/rev3/pre_distillation_infrastructure_baseline.json",
-    "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
-    "docs/architecture/AGI_CLAIM_REGISTRY.md",
-    "docs/architecture/AGI三主体統合設計正本_v0_2.md",
-    "docs/architecture/工学的AGI実装仕様書_v0_2.md",
-    "docs/audit/ARC3_現行実装監査_2026-07-30.md",
-    "docs/references/HDS_SelfContained_Prompt_v1_2_utf8bom.txt",
-    "docs/references/HDSフレーム_rev3_1_外向け仕様.md",
-    "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
-    "docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md",
-    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
-    "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
-    "docs/strategy/ASSET_CLASSIFICATION_REV3.json",
-    "docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md",
-    "docs/strategy/PRODUCTION_IMPORT_BOUNDARY_REV3.md",
-    "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json",
-    "docs/strategy/REV3_STRATEGY_REBASELINE.md"
+    "control/rev3/PH-R00_VALIDATION_REWORK_FRAME.json"
   ],
   "commands": [
     {
-      "id": "CMD-R00-001",
-      "purpose": "dedicated and focused post-commit regression",
-      "result": "PASS_112_OF_112"
+      "id": "CMD-R00-RW-001",
+      "purpose": "dedicated notebook-contract and rev3 regression",
+      "result": "PASS_19_OF_19"
     },
     {
-      "id": "CMD-R00-002",
-      "purpose": "ruff changed source and test",
+      "id": "CMD-R00-RW-002",
+      "purpose": "ruff validation rework source and tests",
       "result": "PASS"
     },
     {
-      "id": "CMD-R00-003",
-      "purpose": "mypy rev3 governance source",
+      "id": "CMD-R00-RW-003",
+      "purpose": "strict mypy packaging scripts",
       "result": "PASS"
     },
     {
-      "id": "CMD-R00-004",
-      "purpose": "compileall changed source and test",
+      "id": "CMD-R00-RW-004",
+      "purpose": "compileall validation rework source and tests",
       "result": "PASS"
     },
     {
-      "id": "CMD-R00-005",
-      "purpose": "full unit post-commit regression",
-      "result": "FAIL_681_PASS_1_PREEXISTING_PRODUCT_REGRESSION"
+      "id": "CMD-R00-RW-005",
+      "purpose": "full unit post-result-commit regression",
+      "result": "PASS_687_OF_687"
     },
     {
-      "id": "CMD-R00-006",
-      "purpose": "full integration post-commit regression",
+      "id": "CMD-R00-RW-006",
+      "purpose": "full integration post-result-commit regression",
       "result": "PASS_8_OF_8"
     },
     {
-      "id": "CMD-R00-007",
-      "purpose": "artifact determinism in three independent processes",
-      "result": "PASS"
+      "id": "CMD-R00-RW-007",
+      "purpose": "external-path notebook build, validation, and runtime smoke",
+      "result": "PASS_25_OF_25"
     },
     {
-      "id": "CMD-R00-008",
-      "purpose": "source import and package discovery",
-      "result": "PASS"
-    },
-    {
-      "id": "CMD-R00-009",
-      "purpose": "wheel build",
-      "result": "ENVIRONMENT_FAILURE"
+      "id": "CMD-R00-RW-008",
+      "purpose": "lock check and two deterministic wheel builds",
+      "result": "PASS_BYTE_IDENTICAL"
     }
   ],
   "tests": {
-    "dedicated_rev3": {
+    "dedicated_notebook_and_rev3": {
       "status": "PASS",
-      "passed": 13,
-      "failed": 0
-    },
-    "focused_p16_p21_and_rev3": {
-      "status": "PASS",
-      "passed": 112,
+      "passed": 19,
       "failed": 0,
-      "post_commit": true
+      "duration_seconds": 8.32,
+      "post_result_commit": true
     },
     "full_unit": {
-      "status": "FAIL",
-      "passed": 681,
-      "failed": 1,
-      "post_commit": true,
-      "classification": "PRODUCT_REGRESSION",
-      "failure_code": "KAGGLE_RUNTIME_IMPORT_CLOSURE_INCOMPLETE:compiled_policy",
-      "change_origin": "PRE_EXISTING_BASE_TREE"
+      "status": "PASS",
+      "passed": 687,
+      "failed": 0,
+      "duration_seconds": 252.99,
+      "post_result_commit": true
     },
     "integration": {
       "status": "PASS",
       "passed": 8,
       "failed": 0,
-      "post_commit": true
+      "duration_seconds": 394.14,
+      "post_result_commit": true
+    },
+    "notebook_contract": {
+      "status": "PASS",
+      "passed_checks": 25,
+      "failed_checks": 0,
+      "runtime_module_count": 37,
+      "runtime_import_smoke": "WIN:2:True:True",
+      "submission_api_call_count": 0
     },
     "lint": {
       "status": "PASS"
     },
     "type_check": {
-      "status": "PASS"
+      "status": "PASS",
+      "mode": "strict"
     },
     "compileall": {
       "status": "PASS"
     },
     "package_build": {
-      "status": "ENVIRONMENT_FAILURE",
-      "source_import_and_discovery": "PASS",
-      "wheel_build": "UNAVAILABLE"
+      "status": "PASS",
+      "lock_check": "PASS",
+      "independent_build_count": 2,
+      "byte_identical": true,
+      "wheel_sha256": "020f80d9fa653d685d7f98418d9ae0a3e107fe94d71acb6f2a5c52fb47156740"
     },
     "determinism": {
       "status": "PASS",
-      "independent_process_count": 3,
-      "aggregate_digest": "983f6291769bae6cb68cd9b0e47a5b8a55c5942f489bf72a98dceb12e2f53106"
+      "runtime_archive_sha256": "f81f2054bf2b273a118471253504a5339a059f58ba913531af90373613b4c629",
+      "wheel_sha256": "020f80d9fa653d685d7f98418d9ae0a3e107fe94d71acb6f2a5c52fb47156740"
     }
   },
   "artifacts": [
     {
       "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
       "digest": "rev3-work-block-frame:33db7d6a9d0dec9128860383ece3543d78638271184b97e35583484838ae74a8"
+    },
+    {
+      "path": "control/rev3/PH-R00_VALIDATION_REWORK_FRAME.json",
+      "digest": "rev3-work-block-frame:0afc5447fae19c385eb0c79d1117f741c45dc416a89bdabd2648002f2c698e55"
     },
     {
       "path": "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json",
@@ -146,30 +152,22 @@
     },
     {
       "path": "analysis/rev3/pre_distillation_infrastructure_baseline.json",
-      "digest": "rev3-pre-distillation-baseline:22c810d62f7e1baa877bf7c99255b2aa3ab5dfafbb52a3a69d796ec3f5346df9"
+      "digest": "rev3-pre-distillation-baseline:dd81b5b1f4c3a1e4e7e132bace3c4d426b2c26d1d4267344ad40d4057710c9f3"
+    },
+    {
+      "path": "analysis/rev3/ph_r00_validation_rework.json",
+      "digest": "rev3-r00-validation-rework:d819d7a9c5591b2ceb24f346fbd686adc1d94bf03783b8d9da8ebd83fa9bd61e"
     }
   ],
-  "failed_requirement_ids": [
+  "failed_requirement_ids": [],
+  "resolved_requirement_ids": [
     "R00-NOTEBOOK-REGRESSION-001",
     "R00-PACKAGE-BUILD-ENVIRONMENT-001"
   ],
-  "open_terms": [
-    {
-      "id": "OT-R00-001",
-      "term": "Historical notebook regression disposition",
-      "state": "OWNER_DECISION_REQUIRED",
-      "question": "Accept the pre-existing compiled-policy notebook failure as quarantined and non-blocking for PH-D00A, or authorize a separate remediation work block."
-    },
-    {
-      "id": "OT-R00-002",
-      "term": "Package build toolchain",
-      "state": "ENVIRONMENT_REMEDIATION_REQUIRED",
-      "question": "Restore a lock-consistent build tool before a wheel-build gate is required."
-    }
-  ],
+  "open_terms": [],
   "self_audit": {
     "decision": "OWNER_REVIEW_REQUIRED",
-    "codex_self_audit_pass": false,
+    "codex_self_audit_pass": true,
     "checks": {
       "objective_alignment": "PASS",
       "scope": "PASS",
@@ -180,21 +178,19 @@
       "data_role": "PASS",
       "claim_strength": "PASS",
       "rollback": "PASS",
-      "resource": "SUSPEND_PACKAGE_BUILD_ENVIRONMENT",
+      "resource": "PASS",
       "historical_fallback": "PASS",
-      "required_validation": "SUSPEND_DECLARED_FAILURES_PRESENT"
+      "required_validation": "PASS"
     },
-    "reason": "All PH-R00 changes are bound and the active rev3 boundary is fail-closed, but one pre-existing historical notebook regression and one package-build environment failure remain declared."
+    "reason": "The two declared validation failures have causal corrections and passing post-result-commit evidence; Owner approval and phase promotion remain reserved."
   },
   "owner_review_required": true,
   "owner_decisions_required": [
-    "Disposition R00-NOTEBOOK-REGRESSION-001",
-    "Disposition R00-PACKAGE-BUILD-ENVIRONMENT-001",
-    "Approve or reject PH-R00",
+    "Approve, rework, or reject PH-R00",
     "Authorize or deny phase promotion to PH-D00A"
   ],
   "phase_invariants": {
-    "current_head_bound": true,
+    "result_commit_bound": true,
     "active_runtime_capability_claim": "NOT_ESTABLISHED",
     "quarantined_s5_dependency_in_rev3_production": 0,
     "historical_fallback_count": 0,
@@ -205,5 +201,5 @@
     "official_access_count": 0,
     "network_submission_count": 0
   },
-  "content_digest": "rev3-r00-phase-state:8e2694a83f158723fa5f2db39c22f6685c6b69a0287113991bd9dc60bcf81928"
+  "content_digest": "rev3-r00-phase-state:5185c708572dcad9151170268f13562d791b487b3b6295d22ebac9818a799789"
 }
