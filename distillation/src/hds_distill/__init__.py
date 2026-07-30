@@ -1,6 +1,7 @@
-"""Isolated HDS source inventory and manifest-freeze package.
+"""Isolated HDS source, manifest, and canonical-representation package.
 
-PH-D01B exports no solver, agent, runtime, or submission capability.
+PH-D02A exports no schema-domain semantics, solver, agent, runtime, or
+submission capability.
 """
 
 from __future__ import annotations

@@ -21,3 +21,17 @@ between equivalent captures; it is excluded from the capture content digest.
 
 Local archive paths and timestamps remain acquisition-only metadata. External
 archives and raw payloads are not copied into the repository.
+
+`PH-D02A` adds `canonicalization_contract.json`. It is canonical JSON without
+a trailing newline and fixes:
+
+- Unicode, number, confidence, set, ordered-array, and explicitly unordered
+  array behavior;
+- repository-relative POSIX paths;
+- content-ID and logical/physical digest domains and exclusions;
+- ZIP, NPY, and NPZ physical representation;
+- raw/canonical trajectory digest separation;
+- the committed synthetic test-vector paths and x3 rebuild contract.
+
+The contract consumes only frozen manifest metadata and synthetic fixtures.
+It does not read a source payload or normalize a real trajectory.

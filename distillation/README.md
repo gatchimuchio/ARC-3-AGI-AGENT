@@ -26,19 +26,37 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
   non-mutation;
 - deterministic freeze and isolation reports.
 
+`PH-D02A` adds the common deterministic representation layer used by later
+distillation schemas:
+
+- strict canonical UTF-8 JSON with Unicode NFC and explicit unordered-array
+  pointers;
+- integer `confidence_ppm`, content-derived IDs, and explicit top-level
+  digest-exclusion categories;
+- domain-separated logical-content, physical-package, raw-trajectory, and
+  canonical-trajectory digests;
+- canonical `ZIP_STORED` bytes with fixed metadata and member order;
+- dependency-free canonical NPY v1 and NPZ encoding with fixed dtype,
+  little endian, C-order shape, member order, and non-finite rejection;
+- committed JSON/ZIP/NPZ test vectors and three-process reproducibility tests.
+
 The compiler hashes source bytes but does not semantically parse, import,
 execute, or replay them. The only network evidence is the already frozen,
 revision-checked, read-only Dataset Viewer capture. Manifest compilation itself
 does not access a network.
 
-This phase does not implement canonical serialization for all later schemas,
-trajectory normalization, Causal IR, candidate generation, a Bridge, an agent,
-a runtime, locked-final access, official access, or submission output.
+PH-D02A does not define the PH-D02B set of 38 Evidence/HDS/Approval schemas,
+normalize any real trajectory, implement Typed Causal IR, generate candidates,
+promote Rules, create a Bridge, agent, or runtime, access locked-final or
+official data, or create submission output. Historical runtime canonical
+helpers are not imported into the isolated distillation package.
 
 Use exactly Python 3.12.13. From the repository root:
 
 ```text
 PYTHONPATH=distillation/src python -m pytest distillation/tests
+PYTHONPATH=distillation/src python -m pytest \
+  distillation/tests/unit/test_canonical.py
 PYTHONPATH=distillation/src python -m ruff check \
   distillation/src distillation/tests
 PYTHONPATH=distillation/src python -m mypy --strict \

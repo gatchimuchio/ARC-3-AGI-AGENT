@@ -17,3 +17,9 @@ Every schema rejects unknown fields. Acquisition and run metadata are not
 members of `SourceContentManifest.content_digest`. No Causal IR, hypothesis,
 Rule, approval, Bridge, runtime, locked-final, official, or submission schema
 is introduced by this phase.
+
+`PH-D02A` intentionally adds no member of the later 38-schema inventory.
+Instead, `../input/canonicalization_contract.json` and
+`hds_distill.canonical` define the common byte, ID, digest, ZIP, NPY, NPZ, and
+trajectory-digest representation that PH-D02B schemas must use. The checked
+vectors are under `../artifacts/test_vectors/`.
