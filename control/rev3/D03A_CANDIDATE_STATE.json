@@ -1,0 +1,413 @@
+{
+  "schema_version": "arc3-rev3-candidate-state-v1",
+  "phase_id": "PH-D03A",
+  "status": "CODEX_IMPLEMENTATION_COMPLETE_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL",
+  "phase_pass": false,
+  "base_commit": "d7870fee0c71cc5048073b5789edd3894df193a6",
+  "base_tree": "8192207a73be7f62bd5fd82b85234d7619c1c5d7",
+  "frame_commit": "5dc291f5c4cae66d58dd35e56cdaecdf556038ba",
+  "frame_tree": "8af1c3ad1359a403b9bd872e877b4e23888fad97",
+  "result_commit": "bfbbe7d7c06f0ad076576de58cc18d5282d82e08",
+  "result_tree": "9e334300defe1bf1f985736065d97920d30623d4",
+  "work_block_id": "WB-PH-D03A-GOLDEN-CONFORMANCE-CANDIDATE-CORPUS",
+  "authority": {
+    "input_manifest_digest": "rev3-authority-input-manifest:aa310f982560074debd3a928b9705fd94d5393b452c0b54095c04b93d49cebd7",
+    "phase_transition_digest": "rev3-phase-transition:ca1c282e9c43f61cc41bd378862b3a0965096ab5e3e9877976dd82395dd93110",
+    "input_phase_state_digest": "rev3-d02c-phase-state:bd01666bf05b5e40a8fe896cc4078814d4ddbcbc63f47c7dd705d4ec5eeb66c8",
+    "preinventory_digest": "rev3-ph-d03a-golden-preinventory:102465e690258f967061b70d2023ec9645818c6e68558c01ca6c74a6b7245104",
+    "work_block_frame_digest": "rev3-work-block-frame:ce4de522b3e5d269d5f80b260e0b0bf24586f0965207149d2043742c2a7b9132",
+    "schema_contract_digest": "hds-schema-contract:d0b7e0ebbe826a5c3b0b16eb1d28844ee9daa496a430a747a83e0157b0c0bd29",
+    "causal_ir_contract_digest": "hds-causal-ir-contract:38b6892f94cab73fa123653a37c248f447257b00d638eeeb0bcfe2ee2e21f98b",
+    "owner_continuous_authorization_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+    "content_specific_golden_approval_digest": null
+  },
+  "changed_files": [
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "analysis/rev3/ph_d03a_golden_preinventory.json",
+    "control/rev3/PH-D03A_WORK_BLOCK_FRAME.json",
+    "distillation/README.md",
+    "distillation/artifacts/golden/candidate_cases.json",
+    "distillation/artifacts/golden/owner_review_request.json",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "distillation/artifacts/reports/golden_gate_coverage.json",
+    "distillation/input/README.md",
+    "distillation/input/golden_conformance_contract.json",
+    "distillation/src/hds_distill/golden_corpus.py",
+    "distillation/tests/unit/test_golden_corpus.py"
+  ],
+  "commands": [
+    {
+      "id": "CMD-D03A-001",
+      "purpose": "build and validate exactly sixteen synthetic Golden candidate cases and four checked artifacts",
+      "result": "PH_D03A_GOLDEN_CANDIDATE_IMPLEMENTATION_PASS"
+    },
+    {
+      "id": "CMD-D03A-002",
+      "purpose": "dedicated Golden candidate corpus, negative-boundary, artifact, and x3 determinism tests",
+      "result": "PASS_33_OF_33"
+    },
+    {
+      "id": "CMD-D03A-003",
+      "purpose": "full distillation regression through PH-D03A",
+      "result": "PASS_252_OF_252"
+    },
+    {
+      "id": "CMD-D03A-004",
+      "purpose": "rev3 governance regression with candidate-only authority assertions",
+      "result": "PASS_29_OF_29"
+    },
+    {
+      "id": "CMD-D03A-005",
+      "purpose": "full historical unit regression",
+      "result": "PASS_717_OF_717"
+    },
+    {
+      "id": "CMD-D03A-006",
+      "purpose": "full historical integration regression",
+      "result": "PASS_8_OF_8"
+    },
+    {
+      "id": "CMD-D03A-007",
+      "purpose": "three independent process deterministic candidate reconstruction",
+      "result": "PASS_3_OF_3"
+    },
+    {
+      "id": "CMD-D03A-008",
+      "purpose": "four checked artifact byte-identical reconstruction",
+      "result": "PASS_4_OF_4"
+    },
+    {
+      "id": "CMD-D03A-009",
+      "purpose": "finding-free checked live Scope Guard audit",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS"
+    },
+    {
+      "id": "CMD-D03A-010",
+      "purpose": "ruff lint across distillation source and tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D03A-011",
+      "purpose": "strict mypy across distillation source and tests",
+      "result": "PASS_20_FILES"
+    },
+    {
+      "id": "CMD-D03A-012",
+      "purpose": "compileall across distillation source and tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D03A-013",
+      "purpose": "protected PH-D02A, PH-D02B, and PH-D02C contract, schema, registry, and vector path preservation",
+      "result": "PASS_ZERO_PROTECTED_INPUT_MUTATIONS"
+    }
+  ],
+  "tests": {
+    "golden_candidate_contract_and_corpus": {
+      "status": "PASS_CANDIDATE_ONLY",
+      "contract_digest": "hds-golden-conformance-contract:7596ae83f79b793e3c125bd3719b884d7e1a5be880e616e948c048714c8b1cf0",
+      "candidate_set_digest": "hds-golden-candidate-set:e59d869a1244fa1735bd0e8b07d16d9b61f607c2976c6165ab47145f12b8a2c1",
+      "gate_coverage_digest": "hds-golden-gate-coverage:6e79e1111a1bb2ac17615be4aefc20ebac51a613f17d37c9d2458d45718a89d7",
+      "owner_review_request_digest": "hds-golden-owner-review-request:40b39be4d53bd9fe2209853dc595fda16452c7d9b943a32907a3a9bb85284cc6",
+      "arc2_case_count": 8,
+      "arc3_case_count": 8,
+      "total_case_count": 16,
+      "executable_pass_hypothesis_count": 34,
+      "expected_nonexecuting_hypothesis_count": 1,
+      "expected_resource_suspension_hypothesis_count": 1,
+      "gate_coverage_count": 16,
+      "gate_pass_result_count": 15,
+      "gate_suspend_result_count": 1,
+      "gate_fail_result_count": 0,
+      "content_specific_owner_approval_count": 0,
+      "golden_frozen_case_count": 0,
+      "sealed_case_count": 0
+    },
+    "dedicated_golden_candidate": {
+      "status": "PASS",
+      "passed": 33,
+      "failed": 0,
+      "duration_seconds": 76.76,
+      "includes_independent_process_rebuild": true
+    },
+    "distillation_full": {
+      "status": "PASS",
+      "passed": 252,
+      "failed": 0,
+      "duration_seconds": 323.05
+    },
+    "rev3_governance": {
+      "status": "PASS",
+      "passed": 29,
+      "failed": 0,
+      "duration_seconds": 64.85
+    },
+    "full_unit": {
+      "status": "PASS",
+      "passed": 717,
+      "failed": 0,
+      "duration_seconds": 545.1
+    },
+    "integration": {
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 421.6
+    },
+    "lint": {
+      "status": "PASS",
+      "tool": "ruff",
+      "version": "0.12.7"
+    },
+    "type_check": {
+      "status": "PASS",
+      "mode": "strict",
+      "tool": "mypy",
+      "version": "1.17.1",
+      "checked_source_file_count": 20
+    },
+    "compileall": {
+      "status": "PASS"
+    },
+    "scope_guard": {
+      "status": "PASS",
+      "finding_count": 0,
+      "audited_source_execution_count": 0,
+      "report_digest": "hds-distillation-scope-audit:3d7146b2812fad78195149e76e9e2019b423cd9da0339c11e27b9fef5a888a02"
+    },
+    "artifact_rebuild": {
+      "status": "PASS",
+      "artifact_count": 4,
+      "byte_identical": true
+    },
+    "independent_process_rebuild": {
+      "status": "PASS",
+      "process_count": 3,
+      "byte_identical": true
+    },
+    "protected_prior_phase_inputs": {
+      "status": "PASS",
+      "mutation_count": 0,
+      "scope": "PH_D02A_D02B_D02C_CONTRACT_SCHEMA_REGISTRY_VECTOR_PATHS"
+    },
+    "environment_lock": {
+      "status": "PASS",
+      "python": "3.12.13",
+      "ruff": "0.12.7",
+      "mypy": "1.17.1",
+      "pytest": "8.4.1"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "analysis/rev3/ph_d03a_golden_preinventory.json",
+      "sha256": "f5ea0dc257a939efed1a033915d13fda088cca7e97aa5124beae48e7e456002f",
+      "digest": "rev3-ph-d03a-golden-preinventory:102465e690258f967061b70d2023ec9645818c6e68558c01ca6c74a6b7245104"
+    },
+    {
+      "path": "control/rev3/PH-D03A_WORK_BLOCK_FRAME.json",
+      "sha256": "44b6bff70c09e670465f98430b47801a4a49106f44e45cc78e072ea2aebdaa1d",
+      "digest": "rev3-work-block-frame:ce4de522b3e5d269d5f80b260e0b0bf24586f0965207149d2043742c2a7b9132"
+    },
+    {
+      "path": "distillation/input/golden_conformance_contract.json",
+      "sha256": "fd285d63a4263004824af6c676c7f7e52e599f1e692ac373ca4ee18cf11b6d27",
+      "digest": "hds-golden-conformance-contract:7596ae83f79b793e3c125bd3719b884d7e1a5be880e616e948c048714c8b1cf0"
+    },
+    {
+      "path": "distillation/artifacts/golden/candidate_cases.json",
+      "sha256": "c8262b3a537256e422de28c46e49c7ffb052a0cf8728a31f1a8f27d632161038",
+      "digest": "hds-golden-candidate-set:e59d869a1244fa1735bd0e8b07d16d9b61f607c2976c6165ab47145f12b8a2c1"
+    },
+    {
+      "path": "distillation/artifacts/reports/golden_gate_coverage.json",
+      "sha256": "6d5c45d7632f003000852cb1639178e82357c07bcf0ffccedbe16bfb694b3748",
+      "digest": "hds-golden-gate-coverage:6e79e1111a1bb2ac17615be4aefc20ebac51a613f17d37c9d2458d45718a89d7"
+    },
+    {
+      "path": "distillation/artifacts/golden/owner_review_request.json",
+      "sha256": "763e61d09f27992616a223dcee84fe67f4b671a9581a5fcb19571312a2ae5780",
+      "digest": "hds-golden-owner-review-request:40b39be4d53bd9fe2209853dc595fda16452c7d9b943a32907a3a9bb85284cc6"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "sha256": "ac02a4a8fdc6921bb05ae3eef9f2b7090bfade21ee3754dbdaa8fdcc89107949",
+      "digest": "hds-distillation-scope-audit:3d7146b2812fad78195149e76e9e2019b423cd9da0339c11e27b9fef5a888a02"
+    },
+    {
+      "path": "distillation/src/hds_distill/golden_corpus.py",
+      "sha256": "5b794877df5e29dd70fd17dcb18cec3df42a01e9c1122122edcf56bc5edd0ff8"
+    },
+    {
+      "path": "distillation/tests/unit/test_golden_corpus.py",
+      "sha256": "15571c2eb6d7199c7ccd643c79806767f56bd2387c10a801a11f7a6351e05820"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "sha256": "64b08ad496f520724df5ea8f65750d06940918cb5ea6d36047d6d8e0ac27a6f7"
+    }
+  ],
+  "failed_implementation_requirement_ids": [],
+  "phase_gate_pending_ids": [
+    "D03A_CONTENT_SPECIFIC_OWNER_APPROVAL_REQUIRED",
+    "D03A_GOLDEN_EXPECTATION_FREEZE_NOT_STARTED"
+  ],
+  "open_terms": [
+    {
+      "open_term_id": "D03A-OT-CONTENT-SPECIFIC-OWNER-APPROVAL",
+      "status": "OPEN",
+      "blocking_for_phase_pass": true,
+      "blocking_for_candidate_implementation": false,
+      "required_authority": "OWNER",
+      "target_count": 16,
+      "review_request_digest": "hds-golden-owner-review-request:40b39be4d53bd9fe2209853dc595fda16452c7d9b943a32907a3a9bb85284cc6",
+      "required_resolution": "Provide trusted OWNER_RECORDED APPROVE, REJECT, or SUSPEND records whose targets exactly match the sixteen provisional expected-artifact digests. Codex must not generate these records."
+    }
+  ],
+  "self_audit": {
+    "decision": "CODEX_CANDIDATE_IMPLEMENTATION_AUDIT_PASS",
+    "codex_implementation_audit_pass": true,
+    "phase_pass": false,
+    "checks": {
+      "objective_alignment": "PASS",
+      "scope": "PASS",
+      "authority": "PASS",
+      "exact_category_inventory": "PASS",
+      "required_artifact_inventory": "PASS",
+      "multiple_hypothesis_ir": "PASS",
+      "typed_ir_execution": "PASS",
+      "exact_fit_recomputation": "PASS",
+      "counter_hypothesis_retention": "PASS",
+      "pre_result_intervention_freeze": "PASS",
+      "synthetic_intervention_boundary": "PASS",
+      "failure_signature": "PASS",
+      "dg_00_through_dg_15_coverage": "PASS",
+      "resource_suspension": "PASS",
+      "identity_and_answer_copy_boundary": "PASS",
+      "causal_claim_boundary": "PASS",
+      "owner_approval_nonfabrication": "PASS",
+      "golden_freeze_nonentry": "PASS",
+      "sealed_corpus_nonentry": "PASS",
+      "determinism": "PASS",
+      "prior_phase_input_preservation": "PASS",
+      "dependency_and_source_nonaccess": "PASS",
+      "rollback": "PASS",
+      "historical_fallback": "PASS",
+      "required_validation": "PASS",
+      "downstream_phase_boundary": "PASS"
+    },
+    "reason": "PH-D03A candidate implementation constructs exactly sixteen deterministic synthetic conformance cases and covers DG-00 through DG-15 while retaining all provisional expectations, models, decisions, and approval templates in non-authoritative held or suspended states. Dedicated, full distillation, rev3 governance, historical unit, integration, static, Scope Guard, protected-input, artifact-rebuild, and three-process determinism evidence passes. A trusted content-specific Owner decision is absent, so PH-D03A PASS, Golden freeze, and PH-D03B entry are not claimed."
+  },
+  "owner_review_required": true,
+  "owner_review_mode": "CONTENT_SPECIFIC_HARD_GATE",
+  "owner_decision_present": false,
+  "owner_approval_generated_count": 0,
+  "owner_decisions_required": [
+    {
+      "decision_id": "D03A-OWNER-GOLDEN-EXPECTATION-REVIEW",
+      "target_count": 16,
+      "allowed_decisions": [
+        "APPROVE",
+        "REJECT",
+        "SUSPEND"
+      ],
+      "trusted_external_digest_required": true,
+      "codex_may_generate": false
+    }
+  ],
+  "phase_invariants": {
+    "current_head_bound_to_result_commit_before_evidence": true,
+    "result_commit_bound": true,
+    "golden_candidate_construction_started": true,
+    "arc2_case_count": 8,
+    "arc3_case_count": 8,
+    "total_case_count": 16,
+    "required_artifact_class_count": 11,
+    "minimum_hypothesis_count_per_case": 2,
+    "total_hypothesis_count": 36,
+    "executable_pass_hypothesis_count": 34,
+    "expected_nonexecuting_hypothesis_count": 1,
+    "expected_resource_suspension_hypothesis_count": 1,
+    "exact_fit_local_count": 34,
+    "exact_fit_nonexecuting_count": 1,
+    "exact_fit_resource_inconclusive_count": 1,
+    "pre_result_frozen_intervention_plan_count": 16,
+    "synthetic_intervention_result_count": 16,
+    "real_intervention_execution_count": 0,
+    "hds_causal_record_count": 16,
+    "failure_signature_count": 16,
+    "gate_result_count": 16,
+    "covered_gate_count": 16,
+    "missing_gate_count": 0,
+    "gate_pass_result_count": 15,
+    "gate_suspend_result_count": 1,
+    "gate_fail_result_count": 0,
+    "approval_schema_template_count": 16,
+    "authoritative_approval_count": 0,
+    "content_specific_owner_approval_count": 0,
+    "owner_approval_generated_count": 0,
+    "provisional_expected_artifact_count": 16,
+    "golden_frozen_case_count": 0,
+    "golden_expected_artifact_freeze_started": false,
+    "approved_expectation_auto_update_count": 0,
+    "sealed_corpus_started": false,
+    "source_payload_read_count": 0,
+    "source_payload_semantic_parse_count": 0,
+    "source_execution_count": 0,
+    "teacher_trajectory_read_count": 0,
+    "teacher_replay_execution_count": 0,
+    "real_trajectory_normalization_count": 0,
+    "general_candidate_generation_count": 0,
+    "causal_mechanism_assertion_count": 0,
+    "rule_promotion_count": 0,
+    "bridge_implementation_file_count": 0,
+    "runtime_implementation_file_count": 0,
+    "llm_call_count": 0,
+    "external_network_call_count": 0,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "network_submission_count": 0,
+    "kaggle_mutation_count": 0,
+    "independent_process_rebuild_count": 3,
+    "deterministic_artifact_count": 4,
+    "deterministic_artifacts_byte_identical": true,
+    "scope_guard_finding_count": 0,
+    "audited_source_execution_count": 0,
+    "protected_prior_phase_input_mutation_count": 0,
+    "preexisting_dirty_file_count": 32,
+    "preexisting_dirty_aggregate_sha256": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "next_phase": "PH-D03B",
+    "next_phase_started": false,
+    "routine_phase_pause_waived": true,
+    "hard_gate_approval_delegated": false
+  },
+  "claim_allowed": [
+    "PH_D03A_SYNTHETIC_GOLDEN_CANDIDATE_IMPLEMENTATION_PASS",
+    "PH_D03A_DG_00_THROUGH_DG_15_BEHAVIOR_COVERED",
+    "PH_D03A_OWNER_REVIEW_REQUEST_READY",
+    "PH_D03A_CODEX_CANDIDATE_IMPLEMENTATION_AUDIT_PASS"
+  ],
+  "claim_prohibited": [
+    "PH_D03A_PASS",
+    "GOLDEN_CONFORMANCE_CORPUS_FROZEN",
+    "CONTENT_SPECIFIC_OWNER_APPROVED",
+    "SEALED_AUDIT_CORPUS_AVAILABLE",
+    "TRAJECTORY_NORMALIZATION_COMPLETE",
+    "REAL_COUNTERFACTUAL_SUPPORTED",
+    "CAUSAL_MECHANISM_ESTABLISHED",
+    "GENERALITY_PROVEN",
+    "RULE_PROMOTED",
+    "HDS_DISTILLATION_PIPELINE_COMPLETE",
+    "HDS_CORPUS_PROCESSED",
+    "HDS_STRUCTURE_BUNDLE_FROZEN",
+    "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED",
+    "DISTILLED_RUNTIME_STRUCTURAL_READY",
+    "GENERIC",
+    "AGI",
+    "OFFICIAL_READY"
+  ],
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-d03a-candidate-state:1da229969f24ebe3078a6a134602a92603c2298d312c7c1ef279d3ae13baaeeb"
+}

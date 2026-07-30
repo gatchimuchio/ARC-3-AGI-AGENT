@@ -577,6 +577,172 @@ def test_ph_d03a_checked_candidates_remain_non_authoritative() -> None:
     assert review["automatic_expectation_update_allowed"] is False
 
 
+def test_ph_d03a_candidate_state_binds_result_without_phase_pass() -> None:
+    state = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "D03A_CANDIDATE_STATE.json"
+    )
+    body = dict(state)
+    for excluded in state["digest_excluded_fields"]:
+        body.pop(str(excluded))
+
+    assert state["content_digest"] == (
+        "rev3-d03a-candidate-state:" + digest_object(body)
+    )
+    assert state["content_digest"] == (
+        "rev3-d03a-candidate-state:"
+        "1da229969f24ebe3078a6a134602a92603c2298d312c7c1ef279d3ae13baaeeb"
+    )
+    assert state["phase_id"] == "PH-D03A"
+    assert state["status"] == (
+        "CODEX_IMPLEMENTATION_COMPLETE_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL"
+    )
+    assert state["phase_pass"] is False
+    assert state["result_commit"] == (
+        "bfbbe7d7c06f0ad076576de58cc18d5282d82e08"
+    )
+    assert state["result_tree"] == (
+        "9e334300defe1bf1f985736065d97920d30623d4"
+    )
+    assert state["failed_implementation_requirement_ids"] == []
+    assert state["phase_gate_pending_ids"] == [
+        "D03A_CONTENT_SPECIFIC_OWNER_APPROVAL_REQUIRED",
+        "D03A_GOLDEN_EXPECTATION_FREEZE_NOT_STARTED",
+    ]
+    assert state["owner_review_required"] is True
+    assert state["owner_review_mode"] == "CONTENT_SPECIFIC_HARD_GATE"
+    assert state["owner_decision_present"] is False
+    assert state["owner_approval_generated_count"] == 0
+    assert len(state["owner_decisions_required"]) == 1
+    assert state["self_audit"]["decision"] == (
+        "CODEX_CANDIDATE_IMPLEMENTATION_AUDIT_PASS"
+    )
+    assert state["self_audit"]["codex_implementation_audit_pass"] is True
+    assert state["self_audit"]["phase_pass"] is False
+
+    invariants = state["phase_invariants"]
+    assert invariants["arc2_case_count"] == 8
+    assert invariants["arc3_case_count"] == 8
+    assert invariants["total_case_count"] == 16
+    assert invariants["total_hypothesis_count"] == 36
+    assert invariants["covered_gate_count"] == 16
+    assert invariants["missing_gate_count"] == 0
+    assert invariants["approval_schema_template_count"] == 16
+    assert invariants["authoritative_approval_count"] == 0
+    assert invariants["content_specific_owner_approval_count"] == 0
+    assert invariants["golden_frozen_case_count"] == 0
+    assert invariants["golden_expected_artifact_freeze_started"] is False
+    assert invariants["sealed_corpus_started"] is False
+    assert invariants["source_payload_read_count"] == 0
+    assert invariants["teacher_trajectory_read_count"] == 0
+    assert invariants["real_intervention_execution_count"] == 0
+    assert invariants["general_candidate_generation_count"] == 0
+    assert invariants["causal_mechanism_assertion_count"] == 0
+    assert invariants["rule_promotion_count"] == 0
+    assert invariants["locked_final_access_count"] == 0
+    assert invariants["official_access_count"] == 0
+    assert invariants["network_submission_count"] == 0
+    assert invariants["kaggle_mutation_count"] == 0
+    assert invariants["next_phase"] == "PH-D03B"
+    assert invariants["next_phase_started"] is False
+    assert invariants["hard_gate_approval_delegated"] is False
+
+    assert state["tests"]["dedicated_golden_candidate"]["passed"] == 33
+    assert state["tests"]["distillation_full"]["passed"] == 252
+    assert state["tests"]["rev3_governance"]["passed"] == 29
+    assert state["tests"]["full_unit"]["passed"] == 717
+    assert state["tests"]["integration"]["passed"] == 8
+    assert state["tests"]["artifact_rebuild"]["artifact_count"] == 4
+    assert state["tests"]["independent_process_rebuild"][
+        "process_count"
+    ] == 3
+    assert "PH_D03A_PASS" in state["claim_prohibited"]
+    assert "GOLDEN_CONFORMANCE_CORPUS_FROZEN" in (
+        state["claim_prohibited"]
+    )
+
+    result_commit = str(state["result_commit"])
+    for artifact in state["artifacts"]:
+        assert _git_blob_sha256(
+            result_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+
+def test_ph_d03a_owner_review_package_is_complete_and_claim_limited(
+) -> None:
+    package_root = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D03A_OWNER_REVIEW_PACKAGE"
+    )
+    required = {
+        "candidate_state_ref.json",
+        "changed_files.json",
+        "commands.json",
+        "failed_requirements.json",
+        "open_terms.json",
+        "proposed_next_action.md",
+        "self_audit.json",
+        "summary.md",
+        "test_results.json",
+    }
+    assert required <= {
+        path.name for path in package_root.iterdir() if path.is_file()
+    }
+
+    state_ref = _json(package_root / "candidate_state_ref.json")
+    failed = _json(package_root / "failed_requirements.json")
+    open_terms = _json(package_root / "open_terms.json")
+    self_audit = _json(package_root / "self_audit.json")
+    tests = _json(package_root / "test_results.json")
+    changed = _json(package_root / "changed_files.json")
+
+    assert state_ref["state_digest"] == (
+        "rev3-d03a-candidate-state:"
+        "1da229969f24ebe3078a6a134602a92603c2298d312c7c1ef279d3ae13baaeeb"
+    )
+    assert state_ref["phase_pass"] is False
+    assert failed["failed_implementation_requirement_count"] == 0
+    assert failed["failed_implementation_requirements"] == []
+    assert failed["phase_gate_pending_count"] == 2
+    assert failed["phase_pass"] is False
+    assert open_terms["required_authority_missing_count"] == 1
+    assert len(open_terms["open_terms"]) == 1
+    assert open_terms["open_terms"][0]["required_authority"] == "OWNER"
+    assert open_terms["open_terms"][0]["target_count"] == 16
+    assert open_terms["owner_decisions"][0]["status"] == "PENDING"
+    assert open_terms["owner_decisions"][0]["codex_may_generate"] is False
+    assert self_audit["decision"] == (
+        "CODEX_CANDIDATE_IMPLEMENTATION_AUDIT_PASS"
+    )
+    assert self_audit["codex_implementation_audit_pass"] is True
+    assert self_audit["phase_pass"] is False
+    assert tests["new_product_regression_count"] == 0
+    assert tests["active_product_regression_count"] == 0
+    assert tests["active_environment_failure_count"] == 0
+    assert tests["active_external_service_failure_count"] == 0
+    assert tests["active_tool_failure_count"] == 0
+    assert tests["phase_gate_pending_count"] == 2
+    assert changed["changed_file_count"] == 12
+    assert changed["changed_files"] == sorted(changed["changed_files"])
+    assert changed["excluded_preexisting_dirty_state"]["mutation"] == "NONE"
+    assert changed["excluded_preexisting_dirty_state"]["staging"] == "NONE"
+
+    summary = (package_root / "summary.md").read_text(encoding="utf-8")
+    next_action = (package_root / "proposed_next_action.md").read_text(
+        encoding="utf-8"
+    )
+    assert "Phase PASS: **false**" in summary
+    assert "trusted content-specific Owner approvals: 0" in summary
+    assert "Codex cannot generate those" in summary
+    assert "do not construct" in next_action
+    assert "Sealed Audit Corpus" in next_action
+
+
 def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
     state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "D01B_PHASE_STATE.json"

@@ -1,0 +1,72 @@
+{
+  "schema_version": "arc3-rev3-owner-review-commands-v1",
+  "phase_id": "PH-D03A",
+  "result_commit": "bfbbe7d7c06f0ad076576de58cc18d5282d82e08",
+  "commands": [
+    {
+      "id": "CMD-D03A-001",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest distillation/tests/unit/test_golden_corpus.py -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/arc3-d03a-golden-postmypy",
+      "result": "PASS_33_OF_33",
+      "duration_seconds": 76.76
+    },
+    {
+      "id": "CMD-D03A-002",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest distillation/tests -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/arc3-d03a-distillation-full",
+      "result": "PASS_252_OF_252",
+      "duration_seconds": 323.05
+    },
+    {
+      "id": "CMD-D03A-003",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/arc3-d03a-governance-implementation",
+      "result": "PASS_29_OF_29",
+      "duration_seconds": 64.85
+    },
+    {
+      "id": "CMD-D03A-004",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest ARC-AGI-3-Agents/tests/unit -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/arc3-d03a-full-unit",
+      "result": "PASS_717_OF_717",
+      "duration_seconds": 545.1
+    },
+    {
+      "id": "CMD-D03A-005",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest ARC-AGI-3-Agents/tests/integration -q --basetemp=C:/Users/mzcum/AppData/Local/Temp/arc3-d03a-full-integration",
+      "result": "PASS_8_OF_8",
+      "duration_seconds": 421.6
+    },
+    {
+      "id": "CMD-D03A-006",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m ruff check distillation/src distillation/tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D03A-007",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m mypy --strict distillation/src distillation/tests",
+      "result": "PASS_20_FILES"
+    },
+    {
+      "id": "CMD-D03A-008",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m compileall -q distillation/src distillation/tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D03A-009",
+      "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe distillation/src/hds_distill/scope_guard.py --project-root distillation --repository-root . --verify-report distillation/artifacts/reports/distillation_scope_audit.json",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS:hds-distillation-scope-audit:3d7146b2812fad78195149e76e9e2019b423cd9da0339c11e27b9fef5a888a02"
+    },
+    {
+      "id": "CMD-D03A-010",
+      "command": "build_phase_d03a_candidate_artifacts(Path('.')) and compare all checked bytes",
+      "result": "PASS_4_OF_4"
+    },
+    {
+      "id": "CMD-D03A-011",
+      "command": "three independent Python 3.12.13 processes with distinct cwd and PYTHONHASHSEED",
+      "result": "PASS_3_OF_3_BYTE_IDENTICAL"
+    },
+    {
+      "id": "CMD-D03A-012",
+      "command": "git diff --name-only fbb36321a7ece68e2692e0c3a81c323b431e87c9..bfbbe7d -- protected PH-D02A/B/C paths",
+      "result": "PASS_ZERO_PROTECTED_INPUT_MUTATIONS"
+    }
+  ]
+}
