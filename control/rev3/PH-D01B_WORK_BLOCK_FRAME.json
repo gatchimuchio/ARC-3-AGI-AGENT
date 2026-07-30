@@ -135,7 +135,8 @@
     "archive_member_content_hash_max_count": 57,
     "repository_source_content_hash_count": 53,
     "remote_recording_content_hash_count": 25,
-    "huggingface_dataset_viewer_read_call_max_count": 32,
+    "huggingface_dataset_viewer_read_call_max_count": 64,
+    "huggingface_dataset_viewer_transient_retry_max_count": 32,
     "source_payload_semantic_parse_count": 0,
     "arc_environment_source_execution_count": 0,
     "teacher_replay_execution_count": 0,
@@ -206,5 +207,5 @@
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-work-block-frame:e7e1e494e7f0fc5c101fdf1392c3bf17fa36a482c619beeccb7ea369c9e3f536"
+  "content_digest": "rev3-work-block-frame:dce706a5bb8b19a66fbe3259525ae2aa7a93b5c207dce54097247bad3eb92b9f"
 }
