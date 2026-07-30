@@ -1,0 +1,159 @@
+{
+  "schema_version": "arc3-rev3-validator-hardening-state-v1",
+  "phase_id": "PH-D03A",
+  "addendum_id": "PH-D03A-CANDIDATE-VALIDATOR-HARDENING-V1",
+  "status": "CODEX_VALIDATOR_HARDENING_PASS_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL",
+  "phase_pass": false,
+  "base_candidate_state_digest": "rev3-d03a-candidate-state:1da229969f24ebe3078a6a134602a92603c2298d312c7c1ef279d3ae13baaeeb",
+  "base_result_commit": "bfbbe7d7c06f0ad076576de58cc18d5282d82e08",
+  "hardening_result_commit": "0bbb3d26284dacb8803ffdea77178091b443f1fd",
+  "hardening_result_tree": "0d9fc4c0b9d7761845f6381a1b3a93783062ad9b",
+  "objective": "Reject semantically modified PH-D03A candidate, coverage, and Owner-review artifacts even when an attacker recomputes valid self-digests.",
+  "discovered_defect_count": 4,
+  "discovered_defects": [
+    {
+      "defect_id": "D03A-VH-001",
+      "pre_fix_behavior": "A forbidden task_id inserted outside HypothesisIR or a rebound case category could pass validation after digest rebinding.",
+      "repair": "Recursively inspect the complete candidate artifact and bind every case inventory field to CASE_SPECS.",
+      "stable_rejection": "D03A_PRIVILEGED_ROUTING_FORBIDDEN_OR_D03A_CASE_INVENTORY_MISMATCH"
+    },
+    {
+      "defect_id": "D03A-VH-002",
+      "pre_fix_behavior": "Rebound exact-fit fields or intervention-result content could pass partial reference checks.",
+      "repair": "Rebuild deterministic expected case content and compare exact-fit, intervention plan, intervention result, and complete case bytes semantically.",
+      "stable_rejection": "D03A_EXACT_FIT_MISMATCH_OR_D03A_INTERVENTION_RESULT_MISMATCH"
+    },
+    {
+      "defect_id": "D03A-VH-003",
+      "pre_fix_behavior": "Rebound gate coverage summary values or entry targets could pass incomplete summary checks.",
+      "repair": "Rebuild the complete coverage report from the candidate set and require exact semantic equality.",
+      "stable_rejection": "D03A_GATE_COVERAGE_INCOMPLETE"
+    },
+    {
+      "defect_id": "D03A-VH-004",
+      "pre_fix_behavior": "A rebound provisional expectation digest in an Owner-review target could pass top-level reference checks.",
+      "repair": "Rebuild the complete Owner-review request from candidate and coverage artifacts and require exact semantic equality.",
+      "stable_rejection": "D03A_REFERENCE_INVALID"
+    }
+  ],
+  "red_test": {
+    "status": "EXPECTED_FAILURE_REPRODUCED",
+    "selected_test_count": 4,
+    "failed_as_expected_count": 4,
+    "failure_mode": "DID_NOT_RAISE_BEFORE_FIX",
+    "command": "ARC-AGI-3-Agents/.venv/Scripts/python.exe -m pytest distillation/tests/unit/test_golden_corpus.py -q -k \"rebound_case_metadata or recomputes_exact_fit or rebound_summary or rebound_target\""
+  },
+  "validation": {
+    "selected_green": {
+      "passed": 4,
+      "failed": 0,
+      "duration_seconds": 19.29
+    },
+    "dedicated_golden_candidate": {
+      "passed": 37,
+      "failed": 0,
+      "duration_seconds": 99.78
+    },
+    "distillation_full": {
+      "passed": 256,
+      "failed": 0,
+      "duration_seconds": 324.76
+    },
+    "historical_unit_full": {
+      "passed": 720,
+      "failed": 0,
+      "duration_seconds": 423.9
+    },
+    "rev3_governance": {
+      "passed": 32,
+      "failed": 0,
+      "duration_seconds": 60.12
+    },
+    "scope_guard": {
+      "status": "PASS",
+      "finding_count": 0,
+      "audited_source_execution_count": 0,
+      "content_digest": "hds-distillation-scope-audit:c1901f1eb450577d0ef7d28289b5bde311d5da0ce9c75834f74e50a751c2929d"
+    },
+    "ruff": "PASS",
+    "strict_mypy_checked_file_count": 20,
+    "strict_mypy": "PASS"
+  },
+  "checked_golden_artifacts": {
+    "mutation_count": 0,
+    "artifacts": [
+      {
+        "path": "distillation/artifacts/golden/candidate_cases.json",
+        "sha256": "c8262b3a537256e422de28c46e49c7ffb052a0cf8728a31f1a8f27d632161038",
+        "content_digest": "hds-golden-candidate-set:e59d869a1244fa1735bd0e8b07d16d9b61f607c2976c6165ab47145f12b8a2c1"
+      },
+      {
+        "path": "distillation/artifacts/golden/owner_review_request.json",
+        "sha256": "763e61d09f27992616a223dcee84fe67f4b671a9581a5fcb19571312a2ae5780",
+        "content_digest": "hds-golden-owner-review-request:40b39be4d53bd9fe2209853dc595fda16452c7d9b943a32907a3a9bb85284cc6"
+      },
+      {
+        "path": "distillation/artifacts/reports/golden_gate_coverage.json",
+        "sha256": "6d5c45d7632f003000852cb1639178e82357c07bcf0ffccedbe16bfb694b3748",
+        "content_digest": "hds-golden-gate-coverage:6e79e1111a1bb2ac17615be4aefc20ebac51a613f17d37c9d2458d45718a89d7"
+      },
+      {
+        "path": "distillation/input/golden_conformance_contract.json",
+        "sha256": "fd285d63a4263004824af6c676c7f7e52e599f1e692ac373ca4ee18cf11b6d27",
+        "content_digest": "hds-golden-conformance-contract:7596ae83f79b793e3c125bd3719b884d7e1a5be880e616e948c048714c8b1cf0"
+      }
+    ]
+  },
+  "result_artifacts": [
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "sha256": "3eb0a3805a76a104b4102aa8132c9cd56a0b790d8d038d2b0c21f77f384da8a5",
+      "content_digest": "hds-distillation-scope-audit:c1901f1eb450577d0ef7d28289b5bde311d5da0ce9c75834f74e50a751c2929d"
+    },
+    {
+      "path": "distillation/src/hds_distill/golden_corpus.py",
+      "sha256": "f48b63fbb8b13996f3f6e63c3e79863da9ebf0c4e3c0aff1efdda526d9d6abc4"
+    },
+    {
+      "path": "distillation/tests/unit/test_golden_corpus.py",
+      "sha256": "4f23081617cb1ab221b3a95462ea5ccbfb230ce5d5b46636659c89fd9067c20b"
+    }
+  ],
+  "failure_accounting": {
+    "active_product_regression_count": 0,
+    "active_environment_failure_count": 0,
+    "active_tool_failure_count": 0,
+    "resolved_expected_red_test_failure_count": 4,
+    "resolved_checked_report_mismatch_count": 2
+  },
+  "authority_boundary": {
+    "content_specific_owner_decision_present": false,
+    "content_specific_owner_approval_count": 0,
+    "golden_freeze_started": false,
+    "sealed_corpus_started": false,
+    "next_phase_started": false,
+    "owner_record_generation_count": 0,
+    "hard_gate_approval_delegated": false
+  },
+  "claim_allowed": [
+    "PH_D03A_CANDIDATE_VALIDATOR_HARDENING_PASS",
+    "REBOUND_SEMANTIC_MUTATION_REJECTED"
+  ],
+  "claim_prohibited": [
+    "PH_D03A_PASS",
+    "CONTENT_SPECIFIC_OWNER_APPROVED",
+    "GOLDEN_CONFORMANCE_CORPUS_FROZEN",
+    "SEALED_AUDIT_CORPUS_READY",
+    "PH_D03B_STARTED"
+  ],
+  "preexisting_dirty_state": {
+    "file_count": 32,
+    "aggregate_sha256": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "mutation": "NONE",
+    "staging": "NONE"
+  },
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-d03a-validator-hardening-state:1fb641f0a1d4bf4b40b4008229020b8497d439ef3c35ed49d0b0e44095df3799"
+}

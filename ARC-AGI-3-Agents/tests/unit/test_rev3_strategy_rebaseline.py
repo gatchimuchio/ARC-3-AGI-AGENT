@@ -802,6 +802,79 @@ def test_ph_d03a_artifact_manifest_binds_candidate_snapshot_bytes(
         ) == artifact["sha256"]
 
 
+def test_ph_d03a_validator_hardening_addendum_is_bound_and_gate_safe(
+) -> None:
+    package_root = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D03A_OWNER_REVIEW_PACKAGE"
+    )
+    state = _json(package_root / "validator_hardening_state.json")
+    body = dict(state)
+    for excluded in state["digest_excluded_fields"]:
+        body.pop(excluded)
+
+    assert state["content_digest"] == (
+        "rev3-d03a-validator-hardening-state:" + digest_object(body)
+    )
+    assert state["content_digest"] == (
+        "rev3-d03a-validator-hardening-state:"
+        "1fb641f0a1d4bf4b40b4008229020b8497d439ef3c35ed49d0b0e44095df3799"
+    )
+    assert state["status"] == (
+        "CODEX_VALIDATOR_HARDENING_PASS_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL"
+    )
+    assert state["phase_pass"] is False
+    assert state["hardening_result_commit"] == (
+        "0bbb3d26284dacb8803ffdea77178091b443f1fd"
+    )
+    assert state["hardening_result_tree"] == (
+        "0d9fc4c0b9d7761845f6381a1b3a93783062ad9b"
+    )
+    assert state["discovered_defect_count"] == 4
+    assert len(state["discovered_defects"]) == 4
+    assert state["red_test"]["failed_as_expected_count"] == 4
+    assert state["validation"]["selected_green"]["passed"] == 4
+    assert state["validation"]["dedicated_golden_candidate"]["passed"] == 37
+    assert state["validation"]["distillation_full"]["passed"] == 256
+    assert state["validation"]["historical_unit_full"]["passed"] == 720
+    assert state["validation"]["rev3_governance"]["passed"] == 32
+    assert state["validation"]["scope_guard"]["finding_count"] == 0
+    assert state["checked_golden_artifacts"]["mutation_count"] == 0
+    assert state["failure_accounting"]["active_product_regression_count"] == 0
+
+    boundary = state["authority_boundary"]
+    assert boundary["content_specific_owner_decision_present"] is False
+    assert boundary["content_specific_owner_approval_count"] == 0
+    assert boundary["golden_freeze_started"] is False
+    assert boundary["sealed_corpus_started"] is False
+    assert boundary["next_phase_started"] is False
+    assert boundary["owner_record_generation_count"] == 0
+    assert boundary["hard_gate_approval_delegated"] is False
+    assert "PH_D03A_PASS" in state["claim_prohibited"]
+    assert "PH_D03B_STARTED" in state["claim_prohibited"]
+
+    result_commit = str(state["hardening_result_commit"])
+    for artifact in state["result_artifacts"]:
+        assert _git_blob_sha256(
+            result_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+    for artifact in state["checked_golden_artifacts"]["artifacts"]:
+        assert _git_blob_sha256(
+            result_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+    summary = (
+        package_root / "validator_hardening_summary.md"
+    ).read_text(encoding="utf-8")
+    assert "Phase PASS: **false**" in summary
+    assert "No Owner decision was created" in summary
+    assert "gate remains open" in summary
+
+
 def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
     state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "D01B_PHASE_STATE.json"
