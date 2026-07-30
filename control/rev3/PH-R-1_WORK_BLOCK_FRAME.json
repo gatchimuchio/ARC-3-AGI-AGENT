@@ -40,13 +40,14 @@
     "docs/strategy/contracts/OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json",
     "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
     "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
     "scripts/package_rev3_strategy.py",
     "scripts/validate_rev3_governance.py"
   ],
   "approved_package_sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
   "base_commit": "d5d7b93769089f9de14f752e3678acea7b2198b3",
   "base_tree": "3d4ac0acb130b90d0da284a0507a876dcc284d46",
-  "content_digest": "rev3-work-block-frame:ff07a9198402e267712f1f5510032f07941bbfd7555e8caa8279c8491ed06aac",
+  "content_digest": "rev3-work-block-frame:1f67eacd5ac07ead631722a0d661ab70fd031e0267f5f64b49eed743106646d0",
   "digest_excluded_fields": [
     "content_digest"
   ],
@@ -59,7 +60,7 @@
     "agent/**",
     "kaggle/**"
   ],
-  "frame_revision": 3,
+  "frame_revision": 4,
   "non_goals": [
     "PH-R00 implementation or authorization",
     "HDS distillation",
@@ -101,7 +102,7 @@
   "spec_sha256": "d51334e4709271c4ff3d9b46c6a4d625a25c55a7ee983a25bd6c827992ef3524",
   "status": "FRAME_LOCKED",
   "stop_condition": "OWNER_REVIEW_REQUIRED_WITH_PH_R00_NOT_STARTED",
-  "supersedes_content_digest": "rev3-work-block-frame:28c7e8d651312397981dac0e5199c4dbfd58058d84c22fd940d6fceb1b4bad63",
+  "supersedes_content_digest": "rev3-work-block-frame:ff07a9198402e267712f1f5510032f07941bbfd7555e8caa8279c8491ed06aac",
   "test_contract": [
     "dedicated PH-R-1 governance tests",
     "focused rev3 regression",
