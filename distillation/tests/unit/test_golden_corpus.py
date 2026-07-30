@@ -474,6 +474,174 @@ def test_candidate_validator_rejects_case_freeze_and_privileged_route() -> None:
         )
 
 
+def test_candidate_validator_rejects_rebound_case_metadata_and_privilege(
+) -> None:
+    privileged = _candidate_set()
+    privileged_case = cast(list[JsonObject], privileged["cases"])[0]
+    privileged_case["task_id"] = "forbidden-case-route"
+    _rebind_digest_only(privileged_case, "hds-golden-candidate-case")
+    _rebind_id_artifact(
+        privileged,
+        namespace="hds-golden-candidate-set",
+        id_field="corpus_id",
+    )
+    with pytest.raises(
+        GoldenCorpusError,
+        match="^D03A_PRIVILEGED_ROUTING_FORBIDDEN",
+    ):
+        validate_golden_candidate_set(
+            REPOSITORY_ROOT,
+            _contract(),
+            privileged,
+        )
+
+    wrong_category = _candidate_set()
+    wrong_category_case = cast(
+        list[JsonObject],
+        wrong_category["cases"],
+    )[0]
+    wrong_category_case["category"] = "REBOUND_WRONG_CATEGORY"
+    _rebind_digest_only(
+        wrong_category_case,
+        "hds-golden-candidate-case",
+    )
+    _rebind_id_artifact(
+        wrong_category,
+        namespace="hds-golden-candidate-set",
+        id_field="corpus_id",
+    )
+    with pytest.raises(
+        GoldenCorpusError,
+        match="^D03A_CASE_INVENTORY_MISMATCH",
+    ):
+        validate_golden_candidate_set(
+            REPOSITORY_ROOT,
+            _contract(),
+            wrong_category,
+        )
+
+
+def test_candidate_validator_recomputes_exact_fit_and_intervention_result(
+) -> None:
+    wrong_fit = _candidate_set()
+    wrong_fit_case = cast(list[JsonObject], wrong_fit["cases"])[0]
+    exact = cast(list[JsonObject], wrong_fit_case["exact_fit_results"])[0]
+    exact["fit_status"] = "NOT_EXECUTABLE"
+    _rebind_digest_only(exact, "hds-golden-exact-fit-result")
+    _rebind_digest_only(wrong_fit_case, "hds-golden-candidate-case")
+    _rebind_id_artifact(
+        wrong_fit,
+        namespace="hds-golden-candidate-set",
+        id_field="corpus_id",
+    )
+    with pytest.raises(
+        GoldenCorpusError,
+        match="^D03A_EXACT_FIT_MISMATCH",
+    ):
+        validate_golden_candidate_set(
+            REPOSITORY_ROOT,
+            _contract(),
+            wrong_fit,
+        )
+
+    wrong_intervention = _candidate_set()
+    wrong_intervention_case = cast(
+        list[JsonObject],
+        wrong_intervention["cases"],
+    )[0]
+    intervention_result = cast(
+        JsonObject,
+        wrong_intervention_case["intervention_result"],
+    )
+    intervention_result["reason_codes"] = ["REBOUND_FALSE_RESULT"]
+    _rebind_id_artifact(
+        intervention_result,
+        namespace="hds-intervention-result",
+        id_field="intervention_result_id",
+    )
+    _rebind_digest_only(
+        wrong_intervention_case,
+        "hds-golden-candidate-case",
+    )
+    _rebind_id_artifact(
+        wrong_intervention,
+        namespace="hds-golden-candidate-set",
+        id_field="corpus_id",
+    )
+    with pytest.raises(
+        GoldenCorpusError,
+        match="^D03A_INTERVENTION_RESULT_MISMATCH",
+    ):
+        validate_golden_candidate_set(
+            REPOSITORY_ROOT,
+            _contract(),
+            wrong_intervention,
+        )
+
+
+def test_coverage_validator_rejects_rebound_summary_and_entry_mutation() -> None:
+    candidate_set = _candidate_set()
+    wrong_summary = _artifact(
+        "distillation/artifacts/reports/golden_gate_coverage.json"
+    )
+    wrong_summary["pass_result_count"] = 14
+    _rebind_id_artifact(
+        wrong_summary,
+        namespace="hds-golden-gate-coverage",
+        id_field="report_id",
+    )
+    with pytest.raises(
+        GoldenCorpusError,
+        match="^D03A_GATE_COVERAGE_INCOMPLETE",
+    ):
+        validate_golden_gate_coverage(candidate_set, wrong_summary)
+
+    wrong_entry = _artifact(
+        "distillation/artifacts/reports/golden_gate_coverage.json"
+    )
+    entries = cast(list[JsonObject], wrong_entry["gate_entries"])
+    entries[0]["fixture_id"] = "rebound.false.fixture"
+    _rebind_id_artifact(
+        wrong_entry,
+        namespace="hds-golden-gate-coverage",
+        id_field="report_id",
+    )
+    with pytest.raises(
+        GoldenCorpusError,
+        match="^D03A_GATE_COVERAGE_INCOMPLETE",
+    ):
+        validate_golden_gate_coverage(candidate_set, wrong_entry)
+
+
+def test_owner_review_validator_rejects_rebound_target_mutation() -> None:
+    candidate_set = _candidate_set()
+    coverage = _artifact(
+        "distillation/artifacts/reports/golden_gate_coverage.json"
+    )
+    request = _artifact(
+        "distillation/artifacts/golden/owner_review_request.json"
+    )
+    targets = cast(list[JsonObject], request["targets"])
+    targets[0]["provisional_expected_artifact_digest"] = (
+        "hds-golden-provisional-expected-artifact:"
+        + "0" * 64
+    )
+    _rebind_id_artifact(
+        request,
+        namespace="hds-golden-owner-review-request",
+        id_field="review_request_id",
+    )
+    with pytest.raises(
+        GoldenCorpusError,
+        match="^D03A_REFERENCE_INVALID",
+    ):
+        validate_golden_owner_review_request(
+            candidate_set,
+            coverage,
+            request,
+        )
+
+
 def test_coverage_and_review_validators_reject_authority_mutations() -> None:
     candidate_set = _candidate_set()
     coverage = _artifact("distillation/artifacts/reports/golden_gate_coverage.json")

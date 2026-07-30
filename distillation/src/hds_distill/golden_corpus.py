@@ -1365,12 +1365,25 @@ def _validate_case(
     resource_profile: Mapping[str, JsonValue],
 ) -> JsonObject:
     fixture_id = cast(str, spec["fixture_id"])
+    expected_case = _build_case(spec, resource_profile)
     if case.get("fixture_id") != fixture_id:
+        _fail("D03A_CASE_INVENTORY_MISMATCH", fixture_id)
+    if (
+        case.get("domain") != spec["domain"]
+        or case.get("category") != spec["category"]
+        or case.get("operator_focus") != list(cast(tuple[str, ...], spec["operators"]))
+        or case.get("primary_gate_id") != spec["primary_gate_id"]
+    ):
         _fail("D03A_CASE_INVENTORY_MISMATCH", fixture_id)
     if case.get("candidate_state") != "PROPOSED_PENDING_OWNER_APPROVAL":
         _fail("D03A_OWNER_APPROVAL_FABRICATION", fixture_id)
     if case.get("artifact_inventory") != list(REQUIRED_ARTIFACT_CLASSES):
         _fail("D03A_CASE_ARTIFACT_MISSING", fixture_id)
+    if (
+        case.get("resource_profile_ref")
+        != resource_profile.get("resource_profile_id")
+    ):
+        _fail("D03A_REFERENCE_INVALID", fixture_id + "/resource_profile")
     _verify_digest_only(case, "hds-golden-candidate-case")
     raw = _validate_record(
         registry,
@@ -1484,6 +1497,10 @@ def _validate_case(
     exact_results = case.get("exact_fit_results")
     if not isinstance(exact_results, list) or len(exact_results) != len(descriptors):
         _fail("D03A_EXACT_FIT_MISMATCH", fixture_id)
+    expected_exact_results = cast(
+        list[Mapping[str, JsonValue]],
+        expected_case["exact_fit_results"],
+    )
     for index, exact in enumerate(exact_results):
         exact_object = _json_object(
             exact,
@@ -1498,6 +1515,8 @@ def _validate_case(
             _fail("D03A_EXACT_FIT_MISMATCH", fixture_id)
         if exact_object.get("causal_establishment") is not False:
             _fail("D03A_CAUSAL_OVERCLAIM", fixture_id)
+        if exact_object != expected_exact_results[index]:
+            _fail("D03A_EXACT_FIT_MISMATCH", fixture_id)
     plan = _validate_record(
         registry,
         "CounterfactualInterventionPlan",
@@ -1515,6 +1534,10 @@ def _validate_case(
         "InterventionResult",
         case.get("intervention_result"),
     )
+    if plan != expected_case["counterfactual_intervention_plan"]:
+        _fail("D03A_INTERVENTION_PLAN_NOT_PRE_RESULT", fixture_id)
+    if intervention_result != expected_case["intervention_result"]:
+        _fail("D03A_INTERVENTION_RESULT_MISMATCH", fixture_id)
     gate = _validate_record(
         registry,
         "GateResult",
@@ -1645,6 +1668,8 @@ def _validate_case(
         or boundaries.get("rule_promotion_count") != 0
     ):
         _fail("D03A_GOLDEN_FREEZE_FORBIDDEN", fixture_id)
+    if dict(case) != expected_case:
+        _fail("D03A_CASE_INVENTORY_MISMATCH", fixture_id + "/content")
     return copy.deepcopy(dict(case))
 
 
@@ -1666,6 +1691,7 @@ def validate_golden_candidate_set(
         policy=policy,
     ):
         _fail("D03A_CONTENT_DIGEST_MISMATCH", "candidate_set")
+    _walk_privileged(artifact)
     if (
         artifact.get("candidate_state") != "PROPOSED_PENDING_OWNER_APPROVAL"
         or artifact.get("content_specific_owner_approval_count") != 0
@@ -1708,6 +1734,8 @@ def validate_golden_candidate_set(
         _fail("D03A_CASE_COUNT_MISMATCH", "ARC2")
     if sum(case["domain"] == "ARC3" for case in validated) != 8:
         _fail("D03A_CASE_COUNT_MISMATCH", "ARC3")
+    if dict(artifact) != build_golden_candidate_set():
+        _fail("D03A_CASE_INVENTORY_MISMATCH", "candidate_set/content")
     return tuple(validated)
 
 
@@ -1837,6 +1865,7 @@ def validate_golden_gate_coverage(
         policy=policy,
     ):
         _fail("D03A_CONTENT_DIGEST_MISMATCH", "gate_coverage")
+    _walk_privileged(report)
     entries = report.get("gate_entries")
     if not isinstance(entries, list):
         _fail("D03A_GATE_COVERAGE_INCOMPLETE")
@@ -1862,6 +1891,8 @@ def validate_golden_gate_coverage(
         != "SUSPEND_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL"
     ):
         _fail("D03A_OWNER_APPROVAL_FABRICATION", "DG-14")
+    if dict(report) != build_golden_gate_coverage_report(candidate_set):
+        _fail("D03A_GATE_COVERAGE_INCOMPLETE", "content")
 
 
 def validate_golden_owner_review_request(
@@ -1876,6 +1907,7 @@ def validate_golden_owner_review_request(
         policy=policy,
     ):
         _fail("D03A_CONTENT_DIGEST_MISMATCH", "owner_review_request")
+    _walk_privileged(request)
     if (
         request.get("candidate_set_digest") != candidate_set.get("content_digest")
         or request.get("gate_coverage_report_digest")
@@ -1898,6 +1930,11 @@ def validate_golden_owner_review_request(
         or response_contract.get("trusted_external_digest_required") is not True
     ):
         _fail("D03A_OWNER_APPROVAL_FABRICATION", "response_contract")
+    if dict(request) != build_golden_owner_review_request(
+        candidate_set,
+        coverage_report,
+    ):
+        _fail("D03A_REFERENCE_INVALID", "owner_review_request/content")
 
 
 def build_phase_d03a_candidate_artifacts(
