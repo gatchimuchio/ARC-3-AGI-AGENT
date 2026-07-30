@@ -1,0 +1,249 @@
+{
+  "schema_version": "arc3-rev3-phase-state-v1",
+  "phase_id": "PH-D00A",
+  "status": "CODEX_SELF_AUDIT_PASS",
+  "base_commit": "0e1424fc715fb5901d3a368cd232b8e54036a210",
+  "base_tree": "b1fcb0e64e3d874c37220abb2f8225b56882e9b9",
+  "result_commit": "4b9e64a6e396386024142df79b71cf8d0214563d",
+  "result_tree": "5bf880f21c0833479dd6167caf29bd502ad8e0da",
+  "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-FREEZE",
+  "work_block_history": [
+    {
+      "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-FREEZE",
+      "frame_commit": "219ce1edcba91786ca0183f906c15df970d1df71",
+      "result_commit": "4b9e64a6e396386024142df79b71cf8d0214563d",
+      "result_tree": "5bf880f21c0833479dd6167caf29bd502ad8e0da"
+    }
+  ],
+  "spec_digest": "sha256:feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f",
+  "roadmap_digest": "sha256:b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2",
+  "input_manifest_digest": "rev3-authority-input-manifest:99de70efcf739800e9c20a5aa064d4b6e98fda655ff94ce37c2fd7118ece2db3",
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "HDS_AUTHORITY_SOURCE",
+    "UPSTREAM_REFERENCE_METADATA",
+    "OWNER_APPROVAL_EVIDENCE"
+  ],
+  "changed_files": [
+    "AUTHORITY_ORDER.md",
+    "DEPENDENCY_LOCK.md",
+    "scripts/audit_hds_dependencies.py",
+    "schemas/dependency_lock.schema.json",
+    "schemas/open_term_record.schema.json",
+    "artifacts/source_content_manifests/hds_dependencies.json",
+    "artifacts/reports/dependency_audit.json",
+    "artifacts/reports/open_term_ledger.json",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+    "control/rev3/PH-D00A_WORK_BLOCK_FRAME.json",
+    "analysis/rev3/ph_d00a_dependency_inventory.json"
+  ],
+  "commands": [
+    {
+      "id": "CMD-D00A-001",
+      "purpose": "dedicated PH-D00A dependency audit tests",
+      "result": "PASS_14_OF_14"
+    },
+    {
+      "id": "CMD-D00A-002",
+      "purpose": "focused PH-D00A and rev3 governance regression",
+      "result": "PASS_27_OF_27"
+    },
+    {
+      "id": "CMD-D00A-003",
+      "purpose": "ruff audit source and tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D00A-004",
+      "purpose": "strict mypy dependency auditor",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D00A-005",
+      "purpose": "compileall audit source and tests",
+      "result": "PASS"
+    },
+    {
+      "id": "CMD-D00A-006",
+      "purpose": "full unit post-result-commit regression",
+      "result": "PASS_701_OF_701"
+    },
+    {
+      "id": "CMD-D00A-007",
+      "purpose": "full integration post-result-commit regression",
+      "result": "PASS_8_OF_8"
+    },
+    {
+      "id": "CMD-D00A-008",
+      "purpose": "Linux exact Translator Git-object and checked-report audit",
+      "result": "DEPENDENCY_LOCK_PASS"
+    },
+    {
+      "id": "CMD-D00A-009",
+      "purpose": "Windows offline checked-report audit",
+      "result": "DEPENDENCY_LOCK_PASS"
+    },
+    {
+      "id": "CMD-D00A-010",
+      "purpose": "three independent canonical report rebuilds",
+      "result": "PASS_BYTE_IDENTICAL"
+    }
+  ],
+  "tests": {
+    "dedicated": {
+      "status": "PASS",
+      "passed": 14,
+      "failed": 0,
+      "duration_seconds": 0.81,
+      "post_result_commit": true
+    },
+    "focused_rev3": {
+      "status": "PASS",
+      "passed": 27,
+      "failed": 0,
+      "duration_seconds": 1.43,
+      "post_result_commit": true
+    },
+    "full_unit": {
+      "status": "PASS",
+      "passed": 701,
+      "failed": 0,
+      "duration_seconds": 289.42,
+      "post_result_commit": true
+    },
+    "integration": {
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 328.02,
+      "post_result_commit": true
+    },
+    "lint": {
+      "status": "PASS",
+      "tool": "ruff"
+    },
+    "type_check": {
+      "status": "PASS",
+      "mode": "strict",
+      "tool": "mypy"
+    },
+    "compileall": {
+      "status": "PASS"
+    },
+    "translator_git_object_audit": {
+      "status": "PASS",
+      "commit": "b501cc77c94048421af8efdb2e866c22b06f7208",
+      "tree": "de5e9e5907efd2d32d22c41d1ef9215867ce9ce5",
+      "readme_git_blob": "7f6f9f4b1e2a25a07e25688b5cde24a96bfd2335"
+    },
+    "determinism": {
+      "status": "PASS",
+      "independent_rebuild_count": 3,
+      "byte_identical": true,
+      "report_sha256": "66bb7fde6967f7ea2e9d112c4969731fb309df0c39957cff82dbdf06a0f30631"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "control/rev3/PH-D00A_WORK_BLOCK_FRAME.json",
+      "digest": "rev3-work-block-frame:799654b7a010355ed206b2c5ab2de034f31ebf363fe9fdc6a3f017e1e4641506"
+    },
+    {
+      "path": "analysis/rev3/ph_d00a_dependency_inventory.json",
+      "digest": "rev3-ph-d00a-dependency-inventory:cd7c9d6d7fefdb3f564e0d6ddda29433bd36bfd3735d8cf397745971eb1aa360"
+    },
+    {
+      "path": "artifacts/source_content_manifests/hds_dependencies.json",
+      "digest": "hds-dependency-lock:df90909100a5d3e8b7b89a7224d1c65f4100bfde3824d9eb98066e0ebf87f695"
+    },
+    {
+      "path": "artifacts/reports/dependency_audit.json",
+      "digest": "hds-dependency-audit-report:dfc1fb138f1bc6c4830ef63987bfe1810c6d08fa0390d634077add0f5a64e9a1"
+    },
+    {
+      "path": "artifacts/reports/open_term_ledger.json",
+      "digest": "hds-open-term-ledger:92774b752cd68c17588c2d443707d6327f28df7e0d4a4960447299e1fe54e291"
+    },
+    {
+      "path": "AUTHORITY_ORDER.md",
+      "sha256": "dfe6fb43564c2aa1ee1cb83cb00861397a466f57a853cbc20a90981719d9e03c"
+    },
+    {
+      "path": "DEPENDENCY_LOCK.md",
+      "sha256": "c5031718aa43273c89793fb4e509044e0c2076839a6820c19f2d603dc2d8d40f"
+    },
+    {
+      "path": "schemas/dependency_lock.schema.json",
+      "sha256": "628631f515481afea107593c0064cf1c8b9c13c16a1da0bcc36e155f2f347af4"
+    },
+    {
+      "path": "schemas/open_term_record.schema.json",
+      "sha256": "681e882cc354abdaeffb7a69caa2c0d2e8a97f06e26be95130fef9cd347aa4e2"
+    },
+    {
+      "path": "scripts/audit_hds_dependencies.py",
+      "sha256": "2d1ce8e0ad7ed0a7ad964b71319ef92f253fa96ed58320b7dabac7eb6abbb3a6"
+    }
+  ],
+  "failed_requirement_ids": [],
+  "open_terms": [],
+  "self_audit": {
+    "decision": "CODEX_SELF_AUDIT_PASS",
+    "codex_self_audit_pass": true,
+    "checks": {
+      "objective_alignment": "PASS",
+      "scope": "PASS",
+      "authority": "PASS",
+      "identity_and_taint": "PASS",
+      "evidence": "PASS",
+      "determinism": "PASS",
+      "data_role": "PASS",
+      "claim_strength": "PASS",
+      "rollback": "PASS",
+      "resource": "PASS",
+      "historical_fallback": "PASS",
+      "required_validation": "PASS"
+    },
+    "reason": "All PH-D00A deliverables and DoD fields are content-bound and pass post-result-commit validation. No ARC corpus, runtime, locked-final, official, or Kaggle path was accessed."
+  },
+  "owner_review_required": false,
+  "owner_review_mode": "CONTINUOUS_AUTHORIZATION_NO_ROUTINE_PAUSE",
+  "owner_decisions_required": [],
+  "owner_authorization": {
+    "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+    "digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+    "hard_gate_approval_delegated": false
+  },
+  "phase_invariants": {
+    "current_head_bound": true,
+    "result_commit_bound": true,
+    "uncommitted_phase_evidence_count": 0,
+    "hds_dependency_match": true,
+    "authority_defined": true,
+    "unresolved_dependency_count": 0,
+    "active_runtime_capability_claim": "NOT_ESTABLISHED",
+    "arc_corpus_access_count": 0,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "network_submission_count": 0,
+    "kaggle_mutation_count": 0,
+    "next_phase": "PH-D00B",
+    "next_phase_started": false,
+    "routine_phase_pause_waived": true
+  },
+  "claim_allowed": [
+    "DEPENDENCY_LOCK_PASS",
+    "PH_D00A_CODEX_SELF_AUDIT_PASS"
+  ],
+  "claim_prohibited": [
+    "HDS_DISTILLATION_PIPELINE_COMPLETE",
+    "HDS_CORPUS_PROCESSED",
+    "HDS_STRUCTURE_BUNDLE_FROZEN",
+    "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED",
+    "DISTILLED_RUNTIME_STRUCTURAL_READY",
+    "GENERIC",
+    "AGI",
+    "OFFICIAL_READY"
+  ],
+  "content_digest": "rev3-d00a-phase-state:bb17828cd495884a3e947f5897c4c3dec7f29fdde836889f2199be2c01449369"
+}
