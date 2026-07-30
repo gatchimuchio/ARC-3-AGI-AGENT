@@ -687,3 +687,46 @@ def test_d01a_source_inventory_and_phase_state_are_content_bound() -> None:
     assert "ARC3_TEACHER_SOURCE_FROZEN" in phase_state[
         "claim_prohibited"
     ]
+    assert phase_state_path.read_bytes() == (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D01A_OWNER_REVIEW_PACKAGE"
+        / "phase_state.json"
+    ).read_bytes()
+
+    artifact_manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D01A_OWNER_REVIEW_PACKAGE"
+        / "artifact_manifest.json"
+    )
+    artifact_manifest_body = dict(artifact_manifest)
+    artifact_manifest_digest = str(
+        artifact_manifest_body.pop("content_digest")
+    )
+    assert artifact_manifest_digest == (
+        "rev3-d01a-owner-review-artifact-manifest:"
+        + digest_object(artifact_manifest_body)
+    )
+    assert artifact_manifest_digest == (
+        "rev3-d01a-owner-review-artifact-manifest:"
+        "078fc8e6273bc4ab86888f3b51d5db4f48be71e7d1f787f4607706fded305ebe"
+    )
+    assert artifact_manifest["snapshot_commit"] == (
+        "50b8259fce783fc2cc28158756a020575eb5e25d"
+    )
+    assert artifact_manifest["snapshot_tree"] == (
+        "caa5aed687475bd188b32863c61a0afcc66c3d34"
+    )
+    assert artifact_manifest["artifact_count"] == 30
+    assert artifact_manifest["manifest_excludes_self"] is True
+    assert all(
+        _git_blob_sha256(
+            str(artifact_manifest["snapshot_commit"]),
+            str(item["path"]),
+        )
+        == item["sha256"]
+        for item in artifact_manifest["artifacts"]
+    )

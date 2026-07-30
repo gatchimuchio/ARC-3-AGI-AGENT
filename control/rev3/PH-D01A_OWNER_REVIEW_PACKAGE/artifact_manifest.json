@@ -1,0 +1,139 @@
+{
+  "schema_version": "arc3-rev3-owner-review-artifact-manifest-v1",
+  "manifest_id": "PH-D01A-OWNER-REVIEW-ARTIFACTS-V1",
+  "phase_id": "PH-D01A",
+  "result_commit": "e71cdd45b7263c2ec77a8b6008140e2db774d286",
+  "result_tree": "b811529a0aae10c3464282fabda9679113121dbd",
+  "snapshot_commit": "50b8259fce783fc2cc28158756a020575eb5e25d",
+  "snapshot_tree": "caa5aed687475bd188b32863c61a0afcc66c3d34",
+  "snapshot_semantics": "VERIFY_EACH_ARTIFACT_WITH_GIT_SHOW_SNAPSHOT_COMMIT_PATH",
+  "hash_algorithm": "sha256",
+  "manifest_excludes_self": true,
+  "artifact_count": 30,
+  "artifacts": [
+    {
+      "path": "control/rev3/D01A_PHASE_STATE.json",
+      "sha256": "8609eda37c52fae021c04177c31b48ea08b365182fba1c27de8c742eee739d39"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/summary.md",
+      "sha256": "98b140e1888d7d580cc14813dc1e0137a10da6cb4d3a0629ce42872e2e0a77e3"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/phase_state.json",
+      "sha256": "8609eda37c52fae021c04177c31b48ea08b365182fba1c27de8c742eee739d39"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/changed_files.json",
+      "sha256": "b92c4122e4ea9fa26e71066300058a4da3fa828b8660cc341342870538f0c578"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/commands.json",
+      "sha256": "c93be7c48ec8a869f8b2c39742b46a867382371e3e68e2d36dc29df8455c262f"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/test_results.json",
+      "sha256": "12be7bafd4306ec8c07725ced05b0af1730f38fdef06e9a091b1e75ad2ee7dc9"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/failed_requirements.json",
+      "sha256": "1ed319d1e09d04da539b646e588defb8444057be1bd7cfd6907f61233990990f"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/open_terms.json",
+      "sha256": "c6eb7bab6e94f2e2132e93ca926e7bf0e2fe8cc338b8b420af8348a261db93af"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/self_audit.json",
+      "sha256": "424a641e7485083e380b4800058bf3fa92fa8d0397e29af2c08c72c5a17ae96e"
+    },
+    {
+      "path": "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+      "sha256": "8f21133f635350c3c283a7b09b35d238293c10a16124b6a5ecb278c1987f71a2"
+    },
+    {
+      "path": "control/rev3/PH-D01A_WORK_BLOCK_FRAME.json",
+      "sha256": "f646c84b96840514a0270bec23be6ae4c805590e44adf67887d0224eeb0790b3"
+    },
+    {
+      "path": "analysis/rev3/ph_d01a_source_preinventory.json",
+      "sha256": "df8326fdf1825061fd2c88ca544b5e4e26cce53ea240807f9e3f2815a84ae030"
+    },
+    {
+      "path": "distillation/README.md",
+      "sha256": "a39074a34b7e52886699c20849c7c1bb5f6bb5cd07c4ed7c39217e242be4b4f0"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "sha256": "c106e0c56006a211342a065a699840dc23d0793b231def809a5f74d2b150dcfc"
+    },
+    {
+      "path": "distillation/artifacts/reports/source_inventory.json",
+      "sha256": "7081391cc0ef2cc4c834526cb4a57df153dea76e4c4cf0d34e2535b410c06dba"
+    },
+    {
+      "path": "distillation/input/README.md",
+      "sha256": "f3d0c8f89a01c7ac01609565d07f88af0d69846d9e79e4b666e155930b5122b4"
+    },
+    {
+      "path": "distillation/input/source_inventory_plan.json",
+      "sha256": "3ab4f5c10426b9aa346ddc863a14c3679e1a8c814359f35f4b3a72641073283e"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-evaluation-challenges.json",
+      "sha256": "a329c9c3ae8df27ea7ac2fe80b88cd451e965a6d7abacc070a452d38d1b42f95"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-evaluation-solutions.json",
+      "sha256": "3c413cec4b555debd2f30950326e79c2b4c8c54136721b0809e53cbb7fb19ee9"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-test-challenges.json",
+      "sha256": "fd817ae33eccbcfcb25ea97fdf26deeca89f1f53b10a7914e06952d1a6d56144"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-training-challenges.json",
+      "sha256": "1a800d3beaf1efc3b35f4b8fc013380182e06f0e84840ca7ddc304874d403f99"
+    },
+    {
+      "path": "distillation/profiles/source/arc2-training-solutions.json",
+      "sha256": "879649e1902de08fe5b3c8ec9aac60d9eb8ff8b1b78de71b684bb82652d99ec6"
+    },
+    {
+      "path": "distillation/profiles/source/arc3-canonical-teacher-trajectories.json",
+      "sha256": "f2ade8771a16931ba4c3d6ac7d6a6bccda747cecb8d0fcc0c3cfb274a8596c04"
+    },
+    {
+      "path": "distillation/profiles/source/arc3-environment-source-bundle.json",
+      "sha256": "f588c961da5759836162be312d4b42b239d7a223872c506313ee7a24afbd790e"
+    },
+    {
+      "path": "distillation/profiles/source/arc3-raw-teacher-recordings.json",
+      "sha256": "b3ea4308aa8b04e141282130872813fbf288966440b45e66dcf484a850b1a88c"
+    },
+    {
+      "path": "distillation/schemas/README.md",
+      "sha256": "6246fb607a50f5b2447fa75459dd47c0c67b2d9a746310b39bd79389c15e2777"
+    },
+    {
+      "path": "distillation/schemas/source_profile.schema.json",
+      "sha256": "c5f7208ef930ab86271a4d7829fb6283e4c3b9ffd80aba62eab4e948b3169e73"
+    },
+    {
+      "path": "distillation/src/hds_distill/__init__.py",
+      "sha256": "aa9abb7812d4ea0257c9323f4193a9ee9fa7ecce7bae396eb37ff6256419ab94"
+    },
+    {
+      "path": "distillation/src/hds_distill/source_inventory.py",
+      "sha256": "2dc57574ac1ac58e35493f7d050615922d99353831201299ca8435068f5f6601"
+    },
+    {
+      "path": "distillation/tests/unit/test_source_inventory.py",
+      "sha256": "2d95b746cd9cccbc0f39e305bc34b5f65a56400231251643dc70b9862414b49b"
+    }
+  ],
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-d01a-owner-review-artifact-manifest:078fc8e6273bc4ab86888f3b51d5db4f48be71e7d1f787f4607706fded305ebe"
+}
