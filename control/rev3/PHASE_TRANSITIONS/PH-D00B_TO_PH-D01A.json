@@ -1,0 +1,40 @@
+{
+  "schema_version": "arc3-rev3-phase-transition-v1",
+  "transition_id": "PH-D00B-TO-PH-D01A-20260730",
+  "from_phase_id": "PH-D00B",
+  "from_phase_status": "CODEX_SELF_AUDIT_PASS",
+  "from_phase_state_path": "control/rev3/D00B_PHASE_STATE.json",
+  "from_phase_state_digest": "rev3-d00b-phase-state:61b2108bdc0d1a9039c8ef1ddeb5eb973bd12133c53cbd0aa88477046da15d74",
+  "from_phase_state_sha256": "4dbdabfe45dd13a98344a2bd2f637743e6fd57bcd5dc94bb3667ac2790c2e702",
+  "from_phase_evidence_commit": "e7f99beff6e6fba343e6ce069434c6a28b040039",
+  "from_phase_evidence_tree": "3c610ed9b20c6663ec5a794b94e0e8e252bbeb49",
+  "from_phase_artifact_manifest_path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+  "from_phase_artifact_manifest_digest": "rev3-d00b-owner-review-artifact-manifest:864a5aebd3326dcd5b85e0127a943edc066987203c1bf5bd805327fd7710969b",
+  "to_phase_id": "PH-D01A",
+  "decision": "CONTINUE_UNDER_RECORDED_OWNER_AUTHORIZATION",
+  "authorization_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+  "authorization_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+  "verified_exit_conditions": {
+    "scope_guard_pass": true,
+    "scope_guard_finding_count": 0,
+    "audited_source_execution_count": 0,
+    "failed_requirement_count": 0,
+    "full_unit_passed": 701,
+    "full_integration_passed": 8
+  },
+  "hard_gates_crossed": [],
+  "permissions_not_granted": [
+    "Rule or RuleAtom promotion",
+    "HDSStructureBundle approval",
+    "DistilledInitialStateBundle approval",
+    "LOCKED_FINAL access",
+    "official environment access",
+    "Kaggle notebook mutation or submission"
+  ],
+  "phase_order_preserved": true,
+  "digest_excluded_fields": [
+    "content_digest",
+    "transition_id"
+  ],
+  "content_digest": "rev3-phase-transition:44e841894140af119ab1766e76abde45cfa83c6f6eed6c03c03a833fdfa1b884"
+}

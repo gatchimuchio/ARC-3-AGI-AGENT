@@ -1,12 +1,12 @@
 {
   "schema_version": "arc3-rev3-authority-input-manifest-v1",
   "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
-  "base_commit": "a231ac1f71486cd0903d4ae95a4cf1ab4bc7741f",
-  "current_phase": "PH-D00B",
+  "base_commit": "e7f99beff6e6fba343e6ce069434c6a28b040039",
+  "current_phase": "PH-D01A",
   "phase_transition": {
-    "path": "control/rev3/PHASE_TRANSITIONS/PH-D00A_TO_PH-D00B.json",
-    "sha256": "01ea7d5d236cd8df196b6ac26246a2f9aee105701a777f25c8bd0c3a2d40d8a8",
-    "content_digest": "rev3-phase-transition:5b66dcacd4b2a62e88166558019dcd5a1dc4cce9419883fd80a141c4cfdbd9f5"
+    "path": "control/rev3/PHASE_TRANSITIONS/PH-D00B_TO_PH-D01A.json",
+    "sha256": "baf463b23a46ad53f5fe7d39ebde28b6792d3dd7f279410de9ccae0720ef9b1d",
+    "content_digest": "rev3-phase-transition:44e841894140af119ab1766e76abde45cfa83c6f6eed6c03c03a833fdfa1b884"
   },
   "inputs": [
     {
@@ -18,7 +18,7 @@
     {
       "authority_rank": 2,
       "path": "AGENTS.md",
-      "sha256": "a734800c467bd5519b12c5b337d8d78fa49763cb9cc3e973c7ee161cf0831e6c",
+      "sha256": "89a12631099927a84098b688c677ec4958eeba0f584ff3cfd79b0484339d1b69",
       "state": "AVAILABLE_BYTE_PRESERVED"
     },
     {
@@ -81,6 +81,6 @@
     }
   ],
   "missing_required_authority_count": 0,
-  "phase_effect": "PH_D00B_INPUT_SET_CLOSED",
-  "content_digest": "rev3-authority-input-manifest:083d0ed69db08dff6f0f62a42c3276dd92002a1657b37dde8da4412a4c656c5e"
+  "phase_effect": "PH_D01A_INPUT_SET_CLOSED",
+  "content_digest": "rev3-authority-input-manifest:ba20118baa128ce18e75ed234079d25cc7c2b84e58f2d285e72732d33506ad05"
 }

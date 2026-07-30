@@ -122,8 +122,9 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ```text
 PH-R00 [OWNER_APPROVED_PASS]
 → PH-D00A [CODEX_SELF_AUDIT_PASS]
-→ PH-D00B [ACTIVE]
-→ PH-D01A ... PH-D14
+→ PH-D00B [CODEX_SELF_AUDIT_PASS]
+→ PH-D01A [ACTIVE]
+→ PH-D01B ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
@@ -605,8 +606,9 @@ Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではあ
 
 PH-R00はOwner ApprovalRecordにより採択済みです。
 PH-D00Aは`DEPENDENCY_LOCK_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
-Active phaseはPH-D00Bです。
-一Work BlockでPH-D00Bだけを実施してください。
+PH-D00Bは`DISTILLATION_SCOPE_GUARD_PASS`かつ`CODEX_SELF_AUDIT_PASS`です。
+Active phaseはPH-D01Aです。
+一Work BlockでPH-D01Aだけを実施してください。
 
 最初に、
 - repository root
@@ -617,20 +619,32 @@ Active phaseはPH-D00Bです。
 - current phase state
 を確認してください。
 
-次にPH-D00B WorkBlockFrameを作成し、蒸留専用namespace、`SCOPE_LOCK.md`、
-Python 3.12環境、input／schemas／src／tests／artifacts分離を固定してください。
-`distillation/`、空の`bridge/`、read-only referenceとしての`runtime/`を分離してください。
+次にPH-D01A WorkBlockFrameを作成し、ARC2／ARC3 sourceを配布形式、split、
+answer visibility、development usage、contaminationでinventoryしてください。
+全admitted source fileを、次のいずれか一つのprofileへ分類してください。
 
-AST、import graph、entrypoint、call behaviorを監査し、official API、network、
-submission output、unlabeled task answer callable、runtime／production依存を
-fail closedで拒否してください。filename文字列だけで判定せず、
-正当なoffline interpreter／teacher replay harnessは許可してください。
+ARC2:
+- `ARC2_KAGGLE_CHALLENGE_SOLUTION`
+- `ARC2_OFFICIAL_TASK_JSON`
+- `ARC2_INTERNAL_NORMALIZED_CORPUS`
 
-PH-D01A、ARC corpus処理、Causal IR、candidate generation、Bridge実装、
-AGI Runtime実装、P22改善、locked final、official、KaggleへPH-D00B内で
-進んではいけません。
+ARC3:
+- `ARC3_ENVIRONMENT_SOURCE_BUNDLE`
+- `ARC3_RAW_TEACHER_RECORDING`
+- `ARC3_CANONICAL_TEACHER_TRAJECTORY`
 
-PH-D00Bの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
+split roleは`TRAIN_TEACHER`、`PUBLIC_EVALUATION_TEACHER`、
+`PUBLIC_EVALUATION_CONSUMED`、`UNLABELED_TEST`、`REPLAY_ONLY_SOURCE`、
+`SEALED_AUDIT`から選び、answer visibility不明、split role不明を0にしてください。
+evaluation解答使用時はcontaminationを明示し、source policy weightを教師素材へ
+数えないでください。成果物は`profiles/source/*.json`と
+`artifacts/reports/source_inventory.json`です。
+
+PH-D01Bのcontent／acquisition／environment manifest freeze、trajectory normalization、
+Causal IR、candidate generation、Bridge実装、AGI Runtime実装、P22改善、
+locked final、official、KaggleへPH-D01A内で進んではいけません。
+
+PH-D01Aの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
 現在のOwner連続進行許可に従い、停止せず次の通常phaseを別Work Blockとして開始してください。
 Codex自身がRule採否、hard gate承認、official承認を生成してはいけません。
 ```

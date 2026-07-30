@@ -62,7 +62,7 @@ def _valid_selection() -> Rev3ProductionSelection:
 
 
 def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
-    assert REV3_ACTIVE_PHASE == "PH-D00B"
+    assert REV3_ACTIVE_PHASE == "PH-D01A"
     assert REV3_PHASE_ORDER[0] == "PH-R00"
     assert REV3_PHASE_ORDER.index("PH-D14") < REV3_PHASE_ORDER.index(
         "PH-B00"
@@ -170,7 +170,7 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     )
     expected = {
         "AGENTS.md": (
-            "a734800c467bd5519b12c5b337d8d78fa49763cb9cc3e973c7ee161cf0831e6c"
+            "89a12631099927a84098b688c677ec4958eeba0f584ff3cfd79b0484339d1b69"
         ),
         (
             "docs/strategy/"
@@ -213,8 +213,8 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     claimed = str(body.pop("content_digest"))
     assert claimed == "rev3-authority-input-manifest:" + digest_object(body)
     assert manifest["missing_required_authority_count"] == 0
-    assert manifest["current_phase"] == "PH-D00B"
-    assert manifest["phase_effect"] == "PH_D00B_INPUT_SET_CLOSED"
+    assert manifest["current_phase"] == "PH-D01A"
+    assert manifest["phase_effect"] == "PH_D01A_INPUT_SET_CLOSED"
     approval = _json(
         REPOSITORY_ROOT
         / "control"
@@ -251,6 +251,29 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
         "bb17828cd495884a3e947f5897c4c3dec7f29fdde836889f2199be2c01449369"
     )
     assert transition["to_phase_id"] == "PH-D00B"
+    assert transition["hard_gates_crossed"] == []
+    transition = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PHASE_TRANSITIONS"
+        / "PH-D00B_TO_PH-D01A.json"
+    )
+    transition_body = dict(transition)
+    for excluded in transition["digest_excluded_fields"]:
+        transition_body.pop(excluded)
+    assert transition["content_digest"] == (
+        "rev3-phase-transition:" + digest_object(transition_body)
+    )
+    assert transition["from_phase_state_digest"] == (
+        "rev3-d00b-phase-state:"
+        "61b2108bdc0d1a9039c8ef1ddeb5eb973bd12133c53cbd0aa88477046da15d74"
+    )
+    assert transition["from_phase_artifact_manifest_digest"] == (
+        "rev3-d00b-owner-review-artifact-manifest:"
+        "864a5aebd3326dcd5b85e0127a943edc066987203c1bf5bd805327fd7710969b"
+    )
+    assert transition["to_phase_id"] == "PH-D01A"
     assert transition["hard_gates_crossed"] == []
 
 
@@ -428,6 +451,72 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
         "rev3-r00-owner-review-artifact-manifest:"
         + digest_object(artifact_manifest_body)
     )
+    assert artifact_manifest["manifest_excludes_self"] is True
+    assert all(
+        _git_blob_sha256(
+            str(artifact_manifest["snapshot_commit"]),
+            str(item["path"]),
+        )
+        == item["sha256"]
+        for item in artifact_manifest["artifacts"]
+    )
+
+
+def test_d00b_phase_state_and_snapshot_manifest_are_content_bound() -> None:
+    phase_state_path = (
+        REPOSITORY_ROOT / "control" / "rev3" / "D00B_PHASE_STATE.json"
+    )
+    phase_state = _json(phase_state_path)
+    phase_state_body = dict(phase_state)
+    phase_state_digest = str(phase_state_body.pop("content_digest"))
+    assert phase_state_digest == (
+        "rev3-d00b-phase-state:" + digest_object(phase_state_body)
+    )
+    assert phase_state["status"] == "CODEX_SELF_AUDIT_PASS"
+    assert phase_state["result_commit"] == (
+        "cc189737ce93796936ca06f386da8aa0fc5af7f4"
+    )
+    assert phase_state["result_tree"] == (
+        "0000051e891522a0ebd4c713557e2e220fd5b1df"
+    )
+    assert phase_state["failed_requirement_ids"] == []
+    assert phase_state["phase_invariants"]["scope_guard_pass"] is True
+    assert phase_state["phase_invariants"][
+        "scope_guard_finding_count"
+    ] == 0
+    assert phase_state["phase_invariants"][
+        "audited_source_execution_count"
+    ] == 0
+    assert phase_state_path.read_bytes() == (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D00B_OWNER_REVIEW_PACKAGE"
+        / "phase_state.json"
+    ).read_bytes()
+
+    artifact_manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D00B_OWNER_REVIEW_PACKAGE"
+        / "artifact_manifest.json"
+    )
+    artifact_manifest_body = dict(artifact_manifest)
+    artifact_manifest_digest = str(
+        artifact_manifest_body.pop("content_digest")
+    )
+    assert artifact_manifest_digest == (
+        "rev3-d00b-owner-review-artifact-manifest:"
+        + digest_object(artifact_manifest_body)
+    )
+    assert artifact_manifest["snapshot_commit"] == (
+        "74a5c06fc2f4b0bc31e4ac4f6dd77aa06ed28dca"
+    )
+    assert artifact_manifest["snapshot_tree"] == (
+        "0672784c121f0a3eddce5bd4d95246b439cc8c72"
+    )
+    assert artifact_manifest["artifact_count"] == 26
     assert artifact_manifest["manifest_excludes_self"] is True
     assert all(
         _git_blob_sha256(
