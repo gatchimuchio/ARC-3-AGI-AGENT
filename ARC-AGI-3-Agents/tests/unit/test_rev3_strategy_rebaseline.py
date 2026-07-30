@@ -875,6 +875,65 @@ def test_ph_d03a_validator_hardening_addendum_is_bound_and_gate_safe(
     assert "gate remains open" in summary
 
 
+def test_ph_d03a_validator_hardening_manifest_binds_snapshot_bytes(
+) -> None:
+    manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D03A_OWNER_REVIEW_PACKAGE"
+        / "validator_hardening_manifest.json"
+    )
+    body = dict(manifest)
+    for excluded in manifest["digest_excluded_fields"]:
+        body.pop(excluded)
+
+    assert manifest["content_digest"] == (
+        "rev3-d03a-validator-hardening-manifest:"
+        + digest_object(body)
+    )
+    assert manifest["content_digest"] == (
+        "rev3-d03a-validator-hardening-manifest:"
+        "c715a33caf6cc503da5b577633545884fa9935b4d680c916fa5e450dc0da3647"
+    )
+    assert manifest["status"] == (
+        "VALIDATOR_HARDENING_PASS_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL"
+    )
+    assert manifest["phase_pass"] is False
+    assert manifest["owner_decision_present"] is False
+    assert manifest["hardening_result_commit"] == (
+        "0bbb3d26284dacb8803ffdea77178091b443f1fd"
+    )
+    assert manifest["hardening_result_tree"] == (
+        "0d9fc4c0b9d7761845f6381a1b3a93783062ad9b"
+    )
+    assert manifest["snapshot_commit"] == (
+        "bea78fd6a330cba301499b4a8e6494d5843a0a3b"
+    )
+    assert manifest["snapshot_tree"] == (
+        "88e9eab4b7c4a6963c1981d0595c4325b7adeddf"
+    )
+    assert manifest["manifest_excludes_self"] is True
+    assert manifest["artifact_count"] == len(manifest["artifacts"]) == 12
+    artifact_paths = [
+        str(artifact["path"]) for artifact in manifest["artifacts"]
+    ]
+    assert artifact_paths == sorted(artifact_paths)
+    assert len(artifact_paths) == len(set(artifact_paths))
+    assert (
+        "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/"
+        "validator_hardening_manifest.json"
+        not in artifact_paths
+    )
+
+    snapshot_commit = str(manifest["snapshot_commit"])
+    for artifact in manifest["artifacts"]:
+        assert _git_blob_sha256(
+            snapshot_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+
 def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
     state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "D01B_PHASE_STATE.json"
