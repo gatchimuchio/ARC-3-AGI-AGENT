@@ -1,0 +1,29 @@
+{
+  "schema_version": "hds-distillation-source-profile-v1",
+  "profile_id": "arc3-canonical-teacher-trajectories",
+  "profile_type": "ARC3_CANONICAL_TEACHER_TRAJECTORY",
+  "domain": "ARC3",
+  "distribution_format": "HISTORICAL_CANONICAL_TEACHER_CORPUS",
+  "split_role": "PUBLIC_EVALUATION_CONSUMED",
+  "answer_visibility": "SUCCESS_TRAJECTORY_VISIBLE",
+  "development_usage": "DISTILLATION_SOURCE",
+  "contamination_class": "PUBLIC_EVALUATION_SUCCESS_TRAJECTORY_CONSUMED",
+  "materialization_state": "REPOSITORY_TRACKED",
+  "source_code_access": "NOT_SOURCE_CODE",
+  "policy_weight_source": false,
+  "selectors": [
+    {
+      "selector_kind": "REPOSITORY_FILES",
+      "paths": [
+        "analysis/teacher/FULL_SOLUTION_CORPUS.json",
+        "analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.json",
+        "analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.npz"
+      ],
+      "expected_file_count": 3
+    }
+  ],
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "hds-source-profile:ac262b83e1973e96f43fb4791223ca1f3c1ba9b4071746cc8269ce9bf425c879"
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "hds-distillation-source-profile-v1",
+  "profile_id": "arc3-environment-source-bundle",
+  "profile_type": "ARC3_ENVIRONMENT_SOURCE_BUNDLE",
+  "domain": "ARC3",
+  "distribution_format": "PYTHON_ENVIRONMENT_SOURCE_AND_METADATA",
+  "split_role": "REPLAY_ONLY_SOURCE",
+  "answer_visibility": "ENVIRONMENT_SOURCE_AND_HIDDEN_STATE_VISIBLE",
+  "development_usage": "REPLAY_HARNESS_ONLY",
+  "contamination_class": "PRIVILEGED_ENVIRONMENT_IMPLEMENTATION",
+  "materialization_state": "REPOSITORY_TRACKED",
+  "source_code_access": "REPLAY_HARNESS_ONLY",
+  "policy_weight_source": false,
+  "selectors": [
+    {
+      "selector_kind": "REPOSITORY_TREE",
+      "root": "environment_files",
+      "expected_file_count": 50,
+      "expected_path_set_sha256": "aae3670694e8c676dd09eedc38141c2d0ba7653e82bd9af63eaae5c650a34275",
+      "archive_alias_distribution_id": "arc-prize-2026-arc-agi-3.zip",
+      "archive_alias_prefix": ""
+    }
+  ],
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "hds-source-profile:c5ec09f96cb75cdcd6c7d1ef0cf547e99244958ee824d2e30fd1d9547bd2154f"
+}

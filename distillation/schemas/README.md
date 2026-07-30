@@ -1,7 +1,10 @@
 # Schema boundary
 
-No Causal IR, evidence, HDS state, approval, or promotion schema is defined in
-`PH-D00B`. Those schemas belong to later ordered phases.
+`source_profile.schema.json` is the minimal strict schema required by
+`PH-D01A`. It fixes the permitted profile, split, answer-visibility,
+development-usage, contamination, materialization, access-policy, and selector
+states. Unknown fields and unknown enum values fail closed.
 
-This directory exists now only to lock the input/schemas/src/tests/artifacts
-separation required by the D00B repository boundary.
+No `SourceContentManifest`, acquisition, environment, Causal IR, evidence, HDS
+state, approval, or promotion schema is defined yet. Those schemas remain in
+their ordered later phases.

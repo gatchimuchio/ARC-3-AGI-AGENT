@@ -1,0 +1,28 @@
+{
+  "schema_version": "hds-distillation-source-profile-v1",
+  "profile_id": "arc2-evaluation-challenges",
+  "profile_type": "ARC2_KAGGLE_CHALLENGE_SOLUTION",
+  "domain": "ARC2",
+  "distribution_format": "KAGGLE_CHALLENGE_JSON",
+  "split_role": "PUBLIC_EVALUATION_TEACHER",
+  "answer_visibility": "CHALLENGE_ONLY",
+  "development_usage": "AVAILABLE_TEACHER_NOT_CONSUMED",
+  "contamination_class": "PUBLIC_EVALUATION_INPUT_VISIBLE",
+  "materialization_state": "EXTERNAL_ARCHIVE_VERIFIED",
+  "source_code_access": "NOT_SOURCE_CODE",
+  "policy_weight_source": false,
+  "selectors": [
+    {
+      "selector_kind": "ARCHIVE_MEMBERS",
+      "distribution_id": "arc-prize-2026-arc-agi-2.zip",
+      "expected_distribution_sha256": "d00746ef4e06a515ad53bde4dff276dc8ef5a26829a0ebeafc8cf8ba6371abaa",
+      "members": [
+        "arc-agi_evaluation_challenges.json"
+      ]
+    }
+  ],
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "hds-source-profile:f423c04a084d75a230272dbcd343249d513de77ca82a5f1b4e3e91beb3412303"
+}

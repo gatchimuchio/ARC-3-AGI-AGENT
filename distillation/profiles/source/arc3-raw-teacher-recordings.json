@@ -1,0 +1,29 @@
+{
+  "schema_version": "hds-distillation-source-profile-v1",
+  "profile_id": "arc3-raw-teacher-recordings",
+  "profile_type": "ARC3_RAW_TEACHER_RECORDING",
+  "domain": "ARC3",
+  "distribution_format": "HUGGINGFACE_RECORDING_ROW_REFERENCE",
+  "split_role": "PUBLIC_EVALUATION_CONSUMED",
+  "answer_visibility": "SUCCESS_TRAJECTORY_VISIBLE",
+  "development_usage": "DISTILLATION_SOURCE",
+  "contamination_class": "PUBLIC_EVALUATION_SUCCESS_TRAJECTORY_CONSUMED",
+  "materialization_state": "REFERENCED_NOT_LOCALLY_MATERIALIZED",
+  "source_code_access": "NOT_SOURCE_CODE",
+  "policy_weight_source": false,
+  "selectors": [
+    {
+      "selector_kind": "EXTERNAL_DATASET_MANIFEST_ROWS",
+      "source_manifest_path": "analysis/teacher/HUMAN_WINNING_REPLAY_SOURCE_MANIFEST.json",
+      "dataset_id": "magic-sword/arc_agi_3_public_demo_human_testing",
+      "dataset_repo_sha": "455b7c58eaa9d5ea05f91cd1b5b603121599e758",
+      "recording_field": "recording_file",
+      "expected_selected_count": 25,
+      "expected_filename_set_sha256": "721665417e5f0ac6a96723525f7664a3980deab6e97ee6a3aaae519690a3793e"
+    }
+  ],
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "hds-source-profile:763263fd5366cbe9dc171936de482044495b2a79c2007a83961d37e2809444f7"
+}

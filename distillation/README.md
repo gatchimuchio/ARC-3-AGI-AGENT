@@ -1,19 +1,24 @@
 # HDS Distillation Project
 
-This project is the isolated `PH-D00B` distillation namespace. Its authority
+This project is the isolated distillation namespace. Its authority
 and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
-Current contents are deliberately limited to:
+`PH-D00B` fixed the repository and behavior boundary. `PH-D01A` adds only:
 
-- an empty input boundary;
-- a schema boundary reserved for later ordered phases;
+- a declarative source-admission plan;
+- eight strict ARC2/ARC3 SourceProfile documents;
+- metadata-only source and contamination inventory;
+- deterministic inventory validation and evidence;
 - trusted static scope markers;
 - a deterministic Scope Guard;
 - dedicated tests;
 - canonical scope-audit evidence.
 
-It does not process ARC data and does not implement Causal IR, candidate
-generation, a Bridge, an agent, a runtime, networking, or submission output.
+The inventory names source locators but does not parse, import, execute, or
+replay their payloads. It does not freeze PH-D01B content/acquisition/
+environment manifests and does not implement normalization, Causal IR,
+candidate generation, a Bridge, an agent, a runtime, networking, or
+submission output.
 
 Use exactly Python 3.12.13. From the repository root:
 
@@ -27,6 +32,8 @@ python distillation/src/hds_distill/scope_guard.py \
   --project-root distillation \
   --repository-root . \
   --verify-report distillation/artifacts/reports/distillation_scope_audit.json
+PYTHONPATH=distillation/src python -c \
+  "from pathlib import Path; from hds_distill.source_inventory import verify_source_inventory_report; verify_source_inventory_report(Path('distillation/artifacts/reports/source_inventory.json'), Path('distillation'), repository_root=Path('.'))"
 ```
 
 On this checkout, validation uses

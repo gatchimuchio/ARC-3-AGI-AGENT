@@ -1,6 +1,6 @@
-"""Isolated HDS distillation package.
+"""Isolated HDS distillation metadata package.
 
-PH-D00B exports no solver, agent, runtime, or submission capability.
+PH-D01A exports no solver, agent, runtime, or submission capability.
 """
 
 from __future__ import annotations

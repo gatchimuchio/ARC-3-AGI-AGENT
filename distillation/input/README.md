@@ -1,7 +1,13 @@
-# Input boundary
+# Input metadata boundary
 
-No ARC source data is admitted in `PH-D00B`.
+`PH-D01A` admits source locator and contamination metadata only through
+`source_inventory_plan.json` and the content-bound documents under
+`../profiles/source/`.
 
-`PH-D01A` may inventory source dialects and contamination only after the D00B
-Scope Guard evidence is bound. Any later input must carry an explicit data role
-and provenance manifest before processing.
+The plan defines the complete candidate roots, exact admitted paths, external
+archive members, raw-recording locators, exclusions, and expected accounting.
+It is not a `SourceContentManifest`, `AcquisitionRecord`, or
+`EnvironmentManifest`. No source payload is copied or processed here.
+
+PH-D01B must separately bind content, acquisition, environment, wheels, seed,
+and read-only source state before any downstream processing.
