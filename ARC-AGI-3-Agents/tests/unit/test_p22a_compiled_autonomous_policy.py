@@ -322,6 +322,27 @@ def test_p_proposed_rollback_requires_hds_capability_and_updates_m() -> None:
     session.end_episode(handle, succeeded=False, reason=report.stop_reason)
 
 
+def test_game_over_is_deferred_to_the_compiled_reset_cycle() -> None:
+    arrays = _arrays()
+    index = 535
+    original = _observation(arrays, index)
+    game_over = GenericObservation(
+        signature="compiled-game-over",
+        available_actions=original.available_actions,
+        rendered_layers=original.rendered_layers,
+        terminal_state="GAME_OVER",
+        progress_count=1,
+        action_payload_schema=original.action_payload_schema,
+    )
+    _, history = _histories_before(arrays, index)
+    body = load_compiled_autonomous_instruction_body()
+
+    assert int(arrays["actions"][index]) == 0
+    assert body.predict(game_over, history).action_id == 0
+    assert body.explicit_rollback_cycle_required(game_over) is True
+    assert body.explicit_rollback_cycle_required(original) is False
+
+
 class _TraceSink:
     def __init__(self) -> None:
         self.digests: list[str] = []

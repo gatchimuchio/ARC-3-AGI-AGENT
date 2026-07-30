@@ -202,6 +202,25 @@ def _semantic_causal_memory_required(
     return result
 
 
+def _explicit_rollback_cycle_required(
+    instruction_body: GenericInstructionBody,
+    observation: GenericObservation,
+) -> bool:
+    selector = getattr(
+        instruction_body,
+        "explicit_rollback_cycle_required",
+        None,
+    )
+    if selector is None:
+        return False
+    if not callable(selector):
+        raise TypeError("GENERIC_P_ROLLBACK_CYCLE_SELECTOR_INVALID")
+    result = selector(observation)
+    if not isinstance(result, bool):
+        raise TypeError("GENERIC_P_ROLLBACK_CYCLE_SELECTOR_RESULT_INVALID")
+    return result
+
+
 def outcome_memory_proposals(
     *,
     memory_records: Sequence[SemanticRecord],
@@ -968,28 +987,38 @@ class GenericAGIRuntime:
             if attribution.category == "FAILURE":
                 cycle_failures.append("GENERIC_GAME_OVER_OBSERVED")
                 if selected_ablation.rollback:
-                    rollback = self.hds.authorize_rollback(
-                        decision,
-                        attribution,
+                    if _explicit_rollback_cycle_required(
+                        self.instruction_body,
                         result_observation,
-                    )
-                    authority_events.append(rollback.authorization_id)
-                    self.executor.rollback_executor.consume(
-                        rollback,
-                        decision,
-                        attribution,
-                        result_observation,
-                    )
-                    observation_after_cycle = self.environment.reset_level(
-                        request_id="generic-rollback-request:"
-                        + digest_object(rollback.authorization_id)[:24]
-                    )
-                    rollback_failures = observation_after_cycle.validate()
-                    if rollback_failures:
-                        raise ValueError(";".join(rollback_failures))
-                    self.session.identity_boundary.require_decision_context(
-                        observation_after_cycle
-                    )
+                    ):
+                        observation_after_cycle = result_observation
+                    else:
+                        rollback = self.hds.authorize_rollback(
+                            decision,
+                            attribution,
+                            result_observation,
+                        )
+                        authority_events.append(rollback.authorization_id)
+                        self.executor.rollback_executor.consume(
+                            rollback,
+                            decision,
+                            attribution,
+                            result_observation,
+                        )
+                        observation_after_cycle = (
+                            self.environment.reset_level(
+                                request_id="generic-rollback-request:"
+                                + digest_object(
+                                    rollback.authorization_id
+                                )[:24]
+                            )
+                        )
+                        rollback_failures = observation_after_cycle.validate()
+                        if rollback_failures:
+                            raise ValueError(";".join(rollback_failures))
+                        self.session.identity_boundary.require_decision_context(
+                            observation_after_cycle
+                        )
                 else:
                     cycle_failures.append("GENERIC_ROLLBACK_ABLATED")
                     observation_after_cycle = result_observation

@@ -443,6 +443,17 @@ class CompiledAutonomousInstructionBody:
 
         return not self.supports(observation)
 
+    def explicit_rollback_cycle_required(
+        self,
+        observation: GenericObservation,
+    ) -> bool:
+        """Let compiled control states consume their trained reset cycle."""
+
+        return (
+            observation.terminal_state == "GAME_OVER"
+            and self.supports(observation)
+        )
+
     def predict(
         self,
         observation: GenericObservation,
