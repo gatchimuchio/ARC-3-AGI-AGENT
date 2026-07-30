@@ -889,6 +889,55 @@ def test_ph_d02b_owner_review_package_is_complete_and_claim_limited(
     assert "Do not enter Golden or Sealed corpus freeze" in next_action
 
 
+def test_ph_d02b_artifact_manifest_binds_snapshot_bytes() -> None:
+    manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D02B_OWNER_REVIEW_PACKAGE"
+        / "artifact_manifest.json"
+    )
+    body = dict(manifest)
+    for excluded in manifest["digest_excluded_fields"]:
+        body.pop(excluded)
+
+    assert manifest["content_digest"] == (
+        "rev3-d02b-owner-review-artifact-manifest:"
+        + digest_object(body)
+    )
+    assert manifest["phase_id"] == "PH-D02B"
+    assert manifest["result_commit"] == (
+        "108c5462c2c73bdd95953e9e9b0cbbce68ac5d02"
+    )
+    assert manifest["result_tree"] == (
+        "63e3a2e9e2f1f8953bec7c6294ed8034349f6d9e"
+    )
+    assert manifest["snapshot_commit"] == (
+        "b4db449881c0a8031d984498b5e4b216bcdf3ef1"
+    )
+    assert manifest["snapshot_tree"] == (
+        "cf05f620f63e0cd6ad20a7beac5e234e8eefdce4"
+    )
+    assert manifest["manifest_excludes_self"] is True
+    assert manifest["artifact_count"] == len(manifest["artifacts"]) == 57
+    artifact_paths = [
+        str(artifact["path"]) for artifact in manifest["artifacts"]
+    ]
+    assert artifact_paths == sorted(artifact_paths)
+    assert len(artifact_paths) == len(set(artifact_paths))
+    assert (
+        "control/rev3/PH-D02B_OWNER_REVIEW_PACKAGE/artifact_manifest.json"
+        not in artifact_paths
+    )
+
+    snapshot_commit = str(manifest["snapshot_commit"])
+    for artifact in manifest["artifacts"]:
+        assert _git_blob_sha256(
+            snapshot_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+
 def test_asset_classification_and_frame_are_content_bound() -> None:
     classification = _json(
         REPOSITORY_ROOT
