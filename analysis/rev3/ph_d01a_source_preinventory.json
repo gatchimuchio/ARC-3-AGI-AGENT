@@ -1,0 +1,123 @@
+{
+  "schema_version": "arc3-rev3-ph-d01a-source-preinventory-v1",
+  "phase_id": "PH-D01A",
+  "work_block_id": "WB-PH-D01A-SOURCE-DIALECT-CONTAMINATION-INVENTORY",
+  "base_commit": "25a4363fc1dfe78d47106f715db65c36d393210f",
+  "inventory_semantics": "PATH_MEMBERSHIP_AND_SOURCE_ADMISSION_ONLY_NOT_CONTENT_FREEZE",
+  "distribution_observations": [
+    {
+      "distribution_id": "arc-prize-2026-arc-agi-2.zip",
+      "authority_sha256": "d00746ef4e06a515ad53bde4dff276dc8ef5a26829a0ebeafc8cf8ba6371abaa",
+      "observed_sha256_match": true,
+      "file_member_count": 6,
+      "member_path_set_sha256": "9e673516d63fe5e28919a4c6ca99dac4288b9af82826928a8008608a79b5c5bc",
+      "admitted_unique_source_count": 5,
+      "excluded_member_count": 1,
+      "exclusion": "sample_submission.json is an output-format example, not teacher source"
+    },
+    {
+      "distribution_id": "arc-prize-2026-arc-agi-3.zip",
+      "authority_sha256": "c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d505de2b1ec61d645",
+      "observed_sha256_match": true,
+      "file_member_count": 148,
+      "member_path_set_sha256": "969340e137c9ec0d2920509f79e7ad681ca2358a2edb4096b8ec398c5c26d6d7",
+      "environment_source_alias_count": 50,
+      "agent_scaffold_non_source_count": 67,
+      "runtime_wheel_non_source_count": 31,
+      "admitted_unique_source_count": 0,
+      "alias_semantics": "The fifty archive environment members alias the fifty Git-tracked environment source IDs and are not counted twice."
+    }
+  ],
+  "repository_candidate_roots": [
+    {
+      "root": "environment_files",
+      "tracked_file_count": 50,
+      "path_set_sha256": "aae3670694e8c676dd09eedc38141c2d0ba7653e82bd9af63eaae5c650a34275",
+      "admitted_source_count": 50,
+      "excluded_non_source_count": 0,
+      "decision": "ADMIT_ALL_AS_ARC3_ENVIRONMENT_SOURCE_BUNDLE"
+    },
+    {
+      "root": "analysis/teacher",
+      "tracked_file_count": 36,
+      "path_set_sha256": "fc4440f86665461996d341f25c1aab24713e155055f8e508c883cee7876d33a3",
+      "admitted_source_count": 3,
+      "excluded_non_source_count": 33,
+      "decision": "ADMIT_EXACT_CANONICAL_CORPUS_FILES_ONLY"
+    },
+    {
+      "root": "analysis/runtime",
+      "tracked_file_count": 8,
+      "path_set_sha256": "49d5eb19c99a18b7b291c4957575af9ff8a97aad3640f7949939ec51d655723e",
+      "admitted_source_count": 0,
+      "excluded_non_source_count": 8,
+      "decision": "EXCLUDE_HISTORICAL_RUNTIME_OUTPUT"
+    },
+    {
+      "root": "datasets",
+      "tracked_file_count": 9,
+      "path_set_sha256": "c019c37a083859ab108375b817678426a37dbf2f61391c356e0a3f1755b259fc",
+      "admitted_source_count": 0,
+      "excluded_non_source_count": 9,
+      "decision": "EXCLUDE_HISTORICAL_DERIVED_EVIDENCE"
+    },
+    {
+      "root": "manifests",
+      "tracked_file_count": 3,
+      "path_set_sha256": "973b34829e3b4be8b57f70564b4454695722cd3a85715ca88a0e7af19301a671",
+      "admitted_source_count": 0,
+      "excluded_non_source_count": 3,
+      "decision": "EXCLUDE_HISTORICAL_DERIVED_PROVENANCE"
+    },
+    {
+      "root": "ARC-AGI-3-Agents/arc3_agi_agent/bundles",
+      "tracked_file_count": 45,
+      "path_set_sha256": "4fcde5fc618112725a458c518b65ff874cbd45c8aa42172a29c8e441822625e3",
+      "admitted_source_count": 0,
+      "excluded_non_source_count": 45,
+      "decision": "EXCLUDE_HISTORICAL_POLICY_AND_WEIGHT_BUNDLES"
+    }
+  ],
+  "raw_recording_locator_observation": {
+    "source_manifest_path": "analysis/teacher/HUMAN_WINNING_REPLAY_SOURCE_MANIFEST.json",
+    "dataset_id": "magic-sword/arc_agi_3_public_demo_human_testing",
+    "dataset_repo_sha": "455b7c58eaa9d5ea05f91cd1b5b603121599e758",
+    "manifest_row_count": 340,
+    "selected_recording_count": 25,
+    "selected_level_count": 183,
+    "recording_filename_set_sha256": "721665417e5f0ac6a96723525f7664a3980deab6e97ee6a3aaae519690a3793e",
+    "materialization_state": "REFERENCED_NOT_LOCALLY_MATERIALIZED",
+    "admission_decision": "DISTILLATION_SOURCE_PUBLIC_EVALUATION_CONSUMED"
+  },
+  "canonical_trajectory_admissions": [
+    "analysis/teacher/FULL_SOLUTION_CORPUS.json",
+    "analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.json",
+    "analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.npz"
+  ],
+  "accounting": {
+    "repository_candidate_file_count": 151,
+    "repository_admitted_source_count": 53,
+    "repository_excluded_non_source_count": 98,
+    "external_arc2_admitted_source_count": 5,
+    "external_raw_recording_admitted_source_count": 25,
+    "arc3_archive_alias_count": 50,
+    "unique_admitted_source_count": 83,
+    "policy_weight_admitted_source_count": 0,
+    "unknown_admission_decision_count": 0,
+    "source_payload_parse_count": 0,
+    "source_execution_count": 0
+  },
+  "phase_boundaries": {
+    "content_manifest_frozen": false,
+    "acquisition_manifest_frozen": false,
+    "environment_manifest_frozen": false,
+    "trajectory_normalization_started": false,
+    "causal_ir_started": false,
+    "candidate_generation_started": false,
+    "bridge_started": false,
+    "runtime_started": false,
+    "official_access_count": 0,
+    "kaggle_mutation_count": 0
+  },
+  "content_digest": "rev3-ph-d01a-source-preinventory:33fccaaedb4c3eb0a5640176da27577c91a96c14a93d0abc69211bb32e014918"
+}
