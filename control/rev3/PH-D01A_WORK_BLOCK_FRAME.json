@@ -67,6 +67,7 @@
     "distillation/src/hds_distill/source_inventory.py",
     "distillation/profiles/source/*.json",
     "distillation/tests/unit/test_source_inventory.py",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
     "distillation/artifacts/reports/source_inventory.json",
     "analysis/rev3/ph_d01a_source_preinventory.json",
     "control/rev3/PH-D01A_WORK_BLOCK_FRAME.json",
@@ -135,6 +136,7 @@
     "Git-tracked candidate path-set drift and raw-recording locator drift fail closed",
     "the five ARC2 source members, fifty ARC3 environment files, twenty-five raw recordings, and three canonical trajectory files are all classified",
     "source payloads are never imported, executed, replayed, or semantically parsed",
+    "the live behavior-based Scope Guard remains finding-free after the inventory compiler is added",
     "dedicated tests pass before focused rev3 and D00A/D00B regressions",
     "ruff, strict mypy, compileall, full unit, and integration regressions pass",
     "inventory generation is byte-identical across three independent processes"
@@ -146,5 +148,5 @@
     "routine_phase_pause_waived": true,
     "hard_gate_approval_delegated": false
   },
-  "content_digest": "rev3-work-block-frame:99c3e678a11efe1540ae10e13610b39af816419a4a621dbc94a1235c6e90caae"
+  "content_digest": "rev3-work-block-frame:c8ba581776540af64fec89f641d28334adc24c77d89d5ad4214e8c7a43ddc4d9"
 }
