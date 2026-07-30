@@ -34,7 +34,7 @@
     "external_irreversible_actions": "EXCLUDED_REQUIRES_SEPARATE_EXPLICIT_EXECUTION_INSTRUCTION"
   },
   "current_work_block": {
-    "content_digest": "rev3-work-block-frame:ea74fe814e84b0e3ca99c27360815870eb6804b5b199e2b4af3a606b6c7a80c8",
+    "content_digest": "rev3-work-block-frame:ac14d98087e931677f48c68d2e8f47c83dcb642ff51d13a24c85a59678fb92bb",
     "entry_transition_digest": "rev3-phase-transition:d0501f919c124bfef2f75694323aff0a5809d921630705c031d4131534d8b449",
     "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json"
   },
@@ -116,12 +116,12 @@
     {
       "path": "docs/strategy/REV3_STRATEGY_REBASELINE.md",
       "role": "PH_R00_REBASELINE",
-      "sha256": "6dfd42d00bb71ef7b4d19ab5ef76fc6cc526c8f4598d3fc2d88b94a0ede84376"
+      "sha256": "4150fe361196fae5b1e82f1e74b0c3ee8840a0762a6b219bd1fcc6e6156deef9"
     },
     {
       "path": "docs/strategy/ASSET_CLASSIFICATION_REV3.json",
       "role": "PH_R00_ASSET_CLASSIFICATION",
-      "sha256": "6f1a79faad2bb0eb32e4f824b3f395b5e77ef1ab6100a279568c3b7e26f26ed6"
+      "sha256": "ea4613e24090edcb96fd881bab2b1d3518a26c703838b243fa49060ad9d9a104"
     },
     {
       "path": "docs/strategy/PRODUCTION_IMPORT_BOUNDARY_REV3.md",
@@ -131,12 +131,12 @@
     {
       "path": "analysis/rev3/pre_distillation_infrastructure_baseline.json",
       "role": "PH_R00_BASELINE",
-      "sha256": "a3c49d2e5eecca4d8f4b50091f94bb2e3e28fc99e4c25fb0aaffc90ee793cff9"
+      "sha256": "93ed4f9684e51e2c28e96dc2038484af30ffa72471c5eae0ee3734740cbfd4a5"
     },
     {
       "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
       "role": "GOVERNANCE_CONTRACT",
-      "sha256": "407223f5c81e39b1d68cf8ecb239ff4b669aec10105bd360b40117646582f09b"
+      "sha256": "31ba02d5338dd37df760a5384e2570031293fc337887f5864cbf9319026c702b"
     },
     {
       "path": "docs/strategy/contracts/HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json",
@@ -221,7 +221,7 @@
     {
       "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
       "role": "CURRENT_WORK_BLOCK_FRAME",
-      "sha256": "a3d62e8507be806fb3f33d7d0482b733212e7a43c147dee4809ede38686f2b2e"
+      "sha256": "10984bc4ea80978f93a62689cfb5f03b1b4366748854eb44a611c68b6ab691df"
     },
     {
       "path": "control/rev3/PHASE_TRANSITIONS/PH-R-1_TO_PH-R00.json",
@@ -313,5 +313,5 @@
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-current-authority-manifest:098235d52f00e6451c65f3531e23f89a67ad5fadad91f9aa913d9a7208a10eee"
+  "content_digest": "rev3-current-authority-manifest:7159981841773a8d3a062f21336382bc128d152a50db1ff3d35bb127f829f430"
 }

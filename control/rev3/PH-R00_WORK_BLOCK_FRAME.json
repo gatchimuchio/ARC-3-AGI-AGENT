@@ -2,11 +2,11 @@
   "schema_version": "arc3-rev3-work-block-frame-v2",
   "work_block_id": "WB-PH-R00-CURRENT-HEAD-REBIND-20260731",
   "phase_id": "PH-R00",
-  "frame_revision": 1,
+  "frame_revision": 2,
   "status": "FRAME_LOCKED",
   "base_commit": "4dbb65c5d45cca3402f326b251c1de6ac4a2e554",
   "base_tree": "44ccb73437480daeaab71e6cb3119b5e6bc5d485",
-  "purpose": "Bind the current committed P16-P21 infrastructure as a pre-distillation baseline, quarantine historical capability assets, and prove the local regression and package surface without claiming runtime capability.",
+  "purpose": "Bind the current committed P16-P21 infrastructure as a pre-distillation baseline, quarantine historical capability assets, repair the exact-tree regression dependency on an ignored local checkpoint, and prove the local regression and package surface without claiming runtime capability.",
   "X": "CURRENT_HEAD_INFRASTRUCTURE_BOUND_WITH_RUNTIME_CAPABILITY_NOT_ESTABLISHED",
   "R": [
     "evidence-commit:3fec094d64d599681a5bb7c10ebda8163747dc10",
@@ -29,6 +29,7 @@
     "historical S5 P22 compiled-policy and CV quarantine",
     "PH-R00 selector and authority-manifest entry",
     "production import and selection fail-closed boundary",
+    "clean-tree unit-test reproducibility without ignored local fixtures",
     "local full unit integration package and notebook validation",
     "non-self-referential implementation evidence"
   ],
@@ -73,6 +74,7 @@
     "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
     "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
     "ARC-AGI-3-Agents/tests/unit/test_kaggle_notebook_contract.py",
+    "ARC-AGI-3-Agents/tests/unit/test_p10_prospective_obligation_composition_audit.py",
     "scripts/validate_rev3_governance.py",
     "scripts/build_kaggle_submission.py",
     "scripts/validate_kaggle_submission.py"
@@ -105,6 +107,7 @@
     "focused P16-P21 and notebook regression",
     "ruff and mypy strict for changed Python",
     "full unit",
+    "exact-tree full unit with no ignored checkpoint dependency",
     "full integration",
     "local package build and archive inspection",
     "local notebook build validation and runtime smoke",
@@ -128,5 +131,5 @@
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-work-block-frame:ea74fe814e84b0e3ca99c27360815870eb6804b5b199e2b4af3a606b6c7a80c8"
+  "content_digest": "rev3-work-block-frame:ac14d98087e931677f48c68d2e8f47c83dcb642ff51d13a24c85a59678fb92bb"
 }

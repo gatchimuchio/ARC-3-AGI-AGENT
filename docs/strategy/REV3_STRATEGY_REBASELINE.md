@@ -37,7 +37,7 @@ PH-R-1 → PH-R00 ApprovalRecord
 = owner-approval-record:fcfc55bcd7e1aa8b28101870cab844679014a6338cb5a7899a379e0241f290c9
 
 PH-R00 WorkBlockFrame
-= rev3-work-block-frame:ea74fe814e84b0e3ca99c27360815870eb6804b5b199e2b4af3a606b6c7a80c8
+= rev3-work-block-frame:ac14d98087e931677f48c68d2e8f47c83dcb642ff51d13a24c85a59678fb92bb
 ```
 
 このentryはPH-R00だけを許可する。HDS蒸留、Bridge、AGI Runtime、
