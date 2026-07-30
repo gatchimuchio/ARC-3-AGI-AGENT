@@ -1,0 +1,51 @@
+{
+  "schema_version": "arc3-rev3-owner-review-self-audit-v1",
+  "phase_id": "PH-D00B",
+  "decision": "CODEX_SELF_AUDIT_PASS",
+  "codex_self_audit_pass": true,
+  "checks": [
+    {"id": "OBJECTIVE_ALIGNMENT", "status": "PASS"},
+    {"id": "SCOPE", "status": "PASS"},
+    {"id": "AUTHORITY", "status": "PASS"},
+    {"id": "IDENTITY_AND_TAINT", "status": "PASS"},
+    {"id": "EVIDENCE", "status": "PASS"},
+    {"id": "DETERMINISM", "status": "PASS"},
+    {"id": "DATA_ROLE", "status": "PASS"},
+    {"id": "CLAIM_STRENGTH", "status": "PASS"},
+    {"id": "ROLLBACK", "status": "PASS"},
+    {"id": "RESOURCE", "status": "PASS"},
+    {"id": "HISTORICAL_FALLBACK", "status": "PASS"},
+    {"id": "REQUIRED_VALIDATION", "status": "PASS"},
+    {"id": "AUDITED_SOURCE_NON_EXECUTION", "status": "PASS"},
+    {"id": "ENVIRONMENT_LOCK", "status": "PASS"}
+  ],
+  "forbidden_activity_counts": {
+    "arc_corpus_access": 0,
+    "causal_ir_started": 0,
+    "candidate_generation_started": 0,
+    "bridge_implementation_started": 0,
+    "agi_runtime_started": 0,
+    "p22_optimization": 0,
+    "locked_final_access": 0,
+    "official_access": 0,
+    "network_submission": 0,
+    "kaggle_mutation": 0,
+    "owner_hard_gate_approval_generated_by_codex": 0
+  },
+  "claim_allowed": [
+    "DISTILLATION_SCOPE_GUARD_PASS",
+    "PH_D00B_CODEX_SELF_AUDIT_PASS"
+  ],
+  "claim_prohibited": [
+    "ARC3_TEACHER_SOURCE_FROZEN",
+    "DISTILLATION_IR_EXECUTABLE",
+    "HDS_DISTILLATION_PIPELINE_COMPLETE",
+    "HDS_CORPUS_PROCESSED",
+    "HDS_STRUCTURE_BUNDLE_FROZEN",
+    "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED",
+    "DISTILLED_RUNTIME_STRUCTURAL_READY",
+    "GENERIC",
+    "AGI",
+    "OFFICIAL_READY"
+  ]
+}

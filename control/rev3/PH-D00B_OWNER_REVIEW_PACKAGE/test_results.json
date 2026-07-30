@@ -1,0 +1,66 @@
+{
+  "schema_version": "arc3-rev3-owner-review-test-results-v1",
+  "phase_id": "PH-D00B",
+  "result_commit": "cc189737ce93796936ca06f386da8aa0fc5af7f4",
+  "results": [
+    {
+      "suite": "PH_D00B_CHECKED_SCOPE_GUARD",
+      "status": "PASS",
+      "finding_count": 0,
+      "audited_source_execution_count": 0
+    },
+    {
+      "suite": "PH_D00B_DEDICATED",
+      "status": "PASS",
+      "passed": 20,
+      "failed": 0,
+      "duration_seconds": 5.96
+    },
+    {
+      "suite": "PH_D00B_FOCUSED_REV3_D00A",
+      "status": "PASS",
+      "passed": 27,
+      "failed": 0,
+      "duration_seconds": 3.98
+    },
+    {
+      "suite": "FULL_UNIT_POST_RESULT_COMMIT",
+      "status": "PASS",
+      "passed": 701,
+      "failed": 0,
+      "duration_seconds": 278.81
+    },
+    {
+      "suite": "FULL_INTEGRATION_POST_RESULT_COMMIT",
+      "status": "PASS",
+      "passed": 8,
+      "failed": 0,
+      "duration_seconds": 319.55
+    },
+    {
+      "suite": "RUFF",
+      "status": "PASS",
+      "version": "0.12.7"
+    },
+    {
+      "suite": "MYPY_STRICT",
+      "status": "PASS",
+      "version": "1.17.1"
+    },
+    {
+      "suite": "COMPILEALL",
+      "status": "PASS"
+    },
+    {
+      "suite": "CANONICAL_REPORT_DETERMINISM",
+      "status": "PASS",
+      "independent_rebuild_count": 3,
+      "byte_identical": true,
+      "sha256": "0e7c057045f80f1923718bb632c1475e12bfd102e289686237c58efa40489b38"
+    }
+  ],
+  "resolved_pre_result_failure_count": 2,
+  "new_product_regression_count": 0,
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0
+}
