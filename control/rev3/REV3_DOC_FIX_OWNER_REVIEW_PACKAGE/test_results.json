@@ -1,0 +1,61 @@
+{
+  "schema_version": "arc3-rev3-owner-review-test-results-v2",
+  "implementation_commit": "3be6aeb67ccb05b55c90bf876c8a16410b8c766e",
+  "implementation_tree": "74c66bba22285cba029bf96cabad1101276adae0",
+  "results": [
+    {
+      "suite": "FULL_UNIT_FINAL_SOURCE_STATE",
+      "status": "PASS",
+      "passed": 725,
+      "failed": 0,
+      "duration_seconds": 381.4,
+      "timing": "FINAL_SOURCE_STATE_BEFORE_IMPLEMENTATION_COMMIT",
+      "implementation_tree_source_changed_after_test": false
+    },
+    {
+      "suite": "FOCUSED_REV3_POST_IMPLEMENTATION_COMMIT",
+      "status": "PASS",
+      "passed": 51,
+      "failed": 0,
+      "duration_seconds": 50.97
+    },
+    {
+      "suite": "RUFF_CHANGED_PYTHON",
+      "status": "PASS"
+    },
+    {
+      "suite": "MYPY_STRICT",
+      "status": "PASS",
+      "checked_source_file_count": 2
+    },
+    {
+      "suite": "JSON_PARSE",
+      "status": "PASS",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "suite": "PACKAGE_REPRODUCIBILITY",
+      "status": "PASS",
+      "python_versions": [
+        "3.12.13",
+        "3.14.4"
+      ],
+      "independent_build_count": 2,
+      "byte_identical": true,
+      "sha256": "f136e975c7b065db6ca550ff76b182ab50f15ccf6cc029b259852ed0b997489c",
+      "size_bytes": 47862
+    },
+    {
+      "suite": "PACKAGE_ARCHIVE_INSPECTION",
+      "status": "PASS",
+      "entry_count": 15,
+      "ascii_entry_name_count": 15,
+      "verified_internal_checksum_count": 14
+    }
+  ],
+  "new_product_regression_count": 0,
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "resolved_environment_failure_count": 1
+}

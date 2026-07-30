@@ -1,0 +1,19 @@
+{
+  "schema_version": "arc3-rev3-owner-review-failed-requirements-v2",
+  "work_block_id": "WB-REV3-AUDIT-CORRECTION-20260731",
+  "active_failed_requirements": [],
+  "resolved_failures": [
+    {
+      "id": "REV3-PYTEST-DEFAULT-TEMP-PERMISSION-001",
+      "classification": "ENVIRONMENT_FAILURE",
+      "command": ".venv/Scripts/python.exe -m pytest tests/unit/test_rev3_strategy_rebaseline.py tests/unit/test_hds_dependency_audit.py -q",
+      "result": "FAILED_BEFORE_TEST_EXECUTION",
+      "likely_cause": "Windows default temporary directory permission failure",
+      "current_change_origin": false,
+      "resolution": "Use an explicit repository-local --basetemp path",
+      "verification": "PASS_51_OF_51"
+    }
+  ],
+  "active_failure_count": 0,
+  "resolved_failure_count": 1
+}
