@@ -1325,6 +1325,59 @@ def test_ph_d02c_owner_review_package_is_complete_and_claim_limited(
     assert "does not let Codex fabricate Owner approval" in next_action
 
 
+def test_ph_d02c_artifact_manifest_binds_snapshot_bytes() -> None:
+    manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D02C_OWNER_REVIEW_PACKAGE"
+        / "artifact_manifest.json"
+    )
+    body = dict(manifest)
+    for excluded in manifest["digest_excluded_fields"]:
+        body.pop(excluded)
+
+    assert manifest["content_digest"] == (
+        "rev3-d02c-owner-review-artifact-manifest:"
+        + digest_object(body)
+    )
+    assert manifest["content_digest"] == (
+        "rev3-d02c-owner-review-artifact-manifest:"
+        "8d1dce7eb8385d8e72fdc2b8fd7ee24b1bc45ff5c9c6c4208d18d74bc7cf0361"
+    )
+    assert manifest["phase_id"] == "PH-D02C"
+    assert manifest["result_commit"] == (
+        "fbb36321a7ece68e2692e0c3a81c323b431e87c9"
+    )
+    assert manifest["result_tree"] == (
+        "7300c53858f55f0c2ab4af9b523de77efcca0714"
+    )
+    assert manifest["snapshot_commit"] == (
+        "c427376e34374a40f44334699fc1528c8b3dac9c"
+    )
+    assert manifest["snapshot_tree"] == (
+        "dc2e69a1fa53f6bf4e31c697d551342071e8ef8d"
+    )
+    assert manifest["manifest_excludes_self"] is True
+    assert manifest["artifact_count"] == len(manifest["artifacts"]) == 41
+    artifact_paths = [
+        str(artifact["path"]) for artifact in manifest["artifacts"]
+    ]
+    assert artifact_paths == sorted(artifact_paths)
+    assert len(artifact_paths) == len(set(artifact_paths))
+    assert (
+        "control/rev3/PH-D02C_OWNER_REVIEW_PACKAGE/artifact_manifest.json"
+        not in artifact_paths
+    )
+
+    snapshot_commit = str(manifest["snapshot_commit"])
+    for artifact in manifest["artifacts"]:
+        assert _git_blob_sha256(
+            snapshot_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+
 def test_d00b_phase_state_and_snapshot_manifest_are_content_bound() -> None:
     phase_state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "D00B_PHASE_STATE.json"
