@@ -664,6 +664,55 @@ def test_ph_d02a_owner_review_package_is_complete_and_claim_limited(
     assert "Do not enter PH-D02C" in next_action
 
 
+def test_ph_d02a_artifact_manifest_binds_snapshot_bytes() -> None:
+    manifest = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "PH-D02A_OWNER_REVIEW_PACKAGE"
+        / "artifact_manifest.json"
+    )
+    body = dict(manifest)
+    for excluded in manifest["digest_excluded_fields"]:
+        body.pop(excluded)
+
+    assert manifest["content_digest"] == (
+        "rev3-d02a-owner-review-artifact-manifest:"
+        + digest_object(body)
+    )
+    assert manifest["phase_id"] == "PH-D02A"
+    assert manifest["result_commit"] == (
+        "5ccde025b70cb462b477b428171a49bf2b857c09"
+    )
+    assert manifest["result_tree"] == (
+        "998c35894efd1ac201fec3877cbd045e3ffce68a"
+    )
+    assert manifest["snapshot_commit"] == (
+        "ffa11f1181fe0a63118eba83a9e3c90090a0abb5"
+    )
+    assert manifest["snapshot_tree"] == (
+        "096709b5f59765a56f17e52caffcddbb7557fd7d"
+    )
+    assert manifest["manifest_excludes_self"] is True
+    assert manifest["artifact_count"] == len(manifest["artifacts"]) == 26
+    artifact_paths = [
+        str(artifact["path"]) for artifact in manifest["artifacts"]
+    ]
+    assert artifact_paths == sorted(artifact_paths)
+    assert len(artifact_paths) == len(set(artifact_paths))
+    assert (
+        "control/rev3/PH-D02A_OWNER_REVIEW_PACKAGE/artifact_manifest.json"
+        not in artifact_paths
+    )
+
+    snapshot_commit = str(manifest["snapshot_commit"])
+    for artifact in manifest["artifacts"]:
+        assert _git_blob_sha256(
+            snapshot_commit,
+            str(artifact["path"]),
+        ) == artifact["sha256"]
+
+
 def test_asset_classification_and_frame_are_content_bound() -> None:
     classification = _json(
         REPOSITORY_ROOT
