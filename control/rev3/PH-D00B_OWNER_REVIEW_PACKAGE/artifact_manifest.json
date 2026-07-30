@@ -1,0 +1,123 @@
+{
+  "schema_version": "arc3-rev3-owner-review-artifact-manifest-v1",
+  "manifest_id": "PH-D00B-OWNER-REVIEW-ARTIFACTS-V1",
+  "phase_id": "PH-D00B",
+  "result_commit": "cc189737ce93796936ca06f386da8aa0fc5af7f4",
+  "result_tree": "0000051e891522a0ebd4c713557e2e220fd5b1df",
+  "snapshot_commit": "74a5c06fc2f4b0bc31e4ac4f6dd77aa06ed28dca",
+  "snapshot_tree": "0672784c121f0a3eddce5bd4d95246b439cc8c72",
+  "snapshot_semantics": "VERIFY_EACH_ARTIFACT_WITH_GIT_SHOW_SNAPSHOT_COMMIT_PATH",
+  "hash_algorithm": "sha256",
+  "manifest_excludes_self": true,
+  "artifact_count": 26,
+  "artifacts": [
+    {
+      "path": "control/rev3/D00B_PHASE_STATE.json",
+      "sha256": "4dbdabfe45dd13a98344a2bd2f637743e6fd57bcd5dc94bb3667ac2790c2e702"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/summary.md",
+      "sha256": "ac2320895d4ee4b311e5a87c34ee91c96def3e5dfadf7e49d09f732678c07400"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/phase_state.json",
+      "sha256": "4dbdabfe45dd13a98344a2bd2f637743e6fd57bcd5dc94bb3667ac2790c2e702"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/changed_files.json",
+      "sha256": "f769885c03462a5030b3c465cac4eaba076674cfb921bfd169bbcca5c18265e9"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/commands.json",
+      "sha256": "5c7b2500f0901ce8f40897dbdc995815385f1f363a2d21ba5fb4342f9e190f90"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/test_results.json",
+      "sha256": "228bd21b9d12d9c85c5e94ad57cfd8ad40d64c19140922abfc0ab3b30ef66ab4"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/failed_requirements.json",
+      "sha256": "bad7eea15e80aa158526442bb08f5864d82ce500282ba60fdffd423bbba67ea0"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/open_terms.json",
+      "sha256": "73858a11692306be3850dad8b37d29f5f8353dbf8651d366161b59de023ac7c1"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/self_audit.json",
+      "sha256": "63c3e3678ea4e00437219b3d25ea5a59e85e23a9b60caf4d38f7502f16ef46ba"
+    },
+    {
+      "path": "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+      "sha256": "35b0442ce2404bd57e472f0066f6a95bd8ed49b757f61b1ef2f37ddece786e70"
+    },
+    {
+      "path": "control/rev3/PH-D00B_WORK_BLOCK_FRAME.json",
+      "sha256": "9e39f2b010ef88df7b31fced7664993e6dafdc6657b175a2ccadc582b0d78aaa"
+    },
+    {
+      "path": "analysis/rev3/ph_d00b_scope_inventory.json",
+      "sha256": "27d757a5ab714bbc35c37536eba4aaf43e3fe52550d30c61ef69189fc75f016f"
+    },
+    {
+      "path": "SCOPE_LOCK.md",
+      "sha256": "139fb00e7fd62a13bcaf9ce05d53020f6e6e42680869fd3eef5d2a64dfd7eb19"
+    },
+    {
+      "path": "distillation/.python-version",
+      "sha256": "aa0d6581054e6e4ff3f91839deca7a854ad37221b8784d060b42d0f847ff1a3b"
+    },
+    {
+      "path": "distillation/README.md",
+      "sha256": "5ba7c69d1e17bfdb7f7a6865b638ee92003f68a032b4f03e80c380db632de353"
+    },
+    {
+      "path": "distillation/pyproject.toml",
+      "sha256": "ffd1a64edcb901145641031c1a42ad8b51464412d2a339cf6e1f8491b66c2826"
+    },
+    {
+      "path": "distillation/input/README.md",
+      "sha256": "dd3f1e5adb960cbb4b836f93312d76572b73599d17cb36c2e2692171e9376ba4"
+    },
+    {
+      "path": "distillation/schemas/README.md",
+      "sha256": "2592630acd0b923be8a725aeb279efa8ffe6ec3a57288a895c3e5f73200f6fcc"
+    },
+    {
+      "path": "distillation/src/hds_distill/__init__.py",
+      "sha256": "12a7bf62f38a2047ed95b07ba41619afb80badf1b44cfc77e3d4c57c2986d532"
+    },
+    {
+      "path": "distillation/src/hds_distill/scope_contract.py",
+      "sha256": "47ab54e1294d10660153bbaf9b57fbeb841be134df88fe88e302454aedad6f66"
+    },
+    {
+      "path": "distillation/src/hds_distill/scope_guard.py",
+      "sha256": "03e31ab162e1416d96495e1117086b123af547a1f68774a45589839b23b584c0"
+    },
+    {
+      "path": "distillation/tests/unit/test_scope_guard.py",
+      "sha256": "38fefc18a28c6c3180f20a1de7226f61e0e24f61671d5335ce7bf82f96643a23"
+    },
+    {
+      "path": "distillation/tests/integration/README.md",
+      "sha256": "652ea985abad4902a4e3bc10d4d8190dbc1058868c828286574ab10b91b39b06"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "sha256": "0e7c057045f80f1923718bb632c1475e12bfd102e289686237c58efa40489b38"
+    },
+    {
+      "path": "bridge/.gitkeep",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "runtime/REFERENCE_ONLY.md",
+      "sha256": "9c644b7aa593149b7959e18a33178afc953863feb53890145df102fab126454d"
+    }
+  ],
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-d00b-owner-review-artifact-manifest:864a5aebd3326dcd5b85e0127a943edc066987203c1bf5bd805327fd7710969b"
+}
