@@ -43,7 +43,19 @@ audit, and frozen-manifest invariants. Its checked examples are under
 `../artifacts/test_vectors/schema_examples/`, and its report is
 `../artifacts/reports/schema_conformance.json`.
 
+Before schema freeze, `PH-D02C` refines exactly two generated documents:
+
+- `operator_registry.schema.json` now requires execution semantics,
+  commutativity, selector cardinality, and a content digest for every entry;
+- `hypothesis_ir.schema.json` now requires a closed typed-input, node,
+  declared-order, ABI, output-reference, claim-scope, and resource-limit
+  contract.
+
+The other 36 schema documents remain byte-identical to the sealed PH-D02B
+snapshot. `hds_distill.interpreter`, not the schema validator, executes the
+registered synthetic IR subset.
+
 The ApprovalRecord example is deliberately `SCHEMA_TEMPLATE`,
 `authoritative=false`, and `decision=SUSPEND`. It is not an Owner approval.
-No schema file is an executable Causal IR, interpreter, Rule promotion,
-runtime, official connector, or submission contract.
+No schema file grants Rule promotion, Owner authority, runtime authority,
+official access, or submission capability.

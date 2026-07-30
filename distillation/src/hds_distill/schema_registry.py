@@ -1,12 +1,14 @@
-"""PH-D02B schema inventory, deterministic artifacts, and bundle validation.
+"""PH-D02B schema inventory with PH-D02C executable-IR refinements.
 
 This module is deliberately offline and standard-library-only.  It defines
 the thirty-eight authority schema names, generates the thirty-three missing
 closed JSON Schema documents, preserves the five earlier phase schemas by
 exact bytes, and validates synthetic or future static record bundles.
 
-It does not execute HypothesisIR, normalize teacher trajectories, promote a
-RuleAtom, produce an Owner decision, or expose a runtime/solver entrypoint.
+PH-D02C refines only ``OperatorRegistry`` and ``HypothesisIR`` before schema
+freeze.  Execution remains in the isolated interpreter module.  This module
+does not normalize teacher trajectories, promote a RuleAtom, produce an Owner
+decision, or expose a runtime/solver entrypoint.
 """
 
 from __future__ import annotations
@@ -36,9 +38,9 @@ JsonObject = dict[str, JsonValue]
 SCHEMA_DRAFT = "https://json-schema.org/draft/2020-12/schema"
 SCHEMA_ID_BASE = "https://local.arc3.invalid/schemas/"
 SCHEMA_CONTRACT_VERSION = "hds-schema-contract-v1"
-SCHEMA_CONTRACT_ID = "HDS-PH-D02B-SCHEMA-CONTRACT-V1"
-VALID_EXAMPLE_SET_ID = "HDS-PH-D02B-VALID-SCHEMA-EXAMPLES-V1"
-INVALID_EXAMPLE_SET_ID = "HDS-PH-D02B-INVALID-SCHEMA-BUNDLES-V1"
+SCHEMA_CONTRACT_ID = "HDS-PH-D02C-SCHEMA-REFINEMENT-CONTRACT-V1"
+VALID_EXAMPLE_SET_ID = "HDS-PH-D02C-VALID-SCHEMA-EXAMPLES-V1"
+INVALID_EXAMPLE_SET_ID = "HDS-PH-D02C-INVALID-SCHEMA-BUNDLES-V1"
 
 CONTENT_DIGEST_PATTERN = r"^[a-z][a-z0-9-]*:[0-9a-f]{64}$"
 CONTENT_ID_PATTERN = r"^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*:[0-9a-f]{64}$"
@@ -672,8 +674,13 @@ def _definitions() -> tuple[SchemaDefinition, ...]:
                     _object(
                         properties={
                             "canonicalization_rule": _string(),
+                            "commutes_with": _strings(),
+                            "content_digest": _string(
+                                pattern=(r"^hds-operator-entry:[0-9a-f]{64}$")
+                            ),
                             "deterministic": _boolean(),
                             "domain": _enum(("ARC2", "ARC3", "COMMON")),
+                            "execution_semantics": _string(),
                             "input_types": _strings(),
                             "invalid_operation_semantics": _string(),
                             "opcode": _string(pattern=r"^[A-Z][A-Z0-9_]*$"),
@@ -682,6 +689,14 @@ def _definitions() -> tuple[SchemaDefinition, ...]:
                             "parameter_schema": _json_any(),
                             "preconditions": _strings(),
                             "resource_cost": _integer(minimum=0),
+                            "selector_cardinality": _enum(
+                                (
+                                    "NOT_SELECTOR",
+                                    "ZERO_OR_MORE",
+                                    "EXACTLY_ONE",
+                                    "AT_LEAST_ONE",
+                                )
+                            ),
                             "side_effect_free": _boolean(),
                             "test_vector_refs": _strings(),
                         },
@@ -698,6 +713,10 @@ def _definitions() -> tuple[SchemaDefinition, ...]:
                             "side_effect_free",
                             "resource_cost",
                             "canonicalization_rule",
+                            "commutes_with",
+                            "content_digest",
+                            "execution_semantics",
+                            "selector_cardinality",
                             "test_vector_refs",
                         ),
                         additional=False,
@@ -1088,6 +1107,66 @@ def _definitions() -> tuple[SchemaDefinition, ...]:
 def _remaining_definitions() -> list[SchemaDefinition]:
     """Definitions 17-38, split only to keep the catalog readable."""
 
+    ir_node_schema = _object(
+        properties={
+            "declared_output_type": _string(),
+            "input_refs": _strings(),
+            "node_id": _string(pattern=r"^[a-z][a-z0-9_]{0,63}$"),
+            "opcode": _string(pattern=r"^[A-Z][A-Z0-9_]*$"),
+            "opcode_version": _string(),
+            "parameters": _object(),
+        },
+        required=(
+            "node_id",
+            "opcode",
+            "opcode_version",
+            "input_refs",
+            "parameters",
+            "declared_output_type",
+        ),
+        additional=False,
+    )
+    typed_input_schema = _object(
+        properties={
+            "name": _string(pattern=r"^[a-z][a-z0-9_]{0,63}$"),
+            "provenance": _enum(
+                (
+                    "OBSERVED",
+                    "DETERMINISTIC_DERIVATION",
+                    "GENERAL_RULE_CONSTANT",
+                )
+            ),
+            "type": _string(),
+            "value": _json_any(),
+        },
+        required=("name", "type", "value", "provenance"),
+        additional=False,
+    )
+    abi_schema = _object(
+        properties={
+            "interpreter_contract_digest": _digest(),
+            "interpreter_version": _string(),
+            "ir_schema_contract_digest": _digest(),
+            "ir_schema_version": _string(),
+            "opcode_registry_digest": _digest(),
+            "resource_cost_model_digest": _digest(),
+            "schema_version": _string(),
+            "serialization_version": _string(),
+            "type_system_digest": _digest(),
+        },
+        required=(
+            "schema_version",
+            "interpreter_version",
+            "interpreter_contract_digest",
+            "ir_schema_version",
+            "ir_schema_contract_digest",
+            "opcode_registry_digest",
+            "type_system_digest",
+            "resource_cost_model_digest",
+            "serialization_version",
+        ),
+        additional=False,
+    )
     return [
         _new_definition(
             index=17,
@@ -1097,20 +1176,46 @@ def _remaining_definitions() -> list[SchemaDefinition]:
             id_field="hypothesis_ir_id",
             digest_namespace="hds-hypothesis-ir",
             properties={
+                "abi": abi_schema,
+                "claim_scope": _enum(
+                    (
+                        "PREDICTIVE_HYPOTHESIS",
+                        "COUNTERFACTUAL_CANDIDATE",
+                    )
+                ),
                 "domain": _enum(("ARC2", "ARC3")),
                 "exclusions": _strings(),
                 "falsification_procedures": _array(_object()),
                 "frame_ref": _string(),
                 "input_types": _strings(min_items=1),
+                "inputs": _array(typed_input_schema, min_items=1),
                 "invariants": _array(_object()),
                 "ir_version": _string(),
-                "operator_graph": _array(_object(), min_items=1),
+                "operator_graph": _array(ir_node_schema, min_items=1),
                 "operator_registry_ref": _string(),
-                "ordering_constraints": _array(_object()),
-                "preconditions": _array(_object()),
-                "predicted_effects": _array(_object(), min_items=1),
+                "ordering_constraints": _array(
+                    _object(
+                        properties={
+                            "after": _string(),
+                            "before": _string(),
+                        },
+                        required=("before", "after"),
+                        additional=False,
+                    )
+                ),
+                "output_refs": _strings(min_items=1),
+                "preconditions": _array(ir_node_schema),
+                "predicted_effects": _array(
+                    _object(
+                        properties={"output_ref": _string()},
+                        required=("output_ref",),
+                        additional=False,
+                    ),
+                    min_items=1,
+                ),
                 "resource_cost": _integer(minimum=0),
-                "selector_graph": _array(_object(), min_items=1),
+                "resource_limit": _integer(minimum=1),
+                "selector_graph": _array(ir_node_schema),
                 "stop_conditions": _array(_object()),
             },
             required=(
@@ -1118,6 +1223,9 @@ def _remaining_definitions() -> list[SchemaDefinition]:
                 "domain",
                 "frame_ref",
                 "operator_registry_ref",
+                "abi",
+                "claim_scope",
+                "inputs",
                 "input_types",
                 "selector_graph",
                 "preconditions",
@@ -1128,7 +1236,9 @@ def _remaining_definitions() -> list[SchemaDefinition]:
                 "invariants",
                 "exclusions",
                 "falsification_procedures",
+                "output_refs",
                 "resource_cost",
+                "resource_limit",
             ),
             references=(
                 ReferenceSpec(
@@ -1141,8 +1251,10 @@ def _remaining_definitions() -> list[SchemaDefinition]:
                 ),
             ),
             semantic_rules=(
-                "SCHEMA_ONLY_NOT_EXECUTABLE_IN_PH_D02B",
+                "EXECUTABLE_TYPED_SUBSET_IN_PH_D02C",
                 "IDENTITY_ROUTING_FIELDS_FORBIDDEN",
+                "ANSWER_COPY_FIELDS_FORBIDDEN",
+                "CAUSAL_ESTABLISHMENT_FROM_EXACT_FIT_FORBIDDEN",
             ),
         ),
         _new_definition(
@@ -2316,7 +2428,7 @@ SCHEMA_BY_FILENAME = {item.filename: item for item in SCHEMA_DEFINITIONS}
 
 
 def build_generated_schema(definition: SchemaDefinition) -> JsonObject:
-    """Build one closed Draft 2020-12 schema for a new PH-D02B type."""
+    """Build one closed Draft 2020-12 schema with D02C refinements."""
 
     if definition.preserved:
         raise ValueError("D02B_PRESERVED_SCHEMA_NOT_GENERATED")
@@ -2329,7 +2441,12 @@ def build_generated_schema(definition: SchemaDefinition) -> JsonObject:
             for key, value in definition.properties.items()
         },
         "required": list(definition.required_fields),
-        "title": "PH-D02B " + definition.name,
+        "title": (
+            "PH-D02C "
+            if definition.name in {"HypothesisIR", "OperatorRegistry"}
+            else "PH-D02B "
+        )
+        + definition.name,
         "type": "object",
         "x-hds-digest-field": definition.digest_field,
         "x-hds-primary-id-field": definition.id_field,
@@ -2362,14 +2479,14 @@ def build_schema_contract() -> JsonObject:
                 "d88fb6fc93"
             ),
             "input_phase_state_digest": (
-                "rev3-d02a-phase-state:"
-                "ad044d4726bb26c5a097d651704f3e7454a5480173d05711ab21a70"
-                "d5f137890"
+                "rev3-d02b-phase-state:"
+                "3946f264bad10ffee665c8b378400a9630a57278bed173cdf504524"
+                "9089082a2"
             ),
             "work_block_frame_digest": (
                 "rev3-work-block-frame:"
-                "fcc339cd5867f698b76c420df7b701a572a2b3f18250701c381fa0b"
-                "35979d071"
+                "36b29b707df9ea4b7f5337fb8483a17415392c84bdfc7d74cd4fb"
+                "37c4306a42e"
             ),
         },
         "contract_id": SCHEMA_CONTRACT_ID,
@@ -2377,7 +2494,16 @@ def build_schema_contract() -> JsonObject:
             "content_digest",
             "contract_id",
         ],
-        "gates": ["DG-00", "DG-01", "DG-02", "DG-14"],
+        "gates": [
+            "DG-00",
+            "DG-01",
+            "DG-02",
+            "DG-03",
+            "DG-08",
+            "DG-09",
+            "DG-12",
+            "DG-14",
+        ],
         "hds_state_axes": {
             axis: list(values) for axis, values in sorted(HDS_STATE_AXES.items())
         },
@@ -2386,16 +2512,16 @@ def build_schema_contract() -> JsonObject:
             "bridge_started": False,
             "candidate_generation_started": False,
             "golden_freeze_started": False,
-            "interpreter_started": False,
+            "interpreter_started": True,
             "kaggle_mutation_count": 0,
             "locked_final_access_count": 0,
             "official_access_count": 0,
-            "ph_d02c_typed_causal_ir_started": False,
+            "ph_d02c_typed_causal_ir_started": True,
             "real_trajectory_normalization_count": 0,
             "rule_promotion_count": 0,
             "runtime_started": False,
         },
-        "phase_id": "PH-D02B",
+        "phase_id": "PH-D02C",
         "references": {
             "duplicate_id": "FAIL_CLOSED",
             "dangling_id": "FAIL_CLOSED",
@@ -2413,7 +2539,8 @@ def build_schema_contract() -> JsonObject:
             "INITIAL_RULEATOM_PROPOSED_OR_PROBATION_ONLY",
             "OWNER_RECORDED_APPROVAL_REQUIRES_TRUSTED_EXTERNAL_DIGEST",
             "COVERAGE_DOES_NOT_IMPLY_COMPLETION_ACCEPTANCE",
-            "NO_PHASE_D02C_EXECUTION_OR_PROMOTION",
+            "PH_D02C_EXECUTION_IS_SYNTHETIC_ONLY",
+            "NO_PHASE_D03_CORPUS_OR_DOWNSTREAM_PROMOTION",
         ],
         "supported_json_schema_keywords": [
             "$defs",
@@ -3194,6 +3321,8 @@ class SchemaRegistry:
 
             identity_fields_by_schema = {
                 "HypothesisIR": (
+                    "abi",
+                    "inputs",
                     "selector_graph",
                     "preconditions",
                     "operator_graph",
@@ -3580,7 +3709,7 @@ def build_valid_example_envelopes(
             "authority_digests": [cast(str, build_schema_contract()["content_digest"])],
             "dependency_digests": ["fixture-dependency:" + "3" * 64],
             "environment_manifest_ref": record_id("EnvironmentManifest"),
-            "interpreter_version": "NOT_STARTED_IN_PH_D02B",
+            "interpreter_version": "hds-causal-ir-interpreter-v1",
             "python_version": "3.12.13",
         },
     )
@@ -3592,16 +3721,20 @@ def build_valid_example_envelopes(
             "entries": [
                 {
                     "canonicalization_rule": "HDS_CANONICAL_JSON_V1",
+                    "commutes_with": [],
+                    "content_digest": "hds-operator-entry:" + "9" * 64,
                     "deterministic": True,
                     "domain": "COMMON",
-                    "input_types": ["JsonValue"],
+                    "execution_semantics": "Return the declared State input.",
+                    "input_types": ["State"],
                     "invalid_operation_semantics": "FAIL_CLOSED",
                     "opcode": "IDENTITY_FIXTURE",
-                    "opcode_version": "1",
-                    "output_type": "JsonValue",
+                    "opcode_version": "1.0.0",
+                    "output_type": "State",
                     "parameter_schema": {},
                     "preconditions": [],
-                    "resource_cost": 0,
+                    "resource_cost": 1,
+                    "selector_cardinality": "NOT_SELECTOR",
                     "side_effect_free": True,
                     "test_vector_refs": ["schema-fixture-only"],
                 }
@@ -3676,16 +3809,16 @@ def build_valid_example_envelopes(
             "X": {"domain": "SCHEMA_CONFORMANCE"},
             "authority_boundary": [
                 "NO_OWNER_APPROVAL_GENERATED",
-                "NO_PHASE_D02C_EXECUTION",
+                "SYNTHETIC_PHASE_D02C_EXECUTION_ONLY",
             ],
             "candidate_budget": 4,
             "domain": "ARC3",
             "evidence_boundary": "SYNTHETIC_SCHEMA_ONLY",
             "hds_dependency_digest": "hds-dependency:" + "6" * 64,
-            "hypothesis_language_version": "schema-only-v1",
+            "hypothesis_language_version": "hds-executable-causal-ir-v1",
             "intervention_budget": 0,
             "non_goals": ["TRAJECTORY_NORMALIZATION"],
-            "purpose": "Validate PH-D02B schema topology",
+            "purpose": "Validate PH-D02C executable schema topology",
             "resource_profile_ref": record_id("ResourceProfile"),
             "rollback_conditions": ["SCHEMA_CONFORMANCE_FAILURE"],
             "source_scope_refs": [record_id("SourceProfile")],
@@ -3697,20 +3830,53 @@ def build_valid_example_envelopes(
     records["HypothesisIR"] = _finalize_new_instance(
         "HypothesisIR",
         {
+            "abi": {
+                "interpreter_contract_digest": (
+                    "hds-causal-ir-interpreter-contract:" + "d" * 64
+                ),
+                "interpreter_version": "hds-causal-ir-interpreter-v1",
+                "ir_schema_contract_digest": ("hds-schema-contract:" + "e" * 64),
+                "ir_schema_version": "hds-causal-ir-v1",
+                "opcode_registry_digest": "hds-operator-registry:" + "a" * 64,
+                "resource_cost_model_digest": ("hds-resource-cost-model:" + "b" * 64),
+                "schema_version": "hds-code-ir-abi-v1",
+                "serialization_version": "hds-canonical-json-v1",
+                "type_system_digest": "hds-common-type-system:" + "c" * 64,
+            },
+            "claim_scope": "PREDICTIVE_HYPOTHESIS",
             "domain": "ARC3",
-            "exclusions": ["EXECUTION_IN_PH_D02B"],
-            "falsification_procedures": [{"kind": "SCHEMA_CHECK"}],
+            "exclusions": ["REAL_DATA_EXECUTION"],
+            "falsification_procedures": [],
             "frame_ref": record_id("DistillationFrame"),
-            "input_types": ["RawObservation"],
+            "input_types": ["State"],
+            "inputs": [
+                {
+                    "name": "input_state",
+                    "provenance": "OBSERVED",
+                    "type": "State",
+                    "value": {"synthetic": True},
+                }
+            ],
             "invariants": [{"kind": "NO_IDENTITY_ROUTING"}],
-            "ir_version": "schema-only-v1",
-            "operator_graph": [{"opcode": "IDENTITY_FIXTURE"}],
+            "ir_version": "hds-executable-causal-ir-v1",
+            "operator_graph": [
+                {
+                    "declared_output_type": "State",
+                    "input_refs": ["input_state"],
+                    "node_id": "result",
+                    "opcode": "IDENTITY_FIXTURE",
+                    "opcode_version": "1.0.0",
+                    "parameters": {},
+                }
+            ],
             "operator_registry_ref": record_id("OperatorRegistry"),
             "ordering_constraints": [],
+            "output_refs": ["result"],
             "preconditions": [],
-            "predicted_effects": [{"kind": "NO_EXECUTION"}],
-            "resource_cost": 0,
-            "selector_graph": [{"selector": "SYNTHETIC"}],
+            "predicted_effects": [{"output_ref": "result"}],
+            "resource_cost": 1,
+            "resource_limit": 128,
+            "selector_graph": [],
             "stop_conditions": [],
         },
     )
@@ -3720,13 +3886,13 @@ def build_valid_example_envelopes(
             "domain": "ARC3",
             "freeze_state": "PRE_RESULT_FROZEN",
             "hypothesis_ir_ref": record_id("HypothesisIR"),
-            "intervention_kind": "SCHEMA_ONLY_NOT_EXECUTABLE",
+            "intervention_kind": "SYNTHETIC_TYPED_INPUT_REPLACEMENT",
             "predicted_outcomes": [
                 {"branch": "A"},
                 {"branch": "B"},
             ],
             "resource_profile_ref": record_id("ResourceProfile"),
-            "reversibility": "NOT_EXECUTABLE",
+            "reversibility": "REVERSIBLE",
             "safety_constraints": ["NO_ENVIRONMENT_ACTION"],
         },
     )
@@ -4117,7 +4283,7 @@ def _artifact_digest(
 def build_valid_example_set(project_root: Path) -> JsonObject:
     examples = build_valid_example_envelopes(project_root)
     artifact: JsonObject = {
-        "artifact_kind": "PH_D02B_VALID_SCHEMA_EXAMPLES",
+        "artifact_kind": "PH_D02C_VALID_SCHEMA_EXAMPLES",
         "content_digest": "",
         "digest_excluded_fields": [
             "content_digest",
@@ -4128,11 +4294,11 @@ def build_valid_example_set(project_root: Path) -> JsonObject:
         "examples": cast(JsonValue, examples),
         "owner_approval_generated": False,
         "phase_boundaries": {
-            "ph_d02c_execution_count": 0,
+            "synthetic_ir_execution_count": 0,
             "real_trajectory_normalization_count": 0,
             "rule_promotion_count": 0,
         },
-        "phase_id": "PH-D02B",
+        "phase_id": "PH-D02C",
         "schema_contract_digest": cast(
             str,
             build_schema_contract()["content_digest"],
@@ -4377,7 +4543,18 @@ def materialize_invalid_case(
         _mutate_and_refinalize(
             envelopes,
             "HypothesisIR",
-            {"selector_graph": [{"task_id": "forbidden"}]},
+            {
+                "selector_graph": [
+                    {
+                        "declared_output_type": "State",
+                        "input_refs": ["input_state"],
+                        "node_id": "selector",
+                        "opcode": "IDENTITY_FIXTURE",
+                        "opcode_version": "1.0.0",
+                        "parameters": {"task_id": "forbidden"},
+                    }
+                ]
+            },
         )
     elif scenario_name == "EVIDENCE_DANGLING_REFERENCE":
         _mutate_and_refinalize(
@@ -4667,7 +4844,7 @@ def build_invalid_example_set(valid_example_set: JsonObject) -> JsonObject:
         for scenario_name, expected_code in INVALID_CASES
     ]
     artifact: JsonObject = {
-        "artifact_kind": "PH_D02B_INVALID_SCHEMA_BUNDLES",
+        "artifact_kind": "PH_D02C_INVALID_SCHEMA_BUNDLES",
         "base_valid_example_set_digest": valid_example_set["content_digest"],
         "case_count": len(cases),
         "cases": cases,
@@ -4678,7 +4855,7 @@ def build_invalid_example_set(valid_example_set: JsonObject) -> JsonObject:
         ],
         "example_set_id": INVALID_EXAMPLE_SET_ID,
         "owner_approval_generated": False,
-        "phase_id": "PH-D02B",
+        "phase_id": "PH-D02C",
         "schema_version": "hds-invalid-schema-bundles-v1",
     }
     artifact["content_digest"] = _artifact_digest(
@@ -4780,7 +4957,7 @@ def build_schema_conformance_report(
         )
 
     report: JsonObject = {
-        "artifact_kind": "PH_D02B_SCHEMA_CONFORMANCE",
+        "artifact_kind": "PH_D02C_SCHEMA_REFINEMENT_CONFORMANCE",
         "content_digest": "",
         "digest_excluded_fields": [
             "content_digest",
@@ -4790,6 +4967,10 @@ def build_schema_conformance_report(
             "DG-00": "PASS",
             "DG-01": "PASS",
             "DG-02": "PASS",
+            "DG-03": "PASS_EXECUTABLE_SCHEMA_CONTRACT",
+            "DG-08": "PASS_IDENTITY_ROUTING_SCHEMA_GUARD",
+            "DG-09": "PASS_CLAIM_SCOPE_SCHEMA_BOUNDARY",
+            "DG-12": "PASS_RESOURCE_LIMIT_SCHEMA_BOUNDARY",
             "DG-14": "PASS_SCHEMA_BOUNDARY_ONLY_NO_APPROVAL",
         },
         "generated_schema_count": sum(
@@ -4809,12 +4990,12 @@ def build_schema_conformance_report(
             "kaggle_mutation_count": 0,
             "locked_final_access_count": 0,
             "official_access_count": 0,
-            "ph_d02c_execution_count": 0,
+            "synthetic_ir_execution_count": 0,
             "real_trajectory_normalization_count": 0,
             "rule_promotion_count": 0,
             "runtime_started": False,
         },
-        "phase_id": "PH-D02B",
+        "phase_id": "PH-D02C",
         "positive_bundle_record_count": len(validated),
         "positive_bundle_result": "PASS",
         "multi_causal_no_single_choice_result": "PASS",
@@ -4822,7 +5003,7 @@ def build_schema_conformance_report(
         "preserved_schema_count": sum(
             definition.preserved for definition in SCHEMA_DEFINITIONS
         ),
-        "report_id": "HDS-PH-D02B-SCHEMA-CONFORMANCE-V1",
+        "report_id": "HDS-PH-D02C-SCHEMA-CONFORMANCE-V1",
         "schema_contract_digest": contract["content_digest"],
         "schema_entries": entries,
         "schema_version": "hds-schema-conformance-report-v1",
@@ -4843,7 +5024,7 @@ def build_schema_conformance_report(
 def build_phase_d02b_artifacts(
     project_root: Path,
 ) -> dict[str, bytes]:
-    """Build every deterministic PH-D02B schema artifact in memory."""
+    """Build the schema inventory with deterministic PH-D02C refinements."""
 
     schema_root = project_root / "distillation/schemas"
     schema_payloads = build_schema_payloads(schema_root)
@@ -4883,7 +5064,7 @@ def build_phase_d02b_artifacts(
 
 
 def write_phase_d02b_artifacts(project_root: Path) -> dict[str, str]:
-    """Write only the deterministic artifact paths owned by PH-D02B."""
+    """Write the deterministic schema paths refined by PH-D02C."""
 
     artifacts = build_phase_d02b_artifacts(project_root)
     written_digests: dict[str, str] = {}

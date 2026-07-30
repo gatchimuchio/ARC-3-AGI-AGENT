@@ -58,17 +58,40 @@ distillation schemas:
 - deterministic schema conformance evidence for DG-00, DG-01, DG-02, and the
   schema-only portion of DG-14.
 
+`PH-D02C` adds the synthetic-only executable Causal IR boundary:
+
+- exactly 18 canonical JSON-native common types, 33 ARC2 opcodes, and 18 ARC3
+  opcodes;
+- complete, content-bound ARC2/ARC3 operator registries with explicit input,
+  output, parameter, precondition, execution, invalid-operation,
+  cardinality, resource, commutativity, and test-vector metadata;
+- closed executable `HypothesisIR` nodes and a Code/IR ABI binding the
+  interpreter contract, refined schema contract, registries, type system,
+  resource model, and canonical serialization;
+- a dependency-free type checker and pure declared-order interpreter with
+  canonical trace/result digests;
+- stable fail-closed errors for malformed types, unknown/version-mismatched
+  opcodes, references, preconditions, invalid operations, cardinality, ABI,
+  identity routing, answer copying, and causal overclaim;
+- `SUSPEND_RESOURCE` with `SUSPEND`/`HOLD`/`INCONCLUSIVE` rather than hidden
+  failure when the declared step budget is exhausted;
+- one checked synthetic vector for every opcode, 15 adversarial programs, an
+  exact comparator, and a bounded synthetic intervention runner that emits no
+  causal claim;
+- deterministic conformance evidence for DG-03, DG-08, DG-09, and DG-12.
+
 The compiler hashes source bytes but does not semantically parse, import,
 execute, or replay them. The only network evidence is the already frozen,
 revision-checked, read-only Dataset Viewer capture. Manifest compilation itself
 does not access a network.
 
-PH-D02B defines only static record shapes and validators. It does not normalize
-any real trajectory, execute `HypothesisIR`, implement the PH-D02C interpreter
-or verifier ABI, generate candidates, promote Rules, create or simulate Owner
-approval, process the corpus, create a Bridge, agent, or runtime, access
-locked-final or official data, or create submission output. Historical runtime
-canonical helpers are not imported into the isolated distillation package.
+PH-D02C executes only checked synthetic typed programs. It does not normalize a
+real trajectory, read teacher/source payloads, freeze the PH-D03 corpus,
+generate or rank candidates, establish a causal mechanism, promote Rules,
+create or simulate Owner approval, process corpus coverage, create a Bridge,
+agent, or runtime, access locked-final or official data, or create submission
+output. Historical runtime canonical helpers are not imported into the
+isolated distillation package.
 
 Use exactly Python 3.12.13. From the repository root:
 
@@ -78,12 +101,16 @@ PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_canonical.py
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_schema_registry.py
+PYTHONPATH=distillation/src python -m pytest \
+  distillation/tests/unit/test_causal_ir.py
 PYTHONPATH=distillation/src python -m ruff check \
   distillation/src distillation/tests
 PYTHONPATH=distillation/src python -m mypy --strict \
   distillation/src distillation/tests
 PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.schema_registry import build_phase_d02b_artifacts; expected=build_phase_d02b_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
+PYTHONPATH=distillation/src python -c \
+  "from pathlib import Path; from hds_distill.verification import build_phase_d02c_artifacts; expected=build_phase_d02c_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
 python distillation/src/hds_distill/scope_guard.py \
   --project-root distillation \
   --repository-root . \

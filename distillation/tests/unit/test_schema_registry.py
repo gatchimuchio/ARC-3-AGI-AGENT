@@ -9,6 +9,7 @@ from typing import Any, cast
 import pytest
 
 import hds_distill.schema_registry as schema_registry
+from hds_distill.operator_registry import build_operator_registry
 from hds_distill.schema_registry import (
     HDS_STATE_AXES,
     INVALID_CASES,
@@ -28,6 +29,7 @@ from hds_distill.schema_registry import (
     materialize_invalid_case,
     validate_json_schema_instance,
 )
+from hds_distill.verification import build_valid_ir_vector_artifact
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 DISTILLATION_ROOT = REPOSITORY_ROOT / "distillation"
@@ -42,6 +44,9 @@ INVALID_EXAMPLES_PATH = (
     / "artifacts/test_vectors/schema_examples/invalid_schema_bundles.json"
 )
 CONFORMANCE_PATH = DISTILLATION_ROOT / "artifacts/reports/schema_conformance.json"
+D02B_ARTIFACT_MANIFEST_PATH = (
+    REPOSITORY_ROOT / "control/rev3/PH-D02B_OWNER_REVIEW_PACKAGE/artifact_manifest.json"
+)
 
 AUTHORITY_SCHEMA_NAMES = (
     "DependencyLock",
@@ -151,6 +156,99 @@ def test_five_prior_phase_schema_bytes_are_preserved(
         )
 
 
+def test_d02c_refines_exactly_two_d02b_schema_documents(
+    schema_payloads: dict[str, bytes],
+) -> None:
+    manifest = _json(D02B_ARTIFACT_MANIFEST_PATH)
+    prior_hashes = {
+        Path(cast(str, item["path"])).name: cast(str, item["sha256"])
+        for item in cast(list[dict[str, Any]], manifest["artifacts"])
+        if cast(str, item["path"]).startswith("distillation/schemas/")
+        and cast(str, item["path"]).endswith(".schema.json")
+    }
+    refined = {
+        "hypothesis_ir.schema.json",
+        "operator_registry.schema.json",
+    }
+
+    generated_filenames = {
+        definition.filename
+        for definition in SCHEMA_DEFINITIONS
+        if not definition.preserved
+    }
+    assert set(prior_hashes) == generated_filenames
+    for filename in generated_filenames:
+        payload = schema_payloads[filename]
+        current = hashlib.sha256(payload).hexdigest()
+        if filename in refined:
+            assert current != prior_hashes[filename]
+        else:
+            assert current == prior_hashes[filename]
+
+
+def test_d02c_ir_schema_refinements_are_closed_and_executable(
+    schema_payloads: dict[str, bytes],
+) -> None:
+    hypothesis = cast(
+        dict[str, Any],
+        json.loads(schema_payloads["hypothesis_ir.schema.json"]),
+    )
+    operator_registry = cast(
+        dict[str, Any],
+        json.loads(schema_payloads["operator_registry.schema.json"]),
+    )
+    hypothesis_properties = cast(dict[str, Any], hypothesis["properties"])
+    node = cast(
+        dict[str, Any],
+        hypothesis_properties["operator_graph"]["items"],
+    )
+    entry = cast(
+        dict[str, Any],
+        operator_registry["properties"]["entries"]["items"],
+    )
+
+    assert hypothesis["additionalProperties"] is False
+    assert node["additionalProperties"] is False
+    assert {
+        "abi",
+        "claim_scope",
+        "inputs",
+        "output_refs",
+        "resource_limit",
+    } <= set(hypothesis_properties)
+    assert {
+        "commutes_with",
+        "content_digest",
+        "execution_semantics",
+        "selector_cardinality",
+    } <= set(entry["properties"])
+    assert "EXECUTABLE_TYPED_SUBSET_IN_PH_D02C" in (hypothesis["x-hds-semantic-rules"])
+
+
+def test_d02c_executable_program_and_registry_match_refined_schemas(
+    schema_payloads: dict[str, bytes],
+) -> None:
+    vectors = build_valid_ir_vector_artifact()
+    first = cast(list[dict[str, Any]], vectors["vectors"])[0]
+    hypothesis_schema = cast(
+        dict[str, schema_registry.JsonValue],
+        json.loads(schema_payloads["hypothesis_ir.schema.json"]),
+    )
+    registry_schema = cast(
+        dict[str, schema_registry.JsonValue],
+        json.loads(schema_payloads["operator_registry.schema.json"]),
+    )
+
+    validate_json_schema_instance(
+        hypothesis_schema,
+        cast(dict[str, schema_registry.JsonValue], first["program"]),
+    )
+    validate_json_schema_instance(
+        registry_schema,
+        build_operator_registry("ARC2"),
+    )
+
+
 def test_thirty_three_generated_schemas_are_closed_and_bound(
     schema_payloads: dict[str, bytes],
 ) -> None:
@@ -188,7 +286,8 @@ def test_schema_contract_binds_inventory_axes_and_phase_boundaries() -> None:
         axis: list(values) for axis, values in sorted(HDS_STATE_AXES.items())
     }
     boundaries = cast(dict[str, Any], contract["phase_boundaries"])
-    assert boundaries["ph_d02c_typed_causal_ir_started"] is False
+    assert boundaries["ph_d02c_typed_causal_ir_started"] is True
+    assert boundaries["interpreter_started"] is True
     assert boundaries["real_trajectory_normalization_count"] == 0
     assert boundaries["rule_promotion_count"] == 0
     assert boundaries["official_access_count"] == 0
@@ -522,6 +621,10 @@ def test_checked_conformance_report_records_all_gates_and_cases() -> None:
         "DG-00": "PASS",
         "DG-01": "PASS",
         "DG-02": "PASS",
+        "DG-03": "PASS_EXECUTABLE_SCHEMA_CONTRACT",
+        "DG-08": "PASS_IDENTITY_ROUTING_SCHEMA_GUARD",
+        "DG-09": "PASS_CLAIM_SCOPE_SCHEMA_BOUNDARY",
+        "DG-12": "PASS_RESOURCE_LIMIT_SCHEMA_BOUNDARY",
         "DG-14": "PASS_SCHEMA_BOUNDARY_ONLY_NO_APPROVAL",
     }
 
