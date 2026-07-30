@@ -35,3 +35,19 @@ a trailing newline and fixes:
 
 The contract consumes only frozen manifest metadata and synthetic fixtures.
 It does not read a source payload or normalize a real trajectory.
+
+`PH-D02B` adds `schema_contract.json`. It is canonical JSON without a trailing
+newline and fixes:
+
+- the exact 38-name/38-file schema inventory;
+- every schema version, primary ID field, digest field and exclusion policy;
+- every typed ID or digest reference and its allowed target schemas;
+- the seven independent HDS state axes;
+- structural and semantic fail-closed policies;
+- the DG-00, DG-01, DG-02, and DG-14 schema boundary;
+- explicit zero counts for PH-D02C execution, real trajectory normalization,
+  Rule promotion, runtime, locked-final, official, and Kaggle activity.
+
+The schema contract consumes only prior checked metadata and synthetic
+fixtures. It grants no approval, promotion, completion acceptance, or phase
+transition.

@@ -1,7 +1,8 @@
-"""Isolated HDS source, manifest, and canonical-representation package.
+"""Isolated HDS source, manifest, representation, and schema package.
 
-PH-D02A exports no schema-domain semantics, solver, agent, runtime, or
-submission capability.
+PH-D02B adds static schemas and fail-closed validation, but exports no
+executable Causal IR, solver, agent, runtime, Owner authority, or submission
+capability.
 """
 
 from __future__ import annotations

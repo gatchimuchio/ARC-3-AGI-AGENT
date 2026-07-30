@@ -40,16 +40,35 @@ distillation schemas:
   little endian, C-order shape, member order, and non-finite rejection;
 - committed JSON/ZIP/NPZ test vectors and three-process reproducibility tests.
 
+`PH-D02B` adds the static schema and HDS record boundary:
+
+- exactly 38 authority-named Draft 2020-12 schemas, with the five PH-D01A/B
+  schema files preserved byte-for-byte and 33 closed schemas added;
+- a content-bound schema contract with one primary ID, digest policy, and
+  typed reference declaration per record type;
+- seven independent HDS state axes and explicit RawObservation,
+  DeterministicDerivation, and InterpretationHypothesis separation;
+- a standard-library-only structural, content-identity, typed-reference, and
+  cross-record semantic validator;
+- one mutually resolvable synthetic example per schema, a two-model
+  MULTI_CAUSAL fixture, a no-selection SUSPEND fixture, and deterministic
+  adversarial bundles with stable failure codes;
+- fail-closed Owner approval and promotion boundaries: checked fixtures contain
+  only a non-authoritative `SCHEMA_TEMPLATE`, never an Owner decision;
+- deterministic schema conformance evidence for DG-00, DG-01, DG-02, and the
+  schema-only portion of DG-14.
+
 The compiler hashes source bytes but does not semantically parse, import,
 execute, or replay them. The only network evidence is the already frozen,
 revision-checked, read-only Dataset Viewer capture. Manifest compilation itself
 does not access a network.
 
-PH-D02A does not define the PH-D02B set of 38 Evidence/HDS/Approval schemas,
-normalize any real trajectory, implement Typed Causal IR, generate candidates,
-promote Rules, create a Bridge, agent, or runtime, access locked-final or
-official data, or create submission output. Historical runtime canonical
-helpers are not imported into the isolated distillation package.
+PH-D02B defines only static record shapes and validators. It does not normalize
+any real trajectory, execute `HypothesisIR`, implement the PH-D02C interpreter
+or verifier ABI, generate candidates, promote Rules, create or simulate Owner
+approval, process the corpus, create a Bridge, agent, or runtime, access
+locked-final or official data, or create submission output. Historical runtime
+canonical helpers are not imported into the isolated distillation package.
 
 Use exactly Python 3.12.13. From the repository root:
 
@@ -57,10 +76,14 @@ Use exactly Python 3.12.13. From the repository root:
 PYTHONPATH=distillation/src python -m pytest distillation/tests
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_canonical.py
+PYTHONPATH=distillation/src python -m pytest \
+  distillation/tests/unit/test_schema_registry.py
 PYTHONPATH=distillation/src python -m ruff check \
   distillation/src distillation/tests
 PYTHONPATH=distillation/src python -m mypy --strict \
   distillation/src distillation/tests
+PYTHONPATH=distillation/src python -c \
+  "from pathlib import Path; from hds_distill.schema_registry import build_phase_d02b_artifacts; expected=build_phase_d02b_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
 python distillation/src/hds_distill/scope_guard.py \
   --project-root distillation \
   --repository-root . \
