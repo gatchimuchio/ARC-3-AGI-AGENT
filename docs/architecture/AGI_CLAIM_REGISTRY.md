@@ -1,7 +1,7 @@
 # ARC3 AGI Claim Registry rev3
 
-- active phase: `PH-D02A`
-- current work block: `WB-PH-D02A-CANONICAL-SERIALIZATION-DIGEST`
+- active phase: `PH-D02B`
+- current work block: `WB-PH-D02B-SCHEMA-HDS-STATE-APPROVAL`
 - rev3 active runtime count: `0`
 - current authority: `ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3`
 - P16〜P21: `PRESERVE_INFRASTRUCTURE_CANDIDATE`
@@ -45,7 +45,8 @@
 | `DEPENDENCY_LOCK_PASS` | HDS正本、Translator参照、権威順序、Owner authorityがcontent-boundで一致する | `CODEX_SELF_AUDIT_PASS` | `control/rev3/D00A_PHASE_STATE.json`、`artifacts/reports/dependency_audit.json` | corpus処理、causal support、Rule promotion、AGI能力を含まない | 保持 |
 | `DISTILLATION_SCOPE_GUARD_PASS` | 蒸留namespace、Python環境、Bridge／runtime境界、behavior-based Scope Guardがfinding 0で固定された | `CODEX_SELF_AUDIT_PASS` | `control/rev3/D00B_PHASE_STATE.json`、`distillation/artifacts/reports/distillation_scope_audit.json` | source freeze、corpus処理、Causal IR、Rule promotion、Bridge／AGI能力を含まない | 保持 |
 | `PH_D01A_SOURCE_INVENTORY_PASS` | admitted ARC2／ARC3 source 83件をprofile、split、answer visibility、usage、contaminationへ一意分類した | `CODEX_SELF_AUDIT_PASS` | `control/rev3/D01A_PHASE_STATE.json`、`distillation/artifacts/reports/source_inventory.json` | content／acquisition／environment freeze、payload処理、trajectory normalization、Causal IR、能力を含まない | 保持 |
-| `PH_D01B_MANIFEST_FREEZE_PASS` | admitted source 83件の内容同一性、取得記録、ARC3 replay環境、run記録を分離して固定した | `CODEX_SELF_AUDIT_PASS` | `control/rev3/D01B_PHASE_STATE.json`、`distillation/artifacts/reports/source_manifest_freeze.json` | canonical schema共通表現、trajectory normalization、Causal IR、Rule promotion、能力を含まない | PH-D02A |
+| `PH_D01B_MANIFEST_FREEZE_PASS` | admitted source 83件の内容同一性、取得記録、ARC3 replay環境、run記録を分離して固定した | `CODEX_SELF_AUDIT_PASS` | `control/rev3/D01B_PHASE_STATE.json`、`distillation/artifacts/reports/source_manifest_freeze.json` | canonical schema共通表現、trajectory normalization、Causal IR、Rule promotion、能力を含まない | 保持 |
+| `PH_D02A_CANONICAL_CONTRACT_PASS` | Unicode NFC JSON、content ID、logical／physical digest、canonical ZIP／NPZ、raw／canonical trajectory digestを決定論的に固定した | `CODEX_SELF_AUDIT_PASS` | `control/rev3/D02A_PHASE_STATE.json`、`distillation/artifacts/reports/canonicalization_conformance.json` | 38 schema、trajectory normalization、Causal IR、Rule promotion、能力を含まない | PH-D02B |
 | `STRUCTURAL_READY` | rev2 C/J/M/P、権限、traceの実装資産が存在する | `INFRASTRUCTURE_CANDIDATE` | P17-A〜P21 phase state、architecture docs、unit tests | 旧phase stateは`UNCOMMITTED_WORKTREE`。distilled bundle接続、現行runtime能力、汎化を含まない | PH-R00 / Track B |
 | `KNOWN_PUBLIC_REGRESSION` | active distilled runtimeだけで公開25 game・183 levelを完遂 | `NOT_ESTABLISHED` | 旧focused `ft09-0d8bbf25`とP22/CVはhistorical quarantine | rev3 active runtime 0。現行全数artifactなし | PH-E00 |
 | `MEMORY_CAUSAL` | candidate-bound Mだけの差で未来の計算・判断・行動が変化 | `INFRASTRUCTURE_CANDIDATE` | 旧P22 ablation witnessとP18〜P21 tests | distilled runtime上の因果証拠ではなく、public全数ablationも未完了 | PH-A05 / PH-A07 |
