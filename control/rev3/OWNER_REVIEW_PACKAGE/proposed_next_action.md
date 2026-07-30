@@ -1,11 +1,12 @@
 # Proposed Next Action
 
-Ownerが次を明示決定するまで停止する。
+Owner ApprovalRecordに従い、PH-D00Aを別Work Blockとして開始する。
 
-1. PH-R00を`OWNER_APPROVED_PASS`、`OWNER_APPROVED_REWORK`、
-   `OWNER_REJECTED`のいずれにするか。
-2. PH-D00A開始を許可するか。
+1. PH-D00A Frame Lockとdependency inventoryを固定する。
+2. HDS三正本、Translator commit、権威順序をcontent digestへbindする。
+3. mismatch fail-closed、DependencyLock schema、Open Term初期schemaを実装する。
+4. PH-D00Aの検証、commit bind、証拠packageを閉じる。
+5. 通常phaseは停止せず、次の別Work Blockへ進む。
 
-Codex self-auditとrequired validationはPASSしているが、これはOwner approvalではない。
-PH-D00AのFrame Lock、ARCデータ処理、Causal IR、candidate generation、
-Bridge、AGI Runtimeを自動開始しない。
+ARCデータ処理、Causal IR、candidate generation、Bridge、AGI Runtimeは
+PH-D00Aへ混在させない。hard gate対象は個別Owner判断まで実行しない。

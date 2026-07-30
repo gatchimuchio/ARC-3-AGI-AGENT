@@ -8,19 +8,23 @@
   "artifacts": [
     {
       "path": "control/rev3/R00_PHASE_STATE.json",
-      "sha256": "7ebd9db58f844d706f2c6cee307941250285e8871b2aa423bca60a48c6fa24eb"
+      "sha256": "88b9ca07854f9efaee1d4ec7153b3aeccedc77f19500dfe2d4d22a2a9803d938"
+    },
+    {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+      "sha256": "e34e21bfb72172dda3c43b922119bee962a9aca899c9d4850402f90c5c7f04f7"
     },
     {
       "path": "control/rev3/OWNER_REVIEW_PACKAGE/summary.md",
-      "sha256": "efe64683171603f3077c522df4fdc2212804ac4113b625ce971dc5aaf9308ae1"
+      "sha256": "8dafea5e7a9a2baef6f46835d7dd23402b0d3ca33880274f5f0426501eb14205"
     },
     {
       "path": "control/rev3/OWNER_REVIEW_PACKAGE/phase_state.json",
-      "sha256": "7ebd9db58f844d706f2c6cee307941250285e8871b2aa423bca60a48c6fa24eb"
+      "sha256": "88b9ca07854f9efaee1d4ec7153b3aeccedc77f19500dfe2d4d22a2a9803d938"
     },
     {
       "path": "control/rev3/OWNER_REVIEW_PACKAGE/changed_files.json",
-      "sha256": "95d4e17012029c39a5eb235d68d2aef581a963e0f68a30a8df8126a455c8c256"
+      "sha256": "6455fd9289622b215dd4f55eb73acf7e7b91052d2f8f8ac6feb26a1ca0c8a0c6"
     },
     {
       "path": "control/rev3/OWNER_REVIEW_PACKAGE/commands.json",
@@ -36,15 +40,15 @@
     },
     {
       "path": "control/rev3/OWNER_REVIEW_PACKAGE/open_terms.json",
-      "sha256": "9961a208e2b25395284ba13918076bbef33d6315f93de41cd1a91d5949e9ec81"
+      "sha256": "fcde834ba6597b84076fb6a8e95b2995c4c06f40590e8a15725b69b9cba03545"
     },
     {
       "path": "control/rev3/OWNER_REVIEW_PACKAGE/self_audit.json",
-      "sha256": "69a61d63d3af1484aeee7a7365bd99fc3b65f1c8c2ceff577b2c75d3747e028e"
+      "sha256": "1be9165880626b0f08e69902c9146dd4e59b031f8a99e1f5c29d94e30a8086dc"
     },
     {
       "path": "control/rev3/OWNER_REVIEW_PACKAGE/proposed_next_action.md",
-      "sha256": "c11562464b0151efb894c4bd11b2ed57c024e2a9871714c820622d1efcd49324"
+      "sha256": "159ad60b1cc98fd31e366a500dfce9c90d1bb57fffb709db384fa57b99089b4c"
     },
     {
       "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
@@ -56,7 +60,7 @@
     },
     {
       "path": "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json",
-      "sha256": "4985f388817c55b98e0d655c03c7504e3f0a058d41b00a5cd84eb817befcc95f"
+      "sha256": "107982f509839100ee8ffb00d09532001f430bb22e097ee4dc6a45cf8560459a"
     },
     {
       "path": "docs/strategy/ASSET_CLASSIFICATION_REV3.json",
@@ -72,7 +76,7 @@
     },
     {
       "path": "docs/strategy/REV3_STRATEGY_REBASELINE.md",
-      "sha256": "936f2cc789a20675d0b81a272f2b2864a9d8478885509f07da1fadd206487d8d"
+      "sha256": "01d34bde6630fa2e3437dadbd0b416120671eea3820f0b32d73c1f53cf19a957"
     },
     {
       "path": "docs/strategy/PRODUCTION_IMPORT_BOUNDARY_REV3.md",
@@ -84,7 +88,7 @@
     },
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
-      "sha256": "2a4d3fdf16d878549ab00188300388961cf08fd9cdf40dddc700540b30ae7f17"
+      "sha256": "9b731b19227dca7457363a53b8b7677df9c557e77a82516adb415eed0d80c4b5"
     },
     {
       "path": "scripts/build_kaggle_submission.py",
@@ -100,8 +104,16 @@
     },
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
-      "sha256": "c983990e63d54c04a79b5493ae3ac1c542450605b4dddcdbe8ff94e67e205ade"
+      "sha256": "d6eb02bc7fdf02876f2219a9bbb60c21bd8822fd962166f5b66155e8798f554f"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "c2697a07c2c002680bd11240dcf4960108cdb248ba1e1fa84e44c95ecd18d6c8"
+    },
+    {
+      "path": "docs/architecture/AGI_CLAIM_REGISTRY.md",
+      "sha256": "6c51f261cf5b5fd21905db90d9b5a624b5a8a88efc712ff4ea7f1dbe450b11cd"
     }
   ],
-  "content_digest": "rev3-r00-owner-review-artifact-manifest:e3a453804bc15fe16cedcf172b94b1f97533f0dea04c93f8279f1a8ecb078674"
+  "content_digest": "rev3-r00-owner-review-artifact-manifest:b489cd66511a738589be916f83f80bb718b3f1d31bcc9f660983a674c3a72db5"
 }

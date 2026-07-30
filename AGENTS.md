@@ -120,14 +120,21 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ## 4. Active Strategy Selector
 
 ```text
-PH-R00
-→ PH-D00A ... PH-D14
+PH-R00 [OWNER_APPROVED_PASS]
+→ PH-D00A [ACTIVE]
+→ PH-D00B ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
 ```
 
 Codexはactive phaseより先へ進まない。
+
+PH-R00のOwner決定と通常phaseを連続実行する現在指示は、
+`control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`へ固定する。
+この指示により、各phaseのWork Block、検証、commit bind、証拠生成を省略せず、
+通常のphase境界ではOwner応答待ちのために停止しない。
+これはCodexへのphase採否権移譲ではなく、Ownerが事前に与えた連続進行許可の実行である。
 
 Hard Gate:
 
@@ -339,6 +346,12 @@ OWNER_REVIEW_PACKAGE/
 
 `OWNER_REVIEW_REQUIRED`で停止する。  
 次phaseへ自動進行しない。
+
+ただし、現在のOwner連続進行許可が有効な間は、phase固有のDoD、自己監査、
+commit bind、Owner Review Packageを閉じた後、順序どおり次の通常phaseへ進む。
+Rule／RuleAtom採否、HDSStructureBundle採択、DistilledInitialStateBundle採択、
+`LOCKED_FINAL`、official環境、Kaggle変更・提出はこの例外に含めず、
+対象内容を示したOwner決定で停止する。
 
 ---
 
@@ -589,8 +602,9 @@ OWNER_APPROVED
 あなたの役割はDevelopment Meta-Cです。
 Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではありません。
 
-Active phaseはPH-R00です。
-一Work BlockでPH-R00だけを実施してください。
+PH-R00はOwner ApprovalRecordにより採択済みです。
+Active phaseはPH-D00Aです。
+一Work BlockでPH-D00Aだけを実施してください。
 
 最初に、
 - repository root
@@ -601,18 +615,16 @@ Active phaseはPH-R00です。
 - current phase state
 を確認してください。
 
-次にWorkBlockFrameを作成し、
-current HEADをPRE_DISTILLATION_INFRASTRUCTURE_BASELINEへrebindしてください。
+次にPH-D00A WorkBlockFrameを作成し、HDS三正本、Translator参照commit、
+権威順序、最終採否者をcontent digestへ固定してください。
+dependency mismatchはfail closedとし、Open Term Ledgerの初期schemaだけを作成してください。
 
-P16〜P21は基盤候補として保持します。
-S5、current compiled MLP、current P22/CV artifactsはhistorical/quarantineへ分類します。
-production completion pathからS5 dependencyを除外する境界を作ってください。
+PH-D00B、ARC corpus処理、Causal IR、Bridge、AGI Runtime、P22改善、
+locked final、official、KaggleへPH-D00A内で進んではいけません。
 
-HDS蒸留、Bridge、AGI能力実装、P22改善、official提出へ進んではいけません。
-
-実装・試験・自己監査・commit bind・Owner Review Package生成後、
-statusをOWNER_REVIEW_REQUIREDとして停止してください。
-OWNER_APPROVED_PASSを自分で設定してはいけません。
+PH-D00Aの実装・試験・自己監査・commit bind・Owner Review Package生成後は、
+現在のOwner連続進行許可に従い、停止せず次の通常phaseを別Work Blockとして開始してください。
+Codex自身がRule採否、hard gate承認、official承認を生成してはいけません。
 ```
 
 ---

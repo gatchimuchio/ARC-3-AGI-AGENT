@@ -1,12 +1,18 @@
 {
   "schema_version": "arc3-rev3-phase-state-v1",
   "phase_id": "PH-R00",
-  "status": "OWNER_REVIEW_REQUIRED",
+  "status": "OWNER_APPROVED_PASS",
   "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
   "base_tree": "d63d26e25758211938cc33d0efe84f50ed096023",
   "result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
   "result_tree": "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9",
   "work_block_id": "WB-PH-R00-VALIDATION-CLOSURE-REWORK",
+  "owner_approval_record": {
+    "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+    "approval_id": "OWNER-APPROVAL-PH-R00-20260730",
+    "approval_artifact_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+    "target_review_commit": "9a0f240dd8e1e07cbc9d19b096502289b0a1331b"
+  },
   "work_block_history": [
     {
       "work_block_id": "WB-PH-R00-STRATEGY-REBASELINE",
@@ -157,6 +163,10 @@
     {
       "path": "analysis/rev3/ph_r00_validation_rework.json",
       "digest": "rev3-r00-validation-rework:d819d7a9c5591b2ceb24f346fbd686adc1d94bf03783b8d9da8ebd83fa9bd61e"
+    },
+    {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+      "digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0"
     }
   ],
   "failed_requirement_ids": [],
@@ -166,7 +176,7 @@
   ],
   "open_terms": [],
   "self_audit": {
-    "decision": "OWNER_REVIEW_REQUIRED",
+    "decision": "CODEX_SELF_AUDIT_PASS",
     "codex_self_audit_pass": true,
     "checks": {
       "objective_alignment": "PASS",
@@ -182,13 +192,10 @@
       "historical_fallback": "PASS",
       "required_validation": "PASS"
     },
-    "reason": "The two declared validation failures have causal corrections and passing post-result-commit evidence; Owner approval and phase promotion remain reserved."
+    "reason": "The two declared validation failures have causal corrections and passing post-result-commit evidence. The separate Owner ApprovalRecord accepts PH-R00 and authorizes PH-D00A."
   },
-  "owner_review_required": true,
-  "owner_decisions_required": [
-    "Approve, rework, or reject PH-R00",
-    "Authorize or deny phase promotion to PH-D00A"
-  ],
+  "owner_review_required": false,
+  "owner_decisions_required": [],
   "phase_invariants": {
     "current_head_bound": true,
     "result_commit_bound": true,
@@ -199,11 +206,12 @@
     "historical_fallback_count": 0,
     "missing_required_authority_count": 0,
     "next_phase": "PH-D00A",
-    "next_phase_started": false,
-    "owner_approval": "required",
+    "next_phase_started": true,
+    "owner_approval": "recorded",
+    "owner_approval_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
     "locked_final_access_count": 0,
     "official_access_count": 0,
     "network_submission_count": 0
   },
-  "content_digest": "rev3-r00-phase-state:261ae0a0472b131b0b72052f69ca4933ffd07b9489277defd6ef327002f722a6"
+  "content_digest": "rev3-r00-phase-state:29d00d5fb0bc30c341720334964e5a410229753a11c0e91bd2894f2ca5ef53ee"
 }

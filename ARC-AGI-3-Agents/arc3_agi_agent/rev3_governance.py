@@ -1,8 +1,9 @@
 """Fail-closed governance boundary for the rev3 distillation-first strategy.
 
-PH-R00 does not construct an AGI runtime.  It defines the only source class
-that a future rev3 production runtime may accept and rejects all historical
-S5/P22 capability paths as parents, active policies, or fallbacks.
+PH-R00 defined the only source class that a future rev3 production runtime
+may accept and rejected all historical S5/P22 capability paths as parents,
+active policies, or fallbacks.  PH-D00A only advances the phase selector; it
+does not construct or activate an AGI runtime.
 """
 
 from __future__ import annotations
@@ -13,7 +14,7 @@ from typing import Final
 REV3_STRATEGY_ID: Final = (
     "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
 )
-REV3_ACTIVE_PHASE: Final = "PH-R00"
+REV3_ACTIVE_PHASE: Final = "PH-D00A"
 REV3_PHASE_ORDER: Final = (
     "PH-R00",
     "PH-D00A",

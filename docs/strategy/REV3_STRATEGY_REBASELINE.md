@@ -1,7 +1,7 @@
 # ARC3 rev3 Strategy Rebaseline
 
 - strategy: `HDS_DISTILLATION_FIRST`
-- active phase: `PH-R00`
+- active phase: `PH-D00A`
 - base commit: `1eece1f21926be24c7c13608eb81f1d0a3f76614`
 - base tree: `d63d26e25758211938cc33d0efe84f50ed096023`
 - Codex role: `DEVELOPMENT_META_C`
@@ -11,8 +11,9 @@
 ## Active selector
 
 ```text
-PH-R00
-→ PH-D00A ... PH-D14
+PH-R00 [OWNER_APPROVED_PASS]
+→ PH-D00A [ACTIVE]
+→ PH-D00B ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
@@ -73,8 +74,10 @@ HDS蒸留仕様、HDS蒸留roadmap、HDS内部／外向け正本、
 Self-Contained Promptは全てbyte-preservingで保持し、記載SHA-256との一致を確認した。
 required authority不足は0である。
 
-これはTrack Dの自動開始許可ではない。PH-R00のcommit bind、自己監査、
-Owner Reviewを先に閉じる。
+PH-R00のcommit bind、自己監査、Owner Reviewは閉じられ、
+`control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`にOwner決定を固定した。
+同Recordの連続進行許可により、通常phaseはphase固有の証拠境界を保ったまま進める。
+Rule採否、構造bundle採択、locked final、official、Kaggleは個別Owner決定を要する。
 
 ## Claims
 
@@ -82,7 +85,8 @@ Owner Reviewを先に閉じる。
 
 ```text
 REV3_AUTHORITY_RETAINED
-PH_R00_IMPLEMENTATION_IN_PROGRESS
+PH_R00_OWNER_APPROVED_PASS
+PH_D00A_IN_PROGRESS
 HISTORICAL_POLICY_QUARANTINED
 ACTIVE_RUNTIME_CAPABILITY_NOT_ESTABLISHED
 ```
@@ -90,8 +94,6 @@ ACTIVE_RUNTIME_CAPABILITY_NOT_ESTABLISHED
 禁止する表現:
 
 ```text
-PH_R00_COMPLETED
-OWNER_APPROVED_PASS
 HDS_DISTILLATION_COMPLETE
 GENERIC
 AGI

@@ -1,12 +1,19 @@
 {
   "schema_version": "arc3-rev3-authority-input-manifest-v1",
   "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
-  "base_commit": "1eece1f21926be24c7c13608eb81f1d0a3f76614",
+  "base_commit": "9a0f240dd8e1e07cbc9d19b096502289b0a1331b",
+  "current_phase": "PH-D00A",
   "inputs": [
+    {
+      "authority_rank": 1,
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+      "sha256": "e34e21bfb72172dda3c43b922119bee962a9aca899c9d4850402f90c5c7f04f7",
+      "state": "OWNER_DECISION_RECORDED"
+    },
     {
       "authority_rank": 2,
       "path": "AGENTS.md",
-      "sha256": "248f3a16577c89d2cac9354a0e471077b59f63141bb177840dc9f13a85745630",
+      "sha256": "c2697a07c2c002680bd11240dcf4960108cdb248ba1e1fa84e44c95ecd18d6c8",
       "state": "AVAILABLE_BYTE_PRESERVED"
     },
     {
@@ -69,6 +76,6 @@
     }
   ],
   "missing_required_authority_count": 0,
-  "phase_effect": "PH_R00_INPUT_SET_CLOSED",
-  "content_digest": "rev3-authority-input-manifest:b3388e4ce73c995cbdd7d8dc8209e1ffbff52f53b7847e4edfcced0e89fd37a4"
+  "phase_effect": "PH_D00A_INPUT_SET_CLOSED",
+  "content_digest": "rev3-authority-input-manifest:99de70efcf739800e9c20a5aa064d4b6e98fda655ff94ce37c2fd7118ece2db3"
 }

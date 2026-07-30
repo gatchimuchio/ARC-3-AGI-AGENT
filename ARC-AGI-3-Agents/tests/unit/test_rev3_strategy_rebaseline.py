@@ -50,7 +50,7 @@ def _valid_selection() -> Rev3ProductionSelection:
 
 
 def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
-    assert REV3_ACTIVE_PHASE == "PH-R00"
+    assert REV3_ACTIVE_PHASE == "PH-D00A"
     assert REV3_PHASE_ORDER[0] == "PH-R00"
     assert REV3_PHASE_ORDER.index("PH-D14") < REV3_PHASE_ORDER.index(
         "PH-B00"
@@ -158,7 +158,7 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     )
     expected = {
         "AGENTS.md": (
-            "248f3a16577c89d2cac9354a0e471077b59f63141bb177840dc9f13a85745630"
+            "c2697a07c2c002680bd11240dcf4960108cdb248ba1e1fa84e44c95ecd18d6c8"
         ),
         (
             "docs/strategy/"
@@ -201,7 +201,26 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
     claimed = str(body.pop("content_digest"))
     assert claimed == "rev3-authority-input-manifest:" + digest_object(body)
     assert manifest["missing_required_authority_count"] == 0
-    assert manifest["phase_effect"] == "PH_R00_INPUT_SET_CLOSED"
+    assert manifest["current_phase"] == "PH-D00A"
+    assert manifest["phase_effect"] == "PH_D00A_INPUT_SET_CLOSED"
+    approval = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "OWNER_APPROVAL_RECORDS"
+        / "PH-R00.json"
+    )
+    approval_body = dict(approval)
+    for excluded in approval["digest_excluded_fields"]:
+        approval_body.pop(excluded)
+    assert approval["approval_artifact_digest"] == (
+        "owner-approval-record:" + digest_object(approval_body)
+    )
+    assert approval["target_artifact_sha256"] == (
+        "7ebd9db58f844d706f2c6cee307941250285e8871b2aa423bca60a48c6fa24eb"
+    )
+    assert approval["next_state"] == "OWNER_APPROVED_PASS"
+    assert approval["authorization_scope"]["phase_order_must_be_preserved"]
 
 
 def test_asset_classification_and_frame_are_content_bound() -> None:
@@ -320,6 +339,13 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
     phase_state_path = (
         REPOSITORY_ROOT / "control" / "rev3" / "R00_PHASE_STATE.json"
     )
+    approval = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "OWNER_APPROVAL_RECORDS"
+        / "PH-R00.json"
+    )
     phase_state = _json(phase_state_path)
     phase_state_body = dict(phase_state)
     phase_state_digest = str(phase_state_body.pop("content_digest"))
@@ -327,7 +353,7 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
         "rev3-r00-phase-state:"
         + digest_object(phase_state_body)
     )
-    assert phase_state["status"] == "OWNER_REVIEW_REQUIRED"
+    assert phase_state["status"] == "OWNER_APPROVED_PASS"
     assert phase_state["result_commit"] == rework["result_commit"]
     assert phase_state["result_tree"] == rework["result_tree"]
     assert phase_state["failed_requirement_ids"] == []
@@ -343,8 +369,11 @@ def test_asset_classification_and_frame_are_content_bound() -> None:
         "quarantined_s5_dependency_in_production"
     ] == 0
     assert phase_invariants["next_phase"] == "PH-D00A"
-    assert phase_invariants["next_phase_started"] is False
-    assert phase_invariants["owner_approval"] == "required"
+    assert phase_invariants["next_phase_started"] is True
+    assert phase_invariants["owner_approval"] == "recorded"
+    assert phase_invariants["owner_approval_digest"] == (
+        approval["approval_artifact_digest"]
+    )
     assert phase_state_path.read_bytes() == (
         REPOSITORY_ROOT
         / "control"

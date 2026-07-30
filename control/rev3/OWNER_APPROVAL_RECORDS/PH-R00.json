@@ -1,0 +1,56 @@
+{
+  "schema_version": "arc3-rev3-owner-approval-record-v1",
+  "approval_id": "OWNER-APPROVAL-PH-R00-20260730",
+  "authority": "大平鉄兵",
+  "target_phase_id": "PH-R00",
+  "target_artifact_digest": "rev3-r00-phase-state:261ae0a0472b131b0b72052f69ca4933ffd07b9489277defd6ef327002f722a6",
+  "target_artifact_sha256": "7ebd9db58f844d706f2c6cee307941250285e8871b2aa423bca60a48c6fa24eb",
+  "target_review_commit": "9a0f240dd8e1e07cbc9d19b096502289b0a1331b",
+  "target_review_tree": "44bab14257607f5f3b43752fc271df8d569affeb",
+  "target_result_commit": "e13a7f07dd7f8b9f4a23d2c4cea141a8fedb2938",
+  "target_result_tree": "b00d9dee4057fcc3848885fa947f77cdd0fb0ba9",
+  "previous_state": "OWNER_REVIEW_REQUIRED",
+  "next_state": "OWNER_APPROVED_PASS",
+  "decision": "APPROVE_PHASE_AND_AUTHORIZE_CONTINUOUS_NON_HARD_GATE_PROGRESSION",
+  "reason_codes": [
+    "OWNER_EXPLICIT_CONTINUE",
+    "OWNER_EXPLICIT_CONTINUOUS_WORK_AUTHORIZATION"
+  ],
+  "evidence_refs": [
+    {
+      "source_type": "CURRENT_USER_INSTRUCTION",
+      "statement": "続行",
+      "utf8_sha256": "4d2dfdf6dd1f48d4c73f93f8758c84f20e0cc475ee8ac00e047ca352cb6c8537"
+    },
+    {
+      "source_type": "CURRENT_USER_INSTRUCTION",
+      "statement": "一々停止しなくていいから連続で作業して良い",
+      "utf8_sha256": "e9f5606b231e717906ec1dffd34c01e2a401749166d97526514c418cd2b8dac8"
+    }
+  ],
+  "authorization_scope": {
+    "allowed": [
+      "record PH-R00 as Owner-approved",
+      "start PH-D00A",
+      "continue sequential implementation phases without a routine pause after each phase",
+      "generate phase-specific implementation, validation, commit binding, and review evidence"
+    ],
+    "still_requires_content_specific_owner_decision": [
+      "Rule or RuleAtom promotion",
+      "HDSStructureBundle approval",
+      "DistilledInitialStateBundle approval",
+      "LOCKED_FINAL access",
+      "official environment access",
+      "Kaggle notebook mutation or submission"
+    ],
+    "phase_order_must_be_preserved": true,
+    "one_work_block_per_phase": true
+  },
+  "spec_version": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
+  "approved_at": "2026-07-30T15:22:57+09:00",
+  "digest_excluded_fields": [
+    "approval_artifact_digest",
+    "approved_at"
+  ],
+  "approval_artifact_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0"
+}

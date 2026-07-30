@@ -1,7 +1,7 @@
 # ARC3 AGI Claim Registry rev3
 
-- active phase: `PH-R00`
-- current work block: `WB-PH-R00-STRATEGY-REBASELINE`
+- active phase: `PH-D00A`
+- current work block: `WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-FREEZE`
 - rev3 active runtime count: `0`
 - current authority: `ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3`
 - P16〜P21: `PRESERVE_INFRASTRUCTURE_CANDIDATE`
@@ -41,7 +41,7 @@
 | `CLAIM_OFFICIAL_COMPATIBILITY` | 公式Competition contractに実接続で適合する | `NOT_EVALUATED` | mock dry-runはPASS、official connection performedはfalse | actualはP13かつP12全blocking PASS後のみ | P13 |
 | `CLAIM_OFFICIAL_SCORE` | 公式scoreを取得済み | `NOT_EVALUATED` | なし | 公式接続・提出未実施 | P15 |
 | `CLAIM_PRE_OFFICIAL_AGI_READY` | rev1 P13公式接続の前提gateを満たした | `HISTORICAL_ONLY` | `PRE_OFFICIAL_AGI_RELEASE_STATE.json`: 57/57 PASS、failed ID 0 | rev2 blocking registryを満たさず、現行phase selectorではない | 参照のみ |
-| `INFRASTRUCTURE_BASELINE_FROZEN` | P16〜P21基盤を現行commit/treeへbindしS5/P22を隔離 | `NOT_ESTABLISHED` | PH-R00 implementation、test、commit bind、Owner Review Packageを生成中 | commit後のresult bindとOwner review未完了 | PH-R00 |
+| `INFRASTRUCTURE_BASELINE_FROZEN` | P16〜P21基盤を現行commit/treeへbindしS5/P22を隔離 | `OWNER_APPROVED` | `control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`、PH-R00 result commit/tree、Owner Review Package | AGI能力、蒸留完了、runtime有効化を含まない | 保持 |
 | `STRUCTURAL_READY` | rev2 C/J/M/P、権限、traceの実装資産が存在する | `INFRASTRUCTURE_CANDIDATE` | P17-A〜P21 phase state、architecture docs、unit tests | 旧phase stateは`UNCOMMITTED_WORKTREE`。distilled bundle接続、現行runtime能力、汎化を含まない | PH-R00 / Track B |
 | `KNOWN_PUBLIC_REGRESSION` | active distilled runtimeだけで公開25 game・183 levelを完遂 | `NOT_ESTABLISHED` | 旧focused `ft09-0d8bbf25`とP22/CVはhistorical quarantine | rev3 active runtime 0。現行全数artifactなし | PH-E00 |
 | `MEMORY_CAUSAL` | candidate-bound Mだけの差で未来の計算・判断・行動が変化 | `INFRASTRUCTURE_CANDIDATE` | 旧P22 ablation witnessとP18〜P21 tests | distilled runtime上の因果証拠ではなく、public全数ablationも未完了 | PH-A05 / PH-A07 |

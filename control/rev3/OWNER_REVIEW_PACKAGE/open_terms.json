@@ -3,14 +3,17 @@
   "phase_id": "PH-R00",
   "required_authority_missing_count": 0,
   "open_terms": [],
-  "owner_decisions": [
+  "owner_decisions": [],
+  "resolved_owner_decisions": [
     {
       "id": "OWNER-R00-DECISION",
-      "question": "Approve, require rework, or reject PH-R00."
+      "decision": "OWNER_APPROVED_PASS",
+      "approval_record": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json"
     },
     {
       "id": "OWNER-PHASE-PROMOTION",
-      "question": "Authorize or deny the start of PH-D00A."
+      "decision": "PH-D00A_AUTHORIZED",
+      "approval_record": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json"
     }
   ]
 }
