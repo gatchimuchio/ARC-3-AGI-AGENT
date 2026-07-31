@@ -76,14 +76,15 @@ def test_current_dependency_lock_passes_fail_closed_contract() -> None:
     )
     assert selector["installation_status"] == "INSTALLED"
     assert selector["ph_r1_status"] == "OWNER_APPROVED_PASS"
-    assert selector["active_phase"] == "PH-D00B"
+    assert selector["active_phase"] == "PH-D01A"
     assert selector["current_work_class"] == (
-        "PH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBIND"
+        "PH-D01A_PRIMARY_SOURCE_INVENTORY_REBIND"
     )
     assert selector["ph_r00_owner_authorization"] == "ESTABLISHED"
     assert selector["ph_r00_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d00a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d00b_status"] == "IN_PROGRESS"
+    assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d01a_status"] == "IN_PROGRESS"
     assert selector["runtime_activation_status"] == "SUSPEND"
     assert (
         selector["historical_evidence"]["classification"]

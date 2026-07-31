@@ -1,0 +1,152 @@
+{
+  "schema_version": "arc3-rev3-work-block-frame-v1",
+  "work_block_id": "WB-PH-D01A-SOURCE-DIALECT-CONTAMINATION-INVENTORY",
+  "phase_id": "PH-D01A",
+  "base_commit": "25a4363fc1dfe78d47106f715db65c36d393210f",
+  "base_tree": "51c7b4f8f057bebbccb1d9852dddc92bda137745",
+  "spec_digest": "sha256:feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f",
+  "roadmap_digest": "sha256:b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2",
+  "hds_spec_digest": "sha256:79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93",
+  "hds_roadmap_digest": "sha256:64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
+  "input_manifest_digest": "rev3-authority-input-manifest:ba20118baa128ce18e75ed234079d25cc7c2b84e58f2d285e72732d33506ad05",
+  "phase_transition_digest": "rev3-phase-transition:44e841894140af119ab1766e76abde45cfa83c6f6eed6c03c03a833fdfa1b884",
+  "purpose": "Inventory every admitted ARC2 and ARC3 source file by dialect, split role, answer visibility, development usage, contamination, materialization, and access boundary without processing source payloads or freezing PH-D01B content manifests.",
+  "X": {
+    "coordinate": "Source admission and contamination metadata before content, acquisition, and environment manifest freeze or any trajectory normalization",
+    "inputs": [
+      "PH-D00B scope and behavior boundary evidence",
+      "exact ARC2 and ARC3 distribution identities declared by the HDS distillation specification",
+      "Git-tracked source-candidate path membership",
+      "ARC3 raw teacher recording locator manifest metadata",
+      "historical canonical teacher-corpus locator metadata",
+      "recorded Owner continuous-progression authorization"
+    ],
+    "change_scope": "PH-D01A source-profile schema, declarative admission plan, profiles, deterministic inventory compiler, tests, report, preinventory, phase evidence, and documentation for this isolated distillation namespace only."
+  },
+  "R": {
+    "risk": "An omitted file, duplicate profile assignment, unknown split or answer visibility, hidden evaluation-answer consumption, policy-weight admission, or environment-source access leak would contaminate every downstream distillation claim.",
+    "required_response": "Fail closed on unknown fields or enums, missing or duplicate source IDs, candidate-path drift, profile-digest mismatch, implicit evaluation contamination, policy-weight admission, environment-source access outside replay, or a report that claims PH-D01B freeze.",
+    "claim_boundary": "PH_D01A_SOURCE_INVENTORY_PASS establishes metadata classification only. It does not establish source-content identity, acquisition reproducibility, environment closure, trajectory normalization, causal evidence, Rule promotion, Bridge readiness, AGI capability, or official readiness."
+  },
+  "Mc": {
+    "mechanism": "Strict SourceProfile JSON, an explicit source-admission plan, Git path-set and archive-member-set membership checks, raw-recording locator reconciliation, unique source IDs, deterministic canonical JSON, and a report rebuilt without loading ARC payload contents.",
+    "owner_authority": "大平鉄兵 remains the sole Rule, promotion, bundle, locked-final, official, and submission decision authority.",
+    "rollback": "Revert PH-D01A-owned commits only; preserve all pre-existing P22/CV worktree changes and all read-only source assets."
+  },
+  "scope": [
+    "define the six permitted ARC2 and ARC3 source profile types",
+    "define the six permitted split roles and explicit answer-visibility, development-usage, contamination, materialization, and source-code-access states",
+    "inventory five admitted ARC2 source archive members and exclude sample_submission.json",
+    "inventory all fifty Git-tracked ARC3 environment-source files as replay-only source",
+    "inventory twenty-five raw winning recording locators as consumed public evaluation distillation source",
+    "inventory three retained canonical trajectory/corpus files as consumed public evaluation distillation source",
+    "exclude historical policy bundles, derived evidence datasets, runtime reports, and policy graphs from teacher-source admission",
+    "record the ARC3 distribution archive environment paths as aliases rather than duplicate source IDs",
+    "generate a deterministic source inventory with one and only one profile assignment per admitted source file"
+  ],
+  "non_goals": [
+    "PH-D01B SourceContentManifest, AcquisitionRecord, EnvironmentManifest, directory Merkle root, wheel hash, seed lock, or read-only freeze",
+    "copying external archives or recordings into the repository",
+    "ARC2 task parsing or ARC3 source-code execution",
+    "trajectory normalization, replay, or semantic interpretation",
+    "Causal IR, HypothesisIR, candidate generation, exact fit, or intervention",
+    "Rule or RuleAtom promotion",
+    "Bridge or AGI Runtime implementation",
+    "P22, CV, or score optimization",
+    "locked-final or official access",
+    "Kaggle notebook mutation or submission",
+    "GitHub Actions workflow creation"
+  ],
+  "allowed_files": [
+    "distillation/README.md",
+    "distillation/input/README.md",
+    "distillation/input/source_inventory_plan.json",
+    "distillation/schemas/README.md",
+    "distillation/schemas/source_profile.schema.json",
+    "distillation/src/hds_distill/__init__.py",
+    "distillation/src/hds_distill/source_inventory.py",
+    "distillation/profiles/source/*.json",
+    "distillation/tests/unit/test_source_inventory.py",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "distillation/artifacts/reports/source_inventory.json",
+    "analysis/rev3/ph_d01a_source_preinventory.json",
+    "control/rev3/PH-D01A_WORK_BLOCK_FRAME.json",
+    "control/rev3/D01A_PHASE_STATE.json",
+    "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/**",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py"
+  ],
+  "read_only_source_boundaries": [
+    "environment_files/**",
+    "analysis/teacher/**",
+    "analysis/runtime/**",
+    "datasets/**",
+    "manifests/**",
+    "ARC-AGI-3-Agents/arc3_agi_agent/bundles/**"
+  ],
+  "forbidden_files": [
+    "analysis/autonomous_completion/**",
+    "environment_files/**",
+    "analysis/teacher/**",
+    "analysis/runtime/**",
+    "datasets/**",
+    "manifests/**",
+    "ARC-AGI-3-Agents/arc3_agi_agent/bundles/**",
+    "ARC-AGI-3-Agents/arc3_agi_agent/compiled_policy.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/s5_*.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/p22_evaluator.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/teacher/**",
+    "bridge/**/*.py",
+    "runtime/**/*.py",
+    "kaggle_notebooks/**",
+    "notebooks/**",
+    "kaggle/**",
+    ".github/workflows/**"
+  ],
+  "allowed_data_roles": [
+    "SOURCE_ADMISSION_METADATA",
+    "DISTRIBUTION_MEMBER_METADATA",
+    "RAW_RECORDING_LOCATOR_METADATA",
+    "REPOSITORY_PATH_MEMBERSHIP_METADATA",
+    "HDS_AUTHORITY_SOURCE",
+    "OWNER_APPROVAL_EVIDENCE",
+    "SYNTHETIC_SOURCE_PROFILE_TEST_FIXTURE"
+  ],
+  "resource_budget": {
+    "arc_source_archive_digest_read_count": 2,
+    "arc_source_archive_member_listing_count": 2,
+    "arc_source_payload_parse_count": 0,
+    "arc_environment_source_execution_count": 0,
+    "teacher_replay_execution_count": 0,
+    "llm_call_count": 0,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "network_submission_count": 0,
+    "kaggle_mutation_count": 0,
+    "external_network_use": "NONE"
+  },
+  "test_contract": [
+    "DG-00 source coordinate, admission universe, and profile assignment are explicit and unique",
+    "DG-06 distribution, split, answer visibility, use, materialization, contamination, and missing-source states are explicit",
+    "DG-09 metadata classification is not presented as causal, capability, or source-freeze evidence",
+    "all admitted source IDs occur exactly once across all profiles",
+    "unknown profile type, split role, answer visibility, usage, contamination, materialization, access policy, or field fails closed",
+    "public evaluation answer or trajectory consumption without PUBLIC_EVALUATION_CONSUMED and explicit contamination fails closed",
+    "environment source without REPLAY_HARNESS_ONLY access fails closed",
+    "policy-weight admission fails closed and admitted policy-weight count remains zero",
+    "Git-tracked candidate path-set drift and raw-recording locator drift fail closed",
+    "the five ARC2 source members, fifty ARC3 environment files, twenty-five raw recordings, and three canonical trajectory files are all classified",
+    "source payloads are never imported, executed, replayed, or semantically parsed",
+    "the live behavior-based Scope Guard remains finding-free after the inventory compiler is added",
+    "dedicated tests pass before focused rev3 and D00A/D00B regressions",
+    "ruff, strict mypy, compileall, full unit, and integration regressions pass",
+    "inventory generation is byte-identical across three independent processes"
+  ],
+  "stop_condition": "Suspend on an unclassifiable admitted source, candidate-path drift, missing required profile metadata, implicit contamination, policy-weight admission, required-test unavailability, or any source payload execution. Otherwise bind PH-D01A evidence and continue to PH-D01B as a separate Work Block under recorded Owner authorization.",
+  "owner_authority": {
+    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+    "approval_record_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+    "routine_phase_pause_waived": true,
+    "hard_gate_approval_delegated": false
+  },
+  "content_digest": "rev3-work-block-frame:c8ba581776540af64fec89f641d28334adc24c77d89d5ad4214e8c7a43ddc4d9"
+}

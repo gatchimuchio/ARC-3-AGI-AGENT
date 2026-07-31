@@ -21,6 +21,7 @@ from arc3_agi_agent.rev3_governance import (
     REV3_INSTALLATION_STATUS,
     REV3_PH_D00A_STATUS,
     REV3_PH_D00B_STATUS,
+    REV3_PH_D01A_STATUS,
     REV3_PH_R00_OWNER_AUTHORIZATION,
     REV3_PH_R00_STATUS,
     REV3_PH_R1_STATUS,
@@ -77,14 +78,15 @@ def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
     assert REV3_STRATEGY_STATUS == "OWNER_APPROVED"
     assert REV3_INSTALLATION_STATUS == "INSTALLED"
     assert REV3_CURRENT_WORK_CLASS == (
-        "PH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBIND"
+        "PH-D01A_PRIMARY_SOURCE_INVENTORY_REBIND"
     )
-    assert REV3_ACTIVE_PHASE == "PH-D00B"
+    assert REV3_ACTIVE_PHASE == "PH-D01A"
     assert REV3_PH_R1_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_R00_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_R00_OWNER_AUTHORIZATION == "ESTABLISHED"
     assert REV3_PH_D00A_STATUS == "OWNER_APPROVED_PASS"
-    assert REV3_PH_D00B_STATUS == "IN_PROGRESS"
+    assert REV3_PH_D00B_STATUS == "OWNER_APPROVED_PASS"
+    assert REV3_PH_D01A_STATUS == "IN_PROGRESS"
     assert REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS == "NOT_FROZEN"
     assert REV3_RUNTIME_ACTIVATION_STATUS == "SUSPEND"
     assert REV3_PHASE_ORDER[0] == "PH-R-1"
@@ -119,6 +121,7 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     )
     assert selector["ph_d00a_status"] == REV3_PH_D00A_STATUS
     assert selector["ph_d00b_status"] == REV3_PH_D00B_STATUS
+    assert selector["ph_d01a_status"] == REV3_PH_D01A_STATUS
     assert selector["distilled_initial_state_bundle_status"] == (
         REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS
     )
@@ -141,7 +144,7 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json" in (
         selector["historical_evidence"]["scope"]
     )
-    assert "distillation/src/hds_distill/scope_guard.py" in (
+    assert "distillation/artifacts/reports/primary_source_provenance.json" in (
         selector["current_phase_candidates"]["paths"]
     )
     assert selector["current_phase_candidates"][
@@ -294,11 +297,11 @@ def test_ph_r1_schemas_reject_unbound_or_self_referential_state() -> None:
     ] == ["approval_artifact_digest"]
 
     selector_schema = _json(
-        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V6.json"
+        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V7.json"
     )
     assert selector_schema["additionalProperties"] is False
     assert selector_schema["properties"]["active_phase"]["const"] == (
-        "PH-D00B"
+        "PH-D01A"
     )
     assert selector_schema["properties"][
         "ph_r00_owner_authorization"
@@ -697,6 +700,8 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
         REPOSITORY_ROOT
         / "control"
         / "rev3"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01A"
         / "PHASE_TRANSITIONS"
         / "PH-D01A_TO_PH-D01B.json"
     )
@@ -2352,12 +2357,10 @@ def test_ph_d00b_entry_and_historical_migration_are_content_bound() -> None:
     assert all(value == 0 for value in frame["resource_budget"].values())
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["active_phase"] == "PH-D00B"
+    assert selector["active_phase"] == "PH-D01A"
     assert selector["ph_d00a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d00b_status"] == "IN_PROGRESS"
-    assert selector["phase_entry_approval"][
-        "approval_artifact_digest"
-    ] == approval["approval_artifact_digest"]
+    assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d01a_status"] == "IN_PROGRESS"
 
     historical_root = (
         control_root / "HISTORICAL_PRE_AUDIT" / "PH-D00B"
@@ -2718,7 +2721,7 @@ def test_historical_d00b_phase_state_and_snapshot_manifest_are_bound() -> None:
     )
 
 
-def test_d01a_source_inventory_and_phase_state_are_content_bound() -> None:
+def test_current_d01a_source_inventory_and_provenance_are_content_bound() -> None:
     frame = _json(
         REPOSITORY_ROOT
         / "control"
@@ -2732,9 +2735,12 @@ def test_d01a_source_inventory_and_phase_state_are_content_bound() -> None:
     )
     assert frame_digest == (
         "rev3-work-block-frame:"
-        "c8ba581776540af64fec89f641d28334adc24c77d89d5ad4214e8c7a43ddc4d9"
+        "faed29f65eaa34fabc7a357d654a1514cc77d224db6e7bba318cc55f0e837eb4"
     )
     assert frame["phase_id"] == "PH-D01A"
+    assert frame["base_commit"] == (
+        "b3326dfb6c60a15387895a3bed1b5222bb622d6b"
+    )
     assert frame["resource_budget"]["arc_source_payload_parse_count"] == 0
     assert frame["resource_budget"][
         "arc_environment_source_execution_count"
@@ -2842,55 +2848,138 @@ def test_d01a_source_inventory_and_phase_state_are_content_bound() -> None:
         "trajectory_normalization_started"
     ] is False
 
-    phase_state_path = (
-        REPOSITORY_ROOT / "control" / "rev3" / "D01A_PHASE_STATE.json"
+    provenance = _json(
+        REPOSITORY_ROOT
+        / "distillation"
+        / "artifacts"
+        / "reports"
+        / "primary_source_provenance.json"
     )
-    phase_state = _json(phase_state_path)
-    phase_state_body = dict(phase_state)
-    phase_state_digest = str(phase_state_body.pop("content_digest"))
-    assert phase_state_digest == (
-        "rev3-d01a-phase-state:" + digest_object(phase_state_body)
+    provenance_body = dict(provenance)
+    for excluded in provenance["digest_excluded_fields"]:
+        provenance_body.pop(str(excluded))
+    assert provenance["content_digest"] == (
+        "hds-primary-source-provenance-report:"
+        + digest_object(provenance_body)
     )
-    assert phase_state["status"] == "CODEX_SELF_AUDIT_PASS"
-    assert phase_state["result_commit"] == (
-        "e71cdd45b7263c2ec77a8b6008140e2db774d286"
+    assert provenance["content_digest"] == (
+        "hds-primary-source-provenance-report:"
+        "5f874b46a83e47407f3caf92be5cab1f3c3214a9e1b4c3ea0d9b412b55ef94e9"
     )
-    assert phase_state["result_tree"] == (
-        "b811529a0aae10c3464282fabda9679113121dbd"
-    )
-    assert phase_state["failed_requirement_ids"] == []
-    invariants = phase_state["phase_invariants"]
-    assert invariants["source_count"] == 83
-    assert invariants["duplicate_source_assignment_count"] == 0
-    assert invariants["unassigned_admitted_source_count"] == 0
-    assert invariants["unknown_answer_visibility_count"] == 0
-    assert invariants["unknown_split_role_count"] == 0
-    assert invariants["policy_weight_admitted_source_count"] == 0
-    assert invariants["source_payload_parse_count"] == 0
-    assert invariants["source_execution_count"] == 0
-    assert invariants["replay_execution_count"] == 0
-    assert invariants["next_phase"] == "PH-D01B"
-    assert invariants["next_phase_started"] is False
-    assert "PH_D01A_SOURCE_INVENTORY_PASS" in phase_state[
-        "claim_allowed"
-    ]
-    assert "ARC3_TEACHER_SOURCE_FROZEN" in phase_state[
-        "claim_prohibited"
-    ]
-    assert phase_state_path.read_bytes() == (
+    assert provenance["source_inventory_digest"] == report["content_digest"]
+    assert provenance["raw_recording_provenance_count"] == 25
+    assert provenance["canonical_corpus_source_count"] == 3
+    assert provenance["provenance_relation_count"] == 75
+    assert provenance["covered_level_count"] == 183
+    assert provenance["raw_trajectory_to_s5_provenance_complete"] is True
+    assert provenance["artifact_layer_policy"][
+        "derived_distillation_evidence_admitted_source_count"
+    ] == 0
+    assert provenance["artifact_layer_policy"][
+        "governance_artifact_admitted_source_count"
+    ] == 0
+
+    transition = _json(
         REPOSITORY_ROOT
         / "control"
         / "rev3"
-        / "PH-D01A_OWNER_REVIEW_PACKAGE"
-        / "phase_state.json"
-    ).read_bytes()
+        / "PHASE_TRANSITIONS"
+        / "PH-D00B_TO_PH-D01A.json"
+    )
+    transition_body = dict(transition)
+    for excluded in transition["digest_excluded_fields"]:
+        transition_body.pop(str(excluded))
+    assert transition["content_digest"] == (
+        "rev3-phase-transition:" + digest_object(transition_body)
+    )
+    assert transition["from_phase_id"] == "PH-D00B"
+    assert transition["to_phase_id"] == "PH-D01A"
+    assert transition["authorization_digest"] == (
+        "owner-approval-record:"
+        "1834f89329a513aacab72f84a7a1a137916fad2831b916c60990b39cd3405e95"
+    )
+    assert transition["external_irreversible_action_authorized"] is False
+
+    selector = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "REV3_CURRENT_SELECTOR.json"
+    )
+    assert selector["active_phase"] == "PH-D01A"
+    assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d01a_status"] == "IN_PROGRESS"
+    assert selector["phase_entry_approval"]["target_evidence_commit"] == (
+        "bdcc41f15b456d3735744df35308b9d559eff64c"
+    )
+
+
+def test_historical_d01a_control_artifacts_are_byte_identical() -> None:
+    historical_root = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01A"
+    )
+    path_pairs = [
+        (
+            "31a6f1eefabee1a19828c024b5619d11a835188f",
+            "control/rev3/PH-D01A_WORK_BLOCK_FRAME.json",
+            historical_root / "PH-D01A_WORK_BLOCK_FRAME.json",
+        ),
+        (
+            "50b8259fce783fc2cc28158756a020575eb5e25d",
+            "control/rev3/D01A_PHASE_STATE.json",
+            historical_root / "D01A_PHASE_STATE.json",
+        ),
+        (
+            "e7d14a12be4fef46854d08bef601f40a2da74941",
+            "control/rev3/PHASE_TRANSITIONS/PH-D01A_TO_PH-D01B.json",
+            historical_root
+            / "PHASE_TRANSITIONS"
+            / "PH-D01A_TO_PH-D01B.json",
+        ),
+    ]
+    for package_name in (
+        "changed_files.json",
+        "commands.json",
+        "failed_requirements.json",
+        "open_terms.json",
+        "phase_state.json",
+        "proposed_next_action.md",
+        "self_audit.json",
+        "summary.md",
+        "test_results.json",
+    ):
+        path_pairs.append(
+            (
+                "50b8259fce783fc2cc28158756a020575eb5e25d",
+                "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/"
+                + package_name,
+                historical_root
+                / "OWNER_REVIEW_PACKAGE"
+                / package_name,
+            )
+        )
+    path_pairs.append(
+        (
+            "9eee596736cc917d399041f875639892efe55f08",
+            "control/rev3/PH-D01A_OWNER_REVIEW_PACKAGE/"
+            "artifact_manifest.json",
+            historical_root
+            / "OWNER_REVIEW_PACKAGE"
+            / "artifact_manifest.json",
+        )
+    )
+    assert len(path_pairs) == 13
+    for source_commit, source_path, migrated_path in path_pairs:
+        assert _git_blob_sha256(source_commit, source_path) == _sha256(
+            migrated_path
+        )
 
     artifact_manifest = _json(
-        REPOSITORY_ROOT
-        / "control"
-        / "rev3"
-        / "PH-D01A_OWNER_REVIEW_PACKAGE"
-        / "artifact_manifest.json"
+        historical_root / "OWNER_REVIEW_PACKAGE" / "artifact_manifest.json"
     )
     artifact_manifest_body = dict(artifact_manifest)
     artifact_manifest_digest = str(

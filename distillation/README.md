@@ -5,20 +5,26 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D00B` is the only active phase. Existing PH-D00B through PH-D03A code,
-reports, phase records, and descriptions below originated before the rev3
-audit correction. They are implementation candidates and historical evidence,
-not current phase-pass, promotion, or completion evidence. Current PH-D00B
-must revalidate the repository boundary and Scope Guard against the exact
-post-audit implementation tree before any later phase may start.
+`PH-D01A` is the only active phase. PH-D00B is Owner-approved against exact
+post-audit implementation and evidence commits. Existing PH-D01A through
+PH-D03A phase records originated before the rev3 audit correction; colliding
+PH-D01A control artifacts are preserved under
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D01A/` and are not current phase-pass,
+promotion, or completion evidence.
 
 The pre-audit PH-D00B candidate fixed the repository and behavior boundary.
-The pre-audit `PH-D01A` candidate added:
+The current `PH-D01A` rebind validates and hardens:
 
 - a declarative source-admission plan;
 - eight strict ARC2/ARC3 SourceProfile documents;
 - metadata-only source and contamination inventory;
 - deterministic inventory validation and evidence;
+- explicit metadata-only provenance from all 25 raw recordings and 183
+  covered levels to FULL and both S5 canonical corpus representations;
+- strict raw-manifest game, row, split, level, action, filename, and pinned
+  trajectory-hash accounting;
+- explicit zero admission for policy weights, Derived Distillation Evidence,
+  and Governance Artifacts;
 - trusted static scope markers;
 - a deterministic Scope Guard;
 - dedicated tests;
@@ -147,6 +153,8 @@ python distillation/src/hds_distill/scope_guard.py \
   --verify-report distillation/artifacts/reports/distillation_scope_audit.json
 PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.source_inventory import verify_source_inventory_report; verify_source_inventory_report(Path('distillation/artifacts/reports/source_inventory.json'), Path('distillation'), repository_root=Path('.'))"
+PYTHONPATH=distillation/src python -c \
+  "from pathlib import Path; from hds_distill.source_inventory import verify_primary_source_provenance_report; verify_primary_source_provenance_report(Path('distillation/artifacts/reports/primary_source_provenance.json'), Path('distillation'), repository_root=Path('.'))"
 PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.manifest_freeze import verify_manifest_freeze_artifacts; verify_manifest_freeze_artifacts(Path('distillation'), repository_root=Path('.'), distribution_paths={'arc-prize-2026-arc-agi-2.zip': Path('../Downloads/arc-prize-2026-arc-agi-2.zip'), 'arc-prize-2026-arc-agi-3.zip': Path('../Downloads/arc-prize-2026-arc-agi-3.zip')})"
 ```

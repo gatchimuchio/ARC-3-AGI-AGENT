@@ -25,6 +25,12 @@ PROFILE_SCHEMA_VERSION: Final = "hds-distillation-source-profile-v1"
 PLAN_SCHEMA_VERSION: Final = "hds-distillation-source-inventory-plan-v1"
 REPORT_SCHEMA_VERSION: Final = "hds-distillation-source-inventory-report-v1"
 REPORT_ID: Final = "HDS-DISTILLATION-SOURCE-INVENTORY-PH-D01A-V1"
+PROVENANCE_REPORT_SCHEMA_VERSION: Final = (
+    "hds-distillation-primary-source-provenance-v1"
+)
+PROVENANCE_REPORT_ID: Final = (
+    "HDS-DISTILLATION-PRIMARY-SOURCE-PROVENANCE-PH-D01A-V1"
+)
 
 PROFILE_DIGEST_NAMESPACE: Final = "hds-source-profile"
 PLAN_DIGEST_NAMESPACE: Final = "hds-source-inventory-plan"
@@ -33,6 +39,13 @@ PREINVENTORY_DIGEST_NAMESPACE: Final = (
 )
 REPORT_DIGEST_NAMESPACE: Final = "hds-source-inventory-report"
 REPORT_DIGEST_EXCLUDED_FIELDS: Final = ("content_digest", "report_id")
+PROVENANCE_REPORT_DIGEST_NAMESPACE: Final = (
+    "hds-primary-source-provenance-report"
+)
+PROVENANCE_REPORT_DIGEST_EXCLUDED_FIELDS: Final = (
+    "content_digest",
+    "report_id",
+)
 
 PROFILE_TYPES: Final = frozenset(
     {
@@ -138,10 +151,94 @@ PLAN_FIELDS: Final = frozenset(
         "content_digest",
     }
 )
+ARC2_DISTRIBUTION_FIELDS: Final = frozenset(
+    {
+        "distribution_id",
+        "expected_sha256",
+        "expected_member_count",
+        "expected_member_path_set_sha256",
+        "admitted_members",
+        "excluded_members",
+    }
+)
+ARC3_DISTRIBUTION_FIELDS: Final = frozenset(
+    {
+        "distribution_id",
+        "expected_sha256",
+        "expected_member_count",
+        "expected_member_path_set_sha256",
+        "environment_alias_prefix",
+        "environment_alias_count",
+        "agent_scaffold_non_source_count",
+        "runtime_wheel_non_source_count",
+    }
+)
+RAW_RECORDING_SOURCE_FIELDS: Final = frozenset(
+    {
+        "source_manifest_path",
+        "dataset_id",
+        "dataset_repo_sha",
+        "expected_selected_count",
+        "expected_level_count",
+        "expected_filename_set_sha256",
+    }
+)
+NON_SOURCE_POLICY_FIELDS: Final = frozenset(
+    {
+        "historical_policy_bundle_root",
+        "historical_policy_bundle_file_count",
+        "teacher_policy_or_report_file_count",
+        "policy_weight_admitted_source_count",
+    }
+)
+RAW_RECORDING_MANIFEST_FIELDS: Final = frozenset(
+    {
+        "config",
+        "dataset_id",
+        "dataset_repo_sha",
+        "dataset_row_count",
+        "development_only",
+        "pinned_trajectory_sha256_by_game",
+        "rows",
+        "runtime_use",
+        "schema_version",
+        "selected_expected_actions",
+        "selected_game_count",
+        "selected_level_count",
+        "selection",
+        "split",
+    }
+)
+RAW_RECORDING_ROW_FIELDS: Final = frozenset(
+    {
+        "expected_actions",
+        "game_id",
+        "recording_file",
+        "row_index",
+        "target_levels",
+    }
+)
+CANONICAL_CORPUS_PATHS: Final = (
+    "analysis/teacher/FULL_SOLUTION_CORPUS.json",
+    "analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.json",
+    "analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.npz",
+)
+FORBIDDEN_PRIMARY_SOURCE_REPOSITORY_PREFIXES: Final = (
+    "analysis/rev3/",
+    "artifacts/reports/",
+    "control/",
+    "distillation/artifacts/",
+    "distillation/profiles/",
+)
 
 _SHA256_RE: Final = re.compile(r"^[0-9a-f]{64}$")
 _GIT_SHA_RE: Final = re.compile(r"^[0-9a-f]{40}$")
 _PROFILE_ID_RE: Final = re.compile(r"^[a-z0-9][a-z0-9-]*$")
+_GAME_ID_RE: Final = re.compile(r"^[a-z0-9]{4}-[0-9a-f]{8}$")
+_RECORDING_FILE_RE: Final = re.compile(
+    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-"
+    r"[0-9a-f]{4}-[0-9a-f]{12}\.recording$"
+)
 
 
 class SourceInventoryError(ValueError):
@@ -212,6 +309,20 @@ def _integer(value: JsonValue, code: str) -> int:
     return value
 
 
+def _nonnegative_integer(value: JsonValue, code: str) -> int:
+    item = _integer(value, code)
+    if item < 0:
+        raise SourceInventoryError(f"{code}_NEGATIVE")
+    return item
+
+
+def _positive_integer(value: JsonValue, code: str) -> int:
+    item = _integer(value, code)
+    if item <= 0:
+        raise SourceInventoryError(f"{code}_NOT_POSITIVE")
+    return item
+
+
 def _string_list(value: JsonValue, code: str) -> list[str]:
     items = _list(value, code)
     result = [_string(item, code + "_ITEM") for item in items]
@@ -267,9 +378,12 @@ def _repository_path(value: JsonValue, code: str) -> str:
     item = _string(value, code)
     if "\\" in item or item.startswith("/"):
         raise SourceInventoryError(f"{code}_NOT_RELATIVE_POSIX:{item}")
+    canonical = PurePosixPath(item).as_posix()
     parts = PurePosixPath(item).parts
     if not parts or any(part in {"", ".", ".."} for part in parts):
         raise SourceInventoryError(f"{code}_ESCAPE:{item}")
+    if canonical != item:
+        raise SourceInventoryError(f"{code}_NOT_CANONICAL:{item}")
     return item
 
 
@@ -318,10 +432,285 @@ def _validate_plan(plan: JsonObject) -> str:
         raise SourceInventoryError("D01A_PLAN_SCHEMA_VERSION_MISMATCH")
     if plan["phase_id"] != PHASE_ID:
         raise SourceInventoryError("D01A_PLAN_PHASE_MISMATCH")
+    arc2 = _object(plan["arc2_distribution"], "D01A_PLAN_ARC2")
+    _strict_fields(arc2, ARC2_DISTRIBUTION_FIELDS, "D01A_PLAN_ARC2")
+    _string(arc2["distribution_id"], "D01A_PLAN_ARC2_DISTRIBUTION")
+    _sha256(arc2["expected_sha256"], "D01A_PLAN_ARC2_SHA256")
+    _positive_integer(
+        arc2["expected_member_count"],
+        "D01A_PLAN_ARC2_MEMBER_COUNT",
+    )
+    _sha256(
+        arc2["expected_member_path_set_sha256"],
+        "D01A_PLAN_ARC2_MEMBER_PATH_SET",
+    )
+    for path in _string_list(
+        arc2["admitted_members"],
+        "D01A_PLAN_ARC2_ADMITTED_MEMBERS",
+    ):
+        _repository_path(path, "D01A_PLAN_ARC2_ADMITTED_MEMBER")
+    for raw_exclusion in _list(
+        arc2["excluded_members"],
+        "D01A_PLAN_ARC2_EXCLUDED_MEMBERS",
+    ):
+        exclusion = _object(
+            raw_exclusion,
+            "D01A_PLAN_ARC2_EXCLUDED_MEMBER",
+        )
+        _strict_fields(
+            exclusion,
+            frozenset({"path", "reason"}),
+            "D01A_PLAN_ARC2_EXCLUDED_MEMBER",
+        )
+        _repository_path(
+            exclusion["path"],
+            "D01A_PLAN_ARC2_EXCLUDED_MEMBER_PATH",
+        )
+        _string(
+            exclusion["reason"],
+            "D01A_PLAN_ARC2_EXCLUDED_MEMBER_REASON",
+        )
+
+    arc3 = _object(plan["arc3_distribution"], "D01A_PLAN_ARC3")
+    _strict_fields(arc3, ARC3_DISTRIBUTION_FIELDS, "D01A_PLAN_ARC3")
+    _string(arc3["distribution_id"], "D01A_PLAN_ARC3_DISTRIBUTION")
+    _sha256(arc3["expected_sha256"], "D01A_PLAN_ARC3_SHA256")
+    _positive_integer(
+        arc3["expected_member_count"],
+        "D01A_PLAN_ARC3_MEMBER_COUNT",
+    )
+    _sha256(
+        arc3["expected_member_path_set_sha256"],
+        "D01A_PLAN_ARC3_MEMBER_PATH_SET",
+    )
+    alias_prefix = arc3["environment_alias_prefix"]
+    if not isinstance(alias_prefix, str):
+        raise SourceInventoryError(
+            "D01A_PLAN_ARC3_ALIAS_PREFIX_NOT_STRING"
+        )
+    for field in (
+        "environment_alias_count",
+        "agent_scaffold_non_source_count",
+        "runtime_wheel_non_source_count",
+    ):
+        _nonnegative_integer(arc3[field], "D01A_PLAN_ARC3_" + field.upper())
+
+    raw_source = _object(
+        plan["raw_recording_source"],
+        "D01A_PLAN_RAW_SOURCE",
+    )
+    _strict_fields(
+        raw_source,
+        RAW_RECORDING_SOURCE_FIELDS,
+        "D01A_PLAN_RAW_SOURCE",
+    )
+    _repository_path(
+        raw_source["source_manifest_path"],
+        "D01A_PLAN_RAW_SOURCE_MANIFEST_PATH",
+    )
+    _string(raw_source["dataset_id"], "D01A_PLAN_RAW_SOURCE_DATASET_ID")
+    _git_sha(
+        raw_source["dataset_repo_sha"],
+        "D01A_PLAN_RAW_SOURCE_DATASET_REPO_SHA",
+    )
+    _positive_integer(
+        raw_source["expected_selected_count"],
+        "D01A_PLAN_RAW_SOURCE_SELECTED_COUNT",
+    )
+    _positive_integer(
+        raw_source["expected_level_count"],
+        "D01A_PLAN_RAW_SOURCE_LEVEL_COUNT",
+    )
+    _sha256(
+        raw_source["expected_filename_set_sha256"],
+        "D01A_PLAN_RAW_SOURCE_FILENAME_SET",
+    )
+
+    non_source = _object(
+        plan["non_source_policy"],
+        "D01A_PLAN_NON_SOURCE_POLICY",
+    )
+    _strict_fields(
+        non_source,
+        NON_SOURCE_POLICY_FIELDS,
+        "D01A_PLAN_NON_SOURCE_POLICY",
+    )
+    _repository_path(
+        non_source["historical_policy_bundle_root"],
+        "D01A_PLAN_POLICY_BUNDLE_ROOT",
+    )
+    for field in (
+        "historical_policy_bundle_file_count",
+        "teacher_policy_or_report_file_count",
+        "policy_weight_admitted_source_count",
+    ):
+        _nonnegative_integer(
+            non_source[field],
+            "D01A_PLAN_NON_SOURCE_" + field.upper(),
+        )
     return _validate_bound_digest(
         plan,
         PLAN_DIGEST_NAMESPACE,
         "D01A_PLAN",
+    )
+
+
+def _validate_raw_recording_manifest(
+    manifest: JsonObject,
+    raw_source: JsonObject,
+) -> list[JsonObject]:
+    _strict_fields(
+        manifest,
+        RAW_RECORDING_MANIFEST_FIELDS,
+        "D01A_RECORDING_MANIFEST",
+    )
+    if manifest["schema_version"] != (
+        "arc3-teacher-human-replay-source-manifest-v1"
+    ):
+        raise SourceInventoryError(
+            "D01A_RECORDING_MANIFEST_SCHEMA_VERSION_MISMATCH"
+        )
+    if manifest["dataset_id"] != raw_source["dataset_id"]:
+        raise SourceInventoryError("D01A_DATASET_ID_MISMATCH")
+    if manifest["dataset_repo_sha"] != raw_source["dataset_repo_sha"]:
+        raise SourceInventoryError("D01A_DATASET_REPO_SHA_MISMATCH")
+    if manifest["development_only"] is not True:
+        raise SourceInventoryError(
+            "D01A_RECORDING_MANIFEST_DEVELOPMENT_ONLY_REQUIRED"
+        )
+    if manifest["runtime_use"] != "FORBIDDEN":
+        raise SourceInventoryError(
+            "D01A_RECORDING_MANIFEST_RUNTIME_USE_NOT_FORBIDDEN"
+        )
+    if manifest["split"] != "train":
+        raise SourceInventoryError("D01A_RECORDING_MANIFEST_SPLIT_INVALID")
+    _string(manifest["config"], "D01A_RECORDING_MANIFEST_CONFIG")
+    _string(manifest["selection"], "D01A_RECORDING_MANIFEST_SELECTION")
+
+    dataset_row_count = _positive_integer(
+        manifest["dataset_row_count"],
+        "D01A_RECORDING_MANIFEST_DATASET_ROW_COUNT",
+    )
+    rows = [
+        _object(row, "D01A_RECORDING_ROW")
+        for row in _list(
+            manifest["rows"],
+            "D01A_RECORDING_MANIFEST_ROWS",
+        )
+    ]
+    expected_selected_count = _positive_integer(
+        raw_source["expected_selected_count"],
+        "D01A_RAW_RECORDING_EXPECTED_COUNT",
+    )
+    if (
+        len(rows) != expected_selected_count
+        or _positive_integer(
+            manifest["selected_game_count"],
+            "D01A_RECORDING_MANIFEST_SELECTED_GAME_COUNT",
+        )
+        != expected_selected_count
+    ):
+        raise SourceInventoryError("D01A_RECORDING_COUNT_MISMATCH")
+
+    game_references: list[str] = []
+    recording_files: list[str] = []
+    row_indices: list[int] = []
+    selected_level_count = 0
+    selected_expected_actions = 0
+    for row in rows:
+        _strict_fields(
+            row,
+            RAW_RECORDING_ROW_FIELDS,
+            "D01A_RECORDING_ROW",
+        )
+        game_reference = _string(
+            row["game_id"],
+            "D01A_RECORDING_GAME_ID",
+        )
+        if _GAME_ID_RE.fullmatch(game_reference) is None:
+            raise SourceInventoryError(
+                f"D01A_RECORDING_GAME_ID_INVALID:{game_reference}"
+            )
+        recording_file = _repository_path(
+            row["recording_file"],
+            "D01A_RECORDING_FILENAME",
+        )
+        if _RECORDING_FILE_RE.fullmatch(recording_file) is None:
+            raise SourceInventoryError(
+                f"D01A_RECORDING_FILENAME_INVALID:{recording_file}"
+            )
+        row_index = _nonnegative_integer(
+            row["row_index"],
+            "D01A_RECORDING_ROW_INDEX",
+        )
+        if row_index >= dataset_row_count:
+            raise SourceInventoryError(
+                f"D01A_RECORDING_ROW_INDEX_OUT_OF_RANGE:{row_index}"
+            )
+        selected_level_count += _positive_integer(
+            row["target_levels"],
+            "D01A_RECORDING_TARGET_LEVELS",
+        )
+        selected_expected_actions += _positive_integer(
+            row["expected_actions"],
+            "D01A_RECORDING_EXPECTED_ACTIONS",
+        )
+        game_references.append(game_reference)
+        recording_files.append(recording_file)
+        row_indices.append(row_index)
+
+    for values, code in (
+        (game_references, "D01A_RECORDING_GAME_ID_DUPLICATE"),
+        (recording_files, "D01A_RECORDING_FILENAME_DUPLICATE"),
+        (row_indices, "D01A_RECORDING_ROW_INDEX_DUPLICATE"),
+    ):
+        if len(values) != len(set(values)):
+            raise SourceInventoryError(code)
+
+    if selected_level_count != _positive_integer(
+        raw_source["expected_level_count"],
+        "D01A_RAW_RECORDING_EXPECTED_LEVEL_COUNT",
+    ):
+        raise SourceInventoryError("D01A_RECORDING_LEVEL_COUNT_MISMATCH")
+    if selected_level_count != _positive_integer(
+        manifest["selected_level_count"],
+        "D01A_RECORDING_MANIFEST_SELECTED_LEVEL_COUNT",
+    ):
+        raise SourceInventoryError(
+            "D01A_RECORDING_MANIFEST_LEVEL_ACCOUNTING_MISMATCH"
+        )
+    if selected_expected_actions != _positive_integer(
+        manifest["selected_expected_actions"],
+        "D01A_RECORDING_MANIFEST_SELECTED_ACTION_COUNT",
+    ):
+        raise SourceInventoryError(
+            "D01A_RECORDING_MANIFEST_ACTION_ACCOUNTING_MISMATCH"
+        )
+    if _path_set_digest(recording_files) != _sha256(
+        raw_source["expected_filename_set_sha256"],
+        "D01A_RAW_RECORDING_FILENAME_SET",
+    ):
+        raise SourceInventoryError("D01A_RECORDING_FILENAME_SET_DRIFT")
+
+    pinned = _object(
+        manifest["pinned_trajectory_sha256_by_game"],
+        "D01A_RECORDING_PINNED_TRAJECTORIES",
+    )
+    if set(pinned) != set(game_references):
+        raise SourceInventoryError(
+            "D01A_RECORDING_PINNED_TRAJECTORY_GAME_SET_MISMATCH"
+        )
+    for game_reference in sorted(game_references):
+        _sha256(
+            pinned[game_reference],
+            "D01A_RECORDING_PINNED_TRAJECTORY_SHA256",
+        )
+    return sorted(
+        rows,
+        key=lambda row: _string(
+            row["game_id"],
+            "D01A_RECORDING_GAME_ID",
+        ),
     )
 
 
@@ -492,6 +881,7 @@ def _candidate_paths(
     )
     result: dict[str, tuple[str, ...]] = {}
     report_rows: list[JsonValue] = []
+    seen_roots: set[str] = set()
     for raw_row in roots:
         row = _object(raw_row, "D01A_CANDIDATE_ROOT")
         expected_fields = frozenset(
@@ -505,6 +895,11 @@ def _candidate_paths(
         )
         _strict_fields(row, expected_fields, "D01A_CANDIDATE_ROOT")
         root = _repository_path(row["root"], "D01A_CANDIDATE_ROOT_PATH")
+        if root in seen_roots:
+            raise SourceInventoryError(
+                f"D01A_CANDIDATE_ROOT_DUPLICATE:{root}"
+            )
+        seen_roots.add(root)
         paths = tuple(
             sorted(
                 tracked_paths_by_root[root]
@@ -861,6 +1256,7 @@ def _external_dataset_records(
     selector: JsonObject,
     profile: JsonObject,
     repository_root: Path,
+    raw_source: JsonObject,
     source_manifest_document: JsonObject | None,
 ) -> list[JsonObject]:
     fields = frozenset(
@@ -879,6 +1275,14 @@ def _external_dataset_records(
         selector["source_manifest_path"],
         "D01A_DATASET_MANIFEST_PATH",
     )
+    expected_manifest_path = _repository_path(
+        raw_source["source_manifest_path"],
+        "D01A_RAW_SOURCE_MANIFEST_PATH",
+    )
+    if manifest_path != expected_manifest_path:
+        raise SourceInventoryError(
+            "D01A_DATASET_MANIFEST_PATH_MISMATCH"
+        )
     manifest = (
         source_manifest_document
         if source_manifest_document is not None
@@ -895,6 +1299,10 @@ def _external_dataset_records(
         selector["dataset_repo_sha"],
         "D01A_DATASET_REPO_SHA",
     )
+    if dataset_id != raw_source["dataset_id"]:
+        raise SourceInventoryError("D01A_DATASET_ID_PLAN_MISMATCH")
+    if dataset_repo_sha != raw_source["dataset_repo_sha"]:
+        raise SourceInventoryError("D01A_DATASET_REPO_SHA_PLAN_MISMATCH")
     if manifest.get("dataset_id") != dataset_id:
         raise SourceInventoryError("D01A_DATASET_ID_MISMATCH")
     if manifest.get("dataset_repo_sha") != dataset_repo_sha:
@@ -903,6 +1311,8 @@ def _external_dataset_records(
         selector["recording_field"],
         "D01A_RECORDING_FIELD",
     )
+    if field != "recording_file":
+        raise SourceInventoryError("D01A_RECORDING_FIELD_INVALID")
     rows = _list(
         manifest.get("rows"),
         "D01A_RECORDING_MANIFEST_ROWS",
@@ -923,11 +1333,23 @@ def _external_dataset_records(
         "D01A_RECORDING_EXPECTED_COUNT",
     ):
         raise SourceInventoryError("D01A_RECORDING_COUNT_MISMATCH")
+    if selector["expected_selected_count"] != (
+        raw_source["expected_selected_count"]
+    ):
+        raise SourceInventoryError(
+            "D01A_RECORDING_COUNT_PLAN_MISMATCH"
+        )
     if _path_set_digest(filenames) != _sha256(
         selector["expected_filename_set_sha256"],
         "D01A_RECORDING_FILENAME_SET",
     ):
         raise SourceInventoryError("D01A_RECORDING_FILENAME_SET_DRIFT")
+    if selector["expected_filename_set_sha256"] != (
+        raw_source["expected_filename_set_sha256"]
+    ):
+        raise SourceInventoryError(
+            "D01A_RECORDING_FILENAME_SET_PLAN_MISMATCH"
+        )
     records: list[JsonObject] = []
     for filename in sorted(filenames):
         locator = f"{dataset_id}@{dataset_repo_sha}/{filename}"
@@ -948,6 +1370,7 @@ def _expand_profiles(
     profiles: Sequence[tuple[str, JsonObject]],
     repository_root: Path,
     paths_by_root: Mapping[str, Sequence[str]],
+    raw_source: JsonObject,
     source_manifest_document: JsonObject | None,
 ) -> tuple[list[JsonObject], list[JsonValue]]:
     records: list[JsonObject] = []
@@ -984,6 +1407,7 @@ def _expand_profiles(
                     selector,
                     profile,
                     repository_root,
+                    raw_source,
                     source_manifest_document,
                 )
             profile_records.extend(expanded)
@@ -1009,6 +1433,27 @@ def _expand_profiles(
     if duplicates:
         raise SourceInventoryError(
             "D01A_SOURCE_ASSIGNMENT_DUPLICATE:" + ",".join(duplicates)
+        )
+    aliases = [
+        _string(alias, "D01A_SOURCE_ALIAS")
+        for record in records
+        for alias in _list(record["aliases"], "D01A_SOURCE_ALIASES")
+    ]
+    duplicate_aliases = sorted(
+        alias
+        for alias, count in Counter(aliases).items()
+        if count > 1
+    )
+    if duplicate_aliases:
+        raise SourceInventoryError(
+            "D01A_SOURCE_ALIAS_DUPLICATE:" + ",".join(duplicate_aliases)
+        )
+    source_id_set = set(source_ids)
+    alias_source_collisions = sorted(set(aliases) & source_id_set)
+    if alias_source_collisions:
+        raise SourceInventoryError(
+            "D01A_SOURCE_ALIAS_ID_COLLISION:"
+            + ",".join(alias_source_collisions)
         )
     return sorted(
         records,
@@ -1271,6 +1716,23 @@ def build_source_inventory(
     if plan["preinventory_digest"] != preinventory_digest:
         raise SourceInventoryError("D01A_PLAN_PREINVENTORY_BINDING_MISMATCH")
     _validate_plan_preinventory_alignment(plan, preinventory)
+    raw_source = _object(
+        plan["raw_recording_source"],
+        "D01A_RAW_RECORDING_SOURCE",
+    )
+    raw_manifest_path = repository_root / _repository_path(
+        raw_source["source_manifest_path"],
+        "D01A_RAW_RECORDING_MANIFEST_PATH",
+    )
+    raw_manifest = (
+        source_manifest_document
+        if source_manifest_document is not None
+        else _load_object(
+            raw_manifest_path,
+            "D01A_RECORDING_MANIFEST",
+        )
+    )
+    _validate_raw_recording_manifest(raw_manifest, raw_source)
 
     paths_by_root, candidate_rows = _candidate_paths(
         plan,
@@ -1287,7 +1749,8 @@ def build_source_inventory(
         profiles,
         repository_root,
         paths_by_root,
-        source_manifest_document,
+        raw_source,
+        raw_manifest,
     )
     _validate_assignments(plan, records, paths_by_root)
 
@@ -1441,6 +1904,260 @@ def build_source_inventory(
     return report
 
 
+def build_primary_source_provenance_report(
+    project_root: Path,
+    *,
+    repository_root: Path | None = None,
+    source_manifest_document: JsonObject | None = None,
+) -> JsonObject:
+    """Build explicit raw-recording-to-corpus provenance from metadata only."""
+
+    project_root = project_root.resolve()
+    repository_root = (
+        repository_root.resolve()
+        if repository_root is not None
+        else project_root.parent.resolve()
+    )
+    if project_root != repository_root / "distillation":
+        raise SourceInventoryError(
+            "D01A_PROJECT_ROOT_MUST_BE_REPOSITORY_DISTILLATION"
+        )
+
+    inventory = build_source_inventory(
+        project_root,
+        repository_root=repository_root,
+        source_manifest_document=source_manifest_document,
+    )
+    plan = _load_object(
+        project_root / "input" / "source_inventory_plan.json",
+        "D01A_PLAN",
+    )
+    _validate_plan(plan)
+    raw_source = _object(
+        plan["raw_recording_source"],
+        "D01A_RAW_RECORDING_SOURCE",
+    )
+    manifest_path = repository_root / _repository_path(
+        raw_source["source_manifest_path"],
+        "D01A_RAW_RECORDING_MANIFEST_PATH",
+    )
+    manifest = (
+        source_manifest_document
+        if source_manifest_document is not None
+        else _load_object(
+            manifest_path,
+            "D01A_RECORDING_MANIFEST",
+        )
+    )
+    rows = _validate_raw_recording_manifest(manifest, raw_source)
+    pinned = _object(
+        manifest["pinned_trajectory_sha256_by_game"],
+        "D01A_RECORDING_PINNED_TRAJECTORIES",
+    )
+
+    source_records = cast(
+        list[JsonObject],
+        _list(inventory["source_records"], "D01A_SOURCE_RECORDS"),
+    )
+    source_ids = {
+        _string(record["source_id"], "D01A_SOURCE_ID")
+        for record in source_records
+    }
+    canonical_source_ids = tuple(
+        "repo:" + path for path in CANONICAL_CORPUS_PATHS
+    )
+    missing_canonical_sources = sorted(set(canonical_source_ids) - source_ids)
+    if missing_canonical_sources:
+        raise SourceInventoryError(
+            "D01A_CANONICAL_CORPUS_SOURCE_MISSING:"
+            + ",".join(missing_canonical_sources)
+        )
+
+    raw_records_by_filename: dict[str, JsonObject] = {}
+    for record in source_records:
+        if record["profile_type"] != "ARC3_RAW_TEACHER_RECORDING":
+            continue
+        locator = _string(record["locator"], "D01A_RAW_RECORDING_LOCATOR")
+        filename = PurePosixPath(locator).name
+        if filename in raw_records_by_filename:
+            raise SourceInventoryError(
+                "D01A_RAW_RECORDING_FILENAME_DUPLICATE:" + filename
+            )
+        raw_records_by_filename[filename] = record
+
+    provenance_records: list[JsonValue] = []
+    for row in rows:
+        game_reference = _string(
+            row["game_id"],
+            "D01A_RECORDING_GAME_ID",
+        )
+        filename = _string(
+            row["recording_file"],
+            "D01A_RECORDING_FILENAME",
+        )
+        raw_record = raw_records_by_filename.get(filename)
+        if raw_record is None:
+            raise SourceInventoryError(
+                "D01A_RAW_RECORDING_SOURCE_NOT_IN_INVENTORY:" + filename
+            )
+        body: JsonObject = {
+            "game_reference": game_reference,
+            "identity_use_boundary": (
+                "PROVENANCE_ONLY_NOT_SELECTOR_PARAMETER_OR_RUNTIME_ROUTING"
+            ),
+            "raw_recording_source_id": raw_record["source_id"],
+            "raw_recording_locator": raw_record["locator"],
+            "recording_file": filename,
+            "pinned_trajectory_sha256": _sha256(
+                pinned[game_reference],
+                "D01A_RECORDING_PINNED_TRAJECTORY_SHA256",
+            ),
+            "target_level_count": _positive_integer(
+                row["target_levels"],
+                "D01A_RECORDING_TARGET_LEVELS",
+            ),
+            "expected_action_count": _positive_integer(
+                row["expected_actions"],
+                "D01A_RECORDING_EXPECTED_ACTIONS",
+            ),
+            "canonical_corpus_source_ids": list(canonical_source_ids),
+            "relation_kind": (
+                "D01A_METADATA_LEDGER_RAW_RECORDING_TO_CANONICAL_CORPUS"
+            ),
+            "evidence_basis": (
+                "D01A_LEDGER_DECLARATION_PLUS_PINNED_SOURCE_MANIFEST_METADATA"
+            ),
+            "payload_cross_check_status": (
+                "NOT_PERFORMED_PH_D01A_METADATA_ONLY"
+            ),
+        }
+        body["provenance_record_id"] = (
+            "hds-primary-source-provenance:"
+            + hashlib.sha256(
+                canonical_json(body).encode("utf-8")
+            ).hexdigest()
+        )
+        provenance_records.append(body)
+
+    if set(raw_records_by_filename) != {
+        _string(row["recording_file"], "D01A_RECORDING_FILENAME")
+        for row in rows
+    }:
+        raise SourceInventoryError(
+            "D01A_RAW_RECORDING_PROVENANCE_COVERAGE_MISMATCH"
+        )
+
+    forbidden_repository_sources = sorted(
+        _string(record["locator"], "D01A_REPOSITORY_LOCATOR")
+        for record in source_records
+        if record["locator_kind"] == "REPOSITORY_FILE"
+        and _string(record["locator"], "D01A_REPOSITORY_LOCATOR").startswith(
+            FORBIDDEN_PRIMARY_SOURCE_REPOSITORY_PREFIXES
+        )
+    )
+    if forbidden_repository_sources:
+        raise SourceInventoryError(
+            "D01A_NON_PRIMARY_ARTIFACT_LAYER_ADMITTED:"
+            + ",".join(forbidden_repository_sources)
+        )
+    if any(record["policy_weight_source"] is not False for record in source_records):
+        raise SourceInventoryError("D01A_POLICY_WEIGHT_SOURCE_ADMITTED")
+
+    metadata_binding: JsonObject = {
+        "dataset_id": manifest["dataset_id"],
+        "dataset_repo_sha": manifest["dataset_repo_sha"],
+        "development_only": manifest["development_only"],
+        "pinned_trajectory_sha256_by_game": pinned,
+        "rows": cast(JsonValue, rows),
+        "runtime_use": manifest["runtime_use"],
+        "schema_version": manifest["schema_version"],
+        "selected_expected_actions": manifest["selected_expected_actions"],
+        "selected_game_count": manifest["selected_game_count"],
+        "selected_level_count": manifest["selected_level_count"],
+        "selection": manifest["selection"],
+        "split": manifest["split"],
+    }
+    metadata_digest = (
+        "hds-source-manifest-metadata:"
+        + hashlib.sha256(
+            canonical_json(metadata_binding).encode("utf-8")
+        ).hexdigest()
+    )
+
+    report: JsonObject = {
+        "schema_version": PROVENANCE_REPORT_SCHEMA_VERSION,
+        "report_id": PROVENANCE_REPORT_ID,
+        "phase_id": PHASE_ID,
+        "inventory_semantics": (
+            "PRIMARY_TEACHER_SOURCE_PROVENANCE_METADATA_ONLY"
+        ),
+        "source_inventory_digest": inventory["content_digest"],
+        "source_manifest_path": raw_source["source_manifest_path"],
+        "source_manifest_metadata_digest": metadata_digest,
+        "artifact_layer_policy": {
+            "admitted_artifact_layer": "PRIMARY_TEACHER_SOURCE",
+            "primary_teacher_source_count": len(source_records),
+            "derived_distillation_evidence_admitted_source_count": 0,
+            "governance_artifact_admitted_source_count": 0,
+            "forbidden_repository_prefixes": list(
+                FORBIDDEN_PRIMARY_SOURCE_REPOSITORY_PREFIXES
+            ),
+            "forbidden_repository_source_count": 0,
+            "policy_weight_admitted_source_count": 0,
+        },
+        "raw_recording_provenance_count": len(provenance_records),
+        "canonical_corpus_source_ids": list(canonical_source_ids),
+        "canonical_corpus_source_count": len(canonical_source_ids),
+        "provenance_relation_count": (
+            len(provenance_records) * len(canonical_source_ids)
+        ),
+        "covered_level_count": sum(
+            _positive_integer(
+                row["target_levels"],
+                "D01A_RECORDING_TARGET_LEVELS",
+            )
+            for row in rows
+        ),
+        "covered_expected_action_count": sum(
+            _positive_integer(
+                row["expected_actions"],
+                "D01A_RECORDING_EXPECTED_ACTIONS",
+            )
+            for row in rows
+        ),
+        "provenance_records": provenance_records,
+        "raw_trajectory_to_s5_provenance_complete": True,
+        "source_payload_access": {
+            "payload_parse_count": 0,
+            "replay_execution_count": 0,
+            "source_execution_count": 0,
+        },
+        "gates": {
+            "DG-00": "PASS",
+            "DG-06": "PASS",
+            "DG-09": "PASS",
+        },
+        "claim_boundary": (
+            "Records ledger-declared metadata provenance and artifact-layer "
+            "exclusion only; does not claim that the source manifest itself "
+            "declares corpus targets, verify corpus payload derivation, freeze "
+            "content or environment manifests, normalize trajectories, "
+            "establish causal mechanisms, promote Rules, start Bridge or "
+            "Runtime, or authorize official access or submission."
+        ),
+        "digest_excluded_fields": list(
+            PROVENANCE_REPORT_DIGEST_EXCLUDED_FIELDS
+        ),
+        "content_digest": "",
+    }
+    report["content_digest"] = _digest(
+        report,
+        PROVENANCE_REPORT_DIGEST_NAMESPACE,
+        excluded_fields=PROVENANCE_REPORT_DIGEST_EXCLUDED_FIELDS,
+    )
+    return report
+
+
 def report_bytes(report: JsonObject) -> bytes:
     """Serialize a report deterministically with one final newline."""
 
@@ -1489,20 +2206,67 @@ def verify_source_inventory_report(
     return report
 
 
+def write_primary_source_provenance_report(
+    report_path: Path,
+    project_root: Path,
+    *,
+    repository_root: Path | None = None,
+) -> JsonObject:
+    """Write the canonical PH-D01A primary-source provenance report."""
+
+    report = build_primary_source_provenance_report(
+        project_root,
+        repository_root=repository_root,
+    )
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_bytes(report_bytes(report))
+    return report
+
+
+def verify_primary_source_provenance_report(
+    report_path: Path,
+    project_root: Path,
+    *,
+    repository_root: Path | None = None,
+) -> JsonObject:
+    """Fail closed unless the checked provenance report is the exact rebuild."""
+
+    report = build_primary_source_provenance_report(
+        project_root,
+        repository_root=repository_root,
+    )
+    try:
+        expected = report_path.read_bytes()
+    except OSError as exc:
+        raise SourceInventoryError(
+            f"D01A_PROVENANCE_REPORT_UNREADABLE:{report_path}"
+        ) from exc
+    if expected != report_bytes(report):
+        raise SourceInventoryError(
+            f"D01A_PROVENANCE_REPORT_MISMATCH:{report_path}"
+        )
+    return report
+
+
 __all__ = [
     "ANSWER_VISIBILITIES",
     "CONTAMINATION_CLASSES",
     "DEVELOPMENT_USAGES",
     "MATERIALIZATION_STATES",
     "PROFILE_TYPES",
+    "PROVENANCE_REPORT_DIGEST_EXCLUDED_FIELDS",
+    "PROVENANCE_REPORT_DIGEST_NAMESPACE",
     "REPORT_DIGEST_EXCLUDED_FIELDS",
     "REPORT_DIGEST_NAMESPACE",
     "SOURCE_CODE_ACCESS_STATES",
     "SPLIT_ROLES",
     "SourceInventoryError",
+    "build_primary_source_provenance_report",
     "build_source_inventory",
     "canonical_json",
     "report_bytes",
+    "verify_primary_source_provenance_report",
     "verify_source_inventory_report",
+    "write_primary_source_provenance_report",
     "write_source_inventory_report",
 ]

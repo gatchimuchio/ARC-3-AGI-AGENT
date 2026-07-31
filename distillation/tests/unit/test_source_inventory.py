@@ -15,14 +15,18 @@ from hds_distill.source_inventory import (
     DEVELOPMENT_USAGES,
     MATERIALIZATION_STATES,
     PROFILE_TYPES,
+    PROVENANCE_REPORT_DIGEST_EXCLUDED_FIELDS,
+    PROVENANCE_REPORT_DIGEST_NAMESPACE,
     REPORT_DIGEST_EXCLUDED_FIELDS,
     REPORT_DIGEST_NAMESPACE,
     SOURCE_CODE_ACCESS_STATES,
     SPLIT_ROLES,
     SourceInventoryError,
+    build_primary_source_provenance_report,
     build_source_inventory,
     canonical_json,
     report_bytes,
+    verify_primary_source_provenance_report,
     verify_source_inventory_report,
 )
 
@@ -30,6 +34,12 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 PROJECT_ROOT = REPOSITORY_ROOT / "distillation"
 PROFILE_ROOT = PROJECT_ROOT / "profiles" / "source"
 REPORT_PATH = PROJECT_ROOT / "artifacts" / "reports" / "source_inventory.json"
+PROVENANCE_REPORT_PATH = (
+    PROJECT_ROOT
+    / "artifacts"
+    / "reports"
+    / "primary_source_provenance.json"
+)
 SCHEMA_PATH = PROJECT_ROOT / "schemas" / "source_profile.schema.json"
 
 
@@ -184,6 +194,123 @@ def test_public_25_and_canonical_corpus_are_explicitly_consumed() -> None:
         == "PUBLIC_EVALUATION_SUCCESS_TRAJECTORY_CONSUMED"
         for record in consumed
     )
+
+
+def test_primary_source_provenance_is_complete_and_content_bound() -> None:
+    report = build_primary_source_provenance_report(
+        PROJECT_ROOT,
+        repository_root=REPOSITORY_ROOT,
+    )
+    checked = _json(PROVENANCE_REPORT_PATH)
+
+    assert report == checked
+    assert PROVENANCE_REPORT_PATH.read_bytes() == report_bytes(report)
+    assert report["raw_recording_provenance_count"] == 25
+    assert report["canonical_corpus_source_count"] == 3
+    assert report["provenance_relation_count"] == 75
+    assert report["covered_level_count"] == 183
+    assert report["covered_expected_action_count"] == 11648
+    assert report["raw_trajectory_to_s5_provenance_complete"] is True
+    assert report["canonical_corpus_source_ids"] == [
+        "repo:analysis/teacher/FULL_SOLUTION_CORPUS.json",
+        "repo:analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.json",
+        "repo:analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.npz",
+    ]
+    layer_policy = report["artifact_layer_policy"]
+    assert layer_policy == {
+        "admitted_artifact_layer": "PRIMARY_TEACHER_SOURCE",
+        "derived_distillation_evidence_admitted_source_count": 0,
+        "forbidden_repository_prefixes": [
+            "analysis/rev3/",
+            "artifacts/reports/",
+            "control/",
+            "distillation/artifacts/",
+            "distillation/profiles/",
+        ],
+        "forbidden_repository_source_count": 0,
+        "governance_artifact_admitted_source_count": 0,
+        "policy_weight_admitted_source_count": 0,
+        "primary_teacher_source_count": 83,
+    }
+    records = cast(list[dict[str, Any]], report["provenance_records"])
+    assert len({record["game_reference"] for record in records}) == 25
+    assert len({record["raw_recording_source_id"] for record in records}) == 25
+    assert len({record["provenance_record_id"] for record in records}) == 25
+    assert all(
+        record["identity_use_boundary"]
+        == "PROVENANCE_ONLY_NOT_SELECTOR_PARAMETER_OR_RUNTIME_ROUTING"
+        and record["relation_kind"]
+        == "D01A_METADATA_LEDGER_RAW_RECORDING_TO_CANONICAL_CORPUS"
+        and record["evidence_basis"]
+        == "D01A_LEDGER_DECLARATION_PLUS_PINNED_SOURCE_MANIFEST_METADATA"
+        and record["payload_cross_check_status"]
+        == "NOT_PERFORMED_PH_D01A_METADATA_ONLY"
+        for record in records
+    )
+    assert str(report["claim_boundary"]).startswith(
+        "Records ledger-declared metadata provenance"
+    )
+
+    body = dict(report)
+    claimed = str(body["content_digest"])
+    for field in PROVENANCE_REPORT_DIGEST_EXCLUDED_FIELDS:
+        body.pop(field)
+    expected = (
+        PROVENANCE_REPORT_DIGEST_NAMESPACE
+        + ":"
+        + hashlib.sha256(
+            canonical_json(cast(Any, body)).encode("utf-8")
+        ).hexdigest()
+    )
+    assert claimed == expected
+
+
+def test_raw_manifest_metadata_contract_fails_closed() -> None:
+    manifest_path = (
+        REPOSITORY_ROOT
+        / "analysis"
+        / "teacher"
+        / "HUMAN_WINNING_REPLAY_SOURCE_MANIFEST.json"
+    )
+    for field, replacement, error in (
+        ("unexpected", True, "UNKNOWN_FIELDS"),
+        ("split", "evaluation", "SPLIT_INVALID"),
+        ("selected_level_count", 182, "LEVEL_ACCOUNTING_MISMATCH"),
+    ):
+        manifest = copy.deepcopy(_json(manifest_path))
+        manifest[field] = replacement
+        with pytest.raises(SourceInventoryError, match=error):
+            build_primary_source_provenance_report(
+                PROJECT_ROOT,
+                repository_root=REPOSITORY_ROOT,
+                source_manifest_document=cast(Any, manifest),
+            )
+
+    manifest = copy.deepcopy(_json(manifest_path))
+    manifest["rows"][0]["row_index"] = 340
+    with pytest.raises(SourceInventoryError, match="ROW_INDEX_OUT_OF_RANGE"):
+        build_primary_source_provenance_report(
+            PROJECT_ROOT,
+            repository_root=REPOSITORY_ROOT,
+            source_manifest_document=cast(Any, manifest),
+        )
+
+
+def test_noncanonical_repository_source_path_fails_closed() -> None:
+    profiles = _profiles()
+    path = _profile_path("arc3-canonical-teacher-trajectories")
+    profile = profiles[path]
+    profile["selectors"][0]["paths"][0] = (
+        "analysis//teacher/FULL_SOLUTION_CORPUS.json"
+    )
+    _rebind_profile(profile)
+
+    with pytest.raises(SourceInventoryError, match="NOT_CANONICAL"):
+        build_source_inventory(
+            PROJECT_ROOT,
+            repository_root=REPOSITORY_ROOT,
+            profile_documents=cast(Any, profiles),
+        )
 
 
 def test_arc2_evaluation_answer_is_visible_but_not_claimed_consumed() -> None:
@@ -423,7 +550,9 @@ def test_raw_recording_locator_drift_fails_closed() -> None:
         / "HUMAN_WINNING_REPLAY_SOURCE_MANIFEST.json"
     )
     manifest = copy.deepcopy(manifest)
-    manifest["rows"][0]["recording_file"] = "changed.recording"
+    manifest["rows"][0]["recording_file"] = (
+        "00000000-0000-0000-0000-000000000000.recording"
+    )
 
     with pytest.raises(
         SourceInventoryError,
@@ -439,7 +568,8 @@ def test_raw_recording_locator_drift_fails_closed() -> None:
 def test_source_payload_files_are_not_read(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    original = Path.read_text
+    original_read_text = Path.read_text
+    original_read_bytes = Path.read_bytes
     forbidden = {
         "analysis/teacher/FULL_SOLUTION_CORPUS.json",
         "analysis/teacher/S5_RENDERED_POLICY_TRAINING_CORPUS.json",
@@ -456,14 +586,33 @@ def test_source_payload_files_are_not_read(
             relative = ""
         if relative.startswith("environment_files/") or relative in forbidden:
             raise AssertionError(f"source payload read: {relative}")
-        return original(path, encoding=encoding, errors=errors)
+        return original_read_text(path, encoding=encoding, errors=errors)
+
+    def guarded_read_bytes(path: Path) -> bytes:
+        try:
+            relative = path.resolve().relative_to(REPOSITORY_ROOT).as_posix()
+        except ValueError:
+            relative = ""
+        if relative.startswith("environment_files/") or relative in forbidden:
+            raise AssertionError(f"source payload read: {relative}")
+        return original_read_bytes(path)
 
     monkeypatch.setattr(Path, "read_text", guarded_read_text)
+    monkeypatch.setattr(Path, "read_bytes", guarded_read_bytes)
     report = build_source_inventory(
         PROJECT_ROOT,
         repository_root=REPOSITORY_ROOT,
     )
     assert report["source_payload_access"] == {
+        "payload_parse_count": 0,
+        "replay_execution_count": 0,
+        "source_execution_count": 0,
+    }
+    provenance = build_primary_source_provenance_report(
+        PROJECT_ROOT,
+        repository_root=REPOSITORY_ROOT,
+    )
+    assert provenance["source_payload_access"] == {
         "payload_parse_count": 0,
         "replay_execution_count": 0,
         "source_execution_count": 0,
@@ -479,6 +628,23 @@ def test_checked_report_verifier_rejects_drift(tmp_path: Path) -> None:
         match="D01A_REPORT_MISMATCH",
     ):
         verify_source_inventory_report(
+            checked,
+            PROJECT_ROOT,
+            repository_root=REPOSITORY_ROOT,
+        )
+
+
+def test_checked_provenance_report_verifier_rejects_drift(
+    tmp_path: Path,
+) -> None:
+    checked = tmp_path / "primary_source_provenance.json"
+    checked.write_bytes(PROVENANCE_REPORT_PATH.read_bytes() + b"\n")
+
+    with pytest.raises(
+        SourceInventoryError,
+        match="D01A_PROVENANCE_REPORT_MISMATCH",
+    ):
+        verify_primary_source_provenance_report(
             checked,
             PROJECT_ROOT,
             repository_root=REPOSITORY_ROOT,

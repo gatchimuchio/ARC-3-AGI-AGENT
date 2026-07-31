@@ -1,10 +1,11 @@
 """Fail-closed governance boundary for the installed rev3 strategy.
 
 The 2026-07-31 audit classified the earlier rev3 phase evidence as historical
-and non-authoritative.  PH-R00 and PH-D00A are Owner-approved; PH-D00B is
-authorized only for the distillation repository and Scope Guard rebind.
-Historical S5/P22 capability paths remain forbidden as parents, active
-policies, or fallbacks.  Phase entry alone never activates a runtime.
+and non-authoritative. PH-R00, PH-D00A, and PH-D00B are Owner-approved;
+PH-D01A is authorized only for metadata-level Primary Teacher Source
+inventory and provenance. Historical S5/P22 capability paths remain
+forbidden as parents, active policies, or fallbacks. Phase entry alone never
+activates a runtime.
 """
 
 from __future__ import annotations
@@ -18,14 +19,15 @@ REV3_STRATEGY_ID: Final = (
 REV3_STRATEGY_STATUS: Final = "OWNER_APPROVED"
 REV3_INSTALLATION_STATUS: Final = "INSTALLED"
 REV3_CURRENT_WORK_CLASS: Final = (
-    "PH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBIND"
+    "PH-D01A_PRIMARY_SOURCE_INVENTORY_REBIND"
 )
-REV3_ACTIVE_PHASE: Final[str | None] = "PH-D00B"
+REV3_ACTIVE_PHASE: Final[str | None] = "PH-D01A"
 REV3_PH_R1_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_R00_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_R00_OWNER_AUTHORIZATION: Final = "ESTABLISHED"
 REV3_PH_D00A_STATUS: Final = "OWNER_APPROVED_PASS"
-REV3_PH_D00B_STATUS: Final = "IN_PROGRESS"
+REV3_PH_D00B_STATUS: Final = "OWNER_APPROVED_PASS"
+REV3_PH_D01A_STATUS: Final = "IN_PROGRESS"
 REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS: Final = "NOT_FROZEN"
 REV3_RUNTIME_ACTIVATION_STATUS: Final = "SUSPEND"
 REV3_PHASE_ORDER: Final = (
@@ -223,6 +225,7 @@ __all__ = [
     "REV3_PH_R00_STATUS",
     "REV3_PH_D00A_STATUS",
     "REV3_PH_D00B_STATUS",
+    "REV3_PH_D01A_STATUS",
     "REV3_PHASE_ORDER",
     "REV3_RUNTIME_ACTIVATION_STATUS",
     "REV3_STRATEGY_ID",

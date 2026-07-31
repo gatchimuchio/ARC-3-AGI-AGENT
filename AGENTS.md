@@ -1,6 +1,6 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00AはOwner承認済みであり、PH-D00Bだけが現在activeである。PH-D00B開始許可は、ARC task payloadへのアクセス、HDS仮説生成・蒸留実行、Bridge、Runtimeの開始許可ではない。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00A、PH-D00BはOwner承認済みであり、PH-D01Aだけが現在activeである。PH-D01A開始許可は、Primary Teacher Sourceのlocator・分類・provenance metadata以外のARC payload解析、source実行・replay、HDS仮説生成・蒸留実行、PH-D01B freeze、Bridge、Runtimeの開始許可ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
 - 日付: `2026-07-31`
@@ -10,9 +10,10 @@
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
 - 契約状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- 現在作業: `PH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBIND`
-- Active phase: `PH-D00B`
-- PH-D00B: `IN_PROGRESS`
+- 現在作業: `PH-D01A_PRIMARY_SOURCE_INVENTORY_REBIND`
+- Active phase: `PH-D01A`
+- PH-D01A: `IN_PROGRESS`
+- PH-D00B: `OWNER_APPROVED_PASS`
 - PH-D00A: `OWNER_APPROVED_PASS`
 - PH-R00: `OWNER_APPROVED_PASS`
 - PH-R-1: `OWNER_APPROVED_PASS`
@@ -138,12 +139,13 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = PH-D00B
-Current work = PH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBIND
+Active phase = PH-D01A
+Current work = PH-D01A_PRIMARY_SOURCE_INVENTORY_REBIND
 PH-R-1 = OWNER_APPROVED_PASS
 PH-R00 = OWNER_APPROVED_PASS
 PH-D00A = OWNER_APPROVED_PASS
-PH-D00B = IN_PROGRESS
+PH-D00B = OWNER_APPROVED_PASS
+PH-D01A = IN_PROGRESS
 PH-R00 Owner authorization = ESTABLISHED
 ```
 
@@ -172,9 +174,11 @@ AND PH-R00_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D00A
 AND PH-D00A_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D00B
+AND PH-D00B_DOD_PASS
+AND OWNER_AUTHORIZED_PH-D01A
 ```
 
-以前に`PH-D00B`を開始しない。現在は全条件が成立し、PH-D00Bだけがactiveである。PH-D01AはPH-D00Bの全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
+以前に`PH-D01A`を開始しない。現在は全条件が成立し、PH-D01Aだけがactiveである。PH-D01BはPH-D01Aの全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -728,9 +732,10 @@ installationはINSTALLEDです。
 PH-R-1はOWNER_APPROVED_PASSです。
 PH-R00はOWNER_APPROVED_PASSです。
 PH-D00AはOWNER_APPROVED_PASSです。
-PH-D00BはIN_PROGRESSです。
-Active phaseはPH-D00Bです。
-現在許可されたwork classはPH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBINDです。
+PH-D00BはOWNER_APPROVED_PASSです。
+PH-D01AはIN_PROGRESSです。
+Active phaseはPH-D01Aです。
+現在許可されたwork classはPH-D01A_PRIMARY_SOURCE_INVENTORY_REBINDです。
 PH-R00のOwner authorizationはESTABLISHEDです。
 
 最初に、
@@ -739,27 +744,28 @@ PH-R00のOwner authorizationはESTABLISHEDです。
 - HEAD/tree
 - dirty state
 - required documents
-- PH-D00A evidence、attestation、approval
-- PH-D00B WorkBlockFrameとphase-entry approval
+- PH-D00B evidence、attestation、approval
+- PH-D01A WorkBlockFrameとphase-entry approval
 を確認してください。
 
 次だけを実施してください。
 
-- distillation／bridge／runtime namespace境界のcurrent HEADへのrebind
-- Python 3.12.13とdevelopment toolchainの固定
-- behavior-based Scope Guardの再検証・必要な是正
-- 監査前PH-D00B control artifactの明示的historical移送
-- static auditor、scope contract、deterministic reportの再検証
+- Primary Teacher Source 83件のprofile／split／answer visibility／contamination再検証
+- public 25とcanonical corpus 3件の`PUBLIC_EVALUATION_CONSUMED`分類
+- raw recording 25件・183 levelとFULL／S5 corpusのmetadata-only provenance
+- policy weight、Derived Distillation Evidence、Governance Artifactのsource admission 0
+- raw recording manifest、canonical path、alias、重複assignmentのfail-closed検証
+- 監査前PH-D01A control artifactの明示的historical移送
 - dedicated／focused／full unit／integration regression
 - deterministic artifact、Implementation Commit、Evidence Commit、attestationの分離
-- PH-D00B DoDとfailed requirement count 0の証明
+- PH-D01A DoDとfailed requirement count 0の証明
 
-ARC task payloadアクセス、HDS仮説生成・蒸留実行、Bridge実装、AGI Runtime、P22改善、locked final、
-official、Kaggleへ進んではいけません。
+ARC task payload解析、source実行・replay、PH-D01B manifest freeze、HDS仮説生成・蒸留実行、
+Bridge実装、AGI Runtime、P22改善、locked final、official、Kaggleへ進んではいけません。
 
-PH-D00B成果のImplementation Commit、Evidence Commit、attestationを分離してください。
+PH-D01A成果のImplementation Commit、Evidence Commit、attestationを分離してください。
 全gateがPASSした場合だけstanding authorizationをexact evidenceへ機械的にbindし、
-PH-D01A entryを記録してください。失敗または未証明gateを承認してはいけません。
+PH-D01B entryを記録してください。失敗または未証明gateを承認してはいけません。
 ```
 
 ---
