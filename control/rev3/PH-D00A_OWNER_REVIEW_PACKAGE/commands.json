@@ -1,0 +1,66 @@
+{
+  "schema_version": "arc3-ph-d00a-command-evidence-v2",
+  "phase_id": "PH-D00A",
+  "commands": [
+    {
+      "command": "pytest tests/unit on standalone exact implementation clone",
+      "result": "729 passed in 458.61s",
+      "status": "PASS"
+    },
+    {
+      "command": "pytest tests/integration on standalone exact implementation clone",
+      "result": "8 passed in 423.74s",
+      "status": "PASS"
+    },
+    {
+      "command": "pytest PH-D00A focused tests on standalone exact implementation clone",
+      "result": "55 passed in 60.78s",
+      "status": "PASS"
+    },
+    {
+      "command": "validate_rev3_governance.py on exact implementation tree",
+      "result": "20 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "audit_hds_dependencies.py on Linux and Windows",
+      "result": "DEPENDENCY_LOCK_PASS on both platforms",
+      "status": "PASS"
+    },
+    {
+      "command": "audit_hds_dependencies.py with exact Translator bare Git clone",
+      "result": "Commit, tree, README blob, and README SHA-256 match",
+      "status": "PASS"
+    },
+    {
+      "command": "audit_hds_dependencies.py --output to three independent external paths",
+      "result": "Three byte-identical reports, SHA-256 254f230d8320a1b8444dbbc8c35863b1b27942260169dbd6205fe78cb5a68b56",
+      "status": "PASS"
+    },
+    {
+      "command": "ruff, strict mypy, and py_compile",
+      "result": "All checks passed",
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --check and standalone clone status",
+      "result": "No findings",
+      "status": "PASS"
+    }
+  ],
+  "resolved_non_product_attempts": [
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "Windows default pytest Temp root denied access",
+      "resolution": "Rerun with isolated repository-local basetemp; 55 of 55 passed",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "Windows Git could not interpret the WSL-format linked-worktree .git pointer",
+      "resolution": "Rerun the exact commit in a standalone ordinary clone; 55 of 55, 729 of 729, and 8 of 8 passed",
+      "status": "RESOLVED"
+    }
+  ],
+  "evidence_payload_digest": "sha256:2d46f90da4b6f3a3e1dc3085e4174b8186805606977fad1ce68a0faa6b661044"
+}

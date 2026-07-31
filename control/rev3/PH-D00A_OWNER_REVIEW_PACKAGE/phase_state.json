@@ -1,0 +1,225 @@
+{
+  "schema_version": "arc3-phase-state-v2",
+  "phase_id": "PH-D00A",
+  "status": "CODEX_SELF_AUDIT_PASS",
+  "base_commit": "7643b13f76543d4e48cf05db03d08336ec9b3a16",
+  "base_tree": "be15955ac81d81801af17322785d2f9178647a7d",
+  "implementation_commit": "b5dd89e8745408420ed6bd59f389e4195bfccca6",
+  "implementation_tree": "9d1f5e2e648eabfce43c5b34be50c01fd426f583",
+  "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-REBIND-20260731",
+  "spec_digest": "sha256:52c652ae734a41cd4116d4e15bca890c43c5e0aaf3f7f8d6f0627a540f7a9f63",
+  "roadmap_digest": "sha256:7c010c9c5becd89800ffb2fd9ba9a914dac3cd246a39891e88367ac5ae7753e5",
+  "input_manifest_digest": "rev3-current-authority-manifest:6b31bc9790b3034496bb7ca2a40e7efb3fe6a5429fcebc685fa9b1318ca5261f",
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "HDS_AUTHORITY_SOURCE",
+    "UPSTREAM_REFERENCE_METADATA",
+    "OWNER_APPROVAL_EVIDENCE",
+    "HISTORICAL_CONTROL_EVIDENCE"
+  ],
+  "changed_files": [
+    "AGENTS.md",
+    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "AUTHORITY_ORDER.md",
+    "DEPENDENCY_LOCK.md",
+    "analysis/rev3/ph_d00a_dependency_inventory.json",
+    "artifacts/reports/dependency_audit.json",
+    "artifacts/source_content_manifests/hds_dependencies.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/D00A_PHASE_STATE.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/changed_files.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/commands.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/failed_requirements.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/open_terms.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/phase_state.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/self_audit.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/summary.md",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/test_results.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/PH-D00A_WORK_BLOCK_FRAME.json",
+    "control/rev3/PH-D00A_WORK_BLOCK_FRAME.json",
+    "control/rev3/PHASE_TRANSITIONS/PH-R00_TO_PH-D00A.json",
+    "control/rev3/REV3_CURRENT_SELECTOR.json",
+    "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+    "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+    "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "docs/strategy/REV3_STRATEGY_REBASELINE.md",
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V5.json",
+    "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+    "scripts/audit_hds_dependencies.py",
+    "scripts/validate_rev3_governance.py"
+  ],
+  "commands": [
+    {
+      "command": "Windows Python 3.12.13 -m pytest tests/unit on standalone exact clone",
+      "result": "729 passed in 458.61s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest tests/integration on standalone exact clone",
+      "result": "8 passed in 423.74s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest PH-D00A focused tests on standalone exact clone",
+      "result": "55 passed in 60.78s",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 scripts/validate_rev3_governance.py on exact implementation tree",
+      "result": "20 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "python3 scripts/audit_hds_dependencies.py --translator-git-dir <exact bare clone> --verify-report <canonical report>",
+      "result": "DEPENDENCY_LOCK_PASS",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/audit_hds_dependencies.py --verify-report <canonical report>",
+      "result": "DEPENDENCY_LOCK_PASS",
+      "status": "PASS"
+    },
+    {
+      "command": "audit_hds_dependencies.py --output <three independent external outputs>",
+      "result": "Three byte-identical reports; SHA-256 254f230d8320a1b8444dbbc8c35863b1b27942260169dbd6205fe78cb5a68b56",
+      "status": "PASS"
+    },
+    {
+      "command": "ruff check <PH-D00A changed Python and tests>",
+      "result": "All checks passed",
+      "status": "PASS"
+    },
+    {
+      "command": "mypy --strict <three PH-D00A source files>",
+      "result": "Success: no issues found in 3 source files",
+      "status": "PASS"
+    },
+    {
+      "command": "py_compile <five PH-D00A Python files>",
+      "result": "No findings",
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --check and clean standalone exact clone status",
+      "result": "No findings",
+      "status": "PASS"
+    }
+  ],
+  "tests": {
+    "exact_tree": {
+      "commit": "b5dd89e8745408420ed6bd59f389e4195bfccca6",
+      "tree": "9d1f5e2e648eabfce43c5b34be50c01fd426f583",
+      "standalone_clone": true,
+      "status": "PASS"
+    },
+    "full_unit": {
+      "duration_seconds": 458.61,
+      "failed": 0,
+      "passed": 729,
+      "status": "PASS"
+    },
+    "full_integration": {
+      "duration_seconds": 423.74,
+      "failed": 0,
+      "passed": 8,
+      "status": "PASS"
+    },
+    "focused_regression": {
+      "duration_seconds": 60.78,
+      "failed": 0,
+      "passed": 55,
+      "status": "PASS"
+    },
+    "governance_validator": {
+      "check_count": 20,
+      "failure_count": 0,
+      "status": "PASS"
+    },
+    "dependency_lock": {
+      "authority_defined": true,
+      "hds_dependency_match": true,
+      "open_term_count": 0,
+      "status": "PASS",
+      "unresolved_dependency_count": 0
+    },
+    "translator_git_objects": {
+      "commit_match": true,
+      "readme_blob_match": true,
+      "status": "PASS",
+      "tree_match": true
+    },
+    "report_reproducibility": {
+      "byte_identical": true,
+      "independent_rebuild_count": 3,
+      "sha256": "254f230d8320a1b8444dbbc8c35863b1b27942260169dbd6205fe78cb5a68b56",
+      "status": "PASS"
+    },
+    "historical_migration": {
+      "artifact_count": 12,
+      "byte_identical": true,
+      "status": "PASS"
+    },
+    "mypy_strict": "PASS",
+    "py_compile": "PASS",
+    "ruff": "PASS"
+  },
+  "artifacts": [
+    {
+      "path": "control/rev3/PH-D00A_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "EVIDENCE_PAYLOAD_DESCRIPTOR",
+      "sha256": "2d46f90da4b6f3a3e1dc3085e4174b8186805606977fad1ce68a0faa6b661044"
+    },
+    {
+      "content_digest": "hds-dependency-lock:2f032a1b853e24624a2df9f176486978e7cf41537af951278996b0f1cf0b9b01",
+      "path": "artifacts/source_content_manifests/hds_dependencies.json",
+      "role": "DEPENDENCY_MANIFEST",
+      "sha256": "7f86e60134dace1552052d6174d7e29b77d548b60903378b4b2466eb2a12f01d"
+    },
+    {
+      "content_digest": "hds-dependency-audit-report:7c1540a1c23d39e9d1db4b7156caeb5313283fa62ef0678d83ce383d2768770e",
+      "path": "artifacts/reports/dependency_audit.json",
+      "role": "DEPENDENCY_AUDIT_REPORT",
+      "sha256": "254f230d8320a1b8444dbbc8c35863b1b27942260169dbd6205fe78cb5a68b56"
+    },
+    {
+      "content_digest": "rev3-current-authority-manifest:6b31bc9790b3034496bb7ca2a40e7efb3fe6a5429fcebc685fa9b1318ca5261f",
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "sha256": "1b47e734404ae8e266038c9a6649c52328739d6825eba5e9e2cab68f3f72cbb3"
+    },
+    {
+      "content_digest": "rev3-work-block-frame:001b2608b7b46c6dfc195bce62835af5f8740f0192e749b6f98c7d450bdee319",
+      "path": "control/rev3/PH-D00A_WORK_BLOCK_FRAME.json",
+      "role": "CURRENT_WORK_BLOCK_FRAME",
+      "sha256": "56cc1173bed2ef4143edf4a9ce6da4d9f5f12bd739bc1ab05551b14def2136e9"
+    }
+  ],
+  "failed_requirement_ids": [],
+  "open_terms": [
+    {
+      "blocks_next_phase_entry": true,
+      "id": "PH-D00A-OWNER-RESULT-BINDING-001",
+      "resolution": "Bind this exact Evidence Commit and evidence payload digest through the standing authorization before PH-D00B entry.",
+      "status": "PENDING_APPROVAL_COMMIT"
+    }
+  ],
+  "self_audit": {
+    "authority": "PASS",
+    "claim_strength": "PASS",
+    "data_role": "PASS",
+    "determinism": "PASS",
+    "evidence": "PASS",
+    "historical_fallback": "PASS",
+    "identity_taint": "PASS",
+    "objective_alignment": "PASS",
+    "resource": "PASS",
+    "rollback": "PASS",
+    "scope": "PASS"
+  },
+  "owner_review_required": true,
+  "evidence_payload_digest": "sha256:2d46f90da4b6f3a3e1dc3085e4174b8186805606977fad1ce68a0faa6b661044"
+}
