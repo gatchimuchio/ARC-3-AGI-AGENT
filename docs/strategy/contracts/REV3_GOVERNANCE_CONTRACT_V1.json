@@ -50,22 +50,23 @@
     ]
   },
   "active_work_block": {
-    "content_digest": "rev3-work-block-frame:1b25b4b9aba92fe42b4abf47214397f05752f217ab6ec7cfeb3da846da58717e",
+    "content_digest": "rev3-work-block-frame:ee3cbcc1bc2c05f0411fe2bc498d50a1808bd2bfb3c2dfeaa3754f121441d4cf",
     "external_irreversible_actions_authorized": false,
-    "path": "control/rev3/PH-D01B_WORK_BLOCK_FRAME.json",
-    "phase_id": "PH-D01B",
+    "path": "control/rev3/PH-D02A_WORK_BLOCK_FRAME.json",
+    "phase_id": "PH-D02A",
     "runtime_capability_addition_count": 0,
-    "transition_digest": "rev3-phase-transition:f464759c7c0ff3ee12034b6d92a125555484ecac7a97e060faa75916f0ecd72a"
+    "transition_digest": "rev3-phase-transition:0b0c9b366beeaac4412d4d5641cf8a0841787c291f2466b3244e60e00199d9c5"
   },
   "current_selector": {
-    "active_phase": "PH-D01B",
-    "current_work_class": "PH-D01B_SOURCE_CONTENT_ACQUISITION_ENVIRONMENT_RUN_AND_SOURCE_BLIND_REBIND",
+    "active_phase": "PH-D02A",
+    "current_work_class": "PH-D02A_CANONICAL_SERIALIZATION_DIGEST_REBIND",
     "distilled_initial_state_bundle_status": "NOT_FROZEN",
     "installation_status": "INSTALLED",
     "ph_d00a_status": "OWNER_APPROVED_PASS",
     "ph_d00b_status": "OWNER_APPROVED_PASS",
     "ph_d01a_status": "OWNER_APPROVED_PASS",
-    "ph_d01b_status": "IN_PROGRESS",
+    "ph_d01b_status": "OWNER_APPROVED_PASS",
+    "ph_d02a_status": "IN_PROGRESS",
     "ph_r00_owner_authorization": "ESTABLISHED",
     "ph_r00_status": "OWNER_APPROVED_PASS",
     "ph_r1_status": "OWNER_APPROVED_PASS",
@@ -132,12 +133,12 @@
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "phase_entry_approval": {
-    "approval_artifact_digest": "owner-approval-record:4083a7a0207d5d7bbc04d31f9cf99d455229528a738d29d38058a1bdf9919a60",
-    "decision_capture_digest": "sha256:c363fe83418a4021ab1eda580fef87f65c715b3abb8d11249b1876ae8d5d0aa5",
-    "from_phase": "PH-D01A",
-    "target_artifact_digest": "sha256:b0e9c80d0d9f6f2ff7642924212b5e67fb3a46eb423a0ce4ac6bd98559841c68",
-    "target_evidence_commit": "ac01fe04e94f97135e234962b19a509d55774485",
-    "to_phase": "PH-D01B"
+    "approval_artifact_digest": "owner-approval-record:75fdf70a6db5d56105afe5439919d5dec290cec5b748282230f10a4146e98e26",
+    "decision_capture_digest": "sha256:4fecedc2acd948e29fa75ea3cfc74703e4af0f46bf5c8d3c81281c3efbf57280",
+    "from_phase": "PH-D01B",
+    "target_artifact_digest": "sha256:27e3b1756cfc7d0fba2c79021089d14e62341ce736d82ba79d09e3185589fa2a",
+    "target_evidence_commit": "04ffbe68b71fed60b786f8147968ac8f5ceb6730",
+    "to_phase": "PH-D02A"
   },
   "j_boundary": {
     "distillation_may_generate": [
@@ -225,6 +226,7 @@
   },
   "source_blind_execution_evidence": {
     "backend": "BUBBLEWRAP_USER_MOUNT_NETWORK_NAMESPACE",
+    "evidence_semantics": "IMMUTABLE_PH_D01B_POINT_IN_TIME_RESULT",
     "plan_digest": "hds-source-blind-execution-plan:b4ae17a427b18a4443940c306e865d8b468b3413fcdc8d1c3141815c55ed75b0",
     "record_digest": "hds-source-blind-execution-record:77960f17486a5da408dbeccef0b21470960cbc4e415044c94dbe5a554caecf76",
     "role_count": 3,
@@ -232,12 +234,14 @@
     "candidate_execution_status": "NOT_STARTED_PHASE_D01B"
   },
   "downstream_invalidation_evidence": {
+    "evidence_semantics": "IMMUTABLE_PH_D01B_POINT_IN_TIME_RESULT",
     "path": "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json",
     "report_digest": "hds-ph-d01b-downstream-invalidation:d491966458d317ad0e29e78769e6477e044bdb911850c9dd2981636701a35761",
     "invalidated_artifact_count": 3,
     "invalidated_artifact_owner_phase": "PH-D02B",
     "current_phase_rebuild_permitted": false,
-    "ph_d02a_status": "NOT_STARTED",
+    "report_point_in_time_ph_d02a_status": "NOT_STARTED",
+    "live_ph_d02a_status": "IN_PROGRESS",
     "ph_d02b_status": "SUSPEND"
   }
 }

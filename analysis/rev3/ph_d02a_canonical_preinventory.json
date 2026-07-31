@@ -2,12 +2,18 @@
   "schema_version": "arc3-rev3-ph-d02a-canonical-preinventory-v1",
   "phase_id": "PH-D02A",
   "work_block_id": "WB-PH-D02A-CANONICAL-SERIALIZATION-DIGEST",
-  "base_commit": "ea24c69794393d56a1e3b79953c56c7bdd42fc0d",
-  "inventory_semantics": "PREIMPLEMENTATION_CANONICAL_CONTRACT_GAP_INVENTORY_NOT_A_CANONICALIZATION_PASS_CLAIM",
+  "base_commit": "4dbf17513fdf2027527f9f5ea64f16a99fc52326",
+  "inventory_semantics": "POST_AUDIT_ENTRY_INVENTORY_OF_HISTORICAL_CANONICAL_CANDIDATE_NOT_A_PHASE_PASS_CLAIM",
   "frozen_input_bindings": {
-    "d01b_phase_state_digest": "rev3-d01b-phase-state:68eea37dcce3d09d1e21b1a43ef5d92b091f1960ee5fffb42507c07e0fe25220",
-    "source_manifest_freeze_digest": "hds-source-manifest-freeze-report:345b0ae96b840bee24d49362704acf4126af5e559d98d3e3f0da9650c73ab48f",
-    "environment_manifest_digest": "hds-environment-manifest:c9d5bf601d0fdec28a4a7bb8df722b6954dfed0e29f19ecaf4797485de152754",
+    "d01b_phase_state_sha256": "acf169375948298ffcd26c93bae43207891b8e6130a6817da8ff174beba1e311",
+    "d01b_evidence_commit": "04ffbe68b71fed60b786f8147968ac8f5ceb6730",
+    "d01b_evidence_tree": "139b5f5ea80e176cf938b545ef7ca9fdc900c9e2",
+    "d01b_evidence_payload_digest": "sha256:27e3b1756cfc7d0fba2c79021089d14e62341ce736d82ba79d09e3185589fa2a",
+    "d01b_owner_approval_digest": "owner-approval-record:75fdf70a6db5d56105afe5439919d5dec290cec5b748282230f10a4146e98e26",
+    "source_manifest_freeze_digest": "hds-source-manifest-freeze-report:ed0f9e1b762065173e4cf941da3a22a85b026c511e75f950ae187c630f03d5e4",
+    "source_blind_execution_digest": "hds-source-blind-execution-record:77960f17486a5da408dbeccef0b21470960cbc4e415044c94dbe5a554caecf76",
+    "environment_manifest_digest": "hds-environment-manifest:1d116488cd85ee5ad9d641aeb2af66187572b181cb03d819fac1cdba3252cfe0",
+    "run_manifest_digest": "hds-run-manifest:8840575d3019836f476785013d2ff4136eac3cf9d4b86ee245e384ebdd007d06",
     "source_entry_count": 83,
     "source_payload_access_planned": false,
     "real_trajectory_normalization_planned": false
@@ -120,63 +126,68 @@
     {
       "gap_id": "D02A-GAP-001",
       "requirement": "Unicode NFC for keys, values, namespaces, and archive names",
-      "current_status": "MISSING"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-002",
       "requirement": "strict JSON-domain types and normalized-key collision rejection",
-      "current_status": "MISSING"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-003",
       "requirement": "set and explicit unordered-array normalization without reordering semantic arrays",
-      "current_status": "MISSING"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-004",
       "requirement": "confidence_ppm integer and range contract",
-      "current_status": "MISSING"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-005",
       "requirement": "content-derived ID and explicit self-field exclusion policy",
-      "current_status": "MISSING"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-006",
       "requirement": "domain-separated logical and physical digests",
-      "current_status": "MISSING_IN_DISTILLATION_NAMESPACE"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-007",
       "requirement": "canonical ZIP independent of timestamps, insertion order, and zlib implementation",
-      "current_status": "MISSING_IN_DISTILLATION_NAMESPACE"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-008",
       "requirement": "dependency-free canonical NPY/NPZ with dtype, endian, shape, tensor order, and finite values fixed",
-      "current_status": "MISSING"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-009",
       "requirement": "raw and canonical trajectory digest separation",
-      "current_status": "MISSING"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
     },
     {
       "gap_id": "D02A-GAP-010",
       "requirement": "committed vectors rebuilt byte-identically in three independent processes, paths, times, insertion orders, and hash seeds",
-      "current_status": "MISSING"
+      "current_status": "CANDIDATE_PRESENT_REQUIRES_POST_AUDIT_REVALIDATION"
+    },
+    {
+      "gap_id": "D02A-GAP-011",
+      "requirement": "canonical JSON document final LF and canonical JSONL with one record per line sorted by NFC record_id",
+      "current_status": "MISSING_IN_HISTORICAL_CANDIDATE"
     }
   ],
   "implementation_plan": [
-    "add one stdlib-only hds_distill.canonical module with stable error codes and no file, network, source, runtime, or subprocess side effects",
-    "add a machine-readable canonicalization contract binding versions, domains, exclusions, ZIP metadata, NPY format, dtypes, and test-vector definitions",
-    "add synthetic canonical JSON, ZIP, NPZ, ID, logical/physical digest, and raw/canonical trajectory vectors",
-    "add dedicated negative tests for every fail-closed boundary",
-    "run three subprocess rebuilds under distinct cwd, wall-clock metadata, insertion order, unordered order, and PYTHONHASHSEED",
-    "rebuild the Scope Guard report and prove finding count remains zero",
-    "verify every frozen PH-D01A/B artifact hash remains unchanged",
-    "bind result commit/tree, post-commit regressions, phase state, and Owner Review Package"
+    "migrate all 13 colliding pre-audit PH-D02A control artifacts byte-identically into the historical namespace",
+    "bind current entry to exact approved PH-D01B implementation, evidence, attestation, decision capture, and approval",
+    "retain and re-audit the stdlib-only canonical implementation candidate",
+    "add missing canonical JSON document final-LF and canonical JSONL fail-closed APIs",
+    "add one deterministic synthetic vector builder for JSON, JSONL, ZIP, and NPZ artifacts",
+    "run negative tests for every canonical boundary and three independent byte-identical rebuilds",
+    "rebuild Scope Guard and governance evidence without touching PH-D02B invalidated artifacts",
+    "bind implementation commit/tree, exact-tree regressions, phase state, and Owner Review Package"
   ],
   "dependency_decision": {
     "runtime_dependencies_added": [],
@@ -196,7 +207,9 @@
     "runtime_started": false,
     "locked_final_access_count": 0,
     "official_access_count": 0,
-    "kaggle_mutation_count": 0
+    "kaggle_mutation_count": 0,
+    "historical_canonical_candidate_present": true,
+    "canonical_contract_revalidation_started": false
   },
   "preexisting_dirty_state": {
     "path_scope": "analysis/autonomous_completion/**",
@@ -205,5 +218,29 @@
     "mutation": "NONE",
     "staging": "NONE"
   },
-  "content_digest": "rev3-ph-d02a-canonical-preinventory:f780f3abb93b5bc1515471000fca24df35f7280a995831f4ff547321e5351eec"
+  "content_digest": "rev3-ph-d02a-canonical-preinventory:d10a594ed216c2d09ab96b8398b403e7519f25b26e56b5cd68a8309270da96e3",
+  "base_tree": "fe3c806ab55a7adfa80e5f8f8c0e9a488317af0d",
+  "candidate_classification": "HISTORICAL_IMPLEMENTATION_CANDIDATE_REQUIRING_POST_AUDIT_REVALIDATION",
+  "historical_canonical_candidate": {
+    "path": "distillation/src/hds_distill/canonical.py",
+    "base_sha256": "b1f1bd152ecf86bb120713eff4c9745edeb0db6378c0d4f52399654173c86413",
+    "base_line_count": 1130,
+    "present_capabilities": [
+      "canonical JSON value codec",
+      "Unicode NFC",
+      "confidence_ppm",
+      "explicit digest exclusions",
+      "content-derived ID",
+      "logical/physical digest domains",
+      "canonical ZIP_STORED",
+      "dependency-free canonical NPY/NPZ",
+      "raw/canonical trajectory digest separation",
+      "three-process synthetic determinism test"
+    ],
+    "blocking_gap": [
+      "no canonical JSON document final-LF API",
+      "no canonical JSONL API or record_id ordering contract"
+    ],
+    "disposition": "REVALIDATE_AND_CORRECT_WITHOUT_TREATING_PRE_AUDIT_EVIDENCE_AS_CURRENT_PASS"
+  }
 }

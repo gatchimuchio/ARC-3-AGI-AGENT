@@ -1,5 +1,5 @@
 {
-  "active_phase": "PH-D01B",
+  "active_phase": "PH-D02A",
   "audit_baseline_commit": "3a7d96755cf6819d36e824fe4b64ae4086f1af98",
   "audit_report_sha256": "8536f4644fdc56cc71fa5a43699b43894c8f5d2c007ff772d68c29cc4546c1c1",
   "authority_manifest_path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
@@ -7,28 +7,20 @@
     "classification": "HISTORICAL_IMPLEMENTATION_CANDIDATE_REQUIRING_POST_AUDIT_REVALIDATION",
     "eligible_for_phase_exit": false,
     "paths": [
-      "analysis/rev3/ph_d01b_manifest_preinventory.json",
-      "distillation/input/manifest_freeze_plan.json",
-      "distillation/input/source_blind_execution_plan.json",
-      "distillation/input/raw_recording_content_capture.json",
-      "distillation/manifests/source_content/**",
-      "distillation/manifests/acquisition/**",
-      "distillation/manifests/environment/arc3-replay.json",
-      "distillation/manifests/run/ph-d01b-freeze.json",
-      "distillation/artifacts/reports/environment_isolation.json",
-      "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json",
-      "distillation/artifacts/reports/source_blind_execution.json",
-      "distillation/artifacts/reports/source_manifest_freeze.json",
-      "distillation/src/hds_distill/manifest_freeze.py",
-      "distillation/src/hds_distill/source_blind_execution.py",
+      "analysis/rev3/ph_d02a_canonical_preinventory.json",
+      "distillation/input/canonicalization_contract.json",
+      "distillation/src/hds_distill/canonical.py",
       "distillation/tests/unit/test_canonical.py",
-      "distillation/tests/unit/test_manifest_freeze.py",
-      "distillation/tests/unit/test_schema_registry.py",
-      "distillation/tests/unit/test_source_blind_execution.py",
-      "scripts/verify_source_blind_execution.py"
+      "distillation/artifacts/test_vectors/canonical_json_v1.json",
+      "distillation/artifacts/test_vectors/canonical_jsonl_v1.jsonl",
+      "distillation/artifacts/test_vectors/canonical_npz_v1.npz",
+      "distillation/artifacts/test_vectors/canonical_test_vectors.json",
+      "distillation/artifacts/test_vectors/canonical_zip_v1.zip",
+      "distillation/artifacts/reports/canonicalization_conformance.json",
+      "scripts/build_ph_d02a_canonical_vectors.py"
     ]
   },
-  "current_work_class": "PH-D01B_SOURCE_CONTENT_ACQUISITION_ENVIRONMENT_RUN_AND_SOURCE_BLIND_REBIND",
+  "current_work_class": "PH-D02A_CANONICAL_SERIALIZATION_DIGEST_REBIND",
   "distilled_initial_state_bundle_status": "NOT_FROZEN",
   "historical_evidence": {
     "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
@@ -37,17 +29,15 @@
     "scope": [
       "control/rev3/HISTORICAL_PRE_AUDIT/**",
       "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01A/**",
-      "control/rev3/D02A_PHASE_STATE.json",
+      "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/**",
       "control/rev3/D02B_PHASE_STATE.json",
       "control/rev3/D02C_PHASE_STATE.json",
       "control/rev3/D03A_CANDIDATE_STATE.json",
       "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
       "control/rev3/OWNER_REVIEW_PACKAGE",
-      "control/rev3/PH-D02A_OWNER_REVIEW_PACKAGE",
       "control/rev3/PH-D02B_OWNER_REVIEW_PACKAGE",
       "control/rev3/PH-D02C_OWNER_REVIEW_PACKAGE",
       "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE",
-      "control/rev3/PHASE_TRANSITIONS/PH-D02A_TO_PH-D02B.json",
       "control/rev3/PHASE_TRANSITIONS/PH-D02B_TO_PH-D02C.json",
       "control/rev3/PHASE_TRANSITIONS/PH-D02C_TO_PH-D03A.json",
       "control/rev3/PH-R00_VALIDATION_REWORK_FRAME.json",
@@ -64,14 +54,14 @@
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "installation_status": "INSTALLED",
-  "next_phase_after_current_phase": "PH-D02A",
+  "next_phase_after_current_phase": "PH-D02B",
   "phase_entry_approval": {
-    "approval_artifact_digest": "owner-approval-record:4083a7a0207d5d7bbc04d31f9cf99d455229528a738d29d38058a1bdf9919a60",
-    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D01A_TO_PH-D01B_20260731.json",
-    "decision_capture_digest": "sha256:c363fe83418a4021ab1eda580fef87f65c715b3abb8d11249b1876ae8d5d0aa5",
-    "decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D01A_TO_PH-D01B_20260731.json",
-    "target_artifact_digest": "sha256:b0e9c80d0d9f6f2ff7642924212b5e67fb3a46eb423a0ce4ac6bd98559841c68",
-    "target_evidence_commit": "ac01fe04e94f97135e234962b19a509d55774485"
+    "approval_artifact_digest": "owner-approval-record:75fdf70a6db5d56105afe5439919d5dec290cec5b748282230f10a4146e98e26",
+    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D01B_TO_PH-D02A_20260731.json",
+    "decision_capture_digest": "sha256:4fecedc2acd948e29fa75ea3cfc74703e4af0f46bf5c8d3c81281c3efbf57280",
+    "decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D01B_TO_PH-D02A_20260731.json",
+    "target_artifact_digest": "sha256:27e3b1756cfc7d0fba2c79021089d14e62341ce736d82ba79d09e3185589fa2a",
+    "target_evidence_commit": "04ffbe68b71fed60b786f8147968ac8f5ceb6730"
   },
   "ph_d00a_status": "OWNER_APPROVED_PASS",
   "ph_d00b_status": "OWNER_APPROVED_PASS",
@@ -80,12 +70,13 @@
   "ph_r00_status": "OWNER_APPROVED_PASS",
   "ph_r1_status": "OWNER_APPROVED_PASS",
   "runtime_activation_status": "SUSPEND",
-  "schema_version": "arc3-rev3-current-selector-v8",
+  "schema_version": "arc3-rev3-current-selector-v9",
   "standing_authorization": {
     "content_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
     "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json"
   },
   "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
   "strategy_status": "OWNER_APPROVED",
-  "ph_d01b_status": "IN_PROGRESS"
+  "ph_d01b_status": "OWNER_APPROVED_PASS",
+  "ph_d02a_status": "IN_PROGRESS"
 }

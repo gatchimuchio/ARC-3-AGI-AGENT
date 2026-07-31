@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 import subprocess
+import unicodedata
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -16,7 +17,7 @@ from zipfile import ZipFile
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SELECTOR_PATH = Path("control/rev3/REV3_CURRENT_SELECTOR.json")
 SELECTOR_SCHEMA_PATH = Path(
-    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V8.json"
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V9.json"
 )
 DECISION_PATH = Path(
     "control/rev3/OWNER_DECISION_CAPTURES/"
@@ -160,6 +161,34 @@ PH_D01B_RUN_MANIFEST_PATH = Path(
 PH_D01B_DOWNSTREAM_INVALIDATION_PATH = Path(
     "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json"
 )
+PH_D01B_RESULT_DECISION_PATH = Path(
+    "control/rev3/OWNER_DECISION_CAPTURES/"
+    "PH-D01B_TO_PH-D02A_20260731.json"
+)
+PH_D01B_RESULT_APPROVAL_PATH = Path(
+    "control/rev3/OWNER_APPROVAL_RECORDS/"
+    "PH-D01B_TO_PH-D02A_20260731.json"
+)
+PH_D01B_EVIDENCE_ATTESTATION_PATH = Path(
+    "control/rev3/PH-D01B_EVIDENCE_ATTESTATION.json"
+)
+PH_D01B_PHASE_STATE_PATH = Path("control/rev3/D01B_PHASE_STATE.json")
+PH_D02A_FRAME_PATH = Path("control/rev3/PH-D02A_WORK_BLOCK_FRAME.json")
+PH_D02A_TRANSITION_PATH = Path(
+    "control/rev3/PHASE_TRANSITIONS/PH-D01B_TO_PH-D02A.json"
+)
+PH_D02A_PREINVENTORY_PATH = Path(
+    "analysis/rev3/ph_d02a_canonical_preinventory.json"
+)
+PH_D02A_CONTRACT_PATH = Path(
+    "distillation/input/canonicalization_contract.json"
+)
+PH_D02A_VECTOR_MANIFEST_PATH = Path(
+    "distillation/artifacts/test_vectors/canonical_test_vectors.json"
+)
+PH_D02A_CONFORMANCE_PATH = Path(
+    "distillation/artifacts/reports/canonicalization_conformance.json"
+)
 PH_R00_PHASE_STATE_PATH = Path("control/rev3/R00_PHASE_STATE.json")
 PH_R00_ASSET_CLASSIFICATION_PATH = Path(
     "docs/strategy/ASSET_CLASSIFICATION_REV3.json"
@@ -190,6 +219,89 @@ def digest_object(value: object) -> str:
     return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
 
 
+def _nfc_json(value: object) -> object:
+    if isinstance(value, str):
+        return unicodedata.normalize("NFC", value)
+    if isinstance(value, list):
+        return [_nfc_json(item) for item in value]
+    if isinstance(value, dict):
+        normalized: dict[str, object] = {}
+        for raw_key, raw_value in value.items():
+            if not isinstance(raw_key, str):
+                raise TypeError("object key must be a string")
+            key = unicodedata.normalize("NFC", raw_key)
+            if key in normalized:
+                raise ValueError("NFC key collision")
+            normalized[key] = _nfc_json(raw_value)
+        return normalized
+    return value
+
+
+def _strict_object_pairs(
+    pairs: list[tuple[str, object]],
+) -> dict[str, object]:
+    result: dict[str, object] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate JSON key")
+        result[key] = value
+    return result
+
+
+def _canonical_document_failures(
+    root: Path,
+    relative_path: Path,
+    location: str,
+) -> list[str]:
+    payload = (root / relative_path).read_bytes()
+    try:
+        decoded = payload.decode("utf-8", errors="strict")
+        parsed = json.loads(
+            decoded,
+            object_pairs_hook=_strict_object_pairs,
+            parse_constant=lambda value: (_ for _ in ()).throw(
+                ValueError("non-finite JSON token: " + value)
+            ),
+        )
+        rebuilt = (
+            canonical_json(_nfc_json(parsed)).encode("utf-8") + b"\n"
+        )
+    except (UnicodeDecodeError, TypeError, ValueError):
+        return [f"{location}:CANONICAL_DOCUMENT_INVALID"]
+    if payload != rebuilt:
+        return [f"{location}:CANONICAL_DOCUMENT_BYTES_MISMATCH"]
+    return []
+
+
+def _domain_content_digest_failures(
+    value: Mapping[str, Any],
+    namespace: str,
+    field: str,
+    location: str,
+) -> list[str]:
+    excluded = value.get("digest_excluded_fields")
+    if not isinstance(excluded, list):
+        return [f"{location}:DIGEST_EXCLUSIONS_MISSING"]
+    body = dict(value)
+    for item in excluded:
+        if not isinstance(item, str) or item not in body:
+            return [f"{location}:DIGEST_EXCLUSION_INVALID"]
+        body.pop(item)
+    try:
+        payload = canonical_json(_nfc_json(body)).encode("utf-8")
+        expected = namespace + ":" + hashlib.sha256(
+            b"HDS-LOGICAL-CONTENT-V1\0"
+            + namespace.encode("ascii")
+            + b"\0"
+            + payload
+        ).hexdigest()
+    except (TypeError, UnicodeEncodeError, ValueError):
+        return [f"{location}:CONTENT_DIGEST_INPUT_INVALID"]
+    if value.get(field) != expected:
+        return [f"{location}:CONTENT_DIGEST_MISMATCH"]
+    return []
+
+
 def _load_object(root: Path, relative_path: Path) -> dict[str, Any]:
     value = json.loads(
         (root / relative_path).read_text(encoding="utf-8")
@@ -208,7 +320,7 @@ def _matches_type(value: object, expected: str) -> bool:
         return isinstance(value, int) and not isinstance(value, bool)
     if expected == "number":
         return (
-            isinstance(value, (int, float))
+            isinstance(value, int | float)
             and not isinstance(value, bool)
         )
     if expected == "string":
@@ -927,7 +1039,120 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d01a_result_approval:DECISION_DIGEST_MISMATCH"
         )
 
-    if selector.get("active_phase") != "PH-D01B":
+    ph_d01b_attestation = _load_object(
+        root, PH_D01B_EVIDENCE_ATTESTATION_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d01b_attestation,
+            attestation_schema,
+            "ph_d01b_evidence_attestation",
+        )
+    )
+    if ph_d01b_attestation.get("phase_id") != "PH-D01B":
+        failures.append("ph_d01b_evidence_attestation:PHASE_MISMATCH")
+    for commit_field, tree_field in (
+        ("implementation_commit", "implementation_tree"),
+        ("evidence_commit", "evidence_tree"),
+    ):
+        commit = ph_d01b_attestation.get(commit_field)
+        expected_tree = ph_d01b_attestation.get(tree_field)
+        if not isinstance(commit, str) or _git_tree(root, commit) != (
+            expected_tree
+        ):
+            failures.append(
+                "ph_d01b_evidence_attestation:"
+                + commit_field.upper()
+                + "_TREE_MISMATCH"
+            )
+    ph_d01b_phase_state_path = root / PH_D01B_PHASE_STATE_PATH
+    if (
+        hashlib.sha256(ph_d01b_phase_state_path.read_bytes()).hexdigest()
+        != ph_d01b_attestation.get("phase_state_sha256")
+    ):
+        failures.append(
+            "ph_d01b_evidence_attestation:"
+            "PHASE_STATE_SHA256_MISMATCH"
+        )
+    ph_d01b_phase_state = _load_object(root, PH_D01B_PHASE_STATE_PATH)
+    if (
+        ph_d01b_phase_state.get("phase_id") != "PH-D01B"
+        or ph_d01b_phase_state.get("status") != "CODEX_SELF_AUDIT_PASS"
+        or ph_d01b_phase_state.get("failed_requirement_ids") != []
+        or ph_d01b_phase_state.get("evidence_payload_digest")
+        != ph_d01b_attestation.get("evidence_payload_digest")
+    ):
+        failures.append("ph_d01b_phase_state:RESULT_BINDING_MISMATCH")
+
+    ph_d01b_result_decision = _load_object(
+        root, PH_D01B_RESULT_DECISION_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d01b_result_decision,
+            decision_v2_schema,
+            "ph_d01b_result_decision",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d01b_result_decision,
+            "sha256:",
+            "owner_decision_content_digest",
+            "ph_d01b_result_decision",
+        )
+    )
+    if (
+        ph_d01b_result_decision.get("standing_authorization_digest")
+        != standing.get("standing_authorization_content_digest")
+    ):
+        failures.append(
+            "ph_d01b_result_decision:STANDING_AUTHORIZATION_MISMATCH"
+        )
+    if (
+        ph_d01b_result_decision.get("target_evidence_commit")
+        != ph_d01b_attestation.get("evidence_commit")
+        or ph_d01b_result_decision.get("target_artifact_digest")
+        != ph_d01b_attestation.get("evidence_payload_digest")
+        or ph_d01b_result_decision.get("gate_status") != "PASS"
+    ):
+        failures.append(
+            "ph_d01b_result_decision:ATTESTATION_BINDING_MISMATCH"
+        )
+
+    ph_d01b_result_approval = _load_object(
+        root, PH_D01B_RESULT_APPROVAL_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d01b_result_approval,
+            approval_schema,
+            "ph_d01b_result_approval",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d01b_result_approval,
+            "owner-approval-record:",
+            "approval_artifact_digest",
+            "ph_d01b_result_approval",
+        )
+    )
+    if (
+        ph_d01b_result_approval.get("owner_decision_capture_digest")
+        != ph_d01b_result_decision.get("owner_decision_content_digest")
+        or ph_d01b_result_approval.get("target_evidence_commit")
+        != ph_d01b_attestation.get("evidence_commit")
+        or ph_d01b_result_approval.get("target_artifact_digest")
+        != ph_d01b_attestation.get("evidence_payload_digest")
+        or ph_d01b_result_approval.get("next_phase_id") != "PH-D02A"
+        or ph_d01b_result_approval.get("next_phase_authorized") is not True
+    ):
+        failures.append(
+            "ph_d01b_result_approval:DECISION_OR_TARGET_MISMATCH"
+        )
+
+    if selector.get("active_phase") != "PH-D02A":
         failures.append("selector:ACTIVE_PHASE_MISMATCH")
     if selector.get("ph_r00_owner_authorization") != "ESTABLISHED":
         failures.append("selector:PH_R00_AUTHORIZATION_MISSING")
@@ -939,18 +1164,20 @@ def validate_repository(root: Path) -> dict[str, object]:
         failures.append("selector:PH_D00B_STATUS_MISMATCH")
     if selector.get("ph_d01a_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D01A_STATUS_MISMATCH")
-    if selector.get("ph_d01b_status") != "IN_PROGRESS":
+    if selector.get("ph_d01b_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D01B_STATUS_MISMATCH")
+    if selector.get("ph_d02a_status") != "IN_PROGRESS":
+        failures.append("selector:PH_D02A_STATUS_MISMATCH")
     if selector.get("runtime_activation_status") != "SUSPEND":
         failures.append("selector:RUNTIME_ACTIVATION_ESCALATED")
     selector_entry_approval = selector.get("phase_entry_approval")
     if not isinstance(selector_entry_approval, dict):
-        failures.append("selector:PH_D01B_ENTRY_APPROVAL_MISSING")
+        failures.append("selector:PH_D02A_ENTRY_APPROVAL_MISSING")
     elif (
         selector_entry_approval.get("approval_artifact_digest")
-        != ph_d01a_result_approval.get("approval_artifact_digest")
+        != ph_d01b_result_approval.get("approval_artifact_digest")
     ):
-        failures.append("selector:PH_D01B_ENTRY_APPROVAL_MISMATCH")
+        failures.append("selector:PH_D02A_ENTRY_APPROVAL_MISMATCH")
     selector_standing = selector.get("standing_authorization")
     if not isinstance(selector_standing, dict):
         failures.append("selector:STANDING_AUTHORIZATION_MISSING")
@@ -1238,6 +1465,309 @@ def validate_repository(root: Path) -> dict[str, object]:
         is not False
     ):
         failures.append("ph_d01b_transition:EXTERNAL_ACTION_AUTHORIZED")
+
+    ph_d02a_frame = _load_object(root, PH_D02A_FRAME_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_d02a_frame,
+            "rev3-work-block-frame:",
+            "content_digest",
+            "ph_d02a_frame",
+        )
+    )
+    if (
+        ph_d02a_frame.get("phase_id") != "PH-D02A"
+        or ph_d02a_frame.get("base_commit")
+        != "4dbf17513fdf2027527f9f5ea64f16a99fc52326"
+        or ph_d02a_frame.get("base_tree")
+        != "fe3c806ab55a7adfa80e5f8f8c0e9a488317af0d"
+    ):
+        failures.append("ph_d02a_frame:PHASE_OR_BASE_MISMATCH")
+    ph_d02a_budget = ph_d02a_frame.get("resource_budget")
+    if not isinstance(ph_d02a_budget, dict):
+        failures.append("ph_d02a_frame:RESOURCE_BUDGET_MISSING")
+    else:
+        for field in (
+            "source_payload_read_count",
+            "source_payload_semantic_parse_count",
+            "arc_environment_source_execution_count",
+            "teacher_replay_execution_count",
+            "real_trajectory_normalization_count",
+            "ph_d02b_schema_count",
+            "hds_hypothesis_generation_count",
+            "distillation_execution_count",
+            "bridge_runtime_capability_count",
+            "rule_promotion_count",
+            "locked_final_access_count",
+            "official_access_count",
+            "network_submission_count",
+            "kaggle_mutation_count",
+        ):
+            if ph_d02a_budget.get(field) != 0:
+                failures.append(f"ph_d02a_frame:{field}:NONZERO")
+        if ph_d02a_budget.get(
+            "canonical_test_vector_rebuild_process_count"
+        ) != 3:
+            failures.append(
+                "ph_d02a_frame:VECTOR_REBUILD_COUNT_MISMATCH"
+            )
+        if ph_d02a_budget.get("external_network_use") != "NONE":
+            failures.append("ph_d02a_frame:EXTERNAL_NETWORK_ENABLED")
+
+    ph_d02a_transition = _load_object(root, PH_D02A_TRANSITION_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_d02a_transition,
+            "rev3-phase-transition:",
+            "content_digest",
+            "ph_d02a_transition",
+        )
+    )
+    if (
+        ph_d02a_transition.get("from_phase_id"),
+        ph_d02a_transition.get("to_phase_id"),
+        ph_d02a_transition.get("decision"),
+    ) != ("PH-D01B", "PH-D02A", "ENTRY_AUTHORIZED"):
+        failures.append("ph_d02a_transition:SEQUENCE_MISMATCH")
+    if (
+        ph_d02a_transition.get("authorization_digest")
+        != ph_d01b_result_approval.get("approval_artifact_digest")
+        or ph_d02a_transition.get("from_phase_state_sha256")
+        != ph_d01b_attestation.get("phase_state_sha256")
+        or ph_d02a_transition.get("from_phase_evidence_commit")
+        != ph_d01b_attestation.get("evidence_commit")
+        or ph_d02a_transition.get("from_phase_evidence_tree")
+        != ph_d01b_attestation.get("evidence_tree")
+        or ph_d02a_transition.get(
+            "from_phase_evidence_payload_digest"
+        )
+        != ph_d01b_attestation.get("evidence_payload_digest")
+    ):
+        failures.append("ph_d02a_transition:EVIDENCE_BINDING_MISMATCH")
+    if (
+        ph_d02a_transition.get(
+            "external_irreversible_action_authorized"
+        )
+        is not False
+    ):
+        failures.append("ph_d02a_transition:EXTERNAL_ACTION_AUTHORIZED")
+
+    ph_d02a_preinventory = _load_object(
+        root, PH_D02A_PREINVENTORY_PATH
+    )
+    preinventory_body = dict(ph_d02a_preinventory)
+    preinventory_body.pop("content_digest", None)
+    if ph_d02a_preinventory.get("content_digest") != (
+        "rev3-ph-d02a-canonical-preinventory:"
+        + digest_object(preinventory_body)
+    ):
+        failures.append("ph_d02a_preinventory:CONTENT_DIGEST_MISMATCH")
+    if (
+        ph_d02a_preinventory.get("phase_id") != "PH-D02A"
+        or ph_d02a_preinventory.get("base_commit")
+        != ph_d02a_frame.get("base_commit")
+        or ph_d02a_preinventory.get("base_tree")
+        != ph_d02a_frame.get("base_tree")
+        or ph_d02a_preinventory.get("preexisting_dirty_state", {}).get(
+            "path_scope"
+        )
+        != "analysis/autonomous_completion/**"
+        or ph_d02a_preinventory.get("preexisting_dirty_state", {}).get(
+            "mutation"
+        )
+        != "NONE"
+    ):
+        failures.append("ph_d02a_preinventory:BOUNDARY_MISMATCH")
+
+    ph_d02a_contract = _load_object(root, PH_D02A_CONTRACT_PATH)
+    failures.extend(
+        _domain_content_digest_failures(
+            ph_d02a_contract,
+            "hds-canonicalization-contract",
+            "content_digest",
+            "ph_d02a_contract",
+        )
+    )
+    failures.extend(
+        _canonical_document_failures(
+            root,
+            PH_D02A_CONTRACT_PATH,
+            "ph_d02a_contract",
+        )
+    )
+    contract_authority = ph_d02a_contract.get("authority")
+    if not isinstance(contract_authority, dict) or (
+        ph_d02a_contract.get("phase_id") != "PH-D02A"
+        or ph_d02a_contract.get("gates") != ["DG-06", "DG-07"]
+        or contract_authority.get("input_phase_state_sha256")
+        != ph_d01b_attestation.get("phase_state_sha256")
+        or contract_authority.get("input_evidence_commit")
+        != ph_d01b_attestation.get("evidence_commit")
+        or contract_authority.get("input_evidence_tree")
+        != ph_d01b_attestation.get("evidence_tree")
+        or contract_authority.get("input_evidence_payload_digest")
+        != ph_d01b_attestation.get("evidence_payload_digest")
+        or contract_authority.get("input_owner_approval_digest")
+        != ph_d01b_result_approval.get("approval_artifact_digest")
+        or contract_authority.get("entry_transition_digest")
+        != ph_d02a_transition.get("content_digest")
+        or contract_authority.get("work_block_frame_digest")
+        != ph_d02a_frame.get("content_digest")
+    ):
+        failures.append("ph_d02a_contract:AUTHORITY_BINDING_MISMATCH")
+    canonical_json_contract = ph_d02a_contract.get("canonical_json")
+    canonical_jsonl_contract = ph_d02a_contract.get("canonical_jsonl")
+    if not isinstance(canonical_json_contract, dict) or (
+        canonical_json_contract.get(
+            "document_serialization_trailing_lf"
+        )
+        is not True
+    ):
+        failures.append("ph_d02a_contract:JSON_DOCUMENT_LF_MISSING")
+    if not isinstance(canonical_jsonl_contract, dict) or (
+        canonical_jsonl_contract.get("record_order")
+        != "UTF8_LEXICOGRAPHIC_BY_NFC_RECORD_ID"
+        or canonical_jsonl_contract.get("final_lf")
+        != "REQUIRED_FOR_NONEMPTY_FILE"
+    ):
+        failures.append("ph_d02a_contract:JSONL_CONTRACT_MISMATCH")
+
+    ph_d02a_vectors = _load_object(
+        root, PH_D02A_VECTOR_MANIFEST_PATH
+    )
+    failures.extend(
+        _domain_content_digest_failures(
+            ph_d02a_vectors,
+            "hds-canonical-test-vectors",
+            "content_digest",
+            "ph_d02a_vectors",
+        )
+    )
+    failures.extend(
+        _canonical_document_failures(
+            root,
+            PH_D02A_VECTOR_MANIFEST_PATH,
+            "ph_d02a_vectors",
+        )
+    )
+    vector_contract = ph_d02a_vectors.get("contract")
+    rebuild_contract = ph_d02a_vectors.get(
+        "independent_rebuild_contract"
+    )
+    if not isinstance(vector_contract, dict) or (
+        vector_contract.get("content_digest")
+        != ph_d02a_contract.get("content_digest")
+        or vector_contract.get("path")
+        != PH_D02A_CONTRACT_PATH.as_posix()
+        or ph_d02a_vectors.get("gates") != ["DG-06", "DG-07"]
+    ):
+        failures.append("ph_d02a_vectors:CONTRACT_BINDING_MISMATCH")
+    if not isinstance(rebuild_contract, dict) or (
+        rebuild_contract.get("count") != 3
+        or rebuild_contract.get("expected") != "BYTE_IDENTICAL"
+    ):
+        failures.append("ph_d02a_vectors:REBUILD_CONTRACT_MISMATCH")
+    vector_outputs = ph_d02a_vectors.get("outputs")
+    expected_vector_paths = {
+        "canonical_json": Path(
+            "distillation/artifacts/test_vectors/canonical_json_v1.json"
+        ),
+        "canonical_jsonl": Path(
+            "distillation/artifacts/test_vectors/canonical_jsonl_v1.jsonl"
+        ),
+        "canonical_npz": Path(
+            "distillation/artifacts/test_vectors/canonical_npz_v1.npz"
+        ),
+        "canonical_zip": Path(
+            "distillation/artifacts/test_vectors/canonical_zip_v1.zip"
+        ),
+    }
+    if not isinstance(vector_outputs, dict):
+        failures.append("ph_d02a_vectors:OUTPUTS_MISSING")
+    else:
+        for output_name, expected_path in expected_vector_paths.items():
+            output = vector_outputs.get(output_name)
+            if not isinstance(output, dict) or output.get(
+                "path"
+            ) != expected_path.as_posix():
+                failures.append(
+                    f"ph_d02a_vectors:{output_name}:PATH_MISMATCH"
+                )
+                continue
+            output_path = root / expected_path
+            if (
+                not output_path.is_file()
+                or hashlib.sha256(output_path.read_bytes()).hexdigest()
+                != output.get("sha256")
+                or output_path.stat().st_size != output.get("size_bytes")
+            ):
+                failures.append(
+                    f"ph_d02a_vectors:{output_name}:BYTES_MISMATCH"
+                )
+
+    ph_d02a_conformance = _load_object(
+        root, PH_D02A_CONFORMANCE_PATH
+    )
+    failures.extend(
+        _domain_content_digest_failures(
+            ph_d02a_conformance,
+            "hds-canonicalization-conformance",
+            "content_digest",
+            "ph_d02a_conformance",
+        )
+    )
+    failures.extend(
+        _canonical_document_failures(
+            root,
+            PH_D02A_CONFORMANCE_PATH,
+            "ph_d02a_conformance",
+        )
+    )
+    report_authority = ph_d02a_conformance.get("authority")
+    determinism = ph_d02a_conformance.get("determinism")
+    report_contract = ph_d02a_conformance.get("contract")
+    report_vectors = ph_d02a_conformance.get("test_vectors")
+    if not isinstance(report_authority, dict) or (
+        report_authority.get("input_phase_state_sha256")
+        != ph_d01b_attestation.get("phase_state_sha256")
+        or report_authority.get("owner_authorization_digest")
+        != ph_d01b_result_approval.get("approval_artifact_digest")
+        or report_authority.get("phase_transition_digest")
+        != ph_d02a_transition.get("content_digest")
+        or report_authority.get("preinventory_digest")
+        != ph_d02a_preinventory.get("content_digest")
+        or report_authority.get("work_block_frame_digest")
+        != ph_d02a_frame.get("content_digest")
+    ):
+        failures.append("ph_d02a_conformance:AUTHORITY_MISMATCH")
+    if not isinstance(report_contract, dict) or (
+        report_contract.get("content_digest")
+        != ph_d02a_contract.get("content_digest")
+    ):
+        failures.append("ph_d02a_conformance:CONTRACT_MISMATCH")
+    if not isinstance(report_vectors, dict) or (
+        report_vectors.get("manifest", {}).get("content_digest")
+        != ph_d02a_vectors.get("content_digest")
+    ):
+        failures.append("ph_d02a_conformance:VECTOR_BINDING_MISMATCH")
+    if not isinstance(determinism, dict) or (
+        determinism.get("independent_process_rebuild_count") != 3
+        or determinism.get("byte_identical") is not True
+        or determinism.get("canonical_json_match") is not True
+        or determinism.get("canonical_jsonl_match") is not True
+        or determinism.get("canonical_npz_match") is not True
+        or determinism.get("canonical_zip_match") is not True
+    ):
+        failures.append("ph_d02a_conformance:DETERMINISM_MISMATCH")
+    if (
+        ph_d02a_conformance.get("phase_id") != "PH-D02A"
+        or ph_d02a_conformance.get("status")
+        != "CODEX_IMPLEMENTATION_VALIDATED"
+        or ph_d02a_conformance.get("active_failure_count") != 0
+        or ph_d02a_conformance.get("gates")
+        != {"DG-06": "PASS", "DG-07": "PASS"}
+    ):
+        failures.append("ph_d02a_conformance:GATE_MISMATCH")
 
     source_inventory = _load_object(root, PH_D01A_SOURCE_INVENTORY_PATH)
     failures.extend(
@@ -1879,6 +2409,74 @@ def validate_repository(root: Path) -> dict[str, object]:
                 + destination_path
             )
 
+    ph_d02a_historical_root = (
+        root / "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A"
+    )
+    ph_d02a_historical_sources = [
+        (
+            "12b23d017663f060d40d98320be0dafbab160638",
+            "control/rev3/PH-D02A_WORK_BLOCK_FRAME.json",
+            "PH-D02A_WORK_BLOCK_FRAME.json",
+        ),
+        (
+            "ffa11f1181fe0a63118eba83a9e3c90090a0abb5",
+            "control/rev3/D02A_PHASE_STATE.json",
+            "D02A_PHASE_STATE.json",
+        ),
+        (
+            "3b08867576ab0723570733a84e85093a1a0523ab",
+            "control/rev3/PHASE_TRANSITIONS/PH-D02A_TO_PH-D02B.json",
+            "PHASE_TRANSITIONS/PH-D02A_TO_PH-D02B.json",
+        ),
+    ]
+    for package_name in (
+        "changed_files.json",
+        "commands.json",
+        "failed_requirements.json",
+        "open_terms.json",
+        "phase_state.json",
+        "proposed_next_action.md",
+        "self_audit.json",
+        "summary.md",
+        "test_results.json",
+    ):
+        ph_d02a_historical_sources.append(
+            (
+                "ffa11f1181fe0a63118eba83a9e3c90090a0abb5",
+                "control/rev3/PH-D02A_OWNER_REVIEW_PACKAGE/"
+                + package_name,
+                "OWNER_REVIEW_PACKAGE/" + package_name,
+            )
+        )
+    ph_d02a_historical_sources.append(
+        (
+            "d07b6f6cb27aed386e06269b7c142e5caf618e78",
+            "control/rev3/PH-D02A_OWNER_REVIEW_PACKAGE/"
+            "artifact_manifest.json",
+            "OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+        )
+    )
+    for source_commit, source_path, destination_path in (
+        ph_d02a_historical_sources
+    ):
+        expected = _git_blob(root, source_commit, source_path)
+        destination = ph_d02a_historical_root / destination_path
+        if expected is None:
+            failures.append(
+                "ph_d02a_historical_migration:SOURCE_MISSING:"
+                + source_path
+            )
+        elif not destination.is_file():
+            failures.append(
+                "ph_d02a_historical_migration:DESTINATION_MISSING:"
+                + destination_path
+            )
+        elif destination.read_bytes() != expected:
+            failures.append(
+                "ph_d02a_historical_migration:CONTENT_MISMATCH:"
+                + destination_path
+            )
+
     asset_classification = _load_object(
         root, PH_R00_ASSET_CLASSIFICATION_PATH
     )
@@ -1932,6 +2530,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d00b_status",
             "ph_d01a_status",
             "ph_d01b_status",
+            "ph_d02a_status",
             "ph_r00_owner_authorization",
             "ph_r00_status",
             "ph_r1_status",
@@ -1946,12 +2545,13 @@ def validate_repository(root: Path) -> dict[str, object]:
     if not isinstance(active_work_block, dict):
         failures.append("governance:ACTIVE_WORK_BLOCK_MISSING")
     elif (
-        active_work_block.get("phase_id") != "PH-D01B"
-        or active_work_block.get("path") != PH_D01B_FRAME_PATH.as_posix()
+        active_work_block.get("phase_id") != "PH-D02A"
+        or active_work_block.get("path") != PH_D02A_FRAME_PATH.as_posix()
         or active_work_block.get("content_digest")
-        != ph_d01b_frame.get("content_digest")
+        != ph_d02a_frame.get("content_digest")
         or active_work_block.get("transition_digest")
-        != ph_d01b_transition.get("content_digest")
+        != ph_d02a_transition.get("content_digest")
+        or active_work_block.get("runtime_capability_addition_count") != 0
         or active_work_block.get(
             "external_irreversible_actions_authorized"
         )
@@ -1973,6 +2573,8 @@ def validate_repository(root: Path) -> dict[str, object]:
         != 0
         or governed_source_blind.get("candidate_execution_status")
         != "NOT_STARTED_PHASE_D01B"
+        or governed_source_blind.get("evidence_semantics")
+        != "IMMUTABLE_PH_D01B_POINT_IN_TIME_RESULT"
     ):
         failures.append("governance:SOURCE_BLIND_EVIDENCE_MISMATCH")
     governed_invalidation = governance.get(
@@ -1992,7 +2594,14 @@ def validate_repository(root: Path) -> dict[str, object]:
             "current_phase_rebuild_permitted"
         )
         is not False
-        or governed_invalidation.get("ph_d02a_status") != "NOT_STARTED"
+        or governed_invalidation.get("evidence_semantics")
+        != "IMMUTABLE_PH_D01B_POINT_IN_TIME_RESULT"
+        or governed_invalidation.get(
+            "report_point_in_time_ph_d02a_status"
+        )
+        != "NOT_STARTED"
+        or governed_invalidation.get("live_ph_d02a_status")
+        != "IN_PROGRESS"
         or governed_invalidation.get("ph_d02b_status") != "SUSPEND"
     ):
         failures.append(
@@ -2039,7 +2648,7 @@ def validate_repository(root: Path) -> dict[str, object]:
                 )
 
     return {
-        "check_count": 37,
+        "check_count": 43,
         "failure_count": len(failures),
         "failures": sorted(set(failures)),
         "status": "PASS" if not failures else "FAIL",

@@ -5,11 +5,12 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D01B` is the only active phase. PH-D01A is Owner-approved against exact
+`PH-D02A` is the only active phase. PH-D01B is Owner-approved against exact
 post-audit implementation and evidence commits. Existing PH-D01A through
 PH-D03A phase records originated before the rev3 audit correction; colliding
-PH-D01B control artifacts are preserved under
-`control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and are not current phase-pass,
+PH-D01B and PH-D02A control artifacts are preserved under
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/`. They are not current phase-pass,
 promotion, or completion evidence.
 
 The Owner-approved `PH-D01A` rebind validates and hardens:
@@ -51,8 +52,8 @@ execution context:
   checked bytes remain preserved and PH-D02B rebuild stays suspended until
   PH-D02A and then PH-D02B are entered in roadmap order.
 
-`PH-D02A` adds the common deterministic representation layer used by later
-distillation schemas:
+The current `PH-D02A` rebind revalidates and hardens the common deterministic
+representation layer used by later distillation schemas:
 
 - strict canonical UTF-8 JSON with Unicode NFC and explicit unordered-array
   pointers;
@@ -64,6 +65,11 @@ distillation schemas:
 - dependency-free canonical NPY v1 and NPZ encoding with fixed dtype,
   little endian, C-order shape, member order, and non-finite rejection;
 - committed JSON/ZIP/NPZ test vectors and three-process reproducibility tests.
+
+PH-D02A uses synthetic vectors only. It does not read or normalize real
+teacher trajectories, rebuild the three invalidated PH-D02B artifacts, define
+the PH-D02B schema set, generate HDS hypotheses, or implement Bridge/Runtime
+capability.
 
 `PH-D02B` adds the static schema and HDS record boundary:
 

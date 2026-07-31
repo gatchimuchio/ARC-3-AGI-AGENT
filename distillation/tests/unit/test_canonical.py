@@ -15,7 +15,6 @@ from pathlib import Path
 from typing import Any, cast
 
 import pytest
-
 from hds_distill.canonical import (
     CANONICAL_NPY_VERSION,
     CANONICAL_NPZ_VERSION,
@@ -31,7 +30,8 @@ from hds_distill.canonical import (
     build_canonical_npz,
     build_canonical_zip,
     canonical_json,
-    canonical_json_bytes,
+    canonical_json_document_bytes,
+    canonical_jsonl_bytes,
     canonical_npy_bytes,
     canonical_npz_digests,
     canonical_npz_logical_value,
@@ -47,6 +47,8 @@ from hds_distill.canonical import (
     raw_trajectory_digest,
     validate_confidence_ppm,
     verify_canonical_json_bytes,
+    verify_canonical_json_document_bytes,
+    verify_canonical_jsonl_bytes,
     verify_canonical_zip,
 )
 
@@ -67,6 +69,9 @@ CONFORMANCE_REPORT_PATH = (
     / "artifacts"
     / "reports"
     / "canonicalization_conformance.json"
+)
+VECTOR_BUILDER_PATH = (
+    REPOSITORY_ROOT / "scripts" / "build_ph_d02a_canonical_vectors.py"
 )
 
 
@@ -184,6 +189,93 @@ def test_canonical_json_normalizes_nfc_keys_values_sets_and_selected_arrays(
         '{"ordered":[{"v":2},{"v":1}],"set":["alpha","beta","é"],'
         '"unordered":[{"v":1},{"v":2}],"z":1,"é":"Café"}'
     )
+
+
+def test_canonical_json_document_and_jsonl_contracts() -> None:
+    document = canonical_json_document_bytes(
+        {"title": "Cafe\u0301", "value": 1}
+    )
+    assert document == b'{"title":"Caf\xc3\xa9","value":1}\n'
+    assert verify_canonical_json_document_bytes(document) == {
+        "title": "Café",
+        "value": 1,
+    }
+
+    records = [
+        {"record_id": "z", "value": 2},
+        {"record_id": "e\u0301", "value": 1},
+        {"record_id": "alpha", "value": 0},
+    ]
+    payload = canonical_jsonl_bytes(reversed(records))
+    assert payload == (
+        b'{"record_id":"alpha","value":0}\n'
+        b'{"record_id":"z","value":2}\n'
+        b'{"record_id":"\xc3\xa9","value":1}\n'
+    )
+    assert verify_canonical_jsonl_bytes(payload) == [
+        {"record_id": "alpha", "value": 0},
+        {"record_id": "z", "value": 2},
+        {"record_id": "é", "value": 1},
+    ]
+    assert canonical_jsonl_bytes([]) == b""
+    assert verify_canonical_jsonl_bytes(b"") == []
+
+
+@pytest.mark.parametrize(
+    ("payload", "error"),
+    [
+        (b"{}", "D02A_JSON_DOCUMENT_FINAL_LF_REQUIRED"),
+        (b"{}\n\n", "D02A_JSON_DOCUMENT_FINAL_LF_REQUIRED"),
+        (b"{}\r\n", "D02A_JSON_DOCUMENT_CR_FORBIDDEN"),
+    ],
+)
+def test_canonical_json_document_rejects_noncanonical_line_endings(
+    payload: bytes,
+    error: str,
+) -> None:
+    with pytest.raises(CanonicalizationError, match=error):
+        verify_canonical_json_document_bytes(payload)
+
+
+@pytest.mark.parametrize(
+    ("payload", "error"),
+    [
+        (
+            b'{"record_id":"a"}',
+            "D02A_JSONL_FINAL_LF_REQUIRED",
+        ),
+        (
+            b'{"record_id":"a"}\n\n',
+            "D02A_JSONL_FINAL_LF_REQUIRED",
+        ),
+        (
+            b'{"record_id":"a"}\r\n',
+            "D02A_JSONL_CR_FORBIDDEN",
+        ),
+        (
+            b'{"record_id":"b"}\n{"record_id":"a"}\n',
+            "D02A_JSONL_NOT_CANONICAL",
+        ),
+        (
+            b'{"record_id":"a"}\n{"record_id":"a"}\n',
+            "D02A_JSONL_RECORD_ID_DUPLICATE",
+        ),
+        (
+            b'{"value":1}\n',
+            "D02A_JSONL_RECORD_ID_REQUIRED",
+        ),
+        (
+            b"[]\n",
+            "D02A_JSONL_RECORD_OBJECT_REQUIRED",
+        ),
+    ],
+)
+def test_canonical_jsonl_rejects_invalid_records_and_order(
+    payload: bytes,
+    error: str,
+) -> None:
+    with pytest.raises(CanonicalizationError, match=error):
+        verify_canonical_jsonl_bytes(payload)
 
 
 def test_unordered_array_pointer_must_resolve_and_ordered_arrays_stay_ordered(
@@ -867,15 +959,18 @@ def test_three_independent_process_path_time_order_and_hash_seed_rebuilds_match(
 def test_checked_contract_is_canonical_content_bound_and_phase_limited(
 ) -> None:
     payload = CONTRACT_PATH.read_bytes()
-    contract = cast(dict[str, Any], verify_canonical_json_bytes(payload))
+    contract = cast(
+        dict[str, Any],
+        verify_canonical_json_document_bytes(payload),
+    )
     claimed = cast(str, contract["content_digest"])
 
     assert hashlib.sha256(payload).hexdigest() == (
-        "24475a34959e7c380afa404700f2f8b7eb5ccc0f12dda404b54506479bcedcaa"
+        "c7300f07095837c6ce711bb375d44755a05af35cc1979705296c46614e82e71b"
     )
     assert claimed == (
         "hds-canonicalization-contract:"
-        "bd37cc6aa0f41021448a83358c9db409b3695cdf88b2eb6ab6eec0068c137257"
+        "8ef686f3e30c2c773dff47637c9bb0d57dbb175d4fc6b7bd1c46a7820cf4068f"
     )
     assert claimed == logical_content_digest(
         "hds-canonicalization-contract",
@@ -886,6 +981,12 @@ def test_checked_contract_is_canonical_content_bound_and_phase_limited(
         ),
     )
     assert contract["gates"] == ["DG-06", "DG-07"]
+    assert contract["canonical_json"][
+        "document_serialization_trailing_lf"
+    ] is True
+    assert contract["canonical_jsonl"]["record_order"] == (
+        "UTF8_LEXICOGRAPHIC_BY_NFC_RECORD_ID"
+    )
     boundaries = cast(dict[str, Any], contract["phase_boundaries"])
     assert boundaries["ph_d02b_schema_count"] == 0
     assert boundaries["causal_ir_started"] is False
@@ -901,17 +1002,17 @@ def test_checked_vectors_are_canonical_content_bound_and_rebuild_exactly(
     manifest_payload = manifest_path.read_bytes()
     manifest = cast(
         dict[str, Any],
-        verify_canonical_json_bytes(manifest_payload),
+        verify_canonical_json_document_bytes(manifest_payload),
     )
     claimed = cast(str, manifest["content_digest"])
     outputs = cast(dict[str, Any], manifest["outputs"])
 
     assert hashlib.sha256(manifest_payload).hexdigest() == (
-        "9a09d700c4113b6474654215d757d4fbbbff569a9365e2c5e57c714328136e65"
+        "30a2b74053d4be8c80817185700383e8962ea8259012427fb1b074c3c55d1e40"
     )
     assert claimed == (
         "hds-canonical-test-vectors:"
-        "dfc146423c85b33fb7fb484dadeafb1d5071b0265bcdb0fa266fe413bc5e2f7b"
+        "59c8c6aea34e0c3d6c9972ab989ee1f4cf936c85ad3f40eb8dc9e274f66803e6"
     )
     assert claimed == logical_content_digest(
         "hds-canonical-test-vectors",
@@ -927,24 +1028,66 @@ def test_checked_vectors_are_canonical_content_bound_and_rebuild_exactly(
         policy=_policy(),
         unordered_paths=("/unordered",),
     )
-    json_payload = canonical_json_bytes(body)
+    json_payload = canonical_json_document_bytes(body)
     checked_json = TEST_VECTOR_ROOT / "canonical_json_v1.json"
     assert checked_json.read_bytes() == json_payload
     assert hashlib.sha256(json_payload).hexdigest() == (
-        "7b0085437f032ee21ecf63130f6a05e37dcd4de085da1aed26c62d2a69965ead"
+        "43b6bd88e71d8ee8918239fb5acb35693094e2f9ed4c85c6f12dc7a4f96d9be6"
     )
 
     zip_payload = build_canonical_zip(
         {
             "z-last.bin": b"\x00\x01",
             "unicode/cafe\u0301.txt": "Cafe\u0301\n".encode(),
+            "records.jsonl": canonical_jsonl_bytes(
+                [
+                    {
+                        "confidence_ppm": 500_000,
+                        "payload": {"kind": "z-last"},
+                        "record_id": "record-z",
+                    },
+                    {
+                        "confidence_ppm": 1_000_000,
+                        "payload": {"kind": "first"},
+                        "record_id": "record-a",
+                    },
+                    {
+                        "confidence_ppm": 750_000,
+                        "payload": {"kind": "Cafe\u0301"},
+                        "record_id": "record-e\u0301",
+                    },
+                ]
+            ),
             "manifest.json": json_payload,
         }
     )
     checked_zip = TEST_VECTOR_ROOT / "canonical_zip_v1.zip"
     assert checked_zip.read_bytes() == zip_payload
+
+    jsonl_payload = canonical_jsonl_bytes(
+        [
+            {
+                "confidence_ppm": 500_000,
+                "payload": {"kind": "z-last"},
+                "record_id": "record-z",
+            },
+            {
+                "confidence_ppm": 1_000_000,
+                "payload": {"kind": "first"},
+                "record_id": "record-a",
+            },
+            {
+                "confidence_ppm": 750_000,
+                "payload": {"kind": "Cafe\u0301"},
+                "record_id": "record-e\u0301",
+            },
+        ]
+    )
+    checked_jsonl = TEST_VECTOR_ROOT / "canonical_jsonl_v1.jsonl"
+    assert checked_jsonl.read_bytes() == jsonl_payload
+    assert verify_canonical_jsonl_bytes(jsonl_payload)
     assert hashlib.sha256(zip_payload).hexdigest() == (
-        "7cf212a5849e35987cd5f84aa0647aed176f5d6e43de97b08c685ad96aa2a94f"
+        "cf84e3e3ad729e4720cb01e524446367d693f34653c58e1ea2fd174bca4bb868"
     )
 
     npz_payload = build_canonical_npz(_tensors())
@@ -1011,18 +1154,60 @@ def test_checked_trajectory_vector_binds_raw_and_canonical_domains() -> None:
     }
 
 
+def test_vector_builder_rebuilds_checked_bytes_in_three_processes(
+    tmp_path: Path,
+) -> None:
+    output_roots: list[Path] = []
+    for index, hash_seed in enumerate(("5", "31", "997")):
+        working_directory = tmp_path / f"builder-cwd-{index}"
+        output_root = tmp_path / f"builder-output-{index}"
+        working_directory.mkdir()
+        environment = dict(os.environ)
+        environment["PYTHONHASHSEED"] = hash_seed
+        subprocess.run(
+            [
+                sys.executable,
+                str(VECTOR_BUILDER_PATH),
+                "--contract",
+                str(CONTRACT_PATH),
+                "--output-root",
+                str(output_root),
+            ],
+            cwd=working_directory,
+            env=environment,
+            check=True,
+            capture_output=True,
+        )
+        output_roots.append(output_root)
+
+    checked_names = {
+        "canonical_json_v1.json",
+        "canonical_jsonl_v1.jsonl",
+        "canonical_npz_v1.npz",
+        "canonical_test_vectors.json",
+        "canonical_zip_v1.zip",
+    }
+    for name in checked_names:
+        payloads = [(root / name).read_bytes() for root in output_roots]
+        assert payloads[0] == payloads[1] == payloads[2]
+        assert payloads[0] == (TEST_VECTOR_ROOT / name).read_bytes()
+
+
 def test_canonicalization_conformance_report_is_bound_and_claim_limited(
 ) -> None:
     payload = CONFORMANCE_REPORT_PATH.read_bytes()
-    report = cast(dict[str, Any], verify_canonical_json_bytes(payload))
+    report = cast(
+        dict[str, Any],
+        verify_canonical_json_document_bytes(payload),
+    )
     claimed = cast(str, report["content_digest"])
 
     assert hashlib.sha256(payload).hexdigest() == (
-        "353d6e78eb7574991c30cf48d5176ef1ec0bb7163dba8cdb7fa3a71855e34b2b"
+        "a5c0fc3f5f6c1ccf30537bebba8bd9789b1906cd2e155e14e062bb6627df5895"
     )
     assert claimed == (
         "hds-canonicalization-conformance:"
-        "d24906ab3b99f8d70bdfd2942f38a69454fa11e926fd1d0288b26b4bda68c7f2"
+        "34243c50e4313322414c6e3525172ce0655a664ea5953bfad6be86803a1bb7ae"
     )
     assert claimed == logical_content_digest(
         "hds-canonicalization-conformance",

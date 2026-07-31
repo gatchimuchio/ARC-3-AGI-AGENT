@@ -298,6 +298,131 @@ def canonical_json_bytes(
     ).encode("utf-8")
 
 
+def canonical_json_document_bytes(
+    value: object,
+    *,
+    unordered_paths: Iterable[str] = (),
+) -> bytes:
+    """Return one canonical JSON document terminated by exactly one LF."""
+
+    return canonical_json_bytes(
+        value,
+        unordered_paths=unordered_paths,
+    ) + b"\n"
+
+
+def verify_canonical_json_document_bytes(
+    payload: bytes,
+    *,
+    unordered_paths: Iterable[str] = (),
+) -> JsonValue:
+    """Return content only for a canonical JSON document with one final LF."""
+
+    if not isinstance(payload, bytes):
+        raise TypeError("D02A_JSON_BYTES_REQUIRED")
+    if not payload.endswith(b"\n") or payload.endswith(b"\n\n"):
+        raise CanonicalizationError("D02A_JSON_DOCUMENT_FINAL_LF_REQUIRED")
+    if b"\r" in payload:
+        raise CanonicalizationError("D02A_JSON_DOCUMENT_CR_FORBIDDEN")
+    return verify_canonical_json_bytes(
+        payload[:-1],
+        unordered_paths=unordered_paths,
+    )
+
+
+def _canonical_jsonl_records(
+    records: Iterable[Mapping[str, object]],
+    *,
+    record_id_field: str,
+) -> list[tuple[str, bytes, dict[str, JsonValue]]]:
+    if not isinstance(record_id_field, str) or not record_id_field:
+        raise CanonicalizationError("D02A_JSONL_RECORD_ID_FIELD_INVALID")
+    normalized_id_field = _nfc(record_id_field)
+    prepared: list[tuple[str, bytes, dict[str, JsonValue]]] = []
+    record_ids: set[str] = set()
+    for index, record in enumerate(records):
+        if not isinstance(record, Mapping):
+            raise CanonicalizationError(
+                f"D02A_JSONL_RECORD_OBJECT_REQUIRED:{index}"
+            )
+        normalized = canonicalize(record)
+        if not isinstance(normalized, dict):
+            raise CanonicalizationError(
+                f"D02A_JSONL_RECORD_OBJECT_REQUIRED:{index}"
+            )
+        record_id = normalized.get(normalized_id_field)
+        if not isinstance(record_id, str) or not record_id:
+            raise CanonicalizationError(
+                f"D02A_JSONL_RECORD_ID_REQUIRED:{index}"
+            )
+        if record_id in record_ids:
+            raise CanonicalizationError(
+                "D02A_JSONL_RECORD_ID_DUPLICATE:" + record_id
+            )
+        record_ids.add(record_id)
+        encoded = canonical_json_bytes(normalized)
+        prepared.append((record_id, encoded, normalized))
+    prepared.sort(key=lambda item: item[0].encode("utf-8"))
+    return prepared
+
+
+def canonical_jsonl_bytes(
+    records: Iterable[Mapping[str, object]],
+    *,
+    record_id_field: str = "record_id",
+) -> bytes:
+    """Return canonical JSONL sorted by NFC-normalized record ID.
+
+    Every non-empty record set has one record per line and exactly one final
+    LF. Empty input is represented by empty bytes.
+    """
+
+    prepared = _canonical_jsonl_records(
+        records,
+        record_id_field=record_id_field,
+    )
+    if not prepared:
+        return b""
+    return b"\n".join(item[1] for item in prepared) + b"\n"
+
+
+def verify_canonical_jsonl_bytes(
+    payload: bytes,
+    *,
+    record_id_field: str = "record_id",
+) -> list[dict[str, JsonValue]]:
+    """Return records only when bytes satisfy the complete JSONL contract."""
+
+    if not isinstance(payload, bytes):
+        raise TypeError("D02A_JSONL_BYTES_REQUIRED")
+    if payload == b"":
+        return []
+    if payload.startswith(b"\xef\xbb\xbf"):
+        raise CanonicalizationError("D02A_UTF8_BOM_FORBIDDEN")
+    if not payload.endswith(b"\n") or payload.endswith(b"\n\n"):
+        raise CanonicalizationError("D02A_JSONL_FINAL_LF_REQUIRED")
+    if b"\r" in payload:
+        raise CanonicalizationError("D02A_JSONL_CR_FORBIDDEN")
+    lines = payload[:-1].split(b"\n")
+    if any(not line for line in lines):
+        raise CanonicalizationError("D02A_JSONL_BLANK_LINE_FORBIDDEN")
+    records: list[dict[str, JsonValue]] = []
+    for index, line in enumerate(lines):
+        value = verify_canonical_json_bytes(line)
+        if not isinstance(value, dict):
+            raise CanonicalizationError(
+                f"D02A_JSONL_RECORD_OBJECT_REQUIRED:{index}"
+            )
+        records.append(value)
+    rebuilt = canonical_jsonl_bytes(
+        records,
+        record_id_field=record_id_field,
+    )
+    if rebuilt != payload:
+        raise CanonicalizationError("D02A_JSONL_NOT_CANONICAL")
+    return records
+
+
 def _reject_json_constant(value: str) -> object:
     raise CanonicalizationError(
         "D02A_NONFINITE_JSON_TOKEN_FORBIDDEN:" + value
@@ -1111,6 +1236,8 @@ __all__ = [
     "build_canonical_zip",
     "canonical_json",
     "canonical_json_bytes",
+    "canonical_json_document_bytes",
+    "canonical_jsonl_bytes",
     "canonical_npy_bytes",
     "canonical_npz_digests",
     "canonical_npz_logical_value",
@@ -1126,5 +1253,7 @@ __all__ = [
     "raw_trajectory_digest",
     "validate_confidence_ppm",
     "verify_canonical_json_bytes",
+    "verify_canonical_json_document_bytes",
+    "verify_canonical_jsonl_bytes",
     "verify_canonical_zip",
 ]
