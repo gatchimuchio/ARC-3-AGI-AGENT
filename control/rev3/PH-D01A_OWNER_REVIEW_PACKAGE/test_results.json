@@ -1,0 +1,123 @@
+{
+  "schema_version": "arc3-ph-d01a-test-results-v2",
+  "phase_id": "PH-D01A",
+  "implementation_commit": "dfd21ff380935dd49f0914e337b26f0437cb3476",
+  "implementation_tree": "7dac42ea99ec4da2155e29e2844e4e313fbce10c",
+  "results": [
+    {
+      "suite": "FULL_UNIT_EXACT_IMPLEMENTATION_COMMIT",
+      "duration_seconds": 631.17,
+      "passed": 731,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_INTEGRATION_EXACT_IMPLEMENTATION_COMMIT",
+      "duration_seconds": 603.34,
+      "passed": 8,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_DISTILLATION_EXACT_IMPLEMENTATION_COMMIT",
+      "duration_seconds": 357.85,
+      "passed": 265,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "MANIFEST_FREEZE_REGRESSION_EXACT_IMPLEMENTATION_COMMIT",
+      "duration_seconds": 18.73,
+      "passed": 23,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "REV3_GOVERNANCE_VALIDATOR",
+      "check_count": 30,
+      "failure_count": 0,
+      "linux_status": "PASS",
+      "windows_status": "PASS"
+    },
+    {
+      "suite": "HDS_DEPENDENCY_LOCK",
+      "content_digest": "hds-dependency-audit-report:7c1540a1c23d39e9d1db4b7156caeb5313283fa62ef0678d83ce383d2768770e",
+      "linux_status": "PASS",
+      "windows_status": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "PRIMARY_SOURCE_INVENTORY",
+      "content_digest": "hds-source-inventory-report:ca27293b57737c743020ad19e063b08cd75d0d0c6d6571e67c6b5934c9f67d79",
+      "source_count": 83,
+      "profile_count": 8,
+      "duplicate_source_assignment_count": 0,
+      "unassigned_admitted_source_count": 0,
+      "unknown_answer_visibility_count": 0,
+      "unknown_split_role_count": 0,
+      "policy_weight_admitted_source_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "PRIMARY_SOURCE_PROVENANCE",
+      "content_digest": "hds-primary-source-provenance-report:5f874b46a83e47407f3caf92be5cab1f3c3214a9e1b4c3ea0d9b412b55ef94e9",
+      "raw_recording_count": 25,
+      "canonical_corpus_source_count": 3,
+      "provenance_relation_count": 75,
+      "covered_level_count": 183,
+      "covered_expected_action_count": 11648,
+      "primary_teacher_source_count": 83,
+      "derived_distillation_evidence_admitted_source_count": 0,
+      "governance_artifact_admitted_source_count": 0,
+      "policy_weight_admitted_source_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "INVENTORY_PROVENANCE_REPRODUCIBILITY",
+      "byte_identical": true,
+      "independent_rebuild_count": 3,
+      "concatenated_report_sha256": "84b1ffd6f257f75236eb30a33c20cbdc79b098aed0ed0596b670ecf9a3c23cda",
+      "status": "PASS"
+    },
+    {
+      "suite": "DISTILLATION_SCOPE_GUARD",
+      "finding_count": 0,
+      "report_content_digest": "hds-distillation-scope-audit:7a93d5abf78b5d2dcfeedc4203454710715d4488ba08e00fdc1d49c286593fec",
+      "status": "PASS"
+    },
+    {
+      "suite": "HISTORICAL_CONTROL_MIGRATION",
+      "artifact_count": 13,
+      "byte_identical": true,
+      "eligible_for_current_activation": false,
+      "status": "PASS"
+    },
+    {
+      "suite": "RUFF_CHANGED_PYTHON",
+      "status": "PASS"
+    },
+    {
+      "suite": "MYPY_STRICT",
+      "checked_source_file_count": 6,
+      "status": "PASS"
+    },
+    {
+      "suite": "PY_COMPILE",
+      "checked_file_count": 6,
+      "status": "PASS"
+    },
+    {
+      "suite": "GIT_DIFF_CHECK",
+      "status": "PASS"
+    }
+  ],
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "active_external_service_failure_count": 0,
+  "active_tool_failure_count": 0,
+  "resolved_implementation_audit_finding_count": 1,
+  "resolved_expected_evidence_drift_count": 1,
+  "resolved_environment_failure_count": 2,
+  "resolved_operator_command_error_count": 1,
+  "evidence_payload_digest": "sha256:b0e9c80d0d9f6f2ff7642924212b5e67fb3a46eb423a0ce4ac6bd98559841c68"
+}
