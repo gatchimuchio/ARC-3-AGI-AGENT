@@ -266,6 +266,55 @@ def download() -> object:
     assert "D00B_NETWORK_COMMAND_FORBIDDEN" in _finding_codes(report)
 
 
+def test_non_allowlisted_process_execution_fails_closed(
+    tmp_path: Path,
+) -> None:
+    repository, project, _report = _audit_fixture(tmp_path)
+    _write_module(
+        project,
+        "process.py",
+        """\
+import subprocess
+
+
+def run_local_tool() -> object:
+    return subprocess.run(["python", "tool.py"], check=True)
+""",
+    )
+
+    report = cast(
+        dict[str, object],
+        audit_project(project, repository_root=repository),
+    )
+    assert "D00B_PROCESS_EXECUTION_FORBIDDEN" in _finding_codes(report)
+
+
+def test_read_only_git_inventory_process_is_allowlisted(
+    tmp_path: Path,
+) -> None:
+    repository, project, _report = _audit_fixture(tmp_path)
+    _write_module(
+        project,
+        "git_inventory.py",
+        """\
+import subprocess
+
+
+def list_repository_metadata(root: str) -> object:
+    return subprocess.run(
+        ["git", "ls-files", "--", root],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+""",
+    )
+
+    report = audit_project(project, repository_root=repository)
+    assert report["scope_guard_pass"] is True
+    assert report["findings"] == []
+
+
 def test_unlabeled_task_answer_callable_fails_closed(tmp_path: Path) -> None:
     repository, project, _report = _audit_fixture(tmp_path)
     _write_module(
@@ -312,6 +361,36 @@ def solve_task(task: object) -> object:
     codes = _finding_codes(report)
     assert "D00B_UNTRUSTED_SCOPE_MARKER" in codes
     assert "D00B_UNLABELED_TASK_PUBLIC_CALLABLE" in codes
+
+
+def test_rebound_trusted_teacher_marker_cannot_bypass_guard(
+    tmp_path: Path,
+) -> None:
+    repository, project, _report = _audit_fixture(tmp_path)
+    _write_module(
+        project,
+        "rebound_marker.py",
+        """\
+from hds_distill.scope_contract import teacher_bound
+
+
+teacher_bound = lambda function: function
+
+
+@teacher_bound
+def solve_task(task: object, expected_answer: object) -> object:
+    del task
+    return expected_answer
+""",
+    )
+
+    report = cast(
+        dict[str, object],
+        audit_project(project, repository_root=repository),
+    )
+    assert (
+        "D00B_TRUSTED_SCOPE_MARKER_REBOUND" in _finding_codes(report)
+    )
 
 
 def test_submission_generator_fails_closed(tmp_path: Path) -> None:
@@ -399,6 +478,41 @@ if __name__ == "__main__":
     codes = _finding_codes(report)
     assert "D00B_UNDECLARED_ENTRYPOINT" in codes
     assert "D00B_UNDECLARED_MAIN_CALLABLE" in codes
+
+
+def test_unknown_pyproject_execution_surface_fails_closed(
+    tmp_path: Path,
+) -> None:
+    repository, project, _report = _audit_fixture(tmp_path)
+    pyproject = project / "pyproject.toml"
+    pyproject.write_text(
+        pyproject.read_text(encoding="utf-8")
+        + "\n[build-system]\n"
+        + 'requires = ["untrusted-build-backend"]\n',
+        encoding="utf-8",
+        newline="\n",
+    )
+
+    report = cast(
+        dict[str, object],
+        audit_project(project, repository_root=repository),
+    )
+    assert (
+        "D00B_PYPROJECT_UNKNOWN_TOP_LEVEL_FIELD"
+        in _finding_codes(report)
+    )
+
+
+def test_executable_artifact_fails_closed(tmp_path: Path) -> None:
+    repository, project, _report = _audit_fixture(tmp_path)
+    script = project / "run.sh"
+    script.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+
+    report = cast(
+        dict[str, object],
+        audit_project(project, repository_root=repository),
+    )
+    assert "D00B_EXECUTABLE_ARTIFACT_FORBIDDEN" in _finding_codes(report)
 
 
 def test_audited_module_is_never_executed(tmp_path: Path) -> None:

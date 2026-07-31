@@ -1,6 +1,6 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1とPH-R00はOwner承認済みであり、PH-D00Aだけが現在activeである。PH-D00A開始許可は、ARC task payloadへのアクセス、HDS蒸留実行、Bridge、Runtimeの開始許可ではない。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00AはOwner承認済みであり、PH-D00Bだけが現在activeである。PH-D00B開始許可は、ARC task payloadへのアクセス、HDS仮説生成・蒸留実行、Bridge、Runtimeの開始許可ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
 - 日付: `2026-07-31`
@@ -10,9 +10,10 @@
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
 - 契約状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- 現在作業: `PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND`
-- Active phase: `PH-D00A`
-- PH-D00A: `IN_PROGRESS`
+- 現在作業: `PH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBIND`
+- Active phase: `PH-D00B`
+- PH-D00B: `IN_PROGRESS`
+- PH-D00A: `OWNER_APPROVED_PASS`
 - PH-R00: `OWNER_APPROVED_PASS`
 - PH-R-1: `OWNER_APPROVED_PASS`
 - 導入承認: `owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8`
@@ -137,11 +138,12 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = PH-D00A
-Current work = PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND
+Active phase = PH-D00B
+Current work = PH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBIND
 PH-R-1 = OWNER_APPROVED_PASS
 PH-R00 = OWNER_APPROVED_PASS
-PH-D00A = IN_PROGRESS
+PH-D00A = OWNER_APPROVED_PASS
+PH-D00B = IN_PROGRESS
 PH-R00 Owner authorization = ESTABLISHED
 ```
 
@@ -168,9 +170,11 @@ AND STRATEGY_INSTALLATION_COMPLETE
 AND OWNER_AUTHORIZED_PH-R00
 AND PH-R00_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D00A
+AND PH-D00A_DOD_PASS
+AND OWNER_AUTHORIZED_PH-D00B
 ```
 
-以前に`PH-D00A`を開始しない。現在は全条件が成立し、PH-D00Aだけがactiveである。PH-D00BはPH-D00Aの全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
+以前に`PH-D00B`を開始しない。現在は全条件が成立し、PH-D00Bだけがactiveである。PH-D01AはPH-D00Bの全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -723,9 +727,10 @@ rev3 strategyはOWNER_APPROVEDです。
 installationはINSTALLEDです。
 PH-R-1はOWNER_APPROVED_PASSです。
 PH-R00はOWNER_APPROVED_PASSです。
-PH-D00AはIN_PROGRESSです。
-Active phaseはPH-D00Aです。
-現在許可されたwork classはPH-D00A_HDS_DEPENDENCY_AUTHORITY_REBINDです。
+PH-D00AはOWNER_APPROVED_PASSです。
+PH-D00BはIN_PROGRESSです。
+Active phaseはPH-D00Bです。
+現在許可されたwork classはPH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBINDです。
 PH-R00のOwner authorizationはESTABLISHEDです。
 
 最初に、
@@ -734,26 +739,27 @@ PH-R00のOwner authorizationはESTABLISHEDです。
 - HEAD/tree
 - dirty state
 - required documents
-- PH-R00 evidence、attestation、approval
-- PH-D00A WorkBlockFrameとphase-entry approval
+- PH-D00A evidence、attestation、approval
+- PH-D00B WorkBlockFrameとphase-entry approval
 を確認してください。
 
 次だけを実施してください。
 
-- HDS正本、権威順序、蒸留scopeのcurrent HEADへのdigest rebind
-- source-blind role、promotion authority、artifact layerの固定
-- 監査前PH-D00A control artifactの明示的historical移送
-- dependency auditor、schema、manifest、report、Open Term Ledgerの再検証
+- distillation／bridge／runtime namespace境界のcurrent HEADへのrebind
+- Python 3.12.13とdevelopment toolchainの固定
+- behavior-based Scope Guardの再検証・必要な是正
+- 監査前PH-D00B control artifactの明示的historical移送
+- static auditor、scope contract、deterministic reportの再検証
 - dedicated／focused／full unit／integration regression
 - deterministic artifact、Implementation Commit、Evidence Commit、attestationの分離
-- PH-D00A DoDとfailed requirement count 0の証明
+- PH-D00B DoDとfailed requirement count 0の証明
 
-ARC task payloadアクセス、HDS仮説生成・蒸留実行、Bridge、AGI Runtime、P22改善、locked final、
+ARC task payloadアクセス、HDS仮説生成・蒸留実行、Bridge実装、AGI Runtime、P22改善、locked final、
 official、Kaggleへ進んではいけません。
 
-PH-D00A成果のImplementation Commit、Evidence Commit、attestationを分離してください。
+PH-D00B成果のImplementation Commit、Evidence Commit、attestationを分離してください。
 全gateがPASSした場合だけstanding authorizationをexact evidenceへ機械的にbindし、
-PH-D00B entryを記録してください。失敗または未証明gateを承認してはいけません。
+PH-D01A entryを記録してください。失敗または未証明gateを承認してはいけません。
 ```
 
 ---

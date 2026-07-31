@@ -2,9 +2,14 @@
 
 - Scope ID: `ARC3_HDS_DISTILLATION_SCOPE_D00B_V1`
 - Phase: `PH-D00B`
-- Work Block: `WB-PH-D00B-DISTILLATION-SCOPE-BOOTSTRAP`
+- Work Block: `WB-PH-D00B-DISTILLATION-REPOSITORY-BOOTSTRAP-REBIND-20260731`
 - Exit claim: `DISTILLATION_SCOPE_GUARD_PASS`
 - Final promotion authority: 大平鉄兵
+
+This is the post-audit current Work Block. Earlier PH-D00B phase state,
+transitions, and review evidence are preserved under
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D00B/` and are not current completion
+evidence.
 
 ## Purpose
 
@@ -63,10 +68,15 @@ submission output.
 - official ARC API imports, calls, or competition mode
 - network-capable imports or calls
 - dynamic imports or source execution
+- process execution except the statically bounded read-only
+  `git ls-files -- <root>` metadata inventory
 - public callables that answer an unlabeled task
+- trusted scope-marker rebinding or local marker spoofing
 - task, game, level, or case identity routing
 - answer maps, full-answer literals, or fixed action sequences
 - submission-format artifact generation
+- unknown `pyproject.toml` execution surfaces or executable/installable
+  artifacts
 - runtime, production, historical solver, agent, teacher, or Bridge dependency
 - executable code in `bridge/` or `runtime/`
 - undeclared or outside-`src/` production entrypoints

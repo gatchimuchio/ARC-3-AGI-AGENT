@@ -3,7 +3,17 @@
 This project is the isolated distillation namespace. Its authority
 and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
-`PH-D00B` fixed the repository and behavior boundary. `PH-D01A` added:
+## Current authority status
+
+`PH-D00B` is the only active phase. Existing PH-D00B through PH-D03A code,
+reports, phase records, and descriptions below originated before the rev3
+audit correction. They are implementation candidates and historical evidence,
+not current phase-pass, promotion, or completion evidence. Current PH-D00B
+must revalidate the repository boundary and Scope Guard against the exact
+post-audit implementation tree before any later phase may start.
+
+The pre-audit PH-D00B candidate fixed the repository and behavior boundary.
+The pre-audit `PH-D01A` candidate added:
 
 - a declarative source-admission plan;
 - eight strict ARC2/ARC3 SourceProfile documents;

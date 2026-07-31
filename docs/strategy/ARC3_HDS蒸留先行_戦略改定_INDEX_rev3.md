@@ -3,9 +3,10 @@
 - Package status: `OWNER_APPROVED`
 - Installation status: `INSTALLED`
 - PH-R-1 status: `OWNER_APPROVED_PASS`
-- Current work class: `PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND`
-- Active phase: `PH-D00A`
-- `PH-D00A`: `IN_PROGRESS`
+- Current work class: `PH-D00B_DISTILLATION_REPOSITORY_BOOTSTRAP_REBIND`
+- Active phase: `PH-D00B`
+- `PH-D00B`: `IN_PROGRESS`
+- `PH-D00A`: `OWNER_APPROVED_PASS`
 - `PH-R00`: `OWNER_APPROVED_PASS`
 - Audit: `docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md`
 - Installation approval: `control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json`

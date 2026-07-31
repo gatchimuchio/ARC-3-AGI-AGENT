@@ -16,7 +16,7 @@ from zipfile import ZipFile
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SELECTOR_PATH = Path("control/rev3/REV3_CURRENT_SELECTOR.json")
 SELECTOR_SCHEMA_PATH = Path(
-    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V5.json"
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V6.json"
 )
 DECISION_PATH = Path(
     "control/rev3/OWNER_DECISION_CAPTURES/"
@@ -81,6 +81,22 @@ PH_D00A_ENTRY_APPROVAL_PATH = Path(
 PH_D00A_FRAME_PATH = Path("control/rev3/PH-D00A_WORK_BLOCK_FRAME.json")
 PH_D00A_TRANSITION_PATH = Path(
     "control/rev3/PHASE_TRANSITIONS/PH-R00_TO_PH-D00A.json"
+)
+PH_D00A_RESULT_DECISION_PATH = Path(
+    "control/rev3/OWNER_DECISION_CAPTURES/"
+    "PH-D00A_TO_PH-D00B_20260731.json"
+)
+PH_D00A_RESULT_APPROVAL_PATH = Path(
+    "control/rev3/OWNER_APPROVAL_RECORDS/"
+    "PH-D00A_TO_PH-D00B_20260731.json"
+)
+PH_D00A_EVIDENCE_ATTESTATION_PATH = Path(
+    "control/rev3/PH-D00A_EVIDENCE_ATTESTATION.json"
+)
+PH_D00A_PHASE_STATE_PATH = Path("control/rev3/D00A_PHASE_STATE.json")
+PH_D00B_FRAME_PATH = Path("control/rev3/PH-D00B_WORK_BLOCK_FRAME.json")
+PH_D00B_TRANSITION_PATH = Path(
+    "control/rev3/PHASE_TRANSITIONS/PH-D00A_TO_PH-D00B.json"
 )
 PH_R00_PHASE_STATE_PATH = Path("control/rev3/R00_PHASE_STATE.json")
 PH_R00_ASSET_CLASSIFICATION_PATH = Path(
@@ -269,6 +285,23 @@ def _git_tree(root: Path, commit: str) -> str | None:
     return result.stdout.strip()
 
 
+def _git_blob(
+    root: Path,
+    commit: str,
+    relative_path: str,
+) -> bytes | None:
+    result = subprocess.run(
+        ["git", "show", f"{commit}:{relative_path}"],
+        cwd=root,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    if result.returncode != 0:
+        return None
+    return result.stdout
+
+
 def validate_repository(root: Path) -> dict[str, object]:
     failures: list[str] = []
     selector = _load_object(root, SELECTOR_PATH)
@@ -347,6 +380,8 @@ def validate_repository(root: Path) -> dict[str, object]:
     if not isinstance(entries, list):
         failures.append("authority_manifest:ENTRIES_MISSING")
     else:
+        if manifest.get("entry_count") != len(entries):
+            failures.append("authority_manifest:ENTRY_COUNT_MISMATCH")
         for index, entry in enumerate(entries):
             if not isinstance(entry, dict):
                 failures.append(
@@ -536,24 +571,124 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d00a_entry_approval:DECISION_DIGEST_MISMATCH"
         )
 
-    if selector.get("active_phase") != "PH-D00A":
+    ph_d00a_attestation = _load_object(
+        root, PH_D00A_EVIDENCE_ATTESTATION_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d00a_attestation,
+            attestation_schema,
+            "ph_d00a_evidence_attestation",
+        )
+    )
+    if ph_d00a_attestation.get("phase_id") != "PH-D00A":
+        failures.append("ph_d00a_evidence_attestation:PHASE_MISMATCH")
+    for commit_field, tree_field in (
+        ("implementation_commit", "implementation_tree"),
+        ("evidence_commit", "evidence_tree"),
+    ):
+        commit = ph_d00a_attestation.get(commit_field)
+        expected_tree = ph_d00a_attestation.get(tree_field)
+        if not isinstance(commit, str) or _git_tree(root, commit) != (
+            expected_tree
+        ):
+            failures.append(
+                "ph_d00a_evidence_attestation:"
+                + commit_field.upper()
+                + "_TREE_MISMATCH"
+            )
+    ph_d00a_phase_state = root / PH_D00A_PHASE_STATE_PATH
+    if hashlib.sha256(ph_d00a_phase_state.read_bytes()).hexdigest() != (
+        ph_d00a_attestation.get("phase_state_sha256")
+    ):
+        failures.append(
+            "ph_d00a_evidence_attestation:"
+            "PHASE_STATE_SHA256_MISMATCH"
+        )
+
+    ph_d00a_result_decision = _load_object(
+        root, PH_D00A_RESULT_DECISION_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d00a_result_decision,
+            decision_v2_schema,
+            "ph_d00a_result_decision",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d00a_result_decision,
+            "sha256:",
+            "owner_decision_content_digest",
+            "ph_d00a_result_decision",
+        )
+    )
+    if (
+        ph_d00a_result_decision.get("standing_authorization_digest")
+        != standing.get("standing_authorization_content_digest")
+    ):
+        failures.append(
+            "ph_d00a_result_decision:STANDING_AUTHORIZATION_MISMATCH"
+        )
+    if (
+        ph_d00a_result_decision.get("target_evidence_commit")
+        != ph_d00a_attestation.get("evidence_commit")
+        or ph_d00a_result_decision.get("target_artifact_digest")
+        != ph_d00a_attestation.get("evidence_payload_digest")
+    ):
+        failures.append(
+            "ph_d00a_result_decision:ATTESTATION_BINDING_MISMATCH"
+        )
+
+    ph_d00a_result_approval = _load_object(
+        root, PH_D00A_RESULT_APPROVAL_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d00a_result_approval,
+            approval_schema,
+            "ph_d00a_result_approval",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d00a_result_approval,
+            "owner-approval-record:",
+            "approval_artifact_digest",
+            "ph_d00a_result_approval",
+        )
+    )
+    if (
+        ph_d00a_result_approval.get("owner_decision_capture_digest")
+        != ph_d00a_result_decision.get(
+            "owner_decision_content_digest"
+        )
+    ):
+        failures.append(
+            "ph_d00a_result_approval:DECISION_DIGEST_MISMATCH"
+        )
+
+    if selector.get("active_phase") != "PH-D00B":
         failures.append("selector:ACTIVE_PHASE_MISMATCH")
     if selector.get("ph_r00_owner_authorization") != "ESTABLISHED":
         failures.append("selector:PH_R00_AUTHORIZATION_MISSING")
     if selector.get("ph_r00_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_R00_STATUS_MISMATCH")
-    if selector.get("ph_d00a_status") != "IN_PROGRESS":
+    if selector.get("ph_d00a_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D00A_STATUS_MISMATCH")
+    if selector.get("ph_d00b_status") != "IN_PROGRESS":
+        failures.append("selector:PH_D00B_STATUS_MISMATCH")
     if selector.get("runtime_activation_status") != "SUSPEND":
         failures.append("selector:RUNTIME_ACTIVATION_ESCALATED")
     selector_entry_approval = selector.get("phase_entry_approval")
     if not isinstance(selector_entry_approval, dict):
-        failures.append("selector:PH_D00A_ENTRY_APPROVAL_MISSING")
+        failures.append("selector:PH_D00B_ENTRY_APPROVAL_MISSING")
     elif (
         selector_entry_approval.get("approval_artifact_digest")
-        != ph_d00a_entry_approval.get("approval_artifact_digest")
+        != ph_d00a_result_approval.get("approval_artifact_digest")
     ):
-        failures.append("selector:PH_D00A_ENTRY_APPROVAL_MISMATCH")
+        failures.append("selector:PH_D00B_ENTRY_APPROVAL_MISMATCH")
     selector_standing = selector.get("standing_authorization")
     if not isinstance(selector_standing, dict):
         failures.append("selector:STANDING_AUTHORIZATION_MISSING")
@@ -666,6 +801,64 @@ def validate_repository(root: Path) -> dict[str, object]:
     ):
         failures.append("ph_d00a_transition:EXTERNAL_ACTION_AUTHORIZED")
 
+    ph_d00b_frame = _load_object(root, PH_D00B_FRAME_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_d00b_frame,
+            "rev3-work-block-frame:",
+            "content_digest",
+            "ph_d00b_frame",
+        )
+    )
+    if ph_d00b_frame.get("phase_id") != "PH-D00B":
+        failures.append("ph_d00b_frame:PHASE_MISMATCH")
+    ph_d00b_budget = ph_d00b_frame.get("resource_budget")
+    if not isinstance(ph_d00b_budget, dict):
+        failures.append("ph_d00b_frame:RESOURCE_BUDGET_MISSING")
+    else:
+        for field in (
+            "network_submission_count",
+            "locked_final_access_count",
+            "official_access_count",
+            "kaggle_mutation_count",
+            "arc_task_payload_read_count",
+            "teacher_trajectory_read_count",
+            "hds_hypothesis_generation_count",
+            "distillation_execution_count",
+            "bridge_runtime_capability_count",
+            "audited_source_execution_count",
+            "rule_promotion_count",
+        ):
+            if ph_d00b_budget.get(field) != 0:
+                failures.append(f"ph_d00b_frame:{field}:NONZERO")
+
+    ph_d00b_transition = _load_object(root, PH_D00B_TRANSITION_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_d00b_transition,
+            "rev3-phase-transition:",
+            "content_digest",
+            "ph_d00b_transition",
+        )
+    )
+    if (
+        ph_d00b_transition.get("from_phase_id"),
+        ph_d00b_transition.get("to_phase_id"),
+        ph_d00b_transition.get("decision"),
+    ) != ("PH-D00A", "PH-D00B", "ENTRY_AUTHORIZED"):
+        failures.append("ph_d00b_transition:SEQUENCE_MISMATCH")
+    if ph_d00b_transition.get(
+        "authorization_digest"
+    ) != ph_d00a_result_approval.get("approval_artifact_digest"):
+        failures.append("ph_d00b_transition:APPROVAL_MISMATCH")
+    if (
+        ph_d00b_transition.get(
+            "external_irreversible_action_authorized"
+        )
+        is not False
+    ):
+        failures.append("ph_d00b_transition:EXTERNAL_ACTION_AUTHORIZED")
+
     phase_state = root / PH_R00_PHASE_STATE_PATH
     if hashlib.sha256(phase_state.read_bytes()).hexdigest() != (
         ph_r00_attestation.get("phase_state_sha256")
@@ -685,6 +878,72 @@ def validate_repository(root: Path) -> dict[str, object]:
             failures.append(
                 "ph_d00a_historical_migration:MISSING:"
                 + relative_path
+            )
+
+    ph_d00b_historical_root = (
+        root / "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00B"
+    )
+    ph_d00b_historical_sources = [
+        (
+            "65d0ba27e3137a670c76db13893c10b6ffebd7b2",
+            "control/rev3/PH-D00B_WORK_BLOCK_FRAME.json",
+            "PH-D00B_WORK_BLOCK_FRAME.json",
+        ),
+        (
+            "74a5c06fc2f4b0bc31e4ac4f6dd77aa06ed28dca",
+            "control/rev3/D00B_PHASE_STATE.json",
+            "D00B_PHASE_STATE.json",
+        ),
+        (
+            "4f149ea2730568e2af89efef136a696b829c0601",
+            "control/rev3/PHASE_TRANSITIONS/PH-D00A_TO_PH-D00B.json",
+            "PHASE_TRANSITIONS/PH-D00A_TO_PH-D00B.json",
+        ),
+        (
+            "25a4363fc1dfe78d47106f715db65c36d393210f",
+            "control/rev3/PHASE_TRANSITIONS/PH-D00B_TO_PH-D01A.json",
+            "PHASE_TRANSITIONS/PH-D00B_TO_PH-D01A.json",
+        ),
+    ]
+    for package_name in (
+        "artifact_manifest.json",
+        "changed_files.json",
+        "commands.json",
+        "failed_requirements.json",
+        "open_terms.json",
+        "phase_state.json",
+        "proposed_next_action.md",
+        "self_audit.json",
+        "summary.md",
+        "test_results.json",
+    ):
+        ph_d00b_historical_sources.append(
+            (
+                "e7f99beff6e6fba343e6ce069434c6a28b040039",
+                "control/rev3/PH-D00B_OWNER_REVIEW_PACKAGE/"
+                + package_name,
+                "OWNER_REVIEW_PACKAGE/" + package_name,
+            )
+        )
+    for source_commit, source_path, destination_path in (
+        ph_d00b_historical_sources
+    ):
+        expected = _git_blob(root, source_commit, source_path)
+        destination = ph_d00b_historical_root / destination_path
+        if expected is None:
+            failures.append(
+                "ph_d00b_historical_migration:SOURCE_MISSING:"
+                + source_path
+            )
+        elif not destination.is_file():
+            failures.append(
+                "ph_d00b_historical_migration:DESTINATION_MISSING:"
+                + destination_path
+            )
+        elif destination.read_bytes() != expected:
+            failures.append(
+                "ph_d00b_historical_migration:CONTENT_MISMATCH:"
+                + destination_path
             )
 
     asset_classification = _load_object(
@@ -737,6 +996,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "distilled_initial_state_bundle_status",
             "installation_status",
             "ph_d00a_status",
+            "ph_d00b_status",
             "ph_r00_owner_authorization",
             "ph_r00_status",
             "ph_r1_status",
@@ -747,6 +1007,22 @@ def validate_repository(root: Path) -> dict[str, object]:
                 failures.append(
                     f"governance.current_selector.{key}:MISMATCH"
                 )
+    active_work_block = governance.get("active_work_block")
+    if not isinstance(active_work_block, dict):
+        failures.append("governance:ACTIVE_WORK_BLOCK_MISSING")
+    elif (
+        active_work_block.get("phase_id") != "PH-D00B"
+        or active_work_block.get("path") != PH_D00B_FRAME_PATH.as_posix()
+        or active_work_block.get("content_digest")
+        != ph_d00b_frame.get("content_digest")
+        or active_work_block.get("transition_digest")
+        != ph_d00b_transition.get("content_digest")
+        or active_work_block.get(
+            "external_irreversible_actions_authorized"
+        )
+        is not False
+    ):
+        failures.append("governance:ACTIVE_WORK_BLOCK_MISMATCH")
 
     profile = _load_object(root, BUILD_READY_PROFILE_PATH)
     if profile.get("profile_status") != (
@@ -788,7 +1064,7 @@ def validate_repository(root: Path) -> dict[str, object]:
                 )
 
     return {
-        "check_count": 20,
+        "check_count": 24,
         "failure_count": len(failures),
         "failures": sorted(set(failures)),
         "status": "PASS" if not failures else "FAIL",

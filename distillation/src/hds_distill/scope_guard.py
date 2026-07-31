@@ -62,16 +62,21 @@ OFFICIAL_IMPORT_PREFIXES: Final = frozenset(
 NETWORK_IMPORT_PREFIXES: Final = frozenset(
     {
         "aiohttp",
+        "asyncio",
         "ftplib",
-        "http.client",
+        "http",
         "httpx",
+        "imaplib",
+        "poplib",
         "requests",
         "smtplib",
         "socket",
+        "socketserver",
+        "ssl",
         "telnetlib",
-        "urllib.request",
+        "urllib",
         "websockets",
-        "xmlrpc.client",
+        "xmlrpc",
     }
 )
 RUNTIME_IMPORT_PREFIXES: Final = frozenset(
@@ -114,6 +119,29 @@ SUBPROCESS_CALLS: Final = frozenset(
         "subprocess.check_output",
         "subprocess.Popen",
         "subprocess.run",
+    }
+)
+PROCESS_EXECUTION_CALLS: Final = frozenset(
+    {
+        *SUBPROCESS_CALLS,
+        "asyncio.create_subprocess_exec",
+        "asyncio.create_subprocess_shell",
+        "os.popen",
+        "os.spawnl",
+        "os.spawnle",
+        "os.spawnlp",
+        "os.spawnlpe",
+        "os.spawnv",
+        "os.spawnve",
+        "os.spawnvp",
+        "os.spawnvpe",
+        "os.system",
+        "pty.spawn",
+    }
+)
+ALLOWED_READ_ONLY_PROCESS_PREFIXES: Final = frozenset(
+    {
+        ("git", "ls-files"),
     }
 )
 NETWORK_COMMAND_TOKENS: Final = frozenset(
@@ -234,6 +262,23 @@ CONFIG_SUFFIXES: Final = (
     "_SUFFIXES",
     "_TOKENS",
     "_VALUES",
+)
+FORBIDDEN_EXECUTABLE_SUFFIXES: Final = frozenset(
+    {
+        ".bat",
+        ".cmd",
+        ".com",
+        ".dll",
+        ".dylib",
+        ".exe",
+        ".jar",
+        ".msi",
+        ".ps1",
+        ".pth",
+        ".sh",
+        ".so",
+        ".whl",
+    }
 )
 
 
@@ -530,6 +575,34 @@ def _string_literals(node: ast.AST) -> tuple[str, ...]:
     )
 
 
+def _literal_command_prefix(call: ast.Call) -> tuple[str, ...]:
+    if not call.args:
+        return ()
+    command = call.args[0]
+    if not isinstance(command, ast.List | ast.Tuple):
+        return ()
+    prefix: list[str] = []
+    for item in command.elts[:2]:
+        if not (
+            isinstance(item, ast.Constant)
+            and isinstance(item.value, str)
+        ):
+            return ()
+        prefix.append(item.value)
+    return tuple(prefix)
+
+
+def _keyword_is_true(call: ast.Call, name: str) -> bool:
+    for keyword in call.keywords:
+        if keyword.arg != name:
+            continue
+        return (
+            isinstance(keyword.value, ast.Constant)
+            and keyword.value.value is True
+        )
+    return False
+
+
 def _function_parameters(
     node: ast.AsyncFunctionDef | ast.FunctionDef,
 ) -> tuple[str, ...]:
@@ -676,6 +749,15 @@ class _BehaviorVisitor(ast.NodeVisitor):
         self._class_stack: list[str] = []
         self._callable_stack: list[str] = []
         self._context_stack: list[frozenset[str]] = []
+        self._trusted_marker_aliases = frozenset(
+            alias
+            for alias, target in record.aliases.items()
+            if target
+            in {
+                TRUSTED_INTERPRETER_MARKER,
+                TRUSTED_TEACHER_MARKER,
+            }
+        )
 
     def _finding(
         self,
@@ -696,6 +778,13 @@ class _BehaviorVisitor(ast.NodeVisitor):
         )
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
+        if node.name in self._trusted_marker_aliases:
+            self._finding(
+                "D00B_TRUSTED_SCOPE_MARKER_REBOUND",
+                node,
+                node.name,
+                "trusted marker import is shadowed by a class",
+            )
         self._class_stack.append(node.name)
         self.generic_visit(node)
         self._class_stack.pop()
@@ -704,6 +793,13 @@ class _BehaviorVisitor(ast.NodeVisitor):
         self,
         node: ast.AsyncFunctionDef | ast.FunctionDef,
     ) -> None:
+        if node.name in self._trusted_marker_aliases:
+            self._finding(
+                "D00B_TRUSTED_SCOPE_MARKER_REBOUND",
+                node,
+                node.name,
+                "trusted marker import is shadowed by a function",
+            )
         is_public_boundary = self._function_depth == 0 and not node.name.startswith(
             "_"
         )
@@ -767,6 +863,19 @@ class _BehaviorVisitor(ast.NodeVisitor):
     def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
         self._visit_function(node)
 
+    def visit_Name(self, node: ast.Name) -> None:
+        if (
+            isinstance(node.ctx, ast.Store)
+            and node.id in self._trusted_marker_aliases
+        ):
+            self._finding(
+                "D00B_TRUSTED_SCOPE_MARKER_REBOUND",
+                node,
+                node.id,
+                "trusted marker import is rebound",
+            )
+        self.generic_visit(node)
+
     def visit_Call(self, node: ast.Call) -> None:
         qualified = _qualified_expression(node.func, self.record.aliases)
         symbol = self._callable_stack[-1] if self._callable_stack else qualified
@@ -798,8 +907,21 @@ class _BehaviorVisitor(ast.NodeVisitor):
                 symbol,
                 qualified,
             )
-        if qualified in SUBPROCESS_CALLS:
+        if qualified in PROCESS_EXECUTION_CALLS:
             command_text = " ".join(_string_literals(node)).casefold()
+            command_prefix = _literal_command_prefix(node)
+            read_only_process = (
+                qualified in SUBPROCESS_CALLS
+                and command_prefix in ALLOWED_READ_ONLY_PROCESS_PREFIXES
+                and not _keyword_is_true(node, "shell")
+            )
+            if not read_only_process:
+                self._finding(
+                    "D00B_PROCESS_EXECUTION_FORBIDDEN",
+                    node,
+                    symbol,
+                    qualified + ":" + command_text,
+                )
             if any(token in command_text for token in NETWORK_COMMAND_TOKENS):
                 self._finding(
                     "D00B_NETWORK_COMMAND_FORBIDDEN",
@@ -1008,6 +1130,39 @@ def _read_project_config(
             )
         )
 
+    unknown_top_level = sorted(set(raw) - {"project", "tool"})
+    if unknown_top_level:
+        config_finding(
+            "D00B_PYPROJECT_UNKNOWN_TOP_LEVEL_FIELD",
+            ",".join(unknown_top_level),
+        )
+    unknown_project_fields = sorted(
+        set(project)
+        - {
+            "dependencies",
+            "description",
+            "name",
+            "optional-dependencies",
+            "readme",
+            "requires-python",
+            "scripts",
+            "version",
+        }
+    )
+    if unknown_project_fields:
+        config_finding(
+            "D00B_PYPROJECT_UNKNOWN_PROJECT_FIELD",
+            ",".join(unknown_project_fields),
+        )
+    unknown_tool_fields = sorted(
+        set(tool) - {"mypy", "pytest", "ruff"}
+    )
+    if unknown_tool_fields:
+        config_finding(
+            "D00B_PYPROJECT_UNKNOWN_TOOL_FIELD",
+            ",".join(unknown_tool_fields),
+        )
+
     if name != "hds-distill":
         config_finding("D00B_PROJECT_IDENTITY_MISMATCH", name)
     if requires_python != "==3.12.13":
@@ -1051,6 +1206,36 @@ def _read_project_config(
             "D00B_RUFF_TARGET_VERSION_MISMATCH",
             str(ruff_config.get("target-version", "")),
         )
+    if ruff_config.get("line-length") != 88:
+        config_finding(
+            "D00B_RUFF_LINE_LENGTH_MISMATCH",
+            str(ruff_config.get("line-length", "")),
+        )
+    ruff_lint = cast(
+        Mapping[str, object],
+        ruff_config.get("lint", {}),
+    )
+    ruff_select = tuple(
+        str(item)
+        for item in cast(Sequence[object], ruff_lint.get("select", []))
+    )
+    if ruff_select != ("B", "E", "F", "I", "UP"):
+        config_finding(
+            "D00B_RUFF_RULE_SET_MISMATCH",
+            ",".join(ruff_select),
+        )
+    mypy_files = tuple(
+        str(item)
+        for item in cast(
+            Sequence[object],
+            mypy_config.get("files", []),
+        )
+    )
+    if mypy_files != ("src", "tests"):
+        config_finding(
+            "D00B_MYPY_BOUNDARY_MISMATCH",
+            ",".join(mypy_files),
+        )
     testpaths = tuple(
         str(item)
         for item in cast(
@@ -1062,6 +1247,30 @@ def _read_project_config(
         config_finding(
             "D00B_PYTEST_BOUNDARY_MISMATCH",
             ",".join(testpaths),
+        )
+    pythonpath = tuple(
+        str(item)
+        for item in cast(
+            Sequence[object],
+            pytest_options.get("pythonpath", []),
+        )
+    )
+    if pythonpath != ("src",):
+        config_finding(
+            "D00B_PYTEST_PYTHONPATH_MISMATCH",
+            ",".join(pythonpath),
+        )
+    addopts = tuple(
+        str(item)
+        for item in cast(
+            Sequence[object],
+            pytest_options.get("addopts", []),
+        )
+    )
+    if addopts != ("--strict-config", "--strict-markers"):
+        config_finding(
+            "D00B_PYTEST_OPTIONS_MISMATCH",
+            ",".join(addopts),
         )
     return (
         ProjectConfig(
@@ -1142,6 +1351,15 @@ def _layout_findings(
                 "D00B_SYMLINK_FORBIDDEN",
                 path,
                 "distillation boundary must not escape by symlink",
+            )
+        if (
+            path.is_file()
+            and path.suffix.casefold() in FORBIDDEN_EXECUTABLE_SUFFIXES
+        ):
+            add(
+                "D00B_EXECUTABLE_ARTIFACT_FORBIDDEN",
+                path,
+                "executable or installable artifacts are forbidden",
             )
     for path in sorted(project_root.rglob("*.py")):
         relative = path.relative_to(project_root)
