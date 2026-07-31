@@ -1,6 +1,6 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00A、PH-D00B、PH-D01A、PH-D01B、PH-D02AはOwner承認済みであり、PH-D02Bだけが現在activeである。PH-D02B開始許可は、監査後の38 HDS rev2 schemaと7 HDSStructureBundle schema、cross-reference、dependency lock、bundle inventory、synthetic conformanceの実装・検証に限られ、PH-D02CのTyped Causal IR／interpreter実行、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS仮説生成・蒸留実行、Rule promotion、Bridge、Runtimeの開始許可ではない。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00A、PH-D00B、PH-D01A、PH-D01B、PH-D02A、PH-D02BはOwner承認済みであり、PH-D02Cだけが現在activeである。PH-D02C開始許可は、監査後のversioned Typed Causal IR、pure offline interpreter、verifier ABI、identity／answer-copy linter、resource suspension、synthetic conformanceの実装・検証に限られ、PH-D03A Golden corpus、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS仮説生成・蒸留実行、Rule promotion、Bridge、Runtimeの開始許可ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
 - 日付: `2026-07-31`
@@ -10,9 +10,10 @@
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
 - 契約状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- 現在作業: `PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND`
-- Active phase: `PH-D02B`
-- PH-D02B: `IN_PROGRESS`
+- 現在作業: `PH-D02C_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_REBIND`
+- Active phase: `PH-D02C`
+- PH-D02C: `IN_PROGRESS`
+- PH-D02B: `OWNER_APPROVED_PASS`
 - PH-D02A: `OWNER_APPROVED_PASS`
 - PH-D01B: `OWNER_APPROVED_PASS`
 - PH-D01A: `OWNER_APPROVED_PASS`
@@ -142,8 +143,8 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = PH-D02B
-Current work = PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND
+Active phase = PH-D02C
+Current work = PH-D02C_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_REBIND
 PH-R-1 = OWNER_APPROVED_PASS
 PH-R00 = OWNER_APPROVED_PASS
 PH-D00A = OWNER_APPROVED_PASS
@@ -151,7 +152,8 @@ PH-D00B = OWNER_APPROVED_PASS
 PH-D01A = OWNER_APPROVED_PASS
 PH-D01B = OWNER_APPROVED_PASS
 PH-D02A = OWNER_APPROVED_PASS
-PH-D02B = IN_PROGRESS
+PH-D02B = OWNER_APPROVED_PASS
+PH-D02C = IN_PROGRESS
 PH-R00 Owner authorization = ESTABLISHED
 ```
 
@@ -188,9 +190,11 @@ AND PH-D01B_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D02A
 AND PH-D02A_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D02B
+AND PH-D02B_DOD_PASS
+AND OWNER_AUTHORIZED_PH-D02C
 ```
 
-以前に`PH-D02B`を開始しない。現在は全条件が成立し、PH-D02Bだけがactiveである。PH-D02CはPH-D02Bの全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
+以前に`PH-D02C`を開始しない。現在は全条件が成立し、PH-D02Cだけがactiveである。PH-D03AはPH-D02Cの全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -748,9 +752,10 @@ PH-D00BはOWNER_APPROVED_PASSです。
 PH-D01AはOWNER_APPROVED_PASSです。
 PH-D01BはOWNER_APPROVED_PASSです。
 PH-D02AはOWNER_APPROVED_PASSです。
-PH-D02BはIN_PROGRESSです。
-Active phaseはPH-D02Bです。
-現在許可されたwork classはPH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBINDです。
+PH-D02BはOWNER_APPROVED_PASSです。
+PH-D02CはIN_PROGRESSです。
+Active phaseはPH-D02Cです。
+現在許可されたwork classはPH-D02C_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_REBINDです。
 PH-R00のOwner authorizationはESTABLISHEDです。
 
 最初に、
@@ -759,30 +764,32 @@ PH-R00のOwner authorizationはESTABLISHEDです。
 - HEAD/tree
 - dirty state
 - required documents
-- PH-D02A evidence、attestation、approval
-- PH-D02B WorkBlockFrameとphase-entry approval
+- PH-D02B evidence、attestation、approval
+- PH-D02C WorkBlockFrameとphase-entry approval
 を確認してください。
 
 次だけを実施してください。
 
-- 38 HDS rev2 schemaと7 HDSStructureBundle schemaのexact 45-schema set固定
-- 全38 schemaの一対一bundle projection mapping固定
-- content-derived identity、typed cross-file reference、dependency lock、schema versionのfail-closed検証
-- duplicate／dangling／wrong-kind／wrong-target referenceの拒否
-- partial bundle／unknown file／unknown version／dependency driftの拒否
-- RawObservation／DeterministicDerivation／InterpretationHypothesis境界、独立HDS state axis、MULTI_CAUSAL／SUSPEND、initial RuleAtom制約の固定
-- synthetic 45-record fixtureとnegative caseの独立process 3回byte-identical rebuild
-- 監査前PH-D02B control artifact 13件の明示的historical移送
+- 承認済みPH-D02B 45-schema setからversioned PH-D02C schema setを派生し、PH-D02B bytesを不変に保つ
+- HypothesisIRとOperatorRegistryだけを明示version migrationする
+- 18 common type、ARC2 33 opcode、ARC3 18 opcodeをexact registryへ固定する
+- pure deterministic offline interpreter、type／parameter checker、selector cardinality、declared orderを固定する
+- unknown type／opcode／version、type mismatch、forward reference、invalid operation、ABI driftをstable codeで拒否する
+- task／game／level／case／source／replay／answer／coordinate／fixed-action routingを再帰的に拒否する
+- resource overflowをSUSPEND_RESOURCE／HOLD／INCONCLUSIVEとして可視化する
+- canonical exact comparatorとbounded synthetic interventionを実装し、causal claimを生成しない
+- 監査前PH-D02C control artifact 13件とIR candidate 12件を明示的historical移送する
+- schema、registry、vector、result、reportの独立process 3回byte-identical rebuild
 - dedicated／focused／full unit／integration regression
 - deterministic artifact、Implementation Commit、Evidence Commit、attestationの分離
-- PH-D02B DoD、DG-00、DG-01、DG-02、DG-14、failed requirement count 0の証明
+- PH-D02C DoD、DG-03、DG-08、DG-09、DG-12、failed requirement count 0の証明
 
-PH-D02C Typed Causal IR／interpreter実行、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS仮説生成・蒸留実行、Rule promotion、
+PH-D03A Golden corpus、PH-D03B Sealed corpus、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS仮説生成・蒸留実行、Rule promotion、
 Bridge実装、AGI Runtime、P22改善、locked final、official、Kaggleへ進んではいけません。
 
-PH-D02B成果のImplementation Commit、Evidence Commit、attestationを分離してください。
+PH-D02C成果のImplementation Commit、Evidence Commit、attestationを分離してください。
 全gateがPASSした場合だけstanding authorizationをexact evidenceへ機械的にbindし、
-PH-D02C entryを記録してください。失敗または未証明gateを承認してはいけません。
+PH-D03A entryを記録してください。失敗または未証明gateを承認してはいけません。
 ```
 
 ---

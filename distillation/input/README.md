@@ -36,7 +36,7 @@ a trailing newline and fixes:
 The contract consumes only frozen manifest metadata and synthetic fixtures.
 It does not read a source payload or normalize a real trajectory.
 
-The current post-audit `PH-D02B` adds
+The Owner-approved post-audit `PH-D02B` adds
 `post_audit_schema_bundle_contract.json`. It is canonical JSON with the
 PH-D02A document boundary and fixes:
 
@@ -62,12 +62,19 @@ It is non-authoritative input only. The checked `schema_contract.json`
 contains later pre-audit PH-D02C refinements and is not the current D02B
 contract.
 
-The historical pre-audit `PH-D02C` candidate also adds
-`causal_ir_contract.json`. It binds the 18 common types,
-both exact opcode inventories, the type/registry/resource/ABI digests, stable
-error codes, and zero downstream activity. Its executable scope is restricted
-to synthetic typed programs; it is not teacher-data evidence or a causal
+The current post-audit `PH-D02C` adds
+`post_audit_causal_ir_schema_contract.json` and rebuilds
+`causal_ir_contract.json`. The first derives exactly 45 schemas from the
+approved PH-D02B set, changes exactly HypothesisIR and OperatorRegistry, and
+records both version migrations. The second binds the 18 common types, both
+exact opcode inventories, the type/registry/resource/ABI digests, stable error
+codes, and zero downstream activity. Its executable scope is restricted to
+synthetic typed programs; it is not teacher-data evidence or a causal
 mechanism assertion.
+
+`historical_pre_audit/PH-D02C/` preserves the 12 pre-audit schema and generated
+IR candidates byte-identically under a content-bound snapshot manifest. Those
+bytes are candidate input only and are not eligible for current activation.
 
 `PH-D03A` adds `golden_conformance_contract.json`. It fixes:
 

@@ -25,6 +25,7 @@ from arc3_agi_agent.rev3_governance import (
     REV3_PH_D01B_STATUS,
     REV3_PH_D02A_STATUS,
     REV3_PH_D02B_STATUS,
+    REV3_PH_D02C_STATUS,
     REV3_PH_R00_OWNER_AUTHORIZATION,
     REV3_PH_R00_STATUS,
     REV3_PH_R1_STATUS,
@@ -35,7 +36,7 @@ from arc3_agi_agent.rev3_governance import (
     audit_rev3_production_imports,
     require_rev3_production_selection,
 )
-from arc3_agi_agent.schema import digest_object
+from arc3_agi_agent.schema import canonical_json, digest_object
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 PACKAGE_ROOT = REPOSITORY_ROOT / "ARC-AGI-3-Agents"
@@ -67,6 +68,20 @@ def _bound(label: str) -> str:
     return label + ":" + hashlib.sha256(label.encode("utf-8")).hexdigest()
 
 
+def _logical_content_digest(
+    namespace: str,
+    body: dict[str, Any],
+) -> str:
+    payload = canonical_json(body).encode("utf-8")
+    digest = hashlib.sha256(
+        b"HDS-LOGICAL-CONTENT-V1\0"
+        + namespace.encode("ascii")
+        + b"\0"
+        + payload
+    ).hexdigest()
+    return namespace + ":" + digest
+
+
 def _valid_selection() -> Rev3ProductionSelection:
     return Rev3ProductionSelection(
         source_kind=DISTILLED_RUNTIME_SOURCE_KIND,
@@ -81,9 +96,9 @@ def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
     assert REV3_STRATEGY_STATUS == "OWNER_APPROVED"
     assert REV3_INSTALLATION_STATUS == "INSTALLED"
     assert REV3_CURRENT_WORK_CLASS == (
-        "PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND"
+        "PH-D02C_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_REBIND"
     )
-    assert REV3_ACTIVE_PHASE == "PH-D02B"
+    assert REV3_ACTIVE_PHASE == "PH-D02C"
     assert REV3_PH_R1_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_R00_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_R00_OWNER_AUTHORIZATION == "ESTABLISHED"
@@ -92,7 +107,8 @@ def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
     assert REV3_PH_D01A_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_D01B_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_D02A_STATUS == "OWNER_APPROVED_PASS"
-    assert REV3_PH_D02B_STATUS == "IN_PROGRESS"
+    assert REV3_PH_D02B_STATUS == "OWNER_APPROVED_PASS"
+    assert REV3_PH_D02C_STATUS == "IN_PROGRESS"
     assert REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS == "NOT_FROZEN"
     assert REV3_RUNTIME_ACTIVATION_STATUS == "SUSPEND"
     assert REV3_PHASE_ORDER[0] == "PH-R-1"
@@ -131,6 +147,7 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert selector["ph_d01b_status"] == REV3_PH_D01B_STATUS
     assert selector["ph_d02a_status"] == REV3_PH_D02A_STATUS
     assert selector["ph_d02b_status"] == REV3_PH_D02B_STATUS
+    assert selector["ph_d02c_status"] == REV3_PH_D02C_STATUS
     assert selector["distilled_initial_state_bundle_status"] == (
         REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS
     )
@@ -153,7 +170,7 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json" in (
         selector["historical_evidence"]["scope"]
     )
-    assert "distillation/input/post_audit_schema_bundle_contract.json" in (
+    assert "distillation/input/post_audit_causal_ir_schema_contract.json" in (
         selector["current_phase_candidates"]["paths"]
     )
     assert selector["current_phase_candidates"][
@@ -315,11 +332,11 @@ def test_ph_r1_schemas_reject_unbound_or_self_referential_state() -> None:
     ] == ["approval_artifact_digest"]
 
     selector_schema = _json(
-        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V10.json"
+        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V11.json"
     )
     assert selector_schema["additionalProperties"] is False
     assert selector_schema["properties"]["active_phase"]["const"] == (
-        "PH-D02B"
+        "PH-D02C"
     )
     assert selector_schema["properties"][
         "ph_r00_owner_authorization"
@@ -818,6 +835,8 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
         REPOSITORY_ROOT
         / "control"
         / "rev3"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D02C"
         / "PHASE_TRANSITIONS"
         / "PH-D02C_TO_PH-D03A.json"
     )
@@ -2320,16 +2339,20 @@ def test_current_d02b_entry_is_bound_to_approved_d02a_evidence() -> None:
     assert frame["resource_budget"]["owner_approval_generated_count"] == 0
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["schema_version"] == "arc3-rev3-current-selector-v10"
-    assert selector["active_phase"] == "PH-D02B"
+    assert selector["schema_version"] == "arc3-rev3-current-selector-v11"
+    assert selector["active_phase"] == "PH-D02C"
     assert selector["current_work_class"] == (
-        "PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND"
+        "PH-D02C_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_REBIND"
     )
     assert selector["ph_d02a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d02b_status"] == "IN_PROGRESS"
+    assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d02c_status"] == "IN_PROGRESS"
     assert selector["phase_entry_approval"][
         "approval_artifact_digest"
-    ] == approval["approval_artifact_digest"]
+    ] == (
+        "owner-approval-record:"
+        "9d738ff10ede2a4b509230a128edf2b527eb442df0181a0b50729e0d94d026b5"
+    )
 
     contract = _json(
         REPOSITORY_ROOT
@@ -2613,13 +2636,14 @@ def test_ph_d00b_entry_and_historical_migration_are_content_bound() -> None:
     assert all(value == 0 for value in frame["resource_budget"].values())
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["active_phase"] == "PH-D02B"
+    assert selector["active_phase"] == "PH-D02C"
     assert selector["ph_d00a_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d01a_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d01b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d02b_status"] == "IN_PROGRESS"
+    assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d02c_status"] == "IN_PROGRESS"
 
     historical_root = (
         control_root / "HISTORICAL_PRE_AUDIT" / "PH-D00B"
@@ -2679,137 +2703,133 @@ def test_ph_d00b_entry_and_historical_migration_are_content_bound() -> None:
         )
 
 
-def test_ph_d02c_phase_state_binds_typed_ir_result_and_boundaries() -> None:
-    state_path = (
-        REPOSITORY_ROOT / "control" / "rev3" / "D02C_PHASE_STATE.json"
+def test_current_d02c_entry_is_bound_to_approved_d02b_evidence() -> None:
+    control_root = REPOSITORY_ROOT / "control" / "rev3"
+    decision = _json(
+        control_root
+        / "OWNER_DECISION_CAPTURES"
+        / "PH-D02B_TO_PH-D02C_20260731.json"
     )
-    package_state_path = (
+    decision_body = dict(decision)
+    for excluded in decision["digest_excluded_fields"]:
+        decision_body.pop(str(excluded))
+    assert decision["owner_decision_content_digest"] == (
+        "sha256:" + digest_object(decision_body)
+    )
+
+    approval = _json(
+        control_root
+        / "OWNER_APPROVAL_RECORDS"
+        / "PH-D02B_TO_PH-D02C_20260731.json"
+    )
+    approval_body = dict(approval)
+    for excluded in approval["digest_excluded_fields"]:
+        approval_body.pop(str(excluded))
+    assert approval["approval_artifact_digest"] == (
+        "owner-approval-record:" + digest_object(approval_body)
+    )
+    assert approval["owner_decision_capture_digest"] == (
+        decision["owner_decision_content_digest"]
+    )
+    assert approval["target_evidence_commit"] == (
+        "6f84e29ded639ca9b23485c6dd5978d94d1a1cea"
+    )
+    assert approval["target_artifact_digest"] == (
+        "sha256:"
+        "ffb42d78bea52d7db9941979eea28e4c1b2fe431532bf32cf1ae8c8b32abb8d4"
+    )
+    assert approval["next_phase_id"] == "PH-D02C"
+    assert approval["next_phase_authorized"] is True
+
+    attestation = _json(control_root / "PH-D02B_EVIDENCE_ATTESTATION.json")
+    assert attestation["evidence_commit"] == approval["target_evidence_commit"]
+    assert attestation["evidence_payload_digest"] == (
+        approval["target_artifact_digest"]
+    )
+
+    transition = _json(
+        control_root / "PHASE_TRANSITIONS" / "PH-D02B_TO_PH-D02C.json"
+    )
+    transition_body = dict(transition)
+    for excluded in transition["digest_excluded_fields"]:
+        transition_body.pop(str(excluded))
+    assert transition["content_digest"] == (
+        "rev3-phase-transition:" + digest_object(transition_body)
+    )
+    assert transition["from_phase_id"] == "PH-D02B"
+    assert transition["to_phase_id"] == "PH-D02C"
+    assert transition["authorization_digest"] == (
+        approval["approval_artifact_digest"]
+    )
+    assert transition["from_phase_state_sha256"] == (
+        attestation["phase_state_sha256"]
+    )
+    assert transition["from_phase_evidence_commit"] == (
+        attestation["evidence_commit"]
+    )
+    assert transition["from_phase_evidence_tree"] == (
+        attestation["evidence_tree"]
+    )
+    assert transition["external_irreversible_action_authorized"] is False
+
+    frame = _json(control_root / "PH-D02C_WORK_BLOCK_FRAME.json")
+    frame_body = dict(frame)
+    for excluded in frame["digest_excluded_fields"]:
+        frame_body.pop(str(excluded))
+    assert frame["content_digest"] == (
+        "rev3-work-block-frame:" + digest_object(frame_body)
+    )
+    assert frame["phase_id"] == "PH-D02C"
+    assert frame["base_commit"] == (
+        "9c9cf5a9790fae341ad1be45506c88e7a7f34b58"
+    )
+    assert frame["base_tree"] == (
+        "e2b19714dd86bd2193a9531fdb65ece4bec0417c"
+    )
+    assert frame["resource_budget"]["required_common_type_count"] == 18
+    assert frame["resource_budget"]["required_arc2_opcode_count"] == 33
+    assert frame["resource_budget"]["required_arc3_opcode_count"] == 18
+    assert frame["resource_budget"]["changed_schema_count"] == 2
+    assert frame["resource_budget"]["derived_schema_set_total_count"] == 45
+    assert frame["resource_budget"]["rule_promotion_count"] == 0
+
+    selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
+    assert selector["schema_version"] == "arc3-rev3-current-selector-v11"
+    assert selector["active_phase"] == "PH-D02C"
+    assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d02c_status"] == "IN_PROGRESS"
+    assert selector["phase_entry_approval"]["approval_artifact_digest"] == (
+        approval["approval_artifact_digest"]
+    )
+
+
+def test_historical_d02c_control_artifacts_are_byte_identical() -> None:
+    source_commit = "9c9cf5a9790fae341ad1be45506c88e7a7f34b58"
+    historical_root = (
         REPOSITORY_ROOT
         / "control"
         / "rev3"
-        / "PH-D02C_OWNER_REVIEW_PACKAGE"
-        / "phase_state.json"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D02C"
     )
-    state = _json(state_path)
-    state_body = dict(state)
-    claimed = str(state_body.pop("content_digest"))
-
-    assert state == _json(package_state_path)
-    assert claimed == "rev3-d02c-phase-state:" + digest_object(state_body)
-    assert state["phase_id"] == "PH-D02C"
-    assert state["status"] == "CODEX_SELF_AUDIT_PASS"
-    assert state["result_commit"] == (
-        "fbb36321a7ece68e2692e0c3a81c323b431e87c9"
-    )
-    assert state["result_tree"] == (
-        "7300c53858f55f0c2ab4af9b523de77efcca0714"
-    )
-    assert state["owner_review_required"] is False
-    assert state["owner_decisions_required"] == []
-    assert state["failed_requirement_ids"] == []
-    assert state["open_terms"] == []
-    assert state["changed_files"] == sorted(state["changed_files"])
-    assert len(state["changed_files"]) == 30
-
-    invariants = state["phase_invariants"]
-    assert invariants["common_type_count"] == 18
-    assert invariants["arc2_opcode_count"] == 33
-    assert invariants["arc3_opcode_count"] == 18
-    assert invariants["total_domain_opcode_count"] == 51
-    assert invariants["operator_metadata_complete_count"] == 51
-    assert invariants["operator_type_resolution_count"] == 51
-    assert invariants["operator_test_vector_count"] == 51
-    assert invariants["valid_ir_vector_count"] == 51
-    assert invariants["valid_ir_vector_pass_count"] == 51
-    assert invariants["invalid_ir_vector_count"] == 15
-    assert invariants["invalid_ir_vector_pass_count"] == 15
-    assert invariants["schema_inventory_count"] == 38
-    assert invariants["refined_schema_count"] == 2
-    assert invariants["unchanged_schema_count"] == 36
-    assert invariants["typed_ir_fail_closed"] is True
-    assert invariants["unknown_opcode_fail_closed"] is True
-    assert invariants["type_mismatch_fail_closed"] is True
-    assert invariants["identity_routing_rejected"] is True
-    assert invariants["answer_copy_rejected"] is True
-    assert invariants["fixed_action_sequence_rejected"] is True
-    assert invariants["ordinary_operator_order_preserved"] is True
-    assert invariants["selector_zero_one_multiple_explicit"] is True
-    assert invariants["causal_overclaim_rejected"] is True
-    assert invariants["resource_overflow_suspends"] is True
-    assert invariants["synthetic_opcode_execution_count"] == 51
-    assert invariants["synthetic_intervention_execution_count"] == 1
-    assert invariants["real_intervention_execution_count"] == 0
-    assert invariants["causal_mechanism_assertion_count"] == 0
-    assert invariants["independent_process_rebuild_count"] == 3
-    assert invariants["deterministic_artifact_count"] == 51
-    assert invariants["deterministic_artifacts_byte_identical"] is True
-    assert invariants["scope_guard_finding_count"] == 0
-    assert invariants["frozen_d02a_artifact_unchanged_count"] == 8
-    assert invariants["source_payload_read_count"] == 0
-    assert invariants["source_execution_count"] == 0
-    assert invariants["real_trajectory_normalization_count"] == 0
-    assert invariants["ph_d02c_typed_causal_ir_started"] is True
-    assert invariants["interpreter_started"] is True
-    assert invariants["verifier_abi_started"] is True
-    assert invariants["golden_freeze_started"] is False
-    assert invariants["sealed_corpus_started"] is False
-    assert invariants["candidate_generation_started"] is False
-    assert invariants["rule_promotion_count"] == 0
-    assert invariants["owner_approval_generated_count"] == 0
-    assert invariants["official_access_count"] == 0
-    assert invariants["kaggle_mutation_count"] == 0
-    assert invariants["preexisting_dirty_file_count"] == 32
-    assert invariants["preexisting_dirty_aggregate_sha256"] == (
-        "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4"
-    )
-    assert invariants["next_phase"] == "PH-D03A"
-    assert invariants["next_phase_started"] is False
-
-    conformance = state["tests"][
-        "typed_causal_ir_contract_and_conformance"
+    pairs = [
+        (
+            "control/rev3/PH-D02C_WORK_BLOCK_FRAME.json",
+            historical_root / "PH-D02C_WORK_BLOCK_FRAME.json",
+        ),
+        (
+            "control/rev3/D02C_PHASE_STATE.json",
+            historical_root / "D02C_PHASE_STATE.json",
+        ),
+        (
+            "control/rev3/PHASE_TRANSITIONS/PH-D02C_TO_PH-D03A.json",
+            historical_root
+            / "PHASE_TRANSITIONS"
+            / "PH-D02C_TO_PH-D03A.json",
+        ),
     ]
-    assert conformance["gates"] == {
-        "DG-03": "PASS_TYPED_EXECUTABLE_IR_AND_STABLE_ERRORS",
-        "DG-08": "PASS_PRIVILEGED_ROUTING_REJECTED",
-        "DG-09": "PASS_PREDICTIVE_SCOPE_NO_CAUSAL_OVERCLAIM",
-        "DG-12": "PASS_RESOURCE_OVERFLOW_SUSPENDS",
-    }
-    assert state["tests"]["dedicated_causal_ir_and_schema"]["passed"] == 87
-    assert state["tests"]["distillation_full"]["passed"] == 219
-    assert state["tests"]["rev3_governance"]["passed"] == 24
-    assert state["tests"]["hds_dependency_audit"]["passed"] == 14
-    assert state["tests"]["full_unit"]["passed"] == 712
-    assert state["tests"]["integration"]["passed"] == 8
-    assert state["tests"]["artifact_rebuild"]["artifact_count"] == 51
-    assert state["tests"]["focused_distillation_rev3_evidence"][
-        "passed"
-    ] == 259
-    assert "PH_D02C_SYNTHETIC_TYPED_IR_PASS" in state["claim_allowed"]
-    assert "GOLDEN_CONFORMANCE_CORPUS_FROZEN" in (
-        state["claim_prohibited"]
-    )
-    assert "CAUSAL_MECHANISM_ESTABLISHED" in state["claim_prohibited"]
-    assert "HDS_STRUCTURE_BUNDLE_OWNER_APPROVED" in (
-        state["claim_prohibited"]
-    )
-
-    result_commit = str(state["result_commit"])
-    for artifact in state["artifacts"]:
-        assert _git_blob_sha256(
-            result_commit,
-            str(artifact["path"]),
-        ) == artifact["sha256"]
-
-
-def test_ph_d02c_owner_review_package_is_complete_and_claim_limited(
-) -> None:
-    package_root = (
-        REPOSITORY_ROOT
-        / "control"
-        / "rev3"
-        / "PH-D02C_OWNER_REVIEW_PACKAGE"
-    )
-    required = {
+    for package_name in (
+        "artifact_manifest.json",
         "changed_files.json",
         "commands.json",
         "failed_requirements.json",
@@ -2819,95 +2839,50 @@ def test_ph_d02c_owner_review_package_is_complete_and_claim_limited(
         "self_audit.json",
         "summary.md",
         "test_results.json",
-    }
-    assert required <= {
-        path.name for path in package_root.iterdir() if path.is_file()
-    }
-
-    failed = _json(package_root / "failed_requirements.json")
-    open_terms = _json(package_root / "open_terms.json")
-    self_audit = _json(package_root / "self_audit.json")
-    tests = _json(package_root / "test_results.json")
-    changed = _json(package_root / "changed_files.json")
-
-    assert failed["failed_requirement_count"] == 0
-    assert failed["failed_requirements"] == []
-    assert open_terms["open_terms"] == []
-    assert open_terms["owner_decisions"] == []
-    assert self_audit["decision"] == "CODEX_SELF_AUDIT_PASS"
-    assert self_audit["codex_self_audit_pass"] is True
-    assert tests["active_product_regression_count"] == 0
-    assert tests["active_environment_failure_count"] == 0
-    assert tests["active_external_service_failure_count"] == 0
-    assert tests["active_tool_failure_count"] == 0
-    assert tests["resolved_evidence_failure_count"] == 1
-    assert tests["resolved_tool_failure_count"] == 1
-    assert tests["non_gate_preexisting_style_baseline_count"] == 1
-    assert changed["changed_file_count"] == 30
-    assert changed["changed_files"] == sorted(changed["changed_files"])
-    assert changed["excluded_preexisting_dirty_state"]["mutation"] == "NONE"
-    assert changed["excluded_preexisting_dirty_state"]["staging"] == "NONE"
-
-    summary = (package_root / "summary.md").read_text(encoding="utf-8")
-    next_action = (package_root / "proposed_next_action.md").read_text(
-        encoding="utf-8"
-    )
-    assert "PH_D02C_SYNTHETIC_TYPED_IR_PASS" in summary
-    assert "not started" in summary
-    assert "Proceed to `PH-D03A`" in next_action
-    assert "does not let Codex fabricate Owner approval" in next_action
+    ):
+        pairs.append(
+            (
+                "control/rev3/PH-D02C_OWNER_REVIEW_PACKAGE/"
+                + package_name,
+                historical_root / "OWNER_REVIEW_PACKAGE" / package_name,
+            )
+        )
+    assert len(pairs) == 13
+    for source_path, destination in pairs:
+        assert destination.is_file()
+        assert _git_blob_sha256(source_commit, source_path) == _sha256(
+            destination
+        )
 
 
-def test_ph_d02c_artifact_manifest_binds_snapshot_bytes() -> None:
-    manifest = _json(
+def test_historical_d02c_ir_snapshot_is_content_bound() -> None:
+    snapshot = _json(
         REPOSITORY_ROOT
-        / "control"
-        / "rev3"
-        / "PH-D02C_OWNER_REVIEW_PACKAGE"
-        / "artifact_manifest.json"
+        / "distillation"
+        / "input"
+        / "historical_pre_audit"
+        / "PH-D02C"
+        / "SNAPSHOT_MANIFEST.json"
     )
-    body = dict(manifest)
-    for excluded in manifest["digest_excluded_fields"]:
-        body.pop(excluded)
-
-    assert manifest["content_digest"] == (
-        "rev3-d02c-owner-review-artifact-manifest:"
-        + digest_object(body)
+    body = dict(snapshot)
+    for excluded in snapshot["digest_excluded_fields"]:
+        body.pop(str(excluded))
+    assert snapshot["content_digest"] == _logical_content_digest(
+        "hds-ph-d02c-historical-snapshot",
+        body,
     )
-    assert manifest["content_digest"] == (
-        "rev3-d02c-owner-review-artifact-manifest:"
-        "8d1dce7eb8385d8e72fdc2b8fd7ee24b1bc45ff5c9c6c4208d18d74bc7cf0361"
+    assert snapshot["artifact_count"] == len(snapshot["artifacts"]) == 12
+    assert snapshot["source_commit"] == (
+        "9c9cf5a9790fae341ad1be45506c88e7a7f34b58"
     )
-    assert manifest["phase_id"] == "PH-D02C"
-    assert manifest["result_commit"] == (
-        "fbb36321a7ece68e2692e0c3a81c323b431e87c9"
-    )
-    assert manifest["result_tree"] == (
-        "7300c53858f55f0c2ab4af9b523de77efcca0714"
-    )
-    assert manifest["snapshot_commit"] == (
-        "c427376e34374a40f44334699fc1528c8b3dac9c"
-    )
-    assert manifest["snapshot_tree"] == (
-        "dc2e69a1fa53f6bf4e31c697d551342071e8ef8d"
-    )
-    assert manifest["manifest_excludes_self"] is True
-    assert manifest["artifact_count"] == len(manifest["artifacts"]) == 41
-    artifact_paths = [
-        str(artifact["path"]) for artifact in manifest["artifacts"]
-    ]
-    assert artifact_paths == sorted(artifact_paths)
-    assert len(artifact_paths) == len(set(artifact_paths))
-    assert (
-        "control/rev3/PH-D02C_OWNER_REVIEW_PACKAGE/artifact_manifest.json"
-        not in artifact_paths
-    )
-
-    snapshot_commit = str(manifest["snapshot_commit"])
-    for artifact in manifest["artifacts"]:
+    assert snapshot["eligible_for_current_activation"] is False
+    for artifact in snapshot["artifacts"]:
+        destination = REPOSITORY_ROOT / str(artifact["destination_path"])
+        assert destination.is_file()
+        assert _sha256(destination) == artifact["sha256"]
         assert _git_blob_sha256(
-            snapshot_commit,
-            str(artifact["path"]),
+            str(snapshot["source_commit"]),
+            str(artifact["source_path"]),
         ) == artifact["sha256"]
 
 
@@ -3165,14 +3140,15 @@ def test_current_d01a_source_inventory_and_provenance_are_content_bound() -> Non
         / "rev3"
         / "REV3_CURRENT_SELECTOR.json"
     )
-    assert selector["active_phase"] == "PH-D02B"
+    assert selector["active_phase"] == "PH-D02C"
     assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d01a_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d01b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d02b_status"] == "IN_PROGRESS"
+    assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d02c_status"] == "IN_PROGRESS"
     assert selector["phase_entry_approval"]["target_evidence_commit"] == (
-        "78aaf2a4f3bc00c5aa8ec66c6414b19ad6089dd3"
+        "6f84e29ded639ca9b23485c6dd5978d94d1a1cea"
     )
 
 
@@ -3280,13 +3256,14 @@ def test_d02a_entry_remains_bound_to_approved_d01b_evidence() -> None:
     assert transition["external_irreversible_action_authorized"] is False
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["active_phase"] == "PH-D02B"
+    assert selector["active_phase"] == "PH-D02C"
     assert selector["current_work_class"] == (
-        "PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND"
+        "PH-D02C_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_REBIND"
     )
     assert selector["ph_d01b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d02b_status"] == "IN_PROGRESS"
+    assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d02c_status"] == "IN_PROGRESS"
 
 
 def test_historical_d02a_control_artifacts_are_byte_identical() -> None:

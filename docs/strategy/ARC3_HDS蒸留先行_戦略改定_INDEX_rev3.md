@@ -3,9 +3,10 @@
 - Package status: `OWNER_APPROVED`
 - Installation status: `INSTALLED`
 - PH-R-1 status: `OWNER_APPROVED_PASS`
-- Current work class: `PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND`
-- Active phase: `PH-D02B`
-- `PH-D02B`: `IN_PROGRESS`
+- Current work class: `PH-D02C_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_REBIND`
+- Active phase: `PH-D02C`
+- `PH-D02C`: `IN_PROGRESS`
+- `PH-D02B`: `OWNER_APPROVED_PASS`
 - `PH-D02A`: `OWNER_APPROVED_PASS`
 - `PH-D01B`: `OWNER_APPROVED_PASS`
 - `PH-D01A`: `OWNER_APPROVED_PASS`
@@ -71,15 +72,17 @@ S5/P22 compiled policy = historical/quarantine
 
 既存成果物は削除しない。監査是正後のOwner承認とStrategy Installationは成立したが、監査前成果物を現在のPhase通過証拠またはactive selectorとして使用しない。
 
-## PH-D02A承認済み証拠とPH-D02B現行境界
+## PH-D02B承認済み証拠とPH-D02C現行境界
 
 - source-blind三roleは別process・別mount projectionで固定し、Executor/Auditorのenvironment source mountとrepository-root visibilityを0件として検証する。
 - 現行environment/run bindingにより監査前PH-D02B成果物3件が失効することを`distillation/artifacts/reports/ph_d01b_downstream_invalidation.json`へexact digest付きで記録する。
 - PH-D02Aではsynthetic test vector上のcanonical JSON／JSONL、ID／digest、ZIP／NPY／NPZ、raw／canonical trajectory digest型を再検証し、exact evidenceへOwner承認を拘束済みである。
 - 監査前PH-D02A control artifact 13件は`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/`へbyte-identicalに保持し、現行phase pass証拠には使用しない。
-- PH-D02Bでは38 HDS rev2 schemaと7 HDSStructureBundle schemaのexact 45-schema set、cross-file reference、dependency lock、bundle inventory、synthetic conformanceだけを実装・再検証する。
+- PH-D02Bでは38 HDS rev2 schemaと7 HDSStructureBundle schemaのexact 45-schema set、cross-file reference、dependency lock、bundle inventory、synthetic conformanceを実装・再検証し、exact evidenceへOwner承認を拘束済みである。
 - 監査前PH-D02B control artifact 13件は`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02B/`へbyte-identicalに保持し、監査前D02C-refined schema／interpreter候補とともに現行phase pass証拠へ使用しない。
-- PH-D02C Typed Causal IR／interpreter実行、real teacher trajectory normalization、HDS仮説生成、Rule promotion、Bridge、Runtimeは開始しない。
+- PH-D02Cでは承認済みPH-D02B schema setからversioned 45-schema setを派生し、Typed Causal IR、pure offline interpreter、verifier ABI、identity／answer-copy linter、resource suspension、synthetic conformanceだけを実装・再検証する。
+- 監査前PH-D02C control artifact 13件と生成IR candidate 12件は明示的historical namespaceへbyte-identicalに保持し、現行phase pass証拠へ使用しない。
+- PH-D03A Golden corpus、real teacher trajectory normalization、HDS仮説生成、Rule promotion、Bridge、Runtimeは開始しない。
 
 ## 機械可読契約
 
@@ -102,6 +105,8 @@ S5/P22 compiled policy = historical/quarantine
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V8.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V9.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V10.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V11.json`
+- `docs/strategy/contracts/POST_AUDIT_CAUSAL_IR_CONTRACT_V1.json`
 - `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 
 ## Codex

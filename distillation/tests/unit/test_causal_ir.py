@@ -110,9 +110,10 @@ def test_authority_type_and_opcode_inventories_are_exact() -> None:
 
 def test_abi_schema_digest_matches_checked_refinement_contract() -> None:
     contract = json.loads(
-        (REPOSITORY_ROOT / "distillation/input/schema_contract.json").read_text(
-            encoding="utf-8"
-        )
+        (
+            REPOSITORY_ROOT
+            / "distillation/input/post_audit_causal_ir_schema_contract.json"
+        ).read_text(encoding="utf-8")
     )
 
     assert contract["content_digest"] == IR_SCHEMA_CONTRACT_DIGEST
@@ -130,6 +131,7 @@ def test_abi_schema_digest_matches_checked_refinement_contract() -> None:
         ("Color", 10),
         ("Grid", [[1], [1, 2]]),
         ("CellSet", [[1, 0], [0, 0]]),
+        ("CellSet", ((0, 0),)),
         ("Region", {"top": 0, "left": 0, "height": 0, "width": 1}),
         (
             "ActionRecord",
@@ -245,10 +247,17 @@ def test_invalid_vector_set_fails_with_exact_stable_codes() -> None:
     [
         ("case_id", "IR_IDENTITY_ROUTING_FORBIDDEN"),
         ("game_id", "IR_IDENTITY_ROUTING_FORBIDDEN"),
+        ("level_id", "IR_IDENTITY_ROUTING_FORBIDDEN"),
+        ("task_id", "IR_IDENTITY_ROUTING_FORBIDDEN"),
+        ("replay_route", "IR_IDENTITY_ROUTING_FORBIDDEN"),
         ("source_filename", "IR_IDENTITY_ROUTING_FORBIDDEN"),
         ("full_input_digest_lookup", "IR_IDENTITY_ROUTING_FORBIDDEN"),
+        ("answer_grid", "IR_ANSWER_COPY_FORBIDDEN"),
+        ("full_answer_grid", "IR_ANSWER_COPY_FORBIDDEN"),
         ("full_answer_literal", "IR_ANSWER_COPY_FORBIDDEN"),
+        ("output_coordinate_table", "IR_ANSWER_COPY_FORBIDDEN"),
         ("output_coordinates", "IR_ANSWER_COPY_FORBIDDEN"),
+        ("fixed_action_sequence", "IR_ANSWER_COPY_FORBIDDEN"),
         ("successful_action_sequence", "IR_ANSWER_COPY_FORBIDDEN"),
     ],
 )
@@ -426,7 +435,7 @@ def test_three_independent_processes_rebuild_identical_artifacts(
         f"sys.path.insert(0,{source!r});"
         "from pathlib import Path;"
         "from hds_distill.verification import build_phase_d02c_artifacts;"
-        "a=build_phase_d02c_artifacts(Path('.'));"
+        f"a=build_phase_d02c_artifacts(Path({str(REPOSITORY_ROOT)!r}));"
         "print(json.dumps({k:hashlib.sha256(v).hexdigest() "
         "for k,v in a.items()},sort_keys=True))"
     )
@@ -452,7 +461,7 @@ def test_three_independent_processes_rebuild_identical_artifacts(
 def test_checked_d02c_artifacts_are_exact_rebuild_outputs() -> None:
     rebuilt = build_phase_d02c_artifacts(REPOSITORY_ROOT)
 
-    assert len(rebuilt) == 9
+    assert len(rebuilt) == 69
     for relative_path, expected in rebuilt.items():
         assert (REPOSITORY_ROOT / relative_path).read_bytes() == expected
 

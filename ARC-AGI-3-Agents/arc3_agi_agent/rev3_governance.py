@@ -1,11 +1,11 @@
 """Fail-closed governance boundary for the installed rev3 strategy.
 
 The 2026-07-31 audit classified the earlier rev3 phase evidence as historical
-and non-authoritative. PH-R00 through PH-D02A are Owner-approved; PH-D02B is
-authorized only for the post-audit 45-schema set, structure-bundle contract,
-and synthetic conformance. Historical S5/P22 capability paths remain
-forbidden as parents, active policies, or fallbacks. Phase entry alone never
-activates a runtime.
+and non-authoritative. PH-R00 through PH-D02B are Owner-approved; PH-D02C is
+authorized only for the post-audit Typed Causal IR, pure offline interpreter,
+verifier ABI, and synthetic conformance. Historical S5/P22 capability paths
+remain forbidden as parents, active policies, or fallbacks. Phase entry alone
+never activates a runtime.
 """
 
 from __future__ import annotations
@@ -19,9 +19,9 @@ REV3_STRATEGY_ID: Final = (
 REV3_STRATEGY_STATUS: Final = "OWNER_APPROVED"
 REV3_INSTALLATION_STATUS: Final = "INSTALLED"
 REV3_CURRENT_WORK_CLASS: Final = (
-    "PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND"
+    "PH-D02C_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_REBIND"
 )
-REV3_ACTIVE_PHASE: Final[str | None] = "PH-D02B"
+REV3_ACTIVE_PHASE: Final[str | None] = "PH-D02C"
 REV3_PH_R1_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_R00_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_R00_OWNER_AUTHORIZATION: Final = "ESTABLISHED"
@@ -30,7 +30,8 @@ REV3_PH_D00B_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_D01A_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_D01B_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_D02A_STATUS: Final = "OWNER_APPROVED_PASS"
-REV3_PH_D02B_STATUS: Final = "IN_PROGRESS"
+REV3_PH_D02B_STATUS: Final = "OWNER_APPROVED_PASS"
+REV3_PH_D02C_STATUS: Final = "IN_PROGRESS"
 REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS: Final = "NOT_FROZEN"
 REV3_RUNTIME_ACTIVATION_STATUS: Final = "SUSPEND"
 REV3_PHASE_ORDER: Final = (
@@ -232,6 +233,7 @@ __all__ = [
     "REV3_PH_D01B_STATUS",
     "REV3_PH_D02A_STATUS",
     "REV3_PH_D02B_STATUS",
+    "REV3_PH_D02C_STATUS",
     "REV3_PHASE_ORDER",
     "REV3_RUNTIME_ACTIVATION_STATUS",
     "REV3_STRATEGY_ID",

@@ -163,7 +163,7 @@ if tuple(TYPE_BY_NAME) != COMMON_TYPE_NAMES:
 
 
 def _sequence(value: object, detail: str) -> Sequence[object]:
-    if not isinstance(value, list | tuple):
+    if not isinstance(value, list):
         fail("IR_TYPE_ERROR", detail)
     return value
 

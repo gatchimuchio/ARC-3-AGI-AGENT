@@ -5,13 +5,14 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D02B` is the only active phase. PH-D02A is Owner-approved against exact
+`PH-D02C` is the only active phase. PH-D02B is Owner-approved against exact
 post-audit implementation and evidence commits. Existing pre-audit PH-D01A
 through PH-D03A phase records remain historical; colliding PH-D01B, PH-D02A,
-and PH-D02B control artifacts are preserved under
+PH-D02B, and PH-D02C control artifacts are preserved under
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/` and
-`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02B/`. They are not current
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02B/` and
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/`. They are not current
 phase-pass, promotion, or completion evidence.
 
 The Owner-approved `PH-D01A` rebind validates and hardens:
@@ -71,7 +72,7 @@ PH-D02A uses synthetic vectors only. It did not read or normalize real
 teacher trajectories, generate HDS hypotheses, or implement Bridge/Runtime
 capability.
 
-The current post-audit `PH-D02B` rebind adds the static schema and bundle
+The Owner-approved post-audit `PH-D02B` rebind adds the static schema and bundle
 record boundary:
 
 - exactly 38 authority-named HDS rev2 schemas plus exactly 7
@@ -95,16 +96,13 @@ record boundary:
 - deterministic schema conformance evidence for DG-00, DG-01, DG-02, and the
   schema-only portion of DG-14.
 
-The checked `distillation/schemas/`, `schema_registry.py`, `causal_ir.py`,
-`interpreter.py`, and their old conformance artifacts are pre-audit PH-D02C
-implementation candidates. They are retained for history but are not imported
-or accepted as current PH-D02B evidence.
-
-The historical pre-audit `PH-D02C` candidate adds a synthetic-only executable
-Causal IR boundary:
+The current post-audit `PH-D02C` rebind derives a synthetic-only executable
+Causal IR boundary from the approved PH-D02B schema set:
 
 - exactly 18 canonical JSON-native common types, 33 ARC2 opcodes, and 18 ARC3
   opcodes;
+- exactly 45 derived schemas, with 43 byte-identical to PH-D02B and explicit
+  version migrations only for HypothesisIR and OperatorRegistry;
 - complete, content-bound ARC2/ARC3 operator registries with explicit input,
   output, parameter, precondition, execution, invalid-operation,
   cardinality, resource, commutativity, and test-vector metadata;
@@ -122,6 +120,11 @@ Causal IR boundary:
   exact comparator, and a bounded synthetic intervention runner that emits no
   causal claim;
 - deterministic conformance evidence for DG-03, DG-08, DG-09, and DG-12.
+
+The 12 pre-audit schema/generated-IR candidates are preserved byte-identically
+under `input/historical_pre_audit/PH-D02C/`. They are revalidated input only,
+not current evidence. Current artifacts bind the approved PH-D02B evidence,
+the PH-D02C entry approval, and the current WorkBlockFrame.
 
 `PH-D03A` adds a non-authoritative Golden conformance candidate layer:
 
@@ -163,7 +166,9 @@ PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_post_audit_schema_bundle.py
 python scripts/build_ph_d02b_schema_bundle.py
 PYTHONPATH=distillation/src python -m pytest \
+  distillation/tests/unit/test_post_audit_causal_ir_schema.py \
   distillation/tests/unit/test_causal_ir.py
+python scripts/build_ph_d02c_causal_ir.py
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_golden_corpus.py
 PYTHONPATH=distillation/src python -m ruff check \

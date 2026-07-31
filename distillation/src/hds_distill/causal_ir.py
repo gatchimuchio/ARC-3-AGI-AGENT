@@ -29,18 +29,23 @@ from .operator_registry import (
     build_operator_registry,
     definition_by_opcode,
 )
+from .post_audit_causal_ir_schema import (
+    EXPECTED_SCHEMA_CONTRACT_DIGEST,
+    PH_D02B_CONTRACT_DIGEST,
+    PH_D02B_EVIDENCE_PAYLOAD_DIGEST,
+    PH_D02B_PHASE_STATE_SHA256,
+    PH_D02C_ENTRY_APPROVAL_DIGEST,
+    PH_D02C_FRAME_DIGEST,
+)
 
-EXECUTABLE_IR_VERSION: Final = "hds-executable-causal-ir-v1"
-INTERPRETER_VERSION: Final = "hds-causal-ir-interpreter-v1"
-IR_SCHEMA_VERSION: Final = "hds-causal-ir-v1"
-IR_CONTRACT_VERSION: Final = "hds-causal-ir-contract-v1"
-IR_ABI_VERSION: Final = "hds-code-ir-abi-v1"
+EXECUTABLE_IR_VERSION: Final = "hds-executable-causal-ir-v2"
+INTERPRETER_VERSION: Final = "hds-causal-ir-interpreter-v2"
+IR_SCHEMA_VERSION: Final = "hds-causal-ir-v2"
+IR_CONTRACT_VERSION: Final = "hds-causal-ir-contract-v2"
+IR_ABI_VERSION: Final = "hds-code-ir-abi-v2"
 RESOURCE_COST_MODEL_VERSION: Final = "hds-resource-cost-model-v1"
 DEFAULT_STEP_LIMIT: Final = 100_000
-IR_SCHEMA_CONTRACT_DIGEST: Final = (
-    "hds-schema-contract:"
-    "d0b7e0ebbe826a5c3b0b16eb1d28844ee9daa496a430a747a83e0157b0c0bd29"
-)
+IR_SCHEMA_CONTRACT_DIGEST: Final = EXPECTED_SCHEMA_CONTRACT_DIGEST
 
 SYNTHETIC_FRAME_REF: Final = (
     "hds-distillation-frame-id:"
@@ -655,22 +660,23 @@ def build_causal_ir_contract() -> JsonObject:
     abi_artifact = build_abi_artifact()
     contract: JsonObject = {
         "schema_version": IR_CONTRACT_VERSION,
-        "contract_id": "HDS-PH-D02C-CAUSAL-IR-CONTRACT-V1",
+        "contract_id": "HDS-PH-D02C-CAUSAL-IR-CONTRACT-V2",
         "phase_id": "PH-D02C",
         "authority": {
             "canonical_contract_digest": (
                 "hds-canonicalization-contract:"
-                "bd37cc6aa0f41021448a83358c9db409b3695cdf88b2eb6ab6eec0068c137257"
+                "8ef686f3e30c2c773dff47637c9bb0d57dbb175d4fc6b7bd1c46a7820cf4068f"
             ),
-            "schema_refinement_contract_digest": (IR_SCHEMA_CONTRACT_DIGEST),
-            "input_phase_state_digest": (
-                "rev3-d02b-phase-state:"
-                "3946f264bad10ffee665c8b378400a9630a57278bed173cdf5045249089082a2"
+            "ph_d02b_schema_contract_digest": PH_D02B_CONTRACT_DIGEST,
+            "ph_d02b_evidence_payload_digest": (
+                PH_D02B_EVIDENCE_PAYLOAD_DIGEST
             ),
-            "work_block_frame_digest": (
-                "rev3-work-block-frame:"
-                "36b29b707df9ea4b7f5337fb8483a17415392c84bdfc7d74cd4fb37c4306a42e"
+            "ph_d02b_phase_state_sha256": (
+                "sha256:" + PH_D02B_PHASE_STATE_SHA256
             ),
+            "ph_d02c_entry_approval_digest": PH_D02C_ENTRY_APPROVAL_DIGEST,
+            "schema_refinement_contract_digest": IR_SCHEMA_CONTRACT_DIGEST,
+            "work_block_frame_digest": PH_D02C_FRAME_DIGEST,
         },
         "gates": ["DG-03", "DG-08", "DG-09", "DG-12"],
         "type_system_digest": type_system["content_digest"],

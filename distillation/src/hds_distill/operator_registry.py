@@ -20,9 +20,9 @@ from .ir_types import (
 )
 
 OPCODE_VERSION: Final = "1.0.0"
-OPERATOR_REGISTRY_SCHEMA_VERSION: Final = "hds-operator-registry-v1"
-ARC2_REGISTRY_VERSION: Final = "hds-arc2-operator-registry-v1"
-ARC3_REGISTRY_VERSION: Final = "hds-arc3-operator-registry-v1"
+OPERATOR_REGISTRY_SCHEMA_VERSION: Final = "hds-operator-registry-v2"
+ARC2_REGISTRY_VERSION: Final = "hds-arc2-operator-registry-v2"
+ARC3_REGISTRY_VERSION: Final = "hds-arc3-operator-registry-v2"
 SYNTHETIC_DEPENDENCY_LOCK_REF: Final = (
     "hds-dependency-lock-id:"
     "e5efa35b6f3f5e5636352d778656f702108b0d9c3a66a18b6bf7708869ea8226"

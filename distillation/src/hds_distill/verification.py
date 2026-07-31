@@ -12,9 +12,10 @@ from .canonical import (
     DigestExclusionPolicy,
     JsonValue,
     canonical_json_bytes,
+    canonical_json_document_bytes,
     content_derived_id,
     logical_content_digest,
-    verify_canonical_json_bytes,
+    verify_canonical_json_document_bytes,
 )
 from .causal_ir import (
     DEFAULT_STEP_LIMIT,
@@ -40,6 +41,9 @@ from .operator_registry import (
     OpcodeDefinition,
     build_operator_registry,
     definition_by_opcode,
+)
+from .post_audit_causal_ir_schema import (
+    build_post_audit_causal_ir_schema_artifacts,
 )
 
 
@@ -450,7 +454,7 @@ def build_valid_ir_vector_artifact() -> JsonObject:
             }
         )
     artifact: JsonObject = {
-        "schema_version": "hds-valid-ir-vector-set-v1",
+        "schema_version": "hds-valid-ir-vector-set-v2",
         "vector_set_id": "",
         "phase_id": "PH-D02C",
         "synthetic_fixture_only": True,
@@ -632,7 +636,7 @@ def build_invalid_ir_vector_artifact() -> JsonObject:
         for name, expected, program in _build_invalid_programs()
     ]
     artifact: JsonObject = {
-        "schema_version": "hds-invalid-ir-vector-set-v1",
+        "schema_version": "hds-invalid-ir-vector-set-v2",
         "vector_set_id": "",
         "phase_id": "PH-D02C",
         "synthetic_fixture_only": True,
@@ -744,7 +748,7 @@ def build_causal_ir_conformance_report(
         fail("IR_CAUSAL_OVERCLAIM", "INTERVENTION_RESULT")
 
     report: JsonObject = {
-        "schema_version": "hds-causal-ir-conformance-report-v1",
+        "schema_version": "hds-causal-ir-conformance-report-v2",
         "report_id": "",
         "phase_id": "PH-D02C",
         "valid_vector_set_digest": valid_vectors["content_digest"],
@@ -801,7 +805,7 @@ def build_phase_d02c_artifacts(
 ) -> dict[str, bytes]:
     """Build every deterministic PH-D02C IR artifact in memory."""
 
-    del project_root
+    encoded = build_post_audit_causal_ir_schema_artifacts(project_root)
     valid_vectors = build_valid_ir_vector_artifact()
     invalid_vectors = build_invalid_ir_vector_artifact()
     conformance = build_causal_ir_conformance_report(
@@ -831,12 +835,16 @@ def build_phase_d02c_artifacts(
         ): invalid_vectors,
         "distillation/artifacts/reports/causal_ir_conformance.json": (conformance),
     }
-    encoded = {
-        path: canonical_json_bytes(value) for path, value in sorted(artifacts.items())
+    generated = {
+        path: canonical_json_document_bytes(value)
+        for path, value in sorted(artifacts.items())
     }
-    for payload in encoded.values():
-        verify_canonical_json_bytes(payload)
-    return encoded
+    if set(encoded) & set(generated):
+        fail("IR_INVALID_OPERATION", "D02C_ARTIFACT_PATH_COLLISION")
+    for payload in generated.values():
+        verify_canonical_json_document_bytes(payload)
+    encoded.update(generated)
+    return dict(sorted(encoded.items()))
 
 
 def write_phase_d02c_artifacts(project_root: Path) -> dict[str, str]:

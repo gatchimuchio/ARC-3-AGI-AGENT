@@ -1,0 +1,123 @@
+{
+  "schema_version": "arc3-post-audit-causal-ir-contract-v1",
+  "phase_owner": "PH-D02C",
+  "authority_binding": {
+    "ph_d02b_schema_bundle_contract_digest": "hds-post-audit-schema-bundle-contract:53a1ab5360575769156028999d9181643c06eff82a4ecd04abf138ceb137f052",
+    "ph_d02b_phase_state_sha256": "5d26a6c4fea0fbf7783db9ab9dc83e47a9d8aba6618494e5c2ea7f81c7823225",
+    "ph_d02b_evidence_payload_digest": "sha256:ffb42d78bea52d7db9941979eea28e4c1b2fe431532bf32cf1ae8c8b32abb8d4",
+    "ph_d02c_entry_approval_digest": "owner-approval-record:9d738ff10ede2a4b509230a128edf2b527eb442df0181a0b50729e0d94d026b5",
+    "ph_d02c_work_block_frame_digest": "rev3-work-block-frame:4f5c20ed2efc3b77e3128e3a0d296bf313ae0597cf72a2d8d2f9eafce9714275"
+  },
+  "schema_migration": {
+    "base_schema_set_version": "hds-post-audit-schema-set-v1",
+    "derived_schema_set_version": "hds-post-audit-causal-ir-schema-set-v1",
+    "base_schema_count": 45,
+    "derived_schema_count": 45,
+    "unchanged_schema_count": 43,
+    "changed_schema_count": 2,
+    "changed_schemas": {
+      "HypothesisIR": {
+        "from": "hds-causal-ir-v1",
+        "to": "hds-causal-ir-v2"
+      },
+      "OperatorRegistry": {
+        "from": "hds-operator-registry-v1",
+        "to": "hds-operator-registry-v2"
+      }
+    },
+    "approved_ph_d02b_schema_byte_changes": 0
+  },
+  "type_and_opcode_inventory": {
+    "common_type_count": 18,
+    "arc2_opcode_count": 33,
+    "arc3_opcode_count": 18,
+    "total_domain_opcode_count": 51,
+    "unknown_type_policy": "IR_TYPE_ERROR",
+    "unknown_opcode_policy": "IR_UNKNOWN_OPCODE",
+    "implicit_coercion_policy": "REJECT"
+  },
+  "operator_registry_entry_contract": {
+    "content_digest_required": true,
+    "repeated_input_types_allowed": true,
+    "closed_parameter_schema_required": true,
+    "test_vector_reference_required": true,
+    "commutativity_default": "ORDERED_NONCOMMUTATIVE",
+    "commutativity_exception_policy": "EXPLICIT_AND_SYMMETRIC_ONLY",
+    "operator_order_policy": "PRESERVE_DECLARED_ORDER"
+  },
+  "interpreter_contract": {
+    "execution_mode": "PURE_DETERMINISTIC_OFFLINE_REGISTERED_BUILTINS_ONLY",
+    "filesystem_access": false,
+    "network_access": false,
+    "subprocess_access": false,
+    "runtime_import_access": false,
+    "forward_reference_policy": "REJECT",
+    "selector_cardinality_policy": "EXPLICIT_NO_IMPLICIT_FIRST",
+    "invalid_operation_policy": "FAIL_WITH_STABLE_CODE",
+    "maximum_step_limit": 100000
+  },
+  "code_ir_abi_contract": {
+    "exact_version_and_digest_match_required": true,
+    "mismatch_policy": "IR_ABI_MISMATCH",
+    "bound_components": [
+      "ir_schema_contract_digest",
+      "type_system_digest",
+      "operator_registry_digest",
+      "resource_cost_model_digest",
+      "interpreter_version",
+      "abi_version"
+    ]
+  },
+  "privileged_information_linter": {
+    "recursive": true,
+    "identity_routing_policy": "REJECT",
+    "answer_copy_policy": "REJECT",
+    "forbidden_classes": [
+      "TASK_GAME_LEVEL_CASE_ID",
+      "SOURCE_OR_REPLAY_ROUTE",
+      "FULL_INPUT_DIGEST_LOOKUP",
+      "ANSWER_OR_OUTPUT_LITERAL",
+      "OUTPUT_COORDINATE_TABLE",
+      "FIXED_SUCCESSFUL_ACTION_SEQUENCE"
+    ]
+  },
+  "resource_contract": {
+    "overflow_status": "SUSPEND_RESOURCE",
+    "assertion_state": "SUSPEND",
+    "operation_state": "HOLD",
+    "evidence_state": "INCONCLUSIVE",
+    "hidden_fail_or_success": false
+  },
+  "verification_contract": {
+    "exact_comparator": "CANONICAL_EQUALITY_WITHOUT_REPAIR",
+    "intervention_scope": "BOUNDED_SYNTHETIC_INPUT_REPLACEMENT_ONLY",
+    "synthetic_intervention_causal_claim": null,
+    "valid_opcode_vector_count": 51,
+    "required_gates": [
+      "DG-03",
+      "DG-08",
+      "DG-09",
+      "DG-12"
+    ],
+    "independent_rebuild_process_count": 3
+  },
+  "phase_boundaries": {
+    "golden_candidate_construction_started": false,
+    "sealed_corpus_started": false,
+    "source_payload_read_count": 0,
+    "real_trajectory_normalization_count": 0,
+    "hds_hypothesis_generation_count": 0,
+    "real_intervention_execution_count": 0,
+    "causal_mechanism_assertion_count": 0,
+    "rule_promotion_count": 0,
+    "bridge_started": false,
+    "runtime_started": false,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "kaggle_mutation_count": 0
+  },
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-post-audit-causal-ir-contract:6a977868c187545497af92ee93afb6c398d33478945628f8173d27a085810b38"
+}
