@@ -18,6 +18,7 @@ from hds_distill.post_audit_causal_ir_schema import (
     EXPECTED_SCHEMA_CONTRACT_DIGEST,
     HISTORICAL_SOURCES,
     SCHEMA_VERSIONS,
+    PostAuditCausalIRSchemaRegistry,
     build_derived_schema_payloads,
     build_historical_snapshot_artifacts,
     build_post_audit_causal_ir_schema_artifacts,
@@ -80,6 +81,21 @@ def test_refined_schemas_validate_current_ir_and_registry() -> None:
     old_program["schema_version"] = "hds-causal-ir-v1"
     with pytest.raises(SchemaValidationError):
         validate_json_schema_instance(old_program, hypothesis_schema)
+
+
+def test_post_audit_registry_adapts_changed_schemas_only() -> None:
+    registry = PostAuditCausalIRSchemaRegistry.from_repository(
+        REPOSITORY_ROOT
+    )
+    definition = definitions_for_domain("ARC2")[0]
+    program = _build_one_opcode_program(definition)
+
+    validated = registry.validate_instance("HypothesisIR", program)
+    assert validated.primary_id == program["hypothesis_ir_id"]
+    old_program = cast(JsonObject, dict(program))
+    old_program["schema_version"] = "hds-causal-ir-v1"
+    with pytest.raises(SchemaValidationError, match="D02B_SCHEMA_CONST"):
+        registry.validate_instance("HypothesisIR", old_program)
 
 
 def test_historical_snapshot_is_exact_and_non_authoritative() -> None:

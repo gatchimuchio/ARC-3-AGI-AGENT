@@ -31,6 +31,9 @@ from .causal_ir import (
 )
 from .interpreter import execute_program
 from .ir_types import IRContractError, JsonObject
+from .post_audit_causal_ir_schema import (
+    PostAuditCausalIRSchemaRegistry,
+)
 from .schema_registry import (
     SchemaRegistry,
     SchemaValidationError,
@@ -1339,7 +1342,7 @@ def _verify_digest_only(
 
 
 def _validate_record(
-    registry: SchemaRegistry,
+    registry: SchemaRegistry | PostAuditCausalIRSchemaRegistry,
     schema_name: str,
     record: object,
 ) -> JsonObject:
@@ -1359,7 +1362,7 @@ def _validate_record(
 
 
 def _validate_case(
-    registry: SchemaRegistry,
+    registry: SchemaRegistry | PostAuditCausalIRSchemaRegistry,
     case: Mapping[str, JsonValue],
     spec: Mapping[str, object],
     resource_profile: Mapping[str, JsonValue],
@@ -1707,9 +1710,8 @@ def validate_golden_candidate_set(
         "D03A_CASE_ARTIFACT_MISSING",
         "resource_profile",
     )
-    registry = SchemaRegistry.from_directory(
-        project_root / "distillation/schemas",
-        project_root / "distillation/input/schema_contract.json",
+    registry = PostAuditCausalIRSchemaRegistry.from_repository(
+        project_root,
     )
     _validate_record(
         registry,

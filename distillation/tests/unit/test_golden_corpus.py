@@ -41,6 +41,7 @@ from hds_distill.ir_types import IRContractError, JsonObject
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 DISTILLATION_SOURCE = REPOSITORY_ROOT / "distillation" / "src"
+PH_D02C_ENTRY_BASE_COMMIT = "9c9cf5a9790fae341ad1be45506c88e7a7f34b58"
 
 
 @lru_cache(maxsize=1)
@@ -679,14 +680,31 @@ def test_coverage_and_review_validators_reject_authority_mutations() -> None:
         )
 
 
-def test_checked_artifact_bytes_match_deterministic_rebuild() -> None:
+def test_checked_pre_audit_artifacts_remain_historical_and_unpromoted() -> None:
     rebuilt = _encoded_artifacts()
 
     assert len(rebuilt) == 4
+    byte_distinct_paths: set[str] = set()
     for relative_path, payload in rebuilt.items():
-        assert (REPOSITORY_ROOT / relative_path).read_bytes() == payload
+        checked = (REPOSITORY_ROOT / relative_path).read_bytes()
+        historical = subprocess.run(
+            [
+                "git",
+                "show",
+                PH_D02C_ENTRY_BASE_COMMIT + ":" + relative_path,
+            ],
+            cwd=REPOSITORY_ROOT,
+            check=True,
+            capture_output=True,
+        ).stdout
+        assert checked == historical
+        if checked != payload:
+            byte_distinct_paths.add(relative_path)
         decoded = json.loads(payload)
         assert isinstance(decoded, dict)
+    assert set(rebuilt) - byte_distinct_paths == {
+        "distillation/input/golden_conformance_contract.json"
+    }
 
 
 def test_three_independent_processes_rebuild_identical_bytes(

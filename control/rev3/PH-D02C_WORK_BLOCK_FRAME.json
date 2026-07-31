@@ -2,11 +2,11 @@
   "schema_version": "arc3-rev3-work-block-frame-v2",
   "work_block_id": "WB-PH-D02C-POST-AUDIT-TYPED-CAUSAL-IR-REBIND-20260731",
   "phase_id": "PH-D02C",
-  "frame_revision": 2,
+  "frame_revision": 3,
   "status": "FRAME_LOCKED",
   "base_commit": "9c9cf5a9790fae341ad1be45506c88e7a7f34b58",
   "base_tree": "e2b19714dd86bd2193a9531fdb65ece4bec0417c",
-  "purpose": "Rebind PH-D02C to the exact Owner-approved post-audit PH-D02B evidence, preserve all pre-audit PH-D02C controls and generated IR artifacts as non-authoritative history, and implement a versioned Typed Causal IR, pure deterministic offline interpreter, verifier ABI, identity and answer-copy linter, explicit resource suspension, and synthetic conformance on a derived PH-D02C schema set without modifying the approved PH-D02B schema set or starting Golden or Sealed corpus work, real normalization, candidate generation, causal promotion, Bridge, Runtime, locked-final, official, or Kaggle work.",
+  "purpose": "Rebind PH-D02C to the exact Owner-approved post-audit PH-D02B evidence, preserve all pre-audit PH-D02C controls and generated IR artifacts as non-authoritative history, implement a versioned Typed Causal IR, pure deterministic offline interpreter, verifier ABI, identity and answer-copy linter, explicit resource suspension, and synthetic conformance on a derived PH-D02C schema set, and preserve dormant PH-D03A candidate regression compatibility through a schema-validation adapter without constructing or freezing Golden artifacts, modifying the approved PH-D02B schema set, or starting Sealed corpus work, real normalization, candidate generation, causal promotion, Bridge, Runtime, locked-final, official, or Kaggle work.",
   "X": "POST_AUDIT_TYPED_CAUSAL_IR_INTERPRETER_VERIFIER_ABI_BOUND_TO_APPROVED_PH_D02B_EVIDENCE",
   "R": [
     "evidence-commit:6f84e29ded639ca9b23485c6dd5978d94d1a1cea",
@@ -47,6 +47,7 @@
     "keep exact fit, local execution, and synthetic intervention results below causal establishment",
     "return SUSPEND_RESOURCE with assertion SUSPEND, operation HOLD, and evidence INCONCLUSIVE on resource exhaustion",
     "generate deterministic positive, per-opcode, invalid, ABI, identity, answer-copy, cardinality, resource, comparator, and synthetic intervention vectors and reports",
+    "route dormant PH-D03A candidate validation through the current PH-D02C schema adapter without generating, changing, approving, or freezing PH-D03A artifacts",
     "prove deterministic regeneration and exact-tree regressions without source payload, real trajectory, ARC environment, Golden expectation, or runtime execution"
   ],
   "non_goals": [
@@ -90,8 +91,10 @@
     "distillation/src/hds_distill/causal_ir.py",
     "distillation/src/hds_distill/interpreter.py",
     "distillation/src/hds_distill/verification.py",
+    "distillation/src/hds_distill/golden_corpus.py",
     "distillation/tests/unit/test_causal_ir.py",
     "distillation/tests/unit/test_post_audit_causal_ir_schema.py",
+    "distillation/tests/unit/test_golden_corpus.py",
     "distillation/artifacts/registries/**",
     "distillation/artifacts/test_vectors/causal_ir/**",
     "distillation/artifacts/reports/causal_ir_conformance.json",
@@ -231,5 +234,5 @@
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-work-block-frame:4f5c20ed2efc3b77e3128e3a0d296bf313ae0597cf72a2d8d2f9eafce9714275"
+  "content_digest": "rev3-work-block-frame:8cf0eda845829c194d2572934105b8b7a5d1d43f04b7798f6277033ab9cd32b4"
 }

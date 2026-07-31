@@ -2595,6 +2595,30 @@ def validate_repository(root: Path) -> dict[str, object]:
         != 51
     ):
         failures.append("ph_d02c_document_contract:INVENTORY_MISMATCH")
+    document_authority = ph_d02c_document_contract.get(
+        "authority_binding"
+    )
+    if not isinstance(document_authority, dict) or (
+        document_authority.get(
+            "ph_d02b_schema_bundle_contract_digest"
+        )
+        != ph_d02b_contract.get("content_digest")
+        or document_authority.get("ph_d02b_phase_state_sha256")
+        != ph_d02b_attestation.get("phase_state_sha256")
+        or document_authority.get(
+            "ph_d02b_evidence_payload_digest"
+        )
+        != ph_d02b_attestation.get("evidence_payload_digest")
+        or document_authority.get("ph_d02c_entry_approval_digest")
+        != ph_d02b_result_approval.get("approval_artifact_digest")
+        or document_authority.get(
+            "ph_d02c_work_block_frame_digest"
+        )
+        != ph_d02c_frame.get("content_digest")
+    ):
+        failures.append(
+            "ph_d02c_document_contract:AUTHORITY_BINDING_MISMATCH"
+        )
 
     ph_d02c_snapshot = _load_object(
         root, PH_D02C_SNAPSHOT_MANIFEST_PATH
@@ -2680,6 +2704,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         )
     )
     schema_entries = ph_d02c_schema_contract.get("schema_entries")
+    schema_authority = ph_d02c_schema_contract.get("authority")
     if (
         ph_d02c_schema_contract.get("phase_id") != "PH-D02C"
         or ph_d02c_schema_contract.get("base_schema_count") != 45
@@ -2730,6 +2755,21 @@ def validate_repository(root: Path) -> dict[str, object]:
                     "ph_d02c_schema_contract:SCHEMA_BYTES_MISMATCH:"
                     + str(item.get("name"))
                 )
+    if not isinstance(schema_authority, dict) or (
+        schema_authority.get("ph_d02b_contract_digest")
+        != ph_d02b_contract.get("content_digest")
+        or schema_authority.get("ph_d02b_phase_state_sha256")
+        != ph_d02b_attestation.get("phase_state_sha256")
+        or schema_authority.get("ph_d02b_evidence_payload_digest")
+        != ph_d02b_attestation.get("evidence_payload_digest")
+        or schema_authority.get("ph_d02c_entry_approval_digest")
+        != ph_d02b_result_approval.get("approval_artifact_digest")
+        or schema_authority.get("ph_d02c_work_block_frame_digest")
+        != ph_d02c_frame.get("content_digest")
+    ):
+        failures.append(
+            "ph_d02c_schema_contract:AUTHORITY_BINDING_MISMATCH"
+        )
 
     ph_d02c_ir_contract = _load_object(
         root, PH_D02C_CAUSAL_IR_CONTRACT_PATH
@@ -2749,6 +2789,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d02c_ir_contract",
         )
     )
+    ir_authority = ph_d02c_ir_contract.get("authority")
     if (
         ph_d02c_ir_contract.get("phase_id") != "PH-D02C"
         or len(ph_d02c_ir_contract.get("common_types", [])) != 18
@@ -2758,6 +2799,23 @@ def validate_repository(root: Path) -> dict[str, object]:
         != ["DG-03", "DG-08", "DG-09", "DG-12"]
     ):
         failures.append("ph_d02c_ir_contract:INVENTORY_MISMATCH")
+    if not isinstance(ir_authority, dict) or (
+        ir_authority.get("ph_d02b_schema_contract_digest")
+        != ph_d02b_contract.get("content_digest")
+        or ir_authority.get("ph_d02b_phase_state_sha256")
+        != "sha256:" + str(ph_d02b_attestation.get("phase_state_sha256"))
+        or ir_authority.get("ph_d02b_evidence_payload_digest")
+        != ph_d02b_attestation.get("evidence_payload_digest")
+        or ir_authority.get("ph_d02c_entry_approval_digest")
+        != ph_d02b_result_approval.get("approval_artifact_digest")
+        or ir_authority.get("schema_refinement_contract_digest")
+        != ph_d02c_schema_contract.get("content_digest")
+        or ir_authority.get("work_block_frame_digest")
+        != ph_d02c_frame.get("content_digest")
+    ):
+        failures.append(
+            "ph_d02c_ir_contract:AUTHORITY_BINDING_MISMATCH"
+        )
 
     ph_d02c_valid_vectors = _load_object(
         root, PH_D02C_VALID_VECTORS_PATH

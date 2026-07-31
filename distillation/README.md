@@ -156,6 +156,11 @@ approval, create a Bridge, agent, or runtime, access locked-final or official
 data, or create submission output. Historical runtime canonical helpers are
 not imported into the isolated distillation package.
 
+Its checked pre-audit artifacts remain byte-identical to the PH-D02C entry
+base and are not rewritten by the current D02C schema adapter. Current
+in-memory compatibility rebuilds are tested for determinism but intentionally
+remain unpromoted and byte-distinct from those historical checked artifacts.
+
 Use exactly Python 3.12.13. From the repository root:
 
 ```text
@@ -179,8 +184,8 @@ PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.schema_registry import build_phase_d02b_artifacts; expected=build_phase_d02b_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
 PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.verification import build_phase_d02c_artifacts; expected=build_phase_d02c_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
-PYTHONPATH=distillation/src python -c \
-  "from pathlib import Path; from hds_distill.golden_corpus import build_phase_d03a_candidate_artifacts; expected=build_phase_d03a_candidate_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
+PYTHONPATH=distillation/src python -m pytest \
+  distillation/tests/unit/test_golden_corpus.py::test_checked_pre_audit_artifacts_remain_historical_and_unpromoted
 python distillation/src/hds_distill/scope_guard.py \
   --project-root distillation \
   --repository-root . \

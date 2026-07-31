@@ -37,7 +37,7 @@
     "external_irreversible_actions": "EXCLUDED_REQUIRES_SEPARATE_EXPLICIT_EXECUTION_INSTRUCTION"
   },
   "current_work_block": {
-    "content_digest": "rev3-work-block-frame:4f5c20ed2efc3b77e3128e3a0d296bf313ae0597cf72a2d8d2f9eafce9714275",
+    "content_digest": "rev3-work-block-frame:8cf0eda845829c194d2572934105b8b7a5d1d43f04b7798f6277033ab9cd32b4",
     "entry_transition_digest": "rev3-phase-transition:67ea82d6fb4d006a2a0a9b58455aef6177889f1c4725df4f291ca55c03c4fa2e",
     "path": "control/rev3/PH-D02C_WORK_BLOCK_FRAME.json"
   },
@@ -139,7 +139,7 @@
     {
       "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
       "role": "GOVERNANCE_CONTRACT",
-      "sha256": "6ea720848ca1d0c0d3710e71fcd402373e76c49d2ffc2d7461927bcae47edb49"
+      "sha256": "a4c0a0508ea26e311c7da672a937531dc8ca1b88eb9755b41f2389c736115d7e"
     },
     {
       "path": "docs/strategy/contracts/HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json",
@@ -329,7 +329,7 @@
     {
       "path": "distillation/README.md",
       "role": "PH_D00B_DISTILLATION_NAMESPACE_README",
-      "sha256": "61a2c6f4af5cdda5bb879d2de43997084f361c83774f7fb0cd5bb8c458562760"
+      "sha256": "9d368bf0bb5ecd03caa42b2be722fa7dc0f6e6c339d817402cd96b587896cd6a"
     },
     {
       "path": "distillation/pyproject.toml",
@@ -374,7 +374,7 @@
     {
       "path": "distillation/artifacts/reports/distillation_scope_audit.json",
       "role": "CURRENT_DISTILLATION_SCOPE_AUDIT_REPORT",
-      "sha256": "5015b373a6843391f682d8350f59b49444b3097bdcff8b5a3030d305c128bcf9"
+      "sha256": "3ecaa92aa124f4cf65e5c41384bfa4dcf59ee5cb11bb29d1801cec590fd93a40"
     },
     {
       "path": "bridge/.gitkeep",
@@ -454,7 +454,7 @@
     {
       "path": "scripts/validate_rev3_governance.py",
       "role": "GOVERNANCE_TOOL",
-      "sha256": "beb930dfc5cb4ae3b4f2bd36aa51fa319dc0c56679e73f107e7e5d6dc1438ae3"
+      "sha256": "377ae984172361d10d7bfcefdab1f3a8edf3e30edd7bfd99a56f06c48db2f97b"
     },
     {
       "path": "scripts/audit_hds_dependencies.py",
@@ -1354,7 +1354,7 @@
     {
       "path": "control/rev3/PH-D02C_WORK_BLOCK_FRAME.json",
       "role": "CURRENT_WORK_BLOCK_FRAME",
-      "sha256": "3b0fd8896cc525e8dcef12b38fdd8b96eddc4d99f94981cf6d739a49e3914dcc"
+      "sha256": "1bdcdeb480307e5b72827a373e679208b44a4d0ff39cbb0b65bd5558ebc4b0cf"
     },
     {
       "path": "control/rev3/PHASE_TRANSITIONS/PH-D02B_TO_PH-D02C.json",
@@ -1394,7 +1394,7 @@
     {
       "path": "docs/strategy/contracts/POST_AUDIT_CAUSAL_IR_CONTRACT_V1.json",
       "role": "PH_D02C_NORMATIVE_CAUSAL_IR_CONTRACT",
-      "sha256": "92abfa19f3fd90c1cbbf993457947eb56d779d5db1043052b706451368509fb8"
+      "sha256": "c3cfcd6a923315659f343bc30f0341ad0100e11c4aec88337c6d9cb957596b31"
     },
     {
       "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V11.json",
@@ -1404,17 +1404,17 @@
     {
       "path": "distillation/input/post_audit_causal_ir_schema_contract.json",
       "role": "PH_D02C_POST_AUDIT_SCHEMA_CONTRACT",
-      "sha256": "99748fd7a66b7c641e049a73420a8a50c13ab565710131827c091903c585fa9d"
+      "sha256": "d0c6f849c2ee3214399932016b51eb3db86bf2a5d70ec9d8b55b35206540d953"
     },
     {
       "path": "distillation/input/causal_ir_contract.json",
       "role": "PH_D02C_EXECUTABLE_IR_CONTRACT",
-      "sha256": "828ffe540b131b2b434d03218ebea31d1fe723dcf7ffa2282d94e2f58ef0a161"
+      "sha256": "33cee304b4a4662cf3a681c19c97460e476ced5753d19e315fa16f1a78319d2e"
     },
     {
       "path": "distillation/src/hds_distill/post_audit_causal_ir_schema.py",
       "role": "PH_D02C_SCHEMA_DERIVER",
-      "sha256": "9181010d6189571c4924128077cf2fb027ac25b5b1b3b48a133b949b4f61b683"
+      "sha256": "d97fecffc0694e4cab7addb47d09481e2d2b67977c404205fb518549d2d721c8"
     },
     {
       "path": "distillation/src/hds_distill/ir_types.py",
@@ -1444,7 +1444,7 @@
     {
       "path": "distillation/tests/unit/test_post_audit_causal_ir_schema.py",
       "role": "PH_D02C_SCHEMA_TEST",
-      "sha256": "403c77bac1a9a03507a8e63e7d9786281b2ebf3c66095dbb79f206a7d8f1662a"
+      "sha256": "5e58cc9677d39ff0d68f160178ff33bf12920f6532d19cef4400600b4e033471"
     },
     {
       "path": "distillation/tests/unit/test_causal_ir.py",
@@ -1474,34 +1474,44 @@
     {
       "path": "distillation/artifacts/registries/code_ir_abi.json",
       "role": "PH_D02C_CODE_IR_ABI_ARTIFACT",
-      "sha256": "7f50c68ae045abbf789242f67c1532eced7154b8157e78e8a9b768a1ade3356a"
+      "sha256": "4f8924bbbb4dbaff910733f85ccec0dded3da5103750a3535b28a94ebb843705"
     },
     {
       "path": "distillation/artifacts/test_vectors/causal_ir/valid_ir_vectors.json",
       "role": "PH_D02C_VALID_IR_VECTORS",
-      "sha256": "68256df6e383f2f2372f3538e174190e5c3b25578f27f6de12967f5e6ec20048"
+      "sha256": "3b9388cb9cb395b33b1364d55421bfda54392047526c612c8bf00636abf5e25d"
     },
     {
       "path": "distillation/artifacts/test_vectors/causal_ir/invalid_ir_vectors.json",
       "role": "PH_D02C_INVALID_IR_VECTORS",
-      "sha256": "cf2e67df2775941ad690222468801154952838b6ab0dc4e5b20714b7b79eec85"
+      "sha256": "a97916922462d27719c4744b63980789b8ba9dadd81c0dfea132427713d67b0b"
     },
     {
       "path": "distillation/artifacts/reports/causal_ir_conformance.json",
       "role": "PH_D02C_CAUSAL_IR_CONFORMANCE",
-      "sha256": "825c98166596f6c0541e4044f737035fb419f3b7521d123792dd9783ba938a15"
+      "sha256": "95d57038cff9ca3d74b332aef3987b16c11cb999add927d2c7fbd7fff0f5b1b6"
     },
     {
       "path": "scripts/build_ph_d02c_causal_ir.py",
       "role": "PH_D02C_CAUSAL_IR_BUILDER",
       "sha256": "42e1aee49528b47890db038bf7c9ae751d2f05fe5613bc15720a4cb0a8075676"
+    },
+    {
+      "path": "distillation/src/hds_distill/golden_corpus.py",
+      "role": "PH_D02C_DORMANT_D03A_SCHEMA_ADAPTER_CONSUMER",
+      "sha256": "e7511225af0f2f3c71a0617c6d2a15e1cc396c33f56ef7c3df610ea2f8b0d930"
+    },
+    {
+      "path": "distillation/tests/unit/test_golden_corpus.py",
+      "role": "PH_D02C_DORMANT_D03A_HISTORICAL_BOUNDARY_TEST",
+      "sha256": "a5a95f4756f26a191c4dd1abba9472d1ab91e2181e6587cc133c28e442c45441"
     }
   ],
-  "entry_count": 289,
+  "entry_count": 291,
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-current-authority-manifest:7f4569fa4f3c0452423ccf4150b98853f51b9e75342c1ed633e575ada91bb3f6",
+  "content_digest": "rev3-current-authority-manifest:5d9e7b46fe546ca15feb21e67b0035d2a54ce750f699425d900b03f3bed6c583",
   "ph_d01b_status": "OWNER_APPROVED_PASS",
   "ph_d02a_status": "OWNER_APPROVED_PASS",
   "ph_d02b_status": "OWNER_APPROVED_PASS",

@@ -21,6 +21,7 @@ from .canonical import (
     DigestExclusionPolicy,
     JsonValue,
     canonical_json_document_bytes,
+    content_derived_id,
     logical_content_digest,
     verify_canonical_json_document_bytes,
 )
@@ -28,6 +29,12 @@ from .post_audit_schema_bundle import (
     BUNDLE_SCHEMA_NAMES,
     HDS_REV2_SCHEMA_NAMES,
     PostAuditSchemaRegistry,
+)
+from .schema_registry import (
+    SchemaRegistry,
+    SchemaValidationError,
+    ValidatedRecord,
+    validate_json_schema_instance,
 )
 
 type JsonObject = dict[str, JsonValue]
@@ -45,7 +52,7 @@ SCHEMA_CONTRACT_NAMESPACE: Final = (
 )
 EXPECTED_SCHEMA_CONTRACT_DIGEST: Final = (
     "hds-post-audit-causal-ir-schema-contract:"
-    "4805851d7be15d4817144af49f9a77e427a7c6156c34544886d31889a25e1c2e"
+    "8d4acb814448b2cba3dff39162a1191aaa490261247907151f9db0750a77b646"
 )
 
 PH_D02B_CONTRACT_DIGEST: Final = (
@@ -60,7 +67,7 @@ PH_D02B_PHASE_STATE_SHA256: Final = (
 )
 PH_D02C_FRAME_DIGEST: Final = (
     "rev3-work-block-frame:"
-    "4f5c20ed2efc3b77e3128e3a0d296bf313ae0597cf72a2d8d2f9eafce9714275"
+    "8cf0eda845829c194d2572934105b8b7a5d1d43f04b7798f6277033ab9cd32b4"
 )
 PH_D02C_ENTRY_APPROVAL_DIGEST: Final = (
     "owner-approval-record:"
@@ -165,6 +172,109 @@ HISTORICAL_SOURCES: Final = (
 
 class CausalIRSchemaError(ValueError):
     """Stable fail-closed error for PH-D02C schema derivation."""
+
+
+class PostAuditCausalIRSchemaRegistry:
+    """Validate D02C migrations while delegating unchanged records to D02B."""
+
+    _BINDINGS: Final = {
+        "HypothesisIR": (
+            "hypothesis_ir_id",
+            "hds-hypothesis-i-r-id",
+            "hds-hypothesis-ir",
+        ),
+        "OperatorRegistry": (
+            "operator_registry_id",
+            "hds-operator-registry-id",
+            "hds-operator-registry",
+        ),
+    }
+
+    def __init__(self, repository_root: Path) -> None:
+        self._base_registry = SchemaRegistry.from_directory(
+            repository_root / "distillation/schemas",
+            repository_root / "distillation/input/schema_contract.json",
+        )
+        payloads = build_derived_schema_payloads(repository_root)
+        self._changed_documents = {
+            name: _verify_schema_document_bytes(
+                payloads[
+                    cast(
+                        str,
+                        _entry_by_name(_base_contract(repository_root))[name][
+                            "filename"
+                        ],
+                    )
+                ]
+            )
+            for name in CHANGED_SCHEMAS
+        }
+
+    @classmethod
+    def from_repository(
+        cls,
+        repository_root: Path,
+    ) -> PostAuditCausalIRSchemaRegistry:
+        return cls(repository_root)
+
+    def validate_instance(
+        self,
+        schema_name: str,
+        instance: Mapping[str, JsonValue],
+    ) -> ValidatedRecord:
+        if schema_name not in self._changed_documents:
+            return self._base_registry.validate_instance(
+                schema_name,
+                instance,
+            )
+        copied = copy.deepcopy(dict(instance))
+        validate_json_schema_instance(
+            copied,
+            self._changed_documents[schema_name],
+        )
+        id_field, id_namespace, digest_namespace = self._BINDINGS[
+            schema_name
+        ]
+        primary_id = copied.get(id_field)
+        content_digest = copied.get("content_digest")
+        if not isinstance(primary_id, str):
+            raise SchemaValidationError(
+                "D02C_PRIMARY_ID_STRING_REQUIRED",
+                "/" + id_field,
+            )
+        if not isinstance(content_digest, str):
+            raise SchemaValidationError(
+                "D02C_CONTENT_DIGEST_STRING_REQUIRED",
+                "/content_digest",
+            )
+        policy = DigestExclusionPolicy(
+            id_fields=frozenset({id_field}),
+            digest_fields=frozenset({"content_digest"}),
+        )
+        if primary_id != content_derived_id(
+            id_namespace,
+            copied,
+            policy=policy,
+        ):
+            raise SchemaValidationError(
+                "D02C_CONTENT_ID_MISMATCH",
+                "/" + id_field,
+            )
+        if content_digest != logical_content_digest(
+            digest_namespace,
+            copied,
+            policy=policy,
+        ):
+            raise SchemaValidationError(
+                "D02C_CONTENT_DIGEST_MISMATCH",
+                "/content_digest",
+            )
+        return ValidatedRecord(
+            schema_name=schema_name,
+            instance=copied,
+            primary_id=primary_id,
+            content_digest=content_digest,
+        )
 
 
 def _fail(code: str, detail: str = "") -> None:
@@ -635,6 +745,7 @@ __all__ = [
     "DERIVED_CONTRACT_PATH",
     "DERIVED_SCHEMA_ROOT",
     "EXPECTED_SCHEMA_CONTRACT_DIGEST",
+    "PostAuditCausalIRSchemaRegistry",
     "SCHEMA_SET_VERSION",
     "SCHEMA_VERSIONS",
     "build_derived_schema_payloads",
