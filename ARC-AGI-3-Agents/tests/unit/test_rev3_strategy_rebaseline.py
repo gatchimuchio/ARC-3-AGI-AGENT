@@ -22,6 +22,7 @@ from arc3_agi_agent.rev3_governance import (
     REV3_PH_D00A_STATUS,
     REV3_PH_D00B_STATUS,
     REV3_PH_D01A_STATUS,
+    REV3_PH_D01B_STATUS,
     REV3_PH_R00_OWNER_AUTHORIZATION,
     REV3_PH_R00_STATUS,
     REV3_PH_R1_STATUS,
@@ -78,15 +79,17 @@ def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
     assert REV3_STRATEGY_STATUS == "OWNER_APPROVED"
     assert REV3_INSTALLATION_STATUS == "INSTALLED"
     assert REV3_CURRENT_WORK_CLASS == (
-        "PH-D01A_PRIMARY_SOURCE_INVENTORY_REBIND"
+        "PH-D01B_SOURCE_CONTENT_ACQUISITION_ENVIRONMENT_RUN_"
+        "AND_SOURCE_BLIND_REBIND"
     )
-    assert REV3_ACTIVE_PHASE == "PH-D01A"
+    assert REV3_ACTIVE_PHASE == "PH-D01B"
     assert REV3_PH_R1_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_R00_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_R00_OWNER_AUTHORIZATION == "ESTABLISHED"
     assert REV3_PH_D00A_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_D00B_STATUS == "OWNER_APPROVED_PASS"
-    assert REV3_PH_D01A_STATUS == "IN_PROGRESS"
+    assert REV3_PH_D01A_STATUS == "OWNER_APPROVED_PASS"
+    assert REV3_PH_D01B_STATUS == "IN_PROGRESS"
     assert REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS == "NOT_FROZEN"
     assert REV3_RUNTIME_ACTIVATION_STATUS == "SUSPEND"
     assert REV3_PHASE_ORDER[0] == "PH-R-1"
@@ -122,6 +125,7 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert selector["ph_d00a_status"] == REV3_PH_D00A_STATUS
     assert selector["ph_d00b_status"] == REV3_PH_D00B_STATUS
     assert selector["ph_d01a_status"] == REV3_PH_D01A_STATUS
+    assert selector["ph_d01b_status"] == REV3_PH_D01B_STATUS
     assert selector["distilled_initial_state_bundle_status"] == (
         REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS
     )
@@ -144,7 +148,7 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json" in (
         selector["historical_evidence"]["scope"]
     )
-    assert "distillation/artifacts/reports/primary_source_provenance.json" in (
+    assert "distillation/input/source_blind_execution_plan.json" in (
         selector["current_phase_candidates"]["paths"]
     )
     assert selector["current_phase_candidates"][
@@ -166,6 +170,15 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert governance["source_blind_roles"]["DISTILLATION_EXECUTOR"][
         "environment_source_mount"
     ] is False
+    assert governance["source_blind_execution_evidence"][
+        "record_digest"
+    ] == (
+        "hds-source-blind-execution-record:"
+        "c182c7951fdea0801983ac00567facc0ff212f1f8708b19d5892597164c6e55e"
+    )
+    assert governance["source_blind_execution_evidence"][
+        "same_process_source_access_then_candidate_generation_count"
+    ] == 0
 
     bundle = _json(
         contract_root / "HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json"
@@ -297,11 +310,11 @@ def test_ph_r1_schemas_reject_unbound_or_self_referential_state() -> None:
     ] == ["approval_artifact_digest"]
 
     selector_schema = _json(
-        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V7.json"
+        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V8.json"
     )
     assert selector_schema["additionalProperties"] is False
     assert selector_schema["properties"]["active_phase"]["const"] == (
-        "PH-D01A"
+        "PH-D01B"
     )
     assert selector_schema["properties"][
         "ph_r00_owner_authorization"
@@ -725,6 +738,8 @@ def test_authority_sources_are_byte_bound_and_missing_inputs_are_explicit(
         REPOSITORY_ROOT
         / "control"
         / "rev3"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01B"
         / "PHASE_TRANSITIONS"
         / "PH-D01B_TO_PH-D02A.json"
     )
@@ -1344,15 +1359,22 @@ def test_ph_d03a_validator_hardening_manifest_binds_snapshot_bytes(
         ) == artifact["sha256"]
 
 
-def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
+def test_historical_ph_d01b_phase_state_binds_old_result() -> None:
     state_path = (
-        REPOSITORY_ROOT / "control" / "rev3" / "D01B_PHASE_STATE.json"
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01B"
+        / "D01B_PHASE_STATE.json"
     )
     package_state_path = (
         REPOSITORY_ROOT
         / "control"
         / "rev3"
-        / "PH-D01B_OWNER_REVIEW_PACKAGE"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01B"
+        / "OWNER_REVIEW_PACKAGE"
         / "phase_state.json"
     )
     state = _json(state_path)
@@ -1427,13 +1449,15 @@ def test_ph_d01b_phase_state_binds_result_and_manifest_freeze() -> None:
             )
 
 
-def test_ph_d01b_owner_review_package_is_complete_and_claim_limited(
+def test_historical_ph_d01b_review_package_is_preserved(
 ) -> None:
     package_root = (
         REPOSITORY_ROOT
         / "control"
         / "rev3"
-        / "PH-D01B_OWNER_REVIEW_PACKAGE"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01B"
+        / "OWNER_REVIEW_PACKAGE"
     )
     required = {
         "changed_files.json",
@@ -1479,12 +1503,14 @@ def test_ph_d01b_owner_review_package_is_complete_and_claim_limited(
     assert "Do not enter PH-D02B" in next_action
 
 
-def test_ph_d01b_artifact_manifest_binds_snapshot_bytes() -> None:
+def test_historical_ph_d01b_artifact_manifest_binds_snapshot_bytes() -> None:
     manifest = _json(
         REPOSITORY_ROOT
         / "control"
         / "rev3"
-        / "PH-D01B_OWNER_REVIEW_PACKAGE"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01B"
+        / "OWNER_REVIEW_PACKAGE"
         / "artifact_manifest.json"
     )
     body = dict(manifest)
@@ -2357,10 +2383,11 @@ def test_ph_d00b_entry_and_historical_migration_are_content_bound() -> None:
     assert all(value == 0 for value in frame["resource_budget"].values())
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["active_phase"] == "PH-D01A"
+    assert selector["active_phase"] == "PH-D01B"
     assert selector["ph_d00a_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d01a_status"] == "IN_PROGRESS"
+    assert selector["ph_d01a_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d01b_status"] == "IN_PROGRESS"
 
     historical_root = (
         control_root / "HISTORICAL_PRE_AUDIT" / "PH-D00B"
@@ -2906,11 +2933,94 @@ def test_current_d01a_source_inventory_and_provenance_are_content_bound() -> Non
         / "rev3"
         / "REV3_CURRENT_SELECTOR.json"
     )
-    assert selector["active_phase"] == "PH-D01A"
+    assert selector["active_phase"] == "PH-D01B"
     assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d01a_status"] == "IN_PROGRESS"
+    assert selector["ph_d01a_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d01b_status"] == "IN_PROGRESS"
     assert selector["phase_entry_approval"]["target_evidence_commit"] == (
-        "bdcc41f15b456d3735744df35308b9d559eff64c"
+        "ac01fe04e94f97135e234962b19a509d55774485"
+    )
+
+
+def test_current_d01b_entry_and_source_blind_evidence_are_bound() -> None:
+    control_root = REPOSITORY_ROOT / "control" / "rev3"
+    frame = _json(control_root / "PH-D01B_WORK_BLOCK_FRAME.json")
+    frame_body = dict(frame)
+    for excluded in frame["digest_excluded_fields"]:
+        frame_body.pop(str(excluded))
+    assert frame["content_digest"] == (
+        "rev3-work-block-frame:" + digest_object(frame_body)
+    )
+    assert frame["content_digest"] == (
+        "rev3-work-block-frame:"
+        "174cbf1bd53ff888f86b5adf1a1d75acc7c344dbfa8569e575adb602ee01dd5b"
+    )
+    assert frame["phase_id"] == "PH-D01B"
+    assert frame["resource_budget"][
+        "local_source_blind_probe_process_count"
+    ] == 3
+    assert frame["resource_budget"]["source_payload_semantic_parse_count"] == 0
+    assert frame["resource_budget"]["teacher_replay_execution_count"] == 0
+
+    decision = _json(
+        control_root
+        / "OWNER_DECISION_CAPTURES"
+        / "PH-D01A_TO_PH-D01B_20260731.json"
+    )
+    decision_body = dict(decision)
+    for excluded in decision["digest_excluded_fields"]:
+        decision_body.pop(str(excluded))
+    assert decision["owner_decision_content_digest"] == (
+        "sha256:" + digest_object(decision_body)
+    )
+    approval = _json(
+        control_root
+        / "OWNER_APPROVAL_RECORDS"
+        / "PH-D01A_TO_PH-D01B_20260731.json"
+    )
+    approval_body = dict(approval)
+    for excluded in approval["digest_excluded_fields"]:
+        approval_body.pop(str(excluded))
+    assert approval["approval_artifact_digest"] == (
+        "owner-approval-record:" + digest_object(approval_body)
+    )
+    assert approval["target_evidence_commit"] == (
+        "ac01fe04e94f97135e234962b19a509d55774485"
+    )
+
+    transition = _json(
+        control_root / "PHASE_TRANSITIONS" / "PH-D01A_TO_PH-D01B.json"
+    )
+    transition_body = dict(transition)
+    for excluded in transition["digest_excluded_fields"]:
+        transition_body.pop(str(excluded))
+    assert transition["content_digest"] == (
+        "rev3-phase-transition:" + digest_object(transition_body)
+    )
+    assert transition["authorization_digest"] == (
+        approval["approval_artifact_digest"]
+    )
+    assert transition["from_phase_id"] == "PH-D01A"
+    assert transition["to_phase_id"] == "PH-D01B"
+    assert transition["external_irreversible_action_authorized"] is False
+
+    source_blind = _json(
+        REPOSITORY_ROOT
+        / "distillation"
+        / "artifacts"
+        / "reports"
+        / "source_blind_execution.json"
+    )
+    assertions = source_blind["separation_assertions"]
+    assert assertions["role_count"] == 3
+    assert assertions["distinct_process_identity_count"] == 3
+    assert assertions["distinct_checkout_projection_count"] == 3
+    assert assertions[
+        "same_process_source_access_then_candidate_generation_count"
+    ] == 0
+    assert assertions["source_blind_execution_contract_established"] is True
+    assert assertions["candidate_execution_status"] == (
+        "NOT_STARTED_PHASE_D01B"
     )
 
 

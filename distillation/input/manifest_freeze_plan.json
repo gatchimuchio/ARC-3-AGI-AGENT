@@ -1,7 +1,7 @@
 {
   "schema_version": "hds-manifest-freeze-plan-v1",
   "phase_id": "PH-D01B",
-  "frame_digest": "rev3-work-block-frame:e6a0ae08024950efd46c69a36a9390ac0fedde70aa2098e5a9731828c5881da1",
+  "frame_digest": "rev3-work-block-frame:174cbf1bd53ff888f86b5adf1a1d75acc7c344dbfa8569e575adb602ee01dd5b",
   "preinventory_digest": "rev3-ph-d01b-manifest-preinventory:be4ebff00ae62900cea26326cc9153481dc3660c588539dcefc53b1f28454ed3",
   "source_inventory": {
     "path": "distillation/artifacts/reports/source_inventory.json",
@@ -17,6 +17,12 @@
     "selected_row_count": 25,
     "selected_level_count": 183,
     "recording_filename_set_sha256": "721665417e5f0ac6a96723525f7664a3980deab6e97ee6a3aaae519690a3793e"
+  },
+  "source_blind_execution": {
+    "plan_path": "distillation/input/source_blind_execution_plan.json",
+    "plan_digest": "hds-source-blind-execution-plan:e832fc5847da096c3bc8167fde5a3ca5a56fed0b873c5a3f23d262cc659fbc2f",
+    "record_path": "distillation/artifacts/reports/source_blind_execution.json",
+    "record_digest": "hds-source-blind-execution-record:c182c7951fdea0801983ac00567facc0ff212f1f8708b19d5892597164c6e55e"
   },
   "distributions": [
     {
@@ -263,6 +269,7 @@
     "remote_recording_content_hash_count": 25,
     "huggingface_dataset_viewer_read_call_max_count": 128,
     "huggingface_dataset_viewer_transient_retry_max_count": 96,
+    "local_source_blind_probe_process_count": 3,
     "source_payload_semantic_parse_count": 0,
     "arc_environment_source_execution_count": 0,
     "teacher_replay_execution_count": 0,
@@ -281,7 +288,8 @@
     "run_manifest_count": 1,
     "raw_recording_verified_count": 25,
     "environment_archive_alias_verified_count": 50,
-    "runtime_wheel_verified_count": 2
+    "runtime_wheel_verified_count": 2,
+    "source_blind_execution_record_count": 1
   },
   "phase_boundaries": {
     "content_manifest_frozen": true,
@@ -298,5 +306,5 @@
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "hds-manifest-freeze-plan:9d4cc055ae4a74cc7f6add9417533ad41720f1f4fc2ffce8a9f9b88e02722bf5"
+  "content_digest": "hds-manifest-freeze-plan:8d3296823340ed4e4d584c7ec707181d5e0ae0168d21789bcfe895c17b7d6fbe"
 }

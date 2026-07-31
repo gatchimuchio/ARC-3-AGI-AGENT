@@ -5,15 +5,14 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D01A` is the only active phase. PH-D00B is Owner-approved against exact
+`PH-D01B` is the only active phase. PH-D01A is Owner-approved against exact
 post-audit implementation and evidence commits. Existing PH-D01A through
 PH-D03A phase records originated before the rev3 audit correction; colliding
-PH-D01A control artifacts are preserved under
-`control/rev3/HISTORICAL_PRE_AUDIT/PH-D01A/` and are not current phase-pass,
+PH-D01B control artifacts are preserved under
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and are not current phase-pass,
 promotion, or completion evidence.
 
-The pre-audit PH-D00B candidate fixed the repository and behavior boundary.
-The current `PH-D01A` rebind validates and hardens:
+The Owner-approved `PH-D01A` rebind validates and hardens:
 
 - a declarative source-admission plan;
 - eight strict ARC2/ARC3 SourceProfile documents;
@@ -30,7 +29,8 @@ The current `PH-D01A` rebind validates and hardens:
 - dedicated tests;
 - canonical scope-audit evidence.
 
-`PH-D01B` freezes the admitted byte identities and their execution context:
+The current `PH-D01B` rebind freezes the admitted byte identities and their
+execution context:
 
 - eight `SourceContentManifest` documents covering all 83 admitted sources;
 - eight separate `AcquisitionRecord` documents;
@@ -41,6 +41,11 @@ The current `PH-D01A` rebind validates and hardens:
   3.12.13, Windows/AMD64, installed distributions, seed/reset, and source
   non-mutation;
 - deterministic freeze and isolation reports.
+- separate process identities and checkout projections for the replay harness
+  maintainer, distillation executor, and distillation auditor;
+- Linux bubblewrap mount and network namespace evidence proving that the
+  executor and auditor do not receive the environment source tree or original
+  repository root.
 
 `PH-D02A` adds the common deterministic representation layer used by later
 distillation schemas:
@@ -157,6 +162,7 @@ PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.source_inventory import verify_primary_source_provenance_report; verify_primary_source_provenance_report(Path('distillation/artifacts/reports/primary_source_provenance.json'), Path('distillation'), repository_root=Path('.'))"
 PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.manifest_freeze import verify_manifest_freeze_artifacts; verify_manifest_freeze_artifacts(Path('distillation'), repository_root=Path('.'), distribution_paths={'arc-prize-2026-arc-agi-2.zip': Path('../Downloads/arc-prize-2026-arc-agi-2.zip'), 'arc-prize-2026-arc-agi-3.zip': Path('../Downloads/arc-prize-2026-arc-agi-3.zip')})"
+python scripts/verify_source_blind_execution.py --verify-report
 ```
 
 On this checkout, validation uses

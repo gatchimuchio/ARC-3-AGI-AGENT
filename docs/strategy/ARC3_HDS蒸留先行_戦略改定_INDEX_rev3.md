@@ -3,9 +3,10 @@
 - Package status: `OWNER_APPROVED`
 - Installation status: `INSTALLED`
 - PH-R-1 status: `OWNER_APPROVED_PASS`
-- Current work class: `PH-D01A_PRIMARY_SOURCE_INVENTORY_REBIND`
-- Active phase: `PH-D01A`
-- `PH-D01A`: `IN_PROGRESS`
+- Current work class: `PH-D01B_SOURCE_CONTENT_ACQUISITION_ENVIRONMENT_RUN_AND_SOURCE_BLIND_REBIND`
+- Active phase: `PH-D01B`
+- `PH-D01B`: `IN_PROGRESS`
+- `PH-D01A`: `OWNER_APPROVED_PASS`
 - `PH-D00B`: `OWNER_APPROVED_PASS`
 - `PH-D00A`: `OWNER_APPROVED_PASS`
 - `PH-R00`: `OWNER_APPROVED_PASS`
@@ -84,6 +85,9 @@ S5/P22 compiled policy = historical/quarantine
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V4.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V5.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V6.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V7.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V8.json`
 - `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 
 ## Codex

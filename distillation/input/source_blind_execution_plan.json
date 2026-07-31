@@ -1,0 +1,158 @@
+{
+  "schema_version": "hds-source-blind-execution-plan-v1",
+  "phase_id": "PH-D01B",
+  "frame_digest": "rev3-work-block-frame:174cbf1bd53ff888f86b5adf1a1d75acc7c344dbfa8569e575adb602ee01dd5b",
+  "enforcement_backend": "BUBBLEWRAP_USER_MOUNT_NETWORK_NAMESPACE",
+  "bubblewrap": {
+    "path": "/usr/bin/bwrap",
+    "sha256": "0abea81db798ebf6b4742ac0664802d97521547a353c2a0dbdc21d76cbbfd2c0"
+  },
+  "probe_tool": {
+    "path": "scripts/verify_source_blind_execution.py",
+    "sha256": "dc414a353800845057010694ac09bc7de616cfae0f384f13b1f829b6f1669f19"
+  },
+  "roles": [
+    {
+      "role_id": "DISTILLATION_AUDITOR",
+      "process_identity": "hds-source-blind-process-identity:638ef71fbe6420545aa84418b5ce83de221908a353b303a123e7d693e26a6e15",
+      "checkout_projection_digest": "hds-source-blind-checkout-projection:6a5aa70904a63d10c9635b1f266e93b4c04eb75bcd3a40071172e8ea6d5a9408",
+      "mount_allowlist": [
+        {
+          "target": "/evidence/primary_source_provenance.json",
+          "source_path": "distillation/artifacts/reports/primary_source_provenance.json",
+          "source_digest": "hds-primary-source-provenance-report:5f874b46a83e47407f3caf92be5cab1f3c3214a9e1b4c3ea0d9b412b55ef94e9",
+          "access": "READ_ONLY"
+        },
+        {
+          "target": "/evidence/source_inventory.json",
+          "source_path": "distillation/artifacts/reports/source_inventory.json",
+          "source_digest": "hds-source-inventory-report:ca27293b57737c743020ad19e063b08cd75d0d0c6d6571e67c6b5934c9f67d79",
+          "access": "READ_ONLY"
+        }
+      ],
+      "allowed_input_roles": [
+        "ACCESS_LEDGER",
+        "ARTIFACT_DIGEST",
+        "PROCESS_MANIFEST"
+      ],
+      "environment_source_access": false,
+      "environment_source_mount": false,
+      "hypothesis_generation": false,
+      "source_access_count": 0,
+      "candidate_generation_count": 0
+    },
+    {
+      "role_id": "DISTILLATION_EXECUTOR",
+      "process_identity": "hds-source-blind-process-identity:fd13b00efab74a6b4c0c5a75a5e7124ecdb5b562ba3bdf36ea2724c06e5528e7",
+      "checkout_projection_digest": "hds-source-blind-checkout-projection:a6fa1b76bfbd7c39ec4dc0db5623987f050338f569304e2b9fdc59686a779cfc",
+      "mount_allowlist": [
+        {
+          "target": "/inputs/arc3-raw-teacher-recordings.json",
+          "source_path": "distillation/manifests/source_content/arc3-raw-teacher-recordings.json",
+          "source_digest": "hds-source-content-manifest:3098feb7241e4ea3444b5942ab8ba0371d8168a51f32a1f3d44c0e09db36eda9",
+          "access": "READ_ONLY"
+        },
+        {
+          "target": "/inputs/raw_recording_content_capture.json",
+          "source_path": "distillation/input/raw_recording_content_capture.json",
+          "source_digest": "hds-raw-recording-content-capture:9a5c78c26c730115a3f694947318da732eba0b36841bebef07099f95a945ff24",
+          "access": "READ_ONLY"
+        }
+      ],
+      "allowed_input_roles": [
+        "FROZEN_RECORDING",
+        "OBSERVABLE_API"
+      ],
+      "environment_source_access": false,
+      "environment_source_mount": false,
+      "hypothesis_generation": true,
+      "source_access_count": 0,
+      "candidate_generation_count": 0
+    },
+    {
+      "role_id": "REPLAY_HARNESS_MAINTAINER",
+      "process_identity": "hds-source-blind-process-identity:84ddc8f9f160ea006314a3c794e47b5b967d103f91f7962f8cf6c3d32fb966a2",
+      "checkout_projection_digest": "hds-source-blind-checkout-projection:0781d939178cf407b8148a89108d6a76774bae22600a2fce6430820e66dd7ba9",
+      "mount_allowlist": [
+        {
+          "target": "/source/environment_files",
+          "source_path": "environment_files",
+          "source_digest": "hds-directory-merkle-v1:1b574ca53167e25e3cea5ce562ecba1eb8bc1830e232a1e2e28877b91879dfeb",
+          "access": "READ_ONLY"
+        }
+      ],
+      "allowed_input_roles": [
+        "ENVIRONMENT_SOURCE",
+        "REPLAY_HARNESS"
+      ],
+      "environment_source_access": true,
+      "environment_source_mount": true,
+      "hypothesis_generation": false,
+      "source_access_count": 50,
+      "candidate_generation_count": 0
+    }
+  ],
+  "access_ledger": [
+    {
+      "event_id": "PH-D01B-ACCESS-001",
+      "role_id": "REPLAY_HARNESS_MAINTAINER",
+      "operation": "BYTE_HASH",
+      "source_kind": "ARC3_ENVIRONMENT_SOURCE",
+      "access_count": 50,
+      "outcome": "ALLOWED_BY_ROLE_CONTRACT"
+    },
+    {
+      "event_id": "PH-D01B-ACCESS-002",
+      "role_id": "REPLAY_HARNESS_MAINTAINER",
+      "operation": "HYPOTHESIS_GENERATION",
+      "source_kind": "NONE",
+      "access_count": 0,
+      "outcome": "ALLOWED_BY_ROLE_CONTRACT"
+    },
+    {
+      "event_id": "PH-D01B-ACCESS-003",
+      "role_id": "DISTILLATION_EXECUTOR",
+      "operation": "ENVIRONMENT_SOURCE_READ",
+      "source_kind": "ARC3_ENVIRONMENT_SOURCE",
+      "access_count": 0,
+      "outcome": "ALLOWED_BY_ROLE_CONTRACT"
+    },
+    {
+      "event_id": "PH-D01B-ACCESS-004",
+      "role_id": "DISTILLATION_EXECUTOR",
+      "operation": "CANDIDATE_GENERATION",
+      "source_kind": "FROZEN_RECORDING",
+      "access_count": 0,
+      "outcome": "ALLOWED_BY_ROLE_CONTRACT"
+    },
+    {
+      "event_id": "PH-D01B-ACCESS-005",
+      "role_id": "DISTILLATION_AUDITOR",
+      "operation": "ENVIRONMENT_SOURCE_READ",
+      "source_kind": "ARC3_ENVIRONMENT_SOURCE",
+      "access_count": 0,
+      "outcome": "ALLOWED_BY_ROLE_CONTRACT"
+    },
+    {
+      "event_id": "PH-D01B-ACCESS-006",
+      "role_id": "DISTILLATION_AUDITOR",
+      "operation": "REPORT_DIGEST_READ",
+      "source_kind": "GOVERNANCE_EVIDENCE",
+      "access_count": 2,
+      "outcome": "ALLOWED_BY_ROLE_CONTRACT"
+    }
+  ],
+  "phase_boundaries": {
+    "candidate_generation_started": false,
+    "hds_hypothesis_generation_started": false,
+    "trajectory_normalization_started": false,
+    "bridge_started": false,
+    "runtime_started": false,
+    "official_access_count": 0,
+    "kaggle_mutation_count": 0
+  },
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "hds-source-blind-execution-plan:e832fc5847da096c3bc8167fde5a3ca5a56fed0b873c5a3f23d262cc659fbc2f"
+}

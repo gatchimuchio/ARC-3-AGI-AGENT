@@ -716,7 +716,23 @@ def test_isolation_and_phase_boundaries_remain_zero(
     assert isolation["source_payload_semantic_parse_count"] == 0
     assert isolation["source_execution_count"] == 0
     assert isolation["teacher_replay_execution_count"] == 0
-    assert isolation["os_source_mount_read_only_enforced"] is False
+    assert isolation["os_source_mount_read_only_enforced"] is True
+    assert isolation["os_source_mount_enforcement_scope"] == (
+        "ROLE_PROJECTION_PROBE"
+    )
+    assert isolation["source_blind_probe_process_count"] == 3
+    assert isolation["source_blind_role_count"] == 3
+    assert (
+        isolation["source_blind_execution_contract_established"] is True
+    )
+    assert (
+        isolation[
+            "same_process_source_access_then_candidate_generation_count"
+        ]
+        == 0
+    )
+    assert report["source_blind_execution_contract_established"] is True
+    assert report["accounting"]["source_blind_execution_record_count"] == 1
     assert isolation["source_snapshot_before"] == (
         isolation["source_snapshot_after"]
     )

@@ -22,6 +22,13 @@ from datetime import datetime
 from pathlib import Path, PurePosixPath
 from typing import Final, cast
 
+from hds_distill.source_blind_execution import (
+    artifact_bytes as source_blind_artifact_bytes,
+)
+from hds_distill.source_blind_execution import (
+    load_source_blind_execution_plan,
+    validate_source_blind_execution_record,
+)
 from hds_distill.source_inventory import (
     ANSWER_VISIBILITIES,
     CONTAMINATION_CLASSES,
@@ -68,6 +75,7 @@ PLAN_FIELDS: Final = frozenset(
         "preinventory_digest",
         "source_inventory",
         "raw_recording_capture",
+        "source_blind_execution",
         "distributions",
         "profile_bindings",
         "acquisition_records",
@@ -952,6 +960,56 @@ def _load_plan(project_root: Path) -> JsonObject:
     return plan
 
 
+def _load_source_blind_execution(
+    project_root: Path,
+    plan: Mapping[str, JsonValue],
+) -> JsonObject:
+    binding = _object(
+        plan["source_blind_execution"],
+        "D01B_SOURCE_BLIND_BINDING",
+    )
+    _strict_fields(
+        binding,
+        frozenset(
+            {
+                "plan_path",
+                "plan_digest",
+                "record_path",
+                "record_digest",
+            }
+        ),
+        "D01B_SOURCE_BLIND_BINDING",
+    )
+    source_blind_plan_path = (
+        project_root.parent
+        / _normalized_relative_posix_path(
+            binding["plan_path"],
+            "D01B_SOURCE_BLIND_PLAN_PATH",
+        )
+    )
+    source_blind_plan = load_source_blind_execution_plan(
+        source_blind_plan_path
+    )
+    if source_blind_plan["content_digest"] != binding["plan_digest"]:
+        raise ManifestFreezeError("D01B_SOURCE_BLIND_PLAN_DIGEST_MISMATCH")
+    record_path = (
+        project_root.parent
+        / _normalized_relative_posix_path(
+            binding["record_path"],
+            "D01B_SOURCE_BLIND_RECORD_PATH",
+        )
+    )
+    record = _read_json(record_path, "D01B_SOURCE_BLIND_RECORD")
+    validate_source_blind_execution_record(record, source_blind_plan)
+    if record["content_digest"] != binding["record_digest"]:
+        raise ManifestFreezeError(
+            "D01B_SOURCE_BLIND_RECORD_DIGEST_MISMATCH"
+        )
+    if record_path.read_bytes() != source_blind_artifact_bytes(record):
+        raise ManifestFreezeError("D01B_SOURCE_BLIND_RECORD_NONCANONICAL")
+    return record
+
+
 def _load_capture(
     project_root: Path,
     plan: Mapping[str, JsonValue],
@@ -1187,6 +1245,7 @@ def _load_capture(
             "remote_recording_content_hash_count",
             "huggingface_dataset_viewer_read_call_max_count",
             "huggingface_dataset_viewer_transient_retry_max_count",
+            "local_source_blind_probe_process_count",
             "source_payload_semantic_parse_count",
             "arc_environment_source_execution_count",
             "teacher_replay_execution_count",
@@ -1236,6 +1295,13 @@ def _load_capture(
             raise ManifestFreezeError(
                 "D01B_RESOURCE_ZERO_BOUNDARY:" + zero_field
             )
+    if _integer(
+        budget["local_source_blind_probe_process_count"],
+        "D01B_SOURCE_BLIND_PROBE_PROCESS_COUNT",
+    ) != 3:
+        raise ManifestFreezeError(
+            "D01B_SOURCE_BLIND_PROBE_PROCESS_COUNT_INVALID"
+        )
     return capture
 
 
@@ -1574,6 +1640,7 @@ def _build_isolation_report(
     post_snapshot: str,
     capture: Mapping[str, JsonValue],
     plan: Mapping[str, JsonValue],
+    source_blind_execution: Mapping[str, JsonValue],
 ) -> JsonObject:
     if pre_snapshot != post_snapshot:
         raise ManifestFreezeError("D01B_SOURCE_INPUT_MUTATION")
@@ -1594,6 +1661,7 @@ def _build_isolation_report(
         "source_execution_count": 0,
         "teacher_replay_execution_count": 0,
         "compiler_network_call_count": 0,
+        "current_rebind_network_call_count": 0,
         "external_capture_network_scope": (
             "PINNED_HUGGINGFACE_DATASET_READ_ONLY"
         ),
@@ -1613,15 +1681,27 @@ def _build_isolation_report(
         ),
         "secret_value_access_count": 0,
         "subprocess_execution_count": 0,
+        "source_blind_probe_process_count": 3,
         "filesystem_write_allowlist": [
             "distillation/manifests/**",
             "distillation/artifacts/reports/**",
         ],
-        "os_source_mount_read_only_enforced": False,
+        "os_source_mount_read_only_enforced": True,
+        "os_source_mount_enforcement_scope": "ROLE_PROJECTION_PROBE",
+        "manifest_compiler_source_nonmutation_verified": True,
+        "source_blind_execution_record_digest": (
+            source_blind_execution["content_digest"]
+        ),
+        "source_blind_role_count": 3,
+        "source_blind_execution_contract_established": True,
+        "distillation_executor_environment_source_mount_count": 0,
+        "distillation_auditor_environment_source_mount_count": 0,
+        "same_process_source_access_then_candidate_generation_count": 0,
         "source_read_only_contract_pass": True,
         "scope_limit": (
-            "Manifest compilation non-mutation and read-only API evidence "
-            "only; later replay-sandbox mount enforcement is not claimed."
+            "Manifest compilation non-mutation plus OS-enforced role "
+            "projection evidence only; candidate execution, hypothesis "
+            "generation, and replay are not claimed."
         ),
         "gates": {
             "DG-00": "PASS",
@@ -1910,6 +1990,7 @@ def _expected_accounting(
             "raw_recording_verified_count",
             "environment_archive_alias_verified_count",
             "runtime_wheel_verified_count",
+            "source_blind_execution_record_count",
         }
     )
     _strict_fields(expected, required, "D01B_EXPECTED_ACCOUNTING")
@@ -1928,6 +2009,10 @@ def build_manifest_freeze(
     repository_root = repository_root.resolve()
     plan = _load_plan(project_root)
     capture = _load_capture(project_root, plan)
+    source_blind_execution = _load_source_blind_execution(
+        project_root,
+        plan,
+    )
     source_inventory_binding = _object(
         plan["source_inventory"],
         "D01B_SOURCE_INVENTORY_BINDING",
@@ -2115,6 +2200,7 @@ def build_manifest_freeze(
             post_snapshot=post_snapshot,
             capture=capture,
             plan=plan,
+            source_blind_execution=source_blind_execution,
         )
         acquisitions = _build_acquisition_records(
             plan,
@@ -2168,6 +2254,7 @@ def build_manifest_freeze(
                 "D01B_RUNTIME_WHEELS",
             )
         ),
+        "source_blind_execution_record_count": 1,
     }
     if actual_accounting != expected:
         raise ManifestFreezeError(
@@ -2240,6 +2327,9 @@ def build_manifest_freeze(
             "run_digest": run_manifest["run_digest"],
         },
         "isolation_report_digest": isolation_report["content_digest"],
+        "source_blind_execution_record_digest": (
+            source_blind_execution["content_digest"]
+        ),
         "accounting": actual_accounting,
         "input_snapshot_before": pre_snapshot,
         "input_snapshot_after": post_snapshot,
@@ -2247,6 +2337,7 @@ def build_manifest_freeze(
         "source_mutation_invalidates_downstream": True,
         "environment_binding_complete": True,
         "source_read_only_contract_pass": True,
+        "source_blind_execution_contract_established": True,
         "gates": {
             "DG-00": "PASS",
             "DG-06": "PASS",
