@@ -1,0 +1,116 @@
+{
+  "schema_version": "arc3-ph-d03b-test-results-v1",
+  "phase_id": "PH-D03B",
+  "implementation_commit": "bb9c5b4d60decb887f2645c8a4cef33183c30919",
+  "implementation_tree": "94914a7a33c2141fa90f70f4ecb29f03f143c758",
+  "results": [
+    {
+      "suite": "EXACT_TREE",
+      "standalone_clone_count": 1,
+      "tracked_diff_finding_count": 0,
+      "protected_change_count": 0,
+      "outside_frame_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_DISTILLATION",
+      "duration_seconds": 462.73,
+      "passed": 327,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_UNIT",
+      "duration_seconds": 592.86,
+      "passed": 738,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_INTEGRATION",
+      "duration_seconds": 601.04,
+      "passed": 8,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "SEALED_AUDIT_CORPUS",
+      "corpus_version": "ph-d03b-v1",
+      "expected_commitment_count": 16,
+      "unique_commitment_count": 16,
+      "source_artifact_count": 7,
+      "checked_artifact_count": 5,
+      "expected_plaintext_stored_count": 0,
+      "actual_audit_consumption_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "STATUS_ONLY_ONE_USE_RUNNER",
+      "allowed_stdout_values": [
+        "FAIL",
+        "PASS"
+      ],
+      "first_valid_attempt_consumes": true,
+      "failed_attempt_consumes": true,
+      "reuse_returns_fail": true,
+      "external_ledger_required": true,
+      "status": "PASS"
+    },
+    {
+      "suite": "SEALED_ARTIFACT_REBUILD",
+      "independent_process_count": 3,
+      "artifact_count_per_process": 5,
+      "byte_identical": true,
+      "git_clean_after_rebuild": true,
+      "status": "PASS"
+    },
+    {
+      "suite": "GATE_OBLIGATIONS",
+      "behaviorally_recomputed_gate_count": 2,
+      "DG-06": "PASS",
+      "DG-14": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "GOVERNANCE_VALIDATOR",
+      "check_count": 74,
+      "failure_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "AUTHORITY_MANIFEST",
+      "entry_count": 366,
+      "changed_entry_count": 0,
+      "content_digest": "rev3-current-authority-manifest:f92c397d5411c75b6fae2bc480f71d6bd090c25fecf7151d30f6ee8c4d10dc84",
+      "status": "PASS"
+    },
+    {
+      "suite": "SCOPE_GUARD",
+      "finding_count": 0,
+      "content_digest": "hds-distillation-scope-audit:3487f0924baaa6f37a27b1796978102d875854ec3fc080baacbe42479c4282b1",
+      "status": "PASS"
+    },
+    {
+      "suite": "STATIC_VALIDATION",
+      "changed_path_ruff": "PASS",
+      "mypy_strict": "PASS",
+      "py_compile": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "RESOURCE_BOUNDARY",
+      "source_payload_semantic_parse_count": 0,
+      "teacher_trajectory_read_count": 0,
+      "real_trajectory_normalization_count": 0,
+      "real_intervention_execution_count": 0,
+      "rule_promotion_count": 0,
+      "bridge_runtime_capability_count": 0,
+      "official_access_count": 0,
+      "network_submission_count": 0,
+      "kaggle_mutation_count": 0,
+      "status": "PASS"
+    }
+  ],
+  "failed_suite_count": 0,
+  "evidence_payload_digest": "sha256:88a5fe85e322640315e3121e0bfd150c96fa05e8119fcdd21b5e391abb9b6e55"
+}

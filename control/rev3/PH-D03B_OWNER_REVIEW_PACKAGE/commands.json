@@ -1,0 +1,93 @@
+{
+  "schema_version": "arc3-ph-d03b-command-evidence-v1",
+  "phase_id": "PH-D03B",
+  "commands": [
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests on standalone exact implementation clone",
+      "result": "327 passed in 462.73s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/unit on standalone exact implementation clone",
+      "result": "738 passed in 592.86s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/integration on standalone exact implementation clone",
+      "result": "8 passed in 601.04s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/build_ph_d03b_sealed_audit.py",
+      "result": "5 artifacts; 16 commitments; 7 source bindings; 0 plaintext; 0 actual audit consumption; byte-identical rebuild; no tracked diff",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/validate_rev3_governance.py",
+      "result": "74 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/refresh_rev3_authority_manifest.py --check",
+      "result": "366 entries, 0 changes",
+      "status": "PASS"
+    },
+    {
+      "command": "scope_guard.py --verify-report",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; 0 findings",
+      "status": "PASS"
+    },
+    {
+      "command": "ruff on all PH-D03B changed Python sources and tests",
+      "result": "All checks passed",
+      "status": "PASS"
+    },
+    {
+      "command": "strict mypy on distillation/src and distillation/tests",
+      "result": "Success: no issues found in 28 source files",
+      "status": "PASS"
+    },
+    {
+      "command": "py_compile on all PH-D03B changed Python sources and tests",
+      "result": "PASS",
+      "status": "PASS"
+    },
+    {
+      "command": "Git exact-tree, WorkBlockFrame, protected-dirty, and final-clean audit",
+      "result": "0 outside Frame; exact clone clean; protected 32-file digest unchanged",
+      "status": "PASS"
+    }
+  ],
+  "resolved_attempts": [
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "The first standalone clone was nested below an extra temporary parent, so legacy manifest-freeze tests resolved their required sibling Downloads archives to a nonexistent directory and produced 315 passed, 1 failed, and 11 setup errors.",
+      "resolution": "Moved the unchanged exact clone to the same parent depth as the authority repository, reverified commit and tree, and reran the full suite to 327 passed.",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "Windows pytest could not use the default temporary directory and a first custom basetemp attempt lacked its parent directory.",
+      "resolution": "Created a repository-local ignored .codex-tmp parent and used explicit unique basetemp paths for all authoritative reruns.",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "PRODUCT_REGRESSION",
+      "finding": "The authority manifest became stale after the last sealed-audit test additions and correctly failed one governance regression.",
+      "resolution": "Regenerated the manifest through the canonical refresh tool, verified the sole changed entry, and reran all 738 unit tests to PASS.",
+      "status": "RESOLVED"
+    }
+  ],
+  "preexisting_out_of_frame_findings": [
+    {
+      "classification": "PRODUCT_REGRESSION",
+      "finding": "Repository-wide Ruff reports one pre-existing import-order finding in distillation/tests/unit/test_golden_corpus.py.",
+      "current_phase_impact": "NONE; the file predates the PH-D03B base and is outside the locked PH-D03B write frame. All PH-D03B changed Python paths pass Ruff.",
+      "status": "DEFERRED_TO_AUTHORIZED_FRAME"
+    }
+  ],
+  "active_current_phase_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "active_evidence_failure_count": 0,
+  "evidence_payload_digest": "sha256:88a5fe85e322640315e3121e0bfd150c96fa05e8119fcdd21b5e391abb9b6e55"
+}
