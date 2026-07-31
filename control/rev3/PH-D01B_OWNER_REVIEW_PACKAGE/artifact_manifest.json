@@ -1,0 +1,560 @@
+{
+  "schema_version": "arc3-ph-d01b-evidence-payload-manifest-v2",
+  "phase_id": "PH-D01B",
+  "work_block_id": "WB-PH-D01B-SOURCE-MANIFEST-AND-SOURCE-BLIND-REBIND-20260731",
+  "base_commit": "c8d652c68a78568a3592705e67104297e8f66ac9",
+  "base_tree": "e9573f4394fd3a6bd2065b48c34d35d98c72d58c",
+  "implementation_commit": "259c8d62bcb8d99875e4f77252ed5aa3cde745b1",
+  "implementation_tree": "84619821ff089181f58d3f315b567ae2f8935299",
+  "payload_digest_method": "SHA256_OF_THIS_FILE_BYTES_WITH_FINAL_LF",
+  "manifest_excludes_self": true,
+  "frame": {
+    "path": "control/rev3/PH-D01B_WORK_BLOCK_FRAME.json",
+    "content_digest": "rev3-work-block-frame:1b25b4b9aba92fe42b4abf47214397f05752f217ab6ec7cfeb3da846da58717e",
+    "sha256": "01032eb07f91e575f53516df0400d5f6cc79e090c7a84950bce52b6b3024c7e8"
+  },
+  "authority_manifest": {
+    "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "content_digest": "rev3-current-authority-manifest:64503b54e528cb0650d56de0bbc5e86832aec8df440ae3238adc3193e82257cc",
+    "sha256": "7957a82d18dac905431dd47281765b5f5d509bcb591f3d5d79eb60785005cf90"
+  },
+  "artifacts": [
+    {
+      "path": "AGENTS.md",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "037c186c9079b0a52dc860e9b97c6130a42dccf5eeb20cb35b436c46ff5793ad"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "60682891dc5ce6a9ac7de58daf39bc3b02095a90aec4825bf1a8ba0efddae554"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "a426f7d8efa9280ba5ffd95bcc44e6febfc88c2b8fd461a9c6b36dd6305bbf6f"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "642c4811f29d4f9519a1313111e89743d9cff203428f6bb4b165e5033b03141e"
+    },
+    {
+      "path": "analysis/rev3/ph_d01b_manifest_preinventory.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "a6dd8e587a2505cbd571047e7cbd4e96d27c8ba0bf36efbc3704982c971a9826",
+      "content_digest": "rev3-ph-d01b-manifest-preinventory:be4ebff00ae62900cea26326cc9153481dc3660c588539dcefc53b1f28454ed3"
+    },
+    {
+      "path": "artifacts/reports/dependency_audit.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "254f230d8320a1b8444dbbc8c35863b1b27942260169dbd6205fe78cb5a68b56",
+      "content_digest": "hds-dependency-audit-report:7c1540a1c23d39e9d1db4b7156caeb5313283fa62ef0678d83ce383d2768770e"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/D01B_PHASE_STATE.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "0f871d15bf141937aede564ea8e66c5c442bc109a2237cf824ada0fce48c2b7c",
+      "content_digest": "rev3-d01b-phase-state:68eea37dcce3d09d1e21b1a43ef5d92b091f1960ee5fffb42507c07e0fe25220"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "e6d82f8b19be70ba0d95034414af1f5117824ea5a9ae5015391aa946b099446e",
+      "content_digest": "rev3-d01b-owner-review-artifact-manifest:71bb9d735a0b608ded78397e8d1620e0140aa7e27de000df7117ab12ca3069a8"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/changed_files.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "3cfe29f8373355069a5dca2782279c321f75aa32cbc853a52eb2a7ecb455b3a3"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/commands.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "31a790d3305c37a56e11fa9250654eca77abd9860cf1160df3419b1466da1ab8"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/failed_requirements.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "a483199380d21ab8df68351f84b35e5090f14253448f8ad0e3154fc9ab3f7e97"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/open_terms.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "64cf272b7e61cd5d98ec60600a92ffe56b12f2c990005c4ceb2ae070db8299cb"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/phase_state.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "0f871d15bf141937aede564ea8e66c5c442bc109a2237cf824ada0fce48c2b7c",
+      "content_digest": "rev3-d01b-phase-state:68eea37dcce3d09d1e21b1a43ef5d92b091f1960ee5fffb42507c07e0fe25220"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "706082a037e2ebcefbde1d56e496d75070f02e749e0966ddab8338ea9c4c79ec"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/self_audit.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "5ab1ce2149a92286dc55193226844fb422e2c613470d7fc4956eb05fc9cdbfb1"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/summary.md",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "2c4440f5719857650d88c576dd5f0b7c728536fa71e46b322b978fb0c33ca2ce"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/OWNER_REVIEW_PACKAGE/test_results.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "916a69f269778caed34dff8696eb29e53e93eee4d168c15e43af59c54e3f2254"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/PH-D01B_WORK_BLOCK_FRAME.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "2587611167d4b5d2975aa91cbc723a44b5774411deac0a767ca9a941e21ecd18",
+      "content_digest": "rev3-work-block-frame:e6a0ae08024950efd46c69a36a9390ac0fedde70aa2098e5a9731828c5881da1"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/PHASE_TRANSITIONS/PH-D01B_TO_PH-D02A.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "613b795cf09eba08cdb9911ea1db4e1b7eea9a9cd5e660c99e2bb8382f469266",
+      "content_digest": "rev3-phase-transition:54ad0fcfaf2a33425f2c2744dbc391461763c35e0f4aae31cf3b6764cd7e1abd"
+    },
+    {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D01A_TO_PH-D01B_20260731.json",
+      "role": "ENTRY_AUTHORIZATION_EVIDENCE",
+      "sha256": "6d4f3a26088d9f979a5401d8df0b526d6259e4eba5e03b5ad5b21ba332b7c83c",
+      "approval_artifact_digest": "owner-approval-record:4083a7a0207d5d7bbc04d31f9cf99d455229528a738d29d38058a1bdf9919a60"
+    },
+    {
+      "path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D01A_TO_PH-D01B_20260731.json",
+      "role": "ENTRY_AUTHORIZATION_EVIDENCE",
+      "sha256": "4c4fcb8a48e10f4a4f5a4113eacfb7c163d46e2d6d3ca84406bfafc104c848de",
+      "owner_decision_content_digest": "sha256:c363fe83418a4021ab1eda580fef87f65c715b3abb8d11249b1876ae8d5d0aa5"
+    },
+    {
+      "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+      "role": "ENTRY_AUTHORIZATION_EVIDENCE",
+      "sha256": "c4bdbe9dac72f2a2148a0217e6c637817a6434854e063e395e4a9abc93c5fcbe",
+      "standing_authorization_content_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed"
+    },
+    {
+      "path": "control/rev3/PH-D01A_EVIDENCE_ATTESTATION.json",
+      "role": "ENTRY_AUTHORIZATION_EVIDENCE",
+      "sha256": "1d0a1da759e29944774e981379e73dd9094ca5a2af16bb3c41584deb12411b8a"
+    },
+    {
+      "path": "control/rev3/PH-D01B_WORK_BLOCK_FRAME.json",
+      "role": "CURRENT_WORK_BLOCK_FRAME",
+      "sha256": "01032eb07f91e575f53516df0400d5f6cc79e090c7a84950bce52b6b3024c7e8",
+      "content_digest": "rev3-work-block-frame:1b25b4b9aba92fe42b4abf47214397f05752f217ab6ec7cfeb3da846da58717e"
+    },
+    {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-D01A_TO_PH-D01B.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "520c6439958f8378440864ecfd2c7546b3b1644ed2864d2200a619a0a4271b0d",
+      "content_digest": "rev3-phase-transition:f464759c7c0ff3ee12034b6d92a125555484ecac7a97e060faa75916f0ecd72a"
+    },
+    {
+      "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
+      "role": "CURRENT_SELECTOR",
+      "sha256": "c9868c6589a2a8ad12d4e7a6bc748ef230a3a2a6c6dd9ad905beb3291f35c740"
+    },
+    {
+      "path": "distillation/.python-version",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "aa0d6581054e6e4ff3f91839deca7a854ad37221b8784d060b42d0f847ff1a3b"
+    },
+    {
+      "path": "distillation/README.md",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "5618c758f929cc6f3bfcb07391fac7922567a578c8e523c2c9d2977efd97a6ec"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "role": "CANONICAL_SCOPE_AUDIT_REPORT",
+      "sha256": "731d4d8552dcc00a2726ce892ed6c34b003129a64a2e76230495247921f0ec39",
+      "content_digest": "hds-distillation-scope-audit:f68f3139841e156a5e7230303dcb7987e7bd983a82b22fce87836489c23c6819"
+    },
+    {
+      "path": "distillation/artifacts/reports/environment_isolation.json",
+      "role": "ENVIRONMENT_ISOLATION_REPORT",
+      "sha256": "4ec0b915de6923c92d57767547b5d713a268e7e4a1ab8135ba119d3180c83fc1",
+      "content_digest": "hds-environment-isolation-report:f40eb881f41330f7b72cb2d157c06b17ed10b83cb8939ebe99b65cda16b9908d"
+    },
+    {
+      "path": "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json",
+      "role": "DOWNSTREAM_INVALIDATION_REPORT",
+      "sha256": "6ec830007ff44b8c680bea2bc9d00bf70926f3b4664c3bfd1380fe014a1358b7",
+      "content_digest": "hds-ph-d01b-downstream-invalidation:d491966458d317ad0e29e78769e6477e044bdb911850c9dd2981636701a35761"
+    },
+    {
+      "path": "distillation/artifacts/reports/primary_source_provenance.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "7e1287455a0b8e860d2c384f52c6ea5570c3344413214c447323fc0780e6109d",
+      "content_digest": "hds-primary-source-provenance-report:5f874b46a83e47407f3caf92be5cab1f3c3214a9e1b4c3ea0d9b412b55ef94e9"
+    },
+    {
+      "path": "distillation/artifacts/reports/source_blind_execution.json",
+      "role": "SOURCE_BLIND_EXECUTION_REPORT",
+      "sha256": "806fb3f9148e0c5e7201d21c94fa1e2713115a80a6fdb3420dbf3dc1891e3918",
+      "content_digest": "hds-source-blind-execution-record:77960f17486a5da408dbeccef0b21470960cbc4e415044c94dbe5a554caecf76"
+    },
+    {
+      "path": "distillation/artifacts/reports/source_inventory.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "7081391cc0ef2cc4c834526cb4a57df153dea76e4c4cf0d34e2535b410c06dba",
+      "content_digest": "hds-source-inventory-report:ca27293b57737c743020ad19e063b08cd75d0d0c6d6571e67c6b5934c9f67d79"
+    },
+    {
+      "path": "distillation/artifacts/reports/source_manifest_freeze.json",
+      "role": "SOURCE_MANIFEST_FREEZE_REPORT",
+      "sha256": "679f8e15561041bb4c9ad760afbde4b5a11ecd84016b45c2d34450d0290a6f4f",
+      "content_digest": "hds-source-manifest-freeze-report:ed0f9e1b762065173e4cf941da3a22a85b026c511e75f950ae187c630f03d5e4"
+    },
+    {
+      "path": "distillation/input/manifest_freeze_plan.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "c989082b41b681065a3254f658f590313cb6248dba71b4684c61339bcb47ac0b",
+      "content_digest": "hds-manifest-freeze-plan:756f3f2106eed6534d4c8e82136cc951e6dfd3a7cb70fbf3edd5e797f33e9993"
+    },
+    {
+      "path": "distillation/input/raw_recording_content_capture.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "f4a295a06563278a3661876433af72fa4b9ac3913aff11b560066368921b0512",
+      "content_digest": "hds-raw-recording-content-capture:9a5c78c26c730115a3f694947318da732eba0b36841bebef07099f95a945ff24"
+    },
+    {
+      "path": "distillation/input/source_blind_execution_plan.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "deb442ea29630391b720f02b1ab2b80dce2ac650b8955128a60513a812bb8d88",
+      "content_digest": "hds-source-blind-execution-plan:b4ae17a427b18a4443940c306e865d8b468b3413fcdc8d1c3141815c55ed75b0"
+    },
+    {
+      "path": "distillation/manifests/acquisition/arc2-evaluation-challenges.json",
+      "role": "ACQUISITION_RECORD",
+      "sha256": "e7b85c97a632d5745d4275d94deeaee8a305dcdb050c3f03adfedd0d9c8f5ad5",
+      "acquisition_digest": "hds-acquisition-record:1dd265c7dbdef4e58bcb8d82e19972e36a574f29b6c9f5e99f5bb3ae5759602e"
+    },
+    {
+      "path": "distillation/manifests/acquisition/arc2-evaluation-solutions.json",
+      "role": "ACQUISITION_RECORD",
+      "sha256": "a9f84e955d8853a85fde67cd6a8c045e2e24c2c9139442b085b82b2af40197a3",
+      "acquisition_digest": "hds-acquisition-record:dd78197fb76ee08b6b82fcffce93bd87a2fa8dbc02697d2bd43bf4cc71c1d31e"
+    },
+    {
+      "path": "distillation/manifests/acquisition/arc2-test-challenges.json",
+      "role": "ACQUISITION_RECORD",
+      "sha256": "15eb18e6993808e140aea8f775329754d48e0a6523ed32a8f01a7a04a222c9ed",
+      "acquisition_digest": "hds-acquisition-record:e12c8bf7a574e1bf67e77c9a6536a9a8a9f4c4886ea9c447a36a56b6e6c43409"
+    },
+    {
+      "path": "distillation/manifests/acquisition/arc2-training-challenges.json",
+      "role": "ACQUISITION_RECORD",
+      "sha256": "15a83a1c2bcdf2a32cb788d545b849cc7608910428fa13bb0e9266374539ead2",
+      "acquisition_digest": "hds-acquisition-record:e977f4c8a2d4ecfae9ed577e5d0830c4e964824fd603bf1dfa617738dd97ce55"
+    },
+    {
+      "path": "distillation/manifests/acquisition/arc2-training-solutions.json",
+      "role": "ACQUISITION_RECORD",
+      "sha256": "2356d8dbb663cb70bfee67ecee772800abb5eabb5267821afa983911eab7d60f",
+      "acquisition_digest": "hds-acquisition-record:a04cfce6e3336c4d85130084a7fcd555d71b9e3a0ec5400868c804fa56e7c09a"
+    },
+    {
+      "path": "distillation/manifests/acquisition/arc3-canonical-teacher-trajectories.json",
+      "role": "ACQUISITION_RECORD",
+      "sha256": "888497973dd362798fb34741ac07c65fa0ed9d0046dfa722ec2363718acccf86",
+      "acquisition_digest": "hds-acquisition-record:e691be248ea8a962b9f2ba4f7269984df8e5e50d1553b47bbf54325ffe850e74"
+    },
+    {
+      "path": "distillation/manifests/acquisition/arc3-environment-source-bundle.json",
+      "role": "ACQUISITION_RECORD",
+      "sha256": "bc5b99b88e743497fc845a5e11d7da14e8e9d5037d0bae36697738a617048a12",
+      "acquisition_digest": "hds-acquisition-record:ba68dc2eebb1d5ab4598472d50617c614425abcc0544fe49899e5e1489e69d73"
+    },
+    {
+      "path": "distillation/manifests/acquisition/arc3-raw-teacher-recordings.json",
+      "role": "ACQUISITION_RECORD",
+      "sha256": "2d280e38e6637903ae22941a34f791c27eaec56d8f70659eb70cb9ccaabb0934",
+      "acquisition_digest": "hds-acquisition-record:16fd2b4a6962b903256d5702ea97817a3864dbfe61e4b2c3ea5ed5941b6ac049"
+    },
+    {
+      "path": "distillation/manifests/environment/arc3-replay.json",
+      "role": "ENVIRONMENT_MANIFEST",
+      "sha256": "e752fcd0efcfa6fc4d8a3e3474d20aafbf3ef64e8eb8549a09c3a382d5a59cdc",
+      "content_digest": "hds-environment-manifest:1d116488cd85ee5ad9d641aeb2af66187572b181cb03d819fac1cdba3252cfe0"
+    },
+    {
+      "path": "distillation/manifests/run/ph-d01b-freeze.json",
+      "role": "RUN_MANIFEST",
+      "sha256": "afb68720c27084ec2ed554e833216a94dc5c6f14944f6fb81c1491b4e79bfccc",
+      "run_digest": "hds-run-manifest:8840575d3019836f476785013d2ff4136eac3cf9d4b86ee245e384ebdd007d06"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc2-evaluation-challenges.json",
+      "role": "SOURCE_CONTENT_MANIFEST",
+      "sha256": "89d03f63a20b8ed20b8263a745af222ba5fd25d17650466fb23eecd934a6e6e9",
+      "content_digest": "hds-source-content-manifest:d3fad156ae8b1129d458471314a63422151979e35f5da20a86365ad32ae93131"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc2-evaluation-solutions.json",
+      "role": "SOURCE_CONTENT_MANIFEST",
+      "sha256": "276cb73c44c3f078e364b65f07eb8b694b8957be6fb2fb41ffc84c320f8e276a",
+      "content_digest": "hds-source-content-manifest:df68055a4e84975c107073aed9bb1173de856b7aa8c0681b8b6bd924bcee5999"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc2-test-challenges.json",
+      "role": "SOURCE_CONTENT_MANIFEST",
+      "sha256": "9e570142b63ba7c15b77c47ec804b0e8916f8c20036aef05a3f138956f21a45e",
+      "content_digest": "hds-source-content-manifest:94a58deeb8d739ed433795355eac764a4bb8531dde792aed3d696a51023e9981"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc2-training-challenges.json",
+      "role": "SOURCE_CONTENT_MANIFEST",
+      "sha256": "8ae243dc41ac6cd2e34e5dbe972ab563ba4f369f5d574d08f9397cc5d887d4fe",
+      "content_digest": "hds-source-content-manifest:d0d1da43295ca77ae8d8946153832dde3e112b92a982c1a2cc25a09c82cd886d"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc2-training-solutions.json",
+      "role": "SOURCE_CONTENT_MANIFEST",
+      "sha256": "36bba23651c07581ac5fbc8ce5a51cabd98e6cc95009095c00444e7fcd11f55b",
+      "content_digest": "hds-source-content-manifest:4aee5ff978c9357b61b3fae610f35671c3ab75c2f02e96231b2c88b4d4a228e3"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc3-canonical-teacher-trajectories.json",
+      "role": "SOURCE_CONTENT_MANIFEST",
+      "sha256": "2858e762d8e47dfd65598114e64e1a6b764b2bf307318d9f63583ed2e3c816a9",
+      "content_digest": "hds-source-content-manifest:1bbf633546ab7942b02d6aa1d1560f41a53d1ddc31b5e586855bbf0b526cd800"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc3-environment-source-bundle.json",
+      "role": "SOURCE_CONTENT_MANIFEST",
+      "sha256": "1a6fdea90ddb69435899b2d03c99f9002d0e11b045d3bd37dd8764660482e5ef",
+      "content_digest": "hds-source-content-manifest:2c97915953dda659ab039def7c9de33223db2ea78acf7de3e7ee70b51d9d6e79"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc3-raw-teacher-recordings.json",
+      "role": "SOURCE_CONTENT_MANIFEST",
+      "sha256": "ff7ab7ed08b10ef6987c305610b9d4fdd7efdffb80567e90c9abe92a6eabd274",
+      "content_digest": "hds-source-content-manifest:3098feb7241e4ea3444b5942ab8ba0371d8168a51f32a1f3d44c0e09db36eda9"
+    },
+    {
+      "path": "distillation/pyproject.toml",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "ffd1a64edcb901145641031c1a42ad8b51464412d2a339cf6e1f8491b66c2826"
+    },
+    {
+      "path": "distillation/schemas/acquisition_record.schema.json",
+      "role": "MANIFEST_SCHEMA",
+      "sha256": "c7dd1e32731ae0a9f88451a582a509ab89c2ddb339313063438fca091b514cf5"
+    },
+    {
+      "path": "distillation/schemas/environment_manifest.schema.json",
+      "role": "MANIFEST_SCHEMA",
+      "sha256": "a4b9280feb7d90dcedea8d55ff82846414d9d7d85c4d40bc44072431713fd271"
+    },
+    {
+      "path": "distillation/schemas/run_manifest.schema.json",
+      "role": "MANIFEST_SCHEMA",
+      "sha256": "888c33520b2d5b75bc1f3bab863d55954d4e001a1ac19549af578a2083714bb6"
+    },
+    {
+      "path": "distillation/schemas/source_content_manifest.schema.json",
+      "role": "MANIFEST_SCHEMA",
+      "sha256": "252508886f21390b3fd728d68f597b57a1cef30ef385c4f5548ba14e8c2cdea8"
+    },
+    {
+      "path": "distillation/src/hds_distill/manifest_freeze.py",
+      "role": "DISTILLATION_IMPLEMENTATION",
+      "sha256": "15760abef9a9914f95d8c293b2f76cc5755d260693414a5541ec3f7cb7fb072d"
+    },
+    {
+      "path": "distillation/src/hds_distill/source_blind_execution.py",
+      "role": "DISTILLATION_IMPLEMENTATION",
+      "sha256": "238c524f7d7991b26c61778d24338e28dae496423721ea8668475d96267438f1"
+    },
+    {
+      "path": "distillation/tests/unit/test_canonical.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "fc8d6ba9201f22374bffc5af0d075eb6992ee7d37d2bda4d7c6e6609a2fca7c2"
+    },
+    {
+      "path": "distillation/tests/unit/test_manifest_freeze.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "84278d0360db7e6f143f807a47b3fbb4cbddfd56a815160dfe99ca12b38a28ac"
+    },
+    {
+      "path": "distillation/tests/unit/test_schema_registry.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "de9345bb34e916acf33800f8fe8430b6019c2ddef7ba0dcde1a6c750b82bd421"
+    },
+    {
+      "path": "distillation/tests/unit/test_source_blind_execution.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "e9d45251b2300daf190bae9a00910765d75393fcde101d3c970ef1e12e3f23be"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "ba6376cfc752b92d7da835136378c2868e03c448896928dfaa4432c96469588d"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "sha256": "7957a82d18dac905431dd47281765b5f5d509bcb591f3d5d79eb60785005cf90",
+      "content_digest": "rev3-current-authority-manifest:64503b54e528cb0650d56de0bbc5e86832aec8df440ae3238adc3193e82257cc"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V8.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "62037f13a85e247598c6c6f3fb6a971ba7307cf56b4fff7318ca675199abde12"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+      "role": "PH_D01B_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "f3f0853ed1c240857348d4e718e35832fcb4a10a2455ad4d35df9fd980c025b8"
+    },
+    {
+      "path": "scripts/validate_rev3_governance.py",
+      "role": "VALIDATION_TOOL",
+      "sha256": "d9bdf49677ae59444d4f9b3126eb39f27bec6f7d485f40a5f4fc939329c7c7d2"
+    },
+    {
+      "path": "scripts/verify_source_blind_execution.py",
+      "role": "VALIDATION_TOOL",
+      "sha256": "dc414a353800845057010694ac09bc7de616cfae0f384f13b1f829b6f1669f19"
+    }
+  ],
+  "artifact_count": 73,
+  "validation": {
+    "exact_tree": {
+      "commit": "259c8d62bcb8d99875e4f77252ed5aa3cde745b1",
+      "tree": "84619821ff089181f58d3f315b567ae2f8935299",
+      "standalone_clone": true,
+      "tracked_diff_finding_count": 0,
+      "protected_change_count": 0,
+      "outside_frame_count": 0,
+      "status": "PASS"
+    },
+    "full_unit": {
+      "duration_seconds": 427.91,
+      "failed": 0,
+      "passed": 732,
+      "status": "PASS"
+    },
+    "full_integration": {
+      "duration_seconds": 314.2,
+      "failed": 0,
+      "passed": 8,
+      "status": "PASS"
+    },
+    "full_distillation": {
+      "duration_seconds": 326.11,
+      "failed": 0,
+      "passed": 272,
+      "status": "PASS"
+    },
+    "focused_d01b": {
+      "duration_seconds": 21.74,
+      "failed": 0,
+      "passed": 147,
+      "status": "PASS"
+    },
+    "focused_governance_dependency": {
+      "duration_seconds": 73.73,
+      "failed": 0,
+      "passed": 58,
+      "status": "PASS"
+    },
+    "governance_validator": {
+      "check_count": 37,
+      "failure_count": 0,
+      "linux_status": "PASS",
+      "windows_status": "PASS",
+      "status": "PASS"
+    },
+    "dependency_audit": {
+      "content_digest": "hds-dependency-audit-report:7c1540a1c23d39e9d1db4b7156caeb5313283fa62ef0678d83ce383d2768770e",
+      "linux_offline_status": "PASS",
+      "windows_offline_status": "PASS",
+      "status": "PASS"
+    },
+    "scope_guard": {
+      "finding_count": 0,
+      "report_content_digest": "hds-distillation-scope-audit:f68f3139841e156a5e7230303dcb7987e7bd983a82b22fce87836489c23c6819",
+      "status": "PASS"
+    },
+    "source_blind_execution": {
+      "content_digest": "hds-source-blind-execution-record:77960f17486a5da408dbeccef0b21470960cbc4e415044c94dbe5a554caecf76",
+      "role_count": 3,
+      "executor_environment_source_mount_count": 0,
+      "auditor_environment_source_mount_count": 0,
+      "repository_root_visible_role_count": 0,
+      "same_process_source_access_then_candidate_generation_count": 0,
+      "independent_live_rebuild_count": 3,
+      "byte_identical": true,
+      "status": "PASS"
+    },
+    "manifest_freeze": {
+      "content_digest": "hds-source-manifest-freeze-report:ed0f9e1b762065173e4cf941da3a22a85b026c511e75f950ae187c630f03d5e4",
+      "source_manifest_count": 8,
+      "source_entry_count": 83,
+      "acquisition_record_count": 8,
+      "environment_manifest_count": 1,
+      "run_manifest_count": 1,
+      "raw_recording_verified_count": 25,
+      "environment_archive_alias_verified_count": 50,
+      "runtime_wheel_verified_count": 2,
+      "independent_rebuild_count": 3,
+      "byte_identical": true,
+      "status": "PASS"
+    },
+    "downstream_invalidation": {
+      "content_digest": "hds-ph-d01b-downstream-invalidation:d491966458d317ad0e29e78769e6477e044bdb911850c9dd2981636701a35761",
+      "invalidated_artifact_count": 3,
+      "unaffected_rebuild_artifact_count": 39,
+      "checked_bytes_preserved": true,
+      "current_phase_rebuild_permitted": false,
+      "ph_d02a_status": "NOT_STARTED",
+      "ph_d02b_status": "SUSPEND",
+      "status": "PASS"
+    },
+    "historical_migration": {
+      "artifact_count": 13,
+      "byte_identical": true,
+      "eligible_for_current_activation": false,
+      "status": "PASS"
+    },
+    "ruff_changed_python": {
+      "checked_file_count": 4,
+      "status": "PASS"
+    },
+    "mypy_strict": {
+      "distillation_source_file_count": 22,
+      "governance_tool_file_count": 1,
+      "status": "PASS"
+    },
+    "py_compile": {
+      "checked_file_count": 4,
+      "status": "PASS"
+    },
+    "resource_boundary": {
+      "arc_source_payload_parse_count": 0,
+      "arc_environment_source_execution_count": 0,
+      "teacher_replay_execution_count": 0,
+      "trajectory_normalization_count": 0,
+      "hds_hypothesis_generation_count": 0,
+      "distillation_execution_count": 0,
+      "bridge_runtime_capability_count": 0,
+      "rule_promotion_count": 0,
+      "locked_final_access_count": 0,
+      "official_access_count": 0,
+      "network_submission_count": 0,
+      "kaggle_mutation_count": 0,
+      "status": "PASS"
+    }
+  },
+  "failed_requirement_count": 0,
+  "claim_boundary": "PH-D01B source identity, acquisition, environment, run, source-blind role projection, and downstream invalidation evidence only; no semantic trajectory parsing, replay, HDS hypothesis generation, PH-D02A, Bridge, Runtime, official access, or submission."
+}

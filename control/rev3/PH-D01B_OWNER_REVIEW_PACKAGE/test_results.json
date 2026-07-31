@@ -1,0 +1,160 @@
+{
+  "schema_version": "arc3-ph-d01b-test-results-v2",
+  "phase_id": "PH-D01B",
+  "implementation_commit": "259c8d62bcb8d99875e4f77252ed5aa3cde745b1",
+  "implementation_tree": "84619821ff089181f58d3f315b567ae2f8935299",
+  "results": [
+    {
+      "suite": "EXACT_TREE",
+      "commit": "259c8d62bcb8d99875e4f77252ed5aa3cde745b1",
+      "tree": "84619821ff089181f58d3f315b567ae2f8935299",
+      "standalone_clone": true,
+      "tracked_diff_finding_count": 0,
+      "protected_change_count": 0,
+      "outside_frame_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_UNIT",
+      "duration_seconds": 427.91,
+      "failed": 0,
+      "passed": 732,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_INTEGRATION",
+      "duration_seconds": 314.2,
+      "failed": 0,
+      "passed": 8,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_DISTILLATION",
+      "duration_seconds": 326.11,
+      "failed": 0,
+      "passed": 272,
+      "status": "PASS"
+    },
+    {
+      "suite": "FOCUSED_D01B",
+      "duration_seconds": 21.74,
+      "failed": 0,
+      "passed": 147,
+      "status": "PASS"
+    },
+    {
+      "suite": "FOCUSED_GOVERNANCE_DEPENDENCY",
+      "duration_seconds": 73.73,
+      "failed": 0,
+      "passed": 58,
+      "status": "PASS"
+    },
+    {
+      "suite": "GOVERNANCE_VALIDATOR",
+      "check_count": 37,
+      "failure_count": 0,
+      "linux_status": "PASS",
+      "windows_status": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "DEPENDENCY_AUDIT",
+      "content_digest": "hds-dependency-audit-report:7c1540a1c23d39e9d1db4b7156caeb5313283fa62ef0678d83ce383d2768770e",
+      "linux_offline_status": "PASS",
+      "windows_offline_status": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "SCOPE_GUARD",
+      "finding_count": 0,
+      "report_content_digest": "hds-distillation-scope-audit:f68f3139841e156a5e7230303dcb7987e7bd983a82b22fce87836489c23c6819",
+      "status": "PASS"
+    },
+    {
+      "suite": "SOURCE_BLIND_EXECUTION",
+      "content_digest": "hds-source-blind-execution-record:77960f17486a5da408dbeccef0b21470960cbc4e415044c94dbe5a554caecf76",
+      "role_count": 3,
+      "executor_environment_source_mount_count": 0,
+      "auditor_environment_source_mount_count": 0,
+      "repository_root_visible_role_count": 0,
+      "same_process_source_access_then_candidate_generation_count": 0,
+      "independent_live_rebuild_count": 3,
+      "byte_identical": true,
+      "status": "PASS"
+    },
+    {
+      "suite": "MANIFEST_FREEZE",
+      "content_digest": "hds-source-manifest-freeze-report:ed0f9e1b762065173e4cf941da3a22a85b026c511e75f950ae187c630f03d5e4",
+      "source_manifest_count": 8,
+      "source_entry_count": 83,
+      "acquisition_record_count": 8,
+      "environment_manifest_count": 1,
+      "run_manifest_count": 1,
+      "raw_recording_verified_count": 25,
+      "environment_archive_alias_verified_count": 50,
+      "runtime_wheel_verified_count": 2,
+      "independent_rebuild_count": 3,
+      "byte_identical": true,
+      "status": "PASS"
+    },
+    {
+      "suite": "DOWNSTREAM_INVALIDATION",
+      "content_digest": "hds-ph-d01b-downstream-invalidation:d491966458d317ad0e29e78769e6477e044bdb911850c9dd2981636701a35761",
+      "invalidated_artifact_count": 3,
+      "unaffected_rebuild_artifact_count": 39,
+      "checked_bytes_preserved": true,
+      "current_phase_rebuild_permitted": false,
+      "ph_d02a_status": "NOT_STARTED",
+      "ph_d02b_status": "SUSPEND",
+      "status": "PASS"
+    },
+    {
+      "suite": "HISTORICAL_MIGRATION",
+      "artifact_count": 13,
+      "byte_identical": true,
+      "eligible_for_current_activation": false,
+      "status": "PASS"
+    },
+    {
+      "suite": "RUFF_CHANGED_PYTHON",
+      "checked_file_count": 4,
+      "status": "PASS"
+    },
+    {
+      "suite": "MYPY_STRICT",
+      "distillation_source_file_count": 22,
+      "governance_tool_file_count": 1,
+      "status": "PASS"
+    },
+    {
+      "suite": "PY_COMPILE",
+      "checked_file_count": 4,
+      "status": "PASS"
+    },
+    {
+      "suite": "RESOURCE_BOUNDARY",
+      "arc_source_payload_parse_count": 0,
+      "arc_environment_source_execution_count": 0,
+      "teacher_replay_execution_count": 0,
+      "trajectory_normalization_count": 0,
+      "hds_hypothesis_generation_count": 0,
+      "distillation_execution_count": 0,
+      "bridge_runtime_capability_count": 0,
+      "rule_promotion_count": 0,
+      "locked_final_access_count": 0,
+      "official_access_count": 0,
+      "network_submission_count": 0,
+      "kaggle_mutation_count": 0,
+      "status": "PASS"
+    }
+  ],
+  "active_product_regression_count": 0,
+  "active_evidence_failure_count": 0,
+  "active_environment_failure_count": 0,
+  "active_external_service_failure_count": 0,
+  "active_tool_failure_count": 0,
+  "resolved_evidence_failure_count": 1,
+  "resolved_environment_failure_count": 1,
+  "resolved_operator_command_error_count": 1,
+  "evidence_payload_digest": "sha256:27e3b1756cfc7d0fba2c79021089d14e62341ce736d82ba79d09e3185589fa2a"
+}
