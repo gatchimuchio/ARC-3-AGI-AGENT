@@ -1,0 +1,85 @@
+{
+  "schema_version": "arc3-ph-d03a-command-evidence-v1",
+  "phase_id": "PH-D03A",
+  "commands": [
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests on standalone exact implementation clone",
+      "result": "311 passed in 389.61s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/unit on standalone exact implementation clone",
+      "result": "738 passed in 508.63s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/integration on standalone exact implementation clone",
+      "result": "8 passed in 414.08s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests/unit/test_golden_corpus.py on standalone exact implementation clone",
+      "result": "37 passed in 132.95s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests/unit/test_golden_corpus.py::test_three_independent_processes_rebuild_identical_bytes",
+      "result": "1 passed in 108.35s; three independent process outputs byte-identical",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/build_ph_d03a_golden_candidate.py",
+      "result": "4 artifacts; 508458 bytes; aggregate sha256 44f76e5f9ec8d4f9367cf12e9ba8ff70498e527678fc361b9d8effb84dc62246; no tracked diff",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/validate_rev3_governance.py",
+      "result": "72 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/refresh_rev3_authority_manifest.py --check",
+      "result": "338 entries, 0 changes",
+      "status": "PASS"
+    },
+    {
+      "command": "scope_guard.py --verify-report",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; 0 findings",
+      "status": "PASS"
+    },
+    {
+      "command": "ruff, strict mypy, and py_compile on PH-D03A changed Python sources and tests",
+      "result": "PASS",
+      "status": "PASS"
+    },
+    {
+      "command": "Git exact-tree, WorkBlockFrame, protected-dirty, and final-clean audit",
+      "result": "0 outside Frame; exact clone clean; protected 32-file digest unchanged",
+      "status": "PASS"
+    }
+  ],
+  "resolved_attempts": [
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "System Windows Python 3.12.10 did not match the locked Python 3.12.13 environment.",
+      "resolution": "Repeated all authoritative validation with the repository project venv at Python 3.12.13 and its exact frozen 97-package dependency set.",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "The generic bundled Python 3.12.13 environment had dependency-set drift.",
+      "resolution": "Used the exact project venv for the final standalone-clone validation.",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "PRODUCT_REGRESSION",
+      "finding": "Historical pre-audit PH-D03A tests initially asserted obsolete active paths after explicit migration.",
+      "resolution": "Reclassified and updated those tests to verify historical byte preservation while current tests validate the post-audit implementation.",
+      "status": "RESOLVED"
+    }
+  ],
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "active_evidence_failure_count": 0,
+  "evidence_payload_digest": "sha256:8c7c1c2b80239eb23e1c72e6bad3a71d9f43b203ac5a6fe4d8e93da3ba6bc309"
+}

@@ -1,0 +1,337 @@
+{
+  "schema_version": "arc3-phase-state-v2",
+  "phase_id": "PH-D03A",
+  "status": "CODEX_SELF_AUDIT_PASS",
+  "base_commit": "70722de7df8278c866de0734c97206c9952d731d",
+  "base_tree": "fd330c8fd8dd9cb66e16d12cbcde14452a28aa6f",
+  "implementation_commit": "0bb43aebf069ab6e6a6e1107c871a2a56ad6efcc",
+  "implementation_tree": "f68414ae78176844f4248054c6af07b2484a5045",
+  "work_block_id": "WB-PH-D03A-POST-AUDIT-GOLDEN-CONFORMANCE-CANDIDATE-20260731",
+  "spec_digest": "sha256:52c652ae734a41cd4116d4e15bca890c43c5e0aaf3f7f8d6f0627a540f7a9f63",
+  "roadmap_digest": "sha256:7c010c9c5becd89800ffb2fd9ba9a914dac3cd246a39891e88367ac5ae7753e5",
+  "input_manifest_digest": "rev3-current-authority-manifest:0963db5ef99345aeacdca3097c27896114fa5e716793ff0fef14aa871fbefba8",
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "APPROVED_PREDECESSOR_EVIDENCE",
+    "APPROVED_POST_AUDIT_CAUSAL_IR_ABI",
+    "HISTORICAL_GOLDEN_CANDIDATE_INPUT",
+    "SYNTHETIC_GOLDEN_CANDIDATE_FIXTURE",
+    "SYNTHETIC_TYPED_IR_PROGRAM",
+    "SYNTHETIC_EXACT_FIT_RESULT",
+    "SYNTHETIC_PREDECLARED_INTERVENTION",
+    "SYNTHETIC_GATE_OBLIGATION_EVIDENCE",
+    "NONAUTHORITATIVE_APPROVAL_SCHEMA_TEMPLATE",
+    "OWNER_APPROVAL_EVIDENCE",
+    "HISTORICAL_CONTROL_EVIDENCE"
+  ],
+  "changed_files": [
+    "AGENTS.md",
+    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "analysis/rev3/historical_pre_audit/ph_d03a_golden_preinventory.json",
+    "analysis/rev3/ph_d03a_post_audit_golden_preinventory.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/D03A_CANDIDATE_STATE.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/candidate_state_ref.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/changed_files.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/commands.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/failed_requirements.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/open_terms.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/self_audit.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/summary.md",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/test_results.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/validator_hardening_manifest.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/validator_hardening_state.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/OWNER_REVIEW_PACKAGE/validator_hardening_summary.md",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/PH-D03A_WORK_BLOCK_FRAME.json",
+    "control/rev3/PH-D03A_WORK_BLOCK_FRAME.json",
+    "control/rev3/PHASE_TRANSITIONS/PH-D02C_TO_PH-D03A.json",
+    "control/rev3/REV3_CURRENT_SELECTOR.json",
+    "distillation/README.md",
+    "distillation/artifacts/golden/candidate_cases.json",
+    "distillation/artifacts/golden/owner_review_request.json",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "distillation/artifacts/reports/golden_gate_coverage.json",
+    "distillation/input/README.md",
+    "distillation/input/golden_conformance_contract.json",
+    "distillation/input/historical_pre_audit/PH-D03A/SNAPSHOT_MANIFEST.json",
+    "distillation/input/historical_pre_audit/PH-D03A/generated/candidate_cases.json",
+    "distillation/input/historical_pre_audit/PH-D03A/generated/golden_conformance_contract.json",
+    "distillation/input/historical_pre_audit/PH-D03A/generated/golden_gate_coverage.json",
+    "distillation/input/historical_pre_audit/PH-D03A/generated/owner_review_request.json",
+    "distillation/input/historical_pre_audit/PH-D03A/source/golden_corpus.py.snapshot",
+    "distillation/input/historical_pre_audit/PH-D03A/tests/test_golden_corpus.py.snapshot",
+    "distillation/src/hds_distill/__init__.py",
+    "distillation/src/hds_distill/golden_corpus.py",
+    "distillation/tests/unit/test_golden_corpus.py",
+    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+    "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V12.json",
+    "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+    "scripts/build_ph_d03a_golden_candidate.py",
+    "scripts/refresh_rev3_authority_manifest.py",
+    "scripts/validate_rev3_governance.py"
+  ],
+  "commands": [
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests on standalone exact implementation clone",
+      "result": "311 passed in 389.61s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/unit on standalone exact implementation clone",
+      "result": "738 passed in 508.63s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/integration on standalone exact implementation clone",
+      "result": "8 passed in 414.08s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests/unit/test_golden_corpus.py on standalone exact implementation clone",
+      "result": "37 passed in 132.95s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests/unit/test_golden_corpus.py::test_three_independent_processes_rebuild_identical_bytes on standalone exact implementation clone",
+      "result": "1 passed in 108.35s; PYTHONHASHSEED 11, 22, and 33 produced byte-identical maps",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/build_ph_d03a_golden_candidate.py on standalone exact implementation clone",
+      "result": "4 artifacts, 508458 bytes, aggregate sha256 44f76e5f9ec8d4f9367cf12e9ba8ff70498e527678fc361b9d8effb84dc62246, no tracked diff",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/validate_rev3_governance.py on standalone exact implementation clone",
+      "result": "72 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/refresh_rev3_authority_manifest.py --check on standalone exact implementation clone",
+      "result": "338 entries; manifest current; rev3-current-authority-manifest:0963db5ef99345aeacdca3097c27896114fa5e716793ff0fef14aa871fbefba8",
+      "status": "PASS"
+    },
+    {
+      "command": "scope_guard.py --verify-report on standalone exact implementation clone",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; hds-distillation-scope-audit:3b9b7a1d72b68f9f06f5ea7e3e7d0866b281b606e958c2cd24a4c6384fa3c91c",
+      "status": "PASS"
+    },
+    {
+      "command": "ruff, strict mypy, and py_compile on all PH-D03A changed Python sources and tests",
+      "result": "ruff PASS; mypy strict 8 source/test files PASS; py_compile PASS",
+      "status": "PASS"
+    },
+    {
+      "command": "Git WorkBlockFrame allowlist, exact-tree, final-clean, and protected-dirty digest audit",
+      "result": "48 implementation destinations; 0 outside Frame; exact clone clean; protected 32-file digest unchanged at 3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+      "status": "PASS"
+    }
+  ],
+  "tests": {
+    "exact_tree": {
+      "suite": "EXACT_TREE",
+      "commit": "0bb43aebf069ab6e6a6e1107c871a2a56ad6efcc",
+      "tree": "f68414ae78176844f4248054c6af07b2484a5045",
+      "standalone_clone_count": 1,
+      "tracked_diff_finding_count": 0,
+      "protected_change_count": 0,
+      "outside_frame_count": 0,
+      "status": "PASS"
+    },
+    "full_distillation": {
+      "suite": "FULL_DISTILLATION",
+      "duration_seconds": 389.61,
+      "failed": 0,
+      "passed": 311,
+      "status": "PASS"
+    },
+    "full_unit": {
+      "suite": "FULL_UNIT",
+      "duration_seconds": 508.63,
+      "failed": 0,
+      "passed": 738,
+      "status": "PASS"
+    },
+    "full_integration": {
+      "suite": "FULL_INTEGRATION",
+      "duration_seconds": 414.08,
+      "failed": 0,
+      "passed": 8,
+      "status": "PASS"
+    },
+    "golden_conformance": {
+      "suite": "GOLDEN_CONFORMANCE",
+      "duration_seconds": 132.95,
+      "failed": 0,
+      "passed": 37,
+      "arc2_case_count": 8,
+      "arc3_case_count": 8,
+      "total_case_count": 16,
+      "behaviorally_recomputed_gate_count": 16,
+      "pass_result_count": 15,
+      "expected_suspend_result_count": 1,
+      "fail_result_count": 0,
+      "implementation_conformance_candidate_pass": true,
+      "content_specific_owner_approval_count": 0,
+      "golden_frozen_case_count": 0,
+      "status": "PASS"
+    },
+    "golden_artifact_rebuild": {
+      "suite": "GOLDEN_ARTIFACT_REBUILD",
+      "independent_process_count": 3,
+      "artifact_count_per_process": 4,
+      "byte_count_per_process": 508458,
+      "aggregate_sha256": "44f76e5f9ec8d4f9367cf12e9ba8ff70498e527678fc361b9d8effb84dc62246",
+      "byte_identical": true,
+      "git_clean_after_rebuild": true,
+      "status": "PASS"
+    },
+    "governance_validator": {
+      "suite": "GOVERNANCE_VALIDATOR",
+      "check_count": 72,
+      "failure_count": 0,
+      "status": "PASS"
+    },
+    "authority_manifest": {
+      "suite": "AUTHORITY_MANIFEST",
+      "entry_count": 338,
+      "changed_entry_count": 0,
+      "content_digest": "rev3-current-authority-manifest:0963db5ef99345aeacdca3097c27896114fa5e716793ff0fef14aa871fbefba8",
+      "status": "PASS"
+    },
+    "scope_guard": {
+      "suite": "SCOPE_GUARD",
+      "finding_count": 0,
+      "report_content_digest": "hds-distillation-scope-audit:3b9b7a1d72b68f9f06f5ea7e3e7d0866b281b606e958c2cd24a4c6384fa3c91c",
+      "status": "PASS"
+    },
+    "historical_control_migration": {
+      "suite": "HISTORICAL_CONTROL_MIGRATION",
+      "artifact_count": 15,
+      "byte_identical": true,
+      "eligible_for_current_activation": false,
+      "status": "PASS"
+    },
+    "historical_golden_snapshot": {
+      "suite": "HISTORICAL_GOLDEN_SNAPSHOT",
+      "artifact_count": 6,
+      "byte_identical": true,
+      "eligible_for_current_activation": false,
+      "content_digest": "hds-ph-d03a-historical-snapshot:a9a254556d2e480cb81d320f8641d8192dec00d859343def40a590e31af62215",
+      "status": "PASS"
+    },
+    "static_validation": {
+      "suite": "STATIC_VALIDATION",
+      "ruff_status": "PASS",
+      "mypy_strict_status": "PASS",
+      "py_compile_status": "PASS",
+      "status": "PASS"
+    },
+    "resource_boundary": {
+      "suite": "RESOURCE_BOUNDARY",
+      "source_payload_read_count": 0,
+      "source_payload_semantic_parse_count": 0,
+      "teacher_trajectory_read_count": 0,
+      "arc_environment_source_execution_count": 0,
+      "teacher_replay_execution_count": 0,
+      "real_trajectory_normalization_count": 0,
+      "real_intervention_execution_count": 0,
+      "general_candidate_generation_count": 0,
+      "owner_approval_generated_count": 0,
+      "golden_expected_artifact_freeze_count": 0,
+      "sealed_corpus_artifact_count": 0,
+      "rule_promotion_count": 0,
+      "bridge_runtime_capability_count": 0,
+      "locked_final_access_count": 0,
+      "official_access_count": 0,
+      "network_submission_count": 0,
+      "kaggle_mutation_count": 0,
+      "status": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "EVIDENCE_PAYLOAD_DESCRIPTOR",
+      "sha256": "8c7c1c2b80239eb23e1c72e6bad3a71d9f43b203ac5a6fe4d8e93da3ba6bc309"
+    },
+    {
+      "path": "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/exact_target_bundle.json",
+      "role": "OWNER_REVIEW_EXACT_TARGET_BUNDLE",
+      "sha256": "4a9087767a7dd85b7fc9be477c86ca94d6defb1d245443f804f5035c8bed57b3",
+      "content_digest": "ph-d03a-exact-target-bundle:c5c2dfbf9c79157592fbfd33d692355977041e1eafe36db5bd679cfed66aa41a"
+    },
+    {
+      "path": "distillation/input/golden_conformance_contract.json",
+      "role": "GOLDEN_IMPLEMENTATION_CONFORMANCE_CONTRACT",
+      "sha256": "823d9eec6119e85608661c258dae34239b7131174a1a403523ee03709be19421",
+      "content_digest": "hds-golden-conformance-contract:8249aff1cfbf90a759dafe5875f38db7f44ffe2ff3709bc3f3df0603f6e78124"
+    },
+    {
+      "path": "distillation/artifacts/golden/candidate_cases.json",
+      "role": "SYNTHETIC_GOLDEN_CANDIDATE_SET",
+      "sha256": "36f1e31c586862e0bf7b1e985fdc4b5066994805d33600d930ff6ff85f76f685",
+      "content_digest": "hds-golden-candidate-set:3e94a4814e542ae899bc38dae405461507decdea21a8926553eafca725ea09c2"
+    },
+    {
+      "path": "distillation/artifacts/reports/golden_gate_coverage.json",
+      "role": "BEHAVIORALLY_RECOMPUTED_GOLDEN_GATE_COVERAGE",
+      "sha256": "b687a9867c8393831ba31fc7fae92b735f41716c351741920c66b11a15ecd4b8",
+      "content_digest": "hds-golden-gate-coverage:65492ed189b0cdc07a60dc65465a99b7f2b0d05d5e96d598cdc4435ff0ca9fef"
+    },
+    {
+      "path": "distillation/artifacts/golden/owner_review_request.json",
+      "role": "NONAUTHORITATIVE_OWNER_REVIEW_REQUEST",
+      "sha256": "dfd2d238784b708a82b998b0e32fe2b4cc44503cdd1670fe0a1b0921b610143c",
+      "content_digest": "hds-golden-owner-review-request:496c3f17a1cd6a79d9d3e979fa0a60848d4ff13ff69cf0d80e94b36ebf575ec4"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D03A/SNAPSHOT_MANIFEST.json",
+      "role": "HISTORICAL_PRE_AUDIT_GOLDEN_SNAPSHOT",
+      "sha256": "f3a83e1238d030f5e5f1bec859d34fc046f650ca8db79c036b10618d62e9b3e3",
+      "content_digest": "hds-ph-d03a-historical-snapshot:a9a254556d2e480cb81d320f8641d8192dec00d859343def40a590e31af62215"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "sha256": "eb0292f7186f9301e0fe9200c7f80957376a6a51aa78395a951b1f45799d5c5b",
+      "content_digest": "rev3-current-authority-manifest:0963db5ef99345aeacdca3097c27896114fa5e716793ff0fef14aa871fbefba8"
+    }
+  ],
+  "failed_requirement_ids": [],
+  "open_terms": [
+    {
+      "id": "PH-D03A-CONTENT-SPECIFIC-OWNER-BINDING-001",
+      "status": "PENDING_APPROVAL_COMMIT",
+      "blocks_phase_result": false,
+      "blocks_next_phase_entry": true,
+      "resolution": "Mechanically bind all 16 exact provisional expectation digests, this Evidence Commit, and this evidence payload digest through the standing authorization before PH-D03B entry."
+    }
+  ],
+  "self_audit": {
+    "authority": "PASS",
+    "claim_strength": "PASS",
+    "cross_file_references": "PASS",
+    "data_role": "PASS",
+    "dependency_lock": "PASS",
+    "determinism": "PASS",
+    "evidence": "PASS",
+    "exact_target_binding": "PASS",
+    "golden_gate_behavior": "PASS",
+    "historical_fallback": "PASS",
+    "identity_taint": "PASS",
+    "objective_alignment": "PASS",
+    "origin_boundary": "PASS",
+    "phase_order": "PASS",
+    "provenance": "PASS",
+    "resource": "PASS",
+    "rollback": "PASS",
+    "scope": "PASS"
+  },
+  "owner_review_required": true,
+  "evidence_payload_digest": "sha256:8c7c1c2b80239eb23e1c72e6bad3a71d9f43b203ac5a6fe4d8e93da3ba6bc309"
+}
