@@ -5,9 +5,9 @@
 - gates: `DG-00`, `DG-14`
 - final selector / promotion authority: `大平鉄兵 / OWNER_ONLY`
 - dependency manifest:
-  `hds-dependency-lock:df90909100a5d3e8b7b89a7224d1c65f4100bfde3824d9eb98066e0ebf87f695`
+  `hds-dependency-lock:2f032a1b853e24624a2df9f176486978e7cf41537af951278996b0f1cf0b9b01`
 - dependency audit:
-  `hds-dependency-audit-report:dfc1fb138f1bc6c4830ef63987bfe1810c6d08fa0390d634077add0f5a64e9a1`
+  `hds-dependency-audit-report:7c1540a1c23d39e9d1db4b7156caeb5313283fa62ef0678d83ce383d2768770e`
 - Open Term Ledger:
   `hds-open-term-ledger:92774b752cd68c17588c2d443707d6327f28df7e0d4a4960447299e1fe54e291`
 
@@ -26,8 +26,8 @@ a blocking failure, not an implicit upgrade.
 | HDS self-contained prompt | `docs/references/HDS_SelfContained_Prompt_v1_2_utf8bom.txt` | `33b8a35176a0cc2f18502befb4a53cfbbf378b35e36b911888fa534a8b377b50` | 9876 |
 | HDS distillation specification | `docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md` | `79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93` | 38926 |
 | HDS distillation roadmap | `docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md` | `64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518` | 20818 |
-| ARC3 rev3 specification | `docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md` | `feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f` | 23083 |
-| ARC3 rev3 roadmap | `docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md` | `b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2` | 17209 |
+| ARC3 rev3 specification | `docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md` | `52c652ae734a41cd4116d4e15bca890c43c5e0aaf3f7f8d6f0627a540f7a9f63` | 36907 |
+| ARC3 rev3 roadmap | `docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md` | `7c010c9c5becd89800ffb2fd9ba9a914dac3cd246a39891e88367ac5ae7753e5` | 26937 |
 
 ## HDS-BlackBox-Translator reference
 
@@ -49,13 +49,13 @@ automatic RuleAtom promotion.
 
 - order document: `AUTHORITY_ORDER.md`
 - SHA-256:
-  `dfe6fb43564c2aa1ee1cb83cb00861397a466f57a853cbc20a90981719d9e03c`
+  `055f4b8c14001193d525708799f31f457d22dc9815a9feb2a972515d9b705044`
 - Owner approval record:
-  `control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`
+  `control/rev3/OWNER_APPROVAL_RECORDS/PH-R00_TO_PH-D00A_20260731.json`
 - record SHA-256:
-  `e34e21bfb72172dda3c43b922119bee962a9aca899c9d4850402f90c5c7f04f7`
+  `afc32e7ef47b7145e29a9c0baf682046ee5548cccd58b7428acbcd7e65df852c`
 - approval artifact digest:
-  `owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0`
+  `owner-approval-record:db4a8bc2a2f1fab0cafb51a64745e072857eea9e35cff6cd8cceb57c65e8e581`
 
 The phase-continuation authorization does not approve Rule promotion,
 HDSStructureBundle, DistilledInitialStateBundle, locked-final access, official

@@ -67,7 +67,7 @@ def _rebind_digest(
     )
 
 
-def test_installed_dependency_lock_remains_suspended_fail_closed() -> None:
+def test_current_dependency_lock_passes_fail_closed_contract() -> None:
     selector = _json(
         REPOSITORY_ROOT
         / "control"
@@ -76,24 +76,27 @@ def test_installed_dependency_lock_remains_suspended_fail_closed() -> None:
     )
     assert selector["installation_status"] == "INSTALLED"
     assert selector["ph_r1_status"] == "OWNER_APPROVED_PASS"
-    assert selector["active_phase"] == "PH-R00"
-    assert selector["current_work_class"] == "PH-R00_CURRENT_HEAD_REBIND"
+    assert selector["active_phase"] == "PH-D00A"
+    assert selector["current_work_class"] == (
+        "PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND"
+    )
     assert selector["ph_r00_owner_authorization"] == "ESTABLISHED"
-    assert selector["ph_r00_status"] == "IN_PROGRESS"
+    assert selector["ph_r00_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d00a_status"] == "IN_PROGRESS"
     assert selector["runtime_activation_status"] == "SUSPEND"
     assert (
         selector["historical_evidence"]["classification"]
         == "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
     )
 
-    with pytest.raises(
-        AUDITOR.AuditFailure,
-        match="DG00_LOCAL_DEPENDENCY_SHA256_MISMATCH",
-    ):
-        AUDITOR.audit_repository(REPOSITORY_ROOT)
+    report = AUDITOR.audit_repository(REPOSITORY_ROOT)
+    assert report == _json(REPORT_PATH)
+    assert report["hds_dependency_match"] is True
+    assert report["authority_defined"] is True
+    assert report["unresolved_dependency_count"] == 0
 
 
-def test_cli_rejects_historical_checked_report_after_audit_correction() -> None:
+def test_cli_accepts_current_checked_report() -> None:
     process = subprocess.run(
         [
             sys.executable,
@@ -108,10 +111,10 @@ def test_cli_rejects_historical_checked_report_after_audit_correction() -> None:
         text=True,
     )
 
-    assert process.returncode == 2
-    assert process.stdout == ""
-    assert process.stderr.startswith(
-        "DEPENDENCY_LOCK_FAIL:DG00_LOCAL_DEPENDENCY_SHA256_MISMATCH:"
+    assert process.returncode == 0
+    assert process.stderr == ""
+    assert process.stdout.startswith(
+        "DEPENDENCY_LOCK_PASS:hds-dependency-audit-report:"
     )
 
 
@@ -127,17 +130,17 @@ def test_phase_artifacts_are_physically_canonical(path: Path) -> None:
     )
 
 
-def test_three_live_rebuild_attempts_fail_with_same_suspension_finding() -> None:
-    findings: list[str] = []
+def test_three_live_rebuild_attempts_are_byte_identical() -> None:
+    reports: list[str] = []
     for _ in range(3):
-        with pytest.raises(AUDITOR.AuditFailure) as captured:
-            AUDITOR.audit_repository(REPOSITORY_ROOT)
-        findings.append(str(captured.value))
+        reports.append(
+            AUDITOR.canonical_json(
+                AUDITOR.audit_repository(REPOSITORY_ROOT)
+            )
+        )
 
-    assert len(set(findings)) == 1
-    assert findings[0].startswith(
-        "DG00_LOCAL_DEPENDENCY_SHA256_MISMATCH:"
-    )
+    assert len(set(reports)) == 1
+    assert reports[0] + "\n" == REPORT_PATH.read_text(encoding="utf-8")
 
 
 def test_recomputed_manifest_drift_still_fails_closed(tmp_path: Path) -> None:

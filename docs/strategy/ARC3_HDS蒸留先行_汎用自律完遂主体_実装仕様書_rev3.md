@@ -18,9 +18,10 @@
 - 仕様状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
 - PH-R-1状態: `OWNER_APPROVED_PASS`
-- 現在作業: `PH-R00_CURRENT_HEAD_REBIND`
-- Active phase: `PH-R00`
-- PH-R00状態: `IN_PROGRESS`
+- 現在作業: `PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND`
+- Active phase: `PH-D00A`
+- PH-D00A状態: `IN_PROGRESS`
+- PH-R00状態: `OWNER_APPROVED_PASS`
 - 最上位目的: HDSで教師素材から構造データを先に蒸留・凍結し、その成果物だけを長期能力の上流入力として、未知ARC3環境を汎用自律完遂する工学的AGI Instanceを構築する
 
 ---
@@ -1179,10 +1180,11 @@ PRE_DISTILLATION_INFRASTRUCTURE_BASELINE
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = PH-R00
-Current work = PH-R00_CURRENT_HEAD_REBIND
+Active phase = PH-D00A
+Current work = PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND
 PH-R-1 = OWNER_APPROVED_PASS
-PH-R00 = IN_PROGRESS
+PH-R00 = OWNER_APPROVED_PASS
+PH-D00A = IN_PROGRESS
 PH-R00 Owner authorization = ESTABLISHED
 DistilledInitialStateBundle = NOT_FROZEN
 Runtime activation = SUSPEND
@@ -1211,7 +1213,7 @@ ApprovalRecord =
 owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8
 ```
 
-この導入承認の範囲は監査是正採択とPH-R-1開始だけである。PH-R00 entryは別のOwnerDecisionCapture／ApprovalRecordへ固定され、将来artifactの事前採択を含まない。
+この導入承認の範囲は監査是正採択とPH-R-1開始だけである。PH-R00 entryとPH-D00A entryは、それぞれ別のOwnerDecisionCapture／ApprovalRecordへexact bindされ、将来artifactの事前採択を含まない。
 
 監査前のPH-R00〜PH-D03A state、transition、ApprovalRecord、review packageは削除しないが、`HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE`とする。是正後のphase passまたはactivation根拠へ再利用しない。
 

@@ -1,10 +1,10 @@
 # ARC3 rev3 Strategy Rebaseline
 
 - strategy: `HDS_DISTILLATION_FIRST`
-- active phase: `PH-R00`
-- work block: `WB-PH-R00-CURRENT-HEAD-REBIND-20260731`
-- source commit: `4dbb65c5d45cca3402f326b251c1de6ac4a2e554`
-- source tree: `44ccb73437480daeaab71e6cb3119b5e6bc5d485`
+- active phase: `PH-D00A`
+- work block: `WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-REBIND-20260731`
+- source commit: `7643b13f76543d4e48cf05db03d08336ec9b3a16`
+- source tree: `be15955ac81d81801af17322785d2f9178647a7d`
 - Codex role: `DEVELOPMENT_META_C`
 - Owner / Meta-J: 大平鉄兵
 - phase state: `IN_PROGRESS`
@@ -13,8 +13,9 @@
 
 ```text
 PH-R-1 [OWNER_APPROVED_PASS]
-→ PH-R00 [ACTIVE / CURRENT_HEAD_REBIND]
-→ PH-D00A ... PH-D14
+→ PH-R00 [OWNER_APPROVED_PASS]
+→ PH-D00A [ACTIVE / HDS_DEPENDENCY_AUTHORITY_REBIND]
+→ PH-D00B ... PH-D14
 → PH-B00 ... PH-B06
 → PH-A00 ... PH-A08
 → PH-E00 ... PH-E04
@@ -24,7 +25,7 @@ PH-R-1 [OWNER_APPROVED_PASS]
 
 ## Entry binding
 
-PH-R00 entryは次へexact bindされている。
+PH-R00とPH-D00A entryは次へexact bindされている。
 
 ```text
 PH-R-1 Evidence Commit
@@ -38,17 +39,30 @@ PH-R-1 → PH-R00 ApprovalRecord
 
 PH-R00 WorkBlockFrame
 = rev3-work-block-frame:ac14d98087e931677f48c68d2e8f47c83dcb642ff51d13a24c85a59678fb92bb
+
+PH-R00 Evidence Commit
+= 4afe81f2b2b1544f13c32ab4c68f871efd493d18
+
+PH-R00 Evidence Payload
+= sha256:ff61dbf341b920bdd912b3e912423ee903e4b983e913b3def0bed452882f0114
+
+PH-R00 → PH-D00A ApprovalRecord
+= owner-approval-record:db4a8bc2a2f1fab0cafb51a64745e072857eea9e35cff6cd8cceb57c65e8e581
+
+PH-D00A WorkBlockFrame
+= rev3-work-block-frame:001b2608b7b46c6dfc195bce62835af5f8740f0192e749b6f98c7d450bdee319
 ```
 
-このentryはPH-R00だけを許可する。HDS蒸留、Bridge、AGI Runtime、
-locked final、official、Kaggleを許可しない。
+PH-D00A entryはdependency／authority rebindだけを許可する。ARC task
+payload、HDS仮説生成・蒸留実行、Bridge、AGI Runtime、locked final、
+official、Kaggleを許可しない。
 
 ## Current asset decision
 
 - P16〜P21は`PRESERVE_INFRASTRUCTURE_CANDIDATE`。
 - P16〜P21の旧`PASS`はlegacy evidenceであり、rev3の能力完成claimではない。
 - PH-R00はcurrent source commit/tree上で、基盤候補の存在、回帰、package surface、
-  import boundaryを再検証する。
+  import boundaryを再検証済みであり、exact evidenceへOwner承認された。
 - S5、compiled policy、P22、CVは`HISTORICAL_QUARANTINE`。
 - historical assetをrev3 production parent、active policy、fallbackへ使用しない。
 - rev3 active runtime countは0。能力claimは`NOT_ESTABLISHED`。
@@ -72,11 +86,12 @@ locked final、official、Kaggleを許可しない。
 - fallbackを一件でも持つselection
 - Owner approval digestを含まないselection
 
-このguardはAGI能力実装ではない。PH-R00のproduction selection境界である。
+このguardはAGI能力実装ではない。PH-R00で固定し、PH-D00Aでも維持する
+production selection境界である。
 
 ## Evidence model
 
-PH-R00は次の非自己参照構造で閉じる。
+PH-D00Aも次の非自己参照構造で閉じる。
 
 ```text
 Source Commit / Tree
@@ -84,12 +99,12 @@ Source Commit / Tree
 → Evidence Commit / Payload Digest
 → EvidenceCommitAttestation
 → standing authorizationの条件評価
-→ PH-R00 result ApprovalRecord / PH-D00A entry
+→ PH-D00A result ApprovalRecord / PH-D00B entry
 ```
 
-PH-R00の完了証拠には、full unit、integration、local package build、
-archive inspection、local notebook build／validation／runtime smoke、
-production import audit、artifact determinismを含める。
+PH-D00Aの完了証拠には、dependency schema／auditor、exact dependency
+digest、Translator Git object、source-blind role、authority、Open Term 0、
+full regression、三回のdeterministic report rebuildを含める。
 
 ## Hard gates
 
@@ -112,17 +127,17 @@ DISTILLED_INITIAL_STATE_BUNDLE_FROZEN
 ```text
 REV3_STRATEGY_OWNER_APPROVED
 PH_R1_OWNER_APPROVED_PASS
-PH_R00_ENTRY_AUTHORIZED
-PH_R00_IN_PROGRESS
+PH_R00_OWNER_APPROVED_PASS
+PH_D00A_ENTRY_AUTHORIZED
+PH_D00A_IN_PROGRESS
 P16_P21_INFRASTRUCTURE_CANDIDATE
 HISTORICAL_POLICY_QUARANTINED
 ACTIVE_RUNTIME_CAPABILITY_NOT_ESTABLISHED
 ```
 
-PH-R00 evidenceが閉じる前に禁止する表現:
+PH-D00A evidenceが閉じる前に禁止する表現:
 
 ```text
-PH_R00_OWNER_APPROVED_PASS
 DEPENDENCY_LOCK_PASS
 HDS_DISTILLATION_COMPLETE
 GENERIC

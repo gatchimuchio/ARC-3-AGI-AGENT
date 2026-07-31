@@ -12,9 +12,10 @@
 - 状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
 - PH-R-1状態: `OWNER_APPROVED_PASS`
-- 現在作業: `PH-R00_CURRENT_HEAD_REBIND`
-- Active phase: `PH-R00`
-- PH-R00状態: `IN_PROGRESS`
+- 現在作業: `PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND`
+- Active phase: `PH-D00A`
+- PH-D00A状態: `IN_PROGRESS`
+- PH-R00状態: `OWNER_APPROVED_PASS`
 - 原則: HDS構造データをOwner承認付きでfreezeするまで、AGI能力実装へ進まない
 
 ---
@@ -101,7 +102,8 @@ OWNER_REVIEW_REQUIRED
 
 ```text
 OWNER_APPROVED_PASS
-PH-R00_IN_PROGRESS
+PH-R00_OWNER_APPROVED_PASS
+PH-D00A_IN_PROGRESS
 ```
 
 ### Entry
@@ -133,6 +135,13 @@ PH-R00_AUTHORIZED
 PH-R00開始判断は、PH-R-1のexact evidence、OwnerDecisionCapture、ApprovalRecordへbindされて成立した。
 
 ## PH-R00 — Current HEAD Rebind / Infrastructure Freeze
+
+### Current status
+
+```text
+OWNER_APPROVED_PASS
+PH-D00A_IN_PROGRESS
+```
 
 ### 目的
 
@@ -201,6 +210,13 @@ Track Dは、`HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`のARC3経路�
 `PH-D04`はARC2専用であり、ARC3 Trackでは`NOT_APPLICABLE`とする。ARC2蒸留は別Trackとして扱い、ARC3の`PH-D05`開始を阻害しない。
 
 ## PH-D00A — HDS Dependency / Authority Freeze
+
+### Current status
+
+```text
+IN_PROGRESS
+WORK_CLASS = PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND
+```
 
 ### 目的
 
@@ -1211,9 +1227,10 @@ Approval Commit
 11. self-auditとOwner Review Packageを生成
 12. Evidence Commitを作成
 13. 後続attestationへ`evidence_commit/tree`を記録
-14. `OWNER_REVIEW_REQUIRED`で停止
+14. DoD PASSとfailed requirement count 0を証明し、Evidence Commitへbind
+15. standing authorizationが適用可能な場合だけ、exact evidenceへApproval Commitを作成して次phaseへ進む
 
-Codexは次phaseへ自動進行しない。
+Codexは未証明phaseを承認しない。外部不可逆操作はstanding authorizationで実行しない。
 
 ---
 
@@ -1221,43 +1238,42 @@ Codexは次phaseへ自動進行しない。
 
 ```text
 Phase:
-PH-R-1
+PH-D00A
 
 目的:
-Owner承認済みrev3 correctionをcurrent authority、selector、schema、
-fail-closed governanceへ導入し、PH-R00を未開始のまま固定する。
+HDS正本、権威順序、source-blind role、蒸留scopeをcurrent HEADへ
+digest bindし、監査前PH-D00A成果をcurrent completion証拠へ再利用しない。
 
 読む順序:
 1. ユーザーの現在指示
-2. OwnerDecisionCapture / ApprovalRecord
-3. PH-R-1 WorkBlockFrame
+2. PH-R00 EvidenceCommitAttestation / OwnerDecisionCapture / ApprovalRecord
+3. PH-D00A WorkBlockFrame
 4. root AGENTS.md
 5. current authority manifest / selector / schemas
 6. rev3仕様 / roadmap / INDEX
 7. AGI/HDS上位正本
 
 実施:
-- Owner approval binding
-- current authority manifest
-- installed selector
-- phase/evidence/approval schemas
-- runtime activation fail-closed guard
-- approved correction packageのbyte-identical再構築
+- HDS dependency inventoryとauthority lockのcurrent-head rebind
+- source-blind roleとOwner-only promotion boundary
+- dependency schema／auditor／manifest／report／Open Term Ledger
+- 監査前PH-D00A control artifactのhistorical namespace移送
+- deterministic report rebuildとfull regression
 - Implementation / Evidence / Attestation分離
 
 禁止:
-- PH-R00開始
-- HDS蒸留開始
+- ARC task payload／teacher trajectoryアクセス
+- HDS仮説生成／蒸留実行
 - AGI能力実装
 - P22改善
 - official提出
 - Rule/Phase/Bundle承認
 
 終了:
-OWNER_REVIEW_REQUIREDで停止。
+DoD PASSとexact evidence bind後だけstanding authorizationをPH-D00B entryへ適用する。
 ```
 
-PH-R00 evidence targetと許可遷移を明示したOwner判断が得られた場合だけ、次Work Blockを`PH-R00`とする。
+PH-D00A evidence targetと許可遷移をexact bindできた場合だけ、次Work Blockを`PH-D00B`とする。
 
 ---
 

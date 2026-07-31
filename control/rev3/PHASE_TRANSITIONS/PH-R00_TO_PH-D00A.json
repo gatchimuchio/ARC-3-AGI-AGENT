@@ -1,0 +1,61 @@
+{
+  "schema_version": "arc3-rev3-phase-transition-v2",
+  "transition_id": "PH-R00-TO-PH-D00A-20260731",
+  "from_phase_id": "PH-R00",
+  "from_phase_status": "OWNER_APPROVED_PASS",
+  "from_phase_state_status": "CODEX_SELF_AUDIT_PASS",
+  "from_phase_state_path": "control/rev3/R00_PHASE_STATE.json",
+  "from_phase_state_sha256": "58bb03f46f3cad5cb4bdc3f815211bb661f83fd4188a41735e5aabbe7beb131e",
+  "from_phase_evidence_commit": "4afe81f2b2b1544f13c32ab4c68f871efd493d18",
+  "from_phase_evidence_tree": "45557eebb199f2e857714e73fdebbaacf5f17d28",
+  "from_phase_evidence_payload_digest": "sha256:ff61dbf341b920bdd912b3e912423ee903e4b983e913b3def0bed452882f0114",
+  "from_phase_evidence_attestation_path": "control/rev3/PH-R00_EVIDENCE_ATTESTATION.json",
+  "to_phase_id": "PH-D00A",
+  "to_phase_status": "IN_PROGRESS",
+  "decision": "ENTRY_AUTHORIZED",
+  "authorization_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00_TO_PH-D00A_20260731.json",
+  "authorization_digest": "owner-approval-record:db4a8bc2a2f1fab0cafb51a64745e072857eea9e35cff6cd8cceb57c65e8e581",
+  "decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-R00_TO_PH-D00A_20260731.json",
+  "decision_capture_digest": "sha256:61bfb90896fa3a3d7f2d58ba7f74ab708d77700b6f074030bdfcd17264414e6f",
+  "standing_authorization_path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+  "standing_authorization_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+  "to_phase_scope": "POST_AUDIT_HDS_DEPENDENCY_AND_AUTHORITY_REBIND_WITHOUT_CORPUS_OR_RUNTIME_ACCESS",
+  "verified_exit_conditions": {
+    "phase_dod": "PASS",
+    "failed_requirement_count": 0,
+    "exact_implementation_commit_and_tree_bound": true,
+    "exact_evidence_commit_and_payload_digest_bound": true,
+    "sequential_predecessor_satisfied": true,
+    "exact_tree_regression_passed": true,
+    "full_unit_passed": 728,
+    "full_integration_passed": 8,
+    "focused_regression_passed": 63,
+    "governance_validator_passed": 16,
+    "wheel_byte_identical": true,
+    "notebook_artifacts_byte_identical": true,
+    "quarantined_runtime_dependency_count": 0
+  },
+  "hard_gates_crossed": [
+    "PH_R00_CURRENT_HEAD_BOUND",
+    "PH_R00_DOD_PASS",
+    "OWNER_APPROVED_PH_R00_RESULT",
+    "OWNER_AUTHORIZED_PH_D00A"
+  ],
+  "permissions_not_granted": [
+    "ARC task payload or teacher trajectory access",
+    "HDS hypothesis generation or distillation execution",
+    "Rule or StructureBundle promotion",
+    "Bridge or AGI runtime capability implementation",
+    "P22 score optimization",
+    "LOCKED_FINAL access",
+    "official environment access",
+    "Kaggle notebook mutation or submission"
+  ],
+  "phase_order_preserved": true,
+  "external_irreversible_action_authorized": false,
+  "digest_excluded_fields": [
+    "content_digest",
+    "transition_id"
+  ],
+  "content_digest": "rev3-phase-transition:4d74eef8671efd814abf05ed4db1cde94c5ce3f3d4c009aaec72c90ddd178cd2"
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": "arc3-rev3-ph-d00a-dependency-inventory-v1",
   "phase_id": "PH-D00A",
-  "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-FREEZE",
-  "base_commit": "0e1424fc715fb5901d3a368cd232b8e54036a210",
-  "base_tree": "b1fcb0e64e3d874c37220abb2f8225b56882e9b9",
+  "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-REBIND-20260731",
+  "base_commit": "7643b13f76543d4e48cf05db03d08336ec9b3a16",
+  "base_tree": "be15955ac81d81801af17322785d2f9178647a7d",
   "local_authority_sources": [
     {
       "path": "docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md",
@@ -34,6 +34,18 @@
       "size_bytes": 20818,
       "sha256": "64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
       "match": true
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+      "size_bytes": 36907,
+      "sha256": "52c652ae734a41cd4116d4e15bca890c43c5e0aaf3f7f8d6f0627a540f7a9f63",
+      "match": true
+    },
+    {
+      "path": "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+      "size_bytes": 26937,
+      "sha256": "7c010c9c5becd89800ffb2fd9ba9a914dac3cd246a39891e88367ac5ae7753e5",
+      "match": true
     }
   ],
   "translator_reference": {
@@ -59,25 +71,20 @@
       "automatic RuleAtom promotion"
     ]
   },
-  "missing_phase_outputs_before_implementation": [
-    "DEPENDENCY_LOCK.md",
-    "AUTHORITY_ORDER.md",
-    "schemas/dependency_lock.schema.json",
-    "schemas/open_term_record.schema.json",
-    "artifacts/source_content_manifests/hds_dependencies.json",
-    "artifacts/reports/dependency_audit.json",
-    "artifacts/reports/open_term_ledger.json",
-    "scripts/audit_hds_dependencies.py",
-    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py"
-  ],
-  "future_phase_directories_absent": [
-    "distillation",
-    "bridge",
-    "runtime",
-    "config",
-    "tests/golden",
-    "tests/sealed"
-  ],
+  "missing_required_inputs": [],
+  "historical_control_migration": {
+    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
+    "destination_root": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A",
+    "migrated_artifact_count": 12,
+    "source_bytes_preserved": true,
+    "eligible_for_current_activation": false
+  },
+  "source_blind_role_boundary": {
+    "replay_harness_maintainer_source_access": true,
+    "distillation_executor_source_mount": false,
+    "distillation_auditor_source_access": false,
+    "owner_only_promotion": true
+  },
   "quarantined_non_inputs": [
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_hds.py",
@@ -109,6 +116,9 @@
     "network_submission": 0,
     "kaggle_mutation": 0
   },
-  "inventory_conclusion": "PH-D00A_INPUTS_AVAILABLE_OUTPUTS_NOT_IMPLEMENTED",
-  "content_digest": "rev3-ph-d00a-dependency-inventory:cd7c9d6d7fefdb3f564e0d6ddda29433bd36bfd3735d8cf397745971eb1aa360"
+  "inventory_conclusion": "PH-D00A_CURRENT_INPUTS_BOUND_AND_READY_FOR_DEPENDENCY_AUDIT",
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-ph-d00a-dependency-inventory:771568a1fd1e951e8c0496ea15b4bac2298d88bcc89b0ee41c398c48e649b042"
 }

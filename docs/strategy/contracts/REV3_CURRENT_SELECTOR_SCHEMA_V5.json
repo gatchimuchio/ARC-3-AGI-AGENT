@@ -1,0 +1,218 @@
+{
+  "$id": "https://gatchimuchio.invalid/schemas/rev3-current-selector-v5.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "active_phase": {
+      "const": "PH-D00A"
+    },
+    "audit_baseline_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "audit_report_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "authority_manifest_path": {
+      "const": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json"
+    },
+    "current_phase_candidates": {
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "const": "CURRENT_HEAD_REBOUND_IMPLEMENTATION_CANDIDATE"
+        },
+        "eligible_for_phase_exit": {
+          "const": true
+        },
+        "paths": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "classification",
+        "eligible_for_phase_exit",
+        "paths"
+      ],
+      "type": "object"
+    },
+    "current_work_class": {
+      "const": "PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND"
+    },
+    "distilled_initial_state_bundle_status": {
+      "const": "NOT_FROZEN"
+    },
+    "historical_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "const": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
+        },
+        "eligible_for_current_activation": {
+          "const": false
+        },
+        "preserve": {
+          "const": true
+        },
+        "scope": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "classification",
+        "eligible_for_current_activation",
+        "preserve",
+        "scope"
+      ],
+      "type": "object"
+    },
+    "installation_approval": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_artifact_digest": {
+          "const": "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8"
+        },
+        "approval_record_path": {
+          "const": "control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json"
+        },
+        "decision_capture_digest": {
+          "const": "sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd"
+        },
+        "decision_capture_path": {
+          "const": "control/rev3/OWNER_DECISION_CAPTURES/REV3_DOC_FIX_TO_PH-R-1_20260731.json"
+        },
+        "target_artifact_digest": {
+          "const": "sha256:3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219"
+        },
+        "target_evidence_commit": {
+          "const": "95c8fb0f1551716191769747d65816e273cf7640"
+        }
+      },
+      "required": [
+        "decision_capture_path",
+        "decision_capture_digest",
+        "approval_record_path",
+        "approval_artifact_digest",
+        "target_evidence_commit",
+        "target_artifact_digest"
+      ],
+      "type": "object"
+    },
+    "installation_status": {
+      "const": "INSTALLED"
+    },
+    "next_phase_after_current_phase": {
+      "const": "PH-D00B"
+    },
+    "phase_entry_approval": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_artifact_digest": {
+          "const": "owner-approval-record:db4a8bc2a2f1fab0cafb51a64745e072857eea9e35cff6cd8cceb57c65e8e581"
+        },
+        "approval_record_path": {
+          "const": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00_TO_PH-D00A_20260731.json"
+        },
+        "decision_capture_digest": {
+          "const": "sha256:61bfb90896fa3a3d7f2d58ba7f74ab708d77700b6f074030bdfcd17264414e6f"
+        },
+        "decision_capture_path": {
+          "const": "control/rev3/OWNER_DECISION_CAPTURES/PH-R00_TO_PH-D00A_20260731.json"
+        },
+        "target_artifact_digest": {
+          "const": "sha256:ff61dbf341b920bdd912b3e912423ee903e4b983e913b3def0bed452882f0114"
+        },
+        "target_evidence_commit": {
+          "const": "4afe81f2b2b1544f13c32ab4c68f871efd493d18"
+        }
+      },
+      "required": [
+        "decision_capture_path",
+        "decision_capture_digest",
+        "approval_record_path",
+        "approval_artifact_digest",
+        "target_evidence_commit",
+        "target_artifact_digest"
+      ],
+      "type": "object"
+    },
+    "ph_d00a_status": {
+      "const": "IN_PROGRESS"
+    },
+    "ph_r00_owner_authorization": {
+      "const": "ESTABLISHED"
+    },
+    "ph_r00_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_r1_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "runtime_activation_status": {
+      "const": "SUSPEND"
+    },
+    "schema_version": {
+      "const": "arc3-rev3-current-selector-v5"
+    },
+    "standing_authorization": {
+      "additionalProperties": false,
+      "properties": {
+        "content_digest": {
+          "const": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed"
+        },
+        "path": {
+          "const": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json"
+        }
+      },
+      "required": [
+        "path",
+        "content_digest"
+      ],
+      "type": "object"
+    },
+    "strategy_id": {
+      "const": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
+    },
+    "strategy_status": {
+      "const": "OWNER_APPROVED"
+    }
+  },
+  "required": [
+    "schema_version",
+    "strategy_id",
+    "strategy_status",
+    "installation_status",
+    "ph_r1_status",
+    "ph_r00_status",
+    "ph_r00_owner_authorization",
+    "ph_d00a_status",
+    "active_phase",
+    "current_work_class",
+    "next_phase_after_current_phase",
+    "distilled_initial_state_bundle_status",
+    "runtime_activation_status",
+    "authority_manifest_path",
+    "installation_approval",
+    "standing_authorization",
+    "phase_entry_approval",
+    "historical_evidence",
+    "current_phase_candidates",
+    "audit_baseline_commit",
+    "audit_report_sha256"
+  ],
+  "title": "Rev3CurrentSelectorPHD00A",
+  "type": "object"
+}

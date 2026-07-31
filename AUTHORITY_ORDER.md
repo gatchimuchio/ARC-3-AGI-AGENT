@@ -3,9 +3,10 @@
 - strategy: `ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3`
 - strategy status: `OWNER_APPROVED`
 - installation status: `INSTALLED`
-- current work class: `PH-R00_CURRENT_HEAD_REBIND`
-- active phase: `PH-R00`
-- `PH-R00`: `IN_PROGRESS`
+- current work class: `PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND`
+- active phase: `PH-D00A`
+- `PH-D00A`: `IN_PROGRESS`
+- `PH-R00`: `OWNER_APPROVED_PASS`
 - `PH-R-1`: `OWNER_APPROVED_PASS`
 - installation approval: `owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8`
 - final selector / Meta-J: `大平鉄兵`
@@ -59,9 +60,16 @@ HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE
 ```
 
 - `control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`
-- `artifacts/source_content_manifests/hds_dependencies.json`
-- `artifacts/reports/dependency_audit.json`
-- `control/rev3/D00A_PHASE_STATE.json`
+- historical result commit `4b9e64a6e396386024142df79b71cf8d0214563d`
+  に記録された`artifacts/source_content_manifests/hds_dependencies.json`の旧blob
+- historical result commit `4b9e64a6e396386024142df79b71cf8d0214563d`
+  に記録された`artifacts/reports/dependency_audit.json`の旧blob
+- `control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/D00A_PHASE_STATE.json`
+- `control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/PH-D00A_WORK_BLOCK_FRAME.json`
+- `control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/`
+
+同名のcurrent working-tree manifest／reportは、現行PH-D00Aのrebind候補であり、
+このhistorical分類には含めない。
 
 The earlier interpretation of generic “continue” instructions as PH-R00 acceptance or continuous phase approval is not valid activation evidence under the corrected contract.
 
@@ -72,7 +80,9 @@ REV3 correction evidence（bound）
 → Owner explicit approval for the exact correction artifact（recorded）
 → PH-R-1 Strategy Installation（Owner approved）
 → Owner authorization for PH-R00（ESTABLISHED）
-→ PH-R00 Current HEAD Rebind（IN_PROGRESS）
+→ PH-R00 Current HEAD Rebind（OWNER_APPROVED_PASS）
+→ Owner authorization for PH-D00A（ESTABLISHED）
+→ PH-D00A HDS Dependency / Authority Rebind（IN_PROGRESS）
 ```
 
-現在許可されるのはPH-R00 WorkBlockFrameの範囲だけである。PH-D00AはPH-R00の全DoD、required validation、failed requirement count 0、exact evidence bindが成立した場合に限り、Ownerのstanding authorizationを機械的に適用して開始できる。将来artifactを事前採択せず、各phaseで同じ条件を再評価する。Missingまたはmismatched authorityはvisible failureであり、gate緩和やhistorical approval再利用で修復しない。
+現在許可されるのはPH-D00A WorkBlockFrameの範囲だけである。PH-D00BはPH-D00Aの全DoD、required validation、failed requirement count 0、exact evidence bindが成立した場合に限り、Ownerのstanding authorizationを機械的に適用して開始できる。将来artifactを事前採択せず、各phaseで同じ条件を再評価する。Missingまたはmismatched authorityはvisible failureであり、gate緩和やhistorical approval再利用で修復しない。

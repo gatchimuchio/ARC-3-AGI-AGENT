@@ -1,8 +1,8 @@
 """Fail-closed governance boundary for the installed rev3 strategy.
 
 The 2026-07-31 audit classified the earlier rev3 phase evidence as historical
-and non-authoritative.  The Owner-approved correction is installed and PH-R00
-is authorized only for the infrastructure rebind.  Historical S5/P22
+and non-authoritative.  PH-R00 is Owner-approved and PH-D00A is authorized
+only for the HDS dependency and authority rebind.  Historical S5/P22
 capability paths remain forbidden as parents, active policies, or fallbacks.
 Phase entry alone never activates a runtime.
 """
@@ -17,11 +17,14 @@ REV3_STRATEGY_ID: Final = (
 )
 REV3_STRATEGY_STATUS: Final = "OWNER_APPROVED"
 REV3_INSTALLATION_STATUS: Final = "INSTALLED"
-REV3_CURRENT_WORK_CLASS: Final = "PH-R00_CURRENT_HEAD_REBIND"
-REV3_ACTIVE_PHASE: Final[str | None] = "PH-R00"
+REV3_CURRENT_WORK_CLASS: Final = (
+    "PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND"
+)
+REV3_ACTIVE_PHASE: Final[str | None] = "PH-D00A"
 REV3_PH_R1_STATUS: Final = "OWNER_APPROVED_PASS"
-REV3_PH_R00_STATUS: Final = "IN_PROGRESS"
+REV3_PH_R00_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_R00_OWNER_AUTHORIZATION: Final = "ESTABLISHED"
+REV3_PH_D00A_STATUS: Final = "IN_PROGRESS"
 REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS: Final = "NOT_FROZEN"
 REV3_RUNTIME_ACTIVATION_STATUS: Final = "SUSPEND"
 REV3_PHASE_ORDER: Final = (
@@ -217,6 +220,7 @@ __all__ = [
     "REV3_PH_R1_STATUS",
     "REV3_PH_R00_OWNER_AUTHORIZATION",
     "REV3_PH_R00_STATUS",
+    "REV3_PH_D00A_STATUS",
     "REV3_PHASE_ORDER",
     "REV3_RUNTIME_ACTIVATION_STATUS",
     "REV3_STRATEGY_ID",

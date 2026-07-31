@@ -47,18 +47,19 @@ OPEN_TERM_SCHEMA_RELATIVE_PATH: Final = (
     "schemas/open_term_record.schema.json"
 )
 OWNER_APPROVAL_RELATIVE_PATH: Final = (
-    "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json"
+    "control/rev3/OWNER_APPROVAL_RECORDS/"
+    "PH-R00_TO_PH-D00A_20260731.json"
 )
 
 EXPECTED_AUTHORITY_ORDER_SHA256: Final = (
-    "dfe6fb43564c2aa1ee1cb83cb00861397a466f57a853cbc20a90981719d9e03c"
+    "055f4b8c14001193d525708799f31f457d22dc9815a9feb2a972515d9b705044"
 )
 EXPECTED_OWNER_APPROVAL_SHA256: Final = (
-    "e34e21bfb72172dda3c43b922119bee962a9aca899c9d4850402f90c5c7f04f7"
+    "afc32e7ef47b7145e29a9c0baf682046ee5548cccd58b7428acbcd7e65df852c"
 )
 EXPECTED_OWNER_APPROVAL_DIGEST: Final = (
     "owner-approval-record:"
-    "a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0"
+    "db4a8bc2a2f1fab0cafb51a64745e072857eea9e35cff6cd8cceb57c65e8e581"
 )
 
 EXPECTED_LOCAL_DEPENDENCIES: Final[
@@ -122,9 +123,9 @@ EXPECTED_LOCAL_DEPENDENCIES: Final[
         "required": True,
         "role": "ARC3_REV3_ROADMAP",
         "sha256": (
-            "b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2"
+            "7c010c9c5becd89800ffb2fd9ba9a914dac3cd246a39891e88367ac5ae7753e5"
         ),
-        "size_bytes": 17209,
+        "size_bytes": 26937,
     },
     {
         "dependency_id": "REV3_ARC3_SPEC",
@@ -135,9 +136,9 @@ EXPECTED_LOCAL_DEPENDENCIES: Final[
         "required": True,
         "role": "ARC3_REV3_SPECIFICATION",
         "sha256": (
-            "feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f"
+            "52c652ae734a41cd4116d4e15bca890c43c5e0aaf3f7f8d6f0627a540f7a9f63"
         ),
-        "size_bytes": 23083,
+        "size_bytes": 36907,
     },
 )
 
@@ -440,11 +441,10 @@ def _validate_owner_approval(root: Path, authority: Mapping[str, JsonValue]) -> 
 
     approval = load_json_object(root / approval_path)
     excluded = approval.get("digest_excluded_fields")
-    if excluded != ["approval_artifact_digest", "approved_at"]:
+    if excluded != ["approval_artifact_digest"]:
         _fail("DG14_OWNER_APPROVAL_DIGEST_POLICY_MISMATCH", repr(excluded))
     approval_body = dict(approval)
     approval_body.pop("approval_artifact_digest", None)
-    approval_body.pop("approved_at", None)
     computed = (
         "owner-approval-record:"
         + sha256_bytes(canonical_json(approval_body).encode("utf-8"))
@@ -452,10 +452,22 @@ def _validate_owner_approval(root: Path, authority: Mapping[str, JsonValue]) -> 
     claimed = authority["owner_approval_artifact_digest"]
     if claimed != EXPECTED_OWNER_APPROVAL_DIGEST or claimed != computed:
         _fail("DG14_OWNER_APPROVAL_DIGEST_MISMATCH", str(claimed))
-    if approval.get("authority") != "大平鉄兵":
-        _fail("DG14_OWNER_IDENTITY_MISMATCH", repr(approval.get("authority")))
-    if approval.get("next_state") != "OWNER_APPROVED_PASS":
-        _fail("DG14_OWNER_DECISION_NOT_APPROVED", repr(approval.get("next_state")))
+    if approval.get("owner_authority") != "大平鉄兵":
+        _fail(
+            "DG14_OWNER_IDENTITY_MISMATCH",
+            repr(approval.get("owner_authority")),
+        )
+    if approval.get("decision") != "OWNER_APPROVED_PASS":
+        _fail(
+            "DG14_OWNER_DECISION_NOT_APPROVED",
+            repr(approval.get("decision")),
+        )
+    if (
+        approval.get("approved_transition") != "PH-R00_TO_PH-D00A"
+        or approval.get("next_phase_id") != PHASE_ID
+        or approval.get("next_phase_authorized") is not True
+    ):
+        _fail("DG14_OWNER_PHASE_ENTRY_MISMATCH", repr(approval))
 
 
 def _validate_authority(
