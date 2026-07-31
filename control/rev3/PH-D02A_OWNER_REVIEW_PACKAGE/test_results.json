@@ -1,0 +1,126 @@
+{
+  "schema_version": "arc3-ph-d02a-test-results-v2",
+  "phase_id": "PH-D02A",
+  "implementation_commit": "5949e14cb0135f807dd227d9d13cc8698e4e3e4e",
+  "implementation_tree": "b65c93696cf091122473e86d0da76ce6dd9090b8",
+  "results": [
+    {
+      "suite": "EXACT_TREE",
+      "commit": "5949e14cb0135f807dd227d9d13cc8698e4e3e4e",
+      "tree": "b65c93696cf091122473e86d0da76ce6dd9090b8",
+      "standalone_clone": true,
+      "tracked_diff_finding_count": 0,
+      "protected_change_count": 0,
+      "outside_frame_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_DISTILLATION",
+      "duration_seconds": 333.32,
+      "failed": 0,
+      "passed": 284,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_UNIT",
+      "duration_seconds": 481.48,
+      "failed": 0,
+      "passed": 734,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_INTEGRATION",
+      "duration_seconds": 414.6,
+      "failed": 0,
+      "passed": 8,
+      "status": "PASS"
+    },
+    {
+      "suite": "FOCUSED_CANONICAL",
+      "duration_seconds": 4.36,
+      "failed": 0,
+      "passed": 81,
+      "status": "PASS"
+    },
+    {
+      "suite": "FOCUSED_GOVERNANCE_DEPENDENCY",
+      "duration_seconds": 75.68,
+      "failed": 0,
+      "passed": 60,
+      "status": "PASS"
+    },
+    {
+      "suite": "GOVERNANCE_VALIDATOR",
+      "check_count": 43,
+      "failure_count": 0,
+      "linux_status": "PASS",
+      "windows_status": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "CANONICAL_VECTOR_REBUILD",
+      "content_digest": "hds-canonical-test-vectors:59c8c6aea34e0c3d6c9972ab989ee1f4cf936c85ad3f40eb8dc9e274f66803e6",
+      "independent_process_count": 3,
+      "artifact_count_per_process": 5,
+      "byte_identical": true,
+      "status": "PASS"
+    },
+    {
+      "suite": "SCOPE_GUARD",
+      "finding_count": 0,
+      "report_content_digest": "hds-distillation-scope-audit:5abbbdb336ed504876a78d43492ac27947ea4522edc9694ddcbcc5051324fa12",
+      "status": "PASS"
+    },
+    {
+      "suite": "HISTORICAL_MIGRATION",
+      "artifact_count": 13,
+      "byte_identical": true,
+      "eligible_for_current_activation": false,
+      "status": "PASS"
+    },
+    {
+      "suite": "RUFF_CHANGED_PYTHON",
+      "checked_file_count": 4,
+      "version": "0.12.7",
+      "status": "PASS"
+    },
+    {
+      "suite": "MYPY_STRICT",
+      "checked_file_count": 5,
+      "version": "1.17.1",
+      "status": "PASS"
+    },
+    {
+      "suite": "PY_COMPILE",
+      "checked_file_count": 5,
+      "status": "PASS"
+    },
+    {
+      "suite": "RESOURCE_BOUNDARY",
+      "source_payload_read_count": 0,
+      "source_payload_semantic_parse_count": 0,
+      "arc_environment_source_execution_count": 0,
+      "teacher_replay_execution_count": 0,
+      "real_trajectory_normalization_count": 0,
+      "ph_d02b_schema_count": 0,
+      "hds_hypothesis_generation_count": 0,
+      "distillation_execution_count": 0,
+      "bridge_runtime_capability_count": 0,
+      "rule_promotion_count": 0,
+      "locked_final_access_count": 0,
+      "official_access_count": 0,
+      "network_submission_count": 0,
+      "kaggle_mutation_count": 0,
+      "status": "PASS"
+    }
+  ],
+  "active_product_regression_count": 0,
+  "active_evidence_failure_count": 0,
+  "active_environment_failure_count": 0,
+  "active_external_service_failure_count": 0,
+  "active_tool_failure_count": 0,
+  "resolved_product_regression_count": 2,
+  "resolved_environment_failure_count": 1,
+  "resolved_operator_command_error_count": 1,
+  "evidence_payload_digest": "sha256:b6f78c8060e7b39521e01ca4dbbf84535acc7a64372b15f8a53d404c8c088d01"
+}

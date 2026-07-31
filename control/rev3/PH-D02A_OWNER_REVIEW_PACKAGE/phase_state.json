@@ -1,0 +1,294 @@
+{
+  "schema_version": "arc3-phase-state-v2",
+  "phase_id": "PH-D02A",
+  "status": "CODEX_SELF_AUDIT_PASS",
+  "base_commit": "4dbf17513fdf2027527f9f5ea64f16a99fc52326",
+  "base_tree": "fe3c806ab55a7adfa80e5f8f8c0e9a488317af0d",
+  "implementation_commit": "5949e14cb0135f807dd227d9d13cc8698e4e3e4e",
+  "implementation_tree": "b65c93696cf091122473e86d0da76ce6dd9090b8",
+  "work_block_id": "WB-PH-D02A-CANONICAL-SERIALIZATION-DIGEST-REBIND-20260731",
+  "spec_digest": "sha256:52c652ae734a41cd4116d4e15bca890c43c5e0aaf3f7f8d6f0627a540f7a9f63",
+  "roadmap_digest": "sha256:7c010c9c5becd89800ffb2fd9ba9a914dac3cd246a39891e88367ac5ae7753e5",
+  "input_manifest_digest": "rev3-current-authority-manifest:67c14a708ae3721adffe9df4caff88fe141d871486d1bfd47f45952d93d14d96",
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "APPROVED_PREDECESSOR_EVIDENCE",
+    "SYNTHETIC_CANONICAL_TEST_VECTOR",
+    "CANONICAL_CONTRACT_METADATA",
+    "OWNER_APPROVAL_EVIDENCE",
+    "HISTORICAL_CONTROL_EVIDENCE"
+  ],
+  "changed_files": [
+    "AGENTS.md",
+    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "analysis/rev3/ph_d02a_canonical_preinventory.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/D02A_PHASE_STATE.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/changed_files.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/commands.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/failed_requirements.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/open_terms.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/phase_state.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/self_audit.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/summary.md",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/OWNER_REVIEW_PACKAGE/test_results.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/PH-D02A_WORK_BLOCK_FRAME.json",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/PHASE_TRANSITIONS/PH-D02A_TO_PH-D02B.json",
+    "control/rev3/PH-D02A_WORK_BLOCK_FRAME.json",
+    "control/rev3/PHASE_TRANSITIONS/PH-D01B_TO_PH-D02A.json",
+    "control/rev3/REV3_CURRENT_SELECTOR.json",
+    "distillation/README.md",
+    "distillation/artifacts/reports/canonicalization_conformance.json",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "distillation/artifacts/test_vectors/canonical_json_v1.json",
+    "distillation/artifacts/test_vectors/canonical_jsonl_v1.jsonl",
+    "distillation/artifacts/test_vectors/canonical_test_vectors.json",
+    "distillation/artifacts/test_vectors/canonical_zip_v1.zip",
+    "distillation/input/canonicalization_contract.json",
+    "distillation/src/hds_distill/canonical.py",
+    "distillation/tests/unit/test_canonical.py",
+    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+    "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V9.json",
+    "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+    "scripts/build_ph_d02a_canonical_vectors.py",
+    "scripts/validate_rev3_governance.py"
+  ],
+  "commands": [
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests on standalone exact implementation clone",
+      "result": "284 passed in 333.32s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/unit on standalone exact clone",
+      "result": "734 passed in 481.48s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/integration on standalone exact clone",
+      "result": "8 passed in 414.60s",
+      "status": "PASS"
+    },
+    {
+      "command": "focused canonical contract and report binding",
+      "result": "81 passed in 4.36s",
+      "status": "PASS"
+    },
+    {
+      "command": "focused rev3 governance and HDS dependency regression",
+      "result": "60 passed in 75.68s",
+      "status": "PASS"
+    },
+    {
+      "command": "validate_rev3_governance.py on Linux and Windows exact implementation tree",
+      "result": "43 checks, 0 failures on both platforms",
+      "status": "PASS"
+    },
+    {
+      "command": "three independent canonical vector rebuilds with varied cwd, PYTHONHASHSEED, insertion order, and excluded metadata",
+      "result": "5 artifacts per process byte-identical; hds-canonical-test-vectors:59c8c6aea34e0c3d6c9972ab989ee1f4cf936c85ad3f40eb8dc9e274f66803e6",
+      "status": "PASS"
+    },
+    {
+      "command": "scope_guard.py --verify-report on exact tree",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; finding_count 0; hds-distillation-scope-audit:5abbbdb336ed504876a78d43492ac27947ea4522edc9694ddcbcc5051324fa12",
+      "status": "PASS"
+    },
+    {
+      "command": "targeted ruff, strict mypy, and py_compile",
+      "result": "ruff 4 files; mypy 5 files; py_compile 5 files",
+      "status": "PASS"
+    },
+    {
+      "command": "git cumulative Frame allowlist and exact-tree audit",
+      "result": "37 destinations; 12 renamed sources; 0 protected changes; 0 outside Frame; clean exact clone",
+      "status": "PASS"
+    }
+  ],
+  "tests": {
+    "exact_tree": {
+      "suite": "EXACT_TREE",
+      "commit": "5949e14cb0135f807dd227d9d13cc8698e4e3e4e",
+      "tree": "b65c93696cf091122473e86d0da76ce6dd9090b8",
+      "standalone_clone": true,
+      "tracked_diff_finding_count": 0,
+      "protected_change_count": 0,
+      "outside_frame_count": 0,
+      "status": "PASS"
+    },
+    "full_distillation": {
+      "suite": "FULL_DISTILLATION",
+      "duration_seconds": 333.32,
+      "failed": 0,
+      "passed": 284,
+      "status": "PASS"
+    },
+    "full_unit": {
+      "suite": "FULL_UNIT",
+      "duration_seconds": 481.48,
+      "failed": 0,
+      "passed": 734,
+      "status": "PASS"
+    },
+    "full_integration": {
+      "suite": "FULL_INTEGRATION",
+      "duration_seconds": 414.6,
+      "failed": 0,
+      "passed": 8,
+      "status": "PASS"
+    },
+    "focused_canonical": {
+      "suite": "FOCUSED_CANONICAL",
+      "duration_seconds": 4.36,
+      "failed": 0,
+      "passed": 81,
+      "status": "PASS"
+    },
+    "focused_governance_dependency": {
+      "suite": "FOCUSED_GOVERNANCE_DEPENDENCY",
+      "duration_seconds": 75.68,
+      "failed": 0,
+      "passed": 60,
+      "status": "PASS"
+    },
+    "governance_validator": {
+      "suite": "GOVERNANCE_VALIDATOR",
+      "check_count": 43,
+      "failure_count": 0,
+      "linux_status": "PASS",
+      "windows_status": "PASS",
+      "status": "PASS"
+    },
+    "canonical_vector_rebuild": {
+      "suite": "CANONICAL_VECTOR_REBUILD",
+      "content_digest": "hds-canonical-test-vectors:59c8c6aea34e0c3d6c9972ab989ee1f4cf936c85ad3f40eb8dc9e274f66803e6",
+      "independent_process_count": 3,
+      "artifact_count_per_process": 5,
+      "byte_identical": true,
+      "status": "PASS"
+    },
+    "scope_guard": {
+      "suite": "SCOPE_GUARD",
+      "finding_count": 0,
+      "report_content_digest": "hds-distillation-scope-audit:5abbbdb336ed504876a78d43492ac27947ea4522edc9694ddcbcc5051324fa12",
+      "status": "PASS"
+    },
+    "historical_migration": {
+      "suite": "HISTORICAL_MIGRATION",
+      "artifact_count": 13,
+      "byte_identical": true,
+      "eligible_for_current_activation": false,
+      "status": "PASS"
+    },
+    "ruff_changed_python": {
+      "suite": "RUFF_CHANGED_PYTHON",
+      "checked_file_count": 4,
+      "version": "0.12.7",
+      "status": "PASS"
+    },
+    "mypy_strict": {
+      "suite": "MYPY_STRICT",
+      "checked_file_count": 5,
+      "version": "1.17.1",
+      "status": "PASS"
+    },
+    "py_compile": {
+      "suite": "PY_COMPILE",
+      "checked_file_count": 5,
+      "status": "PASS"
+    },
+    "resource_boundary": {
+      "source_payload_read_count": 0,
+      "source_payload_semantic_parse_count": 0,
+      "arc_environment_source_execution_count": 0,
+      "teacher_replay_execution_count": 0,
+      "real_trajectory_normalization_count": 0,
+      "ph_d02b_schema_count": 0,
+      "hds_hypothesis_generation_count": 0,
+      "distillation_execution_count": 0,
+      "bridge_runtime_capability_count": 0,
+      "rule_promotion_count": 0,
+      "locked_final_access_count": 0,
+      "official_access_count": 0,
+      "network_submission_count": 0,
+      "kaggle_mutation_count": 0,
+      "status": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "control/rev3/PH-D02A_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "EVIDENCE_PAYLOAD_DESCRIPTOR",
+      "sha256": "b6f78c8060e7b39521e01ca4dbbf84535acc7a64372b15f8a53d404c8c088d01"
+    },
+    {
+      "path": "distillation/artifacts/reports/canonicalization_conformance.json",
+      "role": "CANONICALIZATION_CONFORMANCE_REPORT",
+      "content_digest": "hds-canonicalization-conformance:34243c50e4313322414c6e3525172ce0655a664ea5953bfad6be86803a1bb7ae",
+      "sha256": "a5c0fc3f5f6c1ccf30537bebba8bd9789b1906cd2e155e14e062bb6627df5895"
+    },
+    {
+      "path": "distillation/artifacts/test_vectors/canonical_test_vectors.json",
+      "role": "CANONICAL_VECTOR_MANIFEST",
+      "content_digest": "hds-canonical-test-vectors:59c8c6aea34e0c3d6c9972ab989ee1f4cf936c85ad3f40eb8dc9e274f66803e6",
+      "sha256": "30a2b74053d4be8c80817185700383e8962ea8259012427fb1b074c3c55d1e40"
+    },
+    {
+      "path": "distillation/input/canonicalization_contract.json",
+      "role": "CANONICALIZATION_CONTRACT",
+      "content_digest": "hds-canonicalization-contract:8ef686f3e30c2c773dff47637c9bb0d57dbb175d4fc6b7bd1c46a7820cf4068f",
+      "sha256": "c7300f07095837c6ce711bb375d44755a05af35cc1979705296c46614e82e71b"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "role": "CANONICAL_SCOPE_AUDIT_REPORT",
+      "content_digest": "hds-distillation-scope-audit:5abbbdb336ed504876a78d43492ac27947ea4522edc9694ddcbcc5051324fa12",
+      "sha256": "d03ac1712ed6b63da92866268a8ffb52edcc4b840f8b5237acf5721670760f28"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "content_digest": "rev3-current-authority-manifest:67c14a708ae3721adffe9df4caff88fe141d871486d1bfd47f45952d93d14d96",
+      "sha256": "0d6d430bc0a58f2f5f9938c7871f86e3e765519d718899979f57e09914402890"
+    },
+    {
+      "path": "control/rev3/PH-D02A_WORK_BLOCK_FRAME.json",
+      "role": "CURRENT_WORK_BLOCK_FRAME",
+      "content_digest": "rev3-work-block-frame:ee3cbcc1bc2c05f0411fe2bc498d50a1808bd2bfb3c2dfeaa3754f121441d4cf",
+      "sha256": "a28066b0118e7a5c5adcc730090225546bbb44f84eadc0e68e7a097d2a70c7f1"
+    }
+  ],
+  "failed_requirement_ids": [],
+  "open_terms": [
+    {
+      "id": "PH-D02A-OWNER-RESULT-BINDING-001",
+      "status": "PENDING_APPROVAL_COMMIT",
+      "blocks_next_phase_entry": true,
+      "resolution": "Bind this exact Evidence Commit and evidence payload digest through the standing authorization before PH-D02B entry."
+    }
+  ],
+  "self_audit": {
+    "authority": "PASS",
+    "canonical_serialization": "PASS",
+    "claim_strength": "PASS",
+    "data_role": "PASS",
+    "determinism": "PASS",
+    "digest_domain_separation": "PASS",
+    "evidence": "PASS",
+    "historical_fallback": "PASS",
+    "identity_taint": "PASS",
+    "interoperability": "PASS",
+    "objective_alignment": "PASS",
+    "phase_order": "PASS",
+    "provenance": "PASS",
+    "resource": "PASS",
+    "rollback": "PASS",
+    "scope": "PASS"
+  },
+  "owner_review_required": true,
+  "evidence_payload_digest": "sha256:b6f78c8060e7b39521e01ca4dbbf84535acc7a64372b15f8a53d404c8c088d01"
+}
