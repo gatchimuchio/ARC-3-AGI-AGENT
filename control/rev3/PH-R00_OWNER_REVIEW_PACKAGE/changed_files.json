@@ -1,0 +1,96 @@
+{
+  "schema_version": "arc3-ph-r00-changed-files-v2",
+  "phase_id": "PH-R00",
+  "base_commit": "4dbb65c5d45cca3402f326b251c1de6ac4a2e554",
+  "implementation_commit": "aeb52bf740f7df5f1a1c58256b3ed2232b510714",
+  "changed_file_count": 20,
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "5c91e2e59867a2e70cf406fd9c5cce124885da4cb27f2635a4a4cc1cd6fee015"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "sha256": "f002d22477588e47394734e325a78a8f7a0584ce6e94bb57db062049cb147543"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+      "sha256": "83194ecf757d2febb1da5c73ee97eb7a9e2fd03e16a9ea81cfd2fc959e940168"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_p10_prospective_obligation_composition_audit.py",
+      "sha256": "c38d3900d41b88f41f8b1446ab390f3da94836b341547cafbf9d9a4554fe5be0"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "sha256": "f17ece756eb25fde99cc1686de6413eef28b7bfe8e6f90462f9f69d8c128f91f"
+    },
+    {
+      "path": "AUTHORITY_ORDER.md",
+      "sha256": "6ea69490bd7e3f29b189147d13ff8e091aca16874ced3b7ecd36a29baf7154f4"
+    },
+    {
+      "path": "analysis/rev3/pre_distillation_infrastructure_baseline.json",
+      "sha256": "93ed4f9684e51e2c28e96dc2038484af30ffa72471c5eae0ee3734740cbfd4a5"
+    },
+    {
+      "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
+      "sha256": "10984bc4ea80978f93a62689cfb5f03b1b4366748854eb44a611c68b6ab691df"
+    },
+    {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-R-1_TO_PH-R00.json",
+      "sha256": "eb886c002bcf22d9c5630b6e2541edf41e301a615d14c91be40024cc36aaf56d"
+    },
+    {
+      "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
+      "sha256": "8f0a5ba1d228f17711f911288d38e622dc0259a3bcea28526b63a333f783e738"
+    },
+    {
+      "path": "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+      "sha256": "de236c91cbd26dec28382c438625a6961ac7f7213dab8420775cfb6fa1e8324c"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+      "sha256": "6a75056af73ff34306a4858ab8bcfea248630f0c3a23774c7e0ad75744cad8e5"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+      "sha256": "403c8637c01fdcb3e2318f847c38497ac83a10a904f1ee3dcd74b9b68db75ac0"
+    },
+    {
+      "path": "docs/strategy/ASSET_CLASSIFICATION_REV3.json",
+      "sha256": "ea4613e24090edcb96fd881bab2b1d3518a26c703838b243fa49060ad9d9a104"
+    },
+    {
+      "path": "docs/strategy/PRODUCTION_IMPORT_BOUNDARY_REV3.md",
+      "sha256": "a71f31eba7d0a761d60c68e098cceb3ae946b15169245521e0a887eceed6f0ea"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "sha256": "f720f24503cf016d0a5fbe0e64cfee362346658780e4fdbe1bbac8cf2020f647"
+    },
+    {
+      "path": "docs/strategy/REV3_STRATEGY_REBASELINE.md",
+      "sha256": "4150fe361196fae5b1e82f1e74b0c3ee8840a0762a6b219bd1fcc6e6156deef9"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V4.json",
+      "sha256": "82563ba975d92ce0baa55b6a038df1386dde8fc80ce9dfa156644f7acfcff265"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+      "sha256": "31ba02d5338dd37df760a5384e2570031293fc337887f5864cbf9319026c702b"
+    },
+    {
+      "path": "scripts/validate_rev3_governance.py",
+      "sha256": "cc871e04d588dbda277b7379393c61e64f12ca18da85d356a3a835d30da9ebe6"
+    }
+  ],
+  "excluded_preexisting_dirty_state": {
+    "path_glob": "analysis/autonomous_completion/**",
+    "tracked_file_count": 32,
+    "mutation": "NONE",
+    "staging": "NONE"
+  },
+  "evidence_payload_digest": "sha256:ff61dbf341b920bdd912b3e912423ee903e4b983e913b3def0bed452882f0114"
+}

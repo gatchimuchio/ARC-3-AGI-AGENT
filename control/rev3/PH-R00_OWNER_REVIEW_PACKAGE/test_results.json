@@ -1,0 +1,86 @@
+{
+  "schema_version": "arc3-ph-r00-test-results-v2",
+  "phase_id": "PH-R00",
+  "implementation_commit": "aeb52bf740f7df5f1a1c58256b3ed2232b510714",
+  "implementation_tree": "fcac2235add0ca2f589b5d9a08bc679d197a2669",
+  "results": [
+    {
+      "duration_seconds": 448.81,
+      "failed": 0,
+      "passed": 728,
+      "status": "PASS",
+      "suite": "FULL_UNIT_EXACT_IMPLEMENTATION_COMMIT"
+    },
+    {
+      "duration_seconds": 414.06,
+      "failed": 0,
+      "passed": 8,
+      "status": "PASS",
+      "suite": "FULL_INTEGRATION_EXACT_IMPLEMENTATION_COMMIT"
+    },
+    {
+      "duration_seconds": 74.3,
+      "failed": 0,
+      "passed": 63,
+      "status": "PASS",
+      "suite": "FOCUSED_PH_R00_REGRESSION"
+    },
+    {
+      "status": "PASS",
+      "suite": "RUFF_CHANGED_PYTHON"
+    },
+    {
+      "checked_source_file_count": 2,
+      "status": "PASS",
+      "suite": "MYPY_STRICT"
+    },
+    {
+      "check_count": 16,
+      "failure_count": 0,
+      "status": "PASS",
+      "suite": "REV3_GOVERNANCE_VALIDATOR"
+    },
+    {
+      "byte_identical": true,
+      "independent_build_count": 2,
+      "member_count": 240,
+      "sha256": "4f57f9afaa4821c79d21da04644c497bcc26e24f8d95f68183caf8ac7e28c6ab",
+      "size_bytes": 17022896,
+      "status": "PASS",
+      "suite": "WHEEL_REPRODUCIBILITY",
+      "unsafe_member_path_count": 0
+    },
+    {
+      "byte_identical": true,
+      "independent_build_count": 2,
+      "notebook_sha256": "65b74a1f890ef8102e18e3b201ebc6e33d971629741226654fcb7aedda76ba92",
+      "runtime_archive_sha256": "f81f2054bf2b273a118471253504a5339a059f58ba913531af90373613b4c629",
+      "status": "PASS",
+      "suite": "NOTEBOOK_REPRODUCIBILITY",
+      "validator_checks_failed": 0,
+      "validator_checks_passed": 25
+    },
+    {
+      "historical_fallback_count": 0,
+      "quarantined_module_intersection": [],
+      "status": "PASS",
+      "suite": "PRODUCTION_IMPORT_BOUNDARY"
+    },
+    {
+      "ignored_checkpoint_present": false,
+      "status": "PASS",
+      "suite": "CLEAN_TREE_REPRODUCIBILITY"
+    },
+    {
+      "status": "PASS",
+      "suite": "GIT_DIFF_CHECK"
+    }
+  ],
+  "active_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "active_external_service_failure_count": 0,
+  "active_tool_failure_count": 0,
+  "resolved_environment_failure_count": 2,
+  "resolved_tool_failure_count": 1,
+  "evidence_payload_digest": "sha256:ff61dbf341b920bdd912b3e912423ee903e4b983e913b3def0bed452882f0114"
+}

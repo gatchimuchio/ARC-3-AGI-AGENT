@@ -1,0 +1,171 @@
+{
+  "schema_version": "arc3-ph-r00-evidence-payload-manifest-v2",
+  "phase_id": "PH-R00",
+  "work_block_id": "WB-PH-R00-CURRENT-HEAD-REBIND-20260731",
+  "base_commit": "4dbb65c5d45cca3402f326b251c1de6ac4a2e554",
+  "base_tree": "44ccb73437480daeaab71e6cb3119b5e6bc5d485",
+  "implementation_commit": "aeb52bf740f7df5f1a1c58256b3ed2232b510714",
+  "implementation_tree": "fcac2235add0ca2f589b5d9a08bc679d197a2669",
+  "payload_digest_method": "SHA256_OF_THIS_FILE_BYTES_WITH_FINAL_LF",
+  "manifest_excludes_self": true,
+  "frame": {
+    "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
+    "content_digest": "rev3-work-block-frame:ac14d98087e931677f48c68d2e8f47c83dcb642ff51d13a24c85a59678fb92bb",
+    "sha256": "10984bc4ea80978f93a62689cfb5f03b1b4366748854eb44a611c68b6ab691df"
+  },
+  "authority_manifest": {
+    "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "content_digest": "rev3-current-authority-manifest:ce1a413514f613de8e9195bf0c108065cb16c308d2a14caca9523ef557dd6307",
+    "sha256": "f720f24503cf016d0a5fbe0e64cfee362346658780e4fdbe1bbac8cf2020f647"
+  },
+  "artifacts": [
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "role": "FAIL_CLOSED_RUNTIME_GUARD",
+      "sha256": "f002d22477588e47394734e325a78a8f7a0584ce6e94bb57db062049cb147543"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_p10_prospective_obligation_composition_audit.py",
+      "role": "EXACT_TREE_REPRODUCIBILITY_REGRESSION_TEST",
+      "sha256": "c38d3900d41b88f41f8b1446ab390f3da94836b341547cafbf9d9a4554fe5be0"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "role": "CURRENT_HISTORICAL_EVIDENCE_BOUNDARY_TEST",
+      "sha256": "f17ece756eb25fde99cc1686de6413eef28b7bfe8e6f90462f9f69d8c128f91f"
+    },
+    {
+      "path": "analysis/rev3/pre_distillation_infrastructure_baseline.json",
+      "role": "PRE_DISTILLATION_INFRASTRUCTURE_BASELINE",
+      "sha256": "93ed4f9684e51e2c28e96dc2038484af30ffa72471c5eae0ee3734740cbfd4a5"
+    },
+    {
+      "path": "control/rev3/PH-R00_WORK_BLOCK_FRAME.json",
+      "role": "CURRENT_WORK_BLOCK_FRAME",
+      "sha256": "10984bc4ea80978f93a62689cfb5f03b1b4366748854eb44a611c68b6ab691df"
+    },
+    {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-R-1_TO_PH-R00.json",
+      "role": "PHASE_ENTRY_TRANSITION",
+      "sha256": "eb886c002bcf22d9c5630b6e2541edf41e301a615d14c91be40024cc36aaf56d"
+    },
+    {
+      "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
+      "role": "CURRENT_SELECTOR",
+      "sha256": "8f0a5ba1d228f17711f911288d38e622dc0259a3bcea28526b63a333f783e738"
+    },
+    {
+      "path": "docs/strategy/ASSET_CLASSIFICATION_REV3.json",
+      "role": "CURRENT_ASSET_CLASSIFICATION",
+      "sha256": "ea4613e24090edcb96fd881bab2b1d3518a26c703838b243fa49060ad9d9a104"
+    },
+    {
+      "path": "docs/strategy/PRODUCTION_IMPORT_BOUNDARY_REV3.md",
+      "role": "PRODUCTION_IMPORT_BOUNDARY",
+      "sha256": "a71f31eba7d0a761d60c68e098cceb3ae946b15169245521e0a887eceed6f0ea"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "sha256": "f720f24503cf016d0a5fbe0e64cfee362346658780e4fdbe1bbac8cf2020f647"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+      "role": "GOVERNANCE_CONTRACT",
+      "sha256": "31ba02d5338dd37df760a5384e2570031293fc337887f5864cbf9319026c702b"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V4.json",
+      "role": "CURRENT_SELECTOR_SCHEMA",
+      "sha256": "82563ba975d92ce0baa55b6a038df1386dde8fc80ce9dfa156644f7acfcff265"
+    },
+    {
+      "path": "scripts/validate_rev3_governance.py",
+      "role": "GOVERNANCE_VALIDATOR",
+      "sha256": "cc871e04d588dbda277b7379393c61e64f12ca18da85d356a3a835d30da9ebe6"
+    }
+  ],
+  "artifact_count": 13,
+  "validation": {
+    "exact_tree": {
+      "commit": "aeb52bf740f7df5f1a1c58256b3ed2232b510714",
+      "tree": "fcac2235add0ca2f589b5d9a08bc679d197a2669",
+      "ignored_checkpoint_present": false,
+      "tracked_diff_finding_count": 0,
+      "status": "PASS"
+    },
+    "full_unit": {
+      "duration_seconds": 448.81,
+      "failed": 0,
+      "passed": 728,
+      "status": "PASS"
+    },
+    "full_integration": {
+      "duration_seconds": 414.06,
+      "failed": 0,
+      "passed": 8,
+      "status": "PASS"
+    },
+    "focused_regression": {
+      "duration_seconds": 74.3,
+      "failed": 0,
+      "passed": 63,
+      "status": "PASS"
+    },
+    "ruff": {
+      "status": "PASS"
+    },
+    "mypy_strict": {
+      "checked_source_file_count": 2,
+      "status": "PASS"
+    },
+    "governance_validator": {
+      "check_count": 16,
+      "failure_count": 0,
+      "status": "PASS"
+    },
+    "wheel": {
+      "byte_identical": true,
+      "independent_build_count": 2,
+      "member_count": 240,
+      "sha256": "4f57f9afaa4821c79d21da04644c497bcc26e24f8d95f68183caf8ac7e28c6ab",
+      "size_bytes": 17022896,
+      "status": "PASS",
+      "unsafe_member_path_count": 0
+    },
+    "notebook": {
+      "build_report_sha256": "4e7cfa062b295cb083f55f1ffc98fe040d8745f2a2b50ac5b5461f26eac53377",
+      "byte_identical": true,
+      "independent_build_count": 2,
+      "metadata_sha256": "fd04c4b40f4ab71c4da908d195fc5e4e6a1487c58262dd4fc817fffb8ef99f5e",
+      "notebook_sha256": "65b74a1f890ef8102e18e3b201ebc6e33d971629741226654fcb7aedda76ba92",
+      "notebook_size_bytes": 188336,
+      "normalized_validation_reports_identical": true,
+      "runtime_archive_sha256": "f81f2054bf2b273a118471253504a5339a059f58ba913531af90373613b4c629",
+      "runtime_import_smoke": "WIN:2:True:True",
+      "runtime_module_count": 37,
+      "secret_finding_count": 0,
+      "status": "PASS",
+      "submission_api_call_count": 0,
+      "validator_checks_failed": 0,
+      "validator_checks_passed": 25
+    },
+    "production_import_boundary": {
+      "historical_fallback_count": 0,
+      "known_sample_policy_included": false,
+      "quarantined_module_intersection": [],
+      "runtime_identity_routing_included": false,
+      "status": "PASS",
+      "teacher_included": false
+    }
+  },
+  "claim": "PH_R00_CURRENT_HEAD_REBIND_PASS",
+  "forbidden_claims": [
+    "HDS_DISTILLATION_COMPLETE",
+    "AGI_BUILD_READY",
+    "RUNTIME_ACTIVE",
+    "LOCKED_FINAL_COMPLETE",
+    "OFFICIAL_COMPLETE",
+    "KAGGLE_MUTATION_COMPLETE"
+  ]
+}
