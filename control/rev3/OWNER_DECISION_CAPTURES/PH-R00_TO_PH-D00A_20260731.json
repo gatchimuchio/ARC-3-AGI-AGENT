@@ -1,0 +1,28 @@
+{
+  "schema_version": "arc3-owner-decision-capture-v2",
+  "owner_decision_id": "PH-R00_TO_PH-D00A_20260731",
+  "source_instruction_ref": "codex-thread:user-message:2026-07-31:continuous-required-approvals",
+  "source_instruction_digest": "sha256:cb74ab342a55d0cf6a5a0b02923d46f4c509b9224e2df339a3ed6823fa7b5886",
+  "standing_authorization_path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+  "standing_authorization_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+  "decision_basis": "OWNER_STANDING_AUTHORIZATION",
+  "target_artifact_digest": "sha256:ff61dbf341b920bdd912b3e912423ee903e4b983e913b3def0bed452882f0114",
+  "target_evidence_commit": "4afe81f2b2b1544f13c32ab4c68f871efd493d18",
+  "gate_result_digest": "ph-r00-gate-result:f5b91efea2d8ec5fb1011c7444ad54908ea6577c477ede80d8649dd794b50ebd",
+  "gate_status": "PASS",
+  "allowed_transition": "PH-R00_TO_PH-D00A",
+  "decision": "APPROVE_PHASE_RESULT_AND_AUTHORIZE_NEXT_PHASE_ENTRY",
+  "reason_codes": [
+    "OWNER_STANDING_AUTHORIZATION_APPLIES",
+    "PHASE_DOD_PASS",
+    "FAILED_REQUIREMENT_COUNT_ZERO",
+    "EXACT_EVIDENCE_BOUND",
+    "SEQUENTIAL_PREDECESSOR_SATISFIED"
+  ],
+  "captured_by": "Codex mechanical transcription",
+  "capture_is_mechanical": true,
+  "digest_excluded_fields": [
+    "owner_decision_content_digest"
+  ],
+  "owner_decision_content_digest": "sha256:61bfb90896fa3a3d7f2d58ba7f74ab708d77700b6f074030bdfcd17264414e6f"
+}
