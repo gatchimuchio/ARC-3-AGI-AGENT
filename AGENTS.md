@@ -1,6 +1,6 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00A、PH-D00B、PH-D01A、PH-D01B、PH-D02A、PH-D02B、PH-D02CはOwner承認済みであり、PH-D03Aだけが現在activeである。PH-D03A開始許可は、承認済みPH-D02C ABIを使う16件のsynthetic Golden implementation-conformance candidate、DG-00〜DG-15のbehavioral recomputation、非権威Owner review requestの実装・検証に限られ、Golden freeze、PH-D03B Sealed corpus、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS一般仮説生成・蒸留実行、Rule promotion、Bridge、Runtimeの開始許可ではない。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00A、PH-D00B、PH-D01A、PH-D01B、PH-D02A、PH-D02B、PH-D02C、PH-D03AはOwner承認済みであり、PH-D03Bだけが現在activeである。PH-D03B開始許可は、content-specificに承認された16件のGolden expectation digestをcommitment-only Sealed audit corpusとして固定し、source／approval digest、PASS／FAILのみの一回使用runner、DG-06／DG-14を実装・検証する範囲に限られる。expected plaintextのsealed namespace保存、自動expectation更新、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS一般仮説生成・蒸留実行、Rule promotion、Bridge、Runtimeの開始許可ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
 - 日付: `2026-07-31`
@@ -10,9 +10,10 @@
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
 - 契約状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- 現在作業: `PH-D03A_POST_AUDIT_GOLDEN_CONFORMANCE_CANDIDATE`
-- Active phase: `PH-D03A`
-- PH-D03A: `IN_PROGRESS`
+- 現在作業: `PH-D03B_SEALED_AUDIT_CORPUS_FREEZE`
+- Active phase: `PH-D03B`
+- PH-D03B: `IN_PROGRESS`
+- PH-D03A: `OWNER_APPROVED_PASS`
 - PH-D02C: `OWNER_APPROVED_PASS`
 - PH-D02B: `OWNER_APPROVED_PASS`
 - PH-D02A: `OWNER_APPROVED_PASS`
@@ -144,8 +145,8 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = PH-D03A
-Current work = PH-D03A_POST_AUDIT_GOLDEN_CONFORMANCE_CANDIDATE
+Active phase = PH-D03B
+Current work = PH-D03B_SEALED_AUDIT_CORPUS_FREEZE
 PH-R-1 = OWNER_APPROVED_PASS
 PH-R00 = OWNER_APPROVED_PASS
 PH-D00A = OWNER_APPROVED_PASS
@@ -155,7 +156,8 @@ PH-D01B = OWNER_APPROVED_PASS
 PH-D02A = OWNER_APPROVED_PASS
 PH-D02B = OWNER_APPROVED_PASS
 PH-D02C = OWNER_APPROVED_PASS
-PH-D03A = IN_PROGRESS
+PH-D03A = OWNER_APPROVED_PASS
+PH-D03B = IN_PROGRESS
 PH-R00 Owner authorization = ESTABLISHED
 ```
 
@@ -196,9 +198,11 @@ AND PH-D02B_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D02C
 AND PH-D02C_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D03A
+AND PH-D03A_DOD_PASS
+AND OWNER_AUTHORIZED_PH-D03B
 ```
 
-以前に`PH-D03A`を開始しない。現在は全条件が成立し、PH-D03Aだけがactiveである。PH-D03BはPH-D03Aの全DoD、16件のcontent-specific target bind、required validation、failed requirement count 0、exact evidence bind、OwnerDecisionCaptureが成立するまで開始しない。
+以前に`PH-D03B`を開始しない。現在は全条件が成立し、PH-D03Bだけがactiveである。PH-D05はPH-D03Bの全DoD、16件のimmutable commitment freeze、source／approval digest freeze、status-only one-use runner、required validation、failed requirement count 0、exact evidence bind、OwnerDecisionCaptureが成立するまで開始しない。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -758,9 +762,10 @@ PH-D01BはOWNER_APPROVED_PASSです。
 PH-D02AはOWNER_APPROVED_PASSです。
 PH-D02BはOWNER_APPROVED_PASSです。
 PH-D02CはOWNER_APPROVED_PASSです。
-PH-D03AはIN_PROGRESSです。
-Active phaseはPH-D03Aです。
-現在許可されたwork classはPH-D03A_POST_AUDIT_GOLDEN_CONFORMANCE_CANDIDATEです。
+PH-D03AはOWNER_APPROVED_PASSです。
+PH-D03BはIN_PROGRESSです。
+Active phaseはPH-D03Bです。
+現在許可されたwork classはPH-D03B_SEALED_AUDIT_CORPUS_FREEZEです。
 PH-R00のOwner authorizationはESTABLISHEDです。
 
 最初に、
@@ -769,32 +774,32 @@ PH-R00のOwner authorizationはESTABLISHEDです。
 - HEAD/tree
 - dirty state
 - required documents
-- PH-D02C evidence、attestation、approval
-- PH-D03A WorkBlockFrameとphase-entry approval
+- PH-D03A evidence、attestation、content-specific decision／approval
+- PH-D03B WorkBlockFrameとphase-entry approval
 を確認してください。
 
 次だけを実施してください。
 
-- 承認済みPH-D02C schema／Typed Causal IR／interpreter／verifier ABIをread-only inputとして使う
-- ARC2 8カテゴリ、ARC3 8カテゴリのsynthetic Golden candidateをexactly 16件生成する
-- 各caseへRawObservation、DeterministicDerivation、InterpretationHypothesis、複数HypothesisIR、exact fit、predeclared intervention、InterventionResult、HDSCausalRecord、FailureSignature、GateResult、非権威ApprovalRecord templateを保持する
-- DG-00〜DG-15を宣言値ではなくcase構造・IR再実行・negative probeから再計算する
-- identity routing、authority fabrication、unapproved commit／promotionをstable codeで拒否する
-- exact fitをcausal truthへ昇格せず、全modelをHOLDする
-- resource overflowをSUSPEND_RESOURCE／HOLD／INCONCLUSIVEとして再実行確認する
-- 監査前PH-D03A control artifact 15件、4 candidate artifact、source、test、preinventoryを明示的historical移送する
-- contract、candidate、coverage、review requestの独立process 3回byte-identical rebuild
+- 承認済みPH-D03A target bundle、decision、ApprovalRecord、evidence、Golden source digestsをread-only inputとして使う
+- exactly 16件のapproved expected-artifact digestを、labelとexpected plaintextを持たないcommitment setへ固定する
+- source bytes、content binding、target bundle、decision、ApprovalRecordをsealed manifestへ固定する
+- Golden namespaceとSealed namespaceを分離し、expected plaintextをsealed artifactへ保存しない
+- runnerがsubmission artifactのlogical digestを再計算し、declared digestのコピーや改変を拒否する
+- runner出力をexact bytesの`PASS\n`または`FAIL\n`だけに限定する
+- repository外のmutable ledgerで最初のaudit attemptをatomicにconsumeし、同一ledgerでの再利用をFAILにする
+- static bundle drift、source drift、approval drift、malformed submission、repository内ledgerをfail closedで拒否する
+- DG-06とDG-14を構造とnegative probeから再計算する
+- 5 artifactの独立process 3回byte-identical rebuild
 - dedicated／focused／full unit／integration regression
 - deterministic artifact、Implementation Commit、Evidence Commit、attestationの分離
-- PH-D03A DoD、DG-00〜DG-15、failed requirement count 0の証明
-- 16件のprovisional expectation digestをexact target bundleとしてOwnerDecisionCaptureへ機械的に束縛する
+- PH-D03B DoD、DG-06／DG-14、failed requirement count 0の証明
 
-Golden expectation freeze、PH-D03B Sealed corpus、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS一般仮説生成・蒸留実行、Rule promotion、
+expected plaintextのsealed namespace保存、automatic expectation update、PH-D05 real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS一般仮説生成・蒸留実行、Rule promotion、
 Bridge実装、AGI Runtime、P22改善、locked final、official、Kaggleへ進んではいけません。
 
-PH-D03A成果のImplementation Commit、Evidence Commit、attestationを分離してください。
+PH-D03B成果のImplementation Commit、Evidence Commit、attestationを分離してください。
 全gateがPASSした場合だけstanding authorizationをexact evidenceへ機械的にbindし、
-content-specific Owner decisionを転記してください。失敗または未証明gateを承認してはいけません。
+PH-D03BからPH-D05へのOwner decisionを転記してください。失敗または未証明gateを承認してはいけません。
 ```
 
 ---

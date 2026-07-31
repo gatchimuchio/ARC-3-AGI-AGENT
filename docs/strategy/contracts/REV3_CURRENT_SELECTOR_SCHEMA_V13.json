@@ -1,0 +1,250 @@
+{
+  "$id": "https://gatchimuchio.invalid/schemas/rev3-current-selector-v13.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "active_phase": {
+      "const": "PH-D03B"
+    },
+    "audit_baseline_commit": {
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "audit_report_sha256": {
+      "pattern": "^[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "authority_manifest_path": {
+      "const": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json"
+    },
+    "current_phase_candidates": {
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "const": "SEALED_AUDIT_CORPUS_FREEZE_IN_PROGRESS"
+        },
+        "eligible_for_phase_exit": {
+          "const": false
+        },
+        "paths": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "classification",
+        "eligible_for_phase_exit",
+        "paths"
+      ],
+      "type": "object"
+    },
+    "current_work_class": {
+      "const": "PH-D03B_SEALED_AUDIT_CORPUS_FREEZE"
+    },
+    "distilled_initial_state_bundle_status": {
+      "const": "NOT_FROZEN"
+    },
+    "historical_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "classification": {
+          "const": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
+        },
+        "eligible_for_current_activation": {
+          "const": false
+        },
+        "preserve": {
+          "const": true
+        },
+        "scope": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "classification",
+        "eligible_for_current_activation",
+        "preserve",
+        "scope"
+      ],
+      "type": "object"
+    },
+    "installation_approval": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_artifact_digest": {
+          "const": "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8"
+        },
+        "approval_record_path": {
+          "const": "control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json"
+        },
+        "decision_capture_digest": {
+          "const": "sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd"
+        },
+        "decision_capture_path": {
+          "const": "control/rev3/OWNER_DECISION_CAPTURES/REV3_DOC_FIX_TO_PH-R-1_20260731.json"
+        },
+        "target_artifact_digest": {
+          "const": "sha256:3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219"
+        },
+        "target_evidence_commit": {
+          "const": "95c8fb0f1551716191769747d65816e273cf7640"
+        }
+      },
+      "required": [
+        "decision_capture_path",
+        "decision_capture_digest",
+        "approval_record_path",
+        "approval_artifact_digest",
+        "target_evidence_commit",
+        "target_artifact_digest"
+      ],
+      "type": "object"
+    },
+    "installation_status": {
+      "const": "INSTALLED"
+    },
+    "next_phase_after_current_phase": {
+      "const": "PH-D05"
+    },
+    "phase_entry_approval": {
+      "additionalProperties": false,
+      "properties": {
+        "approval_artifact_digest": {
+          "const": "owner-approval-record:a9c552468bd6f656148030de28b914c2d6ad9b2bc095462ee6ba3e50f4cbe00a"
+        },
+        "approval_record_path": {
+          "const": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D03A_TO_PH-D03B_20260731.json"
+        },
+        "decision_capture_digest": {
+          "const": "sha256:33f13a39d4f2238b7fe329feb6dd0115e248ac222f39d0cb57c573a64fe454be"
+        },
+        "decision_capture_path": {
+          "const": "control/rev3/OWNER_DECISION_CAPTURES/PH-D03A_TO_PH-D03B_20260731.json"
+        },
+        "target_artifact_digest": {
+          "const": "sha256:8c7c1c2b80239eb23e1c72e6bad3a71d9f43b203ac5a6fe4d8e93da3ba6bc309"
+        },
+        "target_evidence_commit": {
+          "const": "cc20fe82ab2aba6ae8159bb2c761b4dabe05886c"
+        }
+      },
+      "required": [
+        "decision_capture_path",
+        "decision_capture_digest",
+        "approval_record_path",
+        "approval_artifact_digest",
+        "target_evidence_commit",
+        "target_artifact_digest"
+      ],
+      "type": "object"
+    },
+    "ph_d00a_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_d00b_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_d01a_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_d01b_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_d02a_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_d02b_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_d02c_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_d03a_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_d03b_status": {
+      "const": "IN_PROGRESS"
+    },
+    "ph_r00_owner_authorization": {
+      "const": "ESTABLISHED"
+    },
+    "ph_r00_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "ph_r1_status": {
+      "const": "OWNER_APPROVED_PASS"
+    },
+    "runtime_activation_status": {
+      "const": "SUSPEND"
+    },
+    "schema_version": {
+      "const": "arc3-rev3-current-selector-v13"
+    },
+    "standing_authorization": {
+      "additionalProperties": false,
+      "properties": {
+        "content_digest": {
+          "const": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed"
+        },
+        "path": {
+          "const": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json"
+        }
+      },
+      "required": [
+        "path",
+        "content_digest"
+      ],
+      "type": "object"
+    },
+    "strategy_id": {
+      "const": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
+    },
+    "strategy_status": {
+      "const": "OWNER_APPROVED"
+    }
+  },
+  "required": [
+    "schema_version",
+    "strategy_id",
+    "strategy_status",
+    "installation_status",
+    "ph_r1_status",
+    "ph_r00_status",
+    "ph_r00_owner_authorization",
+    "ph_d00a_status",
+    "ph_d00b_status",
+    "ph_d01a_status",
+    "ph_d01b_status",
+    "ph_d02a_status",
+    "ph_d02b_status",
+    "ph_d02c_status",
+    "ph_d03a_status",
+    "ph_d03b_status",
+    "active_phase",
+    "current_work_class",
+    "next_phase_after_current_phase",
+    "distilled_initial_state_bundle_status",
+    "runtime_activation_status",
+    "authority_manifest_path",
+    "installation_approval",
+    "standing_authorization",
+    "phase_entry_approval",
+    "historical_evidence",
+    "current_phase_candidates",
+    "audit_baseline_commit",
+    "audit_report_sha256"
+  ],
+  "title": "Rev3CurrentSelectorPHD03B",
+  "type": "object"
+}

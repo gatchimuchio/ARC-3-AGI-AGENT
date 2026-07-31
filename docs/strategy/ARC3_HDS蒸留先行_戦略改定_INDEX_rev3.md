@@ -3,9 +3,10 @@
 - Package status: `OWNER_APPROVED`
 - Installation status: `INSTALLED`
 - PH-R-1 status: `OWNER_APPROVED_PASS`
-- Current work class: `PH-D03A_POST_AUDIT_GOLDEN_CONFORMANCE_CANDIDATE`
-- Active phase: `PH-D03A`
-- `PH-D03A`: `IN_PROGRESS`
+- Current work class: `PH-D03B_SEALED_AUDIT_CORPUS_FREEZE`
+- Active phase: `PH-D03B`
+- `PH-D03B`: `IN_PROGRESS`
+- `PH-D03A`: `OWNER_APPROVED_PASS`
 - `PH-D02C`: `OWNER_APPROVED_PASS`
 - `PH-D02B`: `OWNER_APPROVED_PASS`
 - `PH-D02A`: `OWNER_APPROVED_PASS`
@@ -73,7 +74,7 @@ S5/P22 compiled policy = historical/quarantine
 
 既存成果物は削除しない。監査是正後のOwner承認とStrategy Installationは成立したが、監査前成果物を現在のPhase通過証拠またはactive selectorとして使用しない。
 
-## PH-D02C承認済み証拠とPH-D03A現行境界
+## PH-D03A承認済み証拠とPH-D03B現行境界
 
 - source-blind三roleは別process・別mount projectionで固定し、Executor/Auditorのenvironment source mountとrepository-root visibilityを0件として検証する。
 - 現行environment/run bindingにより監査前PH-D02B成果物3件が失効することを`distillation/artifacts/reports/ph_d01b_downstream_invalidation.json`へexact digest付きで記録する。
@@ -83,9 +84,11 @@ S5/P22 compiled policy = historical/quarantine
 - 監査前PH-D02B control artifact 13件は`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02B/`へbyte-identicalに保持し、監査前D02C-refined schema／interpreter候補とともに現行phase pass証拠へ使用しない。
 - PH-D02Cでは承認済みPH-D02B schema setからversioned 45-schema setを派生し、Typed Causal IR、pure offline interpreter、verifier ABI、identity／answer-copy linter、resource suspension、synthetic conformanceを実装・再検証し、exact evidenceへOwner承認を拘束済みである。
 - 監査前PH-D02C control artifact 13件と生成IR candidate 12件は明示的historical namespaceへbyte-identicalに保持し、現行phase pass証拠へ使用しない。
-- PH-D03AではARC2 8カテゴリ／ARC3 8カテゴリのsynthetic Golden implementation-conformance candidateを生成し、DG-00〜DG-15をcase構造、IR再実行、bounded intervention、negative probeから再計算する。
+- PH-D03AではARC2 8カテゴリ／ARC3 8カテゴリのsynthetic Golden implementation-conformance candidateを生成し、DG-00〜DG-15をcase構造、IR再実行、bounded intervention、negative probeから再計算し、16件すべてのexpectation digestをcontent-specific Owner decisionへ拘束済みである。
 - 監査前PH-D03A control artifact 15件、4 candidate artifact、source、test、preinventoryは明示的historical namespaceへbyte-identicalに保持し、現行phase pass証拠へ使用しない。
-- 現行16 candidateは`PROPOSED_PENDING_OWNER_APPROVAL`であり、Golden freeze、PH-D03B Sealed corpus、real teacher trajectory normalization、HDS一般仮説生成、Rule promotion、Bridge、Runtimeは開始しない。
+- PH-D03Bでは、承認された16件のexpected-artifact digestだけをlabelなしcommitment setへ固定し、Golden source、target bundle、decision、ApprovalRecord、evidenceのexact digestをsealed manifestへ拘束する。
+- Sealed namespaceにはexpected artifact plaintextとfixture identifierを保存しない。runnerはsubmission digestを再計算し、出力をexact `PASS\n`／`FAIL\n`だけに限定し、repository外のmutable ledgerで最初のaudit attemptをconsumeする。
+- 現行境界は`DISTILLATION_CONFORMANCE_CORPUS_FROZEN`までである。PH-D05 real teacher trajectory normalization、HDS一般仮説生成、Rule promotion、Bridge、Runtimeは開始しない。
 
 ## 機械可読契約
 
@@ -110,6 +113,7 @@ S5/P22 compiled policy = historical/quarantine
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V10.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V11.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V12.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V13.json`
 - `docs/strategy/contracts/POST_AUDIT_CAUSAL_IR_CONTRACT_V1.json`
 - `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 

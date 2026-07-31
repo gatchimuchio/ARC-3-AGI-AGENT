@@ -76,7 +76,7 @@ mechanism assertion.
 IR candidates byte-identically under a content-bound snapshot manifest. Those
 bytes are candidate input only and are not eligible for current activation.
 
-The current post-audit `PH-D03A` adds
+The Owner-approved post-audit `PH-D03A` adds
 `golden_conformance_contract.json`. It is bound to the exact approved
 PH-D02C phase-state hash, evidence payload, entry ApprovalRecord, post-audit
 schema contract, executable IR contract, current WorkBlockFrame, and phase
@@ -94,10 +94,34 @@ transition. It fixes:
   causal establishment, general candidate generation, promotion, Bridge,
   runtime, official, and Kaggle activity.
 
-The contract authorizes deterministic candidate construction and validation
-only. The checked Owner review request contains no decision. A new trusted,
-content-specific Owner ApprovalRecord is required before any provisional
-expectation can be frozen, and approved expectations cannot be auto-updated.
+The checked Owner review request itself contains no decision. The separate,
+content-specific PH-D03A OwnerDecisionCapture and ApprovalRecord approve the
+exact sixteen-target bundle without mutating these candidate artifacts.
+Approved expectations cannot be auto-updated.
+
+The current `PH-D03B` adds `sealed_audit_contract.json` and the versioned
+sealed namespace under `../frozen/sealed_audit/ph_d03b_v1/`. The contract is
+bound to the exact PH-D03A evidence, sixteen-target bundle, decision,
+ApprovalRecord, current WorkBlockFrame, preinventory, and transition. It
+fixes:
+
+- exactly sixteen unlabeled expected-artifact digest commitments;
+- zero expected-artifact plaintext and zero fixture identifiers in sealed
+  artifacts;
+- exact source byte hashes and bound digests without copying mutable Golden
+  content;
+- canonical manifest and runner-contract references;
+- exact status-only `PASS\n` or `FAIL\n` disclosure;
+- logical-digest recomputation instead of trusting declared digests;
+- atomic consume-on-first-attempt state in a mutable ledger outside the
+  repository;
+- fail-closed source drift, bundle drift, malformed submission, ledger
+  placement, and reuse behavior;
+- DG-06 and DG-14 evidence with zero real-source normalization, promotion,
+  Bridge, Runtime, official, and Kaggle activity.
+
+The audit path raw-hashes the bound Golden source files but does not parse
+their expected plaintext. PH-D05 is not started by this contract.
 
 `historical_pre_audit/PH-D03A/` preserves the four pre-audit checked
 candidate artifacts plus the corresponding source and test bytes from commit

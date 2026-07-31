@@ -50,16 +50,16 @@
     ]
   },
   "active_work_block": {
-    "content_digest": "rev3-work-block-frame:a035ddb7fda0e8a598d11f65154a5f45f31439d3c229019f60a2324ec9084530",
+    "content_digest": "rev3-work-block-frame:3f741cd961329e719c657bcef91b82984042ce835ff29163640a48121aebea89",
     "external_irreversible_actions_authorized": false,
-    "path": "control/rev3/PH-D03A_WORK_BLOCK_FRAME.json",
-    "phase_id": "PH-D03A",
+    "path": "control/rev3/PH-D03B_WORK_BLOCK_FRAME.json",
+    "phase_id": "PH-D03B",
     "runtime_capability_addition_count": 0,
-    "transition_digest": "rev3-phase-transition:6a10c8cb7d86884e449054462d6407e33c5ea42b9b77387c84e3fad9dc9d0914"
+    "transition_digest": "rev3-phase-transition:3b063d6a78bbd4acc79b9a299badcefd7a22890f286db6d18d96233bc65d24a6"
   },
   "current_selector": {
-    "active_phase": "PH-D03A",
-    "current_work_class": "PH-D03A_POST_AUDIT_GOLDEN_CONFORMANCE_CANDIDATE",
+    "active_phase": "PH-D03B",
+    "current_work_class": "PH-D03B_SEALED_AUDIT_CORPUS_FREEZE",
     "distilled_initial_state_bundle_status": "NOT_FROZEN",
     "installation_status": "INSTALLED",
     "ph_d00a_status": "OWNER_APPROVED_PASS",
@@ -74,7 +74,8 @@
     "ph_r1_status": "OWNER_APPROVED_PASS",
     "runtime_activation_status": "SUSPEND",
     "strategy_status": "OWNER_APPROVED",
-    "ph_d03a_status": "IN_PROGRESS"
+    "ph_d03a_status": "OWNER_APPROVED_PASS",
+    "ph_d03b_status": "IN_PROGRESS"
   },
   "execution_control": [
     "OWNER_CURRENT_EXPLICIT_INSTRUCTION",
@@ -136,12 +137,12 @@
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "phase_entry_approval": {
-    "approval_artifact_digest": "owner-approval-record:2f01decd9706b8a69fc00c1ff7ad22d4ee79aa9c1bfc8667f21792e882235625",
-    "decision_capture_digest": "sha256:e9c85018fc95d1343b9ad0c398f7c4f367371ed4fe0b4b0e0db361bdbb432d8b",
-    "from_phase": "PH-D02C",
-    "target_artifact_digest": "sha256:cb5c07dd9295ee47fa5f114ba9aff5d9f10106da2c6d2412adbea42080fe4a04",
-    "target_evidence_commit": "bfd9f399c8ea1d05ca0f9c081cf13c7c931e24a6",
-    "to_phase": "PH-D03A"
+    "approval_artifact_digest": "owner-approval-record:a9c552468bd6f656148030de28b914c2d6ad9b2bc095462ee6ba3e50f4cbe00a",
+    "decision_capture_digest": "sha256:33f13a39d4f2238b7fe329feb6dd0115e248ac222f39d0cb57c573a64fe454be",
+    "from_phase": "PH-D03A",
+    "target_artifact_digest": "sha256:8c7c1c2b80239eb23e1c72e6bad3a71d9f43b203ac5a6fe4d8e93da3ba6bc309",
+    "target_evidence_commit": "cc20fe82ab2aba6ae8159bb2c761b4dabe05886c",
+    "to_phase": "PH-D03B"
   },
   "j_boundary": {
     "distillation_may_generate": [

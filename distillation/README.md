@@ -5,8 +5,9 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D03A` is the only active phase. PH-D02C is Owner-approved against exact
-post-audit implementation and evidence commits. Existing pre-audit PH-D01A
+`PH-D03B` is the only active phase. PH-D03A is Owner-approved against exact
+post-audit implementation, evidence, sixteen-target bundle, and content-
+specific decision/approval commits. Existing pre-audit PH-D01A
 through PH-D03A phase records remain historical; colliding PH-D01B, PH-D02A,
 PH-D02B, PH-D02C, and PH-D03A control artifacts are preserved under
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and
@@ -127,7 +128,7 @@ under `input/historical_pre_audit/PH-D02C/`. They are revalidated input only,
 not current evidence. Current artifacts bind the approved PH-D02B evidence,
 the PH-D02C entry approval, and the current WorkBlockFrame.
 
-The current post-audit `PH-D03A` rebind adds a non-authoritative Golden
+The Owner-approved post-audit `PH-D03A` rebind adds a Golden
 implementation-conformance candidate layer:
 
 - exactly eight authority-listed ARC2 categories and eight authority-listed
@@ -144,28 +145,47 @@ implementation-conformance candidate layer:
   fabrication rejection, and rejection of unapproved commit or promotion;
 - a content-bound candidate set, gate-coverage report, and Owner review
   request reconstructed byte-identically in three independent processes;
-- only non-authoritative `SCHEMA_TEMPLATE` approvals with `SUSPEND`; no
-  content-specific Owner decision and no Golden expected-artifact freeze.
+- only non-authoritative in-candidate `SCHEMA_TEMPLATE` approvals with
+  `SUSPEND`; the later exact target bundle and external OwnerDecisionCapture
+  approve all sixteen expectation digests without mutating candidate bytes.
+
+The current `PH-D03B` work block freezes those sixteen exact approved
+expectation digests as an immutable commitment-only sealed audit input:
+
+- exactly sixteen unique, lexicographically ordered commitments with no
+  fixture IDs, labels, or expected-artifact plaintext;
+- exact raw-byte and bound-digest records for the Golden source artifacts,
+  target bundle, PH-D03A evidence attestation, OwnerDecisionCapture, and
+  ApprovalRecord;
+- a canonical manifest, runner contract, and freeze report for
+  `DISTILLATION_CONFORMANCE_CORPUS_FROZEN`;
+- an audit-only runner that recomputes submitted logical digests and emits
+  exact `PASS\n` or `FAIL\n` bytes;
+- atomic consume-on-first-attempt state in a caller-supplied mutable ledger
+  outside the repository, with reuse returning `FAIL`;
+- behaviorally checked DG-06 and DG-14 boundaries and zero real-source,
+  normalization, promotion, Bridge, Runtime, official, or Kaggle activity.
 
 The compiler hashes source bytes but does not semantically parse, import,
 execute, or replay them. The only network evidence is the already frozen,
 revision-checked, read-only Dataset Viewer capture. Manifest compilation itself
 does not access a network.
 
-The current PH-D03A candidate executes only checked synthetic typed
-conformance candidates. It does
-not normalize a real trajectory, read teacher/source payloads, freeze Golden
-expectations, create the Sealed corpus, generate or rank general candidates,
-establish a real causal mechanism, promote Rules, create or simulate Owner
-approval, create a Bridge, agent, or runtime, access locked-final or official
-data, or create submission output. Historical runtime canonical helpers are
-not imported into the isolated distillation package.
+PH-D03B reads the approved PH-D03A Golden files semantically only while
+building the commitment set. At audit time it parses only the sealed contract,
+commitments, manifest, runner contract, and submitted artifact values; Golden
+source files are raw-hash checked without expected-plaintext parsing. It does
+not normalize a real trajectory, execute source or replay, generate or rank
+general candidates, establish a real causal mechanism, promote Rules, create
+a Bridge, agent, or runtime, access locked-final or official data, or create
+submission output. Historical runtime canonical helpers are not imported into
+the isolated distillation package.
 
 The checked pre-audit artifacts, source, and tests remain byte-identical under
 `input/historical_pre_audit/PH-D03A/` and are ineligible for current
-activation. The four checked current artifacts are rebuilt from the
-post-audit source and exact PH-D02C evidence binding; they remain provisional,
-unfrozen, and pending content-specific Owner review.
+activation. The four checked PH-D03A artifacts remain byte-identical and are
+bound by the external exact target bundle and Owner approval. PH-D03B never
+rewrites those Golden artifacts.
 
 Use exactly Python 3.12.13. From the repository root:
 
@@ -183,6 +203,12 @@ python scripts/build_ph_d02c_causal_ir.py
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_golden_corpus.py
 python scripts/build_ph_d03a_golden_candidate.py
+PYTHONPATH=distillation/src python -m pytest \
+  distillation/tests/unit/test_sealed_audit.py
+python scripts/build_ph_d03b_sealed_audit.py
+python scripts/run_ph_d03b_sealed_audit.py \
+  --submission <canonical-submission.json> \
+  --ledger <outside-repository-ledger.json>
 PYTHONPATH=distillation/src python -m ruff check \
   distillation/src distillation/tests
 PYTHONPATH=distillation/src python -m mypy --strict \

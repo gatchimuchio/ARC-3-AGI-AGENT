@@ -1,9 +1,9 @@
-"""Isolated HDS schema, Typed Causal IR, and Golden-candidate package.
+"""Isolated HDS schema, Typed Causal IR, Golden, and sealed-audit package.
 
-The active PH-D03A boundary consumes the Owner-approved PH-D02C ABI and adds
-only deterministic, synthetic, non-authoritative Golden implementation-
-conformance candidates. It exports no solver, agent, runtime, Owner authority,
-approved Golden expectation, Sealed corpus, official connector, or submission
+The active PH-D03B boundary freezes the exact Owner-approved PH-D03A
+expectation digests as a commitment-only sealed audit corpus with a
+status-only, one-use runner. It exports no solver, agent, runtime, Owner
+authority, expected-artifact plaintext, official connector, or submission
 capability.
 """
 

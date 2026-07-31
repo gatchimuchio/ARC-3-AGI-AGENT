@@ -18,7 +18,7 @@ from zipfile import ZipFile
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SELECTOR_PATH = Path("control/rev3/REV3_CURRENT_SELECTOR.json")
 SELECTOR_SCHEMA_PATH = Path(
-    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V12.json"
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V13.json"
 )
 DECISION_PATH = Path(
     "control/rev3/OWNER_DECISION_CAPTURES/"
@@ -311,6 +311,46 @@ PH_D03A_COVERAGE_PATH = Path(
 PH_D03A_REVIEW_REQUEST_PATH = Path(
     "distillation/artifacts/golden/owner_review_request.json"
 )
+PH_D03A_RESULT_DECISION_PATH = Path(
+    "control/rev3/OWNER_DECISION_CAPTURES/"
+    "PH-D03A_TO_PH-D03B_20260731.json"
+)
+PH_D03A_RESULT_APPROVAL_PATH = Path(
+    "control/rev3/OWNER_APPROVAL_RECORDS/"
+    "PH-D03A_TO_PH-D03B_20260731.json"
+)
+PH_D03A_EVIDENCE_ATTESTATION_PATH = Path(
+    "control/rev3/PH-D03A_EVIDENCE_ATTESTATION.json"
+)
+PH_D03A_PHASE_STATE_PATH = Path("control/rev3/D03A_CANDIDATE_STATE.json")
+PH_D03A_TARGET_BUNDLE_PATH = Path(
+    "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/"
+    "exact_target_bundle.json"
+)
+PH_D03B_FRAME_PATH = Path("control/rev3/PH-D03B_WORK_BLOCK_FRAME.json")
+PH_D03B_TRANSITION_PATH = Path(
+    "control/rev3/PHASE_TRANSITIONS/PH-D03A_TO_PH-D03B.json"
+)
+PH_D03B_PREINVENTORY_PATH = Path(
+    "analysis/rev3/ph_d03b_sealed_audit_preinventory.json"
+)
+PH_D03B_CONTRACT_PATH = Path(
+    "distillation/input/sealed_audit_contract.json"
+)
+PH_D03B_COMMITMENTS_PATH = Path(
+    "distillation/frozen/sealed_audit/ph_d03b_v1/"
+    "expected_commitments.json"
+)
+PH_D03B_MANIFEST_PATH = Path(
+    "distillation/frozen/sealed_audit/ph_d03b_v1/manifest.json"
+)
+PH_D03B_RUNNER_CONTRACT_PATH = Path(
+    "distillation/frozen/sealed_audit/ph_d03b_v1/"
+    "runner_contract.json"
+)
+PH_D03B_FREEZE_REPORT_PATH = Path(
+    "distillation/artifacts/reports/sealed_audit_freeze.json"
+)
 PH_R00_PHASE_STATE_PATH = Path("control/rev3/R00_PHASE_STATE.json")
 PH_R00_ASSET_CLASSIFICATION_PATH = Path(
     "docs/strategy/ASSET_CLASSIFICATION_REV3.json"
@@ -431,6 +471,17 @@ def _load_object(root: Path, relative_path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise TypeError(f"expected object: {relative_path}")
     return value
+
+
+def _contains_json_key(value: object, forbidden: frozenset[str]) -> bool:
+    if isinstance(value, Mapping):
+        return any(
+            key in forbidden or _contains_json_key(child, forbidden)
+            for key, child in value.items()
+        )
+    if isinstance(value, list):
+        return any(_contains_json_key(child, forbidden) for child in value)
+    return False
 
 
 def _matches_type(value: object, expected: str) -> bool:
@@ -673,17 +724,53 @@ def validate_repository(root: Path) -> dict[str, object]:
         )
     )
     if (
-        manifest.get("active_phase") != selector.get("active_phase")
+        manifest.get("schema_version")
+        != "arc3-rev3-current-authority-manifest-v11"
+        or manifest.get("active_phase") != selector.get("active_phase")
         or manifest.get("current_work_class")
         != selector.get("current_work_class")
         or manifest.get("ph_d02c_status")
         != selector.get("ph_d02c_status")
         or manifest.get("ph_d03a_status")
         != selector.get("ph_d03a_status")
+        or manifest.get("ph_d03b_status")
+        != selector.get("ph_d03b_status")
         or manifest.get("source_binding")
         != {
-            "commit": "70722de7df8278c866de0734c97206c9952d731d",
-            "tree": "fd330c8fd8dd9cb66e16d12cbcde14452a28aa6f",
+            "commit": "4b4a89bc5cc25f166296a491baf8f12ed30babdf",
+            "tree": "15c41b03761b4e6bdc1ddfad235844815d52c447",
+        }
+        or manifest.get("phase_entry_approval")
+        != {
+            "approval_artifact_digest": (
+                "owner-approval-record:"
+                "a9c552468bd6f656148030de28b914c2d6ad9b2bc095462ee6ba3e50f4cbe00a"
+            ),
+            "decision_capture_digest": (
+                "sha256:"
+                "33f13a39d4f2238b7fe329feb6dd0115e248ac222f39d0cb57c573a64fe454be"
+            ),
+            "from_phase": "PH-D03A",
+            "target_artifact_digest": (
+                "sha256:"
+                "8c7c1c2b80239eb23e1c72e6bad3a71d9f43b203ac5a6fe4d8e93da3ba6bc309"
+            ),
+            "target_evidence_commit": (
+                "cc20fe82ab2aba6ae8159bb2c761b4dabe05886c"
+            ),
+            "to_phase": "PH-D03B",
+        }
+        or manifest.get("current_work_block")
+        != {
+            "content_digest": (
+                "rev3-work-block-frame:"
+                "3f741cd961329e719c657bcef91b82984042ce835ff29163640a48121aebea89"
+            ),
+            "entry_transition_digest": (
+                "rev3-phase-transition:"
+                "3b063d6a78bbd4acc79b9a299badcefd7a22890f286db6d18d96233bc65d24a6"
+            ),
+            "path": "control/rev3/PH-D03B_WORK_BLOCK_FRAME.json",
         }
     ):
         failures.append("authority_manifest:CURRENT_SELECTOR_MISMATCH")
@@ -1609,7 +1696,141 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d02c_result_approval:DECISION_OR_TARGET_MISMATCH"
         )
 
-    if selector.get("active_phase") != "PH-D03A":
+    ph_d03a_attestation = _load_object(
+        root, PH_D03A_EVIDENCE_ATTESTATION_PATH
+    )
+    attestation_properties = attestation_schema.get("properties")
+    ph_d03a_attestation_core = (
+        {
+            key: value
+            for key, value in ph_d03a_attestation.items()
+            if key in attestation_properties
+        }
+        if isinstance(attestation_properties, dict)
+        else {}
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d03a_attestation_core,
+            attestation_schema,
+            "ph_d03a_attestation",
+        )
+    )
+    ph_d03a_phase_state = _load_object(root, PH_D03A_PHASE_STATE_PATH)
+    ph_d03a_target_bundle = _load_object(
+        root, PH_D03A_TARGET_BUNDLE_PATH
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d03a_target_bundle,
+            "ph-d03a-exact-target-bundle:",
+            "content_digest",
+            "ph_d03a_target_bundle",
+        )
+    )
+    if (
+        ph_d03a_attestation.get("phase_id") != "PH-D03A"
+        or ph_d03a_attestation.get("implementation_commit")
+        != ph_d03a_phase_state.get("implementation_commit")
+        or ph_d03a_attestation.get("implementation_tree")
+        != ph_d03a_phase_state.get("implementation_tree")
+        or ph_d03a_attestation.get("evidence_payload_digest")
+        != ph_d03a_phase_state.get("evidence_payload_digest")
+        or ph_d03a_attestation.get("phase_state_sha256")
+        != hashlib.sha256(
+            (root / PH_D03A_PHASE_STATE_PATH).read_bytes()
+        ).hexdigest()
+        or ph_d03a_attestation.get("exact_target_bundle_digest")
+        != ph_d03a_target_bundle.get("content_digest")
+        or ph_d03a_attestation.get("exact_target_count") != 16
+        or ph_d03a_target_bundle.get("target_count") != 16
+        or not _git_object_exists(
+            root,
+            str(ph_d03a_attestation.get("implementation_commit")),
+        )
+        or not _git_object_exists(
+            root,
+            str(ph_d03a_attestation.get("evidence_commit")),
+        )
+    ):
+        failures.append("ph_d03a_attestation:TARGET_BINDING_MISMATCH")
+
+    ph_d03a_result_decision = _load_object(
+        root, PH_D03A_RESULT_DECISION_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d03a_result_decision,
+            decision_v2_schema,
+            "ph_d03a_result_decision",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d03a_result_decision,
+            "sha256:",
+            "owner_decision_content_digest",
+            "ph_d03a_result_decision",
+        )
+    )
+    if (
+        ph_d03a_result_decision.get("standing_authorization_digest")
+        != standing.get("standing_authorization_content_digest")
+        or ph_d03a_result_decision.get("target_evidence_commit")
+        != ph_d03a_attestation.get("evidence_commit")
+        or ph_d03a_result_decision.get("target_artifact_digest")
+        != ph_d03a_attestation.get("evidence_payload_digest")
+        or ph_d03a_result_decision.get("gate_result_digest")
+        != ph_d03a_target_bundle.get("content_digest")
+        or ph_d03a_result_decision.get("gate_status") != "PASS"
+        or ph_d03a_result_decision.get("allowed_transition")
+        != "PH-D03A_TO_PH-D03B"
+        or ph_d03a_result_decision.get("decision")
+        != (
+            "APPROVE_ALL_SIXTEEN_PROVISIONAL_EXPECTATIONS_"
+            "AND_AUTHORIZE_NEXT_PHASE_ENTRY"
+        )
+    ):
+        failures.append(
+            "ph_d03a_result_decision:ATTESTATION_BINDING_MISMATCH"
+        )
+
+    ph_d03a_result_approval = _load_object(
+        root, PH_D03A_RESULT_APPROVAL_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d03a_result_approval,
+            approval_schema,
+            "ph_d03a_result_approval",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d03a_result_approval,
+            "owner-approval-record:",
+            "approval_artifact_digest",
+            "ph_d03a_result_approval",
+        )
+    )
+    if (
+        ph_d03a_result_approval.get("owner_decision_capture_digest")
+        != ph_d03a_result_decision.get("owner_decision_content_digest")
+        or ph_d03a_result_approval.get("target_evidence_commit")
+        != ph_d03a_attestation.get("evidence_commit")
+        or ph_d03a_result_approval.get("target_artifact_digest")
+        != ph_d03a_attestation.get("evidence_payload_digest")
+        or ph_d03a_result_approval.get("approved_transition")
+        != "PH-D03A_TO_PH-D03B"
+        or ph_d03a_result_approval.get("next_phase_id") != "PH-D03B"
+        or ph_d03a_result_approval.get("next_phase_authorized")
+        is not True
+    ):
+        failures.append(
+            "ph_d03a_result_approval:DECISION_OR_TARGET_MISMATCH"
+        )
+
+    if selector.get("active_phase") != "PH-D03B":
         failures.append("selector:ACTIVE_PHASE_MISMATCH")
     if selector.get("ph_r00_owner_authorization") != "ESTABLISHED":
         failures.append("selector:PH_R00_AUTHORIZATION_MISSING")
@@ -1629,18 +1850,20 @@ def validate_repository(root: Path) -> dict[str, object]:
         failures.append("selector:PH_D02B_STATUS_MISMATCH")
     if selector.get("ph_d02c_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D02C_STATUS_MISMATCH")
-    if selector.get("ph_d03a_status") != "IN_PROGRESS":
+    if selector.get("ph_d03a_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D03A_STATUS_MISMATCH")
+    if selector.get("ph_d03b_status") != "IN_PROGRESS":
+        failures.append("selector:PH_D03B_STATUS_MISMATCH")
     if selector.get("runtime_activation_status") != "SUSPEND":
         failures.append("selector:RUNTIME_ACTIVATION_ESCALATED")
     selector_entry_approval = selector.get("phase_entry_approval")
     if not isinstance(selector_entry_approval, dict):
-        failures.append("selector:PH_D03A_ENTRY_APPROVAL_MISSING")
+        failures.append("selector:PH_D03B_ENTRY_APPROVAL_MISSING")
     elif (
         selector_entry_approval.get("approval_artifact_digest")
-        != ph_d02c_result_approval.get("approval_artifact_digest")
+        != ph_d03a_result_approval.get("approval_artifact_digest")
     ):
-        failures.append("selector:PH_D03A_ENTRY_APPROVAL_MISMATCH")
+        failures.append("selector:PH_D03B_ENTRY_APPROVAL_MISMATCH")
     selector_standing = selector.get("standing_authorization")
     if not isinstance(selector_standing, dict):
         failures.append("selector:STANDING_AUTHORIZATION_MISSING")
@@ -3423,6 +3646,347 @@ def validate_repository(root: Path) -> dict[str, object]:
                     "ph_d03a_rebuild:BYTES_MISMATCH:" + relative_path
                 )
 
+    ph_d03b_frame = _load_object(root, PH_D03B_FRAME_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_d03b_frame,
+            "rev3-work-block-frame:",
+            "content_digest",
+            "ph_d03b_frame",
+        )
+    )
+    if (
+        ph_d03b_frame.get("phase_id") != "PH-D03B"
+        or ph_d03b_frame.get("base_commit")
+        != "4b4a89bc5cc25f166296a491baf8f12ed30babdf"
+        or ph_d03b_frame.get("base_tree")
+        != "15c41b03761b4e6bdc1ddfad235844815d52c447"
+    ):
+        failures.append("ph_d03b_frame:PHASE_OR_BASE_MISMATCH")
+    ph_d03b_budget = ph_d03b_frame.get("resource_budget")
+    if not isinstance(ph_d03b_budget, dict):
+        failures.append("ph_d03b_frame:RESOURCE_BUDGET_MISSING")
+    else:
+        if (
+            ph_d03b_budget.get("required_expected_commitment_count"),
+            ph_d03b_budget.get("required_source_artifact_count"),
+            ph_d03b_budget.get("required_checked_artifact_count"),
+            ph_d03b_budget.get("independent_process_rebuild_count"),
+            ph_d03b_budget.get("required_gate_count"),
+            ph_d03b_budget.get("required_gate_ids"),
+        ) != (16, 7, 5, 3, 2, ["DG-06", "DG-14"]):
+            failures.append("ph_d03b_frame:SEALED_BUDGET_MISMATCH")
+        for field in (
+            "actual_sealed_corpus_execution_count",
+            "expected_plaintext_stored_count",
+            "runtime_dependency_addition_count",
+            "source_payload_read_count",
+            "source_payload_semantic_parse_count",
+            "teacher_trajectory_read_count",
+            "arc_environment_source_execution_count",
+            "teacher_replay_execution_count",
+            "real_intervention_execution_count",
+            "general_candidate_generation_count",
+            "rule_promotion_count",
+            "bridge_runtime_capability_count",
+            "llm_call_count",
+            "external_network_call_count",
+            "locked_final_access_count",
+            "official_access_count",
+            "network_submission_count",
+            "kaggle_mutation_count",
+        ):
+            if ph_d03b_budget.get(field) != 0:
+                failures.append(f"ph_d03b_frame:{field}:NONZERO")
+        if ph_d03b_budget.get("external_network_use") != "NONE":
+            failures.append("ph_d03b_frame:EXTERNAL_NETWORK_ENABLED")
+
+    ph_d03b_transition = _load_object(root, PH_D03B_TRANSITION_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_d03b_transition,
+            "rev3-phase-transition:",
+            "content_digest",
+            "ph_d03b_transition",
+        )
+    )
+    if (
+        ph_d03b_transition.get("from_phase_id"),
+        ph_d03b_transition.get("to_phase_id"),
+        ph_d03b_transition.get("decision"),
+    ) != ("PH-D03A", "PH-D03B", "ENTRY_AUTHORIZED"):
+        failures.append("ph_d03b_transition:SEQUENCE_MISMATCH")
+    if (
+        ph_d03b_transition.get("authorization_digest")
+        != ph_d03a_result_approval.get("approval_artifact_digest")
+        or ph_d03b_transition.get("decision_capture_digest")
+        != ph_d03a_result_decision.get("owner_decision_content_digest")
+        or ph_d03b_transition.get("from_phase_state_sha256")
+        != ph_d03a_attestation.get("phase_state_sha256")
+        or ph_d03b_transition.get("from_phase_evidence_commit")
+        != ph_d03a_attestation.get("evidence_commit")
+        or ph_d03b_transition.get("from_phase_evidence_tree")
+        != ph_d03a_attestation.get("evidence_tree")
+        or ph_d03b_transition.get(
+            "from_phase_evidence_payload_digest"
+        )
+        != ph_d03a_attestation.get("evidence_payload_digest")
+        or ph_d03b_transition.get(
+            "from_phase_exact_target_bundle_digest"
+        )
+        != ph_d03a_target_bundle.get("content_digest")
+        or ph_d03b_transition.get(
+            "external_irreversible_action_authorized"
+        )
+        is not False
+    ):
+        failures.append("ph_d03b_transition:EVIDENCE_BINDING_MISMATCH")
+
+    ph_d03b_preinventory = _load_object(
+        root, PH_D03B_PREINVENTORY_PATH
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d03b_preinventory,
+            "rev3-ph-d03b-sealed-audit-preinventory:",
+            "content_digest",
+            "ph_d03b_preinventory",
+        )
+    )
+    d03b_preinventory_authority = ph_d03b_preinventory.get("authority")
+    d03b_implementation_plan = ph_d03b_preinventory.get(
+        "implementation_plan"
+    )
+    if (
+        ph_d03b_preinventory.get("phase_id") != "PH-D03B"
+        or ph_d03b_preinventory.get("base_commit")
+        != ph_d03b_frame.get("base_commit")
+        or ph_d03b_preinventory.get("base_tree")
+        != ph_d03b_frame.get("base_tree")
+        or not isinstance(d03b_preinventory_authority, dict)
+        or d03b_preinventory_authority.get("input_evidence_commit")
+        != ph_d03a_attestation.get("evidence_commit")
+        or d03b_preinventory_authority.get(
+            "input_evidence_payload_digest"
+        )
+        != ph_d03a_attestation.get("evidence_payload_digest")
+        or d03b_preinventory_authority.get("exact_target_bundle_digest")
+        != ph_d03a_target_bundle.get("content_digest")
+        or d03b_preinventory_authority.get(
+            "phase_entry_decision_digest"
+        )
+        != ph_d03a_result_decision.get("owner_decision_content_digest")
+        or d03b_preinventory_authority.get(
+            "phase_entry_approval_digest"
+        )
+        != ph_d03a_result_approval.get("approval_artifact_digest")
+        or not isinstance(d03b_implementation_plan, dict)
+        or d03b_implementation_plan.get("checked_artifact_count") != 5
+        or ph_d03b_preinventory.get(
+            "preexisting_dirty_state", {}
+        ).get("aggregate_sha256")
+        != "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4"
+    ):
+        failures.append("ph_d03b_preinventory:BOUNDARY_MISMATCH")
+
+    ph_d03b_contract = _load_object(root, PH_D03B_CONTRACT_PATH)
+    ph_d03b_commitments = _load_object(root, PH_D03B_COMMITMENTS_PATH)
+    ph_d03b_manifest = _load_object(root, PH_D03B_MANIFEST_PATH)
+    ph_d03b_runner = _load_object(root, PH_D03B_RUNNER_CONTRACT_PATH)
+    ph_d03b_report = _load_object(root, PH_D03B_FREEZE_REPORT_PATH)
+    for value, path, namespace, location in (
+        (
+            ph_d03b_contract,
+            PH_D03B_CONTRACT_PATH,
+            "hds-sealed-audit-contract",
+            "ph_d03b_contract",
+        ),
+        (
+            ph_d03b_commitments,
+            PH_D03B_COMMITMENTS_PATH,
+            "hds-sealed-expected-commitment-set",
+            "ph_d03b_commitments",
+        ),
+        (
+            ph_d03b_manifest,
+            PH_D03B_MANIFEST_PATH,
+            "hds-sealed-audit-manifest",
+            "ph_d03b_manifest",
+        ),
+        (
+            ph_d03b_runner,
+            PH_D03B_RUNNER_CONTRACT_PATH,
+            "hds-sealed-audit-runner-contract",
+            "ph_d03b_runner",
+        ),
+        (
+            ph_d03b_report,
+            PH_D03B_FREEZE_REPORT_PATH,
+            "hds-sealed-audit-freeze-report",
+            "ph_d03b_report",
+        ),
+    ):
+        failures.extend(
+            _domain_content_digest_failures(
+                value,
+                namespace,
+                "content_digest",
+                location,
+            )
+        )
+        failures.extend(
+            _canonical_document_failures(root, path, location)
+        )
+
+    sealed_authority = ph_d03b_contract.get("authority")
+    freeze_contract = ph_d03b_contract.get("freeze_contract")
+    if (
+        ph_d03b_contract.get("phase_id") != "PH-D03B"
+        or ph_d03b_contract.get("corpus_version") != "ph-d03b-v1"
+        or not isinstance(sealed_authority, dict)
+        or sealed_authority.get("work_block_frame_digest")
+        != ph_d03b_frame.get("content_digest")
+        or sealed_authority.get("preinventory_digest")
+        != ph_d03b_preinventory.get("content_digest")
+        or sealed_authority.get("phase_transition_digest")
+        != ph_d03b_transition.get("content_digest")
+        or sealed_authority.get("input_evidence_commit")
+        != ph_d03a_attestation.get("evidence_commit")
+        or sealed_authority.get("input_evidence_payload_digest")
+        != ph_d03a_attestation.get("evidence_payload_digest")
+        or sealed_authority.get("exact_target_bundle_digest")
+        != ph_d03a_target_bundle.get("content_digest")
+        or sealed_authority.get(
+            "content_specific_owner_decision_digest"
+        )
+        != ph_d03a_result_decision.get("owner_decision_content_digest")
+        or sealed_authority.get(
+            "content_specific_owner_approval_digest"
+        )
+        != ph_d03a_result_approval.get("approval_artifact_digest")
+        or not isinstance(freeze_contract, dict)
+        or freeze_contract.get("expected_commitment_count") != 16
+        or freeze_contract.get("expected_plaintext_stored_count") != 0
+        or freeze_contract.get(
+            "automatic_expectation_update_allowed"
+        )
+        is not False
+    ):
+        failures.append("ph_d03b_contract:AUTHORITY_OR_BOUNDARY_MISMATCH")
+
+    raw_commitments = ph_d03b_commitments.get("commitments")
+    if (
+        ph_d03b_commitments.get("phase_id") != "PH-D03B"
+        or ph_d03b_commitments.get("commitment_count") != 16
+        or ph_d03b_commitments.get("fixture_identifier_count") != 0
+        or ph_d03b_commitments.get("expected_plaintext_stored_count") != 0
+        or not isinstance(raw_commitments, list)
+        or len(raw_commitments) != 16
+        or len(set(str(item) for item in raw_commitments)) != 16
+        or raw_commitments != sorted(raw_commitments)
+        or _contains_json_key(
+            ph_d03b_commitments,
+            frozenset(
+                {
+                    "expected_artifact",
+                    "expected_payload",
+                    "fixture_id",
+                    "provisional_expected_artifact",
+                }
+            ),
+        )
+    ):
+        failures.append("ph_d03b_commitments:INVENTORY_OR_DISCLOSURE")
+
+    source_artifacts = ph_d03b_manifest.get("source_artifacts")
+    sealed_artifacts = ph_d03b_manifest.get("sealed_artifacts")
+    if (
+        ph_d03b_manifest.get("freeze_status")
+        != "DISTILLATION_CONFORMANCE_CORPUS_FROZEN"
+        or ph_d03b_manifest.get("version_state") != "FROZEN_UNCONSUMED"
+        or ph_d03b_manifest.get("source_artifact_count") != 7
+        or ph_d03b_manifest.get("expected_commitment_count") != 16
+        or ph_d03b_manifest.get("expected_plaintext_stored_count") != 0
+        or ph_d03b_manifest.get("actual_audit_consumption_count") != 0
+        or ph_d03b_manifest.get("runner_output_contract")
+        != "PASS_OR_FAIL_ONLY"
+        or not isinstance(source_artifacts, list)
+        or len(source_artifacts) != 7
+        or not isinstance(sealed_artifacts, list)
+        or len(sealed_artifacts) != 3
+    ):
+        failures.append("ph_d03b_manifest:INVENTORY_OR_BOUNDARY_MISMATCH")
+
+    runner_output = ph_d03b_runner.get("output_contract")
+    runner_consumption = ph_d03b_runner.get("consumption_contract")
+    if (
+        ph_d03b_runner.get("commitment_set_digest")
+        != ph_d03b_commitments.get("content_digest")
+        or not isinstance(runner_output, dict)
+        or runner_output.get("allowed_stdout_bytes_hex")
+        != ["4641494c0a", "504153530a"]
+        or runner_output.get("allowed_values") != ["FAIL", "PASS"]
+        or runner_output.get("additional_fields_allowed") is not False
+        or runner_output.get("stderr_allowed") is not False
+        or not isinstance(runner_consumption, dict)
+        or runner_consumption.get("policy")
+        != "CONSUME_ON_FIRST_AUDIT_ATTEMPT"
+        or runner_consumption.get("atomic_reservation_required") is not True
+        or runner_consumption.get("ledger_must_be_outside_repository")
+        is not True
+    ):
+        failures.append("ph_d03b_runner:DISCLOSURE_OR_CONSUMPTION_MISMATCH")
+
+    sealed_gate_entries = ph_d03b_report.get("gate_entries")
+    if (
+        ph_d03b_report.get("status") != "PASS"
+        or ph_d03b_report.get("exit_state")
+        != "DISTILLATION_CONFORMANCE_CORPUS_FROZEN"
+        or ph_d03b_report.get("failed_requirement_count") != 0
+        or ph_d03b_report.get("actual_sealed_corpus_execution_count") != 0
+        or ph_d03b_report.get("manifest_digest")
+        != ph_d03b_manifest.get("content_digest")
+        or not isinstance(sealed_gate_entries, list)
+        or [
+            item.get("gate_id")
+            for item in sealed_gate_entries
+            if isinstance(item, dict)
+        ]
+        != ["DG-06", "DG-14"]
+        or any(
+            not isinstance(item, dict)
+            or item.get("result") != "PASS"
+            or item.get("behaviorally_recomputed") is not True
+            for item in sealed_gate_entries
+        )
+    ):
+        failures.append("ph_d03b_report:GATE_OR_BOUNDARY_MISMATCH")
+
+    try:
+        from hds_distill.sealed_audit import (
+            build_phase_d03b_artifacts,
+        )
+
+        rebuilt_sealed = build_phase_d03b_artifacts(root)
+    except Exception as exc:  # fail closed and preserve stable report shape
+        failures.append(
+            "ph_d03b_rebuild:EXCEPTION:" + type(exc).__name__
+        )
+    else:
+        if set(rebuilt_sealed) != {
+            PH_D03B_CONTRACT_PATH.as_posix(),
+            PH_D03B_COMMITMENTS_PATH.as_posix(),
+            PH_D03B_MANIFEST_PATH.as_posix(),
+            PH_D03B_RUNNER_CONTRACT_PATH.as_posix(),
+            PH_D03B_FREEZE_REPORT_PATH.as_posix(),
+        }:
+            failures.append("ph_d03b_rebuild:INVENTORY_MISMATCH")
+        for relative_path, payload in rebuilt_sealed.items():
+            if (root / relative_path).read_bytes() != payload:
+                failures.append(
+                    "ph_d03b_rebuild:BYTES_MISMATCH:" + relative_path
+                )
+
     source_inventory = _load_object(root, PH_D01A_SOURCE_INVENTORY_PATH)
     failures.extend(
         _content_digest_failures(
@@ -4381,6 +4945,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d02b_status",
             "ph_d02c_status",
             "ph_d03a_status",
+            "ph_d03b_status",
             "ph_r00_owner_authorization",
             "ph_r00_status",
             "ph_r1_status",
@@ -4395,12 +4960,12 @@ def validate_repository(root: Path) -> dict[str, object]:
     if not isinstance(active_work_block, dict):
         failures.append("governance:ACTIVE_WORK_BLOCK_MISSING")
     elif (
-        active_work_block.get("phase_id") != "PH-D03A"
-        or active_work_block.get("path") != PH_D03A_FRAME_PATH.as_posix()
+        active_work_block.get("phase_id") != "PH-D03B"
+        or active_work_block.get("path") != PH_D03B_FRAME_PATH.as_posix()
         or active_work_block.get("content_digest")
-        != ph_d03a_frame.get("content_digest")
+        != ph_d03b_frame.get("content_digest")
         or active_work_block.get("transition_digest")
-        != ph_d03a_transition.get("content_digest")
+        != ph_d03b_transition.get("content_digest")
         or active_work_block.get("runtime_capability_addition_count") != 0
         or active_work_block.get(
             "external_irreversible_actions_authorized"
@@ -4408,6 +4973,20 @@ def validate_repository(root: Path) -> dict[str, object]:
         is not False
     ):
         failures.append("governance:ACTIVE_WORK_BLOCK_MISMATCH")
+    governed_entry_approval = governance.get("phase_entry_approval")
+    if not isinstance(governed_entry_approval, dict) or (
+        governed_entry_approval.get("approval_artifact_digest")
+        != ph_d03a_result_approval.get("approval_artifact_digest")
+        or governed_entry_approval.get("decision_capture_digest")
+        != ph_d03a_result_decision.get("owner_decision_content_digest")
+        or governed_entry_approval.get("target_artifact_digest")
+        != ph_d03a_attestation.get("evidence_payload_digest")
+        or governed_entry_approval.get("target_evidence_commit")
+        != ph_d03a_attestation.get("evidence_commit")
+        or governed_entry_approval.get("from_phase") != "PH-D03A"
+        or governed_entry_approval.get("to_phase") != "PH-D03B"
+    ):
+        failures.append("governance:PH_D03B_ENTRY_APPROVAL_MISMATCH")
     governed_source_blind = governance.get(
         "source_blind_execution_evidence"
     )
@@ -4507,7 +5086,7 @@ def validate_repository(root: Path) -> dict[str, object]:
                 )
 
     return {
-        "check_count": 72,
+        "check_count": 74,
         "failure_count": len(failures),
         "failures": sorted(set(failures)),
         "status": "PASS" if not failures else "FAIL",
