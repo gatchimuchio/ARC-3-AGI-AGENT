@@ -1,0 +1,33 @@
+{
+  "schema_version": "arc3-owner-decision-capture-v2",
+  "owner_decision_id": "PH-D03B_TO_PH-D05_20260731",
+  "source_instruction_ref": "codex-thread:user-message:2026-07-31:continuous-required-approvals",
+  "source_instruction_digest": "sha256:cb74ab342a55d0cf6a5a0b02923d46f4c509b9224e2df339a3ed6823fa7b5886",
+  "standing_authorization_path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+  "standing_authorization_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+  "decision_basis": "OWNER_STANDING_AUTHORIZATION",
+  "target_artifact_digest": "sha256:88a5fe85e322640315e3121e0bfd150c96fa05e8119fcdd21b5e391abb9b6e55",
+  "target_evidence_commit": "caab292eaf3b67de87dcb1a4ae684d6f7dc1a360",
+  "gate_result_digest": "hds-sealed-audit-freeze-report:559c400c8f7f8f83c5c882a098405338f81a81da89e90a0ce44f562b35aa7d0f",
+  "gate_status": "PASS",
+  "allowed_transition": "PH-D03B_TO_PH-D05",
+  "decision": "APPROVE_PHASE_RESULT_AND_AUTHORIZE_NEXT_PHASE_ENTRY",
+  "reason_codes": [
+    "OWNER_STANDING_AUTHORIZATION_APPLIES",
+    "PH_D03B_DOD_PASS",
+    "FAILED_REQUIREMENT_COUNT_ZERO",
+    "EXACT_IMPLEMENTATION_AND_EVIDENCE_BOUND",
+    "SIXTEEN_APPROVED_COMMITMENTS_FROZEN",
+    "SOURCE_AND_APPROVAL_DIGESTS_FROZEN",
+    "EXPECTED_PLAINTEXT_COUNT_ZERO",
+    "STATUS_ONLY_ONE_USE_RUNNER_PROVEN",
+    "DG_06_AND_DG_14_PASS",
+    "SEQUENTIAL_PREDECESSOR_SATISFIED"
+  ],
+  "captured_by": "Codex mechanical transcription",
+  "capture_is_mechanical": true,
+  "digest_excluded_fields": [
+    "owner_decision_content_digest"
+  ],
+  "owner_decision_content_digest": "sha256:4eb6fdb70f8e4c37883966b17485c318eda07dcd182c0c9dfae90a1ac0f4bcfe"
+}
