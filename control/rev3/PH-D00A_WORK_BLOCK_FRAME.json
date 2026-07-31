@@ -1,113 +1,149 @@
 {
-  "schema_version": "arc3-rev3-work-block-frame-v1",
-  "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-FREEZE",
+  "schema_version": "arc3-rev3-work-block-frame-v2",
+  "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-REBIND-20260731",
   "phase_id": "PH-D00A",
-  "base_commit": "0e1424fc715fb5901d3a368cd232b8e54036a210",
-  "base_tree": "b1fcb0e64e3d874c37220abb2f8225b56882e9b9",
-  "spec_digest": "sha256:feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f",
-  "roadmap_digest": "sha256:b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2",
-  "hds_spec_digest": "sha256:79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93",
-  "hds_roadmap_digest": "sha256:64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
-  "input_manifest_digest": "rev3-authority-input-manifest:99de70efcf739800e9c20a5aa064d4b6e98fda655ff94ce37c2fd7118ece2db3",
-  "purpose": "Freeze the exact HDS authorities, Translator reference, authority ordering, and final approval authority by content digest, with deterministic fail-closed dependency audit and an empty Open Term Ledger schema.",
-  "X": {
-    "coordinate": "HDS dependency and authority identity before any ARC3 distillation implementation",
-    "inputs": [
-      "three local HDS canonical documents",
-      "HDS distillation specification and roadmap",
-      "rev3 ARC3 specification and roadmap",
-      "HDS-BlackBox-Translator commit and README metadata",
-      "current Owner approval record"
-    ],
-    "change_scope": "PH-D00A dependency, authority, schema, validator, test, and evidence files only."
-  },
-  "R": {
-    "risk": "Any digest, upstream commit, authority order, or approval-authority drift invalidates every downstream distillation claim.",
-    "required_response": "Fail closed with DG-00 or DG-14 findings; do not infer or repair an unspecified dependency.",
-    "claim_boundary": "DEPENDENCY_LOCK_PASS establishes dependency and authority closure only; it is not HDS distillation, corpus processing, Bridge readiness, AGI capability, or official readiness."
-  },
-  "Mc": {
-    "mechanism": "Canonical JSON manifests, repository-relative POSIX paths, exact SHA-256 and Git object bindings, strict schemas, and a deterministic read-only audit command.",
-    "owner_authority": "大平鉄兵 remains the sole Rule, promotion, bundle, locked-final, and official decision authority.",
-    "rollback": "Revert PH-D00A-owned commits only; preserve all pre-existing P22/CV worktree changes."
-  },
+  "frame_revision": 2,
+  "status": "FRAME_LOCKED",
+  "base_commit": "7643b13f76543d4e48cf05db03d08336ec9b3a16",
+  "base_tree": "be15955ac81d81801af17322785d2f9178647a7d",
+  "purpose": "Revalidate and freeze the HDS normative dependencies, authority order, source-blind role boundary, and distillation scope against the post-audit current repository state without reading ARC task payloads or starting Bridge or Runtime capability work.",
+  "X": "POST_AUDIT_HDS_DEPENDENCY_AND_AUTHORITY_LOCK_BOUND_TO_CURRENT_HEAD",
+  "R": [
+    "evidence-commit:4afe81f2b2b1544f13c32ab4c68f871efd493d18",
+    "evidence-payload:ff61dbf341b920bdd912b3e912423ee903e4b983e913b3def0bed452882f0114",
+    "owner-approval-record:db4a8bc2a2f1fab0cafb51a64745e072857eea9e35cff6cd8cceb57c65e8e581",
+    "owner-standing-authorization:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed"
+  ],
+  "Mc": [
+    "current_authority_manifest",
+    "hds_dependency_inventory",
+    "dependency_lock_manifest",
+    "authority_order",
+    "source_blind_role_boundary",
+    "dependency_audit_report",
+    "open_term_ledger",
+    "historical_pre_audit_migration",
+    "determinism_evidence"
+  ],
   "scope": [
-    "recalculate and bind the three HDS canonical document hashes",
-    "bind HDS-BlackBox-Translator commit b501cc77c94048421af8efdb2e866c22b06f7208",
-    "document global and nested HDS authority orders",
-    "define the minimal DependencyLock and OpenTermRecord schemas",
-    "implement deterministic dependency audit with mismatch fail-closed behavior",
-    "initialize an empty Open Term Ledger",
-    "generate PH-D00A inventory, audit, phase state, and review evidence"
+    "exact SHA-256 and byte-size inventory of HDS normative dependencies",
+    "exact Git commit tree and README object binding for HDS-BlackBox-Translator",
+    "post-audit authority and promotion boundary",
+    "Primary Teacher Source Derived Distillation Evidence and Governance Artifact separation",
+    "source-blind role and checkout boundary",
+    "canonical dependency schemas auditor and deterministic reports",
+    "migration of colliding pre-audit PH-D00A control artifacts into an explicit historical namespace",
+    "non-self-referential implementation evidence"
   ],
   "non_goals": [
-    "PH-D00B repository bootstrap",
-    "ARC2 or ARC3 corpus access or processing",
-    "Causal IR or HypothesisIR implementation",
-    "candidate generation, exact-fit, intervention, or promotion",
-    "Bridge or AGI Runtime implementation",
-    "P22 or CV optimization",
-    "locked-final or official access",
-    "Kaggle notebook mutation or submission"
+    "ARC task payload or teacher trajectory access",
+    "HDS hypothesis generation or distillation execution",
+    "Rule or StructureBundle promotion",
+    "Bridge or AGI runtime capability implementation",
+    "P22 score optimization",
+    "locked-final access",
+    "official environment access",
+    "Kaggle mutation or submission"
   ],
   "allowed_files": [
-    "DEPENDENCY_LOCK.md",
+    "AGENTS.md",
     "AUTHORITY_ORDER.md",
-    "scripts/audit_hds_dependencies.py",
-    "schemas/dependency_lock.schema.json",
-    "schemas/open_term_record.schema.json",
+    "DEPENDENCY_LOCK.md",
+    "control/rev3/REV3_CURRENT_SELECTOR.json",
+    "control/rev3/PH-D00A_WORK_BLOCK_FRAME.json",
+    "control/rev3/D00A_PHASE_STATE.json",
+    "control/rev3/PH-D00A_EVIDENCE_ATTESTATION.json",
+    "control/rev3/PHASE_TRANSITIONS/PH-R00_TO_PH-D00A.json",
+    "control/rev3/PH-D00A_OWNER_REVIEW_PACKAGE/**",
+    "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/**",
+    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+    "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+    "docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
+    "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "docs/strategy/REV3_STRATEGY_REBASELINE.md",
+    "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V5.json",
+    "analysis/rev3/ph_d00a_dependency_inventory.json",
     "artifacts/source_content_manifests/hds_dependencies.json",
     "artifacts/reports/dependency_audit.json",
     "artifacts/reports/open_term_ledger.json",
-    "analysis/rev3/ph_d00a_dependency_inventory.json",
+    "schemas/dependency_lock.schema.json",
+    "schemas/open_term_record.schema.json",
+    "scripts/audit_hds_dependencies.py",
+    "scripts/validate_rev3_governance.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
     "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
-    "control/rev3/PH-D00A_WORK_BLOCK_FRAME.json",
-    "control/rev3/D00A_PHASE_STATE.json",
-    "control/rev3/PH-D00A_OWNER_REVIEW_PACKAGE/**"
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py"
   ],
   "forbidden_files": [
     "analysis/autonomous_completion/**",
-    "ARC-AGI-3-Agents/arc3_agi_agent/compiled_policy.py",
-    "ARC-AGI-3-Agents/arc3_agi_agent/s5_*.py",
-    "ARC-AGI-3-Agents/arc3_agi_agent/p22_evaluator.py",
+    "analysis/teacher/**",
+    "datasets/**",
+    "environment_files/**",
     "ARC-AGI-3-Agents/arc3_agi_agent/teacher/**",
-    "distillation/**",
-    "bridge/**",
-    "runtime/**",
-    "notebooks/**",
-    "kaggle/**"
+    "ARC-AGI-3-Agents/arc3_agi_agent/compiled_policy.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/s5_runtime.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/p22_evaluator.py",
+    "kaggle/**",
+    "kaggle_notebooks/**"
   ],
   "allowed_data_roles": [
     "REPOSITORY_METADATA",
     "HDS_AUTHORITY_SOURCE",
     "UPSTREAM_REFERENCE_METADATA",
-    "OWNER_APPROVAL_EVIDENCE"
+    "OWNER_APPROVAL_EVIDENCE",
+    "HISTORICAL_CONTROL_EVIDENCE"
   ],
   "resource_budget": {
-    "arc_corpus_file_read_count": 0,
-    "llm_call_count": 0,
+    "network_submission_count": 0,
     "locked_final_access_count": 0,
     "official_access_count": 0,
-    "network_submission_count": 0,
     "kaggle_mutation_count": 0,
-    "external_network_use": "READ_ONLY_TRANSLATOR_REFERENCE_AUDIT_ALREADY_CAPTURED"
+    "maximum_new_runtime_capabilities": 0,
+    "arc_task_payload_read_count": 0,
+    "teacher_trajectory_read_count": 0,
+    "hds_hypothesis_generation_count": 0,
+    "rule_promotion_count": 0
   },
   "test_contract": [
-    "dependency manifest and report validate against strict schemas",
-    "all local HDS SHA-256 values match the locked values",
-    "Translator commit, tree, and README digest match the locked reference",
-    "authority order is defined and Owner remains final promotion authority",
-    "unknown fields, missing fields, malformed digests, path escapes, and mismatches fail closed",
-    "Open Term Ledger is schema-valid, empty, and reports unresolved_dependency_count 0",
-    "dedicated tests pass before focused rev3 regression",
-    "artifact generation is byte deterministic"
+    "dedicated PH-D00A dependency audit tests",
+    "focused rev3 governance regression",
+    "ruff and mypy strict for changed Python",
+    "compileall for changed Python",
+    "full unit",
+    "full integration",
+    "Linux and Windows offline dependency audit",
+    "exact Translator Git-object audit",
+    "three independent canonical report rebuilds",
+    "artifact manifest and JSON schema validation",
+    "git diff and historical migration validation"
   ],
-  "stop_condition": "Suspend only on dependency or authority mismatch. Otherwise bind PH-D00A evidence and continue to PH-D00B as a separate Work Block under the recorded Owner continuous-progression authorization.",
+  "stop_condition": "Apply standing authorization only after all PH-D00A DoD and required validation are PASS with zero failed requirements; otherwise record a visible dependency or authority failure.",
   "owner_authority": {
-    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
-    "approval_record_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
-    "routine_phase_pause_waived": true,
-    "hard_gate_approval_delegated": false
+    "owner": "大平鉄兵",
+    "standing_authorization_path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+    "standing_authorization_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+    "entry_decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-R00_TO_PH-D00A_20260731.json",
+    "entry_decision_capture_digest": "sha256:61bfb90896fa3a3d7f2d58ba7f74ab708d77700b6f074030bdfcd17264414e6f",
+    "entry_approval_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00_TO_PH-D00A_20260731.json",
+    "entry_approval_digest": "owner-approval-record:db4a8bc2a2f1fab0cafb51a64745e072857eea9e35cff6cd8cceb57c65e8e581",
+    "allowed_transition": "PH-R00_TO_PH-D00A"
   },
-  "content_digest": "rev3-work-block-frame:799654b7a010355ed206b2c5ab2de034f31ebf363fe9fdc6a3f017e1e4641506"
+  "historical_migration": {
+    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
+    "source_paths": [
+      "control/rev3/PH-D00A_WORK_BLOCK_FRAME.json",
+      "control/rev3/D00A_PHASE_STATE.json",
+      "control/rev3/PH-D00A_OWNER_REVIEW_PACKAGE"
+    ],
+    "destination_root": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A",
+    "delete_history": false,
+    "eligible_for_current_activation": false
+  },
+  "spec_sha256": "403c8637c01fdcb3e2318f847c38497ac83a10a904f1ee3dcd74b9b68db75ac0",
+  "roadmap_sha256": "de236c91cbd26dec28382c438625a6961ac7f7213dab8420775cfb6fa1e8324c",
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-work-block-frame:43b81eec5ac7ca9400721fff0d2837943966d0fc16de1d31f273a94c66edf761"
 }

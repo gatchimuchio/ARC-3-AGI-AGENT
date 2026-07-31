@@ -1,0 +1,113 @@
+{
+  "schema_version": "arc3-rev3-work-block-frame-v1",
+  "work_block_id": "WB-PH-D00A-HDS-DEPENDENCY-AUTHORITY-FREEZE",
+  "phase_id": "PH-D00A",
+  "base_commit": "0e1424fc715fb5901d3a368cd232b8e54036a210",
+  "base_tree": "b1fcb0e64e3d874c37220abb2f8225b56882e9b9",
+  "spec_digest": "sha256:feea0ac2319e0776b8c34101379608a69ac6e59aefbf4f8943ee453a660ff29f",
+  "roadmap_digest": "sha256:b210be684fd43c9f7a1f431e01c3cd5145e7c36301f2c55b9b2fcffc548652b2",
+  "hds_spec_digest": "sha256:79bc7169550c94ea8d86d5004989f9d7c1d93fa173e5fad2d4df02d88fb6fc93",
+  "hds_roadmap_digest": "sha256:64640eff883f417baeb2d70716e1904c1fd765a3d1a5a5eacb8bba82e3500518",
+  "input_manifest_digest": "rev3-authority-input-manifest:99de70efcf739800e9c20a5aa064d4b6e98fda655ff94ce37c2fd7118ece2db3",
+  "purpose": "Freeze the exact HDS authorities, Translator reference, authority ordering, and final approval authority by content digest, with deterministic fail-closed dependency audit and an empty Open Term Ledger schema.",
+  "X": {
+    "coordinate": "HDS dependency and authority identity before any ARC3 distillation implementation",
+    "inputs": [
+      "three local HDS canonical documents",
+      "HDS distillation specification and roadmap",
+      "rev3 ARC3 specification and roadmap",
+      "HDS-BlackBox-Translator commit and README metadata",
+      "current Owner approval record"
+    ],
+    "change_scope": "PH-D00A dependency, authority, schema, validator, test, and evidence files only."
+  },
+  "R": {
+    "risk": "Any digest, upstream commit, authority order, or approval-authority drift invalidates every downstream distillation claim.",
+    "required_response": "Fail closed with DG-00 or DG-14 findings; do not infer or repair an unspecified dependency.",
+    "claim_boundary": "DEPENDENCY_LOCK_PASS establishes dependency and authority closure only; it is not HDS distillation, corpus processing, Bridge readiness, AGI capability, or official readiness."
+  },
+  "Mc": {
+    "mechanism": "Canonical JSON manifests, repository-relative POSIX paths, exact SHA-256 and Git object bindings, strict schemas, and a deterministic read-only audit command.",
+    "owner_authority": "大平鉄兵 remains the sole Rule, promotion, bundle, locked-final, and official decision authority.",
+    "rollback": "Revert PH-D00A-owned commits only; preserve all pre-existing P22/CV worktree changes."
+  },
+  "scope": [
+    "recalculate and bind the three HDS canonical document hashes",
+    "bind HDS-BlackBox-Translator commit b501cc77c94048421af8efdb2e866c22b06f7208",
+    "document global and nested HDS authority orders",
+    "define the minimal DependencyLock and OpenTermRecord schemas",
+    "implement deterministic dependency audit with mismatch fail-closed behavior",
+    "initialize an empty Open Term Ledger",
+    "generate PH-D00A inventory, audit, phase state, and review evidence"
+  ],
+  "non_goals": [
+    "PH-D00B repository bootstrap",
+    "ARC2 or ARC3 corpus access or processing",
+    "Causal IR or HypothesisIR implementation",
+    "candidate generation, exact-fit, intervention, or promotion",
+    "Bridge or AGI Runtime implementation",
+    "P22 or CV optimization",
+    "locked-final or official access",
+    "Kaggle notebook mutation or submission"
+  ],
+  "allowed_files": [
+    "DEPENDENCY_LOCK.md",
+    "AUTHORITY_ORDER.md",
+    "scripts/audit_hds_dependencies.py",
+    "schemas/dependency_lock.schema.json",
+    "schemas/open_term_record.schema.json",
+    "artifacts/source_content_manifests/hds_dependencies.json",
+    "artifacts/reports/dependency_audit.json",
+    "artifacts/reports/open_term_ledger.json",
+    "analysis/rev3/ph_d00a_dependency_inventory.json",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+    "control/rev3/PH-D00A_WORK_BLOCK_FRAME.json",
+    "control/rev3/D00A_PHASE_STATE.json",
+    "control/rev3/PH-D00A_OWNER_REVIEW_PACKAGE/**"
+  ],
+  "forbidden_files": [
+    "analysis/autonomous_completion/**",
+    "ARC-AGI-3-Agents/arc3_agi_agent/compiled_policy.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/s5_*.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/p22_evaluator.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/teacher/**",
+    "distillation/**",
+    "bridge/**",
+    "runtime/**",
+    "notebooks/**",
+    "kaggle/**"
+  ],
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "HDS_AUTHORITY_SOURCE",
+    "UPSTREAM_REFERENCE_METADATA",
+    "OWNER_APPROVAL_EVIDENCE"
+  ],
+  "resource_budget": {
+    "arc_corpus_file_read_count": 0,
+    "llm_call_count": 0,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "network_submission_count": 0,
+    "kaggle_mutation_count": 0,
+    "external_network_use": "READ_ONLY_TRANSLATOR_REFERENCE_AUDIT_ALREADY_CAPTURED"
+  },
+  "test_contract": [
+    "dependency manifest and report validate against strict schemas",
+    "all local HDS SHA-256 values match the locked values",
+    "Translator commit, tree, and README digest match the locked reference",
+    "authority order is defined and Owner remains final promotion authority",
+    "unknown fields, missing fields, malformed digests, path escapes, and mismatches fail closed",
+    "Open Term Ledger is schema-valid, empty, and reports unresolved_dependency_count 0",
+    "dedicated tests pass before focused rev3 regression",
+    "artifact generation is byte deterministic"
+  ],
+  "stop_condition": "Suspend only on dependency or authority mismatch. Otherwise bind PH-D00A evidence and continue to PH-D00B as a separate Work Block under the recorded Owner continuous-progression authorization.",
+  "owner_authority": {
+    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json",
+    "approval_record_digest": "owner-approval-record:a7df8aa233f07c3bb3831f24eb462db0be5dc0fe6885a6da42bb5dce7c5693c0",
+    "routine_phase_pause_waived": true,
+    "hard_gate_approval_delegated": false
+  },
+  "content_digest": "rev3-work-block-frame:799654b7a010355ed206b2c5ab2de034f31ebf363fe9fdc6a3f017e1e4641506"
+}
