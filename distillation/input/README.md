@@ -36,26 +36,34 @@ a trailing newline and fixes:
 The contract consumes only frozen manifest metadata and synthetic fixtures.
 It does not read a source payload or normalize a real trajectory.
 
-`PH-D02B` added `schema_contract.json`; `PH-D02C` refines only its
-`OperatorRegistry` and `HypothesisIR` entries before schema freeze. It is
-canonical JSON without a trailing newline and fixes:
+The current post-audit `PH-D02B` adds
+`post_audit_schema_bundle_contract.json`. It is canonical JSON with the
+PH-D02A document boundary and fixes:
 
-- the exact 38-name/38-file schema inventory;
+- the exact 38 HDS rev2 plus 7 HDSStructureBundle schema inventory;
 - every schema version, primary ID field, digest field and exclusion policy;
-- every typed ID or digest reference and its allowed target schemas;
+- every typed cross-file reference and its allowed target schemas;
+- one-to-one projection of all 38 HDS rev2 schemas across the 7 canonical
+  bundle record types;
+- exact dependency-lock and 34-file bundle inventory behavior;
 - the seven independent HDS state axes;
 - structural and semantic fail-closed policies;
-- the DG-00, DG-01, DG-02, DG-03, DG-08, DG-09, DG-12, and DG-14 schema
-  boundary;
-- explicit PH-D02C synthetic interpreter activation while real trajectory
-  normalization, Rule promotion, runtime, locked-final, official, and Kaggle
-  activity remain zero.
+- the DG-00, DG-01, DG-02, and schema-only DG-14 boundary;
+- explicit zero PH-D02C execution, real trajectory normalization, Rule
+  promotion, runtime, locked-final, official, and Kaggle activity.
 
 The schema contract consumes only prior checked metadata and synthetic
 fixtures. It grants no approval, promotion, completion acceptance, or phase
 transition.
 
-`PH-D02C` also adds `causal_ir_contract.json`. It binds the 18 common types,
+`historical_pre_audit/PH-D02B/` is a byte-accounted snapshot extracted from
+implementation commit `108c5462c2c73bdd95953e9e9b0cbbce68ac5d02`.
+It is non-authoritative input only. The checked `schema_contract.json`
+contains later pre-audit PH-D02C refinements and is not the current D02B
+contract.
+
+The historical pre-audit `PH-D02C` candidate also adds
+`causal_ir_contract.json`. It binds the 18 common types,
 both exact opcode inventories, the type/registry/resource/ABI digests, stable
 error codes, and zero downstream activity. Its executable scope is restricted
 to synthetic typed programs; it is not teacher-data evidence or a causal

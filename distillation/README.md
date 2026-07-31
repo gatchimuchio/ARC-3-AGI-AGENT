@@ -5,13 +5,14 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D02A` is the only active phase. PH-D01B is Owner-approved against exact
-post-audit implementation and evidence commits. Existing PH-D01A through
-PH-D03A phase records originated before the rev3 audit correction; colliding
-PH-D01B and PH-D02A control artifacts are preserved under
+`PH-D02B` is the only active phase. PH-D02A is Owner-approved against exact
+post-audit implementation and evidence commits. Existing pre-audit PH-D01A
+through PH-D03A phase records remain historical; colliding PH-D01B, PH-D02A,
+and PH-D02B control artifacts are preserved under
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and
-`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/`. They are not current phase-pass,
-promotion, or completion evidence.
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/` and
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02B/`. They are not current
+phase-pass, promotion, or completion evidence.
 
 The Owner-approved `PH-D01A` rebind validates and hardens:
 
@@ -30,7 +31,7 @@ The Owner-approved `PH-D01A` rebind validates and hardens:
 - dedicated tests;
 - canonical scope-audit evidence.
 
-The current `PH-D01B` rebind freezes the admitted byte identities and their
+The Owner-approved `PH-D01B` rebind freezes the admitted byte identities and their
 execution context:
 
 - eight `SourceContentManifest` documents covering all 83 admitted sources;
@@ -52,7 +53,7 @@ execution context:
   checked bytes remain preserved and PH-D02B rebuild stays suspended until
   PH-D02A and then PH-D02B are entered in roadmap order.
 
-The current `PH-D02A` rebind revalidates and hardens the common deterministic
+The Owner-approved `PH-D02A` rebind revalidates and hardens the common deterministic
 representation layer used by later distillation schemas:
 
 - strict canonical UTF-8 JSON with Unicode NFC and explicit unordered-array
@@ -66,30 +67,41 @@ representation layer used by later distillation schemas:
   little endian, C-order shape, member order, and non-finite rejection;
 - committed JSON/ZIP/NPZ test vectors and three-process reproducibility tests.
 
-PH-D02A uses synthetic vectors only. It does not read or normalize real
-teacher trajectories, rebuild the three invalidated PH-D02B artifacts, define
-the PH-D02B schema set, generate HDS hypotheses, or implement Bridge/Runtime
+PH-D02A uses synthetic vectors only. It did not read or normalize real
+teacher trajectories, generate HDS hypotheses, or implement Bridge/Runtime
 capability.
 
-`PH-D02B` adds the static schema and HDS record boundary:
+The current post-audit `PH-D02B` rebind adds the static schema and bundle
+record boundary:
 
-- exactly 38 authority-named Draft 2020-12 schemas, with the five PH-D01A/B
-  schema files preserved byte-for-byte and 33 closed schemas added;
-- a content-bound schema contract with one primary ID, digest policy, and
-  typed reference declaration per record type;
+- exactly 38 authority-named HDS rev2 schemas plus exactly 7
+  HDSStructureBundle schemas under `schema_sets/ph_d02b_v1/`;
+- a content-bound 45-schema contract with one primary identity and digest
+  policy per record type;
+- an exact one-to-one mapping from all 38 HDS rev2 schemas to the 7 canonical
+  bundle record projections without duplicate evidence scoring;
 - seven independent HDS state axes and explicit RawObservation,
   DeterministicDerivation, and InterpretationHypothesis separation;
-- a standard-library-only structural, content-identity, typed-reference, and
-  cross-record semantic validator;
-- one mutually resolvable synthetic example per schema, a two-model
+- a standard-library-only structural, content-identity, typed cross-file
+  reference, dependency-lock, version, and package-inventory validator;
+- one mutually resolvable synthetic example per all 45 schemas, a two-model
   MULTI_CAUSAL fixture, a no-selection SUSPEND fixture, and deterministic
-  adversarial bundles with stable failure codes;
+  adversarial cases with stable failure codes;
+- fail-closed rejection for duplicate/dangling/wrong-kind/wrong-target
+  references, partial bundles, unknown files, unknown versions, and
+  dependency-lock drift;
 - fail-closed Owner approval and promotion boundaries: checked fixtures contain
   only a non-authoritative `SCHEMA_TEMPLATE`, never an Owner decision;
 - deterministic schema conformance evidence for DG-00, DG-01, DG-02, and the
   schema-only portion of DG-14.
 
-`PH-D02C` adds the synthetic-only executable Causal IR boundary:
+The checked `distillation/schemas/`, `schema_registry.py`, `causal_ir.py`,
+`interpreter.py`, and their old conformance artifacts are pre-audit PH-D02C
+implementation candidates. They are retained for history but are not imported
+or accepted as current PH-D02B evidence.
+
+The historical pre-audit `PH-D02C` candidate adds a synthetic-only executable
+Causal IR boundary:
 
 - exactly 18 canonical JSON-native common types, 33 ARC2 opcodes, and 18 ARC3
   opcodes;
@@ -132,7 +144,8 @@ execute, or replay them. The only network evidence is the already frozen,
 revision-checked, read-only Dataset Viewer capture. Manifest compilation itself
 does not access a network.
 
-PH-D03A executes only checked synthetic typed conformance candidates. It does
+The historical PH-D03A candidate executes only checked synthetic typed
+conformance candidates. It does
 not normalize a real trajectory, read teacher/source payloads, freeze Golden
 expectations, create the Sealed corpus, generate or rank general candidates,
 establish a real causal mechanism, promote Rules, create or simulate Owner
@@ -147,7 +160,8 @@ PYTHONPATH=distillation/src python -m pytest distillation/tests
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_canonical.py
 PYTHONPATH=distillation/src python -m pytest \
-  distillation/tests/unit/test_schema_registry.py
+  distillation/tests/unit/test_post_audit_schema_bundle.py
+python scripts/build_ph_d02b_schema_bundle.py
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_causal_ir.py
 PYTHONPATH=distillation/src python -m pytest \

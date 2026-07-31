@@ -1,6 +1,6 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00A、PH-D00B、PH-D01A、PH-D01BはOwner承認済みであり、PH-D02Aだけが現在activeである。PH-D02A開始許可は、synthetic test vector上のcanonical serialization、content-derived ID、logical／physical digest分離、canonical ZIP／NPY／NPZ、raw／canonical trajectory digest型の実装・検証に限られ、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS仮説生成・蒸留実行、PH-D02B、Bridge、Runtimeの開始許可ではない。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1、PH-R00、PH-D00A、PH-D00B、PH-D01A、PH-D01B、PH-D02AはOwner承認済みであり、PH-D02Bだけが現在activeである。PH-D02B開始許可は、監査後の38 HDS rev2 schemaと7 HDSStructureBundle schema、cross-reference、dependency lock、bundle inventory、synthetic conformanceの実装・検証に限られ、PH-D02CのTyped Causal IR／interpreter実行、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS仮説生成・蒸留実行、Rule promotion、Bridge、Runtimeの開始許可ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
 - 日付: `2026-07-31`
@@ -10,9 +10,10 @@
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
 - 契約状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- 現在作業: `PH-D02A_CANONICAL_SERIALIZATION_DIGEST_REBIND`
-- Active phase: `PH-D02A`
-- PH-D02A: `IN_PROGRESS`
+- 現在作業: `PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND`
+- Active phase: `PH-D02B`
+- PH-D02B: `IN_PROGRESS`
+- PH-D02A: `OWNER_APPROVED_PASS`
 - PH-D01B: `OWNER_APPROVED_PASS`
 - PH-D01A: `OWNER_APPROVED_PASS`
 - PH-D00B: `OWNER_APPROVED_PASS`
@@ -141,15 +142,16 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = PH-D02A
-Current work = PH-D02A_CANONICAL_SERIALIZATION_DIGEST_REBIND
+Active phase = PH-D02B
+Current work = PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND
 PH-R-1 = OWNER_APPROVED_PASS
 PH-R00 = OWNER_APPROVED_PASS
 PH-D00A = OWNER_APPROVED_PASS
 PH-D00B = OWNER_APPROVED_PASS
 PH-D01A = OWNER_APPROVED_PASS
 PH-D01B = OWNER_APPROVED_PASS
-PH-D02A = IN_PROGRESS
+PH-D02A = OWNER_APPROVED_PASS
+PH-D02B = IN_PROGRESS
 PH-R00 Owner authorization = ESTABLISHED
 ```
 
@@ -184,9 +186,11 @@ AND PH-D01A_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D01B
 AND PH-D01B_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D02A
+AND PH-D02A_DOD_PASS
+AND OWNER_AUTHORIZED_PH-D02B
 ```
 
-以前に`PH-D02A`を開始しない。現在は全条件が成立し、PH-D02Aだけがactiveである。PH-D02BはPH-D02Aの全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
+以前に`PH-D02B`を開始しない。現在は全条件が成立し、PH-D02Bだけがactiveである。PH-D02CはPH-D02Bの全DoD、required validation、failed requirement count 0、exact evidence bindが成立するまで開始しない。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -743,9 +747,10 @@ PH-D00AはOWNER_APPROVED_PASSです。
 PH-D00BはOWNER_APPROVED_PASSです。
 PH-D01AはOWNER_APPROVED_PASSです。
 PH-D01BはOWNER_APPROVED_PASSです。
-PH-D02AはIN_PROGRESSです。
-Active phaseはPH-D02Aです。
-現在許可されたwork classはPH-D02A_CANONICAL_SERIALIZATION_DIGEST_REBINDです。
+PH-D02AはOWNER_APPROVED_PASSです。
+PH-D02BはIN_PROGRESSです。
+Active phaseはPH-D02Bです。
+現在許可されたwork classはPH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBINDです。
 PH-R00のOwner authorizationはESTABLISHEDです。
 
 最初に、
@@ -754,29 +759,30 @@ PH-R00のOwner authorizationはESTABLISHEDです。
 - HEAD/tree
 - dirty state
 - required documents
-- PH-D01B evidence、attestation、approval
-- PH-D02A WorkBlockFrameとphase-entry approval
+- PH-D02A evidence、attestation、approval
+- PH-D02B WorkBlockFrameとphase-entry approval
 を確認してください。
 
 次だけを実施してください。
 
-- canonical JSON／JSONL、Unicode NFC、strict JSON domain、unordered normalizationの固定
-- confidence_ppm、content-derived ID、明示的digest field除外規則の固定
-- logical／physical digest domainの分離
-- ZIP_STOREDによるcanonical ZIPとdependency-free canonical NPY／NPZの固定
-- raw source bytesとcanonical trajectory recordのdigest型分離
-- synthetic canonical test vectorを独立processで3回byte-identical rebuild
-- 監査前PH-D02A control artifact 13件の明示的historical移送
+- 38 HDS rev2 schemaと7 HDSStructureBundle schemaのexact 45-schema set固定
+- 全38 schemaの一対一bundle projection mapping固定
+- content-derived identity、typed cross-file reference、dependency lock、schema versionのfail-closed検証
+- duplicate／dangling／wrong-kind／wrong-target referenceの拒否
+- partial bundle／unknown file／unknown version／dependency driftの拒否
+- RawObservation／DeterministicDerivation／InterpretationHypothesis境界、独立HDS state axis、MULTI_CAUSAL／SUSPEND、initial RuleAtom制約の固定
+- synthetic 45-record fixtureとnegative caseの独立process 3回byte-identical rebuild
+- 監査前PH-D02B control artifact 13件の明示的historical移送
 - dedicated／focused／full unit／integration regression
 - deterministic artifact、Implementation Commit、Evidence Commit、attestationの分離
-- PH-D02A DoD、DG-06、DG-07、failed requirement count 0の証明
+- PH-D02B DoD、DG-00、DG-01、DG-02、DG-14、failed requirement count 0の証明
 
-real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS仮説生成・蒸留実行、PH-D02B、
+PH-D02C Typed Causal IR／interpreter実行、real teacher trajectoryのsemantic parse／normalization、source実行・replay、HDS仮説生成・蒸留実行、Rule promotion、
 Bridge実装、AGI Runtime、P22改善、locked final、official、Kaggleへ進んではいけません。
 
-PH-D02A成果のImplementation Commit、Evidence Commit、attestationを分離してください。
+PH-D02B成果のImplementation Commit、Evidence Commit、attestationを分離してください。
 全gateがPASSした場合だけstanding authorizationをexact evidenceへ機械的にbindし、
-PH-D02B entryを記録してください。失敗または未証明gateを承認してはいけません。
+PH-D02C entryを記録してください。失敗または未証明gateを承認してはいけません。
 ```
 
 ---

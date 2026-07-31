@@ -50,23 +50,24 @@
     ]
   },
   "active_work_block": {
-    "content_digest": "rev3-work-block-frame:ee3cbcc1bc2c05f0411fe2bc498d50a1808bd2bfb3c2dfeaa3754f121441d4cf",
+    "content_digest": "rev3-work-block-frame:beb14c910934e7a8314432b58acd8ad17ff99f48127f0d2fcdc24dc80031b784",
     "external_irreversible_actions_authorized": false,
-    "path": "control/rev3/PH-D02A_WORK_BLOCK_FRAME.json",
-    "phase_id": "PH-D02A",
+    "path": "control/rev3/PH-D02B_WORK_BLOCK_FRAME.json",
+    "phase_id": "PH-D02B",
     "runtime_capability_addition_count": 0,
-    "transition_digest": "rev3-phase-transition:0b0c9b366beeaac4412d4d5641cf8a0841787c291f2466b3244e60e00199d9c5"
+    "transition_digest": "rev3-phase-transition:cb30548980f242f4dbfec6bfe11d7df753978c4a665b39b4b9c83167bd38cc54"
   },
   "current_selector": {
-    "active_phase": "PH-D02A",
-    "current_work_class": "PH-D02A_CANONICAL_SERIALIZATION_DIGEST_REBIND",
+    "active_phase": "PH-D02B",
+    "current_work_class": "PH-D02B_SCHEMA_SET_BUNDLE_CONTRACT_REBIND",
     "distilled_initial_state_bundle_status": "NOT_FROZEN",
     "installation_status": "INSTALLED",
     "ph_d00a_status": "OWNER_APPROVED_PASS",
     "ph_d00b_status": "OWNER_APPROVED_PASS",
     "ph_d01a_status": "OWNER_APPROVED_PASS",
     "ph_d01b_status": "OWNER_APPROVED_PASS",
-    "ph_d02a_status": "IN_PROGRESS",
+    "ph_d02a_status": "OWNER_APPROVED_PASS",
+    "ph_d02b_status": "IN_PROGRESS",
     "ph_r00_owner_authorization": "ESTABLISHED",
     "ph_r00_status": "OWNER_APPROVED_PASS",
     "ph_r1_status": "OWNER_APPROVED_PASS",
@@ -133,12 +134,12 @@
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "phase_entry_approval": {
-    "approval_artifact_digest": "owner-approval-record:75fdf70a6db5d56105afe5439919d5dec290cec5b748282230f10a4146e98e26",
-    "decision_capture_digest": "sha256:4fecedc2acd948e29fa75ea3cfc74703e4af0f46bf5c8d3c81281c3efbf57280",
-    "from_phase": "PH-D01B",
-    "target_artifact_digest": "sha256:27e3b1756cfc7d0fba2c79021089d14e62341ce736d82ba79d09e3185589fa2a",
-    "target_evidence_commit": "04ffbe68b71fed60b786f8147968ac8f5ceb6730",
-    "to_phase": "PH-D02A"
+    "approval_artifact_digest": "owner-approval-record:cf8fae68b34e144dfc2a7f58fbbb9520cdc91e47a13775870e9e89b521e1facd",
+    "decision_capture_digest": "sha256:32f5f73cdc59fb4cc57fe184c876c46148d2e2a17250bcccbec1253c4ae01ccd",
+    "from_phase": "PH-D02A",
+    "target_artifact_digest": "sha256:b6f78c8060e7b39521e01ca4dbbf84535acc7a64372b15f8a53d404c8c088d01",
+    "target_evidence_commit": "78aaf2a4f3bc00c5aa8ec66c6414b19ad6089dd3",
+    "to_phase": "PH-D02B"
   },
   "j_boundary": {
     "distillation_may_generate": [
@@ -239,9 +240,10 @@
     "report_digest": "hds-ph-d01b-downstream-invalidation:d491966458d317ad0e29e78769e6477e044bdb911850c9dd2981636701a35761",
     "invalidated_artifact_count": 3,
     "invalidated_artifact_owner_phase": "PH-D02B",
-    "current_phase_rebuild_permitted": false,
+    "report_point_in_time_rebuild_permitted": false,
+    "live_ph_d02b_rebuild_permitted": true,
     "report_point_in_time_ph_d02a_status": "NOT_STARTED",
-    "live_ph_d02a_status": "IN_PROGRESS",
-    "ph_d02b_status": "SUSPEND"
+    "live_ph_d02a_status": "OWNER_APPROVED_PASS",
+    "ph_d02b_status": "IN_PROGRESS"
   }
 }

@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, cast
 
 import pytest
+
 from hds_distill.canonical import (
     CANONICAL_NPY_VERSION,
     CANONICAL_NPZ_VERSION,

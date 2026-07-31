@@ -1,0 +1,119 @@
+{
+  "schema_version": "arc3-rev3-ph-d02b-schema-bundle-preinventory-v1",
+  "phase_id": "PH-D02B",
+  "work_block_id": "WB-PH-D02B-POST-AUDIT-SCHEMA-BUNDLE-REBIND-20260731",
+  "base_commit": "32b141ef50224e74d6ed95e9198377a2860328e3",
+  "base_tree": "8f794710bcbde10a22b6a1fc91364cbb1005f0f7",
+  "inventory_semantics": "POST_AUDIT_ENTRY_INVENTORY_OF_HISTORICAL_SCHEMA_CANDIDATES_NOT_A_PHASE_PASS_CLAIM",
+  "frozen_input_bindings": {
+    "d02a_phase_state_sha256": "ff5fd059180ca5c4149f39f017231689eda4cbcadddbfffe611a39555d2bc50a",
+    "d02a_implementation_commit": "5949e14cb0135f807dd227d9d13cc8698e4e3e4e",
+    "d02a_implementation_tree": "b65c93696cf091122473e86d0da76ce6dd9090b8",
+    "d02a_evidence_commit": "78aaf2a4f3bc00c5aa8ec66c6414b19ad6089dd3",
+    "d02a_evidence_tree": "8c7aedb511b6e0f23b5ad58aed0374360f852e6f",
+    "d02a_evidence_payload_digest": "sha256:b6f78c8060e7b39521e01ca4dbbf84535acc7a64372b15f8a53d404c8c088d01",
+    "d02a_owner_approval_digest": "owner-approval-record:cf8fae68b34e144dfc2a7f58fbbb9520cdc91e47a13775870e9e89b521e1facd",
+    "canonicalization_contract_digest": "hds-canonicalization-contract:8ef686f3e30c2c773dff47637c9bb0d57dbb175d4fc6b7bd1c46a7820cf4068f",
+    "canonicalization_conformance_digest": "hds-canonicalization-conformance:34243c50e4313322414c6e3525172ce0655a664ea5953bfad6be86803a1bb7ae"
+  },
+  "required_schema_inventory": {
+    "hds_rev2_schema_count": 38,
+    "structure_bundle_schema_count": 7,
+    "total_schema_count": 45,
+    "hds_rev2_one_to_one_mapping_required": true,
+    "required_bundle_file_count": 34
+  },
+  "historical_control_candidate": {
+    "destination_root": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02B",
+    "artifact_count": 13,
+    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
+    "eligible_for_current_activation": false,
+    "byte_identity_required": true
+  },
+  "historical_schema_snapshot": {
+    "source_commit": "108c5462c2c73bdd95953e9e9b0cbbce68ac5d02",
+    "source_contract_sha256": "adb49377963e533a18866d870202f2056dbc589175a171a24a2e2e8fce930dc7",
+    "schema_count": 38,
+    "destination_root": "distillation/input/historical_pre_audit/PH-D02B",
+    "classification": "HISTORICAL_IMPLEMENTATION_CANDIDATE_INPUT_ONLY",
+    "eligible_for_current_activation": false
+  },
+  "live_pre_audit_d02c_candidate": {
+    "schema_registry_path": "distillation/src/hds_distill/schema_registry.py",
+    "schema_registry_git_blob": "80c64e038a07d78d4738344c5decf9765d9e5519",
+    "schema_contract_path": "distillation/input/schema_contract.json",
+    "schema_contract_git_blob": "77b35337bdf6963978dedef9910ffcd65bc28d72",
+    "schema_directory": "distillation/schemas",
+    "schema_count": 38,
+    "contains_ph_d02c_refinements": true,
+    "classification": "HISTORICAL_PRE_AUDIT_D02C_IMPLEMENTATION_CANDIDATE",
+    "eligible_for_current_d02b_activation": false,
+    "reuse": "NO_IMPORT_OR_ACTIVATION"
+  },
+  "identified_gaps": [
+    {
+      "gap_id": "D02B-GAP-001",
+      "requirement": "seven explicit HDSStructureBundle record schemas",
+      "entry_status": "MISSING"
+    },
+    {
+      "gap_id": "D02B-GAP-002",
+      "requirement": "one-to-one mapping of all 38 HDS rev2 schemas into canonical bundle records",
+      "entry_status": "MISSING"
+    },
+    {
+      "gap_id": "D02B-GAP-003",
+      "requirement": "typed cross-file reference index with duplicate, dangling, wrong-kind, and wrong-target rejection",
+      "entry_status": "PRE_AUDIT_CANDIDATE_PRESENT_REQUIRES_REVALIDATION"
+    },
+    {
+      "gap_id": "D02B-GAP-004",
+      "requirement": "partial bundle, unknown file, unknown version, and dependency-lock rejection",
+      "entry_status": "MISSING"
+    },
+    {
+      "gap_id": "D02B-GAP-005",
+      "requirement": "logical and physical package digest contract without self-reference",
+      "entry_status": "MISSING"
+    },
+    {
+      "gap_id": "D02B-GAP-006",
+      "requirement": "current PH-D02B evidence separated from pre-audit D02B and D02C artifacts",
+      "entry_status": "MISSING"
+    }
+  ],
+  "implementation_plan": [
+    "move the 13 colliding pre-audit PH-D02B control artifacts byte-identically into the historical namespace",
+    "extract the exact 38-schema implementation snapshot from commit 108c5462 as non-authoritative input",
+    "regenerate the 38 base schemas under the approved PH-D02A canonical contract without D02C refinements",
+    "add exactly 7 structure-bundle schemas and exact 38-to-7 projection mapping",
+    "add fail-closed static registry, cross-reference, dependency-lock, version, and package-inventory validation",
+    "build 45 positive fixtures, at least 9 negative cases, checked contract, and conformance report",
+    "run three independent byte-identical rebuilds, full regressions, scope audit, and exact-tree evidence binding"
+  ],
+  "phase_boundaries": {
+    "schema_contract_started": false,
+    "structure_bundle_schema_started": false,
+    "ph_d02c_typed_causal_ir_started": false,
+    "interpreter_started": false,
+    "real_trajectory_normalization_count": 0,
+    "hds_hypothesis_generation_count": 0,
+    "rule_promotion_count": 0,
+    "bridge_started": false,
+    "runtime_started": false,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "kaggle_mutation_count": 0
+  },
+  "preexisting_dirty_state": {
+    "path_scope": "analysis/autonomous_completion/**",
+    "file_count": 32,
+    "aggregate_sha256": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "mutation": "NONE",
+    "staging": "NONE"
+  },
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-ph-d02b-schema-bundle-preinventory:b0fe8423868bfc37a1d39b24c595e9d5124a50e00efe8358705ccf18cbbe7111"
+}

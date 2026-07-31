@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.arc3.invalid/schemas/source_content_manifest.schema.json",
+  "title": "PH-D01B SourceContentManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "manifest_version",
+    "source_profile",
+    "domain",
+    "repository_relative_posix_paths",
+    "files",
+    "directory_merkle_root",
+    "upstream_repository",
+    "upstream_commit_or_release",
+    "split_role",
+    "answer_visibility",
+    "development_usage",
+    "contamination_class",
+    "license",
+    "source_count",
+    "digest_excluded_fields",
+    "content_digest"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "hds-source-content-manifest-v1"
+    },
+    "manifest_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]+$"
+    },
+    "manifest_version": {
+      "const": 1
+    },
+    "source_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_id",
+        "profile_digest"
+      ],
+      "properties": {
+        "profile_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile_digest": {
+          "type": "string",
+          "pattern": "^hds-source-profile:[0-9a-f]{64}$"
+        }
+      }
+    },
+    "domain": {
+      "enum": [
+        "ARC2",
+        "ARC3"
+      ]
+    },
+    "repository_relative_posix_paths": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/relativePosixPath"
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/fileRecord"
+      }
+    },
+    "directory_merkle_root": {
+      "type": "string",
+      "pattern": "^hds-directory-merkle-v1:[0-9a-f]{64}$"
+    },
+    "upstream_repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "upstream_commit_or_release": {
+      "type": "string",
+      "minLength": 1
+    },
+    "split_role": {
+      "enum": [
+        "TRAIN_TEACHER",
+        "PUBLIC_EVALUATION_TEACHER",
+        "PUBLIC_EVALUATION_CONSUMED",
+        "UNLABELED_TEST",
+        "REPLAY_ONLY_SOURCE",
+        "SEALED_AUDIT"
+      ]
+    },
+    "answer_visibility": {
+      "enum": [
+        "CHALLENGE_ONLY",
+        "ANSWER_VISIBLE",
+        "ANSWER_UNAVAILABLE",
+        "ENVIRONMENT_SOURCE_AND_HIDDEN_STATE_VISIBLE",
+        "SUCCESS_TRAJECTORY_VISIBLE"
+      ]
+    },
+    "development_usage": {
+      "enum": [
+        "DISTILLATION_SOURCE",
+        "AVAILABLE_TEACHER_NOT_CONSUMED",
+        "SEALED_AUDIT_ONLY",
+        "REPLAY_HARNESS_ONLY"
+      ]
+    },
+    "contamination_class": {
+      "enum": [
+        "NONE",
+        "PUBLIC_EVALUATION_INPUT_VISIBLE",
+        "PUBLIC_EVALUATION_ANSWER_VISIBLE_NOT_CONSUMED",
+        "PUBLIC_EVALUATION_SUCCESS_TRAJECTORY_CONSUMED",
+        "UNLABELED_TEST_NO_ANSWER",
+        "PRIVILEGED_ENVIRONMENT_IMPLEMENTATION"
+      ]
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "digest_excluded_fields": {
+      "const": [
+        "content_digest"
+      ]
+    },
+    "content_digest": {
+      "type": "string",
+      "pattern": "^hds-source-content-manifest:[0-9a-f]{64}$"
+    }
+  },
+  "$defs": {
+    "relativePosixPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[^/\\\\][^\\\\]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "fileRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "repository_relative_posix_path",
+        "source_locator",
+        "aliases",
+        "sha256",
+        "size_bytes",
+        "verification_method"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository_relative_posix_path": {
+          "$ref": "#/$defs/relativePosixPath"
+        },
+        "source_locator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "verification_method": {
+          "enum": [
+            "REPOSITORY_FILE_SHA256",
+            "ARCHIVE_MEMBER_SHA256",
+            "REPOSITORY_ARCHIVE_ALIAS_BYTE_IDENTITY",
+            "PINNED_DATASET_TRAJECTORY_SHA256"
+          ]
+        }
+      }
+    }
+  }
+}

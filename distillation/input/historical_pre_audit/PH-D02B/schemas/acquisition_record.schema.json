@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.arc3.invalid/schemas/acquisition_record.schema.json",
+  "title": "PH-D01B AcquisitionRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "acquisition_id",
+    "source_content_manifest_id",
+    "source_content_digest",
+    "acquired_at",
+    "local_path",
+    "mtime",
+    "acquisition_actor",
+    "transport",
+    "notes",
+    "digest_excluded_fields",
+    "acquisition_digest"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "hds-acquisition-record-v1"
+    },
+    "acquisition_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]+$"
+    },
+    "source_content_manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_content_digest": {
+      "type": "string",
+      "pattern": "^hds-source-content-manifest:[0-9a-f]{64}$"
+    },
+    "acquired_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "local_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mtime": {
+      "type": "string",
+      "minLength": 1
+    },
+    "acquisition_actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "transport": {
+      "enum": [
+        "LOCAL_GIT_WORKTREE_READ",
+        "LOCAL_ARCHIVE_MEMBER_READ",
+        "HUGGINGFACE_DATASET_VIEWER_ROWS_HTTPS_GET"
+      ]
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "digest_excluded_fields": {
+      "const": [
+        "acquisition_digest"
+      ]
+    },
+    "acquisition_digest": {
+      "type": "string",
+      "pattern": "^hds-acquisition-record:[0-9a-f]{64}$"
+    }
+  }
+}

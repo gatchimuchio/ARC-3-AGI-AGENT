@@ -45,7 +45,13 @@ INVALID_EXAMPLES_PATH = (
 )
 CONFORMANCE_PATH = DISTILLATION_ROOT / "artifacts/reports/schema_conformance.json"
 D02B_ARTIFACT_MANIFEST_PATH = (
-    REPOSITORY_ROOT / "control/rev3/PH-D02B_OWNER_REVIEW_PACKAGE/artifact_manifest.json"
+    REPOSITORY_ROOT
+    / "control"
+    / "rev3"
+    / "HISTORICAL_PRE_AUDIT"
+    / "PH-D02B"
+    / "OWNER_REVIEW_PACKAGE"
+    / "artifact_manifest.json"
 )
 PH_D01B_DOWNSTREAM_INVALIDATION_PATH = (
     DISTILLATION_ROOT
