@@ -15,7 +15,6 @@ from pathlib import Path
 from typing import cast
 
 import pytest
-
 from hds_distill.canonical import (
     DigestExclusionPolicy,
     content_derived_id,
@@ -25,6 +24,7 @@ from hds_distill.golden_corpus import (
     CASE_SPECS,
     GATE_ASSERTIONS,
     GATE_IDS,
+    GATE_OBLIGATION_CHECKS,
     GOLDEN_ERROR_CODES,
     REQUIRED_ARTIFACT_CLASSES,
     GoldenCorpusError,
@@ -41,7 +41,7 @@ from hds_distill.ir_types import IRContractError, JsonObject
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
 DISTILLATION_SOURCE = REPOSITORY_ROOT / "distillation" / "src"
-PH_D02C_ENTRY_BASE_COMMIT = "9c9cf5a9790fae341ad1be45506c88e7a7f34b58"
+PH_D03A_ENTRY_BASE_COMMIT = "70722de7df8278c866de0734c97206c9952d731d"
 
 
 @lru_cache(maxsize=1)
@@ -120,7 +120,12 @@ def test_authority_case_and_gate_inventories_are_exact() -> None:
     assert GATE_IDS == tuple(f"DG-{index:02d}" for index in range(16))
     assert {spec["primary_gate_id"] for spec in CASE_SPECS} == set(GATE_IDS)
     assert set(GATE_ASSERTIONS) == set(GATE_IDS)
-    assert len(GOLDEN_ERROR_CODES) == len(set(GOLDEN_ERROR_CODES)) == 20
+    assert set(GATE_OBLIGATION_CHECKS) == set(GATE_IDS)
+    assert all(
+        len(check_ids) == len(set(check_ids)) == 2
+        for check_ids in GATE_OBLIGATION_CHECKS.values()
+    )
+    assert len(GOLDEN_ERROR_CODES) == len(set(GOLDEN_ERROR_CODES)) == 21
 
 
 def test_contract_is_content_bound_candidate_only_and_phase_limited() -> None:
@@ -144,6 +149,41 @@ def test_contract_is_content_bound_candidate_only_and_phase_limited() -> None:
     assert contract["required_total_case_count"] == 16
     assert contract["required_hypothesis_count_per_case_minimum"] == 2
     assert contract["required_artifact_classes"] == list(REQUIRED_ARTIFACT_CLASSES)
+    authority = cast(JsonObject, contract["authority"])
+    assert authority == {
+        "causal_ir_contract_digest": (
+            "hds-causal-ir-contract:"
+            "160048eb2d37ddd633c589b2bdb07f901d5db449648451ea8a10331039111678"
+        ),
+        "input_evidence_payload_digest": (
+            "sha256:"
+            "cb5c07dd9295ee47fa5f114ba9aff5d9f10106da2c6d2412adbea42080fe4a04"
+        ),
+        "input_phase_state_sha256": (
+            "sha256:"
+            "3a7e627ab0aee7f37346aee6b7ef5188bbe2ef257abd6302de5a358bc2d7293d"
+        ),
+        "phase_entry_approval_digest": (
+            "owner-approval-record:"
+            "2f01decd9706b8a69fc00c1ff7ad22d4ee79aa9c1bfc8667f21792e882235625"
+        ),
+        "phase_transition_digest": (
+            "rev3-phase-transition:"
+            "6a10c8cb7d86884e449054462d6407e33c5ea42b9b77387c84e3fad9dc9d0914"
+        ),
+        "preinventory_digest": (
+            "rev3-ph-d03a-post-audit-golden-preinventory:"
+            "4b961014e9845b9eac2965fcc83815622a441024352095babcd41ef866836fe0"
+        ),
+        "schema_contract_digest": (
+            "hds-post-audit-causal-ir-schema-contract:"
+            "8d4acb814448b2cba3dff39162a1191aaa490261247907151f9db0750a77b646"
+        ),
+            "work_block_frame_digest": (
+                "rev3-work-block-frame:"
+                "a035ddb7fda0e8a598d11f65154a5f45f31439d3c229019f60a2324ec9084530"
+            ),
+        }
     approval = cast(JsonObject, contract["approval_contract"])
     assert approval == {
         "allowed_mode": "SCHEMA_TEMPLATE",
@@ -344,6 +384,22 @@ def test_gate_coverage_is_complete_without_fabricating_dg14() -> None:
     assert report["suspend_result_count"] == 1
     assert report["fail_result_count"] == 0
     assert report["coverage_complete"] is True
+    assert report["declarative_gate_result_trusted"] is False
+    assert report["behaviorally_recomputed_gate_count"] == 16
+    for entry in entries:
+        obligation = cast(JsonObject, entry["obligation_evidence"])
+        gate_id = cast(str, entry["gate_id"])
+        assert obligation["recomputed"] is True
+        assert obligation["declarative_gate_result_trusted"] is False
+        assert obligation["check_ids"] == list(
+            GATE_OBLIGATION_CHECKS[gate_id]
+        )
+        assert obligation["result"] == entry["actual_result"]
+        assert obligation["evidence_digests"]
+        assert entry["actual_reason_codes"] == [
+            GATE_ASSERTIONS[gate_id],
+            "BEHAVIORALLY_RECOMPUTED",
+        ]
     dg14 = next(item for item in entries if item["gate_id"] == "DG-14")
     assert dg14["actual_result"] == "SUSPEND"
     assert dg14["expected_assertion"] == (
@@ -354,6 +410,23 @@ def test_gate_coverage_is_complete_without_fabricating_dg14() -> None:
     assert dg15["expected_assertion"] == (
         "PASS_UNAPPROVED_COMMIT_AND_PROMOTION_REJECTED"
     )
+    assert cast(
+        JsonObject,
+        next(item for item in entries if item["gate_id"] == "DG-08")[
+            "obligation_evidence"
+        ],
+    )["negative_probe_codes"] == [
+        "D03A_PRIVILEGED_ROUTING_FORBIDDEN"
+    ]
+    assert cast(JsonObject, dg14["obligation_evidence"])[
+        "negative_probe_codes"
+    ] == ["D03A_OWNER_APPROVAL_FABRICATION"]
+    assert cast(JsonObject, dg15["obligation_evidence"])[
+        "negative_probe_codes"
+    ] == [
+        "D03A_PROMOTION_FORBIDDEN",
+        "D03A_PROMOTION_FORBIDDEN",
+    ]
 
 
 def test_approval_templates_are_non_authoritative_and_target_proposals() -> None:
@@ -680,31 +753,51 @@ def test_coverage_and_review_validators_reject_authority_mutations() -> None:
         )
 
 
-def test_checked_pre_audit_artifacts_remain_historical_and_unpromoted() -> None:
+def test_pre_audit_artifacts_are_snapshotted_and_current_bytes_are_rebuilt(
+) -> None:
     rebuilt = _encoded_artifacts()
 
     assert len(rebuilt) == 4
-    byte_distinct_paths: set[str] = set()
-    for relative_path, payload in rebuilt.items():
+    snapshot_paths = {
+        "distillation/input/golden_conformance_contract.json": (
+            "generated/golden_conformance_contract.json"
+        ),
+        "distillation/artifacts/golden/candidate_cases.json": (
+            "generated/candidate_cases.json"
+        ),
+        "distillation/artifacts/reports/golden_gate_coverage.json": (
+            "generated/golden_gate_coverage.json"
+        ),
+        "distillation/artifacts/golden/owner_review_request.json": (
+            "generated/owner_review_request.json"
+        ),
+    }
+    for relative_path, snapshot_relative_path in snapshot_paths.items():
+        payload = rebuilt[relative_path]
         checked = (REPOSITORY_ROOT / relative_path).read_bytes()
+        snapshot = (
+            REPOSITORY_ROOT
+            / "distillation"
+            / "input"
+            / "historical_pre_audit"
+            / "PH-D03A"
+            / snapshot_relative_path
+        ).read_bytes()
         historical = subprocess.run(
             [
                 "git",
                 "show",
-                PH_D02C_ENTRY_BASE_COMMIT + ":" + relative_path,
+                PH_D03A_ENTRY_BASE_COMMIT + ":" + relative_path,
             ],
             cwd=REPOSITORY_ROOT,
             check=True,
             capture_output=True,
         ).stdout
-        assert checked == historical
-        if checked != payload:
-            byte_distinct_paths.add(relative_path)
+        assert snapshot == historical
+        assert checked == payload
+        assert checked != historical
         decoded = json.loads(payload)
         assert isinstance(decoded, dict)
-    assert set(rebuilt) - byte_distinct_paths == {
-        "distillation/input/golden_conformance_contract.json"
-    }
 
 
 def test_three_independent_processes_rebuild_identical_bytes(

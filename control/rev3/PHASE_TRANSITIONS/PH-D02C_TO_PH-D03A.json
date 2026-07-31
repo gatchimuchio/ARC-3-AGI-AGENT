@@ -1,0 +1,72 @@
+{
+  "schema_version": "arc3-rev3-phase-transition-v2",
+  "transition_id": "PH-D02C-TO-PH-D03A-20260731",
+  "from_phase_id": "PH-D02C",
+  "from_phase_status": "OWNER_APPROVED_PASS",
+  "from_phase_state_status": "CODEX_SELF_AUDIT_PASS",
+  "from_phase_state_path": "control/rev3/D02C_PHASE_STATE.json",
+  "from_phase_state_sha256": "3a7e627ab0aee7f37346aee6b7ef5188bbe2ef257abd6302de5a358bc2d7293d",
+  "from_phase_evidence_commit": "bfd9f399c8ea1d05ca0f9c081cf13c7c931e24a6",
+  "from_phase_evidence_tree": "a9ac12950e138f8c4b4db527fa859fa3b52cdf74",
+  "from_phase_evidence_payload_digest": "sha256:cb5c07dd9295ee47fa5f114ba9aff5d9f10106da2c6d2412adbea42080fe4a04",
+  "from_phase_evidence_attestation_path": "control/rev3/PH-D02C_EVIDENCE_ATTESTATION.json",
+  "to_phase_id": "PH-D03A",
+  "to_phase_status": "IN_PROGRESS",
+  "decision": "ENTRY_AUTHORIZED",
+  "authorization_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D02C_TO_PH-D03A_20260731.json",
+  "authorization_digest": "owner-approval-record:2f01decd9706b8a69fc00c1ff7ad22d4ee79aa9c1bfc8667f21792e882235625",
+  "decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D02C_TO_PH-D03A_20260731.json",
+  "decision_capture_digest": "sha256:e9c85018fc95d1343b9ad0c398f7c4f367371ed4fe0b4b0e0db361bdbb432d8b",
+  "standing_authorization_path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+  "standing_authorization_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+  "to_phase_scope": "POST_AUDIT_SYNTHETIC_GOLDEN_IMPLEMENTATION_CONFORMANCE_CANDIDATE_WITH_BEHAVIORAL_DG00_THROUGH_DG15_RECOMPUTATION_WITHOUT_FREEZE_SEALED_REAL_NORMALIZATION_CAUSAL_PROMOTION_BRIDGE_OR_RUNTIME",
+  "verified_exit_conditions": {
+    "phase_dod": "PASS",
+    "failed_requirement_count": 0,
+    "exact_implementation_commit_and_tree_bound": true,
+    "exact_evidence_commit_and_payload_digest_bound": true,
+    "sequential_predecessor_satisfied": true,
+    "exact_tree_regression_passed": true,
+    "full_unit_passed": 736,
+    "full_integration_passed": 8,
+    "full_distillation_passed": 311,
+    "governance_validator_passed": 64,
+    "post_audit_schema_count": 45,
+    "valid_ir_vector_count": 51,
+    "invalid_ir_vector_count": 15,
+    "causal_ir_independent_rebuild_count": 3,
+    "scope_guard_finding_count": 0,
+    "historical_control_migration_artifact_count": 13
+  },
+  "hard_gates_crossed": [
+    "PH_D02C_TYPED_CAUSAL_IR_PASS",
+    "PH_D02C_CURRENT_HEAD_BOUND",
+    "PH_D02C_DOD_PASS",
+    "OWNER_APPROVED_PH_D02C_RESULT",
+    "OWNER_AUTHORIZED_PH_D03A"
+  ],
+  "permissions_granted": [
+    "construct exactly sixteen synthetic Golden implementation-conformance candidates",
+    "execute multiple typed synthetic alternatives through the approved PH-D02C ABI",
+    "recompute DG-00 through DG-15 behavior obligations and deterministic coverage",
+    "emit a non-authoritative content-specific Owner review request"
+  ],
+  "permissions_not_granted": [
+    "Golden expectation freeze or automatic expectation mutation",
+    "PH-D03B Sealed corpus construction",
+    "real teacher trajectory semantic parsing or normalization",
+    "ARC environment-source import, replay, or real intervention",
+    "general hypothesis generation, causal interpretation, Rule or StructureBundle promotion",
+    "Bridge or AGI Runtime capability implementation",
+    "P22 score optimization",
+    "LOCKED_FINAL or official access",
+    "Kaggle mutation or submission"
+  ],
+  "phase_order_preserved": true,
+  "external_irreversible_action_authorized": false,
+  "digest_excluded_fields": [
+    "content_digest",
+    "transition_id"
+  ],
+  "content_digest": "rev3-phase-transition:6a10c8cb7d86884e449054462d6407e33c5ea42b9b77387c84e3fad9dc9d0914"
+}

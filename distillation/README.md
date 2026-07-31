@@ -5,14 +5,15 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D02C` is the only active phase. PH-D02B is Owner-approved against exact
+`PH-D03A` is the only active phase. PH-D02C is Owner-approved against exact
 post-audit implementation and evidence commits. Existing pre-audit PH-D01A
 through PH-D03A phase records remain historical; colliding PH-D01B, PH-D02A,
-PH-D02B, and PH-D02C control artifacts are preserved under
+PH-D02B, PH-D02C, and PH-D03A control artifacts are preserved under
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D02A/` and
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D02B/` and
-`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/`. They are not current
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/` and
+`control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A/`. They are not current
 phase-pass, promotion, or completion evidence.
 
 The Owner-approved `PH-D01A` rebind validates and hardens:
@@ -96,7 +97,7 @@ record boundary:
 - deterministic schema conformance evidence for DG-00, DG-01, DG-02, and the
   schema-only portion of DG-14.
 
-The current post-audit `PH-D02C` rebind derives a synthetic-only executable
+The Owner-approved post-audit `PH-D02C` rebind derives a synthetic-only executable
 Causal IR boundary from the approved PH-D02B schema set:
 
 - exactly 18 canonical JSON-native common types, 33 ARC2 opcodes, and 18 ARC3
@@ -126,7 +127,8 @@ under `input/historical_pre_audit/PH-D02C/`. They are revalidated input only,
 not current evidence. Current artifacts bind the approved PH-D02B evidence,
 the PH-D02C entry approval, and the current WorkBlockFrame.
 
-`PH-D03A` adds a non-authoritative Golden conformance candidate layer:
+The current post-audit `PH-D03A` rebind adds a non-authoritative Golden
+implementation-conformance candidate layer:
 
 - exactly eight authority-listed ARC2 categories and eight authority-listed
   ARC3 categories, represented by 16 deterministic synthetic cases;
@@ -134,9 +136,12 @@ the PH-D02C entry approval, and the current WorkBlockFrame.
   two typed HypothesisIR alternatives, exact-fit accounting, a pre-result
   frozen bounded intervention, InterventionResult, HDSCausalRecord,
   FailureSignature, GateResult, and ApprovalRecord schema template per case;
-- complete behavioral coverage of DG-00 through DG-15, including explicit
-  resource suspension, unsupported-opcode failure, pending-Owner suspension,
-  and rejection of unapproved commit or promotion;
+- complete behaviorally recomputed coverage of DG-00 through DG-15. Coverage
+  is derived from case structure, IR re-execution, exact-fit reconstruction,
+  and negative probes rather than trusting each declared GateResult;
+- explicit resource suspension, unsupported-opcode accounting,
+  pending-Owner suspension, recursive privileged-route rejection, authority
+  fabrication rejection, and rejection of unapproved commit or promotion;
 - a content-bound candidate set, gate-coverage report, and Owner review
   request reconstructed byte-identically in three independent processes;
 - only non-authoritative `SCHEMA_TEMPLATE` approvals with `SUSPEND`; no
@@ -147,7 +152,7 @@ execute, or replay them. The only network evidence is the already frozen,
 revision-checked, read-only Dataset Viewer capture. Manifest compilation itself
 does not access a network.
 
-The historical PH-D03A candidate executes only checked synthetic typed
+The current PH-D03A candidate executes only checked synthetic typed
 conformance candidates. It does
 not normalize a real trajectory, read teacher/source payloads, freeze Golden
 expectations, create the Sealed corpus, generate or rank general candidates,
@@ -156,10 +161,11 @@ approval, create a Bridge, agent, or runtime, access locked-final or official
 data, or create submission output. Historical runtime canonical helpers are
 not imported into the isolated distillation package.
 
-Its checked pre-audit artifacts remain byte-identical to the PH-D02C entry
-base and are not rewritten by the current D02C schema adapter. Current
-in-memory compatibility rebuilds are tested for determinism but intentionally
-remain unpromoted and byte-distinct from those historical checked artifacts.
+The checked pre-audit artifacts, source, and tests remain byte-identical under
+`input/historical_pre_audit/PH-D03A/` and are ineligible for current
+activation. The four checked current artifacts are rebuilt from the
+post-audit source and exact PH-D02C evidence binding; they remain provisional,
+unfrozen, and pending content-specific Owner review.
 
 Use exactly Python 3.12.13. From the repository root:
 
@@ -176,6 +182,7 @@ PYTHONPATH=distillation/src python -m pytest \
 python scripts/build_ph_d02c_causal_ir.py
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_golden_corpus.py
+python scripts/build_ph_d03a_golden_candidate.py
 PYTHONPATH=distillation/src python -m ruff check \
   distillation/src distillation/tests
 PYTHONPATH=distillation/src python -m mypy --strict \
@@ -185,7 +192,7 @@ PYTHONPATH=distillation/src python -c \
 PYTHONPATH=distillation/src python -c \
   "from pathlib import Path; from hds_distill.verification import build_phase_d02c_artifacts; expected=build_phase_d02c_artifacts(Path('.')); assert all((Path('.') / path).read_bytes() == payload for path, payload in expected.items())"
 PYTHONPATH=distillation/src python -m pytest \
-  distillation/tests/unit/test_golden_corpus.py::test_checked_pre_audit_artifacts_remain_historical_and_unpromoted
+  distillation/tests/unit/test_golden_corpus.py::test_pre_audit_artifacts_are_snapshotted_and_current_bytes_are_rebuilt
 python distillation/src/hds_distill/scope_guard.py \
   --project-root distillation \
   --repository-root . \

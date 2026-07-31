@@ -19,7 +19,7 @@ from typing import Final, Never, cast
 from .canonical import (
     DigestExclusionPolicy,
     JsonValue,
-    canonical_json_bytes,
+    canonical_json_document_bytes,
     content_derived_id,
     logical_content_digest,
     verify_canonical_json_bytes,
@@ -47,35 +47,47 @@ from .verification import (
     build_valid_ir_vector_artifact,
 )
 
-GOLDEN_CONTRACT_VERSION: Final = "hds-golden-conformance-contract-v1"
-GOLDEN_CANDIDATE_SET_VERSION: Final = "hds-golden-candidate-set-v1"
-GOLDEN_CASE_VERSION: Final = "hds-golden-candidate-case-v1"
-GOLDEN_EXACT_FIT_VERSION: Final = "hds-golden-exact-fit-result-v1"
+GOLDEN_CONTRACT_VERSION: Final = "hds-golden-conformance-contract-v2"
+GOLDEN_CANDIDATE_SET_VERSION: Final = "hds-golden-candidate-set-v2"
+GOLDEN_CASE_VERSION: Final = "hds-golden-candidate-case-v2"
+GOLDEN_EXACT_FIT_VERSION: Final = "hds-golden-exact-fit-result-v2"
 GOLDEN_PROVISIONAL_EXPECTATION_VERSION: Final = (
-    "hds-golden-provisional-expected-artifact-v1"
+    "hds-golden-provisional-expected-artifact-v2"
 )
-GOLDEN_GATE_COVERAGE_VERSION: Final = "hds-golden-gate-coverage-report-v1"
-GOLDEN_OWNER_REVIEW_VERSION: Final = "hds-golden-owner-review-request-v1"
+GOLDEN_GATE_COVERAGE_VERSION: Final = "hds-golden-gate-coverage-report-v2"
+GOLDEN_OWNER_REVIEW_VERSION: Final = "hds-golden-owner-review-request-v2"
 
 PH_D03A_FRAME_DIGEST: Final = (
     "rev3-work-block-frame:"
-    "ce4de522b3e5d269d5f80b260e0b0bf24586f0965207149d2043742c2a7b9132"
+    "a035ddb7fda0e8a598d11f65154a5f45f31439d3c229019f60a2324ec9084530"
 )
 PH_D03A_PREINVENTORY_DIGEST: Final = (
-    "rev3-ph-d03a-golden-preinventory:"
-    "102465e690258f967061b70d2023ec9645818c6e68558c01ca6c74a6b7245104"
+    "rev3-ph-d03a-post-audit-golden-preinventory:"
+    "4b961014e9845b9eac2965fcc83815622a441024352095babcd41ef866836fe0"
 )
-PH_D02C_STATE_DIGEST: Final = (
-    "rev3-d02c-phase-state:"
-    "bd01666bf05b5e40a8fe896cc4078814d4ddbcbc63f47c7dd705d4ec5eeb66c8"
+PH_D03A_TRANSITION_DIGEST: Final = (
+    "rev3-phase-transition:"
+    "6a10c8cb7d86884e449054462d6407e33c5ea42b9b77387c84e3fad9dc9d0914"
+)
+PH_D03A_ENTRY_APPROVAL_DIGEST: Final = (
+    "owner-approval-record:"
+    "2f01decd9706b8a69fc00c1ff7ad22d4ee79aa9c1bfc8667f21792e882235625"
+)
+PH_D02C_STATE_SHA256: Final = (
+    "sha256:"
+    "3a7e627ab0aee7f37346aee6b7ef5188bbe2ef257abd6302de5a358bc2d7293d"
+)
+PH_D02C_EVIDENCE_PAYLOAD_DIGEST: Final = (
+    "sha256:"
+    "cb5c07dd9295ee47fa5f114ba9aff5d9f10106da2c6d2412adbea42080fe4a04"
 )
 PH_D02C_IR_CONTRACT_DIGEST: Final = (
     "hds-causal-ir-contract:"
-    "38b6892f94cab73fa123653a37c248f447257b00d638eeeb0bcfe2ee2e21f98b"
+    "160048eb2d37ddd633c589b2bdb07f901d5db449648451ea8a10331039111678"
 )
 PH_D02C_SCHEMA_CONTRACT_DIGEST: Final = (
-    "hds-schema-contract:"
-    "d0b7e0ebbe826a5c3b0b16eb1d28844ee9daa496a430a747a83e0157b0c0bd29"
+    "hds-post-audit-causal-ir-schema-contract:"
+    "8d4acb814448b2cba3dff39162a1191aaa490261247907151f9db0750a77b646"
 )
 
 REQUIRED_ARTIFACT_CLASSES: Final = (
@@ -236,6 +248,73 @@ GATE_ASSERTIONS: Final = {
     "DG-15": "PASS_UNAPPROVED_COMMIT_AND_PROMOTION_REJECTED",
 }
 
+GATE_OBLIGATION_CHECKS: Final = {
+    "DG-00": (
+        "FRAME_REFERENCE_EXACT",
+        "SYNTHETIC_COORDINATE_BOUND",
+    ),
+    "DG-01": (
+        "OPEN_TERM_EXPLICIT",
+        "OPEN_TERM_BLOCKING",
+    ),
+    "DG-02": (
+        "X_R_MC_SCOPE_FIELDS_COMPLETE",
+        "SCOPE_LIMITATIONS_EXPLICIT",
+    ),
+    "DG-03": (
+        "TYPED_ALTERNATIVES_EXECUTABLE",
+        "EXECUTION_RESULTS_MATCH",
+    ),
+    "DG-04": (
+        "COUNTER_HYPOTHESIS_PRESENT",
+        "ALTERNATIVES_HELD",
+    ),
+    "DG-05": (
+        "ALTERNATIVE_IR_DIGESTS_DISTINCT",
+        "ALTERNATIVE_MODELS_NON_STRAWMAN",
+    ),
+    "DG-06": (
+        "SYNTHETIC_ORIGIN_EXPLICIT",
+        "EVIDENCE_LIMITATIONS_EXPLICIT",
+    ),
+    "DG-07": (
+        "EXACT_FIT_RECOMPUTED",
+        "NONEXECUTABLE_ACCOUNTED",
+    ),
+    "DG-08": (
+        "PRIVILEGED_ROUTE_NEGATIVE_PROBE_REJECTED",
+        "IDENTITY_ROUTE_ABSENT",
+    ),
+    "DG-09": (
+        "CAUSAL_ESTABLISHMENT_FALSE",
+        "NO_MODEL_SELECTED",
+    ),
+    "DG-10": (
+        "INTERVENTION_PREDECLARED",
+        "INTERVENTION_REVERSIBLE_SYNTHETIC",
+    ),
+    "DG-11": (
+        "TEMPORAL_OPERATOR_EXPLICIT",
+        "TEMPORAL_EXECUTION_MATCHED",
+    ),
+    "DG-12": (
+        "RESOURCE_OVERFLOW_REEXECUTED",
+        "RESOURCE_STATE_SUSPEND_HOLD_INCONCLUSIVE",
+    ),
+    "DG-13": (
+        "SURFACE_CORRELATION_HELD",
+        "PROMOTION_COUNT_ZERO",
+    ),
+    "DG-14": (
+        "OWNER_APPROVAL_ABSENT",
+        "FABRICATED_AUTHORITY_NEGATIVE_PROBE_REJECTED",
+    ),
+    "DG-15": (
+        "UNAPPROVED_COMMIT_REJECTED",
+        "PROMOTION_REJECTED",
+    ),
+}
+
 GOLDEN_ERROR_CODES: Final = (
     "D03A_CONTRACT_MISMATCH",
     "D03A_CASE_COUNT_MISMATCH",
@@ -257,6 +336,7 @@ GOLDEN_ERROR_CODES: Final = (
     "D03A_PROMOTION_FORBIDDEN",
     "D03A_RESOURCE_STATE_MISMATCH",
     "D03A_CONTENT_DIGEST_MISMATCH",
+    "D03A_GATE_OBLIGATION_MISMATCH",
 )
 
 PRIVILEGED_KEYS: Final = frozenset(
@@ -1183,12 +1263,17 @@ def build_golden_conformance_contract() -> JsonObject:
 
     contract: JsonObject = {
         "schema_version": GOLDEN_CONTRACT_VERSION,
-        "contract_id": "HDS-PH-D03A-GOLDEN-CONFORMANCE-CANDIDATE-V1",
+        "contract_id": "HDS-PH-D03A-GOLDEN-CONFORMANCE-CANDIDATE-V2",
         "phase_id": "PH-D03A",
         "authority": {
             "work_block_frame_digest": PH_D03A_FRAME_DIGEST,
             "preinventory_digest": PH_D03A_PREINVENTORY_DIGEST,
-            "input_phase_state_digest": PH_D02C_STATE_DIGEST,
+            "phase_transition_digest": PH_D03A_TRANSITION_DIGEST,
+            "phase_entry_approval_digest": PH_D03A_ENTRY_APPROVAL_DIGEST,
+            "input_phase_state_sha256": PH_D02C_STATE_SHA256,
+            "input_evidence_payload_digest": (
+                PH_D02C_EVIDENCE_PAYLOAD_DIGEST
+            ),
             "schema_contract_digest": PH_D02C_SCHEMA_CONTRACT_DIGEST,
             "causal_ir_contract_digest": PH_D02C_IR_CONTRACT_DIGEST,
         },
@@ -1214,6 +1299,9 @@ def build_golden_conformance_contract() -> JsonObject:
             {
                 "gate_id": gate_id,
                 "expected_assertion": GATE_ASSERTIONS[gate_id],
+                "required_recomputed_check_ids": list(
+                    GATE_OBLIGATION_CHECKS[gate_id]
+                ),
             }
             for gate_id in GATE_IDS
         ],
@@ -1324,6 +1412,564 @@ def _walk_privileged(value: object, path: tuple[str, ...] = ()) -> None:
     elif isinstance(value, list | tuple):
         for index, item in enumerate(value):
             _walk_privileged(item, (*path, str(index)))
+
+
+def _assert_candidate_authority_boundary(
+    case: Mapping[str, JsonValue],
+) -> None:
+    """Reject authority, freeze, commit, and promotion states in a candidate."""
+
+    approval = _json_object(
+        case.get("approval_record_template"),
+        "D03A_CASE_ARTIFACT_MISSING",
+        "approval_record_template",
+    )
+    provisional = _json_object(
+        case.get("provisional_expected_artifact"),
+        "D03A_CASE_ARTIFACT_MISSING",
+        "provisional_expected_artifact",
+    )
+    supporting = _json_object(
+        case.get("supporting_records"),
+        "D03A_CASE_ARTIFACT_MISSING",
+        "supporting_records",
+    )
+    decision = _json_object(
+        supporting.get("decision_record"),
+        "D03A_CASE_ARTIFACT_MISSING",
+        "decision_record",
+    )
+    hds_record = _json_object(
+        case.get("hds_causal_record"),
+        "D03A_CASE_ARTIFACT_MISSING",
+        "hds_causal_record",
+    )
+    boundaries = _json_object(
+        case.get("phase_boundaries"),
+        "D03A_CASE_ARTIFACT_MISSING",
+        "phase_boundaries",
+    )
+    if (
+        case.get("candidate_state")
+        != "PROPOSED_PENDING_OWNER_APPROVAL"
+        or approval.get("approval_mode") != "SCHEMA_TEMPLATE"
+        or approval.get("authoritative") is not False
+        or approval.get("authority") != "UNBOUND_SCHEMA_TEMPLATE"
+        or approval.get("decision") != "SUSPEND"
+    ):
+        _fail("D03A_OWNER_APPROVAL_FABRICATION")
+    if (
+        provisional.get("state") != "PROPOSED_NOT_FROZEN"
+        or boundaries.get("content_specific_owner_approval_present")
+        is not False
+        or boundaries.get("golden_expected_artifact_frozen") is not False
+        or boundaries.get("sealed_corpus_started") is not False
+    ):
+        _fail("D03A_GOLDEN_FREEZE_FORBIDDEN")
+    if (
+        decision.get("selected_model_refs") != []
+        or decision.get("operation_state") != "HOLD"
+        or decision.get("adoption_state") != "PROPOSED"
+        or decision.get("update_state") != "PROPOSED"
+        or hds_record.get("selected_model_refs") != []
+        or hds_record.get("operation_state") != "HOLD"
+        or hds_record.get("adoption_state") != "PROPOSED"
+        or hds_record.get("update_state") != "PROPOSED"
+        or boundaries.get("rule_promotion_count") != 0
+    ):
+        _fail("D03A_PROMOTION_FORBIDDEN")
+
+
+def _descriptor_execution_matches(
+    descriptor: Mapping[str, JsonValue],
+) -> bool:
+    program = cast(Mapping[str, object], descriptor.get("hypothesis_ir"))
+    expected = cast(Mapping[str, object], descriptor.get("expected_execution"))
+    kind = expected.get("kind")
+    try:
+        if kind == "PASS":
+            return execute_program(program).as_json() == expected.get("result")
+        if kind == "ERROR":
+            try:
+                execute_program(program)
+            except IRContractError as exc:
+                return exc.code == expected.get("error_code")
+            return False
+        if kind == "SUSPEND_RESOURCE":
+            result = execute_program(program)
+            return (
+                result.as_json() == expected.get("result")
+                and result.status == "SUSPEND_RESOURCE"
+                and result.assertion_state == "SUSPEND"
+                and result.operation_state == "HOLD"
+                and result.evidence_state == "INCONCLUSIVE"
+            )
+    except (IRContractError, KeyError, TypeError, ValueError):
+        return False
+    return False
+
+
+def _gate_obligation_evidence(
+    case: Mapping[str, JsonValue],
+) -> JsonObject:
+    """Recompute one DG obligation from case structure and executable behavior."""
+
+    gate_id = cast(str, case.get("primary_gate_id"))
+    fixture_id = cast(str, case.get("fixture_id"))
+    required_checks = GATE_OBLIGATION_CHECKS.get(gate_id)
+    if required_checks is None:
+        _fail("D03A_GATE_OBLIGATION_MISMATCH", fixture_id)
+
+    raw = _json_object(
+        case.get("raw_observation"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/raw",
+    )
+    supporting = _json_object(
+        case.get("supporting_records"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/supporting",
+    )
+    evidence = _json_object(
+        supporting.get("evidence_record"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/evidence",
+    )
+    models = cast(
+        list[Mapping[str, JsonValue]],
+        supporting.get("model_records"),
+    )
+    decision = _json_object(
+        supporting.get("decision_record"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/decision",
+    )
+    open_term = _json_object(
+        supporting.get("open_term_record"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/open_term",
+    )
+    hds_record = _json_object(
+        case.get("hds_causal_record"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/hds_record",
+    )
+    derivation = _json_object(
+        case.get("deterministic_derivation"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/derivation",
+    )
+    approval = _json_object(
+        case.get("approval_record_template"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/approval",
+    )
+    provisional = _json_object(
+        case.get("provisional_expected_artifact"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/provisional",
+    )
+    plan = _json_object(
+        case.get("counterfactual_intervention_plan"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/plan",
+    )
+    intervention_result = _json_object(
+        case.get("intervention_result"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/intervention_result",
+    )
+    boundaries = _json_object(
+        case.get("phase_boundaries"),
+        "D03A_GATE_OBLIGATION_MISMATCH",
+        fixture_id + "/boundaries",
+    )
+    descriptors = cast(
+        list[Mapping[str, JsonValue]],
+        case.get("hypothesis_candidates"),
+    )
+    exact_results = cast(
+        list[Mapping[str, JsonValue]],
+        case.get("exact_fit_results"),
+    )
+    passed_checks: list[str] = []
+    negative_probe_codes: list[str] = []
+
+    def require(condition: bool, check_id: str) -> None:
+        if check_id not in required_checks or not condition:
+            _fail(
+                "D03A_GATE_OBLIGATION_MISMATCH",
+                fixture_id + "/" + check_id,
+            )
+        passed_checks.append(check_id)
+
+    if gate_id == "DG-00":
+        frame_refs = [
+            *(model.get("frame_ref") for model in models),
+            decision.get("frame_ref"),
+            open_term.get("frame_ref"),
+            hds_record.get("frame_ref"),
+            cast(Mapping[str, JsonValue], case["gate_result"]).get(
+                "frame_ref"
+            ),
+        ]
+        require(
+            all(item == SYNTHETIC_FRAME_REF for item in frame_refs),
+            "FRAME_REFERENCE_EXACT",
+        )
+        require(
+            raw.get("evidence_origin") == "DIRECT_OBSERVATION"
+            and isinstance(raw.get("source_pointer"), str)
+            and cast(str, raw["source_pointer"]).startswith(
+                "synthetic-golden-candidate/"
+            ),
+            "SYNTHETIC_COORDINATE_BOUND",
+        )
+    elif gate_id == "DG-01":
+        require(
+            isinstance(open_term.get("term"), str)
+            and bool(open_term["term"])
+            and open_term.get("status") == "OPEN",
+            "OPEN_TERM_EXPLICIT",
+        )
+        require(
+            open_term.get("blocking") is True
+            and open_term.get("required_resolution")
+            == "OWNER_RECORDED_APPROVAL_OR_REJECTION",
+            "OPEN_TERM_BLOCKING",
+        )
+    elif gate_id == "DG-02":
+        closed_within = cast(
+            Mapping[str, JsonValue],
+            hds_record.get("closed_within"),
+        )
+        required_scope_fields = {
+            "candidate_budget",
+            "evidence_boundary",
+            "hypothesis_language_version",
+            "intervention_set_digest",
+            "limitations",
+            "observed_case_set_digest",
+            "resource_profile_id",
+        }
+        require(
+            required_scope_fields.issubset(closed_within),
+            "X_R_MC_SCOPE_FIELDS_COMPLETE",
+        )
+        limitations = set(
+            cast(list[str], closed_within.get("limitations", []))
+        )
+        require(
+            {
+                "NOT_GENERALITY_EVIDENCE",
+                "NOT_REAL_CAUSAL_EVIDENCE",
+                "NOT_OWNER_APPROVED",
+            }.issubset(limitations),
+            "SCOPE_LIMITATIONS_EXPLICIT",
+        )
+    elif gate_id == "DG-03":
+        typed = True
+        for descriptor in descriptors:
+            try:
+                type_check_program(
+                    cast(Mapping[str, object], descriptor["hypothesis_ir"])
+                )
+            except (IRContractError, KeyError, TypeError, ValueError):
+                typed = False
+        require(
+            len(descriptors) >= 2 and typed,
+            "TYPED_ALTERNATIVES_EXECUTABLE",
+        )
+        require(
+            all(_descriptor_execution_matches(item) for item in descriptors),
+            "EXECUTION_RESULTS_MATCH",
+        )
+    elif gate_id == "DG-04":
+        roles = {
+            cast(str, item.get("hypothesis_role")) for item in descriptors
+        }
+        require(
+            len(descriptors) >= 2 and "COUNTER_HYPOTHESIS" in roles,
+            "COUNTER_HYPOTHESIS_PRESENT",
+        )
+        require(
+            decision.get("selected_model_refs") == []
+            and len(cast(list[JsonValue], decision["held_model_refs"]))
+            == len(models),
+            "ALTERNATIVES_HELD",
+        )
+    elif gate_id == "DG-05":
+        ir_digests = {
+            cast(
+                str,
+                cast(Mapping[str, JsonValue], item["hypothesis_ir"])[
+                    "content_digest"
+                ],
+            )
+            for item in descriptors
+        }
+        require(
+            len(ir_digests) == len(descriptors) >= 2,
+            "ALTERNATIVE_IR_DIGESTS_DISTINCT",
+        )
+        statements = {cast(str, item.get("statement")) for item in models}
+        require(
+            len(statements) == len(models) == len(descriptors)
+            and all(
+                cast(Mapping[str, JsonValue], item["expected_execution"])[
+                    "kind"
+                ]
+                == "PASS"
+                for item in descriptors
+            ),
+            "ALTERNATIVE_MODELS_NON_STRAWMAN",
+        )
+    elif gate_id == "DG-06":
+        provenance = cast(
+            Mapping[str, JsonValue],
+            evidence.get("provenance"),
+        )
+        require(
+            raw.get("evidence_origin") == "DIRECT_OBSERVATION"
+            and derivation.get("derivation_origin")
+            == "DETERMINISTIC_ALGORITHM"
+            and provenance.get("synthetic") is True,
+            "SYNTHETIC_ORIGIN_EXPLICIT",
+        )
+        require(
+            set(cast(list[str], evidence.get("limitations", [])))
+            == {
+                "SYNTHETIC_IMPLEMENTATION_CONFORMANCE_ONLY",
+                "NOT_GENERALITY_EVIDENCE",
+                "NOT_REAL_CAUSAL_EVIDENCE",
+            },
+            "EVIDENCE_LIMITATIONS_EXPLICIT",
+        )
+    elif gate_id == "DG-07":
+        recomputed = [
+            _build_exact_fit(item, domain=cast(str, case["domain"]))
+            for item in descriptors
+        ]
+        require(
+            recomputed == [dict(item) for item in exact_results],
+            "EXACT_FIT_RECOMPUTED",
+        )
+        require(
+            any(
+                item.get("fit_status") == "NOT_EXECUTABLE"
+                and item.get("actual_error_code") == "IR_UNKNOWN_OPCODE"
+                for item in exact_results
+            ),
+            "NONEXECUTABLE_ACCOUNTED",
+        )
+    elif gate_id == "DG-08":
+        probe = copy.deepcopy(dict(case))
+        probe["task_id"] = "negative-probe"
+        try:
+            _walk_privileged(probe)
+        except GoldenCorpusError as exc:
+            negative_probe_codes.append(exc.code)
+            rejected = exc.code == "D03A_PRIVILEGED_ROUTING_FORBIDDEN"
+        else:
+            rejected = False
+        require(
+            rejected,
+            "PRIVILEGED_ROUTE_NEGATIVE_PROBE_REJECTED",
+        )
+        try:
+            _walk_privileged(case)
+        except GoldenCorpusError:
+            clean = False
+        else:
+            clean = True
+        require(clean, "IDENTITY_ROUTE_ABSENT")
+    elif gate_id == "DG-09":
+        require(
+            all(
+                item.get("causal_establishment") is False
+                for item in exact_results
+            ),
+            "CAUSAL_ESTABLISHMENT_FALSE",
+        )
+        require(
+            decision.get("selected_model_refs") == []
+            and hds_record.get("selected_model_refs") == [],
+            "NO_MODEL_SELECTED",
+        )
+    elif gate_id == "DG-10":
+        require(
+            plan.get("freeze_state") == "PRE_RESULT_FROZEN"
+            and intervention_result.get("intervention_plan_ref")
+            == plan.get("intervention_plan_id"),
+            "INTERVENTION_PREDECLARED",
+        )
+        observed = cast(
+            Mapping[str, JsonValue],
+            intervention_result.get("observed_outcome"),
+        )
+        require(
+            plan.get("reversibility") == "REVERSIBLE"
+            and "SYNTHETIC_ONLY"
+            in cast(list[JsonValue], plan.get("safety_constraints"))
+            and observed.get("execution_scope") == "SYNTHETIC_ONLY"
+            and observed.get("causal_claim") is None,
+            "INTERVENTION_REVERSIBLE_SYNTHETIC",
+        )
+    elif gate_id == "DG-11":
+        operator_focus = set(cast(list[str], case.get("operator_focus")))
+        require(
+            {"ORDER_BEFORE", "ORDER_ADJACENT"}.issubset(operator_focus),
+            "TEMPORAL_OPERATOR_EXPLICIT",
+        )
+        require(
+            all(_descriptor_execution_matches(item) for item in descriptors),
+            "TEMPORAL_EXECUTION_MATCHED",
+        )
+    elif gate_id == "DG-12":
+        resource_descriptor = next(
+            (
+                item
+                for item in descriptors
+                if item.get("operator_focus") == "SUSPEND_RESOURCE"
+            ),
+            None,
+        )
+        require(
+            resource_descriptor is not None
+            and _descriptor_execution_matches(resource_descriptor),
+            "RESOURCE_OVERFLOW_REEXECUTED",
+        )
+        resource_result = execute_program(
+            cast(
+                Mapping[str, object],
+                cast(Mapping[str, JsonValue], resource_descriptor)[
+                    "hypothesis_ir"
+                ],
+            )
+        )
+        require(
+            resource_result.status == "SUSPEND_RESOURCE"
+            and resource_result.assertion_state == "SUSPEND"
+            and resource_result.operation_state == "HOLD"
+            and resource_result.evidence_state == "INCONCLUSIVE",
+            "RESOURCE_STATE_SUSPEND_HOLD_INCONCLUSIVE",
+        )
+    elif gate_id == "DG-13":
+        require(
+            decision.get("selected_model_refs") == []
+            and hds_record.get("selected_model_refs") == []
+            and len(cast(list[JsonValue], decision["held_model_refs"]))
+            == len(models),
+            "SURFACE_CORRELATION_HELD",
+        )
+        require(
+            boundaries.get("rule_promotion_count") == 0
+            and decision.get("update_state") == "PROPOSED",
+            "PROMOTION_COUNT_ZERO",
+        )
+    elif gate_id == "DG-14":
+        require(
+            approval.get("authoritative") is False
+            and approval.get("approval_mode") == "SCHEMA_TEMPLATE"
+            and provisional.get("state") == "PROPOSED_NOT_FROZEN",
+            "OWNER_APPROVAL_ABSENT",
+        )
+        probe = copy.deepcopy(dict(case))
+        cast(JsonObject, probe["approval_record_template"])[
+            "authoritative"
+        ] = True
+        try:
+            _assert_candidate_authority_boundary(probe)
+        except GoldenCorpusError as exc:
+            negative_probe_codes.append(exc.code)
+            rejected = exc.code == "D03A_OWNER_APPROVAL_FABRICATION"
+        else:
+            rejected = False
+        require(
+            rejected,
+            "FABRICATED_AUTHORITY_NEGATIVE_PROBE_REJECTED",
+        )
+    elif gate_id == "DG-15":
+        commit_probe = copy.deepcopy(dict(case))
+        commit_supporting = cast(
+            JsonObject,
+            commit_probe["supporting_records"],
+        )
+        cast(JsonObject, commit_supporting["decision_record"])[
+            "update_state"
+        ] = "COMMITTED"
+        try:
+            _assert_candidate_authority_boundary(commit_probe)
+        except GoldenCorpusError as exc:
+            negative_probe_codes.append(exc.code)
+            commit_rejected = exc.code == "D03A_PROMOTION_FORBIDDEN"
+        else:
+            commit_rejected = False
+        require(commit_rejected, "UNAPPROVED_COMMIT_REJECTED")
+
+        promotion_probe = copy.deepcopy(dict(case))
+        promotion_supporting = cast(
+            JsonObject,
+            promotion_probe["supporting_records"],
+        )
+        promotion_models = cast(
+            list[JsonObject],
+            promotion_supporting["model_records"],
+        )
+        cast(JsonObject, promotion_supporting["decision_record"])[
+            "selected_model_refs"
+        ] = [promotion_models[0]["model_id"]]
+        try:
+            _assert_candidate_authority_boundary(promotion_probe)
+        except GoldenCorpusError as exc:
+            negative_probe_codes.append(exc.code)
+            promotion_rejected = exc.code == "D03A_PROMOTION_FORBIDDEN"
+        else:
+            promotion_rejected = False
+        require(promotion_rejected, "PROMOTION_REJECTED")
+
+    if tuple(passed_checks) != required_checks:
+        _fail(
+            "D03A_GATE_OBLIGATION_MISMATCH",
+            fixture_id + "/check_order",
+        )
+    evidence_digests = sorted(
+        {
+            item
+            for item in (
+                case.get("content_digest"),
+                raw.get("content_digest"),
+                derivation.get("content_digest"),
+                evidence.get("content_digest"),
+                hds_record.get("content_digest"),
+                plan.get("content_digest"),
+                intervention_result.get("content_digest"),
+                provisional.get("content_digest"),
+                approval.get("content_digest"),
+            )
+            if isinstance(item, str) and ":" in item
+        }
+    )
+    result = "SUSPEND" if gate_id == "DG-14" else "PASS"
+    return _bind_digest_only(
+        {
+            "schema_version": "hds-golden-gate-obligation-evidence-v1",
+            "gate_id": gate_id,
+            "fixture_id": fixture_id,
+            "expected_assertion": GATE_ASSERTIONS[gate_id],
+            "recomputed": True,
+            "declarative_gate_result_trusted": False,
+            "check_ids": cast(list[JsonValue], passed_checks),
+            "negative_probe_codes": cast(
+                list[JsonValue], negative_probe_codes
+            ),
+            "evidence_digests": cast(list[JsonValue], evidence_digests),
+            "result": result,
+            "digest_excluded_fields": ["content_digest"],
+            "content_digest": "",
+        },
+        namespace="hds-golden-gate-obligation-evidence",
+    )
 
 
 def _verify_digest_only(
@@ -1562,6 +2208,7 @@ def _validate_case(
         "ApprovalRecord",
         case.get("approval_record_template"),
     )
+    _assert_candidate_authority_boundary(case)
     if (
         approval.get("approval_mode") != "SCHEMA_TEMPLATE"
         or approval.get("authoritative") is not False
@@ -1736,6 +2383,13 @@ def validate_golden_candidate_set(
         _fail("D03A_CASE_COUNT_MISMATCH", "ARC2")
     if sum(case["domain"] == "ARC3" for case in validated) != 8:
         _fail("D03A_CASE_COUNT_MISMATCH", "ARC3")
+    obligation_evidence = [
+        _gate_obligation_evidence(case) for case in validated
+    ]
+    if {
+        item["gate_id"] for item in obligation_evidence
+    } != set(GATE_IDS):
+        _fail("D03A_GATE_OBLIGATION_MISMATCH", "candidate_set")
     if dict(artifact) != build_golden_candidate_set():
         _fail("D03A_CASE_INVENTORY_MISMATCH", "candidate_set/content")
     return tuple(validated)
@@ -1749,17 +2403,32 @@ def build_golden_gate_coverage_report(
     for gate_id in GATE_IDS:
         case = next(item for item in cases if item["primary_gate_id"] == gate_id)
         gate = cast(Mapping[str, JsonValue], case["gate_result"])
+        obligation = _gate_obligation_evidence(case)
         entries.append(
             {
                 "gate_id": gate_id,
                 "fixture_id": case["fixture_id"],
                 "expected_assertion": GATE_ASSERTIONS[gate_id],
-                "actual_result": gate["result"],
-                "actual_reason_codes": gate["reason_codes"],
+                "actual_result": obligation["result"],
+                "actual_reason_codes": [
+                    GATE_ASSERTIONS[gate_id],
+                    "BEHAVIORALLY_RECOMPUTED",
+                ],
+                "declared_gate_result": gate["result"],
+                "declared_gate_reason_codes": gate["reason_codes"],
                 "gate_result_digest": gate["content_digest"],
+                "obligation_evidence": obligation,
                 "covered": True,
             }
         )
+    pass_count = sum(
+        cast(Mapping[str, JsonValue], item)["actual_result"] == "PASS"
+        for item in entries
+    )
+    suspend_count = sum(
+        cast(Mapping[str, JsonValue], item)["actual_result"] == "SUSPEND"
+        for item in entries
+    )
     report: JsonObject = {
         "schema_version": GOLDEN_GATE_COVERAGE_VERSION,
         "report_id": "",
@@ -1768,11 +2437,13 @@ def build_golden_gate_coverage_report(
         "gate_count": 16,
         "covered_gate_count": 16,
         "missing_gate_ids": [],
-        "pass_result_count": 15,
-        "suspend_result_count": 1,
+        "pass_result_count": pass_count,
+        "suspend_result_count": suspend_count,
         "fail_result_count": 0,
         "coverage_complete": True,
         "implementation_conformance_candidate_pass": True,
+        "declarative_gate_result_trusted": False,
+        "behaviorally_recomputed_gate_count": 16,
         "gate_entries": entries,
         "approval_boundary": {
             "DG-14": "SUSPEND_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL",
@@ -1877,6 +2548,8 @@ def validate_golden_gate_coverage(
     if (
         report.get("candidate_set_digest") != candidate_set.get("content_digest")
         or report.get("covered_gate_count") != 16
+        or report.get("behaviorally_recomputed_gate_count") != 16
+        or report.get("declarative_gate_result_trusted") is not False
         or report.get("missing_gate_ids") != []
         or report.get("coverage_complete") is not True
         or report.get("fail_result_count") != 0
@@ -1893,6 +2566,27 @@ def validate_golden_gate_coverage(
         != "SUSPEND_PENDING_CONTENT_SPECIFIC_OWNER_APPROVAL"
     ):
         _fail("D03A_OWNER_APPROVAL_FABRICATION", "DG-14")
+    cases = cast(
+        list[Mapping[str, JsonValue]],
+        candidate_set.get("cases"),
+    )
+    for entry in cast(list[Mapping[str, JsonValue]], entries):
+        case = next(
+            (
+                item
+                for item in cases
+                if item["fixture_id"] == entry["fixture_id"]
+            ),
+            None,
+        )
+        if case is None:
+            _fail("D03A_GATE_COVERAGE_INCOMPLETE", "fixture_id")
+        expected_obligation = _gate_obligation_evidence(case)
+        if entry.get("obligation_evidence") != expected_obligation:
+            _fail(
+                "D03A_GATE_OBLIGATION_MISMATCH",
+                cast(str, entry["gate_id"]),
+            )
     if dict(report) != build_golden_gate_coverage_report(candidate_set):
         _fail("D03A_GATE_COVERAGE_INCOMPLETE", "content")
 
@@ -1958,10 +2652,13 @@ def build_phase_d03a_candidate_artifacts(
         "distillation/artifacts/golden/owner_review_request.json": review,
     }
     encoded = {
-        path: canonical_json_bytes(value) for path, value in sorted(artifacts.items())
+        path: canonical_json_document_bytes(value)
+        for path, value in sorted(artifacts.items())
     }
     for payload in encoded.values():
-        verify_canonical_json_bytes(payload)
+        if not payload.endswith(b"\n"):
+            _fail("D03A_CONTENT_DIGEST_MISMATCH", "document_terminator")
+        verify_canonical_json_bytes(payload[:-1])
     return encoded
 
 
@@ -1984,6 +2681,7 @@ __all__ = [
     "CASE_SPECS",
     "GATE_ASSERTIONS",
     "GATE_IDS",
+    "GATE_OBLIGATION_CHECKS",
     "GOLDEN_ERROR_CODES",
     "GoldenCorpusError",
     "REQUIRED_ARTIFACT_CLASSES",

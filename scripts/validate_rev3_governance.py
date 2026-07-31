@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 import subprocess
+import sys
 import unicodedata
 from collections.abc import Mapping
 from pathlib import Path
@@ -17,7 +18,7 @@ from zipfile import ZipFile
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SELECTOR_PATH = Path("control/rev3/REV3_CURRENT_SELECTOR.json")
 SELECTOR_SCHEMA_PATH = Path(
-    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V11.json"
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V12.json"
 )
 DECISION_PATH = Path(
     "control/rev3/OWNER_DECISION_CAPTURES/"
@@ -275,6 +276,41 @@ PH_D02C_CONFORMANCE_PATH = Path(
     "distillation/artifacts/reports/causal_ir_conformance.json"
 )
 PH_D02C_SCHEMA_ROOT = Path("distillation/schema_sets/ph_d02c_v1")
+PH_D02C_RESULT_DECISION_PATH = Path(
+    "control/rev3/OWNER_DECISION_CAPTURES/"
+    "PH-D02C_TO_PH-D03A_20260731.json"
+)
+PH_D02C_RESULT_APPROVAL_PATH = Path(
+    "control/rev3/OWNER_APPROVAL_RECORDS/"
+    "PH-D02C_TO_PH-D03A_20260731.json"
+)
+PH_D02C_EVIDENCE_ATTESTATION_PATH = Path(
+    "control/rev3/PH-D02C_EVIDENCE_ATTESTATION.json"
+)
+PH_D02C_PHASE_STATE_PATH = Path("control/rev3/D02C_PHASE_STATE.json")
+PH_D03A_FRAME_PATH = Path("control/rev3/PH-D03A_WORK_BLOCK_FRAME.json")
+PH_D03A_TRANSITION_PATH = Path(
+    "control/rev3/PHASE_TRANSITIONS/PH-D02C_TO_PH-D03A.json"
+)
+PH_D03A_PREINVENTORY_PATH = Path(
+    "analysis/rev3/ph_d03a_post_audit_golden_preinventory.json"
+)
+PH_D03A_SNAPSHOT_MANIFEST_PATH = Path(
+    "distillation/input/historical_pre_audit/PH-D03A/"
+    "SNAPSHOT_MANIFEST.json"
+)
+PH_D03A_CONTRACT_PATH = Path(
+    "distillation/input/golden_conformance_contract.json"
+)
+PH_D03A_CANDIDATE_SET_PATH = Path(
+    "distillation/artifacts/golden/candidate_cases.json"
+)
+PH_D03A_COVERAGE_PATH = Path(
+    "distillation/artifacts/reports/golden_gate_coverage.json"
+)
+PH_D03A_REVIEW_REQUEST_PATH = Path(
+    "distillation/artifacts/golden/owner_review_request.json"
+)
 PH_R00_PHASE_STATE_PATH = Path("control/rev3/R00_PHASE_STATE.json")
 PH_R00_ASSET_CLASSIFICATION_PATH = Path(
     "docs/strategy/ASSET_CLASSIFICATION_REV3.json"
@@ -636,6 +672,21 @@ def validate_repository(root: Path) -> dict[str, object]:
             "authority_manifest",
         )
     )
+    if (
+        manifest.get("active_phase") != selector.get("active_phase")
+        or manifest.get("current_work_class")
+        != selector.get("current_work_class")
+        or manifest.get("ph_d02c_status")
+        != selector.get("ph_d02c_status")
+        or manifest.get("ph_d03a_status")
+        != selector.get("ph_d03a_status")
+        or manifest.get("source_binding")
+        != {
+            "commit": "70722de7df8278c866de0734c97206c9952d731d",
+            "tree": "fd330c8fd8dd9cb66e16d12cbcde14452a28aa6f",
+        }
+    ):
+        failures.append("authority_manifest:CURRENT_SELECTOR_MISMATCH")
     entries = manifest.get("entries")
     if not isinstance(entries, list):
         failures.append("authority_manifest:ENTRIES_MISSING")
@@ -1452,7 +1503,113 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d02b_result_approval:DECISION_OR_TARGET_MISMATCH"
         )
 
-    if selector.get("active_phase") != "PH-D02C":
+    ph_d02c_attestation = _load_object(
+        root, PH_D02C_EVIDENCE_ATTESTATION_PATH
+    )
+    if (
+        ph_d02c_attestation.get("phase_id") != "PH-D02C"
+        or ph_d02c_attestation.get("self_reference_avoided") is not True
+        or ph_d02c_attestation.get("owner_approval") != "NOT_ESTABLISHED"
+    ):
+        failures.append("ph_d02c_evidence_attestation:BOUNDARY_MISMATCH")
+    for commit_field, tree_field in (
+        ("implementation_commit", "implementation_tree"),
+        ("evidence_commit", "evidence_tree"),
+    ):
+        commit = ph_d02c_attestation.get(commit_field)
+        expected_tree = ph_d02c_attestation.get(tree_field)
+        if not isinstance(commit, str) or _git_tree(root, commit) != (
+            expected_tree
+        ):
+            failures.append(
+                "ph_d02c_evidence_attestation:"
+                + commit_field.upper()
+                + "_TREE_MISMATCH"
+            )
+    ph_d02c_phase_state_path = root / PH_D02C_PHASE_STATE_PATH
+    if (
+        hashlib.sha256(ph_d02c_phase_state_path.read_bytes()).hexdigest()
+        != ph_d02c_attestation.get("phase_state_sha256")
+    ):
+        failures.append(
+            "ph_d02c_evidence_attestation:"
+            "PHASE_STATE_SHA256_MISMATCH"
+        )
+    ph_d02c_phase_state = _load_object(root, PH_D02C_PHASE_STATE_PATH)
+    if (
+        ph_d02c_phase_state.get("phase_id") != "PH-D02C"
+        or ph_d02c_phase_state.get("status") != "CODEX_SELF_AUDIT_PASS"
+        or ph_d02c_phase_state.get("failed_requirement_ids") != []
+        or ph_d02c_phase_state.get("evidence_payload_digest")
+        != ph_d02c_attestation.get("evidence_payload_digest")
+    ):
+        failures.append("ph_d02c_phase_state:RESULT_BINDING_MISMATCH")
+
+    ph_d02c_result_decision = _load_object(
+        root, PH_D02C_RESULT_DECISION_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d02c_result_decision,
+            decision_v2_schema,
+            "ph_d02c_result_decision",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d02c_result_decision,
+            "sha256:",
+            "owner_decision_content_digest",
+            "ph_d02c_result_decision",
+        )
+    )
+    if (
+        ph_d02c_result_decision.get("standing_authorization_digest")
+        != standing.get("standing_authorization_content_digest")
+        or ph_d02c_result_decision.get("target_evidence_commit")
+        != ph_d02c_attestation.get("evidence_commit")
+        or ph_d02c_result_decision.get("target_artifact_digest")
+        != ph_d02c_attestation.get("evidence_payload_digest")
+        or ph_d02c_result_decision.get("gate_status") != "PASS"
+    ):
+        failures.append(
+            "ph_d02c_result_decision:ATTESTATION_BINDING_MISMATCH"
+        )
+
+    ph_d02c_result_approval = _load_object(
+        root, PH_D02C_RESULT_APPROVAL_PATH
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d02c_result_approval,
+            approval_schema,
+            "ph_d02c_result_approval",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d02c_result_approval,
+            "owner-approval-record:",
+            "approval_artifact_digest",
+            "ph_d02c_result_approval",
+        )
+    )
+    if (
+        ph_d02c_result_approval.get("owner_decision_capture_digest")
+        != ph_d02c_result_decision.get("owner_decision_content_digest")
+        or ph_d02c_result_approval.get("target_evidence_commit")
+        != ph_d02c_attestation.get("evidence_commit")
+        or ph_d02c_result_approval.get("target_artifact_digest")
+        != ph_d02c_attestation.get("evidence_payload_digest")
+        or ph_d02c_result_approval.get("next_phase_id") != "PH-D03A"
+        or ph_d02c_result_approval.get("next_phase_authorized")
+        is not True
+    ):
+        failures.append(
+            "ph_d02c_result_approval:DECISION_OR_TARGET_MISMATCH"
+        )
+
+    if selector.get("active_phase") != "PH-D03A":
         failures.append("selector:ACTIVE_PHASE_MISMATCH")
     if selector.get("ph_r00_owner_authorization") != "ESTABLISHED":
         failures.append("selector:PH_R00_AUTHORIZATION_MISSING")
@@ -1470,18 +1627,20 @@ def validate_repository(root: Path) -> dict[str, object]:
         failures.append("selector:PH_D02A_STATUS_MISMATCH")
     if selector.get("ph_d02b_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D02B_STATUS_MISMATCH")
-    if selector.get("ph_d02c_status") != "IN_PROGRESS":
+    if selector.get("ph_d02c_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D02C_STATUS_MISMATCH")
+    if selector.get("ph_d03a_status") != "IN_PROGRESS":
+        failures.append("selector:PH_D03A_STATUS_MISMATCH")
     if selector.get("runtime_activation_status") != "SUSPEND":
         failures.append("selector:RUNTIME_ACTIVATION_ESCALATED")
     selector_entry_approval = selector.get("phase_entry_approval")
     if not isinstance(selector_entry_approval, dict):
-        failures.append("selector:PH_D02C_ENTRY_APPROVAL_MISSING")
+        failures.append("selector:PH_D03A_ENTRY_APPROVAL_MISSING")
     elif (
         selector_entry_approval.get("approval_artifact_digest")
-        != ph_d02b_result_approval.get("approval_artifact_digest")
+        != ph_d02c_result_approval.get("approval_artifact_digest")
     ):
-        failures.append("selector:PH_D02C_ENTRY_APPROVAL_MISMATCH")
+        failures.append("selector:PH_D03A_ENTRY_APPROVAL_MISMATCH")
     selector_standing = selector.get("standing_authorization")
     if not isinstance(selector_standing, dict):
         failures.append("selector:STANDING_AUTHORIZATION_MISSING")
@@ -2703,7 +2862,9 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d02c_schema_contract",
         )
     )
-    schema_entries = ph_d02c_schema_contract.get("schema_entries")
+    ph_d02c_schema_entries = ph_d02c_schema_contract.get(
+        "schema_entries"
+    )
     schema_authority = ph_d02c_schema_contract.get("authority")
     if (
         ph_d02c_schema_contract.get("phase_id") != "PH-D02C"
@@ -2713,8 +2874,8 @@ def validate_repository(root: Path) -> dict[str, object]:
         or ph_d02c_schema_contract.get("changed_schema_count") != 2
         or ph_d02c_schema_contract.get("changed_schema_names")
         != ["HypothesisIR", "OperatorRegistry"]
-        or not isinstance(schema_entries, list)
-        or len(schema_entries) != 45
+        or not isinstance(ph_d02c_schema_entries, list)
+        or len(ph_d02c_schema_entries) != 45
     ):
         failures.append("ph_d02c_schema_contract:INVENTORY_MISMATCH")
     else:
@@ -2726,7 +2887,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         }
         expected_schema_files = {
             item.get("filename")
-            for item in schema_entries
+            for item in ph_d02c_schema_entries
             if isinstance(item, dict)
         }
         if (
@@ -2736,19 +2897,21 @@ def validate_repository(root: Path) -> dict[str, object]:
             failures.append(
                 "ph_d02c_schema_contract:SCHEMA_FILES_MISMATCH"
             )
-        for item in schema_entries:
+        for item in ph_d02c_schema_entries:
             if not isinstance(item, dict):
                 continue
             filename = item.get("filename")
-            schema_path = (
+            ph_d02c_schema_path = (
                 root / PH_D02C_SCHEMA_ROOT / filename
                 if isinstance(filename, str)
                 else None
             )
             if (
-                schema_path is None
-                or not schema_path.is_file()
-                or hashlib.sha256(schema_path.read_bytes()).hexdigest()
+                ph_d02c_schema_path is None
+                or not ph_d02c_schema_path.is_file()
+                or hashlib.sha256(
+                    ph_d02c_schema_path.read_bytes()
+                ).hexdigest()
                 != item.get("derived_schema_sha256")
             ):
                 failures.append(
@@ -2914,6 +3077,351 @@ def validate_repository(root: Path) -> dict[str, object]:
         )
     ):
         failures.append("ph_d02c_conformance:BOUNDARY_ESCALATED")
+
+    ph_d03a_frame = _load_object(root, PH_D03A_FRAME_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_d03a_frame,
+            "rev3-work-block-frame:",
+            "content_digest",
+            "ph_d03a_frame",
+        )
+    )
+    if (
+        ph_d03a_frame.get("phase_id") != "PH-D03A"
+        or ph_d03a_frame.get("base_commit")
+        != "70722de7df8278c866de0734c97206c9952d731d"
+        or ph_d03a_frame.get("base_tree")
+        != "fd330c8fd8dd9cb66e16d12cbcde14452a28aa6f"
+    ):
+        failures.append("ph_d03a_frame:PHASE_OR_BASE_MISMATCH")
+    ph_d03a_budget = ph_d03a_frame.get("resource_budget")
+    if not isinstance(ph_d03a_budget, dict):
+        failures.append("ph_d03a_frame:RESOURCE_BUDGET_MISSING")
+    else:
+        if (
+            ph_d03a_budget.get("required_arc2_case_count"),
+            ph_d03a_budget.get("required_arc3_case_count"),
+            ph_d03a_budget.get("required_total_case_count"),
+            ph_d03a_budget.get("required_gate_count"),
+            ph_d03a_budget.get("required_checked_artifact_count"),
+            ph_d03a_budget.get("independent_process_rebuild_count"),
+        ) != (8, 8, 16, 16, 4, 3):
+            failures.append("ph_d03a_frame:CANDIDATE_BUDGET_MISMATCH")
+        for field in (
+            "source_payload_read_count",
+            "source_payload_semantic_parse_count",
+            "teacher_trajectory_read_count",
+            "arc_environment_source_execution_count",
+            "teacher_replay_execution_count",
+            "real_intervention_execution_count",
+            "general_candidate_generation_count",
+            "owner_approval_generated_count",
+            "golden_expected_artifact_freeze_count",
+            "sealed_corpus_artifact_count",
+            "rule_promotion_count",
+            "bridge_runtime_capability_count",
+            "external_network_call_count",
+            "locked_final_access_count",
+            "official_access_count",
+            "network_submission_count",
+            "kaggle_mutation_count",
+        ):
+            if ph_d03a_budget.get(field) != 0:
+                failures.append(f"ph_d03a_frame:{field}:NONZERO")
+        if ph_d03a_budget.get("external_network_use") != "NONE":
+            failures.append("ph_d03a_frame:EXTERNAL_NETWORK_ENABLED")
+
+    ph_d03a_transition = _load_object(root, PH_D03A_TRANSITION_PATH)
+    failures.extend(
+        _content_digest_failures(
+            ph_d03a_transition,
+            "rev3-phase-transition:",
+            "content_digest",
+            "ph_d03a_transition",
+        )
+    )
+    if (
+        ph_d03a_transition.get("from_phase_id"),
+        ph_d03a_transition.get("to_phase_id"),
+        ph_d03a_transition.get("decision"),
+    ) != ("PH-D02C", "PH-D03A", "ENTRY_AUTHORIZED"):
+        failures.append("ph_d03a_transition:SEQUENCE_MISMATCH")
+    if (
+        ph_d03a_transition.get("authorization_digest")
+        != ph_d02c_result_approval.get("approval_artifact_digest")
+        or ph_d03a_transition.get("from_phase_state_sha256")
+        != ph_d02c_attestation.get("phase_state_sha256")
+        or ph_d03a_transition.get("from_phase_evidence_commit")
+        != ph_d02c_attestation.get("evidence_commit")
+        or ph_d03a_transition.get("from_phase_evidence_tree")
+        != ph_d02c_attestation.get("evidence_tree")
+        or ph_d03a_transition.get(
+            "from_phase_evidence_payload_digest"
+        )
+        != ph_d02c_attestation.get("evidence_payload_digest")
+    ):
+        failures.append("ph_d03a_transition:EVIDENCE_BINDING_MISMATCH")
+    if (
+        ph_d03a_transition.get(
+            "external_irreversible_action_authorized"
+        )
+        is not False
+    ):
+        failures.append("ph_d03a_transition:EXTERNAL_ACTION_AUTHORIZED")
+
+    ph_d03a_preinventory = _load_object(
+        root, PH_D03A_PREINVENTORY_PATH
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d03a_preinventory,
+            "rev3-ph-d03a-post-audit-golden-preinventory:",
+            "content_digest",
+            "ph_d03a_preinventory",
+        )
+    )
+    preinventory_authority = ph_d03a_preinventory.get("authority")
+    if (
+        ph_d03a_preinventory.get("phase_id") != "PH-D03A"
+        or ph_d03a_preinventory.get("base_commit")
+        != ph_d03a_frame.get("base_commit")
+        or ph_d03a_preinventory.get("base_tree")
+        != ph_d03a_frame.get("base_tree")
+        or not isinstance(preinventory_authority, dict)
+        or preinventory_authority.get("input_phase_state_sha256")
+        != ph_d02c_attestation.get("phase_state_sha256")
+        or preinventory_authority.get("input_evidence_payload_digest")
+        != ph_d02c_attestation.get("evidence_payload_digest")
+        or preinventory_authority.get("phase_entry_approval_digest")
+        != ph_d02c_result_approval.get("approval_artifact_digest")
+        or ph_d03a_preinventory.get(
+            "preexisting_dirty_state", {}
+        ).get("aggregate_sha256")
+        != "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4"
+    ):
+        failures.append("ph_d03a_preinventory:BOUNDARY_MISMATCH")
+
+    ph_d03a_snapshot = _load_object(
+        root, PH_D03A_SNAPSHOT_MANIFEST_PATH
+    )
+    failures.extend(
+        _domain_content_digest_failures(
+            ph_d03a_snapshot,
+            "hds-ph-d03a-historical-snapshot",
+            "content_digest",
+            "ph_d03a_snapshot",
+        )
+    )
+    snapshot_entries = ph_d03a_snapshot.get("entries")
+    snapshot_root = (
+        root / "distillation/input/historical_pre_audit/PH-D03A"
+    )
+    if (
+        ph_d03a_snapshot.get("phase_id") != "PH-D03A"
+        or ph_d03a_snapshot.get("source_commit")
+        != "70722de7df8278c866de0734c97206c9952d731d"
+        or ph_d03a_snapshot.get("artifact_count") != 6
+        or ph_d03a_snapshot.get("eligible_for_current_activation")
+        is not False
+        or not isinstance(snapshot_entries, list)
+        or len(snapshot_entries) != 6
+    ):
+        failures.append("ph_d03a_snapshot:INVENTORY_MISMATCH")
+    else:
+        for item in snapshot_entries:
+            if not isinstance(item, dict):
+                failures.append("ph_d03a_snapshot:ITEM_INVALID")
+                continue
+            source_path = item.get("source_path")
+            snapshot_path = item.get("snapshot_path")
+            expected_sha = item.get("sha256")
+            destination = (
+                snapshot_root / snapshot_path
+                if isinstance(snapshot_path, str)
+                else None
+            )
+            source_bytes = (
+                _git_blob(
+                    root,
+                    "70722de7df8278c866de0734c97206c9952d731d",
+                    source_path,
+                )
+                if isinstance(source_path, str)
+                else None
+            )
+            if (
+                destination is None
+                or not destination.is_file()
+                or source_bytes is None
+                or hashlib.sha256(destination.read_bytes()).hexdigest()
+                != expected_sha
+                or hashlib.sha256(source_bytes).hexdigest()
+                != expected_sha
+            ):
+                failures.append(
+                    "ph_d03a_snapshot:ARTIFACT_BYTES_MISMATCH:"
+                    + str(source_path)
+                )
+
+    ph_d03a_contract = _load_object(root, PH_D03A_CONTRACT_PATH)
+    ph_d03a_candidate = _load_object(root, PH_D03A_CANDIDATE_SET_PATH)
+    ph_d03a_coverage = _load_object(root, PH_D03A_COVERAGE_PATH)
+    ph_d03a_review = _load_object(root, PH_D03A_REVIEW_REQUEST_PATH)
+    for value, path, namespace, location in (
+        (
+            ph_d03a_contract,
+            PH_D03A_CONTRACT_PATH,
+            "hds-golden-conformance-contract",
+            "ph_d03a_contract",
+        ),
+        (
+            ph_d03a_candidate,
+            PH_D03A_CANDIDATE_SET_PATH,
+            "hds-golden-candidate-set",
+            "ph_d03a_candidate",
+        ),
+        (
+            ph_d03a_coverage,
+            PH_D03A_COVERAGE_PATH,
+            "hds-golden-gate-coverage",
+            "ph_d03a_coverage",
+        ),
+        (
+            ph_d03a_review,
+            PH_D03A_REVIEW_REQUEST_PATH,
+            "hds-golden-owner-review-request",
+            "ph_d03a_review",
+        ),
+    ):
+        failures.extend(
+            _domain_content_digest_failures(
+                value,
+                namespace,
+                "content_digest",
+                location,
+            )
+        )
+        failures.extend(
+            _canonical_document_failures(root, path, location)
+        )
+    golden_authority = ph_d03a_contract.get("authority")
+    if (
+        ph_d03a_contract.get("phase_id") != "PH-D03A"
+        or ph_d03a_contract.get("candidate_state")
+        != "PROPOSED_PENDING_OWNER_APPROVAL"
+        or ph_d03a_contract.get("required_arc2_case_count") != 8
+        or ph_d03a_contract.get("required_arc3_case_count") != 8
+        or ph_d03a_contract.get("required_total_case_count") != 16
+        or not isinstance(golden_authority, dict)
+        or golden_authority.get("work_block_frame_digest")
+        != ph_d03a_frame.get("content_digest")
+        or golden_authority.get("preinventory_digest")
+        != ph_d03a_preinventory.get("content_digest")
+        or golden_authority.get("phase_transition_digest")
+        != ph_d03a_transition.get("content_digest")
+        or golden_authority.get("phase_entry_approval_digest")
+        != ph_d02c_result_approval.get("approval_artifact_digest")
+        or golden_authority.get("input_phase_state_sha256")
+        != "sha256:" + str(ph_d02c_attestation.get("phase_state_sha256"))
+        or golden_authority.get("input_evidence_payload_digest")
+        != ph_d02c_attestation.get("evidence_payload_digest")
+        or golden_authority.get("schema_contract_digest")
+        != ph_d02c_schema_contract.get("content_digest")
+        or golden_authority.get("causal_ir_contract_digest")
+        != ph_d02c_ir_contract.get("content_digest")
+    ):
+        failures.append("ph_d03a_contract:AUTHORITY_OR_INVENTORY_MISMATCH")
+    candidate_cases = ph_d03a_candidate.get("cases")
+    if (
+        ph_d03a_candidate.get("phase_id") != "PH-D03A"
+        or ph_d03a_candidate.get("candidate_state")
+        != "PROPOSED_PENDING_OWNER_APPROVAL"
+        or ph_d03a_candidate.get("arc2_case_count") != 8
+        or ph_d03a_candidate.get("arc3_case_count") != 8
+        or ph_d03a_candidate.get("case_count") != 16
+        or ph_d03a_candidate.get(
+            "content_specific_owner_approval_count"
+        )
+        != 0
+        or ph_d03a_candidate.get("golden_frozen_case_count") != 0
+        or ph_d03a_candidate.get("sealed_case_count") != 0
+        or not isinstance(candidate_cases, list)
+        or len(candidate_cases) != 16
+    ):
+        failures.append("ph_d03a_candidate:INVENTORY_OR_BOUNDARY_MISMATCH")
+    gate_entries = ph_d03a_coverage.get("gate_entries")
+    if (
+        ph_d03a_coverage.get("phase_id") != "PH-D03A"
+        or ph_d03a_coverage.get("gate_count") != 16
+        or ph_d03a_coverage.get("covered_gate_count") != 16
+        or ph_d03a_coverage.get(
+            "behaviorally_recomputed_gate_count"
+        )
+        != 16
+        or ph_d03a_coverage.get(
+            "declarative_gate_result_trusted"
+        )
+        is not False
+        or ph_d03a_coverage.get("coverage_complete") is not True
+        or ph_d03a_coverage.get("fail_result_count") != 0
+        or not isinstance(gate_entries, list)
+        or len(gate_entries) != 16
+    ):
+        failures.append("ph_d03a_coverage:GATE_MISMATCH")
+    elif any(
+        not isinstance(item, dict)
+        or not isinstance(item.get("obligation_evidence"), dict)
+        or item["obligation_evidence"].get("recomputed") is not True
+        or item["obligation_evidence"].get(
+            "declarative_gate_result_trusted"
+        )
+        is not False
+        or len(item["obligation_evidence"].get("check_ids", [])) != 2
+        for item in gate_entries
+    ):
+        failures.append("ph_d03a_coverage:OBLIGATION_EVIDENCE_MISMATCH")
+    if (
+        ph_d03a_review.get("phase_id") != "PH-D03A"
+        or ph_d03a_review.get("target_count") != 16
+        or ph_d03a_review.get("owner_decision_present") is not False
+        or ph_d03a_review.get("owner_approval_generated") is not False
+        or ph_d03a_review.get("golden_freeze_started") is not False
+        or ph_d03a_review.get("sealed_corpus_started") is not False
+        or ph_d03a_review.get(
+            "automatic_expectation_update_allowed"
+        )
+        is not False
+    ):
+        failures.append("ph_d03a_review:AUTHORITY_BOUNDARY_MISMATCH")
+
+    distillation_source = root / "distillation" / "src"
+    source_text = str(distillation_source)
+    if source_text not in sys.path:
+        sys.path.insert(0, source_text)
+    try:
+        from hds_distill.golden_corpus import (
+            build_phase_d03a_candidate_artifacts,
+        )
+
+        rebuilt_golden = build_phase_d03a_candidate_artifacts(root)
+    except Exception as exc:  # fail closed and preserve stable report shape
+        failures.append(
+            "ph_d03a_rebuild:EXCEPTION:" + type(exc).__name__
+        )
+    else:
+        if set(rebuilt_golden) != {
+            PH_D03A_CONTRACT_PATH.as_posix(),
+            PH_D03A_CANDIDATE_SET_PATH.as_posix(),
+            PH_D03A_COVERAGE_PATH.as_posix(),
+            PH_D03A_REVIEW_REQUEST_PATH.as_posix(),
+        }:
+            failures.append("ph_d03a_rebuild:INVENTORY_MISMATCH")
+        for relative_path, payload in rebuilt_golden.items():
+            if (root / relative_path).read_bytes() != payload:
+                failures.append(
+                    "ph_d03a_rebuild:BYTES_MISMATCH:" + relative_path
+                )
 
     source_inventory = _load_object(root, PH_D01A_SOURCE_INVENTORY_PATH)
     failures.extend(
@@ -3754,6 +4262,68 @@ def validate_repository(root: Path) -> dict[str, object]:
                 + destination_path
             )
 
+    ph_d03a_historical_root = (
+        root / "control/rev3/HISTORICAL_PRE_AUDIT/PH-D03A"
+    )
+    ph_d03a_historical_sources = [
+        (
+            "control/rev3/PH-D03A_WORK_BLOCK_FRAME.json",
+            "PH-D03A_WORK_BLOCK_FRAME.json",
+        ),
+        (
+            "control/rev3/D03A_CANDIDATE_STATE.json",
+            "D03A_CANDIDATE_STATE.json",
+        ),
+    ]
+    for package_name in (
+        "artifact_manifest.json",
+        "candidate_state_ref.json",
+        "changed_files.json",
+        "commands.json",
+        "failed_requirements.json",
+        "open_terms.json",
+        "proposed_next_action.md",
+        "self_audit.json",
+        "summary.md",
+        "test_results.json",
+        "validator_hardening_manifest.json",
+        "validator_hardening_state.json",
+        "validator_hardening_summary.md",
+    ):
+        ph_d03a_historical_sources.append(
+            (
+                "control/rev3/PH-D03A_OWNER_REVIEW_PACKAGE/"
+                + package_name,
+                "OWNER_REVIEW_PACKAGE/" + package_name,
+            )
+        )
+    if len(ph_d03a_historical_sources) != 15:
+        failures.append(
+            "ph_d03a_historical_migration:INVENTORY_MISMATCH"
+        )
+    for source_path, destination_path in ph_d03a_historical_sources:
+        expected = _git_blob(
+            root,
+            "70722de7df8278c866de0734c97206c9952d731d",
+            source_path,
+        )
+        destination = ph_d03a_historical_root / destination_path
+        if expected is None:
+            failures.append(
+                "ph_d03a_historical_migration:SOURCE_MISSING:"
+                + source_path
+            )
+        elif not destination.is_file():
+            failures.append(
+                "ph_d03a_historical_migration:DESTINATION_MISSING:"
+                + destination_path
+            )
+        elif destination.read_bytes() != expected:
+            failures.append(
+                "ph_d03a_historical_migration:CONTENT_MISMATCH:"
+                + destination_path
+            )
+
     asset_classification = _load_object(
         root, PH_R00_ASSET_CLASSIFICATION_PATH
     )
@@ -3810,6 +4380,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d02a_status",
             "ph_d02b_status",
             "ph_d02c_status",
+            "ph_d03a_status",
             "ph_r00_owner_authorization",
             "ph_r00_status",
             "ph_r1_status",
@@ -3824,12 +4395,12 @@ def validate_repository(root: Path) -> dict[str, object]:
     if not isinstance(active_work_block, dict):
         failures.append("governance:ACTIVE_WORK_BLOCK_MISSING")
     elif (
-        active_work_block.get("phase_id") != "PH-D02C"
-        or active_work_block.get("path") != PH_D02C_FRAME_PATH.as_posix()
+        active_work_block.get("phase_id") != "PH-D03A"
+        or active_work_block.get("path") != PH_D03A_FRAME_PATH.as_posix()
         or active_work_block.get("content_digest")
-        != ph_d02c_frame.get("content_digest")
+        != ph_d03a_frame.get("content_digest")
         or active_work_block.get("transition_digest")
-        != ph_d02c_transition.get("content_digest")
+        != ph_d03a_transition.get("content_digest")
         or active_work_block.get("runtime_capability_addition_count") != 0
         or active_work_block.get(
             "external_irreversible_actions_authorized"
@@ -3936,7 +4507,7 @@ def validate_repository(root: Path) -> dict[str, object]:
                 )
 
     return {
-        "check_count": 64,
+        "check_count": 72,
         "failure_count": len(failures),
         "failures": sorted(set(failures)),
         "status": "PASS" if not failures else "FAIL",

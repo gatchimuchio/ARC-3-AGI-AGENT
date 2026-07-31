@@ -76,12 +76,17 @@ mechanism assertion.
 IR candidates byte-identically under a content-bound snapshot manifest. Those
 bytes are candidate input only and are not eligible for current activation.
 
-`PH-D03A` adds `golden_conformance_contract.json`. It fixes:
+The current post-audit `PH-D03A` adds
+`golden_conformance_contract.json`. It is bound to the exact approved
+PH-D02C phase-state hash, evidence payload, entry ApprovalRecord, post-audit
+schema contract, executable IR contract, current WorkBlockFrame, and phase
+transition. It fixes:
 
 - the exact eight ARC2 and eight ARC3 synthetic conformance categories;
 - the eleven required human-auditable artifact classes per case;
 - at least two typed HypothesisIR alternatives per case;
-- complete DG-00 through DG-15 behavioral coverage;
+- complete DG-00 through DG-15 behavioral coverage recomputed from case
+  structure, executable results, bounded interventions, and negative probes;
 - stable candidate-corpus validation errors;
 - `PROPOSED_PENDING_OWNER_APPROVAL` as the only allowed candidate state;
 - non-authoritative `SCHEMA_TEMPLATE` / `SUSPEND` ApprovalRecord semantics;
@@ -93,3 +98,8 @@ The contract authorizes deterministic candidate construction and validation
 only. The checked Owner review request contains no decision. A new trusted,
 content-specific Owner ApprovalRecord is required before any provisional
 expectation can be frozen, and approved expectations cannot be auto-updated.
+
+`historical_pre_audit/PH-D03A/` preserves the four pre-audit checked
+candidate artifacts plus the corresponding source and test bytes from commit
+`70722de7df8278c866de0734c97206c9952d731d`. The snapshot is
+non-authoritative and cannot satisfy a current Golden gate.

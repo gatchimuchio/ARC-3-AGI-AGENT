@@ -1,0 +1,316 @@
+{
+  "schema_version": "arc3-rev3-ph-d03a-post-audit-golden-preinventory-v1",
+  "phase_id": "PH-D03A",
+  "status": "POST_AUDIT_PREIMPLEMENTATION_INVENTORY_COMPLETE",
+  "base_commit": "70722de7df8278c866de0734c97206c9952d731d",
+  "base_tree": "fd330c8fd8dd9cb66e16d12cbcde14452a28aa6f",
+  "authority": {
+    "input_phase_state_path": "control/rev3/D02C_PHASE_STATE.json",
+    "input_phase_state_sha256": "3a7e627ab0aee7f37346aee6b7ef5188bbe2ef257abd6302de5a358bc2d7293d",
+    "input_evidence_commit": "bfd9f399c8ea1d05ca0f9c081cf13c7c931e24a6",
+    "input_evidence_tree": "a9ac12950e138f8c4b4db527fa859fa3b52cdf74",
+    "input_evidence_payload_digest": "sha256:cb5c07dd9295ee47fa5f114ba9aff5d9f10106da2c6d2412adbea42080fe4a04",
+    "input_evidence_attestation_path": "control/rev3/PH-D02C_EVIDENCE_ATTESTATION.json",
+    "phase_entry_decision_digest": "sha256:e9c85018fc95d1343b9ad0c398f7c4f367371ed4fe0b4b0e0db361bdbb432d8b",
+    "phase_entry_approval_digest": "owner-approval-record:2f01decd9706b8a69fc00c1ff7ad22d4ee79aa9c1bfc8667f21792e882235625",
+    "owner_standing_authorization_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
+    "schema_contract_digest": "hds-post-audit-causal-ir-schema-contract:8d4acb814448b2cba3dff39162a1191aaa490261247907151f9db0750a77b646",
+    "causal_ir_contract_digest": "hds-causal-ir-contract:160048eb2d37ddd633c589b2bdb07f901d5db449648451ea8a10331039111678"
+  },
+  "historical_pre_audit_inventory": {
+    "control_artifact_count": 15,
+    "candidate_snapshot_artifact_count": 6,
+    "preinventory_artifact_count": 1,
+    "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
+    "eligible_for_current_activation": false,
+    "source_commit": "70722de7df8278c866de0734c97206c9952d731d"
+  },
+  "existing_distillation_state": {
+    "source_module_count": 12,
+    "unit_test_module_count": 6,
+    "schema_file_count": 45,
+    "common_type_count": 18,
+    "arc2_opcode_count": 33,
+    "arc3_opcode_count": 18,
+    "domain_opcode_count": 51,
+    "registry_artifact_count": 5,
+    "causal_ir_vector_artifact_count": 2,
+    "causal_ir_valid_vector_count": 51,
+    "causal_ir_invalid_vector_count": 15,
+    "golden_contract_artifact_count": 1,
+    "golden_candidate_case_count": 16,
+    "golden_gate_coverage_report_count": 1,
+    "golden_owner_approved_case_count": 0,
+    "golden_frozen_case_count": 0,
+    "sealed_corpus_count": 0,
+    "existing_golden_classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"
+  },
+  "required_case_inventory": [
+    {
+      "case_id": "golden.arc2.recolor",
+      "domain": "ARC2",
+      "case_kind": "RECOLOR",
+      "required_operator_focus": [
+        "RECOLOR",
+        "DELETE"
+      ],
+      "primary_gate_id": "DG-00"
+    },
+    {
+      "case_id": "golden.arc2.object_selection",
+      "domain": "ARC2",
+      "case_kind": "OBJECT_SELECTION",
+      "required_operator_focus": [
+        "SELECT_COMPONENTS_4",
+        "SELECT_COMPONENTS_8",
+        "UNIQUE"
+      ],
+      "primary_gate_id": "DG-01"
+    },
+    {
+      "case_id": "golden.arc2.translation_copy",
+      "domain": "ARC2",
+      "case_kind": "TRANSLATION_COPY",
+      "required_operator_focus": [
+        "TRANSLATE",
+        "OUTLINE",
+        "COPY"
+      ],
+      "primary_gate_id": "DG-02"
+    },
+    {
+      "case_id": "golden.arc2.symmetry",
+      "domain": "ARC2",
+      "case_kind": "SYMMETRY",
+      "required_operator_focus": [
+        "REFLECT_HORIZONTAL",
+        "REFLECT_VERTICAL"
+      ],
+      "primary_gate_id": "DG-03"
+    },
+    {
+      "case_id": "golden.arc2.count_relation",
+      "domain": "ARC2",
+      "case_kind": "COUNT_RELATION",
+      "required_operator_focus": [
+        "COUNT",
+        "COUNT_ENCODE"
+      ],
+      "primary_gate_id": "DG-04"
+    },
+    {
+      "case_id": "golden.arc2.composite_transform",
+      "domain": "ARC2",
+      "case_kind": "COMPOSITE_TRANSFORM",
+      "required_operator_focus": [
+        "COMPOSE",
+        "ROTATE_90",
+        "RECOLOR"
+      ],
+      "primary_gate_id": "DG-05"
+    },
+    {
+      "case_id": "golden.arc2.ambiguous_multi_causal",
+      "domain": "ARC2",
+      "case_kind": "AMBIGUOUS_MULTI_CAUSAL",
+      "required_operator_focus": [
+        "IDENTITY",
+        "COMPOSE"
+      ],
+      "primary_gate_id": "DG-06"
+    },
+    {
+      "case_id": "golden.arc2.impossible_unsupported_opcode",
+      "domain": "ARC2",
+      "case_kind": "IMPOSSIBLE_UNSUPPORTED_OPCODE",
+      "required_operator_focus": [
+        "COPY",
+        "IR_UNKNOWN_OPCODE"
+      ],
+      "primary_gate_id": "DG-07"
+    },
+    {
+      "case_id": "golden.arc3.simple_action_effect",
+      "domain": "ARC3",
+      "case_kind": "SIMPLE_ACTION_EFFECT",
+      "required_operator_focus": [
+        "MATCH_ACTION_ID",
+        "PREDICT_EFFECT"
+      ],
+      "primary_gate_id": "DG-08"
+    },
+    {
+      "case_id": "golden.arc3.action6_payload",
+      "domain": "ARC3",
+      "case_kind": "ACTION6_PAYLOAD",
+      "required_operator_focus": [
+        "MATCH_ACTION_PAYLOAD",
+        "MATCH_ACTION_ID",
+        "PREDICT_EFFECT"
+      ],
+      "primary_gate_id": "DG-09"
+    },
+    {
+      "case_id": "golden.arc3.order_observed",
+      "domain": "ARC3",
+      "case_kind": "ORDER_OBSERVED",
+      "required_operator_focus": [
+        "ORDER_BEFORE",
+        "ORDER_ADJACENT"
+      ],
+      "primary_gate_id": "DG-11"
+    },
+    {
+      "case_id": "golden.arc3.delayed_effect",
+      "domain": "ARC3",
+      "case_kind": "DELAYED_EFFECT",
+      "required_operator_focus": [
+        "DELAYED_EFFECT",
+        "PREDICT_TRANSITION"
+      ],
+      "primary_gate_id": "DG-10"
+    },
+    {
+      "case_id": "golden.arc3.game_over_reset",
+      "domain": "ARC3",
+      "case_kind": "GAME_OVER_RESET",
+      "required_operator_focus": [
+        "TERMINAL_CONTRIBUTION",
+        "RESET_EFFECT"
+      ],
+      "primary_gate_id": "DG-13"
+    },
+    {
+      "case_id": "golden.arc3.ambiguous_mechanism",
+      "domain": "ARC3",
+      "case_kind": "AMBIGUOUS_MECHANISM",
+      "required_operator_focus": [
+        "PREDICT_EFFECT",
+        "PREDICT_TRANSITION"
+      ],
+      "primary_gate_id": "DG-14"
+    },
+    {
+      "case_id": "golden.arc3.counterfactual_supported",
+      "domain": "ARC3",
+      "case_kind": "COUNTERFACTUAL_SUPPORTED",
+      "required_operator_focus": [
+        "PRECONDITION",
+        "EXCLUSION"
+      ],
+      "primary_gate_id": "DG-15"
+    },
+    {
+      "case_id": "golden.arc3.resource_suspension",
+      "domain": "ARC3",
+      "case_kind": "RESOURCE_SUSPENSION",
+      "required_operator_focus": [
+        "REPEAT_N",
+        "SUSPEND_RESOURCE"
+      ],
+      "primary_gate_id": "DG-12"
+    }
+  ],
+  "required_case_artifacts": [
+    "RawObservation",
+    "DeterministicDerivation",
+    "InterpretationHypothesis",
+    "multiple HypothesisIR candidates",
+    "exact fit result",
+    "CounterfactualInterventionPlan",
+    "InterventionResult",
+    "HDSCausalRecord",
+    "FailureSignature",
+    "GateResult",
+    "non-authoritative ApprovalRecord template"
+  ],
+  "required_gate_coverage": [
+    "DG-00",
+    "DG-01",
+    "DG-02",
+    "DG-03",
+    "DG-04",
+    "DG-05",
+    "DG-06",
+    "DG-07",
+    "DG-08",
+    "DG-09",
+    "DG-10",
+    "DG-11",
+    "DG-12",
+    "DG-13",
+    "DG-14",
+    "DG-15"
+  ],
+  "gate_obligation_recomputation": {
+    "required_gate_count": 16,
+    "declarative_gate_result_sufficient": false,
+    "required_evidence": "DETERMINISTIC_CASE_DERIVED_OBLIGATION_EVIDENCE",
+    "negative_probe_gate_ids": [
+      "DG-08",
+      "DG-14",
+      "DG-15"
+    ],
+    "resource_execution_gate_ids": [
+      "DG-12"
+    ],
+    "temporal_execution_gate_ids": [
+      "DG-10",
+      "DG-11"
+    ]
+  },
+  "approval_boundary": {
+    "existing_content_specific_golden_approval_count": 0,
+    "allowed_candidate_state": "PROPOSED_PENDING_OWNER_APPROVAL",
+    "allowed_approval_mode": "SCHEMA_TEMPLATE",
+    "allowed_template_authoritative": false,
+    "allowed_template_decision": "SUSPEND",
+    "required_template_authority": "UNBOUND_SCHEMA_TEMPLATE",
+    "owner_recorded_approval_may_be_generated_by_codex": false,
+    "golden_expected_artifact_freeze_allowed_without_owner_record": false,
+    "golden_expected_artifact_auto_update_allowed": false
+  },
+  "implementation_plan": {
+    "new_contract": "distillation/input/golden_conformance_contract.json",
+    "new_module": "distillation/src/hds_distill/golden_corpus.py",
+    "new_test_module": "distillation/tests/unit/test_golden_corpus.py",
+    "candidate_case_artifact": "distillation/artifacts/golden/candidate_cases.json",
+    "gate_coverage_artifact": "distillation/artifacts/reports/golden_gate_coverage.json",
+    "owner_review_request_artifact": "distillation/artifacts/golden/owner_review_request.json",
+    "checked_artifact_count": 4,
+    "real_source_payload_required": false,
+    "real_teacher_trajectory_required": false,
+    "arc_environment_execution_required": false,
+    "runtime_dependency_addition_required": false,
+    "new_preinventory": "analysis/rev3/ph_d03a_post_audit_golden_preinventory.json",
+    "new_builder": "scripts/build_ph_d03a_golden_candidate.py",
+    "historical_snapshot_manifest": "distillation/input/historical_pre_audit/PH-D03A/SNAPSHOT_MANIFEST.json"
+  },
+  "phase_boundaries": {
+    "golden_candidate_construction_started": false,
+    "golden_expected_artifact_freeze_started": false,
+    "golden_owner_approval_generated_count": 0,
+    "sealed_corpus_started": false,
+    "source_payload_read_count": 0,
+    "real_trajectory_normalization_count": 0,
+    "general_candidate_generation_started": false,
+    "real_intervention_execution_count": 0,
+    "causal_mechanism_assertion_count": 0,
+    "rule_promotion_count": 0,
+    "bridge_started": false,
+    "runtime_started": false,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "network_submission_count": 0,
+    "kaggle_mutation_count": 0
+  },
+  "preexisting_dirty_state": {
+    "tracked_file_count": 32,
+    "aggregate_sha256": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "allowed_to_modify": false
+  },
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-ph-d03a-post-audit-golden-preinventory:4b961014e9845b9eac2965fcc83815622a441024352095babcd41ef866836fe0"
+}

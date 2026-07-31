@@ -1,9 +1,9 @@
-"""Isolated HDS source, representation, schema, and Typed Causal IR package.
+"""Isolated HDS schema, Typed Causal IR, and Golden-candidate package.
 
-The active PH-D02C boundary derives a versioned 45-schema set from the
-Owner-approved PH-D02B set and exposes only a pure offline interpreter,
-verifier ABI, and synthetic conformance utilities. It exports no solver,
-agent, runtime, Owner authority, official connector, or submission
+The active PH-D03A boundary consumes the Owner-approved PH-D02C ABI and adds
+only deterministic, synthetic, non-authoritative Golden implementation-
+conformance candidates. It exports no solver, agent, runtime, Owner authority,
+approved Golden expectation, Sealed corpus, official connector, or submission
 capability.
 """
 
