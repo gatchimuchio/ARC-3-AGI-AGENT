@@ -1054,13 +1054,15 @@ def test_canonicalization_conformance_report_is_bound_and_claim_limited(
     assert "AGI" in report["claim_prohibited"]
 
 
-def test_ph_d01b_frozen_artifacts_outside_declared_d02a_docs_are_unchanged(
+def test_historical_ph_d01b_bytes_and_declared_rebind_are_separated(
 ) -> None:
     manifest_path = (
         REPOSITORY_ROOT
         / "control"
         / "rev3"
-        / "PH-D01B_OWNER_REVIEW_PACKAGE"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01B"
+        / "OWNER_REVIEW_PACKAGE"
         / "artifact_manifest.json"
     )
     manifest = cast(
@@ -1075,17 +1077,59 @@ def test_ph_d01b_frozen_artifacts_outside_declared_d02a_docs_are_unchanged(
         "distillation/schemas/README.md",
         "distillation/src/hds_distill/__init__.py",
     }
+    rebound_in_current_d01b = {
+        "distillation/artifacts/reports/environment_isolation.json",
+        "distillation/artifacts/reports/source_manifest_freeze.json",
+        "distillation/input/manifest_freeze_plan.json",
+        "distillation/manifests/environment/arc3-replay.json",
+        "distillation/manifests/run/ph-d01b-freeze.json",
+        "distillation/src/hds_distill/manifest_freeze.py",
+        "distillation/tests/unit/test_manifest_freeze.py",
+    }
+    historical_root = (
+        REPOSITORY_ROOT
+        / "control"
+        / "rev3"
+        / "HISTORICAL_PRE_AUDIT"
+        / "PH-D01B"
+    )
+    artifact_paths = {
+        cast(str, cast(dict[str, Any], value)["path"])
+        for value in cast(list[object], manifest["artifacts"])
+    }
+    assert mutable_in_d02a <= artifact_paths
+    assert rebound_in_current_d01b <= artifact_paths
+
     checked = 0
+    skipped: set[str] = set()
     for artifact_value in cast(list[object], manifest["artifacts"]):
         artifact = cast(dict[str, Any], artifact_value)
         relative_path = cast(str, artifact["path"])
-        if relative_path in mutable_in_d02a:
+        if relative_path in mutable_in_d02a | rebound_in_current_d01b:
+            skipped.add(relative_path)
             continue
-        payload = (REPOSITORY_ROOT / relative_path).read_bytes()
+        if relative_path == "control/rev3/D01B_PHASE_STATE.json":
+            artifact_path = historical_root / "D01B_PHASE_STATE.json"
+        elif relative_path == (
+            "control/rev3/PH-D01B_WORK_BLOCK_FRAME.json"
+        ):
+            artifact_path = historical_root / "PH-D01B_WORK_BLOCK_FRAME.json"
+        elif relative_path.startswith(
+            "control/rev3/PH-D01B_OWNER_REVIEW_PACKAGE/"
+        ):
+            artifact_path = (
+                historical_root
+                / "OWNER_REVIEW_PACKAGE"
+                / relative_path.rsplit("/", 1)[1]
+            )
+        else:
+            artifact_path = REPOSITORY_ROOT / relative_path
+        payload = artifact_path.read_bytes()
         assert hashlib.sha256(payload).hexdigest() == artifact["sha256"]
         checked += 1
 
-    assert checked == 40
+    assert skipped == mutable_in_d02a | rebound_in_current_d01b
+    assert checked == int(manifest["artifact_count"]) - len(skipped)
 
 
 def test_canonical_hashes_are_full_width_sha256() -> None:

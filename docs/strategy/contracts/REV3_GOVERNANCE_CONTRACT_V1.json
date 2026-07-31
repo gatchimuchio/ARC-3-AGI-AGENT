@@ -50,7 +50,7 @@
     ]
   },
   "active_work_block": {
-    "content_digest": "rev3-work-block-frame:174cbf1bd53ff888f86b5adf1a1d75acc7c344dbfa8569e575adb602ee01dd5b",
+    "content_digest": "rev3-work-block-frame:1b25b4b9aba92fe42b4abf47214397f05752f217ab6ec7cfeb3da846da58717e",
     "external_irreversible_actions_authorized": false,
     "path": "control/rev3/PH-D01B_WORK_BLOCK_FRAME.json",
     "phase_id": "PH-D01B",
@@ -225,10 +225,19 @@
   },
   "source_blind_execution_evidence": {
     "backend": "BUBBLEWRAP_USER_MOUNT_NETWORK_NAMESPACE",
-    "plan_digest": "hds-source-blind-execution-plan:e832fc5847da096c3bc8167fde5a3ca5a56fed0b873c5a3f23d262cc659fbc2f",
-    "record_digest": "hds-source-blind-execution-record:c182c7951fdea0801983ac00567facc0ff212f1f8708b19d5892597164c6e55e",
+    "plan_digest": "hds-source-blind-execution-plan:b4ae17a427b18a4443940c306e865d8b468b3413fcdc8d1c3141815c55ed75b0",
+    "record_digest": "hds-source-blind-execution-record:77960f17486a5da408dbeccef0b21470960cbc4e415044c94dbe5a554caecf76",
     "role_count": 3,
     "same_process_source_access_then_candidate_generation_count": 0,
     "candidate_execution_status": "NOT_STARTED_PHASE_D01B"
+  },
+  "downstream_invalidation_evidence": {
+    "path": "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json",
+    "report_digest": "hds-ph-d01b-downstream-invalidation:d491966458d317ad0e29e78769e6477e044bdb911850c9dd2981636701a35761",
+    "invalidated_artifact_count": 3,
+    "invalidated_artifact_owner_phase": "PH-D02B",
+    "current_phase_rebuild_permitted": false,
+    "ph_d02a_status": "NOT_STARTED",
+    "ph_d02b_status": "SUSPEND"
   }
 }

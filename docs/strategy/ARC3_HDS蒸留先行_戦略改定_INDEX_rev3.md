@@ -69,6 +69,12 @@ S5/P22 compiled policy = historical/quarantine
 
 既存成果物は削除しない。監査是正後のOwner承認とStrategy Installationは成立したが、監査前成果物を現在のPhase通過証拠またはactive selectorとして使用しない。
 
+## PH-D01B現行証拠境界
+
+- source-blind三roleは別process・別mount projectionで固定し、Executor/Auditorのenvironment source mountとrepository-root visibilityを0件として検証する。
+- 現行environment/run bindingにより監査前PH-D02B成果物3件が失効することを`distillation/artifacts/reports/ph_d01b_downstream_invalidation.json`へexact digest付きで記録する。
+- 失効3件はPH-D01Bで再生成しない。checked bytesを保持し、PH-D01B完了後にPH-D02A、PH-D02Bの順で再検証する。
+
 ## 機械可読契約
 
 - `control/rev3/REV3_CURRENT_SELECTOR.json`

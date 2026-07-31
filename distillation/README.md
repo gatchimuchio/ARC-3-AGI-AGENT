@@ -46,6 +46,10 @@ execution context:
 - Linux bubblewrap mount and network namespace evidence proving that the
   executor and auditor do not receive the environment source tree or original
   repository root.
+- an exact downstream invalidation report for three pre-audit PH-D02B
+  artifacts whose embedded environment/run bindings are now stale; their
+  checked bytes remain preserved and PH-D02B rebuild stays suspended until
+  PH-D02A and then PH-D02B are entered in roadmap order.
 
 `PH-D02A` adds the common deterministic representation layer used by later
 distillation schemas:

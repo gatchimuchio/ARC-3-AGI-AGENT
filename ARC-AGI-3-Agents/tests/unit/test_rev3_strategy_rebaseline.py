@@ -174,7 +174,7 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
         "record_digest"
     ] == (
         "hds-source-blind-execution-record:"
-        "c182c7951fdea0801983ac00567facc0ff212f1f8708b19d5892597164c6e55e"
+        "77960f17486a5da408dbeccef0b21470960cbc4e415044c94dbe5a554caecf76"
     )
     assert governance["source_blind_execution_evidence"][
         "same_process_source_access_then_candidate_generation_count"
@@ -2953,7 +2953,7 @@ def test_current_d01b_entry_and_source_blind_evidence_are_bound() -> None:
     )
     assert frame["content_digest"] == (
         "rev3-work-block-frame:"
-        "174cbf1bd53ff888f86b5adf1a1d75acc7c344dbfa8569e575adb602ee01dd5b"
+        "1b25b4b9aba92fe42b4abf47214397f05752f217ab6ec7cfeb3da846da58717e"
     )
     assert frame["phase_id"] == "PH-D01B"
     assert frame["resource_budget"][

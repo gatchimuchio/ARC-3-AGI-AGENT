@@ -47,6 +47,12 @@ CONFORMANCE_PATH = DISTILLATION_ROOT / "artifacts/reports/schema_conformance.jso
 D02B_ARTIFACT_MANIFEST_PATH = (
     REPOSITORY_ROOT / "control/rev3/PH-D02B_OWNER_REVIEW_PACKAGE/artifact_manifest.json"
 )
+PH_D01B_DOWNSTREAM_INVALIDATION_PATH = (
+    DISTILLATION_ROOT
+    / "artifacts"
+    / "reports"
+    / "ph_d01b_downstream_invalidation.json"
+)
 
 AUTHORITY_SCHEMA_NAMES = (
     "DependencyLock",
@@ -536,12 +542,66 @@ def test_rule_and_ir_schemas_expose_no_identity_lookup_fields(
         assert forbidden.isdisjoint(properties)
 
 
-def test_checked_artifacts_are_exact_rebuild_outputs() -> None:
+def test_checked_artifacts_match_except_declared_d01b_invalidation() -> None:
     rebuilt = build_phase_d02b_artifacts(REPOSITORY_ROOT)
+    invalidation = _json(PH_D01B_DOWNSTREAM_INVALIDATION_PATH)
+    body = {
+        key: value
+        for key, value in invalidation.items()
+        if key not in invalidation["digest_excluded_fields"]
+    }
+    assert invalidation["content_digest"] == (
+        "hds-ph-d01b-downstream-invalidation:"
+        + hashlib.sha256(
+            json.dumps(
+                body,
+                allow_nan=False,
+                ensure_ascii=False,
+                separators=(",", ":"),
+                sort_keys=True,
+            ).encode("utf-8")
+        ).hexdigest()
+    )
+    declared = {
+        str(record["path"]): record
+        for record in cast(
+            list[dict[str, Any]],
+            invalidation["invalidated_artifacts"],
+        )
+    }
+    observed: dict[str, dict[str, str]] = {}
 
     assert len(rebuilt) == 42
     for relative_path, expected in rebuilt.items():
-        assert (REPOSITORY_ROOT / relative_path).read_bytes() == expected
+        checked = (REPOSITORY_ROOT / relative_path).read_bytes()
+        if checked == expected:
+            continue
+        observed[relative_path] = {
+            "checked_sha256": hashlib.sha256(checked).hexdigest(),
+            "expected_rebuild_sha256": hashlib.sha256(expected).hexdigest(),
+        }
+
+    assert set(observed) == set(declared)
+    assert len(observed) == invalidation["invalidated_artifact_count"] == 3
+    assert len(rebuilt) - len(observed) == (
+        invalidation["unaffected_rebuild_artifact_count"]
+    )
+    for relative_path, digests in observed.items():
+        assert digests["checked_sha256"] == (
+            declared[relative_path]["checked_sha256"]
+        )
+        assert digests["expected_rebuild_sha256"] == (
+            declared[relative_path]["expected_rebuild_sha256"]
+        )
+        assert declared[relative_path]["owner_phase"] == "PH-D02B"
+    assert invalidation["phase_order"] == {
+        "current_phase": "PH-D01B",
+        "next_phase": "PH-D02A",
+        "invalidated_artifact_owner_phase": "PH-D02B",
+        "ph_d02a_started": False,
+        "ph_d02b_started": False,
+        "current_phase_rebuild_permitted": False,
+    }
 
 
 def test_three_independent_rebuilds_are_byte_identical() -> None:

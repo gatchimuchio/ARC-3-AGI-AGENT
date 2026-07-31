@@ -16,11 +16,14 @@
       "distillation/manifests/environment/arc3-replay.json",
       "distillation/manifests/run/ph-d01b-freeze.json",
       "distillation/artifacts/reports/environment_isolation.json",
+      "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json",
       "distillation/artifacts/reports/source_blind_execution.json",
       "distillation/artifacts/reports/source_manifest_freeze.json",
       "distillation/src/hds_distill/manifest_freeze.py",
       "distillation/src/hds_distill/source_blind_execution.py",
+      "distillation/tests/unit/test_canonical.py",
       "distillation/tests/unit/test_manifest_freeze.py",
+      "distillation/tests/unit/test_schema_registry.py",
       "distillation/tests/unit/test_source_blind_execution.py",
       "scripts/verify_source_blind_execution.py"
     ]

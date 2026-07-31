@@ -72,6 +72,8 @@
     "distillation/src/hds_distill/source_blind_execution.py",
     "distillation/tests/unit/test_manifest_freeze.py",
     "distillation/tests/unit/test_source_blind_execution.py",
+    "distillation/tests/unit/test_canonical.py",
+    "distillation/tests/unit/test_schema_registry.py",
     "distillation/manifests/source_content/**",
     "distillation/manifests/acquisition/**",
     "distillation/manifests/environment/arc3-replay.json",
@@ -79,6 +81,7 @@
     "distillation/artifacts/reports/environment_isolation.json",
     "distillation/artifacts/reports/source_blind_execution.json",
     "distillation/artifacts/reports/source_manifest_freeze.json",
+    "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json",
     "distillation/artifacts/reports/distillation_scope_audit.json",
     "scripts/verify_source_blind_execution.py",
     "scripts/validate_rev3_governance.py",
@@ -190,5 +193,5 @@
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-work-block-frame:174cbf1bd53ff888f86b5adf1a1d75acc7c344dbfa8569e575adb602ee01dd5b"
+  "content_digest": "rev3-work-block-frame:1b25b4b9aba92fe42b4abf47214397f05752f217ab6ec7cfeb3da846da58717e"
 }

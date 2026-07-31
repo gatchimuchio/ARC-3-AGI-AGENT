@@ -37,7 +37,7 @@
     "external_irreversible_actions": "EXCLUDED_REQUIRES_SEPARATE_EXPLICIT_EXECUTION_INSTRUCTION"
   },
   "current_work_block": {
-    "content_digest": "rev3-work-block-frame:174cbf1bd53ff888f86b5adf1a1d75acc7c344dbfa8569e575adb602ee01dd5b",
+    "content_digest": "rev3-work-block-frame:1b25b4b9aba92fe42b4abf47214397f05752f217ab6ec7cfeb3da846da58717e",
     "entry_transition_digest": "rev3-phase-transition:f464759c7c0ff3ee12034b6d92a125555484ecac7a97e060faa75916f0ecd72a",
     "path": "control/rev3/PH-D01B_WORK_BLOCK_FRAME.json"
   },
@@ -109,7 +109,7 @@
     {
       "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
       "role": "STRATEGY_INDEX",
-      "sha256": "5ff3f05d9426120edf09d8d1ebbcdad895ee1cf22686f1aa93a43a626d6306f8"
+      "sha256": "ba6376cfc752b92d7da835136378c2868e03c448896928dfaa4432c96469588d"
     },
     {
       "path": "docs/audits/ARC3_HDS_DISTILLATION_FIRST_REV3_AUDIT_RESOLUTION_2026-07-31.md",
@@ -139,7 +139,7 @@
     {
       "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
       "role": "GOVERNANCE_CONTRACT",
-      "sha256": "5acbfff2c0fad6cb4ab43b47a3b96b20b12e3e87918d6cebb4b2f184b37ce77e"
+      "sha256": "f3f0853ed1c240857348d4e718e35832fcb4a10a2455ad4d35df9fd980c025b8"
     },
     {
       "path": "docs/strategy/contracts/HDS_STRUCTURE_BUNDLE_CONTRACT_V1.json",
@@ -214,7 +214,7 @@
     {
       "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
       "role": "CURRENT_SELECTOR",
-      "sha256": "9b6cc23c29b03b13af0bafe70bf80cb563c7d9b0364f36ab3453437e2d1cbbc5"
+      "sha256": "c9868c6589a2a8ad12d4e7a6bc748ef230a3a2a6c6dd9ad905beb3291f35c740"
     },
     {
       "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
@@ -329,7 +329,7 @@
     {
       "path": "distillation/README.md",
       "role": "PH_D00B_DISTILLATION_NAMESPACE_README",
-      "sha256": "4c2b1d7962d8093ccd162875388d58e5fa043de668a606aedc04eb740b54a91c"
+      "sha256": "5618c758f929cc6f3bfcb07391fac7922567a578c8e523c2c9d2977efd97a6ec"
     },
     {
       "path": "distillation/pyproject.toml",
@@ -374,7 +374,7 @@
     {
       "path": "distillation/artifacts/reports/distillation_scope_audit.json",
       "role": "CURRENT_DISTILLATION_SCOPE_AUDIT_REPORT",
-      "sha256": "3f8b688c33e94df8a9e7271744569f62b26983256f59698f244b4533cbb7ab66"
+      "sha256": "731d4d8552dcc00a2726ce892ed6c34b003129a64a2e76230495247921f0ec39"
     },
     {
       "path": "bridge/.gitkeep",
@@ -429,7 +429,7 @@
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
       "role": "GOVERNANCE_TEST",
-      "sha256": "2f446cbce376b37fb89b2bad8353db66b768390541ee4cf11e751ce5d06e0fa7"
+      "sha256": "642c4811f29d4f9519a1313111e89743d9cff203428f6bb4b165e5033b03141e"
     },
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
@@ -454,7 +454,7 @@
     {
       "path": "scripts/validate_rev3_governance.py",
       "role": "GOVERNANCE_TOOL",
-      "sha256": "b8caf1d3eb41d8a426df7fb688460f5a002de86bf544cc6bd4f19ba334c6ab8a"
+      "sha256": "d9bdf49677ae59444d4f9b3126eb39f27bec6f7d485f40a5f4fc939329c7c7d2"
     },
     {
       "path": "scripts/audit_hds_dependencies.py",
@@ -829,7 +829,7 @@
     {
       "path": "control/rev3/PH-D01B_WORK_BLOCK_FRAME.json",
       "role": "CURRENT_WORK_BLOCK_FRAME",
-      "sha256": "ae0ed091d6cfa79d29a97a22162963aa2d649eb7a9c59b6429b93e5ce656f4cd"
+      "sha256": "01032eb07f91e575f53516df0400d5f6cc79e090c7a84950bce52b6b3024c7e8"
     },
     {
       "path": "control/rev3/PHASE_TRANSITIONS/PH-D01A_TO_PH-D01B.json",
@@ -839,22 +839,27 @@
     {
       "path": "distillation/artifacts/reports/environment_isolation.json",
       "role": "PH_D01B_ENVIRONMENT_ISOLATION_REPORT",
-      "sha256": "9a04c151352c40043dc3b2c7c3f5359753036f40322f88862f56931258f43c05"
+      "sha256": "4ec0b915de6923c92d57767547b5d713a268e7e4a1ab8135ba119d3180c83fc1"
+    },
+    {
+      "path": "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json",
+      "role": "PH_D01B_DOWNSTREAM_INVALIDATION_REPORT",
+      "sha256": "6ec830007ff44b8c680bea2bc9d00bf70926f3b4664c3bfd1380fe014a1358b7"
     },
     {
       "path": "distillation/artifacts/reports/source_blind_execution.json",
       "role": "PH_D01B_SOURCE_BLIND_EXECUTION_REPORT",
-      "sha256": "13cae71e1af7a5bde3b1b5cccb7a3345d1afff13fd2c8c6627e775f1994718c8"
+      "sha256": "806fb3f9148e0c5e7201d21c94fa1e2713115a80a6fdb3420dbf3dc1891e3918"
     },
     {
       "path": "distillation/artifacts/reports/source_manifest_freeze.json",
       "role": "PH_D01B_SOURCE_MANIFEST_FREEZE_REPORT",
-      "sha256": "dbde44c06777d3b5371d3cc944ea184081b7fa04a19f3e65cdf73d74b58629db"
+      "sha256": "679f8e15561041bb4c9ad760afbde4b5a11ecd84016b45c2d34450d0290a6f4f"
     },
     {
       "path": "distillation/input/manifest_freeze_plan.json",
       "role": "PH_D01B_MANIFEST_FREEZE_PLAN",
-      "sha256": "14b8568c3bb19be82152eb683814d68e0c3e6dae2a2c098605cb9238c125ea51"
+      "sha256": "c989082b41b681065a3254f658f590313cb6248dba71b4684c61339bcb47ac0b"
     },
     {
       "path": "distillation/input/raw_recording_content_capture.json",
@@ -864,7 +869,7 @@
     {
       "path": "distillation/input/source_blind_execution_plan.json",
       "role": "PH_D01B_SOURCE_BLIND_EXECUTION_PLAN",
-      "sha256": "7e3a3ed0da1eb06847538fcb88d0865378a5720c4a0736c42b1eac51f0fbc939"
+      "sha256": "deb442ea29630391b720f02b1ab2b80dce2ac650b8955128a60513a812bb8d88"
     },
     {
       "path": "distillation/manifests/acquisition/arc2-evaluation-challenges.json",
@@ -909,12 +914,12 @@
     {
       "path": "distillation/manifests/environment/arc3-replay.json",
       "role": "PH_D01B_ENVIRONMENT_MANIFEST",
-      "sha256": "4a79623d6caaa9ac8a59a40ca1f65b0deed984d99a919eacb84a39b8a844c00d"
+      "sha256": "e752fcd0efcfa6fc4d8a3e3474d20aafbf3ef64e8eb8549a09c3a382d5a59cdc"
     },
     {
       "path": "distillation/manifests/run/ph-d01b-freeze.json",
       "role": "PH_D01B_RUN_MANIFEST",
-      "sha256": "0d8271148fd6d8ca73f40d3e3e6c48f3d9ceb177e6110e92d1863255fb283b79"
+      "sha256": "afb68720c27084ec2ed554e833216a94dc5c6f14944f6fb81c1491b4e79bfccc"
     },
     {
       "path": "distillation/manifests/source_content/arc2-evaluation-challenges.json",
@@ -987,6 +992,16 @@
       "sha256": "238c524f7d7991b26c61778d24338e28dae496423721ea8668475d96267438f1"
     },
     {
+      "path": "distillation/tests/unit/test_canonical.py",
+      "role": "PH_D01B_HISTORICAL_BYTE_PRESERVATION_TEST",
+      "sha256": "fc8d6ba9201f22374bffc5af0d075eb6992ee7d37d2bda4d7c6e6609a2fca7c2"
+    },
+    {
+      "path": "distillation/tests/unit/test_schema_registry.py",
+      "role": "PH_D01B_DOWNSTREAM_INVALIDATION_TEST",
+      "sha256": "de9345bb34e916acf33800f8fe8430b6019c2ddef7ba0dcde1a6c750b82bd421"
+    },
+    {
       "path": "distillation/tests/unit/test_manifest_freeze.py",
       "role": "PH_D01B_MANIFEST_TEST",
       "sha256": "84278d0360db7e6f143f807a47b3fbb4cbddfd56a815160dfe99ca12b38a28ac"
@@ -1007,10 +1022,10 @@
       "sha256": "dc414a353800845057010694ac09bc7de616cfae0f384f13b1f829b6f1669f19"
     }
   ],
-  "entry_count": 191,
+  "entry_count": 194,
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-current-authority-manifest:3940e60e263be6e555dfa665ef96153f98d2dcf814a94f1dc5814fcd97ea0e28",
+  "content_digest": "rev3-current-authority-manifest:64503b54e528cb0650d56de0bbc5e86832aec8df440ae3238adc3193e82257cc",
   "ph_d01b_status": "IN_PROGRESS"
 }

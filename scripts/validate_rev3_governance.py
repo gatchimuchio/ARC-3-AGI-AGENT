@@ -154,6 +154,12 @@ PH_D01B_FREEZE_REPORT_PATH = Path(
 PH_D01B_ENVIRONMENT_MANIFEST_PATH = Path(
     "distillation/manifests/environment/arc3-replay.json"
 )
+PH_D01B_RUN_MANIFEST_PATH = Path(
+    "distillation/manifests/run/ph-d01b-freeze.json"
+)
+PH_D01B_DOWNSTREAM_INVALIDATION_PATH = Path(
+    "distillation/artifacts/reports/ph_d01b_downstream_invalidation.json"
+)
 PH_R00_PHASE_STATE_PATH = Path("control/rev3/R00_PHASE_STATE.json")
 PH_R00_ASSET_CLASSIFICATION_PATH = Path(
     "docs/strategy/ASSET_CLASSIFICATION_REV3.json"
@@ -1433,6 +1439,16 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d01b_environment_manifest:ISOLATION_BINDING_MISMATCH"
         )
 
+    run_manifest = _load_object(root, PH_D01B_RUN_MANIFEST_PATH)
+    failures.extend(
+        _content_digest_failures(
+            run_manifest,
+            "hds-run-manifest:",
+            "run_digest",
+            "ph_d01b_run_manifest",
+        )
+    )
+
     freeze_report = _load_object(root, PH_D01B_FREEZE_REPORT_PATH)
     failures.extend(
         _content_digest_failures(
@@ -1511,6 +1527,134 @@ def validate_repository(root: Path) -> dict[str, object]:
         )
     if len(acquisition_paths) != 8:
         failures.append("ph_d01b_acquisitions:COUNT_MISMATCH")
+
+    downstream_invalidation = _load_object(
+        root, PH_D01B_DOWNSTREAM_INVALIDATION_PATH
+    )
+    failures.extend(
+        _content_digest_failures(
+            downstream_invalidation,
+            "hds-ph-d01b-downstream-invalidation:",
+            "content_digest",
+            "ph_d01b_downstream_invalidation",
+        )
+    )
+    expected_invalidated_artifacts = [
+        {
+            "path": "distillation/artifacts/reports/schema_conformance.json",
+            "checked_sha256": (
+                "1b4d69951d60025a1949f5019ca5aa07019ac0652ed3ffed2"
+                "ae9be1eaa96e5c3"
+            ),
+            "expected_rebuild_sha256": (
+                "eef085afd7638645222ffa0bd6905f77b441f3bba98b8038a"
+                "bb0745174f78080"
+            ),
+            "owner_phase": "PH-D02B",
+            "action": (
+                "PRESERVE_CHECKED_BYTES_AND_REBUILD_ONLY_AFTER_"
+                "PHASE_ORDERED_REVALIDATION"
+            ),
+        },
+        {
+            "path": (
+                "distillation/artifacts/test_vectors/schema_examples/"
+                "invalid_schema_bundles.json"
+            ),
+            "checked_sha256": (
+                "83f90126ef5590db31956a17250d1a05db850f76eadf2fbbb"
+                "4fb2103af1ae8dd"
+            ),
+            "expected_rebuild_sha256": (
+                "e99c7909e6c2aa88ae1924780710780a8e929c0e6e0462763"
+                "bc9d1ebc2fcd78b"
+            ),
+            "owner_phase": "PH-D02B",
+            "action": (
+                "PRESERVE_CHECKED_BYTES_AND_REBUILD_ONLY_AFTER_"
+                "PHASE_ORDERED_REVALIDATION"
+            ),
+        },
+        {
+            "path": (
+                "distillation/artifacts/test_vectors/schema_examples/"
+                "valid_schema_examples.json"
+            ),
+            "checked_sha256": (
+                "a40befab0e15a27a6c73168b42708c2b488fdf5498f458b64"
+                "e5904a506cda253"
+            ),
+            "expected_rebuild_sha256": (
+                "449efee6b1cac4800d5a970dc178a3b623ae3d7c31db34917"
+                "cf76a3169d73e36"
+            ),
+            "owner_phase": "PH-D02B",
+            "action": (
+                "PRESERVE_CHECKED_BYTES_AND_REBUILD_ONLY_AFTER_"
+                "PHASE_ORDERED_REVALIDATION"
+            ),
+        },
+    ]
+    if (
+        downstream_invalidation.get("phase_id") != "PH-D01B"
+        or downstream_invalidation.get("classification")
+        != (
+            "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE_"
+            "REQUIRES_PHASE_ORDERED_REBUILD"
+        )
+        or downstream_invalidation.get("trigger_bindings")
+        != {
+            "source_blind_execution_record_digest": (
+                source_blind_record.get("content_digest")
+            ),
+            "environment_isolation_report_digest": isolation.get(
+                "content_digest"
+            ),
+            "environment_manifest_digest": environment_manifest.get(
+                "content_digest"
+            ),
+            "run_manifest_digest": run_manifest.get("run_digest"),
+            "source_manifest_freeze_report_digest": freeze_report.get(
+                "content_digest"
+            ),
+        }
+        or downstream_invalidation.get("invalidated_artifact_count") != 3
+        or downstream_invalidation.get(
+            "unaffected_rebuild_artifact_count"
+        )
+        != 39
+        or downstream_invalidation.get("invalidated_artifacts")
+        != expected_invalidated_artifacts
+        or downstream_invalidation.get("phase_order")
+        != {
+            "current_phase": "PH-D01B",
+            "next_phase": "PH-D02A",
+            "invalidated_artifact_owner_phase": "PH-D02B",
+            "ph_d02a_started": False,
+            "ph_d02b_started": False,
+            "current_phase_rebuild_permitted": False,
+        }
+        or downstream_invalidation.get("gates")
+        != {
+            "PH-D01B": "PASS_PENDING_FULL_REGRESSION",
+            "PH-D02A": "NOT_STARTED",
+            "PH-D02B": "SUSPEND",
+        }
+    ):
+        failures.append(
+            "ph_d01b_downstream_invalidation:CONTRACT_MISMATCH"
+        )
+    for invalidated_artifact in expected_invalidated_artifacts:
+        artifact_path = root / invalidated_artifact["path"]
+        if (
+            not artifact_path.is_file()
+            or hashlib.sha256(artifact_path.read_bytes()).hexdigest()
+            != invalidated_artifact["checked_sha256"]
+        ):
+            failures.append(
+                "ph_d01b_downstream_invalidation:CHECKED_BYTES_MISMATCH:"
+                + invalidated_artifact["path"]
+            )
 
     phase_state = root / PH_R00_PHASE_STATE_PATH
     if hashlib.sha256(phase_state.read_bytes()).hexdigest() != (
@@ -1831,6 +1975,29 @@ def validate_repository(root: Path) -> dict[str, object]:
         != "NOT_STARTED_PHASE_D01B"
     ):
         failures.append("governance:SOURCE_BLIND_EVIDENCE_MISMATCH")
+    governed_invalidation = governance.get(
+        "downstream_invalidation_evidence"
+    )
+    if not isinstance(governed_invalidation, dict) or (
+        governed_invalidation.get("path")
+        != PH_D01B_DOWNSTREAM_INVALIDATION_PATH.as_posix()
+        or governed_invalidation.get("report_digest")
+        != downstream_invalidation.get("content_digest")
+        or governed_invalidation.get("invalidated_artifact_count") != 3
+        or governed_invalidation.get(
+            "invalidated_artifact_owner_phase"
+        )
+        != "PH-D02B"
+        or governed_invalidation.get(
+            "current_phase_rebuild_permitted"
+        )
+        is not False
+        or governed_invalidation.get("ph_d02a_status") != "NOT_STARTED"
+        or governed_invalidation.get("ph_d02b_status") != "SUSPEND"
+    ):
+        failures.append(
+            "governance:DOWNSTREAM_INVALIDATION_EVIDENCE_MISMATCH"
+        )
 
     profile = _load_object(root, BUILD_READY_PROFILE_PATH)
     if profile.get("profile_status") != (
@@ -1872,7 +2039,7 @@ def validate_repository(root: Path) -> dict[str, object]:
                 )
 
     return {
-        "check_count": 36,
+        "check_count": 37,
         "failure_count": len(failures),
         "failures": sorted(set(failures)),
         "status": "PASS" if not failures else "FAIL",
