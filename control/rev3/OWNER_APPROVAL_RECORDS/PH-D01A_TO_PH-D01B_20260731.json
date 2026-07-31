@@ -1,0 +1,18 @@
+{
+  "schema_version": "arc3-owner-approval-record-v2",
+  "approval_id": "PH-D01A_TO_PH-D01B_20260731",
+  "owner_authority": "大平鉄兵",
+  "owner_decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D01A_TO_PH-D01B_20260731.json",
+  "owner_decision_capture_digest": "sha256:c363fe83418a4021ab1eda580fef87f65c715b3abb8d11249b1876ae8d5d0aa5",
+  "target_evidence_commit": "ac01fe04e94f97135e234962b19a509d55774485",
+  "target_artifact_digest": "sha256:b0e9c80d0d9f6f2ff7642924212b5e67fb3a46eb423a0ce4ac6bd98559841c68",
+  "approved_transition": "PH-D01A_TO_PH-D01B",
+  "decision": "OWNER_APPROVED_PASS",
+  "next_phase_id": "PH-D01B",
+  "next_phase_authorized": true,
+  "future_phase_approval_scope": "EXPLICITLY_LISTED_ONLY",
+  "digest_excluded_fields": [
+    "approval_artifact_digest"
+  ],
+  "approval_artifact_digest": "owner-approval-record:4083a7a0207d5d7bbc04d31f9cf99d455229528a738d29d38058a1bdf9919a60"
+}
