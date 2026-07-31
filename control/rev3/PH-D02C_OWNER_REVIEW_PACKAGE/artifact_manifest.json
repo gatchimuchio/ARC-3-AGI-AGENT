@@ -1,0 +1,629 @@
+{
+  "schema_version": "arc3-ph-d02c-evidence-payload-manifest-v2",
+  "phase_id": "PH-D02C",
+  "work_block_id": "WB-PH-D02C-POST-AUDIT-TYPED-CAUSAL-IR-REBIND-20260731",
+  "base_commit": "9c9cf5a9790fae341ad1be45506c88e7a7f34b58",
+  "base_tree": "e2b19714dd86bd2193a9531fdb65ece4bec0417c",
+  "implementation_commit": "09525862e3f503f6ae4b7e63ad048b1726d4f958",
+  "implementation_tree": "4ffc030f7be0b0063b72c3cb13b2646867a149cc",
+  "payload_digest_method": "SHA256_OF_THIS_FILE_BYTES_WITH_FINAL_LF",
+  "manifest_excludes_self": true,
+  "frame": {
+    "path": "control/rev3/PH-D02C_WORK_BLOCK_FRAME.json",
+    "content_digest": "rev3-work-block-frame:8cf0eda845829c194d2572934105b8b7a5d1d43f04b7798f6277033ab9cd32b4",
+    "sha256": "1bdcdeb480307e5b72827a373e679208b44a4d0ff39cbb0b65bd5558ebc4b0cf"
+  },
+  "authority_manifest": {
+    "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "content_digest": "rev3-current-authority-manifest:5d9e7b46fe546ca15feb21e67b0035d2a54ce750f699425d900b03f3bed6c583",
+    "sha256": "799acee281cfbf26687f98ccb86726e1d12f4ea9867d1741a4c10f57cac59bbe"
+  },
+  "artifact_count": 121,
+  "artifacts": [
+    {
+      "path": "AGENTS.md",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "55a2130178dc0c3e8e773e2d81819fc1cebc87f0840bc5ae38b30ecfec399327"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "462bc0039ba99faa5f64b7b2b8f4e1c11cb619d97047f5f88015d3dfd482f7b5"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "c73374cf30a1ccbc37ec837364b8055c5be2893431f9cb2cc3f7c52aa4c3fa11"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "ab71dccb52418aa3de2b75dd6d4d5924ece5a420a9fd87a3e49522ce93bb3bce"
+    },
+    {
+      "path": "analysis/rev3/ph_d02c_post_audit_ir_preinventory.json",
+      "role": "PH_D02C_PREINVENTORY",
+      "sha256": "324e65f993a7e77ba4bf87c756474f7309661cf24ec490a41c515b787973e4b4"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/D02C_PHASE_STATE.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "b894a2c7285df5eb61e2616c5d35f765e0dfb0a6e1b8b6c506523ea6a19dcab1"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "9b6b91375cda20c4f329ac1f58c32e82c45b2f3b1b94fbe1f30e40bbc3ba5d7d"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/changed_files.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "3dfe9b9b84596eebd1b804dbf1aa8c274c2bd8de215d594844774396b5c51879"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/commands.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "588e34dd5c9243e3350d14c6aee5a2018b8df99711d57b1f316d744ccffa8550"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/failed_requirements.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "468533ad510122b9a7386d4b5a312a3a5d4838295f23d665ff5d114b9418a490"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/open_terms.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "38907385d3cc4e0b55fc74b145a1b6ca46c2d9c0d3c2813e4468e866d403c83a"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/phase_state.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "b894a2c7285df5eb61e2616c5d35f765e0dfb0a6e1b8b6c506523ea6a19dcab1"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/proposed_next_action.md",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "8d0d05422f1ac40b127251d290feada493358edda6912f878032b1270f9a759e"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/self_audit.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "3abe77255a128010181fb36fb3a1c22b1cb8edad16a0532cfec192e46206b8f4"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/summary.md",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "8275073ee5a5ba0f5cc96310a70de71fdfe37f01d6e7715b678cb84b0dbd2ff0"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/OWNER_REVIEW_PACKAGE/test_results.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "afe001a6c174b906485ed5d676daafebb463b6ba7acb372da12a25d52859696c"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/PH-D02C_WORK_BLOCK_FRAME.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "c59226a4fa665b9c4acdc0d9c25b4fe15689d6a8ab806824ec462918499563b9"
+    },
+    {
+      "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D02C/PHASE_TRANSITIONS/PH-D02C_TO_PH-D03A.json",
+      "role": "HISTORICAL_PRE_AUDIT_CONTROL_EVIDENCE",
+      "sha256": "ed95b8f9c432a30c0a1f1980cf298d53fb0a2718ee52eb011152183f096df9cc"
+    },
+    {
+      "path": "control/rev3/PH-D02C_WORK_BLOCK_FRAME.json",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "1bdcdeb480307e5b72827a373e679208b44a4d0ff39cbb0b65bd5558ebc4b0cf"
+    },
+    {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-D02B_TO_PH-D02C.json",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "fa65305df5de184a8b58d97121ea357ef172e844343953aa2f1b766a4b4e5898"
+    },
+    {
+      "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "d95e651ad3972707698f021cc1c818374fed44c65db49cb076258a3de2b3baf2"
+    },
+    {
+      "path": "distillation/README.md",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "9d368bf0bb5ecd03caa42b2be722fa7dc0f6e6c339d817402cd96b587896cd6a"
+    },
+    {
+      "path": "distillation/artifacts/registries/arc2_operator_registry.json",
+      "role": "TYPED_CAUSAL_IR_REGISTRY",
+      "sha256": "5cfaea468b628a6deb60aadbdc0060a49a9725a0985f67f5391efaba563b8b21"
+    },
+    {
+      "path": "distillation/artifacts/registries/arc3_operator_registry.json",
+      "role": "TYPED_CAUSAL_IR_REGISTRY",
+      "sha256": "c7005c41452f39bd55249c619bd31b9f8029670490af1522739250f8fb5e1a2f"
+    },
+    {
+      "path": "distillation/artifacts/registries/code_ir_abi.json",
+      "role": "TYPED_CAUSAL_IR_REGISTRY",
+      "sha256": "4f8924bbbb4dbaff910733f85ccec0dded3da5103750a3535b28a94ebb843705"
+    },
+    {
+      "path": "distillation/artifacts/registries/common_type_system.json",
+      "role": "TYPED_CAUSAL_IR_REGISTRY",
+      "sha256": "4997a79ff2acf0c88f7033c53f7265db8538ba76c6cf0136639043f1caae85ef"
+    },
+    {
+      "path": "distillation/artifacts/registries/resource_cost_model.json",
+      "role": "TYPED_CAUSAL_IR_REGISTRY",
+      "sha256": "63ecd3be1a8763a70ac09d86c64a235bd55676caedd5a0866f6f80cda8e826bd"
+    },
+    {
+      "path": "distillation/artifacts/reports/causal_ir_conformance.json",
+      "role": "CAUSAL_IR_CONFORMANCE_REPORT",
+      "sha256": "95d57038cff9ca3d74b332aef3987b16c11cb999add927d2c7fbd7fff0f5b1b6"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "role": "DISTILLATION_SCOPE_AUDIT_REPORT",
+      "sha256": "3ecaa92aa124f4cf65e5c41384bfa4dcf59ee5cb11bb29d1801cec590fd93a40"
+    },
+    {
+      "path": "distillation/artifacts/test_vectors/causal_ir/invalid_ir_vectors.json",
+      "role": "SYNTHETIC_CAUSAL_IR_VECTOR",
+      "sha256": "a97916922462d27719c4744b63980789b8ba9dadd81c0dfea132427713d67b0b"
+    },
+    {
+      "path": "distillation/artifacts/test_vectors/causal_ir/valid_ir_vectors.json",
+      "role": "SYNTHETIC_CAUSAL_IR_VECTOR",
+      "sha256": "3b9388cb9cb395b33b1364d55421bfda54392047526c612c8bf00636abf5e25d"
+    },
+    {
+      "path": "distillation/input/README.md",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "a2ee59207423c88adedcae990eb7bbfa9fa8cd4f2d87b0bea157bcc081046ae1"
+    },
+    {
+      "path": "distillation/input/causal_ir_contract.json",
+      "role": "EXECUTABLE_CAUSAL_IR_CONTRACT",
+      "sha256": "33cee304b4a4662cf3a681c19c97460e476ced5753d19e315fa16f1a78319d2e"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/SNAPSHOT_MANIFEST.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "d075cdc2efccb3551b25e021e276589916470c399df37db11c1bbbec67ee98d0"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/causal_ir_contract.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "f58989fab87bc080d09001c03fe4de8ea1f84a2d41d198fa42c4fc4c04fb2bb8"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/registries/arc2_operator_registry.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "ea5c1ec3081e0da46e4b7d0d98db3de24212072070df88b59de69c027f61495d"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/registries/arc3_operator_registry.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "7687c0b34bef4cca54d0a7c1e42d50a70a051a1e27ca1da1dd564a076adb7861"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/registries/code_ir_abi.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "c244e0abc18314b651f4052471715e9e3d13614453dd811cc421104689b2160a"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/registries/common_type_system.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "ea4c583da2de25512f7e9e488e6b0de6f30d89664f89b02c638550c4607fec95"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/registries/resource_cost_model.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "81fbdb62ff5f270147fc78c70392bb3c52ba8b40c37d3e9953691a8b62cf1625"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/reports/causal_ir_conformance.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "a7e2bc49bd7dfdd654779af8cba4330bebcbec73154430f09ba7238b3ee36d1b"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/test_vectors/invalid_ir_vectors.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "9efad720be592a32b85eb449775852ddb77880f64dcbd6f982af3e6dfc5d333d"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/generated/test_vectors/valid_ir_vectors.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "efcc716dc35a9f27c552678d0c04dbaa9ee475349d84dcc2b4b4f144f727ec03"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/schema_contract.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "a70d0bb4c9944d16c7be284d7fcd267f0ee7b37988713fa713a678efbca197cc"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/schemas/hypothesis_ir.schema.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "78507270a7acb8e7ffd9d9e2cea60a01b6fddcaed94df72f78f131cde3267f3b"
+    },
+    {
+      "path": "distillation/input/historical_pre_audit/PH-D02C/schemas/operator_registry.schema.json",
+      "role": "HISTORICAL_PRE_AUDIT_IR_EVIDENCE",
+      "sha256": "be0193585650d39c78400424e3aee9aeb388b25efb30f797e3c680f9ba347c32"
+    },
+    {
+      "path": "distillation/input/post_audit_causal_ir_schema_contract.json",
+      "role": "POST_AUDIT_CAUSAL_IR_SCHEMA_CONTRACT",
+      "sha256": "d0c6f849c2ee3214399932016b51eb3db86bf2a5d70ec9d8b55b35206540d953"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/README.md",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "0095a3317b9afe8b1656718710aa845027a919cc883f5ea271349629ea1109be"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/acquisition_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "9858dd953b3377bc79760601682c47f95c5aabfb9bbccd3cdd275f71aaff58d8"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/approval_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "b34bc47c2dafa99c66b1d3c4cf4706793c89cbf7bc89342b86af083d8dd17da4"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/arc2_teacher_case.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "d1cc968668bd6bcc941161f7e44f93caf0347ed6ad068fec1097136d15f4faa5"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/arc3_action_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "d5f1c81e337da95de40e2a8ad0c6ba31331356c94a04b87ac2b1a316bfaebe41"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/arc3_teacher_trajectory.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "2284260fb949c3cdd8fc698bfeac7574a9109c16d130123778ffd061fffa17c7"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/boundary_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "cfa693e56b55f14e713f88a3024fe98275b83e0fb5f89056b2886795a7c91307"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/bundle_approval_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "0fe692264356cce0e591cb0d0107216c8da5eb0b0b41ed5347c2b79ce01e35db"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/claim_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "5111e5a38cec9ff0a02f54b00358b5516bd87022489d8273fb96deafec27d790"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/completion_state_registry.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "b7266419778e3ec4bcda67190bdde555fcc8a7ac8ce406be6513a1da6c34c7bb"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/counterexample_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "090588f729750343f1e62516953674800bce215f3c31efd6d2fa923d8b17642e"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/counterfactual_intervention_plan.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "8ae8fd688f7c041962d7b188acda513e149f76aa671052b6bab0628141f4762d"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/coverage_report.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "164814f2d760a135e41218051ae59d8683f36d2cb81be2efc9fd3292979f070c"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/decision_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "7d01be896d52a9b36b9bba62258ec5c49fe708ae2729e0ae0faeb36d95081e88"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/dependency_lock.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "2d939df30fe6ef41282d17665eed5f2f073dec5e3c234540efea61933f6dcf62"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/deterministic_derivation.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "12d77acf25071e1812c612cc2a9f2834677886dfeb15d9df13726a300b4e05ad"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/distillation_audit.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "f8a837e86078ebc02b3a2a42dfa1aa01214efeeef427b20d3e50665adcb08cba"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/distillation_frame.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "bc6eec79b67e5f196103d06b2b9d9a4707d46d5a40940500f85ad6f1d852dc36"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/environment_manifest.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "11128ee054014da9e68a6862ec18a3336fbac6d154623ff80ecec3c6ade89f31"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/evidence_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "ea7dd5477cf81495aabebf2e0121380551584779a2a436bd64a64086e6cf59fb"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/failure_signature.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "b18544fc505d2d7c37f880c377b28bc99f059b59e68ed1557ea001089d19f801"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/frozen_artifact_manifest.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "dbd26342ee5181da26f8acea1536be4b3bd780db3043be03c3c3f0996356c84b"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/gate_result.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "1699e23490522ec72f06b0480ce09864966c23e702d004a98d2c9b8a28504af5"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/hds_causal_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "cbb2fc6b1d9974e8691f97a201a696360530457db2a29aac2ca04c42f32c3251"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/hds_structure_bundle_manifest.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "461b14886ccd2f8c3bc3b2a9d56778ee4c305a1be13d8ae363e29fcf4a392252"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/hypothesis_ir.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "c437723e8d33dc979595014cc6b5a48e82918a54bcc5f5dc22d74ae29ed75931"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/interpretation_hypothesis.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "13b53602b88e94059714b0cf4146128efe6705e565e34ee5e619b90d3cdd00e8"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/intervention_result.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "4d6167d55aec16ca0df854b95e059fc73fcaed90193b4d4d372c3784f2e3bd82"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/llm_capture_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "84c1f398f61395da84afb82ae5c4a416a55eb8c24f529e1346bb0751bc140843"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/mechanism_asset_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "cbd3a05079fdff95e825f436658929a56f356793317ff44fd878f2cf96f56031"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/model_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "2460f467aac2769d48d17eef96e58541f9198f651ff44bbe6b518a4f5f0382c2"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/normalization_certificate.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "fb1f95a90e5f17777a46f8405f87e4a8ca6d97d4be7133d85aaeb1b944bf6978"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/ontology_type_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "d1c043064ddd32d501157e5b00bf15708639882ba5b826449f321a6019feea2c"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/open_term_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "1edd40561892c0d7c237b1de411d93635f6703a23c1bef6e2d118c1012913bd6"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/operator_registry.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "619b302a5d61af8d87ffdd8210a7ce2bb3a9c2f3b8d3e96bf5f998d89806712c"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/probe_obligation_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "8363c4b180431753015f5e94ab12f843f9f0a930db8810154cc3d0dfa4cc2c38"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/promotion_decision.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "26d518720959c32fe320dc2a4560ddcab174c7675eccaf3bfe9b0df710b16fb7"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/raw_observation.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "b878be3eb6a2e69c0ded48c9e2eed0219905974d9cbc073266d67c61cc9af820"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/resource_profile.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "4f358daf261f77bae031717de170b73294022af4a37266058fe8f2d5225e70f6"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/rule_atom.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "e447f3cc0f0f27411909521982fee8ff06ae1299924e53775e75ad7134d36dd9"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/rule_family.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "76152754e46b10f7be137c5659470fa8f15517dae579fafe2e022f3e17dd5096"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/run_manifest.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "eaadfd4c2bcb12354cd7b2a0e03611d490fbfda93629d149bf38bb55936b9023"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/source_content_manifest.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "3c770a26fbbbf6bf76fd2954bf32f4b53c2747a2ed74a2d2be074654b31190dd"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/source_profile.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "8a215b419ff9fda32dae3d3dbd464446300914d05ea2bfb15e287a9104e15373"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/structure_bundle_migration_record.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "c3d1d92038c955109d14c75b591bbe48644071481a65a4e8747d0b3c1674e37a"
+    },
+    {
+      "path": "distillation/schema_sets/ph_d02c_v1/structure_coverage_profile.schema.json",
+      "role": "POST_AUDIT_SCHEMA_SET",
+      "sha256": "829a802dd65f165f40b212b55351196e415e2fbc620486a33404d492715beb80"
+    },
+    {
+      "path": "distillation/src/hds_distill/__init__.py",
+      "role": "PH_D02C_IMPLEMENTATION",
+      "sha256": "08425b265e6cf32b3d932f8d923c03b21c3312b945c718378099990dd9182db9"
+    },
+    {
+      "path": "distillation/src/hds_distill/causal_ir.py",
+      "role": "PH_D02C_IMPLEMENTATION",
+      "sha256": "5b03b4ca14208e440cbbb2d399fd074c4b4203e631fd378db8d9d9b8241ed8b7"
+    },
+    {
+      "path": "distillation/src/hds_distill/golden_corpus.py",
+      "role": "PH_D02C_IMPLEMENTATION",
+      "sha256": "e7511225af0f2f3c71a0617c6d2a15e1cc396c33f56ef7c3df610ea2f8b0d930"
+    },
+    {
+      "path": "distillation/src/hds_distill/ir_types.py",
+      "role": "PH_D02C_IMPLEMENTATION",
+      "sha256": "ae5a0e4bbc1d36eab71a462436b6fd0beea8eea2afe6ef05b650a572ecbae61d"
+    },
+    {
+      "path": "distillation/src/hds_distill/operator_registry.py",
+      "role": "PH_D02C_IMPLEMENTATION",
+      "sha256": "7af8e24c830052a3dd187b6463fbd801f6b3516d5470cb07d3e40e65ae1730d0"
+    },
+    {
+      "path": "distillation/src/hds_distill/post_audit_causal_ir_schema.py",
+      "role": "PH_D02C_IMPLEMENTATION",
+      "sha256": "d97fecffc0694e4cab7addb47d09481e2d2b67977c404205fb518549d2d721c8"
+    },
+    {
+      "path": "distillation/src/hds_distill/verification.py",
+      "role": "PH_D02C_IMPLEMENTATION",
+      "sha256": "da9b940e232dbd6dd47cf813a345d1b7ca0a03be2f4bdee42b75e05e8db5186b"
+    },
+    {
+      "path": "distillation/tests/unit/test_causal_ir.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "0b95b5cc06c713d7a06834c27466308e3df4c242a394834ee7073f58e102fd14"
+    },
+    {
+      "path": "distillation/tests/unit/test_golden_corpus.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "a5a95f4756f26a191c4dd1abba9472d1ab91e2181e6587cc133c28e442c45441"
+    },
+    {
+      "path": "distillation/tests/unit/test_post_audit_causal_ir_schema.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "5e58cc9677d39ff0d68f160178ff33bf12920f6532d19cef4400600b4e033471"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "1056a3ab832a7928ae7ab276d936631a0f125a89be0e25fd60da7e3dc639b5ff"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "799acee281cfbf26687f98ccb86726e1d12f4ea9867d1741a4c10f57cac59bbe"
+    },
+    {
+      "path": "docs/strategy/contracts/POST_AUDIT_CAUSAL_IR_CONTRACT_V1.json",
+      "role": "NORMATIVE_CAUSAL_IR_CONTRACT",
+      "sha256": "c3cfcd6a923315659f343bc30f0341ad0100e11c4aec88337c6d9cb957596b31"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V11.json",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "55ca908437c2a674c7eed814bccdd3dcb7c89884fb08e84be270ec53fdb46870"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "a4c0a0508ea26e311c7da672a937531dc8ca1b88eb9755b41f2389c736115d7e"
+    },
+    {
+      "path": "scripts/build_ph_d02c_causal_ir.py",
+      "role": "CAUSAL_IR_ARTIFACT_BUILDER",
+      "sha256": "42e1aee49528b47890db038bf7c9ae751d2f05fe5613bc15720a4cb0a8075676"
+    },
+    {
+      "path": "scripts/validate_rev3_governance.py",
+      "role": "PH_D02C_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "377ae984172361d10d7bfcefdab1f3a8edf3e30edd7bfd99a56f06c48db2f97b"
+    },
+    {
+      "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+      "role": "OWNER_STANDING_AUTHORIZATION",
+      "sha256": "c4bdbe9dac72f2a2148a0217e6c637817a6434854e063e395e4a9abc93c5fcbe"
+    },
+    {
+      "path": "control/rev3/D02B_PHASE_STATE.json",
+      "role": "APPROVED_PREDECESSOR_PHASE_STATE",
+      "sha256": "5d26a6c4fea0fbf7783db9ab9dc83e47a9d8aba6618494e5c2ea7f81c7823225"
+    },
+    {
+      "path": "control/rev3/PH-D02B_EVIDENCE_ATTESTATION.json",
+      "role": "APPROVED_PREDECESSOR_EVIDENCE_ATTESTATION",
+      "sha256": "6325e95ee78f3f14065a4441a820869e62551c635d17a1f83438be681ea1936e"
+    },
+    {
+      "path": "control/rev3/PH-D02B_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "APPROVED_PREDECESSOR_EVIDENCE_PAYLOAD",
+      "sha256": "ffb42d78bea52d7db9941979eea28e4c1b2fe431532bf32cf1ae8c8b32abb8d4"
+    },
+    {
+      "path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D02B_TO_PH-D02C_20260731.json",
+      "role": "CURRENT_PHASE_ENTRY_OWNER_DECISION",
+      "sha256": "5a9cb62bf9b208896d84b2a1fc2093f75abec1d8eeae2e2f56ee93b2f34ea3c1"
+    },
+    {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D02B_TO_PH-D02C_20260731.json",
+      "role": "CURRENT_PHASE_ENTRY_OWNER_APPROVAL",
+      "sha256": "e504ea71bac471bdd4eeab4eec3a4582ceeeb1cc005a1651a73327a93127998e"
+    },
+    {
+      "path": "distillation/input/post_audit_schema_bundle_contract.json",
+      "role": "APPROVED_PREDECESSOR_SCHEMA_CONTRACT",
+      "sha256": "89a7bc03381bce1e12924526fde31350958ad28d00add9d2119adc9d6035ded4"
+    },
+    {
+      "path": "distillation/artifacts/reports/post_audit_schema_bundle_conformance.json",
+      "role": "APPROVED_PREDECESSOR_SCHEMA_CONFORMANCE",
+      "sha256": "ea947b0f29f3c2f56e2a07faeaae097952c512421f98154c7457f2505d7aa23a"
+    },
+    {
+      "path": "distillation/artifacts/test_vectors/post_audit_schema_bundle_examples.json",
+      "role": "APPROVED_PREDECESSOR_VALID_SCHEMA_VECTORS",
+      "sha256": "9a21362ce3928096addf56e24049e34e628dbd570b2bd70bc87103eb4235aa11"
+    },
+    {
+      "path": "distillation/artifacts/test_vectors/post_audit_schema_bundle_invalid_cases.json",
+      "role": "APPROVED_PREDECESSOR_INVALID_SCHEMA_VECTORS",
+      "sha256": "1ad641b48a62c344821f34a58ff79149cca57f7000ce008f07e02363dcdc89c8"
+    },
+    {
+      "path": "distillation/pyproject.toml",
+      "role": "DISTILLATION_DEPENDENCY_LOCK",
+      "sha256": "ffd1a64edcb901145641031c1a42ad8b51464412d2a339cf6e1f8491b66c2826"
+    }
+  ]
+}
