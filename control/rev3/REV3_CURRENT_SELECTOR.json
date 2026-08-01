@@ -1,30 +1,28 @@
 {
-  "active_phase": "PH-D05",
+  "active_phase": "PH-D06",
   "audit_baseline_commit": "3a7d96755cf6819d36e824fe4b64ae4086f1af98",
   "audit_report_sha256": "8536f4644fdc56cc71fa5a43699b43894c8f5d2c007ff772d68c29cc4546c1c1",
   "authority_manifest_path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
   "current_phase_candidates": {
-    "classification": "ARC3_TEACHER_TRAJECTORY_NORMALIZATION_IN_PROGRESS",
+    "classification": "MULTI_HYPOTHESIS_CORPUS_IN_PROGRESS",
     "eligible_for_phase_exit": false,
     "paths": [
-      "analysis/rev3/ph_d05_teacher_trajectory_preinventory.json",
-      "control/rev3/PH-D05_WORK_BLOCK_FRAME.json",
-      "control/rev3/PHASE_TRANSITIONS/PH-D03B_TO_PH-D05.json",
-      "distillation/input/arc3_teacher_trajectory_normalization_contract.json",
-      "distillation/src/hds_distill/arc3_trajectory_normalization.py",
-      "distillation/tests/unit/test_arc3_trajectory_normalization.py",
-      "distillation/artifacts/reports/arc3_teacher_recording_acquisition.json",
-      "distillation/artifacts/reports/arc3_teacher_replay_x3.json",
-      "distillation/artifacts/reports/arc3_teacher_trajectory_normalization.json",
-      "distillation/artifacts/teacher/arc3/ph_d05_v1/manifest.json",
-      "distillation/artifacts/teacher/arc3/ph_d05_v1/rebuild_x3.json",
-      "scripts/acquire_ph_d05_teacher_recordings.py",
-      "scripts/ph_d05_replay_worker.py",
-      "scripts/run_ph_d05_replay_x3.py",
-      "scripts/build_ph_d05_teacher_trajectories.py"
+      "analysis/rev3/ph_d06_hypothesis_candidate_preinventory.json",
+      "control/rev3/PH-D06_WORK_BLOCK_FRAME.json",
+      "control/rev3/PHASE_TRANSITIONS/PH-D05_TO_PH-D06.json",
+      "distillation/input/arc3_hypothesis_candidate_generation_contract.json",
+      "distillation/src/hds_distill/hypothesis_generation.py",
+      "distillation/tests/unit/test_hypothesis_generation.py",
+      "distillation/artifacts/candidates/arc3/ph_d06_v1/manifest.json",
+      "distillation/artifacts/candidates/arc3/ph_d06_v1/rebuild_x3.json",
+      "distillation/artifacts/reports/arc3_hypothesis_candidate_generation.json",
+      "distillation/artifacts/reports/arc3_hypothesis_source_blind_execution.json",
+      "distillation/artifacts/reports/arc3_hypothesis_llm_capture.json",
+      "scripts/ph_d06_candidate_worker.py",
+      "scripts/build_ph_d06_hypothesis_candidates.py"
     ]
   },
-  "current_work_class": "PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION",
+  "current_work_class": "PH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATION",
   "distilled_initial_state_bundle_status": "NOT_FROZEN",
   "historical_evidence": {
     "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
@@ -61,14 +59,14 @@
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "installation_status": "INSTALLED",
-  "next_phase_after_current_phase": "PH-D06",
+  "next_phase_after_current_phase": "PH-D07A",
   "phase_entry_approval": {
-    "approval_artifact_digest": "owner-approval-record:42ba4fc83bc4cb750d1e3ac3a011741a68f557bdd02f06f308860b15567d37f1",
-    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D03B_TO_PH-D05_20260731.json",
-    "decision_capture_digest": "sha256:4eb6fdb70f8e4c37883966b17485c318eda07dcd182c0c9dfae90a1ac0f4bcfe",
-    "decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D03B_TO_PH-D05_20260731.json",
-    "target_artifact_digest": "sha256:88a5fe85e322640315e3121e0bfd150c96fa05e8119fcdd21b5e391abb9b6e55",
-    "target_evidence_commit": "caab292eaf3b67de87dcb1a4ae684d6f7dc1a360"
+    "approval_artifact_digest": "owner-approval-record:a2dae0790796b2b9169f8c88e91f704f59226ef8b98ff3342296c09a448a5376",
+    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D05_TO_PH-D06_20260801.json",
+    "decision_capture_digest": "sha256:fa327550ff6c9c0aa81c24589bfa16334ac4d591db6223c48af8ba2f8c5f098b",
+    "decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D05_TO_PH-D06_20260801.json",
+    "target_artifact_digest": "sha256:eb17f67a8a637528a77f0d4fab5a85e6742d7d707adad8e6a66562fc78540a85",
+    "target_evidence_commit": "ab634857aafb952c09917791b6b10d6be8f1efd7"
   },
   "ph_d00a_status": "OWNER_APPROVED_PASS",
   "ph_d00b_status": "OWNER_APPROVED_PASS",
@@ -81,7 +79,7 @@
   "ph_r00_status": "OWNER_APPROVED_PASS",
   "ph_r1_status": "OWNER_APPROVED_PASS",
   "runtime_activation_status": "SUSPEND",
-  "schema_version": "arc3-rev3-current-selector-v14",
+  "schema_version": "arc3-rev3-current-selector-v15",
   "standing_authorization": {
     "content_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
     "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json"
@@ -90,5 +88,6 @@
   "strategy_status": "OWNER_APPROVED",
   "ph_d03a_status": "OWNER_APPROVED_PASS",
   "ph_d03b_status": "OWNER_APPROVED_PASS",
-  "ph_d05_status": "IN_PROGRESS"
+  "ph_d05_status": "OWNER_APPROVED_PASS",
+  "ph_d06_status": "IN_PROGRESS"
 }

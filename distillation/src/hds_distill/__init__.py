@@ -1,9 +1,10 @@
-"""Isolated HDS schema, evidence, and teacher-normalization package.
+"""Isolated HDS schema, evidence, and hypothesis-generation package.
 
-The active PH-D05 boundary admits content-verified raw teacher recordings and
-strict OFFLINE replay captures only to produce lossless canonical trajectory
-evidence.  It exports no hypothesis selection, causal assertion, promoted
-Rule, Bridge, agent runtime, Owner authority, official connector, or
+The active PH-D06 boundary consumes the Owner-approved canonical PH-D05
+teacher corpus in a source-blind process and emits bounded, executable,
+unselected HypothesisIR alternatives plus fail-closed privilege-adversary
+rejections. It exports no fit result, hypothesis selection, causal assertion,
+promoted Rule, Bridge, agent runtime, Owner authority, official connector, or
 submission capability.
 """
 

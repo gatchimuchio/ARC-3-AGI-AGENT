@@ -3,9 +3,10 @@
 - Package status: `OWNER_APPROVED`
 - Installation status: `INSTALLED`
 - PH-R-1 status: `OWNER_APPROVED_PASS`
-- Current work class: `PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION`
-- Active phase: `PH-D05`
-- `PH-D05`: `IN_PROGRESS`
+- Current work class: `PH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATION`
+- Active phase: `PH-D06`
+- `PH-D06`: `IN_PROGRESS`
+- `PH-D05`: `OWNER_APPROVED_PASS`
 - `PH-D03B`: `OWNER_APPROVED_PASS`
 - `PH-D03A`: `OWNER_APPROVED_PASS`
 - `PH-D02C`: `OWNER_APPROVED_PASS`
@@ -75,7 +76,7 @@ S5/P22 compiled policy = historical/quarantine
 
 既存成果物は削除しない。監査是正後のOwner承認とStrategy Installationは成立したが、監査前成果物を現在のPhase通過証拠またはactive selectorとして使用しない。
 
-## PH-D03B承認済み証拠とPH-D05現行境界
+## PH-D05承認済み証拠とPH-D06現行境界
 
 - source-blind三roleは別process・別mount projectionで固定し、Executor/Auditorのenvironment source mountとrepository-root visibilityを0件として検証する。
 - 現行environment/run bindingにより監査前PH-D02B成果物3件が失効することを`distillation/artifacts/reports/ph_d01b_downstream_invalidation.json`へexact digest付きで記録する。
@@ -90,10 +91,14 @@ S5/P22 compiled policy = historical/quarantine
 - PH-D03Bでは、承認された16件のexpected-artifact digestだけをlabelなしcommitment setへ固定し、Golden source、target bundle、decision、ApprovalRecord、evidenceのexact digestをsealed manifestへ拘束する。
 - Sealed namespaceにはexpected artifact plaintextとfixture identifierを保存しない。runnerはsubmission digestを再計算し、出力をexact `PASS\n`／`FAIL\n`だけに限定し、repository外のmutable ledgerで最初のaudit attemptをconsumeする。
 - PH-D03Bの`DISTILLATION_CONFORMANCE_CORPUS_FROZEN`はOwner承認済みである。
-- PH-D05ではexact 25 raw recordingを外部cacheでbyte検証し、全25 game／183 level／11,574 canonical actionをlossless canonical trajectoryへ正規化する。
+- PH-D05ではexact 25 raw recordingを外部cacheでbyte検証し、全25 game／183 level／11,574 canonical actionをlossless canonical trajectoryへ正規化し、exact evidenceへOwner承認を拘束済みである。
 - strict OFFLINE replay x3はcanonical frame／action／availability／terminal／progress mismatch 0、source pre/post identity、network denial、secret scrub、write allowlist、fixed seedを必須とする。
 - canonical manifest、25 package、normalization reportは独立3 processでbyte-identical rebuildする。
-- 現行境界は`ARC3_CANONICAL_TEACHER_TRAJECTORIES_COMPLETE`までである。PH-D06 hypothesis candidate generation、因果主張、intervention、Rule promotion、Bridge、Runtimeは開始しない。
+- PH-D06では25 teacher caseごとに18候補、合計450候補をsource-blind processで生成する。各caseは16 executable typed IRと、answer-copy／identity-routingを生成後に拒否した2 adversarial candidateを持つ。
+- selector familyとoperator／ordering familyの異なる非strawman代替を保持し、candidate auto-adoption、teacher fit、因果主張、intervention、promotionをすべて0に固定する。
+- candidate manifestと25 packageは独立3 processでbyte-identical rebuildし、Executorへのenvironment source mount、repository-root visibility、network、secret継承を0件として検証する。
+- source-blind実行はGit外のexact Python 3.12.13 runtimeに固定し、archive SHA-256、4,522-entry tree digest、interpreter digestを3 processすべてで一致させる。build中のnetwork取得とruntimeのGit格納は認めない。
+- 現行境界は`MULTI_HYPOTHESIS_CORPUS_COMPLETE`までである。PH-D07A teacher fit、PH-D07B intervention、Rule promotion、Bridge、Runtimeは開始しない。
 
 ## 機械可読契約
 
@@ -120,6 +125,7 @@ S5/P22 compiled policy = historical/quarantine
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V12.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V13.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V14.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V15.json`
 - `docs/strategy/contracts/POST_AUDIT_CAUSAL_IR_CONTRACT_V1.json`
 - `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 

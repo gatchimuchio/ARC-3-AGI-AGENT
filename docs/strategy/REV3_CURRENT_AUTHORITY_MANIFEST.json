@@ -1,12 +1,12 @@
 {
-  "schema_version": "arc3-rev3-current-authority-manifest-v12",
+  "schema_version": "arc3-rev3-current-authority-manifest-v13",
   "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
   "strategy_status": "OWNER_APPROVED",
   "installation_status": "INSTALLED",
   "installation_phase_id": "PH-R-1",
   "installation_phase_status": "OWNER_APPROVED_PASS",
-  "active_phase": "PH-D05",
-  "current_work_class": "PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION",
+  "active_phase": "PH-D06",
+  "current_work_class": "PH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATION",
   "ph_r00_status": "OWNER_APPROVED_PASS",
   "ph_r00_owner_authorization": "ESTABLISHED",
   "ph_d00a_status": "OWNER_APPROVED_PASS",
@@ -25,21 +25,21 @@
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "phase_entry_approval": {
-    "approval_artifact_digest": "owner-approval-record:42ba4fc83bc4cb750d1e3ac3a011741a68f557bdd02f06f308860b15567d37f1",
-    "decision_capture_digest": "sha256:4eb6fdb70f8e4c37883966b17485c318eda07dcd182c0c9dfae90a1ac0f4bcfe",
-    "from_phase": "PH-D03B",
-    "target_artifact_digest": "sha256:88a5fe85e322640315e3121e0bfd150c96fa05e8119fcdd21b5e391abb9b6e55",
-    "target_evidence_commit": "caab292eaf3b67de87dcb1a4ae684d6f7dc1a360",
-    "to_phase": "PH-D05"
+    "approval_artifact_digest": "owner-approval-record:a2dae0790796b2b9169f8c88e91f704f59226ef8b98ff3342296c09a448a5376",
+    "decision_capture_digest": "sha256:fa327550ff6c9c0aa81c24589bfa16334ac4d591db6223c48af8ba2f8c5f098b",
+    "from_phase": "PH-D05",
+    "target_artifact_digest": "sha256:eb17f67a8a637528a77f0d4fab5a85e6742d7d707adad8e6a66562fc78540a85",
+    "target_evidence_commit": "ab634857aafb952c09917791b6b10d6be8f1efd7",
+    "to_phase": "PH-D06"
   },
   "standing_authorization": {
     "content_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
     "external_irreversible_actions": "EXCLUDED_REQUIRES_SEPARATE_EXPLICIT_EXECUTION_INSTRUCTION"
   },
   "current_work_block": {
-    "content_digest": "rev3-work-block-frame:d21494a52736baf15e0ecfe046eeeb947ecffdc183c916c4ada25bcf9108dfab",
-    "entry_transition_digest": "rev3-phase-transition:00f50fe8fc9e77bc26d899392f36a097bdaea5e1f8620d0ef5018bb87254e36f",
-    "path": "control/rev3/PH-D05_WORK_BLOCK_FRAME.json"
+    "content_digest": "rev3-work-block-frame:9435534a2a6fbe43a1e38e5b34086ae00786288ce958a33a819d3761724c2c33",
+    "entry_transition_digest": "rev3-phase-transition:916b7d737e5814c13ad8e11866eacefe0a98cba5583f956fca2878658f956edd",
+    "path": "control/rev3/PH-D06_WORK_BLOCK_FRAME.json"
   },
   "runtime_gate": {
     "distilled_initial_state_bundle_status": "NOT_FROZEN",
@@ -54,17 +54,17 @@
     {
       "path": "AGENTS.md",
       "role": "EXECUTION_CONTROL",
-      "sha256": "37cbcc680cb619e8b30a77f25bec482c050246a00a4fd4001213949af02b3003"
+      "sha256": "bca44050cc96cf28474ab7ce2606af9280c46a766108ce2a0f3f08d4c19300a4"
     },
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
       "role": "PH_D03B_RUNTIME_GOVERNANCE_GUARD",
-      "sha256": "60b7279a83378bbf317977ec03a681be23943bb2414c617ecf948a597d31b947"
+      "sha256": "c43577644a6bb89b915e20a79186eefcea6a9a69abf8081197d036c715c94949"
     },
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
       "role": "PH_D03B_GOVERNANCE_REGRESSION_TEST",
-      "sha256": "2ad035a4188e46b86cec5c73985eca5e804c6e03d562deb69c02cb8284bb013e"
+      "sha256": "9b473185a1a7ebface893b80a39af655f5a21474177a61699fee503baa6d3d1e"
     },
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_kaggle_notebook_contract.py",
@@ -79,7 +79,7 @@
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
       "role": "PH_D03B_GOVERNANCE_AND_MIGRATION_TEST",
-      "sha256": "220a2ee52428ea89d71279b7d34ac92bc75330ce81fd93458194bfc58df384c8"
+      "sha256": "2075024cff18551708b7c6f8800c967e608632453a7454788b60c97fd74abd35"
     },
     {
       "path": "AUTHORITY_ORDER.md",
@@ -150,6 +150,11 @@
       "path": "analysis/rev3/ph_d05_teacher_trajectory_preinventory.json",
       "role": "PH_D05_TEACHER_TRAJECTORY_PREINVENTORY",
       "sha256": "e0269523770be7c83003d6d2443590ce94b6d3a2e55cbeb1a7b422a51e486a57"
+    },
+    {
+      "path": "analysis/rev3/ph_d06_hypothesis_candidate_preinventory.json",
+      "role": "PH_D06_HYPOTHESIS_CANDIDATE_PREINVENTORY",
+      "sha256": "8d2709d058e5d750325bbe74ccdb49d58d83eba33891e52e5872b6e71e213eea"
     },
     {
       "path": "analysis/rev3/pre_distillation_infrastructure_baseline.json",
@@ -230,6 +235,11 @@
       "path": "control/rev3/D03B_PHASE_STATE.json",
       "role": "PH_D03B_APPROVED_PHASE_STATE",
       "sha256": "fd8c80bc93baddcd76e2bac087106f09328614e8a7387e947ef91d5c93d6b200"
+    },
+    {
+      "path": "control/rev3/D05_PHASE_STATE.json",
+      "role": "APPROVED_PREDECESSOR_PHASE_STATE",
+      "sha256": "36106b122dfc0b90bfc48f1226ff2dcbdde854c5f441b36b43d7245a285827d7"
     },
     {
       "path": "control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/D00A_PHASE_STATE.json",
@@ -627,6 +637,11 @@
       "sha256": "6acf3d0e7c066ea4e62cbe7ec82fe82ec2c85e5cb3f3cc8d5efb8b1a005790d3"
     },
     {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D05_TO_PH-D06_20260801.json",
+      "role": "CURRENT_PHASE_ENTRY_OWNER_APPROVAL",
+      "sha256": "087e6a754c1f202c2cf1e4e9b9208d5d3499bf758a93ddfe718cc7e3ffc504ef"
+    },
+    {
       "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-R-1_TO_PH-R00_20260731.json",
       "role": "PREDECESSOR_PHASE_ENTRY_OWNER_APPROVAL",
       "sha256": "84f49b35e19dd0e573e5b16679d6231516ea45cad752aa2035f7cfa634afc971"
@@ -685,6 +700,11 @@
       "path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D03B_TO_PH-D05_20260731.json",
       "role": "PH_D05_ENTRY_DECISION",
       "sha256": "35b0cbe206b2e5e26a2ad6ae8a1f097d467132d0d8b716c2c0914c3dff17108d"
+    },
+    {
+      "path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D05_TO_PH-D06_20260801.json",
+      "role": "CURRENT_PHASE_ENTRY_OWNER_DECISION",
+      "sha256": "b7fd70fbec2873fc69283defdd9f0f41a77477184c8269b81183b812764eeace"
     },
     {
       "path": "control/rev3/OWNER_DECISION_CAPTURES/PH-R-1_TO_PH-R00_20260731.json",
@@ -1027,9 +1047,19 @@
       "sha256": "8ba5080b1b7c61717d62693d64409cd6df9385a240da6485926f622b11a6ed74"
     },
     {
+      "path": "control/rev3/PH-D05_EVIDENCE_ATTESTATION.json",
+      "role": "APPROVED_PREDECESSOR_EVIDENCE_ATTESTATION",
+      "sha256": "305f7dcaa752dc1b4ce8a0256a30d41c8a4698afc1b65e8fd24905283327fb2b"
+    },
+    {
       "path": "control/rev3/PH-D05_WORK_BLOCK_FRAME.json",
       "role": "CURRENT_WORK_BLOCK_FRAME",
       "sha256": "088135583d70868897160ad6fb464abba74a4836fd479b356fc10f727b5c2a96"
+    },
+    {
+      "path": "control/rev3/PH-D06_WORK_BLOCK_FRAME.json",
+      "role": "CURRENT_WORK_BLOCK_FRAME",
+      "sha256": "bb1080501f540fe192c2127af3007b3d648cc929f6d92cb1ccb3ace334f5a92d"
     },
     {
       "path": "control/rev3/PH-R-1_EVIDENCE_ATTESTATION.json",
@@ -1112,6 +1142,11 @@
       "sha256": "0fa67b40572baef442bcc33e62773cec4b0377684a38a15119c0a3c10cafa1a4"
     },
     {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-D05_TO_PH-D06.json",
+      "role": "CURRENT_PHASE_ENTRY_TRANSITION",
+      "sha256": "48e1e6f2ff4574ee75924f02b3f023536577c58b461d22a9a91cebb214da1dca"
+    },
+    {
       "path": "control/rev3/PHASE_TRANSITIONS/PH-R-1_TO_PH-R00.json",
       "role": "PREDECESSOR_PHASE_ENTRY_TRANSITION",
       "sha256": "eb886c002bcf22d9c5630b6e2541edf41e301a615d14c91be40024cc36aaf56d"
@@ -1129,7 +1164,7 @@
     {
       "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
       "role": "CURRENT_PHASE_SELECTOR",
-      "sha256": "575b4916093d2b53942c173f68fb50a8a2938ff409e4e1421385361d41cb3d15"
+      "sha256": "fecd37b8a9282e7df379c747f7d32d36c8f8efef1ec0832334092924c98af210"
     },
     {
       "path": "control/rev3/REV3_DOC_FIX_EVIDENCE_ATTESTATION.json",
@@ -1144,7 +1179,142 @@
     {
       "path": "distillation/README.md",
       "role": "PH_D03A_DISTILLATION_DOCUMENTATION",
-      "sha256": "4d093eed596ba531e28cbe3dea80ec50a43183fda79b00237ea62ed4639e7a03"
+      "sha256": "06abf0c6dee8815605f5ceead1d20434f90ed92416115e72dc84f7ecbc75abae"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/0202297cc14feb33d129795ef730839f7cc3e8bef70a57e221a1a8108a220290.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "804993b9eb2660f54ec8ac9b4e6278658da4ea589d125665933d7e63c5eb9c1c"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/1d3ec1c17aac5f4a2898068adc2e533b82e89c5ae7d7718cc69447b9106101bf.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "21f42e7f19dceb70d8a138e1b1eef9982edbf081541e431982cd1b89c43805cb"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/22806ea978e3b054093af49e26bfd15ffb08d54504bdb49c4da8cdb1ce69c9c9.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "93007fe66f7449232f58d71672a0893eec2d3ef0c246ab829b726a649c918488"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/293085e3ac11b39c1be8431a387370f0b0c92e9bf8b4d35339ea3e34878eb63f.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "0d8557490eff67b45428529bc23573121b2843bbfdaf01fe440fa9f4656a3f70"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/2da06304d034d54652295cf00c053b80139bfd12918c0b40434f9eb64536887f.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "79f67665634b8cb18b04625e5e6d60ea70d2047923119519aad36c14f5dcc1a1"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/4108d3386cd9c2d4e3193acf7c7420d73a4c20bfc55cac0a6841dfdd8a5e0b95.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "999a9ae373d8f6e8db518d0011048f39c792acc81bbb2507b3ffe0e528ab981d"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/4c835f3adf4851a6e14a1d8c175271197520fe96a96063e3675b630a186bf50b.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "e8c481966bb63e46c4e419d2a066ab63bd2f904ed939fe927fa2dfa8296f2a15"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/5323e4fd0cde0d7e0c89e64f668d778b3f189c2edc26559318c4fdaba9b2f6df.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "d804782a301adeec1475623f9dc697a7d19c1c444eccf48213b162ce22e1fd2d"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/57b9eec94b95e89e45b289b5824d175afc3ba67f02f86e7d1a4b7ad7e9719662.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "a05b917f450af8031d568f383c6eaeb30e17cd2ff9860eeb2b910fd7251a1268"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/63f05e4de83c38e1ca89dd3531f8b6e4a56603cb805f432eec9972b8efad6179.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "40a182d589d2049825c64c55de58e2e6b7b056e929b372fdd67a0e18c35d46ec"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/779fb747461657e227db0f825a653ead7260f6def0e148d15d76cf6929bd152c.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "ba05a7920fb1b5c859f9c59f4c1f9bbd33832a2c5ea590e0eb69e39008143d74"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/8175b81266b5b0b1a35fe8bf3ef742103d1d34da45b7a8388ba08ef6daaca0b0.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "37f8caadd12fa4a466b63b0d1af3772c165c22a06d7036a2da609ae448e6b0cb"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/855dd5d127ebae4484f38afc1bd9db9f4b31e9fd9577f3b8073111471d42c454.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "eb2446781f51e1e97ca6daca0eff860fb51a274205b0f0bda8119d09f1a05589"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/89f2f68a109c2ae5094d890d42046f76a931d489fdd01b8ed02b6506f2343d51.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "410773b038d78fc5e23ad4021f457295cab7dfbbf67b805833a97eed178d8f9f"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/8e1c364012996970a0d4026d69251f7d5dc501328cd27802fa6e3693d2648318.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "eeb7863f39bc097915d4281d6342e496bdc29ff931c3313b6783afcb538568b2"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/967582df9e2b4ee4fec307b96a1c0d763193289609e8c5708a5a8090d71eef90.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "d26eb127b14f1eabd1d44b3bfc7348a003513713b306fd690154731271a01bb8"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a04f36c9ffedff54a6edf4d20cf36d9bd80827cf493db6df2fecd84bcb30c67f.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "5f724b8011f80bf35e75055f779298f6c4d159e59c4dab1356d3e4eee7f3ee22"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a36d9b92954df5190601e990584b9d9950e51dd95ca3fb0722e0575b29d0136e.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "a8f6e842b4ae858690a2955cf97a607b774af353c383eeba74adfb9841a750cc"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a376456ba4cd25802ff8832be2e923b640c838da5e4c7d132506c419189ad83d.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "ac5d7f0cdd33c9552a162b3415a614922ae2ea800e9c84e613dfdb37ee5eb0a7"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/ad8aeb40f358cc3331f82e37fd16e477b13fe2b30f968c53e8156fca20a469e5.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "d4740204614ce00aed520b28983a8b7af12935e1ed65abf74fb86d8cc7272e2d"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/b22fae1456959ac5b21ae8a93da1703982972bd14874df28c0bcf8625e2abf9d.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "43bcfd72876a7e5ce7cf3fc53d430bfba2ee6e71a0ac41d7330a3d37938337fd"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/b47fdaa92c281a93d231af48bc980c9febc7c41575e6ad1d42c802c807c35cb9.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "ca041fd1312bba1f3b3e62d8c553ca0d2485489ee443892259b935b26401b9bf"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/d44fa16a633449b13b6d15b528c0dcd6c401d71d16d7d98d38bf085bcbc929cc.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "c936a76d24f14d44a0df05e3ef9b4d3ec0caa7cc91627bf6872a24eeb707ae87"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/e7bd05fb6f10c828e6b6413d19077c0011edbbbb09f5c2851d14e30fd546f026.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "47614a0fd13c666da4e5bb6e865c0f910208614d091f71817f5d7479fcbb74c5"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/ff8ecbf8317a5d9bc29fdd941021706b36f6e1d05560ce72627c0dc865a4b446.json.gz",
+      "role": "PH_D06_HYPOTHESIS_CASE_PACKAGE",
+      "sha256": "6a07de775f59f9d60e4336ff14b7f8c1bff0cd51506a63584e84e230a10cabbe"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/manifest.json",
+      "role": "PH_D06_CANDIDATE_CORPUS_MANIFEST",
+      "sha256": "6f8f6a45a2ffed674584c360814926d8f3a0046184cccffad0671865e55e0109"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/rebuild_x3.json",
+      "role": "PH_D06_DETERMINISTIC_REBUILD_EVIDENCE",
+      "sha256": "182b2a8fde9e6fac5668cf2a2d837fd757bc97613f4dd2d91acb607777a2001a"
     },
     {
       "path": "distillation/artifacts/golden/candidate_cases.json",
@@ -1182,6 +1352,21 @@
       "sha256": "63ecd3be1a8763a70ac09d86c64a235bd55676caedd5a0866f6f80cda8e826bd"
     },
     {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_candidate_generation.json",
+      "role": "PH_D06_CANDIDATE_GENERATION_REPORT",
+      "sha256": "990d2c3edc843815fc23240d0e4ef7e5c3435be9bd41a5796d17390ec321f4b9"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_llm_capture.json",
+      "role": "PH_D06_LLM_CAPTURE_REPORT",
+      "sha256": "2bcdc69e3d273f395a58ececb713af163863451bf97a6f7fb4919e9c6aa1c8a6"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_source_blind_execution.json",
+      "role": "PH_D06_SOURCE_BLIND_EXECUTION_REPORT",
+      "sha256": "ef341d260f68b3fdec89d15200e75bad61b968d29a3cd503a0b551840c1541d9"
+    },
+    {
       "path": "distillation/artifacts/reports/arc3_teacher_recording_acquisition.json",
       "role": "PH_D05_ACQUISITION_REPORT",
       "sha256": "250c6636f9a6987840fb4c944332b6ef469e326a556855717ecf93e444fafa30"
@@ -1209,7 +1394,7 @@
     {
       "path": "distillation/artifacts/reports/distillation_scope_audit.json",
       "role": "CURRENT_DISTILLATION_SCOPE_AUDIT_REPORT",
-      "sha256": "9e3531bbaedb43d19aa03442c8120600380eee78f3a18073fcd1da93f630fb74"
+      "sha256": "7866061b5abca0f68ff680cdae33c10638505f8b51549b4cd33d9a73e40091b5"
     },
     {
       "path": "distillation/artifacts/reports/environment_isolation.json",
@@ -1454,7 +1639,12 @@
     {
       "path": "distillation/input/README.md",
       "role": "PH_D03A_INPUT_DOCUMENTATION",
-      "sha256": "f70324d2bc3b3e8cc5b0a3fe478abf6086c39b0b1b07d6feec99c749bb410d03"
+      "sha256": "38b80e895f99c52ec3083225844ca6d3df9c1fd3c77137008ec17a9f7fd3329d"
+    },
+    {
+      "path": "distillation/input/arc3_hypothesis_candidate_generation_contract.json",
+      "role": "PH_D06_CANDIDATE_GENERATION_CONTRACT",
+      "sha256": "a60e51eb01c72d3fec96fa7a302598174341f64f151c0984c6439a98aa127aa6"
     },
     {
       "path": "distillation/input/arc3_teacher_trajectory_normalization_contract.json",
@@ -1719,7 +1909,7 @@
     {
       "path": "distillation/src/hds_distill/__init__.py",
       "role": "PH_D03A_PACKAGE_BOUNDARY",
-      "sha256": "8ba655d5cd1b63d288c96098b56f2128b30cd8edd4111d26dfe86a8e30aff823"
+      "sha256": "6a5ea40a54fc361577296d0fbe982cba8b26f122477f94394cc1f503d553ff31"
     },
     {
       "path": "distillation/src/hds_distill/arc3_trajectory_normalization.py",
@@ -1740,6 +1930,11 @@
       "path": "distillation/src/hds_distill/golden_corpus.py",
       "role": "PH_D03A_GOLDEN_COMPILER_AND_VALIDATOR",
       "sha256": "314c28dc1f9e0984d29371af596b3c877ac285f0f6059d7bd5975611446fa846"
+    },
+    {
+      "path": "distillation/src/hds_distill/hypothesis_generation.py",
+      "role": "PH_D06_HYPOTHESIS_GENERATION_IMPLEMENTATION",
+      "sha256": "efaff6dc2cba0227b76697d1d4ee6773b9ef0083e6ba17d29373a3a5d24899d4"
     },
     {
       "path": "distillation/src/hds_distill/interpreter.py",
@@ -1824,7 +2019,12 @@
     {
       "path": "distillation/tests/unit/test_golden_corpus.py",
       "role": "PH_D03A_GOLDEN_TEST",
-      "sha256": "738ca180c756b94069734d1e6a66c354d51e27464607a369816b0a2c82c1fe9f"
+      "sha256": "8660a60534b6bd51e31eb78561b9b705e6114e3434dcf162fc330bf28fcc423c"
+    },
+    {
+      "path": "distillation/tests/unit/test_hypothesis_generation.py",
+      "role": "PH_D06_HYPOTHESIS_GENERATION_TEST",
+      "sha256": "d0d2e3ff5615e2775aeb0983ecf4df837d6b5f4df0d149766efe45919c1c89fe"
     },
     {
       "path": "distillation/tests/unit/test_manifest_freeze.py",
@@ -1909,7 +2109,7 @@
     {
       "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
       "role": "CURRENT_STRATEGY_INDEX",
-      "sha256": "db5abd9adfc5ff160dcc9ede35c2e1a1f0ace534751508f4da92c6c78c1caf63"
+      "sha256": "28f93326f8769d13e097220b4fb427b0e436c9f378dcb3d131a0363c1a5b52f0"
     },
     {
       "path": "docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
@@ -2017,6 +2217,11 @@
       "sha256": "ae87d7e82542c1bf01e90d3cf3349e61202df96380a12cf1889214d47c4eac4c"
     },
     {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V15.json",
+      "role": "CURRENT_SELECTOR_SCHEMA",
+      "sha256": "3f7edd3662cc79fba5b67d9ad631a2b7217473ed2c4a05afb6761cd6a8a8e61d"
+    },
+    {
       "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V3.json",
       "role": "HISTORICAL_GOVERNANCE_SCHEMA",
       "sha256": "b975b852f10a2b1652bfd74f0398bff24427d3d05f0a736eb35c82864ce868b2"
@@ -2054,7 +2259,7 @@
     {
       "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
       "role": "GOVERNANCE_CONTRACT",
-      "sha256": "c04fcfe04ccabb3b93e2fd336461b7e16ac6682ba30792a8aa14873b473eee30"
+      "sha256": "a08ec158dcca3c0b6e85565f66faa5c812ace141f8e85aa144879738dae5a30e"
     },
     {
       "path": "runtime/REFERENCE_ONLY.md",
@@ -2117,6 +2322,11 @@
       "sha256": "6137dab1fc7c14233fb6c6e20aeb46281b220b2ceeda241a30427cd7f0860c06"
     },
     {
+      "path": "scripts/build_ph_d06_hypothesis_candidates.py",
+      "role": "PH_D06_DETERMINISTIC_BUILDER",
+      "sha256": "21f6f0ddd6db77047145a9ff01e33d1d8bdb815df02eec8e1a09a5d6170041c7"
+    },
+    {
       "path": "scripts/package_rev3_strategy.py",
       "role": "GOVERNANCE_TOOL",
       "sha256": "b113db5ef3d83dc8e561bc7a5328eb3ff20e99a12c8ce3c6ac04f8cdfd81396f"
@@ -2125,6 +2335,11 @@
       "path": "scripts/ph_d05_replay_worker.py",
       "role": "PH_D05_ISOLATED_REPLAY_WORKER",
       "sha256": "09cab53efe663bfde0eb0e95d488db08a66dca8a4ca29eab7b427238bdbdbc0b"
+    },
+    {
+      "path": "scripts/ph_d06_candidate_worker.py",
+      "role": "PH_D06_SOURCE_BLIND_WORKER",
+      "sha256": "61847437bf05d81e306005101fe37d55a67342a55d8de13463e8e47eb4f6ca68"
     },
     {
       "path": "scripts/refresh_rev3_authority_manifest.py",
@@ -2149,7 +2364,7 @@
     {
       "path": "scripts/validate_rev3_governance.py",
       "role": "GOVERNANCE_VALIDATOR",
-      "sha256": "c379921b8de8c805812d7d218300350447d43687cc996e415c3783dac73082fc"
+      "sha256": "03b61167778e914ae7e60e3728caf2434cc07973eac20c9d6854ccb86b015a1e"
     },
     {
       "path": "scripts/verify_source_blind_execution.py",
@@ -2157,16 +2372,17 @@
       "sha256": "dc414a353800845057010694ac09bc7de616cfae0f384f13b1f829b6f1669f19"
     }
   ],
-  "entry_count": 421,
+  "entry_count": 464,
   "digest_excluded_fields": [
     "content_digest"
   ],
-  "content_digest": "rev3-current-authority-manifest:9a815ac92352e3cb844ab2f28d542a58773b5596a0c4d5196a8f1ac633bf158e",
+  "content_digest": "rev3-current-authority-manifest:6752963fbeefe5193e7fc7460595c001663864ed5991df568b66f770925d3eab",
   "ph_d01b_status": "OWNER_APPROVED_PASS",
   "ph_d02a_status": "OWNER_APPROVED_PASS",
   "ph_d02b_status": "OWNER_APPROVED_PASS",
   "ph_d02c_status": "OWNER_APPROVED_PASS",
   "ph_d03a_status": "OWNER_APPROVED_PASS",
   "ph_d03b_status": "OWNER_APPROVED_PASS",
-  "ph_d05_status": "IN_PROGRESS"
+  "ph_d05_status": "OWNER_APPROVED_PASS",
+  "ph_d06_status": "IN_PROGRESS"
 }

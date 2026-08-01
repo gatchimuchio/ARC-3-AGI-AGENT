@@ -1,0 +1,134 @@
+{
+  "$id": "https://gatchimuchio.invalid/schemas/rev3-current-selector-v15.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Rev3CurrentSelectorPHD06",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"const": "arc3-rev3-current-selector-v15"},
+    "strategy_id": {"const": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"},
+    "strategy_status": {"const": "OWNER_APPROVED"},
+    "installation_status": {"const": "INSTALLED"},
+    "ph_r1_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_r00_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_r00_owner_authorization": {"const": "ESTABLISHED"},
+    "ph_d00a_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d00b_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d01a_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d01b_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d02a_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d02b_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d02c_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d03a_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d03b_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d05_status": {"const": "OWNER_APPROVED_PASS"},
+    "ph_d06_status": {"const": "IN_PROGRESS"},
+    "active_phase": {"const": "PH-D06"},
+    "current_work_class": {"const": "PH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATION"},
+    "next_phase_after_current_phase": {"const": "PH-D07A"},
+    "distilled_initial_state_bundle_status": {"const": "NOT_FROZEN"},
+    "runtime_activation_status": {"const": "SUSPEND"},
+    "authority_manifest_path": {"const": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json"},
+    "audit_baseline_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "audit_report_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "installation_approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "decision_capture_path": {"const": "control/rev3/OWNER_DECISION_CAPTURES/REV3_DOC_FIX_TO_PH-R-1_20260731.json"},
+        "decision_capture_digest": {"const": "sha256:58d3caa32976cf6288818e58e225228d4e0e5a1c710c44f67ee164561ea931dd"},
+        "approval_record_path": {"const": "control/rev3/OWNER_APPROVAL_RECORDS/REV3_DOC_FIX_TO_PH-R-1_20260731.json"},
+        "approval_artifact_digest": {"const": "owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8"},
+        "target_evidence_commit": {"const": "95c8fb0f1551716191769747d65816e273cf7640"},
+        "target_artifact_digest": {"const": "sha256:3fe2ae584a5df80ac80e6f44b66446f7ad11e926530a552a98b4d7643041e219"}
+      },
+      "required": ["decision_capture_path", "decision_capture_digest", "approval_record_path", "approval_artifact_digest", "target_evidence_commit", "target_artifact_digest"]
+    },
+    "standing_authorization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "path": {"const": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json"},
+        "content_digest": {"const": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed"}
+      },
+      "required": ["path", "content_digest"]
+    },
+    "phase_entry_approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "decision_capture_path": {"const": "control/rev3/OWNER_DECISION_CAPTURES/PH-D05_TO_PH-D06_20260801.json"},
+        "decision_capture_digest": {"const": "sha256:fa327550ff6c9c0aa81c24589bfa16334ac4d591db6223c48af8ba2f8c5f098b"},
+        "approval_record_path": {"const": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D05_TO_PH-D06_20260801.json"},
+        "approval_artifact_digest": {"const": "owner-approval-record:a2dae0790796b2b9169f8c88e91f704f59226ef8b98ff3342296c09a448a5376"},
+        "target_evidence_commit": {"const": "ab634857aafb952c09917791b6b10d6be8f1efd7"},
+        "target_artifact_digest": {"const": "sha256:eb17f67a8a637528a77f0d4fab5a85e6742d7d707adad8e6a66562fc78540a85"}
+      },
+      "required": ["decision_capture_path", "decision_capture_digest", "approval_record_path", "approval_artifact_digest", "target_evidence_commit", "target_artifact_digest"]
+    },
+    "historical_evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "classification": {"const": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE"},
+        "eligible_for_current_activation": {"const": false},
+        "preserve": {"const": true},
+        "scope": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "required": ["classification", "eligible_for_current_activation", "preserve", "scope"]
+    },
+    "current_phase_candidates": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "classification": {"const": "MULTI_HYPOTHESIS_CORPUS_IN_PROGRESS"},
+        "eligible_for_phase_exit": {"const": false},
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        }
+      },
+      "required": ["classification", "eligible_for_phase_exit", "paths"]
+    }
+  },
+  "required": [
+    "schema_version",
+    "strategy_id",
+    "strategy_status",
+    "installation_status",
+    "ph_r1_status",
+    "ph_r00_status",
+    "ph_r00_owner_authorization",
+    "ph_d00a_status",
+    "ph_d00b_status",
+    "ph_d01a_status",
+    "ph_d01b_status",
+    "ph_d02a_status",
+    "ph_d02b_status",
+    "ph_d02c_status",
+    "ph_d03a_status",
+    "ph_d03b_status",
+    "ph_d05_status",
+    "ph_d06_status",
+    "active_phase",
+    "current_work_class",
+    "next_phase_after_current_phase",
+    "distilled_initial_state_bundle_status",
+    "runtime_activation_status",
+    "authority_manifest_path",
+    "installation_approval",
+    "standing_authorization",
+    "phase_entry_approval",
+    "historical_evidence",
+    "current_phase_candidates",
+    "audit_baseline_commit",
+    "audit_report_sha256"
+  ]
+}

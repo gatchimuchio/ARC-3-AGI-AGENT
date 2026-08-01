@@ -20,7 +20,8 @@
       "NormalizationCertificate",
       "CounterexampleRecord",
       "BoundaryRecord",
-      "FailureSignature"
+      "FailureSignature",
+      "HypothesisCandidate"
     ],
     "governance_artifacts": [
       "PromotionDecision",
@@ -50,16 +51,16 @@
     ]
   },
   "active_work_block": {
-    "content_digest": "rev3-work-block-frame:d21494a52736baf15e0ecfe046eeeb947ecffdc183c916c4ada25bcf9108dfab",
+    "content_digest": "rev3-work-block-frame:9435534a2a6fbe43a1e38e5b34086ae00786288ce958a33a819d3761724c2c33",
     "external_irreversible_actions_authorized": false,
-    "path": "control/rev3/PH-D05_WORK_BLOCK_FRAME.json",
-    "phase_id": "PH-D05",
+    "path": "control/rev3/PH-D06_WORK_BLOCK_FRAME.json",
+    "phase_id": "PH-D06",
     "runtime_capability_addition_count": 0,
-    "transition_digest": "rev3-phase-transition:00f50fe8fc9e77bc26d899392f36a097bdaea5e1f8620d0ef5018bb87254e36f"
+    "transition_digest": "rev3-phase-transition:916b7d737e5814c13ad8e11866eacefe0a98cba5583f956fca2878658f956edd"
   },
   "current_selector": {
-    "active_phase": "PH-D05",
-    "current_work_class": "PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION",
+    "active_phase": "PH-D06",
+    "current_work_class": "PH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATION",
     "distilled_initial_state_bundle_status": "NOT_FROZEN",
     "installation_status": "INSTALLED",
     "ph_d00a_status": "OWNER_APPROVED_PASS",
@@ -76,7 +77,8 @@
     "strategy_status": "OWNER_APPROVED",
     "ph_d03a_status": "OWNER_APPROVED_PASS",
     "ph_d03b_status": "OWNER_APPROVED_PASS",
-    "ph_d05_status": "IN_PROGRESS"
+    "ph_d05_status": "OWNER_APPROVED_PASS",
+    "ph_d06_status": "IN_PROGRESS"
   },
   "execution_control": [
     "OWNER_CURRENT_EXPLICIT_INSTRUCTION",
@@ -138,12 +140,12 @@
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "phase_entry_approval": {
-    "approval_artifact_digest": "owner-approval-record:42ba4fc83bc4cb750d1e3ac3a011741a68f557bdd02f06f308860b15567d37f1",
-    "decision_capture_digest": "sha256:4eb6fdb70f8e4c37883966b17485c318eda07dcd182c0c9dfae90a1ac0f4bcfe",
-    "from_phase": "PH-D03B",
-    "target_artifact_digest": "sha256:88a5fe85e322640315e3121e0bfd150c96fa05e8119fcdd21b5e391abb9b6e55",
-    "target_evidence_commit": "caab292eaf3b67de87dcb1a4ae684d6f7dc1a360",
-    "to_phase": "PH-D05"
+    "approval_artifact_digest": "owner-approval-record:a2dae0790796b2b9169f8c88e91f704f59226ef8b98ff3342296c09a448a5376",
+    "decision_capture_digest": "sha256:fa327550ff6c9c0aa81c24589bfa16334ac4d591db6223c48af8ba2f8c5f098b",
+    "from_phase": "PH-D05",
+    "target_artifact_digest": "sha256:eb17f67a8a637528a77f0d4fab5a85e6742d7d707adad8e6a66562fc78540a85",
+    "target_evidence_commit": "ab634857aafb952c09917791b6b10d6be8f1efd7",
+    "to_phase": "PH-D06"
   },
   "j_boundary": {
     "distillation_may_generate": [
@@ -237,6 +239,29 @@
     "role_count": 3,
     "same_process_source_access_then_candidate_generation_count": 0,
     "candidate_execution_status": "NOT_STARTED_PHASE_D01B"
+  },
+  "current_candidate_source_blind_execution_evidence": {
+    "path": "distillation/artifacts/reports/arc3_hypothesis_source_blind_execution.json",
+    "record_digest": "hds-ph-d06-source-blind-execution:378641c15d4c9855c000cad4dbfb6ac0034a360fe5776a3e9d520c0bbe03f5ba",
+    "role_id": "DISTILLATION_EXECUTOR",
+    "independent_process_count": 3,
+    "repository_root_visibility_count": 0,
+    "environment_source_mount_count": 0,
+    "environment_source_access_count": 0,
+    "same_process_source_access_then_candidate_generation_count": 0,
+    "candidate_generation_count": 450,
+    "candidate_adoption_count": 0,
+    "status": "PASS_SOURCE_BLIND_ESTABLISHED",
+    "python_runtime": {
+      "version": "3.12.13",
+      "asset_name": "cpython-3.12.13+20260728-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+      "archive_sha256": "7ceaf4360f4b4ab44f31d8217cfdc70df8e12b61d9561b4900ee7af87176e50d",
+      "tree_digest": "hds-ph-d06-python-runtime-tree:bb0341f8ca64f9830163873839b08ba8a0cb1f6abb9a56cc9762fb5ce9196d7f",
+      "entry_count": 4522,
+      "executable_sha256": "1e4461092175d186c4bcdb19ee2849a45d6e4d8d1f6a871e45f63418d52a4e35",
+      "mount_path": "/python-runtime",
+      "network_acquisition_during_build": false
+    }
   },
   "downstream_invalidation_evidence": {
     "evidence_semantics": "IMMUTABLE_PH_D01B_POINT_IN_TIME_RESULT",

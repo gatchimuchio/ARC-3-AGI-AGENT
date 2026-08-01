@@ -121,9 +121,9 @@ fixes:
   Bridge, Runtime, official, and Kaggle activity.
 
 The audit path raw-hashes the bound Golden source files but does not parse
-their expected plaintext. PH-D05 is not started by this contract.
+their expected plaintext. PH-D05 was not started by this contract.
 
-The current `PH-D05` adds
+The Owner-approved `PH-D05` adds
 `arc3_teacher_trajectory_normalization_contract.json`. The contract binds the
 exact PH-D03B evidence and entry decision, pinned dataset revision, source and
 environment manifests, acquisition report, strict OFFLINE replay-x3 report,
@@ -133,6 +133,26 @@ recording bytes and replay captures remain outside the repository.
 
 This contract authorizes lossless trajectory normalization only. It does not
 authorize candidate selection, causal claims, intervention, Rule promotion,
+Bridge, Runtime, official access, or Kaggle mutation.
+
+The current `PH-D06` adds
+`arc3_hypothesis_candidate_generation_contract.json`. It binds the exact
+PH-D05 evidence and entry approval, canonical teacher manifest, current
+WorkBlockFrame, preinventory, transition, source-blind execution report,
+candidate manifest, deterministic rebuild evidence, and no-LLM capture. It
+requires 18 candidates per each of 25 cases, including 16 executable typed IR
+alternatives and two privilege adversaries rejected before execution.
+
+The contract also pins source-blind execution to the external, non-Git Python
+3.12.13 runtime archive SHA-256
+`7ceaf4360f4b4ab44f31d8217cfdc70df8e12b61d9561b4900ee7af87176e50d`,
+the extracted 4,522-entry runtime-tree digest, and the exact interpreter
+executable digest. Candidate generation has no network acquisition path; all
+three isolated processes must report the same verified runtime evidence.
+
+This contract authorizes bounded candidate generation only. Every candidate
+remains unselected and unevaluated for fit; PH-D07A owns fit evaluation and
+PH-D07B owns interventions. It authorizes no causal assertion, Rule promotion,
 Bridge, Runtime, official access, or Kaggle mutation.
 
 `historical_pre_audit/PH-D03A/` preserves the four pre-audit checked

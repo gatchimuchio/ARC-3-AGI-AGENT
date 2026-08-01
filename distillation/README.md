@@ -5,9 +5,9 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D05` is the only active phase. PH-D03B is Owner-approved against exact
-post-audit implementation, evidence, immutable sixteen-commitment corpus, and
-content-specific decision/approval commits. Existing pre-audit PH-D01A
+`PH-D06` is the only active phase. PH-D05 is Owner-approved against exact
+canonical teacher-corpus implementation, replay, deterministic rebuild,
+evidence, and content-specific decision/approval commits. Existing pre-audit PH-D01A
 through PH-D03A phase records remain historical; colliding PH-D01B, PH-D02A,
 PH-D02B, PH-D02C, and PH-D03A control artifacts are preserved under
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and
@@ -187,7 +187,7 @@ activation. The four checked PH-D03A artifacts remain byte-identical and are
 bound by the external exact target bundle and Owner approval. PH-D03B never
 rewrites those Golden artifacts.
 
-The current `PH-D05` work block normalizes every one of the 25 pinned ARC3
+The Owner-approved `PH-D05` work block normalizes every one of the 25 pinned ARC3
 public winning recordings into a deterministic canonical teacher corpus:
 
 - all 25 raw payloads are acquired only at the pinned dataset revision,
@@ -213,12 +213,49 @@ public winning recordings into a deterministic canonical teacher corpus:
   causal assertion, intervention, promotion, Bridge, Runtime, official, and
   Kaggle counts remain zero.
 
-The canonical corpus is evidence input for PH-D06. It is not a causal model,
-an approved Rule, a StructureBundle, or runtime capability.
+The current `PH-D06` work block consumes that canonical corpus through three
+source-blind, network-isolated executor processes and deterministically emits:
 
-Use exactly Python 3.12.13. From the repository root:
+- exactly 18 candidates for each of 25 teacher cases;
+- exactly 16 typed executable IR candidates and two fail-closed privilege
+  adversaries per case;
+- selector-family and operator/ordering alternatives sufficient for the
+  Alternative Adequacy gate;
+- explicit `IR_ANSWER_COPY_FORBIDDEN` and
+  `IR_IDENTITY_ROUTING_FORBIDDEN` rejection evidence;
+- byte-identical manifest and 25 package files across three independent
+  builds;
+- zero automatic adoption, fit execution, causal assertion, intervention,
+  promotion, Bridge, Runtime, official access, or Kaggle mutation.
+
+The resulting multi-hypothesis corpus is evidence input for PH-D07A teacher
+fit. It does not select a hypothesis, establish a causal model, approve a
+Rule, create a StructureBundle, or add runtime capability.
+
+PH-D06 additionally pins the source-blind interpreter itself. The external
+runtime archive must be the official
+`cpython-3.12.13+20260728-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz`
+asset with SHA-256
+`7ceaf4360f4b4ab44f31d8217cfdc70df8e12b61d9561b4900ee7af87176e50d`.
+Its extracted 4,522-entry tree digest must be
+`hds-ph-d06-python-runtime-tree:bb0341f8ca64f9830163873839b08ba8a0cb1f6abb9a56cc9762fb5ce9196d7f`,
+and `bin/python3` must have SHA-256
+`1e4461092175d186c4bcdb19ee2849a45d6e4d8d1f6a871e45f63418d52a4e35`.
+The archive and extracted runtime remain outside Git. The build performs no
+network acquisition and rejects a missing, modified, writable-in-namespace,
+or version-mismatched runtime before candidate generation.
+
+Use exactly Python 3.12.13. From the repository root, set the two paths to a
+content-verified external cache before the PH-D06 build:
 
 ```text
+export ARC3_PH_D06_PYTHON_RUNTIME_ARCHIVE=<external-cache>/cpython-3.12.13+20260728-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz
+export ARC3_PH_D06_PYTHON_RUNTIME_ROOT=<external-cache>/cpython-3.12.13+20260728-x86_64-unknown-linux-gnu-frozen
+export PYTHONDONTWRITEBYTECODE=1
+PYTHONPATH=distillation/src "$ARC3_PH_D06_PYTHON_RUNTIME_ROOT/bin/python3" \
+  scripts/build_ph_d06_hypothesis_candidates.py --write
+PYTHONPATH=distillation/src "$ARC3_PH_D06_PYTHON_RUNTIME_ROOT/bin/python3" \
+  scripts/build_ph_d06_hypothesis_candidates.py --verify
 PYTHONPATH=distillation/src python -m pytest distillation/tests
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_canonical.py

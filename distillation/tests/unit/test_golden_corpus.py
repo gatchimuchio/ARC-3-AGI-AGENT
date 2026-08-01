@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import cast
 
 import pytest
+
 from hds_distill.canonical import (
     DigestExclusionPolicy,
     content_derived_id,
