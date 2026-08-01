@@ -1,0 +1,355 @@
+{
+  "schema_version": "arc3-ph-d05-evidence-payload-manifest-v1",
+  "phase_id": "PH-D05",
+  "work_block_id": "WB-PH-D05-ARC3-TEACHER-TRAJECTORY-NORMALIZATION-20260801",
+  "base_commit": "e97f725dafca65c50963c367df58e875e81cb999",
+  "base_tree": "7eb4cbd84edbc17e2bcebdfc1baac176721aa1eb",
+  "implementation_commit": "b3f978d931c1285979830fbd38ce4957ae4b3ac2",
+  "implementation_tree": "9aa864623c497f032cc40971ce9b0614ce2a9272",
+  "payload_digest_method": "SHA256_OF_THIS_FILE_BYTES_WITH_FINAL_LF",
+  "manifest_excludes_self": true,
+  "frame": {
+    "path": "control/rev3/PH-D05_WORK_BLOCK_FRAME.json",
+    "content_digest": "rev3-work-block-frame:d21494a52736baf15e0ecfe046eeeb947ecffdc183c916c4ada25bcf9108dfab",
+    "sha256": "088135583d70868897160ad6fb464abba74a4836fd479b356fc10f727b5c2a96"
+  },
+  "authority_manifest": {
+    "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "content_digest": "rev3-current-authority-manifest:9a815ac92352e3cb844ab2f28d542a58773b5596a0c4d5196a8f1ac633bf158e",
+    "sha256": "f69cd0c4e77d9c465c0761bee7736cefcc481dd3f42bcac2de2fe2a4c5d849c8"
+  },
+  "result": {
+    "exit_claim": "ARC3_CANONICAL_TEACHER_TRAJECTORIES_COMPLETE",
+    "recording_count": 25,
+    "game_count": 25,
+    "level_count": 183,
+    "recorded_action_count": 11648,
+    "canonical_success_prefix_action_count": 11574,
+    "strict_offline_replay_process_count": 3,
+    "deterministic_rebuild_process_count": 3,
+    "failed_requirement_count": 0
+  },
+  "artifact_count": 64,
+  "artifacts": [
+    {
+      "path": "AGENTS.md",
+      "role": "PH_D05_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "37cbcc680cb619e8b30a77f25bec482c050246a00a4fd4001213949af02b3003"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "role": "REV3_GOVERNANCE_IMPLEMENTATION",
+      "sha256": "60b7279a83378bbf317977ec03a681be23943bb2414c617ecf948a597d31b947"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "2ad035a4188e46b86cec5c73985eca5e804c6e03d562deb69c02cb8284bb013e"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "220a2ee52428ea89d71279b7d34ac92bc75330ce81fd93458194bfc58df384c8"
+    },
+    {
+      "path": "analysis/rev3/ph_d05_teacher_trajectory_preinventory.json",
+      "role": "PH_D05_PREINVENTORY",
+      "sha256": "e0269523770be7c83003d6d2443590ce94b6d3a2e55cbeb1a7b422a51e486a57"
+    },
+    {
+      "path": "analysis/teacher/FULL_SOLUTION_CORPUS.json",
+      "role": "APPROVED_TEACHER_SOLUTION_CORPUS",
+      "sha256": "19fcf437c1f03985f06163558851772eb55d38937e31f5f6b7712c211404de6b"
+    },
+    {
+      "path": "control/rev3/D03B_PHASE_STATE.json",
+      "role": "APPROVED_PREDECESSOR_PHASE_STATE",
+      "sha256": "fd8c80bc93baddcd76e2bac087106f09328614e8a7387e947ef91d5c93d6b200"
+    },
+    {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D03B_TO_PH-D05_20260731.json",
+      "role": "PH_D05_ENTRY_OWNER_APPROVAL",
+      "sha256": "6acf3d0e7c066ea4e62cbe7ec82fe82ec2c85e5cb3f3cc8d5efb8b1a005790d3"
+    },
+    {
+      "path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D03B_TO_PH-D05_20260731.json",
+      "role": "PH_D05_ENTRY_OWNER_DECISION",
+      "sha256": "35b0cbe206b2e5e26a2ad6ae8a1f097d467132d0d8b716c2c0914c3dff17108d"
+    },
+    {
+      "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+      "role": "OWNER_STANDING_AUTHORIZATION",
+      "sha256": "c4bdbe9dac72f2a2148a0217e6c637817a6434854e063e395e4a9abc93c5fcbe"
+    },
+    {
+      "path": "control/rev3/PH-D03B_EVIDENCE_ATTESTATION.json",
+      "role": "APPROVED_PREDECESSOR_EVIDENCE_ATTESTATION",
+      "sha256": "4f994e9be2c7551c010422c2311600f119095019e8a69a4d0b4de963e4140aa4"
+    },
+    {
+      "path": "control/rev3/PH-D05_WORK_BLOCK_FRAME.json",
+      "role": "PH_D05_WORK_BLOCK_FRAME",
+      "sha256": "088135583d70868897160ad6fb464abba74a4836fd479b356fc10f727b5c2a96"
+    },
+    {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-D03B_TO_PH-D05.json",
+      "role": "PH_D05_ENTRY_TRANSITION",
+      "sha256": "0fa67b40572baef442bcc33e62773cec4b0377684a38a15119c0a3c10cafa1a4"
+    },
+    {
+      "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
+      "role": "PH_D05_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "575b4916093d2b53942c173f68fb50a8a2938ff409e4e1421385361d41cb3d15"
+    },
+    {
+      "path": "distillation/README.md",
+      "role": "PH_D05_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "4d093eed596ba531e28cbe3dea80ec50a43183fda79b00237ea62ed4639e7a03"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_teacher_recording_acquisition.json",
+      "role": "RAW_RECORDING_ACQUISITION_EVIDENCE",
+      "sha256": "250c6636f9a6987840fb4c944332b6ef469e326a556855717ecf93e444fafa30"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_teacher_replay_x3.json",
+      "role": "STRICT_OFFLINE_REPLAY_X3_EVIDENCE",
+      "sha256": "cea4496e5f79ffc0e2301d387f035b73b176728799f137054cd21a05e72f36cd"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_teacher_trajectory_normalization.json",
+      "role": "TRAJECTORY_NORMALIZATION_EVIDENCE",
+      "sha256": "64ef4d180d20820bc1bc7a2d22ded58aea552e1aa3f252508243d3d748e77936"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "role": "DISTILLATION_SCOPE_AUDIT",
+      "sha256": "9e3531bbaedb43d19aa03442c8120600380eee78f3a18073fcd1da93f630fb74"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/manifest.json",
+      "role": "CANONICAL_TEACHER_CORPUS_MANIFEST",
+      "sha256": "29c5cc86ba96f552a22442ad535fb0cf142e6b073690f830f80508a8ede329ea"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/ar25-0c556536.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "85b233a253eb622614a9dc3609e78d87eaebc0e1af90788ce157aff6b529cca0"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/bp35-0a0ad940.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "d80d4705f8f6bedadbcdad049e03924b3cdaa9261b81838bb292620832e88fe3"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/cd82-fb555c5d.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "77c011ebd4e7c816b55bb050db47a6faf96f6fd5113079d9e021eaabaf38ebdd"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/cn04-2fe56bfb.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "08f9b4a75d92161d6e833e5a16ee26472ee33715edc6acf9a4cd9ffe663c8b9a"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/dc22-fdcac232.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "48693b48ba347af0063e5367091d866a9a672babb807b7fb8c071190283481cc"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/ft09-0d8bbf25.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "007b0e364260e4c9f877bbf2b8c9f2d2d3b63d13e904f447f951fd186ff33ede"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/g50t-5849a774.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "9bd8274e5b7e2fb8a2a08b3f049040899555a39cc67f7b8355294ac00df6d8dd"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/ka59-38d34dbb.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "a703d8453dd51e5b5bad85680a01d72bf722f454e7b83eba8bdee06f9e43f389"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/lf52-271a04aa.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "44eebdbdc31e089321c78d3a7556aa81101b601bdbf445ce0f0833a2cc0ec679"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/lp85-305b61c3.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "0822691fb933594374b0c9d1df3b4d39c96f37884384fde50ca2c74109bd8f88"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/ls20-9607627b.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "1af457047f78334dc8ce269904e101e2ec7ae7e3553c5dfd666b45ffba91267c"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/m0r0-492f87ba.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "d24b0cb7f3bf5c03ed006f18ec9f6d26f1a6a7de42093ed52c93a601eced268a"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/r11l-495a7899.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "9c6558cecdb7ccd7a2c0bd572c2e1c2c4130f6850676b5096a84d93145c3c5c9"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/re86-8af5384d.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "f5badaac875ce3468a4d6122acf2743ed8a75f538c02e37ba44336b1d9fc1114"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/s5i5-18d95033.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "2bd9f415f7ceb71fcfddb52ba23e20a5c7f347da79dd1dfe8173e1cbc22aaa8b"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/sb26-7fbdac44.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "779a748e8a5e2aaf4b96bf75d7d2d1b96fe8a89d8d71a316e81e3845f2492657"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/sc25-635fd71a.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "537a91cd3a0c14540d024662c91cca7ee03a04d6f212d946e6f47fe57d2937c7"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/sk48-d8078629.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "fb52c2c223ce5108e9d56aff03d210704500c67122df514ac269b0b1cd6ca1f8"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/sp80-589a99af.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "74e3347f5813bf526a08217e4120299e9d352d053796c53cb4dbe8ab69497248"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/su15-1944f8ab.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "6e54caa2c170be32e34461f7a8d6784c3aeb315a861e00feebbc9d45d8dc5cc8"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/tn36-ef4dde99.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "5bd8f0cb6f62befcf779e7da012722286d48b61c6e3c26271e1211e2cda4f693"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/tr87-cd924810.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "df8abbf1338cb4efd2eaf14e7d0e527d3ab3db24a79785fe24cccba7db5186ca"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/tu93-0768757b.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "46957d1d196a63cb9d725c5b52e80c335a6fd28d3fca75db3f5f21a6a0af0a93"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/vc33-5430563c.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "6c36d6a5c55b3349ac26f2fe8856d43909c6a48127339d5a89b10723a96ca24a"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/wa30-ee6fef47.json.gz",
+      "role": "CANONICAL_GAME_TRAJECTORY_PACKAGE",
+      "sha256": "98352a4eb7fbcf69901f79080971bb4b678774bf5be06f2f91ce0359aee5287d"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/rebuild_x3.json",
+      "role": "DETERMINISTIC_REBUILD_EVIDENCE",
+      "sha256": "0d6ae31f4cba75ee54be7c36d96dd2e4677e071dc0184ee089400edb605d68cf"
+    },
+    {
+      "path": "distillation/input/README.md",
+      "role": "PH_D05_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "f70324d2bc3b3e8cc5b0a3fe478abf6086c39b0b1b07d6feec99c749bb410d03"
+    },
+    {
+      "path": "distillation/input/arc3_teacher_trajectory_normalization_contract.json",
+      "role": "TRAJECTORY_NORMALIZATION_CONTRACT",
+      "sha256": "d9a493bc16a7ab0bc0919a3ac54a265b40960c4f6d521cd118b9128f1345f195"
+    },
+    {
+      "path": "distillation/manifests/environment/arc3-replay.json",
+      "role": "ARC3_REPLAY_ENVIRONMENT_MANIFEST",
+      "sha256": "e752fcd0efcfa6fc4d8a3e3474d20aafbf3ef64e8eb8549a09c3a382d5a59cdc"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc3-environment-source-bundle.json",
+      "role": "ARC3_ENVIRONMENT_SOURCE_CONTENT_MANIFEST",
+      "sha256": "1a6fdea90ddb69435899b2d03c99f9002d0e11b045d3bd37dd8764660482e5ef"
+    },
+    {
+      "path": "distillation/manifests/source_content/arc3-raw-teacher-recordings.json",
+      "role": "RAW_TEACHER_SOURCE_CONTENT_MANIFEST",
+      "sha256": "ff7ab7ed08b10ef6987c305610b9d4fdd7efdffb80567e90c9abe92a6eabd274"
+    },
+    {
+      "path": "distillation/src/hds_distill/__init__.py",
+      "role": "PH_D05_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "8ba655d5cd1b63d288c96098b56f2128b30cd8edd4111d26dfe86a8e30aff823"
+    },
+    {
+      "path": "distillation/src/hds_distill/arc3_trajectory_normalization.py",
+      "role": "PH_D05_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "01398ece0ad9d0824a24ffec166f5571b15dae91e9c10c15b6cb3e235db4efa8"
+    },
+    {
+      "path": "distillation/tests/unit/test_arc3_trajectory_normalization.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "068c3e864b777f09a713cdb0665a95dd020809aa6e2cb3f992e8033093aec8db"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+      "role": "PH_D05_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "db5abd9adfc5ff160dcc9ede35c2e1a1f0ace534751508f4da92c6c78c1caf63"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "sha256": "f69cd0c4e77d9c465c0761bee7736cefcc481dd3f42bcac2de2fe2a4c5d849c8"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V14.json",
+      "role": "REV3_SELECTOR_SCHEMA",
+      "sha256": "ae87d7e82542c1bf01e90d3cf3349e61202df96380a12cf1889214d47c4eac4c"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+      "role": "REV3_GOVERNANCE_IMPLEMENTATION",
+      "sha256": "c04fcfe04ccabb3b93e2fd336461b7e16ac6682ba30792a8aa14873b473eee30"
+    },
+    {
+      "path": "scripts/acquire_ph_d05_teacher_recordings.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "4e341977390b052dd3019197f28fa21c8a75bdf07bd29de3b790859b4ec72f16"
+    },
+    {
+      "path": "scripts/build_ph_d05_teacher_trajectories.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "6137dab1fc7c14233fb6c6e20aeb46281b220b2ceeda241a30427cd7f0860c06"
+    },
+    {
+      "path": "scripts/ph_d05_replay_worker.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "09cab53efe663bfde0eb0e95d488db08a66dca8a4ca29eab7b427238bdbdbc0b"
+    },
+    {
+      "path": "scripts/refresh_rev3_authority_manifest.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "1e5fc9752f352db566eaf46a21f8d48ed6ab1494cfa2eeedd07d6280baea7dc8"
+    },
+    {
+      "path": "scripts/run_ph_d05_replay_x3.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "1cfbeed6379ba213930250a9ea54666ff3a5fbe7336a1b6766139635dfb81a1e"
+    },
+    {
+      "path": "scripts/validate_rev3_governance.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "c379921b8de8c805812d7d218300350447d43687cc996e415c3783dac73082fc"
+    }
+  ]
+}

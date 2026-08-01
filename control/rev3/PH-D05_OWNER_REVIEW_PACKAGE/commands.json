@@ -1,0 +1,79 @@
+{
+  "schema_version": "arc3-ph-d05-command-evidence-v1",
+  "phase_id": "PH-D05",
+  "commands": [
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests on detached exact implementation worktree at repository sibling depth",
+      "result": "342 passed in 372.53s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/unit on detached exact implementation worktree",
+      "result": "738 passed in 466.44s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/integration on detached exact implementation worktree",
+      "result": "8 passed in 343.78s",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D05 pinned raw teacher recording acquisition",
+      "result": "25 exact payloads; 495947429 bytes; 183 levels; 11648 recorded actions; repository raw bytes 0",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D05 strict OFFLINE replay in three isolated processes",
+      "result": "25 games; 183 levels; 11574 actions; 0 canonical, availability, terminal, or progress mismatches",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D05 canonical trajectory build in three independent processes",
+      "result": "3 builds; 27 files per build; 0 byte mismatches; canonical manifest digest identical",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/validate_rev3_governance.py on exact implementation tree",
+      "result": "80 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/refresh_rev3_authority_manifest.py --check on exact implementation tree",
+      "result": "421 entries, 0 changes",
+      "status": "PASS"
+    },
+    {
+      "command": "scope_guard.py --verify-report on exact implementation tree",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; 0 findings",
+      "status": "PASS"
+    },
+    {
+      "command": "ruff, strict mypy, and py_compile on all PH-D05 changed Python sources and tests",
+      "result": "ruff PASS; strict mypy 30 source files PASS; py_compile PASS",
+      "status": "PASS"
+    },
+    {
+      "command": "Git exact-tree, WorkBlockFrame, protected-dirty, secret, and final-clean audit",
+      "result": "55 implementation destinations; 0 outside Frame; 0 forbidden; 0 secrets; exact worktree clean; protected 32-file digest unchanged",
+      "status": "PASS"
+    }
+  ],
+  "resolved_attempts": [
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "The first detached exact worktree was nested under .codex/cache, so legacy tests resolved the required sibling Downloads ARC2 archive below the cache directory and reported 330 passed, 1 failed, and 11 setup errors.",
+      "resolution": "Recreated the unchanged exact implementation worktree beside the authority repository, verified the same commit and tree, and reran the full distillation suite to 342 passed.",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "Windows Git could not interpret the WSL-form linked-worktree gitdir pointer during Windows-Python tests.",
+      "resolution": "Temporarily used the equivalent Windows gitdir path in the disposable exact worktree only, then restored the WSL pointer and removed the clean worktree through git worktree remove.",
+      "status": "RESOLVED"
+    }
+  ],
+  "active_current_phase_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "active_evidence_failure_count": 0,
+  "evidence_payload_digest": "sha256:eb17f67a8a637528a77f0d4fab5a85e6742d7d707adad8e6a66562fc78540a85"
+}
