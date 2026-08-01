@@ -3,9 +3,10 @@
 - Package status: `OWNER_APPROVED`
 - Installation status: `INSTALLED`
 - PH-R-1 status: `OWNER_APPROVED_PASS`
-- Current work class: `PH-D03B_SEALED_AUDIT_CORPUS_FREEZE`
-- Active phase: `PH-D03B`
-- `PH-D03B`: `IN_PROGRESS`
+- Current work class: `PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION`
+- Active phase: `PH-D05`
+- `PH-D05`: `IN_PROGRESS`
+- `PH-D03B`: `OWNER_APPROVED_PASS`
 - `PH-D03A`: `OWNER_APPROVED_PASS`
 - `PH-D02C`: `OWNER_APPROVED_PASS`
 - `PH-D02B`: `OWNER_APPROVED_PASS`
@@ -74,7 +75,7 @@ S5/P22 compiled policy = historical/quarantine
 
 既存成果物は削除しない。監査是正後のOwner承認とStrategy Installationは成立したが、監査前成果物を現在のPhase通過証拠またはactive selectorとして使用しない。
 
-## PH-D03A承認済み証拠とPH-D03B現行境界
+## PH-D03B承認済み証拠とPH-D05現行境界
 
 - source-blind三roleは別process・別mount projectionで固定し、Executor/Auditorのenvironment source mountとrepository-root visibilityを0件として検証する。
 - 現行environment/run bindingにより監査前PH-D02B成果物3件が失効することを`distillation/artifacts/reports/ph_d01b_downstream_invalidation.json`へexact digest付きで記録する。
@@ -88,7 +89,11 @@ S5/P22 compiled policy = historical/quarantine
 - 監査前PH-D03A control artifact 15件、4 candidate artifact、source、test、preinventoryは明示的historical namespaceへbyte-identicalに保持し、現行phase pass証拠へ使用しない。
 - PH-D03Bでは、承認された16件のexpected-artifact digestだけをlabelなしcommitment setへ固定し、Golden source、target bundle、decision、ApprovalRecord、evidenceのexact digestをsealed manifestへ拘束する。
 - Sealed namespaceにはexpected artifact plaintextとfixture identifierを保存しない。runnerはsubmission digestを再計算し、出力をexact `PASS\n`／`FAIL\n`だけに限定し、repository外のmutable ledgerで最初のaudit attemptをconsumeする。
-- 現行境界は`DISTILLATION_CONFORMANCE_CORPUS_FROZEN`までである。PH-D05 real teacher trajectory normalization、HDS一般仮説生成、Rule promotion、Bridge、Runtimeは開始しない。
+- PH-D03Bの`DISTILLATION_CONFORMANCE_CORPUS_FROZEN`はOwner承認済みである。
+- PH-D05ではexact 25 raw recordingを外部cacheでbyte検証し、全25 game／183 level／11,574 canonical actionをlossless canonical trajectoryへ正規化する。
+- strict OFFLINE replay x3はcanonical frame／action／availability／terminal／progress mismatch 0、source pre/post identity、network denial、secret scrub、write allowlist、fixed seedを必須とする。
+- canonical manifest、25 package、normalization reportは独立3 processでbyte-identical rebuildする。
+- 現行境界は`ARC3_CANONICAL_TEACHER_TRAJECTORIES_COMPLETE`までである。PH-D06 hypothesis candidate generation、因果主張、intervention、Rule promotion、Bridge、Runtimeは開始しない。
 
 ## 機械可読契約
 
@@ -114,6 +119,7 @@ S5/P22 compiled policy = historical/quarantine
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V11.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V12.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V13.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V14.json`
 - `docs/strategy/contracts/POST_AUDIT_CAUSAL_IR_CONTRACT_V1.json`
 - `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 

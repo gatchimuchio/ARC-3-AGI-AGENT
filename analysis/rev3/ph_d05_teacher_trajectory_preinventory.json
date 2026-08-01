@@ -1,0 +1,84 @@
+{
+  "schema_version": "arc3-rev3-ph-d05-teacher-trajectory-preinventory-v1",
+  "phase_id": "PH-D05",
+  "status": "PREIMPLEMENTATION_INVENTORY_COMPLETE",
+  "base_commit": "e97f725dafca65c50963c367df58e875e81cb999",
+  "base_tree": "7eb4cbd84edbc17e2bcebdfc1baac176721aa1eb",
+  "authority": {
+    "input_phase_state_path": "control/rev3/D03B_PHASE_STATE.json",
+    "input_phase_state_sha256": "fd8c80bc93baddcd76e2bac087106f09328614e8a7387e947ef91d5c93d6b200",
+    "input_evidence_commit": "caab292eaf3b67de87dcb1a4ae684d6f7dc1a360",
+    "input_evidence_tree": "cf968258a35afeb51771a7d38ceeb9f4970e1080",
+    "input_evidence_payload_digest": "sha256:88a5fe85e322640315e3121e0bfd150c96fa05e8119fcdd21b5e391abb9b6e55",
+    "input_evidence_attestation_path": "control/rev3/PH-D03B_EVIDENCE_ATTESTATION.json",
+    "phase_entry_decision_digest": "sha256:4eb6fdb70f8e4c37883966b17485c318eda07dcd182c0c9dfae90a1ac0f4bcfe",
+    "phase_entry_approval_digest": "owner-approval-record:42ba4fc83bc4cb750d1e3ac3a011741a68f557bdd02f06f308860b15567d37f1",
+    "owner_standing_authorization_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed"
+  },
+  "collision_inventory": {
+    "preexisting_ph_d05_control_artifact_count": 0,
+    "preexisting_ph_d05_normalizer_module_count": 0,
+    "preexisting_ph_d05_test_count": 0,
+    "preexisting_ph_d05_canonical_artifact_count": 0,
+    "historical_migration_required": false
+  },
+  "primary_teacher_source": {
+    "dataset_id": "magic-sword/arc_agi_3_public_demo_human_testing",
+    "dataset_revision": "455b7c58eaa9d5ea05f91cd1b5b603121599e758",
+    "raw_recording_manifest_path": "distillation/manifests/source_content/arc3-raw-teacher-recordings.json",
+    "raw_recording_manifest_digest": "hds-source-content-manifest:3098feb7241e4ea3444b5942ab8ba0371d8168a51f32a1f3d44c0e09db36eda9",
+    "raw_recording_count": 25,
+    "recorded_action_count": 11648,
+    "canonical_success_prefix_action_count": 11574,
+    "level_count": 183,
+    "environment_manifest_path": "distillation/manifests/environment/arc3-replay.json",
+    "environment_manifest_digest": "hds-environment-manifest:1d116488cd85ee5ad9d641aeb2af66187572b181cb03d819fac1cdba3252cfe0",
+    "environment_source_manifest_path": "distillation/manifests/source_content/arc3-environment-source-bundle.json",
+    "environment_source_merkle_root": "hds-directory-merkle-v1:1b574ca53167e25e3cea5ce562ecba1eb8bc1830e232a1e2e28877b91879dfeb",
+    "raw_payload_repository_storage": "FORBIDDEN_EXTERNAL_VERIFIED_CACHE_ONLY"
+  },
+  "schema_compatibility": {
+    "approved_ph_d02b_schema_bytes_mutable": false,
+    "reset_supported_by_ph_d02b_action_schema": false,
+    "resolution": "PH_D05_DETAILED_CANONICAL_RECORD_IS_AUTHORITATIVE_AND_ACTION1_TO_ACTION7_RECEIVE_PH_D02B_COMPATIBILITY_PROJECTIONS",
+    "reset_record_preservation": "PH_D05_DETAILED_CANONICAL_RECORD_ONLY"
+  },
+  "required_normalization_properties": {
+    "raw_action_ids_only": true,
+    "reset_and_action1_through_action7": true,
+    "action6_xy_payload_complete": true,
+    "every_success_prefix_step_has_before_action_after": true,
+    "available_actions_before_and_after": true,
+    "raw_and_lossless_canonical_frame_binding": true,
+    "terminal_level_and_progress": true,
+    "seed_reset_environment_and_wheel_binding": true,
+    "raw_and_canonical_trajectory_digest_separation": true,
+    "variable_metadata_excluded_from_canonical_digest": true,
+    "strict_offline_replay_count": 3,
+    "source_access_boundary": "REPLAY_HARNESS_MAINTAINER_ONLY"
+  },
+  "phase_boundaries": {
+    "source_payload_semantic_parse_started": false,
+    "real_trajectory_normalization_count": 0,
+    "teacher_replay_execution_count": 0,
+    "general_candidate_generation_started": false,
+    "real_intervention_execution_count": 0,
+    "causal_mechanism_assertion_count": 0,
+    "rule_promotion_count": 0,
+    "bridge_started": false,
+    "runtime_started": false,
+    "locked_final_access_count": 0,
+    "official_access_count": 0,
+    "network_submission_count": 0,
+    "kaggle_mutation_count": 0
+  },
+  "preexisting_dirty_state": {
+    "tracked_file_count": 32,
+    "aggregate_sha256": "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4",
+    "allowed_to_modify": false
+  },
+  "digest_excluded_fields": [
+    "content_digest"
+  ],
+  "content_digest": "rev3-ph-d05-teacher-trajectory-preinventory:ccb578094aa4c2931dcf3f65e58209685b4a40b6e18d4473a1b3d530beda0155"
+}

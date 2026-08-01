@@ -28,6 +28,7 @@ from arc3_agi_agent.rev3_governance import (
     REV3_PH_D02C_STATUS,
     REV3_PH_D03A_STATUS,
     REV3_PH_D03B_STATUS,
+    REV3_PH_D05_STATUS,
     REV3_PH_R00_OWNER_AUTHORIZATION,
     REV3_PH_R00_STATUS,
     REV3_PH_R1_STATUS,
@@ -98,9 +99,9 @@ def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
     assert REV3_STRATEGY_STATUS == "OWNER_APPROVED"
     assert REV3_INSTALLATION_STATUS == "INSTALLED"
     assert REV3_CURRENT_WORK_CLASS == (
-        "PH-D03B_SEALED_AUDIT_CORPUS_FREEZE"
+        "PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION"
     )
-    assert REV3_ACTIVE_PHASE == "PH-D03B"
+    assert REV3_ACTIVE_PHASE == "PH-D05"
     assert REV3_PH_R1_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_R00_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_R00_OWNER_AUTHORIZATION == "ESTABLISHED"
@@ -112,7 +113,8 @@ def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
     assert REV3_PH_D02B_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_D02C_STATUS == "OWNER_APPROVED_PASS"
     assert REV3_PH_D03A_STATUS == "OWNER_APPROVED_PASS"
-    assert REV3_PH_D03B_STATUS == "IN_PROGRESS"
+    assert REV3_PH_D03B_STATUS == "OWNER_APPROVED_PASS"
+    assert REV3_PH_D05_STATUS == "IN_PROGRESS"
     assert REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS == "NOT_FROZEN"
     assert REV3_RUNTIME_ACTIVATION_STATUS == "SUSPEND"
     assert REV3_PHASE_ORDER[0] == "PH-R-1"
@@ -154,6 +156,7 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert selector["ph_d02c_status"] == REV3_PH_D02C_STATUS
     assert selector["ph_d03a_status"] == REV3_PH_D03A_STATUS
     assert selector["ph_d03b_status"] == REV3_PH_D03B_STATUS
+    assert selector["ph_d05_status"] == REV3_PH_D05_STATUS
     assert selector["distilled_initial_state_bundle_status"] == (
         REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS
     )
@@ -176,7 +179,9 @@ def test_rev3_audit_correction_selector_and_contracts_fail_closed() -> None:
     assert "docs/strategy/REV3_AUTHORITY_INPUT_MANIFEST.json" in (
         selector["historical_evidence"]["scope"]
     )
-    assert "distillation/input/sealed_audit_contract.json" in (
+    assert (
+        "distillation/input/arc3_teacher_trajectory_normalization_contract.json"
+        in
         selector["current_phase_candidates"]["paths"]
     )
     assert selector["current_phase_candidates"][
@@ -338,11 +343,11 @@ def test_ph_r1_schemas_reject_unbound_or_self_referential_state() -> None:
     ] == ["approval_artifact_digest"]
 
     selector_schema = _json(
-        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V13.json"
+        contract_root / "REV3_CURRENT_SELECTOR_SCHEMA_V14.json"
     )
     assert selector_schema["additionalProperties"] is False
     assert selector_schema["properties"]["active_phase"]["const"] == (
-        "PH-D03B"
+        "PH-D05"
     )
     assert selector_schema["properties"][
         "ph_r00_owner_authorization"
@@ -450,7 +455,7 @@ def test_rev3_corrected_documents_close_audit_findings() -> None:
     assert "Strategy = OWNER_APPROVED" in combined
     assert "Installation = INSTALLED" in combined
     assert (
-        "Current work = PH-D03B_SEALED_AUDIT_CORPUS_FREEZE"
+        "Current work = PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION"
         in combined
     )
     assert "PH-R00 Owner authorization = ESTABLISHED" in combined
@@ -460,7 +465,8 @@ def test_rev3_corrected_documents_close_audit_findings() -> None:
         "PH-R00 = OWNER_APPROVED_PASS",
         "PH-D02C = OWNER_APPROVED_PASS",
         "PH-D03A = OWNER_APPROVED_PASS",
-        "PH-D03B = IN_PROGRESS",
+        "PH-D03B = OWNER_APPROVED_PASS",
+        "PH-D05 = IN_PROGRESS",
         "Normative Authority",
         "Execution Control",
         "Implementation Commit",
@@ -2355,21 +2361,22 @@ def test_d02b_entry_remains_bound_to_approved_d02a_evidence() -> None:
     assert frame["resource_budget"]["owner_approval_generated_count"] == 0
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["schema_version"] == "arc3-rev3-current-selector-v13"
-    assert selector["active_phase"] == "PH-D03B"
+    assert selector["schema_version"] == "arc3-rev3-current-selector-v14"
+    assert selector["active_phase"] == "PH-D05"
     assert selector["current_work_class"] == (
-        "PH-D03B_SEALED_AUDIT_CORPUS_FREEZE"
+        "PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION"
     )
     assert selector["ph_d02a_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02c_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d03a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d03b_status"] == "IN_PROGRESS"
+    assert selector["ph_d03b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d05_status"] == "IN_PROGRESS"
     assert selector["phase_entry_approval"][
         "approval_artifact_digest"
     ] == (
         "owner-approval-record:"
-        "a9c552468bd6f656148030de28b914c2d6ad9b2bc095462ee6ba3e50f4cbe00a"
+        "42ba4fc83bc4cb750d1e3ac3a011741a68f557bdd02f06f308860b15567d37f1"
     )
 
     contract = _json(
@@ -2654,7 +2661,7 @@ def test_ph_d00b_entry_and_historical_migration_are_content_bound() -> None:
     assert all(value == 0 for value in frame["resource_budget"].values())
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["active_phase"] == "PH-D03B"
+    assert selector["active_phase"] == "PH-D05"
     assert selector["ph_d00a_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d01a_status"] == "OWNER_APPROVED_PASS"
@@ -2663,7 +2670,8 @@ def test_ph_d00b_entry_and_historical_migration_are_content_bound() -> None:
     assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02c_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d03a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d03b_status"] == "IN_PROGRESS"
+    assert selector["ph_d03b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d05_status"] == "IN_PROGRESS"
 
     historical_root = (
         control_root / "HISTORICAL_PRE_AUDIT" / "PH-D00B"
@@ -2814,15 +2822,16 @@ def test_current_d02c_entry_is_bound_to_approved_d02b_evidence() -> None:
     assert frame["resource_budget"]["rule_promotion_count"] == 0
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["schema_version"] == "arc3-rev3-current-selector-v13"
-    assert selector["active_phase"] == "PH-D03B"
+    assert selector["schema_version"] == "arc3-rev3-current-selector-v14"
+    assert selector["active_phase"] == "PH-D05"
     assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02c_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d03a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d03b_status"] == "IN_PROGRESS"
+    assert selector["ph_d03b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d05_status"] == "IN_PROGRESS"
     assert selector["phase_entry_approval"]["approval_artifact_digest"] == (
         "owner-approval-record:"
-        "a9c552468bd6f656148030de28b914c2d6ad9b2bc095462ee6ba3e50f4cbe00a"
+        "42ba4fc83bc4cb750d1e3ac3a011741a68f557bdd02f06f308860b15567d37f1"
     )
 
 
@@ -3000,17 +3009,18 @@ def test_current_d03a_entry_is_bound_to_approved_d02c_evidence() -> None:
     assert frame["resource_budget"]["sealed_corpus_artifact_count"] == 0
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["schema_version"] == "arc3-rev3-current-selector-v13"
-    assert selector["active_phase"] == "PH-D03B"
+    assert selector["schema_version"] == "arc3-rev3-current-selector-v14"
+    assert selector["active_phase"] == "PH-D05"
     assert selector["current_work_class"] == (
-        "PH-D03B_SEALED_AUDIT_CORPUS_FREEZE"
+        "PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION"
     )
     assert selector["ph_d02c_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d03a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d03b_status"] == "IN_PROGRESS"
+    assert selector["ph_d03b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d05_status"] == "IN_PROGRESS"
     assert selector["phase_entry_approval"]["approval_artifact_digest"] == (
         "owner-approval-record:"
-        "a9c552468bd6f656148030de28b914c2d6ad9b2bc095462ee6ba3e50f4cbe00a"
+        "42ba4fc83bc4cb750d1e3ac3a011741a68f557bdd02f06f308860b15567d37f1"
     )
 
 
@@ -3344,7 +3354,7 @@ def test_current_d01a_source_inventory_and_provenance_are_content_bound() -> Non
         / "rev3"
         / "REV3_CURRENT_SELECTOR.json"
     )
-    assert selector["active_phase"] == "PH-D03B"
+    assert selector["active_phase"] == "PH-D05"
     assert selector["ph_d00b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d01a_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d01b_status"] == "OWNER_APPROVED_PASS"
@@ -3352,9 +3362,10 @@ def test_current_d01a_source_inventory_and_provenance_are_content_bound() -> Non
     assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02c_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d03a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d03b_status"] == "IN_PROGRESS"
+    assert selector["ph_d03b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d05_status"] == "IN_PROGRESS"
     assert selector["phase_entry_approval"]["target_evidence_commit"] == (
-        "cc20fe82ab2aba6ae8159bb2c761b4dabe05886c"
+        "caab292eaf3b67de87dcb1a4ae684d6f7dc1a360"
     )
 
 
@@ -3462,16 +3473,17 @@ def test_d02a_entry_remains_bound_to_approved_d01b_evidence() -> None:
     assert transition["external_irreversible_action_authorized"] is False
 
     selector = _json(control_root / "REV3_CURRENT_SELECTOR.json")
-    assert selector["active_phase"] == "PH-D03B"
+    assert selector["active_phase"] == "PH-D05"
     assert selector["current_work_class"] == (
-        "PH-D03B_SEALED_AUDIT_CORPUS_FREEZE"
+        "PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION"
     )
     assert selector["ph_d01b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02a_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02b_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d02c_status"] == "OWNER_APPROVED_PASS"
     assert selector["ph_d03a_status"] == "OWNER_APPROVED_PASS"
-    assert selector["ph_d03b_status"] == "IN_PROGRESS"
+    assert selector["ph_d03b_status"] == "OWNER_APPROVED_PASS"
+    assert selector["ph_d05_status"] == "IN_PROGRESS"
 
 
 def test_historical_d02a_control_artifacts_are_byte_identical() -> None:

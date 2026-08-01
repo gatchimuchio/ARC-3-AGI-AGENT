@@ -5,9 +5,9 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D03B` is the only active phase. PH-D03A is Owner-approved against exact
-post-audit implementation, evidence, sixteen-target bundle, and content-
-specific decision/approval commits. Existing pre-audit PH-D01A
+`PH-D05` is the only active phase. PH-D03B is Owner-approved against exact
+post-audit implementation, evidence, immutable sixteen-commitment corpus, and
+content-specific decision/approval commits. Existing pre-audit PH-D01A
 through PH-D03A phase records remain historical; colliding PH-D01B, PH-D02A,
 PH-D02B, PH-D02C, and PH-D03A control artifacts are preserved under
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and
@@ -149,7 +149,7 @@ implementation-conformance candidate layer:
   `SUSPEND`; the later exact target bundle and external OwnerDecisionCapture
   approve all sixteen expectation digests without mutating candidate bytes.
 
-The current `PH-D03B` work block freezes those sixteen exact approved
+The Owner-approved `PH-D03B` work block freezes those sixteen exact approved
 expectation digests as an immutable commitment-only sealed audit input:
 
 - exactly sixteen unique, lexicographically ordered commitments with no
@@ -187,6 +187,35 @@ activation. The four checked PH-D03A artifacts remain byte-identical and are
 bound by the external exact target bundle and Owner approval. PH-D03B never
 rewrites those Golden artifacts.
 
+The current `PH-D05` work block normalizes every one of the 25 pinned ARC3
+public winning recordings into a deterministic canonical teacher corpus:
+
+- all 25 raw payloads are acquired only at the pinned dataset revision,
+  size/SHA-256 checked, and retained in an external cache rather than Git;
+- all 183 levels, 11,648 recorded actions, and the 11,574-action validated
+  successful corpus are bound without treating raw and canonical trajectories
+  as the same object;
+- RESET and ACTION1 through ACTION7 remain numeric action surfaces, ACTION6
+  requires complete integer x/y, and routing metadata is excluded from the
+  semantic action payload;
+- every transition binds before/action/after, available actions, terminal
+  state, level progress, raw-frame provenance, a lossless canonical frame, and
+  an invertible visible diff;
+- the one validated local solution override is explicit and preserves its
+  distinct 149-action raw source projection beside the 75-action canonical
+  replay;
+- three secret-scrubbed, network-denied, fixed-seed OFFLINE replay processes
+  complete 25 games and 183 levels with zero canonical frame, action,
+  availability, terminal, or progress mismatch;
+- three independent canonical builds produce byte-identical manifest,
+  25 package files, and normalization report;
+- DG-00, DG-06, DG-10, DG-11, and DG-12 are recomputed while hypothesis,
+  causal assertion, intervention, promotion, Bridge, Runtime, official, and
+  Kaggle counts remain zero.
+
+The canonical corpus is evidence input for PH-D06. It is not a causal model,
+an approved Rule, a StructureBundle, or runtime capability.
+
 Use exactly Python 3.12.13. From the repository root:
 
 ```text
@@ -209,6 +238,16 @@ python scripts/build_ph_d03b_sealed_audit.py
 python scripts/run_ph_d03b_sealed_audit.py \
   --submission <canonical-submission.json> \
   --ledger <outside-repository-ledger.json>
+python scripts/acquire_ph_d05_teacher_recordings.py \
+  --output-dir <external-content-verified-cache>
+python scripts/run_ph_d05_replay_x3.py \
+  --output-root <external-replay-cache>
+python scripts/build_ph_d05_teacher_trajectories.py \
+  --raw-recordings-dir <external-content-verified-cache> \
+  --replay-capture-dir <external-replay-cache>/run-1/captures
+python scripts/build_ph_d05_teacher_trajectories.py \
+  --verify-rebuild-root <independent-build-2> \
+  --verify-rebuild-root <independent-build-3>
 PYTHONPATH=distillation/src python -m ruff check \
   distillation/src distillation/tests
 PYTHONPATH=distillation/src python -m mypy --strict \

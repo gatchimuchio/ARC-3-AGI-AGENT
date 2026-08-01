@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import tempfile
+from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
 
@@ -74,6 +75,7 @@ def _entry_path(
 def render_refreshed_manifest(
     repository_root: Path,
     manifest_path: Path,
+    additions: Mapping[str, str] | None = None,
 ) -> tuple[bytes, tuple[str, ...], str]:
     """Return refreshed bytes, changed entry paths, and the logical digest."""
 
@@ -81,6 +83,29 @@ def render_refreshed_manifest(
     raw_entries = manifest.get("entries")
     if not isinstance(raw_entries, list):
         raise ManifestRefreshError("manifest entries must be an array")
+
+    additions = additions or {}
+    raw_paths = {
+        str(item.get("path"))
+        for item in raw_entries
+        if isinstance(item, dict)
+    }
+    for path, role in additions.items():
+        if not path or not role:
+            raise ManifestRefreshError("added entry path and role are required")
+        if path not in raw_paths:
+            raw_entries.append({"path": path, "role": role, "sha256": ""})
+            raw_paths.add(path)
+        else:
+            existing = next(
+                item
+                for item in raw_entries
+                if isinstance(item, dict) and item.get("path") == path
+            )
+            if existing.get("role") != role:
+                raise ManifestRefreshError(
+                    f"existing manifest role mismatch for {path}"
+                )
 
     seen: set[str] = set()
     changed_paths: list[str] = []
@@ -169,11 +194,30 @@ def main() -> int:
         type=Path,
         default=DEFAULT_MANIFEST,
     )
+    parser.add_argument(
+        "--add-entry",
+        action="append",
+        default=[],
+        metavar="PATH=ROLE",
+    )
     arguments = parser.parse_args()
+    additions: dict[str, str] = {}
+    for binding in arguments.add_entry:
+        if "=" not in binding:
+            raise ManifestRefreshError(
+                "--add-entry must use PATH=ROLE"
+            )
+        path, role = binding.split("=", 1)
+        if not path or not role or path in additions:
+            raise ManifestRefreshError(
+                "--add-entry path and role must be non-empty and unique"
+            )
+        additions[path] = role
     manifest_path = arguments.manifest.resolve()
     payload, changed_paths, content_digest = render_refreshed_manifest(
         REPOSITORY_ROOT,
         manifest_path,
+        additions,
     )
     current_payload = manifest_path.read_bytes()
     is_current = current_payload == payload

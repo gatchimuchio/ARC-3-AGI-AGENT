@@ -1,27 +1,30 @@
 {
-  "active_phase": "PH-D03B",
+  "active_phase": "PH-D05",
   "audit_baseline_commit": "3a7d96755cf6819d36e824fe4b64ae4086f1af98",
   "audit_report_sha256": "8536f4644fdc56cc71fa5a43699b43894c8f5d2c007ff772d68c29cc4546c1c1",
   "authority_manifest_path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
   "current_phase_candidates": {
-    "classification": "SEALED_AUDIT_CORPUS_FREEZE_IN_PROGRESS",
+    "classification": "ARC3_TEACHER_TRAJECTORY_NORMALIZATION_IN_PROGRESS",
     "eligible_for_phase_exit": false,
     "paths": [
-      "analysis/rev3/ph_d03b_sealed_audit_preinventory.json",
-      "control/rev3/PH-D03B_WORK_BLOCK_FRAME.json",
-      "control/rev3/PHASE_TRANSITIONS/PH-D03A_TO_PH-D03B.json",
-      "distillation/input/sealed_audit_contract.json",
-      "distillation/src/hds_distill/sealed_audit.py",
-      "distillation/tests/unit/test_sealed_audit.py",
-      "distillation/frozen/sealed_audit/ph_d03b_v1/expected_commitments.json",
-      "distillation/frozen/sealed_audit/ph_d03b_v1/manifest.json",
-      "distillation/frozen/sealed_audit/ph_d03b_v1/runner_contract.json",
-      "distillation/artifacts/reports/sealed_audit_freeze.json",
-      "scripts/build_ph_d03b_sealed_audit.py",
-      "scripts/run_ph_d03b_sealed_audit.py"
+      "analysis/rev3/ph_d05_teacher_trajectory_preinventory.json",
+      "control/rev3/PH-D05_WORK_BLOCK_FRAME.json",
+      "control/rev3/PHASE_TRANSITIONS/PH-D03B_TO_PH-D05.json",
+      "distillation/input/arc3_teacher_trajectory_normalization_contract.json",
+      "distillation/src/hds_distill/arc3_trajectory_normalization.py",
+      "distillation/tests/unit/test_arc3_trajectory_normalization.py",
+      "distillation/artifacts/reports/arc3_teacher_recording_acquisition.json",
+      "distillation/artifacts/reports/arc3_teacher_replay_x3.json",
+      "distillation/artifacts/reports/arc3_teacher_trajectory_normalization.json",
+      "distillation/artifacts/teacher/arc3/ph_d05_v1/manifest.json",
+      "distillation/artifacts/teacher/arc3/ph_d05_v1/rebuild_x3.json",
+      "scripts/acquire_ph_d05_teacher_recordings.py",
+      "scripts/ph_d05_replay_worker.py",
+      "scripts/run_ph_d05_replay_x3.py",
+      "scripts/build_ph_d05_teacher_trajectories.py"
     ]
   },
-  "current_work_class": "PH-D03B_SEALED_AUDIT_CORPUS_FREEZE",
+  "current_work_class": "PH-D05_ARC3_TEACHER_TRAJECTORY_NORMALIZATION",
   "distilled_initial_state_bundle_status": "NOT_FROZEN",
   "historical_evidence": {
     "classification": "HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE",
@@ -58,14 +61,14 @@
     "target_evidence_commit": "95c8fb0f1551716191769747d65816e273cf7640"
   },
   "installation_status": "INSTALLED",
-  "next_phase_after_current_phase": "PH-D05",
+  "next_phase_after_current_phase": "PH-D06",
   "phase_entry_approval": {
-    "approval_artifact_digest": "owner-approval-record:a9c552468bd6f656148030de28b914c2d6ad9b2bc095462ee6ba3e50f4cbe00a",
-    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D03A_TO_PH-D03B_20260731.json",
-    "decision_capture_digest": "sha256:33f13a39d4f2238b7fe329feb6dd0115e248ac222f39d0cb57c573a64fe454be",
-    "decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D03A_TO_PH-D03B_20260731.json",
-    "target_artifact_digest": "sha256:8c7c1c2b80239eb23e1c72e6bad3a71d9f43b203ac5a6fe4d8e93da3ba6bc309",
-    "target_evidence_commit": "cc20fe82ab2aba6ae8159bb2c761b4dabe05886c"
+    "approval_artifact_digest": "owner-approval-record:42ba4fc83bc4cb750d1e3ac3a011741a68f557bdd02f06f308860b15567d37f1",
+    "approval_record_path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D03B_TO_PH-D05_20260731.json",
+    "decision_capture_digest": "sha256:4eb6fdb70f8e4c37883966b17485c318eda07dcd182c0c9dfae90a1ac0f4bcfe",
+    "decision_capture_path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D03B_TO_PH-D05_20260731.json",
+    "target_artifact_digest": "sha256:88a5fe85e322640315e3121e0bfd150c96fa05e8119fcdd21b5e391abb9b6e55",
+    "target_evidence_commit": "caab292eaf3b67de87dcb1a4ae684d6f7dc1a360"
   },
   "ph_d00a_status": "OWNER_APPROVED_PASS",
   "ph_d00b_status": "OWNER_APPROVED_PASS",
@@ -78,7 +81,7 @@
   "ph_r00_status": "OWNER_APPROVED_PASS",
   "ph_r1_status": "OWNER_APPROVED_PASS",
   "runtime_activation_status": "SUSPEND",
-  "schema_version": "arc3-rev3-current-selector-v13",
+  "schema_version": "arc3-rev3-current-selector-v14",
   "standing_authorization": {
     "content_digest": "sha256:221c15869ea930a1d28bdac301280c0f3604010ed9ce108ad92d22a580ece4ed",
     "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json"
@@ -86,5 +89,6 @@
   "strategy_id": "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3",
   "strategy_status": "OWNER_APPROVED",
   "ph_d03a_status": "OWNER_APPROVED_PASS",
-  "ph_d03b_status": "IN_PROGRESS"
+  "ph_d03b_status": "OWNER_APPROVED_PASS",
+  "ph_d05_status": "IN_PROGRESS"
 }

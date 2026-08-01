@@ -99,7 +99,7 @@ content-specific PH-D03A OwnerDecisionCapture and ApprovalRecord approve the
 exact sixteen-target bundle without mutating these candidate artifacts.
 Approved expectations cannot be auto-updated.
 
-The current `PH-D03B` adds `sealed_audit_contract.json` and the versioned
+The Owner-approved `PH-D03B` adds `sealed_audit_contract.json` and the versioned
 sealed namespace under `../frozen/sealed_audit/ph_d03b_v1/`. The contract is
 bound to the exact PH-D03A evidence, sixteen-target bundle, decision,
 ApprovalRecord, current WorkBlockFrame, preinventory, and transition. It
@@ -122,6 +122,18 @@ fixes:
 
 The audit path raw-hashes the bound Golden source files but does not parse
 their expected plaintext. PH-D05 is not started by this contract.
+
+The current `PH-D05` adds
+`arc3_teacher_trajectory_normalization_contract.json`. The contract binds the
+exact PH-D03B evidence and entry decision, pinned dataset revision, source and
+environment manifests, acquisition report, strict OFFLINE replay-x3 report,
+canonical manifest/report digests, deterministic rebuild evidence, action and
+frame invariants, five required gates, and zero downstream activity. Raw
+recording bytes and replay captures remain outside the repository.
+
+This contract authorizes lossless trajectory normalization only. It does not
+authorize candidate selection, causal claims, intervention, Rule promotion,
+Bridge, Runtime, official access, or Kaggle mutation.
 
 `historical_pre_audit/PH-D03A/` preserves the four pre-audit checked
 candidate artifacts plus the corresponding source and test bytes from commit

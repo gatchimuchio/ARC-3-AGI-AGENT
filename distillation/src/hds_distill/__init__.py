@@ -1,10 +1,10 @@
-"""Isolated HDS schema, Typed Causal IR, Golden, and sealed-audit package.
+"""Isolated HDS schema, evidence, and teacher-normalization package.
 
-The active PH-D03B boundary freezes the exact Owner-approved PH-D03A
-expectation digests as a commitment-only sealed audit corpus with a
-status-only, one-use runner. It exports no solver, agent, runtime, Owner
-authority, expected-artifact plaintext, official connector, or submission
-capability.
+The active PH-D05 boundary admits content-verified raw teacher recordings and
+strict OFFLINE replay captures only to produce lossless canonical trajectory
+evidence.  It exports no hypothesis selection, causal assertion, promoted
+Rule, Bridge, agent runtime, Owner authority, official connector, or
+submission capability.
 """
 
 from __future__ import annotations
