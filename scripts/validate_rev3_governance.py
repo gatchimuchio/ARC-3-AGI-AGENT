@@ -824,7 +824,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         != {
             "content_digest": (
                 "rev3-work-block-frame:"
-                "9435534a2a6fbe43a1e38e5b34086ae00786288ce958a33a819d3761724c2c33"
+                "a0fb8f813a90b6a775c12d8778cc5a6d0d60939c18c61359ccb1641f755fe4e1"
             ),
             "entry_transition_digest": (
                 "rev3-phase-transition:"
@@ -4586,6 +4586,26 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d06_frame",
         )
     )
+    ph_d06_read_boundaries = ph_d06_frame.get("read_only_data_boundaries")
+    if not isinstance(ph_d06_read_boundaries, list):
+        failures.append("ph_d06_frame:READ_ONLY_BOUNDARIES_MISSING")
+    else:
+        for boundary in ph_d06_read_boundaries:
+            if not isinstance(boundary, str):
+                failures.append("ph_d06_frame:READ_ONLY_BOUNDARY_INVALID")
+                continue
+            boundary_path = Path(boundary)
+            if boundary_path.is_absolute() or ".." in boundary_path.parts:
+                failures.append("ph_d06_frame:READ_ONLY_BOUNDARY_INVALID")
+                continue
+            if any(marker in boundary for marker in ("*", "?", "[")):
+                exists = any(root.glob(boundary))
+            else:
+                exists = (root / boundary_path).exists()
+            if not exists:
+                failures.append(
+                    "ph_d06_frame:READ_ONLY_BOUNDARY_MISSING:" + boundary
+                )
     failures.extend(
         _content_digest_failures(
             ph_d06_transition,

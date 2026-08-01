@@ -2272,6 +2272,24 @@ def test_ph_r00_current_rebind_and_historical_evidence_are_content_bound(
     )
 
 
+def test_ph_d06_read_only_boundaries_resolve_inside_repository() -> None:
+    frame = _json(
+        REPOSITORY_ROOT / "control" / "rev3" / "PH-D06_WORK_BLOCK_FRAME.json"
+    )
+    boundaries = frame["read_only_data_boundaries"]
+    assert isinstance(boundaries, list)
+    assert boundaries
+    for raw_boundary in boundaries:
+        assert isinstance(raw_boundary, str)
+        boundary = Path(raw_boundary)
+        assert not boundary.is_absolute()
+        assert ".." not in boundary.parts
+        if any(marker in raw_boundary for marker in ("*", "?", "[")):
+            assert any(REPOSITORY_ROOT.glob(raw_boundary)), raw_boundary
+        else:
+            assert (REPOSITORY_ROOT / boundary).exists(), raw_boundary
+
+
 def test_d02b_entry_remains_bound_to_approved_d02a_evidence() -> None:
     control_root = REPOSITORY_ROOT / "control" / "rev3"
     decision = _json(
