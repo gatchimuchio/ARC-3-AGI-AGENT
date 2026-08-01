@@ -1,0 +1,96 @@
+{
+  "schema_version": "arc3-ph-d06-command-evidence-v1",
+  "phase_id": "PH-D06",
+  "commands": [
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests on independent exact implementation clone at repository sibling depth",
+      "result": "350 passed in 642.47s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/unit on independent exact implementation clone",
+      "result": "739 passed in 788.99s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/integration on independent exact implementation clone",
+      "result": "8 passed in 706.65s",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D06 source-blind candidate generation and executable IR validation",
+      "result": "25 teacher cases; 25 packages; 450 candidates; 400 executable typed IR; 50 rejected adversaries",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D06 privilege-adversary rejection",
+      "result": "25 answer-copy rejected with IR_ANSWER_COPY_FORBIDDEN; 25 identity-routing rejected with IR_IDENTITY_ROUTING_FORBIDDEN; rejected payload storage 0",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D06 isolated deterministic rebuild in three bubblewrap processes",
+      "result": "3 builds; 26 worker files per build; 0 byte mismatches; repository root, source, network, and secret visibility 0",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D06 pinned Python runtime integrity and final --verify",
+      "result": "Python 3.12.13; archive, 4522-entry tree, and executable digests exact; 31 generated files verified",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/validate_rev3_governance.py on exact implementation tree",
+      "result": "86 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "scripts/refresh_rev3_authority_manifest.py --check on exact implementation tree",
+      "result": "464 entries, 0 changes",
+      "status": "PASS"
+    },
+    {
+      "command": "scope_guard.py --verify-report on exact implementation tree",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; 0 findings",
+      "status": "PASS"
+    },
+    {
+      "command": "ruff, strict mypy, and py_compile on PH-D06 Python implementation and regression surfaces",
+      "result": "ruff PASS; strict mypy 19 distillation + 3 agent source files PASS; py_compile PASS",
+      "status": "PASS"
+    },
+    {
+      "command": "Git exact-tree, WorkBlockFrame path existence, protected-dirty, scope, and secret audit",
+      "result": "53 implementation destinations; 0 outside Frame; 0 forbidden; 0 missing read-only boundaries; 0 secrets; protected 32-file digest unchanged",
+      "status": "PASS"
+    }
+  ],
+  "resolved_attempts": [
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "The first linked WSL worktree was under Windows AppData and exposed a POSIX gitdir pointer to Windows Git while changing the expected sibling Downloads fixture location; distillation reported 316 passed, 23 failed, 11 errors and agent unit reported 715 passed, 23 failed.",
+      "resolution": "Created an independent full-history repository clone beside the authority repository, verified its own Windows-readable .git directory and sibling Downloads fixtures, then reran the exact final commit suites to 350, 739, and 8 passes.",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "A mutable extracted Python runtime cache had three rewritten encoding .pyc files and failed closed with PH_D06_PYTHON_RUNTIME_MEMBER_BYTES_MISMATCH.",
+      "resolution": "Verified the immutable archive SHA-256, extracted a fresh temporary runtime from that archive, and passed archive, 4522-entry tree, executable, source-blind rebuild, and final verify checks.",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "DOCUMENTATION_MISMATCH",
+      "finding": "PH-D06 WorkBlockFrame referenced the nonexistent legacy path distillation/artifacts/contracts/code_ir_abi.json instead of the active registry path.",
+      "resolution": "Rebound the Frame to distillation/artifacts/registries/code_ir_abi.json, regenerated dependent digests and contract, and added validator plus unit regression coverage requiring every read-only boundary to resolve.",
+      "status": "RESOLVED"
+    },
+    {
+      "classification": "ENVIRONMENT_FAILURE",
+      "finding": "A root-level Ruff invocation forced a subproject configuration and misclassified first-party imports.",
+      "resolution": "Executed Ruff from each declared subproject root and the repository script root; all intended surfaces passed without import rewrites.",
+      "status": "RESOLVED"
+    }
+  ],
+  "active_current_phase_product_regression_count": 0,
+  "active_environment_failure_count": 0,
+  "active_evidence_failure_count": 0,
+  "evidence_payload_digest": "sha256:c003144c5666ad5dce1f83c07881e4ee56f00301b1c419cdb6764b4cdc301a1d"
+}

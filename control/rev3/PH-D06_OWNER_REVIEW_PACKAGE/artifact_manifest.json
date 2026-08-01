@@ -1,0 +1,485 @@
+{
+  "schema_version": "arc3-ph-d06-evidence-payload-manifest-v1",
+  "phase_id": "PH-D06",
+  "work_block_id": "WB-PH-D06-MULTI-HYPOTHESIS-CANDIDATE-GENERATION-20260801",
+  "base_commit": "5a2fab68a408f4c8fa1c00fa4d33eb1cfff769a3",
+  "base_tree": "f43c60225774cc32e4ebcf2d2e2adc22ffe1139a",
+  "implementation_commit": "f8819582bc1fb3bb838594a89fe2c707026bb4cb",
+  "implementation_tree": "a8f6d10ee3d8a3a6203cef72f8870429331b8548",
+  "payload_digest_method": "SHA256_OF_THIS_FILE_BYTES_WITH_FINAL_LF",
+  "manifest_excludes_self": true,
+  "frame": {
+    "path": "control/rev3/PH-D06_WORK_BLOCK_FRAME.json",
+    "content_digest": "rev3-work-block-frame:a0fb8f813a90b6a775c12d8778cc5a6d0d60939c18c61359ccb1641f755fe4e1",
+    "sha256": "07aff55585bd210686d53a1fd6232dae20b2b6ccd6e8515e6e53377c74376917"
+  },
+  "authority_manifest": {
+    "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "content_digest": "rev3-current-authority-manifest:a5ac8e5ddf812f2e77ee737a2fc787cda6c844de4a0e0c916af8c1de1c0140a3",
+    "sha256": "b04d4fe98deac5d3890b36c77b87962cd8878fbca02671263012d735f04eefc6"
+  },
+  "result": {
+    "exit_claim": "MULTI_HYPOTHESIS_CORPUS_COMPLETE_WITH_ZERO_AUTOMATIC_ADOPTION",
+    "teacher_case_count": 25,
+    "candidate_case_package_count": 25,
+    "candidate_count": 450,
+    "executable_candidate_count": 400,
+    "rejected_adversarial_count": 50,
+    "source_blind_process_count": 3,
+    "deterministic_rebuild_process_count": 3,
+    "byte_mismatch_count": 0,
+    "failed_requirement_count": 0
+  },
+  "python_runtime": {
+    "version": "3.12.13",
+    "archive_sha256": "7ceaf4360f4b4ab44f31d8217cfdc70df8e12b61d9561b4900ee7af87176e50d",
+    "tree_digest": "hds-ph-d06-python-runtime-tree:bb0341f8ca64f9830163873839b08ba8a0cb1f6abb9a56cc9762fb5ce9196d7f",
+    "entry_count": 4522,
+    "executable_sha256": "1e4461092175d186c4bcdb19ee2849a45d6e4d8d1f6a871e45f63418d52a4e35",
+    "repository_byte_count": 0,
+    "network_acquisition_during_build": false
+  },
+  "artifact_count": 88,
+  "artifacts": [
+    {
+      "path": "AGENTS.md",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "bca44050cc96cf28474ab7ce2606af9280c46a766108ce2a0f3f08d4c19300a4"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+      "role": "REV3_GOVERNANCE_IMPLEMENTATION",
+      "sha256": "c43577644a6bb89b915e20a79186eefcea6a9a69abf8081197d036c715c94949"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "9b473185a1a7ebface893b80a39af655f5a21474177a61699fee503baa6d3d1e"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "7bff34d8a4e1ee4b735b0238511a40046482284de905d6e7e0db2357ab6282b4"
+    },
+    {
+      "path": "analysis/rev3/ph_d06_hypothesis_candidate_preinventory.json",
+      "role": "PH_D06_PREINVENTORY",
+      "sha256": "8d2709d058e5d750325bbe74ccdb49d58d83eba33891e52e5872b6e71e213eea"
+    },
+    {
+      "path": "control/rev3/D05_PHASE_STATE.json",
+      "role": "APPROVED_PREDECESSOR_PHASE_STATE",
+      "sha256": "36106b122dfc0b90bfc48f1226ff2dcbdde854c5f441b36b43d7245a285827d7"
+    },
+    {
+      "path": "control/rev3/OWNER_APPROVAL_RECORDS/PH-D05_TO_PH-D06_20260801.json",
+      "role": "PH_D06_ENTRY_OWNER_APPROVAL",
+      "sha256": "087e6a754c1f202c2cf1e4e9b9208d5d3499bf758a93ddfe718cc7e3ffc504ef"
+    },
+    {
+      "path": "control/rev3/OWNER_DECISION_CAPTURES/PH-D05_TO_PH-D06_20260801.json",
+      "role": "PH_D06_ENTRY_OWNER_DECISION",
+      "sha256": "b7fd70fbec2873fc69283defdd9f0f41a77477184c8269b81183b812764eeace"
+    },
+    {
+      "path": "control/rev3/OWNER_STANDING_AUTHORIZATIONS/CONTINUOUS_INTERNAL_DEVELOPMENT_20260731.json",
+      "role": "OWNER_STANDING_AUTHORIZATION",
+      "sha256": "c4bdbe9dac72f2a2148a0217e6c637817a6434854e063e395e4a9abc93c5fcbe"
+    },
+    {
+      "path": "control/rev3/PH-D05_EVIDENCE_ATTESTATION.json",
+      "role": "APPROVED_PREDECESSOR_EVIDENCE_ATTESTATION",
+      "sha256": "305f7dcaa752dc1b4ce8a0256a30d41c8a4698afc1b65e8fd24905283327fb2b"
+    },
+    {
+      "path": "control/rev3/PH-D05_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "APPROVED_PREDECESSOR_EVIDENCE_PAYLOAD",
+      "sha256": "eb17f67a8a637528a77f0d4fab5a85e6742d7d707adad8e6a66562fc78540a85"
+    },
+    {
+      "path": "control/rev3/PH-D06_WORK_BLOCK_FRAME.json",
+      "role": "PH_D06_WORK_BLOCK_FRAME",
+      "sha256": "07aff55585bd210686d53a1fd6232dae20b2b6ccd6e8515e6e53377c74376917"
+    },
+    {
+      "path": "control/rev3/PHASE_TRANSITIONS/PH-D05_TO_PH-D06.json",
+      "role": "PH_D06_ENTRY_TRANSITION",
+      "sha256": "48e1e6f2ff4574ee75924f02b3f023536577c58b461d22a9a91cebb214da1dca"
+    },
+    {
+      "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "fecd37b8a9282e7df379c747f7d32d36c8f8efef1ec0832334092924c98af210"
+    },
+    {
+      "path": "distillation/README.md",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "06abf0c6dee8815605f5ceead1d20434f90ed92416115e72dc84f7ecbc75abae"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/0202297cc14feb33d129795ef730839f7cc3e8bef70a57e221a1a8108a220290.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "804993b9eb2660f54ec8ac9b4e6278658da4ea589d125665933d7e63c5eb9c1c"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/1d3ec1c17aac5f4a2898068adc2e533b82e89c5ae7d7718cc69447b9106101bf.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "21f42e7f19dceb70d8a138e1b1eef9982edbf081541e431982cd1b89c43805cb"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/22806ea978e3b054093af49e26bfd15ffb08d54504bdb49c4da8cdb1ce69c9c9.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "93007fe66f7449232f58d71672a0893eec2d3ef0c246ab829b726a649c918488"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/293085e3ac11b39c1be8431a387370f0b0c92e9bf8b4d35339ea3e34878eb63f.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "0d8557490eff67b45428529bc23573121b2843bbfdaf01fe440fa9f4656a3f70"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/2da06304d034d54652295cf00c053b80139bfd12918c0b40434f9eb64536887f.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "79f67665634b8cb18b04625e5e6d60ea70d2047923119519aad36c14f5dcc1a1"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/4108d3386cd9c2d4e3193acf7c7420d73a4c20bfc55cac0a6841dfdd8a5e0b95.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "999a9ae373d8f6e8db518d0011048f39c792acc81bbb2507b3ffe0e528ab981d"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/4c835f3adf4851a6e14a1d8c175271197520fe96a96063e3675b630a186bf50b.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "e8c481966bb63e46c4e419d2a066ab63bd2f904ed939fe927fa2dfa8296f2a15"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/5323e4fd0cde0d7e0c89e64f668d778b3f189c2edc26559318c4fdaba9b2f6df.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "d804782a301adeec1475623f9dc697a7d19c1c444eccf48213b162ce22e1fd2d"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/57b9eec94b95e89e45b289b5824d175afc3ba67f02f86e7d1a4b7ad7e9719662.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "a05b917f450af8031d568f383c6eaeb30e17cd2ff9860eeb2b910fd7251a1268"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/63f05e4de83c38e1ca89dd3531f8b6e4a56603cb805f432eec9972b8efad6179.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "40a182d589d2049825c64c55de58e2e6b7b056e929b372fdd67a0e18c35d46ec"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/779fb747461657e227db0f825a653ead7260f6def0e148d15d76cf6929bd152c.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "ba05a7920fb1b5c859f9c59f4c1f9bbd33832a2c5ea590e0eb69e39008143d74"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/8175b81266b5b0b1a35fe8bf3ef742103d1d34da45b7a8388ba08ef6daaca0b0.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "37f8caadd12fa4a466b63b0d1af3772c165c22a06d7036a2da609ae448e6b0cb"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/855dd5d127ebae4484f38afc1bd9db9f4b31e9fd9577f3b8073111471d42c454.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "eb2446781f51e1e97ca6daca0eff860fb51a274205b0f0bda8119d09f1a05589"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/89f2f68a109c2ae5094d890d42046f76a931d489fdd01b8ed02b6506f2343d51.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "410773b038d78fc5e23ad4021f457295cab7dfbbf67b805833a97eed178d8f9f"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/8e1c364012996970a0d4026d69251f7d5dc501328cd27802fa6e3693d2648318.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "eeb7863f39bc097915d4281d6342e496bdc29ff931c3313b6783afcb538568b2"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/967582df9e2b4ee4fec307b96a1c0d763193289609e8c5708a5a8090d71eef90.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "d26eb127b14f1eabd1d44b3bfc7348a003513713b306fd690154731271a01bb8"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a04f36c9ffedff54a6edf4d20cf36d9bd80827cf493db6df2fecd84bcb30c67f.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "5f724b8011f80bf35e75055f779298f6c4d159e59c4dab1356d3e4eee7f3ee22"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a36d9b92954df5190601e990584b9d9950e51dd95ca3fb0722e0575b29d0136e.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "a8f6e842b4ae858690a2955cf97a607b774af353c383eeba74adfb9841a750cc"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a376456ba4cd25802ff8832be2e923b640c838da5e4c7d132506c419189ad83d.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "ac5d7f0cdd33c9552a162b3415a614922ae2ea800e9c84e613dfdb37ee5eb0a7"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/ad8aeb40f358cc3331f82e37fd16e477b13fe2b30f968c53e8156fca20a469e5.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "d4740204614ce00aed520b28983a8b7af12935e1ed65abf74fb86d8cc7272e2d"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/b22fae1456959ac5b21ae8a93da1703982972bd14874df28c0bcf8625e2abf9d.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "43bcfd72876a7e5ce7cf3fc53d430bfba2ee6e71a0ac41d7330a3d37938337fd"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/b47fdaa92c281a93d231af48bc980c9febc7c41575e6ad1d42c802c807c35cb9.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "ca041fd1312bba1f3b3e62d8c553ca0d2485489ee443892259b935b26401b9bf"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/d44fa16a633449b13b6d15b528c0dcd6c401d71d16d7d98d38bf085bcbc929cc.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "c936a76d24f14d44a0df05e3ef9b4d3ec0caa7cc91627bf6872a24eeb707ae87"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/e7bd05fb6f10c828e6b6413d19077c0011edbbbb09f5c2851d14e30fd546f026.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "47614a0fd13c666da4e5bb6e865c0f910208614d091f71817f5d7479fcbb74c5"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/ff8ecbf8317a5d9bc29fdd941021706b36f6e1d05560ce72627c0dc865a4b446.json.gz",
+      "role": "HYPOTHESIS_CANDIDATE_PACKAGE",
+      "sha256": "6a07de775f59f9d60e4336ff14b7f8c1bff0cd51506a63584e84e230a10cabbe"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/manifest.json",
+      "role": "MULTI_HYPOTHESIS_CORPUS_MANIFEST",
+      "sha256": "6f8f6a45a2ffed674584c360814926d8f3a0046184cccffad0671865e55e0109"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/rebuild_x3.json",
+      "role": "DETERMINISTIC_REBUILD_EVIDENCE",
+      "sha256": "182b2a8fde9e6fac5668cf2a2d837fd757bc97613f4dd2d91acb607777a2001a"
+    },
+    {
+      "path": "distillation/artifacts/registries/code_ir_abi.json",
+      "role": "FROZEN_CODE_IR_ABI",
+      "sha256": "4f8924bbbb4dbaff910733f85ccec0dded3da5103750a3535b28a94ebb843705"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_candidate_generation.json",
+      "role": "CANDIDATE_GENERATION_EVIDENCE",
+      "sha256": "990d2c3edc843815fc23240d0e4ef7e5c3435be9bd41a5796d17390ec321f4b9"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_llm_capture.json",
+      "role": "LLM_NON_USE_EVIDENCE",
+      "sha256": "2bcdc69e3d273f395a58ececb713af163863451bf97a6f7fb4919e9c6aa1c8a6"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_source_blind_execution.json",
+      "role": "SOURCE_BLIND_EXECUTION_EVIDENCE",
+      "sha256": "ef341d260f68b3fdec89d15200e75bad61b968d29a3cd503a0b551840c1541d9"
+    },
+    {
+      "path": "distillation/artifacts/reports/distillation_scope_audit.json",
+      "role": "DISTILLATION_SCOPE_AUDIT",
+      "sha256": "7866061b5abca0f68ff680cdae33c10638505f8b51549b4cd33d9a73e40091b5"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/manifest.json",
+      "role": "CANONICAL_TEACHER_CORPUS_MANIFEST",
+      "sha256": "29c5cc86ba96f552a22442ad535fb0cf142e6b073690f830f80508a8ede329ea"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/ar25-0c556536.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "85b233a253eb622614a9dc3609e78d87eaebc0e1af90788ce157aff6b529cca0"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/bp35-0a0ad940.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "d80d4705f8f6bedadbcdad049e03924b3cdaa9261b81838bb292620832e88fe3"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/cd82-fb555c5d.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "77c011ebd4e7c816b55bb050db47a6faf96f6fd5113079d9e021eaabaf38ebdd"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/cn04-2fe56bfb.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "08f9b4a75d92161d6e833e5a16ee26472ee33715edc6acf9a4cd9ffe663c8b9a"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/dc22-fdcac232.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "48693b48ba347af0063e5367091d866a9a672babb807b7fb8c071190283481cc"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/ft09-0d8bbf25.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "007b0e364260e4c9f877bbf2b8c9f2d2d3b63d13e904f447f951fd186ff33ede"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/g50t-5849a774.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "9bd8274e5b7e2fb8a2a08b3f049040899555a39cc67f7b8355294ac00df6d8dd"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/ka59-38d34dbb.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "a703d8453dd51e5b5bad85680a01d72bf722f454e7b83eba8bdee06f9e43f389"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/lf52-271a04aa.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "44eebdbdc31e089321c78d3a7556aa81101b601bdbf445ce0f0833a2cc0ec679"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/lp85-305b61c3.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "0822691fb933594374b0c9d1df3b4d39c96f37884384fde50ca2c74109bd8f88"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/ls20-9607627b.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "1af457047f78334dc8ce269904e101e2ec7ae7e3553c5dfd666b45ffba91267c"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/m0r0-492f87ba.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "d24b0cb7f3bf5c03ed006f18ec9f6d26f1a6a7de42093ed52c93a601eced268a"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/r11l-495a7899.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "9c6558cecdb7ccd7a2c0bd572c2e1c2c4130f6850676b5096a84d93145c3c5c9"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/re86-8af5384d.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "f5badaac875ce3468a4d6122acf2743ed8a75f538c02e37ba44336b1d9fc1114"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/s5i5-18d95033.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "2bd9f415f7ceb71fcfddb52ba23e20a5c7f347da79dd1dfe8173e1cbc22aaa8b"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/sb26-7fbdac44.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "779a748e8a5e2aaf4b96bf75d7d2d1b96fe8a89d8d71a316e81e3845f2492657"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/sc25-635fd71a.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "537a91cd3a0c14540d024662c91cca7ee03a04d6f212d946e6f47fe57d2937c7"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/sk48-d8078629.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "fb52c2c223ce5108e9d56aff03d210704500c67122df514ac269b0b1cd6ca1f8"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/sp80-589a99af.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "74e3347f5813bf526a08217e4120299e9d352d053796c53cb4dbe8ab69497248"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/su15-1944f8ab.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "6e54caa2c170be32e34461f7a8d6784c3aeb315a861e00feebbc9d45d8dc5cc8"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/tn36-ef4dde99.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "5bd8f0cb6f62befcf779e7da012722286d48b61c6e3c26271e1211e2cda4f693"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/tr87-cd924810.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "df8abbf1338cb4efd2eaf14e7d0e527d3ab3db24a79785fe24cccba7db5186ca"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/tu93-0768757b.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "46957d1d196a63cb9d725c5b52e80c335a6fd28d3fca75db3f5f21a6a0af0a93"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/vc33-5430563c.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "6c36d6a5c55b3349ac26f2fe8856d43909c6a48127339d5a89b10723a96ca24a"
+    },
+    {
+      "path": "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/wa30-ee6fef47.json.gz",
+      "role": "CANONICAL_TEACHER_TRAJECTORY_PACKAGE",
+      "sha256": "98352a4eb7fbcf69901f79080971bb4b678774bf5be06f2f91ce0359aee5287d"
+    },
+    {
+      "path": "distillation/input/README.md",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "38b80e895f99c52ec3083225844ca6d3df9c1fd3c77137008ec17a9f7fd3329d"
+    },
+    {
+      "path": "distillation/input/arc3_hypothesis_candidate_generation_contract.json",
+      "role": "HYPOTHESIS_GENERATION_CONTRACT",
+      "sha256": "e8e8455e22e0148d2b7865b212e9c6cc928f33e0a71e35da2ad64d25a0164c8e"
+    },
+    {
+      "path": "distillation/input/post_audit_causal_ir_schema_contract.json",
+      "role": "FROZEN_CAUSAL_IR_SCHEMA_CONTRACT",
+      "sha256": "d0c6f849c2ee3214399932016b51eb3db86bf2a5d70ec9d8b55b35206540d953"
+    },
+    {
+      "path": "distillation/src/hds_distill/__init__.py",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "6a5ea40a54fc361577296d0fbe982cba8b26f122477f94394cc1f503d553ff31"
+    },
+    {
+      "path": "distillation/src/hds_distill/hypothesis_generation.py",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "efaff6dc2cba0227b76697d1d4ee6773b9ef0083e6ba17d29373a3a5d24899d4"
+    },
+    {
+      "path": "distillation/tests/unit/test_golden_corpus.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "8660a60534b6bd51e31eb78561b9b705e6114e3434dcf162fc330bf28fcc423c"
+    },
+    {
+      "path": "distillation/tests/unit/test_hypothesis_generation.py",
+      "role": "REGRESSION_TEST",
+      "sha256": "d0d2e3ff5615e2775aeb0983ecf4df837d6b5f4df0d149766efe45919c1c89fe"
+    },
+    {
+      "path": "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "28f93326f8769d13e097220b4fb427b0e436c9f378dcb3d131a0363c1a5b52f0"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "sha256": "b04d4fe98deac5d3890b36c77b87962cd8878fbca02671263012d735f04eefc6"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V15.json",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "3f7edd3662cc79fba5b67d9ad631a2b7217473ed2c4a05afb6761cd6a8a8e61d"
+    },
+    {
+      "path": "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+      "role": "PH_D06_IMPLEMENTATION_OR_BOUND_INPUT",
+      "sha256": "a57db102d17e46aa23274fea5476bbb05a8c30863915c05f7f21f48dce48c3bd"
+    },
+    {
+      "path": "scripts/build_ph_d06_hypothesis_candidates.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "21f6f0ddd6db77047145a9ff01e33d1d8bdb815df02eec8e1a09a5d6170041c7"
+    },
+    {
+      "path": "scripts/ph_d06_candidate_worker.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "61847437bf05d81e306005101fe37d55a67342a55d8de13463e8e47eb4f6ca68"
+    },
+    {
+      "path": "scripts/refresh_rev3_authority_manifest.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "1e5fc9752f352db566eaf46a21f8d48ed6ab1494cfa2eeedd07d6280baea7dc8"
+    },
+    {
+      "path": "scripts/validate_rev3_governance.py",
+      "role": "DETERMINISTIC_TOOLING",
+      "sha256": "b16977ed57b62e006032ac0d6fd214a0d831c49118bbcde5c8873025128b379e"
+    }
+  ]
+}

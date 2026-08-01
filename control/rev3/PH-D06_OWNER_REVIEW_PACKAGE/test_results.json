@@ -1,0 +1,157 @@
+{
+  "schema_version": "arc3-ph-d06-test-results-v1",
+  "phase_id": "PH-D06",
+  "implementation_commit": "f8819582bc1fb3bb838594a89fe2c707026bb4cb",
+  "implementation_tree": "a8f6d10ee3d8a3a6203cef72f8870429331b8548",
+  "results": [
+    {
+      "suite": "EXACT_TREE",
+      "commit": "f8819582bc1fb3bb838594a89fe2c707026bb4cb",
+      "tree": "a8f6d10ee3d8a3a6203cef72f8870429331b8548",
+      "independent_clone_count": 1,
+      "changed_destination_file_count": 53,
+      "tracked_diff_finding_count": 0,
+      "protected_change_count": 0,
+      "outside_frame_count": 0,
+      "forbidden_path_count": 0,
+      "secret_finding_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_DISTILLATION",
+      "duration_seconds": 642.47,
+      "passed": 350,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_UNIT",
+      "duration_seconds": 788.99,
+      "passed": 739,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "FULL_INTEGRATION",
+      "duration_seconds": 706.65,
+      "passed": 8,
+      "failed": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "MULTI_HYPOTHESIS_CORPUS",
+      "teacher_case_count": 25,
+      "candidate_case_package_count": 25,
+      "candidate_count": 450,
+      "executable_candidate_count": 400,
+      "rejected_adversarial_count": 50,
+      "candidate_adoption_count": 0,
+      "non_strawman_candidate_count": 300,
+      "observation_compatible_competitor_count": 325,
+      "alternative_adequacy_status": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "PRIVILEGE_ADVERSARIAL_REJECTION",
+      "answer_copy_generated_and_rejected_count": 25,
+      "trajectory_lookup_generated_and_rejected_count": 25,
+      "answer_copy_rejection_code": "IR_ANSWER_COPY_FORBIDDEN",
+      "trajectory_lookup_rejection_code": "IR_IDENTITY_ROUTING_FORBIDDEN",
+      "stored_rejected_payload_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "SOURCE_BLIND_EXECUTION_X3",
+      "independent_process_count": 3,
+      "mount_namespace_pass_count": 3,
+      "network_namespace_pass_count": 3,
+      "repository_root_visibility_count": 0,
+      "environment_source_mount_count": 0,
+      "environment_source_access_count": 0,
+      "secret_environment_key_count": 0,
+      "same_process_source_access_then_candidate_generation_count": 0,
+      "checkout_projection_file_count": 20,
+      "status": "PASS"
+    },
+    {
+      "suite": "DETERMINISTIC_REBUILD_X3",
+      "independent_process_count": 3,
+      "compared_file_count_per_build": 26,
+      "candidate_case_package_count": 25,
+      "candidate_count": 450,
+      "byte_mismatch_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "PINNED_PYTHON_RUNTIME",
+      "version": "3.12.13",
+      "archive_sha256": "7ceaf4360f4b4ab44f31d8217cfdc70df8e12b61d9561b4900ee7af87176e50d",
+      "tree_digest": "hds-ph-d06-python-runtime-tree:bb0341f8ca64f9830163873839b08ba8a0cb1f6abb9a56cc9762fb5ce9196d7f",
+      "entry_count": 4522,
+      "executable_sha256": "1e4461092175d186c4bcdb19ee2849a45d6e4d8d1f6a871e45f63418d52a4e35",
+      "repository_byte_count": 0,
+      "network_acquisition_during_build": false,
+      "status": "PASS"
+    },
+    {
+      "suite": "LLM_DEPENDENCY",
+      "llm_call_count": 0,
+      "live_llm_required_for_rebuild": false,
+      "arbitrary_code_execution_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "GATE_OBLIGATIONS",
+      "behaviorally_recomputed_gate_count": 5,
+      "DG-03": "PASS",
+      "DG-04": "PASS",
+      "DG-05": "PASS",
+      "DG-08": "PASS",
+      "DG-12": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "GOVERNANCE_VALIDATOR",
+      "check_count": 86,
+      "failure_count": 0,
+      "status": "PASS"
+    },
+    {
+      "suite": "AUTHORITY_MANIFEST",
+      "entry_count": 464,
+      "changed_entry_count": 0,
+      "content_digest": "rev3-current-authority-manifest:a5ac8e5ddf812f2e77ee737a2fc787cda6c844de4a0e0c916af8c1de1c0140a3",
+      "status": "PASS"
+    },
+    {
+      "suite": "SCOPE_GUARD",
+      "finding_count": 0,
+      "content_digest": "hds-distillation-scope-audit:649f711a20be5d07ff45b7405b0a0106809f18d2e5c4519988ae987a517af328",
+      "status": "PASS"
+    },
+    {
+      "suite": "STATIC_VALIDATION",
+      "ruff": "PASS",
+      "mypy_strict": "PASS",
+      "mypy_distillation_source_file_count": 19,
+      "mypy_agent_source_file_count": 3,
+      "py_compile": "PASS",
+      "status": "PASS"
+    },
+    {
+      "suite": "RESOURCE_BOUNDARY",
+      "fit_execution_count": 0,
+      "candidate_adoption_count": 0,
+      "causal_assertion_count": 0,
+      "real_intervention_execution_count": 0,
+      "rule_promotion_count": 0,
+      "bridge_runtime_capability_count": 0,
+      "official_access_count": 0,
+      "kaggle_mutation_count": 0,
+      "network_submission_count": 0,
+      "status": "PASS"
+    }
+  ],
+  "failed_suite_count": 0,
+  "evidence_payload_digest": "sha256:c003144c5666ad5dce1f83c07881e4ee56f00301b1c419cdb6764b4cdc301a1d"
+}

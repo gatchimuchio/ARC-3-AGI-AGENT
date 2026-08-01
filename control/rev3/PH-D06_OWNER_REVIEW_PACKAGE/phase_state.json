@@ -1,0 +1,381 @@
+{
+  "schema_version": "arc3-phase-state-v2",
+  "phase_id": "PH-D06",
+  "status": "CODEX_SELF_AUDIT_PASS",
+  "base_commit": "5a2fab68a408f4c8fa1c00fa4d33eb1cfff769a3",
+  "base_tree": "f43c60225774cc32e4ebcf2d2e2adc22ffe1139a",
+  "implementation_commit": "f8819582bc1fb3bb838594a89fe2c707026bb4cb",
+  "implementation_tree": "a8f6d10ee3d8a3a6203cef72f8870429331b8548",
+  "work_block_id": "WB-PH-D06-MULTI-HYPOTHESIS-CANDIDATE-GENERATION-20260801",
+  "spec_digest": "sha256:52c652ae734a41cd4116d4e15bca890c43c5e0aaf3f7f8d6f0627a540f7a9f63",
+  "roadmap_digest": "sha256:7c010c9c5becd89800ffb2fd9ba9a914dac3cd246a39891e88367ac5ae7753e5",
+  "input_manifest_digest": "rev3-current-authority-manifest:a5ac8e5ddf812f2e77ee737a2fc787cda6c844de4a0e0c916af8c1de1c0140a3",
+  "allowed_data_roles": [
+    "REPOSITORY_METADATA",
+    "APPROVED_PREDECESSOR_EVIDENCE",
+    "CANONICAL_TEACHER_TRAJECTORY",
+    "DETERMINISTIC_DERIVATION",
+    "OPERATOR_REGISTRY",
+    "RESOURCE_PROFILE",
+    "HYPOTHESIS_CANDIDATE",
+    "REJECTED_ADVERSARIAL_COMMITMENT",
+    "SOURCE_BLIND_EXECUTION_EVIDENCE",
+    "OWNER_APPROVAL_EVIDENCE"
+  ],
+  "changed_files": [
+    "AGENTS.md",
+    "ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py",
+    "ARC-AGI-3-Agents/tests/unit/test_hds_dependency_audit.py",
+    "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
+    "analysis/rev3/ph_d06_hypothesis_candidate_preinventory.json",
+    "control/rev3/PH-D06_WORK_BLOCK_FRAME.json",
+    "control/rev3/PHASE_TRANSITIONS/PH-D05_TO_PH-D06.json",
+    "control/rev3/REV3_CURRENT_SELECTOR.json",
+    "distillation/README.md",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/0202297cc14feb33d129795ef730839f7cc3e8bef70a57e221a1a8108a220290.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/1d3ec1c17aac5f4a2898068adc2e533b82e89c5ae7d7718cc69447b9106101bf.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/22806ea978e3b054093af49e26bfd15ffb08d54504bdb49c4da8cdb1ce69c9c9.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/293085e3ac11b39c1be8431a387370f0b0c92e9bf8b4d35339ea3e34878eb63f.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/2da06304d034d54652295cf00c053b80139bfd12918c0b40434f9eb64536887f.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/4108d3386cd9c2d4e3193acf7c7420d73a4c20bfc55cac0a6841dfdd8a5e0b95.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/4c835f3adf4851a6e14a1d8c175271197520fe96a96063e3675b630a186bf50b.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/5323e4fd0cde0d7e0c89e64f668d778b3f189c2edc26559318c4fdaba9b2f6df.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/57b9eec94b95e89e45b289b5824d175afc3ba67f02f86e7d1a4b7ad7e9719662.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/63f05e4de83c38e1ca89dd3531f8b6e4a56603cb805f432eec9972b8efad6179.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/779fb747461657e227db0f825a653ead7260f6def0e148d15d76cf6929bd152c.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/8175b81266b5b0b1a35fe8bf3ef742103d1d34da45b7a8388ba08ef6daaca0b0.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/855dd5d127ebae4484f38afc1bd9db9f4b31e9fd9577f3b8073111471d42c454.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/89f2f68a109c2ae5094d890d42046f76a931d489fdd01b8ed02b6506f2343d51.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/8e1c364012996970a0d4026d69251f7d5dc501328cd27802fa6e3693d2648318.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/967582df9e2b4ee4fec307b96a1c0d763193289609e8c5708a5a8090d71eef90.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a04f36c9ffedff54a6edf4d20cf36d9bd80827cf493db6df2fecd84bcb30c67f.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a36d9b92954df5190601e990584b9d9950e51dd95ca3fb0722e0575b29d0136e.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/a376456ba4cd25802ff8832be2e923b640c838da5e4c7d132506c419189ad83d.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/ad8aeb40f358cc3331f82e37fd16e477b13fe2b30f968c53e8156fca20a469e5.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/b22fae1456959ac5b21ae8a93da1703982972bd14874df28c0bcf8625e2abf9d.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/b47fdaa92c281a93d231af48bc980c9febc7c41575e6ad1d42c802c807c35cb9.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/d44fa16a633449b13b6d15b528c0dcd6c401d71d16d7d98d38bf085bcbc929cc.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/e7bd05fb6f10c828e6b6413d19077c0011edbbbb09f5c2851d14e30fd546f026.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/cases/ff8ecbf8317a5d9bc29fdd941021706b36f6e1d05560ce72627c0dc865a4b446.json.gz",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/manifest.json",
+    "distillation/artifacts/candidates/arc3/ph_d06_v1/rebuild_x3.json",
+    "distillation/artifacts/reports/arc3_hypothesis_candidate_generation.json",
+    "distillation/artifacts/reports/arc3_hypothesis_llm_capture.json",
+    "distillation/artifacts/reports/arc3_hypothesis_source_blind_execution.json",
+    "distillation/artifacts/reports/distillation_scope_audit.json",
+    "distillation/input/README.md",
+    "distillation/input/arc3_hypothesis_candidate_generation_contract.json",
+    "distillation/src/hds_distill/__init__.py",
+    "distillation/src/hds_distill/hypothesis_generation.py",
+    "distillation/tests/unit/test_golden_corpus.py",
+    "distillation/tests/unit/test_hypothesis_generation.py",
+    "docs/strategy/ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
+    "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V15.json",
+    "docs/strategy/contracts/REV3_GOVERNANCE_CONTRACT_V1.json",
+    "scripts/build_ph_d06_hypothesis_candidates.py",
+    "scripts/ph_d06_candidate_worker.py",
+    "scripts/validate_rev3_governance.py"
+  ],
+  "commands": [
+    {
+      "command": "Windows Python 3.12.13 -m pytest distillation/tests on independent exact implementation clone at repository sibling depth",
+      "result": "350 passed in 642.47s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/unit on independent exact implementation clone",
+      "result": "739 passed in 788.99s",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 -m pytest ARC-AGI-3-Agents/tests/integration on independent exact implementation clone",
+      "result": "8 passed in 706.65s",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D06 source-blind candidate generation and executable IR validation",
+      "result": "25 teacher cases; 25 packages; 450 candidates; 400 executable typed IR; 50 rejected adversaries",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D06 privilege-adversary rejection",
+      "result": "25 answer-copy rejected with IR_ANSWER_COPY_FORBIDDEN; 25 identity-routing rejected with IR_IDENTITY_ROUTING_FORBIDDEN; rejected payload storage 0",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D06 isolated deterministic rebuild in three bubblewrap processes",
+      "result": "3 builds; 26 worker files per build; 0 byte mismatches; repository root, source, network, and secret visibility 0",
+      "status": "PASS"
+    },
+    {
+      "command": "PH-D06 pinned Python runtime integrity and final --verify",
+      "result": "Python 3.12.13; archive, 4522-entry tree, and executable digests exact; 31 generated files verified",
+      "status": "PASS"
+    },
+    {
+      "command": "Windows Python 3.12.13 scripts/validate_rev3_governance.py on exact implementation tree",
+      "result": "86 checks, 0 failures",
+      "status": "PASS"
+    },
+    {
+      "command": "scripts/refresh_rev3_authority_manifest.py --check on exact implementation tree",
+      "result": "464 entries, 0 changes",
+      "status": "PASS"
+    },
+    {
+      "command": "scope_guard.py --verify-report on exact implementation tree",
+      "result": "DISTILLATION_SCOPE_GUARD_PASS; 0 findings",
+      "status": "PASS"
+    },
+    {
+      "command": "ruff, strict mypy, and py_compile on PH-D06 Python implementation and regression surfaces",
+      "result": "ruff PASS; strict mypy 19 distillation + 3 agent source files PASS; py_compile PASS",
+      "status": "PASS"
+    },
+    {
+      "command": "Git exact-tree, WorkBlockFrame path existence, protected-dirty, scope, and secret audit",
+      "result": "53 implementation destinations; 0 outside Frame; 0 forbidden; 0 missing read-only boundaries; 0 secrets; protected 32-file digest unchanged",
+      "status": "PASS"
+    }
+  ],
+  "tests": {
+    "exact_tree": {
+      "suite": "EXACT_TREE",
+      "commit": "f8819582bc1fb3bb838594a89fe2c707026bb4cb",
+      "tree": "a8f6d10ee3d8a3a6203cef72f8870429331b8548",
+      "independent_clone_count": 1,
+      "changed_destination_file_count": 53,
+      "tracked_diff_finding_count": 0,
+      "protected_change_count": 0,
+      "outside_frame_count": 0,
+      "forbidden_path_count": 0,
+      "secret_finding_count": 0,
+      "status": "PASS"
+    },
+    "full_distillation": {
+      "suite": "FULL_DISTILLATION",
+      "duration_seconds": 642.47,
+      "passed": 350,
+      "failed": 0,
+      "status": "PASS"
+    },
+    "full_unit": {
+      "suite": "FULL_UNIT",
+      "duration_seconds": 788.99,
+      "passed": 739,
+      "failed": 0,
+      "status": "PASS"
+    },
+    "full_integration": {
+      "suite": "FULL_INTEGRATION",
+      "duration_seconds": 706.65,
+      "passed": 8,
+      "failed": 0,
+      "status": "PASS"
+    },
+    "multi_hypothesis_corpus": {
+      "suite": "MULTI_HYPOTHESIS_CORPUS",
+      "teacher_case_count": 25,
+      "candidate_case_package_count": 25,
+      "candidate_count": 450,
+      "executable_candidate_count": 400,
+      "rejected_adversarial_count": 50,
+      "candidate_adoption_count": 0,
+      "non_strawman_candidate_count": 300,
+      "observation_compatible_competitor_count": 325,
+      "alternative_adequacy_status": "PASS",
+      "status": "PASS"
+    },
+    "privilege_adversarial_rejection": {
+      "suite": "PRIVILEGE_ADVERSARIAL_REJECTION",
+      "answer_copy_generated_and_rejected_count": 25,
+      "trajectory_lookup_generated_and_rejected_count": 25,
+      "answer_copy_rejection_code": "IR_ANSWER_COPY_FORBIDDEN",
+      "trajectory_lookup_rejection_code": "IR_IDENTITY_ROUTING_FORBIDDEN",
+      "stored_rejected_payload_count": 0,
+      "status": "PASS"
+    },
+    "source_blind_execution_x3": {
+      "suite": "SOURCE_BLIND_EXECUTION_X3",
+      "independent_process_count": 3,
+      "mount_namespace_pass_count": 3,
+      "network_namespace_pass_count": 3,
+      "repository_root_visibility_count": 0,
+      "environment_source_mount_count": 0,
+      "environment_source_access_count": 0,
+      "secret_environment_key_count": 0,
+      "same_process_source_access_then_candidate_generation_count": 0,
+      "checkout_projection_file_count": 20,
+      "status": "PASS"
+    },
+    "deterministic_rebuild_x3": {
+      "suite": "DETERMINISTIC_REBUILD_X3",
+      "independent_process_count": 3,
+      "compared_file_count_per_build": 26,
+      "candidate_case_package_count": 25,
+      "candidate_count": 450,
+      "byte_mismatch_count": 0,
+      "status": "PASS"
+    },
+    "python_runtime": {
+      "suite": "PINNED_PYTHON_RUNTIME",
+      "version": "3.12.13",
+      "archive_sha256": "7ceaf4360f4b4ab44f31d8217cfdc70df8e12b61d9561b4900ee7af87176e50d",
+      "tree_digest": "hds-ph-d06-python-runtime-tree:bb0341f8ca64f9830163873839b08ba8a0cb1f6abb9a56cc9762fb5ce9196d7f",
+      "entry_count": 4522,
+      "executable_sha256": "1e4461092175d186c4bcdb19ee2849a45d6e4d8d1f6a871e45f63418d52a4e35",
+      "repository_byte_count": 0,
+      "network_acquisition_during_build": false,
+      "status": "PASS"
+    },
+    "llm_dependency": {
+      "suite": "LLM_DEPENDENCY",
+      "llm_call_count": 0,
+      "live_llm_required_for_rebuild": false,
+      "arbitrary_code_execution_count": 0,
+      "status": "PASS"
+    },
+    "gate_obligations": {
+      "suite": "GATE_OBLIGATIONS",
+      "behaviorally_recomputed_gate_count": 5,
+      "DG-03": "PASS",
+      "DG-04": "PASS",
+      "DG-05": "PASS",
+      "DG-08": "PASS",
+      "DG-12": "PASS",
+      "status": "PASS"
+    },
+    "governance_validator": {
+      "suite": "GOVERNANCE_VALIDATOR",
+      "check_count": 86,
+      "failure_count": 0,
+      "status": "PASS"
+    },
+    "authority_manifest": {
+      "suite": "AUTHORITY_MANIFEST",
+      "entry_count": 464,
+      "changed_entry_count": 0,
+      "content_digest": "rev3-current-authority-manifest:a5ac8e5ddf812f2e77ee737a2fc787cda6c844de4a0e0c916af8c1de1c0140a3",
+      "status": "PASS"
+    },
+    "scope_guard": {
+      "suite": "SCOPE_GUARD",
+      "finding_count": 0,
+      "content_digest": "hds-distillation-scope-audit:649f711a20be5d07ff45b7405b0a0106809f18d2e5c4519988ae987a517af328",
+      "status": "PASS"
+    },
+    "static_validation": {
+      "suite": "STATIC_VALIDATION",
+      "ruff": "PASS",
+      "mypy_strict": "PASS",
+      "mypy_distillation_source_file_count": 19,
+      "mypy_agent_source_file_count": 3,
+      "py_compile": "PASS",
+      "status": "PASS"
+    },
+    "resource_boundary": {
+      "suite": "RESOURCE_BOUNDARY",
+      "fit_execution_count": 0,
+      "candidate_adoption_count": 0,
+      "causal_assertion_count": 0,
+      "real_intervention_execution_count": 0,
+      "rule_promotion_count": 0,
+      "bridge_runtime_capability_count": 0,
+      "official_access_count": 0,
+      "kaggle_mutation_count": 0,
+      "network_submission_count": 0,
+      "status": "PASS"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "control/rev3/PH-D06_OWNER_REVIEW_PACKAGE/artifact_manifest.json",
+      "role": "EVIDENCE_PAYLOAD_DESCRIPTOR",
+      "sha256": "c003144c5666ad5dce1f83c07881e4ee56f00301b1c419cdb6764b4cdc301a1d"
+    },
+    {
+      "path": "control/rev3/PH-D06_WORK_BLOCK_FRAME.json",
+      "role": "PH_D06_WORK_BLOCK_FRAME",
+      "sha256": "07aff55585bd210686d53a1fd6232dae20b2b6ccd6e8515e6e53377c74376917",
+      "content_digest": "rev3-work-block-frame:a0fb8f813a90b6a775c12d8778cc5a6d0d60939c18c61359ccb1641f755fe4e1"
+    },
+    {
+      "path": "distillation/input/arc3_hypothesis_candidate_generation_contract.json",
+      "role": "HYPOTHESIS_GENERATION_CONTRACT",
+      "sha256": "e8e8455e22e0148d2b7865b212e9c6cc928f33e0a71e35da2ad64d25a0164c8e",
+      "content_digest": "hds-arc3-hypothesis-candidate-generation-contract:6c657a49e7157b30f6717937eed346d436e218a9c0337d9bb367ba59151e1e30"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/manifest.json",
+      "role": "MULTI_HYPOTHESIS_CORPUS_MANIFEST",
+      "sha256": "6f8f6a45a2ffed674584c360814926d8f3a0046184cccffad0671865e55e0109",
+      "content_digest": "hds-multi-hypothesis-corpus-manifest:82c5f9c26c85686f1f40c53cd7c926995a1371811efb85f359962afefb69169d"
+    },
+    {
+      "path": "distillation/artifacts/candidates/arc3/ph_d06_v1/rebuild_x3.json",
+      "role": "DETERMINISTIC_REBUILD_EVIDENCE",
+      "sha256": "182b2a8fde9e6fac5668cf2a2d837fd757bc97613f4dd2d91acb607777a2001a",
+      "content_digest": "hds-ph-d06-rebuild-x3:11ec69e6c78fbc2210292f34cd61d3b3aee7d6f629c8d806a6e9e87cc05d3340"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_candidate_generation.json",
+      "role": "CANDIDATE_GENERATION_EVIDENCE",
+      "sha256": "990d2c3edc843815fc23240d0e4ef7e5c3435be9bd41a5796d17390ec321f4b9",
+      "content_digest": "hds-ph-d06-hypothesis-candidate-generation:696297619b6062a17c3c4b1496ab74cab768c45cdcb9f884db9d6284ba6a2825"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_source_blind_execution.json",
+      "role": "SOURCE_BLIND_EXECUTION_EVIDENCE",
+      "sha256": "ef341d260f68b3fdec89d15200e75bad61b968d29a3cd503a0b551840c1541d9",
+      "content_digest": "hds-ph-d06-source-blind-execution:378641c15d4c9855c000cad4dbfb6ac0034a360fe5776a3e9d520c0bbe03f5ba"
+    },
+    {
+      "path": "distillation/artifacts/reports/arc3_hypothesis_llm_capture.json",
+      "role": "LLM_NON_USE_EVIDENCE",
+      "sha256": "2bcdc69e3d273f395a58ececb713af163863451bf97a6f7fb4919e9c6aa1c8a6",
+      "content_digest": "hds-ph-d06-llm-capture:464c21d8aeccb559219f6fd4970d60dc69ac9a2821e7788d99092ed95ad382d8"
+    },
+    {
+      "path": "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json",
+      "role": "CURRENT_AUTHORITY_MANIFEST",
+      "sha256": "b04d4fe98deac5d3890b36c77b87962cd8878fbca02671263012d735f04eefc6",
+      "content_digest": "rev3-current-authority-manifest:a5ac8e5ddf812f2e77ee737a2fc787cda6c844de4a0e0c916af8c1de1c0140a3"
+    }
+  ],
+  "failed_requirement_ids": [],
+  "open_terms": [
+    {
+      "id": "PH-D06-EVIDENCE-APPROVAL-BINDING-001",
+      "status": "PENDING_APPROVAL_COMMIT",
+      "blocks_phase_result": false,
+      "blocks_next_phase_entry": true,
+      "resolution": "Bind this exact Evidence Commit and evidence payload digest through the standing authorization before PH-D07A entry."
+    }
+  ],
+  "self_audit": {
+    "authority": "PASS",
+    "claim_strength": "PASS",
+    "cross_file_references": "PASS",
+    "data_role": "PASS",
+    "dependency_lock": "PASS",
+    "determinism": "PASS",
+    "dg03_hypothesis_executability": "PASS",
+    "dg04_counter_hypothesis": "PASS",
+    "dg05_alternative_adequacy": "PASS",
+    "dg08_privilege_rejection": "PASS",
+    "dg12_bounded_computation": "PASS",
+    "evidence": "PASS",
+    "identity_taint_development_only": "PASS",
+    "llm_independence": "PASS",
+    "objective_alignment": "PASS",
+    "phase_order": "PASS",
+    "provenance": "PASS",
+    "resource": "PASS",
+    "rollback": "PASS",
+    "scope": "PASS",
+    "source_blind_execution": "PASS"
+  },
+  "owner_review_required": true,
+  "evidence_payload_digest": "sha256:c003144c5666ad5dce1f83c07881e4ee56f00301b1c419cdb6764b4cdc301a1d"
+}
