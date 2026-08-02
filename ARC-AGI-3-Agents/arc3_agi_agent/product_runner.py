@@ -262,7 +262,11 @@ def main() -> int:
     print(encoded)
     if arguments.report is not None:
         arguments.report.parent.mkdir(parents=True, exist_ok=True)
-        arguments.report.write_text(encoded + "\n", encoding="utf-8")
+        arguments.report.write_text(
+            encoded + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
     return 0 if report["product_completion_established"] is True else 2
 
 
