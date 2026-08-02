@@ -4,7 +4,7 @@
   "product_name": "ARC3CompletionAgent",
   "product_status": "IN_DEVELOPMENT",
   "active_milestone": "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE",
-  "current_work_class": "BUILD_RUNNABLE_PRODUCT_BASELINE_AGAINST_ALL_25_OFFICIAL_SAMPLE_GAMES",
+  "current_work_class": "SEAL_M0_PRODUCT_BASELINE_AND_PREPARE_M1_RUNTIME_SURFACE",
   "endpoint": {
     "artifact": "ARC3CompletionAgent",
     "official_sample_game_target": 25,
@@ -87,9 +87,9 @@
     {
       "id": "B-07",
       "component": "ProductAcceptance",
-      "finding": "blocking endpoint metrics exist, but the all-25 baseline has not yet been executed",
-      "status": "PARTIAL_RUNNER_ADDED_BASELINE_PENDING",
-      "evidence": "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py"
+      "finding": "the all-25 product baseline executed with 25 bounded reports, zero budget impossibilities, zero adapter crashes and zero scorecard lifecycle leaks",
+      "status": "CLOSED_PRODUCT_BASELINE_EXECUTABLE",
+      "evidence": "analysis/product/rev4/current_product_baseline.json"
     }
   ],
   "required_implementation": [
@@ -110,9 +110,20 @@
   },
   "current_evidence": {
     "baseline_report_path": "analysis/product/rev4/current_product_baseline.json",
-    "baseline_report_status": "NOT_EXECUTED",
-    "baseline_report_complete": false,
-    "product_completion_established": false
+    "baseline_report_sha256": "3d94802235d82f6e96b0666a45c21a0662c9be0114ca6f5979f8990e23b7bfe8",
+    "baseline_report_status": "EXECUTED",
+    "baseline_report_complete": true,
+    "baseline_execution_source_commit": "b99c0daa99954a660a35d30a091be111b722e94d",
+    "baseline_execution_started_at": "2026-08-02T17:20:12+09:00",
+    "baseline_execution_completed_at": "2026-08-02T19:31:39+09:00",
+    "m0_exit_status": "PRODUCT_BASELINE_EXECUTABLE",
+    "product_game_win_count": 0,
+    "product_level_completion_count": 3,
+    "product_completion_established": false,
+    "product_endpoint_failures": [
+      "PRODUCT_GAME_WIN_COUNT_MISMATCH",
+      "PRODUCT_LEVEL_COMPLETION_COUNT_MISMATCH"
+    ]
   },
   "allowed": [
     "reuse GenericAGIRuntime CognitiveSession GenericHDSJudgementSubject SemanticMemory and official adapters",

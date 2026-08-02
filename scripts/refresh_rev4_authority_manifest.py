@@ -140,6 +140,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_RUNTIME_PERFORMANCE_EVIDENCE",
     ),
     (
+        "analysis/product/rev4/current_product_baseline.json",
+        "PRODUCT_M0_ALL_25_BASELINE_EVIDENCE",
+    ),
+    (
         "ARC-AGI-3-Agents/tests/unit/test_product_runner.py",
         "PRODUCT_RUNNER_ACCEPTANCE_TEST",
     ),

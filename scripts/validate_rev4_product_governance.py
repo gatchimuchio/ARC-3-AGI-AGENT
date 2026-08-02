@@ -17,6 +17,7 @@ CONTRACT_PATH: Final = Path(
 CLASSIFICATION_PATH: Final = Path("control/rev4/LEGACY_REV3_CLASSIFICATION.json")
 MANIFEST_PATH: Final = Path("docs/strategy/REV4_CURRENT_AUTHORITY_MANIFEST.json")
 RESOURCE_BOUNDS_PATH: Final = Path("analysis/product/rev4/product_resource_bounds.json")
+BASELINE_PATH: Final = Path("analysis/product/rev4/current_product_baseline.json")
 PRODUCT_GOVERNANCE_PATH: Final = Path(
     "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py"
 )
@@ -313,8 +314,12 @@ def validate_repository(root: Path) -> dict[str, object]:
     )
     check(
         blocker_map.get("B-07", {}).get("status")
-        == "PARTIAL_RUNNER_ADDED_BASELINE_PENDING",
+        == "CLOSED_PRODUCT_BASELINE_EXECUTABLE",
         "current_task:B07_STATUS",
+    )
+    check(
+        blocker_map.get("B-07", {}).get("evidence") == BASELINE_PATH.as_posix(),
+        "current_task:B07_EVIDENCE",
     )
 
     constants = _literal_constants(root / PRODUCT_GOVERNANCE_PATH)
@@ -409,7 +414,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         baseline_path = evidence.get("baseline_report_path")
         baseline = root / str(baseline_path)
         check(
-            baseline_path == "analysis/product/rev4/current_product_baseline.json",
+            baseline_path == BASELINE_PATH.as_posix(),
             "current_task:BASELINE_PATH",
         )
         if baseline.is_file():
@@ -433,6 +438,59 @@ def validate_repository(root: Path) -> dict[str, object]:
             check(
                 baseline_value.get("product_action_budget_per_game") == 4096,
                 "baseline:ACTION_BUDGET",
+            )
+            check(
+                evidence.get("baseline_report_sha256")
+                == hashlib.sha256(baseline.read_bytes()).hexdigest(),
+                "current_task:BASELINE_SHA256",
+            )
+            expected_baseline_metrics: dict[str, object] = {
+                "product_baseline_status": "PRODUCT_BASELINE_EXECUTABLE",
+                "product_baseline_executable": True,
+                "baseline_report_complete": True,
+                "advertised_game_count": 25,
+                "started_game_count": 25,
+                "completed_game_count": 25,
+                "product_bounded_report_count": 25,
+                "budget_impossible_game_count": 0,
+                "adapter_crash_count": 0,
+                "failed_game_count": 0,
+                "scorecard_lifecycle_leak_count": 0,
+                "active_product_path_count": 1,
+                "product_game_win_count": 0,
+                "product_level_completion_count": 3,
+                "product_completion_established": False,
+                "product_status": "INCOMPLETE",
+            }
+            for key, expected in expected_baseline_metrics.items():
+                check(
+                    baseline_value.get(key) == expected,
+                    f"baseline:{key.upper()}_MISMATCH",
+                )
+            check(
+                evidence.get("m0_exit_status")
+                == baseline_value.get("product_baseline_status"),
+                "current_task:M0_EXIT_STATUS",
+            )
+            check(
+                evidence.get("product_game_win_count")
+                == baseline_value.get("product_game_win_count"),
+                "current_task:BASELINE_WIN_COUNT",
+            )
+            check(
+                evidence.get("product_level_completion_count")
+                == baseline_value.get("product_level_completion_count"),
+                "current_task:BASELINE_LEVEL_COUNT",
+            )
+            check(
+                evidence.get("product_completion_established")
+                == baseline_value.get("product_completion_established"),
+                "current_task:BASELINE_COMPLETION_CLAIM",
+            )
+            check(
+                evidence.get("product_endpoint_failures")
+                == baseline_value.get("product_endpoint_failures"),
+                "current_task:BASELINE_ENDPOINT_FAILURES",
             )
         else:
             check(

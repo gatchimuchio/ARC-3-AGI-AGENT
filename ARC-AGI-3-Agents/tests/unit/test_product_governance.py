@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import subprocess
 import sys
@@ -141,6 +142,34 @@ def test_rev4_current_task_and_legacy_boundary_are_explicit() -> None:
     assert classification["current_selector"] is False
     assert classification["runtime_activation_eligible"] is False
     assert classification["phase_authority_eligible"] is False
+
+
+def test_m0_current_baseline_is_byte_bound_and_honest() -> None:
+    current = _json(REPOSITORY_ROOT / ARC3_CURRENT_SELECTOR_PATH)
+    evidence = current["current_evidence"]
+    assert isinstance(evidence, dict)
+    baseline_path = REPOSITORY_ROOT / str(evidence["baseline_report_path"])
+    baseline = _json(baseline_path)
+
+    assert (
+        hashlib.sha256(baseline_path.read_bytes()).hexdigest()
+        == evidence["baseline_report_sha256"]
+    )
+    assert evidence["baseline_report_status"] == "EXECUTED"
+    assert evidence["baseline_report_complete"] is True
+    assert evidence["m0_exit_status"] == "PRODUCT_BASELINE_EXECUTABLE"
+    assert baseline["started_game_count"] == 25
+    assert baseline["completed_game_count"] == 25
+    assert baseline["product_bounded_report_count"] == 25
+    assert baseline["budget_impossible_game_count"] == 0
+    assert baseline["adapter_crash_count"] == 0
+    assert baseline["scorecard_lifecycle_leak_count"] == 0
+    assert baseline["product_game_win_count"] == 0
+    assert baseline["product_level_completion_count"] == 3
+    assert baseline["product_completion_established"] is False
+    assert (
+        evidence["product_endpoint_failures"] == baseline["product_endpoint_failures"]
+    )
 
 
 def test_rev4_product_governance_validator_passes() -> None:
