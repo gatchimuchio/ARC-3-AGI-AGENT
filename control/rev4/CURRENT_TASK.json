@@ -1,0 +1,124 @@
+{
+  "schema_version": "arc3-product-current-task-v1",
+  "product_id": "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4",
+  "product_name": "ARC3CompletionAgent",
+  "product_status": "IN_DEVELOPMENT",
+  "active_milestone": "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE",
+  "current_work_class": "BUILD_RUNNABLE_PRODUCT_BASELINE_AGAINST_ALL_25_OFFICIAL_SAMPLE_GAMES",
+  "endpoint": {
+    "artifact": "ARC3CompletionAgent",
+    "official_sample_game_target": 25,
+    "official_sample_level_target": 183,
+    "required_final_state": "WIN",
+    "manual_step_intervention_allowed": false,
+    "fixed_trajectory_playback_allowed": false
+  },
+  "authoritative_spec": "docs/strategy/ARC3_AGIエージェント_製品仕様書_rev4.md",
+  "authoritative_roadmap": "docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md",
+  "verified_official_contract": {
+    "input": "FrameDataRaw",
+    "output": "one legal GameAction per external cycle",
+    "terminal_states": [
+      "WIN",
+      "GAME_OVER"
+    ],
+    "action_surface": [
+      "RESET",
+      "ACTION1",
+      "ACTION2",
+      "ACTION3",
+      "ACTION4",
+      "ACTION5",
+      "ACTION6_XY",
+      "ACTION7"
+    ]
+  },
+  "verified_teacher_material": {
+    "game_count": 25,
+    "level_count": 183,
+    "canonical_frame_count": 10942,
+    "canonical_success_action_count": 11574,
+    "max_known_success_actions_per_game": 1519,
+    "manifest": "distillation/artifacts/teacher/arc3/ph_d05_v1/manifest.json"
+  },
+  "verified_product_blockers": [
+    {
+      "id": "B-01",
+      "component": "ResourceContract",
+      "finding": "competition action budget 128 is below known successful maximum 1519",
+      "status": "BLOCKING"
+    },
+    {
+      "id": "B-02",
+      "component": "P",
+      "finding": "active HybridRelationalInstructionBody is generic exploration and scoring, not ARC3 capability compiled from teacher and HDS materials",
+      "status": "BLOCKING"
+    },
+    {
+      "id": "B-03",
+      "component": "P_IR",
+      "finding": "default compatibility_p_ir_program is a compatibility fixture rather than the product capability program",
+      "status": "BLOCKING"
+    },
+    {
+      "id": "B-04",
+      "component": "ObservationRepresentation",
+      "finding": "primary representation and visible-effect reasoning are final-layer-centric despite multi-layer official games",
+      "status": "BLOCKING"
+    },
+    {
+      "id": "B-05",
+      "component": "ActionCandidateGeneration",
+      "finding": "ACTION6 candidates are dominated by connected-component anchors and do not cover the full spatial hypothesis surface",
+      "status": "BLOCKING"
+    },
+    {
+      "id": "B-06",
+      "component": "C_P",
+      "finding": "goal induction, mechanism induction, subgoal planning and multi-step planning are incomplete",
+      "status": "BLOCKING"
+    },
+    {
+      "id": "B-07",
+      "component": "ProductAcceptance",
+      "finding": "25-game and 183-level completion is not yet the blocking acceptance path",
+      "status": "BLOCKING"
+    }
+  ],
+  "required_implementation": [
+    "ARC-AGI-3-Agents/agents/templates/arc3_completion_agent.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
+    "configurable development ResourceContract with at least 4096 actions per game",
+    "official sample 25-game blocking acceptance execution",
+    "analysis/product/rev4/current_product_baseline.json"
+  ],
+  "exit_conditions": {
+    "official_sample_games_started": 25,
+    "budget_impossible_game_count": 0,
+    "adapter_crash_count": 0,
+    "scorecard_lifecycle_leak_count": 0,
+    "active_product_path_count": 1,
+    "baseline_report_complete": true,
+    "status": "PRODUCT_BASELINE_EXECUTABLE"
+  },
+  "allowed": [
+    "reuse GenericAGIRuntime CognitiveSession GenericHDSJudgementSubject SemanticMemory and official adapters",
+    "use known answers successful trajectories raw recordings and environment source as development materials",
+    "change product code resource contract P J M adapter and tests",
+    "compile HDS interpretation into product P J0 and M0",
+    "run and repair the product continuously against official samples"
+  ],
+  "forbidden": [
+    "create a new repository",
+    "treat HDS analysis structure extraction or P generation as the final product",
+    "add governance-only milestones",
+    "create analysis artifacts not consumed by product runtime acceptance or repair",
+    "use game or level identity to select a fixed successful trajectory",
+    "claim completion before the integrated product reaches the endpoint"
+  ],
+  "legacy_rev3": {
+    "classification": "HISTORICAL_REUSE_ONLY",
+    "preserve": true,
+    "current_selector": false
+  }
+}
