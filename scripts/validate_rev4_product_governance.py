@@ -25,12 +25,26 @@ M2_PRODUCT_CAPABILITY_PATH: Final = Path(
     "analysis/product/rev4/m2_product_capability_bundle.json"
 )
 M2_PRODUCT_DESCRIPTOR_PATH: Final = Path(
-    "ARC-AGI-3-Agents/arc3_agi_agent/bundles/"
-    "arc3_product_initial_state_v1.json"
+    "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json"
 )
 M2_PRODUCT_PACKAGE_PATH: Final = Path(
-    "ARC-AGI-3-Agents/arc3_agi_agent/bundles/"
-    "arc3_product_initial_state_v1.zip"
+    "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip"
+)
+M4_PRODUCT_PATH: Final = Path("analysis/product/rev4/m4_full_sample_product.json")
+M5_CLEAN_PRODUCT_PATH: Final = Path(
+    "analysis/product/rev4/m5_clean_install_product.json"
+)
+M5_RELEASE_PATH: Final = Path("analysis/product/rev4/m5_product_release.json")
+NOTEBOOK_VALIDATION_PATH: Final = Path(
+    "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json"
+)
+RELEASE_MANIFEST_PATH: Final = Path("release/ARC3CompletionAgent-v1.0/MANIFEST.json")
+RELEASE_WHEEL_PATH: Final = Path(
+    "release/ARC3CompletionAgent-v1.0/arc3_completion_agent-1.0.0-py3-none-any.whl"
+)
+RELEASE_SUMS_PATH: Final = Path("release/ARC3CompletionAgent-v1.0/SHA256SUMS")
+RELEASE_DEPENDENCY_LOCK_PATH: Final = Path(
+    "release/ARC3CompletionAgent-v1.0/requirements-lock.txt"
 )
 PRODUCT_GOVERNANCE_PATH: Final = Path(
     "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py"
@@ -45,7 +59,8 @@ GENERIC_RUNNER_PATH: Final = Path(
 REV3_GOVERNANCE_PATH: Final = Path("ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py")
 PRODUCT_ID: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
 PRODUCT_NAME: Final = "ARC3CompletionAgent"
-ACTIVE_MILESTONE: Final = "M3_INTEGRATED_AGI_CAPABILITY"
+ACTIVE_MILESTONE: Final = "M5_PRODUCT_CLOSURE_AND_PACKAGING"
+RUNTIME_FROZEN_MILESTONE: Final = "M4_FULL_SAMPLE_REPAIR_LOOP"
 
 
 def _load_object(root: Path, relative: Path) -> dict[str, Any]:
@@ -103,6 +118,11 @@ def validate_repository(root: Path) -> dict[str, object]:
     m1_runtime_surface = _load_object(root, M1_RUNTIME_SURFACE_PATH)
     m2_product_capability = _load_object(root, M2_PRODUCT_CAPABILITY_PATH)
     m2_product_descriptor = _load_object(root, M2_PRODUCT_DESCRIPTOR_PATH)
+    m4_product = _load_object(root, M4_PRODUCT_PATH)
+    m5_clean_product = _load_object(root, M5_CLEAN_PRODUCT_PATH)
+    m5_release = _load_object(root, M5_RELEASE_PATH)
+    notebook_validation = _load_object(root, NOTEBOOK_VALIDATION_PATH)
+    release_manifest = _load_object(root, RELEASE_MANIFEST_PATH)
 
     check(
         current.get("schema_version") == "arc3-product-current-task-v2",
@@ -118,9 +138,39 @@ def validate_repository(root: Path) -> dict[str, object]:
         "current_task:ACTIVE_MILESTONE",
     )
     check(
+        current.get("product_status") == "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+        "current_task:PRODUCT_STATUS",
+    )
+    check(
+        current.get("current_work_class")
+        == "AWAIT_CURRENT_OWNER_AUTHORIZATION_FOR_EXTERNAL_KAGGLE_RUN",
+        "current_task:WORK_CLASS",
+    )
+    check(
         contract.get("active_milestone") == ACTIVE_MILESTONE,
         "contract:ACTIVE_MILESTONE",
     )
+    exit_conditions = current.get("exit_conditions")
+    expected_exit_conditions: dict[str, object] = {
+        "m3_agi_closed_loop_capability_active": True,
+        "m4_official_sample_product_complete": True,
+        "wheel_byte_reproducible": True,
+        "fresh_install_passed": True,
+        "clean_install_25_of_25_win": True,
+        "clean_install_183_of_183_complete": True,
+        "dependency_lock_matches_fresh_install": True,
+        "kaggle_notebook_local_validation_passed": True,
+        "external_kaggle_normal_run_complete": False,
+        "product_released": False,
+        "status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+    }
+    check(isinstance(exit_conditions, dict), "current_task:EXIT_CONDITIONS_MISSING")
+    if isinstance(exit_conditions, dict):
+        for key, expected in expected_exit_conditions.items():
+            check(
+                exit_conditions.get(key) == expected,
+                f"current_task:EXIT_{key.upper()}_MISMATCH",
+            )
     check(
         manifest.get("active_milestone") == ACTIVE_MILESTONE,
         "authority_manifest:ACTIVE_MILESTONE",
@@ -224,6 +274,24 @@ def validate_repository(root: Path) -> dict[str, object]:
             contract_endpoint.get("product_no_progress_limit") == 650,
             "contract:NO_PROGRESS_LIMIT",
         )
+    selector_invariants = contract.get("current_selector_invariants")
+    expected_selector_invariants: dict[str, object] = {
+        "current_selector_count": 1,
+        "legacy_rev3_is_current": False,
+        "legacy_rev3_runtime_activation_eligible": False,
+        "product_completion_requires_measured_endpoint": True,
+        "external_kaggle_write_requires_current_owner_authorization": True,
+    }
+    check(
+        isinstance(selector_invariants, dict),
+        "contract:SELECTOR_INVARIANTS_MISSING",
+    )
+    if isinstance(selector_invariants, dict):
+        for key, expected in expected_selector_invariants.items():
+            check(
+                selector_invariants.get(key) == expected,
+                f"contract:{key.upper()}_MISMATCH",
+            )
 
     resource_body = dict(resource_bounds)
     resource_digest = resource_body.pop("content_digest", None)
@@ -437,6 +505,70 @@ def validate_repository(root: Path) -> dict[str, object]:
                 m2_acceptance.get(key) == expected,
                 f"contract:M2_{key.upper()}_MISMATCH",
             )
+    m3_acceptance = contract.get("m3_integrated_agi_acceptance")
+    expected_contract_m3: dict[str, object] = {
+        "path": M4_PRODUCT_PATH.as_posix(),
+        "executed_plan_count": 10733,
+        "hds_plan_commit_count": 10733,
+        "initial_plan_count": 25,
+        "plan_step_count": 4,
+        "failure_attribution_count": 12,
+        "rollback_plan_count": 42,
+        "post_rollback_replan_count": 42,
+        "failure_hypothesis_invalidation_count": 478,
+        "plan_integrity_row_count": 25,
+        "status": "AGI_CLOSED_LOOP_CAPABILITY_ACTIVE",
+    }
+    check(isinstance(m3_acceptance, dict), "contract:M3_ACCEPTANCE_MISSING")
+    if isinstance(m3_acceptance, dict):
+        for key, expected in expected_contract_m3.items():
+            check(
+                m3_acceptance.get(key) == expected,
+                f"contract:M3_{key.upper()}_MISMATCH",
+            )
+    m4_acceptance = contract.get("m4_full_sample_acceptance")
+    expected_contract_m4: dict[str, object] = {
+        "path": M4_PRODUCT_PATH.as_posix(),
+        "game_win_count": 25,
+        "level_completion_count": 183,
+        "action_count": 10733,
+        "runtime_failure_signature_row_count": 0,
+        "adapter_crash_count": 0,
+        "lifecycle_failure_count": 0,
+        "shared_session_count": 1,
+        "status": "OFFICIAL_SAMPLE_PRODUCT_COMPLETE",
+    }
+    check(isinstance(m4_acceptance, dict), "contract:M4_ACCEPTANCE_MISSING")
+    if isinstance(m4_acceptance, dict):
+        for key, expected in expected_contract_m4.items():
+            check(
+                m4_acceptance.get(key) == expected,
+                f"contract:M4_{key.upper()}_MISMATCH",
+            )
+    m5_acceptance = contract.get("m5_local_closure_acceptance")
+    expected_contract_m5: dict[str, object] = {
+        "path": M5_RELEASE_PATH.as_posix(),
+        "clean_install_path": M5_CLEAN_PRODUCT_PATH.as_posix(),
+        "wheel_manifest_path": RELEASE_MANIFEST_PATH.as_posix(),
+        "dependency_lock_path": RELEASE_DEPENDENCY_LOCK_PATH.as_posix(),
+        "notebook_validation_path": NOTEBOOK_VALIDATION_PATH.as_posix(),
+        "clean_install_functional_result_exact": True,
+        "product_logical_identity_preserved": True,
+        "wheel_byte_reproducible": True,
+        "dependency_lock_matches_fresh_install": True,
+        "local_acceptance_failure_count": 0,
+        "status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+        "external_kaggle_normal_run_status": (
+            "NOT_EXECUTED_REQUIRES_CURRENT_OWNER_AUTHORIZATION"
+        ),
+    }
+    check(isinstance(m5_acceptance, dict), "contract:M5_ACCEPTANCE_MISSING")
+    if isinstance(m5_acceptance, dict):
+        for key, expected in expected_contract_m5.items():
+            check(
+                m5_acceptance.get(key) == expected,
+                f"contract:M5_{key.upper()}_MISMATCH",
+            )
     m2_body = dict(m2_product_capability)
     m2_claimed_digest = m2_body.pop("content_digest", None)
     check(
@@ -446,8 +578,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         "m2_product_capability:CONTENT_DIGEST_MISMATCH",
     )
     check(
-        m2_product_capability.get("exit_status")
-        == "PRODUCT_CAPABILITY_BUNDLE_ACTIVE",
+        m2_product_capability.get("exit_status") == "PRODUCT_CAPABILITY_BUNDLE_ACTIVE",
         "m2_product_capability:EXIT_STATUS",
     )
     check(
@@ -485,9 +616,7 @@ def validate_repository(root: Path) -> dict[str, object]:
     check(
         descriptor_claimed_digest
         == "product-capability-descriptor:"
-        + hashlib.sha256(
-            _canonical_json(descriptor_body).encode("utf-8")
-        ).hexdigest(),
+        + hashlib.sha256(_canonical_json(descriptor_body).encode("utf-8")).hexdigest(),
         "m2_product_descriptor:CONTENT_DIGEST_MISMATCH",
     )
     package_path = root / M2_PRODUCT_PACKAGE_PATH
@@ -497,19 +626,171 @@ def validate_repository(root: Path) -> dict[str, object]:
         "m2_product_descriptor:PACKAGE_SHA256",
     )
     check(
-        m2_product_descriptor.get("package_size_bytes")
-        == package_path.stat().st_size,
+        m2_product_descriptor.get("package_size_bytes") == package_path.stat().st_size,
         "m2_product_descriptor:PACKAGE_SIZE",
     )
     check(
         m2_product_descriptor.get("p_compiler_mode") == "PRODUCT"
-        and m2_product_descriptor.get("p_program_id")
-        == "arc3.product.capability.v1"
+        and m2_product_descriptor.get("p_program_id") == "arc3.product.capability.v1"
         and m2_product_descriptor.get("m0_record_count") == 8
         and m2_product_descriptor.get("identity_free") is True
         and m2_product_descriptor.get("contains_identity_router") is False
         and m2_product_descriptor.get("contains_fixed_trajectory") is False,
         "m2_product_descriptor:PRODUCT_CONTRACT",
+    )
+
+    release_body = dict(m5_release)
+    release_claimed_digest = release_body.pop("content_digest", None)
+    check(
+        release_claimed_digest
+        == "arc3-product-release-evidence:"
+        + hashlib.sha256(_canonical_json(release_body).encode("utf-8")).hexdigest(),
+        "m5_release:CONTENT_DIGEST_MISMATCH",
+    )
+    implementation_commit = m5_release.get("implementation_commit")
+    check(
+        isinstance(implementation_commit, str) and len(implementation_commit) == 40,
+        "m5_release:IMPLEMENTATION_COMMIT_INVALID",
+    )
+    run_evidence_rows = (
+        ("m4_product", m4_product, "M4_CANONICAL_FULL_SAMPLE"),
+        (
+            "m5_clean_product",
+            m5_clean_product,
+            "M5_CLEAN_INSTALL_FULL_SAMPLE",
+        ),
+    )
+    for label, value, stage in run_evidence_rows:
+        body = dict(value)
+        claimed_digest = body.pop("content_digest", None)
+        check(
+            claimed_digest
+            == "arc3-product-run-evidence:"
+            + hashlib.sha256(_canonical_json(body).encode("utf-8")).hexdigest(),
+            f"{label}:CONTENT_DIGEST_MISMATCH",
+        )
+        expected_run_values: dict[str, object] = {
+            "evidence_stage": stage,
+            "implementation_commit": implementation_commit,
+            "product_status": "COMPLETE",
+            "product_completion_established": True,
+            "product_endpoint_failure_count": 0,
+            "product_endpoint_failures": [],
+            "product_game_win_count": 25,
+            "product_level_completion_count": 183,
+            "product_total_action_count": 10733,
+            "product_plan_integrity_row_count": 25,
+            "product_runtime_failure_signature_row_count": 0,
+            "product_executed_plan_count": 10733,
+            "product_hds_plan_commit_count": 10733,
+            "product_initial_plan_count": 25,
+            "product_max_plan_step_count": 4,
+            "product_failure_attribution_count": 12,
+            "product_rollback_plan_count": 42,
+            "product_post_rollback_replan_count": 42,
+            "per_game_reference_exact": True,
+            "scorecard_closed": True,
+            "shared_session_count": 1,
+            "state_owner_violation_count": 0,
+            "identity_boundary": "PASS",
+            "runtime_policy_changed": False,
+        }
+        for key, expected in expected_run_values.items():
+            check(
+                value.get(key) == expected,
+                f"{label}:{key.upper()}_MISMATCH",
+            )
+    check(
+        m4_product.get("results") == m5_clean_product.get("results")
+        and m4_product.get("orchestration_game_index")
+        == m5_clean_product.get("orchestration_game_index"),
+        "m5_clean_product:FUNCTIONAL_RESULT_MISMATCH",
+    )
+    for logical_field in (
+        "product_initial_state_logical_digest",
+        "product_p_logical_digest",
+        "product_p_program_id",
+        "product_p_body_format",
+        "product_p_body_version",
+        "product_p_compiler_mode",
+        "product_bundle_j0_digest",
+        "product_j0_digest",
+        "product_m0_digest",
+        "product_m0_record_count",
+    ):
+        check(
+            m4_product.get(logical_field) == m5_clean_product.get(logical_field),
+            f"m5_clean_product:{logical_field.upper()}_MISMATCH",
+        )
+
+    release_wheel = root / RELEASE_WHEEL_PATH
+    release_manifest_path = root / RELEASE_MANIFEST_PATH
+    release_sums = root / RELEASE_SUMS_PATH
+    release_dependency_lock = root / RELEASE_DEPENDENCY_LOCK_PATH
+    notebook_path = root / NOTEBOOK_VALIDATION_PATH
+    check(
+        release_manifest.get("wheel_sha256")
+        == hashlib.sha256(release_wheel.read_bytes()).hexdigest(),
+        "release_manifest:WHEEL_SHA256_MISMATCH",
+    )
+    expected_release_manifest: dict[str, object] = {
+        "product_id": PRODUCT_NAME,
+        "product_version": "1.0.0",
+        "byte_reproducible": True,
+        "teacher_included": False,
+        "fixed_action_trajectory_included": False,
+        "runtime_identity_routing_included": False,
+        "literal_coordinate_table_included": False,
+        "compiled_identity_free_product_policy_included": True,
+    }
+    for key, expected in expected_release_manifest.items():
+        check(
+            release_manifest.get(key) == expected,
+            f"release_manifest:{key.upper()}_MISMATCH",
+        )
+    check(
+        notebook_validation.get("status") == "PASS"
+        and notebook_validation.get("failed_check_ids") == []
+        and notebook_validation.get("tracked_secret_findings") == []
+        and notebook_validation.get("notebook_secret_findings") == []
+        and notebook_validation.get("submission_api_call_count") == 0,
+        "notebook_validation:RELEASE_CONTRACT_FAILURE",
+    )
+    expected_release_values: dict[str, object] = {
+        "local_release_status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+        "external_kaggle_normal_run_status": (
+            "NOT_EXECUTED_REQUIRES_CURRENT_OWNER_AUTHORIZATION"
+        ),
+        "product_released": False,
+        "clean_install_functional_result_exact": True,
+        "product_logical_identity_preserved": True,
+        "wheel_byte_reproducible": True,
+        "dependency_lock_matches_fresh_install": True,
+        "notebook_validation_status": "PASS",
+        "notebook_submission_api_call_count": 0,
+        "notebook_secret_finding_count": 0,
+        "local_acceptance_failure_count": 0,
+        "remaining_release_gate_count": 1,
+    }
+    for key, expected in expected_release_values.items():
+        check(
+            m5_release.get(key) == expected,
+            f"m5_release:{key.upper()}_MISMATCH",
+        )
+    check(
+        m5_release.get("m4_evidence_sha256")
+        == hashlib.sha256((root / M4_PRODUCT_PATH).read_bytes()).hexdigest()
+        and m5_release.get("m5_clean_evidence_sha256")
+        == hashlib.sha256((root / M5_CLEAN_PRODUCT_PATH).read_bytes()).hexdigest()
+        and m5_release.get("release_manifest_sha256")
+        == hashlib.sha256(release_manifest_path.read_bytes()).hexdigest()
+        and m5_release.get("release_sums_sha256")
+        == hashlib.sha256(release_sums.read_bytes()).hexdigest()
+        and m5_release.get("dependency_lock_sha256")
+        == hashlib.sha256(release_dependency_lock.read_bytes()).hexdigest()
+        and m5_release.get("notebook_validation_sha256")
+        == hashlib.sha256(notebook_path.read_bytes()).hexdigest(),
+        "m5_release:BOUND_ARTIFACT_DIGEST_MISMATCH",
     )
 
     check(
@@ -573,19 +854,36 @@ def validate_repository(root: Path) -> dict[str, object]:
             f"current_task:{blocker_id.replace('-', '')}_EVIDENCE",
         )
     check(
+        blocker_map.get("B-06", {}).get("status") == "CLOSED_M3_AGI_CAPABILITY",
+        "current_task:B06_STATUS",
+    )
+    check(
+        blocker_map.get("B-06", {}).get("evidence") == M4_PRODUCT_PATH.as_posix(),
+        "current_task:B06_EVIDENCE",
+    )
+    check(
         blocker_map.get("B-07", {}).get("status")
-        == "CLOSED_PRODUCT_BASELINE_EXECUTABLE",
+        == "CLOSED_M4_OFFICIAL_SAMPLE_PRODUCT_COMPLETE",
         "current_task:B07_STATUS",
     )
     check(
-        blocker_map.get("B-07", {}).get("evidence") == BASELINE_PATH.as_posix(),
+        blocker_map.get("B-07", {}).get("evidence") == M4_PRODUCT_PATH.as_posix(),
         "current_task:B07_EVIDENCE",
+    )
+    check(
+        blocker_map.get("B-08", {}).get("status")
+        == "AWAITING_CURRENT_OWNER_AUTHORIZATION",
+        "current_task:B08_STATUS",
+    )
+    check(
+        blocker_map.get("B-08", {}).get("evidence") == M5_RELEASE_PATH.as_posix(),
+        "current_task:B08_EVIDENCE",
     )
 
     constants = _literal_constants(root / PRODUCT_GOVERNANCE_PATH)
     expected_constants: dict[str, object] = {
         "ARC3_PRODUCT_ID": PRODUCT_NAME,
-        "ARC3_PRODUCT_ACTIVE_MILESTONE": ACTIVE_MILESTONE,
+        "ARC3_PRODUCT_ACTIVE_MILESTONE": RUNTIME_FROZEN_MILESTONE,
         "ARC3_OFFICIAL_SAMPLE_GAME_TARGET": 25,
         "ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET": 183,
         "ARC3_KNOWN_SUCCESS_ACTION_CEILING": 1519,
@@ -625,8 +923,8 @@ def validate_repository(root: Path) -> dict[str, object]:
     )
     check(
         entrypoint_constants.get("ARC3_COMPLETION_AGENT_PRODUCT_VERSION")
-        == "arc3-completion-agent-product-v0.3",
-        "product_entrypoint:M2_VERSION_MISMATCH",
+        == "arc3-completion-agent-product-v1.0",
+        "product_entrypoint:PRODUCT_VERSION_MISMATCH",
     )
     check(
         "OfflineGenericEnvironment" in entrypoint_source,
@@ -704,8 +1002,7 @@ def validate_repository(root: Path) -> dict[str, object]:
                 f"current_task:{key.upper()}_MISMATCH",
             )
         check(
-            evidence.get("m2_report_path")
-            == M2_PRODUCT_CAPABILITY_PATH.as_posix(),
+            evidence.get("m2_report_path") == M2_PRODUCT_CAPABILITY_PATH.as_posix(),
             "current_task:M2_REPORT_PATH",
         )
         check(
@@ -716,8 +1013,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "current_task:M2_REPORT_SHA256",
         )
         check(
-            evidence.get("m2_descriptor_path")
-            == M2_PRODUCT_DESCRIPTOR_PATH.as_posix(),
+            evidence.get("m2_descriptor_path") == M2_PRODUCT_DESCRIPTOR_PATH.as_posix(),
             "current_task:M2_DESCRIPTOR_PATH",
         )
         check(
@@ -728,8 +1024,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "current_task:M2_DESCRIPTOR_SHA256",
         )
         check(
-            evidence.get("m2_package_path")
-            == M2_PRODUCT_PACKAGE_PATH.as_posix(),
+            evidence.get("m2_package_path") == M2_PRODUCT_PACKAGE_PATH.as_posix(),
             "current_task:M2_PACKAGE_PATH",
         )
         check(
@@ -819,22 +1114,22 @@ def validate_repository(root: Path) -> dict[str, object]:
                 "current_task:M0_EXIT_STATUS",
             )
             check(
-                evidence.get("product_game_win_count")
+                evidence.get("m0_product_game_win_count")
                 == baseline_value.get("product_game_win_count"),
                 "current_task:BASELINE_WIN_COUNT",
             )
             check(
-                evidence.get("product_level_completion_count")
+                evidence.get("m0_product_level_completion_count")
                 == baseline_value.get("product_level_completion_count"),
                 "current_task:BASELINE_LEVEL_COUNT",
             )
             check(
-                evidence.get("product_completion_established")
+                evidence.get("m0_product_completion_established")
                 == baseline_value.get("product_completion_established"),
                 "current_task:BASELINE_COMPLETION_CLAIM",
             )
             check(
-                evidence.get("product_endpoint_failures")
+                evidence.get("m0_product_endpoint_failures")
                 == baseline_value.get("product_endpoint_failures"),
                 "current_task:BASELINE_ENDPOINT_FAILURES",
             )
@@ -848,8 +1143,49 @@ def validate_repository(root: Path) -> dict[str, object]:
                 "current_task:ABSENT_BASELINE_COMPLETENESS",
             )
             check(
-                evidence.get("product_completion_established") is False,
+                evidence.get("m0_product_completion_established") is False,
                 "current_task:ABSENT_BASELINE_COMPLETION_CLAIM",
+            )
+        expected_current_product: dict[str, object] = {
+            "implementation_commit": implementation_commit,
+            "m4_report_path": M4_PRODUCT_PATH.as_posix(),
+            "m4_report_sha256": hashlib.sha256(
+                (root / M4_PRODUCT_PATH).read_bytes()
+            ).hexdigest(),
+            "m4_exit_status": "OFFICIAL_SAMPLE_PRODUCT_COMPLETE",
+            "m5_clean_report_path": M5_CLEAN_PRODUCT_PATH.as_posix(),
+            "m5_clean_report_sha256": hashlib.sha256(
+                (root / M5_CLEAN_PRODUCT_PATH).read_bytes()
+            ).hexdigest(),
+            "m5_release_report_path": M5_RELEASE_PATH.as_posix(),
+            "m5_release_report_sha256": hashlib.sha256(
+                (root / M5_RELEASE_PATH).read_bytes()
+            ).hexdigest(),
+            "m5_local_exit_status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+            "product_game_win_count": 25,
+            "product_level_completion_count": 183,
+            "product_total_action_count": 10733,
+            "product_completion_established": True,
+            "product_endpoint_failures": [],
+            "wheel_path": RELEASE_WHEEL_PATH.as_posix(),
+            "wheel_sha256": release_manifest.get("wheel_sha256"),
+            "wheel_size_bytes": release_manifest.get("wheel_size_bytes"),
+            "dependency_lock_path": RELEASE_DEPENDENCY_LOCK_PATH.as_posix(),
+            "dependency_lock_sha256": hashlib.sha256(
+                (root / RELEASE_DEPENDENCY_LOCK_PATH).read_bytes()
+            ).hexdigest(),
+            "notebook_validation_path": NOTEBOOK_VALIDATION_PATH.as_posix(),
+            "notebook_validation_sha256": hashlib.sha256(
+                (root / NOTEBOOK_VALIDATION_PATH).read_bytes()
+            ).hexdigest(),
+            "external_kaggle_normal_run_status": (
+                "NOT_EXECUTED_REQUIRES_CURRENT_OWNER_AUTHORIZATION"
+            ),
+        }
+        for key, expected in expected_current_product.items():
+            check(
+                evidence.get(key) == expected,
+                f"current_task:{key.upper()}_MISMATCH",
             )
 
     manifest_body = dict(manifest)
@@ -876,10 +1212,10 @@ def validate_repository(root: Path) -> dict[str, object]:
                 continue
             relative = entry.get("path")
             expected_sha = entry.get("sha256")
-            valid = isinstance(relative, str) and isinstance(expected_sha, str)
-            check(valid, f"authority_manifest.entries[{index}]:INVALID")
-            if not valid:
+            if not isinstance(relative, str) or not isinstance(expected_sha, str):
+                check(False, f"authority_manifest.entries[{index}]:INVALID")
                 continue
+            check(True, f"authority_manifest.entries[{index}]:INVALID")
             paths.append(relative)
             artifact = root / relative
             check(
@@ -905,6 +1241,15 @@ def validate_repository(root: Path) -> dict[str, object]:
             M2_PRODUCT_CAPABILITY_PATH.as_posix(),
             M2_PRODUCT_DESCRIPTOR_PATH.as_posix(),
             M2_PRODUCT_PACKAGE_PATH.as_posix(),
+            M4_PRODUCT_PATH.as_posix(),
+            M5_CLEAN_PRODUCT_PATH.as_posix(),
+            M5_RELEASE_PATH.as_posix(),
+            NOTEBOOK_VALIDATION_PATH.as_posix(),
+            "release/ARC3CompletionAgent-v1.0/README.md",
+            RELEASE_DEPENDENCY_LOCK_PATH.as_posix(),
+            RELEASE_MANIFEST_PATH.as_posix(),
+            RELEASE_WHEEL_PATH.as_posix(),
+            RELEASE_SUMS_PATH.as_posix(),
         ):
             check(required in paths, f"authority_manifest:UNBOUND:{required}")
 

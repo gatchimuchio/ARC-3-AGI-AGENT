@@ -71,8 +71,9 @@ B-02 teacher-derived compiled product P (closed in M2)
 B-03 non-compatibility product P-IR (closed in M2)
 B-04 temporal action-frame/composite/history surface (closed in M1)
 B-05 ACTION6 seven-class spatial candidate surface (closed in M1)
-B-06 goal/mechanism/subgoal/plan induction is incomplete
-B-07 all-25 bounded product baseline (closed in M0)
+B-06 online goal/mechanism/subgoal/4-step plan (closed in M3)
+B-07 25/25 WIN, 183/183, 10,733 actions (closed in M4)
+B-08 external Kaggle normal run (M5 gate; current Owner authorization required)
 ```
 
 ## 製品開発ロードマップ
@@ -89,18 +90,23 @@ B-07 all-25 bounded product baseline (closed in M0)
 ## 現在作業
 
 ```text
-M3_INTEGRATED_AGI_CAPABILITY
+M5_PRODUCT_CLOSURE_AND_PACKAGING
 ```
 
-M0／M1／M2は次の実測証拠で閉じています。
+M0～M4は次の実測証拠で閉じています。
 
 - `analysis/product/rev4/current_product_baseline.json`
 - `analysis/product/rev4/m1_official_runtime_surface.json`
 - `analysis/product/rev4/m2_product_capability_bundle.json`
+- `analysis/product/rev4/m4_full_sample_product.json`
+- `analysis/product/rev4/m5_clean_install_product.json`
+- `analysis/product/rev4/m5_product_release.json`
 - M1: 25/25 initial observation、183 level契約、action 0〜7、J authorization／一手実行／再観測 25/25
 - M2: FT09 75 action・6/6・WIN、同一J0／M0のP除去対照 128 action・0/6・NOT_FINISHED
+- M4: 25/25 WIN、183/183 level、10,733 action、failure signature 0、shared session 1
+- M5: wheel byte再現、fresh install後も25/25 WIN・183/183・10,733 action、M4との機能結果一致
 
-現在は同じ製品bundleでオンライン機構同定、計画、関連M因果性、無関連M不変性、rollback後の再計画を実装します。
+同じ製品bundleとruntimeのwheel freeze、fresh install全数回帰、依存lock、Notebook契約、digest、local release証拠は閉じました。外部Kaggle実行と提出は、当該操作へのOwnerの現在の明示授権がある場合に限ります。
 
 公式sampleを使う現行製品入口（既定は全25 game、OFFLINEのみ）:
 

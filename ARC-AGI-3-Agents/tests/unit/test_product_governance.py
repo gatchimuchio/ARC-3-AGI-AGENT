@@ -30,6 +30,22 @@ def _json(path: Path) -> dict[str, Any]:
     return value
 
 
+def _content_digest(report: dict[str, Any], prefix: str) -> str:
+    digest_body = dict(report)
+    digest_body.pop("content_digest")
+    return (
+        prefix
+        + hashlib.sha256(
+            json.dumps(
+                digest_body,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+    )
+
+
 def _complete_report() -> dict[str, object]:
     progress = [8] * 8 + [7] * 17
     assert sum(progress) == 183
@@ -66,9 +82,7 @@ def _complete_report() -> dict[str, object]:
                 "initial_plan_count": 1,
                 "revised_plan_count": index,
                 "rollback_plan_count": 1 if index == 0 else 0,
-                "failed_hypothesis_invalidation_count": (
-                    1 if index == 0 else 0
-                ),
+                "failed_hypothesis_invalidation_count": (1 if index == 0 else 0),
                 "post_rollback_replan_count": 1 if index == 0 else 0,
                 "memory_bound_plan_count": index,
                 "competing_hypothesis_plan_count": index + 1,
@@ -189,7 +203,9 @@ def test_rev4_current_task_and_legacy_boundary_are_explicit() -> None:
     )
 
     assert current["schema_version"] == "arc3-product-current-task-v2"
-    assert current["active_milestone"] == ARC3_PRODUCT_ACTIVE_MILESTONE
+    assert current["active_milestone"] == "M5_PRODUCT_CLOSURE_AND_PACKAGING"
+    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M4_FULL_SAMPLE_REPAIR_LOOP"
+    assert current["product_status"] == "LOCAL_PRODUCT_CLOSURE_COMPLETE"
     assert current["legacy_rev3"]["current_selector"] is False
     assert classification["classification"] == "HISTORICAL_REUSE_ONLY"
     assert classification["current_selector"] is False
@@ -217,11 +233,12 @@ def test_m0_current_baseline_is_byte_bound_and_honest() -> None:
     assert baseline["budget_impossible_game_count"] == 0
     assert baseline["adapter_crash_count"] == 0
     assert baseline["scorecard_lifecycle_leak_count"] == 0
-    assert baseline["product_game_win_count"] == 0
-    assert baseline["product_level_completion_count"] == 3
-    assert baseline["product_completion_established"] is False
+    assert evidence["m0_product_game_win_count"] == 0
+    assert evidence["m0_product_level_completion_count"] == 3
+    assert evidence["m0_product_completion_established"] is False
     assert (
-        evidence["product_endpoint_failures"] == baseline["product_endpoint_failures"]
+        evidence["m0_product_endpoint_failures"]
+        == baseline["product_endpoint_failures"]
     )
 
 
@@ -254,14 +271,17 @@ def test_m2_product_capability_is_byte_bound_and_active() -> None:
     report = _json(report_path)
     digest_body = dict(report)
     expected_content_digest = digest_body.pop("content_digest")
-    actual_content_digest = "arc3-product-m2-acceptance:" + hashlib.sha256(
-        json.dumps(
-            digest_body,
-            ensure_ascii=False,
-            sort_keys=True,
-            separators=(",", ":"),
-        ).encode("utf-8")
-    ).hexdigest()
+    actual_content_digest = (
+        "arc3-product-m2-acceptance:"
+        + hashlib.sha256(
+            json.dumps(
+                digest_body,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+    )
 
     assert (
         hashlib.sha256(report_path.read_bytes()).hexdigest()
@@ -280,6 +300,60 @@ def test_m2_product_capability_is_byte_bound_and_active() -> None:
     assert report["p_removal_ablation"]["actions_executed"] == 128
     assert report["p_removal_ablation"]["progress_count"] == 0
     assert report["p_removal_ablation"]["final_state"] == "NOT_FINISHED"
+
+
+def test_m4_m5_and_release_evidence_are_byte_bound_and_closed_locally() -> None:
+    current = _json(REPOSITORY_ROOT / ARC3_CURRENT_SELECTOR_PATH)
+    evidence = current["current_evidence"]
+    assert isinstance(evidence, dict)
+
+    m4_path = REPOSITORY_ROOT / str(evidence["m4_report_path"])
+    m5_path = REPOSITORY_ROOT / str(evidence["m5_clean_report_path"])
+    release_path = REPOSITORY_ROOT / str(evidence["m5_release_report_path"])
+    m4 = _json(m4_path)
+    m5 = _json(m5_path)
+    release = _json(release_path)
+
+    assert (
+        hashlib.sha256(m4_path.read_bytes()).hexdigest() == evidence["m4_report_sha256"]
+    )
+    assert (
+        hashlib.sha256(m5_path.read_bytes()).hexdigest()
+        == evidence["m5_clean_report_sha256"]
+    )
+    assert (
+        hashlib.sha256(release_path.read_bytes()).hexdigest()
+        == evidence["m5_release_report_sha256"]
+    )
+    assert m4["content_digest"] == _content_digest(m4, "arc3-product-run-evidence:")
+    assert m5["content_digest"] == _content_digest(m5, "arc3-product-run-evidence:")
+    assert release["content_digest"] == _content_digest(
+        release, "arc3-product-release-evidence:"
+    )
+
+    for report in (m4, m5):
+        assert report["product_game_win_count"] == 25
+        assert report["product_level_completion_count"] == 183
+        assert report["product_total_action_count"] == 10_733
+        assert report["product_endpoint_failure_count"] == 0
+        assert report["product_runtime_failure_signature_row_count"] == 0
+        assert report["product_completion_established"] is True
+
+    assert m4["results"] == m5["results"]
+    assert m4["orchestration_game_index"] == m5["orchestration_game_index"]
+    assert m4["product_p_logical_digest"] == m5["product_p_logical_digest"]
+    assert m4["product_j0_digest"] == m5["product_j0_digest"]
+    assert m4["product_m0_digest"] == m5["product_m0_digest"]
+
+    assert release["local_release_status"] == "LOCAL_PRODUCT_CLOSURE_COMPLETE"
+    assert release["local_acceptance_failure_count"] == 0
+    assert release["wheel_byte_reproducible"] is True
+    assert release["clean_install_functional_result_exact"] is True
+    assert release["product_logical_identity_preserved"] is True
+    assert release["product_released"] is False
+    assert release["remaining_release_gates"] == [
+        "EXTERNAL_KAGGLE_NORMAL_RUN_REQUIRES_CURRENT_OWNER_AUTHORIZATION"
+    ]
 
 
 def test_rev4_product_governance_validator_passes() -> None:

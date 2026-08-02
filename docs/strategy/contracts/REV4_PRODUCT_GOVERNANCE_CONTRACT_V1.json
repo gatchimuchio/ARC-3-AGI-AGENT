@@ -15,7 +15,7 @@
     "ARC3_PRODUCT_ROADMAP_REV4",
     "REV4_CURRENT_TASK"
   ],
-  "active_milestone": "M3_INTEGRATED_AGI_CAPABILITY",
+  "active_milestone": "M5_PRODUCT_CLOSURE_AND_PACKAGING",
   "endpoint": {
     "official_sample_game_target": 25,
     "official_sample_level_target": 183,
@@ -33,11 +33,24 @@
     "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/product_runtime_surface.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/product_capability.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_trace.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
     "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
     "ARC-AGI-3-Agents/scripts/run_m1_official_runtime_surface_acceptance.py",
     "ARC-AGI-3-Agents/scripts/run_m2_product_capability_acceptance.py",
-    "analysis/product/rev4/m2_product_capability_bundle.json"
+    "analysis/product/rev4/m2_product_capability_bundle.json",
+    "analysis/product/rev4/m4_full_sample_product.json",
+    "analysis/product/rev4/m5_clean_install_product.json",
+    "analysis/product/rev4/m5_product_release.json",
+    "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
+    "scripts/build_product_release.py",
+    "scripts/capture_product_run_evidence.py",
+    "scripts/build_product_release_evidence.py",
+    "release/ARC3CompletionAgent-v1.0/README.md",
+    "release/ARC3CompletionAgent-v1.0/requirements-lock.txt",
+    "release/ARC3CompletionAgent-v1.0/MANIFEST.json",
+    "release/ARC3CompletionAgent-v1.0/SHA256SUMS",
+    "release/ARC3CompletionAgent-v1.0/arc3_completion_agent-1.0.0-py3-none-any.whl"
   ],
   "baseline": {
     "path": "analysis/product/rev4/current_product_baseline.json",
@@ -92,10 +105,49 @@
     "failure_count": 0,
     "status": "PRODUCT_CAPABILITY_BUNDLE_ACTIVE"
   },
+  "m3_integrated_agi_acceptance": {
+    "path": "analysis/product/rev4/m4_full_sample_product.json",
+    "executed_plan_count": 10733,
+    "hds_plan_commit_count": 10733,
+    "initial_plan_count": 25,
+    "plan_step_count": 4,
+    "failure_attribution_count": 12,
+    "rollback_plan_count": 42,
+    "post_rollback_replan_count": 42,
+    "failure_hypothesis_invalidation_count": 478,
+    "plan_integrity_row_count": 25,
+    "status": "AGI_CLOSED_LOOP_CAPABILITY_ACTIVE"
+  },
+  "m4_full_sample_acceptance": {
+    "path": "analysis/product/rev4/m4_full_sample_product.json",
+    "game_win_count": 25,
+    "level_completion_count": 183,
+    "action_count": 10733,
+    "runtime_failure_signature_row_count": 0,
+    "adapter_crash_count": 0,
+    "lifecycle_failure_count": 0,
+    "shared_session_count": 1,
+    "status": "OFFICIAL_SAMPLE_PRODUCT_COMPLETE"
+  },
+  "m5_local_closure_acceptance": {
+    "path": "analysis/product/rev4/m5_product_release.json",
+    "clean_install_path": "analysis/product/rev4/m5_clean_install_product.json",
+    "wheel_manifest_path": "release/ARC3CompletionAgent-v1.0/MANIFEST.json",
+    "dependency_lock_path": "release/ARC3CompletionAgent-v1.0/requirements-lock.txt",
+    "notebook_validation_path": "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
+    "clean_install_functional_result_exact": true,
+    "product_logical_identity_preserved": true,
+    "wheel_byte_reproducible": true,
+    "dependency_lock_matches_fresh_install": true,
+    "local_acceptance_failure_count": 0,
+    "status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+    "external_kaggle_normal_run_status": "NOT_EXECUTED_REQUIRES_CURRENT_OWNER_AUTHORIZATION"
+  },
   "current_selector_invariants": {
     "current_selector_count": 1,
     "legacy_rev3_is_current": false,
     "legacy_rev3_runtime_activation_eligible": false,
-    "product_completion_requires_measured_endpoint": true
+    "product_completion_requires_measured_endpoint": true,
+    "external_kaggle_write_requires_current_owner_authorization": true
   }
 }

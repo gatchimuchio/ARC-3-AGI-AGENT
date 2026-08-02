@@ -1,0 +1,29 @@
+{
+  "agent_sha256": {
+    "arc3_completion_agent.py": "5e449ad7f67fb9fbfa02baf617b9a177165464ae96be5525e969af31ac0eaa7c",
+    "generic_agi_agent.py": "1b81f9384ca54b307c6c8728052f57c04aef47b73e822df58250b179fe30e32d"
+  },
+  "arc_agi_version": "0.9.8",
+  "byte_reproducible": true,
+  "compiled_identity_free_product_policy_included": true,
+  "entrypoint": "arc3_agi_agent.product_runner:main",
+  "fixed_action_trajectory_included": false,
+  "literal_coordinate_table_included": false,
+  "numpy_version": "2.3.2",
+  "product_id": "ARC3CompletionAgent",
+  "product_version": "1.0.0",
+  "python_requires": ">=3.12",
+  "runtime_archive_sha256": "c7a73f34deaa548f56e334ef7a25e84353fc7e3cc1a08ec652524ea1b68c6802",
+  "runtime_asset_sha256": {
+    "bundles/arc3_product_initial_state_v1.json": "0c2f9bced86f316e43eb720b5f9d1c11afc2502935bfd982172b36d6a0c04526",
+    "bundles/arc3_product_initial_state_v1.zip": "a24ba468374bf7fabda2d0ecae44793125fe1eb829db649196a8f77d0b7d91ce"
+  },
+  "runtime_identity_routing_included": false,
+  "schema_version": "arc3-product-release-build-v1",
+  "teacher_included": false,
+  "wheel_filename": "arc3_completion_agent-1.0.0-py3-none-any.whl",
+  "wheel_member_count": 62,
+  "wheel_member_inventory_sha256": "a0c100e1b7447087157860f78112f686ab3101a49cda889d87ee1a5f423b46ab",
+  "wheel_sha256": "0557c3cbc1fbaf295a25351aad62c9349cdcfdb5fdc5bce669edffdfc4de55de",
+  "wheel_size_bytes": 8163746
+}

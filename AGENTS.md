@@ -47,10 +47,10 @@ no fixed trajectory playback
 ## Current Work
 
 ```text
-M3_INTEGRATED_AGI_CAPABILITY
+M5_PRODUCT_CLOSURE_AND_PACKAGING
 ```
 
-M0の全25 bounded baseline、M1の公式runtime surface、M2の製品`P／J0／M0` bundleは閉じた。現在は同じ`ARC3CompletionAgent`でオンライン機構同定、計画、関連M因果性、無関連M不変性、rollback後の再計画を閉じる。
+M0～M3の製品runtime能力、M4の公式サンプル全数完遂、M5のlocal product closureは閉じた。M4／M5正本はともに25/25 `WIN`、183/183 level、10,733 action、runtime failure signature 0である。現在の未閉包gateは、Ownerの現在の明示授権を要する外部Kaggle normal runのみである。
 
 現在の機械検証gateは次である。
 
@@ -60,14 +60,14 @@ python scripts/validate_rev4_product_governance.py
 
 旧`validate_rev3_governance.py`はrev3履歴snapshotの整合だけを検査し、current selectorを決定しない。
 
-現在実装する。
+現在実装・検証する。
 
-1. competing mechanism／counter-hypothesisのオンライン更新
-2. bounded subgoal／multi-step／probe plan
-3. relevant M mutationによるfuture action変更
-4. irrelevant M mutationに対するaction不変性
-5. failed hypothesis invalidationとrollback後のreplan
-6. C／J／M／P deletion試験とv0.3超過の公式sample進捗
+1. implementation commitに結合したbyte-reproducible wheel
+2. fresh Python 3.12 venvでの通常install／`pip check`
+3. installed wheelだけで25/25／183/183を再実行
+4. M4とclean-install runの機能結果・P／J0／M0一致
+5. Kaggle Notebookのruntime／placeholder／secret／failure可視化契約
+6. 外部Kaggle実行はOwnerの現在の明示授権後のみ実行
 
 ## Verified Product Gaps
 
@@ -77,8 +77,9 @@ B-02 closed in M2: teacher-derived compiled product P is runtime-bound
 B-03 closed in M2: non-compatibility product P-IR is runtime-bound
 B-04 closed in M1: all temporal action frames, final composite and history represented
 B-05 closed in M1: ACTION6 covers seven bounded spatial affordance classes
-B-06 goal/mechanism/subgoal/plan induction is incomplete
-B-07 closed in M0: all-25 bounded product baseline executed
+B-06 closed in M3: online goal/mechanism/subgoal/4-step plan and replan active
+B-07 closed in M4: 25/25 WIN, 183/183, 10,733 actions, runtime failure 0
+B-08 M5 gate: external Kaggle normal run requires current Owner authorization
 ```
 
 ## Product Architecture

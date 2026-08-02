@@ -12,7 +12,7 @@ from typing import Final
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH: Final = Path("docs/strategy/REV4_CURRENT_AUTHORITY_MANIFEST.json")
 PRODUCT_ID: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
-ACTIVE_MILESTONE: Final = "M3_INTEGRATED_AGI_CAPABILITY"
+ACTIVE_MILESTONE: Final = "M5_PRODUCT_CLOSURE_AND_PACKAGING"
 
 AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     ("AGENTS.md", "CURRENT_EXECUTION_CONTROL"),
@@ -155,6 +155,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_M2_CAPABILITY_BUNDLE_LOADER",
     ),
     (
+        "ARC-AGI-3-Agents/arc3_agi_agent/product_trace.py",
+        "PRODUCT_M3_PLAN_AND_MEMORY_TRACE",
+    ),
+    (
         "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
         "PRODUCT_M2_CAPABILITY_DESCRIPTOR",
     ),
@@ -188,6 +192,26 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_M2_CAPABILITY_COMPILER_COMMAND",
     ),
     (
+        "scripts/build_product_release.py",
+        "PRODUCT_M5_DETERMINISTIC_WHEEL_BUILDER",
+    ),
+    (
+        "scripts/capture_product_run_evidence.py",
+        "PRODUCT_M4_M5_RUN_EVIDENCE_CAPTURE",
+    ),
+    (
+        "scripts/build_product_release_evidence.py",
+        "PRODUCT_M5_RELEASE_EVIDENCE_BUILDER",
+    ),
+    (
+        "scripts/build_kaggle_submission.py",
+        "PRODUCT_M5_NOTEBOOK_BUILDER",
+    ),
+    (
+        "scripts/validate_kaggle_submission.py",
+        "PRODUCT_M5_NOTEBOOK_VALIDATOR",
+    ),
+    (
         "analysis/product/rev4/product_resource_bounds.json",
         "PRODUCT_RESOURCE_BOUND_EVIDENCE",
     ),
@@ -208,12 +232,56 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_M2_CAPABILITY_ACCEPTANCE_EVIDENCE",
     ),
     (
+        "analysis/product/rev4/m4_full_sample_product.json",
+        "PRODUCT_M4_FULL_SAMPLE_EVIDENCE",
+    ),
+    (
+        "analysis/product/rev4/m5_clean_install_product.json",
+        "PRODUCT_M5_CLEAN_INSTALL_EVIDENCE",
+    ),
+    (
+        "analysis/product/rev4/m5_product_release.json",
+        "PRODUCT_M5_LOCAL_RELEASE_EVIDENCE",
+    ),
+    (
+        "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
+        "PRODUCT_M5_NOTEBOOK_VALIDATION_EVIDENCE",
+    ),
+    (
+        "release/ARC3CompletionAgent-v1.0/README.md",
+        "PRODUCT_M5_RELEASE_OPERATOR_GUIDE",
+    ),
+    (
+        "release/ARC3CompletionAgent-v1.0/requirements-lock.txt",
+        "PRODUCT_M5_RESOLVED_DEPENDENCY_LOCK",
+    ),
+    (
+        "release/ARC3CompletionAgent-v1.0/MANIFEST.json",
+        "PRODUCT_M5_RELEASE_MANIFEST",
+    ),
+    (
+        "release/ARC3CompletionAgent-v1.0/SHA256SUMS",
+        "PRODUCT_M5_RELEASE_DIGESTS",
+    ),
+    (
+        "release/ARC3CompletionAgent-v1.0/arc3_completion_agent-1.0.0-py3-none-any.whl",
+        "PRODUCT_M5_RELEASE_WHEEL",
+    ),
+    (
         "ARC-AGI-3-Agents/tests/unit/test_product_runner.py",
         "PRODUCT_RUNNER_ACCEPTANCE_TEST",
     ),
     (
         "ARC-AGI-3-Agents/tests/unit/test_product_governance.py",
         "PRODUCT_GOVERNANCE_ACCEPTANCE_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_product_release_package.py",
+        "PRODUCT_M5_RELEASE_PACKAGE_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_kaggle_notebook_contract.py",
+        "PRODUCT_M5_NOTEBOOK_CONTRACT_TEST",
     ),
     (
         "ARC-AGI-3-Agents/tests/unit/test_generic_competition_runner.py",

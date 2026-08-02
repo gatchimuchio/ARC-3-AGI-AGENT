@@ -4,8 +4,10 @@
 C／J／M／P runtimeを統合した実行パッケージです。公式基盤の原READMEは
 [`UPSTREAM_README.md`](UPSTREAM_README.md) に参照用として保存しています。
 
-現在milestoneは`M3_INTEGRATED_AGI_CAPABILITY`です。M0の全25 bounded baseline、
-M1の全25初期観測・一手実行・再観測runtime surface、M2の製品P／J0／M0 bundleは閉じています。
+現在milestoneは`M5_PRODUCT_CLOSURE_AND_PACKAGING`です。M0～M3の製品runtime能力と、
+M4の25/25 `WIN`・183/183 level・10,733 actionの公式サンプル全数完遂、
+M5のbyte-reproducible wheel・fresh install全数回帰・依存lock・Notebook静的検証まで
+ローカル閉包済みです。外部Kaggle normal runは現在のOwner明示授権を要します。
 
 P3では`arc3_agi_agent.evidence_compiler`を追加し、730件の解析・metadata sourceから
 identity-freeなC/J/M fixtureを生成済みです。P4では共通`InstructionBody`契約、

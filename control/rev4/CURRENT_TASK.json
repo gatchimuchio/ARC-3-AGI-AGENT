@@ -2,9 +2,9 @@
   "schema_version": "arc3-product-current-task-v2",
   "product_id": "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4",
   "product_name": "ARC3CompletionAgent",
-  "product_status": "IN_DEVELOPMENT",
-  "active_milestone": "M3_INTEGRATED_AGI_CAPABILITY",
-  "current_work_class": "IMPLEMENT_ONLINE_MECHANISM_PLANNING_AND_MEMORY_CAUSALITY",
+  "product_status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+  "active_milestone": "M5_PRODUCT_CLOSURE_AND_PACKAGING",
+  "current_work_class": "AWAIT_CURRENT_OWNER_AUTHORIZATION_FOR_EXTERNAL_KAGGLE_RUN",
   "endpoint": {
     "artifact": "ARC3CompletionAgent",
     "official_sample_game_target": 25,
@@ -86,35 +86,46 @@
     {
       "id": "B-06",
       "component": "C_P",
-      "finding": "goal induction, mechanism induction, subgoal planning and multi-step planning are incomplete",
-      "status": "BLOCKING"
+      "finding": "online multiple representations, competing hypotheses, subgoals, four-step plans, invalidation and rollback replanning are active for every executed action",
+      "status": "CLOSED_M3_AGI_CAPABILITY",
+      "evidence": "analysis/product/rev4/m4_full_sample_product.json"
     },
     {
       "id": "B-07",
       "component": "ProductAcceptance",
-      "finding": "the all-25 product baseline executed with 25 bounded reports, zero budget impossibilities, zero adapter crashes and zero scorecard lifecycle leaks",
-      "status": "CLOSED_PRODUCT_BASELINE_EXECUTABLE",
-      "evidence": "analysis/product/rev4/current_product_baseline.json"
+      "finding": "one shared-session product run completed all 25 games, all 183 levels and 10733 actions with no endpoint failure",
+      "status": "CLOSED_M4_OFFICIAL_SAMPLE_PRODUCT_COMPLETE",
+      "evidence": "analysis/product/rev4/m4_full_sample_product.json"
+    },
+    {
+      "id": "B-08",
+      "component": "ExternalKaggleExecution",
+      "finding": "local product closure is complete; an external Kaggle normal run is a separate write and requires current Owner authorization",
+      "status": "AWAITING_CURRENT_OWNER_AUTHORIZATION",
+      "evidence": "analysis/product/rev4/m5_product_release.json"
     }
   ],
   "required_implementation": [
-    "multiple online representations and competing mechanism hypotheses",
-    "bounded subgoal multi-step and probe planning",
-    "relevant memory mutation changes future candidate plan or action",
-    "irrelevant memory mutation leaves action invariant",
-    "failed hypothesis invalidation and revised rollback plan",
-    "C J M P deletion tests fail as predicted",
-    "official sample completed game or level count improves over v0.3"
+    "preserve implementation commit 9e7657281bc31ee4dd97a09bde7e96b567631166",
+    "preserve byte-reproducible wheel sha256 0557c3cbc1fbaf295a25351aad62c9349cdcfdb5fdc5bce669edffdfc4de55de",
+    "preserve fresh-install 25 of 25 games and 183 of 183 levels",
+    "preserve exact M4 and M5 functional result equality",
+    "preserve P J0 M0 logical identity across checkout and wheel",
+    "preserve dependency lock and Kaggle Notebook validation",
+    "do not execute an external Kaggle write without current Owner authorization"
   ],
   "exit_conditions": {
-    "relevant_memory_causality_passed": true,
-    "irrelevant_memory_invariance_passed": true,
-    "failed_hypothesis_non_repetition_passed": true,
-    "next_probe_and_question_generated": true,
-    "rollback_revises_plan": true,
-    "trinity_deletion_tests_passed": true,
-    "sample_progress_improved_over_v0_3": true,
-    "status": "AGI_CLOSED_LOOP_CAPABILITY_ACTIVE"
+    "m3_agi_closed_loop_capability_active": true,
+    "m4_official_sample_product_complete": true,
+    "wheel_byte_reproducible": true,
+    "fresh_install_passed": true,
+    "clean_install_25_of_25_win": true,
+    "clean_install_183_of_183_complete": true,
+    "dependency_lock_matches_fresh_install": true,
+    "kaggle_notebook_local_validation_passed": true,
+    "external_kaggle_normal_run_complete": false,
+    "product_released": false,
+    "status": "LOCAL_PRODUCT_CLOSURE_COMPLETE"
   },
   "current_evidence": {
     "baseline_report_path": "analysis/product/rev4/current_product_baseline.json",
@@ -125,10 +136,10 @@
     "baseline_execution_started_at": "2026-08-02T17:20:12+09:00",
     "baseline_execution_completed_at": "2026-08-02T19:31:39+09:00",
     "m0_exit_status": "PRODUCT_BASELINE_EXECUTABLE",
-    "product_game_win_count": 0,
-    "product_level_completion_count": 3,
-    "product_completion_established": false,
-    "product_endpoint_failures": [
+    "m0_product_game_win_count": 0,
+    "m0_product_level_completion_count": 3,
+    "m0_product_completion_established": false,
+    "m0_product_endpoint_failures": [
       "PRODUCT_GAME_WIN_COUNT_MISMATCH",
       "PRODUCT_LEVEL_COMPLETION_COUNT_MISMATCH"
     ],
@@ -158,7 +169,29 @@
     "m2_descriptor_path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
     "m2_descriptor_sha256": "0c2f9bced86f316e43eb720b5f9d1c11afc2502935bfd982172b36d6a0c04526",
     "m2_package_path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
-    "m2_package_sha256": "a24ba468374bf7fabda2d0ecae44793125fe1eb829db649196a8f77d0b7d91ce"
+    "m2_package_sha256": "a24ba468374bf7fabda2d0ecae44793125fe1eb829db649196a8f77d0b7d91ce",
+    "implementation_commit": "9e7657281bc31ee4dd97a09bde7e96b567631166",
+    "m4_report_path": "analysis/product/rev4/m4_full_sample_product.json",
+    "m4_report_sha256": "31caa9b8f4c42033a2cd4ebe037dba9b8f69c03b2e09bac94336d10a4edce5e4",
+    "m4_exit_status": "OFFICIAL_SAMPLE_PRODUCT_COMPLETE",
+    "m5_clean_report_path": "analysis/product/rev4/m5_clean_install_product.json",
+    "m5_clean_report_sha256": "82d5b567c80c3bb5242f351d181ebfd9945ce508aa417e473ab06c8e247c22e6",
+    "m5_release_report_path": "analysis/product/rev4/m5_product_release.json",
+    "m5_release_report_sha256": "c44e43bee35d376aefe0c79f0c9d7da3d47afb0f9fec2b78fca4b6c3a649221d",
+    "m5_local_exit_status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+    "product_game_win_count": 25,
+    "product_level_completion_count": 183,
+    "product_total_action_count": 10733,
+    "product_completion_established": true,
+    "product_endpoint_failures": [],
+    "wheel_path": "release/ARC3CompletionAgent-v1.0/arc3_completion_agent-1.0.0-py3-none-any.whl",
+    "wheel_sha256": "0557c3cbc1fbaf295a25351aad62c9349cdcfdb5fdc5bce669edffdfc4de55de",
+    "wheel_size_bytes": 8163746,
+    "dependency_lock_path": "release/ARC3CompletionAgent-v1.0/requirements-lock.txt",
+    "dependency_lock_sha256": "820484447137d2cc4394a97bf5632f6dd0104d5258c4b0f005a7fbb0541d0c05",
+    "notebook_validation_path": "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
+    "notebook_validation_sha256": "027ddff2853b97e7f05e0ba0183447e5eb6c542fe3bb7a108230793f04429bdc",
+    "external_kaggle_normal_run_status": "NOT_EXECUTED_REQUIRES_CURRENT_OWNER_AUTHORIZATION"
   },
   "allowed": [
     "reuse GenericAGIRuntime CognitiveSession GenericHDSJudgementSubject SemanticMemory and official adapters",

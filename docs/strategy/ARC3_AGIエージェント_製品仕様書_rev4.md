@@ -448,13 +448,17 @@ known successful max per game = 1519
 
 ACTION6候補はobject、cell、region、boundary、path、UI、candidate-positionの7分類を、現観測由来・bounded・重複座標なしで生成する。
 
-#### B-06 目的・機構・計画能力不足
+#### B-06 目的・機構・計画能力不足 — M3 CLOSED
 
-現行Pはactionのprogress／hazard／information scoreを主に計算するが、level目的推定、機構仮説、subgoal、multi-step plan、phase遷移を製品能力として閉じていない。
+同一製品runtimeに、複数representation、競合機構仮説、subgoal、4-step plan、probe、失敗仮説無効化、rollback後replanを統合した。M4正本runは10,733手すべてでC planとJ commitを一対一に記録し、M参照が次判断へ結合されたことを示す。
 
-#### B-07 製品受入未接続 — M0 CLOSED
+#### B-07 製品受入未接続 — M4 CLOSED
 
-同一artifactの25 game blocking baselineを実行済みである。最終`WIN` 25/25／183/183は引き続き製品endpointであり、未達のままである。
+同一`ARC3CompletionAgent v1.0`を公式サンプル25 gameへ一セッションで逐次実行し、25/25 `WIN`、183/183 level、10,733 action、runtime failure signature 0、scorecard leak 0を実測した。正本証拠は`analysis/product/rev4/m4_full_sample_product.json`とする。
+
+#### B-08 公式外部実行 — M5 GATE
+
+wheel・clean install・同一サンプル全数回帰・依存lock・Kaggle Notebook静的検証はローカル閉包済みである。外部Kaggle Notebook実行と提出は、当該操作に対するOwnerの現在の明示授権がある場合に限る。
 
 ---
 

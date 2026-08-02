@@ -6,7 +6,7 @@
 - 対象repository: `gatchimuchio/ARC-3-AGI-AGENT`
 - 日付: `2026-08-02`
 - 状態: `OWNER_PRODUCT_DIRECTIVE_INSTALLED`
-- 現在milestone: `M3_INTEGRATED_AGI_CAPABILITY`
+- 現在milestone: `M5_PRODUCT_CLOSURE_AND_PACKAGING`
 
 ---
 
@@ -318,6 +318,13 @@ ARC3CompletionAgent v0.4
 
 `AGI_CLOSED_LOOP_CAPABILITY_ACTIVE`
 
+実績（2026-08-03）:
+
+- 全actionへの複数representation・競合仮説・subgoal・4-step plan結合
+- 10,733/10,733 actionでC planとJ commitが一致
+- 失敗帰属12、rollback plan 42、失敗仮説無効化478、rollback後replan 42
+- relevant M causality／irrelevant M invariance／C-J-M-P deletion回帰PASS
+
 ---
 
 # M4 — FULL-SAMPLE REPAIR LOOP
@@ -392,6 +399,19 @@ G7  25/25 games WIN
 
 `OFFICIAL_SAMPLE_PRODUCT_COMPLETE`
 
+実績（2026-08-03）:
+
+```text
+25 / 25 games WIN
+183 / 183 levels complete
+10,733 actions
+runtime failure signature 0
+adapter / lifecycle failure 0
+one shared CognitiveSession
+```
+
+正本証拠: `analysis/product/rev4/m4_full_sample_product.json`
+
 ---
 
 # M5 — PRODUCT CLOSURE AND PACKAGING
@@ -430,24 +450,33 @@ submission accepted or platform failure isolated
 
 `ARC3_COMPLETION_AGENT_PRODUCT_RELEASED`
 
+Local closure実績（2026-08-03）:
+
+- implementation commit `9e7657281bc31ee4dd97a09bde7e96b567631166`
+- wheel SHA-256 `0557c3cbc1fbaf295a25351aad62c9349cdcfdb5fdc5bce669edffdfc4de55de`
+- 別clean archive間でwheel／MANIFEST byte一致
+- fresh Python 3.12.13 venvへ通常install、`pip check` PASS
+- installed wheelで25/25 `WIN`、183/183、10,733 action
+- M4とclean-install runの25行機能結果が完全一致
+- P／J0／M0 logical identity一致
+- Kaggle Notebook local validation 25/25 PASS、secret 0、submission API call 0
+
+正本証拠:
+
+- `analysis/product/rev4/m5_clean_install_product.json`
+- `analysis/product/rev4/m5_product_release.json`
+
+外部Kaggle normal runは未実行であり、Ownerの現在の明示授権まで`ARC3_COMPLETION_AGENT_PRODUCT_RELEASED`はclaimしない。
+
 ---
 
 ## 1. 現在作業
 
 ```text
-M3_INTEGRATED_AGI_CAPABILITY
+M5_PRODUCT_CLOSURE_AND_PACKAGING
 ```
 
-現在実装するもの:
-
-1. competing mechanism／counter-hypothesisのオンライン更新
-2. bounded subgoal／multi-step／probe plan
-3. relevant M mutationによるfuture action変更
-4. irrelevant M mutationに対するaction不変性
-5. failed hypothesis invalidationとrollback後のreplan
-6. C／J／M／P deletion試験とv0.3超過の公式sample進捗
-
-M2でactive化した同一product bundleとentrypointを維持し、静的artifactだけで完了扱いしない。経験による次判断の変化と公式sample進捗を同じwork block内で実測する。
+ローカルproduct closureは完了した。現在の作業境界は、Ownerの現在の明示授権を得た後の外部Kaggle normal runのみである。授権なしにNotebook upload、run、submissionを実行しない。
 
 ---
 
