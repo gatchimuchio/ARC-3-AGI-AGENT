@@ -1,103 +1,162 @@
-# ARC3 Codex開発契約 rev4
+# ARC3 Completion Agent 製品開発契約 rev4
 
-このrepositoryの現在目的は、HDSでARC3成功軌道をタスク分解し、ARC3エージェントが使用する汎用構造と命令形Pを抽出・実装することである。
+このrepositoryの最終成果物は、ARC3公式サンプル25 game／183 levelを同一AGI構造で完遂する実行可能製品`ARC3CompletionAgent`である。
 
-## 正本
+HDS分析、教師軌道分解、構造データ、命令形P、J設定、M0、試験reportは製品を成立させる素材・手段・内部部品であり、それ自体を開発endpointとしない。
+
+## Authority
 
 1. Ownerの現在の明示指示
-2. `docs/strategy/ARC3_HDS直接抽出_汎用構造命令形P_実装仕様書_rev4.md`
-3. `docs/roadmap/ARC3_HDS直接抽出_開発ロードマップ_rev4.md`
+2. `docs/strategy/ARC3_AGIエージェント_製品仕様書_rev4.md`
+3. `docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md`
 4. `control/rev4/CURRENT_TASK.json`
-5. HDS／AGI上位正本
+5. HDS内部正本
+6. AGI三主体統合設計正本
+7. 旧rev3／P0〜P22／S0〜S6は履歴・再利用資産
 
-rev3のD/B/A/E phase、`control/rev3/REV3_CURRENT_SELECTOR.json`、旧P0〜P22、S0〜S6は履歴であり、current task selectorではない。
-
-## 最上位目的
-
-```text
-25 game／183 levelの成功軌道
-→ HDS TaskDecompositionRecord
-→ GenericStructureLibrary
-→ Imperative PBundle
-→ 同一ARC3 Agent
-→ 183/183実行
-→ 公式提出
-```
-
-## 現在作業
+## Product Endpoint
 
 ```text
-P1_TASK_DECOMPOSITION
+ARC3CompletionAgent
+→ official EnvironmentWrapper
+→ observe FrameDataRaw
+→ C = Execute(L0, P)
+→ J_hds judges
+→ M updates
+→ emit one legal GameAction
+→ repeat
+→ 25/25 WIN and 183/183 complete
 ```
 
-- 全25 game／183 levelを列挙する。
-- 各成功軌道をbefore／target／condition／operation／effect／progress／terminalへ分解する。
-- terminalから逆向きに寄与stepを結ぶ。
-- 全stepを機械可読TaskDecompositionRecordへ変換する。
-- 不明項目は`open_terms`へ置き、推測で閉じない。
-
-## HDSの使い方
-
-HDSは成果物ではなく判断方法である。
+製品完成条件:
 
 ```text
-F  観測を切り取る
-Md 構造候補と反対候補を作る
-Cm 採否・保留・観測要求を決める
-U  結果を分解記録、構造、P、M、Failure Signatureへ反映する
+one runnable product artifact
+one active C/J/M/P runtime
+25 / 25 official sample games WIN
+183 / 183 levels complete
+no manual per-step intervention
+no fixed trajectory playback
 ```
 
-## 許可
-
-- 既知回答・成功軌道・raw recording・canonical trajectoryの使用
-- 最大情報で抽出してからidentity／replay依存を減算すること
-- 既存IR／interpreter／P16〜P21 substrateの再利用
-- repository内の実装・試験・修正の連続実行
-- failureから前工程へ戻ること
-
-## 禁止
-
-- 新repositoryの作成
-- HDS理論証明を主目的にすること
-- schema／digest／attestation／approval専用phaseの追加
-- source-blind証明を抽出開始条件にすること
-- game ID／level IDだけによるruntime action routing
-- fixed trajectory replayを汎用Pとして扱うこと
-- 次工程が読まないartifactの作成
-- 仕様外のBridge／Runtime／公式作業の先行
-
-## 工程
+## Current Work
 
 ```text
-P1 Task Decomposition
-P2 Generic Structure Extraction
-P3 Imperative P Compilation
-P4 Agent Integration
-P5 Full Execution Repair Loop
-P6 Official Packaging / Evaluation
+M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
 ```
 
-これ以外のTrackを追加しない。
+現在は分析artifactを増やすのではなく、既存`GenericAGIAgent`／`GenericAGIRuntime`を製品baselineとして公式サンプルへ接続し、能力以前のblocking defectを除去する。
 
-## 成果物規則
+最初に実装する。
 
-新artifactは次のいずれかを満たす場合だけ作る。
+1. `ARC3CompletionAgent`製品entrypoint
+2. 公式サンプル25 game blocking acceptance runner
+3. configurable 4096-action development Resource Contract
+4. HDS resource／no-progress境界との整合
+5. current product baseline report
+6. blocker B-01〜B-07のstatus
+
+## Verified Product Gaps
 
 ```text
-次工程のコードが直接読む
-失敗修正に直接使う
-公式提出に必要
+B-01 current competition budget 128 < known successful max 1519
+B-02 current P is generic exploration/scoring, not teacher-derived ARC3 capability
+B-03 default P-IR is compatibility fixture
+B-04 main representation/effect path is final-layer-centric
+B-05 ACTION6 candidates are component-anchor-centric
+B-06 goal/mechanism/subgoal/plan induction is incomplete
+B-07 25/183 product acceptance is not blocking
 ```
 
-各phaseのprimary artifactは一系統、verification reportは一つまでを原則とする。
+## Product Architecture
 
-## 検証
+```text
+C = Execute(L0, P)
+AGI Kernel = Trinity(C, J, M)
+Product = Official Adapter + AGI Kernel + Product Runtime + Product Bundle
+```
 
-- testは各work unitの末尾で行う。
-- test専用phaseを作らない。
-- test数を成果と数えない。
-- 実際のcoverage、実行結果、failure解消を成果とする。
+- C: representation、hypothesis、counter-hypothesis、prediction、candidate、probe、plan
+- J: HDS purpose、frame、gate、selection、action、rollback、memory update、next question、stop
+- M: active judgment grounds, revised by experience
+- P: Layer-0が実行するARC3能力本体
+- Adapter: official I/O conversion only; not a subject
 
-## Owner権限
+Cは最終採否・外部action・active memory commitを行わない。J以外の外部action経路を禁止する。
 
-Ownerは最上位目的、戦略変更、PBundle freeze、公式提出を決める。内部の連続開発は、明示的な停止指示または重大な仕様衝突がない限り継続する。
+## HDS Usage
+
+HDSは開発成果物ではなく、製品Jと開発時failure分解の方法である。
+
+```text
+F   observe/frame
+Md  model alternatives, counter-hypotheses, candidates
+Cm  compare, gate, decide
+U   attribute result, revise P/J/M or product component
+```
+
+教師素材のHDS解釈は、P／J0／M0へコンパイルされ製品で使われる範囲だけ実施する。
+
+## Product-First Milestones
+
+```text
+M0 Product baseline / blockers
+M1 Official product runtime
+M2 Product capability bundle P/J0/M0
+M3 Integrated AGI capability
+M4 Full-sample repair loop
+M5 Product closure / packaging
+```
+
+全milestoneでrunnable `ARC3CompletionAgent`を保持する。reportだけ、schemaだけ、evidenceだけ、approvalだけのmilestoneを作らない。
+
+## Allowed
+
+- 既知回答・成功軌道・raw recording・canonical trajectoryの能力構築利用
+- environment sourceを開発時の機構確認へ利用
+- 最大情報から構造を抽出し、製品runtimeでidentity／replay依存を減算
+- PH-D05 corpus、P16〜P21 substrate、P-IR、C/J/M、official adapterの再利用
+- 製品code、bundle、tests、runner、failure repairの連続実行
+- failureからC／J／M／P／Adapter／Resourceへ戻ること
+
+## Forbidden
+
+- 新repository作成
+- HDS蒸留／構造抽出を最終製品扱いすること
+- productへ接続しない大量analysis artifact
+- governance-only phase
+- action ID／game ID／level IDによる完成trajectory routing
+- fixed answer playbackをAGI能力と数えること
+- current product baseline測定前の抽象的な完成claim
+- 128 action固定の維持
+- Jを迂回する外部action
+
+## Progress Metrics
+
+```text
+games started
+games WIN
+levels completed
+failure classes
+actions used
+resource stop count
+memory-caused behavior change
+regressions
+```
+
+test数、schema数、commit数、digest数を製品進捗と数えない。
+
+## Artifact Rule
+
+新artifactは次のいずれかの場合だけ作る。
+
+```text
+product runtimeが直接読む
+product acceptanceが直接読む
+product failure repairに直接使う
+official packageに必要
+```
+
+## Owner Boundary
+
+Ownerは製品定義、戦略変更、Product Bundle freeze、公式提出を決定する。内部実装・試験・修正は、明示停止または重大な仕様衝突まで継続する。
