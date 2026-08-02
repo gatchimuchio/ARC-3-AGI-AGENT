@@ -122,7 +122,7 @@ def run_sequential_competition(
             started_game_count += 1
             environment: object | None = None
             episode_handle = None
-            game_succeeded = False
+            game_outcome_succeeded = False
             game_reason = "UNSTARTED"
             try:
                 episode_handle = cognitive_session.begin_episode()
@@ -155,8 +155,8 @@ def run_sequential_competition(
                 runtime_report = getattr(agent, "runtime_report", None)
                 if runtime_report is None:
                     raise RuntimeError("GENERIC_COMPETITION_RUNTIME_REPORT_MISSING")
-                game_succeeded = True
                 game_reason = str(runtime_report.stop_reason)
+                game_outcome_succeeded = str(runtime_report.final_state) == "WIN"
                 completed.append(
                     {
                         "game_index": game_index,
@@ -197,7 +197,7 @@ def run_sequential_competition(
                     try:
                         cognitive_session.end_episode(
                             episode_handle,
-                            succeeded=game_succeeded,
+                            succeeded=game_outcome_succeeded,
                             reason=game_reason,
                         )
                     except Exception as error:

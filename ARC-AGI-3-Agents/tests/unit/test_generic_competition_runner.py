@@ -2,9 +2,13 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+import pytest
+
 from arc3_agi_agent.generic_competition_runner import (
     run_sequential_competition,
 )
+from arc3_agi_agent.generic_session import CognitiveSession, EpisodeHandle
+from arc3_agi_agent.memory_overlay import EpisodeOverlayReceipt
 
 
 @dataclass(frozen=True)
@@ -201,4 +205,37 @@ def test_runner_records_release_failure_and_continues() -> None:
             "error_type": "RuntimeError",
             "error_message": "bounded release failure",
         }
+    ]
+
+
+def test_not_finished_runtime_closes_episode_as_failure(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[bool, str]] = []
+    original = CognitiveSession.end_episode
+
+    def tracking_end_episode(
+        self: CognitiveSession,
+        handle: EpisodeHandle,
+        *,
+        succeeded: bool,
+        reason: str,
+    ) -> EpisodeOverlayReceipt:
+        calls.append((succeeded, reason))
+        return original(self, handle, succeeded=succeeded, reason=reason)
+
+    monkeypatch.setattr(
+        CognitiveSession,
+        "end_episode",
+        tracking_end_episode,
+    )
+    run_sequential_competition(
+        arcade=_Arcade(),
+        agent_factory=_Agent,
+    )
+
+    assert calls == [
+        (False, "RESOURCE_LIMIT"),
+        (False, "RuntimeError"),
+        (False, "RESOURCE_LIMIT"),
     ]
