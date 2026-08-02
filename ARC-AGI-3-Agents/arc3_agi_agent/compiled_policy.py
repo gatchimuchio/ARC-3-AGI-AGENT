@@ -564,6 +564,35 @@ class CompiledAutonomousInstructionBody:
                 observation=observation,
                 action_history=action_history,
             )
+        if observation.terminal_state == "GAME_OVER":
+            history_ref = "bounded-action-effect-memory:" + digest_object(
+                action_history
+            )
+            rollback_refs = tuple(
+                sorted(
+                    (
+                        self.provenance_digest(),
+                        "compiled-policy-control:game-over-rollback",
+                        history_ref,
+                    )
+                )
+            )
+            return InstructionBodyResult(
+                predictions=(),
+                query_digest="compiled-policy-query:"
+                + digest_object(
+                    {
+                        "body": self.digest(),
+                        "observation": observation.digest(),
+                        "representation": representation.digest_value,
+                        "history": history_ref,
+                        "control": "ROLLBACK",
+                    }
+                ),
+                selected_instruction_refs=rollback_refs,
+                control_operation="ROLLBACK",
+                control_instruction_refs=rollback_refs,
+            )
         decision = self.predict(observation, action_history)
         uncertainty = min(
             0.49,

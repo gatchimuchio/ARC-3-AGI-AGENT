@@ -238,6 +238,9 @@ class ActionEffectRecord:
     visible_change: bool = False
     compatibility_reset: bool = False
     target_palette: int = 0
+    plan_id: str = ""
+    outcome_category: str = ""
+    hypothesis_refs: tuple[str, ...] = ()
 
     def payload(self) -> dict[str, int]:
         return dict(self.payload_items)
@@ -270,6 +273,23 @@ class ActionEffectRecord:
             failures.append("ACTION_EFFECT_HISTORY_NON_POINTER_PAYLOAD_PRESENT")
         if self.compatibility_reset != (self.action_id == 0):
             failures.append("ACTION_EFFECT_HISTORY_RESET_SCOPE_INVALID")
+        plan_metadata_present = bool(
+            self.plan_id or self.outcome_category or self.hypothesis_refs
+        )
+        if plan_metadata_present:
+            if not _text(self.plan_id):
+                failures.append("ACTION_EFFECT_HISTORY_PLAN_ID_INVALID")
+            if self.outcome_category not in {
+                "FAILURE",
+                "NO_EFFECT",
+                "PROGRESS",
+                "VISIBLE_CHANGE",
+            }:
+                failures.append("ACTION_EFFECT_HISTORY_OUTCOME_INVALID")
+            if not self.hypothesis_refs or not _sorted_unique_text(
+                self.hypothesis_refs
+            ):
+                failures.append("ACTION_EFFECT_HISTORY_HYPOTHESIS_REFS_INVALID")
         return tuple(sorted(set(failures)))
 
     def digest(self) -> str:
@@ -455,6 +475,127 @@ class GenericHypothesis:
 
 
 @dataclass(frozen=True, slots=True)
+class GenericPlanStep:
+    """One internal or external step in a bounded receding-horizon plan."""
+
+    step_index: int
+    operation: str
+    completion_predicate: str
+    failure_transition: str
+
+    def validate(self) -> tuple[str, ...]:
+        failures: list[str] = []
+        if (
+            isinstance(self.step_index, bool)
+            or not isinstance(self.step_index, int)
+            or self.step_index < 0
+        ):
+            failures.append("GENERIC_PLAN_STEP_INDEX_INVALID")
+        if self.operation not in {
+            "ACTION",
+            "BOUNDED_PROBE",
+            "ROLLBACK",
+            "REOBSERVE",
+            "VERIFY",
+            "REPLAN",
+        }:
+            failures.append("GENERIC_PLAN_STEP_OPERATION_INVALID")
+        if not _text(self.completion_predicate):
+            failures.append("GENERIC_PLAN_STEP_COMPLETION_INVALID")
+        if not _text(self.failure_transition):
+            failures.append("GENERIC_PLAN_STEP_FAILURE_TRANSITION_INVALID")
+        return tuple(sorted(set(failures)))
+
+
+@dataclass(frozen=True, slots=True)
+class GenericPlan:
+    """Identity-free online plan bound to hypotheses, evidence, and a subgoal.
+
+    Only the first step may cause an external side effect.  The remaining
+    steps force reobservation, effect verification, and contingent replanning
+    before another external action can be authorized.
+    """
+
+    plan_id: str
+    candidate_id: str | None
+    mode: str
+    phase: str
+    goal_predicate: str
+    subgoal: str
+    hypothesis_refs: tuple[str, ...]
+    representation_refs: tuple[str, ...]
+    memory_refs: tuple[str, ...]
+    steps: tuple[GenericPlanStep, ...]
+    revision_reason: str
+    predecessor_plan_id: str = ""
+    invalidated_hypothesis_refs: tuple[str, ...] = ()
+
+    def validate(self) -> tuple[str, ...]:
+        failures: list[str] = []
+        if not _text(self.plan_id):
+            failures.append("GENERIC_PLAN_ID_INVALID")
+        if self.candidate_id is not None and not _text(self.candidate_id):
+            failures.append("GENERIC_PLAN_CANDIDATE_ID_INVALID")
+        if self.mode not in {"ACTION_PLAN", "PROBE_PLAN", "ROLLBACK_PLAN"}:
+            failures.append("GENERIC_PLAN_MODE_INVALID")
+        if not all(
+            _text(value)
+            for value in (
+                self.phase,
+                self.goal_predicate,
+                self.subgoal,
+                self.revision_reason,
+            )
+        ):
+            failures.append("GENERIC_PLAN_PURPOSE_INVALID")
+        if not self.hypothesis_refs or not _sorted_unique_text(
+            self.hypothesis_refs
+        ):
+            failures.append("GENERIC_PLAN_HYPOTHESIS_REFS_INVALID")
+        if (
+            len(self.representation_refs) < 2
+            or not _sorted_unique_text(self.representation_refs)
+        ):
+            failures.append("GENERIC_PLAN_REPRESENTATION_REFS_INVALID")
+        if not _sorted_unique_text(self.memory_refs):
+            failures.append("GENERIC_PLAN_MEMORY_REFS_INVALID")
+        if self.predecessor_plan_id and not _text(self.predecessor_plan_id):
+            failures.append("GENERIC_PLAN_PREDECESSOR_INVALID")
+        if not _sorted_unique_text(self.invalidated_hypothesis_refs):
+            failures.append("GENERIC_PLAN_INVALIDATED_REFS_INVALID")
+        if set(self.hypothesis_refs).intersection(
+            self.invalidated_hypothesis_refs
+        ):
+            failures.append("GENERIC_PLAN_REUSES_INVALIDATED_HYPOTHESIS")
+        if not 3 <= len(self.steps) <= 5:
+            failures.append("GENERIC_PLAN_DEPTH_INVALID")
+        if tuple(step.step_index for step in self.steps) != tuple(
+            range(len(self.steps))
+        ):
+            failures.append("GENERIC_PLAN_STEP_ORDER_INVALID")
+        for step in self.steps:
+            failures.extend(step.validate())
+        if self.steps:
+            expected_first = {
+                "ACTION_PLAN": "ACTION",
+                "PROBE_PLAN": "BOUNDED_PROBE",
+                "ROLLBACK_PLAN": "ROLLBACK",
+            }.get(self.mode)
+            if self.steps[0].operation != expected_first:
+                failures.append("GENERIC_PLAN_FIRST_STEP_INVALID")
+            if tuple(step.operation for step in self.steps[1:3]) != (
+                "REOBSERVE",
+                "VERIFY",
+            ):
+                failures.append("GENERIC_PLAN_VERIFY_SEQUENCE_INVALID")
+        if self.mode == "ROLLBACK_PLAN" and self.candidate_id is not None:
+            failures.append("GENERIC_PLAN_ROLLBACK_CANDIDATE_PRESENT")
+        if self.mode != "ROLLBACK_PLAN" and self.candidate_id is None:
+            failures.append("GENERIC_PLAN_ACTION_CANDIDATE_MISSING")
+        return tuple(sorted(set(failures)))
+
+
+@dataclass(frozen=True, slots=True)
 class GenericCandidate:
     candidate_id: str
     descriptor: ActionDescriptor
@@ -468,6 +609,7 @@ class GenericCandidate:
     evidence_binding_key: EvidenceBindingKey
     evidence_bindings: tuple[CandidateEvidenceBinding, ...]
     typed_provenance: TypedCandidateProvenance
+    plan: GenericPlan
     memory_effects: tuple[str, ...] = ()
 
     def semantic_identity(self) -> tuple[int, tuple[tuple[str, int], ...]]:
@@ -495,6 +637,14 @@ class GenericCandidate:
             if binding.key != self.evidence_binding_key:
                 failures.append("GENERIC_CANDIDATE_EVIDENCE_KEY_MISMATCH")
         failures.extend(self.typed_provenance.validate())
+        failures.extend(self.plan.validate())
+        if self.plan.candidate_id != self.candidate_id:
+            failures.append("GENERIC_CANDIDATE_PLAN_BINDING_INVALID")
+        expected_mode = (
+            "ACTION_PLAN" if self.operation == "ACTION" else "PROBE_PLAN"
+        )
+        if self.plan.mode != expected_mode:
+            failures.append("GENERIC_CANDIDATE_PLAN_MODE_INVALID")
         if not _sorted_unique_text(self.memory_effects):
             failures.append("GENERIC_CANDIDATE_MEMORY_EFFECTS_INVALID")
         binding_refs = tuple(
@@ -547,6 +697,7 @@ class GenericComputeResult:
     provenance: tuple[str, ...]
     control_operation: str = ""
     control_instruction_refs: tuple[str, ...] = ()
+    control_plan: GenericPlan | None = None
     _digest_cache: str | None = field(
         default=None,
         init=False,
@@ -574,7 +725,11 @@ class GenericComputeResult:
         if len(model_types) < 2:
             failures.append("GENERIC_HYPOTHESIS_MODEL_DIVERSITY_MISSING")
         semantic_candidates = {item.semantic_identity() for item in self.candidates}
-        if len(observation.available_actions) >= 2 and len(semantic_candidates) < 2:
+        if (
+            not self.control_operation
+            and len(observation.available_actions) >= 2
+            and len(semantic_candidates) < 2
+        ):
             failures.append("GENERIC_CANDIDATE_DIVERSITY_MISSING")
         for hypothesis in self.hypotheses:
             failures.extend(hypothesis.validate())
@@ -582,6 +737,17 @@ class GenericComputeResult:
             failures.extend(prediction.validate())
         for candidate in self.candidates:
             failures.extend(candidate.validate(observation))
+        hypothesis_ids = {item.hypothesis_id for item in self.hypotheses}
+        plans = tuple(item.plan for item in self.candidates)
+        if self.control_plan is not None:
+            failures.extend(self.control_plan.validate())
+            plans = (*plans, self.control_plan)
+        for plan in plans:
+            if not set(plan.hypothesis_refs).issubset(hypothesis_ids):
+                failures.append("GENERIC_PLAN_HYPOTHESIS_BINDING_INVALID")
+        plan_ids = tuple(item.plan_id for item in plans)
+        if len(plan_ids) != len(set(plan_ids)):
+            failures.append("GENERIC_PLAN_ID_DUPLICATED")
         expected_stages = (
             "represent",
             "retrieve",
@@ -610,6 +776,8 @@ class GenericComputeResult:
             failures.append("GENERIC_COMPUTE_CONTROL_OPERATION_INVALID")
         if bool(self.control_operation) != bool(self.control_instruction_refs):
             failures.append("GENERIC_COMPUTE_CONTROL_PROVENANCE_INVALID")
+        if bool(self.control_operation) != bool(self.control_plan):
+            failures.append("GENERIC_COMPUTE_CONTROL_PLAN_INVALID")
         return tuple(sorted(set(failures)))
 
 
@@ -645,6 +813,7 @@ class GenericHDSDecision:
     assertion_state: str
     operation_state: str
     selected_candidate_id: str | None
+    selected_plan_id: str | None
     gate_results: tuple[GateResult, ...]
     reasons: tuple[str, ...]
     next_question: str
@@ -684,6 +853,11 @@ class GenericHDSDecision:
             and self.selected_candidate_id is not None
         ):
             failures.append("GENERIC_DECISION_ACTION_AUTHORITY_INVALID")
+        if self.operation_state in {"EXECUTE", "PROBE", "ROLLBACK"}:
+            if self.selected_plan_id is None:
+                failures.append("GENERIC_DECISION_PLAN_MISSING")
+        elif self.selected_plan_id is not None:
+            failures.append("GENERIC_DECISION_PLAN_UNEXPECTED")
         return tuple(sorted(set(failures)))
 
 
@@ -805,6 +979,8 @@ __all__ = [
     "GenericHDSFrame",
     "GenericHypothesis",
     "GenericObservation",
+    "GenericPlan",
+    "GenericPlanStep",
     "GenericPrediction",
     "GenericRunReport",
     "Layer0StageTrace",

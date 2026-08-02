@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from typing import Any, ClassVar, Mapping
 
@@ -334,16 +335,32 @@ class OfflineGenericEnvironment:
         if request_id in self._seen_request_ids:
             raise RuntimeError(f"{self._boundary}_DUPLICATE_REQUEST")
         self._seen_request_ids.add(request_id)
-        raw = self.environment.step(
-            GameAction.RESET,
-            data={},
-            reasoning={
-                "authority": "HDS",
-                "runtime": "GenericAGIRuntime",
-                "request_id": request_id,
-                "scope": "level",
-            },
-        )
+        reasoning = {
+            "authority": "HDS",
+            "runtime": "GenericAGIRuntime",
+            "request_id": request_id,
+            "scope": "level",
+        }
+        if isinstance(self.environment, LocalEnvironmentWrapper):
+            prior_reset_scope = os.environ.get("ONLY_RESET_LEVELS")
+            os.environ["ONLY_RESET_LEVELS"] = "true"
+            try:
+                raw = self.environment.step(
+                    GameAction.RESET,
+                    data={},
+                    reasoning=reasoning,
+                )
+            finally:
+                if prior_reset_scope is None:
+                    os.environ.pop("ONLY_RESET_LEVELS", None)
+                else:
+                    os.environ["ONLY_RESET_LEVELS"] = prior_reset_scope
+        else:
+            raw = self.environment.step(
+                GameAction.RESET,
+                data={},
+                reasoning=reasoning,
+            )
         if not isinstance(raw, FrameDataRaw):
             raise RuntimeError(f"{self._boundary}_RESET_FAILED")
         self._advance(raw)

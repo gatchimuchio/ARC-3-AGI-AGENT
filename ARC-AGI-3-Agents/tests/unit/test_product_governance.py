@@ -60,6 +60,22 @@ def _complete_report() -> dict[str, object]:
                 "progress_count": progress[index],
                 "final_state": "WIN",
                 "stop_reason": "GOAL_REACHED",
+                "failure_signatures": (),
+                "executed_plan_count": index + 1,
+                "hds_plan_commit_count": index + 1,
+                "initial_plan_count": 1,
+                "revised_plan_count": index,
+                "rollback_plan_count": 1 if index == 0 else 0,
+                "failed_hypothesis_invalidation_count": (
+                    1 if index == 0 else 0
+                ),
+                "post_rollback_replan_count": 1 if index == 0 else 0,
+                "memory_bound_plan_count": index,
+                "competing_hypothesis_plan_count": index + 1,
+                "multi_representation_plan_count": index + 1,
+                "subgoal_plan_count": index + 1,
+                "max_plan_step_count": 4,
+                "failure_attribution_count": 1 if index == 0 else 0,
             }
             for index in range(25)
         ],
@@ -68,7 +84,7 @@ def _complete_report() -> dict[str, object]:
 
 def test_product_governance_constants_match_endpoint() -> None:
     assert ARC3_CURRENT_SELECTOR_PATH == "control/rev4/CURRENT_TASK.json"
-    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M3_INTEGRATED_AGI_CAPABILITY"
+    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M4_FULL_SAMPLE_REPAIR_LOOP"
     assert ARC3_OFFICIAL_SAMPLE_GAME_TARGET == 25
     assert ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET == 183
     assert ARC3_DEVELOPMENT_ACTION_BUDGET == 4096
@@ -86,6 +102,11 @@ def test_product_endpoint_accepts_only_the_full_measured_result() -> None:
     assert metrics["product_endpoint_failures"] == ()
     assert metrics["product_game_win_count"] == 25
     assert metrics["product_level_completion_count"] == 183
+    assert metrics["product_plan_integrity_row_count"] == 25
+    assert metrics["product_runtime_failure_signature_row_count"] == 0
+    assert metrics["product_executed_plan_count"] == 325
+    assert metrics["product_hds_plan_commit_count"] == 325
+    assert metrics["product_max_plan_step_count"] == 4
     assert metrics["product_completion_established"] is True
     assert metrics["product_baseline_executable"] is True
     assert metrics["product_baseline_status"] == ("PRODUCT_BASELINE_EXECUTABLE")
@@ -127,6 +148,38 @@ def test_product_endpoint_rejects_duplicate_index_and_open_scorecard() -> None:
     assert isinstance(endpoint_failures, tuple)
     assert "PRODUCT_GAME_INDEX_COVERAGE_MISMATCH" in endpoint_failures
     assert "PRODUCT_SCORECARD_NOT_CLOSED" in endpoint_failures
+
+
+def test_product_endpoint_rejects_runtime_failure_and_missing_plan_evidence() -> None:
+    report = _complete_report()
+    results = report["results"]
+    assert isinstance(results, list)
+    results[0]["failure_signatures"] = ("GENERIC_RESOURCE_LIMIT",)
+    results[1]["hds_plan_commit_count"] = 0
+
+    metrics = ARC3_PRODUCT_ENDPOINT.metrics(report)
+    endpoint_failures = metrics["product_endpoint_failures"]
+
+    assert metrics["product_completion_established"] is False
+    assert isinstance(endpoint_failures, tuple)
+    assert "PRODUCT_RUNTIME_FAILURE_SIGNATURE_PRESENT" in endpoint_failures
+    assert "PRODUCT_PLAN_EVIDENCE_COVERAGE_MISMATCH" in endpoint_failures
+
+
+def test_product_endpoint_rejects_unbounded_plan_depth() -> None:
+    report = _complete_report()
+    results = report["results"]
+    assert isinstance(results, list)
+    results[0]["max_plan_step_count"] = 100
+
+    metrics = ARC3_PRODUCT_ENDPOINT.metrics(report)
+    endpoint_failures = metrics["product_endpoint_failures"]
+
+    assert metrics["product_max_plan_step_count"] == 100
+    assert metrics["product_completion_established"] is False
+    assert isinstance(endpoint_failures, tuple)
+    assert "PRODUCT_PLAN_DEPTH_MISMATCH" in endpoint_failures
+    assert "PRODUCT_PLAN_EVIDENCE_COVERAGE_MISMATCH" in endpoint_failures
 
 
 def test_rev4_current_task_and_legacy_boundary_are_explicit() -> None:

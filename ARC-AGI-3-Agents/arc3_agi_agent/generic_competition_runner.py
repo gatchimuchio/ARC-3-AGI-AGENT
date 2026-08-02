@@ -164,6 +164,14 @@ def run_sequential_competition(
                         "progress_count": int(runtime_report.progress_count),
                         "final_state": str(runtime_report.final_state),
                         "stop_reason": str(runtime_report.stop_reason),
+                        "failure_signatures": tuple(
+                            str(item)
+                            for item in getattr(
+                                runtime_report,
+                                "failure_signatures",
+                                (),
+                            )
+                        ),
                         "memory_citation_count": int(
                             getattr(runtime_report, "memory_citation_count", 0)
                         ),
@@ -174,6 +182,61 @@ def run_sequential_competition(
                                 "memory_citation_ids",
                                 (),
                             )
+                        ),
+                        "executed_plan_count": int(
+                            getattr(runtime_report, "executed_plan_count", 0)
+                        ),
+                        "hds_plan_commit_count": int(
+                            getattr(runtime_report, "hds_plan_commit_count", 0)
+                        ),
+                        "initial_plan_count": int(
+                            getattr(runtime_report, "initial_plan_count", 0)
+                        ),
+                        "revised_plan_count": int(
+                            getattr(runtime_report, "revised_plan_count", 0)
+                        ),
+                        "rollback_plan_count": int(
+                            getattr(runtime_report, "rollback_plan_count", 0)
+                        ),
+                        "failed_hypothesis_invalidation_count": int(
+                            getattr(
+                                runtime_report,
+                                "failed_hypothesis_invalidation_count",
+                                0,
+                            )
+                        ),
+                        "post_rollback_replan_count": int(
+                            getattr(
+                                runtime_report,
+                                "post_rollback_replan_count",
+                                0,
+                            )
+                        ),
+                        "memory_bound_plan_count": int(
+                            getattr(runtime_report, "memory_bound_plan_count", 0)
+                        ),
+                        "competing_hypothesis_plan_count": int(
+                            getattr(
+                                runtime_report,
+                                "competing_hypothesis_plan_count",
+                                0,
+                            )
+                        ),
+                        "multi_representation_plan_count": int(
+                            getattr(
+                                runtime_report,
+                                "multi_representation_plan_count",
+                                0,
+                            )
+                        ),
+                        "subgoal_plan_count": int(
+                            getattr(runtime_report, "subgoal_plan_count", 0)
+                        ),
+                        "max_plan_step_count": int(
+                            getattr(runtime_report, "max_plan_step_count", 0)
+                        ),
+                        "failure_attribution_count": int(
+                            getattr(runtime_report, "failure_attribution_count", 0)
                         ),
                     }
                 )

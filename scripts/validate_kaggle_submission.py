@@ -17,11 +17,13 @@ from typing import Sequence
 from build_kaggle_submission import (
     ACTION_BUDGET,
     AGENT_SOURCE,
+    AGENT_SOURCES,
     COMPETITION_SLUG,
     DEFAULT_OUTPUT_DIR,
     OFFICIAL_PLACEHOLDER_PARQUET_SHA256,
     OFFICIAL_PLACEHOLDER_PARQUET_SIZE,
     PACKAGE_ROOT,
+    RUNTIME_ASSETS,
     RUNTIME_MODULES,
     build_metadata,
     build_notebook,
@@ -50,7 +52,7 @@ SECRET_PATTERNS = (
         re.compile(rb"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
     ),
 )
-RUNTIME_SMOKE_EXPECTED_OUTPUT = "WIN:2:True:True"
+RUNTIME_SMOKE_EXPECTED_OUTPUT = "arc3.product.capability.v1:4096:PRODUCT:True"
 
 
 def _sha256(data: bytes) -> str:
@@ -214,21 +216,15 @@ def _preexecution_fallback_smoke(
 
 def dedent_smoke_command() -> str:
     return (
-        "from arc3_agi_agent.generic_compute import "
-        "HybridRelationalInstructionBody\n"
-        "from arc3_agi_agent.generic_env import MechanismWorld\n"
-        "from arc3_agi_agent.generic_runtime import GenericAGIRuntime\n"
-        "from arc3_agi_agent.generic_session import "
-        "ResourceContract, create_cognitive_session\n"
-        "session = create_cognitive_session("
-        "p_bundle=HybridRelationalInstructionBody(), "
-        "resource_contract=ResourceContract("
-        "action_budget_per_episode=16))\n"
-        "report = GenericAGIRuntime("
-        "MechanismWorld((11, 29, 47), (1,), required_progress=2), "
-        "session, session.begin_episode()).run()\n"
-        "print(f'{report.final_state}:{report.progress_count}:'"
-        "f'{report.no_fallback_used}:{report.runtime_identity_received}')\n"
+        "from arc3_agi_agent.product_capability import "
+        "load_product_initial_state\n"
+        "from arc3_agi_agent.product_runner import create_product_session\n"
+        "initial = load_product_initial_state()\n"
+        "session = create_product_session()\n"
+        "print(f'{initial.p_bundle.program.program_id}:'"
+        "f'{session.resource_contract.action_budget_per_episode}:'"
+        "f'{initial.p_bundle.compiler_report.mode}:'"
+        "f'{session.instruction_body.digest() == initial.p_bundle.body.digest()}')\n"
     )
 
 
@@ -282,7 +278,7 @@ def validate(
     )
     payload_source = cell_sources_by_id.get("verify-runtime-payload", "")
     competition_source = cell_sources_by_id.get(
-        "execute-generic-runtime",
+        "execute-product-runtime",
         "",
     )
     placeholder_source = cell_sources_by_id.get(
@@ -306,6 +302,9 @@ def validate(
     runner_source = (PACKAGE_ROOT / "generic_competition_runner.py").read_text(
         encoding="utf-8"
     )
+    product_runner_source = (PACKAGE_ROOT / "product_runner.py").read_text(
+        encoding="utf-8"
+    )
     import_smoke = _runtime_import_smoke(runtime_archive)
     archive_members: list[str]
     with tempfile.TemporaryDirectory(
@@ -320,6 +319,7 @@ def validate(
             "ARC3_KAGGLE_RUNTIME_MANIFEST.json",
             "arc3_agi_agent/__init__.py",
             *(f"arc3_agi_agent/{name}" for name in RUNTIME_MODULES),
+            *(f"arc3_agi_agent/{name}" for name in RUNTIME_ASSETS),
         ]
     )
     tracked_secret_findings = _tracked_secret_findings()
@@ -349,6 +349,11 @@ def validate(
             == _sha256(runtime_archive)
             and build_report.get("agent_sha256")
             == _sha256(AGENT_SOURCE.read_bytes())
+            and build_report.get("agent_sha256_by_filename")
+            == {
+                name: _sha256(path.read_bytes())
+                for name, path in AGENT_SOURCES.items()
+            }
             and build_report.get("preexecution_fallback", {}).get(
                 "sha256"
             )
@@ -381,8 +386,10 @@ def validate(
             for marker in (
                 "KAGGLE_IS_COMPETITION_RERUN",
                 "http://gateway:8001/api/games",
-                "OPERATION_MODE=online",
-                "arc3_agi_agent.generic_competition_runner",
+                "OPERATION_MODE=competition",
+                "arc3_agi_agent.product_runner",
+                '"--mode"',
+                '"competition"',
             )
         ),
         "NB-010_OFFICIAL_OFFLINE_WHEEL_CONTRACT": (
@@ -425,7 +432,7 @@ def validate(
         ),
         "NB-014_NO_SECRET": not notebook_secret_findings
         and not tracked_secret_findings,
-        "NB-015_GENERIC_BOUNDARY": (
+        "NB-015_PRODUCT_BOUNDARY": (
             build_report.get("runtime_archive", {}).get(
                 "teacher_included"
             )
@@ -438,6 +445,19 @@ def validate(
                 "runtime_identity_routing_included"
             )
             is False
+            and build_report.get("runtime_archive", {}).get(
+                "fixed_action_trajectory_included"
+            )
+            is False
+            and build_report.get("runtime_archive", {}).get(
+                "literal_coordinate_table_included"
+            )
+            is False
+            and build_report.get("runtime_archive", {}).get(
+                "compiled_identity_free_product_policy_included"
+            )
+            is True
+            and runtime_manifest.get("product_id") == "ARC3CompletionAgent"
             and runtime_manifest.get("action_budget") == ACTION_BUDGET
         ),
         "NB-016_CELL_IDS_UNIQUE": (
@@ -466,7 +486,7 @@ def validate(
             == [
                 "install-official-offline-wheels",
                 "verify-runtime-payload",
-                "execute-generic-runtime",
+                "execute-product-runtime",
                 "write-official-placeholder",
             ]
             and cell_types == ["code", "code", "code", "code"]
@@ -495,12 +515,16 @@ def validate(
             and "Thread(" not in runner_source
             and "Swarm(" not in competition_source
             and '"main.py"' not in competition_source
+            and "product_process_exit_code" in product_runner_source
+            and 'mode == "competition"' in product_runner_source
         ),
         "NB-023_RESOURCE_LIMITS_NOT_SELF_IMPOSED": (
             "setrlimit" not in sources
             and "RLIMIT_AS" not in sources
             and "setrlimit" not in runner_source
             and "RLIMIT_AS" not in runner_source
+            and "setrlimit" not in product_runner_source
+            and "RLIMIT_AS" not in product_runner_source
             and "record=True" not in runner_source
         ),
         "NB-024_PREEXEC_COLLECTIBLE_FALLBACK": (
@@ -516,7 +540,7 @@ def validate(
                 )
             )
             and cell_ids.index("install-official-offline-wheels")
-            < cell_ids.index("execute-generic-runtime")
+            < cell_ids.index("execute-product-runtime")
             and fallback_smoke["passed"] is True
         ),
         "NB-025_FAILURE_VISIBLE_AND_COLLECTIBLE": (
@@ -556,7 +580,7 @@ def validate(
         ),
     }
     return {
-        "schema_version": "arc3-kaggle-notebook-validation-v5",
+        "schema_version": "arc3-kaggle-notebook-validation-v6",
         "status": "PASS" if all(checks.values()) else "FAIL",
         "checks": checks,
         "failed_check_ids": [
@@ -573,6 +597,10 @@ def validate(
         "build_report_sha256": _sha256(build_report_data),
         "runtime_archive": runtime_manifest,
         "agent_sha256": _sha256(AGENT_SOURCE.read_bytes()),
+        "agent_sha256_by_filename": {
+            name: _sha256(path.read_bytes())
+            for name, path in AGENT_SOURCES.items()
+        },
         "compile_failures": compile_failures,
         "runtime_import_smoke": import_smoke,
         "preexecution_fallback_smoke": fallback_smoke,

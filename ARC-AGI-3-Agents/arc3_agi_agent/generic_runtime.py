@@ -142,11 +142,15 @@ def _rendered_changed(
     before: GenericObservation,
     after: GenericObservation,
 ) -> bool:
-    effect_set = set(after.visible_effects)
-    if effect_set & {"VISIBLE_STATE_CHANGE", "TRANSIENT_ANIMATION_CHANGE"}:
-        return True
-    if effect_set & {"NO_VISIBLE_CHANGE", "INTERFACE_ONLY_CHANGE"}:
-        return False
+    """Return the persistent rendered effect consumed by bounded policy M.
+
+    ``visible_effects`` also describes transient animation and interface
+    classifications.  Those facts remain available to representation and HDS,
+    but the compiled product P was trained on equality of consecutive
+    action-complete renders.  Letting a semantic effect label override that
+    equality changes the policy feature alphabet and causes closed-loop drift.
+    """
+
     if before.rendered_layers and after.rendered_layers:
         return before.composited_view != after.composited_view
     return before.signature != after.signature
@@ -159,6 +163,9 @@ def _action_effect_record(
     before: GenericObservation,
     after: GenericObservation,
     compatibility_reset: bool = False,
+    plan_id: str = "",
+    outcome_category: str = "",
+    hypothesis_refs: tuple[str, ...] = (),
 ) -> ActionEffectRecord:
     target_palette = 0
     if action_id == 6:
@@ -178,6 +185,9 @@ def _action_effect_record(
         visible_change=_rendered_changed(before, after),
         compatibility_reset=compatibility_reset,
         target_palette=target_palette,
+        plan_id=plan_id,
+        outcome_category=outcome_category,
+        hypothesis_refs=hypothesis_refs,
     )
     failures = record.validate()
     if failures:
@@ -737,12 +747,18 @@ class GenericAGIRuntime:
                 )
                 rollback_memory_update_digests: list[str] = []
                 if selected_ablation.memory_write:
+                    control_plan = compute_result.control_plan
+                    if control_plan is None:
+                        raise RuntimeError("GENERIC_CONTROL_PLAN_MISSING")
                     record = _action_effect_record(
                         action_id=0,
                         payload={},
                         before=observation,
                         after=result_observation,
                         compatibility_reset=True,
+                        plan_id=control_plan.plan_id,
+                        outcome_category=attribution.category,
+                        hypothesis_refs=control_plan.hypothesis_refs,
                     )
                     history_authorization = self.hds.authorize_action_history(
                         decision,
@@ -886,6 +902,9 @@ class GenericAGIRuntime:
                     payload=payload,
                     before=observation,
                     after=result_observation,
+                    plan_id=selected.plan.plan_id,
+                    outcome_category=attribution.category,
+                    hypothesis_refs=selected.plan.hypothesis_refs,
                 )
                 history_authorization = self.hds.authorize_action_history(
                     decision,
@@ -1028,7 +1047,14 @@ class GenericAGIRuntime:
                     experience_event_digests=experience_event_digests,
                 )
             )
-            failures.extend(cycle_failures)
+            failures.extend(
+                failure
+                for failure in cycle_failures
+                if not (
+                    selected_ablation.rollback
+                    and failure == "GENERIC_GAME_OVER_OBSERVED"
+                )
+            )
             observation = observation_after_cycle
             if attribution.category == "FAILURE" and not selected_ablation.rollback:
                 break

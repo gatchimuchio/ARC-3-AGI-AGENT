@@ -1,4 +1,4 @@
-"""Build the deterministic ARC-AGI-3 GenericAGIRuntime Kaggle Notebook."""
+"""Build the deterministic ARC3CompletionAgent Kaggle Notebook."""
 
 from __future__ import annotations
 
@@ -17,12 +17,20 @@ from typing import Sequence
 ROOT = Path(__file__).resolve().parents[1]
 AGENTS_ROOT = ROOT / "ARC-AGI-3-Agents"
 PACKAGE_ROOT = AGENTS_ROOT / "arc3_agi_agent"
-AGENT_SOURCE = AGENTS_ROOT / "agents" / "templates" / "generic_agi_agent.py"
+AGENT_SOURCES = {
+    "generic_agi_agent.py": (
+        AGENTS_ROOT / "agents" / "templates" / "generic_agi_agent.py"
+    ),
+    "arc3_completion_agent.py": (
+        AGENTS_ROOT / "agents" / "templates" / "arc3_completion_agent.py"
+    ),
+}
+AGENT_SOURCE = AGENT_SOURCES["arc3_completion_agent.py"]
 DEFAULT_OUTPUT_DIR = ROOT / "kaggle_notebooks"
 COMPETITION_SLUG = "arc-prize-2026-arc-agi-3"
 DEFAULT_USERNAME = "tecchannn"
-DEFAULT_NOTEBOOK_SLUG = "arc3-genericagiruntime-p15"
-ACTION_BUDGET = 128
+DEFAULT_NOTEBOOK_SLUG = "arc3-completion-agent-v1"
+ACTION_BUDGET = 4096
 OFFICIAL_PLACEHOLDER_PARQUET_SHA256 = (
     "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194"
 )
@@ -52,7 +60,9 @@ OFFICIAL_PLACEHOLDER_PARQUET_ZLIB_B64 = (
 )
 RUNTIME_MODULES = (
     "authority_state.py",
+    "canonical_artifact.py",
     "causal_record.py",
+    "compiled_policy.py",
     "control_state.py",
     "decision_context.py",
     "episode_transaction.py",
@@ -69,6 +79,7 @@ RUNTIME_MODULES = (
     "generic_structural.py",
     "generic_types.py",
     "identity_boundary.py",
+    "initial_state_compiler.py",
     "ir.py",
     "memory_backend.py",
     "memory_consolidation.py",
@@ -77,12 +88,18 @@ RUNTIME_MODULES = (
     "memory_overlay.py",
     "memory_retrieval.py",
     "memory_transaction.py",
+    "p_bundle.py",
+    "p_compiler_v2.py",
     "p_ir.py",
     "p_ir_abi.py",
     "p_ir_interpreter.py",
     "p_ir_resource.py",
     "p_ir_types.py",
     "p_ir_validator.py",
+    "product_capability.py",
+    "product_governance.py",
+    "product_runner.py",
+    "product_trace.py",
     "runtime_identity.py",
     "sample_observation.py",
     "schema.py",
@@ -90,14 +107,14 @@ RUNTIME_MODULES = (
     "verification.py",
 )
 RUNTIME_ENTRY_MODULES = (
-    "generic_competition_runner.py",
+    "product_runner.py",
     "generic_env.py",
     "generic_runtime.py",
     "generic_session.py",
+    "product_trace.py",
 )
 QUARANTINED_RUNTIME_MODULE_ROOTS = frozenset(
     {
-        "compiled_policy",
         "p22_evaluator",
         "s5_authority",
         "s5_compute",
@@ -108,13 +125,16 @@ QUARANTINED_RUNTIME_MODULE_ROOTS = frozenset(
         "teacher",
     }
 )
+RUNTIME_ASSETS = (
+    "bundles/arc3_product_initial_state_v1.json",
+    "bundles/arc3_product_initial_state_v1.zip",
+)
 FORBIDDEN_RUNTIME_CONTENT = (
     "from .teacher",
     "import .teacher",
     "s5_rendered_policy",
     "full_solution_corpus",
     "level_solution_graph",
-    "environment_files",
 )
 
 
@@ -245,15 +265,30 @@ def build_runtime_archive() -> tuple[bytes, dict[str, object]]:
             )
         module_digests[name] = _sha256(data)
         members.append((f"arc3_agi_agent/{name}", data))
+    asset_digests: dict[str, str] = {}
+    for name in RUNTIME_ASSETS:
+        path = PACKAGE_ROOT / name
+        if not path.is_file():
+            raise FileNotFoundError(path)
+        data = path.read_bytes()
+        asset_digests[name] = _sha256(data)
+        members.append((f"arc3_agi_agent/{name}", data))
     manifest: dict[str, object] = {
-        "schema_version": "arc3-kaggle-runtime-package-v1",
+        "schema_version": "arc3-kaggle-runtime-package-v2",
+        "product_id": "ARC3CompletionAgent",
+        "product_version": "arc3-completion-agent-product-v1.0",
         "action_budget": ACTION_BUDGET,
         "runtime_entry_modules": list(RUNTIME_ENTRY_MODULES),
         "runtime_modules": list(reachable_modules),
         "module_sha256": module_digests,
+        "runtime_assets": list(RUNTIME_ASSETS),
+        "asset_sha256": asset_digests,
         "teacher_included": False,
         "known_sample_policy_included": False,
         "runtime_identity_routing_included": False,
+        "fixed_action_trajectory_included": False,
+        "literal_coordinate_table_included": False,
+        "compiled_identity_free_product_policy_included": True,
     }
     members.append(
         (
@@ -294,18 +329,26 @@ def _code_cell(source: str, *, cell_id: str) -> dict[str, object]:
 
 def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
     runtime_archive, runtime_manifest = build_runtime_archive()
-    agent_data = AGENT_SOURCE.read_bytes()
-    agent_text = agent_data.decode("utf-8")
-    for term in FORBIDDEN_RUNTIME_CONTENT:
-        if term in agent_text.casefold():
-            raise RuntimeError(
-                f"KAGGLE_AGENT_FORBIDDEN_CONTENT:{term}"
-            )
-    compile(agent_text, str(AGENT_SOURCE), "exec")
+    agent_payloads = {
+        name: path.read_bytes() for name, path in AGENT_SOURCES.items()
+    }
+    for name, agent_data in agent_payloads.items():
+        agent_text = agent_data.decode("utf-8")
+        for term in FORBIDDEN_RUNTIME_CONTENT:
+            if term in agent_text.casefold():
+                raise RuntimeError(
+                    f"KAGGLE_AGENT_FORBIDDEN_CONTENT:{name}:{term}"
+                )
+        compile(agent_text, str(AGENT_SOURCES[name]), "exec")
     archive_b64 = base64.b64encode(runtime_archive).decode("ascii")
-    agent_b64 = base64.b64encode(agent_data).decode("ascii")
+    agent_payload_b64 = {
+        name: base64.b64encode(data).decode("ascii")
+        for name, data in agent_payloads.items()
+    }
     archive_digest = _sha256(runtime_archive)
-    agent_digest = _sha256(agent_data)
+    agent_digests = {
+        name: _sha256(data) for name, data in agent_payloads.items()
+    }
 
     install_cell = _code_cell(
         dedent(
@@ -449,31 +492,35 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                     hashlib.sha256(runtime_archive).hexdigest()
                     == expected_runtime_sha256
                 )
-                runtime_zip = Path("/tmp/arc3_generic_runtime.zip")
+                runtime_zip = Path("/tmp/arc3_completion_runtime.zip")
                 runtime_zip.write_bytes(runtime_archive)
 
-                payload_root = Path("/tmp/arc3_generic_payload")
+                payload_root = Path("/tmp/arc3_completion_payload")
                 if payload_root.exists():
                     shutil.rmtree(payload_root)
                 payload_root.mkdir(parents=True)
                 with zipfile.ZipFile(runtime_zip) as archive:
                     archive.extractall(payload_root)
 
-                agent_source = base64.b64decode({agent_b64!r})
-                expected_agent_sha256 = {agent_digest!r}
-                assert (
-                    hashlib.sha256(agent_source).hexdigest()
-                    == expected_agent_sha256
-                )
-                agent_path = payload_root / "generic_agi_agent.py"
-                agent_path.write_bytes(agent_source)
+                agent_payload_b64 = {agent_payload_b64!r}
+                expected_agent_sha256 = {agent_digests!r}
+                for filename, encoded_agent in agent_payload_b64.items():
+                    agent_source = base64.b64decode(encoded_agent)
+                    assert (
+                        hashlib.sha256(agent_source).hexdigest()
+                        == expected_agent_sha256[filename]
+                    )
+                    (payload_root / filename).write_bytes(agent_source)
                 payload_ready = True
                 payload_status["status"] = "COMPLETE"
                 print({{
                     "runtime_sha256": expected_runtime_sha256,
                     "runtime_size_bytes": len(runtime_archive),
                     "agent_sha256": expected_agent_sha256,
-                    "agent_size_bytes": len(agent_source),
+                    "agent_size_bytes": {{
+                        name: len(base64.b64decode(value))
+                        for name, value in agent_payload_b64.items()
+                    }},
                 }})
             except Exception as error:
                 payload_status["status"] = "PAYLOAD_EXCEPTION"
@@ -516,7 +563,7 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
             import urllib.request
             from pathlib import Path
 
-            payload_root = Path("/tmp/arc3_generic_payload")
+            payload_root = Path("/tmp/arc3_completion_payload")
             if os.getenv("KAGGLE_IS_COMPETITION_RERUN"):
                 runtime_status_path = Path(
                     "/kaggle/working/arc3_runtime_status.json"
@@ -579,24 +626,24 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                         payload_root / "arc3_agi_agent",
                         runtime_dst,
                     )
-                    shutil.copy2(
-                        payload_root / "generic_agi_agent.py",
-                        framework_dst
-                        / "agents"
-                        / "templates"
-                        / "generic_agi_agent.py",
-                    )
+                    for filename in (
+                        "generic_agi_agent.py",
+                        "arc3_completion_agent.py",
+                    ):
+                        shutil.copy2(
+                            payload_root / filename,
+                            framework_dst / "agents" / "templates" / filename,
+                        )
 
                     agents_init = '''from typing import Type
             from dotenv import load_dotenv
             from .agent import Agent, Playback
-            from .swarm import Swarm
-            from .templates.generic_agi_agent import GenericAGIAgent
+            from .templates.arc3_completion_agent import ARC3CompletionAgent
 
             load_dotenv()
 
             AVAILABLE_AGENTS: dict[str, Type[Agent]] = {
-                "genericagi": GenericAGIAgent,
+                "arc3completion": ARC3CompletionAgent,
             }
             '''
                     (framework_dst / "agents" / "__init__.py").write_text(
@@ -608,7 +655,7 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
             PORT=8001
             ARC_API_KEY=test-key-123
             ARC_BASE_URL=http://gateway:8001/
-            OPERATION_MODE=online
+            OPERATION_MODE=competition
             ENVIRONMENTS_DIR=
             RECORDINGS_DIR=/kaggle/working/server_recording
             '''
@@ -623,7 +670,9 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                         [
                             sys.executable,
                             "-m",
-                            "arc3_agi_agent.generic_competition_runner",
+                            "arc3_agi_agent.product_runner",
+                            "--mode",
+                            "competition",
                         ],
                         cwd=framework_dst,
                         env=run_env,
@@ -662,7 +711,7 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
                     )
             """
         ),
-        cell_id="execute-generic-runtime",
+        cell_id="execute-product-runtime",
     )
     placeholder_cell = _code_cell(
         dedent(
@@ -715,7 +764,9 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
         ],
     }
     build_report = {
-        "schema_version": "arc3-kaggle-notebook-build-v3",
+        "schema_version": "arc3-kaggle-notebook-build-v4",
+        "product_id": "ARC3CompletionAgent",
+        "product_version": "arc3-completion-agent-product-v1.0",
         "competition": COMPETITION_SLUG,
         "action_budget_per_game": ACTION_BUDGET,
         "preexecution_fallback": {
@@ -724,8 +775,11 @@ def build_notebook() -> tuple[dict[str, object], dict[str, object]]:
             "size_bytes": OFFICIAL_PLACEHOLDER_PARQUET_SIZE,
         },
         "runtime_archive": runtime_manifest,
-        "agent_sha256": agent_digest,
-        "agent_size_bytes": len(agent_data),
+        "agent_sha256": agent_digests["arc3_completion_agent.py"],
+        "agent_sha256_by_filename": agent_digests,
+        "agent_size_bytes_by_filename": {
+            name: len(data) for name, data in agent_payloads.items()
+        },
         "notebook_cell_count": len(notebook["cells"]),  # type: ignore[arg-type]
     }
     return notebook, build_report
@@ -738,7 +792,7 @@ def build_metadata(
 ) -> dict[str, object]:
     return {
         "id": f"{username}/{notebook_slug}",
-        "title": "ARC3 GenericAGIRuntime P15",
+        "title": "ARC3CompletionAgent v1",
         "code_file": "submission.ipynb",
         "language": "python",
         "kernel_type": "notebook",

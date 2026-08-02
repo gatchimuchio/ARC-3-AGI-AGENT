@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import os
+
 import numpy as np
 import pytest
 from arc_agi.local_wrapper import LocalEnvironmentWrapper
@@ -61,6 +63,27 @@ class _TemporalLocalEnvironment(LocalEnvironmentWrapper):
         return self.after
 
 
+class _LevelResetLocalEnvironment(LocalEnvironmentWrapper):
+    def __init__(self, before: FrameDataRaw, after: FrameDataRaw) -> None:
+        self._last_response = before
+        self.after = after
+        self.observed_reset_scope: str | None = None
+
+    def step(
+        self,
+        action: GameAction,
+        *,
+        data: dict[str, int],
+        reasoning: dict[str, object],
+    ) -> FrameDataRaw:
+        assert action is GameAction.RESET
+        assert data == {}
+        assert reasoning["scope"] == "level"
+        self.observed_reset_scope = os.environ.get("ONLY_RESET_LEVELS")
+        self._last_response = self.after
+        return self.after
+
+
 def test_temporal_action_frames_and_cycle_history_are_preserved() -> None:
     stable = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
     transient = [[0, 0, 0], [0, 2, 0], [0, 0, 0]]
@@ -112,8 +135,32 @@ def test_temporal_action_frames_and_cycle_history_are_preserved() -> None:
             before=initial,
             after=result,
         ).visible_change
-        is True
+        is False
     )
+
+
+def test_offline_reset_is_scoped_to_current_level(monkeypatch: pytest.MonkeyPatch) -> None:
+    matrix = [[0, 0], [0, 1]]
+    before = _frame(
+        [matrix],
+        available_actions=[1],
+        levels_completed=2,
+    )
+    before.state = GameState.GAME_OVER
+    after = _frame(
+        [matrix],
+        available_actions=[1],
+        levels_completed=2,
+    )
+    local = _LevelResetLocalEnvironment(before, after)
+    environment = OfflineGenericEnvironment(local)
+    monkeypatch.setenv("ONLY_RESET_LEVELS", "prior-value")
+
+    result = environment.reset_level(request_id="m1-level-only-reset")
+
+    assert result.progress_count == 2
+    assert local.observed_reset_scope == "true"
+    assert os.environ["ONLY_RESET_LEVELS"] == "prior-value"
 
 
 def test_action6_covers_general_spatial_affordance_surface() -> None:

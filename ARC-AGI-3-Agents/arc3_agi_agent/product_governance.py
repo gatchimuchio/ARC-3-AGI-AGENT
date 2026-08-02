@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Final
 
 ARC3_PRODUCT_ID: Final = "ARC3CompletionAgent"
-ARC3_PRODUCT_ACTIVE_MILESTONE: Final = "M3_INTEGRATED_AGI_CAPABILITY"
+ARC3_PRODUCT_ACTIVE_MILESTONE: Final = "M4_FULL_SAMPLE_REPAIR_LOOP"
 ARC3_OFFICIAL_SAMPLE_GAME_TARGET: Final = 25
 ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET: Final = 183
 ARC3_KNOWN_SUCCESS_ACTION_CEILING: Final = 1519
@@ -78,6 +78,75 @@ class ProductEndpointContract:
             for row in valid_rows
             if (value := _integer(row.get("progress_count"))) is not None and value >= 0
         ]
+        action_values = [
+            value
+            for row in valid_rows
+            if (value := _integer(row.get("actions_executed"))) is not None
+            and value >= 0
+        ]
+        plan_metric_names = (
+            "executed_plan_count",
+            "hds_plan_commit_count",
+            "initial_plan_count",
+            "revised_plan_count",
+            "rollback_plan_count",
+            "failed_hypothesis_invalidation_count",
+            "post_rollback_replan_count",
+            "memory_bound_plan_count",
+            "competing_hypothesis_plan_count",
+            "multi_representation_plan_count",
+            "subgoal_plan_count",
+            "max_plan_step_count",
+            "failure_attribution_count",
+        )
+        plan_metric_values = {
+            name: tuple(
+                value
+                for row in valid_rows
+                if (value := _integer(row.get(name))) is not None
+                and value >= 0
+            )
+            for name in plan_metric_names
+        }
+        plan_metric_totals = {
+            name: (
+                max(values, default=0)
+                if name == "max_plan_step_count"
+                else sum(values)
+            )
+            for name, values in plan_metric_values.items()
+        }
+        plan_integrity_rows: list[dict[str, object]] = []
+        runtime_failure_signature_row_count = 0
+        for row in valid_rows:
+            raw_failure_signatures = row.get("failure_signatures")
+            if not isinstance(raw_failure_signatures, (list, tuple)) or any(
+                not isinstance(item, str) or not item
+                for item in raw_failure_signatures
+            ):
+                runtime_failure_signature_row_count += 1
+            elif raw_failure_signatures:
+                runtime_failure_signature_row_count += 1
+            actions = _integer(row.get("actions_executed"))
+            metrics: dict[str, int] = {}
+            for name in plan_metric_names:
+                value = _integer(row.get(name))
+                metrics[name] = -1 if value is None else value
+            if (
+                actions is not None
+                and actions > 0
+                and all(value >= 0 for value in metrics.values())
+                and metrics["executed_plan_count"] == actions
+                and metrics["hds_plan_commit_count"] == actions
+                and metrics["initial_plan_count"] == 1
+                and metrics["revised_plan_count"] >= actions - 1
+                and metrics["memory_bound_plan_count"] >= actions - 1
+                and metrics["competing_hypothesis_plan_count"] == actions
+                and metrics["multi_representation_plan_count"] == actions
+                and metrics["subgoal_plan_count"] == actions
+                and metrics["max_plan_step_count"] == 4
+            ):
+                plan_integrity_rows.append(row)
         game_win_count = sum(1 for row in valid_rows if row.get("final_state") == "WIN")
         level_completion_count = sum(progress_values)
         advertised = _integer(report.get("advertised_game_count"))
@@ -176,6 +245,22 @@ class ProductEndpointContract:
             endpoint_failures.append("PRODUCT_GAME_WIN_COUNT_MISMATCH")
         if level_completion_count != self.level_target:
             endpoint_failures.append("PRODUCT_LEVEL_COMPLETION_COUNT_MISMATCH")
+        if runtime_failure_signature_row_count:
+            endpoint_failures.append("PRODUCT_RUNTIME_FAILURE_SIGNATURE_PRESENT")
+        if len(plan_integrity_rows) != self.game_target:
+            endpoint_failures.append("PRODUCT_PLAN_EVIDENCE_COVERAGE_MISMATCH")
+        if plan_metric_totals["initial_plan_count"] != self.game_target:
+            endpoint_failures.append("PRODUCT_INITIAL_PLAN_COVERAGE_MISMATCH")
+        if plan_metric_totals["failure_attribution_count"] <= 0:
+            endpoint_failures.append("PRODUCT_FAILURE_ATTRIBUTION_MISSING")
+        if plan_metric_totals["rollback_plan_count"] <= 0:
+            endpoint_failures.append("PRODUCT_ROLLBACK_PLAN_EVIDENCE_MISSING")
+        if plan_metric_totals["failed_hypothesis_invalidation_count"] <= 0:
+            endpoint_failures.append("PRODUCT_HYPOTHESIS_INVALIDATION_MISSING")
+        if plan_metric_totals["post_rollback_replan_count"] <= 0:
+            endpoint_failures.append("PRODUCT_POST_ROLLBACK_REPLAN_MISSING")
+        if plan_metric_totals["max_plan_step_count"] != 4:
+            endpoint_failures.append("PRODUCT_PLAN_DEPTH_MISMATCH")
         normalized_endpoint_failures = tuple(sorted(set(endpoint_failures)))
         complete = not normalized_endpoint_failures
         observed_budget_impossible = (
@@ -205,6 +290,15 @@ class ProductEndpointContract:
             "product_bounded_report_count": len(bounded_rows),
             "product_game_win_count": game_win_count,
             "product_level_completion_count": level_completion_count,
+            "product_total_action_count": sum(action_values),
+            "product_plan_integrity_row_count": len(plan_integrity_rows),
+            "product_runtime_failure_signature_row_count": (
+                runtime_failure_signature_row_count
+            ),
+            **{
+                f"product_{name}": value
+                for name, value in plan_metric_totals.items()
+            },
             "adapter_crash_count": failed if failed is not None else self.game_target,
             "scorecard_lifecycle_leak_count": (
                 0

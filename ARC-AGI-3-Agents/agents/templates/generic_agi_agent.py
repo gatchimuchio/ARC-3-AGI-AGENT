@@ -16,6 +16,7 @@ from arc3_agi_agent.generic_session import (
     EpisodeHandle,
 )
 from arc3_agi_agent.generic_types import GenericEnvironment
+from arc3_agi_agent.product_trace import ProductTraceSummarySink
 
 from ..agent import Agent
 
@@ -39,6 +40,19 @@ class GenericAGIAgentReport:
     identity_boundary_passed: bool
     memory_citation_count: int
     memory_citation_ids: tuple[str, ...]
+    executed_plan_count: int
+    hds_plan_commit_count: int
+    initial_plan_count: int
+    revised_plan_count: int
+    rollback_plan_count: int
+    failed_hypothesis_invalidation_count: int
+    post_rollback_replan_count: int
+    memory_bound_plan_count: int
+    competing_hypothesis_plan_count: int
+    multi_representation_plan_count: int
+    subgoal_plan_count: int
+    max_plan_step_count: int
+    failure_attribution_count: int
 
 
 class GenericAGIAgent(Agent):
@@ -93,16 +107,14 @@ class GenericAGIAgent(Agent):
             if not isinstance(current, FrameDataRaw) or current.is_empty():
                 raise RuntimeError("GENERIC_COMPETITION_INITIAL_OBSERVATION_MISSING")
             self.append_frame(self._convert_raw_frame_data(current))
+            trace_summary = ProductTraceSummarySink()
             report = GenericAGIRuntime(
                 environment=self._runtime_environment(),
                 session=self.cognitive_session,
                 episode_handle=self.episode_handle,
+                retain_cycle_objects=False,
+                trace_sink=trace_summary,
             ).run()
-            memory_citations = tuple(
-                citation
-                for cycle in report.cycles
-                for citation in cycle.compute_result.memory_citations
-            )
             self.action_counter = report.actions_executed
             self.runtime_report = GenericAGIAgentReport(
                 actions_executed=report.actions_executed,
@@ -116,9 +128,30 @@ class GenericAGIAgent(Agent):
                 runtime_identity_digest=report.runtime_identity_digest,
                 session_lineage_digest=report.session_lineage_digest,
                 identity_boundary_passed=report.identity_boundary_passed,
-                memory_citation_count=len(memory_citations),
-                memory_citation_ids=tuple(
-                    sorted({item.memory_id for item in memory_citations})
+                memory_citation_count=trace_summary.citation_count,
+                memory_citation_ids=tuple(sorted(trace_summary.citation_ids)),
+                executed_plan_count=trace_summary.executed_plan_count,
+                hds_plan_commit_count=trace_summary.hds_plan_commit_count,
+                initial_plan_count=trace_summary.initial_plan_count,
+                revised_plan_count=trace_summary.revised_plan_count,
+                rollback_plan_count=trace_summary.rollback_plan_count,
+                failed_hypothesis_invalidation_count=(
+                    trace_summary.failed_hypothesis_invalidation_count
+                ),
+                post_rollback_replan_count=(
+                    trace_summary.post_rollback_replan_count
+                ),
+                memory_bound_plan_count=trace_summary.memory_bound_plan_count,
+                competing_hypothesis_plan_count=(
+                    trace_summary.competing_hypothesis_plan_count
+                ),
+                multi_representation_plan_count=(
+                    trace_summary.multi_representation_plan_count
+                ),
+                subgoal_plan_count=trace_summary.subgoal_plan_count,
+                max_plan_step_count=trace_summary.max_plan_step_count,
+                failure_attribution_count=(
+                    trace_summary.failure_attribution_count
                 ),
             )
             final_raw = self.arc_env.observation_space

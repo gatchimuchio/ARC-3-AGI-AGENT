@@ -28,6 +28,8 @@ from .generic_types import (
     GenericComputeResult,
     GenericHypothesis,
     GenericObservation,
+    GenericPlan,
+    GenericPlanStep,
     GenericPrediction,
     Layer0StageTrace,
     ObjectRole,
@@ -52,6 +54,246 @@ def _sigmoid(value: float) -> float:
         return 1.0 / (1.0 + inverse)
     direct = math.exp(value)
     return direct / (1.0 + direct)
+
+
+@dataclass(frozen=True, slots=True)
+class _OnlinePlanContext:
+    phase: str
+    revision_reason: str
+    predecessor_plan_id: str
+    invalidated_hypothesis_refs: tuple[str, ...]
+    history_ref: str
+
+
+def _online_plan_context(
+    action_history: tuple[ActionEffectRecord, ...],
+) -> _OnlinePlanContext:
+    if not action_history:
+        return _OnlinePlanContext(
+            phase="INITIAL_MECHANISM_IDENTIFICATION",
+            revision_reason="INITIAL_ONLINE_PLAN",
+            predecessor_plan_id="",
+            invalidated_hypothesis_refs=(),
+            history_ref="",
+        )
+    last = action_history[-1]
+    invalidated = (
+        last.hypothesis_refs
+        if last.outcome_category in {"FAILURE", "NO_EFFECT"}
+        else ()
+    )
+    if last.compatibility_reset:
+        phase = "POST_ROLLBACK_REIDENTIFICATION"
+        reason = "ROLLBACK_RECOVERY_REPLAN"
+    elif last.outcome_category == "FAILURE":
+        phase = "HAZARD_RECOVERY"
+        reason = "FAILED_HYPOTHESIS_INVALIDATED"
+    elif last.outcome_category == "NO_EFFECT":
+        phase = "MECHANISM_DISCRIMINATION"
+        reason = "NO_EFFECT_PLAN_REVISED"
+    elif last.outcome_category == "PROGRESS":
+        phase = "SUBGOAL_ADVANCEMENT"
+        reason = "SUBGOAL_ADVANCED"
+    else:
+        phase = "EFFECT_VERIFICATION"
+        reason = "EFFECT_MODEL_UPDATED"
+    return _OnlinePlanContext(
+        phase=phase,
+        revision_reason=reason,
+        predecessor_plan_id=last.plan_id,
+        invalidated_hypothesis_refs=tuple(sorted(set(invalidated))),
+        history_ref="bounded-action-effect-memory:" + digest_object(action_history),
+    )
+
+
+def _plan_representation_refs(
+    observation: GenericObservation,
+    representation: RelationalRepresentation,
+) -> tuple[str, ...]:
+    return tuple(
+        sorted(
+            {
+                representation.digest_value,
+                "render-sequence:" + digest_object(observation.rendered_layers),
+                "action-surface:"
+                + digest_object(observation.available_actions),
+            }
+        )
+    )
+
+
+def _goal_and_subgoal(prediction: GenericPrediction) -> tuple[str, str]:
+    effects = tuple(sorted(set(prediction.predicted_effects)))
+    if "LEVEL_PROGRESS" in effects:
+        goal = "increase-level-progress-or-reach-win"
+    elif "VISIBLE_STATE_CHANGE" in effects:
+        goal = "produce-and-verify-state-transition"
+    else:
+        goal = "discriminate-current-mechanism"
+    return goal, "cause-and-verify:" + "+".join(effects)
+
+
+def _candidate_plan(
+    *,
+    candidate_id: str,
+    operation: str,
+    prediction: GenericPrediction,
+    hypotheses: Sequence[GenericHypothesis],
+    observation: GenericObservation,
+    representation: RelationalRepresentation,
+    action_history: tuple[ActionEffectRecord, ...],
+    memory_refs: tuple[str, ...],
+) -> GenericPlan:
+    context = _online_plan_context(action_history)
+    current_hypothesis_refs = tuple(
+        sorted(
+            hypothesis.hypothesis_id
+            for hypothesis in hypotheses
+            if hypothesis.hypothesis_id
+            not in context.invalidated_hypothesis_refs
+        )
+    )
+    goal, subgoal = _goal_and_subgoal(prediction)
+    plan_memory_refs = tuple(
+        sorted({*memory_refs, context.history_ref} - {""})
+    )
+    mode = "ACTION_PLAN" if operation == "ACTION" else "PROBE_PLAN"
+    steps = (
+        GenericPlanStep(
+            step_index=0,
+            operation=operation,
+            completion_predicate="one HDS-authorized legal action is emitted",
+            failure_transition="veto hazard or request bounded rollback",
+        ),
+        GenericPlanStep(
+            step_index=1,
+            operation="REOBSERVE",
+            completion_predicate="action-complete rendered observation is received",
+            failure_transition="suspend on observation or action-surface error",
+        ),
+        GenericPlanStep(
+            step_index=2,
+            operation="VERIFY",
+            completion_predicate="effect is attributed to progress hazard or no-effect",
+            failure_transition="invalidate the unsupported mechanism hypothesis",
+        ),
+        GenericPlanStep(
+            step_index=3,
+            operation="REPLAN",
+            completion_predicate="next subgoal plan is committed or WIN is confirmed",
+            failure_transition="ask the next HDS question without another action",
+        ),
+    )
+    plan_id = "plan:generic:" + digest_object(
+        {
+            "candidate": candidate_id,
+            "phase": context.phase,
+            "goal": goal,
+            "subgoal": subgoal,
+            "hypotheses": current_hypothesis_refs,
+            "predecessor": context.predecessor_plan_id,
+            "revision": context.revision_reason,
+            "invalidated": context.invalidated_hypothesis_refs,
+        }
+    )[:24]
+    return GenericPlan(
+        plan_id=plan_id,
+        candidate_id=candidate_id,
+        mode=mode,
+        phase=context.phase,
+        goal_predicate=goal,
+        subgoal=subgoal,
+        hypothesis_refs=current_hypothesis_refs,
+        representation_refs=_plan_representation_refs(
+            observation,
+            representation,
+        ),
+        memory_refs=plan_memory_refs,
+        steps=steps,
+        revision_reason=context.revision_reason,
+        predecessor_plan_id=context.predecessor_plan_id,
+        invalidated_hypothesis_refs=(
+            context.invalidated_hypothesis_refs
+        ),
+    )
+
+
+def _rollback_plan(
+    *,
+    hypotheses: Sequence[GenericHypothesis],
+    observation: GenericObservation,
+    representation: RelationalRepresentation,
+    action_history: tuple[ActionEffectRecord, ...],
+) -> GenericPlan:
+    context = _online_plan_context(action_history)
+    current_hypothesis_refs = tuple(
+        sorted(
+            hypothesis.hypothesis_id
+            for hypothesis in hypotheses
+            if hypothesis.hypothesis_id
+            not in context.invalidated_hypothesis_refs
+        )
+    )
+    revision_reason = (
+        "FAILURE_TRIGGERED_ROLLBACK"
+        if observation.terminal_state == "GAME_OVER"
+        else "MODEL_REQUESTED_ROLLBACK"
+    )
+    steps = (
+        GenericPlanStep(
+            step_index=0,
+            operation="ROLLBACK",
+            completion_predicate="one HDS-authorized level reset is executed",
+            failure_transition="stop on unavailable or failed rollback",
+        ),
+        GenericPlanStep(
+            step_index=1,
+            operation="REOBSERVE",
+            completion_predicate="a non-terminal action-complete render is received",
+            failure_transition="classify rollback as failed",
+        ),
+        GenericPlanStep(
+            step_index=2,
+            operation="VERIFY",
+            completion_predicate="the failed plan is absent from the active model",
+            failure_transition="retain hazard evidence and stop",
+        ),
+        GenericPlanStep(
+            step_index=3,
+            operation="REPLAN",
+            completion_predicate="a revised post-rollback subgoal plan is committed",
+            failure_transition="suspend for unresolved mechanism evidence",
+        ),
+    )
+    plan_id = "plan:rollback:" + digest_object(
+        {
+            "observation": observation.digest(),
+            "hypotheses": current_hypothesis_refs,
+            "predecessor": context.predecessor_plan_id,
+            "invalidated": context.invalidated_hypothesis_refs,
+            "revision": revision_reason,
+        }
+    )[:24]
+    return GenericPlan(
+        plan_id=plan_id,
+        candidate_id=None,
+        mode="ROLLBACK_PLAN",
+        phase="HAZARD_RECOVERY",
+        goal_predicate="restore-actionable-non-game-over-level-state",
+        subgoal="rollback-once-reobserve-and-reidentify-mechanism",
+        hypothesis_refs=current_hypothesis_refs,
+        representation_refs=_plan_representation_refs(
+            observation,
+            representation,
+        ),
+        memory_refs=tuple(sorted({context.history_ref} - {""})),
+        steps=steps,
+        revision_reason=revision_reason,
+        predecessor_plan_id=context.predecessor_plan_id,
+        invalidated_hypothesis_refs=(
+            context.invalidated_hypothesis_refs
+        ),
+    )
 
 
 def _component_shape(
@@ -1362,6 +1604,126 @@ class GenericComputeSubject:
                 ),
             )
         )
+        plan_context = _online_plan_context(action_history)
+        hypothesis_revision_digest = digest_object(
+            {
+                "phase": plan_context.phase,
+                "revision": plan_context.revision_reason,
+                "predecessor": plan_context.predecessor_plan_id,
+                "invalidated": plan_context.invalidated_hypothesis_refs,
+                "history": plan_context.history_ref,
+            }
+        )
+        if instruction_result.control_operation:
+            if (
+                instruction_result.control_operation != "ROLLBACK"
+                or not instruction_result.control_instruction_refs
+            ):
+                raise RuntimeError("GENERIC_P_CONTROL_OPERATION_INVALID")
+            control_hypotheses = (
+                GenericHypothesis(
+                    hypothesis_id="hypothesis:rollback:baseline:"
+                    + digest_object(
+                        (observation.digest(), hypothesis_revision_digest)
+                    )[:20],
+                    model_type="baseline",
+                    statement=(
+                        "The observed terminal failure requires one HDS-authorized "
+                        "level rollback followed by reobservation."
+                    ),
+                    predictions=("LEVEL_RESET", "SAFE_REOBSERVATION"),
+                    falsification_conditions=(
+                        "the reset observation remains GAME_OVER",
+                    ),
+                    supporting_evidence=(
+                        observation.digest(),
+                        *instruction_result.control_instruction_refs,
+                    ),
+                    confidence=0.999,
+                ),
+                GenericHypothesis(
+                    hypothesis_id="hypothesis:rollback:counter:"
+                    + digest_object(
+                        (
+                            instruction_result.query_digest,
+                            hypothesis_revision_digest,
+                        )
+                    )[:20],
+                    model_type="counter_hypothesis",
+                    statement=(
+                        "The rollback may fail to restore an actionable level state."
+                    ),
+                    predictions=("RESET_FAILURE",),
+                    falsification_conditions=(
+                        "reset yields a non-terminal observation with legal actions",
+                    ),
+                    contradicting_evidence=(observation.digest(),),
+                    confidence=0.001,
+                ),
+            )
+            stages.extend(
+                (
+                    Layer0StageTrace(
+                        stage="model",
+                        input_digest=memory_query_digest,
+                        output_digest="generic-model-set:"
+                        + digest_object(control_hypotheses),
+                        selected_refs=tuple(
+                            item.hypothesis_id for item in control_hypotheses
+                        ),
+                    ),
+                    Layer0StageTrace(
+                        stage="predict",
+                        input_digest=instruction_result.query_digest,
+                        output_digest="generic-predictions:"
+                        + digest_object(()),
+                        selected_refs=(
+                            instruction_result.selected_instruction_refs
+                        ),
+                    ),
+                    Layer0StageTrace(
+                        stage="candidate",
+                        input_digest="generic-predictions:"
+                        + digest_object(()),
+                        output_digest="generic-candidates:"
+                        + digest_object(()),
+                        selected_refs=(),
+                    ),
+                )
+            )
+            return GenericComputeResult(
+                command_id=command.command_id,
+                representation=representation,
+                memory_citations=citations,
+                hypotheses=control_hypotheses,
+                predictions=(),
+                candidates=(),
+                stages=tuple(stages),
+                instruction_body_format=instruction_body.format_id(),
+                instruction_body_version=instruction_body.body_version(),
+                instruction_body_digest=instruction_body.digest(),
+                p_ir_logical_digest=p_ir_execution.program_logical_digest,
+                p_ir_execution_digest=p_ir_execution.execution_digest,
+                l0_abi_version=selected_program.l0_abi_version,
+                uncertainty=0.001,
+                provenance=(
+                    instruction_body.provenance_digest(),
+                    memory_query_digest,
+                    p_ir_execution.program_logical_digest,
+                    p_ir_execution.execution_digest,
+                    GENERIC_COMPUTE_VERSION,
+                ),
+                control_operation=instruction_result.control_operation,
+                control_instruction_refs=(
+                    instruction_result.control_instruction_refs
+                ),
+                control_plan=_rollback_plan(
+                    hypotheses=control_hypotheses,
+                    observation=observation,
+                    representation=representation,
+                    action_history=action_history,
+                ),
+            )
         if not ranked_predictions:
             raise RuntimeError("GENERIC_P_PREDICTION_MISSING")
         primary = ranked_predictions[0]
@@ -1372,7 +1734,8 @@ class GenericComputeSubject:
         )
         hypotheses = [
             GenericHypothesis(
-                hypothesis_id="hypothesis:baseline:" + digest_object(primary)[:20],
+                hypothesis_id="hypothesis:baseline:"
+                + digest_object((primary, hypothesis_revision_digest))[:20],
                 model_type="baseline",
                 statement=(
                     "The highest supported legal action relation can advance "
@@ -1394,7 +1757,7 @@ class GenericComputeSubject:
             ),
             GenericHypothesis(
                 hypothesis_id="hypothesis:alternative:"
-                + digest_object(alternative)[:20],
+                + digest_object((alternative, hypothesis_revision_digest))[:20],
                 model_type="alternative",
                 statement=(
                     "A different legal action or role binding explains the "
@@ -1418,7 +1781,13 @@ class GenericComputeSubject:
                     GenericHypothesis(
                         hypothesis_id="hypothesis:counter:"
                         + digest_object(
-                            tuple(item.hazard_likelihood for item in ranked_predictions)
+                            (
+                                tuple(
+                                    item.hazard_likelihood
+                                    for item in ranked_predictions
+                                ),
+                                hypothesis_revision_digest,
+                            )
                         )[:20],
                         model_type="counter_hypothesis",
                         statement=(
@@ -1447,7 +1816,12 @@ class GenericComputeSubject:
                     ),
                     GenericHypothesis(
                         hypothesis_id="hypothesis:null:"
-                        + digest_object(representation.digest_value)[:20],
+                        + digest_object(
+                            (
+                                representation.digest_value,
+                                hypothesis_revision_digest,
+                            )
+                        )[:20],
                         model_type="null_model",
                         statement=(
                             "No legal action has yet been shown to cause progress; "
@@ -1531,15 +1905,25 @@ class GenericComputeSubject:
                 and prediction.memory_refs
                 else "BOUNDED_PROBE"
             )
+            candidate_id = "candidate:generic:" + digest_object(
+                {
+                    "command": command.command_id,
+                    "descriptor": prediction.descriptor,
+                }
+            )[:24]
+            plan = _candidate_plan(
+                candidate_id=candidate_id,
+                operation=operation,
+                prediction=prediction,
+                hypotheses=hypotheses,
+                observation=observation,
+                representation=representation,
+                action_history=action_history,
+                memory_refs=memory_binding_refs,
+            )
             candidates.append(
                 GenericCandidate(
-                    candidate_id="candidate:generic:"
-                    + digest_object(
-                        {
-                            "command": command.command_id,
-                            "descriptor": prediction.descriptor,
-                        }
-                    )[:24],
+                    candidate_id=candidate_id,
                     descriptor=prediction.descriptor,
                     operation=operation,
                     expected_progress=prediction.progress_likelihood,
@@ -1566,6 +1950,7 @@ class GenericComputeSubject:
                         counter_evidence_refs=counter_evidence_refs,
                         runtime_version=GENERIC_COMPUTE_VERSION,
                     ),
+                    plan=plan,
                     memory_effects=memory_effects,
                 )
             )

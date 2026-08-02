@@ -80,6 +80,7 @@ class _RuntimeReport:
     progress_count: int = 0
     final_state: str = "NOT_FINISHED"
     stop_reason: str = "RESOURCE_LIMIT"
+    failure_signatures: tuple[str, ...] = ("GENERIC_RESOURCE_LIMIT",)
 
 
 class _Agent:
@@ -153,6 +154,12 @@ def test_runner_isolates_one_game_and_closes_one_scorecard() -> None:
     assert report["cross_game_semantic_promotion"] == "ENABLED"
     assert report["state_owner_violation_count"] == 0
     assert report["identity_boundary"] == "PASS"
+    completed = report["results"]
+    assert isinstance(completed, list)
+    assert all(
+        item["failure_signatures"] == ("GENERIC_RESOURCE_LIMIT",)
+        for item in completed
+    )
     assert report["orchestration_game_index"] == [
         {"game_index": index, "game_id": game_id}
         for index, game_id in enumerate(arcade.game_ids)

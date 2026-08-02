@@ -194,6 +194,7 @@ class ActionAuthorizationExecutor:
             authorization.decision_id != decision.decision_id
             or authorization.candidate_id != candidate.candidate_id
             or authorization.candidate_id != decision.selected_candidate_id
+            or decision.selected_plan_id != candidate.plan.plan_id
             or authorization.observation_signature != observation.signature
             or authorization.action_id != candidate.descriptor.action_id
             or authorization.payload_digest
@@ -279,6 +280,7 @@ class ControlRollbackAuthorizationExecutor:
         if (
             decision.operation_state != "ROLLBACK"
             or decision.selected_candidate_id is not None
+            or decision.selected_plan_id is None
             or authorization.decision_id != decision.decision_id
             or authorization.observation_signature != observation.signature
             or not authorization.control_instruction_ref
@@ -634,6 +636,10 @@ class GenericHDSJudgementSubject:
             for item in result.candidates
             if item.descriptor.action_id in observation.available_actions
         )
+        control_rollback_requested = result.control_operation == "ROLLBACK"
+        action_or_control_available = bool(
+            legal_candidates or control_rollback_requested
+        )
         hazard_vetoed_candidate_ids = {
             item.candidate_id
             for item in legal_candidates
@@ -683,8 +689,8 @@ class GenericHDSJudgementSubject:
         gates.append(
             _gate(
                 "G03",
-                "PASS" if legal_candidates else "SUSPEND",
-                *(("I202",) if not legal_candidates else ()),
+                "PASS" if action_or_control_available else "SUSPEND",
+                *(("I202",) if not action_or_control_available else ()),
                 next_probe="request-legal-action-observation",
             )
         )
@@ -740,7 +746,9 @@ class GenericHDSJudgementSubject:
         gates.append(
             _gate(
                 "G10",
-                "PASS" if safe_candidates else "SUSPEND",
+                "PASS"
+                if safe_candidates or control_rollback_requested
+                else "SUSPEND",
                 *(
                     (
                         "EVIDENCE_HAZARD_VETO"
@@ -749,7 +757,7 @@ class GenericHDSJudgementSubject:
                         and not safe_candidates
                         else "D602",
                     )
-                    if not safe_candidates
+                    if not safe_candidates and not control_rollback_requested
                     else ()
                 ),
                 next_probe="find-lower-risk-candidate",
@@ -924,6 +932,15 @@ class GenericHDSJudgementSubject:
                 }
             )
         )
+        selected_plan_id = (
+            selected.plan.plan_id
+            if selected is not None
+            else (
+                result.control_plan.plan_id
+                if operation == "ROLLBACK" and result.control_plan is not None
+                else None
+            )
+        )
         decision_binding = digest_object(
             {
                 "run": self.run_id,
@@ -934,6 +951,7 @@ class GenericHDSJudgementSubject:
                 "selected": (
                     selected.candidate_id if selected is not None else None
                 ),
+                "selected_plan": selected_plan_id,
                 "gates": gates,
             }
         )
@@ -948,6 +966,7 @@ class GenericHDSJudgementSubject:
             selected_candidate_id=(
                 selected.candidate_id if selected is not None else None
             ),
+            selected_plan_id=selected_plan_id,
             gate_results=tuple(gates),
             reasons=tuple(sorted(set(reasons))),
             next_question=next_question,
@@ -996,6 +1015,7 @@ class GenericHDSJudgementSubject:
         if (
             not decision.external_action_authorized
             or decision.selected_candidate_id != candidate.candidate_id
+            or decision.selected_plan_id != candidate.plan.plan_id
         ):
             raise PermissionError("HDS_ACTION_NOT_COMMITTED")
         payload_digest = digest_object(candidate.descriptor.payload())
@@ -1047,6 +1067,9 @@ class GenericHDSJudgementSubject:
                 or record.action_id != selected_candidate.descriptor.action_id
                 or record.payload_items
                 != selected_candidate.descriptor.payload_items
+                or record.plan_id != selected_candidate.plan.plan_id
+                or record.hypothesis_refs
+                != selected_candidate.plan.hypothesis_refs
             ):
                 raise PermissionError("HDS_ACTION_HISTORY_ACTION_BINDING_INVALID")
         elif decision.operation_state == "ROLLBACK":
@@ -1055,6 +1078,7 @@ class GenericHDSJudgementSubject:
                 or decision.selected_candidate_id is not None
                 or record.action_id != 0
                 or not record.compatibility_reset
+                or record.plan_id != decision.selected_plan_id
             ):
                 raise PermissionError("HDS_ACTION_HISTORY_ROLLBACK_BINDING_INVALID")
         else:
@@ -1096,6 +1120,8 @@ class GenericHDSJudgementSubject:
             or decision.selected_candidate_id is not None
             or result.control_operation != "ROLLBACK"
             or not result.control_instruction_refs
+            or result.control_plan is None
+            or decision.selected_plan_id != result.control_plan.plan_id
             or decision.compute_result_digest != result.digest()
         ):
             raise PermissionError("HDS_CONTROL_ROLLBACK_NOT_COMMITTED")

@@ -11,7 +11,7 @@ from arc3_agi_agent.generic_types import GenericEnvironment
 
 from .generic_agi_agent import GenericAGIAgent, GenericAGIAgentReport
 
-ARC3_COMPLETION_AGENT_PRODUCT_VERSION = "arc3-completion-agent-product-v0.3"
+ARC3_COMPLETION_AGENT_PRODUCT_VERSION = "arc3-completion-agent-product-v1.0"
 
 
 class ARC3CompletionAgent(GenericAGIAgent):

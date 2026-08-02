@@ -33,7 +33,7 @@ from .product_governance import (
 from .runtime_identity import build_runtime_identity
 from .schema import digest_object
 
-ARC3_PRODUCT_RUNNER_VERSION = "arc3-completion-product-runner-v0.3"
+ARC3_PRODUCT_RUNNER_VERSION = "arc3-completion-product-runner-v1.0"
 
 logger = logging.getLogger(__name__)
 
@@ -370,6 +370,20 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
+def product_process_exit_code(
+    *,
+    mode: str,
+    report: dict[str, object],
+) -> int:
+    """Keep hidden score incompleteness distinct from transport failure."""
+
+    if mode not in {"offline", "competition"}:
+        raise ValueError("ARC3_PRODUCT_PROCESS_MODE_INVALID")
+    if mode == "competition":
+        return 0
+    return 0 if report.get("product_completion_established") is True else 2
+
+
 def main() -> int:
     logging.basicConfig(
         level=logging.INFO,
@@ -398,7 +412,13 @@ def main() -> int:
             encoding="utf-8",
             newline="\n",
         )
-    return 0 if report["product_completion_established"] is True else 2
+    # The official scorecard, rather than local sample completion, owns the
+    # hidden result. Do not turn a closed competition run into a system error
+    # merely because hidden games differ from the local sample endpoint.
+    return product_process_exit_code(
+        mode=str(arguments.mode),
+        report=report,
+    )
 
 
 if __name__ == "__main__":
@@ -413,6 +433,7 @@ __all__ = [
     "ARC3_PRODUCT_ID",
     "ARC3_PRODUCT_RUNNER_VERSION",
     "create_product_session",
+    "product_process_exit_code",
     "run_arc3_completion_offline",
     "run_arc3_completion_product",
 ]

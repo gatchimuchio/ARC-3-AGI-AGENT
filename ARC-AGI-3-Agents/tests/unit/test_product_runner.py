@@ -20,6 +20,7 @@ from arc3_agi_agent.product_runner import (
     ARC3_DEVELOPMENT_ACTION_BUDGET,
     ARC3_KNOWN_SUCCESS_ACTION_CEILING,
     create_product_session,
+    product_process_exit_code,
     run_arc3_completion_product,
 )
 from arc3_agi_agent.runtime_identity import build_runtime_identity
@@ -209,3 +210,16 @@ def test_product_runner_rejects_p_removal_from_the_product_path() -> None:
             agent_factory=_ProductAgent,
             session_factory=ablated_session_factory,
         )
+
+
+def test_hidden_score_incompleteness_is_not_a_competition_transport_error() -> None:
+    incomplete = {"product_completion_established": False}
+
+    assert product_process_exit_code(
+        mode="competition",
+        report=incomplete,
+    ) == 0
+    assert product_process_exit_code(
+        mode="offline",
+        report=incomplete,
+    ) == 2

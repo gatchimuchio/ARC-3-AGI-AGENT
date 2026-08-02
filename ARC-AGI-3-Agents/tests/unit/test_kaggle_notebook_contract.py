@@ -52,7 +52,7 @@ def test_kaggle_notebook_matches_official_submission_shape() -> None:
     assert [cell["id"] for cell in cells] == [
         "install-official-offline-wheels",
         "verify-runtime-payload",
-        "execute-generic-runtime",
+        "execute-product-runtime",
         "write-official-placeholder",
     ]
 
@@ -78,10 +78,13 @@ def test_kaggle_notebook_matches_official_submission_shape() -> None:
     assert '"PAYLOAD_EXCEPTION"' in payload
     assert '"/kaggle/working/arc3_payload_status.json"' in payload
 
-    competition = sources["execute-generic-runtime"]
+    competition = sources["execute-product-runtime"]
     assert "KAGGLE_IS_COMPETITION_RERUN" in competition
     assert "to_parquet" not in competition
-    assert "arc3_agi_agent.generic_competition_runner" in competition
+    assert "arc3_agi_agent.product_runner" in competition
+    assert '"--mode"' in competition
+    assert '"competition"' in competition
+    assert "OPERATION_MODE=competition" in competition
     assert '"main.py"' not in competition
     assert '"--agent"' not in competition
     subprocess_calls = [
@@ -119,19 +122,15 @@ def test_kaggle_notebook_matches_official_submission_shape() -> None:
         in placeholder
     )
     assert "dry-run" not in placeholder
-    assert BUILDER.ACTION_BUDGET == 128
-    assert "generic_competition_runner.py" in BUILDER.RUNTIME_MODULES
+    assert BUILDER.ACTION_BUDGET == 4096
+    assert "product_runner.py" in BUILDER.RUNTIME_MODULES
+    assert "product_trace.py" in BUILDER.RUNTIME_MODULES
 
 
 def test_kaggle_runtime_archive_is_exact_generic_runtime_closure() -> None:
     excluded_infrastructure = {
-        "canonical_artifact.py",
-        "compiled_policy.py",
-        "initial_state_compiler.py",
         "negative_transfer.py",
         "p22_evaluator.py",
-        "p_bundle.py",
-        "p_compiler_v2.py",
         "p_evaluator.py",
         "p_registry.py",
     }
@@ -141,6 +140,17 @@ def test_kaggle_runtime_archive_is_exact_generic_runtime_closure() -> None:
 
     assert resolved == BUILDER.RUNTIME_MODULES
     assert excluded_infrastructure.isdisjoint(BUILDER.RUNTIME_MODULES)
+    assert {
+        "canonical_artifact.py",
+        "compiled_policy.py",
+        "initial_state_compiler.py",
+        "p_bundle.py",
+        "p_compiler_v2.py",
+        "product_capability.py",
+        "product_governance.py",
+        "product_runner.py",
+        "product_trace.py",
+    } <= set(BUILDER.RUNTIME_MODULES)
     assert manifest["runtime_entry_modules"] == list(
         BUILDER.RUNTIME_ENTRY_MODULES
     )
@@ -148,6 +158,11 @@ def test_kaggle_runtime_archive_is_exact_generic_runtime_closure() -> None:
     assert manifest["teacher_included"] is False
     assert manifest["known_sample_policy_included"] is False
     assert manifest["runtime_identity_routing_included"] is False
+    assert manifest["fixed_action_trajectory_included"] is False
+    assert manifest["literal_coordinate_table_included"] is False
+    assert manifest["compiled_identity_free_product_policy_included"] is True
+    assert manifest["product_id"] == "ARC3CompletionAgent"
+    assert manifest["runtime_assets"] == list(BUILDER.RUNTIME_ASSETS)
 
 
 def test_kaggle_runtime_archive_import_smoke_uses_current_session_api() -> None:
@@ -155,7 +170,9 @@ def test_kaggle_runtime_archive_import_smoke_uses_current_session_api() -> None:
 
     result = VALIDATOR._runtime_import_smoke(runtime_archive)
 
-    assert VALIDATOR.RUNTIME_SMOKE_EXPECTED_OUTPUT == "WIN:2:True:True"
+    assert VALIDATOR.RUNTIME_SMOKE_EXPECTED_OUTPUT == (
+        "arc3.product.capability.v1:4096:PRODUCT:True"
+    )
     assert result["passed"] is True
     assert result["returncode"] == 0
     assert result["stdout"] == VALIDATOR.RUNTIME_SMOKE_EXPECTED_OUTPUT
@@ -196,11 +213,11 @@ def test_kaggle_runtime_allowlist_rejects_quarantined_module(
     monkeypatch.setattr(
         BUILDER,
         "RUNTIME_MODULES",
-        BUILDER.RUNTIME_MODULES + ("compiled_policy.py",),
+        BUILDER.RUNTIME_MODULES + ("p22_evaluator.py",),
     )
 
     with pytest.raises(
         RuntimeError,
-        match="KAGGLE_RUNTIME_QUARANTINED_MODULE_ALLOWED:compiled_policy",
+        match="KAGGLE_RUNTIME_QUARANTINED_MODULE_ALLOWED:p22_evaluator",
     ):
         BUILDER._validate_relative_import_closure()

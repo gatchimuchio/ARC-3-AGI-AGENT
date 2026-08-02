@@ -16,6 +16,7 @@ from arc3_agi_agent.generic_compute import (
     action_descriptors,
     represent_observation,
 )
+from arc3_agi_agent.generic_memory import SemanticRecord
 from arc3_agi_agent.generic_runtime import (
     GenericAGIRuntime,
     GenericRuntimeAblation,
@@ -31,6 +32,7 @@ from arc3_agi_agent.generic_types import (
 )
 from arc3_agi_agent.p_bundle import p_bundle_from_package
 from arc3_agi_agent.p_compiler_v2 import PCompilerV2
+from arc3_agi_agent.product_trace import ProductTraceSummarySink
 from arc3_agi_agent.s5_policy import (
     S5HistoryRecord,
     load_s5_rendered_policy_body,
@@ -183,6 +185,29 @@ def test_action_effect_history_ignores_non_policy_interface_layers() -> None:
     )
 
 
+def test_action_effect_history_uses_render_equality_not_effect_label() -> None:
+    before = GenericObservation(
+        signature="before-labelled-interface-change",
+        available_actions=(1,),
+        rendered_layers=(((0, 0), (0, 0)),),
+        terminal_state="NOT_FINISHED",
+    )
+    after = GenericObservation(
+        signature="after-labelled-interface-change",
+        available_actions=(1,),
+        rendered_layers=(((1, 0), (0, 0)),),
+        terminal_state="NOT_FINISHED",
+        visible_effects=("INTERFACE_ONLY_CHANGE", "NO_VISIBLE_CHANGE"),
+    )
+
+    assert _action_effect_record(
+        action_id=1,
+        payload={},
+        before=before,
+        after=after,
+    ).visible_change is True
+
+
 def test_migrated_policy_matches_development_reference() -> None:
     arrays = _arrays()
     legacy_body = load_s5_rendered_policy_body()
@@ -226,6 +251,48 @@ def test_same_render_changes_action_only_through_passive_m() -> None:
 
     assert body.predict(_observation(arrays, first), first_history).action_id == 6
     assert body.predict(_observation(arrays, second), second_history).action_id == 3
+
+
+def test_irrelevant_semantic_m_leaves_supported_action_invariant() -> None:
+    arrays = _arrays()
+    body = load_compiled_autonomous_instruction_body()
+    observation = _observation(arrays, 9)
+    _, history = _histories_before(arrays, 9)
+    representation = represent_observation(
+        observation,
+        goal_tokens=("goal:progress",),
+    )
+    descriptors = action_descriptors(observation, representation)
+    irrelevant = SemanticRecord(
+        memory_id="memory:irrelevant-unrelated-domain",
+        kind="WORLD_MODEL",
+        statement="An unrelated domain has an unrelated transition.",
+        semantic_tokens=("unrelated:domain", "unrelated:transition"),
+        falsification_condition="unrelated evidence refutes the unrelated rule",
+        created_version=1,
+        updated_version=1,
+    )
+    assert irrelevant.validate() == ()
+
+    baseline = body.query(
+        representation,
+        descriptors,
+        (),
+        observation=observation,
+        action_history=history,
+    )
+    mutated = body.query(
+        representation,
+        descriptors,
+        (irrelevant,),
+        observation=observation,
+        action_history=history,
+    )
+
+    baseline_choice = max(baseline.predictions, key=lambda item: item.prior)
+    mutated_choice = max(mutated.predictions, key=lambda item: item.prior)
+    assert mutated_choice.descriptor == baseline_choice.descriptor
+    assert mutated_choice.prior == baseline_choice.prior
 
 
 def test_pointer_is_derived_from_current_render() -> None:
@@ -313,13 +380,125 @@ def test_p_proposed_rollback_requires_hds_capability_and_updates_m() -> None:
     assert world.reset_count == 1
     assert report.actions_executed == 1
     assert report.cycles[0].decision.operation_state == "ROLLBACK"
+    control_plan = report.cycles[0].compute_result.control_plan
+    assert control_plan is not None
+    assert control_plan.mode == "ROLLBACK_PLAN"
+    assert report.cycles[0].decision.selected_plan_id == control_plan.plan_id
+    assert tuple(step.operation for step in control_plan.steps) == (
+        "ROLLBACK",
+        "REOBSERVE",
+        "VERIFY",
+        "REPLAN",
+    )
     assert report.cycles[0].selected_candidate is None
     assert report.cycles[0].attribution is not None
     assert report.cycles[0].attribution.action_semantic_key == "control:rollback"
     assert session.action_history.view()[-1].action_id == 0
     assert session.action_history.view()[-1].compatibility_reset is True
+    assert session.action_history.view()[-1].plan_id == control_plan.plan_id
     assert len(report.cycles[0].authority_events) >= 3
     session.end_episode(handle, succeeded=False, reason=report.stop_reason)
+
+
+class _RollbackThenWinWorld:
+    def __init__(
+        self,
+        failed: GenericObservation,
+        recovered: GenericObservation,
+    ) -> None:
+        self.current = failed
+        self.recovered = recovered
+        self.reset_count = 0
+        self.step_count = 0
+        self.request_ids: set[str] = set()
+
+    def observe(self) -> GenericObservation:
+        return self.current
+
+    def step(
+        self,
+        action_id: int,
+        *,
+        payload: Mapping[str, int],
+        request_id: str,
+    ) -> GenericObservation:
+        assert action_id in self.current.available_actions
+        assert request_id not in self.request_ids
+        self.request_ids.add(request_id)
+        self.step_count += 1
+        self.current = GenericObservation(
+            signature="rollback-then-win:win",
+            available_actions=self.recovered.available_actions,
+            rendered_layers=self.recovered.rendered_layers,
+            terminal_state="WIN",
+            progress_count=1,
+            visible_effects=("LEVEL_PROGRESS",),
+            action_payload_schema=self.recovered.action_payload_schema,
+            last_action_id=action_id,
+            last_action_payload_items=tuple(sorted(payload.items())),
+        )
+        return self.current
+
+    def reset_level(self, *, request_id: str) -> GenericObservation:
+        assert request_id not in self.request_ids
+        self.request_ids.add(request_id)
+        self.reset_count += 1
+        self.current = GenericObservation(
+            signature="rollback-then-win:recovered",
+            available_actions=self.recovered.available_actions,
+            rendered_layers=self.recovered.rendered_layers,
+            terminal_state="NOT_FINISHED",
+            action_payload_schema=self.recovered.action_payload_schema,
+            visible_effects=("LEVEL_RESET",),
+        )
+        return self.current
+
+
+def test_control_rollback_is_followed_by_a_revised_plan() -> None:
+    arrays = _arrays()
+    recovered = _observation(arrays, 0)
+    failed = GenericObservation(
+        signature="rollback-then-win:failed",
+        available_actions=recovered.available_actions,
+        rendered_layers=recovered.rendered_layers,
+        terminal_state="GAME_OVER",
+        action_payload_schema=recovered.action_payload_schema,
+    )
+    body = load_compiled_autonomous_instruction_body()
+    session = create_cognitive_session(
+        p_bundle=body,
+        resource_contract=ResourceContract(action_budget_per_episode=2),
+    )
+    handle = session.begin_episode()
+    world = _RollbackThenWinWorld(failed, recovered)
+
+    report = GenericAGIRuntime(world, session, handle).run()
+
+    assert report.final_state == "WIN"
+    assert world.reset_count == 1
+    assert world.step_count == 1
+    assert len(report.cycles) == 2
+    rollback_cycle, revised_cycle = report.cycles
+    rollback_plan = rollback_cycle.compute_result.control_plan
+    assert rollback_plan is not None
+    assert revised_cycle.selected_candidate is not None
+    revised_plan = revised_cycle.selected_candidate.plan
+    assert revised_plan.revision_reason == "ROLLBACK_RECOVERY_REPLAN"
+    assert revised_plan.predecessor_plan_id == rollback_plan.plan_id
+    assert revised_cycle.decision.selected_plan_id == revised_plan.plan_id
+    summary = ProductTraceSummarySink()
+    for cycle in report.cycles:
+        summary.append(cycle)
+    assert summary.executed_plan_count == 2
+    assert summary.hds_plan_commit_count == 2
+    assert summary.revised_plan_count == 1
+    assert summary.rollback_plan_count == 1
+    assert summary.post_rollback_replan_count == 1
+    assert summary.competing_hypothesis_plan_count == 2
+    assert summary.multi_representation_plan_count == 2
+    assert summary.subgoal_plan_count == 2
+    assert summary.max_plan_step_count == 4
+    session.end_episode(handle, succeeded=True, reason=report.stop_reason)
 
 
 def test_game_over_is_deferred_to_the_compiled_reset_cycle() -> None:
@@ -341,6 +520,36 @@ def test_game_over_is_deferred_to_the_compiled_reset_cycle() -> None:
     assert body.predict(game_over, history).action_id == 0
     assert body.explicit_rollback_cycle_required(game_over) is True
     assert body.explicit_rollback_cycle_required(original) is False
+
+
+def test_any_supported_game_over_requests_hds_controlled_rollback() -> None:
+    arrays = _arrays()
+    index = 0
+    original = _observation(arrays, index)
+    game_over = GenericObservation(
+        signature="compiled-untrained-game-over",
+        available_actions=original.available_actions,
+        rendered_layers=original.rendered_layers,
+        terminal_state="GAME_OVER",
+        action_payload_schema=original.action_payload_schema,
+    )
+    body = load_compiled_autonomous_instruction_body()
+    assert body.predict(original, ()).action_id != 0
+    representation = represent_observation(
+        game_over,
+        goal_tokens=("goal:progress",),
+    )
+
+    result = body.query(
+        representation,
+        action_descriptors(game_over, representation),
+        (),
+        observation=game_over,
+    )
+
+    assert result.control_operation == "ROLLBACK"
+    assert result.control_instruction_refs
+    assert result.predictions == ()
 
 
 class _TraceSink:
