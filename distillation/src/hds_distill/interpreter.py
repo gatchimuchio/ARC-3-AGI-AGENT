@@ -707,11 +707,20 @@ def _build_result(
     )
 
 
-def execute_program(program: Mapping[str, object]) -> ExecutionResult:
-    """Type-check and execute one program without side effects."""
+def execute_type_checked_program(
+    checked: TypeCheckedProgram,
+    input_overrides: Mapping[str, JsonValue] | None = None,
+) -> ExecutionResult:
+    """Execute a checked program with typed replacements for declared inputs."""
 
-    checked = type_check_program(program)
     values: dict[str, JsonValue] = {item.name: item.value for item in checked.inputs}
+    if input_overrides:
+        by_name = {item.name: item for item in checked.inputs}
+        unknown = sorted(set(input_overrides) - set(by_name))
+        if unknown:
+            fail("IR_REFERENCE_ERROR", "INPUT_OVERRIDE:" + ",".join(unknown))
+        for name, value in input_overrides.items():
+            values[name] = validate_typed_value(by_name[name].type_name, value)
     trace: list[TraceEntry] = []
     used = 0
     for index, node in enumerate(checked.nodes):
@@ -771,8 +780,15 @@ def execute_program(program: Mapping[str, object]) -> ExecutionResult:
     )
 
 
+def execute_program(program: Mapping[str, object]) -> ExecutionResult:
+    """Type-check and execute one program without side effects."""
+
+    return execute_type_checked_program(type_check_program(program))
+
+
 __all__ = [
     "ExecutionResult",
     "TraceEntry",
     "execute_program",
+    "execute_type_checked_program",
 ]

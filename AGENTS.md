@@ -1,18 +1,19 @@
 # ARC3 Codex 開発運用契約 rev3
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1からPH-D05まではOwner承認済みであり、PH-D06だけが現在activeである。PH-D06開始許可は、canonical teacher trajectory 25件から複数の未選択HypothesisIRをsource-blind processで生成し、Alternative Adequacy、特権候補拒否、deterministic build 3 processを証明する範囲に限られる。teacher fit、因果主張、intervention、Rule promotion、Bridge、Runtime、official、Kaggleの開始許可ではない。
+この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1からPH-D06まではOwner承認済みであり、PH-D07Aだけが現在activeである。PH-D07A開始許可は、canonical teacher trajectory 25件に対するPH-D06の全450候補（400 executable、50 DG-08 rejected）のtrajectory-local observational fitを全11,574 teacher step／185,184 candidate-stepで会計し、exact fitとcausal supportを分離して3 independent comparator processで証明する範囲に限られる。counterfactual intervention、因果主張、candidate selection／adoption、Rule promotion、Bridge、Runtime、official、Kaggleの開始許可ではない。
 
 - 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
-- 日付: `2026-08-01`
+- 日付: `2026-08-02`
 - 対象戦略: HDS蒸留先行
 - 上位仕様: `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
 - 上位roadmap: `ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
 - 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
 - 契約状態: `OWNER_APPROVED`
 - 導入状態: `INSTALLED`
-- 現在作業: `PH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATION`
-- Active phase: `PH-D06`
-- PH-D06: `IN_PROGRESS`
+- 現在作業: `PH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTING`
+- Active phase: `PH-D07A`
+- PH-D07A: `IN_PROGRESS`
+- PH-D06: `OWNER_APPROVED_PASS`
 - PH-D05: `OWNER_APPROVED_PASS`
 - PH-D03B: `OWNER_APPROVED_PASS`
 - PH-D03A: `OWNER_APPROVED_PASS`
@@ -147,8 +148,8 @@ Meta-M = Repository / Specs / Ledger / Artifacts
 ```text
 Strategy = OWNER_APPROVED
 Installation = INSTALLED
-Active phase = PH-D06
-Current work = PH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATION
+Active phase = PH-D07A
+Current work = PH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTING
 PH-R-1 = OWNER_APPROVED_PASS
 PH-R00 = OWNER_APPROVED_PASS
 PH-D00A = OWNER_APPROVED_PASS
@@ -161,7 +162,8 @@ PH-D02C = OWNER_APPROVED_PASS
 PH-D03A = OWNER_APPROVED_PASS
 PH-D03B = OWNER_APPROVED_PASS
 PH-D05 = OWNER_APPROVED_PASS
-PH-D06 = IN_PROGRESS
+PH-D06 = OWNER_APPROVED_PASS
+PH-D07A = IN_PROGRESS
 PH-R00 Owner authorization = ESTABLISHED
 ```
 
@@ -208,9 +210,11 @@ AND PH-D03B_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D05
 AND PH-D05_DOD_PASS
 AND OWNER_AUTHORIZED_PH-D06
+AND PH-D06_DOD_PASS
+AND OWNER_AUTHORIZED_PH-D07A
 ```
 
-以前に`PH-D06`を開始しない。現在は全条件が成立し、PH-D06だけがactiveである。PH-D07AはPH-D06の全DoD、25 teacher case／450 candidate／400 executable IR／50 DG-08 rejection、source-blind build x3、deterministic rebuild x3、required validation、failed requirement count 0、exact evidence bind、OwnerDecisionCaptureが成立するまで開始しない。
+以前に`PH-D07A`を開始しない。現在は全条件が成立し、PH-D07Aだけがactiveである。PH-D07BはPH-D07Aの全DoD、25 fit case／450 candidate／400 eligible execution／50 DG-08 ineligible、全11,574 teacher step／185,184 candidate-step、7 comparison axis、isolated comparator x3、deterministic rebuild x3、required validation、failed requirement count 0、exact evidence bind、OwnerDecisionCaptureが成立するまで開始しない。
 
 ```text
 HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
@@ -773,9 +777,10 @@ PH-D02CはOWNER_APPROVED_PASSです。
 PH-D03AはOWNER_APPROVED_PASSです。
 PH-D03BはOWNER_APPROVED_PASSです。
 PH-D05はOWNER_APPROVED_PASSです。
-PH-D06はIN_PROGRESSです。
-Active phaseはPH-D06です。
-現在許可されたwork classはPH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATIONです。
+PH-D06はOWNER_APPROVED_PASSです。
+PH-D07AはIN_PROGRESSです。
+Active phaseはPH-D07Aです。
+現在許可されたwork classはPH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTINGです。
 PH-R00のOwner authorizationはESTABLISHEDです。
 
 最初に、
@@ -784,28 +789,30 @@ PH-R00のOwner authorizationはESTABLISHEDです。
 - HEAD/tree
 - dirty state
 - required documents
-- PH-D05 evidence、attestation、content-specific decision／approval
-- PH-D06 WorkBlockFrameとphase-entry approval
+- PH-D06 evidence、attestation、content-specific decision／approval
+- PH-D07A WorkBlockFrameとphase-entry approval
 を確認してください。
 
 次だけを実施してください。
 
-- canonical teacher trajectory 25件から各18件、総450件の候補を生成する
-- 各caseで16 executable IR、異なるselector family、異なるoperator／ordering family、non-strawman alternativeを保持する
-- answer-copyとtrajectory-lookup adversaryを各caseで生成し、payloadを保存せずDG-08の安定error codeで棄却する
-- 全候補のprovenance、resource cost、Alternative Adequacy、distinguishing intervention obligationを固定する
-- DISTILLATION_EXECUTORをbubblewrapで分離し、repository root、environment source、network、secretを見せない
-- candidate manifest、25 package、source-blind report、LLM不使用reportを独立3 processでbyte-identical rebuildする
-- DG-03、DG-04、DG-05、DG-08、DG-12を構造と実行証拠から再計算する
+- canonical teacher trajectory 25件とPH-D06 candidate package 25件をread-only inputとして拘束する
+- 400 executable HypothesisIRを各自のteacher trajectory全stepで実行し、全11,574 teacher step／185,184 candidate-stepを会計する
+- RAW_ACTION_MATCH、STEP_PRECONDITION、PREDICTED_EFFECT、STATE_ABSTRACTION、TRANSITION、ORDERING、TERMINAL_CONTRIBUTIONの7 axisを、未宣言axisのmatch補完なしで評価する
+- fitをLOCAL_EXACT_FIT、FALSIFIED、INCONCLUSIVE_RESOURCE、NOT_ELIGIBLE_DG_08へ分類する
+- 50 answer-copy／identity-routing adversaryをDG-08 rejectedのまま一度も実行しない
+- exact fit、positive mechanism support、causal supportを別fieldとし、causal supportをNOT_ESTABLISHEDに固定する
+- DISTILLATION_COMPARATORをbubblewrapで分離し、repository root、environment source、network、secretを見せない
+- fit manifest、25 case package、isolation reportを3 independent processでbyte-identical rebuildする
+- DG-07、DG-08、DG-09を構造と実行証拠から再計算する
 - dedicated／focused／full unit／integration regression
 - deterministic artifact、Implementation Commit、Evidence Commit、attestationの分離
-- PH-D06 DoD、required five gates、failed requirement count 0の証明
+- PH-D07A DoD、required three gates、failed requirement count 0の証明
 
-teacher fit、candidate selection、因果主張、counterfactual intervention、Rule promotion、Bridge実装、AGI Runtime、P22改善、locked final、official、Kaggleへ進んではいけません。
+candidate selection／adoption、因果主張、counterfactual intervention、Rule promotion、Bridge実装、AGI Runtime、P22改善、locked final、official、Kaggleへ進んではいけません。
 
-PH-D06成果のImplementation Commit、Evidence Commit、attestationを分離してください。
+PH-D07A成果のImplementation Commit、Evidence Commit、attestationを分離してください。
 全gateがPASSした場合だけstanding authorizationをexact evidenceへ機械的にbindし、
-PH-D06からPH-D07AへのOwner decisionを転記してください。失敗または未証明gateを承認してはいけません。
+PH-D07AからPH-D07BへのOwner decisionを転記してください。失敗または未証明gateを承認してはいけません。
 ```
 
 ---

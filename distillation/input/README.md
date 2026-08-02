@@ -135,7 +135,7 @@ This contract authorizes lossless trajectory normalization only. It does not
 authorize candidate selection, causal claims, intervention, Rule promotion,
 Bridge, Runtime, official access, or Kaggle mutation.
 
-The current `PH-D06` adds
+The Owner-approved `PH-D06` adds
 `arc3_hypothesis_candidate_generation_contract.json`. It binds the exact
 PH-D05 evidence and entry approval, canonical teacher manifest, current
 WorkBlockFrame, preinventory, transition, source-blind execution report,
@@ -151,9 +151,22 @@ executable digest. Candidate generation has no network acquisition path; all
 three isolated processes must report the same verified runtime evidence.
 
 This contract authorizes bounded candidate generation only. Every candidate
-remains unselected and unevaluated for fit; PH-D07A owns fit evaluation and
+remains unselected and was unevaluated for fit at PH-D06 exit; PH-D07A owns fit evaluation and
 PH-D07B owns interventions. It authorizes no causal assertion, Rule promotion,
 Bridge, Runtime, official access, or Kaggle mutation.
+
+The current `PH-D07A` adds
+`arc3_extensional_exact_fit_contract.json`. It binds the exact approved PH-D06
+implementation/evidence, canonical teacher and candidate manifests, current
+WorkBlockFrame, preinventory, transition, pinned Python runtime, isolated
+comparator evidence, fit manifest, and deterministic rebuild-x3 evidence. It
+requires all 450 candidates and 185,184 candidate-step evaluations to be
+accounted while the 50 DG-08 candidates remain unexecuted.
+
+The contract authorizes observational fit accounting only. `LOCAL_EXACT_FIT`
+does not establish causal support or select a candidate. PH-D07B owns
+counterfactual intervention; Rule promotion, StructureBundle construction,
+Bridge, Runtime, official access, and Kaggle mutation remain prohibited.
 
 `historical_pre_audit/PH-D03A/` preserves the four pre-audit checked
 candidate artifacts plus the corresponding source and test bytes from commit

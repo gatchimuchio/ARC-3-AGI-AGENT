@@ -11,6 +11,7 @@ import re
 import subprocess
 import sys
 import unicodedata
+from collections import Counter
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -19,7 +20,7 @@ from zipfile import ZipFile
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 SELECTOR_PATH = Path("control/rev3/REV3_CURRENT_SELECTOR.json")
 SELECTOR_SCHEMA_PATH = Path(
-    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V15.json"
+    "docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V16.json"
 )
 DECISION_PATH = Path(
     "control/rev3/OWNER_DECISION_CAPTURES/"
@@ -416,6 +417,35 @@ PH_D06_SOURCE_BLIND_REPORT_PATH = Path(
 PH_D06_LLM_CAPTURE_REPORT_PATH = Path(
     "distillation/artifacts/reports/arc3_hypothesis_llm_capture.json"
 )
+PH_D06_RESULT_DECISION_PATH = Path(
+    "control/rev3/OWNER_DECISION_CAPTURES/PH-D06_TO_PH-D07A_20260801.json"
+)
+PH_D06_RESULT_APPROVAL_PATH = Path(
+    "control/rev3/OWNER_APPROVAL_RECORDS/PH-D06_TO_PH-D07A_20260801.json"
+)
+PH_D06_EVIDENCE_ATTESTATION_PATH = Path(
+    "control/rev3/PH-D06_EVIDENCE_ATTESTATION.json"
+)
+PH_D06_PHASE_STATE_PATH = Path("control/rev3/D06_PHASE_STATE.json")
+PH_D07A_FRAME_PATH = Path("control/rev3/PH-D07A_WORK_BLOCK_FRAME.json")
+PH_D07A_TRANSITION_PATH = Path(
+    "control/rev3/PHASE_TRANSITIONS/PH-D06_TO_PH-D07A.json"
+)
+PH_D07A_PREINVENTORY_PATH = Path(
+    "analysis/rev3/ph_d07a_exact_fit_preinventory.json"
+)
+PH_D07A_CONTRACT_PATH = Path(
+    "distillation/input/arc3_extensional_exact_fit_contract.json"
+)
+PH_D07A_ARTIFACT_ROOT = Path("distillation/artifacts/fit/arc3/ph_d07a_v1")
+PH_D07A_MANIFEST_PATH = PH_D07A_ARTIFACT_ROOT / "manifest.json"
+PH_D07A_REBUILD_X3_PATH = PH_D07A_ARTIFACT_ROOT / "rebuild_x3.json"
+PH_D07A_FIT_REPORT_PATH = Path(
+    "distillation/artifacts/reports/arc3_extensional_exact_fit.json"
+)
+PH_D07A_ISOLATION_REPORT_PATH = Path(
+    "distillation/artifacts/reports/arc3_extensional_fit_isolation.json"
+)
 PH_R00_PHASE_STATE_PATH = Path("control/rev3/R00_PHASE_STATE.json")
 PH_R00_ASSET_CLASSIFICATION_PATH = Path(
     "docs/strategy/ASSET_CLASSIFICATION_REV3.json"
@@ -672,6 +702,32 @@ def _content_digest_failures(
     return []
 
 
+def _logical_content_digest_failures(
+    value: Mapping[str, Any],
+    namespace: str,
+    field: str,
+    location: str,
+) -> list[str]:
+    excluded = value.get("digest_excluded_fields")
+    if not isinstance(excluded, list):
+        return [f"{location}:DIGEST_EXCLUSIONS_MISSING"]
+    body = dict(value)
+    for item in excluded:
+        if not isinstance(item, str) or item not in body:
+            return [f"{location}:DIGEST_EXCLUSION_INVALID"]
+        body.pop(item)
+    payload = canonical_json(_nfc_json(body)).encode("utf-8")
+    digest = hashlib.sha256(
+        b"HDS-LOGICAL-CONTENT-V1\0"
+        + namespace.encode("ascii")
+        + b"\0"
+        + payload
+    ).hexdigest()
+    if value.get(field) != namespace + ":" + digest:
+        return [f"{location}:CONTENT_DIGEST_MISMATCH"]
+    return []
+
+
 def _git_object_exists(root: Path, commit: str) -> bool:
     result = subprocess.run(
         ["git", "cat-file", "-e", commit + "^{commit}"],
@@ -789,7 +845,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         )
     )
     if (
-        manifest.get("schema_version") != "arc3-rev3-current-authority-manifest-v13"
+        manifest.get("schema_version") != "arc3-rev3-current-authority-manifest-v14"
         or manifest.get("active_phase") != selector.get("active_phase")
         or manifest.get("current_work_class") != selector.get("current_work_class")
         or manifest.get("ph_d02c_status") != selector.get("ph_d02c_status")
@@ -797,6 +853,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         or manifest.get("ph_d03b_status") != selector.get("ph_d03b_status")
         or manifest.get("ph_d05_status") != selector.get("ph_d05_status")
         or manifest.get("ph_d06_status") != selector.get("ph_d06_status")
+        or manifest.get("ph_d07a_status") != selector.get("ph_d07a_status")
         or manifest.get("source_binding")
         != {
             "commit": "e97f725dafca65c50963c367df58e875e81cb999",
@@ -806,31 +863,31 @@ def validate_repository(root: Path) -> dict[str, object]:
         != {
             "approval_artifact_digest": (
                 "owner-approval-record:"
-                "a2dae0790796b2b9169f8c88e91f704f59226ef8b98ff3342296c09a448a5376"
+                "671eb5630587ea43df5e546b3f3b44049c0851a33f300ea7159d20d33e3bad6e"
             ),
             "decision_capture_digest": (
                 "sha256:"
-                "fa327550ff6c9c0aa81c24589bfa16334ac4d591db6223c48af8ba2f8c5f098b"
+                "8884f3fe55be5887d46c68c06fa77cf8abdccd4c11db908652a74ab87b0773aa"
             ),
-            "from_phase": "PH-D05",
+            "from_phase": "PH-D06",
             "target_artifact_digest": (
                 "sha256:"
-                "eb17f67a8a637528a77f0d4fab5a85e6742d7d707adad8e6a66562fc78540a85"
+                "c003144c5666ad5dce1f83c07881e4ee56f00301b1c419cdb6764b4cdc301a1d"
             ),
-            "target_evidence_commit": ("ab634857aafb952c09917791b6b10d6be8f1efd7"),
-            "to_phase": "PH-D06",
+            "target_evidence_commit": ("fcfdd97cef8b53199bcced241568725870e051ee"),
+            "to_phase": "PH-D07A",
         }
         or manifest.get("current_work_block")
         != {
             "content_digest": (
                 "rev3-work-block-frame:"
-                "a0fb8f813a90b6a775c12d8778cc5a6d0d60939c18c61359ccb1641f755fe4e1"
+                "38aaee76c202b9b53f52d89b1e3a281e734bf0f76df99eb58bbc1173cb56862e"
             ),
             "entry_transition_digest": (
                 "rev3-phase-transition:"
-                "916b7d737e5814c13ad8e11866eacefe0a98cba5583f956fca2878658f956edd"
+                "3d821e7a5c1b2c7c77d1c68f8300678889210dd247d1c143b39dc4ef493fa26c"
             ),
-            "path": "control/rev3/PH-D06_WORK_BLOCK_FRAME.json",
+            "path": "control/rev3/PH-D07A_WORK_BLOCK_FRAME.json",
         }
     ):
         failures.append("authority_manifest:CURRENT_SELECTOR_MISMATCH")
@@ -1890,7 +1947,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d03a_result_approval:DECISION_OR_TARGET_MISMATCH"
         )
 
-    if selector.get("active_phase") != "PH-D06":
+    if selector.get("active_phase") != "PH-D07A":
         failures.append("selector:ACTIVE_PHASE_MISMATCH")
     if selector.get("ph_r00_owner_authorization") != "ESTABLISHED":
         failures.append("selector:PH_R00_AUTHORIZATION_MISSING")
@@ -1916,18 +1973,20 @@ def validate_repository(root: Path) -> dict[str, object]:
         failures.append("selector:PH_D03B_STATUS_MISMATCH")
     if selector.get("ph_d05_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D05_STATUS_MISMATCH")
-    if selector.get("ph_d06_status") != "IN_PROGRESS":
+    if selector.get("ph_d06_status") != "OWNER_APPROVED_PASS":
         failures.append("selector:PH_D06_STATUS_MISMATCH")
+    if selector.get("ph_d07a_status") != "IN_PROGRESS":
+        failures.append("selector:PH_D07A_STATUS_MISMATCH")
     if selector.get("runtime_activation_status") != "SUSPEND":
         failures.append("selector:RUNTIME_ACTIVATION_ESCALATED")
     selector_entry_approval = selector.get("phase_entry_approval")
     if not isinstance(selector_entry_approval, dict):
-        failures.append("selector:PH_D06_ENTRY_APPROVAL_MISSING")
+        failures.append("selector:PH_D07A_ENTRY_APPROVAL_MISSING")
     elif selector_entry_approval.get("approval_artifact_digest") != (
         "owner-approval-record:"
-        "a2dae0790796b2b9169f8c88e91f704f59226ef8b98ff3342296c09a448a5376"
+        "671eb5630587ea43df5e546b3f3b44049c0851a33f300ea7159d20d33e3bad6e"
     ):
-        failures.append("selector:PH_D06_ENTRY_APPROVAL_MISMATCH")
+        failures.append("selector:PH_D07A_ENTRY_APPROVAL_MISMATCH")
     selector_standing = selector.get("standing_authorization")
     if not isinstance(selector_standing, dict):
         failures.append("selector:STANDING_AUTHORIZATION_MISSING")
@@ -4578,6 +4637,18 @@ def validate_repository(root: Path) -> dict[str, object]:
     ph_d06_generation = _load_object(root, PH_D06_GENERATION_REPORT_PATH)
     ph_d06_source_blind = _load_object(root, PH_D06_SOURCE_BLIND_REPORT_PATH)
     ph_d06_llm_capture = _load_object(root, PH_D06_LLM_CAPTURE_REPORT_PATH)
+    ph_d06_phase_state = _load_object(root, PH_D06_PHASE_STATE_PATH)
+    ph_d06_attestation = _load_object(root, PH_D06_EVIDENCE_ATTESTATION_PATH)
+    ph_d06_result_decision = _load_object(root, PH_D06_RESULT_DECISION_PATH)
+    ph_d06_result_approval = _load_object(root, PH_D06_RESULT_APPROVAL_PATH)
+    ph_d07a_frame = _load_object(root, PH_D07A_FRAME_PATH)
+    ph_d07a_transition = _load_object(root, PH_D07A_TRANSITION_PATH)
+    ph_d07a_preinventory = _load_object(root, PH_D07A_PREINVENTORY_PATH)
+    ph_d07a_contract = _load_object(root, PH_D07A_CONTRACT_PATH)
+    ph_d07a_manifest = _load_object(root, PH_D07A_MANIFEST_PATH)
+    ph_d07a_rebuild = _load_object(root, PH_D07A_REBUILD_X3_PATH)
+    ph_d07a_fit_report = _load_object(root, PH_D07A_FIT_REPORT_PATH)
+    ph_d07a_isolation = _load_object(root, PH_D07A_ISOLATION_REPORT_PATH)
     failures.extend(
         _content_digest_failures(
             ph_d06_frame,
@@ -5173,6 +5244,494 @@ def validate_repository(root: Path) -> dict[str, object]:
         )
     ):
         failures.append("ph_d06_generation:GATE_OR_BINDING_MISMATCH")
+
+    failures.extend(
+        _schema_failures(
+            ph_d06_result_decision,
+            decision_v2_schema,
+            "ph_d06_result_decision",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d06_result_decision,
+            "sha256:",
+            "owner_decision_content_digest",
+            "ph_d06_result_decision",
+        )
+    )
+    failures.extend(
+        _schema_failures(
+            ph_d06_result_approval,
+            approval_schema,
+            "ph_d06_result_approval",
+        )
+    )
+    failures.extend(
+        _content_digest_failures(
+            ph_d06_result_approval,
+            "owner-approval-record:",
+            "approval_artifact_digest",
+            "ph_d06_result_approval",
+        )
+    )
+    if (
+        hashlib.sha256(
+            (root / PH_D06_PHASE_STATE_PATH).read_bytes()
+        ).hexdigest()
+        != ph_d06_attestation.get("phase_state_sha256")
+        or ph_d06_attestation.get("phase_id") != "PH-D06"
+        or ph_d06_attestation.get("implementation_commit")
+        != ph_d06_phase_state.get("implementation_commit")
+        or ph_d06_attestation.get("implementation_tree")
+        != ph_d06_phase_state.get("implementation_tree")
+        or ph_d06_result_decision.get("standing_authorization_digest")
+        != standing.get("standing_authorization_content_digest")
+        or ph_d06_result_decision.get("target_evidence_commit")
+        != ph_d06_attestation.get("evidence_commit")
+        or ph_d06_result_decision.get("target_artifact_digest")
+        != ph_d06_attestation.get("evidence_payload_digest")
+        or ph_d06_result_decision.get("gate_result_digest")
+        != ph_d06_generation.get("content_digest")
+        or ph_d06_result_decision.get("gate_status") != "PASS"
+        or ph_d06_result_decision.get("allowed_transition")
+        != "PH-D06_TO_PH-D07A"
+        or ph_d06_result_decision.get("decision")
+        != "APPROVE_PHASE_RESULT_AND_AUTHORIZE_NEXT_PHASE_ENTRY"
+        or ph_d06_result_approval.get("owner_decision_capture_digest")
+        != ph_d06_result_decision.get("owner_decision_content_digest")
+        or ph_d06_result_approval.get("target_evidence_commit")
+        != ph_d06_attestation.get("evidence_commit")
+        or ph_d06_result_approval.get("target_artifact_digest")
+        != ph_d06_attestation.get("evidence_payload_digest")
+        or ph_d06_result_approval.get("approved_transition")
+        != "PH-D06_TO_PH-D07A"
+        or ph_d06_result_approval.get("next_phase_id") != "PH-D07A"
+        or ph_d06_result_approval.get("next_phase_authorized") is not True
+    ):
+        failures.append("ph_d06_result_approval:BINDING_MISMATCH")
+
+    for value, prefix, location in (
+        (
+            ph_d07a_frame,
+            "rev3-work-block-frame",
+            "ph_d07a_frame",
+        ),
+        (
+            ph_d07a_transition,
+            "rev3-phase-transition",
+            "ph_d07a_transition",
+        ),
+        (
+            ph_d07a_preinventory,
+            "rev3-ph-d07a-exact-fit-preinventory",
+            "ph_d07a_preinventory",
+        ),
+        (
+            ph_d07a_contract,
+            "hds-arc3-extensional-exact-fit-contract",
+            "ph_d07a_contract",
+        ),
+        (
+            ph_d07a_manifest,
+            "hds-arc3-extensional-fit-manifest",
+            "ph_d07a_manifest",
+        ),
+        (
+            ph_d07a_rebuild,
+            "hds-ph-d07a-comparator-rebuild-x3",
+            "ph_d07a_rebuild",
+        ),
+        (
+            ph_d07a_fit_report,
+            "hds-ph-d07a-extensional-exact-fit",
+            "ph_d07a_fit_report",
+        ),
+        (
+            ph_d07a_isolation,
+            "hds-ph-d07a-fit-isolation",
+            "ph_d07a_isolation",
+        ),
+    ):
+        failures.extend(
+            _logical_content_digest_failures(
+                value,
+                prefix,
+                "content_digest",
+                location,
+            )
+        )
+
+    ph_d07a_budget = ph_d07a_frame.get("resource_budget")
+    if (
+        ph_d07a_frame.get("phase_id") != "PH-D07A"
+        or ph_d07a_frame.get("status") != "FRAME_LOCKED"
+        or ph_d07a_frame.get("base_commit")
+        != ph_d07a_preinventory.get("base_commit")
+        or ph_d07a_frame.get("base_tree")
+        != ph_d07a_preinventory.get("base_tree")
+        or not isinstance(ph_d07a_budget, dict)
+        or (
+            ph_d07a_budget.get("required_teacher_case_count"),
+            ph_d07a_budget.get("required_teacher_step_count"),
+            ph_d07a_budget.get("required_candidate_count"),
+            ph_d07a_budget.get("required_eligible_candidate_count"),
+            ph_d07a_budget.get("required_rejected_ineligible_count"),
+            ph_d07a_budget.get("required_candidate_step_evaluation_count"),
+            ph_d07a_budget.get("required_comparison_axis_count"),
+            ph_d07a_budget.get("required_independent_comparator_process_count"),
+        )
+        != (25, 11574, 450, 400, 50, 185184, 7, 3)
+        or ph_d07a_budget.get("required_gate_ids")
+        != ["DG-07", "DG-08", "DG-09"]
+        or any(
+            ph_d07a_budget.get(field) != 0
+            for field in (
+                "bridge_runtime_capability_count",
+                "candidate_adoption_count",
+                "candidate_selection_count",
+                "causal_support_count",
+                "kaggle_mutation_count",
+                "locked_final_access_count",
+                "network_submission_count",
+                "official_access_count",
+                "real_intervention_execution_count",
+                "rule_promotion_count",
+            )
+        )
+    ):
+        failures.append("ph_d07a_frame:BOUNDARY_OR_BUDGET_MISMATCH")
+
+    if (
+        (
+            ph_d07a_transition.get("from_phase_id"),
+            ph_d07a_transition.get("to_phase_id"),
+            ph_d07a_transition.get("decision"),
+        )
+        != ("PH-D06", "PH-D07A", "ENTRY_AUTHORIZED")
+        or ph_d07a_transition.get("from_phase_state_sha256")
+        != ph_d06_attestation.get("phase_state_sha256")
+        or ph_d07a_transition.get("from_phase_implementation_commit")
+        != ph_d06_attestation.get("implementation_commit")
+        or ph_d07a_transition.get("from_phase_implementation_tree")
+        != ph_d06_attestation.get("implementation_tree")
+        or ph_d07a_transition.get("from_phase_evidence_commit")
+        != ph_d06_attestation.get("evidence_commit")
+        or ph_d07a_transition.get("from_phase_evidence_tree")
+        != ph_d06_attestation.get("evidence_tree")
+        or ph_d07a_transition.get("from_phase_evidence_payload_digest")
+        != ph_d06_attestation.get("evidence_payload_digest")
+        or ph_d07a_transition.get("authorization_digest")
+        != ph_d06_result_approval.get("approval_artifact_digest")
+        or ph_d07a_transition.get("decision_capture_digest")
+        != ph_d06_result_decision.get("owner_decision_content_digest")
+        or ph_d07a_transition.get("external_irreversible_action_authorized")
+        is not False
+    ):
+        failures.append("ph_d07a_transition:EVIDENCE_BINDING_MISMATCH")
+
+    ph_d07a_preinventory_authority = ph_d07a_preinventory.get("authority")
+    ph_d07a_dirty = ph_d07a_preinventory.get("preexisting_dirty_state")
+    if (
+        ph_d07a_preinventory.get("phase_id") != "PH-D07A"
+        or not isinstance(ph_d07a_preinventory_authority, dict)
+        or ph_d07a_preinventory_authority.get("input_evidence_commit")
+        != ph_d06_attestation.get("evidence_commit")
+        or ph_d07a_preinventory_authority.get("input_evidence_tree")
+        != ph_d06_attestation.get("evidence_tree")
+        or ph_d07a_preinventory_authority.get("input_evidence_payload_digest")
+        != ph_d06_attestation.get("evidence_payload_digest")
+        or ph_d07a_preinventory_authority.get("phase_entry_approval_digest")
+        != ph_d06_result_approval.get("approval_artifact_digest")
+        or ph_d07a_preinventory_authority.get("phase_entry_decision_digest")
+        != ph_d06_result_decision.get("owner_decision_content_digest")
+        or not isinstance(ph_d07a_dirty, dict)
+        or ph_d07a_dirty.get("tracked_file_count") != 32
+        or ph_d07a_dirty.get("aggregate_sha256")
+        != "3bb18c20566ad712e0cbf00604e83da9c7afdecf469d261974da046632a5d1f4"
+        or ph_d07a_dirty.get("allowed_to_modify") is not False
+    ):
+        failures.append("ph_d07a_preinventory:BOUNDARY_MISMATCH")
+
+    expected_teacher_digest = (
+        "hds-arc3-canonical-teacher-corpus-manifest:"
+        "f81183465265bfa9f29208dd788bb3bfd358c23995ab0aeb8ec9549450360aa6"
+    )
+    expected_candidate_digest = (
+        "hds-multi-hypothesis-corpus-manifest:"
+        "82c5f9c26c85686f1f40c53cd7c926995a1371811efb85f359962afefb69169d"
+    )
+    expected_axis_counts = {
+        "ORDERING": 75,
+        "PREDICTED_EFFECT": 25,
+        "RAW_ACTION_MATCH": 75,
+        "STATE_ABSTRACTION": 25,
+        "STEP_PRECONDITION": 75,
+        "TERMINAL_CONTRIBUTION": 75,
+        "TRANSITION": 50,
+    }
+    expected_fit_status_counts = {
+        "FALSIFIED": 259,
+        "LOCAL_EXACT_FIT": 141,
+        "NOT_ELIGIBLE_DG_08": 50,
+    }
+    expected_support_counts = {
+        "FALSIFIED": 259,
+        "INCONCLUSIVE": 50,
+        "LOCAL_EXACT_FIT": 96,
+        "OBSERVED_COMPATIBLE": 45,
+    }
+    manifest_boundaries = ph_d07a_manifest.get("phase_boundaries")
+    ph_d07a_rows = ph_d07a_manifest.get("case_packages")
+    if (
+        ph_d07a_manifest.get("status") != "EXTENSIONAL_FIT_ACCOUNTED"
+        or ph_d07a_manifest.get("teacher_manifest_digest")
+        != expected_teacher_digest
+        or ph_d07a_manifest.get("candidate_manifest_digest")
+        != expected_candidate_digest
+        or ph_d07a_manifest.get("primary_source_manifest_digest_before")
+        != expected_teacher_digest
+        or ph_d07a_manifest.get("primary_source_manifest_digest_after")
+        != expected_teacher_digest
+        or ph_d07a_manifest.get("primary_source_manifest_mutation_count") != 0
+        or (
+            ph_d07a_manifest.get("teacher_case_count"),
+            ph_d07a_manifest.get("teacher_step_count"),
+            ph_d07a_manifest.get("fit_case_package_count"),
+            ph_d07a_manifest.get("candidate_count"),
+            ph_d07a_manifest.get("eligible_fit_evaluation_count"),
+            ph_d07a_manifest.get("rejected_ineligible_candidate_count"),
+            ph_d07a_manifest.get("candidate_step_evaluation_count"),
+            ph_d07a_manifest.get("exact_fit_candidate_count"),
+        )
+        != (25, 11574, 25, 450, 400, 50, 185184, 141)
+        or ph_d07a_manifest.get("axis_candidate_counts")
+        != expected_axis_counts
+        or ph_d07a_manifest.get("fit_status_counts")
+        != expected_fit_status_counts
+        or ph_d07a_manifest.get("mechanism_support_state_counts")
+        != expected_support_counts
+        or ph_d07a_manifest.get("gates")
+        != {
+            "DG-07": "PASS_EXTENSIONAL_FIT_ACCOUNTED",
+            "DG-08": "PASS_PRIVILEGE_REJECTION_PRESERVED",
+            "DG-09": "PASS_FIT_CAUSAL_SEPARATION",
+        }
+        or not isinstance(manifest_boundaries, dict)
+        or any(value != 0 for value in manifest_boundaries.values())
+        or not isinstance(ph_d07a_rows, list)
+        or len(ph_d07a_rows) != 25
+    ):
+        failures.append("ph_d07a_manifest:COVERAGE_OR_BOUNDARY_MISMATCH")
+
+    recomputed_status: Counter[str] = Counter()
+    recomputed_support: Counter[str] = Counter()
+    recomputed_axis: Counter[str] = Counter()
+    recomputed_candidate_steps = 0
+    recomputed_teacher_steps = 0
+    recomputed_exact = 0
+    recomputed_candidate_count = 0
+    seen_case_refs: set[str] = set()
+    if isinstance(ph_d07a_rows, list):
+        for package_index, raw_row in enumerate(ph_d07a_rows):
+            location = f"ph_d07a_package[{package_index}]"
+            if not isinstance(raw_row, dict):
+                failures.append(location + ":ROW_NOT_OBJECT")
+                continue
+            relative = raw_row.get("fit_case_path")
+            if not isinstance(relative, str):
+                failures.append(location + ":PATH_INVALID")
+                continue
+            package_path = root / PH_D07A_ARTIFACT_ROOT / relative
+            try:
+                package_bytes = package_path.read_bytes()
+                package = json.loads(gzip.decompress(package_bytes))
+            except (OSError, gzip.BadGzipFile, json.JSONDecodeError):
+                failures.append(location + ":UNREADABLE")
+                continue
+            if not isinstance(package, dict):
+                failures.append(location + ":NOT_OBJECT")
+                continue
+            failures.extend(
+                _logical_content_digest_failures(
+                    package,
+                    "hds-arc3-extensional-fit-case",
+                    "content_digest",
+                    location,
+                )
+            )
+            case_ref = package.get("teacher_case_ref")
+            results = package.get("fit_results")
+            if (
+                raw_row.get("fit_case_sha256")
+                != hashlib.sha256(package_bytes).hexdigest()
+                or raw_row.get("fit_case_size_bytes") != len(package_bytes)
+                or raw_row.get("fit_case_content_digest")
+                != package.get("content_digest")
+                or raw_row.get("teacher_case_ref") != case_ref
+                or not isinstance(case_ref, str)
+                or case_ref in seen_case_refs
+                or not isinstance(results, list)
+                or len(results) != 18
+            ):
+                failures.append(location + ":BINDING_OR_COVERAGE_MISMATCH")
+                continue
+            seen_case_refs.add(case_ref)
+            recomputed_teacher_steps += package.get("teacher_step_count", 0)
+            recomputed_candidate_steps += package.get(
+                "candidate_step_evaluation_count",
+                0,
+            )
+            for raw_result in results:
+                if not isinstance(raw_result, dict):
+                    failures.append(location + ":RESULT_NOT_OBJECT")
+                    continue
+                failures.extend(
+                    _logical_content_digest_failures(
+                        raw_result,
+                        "hds-arc3-extensional-fit-result",
+                        "content_digest",
+                        location + ".result",
+                    )
+                )
+                recomputed_candidate_count += 1
+                recomputed_status[str(raw_result.get("fit_status"))] += 1
+                recomputed_support[
+                    str(raw_result.get("mechanism_support_state"))
+                ] += 1
+                axis = raw_result.get("comparison_axis")
+                if isinstance(axis, str):
+                    recomputed_axis[axis] += 1
+                recomputed_exact += raw_result.get("exact_fit") is True
+                if (
+                    raw_result.get("causal_support_state")
+                    != "NOT_ESTABLISHED"
+                    or raw_result.get("candidate_selection_state")
+                    != "UNSELECTED"
+                    or raw_result.get("candidate_adoption_state")
+                    != "NOT_ADOPTED"
+                    or raw_result.get("promotion_state") != "NOT_PROMOTED"
+                    or raw_result.get("intervention_execution_state")
+                    != "NOT_RUN_PH_D07A"
+                ):
+                    failures.append(location + ":DOWNSTREAM_STATE_ESCALATED")
+    if (
+        len(seen_case_refs) != 25
+        or recomputed_candidate_count != 450
+        or recomputed_teacher_steps != 11574
+        or recomputed_candidate_steps != 185184
+        or recomputed_exact != 141
+        or dict(sorted(recomputed_status.items())) != expected_fit_status_counts
+        or dict(sorted(recomputed_support.items())) != expected_support_counts
+        or dict(sorted(recomputed_axis.items())) != expected_axis_counts
+    ):
+        failures.append("ph_d07a_packages:RECOMPUTED_AGGREGATE_MISMATCH")
+
+    isolation_processes = ph_d07a_isolation.get("process_results")
+    expected_runtime = {
+        "archive_sha256": (
+            "7ceaf4360f4b4ab44f31d8217cfdc70df8e12b61d9561b4900ee7af87176e50d"
+        ),
+        "asset_name": (
+            "cpython-3.12.13+20260728-x86_64-unknown-linux-gnu-"
+            "install_only_stripped.tar.gz"
+        ),
+        "entry_count": 4522,
+        "executable_sha256": (
+            "1e4461092175d186c4bcdb19ee2849a45d6e4d8d1f6a871e45f63418d52a4e35"
+        ),
+        "mount_path": "/python-runtime",
+        "network_acquisition_during_build": False,
+        "tree_digest": (
+            "hds-ph-d06-python-runtime-tree:"
+            "bb0341f8ca64f9830163873839b08ba8a0cb1f6abb9a56cc9762fb5ce9196d7f"
+        ),
+        "version": "3.12.13",
+    }
+    if (
+        ph_d07a_rebuild.get("status") != "PASS"
+        or ph_d07a_rebuild.get("independent_process_count") != 3
+        or ph_d07a_rebuild.get("comparator_execution_mode")
+        != "SEQUENTIAL_INDEPENDENT_PROCESSES"
+        or ph_d07a_rebuild.get("maximum_concurrent_process_count") != 1
+        or ph_d07a_rebuild.get("compared_file_count_per_build") != 26
+        or ph_d07a_rebuild.get("byte_mismatch_count") != 0
+        or ph_d07a_rebuild.get("candidate_accounting_count") != 450
+        or ph_d07a_rebuild.get("candidate_step_evaluation_count") != 185184
+        or ph_d07a_isolation.get("status")
+        != "PASS_ISOLATED_COMPARATOR_X3"
+        or ph_d07a_isolation.get("independent_process_count") != 3
+        or ph_d07a_isolation.get("comparator_execution_mode")
+        != "SEQUENTIAL_INDEPENDENT_PROCESSES"
+        or ph_d07a_isolation.get("maximum_concurrent_process_count") != 1
+        or ph_d07a_isolation.get("python_runtime") != expected_runtime
+        or ph_d07a_isolation.get("repository_root_visibility_count") != 0
+        or ph_d07a_isolation.get("environment_source_mount_count") != 0
+        or ph_d07a_isolation.get("environment_source_access_count") != 0
+        or ph_d07a_isolation.get("secret_environment_key_count") != 0
+        or ph_d07a_isolation.get("primary_source_write_count") != 0
+        or ph_d07a_isolation.get("candidate_source_write_count") != 0
+        or ph_d07a_isolation.get("network_namespace_pass_count") != 3
+        or ph_d07a_isolation.get("mount_namespace_pass_count") != 3
+        or not isinstance(isolation_processes, list)
+        or len(isolation_processes) != 3
+    ):
+        failures.append("ph_d07a_isolation:BOUNDARY_MISMATCH")
+
+    ph_d07a_contract_authority = ph_d07a_contract.get("authority")
+    ph_d07a_contract_output = ph_d07a_contract.get("output_contract")
+    if (
+        ph_d07a_contract.get("phase_id") != "PH-D07A"
+        or not isinstance(ph_d07a_contract_authority, dict)
+        or ph_d07a_contract_authority.get("work_block_frame_digest")
+        != ph_d07a_frame.get("content_digest")
+        or ph_d07a_contract_authority.get("preinventory_digest")
+        != ph_d07a_preinventory.get("content_digest")
+        or ph_d07a_contract_authority.get("phase_transition_digest")
+        != ph_d07a_transition.get("content_digest")
+        or ph_d07a_contract_authority.get("phase_entry_approval_digest")
+        != ph_d06_result_approval.get("approval_artifact_digest")
+        or ph_d07a_contract_authority.get("phase_entry_decision_digest")
+        != ph_d06_result_decision.get("owner_decision_content_digest")
+        or not isinstance(ph_d07a_contract_output, dict)
+        or ph_d07a_contract_output.get("fit_manifest_digest")
+        != ph_d07a_manifest.get("content_digest")
+        or ph_d07a_contract_output.get("rebuild_x3_digest")
+        != ph_d07a_rebuild.get("content_digest")
+        or ph_d07a_contract_output.get("isolation_report_digest")
+        != ph_d07a_isolation.get("content_digest")
+        or ph_d07a_contract_output.get("fit_report_digest")
+        != ph_d07a_fit_report.get("content_digest")
+    ):
+        failures.append("ph_d07a_contract:AUTHORITY_OR_OUTPUT_MISMATCH")
+
+    if (
+        ph_d07a_fit_report.get("status") != "EXTENSIONAL_FIT_ACCOUNTED"
+        or ph_d07a_fit_report.get("teacher_manifest_digest")
+        != expected_teacher_digest
+        or ph_d07a_fit_report.get("candidate_manifest_digest")
+        != expected_candidate_digest
+        or ph_d07a_fit_report.get("fit_manifest_digest")
+        != ph_d07a_manifest.get("content_digest")
+        or ph_d07a_fit_report.get("rebuild_x3_digest")
+        != ph_d07a_rebuild.get("content_digest")
+        or ph_d07a_fit_report.get("isolation_report_digest")
+        != ph_d07a_isolation.get("content_digest")
+        or ph_d07a_fit_report.get("gates")
+        != {"DG-07": "PASS", "DG-08": "PASS", "DG-09": "PASS"}
+        or any(
+            ph_d07a_fit_report.get(field) != 0
+            for field in (
+                "candidate_selection_count",
+                "candidate_adoption_count",
+                "causal_support_count",
+                "real_intervention_execution_count",
+                "rule_promotion_count",
+                "primary_source_manifest_mutation_count",
+            )
+        )
+    ):
+        failures.append("ph_d07a_fit_report:GATE_OR_BINDING_MISMATCH")
 
     source_inventory = _load_object(root, PH_D01A_SOURCE_INVENTORY_PATH)
     failures.extend(
@@ -6135,6 +6694,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "ph_d03b_status",
             "ph_d05_status",
             "ph_d06_status",
+            "ph_d07a_status",
             "ph_r00_owner_authorization",
             "ph_r00_status",
             "ph_r1_status",
@@ -6149,11 +6709,12 @@ def validate_repository(root: Path) -> dict[str, object]:
     if not isinstance(active_work_block, dict):
         failures.append("governance:ACTIVE_WORK_BLOCK_MISSING")
     elif (
-        active_work_block.get("phase_id") != "PH-D06"
-        or active_work_block.get("path") != PH_D06_FRAME_PATH.as_posix()
-        or active_work_block.get("content_digest") != ph_d06_frame.get("content_digest")
+        active_work_block.get("phase_id") != "PH-D07A"
+        or active_work_block.get("path") != PH_D07A_FRAME_PATH.as_posix()
+        or active_work_block.get("content_digest")
+        != ph_d07a_frame.get("content_digest")
         or active_work_block.get("transition_digest")
-        != ph_d06_transition.get("content_digest")
+        != ph_d07a_transition.get("content_digest")
         or active_work_block.get("runtime_capability_addition_count") != 0
         or active_work_block.get(
             "external_irreversible_actions_authorized"
@@ -6164,17 +6725,17 @@ def validate_repository(root: Path) -> dict[str, object]:
     governed_entry_approval = governance.get("phase_entry_approval")
     if not isinstance(governed_entry_approval, dict) or (
         governed_entry_approval.get("approval_artifact_digest")
-        != ph_d05_result_approval.get("approval_artifact_digest")
+        != ph_d06_result_approval.get("approval_artifact_digest")
         or governed_entry_approval.get("decision_capture_digest")
-        != ph_d05_result_decision.get("owner_decision_content_digest")
+        != ph_d06_result_decision.get("owner_decision_content_digest")
         or governed_entry_approval.get("target_artifact_digest")
-        != ph_d05_attestation.get("evidence_payload_digest")
+        != ph_d06_attestation.get("evidence_payload_digest")
         or governed_entry_approval.get("target_evidence_commit")
-        != ph_d05_attestation.get("evidence_commit")
-        or governed_entry_approval.get("from_phase") != "PH-D05"
-        or governed_entry_approval.get("to_phase") != "PH-D06"
+        != ph_d06_attestation.get("evidence_commit")
+        or governed_entry_approval.get("from_phase") != "PH-D06"
+        or governed_entry_approval.get("to_phase") != "PH-D07A"
     ):
-        failures.append("governance:PH_D06_ENTRY_APPROVAL_MISMATCH")
+        failures.append("governance:PH_D07A_ENTRY_APPROVAL_MISMATCH")
     governed_source_blind = governance.get("source_blind_execution_evidence")
     if not isinstance(governed_source_blind, dict) or (
         governed_source_blind.get("plan_digest")
@@ -6217,6 +6778,51 @@ def validate_repository(root: Path) -> dict[str, object]:
         != expected_ph_d06_runtime_evidence
     ):
         failures.append("governance:CURRENT_CANDIDATE_SOURCE_BLIND_MISMATCH")
+    governed_extensional_fit = governance.get(
+        "current_extensional_fit_evidence"
+    )
+    if not isinstance(governed_extensional_fit, dict) or (
+        governed_extensional_fit.get("path")
+        != PH_D07A_FIT_REPORT_PATH.as_posix()
+        or governed_extensional_fit.get("record_digest")
+        != ph_d07a_fit_report.get("content_digest")
+        or governed_extensional_fit.get("fit_manifest_digest")
+        != ph_d07a_manifest.get("content_digest")
+        or governed_extensional_fit.get("isolation_report_digest")
+        != ph_d07a_isolation.get("content_digest")
+        or governed_extensional_fit.get("rebuild_x3_digest")
+        != ph_d07a_rebuild.get("content_digest")
+        or governed_extensional_fit.get("role_id")
+        != "DISTILLATION_COMPARATOR"
+        or governed_extensional_fit.get("independent_process_count") != 3
+        or governed_extensional_fit.get("comparator_execution_mode")
+        != "SEQUENTIAL_INDEPENDENT_PROCESSES"
+        or governed_extensional_fit.get("maximum_concurrent_process_count")
+        != 1
+        or governed_extensional_fit.get("teacher_case_count") != 25
+        or governed_extensional_fit.get("teacher_step_count") != 11574
+        or governed_extensional_fit.get("candidate_accounting_count") != 450
+        or governed_extensional_fit.get("eligible_fit_evaluation_count")
+        != 400
+        or governed_extensional_fit.get("rejected_ineligible_candidate_count")
+        != 50
+        or governed_extensional_fit.get("candidate_step_evaluation_count")
+        != 185184
+        or governed_extensional_fit.get("exact_fit_candidate_count") != 141
+        or governed_extensional_fit.get("status")
+        != "EXTENSIONAL_FIT_ACCOUNTED"
+        or any(
+            governed_extensional_fit.get(field) != 0
+            for field in (
+                "candidate_selection_count",
+                "causal_support_count",
+                "real_intervention_execution_count",
+                "rule_promotion_count",
+                "primary_source_manifest_mutation_count",
+            )
+        )
+    ):
+        failures.append("governance:CURRENT_EXTENSIONAL_FIT_MISMATCH")
     governed_invalidation = governance.get("downstream_invalidation_evidence")
     if not isinstance(governed_invalidation, dict) or (
         governed_invalidation.get("path")
@@ -6295,7 +6901,7 @@ def validate_repository(root: Path) -> dict[str, object]:
                 )
 
     return {
-        "check_count": 86,
+        "check_count": 87,
         "failure_count": len(failures),
         "failures": sorted(set(failures)),
         "status": "PASS" if not failures else "FAIL",

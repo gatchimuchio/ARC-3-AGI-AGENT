@@ -5,9 +5,9 @@ and behavioral boundary is the repository-root `SCOPE_LOCK.md`.
 
 ## Current authority status
 
-`PH-D06` is the only active phase. PH-D05 is Owner-approved against exact
-canonical teacher-corpus implementation, replay, deterministic rebuild,
-evidence, and content-specific decision/approval commits. Existing pre-audit PH-D01A
+`PH-D07A` is the only active phase. PH-D06 is Owner-approved against exact
+multi-hypothesis candidate generation, source-blind execution, deterministic
+rebuild, evidence, and content-specific decision/approval commits. Existing pre-audit PH-D01A
 through PH-D03A phase records remain historical; colliding PH-D01B, PH-D02A,
 PH-D02B, PH-D02C, and PH-D03A control artifacts are preserved under
 `control/rev3/HISTORICAL_PRE_AUDIT/PH-D01B/` and
@@ -213,7 +213,7 @@ public winning recordings into a deterministic canonical teacher corpus:
   causal assertion, intervention, promotion, Bridge, Runtime, official, and
   Kaggle counts remain zero.
 
-The current `PH-D06` work block consumes that canonical corpus through three
+The Owner-approved `PH-D06` work block consumes that canonical corpus through three
 source-blind, network-isolated executor processes and deterministically emits:
 
 - exactly 18 candidates for each of 25 teacher cases;
@@ -245,6 +245,30 @@ The archive and extracted runtime remain outside Git. The build performs no
 network acquisition and rejects a missing, modified, writable-in-namespace,
 or version-mismatched runtime before candidate generation.
 
+The current `PH-D07A` work block accounts the trajectory-local observational
+fit of all 450 PH-D06 candidates against the immutable canonical corpus:
+
+- all 400 executable candidates run over every step in their own teacher
+  trajectory, totaling 11,574 teacher steps and 185,184 candidate-step
+  evaluations;
+- all 50 DG-08 privilege adversaries remain ineligible and are never executed;
+- seven declared comparison axes are accounted without treating an unclaimed
+  axis as a match;
+- `LOCAL_EXACT_FIT`, `FALSIFIED`, `INCONCLUSIVE_RESOURCE`, and
+  `NOT_ELIGIBLE_DG_08` remain observational classifications only;
+- positive mechanism support is separate from exact Boolean compatibility,
+  while causal support, selection, adoption, intervention, and promotion stay
+  at zero;
+- 25 fit packages and one manifest are rebuilt byte-identically by three fresh,
+  network-isolated comparator processes executed sequentially within the
+  pinned memory envelope;
+- canonical teacher and candidate manifest digests are checked before and after
+  comparison and are never mutated.
+
+PH-D07A emits Derived Distillation Evidence for PH-D07B. It does not establish
+a unique mechanism, run an intervention, approve a Rule, create a
+StructureBundle, or add Bridge/Runtime capability.
+
 Use exactly Python 3.12.13. From the repository root, set the two paths to a
 content-verified external cache before the PH-D06 build:
 
@@ -256,6 +280,8 @@ PYTHONPATH=distillation/src "$ARC3_PH_D06_PYTHON_RUNTIME_ROOT/bin/python3" \
   scripts/build_ph_d06_hypothesis_candidates.py --write
 PYTHONPATH=distillation/src "$ARC3_PH_D06_PYTHON_RUNTIME_ROOT/bin/python3" \
   scripts/build_ph_d06_hypothesis_candidates.py --verify
+python3 scripts/build_ph_d07a_exact_fit.py --write
+python3 scripts/build_ph_d07a_exact_fit.py --verify
 PYTHONPATH=distillation/src python -m pytest distillation/tests
 PYTHONPATH=distillation/src python -m pytest \
   distillation/tests/unit/test_canonical.py

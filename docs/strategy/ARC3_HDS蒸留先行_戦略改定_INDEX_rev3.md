@@ -3,9 +3,10 @@
 - Package status: `OWNER_APPROVED`
 - Installation status: `INSTALLED`
 - PH-R-1 status: `OWNER_APPROVED_PASS`
-- Current work class: `PH-D06_MULTI_HYPOTHESIS_CANDIDATE_GENERATION`
-- Active phase: `PH-D06`
-- `PH-D06`: `IN_PROGRESS`
+- Current work class: `PH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTING`
+- Active phase: `PH-D07A`
+- `PH-D07A`: `IN_PROGRESS`
+- `PH-D06`: `OWNER_APPROVED_PASS`
 - `PH-D05`: `OWNER_APPROVED_PASS`
 - `PH-D03B`: `OWNER_APPROVED_PASS`
 - `PH-D03A`: `OWNER_APPROVED_PASS`
@@ -76,7 +77,7 @@ S5/P22 compiled policy = historical/quarantine
 
 既存成果物は削除しない。監査是正後のOwner承認とStrategy Installationは成立したが、監査前成果物を現在のPhase通過証拠またはactive selectorとして使用しない。
 
-## PH-D05承認済み証拠とPH-D06現行境界
+## PH-D06承認済み証拠とPH-D07A現行境界
 
 - source-blind三roleは別process・別mount projectionで固定し、Executor/Auditorのenvironment source mountとrepository-root visibilityを0件として検証する。
 - 現行environment/run bindingにより監査前PH-D02B成果物3件が失効することを`distillation/artifacts/reports/ph_d01b_downstream_invalidation.json`へexact digest付きで記録する。
@@ -94,11 +95,14 @@ S5/P22 compiled policy = historical/quarantine
 - PH-D05ではexact 25 raw recordingを外部cacheでbyte検証し、全25 game／183 level／11,574 canonical actionをlossless canonical trajectoryへ正規化し、exact evidenceへOwner承認を拘束済みである。
 - strict OFFLINE replay x3はcanonical frame／action／availability／terminal／progress mismatch 0、source pre/post identity、network denial、secret scrub、write allowlist、fixed seedを必須とする。
 - canonical manifest、25 package、normalization reportは独立3 processでbyte-identical rebuildする。
-- PH-D06では25 teacher caseごとに18候補、合計450候補をsource-blind processで生成する。各caseは16 executable typed IRと、answer-copy／identity-routingを生成後に拒否した2 adversarial candidateを持つ。
+- PH-D06では25 teacher caseごとに18候補、合計450候補をsource-blind processで生成し、exact evidenceへOwner承認を拘束済みである。各caseは16 executable typed IRと、answer-copy／identity-routingを生成後に拒否した2 adversarial candidateを持つ。
 - selector familyとoperator／ordering familyの異なる非strawman代替を保持し、candidate auto-adoption、teacher fit、因果主張、intervention、promotionをすべて0に固定する。
 - candidate manifestと25 packageは独立3 processでbyte-identical rebuildし、Executorへのenvironment source mount、repository-root visibility、network、secret継承を0件として検証する。
 - source-blind実行はGit外のexact Python 3.12.13 runtimeに固定し、archive SHA-256、4,522-entry tree digest、interpreter digestを3 processすべてで一致させる。build中のnetwork取得とruntimeのGit格納は認めない。
-- 現行境界は`MULTI_HYPOTHESIS_CORPUS_COMPLETE`までである。PH-D07A teacher fit、PH-D07B intervention、Rule promotion、Bridge、Runtimeは開始しない。
+- PH-D07Aでは400 executable candidateを各自のteacher trajectory全stepで実行し、25 case／11,574 teacher step／185,184 candidate-stepを会計する。50 DG-08 candidateは非適格のまま実行しない。
+- RAW_ACTION_MATCH、STEP_PRECONDITION、PREDICTED_EFFECT、STATE_ABSTRACTION、TRANSITION、ORDERING、TERMINAL_CONTRIBUTIONの7 axisを、未宣言axisの適合補完なしで記録する。
+- comparatorはrepository root、environment source、network、secretから分離したfresh processとし、25 fit packageとmanifestを3 processでbyte-identical rebuildする。メモリ上限内での安全性を保つためprocessは逐次起動するが、各processの独立性は維持する。
+- 現行境界は`EXTENSIONAL_FIT_ACCOUNTED`までである。LOCAL_EXACT_FITはtrajectory-local observational compatibilityのみであり、PH-D07B intervention、causal support、candidate selection／adoption、Rule promotion、Bridge、Runtimeは開始しない。
 
 ## 機械可読契約
 
@@ -126,6 +130,7 @@ S5/P22 compiled policy = historical/quarantine
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V13.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V14.json`
 - `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V15.json`
+- `docs/strategy/contracts/REV3_CURRENT_SELECTOR_SCHEMA_V16.json`
 - `docs/strategy/contracts/POST_AUDIT_CAUSAL_IR_CONTRACT_V1.json`
 - `docs/strategy/contracts/CLAIM_REGISTRY_REV3.json`
 
