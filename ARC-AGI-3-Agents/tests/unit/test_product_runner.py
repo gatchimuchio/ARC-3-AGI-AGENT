@@ -64,16 +64,19 @@ class _RuntimeReport:
 
 
 class _ProductAgent:
-    next_progress = iter((91, 92))
+    progress_values: tuple[int, ...] = (91, 92)
+    call_count = 0
 
     def __init__(self, **kwargs: object) -> None:
         assert kwargs["record"] is False
         self.runtime_report: _RuntimeReport | None = None
 
     def main(self) -> None:
+        progress = self.progress_values[type(self).call_count]
+        type(self).call_count += 1
         self.runtime_report = _RuntimeReport(
             actions_executed=128,
-            progress_count=next(self.next_progress),
+            progress_count=progress,
         )
 
 
@@ -89,7 +92,7 @@ def test_product_session_closes_known_budget_impossibility() -> None:
 
 
 def test_product_runner_reports_endpoint_metrics_without_false_completion() -> None:
-    _ProductAgent.next_progress = iter((91, 92))
+    _ProductAgent.call_count = 0
 
     report = run_arc3_completion_product(
         arcade=_Arcade(),
