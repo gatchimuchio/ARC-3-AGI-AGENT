@@ -1,0 +1,50 @@
+{
+  "schema_version": "arc3-rev4-current-task-v1",
+  "strategy_id": "ARC3_HDS_DIRECT_STRUCTURE_AND_IMPERATIVE_P_REV4",
+  "strategy_status": "OWNER_DIRECTIVE_INSTALLED",
+  "active_phase": "P1_TASK_DECOMPOSITION",
+  "current_work_class": "DECOMPOSE_ALL_25_GAMES_183_LEVELS_INTO_HDS_TASK_RECORDS",
+  "objective": "Extract agent-consumable generic structures and imperative P from ARC3 teacher trajectories, then integrate them into one ARC3 agent.",
+  "authoritative_spec": "docs/strategy/ARC3_HDS直接抽出_汎用構造命令形P_実装仕様書_rev4.md",
+  "authoritative_roadmap": "docs/roadmap/ARC3_HDS直接抽出_開発ロードマップ_rev4.md",
+  "primary_inputs": [
+    "distillation/artifacts/teacher/arc3/ph_d05_v1/manifest.json",
+    "distillation/artifacts/teacher/arc3/ph_d05_v1/packages/*.json.gz",
+    "raw teacher recordings and rendered before/after evidence",
+    "known answers and successful action trajectories"
+  ],
+  "required_outputs": [
+    "distillation/artifacts/decomposition/arc3/rev4/manifest.json",
+    "distillation/artifacts/decomposition/arc3/rev4/cases/*.json.gz",
+    "distillation/artifacts/decomposition/arc3/rev4/report.json"
+  ],
+  "exit_conditions": {
+    "game_count": 25,
+    "level_count": 183,
+    "orphan_success_step_count": 0,
+    "round_trip_source_binding": true,
+    "terminal_contribution_tracked": true,
+    "status": "TASK_DECOMPOSITION_COMPLETE"
+  },
+  "allowed": [
+    "use known answers and successful trajectories for extraction",
+    "use maximum available teacher information before subtracting identity and replay dependencies",
+    "reuse existing IR interpreter and canonical trajectory assets",
+    "implement test and repair continuously inside P1"
+  ],
+  "forbidden": [
+    "create a new repository",
+    "add governance-only phases",
+    "treat HDS formalization as the primary product",
+    "start P3 or P4 before P1 and P2 outputs exist",
+    "use game or level identity as runtime action routing",
+    "treat fixed trajectory replay as generic P"
+  ],
+  "legacy_rev3": {
+    "classification": "HISTORICAL_SUPERSEDED",
+    "preserve": true,
+    "current_selector": false
+  },
+  "runtime_activation_status": "SUSPEND",
+  "official_status": "NOT_STARTED"
+}
