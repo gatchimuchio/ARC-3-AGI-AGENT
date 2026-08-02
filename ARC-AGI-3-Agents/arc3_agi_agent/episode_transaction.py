@@ -38,6 +38,27 @@ class EpisodeTransaction:
     base_session_global_digest: str
     consolidation_enabled: bool = False
     state: str = field(default="ACTIVE", init=False)
+    level_transition_ordinal: int = field(default=0, init=False)
+
+    @staticmethod
+    def _level_handle(
+        *,
+        episode_handle_digest: str,
+        previous_level_handle_digest: str,
+        transition_ordinal: int,
+        boundary_ordinal: int,
+        memory: SemanticMemory,
+    ) -> str:
+        return "level-handle:" + digest_object(
+            {
+                "episode_handle_digest": episode_handle_digest,
+                "previous_level_handle_digest": previous_level_handle_digest,
+                "transition_ordinal": transition_ordinal,
+                "boundary_ordinal": boundary_ordinal,
+                "base_version": memory.version,
+                "base_active_digest": _active_digest(memory),
+            }
+        )
 
     @classmethod
     def begin(
@@ -60,12 +81,12 @@ class EpisodeTransaction:
         except Exception:
             control.end_episode(episode_handle_digest)
             raise
-        level_handle_digest = "level-handle:" + digest_object(
-            {
-                "episode_control_scope": "ACTIVE",
-                "base_version": memory.version,
-                "base_active_digest": _active_digest(memory),
-            }
+        level_handle_digest = cls._level_handle(
+            episode_handle_digest=episode_handle_digest,
+            previous_level_handle_digest="",
+            transition_ordinal=0,
+            boundary_ordinal=0,
+            memory=memory,
         )
         try:
             control.begin_level(level_handle_digest)
@@ -95,6 +116,53 @@ class EpisodeTransaction:
         self.control.require_episode(episode_handle_digest)
         self.overlay.require_episode(episode_handle_digest)
 
+    def transition_level(
+        self,
+        *,
+        episode_handle_digest: str,
+        preserve_causal_memory: bool,
+        boundary_ordinal: int,
+    ) -> tuple[str, str]:
+        """Close one level-attempt scope and open the next opaque scope.
+
+        Active semantic records are HDS-authorized, post-outcome causal
+        evidence.  A failed environment attempt may therefore preserve them
+        for the retry while working memory is still cleared at the boundary.
+        Episode close remains the authority that prevents failed-game leakage.
+        """
+
+        self.require_active(episode_handle_digest)
+        if (
+            isinstance(boundary_ordinal, bool)
+            or not isinstance(boundary_ordinal, int)
+            or boundary_ordinal < 0
+        ):
+            raise ValueError("EPISODE_TRANSACTION_LEVEL_BOUNDARY_INVALID")
+        closed_handle = self.level_handle_digest
+        self.overlay.end_level(
+            closed_handle,
+            succeeded=preserve_causal_memory,
+        )
+        self.control.end_level(closed_handle)
+        self.level_transition_ordinal += 1
+        next_handle = self._level_handle(
+            episode_handle_digest=episode_handle_digest,
+            previous_level_handle_digest=closed_handle,
+            transition_ordinal=self.level_transition_ordinal,
+            boundary_ordinal=boundary_ordinal,
+            memory=self.memory,
+        )
+        try:
+            self.control.begin_level(next_handle)
+            self.overlay.begin_level(next_handle)
+        except Exception:
+            if self.control.current_level_handle_digest == next_handle:
+                self.control.end_level(next_handle)
+            self.state = "FAILED_CLOSED"
+            raise
+        self.level_handle_digest = next_handle
+        return closed_handle, next_handle
+
     def close(
         self,
         *,
@@ -123,23 +191,27 @@ class EpisodeTransaction:
         self.control.end_episode(episode_handle_digest)
         final_digest = _active_digest(self.memory)
         if not succeeded and (
-            receipt.final_active_digest
-            != self.base_session_global_digest
+            receipt.final_active_digest != self.base_session_global_digest
             or final_digest != self.base_session_global_digest
             or receipt.promoted
         ):
             self.state = "FAILED_CLOSED"
             raise RuntimeError("EPISODE_TRANSACTION_GLOBAL_DIGEST_LEAK")
-        if succeeded and not self.consolidation_enabled and (
-            receipt.final_active_digest
-            != self.base_session_global_digest
-            or final_digest != self.base_session_global_digest
-            or receipt.promoted
+        if (
+            succeeded
+            and not self.consolidation_enabled
+            and (
+                receipt.final_active_digest != self.base_session_global_digest
+                or final_digest != self.base_session_global_digest
+                or receipt.promoted
+            )
         ):
             self.state = "FAILED_CLOSED"
             raise RuntimeError("EPISODE_TRANSACTION_GLOBAL_DIGEST_LEAK")
-        if succeeded and self.consolidation_enabled and (
-            receipt.final_active_digest != final_digest
+        if (
+            succeeded
+            and self.consolidation_enabled
+            and (receipt.final_active_digest != final_digest)
         ):
             self.state = "FAILED_CLOSED"
             raise RuntimeError("EPISODE_TRANSACTION_PROMOTION_DIGEST_MISMATCH")

@@ -12,7 +12,7 @@ from typing import Final
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH: Final = Path("docs/strategy/REV4_CURRENT_AUTHORITY_MANIFEST.json")
 PRODUCT_ID: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
-ACTIVE_MILESTONE: Final = "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE"
+ACTIVE_MILESTONE: Final = "M2_PRODUCT_CAPABILITY_BUNDLE"
 
 AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     ("AGENTS.md", "CURRENT_EXECUTION_CONTROL"),
@@ -83,8 +83,28 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_COMPUTE_SUBJECT",
     ),
     (
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_types.py",
+        "PRODUCT_TYPED_RUNTIME_CONTRACT",
+    ),
+    (
         "ARC-AGI-3-Agents/arc3_agi_agent/generic_env.py",
         "PRODUCT_ENVIRONMENT_ADAPTER",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/sample_observation.py",
+        "PRODUCT_OFFICIAL_FRAME_PROJECTION",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_runtime.py",
+        "PRODUCT_CJM_RUNTIME_LOOP",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_session.py",
+        "PRODUCT_SESSION_AND_LEVEL_SCOPE",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/episode_transaction.py",
+        "PRODUCT_LEVEL_MEMORY_TRANSACTION",
     ),
     (
         "ARC-AGI-3-Agents/arc3_agi_agent/generic_memory.py",
@@ -118,6 +138,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
         "PRODUCT_ACCEPTANCE_RUNNER",
     ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/product_runtime_surface.py",
+        "PRODUCT_M1_RUNTIME_SURFACE_ACCEPTANCE",
+    ),
     ("ARC-AGI-3-Agents/pyproject.toml", "PRODUCT_PACKAGE_ENTRYPOINT"),
     (
         "scripts/validate_rev4_product_governance.py",
@@ -132,6 +156,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_RESOURCE_BOUND_MEASUREMENT",
     ),
     (
+        "ARC-AGI-3-Agents/scripts/run_m1_official_runtime_surface_acceptance.py",
+        "PRODUCT_M1_RUNTIME_SURFACE_COMMAND",
+    ),
+    (
         "analysis/product/rev4/product_resource_bounds.json",
         "PRODUCT_RESOURCE_BOUND_EVIDENCE",
     ),
@@ -142,6 +170,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     (
         "analysis/product/rev4/current_product_baseline.json",
         "PRODUCT_M0_ALL_25_BASELINE_EVIDENCE",
+    ),
+    (
+        "analysis/product/rev4/m1_official_runtime_surface.json",
+        "PRODUCT_M1_OFFICIAL_RUNTIME_SURFACE_EVIDENCE",
     ),
     (
         "ARC-AGI-3-Agents/tests/unit/test_product_runner.py",
@@ -162,6 +194,14 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     (
         "ARC-AGI-3-Agents/tests/unit/test_product_runtime_performance_invariants.py",
         "PRODUCT_RUNTIME_PERFORMANCE_REGRESSION_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_m1_official_runtime_surface.py",
+        "PRODUCT_M1_RUNTIME_SURFACE_UNIT_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/integration/test_m1_official_all25_runtime_surface.py",
+        "PRODUCT_M1_RUNTIME_SURFACE_INTEGRATION_TEST",
     ),
     (
         "ARC-AGI-3-Agents/tests/integration/test_product_offline_runner.py",

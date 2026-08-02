@@ -3,8 +3,8 @@
   "product_id": "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4",
   "product_name": "ARC3CompletionAgent",
   "product_status": "IN_DEVELOPMENT",
-  "active_milestone": "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE",
-  "current_work_class": "SEAL_M0_PRODUCT_BASELINE_AND_PREPARE_M1_RUNTIME_SURFACE",
+  "active_milestone": "M2_PRODUCT_CAPABILITY_BUNDLE",
+  "current_work_class": "COMPILE_HDS_TEACHER_MATERIAL_INTO_PRODUCT_P_J0_M0",
   "endpoint": {
     "artifact": "ARC3CompletionAgent",
     "official_sample_game_target": 25,
@@ -36,7 +36,8 @@
       "ACTION5",
       "ACTION6_XY",
       "ACTION7"
-    ]
+    ],
+    "frame_list_semantics": "TEMPORAL_CAMERA_RENDERS_WITH_FINAL_ACTION_COMPLETE_COMPOSITE"
   },
   "verified_teacher_material": {
     "game_count": 25,
@@ -69,14 +70,16 @@
     {
       "id": "B-04",
       "component": "ObservationRepresentation",
-      "finding": "primary representation and visible-effect reasoning are final-layer-centric despite multi-layer official games",
-      "status": "BLOCKING"
+      "finding": "all temporal action frames, the final composite, action completion and bounded cross-cycle history are now represented without identity leakage",
+      "status": "CLOSED_M1_OFFICIAL_RUNTIME_SURFACE",
+      "evidence": "analysis/product/rev4/m1_official_runtime_surface.json"
     },
     {
       "id": "B-05",
       "component": "ActionCandidateGeneration",
-      "finding": "ACTION6 candidates are dominated by connected-component anchors and do not cover the full spatial hypothesis surface",
-      "status": "BLOCKING"
+      "finding": "ACTION6 now covers object, cell, region, boundary, path, UI and candidate-position affordances under a bounded current-render contract",
+      "status": "CLOSED_M1_OFFICIAL_RUNTIME_SURFACE",
+      "evidence": "analysis/product/rev4/m1_official_runtime_surface.json"
     },
     {
       "id": "B-06",
@@ -93,20 +96,20 @@
     }
   ],
   "required_implementation": [
-    "ARC-AGI-3-Agents/agents/templates/arc3_completion_agent.py",
-    "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
-    "configurable development ResourceContract with at least 4096 actions per game",
-    "official sample 25-game blocking acceptance execution",
-    "analysis/product/rev4/current_product_baseline.json"
+    "teacher and HDS interpretation consumed by product compilation",
+    "non-compatibility product P-IR program",
+    "product instruction body replacing HybridRelationalInstructionBody",
+    "ARC3 HDS domain profile J0",
+    "sealed semantic memory seed M0",
+    "runtime identity bound to the compiled P J0 M0 bundle"
   ],
   "exit_conditions": {
-    "official_sample_games_started": 25,
-    "budget_impossible_game_count": 0,
-    "adapter_crash_count": 0,
-    "scorecard_lifecycle_leak_count": 0,
-    "active_product_path_count": 1,
-    "baseline_report_complete": true,
-    "status": "PRODUCT_BASELINE_EXECUTABLE"
+    "compiled_product_bundle_count": 1,
+    "compatibility_p_ir_active": false,
+    "hybrid_baseline_instruction_body_active": false,
+    "p_j0_m0_runtime_identity_bound": true,
+    "identity_boundary_passed": true,
+    "status": "PRODUCT_CAPABILITY_BUNDLE_LOADED"
   },
   "current_evidence": {
     "baseline_report_path": "analysis/product/rev4/current_product_baseline.json",
@@ -123,7 +126,17 @@
     "product_endpoint_failures": [
       "PRODUCT_GAME_WIN_COUNT_MISMATCH",
       "PRODUCT_LEVEL_COMPLETION_COUNT_MISMATCH"
-    ]
+    ],
+    "m1_report_path": "analysis/product/rev4/m1_official_runtime_surface.json",
+    "m1_report_sha256": "236dcab45752e4603eb11c202968e852d4d4fb5fdf5ffd0416ae235f06bbe3fb",
+    "m1_exit_status": "OFFICIAL_RUNTIME_SURFACE_COMPLETE",
+    "m1_failure_reasons": [],
+    "m1_inspected_game_count": 25,
+    "m1_total_win_level_count": 183,
+    "m1_hds_authorized_game_count": 25,
+    "m1_external_action_game_count": 25,
+    "m1_reobserved_game_count": 25,
+    "m1_scorecard_closed": true
   },
   "allowed": [
     "reuse GenericAGIRuntime CognitiveSession GenericHDSJudgementSubject SemanticMemory and official adapters",

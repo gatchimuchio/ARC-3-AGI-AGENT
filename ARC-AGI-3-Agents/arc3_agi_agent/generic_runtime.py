@@ -142,11 +142,13 @@ def _rendered_changed(
     before: GenericObservation,
     after: GenericObservation,
 ) -> bool:
+    effect_set = set(after.visible_effects)
+    if effect_set & {"VISIBLE_STATE_CHANGE", "TRANSIENT_ANIMATION_CHANGE"}:
+        return True
+    if effect_set & {"NO_VISIBLE_CHANGE", "INTERFACE_ONLY_CHANGE"}:
+        return False
     if before.rendered_layers and after.rendered_layers:
-        # Candidate computation and the compiled rendered-policy feature
-        # contract both consume the final composited layer. Interface-only
-        # changes in earlier layers must not contaminate P's bounded history.
-        return before.rendered_layers[-1] != after.rendered_layers[-1]
+        return before.composited_view != after.composited_view
     return before.signature != after.signature
 
 
@@ -166,7 +168,7 @@ def _action_effect_record(
             raise ValueError("GENERIC_POINTER_HISTORY_RENDER_REQUIRED")
         x = payload["x"]
         y = payload["y"]
-        matrix = before.rendered_layers[-1]
+        matrix = before.composited_view
         if not (0 <= y < len(matrix) and 0 <= x < len(matrix[y])):
             raise ValueError("GENERIC_POINTER_HISTORY_TARGET_INVALID")
         target_palette = matrix[y][x]
@@ -237,19 +239,13 @@ def outcome_memory_proposals(
     del hypotheses
     selected_policy = evidence_policy or EvidencePolicy()
     if not evidence_episode_nonce:
-        evidence_episode_nonce = "compatibility-episode:" + digest_object(
-            decision_id
-        )
+        evidence_episode_nonce = "compatibility-episode:" + digest_object(decision_id)
     if cycle_index < 0:
         raise ValueError("CAUSAL_MEMORY_CYCLE_INVALID")
     active = {item.memory_id: item for item in memory_records}
     semantic_key = candidate.descriptor.semantic_key
     binding_key = candidate.evidence_binding_key
-    kind = (
-        "HAZARD_MODEL"
-        if attribution.category == "FAILURE"
-        else "ACTION_EFFECT"
-    )
+    kind = "HAZARD_MODEL" if attribution.category == "FAILURE" else "ACTION_EFFECT"
     record_id = causal_record_id(
         kind=kind,
         binding_key=binding_key,
@@ -270,14 +266,10 @@ def outcome_memory_proposals(
         "NO_EFFECT": "NO_EFFECT",
         "VISIBLE_CHANGE": "SUPPORT",
     }[attribution.category]
-    delay_steps = (
-        1 if "DELAYED_EFFECT" in attribution.visible_effects else 0
-    )
+    delay_steps = 1 if "DELAYED_EFFECT" in attribution.visible_effects else 0
     group = evidence_group(
         outcome=outcome,
-        normalized_before_pattern_digest=(
-            binding_key.normalized_state_pattern_digest
-        ),
+        normalized_before_pattern_digest=(binding_key.normalized_state_pattern_digest),
         action_relation_digest=binding_key.action_relation_digest,
         normalized_after_effect_digest="normalized-effect:"
         + digest_object(
@@ -294,9 +286,7 @@ def outcome_memory_proposals(
         event_ids=attribution.evidence,
     )
     prior_groups = prior.evidence_groups if prior is not None else ()
-    group_is_new = group.group_id not in {
-        item.group_id for item in prior_groups
-    }
+    group_is_new = group.group_id not in {item.group_id for item in prior_groups}
     prior_payload = prior.payload() if prior is not None else {}
 
     def prior_count(name: str) -> int:
@@ -313,11 +303,7 @@ def outcome_memory_proposals(
         visible_change_count += 1
     prior_effects_value = prior_payload.get("learned_effects", ())
     prior_learned_effects = (
-        {
-            str(item)
-            for item in prior_effects_value
-            if isinstance(item, str)
-        }
+        {str(item) for item in prior_effects_value if isinstance(item, str)}
         if isinstance(prior_effects_value, (tuple, list))
         else set()
     )
@@ -398,12 +384,8 @@ class GenericAGIRuntime:
     )
 
     def __post_init__(self) -> None:
-        if (
-            not isinstance(self.retain_cycle_objects, bool)
-            or (
-                not self.retain_cycle_objects
-                and self.trace_sink is None
-            )
+        if not isinstance(self.retain_cycle_objects, bool) or (
+            not self.retain_cycle_objects and self.trace_sink is None
         ):
             raise ValueError("GENERIC_RUNTIME_TRACE_RETENTION_INVALID")
         self.session.require_episode(self.episode_handle)
@@ -422,9 +404,7 @@ class GenericAGIRuntime:
         resources = self.session.resource_contract
         return GenericRuntimeConfiguration(
             max_cycles=resources.action_budget_per_episode,
-            max_memory_updates_per_cycle=(
-                resources.max_memory_updates_per_cycle
-            ),
+            max_memory_updates_per_cycle=(resources.max_memory_updates_per_cycle),
         )
 
     @property
@@ -467,6 +447,7 @@ class GenericAGIRuntime:
         authority_events: Sequence[str],
         failure_signatures: Sequence[str],
         decision_context_digest: str,
+        experience_event_digests: Sequence[str] = (),
     ) -> GenericCycleTrace:
         from .generic_types import (
             GenericComputeResult,
@@ -483,6 +464,7 @@ class GenericAGIRuntime:
         update_digest_tuple = tuple(memory_update_digests)
         authority_event_tuple = tuple(authority_events)
         failure_signature_tuple = tuple(failure_signatures)
+        experience_event_digest_tuple = tuple(experience_event_digests)
         runtime_identity_digest = self.session.runtime_identity.digest()
         session_lineage_digest = self.session.lineage_digest
         trace_digest = "generic-cycle-trace:" + digest_object(
@@ -514,6 +496,7 @@ class GenericAGIRuntime:
                 "runtime_identity_digest": runtime_identity_digest,
                 "session_lineage_digest": session_lineage_digest,
                 "decision_context_digest": decision_context_digest,
+                "experience_event_digests": (experience_event_digest_tuple),
             }
         )
         return GenericCycleTrace(
@@ -533,6 +516,7 @@ class GenericAGIRuntime:
             runtime_identity_digest=runtime_identity_digest,
             session_lineage_digest=session_lineage_digest,
             decision_context_digest=decision_context_digest,
+            experience_event_digests=experience_event_digest_tuple,
         )
 
     def run(
@@ -552,6 +536,11 @@ class GenericAGIRuntime:
             raise ValueError(";".join(observation_failures))
         initial_digest = observation.digest()
         self.session.identity_boundary.require_decision_context(observation)
+        initial_level_event_digest = self.session.bind_level_scope(
+            self.episode_handle,
+            progress_count=observation.progress_count,
+            observation_digest=initial_digest,
+        )
         initial_memory_version = self.memory.version
         traces = _TraceCollector(
             retain_cycle_objects=self.retain_cycle_objects,
@@ -564,12 +553,11 @@ class GenericAGIRuntime:
         self.session.ledger.append(
             "RUNTIME_BEGIN",
             {
-                "runtime_identity_digest": (
-                    self.session.runtime_identity.digest()
-                ),
+                "runtime_identity_digest": (self.session.runtime_identity.digest()),
                 "session_lineage_digest": self.session.lineage_digest,
                 "episode_handle_digest": self.episode_handle.handle_digest,
                 "initial_observation_digest": initial_digest,
+                "initial_level_event_digest": initial_level_event_digest,
             },
         )
 
@@ -580,9 +568,7 @@ class GenericAGIRuntime:
             self.session.control.set_remaining_budget(remaining)
             memory_view = self.memory.view()
             decision_context = DecisionContext(
-                observation=DecisionObservation.from_observation(
-                    observation
-                ),
+                observation=DecisionObservation.from_observation(observation),
                 memory_version=memory_view.version,
                 cycle_index=self.session.control.cycle_index,
                 purpose_tokens=tuple(
@@ -644,9 +630,7 @@ class GenericAGIRuntime:
                 decision.selected_candidate_id,
             )
             retrieval_stage = next(
-                item
-                for item in compute_result.stages
-                if item.stage == "retrieve"
+                item for item in compute_result.stages if item.stage == "retrieve"
             )
             authority_events = [command.command_id, decision.decision_id]
             cycle_failures: list[str] = []
@@ -673,29 +657,37 @@ class GenericAGIRuntime:
                         )
                     )
                     break
-                control_rollback_authorization = (
-                    self.hds.authorize_control_rollback(
-                        decision,
-                        compute_result,
-                        observation,
-                    )
+                control_rollback_authorization = self.hds.authorize_control_rollback(
+                    decision,
+                    compute_result,
+                    observation,
                 )
-                authority_events.append(
-                    control_rollback_authorization.authorization_id
-                )
+                authority_events.append(control_rollback_authorization.authorization_id)
                 self.executor.control_rollback_executor.consume(
                     control_rollback_authorization,
                     decision,
                     observation,
                 )
-                request_id = "generic-control-rollback-request:" + digest_object(
-                    {
-                        "authorization": (
-                            control_rollback_authorization.authorization_id
-                        ),
-                        "cycle": cycle_index,
-                    }
-                )[:24]
+                control_experience_events = [
+                    self.session.record_level_reset(
+                        self.episode_handle,
+                        progress_count=observation.progress_count,
+                        observation_digest=observation.digest(),
+                        cycle_index=cycle_index,
+                        reason="HDS_CONTROL_ROLLBACK",
+                    )
+                ]
+                request_id = (
+                    "generic-control-rollback-request:"
+                    + digest_object(
+                        {
+                            "authorization": (
+                                control_rollback_authorization.authorization_id
+                            ),
+                            "cycle": cycle_index,
+                        }
+                    )[:24]
+                )
                 try:
                     result_observation = self.environment.reset_level(
                         request_id=request_id
@@ -722,9 +714,8 @@ class GenericAGIRuntime:
                             memory_update_digests=(),
                             authority_events=authority_events,
                             failure_signatures=cycle_failures,
-                            decision_context_digest=(
-                                decision_context.digest()
-                            ),
+                            decision_context_digest=(decision_context.digest()),
+                            experience_event_digests=(control_experience_events),
                         )
                     )
                     break
@@ -753,29 +744,21 @@ class GenericAGIRuntime:
                         after=result_observation,
                         compatibility_reset=True,
                     )
-                    history_authorization = (
-                        self.hds.authorize_action_history(
-                            decision,
-                            record,
-                            before_observation=observation,
-                            after_observation=result_observation,
-                            history_version=(
-                                self.session.action_history.version
-                            ),
-                            selected_candidate=None,
-                        )
+                    history_authorization = self.hds.authorize_action_history(
+                        decision,
+                        record,
+                        before_observation=observation,
+                        after_observation=result_observation,
+                        history_version=(self.session.action_history.version),
+                        selected_candidate=None,
                     )
-                    authority_events.append(
-                        history_authorization.authorization_id
-                    )
+                    authority_events.append(history_authorization.authorization_id)
                     history_event = self.executor.execute_action_history(
                         self.session.action_history,
                         record,
                         history_authorization,
                     )
-                    rollback_memory_update_digests.append(
-                        history_event.event_digest
-                    )
+                    rollback_memory_update_digests.append(history_event.event_digest)
                 self.hds.observe_outcome(attribution)
                 traces.append(
                     self._cycle_trace(
@@ -788,12 +771,11 @@ class GenericAGIRuntime:
                         result_observation=result_observation,
                         attribution=attribution,
                         memory_query_digest=retrieval_stage.output_digest,
-                        memory_update_digests=(
-                            rollback_memory_update_digests
-                        ),
+                        memory_update_digests=(rollback_memory_update_digests),
                         authority_events=authority_events,
                         failure_signatures=cycle_failures,
                         decision_context_digest=decision_context.digest(),
+                        experience_event_digests=control_experience_events,
                     )
                 )
                 observation = result_observation
@@ -845,12 +827,15 @@ class GenericAGIRuntime:
                 selected,
                 observation,
             )
-            request_id = "generic-action-request:" + digest_object(
-                {
-                    "authorization": action_authorization.authorization_id,
-                    "cycle": cycle_index,
-                }
-            )[:24]
+            request_id = (
+                "generic-action-request:"
+                + digest_object(
+                    {
+                        "authorization": action_authorization.authorization_id,
+                        "cycle": cycle_index,
+                    }
+                )[:24]
+            )
             try:
                 result_observation = self.environment.step(
                     action_id,
@@ -858,9 +843,9 @@ class GenericAGIRuntime:
                     request_id=request_id,
                 )
             except Exception as error:
-                failure = "GENERIC_ENVIRONMENT_EXECUTION_FAILURE:" + type(
-                    error
-                ).__name__
+                failure = (
+                    "GENERIC_ENVIRONMENT_EXECUTION_FAILURE:" + type(error).__name__
+                )
                 failures.append(failure)
                 cycle_failures.append(failure)
                 stop_reason = "SYSTEM_FAULT"
@@ -885,19 +870,16 @@ class GenericAGIRuntime:
             result_failures = result_observation.validate()
             if result_failures:
                 raise ValueError(";".join(result_failures))
-            self.session.identity_boundary.require_decision_context(
-                result_observation
-            )
+            self.session.identity_boundary.require_decision_context(result_observation)
             actions_executed += 1
-            highest_progress = max(
-                highest_progress, result_observation.progress_count
-            )
+            highest_progress = max(highest_progress, result_observation.progress_count)
             attribution = self.hds.attribute(
                 before=observation,
                 after=result_observation,
                 candidate=selected,
             )
             memory_update_digests: list[str] = []
+            experience_event_digests: list[str] = []
             if selected_ablation.memory_write:
                 history_record = _action_effect_record(
                     action_id=action_id,
@@ -913,9 +895,7 @@ class GenericAGIRuntime:
                     history_version=self.session.action_history.version,
                     selected_candidate=selected,
                 )
-                authority_events.append(
-                    history_authorization.authorization_id
-                )
+                authority_events.append(history_authorization.authorization_id)
                 history_event = self.executor.execute_action_history(
                     self.session.action_history,
                     history_record,
@@ -942,13 +922,8 @@ class GenericAGIRuntime:
                     cycle_index=cycle_index,
                     evidence_policy=self.session.hds_config.evidence_policy(),
                 )
-                if (
-                    len(proposals)
-                    > self.configuration.max_memory_updates_per_cycle
-                ):
-                    cycle_failures.append(
-                        "SEMANTIC_MEMORY_MANDATORY_BATCH_SUSPEND"
-                    )
+                if len(proposals) > self.configuration.max_memory_updates_per_cycle:
+                    cycle_failures.append("SEMANTIC_MEMORY_MANDATORY_BATCH_SUSPEND")
                 else:
                     memory_version = self.memory.version
                     memory_authorizations = tuple(
@@ -960,8 +935,7 @@ class GenericAGIRuntime:
                         for proposal in proposals
                     )
                     authority_events.extend(
-                        item.authorization_id
-                        for item in memory_authorizations
+                        item.authorization_id for item in memory_authorizations
                     )
                     receipts = self.executor.execute_memory_batch(
                         self.memory,
@@ -977,13 +951,18 @@ class GenericAGIRuntime:
                         ),
                     )
                     memory_update_digests.extend(
-                        sorted(
-                            {
-                                receipt.event_digest
-                                for receipt in receipts
-                            }
-                        )
+                        sorted({receipt.event_digest for receipt in receipts})
                     )
+            if result_observation.progress_count > observation.progress_count:
+                experience_event_digests.append(
+                    self.session.record_level_transition(
+                        self.episode_handle,
+                        before_progress=observation.progress_count,
+                        after_progress=result_observation.progress_count,
+                        observation_digest=result_observation.digest(),
+                        cycle_index=cycle_index,
+                    )
+                )
             if attribution.category == "FAILURE":
                 cycle_failures.append("GENERIC_GAME_OVER_OBSERVED")
                 if selected_ablation.rollback:
@@ -993,6 +972,15 @@ class GenericAGIRuntime:
                     ):
                         observation_after_cycle = result_observation
                     else:
+                        experience_event_digests.append(
+                            self.session.record_level_reset(
+                                self.episode_handle,
+                                progress_count=(result_observation.progress_count),
+                                observation_digest=(result_observation.digest()),
+                                cycle_index=cycle_index,
+                                reason="GAME_OVER_AUTO_ROLLBACK",
+                            )
+                        )
                         rollback = self.hds.authorize_rollback(
                             decision,
                             attribution,
@@ -1005,13 +993,9 @@ class GenericAGIRuntime:
                             attribution,
                             result_observation,
                         )
-                        observation_after_cycle = (
-                            self.environment.reset_level(
-                                request_id="generic-rollback-request:"
-                                + digest_object(
-                                    rollback.authorization_id
-                                )[:24]
-                            )
+                        observation_after_cycle = self.environment.reset_level(
+                            request_id="generic-rollback-request:"
+                            + digest_object(rollback.authorization_id)[:24]
                         )
                         rollback_failures = observation_after_cycle.validate()
                         if rollback_failures:
@@ -1041,14 +1025,12 @@ class GenericAGIRuntime:
                     authority_events=authority_events,
                     failure_signatures=cycle_failures,
                     decision_context_digest=decision_context.digest(),
+                    experience_event_digests=experience_event_digests,
                 )
             )
             failures.extend(cycle_failures)
             observation = observation_after_cycle
-            if (
-                attribution.category == "FAILURE"
-                and not selected_ablation.rollback
-            ):
+            if attribution.category == "FAILURE" and not selected_ablation.rollback:
                 break
             if result_observation.terminal_state == "WIN":
                 stop_reason = "GOAL_REACHED"

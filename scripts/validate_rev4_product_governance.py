@@ -18,6 +18,9 @@ CLASSIFICATION_PATH: Final = Path("control/rev4/LEGACY_REV3_CLASSIFICATION.json"
 MANIFEST_PATH: Final = Path("docs/strategy/REV4_CURRENT_AUTHORITY_MANIFEST.json")
 RESOURCE_BOUNDS_PATH: Final = Path("analysis/product/rev4/product_resource_bounds.json")
 BASELINE_PATH: Final = Path("analysis/product/rev4/current_product_baseline.json")
+M1_RUNTIME_SURFACE_PATH: Final = Path(
+    "analysis/product/rev4/m1_official_runtime_surface.json"
+)
 PRODUCT_GOVERNANCE_PATH: Final = Path(
     "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py"
 )
@@ -31,7 +34,7 @@ GENERIC_RUNNER_PATH: Final = Path(
 REV3_GOVERNANCE_PATH: Final = Path("ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py")
 PRODUCT_ID: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
 PRODUCT_NAME: Final = "ARC3CompletionAgent"
-ACTIVE_MILESTONE: Final = "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE"
+ACTIVE_MILESTONE: Final = "M2_PRODUCT_CAPABILITY_BUNDLE"
 
 
 def _load_object(root: Path, relative: Path) -> dict[str, Any]:
@@ -86,6 +89,7 @@ def validate_repository(root: Path) -> dict[str, object]:
     classification = _load_object(root, CLASSIFICATION_PATH)
     manifest = _load_object(root, MANIFEST_PATH)
     resource_bounds = _load_object(root, RESOURCE_BOUNDS_PATH)
+    m1_runtime_surface = _load_object(root, M1_RUNTIME_SURFACE_PATH)
 
     check(
         current.get("schema_version") == "arc3-product-current-task-v2",
@@ -99,6 +103,14 @@ def validate_repository(root: Path) -> dict[str, object]:
     check(
         current.get("active_milestone") == ACTIVE_MILESTONE,
         "current_task:ACTIVE_MILESTONE",
+    )
+    check(
+        contract.get("active_milestone") == ACTIVE_MILESTONE,
+        "contract:ACTIVE_MILESTONE",
+    )
+    check(
+        manifest.get("active_milestone") == ACTIVE_MILESTONE,
+        "authority_manifest:ACTIVE_MILESTONE",
     )
     check(
         current.get("current_validator")
@@ -132,6 +144,17 @@ def validate_repository(root: Path) -> dict[str, object]:
         check(
             endpoint.get("fixed_trajectory_playback_allowed") is False,
             "current_task:FIXED_PLAYBACK_ENABLED",
+        )
+    official_contract = current.get("verified_official_contract")
+    check(
+        isinstance(official_contract, dict),
+        "current_task:OFFICIAL_CONTRACT_MISSING",
+    )
+    if isinstance(official_contract, dict):
+        check(
+            official_contract.get("frame_list_semantics")
+            == ("TEMPORAL_CAMERA_RENDERS_WITH_FINAL_ACTION_COMPLETE_COMPOSITE"),
+            "current_task:FRAME_LIST_SEMANTICS",
         )
 
     check(contract.get("product_id") == PRODUCT_ID, "contract:PRODUCT_ID")
@@ -274,6 +297,109 @@ def validate_repository(root: Path) -> dict[str, object]:
             "contract:BASELINE_STATUS",
         )
 
+    m1_acceptance = contract.get("m1_runtime_surface_acceptance")
+    check(isinstance(m1_acceptance, dict), "contract:M1_ACCEPTANCE_MISSING")
+    if isinstance(m1_acceptance, dict):
+        check(
+            m1_acceptance.get("path") == M1_RUNTIME_SURFACE_PATH.as_posix(),
+            "contract:M1_PATH",
+        )
+        check(
+            m1_acceptance.get("status") == "OFFICIAL_RUNTIME_SURFACE_COMPLETE",
+            "contract:M1_STATUS",
+        )
+        check(
+            m1_acceptance.get("game_count") == 25,
+            "contract:M1_GAME_COUNT",
+        )
+        check(
+            m1_acceptance.get("level_count") == 183,
+            "contract:M1_LEVEL_COUNT",
+        )
+        check(
+            m1_acceptance.get("hds_authorized_game_count") == 25,
+            "contract:M1_HDS_AUTHORIZATION_COUNT",
+        )
+        check(
+            m1_acceptance.get("external_action_game_count") == 25,
+            "contract:M1_EXTERNAL_ACTION_COUNT",
+        )
+        check(
+            m1_acceptance.get("reobserved_game_count") == 25,
+            "contract:M1_REOBSERVATION_COUNT",
+        )
+    check(
+        m1_runtime_surface.get("schema_version")
+        == "arc3-product-m1-runtime-surface-v1",
+        "m1_runtime_surface:SCHEMA_VERSION",
+    )
+    check(
+        m1_runtime_surface.get("exit_status") == "OFFICIAL_RUNTIME_SURFACE_COMPLETE",
+        "m1_runtime_surface:EXIT_STATUS",
+    )
+    check(
+        m1_runtime_surface.get("failure_reasons") == [],
+        "m1_runtime_surface:FAILURES_PRESENT",
+    )
+    expected_m1_metrics: dict[str, object] = {
+        "advertised_game_count": 25,
+        "inspected_game_count": 25,
+        "total_win_level_count": 183,
+        "normal_action_union": list(range(1, 8)),
+        "legal_action_union": list(range(8)),
+        "hds_authorized_game_count": 25,
+        "external_action_game_count": 25,
+        "reobserved_game_count": 25,
+        "single_cognitive_session_count": 1,
+        "episode_count": 25,
+        "scorecard_closed": True,
+    }
+    for key, expected in expected_m1_metrics.items():
+        check(
+            m1_runtime_surface.get(key) == expected,
+            f"m1_runtime_surface:{key.upper()}_MISMATCH",
+        )
+    check(
+        set(m1_runtime_surface.get("pointer_categories", []))
+        == {
+            "boundary",
+            "candidate-position",
+            "cell",
+            "object",
+            "path",
+            "region",
+            "ui",
+        },
+        "m1_runtime_surface:POINTER_CATEGORY_MISMATCH",
+    )
+    check(
+        m1_runtime_surface.get("multi_frame_initial_game_count", 0) >= 2,
+        "m1_runtime_surface:MULTI_FRAME_COVERAGE",
+    )
+    m1_rows = m1_runtime_surface.get("rows")
+    check(isinstance(m1_rows, list), "m1_runtime_surface:ROWS_MISSING")
+    if isinstance(m1_rows, list):
+        check(len(m1_rows) == 25, "m1_runtime_surface:ROW_COUNT")
+        check(
+            [row.get("game_ordinal") for row in m1_rows if isinstance(row, dict)]
+            == list(range(25)),
+            "m1_runtime_surface:ROW_ORDINALS",
+        )
+        check(
+            all(
+                isinstance(row, dict)
+                and row.get("external_action_executed") is True
+                and row.get("reobservation_valid") is True
+                and row.get("hds_authorization_valid") is True
+                for row in m1_rows
+            ),
+            "m1_runtime_surface:ROW_RUNTIME_GATE",
+        )
+    check(
+        '"game_id"' not in (root / M1_RUNTIME_SURFACE_PATH).read_text(encoding="utf-8"),
+        "m1_runtime_surface:GAME_ID_LEAK",
+    )
+
     check(
         classification.get("classification") == "HISTORICAL_REUSE_ONLY",
         "classification:ROLE",
@@ -312,6 +438,17 @@ def validate_repository(root: Path) -> dict[str, object]:
         blocker_map.get("B-01", {}).get("status") == "CLOSED_PRODUCT_PATH",
         "current_task:B01_STATUS",
     )
+    for blocker_id in ("B-04", "B-05"):
+        check(
+            blocker_map.get(blocker_id, {}).get("status")
+            == "CLOSED_M1_OFFICIAL_RUNTIME_SURFACE",
+            f"current_task:{blocker_id.replace('-', '')}_STATUS",
+        )
+        check(
+            blocker_map.get(blocker_id, {}).get("evidence")
+            == M1_RUNTIME_SURFACE_PATH.as_posix(),
+            f"current_task:{blocker_id.replace('-', '')}_EVIDENCE",
+        )
     check(
         blocker_map.get("B-07", {}).get("status")
         == "CLOSED_PRODUCT_BASELINE_EXECUTABLE",
@@ -340,6 +477,7 @@ def validate_repository(root: Path) -> dict[str, object]:
 
     runner_source = (root / PRODUCT_RUNNER_PATH).read_text(encoding="utf-8")
     entrypoint_source = (root / PRODUCT_ENTRYPOINT_PATH).read_text(encoding="utf-8")
+    entrypoint_constants = _literal_constants(root / PRODUCT_ENTRYPOINT_PATH)
     rev3_source = (root / REV3_GOVERNANCE_PATH).read_text(encoding="utf-8")
     generic_runner_source = (root / GENERIC_RUNNER_PATH).read_text(encoding="utf-8")
     check(
@@ -361,6 +499,11 @@ def validate_repository(root: Path) -> dict[str, object]:
     check(
         "class ARC3CompletionAgent(GenericAGIAgent)" in entrypoint_source,
         "product_entrypoint:CLASS_MISSING",
+    )
+    check(
+        entrypoint_constants.get("ARC3_COMPLETION_AGENT_PRODUCT_VERSION")
+        == "arc3-completion-agent-product-v0.2",
+        "product_entrypoint:M1_VERSION_MISMATCH",
     )
     check(
         "OfflineGenericEnvironment" in entrypoint_source,
@@ -411,6 +554,32 @@ def validate_repository(root: Path) -> dict[str, object]:
     evidence = current.get("current_evidence")
     check(isinstance(evidence, dict), "current_task:EVIDENCE_MISSING")
     if isinstance(evidence, dict):
+        check(
+            evidence.get("m1_report_path") == M1_RUNTIME_SURFACE_PATH.as_posix(),
+            "current_task:M1_REPORT_PATH",
+        )
+        check(
+            evidence.get("m1_report_sha256")
+            == hashlib.sha256(
+                (root / M1_RUNTIME_SURFACE_PATH).read_bytes()
+            ).hexdigest(),
+            "current_task:M1_REPORT_SHA256",
+        )
+        expected_current_m1: dict[str, object] = {
+            "m1_exit_status": "OFFICIAL_RUNTIME_SURFACE_COMPLETE",
+            "m1_failure_reasons": [],
+            "m1_inspected_game_count": 25,
+            "m1_total_win_level_count": 183,
+            "m1_hds_authorized_game_count": 25,
+            "m1_external_action_game_count": 25,
+            "m1_reobserved_game_count": 25,
+            "m1_scorecard_closed": True,
+        }
+        for key, expected in expected_current_m1.items():
+            check(
+                evidence.get(key) == expected,
+                f"current_task:{key.upper()}_MISMATCH",
+            )
         baseline_path = evidence.get("baseline_report_path")
         baseline = root / str(baseline_path)
         check(
@@ -555,6 +724,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             PRODUCT_ENTRYPOINT_PATH.as_posix(),
             GENERIC_RUNNER_PATH.as_posix(),
             RESOURCE_BOUNDS_PATH.as_posix(),
+            M1_RUNTIME_SURFACE_PATH.as_posix(),
         ):
             check(required in paths, f"authority_manifest:UNBOUND:{required}")
 

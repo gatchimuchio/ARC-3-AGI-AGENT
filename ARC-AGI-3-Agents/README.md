@@ -1,8 +1,11 @@
-# ARC-AGI-3 Agents — P1実行核 / P3証拠compiler / C・J・M単独主体
+# ARC-AGI-3 Agents — ARC3CompletionAgent rev4製品runtime
 
-このディレクトリはARC-AGI-3公式agent基盤に、本リポジトリの
-P1 Layer-0 execution mechanismを統合した実行パッケージです。公式基盤の原READMEは
+このディレクトリはARC-AGI-3公式agent基盤に、`ARC3CompletionAgent`の
+C／J／M／P runtimeを統合した実行パッケージです。公式基盤の原READMEは
 [`UPSTREAM_README.md`](UPSTREAM_README.md) に参照用として保存しています。
+
+現在milestoneは`M2_PRODUCT_CAPABILITY_BUNDLE`です。M0の全25 bounded baselineと、
+M1の全25初期観測・一手実行・再観測runtime surfaceは閉じています。
 
 P3では`arc3_agi_agent.evidence_compiler`を追加し、730件の解析・metadata sourceから
 identity-freeなC/J/M fixtureを生成済みです。P4では共通`InstructionBody`契約、
@@ -12,7 +15,7 @@ P5ではtyped HDS Frameとstandalone Jを実装し、integrated HDSも同じ判�
 active/archiveを持つstandalone Mを実装しました。P7では三pairの固有不足を
 実行監査しました。P8ではfull二周期TrinityとP/J/M因果分離を実証しました。
 P9では全8 subsetを実行し、full setだけがPASSするcertificateを固定しました。
-現在phaseはP10です。
+以下のP1〜P10記録はlegacy実装資産として保持し、現在selectorには使用しません。
 
 ## 現在の実行入口
 
@@ -25,6 +28,13 @@ uv run arc3-completion-product \
   --mode offline \
   --action-budget 4096 \
   --report ../analysis/product/rev4/current_product_baseline.json
+```
+
+M1公式runtime surface acceptance:
+
+```bash
+uv run python scripts/run_m1_official_runtime_surface_acceptance.py \
+  --output ../analysis/product/rev4/m1_official_runtime_surface.json
 ```
 
 同じ`ARC3CompletionAgent`／C・J・M・P runtimeが、ローカルではOFFLINE adapter、

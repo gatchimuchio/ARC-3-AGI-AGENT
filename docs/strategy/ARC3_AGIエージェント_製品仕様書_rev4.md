@@ -213,7 +213,8 @@ ARC3CompletionAgentは、単なる合法action探索器ではなく、少なく�
 
 ### 3.1 観測・表現
 
-- 全render layerの保持と相互関係
+- 一手内の全camera render frameの保持と時系列関係
+- action完了時の最終composited view
 - 時系列frame差分
 - entity／object／region／interfaceの分離
 - role、shape、color、count、position、orientation、topology
@@ -222,7 +223,7 @@ ARC3CompletionAgentは、単なる合法action探索器ではなく、少なく�
 - level progress、terminal、reset、failure
 - animation／delayed effect／action completionの区別
 
-最終composited layerだけへ縮退してはならない。公式サンプルには複数layerを持つgameが存在する。
+最終composited viewだけへ縮退してはならない。公式`FrameDataRaw.frame[]`は空間layerではなく、一回の外部actionが完了するまでにcameraが生成した時系列render列である。途中frameにだけ現れるanimation／delayed effectも保持する。
 
 ### 3.2 タスク・機構同定
 
@@ -439,21 +440,21 @@ known successful max per game = 1519
 
 `create_cognitive_session()`は指定がなければ`compatibility_p_ir_program()`を使用する。これは製品能力bundleではない。
 
-#### B-04 観測縮退
+#### B-04 観測縮退 — M1 CLOSED
 
-Frame adapterは全layerを保持するが、主要representationとeffect差分は最終layer中心である。複数layer・interface・temporal情報を製品表現へ統合する必要がある。
+全action frame、最終composited view、frame間差分、action completion、外部cycle履歴を製品表現へ統合した。公式25環境でframe数保存とidentity境界を実測済みである。
 
-#### B-05 ACTION6候補不足
+#### B-05 ACTION6候補不足 — M1 CLOSED
 
-現行pointer候補はconnected component周辺anchor中心であり、空セル、経路、領域内部、境界、UI、構成候補を十分に生成しない。
+ACTION6候補はobject、cell、region、boundary、path、UI、candidate-positionの7分類を、現観測由来・bounded・重複座標なしで生成する。
 
 #### B-06 目的・機構・計画能力不足
 
 現行Pはactionのprogress／hazard／information scoreを主に計算するが、level目的推定、機構仮説、subgoal、multi-step plan、phase遷移を製品能力として閉じていない。
 
-#### B-07 製品受入未接続
+#### B-07 製品受入未接続 — M0 CLOSED
 
-公式サンプル25 game／183 levelの最終`WIN`を、同一artifactのblocking acceptanceとして使用していない。
+同一artifactの25 game blocking baselineを実行済みである。最終`WIN` 25/25／183/183は引き続き製品endpointであり、未達のままである。
 
 ---
 
@@ -519,7 +520,7 @@ regression count
 - 全25 environmentをopen／closeできる
 - 全action surfaceを送信できる
 - ACTION6 payloadが有効範囲
-- 複数render layerを失わない
+- 一手内の全render frameと最終composited viewを失わない
 - terminal／progressを正しく扱う
 
 ### 9.2 三主体

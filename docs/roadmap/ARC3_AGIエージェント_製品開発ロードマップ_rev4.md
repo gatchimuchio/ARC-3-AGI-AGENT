@@ -6,7 +6,7 @@
 - 対象repository: `gatchimuchio/ARC-3-AGI-AGENT`
 - 日付: `2026-08-02`
 - 状態: `OWNER_PRODUCT_DIRECTIVE_INSTALLED`
-- 現在milestone: `M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE`
+- 現在milestone: `M2_PRODUCT_CAPABILITY_BUNDLE`
 
 ---
 
@@ -107,9 +107,9 @@ one product path
 
 ### Observation Model
 
-- 全render layer
-- composited view
-- layer間relation
+- 一手内の全camera render frame
+- action完了時の最終composited view
+- action frame間のtemporal relation
 - temporal frame history
 - animation／complete-action区別
 - progress／terminal／full reset
@@ -138,12 +138,12 @@ one product path
 ARC3CompletionAgent v0.2
 ```
 
-全25 gameで観測・候補生成・action・再観測が成立する。複数layer gameを含め、情報縮退を起こさない。
+全25 gameで観測・候補生成・J authorization・一手実行・再観測が成立する。複数action frameを持つ初期観測を含め、情報縮退を起こさない。
 
 ## Acceptance
 
 - all 25 initial frames parse
-- all observed layer counts preserved
+- all observed action-frame counts preserved
 - all legal actions represented
 - ACTION6 candidate space includes objects, cells, regions, boundaries, paths, UI candidates
 - terminal／level progress transitions correct
@@ -152,6 +152,18 @@ ARC3CompletionAgent v0.2
 ## Exit
 
 `OFFICIAL_RUNTIME_SURFACE_COMPLETE`
+
+実測証拠: `analysis/product/rev4/m1_official_runtime_surface.json`
+
+```text
+25 / 25 initial frames inspected
+183 total win-level contract
+normal actions 1..7 and RESET control 0 represented
+ACTION6 seven spatial affordance categories represented
+25 / 25 selected emissions consumed J authorization
+25 / 25 external actions executed and reobserved
+identity / descriptor failure 0
+```
 
 ---
 
@@ -184,7 +196,7 @@ applicability boundary
 
 次の命令能力をPへ実装する。
 
-- multi-layer representation
+- temporal action-frame／final-composite representation
 - task/mechanism hypothesis generation
 - counter-hypothesis generation
 - action-effect prediction
@@ -416,18 +428,19 @@ submission accepted or platform failure isolated
 ## 1. 現在作業
 
 ```text
-M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
+M2_PRODUCT_CAPABILITY_BUNDLE
 ```
 
-最初に実装するもの:
+現在実装するもの:
 
-1. 製品entrypoint `ARC3CompletionAgent`
-2. 4096 actionの設定可能Resource Contract
-3. 公式サンプル25 game blocking acceptance runner
-4. current product baseline report
-5. blocker B-01〜B-07の機械可読status
+1. 教師・HDS素材を消費するproduct capability schema
+2. compatibility fixtureではない製品P-IR
+3. baseline scorerではない製品P
+4. ARC3 domain profile J0
+5. sealed semantic seed M0
+6. P／J0／M0を束ねるruntime identityとload gate
 
-HDS軌道分解を先行して大量生産しない。製品runnerを先に成立させ、能力素材は製品へ接続しながら作る。
+HDS軌道分解を独立成果として大量生産しない。解釈した構造は同じwork block内で製品bundleへコンパイルし、runtime load試験まで閉じる。
 
 ---
 

@@ -39,9 +39,7 @@ from .runtime_identity import RuntimeIdentity, build_runtime_identity
 from .schema import digest_object
 
 GENERIC_SESSION_VERSION = "arc3-cognitive-session-v1"
-RUNTIME_MODES = frozenset(
-    {"DEVELOPMENT", "VALIDATION", "LOCKED_FINAL", "COMPETITION"}
-)
+RUNTIME_MODES = frozenset({"DEVELOPMENT", "VALIDATION", "LOCKED_FINAL", "COMPETITION"})
 
 
 @dataclass(frozen=True, slots=True)
@@ -64,13 +62,10 @@ class ResourceContract:
             or not 1 <= self.max_memory_updates_per_cycle <= 64
         ):
             failures.append("RESOURCE_MEMORY_UPDATE_BUDGET_INVALID")
-        if (
-            self.time_budget_seconds is not None
-            and (
-                isinstance(self.time_budget_seconds, bool)
-                or not isinstance(self.time_budget_seconds, (int, float))
-                or self.time_budget_seconds <= 0
-            )
+        if self.time_budget_seconds is not None and (
+            isinstance(self.time_budget_seconds, bool)
+            or not isinstance(self.time_budget_seconds, (int, float))
+            or self.time_budget_seconds <= 0
         ):
             failures.append("RESOURCE_TIME_BUDGET_INVALID")
         return tuple(failures)
@@ -86,10 +81,7 @@ class FrozenPReference:
     def require_unchanged(self) -> None:
         if self.body.digest() != self.logical_digest:
             raise RuntimeError("COGNITIVE_SESSION_P_REFERENCE_CHANGED")
-        if (
-            p_ir_program_logical_digest(self.program)
-            != self.program_logical_digest
-        ):
+        if p_ir_program_logical_digest(self.program) != self.program_logical_digest:
             raise RuntimeError("COGNITIVE_SESSION_P_IR_REFERENCE_CHANGED")
 
 
@@ -126,17 +118,11 @@ class GenericSideEffectExecutor:
     authority_state: AuthorityState = field(repr=False)
     action_executor: ActionAuthorizationExecutor = field(init=False)
     rollback_executor: RollbackAuthorizationExecutor = field(init=False)
-    control_rollback_executor: ControlRollbackAuthorizationExecutor = field(
-        init=False
-    )
+    control_rollback_executor: ControlRollbackAuthorizationExecutor = field(init=False)
 
     def __post_init__(self) -> None:
-        self.action_executor = ActionAuthorizationExecutor(
-            self.authority_state
-        )
-        self.rollback_executor = RollbackAuthorizationExecutor(
-            self.authority_state
-        )
+        self.action_executor = ActionAuthorizationExecutor(self.authority_state)
+        self.rollback_executor = RollbackAuthorizationExecutor(self.authority_state)
         self.control_rollback_executor = ControlRollbackAuthorizationExecutor(
             self.authority_state
         )
@@ -167,10 +153,7 @@ class GenericSideEffectExecutor:
     ) -> tuple[MemoryMutationReceipt, ...]:
         from .generic_memory import MemoryAuthorization
 
-        if not all(
-            isinstance(item, MemoryAuthorization)
-            for item in authorizations
-        ):
+        if not all(isinstance(item, MemoryAuthorization) for item in authorizations):
             raise TypeError("GENERIC_MEMORY_AUTHORIZATION_REQUIRED")
         return memory.apply_authorized_batch(
             proposals,
@@ -228,6 +211,12 @@ class CognitiveSession:
         metadata={"serialize": False},
     )
     _poisoned_reason: str | None = field(
+        default=None,
+        init=False,
+        repr=False,
+        metadata={"serialize": False},
+    )
+    _level_progress: int | None = field(
         default=None,
         init=False,
         repr=False,
@@ -296,9 +285,7 @@ class CognitiveSession:
 
     def begin_episode(self) -> EpisodeHandle:
         if self._poisoned_reason is not None:
-            raise RuntimeError(
-                "COGNITIVE_SESSION_POISONED:" + self._poisoned_reason
-            )
+            raise RuntimeError("COGNITIVE_SESSION_POISONED:" + self._poisoned_reason)
         if self._active_episode is not None:
             raise RuntimeError("COGNITIVE_SESSION_EPISODE_ALREADY_ACTIVE")
         self.p_bundle.require_unchanged()
@@ -328,6 +315,7 @@ class CognitiveSession:
         self.action_history.begin_episode()
         self._active_episode = handle
         self._active_transaction = transaction
+        self._level_progress = None
         self.ledger.append(
             "EPISODE_BEGIN",
             {
@@ -346,6 +334,147 @@ class CognitiveSession:
 
         self._require_handle(handle)
         return handle._evidence_nonce
+
+    def bind_level_scope(
+        self,
+        handle: EpisodeHandle,
+        *,
+        progress_count: int,
+        observation_digest: str,
+    ) -> str:
+        """Bind the initial explicit level-local M scope to rendered state."""
+
+        self._require_handle(handle)
+        if self._level_progress is not None:
+            raise RuntimeError("COGNITIVE_SESSION_LEVEL_SCOPE_ALREADY_BOUND")
+        if (
+            isinstance(progress_count, bool)
+            or not isinstance(progress_count, int)
+            or progress_count < 0
+        ):
+            raise ValueError("COGNITIVE_SESSION_LEVEL_PROGRESS_INVALID")
+        if not isinstance(observation_digest, str) or not observation_digest:
+            raise ValueError("COGNITIVE_SESSION_LEVEL_OBSERVATION_REQUIRED")
+        transaction = self._active_transaction
+        if transaction is None:
+            raise RuntimeError("COGNITIVE_SESSION_TRANSACTION_MISSING")
+        self._level_progress = progress_count
+        return self.ledger.append(
+            "LEVEL_SCOPE_BEGIN",
+            {
+                "episode_handle_digest": handle.handle_digest,
+                "level_handle_digest": transaction.level_handle_digest,
+                "progress_count": progress_count,
+                "observation_digest": observation_digest,
+                "memory_version": self.memory.version,
+            },
+        )
+
+    def record_level_transition(
+        self,
+        handle: EpisodeHandle,
+        *,
+        before_progress: int,
+        after_progress: int,
+        observation_digest: str,
+        cycle_index: int,
+    ) -> str:
+        """Close successful level M and open the next game-local level M."""
+
+        self._require_handle(handle)
+        if (
+            self._level_progress != before_progress
+            or isinstance(after_progress, bool)
+            or not isinstance(after_progress, int)
+            or after_progress <= before_progress
+        ):
+            raise ValueError("COGNITIVE_SESSION_LEVEL_TRANSITION_INVALID")
+        if (
+            isinstance(cycle_index, bool)
+            or not isinstance(cycle_index, int)
+            or cycle_index < 0
+        ):
+            raise ValueError("COGNITIVE_SESSION_LEVEL_CYCLE_INVALID")
+        if not isinstance(observation_digest, str) or not observation_digest:
+            raise ValueError("COGNITIVE_SESSION_LEVEL_OBSERVATION_REQUIRED")
+        transaction = self._active_transaction
+        if transaction is None:
+            raise RuntimeError("COGNITIVE_SESSION_TRANSACTION_MISSING")
+        closed_handle, opened_handle = transaction.transition_level(
+            episode_handle_digest=handle.handle_digest,
+            preserve_causal_memory=True,
+            boundary_ordinal=after_progress,
+        )
+        self._level_progress = after_progress
+        return self.ledger.append(
+            "LEVEL_SCOPE_TRANSITION",
+            {
+                "episode_handle_digest": handle.handle_digest,
+                "closed_level_handle_digest": closed_handle,
+                "opened_level_handle_digest": opened_handle,
+                "before_progress": before_progress,
+                "after_progress": after_progress,
+                "progress_delta": after_progress - before_progress,
+                "observation_digest": observation_digest,
+                "cycle_index": cycle_index,
+                "memory_version": self.memory.version,
+            },
+        )
+
+    def record_level_reset(
+        self,
+        handle: EpisodeHandle,
+        *,
+        progress_count: int,
+        observation_digest: str,
+        cycle_index: int,
+        reason: str,
+    ) -> str:
+        """Rotate retry scope while retaining HDS-attributed causal evidence.
+
+        A GAME_OVER invalidates the attempted environment state, not the
+        observed action/effect evidence.  Working memory is cleared by the
+        level boundary, while causal semantic M remains game-local and is
+        discarded at episode close if the game never succeeds.
+        """
+
+        self._require_handle(handle)
+        if self._level_progress != progress_count:
+            raise ValueError("COGNITIVE_SESSION_LEVEL_RESET_PROGRESS_INVALID")
+        if (
+            isinstance(cycle_index, bool)
+            or not isinstance(cycle_index, int)
+            or cycle_index < 0
+        ):
+            raise ValueError("COGNITIVE_SESSION_LEVEL_CYCLE_INVALID")
+        if not isinstance(observation_digest, str) or not observation_digest:
+            raise ValueError("COGNITIVE_SESSION_LEVEL_OBSERVATION_REQUIRED")
+        if not isinstance(reason, str) or not reason:
+            raise ValueError("COGNITIVE_SESSION_LEVEL_RESET_REASON_REQUIRED")
+        transaction = self._active_transaction
+        if transaction is None:
+            raise RuntimeError("COGNITIVE_SESSION_TRANSACTION_MISSING")
+        closed_handle, opened_handle = transaction.transition_level(
+            episode_handle_digest=handle.handle_digest,
+            preserve_causal_memory=True,
+            boundary_ordinal=progress_count,
+        )
+        return self.ledger.append(
+            "LEVEL_SCOPE_RESET",
+            {
+                "episode_handle_digest": handle.handle_digest,
+                "closed_level_handle_digest": closed_handle,
+                "opened_level_handle_digest": opened_handle,
+                "progress_count": progress_count,
+                "observation_digest": observation_digest,
+                "cycle_index": cycle_index,
+                "reason_digest": digest_object(reason),
+                "attempt_succeeded": False,
+                "causal_memory_preserved": True,
+                "working_memory_cleared": True,
+                "memory_version": self.memory.version,
+            },
+        )
 
     def end_episode(
         self,
@@ -371,10 +500,12 @@ class CognitiveSession:
             self.action_history.end_episode()
             self._active_episode = None
             self._active_transaction = None
+            self._level_progress = None
             raise
         self.action_history.end_episode()
         self._active_episode = None
         self._active_transaction = None
+        self._level_progress = None
         self.ledger.append(
             "EPISODE_END",
             {

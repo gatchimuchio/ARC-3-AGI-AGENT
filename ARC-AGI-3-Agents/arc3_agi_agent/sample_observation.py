@@ -11,18 +11,14 @@ from arcengine import FrameDataRaw
 from .schema import digest_object
 from .verification import RenderedObservation
 
-_SUPPORTED_TERMINAL_STATES = frozenset(
-    {"NOT_FINISHED", "WIN", "GAME_OVER"}
-)
+_SUPPORTED_TERMINAL_STATES = frozenset({"NOT_FINISHED", "WIN", "GAME_OVER"})
 
 
 def _matrix(value: object) -> tuple[tuple[int, ...], ...]:
     tolist = getattr(value, "tolist", None)
     if callable(tolist):
         value = tolist()
-    if not isinstance(value, Sequence) or isinstance(
-        value, (str, bytes, bytearray)
-    ):
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes, bytearray)):
         return ()
 
     rows: list[tuple[int, ...]] = []
@@ -54,13 +50,41 @@ def _terminal_state(frame: FrameDataRaw) -> str:
 
 @dataclass(frozen=True, slots=True)
 class SampleFrameProjection:
-    """One immutable, identity-free projection of a rendered frame."""
+    """One immutable projection of an action-complete frame response.
+
+    The official ``FrameDataRaw.frame`` list contains temporal camera renders
+    collected while one external action completes.  ``layers`` remains the
+    compatibility attribute name; callers should use the semantic properties
+    below for new product code.
+    """
 
     layers: tuple[tuple[tuple[int, ...], ...], ...]
     signature: str
     dimensions: tuple[int, int] | None
     available_actions: tuple[int, ...]
     terminal_state: str
+
+    @property
+    def action_frames(self) -> tuple[tuple[tuple[int, ...], ...], ...]:
+        return self.layers
+
+    @property
+    def composited_view(self) -> tuple[tuple[int, ...], ...]:
+        return self.layers[-1] if self.layers else ()
+
+    @property
+    def action_frame_signatures(self) -> tuple[str, ...]:
+        return tuple(
+            "action-frame:" + digest_object(action_frame)[:20]
+            for action_frame in self.layers
+        )
+
+    @property
+    def frame_relations(self) -> tuple[str, ...]:
+        return tuple(
+            f"action-frame:{index - 1}:precedes:action-frame:{index}"
+            for index in range(1, len(self.layers))
+        )
 
 
 @dataclass(frozen=True, slots=True)
@@ -72,12 +96,12 @@ class SampleFrameAdapter:
 
         layers = _layers(frame)
         dimensions: tuple[int, int] | None = None
-        for layer in layers:
-            if not layer:
+        for action_frame in reversed(layers):
+            if not action_frame:
                 continue
-            widths = {len(row) for row in layer}
+            widths = {len(row) for row in action_frame}
             if len(widths) == 1 and next(iter(widths), 0) > 0:
-                dimensions = (len(layer), next(iter(widths)))
+                dimensions = (len(action_frame), next(iter(widths)))
                 break
         available_actions = tuple(
             sorted(
@@ -122,18 +146,32 @@ class SampleFrameAdapter:
         current_projection: SampleFrameProjection | None = None,
         previous_projection: SampleFrameProjection | None = None,
     ) -> tuple[str, ...]:
-        if previous is None:
-            return ()
-
         current_view = current_projection or self.project(current)
+        effects: set[str] = {"ACTION_COMPLETE"}
+        if len(current_view.action_frames) > 1:
+            effects.add("ANIMATION_OBSERVED")
+        if current.full_reset:
+            effects.add("FULL_RESET")
+        if previous is None:
+            effects.add("INITIAL_OBSERVATION")
+            terminal_state = current_view.terminal_state
+            if terminal_state == "WIN":
+                effects.update(("LEVEL_PROGRESS", "WIN_TERMINAL"))
+            elif terminal_state == "GAME_OVER":
+                effects.add("IRREVERSIBLE_FAILURE")
+            return tuple(sorted(effects))
+
         previous_view = previous_projection or self.project(previous)
-        effects: set[str] = set()
-        current_render = current_view.layers[-1] if current_view.layers else ()
-        previous_render = (
-            previous_view.layers[-1] if previous_view.layers else ()
+        current_render = current_view.composited_view
+        previous_render = previous_view.composited_view
+        temporal_path = (previous_render, *current_view.action_frames)
+        temporal_change = any(
+            left != right for left, right in zip(temporal_path, temporal_path[1:])
         )
         if current_render == previous_render:
             effects.add("NO_VISIBLE_CHANGE")
+            if temporal_change:
+                effects.add("TRANSIENT_ANIMATION_CHANGE")
         else:
             same_shape = (
                 len(current_render) == len(previous_render)
@@ -163,8 +201,7 @@ class SampleFrameAdapter:
             height = len(current_render)
             width = len(current_render[0]) if current_render else 0
             interface_only = bool(changed_cells) and all(
-                vertical in {0, height - 1}
-                or horizontal in {0, width - 1}
+                vertical in {0, height - 1} or horizontal in {0, width - 1}
                 for vertical, horizontal in changed_cells
             )
             if interface_only:
@@ -173,17 +210,12 @@ class SampleFrameAdapter:
                 effects.add("VISIBLE_STATE_CHANGE")
         if current.levels_completed > previous.levels_completed:
             effects.add("LEVEL_PROGRESS")
-        if current.full_reset:
-            effects.add("FULL_RESET")
         terminal_state = current_view.terminal_state
         if terminal_state == "WIN":
             effects.update(("LEVEL_PROGRESS", "WIN_TERMINAL"))
         elif terminal_state == "GAME_OVER":
             effects.add("IRREVERSIBLE_FAILURE")
-        if (
-            current_view.available_actions
-            != previous_view.available_actions
-        ):
+        if current_view.available_actions != previous_view.available_actions:
             effects.add("ACTION_SURFACE_CHANGE")
         return tuple(sorted(effects))
 
@@ -197,14 +229,11 @@ class SampleFrameAdapter:
     ) -> dict[str, object]:
         current_view = current_projection or self.project(current)
         previous_view = (
-            None
-            if previous is None
-            else previous_projection or self.project(previous)
+            None if previous is None else previous_projection or self.project(previous)
         )
-        layers = current_view.layers
-        palette = Counter(
-            cell for layer in layers for row in layer for cell in row
-        )
+        layers = current_view.action_frames
+        composited_view = current_view.composited_view
+        palette = Counter(cell for layer in layers for row in layer for cell in row)
         objects = tuple(
             {
                 "entity_id": f"palette:{value}",
@@ -217,15 +246,14 @@ class SampleFrameAdapter:
             }
             for value, count in sorted(palette.items())
         )
-        relations = tuple(
-            f"layer:{index - 1}:precedes:layer:{index}"
-            for index in range(1, len(layers))
-        )
+        relations = current_view.frame_relations
         available_actions = current_view.available_actions
         terminal_state = current_view.terminal_state
         return {
             "frame": layers,
+            "composited_view": composited_view,
             "frame_signature": current_view.signature,
+            "action_frame_signatures": (current_view.action_frame_signatures),
             "dimensions": current_view.dimensions,
             "available_actions": available_actions,
             "effects": self.visible_effects(
@@ -238,19 +266,21 @@ class SampleFrameAdapter:
             "relations": relations,
             "resources": (
                 f"available-action-count:{len(available_actions)}",
-                f"visible-layer-count:{len(layers)}",
+                f"action-frame-count:{len(layers)}",
             ),
             "phase_hypotheses": (
-                "terminal"
-                if terminal_state in {"WIN", "GAME_OVER"}
-                else "active",
+                "terminal" if terminal_state in {"WIN", "GAME_OVER"} else "active",
             ),
             "feature_tokens": (
                 f"terminal:{terminal_state.casefold()}",
-                f"visible-layer-count:{len(layers)}",
+                f"action-frame-count:{len(layers)}",
                 f"visible-palette-size:{len(palette)}",
+                "action-complete:true",
+                f"animation-observed:{str(len(layers) > 1).casefold()}",
             ),
             "terminal_state": terminal_state,
+            "full_reset": bool(current.full_reset),
+            "action_complete": True,
         }
 
     def rendered_observation(
@@ -265,9 +295,7 @@ class SampleFrameAdapter:
     ) -> RenderedObservation:
         current_view = current_projection or self.project(current)
         previous_view = (
-            None
-            if previous is None
-            else previous_projection or self.project(previous)
+            None if previous is None else previous_projection or self.project(previous)
         )
         effects = self.visible_effects(
             current,

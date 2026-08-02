@@ -47,10 +47,10 @@ no fixed trajectory playback
 ## Current Work
 
 ```text
-M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
+M2_PRODUCT_CAPABILITY_BUNDLE
 ```
 
-現在は分析artifactを増やすのではなく、既存`GenericAGIAgent`／`GenericAGIRuntime`を製品baselineとして公式サンプルへ接続し、能力以前のblocking defectを除去する。
+M0の全25 bounded baselineとM1の公式runtime surfaceは閉じた。現在はPH-D05教師素材とHDS解釈を、製品が直接loadする非互換fixtureの`P／J0／M0` bundleへコンパイルする。独立した分析完成をendpointにせず、同じ`ARC3CompletionAgent`へ直結する。
 
 現在の機械検証gateは次である。
 
@@ -60,14 +60,14 @@ python scripts/validate_rev4_product_governance.py
 
 旧`validate_rev3_governance.py`はrev3履歴snapshotの整合だけを検査し、current selectorを決定しない。
 
-最初に実装する。
+現在実装する。
 
-1. `ARC3CompletionAgent`製品entrypoint
-2. 公式サンプル25 game blocking acceptance runner
-3. configurable 4096-action development Resource Contract
-4. HDS resource／no-progress境界との整合
-5. current product baseline report
-6. blocker B-01〜B-07のstatus
+1. 教師軌道・HDS解釈からのproduct capability schema
+2. `compatibility_p_ir_program()`を置換する製品P-IR
+3. `HybridRelationalInstructionBody`を置換する製品P
+4. ARC3 domain profile `J0`
+5. sealed semantic seed `M0`
+6. P／J0／M0を束ねるruntime identityとload gate
 
 ## Verified Product Gaps
 
@@ -75,10 +75,10 @@ python scripts/validate_rev4_product_governance.py
 B-01 legacy generic path budget 128; product path closed at 4096
 B-02 current P is generic exploration/scoring, not teacher-derived ARC3 capability
 B-03 default P-IR is compatibility fixture
-B-04 main representation/effect path is final-layer-centric
-B-05 ACTION6 candidates are component-anchor-centric
+B-04 closed in M1: all temporal action frames, final composite and history represented
+B-05 closed in M1: ACTION6 covers seven bounded spatial affordance classes
 B-06 goal/mechanism/subgoal/plan induction is incomplete
-B-07 blocking product runner added; all-25 baseline pending
+B-07 closed in M0: all-25 bounded product baseline executed
 ```
 
 ## Product Architecture

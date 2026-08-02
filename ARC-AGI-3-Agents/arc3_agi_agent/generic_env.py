@@ -25,6 +25,31 @@ TRANSFORMATION_FAMILIES = (
     "ORDER",
     "UNSEEN_COMPOSITION",
 )
+_OBSERVATION_HISTORY_LIMIT = 16
+
+
+def _last_action_surface(
+    frame: FrameDataRaw,
+) -> tuple[int, tuple[tuple[str, int], ...]]:
+    """Project only the legal action payload, never opaque reasoning data."""
+
+    action_input = frame.action_input
+    raw_action = getattr(action_input, "id", 0)
+    raw_action = getattr(raw_action, "value", raw_action)
+    action_id = (
+        raw_action
+        if isinstance(raw_action, int) and not isinstance(raw_action, bool)
+        else 0
+    )
+    raw_payload = getattr(action_input, "data", {})
+    payload: list[tuple[str, int]] = []
+    if action_id == 6 and isinstance(raw_payload, Mapping):
+        for key in ("x", "y"):
+            value = raw_payload.get(key)
+            if isinstance(value, bool) or not isinstance(value, int):
+                continue
+            payload.append((key, value))
+    return action_id, tuple(sorted(payload))
 
 
 def _rotate(
@@ -211,6 +236,11 @@ class OfflineGenericEnvironment:
         repr=False,
     )
     _seen_request_ids: set[str] = field(default_factory=set, init=False)
+    _observation_history: tuple[str, ...] = field(
+        default=(),
+        init=False,
+        repr=False,
+    )
 
     def __post_init__(self) -> None:
         if not isinstance(self.environment, LocalEnvironmentWrapper):
@@ -218,8 +248,22 @@ class OfflineGenericEnvironment:
         current = self.environment.observation_space
         if not isinstance(current, FrameDataRaw):
             raise TypeError(f"{self._boundary}_INITIAL_FRAME_REQUIRED")
+        self._initialize_current(current)
+
+    def _initialize_current(self, current: FrameDataRaw) -> None:
         self._current = current
         self._current_projection = self.frame_adapter.project(current)
+        self._observation_history = (self._current_projection.signature,)
+
+    def _advance(self, raw: FrameDataRaw) -> None:
+        self._previous = self._current
+        self._previous_projection = self._current_projection
+        self._current = raw
+        self._current_projection = self.frame_adapter.project(raw)
+        self._observation_history = (
+            *self._observation_history,
+            self._current_projection.signature,
+        )[-_OBSERVATION_HISTORY_LIMIT:]
 
     def _observation(self) -> GenericObservation:
         projection = self._current_projection
@@ -232,6 +276,7 @@ class OfflineGenericEnvironment:
         payload_schema: tuple[tuple[int, tuple[str, ...]], ...] = ()
         if 6 in projection.available_actions:
             payload_schema = ((6, ("x", "y")),)
+        last_action_id, last_action_payload_items = _last_action_surface(self._current)
         return GenericObservation(
             signature=projection.signature,
             available_actions=projection.available_actions,
@@ -240,6 +285,13 @@ class OfflineGenericEnvironment:
             progress_count=int(self._current.levels_completed),
             visible_effects=effects,
             action_payload_schema=payload_schema,
+            control_actions=(0,),
+            win_level_count=int(self._current.win_levels),
+            full_reset=bool(self._current.full_reset),
+            last_action_id=last_action_id,
+            last_action_payload_items=last_action_payload_items,
+            observation_history=self._observation_history,
+            action_complete=True,
         )
 
     def observe(self) -> GenericObservation:
@@ -264,8 +316,6 @@ class OfflineGenericEnvironment:
             if set(payload) != {"x", "y"}:
                 raise ValueError(f"{self._boundary}_POINTER_PAYLOAD_REQUIRED")
             data = {"x": int(payload["x"]), "y": int(payload["y"])}
-        previous = self._current
-        previous_projection = self._current_projection
         raw = self.environment.step(
             action,
             data=data,
@@ -277,18 +327,13 @@ class OfflineGenericEnvironment:
         )
         if not isinstance(raw, FrameDataRaw):
             raise RuntimeError(f"{self._boundary}_STEP_FAILED")
-        self._previous = previous
-        self._previous_projection = previous_projection
-        self._current = raw
-        self._current_projection = self.frame_adapter.project(raw)
+        self._advance(raw)
         return self._observation()
 
     def reset_level(self, *, request_id: str) -> GenericObservation:
         if request_id in self._seen_request_ids:
             raise RuntimeError(f"{self._boundary}_DUPLICATE_REQUEST")
         self._seen_request_ids.add(request_id)
-        previous = self._current
-        previous_projection = self._current_projection
         raw = self.environment.step(
             GameAction.RESET,
             data={},
@@ -301,10 +346,7 @@ class OfflineGenericEnvironment:
         )
         if not isinstance(raw, FrameDataRaw):
             raise RuntimeError(f"{self._boundary}_RESET_FAILED")
-        self._previous = previous
-        self._previous_projection = previous_projection
-        self._current = raw
-        self._current_projection = self.frame_adapter.project(raw)
+        self._advance(raw)
         return self._observation()
 
 
@@ -322,8 +364,7 @@ class CompetitionGenericEnvironment(OfflineGenericEnvironment):
         current = self.environment.observation_space
         if not isinstance(current, FrameDataRaw):
             raise TypeError("GENERIC_COMPETITION_INITIAL_FRAME_REQUIRED")
-        self._current = current
-        self._current_projection = self.frame_adapter.project(current)
+        self._initialize_current(current)
 
 
 def transformed_worlds(

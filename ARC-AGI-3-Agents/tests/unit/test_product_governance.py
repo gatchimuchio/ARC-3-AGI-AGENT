@@ -68,7 +68,7 @@ def _complete_report() -> dict[str, object]:
 
 def test_product_governance_constants_match_endpoint() -> None:
     assert ARC3_CURRENT_SELECTOR_PATH == "control/rev4/CURRENT_TASK.json"
-    assert ARC3_PRODUCT_ACTIVE_MILESTONE == ("M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE")
+    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M2_PRODUCT_CAPABILITY_BUNDLE"
     assert ARC3_OFFICIAL_SAMPLE_GAME_TARGET == 25
     assert ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET == 183
     assert ARC3_DEVELOPMENT_ACTION_BUDGET == 4096
@@ -170,6 +170,27 @@ def test_m0_current_baseline_is_byte_bound_and_honest() -> None:
     assert (
         evidence["product_endpoint_failures"] == baseline["product_endpoint_failures"]
     )
+
+
+def test_m1_runtime_surface_is_byte_bound_and_complete() -> None:
+    current = _json(REPOSITORY_ROOT / ARC3_CURRENT_SELECTOR_PATH)
+    evidence = current["current_evidence"]
+    assert isinstance(evidence, dict)
+    report_path = REPOSITORY_ROOT / str(evidence["m1_report_path"])
+    report = _json(report_path)
+
+    assert (
+        hashlib.sha256(report_path.read_bytes()).hexdigest()
+        == evidence["m1_report_sha256"]
+    )
+    assert report["exit_status"] == "OFFICIAL_RUNTIME_SURFACE_COMPLETE"
+    assert report["failure_reasons"] == []
+    assert report["inspected_game_count"] == 25
+    assert report["total_win_level_count"] == 183
+    assert report["hds_authorized_game_count"] == 25
+    assert report["external_action_game_count"] == 25
+    assert report["reobserved_game_count"] == 25
+    assert report["scorecard_closed"] is True
 
 
 def test_rev4_product_governance_validator_passes() -> None:

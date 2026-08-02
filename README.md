@@ -69,10 +69,10 @@ supported actions                 RESET, ACTION1..ACTION7
 B-01 product path budget = 4096 >= known max 1519 (closed in product path)
 B-02 active P is generic exploration/scoring only
 B-03 default P-IR is a compatibility fixture
-B-04 representation/effect path is final-layer-centric
-B-05 ACTION6 candidate generation is too narrow
+B-04 temporal action-frame/composite/history surface (closed in M1)
+B-05 ACTION6 seven-class spatial candidate surface (closed in M1)
 B-06 goal/mechanism/subgoal/plan induction is incomplete
-B-07 blocking acceptance runner added; all-25 baseline pending
+B-07 all-25 bounded product baseline (closed in M0)
 ```
 
 ## 製品開発ロードマップ
@@ -89,18 +89,16 @@ B-07 blocking acceptance runner added; all-25 baseline pending
 ## 現在作業
 
 ```text
-M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
+M2_PRODUCT_CAPABILITY_BUNDLE
 ```
 
-最初に実装するもの:
+M0／M1は次の実測証拠で閉じています。
 
-- `ARC3CompletionAgent`製品entrypoint
-- configurable 4096-action development budget
-- 公式サンプル25 game blocking acceptance runner
-- current product baseline
-- blocker B-01〜B-07の機械可読status
+- `analysis/product/rev4/current_product_baseline.json`
+- `analysis/product/rev4/m1_official_runtime_surface.json`
+- M1: 25/25 initial observation、183 level契約、action 0〜7、J authorization／一手実行／再観測 25/25
 
-HDS軌道分解や構造抽出を先に独立完成させません。製品runnerを先に成立させ、能力素材を製品へ接続しながら構築します。
+現在は教師・HDS素材を、製品runtimeが直接loadする`P／J0／M0` bundleへコンパイルします。分析artifactだけを独立完成させません。
 
 公式sampleを使う現行製品入口（既定は全25 game、OFFLINEのみ）:
 
@@ -113,6 +111,14 @@ python -m arc3_agi_agent.product_runner \
 ```
 
 `--game LS20`のような部分実行はadapter診断専用で、M0 baselineまたは製品完成には数えません。
+
+M1公式runtime surfaceの再現コマンド:
+
+```bash
+cd ARC-AGI-3-Agents
+python scripts/run_m1_official_runtime_surface_acceptance.py \
+  --output ../analysis/product/rev4/m1_official_runtime_surface.json
+```
 
 ## 現在gate
 

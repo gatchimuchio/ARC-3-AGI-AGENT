@@ -21,9 +21,7 @@ from .taint import (
 )
 
 GENERIC_TYPES_VERSION = "arc3-generic-types-v1"
-GENERIC_TERMINAL_STATES = frozenset(
-    {"NOT_FINISHED", "WIN", "GAME_OVER", "UNKNOWN"}
-)
+GENERIC_TERMINAL_STATES = frozenset({"NOT_FINISHED", "WIN", "GAME_OVER", "UNKNOWN"})
 GENERIC_DECISION_OPERATIONS = frozenset(
     {"EXECUTE", "PROBE", "REOBSERVE", "ROLLBACK", "SUSPEND", "STOP"}
 )
@@ -35,15 +33,20 @@ def _text(value: object) -> bool:
 
 
 def _sorted_unique_text(values: Sequence[str]) -> bool:
-    return (
-        all(_text(item) for item in values)
-        and tuple(values) == tuple(sorted(set(values)))
+    return all(_text(item) for item in values) and tuple(values) == tuple(
+        sorted(set(values))
     )
 
 
 @dataclass(frozen=True, slots=True)
 class GenericObservation:
-    """One rendered, identity-free environment observation."""
+    """One action-complete, identity-free environment observation.
+
+    ``rendered_layers`` is retained as the compatibility field name.  For the
+    official ARC3 contract its items are temporal camera renders produced
+    during one external action, not independent spatial layers.  The final
+    item is the action-complete composited view used for spatial reasoning.
+    """
 
     signature: str
     available_actions: tuple[int, ...]
@@ -55,6 +58,13 @@ class GenericObservation:
     progress_count: int = 0
     visible_effects: tuple[str, ...] = ()
     action_payload_schema: tuple[tuple[int, tuple[str, ...]], ...] = ()
+    control_actions: tuple[int, ...] = ()
+    win_level_count: int = 0
+    full_reset: bool = False
+    last_action_id: int = 0
+    last_action_payload_items: tuple[tuple[str, int], ...] = ()
+    observation_history: tuple[str, ...] = ()
+    action_complete: bool = True
     _validation_cache: tuple[str, ...] | None = field(
         default=None,
         init=False,
@@ -70,6 +80,41 @@ class GenericObservation:
         metadata={"serialize": False},
     )
 
+    @property
+    def rendered_action_frames(
+        self,
+    ) -> tuple[tuple[tuple[int, ...], ...], ...]:
+        """Return every temporal render from the current external action."""
+
+        return self.rendered_layers
+
+    @property
+    def composited_view(self) -> tuple[tuple[int, ...], ...]:
+        """Return the final camera-composited render for spatial reasoning."""
+
+        return self.rendered_layers[-1] if self.rendered_layers else ()
+
+    @property
+    def action_frame_count(self) -> int:
+        return len(self.rendered_layers)
+
+    @property
+    def animation_observed(self) -> bool:
+        return len(self.rendered_layers) > 1
+
+    @property
+    def frame_relations(self) -> tuple[str, ...]:
+        return tuple(
+            f"action-frame:{index - 1}:precedes:action-frame:{index}"
+            for index in range(1, len(self.rendered_layers))
+        )
+
+    @property
+    def legal_action_surface(self) -> tuple[int, ...]:
+        """Normal actions plus separately governed control actions."""
+
+        return tuple(sorted({*self.control_actions, *self.available_actions}))
+
     def validate(self) -> tuple[str, ...]:
         if self._validation_cache is not None:
             return self._validation_cache
@@ -82,10 +127,19 @@ class GenericObservation:
                 isinstance(item, bool) or not isinstance(item, int)
                 for item in self.available_actions
             )
-            or self.available_actions
-            != tuple(sorted(set(self.available_actions)))
+            or self.available_actions != tuple(sorted(set(self.available_actions)))
         ):
             failures.append("GENERIC_AVAILABLE_ACTIONS_INVALID")
+        if (
+            any(
+                isinstance(item, bool) or not isinstance(item, int)
+                for item in self.control_actions
+            )
+            or self.control_actions != tuple(sorted(set(self.control_actions)))
+            or any(item != 0 for item in self.control_actions)
+            or bool(set(self.control_actions) & set(self.available_actions))
+        ):
+            failures.append("GENERIC_CONTROL_ACTIONS_INVALID")
         if self.terminal_state not in GENERIC_TERMINAL_STATES:
             failures.append("GENERIC_TERMINAL_STATE_INVALID")
         if (
@@ -94,6 +148,39 @@ class GenericObservation:
             or self.progress_count < 0
         ):
             failures.append("GENERIC_PROGRESS_COUNT_INVALID")
+        if (
+            isinstance(self.win_level_count, bool)
+            or not isinstance(self.win_level_count, int)
+            or self.win_level_count < 0
+            or (self.win_level_count > 0 and self.progress_count > self.win_level_count)
+        ):
+            failures.append("GENERIC_WIN_LEVEL_COUNT_INVALID")
+        if not isinstance(self.full_reset, bool):
+            failures.append("GENERIC_FULL_RESET_INVALID")
+        if (
+            isinstance(self.last_action_id, bool)
+            or not isinstance(self.last_action_id, int)
+            or self.last_action_id < 0
+        ):
+            failures.append("GENERIC_LAST_ACTION_INVALID")
+        payload_keys = tuple(key for key, _ in self.last_action_payload_items)
+        if (
+            payload_keys != tuple(sorted(set(payload_keys)))
+            or any(key not in {"x", "y"} for key in payload_keys)
+            or any(
+                isinstance(value, bool) or not isinstance(value, int)
+                for _, value in self.last_action_payload_items
+            )
+            or (self.last_action_id != 6 and bool(self.last_action_payload_items))
+            or (self.last_action_payload_items and set(payload_keys) != {"x", "y"})
+        ):
+            failures.append("GENERIC_LAST_ACTION_PAYLOAD_INVALID")
+        if len(self.observation_history) > 16 or any(
+            not _text(item) for item in self.observation_history
+        ):
+            failures.append("GENERIC_OBSERVATION_HISTORY_INVALID")
+        if not isinstance(self.action_complete, bool):
+            failures.append("GENERIC_ACTION_COMPLETE_INVALID")
         if not _sorted_unique_text(self.visible_effects):
             failures.append("GENERIC_VISIBLE_EFFECTS_INVALID")
         schema_actions = tuple(item[0] for item in self.action_payload_schema)
@@ -175,9 +262,7 @@ class ActionEffectRecord:
             payload = self.payload()
             if set(payload) != {"x", "y"}:
                 failures.append("ACTION_EFFECT_HISTORY_POINTER_PAYLOAD_INVALID")
-            elif not (
-                0 <= payload["x"] < 64 and 0 <= payload["y"] < 64
-            ):
+            elif not (0 <= payload["x"] < 64 and 0 <= payload["y"] < 64):
                 failures.append("ACTION_EFFECT_HISTORY_POINTER_RANGE_INVALID")
             if not 0 <= self.target_palette < 16:
                 failures.append("ACTION_EFFECT_HISTORY_PALETTE_INVALID")
@@ -300,9 +385,7 @@ class ActionDescriptor:
             validate_coordinate_provenance(
                 payload_items=self.payload_items,
                 coordinate_provenance=self.coordinate_provenance,
-                coordinate_observation_digest=(
-                    self.coordinate_observation_digest
-                ),
+                coordinate_observation_digest=(self.coordinate_observation_digest),
                 current_observation_digest=observation.digest(),
                 rendered_layers=observation.rendered_layers,
             )
@@ -490,13 +573,8 @@ class GenericComputeResult:
         model_types = {item.model_type for item in self.hypotheses}
         if len(model_types) < 2:
             failures.append("GENERIC_HYPOTHESIS_MODEL_DIVERSITY_MISSING")
-        semantic_candidates = {
-            item.semantic_identity() for item in self.candidates
-        }
-        if (
-            len(observation.available_actions) >= 2
-            and len(semantic_candidates) < 2
-        ):
+        semantic_candidates = {item.semantic_identity() for item in self.candidates}
+        if len(observation.available_actions) >= 2 and len(semantic_candidates) < 2:
             failures.append("GENERIC_CANDIDATE_DIVERSITY_MISSING")
         for hypothesis in self.hypotheses:
             failures.extend(hypothesis.validate())
@@ -640,6 +718,7 @@ class GenericCycleTrace:
     runtime_identity_digest: str = ""
     session_lineage_digest: str = ""
     decision_context_digest: str = ""
+    experience_event_digests: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -672,9 +751,7 @@ class GenericRunReport:
             {
                 "runtime_version": self.runtime_version,
                 "instruction_body_version": self.instruction_body_version,
-                "initial_observation_digest": (
-                    self.initial_observation_digest
-                ),
+                "initial_observation_digest": (self.initial_observation_digest),
                 "final_observation_digest": self.final_observation_digest,
                 "final_state": self.final_state,
                 "progress_count": self.progress_count,

@@ -138,6 +138,26 @@ def _relative_band(value: float) -> str:
     return "middle"
 
 
+def _frame_change_count(
+    left: tuple[tuple[int, ...], ...],
+    right: tuple[tuple[int, ...], ...],
+) -> int:
+    """Return a bounded structural delta for two temporal camera renders."""
+
+    if len(left) != len(right) or any(
+        len(left_row) != len(right_row) for left_row, right_row in zip(left, right)
+    ):
+        return max(
+            sum(len(row) for row in left),
+            sum(len(row) for row in right),
+        )
+    return sum(
+        left_cell != right_cell
+        for left_row, right_row in zip(left, right)
+        for left_cell, right_cell in zip(left_row, right_row)
+    )
+
+
 def represent_observation(
     observation: GenericObservation,
     *,
@@ -148,7 +168,7 @@ def represent_observation(
     failures = observation.validate()
     if failures:
         raise ValueError(";".join(failures))
-    matrix = observation.rendered_layers[-1] if observation.rendered_layers else ()
+    matrix = observation.composited_view
     raw_components = _components(matrix)
     height = len(matrix) if matrix else 1
     width = len(matrix[0]) if matrix else 1
@@ -182,8 +202,8 @@ def represent_observation(
                 relative_vertical=_relative_band(centroid_y / max(1, height - 1)),
                 relative_horizontal=_relative_band(centroid_x / max(1, width - 1)),
                 neighbor_count=0,
-                target_x=max(0, min(63, target_x)),
-                target_y=max(0, min(63, target_y)),
+                target_x=max(0, min(width - 1, target_x)),
+                target_y=max(0, min(height - 1, target_y)),
             )
         )
     neighbor_counts = [0 for _ in roles]
@@ -215,12 +235,43 @@ def represent_observation(
         )
         for index, role in enumerate(roles)
     ]
+    relations.update(observation.frame_relations)
+    for index in range(1, observation.action_frame_count):
+        change_count = _frame_change_count(
+            observation.rendered_action_frames[index - 1],
+            observation.rendered_action_frames[index],
+        )
+        relations.add(
+            f"action-frame:{index - 1}:changed-cells:{change_count}:"
+            f"action-frame:{index}"
+        )
+    history_repeat_count = observation.observation_history.count(observation.signature)
     topology_tokens = {
         f"object-count:{len(roles)}",
         f"relation-count:{len(relations)}",
         f"action-count:{len(observation.available_actions)}",
+        f"control-action-count:{len(observation.control_actions)}",
+        f"legal-action-count:{len(observation.legal_action_surface)}",
         f"terminal:{observation.terminal_state.casefold()}",
+        f"progress-count:{observation.progress_count}",
+        f"win-level-count:{observation.win_level_count}",
+        f"action-frame-count:{observation.action_frame_count}",
+        f"animation-observed:{str(observation.animation_observed).casefold()}",
+        f"action-complete:{str(observation.action_complete).casefold()}",
+        f"full-reset:{str(observation.full_reset).casefold()}",
+        f"last-action:{observation.last_action_id}",
+        f"history-length:{len(observation.observation_history)}",
+        f"current-signature-repeat-count:{history_repeat_count}",
     }
+    topology_tokens.update(
+        f"action-frame:{index}:palette-size:"
+        f"{len({cell for row in action_frame for cell in row})}"
+        for index, action_frame in enumerate(observation.rendered_action_frames)
+    )
+    topology_tokens.update(
+        f"payload-schema:{action_id}:{','.join(fields)}"
+        for action_id, fields in observation.action_payload_schema
+    )
     topology_tokens.update(token for role in roles for token in role.semantic_tokens())
     role_tuple = tuple(roles)
     relation_tuple = tuple(sorted(relations))
@@ -249,123 +300,287 @@ def represent_observation(
     return representation
 
 
+_POINTER_CANDIDATE_LIMIT = 112
+_POINTER_CATEGORY_SCHEDULE = (
+    "object",
+    "object",
+    "cell",
+    "object",
+    "region",
+    "boundary",
+    "path",
+    "object",
+    "ui",
+    "candidate-position",
+)
+
+
+def _pointer_candidate_groups(
+    matrix: tuple[tuple[int, ...], ...],
+    representation: RelationalRepresentation,
+) -> dict[str, list[tuple[str, int, int, str]]]:
+    """Build bounded, current-render-derived spatial affordance groups."""
+
+    height = len(matrix) if matrix else 64
+    width = len(matrix[0]) if matrix else 64
+    components = _components(matrix)[:32]
+    groups: dict[str, list[tuple[str, int, int, str]]] = {
+        category: [] for category in dict.fromkeys(_POINTER_CATEGORY_SCHEDULE)
+    }
+
+    def add(
+        category: str,
+        label: str,
+        x: int,
+        y: int,
+        target_role: str,
+    ) -> None:
+        groups[category].append(
+            (
+                label,
+                max(0, min(width - 1, x)),
+                max(0, min(height - 1, y)),
+                target_role,
+            )
+        )
+
+    ordered_roles = tuple(
+        sorted(
+            representation.roles,
+            key=lambda role: (
+                {
+                    "medium": 0,
+                    "small": 1,
+                    "point": 2,
+                    "large": 3,
+                }.get(role.area_bucket, 4),
+                role.area_rank,
+                -role.neighbor_count,
+                role.role_id,
+            ),
+        )
+    )
+    for role in ordered_roles[:32]:
+        cells = components[role.area_rank] if role.area_rank < len(components) else ()
+        if cells:
+            centroid_y = sum(y for y, _ in cells) / len(cells)
+            centroid_x = sum(x for _, x in cells) / len(cells)
+            nearest_y, nearest_x = min(
+                cells,
+                key=lambda item: (
+                    (item[0] - centroid_y) ** 2 + (item[1] - centroid_x) ** 2,
+                    item[0],
+                    item[1],
+                ),
+            )
+        else:
+            nearest_x = role.target_x
+            nearest_y = role.target_y
+        semantic_role = ":".join(role.semantic_tokens())
+        for anchor, x, y in (
+            ("center", role.target_x, role.target_y),
+            ("interior", nearest_x, nearest_y),
+            ("north-adjacent", role.target_x, role.target_y - 1),
+            ("south-adjacent", role.target_x, role.target_y + 1),
+            ("west-adjacent", role.target_x - 1, role.target_y),
+            ("east-adjacent", role.target_x + 1, role.target_y),
+        ):
+            add(
+                "object",
+                f"{semantic_role}:anchor:{anchor}",
+                x,
+                y,
+                role.role_id,
+            )
+
+    for vertical_index in (1, 2, 3):
+        for horizontal_index in (1, 2, 3):
+            y = round(vertical_index * (height - 1) / 4)
+            x = round(horizontal_index * (width - 1) / 4)
+            vertical = _relative_band(y / max(1, height - 1))
+            horizontal = _relative_band(x / max(1, width - 1))
+            add(
+                "cell",
+                f"grid:{vertical}:{horizontal}",
+                x,
+                y,
+                f"affordance:cell:{vertical}:{horizontal}",
+            )
+
+    background = (
+        Counter(cell for row in matrix for cell in row).most_common(1)[0][0]
+        if matrix
+        else 0
+    )
+    for vertical_index in (1, 3, 5):
+        for horizontal_index in (1, 3, 5):
+            y = round(vertical_index * (height - 1) / 6)
+            x = round(horizontal_index * (width - 1) / 6)
+            if matrix and matrix[y][x] != background:
+                continue
+            vertical = _relative_band(y / max(1, height - 1))
+            horizontal = _relative_band(x / max(1, width - 1))
+            add(
+                "region",
+                f"background:{vertical}:{horizontal}",
+                x,
+                y,
+                f"affordance:region:{vertical}:{horizontal}",
+            )
+
+    for label, x, y in (
+        ("north-west", 0, 0),
+        ("north", width // 2, 0),
+        ("north-east", width - 1, 0),
+        ("west", 0, height // 2),
+        ("east", width - 1, height // 2),
+        ("south-west", 0, height - 1),
+        ("south", width // 2, height - 1),
+        ("south-east", width - 1, height - 1),
+    ):
+        add("boundary", label, x, y, f"affordance:boundary:{label}")
+
+    role_pairs = tuple(zip(ordered_roles[:8], ordered_roles[1:9]))
+    if role_pairs:
+        for left, right in role_pairs:
+            midpoint_x = round((left.target_x + right.target_x) / 2)
+            midpoint_y = round((left.target_y + right.target_y) / 2)
+            add(
+                "path",
+                "between-role-centers",
+                midpoint_x,
+                midpoint_y,
+                "affordance:path:between-roles",
+            )
+            add(
+                "path",
+                "manhattan-elbow-horizontal-first",
+                right.target_x,
+                left.target_y,
+                "affordance:path:elbow",
+            )
+    else:
+        add(
+            "path",
+            "board-diagonal-first-third",
+            (width - 1) // 3,
+            (height - 1) // 3,
+            "affordance:path:board-diagonal",
+        )
+        add(
+            "path",
+            "board-diagonal-second-third",
+            2 * (width - 1) // 3,
+            2 * (height - 1) // 3,
+            "affordance:path:board-diagonal",
+        )
+
+    inner_left = min(1, width - 1)
+    inner_right = max(0, width - 2)
+    inner_top = min(1, height - 1)
+    inner_bottom = max(0, height - 2)
+    for label, x, y in (
+        ("north-strip", width // 2, inner_top),
+        ("south-strip", width // 2, inner_bottom),
+        ("west-strip", inner_left, height // 2),
+        ("east-strip", inner_right, height // 2),
+        ("north-west-control", inner_left, inner_top),
+        ("south-east-control", inner_right, inner_bottom),
+    ):
+        add("ui", label, x, y, f"affordance:ui:{label}")
+
+    for component_index, cells in enumerate(components[:16]):
+        min_y = min(y for y, _ in cells)
+        max_y = max(y for y, _ in cells)
+        min_x = min(x for _, x in cells)
+        max_x = max(x for _, x in cells)
+        for label, x, y in (
+            ("north-of-object", (min_x + max_x) // 2, min_y - 1),
+            ("south-of-object", (min_x + max_x) // 2, max_y + 1),
+            ("west-of-object", min_x - 1, (min_y + max_y) // 2),
+            ("east-of-object", max_x + 1, (min_y + max_y) // 2),
+        ):
+            add(
+                "candidate-position",
+                label,
+                x,
+                y,
+                f"affordance:candidate-position:rank:{component_index}",
+            )
+    if not groups["candidate-position"]:
+        add(
+            "candidate-position",
+            "near-board-center",
+            width // 2 + 1,
+            height // 2,
+            "affordance:candidate-position:board-center",
+        )
+    return groups
+
+
+def _pointer_descriptors(
+    *,
+    observation: GenericObservation,
+    representation: RelationalRepresentation,
+    action_id: int,
+    surface_ordinal: int,
+) -> tuple[ActionDescriptor, ...]:
+    matrix = observation.composited_view
+    groups = _pointer_candidate_groups(matrix, representation)
+    indexes = {category: 0 for category in groups}
+    seen_coordinates: set[tuple[int, int]] = set()
+    descriptors: list[ActionDescriptor] = []
+    while len(descriptors) < _POINTER_CANDIDATE_LIMIT:
+        appended = False
+        for category in _POINTER_CATEGORY_SCHEDULE:
+            candidates = groups[category]
+            while indexes[category] < len(candidates):
+                label, x, y, target_role = candidates[indexes[category]]
+                indexes[category] += 1
+                if (x, y) in seen_coordinates:
+                    continue
+                seen_coordinates.add((x, y))
+                descriptors.append(
+                    ActionDescriptor(
+                        action_id=action_id,
+                        surface_ordinal=surface_ordinal,
+                        semantic_key=(
+                            f"surface:{surface_ordinal}:category:{category}:{label}"
+                        ),
+                        payload_items=(("x", x), ("y", y)),
+                        target_role=target_role,
+                        coordinate_provenance=(COORDINATE_PROVENANCE_CURRENT_RENDER),
+                        coordinate_observation_digest=observation.digest(),
+                    )
+                )
+                appended = True
+                break
+            if len(descriptors) >= _POINTER_CANDIDATE_LIMIT:
+                break
+        if not appended:
+            break
+    return tuple(descriptors)
+
+
 def action_descriptors(
     observation: GenericObservation,
     representation: RelationalRepresentation,
 ) -> tuple[ActionDescriptor, ...]:
-    """Bind every legal action to role-relative targets when required."""
+    """Bind every legal action to a bounded current-render affordance."""
 
     payload_schema = dict(observation.action_payload_schema)
     descriptors: list[ActionDescriptor] = []
-    matrix = observation.rendered_layers[-1] if observation.rendered_layers else ()
-    matrix_height = len(matrix) if matrix else 64
-    matrix_width = len(matrix[0]) if matrix else 64
-    components = _components(matrix)[:32]
     for ordinal, action_id in enumerate(observation.available_actions):
         fields = payload_schema.get(action_id, ())
         if set(fields) == {"x", "y"}:
-            targets = tuple(
-                sorted(
-                    representation.roles,
-                    key=lambda role: (
-                        {
-                            "medium": 0,
-                            "small": 1,
-                            "point": 2,
-                            "large": 3,
-                        }.get(role.area_bucket, 4),
-                        role.area_rank,
-                        -role.neighbor_count,
-                        role.role_id,
-                    ),
+            descriptors.extend(
+                _pointer_descriptors(
+                    observation=observation,
+                    representation=representation,
+                    action_id=action_id,
+                    surface_ordinal=ordinal,
                 )
-            ) or (
-                ObjectRole(
-                    role_id="role:synthetic:center",
-                    area_rank=0,
-                    area_bucket="unknown",
-                    shape_signature="unknown",
-                    relative_vertical="middle",
-                    relative_horizontal="middle",
-                    neighbor_count=0,
-                    target_x=32,
-                    target_y=32,
-                ),
             )
-            role_anchors: list[tuple[ObjectRole, tuple[tuple[str, int, int], ...]]] = []
-            for role in targets[:32]:
-                cells = (
-                    components[role.area_rank]
-                    if role.area_rank < len(components)
-                    else ()
-                )
-                if cells:
-                    centroid_y = sum(y for y, _ in cells) / len(cells)
-                    centroid_x = sum(x for _, x in cells) / len(cells)
-                    nearest_y, nearest_x = min(
-                        cells,
-                        key=lambda item: (
-                            (item[0] - centroid_y) ** 2 + (item[1] - centroid_x) ** 2,
-                            item[0],
-                            item[1],
-                        ),
-                    )
-                else:
-                    nearest_x = role.target_x
-                    nearest_y = role.target_y
-                raw_anchors = (
-                    ("center", role.target_x, role.target_y),
-                    ("interior", nearest_x, nearest_y),
-                    ("north", role.target_x, role.target_y - 1),
-                    ("south", role.target_x, role.target_y + 1),
-                    ("west", role.target_x - 1, role.target_y),
-                    ("east", role.target_x + 1, role.target_y),
-                )
-                seen_coordinates: set[tuple[int, int]] = set()
-                role_anchor_values: list[tuple[str, int, int]] = []
-                for anchor_name, target_x, target_y in raw_anchors:
-                    coordinate = (
-                        max(0, min(matrix_width - 1, target_x)),
-                        max(0, min(matrix_height - 1, target_y)),
-                    )
-                    if coordinate in seen_coordinates:
-                        continue
-                    seen_coordinates.add(coordinate)
-                    role_anchor_values.append(
-                        (anchor_name, coordinate[0], coordinate[1])
-                    )
-                role_anchors.append((role, tuple(role_anchor_values)))
-            max_anchor_count = max(
-                (len(anchors) for _, anchors in role_anchors),
-                default=0,
-            )
-            for anchor_index in range(max_anchor_count):
-                for role_index, (role, anchors) in enumerate(role_anchors):
-                    if anchor_index > 0 and role_index >= 8:
-                        continue
-                    if anchor_index >= len(anchors):
-                        continue
-                    anchor_name, target_x, target_y = anchors[anchor_index]
-                    descriptors.append(
-                        ActionDescriptor(
-                            action_id=action_id,
-                            surface_ordinal=ordinal,
-                            semantic_key=(
-                                f"surface:{ordinal}:target:"
-                                + ":".join(role.semantic_tokens())
-                                + f":anchor:{anchor_name}"
-                            ),
-                            payload_items=(
-                                ("x", target_x),
-                                ("y", target_y),
-                            ),
-                            target_role=role.role_id,
-                            coordinate_provenance=(
-                                COORDINATE_PROVENANCE_CURRENT_RENDER
-                            ),
-                            coordinate_observation_digest=observation.digest(),
-                        )
-                    )
         else:
             descriptors.append(
                 ActionDescriptor(

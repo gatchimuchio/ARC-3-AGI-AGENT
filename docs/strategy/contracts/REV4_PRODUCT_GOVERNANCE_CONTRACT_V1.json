@@ -15,7 +15,7 @@
     "ARC3_PRODUCT_ROADMAP_REV4",
     "REV4_CURRENT_TASK"
   ],
-  "active_milestone": "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE",
+  "active_milestone": "M2_PRODUCT_CAPABILITY_BUNDLE",
   "endpoint": {
     "official_sample_game_target": 25,
     "official_sample_level_target": 183,
@@ -30,7 +30,9 @@
   "required_product_files": [
     "ARC-AGI-3-Agents/agents/templates/arc3_completion_agent.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py",
-    "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py"
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_runtime_surface.py",
+    "ARC-AGI-3-Agents/scripts/run_m1_official_runtime_surface_acceptance.py"
   ],
   "baseline": {
     "path": "analysis/product/rev4/current_product_baseline.json",
@@ -47,6 +49,27 @@
     "active_product_path_count": 1,
     "requires_win_count": false,
     "status": "PRODUCT_BASELINE_EXECUTABLE"
+  },
+  "m1_runtime_surface_acceptance": {
+    "path": "analysis/product/rev4/m1_official_runtime_surface.json",
+    "game_count": 25,
+    "level_count": 183,
+    "normal_action_union": [1, 2, 3, 4, 5, 6, 7],
+    "legal_action_union": [0, 1, 2, 3, 4, 5, 6, 7],
+    "pointer_categories": [
+      "boundary",
+      "candidate-position",
+      "cell",
+      "object",
+      "path",
+      "region",
+      "ui"
+    ],
+    "hds_authorized_game_count": 25,
+    "external_action_game_count": 25,
+    "reobserved_game_count": 25,
+    "failure_count": 0,
+    "status": "OFFICIAL_RUNTIME_SURFACE_COMPLETE"
   },
   "current_selector_invariants": {
     "current_selector_count": 1,
