@@ -35,6 +35,12 @@ M5_CLEAN_PRODUCT_PATH: Final = Path(
     "analysis/product/rev4/m5_clean_install_product.json"
 )
 M5_RELEASE_PATH: Final = Path("analysis/product/rev4/m5_product_release.json")
+COMPLETION_AUDIT_PATH: Final = Path(
+    "analysis/product/rev4/product_completion_audit.json"
+)
+M3_TRANSFORMATION_PATH: Final = Path(
+    "analysis/product/rev4/m3_active_product_transformation.json"
+)
 NOTEBOOK_VALIDATION_PATH: Final = Path(
     "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json"
 )
@@ -59,8 +65,7 @@ GENERIC_RUNNER_PATH: Final = Path(
 REV3_GOVERNANCE_PATH: Final = Path("ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py")
 PRODUCT_ID: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
 PRODUCT_NAME: Final = "ARC3CompletionAgent"
-ACTIVE_MILESTONE: Final = "M5_PRODUCT_CLOSURE_AND_PACKAGING"
-RUNTIME_FROZEN_MILESTONE: Final = "M4_FULL_SAMPLE_REPAIR_LOOP"
+ACTIVE_MILESTONE: Final = "M3_INTEGRATED_AGI_CAPABILITY"
 
 
 def _load_object(root: Path, relative: Path) -> dict[str, Any]:
@@ -121,6 +126,8 @@ def validate_repository(root: Path) -> dict[str, object]:
     m4_product = _load_object(root, M4_PRODUCT_PATH)
     m5_clean_product = _load_object(root, M5_CLEAN_PRODUCT_PATH)
     m5_release = _load_object(root, M5_RELEASE_PATH)
+    completion_audit = _load_object(root, COMPLETION_AUDIT_PATH)
+    m3_transformation = _load_object(root, M3_TRANSFORMATION_PATH)
     notebook_validation = _load_object(root, NOTEBOOK_VALIDATION_PATH)
     release_manifest = _load_object(root, RELEASE_MANIFEST_PATH)
 
@@ -138,12 +145,12 @@ def validate_repository(root: Path) -> dict[str, object]:
         "current_task:ACTIVE_MILESTONE",
     )
     check(
-        current.get("product_status") == "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+        current.get("product_status") == "M3_GENERICITY_REOPENED",
         "current_task:PRODUCT_STATUS",
     )
     check(
         current.get("current_work_class")
-        == "AWAIT_CURRENT_OWNER_AUTHORIZATION_FOR_EXTERNAL_KAGGLE_RUN",
+        == "ACTIVE_PRODUCT_GENERICITY_AND_LOCKED_EVALUATION_REPAIR",
         "current_task:WORK_CLASS",
     )
     check(
@@ -152,17 +159,15 @@ def validate_repository(root: Path) -> dict[str, object]:
     )
     exit_conditions = current.get("exit_conditions")
     expected_exit_conditions: dict[str, object] = {
-        "m3_agi_closed_loop_capability_active": True,
-        "m4_official_sample_product_complete": True,
-        "wheel_byte_reproducible": True,
-        "fresh_install_passed": True,
-        "clean_install_25_of_25_win": True,
-        "clean_install_183_of_183_complete": True,
-        "dependency_lock_matches_fresh_install": True,
-        "kaggle_notebook_local_validation_passed": True,
+        "known_sample_regression_complete": True,
+        "local_package_regression_complete": True,
+        "m3_active_product_transformation_complete": True,
+        "m3_same_active_artifact_genericity_complete": False,
+        "active_artifact_locked_evaluator_complete": False,
         "external_kaggle_normal_run_complete": False,
+        "official_full_complete": False,
         "product_released": False,
-        "status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+        "status": "M3_GENERICITY_REOPENED",
     }
     check(isinstance(exit_conditions, dict), "current_task:EXIT_CONDITIONS_MISSING")
     if isinstance(exit_conditions, dict):
@@ -507,17 +512,16 @@ def validate_repository(root: Path) -> dict[str, object]:
             )
     m3_acceptance = contract.get("m3_integrated_agi_acceptance")
     expected_contract_m3: dict[str, object] = {
-        "path": M4_PRODUCT_PATH.as_posix(),
-        "executed_plan_count": 10733,
-        "hds_plan_commit_count": 10733,
-        "initial_plan_count": 25,
-        "plan_step_count": 4,
-        "failure_attribution_count": 12,
-        "rollback_plan_count": 42,
-        "post_rollback_replan_count": 42,
-        "failure_hypothesis_invalidation_count": 478,
-        "plan_integrity_row_count": 25,
-        "status": "AGI_CLOSED_LOOP_CAPABILITY_ACTIVE",
+        "path": COMPLETION_AUDIT_PATH.as_posix(),
+        "known_sample_regression_complete": True,
+        "cv_holdout_execution_count": 25,
+        "cv_holdout_completed_environment_count": 0,
+        "cv_holdout_completed_level_count": 0,
+        "active_product_transformation_completion_count": 7,
+        "active_product_transformation_status": "PASS",
+        "same_active_artifact_locked_completion": False,
+        "completion_allowed": False,
+        "status": "M3_GENERICITY_REOPENED",
     }
     check(isinstance(m3_acceptance, dict), "contract:M3_ACCEPTANCE_MISSING")
     if isinstance(m3_acceptance, dict):
@@ -536,7 +540,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         "adapter_crash_count": 0,
         "lifecycle_failure_count": 0,
         "shared_session_count": 1,
-        "status": "OFFICIAL_SAMPLE_PRODUCT_COMPLETE",
+        "status": "KNOWN_SAMPLE_REGRESSION_COMPLETE",
     }
     check(isinstance(m4_acceptance, dict), "contract:M4_ACCEPTANCE_MISSING")
     if isinstance(m4_acceptance, dict):
@@ -557,7 +561,7 @@ def validate_repository(root: Path) -> dict[str, object]:
         "wheel_byte_reproducible": True,
         "dependency_lock_matches_fresh_install": True,
         "local_acceptance_failure_count": 0,
-        "status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+        "status": "LOCAL_PACKAGE_REGRESSION_COMPLETE",
         "external_kaggle_normal_run_status": (
             "NOT_EXECUTED_REQUIRES_CURRENT_OWNER_AUTHORIZATION"
         ),
@@ -569,6 +573,86 @@ def validate_repository(root: Path) -> dict[str, object]:
                 m5_acceptance.get(key) == expected,
                 f"contract:M5_{key.upper()}_MISMATCH",
             )
+    completion_audit_body = dict(completion_audit)
+    completion_audit_digest = completion_audit_body.pop("content_digest", None)
+    check(
+        completion_audit_digest
+        == "arc3-product-completion-audit:"
+        + hashlib.sha256(
+            _canonical_json(completion_audit_body).encode("utf-8")
+        ).hexdigest(),
+        "completion_audit:CONTENT_DIGEST_MISMATCH",
+    )
+    expected_completion_audit: dict[str, object] = {
+        "schema_version": "arc3-product-completion-audit-v1",
+        "evaluation_role": "PRODUCT_COMPLETION_AUTHORITY_GATE",
+        "status": "M3_GENERICITY_REOPENED",
+        "product_completion_allowed": False,
+    }
+    for key, expected in expected_completion_audit.items():
+        check(
+            completion_audit.get(key) == expected,
+            f"completion_audit:{key.upper()}_MISMATCH",
+        )
+    transformation_body = dict(m3_transformation)
+    transformation_digest = transformation_body.pop("content_digest", None)
+    check(
+        transformation_digest
+        == "arc3-product-active-genericity:"
+        + hashlib.sha256(
+            _canonical_json(transformation_body).encode("utf-8")
+        ).hexdigest(),
+        "m3_transformation:CONTENT_DIGEST_MISMATCH",
+    )
+    transformation_completion = m3_transformation.get(
+        "transformation_completion"
+    )
+    check(
+        m3_transformation.get("status") == "PASS"
+        and m3_transformation.get("semantic_environment_completion_executed")
+        is True
+        and m3_transformation.get("product_p_j0_m0_identity_bound") is True
+        and m3_transformation.get(
+            "same_runtime_identity_for_all_environments"
+        )
+        is True
+        and transformation_completion == {"completed": 7, "required": 7},
+        "m3_transformation:ACTIVE_PRODUCT_COMPLETION_FAILURE",
+    )
+    completion_gates = completion_audit.get("gates")
+    check(isinstance(completion_gates, dict), "completion_audit:GATES_MISSING")
+    if isinstance(completion_gates, dict):
+        required_completion_gates = (
+            "KNOWN_SAMPLE_REGRESSION",
+            "LOCAL_PACKAGE_REGRESSION",
+            "GEN_CV_HOLDOUT_COMPLETION",
+            "GEN_SEMANTIC_TRANSFORMATION_COMPLETION",
+            "AUT_006_ACTIVE_ARTIFACT_LOCKED_EVALUATOR",
+            "OFF_004_OUTPUT_BYTES",
+            "OFF_005_SCORE_RETURNED",
+            "OFF_007_SAME_RUNTIME_IDENTITY",
+            "OFFICIAL_FULL_COMPLETE",
+        )
+        for gate in required_completion_gates:
+            check(
+                isinstance(completion_gates.get(gate), bool),
+                f"completion_audit:{gate}_BOOLEAN_REQUIRED",
+            )
+        failed_completion_gates = tuple(
+            gate
+            for gate in required_completion_gates
+            if completion_gates.get(gate) is not True
+        )
+        check(
+            tuple(completion_audit.get("blocking_requirement_ids", ()))
+            == failed_completion_gates,
+            "completion_audit:BLOCKING_REQUIREMENTS_DO_NOT_MATCH_GATES",
+        )
+        check(
+            completion_audit.get("product_completion_allowed")
+            is (not failed_completion_gates),
+            "completion_audit:COMPLETION_BOOLEAN_MISMATCH",
+        )
     m2_body = dict(m2_product_capability)
     m2_claimed_digest = m2_body.pop("content_digest", None)
     check(
@@ -854,16 +938,18 @@ def validate_repository(root: Path) -> dict[str, object]:
             f"current_task:{blocker_id.replace('-', '')}_EVIDENCE",
         )
     check(
-        blocker_map.get("B-06", {}).get("status") == "CLOSED_M3_AGI_CAPABILITY",
+        blocker_map.get("B-06", {}).get("status")
+        == "REOPENED_M3_GENERICITY_NOT_ESTABLISHED",
         "current_task:B06_STATUS",
     )
     check(
-        blocker_map.get("B-06", {}).get("evidence") == M4_PRODUCT_PATH.as_posix(),
+        blocker_map.get("B-06", {}).get("evidence")
+        == COMPLETION_AUDIT_PATH.as_posix(),
         "current_task:B06_EVIDENCE",
     )
     check(
         blocker_map.get("B-07", {}).get("status")
-        == "CLOSED_M4_OFFICIAL_SAMPLE_PRODUCT_COMPLETE",
+        == "CLOSED_KNOWN_SAMPLE_REGRESSION",
         "current_task:B07_STATUS",
     )
     check(
@@ -879,11 +965,20 @@ def validate_repository(root: Path) -> dict[str, object]:
         blocker_map.get("B-08", {}).get("evidence") == M5_RELEASE_PATH.as_posix(),
         "current_task:B08_EVIDENCE",
     )
+    check(
+        blocker_map.get("B-09", {}).get("status") == "OPEN_M3_BLOCKING",
+        "current_task:B09_STATUS",
+    )
+    check(
+        blocker_map.get("B-09", {}).get("evidence")
+        == COMPLETION_AUDIT_PATH.as_posix(),
+        "current_task:B09_EVIDENCE",
+    )
 
     constants = _literal_constants(root / PRODUCT_GOVERNANCE_PATH)
     expected_constants: dict[str, object] = {
         "ARC3_PRODUCT_ID": PRODUCT_NAME,
-        "ARC3_PRODUCT_ACTIVE_MILESTONE": RUNTIME_FROZEN_MILESTONE,
+        "ARC3_PRODUCT_ACTIVE_MILESTONE": ACTIVE_MILESTONE,
         "ARC3_OFFICIAL_SAMPLE_GAME_TARGET": 25,
         "ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET": 183,
         "ARC3_KNOWN_SUCCESS_ACTION_CEILING": 1519,
@@ -1152,7 +1247,7 @@ def validate_repository(root: Path) -> dict[str, object]:
             "m4_report_sha256": hashlib.sha256(
                 (root / M4_PRODUCT_PATH).read_bytes()
             ).hexdigest(),
-            "m4_exit_status": "OFFICIAL_SAMPLE_PRODUCT_COMPLETE",
+            "m4_exit_status": "KNOWN_SAMPLE_REGRESSION_COMPLETE",
             "m5_clean_report_path": M5_CLEAN_PRODUCT_PATH.as_posix(),
             "m5_clean_report_sha256": hashlib.sha256(
                 (root / M5_CLEAN_PRODUCT_PATH).read_bytes()
@@ -1161,12 +1256,32 @@ def validate_repository(root: Path) -> dict[str, object]:
             "m5_release_report_sha256": hashlib.sha256(
                 (root / M5_RELEASE_PATH).read_bytes()
             ).hexdigest(),
-            "m5_local_exit_status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+            "m5_local_exit_status": "LOCAL_PACKAGE_REGRESSION_COMPLETE",
             "product_game_win_count": 25,
             "product_level_completion_count": 183,
             "product_total_action_count": 10733,
-            "product_completion_established": True,
+            "product_completion_established": False,
             "product_endpoint_failures": [],
+            "completion_audit_path": COMPLETION_AUDIT_PATH.as_posix(),
+            "completion_audit_sha256": hashlib.sha256(
+                (root / COMPLETION_AUDIT_PATH).read_bytes()
+            ).hexdigest(),
+            "completion_audit_status": "M3_GENERICITY_REOPENED",
+            "completion_audit_blocking_requirement_count": len(
+                completion_audit.get("blocking_requirement_ids", ())
+            ),
+            "active_product_transformation_report_path": (
+                M3_TRANSFORMATION_PATH.as_posix()
+            ),
+            "active_product_transformation_report_sha256": hashlib.sha256(
+                (root / M3_TRANSFORMATION_PATH).read_bytes()
+            ).hexdigest(),
+            "active_product_transformation_status": "PASS",
+            "active_product_transformation_completion_count": 7,
+            "cv_holdout_execution_count": 25,
+            "cv_holdout_completed_environment_count": 0,
+            "cv_holdout_completed_level_count": 0,
+            "same_active_artifact_locked_completion": False,
             "wheel_path": RELEASE_WHEEL_PATH.as_posix(),
             "wheel_sha256": release_manifest.get("wheel_sha256"),
             "wheel_size_bytes": release_manifest.get("wheel_size_bytes"),

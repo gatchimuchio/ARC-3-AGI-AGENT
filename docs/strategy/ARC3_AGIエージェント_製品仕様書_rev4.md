@@ -28,7 +28,7 @@ ARC3CompletionAgent
 
 HDS、成功軌道、回答、解析データ、構造抽出、命令形P、J設定、初期記憶は、製品能力を構築するための素材・手段・内部部品である。
 
-開発完了は、これらの内部成果物が存在した時点ではなく、統合された製品が公式サンプルを完遂した時点で判定する。
+公式サンプル完遂は必須の既知サンプル回帰である。開発完了は、統合された同一artifactが未知環境評価と公式full scopeまで完遂した時点で判定する。
 
 ---
 
@@ -67,7 +67,7 @@ OUTPUT
 
 製品は`WIN`または`GAME_OVER`まで自己循環する。人間はgame途中のaction、対象、順序、probe、resetを指示しない。
 
-### 1.2 公式サンプル製品受入
+### 1.2 公式サンプル回帰受入
 
 ```text
 one packaged agent artifact
@@ -82,11 +82,25 @@ no manual per-step intervention
 no fixed successful-trajectory playback
 ```
 
-公式サンプル全数完遂を、本repositoryの製品完成条件とする。
+公式サンプル全数完遂を、本repositoryの必須回帰条件とする。
 
-これは公式private完遂、未知分布全体の汎化、存在論的なAGI全称証明とは分離する。製品としての受入対象は、公式サンプルを汎用的に完遂する統合AGIエージェントである。
+これは未知分布への汎用性または製品完成を単独では証明しない。製品完成には、同一active artifact、CVとsingle-artifact証拠の分離、semantic transformed-environment完遂、未使用locked evaluator完遂、公式output bytes／score／full scope完遂を追加で要求する。別runtimeの証拠合算は禁止する。
 
-### 1.3 資源契約
+### 1.3 完成claim gate
+
+```text
+KNOWN_SAMPLE_REGRESSION
++ MEMORY_CAUSAL
++ P_VERSION_LEARNING_CAUSAL
++ SEALED_SINGLE_ARTIFACT_COMPLETE
++ COMPETITION_READY
++ OFFICIAL_FULL_COMPLETE
+= ARC3実証上の製品完成
+```
+
+機械正本は`analysis/product/rev4/product_completion_audit.json`とし、一件でもblocking gateが`PASS`以外なら完成claimを禁止する。
+
+### 1.4 資源契約
 
 現行のcompetition pathは1ゲーム128 actionで停止するが、保持済み教師成功軌道は最大1,519 actionを必要とする。
 

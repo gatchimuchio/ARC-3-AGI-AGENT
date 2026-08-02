@@ -182,9 +182,10 @@ def test_product_runner_reports_endpoint_metrics_without_false_completion() -> N
     endpoint_failures = report["product_endpoint_failures"]
     assert isinstance(endpoint_failures, tuple)
     assert "PRODUCT_ADVERTISED_GAME_COUNT_MISMATCH" in endpoint_failures
+    assert report["known_sample_regression_established"] is False
     assert report["product_completion_established"] is False
     assert report["product_baseline_executable"] is False
-    assert report["product_status"] == "INCOMPLETE"
+    assert report["product_status"] == "KNOWN_SAMPLE_REGRESSION_INCOMPLETE"
     assert report["product_capability_status"] == (
         "PRODUCT_CAPABILITY_BUNDLE_LOADED"
     )
@@ -213,7 +214,7 @@ def test_product_runner_rejects_p_removal_from_the_product_path() -> None:
 
 
 def test_hidden_score_incompleteness_is_not_a_competition_transport_error() -> None:
-    incomplete = {"product_completion_established": False}
+    incomplete = {"known_sample_regression_established": False}
 
     assert product_process_exit_code(
         mode="competition",

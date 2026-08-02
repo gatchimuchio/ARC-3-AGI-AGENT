@@ -99,8 +99,8 @@ def build_evidence(
     source_bytes = source_report.read_bytes()
     report = _load_object(source_report)
     report.update(ARC3_PRODUCT_ENDPOINT.metrics(report))
-    if report.get("product_completion_established") is not True:
-        raise RuntimeError("ARC3_PRODUCT_EVIDENCE_ENDPOINT_INCOMPLETE")
+    if report.get("known_sample_regression_established") is not True:
+        raise RuntimeError("ARC3_PRODUCT_EVIDENCE_KNOWN_SAMPLE_INCOMPLETE")
     if report.get("product_endpoint_failures") not in ([], ()):
         raise RuntimeError("ARC3_PRODUCT_EVIDENCE_ENDPOINT_FAILURE_PRESENT")
 

@@ -12,7 +12,7 @@ from typing import Final
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH: Final = Path("docs/strategy/REV4_CURRENT_AUTHORITY_MANIFEST.json")
 PRODUCT_ID: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
-ACTIVE_MILESTONE: Final = "M5_PRODUCT_CLOSURE_AND_PACKAGING"
+ACTIVE_MILESTONE: Final = "M3_INTEGRATED_AGI_CAPABILITY"
 
 AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     ("AGENTS.md", "CURRENT_EXECUTION_CONTROL"),
@@ -155,6 +155,18 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_M2_CAPABILITY_BUNDLE_LOADER",
     ),
     (
+        "ARC-AGI-3-Agents/arc3_agi_agent/product_completion_audit.py",
+        "PRODUCT_COMPLETION_AUTHORITY_GATE",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/product_genericity.py",
+        "PRODUCT_M3_ACTIVE_ARTIFACT_GENERICITY",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/product_cross_validation.py",
+        "PRODUCT_M3_PRODUCT_EQUIVALENT_CROSS_GAME_CV",
+    ),
+    (
         "ARC-AGI-3-Agents/arc3_agi_agent/product_trace.py",
         "PRODUCT_M3_PLAN_AND_MEMORY_TRACE",
     ),
@@ -204,6 +216,18 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_M5_RELEASE_EVIDENCE_BUILDER",
     ),
     (
+        "scripts/build_product_completion_audit.py",
+        "PRODUCT_COMPLETION_AUDIT_BUILDER",
+    ),
+    (
+        "scripts/run_m3_active_product_genericity.py",
+        "PRODUCT_M3_GENERICITY_EXECUTION_COMMAND",
+    ),
+    (
+        "scripts/run_m3_product_cv.py",
+        "PRODUCT_M3_CROSS_GAME_CV_COMMAND",
+    ),
+    (
         "scripts/build_kaggle_submission.py",
         "PRODUCT_M5_NOTEBOOK_BUILDER",
     ),
@@ -244,6 +268,14 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_M5_LOCAL_RELEASE_EVIDENCE",
     ),
     (
+        "analysis/product/rev4/product_completion_audit.json",
+        "PRODUCT_COMPLETION_AUDIT_EVIDENCE",
+    ),
+    (
+        "analysis/product/rev4/m3_active_product_transformation.json",
+        "PRODUCT_M3_ACTIVE_ARTIFACT_TRANSFORMATION_EVIDENCE",
+    ),
+    (
         "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
         "PRODUCT_M5_NOTEBOOK_VALIDATION_EVIDENCE",
     ),
@@ -274,6 +306,18 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     (
         "ARC-AGI-3-Agents/tests/unit/test_product_governance.py",
         "PRODUCT_GOVERNANCE_ACCEPTANCE_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_product_completion_audit.py",
+        "PRODUCT_COMPLETION_AUDIT_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_product_genericity.py",
+        "PRODUCT_M3_GENERICITY_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_product_cross_validation.py",
+        "PRODUCT_M3_CROSS_GAME_CV_TEST",
     ),
     (
         "ARC-AGI-3-Agents/tests/unit/test_product_release_package.py",

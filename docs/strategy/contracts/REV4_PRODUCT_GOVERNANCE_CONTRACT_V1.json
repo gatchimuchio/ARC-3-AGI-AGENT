@@ -15,7 +15,7 @@
     "ARC3_PRODUCT_ROADMAP_REV4",
     "REV4_CURRENT_TASK"
   ],
-  "active_milestone": "M5_PRODUCT_CLOSURE_AND_PACKAGING",
+  "active_milestone": "M3_INTEGRATED_AGI_CAPABILITY",
   "endpoint": {
     "official_sample_game_target": 25,
     "official_sample_level_target": 183,
@@ -25,7 +25,9 @@
     "known_success_no_progress_ceiling": 644,
     "product_no_progress_limit": 650,
     "manual_step_intervention_allowed": false,
-    "fixed_trajectory_playback_allowed": false
+    "fixed_trajectory_playback_allowed": false,
+    "known_sample_result_role": "KNOWN_SAMPLE_REGRESSION",
+    "required_completion_scope": "OFFICIAL_FULL_COMPLETE"
   },
   "required_product_files": [
     "ARC-AGI-3-Agents/agents/templates/arc3_completion_agent.py",
@@ -33,6 +35,9 @@
     "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/product_runtime_surface.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/product_capability.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_completion_audit.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_genericity.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_cross_validation.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/product_trace.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
     "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
@@ -42,10 +47,15 @@
     "analysis/product/rev4/m4_full_sample_product.json",
     "analysis/product/rev4/m5_clean_install_product.json",
     "analysis/product/rev4/m5_product_release.json",
+    "analysis/product/rev4/product_completion_audit.json",
+    "analysis/product/rev4/m3_active_product_transformation.json",
     "analysis/official/KAGGLE_NOTEBOOK_VALIDATION.json",
     "scripts/build_product_release.py",
     "scripts/capture_product_run_evidence.py",
     "scripts/build_product_release_evidence.py",
+    "scripts/build_product_completion_audit.py",
+    "scripts/run_m3_active_product_genericity.py",
+    "scripts/run_m3_product_cv.py",
     "release/ARC3CompletionAgent-v1.0/README.md",
     "release/ARC3CompletionAgent-v1.0/requirements-lock.txt",
     "release/ARC3CompletionAgent-v1.0/MANIFEST.json",
@@ -106,17 +116,16 @@
     "status": "PRODUCT_CAPABILITY_BUNDLE_ACTIVE"
   },
   "m3_integrated_agi_acceptance": {
-    "path": "analysis/product/rev4/m4_full_sample_product.json",
-    "executed_plan_count": 10733,
-    "hds_plan_commit_count": 10733,
-    "initial_plan_count": 25,
-    "plan_step_count": 4,
-    "failure_attribution_count": 12,
-    "rollback_plan_count": 42,
-    "post_rollback_replan_count": 42,
-    "failure_hypothesis_invalidation_count": 478,
-    "plan_integrity_row_count": 25,
-    "status": "AGI_CLOSED_LOOP_CAPABILITY_ACTIVE"
+    "path": "analysis/product/rev4/product_completion_audit.json",
+    "known_sample_regression_complete": true,
+    "cv_holdout_execution_count": 25,
+    "cv_holdout_completed_environment_count": 0,
+    "cv_holdout_completed_level_count": 0,
+    "active_product_transformation_completion_count": 7,
+    "active_product_transformation_status": "PASS",
+    "same_active_artifact_locked_completion": false,
+    "completion_allowed": false,
+    "status": "M3_GENERICITY_REOPENED"
   },
   "m4_full_sample_acceptance": {
     "path": "analysis/product/rev4/m4_full_sample_product.json",
@@ -127,7 +136,7 @@
     "adapter_crash_count": 0,
     "lifecycle_failure_count": 0,
     "shared_session_count": 1,
-    "status": "OFFICIAL_SAMPLE_PRODUCT_COMPLETE"
+    "status": "KNOWN_SAMPLE_REGRESSION_COMPLETE"
   },
   "m5_local_closure_acceptance": {
     "path": "analysis/product/rev4/m5_product_release.json",
@@ -140,7 +149,7 @@
     "wheel_byte_reproducible": true,
     "dependency_lock_matches_fresh_install": true,
     "local_acceptance_failure_count": 0,
-    "status": "LOCAL_PRODUCT_CLOSURE_COMPLETE",
+    "status": "LOCAL_PACKAGE_REGRESSION_COMPLETE",
     "external_kaggle_normal_run_status": "NOT_EXECUTED_REQUIRES_CURRENT_OWNER_AUTHORIZATION"
   },
   "current_selector_invariants": {
@@ -148,6 +157,10 @@
     "legacy_rev3_is_current": false,
     "legacy_rev3_runtime_activation_eligible": false,
     "product_completion_requires_measured_endpoint": true,
+    "known_sample_regression_is_product_completion": false,
+    "cross_artifact_evidence_aggregation_allowed": false,
+    "active_artifact_locked_evaluator_required": true,
+    "official_full_complete_required": true,
     "external_kaggle_write_requires_current_owner_authorization": true
   }
 }

@@ -98,7 +98,7 @@ def _complete_report() -> dict[str, object]:
 
 def test_product_governance_constants_match_endpoint() -> None:
     assert ARC3_CURRENT_SELECTOR_PATH == "control/rev4/CURRENT_TASK.json"
-    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M4_FULL_SAMPLE_REPAIR_LOOP"
+    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M3_INTEGRATED_AGI_CAPABILITY"
     assert ARC3_OFFICIAL_SAMPLE_GAME_TARGET == 25
     assert ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET == 183
     assert ARC3_DEVELOPMENT_ACTION_BUDGET == 4096
@@ -121,10 +121,14 @@ def test_product_endpoint_accepts_only_the_full_measured_result() -> None:
     assert metrics["product_executed_plan_count"] == 325
     assert metrics["product_hds_plan_commit_count"] == 325
     assert metrics["product_max_plan_step_count"] == 4
-    assert metrics["product_completion_established"] is True
+    assert metrics["known_sample_regression_established"] is True
+    assert metrics["known_sample_regression_status"] == (
+        "KNOWN_SAMPLE_REGRESSION_COMPLETE"
+    )
+    assert metrics["product_completion_established"] is False
     assert metrics["product_baseline_executable"] is True
     assert metrics["product_baseline_status"] == ("PRODUCT_BASELINE_EXECUTABLE")
-    assert metrics["product_status"] == "COMPLETE"
+    assert metrics["product_status"] == "GENERICITY_NOT_ESTABLISHED"
 
 
 def test_product_baseline_accepts_bounded_reports_without_claiming_wins() -> None:
@@ -203,9 +207,9 @@ def test_rev4_current_task_and_legacy_boundary_are_explicit() -> None:
     )
 
     assert current["schema_version"] == "arc3-product-current-task-v2"
-    assert current["active_milestone"] == "M5_PRODUCT_CLOSURE_AND_PACKAGING"
-    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M4_FULL_SAMPLE_REPAIR_LOOP"
-    assert current["product_status"] == "LOCAL_PRODUCT_CLOSURE_COMPLETE"
+    assert current["active_milestone"] == "M3_INTEGRATED_AGI_CAPABILITY"
+    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M3_INTEGRATED_AGI_CAPABILITY"
+    assert current["product_status"] == "M3_GENERICITY_REOPENED"
     assert current["legacy_rev3"]["current_selector"] is False
     assert classification["classification"] == "HISTORICAL_REUSE_ONLY"
     assert classification["current_selector"] is False

@@ -381,7 +381,11 @@ def product_process_exit_code(
         raise ValueError("ARC3_PRODUCT_PROCESS_MODE_INVALID")
     if mode == "competition":
         return 0
-    return 0 if report.get("product_completion_established") is True else 2
+    return (
+        0
+        if report.get("known_sample_regression_established") is True
+        else 2
+    )
 
 
 def main() -> int:

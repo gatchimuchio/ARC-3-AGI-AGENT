@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import Final
 
 ARC3_PRODUCT_ID: Final = "ARC3CompletionAgent"
-ARC3_PRODUCT_ACTIVE_MILESTONE: Final = "M4_FULL_SAMPLE_REPAIR_LOOP"
+ARC3_PRODUCT_ACTIVE_MILESTONE: Final = "M3_INTEGRATED_AGI_CAPABILITY"
 ARC3_OFFICIAL_SAMPLE_GAME_TARGET: Final = 25
 ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET: Final = 183
 ARC3_KNOWN_SUCCESS_ACTION_CEILING: Final = 1519
@@ -25,7 +25,7 @@ def _integer(value: object) -> int | None:
 
 @dataclass(frozen=True, slots=True)
 class ProductEndpointContract:
-    """Measured endpoint that must hold before product completion is claimed."""
+    """Measured known-sample endpoint; never sufficient for AGI completion."""
 
     game_target: int = ARC3_OFFICIAL_SAMPLE_GAME_TARGET
     level_target: int = ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET
@@ -262,7 +262,7 @@ class ProductEndpointContract:
         if plan_metric_totals["max_plan_step_count"] != 4:
             endpoint_failures.append("PRODUCT_PLAN_DEPTH_MISMATCH")
         normalized_endpoint_failures = tuple(sorted(set(endpoint_failures)))
-        complete = not normalized_endpoint_failures
+        known_sample_complete = not normalized_endpoint_failures
         observed_budget_impossible = (
             actual_action_budget is None
             or actual_action_budget < self.known_success_action_ceiling
@@ -317,8 +317,20 @@ class ProductEndpointContract:
             ),
             "product_endpoint_failure_count": len(normalized_endpoint_failures),
             "product_endpoint_failures": normalized_endpoint_failures,
-            "product_completion_established": complete,
-            "product_status": "COMPLETE" if complete else "INCOMPLETE",
+            "known_sample_regression_established": known_sample_complete,
+            "known_sample_regression_status": (
+                "KNOWN_SAMPLE_REGRESSION_COMPLETE"
+                if known_sample_complete
+                else "KNOWN_SAMPLE_REGRESSION_INCOMPLETE"
+            ),
+            # Higher AGI authority requires genericity, locked-evaluator, and
+            # official-full evidence. This endpoint sees none of those gates.
+            "product_completion_established": False,
+            "product_status": (
+                "GENERICITY_NOT_ESTABLISHED"
+                if known_sample_complete
+                else "KNOWN_SAMPLE_REGRESSION_INCOMPLETE"
+            ),
         }
 
 

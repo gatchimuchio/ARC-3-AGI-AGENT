@@ -17,7 +17,7 @@ official adapter
 
 HDS分析、成功軌道、解析データ、汎用構造、命令形Pは製品能力を構築する素材・手段・内部部品です。これらを作っただけでは開発完了ではありません。
 
-開発完了条件:
+既知サンプル回帰条件:
 
 ```text
 25 / 25 official sample games = WIN
@@ -26,6 +26,8 @@ one runnable product artifact
 no manual per-step intervention
 no fixed successful-trajectory playback
 ```
+
+上位AGI正本に基づく製品完成には、さらに同一active artifactの汎用性、未使用locked evaluator完遂、package identity、公式output bytes／score／full scope完遂が必要です。既知サンプル回帰だけをAGI完成とは扱いません。
 
 ## 現行正本
 
@@ -71,9 +73,10 @@ B-02 teacher-derived compiled product P (closed in M2)
 B-03 non-compatibility product P-IR (closed in M2)
 B-04 temporal action-frame/composite/history surface (closed in M1)
 B-05 ACTION6 seven-class spatial candidate surface (closed in M1)
-B-06 online goal/mechanism/subgoal/4-step plan (closed in M3)
-B-07 25/25 WIN, 183/183, 10,733 actions (closed in M4)
-B-08 external Kaggle normal run (M5 gate; current Owner authorization required)
+B-06 online trace exists; unknown-state capability reopened in M3
+B-07 25/25 WIN, 183/183, 10,733 actions (known-sample regression)
+B-08 external Kaggle write requires current Owner authorization
+B-09 active product transformation 7/7、CV 0/25、active-P locked evaluation absent
 ```
 
 ## 製品開発ロードマップ
@@ -90,10 +93,10 @@ B-08 external Kaggle normal run (M5 gate; current Owner authorization required)
 ## 現在作業
 
 ```text
-M5_PRODUCT_CLOSURE_AND_PACKAGING
+M3_INTEGRATED_AGI_CAPABILITY
 ```
 
-M0～M4は次の実測証拠で閉じています。
+M0～M2と既知サンプル／package回帰は次の実測証拠で保持しています。
 
 - `analysis/product/rev4/current_product_baseline.json`
 - `analysis/product/rev4/m1_official_runtime_surface.json`
@@ -101,12 +104,13 @@ M0～M4は次の実測証拠で閉じています。
 - `analysis/product/rev4/m4_full_sample_product.json`
 - `analysis/product/rev4/m5_clean_install_product.json`
 - `analysis/product/rev4/m5_product_release.json`
+- `analysis/product/rev4/product_completion_audit.json`
 - M1: 25/25 initial observation、183 level契約、action 0〜7、J authorization／一手実行／再観測 25/25
 - M2: FT09 75 action・6/6・WIN、同一J0／M0のP除去対照 128 action・0/6・NOT_FINISHED
 - M4: 25/25 WIN、183/183 level、10,733 action、failure signature 0、shared session 1
 - M5: wheel byte再現、fresh install後も25/25 WIN・183/183・10,733 action、M4との機能結果一致
 
-同じ製品bundleとruntimeのwheel freeze、fresh install全数回帰、依存lock、Notebook契約、digest、local release証拠は閉じました。外部Kaggle実行と提出は、当該操作へのOwnerの現在の明示授権がある場合に限ります。
+wheel freeze、fresh install全数回帰、依存lock、Notebook契約は有効な回帰証拠です。active product P／J0／M0はdevelopment transformation worldを7/7完遂しました。ただしcompletion auditはCV完遂0とsealed active-P不一致を検出しており、製品完成claimを拒否しています。外部Kaggle実行と提出は、当該操作へのOwnerの現在の明示授権がある場合に限ります。
 
 公式sampleを使う現行製品入口（既定は全25 game、OFFLINEのみ）:
 
@@ -132,6 +136,7 @@ python scripts/run_m1_official_runtime_surface_acceptance.py \
 
 ```bash
 python scripts/validate_rev4_product_governance.py
+python scripts/build_product_completion_audit.py --check
 cd ARC-AGI-3-Agents
 python -m pytest -q tests/unit/test_product_runner.py tests/unit/test_product_governance.py
 ```

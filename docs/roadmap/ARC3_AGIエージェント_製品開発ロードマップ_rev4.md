@@ -6,7 +6,7 @@
 - 対象repository: `gatchimuchio/ARC-3-AGI-AGENT`
 - 日付: `2026-08-02`
 - 状態: `OWNER_PRODUCT_DIRECTIVE_INSTALLED`
-- 現在milestone: `M5_PRODUCT_CLOSURE_AND_PACKAGING`
+- 現在milestone: `M3_INTEGRATED_AGI_CAPABILITY`
 
 ---
 
@@ -14,9 +14,10 @@
 
 ```text
 DONE
-25/25 official sample games = WIN
-183/183 levels = COMPLETE
-one ARC3CompletionAgent artifact
+one frozen ARC3CompletionAgent artifact
+same-artifact unknown environment completion
+official output bytes and score returned
+official full scope complete
         ↑
 M5 Product Closure / Packaging
         ↑
@@ -34,6 +35,8 @@ M0 Current Product Baseline / Blocking Defects
 HDS分析、教師軌道分解、構造抽出、P生成はM2〜M4で使う能力構築workstreamであり、独立した最終endpointではない。
 
 各milestoneは必ず実行可能なagent artifactと、公式サンプル上の実測結果を出す。
+
+2026-08-03監査でM4／M5の25/25・183/183は既知サンプル／package回帰として有効だが、完成claimには不足すると確認した。active product P／J0／M0は七development transformationを7/7完遂した。一方、active Pは全teacher parameterを継承し、CVは25 holdout中完遂0、sealed証拠はactive Pと不一致であるため、M3で同一artifact汎用性を修正する。
 
 ---
 
@@ -313,17 +316,28 @@ ARC3CompletionAgent v0.4
 - rollback／reset produces a revised plan
 - C/J/M/P deletion tests fail as predicted
 - official sample completed game／level count improves over v0.3
+- product-equivalent CV uses viable resource bounds and completes holdout environments
+- semantic transformed environments complete through the active P／J0／M0 identity
+- one frozen active artifact completes an unused locked evaluator
 
 ## Exit
 
 `AGI_CLOSED_LOOP_CAPABILITY_ACTIVE`
 
-実績（2026-08-03）:
+既知サンプル実績（2026-08-03）:
 
 - 全actionへの複数representation・競合仮説・subgoal・4-step plan結合
 - 10,733/10,733 actionでC planとJ commitが一致
 - 失敗帰属12、rollback plan 42、失敗仮説無効化478、rollback後replan 42
 - relevant M causality／irrelevant M invariance／C-J-M-P deletion回帰PASS
+
+再開理由（2026-08-03）:
+
+- committed CV: 25 execution、environment completion 0、level completion 0
+- active product development transformation: 7/7 `PASS`
+- legacy S6: `MEASURED_NOT_PROVEN`（active product実行証拠には不使用）
+- sealed 3/3: active compiled product Pとdigest不一致
+- current work: product-equivalent CV、semantic transformation、active-artifact locked evaluation
 
 ---
 
@@ -397,7 +411,7 @@ G7  25/25 games WIN
 
 ## Exit
 
-`OFFICIAL_SAMPLE_PRODUCT_COMPLETE`
+`KNOWN_SAMPLE_REGRESSION_COMPLETE`
 
 実績（2026-08-03）:
 
@@ -444,13 +458,13 @@ normal Kaggle run complete
 submission accepted or platform failure isolated
 ```
 
-公式platform failureは製品failureと分離する。ただし製品完成claimはclean-environment公式サンプル全数完遂を必要とする。
+公式platform failureは製品failureと分離する。clean-environment公式サンプル全数完遂は必要条件だが、製品完成の十分条件ではない。
 
 ## Exit
 
-`ARC3_COMPLETION_AGENT_PRODUCT_RELEASED`
+`ARC3_COMPLETION_AGENT_PRODUCT_RELEASED`は、M3汎用性、同一artifact locked評価、package再固定、公式full completionが全て成立した場合だけ使用する。現行M5成果は`LOCAL_PACKAGE_REGRESSION_COMPLETE`である。
 
-Local closure実績（2026-08-03）:
+Local package regression実績（2026-08-03）:
 
 - implementation commit `9e7657281bc31ee4dd97a09bde7e96b567631166`
 - wheel SHA-256 `0557c3cbc1fbaf295a25351aad62c9349cdcfdb5fdc5bce669edffdfc4de55de`
@@ -473,10 +487,10 @@ Local closure実績（2026-08-03）:
 ## 1. 現在作業
 
 ```text
-M5_PRODUCT_CLOSURE_AND_PACKAGING
+M3_INTEGRATED_AGI_CAPABILITY
 ```
 
-ローカルproduct closureは完了した。現在の作業境界は、Ownerの現在の明示授権を得た後の外部Kaggle normal runのみである。授権なしにNotebook upload、run、submissionを実行しない。
+既知サンプル／package回帰を保持しながら、active productと同一model family／resource contractのCV、semantic transformed-environment completion、同一frozen artifactのlocked評価を実装・修正する。授権なしにNotebook upload、run、submissionを実行しない。
 
 ---
 

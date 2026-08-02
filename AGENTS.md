@@ -1,6 +1,6 @@
 # ARC3 Completion Agent 製品開発契約 rev4
 
-このrepositoryの最終成果物は、ARC3公式サンプル25 game／183 levelを同一AGI構造で完遂する実行可能製品`ARC3CompletionAgent`である。
+このrepositoryの最終成果物は、ARC3公式環境を同一AGI構造で自律完遂する実行可能製品`ARC3CompletionAgent`である。公式サンプル25 game／183 levelは必須の既知サンプル回帰であり、それだけをAGI完成扱いしない。
 
 HDS分析、教師軌道分解、構造データ、命令形P、J設定、M0、試験reportは製品を成立させる素材・手段・内部部品であり、それ自体を開発endpointとしない。
 
@@ -30,10 +30,12 @@ ARC3CompletionAgent
 → M updates
 → emit one legal GameAction
 → repeat
-→ 25/25 WIN and 183/183 complete
+→ known sample 25/25 WIN and 183/183 complete
+→ same active artifact genericity and unused locked evaluation
+→ official full completion
 ```
 
-製品完成条件:
+既知サンプル回帰条件:
 
 ```text
 one runnable product artifact
@@ -44,29 +46,32 @@ no manual per-step intervention
 no fixed trajectory playback
 ```
 
+製品完成条件は上記に加え、同一active artifactによる汎用性、未使用locked evaluator完遂、package identity、公式output bytes／score／full scope完遂を全て要求する。別artifactの成果合算は禁止する。
+
 ## Current Work
 
 ```text
-M5_PRODUCT_CLOSURE_AND_PACKAGING
+M3_INTEGRATED_AGI_CAPABILITY
 ```
 
-M0～M3の製品runtime能力、M4の公式サンプル全数完遂、M5のlocal product closureは閉じた。M4／M5正本はともに25/25 `WIN`、183/183 level、10,733 action、runtime failure signature 0である。現在の未閉包gateは、Ownerの現在の明示授権を要する外部Kaggle normal runのみである。
+M4／M5証拠は25/25 `WIN`、183/183 level、10,733 action、runtime failure signature 0の既知サンプル／package回帰として保持する。active product P／J0／M0は七つのdevelopment transformation worldを7/7完遂した。一方、現行active Pは全teacher parameterを継承し、CVは25 holdout中完遂0、sealed証拠はactive Pとdigest不一致である。したがってM3を継続し、汎用性と同一artifact評価を修正する。
 
 現在の機械検証gateは次である。
 
 ```text
 python scripts/validate_rev4_product_governance.py
+python scripts/build_product_completion_audit.py --check
 ```
 
 旧`validate_rev3_governance.py`はrev3履歴snapshotの整合だけを検査し、current selectorを決定しない。
 
 現在実装・検証する。
 
-1. implementation commitに結合したbyte-reproducible wheel
-2. fresh Python 3.12 venvでの通常install／`pip check`
-3. installed wheelだけで25/25／183/183を再実行
-4. M4とclean-install runの機能結果・P／J0／M0一致
-5. Kaggle Notebookのruntime／placeholder／secret／failure可視化契約
+1. active productと同じmodel family／resource contractによるCV
+2. semantic transformed-environment completion
+3. 同一frozen P／J0／M0による未使用locked evaluator完遂
+4. 既知25/25／183/183回帰の維持
+5. 汎用性成立後のwheel／clean install／Notebook再固定
 6. 外部Kaggle実行はOwnerの現在の明示授権後のみ実行
 
 ## Verified Product Gaps
@@ -77,9 +82,10 @@ B-02 closed in M2: teacher-derived compiled product P is runtime-bound
 B-03 closed in M2: non-compatibility product P-IR is runtime-bound
 B-04 closed in M1: all temporal action frames, final composite and history represented
 B-05 closed in M1: ACTION6 covers seven bounded spatial affordance classes
-B-06 closed in M3: online goal/mechanism/subgoal/4-step plan and replan active
-B-07 closed in M4: 25/25 WIN, 183/183, 10,733 actions, runtime failure 0
-B-08 M5 gate: external Kaggle normal run requires current Owner authorization
+B-06 reopened in M3: online trace exists, unknown-state capability is unproven
+B-07 known-sample regression: 25/25 WIN, 183/183, 10,733 actions
+B-08 external Kaggle write requires current Owner authorization
+B-09 open: active transformation 7/7、CV 0/25、sealed active-P mismatch
 ```
 
 ## Product Architecture
