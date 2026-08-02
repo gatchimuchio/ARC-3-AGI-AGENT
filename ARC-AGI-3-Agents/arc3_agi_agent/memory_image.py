@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Mapping, Sequence
 
 from .schema import digest_object
@@ -12,14 +13,17 @@ MEMORY_IMAGE_SCHEMA_VERSION = 1
 RecordBlob = tuple[str, str]
 
 
+@lru_cache(maxsize=65_536)
+def _require_record_payload(payload: str) -> None:
+    parsed = json.loads(payload)
+    if not isinstance(parsed, dict):
+        raise ValueError("MEMORY_IMAGE_RECORD_PAYLOAD_INVALID")
+
+
 def _normalize_items(
     values: Mapping[str, str] | Sequence[RecordBlob],
 ) -> tuple[RecordBlob, ...]:
-    items = (
-        tuple(values.items())
-        if isinstance(values, Mapping)
-        else tuple(values)
-    )
+    items = tuple(values.items()) if isinstance(values, Mapping) else tuple(values)
     normalized = tuple(sorted(items))
     keys = tuple(key for key, _ in normalized)
     if keys != tuple(sorted(set(keys))):
@@ -29,9 +33,7 @@ def _normalize_items(
             raise ValueError("MEMORY_IMAGE_RECORD_KEY_INVALID")
         if not isinstance(payload, str) or not payload:
             raise ValueError("MEMORY_IMAGE_RECORD_PAYLOAD_INVALID")
-        parsed = json.loads(payload)
-        if not isinstance(parsed, dict):
-            raise ValueError("MEMORY_IMAGE_RECORD_PAYLOAD_INVALID")
+        _require_record_payload(payload)
     return normalized
 
 
@@ -144,10 +146,7 @@ class MemoryImage:
 
         def region(name: str) -> tuple[RecordBlob, ...]:
             value = payload.get(name, ())
-            if (
-                isinstance(value, (str, bytes))
-                or not isinstance(value, Sequence)
-            ):
+            if isinstance(value, (str, bytes)) or not isinstance(value, Sequence):
                 raise TypeError("MEMORY_IMAGE_REGION_INVALID:" + name)
             output: list[RecordBlob] = []
             for item in value:

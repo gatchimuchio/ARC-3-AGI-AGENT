@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Mapping, Sequence
+from functools import lru_cache
 from typing import Any
 
 from .p_ir_abi import L0_ABI_VERSION, PIR_SEMANTICS_DIGEST
@@ -203,6 +204,7 @@ def compatibility_p_ir_program(
     return program
 
 
+@lru_cache(maxsize=256)
 def p_ir_program_logical_digest(program: PIRProgram) -> str:
     require_valid_p_ir_program(program)
     return "p-ir-logical:" + digest_object(program)
@@ -221,9 +223,7 @@ def _parameter_value(value: object) -> PIRParameterValue:
         return value
     if isinstance(value, int) and not isinstance(value, bool):
         return value
-    if isinstance(value, Sequence) and not isinstance(
-        value, (str, bytes, bytearray)
-    ):
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
         converted = tuple(_parameter_value(item) for item in value)
         if any(isinstance(item, tuple) for item in converted):
             raise TypeError("P_IR_PARAMETER_NESTING_INVALID")
@@ -239,9 +239,7 @@ def _node_from_dict(value: Mapping[str, object]) -> PIRNode:
         raise TypeError("P_IR_NODE_PARAMETERS_INVALID")
     parameters: list[tuple[str, PIRParameterValue]] = []
     for item in parameter_values:
-        if not isinstance(item, Sequence) or isinstance(
-            item, (str, bytes, bytearray)
-        ):
+        if not isinstance(item, Sequence) or isinstance(item, (str, bytes, bytearray)):
             raise TypeError("P_IR_NODE_PARAMETER_INVALID")
         pair = tuple(item)
         if len(pair) != 2:
@@ -263,9 +261,7 @@ def _node_from_dict(value: Mapping[str, object]) -> PIRNode:
 
 def _graph_from_dict(value: Mapping[str, object]) -> TypedDAG:
     nodes = value.get("nodes", ())
-    if not isinstance(nodes, Sequence) or isinstance(
-        nodes, (str, bytes, bytearray)
-    ):
+    if not isinstance(nodes, Sequence) or isinstance(nodes, (str, bytes, bytearray)):
         raise TypeError("P_IR_GRAPH_NODES_INVALID")
     outputs_value = value.get("outputs", ())
     if not isinstance(outputs_value, Sequence) or isinstance(
@@ -276,9 +272,7 @@ def _graph_from_dict(value: Mapping[str, object]) -> TypedDAG:
         graph_id=str(value["graph_id"]),
         graph_kind=str(value["graph_kind"]),
         nodes=tuple(
-            _node_from_dict(item)
-            for item in nodes
-            if isinstance(item, Mapping)
+            _node_from_dict(item) for item in nodes if isinstance(item, Mapping)
         ),
         outputs=tuple(str(item) for item in outputs_value),
     )
@@ -317,9 +311,7 @@ def p_ir_program_from_dict(value: Mapping[str, object]) -> PIRProgram:
     )
     scalars: list[tuple[str, int]] = []
     for item in scalars_value:
-        if not isinstance(item, Sequence) or isinstance(
-            item, (str, bytes, bytearray)
-        ):
+        if not isinstance(item, Sequence) or isinstance(item, (str, bytes, bytearray)):
             raise TypeError("P_IR_SCALAR_PARAMETER_INVALID")
         pair = tuple(item)
         if len(pair) != 2:
@@ -329,8 +321,7 @@ def p_ir_program_from_dict(value: Mapping[str, object]) -> PIRProgram:
     model = value.get("model_graph")
     candidate = value.get("candidate_graph")
     if not all(
-        isinstance(item, Mapping)
-        for item in (representation, model, candidate)
+        isinstance(item, Mapping) for item in (representation, model, candidate)
     ):
         raise TypeError("P_IR_REQUIRED_GRAPH_INVALID")
     program = PIRProgram(
@@ -353,21 +344,14 @@ def p_ir_program_from_dict(value: Mapping[str, object]) -> PIRProgram:
             max_objects=int(resource_value["max_objects"]),
             max_relations=int(resource_value["max_relations"]),
             max_candidates=int(resource_value["max_candidates"]),
-            max_memory_citations=int(
-                resource_value["max_memory_citations"]
-            ),
-            worst_case_operation_cost=int(
-                resource_value["worst_case_operation_cost"]
-            ),
+            max_memory_citations=int(resource_value["max_memory_citations"]),
+            worst_case_operation_cost=int(resource_value["worst_case_operation_cost"]),
         ),
         provenance=ProvenanceManifest(
             source_digests=tuple(
-                str(item)
-                for item in provenance_value.get("source_digests", ())
+                str(item) for item in provenance_value.get("source_digests", ())
             ),
-            evidence_manifest_digest=str(
-                provenance_value["evidence_manifest_digest"]
-            ),
+            evidence_manifest_digest=str(provenance_value["evidence_manifest_digest"]),
             identity_free=bool(provenance_value.get("identity_free", False)),
         ),
     )

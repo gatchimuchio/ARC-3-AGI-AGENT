@@ -3,14 +3,18 @@
 from __future__ import annotations
 
 import dataclasses
-import json
+import math
 import re
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
+from functools import lru_cache
 from typing import Generic, TypeVar
 
 from .generic_types import GenericObservation
-from .schema import canonical_json, forbidden_runtime_paths
+from .schema import (
+    FORBIDDEN_RUNTIME_KEY_TOKENS,
+    canonical_json,
+)
 
 IDENTITY_BOUNDARY_VERSION = "arc3-identity-boundary-v1"
 
@@ -31,9 +35,7 @@ class OrchestrationMetadata:
     scorecard_id: Tainted[str] = field(metadata={"serialize": False})
     game_id: Tainted[str] = field(metadata={"serialize": False})
     game_index: Tainted[int] = field(metadata={"serialize": False})
-    environment_handle: Tainted[object] = field(
-        metadata={"serialize": False}
-    )
+    environment_handle: Tainted[object] = field(metadata={"serialize": False})
 
 
 _FORBIDDEN_DECISION_KEYS = frozenset(
@@ -55,44 +57,112 @@ _FORBIDDEN_DECISION_KEYS = frozenset(
 )
 
 
-def _contains_taint(value: object) -> bool:
+@lru_cache(maxsize=2_048)
+def _normalized_key(value: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", value.casefold())
+
+
+def _inspect_value(
+    value: object,
+    *,
+    path: str,
+    runtime_paths: list[str],
+    orchestration_paths: list[str],
+) -> bool:
+    """Inspect one immutable decision value in a single fail-closed walk."""
+
     if isinstance(value, (Tainted, OrchestrationMetadata)):
         return True
+    if value is None or isinstance(value, (str, bool, int)):
+        return False
+    if isinstance(value, float):
+        if math.isfinite(value):
+            return False
+        canonical_json(value)
+        return False
+    tainted = False
     if dataclasses.is_dataclass(value):
-        return any(
-            _contains_taint(getattr(value, item.name))
-            for item in dataclasses.fields(value)
-            if item.metadata.get("serialize", True)
-        )
+        for item in dataclasses.fields(value):
+            if not item.metadata.get("serialize", True):
+                continue
+            child_path = f"{path}.{item.name}"
+            normalized = _normalized_key(item.name)
+            if normalized in FORBIDDEN_RUNTIME_KEY_TOKENS:
+                runtime_paths.append(child_path)
+            if normalized in _FORBIDDEN_DECISION_KEYS:
+                orchestration_paths.append(child_path)
+            tainted = (
+                _inspect_value(
+                    getattr(value, item.name),
+                    path=child_path,
+                    runtime_paths=runtime_paths,
+                    orchestration_paths=orchestration_paths,
+                )
+                or tainted
+            )
+        return tainted
+    if isinstance(value, dict):
+        for key, item in value.items():
+            key_path = f"{path}.<key>"
+            if not isinstance(key, (str, int, float, bool)) and key is not None:
+                tainted = (
+                    _inspect_value(
+                        key,
+                        path=key_path,
+                        runtime_paths=runtime_paths,
+                        orchestration_paths=orchestration_paths,
+                    )
+                    or tainted
+                )
+            child_path = f"{path}.{key}"
+            normalized = _normalized_key(str(key))
+            if normalized in FORBIDDEN_RUNTIME_KEY_TOKENS:
+                runtime_paths.append(child_path)
+            if normalized in _FORBIDDEN_DECISION_KEYS:
+                orchestration_paths.append(child_path)
+            tainted = (
+                _inspect_value(
+                    item,
+                    path=child_path,
+                    runtime_paths=runtime_paths,
+                    orchestration_paths=orchestration_paths,
+                )
+                or tainted
+            )
+        return tainted
+    if isinstance(value, (tuple, list)):
+        for index, item in enumerate(value):
+            tainted = (
+                _inspect_value(
+                    item,
+                    path=f"{path}[{index}]",
+                    runtime_paths=runtime_paths,
+                    orchestration_paths=orchestration_paths,
+                )
+                or tainted
+            )
+        return tainted
     if isinstance(value, Mapping):
-        return any(
-            _contains_taint(key) or _contains_taint(item)
-            for key, item in value.items()
+        return _inspect_value(
+            dict(value.items()),
+            path=path,
+            runtime_paths=runtime_paths,
+            orchestration_paths=orchestration_paths,
         )
     if isinstance(value, Sequence) and not isinstance(
         value,
         (str, bytes, bytearray),
     ):
-        return any(_contains_taint(item) for item in value)
+        return _inspect_value(
+            tuple(value),
+            path=path,
+            runtime_paths=runtime_paths,
+            orchestration_paths=orchestration_paths,
+        )
+    # Preserve the former canonical serializer's fail-closed behavior for
+    # unsupported leaves and non-finite numbers.
+    canonical_json(value)
     return False
-
-
-def _forbidden_keys(value: object, path: str = "$") -> list[str]:
-    failures: list[str] = []
-    if isinstance(value, Mapping):
-        for key, item in value.items():
-            normalized = re.sub(r"[^a-z0-9]", "", str(key).casefold())
-            child_path = f"{path}.{key}"
-            if normalized in _FORBIDDEN_DECISION_KEYS:
-                failures.append(child_path)
-            failures.extend(_forbidden_keys(item, child_path))
-    elif isinstance(value, Sequence) and not isinstance(
-        value,
-        (str, bytes, bytearray),
-    ):
-        for index, item in enumerate(value):
-            failures.extend(_forbidden_keys(item, f"{path}[{index}]"))
-    return failures
 
 
 @dataclass(frozen=True, slots=True)
@@ -125,26 +195,29 @@ class IdentityBoundary:
                     "action_payload_schema": value.action_payload_schema,
                     "rendered_content_digest": value.digest(),
                 }
-            if _contains_taint(value):
+            runtime_paths: list[str] = []
+            orchestration_paths: list[str] = []
+            if _inspect_value(
+                value,
+                path="$",
+                runtime_paths=runtime_paths,
+                orchestration_paths=orchestration_paths,
+            ):
                 failures.append(f"$[{index}]:TAINTED_VALUE")
                 continue
-            serialized = json.loads(canonical_json(value))
             failures.extend(
-                f"$[{index}]{path[1:]}:FORBIDDEN_KEY"
-                for path in forbidden_runtime_paths(serialized)
+                f"$[{index}]{path[1:]}:FORBIDDEN_KEY" for path in runtime_paths
             )
             failures.extend(
                 f"$[{index}]{path[1:]}:ORCHESTRATION_KEY"
-                for path in _forbidden_keys(serialized)
+                for path in orchestration_paths
             )
         return tuple(sorted(set(failures)))
 
     def require_decision_context(self, *values: object) -> None:
         failures = self.inspect_decision_context(*values)
         if failures:
-            raise PermissionError(
-                "IDENTITY_BOUNDARY_VIOLATION:" + ",".join(failures)
-            )
+            raise PermissionError("IDENTITY_BOUNDARY_VIOLATION:" + ",".join(failures))
 
 
 __all__ = [

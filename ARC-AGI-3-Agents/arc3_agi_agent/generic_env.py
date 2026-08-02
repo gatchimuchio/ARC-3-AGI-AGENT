@@ -12,7 +12,7 @@ from arc_agi.local_wrapper import (  # type: ignore[import-untyped]
 from arcengine import FrameDataRaw, GameAction
 
 from .generic_types import GenericObservation
-from .sample_observation import SampleFrameAdapter
+from .sample_observation import SampleFrameAdapter, SampleFrameProjection
 from .schema import digest_object
 
 GENERIC_ENV_VERSION = "arc3-generic-environments-v1"
@@ -79,18 +79,13 @@ class MechanismWorld:
     _seen_request_ids: set[str] = field(default_factory=set, init=False)
 
     def __post_init__(self) -> None:
-        if (
-            not self.available_actions
-            or self.available_actions
-            != tuple(sorted(set(self.available_actions)))
+        if not self.available_actions or self.available_actions != tuple(
+            sorted(set(self.available_actions))
         ):
             raise ValueError("MECHANISM_WORLD_ACTION_SURFACE_INVALID")
-        if (
-            not self.winning_ordinals
-            or any(
-                item < 0 or item >= len(self.available_actions)
-                for item in self.winning_ordinals
-            )
+        if not self.winning_ordinals or any(
+            item < 0 or item >= len(self.available_actions)
+            for item in self.winning_ordinals
         ):
             raise ValueError("MECHANISM_WORLD_WINNING_ORDINAL_INVALID")
         if self.transformation not in {"BASE", *TRANSFORMATION_FAMILIES}:
@@ -135,7 +130,8 @@ class MechanismWorld:
     def observe(self) -> GenericObservation:
         matrix = self._base_matrix()
         return GenericObservation(
-            signature="mechanism-frame:" + digest_object(
+            signature="mechanism-frame:"
+            + digest_object(
                 {
                     "matrix": matrix,
                     "progress": self._progress,
@@ -171,9 +167,7 @@ class MechanismWorld:
             self._state = "GAME_OVER"
             self._last_effects = ("IRREVERSIBLE_FAILURE",)
             return self.observe()
-        expected = self.winning_ordinals[
-            self._progress % len(self.winning_ordinals)
-        ]
+        expected = self.winning_ordinals[self._progress % len(self.winning_ordinals)]
         if ordinal == expected:
             self._progress += 1
             self._last_effects = ("LEVEL_PROGRESS", "VISIBLE_STATE_CHANGE")
@@ -210,6 +204,12 @@ class OfflineGenericEnvironment:
     frame_adapter: SampleFrameAdapter = field(default_factory=SampleFrameAdapter)
     _current: FrameDataRaw = field(init=False, repr=False)
     _previous: FrameDataRaw | None = field(default=None, init=False, repr=False)
+    _current_projection: SampleFrameProjection = field(init=False, repr=False)
+    _previous_projection: SampleFrameProjection | None = field(
+        default=None,
+        init=False,
+        repr=False,
+    )
     _seen_request_ids: set[str] = field(default_factory=set, init=False)
 
     def __post_init__(self) -> None:
@@ -219,11 +219,15 @@ class OfflineGenericEnvironment:
         if not isinstance(current, FrameDataRaw):
             raise TypeError(f"{self._boundary}_INITIAL_FRAME_REQUIRED")
         self._current = current
+        self._current_projection = self.frame_adapter.project(current)
 
     def _observation(self) -> GenericObservation:
-        projection = self.frame_adapter.project(self._current)
+        projection = self._current_projection
         effects = self.frame_adapter.visible_effects(
-            self._current, self._previous
+            self._current,
+            self._previous,
+            current_projection=projection,
+            previous_projection=self._previous_projection,
         )
         payload_schema: tuple[tuple[int, tuple[str, ...]], ...] = ()
         if 6 in projection.available_actions:
@@ -258,11 +262,10 @@ class OfflineGenericEnvironment:
         data: dict[str, int] = {}
         if action_id == 6:
             if set(payload) != {"x", "y"}:
-                raise ValueError(
-                    f"{self._boundary}_POINTER_PAYLOAD_REQUIRED"
-                )
+                raise ValueError(f"{self._boundary}_POINTER_PAYLOAD_REQUIRED")
             data = {"x": int(payload["x"]), "y": int(payload["y"])}
-        self._previous = self._current
+        previous = self._current
+        previous_projection = self._current_projection
         raw = self.environment.step(
             action,
             data=data,
@@ -274,14 +277,18 @@ class OfflineGenericEnvironment:
         )
         if not isinstance(raw, FrameDataRaw):
             raise RuntimeError(f"{self._boundary}_STEP_FAILED")
+        self._previous = previous
+        self._previous_projection = previous_projection
         self._current = raw
+        self._current_projection = self.frame_adapter.project(raw)
         return self._observation()
 
     def reset_level(self, *, request_id: str) -> GenericObservation:
         if request_id in self._seen_request_ids:
             raise RuntimeError(f"{self._boundary}_DUPLICATE_REQUEST")
         self._seen_request_ids.add(request_id)
-        self._previous = self._current
+        previous = self._current
+        previous_projection = self._current_projection
         raw = self.environment.step(
             GameAction.RESET,
             data={},
@@ -294,7 +301,10 @@ class OfflineGenericEnvironment:
         )
         if not isinstance(raw, FrameDataRaw):
             raise RuntimeError(f"{self._boundary}_RESET_FAILED")
+        self._previous = previous
+        self._previous_projection = previous_projection
         self._current = raw
+        self._current_projection = self.frame_adapter.project(raw)
         return self._observation()
 
 
@@ -308,13 +318,12 @@ class CompetitionGenericEnvironment(OfflineGenericEnvironment):
         if not isinstance(self.environment, EnvironmentWrapper) or isinstance(
             self.environment, LocalEnvironmentWrapper
         ):
-            raise TypeError(
-                "GENERIC_COMPETITION_REMOTE_WRAPPER_REQUIRED"
-            )
+            raise TypeError("GENERIC_COMPETITION_REMOTE_WRAPPER_REQUIRED")
         current = self.environment.observation_space
         if not isinstance(current, FrameDataRaw):
             raise TypeError("GENERIC_COMPETITION_INITIAL_FRAME_REQUIRED")
         self._current = current
+        self._current_projection = self.frame_adapter.project(current)
 
 
 def transformed_worlds(
@@ -331,7 +340,9 @@ def transformed_worlds(
                 winning_ordinals=(1,),
                 required_progress=2,
                 transformation=family,
-                failure_ordinals=(2,) if family in {"ORDER", "UNSEEN_COMPOSITION"} else (),
+                failure_ordinals=(2,)
+                if family in {"ORDER", "UNSEEN_COMPOSITION"}
+                else (),
                 seed=seed + index,
             ),
         )

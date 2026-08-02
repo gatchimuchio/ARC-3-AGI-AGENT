@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from functools import lru_cache
 from typing import Mapping, Protocol, Sequence
 
 from .schema import digest_object
@@ -61,9 +62,7 @@ class EvidenceBindingKey:
 
     def payload(self) -> dict[str, str]:
         return {
-            "normalized_state_pattern_digest": (
-                self.normalized_state_pattern_digest
-            ),
+            "normalized_state_pattern_digest": (self.normalized_state_pattern_digest),
             "action_relation_digest": self.action_relation_digest,
             "precondition_digest": self.precondition_digest,
             "predicted_effect_digest": self.predicted_effect_digest,
@@ -100,11 +99,7 @@ class CandidateEvidenceBinding:
             "confidence_ppm",
         ):
             value = getattr(self, name)
-            if (
-                isinstance(value, bool)
-                or not isinstance(value, int)
-                or value < 0
-            ):
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
                 failures.append("CANDIDATE_EVIDENCE_COUNTER_INVALID:" + name)
         if self.confidence_ppm > 1_000_000:
             failures.append("CANDIDATE_EVIDENCE_CONFIDENCE_INVALID")
@@ -159,6 +154,66 @@ def _relation_without_surface_ordinal(value: str) -> str:
     return re.sub(r"^surface:\d+:", "surface:dynamic:", value)
 
 
+@lru_cache(maxsize=65_536)
+def _build_evidence_binding_key_cached(
+    *,
+    topology_tokens: tuple[str, ...],
+    relations: tuple[str, ...],
+    descriptor_semantic_key: str,
+    action_id: int,
+    target_role: str | None,
+    payload_fields: tuple[str, ...],
+    predicted_effects: tuple[str, ...],
+    scope_class: str,
+) -> EvidenceBindingKey:
+    normalized_state_pattern_digest = "state-pattern:" + digest_object(
+        {
+            "topology_tokens": topology_tokens,
+            "relations": relations,
+        }
+    )
+    action_relation_digest = "action-relation:" + digest_object(
+        {
+            "current_legal_action": action_id,
+            "semantic_relation": _relation_without_surface_ordinal(
+                descriptor_semantic_key
+            ),
+            "target_role": target_role or "UNTARGETED",
+            "dynamic_anchor_class": (
+                "CURRENT_RENDER_ROLE_ANCHOR"
+                if {"x", "y"}.issubset(payload_fields)
+                else "NO_COORDINATE_ANCHOR"
+            ),
+            "payload_fields": payload_fields,
+            "effect_binding_class": (
+                "PREDICTED_EFFECT_FAMILY" if predicted_effects else "OPEN_EFFECT"
+            ),
+        }
+    )
+    precondition_digest = "precondition:" + digest_object(
+        {
+            "state_pattern": normalized_state_pattern_digest,
+            "target_role": target_role or "UNTARGETED",
+            "payload_fields": payload_fields,
+        }
+    )
+    predicted_effect_digest = "predicted-effect:" + digest_object(predicted_effects)
+    applicability_scope_digest = "applicability-scope:" + digest_object(
+        {
+            "scope_class": scope_class,
+            "targeted": target_role is not None,
+            "payload_fields": payload_fields,
+        }
+    )
+    return EvidenceBindingKey(
+        normalized_state_pattern_digest=normalized_state_pattern_digest,
+        action_relation_digest=action_relation_digest,
+        precondition_digest=precondition_digest,
+        predicted_effect_digest=predicted_effect_digest,
+        applicability_scope_digest=applicability_scope_digest,
+    )
+
+
 def build_evidence_binding_key(
     *,
     topology_tokens: Sequence[str],
@@ -172,57 +227,15 @@ def build_evidence_binding_key(
 ) -> EvidenceBindingKey:
     """Build an identity-free key without literal coordinate values."""
 
-    normalized_topology = tuple(sorted(set(topology_tokens)))
-    normalized_relations = tuple(sorted(set(relations)))
-    normalized_payload_fields = tuple(sorted(set(payload_fields)))
-    normalized_effects = tuple(sorted(set(predicted_effects)))
-    normalized_state_pattern_digest = "state-pattern:" + digest_object(
-        {
-            "topology_tokens": normalized_topology,
-            "relations": normalized_relations,
-        }
-    )
-    action_relation_digest = "action-relation:" + digest_object(
-        {
-            "current_legal_action": action_id,
-            "semantic_relation": _relation_without_surface_ordinal(
-                descriptor_semantic_key
-            ),
-            "target_role": target_role or "UNTARGETED",
-            "dynamic_anchor_class": (
-                "CURRENT_RENDER_ROLE_ANCHOR"
-                if {"x", "y"}.issubset(normalized_payload_fields)
-                else "NO_COORDINATE_ANCHOR"
-            ),
-            "payload_fields": normalized_payload_fields,
-            "effect_binding_class": (
-                "PREDICTED_EFFECT_FAMILY" if normalized_effects else "OPEN_EFFECT"
-            ),
-        }
-    )
-    precondition_digest = "precondition:" + digest_object(
-        {
-            "state_pattern": normalized_state_pattern_digest,
-            "target_role": target_role or "UNTARGETED",
-            "payload_fields": normalized_payload_fields,
-        }
-    )
-    predicted_effect_digest = "predicted-effect:" + digest_object(
-        normalized_effects
-    )
-    applicability_scope_digest = "applicability-scope:" + digest_object(
-        {
-            "scope_class": scope_class,
-            "targeted": target_role is not None,
-            "payload_fields": normalized_payload_fields,
-        }
-    )
-    return EvidenceBindingKey(
-        normalized_state_pattern_digest=normalized_state_pattern_digest,
-        action_relation_digest=action_relation_digest,
-        precondition_digest=precondition_digest,
-        predicted_effect_digest=predicted_effect_digest,
-        applicability_scope_digest=applicability_scope_digest,
+    return _build_evidence_binding_key_cached(
+        topology_tokens=tuple(sorted(set(topology_tokens))),
+        relations=tuple(sorted(set(relations))),
+        descriptor_semantic_key=descriptor_semantic_key,
+        action_id=action_id,
+        target_role=target_role,
+        payload_fields=tuple(sorted(set(payload_fields))),
+        predicted_effects=tuple(sorted(set(predicted_effects))),
+        scope_class=scope_class,
     )
 
 
@@ -240,15 +253,11 @@ def binding_key_from_payload(
     if not all(isinstance(value, str) and value for value in values.values()):
         return None
     return EvidenceBindingKey(
-        normalized_state_pattern_digest=str(
-            values["normalized_state_pattern_digest"]
-        ),
+        normalized_state_pattern_digest=str(values["normalized_state_pattern_digest"]),
         action_relation_digest=str(values["action_relation_digest"]),
         precondition_digest=str(values["precondition_digest"]),
         predicted_effect_digest=str(values["predicted_effect_digest"]),
-        applicability_scope_digest=str(
-            values["applicability_scope_digest"]
-        ),
+        applicability_scope_digest=str(values["applicability_scope_digest"]),
     )
 
 
@@ -263,8 +272,7 @@ def record_matches_binding_prefix(
         == key.normalized_state_pattern_digest
         and record_key.action_relation_digest == key.action_relation_digest
         and record_key.precondition_digest == key.precondition_digest
-        and record_key.applicability_scope_digest
-        == key.applicability_scope_digest
+        and record_key.applicability_scope_digest == key.applicability_scope_digest
     )
 
 
@@ -286,8 +294,7 @@ def bind_candidate_records(
         record_key = binding_key_from_payload(payload)
         if (
             record_key is None
-            or record_key.action_relation_digest
-            != key.action_relation_digest
+            or record_key.action_relation_digest != key.action_relation_digest
         ):
             continue
         state_match = (
@@ -295,16 +302,13 @@ def bind_candidate_records(
             == key.normalized_state_pattern_digest
         )
         precondition_match = (
-            state_match
-            and record_key.precondition_digest == key.precondition_digest
+            state_match and record_key.precondition_digest == key.precondition_digest
         )
         effect_compatible = (
-            record_key.predicted_effect_digest
-            == key.predicted_effect_digest
+            record_key.predicted_effect_digest == key.predicted_effect_digest
         )
         scope_applicable = (
-            record_key.applicability_scope_digest
-            == key.applicability_scope_digest
+            record_key.applicability_scope_digest == key.applicability_scope_digest
         )
         support_count = _counter(payload, "support_count")
         contradiction_count = _counter(payload, "contradiction_count")

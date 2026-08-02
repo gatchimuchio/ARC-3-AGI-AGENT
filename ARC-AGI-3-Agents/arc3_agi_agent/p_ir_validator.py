@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 from collections import deque
 from collections.abc import Sequence
+from functools import lru_cache
 
 from .p_ir_abi import abi_compatibility_failures
 from .p_ir_resource import static_resource_failures
@@ -106,16 +107,10 @@ def _graph_type_failures(graph: TypedDAG) -> tuple[str, ...]:
                 failures.append("P_IR_PARAMETER_VALUE_INVALID:" + node.node_id)
         if node.opcode == "TOPK":
             value = node.parameter_map().get("k")
-            if (
-                isinstance(value, bool)
-                or not isinstance(value, int)
-                or value < 1
-            ):
+            if isinstance(value, bool) or not isinstance(value, int) or value < 1:
                 failures.append("P_IR_TOPK_BOUND_INVALID:" + node.node_id)
         if node.opcode == "FEATURE_PROJECT":
-            mode = node.parameter_map().get(
-                "projection_mode", "spatial-relational"
-            )
+            mode = node.parameter_map().get("projection_mode", "spatial-relational")
             if mode not in _PROJECTION_MODES:
                 failures.append("P_IR_PROJECTION_MODE_INVALID:" + node.node_id)
         dependencies[node.node_id] = {
@@ -129,9 +124,7 @@ def _graph_type_failures(graph: TypedDAG) -> tuple[str, ...]:
         output_types[node.node_id] = node.output_type
 
     indegree = {
-        node_id: len(
-            {item for item in refs if item in node_map}
-        )
+        node_id: len({item for item in refs if item in node_map})
         for node_id, refs in dependencies.items()
     }
     dependents: dict[str, list[str]] = {node_id: [] for node_id in node_map}
@@ -139,7 +132,9 @@ def _graph_type_failures(graph: TypedDAG) -> tuple[str, ...]:
         for ref in refs:
             if ref in dependents:
                 dependents[ref].append(node_id)
-    ready = deque(sorted(node_id for node_id, degree in indegree.items() if degree == 0))
+    ready = deque(
+        sorted(node_id for node_id, degree in indegree.items() if degree == 0)
+    )
     ordered: list[str] = []
     while ready:
         node_id = ready.popleft()
@@ -174,25 +169,19 @@ def _graph_type_failures(graph: TypedDAG) -> tuple[str, ...]:
 
 def stable_topological_order(graph: TypedDAG) -> tuple[str, ...]:
     failures = _graph_type_failures(graph)
-    blocking = tuple(
-        item for item in failures if "CYCLE" in item or "UNKNOWN" in item
-    )
+    blocking = tuple(item for item in failures if "CYCLE" in item or "UNKNOWN" in item)
     if blocking:
         raise ValueError(";".join(blocking))
     node_ids = {node.node_id for node in graph.nodes}
     dependencies = {
-        node.node_id: {
-            ref for ref in node.inputs if ref in node_ids
-        }
+        node.node_id: {ref for ref in node.inputs if ref in node_ids}
         for node in graph.nodes
     }
     dependents: dict[str, set[str]] = {node_id: set() for node_id in node_ids}
     for node_id, refs in dependencies.items():
         for ref in refs:
             dependents[ref].add(node_id)
-    ready = sorted(
-        node_id for node_id, refs in dependencies.items() if not refs
-    )
+    ready = sorted(node_id for node_id, refs in dependencies.items() if not refs)
     ordered: list[str] = []
     while ready:
         node_id = ready.pop(0)
@@ -216,8 +205,7 @@ def _program_security_failures(program: PIRProgram) -> tuple[str, ...]:
     )
     for value in values:
         failures.extend(
-            "P_IR_IDENTITY_TAINT:" + path
-            for path in forbidden_runtime_paths(value)
+            "P_IR_IDENTITY_TAINT:" + path for path in forbidden_runtime_paths(value)
         )
         failures.extend(
             "P_IR_ARBITRARY_CODE_SURFACE:" + path
@@ -228,6 +216,7 @@ def _program_security_failures(program: PIRProgram) -> tuple[str, ...]:
     return tuple(sorted(set(failures)))
 
 
+@lru_cache(maxsize=256)
 def validate_p_ir_program(program: PIRProgram) -> tuple[str, ...]:
     failures: list[str] = []
     if program.schema_version != PIR_SCHEMA_VERSION:
@@ -245,8 +234,7 @@ def validate_p_ir_program(program: PIRProgram) -> tuple[str, ...]:
         if graph.graph_kind != expected_kind:
             failures.append("P_IR_REQUIRED_GRAPH_KIND_MISMATCH:" + graph.graph_id)
     representation_output_types = {
-        node.node_id: node.output_type
-        for node in program.representation_graph.nodes
+        node.node_id: node.output_type for node in program.representation_graph.nodes
     }
     if tuple(
         representation_output_types.get(item)
@@ -254,12 +242,10 @@ def validate_p_ir_program(program: PIRProgram) -> tuple[str, ...]:
     ) != ("Representation",):
         failures.append("P_IR_REPRESENTATION_OUTPUT_INVALID")
     candidate_output_types = {
-        node.node_id: node.output_type
-        for node in program.candidate_graph.nodes
+        node.node_id: node.output_type for node in program.candidate_graph.nodes
     }
     if tuple(
-        candidate_output_types.get(item)
-        for item in program.candidate_graph.outputs
+        candidate_output_types.get(item) for item in program.candidate_graph.outputs
     ) != ("CandidateSet",):
         failures.append("P_IR_CANDIDATE_OUTPUT_INVALID")
     failures.extend(static_resource_failures(program))

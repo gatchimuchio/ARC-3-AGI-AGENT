@@ -1,6 +1,6 @@
 {
   "active_milestone": "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE",
-  "content_digest": "rev4-current-authority-manifest:dbd7e7b3399c7ecf3523c64cbe69c99f26fbde0ff65420faf19854ee124c242c",
+  "content_digest": "rev4-current-authority-manifest:17318066ac9a48b8e66012d6a9f17b0e1cd8a2a0518dee01b0932f10eeb10322",
   "current_selector_path": "control/rev4/CURRENT_TASK.json",
   "digest_excluded_fields": [
     "content_digest"
@@ -97,6 +97,46 @@
       "sha256": "782edc9eb6ea85c777b95d625c664470a0dd260c43fa1f474ceb4f31da776c4d"
     },
     {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_compute.py",
+      "role": "PRODUCT_COMPUTE_SUBJECT",
+      "sha256": "459a416dd93b3877fde4e46ebb65c06c8578da619063a2082f2638d75e0693c9"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_env.py",
+      "role": "PRODUCT_ENVIRONMENT_ADAPTER",
+      "sha256": "09c321e88fc6a85f91c8eed77409370bdbb5c4c334f38ac61fcb85e72fc2e1bd"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_memory.py",
+      "role": "PRODUCT_MEMORY_SUBJECT",
+      "sha256": "92c0441e7f59de40d376658116d752c273c6ccfde96c25bdd9dbac69c7a2916b"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/memory_image.py",
+      "role": "PRODUCT_MEMORY_IMAGE",
+      "sha256": "774d98778151bb4fab9fc6bff54c25b5f04e6a611a35dc12340a83b592f56e80"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/evidence_binding.py",
+      "role": "PRODUCT_EVIDENCE_BINDING",
+      "sha256": "8447abf0c59b7a3311023c71c5de45bfebe4ce11e969f30e42ce3d45c0bac832"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/identity_boundary.py",
+      "role": "PRODUCT_IDENTITY_BOUNDARY",
+      "sha256": "23b2866c2006fd2c234e9effa127e2a06942655b4ef231c282467b2253eb513a"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/p_ir.py",
+      "role": "PRODUCT_INSTRUCTION_PROGRAM",
+      "sha256": "1c5a9d722e77b9c58c545a77f239f4e8c8e9c9316610cdb00361ff3843042ff7"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/p_ir_validator.py",
+      "role": "PRODUCT_INSTRUCTION_VALIDATOR",
+      "sha256": "73c5c4a030438e36ea82090989169ac1d368843f0dc0d4b29a7dcab0377937f1"
+    },
+    {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py",
       "role": "PRODUCT_ENDPOINT_CONTRACT",
       "sha256": "517476d9fdfa4cae6af5a7f22c2f565fa0772eadf108dfb50371a35f6a185c46"
@@ -119,7 +159,7 @@
     {
       "path": "scripts/refresh_rev4_authority_manifest.py",
       "role": "CURRENT_MANIFEST_BUILDER",
-      "sha256": "ecf8ca302255eeaab6052412348a0bb7fd23766051d24ec212ae887e3d3d59ff"
+      "sha256": "2df90986264f18099d27af060324f98daa77f17f158806e3a6183ec59d8f9b25"
     },
     {
       "path": "scripts/measure_product_resource_bounds.py",
@@ -130,6 +170,11 @@
       "path": "analysis/product/rev4/product_resource_bounds.json",
       "role": "PRODUCT_RESOURCE_BOUND_EVIDENCE",
       "sha256": "8c96e3f0ae777b7b6e8fedb892e7399cc8d011dbbe26817cb55f9dcde243a2fc"
+    },
+    {
+      "path": "analysis/product/rev4/m0_runtime_performance_repair.json",
+      "role": "PRODUCT_RUNTIME_PERFORMANCE_EVIDENCE",
+      "sha256": "bcee23167ebd2c55c2c65297f727d4b1e6a3433d83af2744f53377d9a7d5aaa9"
     },
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_product_runner.py",
@@ -152,6 +197,11 @@
       "sha256": "f65b2623cd6f46c44839a57b4999e8260381d62018db96026f167a3063077b95"
     },
     {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_product_runtime_performance_invariants.py",
+      "role": "PRODUCT_RUNTIME_PERFORMANCE_REGRESSION_TEST",
+      "sha256": "d3222257838d06d09337cb75651bcb55d156003f3a3a269123a68e3c03f7c28d"
+    },
+    {
       "path": "ARC-AGI-3-Agents/tests/integration/test_product_offline_runner.py",
       "role": "PRODUCT_OFFLINE_INTEGRATION_TEST",
       "sha256": "725d99a7d06a9a41ff9eb6078b91b50b9638bb96500363c8370a6be8d7d7ba09"
@@ -162,7 +212,7 @@
       "sha256": "f142083ef5aa434e34a4bb23fcd76fe1ef1d9bec67d7e6be7fabee6b8d396f26"
     }
   ],
-  "entry_count": 31,
+  "entry_count": 41,
   "generated_by": "scripts/refresh_rev4_authority_manifest.py",
   "legacy_rev3_classification_path": "control/rev4/LEGACY_REV3_CLASSIFICATION.json",
   "product_id": "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4",

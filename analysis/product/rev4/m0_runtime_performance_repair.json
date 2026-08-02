@@ -1,0 +1,50 @@
+{
+  "behavior_equivalence": {
+    "actions_executed": 650,
+    "failure_signatures": [
+      "GENERIC_GAME_OVER_OBSERVED"
+    ],
+    "final_state": "NOT_FINISHED",
+    "lifecycle_failure_count_after": 0,
+    "progress_count": 0,
+    "stop_reason": "NO_PROGRESS_LIMIT"
+  },
+  "classification": "PRODUCT_RUNTIME_PERFORMANCE_REPAIR",
+  "measured_at": "2026-08-02T16:04:05+09:00",
+  "optimizations": [
+    "single-pass fail-closed identity-boundary inspection",
+    "canonical semantic-record and citation caching",
+    "deeply immutable cached semantic payloads",
+    "canonical memory-region digest without dataclass reserialization",
+    "P-IR validation and logical-digest caching",
+    "normalized evidence-binding-key caching",
+    "one rendered-frame projection per raw observation",
+    "immutable instruction-body metadata caching"
+  ],
+  "profile_100_cycles": {
+    "after": {
+      "function_calls": 127271317,
+      "runtime_seconds": 82.46
+    },
+    "before": {
+      "function_calls": 294630422,
+      "runtime_seconds": 229.52
+    },
+    "function_call_reduction_percent": 56.8,
+    "runtime_reduction_percent": 64.07
+  },
+  "product_id": "ARC3CompletionAgent",
+  "runtime_650_cycles": {
+    "after": {
+      "average_fps": 2.11,
+      "runtime_seconds": 308.78
+    },
+    "before": {
+      "average_fps": 0.55,
+      "runtime_seconds": 1190.27
+    },
+    "runtime_reduction_percent": 74.06,
+    "speedup_ratio": 3.85
+  },
+  "schema_version": "arc3-product-runtime-performance-repair-v1"
+}

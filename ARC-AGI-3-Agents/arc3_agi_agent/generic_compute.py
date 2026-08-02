@@ -5,6 +5,7 @@ from __future__ import annotations
 import math
 from collections import Counter, deque
 from dataclasses import dataclass, field
+from functools import lru_cache
 from typing import Protocol, Sequence
 
 from .authority_state import AuthorityState
@@ -111,8 +112,7 @@ def _components(
                         queue.append((next_y, next_x))
             ordered_cells = tuple(sorted(cells))
             if all(
-                cell_y in {0, height - 1}
-                or cell_x in {0, width - 1}
+                cell_y in {0, height - 1} or cell_x in {0, width - 1}
                 for cell_y, cell_x in ordered_cells
             ):
                 # Border-only components are rendered interface evidence, not
@@ -180,9 +180,7 @@ def represent_observation(
                 area_bucket=area_bucket,
                 shape_signature=shape_signature,
                 relative_vertical=_relative_band(centroid_y / max(1, height - 1)),
-                relative_horizontal=_relative_band(
-                    centroid_x / max(1, width - 1)
-                ),
+                relative_horizontal=_relative_band(centroid_x / max(1, width - 1)),
                 neighbor_count=0,
                 target_x=max(0, min(63, target_x)),
                 target_y=max(0, min(63, target_y)),
@@ -196,19 +194,13 @@ def represent_observation(
             right_y, right_x = centroids[right]
             vertical = "above" if left_y < right_y else "below"
             horizontal = "left-of" if left_x < right_x else "right-of"
-            relations.add(
-                f"{roles[left].role_id}:{vertical}:{roles[right].role_id}"
-            )
-            relations.add(
-                f"{roles[left].role_id}:{horizontal}:{roles[right].role_id}"
-            )
+            relations.add(f"{roles[left].role_id}:{vertical}:{roles[right].role_id}")
+            relations.add(f"{roles[left].role_id}:{horizontal}:{roles[right].role_id}")
             distance = abs(left_y - right_y) + abs(left_x - right_x)
             if distance <= max(2.0, min(height, width) / 8.0):
                 neighbor_counts[left] += 1
                 neighbor_counts[right] += 1
-                relations.add(
-                    f"{roles[left].role_id}:near:{roles[right].role_id}"
-                )
+                relations.add(f"{roles[left].role_id}:near:{roles[right].role_id}")
     roles = [
         ObjectRole(
             role_id=role.role_id,
@@ -229,9 +221,7 @@ def represent_observation(
         f"action-count:{len(observation.available_actions)}",
         f"terminal:{observation.terminal_state.casefold()}",
     }
-    topology_tokens.update(
-        token for role in roles for token in role.semantic_tokens()
-    )
+    topology_tokens.update(token for role in roles for token in role.semantic_tokens())
     role_tuple = tuple(roles)
     relation_tuple = tuple(sorted(relations))
     topology_tuple = tuple(sorted(topology_tokens))
@@ -267,11 +257,7 @@ def action_descriptors(
 
     payload_schema = dict(observation.action_payload_schema)
     descriptors: list[ActionDescriptor] = []
-    matrix = (
-        observation.rendered_layers[-1]
-        if observation.rendered_layers
-        else ()
-    )
+    matrix = observation.rendered_layers[-1] if observation.rendered_layers else ()
     matrix_height = len(matrix) if matrix else 64
     matrix_width = len(matrix[0]) if matrix else 64
     components = _components(matrix)[:32]
@@ -306,9 +292,7 @@ def action_descriptors(
                     target_y=32,
                 ),
             )
-            role_anchors: list[
-                tuple[ObjectRole, tuple[tuple[str, int, int], ...]]
-            ] = []
+            role_anchors: list[tuple[ObjectRole, tuple[tuple[str, int, int], ...]]] = []
             for role in targets[:32]:
                 cells = (
                     components[role.area_rank]
@@ -321,8 +305,7 @@ def action_descriptors(
                     nearest_y, nearest_x = min(
                         cells,
                         key=lambda item: (
-                            (item[0] - centroid_y) ** 2
-                            + (item[1] - centroid_x) ** 2,
+                            (item[0] - centroid_y) ** 2 + (item[1] - centroid_x) ** 2,
                             item[0],
                             item[1],
                         ),
@@ -504,11 +487,7 @@ def _memory_effects(
         value = record.payload().get("learned_effects", ())
         if isinstance(value, (str, bytes)) or not isinstance(value, Sequence):
             continue
-        effects.update(
-            str(item)
-            for item in value
-            if isinstance(item, str) and item
-        )
+        effects.update(str(item) for item in value if isinstance(item, str) and item)
     return tuple(sorted(effects))
 
 
@@ -525,12 +504,15 @@ class SymbolicRelationalInstructionBody:
     def body_version(self) -> str:
         return self.version
 
+    @lru_cache(maxsize=128)
     def provenance_digest(self) -> str:
         return "generic-p-provenance:" + digest_object(self.provenance)
 
+    @lru_cache(maxsize=128)
     def digest(self) -> str:
         return "generic-symbolic-p:" + digest_object(self)
 
+    @lru_cache(maxsize=128)
     def validate(self) -> tuple[str, ...]:
         failures: list[str] = []
         if not self.version or not self.provenance:
@@ -586,12 +568,7 @@ class SymbolicRelationalInstructionBody:
                     + visible_change * 0.65 / math.sqrt(sample_count)
                 )
             )
-            prior = _bounded(
-                0.3
-                + 0.45 * progress
-                + 0.2 * information
-                - 0.35 * risk
-            )
+            prior = _bounded(0.3 + 0.45 * progress + 0.2 * information - 0.35 * risk)
             effects = {"VISIBLE_STATE_CHANGE"}
             if progress >= 0.5:
                 effects.add("LEVEL_PROGRESS")
@@ -657,12 +634,15 @@ class ParametricRelationalInstructionBody:
     def body_version(self) -> str:
         return self.version
 
+    @lru_cache(maxsize=128)
     def provenance_digest(self) -> str:
         return "generic-p-provenance:" + digest_object(self.provenance)
 
+    @lru_cache(maxsize=128)
     def digest(self) -> str:
         return "generic-parametric-p:" + digest_object(self)
 
+    @lru_cache(maxsize=128)
     def validate(self) -> tuple[str, ...]:
         failures: list[str] = []
         if len(self.hidden_weights) < 2:
@@ -710,11 +690,7 @@ class ParametricRelationalInstructionBody:
             records,
             representation=representation,
         )
-        observed = (
-            1.0
-            if success + hazard + no_effect + visible_change > 0.0
-            else 0.0
-        )
+        observed = 1.0 if success + hazard + no_effect + visible_change > 0.0 else 0.0
         continue_visible_effect = (
             visible_change > 0.0
             and hazard == 0.0
@@ -771,8 +747,7 @@ class ParametricRelationalInstructionBody:
             )
             hazard = _sigmoid(
                 sum(
-                    weight * value
-                    for weight, value in zip(self.hazard_weights, hidden)
+                    weight * value for weight, value in zip(self.hazard_weights, hidden)
                 )
                 - 2.0
             )
@@ -861,14 +836,17 @@ class HybridRelationalInstructionBody:
     def body_version(self) -> str:
         return self.version
 
+    @lru_cache(maxsize=128)
     def provenance_digest(self) -> str:
         return "generic-p-provenance:" + digest_object(
             (self.symbolic.provenance_digest(), self.parametric.provenance_digest())
         )
 
+    @lru_cache(maxsize=128)
     def digest(self) -> str:
         return "generic-hybrid-p:" + digest_object(self)
 
+    @lru_cache(maxsize=128)
     def validate(self) -> tuple[str, ...]:
         return tuple(
             sorted(
@@ -930,16 +908,12 @@ class HybridRelationalInstructionBody:
                     hazard_likelihood=max(
                         item.hazard_likelihood, other.hazard_likelihood
                     ),
-                    information_gain=(
-                        item.information_gain + other.information_gain
-                    )
+                    information_gain=(item.information_gain + other.information_gain)
                     / 2.0,
                     prior=(item.prior + other.prior) / 2.0,
                     uncertainty=max(item.uncertainty, other.uncertainty),
                     instruction_refs=tuple(
-                        sorted(
-                            set((*item.instruction_refs, *other.instruction_refs))
-                        )
+                        sorted(set((*item.instruction_refs, *other.instruction_refs)))
                     ),
                     memory_refs=tuple(
                         sorted(set((*item.memory_refs, *other.memory_refs)))
@@ -948,7 +922,8 @@ class HybridRelationalInstructionBody:
             )
         return InstructionBodyResult(
             predictions=tuple(predictions),
-            query_digest="generic-hybrid-query:" + digest_object(
+            query_digest="generic-hybrid-query:"
+            + digest_object(
                 {
                     "symbolic": symbolic.query_digest,
                     "parametric": parametric.query_digest,
@@ -1049,9 +1024,7 @@ class GenericComputeSubject:
         if not selected_ablation.effective_serial_depth:
             raise RuntimeError(GENERIC_SERIAL_DEPTH_WITNESS)
         history_failures = tuple(
-            failure
-            for record in action_history
-            for failure in record.validate()
+            failure for record in action_history for failure in record.validate()
         )
         if history_failures:
             raise ValueError(";".join(sorted(set(history_failures))))
@@ -1155,17 +1128,14 @@ class GenericComputeSubject:
             action_history=action_history,
         )
         descriptor_order: dict[ActionDescriptor, int] = {
-            descriptor: index
-            for index, descriptor in enumerate(descriptors)
+            descriptor: index for index, descriptor in enumerate(descriptors)
         }
         for prediction in instruction_result.predictions:
             descriptor_failures = prediction.descriptor.validate(observation)
             if descriptor_failures:
                 raise ValueError(";".join(descriptor_failures))
             if prediction.descriptor not in descriptor_order:
-                descriptor_order[prediction.descriptor] = len(
-                    descriptor_order
-                )
+                descriptor_order[prediction.descriptor] = len(descriptor_order)
         ranked_predictions = tuple(
             sorted(
                 instruction_result.predictions,
@@ -1187,8 +1157,7 @@ class GenericComputeSubject:
         )
         hypotheses = [
             GenericHypothesis(
-                hypothesis_id="hypothesis:baseline:"
-                + digest_object(primary)[:20],
+                hypothesis_id="hypothesis:baseline:" + digest_object(primary)[:20],
                 model_type="baseline",
                 statement=(
                     "The highest supported legal action relation can advance "
@@ -1277,9 +1246,7 @@ class GenericComputeSubject:
                         falsification_conditions=(
                             "one action has reproducible immediate progress",
                         ),
-                        confidence=max(
-                            item.uncertainty for item in ranked_predictions
-                        ),
+                        confidence=max(item.uncertainty for item in ranked_predictions),
                     ),
                 )
             )
@@ -1288,9 +1255,7 @@ class GenericComputeSubject:
                 stage="model",
                 input_digest=memory_query_digest,
                 output_digest="generic-model-set:" + digest_object(hypotheses),
-                selected_refs=tuple(
-                    item.hypothesis_id for item in hypotheses
-                ),
+                selected_refs=tuple(item.hypothesis_id for item in hypotheses),
             )
         )
         stages.append(
@@ -1322,12 +1287,7 @@ class GenericComputeSubject:
             )
             prediction_ref = "prediction:" + digest_object(prediction)
             memory_binding_refs = tuple(
-                sorted(
-                    {
-                        binding.record_digest
-                        for binding in evidence_bindings
-                    }
-                )
+                sorted({binding.record_digest for binding in evidence_bindings})
             )
             counter_evidence_refs = tuple(
                 sorted(
@@ -1344,9 +1304,7 @@ class GenericComputeSubject:
                     }
                 )
             )
-            bound_record_ids = {
-                binding.record_id for binding in evidence_bindings
-            }
+            bound_record_ids = {binding.record_id for binding in evidence_bindings}
             memory_effects = _memory_effects(
                 records,
                 bound_record_ids,
@@ -1401,8 +1359,7 @@ class GenericComputeSubject:
         stages.append(
             Layer0StageTrace(
                 stage="candidate",
-                input_digest="generic-predictions:"
-                + digest_object(ranked_predictions),
+                input_digest="generic-predictions:" + digest_object(ranked_predictions),
                 output_digest="generic-candidates:" + digest_object(candidates),
                 selected_refs=tuple(item.candidate_id for item in candidates),
             )
@@ -1430,9 +1387,7 @@ class GenericComputeSubject:
                 GENERIC_COMPUTE_VERSION,
             ),
             control_operation=instruction_result.control_operation,
-            control_instruction_refs=(
-                instruction_result.control_instruction_refs
-            ),
+            control_instruction_refs=(instruction_result.control_instruction_refs),
         )
         return result
 

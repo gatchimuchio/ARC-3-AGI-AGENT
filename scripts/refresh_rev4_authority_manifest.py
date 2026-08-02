@@ -79,6 +79,38 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_SEQUENTIAL_ORCHESTRATOR",
     ),
     (
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_compute.py",
+        "PRODUCT_COMPUTE_SUBJECT",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_env.py",
+        "PRODUCT_ENVIRONMENT_ADAPTER",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_memory.py",
+        "PRODUCT_MEMORY_SUBJECT",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/memory_image.py",
+        "PRODUCT_MEMORY_IMAGE",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/evidence_binding.py",
+        "PRODUCT_EVIDENCE_BINDING",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/identity_boundary.py",
+        "PRODUCT_IDENTITY_BOUNDARY",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_ir.py",
+        "PRODUCT_INSTRUCTION_PROGRAM",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_ir_validator.py",
+        "PRODUCT_INSTRUCTION_VALIDATOR",
+    ),
+    (
         "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py",
         "PRODUCT_ENDPOINT_CONTRACT",
     ),
@@ -104,6 +136,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_RESOURCE_BOUND_EVIDENCE",
     ),
     (
+        "analysis/product/rev4/m0_runtime_performance_repair.json",
+        "PRODUCT_RUNTIME_PERFORMANCE_EVIDENCE",
+    ),
+    (
         "ARC-AGI-3-Agents/tests/unit/test_product_runner.py",
         "PRODUCT_RUNNER_ACCEPTANCE_TEST",
     ),
@@ -118,6 +154,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     (
         "ARC-AGI-3-Agents/tests/unit/test_competition_generic_agent.py",
         "PRODUCT_ADAPTER_REGRESSION_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_product_runtime_performance_invariants.py",
+        "PRODUCT_RUNTIME_PERFORMANCE_REGRESSION_TEST",
     ),
     (
         "ARC-AGI-3-Agents/tests/integration/test_product_offline_runner.py",

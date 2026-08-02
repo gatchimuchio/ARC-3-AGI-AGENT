@@ -6,10 +6,12 @@ but it cannot create hypotheses, choose actions, or initiate mutations.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import threading
 from dataclasses import dataclass, field, replace
-from typing import TYPE_CHECKING, Mapping, Sequence
+from functools import lru_cache
+from typing import TYPE_CHECKING, Iterator, Mapping, Sequence
 
 from .authority_state import AuthorityState
 from .generic_types import ActionEffectRecord, SemanticMemoryCitation
@@ -85,6 +87,40 @@ def _sorted_unique(values: Sequence[str]) -> tuple[str, ...]:
     return tuple(sorted(set(values)))
 
 
+class _FrozenPayloadMapping(Mapping[str, object]):
+    """Minimal immutable Mapping used inside cached semantic records."""
+
+    __slots__ = ("_items",)
+
+    def __init__(self, items: Sequence[tuple[str, object]]) -> None:
+        self._items = tuple(sorted(items))
+
+    def __getitem__(self, key: str) -> object:
+        for candidate, value in self._items:
+            if candidate == key:
+                return value
+        raise KeyError(key)
+
+    def __iter__(self) -> Iterator[str]:
+        return (key for key, _ in self._items)
+
+    def __len__(self) -> int:
+        return len(self._items)
+
+
+def _freeze_payload(value: object) -> object:
+    if isinstance(value, Mapping):
+        return _FrozenPayloadMapping(
+            tuple((str(key), _freeze_payload(item)) for key, item in value.items())
+        )
+    if isinstance(value, Sequence) and not isinstance(
+        value,
+        (str, bytes, bytearray),
+    ):
+        return tuple(_freeze_payload(item) for item in value)
+    return value
+
+
 @dataclass(frozen=True, slots=True)
 class SemanticRecord:
     memory_id: str
@@ -102,6 +138,22 @@ class SemanticRecord:
     updated_version: int = 0
     rollback_pointer: int = 0
     payload_items: tuple[tuple[str, object], ...] = ()
+    _canonical_blob_cache: str | None = field(
+        default=None,
+        init=False,
+        repr=False,
+        compare=False,
+        hash=False,
+        metadata={"serialize": False},
+    )
+    _citation_cache: SemanticMemoryCitation | None = field(
+        default=None,
+        init=False,
+        repr=False,
+        compare=False,
+        hash=False,
+        metadata={"serialize": False},
+    )
 
     def payload(self) -> dict[str, object]:
         return dict(self.payload_items)
@@ -124,10 +176,9 @@ class SemanticRecord:
             ("COUNTER_EVIDENCE", self.counter_evidence),
             ("SCOPE", self.scope),
         ):
-            if (
-                any(not _valid_text(item) for item in values)
-                or values != _sorted_unique(values)
-            ):
+            if any(
+                not _valid_text(item) for item in values
+            ) or values != _sorted_unique(values):
                 failures.append(f"SEMANTIC_MEMORY_{name}_INVALID")
         if not _valid_text(self.falsification_condition):
             failures.append("SEMANTIC_MEMORY_FALSIFIER_MISSING")
@@ -154,13 +205,19 @@ class SemanticRecord:
         return tuple(sorted(set(failures)))
 
     def citation(self) -> SemanticMemoryCitation:
-        return SemanticMemoryCitation(
-            memory_id=self.memory_id,
-            version=self.updated_version,
-            kind=self.kind,
-            semantic_tokens=self.semantic_tokens,
-            content_digest="semantic-record:" + digest_object(self),
-        )
+        cached = self._citation_cache
+        if cached is None:
+            blob = _record_blob(self)
+            cached = SemanticMemoryCitation(
+                memory_id=self.memory_id,
+                version=self.updated_version,
+                kind=self.kind,
+                semantic_tokens=self.semantic_tokens,
+                content_digest="semantic-record:"
+                + hashlib.sha256(blob.encode("utf-8")).hexdigest(),
+            )
+            object.__setattr__(self, "_citation_cache", cached)
+        return cached
 
 
 @dataclass(frozen=True, slots=True)
@@ -183,8 +240,7 @@ class MemoryMutationProposal:
         if not _valid_text(self.target_id) or not _valid_text(self.reason):
             failures.append("SEMANTIC_MEMORY_PROPOSAL_TEXT_INVALID")
         if (
-            self.operation
-            in {"ADD", "REVISE", "SPLIT", "REPLACE", "REINDEX"}
+            self.operation in {"ADD", "REVISE", "SPLIT", "REPLACE", "REINDEX"}
             and self.record is None
         ):
             failures.append("SEMANTIC_MEMORY_PROPOSAL_RECORD_REQUIRED")
@@ -198,13 +254,10 @@ class MemoryMutationProposal:
             failures.append("SEMANTIC_MEMORY_FALSIFIER_REQUIRED")
         if self.operation == "MERGE" and not self.source_ids:
             failures.append("SEMANTIC_MEMORY_MERGE_SOURCE_REQUIRED")
-        if (
-            self.operation == "ROLLBACK"
-            and (
-                isinstance(self.rollback_version, bool)
-                or not isinstance(self.rollback_version, int)
-                or self.rollback_version < 0
-            )
+        if self.operation == "ROLLBACK" and (
+            isinstance(self.rollback_version, bool)
+            or not isinstance(self.rollback_version, int)
+            or self.rollback_version < 0
         ):
             failures.append("SEMANTIC_MEMORY_ROLLBACK_VERSION_REQUIRED")
         return tuple(sorted(set(failures)))
@@ -394,9 +447,7 @@ class BoundedActionEffectMemory:
                 before_observation_signature=(
                     authorization.before_observation_signature
                 ),
-                after_observation_signature=(
-                    authorization.after_observation_signature
-                ),
+                after_observation_signature=(authorization.after_observation_signature),
                 expected_version=authorization.expected_version,
                 record_digest=authorization.record_digest,
             )
@@ -432,9 +483,7 @@ class BoundedActionEffectMemory:
                 before_observation_signature=(
                     authorization.before_observation_signature
                 ),
-                after_observation_signature=(
-                    authorization.after_observation_signature
-                ),
+                after_observation_signature=(authorization.after_observation_signature),
                 record=record,
                 previous_event_digest=previous,
                 event_digest=event_digest,
@@ -473,10 +522,9 @@ class SemanticMemoryQuery:
         failures: list[str] = []
         if not _valid_text(self.query_id):
             failures.append("SEMANTIC_MEMORY_QUERY_ID_MISSING")
-        if (
-            any(not _valid_text(item) for item in self.semantic_tokens)
-            or self.semantic_tokens != _sorted_unique(self.semantic_tokens)
-        ):
+        if any(
+            not _valid_text(item) for item in self.semantic_tokens
+        ) or self.semantic_tokens != _sorted_unique(self.semantic_tokens):
             failures.append("SEMANTIC_MEMORY_QUERY_TOKENS_INVALID")
         if any(item not in SEMANTIC_MEMORY_KINDS for item in self.kinds):
             failures.append("SEMANTIC_MEMORY_QUERY_KIND_INVALID")
@@ -557,12 +605,18 @@ _MEMORY_BATCH_PRIORITY = {
 
 
 def _record_blob(record: SemanticRecord) -> str:
+    cached = record._canonical_blob_cache
+    if cached is not None:
+        return cached
     failures = record.validate()
     if failures:
         raise ValueError(";".join(failures))
-    return canonical_json(record)
+    cached = canonical_json(record)
+    object.__setattr__(record, "_canonical_blob_cache", cached)
+    return cached
 
 
+@lru_cache(maxsize=32_768)
 def _record_from_blob(payload: str) -> SemanticRecord:
     value = json.loads(payload)
     if not isinstance(value, Mapping):
@@ -570,17 +624,13 @@ def _record_from_blob(payload: str) -> SemanticRecord:
 
     def texts(name: str) -> tuple[str, ...]:
         selected = value.get(name, ())
-        if (
-            isinstance(selected, (str, bytes))
-            or not isinstance(selected, Sequence)
-        ):
+        if isinstance(selected, (str, bytes)) or not isinstance(selected, Sequence):
             raise TypeError("SEMANTIC_MEMORY_RECORD_SEQUENCE_INVALID:" + name)
         return tuple(str(item) for item in selected)
 
     payload_value = value.get("payload_items", ())
-    if (
-        isinstance(payload_value, (str, bytes))
-        or not isinstance(payload_value, Sequence)
+    if isinstance(payload_value, (str, bytes)) or not isinstance(
+        payload_value, Sequence
     ):
         raise TypeError("SEMANTIC_MEMORY_RECORD_PAYLOAD_INVALID")
     payload_items: list[tuple[str, object]] = []
@@ -591,7 +641,7 @@ def _record_from_blob(payload: str) -> SemanticRecord:
             or len(item) != 2
         ):
             raise TypeError("SEMANTIC_MEMORY_RECORD_PAYLOAD_INVALID")
-        payload_items.append((str(item[0]), item[1]))
+        payload_items.append((str(item[0]), _freeze_payload(item[1])))
     record = SemanticRecord(
         memory_id=str(value["memory_id"]),
         kind=str(value["kind"]),
@@ -612,6 +662,7 @@ def _record_from_blob(payload: str) -> SemanticRecord:
     failures = record.validate()
     if failures:
         raise ValueError(";".join(failures))
+    object.__setattr__(record, "_canonical_blob_cache", payload)
     return record
 
 
@@ -622,13 +673,8 @@ def _provenance_from_blob(payload: str) -> MemoryProvenance:
 
     def texts(name: str) -> tuple[str, ...]:
         selected = value.get(name, ())
-        if (
-            isinstance(selected, (str, bytes))
-            or not isinstance(selected, Sequence)
-        ):
-            raise TypeError(
-                "SEMANTIC_MEMORY_PROVENANCE_SEQUENCE_INVALID:" + name
-            )
+        if isinstance(selected, (str, bytes)) or not isinstance(selected, Sequence):
+            raise TypeError("SEMANTIC_MEMORY_PROVENANCE_SEQUENCE_INVALID:" + name)
         return tuple(str(item) for item in selected)
 
     return MemoryProvenance(
@@ -696,8 +742,7 @@ class SemanticMemory:
         self._image = rebuilt
         for event in self.backend.events():
             self._provenance.extend(
-                _provenance_from_blob(item)
-                for item in event.audit_payloads
+                _provenance_from_blob(item) for item in event.audit_payloads
             )
 
     @property
@@ -712,8 +757,7 @@ class SemanticMemory:
 
     def _active_records(self) -> dict[str, SemanticRecord]:
         return {
-            key: _record_from_blob(payload)
-            for key, payload in self._image.active_items
+            key: _record_from_blob(payload) for key, payload in self._image.active_items
         }
 
     def _archive_records(self) -> dict[str, SemanticRecord]:
@@ -724,24 +768,31 @@ class SemanticMemory:
 
     def _sealed_records(self) -> dict[str, SemanticRecord]:
         return {
-            key: _record_from_blob(payload)
-            for key, payload in self._image.sealed_items
+            key: _record_from_blob(payload) for key, payload in self._image.sealed_items
         }
 
     @staticmethod
     def _active_digest_for(
         active: Mapping[str, SemanticRecord],
     ) -> str:
-        return "semantic-active:" + digest_object(
-            tuple(active[key] for key in sorted(active))
+        canonical_records = (
+            "[" + ",".join(_record_blob(active[key]) for key in sorted(active)) + "]"
+        )
+        return (
+            "semantic-active:"
+            + hashlib.sha256(canonical_records.encode("utf-8")).hexdigest()
         )
 
     @staticmethod
     def _archive_digest_for(
         archive: Mapping[str, SemanticRecord],
     ) -> str:
-        return "semantic-archive:" + digest_object(
-            tuple(archive[key] for key in sorted(archive))
+        canonical_records = (
+            "[" + ",".join(_record_blob(archive[key]) for key in sorted(archive)) + "]"
+        )
+        return (
+            "semantic-archive:"
+            + hashlib.sha256(canonical_records.encode("utf-8")).hexdigest()
         )
 
     def _active_digest(self) -> str:
@@ -756,22 +807,16 @@ class SemanticMemory:
         active: Mapping[str, SemanticRecord] | None = None,
         sealed: Mapping[str, SemanticRecord] | None = None,
     ) -> None:
-        current_active = (
-            self._active_records() if active is None else dict(active)
-        )
-        current_sealed = (
-            self._sealed_records() if sealed is None else dict(sealed)
-        )
+        current_active = self._active_records() if active is None else dict(active)
+        current_sealed = self._sealed_records() if sealed is None else dict(sealed)
         image = MemoryImage.build(
             version=0,
             active={
-                key: _record_blob(record)
-                for key, record in current_active.items()
+                key: _record_blob(record) for key, record in current_active.items()
             },
             archive=(),
             sealed={
-                key: _record_blob(record)
-                for key, record in current_sealed.items()
+                key: _record_blob(record) for key, record in current_sealed.items()
             },
         )
         self.backend.replace_bootstrap(image)
@@ -830,13 +875,9 @@ class SemanticMemory:
     def view(self) -> MemoryView:
         active_records = self._active_records()
         sealed_records = self._sealed_records()
-        active = tuple(
-            active_records[key] for key in sorted(active_records)
-        )
+        active = tuple(active_records[key] for key in sorted(active_records))
         working = tuple(self._working[key] for key in sorted(self._working))
-        sealed = tuple(
-            sealed_records[key] for key in sorted(sealed_records)
-        )
+        sealed = tuple(sealed_records[key] for key in sorted(sealed_records))
         digest = "semantic-memory-view:" + digest_object(
             {
                 "version": self.version,
@@ -885,8 +926,7 @@ class SemanticMemory:
             limit=query.limit,
         )
         selected_scores = tuple(
-            (item.record_id, item.total_score)
-            for item in score_breakdowns
+            (item.record_id, item.total_score) for item in score_breakdowns
         )
         digest = "semantic-memory-query:" + digest_object(
             {
@@ -911,8 +951,7 @@ class SemanticMemory:
     def snapshot(self, version: int | None = None) -> tuple[SemanticRecord, ...]:
         image = self.backend.rebuild(version)
         values = {
-            key: _record_from_blob(payload)
-            for key, payload in image.active_items
+            key: _record_from_blob(payload) for key, payload in image.active_items
         }
         return tuple(values[key] for key in sorted(values))
 
@@ -1172,12 +1211,10 @@ class SemanticMemory:
                 raise RuntimeError("SEMANTIC_MEMORY_MANDATORY_BATCH_SUSPEND")
             if len({item.target_id for item in proposals}) != len(proposals):
                 raise ValueError("SEMANTIC_MEMORY_BATCH_TARGET_DUPLICATE")
-            if len(
-                {item.authorization_id for item in authorizations}
-            ) != len(authorizations):
-                raise ValueError(
-                    "SEMANTIC_MEMORY_BATCH_AUTHORIZATION_DUPLICATE"
-                )
+            if len({item.authorization_id for item in authorizations}) != len(
+                authorizations
+            ):
+                raise ValueError("SEMANTIC_MEMORY_BATCH_AUTHORIZATION_DUPLICATE")
             pairs = list(zip(proposals, authorizations))
             pairs.sort(
                 key=lambda item: (
@@ -1224,9 +1261,7 @@ class SemanticMemory:
                                 "idempotency_key": idempotency_key,
                                 "index": index,
                                 "proposal": proposal,
-                                "authorization": (
-                                    authorization.authorization_id
-                                ),
+                                "authorization": (authorization.authorization_id),
                             }
                         )[:24],
                         operation=proposal.operation,
@@ -1236,13 +1271,9 @@ class SemanticMemory:
                         old_digest=old_digest,
                         new_digest=self._active_digest_for(active),
                         evidence=_sorted_unique(proposal.evidence),
-                        counter_evidence=_sorted_unique(
-                            proposal.counter_evidence
-                        ),
+                        counter_evidence=_sorted_unique(proposal.counter_evidence),
                         scope=_sorted_unique(proposal.scope),
-                        falsification_condition=(
-                            proposal.falsification_condition
-                        ),
+                        falsification_condition=(proposal.falsification_condition),
                         authority="HDS",
                         rollback_pointer=(
                             proposal.rollback_version
@@ -1256,14 +1287,8 @@ class SemanticMemory:
                 )
             preliminary = MemoryImage.build(
                 version=next_version,
-                active={
-                    key: _record_blob(record)
-                    for key, record in active.items()
-                },
-                archive={
-                    key: _record_blob(record)
-                    for key, record in archive.items()
-                },
+                active={key: _record_blob(record) for key, record in active.items()},
+                archive={key: _record_blob(record) for key, record in archive.items()},
                 sealed=self._image.sealed_items,
                 last_event_digest=(
                     self._image.last_event_digest or "PREPARED_EVENT_TAIL"
@@ -1275,9 +1300,7 @@ class SemanticMemory:
             if len(set(proposal_digests)) != len(proposal_digests):
                 raise ValueError("SEMANTIC_MEMORY_BATCH_PROPOSAL_DUPLICATE")
             delta = MemoryDelta.between(self._image, preliminary)
-            provenance_payloads = tuple(
-                canonical_json(item) for item in provenance
-            )
+            provenance_payloads = tuple(canonical_json(item) for item in provenance)
             event = MemoryEvent(
                 event_id="memory-event:"
                 + digest_object(
@@ -1310,9 +1333,7 @@ class SemanticMemory:
                 next_version=next_version,
                 idempotency_key=idempotency_key,
                 proposal_digests=proposal_digests,
-                target_ids=tuple(
-                    item.target_id for item in ordered_proposals
-                ),
+                target_ids=tuple(item.target_id for item in ordered_proposals),
                 event_batch=(event,),
                 next_image=next_image,
                 provenance_payloads=provenance_payloads,
@@ -1340,9 +1361,7 @@ class SemanticMemory:
             prior = self._committed_batches.get(staged.idempotency_key)
             if prior is not None:
                 if prior[0] != staged_digest:
-                    raise RuntimeError(
-                        "SEMANTIC_MEMORY_IDEMPOTENCY_PAYLOAD_CONFLICT"
-                    )
+                    raise RuntimeError("SEMANTIC_MEMORY_IDEMPOTENCY_PAYLOAD_CONFLICT")
                 return prior[1]
             if (
                 self.version != staged.expected_version
@@ -1358,9 +1377,7 @@ class SemanticMemory:
                 if not isinstance(proposal, MemoryMutationProposal):
                     raise TypeError("SEMANTIC_MEMORY_STAGED_PROPOSAL_INVALID")
                 if not isinstance(authorization, MemoryAuthorization):
-                    raise TypeError(
-                        "SEMANTIC_MEMORY_STAGED_AUTHORIZATION_INVALID"
-                    )
+                    raise TypeError("SEMANTIC_MEMORY_STAGED_AUTHORIZATION_INVALID")
                 self._validate_authorized_pair(
                     proposal,
                     authorization,
@@ -1395,8 +1412,7 @@ class SemanticMemory:
                 )
             self._image = staged.next_image
             committed_provenance = tuple(
-                _provenance_from_blob(item)
-                for item in staged.provenance_payloads
+                _provenance_from_blob(item) for item in staged.provenance_payloads
             )
             self._provenance.extend(committed_provenance)
             active_digest = self._active_digest()
@@ -1486,7 +1502,12 @@ def semantic_record(
         scope=_sorted_unique(tuple(scope)),
         falsification_condition=falsification_condition,
         state=state,
-        payload_items=tuple(sorted((payload or {}).items())),
+        payload_items=tuple(
+            sorted(
+                (str(key), _freeze_payload(value))
+                for key, value in (payload or {}).items()
+            )
+        ),
     )
 
 
