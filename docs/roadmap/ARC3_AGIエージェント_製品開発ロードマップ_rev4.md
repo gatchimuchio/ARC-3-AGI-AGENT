@@ -6,7 +6,7 @@
 - 対象repository: `gatchimuchio/ARC-3-AGI-AGENT`
 - 日付: `2026-08-02`
 - 状態: `OWNER_PRODUCT_DIRECTIVE_INSTALLED`
-- 現在milestone: `M2_PRODUCT_CAPABILITY_BUNDLE`
+- 現在milestone: `M3_INTEGRATED_AGI_CAPABILITY`
 
 ---
 
@@ -252,6 +252,13 @@ ARC3CompletionAgent v0.3
 
 `PRODUCT_CAPABILITY_BUNDLE_ACTIVE`
 
+実績（2026-08-02）:
+
+- `ARC3ProductBundle v1`を製品entrypointへruntime identity付きで結合
+- FT09を75 action、6/6 level、`WIN`で完遂
+- 同一J0／M0・128 actionのP除去対照は0/6、`NOT_FINISHED`
+- M2受入14 gate PASS、証拠は`analysis/product/rev4/m2_product_capability_bundle.json`
+
 ---
 
 # M3 — INTEGRATED AGI CAPABILITY
@@ -428,19 +435,19 @@ submission accepted or platform failure isolated
 ## 1. 現在作業
 
 ```text
-M2_PRODUCT_CAPABILITY_BUNDLE
+M3_INTEGRATED_AGI_CAPABILITY
 ```
 
 現在実装するもの:
 
-1. 教師・HDS素材を消費するproduct capability schema
-2. compatibility fixtureではない製品P-IR
-3. baseline scorerではない製品P
-4. ARC3 domain profile J0
-5. sealed semantic seed M0
-6. P／J0／M0を束ねるruntime identityとload gate
+1. competing mechanism／counter-hypothesisのオンライン更新
+2. bounded subgoal／multi-step／probe plan
+3. relevant M mutationによるfuture action変更
+4. irrelevant M mutationに対するaction不変性
+5. failed hypothesis invalidationとrollback後のreplan
+6. C／J／M／P deletion試験とv0.3超過の公式sample進捗
 
-HDS軌道分解を独立成果として大量生産しない。解釈した構造は同じwork block内で製品bundleへコンパイルし、runtime load試験まで閉じる。
+M2でactive化した同一product bundleとentrypointを維持し、静的artifactだけで完了扱いしない。経験による次判断の変化と公式sample進捗を同じwork block内で実測する。
 
 ---
 

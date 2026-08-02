@@ -6,6 +6,7 @@ import re
 from dataclasses import dataclass, replace
 from typing import Final, Sequence
 
+from .compiled_policy import CompiledAutonomousInstructionBody
 from .generic_compute import (
     GenericInstructionBody,
     HybridRelationalInstructionBody,
@@ -31,7 +32,7 @@ from .schema import digest_object
 
 P_COMPILER_V2_VERSION: Final = "arc3-p-compiler-v2"
 P_COMPILER_MODES: Final = frozenset(
-    {"BOOTSTRAP", "SYMBOLIC", "PARAMETRIC", "HYBRID"}
+    {"BOOTSTRAP", "SYMBOLIC", "PARAMETRIC", "HYBRID", "PRODUCT"}
 )
 P_COMPILER_TARGETS: Final = (
     "candidate_scoring",
@@ -448,6 +449,43 @@ class PCompilerV2:
         if candidate.logical_digest() == parent.logical_digest():
             raise RuntimeError("P_COMPILER_CANDIDATE_NOT_ISOLATED")
         return candidate
+
+    def compile_product(
+        self,
+        *,
+        body: CompiledAutonomousInstructionBody,
+        program: PIRProgram,
+        evidence_digest: str,
+        selected_evidence_count: int,
+        target_version: str,
+    ) -> PBundle:
+        """Seal a precompiled identity-free body into the product P bundle."""
+
+        if (
+            not evidence_digest
+            or isinstance(selected_evidence_count, bool)
+            or not isinstance(selected_evidence_count, int)
+            or selected_evidence_count <= 0
+        ):
+            raise ValueError("P_COMPILER_PRODUCT_EVIDENCE_INVALID")
+        if not target_version:
+            raise ValueError("P_COMPILER_TARGET_VERSION_INVALID")
+        if "compatibility" in program.program_id.casefold():
+            raise PermissionError("P_COMPILER_PRODUCT_COMPATIBILITY_FORBIDDEN")
+        if program.provenance.evidence_manifest_digest != evidence_digest:
+            raise PermissionError("P_COMPILER_PRODUCT_EVIDENCE_BINDING_INVALID")
+        if body.validate():
+            raise ValueError("P_COMPILER_PRODUCT_BODY_INVALID")
+        return self._build_bundle(
+            mode="PRODUCT",
+            parent_digest="NONE",
+            evidence_digest=evidence_digest,
+            selected_evidence_count=selected_evidence_count,
+            target_version=target_version,
+            body=body,
+            program=program,
+            lifecycle="ACTIVE",
+        )
 
     def compile_symbolic(
         self,

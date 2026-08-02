@@ -210,11 +210,11 @@ def compile_s5_rendered_policy(
     """Fit deterministic heads and emit no training examples into Runtime P."""
 
     try:
-        import sklearn  # type: ignore[import-not-found]
-        from sklearn.neural_network import (  # type: ignore[import-not-found]
+        import sklearn  # type: ignore[import-untyped]
+        from sklearn.neural_network import (  # type: ignore[import-untyped]
             MLPClassifier,
         )
-        from threadpoolctl import (  # type: ignore[import-not-found]
+        from threadpoolctl import (  # type: ignore[import-untyped]
             threadpool_limits,
         )
     except ImportError as error:

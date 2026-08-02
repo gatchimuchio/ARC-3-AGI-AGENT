@@ -164,6 +164,17 @@ def run_sequential_competition(
                         "progress_count": int(runtime_report.progress_count),
                         "final_state": str(runtime_report.final_state),
                         "stop_reason": str(runtime_report.stop_reason),
+                        "memory_citation_count": int(
+                            getattr(runtime_report, "memory_citation_count", 0)
+                        ),
+                        "memory_citation_ids": tuple(
+                            str(item)
+                            for item in getattr(
+                                runtime_report,
+                                "memory_citation_ids",
+                                (),
+                            )
+                        ),
                     }
                 )
                 logger.info(

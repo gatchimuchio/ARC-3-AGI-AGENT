@@ -67,8 +67,8 @@ supported actions                 RESET, ACTION1..ACTION7
 
 ```text
 B-01 product path budget = 4096 >= known max 1519 (closed in product path)
-B-02 active P is generic exploration/scoring only
-B-03 default P-IR is a compatibility fixture
+B-02 teacher-derived compiled product P (closed in M2)
+B-03 non-compatibility product P-IR (closed in M2)
 B-04 temporal action-frame/composite/history surface (closed in M1)
 B-05 ACTION6 seven-class spatial candidate surface (closed in M1)
 B-06 goal/mechanism/subgoal/plan induction is incomplete
@@ -89,16 +89,18 @@ B-07 all-25 bounded product baseline (closed in M0)
 ## 現在作業
 
 ```text
-M2_PRODUCT_CAPABILITY_BUNDLE
+M3_INTEGRATED_AGI_CAPABILITY
 ```
 
-M0／M1は次の実測証拠で閉じています。
+M0／M1／M2は次の実測証拠で閉じています。
 
 - `analysis/product/rev4/current_product_baseline.json`
 - `analysis/product/rev4/m1_official_runtime_surface.json`
+- `analysis/product/rev4/m2_product_capability_bundle.json`
 - M1: 25/25 initial observation、183 level契約、action 0〜7、J authorization／一手実行／再観測 25/25
+- M2: FT09 75 action・6/6・WIN、同一J0／M0のP除去対照 128 action・0/6・NOT_FINISHED
 
-現在は教師・HDS素材を、製品runtimeが直接loadする`P／J0／M0` bundleへコンパイルします。分析artifactだけを独立完成させません。
+現在は同じ製品bundleでオンライン機構同定、計画、関連M因果性、無関連M不変性、rollback後の再計画を実装します。
 
 公式sampleを使う現行製品入口（既定は全25 game、OFFLINEのみ）:
 

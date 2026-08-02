@@ -47,10 +47,10 @@ no fixed trajectory playback
 ## Current Work
 
 ```text
-M2_PRODUCT_CAPABILITY_BUNDLE
+M3_INTEGRATED_AGI_CAPABILITY
 ```
 
-M0の全25 bounded baselineとM1の公式runtime surfaceは閉じた。現在はPH-D05教師素材とHDS解釈を、製品が直接loadする非互換fixtureの`P／J0／M0` bundleへコンパイルする。独立した分析完成をendpointにせず、同じ`ARC3CompletionAgent`へ直結する。
+M0の全25 bounded baseline、M1の公式runtime surface、M2の製品`P／J0／M0` bundleは閉じた。現在は同じ`ARC3CompletionAgent`でオンライン機構同定、計画、関連M因果性、無関連M不変性、rollback後の再計画を閉じる。
 
 現在の機械検証gateは次である。
 
@@ -62,19 +62,19 @@ python scripts/validate_rev4_product_governance.py
 
 現在実装する。
 
-1. 教師軌道・HDS解釈からのproduct capability schema
-2. `compatibility_p_ir_program()`を置換する製品P-IR
-3. `HybridRelationalInstructionBody`を置換する製品P
-4. ARC3 domain profile `J0`
-5. sealed semantic seed `M0`
-6. P／J0／M0を束ねるruntime identityとload gate
+1. competing mechanism／counter-hypothesisのオンライン更新
+2. bounded subgoal／multi-step／probe plan
+3. relevant M mutationによるfuture action変更
+4. irrelevant M mutationに対するaction不変性
+5. failed hypothesis invalidationとrollback後のreplan
+6. C／J／M／P deletion試験とv0.3超過の公式sample進捗
 
 ## Verified Product Gaps
 
 ```text
 B-01 legacy generic path budget 128; product path closed at 4096
-B-02 current P is generic exploration/scoring, not teacher-derived ARC3 capability
-B-03 default P-IR is compatibility fixture
+B-02 closed in M2: teacher-derived compiled product P is runtime-bound
+B-03 closed in M2: non-compatibility product P-IR is runtime-bound
 B-04 closed in M1: all temporal action frames, final composite and history represented
 B-05 closed in M1: ACTION6 covers seven bounded spatial affordance classes
 B-06 goal/mechanism/subgoal/plan induction is incomplete

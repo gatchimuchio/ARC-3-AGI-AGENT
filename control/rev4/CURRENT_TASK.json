@@ -3,8 +3,8 @@
   "product_id": "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4",
   "product_name": "ARC3CompletionAgent",
   "product_status": "IN_DEVELOPMENT",
-  "active_milestone": "M2_PRODUCT_CAPABILITY_BUNDLE",
-  "current_work_class": "COMPILE_HDS_TEACHER_MATERIAL_INTO_PRODUCT_P_J0_M0",
+  "active_milestone": "M3_INTEGRATED_AGI_CAPABILITY",
+  "current_work_class": "IMPLEMENT_ONLINE_MECHANISM_PLANNING_AND_MEMORY_CAUSALITY",
   "endpoint": {
     "artifact": "ARC3CompletionAgent",
     "official_sample_game_target": 25,
@@ -58,14 +58,16 @@
     {
       "id": "B-02",
       "component": "P",
-      "finding": "active HybridRelationalInstructionBody is generic exploration and scoring, not ARC3 capability compiled from teacher and HDS materials",
-      "status": "BLOCKING"
+      "finding": "the product now loads one teacher-derived compiled instruction body through ARC3ProductBundle v1 instead of HybridRelationalInstructionBody",
+      "status": "CLOSED_M2_PRODUCT_CAPABILITY_BUNDLE",
+      "evidence": "analysis/product/rev4/m2_product_capability_bundle.json"
     },
     {
       "id": "B-03",
       "component": "P_IR",
-      "finding": "default compatibility_p_ir_program is a compatibility fixture rather than the product capability program",
-      "status": "BLOCKING"
+      "finding": "the product program is arc3.product.capability.v1 and the compatibility P-IR is rejected by the product load gate",
+      "status": "CLOSED_M2_PRODUCT_CAPABILITY_BUNDLE",
+      "evidence": "analysis/product/rev4/m2_product_capability_bundle.json"
     },
     {
       "id": "B-04",
@@ -96,20 +98,23 @@
     }
   ],
   "required_implementation": [
-    "teacher and HDS interpretation consumed by product compilation",
-    "non-compatibility product P-IR program",
-    "product instruction body replacing HybridRelationalInstructionBody",
-    "ARC3 HDS domain profile J0",
-    "sealed semantic memory seed M0",
-    "runtime identity bound to the compiled P J0 M0 bundle"
+    "multiple online representations and competing mechanism hypotheses",
+    "bounded subgoal multi-step and probe planning",
+    "relevant memory mutation changes future candidate plan or action",
+    "irrelevant memory mutation leaves action invariant",
+    "failed hypothesis invalidation and revised rollback plan",
+    "C J M P deletion tests fail as predicted",
+    "official sample completed game or level count improves over v0.3"
   ],
   "exit_conditions": {
-    "compiled_product_bundle_count": 1,
-    "compatibility_p_ir_active": false,
-    "hybrid_baseline_instruction_body_active": false,
-    "p_j0_m0_runtime_identity_bound": true,
-    "identity_boundary_passed": true,
-    "status": "PRODUCT_CAPABILITY_BUNDLE_LOADED"
+    "relevant_memory_causality_passed": true,
+    "irrelevant_memory_invariance_passed": true,
+    "failed_hypothesis_non_repetition_passed": true,
+    "next_probe_and_question_generated": true,
+    "rollback_revises_plan": true,
+    "trinity_deletion_tests_passed": true,
+    "sample_progress_improved_over_v0_3": true,
+    "status": "AGI_CLOSED_LOOP_CAPABILITY_ACTIVE"
   },
   "current_evidence": {
     "baseline_report_path": "analysis/product/rev4/current_product_baseline.json",
@@ -136,13 +141,31 @@
     "m1_hds_authorized_game_count": 25,
     "m1_external_action_game_count": 25,
     "m1_reobserved_game_count": 25,
-    "m1_scorecard_closed": true
+    "m1_scorecard_closed": true,
+    "m2_report_path": "analysis/product/rev4/m2_product_capability_bundle.json",
+    "m2_report_sha256": "23584d9fb3c91af23ffa19f3f71934eba31f85803e4ccff6528d77ab50b71131",
+    "m2_exit_status": "PRODUCT_CAPABILITY_BUNDLE_ACTIVE",
+    "m2_failure_reasons": [],
+    "m2_acceptance_gate_count": 14,
+    "m2_controlled_game_id": "ft09-0d8bbf25",
+    "m2_product_actions": 75,
+    "m2_product_level_completion_count": 6,
+    "m2_product_final_state": "WIN",
+    "m2_p_removal_actions": 128,
+    "m2_p_removal_level_completion_count": 0,
+    "m2_p_removal_final_state": "NOT_FINISHED",
+    "m2_teacher_seed_citation_count": 7,
+    "m2_descriptor_path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+    "m2_descriptor_sha256": "0c2f9bced86f316e43eb720b5f9d1c11afc2502935bfd982172b36d6a0c04526",
+    "m2_package_path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
+    "m2_package_sha256": "a24ba468374bf7fabda2d0ecae44793125fe1eb829db649196a8f77d0b7d91ce"
   },
   "allowed": [
     "reuse GenericAGIRuntime CognitiveSession GenericHDSJudgementSubject SemanticMemory and official adapters",
     "use known answers successful trajectories raw recordings and environment source as development materials",
     "change product code resource contract P J M adapter and tests",
     "compile HDS interpretation into product P J0 and M0",
+    "implement and test online C J M closed-loop capability through the same product bundle",
     "run and repair the product continuously against official samples"
   ],
   "forbidden": [

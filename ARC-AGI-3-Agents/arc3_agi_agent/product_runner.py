@@ -7,19 +7,20 @@ import json
 import logging
 import os
 from collections.abc import Callable
+from dataclasses import replace
 from pathlib import Path
 from typing import Any, cast
 
 from arc_agi import Arcade, OperationMode  # type: ignore[import-untyped]
 
 from .generic_competition_runner import run_sequential_competition
-from .generic_compute import HybridRelationalInstructionBody
 from .generic_hds import HDSConfiguration
 from .generic_session import (
     CognitiveSession,
     ResourceContract,
     create_cognitive_session,
 )
+from .product_capability import load_product_initial_state
 from .product_governance import (
     ARC3_DEVELOPMENT_ACTION_BUDGET,
     ARC3_KNOWN_SUCCESS_ACTION_CEILING,
@@ -29,10 +30,29 @@ from .product_governance import (
     ARC3_PRODUCT_ID,
     ARC3_PRODUCT_NO_PROGRESS_LIMIT,
 )
+from .runtime_identity import build_runtime_identity
+from .schema import digest_object
 
-ARC3_PRODUCT_RUNNER_VERSION = "arc3-completion-product-runner-v0.2"
+ARC3_PRODUCT_RUNNER_VERSION = "arc3-completion-product-runner-v0.3"
 
 logger = logging.getLogger(__name__)
+
+
+def _selected_product_hds_configuration(
+    *,
+    action_budget: int,
+) -> HDSConfiguration:
+    initial = load_product_initial_state()
+    if action_budget == initial.j0.resource_budget:
+        return initial.j0
+    return replace(
+        initial.j0,
+        resource_budget=action_budget,
+        stop_after_no_progress=min(
+            action_budget,
+            ARC3_PRODUCT_NO_PROGRESS_LIMIT,
+        ),
+    )
 
 
 def create_product_session(
@@ -40,27 +60,64 @@ def create_product_session(
     action_budget: int = ARC3_DEVELOPMENT_ACTION_BUDGET,
     mode: str = "COMPETITION",
 ) -> CognitiveSession:
-    """Create the current product session with a non-blocking action budget.
+    """Load the one compiled P/J0/M0 product identity into a new session."""
 
-    The active P remains the current runtime baseline until M2 compiles and
-    installs the ARC3 product capability bundle. M0 exists to measure this
-    product path honestly, not to claim capability completion.
-    """
-
+    initial = load_product_initial_state()
+    selected_j0 = _selected_product_hds_configuration(
+        action_budget=action_budget,
+    )
     return create_cognitive_session(
-        p_bundle=HybridRelationalInstructionBody(),
+        p_bundle=initial.p_bundle.body,
+        p_ir_program=initial.p_bundle.program,
         mode=mode,
-        hds_configuration=HDSConfiguration(
-            resource_budget=action_budget,
-            stop_after_no_progress=min(
-                action_budget,
-                ARC3_PRODUCT_NO_PROGRESS_LIMIT,
-            ),
-        ),
+        hds_configuration=selected_j0,
+        initial_memory_records=initial.m0,
         resource_contract=ResourceContract(
             action_budget_per_episode=action_budget,
         ),
     )
+
+
+def _require_product_session_binding(
+    session: CognitiveSession,
+    *,
+    action_budget: int,
+) -> None:
+    """Fail closed unless the session is the packaged P/J0/M0 product."""
+
+    initial = load_product_initial_state()
+    expected_j0 = _selected_product_hds_configuration(
+        action_budget=action_budget,
+    )
+    expected_m0 = {
+        record.memory_id: digest_object(record) for record in initial.m0
+    }
+    active_memory = {
+        record.memory_id: digest_object(record)
+        for record in session.memory.snapshot()
+    }
+    expected_identity = build_runtime_identity(
+        p_bundle=initial.p_bundle.body,
+        p_ir_program=initial.p_bundle.program,
+        hds_configuration=expected_j0,
+        initial_memory_records=initial.m0,
+    )
+    failures: list[str] = []
+    if session.instruction_body.digest() != initial.p_bundle.body.digest():
+        failures.append("PRODUCT_SESSION_P_BODY_MISMATCH")
+    if session.p_ir_program != initial.p_bundle.program:
+        failures.append("PRODUCT_SESSION_P_IR_MISMATCH")
+    if session.hds_config != expected_j0:
+        failures.append("PRODUCT_SESSION_J0_MISMATCH")
+    if session.resource_contract.action_budget_per_episode != action_budget:
+        failures.append("PRODUCT_SESSION_RESOURCE_CONTRACT_MISMATCH")
+    if any(active_memory.get(key) != value for key, value in expected_m0.items()):
+        failures.append("PRODUCT_SESSION_M0_MISMATCH")
+    if session.runtime_identity != expected_identity:
+        failures.append("PRODUCT_SESSION_RUNTIME_IDENTITY_MISMATCH")
+    failures.extend(session.state_owner_violations())
+    if failures:
+        raise RuntimeError(";".join(sorted(set(failures))))
 
 
 def run_arc3_completion_product(
@@ -77,22 +134,96 @@ def run_arc3_completion_product(
         from agents.templates.arc3_completion_agent import ARC3CompletionAgent
 
         agent_factory = ARC3CompletionAgent
-    selected_session_factory = session_factory
-    if selected_session_factory is None:
+    source_session_factory = session_factory
+    if source_session_factory is None:
 
-        def selected_session_factory() -> CognitiveSession:
+        def source_session_factory() -> CognitiveSession:
             return create_product_session(
                 action_budget=action_budget,
                 mode=session_mode,
             )
+
+    created_sessions: list[CognitiveSession] = []
+
+    def selected_session_factory() -> CognitiveSession:
+        session = source_session_factory()
+        if not isinstance(session, CognitiveSession):
+            raise TypeError("ARC3_PRODUCT_COGNITIVE_SESSION_REQUIRED")
+        _require_product_session_binding(
+            session,
+            action_budget=action_budget,
+        )
+        created_sessions.append(session)
+        return session
 
     report = run_sequential_competition(
         arcade=arcade,
         agent_factory=agent_factory,
         session_factory=selected_session_factory,
     )
+    if len(created_sessions) != 1:
+        raise RuntimeError("ARC3_PRODUCT_SESSION_COUNT_INVALID")
+    product_session = created_sessions[0]
+    initial = load_product_initial_state()
+    result_rows = report.get("results", ())
+    if not isinstance(result_rows, list):
+        raise TypeError("ARC3_PRODUCT_RESULT_ROWS_INVALID")
+    citation_count = sum(
+        int(row.get("memory_citation_count", 0))
+        for row in result_rows
+        if isinstance(row, dict)
+    )
+    citation_ids = tuple(
+        sorted(
+            {
+                str(memory_id)
+                for row in result_rows
+                if isinstance(row, dict)
+                for memory_id in row.get("memory_citation_ids", ())
+            }
+        )
+    )
+    product_seed_citation_ids = tuple(
+        item for item in citation_ids if item.startswith("product-seed:")
+    )
     report.update(ARC3_PRODUCT_ENDPOINT.metrics(report))
-    report["product_runner_version"] = ARC3_PRODUCT_RUNNER_VERSION
+    report.update(
+        {
+            "product_runner_version": ARC3_PRODUCT_RUNNER_VERSION,
+            "product_capability_status": "PRODUCT_CAPABILITY_BUNDLE_LOADED",
+            "product_initial_state_logical_digest": initial.logical_digest,
+            "product_p_logical_digest": initial.p_bundle.logical_digest(),
+            "product_p_program_id": initial.p_bundle.program.program_id,
+            "product_p_body_format": initial.p_bundle.body.format_id(),
+            "product_p_body_version": initial.p_bundle.body.body_version(),
+            "product_p_compiler_mode": (
+                initial.p_bundle.compiler_report.mode
+            ),
+            "product_bundle_j0_digest": "j0:" + digest_object(initial.j0),
+            "product_j0_digest": (
+                "j0:" + digest_object(product_session.hds_config)
+            ),
+            "product_m0_digest": "m0:" + digest_object(initial.m0),
+            "product_m0_record_count": len(initial.m0),
+            "product_runtime_identity_digest": (
+                product_session.runtime_identity.digest()
+            ),
+            "p_j0_m0_runtime_identity_bound": True,
+            "product_memory_citation_count": citation_count,
+            "product_memory_citation_ids": citation_ids,
+            "product_teacher_seed_citation_count": len(
+                product_seed_citation_ids
+            ),
+            "product_teacher_seed_citation_ids": (
+                product_seed_citation_ids
+            ),
+            "product_teacher_structure_cited": bool(
+                product_seed_citation_ids
+            ),
+            "compatibility_p_ir_active": False,
+            "hybrid_baseline_instruction_body_active": False,
+        }
+    )
     return report
 
 

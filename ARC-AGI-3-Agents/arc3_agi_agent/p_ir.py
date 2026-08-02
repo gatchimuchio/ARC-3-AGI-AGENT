@@ -33,6 +33,234 @@ PIR_DEFAULT_MAX_MEMORY_CITATIONS = 128
 PIR_DEFAULT_WORST_CASE_COST = 200_000
 
 
+def product_capability_p_ir_program(
+    *,
+    source_digests: Sequence[str],
+    evidence_manifest_digest: str,
+) -> PIRProgram:
+    """Build the identity-free ARC3 product capability program.
+
+    Development evidence enters only as opaque content digests. The runtime
+    graph consumes current rendered observations, temporal action frames,
+    legal actions, passive memory, and no orchestration identity.
+    """
+
+    normalized_sources = tuple(sorted(set(source_digests)))
+    if not normalized_sources or any(not item for item in normalized_sources):
+        raise ValueError("PRODUCT_P_IR_SOURCE_DIGEST_REQUIRED")
+    if not evidence_manifest_digest:
+        raise ValueError("PRODUCT_P_IR_EVIDENCE_DIGEST_REQUIRED")
+
+    representation = TypedDAG(
+        graph_id="product.representation.v1",
+        graph_kind="REPRESENTATION",
+        nodes=(
+            PIRNode(
+                node_id="grid",
+                opcode="GRID_INPUT",
+                inputs=("$observation",),
+                output_type="Grid",
+            ),
+            PIRNode(
+                node_id="history",
+                opcode="HISTORY_INPUT",
+                inputs=("$history",),
+                output_type="GridHistory",
+            ),
+            PIRNode(
+                node_id="temporal_delta",
+                opcode="TEMPORAL_DIFF",
+                inputs=("history",),
+                output_type="GridDelta",
+            ),
+            PIRNode(
+                node_id="regions",
+                opcode="REGION_PARTITION",
+                inputs=("grid",),
+                output_type="RegionSet",
+            ),
+            PIRNode(
+                node_id="objects",
+                opcode="CONNECTED_COMPONENTS",
+                inputs=("grid",),
+                output_type="ObjectSet",
+                parameters=(("connectivity", 4), ("max_objects", 64)),
+            ),
+            PIRNode(
+                node_id="features",
+                opcode="OBJECT_FEATURES",
+                inputs=("objects",),
+                output_type="FeatureSet",
+            ),
+            PIRNode(
+                node_id="role_objects",
+                opcode="ROLE_NORMALIZE",
+                inputs=("objects", "features"),
+                output_type="ObjectSet",
+            ),
+            PIRNode(
+                node_id="canonical_objects",
+                opcode="TRANSFORM_CANONICALIZE",
+                inputs=("role_objects",),
+                output_type="ObjectSet",
+            ),
+            PIRNode(
+                node_id="tracks",
+                opcode="OBJECT_TRACK",
+                inputs=("canonical_objects", "history"),
+                output_type="TrackSet",
+            ),
+            PIRNode(
+                node_id="relations",
+                opcode="RELATION_GRAPH",
+                inputs=("tracks",),
+                output_type="RelationGraph",
+                parameters=(("max_relations", 4096),),
+            ),
+            PIRNode(
+                node_id="representation",
+                opcode="FEATURE_PROJECT",
+                inputs=("canonical_objects", "features", "relations"),
+                output_type="Representation",
+                parameters=(("projection_mode", "spatial-relational"),),
+            ),
+        ),
+        outputs=("representation",),
+    )
+    model = TypedDAG(
+        graph_id="product.model.v1",
+        graph_kind="MODEL",
+        nodes=(
+            PIRNode(
+                node_id="state",
+                opcode="STATE_BUILD",
+                inputs=("$representation",),
+                output_type="StateVector",
+            ),
+            PIRNode(
+                node_id="precondition",
+                opcode="PRECONDITION",
+                inputs=("state",),
+                output_type="Predicate",
+            ),
+            PIRNode(
+                node_id="goal",
+                opcode="GOAL_MODEL",
+                inputs=("state",),
+                output_type="GoalScore",
+            ),
+            PIRNode(
+                node_id="counter_goal",
+                opcode="COUNTER_MODEL",
+                inputs=("goal",),
+                output_type="GoalScore",
+            ),
+            PIRNode(
+                node_id="composed_goal",
+                opcode="COMPOSE_MODEL",
+                inputs=("goal", "counter_goal"),
+                output_type="GoalScore",
+            ),
+            PIRNode(
+                node_id="hazard",
+                opcode="HAZARD_MODEL",
+                inputs=("state",),
+                output_type="HazardScore",
+            ),
+            PIRNode(
+                node_id="uncertainty",
+                opcode="UNCERTAINTY_MODEL",
+                inputs=("state",),
+                output_type="UncertaintyScore",
+            ),
+        ),
+        outputs=("composed_goal", "hazard", "precondition", "uncertainty"),
+    )
+    candidate = TypedDAG(
+        graph_id="product.candidate.v1",
+        graph_kind="CANDIDATE",
+        nodes=(
+            PIRNode(
+                node_id="actions",
+                opcode="ENUM_ACTIONS",
+                inputs=("$legal_actions",),
+                output_type="ActionSet",
+            ),
+            PIRNode(
+                node_id="role_bindings",
+                opcode="BIND_ROLE",
+                inputs=("actions", "$objects"),
+                output_type="ActionBinding",
+            ),
+            PIRNode(
+                node_id="current_bindings",
+                opcode="BIND_COORD_CURRENT_RENDER",
+                inputs=("role_bindings", "$grid"),
+                output_type="ActionBinding",
+            ),
+            PIRNode(
+                node_id="applicable",
+                opcode="FILTER_PRECONDITION",
+                inputs=("current_bindings", "$predicate"),
+                output_type="CandidateSet",
+            ),
+            PIRNode(
+                node_id="scored",
+                opcode="SCORE_CANDIDATE",
+                inputs=(
+                    "applicable",
+                    "$goal_score",
+                    "$hazard_score",
+                    "$uncertainty_score",
+                ),
+                output_type="CandidateSet",
+            ),
+            PIRNode(
+                node_id="probes",
+                opcode="MAKE_PROBE",
+                inputs=("scored", "$uncertainty_score"),
+                output_type="CandidateSet",
+            ),
+            PIRNode(
+                node_id="bounded",
+                opcode="TOPK",
+                inputs=("probes",),
+                output_type="CandidateSet",
+                parameters=(("k", 2048),),
+            ),
+        ),
+        outputs=("bounded",),
+    )
+    program = PIRProgram(
+        schema_version=PIR_SCHEMA_VERSION,
+        l0_abi_version=L0_ABI_VERSION,
+        opcode_version=PIR_OPCODE_VERSION,
+        type_version=PIR_TYPE_VERSION,
+        semantics_digest=PIR_SEMANTICS_DIGEST,
+        program_id="arc3.product.capability.v1",
+        representation_graph=representation,
+        model_graph=model,
+        candidate_graph=candidate,
+        parameter_manifest=ParameterManifest(),
+        resource_manifest=PIRResourceManifest(
+            max_nodes=PIR_DEFAULT_MAX_NODES,
+            max_tensor_bytes=PIR_DEFAULT_MAX_TENSOR_BYTES,
+            max_objects=PIR_DEFAULT_MAX_OBJECTS,
+            max_relations=PIR_DEFAULT_MAX_RELATIONS,
+            max_candidates=PIR_DEFAULT_MAX_CANDIDATES,
+            max_memory_citations=PIR_DEFAULT_MAX_MEMORY_CITATIONS,
+            worst_case_operation_cost=PIR_DEFAULT_WORST_CASE_COST,
+        ),
+        provenance=ProvenanceManifest(
+            source_digests=normalized_sources,
+            evidence_manifest_digest=evidence_manifest_digest,
+            identity_free=True,
+        ),
+    )
+    require_valid_p_ir_program(program)
+    return program
+
+
 def compatibility_p_ir_program(
     *,
     projection_mode: str = "spatial-relational",
@@ -371,4 +599,5 @@ __all__ = [
     "p_ir_program_from_dict",
     "p_ir_program_logical_digest",
     "p_ir_program_to_dict",
+    "product_capability_p_ir_program",
 ]

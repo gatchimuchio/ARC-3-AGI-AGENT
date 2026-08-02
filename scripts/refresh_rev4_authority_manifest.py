@@ -12,7 +12,7 @@ from typing import Final
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 MANIFEST_PATH: Final = Path("docs/strategy/REV4_CURRENT_AUTHORITY_MANIFEST.json")
 PRODUCT_ID: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
-ACTIVE_MILESTONE: Final = "M2_PRODUCT_CAPABILITY_BUNDLE"
+ACTIVE_MILESTONE: Final = "M3_INTEGRATED_AGI_CAPABILITY"
 
 AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     ("AGENTS.md", "CURRENT_EXECUTION_CONTROL"),
@@ -127,6 +127,14 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_INSTRUCTION_PROGRAM",
     ),
     (
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_ir_interpreter.py",
+        "PRODUCT_INSTRUCTION_INTERPRETER",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_compiler_v2.py",
+        "PRODUCT_INSTRUCTION_COMPILER",
+    ),
+    (
         "ARC-AGI-3-Agents/arc3_agi_agent/p_ir_validator.py",
         "PRODUCT_INSTRUCTION_VALIDATOR",
     ),
@@ -141,6 +149,18 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     (
         "ARC-AGI-3-Agents/arc3_agi_agent/product_runtime_surface.py",
         "PRODUCT_M1_RUNTIME_SURFACE_ACCEPTANCE",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/product_capability.py",
+        "PRODUCT_M2_CAPABILITY_BUNDLE_LOADER",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+        "PRODUCT_M2_CAPABILITY_DESCRIPTOR",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
+        "PRODUCT_M2_CAPABILITY_PACKAGE",
     ),
     ("ARC-AGI-3-Agents/pyproject.toml", "PRODUCT_PACKAGE_ENTRYPOINT"),
     (
@@ -160,6 +180,14 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_M1_RUNTIME_SURFACE_COMMAND",
     ),
     (
+        "ARC-AGI-3-Agents/scripts/run_m2_product_capability_acceptance.py",
+        "PRODUCT_M2_CAPABILITY_ACCEPTANCE_COMMAND",
+    ),
+    (
+        "scripts/build_m2_product_capability_bundle.py",
+        "PRODUCT_M2_CAPABILITY_COMPILER_COMMAND",
+    ),
+    (
         "analysis/product/rev4/product_resource_bounds.json",
         "PRODUCT_RESOURCE_BOUND_EVIDENCE",
     ),
@@ -174,6 +202,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     (
         "analysis/product/rev4/m1_official_runtime_surface.json",
         "PRODUCT_M1_OFFICIAL_RUNTIME_SURFACE_EVIDENCE",
+    ),
+    (
+        "analysis/product/rev4/m2_product_capability_bundle.json",
+        "PRODUCT_M2_CAPABILITY_ACCEPTANCE_EVIDENCE",
     ),
     (
         "ARC-AGI-3-Agents/tests/unit/test_product_runner.py",
@@ -198,6 +230,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     (
         "ARC-AGI-3-Agents/tests/unit/test_m1_official_runtime_surface.py",
         "PRODUCT_M1_RUNTIME_SURFACE_UNIT_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_p20a_p_ir.py",
+        "PRODUCT_M2_P_IR_REGRESSION_TEST",
     ),
     (
         "ARC-AGI-3-Agents/tests/integration/test_m1_official_all25_runtime_surface.py",

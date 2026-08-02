@@ -68,7 +68,7 @@ def _complete_report() -> dict[str, object]:
 
 def test_product_governance_constants_match_endpoint() -> None:
     assert ARC3_CURRENT_SELECTOR_PATH == "control/rev4/CURRENT_TASK.json"
-    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M2_PRODUCT_CAPABILITY_BUNDLE"
+    assert ARC3_PRODUCT_ACTIVE_MILESTONE == "M3_INTEGRATED_AGI_CAPABILITY"
     assert ARC3_OFFICIAL_SAMPLE_GAME_TARGET == 25
     assert ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET == 183
     assert ARC3_DEVELOPMENT_ACTION_BUDGET == 4096
@@ -191,6 +191,42 @@ def test_m1_runtime_surface_is_byte_bound_and_complete() -> None:
     assert report["external_action_game_count"] == 25
     assert report["reobserved_game_count"] == 25
     assert report["scorecard_closed"] is True
+
+
+def test_m2_product_capability_is_byte_bound_and_active() -> None:
+    current = _json(REPOSITORY_ROOT / ARC3_CURRENT_SELECTOR_PATH)
+    evidence = current["current_evidence"]
+    assert isinstance(evidence, dict)
+    report_path = REPOSITORY_ROOT / str(evidence["m2_report_path"])
+    report = _json(report_path)
+    digest_body = dict(report)
+    expected_content_digest = digest_body.pop("content_digest")
+    actual_content_digest = "arc3-product-m2-acceptance:" + hashlib.sha256(
+        json.dumps(
+            digest_body,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+
+    assert (
+        hashlib.sha256(report_path.read_bytes()).hexdigest()
+        == evidence["m2_report_sha256"]
+    )
+    assert expected_content_digest == actual_content_digest
+    assert report["exit_status"] == "PRODUCT_CAPABILITY_BUNDLE_ACTIVE"
+    assert report["failure_reasons"] == []
+    gates = report["gates"]
+    assert isinstance(gates, dict)
+    assert len(gates) == 14
+    assert set(gates.values()) == {True}
+    assert report["product_result"]["actions_executed"] == 75
+    assert report["product_result"]["progress_count"] == 6
+    assert report["product_result"]["final_state"] == "WIN"
+    assert report["p_removal_ablation"]["actions_executed"] == 128
+    assert report["p_removal_ablation"]["progress_count"] == 0
+    assert report["p_removal_ablation"]["final_state"] == "NOT_FINISHED"
 
 
 def test_rev4_product_governance_validator_passes() -> None:

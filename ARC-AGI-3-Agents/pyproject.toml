@@ -91,7 +91,7 @@ include = [
 ]
 
 [tool.setuptools.package-data]
-arc3_agi_agent = ["bundles/*.json", "bundles/*.npz"]
+arc3_agi_agent = ["bundles/*.json", "bundles/*.npz", "bundles/*.zip"]
 
 [tool.mypy]
 strict = true

@@ -4,8 +4,8 @@
 C／J／M／P runtimeを統合した実行パッケージです。公式基盤の原READMEは
 [`UPSTREAM_README.md`](UPSTREAM_README.md) に参照用として保存しています。
 
-現在milestoneは`M2_PRODUCT_CAPABILITY_BUNDLE`です。M0の全25 bounded baselineと、
-M1の全25初期観測・一手実行・再観測runtime surfaceは閉じています。
+現在milestoneは`M3_INTEGRATED_AGI_CAPABILITY`です。M0の全25 bounded baseline、
+M1の全25初期観測・一手実行・再観測runtime surface、M2の製品P／J0／M0 bundleは閉じています。
 
 P3では`arc3_agi_agent.evidence_compiler`を追加し、730件の解析・metadata sourceから
 identity-freeなC/J/M fixtureを生成済みです。P4では共通`InstructionBody`契約、
@@ -35,6 +35,14 @@ M1公式runtime surface acceptance:
 ```bash
 uv run python scripts/run_m1_official_runtime_surface_acceptance.py \
   --output ../analysis/product/rev4/m1_official_runtime_surface.json
+```
+
+M2製品bundle再構築とP除去対照acceptance:
+
+```bash
+uv run python ../scripts/build_m2_product_capability_bundle.py
+uv run python scripts/run_m2_product_capability_acceptance.py \
+  --output ../analysis/product/rev4/m2_product_capability_bundle.json
 ```
 
 同じ`ARC3CompletionAgent`／C・J・M・P runtimeが、ローカルではOFFLINE adapter、

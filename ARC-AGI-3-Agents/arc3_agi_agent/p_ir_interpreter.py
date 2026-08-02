@@ -65,11 +65,15 @@ class PIRExecutionResult:
 def _grid_history(
     context: PIRExecutionContext,
 ) -> tuple[tuple[tuple[int, ...], ...], ...]:
-    observations = (*context.history[-15:], context.observation)
-    return tuple(
-        item.rendered_layers[-1] if item.rendered_layers else ()
-        for item in observations
+    prior_composites = tuple(
+        item.composited_view for item in context.history[-15:]
     )
+    current_action_frames = (
+        context.observation.rendered_action_frames
+        if context.observation.rendered_action_frames
+        else (context.observation.composited_view,)
+    )
+    return (*prior_composites, *current_action_frames)[-16:]
 
 
 def _project_representation(

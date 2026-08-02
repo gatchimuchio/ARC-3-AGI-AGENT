@@ -22,6 +22,7 @@ from arc3_agi_agent.p_ir import (
     p_ir_program_from_dict,
     p_ir_program_logical_digest,
     p_ir_program_to_dict,
+    product_capability_p_ir_program,
 )
 from arc3_agi_agent.p_ir_abi import L0_ABI_VERSION
 from arc3_agi_agent.p_ir_interpreter import (
@@ -237,6 +238,45 @@ def test_interpreter_deterministic() -> None:
     assert p_ir_program_logical_digest(restored) == (
         p_ir_program_logical_digest(program)
     )
+
+
+def test_product_p_ir_consumes_prior_composite_and_current_action_frames() -> None:
+    prior = _observation()
+    transient = tuple(
+        tuple(7 if (y, x) == (0, 0) else cell for x, cell in enumerate(row))
+        for y, row in enumerate(prior.composited_view)
+    )
+    final = tuple(
+        tuple(8 if (y, x) == (0, 1) else cell for x, cell in enumerate(row))
+        for y, row in enumerate(prior.composited_view)
+    )
+    current = replace(
+        prior,
+        signature="p20a-product-current",
+        rendered_layers=(transient, final),
+    )
+    program = product_capability_p_ir_program(
+        source_digests=("sha256:teacher-structure",),
+        evidence_manifest_digest="product-evidence:test",
+    )
+
+    execution = FixedL0PIRInterpreter().execute_representation(
+        program,
+        PIRExecutionContext(
+            observation=current,
+            goal_tokens=("goal:progress",),
+            history=(prior,),
+        ),
+    )
+    values = dict(execution.values)
+
+    assert validate_p_ir_program(program) == ()
+    assert values["history"].value == (
+        prior.composited_view,
+        transient,
+        final,
+    )
+    assert values["temporal_delta"].value
 
 
 def test_p20a_phase_state_is_content_bound() -> None:

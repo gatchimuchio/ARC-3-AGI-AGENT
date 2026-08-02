@@ -503,7 +503,7 @@ def test_rev4_is_current_and_rev3_is_explicitly_historical() -> None:
     )
     combined = "\n".join(path.read_text(encoding="utf-8") for path in document_paths)
     assert "ARC3CompletionAgent" in combined
-    assert "M2_PRODUCT_CAPABILITY_BUNDLE" in combined
+    assert "M3_INTEGRATED_AGI_CAPABILITY" in combined
     assert "25/25" in combined
     assert "183/183" in combined
     assert "control/rev4/CURRENT_TASK.json" in combined
@@ -512,7 +512,7 @@ def test_rev4_is_current_and_rev3_is_explicitly_historical() -> None:
     classification = _json(
         REPOSITORY_ROOT / "control" / "rev4" / "LEGACY_REV3_CLASSIFICATION.json"
     )
-    assert current["active_milestone"] == "M2_PRODUCT_CAPABILITY_BUNDLE"
+    assert current["active_milestone"] == "M3_INTEGRATED_AGI_CAPABILITY"
     assert current["legacy_rev3"]["current_selector"] is False
     assert classification["classification"] == "HISTORICAL_REUSE_ONLY"
     assert classification["current_selector"] is False

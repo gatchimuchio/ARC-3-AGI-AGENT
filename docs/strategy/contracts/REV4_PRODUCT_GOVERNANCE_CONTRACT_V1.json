@@ -15,7 +15,7 @@
     "ARC3_PRODUCT_ROADMAP_REV4",
     "REV4_CURRENT_TASK"
   ],
-  "active_milestone": "M2_PRODUCT_CAPABILITY_BUNDLE",
+  "active_milestone": "M3_INTEGRATED_AGI_CAPABILITY",
   "endpoint": {
     "official_sample_game_target": 25,
     "official_sample_level_target": 183,
@@ -32,7 +32,12 @@
     "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
     "ARC-AGI-3-Agents/arc3_agi_agent/product_runtime_surface.py",
-    "ARC-AGI-3-Agents/scripts/run_m1_official_runtime_surface_acceptance.py"
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_capability.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+    "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
+    "ARC-AGI-3-Agents/scripts/run_m1_official_runtime_surface_acceptance.py",
+    "ARC-AGI-3-Agents/scripts/run_m2_product_capability_acceptance.py",
+    "analysis/product/rev4/m2_product_capability_bundle.json"
   ],
   "baseline": {
     "path": "analysis/product/rev4/current_product_baseline.json",
@@ -70,6 +75,22 @@
     "reobserved_game_count": 25,
     "failure_count": 0,
     "status": "OFFICIAL_RUNTIME_SURFACE_COMPLETE"
+  },
+  "m2_product_capability_acceptance": {
+    "path": "analysis/product/rev4/m2_product_capability_bundle.json",
+    "descriptor_path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+    "package_path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
+    "controlled_game_id": "ft09-0d8bbf25",
+    "controlled_action_budget": 128,
+    "product_actions": 75,
+    "product_level_count": 6,
+    "product_final_state": "WIN",
+    "p_removal_actions": 128,
+    "p_removal_level_count": 0,
+    "p_removal_final_state": "NOT_FINISHED",
+    "acceptance_gate_count": 14,
+    "failure_count": 0,
+    "status": "PRODUCT_CAPABILITY_BUNDLE_ACTIVE"
   },
   "current_selector_invariants": {
     "current_selector_count": 1,

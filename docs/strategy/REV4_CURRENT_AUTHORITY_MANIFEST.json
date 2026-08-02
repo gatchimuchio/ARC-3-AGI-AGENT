@@ -1,6 +1,6 @@
 {
-  "active_milestone": "M2_PRODUCT_CAPABILITY_BUNDLE",
-  "content_digest": "rev4-current-authority-manifest:c336a11c6cba6b60ad29a96ee5636ced6f84386507cf8ebae3264b57cded074d",
+  "active_milestone": "M3_INTEGRATED_AGI_CAPABILITY",
+  "content_digest": "rev4-current-authority-manifest:ce1fa9506165efb307d9264a48cf16ef06a1bdbe8cc2bb349ff573982a7c7f5d",
   "current_selector_path": "control/rev4/CURRENT_TASK.json",
   "digest_excluded_fields": [
     "content_digest"
@@ -9,17 +9,17 @@
     {
       "path": "AGENTS.md",
       "role": "CURRENT_EXECUTION_CONTROL",
-      "sha256": "3851ef318830efffd85b660604fa69353f0ff98d99cf315eca1226de858c3124"
+      "sha256": "63babcb1648c075cfd0bfad74d2d1ac8665569630961367d4479824bfb03920b"
     },
     {
       "path": "README.md",
       "role": "PRODUCT_OPERATOR_DOCUMENTATION",
-      "sha256": "103770356c97df45f750b9f14f21b87cb7f3669102d1064440de4f0e53dc6b2c"
+      "sha256": "4aeb97ecbbc08a02f33891e70eb8c375e56cee28fc6557700774e8770c3da5d5"
     },
     {
       "path": "ARC-AGI-3-Agents/README.md",
       "role": "PRODUCT_PACKAGE_OPERATOR_DOCUMENTATION",
-      "sha256": "4b7203c5307ab43f0a52089a0b31d2e1dbcba149be50bb2bcc03827613afb248"
+      "sha256": "08075b6ce5f1c110804b265412dafa792b0c55461d169443177821648dc80a8d"
     },
     {
       "path": "docs/architecture/AGI三主体統合設計正本_v0_2.md",
@@ -44,12 +44,12 @@
     {
       "path": "docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md",
       "role": "ARC3_PRODUCT_ROADMAP",
-      "sha256": "0934957377fa8b4840102206f47ef7e7391b7e57c76c64310ebe33ef6694ded3"
+      "sha256": "21f29f07094f746a74c4df844da9a9d67ddb00d8c33f6a9065be22d107146dfc"
     },
     {
       "path": "control/rev4/CURRENT_TASK.json",
       "role": "SOLE_CURRENT_SELECTOR",
-      "sha256": "9d727a5eff1f2b9f00bcb79c48048f844dfecc1fdf67b13d374df1bb6c92d7da"
+      "sha256": "7fb5962ec0c33c54983e088600fc7eb883bf9c48171ec9a5b4e3cd73bb9b55ec"
     },
     {
       "path": "control/rev4/LEGACY_REV3_CLASSIFICATION.json",
@@ -59,7 +59,7 @@
     {
       "path": "docs/strategy/contracts/REV4_PRODUCT_GOVERNANCE_CONTRACT_V1.json",
       "role": "MACHINE_GOVERNANCE_CONTRACT",
-      "sha256": "1656285305238fd8d7827d2c425c194e79103ad50877d3a3e9ae95160a3a9b74"
+      "sha256": "8ae7ae34934187c3462c8612ff59be47fbe829922965a04e1943f7b69d51da66"
     },
     {
       "path": "control/rev3/REV3_CURRENT_SELECTOR.json",
@@ -84,17 +84,17 @@
     {
       "path": "ARC-AGI-3-Agents/agents/templates/arc3_completion_agent.py",
       "role": "PRODUCT_ENTRYPOINT",
-      "sha256": "62e46fceca53e432169b13ae33b5d13ad0bdd1d2c0c4150b2656c62c236f979d"
+      "sha256": "e3ca563d522b80cf076d9e7ab0d82741b2b7d95666e4a0597f0e6b1074e38608"
     },
     {
       "path": "ARC-AGI-3-Agents/agents/templates/generic_agi_agent.py",
       "role": "PRODUCT_RUNTIME_ENTRYPOINT_BASE",
-      "sha256": "3d678907e023b3843f9da74bf2e104eabd43c30b6e39b4f24596dd1d5d0cf74a"
+      "sha256": "1e89ab81f3438ee86c4086e6d6439f8d9a60074c81552f9f3e4d966ab2462fec"
     },
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_competition_runner.py",
       "role": "PRODUCT_SEQUENTIAL_ORCHESTRATOR",
-      "sha256": "782edc9eb6ea85c777b95d625c664470a0dd260c43fa1f474ceb4f31da776c4d"
+      "sha256": "5202bd1a385eac157881b1a5305480324cad918154f3654b8a12a66ab947e645"
     },
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_compute.py",
@@ -154,7 +154,17 @@
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/p_ir.py",
       "role": "PRODUCT_INSTRUCTION_PROGRAM",
-      "sha256": "1c5a9d722e77b9c58c545a77f239f4e8c8e9c9316610cdb00361ff3843042ff7"
+      "sha256": "f1f769b21a7393e75ccf1a69e86b1e5274e2bb0411a32660f63051a61395ab53"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/p_ir_interpreter.py",
+      "role": "PRODUCT_INSTRUCTION_INTERPRETER",
+      "sha256": "2c3a3727f7e9edd26ae59b266db37596d2f873320a59acde7ae209c0f50e31fe"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/p_compiler_v2.py",
+      "role": "PRODUCT_INSTRUCTION_COMPILER",
+      "sha256": "62fac747b1c00dd658d0921e61dffb7f3a1b468c01b203cfe8438c6ebbb7fc61"
     },
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/p_ir_validator.py",
@@ -164,12 +174,12 @@
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py",
       "role": "PRODUCT_ENDPOINT_CONTRACT",
-      "sha256": "ba169a1a6e535d715d78720963b290ed4355ac44f53f12a6751ac47887d2513e"
+      "sha256": "b4a3d705e9312d62ee8354f67cb2f12441a0977c83549e3d5e8aed59a220352a"
     },
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
       "role": "PRODUCT_ACCEPTANCE_RUNNER",
-      "sha256": "f0157bdce9fdb75e0f0f099e189692c3afb4c8527ba07aa8f9381280213f4e95"
+      "sha256": "b9a05d1daaee24fad7b5d35a63c87cc162fd6e5f2d9e063df0caba3cec02035b"
     },
     {
       "path": "ARC-AGI-3-Agents/arc3_agi_agent/product_runtime_surface.py",
@@ -177,19 +187,34 @@
       "sha256": "cbc92a1c6f2f5935c70dfc0e4d13016d5469e0ed2212f73e18b0acfc4fb9bf45"
     },
     {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/product_capability.py",
+      "role": "PRODUCT_M2_CAPABILITY_BUNDLE_LOADER",
+      "sha256": "226f859deb4dd876f3ffb2250066fc43b5c5a90c87d0862bf9350faeaba056c4"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+      "role": "PRODUCT_M2_CAPABILITY_DESCRIPTOR",
+      "sha256": "0c2f9bced86f316e43eb720b5f9d1c11afc2502935bfd982172b36d6a0c04526"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
+      "role": "PRODUCT_M2_CAPABILITY_PACKAGE",
+      "sha256": "a24ba468374bf7fabda2d0ecae44793125fe1eb829db649196a8f77d0b7d91ce"
+    },
+    {
       "path": "ARC-AGI-3-Agents/pyproject.toml",
       "role": "PRODUCT_PACKAGE_ENTRYPOINT",
-      "sha256": "80b84a4e38f9fa4fd17b876a2616063832114b18709fb57aa2a79370ffcac05d"
+      "sha256": "e45fd8b9adf69705822c857efd805398d0bd643190f1c038e587184c7bebee82"
     },
     {
       "path": "scripts/validate_rev4_product_governance.py",
       "role": "CURRENT_GOVERNANCE_VALIDATOR",
-      "sha256": "7a815c2229268831cadda680b16d316e29ce60b73c6d79a0f2d2dba633204f5e"
+      "sha256": "e88f63189396185a0dffe1604225b1f0fb21223f2bdd602bf9d032b539a100ef"
     },
     {
       "path": "scripts/refresh_rev4_authority_manifest.py",
       "role": "CURRENT_MANIFEST_BUILDER",
-      "sha256": "c7202aea0924a55541b3c2cceb50894ef8b3f8ea0087a727b49c68272e91d911"
+      "sha256": "d2e9401c47094c968fca23393e1e44023bd40815b2cd564cf09a26c373c9547d"
     },
     {
       "path": "scripts/measure_product_resource_bounds.py",
@@ -200,6 +225,16 @@
       "path": "ARC-AGI-3-Agents/scripts/run_m1_official_runtime_surface_acceptance.py",
       "role": "PRODUCT_M1_RUNTIME_SURFACE_COMMAND",
       "sha256": "a9a36fdf6af9a387008a9ea6a0865c6605db17008165a591927634e16153d845"
+    },
+    {
+      "path": "ARC-AGI-3-Agents/scripts/run_m2_product_capability_acceptance.py",
+      "role": "PRODUCT_M2_CAPABILITY_ACCEPTANCE_COMMAND",
+      "sha256": "ee6885776d21ff30e89b06167b38c83898cb3eac5a2ae5344d8408ada1c1f14f"
+    },
+    {
+      "path": "scripts/build_m2_product_capability_bundle.py",
+      "role": "PRODUCT_M2_CAPABILITY_COMPILER_COMMAND",
+      "sha256": "49960e482ee9938268c40ac9c08738a2bcc716a5e2e92ed4dabe7e7107a8c921"
     },
     {
       "path": "analysis/product/rev4/product_resource_bounds.json",
@@ -222,14 +257,19 @@
       "sha256": "236dcab45752e4603eb11c202968e852d4d4fb5fdf5ffd0416ae235f06bbe3fb"
     },
     {
+      "path": "analysis/product/rev4/m2_product_capability_bundle.json",
+      "role": "PRODUCT_M2_CAPABILITY_ACCEPTANCE_EVIDENCE",
+      "sha256": "23584d9fb3c91af23ffa19f3f71934eba31f85803e4ccff6528d77ab50b71131"
+    },
+    {
       "path": "ARC-AGI-3-Agents/tests/unit/test_product_runner.py",
       "role": "PRODUCT_RUNNER_ACCEPTANCE_TEST",
-      "sha256": "fadc3e5592ab4b7a372b4702a9b21f72d6af1b28a80a4e695c270cc283a44029"
+      "sha256": "63a682466eed8d46995c43781d157a5993ece38dbd1f7a37764a67b1a5c56357"
     },
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_product_governance.py",
       "role": "PRODUCT_GOVERNANCE_ACCEPTANCE_TEST",
-      "sha256": "e4ce7ac6bb3741964c01d5f545f1467091098a38a2ccff5951187cb652077d5b"
+      "sha256": "8981d9500862a240c254d3507eef1e2b83cecde0d084117d26d01f27c76ffc8a"
     },
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_generic_competition_runner.py",
@@ -252,6 +292,11 @@
       "sha256": "9e70f809b038976035f9a22e17c5c5645c33ad25b065560c0c8a1d6760879b93"
     },
     {
+      "path": "ARC-AGI-3-Agents/tests/unit/test_p20a_p_ir.py",
+      "role": "PRODUCT_M2_P_IR_REGRESSION_TEST",
+      "sha256": "aabf5e2b00b973015a56988404d9d10f2e01d0275ac017ba3e5de5730f1ec047"
+    },
+    {
       "path": "ARC-AGI-3-Agents/tests/integration/test_m1_official_all25_runtime_surface.py",
       "role": "PRODUCT_M1_RUNTIME_SURFACE_INTEGRATION_TEST",
       "sha256": "1efeb1e271f1d0976602889fbd6c40023f2e42b126de26995ae923a4e2756cff"
@@ -264,10 +309,10 @@
     {
       "path": "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",
       "role": "CURRENT_HISTORICAL_BOUNDARY_REGRESSION_TEST",
-      "sha256": "3dbaee290d593a3957dff2911523d5a9df64913b01f47e4187b71ce745be5ba9"
+      "sha256": "a739c076d33aa730fd4c6263f00ec826c4c12518d13cbc6b6f0726b00c3dffc3"
     }
   ],
-  "entry_count": 52,
+  "entry_count": 61,
   "generated_by": "scripts/refresh_rev4_authority_manifest.py",
   "legacy_rev3_classification_path": "control/rev4/LEGACY_REV3_CLASSIFICATION.json",
   "product_id": "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4",

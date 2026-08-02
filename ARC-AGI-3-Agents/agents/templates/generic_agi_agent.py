@@ -37,6 +37,8 @@ class GenericAGIAgentReport:
     runtime_identity_digest: str
     session_lineage_digest: str
     identity_boundary_passed: bool
+    memory_citation_count: int
+    memory_citation_ids: tuple[str, ...]
 
 
 class GenericAGIAgent(Agent):
@@ -96,6 +98,11 @@ class GenericAGIAgent(Agent):
                 session=self.cognitive_session,
                 episode_handle=self.episode_handle,
             ).run()
+            memory_citations = tuple(
+                citation
+                for cycle in report.cycles
+                for citation in cycle.compute_result.memory_citations
+            )
             self.action_counter = report.actions_executed
             self.runtime_report = GenericAGIAgentReport(
                 actions_executed=report.actions_executed,
@@ -109,6 +116,10 @@ class GenericAGIAgent(Agent):
                 runtime_identity_digest=report.runtime_identity_digest,
                 session_lineage_digest=report.session_lineage_digest,
                 identity_boundary_passed=report.identity_boundary_passed,
+                memory_citation_count=len(memory_citations),
+                memory_citation_ids=tuple(
+                    sorted({item.memory_id for item in memory_citations})
+                ),
             )
             final_raw = self.arc_env.observation_space
             if isinstance(final_raw, FrameDataRaw):
