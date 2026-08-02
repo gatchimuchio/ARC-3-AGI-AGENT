@@ -1,8 +1,8 @@
-# ARC3 Completion Agent 製品開発契約 rev4
+# ARC3公式サンプル汎用完遂AGI 開発実行契約 rev5.1
 
-このrepositoryの最終成果物は、ARC3公式環境を同一AGI構造で自律完遂する実行可能製品`ARC3CompletionAgent`である。公式サンプル25 game／183 levelは必須の既知サンプル回帰であり、それだけをAGI完成扱いしない。
+このrepositoryの当該開発endpointは、ARC3公式サンプル25 game／183 levelを同一のC／J／M／P構造で自律完遂する実行可能製品`ARC3CompletionAgent`である。
 
-HDS分析、教師軌道分解、構造データ、命令形P、J設定、M0、試験reportは製品を成立させる素材・手段・内部部品であり、それ自体を開発endpointとしない。
+HDS解析、成功軌道、構造、P/J0/M0、試験、reportは、製品能力を構築する素材・手段・内部部品であり、それ自体を開発endpointとしない。
 
 ## Authority
 
@@ -10,14 +10,13 @@ HDS分析、教師軌道分解、構造データ、命令形P、J設定、M0、�
 2. `docs/architecture/AGI三主体統合設計正本_v0_2.md`
 3. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
 4. `docs/architecture/工学的AGI実装仕様書_v0_2.md`
-5. `docs/strategy/ARC3_AGIエージェント_製品仕様書_rev4.md`
-6. `docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md`
-7. `control/rev4/CURRENT_TASK.json`
-8. 旧rev3／P0〜P22／S0〜S6は履歴・再利用資産
+5. `docs/strategy/ARC3公式サンプル汎用完遂AGI_実装仕様書_rev5_1.md`
+6. `docs/roadmap/ARC3公式サンプル汎用完遂AGI_開発ロードマップ_rev5_1.md`
+7. `docs/instructions/ARC3公式サンプル汎用完遂AGI_ロードマップ準拠指示書_rev5_1.md`
+8. `control/rev5_1/CURRENT_TASK.json`
+9. 旧rev4／rev3／P0〜P22／S0〜S6は履歴・再利用資産
 
-上位のAGI／HDS正本を、ARC3製品仕様、roadmap、current taskが上書きしてはならない。規範権威と作業順序を分離し、`control/rev4/CURRENT_TASK.json`は作業対象を選択するだけとする。
-
-現在selectorは`control/rev4/CURRENT_TASK.json`の一つだけである。`control/rev3/REV3_CURRENT_SELECTOR.json`というlegacy filenameは履歴snapshotとして保持するが、現在phase、runtime activation、作業許可を与えない。分類正本は`control/rev4/LEGACY_REV3_CLASSIFICATION.json`とする。
+上位AGI／HDS正本をARC3仕様が上書きしてはならない。仕様書、ロードマップ、指示書は三点一組であり、ロードマップPoint IDと指示書の指示IDが一致しない作業を開始してはならない。
 
 ## Product Endpoint
 
@@ -30,153 +29,162 @@ ARC3CompletionAgent
 → M updates
 → emit one legal GameAction
 → repeat
-→ known sample 25/25 WIN and 183/183 complete
-→ same active artifact genericity and unused locked evaluation
-→ official full completion
+→ 25/25 WIN and 183/183 complete
 ```
 
-既知サンプル回帰条件:
+当該開発の終了条件:
 
 ```text
 one runnable product artifact
-one active C/J/M/P runtime
+one active ARC3ProductBundle
+closed Trinity(C,J,M)
+J authorizes every external action
+M changes future computation or judgement
 25 / 25 official sample games WIN
 183 / 183 levels complete
 no manual per-step intervention
 no fixed trajectory playback
+no identity action router
+clean-state repeat PASS
 ```
 
-製品完成条件は上記に加え、同一active artifactによる汎用性、未使用locked evaluator完遂、package identity、公式output bytes／score／full scope完遂を全て要求する。別artifactの成果合算は禁止する。
-
-## Current Work
+## Current Point
 
 ```text
-M3_INTEGRATED_AGI_CAPABILITY
+M0-P02_CAPABILITY_COVERAGE_MATRIX
 ```
 
-M4／M5証拠は25/25 `WIN`、183/183 level、10,733 action、runtime failure signature 0の既知サンプル／package回帰として保持する。active product P／J0／M0は七つのdevelopment transformation worldを7/7完遂した。一方、現行active Pは全teacher parameterを継承し、CVは25 holdout中完遂0、sealed証拠はactive Pとdigest不一致である。したがってM3を継続し、汎用性と同一artifact評価を修正する。
+M0-P01は既存substrateで充足済みであり、新しいshell、runner、agent subclass、packageを作ってはならない。
 
-現在の機械検証gateは次である。
+現在Pointでは、公式25 gameを浅く一巡し、次の能力面を一つの`CapabilityCoverageMatrix`へ記録する。
 
 ```text
-python scripts/validate_rev4_product_governance.py
-python scripts/build_product_completion_audit.py --check
+input modality
+action surface
+RESET
+ACTION6
+ACTION7
+render layer count
+temporal / animation
+delayed effect
+phase change
+long-horizon action count
+rollback requirement
+planning depth
+spatial binding type
+goal structure
 ```
 
-旧`validate_rev3_governance.py`はrev3履歴snapshotの整合だけを検査し、current selectorを決定しない。
+深層HDS解析、全game構造抽出、P/J/M実装はM0-P03 basis選定前に開始しない。
 
-現在実装・検証する。
-
-1. active productと同じmodel family／resource contractによるCV
-2. semantic transformed-environment completion
-3. 同一frozen P／J0／M0による未使用locked evaluator完遂
-4. 既知25/25／183/183回帰の維持
-5. 汎用性成立後のwheel／clean install／Notebook再固定
-6. 外部Kaggle実行はOwnerの現在の明示授権後のみ実行
-
-## Verified Product Gaps
-
-```text
-B-01 legacy generic path budget 128; product path closed at 4096
-B-02 closed in M2: teacher-derived compiled product P is runtime-bound
-B-03 closed in M2: non-compatibility product P-IR is runtime-bound
-B-04 closed in M1: all temporal action frames, final composite and history represented
-B-05 closed in M1: ACTION6 covers seven bounded spatial affordance classes
-B-06 reopened in M3: online trace exists, unknown-state capability is unproven
-B-07 known-sample regression: 25/25 WIN, 183/183, 10,733 actions
-B-08 external Kaggle write requires current Owner authorization
-B-09 open: active transformation 7/7、CV 0/25、sealed active-P mismatch
-```
-
-## Product Architecture
+## Fixed Architecture
 
 ```text
 C = Execute(L0, P)
 AGI Kernel = Trinity(C, J, M)
-Product = Official Adapter + AGI Kernel + Product Runtime + Product Bundle
+Product = Official Adapter + AGI Kernel + Product Runtime
 ```
 
 - C: representation、hypothesis、counter-hypothesis、prediction、candidate、probe、plan
-- J: HDS purpose、frame、gate、selection、action、rollback、memory update、next question、stop
+- J: HDS purpose、W=(X,R,Mc)、gate、selection、action、rollback、memory update、next question、stop
 - M: active judgment grounds, revised by experience
 - P: Layer-0が実行するARC3能力本体
 - Adapter: official I/O conversion only; not a subject
 
-Cは最終採否・外部action・active memory commitを行わない。J以外の外部action経路を禁止する。
+Cは最終採否、外部action、ACTIVE M commitを行わない。J以外の外部action経路を禁止する。
 
-## HDS Usage
-
-HDSは開発成果物ではなく、製品Jと開発時failure分解の方法である。
+## HDS Run Contract
 
 ```text
-F   observe/frame
-Md  model alternatives, counter-hypotheses, candidates
-Cm  compare, gate, decide
-U   attribute result, revise P/J/M or product component
+F   observation / purpose / boundary / open terms
+Md  baseline / alternatives / counter-hypotheses / predictions / plans
+Cm  gates / selection / suspend / execute / stop
+U   attribution / model revision / Failure Signature / memory update
 ```
 
-教師素材のHDS解釈は、P／J0／M0へコンパイルされ製品で使われる範囲だけ実施する。
-
-## Product-First Milestones
+一回の成功をrelease P/J0/M0へ直接昇格させない。
 
 ```text
-M0 Product baseline / blockers
-M1 Official product runtime
-M2 Product capability bundle P/J0/M0
-M3 Integrated AGI capability
-M4 Full-sample repair loop
-M5 Product closure / packaging
+Runtime M / LOCAL_M
+→ PROBATION_DEV
+→ ACTIVE_DEV
+→ RELEASE_FROZEN
 ```
 
-全milestoneでrunnable `ARC3CompletionAgent`を保持する。reportだけ、schemaだけ、evidenceだけ、approvalだけのmilestoneを作らない。
+## Roadmap Discipline
+
+各Pointは対応する指示書だけで実行する。
+
+```text
+M0 Capability basis + first AGI closure
+M1 Capability-family expansion
+M2 Full-sample product closure
+M3 Generic / AGI conformance
+M4 Product freeze and release
+```
+
+各CapabilityClosureUnitは次で閉じる。
+
+```text
+product failure / missing capability
+→ HDS F/Md/Cm/U
+→ product capability change
+→ integrated agent execution
+→ behavior delta
+→ regression
+```
+
+分析report、schema、shell、runner、testだけで終了してはならない。
 
 ## Allowed
 
 - 既知回答・成功軌道・raw recording・canonical trajectoryの能力構築利用
-- environment sourceを開発時の機構確認へ利用
+- environment sourceを開発時のmechanism確認へ利用
 - 最大情報から構造を抽出し、製品runtimeでidentity／replay依存を減算
-- PH-D05 corpus、P16〜P21 substrate、P-IR、C/J/M、official adapterの再利用
-- 製品code、bundle、tests、runner、failure repairの連続実行
-- failureからC／J／M／P／Adapter／Resourceへ戻ること
+- PH-D05 corpus、既存C/J/M、P-IR、official adapterの再利用
+- roadmap Point内での製品code、P/J/M、tests、failure repair
+- failureから責任componentへ戻ること
 
 ## Forbidden
 
-- 新repository作成
-- HDS蒸留／構造抽出を最終製品扱いすること
-- productへ接続しない大量analysis artifact
+- 新repository
+- 新しい空shell／agent subclass
+- parallel runner／package path
+- HDS解析・構造抽出・P生成を最終製品扱いすること
+- Point外の先行実装
+- 製品へ接続しない大量analysis artifact
 - governance-only phase
-- action ID／game ID／level IDによる完成trajectory routing
-- fixed answer playbackをAGI能力と数えること
-- current product baseline測定前の抽象的な完成claim
-- 128 action固定の維持
-- Jを迂回する外部action
+- game／level ID、frame hash、trajectory indexによる答え選択
+- fixed successful trajectory playback
+- J bypass
+- test数、schema数、commit数、digest数を進捗扱いすること
 
 ## Progress Metrics
 
 ```text
-games started
 games WIN
 levels completed
-failure classes
-actions used
-resource stop count
+Failure Signature reduction
+ACTIVE_DEV CapabilityFamily count
+P/J/M capability delta
 memory-caused behavior change
 regressions
 ```
-
-test数、schema数、commit数、digest数を製品進捗と数えない。
 
 ## Artifact Rule
 
 新artifactは次のいずれかの場合だけ作る。
 
 ```text
+次Pointが直接読む
 product runtimeが直接読む
 product acceptanceが直接読む
 product failure repairに直接使う
 official packageに必要
 ```
 
-## Owner Boundary
+## Reporting
 
-Ownerは製品定義、戦略変更、Product Bundle freeze、公式提出を決定する。内部実装・試験・修正は、明示停止または重大な仕様衝突まで継続する。
+各Point終了時は、対応指示書の`PointReport`形式だけで報告する。
+
+Ownerは製品定義、戦略変更、release ProductBundle freeze、公式提出を決定する。内部実装・試験・修正は、明示停止または重大な仕様衝突までロードマップ順で継続する。
