@@ -88,7 +88,7 @@ def test_product_session_closes_known_budget_impossibility() -> None:
     assert ARC3_DEVELOPMENT_ACTION_BUDGET >= ARC3_KNOWN_SUCCESS_ACTION_CEILING
     assert session.resource_contract.action_budget_per_episode == 4096
     assert session.hds_config.resource_budget == 4096
-    assert session.hds_config.stop_after_no_progress == 4096
+    assert session.hds_config.stop_after_no_progress == 650
 
 
 def test_product_runner_reports_endpoint_metrics_without_false_completion() -> None:
@@ -103,6 +103,7 @@ def test_product_runner_reports_endpoint_metrics_without_false_completion() -> N
     assert report["product_action_budget_per_game"] == 4096
     assert report["known_success_action_ceiling"] == 1519
     assert report["known_budget_impossibility"] is False
+    assert report["product_game_started_count"] == 2
     assert report["product_game_win_count"] == 2
     assert report["product_level_completion_count"] == 183
     endpoint_failure_count = report["product_endpoint_failure_count"]
@@ -112,4 +113,5 @@ def test_product_runner_reports_endpoint_metrics_without_false_completion() -> N
     assert isinstance(endpoint_failures, tuple)
     assert "PRODUCT_ADVERTISED_GAME_COUNT_MISMATCH" in endpoint_failures
     assert report["product_completion_established"] is False
+    assert report["product_baseline_executable"] is False
     assert report["product_status"] == "INCOMPLETE"

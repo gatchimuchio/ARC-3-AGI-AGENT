@@ -16,12 +16,16 @@ CONTRACT_PATH: Final = Path(
 )
 CLASSIFICATION_PATH: Final = Path("control/rev4/LEGACY_REV3_CLASSIFICATION.json")
 MANIFEST_PATH: Final = Path("docs/strategy/REV4_CURRENT_AUTHORITY_MANIFEST.json")
+RESOURCE_BOUNDS_PATH: Final = Path("analysis/product/rev4/product_resource_bounds.json")
 PRODUCT_GOVERNANCE_PATH: Final = Path(
     "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py"
 )
 PRODUCT_RUNNER_PATH: Final = Path("ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py")
 PRODUCT_ENTRYPOINT_PATH: Final = Path(
     "ARC-AGI-3-Agents/agents/templates/arc3_completion_agent.py"
+)
+GENERIC_RUNNER_PATH: Final = Path(
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_competition_runner.py"
 )
 REV3_GOVERNANCE_PATH: Final = Path("ARC-AGI-3-Agents/arc3_agi_agent/rev3_governance.py")
 PRODUCT_ID: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
@@ -80,6 +84,7 @@ def validate_repository(root: Path) -> dict[str, object]:
     contract = _load_object(root, CONTRACT_PATH)
     classification = _load_object(root, CLASSIFICATION_PATH)
     manifest = _load_object(root, MANIFEST_PATH)
+    resource_bounds = _load_object(root, RESOURCE_BOUNDS_PATH)
 
     check(
         current.get("schema_version") == "arc3-product-current-task-v2",
@@ -174,6 +179,99 @@ def validate_repository(root: Path) -> dict[str, object]:
             contract_endpoint.get("known_success_action_ceiling") == 1519,
             "contract:KNOWN_SUCCESS_CEILING",
         )
+        check(
+            contract_endpoint.get("known_success_no_progress_ceiling") == 644,
+            "contract:KNOWN_NO_PROGRESS_CEILING",
+        )
+        check(
+            contract_endpoint.get("product_no_progress_limit") == 650,
+            "contract:NO_PROGRESS_LIMIT",
+        )
+
+    resource_body = dict(resource_bounds)
+    resource_digest = resource_body.pop("content_digest", None)
+    calculated_resource_digest = (
+        "arc3-product-resource-bounds:"
+        + hashlib.sha256(_canonical_json(resource_body).encode("utf-8")).hexdigest()
+    )
+    check(
+        resource_digest == calculated_resource_digest,
+        "resource_bounds:CONTENT_DIGEST_MISMATCH",
+    )
+    check(
+        resource_bounds.get("schema_version") == "arc3-product-resource-bounds-v1",
+        "resource_bounds:SCHEMA_VERSION",
+    )
+    check(
+        resource_bounds.get("product_id") == PRODUCT_NAME,
+        "resource_bounds:PRODUCT_ID",
+    )
+    check(
+        resource_bounds.get("game_count") == 25,
+        "resource_bounds:GAME_COUNT",
+    )
+    check(
+        resource_bounds.get("level_count") == 183,
+        "resource_bounds:LEVEL_COUNT",
+    )
+    check(
+        resource_bounds.get("known_success_action_ceiling") == 1519,
+        "resource_bounds:ACTION_CEILING",
+    )
+    check(
+        resource_bounds.get("known_success_no_progress_ceiling") == 644,
+        "resource_bounds:NO_PROGRESS_CEILING",
+    )
+    check(
+        resource_bounds.get("recommended_no_progress_limit") == 650,
+        "resource_bounds:NO_PROGRESS_LIMIT",
+    )
+    teacher_manifest_path = resource_bounds.get("source_manifest_path")
+    check(
+        teacher_manifest_path
+        == "distillation/artifacts/teacher/arc3/ph_d05_v1/manifest.json",
+        "resource_bounds:SOURCE_MANIFEST_PATH",
+    )
+    if isinstance(teacher_manifest_path, str):
+        teacher_manifest = root / teacher_manifest_path
+        check(teacher_manifest.is_file(), "resource_bounds:SOURCE_MANIFEST_MISSING")
+        if teacher_manifest.is_file():
+            check(
+                hashlib.sha256(teacher_manifest.read_bytes()).hexdigest()
+                == resource_bounds.get("source_manifest_sha256"),
+                "resource_bounds:SOURCE_MANIFEST_SHA256",
+            )
+    resource_games = resource_bounds.get("games")
+    check(isinstance(resource_games, list), "resource_bounds:GAMES_MISSING")
+    if isinstance(resource_games, list):
+        game_ids = [
+            item.get("game_id") for item in resource_games if isinstance(item, dict)
+        ]
+        check(len(resource_games) == 25, "resource_bounds:GAME_ROWS")
+        check(len(game_ids) == 25, "resource_bounds:GAME_ROW_TYPES")
+        check(len(set(game_ids)) == 25, "resource_bounds:DUPLICATE_GAME_ID")
+    baseline_acceptance = contract.get("baseline_acceptance")
+    check(
+        isinstance(baseline_acceptance, dict),
+        "contract:BASELINE_ACCEPTANCE_MISSING",
+    )
+    if isinstance(baseline_acceptance, dict):
+        check(
+            baseline_acceptance.get("started_game_count") == 25,
+            "contract:BASELINE_STARTED_COUNT",
+        )
+        check(
+            baseline_acceptance.get("bounded_report_count") == 25,
+            "contract:BASELINE_REPORT_COUNT",
+        )
+        check(
+            baseline_acceptance.get("requires_win_count") is False,
+            "contract:BASELINE_WIN_REQUIREMENT",
+        )
+        check(
+            baseline_acceptance.get("status") == "PRODUCT_BASELINE_EXECUTABLE",
+            "contract:BASELINE_STATUS",
+        )
 
     check(
         classification.get("classification") == "HISTORICAL_REUSE_ONLY",
@@ -226,6 +324,8 @@ def validate_repository(root: Path) -> dict[str, object]:
         "ARC3_OFFICIAL_SAMPLE_GAME_TARGET": 25,
         "ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET": 183,
         "ARC3_KNOWN_SUCCESS_ACTION_CEILING": 1519,
+        "ARC3_KNOWN_SUCCESS_NO_PROGRESS_CEILING": 644,
+        "ARC3_PRODUCT_NO_PROGRESS_LIMIT": 650,
         "ARC3_DEVELOPMENT_ACTION_BUDGET": 4096,
         "ARC3_CURRENT_SELECTOR_PATH": CURRENT_TASK_PATH.as_posix(),
         "ARC3_LEGACY_REV3_IS_CURRENT": False,
@@ -236,6 +336,7 @@ def validate_repository(root: Path) -> dict[str, object]:
     runner_source = (root / PRODUCT_RUNNER_PATH).read_text(encoding="utf-8")
     entrypoint_source = (root / PRODUCT_ENTRYPOINT_PATH).read_text(encoding="utf-8")
     rev3_source = (root / REV3_GOVERNANCE_PATH).read_text(encoding="utf-8")
+    generic_runner_source = (root / GENERIC_RUNNER_PATH).read_text(encoding="utf-8")
     check(
         ".product_governance import" in runner_source,
         "product_runner:GOVERNANCE_IMPORT_MISSING",
@@ -245,12 +346,28 @@ def validate_repository(root: Path) -> dict[str, object]:
         "product_runner:ENDPOINT_GATE_MISSING",
     )
     check(
+        "def run_arc3_completion_offline(" in runner_source,
+        "product_runner:OFFLINE_ENTRYPOINT_MISSING",
+    )
+    check(
         "rev3_governance" not in runner_source + entrypoint_source,
         "product_runtime:LEGACY_REV3_IMPORT",
     )
     check(
         "class ARC3CompletionAgent(GenericAGIAgent)" in entrypoint_source,
         "product_entrypoint:CLASS_MISSING",
+    )
+    check(
+        "OfflineGenericEnvironment" in entrypoint_source,
+        "product_entrypoint:OFFLINE_ADAPTER_MISSING",
+    )
+    check(
+        '"started_game_count": started_game_count' in generic_runner_source,
+        "generic_runner:STARTED_COUNT_MISSING",
+    )
+    check(
+        '"resource_action_budget_per_episode"' in generic_runner_source,
+        "generic_runner:OBSERVED_BUDGET_MISSING",
     )
     check(
         "REV3_IS_CURRENT: Final = False" in rev3_source,
@@ -378,6 +495,8 @@ def validate_repository(root: Path) -> dict[str, object]:
             PRODUCT_GOVERNANCE_PATH.as_posix(),
             PRODUCT_RUNNER_PATH.as_posix(),
             PRODUCT_ENTRYPOINT_PATH.as_posix(),
+            GENERIC_RUNNER_PATH.as_posix(),
+            RESOURCE_BOUNDS_PATH.as_posix(),
         ):
             check(required in paths, f"authority_manifest:UNBOUND:{required}")
 

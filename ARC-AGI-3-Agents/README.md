@@ -18,6 +18,18 @@ P9では全8 subsetを実行し、full setだけがPASSするcertificateを固�
 
 Python 3.12とロック済み依存関係を使用します。
 
+rev4製品baseline入口:
+
+```bash
+uv run arc3-completion-product \
+  --mode offline \
+  --action-budget 4096 \
+  --report ../analysis/product/rev4/current_product_baseline.json
+```
+
+同じ`ARC3CompletionAgent`／C・J・M・P runtimeが、ローカルではOFFLINE adapter、
+公式gatewayではcompetition adapterを使用します。adapterは主体ではありません。
+
 ```bash
 uv sync --locked
 uv run python sample_main.py --all-samples --max-actions 1

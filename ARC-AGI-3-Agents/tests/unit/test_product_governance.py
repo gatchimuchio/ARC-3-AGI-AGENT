@@ -10,11 +10,13 @@ from arc3_agi_agent.product_governance import (
     ARC3_CURRENT_SELECTOR_PATH,
     ARC3_DEVELOPMENT_ACTION_BUDGET,
     ARC3_KNOWN_SUCCESS_ACTION_CEILING,
+    ARC3_KNOWN_SUCCESS_NO_PROGRESS_CEILING,
     ARC3_LEGACY_REV3_IS_CURRENT,
     ARC3_OFFICIAL_SAMPLE_GAME_TARGET,
     ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET,
     ARC3_PRODUCT_ACTIVE_MILESTONE,
     ARC3_PRODUCT_ENDPOINT,
+    ARC3_PRODUCT_NO_PROGRESS_LIMIT,
 )
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[3]
@@ -32,6 +34,7 @@ def _complete_report() -> dict[str, object]:
     assert sum(progress) == 183
     return {
         "advertised_game_count": 25,
+        "started_game_count": 25,
         "completed_game_count": 25,
         "failed_game_count": 0,
         "lifecycle_failure_count": 0,
@@ -39,11 +42,23 @@ def _complete_report() -> dict[str, object]:
         "scorecard_open_count": 1,
         "scorecard_close_count": 1,
         "scorecard_closed": True,
+        "shared_session_count": 1,
+        "resource_action_budget_per_episode": 4096,
+        "hds_stop_after_no_progress": 650,
+        "state_owner_violation_count": 0,
+        "identity_boundary": "PASS",
+        "runtime_policy_changed": False,
+        "orchestration_game_index": [
+            {"game_index": index, "game_id": f"sample-{index:02d}"}
+            for index in range(25)
+        ],
         "results": [
             {
                 "game_index": index,
+                "actions_executed": index + 1,
                 "progress_count": progress[index],
                 "final_state": "WIN",
+                "stop_reason": "GOAL_REACHED",
             }
             for index in range(25)
         ],
@@ -57,6 +72,8 @@ def test_product_governance_constants_match_endpoint() -> None:
     assert ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET == 183
     assert ARC3_DEVELOPMENT_ACTION_BUDGET == 4096
     assert ARC3_KNOWN_SUCCESS_ACTION_CEILING == 1519
+    assert ARC3_KNOWN_SUCCESS_NO_PROGRESS_CEILING == 644
+    assert ARC3_PRODUCT_NO_PROGRESS_LIMIT == 650
     assert ARC3_LEGACY_REV3_IS_CURRENT is False
     assert ARC3_PRODUCT_ENDPOINT.validate() == ()
 
@@ -69,7 +86,30 @@ def test_product_endpoint_accepts_only_the_full_measured_result() -> None:
     assert metrics["product_game_win_count"] == 25
     assert metrics["product_level_completion_count"] == 183
     assert metrics["product_completion_established"] is True
+    assert metrics["product_baseline_executable"] is True
+    assert metrics["product_baseline_status"] == ("PRODUCT_BASELINE_EXECUTABLE")
     assert metrics["product_status"] == "COMPLETE"
+
+
+def test_product_baseline_accepts_bounded_reports_without_claiming_wins() -> None:
+    report = _complete_report()
+    results = report["results"]
+    assert isinstance(results, list)
+    for row in results:
+        row["progress_count"] = 0
+        row["final_state"] = "NOT_FINISHED"
+        row["stop_reason"] = "RESOURCE_LIMIT"
+
+    metrics = ARC3_PRODUCT_ENDPOINT.metrics(report)
+
+    assert metrics["product_baseline_failure_count"] == 0
+    assert metrics["baseline_report_complete"] is True
+    assert metrics["product_baseline_executable"] is True
+    assert metrics["product_completion_established"] is False
+    assert metrics["product_endpoint_failures"] == (
+        "PRODUCT_GAME_WIN_COUNT_MISMATCH",
+        "PRODUCT_LEVEL_COMPLETION_COUNT_MISMATCH",
+    )
 
 
 def test_product_endpoint_rejects_duplicate_index_and_open_scorecard() -> None:

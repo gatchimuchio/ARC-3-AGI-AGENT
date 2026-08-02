@@ -22,6 +22,8 @@
     "required_final_state": "WIN",
     "product_action_budget_per_game": 4096,
     "known_success_action_ceiling": 1519,
+    "known_success_no_progress_ceiling": 644,
+    "product_no_progress_limit": 650,
     "manual_step_intervention_allowed": false,
     "fixed_trajectory_playback_allowed": false
   },
@@ -34,6 +36,17 @@
     "path": "analysis/product/rev4/current_product_baseline.json",
     "required_for_m0_exit": true,
     "required_for_product_completion": true
+  },
+  "baseline_acceptance": {
+    "advertised_game_count": 25,
+    "started_game_count": 25,
+    "bounded_report_count": 25,
+    "budget_impossible_game_count": 0,
+    "adapter_crash_count": 0,
+    "scorecard_lifecycle_leak_count": 0,
+    "active_product_path_count": 1,
+    "requires_win_count": false,
+    "status": "PRODUCT_BASELINE_EXECUTABLE"
   },
   "current_selector_invariants": {
     "current_selector_count": 1,

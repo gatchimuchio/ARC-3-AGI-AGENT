@@ -41,9 +41,7 @@ def _peak_rss_mb() -> float | None:
 
         getrusage = getattr(resource, "getrusage")
         usage = getrusage(getattr(resource, "RUSAGE_SELF"))
-        peak_rss = float(
-            getattr(usage, "ru_maxrss")
-        )
+        peak_rss = float(getattr(usage, "ru_maxrss"))
         return round(peak_rss / 1024, 3)
     except (ImportError, OSError, ValueError):
         return None
@@ -79,6 +77,7 @@ def run_sequential_competition(
 
         agent_factory = GenericAGIAgent
     if session_factory is None:
+
         def default_session_factory() -> CognitiveSession:
             return create_cognitive_session(
                 p_bundle=HybridRelationalInstructionBody(),
@@ -114,11 +113,13 @@ def run_sequential_competition(
     completed: list[dict[str, object]] = []
     failures: list[dict[str, object]] = []
     lifecycle_failures: list[dict[str, object]] = []
+    started_game_count = 0
     close_result: object | None = None
     close_error: Exception | None = None
     session_lifecycle_failed = False
     try:
         for game_index, game_id in enumerate(game_ids):
+            started_game_count += 1
             environment: object | None = None
             episode_handle = None
             game_succeeded = False
@@ -202,10 +203,7 @@ def run_sequential_competition(
                     except Exception as error:
                         session_lifecycle_failed = True
                         logger.exception(
-                            (
-                                "Cognitive session episode closure failed: "
-                                "index=%s/%s"
-                            ),
+                            ("Cognitive session episode closure failed: index=%s/%s"),
                             game_index + 1,
                             len(game_ids),
                         )
@@ -246,6 +244,7 @@ def run_sequential_competition(
         "schema_version": GENERIC_COMPETITION_RUNNER_VERSION,
         "orchestration_mode": "SEQUENTIAL_SINGLE_ACTIVE_GAME",
         "advertised_game_count": len(game_ids),
+        "started_game_count": started_game_count,
         "completed_game_count": len(completed),
         "failed_game_count": len(failures),
         "lifecycle_failure_count": len(lifecycle_failures),
@@ -254,6 +253,12 @@ def run_sequential_competition(
         "scorecard_close_count": 1 if close_error is None else 0,
         "scorecard_closed": close_result is not None,
         "shared_session_count": 1,
+        "resource_action_budget_per_episode": (
+            cognitive_session.resource_contract.action_budget_per_episode
+        ),
+        "hds_stop_after_no_progress": (
+            cognitive_session.hds_config.stop_after_no_progress
+        ),
         "per_game_new_memory_count": 0,
         "per_game_new_p_count": 0,
         "cross_game_semantic_promotion": (
@@ -263,6 +268,10 @@ def run_sequential_competition(
         ),
         "state_owner_violation_count": len(state_owner_violations),
         "identity_boundary": "PASS",
+        "orchestration_game_index": [
+            {"game_index": index, "game_id": game_id}
+            for index, game_id in enumerate(game_ids)
+        ],
         "runtime_identity_digest": cognitive_session.runtime_identity.digest(),
         "session_lineage_digest": cognitive_session.lineage_digest,
         "results": completed,

@@ -6,6 +6,7 @@ from arc_agi import EnvironmentWrapper
 from arc_agi.local_wrapper import LocalEnvironmentWrapper
 from arcengine import FrameDataRaw, GameAction, GameState
 
+from agents.templates.arc3_completion_agent import ARC3CompletionAgent
 from agents.templates.generic_agi_agent import GenericAGIAgent
 from arc3_agi_agent.generic_compute import HybridRelationalInstructionBody
 from arc3_agi_agent.generic_env import CompetitionGenericEnvironment
@@ -42,9 +43,7 @@ class _FakeCompetitionEnvironment(EnvironmentWrapper):
     ) -> None:
         self._last_response = before
         self.after = after
-        self.calls: list[
-            tuple[GameAction, dict[str, int], dict[str, object]]
-        ] = []
+        self.calls: list[tuple[GameAction, dict[str, int], dict[str, object]]] = []
 
     def step(
         self,
@@ -60,6 +59,27 @@ class _FakeCompetitionEnvironment(EnvironmentWrapper):
 class _FakeLocalEnvironment(LocalEnvironmentWrapper):
     def __init__(self, frame: FrameDataRaw) -> None:
         self._last_response = frame
+
+
+class _SteppingFakeLocalEnvironment(LocalEnvironmentWrapper):
+    def __init__(
+        self,
+        before: FrameDataRaw,
+        after: FrameDataRaw,
+    ) -> None:
+        self._last_response = before
+        self.after = after
+        self.calls: list[tuple[GameAction, dict[str, int], dict[str, object]]] = []
+
+    def step(
+        self,
+        action: GameAction,
+        data: dict[str, int] | None = None,
+        reasoning: dict[str, object] | None = None,
+    ) -> FrameDataRaw:
+        self.calls.append((action, data or {}, reasoning or {}))
+        self._last_response = self.after
+        return self.after
 
 
 def test_competition_adapter_projects_identity_free_frame_and_emits_once() -> None:
@@ -95,9 +115,7 @@ def test_competition_adapter_projects_identity_free_frame_and_emits_once() -> No
             },
         )
     ]
-    with pytest.raises(
-        RuntimeError, match="GENERIC_COMPETITION_DUPLICATE_REQUEST"
-    ):
+    with pytest.raises(RuntimeError, match="GENERIC_COMPETITION_DUPLICATE_REQUEST"):
         adapter.step(
             6,
             payload={"x": 1, "y": 0},
@@ -106,9 +124,7 @@ def test_competition_adapter_projects_identity_free_frame_and_emits_once() -> No
 
 
 def test_competition_adapter_rejects_local_wrapper() -> None:
-    with pytest.raises(
-        TypeError, match="GENERIC_COMPETITION_REMOTE_WRAPPER_REQUIRED"
-    ):
+    with pytest.raises(TypeError, match="GENERIC_COMPETITION_REMOTE_WRAPPER_REQUIRED"):
         CompetitionGenericEnvironment(
             _FakeLocalEnvironment(_frame([[0]], available_actions=[1]))
         )
@@ -148,6 +164,42 @@ def test_generic_competition_agent_runs_only_generic_runtime() -> None:
     assert agent.runtime_report.final_state == "WIN"
     assert agent.runtime_report.no_fallback_used is True
     assert agent.runtime_report.runtime_identity_received is True
+    assert agent.runtime_report.identity_boundary_passed is True
+    assert len(environment.calls) == 1
+    assert environment.calls[0][2]["authority"] == "HDS"
+
+
+def test_product_agent_uses_same_runtime_with_offline_adapter() -> None:
+    before = _frame([[0, 0], [0, 1]])
+    after = _frame(
+        [[0, 1], [0, 1]],
+        state=GameState.WIN,
+        levels_completed=1,
+    )
+    environment = _SteppingFakeLocalEnvironment(before, after)
+    session = create_cognitive_session(
+        p_bundle=HybridRelationalInstructionBody(),
+        mode="VALIDATION",
+        resource_contract=ResourceContract(action_budget_per_episode=8),
+    )
+    episode_handle = session.begin_episode()
+    agent = ARC3CompletionAgent(
+        card_id="card:offline-product",
+        game_id="orchestration-only-identity",
+        agent_name="arc3completion",
+        ROOT_URL="",
+        record=False,
+        arc_env=environment,
+        max_actions=8,
+        cognitive_session=session,
+        episode_handle=episode_handle,
+    )
+
+    agent.main()
+
+    assert agent.runtime_report is not None
+    assert agent.runtime_report.actions_executed == 1
+    assert agent.runtime_report.final_state == "WIN"
     assert agent.runtime_report.identity_boundary_passed is True
     assert len(environment.calls) == 1
     assert environment.calls[0][2]["authority"] == "HDS"

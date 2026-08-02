@@ -18,6 +18,10 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
     ("AGENTS.md", "CURRENT_EXECUTION_CONTROL"),
     ("README.md", "PRODUCT_OPERATOR_DOCUMENTATION"),
     (
+        "ARC-AGI-3-Agents/README.md",
+        "PRODUCT_PACKAGE_OPERATOR_DOCUMENTATION",
+    ),
+    (
         "docs/architecture/AGI三主体統合設計正本_v0_2.md",
         "NORMATIVE_AGI_ARCHITECTURE",
     ),
@@ -67,6 +71,14 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "PRODUCT_ENTRYPOINT",
     ),
     (
+        "ARC-AGI-3-Agents/agents/templates/generic_agi_agent.py",
+        "PRODUCT_RUNTIME_ENTRYPOINT_BASE",
+    ),
+    (
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_competition_runner.py",
+        "PRODUCT_SEQUENTIAL_ORCHESTRATOR",
+    ),
+    (
         "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py",
         "PRODUCT_ENDPOINT_CONTRACT",
     ),
@@ -74,6 +86,7 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py",
         "PRODUCT_ACCEPTANCE_RUNNER",
     ),
+    ("ARC-AGI-3-Agents/pyproject.toml", "PRODUCT_PACKAGE_ENTRYPOINT"),
     (
         "scripts/validate_rev4_product_governance.py",
         "CURRENT_GOVERNANCE_VALIDATOR",
@@ -83,12 +96,32 @@ AUTHORITY_ENTRIES: Final[tuple[tuple[str, str], ...]] = (
         "CURRENT_MANIFEST_BUILDER",
     ),
     (
+        "scripts/measure_product_resource_bounds.py",
+        "PRODUCT_RESOURCE_BOUND_MEASUREMENT",
+    ),
+    (
+        "analysis/product/rev4/product_resource_bounds.json",
+        "PRODUCT_RESOURCE_BOUND_EVIDENCE",
+    ),
+    (
         "ARC-AGI-3-Agents/tests/unit/test_product_runner.py",
         "PRODUCT_RUNNER_ACCEPTANCE_TEST",
     ),
     (
         "ARC-AGI-3-Agents/tests/unit/test_product_governance.py",
         "PRODUCT_GOVERNANCE_ACCEPTANCE_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_generic_competition_runner.py",
+        "PRODUCT_ORCHESTRATOR_REGRESSION_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/unit/test_competition_generic_agent.py",
+        "PRODUCT_ADAPTER_REGRESSION_TEST",
+    ),
+    (
+        "ARC-AGI-3-Agents/tests/integration/test_product_offline_runner.py",
+        "PRODUCT_OFFLINE_INTEGRATION_TEST",
     ),
     (
         "ARC-AGI-3-Agents/tests/unit/test_rev3_strategy_rebaseline.py",

@@ -50,7 +50,10 @@ official sample games       = 25
 official sample levels      = 183
 teacher canonical actions   = 11,574
 max known actions per game  = 1,519
-current product budget      = 128
+legacy generic budget       = 128
+current product budget      = 4096
+teacher max no-progress run = 644
+product no-progress limit   = 650
 current competition P       = HybridRelationalInstructionBody()
 default P-IR                = compatibility_p_ir_program()
 ```

@@ -102,6 +102,18 @@ M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
 
 HDS軌道分解や構造抽出を先に独立完成させません。製品runnerを先に成立させ、能力素材を製品へ接続しながら構築します。
 
+公式sampleを使う現行製品入口（既定は全25 game、OFFLINEのみ）:
+
+```bash
+cd ARC-AGI-3-Agents
+python -m arc3_agi_agent.product_runner \
+  --mode offline \
+  --action-budget 4096 \
+  --report ../analysis/product/rev4/current_product_baseline.json
+```
+
+`--game LS20`のような部分実行はadapter診断専用で、M0 baselineまたは製品完成には数えません。
+
 ## 現在gate
 
 ```bash

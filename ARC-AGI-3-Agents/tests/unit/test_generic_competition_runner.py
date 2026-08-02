@@ -131,6 +131,7 @@ def test_runner_isolates_one_game_and_closes_one_scorecard() -> None:
     assert all(item._session.closed for item in arcade.environments)
     assert _Agent.active_peak == 1
     assert report["advertised_game_count"] == 3
+    assert report["started_game_count"] == 3
     assert report["completed_game_count"] == 2
     assert report["failed_game_count"] == 1
     assert report["lifecycle_failure_count"] == 0
@@ -141,11 +142,17 @@ def test_runner_isolates_one_game_and_closes_one_scorecard() -> None:
     assert len(set(_Agent.memory_object_ids)) == 1
     assert len(set(_Agent.p_object_ids)) == 1
     assert report["shared_session_count"] == 1
+    assert report["resource_action_budget_per_episode"] == 128
+    assert report["hds_stop_after_no_progress"] == 128
     assert report["per_game_new_memory_count"] == 0
     assert report["per_game_new_p_count"] == 0
     assert report["cross_game_semantic_promotion"] == "ENABLED"
     assert report["state_owner_violation_count"] == 0
     assert report["identity_boundary"] == "PASS"
+    assert report["orchestration_game_index"] == [
+        {"game_index": index, "game_id": game_id}
+        for index, game_id in enumerate(arcade.game_ids)
+    ]
 
 
 def test_runner_records_release_failure_and_continues() -> None:

@@ -2,6 +2,13 @@
 
 from __future__ import annotations
 
+from arc_agi.local_wrapper import (  # type: ignore[import-untyped]
+    LocalEnvironmentWrapper,
+)
+
+from arc3_agi_agent.generic_env import OfflineGenericEnvironment
+from arc3_agi_agent.generic_types import GenericEnvironment
+
 from .generic_agi_agent import GenericAGIAgent, GenericAGIAgentReport
 
 ARC3_COMPLETION_AGENT_PRODUCT_VERSION = "arc3-completion-agent-product-v0.1"
@@ -18,6 +25,13 @@ class ARC3CompletionAgent(GenericAGIAgent):
 
     PRODUCT_ID = "ARC3CompletionAgent"
     PRODUCT_VERSION = ARC3_COMPLETION_AGENT_PRODUCT_VERSION
+
+    def _runtime_environment(self) -> GenericEnvironment:
+        """Select only the official I/O adapter; retain one C/J/M/P runtime."""
+
+        if isinstance(self.arc_env, LocalEnvironmentWrapper):
+            return OfflineGenericEnvironment(self.arc_env)
+        return super()._runtime_environment()
 
 
 __all__ = [

@@ -98,7 +98,9 @@ no fixed successful-trajectory playback
 per-game action budget >= 4096
 budget is configurable
 actual actions are measured
-no-progress stop is mechanism-aware
+known successful max no-level-progress streak = 644
+development no-progress stop = 650
+no-progress stop is mechanism-aware and separate from action budget
 unbounded loop is forbidden
 ```
 

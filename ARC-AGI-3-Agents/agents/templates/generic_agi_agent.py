@@ -15,6 +15,7 @@ from arc3_agi_agent.generic_session import (
     CognitiveSession,
     EpisodeHandle,
 )
+from arc3_agi_agent.generic_types import GenericEnvironment
 
 from ..agent import Agent
 
@@ -66,9 +67,7 @@ class GenericAGIAgent(Agent):
             selected_max_actions
             != cognitive_session.resource_contract.action_budget_per_episode
         ):
-            raise ValueError(
-                "GENERIC_COMPETITION_SESSION_BUDGET_MISMATCH"
-            )
+            raise ValueError("GENERIC_COMPETITION_SESSION_BUDGET_MISMATCH")
         cognitive_session.require_episode(episode_handle)
         super().__init__(*args, **kwargs)
         self.cognitive_session = cognitive_session
@@ -78,6 +77,11 @@ class GenericAGIAgent(Agent):
         self.frames: list[FrameData] = []
         self.runtime_report: GenericAGIAgentReport | None = None
 
+    def _runtime_environment(self) -> GenericEnvironment:
+        """Build the identity-free remote adapter used by this entrypoint."""
+
+        return CompetitionGenericEnvironment(self.arc_env)
+
     def main(self) -> None:
         """Execute the frozen generic C/J/M/P loop against one remote wrapper."""
 
@@ -85,12 +89,10 @@ class GenericAGIAgent(Agent):
         try:
             current = self.arc_env.observation_space
             if not isinstance(current, FrameDataRaw) or current.is_empty():
-                raise RuntimeError(
-                    "GENERIC_COMPETITION_INITIAL_OBSERVATION_MISSING"
-                )
+                raise RuntimeError("GENERIC_COMPETITION_INITIAL_OBSERVATION_MISSING")
             self.append_frame(self._convert_raw_frame_data(current))
             report = GenericAGIRuntime(
-                environment=CompetitionGenericEnvironment(self.arc_env),
+                environment=self._runtime_environment(),
                 session=self.cognitive_session,
                 episode_handle=self.episode_handle,
             ).run()
