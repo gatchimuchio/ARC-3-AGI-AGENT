@@ -1,0 +1,44 @@
+{
+  "schema_version": "arc3-rev4-product-governance-contract-v1",
+  "product_id": "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4",
+  "product_name": "ARC3CompletionAgent",
+  "current_selector_path": "control/rev4/CURRENT_TASK.json",
+  "current_validator_path": "scripts/validate_rev4_product_governance.py",
+  "authority_manifest_path": "docs/strategy/REV4_CURRENT_AUTHORITY_MANIFEST.json",
+  "legacy_rev3_classification_path": "control/rev4/LEGACY_REV3_CLASSIFICATION.json",
+  "authority_order": [
+    "OWNER_CURRENT_EXPLICIT_INSTRUCTION",
+    "AGI_TRINITY_ARCHITECTURE",
+    "HDS_INTERNAL_SPECIFICATION",
+    "ENGINEERING_AGI_SPECIFICATION",
+    "ARC3_PRODUCT_SPECIFICATION_REV4",
+    "ARC3_PRODUCT_ROADMAP_REV4",
+    "REV4_CURRENT_TASK"
+  ],
+  "active_milestone": "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE",
+  "endpoint": {
+    "official_sample_game_target": 25,
+    "official_sample_level_target": 183,
+    "required_final_state": "WIN",
+    "product_action_budget_per_game": 4096,
+    "known_success_action_ceiling": 1519,
+    "manual_step_intervention_allowed": false,
+    "fixed_trajectory_playback_allowed": false
+  },
+  "required_product_files": [
+    "ARC-AGI-3-Agents/agents/templates/arc3_completion_agent.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_governance.py",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py"
+  ],
+  "baseline": {
+    "path": "analysis/product/rev4/current_product_baseline.json",
+    "required_for_m0_exit": true,
+    "required_for_product_completion": true
+  },
+  "current_selector_invariants": {
+    "current_selector_count": 1,
+    "legacy_rev3_is_current": false,
+    "legacy_rev3_runtime_activation_eligible": false,
+    "product_completion_requires_measured_endpoint": true
+  }
+}

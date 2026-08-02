@@ -20,6 +20,7 @@ from arc3_agi_agent.rev3_governance import (
     REV3_CURRENT_WORK_CLASS,
     REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS,
     REV3_INSTALLATION_STATUS,
+    REV3_IS_CURRENT,
     REV3_PH_D00A_STATUS,
     REV3_PH_D00B_STATUS,
     REV3_PH_D01A_STATUS,
@@ -37,7 +38,9 @@ from arc3_agi_agent.rev3_governance import (
     REV3_PH_R1_STATUS,
     REV3_PHASE_ORDER,
     REV3_RUNTIME_ACTIVATION_STATUS,
+    REV3_SELECTOR_ROLE,
     REV3_STRATEGY_STATUS,
+    REV3_SUPERSEDED_BY,
     Rev3ProductionSelection,
     audit_rev3_production_imports,
     require_rev3_production_selection,
@@ -99,6 +102,9 @@ def _valid_selection() -> Rev3ProductionSelection:
 
 
 def test_rev3_phase_order_and_hard_gates_are_fixed() -> None:
+    assert REV3_IS_CURRENT is False
+    assert REV3_SELECTOR_ROLE == "HISTORICAL_REUSE_ONLY"
+    assert REV3_SUPERSEDED_BY == "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
     assert REV3_STRATEGY_STATUS == "OWNER_APPROVED"
     assert REV3_INSTALLATION_STATUS == "INSTALLED"
     assert REV3_CURRENT_WORK_CLASS == (
@@ -536,103 +542,64 @@ def test_rev3_strategy_package_is_deterministic_and_ascii_safe(
         assert len(checksums) == len(names) - 1
 
 
-def test_installed_rev3_governance_validator_passes() -> None:
-    script = REPOSITORY_ROOT / "scripts" / "validate_rev3_governance.py"
-    result = subprocess.run(
-        [sys.executable, str(script)],
-        cwd=REPOSITORY_ROOT,
-        check=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    report = json.loads(result.stdout)
-    assert report["status"] == "PASS"
-    assert report["failure_count"] == 0
-    assert report["check_count"] >= 12
+def test_historical_rev3_and_current_rev4_validators_pass() -> None:
+    for name in (
+        "validate_rev3_governance.py",
+        "validate_rev4_product_governance.py",
+    ):
+        script = REPOSITORY_ROOT / "scripts" / name
+        result = subprocess.run(
+            [sys.executable, str(script)],
+            cwd=REPOSITORY_ROOT,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        report = json.loads(result.stdout)
+        assert report["status"] == "PASS"
+        assert report["failure_count"] == 0
+        assert report["check_count"] >= 12
 
 
-def test_rev3_corrected_documents_close_audit_findings() -> None:
+def test_rev4_is_current_and_rev3_is_explicitly_historical() -> None:
     document_paths = (
         REPOSITORY_ROOT / "AGENTS.md",
         REPOSITORY_ROOT
         / "docs"
         / "strategy"
-        / "ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md",
+        / "ARC3_AGIエージェント_製品仕様書_rev4.md",
         REPOSITORY_ROOT
         / "docs"
         / "roadmap"
-        / "ARC3_HDS蒸留先行_開発ロードマップ_rev3.md",
-        REPOSITORY_ROOT
-        / "docs"
-        / "strategy"
-        / "ARC3_HDS蒸留先行_戦略改定_INDEX_rev3.md",
-        REPOSITORY_ROOT / "AUTHORITY_ORDER.md",
+        / "ARC3_AGIエージェント_製品開発ロードマップ_rev4.md",
     )
     combined = "\n".join(
         path.read_text(encoding="utf-8") for path in document_paths
     )
-    assert "Strategy = OWNER_APPROVED" in combined
-    assert "Installation = INSTALLED" in combined
-    assert (
-        "Current work = PH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTING"
-        in combined
-    )
-    assert "PH-R00 Owner authorization = ESTABLISHED" in combined
-    assert "DISTILLATION_CONFORMANCE_CORPUS_FROZEN" in combined
-    assert "NOT_INSTALLED" not in combined
-    for required in (
-        "PH-R00 = OWNER_APPROVED_PASS",
-        "PH-D02C = OWNER_APPROVED_PASS",
-        "PH-D03A = OWNER_APPROVED_PASS",
-        "PH-D03B = OWNER_APPROVED_PASS",
-        "PH-D05 = OWNER_APPROVED_PASS",
-        "PH-D06 = OWNER_APPROVED_PASS",
-        "PH-D07A = IN_PROGRESS",
-        "Normative Authority",
-        "Execution Control",
-        "Implementation Commit",
-        "Evidence Commit",
-        "OwnerDecisionCapture",
-        "Primary Teacher Source",
-        "Derived Distillation Evidence",
-        "Governance Artifacts",
-        "Relevant Memory Causal Witness",
-        "Irrelevant Memory Invariance",
-        "target_projections",
-        "J_CORE_OWNER_FROZEN",
-        "fold-specific HDSStructureBundle",
-        "LockedEvaluatorCustodian",
-        "legal action mask",
-        "MANIFEST.json",
-        "SHA256SUMS",
-    ):
-        assert required in combined
+    assert "ARC3CompletionAgent" in combined
+    assert "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE" in combined
+    assert "25/25" in combined
+    assert "183/183" in combined
+    assert "control/rev4/CURRENT_TASK.json" in combined
 
-    roadmap = document_paths[2].read_text(encoding="utf-8")
-    for phase_id in (
-        "PH-D01A",
-        "PH-D01B",
-        "PH-D02A",
-        "PH-D02B",
-        "PH-D02C",
-        "PH-D03A",
-        "PH-D03B",
-        "PH-D07A",
-        "PH-D07B",
-        "PH-D09",
-        "PH-D10",
-        "PH-D11",
-    ):
-        assert f"## {phase_id} " in roadmap
-    for forbidden in (
-        "## PH-D01A/B",
-        "## PH-D02A/B/C",
-        "## PH-D03A/B",
-        "## PH-D07A/B",
-        "## PH-D09〜D11",
-    ):
-        assert forbidden not in roadmap
+    current = _json(
+        REPOSITORY_ROOT / "control" / "rev4" / "CURRENT_TASK.json"
+    )
+    classification = _json(
+        REPOSITORY_ROOT
+        / "control"
+        / "rev4"
+        / "LEGACY_REV3_CLASSIFICATION.json"
+    )
+    assert current["active_milestone"] == (
+        "M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE"
+    )
+    assert current["legacy_rev3"]["current_selector"] is False
+    assert classification["classification"] == "HISTORICAL_REUSE_ONLY"
+    assert classification["current_selector"] is False
+    assert classification["runtime_activation_eligible"] is False
+    assert classification["phase_authority_eligible"] is False
 
 
 @pytest.mark.parametrize(

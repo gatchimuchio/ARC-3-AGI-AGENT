@@ -1,5 +1,5 @@
 {
-  "schema_version": "arc3-product-current-task-v1",
+  "schema_version": "arc3-product-current-task-v2",
   "product_id": "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4",
   "product_name": "ARC3CompletionAgent",
   "product_status": "IN_DEVELOPMENT",
@@ -15,6 +15,11 @@
   },
   "authoritative_spec": "docs/strategy/ARC3_AGIエージェント_製品仕様書_rev4.md",
   "authoritative_roadmap": "docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md",
+  "authoritative_architecture": "docs/architecture/AGI三主体統合設計正本_v0_2.md",
+  "authoritative_hds": "docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md",
+  "authoritative_engineering_spec": "docs/architecture/工学的AGI実装仕様書_v0_2.md",
+  "governance_contract": "docs/strategy/contracts/REV4_PRODUCT_GOVERNANCE_CONTRACT_V1.json",
+  "current_validator": "scripts/validate_rev4_product_governance.py",
   "verified_official_contract": {
     "input": "FrameDataRaw",
     "output": "one legal GameAction per external cycle",
@@ -45,8 +50,9 @@
     {
       "id": "B-01",
       "component": "ResourceContract",
-      "finding": "competition action budget 128 is below known successful maximum 1519",
-      "status": "BLOCKING"
+      "finding": "legacy generic path remains 128, while the only product path uses 4096 against known successful maximum 1519",
+      "status": "CLOSED_PRODUCT_PATH",
+      "evidence": "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py"
     },
     {
       "id": "B-02",
@@ -81,8 +87,9 @@
     {
       "id": "B-07",
       "component": "ProductAcceptance",
-      "finding": "25-game and 183-level completion is not yet the blocking acceptance path",
-      "status": "BLOCKING"
+      "finding": "blocking endpoint metrics exist, but the all-25 baseline has not yet been executed",
+      "status": "PARTIAL_RUNNER_ADDED_BASELINE_PENDING",
+      "evidence": "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py"
     }
   ],
   "required_implementation": [
@@ -100,6 +107,12 @@
     "active_product_path_count": 1,
     "baseline_report_complete": true,
     "status": "PRODUCT_BASELINE_EXECUTABLE"
+  },
+  "current_evidence": {
+    "baseline_report_path": "analysis/product/rev4/current_product_baseline.json",
+    "baseline_report_status": "NOT_EXECUTED",
+    "baseline_report_complete": false,
+    "product_completion_established": false
   },
   "allowed": [
     "reuse GenericAGIRuntime CognitiveSession GenericHDSJudgementSubject SemanticMemory and official adapters",
@@ -119,6 +132,7 @@
   "legacy_rev3": {
     "classification": "HISTORICAL_REUSE_ONLY",
     "preserve": true,
-    "current_selector": false
+    "current_selector": false,
+    "classification_record": "control/rev4/LEGACY_REV3_CLASSIFICATION.json"
   }
 }

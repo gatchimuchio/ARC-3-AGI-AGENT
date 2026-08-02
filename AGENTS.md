@@ -7,12 +7,17 @@ HDS分析、教師軌道分解、構造データ、命令形P、J設定、M0、�
 ## Authority
 
 1. Ownerの現在の明示指示
-2. `docs/strategy/ARC3_AGIエージェント_製品仕様書_rev4.md`
-3. `docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md`
-4. `control/rev4/CURRENT_TASK.json`
-5. HDS内部正本
-6. AGI三主体統合設計正本
-7. 旧rev3／P0〜P22／S0〜S6は履歴・再利用資産
+2. `docs/architecture/AGI三主体統合設計正本_v0_2.md`
+3. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
+4. `docs/architecture/工学的AGI実装仕様書_v0_2.md`
+5. `docs/strategy/ARC3_AGIエージェント_製品仕様書_rev4.md`
+6. `docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md`
+7. `control/rev4/CURRENT_TASK.json`
+8. 旧rev3／P0〜P22／S0〜S6は履歴・再利用資産
+
+上位のAGI／HDS正本を、ARC3製品仕様、roadmap、current taskが上書きしてはならない。規範権威と作業順序を分離し、`control/rev4/CURRENT_TASK.json`は作業対象を選択するだけとする。
+
+現在selectorは`control/rev4/CURRENT_TASK.json`の一つだけである。`control/rev3/REV3_CURRENT_SELECTOR.json`というlegacy filenameは履歴snapshotとして保持するが、現在phase、runtime activation、作業許可を与えない。分類正本は`control/rev4/LEGACY_REV3_CLASSIFICATION.json`とする。
 
 ## Product Endpoint
 
@@ -47,6 +52,14 @@ M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
 
 現在は分析artifactを増やすのではなく、既存`GenericAGIAgent`／`GenericAGIRuntime`を製品baselineとして公式サンプルへ接続し、能力以前のblocking defectを除去する。
 
+現在の機械検証gateは次である。
+
+```text
+python scripts/validate_rev4_product_governance.py
+```
+
+旧`validate_rev3_governance.py`はrev3履歴snapshotの整合だけを検査し、current selectorを決定しない。
+
 最初に実装する。
 
 1. `ARC3CompletionAgent`製品entrypoint
@@ -59,13 +72,13 @@ M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
 ## Verified Product Gaps
 
 ```text
-B-01 current competition budget 128 < known successful max 1519
+B-01 legacy generic path budget 128; product path closed at 4096
 B-02 current P is generic exploration/scoring, not teacher-derived ARC3 capability
 B-03 default P-IR is compatibility fixture
 B-04 main representation/effect path is final-layer-centric
 B-05 ACTION6 candidates are component-anchor-centric
 B-06 goal/mechanism/subgoal/plan induction is incomplete
-B-07 25/183 product acceptance is not blocking
+B-07 blocking product runner added; all-25 baseline pending
 ```
 
 ## Product Architecture

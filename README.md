@@ -33,6 +33,7 @@ no fixed successful-trajectory playback
 - [製品開発ロードマップ rev4](docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md)
 - [Codex製品開発契約](AGENTS.md)
 - [Current Product Task](control/rev4/CURRENT_TASK.json)
+- [rev4 governance contract](docs/strategy/contracts/REV4_PRODUCT_GOVERNANCE_CONTRACT_V1.json)
 
 旧rev3のHDS蒸留多段工程、P0〜P22、S0〜S6は履歴・再利用資産であり、現在の開発endpointではありません。
 
@@ -65,13 +66,13 @@ supported actions                 RESET, ACTION1..ACTION7
 ## 確認済みの製品阻害要因
 
 ```text
-B-01 competition budget = 128 < known max 1519
+B-01 product path budget = 4096 >= known max 1519 (closed in product path)
 B-02 active P is generic exploration/scoring only
 B-03 default P-IR is a compatibility fixture
 B-04 representation/effect path is final-layer-centric
 B-05 ACTION6 candidate generation is too narrow
 B-06 goal/mechanism/subgoal/plan induction is incomplete
-B-07 official 25/183 completion is not the blocking acceptance
+B-07 blocking acceptance runner added; all-25 baseline pending
 ```
 
 ## 製品開発ロードマップ
@@ -100,6 +101,16 @@ M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
 - blocker B-01〜B-07の機械可読status
 
 HDS軌道分解や構造抽出を先に独立完成させません。製品runnerを先に成立させ、能力素材を製品へ接続しながら構築します。
+
+## 現在gate
+
+```bash
+python scripts/validate_rev4_product_governance.py
+cd ARC-AGI-3-Agents
+python -m pytest -q tests/unit/test_product_runner.py tests/unit/test_product_governance.py
+```
+
+`control/rev3/REV3_CURRENT_SELECTOR.json`はpath名を変更せず履歴保存していますが、現在selectorではありません。
 
 ## 製品進捗指標
 

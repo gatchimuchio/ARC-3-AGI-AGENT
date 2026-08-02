@@ -105,5 +105,11 @@ def test_product_runner_reports_endpoint_metrics_without_false_completion() -> N
     assert report["known_budget_impossibility"] is False
     assert report["product_game_win_count"] == 2
     assert report["product_level_completion_count"] == 183
+    endpoint_failure_count = report["product_endpoint_failure_count"]
+    assert isinstance(endpoint_failure_count, int)
+    assert endpoint_failure_count > 0
+    endpoint_failures = report["product_endpoint_failures"]
+    assert isinstance(endpoint_failures, tuple)
+    assert "PRODUCT_ADVERTISED_GAME_COUNT_MISMATCH" in endpoint_failures
     assert report["product_completion_established"] is False
     assert report["product_status"] == "INCOMPLETE"

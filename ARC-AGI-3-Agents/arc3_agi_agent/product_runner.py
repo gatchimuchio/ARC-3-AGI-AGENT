@@ -14,13 +14,16 @@ from .generic_session import (
     ResourceContract,
     create_cognitive_session,
 )
+from .product_governance import (
+    ARC3_DEVELOPMENT_ACTION_BUDGET,
+    ARC3_KNOWN_SUCCESS_ACTION_CEILING,
+    ARC3_OFFICIAL_SAMPLE_GAME_TARGET,
+    ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET,
+    ARC3_PRODUCT_ENDPOINT,
+    ARC3_PRODUCT_ID,
+)
 
 ARC3_PRODUCT_RUNNER_VERSION = "arc3-completion-product-runner-v0.1"
-ARC3_PRODUCT_ID = "ARC3CompletionAgent"
-ARC3_OFFICIAL_SAMPLE_GAME_TARGET = 25
-ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET = 183
-ARC3_KNOWN_SUCCESS_ACTION_CEILING = 1519
-ARC3_DEVELOPMENT_ACTION_BUDGET = 4096
 
 logger = logging.getLogger(__name__)
 
@@ -42,48 +45,6 @@ def create_product_session() -> CognitiveSession:
     )
 
 
-def _product_metrics(report: dict[str, object]) -> dict[str, object]:
-    raw_results = report.get("results", ())
-    results = raw_results if isinstance(raw_results, list) else []
-    game_win_count = sum(
-        1
-        for row in results
-        if isinstance(row, dict) and row.get("final_state") == "WIN"
-    )
-    level_completion_count = sum(
-        int(row.get("progress_count", 0))
-        for row in results
-        if isinstance(row, dict)
-        and isinstance(row.get("progress_count", 0), int)
-        and not isinstance(row.get("progress_count", 0), bool)
-    )
-    advertised = report.get("advertised_game_count", 0)
-    game_count = advertised if isinstance(advertised, int) else 0
-    product_complete = (
-        game_count == ARC3_OFFICIAL_SAMPLE_GAME_TARGET
-        and game_win_count == ARC3_OFFICIAL_SAMPLE_GAME_TARGET
-        and level_completion_count == ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET
-        and report.get("failed_game_count") == 0
-        and report.get("lifecycle_failure_count") == 0
-    )
-    return {
-        "product_id": ARC3_PRODUCT_ID,
-        "product_runner_version": ARC3_PRODUCT_RUNNER_VERSION,
-        "product_action_budget_per_game": ARC3_DEVELOPMENT_ACTION_BUDGET,
-        "known_success_action_ceiling": ARC3_KNOWN_SUCCESS_ACTION_CEILING,
-        "known_budget_impossibility": (
-            ARC3_DEVELOPMENT_ACTION_BUDGET
-            < ARC3_KNOWN_SUCCESS_ACTION_CEILING
-        ),
-        "official_sample_game_target": ARC3_OFFICIAL_SAMPLE_GAME_TARGET,
-        "official_sample_level_target": ARC3_OFFICIAL_SAMPLE_LEVEL_TARGET,
-        "product_game_win_count": game_win_count,
-        "product_level_completion_count": level_completion_count,
-        "product_completion_established": product_complete,
-        "product_status": "COMPLETE" if product_complete else "INCOMPLETE",
-    }
-
-
 def run_arc3_completion_product(
     *,
     arcade: Any | None = None,
@@ -101,7 +62,8 @@ def run_arc3_completion_product(
         agent_factory=agent_factory,
         session_factory=session_factory or create_product_session,
     )
-    report.update(_product_metrics(report))
+    report.update(ARC3_PRODUCT_ENDPOINT.metrics(report))
+    report["product_runner_version"] = ARC3_PRODUCT_RUNNER_VERSION
     return report
 
 

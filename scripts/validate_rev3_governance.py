@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Validate installed rev3 governance without external schema packages."""
+"""Validate the immutable rev3 governance snapshot.
+
+Rev4 product governance supersedes rev3 as current execution control. This
+validator binds manifest entries to the last rev3 execution-control commit
+instead of interpreting the rev4 working tree as rev3 authority.
+"""
 
 from __future__ import annotations
 
@@ -39,6 +44,9 @@ APPROVAL_SCHEMA_PATH = Path(
 FRAME_PATH = Path("control/rev3/PH-R-1_WORK_BLOCK_FRAME.json")
 AUTHORITY_MANIFEST_PATH = Path(
     "docs/strategy/REV3_CURRENT_AUTHORITY_MANIFEST.json"
+)
+LEGACY_REV3_CLASSIFICATION_PATH = Path(
+    "control/rev4/LEGACY_REV3_CLASSIFICATION.json"
 )
 CORRECTION_ATTESTATION_PATH = Path(
     "control/rev3/REV3_DOC_FIX_EVIDENCE_ATTESTATION.json"
@@ -773,6 +781,23 @@ def _git_blob(
 def validate_repository(root: Path) -> dict[str, object]:
     failures: list[str] = []
     selector = _load_object(root, SELECTOR_PATH)
+    legacy_classification = _load_object(
+        root, LEGACY_REV3_CLASSIFICATION_PATH
+    )
+    historical_snapshot = legacy_classification.get("historical_snapshot")
+    if (
+        legacy_classification.get("classification")
+        != "HISTORICAL_REUSE_ONLY"
+        or legacy_classification.get("current_selector") is not False
+        or legacy_classification.get("runtime_activation_eligible") is not False
+        or legacy_classification.get("phase_authority_eligible") is not False
+        or not isinstance(historical_snapshot, dict)
+        or historical_snapshot.get("selector_path")
+        != SELECTOR_PATH.as_posix()
+        or historical_snapshot.get("authority_manifest_path")
+        != AUTHORITY_MANIFEST_PATH.as_posix()
+    ):
+        failures.append("legacy_rev3_classification:BOUNDARY_MISMATCH")
     selector_schema = _load_object(root, SELECTOR_SCHEMA_PATH)
     failures.extend(
         _schema_failures(selector, selector_schema, "selector")
@@ -892,6 +917,17 @@ def validate_repository(root: Path) -> dict[str, object]:
     ):
         failures.append("authority_manifest:CURRENT_SELECTOR_MISMATCH")
     entries = manifest.get("entries")
+    snapshot_commit = (
+        historical_snapshot.get("last_rev3_execution_control_commit")
+        if isinstance(historical_snapshot, dict)
+        else None
+    )
+    if not isinstance(snapshot_commit, str) or not _git_object_exists(
+        root, snapshot_commit
+    ):
+        failures.append(
+            "legacy_rev3_classification:SNAPSHOT_COMMIT_MISSING"
+        )
     if not isinstance(entries, list):
         failures.append("authority_manifest:ENTRIES_MISSING")
     else:
@@ -912,13 +948,27 @@ def validate_repository(root: Path) -> dict[str, object]:
                     f"authority_manifest.entries[{index}]:INVALID"
                 )
                 continue
-            artifact = root / path
-            if not artifact.is_file():
+            snapshot_bytes = (
+                _git_blob(root, snapshot_commit, path)
+                if isinstance(snapshot_commit, str)
+                else None
+            )
+            if snapshot_bytes is None:
                 failures.append(
                     f"authority_manifest.entries[{index}]:MISSING"
                 )
                 continue
-            actual_sha = hashlib.sha256(artifact.read_bytes()).hexdigest()
+            actual_sha = hashlib.sha256(snapshot_bytes).hexdigest()
+            if path == "AGENTS.md":
+                snapshot_agents_sha = (
+                    historical_snapshot.get("last_rev3_agents_sha256")
+                    if isinstance(historical_snapshot, dict)
+                    else None
+                )
+                if snapshot_agents_sha != expected_sha:
+                    failures.append(
+                        "legacy_rev3_classification:AGENTS_SHA_MISMATCH"
+                    )
             if actual_sha != expected_sha:
                 failures.append(
                     f"authority_manifest.entries[{index}]:SHA256_MISMATCH"

@@ -1,11 +1,13 @@
-"""Fail-closed governance boundary for the installed rev3 strategy.
+"""Historical fail-closed governance boundary for the superseded rev3 strategy.
 
 The 2026-07-31 audit classified the earlier rev3 phase evidence as historical
 and non-authoritative. PH-R00 through PH-D06 are Owner-approved; PH-D07A is
 authorized only to account for trajectory-local observational fit while
 causal support, candidate selection, adoption, and promotion remain zero.
 Historical S5/P22 capability paths remain forbidden as parents, active
-policies, or fallbacks. Phase entry alone never activates a runtime.
+policies, or fallbacks. Phase entry alone never activates a runtime.  The
+rev4 product selector supersedes this module as execution control; these
+constants preserve the exact state at supersession for audit and reuse.
 """
 
 from __future__ import annotations
@@ -13,14 +15,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Final
 
-REV3_STRATEGY_ID: Final = (
-    "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
-)
+REV3_STRATEGY_ID: Final = "ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3"
+REV3_SELECTOR_ROLE: Final = "HISTORICAL_REUSE_ONLY"
+REV3_IS_CURRENT: Final = False
+REV3_SUPERSEDED_BY: Final = "ARC3_COMPLETION_AGI_AGENT_PRODUCT_REV4"
 REV3_STRATEGY_STATUS: Final = "OWNER_APPROVED"
 REV3_INSTALLATION_STATUS: Final = "INSTALLED"
-REV3_CURRENT_WORK_CLASS: Final = (
-    "PH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTING"
-)
+REV3_CURRENT_WORK_CLASS: Final = "PH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTING"
 REV3_ACTIVE_PHASE: Final[str | None] = "PH-D07A"
 REV3_PH_R1_STATUS: Final = "OWNER_APPROVED_PASS"
 REV3_PH_R00_STATUS: Final = "OWNER_APPROVED_PASS"
@@ -186,21 +187,15 @@ def require_rev3_production_selection(
             "REV3_PRODUCTION_SELECTION_REJECTED:" + ",".join(failures)
         )
     if not _strategy_is_installed(REV3_INSTALLATION_STATUS):
-        raise PermissionError(
-            "REV3_STRATEGY_NOT_INSTALLED:"
-            f"{REV3_INSTALLATION_STATUS}"
-        )
-    if not _bundle_is_frozen(
-        REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS
-    ):
+        raise PermissionError(f"REV3_STRATEGY_NOT_INSTALLED:{REV3_INSTALLATION_STATUS}")
+    if not _bundle_is_frozen(REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS):
         raise PermissionError(
             "REV3_INITIAL_STATE_BUNDLE_NOT_FROZEN:"
             f"{REV3_DISTILLED_INITIAL_STATE_BUNDLE_STATUS}"
         )
     if not _runtime_is_active(REV3_RUNTIME_ACTIVATION_STATUS):
         raise PermissionError(
-            "REV3_RUNTIME_ACTIVATION_SUSPENDED:"
-            f"{REV3_RUNTIME_ACTIVATION_STATUS}"
+            f"REV3_RUNTIME_ACTIVATION_SUSPENDED:{REV3_RUNTIME_ACTIVATION_STATUS}"
         )
     return selection
 
@@ -245,8 +240,11 @@ __all__ = [
     "REV3_PH_D06_STATUS",
     "REV3_PHASE_ORDER",
     "REV3_RUNTIME_ACTIVATION_STATUS",
+    "REV3_IS_CURRENT",
+    "REV3_SELECTOR_ROLE",
     "REV3_STRATEGY_ID",
     "REV3_STRATEGY_STATUS",
+    "REV3_SUPERSEDED_BY",
     "Rev3ProductionSelection",
     "audit_rev3_production_imports",
     "require_rev3_production_selection",
