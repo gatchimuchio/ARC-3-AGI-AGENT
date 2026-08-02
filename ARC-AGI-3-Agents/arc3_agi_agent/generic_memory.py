@@ -1170,13 +1170,18 @@ class SemanticMemory:
             if target_version is None:
                 raise KeyError(target_version)
             target_image = self.backend.rebuild(target_version)
-            for record in active.values():
-                self._archive_record(archive, record, state="SUPERSEDED")
             active.clear()
             active.update(
                 {
                     key: _record_from_blob(payload)
                     for key, payload in target_image.active_items
+                }
+            )
+            archive.clear()
+            archive.update(
+                {
+                    key: _record_from_blob(payload)
+                    for key, payload in target_image.archive_items
                 }
             )
         else:

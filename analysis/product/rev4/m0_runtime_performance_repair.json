@@ -10,7 +10,58 @@
     "stop_reason": "NO_PROGRESS_LIMIT"
   },
   "classification": "PRODUCT_RUNTIME_PERFORMANCE_REPAIR",
-  "measured_at": "2026-08-02T16:04:05+09:00",
+  "cross_game_cumulative_repair": {
+    "after_shared_session_100_cycles": [
+      {
+        "average_fps": 3.57,
+        "game": "AR25",
+        "runtime_seconds": 28.01
+      },
+      {
+        "average_fps": 2.28,
+        "game": "BP35",
+        "runtime_seconds": 43.9
+      },
+      {
+        "average_fps": 3.61,
+        "game": "CD82",
+        "runtime_seconds": 27.72
+      },
+      {
+        "average_fps": 5.23,
+        "game": "CN04",
+        "runtime_seconds": 19.13
+      }
+    ],
+    "archive_restored_to_episode_base": true,
+    "audit_event_ledger_retained": true,
+    "before_shared_session_650_cycles": [
+      {
+        "average_fps": 2.07,
+        "game": "AR25",
+        "runtime_seconds": 313.94
+      },
+      {
+        "average_fps": 1.33,
+        "game": "BP35",
+        "runtime_seconds": 487.29
+      },
+      {
+        "average_fps": 1.11,
+        "game": "CD82",
+        "runtime_seconds": 583.94
+      },
+      {
+        "average_fps": 0.89,
+        "game": "CN04",
+        "runtime_seconds": 727.65
+      }
+    ],
+    "diagnostic_action_budget_after": 100,
+    "monotonic_cross_game_slowdown_after": false,
+    "monotonic_cross_game_slowdown_before": true
+  },
+  "measured_at": "2026-08-02T17:08:35+09:00",
   "optimizations": [
     "single-pass fail-closed identity-boundary inspection",
     "canonical semantic-record and citation caching",
@@ -19,7 +70,8 @@
     "P-IR validation and logical-digest caching",
     "normalized evidence-binding-key caching",
     "one rendered-frame projection per raw observation",
-    "immutable instruction-body metadata caching"
+    "immutable instruction-body metadata caching",
+    "failed-episode archive rollback to the episode base with audit ledger retention"
   ],
   "profile_100_cycles": {
     "after": {

@@ -6,12 +6,15 @@ from unittest.mock import Mock
 
 import numpy as np
 import pytest
-from arc_agi.local_wrapper import LocalEnvironmentWrapper  # type: ignore[import-untyped]
+from arc_agi import local_wrapper  # type: ignore[import-untyped]
 from arcengine import FrameDataRaw, GameAction, GameState
 
 from arc3_agi_agent.evidence_binding import build_evidence_binding_key
-from arc3_agi_agent.generic_env import OfflineGenericEnvironment
+from arc3_agi_agent.generic_compute import ParametricRelationalInstructionBody
+from arc3_agi_agent.generic_env import MechanismWorld, OfflineGenericEnvironment
 from arc3_agi_agent.generic_memory import SemanticMemory, semantic_record
+from arc3_agi_agent.generic_runtime import GenericAGIRuntime
+from arc3_agi_agent.generic_session import ResourceContract, create_cognitive_session
 from arc3_agi_agent.identity_boundary import IdentityBoundary, Tainted
 from arc3_agi_agent.sample_observation import SampleFrameAdapter
 from arc3_agi_agent.schema import canonical_json, digest_object
@@ -29,7 +32,9 @@ def _frame(values: list[list[int]], *, levels_completed: int = 0) -> FrameDataRa
     return result
 
 
-class _FakeOfflineEnvironment(LocalEnvironmentWrapper):  # type: ignore[misc]
+class _FakeOfflineEnvironment(
+    local_wrapper.LocalEnvironmentWrapper  # type: ignore[misc]
+):
     def __init__(self, before: FrameDataRaw, after: FrameDataRaw) -> None:
         self._last_response = before
         self.after = after
@@ -177,3 +182,31 @@ def test_offline_environment_projects_each_raw_frame_once() -> None:
     assert result.progress_count == 1
     assert "LEVEL_PROGRESS" in result.visible_effects
     assert adapter.project.call_count == 2
+
+
+def test_failed_episode_rollback_restores_archive_but_retains_audit_ledger() -> None:
+    session = create_cognitive_session(
+        p_bundle=ParametricRelationalInstructionBody(),
+        resource_contract=ResourceContract(action_budget_per_episode=1),
+    )
+    base_image = session.memory.backend.current_image()
+    handle = session.begin_episode()
+    report = GenericAGIRuntime(
+        MechanismWorld((11,), (0,), required_progress=2),
+        session,
+        handle,
+    ).run()
+
+    assert report.memory_final_version > report.memory_initial_version
+    event_count_before_rollback = len(session.memory.event_ledger())
+    receipt = session.end_episode(
+        handle,
+        succeeded=False,
+        reason="performance-invariant-failed-episode",
+    )
+    final_image = session.memory.backend.current_image()
+
+    assert receipt.discarded is True
+    assert final_image.active_items == base_image.active_items
+    assert final_image.archive_items == base_image.archive_items
+    assert len(session.memory.event_ledger()) > event_count_before_rollback
