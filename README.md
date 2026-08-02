@@ -1,77 +1,117 @@
-# ARC-3 AGI Agent
+# ARC3 Completion AGI Agent
 
-ARC Prize 2026 / ARC-AGI-3向けに、**HDSで成功軌道をタスク分解し、汎用構造と命令形Pを抽出して、同一のC／J／Mエージェントで実行する**repositoryです。
-
-## 現行正本
-
-- [実装仕様書 rev4](docs/strategy/ARC3_HDS直接抽出_汎用構造命令形P_実装仕様書_rev4.md)
-- [開発ロードマップ rev4](docs/roadmap/ARC3_HDS直接抽出_開発ロードマップ_rev4.md)
-- [Codex開発契約](AGENTS.md)
-- [Current Task](control/rev4/CURRENT_TASK.json)
-
-rev3のHDS蒸留多段工程、P0〜P22、S0〜S6は履歴・再利用資産であり、現在の作業selectorではありません。
-
-## 最上位目的
-
-```text
-成功軌道・回答・観測記録
-→ HDS Task Decomposition
-→ Generic Structure Library
-→ Imperative PBundle
-→ ARC3 Agent Integration
-→ 25 game／183 level full execution
-→ Official submission
-```
-
-## 現在の状態
-
-```text
-Strategy : ARC3_HDS_DIRECT_STRUCTURE_AND_IMPERATIVE_P_REV4
-Phase    : P1_TASK_DECOMPOSITION
-Runtime  : SUSPEND until PBundle integration
-Official : NOT_STARTED
-```
-
-現在は、PH-D05で整備済みの25 game／183 levelのcanonical teacher trajectoryを主入力として、全成功stepを次へ分解します。
-
-- 状態
-- 対象／役割
-- 関係
-- 前提条件
-- 操作
-- 即時／遅延効果
-- progress／terminal寄与
-- hazard／failure
-
-## 六工程
-
-1. `P1_TASK_DECOMPOSITION`
-2. `P2_GENERIC_STRUCTURE_EXTRACTION`
-3. `P3_IMPERATIVE_P_COMPILATION`
-4. `P4_AGENT_INTEGRATION`
-5. `P5_FULL_EXECUTION_REPAIR_LOOP`
-6. `P6_OFFICIAL_PACKAGING_AND_EVALUATION`
-
-文書、schema、evidence、approvalを独立phaseとして増殖させません。
-
-## 再利用する既存資産
-
-- PH-D05 canonical teacher trajectories
-- raw recording／before-after／progress／terminal
-- typed IR／interpreter／operator registry
-- C／J／M／Trinity実装
-- P16〜P21 Runtime substrate候補
-- Kaggle lifecycle／output contract資産
+ARC Prize 2026 / ARC-AGI-3公式サンプルを、**同一のC／J／M／P構造で自律完遂する製品`ARC3CompletionAgent`**を構築するrepositoryです。
 
 ## 最終成果物
 
 ```text
-TaskDecompositionCorpus
-ARC3StructureLibrary
-ARC3PBundle
-GenericARC3Agent
-FullExecutionReport
-KaggleSubmissionArtifact
+ARC3CompletionAgent
+=
+official adapter
++ C = Execute(L0, P)
++ HDS judgement subject J
++ mutable memory subject M
++ product runtime
++ ARC3 product capability bundle
 ```
 
-完成判定はartifact数やtest数ではなく、汎用構造とPが実際にagentで使用され、全数実行結果へ変換されたかで行います。
+HDS分析、成功軌道、解析データ、汎用構造、命令形Pは製品能力を構築する素材・手段・内部部品です。これらを作っただけでは開発完了ではありません。
+
+開発完了条件:
+
+```text
+25 / 25 official sample games = WIN
+183 / 183 levels = COMPLETE
+one runnable product artifact
+no manual per-step intervention
+no fixed successful-trajectory playback
+```
+
+## 現行正本
+
+- [製品仕様書 rev4](docs/strategy/ARC3_AGIエージェント_製品仕様書_rev4.md)
+- [製品開発ロードマップ rev4](docs/roadmap/ARC3_AGIエージェント_製品開発ロードマップ_rev4.md)
+- [Codex製品開発契約](AGENTS.md)
+- [Current Product Task](control/rev4/CURRENT_TASK.json)
+
+旧rev3のHDS蒸留多段工程、P0〜P22、S0〜S6は履歴・再利用資産であり、現在の開発endpointではありません。
+
+## 公式サンプルと保持済み素材
+
+```text
+official games                    25
+official levels                   183
+PH-D05 canonical frames           10,942
+PH-D05 canonical success actions  11,574
+max known success actions/game    1,519
+supported actions                 RESET, ACTION1..ACTION7
+```
+
+## 現行製品候補
+
+既存repositoryには次の製品部品があります。
+
+- `GenericAGIAgent`: official Agent shell
+- `GenericAGIRuntime`: C／J／M／P循環
+- `CognitiveSession`: run単位の継続主体
+- `GenericHDSJudgementSubject`: action／memory／rollback権限
+- `SemanticMemory`: 可変判断根拠
+- `CompetitionGenericEnvironment`: official adapter
+- `generic_competition_runner`: 25 game逐次runner
+- typed P-IR／interpreter／compiler
+
+これらを捨てず、`ARC3CompletionAgent`製品へ統合します。
+
+## 確認済みの製品阻害要因
+
+```text
+B-01 competition budget = 128 < known max 1519
+B-02 active P is generic exploration/scoring only
+B-03 default P-IR is a compatibility fixture
+B-04 representation/effect path is final-layer-centric
+B-05 ACTION6 candidate generation is too narrow
+B-06 goal/mechanism/subgoal/plan induction is incomplete
+B-07 official 25/183 completion is not the blocking acceptance
+```
+
+## 製品開発ロードマップ
+
+1. `M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE`
+2. `M1_OFFICIAL_PRODUCT_RUNTIME`
+3. `M2_PRODUCT_CAPABILITY_BUNDLE`
+4. `M3_INTEGRATED_AGI_CAPABILITY`
+5. `M4_FULL_SAMPLE_REPAIR_LOOP`
+6. `M5_PRODUCT_CLOSURE_AND_PACKAGING`
+
+全milestoneで実行可能な`ARC3CompletionAgent`を保持し、公式サンプル上の実測差分を出します。
+
+## 現在作業
+
+```text
+M0_PRODUCT_BASELINE_AND_BLOCKER_CLOSURE
+```
+
+最初に実装するもの:
+
+- `ARC3CompletionAgent`製品entrypoint
+- configurable 4096-action development budget
+- 公式サンプル25 game blocking acceptance runner
+- current product baseline
+- blocker B-01〜B-07の機械可読status
+
+HDS軌道分解や構造抽出を先に独立完成させません。製品runnerを先に成立させ、能力素材を製品へ接続しながら構築します。
+
+## 製品進捗指標
+
+```text
+games started
+games WIN
+levels completed
+failure classes
+actions used
+resource stops
+memory-caused behavior changes
+regressions
+```
+
+test数、schema数、artifact数、commit数は製品完成の代替指標にしません。
