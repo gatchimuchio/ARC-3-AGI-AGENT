@@ -1,838 +1,103 @@
-# ARC3 Codex 開発運用契約 rev3
+# ARC3 Codex開発契約 rev4
 
-この文書は、`gatchimuchio/ARC-3-AGI-AGENT`を変更するCodexに対する、Owner承認済みrev3 strategyのfail-closed運用guardである。PH-R-1からPH-D06まではOwner承認済みであり、PH-D07Aだけが現在activeである。PH-D07A開始許可は、canonical teacher trajectory 25件に対するPH-D06の全450候補（400 executable、50 DG-08 rejected）のtrajectory-local observational fitを全11,574 teacher step／185,184 candidate-stepで会計し、exact fitとcausal supportを分離して3 independent comparator processで証明する範囲に限られる。counterfactual intervention、因果主張、candidate selection／adoption、Rule promotion、Bridge、Runtime、official、Kaggleの開始許可ではない。
+このrepositoryの現在目的は、HDSでARC3成功軌道をタスク分解し、ARC3エージェントが使用する汎用構造と命令形Pを抽出・実装することである。
 
-- 契約ID: `ARC3_CODEX_DEVELOPMENT_OPERATING_CONTRACT_REV3`
-- 日付: `2026-08-02`
-- 対象戦略: HDS蒸留先行
-- 上位仕様: `ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
-- 上位roadmap: `ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
-- 基準commit: `6858a316241b101bb5a44fd1dd7854dc0fa146c0`
-- 契約状態: `OWNER_APPROVED`
-- 導入状態: `INSTALLED`
-- 現在作業: `PH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTING`
-- Active phase: `PH-D07A`
-- PH-D07A: `IN_PROGRESS`
-- PH-D06: `OWNER_APPROVED_PASS`
-- PH-D05: `OWNER_APPROVED_PASS`
-- PH-D03B: `OWNER_APPROVED_PASS`
-- PH-D03A: `OWNER_APPROVED_PASS`
-- PH-D02C: `OWNER_APPROVED_PASS`
-- PH-D02B: `OWNER_APPROVED_PASS`
-- PH-D02A: `OWNER_APPROVED_PASS`
-- PH-D01B: `OWNER_APPROVED_PASS`
-- PH-D01A: `OWNER_APPROVED_PASS`
-- PH-D00B: `OWNER_APPROVED_PASS`
-- PH-D00A: `OWNER_APPROVED_PASS`
-- PH-R00: `OWNER_APPROVED_PASS`
-- PH-R-1: `OWNER_APPROVED_PASS`
-- 導入承認: `owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8`
-- Codex role: `DEVELOPMENT_META_C`
-- 最終採否者: 大平鉄兵
-- 継続記憶正本: Git Repository / 仕様 / Ledger / Artifact
-
----
-
-## 1. Codexの役割
-
-Codexは次である。
-
-```text
-Development Meta-C
-=
-解析器
-+ 候補生成器
-+ 実装器
-+ 試験実行器
-+ 証拠生成器
-+ 自己監査器
-```
-
-Codexは次ではない。
-
-- Project Owner
-- Meta-J
-- HDS最終判断主体
-- AGI Runtime
-- RuntimeのJ
-- Rule promotion authority
-- phase promotion authority
-- completion claim authority
-- official submission authority
-- 永続する自律主体
-- repository外に継続する記憶主体
-
-Codexの状態はsessionをまたいで自然継続しない。  
-前回作業はrepository、phase state、artifact、commit、reportからのみ復元する。
-
----
-
-## 2. Meta-Trinity
-
-```text
-Meta-J = 大平鉄兵
-Meta-C = Codex
-Meta-M = Repository / Specs / Ledger / Artifacts
-```
-
-### Meta-Jの専権
-
-- 最上位目的
-- Scope
-- 権威順序
-- 定義
-- Rule採否
-- phase遷移
-- Owner Approval
-- claim
-- locked final使用
-- official submission
-- 戦略変更
-
-### Codexの権限
-
-- read
-- inventory
-- static analysis
-- hypothesis proposal
-- code implementation
-- test implementation
-- test execution
-- artifact generation
-- self-audit
-- failure classification
-- owner review package生成
-
-### Repositoryの役割
-
-- source of truth
-- version lineage
-- evidence
-- failure history
-- approval
-- rollback
-- task handoff
-- context recovery
-
----
-
-## 3. Authority planes
-
-権威を「規範権威」と「実行制御」に分離する。実行制御は、作業対象・順序・停止点を決めるだけであり、規範権威の意味を変更できない。
-
-### 3.1 Normative Authority
+## 正本
 
 1. Ownerの現在の明示指示
-2. `docs/architecture/AGI三主体統合設計正本_v0_2.md`
-3. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
-4. `docs/architecture/工学的AGI実装仕様書_v0_2.md`
-5. `docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
-6. `docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md`
-7. `docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
-8. `docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
+2. `docs/strategy/ARC3_HDS直接抽出_汎用構造命令形P_実装仕様書_rev4.md`
+3. `docs/roadmap/ARC3_HDS直接抽出_開発ロードマップ_rev4.md`
+4. `control/rev4/CURRENT_TASK.json`
+5. HDS／AGI上位正本
 
-### 3.2 Execution Control
+rev3のD/B/A/E phase、`control/rev3/REV3_CURRENT_SELECTOR.json`、旧P0〜P22、S0〜S6は履歴であり、current task selectorではない。
 
-1. Ownerの現在の明示指示
-2. 本運用契約
-3. Ownerの明示判断を`OwnerDecisionCapture`で転記した、Owner承認済みactive phase state
-4. current Work Block FrameSpec
-5. committed evidence
-
-過去のphase state、ApprovalRecord、transition、artifact-local `next_*`、P0〜P22 artifactは履歴証拠であり、current task selectorではない。下位資料が上位資料と衝突した場合は採用せず、不明点は推測で埋めずOpen Termへ記録する。
-
----
-
-## 4. Active Strategy Selector
+## 最上位目的
 
 ```text
-Strategy = OWNER_APPROVED
-Installation = INSTALLED
-Active phase = PH-D07A
-Current work = PH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTING
-PH-R-1 = OWNER_APPROVED_PASS
-PH-R00 = OWNER_APPROVED_PASS
-PH-D00A = OWNER_APPROVED_PASS
-PH-D00B = OWNER_APPROVED_PASS
-PH-D01A = OWNER_APPROVED_PASS
-PH-D01B = OWNER_APPROVED_PASS
-PH-D02A = OWNER_APPROVED_PASS
-PH-D02B = OWNER_APPROVED_PASS
-PH-D02C = OWNER_APPROVED_PASS
-PH-D03A = OWNER_APPROVED_PASS
-PH-D03B = OWNER_APPROVED_PASS
-PH-D05 = OWNER_APPROVED_PASS
-PH-D06 = OWNER_APPROVED_PASS
-PH-D07A = IN_PROGRESS
-PH-R00 Owner authorization = ESTABLISHED
+25 game／183 levelの成功軌道
+→ HDS TaskDecompositionRecord
+→ GenericStructureLibrary
+→ Imperative PBundle
+→ 同一ARC3 Agent
+→ 183/183実行
+→ 公式提出
 ```
 
-監査是正後の順序は次であり、PH-R-1までを実装済みとする。
+## 現在作業
 
 ```text
-REV3文書・契約の監査是正
-→ Ownerによる是正内容の明示承認
-→ PH-R-1 STRATEGY_INSTALLATION（implemented）
-→ PH-R00
-→ PH-D00A ... PH-D14
-→ PH-B00 ... PH-B06
-→ PH-A00 ... PH-A08
-→ PH-E00 ... PH-E04
+P1_TASK_DECOMPOSITION
 ```
 
-`control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`を含む監査前のphase evidenceは削除しないが、`HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE`として扱う。監査前文書を対象とした決定、またはOwnerの単なる「続行」をCodexがphase承認へ変換した記録は、是正後仕様のactivation根拠にならない。
+- 全25 game／183 levelを列挙する。
+- 各成功軌道をbefore／target／condition／operation／effect／progress／terminalへ分解する。
+- terminalから逆向きに寄与stepを結ぶ。
+- 全stepを機械可読TaskDecompositionRecordへ変換する。
+- 不明項目は`open_terms`へ置き、推測で閉じない。
 
-Hard Gate:
+## HDSの使い方
+
+HDSは成果物ではなく判断方法である。
 
 ```text
-OWNER_APPROVED_REV3_CORRECTION
-AND STRATEGY_INSTALLATION_COMPLETE
-AND OWNER_AUTHORIZED_PH-R00
-AND PH-R00_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D00A
-AND PH-D00A_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D00B
-AND PH-D00B_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D01A
-AND PH-D01A_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D01B
-AND PH-D01B_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D02A
-AND PH-D02A_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D02B
-AND PH-D02B_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D02C
-AND PH-D02C_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D03A
-AND PH-D03A_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D03B
-AND PH-D03B_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D05
-AND PH-D05_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D06
-AND PH-D06_DOD_PASS
-AND OWNER_AUTHORIZED_PH-D07A
+F  観測を切り取る
+Md 構造候補と反対候補を作る
+Cm 採否・保留・観測要求を決める
+U  結果を分解記録、構造、P、M、Failure Signatureへ反映する
 ```
 
-以前に`PH-D07A`を開始しない。現在は全条件が成立し、PH-D07Aだけがactiveである。PH-D07BはPH-D07Aの全DoD、25 fit case／450 candidate／400 eligible execution／50 DG-08 ineligible、全11,574 teacher step／185,184 candidate-step、7 comparison axis、isolated comparator x3、deterministic rebuild x3、required validation、failed requirement count 0、exact evidence bind、OwnerDecisionCaptureが成立するまで開始しない。
+## 許可
+
+- 既知回答・成功軌道・raw recording・canonical trajectoryの使用
+- 最大情報で抽出してからidentity／replay依存を減算すること
+- 既存IR／interpreter／P16〜P21 substrateの再利用
+- repository内の実装・試験・修正の連続実行
+- failureから前工程へ戻ること
+
+## 禁止
+
+- 新repositoryの作成
+- HDS理論証明を主目的にすること
+- schema／digest／attestation／approval専用phaseの追加
+- source-blind証明を抽出開始条件にすること
+- game ID／level IDだけによるruntime action routing
+- fixed trajectory replayを汎用Pとして扱うこと
+- 次工程が読まないartifactの作成
+- 仕様外のBridge／Runtime／公式作業の先行
+
+## 工程
 
 ```text
-HDS_STRUCTURE_BUNDLE_OWNER_APPROVED
+P1 Task Decomposition
+P2 Generic Structure Extraction
+P3 Imperative P Compilation
+P4 Agent Integration
+P5 Full Execution Repair Loop
+P6 Official Packaging / Evaluation
 ```
 
-以前にBridge/AGI capability implementationを開始しない。
+これ以外のTrackを追加しない。
+
+## 成果物規則
+
+新artifactは次のいずれかを満たす場合だけ作る。
 
 ```text
-DISTILLED_INITIAL_STATE_BUNDLE_FROZEN
+次工程のコードが直接読む
+失敗修正に直接使う
+公式提出に必要
 ```
 
-以前にDistilled AGI Runtimeを開始しない。
+各phaseのprimary artifactは一系統、verification reportは一つまでを原則とする。
 
----
+## 検証
 
-## 5. Phase State
+- testは各work unitの末尾で行う。
+- test専用phaseを作らない。
+- test数を成果と数えない。
+- 実際のcoverage、実行結果、failure解消を成果とする。
 
-### Codexが設定できる状態
+## Owner権限
 
-```text
-NOT_STARTED
-IN_PROGRESS
-CODEX_IMPLEMENTATION_COMPLETE
-CODEX_SELF_AUDIT_PASS
-CODEX_REWORK_REQUIRED
-OWNER_REVIEW_REQUIRED
-SUSPEND
-```
-
-### Ownerだけが設定できる状態
-
-```text
-OWNER_APPROVED_PASS
-OWNER_APPROVED_REWORK
-OWNER_REJECTED
-```
-
-Codexは`PASS`、`COMPLETE`、`PROMOTED`を単独で最終状態にしない。
-
-### phase state必須field
-
-```text
-schema_version
-phase_id
-status
-base_commit
-base_tree
-implementation_commit
-implementation_tree
-work_block_id
-spec_digest
-roadmap_digest
-input_manifest_digest
-allowed_data_roles
-changed_files
-commands
-tests
-artifacts
-failed_requirement_ids
-open_terms
-self_audit
-owner_review_required
-evidence_payload_digest
-```
-
-phase stateは、自身を含まない`implementation_commit/tree`へbindする。phase stateとOwner Review Packageを含むGit objectは、後段の`EvidenceCommitAttestation`が`evidence_commit/tree`として記録する。Owner承認はさらに別の`OwnerDecisionCapture`と`approval_commit`へ分離する。
-
-```text
-Implementation Commit
-  code / tests / docs
-  ↓
-Evidence Commit
-  phase state / review package
-  target = implementation_commit/tree
-  ↓
-EvidenceCommitAttestation
-  evidence_commit/tree
-  target = evidence_payload_digest
-  ↓
-Approval Commit
-  OwnerDecisionCapture / ApprovalRecord
-  target = evidence_commit + evidence_payload_digest
-```
-
-commitは自分自身のhashをpayloadへ記録しない。`evidence_commit`はEvidence Commit自身ではなく、後続attestationまたはapproval側に置く。`approval_commit`もApprovalRecord自身へ埋め込まない。uncommitted worktreeをphase completion証拠にしない。
-
-### OwnerDecisionCapture
-
-CodexはOwnerの明示判断を次のrecordへ機械的に転記できる。
-
-```text
-owner_decision_id
-source_instruction_ref
-source_instruction_digest
-target_artifact_digest
-target_evidence_commit
-allowed_transition
-decision
-reason_codes
-captured_by
-capture_is_mechanical = true
-owner_decision_content_digest
-```
-
-Codexは`decision`、`allowed_transition`、`reason_codes`を推測・補完・拡張しない。Owner指示が対象artifactまたは遷移を一意に特定しない場合、recordを生成せず`OWNER_DECISION_NOT_ESTABLISHED`とする。正式schemaは`docs/strategy/contracts/OWNER_DECISION_CAPTURE_SCHEMA_V1.json`で固定する。
-
-### OwnerStandingAuthorization
-
-Ownerが、roadmap内の必要承認を全て与え、連続進行を明示した場合、その判断を
-`OWNER_STANDING_AUTHORIZATION_SCHEMA_V1.json`へ機械転記できる。
-
-Standing authorizationは、将来artifactへdigestなしのPASSを事前付与するものではない。
-各phaseで次を全て満たした場合だけ、`OWNER_DECISION_CAPTURE_SCHEMA_V2.json`により
-standing authorizationをexact artifactへ適用する。
-
-```text
-required DoD = PASS
-failed requirement count = 0
-exact implementation/evidence commit = bound
-exact evidence payload digest = bound
-sequential predecessor = approved
-```
-
-一件でもFAIL、未検証、digest不一致、順序違反ならcaptureを生成しない。
-Standing authorizationは、external submission、one-time locked access、credential変更、
-課金・公開などの不可逆な外部操作を含まない。それらは別の明示実行指示を必要とする。
-
----
-
-## 6. Work Block Protocol
-
-一Work Blockは、
-
-```text
-一phase
-または
-一blocking failure修正
-```
-
-だけを扱う。
-
-### WB-00 Context Recovery
-
-- repository root
-- branch
-- HEAD
-- tree
-- dirty state
-- current phase
-- current phase state
-- required docs
-- dependency hashes
-- prior owner decisions
-
-を確認する。
-
-不一致なら`SUSPEND_CONTEXT_MISMATCH`。
-
-### WB-01 Frame Lock
-
-`WorkBlockFrame.json`を作る。
-
-必須:
-
-```text
-purpose
-X
-R
-Mc
-scope
-non_goals
-allowed_files
-forbidden_files
-allowed_data_roles
-resource_budget
-test_contract
-stop_condition
-owner_authority
-```
-
-### WB-02 Inventory
-
-変更前に、
-
-- current implementation
-- existing tests
-- existing artifact
-- gaps
-- reused modules
-- quarantined modules
-
-を列挙する。
-
-### WB-03 Plan
-
-実装前に、最小変更単位と検証順序を固定する。
-
-計画は上位仕様を変更しない。
-
-### WB-04 Implement
-
-- allowed filesだけ変更
-- undocumented compatibility hack禁止
-- fallback追加禁止
-- test weakening禁止
-- scope expansion禁止
-- frozen artifact変更禁止
-
-### WB-05 Validate
-
-順序:
-
-1. dedicated test
-2. focused regression
-3. type/lint
-4. full unit
-5. integration
-6. package/notebook
-7. artifact determinism
-
-必要な範囲だけだが、phase DoDで要求された試験は省略しない。
-
-### WB-06 Self Audit
-
-最低限:
-
-- objective alignment
-- scope
-- authority
-- identity/taint
-- evidence
-- determinism
-- data role
-- claim strength
-- rollback
-- resource
-- historical fallback
-
-### WB-07 Commit Bind
-
-1. code/test/docだけをImplementation Commitへcommit
-2. `implementation_commit/tree`を取得
-3. Implementation Commitに対するrequired testsを実行
-4. phase stateとOwner Review Packageを生成し、`implementation_commit/tree`へbind
-5. phase stateとpackageをEvidence Commitへcommit
-6. `evidence_commit/tree`と`evidence_payload_digest`を後続の`EvidenceCommitAttestation`へ記録
-7. Ownerが明示判断した場合だけ、`OwnerDecisionCapture`とApprovalRecordを別のApproval Commitへcommit
-
-Implementation Commit後にcode/test/docを変更した場合、phase stateは失効する。Evidence Commit後にevidence payloadを変更した場合、attestationとOwner判断は失効する。
-
-### WB-08 Owner Review Package
-
-```text
-OWNER_REVIEW_PACKAGE/
-  summary.md
-  phase_state.json
-  changed_files.json
-  commands.json
-  test_results.json
-  artifact_manifest.json
-  failed_requirements.json
-  open_terms.json
-  self_audit.json
-  proposed_next_action.md
-```
-
-Packageは`implementation_commit/tree`と`evidence_payload_digest`へbindし、自分自身を含むcommit hashを内部に要求しない。Owner判断はpackageに事前生成せず、後段の`OwnerDecisionCapture`へ分離する。
-
-### WB-09 Stop
-
-通常は`OWNER_REVIEW_REQUIRED`で停止し、次phaseへ自動進行しない。
-
-「続行」「連続で作業してよい」は実装継続許可であり、Owner専権のphase採否、Rule採否、HDSStructureBundle採択、DistilledInitialStateBundle採択、`LOCKED_FINAL`、official環境、Kaggle変更・提出を代替しない。各専権判断には、対象artifactと遷移を特定したOwnerの明示判断が必要である。
-
-ただし、Ownerが「必要な承認を総て承認し、連続で止めない」と明示し、上記
-`OwnerStandingAuthorization`がApproval Commitへ固定された場合は例外とする。
-この場合も各phaseのDoD PASS後にexact digestへ機械bindし、失敗または未証明phaseを
-承認してはならない。不可逆な外部操作はstanding authorizationの対象外である。
-
----
-
-## 7. HDS蒸留中のCodex
-
-### 許可
-
-- raw evidence正規化
-- deterministic derivation
-- HypothesisIR候補生成
-- counter-hypothesis生成
-- exact fit実行
-- counterfactual intervention
-- cross-case unification
-- boundary/counterexample mining
-- FailureSignature生成
-- promotion candidate生成
-- evidence report
-- Owner review package
-
-### 禁止
-
-- Ruleの自動active化
-- exact fitを因果確定と呼ぶ
-- source codeから正解を抽出
-- S5 MLPを教師因果として扱う
-- live LLM responseを最終artifactへ直接採用
-- case identityをRule triggerへ入れる
-- public corpusをblind evidenceと呼ぶ
-- coverage不足を隠す
-- all SUSPENDでAGI Build Readyを宣言
-
-### LLM capture
-
-LLMを使う場合:
-
-```text
-prompt
-model
-parameters
-request
-raw response
-digest
-```
-
-をfreezeし、後段はdeterministic parse/validate/compileとする。
-
-### Source-blind execution separation
-
-| Role | environment source | replay harness | hypothesis生成 | promotion |
-|---|---:|---:|---:|---:|
-| `REPLAY_HARNESS_MAINTAINER` | 可 | 可 | 禁止 | 禁止 |
-| `DISTILLATION_EXECUTOR` | mount禁止 | observable API / recordingのみ | 可 | 禁止 |
-| `DISTILLATION_AUDITOR` | 禁止 | 禁止 | 禁止 | 禁止 |
-
-- `DISTILLATION_EXECUTOR`はsource treeを含まない別checkoutまたは隔離processで実行する。
-- roleごとにprocess identity、checkout digest、mount allowlist、access ledgerを固定する。
-- 同一Codex sessionがsource access roleとhypothesis generation roleを兼務した出力は`SOURCE_BLIND_NOT_ESTABLISHED`とし、昇格入力へ使わない。
-- Auditorはaccess ledger、artifact digest、process manifestだけを確認する。
-
----
-
-## 8. Bridge中のCodex
-
-### 許可
-
-- approved structure recordのeligibility分類
-- type mapping
-- P-IR/J_DOMAIN_PROFILE₀/M₀/probe candidate生成
-- taint audit
-- non-replay audit
-- deterministic package
-- structural tests
-
-### 禁止
-
-- Owner未承認RuleのP格納
-- `LOCAL_EXACT_FIT`のactive P化
-- teacher trajectory格納
-- fixed action sequence
-- exact action-surface head
-- S5 weights reuse
-- unsupported generalization
-- natural languageを無検証opcodeへ変換
-- `OWNER_APPROVED_PASS`設定
-
----
-
-## 9. AGI構築中のCodex
-
-### 許可
-
-- distilled bundle loader
-- C/J/M/L₀接続
-- online mechanism identification
-- probe loop
-- memory update
-- negative transfer
-- version learning
-- official-like test
-
-### 禁止
-
-- teacher package import
-- S5 fallback
-- current compiled MLP fallback
-- game ID routing
-- exact state lookup
-- runtimeへの開発source同梱
-- Codexによるrun中補正
-- locked finalへの反復アクセス
-- official結果を無断でdevelopment signal化
-
----
-
-## 10. Data Role Access
-
-| Role | Distillation | Bridge | AGI Dev | Locked | Official |
-|---|---:|---:|---:|---:|---:|
-| `DISTILLATION_SOURCE` | 可 | manifestのみ | 禁止 | 禁止 | 禁止 |
-| `DEVELOPMENT_TRAIN` | 可 | 可 | 可 | 禁止 | 禁止 |
-| `DEVELOPMENT_VALIDATION` | 可 | 可 | 可 | 禁止 | 禁止 |
-| `CV_PROCEDURE` | 評価のみ | 評価のみ | 評価のみ | 禁止 | 禁止 |
-| `LOCKED_FINAL` | 禁止 | 禁止 | 禁止 | 一回 | 禁止 |
-| `OFFICIAL_PUBLIC` | 禁止 | 禁止 | 禁止 | 禁止 | 明示許可 |
-| `OFFICIAL_PRIVATE` | 禁止 | 禁止 | 禁止 | 禁止 | 明示許可 |
-
-アクセスは`DataAccessLedger`へ記録する。
-
-available actionとpayload schemaは正当な観測である。legal action mask、payload validation、action availability changeの観測を許可する。一方、exact action tupleだけで専用policy headを選ぶこと、environment identity proxyとして使うこと、固定trajectoryを選ぶことは禁止する。
-
-Locked finalでは次を分離する。
-
-- `LOCKED_EVALUATOR_AUTHORITY`: evaluator versionと更新を承認する。Runtime実装者と兼務しない。
-- `LOCKED_EVALUATOR_CUSTODIAN`: sealed inputと鍵を保管し、内容を開発roleへ開示しない。
-- `ONE_TIME_TOKEN_ISSUER`: artifact/evaluator digestへ一回限りtokenを発行する。
-- `CONSUMPTION_LEDGER_WRITER`:実行・開示・development転用時刻を追記し、`CONSUMED`を記録する。
-
-Codexが上記roleを兼務する場合、その評価は`INDEPENDENT_LOCKED_FINAL_NOT_ESTABLISHED`であり、locked-final claimに使わない。
-
----
-
-## 11. Failure Handling
-
-failureは次へ分類する。
-
-```text
-PRODUCT_FAILURE
-SPEC_FAILURE
-EVIDENCE_FAILURE
-DATA_ROLE_VIOLATION
-IDENTITY_TAINT
-ENVIRONMENT_FAILURE
-RESOURCE_EXHAUSTION
-TOOL_FAILURE
-EXTERNAL_SERVICE_FAILURE
-```
-
-### 原則
-
-- failureを消すために試験を弱めない
-- thresholdを無断で緩めない
-- scopeを狭めてPASSを偽装しない
-- environment failureをproduct PASSに変えない
-- resource exhaustionを能力FAILへ誤帰属しない
-- external service failureをagent能力へ誤帰属しない
-- scoreだけでC/J/M/Pへ帰属しない
-
-### SUSPEND条件
-
-- dependency mismatch
-- source digest mismatch
-- missing approval
-- forbidden data access
-- unresolved spec term
-- required test unavailable
-- evidence不足
-- resource不足
-- branch/HEAD mismatch
-- phase gate未承認
-
----
-
-## 12. Branch / Commit Discipline
-
-repositoryの公開方法はOwnerの現在指示に従う。現在は`main`へ直接commit/pushし、PRと作業branchを作らない。
-
-commit規律:
-
-1. Implementation Commit: implementation/test/docだけ
-2. Evidence Commit: phase state/review package、targetはImplementation Commit
-3. EvidenceCommitAttestation: Evidence Commitを後続objectから記録
-4. Approval Commit: OwnerDecisionCapture/ApprovalRecord、Ownerの明示判断がある場合だけ
-
-大規模phaseでは複数commit可。  
-ただしOwner Review Packageは単一の`implementation_commit/tree`へbindする。
-
-禁止:
-
-- unrelated refactor
-- generated artifactの手修正
-- force overwrite of frozen baseline
-- history rewrite after owner review
-- phase evidenceをcommit前に最終化
-- commitが自分自身のcommit/tree hashをpayloadへ記録する自己参照
-
----
-
-## 13. Claim Discipline
-
-Codexが書ける表現:
-
-```text
-IMPLEMENTED
-TESTED
-CODEX_SELF_AUDIT_PASS
-EVIDENCE_GENERATED
-OWNER_REVIEW_REQUIRED
-NOT_ESTABLISHED
-NOT_EVALUATED
-SUSPEND
-```
-
-CodexがOwner承認なしに書けない表現:
-
-```text
-COMPLETED
-CLOSED
-PROMOTED
-GENERIC
-AGI
-OFFICIAL_READY
-OWNER_APPROVED
-```
-
-これらを使う場合は、claim registryの正式IDとOwner ApprovalRecordが必要。
-
----
-
-## 14. Reporting Template
-
-最終報告は次の順。
-
-```text
-1. Phase / Work Block
-2. Fixed purpose
-3. Base commit/tree
-4. Changed files
-5. What was implemented
-6. Tests and commands
-7. Artifacts and digests
-8. Failures / regressions
-9. Open terms
-10. Self-audit
-11. Claim allowed
-12. Claim prohibited
-13. Owner decisions required
-14. Stop state
-```
-
-誇張、宣伝、一般論で埋めない。
-
----
-
-## 15. Initial Instruction to Codex
-
-```text
-あなたの役割はDevelopment Meta-Cです。
-Owner、HDS最終判断主体、AGI Runtime、phase promotion authorityではありません。
-
-rev3 strategyはOWNER_APPROVEDです。
-installationはINSTALLEDです。
-PH-R-1はOWNER_APPROVED_PASSです。
-PH-R00はOWNER_APPROVED_PASSです。
-PH-D00AはOWNER_APPROVED_PASSです。
-PH-D00BはOWNER_APPROVED_PASSです。
-PH-D01AはOWNER_APPROVED_PASSです。
-PH-D01BはOWNER_APPROVED_PASSです。
-PH-D02AはOWNER_APPROVED_PASSです。
-PH-D02BはOWNER_APPROVED_PASSです。
-PH-D02CはOWNER_APPROVED_PASSです。
-PH-D03AはOWNER_APPROVED_PASSです。
-PH-D03BはOWNER_APPROVED_PASSです。
-PH-D05はOWNER_APPROVED_PASSです。
-PH-D06はOWNER_APPROVED_PASSです。
-PH-D07AはIN_PROGRESSです。
-Active phaseはPH-D07Aです。
-現在許可されたwork classはPH-D07A_EXTENSIONAL_EXACT_FIT_ACCOUNTINGです。
-PH-R00のOwner authorizationはESTABLISHEDです。
-
-最初に、
-- repository root
-- branch
-- HEAD/tree
-- dirty state
-- required documents
-- PH-D06 evidence、attestation、content-specific decision／approval
-- PH-D07A WorkBlockFrameとphase-entry approval
-を確認してください。
-
-次だけを実施してください。
-
-- canonical teacher trajectory 25件とPH-D06 candidate package 25件をread-only inputとして拘束する
-- 400 executable HypothesisIRを各自のteacher trajectory全stepで実行し、全11,574 teacher step／185,184 candidate-stepを会計する
-- RAW_ACTION_MATCH、STEP_PRECONDITION、PREDICTED_EFFECT、STATE_ABSTRACTION、TRANSITION、ORDERING、TERMINAL_CONTRIBUTIONの7 axisを、未宣言axisのmatch補完なしで評価する
-- fitをLOCAL_EXACT_FIT、FALSIFIED、INCONCLUSIVE_RESOURCE、NOT_ELIGIBLE_DG_08へ分類する
-- 50 answer-copy／identity-routing adversaryをDG-08 rejectedのまま一度も実行しない
-- exact fit、positive mechanism support、causal supportを別fieldとし、causal supportをNOT_ESTABLISHEDに固定する
-- DISTILLATION_COMPARATORをbubblewrapで分離し、repository root、environment source、network、secretを見せない
-- fit manifest、25 case package、isolation reportを3 independent processでbyte-identical rebuildする
-- DG-07、DG-08、DG-09を構造と実行証拠から再計算する
-- dedicated／focused／full unit／integration regression
-- deterministic artifact、Implementation Commit、Evidence Commit、attestationの分離
-- PH-D07A DoD、required three gates、failed requirement count 0の証明
-
-candidate selection／adoption、因果主張、counterfactual intervention、Rule promotion、Bridge実装、AGI Runtime、P22改善、locked final、official、Kaggleへ進んではいけません。
-
-PH-D07A成果のImplementation Commit、Evidence Commit、attestationを分離してください。
-全gateがPASSした場合だけstanding authorizationをexact evidenceへ機械的にbindし、
-PH-D07AからPH-D07BへのOwner decisionを転記してください。失敗または未証明gateを承認してはいけません。
-```
-
----
-
-## 16. Owner承認後も維持する固定境界
-
-Codexは、開発を自律的に完遂する主体ではない。
-
-> **Ownerが定めた目的と境界の中で、Repositoryを継続記憶として読み、限定されたWork Blockを実装・検証し、証拠を生成してOwnerへ返すDevelopment Meta-Cである。**
-
-この位置づけを崩さないことで、
-
-```text
-Codexの作業
-```
-
-と、
-
-```text
-AGI Runtimeの自律
-```
-
-を混同しない。
+Ownerは最上位目的、戦略変更、PBundle freeze、公式提出を決める。内部の連続開発は、明示的な停止指示または重大な仕様衝突がない限り継続する。
