@@ -35,11 +35,16 @@ from .generic_types import (
     ObjectRole,
     RelationalRepresentation,
 )
+from .local_capability import (
+    LOCAL_CAPABILITY_VERSION,
+    development_hypotheses,
+    enrich_development_predictions,
+)
 from .p_ir_types import PIRProgram
 from .schema import digest_object
 from .taint import COORDINATE_PROVENANCE_CURRENT_RENDER
 
-GENERIC_COMPUTE_VERSION = "arc3-generic-compute-v1"
+GENERIC_COMPUTE_VERSION = "arc3-generic-compute-v2"
 GENERIC_P_REMOVAL_WITNESS = "GENERIC_EXECUTABLE_INSTRUCTION_BODY_REQUIRED"
 GENERIC_SERIAL_DEPTH_WITNESS = "GENERIC_EFFECTIVE_SERIAL_DEPTH_REMOVED"
 
@@ -1584,6 +1589,47 @@ class GenericComputeSubject:
             observation=observation,
             action_history=action_history,
         )
+        enriched_predictions = enrich_development_predictions(
+            instruction_result.predictions,
+            records,
+            observation,
+        )
+        if enriched_predictions != instruction_result.predictions:
+            capability_instruction_refs = tuple(
+                sorted(
+                    {
+                        ref
+                        for prediction in enriched_predictions
+                        for ref in prediction.instruction_refs
+                        if ref.startswith(
+                            ("active-capability:", "probation-capability:")
+                        )
+                    }
+                )
+            )
+            instruction_result = InstructionBodyResult(
+                predictions=enriched_predictions,
+                query_digest="generic-local-capability-query:"
+                + digest_object(
+                    {
+                        "base_query": instruction_result.query_digest,
+                        "local_capability_version": LOCAL_CAPABILITY_VERSION,
+                        "predictions": enriched_predictions,
+                    }
+                ),
+                selected_instruction_refs=tuple(
+                    sorted(
+                        {
+                            *instruction_result.selected_instruction_refs,
+                            *capability_instruction_refs,
+                        }
+                    )
+                ),
+                control_operation=instruction_result.control_operation,
+                control_instruction_refs=(
+                    instruction_result.control_instruction_refs
+                ),
+            )
         descriptor_order: dict[ActionDescriptor, int] = {
             descriptor: index for index, descriptor in enumerate(descriptors)
         }
@@ -1839,6 +1885,15 @@ class GenericComputeSubject:
                     ),
                 )
             )
+        hypotheses.extend(
+            development_hypotheses(
+                records,
+                observation,
+                include_counter_hypotheses=(
+                    selected_ablation.counter_hypothesis
+                ),
+            )
+        )
         stages.append(
             Layer0StageTrace(
                 stage="model",
@@ -1857,6 +1912,14 @@ class GenericComputeSubject:
             )
         )
 
+        execute_eligible_memory_refs = {
+            record.memory_id
+            for record in records
+            if (
+                record.state not in {"PROPOSED", "PROBATION"}
+                and record.payload().get("execute_eligibility") is True
+            )
+        }
         candidates: list[GenericCandidate] = []
         for prediction in ranked_predictions:
             evidence_binding_key = build_evidence_binding_key(
@@ -1902,7 +1965,10 @@ class GenericComputeSubject:
                 "ACTION"
                 if prediction.progress_likelihood >= 0.55
                 and prediction.hazard_likelihood <= 0.25
-                and prediction.memory_refs
+                and any(
+                    ref in execute_eligible_memory_refs
+                    for ref in prediction.memory_refs
+                )
                 else "BOUNDED_PROBE"
             )
             candidate_id = "candidate:generic:" + digest_object(
@@ -1936,6 +2002,7 @@ class GenericComputeSubject:
                         instruction_result.query_digest,
                         representation.digest_value,
                         p_ir_execution.program_logical_digest,
+                        LOCAL_CAPABILITY_VERSION,
                         GENERIC_COMPUTE_VERSION,
                     ),
                     evidence_binding_key=evidence_binding_key,
@@ -1984,6 +2051,7 @@ class GenericComputeSubject:
                 memory_query_digest,
                 p_ir_execution.program_logical_digest,
                 p_ir_execution.execution_digest,
+                LOCAL_CAPABILITY_VERSION,
                 GENERIC_COMPUTE_VERSION,
             ),
             control_operation=instruction_result.control_operation,

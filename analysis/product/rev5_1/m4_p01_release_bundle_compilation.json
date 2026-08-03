@@ -1,0 +1,102 @@
+{
+  "artifact_type": "M4ReleaseBundleCompilationEvidence",
+  "asset_stage": "RELEASE_FROZEN",
+  "claim_boundary": {
+    "ARC3_PRODUCT_COMPLETE": false,
+    "allowed_claim": "M4_P01_RELEASE_BUNDLE_COMPILED",
+    "clean_full_sample_repeat_complete": false,
+    "clean_install_complete": false,
+    "code_dependency_resource_freeze_complete": false,
+    "next_point": "M4-P02_CODE_DEPENDENCY_RESOURCE_FREEZE",
+    "release_bundle_compiled": true
+  },
+  "compilation_audit": {
+    "P05_candidate_included": false,
+    "P_J0_M0_functional_identity_preserved": true,
+    "deterministic_archive_rebuild": "BYTE_IDENTICAL",
+    "identity_replay_finding_count": 0,
+    "included_non_release_asset_count": 0,
+    "initial_state_recompilation": "BYTE_IDENTICAL",
+    "release_bundle_load": "PASS",
+    "release_mechanism_family_count": 1,
+    "release_product_bundle_count": 1,
+    "release_stage": "RELEASE_FROZEN",
+    "runtime_policy_changed": false,
+    "source_stage": "ACTIVE_DEV"
+  },
+  "exit_audit": {
+    "M3_closure": "PASS",
+    "deterministic_archive_rebuild": "BYTE_IDENTICAL",
+    "identity_replay_finding_count": 0,
+    "included_non_release_asset_count": 0,
+    "release_asset_stage": "RELEASE_FROZEN",
+    "release_bundle_load": "PASS",
+    "release_product_bundle_count": 1,
+    "status": "M4_P01_PASS"
+  },
+  "logical_content_sha256": "3c0b1b732dade6576f6ee1fb538b8a19f8eea5d742a3b6b1b3f678ea42c397db",
+  "point_id": "M4-P01_RELEASE_BUNDLE_COMPILATION",
+  "release_artifact": {
+    "descriptor_path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_release_v1.json",
+    "descriptor_sha256": "c86470412a3479115784c8620dcdfb6e68724dc1805c65d9a458c2bc23284d99",
+    "initial_state_logical_digest": "initial-state-logical:a3fdd6b188538eda5b6837c1bddf5c60f46dc7c09ba03b47bc170d10e85f45bb",
+    "j0_digest": "j0:65dd269884a737a6b76dd263164984ea257c97865a4d88abbaa1a9e5ad87245d",
+    "m0_digest": "m0:1302d43f51362ac3a104b125beac10a205e7fa0f585b26eb19ac19537aa574c6",
+    "manifest_logical_digest": "release-manifest:0b16e49719e326a1f51d81e5f107508025f1eeabe6735b205a11ebc233cb6489",
+    "p_logical_digest": "p-logical:72091424e67812b8b7e9efd245943a696027ed2da7cdff7d3f1c714ae44ffb1c",
+    "package_path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_release_v1.zip",
+    "package_sha256": "99dd28966a0c20eaf2d93c3c47746d81d0ff2de666290f33b13526e8e878c923",
+    "package_size_bytes": 7984057,
+    "product_bundle_id": "ARC3ProductBundle-release-v1"
+  },
+  "runtime_product": "ARC3CompletionAgent",
+  "schema_version": "arc3-rev5-1-m4-p01-release-compilation-v1",
+  "source_bindings": {
+    "M3_closure": {
+      "logical_content_sha256": "55d7ee2a18ab851f69b2df1ff8c590c10a0aba8f3abbd28d193c11107185f829",
+      "path": "analysis/product/rev5_1/m3_conformance_closure.json",
+      "sha256": "b98d5bb4e8ef6383e97276233c8e1256634e5efe692d73eb6a4275893d6470f6",
+      "status": "M3_COMPLETE"
+    },
+    "active_product_descriptor": {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+      "sha256": "0c2f9bced86f316e43eb720b5f9d1c11afc2502935bfd982172b36d6a0c04526"
+    },
+    "active_product_package": {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
+      "sha256": "a24ba468374bf7fabda2d0ecae44793125fe1eb829db649196a8f77d0b7d91ce"
+    },
+    "excluded_P05_candidate": {
+      "included": false,
+      "path": "analysis/product/rev5_1/m3_p05_next_initial_state_candidate.zip",
+      "sha256": "54948c3b5c0af83cd7e91ed1c0824f1f7c766c556c0abe357b5cf3a1ea288897"
+    },
+    "implementation": [
+      {
+        "path": "ARC-AGI-3-Agents/arc3_agi_agent/product_capability.py",
+        "sha256": "d93fbe23a4ac70a103cd8ed630cea9daf41418d45934db6922601fab3df4efe8"
+      },
+      {
+        "path": "ARC-AGI-3-Agents/arc3_agi_agent/product_release.py",
+        "sha256": "b8d718d737ca5b1f097de05c3ce9b7e03e444477cb147a41650034a844db6c57"
+      },
+      {
+        "path": "ARC-AGI-3-Agents/arc3_agi_agent/local_capability.py",
+        "sha256": "6a9329acb0c14a6cb246682b1b5fa99b734e6f84f2688d5885aa25d452c7edcf"
+      },
+      {
+        "path": "ARC-AGI-3-Agents/arc3_agi_agent/initial_state_compiler.py",
+        "sha256": "e74ddd41d1292adc40ac29c07a55e355544554f65d44bb583281275581ecffea"
+      },
+      {
+        "path": "ARC-AGI-3-Agents/arc3_agi_agent/canonical_artifact.py",
+        "sha256": "64a9450b67cced5dfe6b436ba3b4ba2f089998dc88eb973975923d75c3929aaf"
+      },
+      {
+        "path": "scripts/build_rev5_1_m4_p01_release_bundle.py",
+        "sha256": "1c0fa7b5c5566847a6339048858b83bebcb965bb3179605641dfb5922df54a11"
+      }
+    ]
+  },
+  "status": "M4_P01_PASS"
+}

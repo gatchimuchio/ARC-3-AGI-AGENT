@@ -6,7 +6,7 @@ import argparse
 import json
 import logging
 import os
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from dataclasses import replace
 from pathlib import Path
 from typing import Any, cast
@@ -20,6 +20,8 @@ from .generic_session import (
     ResourceContract,
     create_cognitive_session,
 )
+from .initial_state_compiler import InitialStateBundle
+from .local_capability import active_dev_mechanism_families
 from .product_capability import load_product_initial_state
 from .product_governance import (
     ARC3_DEVELOPMENT_ACTION_BUDGET,
@@ -29,6 +31,12 @@ from .product_governance import (
     ARC3_PRODUCT_ENDPOINT,
     ARC3_PRODUCT_ID,
     ARC3_PRODUCT_NO_PROGRESS_LIMIT,
+)
+from .product_release import (
+    PRODUCT_RELEASE_STAGE,
+    LoadedProductReleaseBundle,
+    load_default_product_release_bundle,
+    load_product_release_bundle,
 )
 from .runtime_identity import build_runtime_identity
 from .schema import digest_object
@@ -40,13 +48,13 @@ logger = logging.getLogger(__name__)
 
 def _selected_product_hds_configuration(
     *,
+    initial_state: InitialStateBundle,
     action_budget: int,
 ) -> HDSConfiguration:
-    initial = load_product_initial_state()
-    if action_budget == initial.j0.resource_budget:
-        return initial.j0
+    if action_budget == initial_state.j0.resource_budget:
+        return initial_state.j0
     return replace(
-        initial.j0,
+        initial_state.j0,
         resource_budget=action_budget,
         stop_after_no_progress=min(
             action_budget,
@@ -59,11 +67,13 @@ def create_product_session(
     *,
     action_budget: int = ARC3_DEVELOPMENT_ACTION_BUDGET,
     mode: str = "COMPETITION",
+    initial_state: InitialStateBundle | None = None,
 ) -> CognitiveSession:
     """Load the one compiled P/J0/M0 product identity into a new session."""
 
-    initial = load_product_initial_state()
+    initial = initial_state or load_product_initial_state()
     selected_j0 = _selected_product_hds_configuration(
+        initial_state=initial,
         action_budget=action_budget,
     )
     return create_cognitive_session(
@@ -82,19 +92,18 @@ def _require_product_session_binding(
     session: CognitiveSession,
     *,
     action_budget: int,
+    initial_state: InitialStateBundle | None = None,
 ) -> None:
     """Fail closed unless the session is the packaged P/J0/M0 product."""
 
-    initial = load_product_initial_state()
+    initial = initial_state or load_product_initial_state()
     expected_j0 = _selected_product_hds_configuration(
+        initial_state=initial,
         action_budget=action_budget,
     )
-    expected_m0 = {
-        record.memory_id: digest_object(record) for record in initial.m0
-    }
+    expected_m0 = {record.memory_id: digest_object(record) for record in initial.m0}
     active_memory = {
-        record.memory_id: digest_object(record)
-        for record in session.memory.snapshot()
+        record.memory_id: digest_object(record) for record in session.memory.snapshot()
     }
     expected_identity = build_runtime_identity(
         p_bundle=initial.p_bundle.body,
@@ -127,6 +136,7 @@ def run_arc3_completion_product(
     session_factory: Callable[[], CognitiveSession] | None = None,
     action_budget: int = ARC3_DEVELOPMENT_ACTION_BUDGET,
     session_mode: str = "COMPETITION",
+    release_bundle: LoadedProductReleaseBundle | None = None,
 ) -> dict[str, object]:
     """Run the one product path and evaluate the actual product endpoint."""
 
@@ -134,6 +144,11 @@ def run_arc3_completion_product(
         from agents.templates.arc3_completion_agent import ARC3CompletionAgent
 
         agent_factory = ARC3CompletionAgent
+    selected_initial_state = (
+        release_bundle.initial_state
+        if release_bundle is not None
+        else load_product_initial_state()
+    )
     source_session_factory = session_factory
     if source_session_factory is None:
 
@@ -141,6 +156,7 @@ def run_arc3_completion_product(
             return create_product_session(
                 action_budget=action_budget,
                 mode=session_mode,
+                initial_state=selected_initial_state,
             )
 
     created_sessions: list[CognitiveSession] = []
@@ -152,6 +168,7 @@ def run_arc3_completion_product(
         _require_product_session_binding(
             session,
             action_budget=action_budget,
+            initial_state=selected_initial_state,
         )
         created_sessions.append(session)
         return session
@@ -164,7 +181,7 @@ def run_arc3_completion_product(
     if len(created_sessions) != 1:
         raise RuntimeError("ARC3_PRODUCT_SESSION_COUNT_INVALID")
     product_session = created_sessions[0]
-    initial = load_product_initial_state()
+    initial = selected_initial_state
     result_rows = report.get("results", ())
     if not isinstance(result_rows, list):
         raise TypeError("ARC3_PRODUCT_RESULT_ROWS_INVALID")
@@ -186,23 +203,77 @@ def run_arc3_completion_product(
     product_seed_citation_ids = tuple(
         item for item in citation_ids if item.startswith("product-seed:")
     )
+    active_dev_families = (
+        () if release_bundle is not None else active_dev_mechanism_families()
+    )
+    release_families: tuple[Mapping[str, object], ...] = ()
+    if release_bundle is not None:
+        raw_release_families = release_bundle.mechanism_family_registry.get("families")
+        if not isinstance(raw_release_families, list) or not all(
+            isinstance(item, Mapping) for item in raw_release_families
+        ):
+            raise TypeError("ARC3_PRODUCT_RELEASE_FAMILY_REGISTRY_INVALID")
+        release_families = tuple(
+            {str(key): value for key, value in item.items()}
+            for item in raw_release_families
+        )
+    action_id_counts: dict[str, int] = {}
+    for row in result_rows:
+        if not isinstance(row, dict):
+            continue
+        row_counts = row.get("action_id_counts", {})
+        if not isinstance(row_counts, dict):
+            raise TypeError("ARC3_PRODUCT_ACTION_ID_COUNTS_INVALID")
+        for action_id, count in row_counts.items():
+            key = str(action_id)
+            action_id_counts[key] = action_id_counts.get(key, 0) + int(count)
+    memory_causal_behavior_change_count = sum(
+        int(row.get("memory_causal_behavior_change_count", 0))
+        for row in result_rows
+        if isinstance(row, dict)
+    )
+    memory_causal_witness_refs = tuple(
+        sorted(
+            {
+                str(witness)
+                for row in result_rows
+                if isinstance(row, dict)
+                for witness in row.get("memory_causal_witness_refs", ())
+            }
+        )
+    )
     report.update(ARC3_PRODUCT_ENDPOINT.metrics(report))
     report.update(
         {
             "product_runner_version": ARC3_PRODUCT_RUNNER_VERSION,
-            "product_capability_status": "PRODUCT_CAPABILITY_BUNDLE_LOADED",
+            "product_capability_status": (
+                "PRODUCT_RELEASE_BUNDLE_LOADED"
+                if release_bundle is not None
+                else "PRODUCT_CAPABILITY_BUNDLE_LOADED"
+            ),
+            "product_bundle_stage": (
+                PRODUCT_RELEASE_STAGE if release_bundle is not None else "ACTIVE_DEV"
+            ),
+            "product_release_bundle_loaded": release_bundle is not None,
+            "product_release_bundle_id": (
+                release_bundle.descriptor.get("product_bundle_id")
+                if release_bundle is not None
+                else None
+            ),
+            "product_release_bundle_logical_digest": (
+                release_bundle.logical_digest if release_bundle is not None else None
+            ),
+            "product_release_bundle_sha256": (
+                release_bundle.package_sha256 if release_bundle is not None else None
+            ),
             "product_initial_state_logical_digest": initial.logical_digest,
             "product_p_logical_digest": initial.p_bundle.logical_digest(),
             "product_p_program_id": initial.p_bundle.program.program_id,
             "product_p_body_format": initial.p_bundle.body.format_id(),
             "product_p_body_version": initial.p_bundle.body.body_version(),
-            "product_p_compiler_mode": (
-                initial.p_bundle.compiler_report.mode
-            ),
+            "product_p_compiler_mode": (initial.p_bundle.compiler_report.mode),
             "product_bundle_j0_digest": "j0:" + digest_object(initial.j0),
-            "product_j0_digest": (
-                "j0:" + digest_object(product_session.hds_config)
-            ),
+            "product_j0_digest": ("j0:" + digest_object(product_session.hds_config)),
             "product_m0_digest": "m0:" + digest_object(initial.m0),
             "product_m0_record_count": len(initial.m0),
             "product_runtime_identity_digest": (
@@ -211,15 +282,34 @@ def run_arc3_completion_product(
             "p_j0_m0_runtime_identity_bound": True,
             "product_memory_citation_count": citation_count,
             "product_memory_citation_ids": citation_ids,
-            "product_teacher_seed_citation_count": len(
-                product_seed_citation_ids
+            "product_teacher_seed_citation_count": len(product_seed_citation_ids),
+            "product_teacher_seed_citation_ids": (product_seed_citation_ids),
+            "product_teacher_structure_cited": bool(product_seed_citation_ids),
+            "product_active_dev_mechanism_family_count": len(active_dev_families),
+            "product_active_dev_mechanism_family_ids": tuple(
+                family.family_id for family in active_dev_families
             ),
-            "product_teacher_seed_citation_ids": (
-                product_seed_citation_ids
+            "product_active_dev_mechanism_family_digests": tuple(
+                family.logical_digest() for family in active_dev_families
             ),
-            "product_teacher_structure_cited": bool(
-                product_seed_citation_ids
+            "product_release_frozen_mechanism_family_count": len(release_families),
+            "product_release_frozen_mechanism_family_ids": tuple(
+                str(family.get("family_id")) for family in release_families
             ),
+            "product_release_frozen_mechanism_family_digests": tuple(
+                str(family.get("release_logical_digest")) for family in release_families
+            ),
+            "product_action_id_counts": {
+                action_id: action_id_counts[action_id]
+                for action_id in sorted(
+                    action_id_counts,
+                    key=int,
+                )
+            },
+            "product_memory_causal_behavior_change_count": (
+                memory_causal_behavior_change_count
+            ),
+            "product_memory_causal_witness_refs": (memory_causal_witness_refs),
             "compatibility_p_ir_active": False,
             "hybrid_baseline_instruction_body_active": False,
         }
@@ -304,6 +394,7 @@ def run_arc3_completion_offline(
     requested_games: tuple[str, ...] = (),
     recordings_dir: Path | None = None,
     action_budget: int = ARC3_DEVELOPMENT_ACTION_BUDGET,
+    release_bundle: LoadedProductReleaseBundle | None = None,
 ) -> dict[str, object]:
     """Run the product C/J/M/P path against official bundled environments."""
 
@@ -333,6 +424,7 @@ def run_arc3_completion_offline(
         arcade=_SelectedOfflineArcade(arcade, selected),
         action_budget=action_budget,
         session_mode="VALIDATION",
+        release_bundle=release_bundle,
     )
     report.update(
         {
@@ -367,6 +459,9 @@ def _parser() -> argparse.ArgumentParser:
         default=ARC3_DEVELOPMENT_ACTION_BUDGET,
     )
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--release-descriptor", type=Path)
+    parser.add_argument("--release-bundle", type=Path)
+    parser.add_argument("--release-frozen", action="store_true")
     return parser
 
 
@@ -381,11 +476,7 @@ def product_process_exit_code(
         raise ValueError("ARC3_PRODUCT_PROCESS_MODE_INVALID")
     if mode == "competition":
         return 0
-    return (
-        0
-        if report.get("known_sample_regression_established") is True
-        else 2
-    )
+    return 0 if report.get("known_sample_regression_established") is True else 2
 
 
 def main() -> int:
@@ -394,18 +485,37 @@ def main() -> int:
         format="%(asctime)s | %(levelname)s | %(message)s",
     )
     arguments = _parser().parse_args()
+    if (arguments.release_descriptor is None) != (arguments.release_bundle is None):
+        raise ValueError("ARC3_PRODUCT_RELEASE_ARTIFACT_PAIR_REQUIRED")
+    if arguments.release_frozen and arguments.release_descriptor is not None:
+        raise ValueError("ARC3_PRODUCT_RELEASE_SELECTION_AMBIGUOUS")
+    release_bundle = (
+        load_default_product_release_bundle()
+        if arguments.release_frozen
+        else (
+            load_product_release_bundle(
+                descriptor_path=arguments.release_descriptor,
+                package_path=arguments.release_bundle,
+            )
+            if arguments.release_descriptor is not None
+            and arguments.release_bundle is not None
+            else None
+        )
+    )
     if arguments.mode == "offline":
         report = run_arc3_completion_offline(
             environments_dir=arguments.environments_dir,
             requested_games=tuple(arguments.game),
             recordings_dir=arguments.recordings_dir,
             action_budget=arguments.action_budget,
+            release_bundle=release_bundle,
         )
     else:
         if arguments.game:
             raise ValueError("ARC3_PRODUCT_COMPETITION_GAME_FILTER_FORBIDDEN")
         report = run_arc3_completion_product(
             action_budget=arguments.action_budget,
+            release_bundle=release_bundle,
         )
     encoded = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=True)
     print(encoded)

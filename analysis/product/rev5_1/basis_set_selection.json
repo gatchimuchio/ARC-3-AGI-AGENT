@@ -1,0 +1,379 @@
+{
+  "schema_version": "arc3-rev5-1-basis-set-selection-v1",
+  "artifact_type": "BasisSetSelection",
+  "point_id": "M0-P03_BASIS_SET_SELECTION",
+  "status": "M0_P03_COMPLETE",
+  "consumed_by_next_point": "M0-P04_BASIS_CASE_DEEP_HDS_ANALYSIS",
+  "input_contract": {
+    "only_input": "analysis/product/rev5_1/capability_coverage_matrix.json",
+    "sha256": "7cc9a81a83f997e2df1fa5fd00ec3024dd1351525915abbfb79e67a6eaf90e9e",
+    "matrix_status": "M0_P02_COMPLETE",
+    "matrix_game_count": 25,
+    "matrix_level_count": 183,
+    "external_input_count": 0
+  },
+  "mandatory_surface_predicates": {
+    "KEYBOARD_ONLY": "basis_coverage_tags contains KEYBOARD_ONLY",
+    "ACTION6_ONLY": "basis_coverage_tags contains ACTION6_ONLY",
+    "MIXED_ACTION_SURFACE": "basis_coverage_tags contains MIXED_DIRECTION_AND_XY",
+    "RESET": "reset_usage.observed is true",
+    "ACTION7": "action7_usage.observed is true; availability alone is not sufficient",
+    "TEMPORAL_COMPLEXITY": "temporal_or_animation_complexity.classification is VERY_LONG_MULTI_FRAME",
+    "LONG_HORIZON_RESOURCE": "planning_depth.classification is DEEP or EXTREME"
+  },
+  "minimum_set_proof": {
+    "minimum_cardinality": 3,
+    "minimum_solution_count": 9,
+    "lower_bound": "KEYBOARD_ONLY, ACTION6_ONLY, and MIXED_ACTION_SURFACE are mutually exclusive row tags, so at least three games are required.",
+    "enumeration_scope": "ALL_COMBINATIONS_OF_25_MATRIX_ROWS",
+    "minimum_solutions": [
+      {
+        "game_ids": [
+          "ft09-0d8bbf25",
+          "g50t-5849a774",
+          "lf52-271a04aa"
+        ],
+        "selected": false,
+        "teacher_total_actions": 1657,
+        "maximum_actions_per_level": 380,
+        "maximum_render_layer_count": 95
+      },
+      {
+        "game_ids": [
+          "g50t-5849a774",
+          "lf52-271a04aa",
+          "lp85-305b61c3"
+        ],
+        "selected": false,
+        "teacher_total_actions": 1819,
+        "maximum_actions_per_level": 380,
+        "maximum_render_layer_count": 95
+      },
+      {
+        "game_ids": [
+          "g50t-5849a774",
+          "lf52-271a04aa",
+          "r11l-495a7899"
+        ],
+        "selected": false,
+        "teacher_total_actions": 1734,
+        "maximum_actions_per_level": 380,
+        "maximum_render_layer_count": 95
+      },
+      {
+        "game_ids": [
+          "g50t-5849a774",
+          "lf52-271a04aa",
+          "s5i5-18d95033"
+        ],
+        "selected": false,
+        "teacher_total_actions": 2086,
+        "maximum_actions_per_level": 380,
+        "maximum_render_layer_count": 95
+      },
+      {
+        "game_ids": [
+          "g50t-5849a774",
+          "lf52-271a04aa",
+          "tn36-ef4dde99"
+        ],
+        "selected": false,
+        "teacher_total_actions": 1817,
+        "maximum_actions_per_level": 380,
+        "maximum_render_layer_count": 95
+      },
+      {
+        "game_ids": [
+          "g50t-5849a774",
+          "lf52-271a04aa",
+          "vc33-5430563c"
+        ],
+        "selected": false,
+        "teacher_total_actions": 1920,
+        "maximum_actions_per_level": 380,
+        "maximum_render_layer_count": 95
+      },
+      {
+        "game_ids": [
+          "lf52-271a04aa",
+          "ls20-9607627b",
+          "vc33-5430563c"
+        ],
+        "selected": false,
+        "teacher_total_actions": 1917,
+        "maximum_actions_per_level": 380,
+        "maximum_render_layer_count": 65
+      },
+      {
+        "game_ids": [
+          "lf52-271a04aa",
+          "tr87-cd924810",
+          "vc33-5430563c"
+        ],
+        "selected": false,
+        "teacher_total_actions": 1746,
+        "maximum_actions_per_level": 380,
+        "maximum_render_layer_count": 65
+      },
+      {
+        "game_ids": [
+          "lf52-271a04aa",
+          "vc33-5430563c",
+          "wa30-ee6fef47"
+        ],
+        "selected": true,
+        "teacher_total_actions": 2964,
+        "maximum_actions_per_level": 645,
+        "maximum_render_layer_count": 65
+      }
+    ]
+  },
+  "selected_basis": {
+    "basis_id": "ARC3_M0_BASIS_REV5_1_V1",
+    "ordered_game_count": 3,
+    "ordered_games": [
+      {
+        "order": 1,
+        "game_id": "vc33-5430563c",
+        "level_count": 7,
+        "input_modality": "COORDINATE_CLICK",
+        "available_action_ids": [
+          6
+        ],
+        "observed_action_ids": [
+          6
+        ],
+        "reset_count": 0,
+        "action6_count": 338,
+        "action7_count": 0,
+        "temporal_class": "VERY_LONG_MULTI_FRAME",
+        "maximum_render_layer_count": 65,
+        "teacher_total_actions": 338,
+        "maximum_actions_per_level": 109,
+        "planning_depth": "MULTI_STEP",
+        "spatial_binding_type": [
+          "ABSOLUTE_XY"
+        ],
+        "goal_advancement": "COORDINATE_TRIGGERED_AUTO_ADVANCE",
+        "mandatory_surfaces_covered": [
+          "ACTION6_ONLY",
+          "TEMPORAL_COMPLEXITY"
+        ],
+        "selection_rationale": {
+          "closes": [
+            "ACTION6_ONLY",
+            "TEMPORAL_COMPLEXITY"
+          ],
+          "reason": "Combines a pure ACTION6/x-y surface with VERY_LONG_MULTI_FRAME observations; no other selected game is needed to isolate coordinate binding.",
+          "preferred_over": {
+            "candidate_game_ids": [
+              "ft09-0d8bbf25",
+              "lp85-305b61c3",
+              "r11l-495a7899",
+              "s5i5-18d95033",
+              "tn36-ef4dde99"
+            ],
+            "reason": "It is the only ACTION6_ONLY candidate classified VERY_LONG_MULTI_FRAME, so it preserves the minimum cardinality while adding temporal stress."
+          }
+        }
+      },
+      {
+        "order": 2,
+        "game_id": "lf52-271a04aa",
+        "level_count": 10,
+        "input_modality": "COORDINATE_CLICK",
+        "available_action_ids": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          7
+        ],
+        "observed_action_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          7
+        ],
+        "reset_count": 1,
+        "action6_count": 424,
+        "action7_count": 1,
+        "temporal_class": "EXTENDED_MULTI_FRAME",
+        "maximum_render_layer_count": 27,
+        "teacher_total_actions": 1107,
+        "maximum_actions_per_level": 380,
+        "planning_depth": "DEEP",
+        "spatial_binding_type": [
+          "RELATIVE_DIRECTIONAL_GRID",
+          "ABSOLUTE_XY",
+          "RECOVERY_CONTROL"
+        ],
+        "goal_advancement": "COORDINATE_TRIGGERED_AUTO_ADVANCE",
+        "mandatory_surfaces_covered": [
+          "MIXED_ACTION_SURFACE",
+          "RESET",
+          "ACTION7",
+          "LONG_HORIZON_RESOURCE"
+        ],
+        "selection_rationale": {
+          "closes": [
+            "MIXED_ACTION_SURFACE",
+            "RESET",
+            "ACTION7",
+            "LONG_HORIZON_RESOURCE"
+          ],
+          "reason": "Carries direction plus x-y actions, observed RESET and ACTION7, and DEEP planning in one case.",
+          "preferred_over": {
+            "candidate_game_ids": [
+              "su15-1944f8ab"
+            ],
+            "reason": "The other observed ACTION7 candidate does not cover the mixed direction/x-y surface or DEEP planning, which would require an additional basis game."
+          }
+        }
+      },
+      {
+        "order": 3,
+        "game_id": "wa30-ee6fef47",
+        "level_count": 9,
+        "input_modality": "KEYBOARD",
+        "available_action_ids": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "observed_action_ids": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "reset_count": 12,
+        "action6_count": 0,
+        "action7_count": 0,
+        "temporal_class": "SHORT_MULTI_FRAME",
+        "maximum_render_layer_count": 2,
+        "teacher_total_actions": 1519,
+        "maximum_actions_per_level": 645,
+        "planning_depth": "EXTREME",
+        "spatial_binding_type": [
+          "RELATIVE_DIRECTIONAL_GRID",
+          "NONSPATIAL_COMMIT",
+          "RECOVERY_CONTROL"
+        ],
+        "goal_advancement": "MIXED_ACTION_STATE_REACH_AUTO_ADVANCE",
+        "mandatory_surfaces_covered": [
+          "KEYBOARD_ONLY",
+          "RESET",
+          "LONG_HORIZON_RESOURCE"
+        ],
+        "selection_rationale": {
+          "closes": [
+            "KEYBOARD_ONLY",
+            "RESET",
+            "LONG_HORIZON_RESOURCE"
+          ],
+          "reason": "Covers keyboard-only control and the sole EXTREME planning/resource case: 1519 total teacher actions and 645 actions in one level.",
+          "preferred_over": {
+            "candidate_game_ids": [
+              "g50t-5849a774",
+              "ls20-9607627b",
+              "tr87-cd924810"
+            ],
+            "reason": "Temporal stress is already covered by VC33; WA30 uniquely adds the EXTREME long-horizon surface and observed ACTION5 use."
+          }
+        }
+      }
+    ],
+    "surface_carriers": {
+      "KEYBOARD_ONLY": [
+        "wa30-ee6fef47"
+      ],
+      "ACTION6_ONLY": [
+        "vc33-5430563c"
+      ],
+      "MIXED_ACTION_SURFACE": [
+        "lf52-271a04aa"
+      ],
+      "RESET": [
+        "lf52-271a04aa",
+        "wa30-ee6fef47"
+      ],
+      "ACTION7": [
+        "lf52-271a04aa"
+      ],
+      "TEMPORAL_COMPLEXITY": [
+        "vc33-5430563c"
+      ],
+      "LONG_HORIZON_RESOURCE": [
+        "lf52-271a04aa",
+        "wa30-ee6fef47"
+      ]
+    },
+    "uncovered_mandatory_surfaces": []
+  },
+  "selection_audit": {
+    "short_game_only": false,
+    "single_action_surface_only": false,
+    "single_goal_advancement_only": false,
+    "desired_answer_convenience_used": false,
+    "successful_action_sequence_used": false,
+    "deep_hds_analysis_started": false,
+    "diversity_evidence": {
+      "input_modalities": [
+        "COORDINATE_CLICK",
+        "KEYBOARD"
+      ],
+      "temporal_classes": [
+        "EXTENDED_MULTI_FRAME",
+        "SHORT_MULTI_FRAME",
+        "VERY_LONG_MULTI_FRAME"
+      ],
+      "planning_depth_classes": [
+        "DEEP",
+        "EXTREME",
+        "MULTI_STEP"
+      ],
+      "goal_advancement_classes": [
+        "COORDINATE_TRIGGERED_AUTO_ADVANCE",
+        "MIXED_ACTION_STATE_REACH_AUTO_ADVANCE"
+      ],
+      "spatial_binding_types": [
+        "ABSOLUTE_XY",
+        "NONSPATIAL_COMMIT",
+        "RECOVERY_CONTROL",
+        "RELATIVE_DIRECTIONAL_GRID"
+      ]
+    },
+    "mechanism_family_claim": "NOT_MADE_BY_SHALLOW_P03",
+    "basis_expansion_condition": "If M0-P04 proves that selected cases collapse to one mechanism family or exposes an uncovered mandatory capability, return to M0-P03 and add the smallest matrix-backed alternative."
+  },
+  "p04_analysis_obligations": [
+    "Establish semantic goal predicates for each selected game.",
+    "Identify intra-level phase predicates and phase transitions.",
+    "Test cross-action delayed effects rather than inferring them from frame-stack length.",
+    "Distinguish observed RESET/ACTION7 use from rollback necessity by counterfactual evidence.",
+    "Replace teacher-action depth proxies with mechanism segments, loops, and stop conditions."
+  ],
+  "exit_audit": {
+    "mandatory_surface_coverage_complete": true,
+    "selected_basis_cardinality_is_minimum": true,
+    "desired_answer_convenience_only": false,
+    "basis_order_fixed_for_m0": true,
+    "uncovered_capability_count": 0,
+    "explicit_additional_conditions_recorded": true,
+    "new_shell_count": 0,
+    "new_runner_count": 0,
+    "new_package_count": 0,
+    "runtime_product_change": "NONE_BY_P03_DESIGN",
+    "allowed_claim": "M0_P03_BASIS_SELECTION_ONLY",
+    "product_completion_claim": false
+  }
+}

@@ -434,6 +434,7 @@ class GenericHDSJudgementSubject:
                 {
                     *(f"legal-action:{item}" for item in observation.available_actions),
                     *(f"active-memory:{item.memory_id}" for item in memory.active),
+                    *(f"working-memory:{item.memory_id}" for item in memory.working),
                     *(f"sealed-boundary:{item.memory_id}" for item in memory.sealed),
                 }
             )
@@ -763,7 +764,24 @@ class GenericHDSJudgementSubject:
                 next_probe="find-lower-risk-candidate",
             )
         )
-        gates.append(_gate("G11", "NOT_APPLICABLE"))
+        temporal_attribution_pass = observation.action_complete
+        gates.append(
+            _gate(
+                "G11",
+                "PASS" if temporal_attribution_pass else "SUSPEND",
+                *(
+                    ()
+                    if temporal_attribution_pass
+                    else ("TEMPORAL_EFFECT_UNSETTLED",)
+                ),
+                required_information=(
+                    ()
+                    if temporal_attribution_pass
+                    else ("action-complete rendered observation",)
+                ),
+                next_probe="wait-for-action-complete-render",
+            )
+        )
         resource_pass = frame.resource_budget > 0
         gates.append(
             _gate(

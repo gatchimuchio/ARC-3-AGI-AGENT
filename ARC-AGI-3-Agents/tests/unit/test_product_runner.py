@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 import pytest
 
@@ -15,6 +16,10 @@ from arc3_agi_agent.identity_boundary import IdentityBoundary
 from arc3_agi_agent.product_capability import (
     PRODUCT_CAPABILITY_PROGRAM_ID,
     load_product_initial_state,
+)
+from arc3_agi_agent.product_release import (
+    PRODUCT_RELEASE_STAGE,
+    load_product_release_bundle,
 )
 from arc3_agi_agent.product_runner import (
     ARC3_DEVELOPMENT_ACTION_BUDGET,
@@ -194,6 +199,11 @@ def test_product_runner_reports_endpoint_metrics_without_false_completion() -> N
     assert report["hybrid_baseline_instruction_body_active"] is False
     assert report["product_p_compiler_mode"] == "PRODUCT"
     assert report["product_p_program_id"] == PRODUCT_CAPABILITY_PROGRAM_ID
+    assert report["product_action_id_counts"] == {}
+    assert report["product_active_dev_mechanism_family_count"] == 1
+    assert report["product_active_dev_mechanism_family_ids"] == (
+        "RELATION_BOUND_ACTION_EMISSION",
+    )
 
 
 def test_product_runner_rejects_p_removal_from_the_product_path() -> None:
@@ -212,6 +222,35 @@ def test_product_runner_rejects_p_removal_from_the_product_path() -> None:
             session_factory=ablated_session_factory,
         )
 
+
+def test_product_runner_binds_the_explicit_release_artifact() -> None:
+    repository_root = Path(__file__).resolve().parents[3]
+    bundle_directory = (
+        repository_root / "ARC-AGI-3-Agents" / "arc3_agi_agent" / "bundles"
+    )
+    release = load_product_release_bundle(
+        descriptor_path=bundle_directory / "arc3_product_release_v1.json",
+        package_path=bundle_directory / "arc3_product_release_v1.zip",
+    )
+    _ProductAgent.call_count = 0
+
+    report = run_arc3_completion_product(
+        arcade=_Arcade(),
+        agent_factory=_ProductAgent,
+        release_bundle=release,
+    )
+
+    assert report["product_capability_status"] == "PRODUCT_RELEASE_BUNDLE_LOADED"
+    assert report["product_bundle_stage"] == PRODUCT_RELEASE_STAGE
+    assert report["product_release_bundle_loaded"] is True
+    assert report["product_release_bundle_id"] == "ARC3ProductBundle-release-v1"
+    assert report["product_release_bundle_logical_digest"] == release.logical_digest
+    assert report["product_release_bundle_sha256"] == release.package_sha256
+    assert report["product_active_dev_mechanism_family_count"] == 0
+    assert report["product_release_frozen_mechanism_family_count"] == 1
+    assert report["product_release_frozen_mechanism_family_ids"] == (
+        "RELATION_BOUND_ACTION_EMISSION",
+    )
 
 def test_hidden_score_incompleteness_is_not_a_competition_transport_error() -> None:
     incomplete = {"known_sample_regression_established": False}

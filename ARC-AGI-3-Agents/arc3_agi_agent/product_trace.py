@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from .compiled_policy import MEMORY_CAUSAL_WITNESS_PREFIX
 from .generic_types import GenericCycleTrace
 
 
@@ -26,12 +27,23 @@ class ProductTraceSummarySink:
     subgoal_plan_count: int = 0
     max_plan_step_count: int = 0
     failure_attribution_count: int = 0
+    action_id_counts: dict[int, int] = field(default_factory=dict)
+    memory_causal_behavior_change_count: int = 0
+    memory_causal_witness_refs: set[str] = field(default_factory=set)
+    _prior_cycle_memory_updated: bool = field(
+        default=False,
+        init=False,
+        repr=False,
+    )
 
     def append(self, trace: GenericCycleTrace) -> None:
         citations = trace.compute_result.memory_citations
         self.citation_count += len(citations)
         self.citation_ids.update(item.memory_id for item in citations)
         if trace.attribution is None:
+            self._prior_cycle_memory_updated = bool(
+                trace.memory_update_digests
+            )
             return
         plan = (
             trace.selected_candidate.plan
@@ -42,6 +54,28 @@ class ProductTraceSummarySink:
             raise RuntimeError("PRODUCT_EXECUTED_PLAN_MISSING")
         if trace.decision.selected_plan_id != plan.plan_id:
             raise RuntimeError("PRODUCT_HDS_PLAN_COMMIT_MISMATCH")
+        if trace.selected_candidate is not None:
+            action_id = trace.selected_candidate.descriptor.action_id
+        elif trace.attribution.action_semantic_key == "control:rollback":
+            action_id = 0
+        else:
+            raise RuntimeError("PRODUCT_EXECUTED_ACTION_ID_MISSING")
+        self.action_id_counts[action_id] = (
+            self.action_id_counts.get(action_id, 0) + 1
+        )
+        instruction_refs = (
+            trace.selected_candidate.typed_provenance.p_instruction_refs
+            if trace.selected_candidate is not None
+            else trace.compute_result.control_instruction_refs
+        )
+        memory_causal_witnesses = {
+            ref
+            for ref in instruction_refs
+            if ref.startswith(MEMORY_CAUSAL_WITNESS_PREFIX)
+        }
+        if memory_causal_witnesses and self._prior_cycle_memory_updated:
+            self.memory_causal_behavior_change_count += 1
+            self.memory_causal_witness_refs.update(memory_causal_witnesses)
         self.executed_plan_count += 1
         self.hds_plan_commit_count += 1
         if plan.revision_reason == "INITIAL_ONLINE_PLAN":
@@ -68,6 +102,7 @@ class ProductTraceSummarySink:
         )
         if trace.attribution.category == "FAILURE":
             self.failure_attribution_count += 1
+        self._prior_cycle_memory_updated = bool(trace.memory_update_digests)
 
 
 __all__ = ["ProductTraceSummarySink"]

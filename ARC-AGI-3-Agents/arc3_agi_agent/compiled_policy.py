@@ -49,6 +49,7 @@ COMPILED_POLICY_PALETTE_SIZE: Final = 16
 COMPILED_POLICY_HISTORY_LIMIT: Final = 16
 COMPILED_POLICY_POINTER_ACTION_ID: Final = 6
 COMPILED_POLICY_RESET_ACTION_ID: Final = 0
+MEMORY_CAUSAL_WITNESS_PREFIX: Final = "memory-causal-witness:"
 
 
 def _bundle_path(filename: str) -> Path:
@@ -594,6 +595,35 @@ class CompiledAutonomousInstructionBody:
                 control_instruction_refs=rollback_refs,
             )
         decision = self.predict(observation, action_history)
+        memory_causal_witness_refs: tuple[str, ...] = ()
+        if action_history:
+            without_memory = self.predict(observation, ())
+            actual_semantic_action = (
+                decision.action_id,
+                decision.horizontal,
+                decision.vertical,
+            )
+            counterfactual_semantic_action = (
+                without_memory.action_id,
+                without_memory.horizontal,
+                without_memory.vertical,
+            )
+            if actual_semantic_action != counterfactual_semantic_action:
+                memory_causal_witness_refs = (
+                    MEMORY_CAUSAL_WITNESS_PREFIX
+                    + digest_object(
+                        {
+                            "observation": observation.digest(),
+                            "actual": actual_semantic_action,
+                            "without_action_effect_memory": (
+                                counterfactual_semantic_action
+                            ),
+                            "history": tuple(
+                                record.digest() for record in action_history
+                            ),
+                        }
+                    ),
+                )
         uncertainty = min(
             0.49,
             1.0 / (1.0 + max(0.0, decision.action_margin)),
@@ -606,6 +636,7 @@ class CompiledAutonomousInstructionBody:
             decision.head_id,
             decision.feature_digest,
             history_ref,
+            *memory_causal_witness_refs,
         )
         predictions: list[GenericPrediction] = []
         control_operation = ""
@@ -836,6 +867,7 @@ __all__ = [
     "COMPILED_POLICY_MANIFEST_FILENAME",
     "COMPILED_POLICY_SCHEMA_VERSION",
     "COMPILED_POLICY_WEIGHTS_FILENAME",
+    "MEMORY_CAUSAL_WITNESS_PREFIX",
     "CompiledAutonomousInstructionBody",
     "CompiledDenseHead",
     "CompiledPolicyDecision",

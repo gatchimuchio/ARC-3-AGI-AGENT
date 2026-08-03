@@ -39,6 +39,7 @@ from .generic_types import (
     GenericRunReport,
     OutcomeAttribution,
 )
+from .local_capability import refresh_local_capability_memory
 from .schema import digest_object
 
 GENERIC_RUNTIME_VERSION = "arc3-generic-agi-runtime-v1"
@@ -545,6 +546,23 @@ class GenericAGIRuntime:
         if observation_failures:
             raise ValueError(";".join(observation_failures))
         initial_digest = observation.digest()
+        local_refresh = refresh_local_capability_memory(
+            self.memory,
+            observation,
+        )
+        initial_local_memory_event_digest = self.session.ledger.append(
+            "LOCAL_M_REFRESH",
+            {
+                "refresh_digest": local_refresh.digest(),
+                "observation_digest": local_refresh.observation_digest,
+                "added_ids": local_refresh.added_ids,
+                "revised_ids": local_refresh.revised_ids,
+                "invalidated_ids": local_refresh.invalidated_ids,
+                "retained_ids": local_refresh.retained_ids,
+                "working_record_ids": local_refresh.working_record_ids,
+                "capability_ids": local_refresh.capability_ids,
+            },
+        )
         self.session.identity_boundary.require_decision_context(observation)
         initial_level_event_digest = self.session.bind_level_scope(
             self.episode_handle,
@@ -568,10 +586,31 @@ class GenericAGIRuntime:
                 "episode_handle_digest": self.episode_handle.handle_digest,
                 "initial_observation_digest": initial_digest,
                 "initial_level_event_digest": initial_level_event_digest,
+                "initial_local_memory_event_digest": (
+                    initial_local_memory_event_digest
+                ),
             },
         )
 
         for cycle_index in range(self.configuration.max_cycles):
+            if observation.digest() != local_refresh.observation_digest:
+                local_refresh = refresh_local_capability_memory(
+                    self.memory,
+                    observation,
+                )
+                self.session.ledger.append(
+                    "LOCAL_M_REFRESH",
+                    {
+                        "refresh_digest": local_refresh.digest(),
+                        "observation_digest": local_refresh.observation_digest,
+                        "added_ids": local_refresh.added_ids,
+                        "revised_ids": local_refresh.revised_ids,
+                        "invalidated_ids": local_refresh.invalidated_ids,
+                        "retained_ids": local_refresh.retained_ids,
+                        "working_record_ids": local_refresh.working_record_ids,
+                        "capability_ids": local_refresh.capability_ids,
+                    },
+                )
             remaining = self.configuration.max_cycles - cycle_index
             if self.session.control.cycle_index != cycle_index:
                 raise RuntimeError("GENERIC_CONTROL_CYCLE_INDEX_DIVERGED")

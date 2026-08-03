@@ -1,0 +1,234 @@
+{
+  "schema_version": "arc3-rev5-1-full-sample-failure-capability-inventory-v1",
+  "artifact_type": "FullSampleFailureCapabilityInventory",
+  "point_id": "M1-P01_FULL_SAMPLE_FAILURE_CAPABILITY_INVENTORY",
+  "status": "M1_P01_COMPLETE",
+  "runtime_product": "ARC3CompletionAgent",
+  "asset_stage": "ACTIVE_DEV",
+  "input_contract": {
+    "initial_horizontal_subtraction": "analysis/product/rev5_1/initial_horizontal_subtraction.json",
+    "initial_horizontal_subtraction_sha256": "31a6ded9ab918f8583aa7289e10fc63375a1e07c0de28f5155c31b7d59a9f062",
+    "active_dev_capability_count": 1,
+    "active_dev_capability_ids": [
+      "RELATION_BOUND_ACTION_EMISSION"
+    ],
+    "official_sample_game_target": 25,
+    "official_sample_level_target": 183
+  },
+  "full_sample_run": {
+    "report": "analysis/product/rev5_1/m1_p01_full_sample_inventory_run.json",
+    "report_sha256": "f5212c742cafa49992edfe1c15c242aeebc9732fc4ae291c79a29ebee3c2b131",
+    "operation_mode": "OFFLINE",
+    "action_budget_per_game": 4096,
+    "advertised_game_count": 25,
+    "attempted_game_count": 25,
+    "completed_game_count": 25,
+    "game_win_count": 25,
+    "level_completion_count": 183,
+    "total_action_count": 10733,
+    "failed_game_count": 0,
+    "lifecycle_failure_count": 0,
+    "runtime_failure_signature_row_count": 0,
+    "endpoint_failure_count": 0,
+    "shared_session_count": 1,
+    "scorecard_open_count": 1,
+    "scorecard_close_count": 1,
+    "scorecard_closed": true,
+    "state_owner_violation_count": 0,
+    "known_sample_regression_established": true,
+    "known_sample_regression_status": "KNOWN_SAMPLE_REGRESSION_COMPLETE",
+    "product_completion_established": false,
+    "product_status": "GENERICITY_NOT_ESTABLISHED"
+  },
+  "trinity_runtime_metrics": {
+    "executed_plan_count": 10733,
+    "hds_plan_commit_count": 10733,
+    "authorization_and_attribution_coverage": "10733/10733",
+    "initial_plan_count": 25,
+    "revised_plan_count": 10708,
+    "memory_bound_plan_count": 10708,
+    "competing_hypothesis_plan_count": 10733,
+    "multi_representation_plan_count": 10733,
+    "subgoal_plan_count": 10733,
+    "memory_causal_behavior_change_count": 7567,
+    "failed_hypothesis_invalidation_count": 478,
+    "failure_attribution_count": 12,
+    "rollback_plan_count": 42,
+    "post_rollback_replan_count": 42
+  },
+  "observed_action_surface": {
+    "0": 42,
+    "1": 1610,
+    "2": 1648,
+    "3": 1888,
+    "4": 2075,
+    "5": 340,
+    "6": 3112,
+    "7": 18
+  },
+  "failure_class_inventory": [
+    {
+      "failure_class": "OBSERVATION_LOSS",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "REPRESENTATION_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "ENTITY_ROLE_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "RELATION_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "GOAL_INDUCTION_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "MECHANISM_INDUCTION_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "PRECONDITION_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "ACTION_BINDING_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "EFFECT_PREDICTION_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "DELAY_ATTRIBUTION_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "PLAN_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "PROBE_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "JUDGEMENT_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "MEMORY_RETRIEVAL_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "MEMORY_UPDATE_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "ROLLBACK_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "LEVEL_TRANSFER_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "GAME_TRANSFER_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    },
+    {
+      "failure_class": "RESOURCE_ERROR",
+      "affected_game_count": 0,
+      "affected_level_count": 0
+    }
+  ],
+  "ranked_failure_clusters": [],
+  "ranking_contract": {
+    "dimensions": [
+      "affected_game_count",
+      "affected_level_count",
+      "blocking_severity",
+      "reusability",
+      "implementation_dependency",
+      "regression_risk"
+    ],
+    "empty_ranking_complete": true,
+    "reason": "Every advertised game ended in WIN with all 183 levels complete and no runtime failure signature. Ranking an empty failure set is complete; inventing a failure cluster is forbidden."
+  },
+  "highest_leverage_gap_decision": {
+    "selection_record_count": 1,
+    "runtime_capability_gap_count": 0,
+    "selected_runtime_capability_gap": "NONE_NO_NON_WIN_FAILURE_CLUSTER",
+    "affected_game_count": 0,
+    "affected_level_count": 0,
+    "new_capability_implementation_authorized": false,
+    "next_real_gap": "M1_FULL_MAPPING_CLOSURE_EVIDENCE",
+    "next_real_gap_classification": "ROADMAP_EVIDENCE_GATE_NOT_RUNTIME_FAILURE",
+    "reason": "The repair loop M1-P02 through M1-P06 is conditional on a non-empty failure cluster. The remaining M1 requirement is to map all raw actions and segments to a CapabilityFamily or explicit Domain-Local Residue in M1-P07."
+  },
+  "conditional_point_disposition": {
+    "M1-P02_CAPABILITY_CLOSURE_UNIT_SELECTION": "NOT_APPLICABLE_ZERO_FAILURE_CLUSTERS",
+    "M1-P03_HDS_CASESET_ANALYSIS": "NOT_APPLICABLE_NO_SELECTED_FAILURE_CASESET",
+    "M1-P04_PRODUCT_CAPABILITY_IMPLEMENTATION": "NOT_AUTHORIZED_DURING_ZERO_FAILURE_INVENTORY",
+    "M1-P05_AFFECTED_GAME_CLOSURE": "NOT_APPLICABLE_ALL_GAMES_ALREADY_WIN",
+    "M1-P06_CONTINUOUS_HORIZONTAL_SUBTRACTION_PROMOTION": "NO_NEW_CAPABILITY_CANDIDATE_FROM_FAILURE_INVENTORY",
+    "next_point": "M1-P07_FULL_MAPPING_CLOSURE"
+  },
+  "failure_classification": {
+    "run_failure": "NONE",
+    "process_exit_code": 0,
+    "product_completion_false_classification": "INTENTIONAL_GENERICITY_GATE",
+    "product_completion_false_is_runtime_failure": false,
+    "genericity_gate_owner": "M3_GENERIC_AGI_CONFORMANCE"
+  },
+  "no_implementation_audit": {
+    "new_capability_count": 0,
+    "modified_runtime_file_count": 0,
+    "new_product_shell_count": 0,
+    "new_product_runner_count": 0,
+    "new_product_package_count": 0
+  },
+  "validation": {
+    "full_sample_report_reaggregated": true,
+    "all_result_rows_final_state_WIN": true,
+    "all_result_rows_stop_reason_GOAL_REACHED": true,
+    "all_result_rows_failure_signatures_empty": true,
+    "total_level_count_reaggregated": 183,
+    "total_action_count_reaggregated": 10733,
+    "endpoint_failure_count": 0,
+    "protected_user_diff_sha256": "d921b44a6f735552cf8592911e3bfa6d93b1c3aac69f6e88cf7e6bd0bd1ce2fb"
+  },
+  "exit_audit": {
+    "official_sample_game_attempt_count": 25,
+    "failure_clusters_ranked": true,
+    "highest_leverage_gap_identification_record_count": 1,
+    "runtime_capability_gap_count": 0,
+    "conditional_repair_loop_required": false,
+    "allowed_claim": "M1_P01_FULL_SAMPLE_INVENTORY_COMPLETE_WITH_ZERO_RUNTIME_FAILURE_CLUSTERS",
+    "M1_complete": false,
+    "genericity_established": false,
+    "product_completion_claim": false
+  },
+  "consumed_by_next_point": "M1-P07_FULL_MAPPING_CLOSURE"
+}

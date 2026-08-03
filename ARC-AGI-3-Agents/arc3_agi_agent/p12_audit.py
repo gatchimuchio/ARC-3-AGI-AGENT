@@ -855,6 +855,10 @@ def operational_conformance_suite() -> dict[str, object]:
     candidate_progress = replace(
         base_result.candidates[0],
         candidate_id="candidate:j-only:progress",
+        plan=replace(
+            base_result.candidates[0].plan,
+            candidate_id="candidate:j-only:progress",
+        ),
         expected_progress=0.95,
         expected_information_gain=0.05,
         expected_risk=0.3,
@@ -863,6 +867,10 @@ def operational_conformance_suite() -> dict[str, object]:
     candidate_information = replace(
         base_result.candidates[1],
         candidate_id="candidate:j-only:information",
+        plan=replace(
+            base_result.candidates[1].plan,
+            candidate_id="candidate:j-only:information",
+        ),
         expected_progress=0.2,
         expected_information_gain=0.95,
         expected_risk=0.05,

@@ -415,8 +415,21 @@ def _load_product_initial_state(
     descriptor_path: Path,
     package_path: Path,
 ) -> InitialStateBundle:
+    return load_product_initial_state_payloads(
+        descriptor_payload=descriptor_path.read_bytes(),
+        package_payload=package_path.read_bytes(),
+    )
+
+
+def load_product_initial_state_payloads(
+    *,
+    descriptor_payload: bytes,
+    package_payload: bytes,
+) -> InitialStateBundle:
+    """Load the canonical product initial state from bound in-memory bytes."""
+
     descriptor = _descriptor_body(
-        json.loads(descriptor_path.read_text(encoding="utf-8"))
+        json.loads(descriptor_payload.decode("utf-8"))
     )
     if (
         descriptor.get("schema_version") != PRODUCT_CAPABILITY_SCHEMA_VERSION
@@ -430,14 +443,13 @@ def _load_product_initial_state(
         or descriptor.get("contains_identity_router") is not False
     ):
         raise ValueError("PRODUCT_CAPABILITY_DESCRIPTOR_CONTRACT_INVALID")
-    payload = package_path.read_bytes()
     if (
         descriptor.get("package_sha256")
-        != hashlib.sha256(payload).hexdigest()
-        or descriptor.get("package_size_bytes") != len(payload)
+        != hashlib.sha256(package_payload).hexdigest()
+        or descriptor.get("package_size_bytes") != len(package_payload)
     ):
         raise ValueError("PRODUCT_CAPABILITY_PACKAGE_DIGEST_MISMATCH")
-    initial_state = initial_state_from_package(payload)
+    initial_state = initial_state_from_package(package_payload)
     p_bundle = initial_state.p_bundle
     if (
         initial_state.logical_digest
@@ -513,6 +525,7 @@ __all__ = [
     "ProductCompilationEvidence",
     "compile_product_initial_state",
     "load_product_initial_state",
+    "load_product_initial_state_payloads",
     "product_capability_descriptor",
     "product_hds_domain_profile",
     "product_initial_memory",

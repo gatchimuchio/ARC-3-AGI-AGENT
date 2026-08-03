@@ -1,0 +1,537 @@
+{
+  "applicability_predicate_contract": {
+    "falsification_condition": [
+      "NEGATIVE_CONDITION_OBSERVED",
+      "REQUIRED_CONDITION_MISSING"
+    ],
+    "negative_conditions_are_observation_derived": true,
+    "required_action_surface": [
+      "NON_CONTROL_LEGAL_ACTION"
+    ],
+    "required_entities": [
+      "CURRENT_RENDERED_LAYERS"
+    ],
+    "required_relations": [
+      "LEGAL_ACTION_TO_RENDERED_TRANSITION"
+    ],
+    "required_state_pattern": [
+      "NON_TERMINAL_STATE"
+    ],
+    "temporal_conditions": [
+      "ACTION_COMPLETE"
+    ]
+  },
+  "artifact_type": "ApplicabilityCounterfactualEvidence",
+  "asset_stage": "ACTIVE_DEV",
+  "baseline": {
+    "action_complete": true,
+    "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+    "active_mechanism_hypothesis_count": 1,
+    "applicable": true,
+    "available_actions": [
+      1,
+      2,
+      3,
+      4,
+      6
+    ],
+    "case_id": "baseline",
+    "evaluation_logical_digest": "applicability-evaluation:98c92cbc19e7fbb38a8ed68a07219310bf0d36837d6fa17053f6cd40b095ecf7",
+    "falsification_condition": [
+      "NEGATIVE_CONDITION_OBSERVED",
+      "REQUIRED_CONDITION_MISSING"
+    ],
+    "identity_input_count": 0,
+    "missing_conditions": [],
+    "negative_conditions": [],
+    "observation_digest": "generic-observation:b30cea77d34319724466cd7f77797d4c86353cf5c3e88fc2f1c89a1ed3a19b73",
+    "perturbation_class": "BASELINE",
+    "render_frame_count": 1,
+    "runtime_disposition": "ACTIVE_MECHANISM_AVAILABLE",
+    "satisfied_conditions": [
+      "ACTION_COMPLETE",
+      "CURRENT_RENDERED_LAYERS",
+      "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+      "NON_CONTROL_LEGAL_ACTION",
+      "NON_TERMINAL_STATE"
+    ],
+    "terminal_state": "NOT_FINISHED"
+  },
+  "claim_boundary": {
+    "M3_complete": false,
+    "allowed_claim": "M3_P04_APPLICABILITY_COUNTERFACTUAL_ONLY",
+    "next_point": "M3-P05_RUNTIME_VERSION_LEARNING",
+    "product_completion_established": false,
+    "release_established": false
+  },
+  "condition_breaking_cases": [
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 0,
+      "applicable": false,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "terminal-win",
+      "evaluation_logical_digest": "applicability-evaluation:645593f9bc0146eb3d4c598adb86dc669ffe4f287a80922d61448700e1a45b04",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "intentionally_broken_condition": "NON_TERMINAL_STATE",
+      "missing_conditions": [
+        "NON_TERMINAL_STATE"
+      ],
+      "negative_conditions": [
+        "TERMINAL_STATE"
+      ],
+      "observation_digest": "generic-observation:4bc682c2c1b1d5c2f197d8af16e1dd862ec24b96846689beddb7080390f91206",
+      "perturbation_class": "CONDITION_BREAKING",
+      "render_frame_count": 1,
+      "runtime_disposition": "NON_APPLICABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION"
+      ],
+      "terminal_state": "WIN"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 0,
+      "applicable": false,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "terminal-game-over",
+      "evaluation_logical_digest": "applicability-evaluation:645593f9bc0146eb3d4c598adb86dc669ffe4f287a80922d61448700e1a45b04",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "intentionally_broken_condition": "NON_TERMINAL_STATE",
+      "missing_conditions": [
+        "NON_TERMINAL_STATE"
+      ],
+      "negative_conditions": [
+        "TERMINAL_STATE"
+      ],
+      "observation_digest": "generic-observation:62e7eb79f97f13e50cd8063da989248a1f796435a69f67c7a16e0570a6531d65",
+      "perturbation_class": "CONDITION_BREAKING",
+      "render_frame_count": 1,
+      "runtime_disposition": "NON_APPLICABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION"
+      ],
+      "terminal_state": "GAME_OVER"
+    },
+    {
+      "action_complete": false,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 0,
+      "applicable": false,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "unsettled-action",
+      "evaluation_logical_digest": "applicability-evaluation:97674b4500d91e428f000be31d94b290bd41948c78816eb7a01a33275593874a",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "intentionally_broken_condition": "ACTION_COMPLETE",
+      "missing_conditions": [
+        "ACTION_COMPLETE"
+      ],
+      "negative_conditions": [
+        "UNSETTLED_OBSERVATION"
+      ],
+      "observation_digest": "generic-observation:0d4a7b83fe1105e190efbe36813fa4d906183f5aacda2a44c6797e38ac9d89ef",
+      "perturbation_class": "CONDITION_BREAKING",
+      "render_frame_count": 1,
+      "runtime_disposition": "NON_APPLICABLE",
+      "satisfied_conditions": [
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 0,
+      "applicable": false,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "render-absent",
+      "evaluation_logical_digest": "applicability-evaluation:fe0f568ce0758f951367d33d8b810f684f03d117718999cb755c3cb1fba63f86",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "intentionally_broken_condition": "CURRENT_RENDERED_LAYERS",
+      "missing_conditions": [
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION"
+      ],
+      "negative_conditions": [
+        "RENDERED_ENTITY_ABSENT"
+      ],
+      "observation_digest": "generic-observation:f4ffbddce4cf4f0d411155c3b62c0395f87d31dfba85ecd21f0ff1b48f35f4d9",
+      "perturbation_class": "CONDITION_BREAKING",
+      "render_frame_count": 0,
+      "runtime_disposition": "NON_APPLICABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 0,
+      "applicable": false,
+      "available_actions": [
+        0
+      ],
+      "case_id": "external-action-surface-absent",
+      "evaluation_logical_digest": "applicability-evaluation:4ba3d65542b92ab3e6824f1d5b8a0110b5fd49bcb077e7e4a4a13ee0f016ac4b",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "intentionally_broken_condition": "NON_CONTROL_LEGAL_ACTION",
+      "missing_conditions": [
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION"
+      ],
+      "negative_conditions": [
+        "EXTERNAL_ACTION_SURFACE_ABSENT"
+      ],
+      "observation_digest": "generic-observation:0c65b5aff09f25c90c017a40859978f9290e7d743bd2d8fea3453dc008ed4c4f",
+      "perturbation_class": "CONDITION_BREAKING",
+      "render_frame_count": 1,
+      "runtime_disposition": "NON_APPLICABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    }
+  ],
+  "condition_preserving_cases": [
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 1,
+      "applicable": true,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "palette-permutation",
+      "evaluation_logical_digest": "applicability-evaluation:98c92cbc19e7fbb38a8ed68a07219310bf0d36837d6fa17053f6cd40b095ecf7",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "missing_conditions": [],
+      "negative_conditions": [],
+      "observation_digest": "generic-observation:6760af7053430e01466b11fb54de7c974c5ef512a7b1df0d8fa8856e622c886c",
+      "perturbation_class": "CONDITION_PRESERVING",
+      "render_frame_count": 1,
+      "runtime_disposition": "ACTIVE_MECHANISM_AVAILABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 1,
+      "applicable": true,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "rotation-90",
+      "evaluation_logical_digest": "applicability-evaluation:98c92cbc19e7fbb38a8ed68a07219310bf0d36837d6fa17053f6cd40b095ecf7",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "missing_conditions": [],
+      "negative_conditions": [],
+      "observation_digest": "generic-observation:ba12308a2f2cb764449255aa9dc25391c73e026e8a82b9f6e4eec84f09be3a0f",
+      "perturbation_class": "CONDITION_PRESERVING",
+      "render_frame_count": 1,
+      "runtime_disposition": "ACTIVE_MECHANISM_AVAILABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 1,
+      "applicable": true,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "horizontal-reflection",
+      "evaluation_logical_digest": "applicability-evaluation:98c92cbc19e7fbb38a8ed68a07219310bf0d36837d6fa17053f6cd40b095ecf7",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "missing_conditions": [],
+      "negative_conditions": [],
+      "observation_digest": "generic-observation:a00a5c346be8b8f6d813b4b03f285ec9296d058114d04dff28a7af0c1ad669c5",
+      "perturbation_class": "CONDITION_PRESERVING",
+      "render_frame_count": 1,
+      "runtime_disposition": "ACTIVE_MECHANISM_AVAILABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 1,
+      "applicable": true,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "layout-shift",
+      "evaluation_logical_digest": "applicability-evaluation:98c92cbc19e7fbb38a8ed68a07219310bf0d36837d6fa17053f6cd40b095ecf7",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "missing_conditions": [],
+      "negative_conditions": [],
+      "observation_digest": "generic-observation:4268dbfb44ceb3a50875dc69a360be8a4500d86d16f8dfe0e81247d314dc8ef7",
+      "perturbation_class": "CONDITION_PRESERVING",
+      "render_frame_count": 1,
+      "runtime_disposition": "ACTIVE_MECHANISM_AVAILABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 1,
+      "applicable": true,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "case_id": "signature-substitution",
+      "evaluation_logical_digest": "applicability-evaluation:98c92cbc19e7fbb38a8ed68a07219310bf0d36837d6fa17053f6cd40b095ecf7",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "missing_conditions": [],
+      "negative_conditions": [],
+      "observation_digest": "generic-observation:26edfc3f3722bef47636881234bc8848d66d3ddd3ef1cf25c7a56978db62724e",
+      "perturbation_class": "CONDITION_PRESERVING",
+      "render_frame_count": 1,
+      "runtime_disposition": "ACTIVE_MECHANISM_AVAILABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 1,
+      "applicable": true,
+      "available_actions": [
+        6
+      ],
+      "case_id": "coordinate-only-parameterization",
+      "evaluation_logical_digest": "applicability-evaluation:98c92cbc19e7fbb38a8ed68a07219310bf0d36837d6fa17053f6cd40b095ecf7",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "missing_conditions": [],
+      "negative_conditions": [],
+      "observation_digest": "generic-observation:2de7f9933c3ae228db7cdf08a786af141a3a3781a980d854fe293674da264bdc",
+      "perturbation_class": "CONDITION_PRESERVING",
+      "render_frame_count": 1,
+      "runtime_disposition": "ACTIVE_MECHANISM_AVAILABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    },
+    {
+      "action_complete": true,
+      "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+      "active_mechanism_hypothesis_count": 1,
+      "applicable": true,
+      "available_actions": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "case_id": "directional-only-parameterization",
+      "evaluation_logical_digest": "applicability-evaluation:98c92cbc19e7fbb38a8ed68a07219310bf0d36837d6fa17053f6cd40b095ecf7",
+      "falsification_condition": [
+        "NEGATIVE_CONDITION_OBSERVED",
+        "REQUIRED_CONDITION_MISSING"
+      ],
+      "identity_input_count": 0,
+      "missing_conditions": [],
+      "negative_conditions": [],
+      "observation_digest": "generic-observation:300fbe7c39fef0fe3651afe98c6102529b4436dc79ce5dfddcbf2adfc48e117b",
+      "perturbation_class": "CONDITION_PRESERVING",
+      "render_frame_count": 1,
+      "runtime_disposition": "ACTIVE_MECHANISM_AVAILABLE",
+      "satisfied_conditions": [
+        "ACTION_COMPLETE",
+        "CURRENT_RENDERED_LAYERS",
+        "LEGAL_ACTION_TO_RENDERED_TRANSITION",
+        "NON_CONTROL_LEGAL_ACTION",
+        "NON_TERMINAL_STATE"
+      ],
+      "terminal_state": "NOT_FINISHED"
+    }
+  ],
+  "evidence_bindings": {
+    "active_product_bundle": {
+      "J0_digest": "j0:65dd269884a737a6b76dd263164984ea257c97865a4d88abbaa1a9e5ad87245d",
+      "M0_digest": "m0:1302d43f51362ac3a104b125beac10a205e7fa0f585b26eb19ac19537aa574c6",
+      "P_logical_digest": "p-logical:72091424e67812b8b7e9efd245943a696027ed2da7cdff7d3f1c714ae44ffb1c",
+      "initial_state_logical_digest": "initial-state-logical:a3fdd6b188538eda5b6837c1bddf5c60f46dc7c09ba03b47bc170d10e85f45bb",
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+      "sha256": "0c2f9bced86f316e43eb720b5f9d1c11afc2502935bfd982172b36d6a0c04526"
+    },
+    "applicability_predicate_source": {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/local_capability.py",
+      "sha256": "6a9329acb0c14a6cb246682b1b5fa99b734e6f84f2688d5885aa25d452c7edcf"
+    },
+    "m3_p03_identity_replay_audit": {
+      "path": "analysis/product/rev5_1/m3_p03_identity_replay_audit.json",
+      "sha256": "655a6e64ded2d6e881253b0131629aa593af00199006b2adbc6bb5312ebe5f60"
+    }
+  },
+  "logical_content_sha256": "7a878c248f00c1debc9a4caf15744c1d8414e0020b19bd67925709d406602d7f",
+  "mandatory_family_audit": {
+    "action_principle_digest": "action-principle:bdcc1206f352e2eae25cf88abe682d21e4667153f593ba2b5568fbc23a42f2d7",
+    "applicability_inputs": "CURRENT_GENERIC_OBSERVATION_ONLY",
+    "audited_family_count": 1,
+    "family_id": "RELATION_BOUND_ACTION_EMISSION",
+    "family_logical_digest": "generic-mechanism-family:ed0f111c1fce796934905b4fa3a9310a2ed9f856eb57177e86b156a9c1482ebf",
+    "mandatory_family_count": 1,
+    "surface_identity_selector_count": 0,
+    "uncovered_family_count": 0
+  },
+  "point_id": "M3-P04_APPLICABILITY_COUNTERFACTUAL",
+  "runtime_product": "ARC3CompletionAgent",
+  "schema_version": "arc3-rev5-1-m3-p04-applicability-v1",
+  "status": "M3_P04_PASS",
+  "summary": {
+    "action_principle_maintained_when_conditions_hold": true,
+    "active_development_product_bundle_count": 1,
+    "active_product_bundle_changed": false,
+    "active_projection_removed_when_condition_breaks": true,
+    "applicability_maintained_when_conditions_hold": true,
+    "condition_breaking_case_count": 5,
+    "condition_breaking_pass_count": 5,
+    "condition_preserving_case_count": 7,
+    "condition_preserving_pass_count": 7,
+    "invalid_contract_fail_closed": true,
+    "non_applicable_when_condition_breaks": true,
+    "valid_contract_applicability_semantics_changed": false
+  }
+}

@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Sequence
 
-GENERIC_PACKAGE_VERSION = "arc3-generic-runtime-package-v1"
+GENERIC_PACKAGE_VERSION = "arc3-generic-runtime-package-v2"
 GENERIC_RUNTIME_MODULES = (
     "authority_state.py",
     "canonical_artifact.py",
@@ -34,6 +34,7 @@ GENERIC_RUNTIME_MODULES = (
     "generic_types.py",
     "identity_boundary.py",
     "initial_state_compiler.py",
+    "local_capability.py",
     "memory_overlay.py",
     "memory_backend.py",
     "memory_consolidation.py",

@@ -1,0 +1,267 @@
+{
+  "schema_version": "arc3-rev5-1-basis-set-win-closure-v1",
+  "artifact_type": "BasisSetWinClosure",
+  "point_id": "M0-P07_BASIS_SET_WIN_CLOSURE",
+  "status": "M0_P07_COMPLETE",
+  "runtime_product": "ARC3CompletionAgent",
+  "asset_stage": "PROBATION_DEV",
+  "input_contract": {
+    "first_online_trinity_closure": "analysis/product/rev5_1/first_online_trinity_closure.json",
+    "first_online_trinity_closure_sha256": "5d0e40e59bf1308c44f86277287bef0248ea4e8c93ceb5f4152cecbe0d616ac5",
+    "basis_set_selection": "analysis/product/rev5_1/basis_set_selection.json",
+    "basis_set_selection_sha256": "4c20dea3a89c16f1d354d4ed273a6918b31992cfc60685738750740ea62fb21b",
+    "ordered_game_ids": [
+      "vc33-5430563c",
+      "lf52-271a04aa",
+      "wa30-ee6fef47"
+    ],
+    "basis_game_count": 3,
+    "basis_level_count": 26
+  },
+  "single_session_product_run": {
+    "operation_mode": "OFFLINE",
+    "product_path": "arc3_agi_agent.product_runner",
+    "report": "analysis/product/rev5_1/p07_basis_combined_run.json",
+    "report_sha256": "125cc58f5e195edd508e5257ea8ac7d6943f5acdbb23ca0422805061de7a810b",
+    "scorecard_open_count": 1,
+    "scorecard_close_count": 1,
+    "scorecard_closed": true,
+    "shared_session_count": 1,
+    "active_agent_peak": 1,
+    "state_owner_violation_count": 0,
+    "runtime_identity_digest": "runtime-identity:8b804fa65ef4b75c402c051f2f89c0a2b05c3031c45acc0b6db256c0645ae418",
+    "p_logical_digest": "p-logical:72091424e67812b8b7e9efd245943a696027ed2da7cdff7d3f1c714ae44ffb1c",
+    "j0_digest": "j0:65dd269884a737a6b76dd263164984ea257c97865a4d88abbaa1a9e5ad87245d",
+    "m0_digest": "m0:1302d43f51362ac3a104b125beac10a205e7fa0f585b26eb19ac19537aa574c6",
+    "game_win_count": 3,
+    "level_completion_count": 26,
+    "total_action_count": 2419,
+    "completed_game_count": 3,
+    "failed_game_count": 0,
+    "lifecycle_failure_count": 0,
+    "product_status": "KNOWN_SAMPLE_REGRESSION_INCOMPLETE",
+    "filtered_run_exit_classification": "EXPECTED_FULL_ENDPOINT_INCOMPLETENESS",
+    "product_completion_claim": false
+  },
+  "per_game_results": [
+    {
+      "order": 1,
+      "game_id": "vc33-5430563c",
+      "final_state": "WIN",
+      "stop_reason": "GOAL_REACHED",
+      "levels_completed": 7,
+      "actions_executed": 338,
+      "action_id_counts": {
+        "6": 338
+      },
+      "hds_plan_commit_count": 338,
+      "memory_causal_behavior_change_count": 305,
+      "failed_hypothesis_invalidation_count": 33,
+      "rollback_plan_count": 0,
+      "post_rollback_replan_count": 0
+    },
+    {
+      "order": 2,
+      "game_id": "lf52-271a04aa",
+      "final_state": "WIN",
+      "stop_reason": "GOAL_REACHED",
+      "levels_completed": 10,
+      "actions_executed": 1107,
+      "action_id_counts": {
+        "0": 1,
+        "1": 158,
+        "2": 165,
+        "3": 164,
+        "4": 194,
+        "6": 424,
+        "7": 1
+      },
+      "hds_plan_commit_count": 1107,
+      "memory_causal_behavior_change_count": 930,
+      "failed_hypothesis_invalidation_count": 30,
+      "rollback_plan_count": 1,
+      "post_rollback_replan_count": 1
+    },
+    {
+      "order": 3,
+      "game_id": "wa30-ee6fef47",
+      "final_state": "WIN",
+      "stop_reason": "GOAL_REACHED",
+      "levels_completed": 9,
+      "actions_executed": 974,
+      "action_id_counts": {
+        "0": 3,
+        "1": 172,
+        "2": 180,
+        "3": 242,
+        "4": 262,
+        "5": 115
+      },
+      "hds_plan_commit_count": 974,
+      "memory_causal_behavior_change_count": 507,
+      "failed_hypothesis_invalidation_count": 13,
+      "failure_attribution_count": 3,
+      "rollback_plan_count": 3,
+      "post_rollback_replan_count": 3
+    }
+  ],
+  "trinity_closure": {
+    "executed_plan_count": 2419,
+    "hds_plan_commit_count": 2419,
+    "authorization_and_attribution_coverage": "2419/2419",
+    "memory_causal_behavior_change_count": 1742,
+    "memory_causal_witness_count": 1742,
+    "memory_causal_witness_unique_count": 1742,
+    "memory_causal_witness_sorted_lines_sha256": "3e339262b602db54a265f1f95b6b2862d24b74629ffc7ac20e0b88a1a8e2f0c1",
+    "failed_hypothesis_invalidation_count": 76,
+    "failure_attribution_count": 3,
+    "rollback_plan_count": 4,
+    "post_rollback_replan_count": 4,
+    "all_external_actions_J_authorized": true,
+    "all_executed_actions_attributed": true,
+    "relevant_M_update_changes_future_behavior": true,
+    "all_failures_recovered": true
+  },
+  "mandatory_surface_proof": {
+    "aggregate_action_id_counts": {
+      "0": 4,
+      "1": 330,
+      "2": 345,
+      "3": 406,
+      "4": 456,
+      "5": 115,
+      "6": 762,
+      "7": 1
+    },
+    "ACTION6_ONLY": {
+      "carrier": "vc33-5430563c",
+      "covered": true,
+      "ACTION6_count": 338
+    },
+    "MIXED_ACTION_SURFACE": {
+      "carrier": "lf52-271a04aa",
+      "covered": true,
+      "observed_action_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ]
+    },
+    "ACTION7": {
+      "carrier": "lf52-271a04aa",
+      "covered": true,
+      "executed_count": 1
+    },
+    "KEYBOARD_ONLY": {
+      "carrier": "wa30-ee6fef47",
+      "covered": true,
+      "observed_action_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "RESET": {
+      "carriers": [
+        "lf52-271a04aa",
+        "wa30-ee6fef47"
+      ],
+      "covered": true,
+      "executed_count": 4
+    },
+    "TEMPORAL_COMPLEXITY": {
+      "carrier": "vc33-5430563c",
+      "covered": true,
+      "classification": "VERY_LONG_MULTI_FRAME"
+    },
+    "LONG_HORIZON_RESOURCE": {
+      "carriers": [
+        "lf52-271a04aa",
+        "wa30-ee6fef47"
+      ],
+      "covered": true,
+      "maximum_actual_actions_in_one_game": 1107,
+      "action_budget": 4096
+    }
+  },
+  "independent_regression_reports": {
+    "vc33": {
+      "path": "analysis/product/rev5_1/p07_vc33_regression_run.json",
+      "sha256": "0189849a107b835ff4b81cace5f32d0bee0538569bd249a220fff2962d7f3e0e"
+    },
+    "lf52": {
+      "path": "analysis/product/rev5_1/p07_lf52_action_surface_run.json",
+      "sha256": "5474313cd1f7d6a23e10b7477e41455ecf3f606b27124e49a0519ca82b374250"
+    },
+    "wa30": {
+      "path": "analysis/product/rev5_1/p07_wa30_baseline_run.json",
+      "sha256": "66c90a6d62524ed3e35c4fe0adde05d87ce55c8f43541a18d9ff2e06ce12aff2"
+    }
+  },
+  "capability_delta_and_genericity": {
+    "behavioral_capability_delta_required": false,
+    "reason": "The M0-P06 C/J/M/P product structure completed both remaining basis games on their first behavioral run.",
+    "audit_instrumentation_added": "Streaming action-id histogram only; it is not supplied to C, J, M, or P.",
+    "game_id_action_selector": false,
+    "level_id_action_selector": false,
+    "successful_trajectory_playback": false,
+    "literal_frame_hash_lookup": false,
+    "literal_coordinate_table": false,
+    "direct_teacher_answer_at_runtime": false,
+    "source_or_hidden_state_at_runtime": false,
+    "manual_step_intervention": false,
+    "new_product_shell_count": 0,
+    "new_product_runner_count": 0,
+    "new_product_package_count": 0
+  },
+  "implementation_sha256": {
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_trace.py": "4363644d24370233d28710daf82a4ba6099cb39540040c63cf4d01d183afeb8c",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_competition_runner.py": "2a20a93336bb4f48c9e25eb00779980f3b2f36d3bbf8b2197b140f7956733a7e",
+    "ARC-AGI-3-Agents/arc3_agi_agent/product_runner.py": "1207cf4678833cf7d5dcae2144f50e169cf3b36fe4e3508f1bd2a1b288fd6cee",
+    "ARC-AGI-3-Agents/agents/templates/generic_agi_agent.py": "775d4ce0254a0a574bdc370b7b71dc27e303bb9f37f05f0b8e8282de66e9cfe7",
+    "ARC-AGI-3-Agents/tests/unit/test_generic_runtime_p12.py": "a0b0b66f1edebd43b6a00964ff086f2e16c554a7098f52b5974ad3d2d5ab602d",
+    "ARC-AGI-3-Agents/tests/unit/test_p22a_compiled_autonomous_policy.py": "1027a2f8c75d63d84e00aadd627e6dd0fc977bdb5292cc2463ffe91caa965415",
+    "ARC-AGI-3-Agents/tests/unit/test_product_runner.py": "dc4bf0879a15c2699a1d8ef18e1c7287d8368242844a9dc405d414f38106012c"
+  },
+  "validation": {
+    "ruff": "PASS",
+    "mypy_strict": "PASS",
+    "action_histogram_focused_regression": {
+      "collected": 24,
+      "passed": 24,
+      "failed": 0,
+      "duration_seconds": 81.02
+    },
+    "product_path_regression": {
+      "collected": 37,
+      "passed": 37,
+      "failed": 0,
+      "duration_seconds": 96.87
+    },
+    "protected_user_diff_sha256": "d921b44a6f735552cf8592911e3bfa6d93b1c3aac69f6e88cf7e6bd0bd1ce2fb"
+  },
+  "exit_audit": {
+    "all_basis_games_win": true,
+    "all_basis_levels_complete": true,
+    "basis_game_win_count": 3,
+    "basis_level_completion_count": 26,
+    "keyboard_only_covered": true,
+    "ACTION6_only_covered": true,
+    "mixed_action_surface_covered": true,
+    "RESET_covered": true,
+    "ACTION7_covered": true,
+    "temporal_complexity_covered": true,
+    "long_horizon_case_covered": true,
+    "allowed_claim": "M0_P07_BASIS_SET_WIN_CLOSURE_COMPLETE",
+    "official_sample_completion_claim": false,
+    "product_completion_claim": false
+  },
+  "consumed_by_next_point": "M0-P08_INITIAL_HORIZONTAL_SUBTRACTION"
+}

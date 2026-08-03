@@ -81,6 +81,7 @@ RUNTIME_MODULES = (
     "identity_boundary.py",
     "initial_state_compiler.py",
     "ir.py",
+    "local_capability.py",
     "memory_backend.py",
     "memory_consolidation.py",
     "memory_event.py",

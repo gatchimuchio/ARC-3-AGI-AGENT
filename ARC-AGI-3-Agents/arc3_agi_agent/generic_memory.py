@@ -861,11 +861,19 @@ class SemanticMemory:
     def set_working(self, records: Sequence[SemanticRecord]) -> None:
         """Replace cycle-local working memory; it is never an active authority."""
 
+        active_ids = set(self._active_records())
+        sealed_ids = set(self._sealed_records())
         next_working: dict[str, SemanticRecord] = {}
         for record in records:
             failures = record.validate()
             if failures:
                 raise ValueError(";".join(failures))
+            if record.state not in {"PROPOSED", "PROBATION"}:
+                raise ValueError("SEMANTIC_MEMORY_WORKING_STATE_INVALID")
+            if record.memory_id in active_ids or record.memory_id in sealed_ids:
+                raise ValueError("SEMANTIC_MEMORY_WORKING_ID_COLLISION")
+            if record.memory_id in next_working:
+                raise ValueError("SEMANTIC_MEMORY_WORKING_DUPLICATE")
             next_working[record.memory_id] = record
         self._working = next_working
 
@@ -913,8 +921,10 @@ class SemanticMemory:
         failures = query.validate()
         if failures:
             raise ValueError(";".join(failures))
-        records = list(self._active_records().values()) + list(
-            self._sealed_records().values()
+        records = (
+            list(self._active_records().values())
+            + list(self._working.values())
+            + list(self._sealed_records().values())
         )
         if query.include_archive:
             records.extend(self._archive_records().values())

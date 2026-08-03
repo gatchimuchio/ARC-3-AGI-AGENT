@@ -6,7 +6,7 @@ import io
 import json
 import re
 import zipfile
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import dataclass
 from typing import Final
 
@@ -35,9 +35,7 @@ INITIAL_STATE_ALLOWED_MEMORY_KINDS: Final = frozenset(
         "WORLD_MODEL",
     }
 )
-_IDENTITY_VALUE = re.compile(
-    r"(?i)(?:^|[^a-z0-9])(?:game|task|level)[-_ ]?(?:id|\d+)"
-)
+_IDENTITY_VALUE = re.compile(r"(?i)(?:^|[^a-z0-9])(?:game|task|level)[-_ ]?(?:id|\d+)")
 
 
 def _initial_state_digest(
@@ -77,9 +75,7 @@ class InitialStateBundle:
         if self.p_bundle.manifest.lifecycle != "ACTIVE":
             failures.append("INITIAL_STATE_ACTIVE_P_REQUIRED")
         failures.extend(self.j0.validate())
-        if self.m0 != tuple(
-            sorted(self.m0, key=lambda item: item.memory_id)
-        ):
+        if self.m0 != tuple(sorted(self.m0, key=lambda item: item.memory_id)):
             failures.append("INITIAL_STATE_M0_ORDER_INVALID")
         if len({item.memory_id for item in self.m0}) != len(self.m0):
             failures.append("INITIAL_STATE_M0_DUPLICATE")
@@ -91,8 +87,7 @@ class InitialStateBundle:
             if record.state not in {"ACTIVE", "PROBATION"}:
                 failures.append("INITIAL_STATE_M0_STATE_FORBIDDEN")
             if any(
-                marker in record.scope
-                for marker in ("EPISODE_LOCAL", "LEVEL_LOCAL")
+                marker in record.scope for marker in ("EPISODE_LOCAL", "LEVEL_LOCAL")
             ):
                 failures.append("INITIAL_STATE_M0_SCOPE_FORBIDDEN")
             failures.extend(
@@ -207,35 +202,48 @@ def _float_field(value: Mapping[str, object], key: str) -> float:
 
 
 def _strings(value: object, error: str) -> tuple[str, ...]:
-    if not isinstance(value, Sequence) or isinstance(
-        value, (str, bytes, bytearray)
-    ):
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes, bytearray)):
         raise TypeError(error)
     return tuple(str(item) for item in value)
 
 
+class _FrozenJSONMapping(Mapping[str, object]):
+    """Immutable JSON mapping that preserves typed causal payload shape."""
+
+    __slots__ = ("_items",)
+
+    def __init__(self, items: Sequence[tuple[str, object]]) -> None:
+        self._items = tuple(sorted(items))
+
+    def __getitem__(self, key: str) -> object:
+        for candidate, value in self._items:
+            if candidate == key:
+                return value
+        raise KeyError(key)
+
+    def __iter__(self) -> Iterator[str]:
+        return (key for key, _ in self._items)
+
+    def __len__(self) -> int:
+        return len(self._items)
+
+
 def _freeze_json(value: object) -> object:
     if isinstance(value, Mapping):
-        return tuple(
-            sorted((str(key), _freeze_json(item)) for key, item in value.items())
+        return _FrozenJSONMapping(
+            tuple((str(key), _freeze_json(item)) for key, item in value.items())
         )
-    if isinstance(value, Sequence) and not isinstance(
-        value, (str, bytes, bytearray)
-    ):
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
         return tuple(_freeze_json(item) for item in value)
     return value
 
 
 def _payload_pairs(value: object) -> tuple[tuple[str, object], ...]:
-    if not isinstance(value, Sequence) or isinstance(
-        value, (str, bytes, bytearray)
-    ):
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes, bytearray)):
         raise TypeError("INITIAL_STATE_PAYLOAD_INVALID")
     output: list[tuple[str, object]] = []
     for item in value:
-        if not isinstance(item, Sequence) or isinstance(
-            item, (str, bytes, bytearray)
-        ):
+        if not isinstance(item, Sequence) or isinstance(item, (str, bytes, bytearray)):
             raise TypeError("INITIAL_STATE_PAYLOAD_PAIR_INVALID")
         pair = tuple(item)
         if len(pair) != 2:
@@ -293,31 +301,21 @@ def _hds_configuration_from_dict(
         risk_limit=_float_field(value, "risk_limit"),
         evidence_mode=str(value["evidence_mode"]),
         resource_budget=_int_field(value, "resource_budget"),
-        stop_after_no_progress=_int_field(
-            value, "stop_after_no_progress"
-        ),
+        stop_after_no_progress=_int_field(value, "stop_after_no_progress"),
         required_authorities=_strings(
             value.get("required_authorities", ()),
             "INITIAL_STATE_J0_AUTHORITIES_INVALID",
         ),
         projection_boundary=str(value["projection_boundary"]),
         local_min_support=_int_field(value, "local_min_support"),
-        session_min_total_support=_int_field(
-            value, "session_min_total_support"
-        ),
+        session_min_total_support=_int_field(value, "session_min_total_support"),
         session_min_distinct_episode_support=_int_field(
             value,
             "session_min_distinct_episode_support",
         ),
-        active_confidence_ppm=_int_field(
-            value, "active_confidence_ppm"
-        ),
-        max_contradiction_ratio_ppm=_int_field(
-            value, "max_contradiction_ratio_ppm"
-        ),
-        max_hazard_for_execute=_int_field(
-            value, "max_hazard_for_execute"
-        ),
+        active_confidence_ppm=_int_field(value, "active_confidence_ppm"),
+        max_contradiction_ratio_ppm=_int_field(value, "max_contradiction_ratio_ppm"),
+        max_hazard_for_execute=_int_field(value, "max_hazard_for_execute"),
     )
 
 
@@ -348,9 +346,7 @@ def initial_state_from_package(payload: bytes) -> InitialStateBundle:
         ):
             raise TypeError("INITIAL_STATE_M0_INVALID")
         m0 = tuple(
-            _semantic_record_from_dict(
-                _mapping(item, "INITIAL_STATE_RECORD_INVALID")
-            )
+            _semantic_record_from_dict(_mapping(item, "INITIAL_STATE_RECORD_INVALID"))
             for item in m0_value
         )
         bundle = InitialStateBundle(

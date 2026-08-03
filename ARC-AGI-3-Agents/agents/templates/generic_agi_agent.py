@@ -53,6 +53,9 @@ class GenericAGIAgentReport:
     subgoal_plan_count: int
     max_plan_step_count: int
     failure_attribution_count: int
+    action_id_counts: tuple[tuple[int, int], ...]
+    memory_causal_behavior_change_count: int
+    memory_causal_witness_refs: tuple[str, ...]
 
 
 class GenericAGIAgent(Agent):
@@ -152,6 +155,15 @@ class GenericAGIAgent(Agent):
                 max_plan_step_count=trace_summary.max_plan_step_count,
                 failure_attribution_count=(
                     trace_summary.failure_attribution_count
+                ),
+                action_id_counts=tuple(
+                    sorted(trace_summary.action_id_counts.items())
+                ),
+                memory_causal_behavior_change_count=(
+                    trace_summary.memory_causal_behavior_change_count
+                ),
+                memory_causal_witness_refs=tuple(
+                    sorted(trace_summary.memory_causal_witness_refs)
                 ),
             )
             final_raw = self.arc_env.observation_space

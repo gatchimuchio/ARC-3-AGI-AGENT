@@ -1,0 +1,219 @@
+{
+  "schema_version": "arc3-rev5-1-integrated-local-capability-v1",
+  "artifact_type": "IntegratedLocalCapability",
+  "point_id": "M0-P05_LOCAL_CAPABILITY_IMPLEMENTATION",
+  "status": "M0_P05_COMPLETE",
+  "consumed_by_next_point": "M0-P06_FIRST_ONLINE_TRINITY_CLOSURE",
+  "runtime_product": "ARC3CompletionAgent",
+  "asset_stage": "PROBATION_DEV",
+  "input_contract": {
+    "basis_task_mechanism_records": "analysis/product/rev5_1/basis_task_mechanism_records.json",
+    "basis_task_mechanism_records_sha256": "2e0694f1140faa290f1babc0c59d1f6bcb3d5610fd2341b74c8c5546f620c95c",
+    "basis_task_mechanism_records_logical_sha256": "8362958edefe1849ee77222b1b28555a21f9cb770c9013a9d5d715971b2046f5",
+    "mapped_basis_game_count": 3,
+    "mapped_basis_level_count": 26,
+    "mapped_canonical_action_count": 2964,
+    "mechanism_segment_count": 74
+  },
+  "capability_contract": {
+    "module": "ARC-AGI-3-Agents/arc3_agi_agent/local_capability.py",
+    "version": "arc3-local-capability-probation-v1",
+    "memory_scope": [
+      "EPISODE_LOCAL",
+      "LEVEL_LOCAL",
+      "LOCAL_M"
+    ],
+    "record_state": "PROBATION",
+    "execute_eligibility": false,
+    "capabilities": [
+      {
+        "capability_id": "TEMPORAL_SETTLE_AND_ATTRIBUTION",
+        "p04_evidence_cases": [
+          "VC33_GRAVITY_SUPPORT_TRANSFER",
+          "LF52_MIXED_GRID_SELECTION_UNDO"
+        ],
+        "P_dev": "retain the complete current action render sequence and detect its settled boundary",
+        "J_dev": "G11 suspends external action while the current effect is unsettled",
+        "M_dev": "refresh receipts revise temporal state and bind attribution to the observed action boundary"
+      },
+      {
+        "capability_id": "RESOURCE_AWARE_PLAN_AND_ROLLBACK",
+        "p04_evidence_cases": [
+          "VC33_GRAVITY_SUPPORT_TRANSFER",
+          "LF52_MIXED_GRID_SELECTION_UNDO",
+          "WA30_MULTI_ACTOR_ATTACHMENT_TRANSPORT"
+        ],
+        "P_dev": "project goal, budget hazard, probe, plan, verify, and recovery hypotheses",
+        "J_dev": "retain existing risk, resource, rollback, reset, and suspend ownership",
+        "M_dev": "bind observed support, no-effect, hazard, revision, and recovery evidence"
+      },
+      {
+        "capability_id": "RELATION_BOUND_ACTION_EMISSION",
+        "p04_evidence_cases": [
+          "VC33_GRAVITY_SUPPORT_TRANSFER",
+          "LF52_MIXED_GRID_SELECTION_UNDO",
+          "WA30_MULTI_ACTOR_ATTACHMENT_TRANSPORT"
+        ],
+        "P_dev": "bind legal actions and ACTION6 payloads to roles derived from the current composited render",
+        "J_dev": "require a legal, coherent, reversible, temporally settled candidate before authorization",
+        "M_dev": "invalidate a coordinate or coupling binding when the current rendered action surface contradicts it"
+      }
+    ]
+  },
+  "integration": {
+    "first_observation_to_local_m_before_first_compute": true,
+    "runtime_path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_runtime.py",
+    "compute_path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_compute.py",
+    "judgement_path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_hds.py",
+    "memory_path": "ARC-AGI-3-Agents/arc3_agi_agent/generic_memory.py",
+    "existing_product_session_factory": "arc3_agi_agent.product_runner.create_product_session",
+    "existing_product_runtime": "arc3_agi_agent.generic_runtime.GenericAGIRuntime",
+    "local_m_refresh_event": "LOCAL_M_REFRESH",
+    "counter_hypothesis_ablation_preserved": true,
+    "generic_runtime_allow_list_contains_capability": true,
+    "kaggle_runtime_import_closure_contains_capability": true,
+    "new_product_shell_count": 0,
+    "new_product_runner_count": 0,
+    "new_product_package_count": 0
+  },
+  "actual_product_runtime_proof": {
+    "test": "ARC-AGI-3-Agents/tests/unit/test_m0_p05_local_capability.py::test_actual_product_runtime_loads_and_cites_probation_capability",
+    "final_state": "WIN",
+    "actions_executed": 1,
+    "local_m_citation_ids": [
+      "local-m:coordinate-binding",
+      "local-m:counter-hypothesis",
+      "local-m:goal-model",
+      "local-m:mechanism-hypothesis",
+      "local-m:observation-state",
+      "local-m:resource-recovery",
+      "local-m:temporal-settle"
+    ],
+    "C_hypothesis_model_types": [
+      "alternative",
+      "baseline",
+      "counter_hypothesis",
+      "goal_model",
+      "null_model",
+      "probation_mechanism"
+    ],
+    "J_acceptance_operation": "PROBE",
+    "J_external_action_authorized": true,
+    "J_temporal_gate_when_settled": "PASS",
+    "manual_step_intervention": false
+  },
+  "rejection_and_memory_revision_proof": {
+    "unsettled_test": "ARC-AGI-3-Agents/tests/unit/test_m0_p05_local_capability.py::test_hds_rejects_action_while_temporal_effect_is_unsettled",
+    "unsettled_operation": "SUSPEND",
+    "unsettled_stop_reason": "HDS_SUSPEND",
+    "unsettled_external_actions_executed": 0,
+    "unsettled_gate": "G11",
+    "unsettled_reason": "TEMPORAL_EFFECT_UNSETTLED",
+    "refresh_test": "ARC-AGI-3-Agents/tests/unit/test_m0_p05_local_capability.py::test_local_m_refresh_revises_and_invalidates_surface_capability",
+    "first_surface_added_ids": [
+      "local-m:coordinate-binding",
+      "local-m:counter-hypothesis",
+      "local-m:goal-model",
+      "local-m:mechanism-hypothesis",
+      "local-m:observation-state",
+      "local-m:resource-recovery",
+      "local-m:temporal-settle"
+    ],
+    "changed_surface_added_ids": [
+      "local-m:coupling-binding"
+    ],
+    "changed_surface_revised_ids": [
+      "local-m:counter-hypothesis",
+      "local-m:goal-model",
+      "local-m:mechanism-hypothesis",
+      "local-m:observation-state",
+      "local-m:resource-recovery",
+      "local-m:temporal-settle"
+    ],
+    "changed_surface_invalidated_ids": [
+      "local-m:coordinate-binding"
+    ]
+  },
+  "safety_and_genericity": {
+    "rendered_observation_only": true,
+    "all_current_action_frames_retained": true,
+    "frame_order_and_change_relations_represented": true,
+    "game_id_action_selector": false,
+    "level_id_action_selector": false,
+    "successful_trajectory_playback": false,
+    "literal_frame_hash_lookup": false,
+    "literal_coordinate_table": false,
+    "probation_record_can_directly_authorize_ACTION": false,
+    "release_P_J0_M0_promotion": false,
+    "J_owns_external_action_authorization": true
+  },
+  "implementation_sha256": {
+    "ARC-AGI-3-Agents/arc3_agi_agent/local_capability.py": "78115b19687eb90b0c97f7958e43b40dbb68e9f605d944343da61c3b01f6b851",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_compute.py": "0cdd6d625fdc5bf6e86b3654f339e5f57df796ffc2f47235a56c1b9a90e5914c",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_hds.py": "670e5229daf8f5bd99f1e5169a870dc27df23fa2fe020ee56cb41da8f34f3595",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_memory.py": "7858c1d71f2aec1212f1163baa9fd67a884b02d3b9405a12b17b882af74c3f2f",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_runtime.py": "5079b146629ad4cd662b483adc722d0263441be47f739a10c6f09975f5657a5b",
+    "ARC-AGI-3-Agents/arc3_agi_agent/generic_package.py": "fb960351a6c4e626dbd576674b5a2b4f6d598a45a18cddf4b7b2e75e16740d23",
+    "ARC-AGI-3-Agents/arc3_agi_agent/p12_audit.py": "780403624eaf1d7b1b75be893c902a527e008ca2e1a967944ecb3fc9e18fd697",
+    "ARC-AGI-3-Agents/tests/unit/test_m0_p05_local_capability.py": "c894d3bb94e6259caa100fe2fc6bb6f1d44046cc73d2c423a7b7ab24b7366e38",
+    "scripts/build_kaggle_submission.py": "6eb0bb7bfaa5af9c436ccf986cbebcf7b8c62c64cba3c4e1e89c9ead7c5bcfa7"
+  },
+  "validation": {
+    "python": "3.12.13",
+    "focused_p05_and_operational": {
+      "collected": 5,
+      "passed": 4,
+      "environment_error": 1,
+      "environment_error_classification": "Windows pytest basetemp parent missing; rerun with an existing isolated basetemp passed"
+    },
+    "package_and_atomic_memory_retry": {
+      "collected": 14,
+      "passed": 14,
+      "failed": 0
+    },
+    "relevant_runtime_regression": {
+      "collected": 77,
+      "passed": 77,
+      "failed": 0,
+      "duration_seconds": 54.21
+    },
+    "post_package_fix": {
+      "collected": 7,
+      "passed": 7,
+      "failed": 0,
+      "duration_seconds": 45.72
+    },
+    "full_unit_diagnostic_before_package_fix": {
+      "collected": 789,
+      "passed": 780,
+      "failed": 9,
+      "duration_seconds": 531.76,
+      "p05_change_failures_fixed_after_run": 5,
+      "remaining_pre_existing_non_p05_failures": [
+        "rev4 validator conflicts with the installed rev5.1 authority and historical hashes",
+        "rev4-is-current test conflicts with the installed rev5.1 authority",
+        "development-only product_cross_validation teacher imports are scanned by a whole-package runtime test"
+      ]
+    },
+    "ruff": "PASS",
+    "mypy_strict": "PASS",
+    "git_diff_check": "PASS",
+    "protected_user_diff_sha256": "d921b44a6f735552cf8592911e3bfa6d93b1c3aac69f6e88cf7e6bd0bd1ce2fb"
+  },
+  "exit_audit": {
+    "capability_loaded_by_actual_product_runtime": true,
+    "C_output_cites_capability": true,
+    "J_can_accept": true,
+    "J_can_reject": true,
+    "M_can_revise": true,
+    "M_can_invalidate": true,
+    "first_observation_loaded_to_LOCAL_M": true,
+    "PROBATION_DEV_boundary_preserved": true,
+    "new_shell_count": 0,
+    "new_runner_count": 0,
+    "new_package_count": 0,
+    "allowed_claim": "M0_P05_LOCAL_CAPABILITY_IMPLEMENTATION_COMPLETE",
+    "first_basis_game_online_win_claim": false,
+    "product_completion_claim": false
+  }
+}

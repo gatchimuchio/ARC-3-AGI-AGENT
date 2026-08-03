@@ -1,0 +1,145 @@
+{
+  "artifact_type": "M2FullSampleProductClosure",
+  "asset_stage": "ACTIVE_DEV",
+  "claim_boundary": {
+    "AGI_conformance_established": false,
+    "allowed_claim": "M2_FULL_SAMPLE_PRODUCT_CLOSURE_ONLY",
+    "genericity_established": false,
+    "next_point": "M3-P01_C_J_M_P_ABLATION",
+    "product_completion_established": false,
+    "release_established": false
+  },
+  "evidence_bindings": {
+    "active_product_bundle": {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+      "sha256": "0c2f9bced86f316e43eb720b5f9d1c11afc2502935bfd982172b36d6a0c04526"
+    },
+    "full_mapping_closure": {
+      "path": "analysis/product/rev5_1/full_mapping_closure.json",
+      "sha256": "997252270563a14ea219ed8356424886dde0122effedd879028cf891c4a04764"
+    },
+    "run_A": {
+      "path": "analysis/product/rev5_1/m2_p01_clean_run_a.json",
+      "sha256": "6560a9388e735824efbb4644bc12f34f7e0d995935b29da52231767aca01ee41"
+    },
+    "run_B": {
+      "path": "analysis/product/rev5_1/m2_p04_shuffled_run_b.json",
+      "sha256": "338c8371fed83c336eb94b4f1ba45b0cd58b6f6a18f2a49622219825088798f2"
+    },
+    "run_C": {
+      "path": "analysis/product/rev5_1/m2_p04_shuffled_run_c.json",
+      "sha256": "2c822fb418b646670b34404675e3360a3b1c30aeb8b77dc423ddc3d6a1d004ad"
+    },
+    "shuffle_order_plan": {
+      "path": "analysis/product/rev5_1/m2_shuffle_order_plan.json",
+      "sha256": "aec0b651cfc5c65b49027f669d92e30772ecf56fc05644ce074010efe12cb8de"
+    }
+  },
+  "exit_audit": {
+    "M2_complete": true,
+    "M_causally_changes_later_behavior": true,
+    "all_external_actions_J_authorized": true,
+    "clean_state_each_run": true,
+    "official_sample_game_win_count_per_run": 25,
+    "official_sample_level_completion_count_per_run": 183,
+    "one_ACTIVE_DEV_ProductBundle": true,
+    "one_agent_architecture": true,
+    "zero_fixed_replay": true,
+    "zero_identity_router": true
+  },
+  "identity_replay_preliminary_audit": {
+    "active_bundle_forbidden_path_count": 0,
+    "active_bundle_literal_game_id_count": 0,
+    "decision_identity_taint_finding_count": 0,
+    "domain_local_residue_runtime_selector_count": 0,
+    "fixed_trajectory_playback_finding_count": 0,
+    "full_M3_P03_audit_still_required": true,
+    "identity_action_router_finding_count": 0,
+    "scope": {
+      "active_bundle": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+      "decision_modules": [
+        "ARC-AGI-3-Agents/arc3_agi_agent/compiled_policy.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_compute.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_hds.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_memory.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/generic_runtime.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/local_capability.py",
+        "ARC-AGI-3-Agents/arc3_agi_agent/p_ir_interpreter.py"
+      ],
+      "domain_local_residue_count": 46,
+      "orchestration_identity_classification": "TAINTED_METADATA_ONLY",
+      "selector_classification": "GOVERNANCE_ONLY_NOT_PACKAGED_RUNTIME_INPUT"
+    }
+  },
+  "logical_content_sha256": "4d9093c3c13dfd3eefb56a886fe3c9359f4c8a2ae24071f7611cb91b72325dd9",
+  "point_id": "M2-P05_FULL_SAMPLE_PRODUCT_CLOSURE",
+  "run_audit": {
+    "active_development_product_bundle_count": 1,
+    "aggregate_game_win_count": 75,
+    "aggregate_level_completion_count": 549,
+    "aggregate_runtime_action_count": 32199,
+    "distinct_session_lineage_count": 3,
+    "endpoint_failure_count": 0,
+    "failure_signature_row_count": 0,
+    "fresh_M_count": 3,
+    "fresh_cognitive_session_count": 3,
+    "fresh_process_count": 3,
+    "lifecycle_failure_count": 0,
+    "manual_step_intervention_count": 0,
+    "per_run": {
+      "A": {
+        "failed_hypothesis_invalidation_count": 478,
+        "failure_attribution_count": 12,
+        "game_win_count": 25,
+        "level_completion_count": 183,
+        "memory_causal_behavior_change_count": 7567,
+        "order_digest": "sha256:fe55d0b4f068067a9a7de2c4e9b038bd3f301f944a7929b136b6d6b2d1b9d3c3",
+        "post_rollback_replan_count": 42,
+        "rollback_plan_count": 42,
+        "runtime_action_count": 10733,
+        "session_lineage_digest": "cognitive-lineage:d5878323ea76e034d7609f65fc9fe21210cd52e653246ab50e6ec67014419de9"
+      },
+      "B": {
+        "failed_hypothesis_invalidation_count": 478,
+        "failure_attribution_count": 12,
+        "game_win_count": 25,
+        "level_completion_count": 183,
+        "memory_causal_behavior_change_count": 7567,
+        "order_digest": "sha256:107fa8ada59556fd88421b866f254658a49ec84009a72cbbec651370ea0a3d07",
+        "post_rollback_replan_count": 42,
+        "rollback_plan_count": 42,
+        "runtime_action_count": 10733,
+        "session_lineage_digest": "cognitive-lineage:a509172f72b292c2843ebeb010a65834c10c4d7fba177cf845d7951f448d4b9f"
+      },
+      "C": {
+        "failed_hypothesis_invalidation_count": 478,
+        "failure_attribution_count": 12,
+        "game_win_count": 25,
+        "level_completion_count": 183,
+        "memory_causal_behavior_change_count": 7567,
+        "order_digest": "sha256:434ad8d4814b2d521dd505e44db81df645a8a343173f92733a0b868561fb1e7c",
+        "post_rollback_replan_count": 42,
+        "rollback_plan_count": 42,
+        "runtime_action_count": 10733,
+        "session_lineage_digest": "cognitive-lineage:b06a7fa87ede998b61bb3be7bde79dffa7d5482c2472b38b728ce59afbfbd8d3"
+      }
+    },
+    "policy_swap_count": 0,
+    "retry_count": 0,
+    "state_owner_violation_count": 0
+  },
+  "runtime_product": "ARC3CompletionAgent",
+  "schema_version": "arc3-rev5-1-m2-full-sample-closure-v1",
+  "shuffle_audit": {
+    "active_bundle_identity_mismatch_count": 0,
+    "aggregate_metric_mismatch_count": 0,
+    "algorithm": "SHA256_ASCENDING_OF_LABEL_PIPE_GAME_ID",
+    "all_orders_distinct": true,
+    "blocking_order_dependency_count": 0,
+    "per_game_functional_mismatch_count": 0,
+    "run_A_is_official_order": true,
+    "run_B_is_exact_permutation": true,
+    "run_C_is_exact_permutation": true
+  },
+  "status": "M2_COMPLETE"
+}

@@ -1,0 +1,427 @@
+{
+  "artifact_type": "RuntimeVersionLearningEvidence",
+  "asset_stage": "ACTIVE_DEV",
+  "claim_boundary": {
+    "M3_complete": false,
+    "allowed_claim": "M3_P05_RUNTIME_VERSION_LEARNING_ONLY",
+    "candidate_is_active_product": false,
+    "full_sample_regression_complete": false,
+    "next_point": "M3-P06_CONFORMANCE_FULL_REGRESSION",
+    "product_completion_established": false,
+    "release_established": false
+  },
+  "deletion_and_focused_regression": {
+    "acquired_record_deletion_changes_action": true,
+    "candidate_non_degrading_on_representative_world": true,
+    "candidate_with_acquired_record": {
+      "action_count": 1,
+      "action_sequence": [
+        11
+      ],
+      "all_external_actions_J_authorized": true,
+      "final_state": "WIN",
+      "first_action": 11,
+      "observation_digest": "generic-observation:f41001158ed4e834800aca9e9332dffc4eee45653e566e394ab8385e8de25662",
+      "stop_reason": "GOAL_REACHED"
+    },
+    "control_without_acquired_record": {
+      "action_count": 2,
+      "action_sequence": [
+        29,
+        11
+      ],
+      "all_external_actions_J_authorized": true,
+      "final_state": "WIN",
+      "first_action": 29,
+      "observation_digest": "generic-observation:f41001158ed4e834800aca9e9332dffc4eee45653e566e394ab8385e8de25662",
+      "stop_reason": "GOAL_REACHED"
+    },
+    "same_observation": true
+  },
+  "evidence_bindings": {
+    "active_product_descriptor": {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.json",
+      "sha256": "0c2f9bced86f316e43eb720b5f9d1c11afc2502935bfd982172b36d6a0c04526"
+    },
+    "active_product_package": {
+      "path": "ARC-AGI-3-Agents/arc3_agi_agent/bundles/arc3_product_initial_state_v1.zip",
+      "sha256": "a24ba468374bf7fabda2d0ecae44793125fe1eb829db649196a8f77d0b7d91ce"
+    },
+    "implementation_sources": {
+      "ARC-AGI-3-Agents/arc3_agi_agent/initial_state_compiler.py": "e74ddd41d1292adc40ac29c07a55e355544554f65d44bb583281275581ecffea",
+      "ARC-AGI-3-Agents/arc3_agi_agent/memory_consolidation.py": "006c007465dd896b5131f3d8a36c392b8abadd2ed2fca3ff7846d5834dfe4fcc",
+      "ARC-AGI-3-Agents/arc3_agi_agent/negative_transfer.py": "73ccdf62dfe1e9ffeaae886ed81cafb96a6a307a6be0e1716578ca4c40d1af24",
+      "ARC-AGI-3-Agents/arc3_agi_agent/product_version_learning.py": "7fe22f8c9e526bace9623d7e98b9065b8fef338a78b9ff9bd7190e212ca909e0"
+    },
+    "m3_p04_applicability_counterfactual": {
+      "path": "analysis/product/rev5_1/m3_p04_applicability_counterfactual.json",
+      "sha256": "9faa04d9dcaf0e39a2094aac55760bac9a659bb8b36a388cf2402037a5855178"
+    }
+  },
+  "false_learning_control": {
+    "add_J_authorized": true,
+    "add_receipt_operation": "ADD",
+    "admitted_to_candidate_input": false,
+    "false_record_absent_after_rollback": true,
+    "false_record_execute_eligible_after_invalidation": false,
+    "false_record_suspended_after_invalidation": true,
+    "injected_record_id": "causal:action-effect:2df8c63fd9c232f9f903e6a7da739b22",
+    "injected_record_state": "SUSPENDED",
+    "invalidation_J_authorized": true,
+    "invalidation_receipt_operation": "INVALIDATE",
+    "negative_transfer_decision": "INVALIDATE",
+    "negative_transfer_reasons": [
+      "CONTRADICTION_POLICY_INVALIDATED"
+    ],
+    "pre_injection_active_memory_restored": true,
+    "rollback_J_authorized": true,
+    "rollback_receipt_operation": "ROLLBACK"
+  },
+  "logical_content_sha256": "163f9975dbd850a392b2563da2a83ab17079b0e3b15a825b62de7836e77dbdb6",
+  "multi_run_gate": {
+    "assessment_digest": "product-version-learning-assessment:97361a44f7e0b799e940efd105ec2ed7ec3872c8253cfdaec24f3e86086e1b68",
+    "candidate_record_count": 1,
+    "contradiction_assessments": [
+      {
+        "assessment_digest": "negative-transfer-assessment:395d58908429ef22b66ee7e944c0400bcbc12211fcc61fce15e4b56c40b9fe1b",
+        "decision": "ACCEPT",
+        "reasons": [
+          "CAUSAL_POLICY_VALID"
+        ],
+        "record_id": "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0"
+      }
+    ],
+    "contradiction_test_passed": true,
+    "decision": "PROMOTE_TO_VERSION_CANDIDATE",
+    "deletion_test_passed": true,
+    "eligible_record_ids": [
+      "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0"
+    ],
+    "focused_regression_passed": true,
+    "reasons": [
+      "VERSION_CANDIDATE_GATES_PASSED"
+    ],
+    "rejected_records": [
+      [
+        "causal:action-effect:6be99bab7ad32f69d897a523cbd6497d",
+        [
+          "ACTIVE_RUNTIME_M_REQUIRED",
+          "DISTINCT_RUN_SUPPORT_INSUFFICIENT",
+          "EXECUTE_ELIGIBILITY_REQUIRED",
+          "TOTAL_SUPPORT_INSUFFICIENT"
+        ]
+      ]
+    ],
+    "required_distinct_run_support": 3,
+    "source_record_ids": [
+      "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0",
+      "causal:action-effect:6be99bab7ad32f69d897a523cbd6497d"
+    ]
+  },
+  "next_version_candidate": {
+    "activation_performed": false,
+    "candidate_J0_digest": "j0:65dd269884a737a6b76dd263164984ea257c97865a4d88abbaa1a9e5ad87245d",
+    "candidate_M0_digest": "m0:6ae082a27f0809e1d723ec1dd28e792f33d382341e7deb77b16378da7c5b3107",
+    "candidate_M0_record_count": 9,
+    "candidate_P_logical_digest": "p-logical:72091424e67812b8b7e9efd245943a696027ed2da7cdff7d3f1c714ae44ffb1c",
+    "candidate_initial_state_logical_digest": "initial-state-logical:2c7a39e89844bf7eabd197733be8f930ec81898ef1ce54e08f27b8993c111efc",
+    "compiled_acquired_record_ids": [
+      "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0"
+    ],
+    "false_learning_record_compiled": false,
+    "package_path": "analysis/product/rev5_1/m3_p05_next_initial_state_candidate.zip",
+    "package_roundtrip_byte_identical": true,
+    "package_sha256": "54948c3b5c0af83cd7e91ed1c0824f1f7c766c556c0abe357b5cf3a1ea288897",
+    "package_size_bytes": 7975666,
+    "parent_J0_digest": "j0:65dd269884a737a6b76dd263164984ea257c97865a4d88abbaa1a9e5ad87245d",
+    "parent_M0_digest": "m0:1302d43f51362ac3a104b125beac10a205e7fa0f585b26eb19ac19537aa574c6",
+    "parent_M0_record_count": 8,
+    "parent_P_logical_digest": "p-logical:72091424e67812b8b7e9efd245943a696027ed2da7cdff7d3f1c714ae44ffb1c",
+    "parent_initial_state_logical_digest": "initial-state-logical:a3fdd6b188538eda5b6837c1bddf5c60f46dc7c09ba03b47bc170d10e85f45bb",
+    "rejected_or_invalid_record_ids": [
+      "causal:action-effect:6be99bab7ad32f69d897a523cbd6497d"
+    ],
+    "status": "CANDIDATE_PENDING_M3_P06"
+  },
+  "one_success_gate": {
+    "assessment_digest": "product-version-learning-assessment:6965c6d498e71d3eac58328c17244017ec33b00a17b581144dc08cf8c84307f7",
+    "candidate_record_count": 0,
+    "contradiction_test_passed": true,
+    "decision": "HOLD_RUNTIME_M",
+    "deletion_test_passed": true,
+    "eligible_record_ids": [],
+    "focused_regression_passed": true,
+    "reasons": [
+      "NO_STABLE_MULTI_RUN_RECORD"
+    ],
+    "rejected_records": [
+      [
+        "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0",
+        [
+          "ACTIVE_RUNTIME_M_REQUIRED",
+          "DISTINCT_RUN_SUPPORT_INSUFFICIENT",
+          "EXECUTE_ELIGIBILITY_REQUIRED",
+          "TOTAL_SUPPORT_INSUFFICIENT"
+        ]
+      ],
+      [
+        "causal:action-effect:6be99bab7ad32f69d897a523cbd6497d",
+        [
+          "ACTIVE_RUNTIME_M_REQUIRED",
+          "DISTINCT_RUN_SUPPORT_INSUFFICIENT",
+          "EXECUTE_ELIGIBILITY_REQUIRED",
+          "TOTAL_SUPPORT_INSUFFICIENT"
+        ]
+      ]
+    ],
+    "required_distinct_run_support": 3,
+    "source_record_ids": [
+      "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0",
+      "causal:action-effect:6be99bab7ad32f69d897a523cbd6497d"
+    ]
+  },
+  "point_id": "M3-P05_RUNTIME_VERSION_LEARNING",
+  "restart_evidence": {
+    "acquired_capability_changes_restart_behavior": true,
+    "acquired_record_bound_to_selected_candidate": true,
+    "acquired_record_retrieved": true,
+    "candidate_compiled_initial_state": {
+      "action_count": 1,
+      "action_sequence": [
+        11
+      ],
+      "execute_eligible_binding_count": 1,
+      "final_state": "WIN",
+      "first_action": 11,
+      "fresh_CognitiveSession": true,
+      "loaded_from_compiled_initial_state_package": true,
+      "memory_citation_ids": [
+        "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0",
+        "local-m:counter-hypothesis",
+        "local-m:goal-model",
+        "local-m:mechanism-hypothesis",
+        "local-m:observation-state",
+        "local-m:resource-recovery",
+        "local-m:temporal-settle",
+        "product-seed:action-surface",
+        "product-seed:goal-progress",
+        "product-seed:hazard-boundary",
+        "product-seed:ordered-composition",
+        "product-seed:reset-recovery",
+        "product-seed:role-relation",
+        "product-seed:temporal-observation"
+      ],
+      "mutable_training_memory_reused": false,
+      "observation_digest": "generic-observation:f41001158ed4e834800aca9e9332dffc4eee45653e566e394ab8385e8de25662",
+      "plan_memory_refs": [
+        "semantic-record:ddf4d6194fca669654c8d46d25f14cb70d1ae2c0662975324b513ce61ac8625d"
+      ],
+      "stop_reason": "GOAL_REACHED",
+      "typed_memory_binding_refs": [
+        "semantic-record:ddf4d6194fca669654c8d46d25f14cb70d1ae2c0662975324b513ce61ac8625d"
+      ]
+    },
+    "control_parent_initial_state": {
+      "action_count": 2,
+      "action_sequence": [
+        29,
+        11
+      ],
+      "execute_eligible_binding_count": 0,
+      "final_state": "WIN",
+      "first_action": 29,
+      "fresh_CognitiveSession": true,
+      "loaded_from_compiled_initial_state_package": true,
+      "memory_citation_ids": [
+        "causal:action-effect:7cf5f4ad32168487fc89e3dfc0addbda",
+        "local-m:counter-hypothesis",
+        "local-m:goal-model",
+        "local-m:mechanism-hypothesis",
+        "local-m:observation-state",
+        "local-m:resource-recovery",
+        "local-m:temporal-settle",
+        "product-seed:action-surface",
+        "product-seed:goal-progress",
+        "product-seed:hazard-boundary",
+        "product-seed:ordered-composition",
+        "product-seed:reset-recovery",
+        "product-seed:role-relation",
+        "product-seed:temporal-observation"
+      ],
+      "mutable_training_memory_reused": false,
+      "observation_digest": "generic-observation:f41001158ed4e834800aca9e9332dffc4eee45653e566e394ab8385e8de25662",
+      "plan_memory_refs": [
+        "bounded-action-effect-memory:5d7e41e45659ea3674ecd8ea582ad86f866fb82e71bd22c346c923e35e3ab5cc"
+      ],
+      "stop_reason": "GOAL_REACHED",
+      "typed_memory_binding_refs": []
+    },
+    "same_observation": true,
+    "training_SemanticMemory_object_reused": false
+  },
+  "runtime_learning": {
+    "first_run_global_causal_state": "PROBATION",
+    "first_run_version_candidate_created": false,
+    "run_count": 3,
+    "runs": [
+      {
+        "action_count": 2,
+        "action_sequence": [
+          29,
+          11
+        ],
+        "all_external_actions_J_authorized": true,
+        "all_runtime_M_updates_J_authorized": true,
+        "episode_overlay_consolidated": true,
+        "final_state": "WIN",
+        "global_causal_records": [
+          {
+            "contradiction_count": 0,
+            "distinct_run_support": 1,
+            "execute_eligibility": false,
+            "hazard_count": 0,
+            "kind": "ACTION_EFFECT",
+            "no_effect_count": 0,
+            "record_id": "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0",
+            "state": "PROBATION",
+            "support_count": 1
+          },
+          {
+            "contradiction_count": 0,
+            "distinct_run_support": 0,
+            "execute_eligibility": false,
+            "hazard_count": 0,
+            "kind": "ACTION_EFFECT",
+            "no_effect_count": 1,
+            "record_id": "causal:action-effect:6be99bab7ad32f69d897a523cbd6497d",
+            "state": "PROPOSED",
+            "support_count": 0
+          }
+        ],
+        "memory_version_after": 4,
+        "memory_version_before": 0,
+        "outcome_sequence": [
+          "NO_EFFECT",
+          "PROGRESS"
+        ],
+        "run_ordinal": 1,
+        "runtime_M_changed": true,
+        "stop_reason": "GOAL_REACHED",
+        "version_candidate_created": false
+      },
+      {
+        "action_count": 1,
+        "action_sequence": [
+          11
+        ],
+        "all_external_actions_J_authorized": true,
+        "all_runtime_M_updates_J_authorized": true,
+        "episode_overlay_consolidated": true,
+        "final_state": "WIN",
+        "global_causal_records": [
+          {
+            "contradiction_count": 0,
+            "distinct_run_support": 2,
+            "execute_eligibility": false,
+            "hazard_count": 0,
+            "kind": "ACTION_EFFECT",
+            "no_effect_count": 0,
+            "record_id": "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0",
+            "state": "PROBATION",
+            "support_count": 2
+          },
+          {
+            "contradiction_count": 0,
+            "distinct_run_support": 0,
+            "execute_eligibility": false,
+            "hazard_count": 0,
+            "kind": "ACTION_EFFECT",
+            "no_effect_count": 1,
+            "record_id": "causal:action-effect:6be99bab7ad32f69d897a523cbd6497d",
+            "state": "PROPOSED",
+            "support_count": 0
+          }
+        ],
+        "memory_version_after": 7,
+        "memory_version_before": 4,
+        "outcome_sequence": [
+          "PROGRESS"
+        ],
+        "run_ordinal": 2,
+        "runtime_M_changed": true,
+        "stop_reason": "GOAL_REACHED",
+        "version_candidate_created": false
+      },
+      {
+        "action_count": 1,
+        "action_sequence": [
+          11
+        ],
+        "all_external_actions_J_authorized": true,
+        "all_runtime_M_updates_J_authorized": true,
+        "episode_overlay_consolidated": true,
+        "final_state": "WIN",
+        "global_causal_records": [
+          {
+            "contradiction_count": 0,
+            "distinct_run_support": 3,
+            "execute_eligibility": true,
+            "hazard_count": 0,
+            "kind": "ACTION_EFFECT",
+            "no_effect_count": 0,
+            "record_id": "causal:action-effect:5330eedc74e9a87b39ea32ddaadcd2a0",
+            "state": "ACTIVE",
+            "support_count": 3
+          },
+          {
+            "contradiction_count": 0,
+            "distinct_run_support": 0,
+            "execute_eligibility": false,
+            "hazard_count": 0,
+            "kind": "ACTION_EFFECT",
+            "no_effect_count": 1,
+            "record_id": "causal:action-effect:6be99bab7ad32f69d897a523cbd6497d",
+            "state": "PROPOSED",
+            "support_count": 0
+          }
+        ],
+        "memory_version_after": 10,
+        "memory_version_before": 7,
+        "outcome_sequence": [
+          "PROGRESS"
+        ],
+        "run_ordinal": 3,
+        "runtime_M_changed": true,
+        "stop_reason": "GOAL_REACHED",
+        "version_candidate_created": false
+      }
+    ],
+    "runtime_M_consolidation_is_version_promotion": false,
+    "runtime_experience_updates_M_first": true
+  },
+  "runtime_product": "ARC3CompletionAgent",
+  "schema_version": "arc3-rev5-1-m3-p05-runtime-version-learning-v1",
+  "status": "M3_P05_PASS",
+  "summary": {
+    "active_development_product_bundle_count": 1,
+    "active_runtime_bundle_unchanged": true,
+    "false_learning_invalidated": true,
+    "false_learning_rollback_effective": true,
+    "one_success_release_candidate_count": 0,
+    "restart_acquired_capability_causal": true,
+    "restart_uses_compiled_initial_state": true,
+    "runtime_experience_updates_M_first": true,
+    "stable_multi_run_candidate_count": 1
+  },
+  "version_lineage_candidate": {
+    "activation_event_count": 0,
+    "active_runtime_count": 1,
+    "candidate_runtime_identity_digest": "runtime-identity:19b98a0164cd24d0947c9c7485fadf9f9abd1294976bb5aa80e102b2e6919bb2",
+    "candidate_status": "CANDIDATE_PENDING_M3_P06",
+    "candidate_version": "arc3-product-initial-state-v1-m3-p05-candidate",
+    "full_regression_required_before_activation": true,
+    "parent_runtime_identity_digest": "runtime-identity:f8d3d82507cfdff475e70ccf896bffb3d570f6ec26324eee7af15be020eecef1",
+    "parent_version": "arc3-product-initial-state-v1",
+    "transition_digest": "runtime-version-candidate-transition:138687ec55f404000f9ade85a8156a32f2fa38d346fec75743789f58619467dc"
+  }
+}

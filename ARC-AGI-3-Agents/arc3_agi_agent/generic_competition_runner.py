@@ -238,6 +238,29 @@ def run_sequential_competition(
                         "failure_attribution_count": int(
                             getattr(runtime_report, "failure_attribution_count", 0)
                         ),
+                        "action_id_counts": {
+                            str(action_id): int(count)
+                            for action_id, count in getattr(
+                                runtime_report,
+                                "action_id_counts",
+                                (),
+                            )
+                        },
+                        "memory_causal_behavior_change_count": int(
+                            getattr(
+                                runtime_report,
+                                "memory_causal_behavior_change_count",
+                                0,
+                            )
+                        ),
+                        "memory_causal_witness_refs": tuple(
+                            str(item)
+                            for item in getattr(
+                                runtime_report,
+                                "memory_causal_witness_refs",
+                                (),
+                            )
+                        ),
                     }
                 )
                 logger.info(

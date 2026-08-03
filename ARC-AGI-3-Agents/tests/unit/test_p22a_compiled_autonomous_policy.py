@@ -9,6 +9,7 @@ import pytest
 
 from arc3_agi_agent.compiled_policy import (
     COMPILED_POLICY_HISTORY_LIMIT,
+    MEMORY_CAUSAL_WITNESS_PREFIX,
     compiled_policy_feature_vector,
     load_compiled_autonomous_instruction_body,
 )
@@ -251,6 +252,23 @@ def test_same_render_changes_action_only_through_passive_m() -> None:
 
     assert body.predict(_observation(arrays, first), first_history).action_id == 6
     assert body.predict(_observation(arrays, second), second_history).action_id == 3
+    observation = _observation(arrays, second)
+    representation = represent_observation(
+        observation,
+        goal_tokens=("goal:progress",),
+    )
+    result = body.query(
+        representation,
+        action_descriptors(observation, representation),
+        (),
+        observation=observation,
+        action_history=second_history,
+    )
+    selected = max(result.predictions, key=lambda item: item.prior)
+    assert any(
+        ref.startswith(MEMORY_CAUSAL_WITNESS_PREFIX)
+        for ref in selected.instruction_refs
+    )
 
 
 def test_irrelevant_semantic_m_leaves_supported_action_invariant() -> None:
@@ -493,6 +511,8 @@ def test_control_rollback_is_followed_by_a_revised_plan() -> None:
     assert summary.hds_plan_commit_count == 2
     assert summary.revised_plan_count == 1
     assert summary.rollback_plan_count == 1
+    assert summary.action_id_counts[0] == 1
+    assert sum(summary.action_id_counts.values()) == 2
     assert summary.post_rollback_replan_count == 1
     assert summary.competing_hypothesis_plan_count == 2
     assert summary.multi_representation_plan_count == 2

@@ -232,6 +232,7 @@ def test_recovered_game_over_is_attribution_not_final_failure() -> None:
     assert summary.executed_plan_count == report.actions_executed
     assert summary.hds_plan_commit_count == report.actions_executed
     assert summary.failure_attribution_count == 1
+    assert sum(summary.action_id_counts.values()) == report.actions_executed
     assert summary.competing_hypothesis_plan_count == report.actions_executed
     assert summary.multi_representation_plan_count == report.actions_executed
     assert summary.subgoal_plan_count == report.actions_executed
