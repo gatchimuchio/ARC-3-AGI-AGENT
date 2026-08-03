@@ -17,8 +17,8 @@
     53996483,
     53966647
   ],
-  "checked_at_utc": "2026-08-03T08:20:12.935021Z",
-  "elapsed_seconds": 1325.862,
+  "checked_at_utc": "2026-08-03T17:04:25.139000Z",
+  "elapsed_seconds": 32778.066,
   "episode_evidence": {
     "endpoint": "competitions.CompetitionApiService/ListSubmissionEpisodes",
     "episode_count": 0,
@@ -52,7 +52,7 @@
     "SECRET_FINDING_COUNT_ZERO": true,
     "SUBMISSION_AUTHORIZED_ONCE": true
   },
-  "logical_content_sha256": "b13ec86e51e35a23141bacebfb083073590d9e278f7232df8b3b68b3ed1b1aee",
+  "logical_content_sha256": "6cf0b5151c3ca6895f590497bf9e800692761643ff5676fe650826e56946cd27",
   "new_submission_refs": [
     55206302
   ],
@@ -83,11 +83,11 @@
   },
   "submission_result": {
     "error_description": null,
-    "failure_classification": "NONE_NONTERMINAL",
+    "failure_classification": "NONE_PLATFORM_COMPLETED",
     "private_score": null,
-    "public_score": null,
-    "status": "PENDING",
-    "terminal": false,
-    "total_bytes": 0
+    "public_score": "0.06",
+    "status": "COMPLETE",
+    "terminal": true,
+    "total_bytes": 3460
   }
 }
