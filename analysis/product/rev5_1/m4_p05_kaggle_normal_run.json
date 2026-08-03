@@ -1,0 +1,183 @@
+{
+  "artifact_type": "M4KagglePackageNormalRunEvidence",
+  "asset_stage": "RELEASE_FROZEN",
+  "check_count": 17,
+  "checks": {
+    "NR-001_KERNEL_COMPLETE": true,
+    "NR-002_ACCEPTED_VERSION_RECORDED": true,
+    "NR-003_ONE_CURRENT_KERNEL": true,
+    "NR-004_OUTPUT_SET_EXACT": true,
+    "NR-005_NO_RUNTIME_ENV_PERSISTED": true,
+    "NR-006_SERVER_SOURCE_ROUNDTRIP": true,
+    "NR-007_SERVER_METADATA_SAFE": true,
+    "NR-008_PACKAGE_VALIDATION_PASS": true,
+    "NR-009_INSTALL_COMPLETE": true,
+    "NR-010_RELEASE_IDENTITY_EXACT": true,
+    "NR-011_NORMAL_STATUS_COMPLETE": true,
+    "NR-012_OUTPUT_CONTRACT_EXACT": true,
+    "NR-013_NO_RUNTIME_EXCEPTION": true,
+    "NR-014_ZERO_SUBMISSION_API_CALLS": true,
+    "NR-015_SEQUENTIAL_SCORECARD_LIFECYCLE": true,
+    "NR-016_SAME_M4_P04_RELEASE": true,
+    "NR-017_WHEELHOUSE_MANIFEST_EXACT": true
+  },
+  "dependency_install": {
+    "installed_distribution_count": 33,
+    "resolved_mount": "/kaggle/input/datasets/tecchannn/arc3-completion-release-rev5-1",
+    "runtime_environment": "/tmp/arc3_runtime_env",
+    "status": "COMPLETE",
+    "status_sha256": "8678b25fb56082fdd898102ed6055ec3609f131eed9d335d3054b254312444bf",
+    "verified_wheel_count": 33,
+    "wheelhouse_manifest_sha256": "faa8b84778a7f02f57f330ce2ac25c27a6498ec4598bf46fb62e074df77483c4"
+  },
+  "failed_check_ids": [],
+  "kernel": {
+    "completion_checked_utc": "2026-08-03T07:26:19.342813Z",
+    "id_no": 129549121,
+    "latest_run_time_utc": "2026-08-03T07:24:18.117000",
+    "log_duration_seconds": 38.734,
+    "log_event_count": 89,
+    "monitor_elapsed_seconds": 124.939,
+    "push_started_utc": "2026-08-03T07:24:14.403789Z",
+    "ref": "tecchannn/arc3completionagent-rev5-1-frozen-release",
+    "url": "https://www.kaggle.com/code/tecchannn/arc3completionagent-rev5-1-frozen-release",
+    "version": 4,
+    "worker_status": "COMPLETE"
+  },
+  "logical_content_sha256": "10a8e6edb2b9eaf21e8ba3d54c96aeadd86b9fd86897d84924a972d50a6c82cb",
+  "notebook": {
+    "cell_count": 4,
+    "cell_source_sha256": "c4e1ff3c3e39290a28b30caf2ac527e38272ed18d2d8ba053defe34b0ac87980",
+    "local_sha256": "692f222ccee5c8eaf614ce59b9ac516e8cb5fa7557cac0086c8e4753870ff0bc",
+    "path": "kaggle_notebooks/submission.ipynb",
+    "server_dataset_source_normalization": {
+      "requested": "tecchannn/arc3-completion-release-rev5-1/1",
+      "stored": [
+        "tecchannn/arc3-completion-release-rev5-1"
+      ]
+    },
+    "server_metadata_sha256": "9e90abfdfdead59b4095623f2dd62b7c8add000d0069a7e17434f79220eeb3d2",
+    "server_payload_sha256": "8d797364a4494515d28bc86fb5f67d239567a7c865b7a787227960972ba23da3",
+    "source_roundtrip_exact": true
+  },
+  "output": {
+    "columns": [
+      "row_id",
+      "game_id",
+      "end_of_game",
+      "score"
+    ],
+    "listed_outputs": [
+      {
+        "creationDate": "7:24 am, Monday 3 August 2026 UTC",
+        "name": "arc3_install_status.json",
+        "size": 905
+      },
+      {
+        "creationDate": "7:24 am, Monday 3 August 2026 UTC",
+        "name": "arc3_normal_run_status.json",
+        "size": 914
+      },
+      {
+        "creationDate": "7:24 am, Monday 3 August 2026 UTC",
+        "name": "arc3_payload_status.json",
+        "size": 905
+      },
+      {
+        "creationDate": "7:24 am, Monday 3 August 2026 UTC",
+        "name": "submission.parquet",
+        "size": 890
+      }
+    ],
+    "parquet_magic_valid": true,
+    "path": "submission.parquet",
+    "rows": [
+      {
+        "end_of_game": true,
+        "game_id": "1",
+        "row_id": "1_0",
+        "score": 1
+      }
+    ],
+    "sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb",
+    "size_bytes": 2648,
+    "status_sha256": "f8358d982fbfa693a4930080b10877e0afba31c5de7ee317fad17aa327221af7"
+  },
+  "passed_check_count": 17,
+  "platform_failure_count": 0,
+  "point_id": "M4-P05_KAGGLE_PACKAGE_NORMAL_RUN",
+  "product_failure_count": 0,
+  "release_identity": {
+    "action_budget": 4096,
+    "agent_class": "ARC3CompletionAgent",
+    "dependency_pin_count": 32,
+    "dependency_pin_mismatch_count": 0,
+    "entrypoint_count": 1,
+    "entrypoint_target": "arc3_agi_agent.product_runner:main",
+    "error_message": null,
+    "error_type": null,
+    "initial_state_logical_digest": "initial-state-logical:a3fdd6b188538eda5b6837c1bddf5c60f46dc7c09ba03b47bc170d10e85f45bb",
+    "j0_digest": "j0:65dd269884a737a6b76dd263164984ea257c97865a4d88abbaa1a9e5ad87245d",
+    "m0_digest": "m0:1302d43f51362ac3a104b125beac10a205e7fa0f585b26eb19ac19537aa574c6",
+    "p_logical_digest": "p-logical:72091424e67812b8b7e9efd245943a696027ed2da7cdff7d3f1c714ae44ffb1c",
+    "release_bundle_id": "ARC3ProductBundle-release-v1",
+    "release_bundle_logical_digest": "release-manifest:0b16e49719e326a1f51d81e5f107508025f1eeabe6735b205a11ebc233cb6489",
+    "release_bundle_stage": "RELEASE_FROZEN",
+    "release_package_sha256": "99dd28966a0c20eaf2d93c3c47746d81d0ff2de666290f33b13526e8e878c923",
+    "runtime_identity_digest": "runtime-identity:47094e2ddb524bb1dba76078d51e10a20b090148bcd5b9a7c9cc4a20a416faff",
+    "state_owner_violation_count": 0,
+    "status": "COMPLETE",
+    "status_sha256": "73b520c5b2899d7307c3a78c1e83a518645fd9bfc192bd19fd60e15cbd047cc0"
+  },
+  "runtime_policy_changed": false,
+  "runtime_product": "ARC3CompletionAgent",
+  "schema_version": "arc3-rev5-1-m4-p05-kaggle-normal-run-v1",
+  "source_bindings": {
+    "M4_P04_same_release_full_sample": {
+      "path": "analysis/product/rev5_1/m4_p04_clean_full_sample_closure.json",
+      "sha256": "9101fbe6ab473adc6b0e9dec02ac94b25ffb3c7dfbd57fe202bff1f7c23d6dcb"
+    },
+    "M4_P04_sequential_scorecard_run": {
+      "path": "analysis/product/rev5_1/m4_p04_clean_full_sample_run.json",
+      "sha256": "828fe4d1c56ddc018ec7706860622513082597ed5b813435bf17ee455f6023ff"
+    },
+    "kernel_logs_sha256": "abb166382ad7327bf738e867c1bc6ba5c45127f9420a137eef096587e7abcf3a",
+    "package_validation": {
+      "path": "analysis/product/rev5_1/m4_p05_kaggle_package_validation.json",
+      "sha256": "e25186879d3cb927e364e725d1a6737d3f0632e82e159868b1e3eaf862013532"
+    },
+    "wheelhouse_manifest": {
+      "path": "analysis/product/rev5_1/m4_p05_kaggle_wheelhouse_manifest.json",
+      "sha256": "faa8b84778a7f02f57f330ce2ac25c27a6498ec4598bf46fb62e074df77483c4"
+    }
+  },
+  "status": "M4_P05_NORMAL_RUN_PASS",
+  "submission_guard": {
+    "competition": "arc-prize-2026-arc-agi-3",
+    "expected_refs": [
+      "55070928",
+      "55069307",
+      "55049227",
+      "55045360",
+      "55043205",
+      "55040966",
+      "53996483",
+      "53966647"
+    ],
+    "observed_refs": [
+      "55070928",
+      "55069307",
+      "55049227",
+      "55045360",
+      "55043205",
+      "55040966",
+      "53996483",
+      "53966647"
+    ],
+    "submission_api_call_count": 0,
+    "submission_count_after": 8,
+    "submission_count_before": 8,
+    "submission_count_delta": 0
+  },
+  "transport_failure_count": 0
+}

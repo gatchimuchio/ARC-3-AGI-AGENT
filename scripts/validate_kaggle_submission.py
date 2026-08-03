@@ -1,4 +1,4 @@
-"""Validate the ARC-AGI-3 notebook without consuming a submission slot."""
+"""Validate the M4-P05 Kaggle package without creating a submission."""
 
 from __future__ import annotations
 
@@ -11,52 +11,58 @@ import subprocess
 import sys
 import tempfile
 import zipfile
+from email.parser import BytesParser
 from pathlib import Path
-from typing import Sequence
+from typing import Final, Sequence
 
 from build_kaggle_submission import (
     ACTION_BUDGET,
-    AGENT_SOURCE,
-    AGENT_SOURCES,
     COMPETITION_SLUG,
     DEFAULT_OUTPUT_DIR,
+    M4_P02_REPORT_PATH,
+    M4_P04_REPORT_PATH,
+    OFFICIAL_PINNED_NOTEBOOK,
+    OFFICIAL_PINNED_NOTEBOOK_SOURCE_SHA256,
     OFFICIAL_PLACEHOLDER_PARQUET_SHA256,
     OFFICIAL_PLACEHOLDER_PARQUET_SIZE,
-    PACKAGE_ROOT,
-    RUNTIME_ASSETS,
-    RUNTIME_MODULES,
+    RELEASE_BUNDLE_ID,
+    RELEASE_BUNDLE_LOGICAL_DIGEST,
+    RELEASE_DESCRIPTOR_SHA256,
+    RELEASE_DISTRIBUTION,
+    RELEASE_ENTRYPOINT,
+    RELEASE_ENTRYPOINT_TARGET,
+    RELEASE_INITIAL_STATE_DIGEST,
+    RELEASE_J0_DIGEST,
+    RELEASE_M0_DIGEST,
+    RELEASE_P_DIGEST,
+    RELEASE_PACKAGE_SHA256,
+    RELEASE_RUNTIME_IDENTITY,
+    RELEASE_VERSION,
+    RELEASE_WHEEL_PATH,
+    RELEASE_WHEEL_SHA256,
+    ROOT,
+    WHEELHOUSE_DATASET_ID,
+    WHEELHOUSE_DATASET_SLUG,
+    WHEELHOUSE_DATASET_SOURCE,
+    WHEELHOUSE_INPUT_ROOT,
+    WHEELHOUSE_MANIFEST_PATH,
     build_metadata,
     build_notebook,
-    build_runtime_archive,
 )
 
-ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_REPORT = ROOT / "analysis" / "official" / (
-    "KAGGLE_NOTEBOOK_VALIDATION.json"
+DEFAULT_REPORT: Final = ROOT / "analysis/product/rev5_1/" / (
+    "m4_p05_kaggle_package_validation.json"
 )
-SECRET_PATTERNS = (
-    (
-        "KAGGLE_TOKEN",
-        re.compile(rb"(?<![A-Za-z0-9_-])KGAT_[A-Za-z0-9_-]{20,}"),
-    ),
-    (
-        "OPENAI_TOKEN",
-        re.compile(rb"(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{20,}"),
-    ),
-    (
-        "GITHUB_TOKEN",
-        re.compile(rb"(?<![A-Za-z0-9_-])gh[pousr]_[A-Za-z0-9]{20,}"),
-    ),
-    (
-        "PRIVATE_KEY",
-        re.compile(rb"-----BEGIN [A-Z ]*PRIVATE KEY-----"),
-    ),
+SECRET_PATTERNS: Final = (
+    ("KAGGLE_TOKEN", re.compile(rb"(?<![A-Za-z0-9_-])KGAT_[A-Za-z0-9_-]{20,}")),
+    ("OPENAI_TOKEN", re.compile(rb"(?<![A-Za-z0-9_-])sk-[A-Za-z0-9_-]{20,}")),
+    ("GITHUB_TOKEN", re.compile(rb"(?<![A-Za-z0-9_-])gh[pousr]_[A-Za-z0-9]{20,}")),
+    ("PRIVATE_KEY", re.compile(rb"-----BEGIN [A-Z ]*PRIVATE KEY-----")),
 )
-RUNTIME_SMOKE_EXPECTED_OUTPUT = "arc3.product.capability.v1:4096:PRODUCT:True"
 
 
-def _sha256(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
+def _sha256(payload: bytes) -> str:
+    return hashlib.sha256(payload).hexdigest()
 
 
 def _cell_source(cell: object) -> str:
@@ -65,11 +71,36 @@ def _cell_source(cell: object) -> str:
     source = cell.get("source", "")
     if isinstance(source, str):
         return source
-    if isinstance(source, list) and all(
-        isinstance(item, str) for item in source
-    ):
+    if isinstance(source, list) and all(isinstance(item, str) for item in source):
         return "".join(source)
     raise TypeError("KAGGLE_NOTEBOOK_CELL_SOURCE_INVALID")
+
+
+def _load_object(path: Path) -> tuple[dict[str, object], bytes]:
+    payload = path.read_bytes()
+    value = json.loads(payload)
+    if not isinstance(value, dict):
+        raise TypeError("KAGGLE_VALIDATION_JSON_OBJECT_REQUIRED:" + path.as_posix())
+    return {str(key): item for key, item in value.items()}, payload
+
+
+def _logical_seal(value: dict[str, object]) -> str:
+    material = dict(value)
+    material.pop("logical_content_sha256", None)
+    return _sha256(
+        json.dumps(
+            material,
+            ensure_ascii=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        ).encode("utf-8")
+    )
+
+
+def _require_object(value: object, error: str) -> dict[str, object]:
+    if not isinstance(value, dict):
+        raise TypeError(error)
+    return {str(key): item for key, item in value.items()}
 
 
 def _report_notebook_path(notebook_path: Path) -> str:
@@ -101,67 +132,37 @@ def _tracked_secret_findings() -> list[dict[str, object]]:
             count = len(pattern.findall(data))
             if count:
                 findings.append(
-                    {
-                        "path": relative,
-                        "pattern": name,
-                        "match_count": count,
-                    }
+                    {"path": relative, "pattern": name, "match_count": count}
                 )
     return findings
 
 
-def _runtime_import_smoke(runtime_archive: bytes) -> dict[str, object]:
-    with tempfile.TemporaryDirectory(
-        prefix="arc3-kaggle-runtime-validation-"
-    ) as directory:
-        root = Path(directory)
-        archive_path = root / "runtime.zip"
-        archive_path.write_bytes(runtime_archive)
-        with zipfile.ZipFile(archive_path) as archive:
-            archive.extractall(root)
-        command = dedent_smoke_command()
-        environment = os.environ.copy()
-        environment["PYTHONPATH"] = str(root)
-        result = subprocess.run(
-            [sys.executable, "-c", command],
-            cwd=root,
-            env=environment,
-            check=False,
-            capture_output=True,
-            text=True,
-            timeout=120,
-        )
-        return {
-            "returncode": result.returncode,
-            "stdout": result.stdout.strip(),
-            "stderr": result.stderr.strip(),
-            "passed": result.returncode == 0
-            and result.stdout.strip() == RUNTIME_SMOKE_EXPECTED_OUTPUT,
-        }
-
-
-def _preexecution_fallback_smoke(
-    install_source: str,
-) -> dict[str, object]:
-    with tempfile.TemporaryDirectory(
-        prefix="arc3-kaggle-fallback-validation-"
-    ) as directory:
+def _preexecution_fallback_smoke(install_source: str) -> dict[str, object]:
+    with tempfile.TemporaryDirectory(prefix="arc3-m4-p05-fallback-") as directory:
         root = Path(directory)
         fallback_path = root / "submission.parquet"
         status_path = root / "arc3_install_status.json"
-        transformed_source = install_source.replace(
-            '"/kaggle/working/submission.parquet"',
-            repr(str(fallback_path)),
-        ).replace(
-            '"/kaggle/working/arc3_install_status.json"',
-            repr(str(status_path)),
+        missing_wheelhouse = root / "missing-wheelhouse"
+        transformed = (
+            install_source.replace(
+                'Path("/kaggle/working/submission.parquet")',
+                f"Path({str(fallback_path)!r})",
+            )
+            .replace(
+                'Path("/kaggle/working/arc3_install_status.json")',
+                f"Path({str(status_path)!r})",
+            )
+            .replace(
+                repr("/kaggle/input/" + WHEELHOUSE_DATASET_SLUG),
+                repr(str(missing_wheelhouse)),
+            )
+            .replace(
+                repr(WHEELHOUSE_INPUT_ROOT),
+                repr(str(root / "isolated-kaggle-input")),
+            )
         )
         script_path = root / "install_cell.py"
-        script_path.write_text(
-            transformed_source,
-            encoding="utf-8",
-            newline="\n",
-        )
+        script_path.write_text(transformed, encoding="utf-8", newline="\n")
         environment = os.environ.copy()
         environment["KAGGLE_IS_COMPETITION_RERUN"] = "1"
         result = subprocess.run(
@@ -173,65 +174,117 @@ def _preexecution_fallback_smoke(
             text=True,
             timeout=120,
         )
-        inspection: dict[str, object] = {}
+        fallback: dict[str, object] = {}
         if fallback_path.is_file():
-            fallback_data = fallback_path.read_bytes()
-            inspection = {
-                "size_bytes": len(fallback_data),
-                "sha256": _sha256(fallback_data),
-                "parquet_magic_valid": (
-                    fallback_data[:4] == b"PAR1"
-                    and fallback_data[-4:] == b"PAR1"
-                ),
+            payload = fallback_path.read_bytes()
+            fallback = {
+                "size_bytes": len(payload),
+                "sha256": _sha256(payload),
+                "parquet_magic_valid": payload[:4] == b"PAR1" and payload[-4:] == b"PAR1",
             }
         install_status: dict[str, object] = {}
         if status_path.is_file():
-            install_status = json.loads(
-                status_path.read_text(encoding="utf-8")
-            )
+            install_status = json.loads(status_path.read_text(encoding="utf-8"))
+            error_message = install_status.get("error_message")
+            if isinstance(error_message, str):
+                normalized_message = error_message
+                root_variants = {
+                    str(root),
+                    root.as_posix(),
+                    json.dumps(str(root))[1:-1],
+                    json.dumps(root.as_posix())[1:-1],
+                }
+                for root_variant in root_variants:
+                    normalized_message = normalized_message.replace(
+                        root_variant,
+                        "<TEMP_ROOT>",
+                    )
+                install_status["error_message"] = normalized_message
+        visible = (
+            "FileNotFoundError" in result.stderr
+            and "frozen wheelhouse dataset is missing or unverified" in result.stderr
+        )
+        passed = (
+            result.returncode == 0
+            and fallback.get("size_bytes") == OFFICIAL_PLACEHOLDER_PARQUET_SIZE
+            and fallback.get("sha256") == OFFICIAL_PLACEHOLDER_PARQUET_SHA256
+            and fallback.get("parquet_magic_valid") is True
+            and install_status.get("status") == "INSTALL_EXCEPTION"
+            and install_status.get("error_type") == "FileNotFoundError"
+            and visible
+        )
         return {
-            "passed": (
-                result.returncode == 0
-                and inspection.get("size_bytes")
-                == OFFICIAL_PLACEHOLDER_PARQUET_SIZE
-                and inspection.get("sha256")
-                == OFFICIAL_PLACEHOLDER_PARQUET_SHA256
-                and inspection.get("parquet_magic_valid") is True
-                and install_status.get("status") == "INSTALL_EXCEPTION"
-                and install_status.get("error_type") == "FileNotFoundError"
-                and "FileNotFoundError" in result.stderr
-                and "ARC3 competition wheel bundle is missing"
-                in result.stderr
-            ),
+            "passed": passed,
             "returncode": result.returncode,
-            "fallback": inspection,
+            "fallback": fallback,
             "install_status": install_status,
-            "expected_install_failure_visible": (
-                "FileNotFoundError" in result.stderr
-                and "ARC3 competition wheel bundle is missing"
-                in result.stderr
-            ),
+            "expected_install_failure_visible": visible,
         }
 
 
-def dedent_smoke_command() -> str:
-    return (
-        "from arc3_agi_agent.product_capability import "
-        "load_product_initial_state\n"
-        "from arc3_agi_agent.product_runner import create_product_session\n"
-        "initial = load_product_initial_state()\n"
-        "session = create_product_session()\n"
-        "print(f'{initial.p_bundle.program.program_id}:'"
-        "f'{session.resource_contract.action_budget_per_episode}:'"
-        "f'{initial.p_bundle.compiler_report.mode}:'"
-        "f'{session.instruction_body.digest() == initial.p_bundle.body.digest()}')\n"
+def _release_wheel_inspection() -> dict[str, object]:
+    payload = RELEASE_WHEEL_PATH.read_bytes()
+    p02, _ = _load_object(M4_P02_REPORT_PATH)
+    p02_wheel = _require_object(
+        p02.get("wheel_artifact"),
+        "KAGGLE_M4_P02_WHEEL_ARTIFACT_INVALID",
     )
+    expected_names = p02_wheel.get("member_names")
+    with zipfile.ZipFile(RELEASE_WHEEL_PATH) as archive:
+        member_names = tuple(archive.namelist())
+        metadata_names = tuple(
+            name for name in member_names if name.endswith(".dist-info/METADATA")
+        )
+        entrypoint_names = tuple(
+            name for name in member_names if name.endswith(".dist-info/entry_points.txt")
+        )
+        release_manifest_names = tuple(
+            name
+            for name in member_names
+            if name.endswith(".dist-info/release_manifest.json")
+        )
+        if len(metadata_names) != 1 or len(entrypoint_names) != 1 or len(release_manifest_names) != 1:
+            raise ValueError("KAGGLE_RELEASE_WHEEL_METADATA_CARDINALITY_INVALID")
+        metadata = BytesParser().parsebytes(archive.read(metadata_names[0]))
+        requirements = tuple(str(item) for item in metadata.get_all("Requires-Dist", ()))
+        entrypoints = archive.read(entrypoint_names[0]).decode("utf-8")
+        release_manifest = json.loads(archive.read(release_manifest_names[0]))
+        descriptor = archive.read("arc3_agi_agent/bundles/arc3_product_release_v1.json")
+        package = archive.read("arc3_agi_agent/bundles/arc3_product_release_v1.zip")
+        runner_source = archive.read(
+            "arc3_agi_agent/generic_competition_runner.py"
+        ).decode("utf-8")
+        product_runner_source = archive.read("arc3_agi_agent/product_runner.py").decode(
+            "utf-8"
+        )
+    forbidden_members = tuple(
+        name
+        for name in member_names
+        if name.startswith("arc3_agi_agent/teacher/")
+        or name.startswith("analysis/")
+        or name.startswith("scratch/")
+    )
+    return {
+        "sha256": _sha256(payload),
+        "size_bytes": len(payload),
+        "member_count": len(member_names),
+        "member_names_match_M4_P02": list(member_names) == expected_names,
+        "distribution": str(metadata.get("Name", "")),
+        "version": str(metadata.get("Version", "")),
+        "requires_python": str(metadata.get("Requires-Python", "")),
+        "requirements": requirements,
+        "dependency_count": len(requirements),
+        "entrypoints": entrypoints,
+        "release_manifest": release_manifest,
+        "release_descriptor_sha256": _sha256(descriptor),
+        "release_package_sha256": _sha256(package),
+        "forbidden_members": forbidden_members,
+        "runner_source": runner_source,
+        "product_runner_source": product_runner_source,
+    }
 
 
-def validate(
-    *,
-    notebook_dir: Path,
-) -> dict[str, object]:
+def validate(*, notebook_dir: Path) -> dict[str, object]:
     notebook_path = notebook_dir / "submission.ipynb"
     metadata_path = notebook_dir / "kernel-metadata.json"
     build_report_path = notebook_dir / "build-report.json"
@@ -241,94 +294,97 @@ def validate(
     notebook = json.loads(notebook_data)
     metadata = json.loads(metadata_data)
     build_report = json.loads(build_report_data)
-
     notebook_id = metadata.get("id")
     if not isinstance(notebook_id, str) or "/" not in notebook_id:
         raise ValueError("KAGGLE_NOTEBOOK_ID_INVALID")
     username, notebook_slug = notebook_id.split("/", 1)
+
     expected_notebook, expected_build_report = build_notebook()
-    expected_runtime_archive = expected_build_report.get("runtime_archive")
-    if not isinstance(expected_runtime_archive, dict):
-        raise TypeError("KAGGLE_EXPECTED_RUNTIME_BUILD_REPORT_INVALID")
-    expected_metadata = build_metadata(
-        username=username,
-        notebook_slug=notebook_slug,
+    expected_metadata = build_metadata(username=username, notebook_slug=notebook_slug)
+    expected_notebook_data = (
+        json.dumps(expected_notebook, indent=1, ensure_ascii=False) + "\n"
+    ).encode("utf-8")
+    expected_metadata_data = (
+        json.dumps(expected_metadata, indent=2, ensure_ascii=False) + "\n"
+    ).encode("utf-8")
+    expected_build_report.update(
+        {
+            "notebook_sha256": _sha256(expected_notebook_data),
+            "notebook_size_bytes": len(expected_notebook_data),
+            "metadata_sha256": _sha256(expected_metadata_data),
+            "metadata": expected_metadata,
+        }
     )
+
     cells = notebook.get("cells")
     if not isinstance(cells, list):
         raise TypeError("KAGGLE_NOTEBOOK_CELLS_INVALID")
-    cell_ids = [
-        cell.get("id")
-        for cell in cells
-        if isinstance(cell, dict)
-    ]
-    cell_types = [
-        cell.get("cell_type")
-        for cell in cells
-        if isinstance(cell, dict)
-    ]
-    cell_sources_by_id = {
+    cell_ids = [cell.get("id") for cell in cells if isinstance(cell, dict)]
+    cell_types = [cell.get("cell_type") for cell in cells if isinstance(cell, dict)]
+    sources_by_id = {
         str(cell.get("id")): _cell_source(cell)
         for cell in cells
         if isinstance(cell, dict) and isinstance(cell.get("id"), str)
     }
-    install_source = cell_sources_by_id.get(
-        "install-official-offline-wheels",
-        "",
-    )
-    payload_source = cell_sources_by_id.get("verify-runtime-payload", "")
-    competition_source = cell_sources_by_id.get(
-        "execute-product-runtime",
-        "",
-    )
-    placeholder_source = cell_sources_by_id.get(
-        "write-official-placeholder",
-        "",
-    )
+    install_source = sources_by_id.get("install-exact-frozen-wheelhouse", "")
+    payload_source = sources_by_id.get("verify-exact-release-identity", "")
+    runtime_source = sources_by_id.get("execute-frozen-product-runtime", "")
+    placeholder_source = sources_by_id.get("write-official-placeholder", "")
     sources = "\n".join(_cell_source(cell) for cell in cells)
-    code_sources = [
-        _cell_source(cell)
-        for cell in cells
-        if isinstance(cell, dict) and cell.get("cell_type") == "code"
-    ]
     compile_failures: list[str] = []
-    for index, source in enumerate(code_sources):
+    for index, cell in enumerate(cells):
+        if not isinstance(cell, dict) or cell.get("cell_type") != "code":
+            continue
         try:
-            compile(source, f"submission.ipynb:code-cell-{index}", "exec")
+            compile(_cell_source(cell), f"submission.ipynb:code-cell-{index}", "exec")
         except SyntaxError as error:
             compile_failures.append(f"{index}:{error}")
 
-    runtime_archive, runtime_manifest = build_runtime_archive()
-    runner_source = (PACKAGE_ROOT / "generic_competition_runner.py").read_text(
-        encoding="utf-8"
+    wheelhouse, wheelhouse_payload = _load_object(WHEELHOUSE_MANIFEST_PATH)
+    p04, p04_payload = _load_object(M4_P04_REPORT_PATH)
+    release = _release_wheel_inspection()
+    runner_source = str(release.pop("runner_source"))
+    product_runner_source = str(release.pop("product_runner_source"))
+    release_manifest = _require_object(
+        release.get("release_manifest"),
+        "KAGGLE_RELEASE_MANIFEST_INVALID",
     )
-    product_runner_source = (PACKAGE_ROOT / "product_runner.py").read_text(
-        encoding="utf-8"
+    release_requirements = release.get("requirements")
+    if not isinstance(release_requirements, tuple) or not all(
+        isinstance(item, str) for item in release_requirements
+    ):
+        raise TypeError("KAGGLE_RELEASE_REQUIREMENTS_INVALID")
+    wheelhouse_release = _require_object(
+        wheelhouse.get("release_wheel"),
+        "KAGGLE_WHEELHOUSE_RELEASE_INVALID",
     )
-    import_smoke = _runtime_import_smoke(runtime_archive)
-    archive_members: list[str]
-    with tempfile.TemporaryDirectory(
-        prefix="arc3-kaggle-members-"
-    ) as directory:
-        archive_path = Path(directory) / "runtime.zip"
-        archive_path.write_bytes(runtime_archive)
-        with zipfile.ZipFile(archive_path) as archive:
-            archive_members = sorted(archive.namelist())
-    required_members = sorted(
-        [
-            "ARC3_KAGGLE_RUNTIME_MANIFEST.json",
-            "arc3_agi_agent/__init__.py",
-            *(f"arc3_agi_agent/{name}" for name in RUNTIME_MODULES),
-            *(f"arc3_agi_agent/{name}" for name in RUNTIME_ASSETS),
-        ]
+    wheelhouse_dependencies = wheelhouse.get("dependency_wheels")
+    if not isinstance(wheelhouse_dependencies, list):
+        raise TypeError("KAGGLE_WHEELHOUSE_DEPENDENCIES_INVALID")
+    build_official_basis = _require_object(
+        build_report.get("official_contract_basis"),
+        "KAGGLE_BUILD_OFFICIAL_BASIS_INVALID",
     )
-    tracked_secret_findings = _tracked_secret_findings()
+    build_sources = _require_object(
+        build_report.get("source_bindings"),
+        "KAGGLE_BUILD_SOURCE_BINDINGS_INVALID",
+    )
+    p04_exit = _require_object(
+        p04.get("exit_audit"),
+        "KAGGLE_M4_P04_EXIT_AUDIT_INVALID",
+    )
+    p04_sources = _require_object(
+        p04.get("source_bindings"),
+        "KAGGLE_M4_P04_SOURCE_BINDINGS_INVALID",
+    )
+    p04_release = _require_object(
+        p04_sources.get("release_wheel"),
+        "KAGGLE_M4_P04_RELEASE_BINDING_INVALID",
+    )
     fallback_smoke = _preexecution_fallback_smoke(install_source)
+    tracked_secret_findings = _tracked_secret_findings()
     notebook_secret_findings = [
-        {
-            "pattern": name,
-            "match_count": len(pattern.findall(notebook_data)),
-        }
+        {"pattern": name, "match_count": len(pattern.findall(notebook_data))}
         for name, pattern in SECRET_PATTERNS
         if pattern.search(notebook_data)
     ]
@@ -337,39 +393,55 @@ def validate(
         if isinstance(notebook.get("metadata"), dict)
         else {}
     )
+    submission_markers = (
+        "create_code_competition_submission",
+        "kaggle competitions submit",
+        "/api/v1/competitions/submissions",
+    )
     checks = {
         "NB-001_SOURCE_REBUILD_EXACT": notebook == expected_notebook,
         "NB-002_METADATA_REBUILD_EXACT": metadata == expected_metadata,
-        "NB-003_BUILD_DIGEST_BOUND": (
+        "NB-003_BUILD_REPORT_REBUILD_EXACT": build_report == expected_build_report,
+        "NB-004_BUILD_DIGEST_BOUND": (
             build_report.get("notebook_sha256") == _sha256(notebook_data)
             and build_report.get("metadata_sha256") == _sha256(metadata_data)
-            and build_report.get("runtime_archive", {}).get(
-                "archive_sha256"
-            )
-            == _sha256(runtime_archive)
-            and build_report.get("agent_sha256")
-            == _sha256(AGENT_SOURCE.read_bytes())
-            and build_report.get("agent_sha256_by_filename")
-            == {
-                name: _sha256(path.read_bytes())
-                for name, path in AGENT_SOURCES.items()
-            }
-            and build_report.get("preexecution_fallback", {}).get(
-                "sha256"
-            )
-            == OFFICIAL_PLACEHOLDER_PARQUET_SHA256
-            and build_report.get("preexecution_fallback", {}).get(
-                "size_bytes"
-            )
-            == OFFICIAL_PLACEHOLDER_PARQUET_SIZE
-            and expected_runtime_archive.get("archive_sha256")
-            == _sha256(runtime_archive)
         ),
-        "NB-004_CODE_COMPILES": not compile_failures,
-        "NB-005_RUNTIME_IMPORT_SMOKE": bool(import_smoke["passed"]),
-        "NB-006_RUNTIME_ALLOWLIST_EXACT": archive_members
-        == required_members,
-        "NB-007_CPU_INTERNET_DISABLED": (
+        "NB-005_CODE_COMPILES": not compile_failures,
+        "NB-006_RELEASE_WHEEL_EXACT": (
+            release["sha256"] == RELEASE_WHEEL_SHA256
+            and release["distribution"] == RELEASE_DISTRIBUTION
+            and release["version"] == RELEASE_VERSION
+            and release["requires_python"] == "==3.12.*"
+            and release["member_names_match_M4_P02"] is True
+            and release["forbidden_members"] == ()
+        ),
+        "NB-007_RELEASE_BUNDLE_EXACT": (
+            release["release_descriptor_sha256"] == RELEASE_DESCRIPTOR_SHA256
+            and release["release_package_sha256"] == RELEASE_PACKAGE_SHA256
+            and release_manifest.get("asset_stage") == "RELEASE_FROZEN"
+            and release_manifest.get("entrypoint") == RELEASE_ENTRYPOINT
+            and release_manifest.get("entrypoint_target")
+            == RELEASE_ENTRYPOINT_TARGET
+        ),
+        "NB-008_WHEELHOUSE_MANIFEST_EXACT": (
+            wheelhouse.get("status") == "WHEELHOUSE_READY"
+            and wheelhouse.get("logical_content_sha256") == _logical_seal(wheelhouse)
+            and wheelhouse.get("dependency_count") == 32
+            and wheelhouse.get("file_count") == 33
+            and wheelhouse_release.get("sha256") == RELEASE_WHEEL_SHA256
+            and release["dependency_count"] == 32
+            and tuple(sorted(release_requirements))
+            == tuple(
+                sorted(
+                    str(row["requirement"])
+                    for row in wheelhouse_dependencies
+                    if isinstance(row, dict)
+                )
+            )
+        ),
+        "NB-009_DATASET_SOURCE_EXACT": metadata.get("dataset_sources")
+        == [WHEELHOUSE_DATASET_SOURCE],
+        "NB-010_CPU_INTERNET_DISABLED": (
             isinstance(kaggle_metadata, dict)
             and kaggle_metadata.get("accelerator") == "none"
             and kaggle_metadata.get("isGpuEnabled") is False
@@ -377,215 +449,185 @@ def validate(
             and metadata.get("enable_gpu") is False
             and metadata.get("enable_internet") is False
         ),
-        "NB-008_COMPETITION_SOURCE_EXACT": metadata.get(
-            "competition_sources"
-        )
+        "NB-011_COMPETITION_SOURCE_EXACT": metadata.get("competition_sources")
         == [COMPETITION_SLUG],
-        "NB-009_GATEWAY_RERUN_CONTRACT": all(
-            marker in sources
+        "NB-012_EXACT_OFFLINE_INSTALL": all(
+            marker in install_source
+            for marker in (
+                WHEELHOUSE_DATASET_SLUG,
+                WHEELHOUSE_DATASET_SOURCE,
+                RELEASE_WHEEL_SHA256,
+                "--no-index",
+                "--no-cache-dir",
+                "--no-compile",
+                "--no-deps",
+                "--target",
+                "--force-reinstall",
+                "observed_target_versions",
+                "arc3_runtime_environment",
+                '/tmp/arc3_runtime_env',
+            )
+        ),
+        "NB-013_RELEASE_BOOT_IDENTITY_EXACT": all(
+            marker in payload_source
+            for marker in (
+                RELEASE_RUNTIME_IDENTITY,
+                RELEASE_BUNDLE_ID,
+                RELEASE_BUNDLE_LOGICAL_DIGEST,
+                RELEASE_INITIAL_STATE_DIGEST,
+                RELEASE_P_DIGEST,
+                RELEASE_J0_DIGEST,
+                RELEASE_M0_DIGEST,
+                RELEASE_ENTRYPOINT_TARGET,
+                '"dependency_pin_mismatch_count": 0',
+            )
+        ),
+        "NB-014_GATEWAY_RERUN_CONTRACT": all(
+            marker in runtime_source
             for marker in (
                 "KAGGLE_IS_COMPETITION_RERUN",
                 "http://gateway:8001/api/games",
-                "OPERATION_MODE=competition",
-                "arc3_agi_agent.product_runner",
+                '"OPERATION_MODE": "competition"',
                 '"--mode"',
                 '"competition"',
+                '"--release-frozen"',
             )
         ),
-        "NB-010_OFFICIAL_OFFLINE_WHEEL_CONTRACT": (
-            all(
-                marker in install_source
-                for marker in (
-                    "--no-index",
-                    "arc_agi_3_wheels",
-                    '"arc-agi"',
-                    '"python-dotenv"',
-                    "if wheel_dir.is_dir()",
-                    'elif os.getenv("KAGGLE_IS_COMPETITION_RERUN")',
-                    "raise FileNotFoundError",
-                )
-            )
-            and '"arc-agi==' not in install_source
-            and '"python-dotenv==' not in install_source
+        "NB-015_ONE_FROZEN_ENTRYPOINT": (
+            RELEASE_ENTRYPOINT in runtime_source
+            and "shutil.which" in runtime_source
+            and '"main.py"' not in runtime_source
+            and '"--agent"' not in runtime_source
+            and "arc3_agi_agent.product_runner" not in runtime_source
         ),
-        "NB-011_GATEWAY_OWNS_RERUN_OUTPUT": (
-            "/kaggle/working/submission.parquet"
-            not in competition_source
-            and "to_parquet" not in competition_source
-            and "submission_visible_to_notebook" not in competition_source
+        "NB-016_SEQUENTIAL_SCORECARD_LIFECYCLE": (
+            "SEQUENTIAL_SINGLE_ACTIVE_GAME" in runner_source
+            and "for game_index, game_id in enumerate(game_ids)" in runner_source
+            and "active_agent_peak" in runner_source
+            and "scorecard_open_count" in runner_source
+            and "scorecard_close_count" in runner_source
+            and "close_scorecard" in runner_source
+            and "Thread(" not in runner_source
+            and "SEQUENTIAL_SINGLE_ACTIVE_GAME" in runtime_source
+            and '"scorecard_open_count": 1' in runtime_source
+            and '"scorecard_close_count": 1' in runtime_source
+            and '"scorecard_closed": True' in runtime_source
         ),
-        "NB-012_NO_SUBMISSION_SIDE_EFFECT": not any(
-            marker in sources
-            for marker in (
-                "create_code_competition_submission",
-                "kaggle competitions submit",
-                "/api/v1/competitions/submissions",
-            )
+        "NB-017_GATEWAY_OWNS_SUCCESS_OUTPUT": (
+            "/kaggle/working/submission.parquet" not in runtime_source
+            and "to_parquet" not in runtime_source
         ),
-        "NB-013_NO_EXTERNAL_ARC_OR_LLM_ENDPOINT": not any(
+        "NB-018_NO_SUBMISSION_SIDE_EFFECT": not any(
+            marker in sources for marker in submission_markers
+        ),
+        "NB-019_NO_EXTERNAL_ARC_OR_LLM_ENDPOINT": not any(
             marker in sources.casefold()
-            for marker in (
-                "three.arcprize.org",
-                "api.openai.com",
-                "anthropic.com",
-            )
+            for marker in ("three.arcprize.org", "api.openai.com", "anthropic.com")
         ),
-        "NB-014_NO_SECRET": not notebook_secret_findings
+        "NB-020_NO_SECRET": not notebook_secret_findings
         and not tracked_secret_findings,
-        "NB-015_PRODUCT_BOUNDARY": (
-            build_report.get("runtime_archive", {}).get(
-                "teacher_included"
-            )
-            is False
-            and build_report.get("runtime_archive", {}).get(
-                "known_sample_policy_included"
-            )
-            is False
-            and build_report.get("runtime_archive", {}).get(
-                "runtime_identity_routing_included"
-            )
-            is False
-            and build_report.get("runtime_archive", {}).get(
-                "fixed_action_trajectory_included"
-            )
-            is False
-            and build_report.get("runtime_archive", {}).get(
-                "literal_coordinate_table_included"
-            )
-            is False
-            and build_report.get("runtime_archive", {}).get(
-                "compiled_identity_free_product_policy_included"
-            )
-            is True
-            and runtime_manifest.get("product_id") == "ARC3CompletionAgent"
-            and runtime_manifest.get("action_budget") == ACTION_BUDGET
-        ),
-        "NB-016_CELL_IDS_UNIQUE": (
-            len(cell_ids) == len(cells)
-            and all(
-                isinstance(cell_id, str) and bool(cell_id)
-                for cell_id in cell_ids
-            )
-            and len(set(cell_ids)) == len(cell_ids)
-        ),
-        "NB-017_OFFICIAL_PLACEHOLDER_EXACT": (
-            all(
-                marker in placeholder_source
-                for marker in (
-                    'data=[["1_0", "1", True, 1]]',
-                    'columns=["row_id", "game_id", "end_of_game", "score"]',
-                    'if not os.getenv("KAGGLE_IS_COMPETITION_RERUN")',
-                    '"/kaggle/working/submission.parquet"',
-                    "index=False",
-                )
-            )
-            and "dry-run" not in placeholder_source
-        ),
-        "NB-018_OFFICIAL_FOUR_CODE_CELL_LAYOUT": (
+        "NB-021_CELL_IDS_UNIQUE_AND_OFFICIAL_LAYOUT": (
             cell_ids
             == [
-                "install-official-offline-wheels",
-                "verify-runtime-payload",
-                "execute-product-runtime",
+                "install-exact-frozen-wheelhouse",
+                "verify-exact-release-identity",
+                "execute-frozen-product-runtime",
                 "write-official-placeholder",
             ]
-            and cell_types == ["code", "code", "code", "code"]
+            and cell_types == ["code"] * 4
+            and len(set(cell_ids)) == 4
         ),
-        "NB-019_RERUN_AND_PLACEHOLDER_SEPARATE": (
-            "to_parquet" not in competition_source
-            and "subprocess.run" not in placeholder_source
-            and "KAGGLE_IS_COMPETITION_RERUN" in competition_source
-            and "KAGGLE_IS_COMPETITION_RERUN" in placeholder_source
+        "NB-022_OFFICIAL_PLACEHOLDER_SCHEMA": all(
+            marker in placeholder_source
+            for marker in (
+                'data=[["1_0", "1", True, 1]]',
+                'columns=["row_id", "game_id", "end_of_game", "score"]',
+                'if not os.getenv("KAGGLE_IS_COMPETITION_RERUN")',
+                'Path("/kaggle/working/submission.parquet")',
+                "index=False",
+            )
         ),
-        "NB-020_NO_UNDOCUMENTED_RUNTIME_LIMIT": (
-            "timeout=36_000" not in competition_source
-            and "timeout=36000" not in competition_source
+        "NB-023_PREEXEC_COLLECTIBLE_FALLBACK": (
+            fallback_smoke["passed"] is True
+            and OFFICIAL_PLACEHOLDER_PARQUET_SHA256 in install_source
+            and str(OFFICIAL_PLACEHOLDER_PARQUET_SIZE) in install_source
+            and cell_ids.index("install-exact-frozen-wheelhouse")
+            < cell_ids.index("execute-frozen-product-runtime")
+        ),
+        "NB-024_FAILURE_VISIBLE_AND_COLLECTIBLE": all(
+            marker in sources
+            for marker in (
+                '"INSTALL_EXCEPTION"',
+                '"BOOT_EXCEPTION"',
+                '"RUNTIME_EXCEPTION"',
+                "traceback.print_exc()",
+                "/kaggle/working/arc3_install_status.json",
+                "/kaggle/working/arc3_payload_status.json",
+                "/kaggle/working/arc3_runtime_status.json",
+            )
+        ),
+        "NB-025_NO_UNDOCUMENTED_RUNTIME_LIMIT": (
+            "timeout=36_000" not in runtime_source
+            and "timeout=36000" not in runtime_source
             and "MAX_WALL" not in sources
             and "WALL_TIME" not in sources
+            and "subprocess.run(" in runtime_source
+            and "check=False" in runtime_source
         ),
-        "NB-021_NOTEBOOK_FORMAT_MATCHES_OFFICIAL": (
+        "NB-026_NOTEBOOK_FORMAT_MATCHES_OFFICIAL": (
             notebook.get("nbformat") == 4
             and notebook.get("nbformat_minor") == 4
+            and build_official_basis.get("pinned_notebook") == OFFICIAL_PINNED_NOTEBOOK
+            and build_official_basis.get("pinned_notebook_source_sha256")
+            == OFFICIAL_PINNED_NOTEBOOK_SOURCE_SHA256
         ),
-        "NB-022_SEQUENTIAL_SINGLE_ACTIVE_GAME": (
-            "SEQUENTIAL_SINGLE_ACTIVE_GAME" in runner_source
-            and "for game_index, game_id in enumerate(game_ids)"
-            in runner_source
-            and "active_agent_peak" in runner_source
-            and "Thread(" not in runner_source
-            and "Swarm(" not in competition_source
-            and '"main.py"' not in competition_source
-            and "product_process_exit_code" in product_runner_source
-            and 'mode == "competition"' in product_runner_source
+        "NB-027_SAME_M4_P04_RELEASE": (
+            p04.get("status") == "M4_P04_PASS"
+            and p04_exit.get("same_release_artifact") is True
+            and p04_release.get("sha256") == RELEASE_WHEEL_SHA256
+            and build_sources.get("M4_P04_same_release_full_sample_sha256")
+            == _sha256(p04_payload)
         ),
-        "NB-023_RESOURCE_LIMITS_NOT_SELF_IMPOSED": (
-            "setrlimit" not in sources
-            and "RLIMIT_AS" not in sources
-            and "setrlimit" not in runner_source
-            and "RLIMIT_AS" not in runner_source
-            and "setrlimit" not in product_runner_source
-            and "RLIMIT_AS" not in product_runner_source
-            and "record=True" not in runner_source
+        "NB-028_NO_RUNTIME_REPACKAGING": (
+            "copytree" not in sources
+            and "agent_payload" not in sources
+            and "runtime_archive" not in sources
+            and "generic_agi_agent.py" not in sources
+            and "arc3_completion_agent.py" not in sources
         ),
-        "NB-024_PREEXEC_COLLECTIBLE_FALLBACK": (
-            all(
-                marker in install_source
-                for marker in (
-                    "if competition_rerun:",
-                    'Path("/kaggle/working/submission.parquet")',
-                    "fallback_bytes = zlib.decompress(",
-                    "fallback_path.write_bytes(fallback_bytes)",
-                    OFFICIAL_PLACEHOLDER_PARQUET_SHA256,
-                    str(OFFICIAL_PLACEHOLDER_PARQUET_SIZE),
-                )
-            )
-            and cell_ids.index("install-official-offline-wheels")
-            < cell_ids.index("execute-product-runtime")
-            and fallback_smoke["passed"] is True
+        "NB-029_NO_INPUT_MUTATION": (
+            "wheelhouse_root.write" not in install_source
+            and "(wheelhouse_root / filename).write" not in install_source
+            and "manifest_path.write" not in install_source
+            and "shutil.copy" not in sources
         ),
-        "NB-025_FAILURE_VISIBLE_AND_COLLECTIBLE": (
-            all(
-                all(marker in source for marker in markers)
-                for source, markers in (
-                    (
-                        install_source,
-                        (
-                            '"INSTALL_EXCEPTION"',
-                            "traceback.print_exc()",
-                            '"/kaggle/working/arc3_install_status.json"',
-                        ),
-                    ),
-                    (
-                        payload_source,
-                        (
-                            '"PAYLOAD_EXCEPTION"',
-                            "traceback.print_exc()",
-                            '"/kaggle/working/arc3_payload_status.json"',
-                        ),
-                    ),
-                    (
-                        competition_source,
-                        (
-                            "check=False",
-                            'runtime_status["runner_returncode"]',
-                            '"RUNNER_NONZERO"',
-                            '"BOOTSTRAP_EXCEPTION"',
-                            "traceback.print_exc()",
-                            '"/kaggle/working/arc3_runtime_status.json"',
-                        ),
-                    ),
-                )
-            )
-            and "check=True" not in competition_source
+        "NB-030_PRODUCT_EXIT_BOUNDARY_PRESERVED": (
+            'if mode == "competition"' in product_runner_source
+            and "return 0" in product_runner_source
+            and "official scorecard" in product_runner_source
+        ),
+        "NB-031_ACTION_BUDGET_FROZEN": (
+            ACTION_BUDGET == 4096
+            and '"--action-budget"' in runtime_source
+            and "4096" in runtime_source
+        ),
+        "NB-032_RUNTIME_POLICY_UNCHANGED": (
+            build_report.get("runtime_policy_changed") is False
+            and wheelhouse.get("runtime_policy_changed") is False
+            and "/kaggle/working/arc3_runtime_env" not in sources
         ),
     }
     return {
-        "schema_version": "arc3-kaggle-notebook-validation-v6",
+        "schema_version": "arc3-rev5-1-m4-p05-kaggle-package-validation-v1",
+        "artifact_type": "M4KagglePackageValidationEvidence",
+        "point_id": "M4-P05_KAGGLE_PACKAGE_NORMAL_RUN",
+        "runtime_product": "ARC3CompletionAgent",
+        "asset_stage": "RELEASE_FROZEN",
         "status": "PASS" if all(checks.values()) else "FAIL",
         "checks": checks,
-        "failed_check_ids": [
-            name for name, passed in checks.items() if not passed
-        ],
+        "passed_check_count": sum(checks.values()),
+        "check_count": len(checks),
+        "failed_check_ids": [name for name, passed in checks.items() if not passed],
         "notebook": {
             "path": _report_notebook_path(notebook_path),
             "id": notebook_id,
@@ -595,33 +637,37 @@ def validate(
         },
         "metadata_sha256": _sha256(metadata_data),
         "build_report_sha256": _sha256(build_report_data),
-        "runtime_archive": runtime_manifest,
-        "agent_sha256": _sha256(AGENT_SOURCE.read_bytes()),
-        "agent_sha256_by_filename": {
-            name: _sha256(path.read_bytes())
-            for name, path in AGENT_SOURCES.items()
+        "wheelhouse_manifest": {
+            "path": WHEELHOUSE_MANIFEST_PATH.relative_to(ROOT).as_posix(),
+            "sha256": _sha256(wheelhouse_payload),
+            "logical_content_sha256": wheelhouse.get("logical_content_sha256"),
+            "dataset_id": WHEELHOUSE_DATASET_ID,
+            "dataset_source": WHEELHOUSE_DATASET_SOURCE,
+            "dependency_count": wheelhouse.get("dependency_count"),
+            "file_count": wheelhouse.get("file_count"),
+            "total_size_bytes": wheelhouse.get("total_size_bytes"),
+        },
+        "release_wheel": release,
+        "M4_P04_same_release_full_sample": {
+            "path": M4_P04_REPORT_PATH.relative_to(ROOT).as_posix(),
+            "sha256": _sha256(p04_payload),
+            "status": p04.get("status"),
         },
         "compile_failures": compile_failures,
-        "runtime_import_smoke": import_smoke,
         "preexecution_fallback_smoke": fallback_smoke,
         "notebook_secret_findings": notebook_secret_findings,
         "tracked_secret_findings": tracked_secret_findings,
+        "secret_finding_count": len(notebook_secret_findings)
+        + len(tracked_secret_findings),
         "submission_api_call_count": 0,
+        "runtime_policy_changed": False,
     }
 
 
 def parse_arguments(argv: Sequence[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--notebook-dir",
-        type=Path,
-        default=DEFAULT_OUTPUT_DIR,
-    )
-    parser.add_argument(
-        "--report",
-        type=Path,
-        default=DEFAULT_REPORT,
-    )
+    parser.add_argument("--notebook-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--report", type=Path, default=DEFAULT_REPORT)
     return parser.parse_args(argv)
 
 
