@@ -1,0 +1,36 @@
+{
+  "artifact_type": "M4SubmissionPlatformClosure",
+  "asset_stage": "RELEASE_FROZEN",
+  "claim_boundary": {
+    "ARC3_COMPLETION_AGENT_PRODUCT_RELEASED": false,
+    "allowed_claim": "M4_P06_SUBMISSION_PENDING",
+    "official_score": null
+  },
+  "exit_audit": {
+    "M4_P05_kaggle_normal_run": "PASS",
+    "episode_evidence_recorded": true,
+    "explicit_submission_authorization": true,
+    "failure_classification_recorded": true,
+    "official_score_recorded": false,
+    "runtime_policy_changed": false,
+    "same_notebook_version": 4,
+    "same_release_artifact": true,
+    "secret_finding_count": 0,
+    "status": "M4_P06_PENDING",
+    "submission_ref_recorded": true,
+    "submission_terminal_status_recorded": false,
+    "total_bytes_recorded": true
+  },
+  "failure_separation": {
+    "classification": "NONE_NONTERMINAL",
+    "kaggle_platform_failure": false,
+    "product_failure": false,
+    "transport_failure": false
+  },
+  "logical_content_sha256": "920091328770693a006361b0b03d8729250495868f12eb8bfe7fe387ef9c3001",
+  "point_id": "M4-P06_SUBMISSION_PLATFORM_SEPARATION",
+  "runtime_product": "ARC3CompletionAgent",
+  "schema_version": "arc3-rev5-1-m4-p06-submission-platform-closure-v1",
+  "status": "M4_P06_PENDING",
+  "submission_result_logical_sha256": "b13ec86e51e35a23141bacebfb083073590d9e278f7232df8b3b68b3ed1b1aee"
+}

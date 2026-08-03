@@ -22,7 +22,7 @@
   },
   "active_milestone": "M4_PRODUCT_FREEZE_AND_RELEASE",
   "active_point": "M4-P06_SUBMISSION_PLATFORM_SEPARATION",
-  "point_status": "BLOCKED_PENDING_EXPLICIT_SUBMISSION_AUTHORIZATION",
+  "point_status": "SUBMISSION_PENDING_TERMINAL",
   "previous_point": {
     "point_id": "M4-P05_KAGGLE_PACKAGE_NORMAL_RUN",
     "status": "M4_P05_PASS",
@@ -51,7 +51,21 @@
     "runtime_identity_digest": "runtime-identity:47094e2ddb524bb1dba76078d51e10a20b090148bcd5b9a7c9cc4a20a416faff",
     "runtime_policy_changed": false
   },
-  "current_objective": "Wait for a new explicit submission authorization. After authorization only, submit the exact accepted M4-P05 Notebook version 4 and RELEASE_FROZEN artifact, inspect that exact submission through terminal status, official score, output bytes, errors, and episode evidence, and classify product, transport, and Kaggle platform outcomes without changing capability or packaging.",
+  "active_submission": {
+    "competition_slug": "arc-prize-2026-arc-agi-3",
+    "submission_ref": 55206302,
+    "submitted_at_utc": "2026-08-03T07:58:07.073Z",
+    "submission_description": "ARC3CompletionAgent rev5.1 frozen release v4 git daa91d8 M4-P06",
+    "notebook_ref": "tecchannn/arc3completionagent-rev5-1-frozen-release",
+    "notebook_version": 4,
+    "kernel_script_version_id": 339850804,
+    "source_git_sha": "daa91d8fcc5d08baaacbb0f9661175cce7bc58a7",
+    "status": "PENDING",
+    "submission_call_count": 1,
+    "retry_call_count": 0,
+    "monitoring_automation_id": "arc3-55206302"
+  },
+  "current_objective": "Monitor only submission ref 55206302 through terminal status. Do not resubmit or update Notebook version 4. Collect official score, total bytes, error description, and the exact zero-or-more episode response, classify product, transport, and Kaggle platform outcomes, then bind the terminal result to the unchanged RELEASE_FROZEN artifact.",
   "verified_material": {
     "full_mapping_closure": "analysis/product/rev5_1/full_mapping_closure.json",
     "full_mapping_closure_sha256": "997252270563a14ea219ed8356424886dde0122effedd879028cf891c4a04764",
