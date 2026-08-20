@@ -1,205 +1,166 @@
 # Repository Operating Contract
 
-この文書は、本repositoryでAI実装エージェント／コード監査者が作業するための**恒久的な運用契約**である。
-ARC3の攻略戦略、現在Point、製品完成状態、scoreなどの可変状態はここに書かない。
-
-目的は「作業したように見せること」ではない。
-Ownerが指定した目的を保持し、正確・安全・再現可能・監査可能な変更を、因果のある最小のレビュー可能差分として実現することである。
+このrepositoryのAI実装エージェント／コード監査者は、**日本語を基底言語**として作業する。
+目的は作業量を増やすことではなく、Ownerの目的を保持し、最小の因果差分で正確・再現可能・監査可能な成果を作ることである。
 
 ## 1. Authority
 
-### 1.1 規範の優先順位
+優先順位は次の通り。
 
 1. Ownerの現在の明示指示
-2. 対象pathに適用される最も近い`AGENTS.md`
-3. root `AUTHORITY_ORDER.md`
-4. `control/CURRENT_SELECTOR.json`が選択する現行仕様・ロードマップ・Current Task・局所指示
-5. 現行コード、interface、tests、設定が示す既存契約
-6. 推測、記憶、一般論
+2. 対象pathに最も近い`AGENTS.md`
+3. `運用/権限順序.md`
+4. `制御/現在状態.json`が選択する現行文書
+5. 現行コード・tests・runtime結果・公式結果
+6. 推測・記憶・一般論・Git履歴
 
-root `AGENTS.md`はrepository全体に適用する。下位`AGENTS.md`は対象subtreeをより具体化できるが、rootのauthority・evidence・failure規則を緩和してはならない。
+旧rev、旧artifact、削除済み実装、Git履歴は現在の権威ではない。Ownerの明示指示なしに復活させない。
 
-### 1.2 規範と観測事実を混同しない
+## 2. 日本語基底
 
-仕様書は「どうあるべきか」を定める。コード、test、runtime結果、公式結果は「何が成立しているか」を示す。
+`運用/日本語基底方針.md`を必ず守る。
 
-```text
-Normative Target != Observed State
-```
+内部の正本は原則として日本語にする。
 
-両者が矛盾する場合、文書に合わせて観測事実を読み替えない。矛盾そのものをgapとして扱い、必要なら修正対象へ戻す。
+- 設計文書
+- HDSの観測・Frame・問い・判断理由
+- HDSコンパイラの内部表現
+- ミニドラの命令形・推論表現・候補出力
+- 記憶の事実・定石・因果・反例・境界
+- Failure Signature
+- tests名、ログ、診断文
+- 内部schemaの名称と意味
 
-## 2. Current Stateの単一入口
+英語を許すのは、Python予約語、外部SDK/API、package名、外部schema、Kaggle/ARCが要求する固定記号など、実務上変更不能または変更すると接続性を損なう境界だけである。
 
-可変な現在状態の入口は次だけである。
+内部で英語正本を作り、日本語訳を併記する二重管理は禁止する。日本語を正本とし、外部境界で必要な記号へ射影する。
 
-`control/CURRENT_SELECTOR.json`
+## 3. AGI構成の不変条件
 
-作業開始時は必ずSelectorから以下を解決する。
-
-- active strategy
-- specification
-- roadmap
-- roadmap manifest
-- Current Task
-- active instruction
-- auto-advance policy
-
-README、AGENTS、architecture文書、historical artifact、過去のphase stateをCurrent Stateの代用品にしてはならない。
-SelectorとCurrent Task／Manifestが不一致なら、推測で補正せずvisible failureとする。
-
-Selectorを変更するのは、現在の作業が明示的にstate transitionを要求し、その条件を満たした場合だけである。cleanup、refactor、test PASS、artifact生成を理由に暗黙遷移しない。
-
-## 3. 作業開始契約
-
-変更前に次を成立させる。
-
-1. rootと対象subtreeの`AGENTS.md`を読む。
-2. `control/CURRENT_SELECTOR.json`を読み、選択された文書を解決する。
-3. `python scripts/check_repository_environment.py`で環境整合を確認する。
-4. 対象コード、tests、既存artifact、既知failureを確認する。
-5. 「目的」「現在状態」「不足」「変更禁止範囲」を区別する。
-6. 既存資産で目的を満たせないことを確認してから新規構造を作る。
-
-既に答えがrepository内にある場合、別shell、別runner、別package、別schemaを作って同じ問題を再実装しない。
-
-## 4. 変更原則
-
-### 4.1 目的保持
-
-局所的にtestを通すこと、形式を整えること、artifactを増やすことを上位目的へ昇格させない。
-実装途中で既存設計が目的を阻害していると分かった場合、既存設計を守るために目的を縮小しない。
-
-### 4.2 Root Cause First
-
-症状だけを塞ぐ前に、再発を生む責任境界を特定する。
-
-- state ownership
-- authority drift
-- stale duplication
-- hidden fallback
-- interface mismatch
-- dependency drift
-- evidence gap
-- causal misattribution
-
-が原因なら、その原因面を修正する。
-
-### 4.3 Minimal Causal Diff
-
-変更は小さいほど良いのではなく、**目的を成立させる因果が閉じる最小単位**にする。
-
-- 無関係なrename、format、cleanupを混ぜない。
-- 同一目的のためにparallel implementationを増やさない。
-- 既存public interfaceを変更する場合はconsumerを確認する。
-- path-sensitiveなrelease／Kaggle／artifact資産を見た目の整理だけで移動しない。
-- generated outputをsource of truthへ昇格させない。
-
-## 5. Evidence and Claims
-
-主張の強さを証拠より上げない。
+AGIの主体は次の三つで固定する。
 
 ```text
-E0  document / static structure / artifact existence
-E1  unit / static / schema / deterministic local check
-E2  local integrated / offline runtime result
-E3  official sample environment result
-E4  platform normal-run result
-E5  official accepted result / score
+HDS + LLM + 記憶
 ```
 
-上位Evidenceが必要な能力claimを、下位Evidenceで代替しない。
+### HDS
 
-以下は単独では能力完成の証拠ではない。
+- ARC3世界を最初に受け取る入力主体
+- 観測・対象化・Frame・目的・問い・境界を確定する
+- HDSコンパイラを管轄する
+- ミニドラへ渡すデータをコンパイルする
+- ミニドラ出力を評価・反証し、必要ならフィードバックして再計算させる
+- 最終的な出力・作用を確定する
+- 作用結果を再観測し、因果帰属する
+- 記憶更新を採否する
 
-- classやshellの存在
-- test数
-- schema数
-- artifact数
-- digest一致
-- mock PASS
-- package build成功
-- 自己申告PASS
+HDSコンパイラを第4主体として扱ってはならない。
 
-実行していないtestをPASSと報告しない。失敗したofficial resultをlocal成功で上書きしない。
+### ミニドラ
 
-## 6. Verification
+ミニドラはLLM主体である。
 
-変更後は、変更対象に最も近い検証から実行し、必要な範囲まで回帰を広げる。
+- HDSがコンパイルした入力だけを受け取る
+- 記憶を参照して仮説・反対仮説・推論・計画・命令形・作用候補を生成する
+- HDSのフィードバックを受けて再計算する
+- ARC3世界へ直接作用しない
+- 記憶を独断で確定更新しない
 
-1. syntax／static／targeted test
-2. affected integration
-3. repository／product regression
-4. Current Taskが要求するofficial／platform validation
+### 記憶
 
-検証を通すために、gateを弱める、assertionを消す、expected resultを都合よく書き換える、例外を握り潰す、fallbackで別経路へ逃がすことを禁止する。
+- 事前にHDSで蒸留したPrior Memory
+- 実行中に獲得するRuntime Memory
 
-検証不能なものは未確認として残し、確認済みとして報告しない。
+を保持する。
 
-## 7. Failure Contract
+記憶はappend-onlyではない。必要に応じて`追加 / 改訂 / 統合 / 分割 / 置換 / 無効化 / 削除 / 巻き戻し / 保管`する。
+確定更新の責任はHDSにある。
 
-失敗は隠さず、次の判断材料として保持する。
+## 4. 世界との入出力契約
 
-- failure evidenceを削除して成功扱いしない。
-- 不明な値を推測で埋めない。
-- authority／path／digest／interface不一致をsilent fallbackしない。
-- generic capabilityを主張する経路にidentity routing、answer map、fixed replay等の隠れた代行を導入しない。
-- 作業途中で成立不能条件が見つかった場合は、その地点と原因を明示する。
+外側の1cycleは次で固定する。
 
-修復可能なfailureは責任componentへ戻して直す。根拠不足で先へ進めない場合は、現在地点を維持してvisible failureとして終了する。
-
-## 8. Artifact and History
-
-新artifactは、少なくとも次のどれかに直接使われる場合だけ作る。
-
-- runtimeが読む
-- Current／next taskが読む
-- acceptance／auditが読む
-- failure repairに使う
-- release／submissionに必要
-
-CURRENTとHISTORICALを混同しない。
-`docs/history/`およびSelectorから選択されない旧control／旧release／旧artifactは、再利用可能な証拠ではあっても現在の権威ではない。
-
-履歴証拠を改変して現在に合わせない。必要なら新しい訂正artifactを追加し、当時の記録を残す。
-
-## 9. Toolchain and Dependencies
-
-実装subtreeでは、そのsubtreeに最も近い`pyproject.toml`、lock file、`.python-version`、test設定をtoolchainの正本とする。
-
-- dependency追加は目的上必要な場合だけ行う。
-- dependencyを変更したら対応するlockを更新する。
-- lock済み環境がある場合はそれを優先する。
-- repository内の既存script／entrypointを確認してから新しい実行入口を作る。
-- network、official access、submission等の外部副作用は、Current TaskとOwner権限の範囲でのみ実行する。
-
-## 10. Git and Scope
-
-- 無関係な変更をstage／commitしない。
-- 変更前後のdiffを監査する。
-- 一つのcommitには一つの説明可能な目的を持たせる。
-- force push、history rewrite、証拠削除などの破壊的操作は明示指示なしに行わない。
-- branch、commit、push、PRはそれぞれ許可された範囲だけ実行する。
-
-## 11. Completion Report
-
-完了報告では最低限、次を区別する。
-
-- 何を目的に変更したか
-- 何を変更したか
-- 何を実行して検証したか
-- 実際に観測された結果
-- 未確認事項／残存risk
-- Selectorを変更したか、変更していないか
-
-「実装した」と「成立を確認した」を同義にしない。
-
-## 12. Stable Entry Point
-
-現在地点をこの文書へ転記しない。
-
-```bash
-python scripts/check_repository_environment.py
+```text
+ARC3世界
+→ HDS
+→ HDSコンパイラ
+→ ミニドラ ⇄ 記憶
+→ HDS
+→ 必要ならミニドラへ再入力
+→ HDS確定
+→ ARC3へ作用
+→ HDSが再観測
+→ 記憶更新
 ```
 
-その後、`control/CURRENT_SELECTOR.json`から現在の作業を読む。
+HDSを迂回して、LLM・Planner・Memory・補助componentが直接Actionを出してはならない。
+
+## 5. 作業開始
+
+変更前に必ず次を行う。
+
+1. `python3 道具/リポジトリ環境監査.py`
+2. `制御/現在状態.json`を読む
+3. Ownerの目的を一文で固定する
+4. 現在状態と不足を区別する
+5. 変更禁止範囲を確認する
+6. 現在作業木の既存資産を確認する
+
+Git履歴から旧実装を自動回収しない。
+
+## 6. 変更原則
+
+- 原因を閉じる最小差分にする。
+- test数、class数、artifact数、文書量を進捗とみなさない。
+- 目的に不要なcompatibility layer、fallback、parallel implementationを増やさない。
+- 実装より先に意味・責任境界を確定する。
+- 外部仕様を内部設計へ侵入させず、`接続/`で変換する。
+- 未確認を成功扱いしない。
+- 失敗を隠さず、次の判断材料として残す。
+
+## 7. Strategy Boundary
+
+現在のARC3攻略戦略は未選択である。
+`戦略/`に新しい正本が明示されるまで、旧rev6以前の戦略を補完・復元・継承しない。
+
+ただし次は戦略ではなく不変構成として保持する。
+
+- 日本語基底
+- HDS + LLM + 記憶
+- HDSコンパイラはHDS管轄
+- ミニドラはLLM主体
+- HDSがARC3世界との入出力を支配する
+
+## 8. Evidence
+
+主張の強さを観測証拠より上げない。
+
+```text
+E0 文書・静的構造
+E1 unit / schema / static check
+E2 local integrated runtime
+E3 ARC3公式sample環境
+E4 Kaggle normal run
+E5 official accepted score
+```
+
+下位Evidenceで上位claimを代替しない。
+
+## 9. Git
+
+remote repositoryは最終的に`main`一本を維持する。
+ツール側の安全規則で一時branchが必要な場合だけ使用し、統合後は残さない。
+force push、history rewrite、証拠の破壊はOwnerの明示指示なしに行わない。
+
+## 10. 完了報告
+
+最低限、次を分けて報告する。
+
+- 目的
+- 変更
+- 実行した検証
+- 観測結果
+- 未確認事項
+- 現在状態を変更したか
+
+「実装した」と「成立した」を同義にしない。
