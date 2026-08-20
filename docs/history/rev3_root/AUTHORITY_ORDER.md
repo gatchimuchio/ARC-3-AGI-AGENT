@@ -1,0 +1,88 @@
+# ARC3 rev3 Authority Planes
+
+- strategy: `ARC3_HDS_DISTILLATION_FIRST_AUTONOMOUS_COMPLETION_SPEC_REV3`
+- strategy status: `OWNER_APPROVED`
+- installation status: `INSTALLED`
+- current work class: `PH-D00A_HDS_DEPENDENCY_AUTHORITY_REBIND`
+- active phase: `PH-D00A`
+- `PH-D00A`: `IN_PROGRESS`
+- `PH-R00`: `OWNER_APPROVED_PASS`
+- `PH-R-1`: `OWNER_APPROVED_PASS`
+- installation approval: `owner-approval-record:32de1b2446b1dfc5fdecd187a65077cbb5f1569a115aa6dbebfc08ad3b1970b8`
+- final selector / Meta-J: `大平鉄兵`
+- implementation role / Meta-C: `Codex`
+
+この文書は規範権威と実行制御を分離する。実行制御、code、tests、tools、generated content、memory、historical artifactsは規範権威の意味を変更できない。
+
+## Normative Authority
+
+1. Current explicit instruction from Owner 大平鉄兵
+2. `docs/architecture/AGI三主体統合設計正本_v0_2.md`
+3. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
+4. `docs/architecture/工学的AGI実装仕様書_v0_2.md`
+5. `docs/strategy/ARC3_HDS蒸留先行_汎用自律完遂主体_実装仕様書_rev3.md`
+6. `docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md`
+7. `docs/roadmap/ARC3_HDS蒸留先行_開発ロードマップ_rev3.md`
+8. `docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
+
+## Execution Control
+
+1. Current explicit instruction from Owner 大平鉄兵
+2. root `AGENTS.md`
+3. Owner-approved active phase state backed by `OwnerDecisionCapture`
+4. Current Work Block Frame
+5. Committed evidence
+
+Past phase states, ApprovalRecords, transitions, artifact-local `next_*`, and P0-P22 artifacts are evidence only and are not current selectors.
+
+## HDS dependency order
+
+Within an Owner-approved Track D Work Block, after applying Normative Authority:
+
+1. `docs/references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
+2. `docs/references/HDSフレーム_rev3_1_外向け仕様.md`
+3. `docs/strategy/HDS蒸留仕様書_ARC2_ARC3_rev2.md`
+4. `docs/roadmap/HDS蒸留開発ロードマップ_ARC2_ARC3_rev2.md`
+5. Owner decision captured for the exact target artifact
+6. Phase Frame, Manifest, and Run Report
+7. `gatchimuchio/HDS-BlackBox-Translator` at the locked commit
+8. rev1 documents
+9. Implementer inference
+
+`docs/references/HDS_SelfContained_Prompt_v1_2_utf8bom.txt` is a locked prompt dependency. It does not outrank the internal or external HDS specifications.
+
+## Historical pre-audit evidence
+
+The following record and its downstream PH-D00A evidence are preserved but classified as:
+
+```text
+HISTORICAL_PRE_AUDIT_NONAUTHORITATIVE
+```
+
+- `control/rev3/OWNER_APPROVAL_RECORDS/PH-R00.json`
+- historical result commit `4b9e64a6e396386024142df79b71cf8d0214563d`
+  に記録された`artifacts/source_content_manifests/hds_dependencies.json`の旧blob
+- historical result commit `4b9e64a6e396386024142df79b71cf8d0214563d`
+  に記録された`artifacts/reports/dependency_audit.json`の旧blob
+- `control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/D00A_PHASE_STATE.json`
+- `control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/PH-D00A_WORK_BLOCK_FRAME.json`
+- `control/rev3/HISTORICAL_PRE_AUDIT/PH-D00A/OWNER_REVIEW_PACKAGE/`
+
+同名のcurrent working-tree manifest／reportは、現行PH-D00Aのrebind候補であり、
+このhistorical分類には含めない。
+
+The earlier interpretation of generic “continue” instructions as PH-R00 acceptance or continuous phase approval is not valid activation evidence under the corrected contract.
+
+## Current gate
+
+```text
+REV3 correction evidence（bound）
+→ Owner explicit approval for the exact correction artifact（recorded）
+→ PH-R-1 Strategy Installation（Owner approved）
+→ Owner authorization for PH-R00（ESTABLISHED）
+→ PH-R00 Current HEAD Rebind（OWNER_APPROVED_PASS）
+→ Owner authorization for PH-D00A（ESTABLISHED）
+→ PH-D00A HDS Dependency / Authority Rebind（IN_PROGRESS）
+```
+
+現在許可されるのはPH-D00A WorkBlockFrameの範囲だけである。PH-D00BはPH-D00Aの全DoD、required validation、failed requirement count 0、exact evidence bindが成立した場合に限り、Ownerのstanding authorizationを機械的に適用して開始できる。将来artifactを事前採択せず、各phaseで同じ条件を再評価する。Missingまたはmismatched authorityはvisible failureであり、gate緩和やhistorical approval再利用で修復しない。
