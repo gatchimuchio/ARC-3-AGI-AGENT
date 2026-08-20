@@ -1,0 +1,41 @@
+name: Keep main only
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete every remote branch except the default branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          gh api --paginate "repos/${REPOSITORY}/branches?per_page=100" --jq '.[].name' |
+          while IFS= read -r branch; do
+            if [[ -z "$branch" || "$branch" == "$DEFAULT_BRANCH" ]]; then
+              continue
+            fi
+
+            encoded_branch="$(python3 - "$branch" <<'PY'
+          import sys
+          from urllib.parse import quote
+
+          print(quote(sys.argv[1], safe=""))
+          PY
+          )"
+
+            echo "Deleting branch: ${branch}"
+            gh api --method DELETE "repos/${REPOSITORY}/git/refs/heads/${encoded_branch}"
+          done
