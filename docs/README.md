@@ -1,48 +1,60 @@
-# ARC3 文書索引 — CURRENT rev6
+# ARC3 Document Index
 
-このindexは、現行開発と履歴資産を分離するための入口である。
+このindexは文書の役割を示す。**Current Stateそのものは保持しない。**
+現在の仕様・ロードマップ・Task・Instructionは[`../control/CURRENT_SELECTOR.json`](../control/CURRENT_SELECTOR.json)から解決する。
 
-## CURRENT
+## Stable Operating Documents
 
-### 上位設計
+- [`../AGENTS.md`](../AGENTS.md): repository-wide implementation contract
+- [`../AUTHORITY_ORDER.md`](../AUTHORITY_ORDER.md): authority / observed reality / history boundary
+- [`operations/REPOSITORY_OPERATING_MODEL.md`](operations/REPOSITORY_OPERATING_MODEL.md): repository operating model
+- [`../control/README.md`](../control/README.md): Current Selectorとstate transitionの契約
 
-- `architecture/AGI三主体統合設計正本_v0_2.md`
-- `references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`
+## Upper Architecture / References
 
-### ARC3 rev6 三点セット
+- [`architecture/AGI三主体統合設計正本_v0_2.md`](architecture/AGI三主体統合設計正本_v0_2.md): 上位AGI責任構造
+- [`references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md`](references/HDS_FRAMEWORK_rev3_1a_INTERNAL.md): HDS内部仕様
+- [`references/HDSフレーム_rev3_1_外向け仕様.md`](references/HDSフレーム_rev3_1_外向け仕様.md): HDS外向け仕様
 
-- `strategy/ARC3公式サンプル汎用完遂AGI_実装仕様書_rev6.md`
-- `roadmap/ARC3公式サンプル汎用完遂AGI_開発ロードマップ_rev6.md`
-- `instructions/arc3_rev6/INDEX.md`
+これらの文書は上位構造を与えるが、Current Pointや能力成立を宣言するstate fileではない。
 
-### 機械可読CURRENT
+## Strategy Documents
 
-- `../control/CURRENT_SELECTOR.json`
-- `../control/rev6/CURRENT_TASK.json`
-- `../control/rev6/ROADMAP_MANIFEST.json`
+`strategy/`には複数世代の戦略仕様が共存する。
+**ファイル名のrev番号やmtimeではなくSelectorの`spec_path`だけが現行仕様を選ぶ。**
 
-現在地点は`R0-P01_INVALIDATE_REV5_1_FALSE_CLOSURE`、製品状態は`NOT_ESTABLISHED`、自動遷移は禁止。
+## Roadmaps
 
-## IMPLEMENTATION SUBSTRATE
+`roadmap/`には複数の実装ロードマップが存在する。
+現行ロードマップはSelectorの`roadmap_path`から解決する。
+ロードマップ上のPoint存在は、そのPointの実装完了証拠ではない。
 
-実装本体は`../ARC-AGI-3-Agents/arc3_agi_agent/`に保持する。
-このdirectoryの存在、過去のP番号、test、certificate、bundle、local scoreはcurrent completion claimを自動的に成立させない。
+## Instructions
 
-## HISTORICAL / REFERENCE ONLY
+`instructions/`は局所作業契約を保持する。
+実行対象はSelectorの`current_task_path`と`active_instruction_path`から一意に選ぶ。
+旧Instructionを近い名前という理由だけで実行しない。
 
-次は削除しないが、current selectorとして扱わない。
+## Evaluation / Official / Security / Audit
 
-- rev2／rev3／rev4／rev5.1のstrategy・roadmap・instructions
-- P0〜P22関連文書・control・artifact
-- PH-D系の蒸留・authority・scope資料
-- `../release/ARC3CompletionAgent-v1.0/`
-- `../release/rev5_1/`
-- `../kaggle_notebooks/`内のrev5.1 submission資産
-- rev5.1以前のcompletion／release自己申告artifact
+- `evaluation/`: 評価役割・境界
+- `official/`: official completion predicates等
+- `security/`: identity／taint等のsecurity boundary
+- `audit/`, `audits/`: 監査記録・監査仕様
+- `migration/`: 過去資産の分類・移行記録
 
-履歴分類の入口は`history/README.md`を参照する。
+これらは現在Taskの入力になり得るが、自身でCurrent Stateを選択しない。
 
-## Authority Rule
+## History
 
-現行権威はroot `AGENTS.md`と`../control/CURRENT_SELECTOR.json`に従う。
-古い文書に`current`、`PASS`、`RELEASED`等の記載が残っていても、それは当時の状態記録でありrev6を上書きしない。
+[`history/README.md`](history/README.md)は、旧authority／旧release／旧submission等を現在の権威面から分離するindexである。
+
+旧文書は削除しない。ただしSelectorから選択されない限りcurrent authorityではない。
+
+## Document Rules
+
+1. Current ID、score、product statusをstable indexへ複製しない。
+2. 仕様上のclaimと実測結果を同じものとして書かない。
+3. historical documentを現在に合わせて改変しない。
+4. 新しい文書はruntime、Task、audit、failure repair、release等の直接consumerがある場合に作る。
+5. current entrypointを増やさない。Currentは`control/CURRENT_SELECTOR.json`から始める。

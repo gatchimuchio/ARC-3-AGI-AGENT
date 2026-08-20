@@ -1,42 +1,76 @@
-# ARC3公式サンプル汎用完遂AGI
+# ARC-3 AGI Agent
 
-本repositoryの当該開発endpointは、公式ARC3サンプル25 game／183 levelを同一のC／J／M／P構造で自律完遂する`ARC3CompletionAgent`です。
+ARC Prize / ARC-AGI-3を対象に、同一のAGI責任構造で自律完遂する実行主体を開発・検証するrepositoryです。
 
-## Current Authority
+このREADMEはrepositoryの入口だけを示します。**現在Point、product status、scoreはここに固定しません。**
 
-- [仕様書 rev6](docs/strategy/ARC3公式サンプル汎用完遂AGI_実装仕様書_rev6.md)
-- [ロードマップ rev6](docs/roadmap/ARC3公式サンプル汎用完遂AGI_開発ロードマップ_rev6.md)
-- [Point別指示書 Index](docs/instructions/arc3_rev6/INDEX.md)
-- [Current Selector](control/CURRENT_SELECTOR.json)
+## Current State
 
-## Current Status
+現在の作業状態の唯一の入口:
 
-```text
-Product status: NOT_ESTABLISHED
-Current Point: R0-P01_INVALIDATE_REV5_1_FALSE_CLOSURE
-Auto advance: false
+[`control/CURRENT_SELECTOR.json`](control/CURRENT_SELECTOR.json)
+
+Selectorが現行の仕様、ロードマップ、Current Task、局所指示を選択します。
+
+環境整合の確認:
+
+```bash
+python scripts/check_repository_environment.py
 ```
 
-rev5.1は公式public score 0.06を得たにもかかわらず`PRODUCT_RELEASED`を宣言したため、製品完成証拠として失効しました。旧artifactは履歴として保存します。
+## Operating Contract
 
-## rev6の物理構造
+AI実装エージェント／コード監査者の恒久運用契約:
 
-```text
-仕様書 1 file
-ロードマップ 1 file
-共通実行契約 1 file
-Point別指示書 33 files
-機械可読Roadmap Manifest
-Current Task / Current Selector
-```
+- [`AGENTS.md`](AGENTS.md)
+- [`AUTHORITY_ORDER.md`](AUTHORITY_ORDER.md)
+- [`docs/operations/REPOSITORY_OPERATING_MODEL.md`](docs/operations/REPOSITORY_OPERATING_MODEL.md)
 
-各Pointは独立ファイルです。一冊の巨大指示書から複数工程を機械的に通過させません。
+戦略と実装環境を分離し、AGENTSやREADMEへCurrent Stateを複製しない方針です。
 
-## Product Formula
+## Repository Map
 
 ```text
-C = Execute(L0, P)
-AGI Kernel = Trinity(C, J_hds, M)
+AGENTS.md                 repository-wide implementation contract
+AUTHORITY_ORDER.md        authority / evidence / history boundary
+control/                   current selector and strategy-specific state
+docs/architecture/        upper architecture
+docs/references/          HDS and reference specifications
+docs/strategy/            strategy specifications
+docs/roadmap/             implementation roadmaps
+docs/instructions/        local execution instructions
+docs/operations/          stable repository operating model
+docs/history/             historical authority/document index
+ARC-AGI-3-Agents/          product implementation and package toolchain
+analysis/ evidence/        observations, reports, evaluation evidence
+artifacts/ manifests/      generated/canonical supporting artifacts
+release/                   preserved release assets
+kaggle_notebooks/          preserved platform notebook assets
+scripts/                   repository-level build/audit/validation tools
 ```
 
-進捗はgame WIN、level complete、Failure Signature減少、P/J/M能力差分だけで測定します。
+## Product Implementation
+
+実装本体は現在、[`ARC-AGI-3-Agents/`](ARC-AGI-3-Agents/)にあります。
+このsubtreeのローカル運用規則は[`ARC-AGI-3-Agents/AGENTS.md`](ARC-AGI-3-Agents/AGENTS.md)を参照します。
+
+toolchainのversionは文章へ転記せず、subtreeの次のファイルを正本とします。
+
+- `.python-version`
+- `pyproject.toml`
+- `uv.lock`
+- `pytest.ini`
+
+## Development Entry
+
+1. repository operating contractを読む。
+2. environment checkを通す。
+3. `control/CURRENT_SELECTOR.json`からCurrent Taskを解決する。
+4. 既存実装・tests・evidenceを確認する。
+5. 現在Taskの目的に必要な最小因果差分だけを変更する。
+6. relevant verificationを実行し、観測結果とclaimを分離して報告する。
+
+## History
+
+旧rev、旧phase、旧release、旧submissionは削除せず履歴証拠として保持します。
+現行権威との境界は[`docs/history/README.md`](docs/history/README.md)を参照してください。
