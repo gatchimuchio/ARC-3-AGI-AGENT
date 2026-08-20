@@ -1,47 +1,18 @@
-# Secrets and local configuration
-.env
-.env.*
-!.env.example
-
-# Python
 __pycache__/
 *.py[cod]
-*.pyo
+.venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
 .coverage
 htmlcov/
-*.egg-info/
-.venv/
-venv/
 build/
 dist/
-
-# Runtime outputs
-recordings/
-logs/
-runs/
-checkpoints/
-*.log
-
-# Local analysis scratch
-scratch/
-tmp/
-*.tmp
-.codex-run-*/
-**/.codex-run-*/
-.codex-m4-clean-install-state.json
-.pytest-tmp-*/
-**/.pytest-tmp-*/
-analysis/autonomous_completion/public_traces/
-
-# Hash-bound heavyweight P10 runtime source; retain compact/audit artifacts.
-evidence/p10/development/active_all25_max450_v14/p10_all25_active_max450_raw.json
-evidence/p10/development/prospective_obligation_relation_v1/p10_all25_active_max16_raw.json
-
-# IDE / OS
-.vscode/
-.idea/
+*.egg-info/
+.env
 .DS_Store
 Thumbs.db
+
+# 実行時生成物
+出力/
+一時/

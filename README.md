@@ -1,76 +1,74 @@
-# ARC-3 AGI Agent
+# ARC-3 AGI
 
-ARC Prize / ARC-AGI-3を対象に、同一のAGI責任構造で自律完遂する実行主体を開発・検証するrepositoryです。
+ARC Prize 2026 / ARC-AGI-3を対象に、**日本語を基底言語とするAGI構成**を実装・検証するrepositoryです。
 
-このREADMEはrepositoryの入口だけを示します。**現在Point、product status、scoreはここに固定しません。**
+この作業木は旧rev・旧戦略・旧agent実装を継承しません。過去の成果はGit履歴には残りますが、現在の権威ではありません。
 
-## Current State
+## 固定する基本構成
 
-現在の作業状態の唯一の入口:
-
-[`control/CURRENT_SELECTOR.json`](control/CURRENT_SELECTOR.json)
-
-Selectorが現行の仕様、ロードマップ、Current Task、局所指示を選択します。
-
-環境整合の確認:
-
-```bash
-python scripts/check_repository_environment.py
+```text
+ARC3世界
+  ↓
+HDS
+  ├ 観測・対象化・問いの確定
+  └ HDSコンパイラ
+        ↓
+ミニドラ = LLM主体
+        ↕
+記憶 = 記憶主体
+        ↓
+HDS
+  ├ 評価・反証・フィードバック
+  ├ 再計算要求
+  └ 確定・作用承認
+        ↓
+ARC3世界
 ```
 
-## Operating Contract
+- **HDS**: ARC3世界の入力主体かつ最終判断・作用主体。HDSコンパイラはHDSの管轄です。
+- **ミニドラ**: HDSがコンパイルしたデータを処理するLLM主体です。ARC3世界へ直接作用しません。
+- **記憶**: 事前蒸留知識と実行時知識を保持する可変記憶主体です。更新確定はHDSが行います。
 
-AI実装エージェント／コード監査者の恒久運用契約:
+AGIの三主体構成は `HDS + LLM + 記憶` で不変です。
 
-- [`AGENTS.md`](AGENTS.md)
-- [`AUTHORITY_ORDER.md`](AUTHORITY_ORDER.md)
-- [`docs/operations/REPOSITORY_OPERATING_MODEL.md`](docs/operations/REPOSITORY_OPERATING_MODEL.md)
+## 日本語基底
 
-戦略と実装環境を分離し、AGENTSやREADMEへCurrent Stateを複製しない方針です。
+実務上やむを得ない外部契約を除き、設計・認知表現・命令形・記憶・ログ・失敗署名・文書・内部schemaは日本語を正本とします。
+
+英語はPython予約語、ARC/Kaggle SDK、外部API、package名、外部schemaなどの**Adapter境界の固定記号**としてのみ残します。
+
+詳細: [`運用/日本語基底方針.md`](運用/日本語基底方針.md)
+
+## 現在状態
+
+唯一の可変状態入口:
+
+[`制御/現在状態.json`](制御/現在状態.json)
+
+現在は**戦略未選択・再設計中**です。旧revから戦略やPointを復元してはいけません。
 
 ## Repository Map
 
 ```text
-AGENTS.md                 repository-wide implementation contract
-AUTHORITY_ORDER.md        authority / evidence / history boundary
-control/                   current selector and strategy-specific state
-docs/architecture/        upper architecture
-docs/references/          HDS and reference specifications
-docs/strategy/            strategy specifications
-docs/roadmap/             implementation roadmaps
-docs/instructions/        local execution instructions
-docs/operations/          stable repository operating model
-docs/history/             historical authority/document index
-ARC-AGI-3-Agents/          product implementation and package toolchain
-analysis/ evidence/        observations, reports, evaluation evidence
-artifacts/ manifests/      generated/canonical supporting artifacts
-release/                   preserved release assets
-kaggle_notebooks/          preserved platform notebook assets
-scripts/                   repository-level build/audit/validation tools
+AGENTS.md             AI実装エージェントの恒久運用契約
+制御/                 現在状態の単一入口
+運用/                 権限・日本語基底・repository運用
+設計/                 AGI三主体の不変構成
+HDS/                  HDSとHDSコンパイラ
+ミニドラ/             LLM主体
+記憶/                 Prior / Runtime Memory
+入力/                 ARC3公式入力の受け口
+接続/                 外部Adapter境界
+戦略/                 今後確定するARC3攻略戦略
+検証/                 成立確認・回帰・証拠
+道具/                 repository監査・補助実装
 ```
 
-## Product Implementation
+## 開始手順
 
-実装本体は現在、[`ARC-AGI-3-Agents/`](ARC-AGI-3-Agents/)にあります。
-このsubtreeのローカル運用規則は[`ARC-AGI-3-Agents/AGENTS.md`](ARC-AGI-3-Agents/AGENTS.md)を参照します。
+1. `AGENTS.md`を読む。
+2. `python3 道具/リポジトリ環境監査.py`を実行する。
+3. `制御/現在状態.json`を読む。
+4. 現在の明示目的だけを扱う。
 
-toolchainのversionは文章へ転記せず、subtreeの次のファイルを正本とします。
-
-- `.python-version`
-- `pyproject.toml`
-- `uv.lock`
-- `pytest.ini`
-
-## Development Entry
-
-1. repository operating contractを読む。
-2. environment checkを通す。
-3. `control/CURRENT_SELECTOR.json`からCurrent Taskを解決する。
-4. 既存実装・tests・evidenceを確認する。
-5. 現在Taskの目的に必要な最小因果差分だけを変更する。
-6. relevant verificationを実行し、観測結果とclaimを分離して報告する。
-
-## History
-
-旧rev、旧phase、旧release、旧submissionは削除せず履歴証拠として保持します。
-現行権威との境界は[`docs/history/README.md`](docs/history/README.md)を参照してください。
+旧履歴は、Ownerが明示的に再利用を指示した場合だけ参照します。
