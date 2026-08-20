@@ -1,23 +1,18 @@
-# ARC-AGI-3-Agents — ARC3 implementation substrate
+# ARC-AGI-3-Agents — Product Implementation Substrate
 
-このdirectoryは`ARC3CompletionAgent`の実装資産を保持する。**current strategy／phase／completion authorityではない。**
+このdirectoryは`ARC3CompletionAgent`の実装資産とpackage toolchainを保持する。
+**current strategy／Point／product status／completion authorityは保持しない。**
 
-## Current Repository State
+## Current Work Resolution
 
-```text
-strategy = ARC3_OFFICIAL_SAMPLE_GENERIC_COMPLETION_AGI_REV6
-product_status = NOT_ESTABLISHED
-active_point = R0-P01_INVALIDATE_REV5_1_FALSE_CLOSURE
-```
+現在作業はrepository rootから解決する。
 
-現行権威はrepository rootの次だけを参照する。
+- `../AGENTS.md`: repository-wide operating contract
+- `AGENTS.md`: このsubtreeのlocal implementation contract
+- `../AUTHORITY_ORDER.md`: authority / evidence boundary
+- `../control/CURRENT_SELECTOR.json`: current workの唯一の入口
 
-- `../AGENTS.md`
-- `../control/CURRENT_SELECTOR.json`
-- `../control/rev6/CURRENT_TASK.json`
-- active Point instruction
-
-このdirectory内に残る`rev4`、`P1`〜`P22`、M3/M4/M5、certificate、bundle、local score等の記述・実装・testは、再利用可能な実装資産または履歴証拠であり、rev6 completion claimを自動成立させない。
+このREADMEから現在Pointを推定しない。
 
 ## Implementation
 
@@ -25,33 +20,51 @@ active_point = R0-P01_INVALIDATE_REV5_1_FALSE_CLOSURE
 
 `arc3_agi_agent/`
 
-保持されている責任構造:
+既存のentrypoint、agents、tests、audit tools、bundles等は、新規実装を作る前に再利用可能性を確認する。
+過去世代の名称を持つmoduleやscriptが存在していても、その名称だけでcurrent／historicalを判定しない。
 
-```text
-C = Execute(L0, P)
-AGI Kernel = Trinity(C, J, M)
-```
+## Toolchain
 
-rev6では、この既存substrateを捨てず、R0-P02で実能力・実score・実行経路を再基準化した後に採否する。
+versionやdependencyは文章へ転記せず、次を正本とする。
 
-## Rebaseline Candidates
+- `.python-version`
+- `pyproject.toml`
+- `uv.lock`
+- `pytest.ini`
 
-以下の入口は旧実装から保持されている。rev6で有効とみなす前にR0-P02以降で実測確認する。
+環境構築:
 
 ```bash
 uv sync --locked
-uv run arc3-completion-product --mode offline --action-budget 4096
-python -m pytest -q tests
-python -m mypy arc3_agi_agent
-ruff check arc3_agi_agent tests
 ```
 
-Kaggle／competition mode／公式提出は、旧releaseや旧Notebookをそのままcurrent経路として再利用しない。
+代表的なlocal verification:
 
-## Historical README
+```bash
+python -m compileall -q arc3_agi_agent agents tests/unit
+python -m unittest discover -s tests/unit -p "test_*.py" -v
+python -m pytest -q tests
+python -m mypy arc3_agi_agent
+ruff check arc3_agi_agent agents/__init__.py agents/recorder.py tests/conftest.py tests/unit
+```
 
-rev4時点でこのdirectoryがcurrent product runtimeを名乗っていたREADME原文は次へ保存する。
+実際に必要なcheckはCurrent Taskと変更範囲に応じて選択する。
+未実行checkをPASSと報告しない。
+
+## Evidence Boundary
+
+このsubtreeに実装、test、bundle、certificate、local score等が存在しても、それ自体でofficial capabilityやcompletionは成立しない。
+claimはroot operating contractのEvidence Levelに従い、対応する実測結果へ接続する。
+
+## External / Platform Boundary
+
+release、Kaggle Notebook、competition mode、official access等は、このREADMEの記述だけではcurrent execution pathにならない。
+Current TaskとOwner権限で明示的に選択された場合だけ使用する。
+
+## Historical Documentation
+
+過去にこのdirectoryがcurrent product runtimeを名乗っていたREADME原文は次へ保存している。
 
 `../docs/history/rev4_runtime/ARC-AGI-3-Agents_README.md`
 
-古いREADMEは当時の実装状況を読むための証拠であり、現在地点を選択しない。
+旧READMEは当時の実装状況を読むための証拠であり、現在地点を選択しない。
