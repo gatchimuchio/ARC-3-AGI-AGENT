@@ -1,0 +1,13 @@
+{
+  "スキーマ版": "arc3-hds-prior-memory-canonical-v0.4",
+  "基底言語": "日本語",
+  "状態": "初回全数解析完了・成功trajectory拡張継続",
+  "公式ゲーム数": 25,
+  "公式レベル数": 183,
+  "初期一手作用実測候補数": 5112,
+  "検証済み既知解レベル数": 9,
+  "索引": {"path":"183レベル_HDS索引.json","SHA256":"5848a8947eed806a61531b963ea9113e53ef5e3db028f406d010b02af9a41ffd"},
+  "統合正本": {"path":"機構作用既知解_HDS正本.json","SHA256":"b189d9367f693baf65635d34af14c31e4a8b34e04dc88b214e3f3b2e48049424"},
+  "HDS境界": "source読解・一手観測・成功trajectoryを分離し、fresh instanceでlevel遷移を再現したtrajectoryだけを既知解確定とする。",
+  "次工程": "残174レベルの成功trajectory生成・再現と、レベル間→ゲーム間の水平引き算。"
+}
