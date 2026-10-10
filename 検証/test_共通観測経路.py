@@ -16,6 +16,12 @@ def 語彙結果(適用='適用可能',作用=None,保留=None,不確実=None,�
          '作用候補群':作用 or [],'保留理由群':保留 or [],'規則不確実性':不確実 or [],'複数整合解':複数,'実行許可':False}
 def 作用(n=0):return {'作用番号':6,'引数':{'x':0,'y':0},'番号':n,'実行許可':False}
 class 共通照会試験(unittest.TestCase):
+ def setUp(self):
+  # 既存二語彙の採否回帰。新語彙は別の実盤面試験で全照会する。
+  for name in ('鎖語彙を接続する','形状語彙を接続する'):
+   p=patch('接続.共通観測経路.'+name,return_value=語彙結果('構造上不適用'))
+   p.start();self.addCleanup(p.stop)
+
  def run_case(self,a,b):
   h=object()
   with patch('接続.共通観測経路.列図式候補',return_value=a) as x,patch('接続.共通観測経路.複合図式候補',return_value=b) as y:
@@ -24,7 +30,7 @@ class 共通照会試験(unittest.TestCase):
   return result
  def test_構造上不適用の理由を全体HOLDと混ぜない(self):
   r=self.run_case(語彙結果(作用=[作用()]),語彙結果('構造上不適用',保留=['構造違い']))
-  self.assertEqual(r['状態'],'条件付き候補');self.assertEqual(len(r['次作用候補群']),1);self.assertFalse(r['保留理由群']);self.assertEqual(len(r['未採用理由群']),1)
+  self.assertEqual(r['状態'],'条件付き候補');self.assertEqual(len(r['次作用候補群']),1);self.assertFalse(r['保留理由群']);self.assertEqual(len(r['未採用理由群']),3)
  def test_順序付き経路は先頭だけを現在作用とし全経路を保持(self):
   r=self.run_case(語彙結果('構造上不適用'),語彙結果(作用=[作用(i) for i in range(3)]))
   self.assertEqual(len(r['次作用候補群']),1);self.assertEqual(len(r['候補経路群'][0]['経路']),3)
@@ -39,7 +45,7 @@ class 共通照会試験(unittest.TestCase):
   r=self.run_case(a,語彙結果('構造上不適用'));self.assertEqual(r['状態'],'複数整合解を保持');self.assertFalse(r['規則不確実性']);self.assertEqual(len(r['全目標候補群'][0]['候補群']),5)
  def test_解析不明や複数適用は任意選択しない(self):
   for b in (語彙結果('未確認'),語彙結果(作用=[作用()])):
-   r=self.run_case(語彙結果(作用=[作用()]),b);self.assertEqual(r['状態'],'未確認');self.assertFalse(r['次作用候補群']);self.assertEqual(len(r['語彙別結果']),2)
+   r=self.run_case(語彙結果(作用=[作用()]),b);self.assertEqual(r['状態'],'未確認');self.assertFalse(r['次作用候補群']);self.assertEqual(len(r['語彙別結果']),4)
  def test_例外を構造上不適用へ隠さない(self):
   with patch('接続.共通観測経路.列図式候補',side_effect=ValueError('fixture')),patch('接続.共通観測経路.複合図式候補',return_value=語彙結果(作用=[作用()])):
    r=公開観測から候補を照会する(object(),公開入力());self.assertEqual(r['語彙別結果'][0]['結果']['適用性']['状態'],'未確認');self.assertFalse(r['次作用候補群'])

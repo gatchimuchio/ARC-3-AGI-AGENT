@@ -28,11 +28,8 @@ def 記号を読む(f,x,y,bg):
  if set(rim)=={bg} and len(set(center))==1:return None
  raise ValueError('記号文法不成立')
 
-def 図式を観測する(frame):
- if not frame or not frame[0] or any(len(r)!=len(frame[0]) for r in frame):raise ValueError('空または非矩形盤面')
- h=len(frame);w=len(frame[0]);counts=Counter(v for r in frame for v in r).most_common()
- if len(counts)>1 and counts[0][1]==counts[1][1]:raise ValueError('背景候補同数で未確定')
- bg=counts[0][0]
+def 容器外形を観測する(frame,bg):
+ h=len(frame);w=len(frame[0])
  boxes=[]
  for y in range(h-9):
   x=0
@@ -45,11 +42,23 @@ def 図式を観測する(frame):
     selected=len(set(brackets))==1 and brackets[0] not in (bg,c)
     slots=[]
     for j in range((n-4)//6):
-     xx=x+3+6*j;yy=y+3;token=記号を読む(frame,xx,yy,bg)
-     slots.append({'位置':[xx,yy],'記号':token})
+     xx=x+3+6*j;yy=y+3
+     slots.append({'位置':[xx,yy],'記号':None})
     boxes.append({'色':c,'位置':[x,y],'起点':selected,'枠群':slots})
    x=end
+ return boxes
+
+def 図式を観測する(frame):
+ if not frame or not frame[0] or any(len(r)!=len(frame[0]) for r in frame):raise ValueError('空または非矩形盤面')
+ h=len(frame);w=len(frame[0]);counts=Counter(v for r in frame for v in r).most_common()
+ if len(counts)>1 and counts[0][1]==counts[1][1]:raise ValueError('背景候補同数で未確定')
+ bg=counts[0][0]
+ boxes=容器外形を観測する(frame,bg)
  if not boxes:raise 知覚不適用('固定文法の枠付き容器が観測できない')
+ if not any(b['起点'] for b in boxes):raise 知覚不適用('固定文法に必須の四隅標識付き起点が存在しない')
+ for b in boxes:
+  for slot in b['枠群']:
+   slot['記号']=記号を読む(frame,*slot['位置'],bg)
  if sum(b['起点'] for b in boxes)!=1:raise ValueError('標識付き起点/容器を一意に確認できない')
  if len({b['色'] for b in boxes})!=len(boxes):raise ValueError('同色容器の参照先が複数')
  top=min(b['位置'][1] for b in boxes);bottom=max(b['位置'][1]+10 for b in boxes)
