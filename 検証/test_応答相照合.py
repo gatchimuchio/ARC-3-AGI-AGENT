@@ -26,6 +26,19 @@ class 相接続試験(unittest.TestCase):
   with patch('接続.応答相照合._構造',return_value=({'固定構造':1},{})),patch('接続.応答相照合.照会',return_value=(True,{})),patch('接続.応答相照合.一致する',return_value=(True,{})):
    r=公開応答相を照合する(object(),a,b,6,self.old(a),予測盤面=[[1]])
   self.assertEqual(len(r['進行証拠']['旧目標充足の全証拠']),3);self.assertEqual([x['全画素一致'] for x in r['相別予測差分照合']],[True,True,False]);self.assertFalse(r['実行許可'])
+ def test_目標だけ成立する別語彙で旧応答支持を失わない(self):
+  a=self.obs([[[0]]],0);b=self.obs([[[1]],[[1]]],1,1);old=self.old(a)
+  old['語彙別結果'].append({'語彙':'形状目標対応','結果':{'適用性':{'状態':'適用可能'},'作用適用性':{'状態':'構造上不適用'},'局所保留群':['目標のみの追加解釈']}})
+  with patch('接続.応答相照合._構造',return_value=({},{})),patch('接続.応答相照合.照会',return_value=(True,{})),patch('接続.応答相照合.一致する',return_value=(True,{})):
+   r=公開応答相を照合する(object(),a,b,6,old)
+  self.assertEqual(r['進行証拠']['進行判定'],'公開完了増分と旧目標充足の支持あり');self.assertEqual(len(r['進行証拠']['旧目標充足の全証拠']),2)
+  self.assertEqual(r['語彙適用境界'][1]['目標適用性']['状態'],'適用可能');self.assertEqual(old['語彙別結果'][1]['結果']['局所保留群'],['目標のみの追加解釈'])
+ def test_別語彙作用未知と不正境界と全体隔離を無視しない(self):
+  a=self.obs([[[0]]],0);b=self.obs([[[1]]],1,1)
+  for scope,fault in [({'状態':'未確認'},False),({'状態':'誤った値'},False),(None,False),({'状態':'構造上不適用'},True)]:
+   old=self.old(a);old['語彙別結果'].append({'語彙':'形状目標対応','結果':{'適用性':{'状態':'適用可能'},'作用適用性':scope}})
+   if fault:old['規則不確実性']=['実HDS隔離']
+   r=公開応答相を照合する(object(),a,b,6,old);self.assertIsNone(r['進行証拠']);self.assertTrue(r['保留理由群']);self.assertEqual(len(r['相記録']['応答全盤面']),1)
  def test_旧照会の観測対応を確認する(self):
   a=self.obs([[[0]]],0);b=self.obs([[[1]]],1,1);old=self.old(a);old['出所']['観測通番']=999
   r=公開応答相を照合する(object(),a,b,6,old,予測盤面=[[1]]);self.assertTrue(r['保留理由群']);self.assertFalse(r['相別予測差分照合']);self.assertIsNone(r['進行証拠'])
