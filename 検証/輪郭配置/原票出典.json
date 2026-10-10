@@ -1,0 +1,85 @@
+{
+  "利用区分": "全て公開教師・開発観測。予約最終評価ではない。",
+  "原票": [
+    {
+      "game": "wa30",
+      "game_id": "wa30-ee6fef47",
+      "session_id": "0f88f0f8-aeeb-438d-a901-fe09de856cfb",
+      "source_blog": "https://arcprize.org/blog/arc-agi-3-human-dataset",
+      "replay_url": "https://arcprize.org/replay/0f88f0f8-aeeb-438d-a901-fe09de856cfb",
+      "recording_url": "https://arcprize.org/api/recordings/wa30-ee6fef47/0f88f0f8-aeeb-438d-a901-fe09de856cfb",
+      "path": "/workspace/shared/arc_official_teachers/0f88f0f8-aeeb-438d-a901-fe09de856cfb.recording.jsonl",
+      "sha256": "fc26236cc2f16cb7886e4a8624f3a414c2737aa585229818c6dc1a59c82b26eb",
+      "frame_rows": 1565,
+      "transition_count": 1564,
+      "last_state": "WIN",
+      "levels_completed": 9,
+      "win_levels": 9,
+      "initial_action": 0,
+      "all_frames_64x64": true
+    },
+    {
+      "game": "wa30",
+      "game_id": "wa30-ee6fef47",
+      "session_id": "5fd30bfc-e7c4-48e1-ac4c-65b80de6f7d8",
+      "source_blog": "https://arcprize.org/blog/arc-agi-3-human-dataset",
+      "replay_url": "https://arcprize.org/replay/5fd30bfc-e7c4-48e1-ac4c-65b80de6f7d8",
+      "recording_url": "https://arcprize.org/api/recordings/wa30-ee6fef47/5fd30bfc-e7c4-48e1-ac4c-65b80de6f7d8",
+      "path": "/workspace/shared/arc_official_teachers/5fd30bfc-e7c4-48e1-ac4c-65b80de6f7d8.recording.jsonl",
+      "sha256": "1a1a67ce92072038ede69185b0f33fc2bedcaafe6b9e88a8c51b92e025467385",
+      "frame_rows": 1520,
+      "transition_count": 1519,
+      "last_state": "WIN",
+      "levels_completed": 9,
+      "win_levels": 9,
+      "initial_action": 0,
+      "all_frames_64x64": true
+    },
+    {
+      "game": "wa30",
+      "game_id": "wa30-ee6fef47",
+      "session_id": "5c0bed76-ae96-43c1-b99b-aa293848257e",
+      "source_blog": "https://arcprize.org/blog/arc-agi-3-human-dataset",
+      "replay_url": "https://arcprize.org/replay/5c0bed76-ae96-43c1-b99b-aa293848257e",
+      "recording_url": "https://arcprize.org/api/recordings/wa30-ee6fef47/5c0bed76-ae96-43c1-b99b-aa293848257e",
+      "path": "/workspace/shared/arc_official_teachers/5c0bed76-ae96-43c1-b99b-aa293848257e.recording.jsonl",
+      "sha256": "bd27e04a360700faa662296ca4662bb3a239075104650d382abcac73f27488da",
+      "frame_rows": 1234,
+      "transition_count": 1233,
+      "last_state": "GAME_OVER",
+      "levels_completed": 5,
+      "win_levels": 9,
+      "initial_action": 0,
+      "all_frames_64x64": true
+    }
+  ],
+  "公開教師実入力数": 661,
+  "原観測事実数": 6738,
+  "集約": "同一初期化/進捗区間・同一抽象前提結果。原観測回数とHDS経験数を同一視しない。",
+  "初期化後静的作用数": 443,
+  "旧19作用前反例": "元wa30研究の最終manifest d24d35f496f2ae970b286c1fd48acc13c81ac380527a107459987d2e0c7b0c87を参照。自律対象を除いた条件付き範囲であり反例を削除しない。",
+  "実状態期待SHA256": "796fb8b18d1da40928b5a89a58251476ff29c338ac4d2a6231e67dce1732a6f6",
+  "圧縮資料": [
+    {
+      "経路": "公開教師661.json.gz",
+      "SHA256": "d49fb714cf784d029171ce5756e24eafabb2961c156b24002cdfdc0fb466a228",
+      "展開SHA256": "5f15b6f05f84eee8ab164ff7b5848c0012f9ec1f0127790871a1a64df1556177",
+      "bytes": 23500
+    },
+    {
+      "経路": "公開静的応答443.json.gz",
+      "SHA256": "5da482e65434cce4ac4a64e05597aa597629c0ee94cacea9483330c959f8fafe",
+      "展開SHA256": "37b5cff71e6d9bd3fdbc3b2c6370295e0cd29fb17dde8a31848091f09c24537c",
+      "bytes": 48985
+    }
+  ],
+  "凍結照会期待値": {
+    "経路": "境界付き期待値.json.gz",
+    "利用区分": "テスト限定。実661再照会を比較する期待値。runtime入力ではない。",
+    "SHA256": "ffca0d8111d023ee640444fb185522a954250909095a4912105db0b40022ebf2"
+  },
+  "既存反証対照参照": {
+    "経路": "arc-wa30-complete-search-r2/全31照会実状態対照.json",
+    "意味": "空・矛盾実状態は構成31照会全HOLD。今回再学習なし。"
+  }
+}
