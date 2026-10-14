@@ -1,0 +1,94 @@
+{
+  "schema": "arc3-checkpoint-archive-index-v1",
+  "base_commit": "9ce1830494bb80f5d820fbad61ca9096954a04c6",
+  "archives": [
+    {
+      "checkpoint": "初期129経験",
+      "archive_filename": "ARC3_目標相対操作学習_20261013_v2.tar.gz",
+      "archive_bytes": 5420962,
+      "archive_sha256": "eee277c3d201aa1981b4d7e574d2ccd45ca5adc037ec92591a7976e74159a80b",
+      "archive_in_this_commit": false,
+      "report": "原報告/初期129経験.md",
+      "historical_validation": "検証票/初期129経験.json",
+      "archive_scope": "Previously delivered original archive; not bundled in this first records-only commit."
+    },
+    {
+      "checkpoint": "初回fresh1レベル",
+      "archive_filename": "ARC3_first_fresh_level_checkpoint_20261013.tar.gz",
+      "archive_bytes": 3806257,
+      "archive_sha256": "5a063272f5eb967c051fb54e0d896f4d774aa54990b97f93627aec0445290b0d",
+      "archive_in_this_commit": false,
+      "report": "原報告/初回fresh1レベル.md",
+      "historical_validation": "検証票/初回fresh1レベル.json",
+      "archive_scope": "Previously delivered original archive; not bundled in this first records-only commit."
+    },
+    {
+      "checkpoint": "保存期限失敗",
+      "archive_filename": "ARC3_resource_failure_checkpoint_20261013.tar.gz",
+      "archive_bytes": 7314242,
+      "archive_sha256": "6997ea0290620d809eac4c7c5a727786bc4b4f1c9babcdbd2bc6a07b93fda992",
+      "archive_in_this_commit": false,
+      "report": "原報告/保存期限失敗.md",
+      "historical_validation": "検証票/保存期限失敗.json",
+      "archive_scope": "Previously delivered original archive; not bundled in this first records-only commit."
+    },
+    {
+      "checkpoint": "計算期限失敗",
+      "archive_filename": "ARC3_compute_failure_checkpoint_20261013.tar.gz",
+      "archive_bytes": 13696451,
+      "archive_sha256": "98bb631629373e59ba642ba65077a1dd3952a038d42331e43a2c483b383d902a",
+      "archive_in_this_commit": false,
+      "report": "原報告/計算期限失敗.md",
+      "historical_validation": "検証票/計算期限失敗.json",
+      "archive_scope": "Previously delivered original archive; not bundled in this first records-only commit."
+    },
+    {
+      "checkpoint": "目標一意境界失敗",
+      "archive_filename": "ARC3_goal_ambiguity_failure_checkpoint_20261013.tar.gz",
+      "archive_bytes": 22304243,
+      "archive_sha256": "93dd03fc79465d07ae0604e91c9a52f2eca1546549f8ca9f3d6377297ba76fec",
+      "archive_in_this_commit": false,
+      "report": "原報告/目標一意境界失敗.md",
+      "historical_validation": "検証票/目標一意境界失敗.json",
+      "archive_scope": "Previously delivered original archive; not bundled in this first records-only commit."
+    },
+    {
+      "checkpoint": "目標集合修復4経験",
+      "archive_filename": "ARC3_goalset4_learning_checkpoint_20261013.tar.gz",
+      "archive_bytes": 1499276,
+      "archive_sha256": "f3270217c9b4735db12a761dfdb4e7d46e70fa23e81532347f2e18334414bc4a",
+      "archive_in_this_commit": false,
+      "report": "原報告/目標集合修復4経験.md",
+      "historical_validation": "検証票/目標集合修復4経験.json",
+      "archive_scope": "Previously delivered original archive; not bundled in this first records-only commit."
+    },
+    {
+      "checkpoint": "準備保存50経験",
+      "archive_filename": "preparation_preservation_learning_checkpoint.tar.gz",
+      "archive_bytes": 1545234,
+      "archive_sha256": "272110bf92783dc1ea191a6efd65baabd32d22626bec3a86c6653ec14544bfb8",
+      "archive_in_this_commit": false,
+      "report": "原報告/準備保存50経験.md",
+      "historical_validation": "検証票/準備保存50経験.json",
+      "archive_scope": "Previously delivered original archive; not bundled in this first records-only commit."
+    },
+    {
+      "checkpoint": "保存118観測診断",
+      "archive_filename": "saved118_diagnostic_v2_delivery.tar.xz",
+      "archive_bytes": 11008128,
+      "archive_sha256": "4b9d0cfb1bfcb7455ad0f75ee2eb3adb7c7745828cdf3dac6267856d37ffe74b",
+      "archive_in_this_commit": false,
+      "report": "原報告/保存118観測診断.md",
+      "historical_validation": "検証票/保存118観測診断.json",
+      "archive_scope": "Previously delivered original archive; not bundled in this first records-only commit."
+    }
+  ],
+  "this_commit_is_raw_corpus_complete": false,
+  "certified_fresh_level_count": 1,
+  "official_level_count": 183,
+  "certified_percent": 0.546448087431694,
+  "failed_run_observed_level_count_not_certified": 6,
+  "learned_experiences_not_levels": 183,
+  "diagnostic_current_counter": 6647,
+  "no_full_game_WIN": true
+}

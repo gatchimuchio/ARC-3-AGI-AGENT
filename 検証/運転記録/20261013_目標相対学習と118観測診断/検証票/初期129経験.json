@@ -1,0 +1,72 @@
+{
+  "Action": 0,
+  "Git_writes": 0,
+  "HDS_calls": 0,
+  "SDK_calls": 0,
+  "address_space_limit_bytes": 536870912,
+  "after_resources": {
+    "RAM_available": 9168408576,
+    "RAM_floor": 2147483648,
+    "RAM_retained": 4831838208,
+    "builder_AS": 536870912,
+    "disk_available": 31372722176,
+    "disk_floor": 1073741824,
+    "disk_future_reserved": 1547698176,
+    "epoch": 1791908648.3916838,
+    "scope_bytes": 12310023,
+    "scope_cap": 134217728
+  },
+  "all_source_files": 1618,
+  "all_tar_entries": 1619,
+  "archive": {
+    "bytes": 5420962,
+    "identity": {
+      "ctime_ns": 1791908646875130615,
+      "device": 27,
+      "inode": 1849901,
+      "mode": 33188,
+      "mtime_ns": 1791908646875130615,
+      "size": 5420962
+    },
+    "path": "arc-goal-operation-checkpoint-20261013/ARC3_目標相対操作学習_20261013_v2.tar.gz",
+    "sha256": "eee277c3d201aa1981b4d7e574d2ccd45ca5adc037ec92591a7976e74159a80b"
+  },
+  "before_resources": {
+    "RAM_available": 9180704768,
+    "RAM_floor": 2147483648,
+    "RAM_retained": 4831838208,
+    "builder_AS": 536870912,
+    "disk_available": 31379009536,
+    "disk_floor": 1073741824,
+    "disk_future_reserved": 1547698176,
+    "epoch": 1791908637.4032774,
+    "scope_bytes": 6186054,
+    "scope_cap": 134217728
+  },
+  "byte_for_byte_source_comparison": true,
+  "duplicates_links_escape_paths": 0,
+  "elapsed_seconds": 10.988725662231445,
+  "every_entry_sha256_size_verified": true,
+  "gzip_CRC_EOF_checked": true,
+  "inventory_unchanged": true,
+  "manifest": {
+    "bytes": 702707,
+    "identity": {
+      "ctime_ns": 1791908645420046021,
+      "device": 27,
+      "inode": 1849810,
+      "mode": 33188,
+      "mtime_ns": 1791908645420046021,
+      "size": 702707
+    },
+    "path": "arc-goal-operation-checkpoint-20261013/manifest_v2.json",
+    "sha256": "dd514eb4d4be57b3f1e5634047237ed2c9bebd7f8609b92fad215db515b049de"
+  },
+  "maxrss_KiB": 27124,
+  "no_silent_truncation": true,
+  "same_snapshot_identities_unchanged": true,
+  "schema": "goal-operation-checkpoint-readback-v2",
+  "source_bytes": 160846145,
+  "status": "PASS",
+  "verified_tar_payload_bytes": 161548852
+}

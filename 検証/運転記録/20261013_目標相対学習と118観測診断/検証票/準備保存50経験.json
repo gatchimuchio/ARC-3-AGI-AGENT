@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "archive": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_prepsave_learning/preparation_preservation_learning_checkpoint.tar.gz",
+    "bytes": 1545234,
+    "sha256": "272110bf92783dc1ea191a6efd65baabd32d22626bec3a86c6653ec14544bfb8"
+  },
+  "member_count": 413,
+  "expected_member_count": 413,
+  "payload_bytes": 20618372,
+  "all_member_hashes_sizes": true,
+  "all_original_inputs_unchanged": true,
+  "tar_end_zero_bytes": 7680,
+  "gzip_CRC32": 1721866039,
+  "gzip_EOF": true,
+  "gzip_no_trailing_data": true,
+  "xz_packets_verified": 332,
+  "raw_budget_bytes": 67108864,
+  "archive_budget_bytes": 15728640,
+  "guard_after": {
+    "used": {
+      "source": 8959512,
+      "evidence": 949291114,
+      "failure": 16256451
+    },
+    "disk_free": 30277705728,
+    "MemAvailable": 8942583808,
+    "future_disk": 3913285632,
+    "reserved_RAM": 4831838208
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "schema": "arc3-checkpoint-readback-v1",
+  "status": "PASS",
+  "archive": {
+    "path": "arc-column-live-loop-20261013/evidence/checkpoint_goalset4_learning/ARC3_goalset4_learning_checkpoint_20261013.tar.gz",
+    "bytes": 1499276,
+    "sha256": "f3270217c9b4735db12a761dfdb4e7d46e70fa23e81532347f2e18334414bc4a"
+  },
+  "manifest": {
+    "path": "arc-column-live-loop-20261013/evidence/checkpoint_goalset4_learning/manifest_v1.json",
+    "bytes": 73934,
+    "sha256": "0dca600a344ca1dab017fa31aa8afaf01bda4c1098e979fc4033c1f6eff28b72"
+  },
+  "member_count": 298,
+  "source_file_count": 297,
+  "source_bytes": 19776752,
+  "all_member_bytes": 19850686,
+  "full_gzip_uncompressed_bytes": 20316160,
+  "checks": {
+    "all_member_sha256_and_bytes": true,
+    "source_unchanged_sha256_and_bytes": true,
+    "manifest_exact": true,
+    "full_gzip_CRC_EOF": true,
+    "no_full_extraction": true,
+    "no_SDK_HDS_Action_execution": true,
+    "no_opaque_body_reads": true
+  },
+  "preflight": {
+    "available_disk_bytes": 30395789312,
+    "available_ram_bytes": 9242075136,
+    "L_source_bytes": 903525341,
+    "output_bytes": 44547
+  },
+  "postflight": {
+    "available_disk_bytes": 30394191872,
+    "available_ram_bytes": 9235619840,
+    "L_source_bytes": 905107581,
+    "output_bytes": 1626787
+  },
+  "limits": {
+    "output": 67108864,
+    "L": 2147483648,
+    "evidence_category": 2097152000,
+    "globalfuture": 3779067904,
+    "disk_floor": 1073741824,
+    "RAM_reserved": 4831838208,
+    "RAM_floor": 2147483648,
+    "packaging_AS": 536870912
+  }
+}

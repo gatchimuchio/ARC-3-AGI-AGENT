@@ -1,0 +1,114 @@
+{
+  "status": "PASS",
+  "archiveFileRef": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/saved118_diagnostic_v2_delivery.tar.xz",
+    "bytes": 11008128,
+    "sha256": "4b9d0cfb1bfcb7455ad0f75ee2eb3adb7c7745828cdf3dac6267856d37ffe74b"
+  },
+  "payloadManifestFileRef": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/payload_manifest_v2.json",
+    "bytes": 1490659,
+    "sha256": "0cf1489d52facf16bfc1bdef4f50ef0642de8c081d389249d4d6571ae053b2c8"
+  },
+  "embeddedManifestMember": "manifest_v2.json",
+  "readmeFileRef": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/README_ja_v2.md",
+    "bytes": 2406,
+    "sha256": "7884461c1fa1bccc70db811ff05b25f6d727e84036df785506da5ff1d74d3835"
+  },
+  "embeddedReadmeMember": "README_ja_v2.md",
+  "builderFileRef": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/package_delivery_v2.py",
+    "bytes": 5632,
+    "sha256": "16e207bcabc51edd7d603ef59419bc362e71bd84a7cf09a12dfea4c9dc906486"
+  },
+  "verified_files": 3912,
+  "verified_directories": 6,
+  "original_evidence_files": 3910,
+  "full_member_size_SHA256": true,
+  "full_xz_CRC64_footer_EOF": true,
+  "originals_and_external_refs_unchanged": true,
+  "all_previous_versions_unchanged": [
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/README_ja.md",
+      "bytes": 2343,
+      "sha256": "341a972fef3fe68d7ac0983e38335e329875c8924f21b43fc016f74e40cd318a"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/README_ja_v2.md",
+      "bytes": 2406,
+      "sha256": "7884461c1fa1bccc70db811ff05b25f6d727e84036df785506da5ff1d74d3835"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/manifest_v1.json",
+      "bytes": 1489581,
+      "sha256": "bcdd7827dfaa22f2d5e95a95654746954dfd60e62509a777d1a3a887f18a112b"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/manifest_v2.json",
+      "bytes": 1489624,
+      "sha256": "d9c751876746fe94ec31ebad8073b85db2b549190d636c6d80e8280c791fb4a0"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/package_delivery_v2.py",
+      "bytes": 5632,
+      "sha256": "16e207bcabc51edd7d603ef59419bc362e71bd84a7cf09a12dfea4c9dc906486"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/package_verify_v1.py",
+      "bytes": 10232,
+      "sha256": "66fc960fc8d3b70d36ce9564b4895e5d885cf54da65dab673fa593fe62906e30"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/package_verify_v2.py",
+      "bytes": 11650,
+      "sha256": "5a01dd1e04b99e18ffa9cd8a9a35571315e8fd850fa8ed0b6d694647fb45ee86"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/saved118_diagnostic_v1.tar.xz",
+      "bytes": 10805540,
+      "sha256": "154493a7cd37021a1ec8e46dacbb5fd497854f2eb614621e1cddaab0f21943da"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/saved118_diagnostic_v2.tar.xz",
+      "bytes": 2194891,
+      "sha256": "839b6bbff690edf1f1fad7d2927ebab8fc971e0211abc4b65bb3b693a943f431"
+    },
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_saved118_diagnostic/verification_v1.json",
+      "bytes": 2100,
+      "sha256": "986202cbab8c92412995b66f0676200c0bb0cd3728f19e78da3eac5663b18531"
+    }
+  ],
+  "only_semantic_change": "termination wording identifies execution worker rather than human Owner",
+  "fresh_source_excluded": true,
+  "checkpoint_cap_bytes": 33554432,
+  "archive_cap_bytes": 15728640,
+  "reserve_bytes": {
+    "fresh_evidence": 1073741824,
+    "failure": 16777216,
+    "future_pure_audit": 20971520
+  },
+  "budget_before": {
+    "used": {
+      "source": 9586540,
+      "evidence": 975973046,
+      "failure": 16256451
+    },
+    "disk_free": 30247026688,
+    "MemAvailable": 9207107584,
+    "future_disk": 3913285632,
+    "reserved_RAM": 4831838208
+  },
+  "budget_after_before_receipt": {
+    "used": {
+      "source": 9586540,
+      "evidence": 988471833,
+      "failure": 16256451
+    },
+    "disk_free": 30234525696,
+    "MemAvailable": 9199013888,
+    "future_disk": 3913285632,
+    "reserved_RAM": 4831838208
+  }
+}

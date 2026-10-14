@@ -1,0 +1,43 @@
+{
+  "schema": "ARC3-resource-failure-checkpoint-validation-v1",
+  "status": "PASS",
+  "archive": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_resource_failure/ARC3_resource_failure_checkpoint_20261013.tar.gz",
+    "bytes": 7314242,
+    "sha256": "6997ea0290620d809eac4c7c5a727786bc4b4f1c9babcdbd2bc6a07b93fda992"
+  },
+  "manifest": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-column-live-loop-20261013/evidence/checkpoint_resource_failure/source_manifest.json",
+    "bytes": 760849,
+    "sha256": "4be33bf8747fd8fd2c026b92aa66f7a65ef3e7a148bccd0e1c4a98887108d9c9"
+  },
+  "verified_members": 2807,
+  "verified_archived_source_bytes": 130451332,
+  "source_file_count": 2806,
+  "source_bytes": 129690483,
+  "streaming_archive_and_readback": true,
+  "all_member_paths_sizes_sha256": true,
+  "all_source_byte_for_byte": true,
+  "all_sources_rehashed_after_archive": true,
+  "gzip_CRC32_ISIZE_and_true_EOF": true,
+  "tar_end_markers": true,
+  "uncompressed_tar_bytes": 135393280,
+  "pinned_refs_verified": 2009,
+  "active_run_files_included": 0,
+  "opaque_bodies_read": 0,
+  "SDK_HDS_Action_Teach_calls": 0,
+  "worker_peak_rss_bytes": 30916608,
+  "limits": {
+    "checkpoint_bytes": 33554432,
+    "worker_AS_bytes": 536870912,
+    "L_scope_bytes": 1073741824,
+    "source_bytes": 16777216,
+    "evidence_bytes": 1023410176,
+    "failure_bytes": 33554432,
+    "global_future_bytes": 2638217216,
+    "disk_floor_bytes": 1073741824,
+    "RAM_reserved_bytes": 5905580032,
+    "RAM_floor_bytes": 2147483648
+  },
+  "scope_note": "Archive integrity verification only; semantic run findings remain attributed to the included historical independent audit and final exit proof. No active-run outcome assertion."
+}
