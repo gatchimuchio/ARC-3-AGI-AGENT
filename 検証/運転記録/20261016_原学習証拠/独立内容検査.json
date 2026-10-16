@@ -1,0 +1,3546 @@
+{
+  "schema": "independent-original-learning-admission-v1",
+  "status": "ADMITTED_FOR_EXACT_HISTORICAL_PRESERVATION_WITH_HASH_ONLY_PYC_EXCEPTION",
+  "resource_limits": {
+    "AS_bytes": 536870912,
+    "output_cap_bytes": 102400,
+    "disk_floor_bytes": 1073741824
+  },
+  "scope": {
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "recovered_code_executed": false,
+    "original_files_modified": false,
+    "dependency_targets_read": false,
+    "official_game_SDK_source_read": false
+  },
+  "archives": [
+    {
+      "name": "ARC3_目標相対操作学習_20261013_v2.tar.gz",
+      "bytes": 5420962,
+      "sha256": "eee277c3d201aa1981b4d7e574d2ccd45ca5adc037ec92591a7976e74159a80b",
+      "whole_gzip_crc_eof_verified": true,
+      "tar_uncompressed_bytes": 163328000,
+      "member_count": 1619,
+      "payload_bytes": 161548852,
+      "extensions": {
+        ".json": 144,
+        ".py": 62,
+        ".diff": 7,
+        ".jsonl": 4,
+        ".json.xz": 1391,
+        ".exit": 1,
+        ".log": 1,
+        ".md": 7,
+        ".txt": 1,
+        ".toml": 1
+      },
+      "manifest_file": "manifest.json",
+      "manifest_sha256": "dd514eb4d4be57b3f1e5634047237ed2c9bebd7f8609b92fad215db515b049de",
+      "manifest_entry_count": 1618,
+      "manifest_bytes_equal": true,
+      "member_identity_digest_algorithm": "SHA256 of sorted JSON arrays [path,bytes,sha256] with ensure_ascii=false,separators=(comma,colon), joined by newline",
+      "member_identity_digest": "ec98a5331d38a6c867bbf5478fc0cc344e5a3d92a189517828c92ecf4bdb101d",
+      "hash_mismatches": [],
+      "membership_extras": [],
+      "json_count": 1535,
+      "xz_count": 1391,
+      "max_xz_decoded_bytes": 3399415,
+      "membership_missing": [],
+      "final_archive_identity_recheck": {
+        "bytes_equal": true,
+        "sha256_equal": true
+      }
+    },
+    {
+      "name": "ARC3_goalset4_learning_checkpoint_20261013.tar.gz",
+      "bytes": 1499276,
+      "sha256": "f3270217c9b4735db12a761dfdb4e7d46e70fa23e81532347f2e18334414bc4a",
+      "whole_gzip_crc_eof_verified": true,
+      "tar_uncompressed_bytes": 20316160,
+      "member_count": 298,
+      "payload_bytes": 19850686,
+      "extensions": {
+        ".py": 35,
+        ".json": 53,
+        ".json.xz": 202,
+        ".txt": 2,
+        ".diff": 3,
+        ".md": 3
+      },
+      "manifest_file": "manifest_v1.json",
+      "manifest_sha256": "0dca600a344ca1dab017fa31aa8afaf01bda4c1098e979fc4033c1f6eff28b72",
+      "manifest_entry_count": 297,
+      "manifest_bytes_equal": true,
+      "member_identity_digest_algorithm": "SHA256 of sorted JSON arrays [path,bytes,sha256] with ensure_ascii=false,separators=(comma,colon), joined by newline",
+      "member_identity_digest": "0e154e4a8b249671e8f51590dd1cc4a198fb1f6e3f9e4d8826a572b07148a7e0",
+      "hash_mismatches": [],
+      "membership_extras": [],
+      "json_count": 255,
+      "xz_count": 202,
+      "max_xz_decoded_bytes": 2865163,
+      "membership_missing": [],
+      "final_archive_identity_recheck": {
+        "bytes_equal": true,
+        "sha256_equal": true
+      }
+    },
+    {
+      "name": "preparation_preservation_learning_checkpoint.tar.gz",
+      "bytes": 1545234,
+      "sha256": "272110bf92783dc1ea191a6efd65baabd32d22626bec3a86c6653ec14544bfb8",
+      "whole_gzip_crc_eof_verified": true,
+      "tar_uncompressed_bytes": 21299200,
+      "member_count": 413,
+      "payload_bytes": 20618372,
+      "extensions": {
+        ".md": 6,
+        ".json": 42,
+        ".sha256": 1,
+        ".json.xz": 332,
+        ".pyc": 1,
+        ".py": 29,
+        ".diff": 2
+      },
+      "manifest_file": "manifest.json",
+      "manifest_sha256": "f8319dadd6ac361740bd6db6e794c2ade03d2318eb368a8bb6dce85dc9c71893",
+      "manifest_entry_count": 411,
+      "manifest_bytes_equal": true,
+      "member_identity_digest_algorithm": "SHA256 of sorted JSON arrays [path,bytes,sha256] with ensure_ascii=false,separators=(comma,colon), joined by newline",
+      "member_identity_digest": "ebcd3acd5f0124bb5ad766c79eeed4bd3d75afdf3710548fa0b54fe9d7b7c0b2",
+      "hash_mismatches": [],
+      "membership_extras": [],
+      "json_count": 374,
+      "xz_count": 332,
+      "max_xz_decoded_bytes": 2218757,
+      "membership_missing": [],
+      "final_archive_identity_recheck": {
+        "bytes_equal": true,
+        "sha256_equal": true
+      }
+    }
+  ],
+  "credential_candidates": [],
+  "pii_email_candidates": [],
+  "opaque_string_candidates": [],
+  "json_parse_errors": [],
+  "syntax_errors": [],
+  "typed_tags": {
+    "__辞書__": 415933,
+    "__データ型__": 37095,
+    "__列挙__": 19139,
+    "__組__": 374274
+  },
+  "own_python": [
+    {
+      "member": "arc-column-goal-pools-20261013/source/column_pool_fixture_v1.py",
+      "bytes": 4761,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-pools-20261013/source/column_pool_harness_v1.py",
+      "bytes": 25341,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ],
+      "risk_call_names": {
+        "loads": 9,
+        "decompress": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-pools-20261013/source/column_pool_outer_v1.py",
+      "bytes": 1174,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/caller_fixture_v1.py",
+      "bytes": 3326,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "load": 1,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/column_goal_work_v1.py",
+      "bytes": 9769,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/column_goal_work_v2.py",
+      "bytes": 10426,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/column_work_caller_v1.py",
+      "bytes": 11188,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "decompress": 1,
+        "loads": 7,
+        "load": 1,
+        "compile": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/column_work_outer_v1.py",
+      "bytes": 696,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "pathlib",
+        "resource",
+        "sys",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/synthetic_fixture_v2.py",
+      "bytes": 7167,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-20261013/source/column_harness_v1.py",
+      "bytes": 23215,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ],
+      "risk_call_names": {
+        "loads": 9,
+        "decompress": 1,
+        "b64decode": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-20261013/source/column_outer_v1.py",
+      "bytes": 1164,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-20261013/source/column_small_fixture_v1.py",
+      "bytes": 4567,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-audit-20261013/source/audit_v1.py",
+      "bytes": 12892,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "decompress": 1,
+        "load": 1,
+        "b64decode": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-audit-20261013/source/pool_audit_v1.py",
+      "bytes": 10422,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "pathlib",
+        "resource",
+        "接続"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-audit-20261013/source/preparation14_audit_v1.py",
+      "bytes": 14968,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "pathlib",
+        "resource",
+        "接続"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "load": 1,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-audit-20261013/source/preservation24_audit_v1.py",
+      "bytes": 16860,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "pathlib",
+        "resource",
+        "接続"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "load": 1,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-audit-20261013/source/preservation24_audit_v2.py",
+      "bytes": 16873,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "pathlib",
+        "resource",
+        "接続"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "load": 1,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-learning-audit-20261013/source/repair13_audit_v1.py",
+      "bytes": 11334,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "pathlib",
+        "resource"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "loads": 1,
+        "load": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-phase-audit-20261013/script/audit_v1.py",
+      "bytes": 10735,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "collections",
+        "hashlib",
+        "itertools",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "run": 1,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/column_preparation_fixture_v1.py",
+      "bytes": 5006,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 6,
+        "decompress": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/column_preparation_harness_v1.py",
+      "bytes": 16471,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "sys",
+        "time",
+        "接続"
+      ],
+      "risk_call_names": {
+        "decompress": 1,
+        "loads": 7,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/column_preparation_outer_v1.py",
+      "bytes": 1330,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/column_preservation_fixture_v1.py",
+      "bytes": 5632,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 6,
+        "decompress": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/column_preservation_harness_v1.py",
+      "bytes": 19023,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "sys",
+        "time",
+        "接続"
+      ],
+      "risk_call_names": {
+        "decompress": 1,
+        "loads": 9,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/column_preservation_harness_v2.py",
+      "bytes": 19026,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "sys",
+        "time",
+        "接続"
+      ],
+      "risk_call_names": {
+        "decompress": 1,
+        "loads": 9,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/column_preservation_outer_v1.py",
+      "bytes": 1332,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/column_preservation_outer_v2.py",
+      "bytes": 1332,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-teacher-20261013/source/preparation_pack_v1.py",
+      "bytes": 14274,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-preparation-teacher-20261013/source/preservation_pack_v1.py",
+      "bytes": 11267,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-teacher-recovery-20261013/download_v2.py",
+      "bytes": 3178,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "http.client",
+        "json",
+        "logging",
+        "os",
+        "pathlib",
+        "requests",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-teacher-recovery-20261013/inspect_v2.py",
+      "bytes": 4457,
+      "ast_parse": true,
+      "imports": [
+        "collections",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time"
+      ],
+      "risk_call_names": {
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-teacher-recovery-20261013/recover.py",
+      "bytes": 6141,
+      "ast_parse": true,
+      "imports": [
+        "collections",
+        "hashlib",
+        "http.client",
+        "json",
+        "logging",
+        "os",
+        "pathlib",
+        "requests",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time"
+      ],
+      "risk_call_names": {
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_fixture_v1.py",
+      "bytes": 7323,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "lzma",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "load": 2,
+        "decompress": 2,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_fixture_v2.py",
+      "bytes": 7888,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "lzma",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "load": 2,
+        "decompress": 2,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_harness_v1.py",
+      "bytes": 26561,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ],
+      "risk_call_names": {
+        "loads": 9,
+        "decompress": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_harness_v2.py",
+      "bytes": 26564,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ],
+      "risk_call_names": {
+        "loads": 9,
+        "decompress": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_harness_v3.py",
+      "bytes": 26932,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ],
+      "risk_call_names": {
+        "loads": 9,
+        "decompress": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_outer_v1.py",
+      "bytes": 1174,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_outer_v2.py",
+      "bytes": 1174,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_outer_v3.py",
+      "bytes": 1316,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_pack_v1.py",
+      "bytes": 8238,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "decompress": 1,
+        "loads": 2,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_pack_v2.py",
+      "bytes": 8234,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "decompress": 1,
+        "loads": 2,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_pack_v3.py",
+      "bytes": 8236,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "decompress": 1,
+        "loads": 2,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/column_perception_preflight.py",
+      "bytes": 3355,
+      "ast_parse": true,
+      "imports": [
+        "base64",
+        "collections",
+        "hashlib",
+        "json",
+        "math",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "接続.列図式規則"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "b64decode": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/ARC3境界.py",
+      "bytes": 9941,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "typing"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/列図式規則.py",
+      "bytes": 20302,
+      "ast_parse": true,
+      "imports": [
+        "ARC3境界",
+        "collections",
+        "copy",
+        "hds学習系統",
+        "itertools",
+        "図式観測"
+      ],
+      "risk_call_names": {
+        "照会する": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/図式観測.py",
+      "bytes": 1295,
+      "ast_parse": true,
+      "imports": [
+        "collections"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/検証/test_列図式規則.py",
+      "bytes": 9912,
+      "ast_parse": true,
+      "imports": [
+        "builtins",
+        "copy",
+        "hds学習系統",
+        "inspect",
+        "json",
+        "os",
+        "pathlib",
+        "sys",
+        "tempfile",
+        "unittest",
+        "unittest.mock",
+        "接続.ARC3境界",
+        "接続.列図式規則",
+        "道具.列図式教師検証"
+      ],
+      "risk_call_names": {
+        "処理する": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/道具/列図式教師検証.py",
+      "bytes": 11873,
+      "ast_parse": true,
+      "imports": [
+        "argparse",
+        "collections",
+        "hashlib",
+        "hds学習系統",
+        "itertools",
+        "json",
+        "pathlib",
+        "sys",
+        "接続.列図式規則",
+        "接続.図式観測"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "処理する": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-operation-checkpoint-20261013/source/build_checkpoint_v2.py",
+      "bytes": 13154,
+      "ast_parse": true,
+      "imports": [
+        "argparse",
+        "gzip",
+        "hashlib",
+        "io",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "re",
+        "resource",
+        "shutil",
+        "stat",
+        "tarfile",
+        "time"
+      ],
+      "risk_call_names": {
+        "compile": 5,
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-candidate-query-20261013/source/candidate_preservation_v1.py",
+      "bytes": 12814,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-candidate-query-20261013/source/candidate_query_v5.py",
+      "bytes": 18574,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続",
+        "接続.図式観測"
+      ],
+      "risk_call_names": {
+        "loads": 8,
+        "exec": 1,
+        "compile": 1,
+        "b64decode": 2,
+        "decompress": 1,
+        "照会する": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/column_goal_work_v2.py",
+      "bytes": 10426,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/analysis_generation_source_evidence_v1.py.txt",
+      "bytes": 7482,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "collections",
+        "copy",
+        "hashlib",
+        "itertools",
+        "json",
+        "lzma",
+        "pathlib",
+        "resource",
+        "runpy",
+        "signal"
+      ],
+      "risk_call_names": {
+        "loads": 4,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_guard_v1.py",
+      "bytes": 1962,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_harness_pure_v1.py",
+      "bytes": 13457,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "loads": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_harness_pure_v2.py",
+      "bytes": 13991,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "loads": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_harness_pure_v3.py",
+      "bytes": 14221,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "loads": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_harness_v1.py",
+      "bytes": 22059,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "load": 2,
+        "decompress": 1,
+        "loads": 13
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_harness_v2.py",
+      "bytes": 22763,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "load": 2,
+        "decompress": 1,
+        "loads": 13
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_harness_v3.py",
+      "bytes": 22991,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "load": 2,
+        "decompress": 1,
+        "loads": 13
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_material_pure_v1.py",
+      "bytes": 3315,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "goalset_guard_v1",
+        "goalset_pack_v1",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "signal"
+      ],
+      "risk_call_names": {
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_material_pure_v2.py",
+      "bytes": 3628,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "goalset_guard_v1",
+        "goalset_pack_v2",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "signal"
+      ],
+      "risk_call_names": {
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_outer_v1.py",
+      "bytes": 1485,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_outer_v2.py",
+      "bytes": 1485,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_outer_v3.py",
+      "bytes": 1485,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_pack_v1.py",
+      "bytes": 8673,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "goalset_guard_v1",
+        "hashlib",
+        "json",
+        "pathlib"
+      ],
+      "risk_call_names": {
+        "loads": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_pack_v2.py",
+      "bytes": 9159,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "goalset_guard_v1",
+        "hashlib",
+        "json",
+        "pathlib"
+      ],
+      "risk_call_names": {
+        "loads": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_goalset4_learning/package_readonly_v1.py",
+      "bytes": 10537,
+      "ast_parse": true,
+      "imports": [
+        "gzip",
+        "hashlib",
+        "io",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "tarfile",
+        "time"
+      ],
+      "risk_call_names": {
+        "loads": 5
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_goalset4_51229802_audit_v1.py",
+      "bytes": 15654,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "load": 1,
+        "compile": 2,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goal_scope_hold_helpers_v1.py",
+      "bytes": 4240,
+      "ast_parse": true,
+      "imports": [
+        "copy"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_fresh_factory_v3.py",
+      "bytes": 13002,
+      "ast_parse": true,
+      "imports": [
+        "arc_agi",
+        "arcengine",
+        "ast",
+        "base64",
+        "contextlib",
+        "hashlib",
+        "json",
+        "logging",
+        "loop_guard_v3",
+        "numpy",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1,
+        "step": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_guard_v3.py",
+      "bytes": 1948,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_live_v12.py",
+      "bytes": 39125,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "goal_scope_hold_helpers_v1",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "loop_fresh_factory_v3",
+        "loop_guard_v3",
+        "lzma",
+        "os",
+        "pathlib",
+        "pilot_semantics_v3",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "uuid",
+        "接続"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "decompress": 2,
+        "loads": 21,
+        "compile": 1,
+        "照会する": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_outer_v1.py",
+      "bytes": 1213,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "sys"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/test_goal_scope_hold_v1.py",
+      "bytes": 13752,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "collections",
+        "copy",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "importlib.util",
+        "itertools",
+        "json",
+        "loop_fresh_factory_v3",
+        "loop_guard_v3",
+        "lzma",
+        "pathlib",
+        "resource",
+        "sys",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "load": 8,
+        "exec": 2,
+        "decompress": 1,
+        "loads": 3,
+        "compile": 2,
+        "照会する": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/test_goal_scope_hold_v2.py",
+      "bytes": 13853,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "collections",
+        "copy",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "importlib.util",
+        "itertools",
+        "json",
+        "loop_fresh_factory_v3",
+        "loop_guard_v3",
+        "lzma",
+        "pathlib",
+        "resource",
+        "sys",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "load": 8,
+        "exec": 2,
+        "decompress": 1,
+        "loads": 3,
+        "compile": 2,
+        "照会する": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/test_goal_scope_hold_v3.py",
+      "bytes": 14548,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "collections",
+        "copy",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "importlib.util",
+        "itertools",
+        "json",
+        "loop_fresh_factory_v3",
+        "loop_guard_v3",
+        "lzma",
+        "pathlib",
+        "resource",
+        "sys",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "load": 8,
+        "exec": 2,
+        "decompress": 1,
+        "loads": 3,
+        "compile": 2,
+        "照会する": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-live-pilot-20261013/source/pilot_semantics_v3.py",
+      "bytes": 13855,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "json",
+        "types"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_harness_v3.py",
+      "bytes": 26932,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ],
+      "risk_call_names": {
+        "loads": 9,
+        "decompress": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/列図式規則.py",
+      "bytes": 20302,
+      "ast_parse": true,
+      "imports": [
+        "ARC3境界",
+        "collections",
+        "copy",
+        "hds学習系統",
+        "itertools",
+        "図式観測"
+      ],
+      "risk_call_names": {
+        "照会する": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/図式観測.py",
+      "bytes": 1295,
+      "ast_parse": true,
+      "imports": [
+        "collections"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-current-family-source-20261013/道具/列図式教師検証.py",
+      "bytes": 11873,
+      "ast_parse": true,
+      "imports": [
+        "argparse",
+        "collections",
+        "hashlib",
+        "hds学習系統",
+        "itertools",
+        "json",
+        "pathlib",
+        "sys",
+        "接続.列図式規則",
+        "接続.図式観測"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "処理する": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-live-step-adapter-20261013/adapter.py",
+      "bytes": 14264,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "contextlib",
+        "fcntl",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "sys",
+        "uuid"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "loads": 2,
+        "compile": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-live-step-adapter-20261013/final_adoption_v4.py",
+      "bytes": 25818,
+      "ast_parse": true,
+      "imports": [
+        "adapter",
+        "copy",
+        "hashlib",
+        "json",
+        "lzma",
+        "pathlib"
+      ],
+      "risk_call_names": {
+        "decompress": 2,
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-official-fresh-all25-20261013/prep/fresh_all25_v1.py",
+      "bytes": 35645,
+      "ast_parse": true,
+      "imports": [
+        "arc_agi",
+        "arcengine",
+        "base64",
+        "builtins",
+        "enum",
+        "hashlib",
+        "io",
+        "json",
+        "logging",
+        "math",
+        "numpy",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time"
+      ],
+      "risk_call_names": {
+        "loads": 5,
+        "b64decode": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/build_fixture_v1.py",
+      "bytes": 3109,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/build_harness_v1.py",
+      "bytes": 15526,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "pathlib"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/build_prepsave_v1.py",
+      "bytes": 5248,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/build_prepsave_v2.py",
+      "bytes": 5582,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_guard_v1.py",
+      "bytes": 1975,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_pure_v1.py",
+      "bytes": 13159,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1,
+        "loads": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_pure_v2.py",
+      "bytes": 14284,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1,
+        "loads": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_pure_v3.py",
+      "bytes": 14577,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1,
+        "loads": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_pure_v4.py",
+      "bytes": 17243,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "contextlib",
+        "hashlib",
+        "importlib.util",
+        "io",
+        "json",
+        "lzma",
+        "pathlib",
+        "random",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1,
+        "loads": 3,
+        "decompress": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_v1.py",
+      "bytes": 19297,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 9
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_v2.py",
+      "bytes": 19366,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 9
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_v3.py",
+      "bytes": 20321,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 9
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_v4.py",
+      "bytes": 20304,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 9
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_v5.py",
+      "bytes": 20787,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 9
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_outer_v1.py",
+      "bytes": 1487,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_outer_v2.py",
+      "bytes": 1487,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_outer_v3.py",
+      "bytes": 1487,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_outer_v4.py",
+      "bytes": 1487,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_outer_v5.py",
+      "bytes": 1487,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/revise_harness_v2.py",
+      "bytes": 1773,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib"
+      ],
+      "risk_call_names": {
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/revise_harness_v3.py",
+      "bytes": 2156,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib"
+      ],
+      "risk_call_names": {
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/revise_harness_v4.py",
+      "bytes": 2117,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib"
+      ],
+      "risk_call_names": {
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/revise_harness_v5.py",
+      "bytes": 5296,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib"
+      ],
+      "risk_call_names": {
+        "loads": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-live-loop-20261013/evidence/independent_prepsave_ccd893ba_audit_v1.py",
+      "bytes": 20623,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "collections",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "exec": 3,
+        "load": 1,
+        "compile": 3,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-live-loop-20261013/evidence/independent_prepsave_native_audit_v2.py",
+      "bytes": 20900,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "collections",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "exec": 3,
+        "load": 1,
+        "compile": 3,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-live-loop-20261013/evidence/independent_prepsave_native_audit_v3.py",
+      "bytes": 21007,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "collections",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "exec": 3,
+        "load": 1,
+        "compile": 3,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-live-loop-20261013/evidence/independent_prepsave_native_audit_v4.py",
+      "bytes": 21382,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "collections",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_names": {
+        "exec": 3,
+        "load": 1,
+        "compile": 3,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "original/arc-column-live-loop-20261013/source/goalset_connection/resource_guard_v1.py",
+      "bytes": 1948,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "package_checkpoint.py",
+      "bytes": 15577,
+      "ast_parse": true,
+      "imports": [
+        "gzip",
+        "hashlib",
+        "io",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "shutil",
+        "struct",
+        "tarfile",
+        "zlib"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "loads": 2,
+        "compile": 1,
+        "decompress": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+      "bytes": 527,
+      "ast_parse": true,
+      "imports": [
+        "吸気系",
+        "型",
+        "実行系",
+        "排気系",
+        "系統"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+      "bytes": 2815,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "copy",
+        "dataclasses",
+        "typing"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+      "bytes": 3061,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "copy",
+        "json",
+        "typing",
+        "型"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/型.py",
+      "bytes": 6575,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "enum",
+        "typing"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "bytes": 34178,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "datetime",
+        "pathlib",
+        "台帳",
+        "型",
+        "懐疑",
+        "推論",
+        "検証",
+        "永続化",
+        "適応"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+      "bytes": 3392,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "typing",
+        "型"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+      "bytes": 2779,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "typing",
+        "型"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+      "bytes": 11404,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "itertools",
+        "json",
+        "typing",
+        "型"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+      "bytes": 2696,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "typing",
+        "型",
+        "推論"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+      "bytes": 3125,
+      "ast_parse": true,
+      "imports": [
+        "",
+        "__future__",
+        "dataclasses",
+        "enum",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "bytes": 1951,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "pathlib",
+        "吸気系",
+        "型",
+        "実行系",
+        "排気系"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+      "bytes": 10139,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "typing",
+        "型",
+        "推論"
+      ],
+      "risk_call_names": {},
+      "opaque_literal_lengths": [],
+      "classification": "repository_owned_frozen_HDS_source_static_only"
+    }
+  ],
+  "paused_fixed_core_members": [],
+  "recordings": [
+    {
+      "member": "arc-column-goal-pools-20261013/source/synthetic_fixture/rows.jsonl",
+      "bytes": 117,
+      "sha256": "0d496bd46f43752bad3199607dd7b9b799c6405b83098c24c825224d4c8acfd2",
+      "complete_json_rows": 3,
+      "total_frames": 6,
+      "max_line_bytes": 39,
+      "errors": [],
+      "row_keysets": {
+        "data": 3
+      },
+      "action_keysets": {},
+      "action_reasoning_types": {},
+      "action_ids": {},
+      "states": {
+        "None": 3
+      },
+      "guid_types": [
+        "NoneType"
+      ],
+      "truncated_tail": null,
+      "first_50331648_sha256": null,
+      "classification": "own synthetic fixture, not public recording",
+      "frames_shape": [
+        1,
+        1
+      ],
+      "explanation": "Three synthetic rows containing two 1x1 numeric frames each; public 64x64 requirement is inapplicable."
+    },
+    {
+      "member": "arc-column-learning-20261013/source/synthetic_fixture/rows.jsonl",
+      "bytes": 117,
+      "sha256": "0d496bd46f43752bad3199607dd7b9b799c6405b83098c24c825224d4c8acfd2",
+      "complete_json_rows": 3,
+      "total_frames": 6,
+      "max_line_bytes": 39,
+      "errors": [],
+      "row_keysets": {
+        "data": 3
+      },
+      "action_keysets": {},
+      "action_reasoning_types": {},
+      "action_ids": {},
+      "states": {
+        "None": 3
+      },
+      "guid_types": [
+        "NoneType"
+      ],
+      "truncated_tail": null,
+      "first_50331648_sha256": null,
+      "classification": "own synthetic fixture, not public recording",
+      "frames_shape": [
+        1,
+        1
+      ],
+      "explanation": "Three synthetic rows containing two 1x1 numeric frames each; public 64x64 requirement is inapplicable."
+    },
+    {
+      "member": "arc-column-teacher-recovery-20261013/public-recording-v2.jsonl",
+      "bytes": 67880086,
+      "sha256": "e26ff1df251af042911126a067c08ee25973b01d3389269472eed6859a4383f2",
+      "complete_json_rows": 258,
+      "total_frames": 5363,
+      "max_line_bytes": 5130840,
+      "errors": [],
+      "row_keysets": {
+        "data,timestamp": 258
+      },
+      "action_keysets": {
+        "data,id,reasoning": 257
+      },
+      "action_reasoning_types": {
+        "NoneType": 257
+      },
+      "action_ids": {
+        "0": 1,
+        "5": 26,
+        "6": 230
+      },
+      "states": {
+        "NOT_FINISHED": 256,
+        "WIN": 1
+      },
+      "guid_types": [
+        "NoneType",
+        "str"
+      ],
+      "truncated_tail": null,
+      "first_50331648_sha256": "1dd0b8592f48eb391ed301e7eae82d97cb517593932177a6ac23f0c70f0058b4",
+      "classification": "public recording or preserved failed-download prefix",
+      "public_source_url": "https://arcprize.org/api/recordings/sb26-7fbdac44/005a84c0-2969-488b-baa1-d57e68866b33"
+    },
+    {
+      "member": "arc-column-teacher-recovery-20261013/public-recording.jsonl",
+      "bytes": 50331648,
+      "sha256": "1dd0b8592f48eb391ed301e7eae82d97cb517593932177a6ac23f0c70f0058b4",
+      "complete_json_rows": 219,
+      "total_frames": 3855,
+      "max_line_bytes": 4207628,
+      "errors": [],
+      "row_keysets": {
+        "data,timestamp": 219
+      },
+      "action_keysets": {
+        "data,id,reasoning": 219
+      },
+      "action_reasoning_types": {
+        "NoneType": 219
+      },
+      "action_ids": {
+        "0": 1,
+        "5": 20,
+        "6": 198
+      },
+      "states": {
+        "NOT_FINISHED": 219
+      },
+      "guid_types": [
+        "str"
+      ],
+      "truncated_tail": {
+        "line_1_based": 220,
+        "offset": 48789633,
+        "bytes": 1542015,
+        "newline_terminated": false
+      },
+      "first_50331648_sha256": "1dd0b8592f48eb391ed301e7eae82d97cb517593932177a6ac23f0c70f0058b4",
+      "classification": "public recording or preserved failed-download prefix",
+      "public_source_url": "https://arcprize.org/api/recordings/sb26-7fbdac44/005a84c0-2969-488b-baa1-d57e68866b33"
+    }
+  ],
+  "source_provenance": "Header roots and manifest identities whitelisted before member bodies; historical own-source allowlist used for source provenance; typed HDS packets inspected as JSON data only.",
+  "bytecode_exception": {
+    "member": "original/arc-column-goalset-prepsave-learning-20261013/source/__pycache__/prepsave_guard_v1.cpython-312.pyc",
+    "bytes": 5113,
+    "sha256": "473378f99a8bd53c6ba2d54c675d2792fca2a63a139271fa59ce365b4b0ffe53",
+    "hash_only": true
+  },
+  "json_structure_counts": {
+    "ordinary_dict": 381,
+    "typed_dict": 1753,
+    "ordinary_list": 30
+  },
+  "strings_walked": 2684171,
+  "json_total": 2164,
+  "xz_total": 1925,
+  "peak_rss_kib": 163044,
+  "frozen_core_verification": {
+    "baseline_commit": "702a0e1b5bcb7f744522d829e2673ac962a0fe6c",
+    "baseline_tree": "77a59105f7dceadd2423b85ea7ecc024e88a9713",
+    "source": "publication_20261016/base_tree.json",
+    "files": [
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/README.md",
+        "repository_path": "HDS/学習系統/v0.4.2/README.md",
+        "bytes": 622,
+        "sha256": "fcb579bf30bf51a3d45d1935ba6c58c79baeef9c2c95df3c27046641e6f176d6",
+        "git_blob": "a04811b7c2c4af80d022bed2e92de47359abb285",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+        "bytes": 527,
+        "sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57",
+        "git_blob": "ef58e4969fcd4ba4c4310285c4d45cc740f8150c",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+        "bytes": 2815,
+        "sha256": "a6cab8fca7cb591c42fa7444f9678fe0003da69faafcce852598286dceb522e2",
+        "git_blob": "31f6e4d86c42448d90a6e829b86ab99e441982dc",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+        "bytes": 3061,
+        "sha256": "50c48e5a9a8aa39158d0cdaacc0501608a829486960d41cb2fea6cb02e5660a4",
+        "git_blob": "81ffd4ea6e1a2f611020faeb5d28416ab0d79172",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/型.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/型.py",
+        "bytes": 6575,
+        "sha256": "aa1241708655280b36564f5e3ff6968849b4d09790b8932aabad1570cbca302c",
+        "git_blob": "0ade344cf314d710ace16d4e53907b89ee47d742",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+        "bytes": 34178,
+        "sha256": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429",
+        "git_blob": "7dc89687e75d00b7b0b87f5fa23d950649a514f6",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+        "bytes": 3392,
+        "sha256": "bb7e85c2dbafbd430f1b7733bf3a2d307dc24e3227e79994b491cf711322f715",
+        "git_blob": "82016fb3fc15f0baa7af3b5b7c792420c95188ca",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+        "bytes": 2779,
+        "sha256": "2ba7ceb8d0d6c784d092f91fe484477127f044e50f68c54c977374b17f2f6361",
+        "git_blob": "54f3bec51663dde9dedd38f8bf007d336d40b9ea",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+        "bytes": 11404,
+        "sha256": "315dd0d23a9682cdf14be71346341976cbdbcd2cbd924a250afc4ad53058dba6",
+        "git_blob": "e394dc97f4986ca3212b1e10398060ac2495d3e6",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+        "bytes": 2696,
+        "sha256": "e23f271d38e1f52d75557dbf3342abf7b59a85fbdc315a06c0040fd7ca204eb3",
+        "git_blob": "28e5ac81be2160a705e7edef016f92702640b5a8",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+        "bytes": 3125,
+        "sha256": "8aa431b3012424fd8347c5b3d93a5fbf2218d35020836f5d40abb427f9d6da0d",
+        "git_blob": "68a4f62d4dfea55b481de0f36b8e2436afa6b0a2",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+        "bytes": 1951,
+        "sha256": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5",
+        "git_blob": "ef2088692ae333bca598fa5e7cd4b10de58c5ad1",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+        "repository_path": "HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+        "bytes": 10139,
+        "sha256": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac",
+        "git_blob": "7af4f016518df38207e9b66d075846fa7efdea0d",
+        "baseline_git_blob_equal": true
+      },
+      {
+        "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/pyproject.toml",
+        "repository_path": "HDS/学習系統/v0.4.2/pyproject.toml",
+        "bytes": 173,
+        "sha256": "c0d318c4a533f7ad7a2fe6f141cc44480a718def8c9794caf4a866e89b63961e",
+        "git_blob": "a37ffd808c861d4a150cdbbd4b98f0f0db115716",
+        "baseline_git_blob_equal": true
+      }
+    ],
+    "conclusion": "CP3 duplicates 14 unchanged repository-owned fixed HDS files already on main. Static inspection only; not imported, executed or modified."
+  },
+  "typed_data_validation": {
+    "json_duplicate_keys": 0,
+    "tagged_objects_checked": 846441,
+    "tag_shapes_checked": true,
+    "typed_dictionary_duplicate_keys": 0,
+    "data_type_names": {
+      "原理記録": 7941,
+      "学習過程記録": 3013,
+      "懐疑記録": 10920,
+      "経験記録": 2184,
+      "観測事実": 8736,
+      "外部入力": 1502,
+      "外部出力": 1324,
+      "実行結果": 829,
+      "予測記録": 646
+    },
+    "enum_names": {
+      "採用状態": 8063,
+      "原理状態": 8063,
+      "学習成立状態": 3013
+    },
+    "native_instantiation": false
+  },
+  "saved_state_semantic_comparisons": [
+    {
+      "nonce": "51229802dbf84496a84d401f79e62e1f",
+      "experience_before": 129,
+      "experience_after": 133,
+      "principles_before": 11,
+      "principles_after": 13,
+      "all_11_ledger_old_prefixes_equal": true,
+      "query_only_changed_identifier_counters": {
+        "照会": [
+          4713,
+          4775
+        ],
+        "学習判定": [
+          4713,
+          4775
+        ]
+      },
+      "query_nonidentifier_state_unchanged": true
+    },
+    {
+      "nonce": "b6752d29848b4a86990c441935ae5363",
+      "experience_before": 133,
+      "experience_after": 183,
+      "principles_before": 13,
+      "principles_after": 16,
+      "all_11_ledger_old_prefixes_equal": true,
+      "query_only_changed_identifier_counters": {
+        "照会": [
+          4775,
+          4887
+        ],
+        "学習判定": [
+          4775,
+          4887
+        ]
+      },
+      "query_nonidentifier_state_unchanged": true
+    }
+  ],
+  "completion_scalar_evidence": {
+    "arc-column-goal-pools-20261013/state_trace/6a947066e1a16bf2b668ea7af1a7e51b/completion.json.xz": {
+      "teach_calls": 0,
+      "query_calls": 236,
+      "Action": 0,
+      "new_clear": 0
+    },
+    "arc-column-learning-20261013/state_trace/c2f866fa03f288e255c4c88aea21cb75/completion.json.xz": {
+      "teach_calls": 78,
+      "query_calls": 7,
+      "Action": 0,
+      "new_clear": 0
+    },
+    "arc-column-preparation-learning-20261013/state_trace/4b4bed2b789a62d3d941224ab5e174b0/completion.json.xz": {
+      "teach_calls": 24,
+      "query_calls": 60,
+      "Action": 0,
+      "new_clear": 0
+    },
+    "arc-column-preparation-learning-20261013/state_trace/de69b52d4c3717fd331eb420149bf7a1/completion.json.xz": {
+      "teach_calls": 14,
+      "query_calls": 35,
+      "Action": 0,
+      "new_clear": 0
+    },
+    "arc-column-work-learning-20261013/state_trace/b0ed233c65f273f9dca51289ed9b80cc/completion.json.xz": {
+      "teach_calls": 13,
+      "query_calls": 14,
+      "Action": 0,
+      "new_clear": 0
+    },
+    "arc-column-goalset-learning-20261013/evidence/51229802dbf84496a84d401f79e62e1f/completion.json.xz": {
+      "teach_calls": 4,
+      "query_calls": 62,
+      "Action": 0,
+      "new_clear": 0,
+      "old129_all_prefixes_unchanged": true,
+      "paired_counter_before": 4713,
+      "paired_counter_after": 4775
+    },
+    "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/completion.json.xz": {
+      "teach_calls": 50,
+      "query_calls": 112,
+      "Action": 0,
+      "new_clear": 0,
+      "old133_all_prefixes_unchanged": true,
+      "paired_counter_before": 4775,
+      "paired_counter_after": 4887
+    }
+  },
+  "public_initial_observations": {
+    "files": 25,
+    "frames": 27,
+    "encoding": "base64 raw signed-byte palette array",
+    "shape": [
+      64,
+      64
+    ],
+    "bytes_per_frame": 4096,
+    "palette_min": 0,
+    "palette_max": 15,
+    "all_frame_declared_sha256_match": true,
+    "opaque_code_detected": false
+  },
+  "opaque_string_review": {
+    "flagged_entries": 55,
+    "resolved_entries": 55,
+    "public_pixel_base64_duplicate_flags": 54,
+    "authorization_prose_fields": 1,
+    "unresolved": 0
+  },
+  "diff_static_review": [
+    {
+      "member": "arc-column-goal-pools-20261013/source/column_to_pool_v1.diff",
+      "headers": [
+        "--- column_harness_v1.py",
+        "+++ column_pool_harness_v1.py"
+      ]
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/column_goal_work_v1_v2.diff",
+      "headers": [
+        "--- column_goal_work_v1.py",
+        "+++ column_goal_work_v2.py"
+      ]
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/preparation14_to_preservation24_v1.diff",
+      "headers": [
+        "--- preparation14",
+        "+++ preservation24"
+      ]
+    },
+    {
+      "member": "arc-column-preparation-learning-20261013/source/preservation_v1_v2.diff",
+      "headers": [
+        "--- ",
+        "+++ "
+      ]
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/pool_to_work_v1.diff",
+      "headers": [
+        "--- immutable_pool_v1",
+        "+++ work_v1"
+      ]
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/work_v1_v2.diff",
+      "headers": [
+        "--- pack_v1",
+        "+++ pack_v2",
+        "--- harness_v1",
+        "+++ harness_v2",
+        "--- outer_v1",
+        "+++ outer_v2",
+        "--- fixture_v1",
+        "+++ fixture_v2"
+      ]
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/work_v2_v3.diff",
+      "headers": [
+        "--- pack_v2",
+        "+++ pack_v3",
+        "--- harness_v2",
+        "+++ harness_v3",
+        "--- outer_v2",
+        "+++ outer_v3"
+      ]
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_harness_v2_v3.diff",
+      "headers": [
+        "--- goalset_harness_v2.py",
+        "+++ goalset_harness_v3.py"
+      ]
+    },
+    {
+      "member": "arc-column-goalset-learning-20261013/source/goalset_pack_v1_v2.diff",
+      "headers": [
+        "--- goalset_pack_v1.py",
+        "+++ goalset_pack_v2.py"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_live_v11_loop_live_v12.diff",
+      "headers": [
+        "--- loop_live_v11.py",
+        "+++ loop_live_v12.py"
+      ]
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_v3_v4.diff",
+      "headers": [
+        "--- prepsave_harness_v3.py",
+        "+++ prepsave_harness_v4.py"
+      ]
+    },
+    {
+      "member": "original/arc-column-goalset-prepsave-learning-20261013/source/prepsave_harness_v4_v5.diff",
+      "headers": [
+        "--- prepsave_harness_v4.py",
+        "+++ prepsave_harness_v5.py"
+      ]
+    }
+  ],
+  "additional_security_scan": {
+    "url_hosts": {
+      "arcprize.org": 15,
+      "github.com": 2
+    },
+    "sensitive_url_query_candidates": [],
+    "official_game_source_or_pickle_marshal_signature_candidates": [],
+    "personal_or_secret_key_candidates": [],
+    "code_like_string_occurrences_in_json": 10,
+    "long_source_literal_review": [
+      {
+        "member": "arc-column-live-loop-20261013/evidence/checkpoint_goalset4_learning/package_readonly_v1.py",
+        "line": 35,
+        "characters": 2290,
+        "first_line": "# ARC3 目標集合・修復4教師 学習checkpoint（2026-10-13）"
+      },
+      {
+        "member": "original/arc-column-goalset-prepsave-learning-20261013/source/build_harness_v1.py",
+        "line": 18,
+        "characters": 9769,
+        "first_line": "def bootstrap(r,name):"
+      },
+      {
+        "member": "original/arc-column-goalset-prepsave-learning-20261013/source/revise_harness_v5.py",
+        "line": 29,
+        "characters": 2666,
+        "first_line": " # Actual retained launch failure and failed_closed packet are present during static admission."
+      }
+    ],
+    "embedded_code_string_review": [
+      {
+        "member": "arc-column-preparation-learning-20261013/source/preparation_runtime_actual_tools_v1.json.xz",
+        "field": "$/entries/prep14_readback_cmd",
+        "characters": 3690,
+        "sha256": "ee4ecb71fb8467da84a94a0cb8fd9c30474e006a8be96362f77bc802a13f3191",
+        "first_line": "python -B - <<'PY'",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      },
+      {
+        "member": "arc-column-preparation-learning-20261013/source/preparation_runtime_actual_tools_v1.json.xz",
+        "field": "$/entries/prep14_aux_save_cmd",
+        "characters": 7894,
+        "sha256": "2421dec67f1f95c072d0027b037fcdc613c55d421caed6a4b5cf5f9994c9af13",
+        "first_line": "python -B - <<'PY'",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      },
+      {
+        "member": "arc-column-preparation-learning-20261013/source/preservation_runtime_actual_tools_v1.json.xz",
+        "field": "$/entries/pres24_readback_cmd",
+        "characters": 3690,
+        "sha256": "2cf14b2565c1675198043e1ca0853f99de195b7af33633ef1c7bebdb1f5fc5cc",
+        "first_line": "python -B - <<'PY'",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      },
+      {
+        "member": "arc-column-preparation-learning-20261013/source/preservation_runtime_actual_tools_v1.json.xz",
+        "field": "$/entries/pres24_v2_cmd",
+        "characters": 1355,
+        "sha256": "47949599127346dc4986bc7009b2cfad655b567230609e06a3f5bc3dc3e28c3b",
+        "first_line": "python -B - <<'PY'",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      },
+      {
+        "member": "arc-column-preparation-learning-20261013/source/preservation_runtime_actual_tools_v1.json.xz",
+        "field": "$/entries/pres24_build_cmd",
+        "characters": 13994,
+        "sha256": "89e9c5036c97149803b76202363f145c03ecbed776e9df2bd20245b9a75832db",
+        "first_line": "python -B - <<'PY'",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      },
+      {
+        "member": "arc-column-preparation-learning-20261013/source/preservation_runtime_actual_tools_v1.json.xz",
+        "field": "$/entries/pres24_initial_read/output",
+        "characters": 18655,
+        "sha256": "8899b52a4a9c9af210177b3eeb67915ea0c1d8d50ce61e129ebb1649f5835502",
+        "first_line": "\"\"\"Preparation14 continuation. Reuses immutable work-v3 IO/profile/normal persistence; no core edits.\"\"\"",
+        "python_parse": true,
+        "functions": [
+          "guard",
+          "packet",
+          "semantic",
+          "one_result",
+          "Run",
+          "run"
+        ],
+        "imports": [
+          "hashlib",
+          "hds学習系統",
+          "hds学習系統.永続化",
+          "importlib.util",
+          "json",
+          "lzma",
+          "os",
+          "pathlib",
+          "resource",
+          "shutil",
+          "sys",
+          "time",
+          "接続"
+        ]
+      },
+      {
+        "member": "arc-column-work-learning-20261013/source/v3_runtime_recovery_actual_tools_v1.json.xz",
+        "field": "$/readback_corrected/command",
+        "characters": 3092,
+        "sha256": "d26ef29839b1ddf848070f2c1fe179a02b6126b4bff62573baa83d771096ff55",
+        "first_line": "python -B - <<'PY'",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      },
+      {
+        "member": "arc-column-work-learning-20261013/source/v3_runtime_recovery_actual_tools_v1.json.xz",
+        "field": "$/readback_failed/command",
+        "characters": 2306,
+        "sha256": "5957570e1bdfafffe2a73b6b66c0d5d009b3640c993a8ff7b5786dc708be328b",
+        "first_line": "python -B - <<'PY'",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      },
+      {
+        "member": "arc-column-work-learning-20261013/source/v3_runtime_recovery_actual_tools_v1.json.xz",
+        "field": "$/fixture/command",
+        "characters": 1929,
+        "sha256": "e0ac6bddcb2bc002f5e9869a812fbabb854af605cb8381f246f57921fbac0116",
+        "first_line": "python -B - <<'PY'",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      },
+      {
+        "member": "arc-column-goalset-learning-20261013/evidence/parent_final_preparation_tools_v1.json",
+        "field": "$/tools/0/actual/output",
+        "characters": 3552,
+        "sha256": "34535c8f63c5e2485534cabb146cb3fbc2a0c274d1a80bde12ae0e896e49679e",
+        "first_line": "from __future__ import annotations",
+        "python_parse": false,
+        "description": "Readable own preparation command/source diagnostic or patch text; not evaluated."
+      }
+    ],
+    "own_embedded_python_heredocs_ast_parsed": 19
+  },
+  "prepsave_manifest_sha256_sidecar_verified": true,
+  "admission_summary": {
+    "archives": 3,
+    "regular_members": 2330,
+    "manifest_entries_plus_manifest_self_sidecars_match": true,
+    "links_absolute_paths_path_escapes_duplicates": 0,
+    "json_documents": 2164,
+    "xz_documents": 1925,
+    "own_python_members": 126,
+    "additional_python_text_evidence": 1,
+    "other_text_members_including_python_text_evidence": 35,
+    "jsonl_members": 4,
+    "hash_only_pyc_members": 1,
+    "credential_pii_opaque_body_candidates_unresolved": 0,
+    "all_member_types_accounted_for": true,
+    "runtime_approval": false
+  },
+  "semantic_admission": [
+    "All members were admitted by exact manifest identity, safe relative regular-file headers, known own-project/evidence namespaces, and declared file type before semantic inspection. No linked dependency target was opened.",
+    "126 Python files and one .py.txt source-evidence file were decoded and AST parsed, with imports, calls, literals and security markers examined statically. Own wrappers may call native HDS/SDK if later executed; this inspection never imports or executes them. Historical sources are admitted as evidence, not as a safe-to-run or adopted runtime.",
+    "14 HDS v0.4.2 files in CP3 are unchanged repository-owned fixed core, individually equal in Git blob identity to the recovered baseline main tree. They are not official game/SDK source.",
+    "2164 JSON documents, including 1925 completely decoded XZ packets, are manifests, observations, own tool receipts, contracts, reports, typed HDS input/output/state, scoring or failure evidence. All JSON and typed-map duplicate keys were rejected; all four typed tag forms were validated without reconstructing native objects.",
+    "Public initial-observation base64 contains exactly 27 raw 4096-byte 64x64 palette arrays with verified declared SHA256. The two synthetic JSONL fixtures contain three rows each, each row with two 1x1 numeric frames; these are explicitly synthetic, not malformed official frames.",
+    "The full public teacher recording has 258 JSONL rows, 257 observed-action records with null reasoning, 5363 valid 64x64 palette frames and one public scorecard. The preserved failed download equals its first 50331648 bytes and ends mid-row220. Public recording WIN is historical teacher content, not evidence of new agent achievement.",
+    "Other 35 UTF-8 text members are own patches, Markdown reports/authority context, one source-evidence text, exit/log, report text, pyproject metadata or manifest digest. All were read and scanned; no unexpected binary body was found.",
+    "All detected long encoded strings resolve to public palette arrays; the authorization field is plain historical execution-policy prose. Ten code-like JSON strings are own recorded preparation/readback commands, a harness source readback or diagnostic output; 19 stored shell heredoc commands across those receipt files AST parse as own Python.",
+    "Known prepsave_guard_v1.cpython-312.pyc is preserved only under its exact supplied 5113-byte/SHA256 identity. Its contents were hashed only, never decoded, disassembled or executed. It remains a deliberate semantic-inspection exception."
+  ],
+  "limitations": [
+    "No new native HDS, SDK, Query, Teach, Action, fresh run, fresh043 validation, replay, game solving, Git operation or upload occurred. This is preservation admission only.",
+    "No opaque official game/SDK source, dependency target or external referenced archive was read. Import/path references in own source are retained as historical evidence and do not establish a runnable self-contained environment.",
+    "Credential/PII review used complete text and structured-data scans, known marker/query/key patterns, code/import/literal inspection and public observation schema review. No candidate remained, but static scanning is not a proof that arbitrarily encoded secrets or all possible personal information are absent.",
+    "The single exact bytecode exception has no semantic-body inspection. Preservation admission depends on accepting this known hash-only historical artifact, not on a claim that its bytecode was inspected.",
+    "Goalset4 adds four correlated relation experiences (129 to133) and prepsave adds50 (133 to183). These counts are learning experiences, not cleared levels or independent environment trials. Stored scoring62/62 and112/112 is historical within-scope evidence, not a new evaluation.",
+    "Existing public teacher WIN, historical fresh1/183 and other reports do not support full183/183, new full-run WIN, fresh043 success, cross-game generalization or current runtime adoption. Failure, partial-download and superseded source evidence remain unchanged."
+  ],
+  "resources_final": {
+    "peak_rss_kib": 163044,
+    "AS_cap_bytes": 536870912,
+    "disk_available_bytes": 31555706880,
+    "disk_floor_bytes": 1073741824,
+    "only_created_file": "publication_originals/independent_learning_admission.json",
+    "no_extraction_or_archive_copies": true
+  }
+}

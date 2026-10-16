@@ -1,0 +1,61 @@
+{
+  "schema": "arc3-original-learning-archive-preservation-v1",
+  "checkpoints": [
+    {
+      "checkpoint": "初期129経験",
+      "archive": "ARC3_目標相対操作学習_20261013_v2.tar.gz",
+      "archive_bytes": 5420962,
+      "archive_sha256": "eee277c3d201aa1981b4d7e574d2ccd45ca5adc037ec92591a7976e74159a80b",
+      "manifest_filename": "初期129経験原manifest.json.gz",
+      "manifest_gzip_bytes": 106910,
+      "manifest_gzip_sha256": "2878725317cbfafc915bd0b01fababa2ab4680b13223b32ea85ed75d093a520a",
+      "manifest_original_bytes": 702707,
+      "manifest_original_sha256": "dd514eb4d4be57b3f1e5634047237ed2c9bebd7f8609b92fad215db515b049de",
+      "manifest_member": "manifest.json"
+    },
+    {
+      "checkpoint": "目標集合修復4経験",
+      "archive": "ARC3_goalset4_learning_checkpoint_20261013.tar.gz",
+      "archive_bytes": 1499276,
+      "archive_sha256": "f3270217c9b4735db12a761dfdb4e7d46e70fa23e81532347f2e18334414bc4a",
+      "manifest_filename": "目標集合修復4経験原manifest.json.gz",
+      "manifest_gzip_bytes": 14429,
+      "manifest_gzip_sha256": "5f2c5f132acbc78cc376c8010e21401d0e4aff3e24d2b91032ed16ff89a78f02",
+      "manifest_original_bytes": 73934,
+      "manifest_original_sha256": "0dca600a344ca1dab017fa31aa8afaf01bda4c1098e979fc4033c1f6eff28b72",
+      "manifest_member": "arc-column-live-loop-20261013/evidence/checkpoint_goalset4_learning/manifest_v1.json"
+    },
+    {
+      "checkpoint": "準備保存50経験",
+      "archive": "preparation_preservation_learning_checkpoint.tar.gz",
+      "archive_bytes": 1545234,
+      "archive_sha256": "272110bf92783dc1ea191a6efd65baabd32d22626bec3a86c6653ec14544bfb8",
+      "manifest_filename": "準備保存50経験原manifest.json.gz",
+      "manifest_gzip_bytes": 19930,
+      "manifest_gzip_sha256": "ac66392ec545cebbe5f2da3218e4bab609ef787a6a042105fedb7e1368d1919c",
+      "manifest_original_bytes": 101931,
+      "manifest_original_sha256": "f8319dadd6ac361740bd6db6e794c2ade03d2318eb368a8bb6dce85dc9c71893",
+      "manifest_member": "manifest.json"
+    }
+  ],
+  "learned_experiences": [
+    129,
+    133,
+    183
+  ],
+  "certified_levels_unchanged": 1,
+  "official_levels": 183,
+  "native_execution_by_publication": false,
+  "independent_admission": {
+    "path": "独立内容検査.json",
+    "bytes": 94228,
+    "sha256": "54369e80067efbf00a3530452c855a1c4340188ccf55bd12801e43add65a5daa",
+    "status": "ADMITTED_FOR_EXACT_HISTORICAL_PRESERVATION_WITH_HASH_ONLY_PYC_EXCEPTION"
+  },
+  "publication_scope": "Three unchanged original learning archives, their complete original manifests and content inspection; evidence only",
+  "unrecovered": [
+    "fresh043 source and run closure",
+    "some later source/fixture/analysis dependencies"
+  ],
+  "other_archives": "Later bounded preservation commits; not included here"
+}
