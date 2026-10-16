@@ -1,0 +1,3509 @@
+{
+  "schema": "independent-saved118-original-admission-v1",
+  "status": "ADMITTED_FOR_EXACT_HISTORICAL_EVIDENCE_PRESERVATION_WITH_ORIGINAL_FAILURES",
+  "archive": {
+    "name": "saved118_diagnostic_v2_delivery.tar.xz",
+    "bytes": 11008128,
+    "sha256": "4b9d0cfb1bfcb7455ad0f75ee2eb3adb7c7745828cdf3dac6267856d37ffe74b",
+    "whole_xz_crc64_eof": true,
+    "outer_xz_unused_data_bytes": 0,
+    "uncompressed_tar_bytes": 44380160,
+    "final_bytes_sha256_recheck_equal": true
+  },
+  "manifest": {
+    "sha256": "0cf1489d52facf16bfc1bdef4f50ef0642de8c081d389249d4d6571ae053b2c8",
+    "payload_entries": 3911,
+    "directory_members": 6,
+    "all_headers_preclassified_before_bodies": true,
+    "manifest_byte_equal": true
+  },
+  "counts": {
+    "tar_members": 3918,
+    "regular_files": 3912,
+    "directories": 6,
+    "extensions": {
+      ".md": 11,
+      ".py": 44,
+      ".json": 91,
+      ".json.xz": 3766
+    },
+    "json_parsed": 3856,
+    "empty_json_failure_placeholders": 1,
+    "xz_packets": 3766,
+    "xz_decoded_bytes": 126597729,
+    "max_xz_decoded_bytes": 624094,
+    "strings_scanned": 3072445,
+    "json_duplicate_keys": 0,
+    "typed_map_duplicate_keys": 0,
+    "typed_tag_shapes_valid": true
+  },
+  "own_python": [
+    {
+      "member": "arc-column-candidate-query-20261013/source/candidate_query_v5.py",
+      "bytes": 18574,
+      "sha256": "7e92d5c73d3b3b002c2e2dcb09b526950d9c2c1caf881838ce38f8cbd48b7aba",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続",
+        "接続.図式観測"
+      ],
+      "functions": [
+        "guard",
+        "bind_helpers",
+        "canonical_observation",
+        "View",
+        "semantic_entry",
+        "Run",
+        "run"
+      ],
+      "risk_call_names": {
+        "loads": 8,
+        "exec": 1,
+        "compile": 1,
+        "b64decode": 2,
+        "decompress": 1,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_combined_audit_v1.py",
+      "bytes": 7146,
+      "sha256": "a45a3c42796428139d77529307046fd0ff91a1d86ec477b8c62e90503b7bc1a3",
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "runpy",
+        "sys",
+        "traceback"
+      ],
+      "functions": [
+        "digest",
+        "read",
+        "exact",
+        "td",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 10
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_combined_audit_v2.py",
+      "bytes": 7147,
+      "sha256": "10c8538ae035faf28a22e42edee04da94f629e657b3103c4ab99648f0bfd34d9",
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "runpy",
+        "sys",
+        "traceback"
+      ],
+      "functions": [
+        "digest",
+        "read",
+        "exact",
+        "td",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 10
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_failure_prefix_audit_v1.py",
+      "bytes": 15132,
+      "sha256": "987302af9554866ee17fa9a9c2ffc993dc49f6e09fec68d9802a7df7844d6338",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "runpy",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "out",
+        "main"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_native_audit_v1.py",
+      "bytes": 11856,
+      "sha256": "5f9dd6bb07441f5a603b61cf8408fd45c447f5fa8955d11569a37088d986981c",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "runpy",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "out",
+        "main"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_native_audit_v2.py",
+      "bytes": 11856,
+      "sha256": "3a527f95a95b9cd319d14912156d5855d427a030b4848055169e028a8c58b617",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "runpy",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "out",
+        "main"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved59_native_suffix_audit_v1.py",
+      "bytes": 12340,
+      "sha256": "f2defcd6a88fe3c2ca4dbe677a4b97b0c9203df8944185ae265ec850c892af6c",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "runpy",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "out",
+        "main"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/candidate_goalset_v2.py",
+      "bytes": 5962,
+      "sha256": "d1bb8a9c7f51ac577c603d49f6f153a68e44c4b32c97b95c43a322fd09835018",
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "hashlib",
+        "pathlib",
+        "types"
+      ],
+      "functions": [
+        "全作用候補を構成する"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/closure/latest_closed_state_v2.py",
+      "bytes": 24550,
+      "sha256": "872d68d4b8bc54118c260a3eaced5f629139c7f3abab1ae66ba34ff6881265f6",
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "stat"
+      ],
+      "functions": [
+        "ClosureError",
+        "require",
+        "same",
+        "digest",
+        "pairs_unique",
+        "loads",
+        "td",
+        "ts",
+        "record",
+        "typed_state",
+        "safe_path",
+        "identity",
+        "ref_schema",
+        "Reader",
+        "resource_guard",
+        "check_summary",
+        "terminal",
+        "check_tools",
+        "check_completion",
+        "state_snapshot",
+        "check_states",
+        "check_calls",
+        "verify",
+        "save_new",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 5,
+        "decompress": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/catalog_v1.py",
+      "bytes": 9859,
+      "sha256": "e60e14406207ff7e9511d669c199c6f4d1cc958141d846e96031b7bcca43f3f8",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "collections",
+        "copy",
+        "hashlib",
+        "itertools",
+        "json",
+        "lzma",
+        "pathlib",
+        "sys",
+        "types"
+      ],
+      "functions": [
+        "require",
+        "sha",
+        "jb",
+        "exact",
+        "read",
+        "untag",
+        "packet",
+        "module",
+        "pixels",
+        "before_public",
+        "raw_lines",
+        "catalog"
+      ],
+      "risk_call_names": {
+        "loads": 7,
+        "exec": 2,
+        "decompress": 1,
+        "compile": 2,
+        "b64decode": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/guarded_wrapper_v1.py",
+      "bytes": 7389,
+      "sha256": "a1df116220e92ad6a059b7bff94c4aeb227dec13caf64afa6f7456195ae88523",
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "require",
+        "digest",
+        "exact",
+        "read",
+        "validate_gate",
+        "load",
+        "admission",
+        "main"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "loads": 3,
+        "load": 2,
+        "compile": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/guarded_wrapper_v2.py",
+      "bytes": 7731,
+      "sha256": "5641270957c2e87179a2f95b897bfb88192eb080525d8bda42650d0503f7f93d",
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "math",
+        "os",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "require",
+        "digest",
+        "exact",
+        "read",
+        "validate_gate",
+        "load",
+        "admission",
+        "main"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "loads": 3,
+        "load": 2,
+        "compile": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/guarded_wrapper_v3.py",
+      "bytes": 7829,
+      "sha256": "61502f7e59df84129dbbc9af946e89573ac7e094a81d3e1b98a06d4420fef8f6",
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "math",
+        "os",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "require",
+        "digest",
+        "exact",
+        "read",
+        "validate_gate",
+        "load",
+        "admission",
+        "main"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "loads": 3,
+        "load": 2,
+        "compile": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v1.py",
+      "bytes": 12301,
+      "sha256": "75929ef681ddd51ea6013929ac313e4fc84fdbbf25e04f3ba92f3853d7460099",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "native_permission",
+        "load_pure",
+        "Storage",
+        "guard",
+        "candidate_code_set",
+        "current_origin",
+        "expected_state",
+        "Run",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 1,
+        "exec": 3,
+        "compile": 3,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v2.py",
+      "bytes": 13629,
+      "sha256": "e1126aa14ad18ad5b2b9bec91416d079805f362db8b8742579b0d09313abc1e1",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続"
+      ],
+      "functions": [
+        "native_permission",
+        "load_pure",
+        "Storage",
+        "guard",
+        "candidate_code_set",
+        "current_origin",
+        "expected_state",
+        "Run",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "exec": 3,
+        "compile": 3,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v3.py",
+      "bytes": 14729,
+      "sha256": "5e352bff8e184ba4a881e8f0ad2972314f5c9e007a04e52988e55bcbf4268434",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続"
+      ],
+      "functions": [
+        "native_permission",
+        "load_pure",
+        "Storage",
+        "guard",
+        "candidate_code_set",
+        "current_origin",
+        "expected_state",
+        "Run",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "exec": 3,
+        "compile": 3,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v4.py",
+      "bytes": 14944,
+      "sha256": "25fc9500a80739fd6cd2f20f7ce1ffb0c633d469e91d99eb4bc3dce84a8caadd",
+      "ast_parse": false,
+      "syntax_error": {
+        "type": "IndentationError",
+        "line": 208,
+        "offset": 4,
+        "message": "unexpected indent"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v5.py",
+      "bytes": 14942,
+      "sha256": "8e09384ce3cc5039b4fdfb36e618c5ec993657dedbfee1ce1e8861a6f19e7230",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続"
+      ],
+      "functions": [
+        "native_permission",
+        "load_pure",
+        "Storage",
+        "guard",
+        "candidate_code_set",
+        "current_origin",
+        "expected_state",
+        "Run",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "exec": 3,
+        "compile": 3,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v6.py",
+      "bytes": 15716,
+      "sha256": "a3807fc9724ef084b98b3ae60cf07774991cdd5b957a237f3db5a82653b2e29d",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続"
+      ],
+      "functions": [
+        "native_permission",
+        "load_pure",
+        "Storage",
+        "guard",
+        "candidate_code_set",
+        "current_origin",
+        "validate_dependency_pins",
+        "expected_state",
+        "Run",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "exec": 3,
+        "compile": 3,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v7.py",
+      "bytes": 16693,
+      "sha256": "59001e776888ea9171d77b600ffae79ff17bf81de2bfeaf0bff2b3349b8efacf",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続"
+      ],
+      "functions": [
+        "native_permission",
+        "load_pure",
+        "Storage",
+        "guard",
+        "candidate_code_set",
+        "current_origin",
+        "validate_dependency_pins",
+        "actual_native_dependency_pins",
+        "expected_state",
+        "Run",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "exec": 3,
+        "compile": 3,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/measure_intent_caps_v1.py",
+      "bytes": 5778,
+      "sha256": "893f8cb97979f8403474d102860104fbc44fdc972f6678be3baf98497776e4c9",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "lzma",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "read_packet",
+        "td",
+        "enc",
+        "jb",
+        "pack_size",
+        "ref"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "compile": 1,
+        "decompress": 2,
+        "loads": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/prefix_closure_v1.py",
+      "bytes": 6262,
+      "sha256": "d7087293102f28047d994feee5b36a94111416bb1def8ea6bed3d4259a4ea9f0",
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "hashlib",
+        "json",
+        "lzma",
+        "pathlib",
+        "types"
+      ],
+      "functions": [
+        "require",
+        "sha",
+        "read",
+        "exact",
+        "packet",
+        "td",
+        "verify"
+      ],
+      "risk_call_names": {
+        "loads": 12,
+        "decompress": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/suffix_guarded_wrapper_v1.py",
+      "bytes": 8185,
+      "sha256": "cbb9776f8ba134fcf20290e0371e3a7ce9bc8696206927a74ec2cebfe4899a91",
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "math",
+        "os",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "functions": [
+        "require",
+        "digest",
+        "exact",
+        "read",
+        "validate_gate",
+        "load",
+        "admission",
+        "main"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "loads": 3,
+        "load": 2,
+        "compile": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/suffix_harness_disabled_v1.py",
+      "bytes": 18171,
+      "sha256": "73f3e70d8cc453985c531b87d5562fb8f4510c6c8952a0cf91de90e587c92163",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続"
+      ],
+      "functions": [
+        "native_permission",
+        "load_pure",
+        "Storage",
+        "guard",
+        "candidate_code_set",
+        "current_origin",
+        "validate_dependency_pins",
+        "actual_native_dependency_pins",
+        "expected_state",
+        "Run",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "exec": 3,
+        "compile": 3,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_guarded_wrapper_v1.py",
+      "bytes": 3975,
+      "sha256": "feff169305a5beec4ffcf2450ed6b844a579ee8a1e18806ed620c392f73ddfb9",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "sys"
+      ],
+      "functions": [
+        "bad"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_guarded_wrapper_v2.py",
+      "bytes": 3975,
+      "sha256": "6f74fb1087438ce536c0a5ee82e7c303c5ef861e4b054e480e2a53195e84f201",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "sys"
+      ],
+      "functions": [
+        "bad"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_pure_v1.py",
+      "bytes": 7951,
+      "sha256": "52105c7c8d2e3fb4b28d537cf13a0290704964a1e31669ac149c1734d7f78700",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "External",
+        "Fixture",
+        "run",
+        "rejects"
+      ],
+      "risk_call_names": {
+        "run": 2,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_pure_v2.py",
+      "bytes": 7978,
+      "sha256": "8d14b3ab1bd46fd00267d56dc9c79e27bc4bea2725bf3f413c148e5602e86843",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "External",
+        "Fixture",
+        "run",
+        "rejects"
+      ],
+      "risk_call_names": {
+        "run": 2,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_pure_v3.py",
+      "bytes": 7978,
+      "sha256": "4a4c2d9660ce156e24ec54cec5a5ee44b87f292fe0b53264264d7efe3ebc9999",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "External",
+        "Fixture",
+        "run",
+        "rejects"
+      ],
+      "risk_call_names": {
+        "run": 2,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_pure_v4.py",
+      "bytes": 10318,
+      "sha256": "67eb6fa3510f99ccc5136b99abe48b651cdbd09070d1477abc2c6adde9c9a1ed",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "External",
+        "Fixture",
+        "run",
+        "rejects",
+        "save"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "run": 2,
+        "compile": 1,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_pure_v5.py",
+      "bytes": 10318,
+      "sha256": "7cc23ad3725670326c3ad248770e7011e3370401beb9068c3869153814150173",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "External",
+        "Fixture",
+        "run",
+        "rejects",
+        "save"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "run": 2,
+        "compile": 1,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_pure_v6.py",
+      "bytes": 11091,
+      "sha256": "cf3d7d55ab1d247c97d4137ab398eacc9595dac80ed7190a7ab733b77b3618cd",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "External",
+        "Fixture",
+        "run",
+        "rejects",
+        "save"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "loads": 1,
+        "run": 2,
+        "compile": 1,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_pure_v7.py",
+      "bytes": 11314,
+      "sha256": "3e678fd6b6ad988f1e042524b784aa8e30b9f5ade0e6ee4eff5f7a69c26a5eed",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "External",
+        "Fixture",
+        "run",
+        "rejects",
+        "save"
+      ],
+      "risk_call_names": {
+        "exec": 1,
+        "loads": 1,
+        "run": 2,
+        "compile": 1,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_pure_v8.py",
+      "bytes": 12553,
+      "sha256": "dbfcebfe5965cc9557ebfe12e40933f750243d6fbb3e771af55492d9a67bc8b2",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "time",
+        "types"
+      ],
+      "functions": [
+        "External",
+        "Fixture",
+        "run",
+        "rejects",
+        "save"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "loads": 1,
+        "run": 2,
+        "compile": 2,
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_suffix_pure_v1.py",
+      "bytes": 6325,
+      "sha256": "07e7422a4b6f3c8a917bb922284eabc6d510c0a5c2c3eda9afca9975e615aee6",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "types"
+      ],
+      "functions": [
+        "rejects",
+        "semantic",
+        "save"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/test_suffix_wrapper_v1.py",
+      "bytes": 4640,
+      "sha256": "4aa2298f21a1b90a11389ba9cc08ed95493823a5a5e8ccc48b1c52536538cdb6",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "runpy",
+        "sys"
+      ],
+      "functions": [
+        "bad"
+      ],
+      "risk_call_names": {
+        "loads": 1
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/goalset_common_v4.py",
+      "bytes": 8937,
+      "sha256": "26b58ae33fc43b16fb1dfeb6ef1d5790a8a2759c3f75700a64924b387b2c75a1",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "collections",
+        "copy",
+        "hashlib",
+        "itertools",
+        "pathlib",
+        "types"
+      ],
+      "functions": [
+        "exact",
+        "require",
+        "read_pin",
+        "load_pure",
+        "_bind_fixed",
+        "goalset_pool",
+        "slot_map",
+        "skeleton",
+        "token_key",
+        "goalset_base",
+        "hit",
+        "goalset_preconditions"
+      ],
+      "risk_call_names": {
+        "exec": 2,
+        "compile": 2
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/resource_guard_v1.py",
+      "bytes": 1948,
+      "sha256": "d221c24e808fb66b686b6a030c54f89fb92a30ce8ffc23a3f5de9f9200009038",
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "os",
+        "pathlib",
+        "shutil"
+      ],
+      "functions": [
+        "guard",
+        "fsyncdir",
+        "save"
+      ],
+      "risk_call_names": {}
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_harness_v3.py",
+      "bytes": 26932,
+      "sha256": "f0d73f35a9516eda585b134ae54be9815b36d6164786b9f8a0966c3983640007",
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ],
+      "functions": [
+        "eq",
+        "jb",
+        "sha",
+        "identity",
+        "ref",
+        "fsyncdir",
+        "readref",
+        "guard",
+        "ensure_scope",
+        "Clock",
+        "IndexedRows",
+        "capture_call",
+        "snapshot_value",
+        "frame_hash",
+        "APIView",
+        "Run",
+        "run"
+      ],
+      "risk_call_names": {
+        "loads": 9,
+        "decompress": 2
+      }
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/ARC3境界.py",
+      "bytes": 9941,
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "typing"
+      ],
+      "functions": [
+        "境界違反",
+        "_属性",
+        "_列",
+        "_整数",
+        "_作用番号",
+        "_盤面列",
+        "観測",
+        "HDS確定作用",
+        "観測する",
+        "HDS観測入力",
+        "作用を排出する"
+      ],
+      "risk_call_names": {}
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/列図式規則.py",
+      "bytes": 20302,
+      "sha256": "d303b314446d22c604008d590636cccf6e1d140fbd365f22ff018b55d97de399",
+      "ast_parse": true,
+      "imports": [
+        "ARC3境界",
+        "collections",
+        "copy",
+        "hds学習系統",
+        "itertools",
+        "図式観測"
+      ],
+      "functions": [
+        "知覚不適用",
+        "記号を読む",
+        "容器外形を観測する",
+        "図式を観測する",
+        "列を生成する",
+        "一致する",
+        "照会",
+        "内容候補を構成する",
+        "選択を読む",
+        "_参照群",
+        "_照会保留",
+        "_対象関係",
+        "作用候補を構成する",
+        "候補を構成する",
+        "観測から候補を構成する",
+        "候補台帳を構成する"
+      ],
+      "risk_call_names": {
+        "照会する": 1
+      }
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/図式観測.py",
+      "bytes": 1295,
+      "sha256": "417269f9e94ec548c7f727c3e263efe952bbae21cf601021bcfd4d89b1a786d2",
+      "ast_parse": true,
+      "imports": [
+        "collections"
+      ],
+      "functions": [
+        "_作用番号",
+        "成分群"
+      ],
+      "risk_call_names": {}
+    },
+    {
+      "member": "arc-current-family-source-20261013/検証/test_列図式規則.py",
+      "bytes": 9912,
+      "sha256": "6202f490248cfd5f3734338b2bd119fedfe373c31b5abb6213119b1e07a91769",
+      "ast_parse": true,
+      "imports": [
+        "builtins",
+        "copy",
+        "hds学習系統",
+        "inspect",
+        "json",
+        "os",
+        "pathlib",
+        "sys",
+        "tempfile",
+        "unittest",
+        "unittest.mock",
+        "接続.ARC3境界",
+        "接続.列図式規則",
+        "道具.列図式教師検証"
+      ],
+      "functions": [
+        "固定語彙境界",
+        "公開教師保持評価"
+      ],
+      "risk_call_names": {
+        "処理する": 2
+      }
+    },
+    {
+      "member": "arc-current-family-source-20261013/道具/列図式教師検証.py",
+      "bytes": 11873,
+      "sha256": "f8a6bbca6a557973a7f54bdf0af8e85ed0419fcf5b463e10dcc310160245bc28",
+      "ast_parse": true,
+      "imports": [
+        "argparse",
+        "collections",
+        "hashlib",
+        "hds学習系統",
+        "itertools",
+        "json",
+        "pathlib",
+        "sys",
+        "接続.列図式規則",
+        "接続.図式観測"
+      ],
+      "functions": [
+        "公開原票を読む",
+        "完了数",
+        "同一実行",
+        "記号記録",
+        "遷移作用を測る",
+        "教師を取り込む",
+        "評価する",
+        "_範囲",
+        "_保存",
+        "main"
+      ],
+      "risk_call_names": {
+        "loads": 2,
+        "処理する": 3
+      }
+    }
+  ],
+  "syntax_errors": [
+    {
+      "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v4.py",
+      "type": "IndentationError",
+      "line": 208,
+      "offset": 4,
+      "message": "unexpected indent"
+    }
+  ],
+  "empty_failure_placeholders": [
+    {
+      "member": "arc-column-live-loop-20261013/evidence/634eb13522ed4d58a68e60d2bdf16064/failure_latest.standard.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "credential_candidates": [],
+  "pii_candidates": [],
+  "opaque_candidates": [],
+  "unknown_types": [],
+  "embedded_code_strings": [],
+  "typed_tag_counts": {
+    "__辞書__": 241670,
+    "__データ型__": 45613,
+    "__列挙__": 55551,
+    "__組__": 705040
+  },
+  "type_names": {
+    "原理記録": 26528,
+    "学習過程記録": 2492,
+    "懐疑記録": 3660,
+    "経験記録": 732,
+    "観測事実": 2928,
+    "外部入力": 3757,
+    "外部出力": 1996,
+    "実行結果": 1760,
+    "予測記録": 1760
+  },
+  "enum_names": {
+    "採用状態": 26531,
+    "原理状態": 26528,
+    "学習成立状態": 2492
+  },
+  "state_summary": [
+    {
+      "member": "arc-column-live-loop-20261013/evidence/76fb30b532aa412bab83d5aa1cd6df23/after_all_queries.standard.json",
+      "identifiers": {
+        "経験": 183,
+        "懐疑": 915,
+        "学習": 183,
+        "原理候補": 229,
+        "原理": 16,
+        "更新": 16,
+        "照会": 6647,
+        "学習判定": 6647
+      },
+      "ledger_lengths": {
+        "観測台帳": 183,
+        "認知世界台帳": 183,
+        "懐疑台帳": 915,
+        "学習過程台帳": 183,
+        "全体帰還台帳": 183,
+        "推論記録台帳": 229,
+        "証拠台帳": 229,
+        "判断台帳": 229,
+        "原理台帳": 16,
+        "暫定性台帳": 16,
+        "更新台帳": 16
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/76fb30b532aa412bab83d5aa1cd6df23/restored_before.standard.json",
+      "identifiers": {
+        "経験": 183,
+        "懐疑": 915,
+        "学習": 183,
+        "原理候補": 229,
+        "原理": 16,
+        "更新": 16,
+        "照会": 5880,
+        "学習判定": 5880
+      },
+      "ledger_lengths": {
+        "観測台帳": 183,
+        "認知世界台帳": 183,
+        "懐疑台帳": 915,
+        "学習過程台帳": 183,
+        "全体帰還台帳": 183,
+        "推論記録台帳": 229,
+        "証拠台帳": 229,
+        "判断台帳": 229,
+        "原理台帳": 16,
+        "暫定性台帳": 16,
+        "更新台帳": 16
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/793242337c714081b4f642f1e0db3663/failure_latest.standard.json",
+      "identifiers": {
+        "経験": 183,
+        "懐疑": 915,
+        "学習": 183,
+        "原理候補": 229,
+        "原理": 16,
+        "更新": 16,
+        "照会": 5880,
+        "学習判定": 5880
+      },
+      "ledger_lengths": {
+        "観測台帳": 183,
+        "認知世界台帳": 183,
+        "懐疑台帳": 915,
+        "学習過程台帳": 183,
+        "全体帰還台帳": 183,
+        "推論記録台帳": 229,
+        "証拠台帳": 229,
+        "判断台帳": 229,
+        "原理台帳": 16,
+        "暫定性台帳": 16,
+        "更新台帳": 16
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/793242337c714081b4f642f1e0db3663/restored_before.standard.json",
+      "identifiers": {
+        "経験": 183,
+        "懐疑": 915,
+        "学習": 183,
+        "原理候補": 229,
+        "原理": 16,
+        "更新": 16,
+        "照会": 4887,
+        "学習判定": 4887
+      },
+      "ledger_lengths": {
+        "観測台帳": 183,
+        "認知世界台帳": 183,
+        "懐疑台帳": 915,
+        "学習過程台帳": 183,
+        "全体帰還台帳": 183,
+        "推論記録台帳": 229,
+        "証拠台帳": 229,
+        "判断台帳": 229,
+        "原理台帳": 16,
+        "暫定性台帳": 16,
+        "更新台帳": 16
+      }
+    }
+  ],
+  "top_level_receipt_summaries": [
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_all_intent_caps_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "observations",
+        "all_synthetic_query_inputs",
+        "max_compressed_bytes",
+        "max_rawbytes",
+        "cap_bytes",
+        "all_measurements",
+        "recovered_failed_intent",
+        "suffix",
+        "budget",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-all-origin-candidate-intent-cap-pure-v1",
+        "status": "PASS",
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "observations": 118,
+        "all_synthetic_query_inputs": 1760,
+        "max_compressed_bytes": 8360,
+        "max_rawbytes": 28000,
+        "cap_bytes": 16384
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_closure_handoff_v1.json",
+      "keys": [
+        "schema",
+        "combined_report",
+        "combined_tools",
+        "actual_report_fields",
+        "actual_combined_tools_fields",
+        "audit_sources",
+        "validation_notes"
+      ],
+      "scalars": {
+        "schema": "validated-saved118-closure-handoff-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_combined_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "source",
+        "launch",
+        "polls",
+        "actual_exit",
+        "native_API"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-combined-actual-tools-v1",
+        "source": "arc-column-live-loop-20261013/evidence/independent_saved118_combined_audit_v2.py",
+        "actual_exit": 0,
+        "native_API": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_combined_audit_receipt_v1.json",
+      "keys": [
+        "prefix_summary",
+        "suffix_summary",
+        "suffix_audit_tools"
+      ],
+      "scalars": {}
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_combined_native_summary_v2.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "integration_kind",
+        "original_prefix_status",
+        "native_segment_count",
+        "segments",
+        "verified",
+        "counts",
+        "states",
+        "latest_closed_state",
+        "frames",
+        "support_patterns",
+        "nonempty_HOLD_queries",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-combined-native-diagnostic-audit-v1",
+        "status": "PASS",
+        "integration_kind": "FAILED_prefix59_plus_completed_suffix59",
+        "original_prefix_status": "FAILED",
+        "native_segment_count": 2
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_diagnostic_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "launch",
+        "polls"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-diagnostic-actual-tools-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_diagnostic_actual_tools_v5.json",
+      "keys": [
+        "schema",
+        "launch",
+        "polls"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-diagnostic-actual-tools-v5"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_diagnostic_actual_tools_v8.json",
+      "keys": [
+        "launch",
+        "polls"
+      ],
+      "scalars": {}
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_diagnostic_pure_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "all118",
+        "strict_query_upper_bound",
+        "synthetic_fixture_calls",
+        "negative_checks",
+        "max_observation_bound",
+        "baseline_counter",
+        "max_final_counter",
+        "native",
+        "HDS_restores",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "runtime_enabled",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-source-pure-v1",
+        "status": "PASS",
+        "strict_query_upper_bound": 4885,
+        "synthetic_fixture_calls": 1760,
+        "max_observation_bound": 58,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "native": 0,
+        "HDS_restores": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "runtime_enabled": false,
+        "elapsed_seconds": 9.68584553799883
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_diagnostic_pure_v5.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "all118",
+        "strict_query_upper_bound",
+        "synthetic_fixture_calls",
+        "negative_checks",
+        "max_observation_bound",
+        "baseline_counter",
+        "max_final_counter",
+        "native",
+        "HDS_restores",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "runtime_enabled",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-source-pure-v1",
+        "status": "PASS",
+        "strict_query_upper_bound": 4885,
+        "synthetic_fixture_calls": 1760,
+        "max_observation_bound": 58,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "native": 0,
+        "HDS_restores": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "runtime_enabled": false,
+        "elapsed_seconds": 9.79225260399835
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_diagnostic_pure_v8.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "all118",
+        "strict_query_upper_bound",
+        "synthetic_fixture_calls",
+        "negative_checks",
+        "max_observation_bound",
+        "baseline_counter",
+        "max_final_counter",
+        "native",
+        "HDS_restores",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "runtime_enabled",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-source-pure-v1",
+        "status": "PASS",
+        "strict_query_upper_bound": 4885,
+        "synthetic_fixture_calls": 1760,
+        "max_observation_bound": 58,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "native": 0,
+        "HDS_restores": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "runtime_enabled": false,
+        "elapsed_seconds": 10.719597197996336
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_diagnostic_review_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "sources",
+        "actual_tools",
+        "all_cases",
+        "strict_Query_upper_bound",
+        "synthetic_calls",
+        "negative_checks",
+        "checks",
+        "resource",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "remaining_gates"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-disabled-diagnostic-review-v1",
+        "status": "PASS_SOURCE_PURE_ONLY",
+        "all_cases": 118,
+        "strict_Query_upper_bound": 4885,
+        "synthetic_calls": 1760,
+        "negative_checks": 32,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_failure_prefix_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "source",
+        "launch",
+        "polls",
+        "actual_exit",
+        "native_API"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-failure-prefix-actual-tools-v1",
+        "source": "arc-column-live-loop-20261013/evidence/independent_saved118_failure_prefix_audit_v1.py",
+        "actual_exit": 0,
+        "native_API": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_failure_prefix_receipt_v1.json",
+      "keys": [
+        "nonce",
+        "failure",
+        "actual_tools"
+      ],
+      "scalars": {
+        "nonce": "793242337c714081b4f642f1e0db3663"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_failure_prefix_summary_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "nonce",
+        "verified",
+        "failure",
+        "actual_tools",
+        "actual_exit",
+        "states",
+        "latest_closed_state",
+        "counts",
+        "frames",
+        "all_queries",
+        "support_patterns",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-native-failed-prefix-audit-v1",
+        "status": "PASS_FAILURE_PREFIX",
+        "nonce": "793242337c714081b4f642f1e0db3663",
+        "actual_exit": null,
+        "elapsed_seconds": 27.740245067005162
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_guarded_wrapper_pure_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "checks",
+        "count",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "enabled_gate_created",
+        "synthetic_in_memory_gate_only",
+        "wrapper_source",
+        "contract"
+      ],
+      "scalars": {
+        "schema": "saved118-guarded-wrapper-pure-v1",
+        "status": "PASS",
+        "count": 47,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "enabled_gate_created": false,
+        "synthetic_in_memory_gate_only": true
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_guarded_wrapper_pure_v2.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "checks",
+        "count",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "enabled_gate_created",
+        "synthetic_in_memory_gate_only",
+        "wrapper_source",
+        "contract"
+      ],
+      "scalars": {
+        "schema": "saved118-guarded-wrapper-pure-v1",
+        "status": "PASS",
+        "count": 47,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "enabled_gate_created": false,
+        "synthetic_in_memory_gate_only": true
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_intent_caps_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "launch",
+        "polls",
+        "actual_exit"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-intent-caps-actual-tools-v1",
+        "actual_exit": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_prenative_failure_634eb135_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "nonce",
+        "session_id",
+        "poll",
+        "failure",
+        "all_run_files",
+        "cause",
+        "first_three_source_pins",
+        "native_imports",
+        "machine_restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "baseline_unchanged",
+        "counter_remains",
+        "checks",
+        "stopping_condition",
+        "remaining_gap"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-prenative-failure-review-v1",
+        "status": "PASS_FAILURE_CLOSURE",
+        "nonce": "634eb13522ed4d58a68e60d2bdf16064",
+        "session_id": 15332,
+        "cause": "Third material source pin is67880086B public recording, rejected by readref8MiB before imports or HDS restoration. Pins match actual bytes; cap category mismatch.",
+        "native_imports": 0,
+        "machine_restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "counter_remains": 4887,
+        "stopping_condition": "Root may stop retained process without loss of newly produced native data; only pure catalog/exception references remain reproducible from pinned inputs. No stop authority exercised by reviewer.",
+        "remaining_gap": "Before retry, separate material refs from actual core dependency pins, validate both in pure preflight, issue new source/review/root gate and preserve old artifacts."
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_query_wrapper_review_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "sources",
+        "actual_tools",
+        "all_cases",
+        "strict_Query_upper_bound",
+        "synthetic_calls",
+        "negative_checks",
+        "checks",
+        "resource",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "remaining_gates",
+        "errors",
+        "disabled_harness_review",
+        "wrapper",
+        "contract",
+        "wrapper_pure",
+        "wrapper_actual_exec"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-query-wrapper-review-v1",
+        "status": "PASS_SOURCE_PURE_ONLY",
+        "all_cases": 118,
+        "strict_Query_upper_bound": 4885,
+        "synthetic_calls": 1760,
+        "negative_checks": 32,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved118_query_wrapper_review_v2.json",
+      "keys": [
+        "schema",
+        "status",
+        "sources",
+        "actual_tools",
+        "all_cases",
+        "strict_Query_upper_bound",
+        "synthetic_calls",
+        "negative_checks",
+        "checks",
+        "resource",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "remaining_gates",
+        "errors",
+        "disabled_harness_review",
+        "wrapper",
+        "contract",
+        "wrapper_pure",
+        "wrapper_actual_exec",
+        "corrected_harness_pure",
+        "corrected_harness_actual_tools",
+        "prior_native_attempt_failure_review"
+      ],
+      "scalars": {
+        "schema": "independent-saved118-query-wrapper-review-v2",
+        "status": "PASS_SOURCE_PURE_ONLY",
+        "all_cases": 118,
+        "strict_Query_upper_bound": 4885,
+        "synthetic_calls": 1760,
+        "negative_checks": 38,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved59_native_suffix_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "source",
+        "launch",
+        "polls",
+        "actual_exit",
+        "native_API"
+      ],
+      "scalars": {
+        "schema": "independent-saved59-native-suffix-actual-tools-v1",
+        "source": "arc-column-live-loop-20261013/evidence/independent_saved59_native_suffix_audit_v1.py",
+        "actual_exit": 0,
+        "native_API": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved59_native_suffix_receipt_v1.json",
+      "keys": [
+        "nonce",
+        "completion",
+        "actual_tools"
+      ],
+      "scalars": {
+        "nonce": "76fb30b532aa412bab83d5aa1cd6df23"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved59_native_suffix_summary_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "nonce",
+        "verified",
+        "completion",
+        "actual_tools",
+        "actual_exit",
+        "states",
+        "latest_closed_state",
+        "counts",
+        "frames",
+        "all_queries",
+        "support_patterns",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "independent-saved59-native-suffix-audit-v1",
+        "status": "PASS",
+        "nonce": "76fb30b532aa412bab83d5aa1cd6df23",
+        "actual_exit": 0,
+        "elapsed_seconds": 24.20591241100192
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved59_suffix_source_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "prefix_closure",
+        "launch",
+        "polls",
+        "actual_exit"
+      ],
+      "scalars": {
+        "schema": "independent-saved59-suffix-source-actual-tools-v1",
+        "actual_exit": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved59_suffix_source_pure_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "checks",
+        "measurements",
+        "suffix_observations",
+        "Query_upper_bound",
+        "synthetic_queries",
+        "baseline_counter",
+        "max_final_counter",
+        "prefix_closure",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "all118_complete_claim"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-source-pure-v1",
+        "status": "PASS",
+        "suffix_observations": 59,
+        "Query_upper_bound": 2567,
+        "synthetic_queries": 767,
+        "baseline_counter": 5880,
+        "max_final_counter": 8447,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "all118_complete_claim": false
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved59_suffix_wrapper_pure_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "checks",
+        "count",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "enabled_gate_created",
+        "synthetic_in_memory_gate_only",
+        "wrapper_source",
+        "contract"
+      ],
+      "scalars": {
+        "schema": "saved118-guarded-wrapper-pure-v1",
+        "status": "PASS",
+        "count": 52,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "enabled_gate_created": false,
+        "synthetic_in_memory_gate_only": true
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_saved59_suffix_wrapper_review_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "source",
+        "contract",
+        "harness",
+        "prefix_closure_source",
+        "actual_tools",
+        "source_pure",
+        "wrapper_pure",
+        "all118_intent_caps",
+        "intent_caps_actual_tools",
+        "checks",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "limits",
+        "remaining_gates"
+      ],
+      "scalars": {
+        "schema": "independent-saved59-suffix-wrapper-review-v1",
+        "status": "PASS_SOURCE_PURE_ONLY",
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_all_intent_cap_measurement_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "observations",
+        "all_synthetic_query_inputs",
+        "max_compressed_bytes",
+        "max_rawbytes",
+        "cap_bytes",
+        "all_measurements",
+        "recovered_failed_intent",
+        "suffix",
+        "budget",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-all-origin-candidate-intent-cap-pure-v1",
+        "status": "PASS",
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "observations": 118,
+        "all_synthetic_query_inputs": 1760,
+        "max_compressed_bytes": 8360,
+        "max_rawbytes": 28000,
+        "cap_bytes": 16384
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_diagnostic_pure_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "v3",
+        "v5"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-pure-actual-tools-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_diagnostic_pure_report_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "all118",
+        "strict_query_upper_bound",
+        "synthetic_fixture_calls",
+        "negative_checks",
+        "max_observation_bound",
+        "baseline_counter",
+        "max_final_counter",
+        "native",
+        "HDS_restores",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "runtime_enabled",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-source-pure-v1",
+        "status": "PASS",
+        "strict_query_upper_bound": 4885,
+        "synthetic_fixture_calls": 1760,
+        "max_observation_bound": 58,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "native": 0,
+        "HDS_restores": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "runtime_enabled": false,
+        "elapsed_seconds": 10.660003960001632
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_diagnostic_pure_report_v3.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "all118",
+        "strict_query_upper_bound",
+        "synthetic_fixture_calls",
+        "negative_checks",
+        "max_observation_bound",
+        "baseline_counter",
+        "max_final_counter",
+        "native",
+        "HDS_restores",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "runtime_enabled",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-source-pure-v1",
+        "status": "PASS",
+        "strict_query_upper_bound": 4885,
+        "synthetic_fixture_calls": 1760,
+        "max_observation_bound": 58,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "native": 0,
+        "HDS_restores": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "runtime_enabled": false,
+        "elapsed_seconds": 10.671737305994611
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_diagnostic_pure_report_v5.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "all118",
+        "strict_query_upper_bound",
+        "synthetic_fixture_calls",
+        "negative_checks",
+        "max_observation_bound",
+        "baseline_counter",
+        "max_final_counter",
+        "native",
+        "HDS_restores",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "runtime_enabled",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-source-pure-v1",
+        "status": "PASS",
+        "strict_query_upper_bound": 4885,
+        "synthetic_fixture_calls": 1760,
+        "max_observation_bound": 58,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "native": 0,
+        "HDS_restores": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "runtime_enabled": false,
+        "elapsed_seconds": 10.179101237001305
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_diagnostic_pure_report_v7.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "all118",
+        "strict_query_upper_bound",
+        "synthetic_fixture_calls",
+        "negative_checks",
+        "max_observation_bound",
+        "baseline_counter",
+        "max_final_counter",
+        "native",
+        "HDS_restores",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "runtime_enabled",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-source-pure-v1",
+        "status": "PASS",
+        "strict_query_upper_bound": 4885,
+        "synthetic_fixture_calls": 1760,
+        "max_observation_bound": 58,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "native": 0,
+        "HDS_restores": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "runtime_enabled": false,
+        "elapsed_seconds": 9.88363154700346
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_diagnostic_pure_report_v8.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "all118",
+        "strict_query_upper_bound",
+        "synthetic_fixture_calls",
+        "negative_checks",
+        "max_observation_bound",
+        "baseline_counter",
+        "max_final_counter",
+        "native",
+        "HDS_restores",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "runtime_enabled",
+        "elapsed_seconds",
+        "limitations"
+      ],
+      "scalars": {
+        "schema": "saved118-diagnostic-source-pure-v1",
+        "status": "PASS",
+        "strict_query_upper_bound": 4885,
+        "synthetic_fixture_calls": 1760,
+        "max_observation_bound": 58,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "native": 0,
+        "HDS_restores": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "runtime_enabled": false,
+        "elapsed_seconds": 10.952137858999777
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_diagnostic_source_readiness_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "runtime_started",
+        "enabled_gate_created",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "files",
+        "evidence",
+        "all_observations",
+        "structural_Query_ceiling",
+        "synthetic_fixture_calls",
+        "source_pure_negative_checks",
+        "wrapper_gate_checks",
+        "baseline",
+        "baseline_experiences",
+        "baseline_counter",
+        "max_final_counter",
+        "budget",
+        "current_scope_bytes",
+        "future_entry",
+        "remaining",
+        "limits",
+        "failure_history",
+        "all_source_versions_retained"
+      ],
+      "scalars": {
+        "schema": "saved118-query-diagnostic-source-readiness-v1",
+        "status": "SOURCE_PURE_AND_INDEPENDENT_PASS",
+        "runtime_started": false,
+        "enabled_gate_created": false,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "all_observations": 118,
+        "structural_Query_ceiling": 4885,
+        "synthetic_fixture_calls": 1760,
+        "source_pure_negative_checks": 32,
+        "wrapper_gate_checks": 47,
+        "baseline_experiences": 183,
+        "baseline_counter": 4887,
+        "max_final_counter": 9772,
+        "future_entry": "guarded_wrapper_v2.py ABSOLUTE_ROOT_GATE_PATH EXACT_ROOT_GATE_SHA"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_failed_prefix_file_closure_v1.json",
+      "keys": [
+        "schema",
+        "nonce",
+        "original_status",
+        "files",
+        "file_count",
+        "bytes",
+        "all_original_files_preserved"
+      ],
+      "scalars": {
+        "schema": "saved118-failed-prefix-file-closure-v1",
+        "nonce": "793242337c714081b4f642f1e0db3663",
+        "original_status": "FAILED",
+        "file_count": 2113,
+        "bytes": 18565242,
+        "all_original_files_preserved": true
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_guarded_wrapper_pure_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "exec"
+      ],
+      "scalars": {
+        "schema": "saved118-guarded-wrapper-pure-actual-tools-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_guarded_wrapper_pure_report_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "checks",
+        "count",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "enabled_gate_created",
+        "synthetic_in_memory_gate_only",
+        "wrapper_source",
+        "contract"
+      ],
+      "scalars": {
+        "schema": "saved118-guarded-wrapper-pure-v1",
+        "status": "PASS",
+        "count": 47,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "enabled_gate_created": false,
+        "synthetic_in_memory_gate_only": true
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_guarded_wrapper_pure_report_v2.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "checks",
+        "count",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "enabled_gate_created",
+        "synthetic_in_memory_gate_only",
+        "wrapper_source",
+        "contract"
+      ],
+      "scalars": {
+        "schema": "saved118-guarded-wrapper-pure-v1",
+        "status": "PASS",
+        "count": 47,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "enabled_gate_created": false,
+        "synthetic_in_memory_gate_only": true
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_intent_cap_measure_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "launch",
+        "polls"
+      ],
+      "scalars": {
+        "schema": "saved118-intent-cap-measure-actual-tools-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_634eb135_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "nonce",
+        "command",
+        "launch",
+        "polls",
+        "authorized_failure_termination",
+        "native_status",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action"
+      ],
+      "scalars": {
+        "schema": "saved118-native-actual-tools-v1",
+        "nonce": "634eb13522ed4d58a68e60d2bdf16064",
+        "authorized_failure_termination": true,
+        "native_status": "FAILED_PRE_NATIVE",
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_634eb135_failure_analysis_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "session_id",
+        "failure_manifest",
+        "launch",
+        "first_poll",
+        "rejected_dependency",
+        "cause",
+        "baseline_unchanged",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "native_zero_basis",
+        "all118_unprocessed",
+        "reserved_failure_standard",
+        "process_terminated",
+        "restart_attempted",
+        "next_step"
+      ],
+      "scalars": {
+        "schema": "saved118-634eb135-pre-native-failure-analysis-v1",
+        "status": "FAILED_HELD_PRE_NATIVE",
+        "session_id": 15332,
+        "cause": "Public recording exact67,880,086B incorrectly sent through shared code8MiB reader cap before native imports. Hash and size unchanged.",
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "native_zero_basis": "Pinned guarded_wrapper_v2 call stack failed at harness_disabled_v5 line153 before lines156–159 native imports and before line145 restore. Catalog pure AST and closure have no native calls.",
+        "all118_unprocessed": true,
+        "process_terminated": false,
+        "restart_attempted": false,
+        "next_step": "Independent recovery review, root termination authorization; separately reviewed smallest code/public-reference cap fix and new root gate only."
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_634eb135_held_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-held-confirmation-actual-v1",
+        "session_id": 15332
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_634eb135_interrupt_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "chars",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-single-authorized-interrupt-actual-v1",
+        "session_id": 15332,
+        "chars": "\\u0003"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_634eb135_launch_actual_v1.json",
+      "keys": [
+        "schema",
+        "command",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-launch-actual-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_634eb135_poll_001_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-poll-actual-v1",
+        "session_id": 15332
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_actual_tools_held_v1.json",
+      "keys": [
+        "schema",
+        "nonce",
+        "command",
+        "launch",
+        "polls",
+        "status"
+      ],
+      "scalars": {
+        "schema": "saved118-native-actual-tools-v1",
+        "nonce": "793242337c714081b4f642f1e0db3663",
+        "status": "failed_held_not_terminal"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_actual_tools_terminal_v1.json",
+      "keys": [
+        "schema",
+        "nonce",
+        "command",
+        "launch",
+        "polls",
+        "status",
+        "authorization"
+      ],
+      "scalars": {
+        "schema": "saved118-native-actual-tools-v1",
+        "nonce": "793242337c714081b4f642f1e0db3663",
+        "status": "failed_prefix_authorized_termination",
+        "authorization": "Root authorized one Ctrl-C to session20866 after independent PASS_FAILURE_PREFIX."
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_held_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-held-confirmation-actual-v1",
+        "session_id": 20866
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_launch_actual_v1.json",
+      "keys": [
+        "schema",
+        "command",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-launch-actual-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_poll_001_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-poll-actual-v1",
+        "session_id": 20866
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_poll_002_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-poll-actual-v1",
+        "session_id": 20866
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_poll_003_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-poll-actual-v1",
+        "session_id": 20866
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_poll_004_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-poll-actual-v1",
+        "session_id": 20866
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_poll_005_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-poll-actual-v1",
+        "session_id": 20866
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_native_79324233_poll_006_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved118-native-poll-actual-v1",
+        "session_id": 20866
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_repaired_source_pure_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "v7",
+        "v8"
+      ],
+      "scalars": {
+        "schema": "saved118-repaired-source-pure-actual-tools-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved118_repaired_wrapper_pure_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "exec"
+      ],
+      "scalars": {
+        "schema": "saved118-repaired-wrapper-pure-actual-tools-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "nonce",
+        "command",
+        "launch",
+        "polls"
+      ],
+      "scalars": {
+        "schema": "saved118-native-actual-tools-v1",
+        "nonce": "76fb30b532aa412bab83d5aa1cd6df23"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_launch_actual_v1.json",
+      "keys": [
+        "schema",
+        "command",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-launch-actual-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_001_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_002_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_003_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_004_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_005_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_006_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_007_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_008_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_009_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_010_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_76fb30b5_poll_011_actual_v1.json",
+      "keys": [
+        "schema",
+        "session_id",
+        "result"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-native-poll-actual-v1",
+        "session_id": 80573
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_source_pure_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "launch",
+        "polls",
+        "prefix_closure_exec"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-source-pure-actual-tools-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_source_pure_report_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "checks",
+        "measurements",
+        "suffix_observations",
+        "Query_upper_bound",
+        "synthetic_queries",
+        "baseline_counter",
+        "max_final_counter",
+        "prefix_closure",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "Action",
+        "SDK",
+        "all118_complete_claim"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-source-pure-v1",
+        "status": "PASS",
+        "suffix_observations": 59,
+        "Query_upper_bound": 2567,
+        "synthetic_queries": 767,
+        "baseline_counter": 5880,
+        "max_final_counter": 8447,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "Action": 0,
+        "SDK": 0,
+        "all118_complete_claim": false
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_wrapper_pure_actual_tools_v1.json",
+      "keys": [
+        "schema",
+        "exec"
+      ],
+      "scalars": {
+        "schema": "saved59-suffix-wrapper-pure-actual-tools-v1"
+      }
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/saved59_suffix_wrapper_pure_report_v1.json",
+      "keys": [
+        "schema",
+        "status",
+        "errors",
+        "checks",
+        "count",
+        "native",
+        "restore",
+        "Query",
+        "Teach",
+        "SDK",
+        "Action",
+        "enabled_gate_created",
+        "synthetic_in_memory_gate_only",
+        "wrapper_source",
+        "contract"
+      ],
+      "scalars": {
+        "schema": "saved118-guarded-wrapper-pure-v1",
+        "status": "PASS",
+        "count": 52,
+        "native": 0,
+        "restore": 0,
+        "Query": 0,
+        "Teach": 0,
+        "SDK": 0,
+        "Action": 0,
+        "enabled_gate_created": false,
+        "synthetic_in_memory_gate_only": true
+      }
+    }
+  ],
+  "scope": {
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "recovered_code_execution": false,
+    "official_game_SDK_implementation_read": false,
+    "dependency_targets_read": false,
+    "archive_modified": false,
+    "git_calls": 0
+  },
+  "xz_packet_check_types": {
+    "CRC64": 3766
+  },
+  "url_hosts": {
+    "arcprize.org": 2
+  },
+  "member_identity_digest": {
+    "algorithm": "SHA256 of sorted JSON arrays [path,bytes,sha256], ensure_ascii=false,separators=(comma,colon), joined by newline",
+    "sha256": "841716721f9271030759ef7df51aec2f1784ea18765b82f113be917d276bc3e9"
+  },
+  "api_member_counts": {
+    "76fb30b532aa412bab83d5aa1cd6df23": {
+      "intent": {
+        "count": 767,
+        "first": 0,
+        "last": 766,
+        "unique": 767,
+        "contiguous": true
+      },
+      "reply": {
+        "count": 767,
+        "first": 0,
+        "last": 766,
+        "unique": 767,
+        "contiguous": true
+      }
+    },
+    "793242337c714081b4f642f1e0db3663": {
+      "intent": {
+        "count": 993,
+        "first": 0,
+        "last": 992,
+        "unique": 993,
+        "contiguous": true
+      },
+      "reply": {
+        "count": 993,
+        "first": 0,
+        "last": 992,
+        "unique": 993,
+        "contiguous": true
+      }
+    }
+  },
+  "frame_member_counts": {
+    "76fb30b532aa412bab83d5aa1cd6df23": {
+      "input": {
+        "count": 59,
+        "first": 59,
+        "last": 117,
+        "unique": 59,
+        "contiguous": true
+      },
+      "result": {
+        "count": 59,
+        "first": 59,
+        "last": 117,
+        "unique": 59,
+        "contiguous": true
+      }
+    },
+    "793242337c714081b4f642f1e0db3663": {
+      "input": {
+        "count": 60,
+        "first": 0,
+        "last": 59,
+        "unique": 60,
+        "contiguous": true
+      },
+      "result": {
+        "count": 59,
+        "first": 0,
+        "last": 58,
+        "unique": 59,
+        "contiguous": true
+      }
+    }
+  },
+  "api_methods": {
+    "照会する": 3520
+  },
+  "state_data_comparisons": {
+    "prefix_to_restored_exact_equal": true,
+    "suffix_nonidentifier_state_equal": true,
+    "suffix_changed_identifiers": {
+      "照会": [
+        5880,
+        6647
+      ],
+      "学習判定": [
+        5880,
+        6647
+      ]
+    },
+    "prefix_before_present": true,
+    "prefix_nonidentifier_state_equal": true,
+    "prefix_changed_identifiers": {
+      "照会": [
+        4887,
+        5880
+      ],
+      "学習判定": [
+        4887,
+        5880
+      ]
+    }
+  },
+  "resources": {
+    "AS_cap_bytes": 536870912,
+    "report_cap_bytes": 112640,
+    "peak_rss_kib": 92216,
+    "disk_available_bytes": 31534514176,
+    "disk_floor_bytes": 1073741824,
+    "only_written_file": "publication_originals/independent_saved118_admission.json",
+    "previous_learning_report_unchanged": true,
+    "full_extraction_or_archive_copy": false
+  },
+  "independent_pair_semantics": {
+    "exact_intent_reply_common_field_matches": 1760,
+    "raw_native_result_records": 1760,
+    "external_output_records": 1760,
+    "all_pairs_query_only": true,
+    "each_reply_counter_increment_exactly_one": true,
+    "all_pair_nonidentifier_profiles_equal": true,
+    "frame_results_once_each_0_through117": true,
+    "all_frame_input_result_origins_equal": true,
+    "retained_failed_input_frame59_matches_resumed_suffix_origin": true,
+    "unmatched_failed_prefix_input_count": 1,
+    "return_types": {
+      "外部出力": 1760
+    }
+  },
+  "source_static_details": {
+    "python_files": 44,
+    "ast_parse_pass": 43,
+    "historical_syntax_errors": [
+      {
+        "member": "arc-column-live-loop-20261013/source/goalset_connection/diagnostic/harness_disabled_v4.py",
+        "type": "IndentationError",
+        "line": 208,
+        "offset": 4,
+        "message": "unexpected indent"
+      }
+    ],
+    "warnings": [
+      {
+        "member": "arc-column-live-loop-20261013/evidence/independent_saved118_combined_audit_v1.py",
+        "line": 31,
+        "type": "SyntaxWarning",
+        "message": "invalid decimal literal"
+      }
+    ],
+    "long_encoded_source_candidates": [],
+    "long_source_literals": [],
+    "literal_decoder_call_sites": [],
+    "semantic_review": "Own diagnostic harnesses, guards, fixtures, audits, adapters and fixed perception/grammar source. Imports and dynamic exec sites were inspected statically; no import target opened and no source executed."
+  },
+  "historical_crosschecks": {
+    "historical_combined_audit_counts": {
+      "observations": 118,
+      "Query": 1760,
+      "prefix_Query": 993,
+      "suffix_Query": 767,
+      "Teach": 0,
+      "Action": 0,
+      "SDK": 0,
+      "experiences": 183,
+      "counter_before": 4887,
+      "counter_middle": 5880,
+      "counter_after": 6647,
+      "native_by_auditor": 0,
+      "restore_by_auditor": 0
+    },
+    "historical_combined_audit_limitations": [
+      "All118 saved-observation diagnostic coverage, not a fresh clear or evidence of new transfer capability.",
+      "Original79324233 run remains FAILED; this is a separate integration across preserved serial segments.",
+      "Fixed full-bijection goal enumeration and first-supported order remain priors, not learned policy.",
+      "Fresh runtime must independently obtain a new root gate and Query its own exact current observations."
+    ],
+    "failed_prefix_actual_terminal_exit_codes": [
+      130
+    ]
+  },
+  "admission_summary": {
+    "archive_identity_match": true,
+    "all_3918_member_headers_and_all3912_file_bytes_hashes_verified": true,
+    "manifest_self_bytes_verified": true,
+    "whole_outer_xz_crc64_eof_verified": true,
+    "all3766_inner_xz_crc64_eof_verified": true,
+    "nonempty_json_documents_validated": 3856,
+    "preserved_zero_byte_failure_placeholder": 1,
+    "own_python_sources": 44,
+    "python_ast_pass": 43,
+    "preserved_historical_indentation_error_sources": 1,
+    "markdown_context_and_reports": 11,
+    "directories": 6,
+    "links_absolute_paths_path_escapes_duplicate_members": 0,
+    "completed_saved_observations": 118,
+    "historical_query_pairs": 1760,
+    "historical_experiences_unchanged": 183,
+    "historical_final_paired_counter": 6647,
+    "new_native_or_environment_execution": 0,
+    "unresolved_security_or_provenance_candidates": 0,
+    "runtime_adoption_authorized_by_this_report": false
+  },
+  "semantic_admission": [
+    "Every tar header was classified against the supplied original manifest before file-body inspection. All relative paths are own ARC3 source/evidence/authority namespaces; six directory entries are exactly declared. All 3,911 declared payload files plus manifest itself match exact byte counts and SHA256. No links, path escapes, absolute member paths or duplicates exist.",
+    "All nonempty JSON/XZ files are own diagnostic catalogs, frame/query inputs and results, typed HDS state/raw/external output, failure evidence, reviews, contracts or tool receipts. The four typed forms were shape-validated as inert data; dictionary duplicate keys were rejected. No native object deserialization, import or recovered-code execution was used.",
+    "All 1,760 query intent/reply pairs have identical shared fields and exactly one saved raw execution-result record plus one external-output record. Every pair increments only query and learning-judgment counters by one; all other before/after summary fields match.",
+    "993 preserved prefix queries span counter 4,887 through 5,880; 767 suffix queries span 5,880 through 6,647. The prefix failure state exactly equals the suffix restored state. Whole saved state outside identifiers remains unchanged across both segments, including all 11 ledgers, experience 183 and principle 16 counts.",
+    "Completed frame-result ordinals are exactly 0 through 117 once each. 119 frame inputs are retained because the failed prefix includes its uncompleted frame 59 input; that origin exactly matches the resumed suffix frame 59 input. No observation was silently omitted or added to completed coverage.",
+    "44 Python source files are own audits, diagnostic harness versions, guards, fixtures, adapters or fixed perception/grammar source.43 AST parse; harness_disabled_v4.py retains the original IndentationError at line 208. Combined audit v1 retains a line 31 invalid-decimal-literal SyntaxWarning. These are historical artifacts, not adopted runnable fixes.",
+    "One zero-byte failure_latest.standard.json is the declared pre-native failure placeholder, not a successfully serialized state. Original failure status and terminal exit 130 are retained. The later combined audit does not relabel the prefix run as successful.",
+    "Complete text/structured-string scans found no credential markers, email-pattern or sensitive-field PII candidates, signed credential URLs, unknown binary member types, long hex/base64 JSON/source payloads, or literal decoder calls. The only observed URL host is arcprize.org. No opaque SDK/game implementation or SDK stderr body is present under the inspected member provenance.",
+    "Eleven Markdown files preserve own reports/plans and authority context. The original manifest externalFileRefs remain references only. No HDS core body, official implementation, external corpus or dependency target was opened through these references."
+  ],
+  "limitations": [
+    "118 observations are saved-observation diagnostics; 1,760 is historical Query count and 183 is unchanged experience count. None is a count of newly solved levels. Counter 6,647 is a saved historical baseline, not fresh runtime permission.",
+    "No native HDS, SDK, Query, Teach, Action, recovered-code execution, fresh run, fresh043 validation, full-run WIN verification, Git action or upload occurred during this inspection.",
+    "Original 79324233 remains FAILED with historical exit 130; 634eb135 is pre-native failure. Failed inputs, empty placeholders, syntax-defective source and superseded reviews remain unchanged as required evidence.",
+    "The archive is not a self-contained runnable environment. External references, fixed core and the large public corpus were not re-fetched or opened for this inspection. Stored conclusions about generalization or live adoption were not experimentally revalidated.",
+    "No security/provenance candidate remained after inspection, but static marker, schema and source inspection is not a proof against arbitrarily encoded secrets or every possible form of personal information.",
+    "This report admits exact evidence preservation only. It does not approve executing any recovered source, adopting disabled harness versions or changing authority/current-state/HDS core."
+  ]
+}
