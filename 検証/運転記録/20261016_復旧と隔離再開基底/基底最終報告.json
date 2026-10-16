@@ -1,0 +1,64 @@
+{
+  "schema": "arc3-isolated-baseline-final-status-v1",
+  "status": "RESTORED_AND_PURE_BOUNDARIES_CHARACTERIZED_NOT_LIVE_READY",
+  "restored_files": 24,
+  "restored_payload_bytes": 5546099,
+  "state_experiences": 183,
+  "state_principles": 16,
+  "paired_counters": 6647,
+  "tests": {
+    "run": "test_results/parent_verification/pure_save_boundaries.json",
+    "cases": 38,
+    "assertion_failures": 0,
+    "errors": 0,
+    "observed_weakness_cases": 12
+  },
+  "guard_distinction": {
+    "resource_guard_v1.save": "Original full pre- and post-save guards; external cap/symlink changes detected in fixtures.",
+    "column_work_harness_v3.Run.save": "Only pre-save guard; no post-save scan. Exact extracted method, not current adopted binding certification.",
+    "actual_adopted_connection": "Not executed or certified; freeze actual save/guard binding before choosing patch target."
+  },
+  "highest_priority_minimum_next_change": {
+    "scope": "A new connection-side boundary only, after identifying actual adopted save/guard binding. No core or archived-source changes.",
+    "capture": [
+      "Clock.enter failure before try",
+      "standard mkdir failure before try",
+      "compute reentry failure after durable save"
+    ],
+    "required_evidence": [
+      "original primary exception",
+      "original pending descriptor and partial bytes",
+      "completed FileRef when save already committed",
+      "timer stopped and no automatic follow-on native operation"
+    ],
+    "acceptance": "Same inert-packet previous/current success bytes/hash, order and full scans; three fault points produce durable diagnostic evidence without losing prior failure; add postguard only if actual adopted path lacks it."
+  },
+  "missing_exact_dependency": {
+    "name": "goalset_preparation_preservation_analysis_v1.json",
+    "bytes": 358669,
+    "sha256": "a86fb6da4582d5e8db24032cef2fa8f1a661fe55ca48ca2e8643a9ef5faffd85",
+    "scope": "Absent from14 recovered archive headers; exact old diagnostic blocked."
+  },
+  "additional_blockers": [
+    "Original absolute paths absent; no patched import path or launcher.",
+    "11 dependency references have archive-header presence only and are intentionally not materialized or certified in this baseline.",
+    "Later fresh source/evidence043 unrecovered.",
+    "Actual native restore, codec, SDK/public connection and live regression untested."
+  ],
+  "run_history_limit": "Initial successful test JSON/log were overwritten before no-clobber output was added. See test_results/initial_run_provenance_limit.json. Enhanced subsequent runs and parent verification are preserved.",
+  "no_execution": {
+    "native_HDS": 0,
+    "native_restore": 0,
+    "Query": 0,
+    "Teach": 0,
+    "SDK": 0,
+    "Action": 0,
+    "Git": 0
+  },
+  "limits": {
+    "directory_bytes_cap": 33554432,
+    "process_AS_bytes": 536870912,
+    "disk_floor_bytes": 1073741824
+  },
+  "capability_improvement_claim": false
+}

@@ -1,0 +1,135 @@
+{
+  "schema": "arc3-recovered-archive-preservation-index-v1",
+  "recovery_date": "2026-10-16",
+  "archives": [
+    {
+      "name": "saved118_diagnostic_v2_delivery.tar.xz",
+      "bytes": 11008128,
+      "sha256": "4b9d0cfb1bfcb7455ad0f75ee2eb3adb7c7745828cdf3dac6267856d37ffe74b",
+      "prior_hash_match": true,
+      "member_count": 3918
+    },
+    {
+      "name": "preparation_preservation_learning_checkpoint.tar.gz",
+      "bytes": 1545234,
+      "sha256": "272110bf92783dc1ea191a6efd65baabd32d22626bec3a86c6653ec14544bfb8",
+      "prior_hash_match": true,
+      "member_count": 413
+    },
+    {
+      "name": "ARC3_goalset4_learning_checkpoint_20261013.tar.gz",
+      "bytes": 1499276,
+      "sha256": "f3270217c9b4735db12a761dfdb4e7d46e70fa23e81532347f2e18334414bc4a",
+      "prior_hash_match": true,
+      "member_count": 298
+    },
+    {
+      "name": "ARC3_goal_ambiguity_failure_20261013_volume_03_of_03.tar.gz",
+      "bytes": 7740800,
+      "sha256": "26351f31808363d915ab1b4be33e30660810b7015acba9a915148226ad990781",
+      "prior_hash_match": null,
+      "member_count": 2255
+    },
+    {
+      "name": "ARC3_goal_ambiguity_failure_20261013_volume_02_of_03.tar.gz",
+      "bytes": 9623182,
+      "sha256": "332e51ad20a6553dac2b2ea0da0aaa805095517cecfc67a9d2c2203b6e7be115",
+      "prior_hash_match": null,
+      "member_count": 2256
+    },
+    {
+      "name": "ARC3_goal_ambiguity_failure_20261013_volume_01_of_03.tar.gz",
+      "bytes": 8011780,
+      "sha256": "98cb899e90e2794c4a5403553283399d99c38f78162b14b08b6779781ee48ee4",
+      "prior_hash_match": null,
+      "member_count": 2252
+    },
+    {
+      "name": "ARC3_compute_failure_checkpoint_20261013.tar.gz",
+      "bytes": 13696451,
+      "sha256": "98bb631629373e59ba642ba65077a1dd3952a038d42331e43a2c483b383d902a",
+      "prior_hash_match": true,
+      "member_count": 4114
+    },
+    {
+      "name": "ARC3_resource_failure_checkpoint_20261013.tar.gz",
+      "bytes": 7314242,
+      "sha256": "6997ea0290620d809eac4c7c5a727786bc4b4f1c9babcdbd2bc6a07b93fda992",
+      "prior_hash_match": true,
+      "member_count": 2807
+    },
+    {
+      "name": "ARC3_first_fresh_level_checkpoint_20261013.tar.gz",
+      "bytes": 3806257,
+      "sha256": "5a063272f5eb967c051fb54e0d896f4d774aa54990b97f93627aec0445290b0d",
+      "prior_hash_match": true,
+      "member_count": 2126
+    },
+    {
+      "name": "ARC3_目標相対操作学習_20261013_v2.tar.gz",
+      "bytes": 5420962,
+      "sha256": "eee277c3d201aa1981b4d7e574d2ccd45ca5adc037ec92591a7976e74159a80b",
+      "prior_hash_match": true,
+      "member_count": 1619
+    },
+    {
+      "name": "official-connection-checkpoint.tar.gz",
+      "bytes": 1305364,
+      "sha256": "8be89e9ba3e64f174a362acd9c231267cee2f8afe4541bd73d5a3f52d823fa9b",
+      "prior_hash_match": null,
+      "member_count": 1193
+    },
+    {
+      "name": "goal6-query-checkpoint.tar.gz",
+      "bytes": 862122,
+      "sha256": "483d69377cd9c82743e86e7c54b41b2bbb65fa615cc0dc89aedf34159a8c1500",
+      "prior_hash_match": true,
+      "member_count": 48
+    },
+    {
+      "name": "goal6-checkpoint.tar.gz",
+      "bytes": 635597,
+      "sha256": "52bd271ff10bf5e12fdfff6205215f94240a85e7e90cda02444b633545118563",
+      "prior_hash_match": true,
+      "member_count": 200
+    },
+    {
+      "name": "arc-recovery-20261013-evidence.tar.gz",
+      "bytes": 3920259,
+      "sha256": "64199f3f35772f39f0849f254ac6f3a1c9e52807ea476dbf542c1ff39c571ed9",
+      "prior_hash_match": null,
+      "member_count": 196
+    }
+  ],
+  "total_archive_bytes": 76389654,
+  "archive_count": 14,
+  "original_archives_in_this_commit": false,
+  "local_status": "All14 recovered from persistent Library records; sizes and tar readability checked.9 archive SHA256 values also match retained pre-restart identities.",
+  "null_prior_hash_match": "Old independent identity receipt has not been recovered; null does not mean a failed hash match.",
+  "baseline_package_in_this_commit": {
+    "name": "arc-restart-baseline-20261016.tar.xz",
+    "bytes": 140636,
+    "sha256": "59f62454f7428d55f903d7cd9c0a4d24ca1c5a9ef663aaa05e2e742142cf35d0",
+    "payload_files": 46
+  },
+  "missing": [
+    "later fresh source and043edc execution/audit evidence",
+    "goalset_preparation_preservation_analysis_v1.json:358669bytes:a86fb6da4582d5e8db24032cef2fa8f1a661fe55ca48ca2e8643a9ef5faffd85",
+    "original second publication plan/inspection receipts and suffix59 attestation source",
+    "unarchived historical candidate/adapter/next-family/pure fixture groups; exact residual reconciliation pending"
+  ],
+  "latest_recovered_closed_state": {
+    "experiences": 183,
+    "principles": 16,
+    "query_counter": 6647,
+    "learning_judgment_counter": 6647,
+    "certified_fresh_levels": 1,
+    "official_levels": 183,
+    "no_full_game_WIN": true
+  },
+  "limitations": [
+    "This archive inventory does not publish the14 archive payloads; they require later separate commits.",
+    "Recovered baseline and pure fixture tests are not native/live activation or capability improvement.",
+    "Missing in reviewed storage is not proof of permanent loss from every possible source."
+  ]
+}
