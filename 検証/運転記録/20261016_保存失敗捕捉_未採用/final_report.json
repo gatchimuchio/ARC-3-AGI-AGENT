@@ -1,0 +1,92 @@
+{
+  "schema": "outside-hds-save-capture-repair-v1",
+  "status": "PURE_FIXTURE_VERIFIED_NOT_ADOPTED",
+  "purpose": "Preserve save-boundary failure evidence outside frozen HDS without live execution or changing normal save semantics.",
+  "observation": "Historical transformed save/standard pretry deadline/mkdir failures bypass local capture; compute reentry can fail after successful durable output and pending clearance. Resource writer already has pre/post guards.",
+  "cause": "try/finally boundaries do not include all entry/exit operations; result becomes unavailable to ordinary caller when finally raises.",
+  "change": "New caller-side SaveCapture delegates exact pinned own save/standard functions. On failure: stop original timer, retain prior/current/attempted pending object references, inspect only matching own method code+receiver, recover completed result/FileRef, bound existing output observation and guarded diagnostic sink by existing failure120 budget, stop finally and rethrow same primary exception. No monkey-patch or launcher.",
+  "previous": {
+    "target_faults": "missing method exception entry and lost returned receipt; standard mkdir can leave save timer active",
+    "normal_save": "exact inherited source AST with full pre-save scan",
+    "baseline_tests": 38,
+    "baseline_weakness_cases": 12
+  },
+  "current": {
+    "target_faults": "durable diagnostic in permitted fixture budget; exact pending/partial/completed evidence retained; timer stopped; same exception rethrown",
+    "normal_save": "same bytes/hash, typed order, full scans, open/fsync/clock call sequence",
+    "tests": 63,
+    "failures": 0,
+    "errors": 0,
+    "new_capture_cases": 25,
+    "latest_run": "evidence/run_06_defaults/results.json",
+    "source_sha256": "16d99ae49ce94bff9622a9b6c03edbd353c287efc439d69c06b3d9410a096435",
+    "test_runner_sha256": "aa808c811409beec3589348038459b9aab5b7ff3924f8039eaaec337570f7581"
+  },
+  "delta": {
+    "normal_output_semantic_change": false,
+    "new_failure_capture": "target3 fault positions, standard/journal variants, no-clobber and secondary failure evidence",
+    "capability_improvement_claim": false,
+    "performance_improvement_claim": false,
+    "live_readiness_claim": false
+  },
+  "regression": {
+    "baseline38_reexecuted": true,
+    "baseline12_weaknesses_retained": true,
+    "full_scan_order_preserved": true,
+    "pending_identity_preserved": true,
+    "partial_output_bytes_retained": true,
+    "completed_FileRef_preserved": true,
+    "own_frame_identity_only": true,
+    "unrelated_frame_rejected": true,
+    "old_evidence_no_overwrite": true,
+    "HOLD": "same exception propagation and inert HOLD packet bytes; existing outer HOLD/latch not executed or replaced"
+  },
+  "review": {
+    "initial_material_findings": [
+      "unbounded output observation/FIFO blocking after timer stop",
+      "capture bookkeeping could replace primary exception"
+    ],
+    "disposition": "corrected and tested; independent reviewer recheck found no further material blocker for NOT_ADOPTED pure-fixture retention"
+  },
+  "failed_tests_retained": [
+    {
+      "path": "evidence/run_01",
+      "tests": 53,
+      "errors": 15,
+      "reason": "new test scaffold named nonexistent fixture method; no new adapter test reached execution",
+      "exact_runner_and_adapter_retained": true
+    }
+  ],
+  "limits": {
+    "work_directory_bytes_cap": 16777216,
+    "AS_bytes": 536870912,
+    "disk_floor_bytes": 1073741824,
+    "existing_failure_seconds": 120,
+    "new_observation_read_bound_bytes": 33554432,
+    "original_quota_semantics_changed": false,
+    "no_cache_ledger_or_optimization": true
+  },
+  "no_execution": {
+    "HDS_import": 0,
+    "native_restore": 0,
+    "Query": 0,
+    "Teach": 0,
+    "SDK": 0,
+    "Action": 0,
+    "live_wrapper": 0,
+    "Git": 0
+  },
+  "limitations": [
+    "NOT_ADOPTED: current/fresh043 binding missing; no actual native codec or HDS persistence tested.",
+    "Durable capture is conditional on available existing failure time/space and working I/O; failure under capture exhaustion stays in memory and original exception propagates.",
+    "Capture allocation/bookkeeping exhaustion can prevent new record creation; primary propagation and stop are best effort, not a guarantee under kernel/process failure.",
+    "Diagnostic output written during failure timer; final stop is observed only after unwind in test evidence, not claimed by the diagnostic before it finishes writing.",
+    "Timer stop itself can fail; this is retained without a false stopped claim.",
+    "Signals/time and high accounting limits use deterministic test doubles; no real asynchronous-signal or power-loss guarantee.",
+    "Existing output is read O_NOFOLLOW/O_NONBLOCK as a regular bounded file; ancestor namespace race confinement not proven.",
+    "The prototype takes a caller-supplied failure sink; only the tested sink binding enforces original incremental failure4MiB plus resource pre/post guards/exclusive write. No arbitrary sink certification.",
+    "Sink failure can leave unreceipted diagnostic bytes; bytes are not removed, no receipt is claimed, and test evidence preserves their full bytes/hash.",
+    "No persistent native HOLD latch is supplied; existing outer HOLD must remain authoritative for adoption. No auto-retry or follow-on native operation is made.",
+    "Other historical weaknesses, including lack of inherited postguard, are not changed or declared fixed."
+  ]
+}

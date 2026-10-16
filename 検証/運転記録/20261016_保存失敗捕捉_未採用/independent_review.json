@@ -1,0 +1,32 @@
+{
+  "status": "NO_MATERIAL_BLOCKER_FOR_NOT_ADOPTED_PURE_FIXTURE_EVIDENCE",
+  "review_mode": "independent read-only static review; no test execution or live approval",
+  "initial_findings": [
+    "FIFO/unbounded observation could hang after timer stop",
+    "capture bookkeeping could mask primary exception"
+  ],
+  "corrected": [
+    "O_NONBLOCK|O_NOFOLLOW regular output and32MiB bound",
+    "timer stopped before capture allocation; all subsequent capture work exception-protected",
+    "existing failure120 budget consumed, not reset; unconditional final stop",
+    "sink quota and partial-output limitations explicit"
+  ],
+  "final_addendum": {
+    "run": "evidence/run_06_defaults",
+    "tests": 63,
+    "failures": 0,
+    "errors": 0,
+    "adapter_sha256": "16d99ae49ce94bff9622a9b6c03edbd353c287efc439d69c06b3d9410a096435",
+    "runner_sha256": "aa808c811409beec3589348038459b9aab5b7ff3924f8039eaaec337570f7581",
+    "delta_since_run05": "Only category sentinel/default forwarding and one baseline-default test"
+  },
+  "limitations": [
+    "Current/fresh043 adoption unknown",
+    "Real signal/powerloss behavior untested",
+    "Initial capture bookkeeping precedes failure-budget entry",
+    "Own-source binding, authorized sink and outer HOLD/latch remain caller responsibilities",
+    "Allocation failure can prevent retained diagnostic; primary exception takes precedence",
+    "Original method finally may already mask an earlier error; method_primary holds earlier error when available",
+    "Ancestor-directory race confinement not proven"
+  ]
+}

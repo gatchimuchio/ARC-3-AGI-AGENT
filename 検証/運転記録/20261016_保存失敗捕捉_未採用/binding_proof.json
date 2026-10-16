@@ -1,0 +1,71 @@
+{
+  "schema": "recovered-historical-save-binding-v1",
+  "adopted": false,
+  "runtime_binding": "NOT_CERTIFIED",
+  "prototype_target": "saved59 suffix historical AST-assembled BaseRun.save/standard; exact source fixtures only",
+  "chain": [
+    "suffix_guarded_wrapper_v1.GuardedRun(h.Run)",
+    "suffix_harness_disabled_v1.Run(BaseRun)",
+    "AST-copy of column_work_harness_v3.Run.save/standard",
+    "bare guard resolves to suffix_harness_disabled_v1.guard in compiled globals",
+    "scope.guard resolves to pinned resource_guard_v1.guard"
+  ],
+  "proof": [
+    {
+      "file": "inputs/diagnostic/suffix_guarded_wrapper_v1.py",
+      "lines": [
+        63,
+        73,
+        82,
+        92
+      ],
+      "fact": "loads suffix harness, subclass overrides no save/standard; inherited save call"
+    },
+    {
+      "file": "inputs/diagnostic/suffix_harness_disabled_v1.py",
+      "lines": [
+        27,
+        52,
+        60,
+        66,
+        126,
+        143
+      ],
+      "fact": "exact base AST methods assembled; state_trace -> evidence; aggregate800MiB and packet check inserted; guard invokes original full scope guard plus original incremental caps"
+    },
+    {
+      "file": "inputs/baseline/source/column_work_harness_v3.py",
+      "lines": [
+        134,
+        181
+      ],
+      "fact": "save and standard full source inspected before development; pretry entry/mkdir and postcommit compute reentry gaps"
+    },
+    {
+      "file": "inputs/baseline/source/resource_guard_v1.py",
+      "lines": [
+        8,
+        39
+      ],
+      "fact": "full guard; separate resource save has both pre and post full guards"
+    }
+  ],
+  "historical_save_full_guard_count": 1,
+  "resource_writer_pre_post_full_guards": true,
+  "resource_writer_is_historical_diagnostic_save_binding": false,
+  "source_changes": {
+    "core": 0,
+    "originals": 0,
+    "existing_archives": 0,
+    "authority": 0,
+    "Git": 0
+  },
+  "current_adoption_blocker": "later fresh043 source/evidence unrecovered; historical static chain does not establish current adopted connection; no live release provided",
+  "postguard_change": "none; no blind wrapper duplication; historical missing postguard remains separately characterized, not silently fixed",
+  "state_context": {
+    "experiences": 183,
+    "principles": 16,
+    "paired_counter": 6647,
+    "solved_level_count": "NOT_INFERRED"
+  }
+}
