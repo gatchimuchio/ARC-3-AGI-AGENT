@@ -1,0 +1,84 @@
+{
+  "schema": "arc3-resource-compute-failure-original-index-v1",
+  "checkpoints": [
+    {
+      "kind": "resource",
+      "archive": {
+        "path": "ARC3_resource_failure_checkpoint_20261013.tar.gz",
+        "bytes": 7314242,
+        "sha256": "6997ea0290620d809eac4c7c5a727786bc4b4f1c9babcdbd2bc6a07b93fda992",
+        "git_blob": "1a0bbd386f223f5bf57c0290cc5e017a64de8f15"
+      },
+      "original_manifest": {
+        "path": "source_manifest.json",
+        "bytes": 760849,
+        "sha256": "4be33bf8747fd8fd2c026b92aa66f7a65ef3e7a148bccd0e1c4a98887108d9c9",
+        "git_blob": "534be40fa5610d94d3ea5f586775b60bc760882d"
+      },
+      "manifest_gzip": {
+        "path": "resource原manifest.json.gz",
+        "bytes": 126432,
+        "sha256": "8d36321b353d0276dd07da4ad2c2cc9d00199668be79980ae2cf00389b1c20ae",
+        "git_blob": "e283d40d2127a08b187b86414766d0b9a7ffcb44"
+      },
+      "inspection": {
+        "path": "resource独立内容検査.json",
+        "bytes": 28387,
+        "sha256": "cdb449b30f16838a32bc785b8dc7da4711d7f929925dde5df0177ddc351d288a",
+        "git_blob": "1997828cd90d81830063da00067af0e7fcb4287c"
+      },
+      "historical_outcome": "FAILED",
+      "runtime_adoption": false
+    },
+    {
+      "kind": "compute",
+      "archive": {
+        "path": "ARC3_compute_failure_checkpoint_20261013.tar.gz",
+        "bytes": 13696451,
+        "sha256": "98bb631629373e59ba642ba65077a1dd3952a038d42331e43a2c483b383d902a",
+        "git_blob": "00e41b37204d32e9130edd98f72501093abad8d8",
+        "storage": "EXACT_REASSEMBLY_OF_ORDERED_BYTE_PARTS",
+        "parts": [
+          {
+            "path": "ARC3_compute_failure_checkpoint_20261013.tar.gz.part01",
+            "offset": 0,
+            "bytes": 8388608,
+            "sha256": "6449fcc63437b9a8d1956a3eaf5ac8e987ca4c481c3c1a6d78b37d2dac968e43",
+            "git_blob": "7ac32dcdd40879dc669a27636a3cea9547aca69d"
+          },
+          {
+            "path": "ARC3_compute_failure_checkpoint_20261013.tar.gz.part02",
+            "offset": 8388608,
+            "bytes": 5307843,
+            "sha256": "ff3f355d9a6849754aeda4b2aa8f4b354ac003b9be09077b23f10099084a265e",
+            "git_blob": "35b6568ccbf0320a1e439f6a21af4d9dadd5644f"
+          }
+        ],
+        "transport_limit": "MCP JSON request limit16MiB; raw archive13696451B cannot fit as single base64 request"
+      },
+      "original_manifest": {
+        "path": "manifest_v1.json",
+        "bytes": 1163870,
+        "sha256": "6b5185dccbeb63a7d4a0e60faedc42b162975ce4e9ebbc18704ebfb7a3df7283",
+        "git_blob": "a134e13cde1724f24fc84ecaec1ee48d0f20d8ff"
+      },
+      "manifest_gzip": {
+        "path": "compute原manifest.json.gz",
+        "bytes": 193693,
+        "sha256": "20d11857aab6fd40fc02ebeccee3835dd2ffd3e44f45445b0b649488609ddb2c",
+        "git_blob": "51c01cd8908582ed8e8c796f2978416a9791fe99"
+      },
+      "inspection": {
+        "path": "compute独立内容検査.json",
+        "bytes": 13324,
+        "sha256": "e36daa1a780302e6eed657a71d96bcff199c895ee3469dd324ff122d86bf5d4e",
+        "git_blob": "50f817fc71470750762a0fad1b3ae2018f5a2cfa"
+      },
+      "historical_outcome": "FAILED",
+      "runtime_adoption": false
+    }
+  ],
+  "certified_fresh_levels_unchanged": 1,
+  "official_levels": 183,
+  "no_new_native_execution": true
+}

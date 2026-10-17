@@ -1,0 +1,476 @@
+{
+  "schema": "independent-original-success-failure-admission-v1",
+  "status": "ADMITTED_FOR_EXACT_HISTORICAL_EVIDENCE_PRESERVATION",
+  "archive": {
+    "name": "ARC3_compute_failure_checkpoint_20261013.tar.gz",
+    "bytes": 13696451,
+    "sha256": "98bb631629373e59ba642ba65077a1dd3952a038d42331e43a2c483b383d902a",
+    "whole_gzip_crc_eof": true,
+    "uncompressed_tar_bytes": 256757760,
+    "final_identity_unchanged": true
+  },
+  "manifest": {
+    "name": "manifest_v1.json",
+    "sha256": "6b5185dccbeb63a7d4a0e60faedc42b162975ce4e9ebbc18704ebfb7a3df7283",
+    "payload_entries": 4113,
+    "all_headers_preclassified": true,
+    "self_bytes_equal": true
+  },
+  "counts": {
+    "members": 4114,
+    "regular_files": 4114,
+    "payload_bytes": 249389856,
+    "extensions": {
+      ".py": 19,
+      ".json": 1133,
+      ".json.xz": 2959,
+      ".lock": 1,
+      ".md": 2
+    },
+    "valid_nonempty_json_documents": 4092,
+    "xz_crc64_eof_packets": 2959,
+    "max_decoded_xz_bytes": 6590314,
+    "empty_files_by_extension": {
+      ".lock": 1
+    },
+    "source_ast_pass": 19,
+    "source_syntax_failures": [],
+    "JSON_and_typed_map_duplicate_keys": 0,
+    "typed_shapes_valid": true
+  },
+  "own_source": [
+    {
+      "member": "arc-column-candidate-query-20261013/source/candidate_preservation_v1.py",
+      "sha256": "a57f0490be3c186a072e9e80f41072581c3ecbfc7ef3aaae49283558281799f3",
+      "bytes": 12814,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ]
+    },
+    {
+      "member": "arc-column-candidate-query-20261013/source/candidate_query_v5.py",
+      "sha256": "7e92d5c73d3b3b002c2e2dcb09b526950d9c2c1caf881838ce38f8cbd48b7aba",
+      "bytes": 18574,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "copy",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "接続",
+        "接続.図式観測"
+      ]
+    },
+    {
+      "member": "arc-column-goal-work-measurement-20261013/source/column_goal_work_v2.py",
+      "sha256": "8427b6cf7498613c548e6ac883ebfe800ffa6c43b25ded7488d45facdb9f34be",
+      "bytes": 10426,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_compute_failure/package_readonly_v1.py",
+      "sha256": "1075b0c0b50ddbd78c273b08c4ede5133eb5a760d17039c784b8d58f5a1b0e89",
+      "bytes": 8789,
+      "ast_parse": true,
+      "imports": [
+        "gzip",
+        "hashlib",
+        "io",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "tarfile",
+        "time"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_failure_13666f59_audit_v1.py",
+      "sha256": "15476c6f08f65878cc51d50d177d185f5a011a1b4abb73b8163f7efdd2e3ab95",
+      "bytes": 12005,
+      "ast_parse": true,
+      "imports": [
+        "base64",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.永続化",
+        "json",
+        "loop_guard_v2",
+        "lzma",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "traceback"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_fresh_factory_v2.py",
+      "sha256": "e74f63362ab7ef82943b2a9486d2b00ef3508a88dac9bf9d3caae3d63ada306b",
+      "bytes": 12998,
+      "ast_parse": true,
+      "imports": [
+        "arc_agi",
+        "arcengine",
+        "ast",
+        "base64",
+        "contextlib",
+        "hashlib",
+        "json",
+        "logging",
+        "loop_guard_v2",
+        "numpy",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_guard_v2.py",
+      "sha256": "2049df373d5428c1a1c30052bc9312cfa14f4b27c1cc2f71db7e0cde8724076a",
+      "bytes": 1947,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "os",
+        "pathlib",
+        "shutil"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_live_v10.py",
+      "sha256": "6b8f63ed1ee60174f1886f4303e5c5377c9e89c120be03f724b35630662a0ccb",
+      "bytes": 35621,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "loop_fresh_factory_v2",
+        "loop_guard_v2",
+        "lzma",
+        "os",
+        "pathlib",
+        "pilot_semantics_v3",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "uuid",
+        "接続"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_outer_v1.py",
+      "sha256": "1be1b886c019f9b1db52cfd232ca2e4dc8d302c492243190cdecfd60d0ccb7d6",
+      "bytes": 1213,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "sys"
+      ]
+    },
+    {
+      "member": "arc-column-live-pilot-20261013/source/pilot_semantics_v3.py",
+      "sha256": "1b3f23bfe847cc452fdd9367700686e325025ad9a74194c168ad5d9ba4f076cb",
+      "bytes": 13855,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "json",
+        "types"
+      ]
+    },
+    {
+      "member": "arc-column-work-learning-20261013/source/column_work_harness_v3.py",
+      "sha256": "f0d73f35a9516eda585b134ae54be9815b36d6164786b9f8a0966c3983640007",
+      "bytes": 26932,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ]
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/ARC3境界.py",
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+      "bytes": 9941,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "typing"
+      ]
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/列図式規則.py",
+      "sha256": "d303b314446d22c604008d590636cccf6e1d140fbd365f22ff018b55d97de399",
+      "bytes": 20302,
+      "ast_parse": true,
+      "imports": [
+        "ARC3境界",
+        "collections",
+        "copy",
+        "hds学習系統",
+        "itertools",
+        "図式観測"
+      ]
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/図式観測.py",
+      "sha256": "417269f9e94ec548c7f727c3e263efe952bbae21cf601021bcfd4d89b1a786d2",
+      "bytes": 1295,
+      "ast_parse": true,
+      "imports": [
+        "collections"
+      ]
+    },
+    {
+      "member": "arc-current-family-source-20261013/検証/test_列図式規則.py",
+      "sha256": "6202f490248cfd5f3734338b2bd119fedfe373c31b5abb6213119b1e07a91769",
+      "bytes": 9912,
+      "ast_parse": true,
+      "imports": [
+        "builtins",
+        "copy",
+        "hds学習系統",
+        "inspect",
+        "json",
+        "os",
+        "pathlib",
+        "sys",
+        "tempfile",
+        "unittest",
+        "unittest.mock",
+        "接続.ARC3境界",
+        "接続.列図式規則",
+        "道具.列図式教師検証"
+      ]
+    },
+    {
+      "member": "arc-current-family-source-20261013/道具/列図式教師検証.py",
+      "sha256": "f8a6bbca6a557973a7f54bdf0af8e85ed0419fcf5b463e10dcc310160245bc28",
+      "bytes": 11873,
+      "ast_parse": true,
+      "imports": [
+        "argparse",
+        "collections",
+        "hashlib",
+        "hds学習系統",
+        "itertools",
+        "json",
+        "pathlib",
+        "sys",
+        "接続.列図式規則",
+        "接続.図式観測"
+      ]
+    },
+    {
+      "member": "arc-live-step-adapter-20261013/adapter.py",
+      "sha256": "f18d9d33191749a5c6e731f58f534936a73b6e9162c1363fc5424c92e80e09d7",
+      "bytes": 14264,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "base64",
+        "contextlib",
+        "fcntl",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "sys",
+        "uuid"
+      ]
+    },
+    {
+      "member": "arc-live-step-adapter-20261013/final_adoption_v4.py",
+      "sha256": "1a6b5987886f8ae2a2fb85695455698d58797ceb9ef7635bdcaf7715d3a9238d",
+      "bytes": 25818,
+      "ast_parse": true,
+      "imports": [
+        "adapter",
+        "copy",
+        "hashlib",
+        "json",
+        "lzma",
+        "pathlib"
+      ]
+    },
+    {
+      "member": "arc-official-fresh-all25-20261013/prep/fresh_all25_v1.py",
+      "sha256": "52904ce9357a933c2f53daf0cd23b5672dfdb30aef50844f89daa8b56a824516",
+      "bytes": 35645,
+      "ast_parse": true,
+      "imports": [
+        "arc_agi",
+        "arcengine",
+        "base64",
+        "builtins",
+        "enum",
+        "hashlib",
+        "io",
+        "json",
+        "logging",
+        "math",
+        "numpy",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time"
+      ]
+    }
+  ],
+  "frozen_core": [],
+  "exceptions": [],
+  "security_candidates": [],
+  "opaque_candidates": [],
+  "unknown_type_candidates": [],
+  "historical_findings": [],
+  "public_payloads": {
+    "verified_base64_public_64x64_palette_frames": 2106
+  },
+  "scope": {
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "recovered_code_execution": false,
+    "official_implementation_or_opaque_stderr_read": false,
+    "dependency_targets_read": false,
+    "git_or_upload_calls": 0
+  },
+  "member_identity_digest": {
+    "algorithm": "SHA256 sorted JSON [path,bytes,sha256] rows, ensure_ascii=false,separators=(comma,colon), newline joined",
+    "sha256": "d0eedc681cc3bef85cb8bedce758e0927a8157d4ace6160c20993e6048eb0ece"
+  },
+  "typed_tags": {
+    "__辞書__": 342714,
+    "__データ型__": 108019,
+    "__列挙__": 38373,
+    "__組__": 878229
+  },
+  "data_type_names": {
+    "原理記録": 14650,
+    "学習過程記録": 9073,
+    "懐疑記録": 38700,
+    "経験記録": 7740,
+    "観測事実": 30960,
+    "外部出力": 1449,
+    "外部入力": 2781,
+    "実行結果": 1333,
+    "予測記録": 1333
+  },
+  "enum_names": {
+    "採用状態": 14650,
+    "原理状態": 14650,
+    "学習成立状態": 9073
+  },
+  "SDK_metadata_provenance": {
+    "members": 59,
+    "schema_keyset_counts": {
+      "cache_durability,cache_files,containment,denials,exceptions,make_attempted,make_returned,nonfatal_network_diagnostics,opaque_streams,ordinary_Action_attempted,ordinary_Action_returned,sdk_events,sdk_io": 59
+    },
+    "opaque_targets_not_opened": true,
+    "producer": "Own FreshFactory.diagnostics(), fresh_all25_v1.py IO observer and own pure fixtures; file references and sanitized errors only.",
+    "loopback_probe_address_fields_classified_non_PII": 60
+  },
+  "url_hosts": {
+    "arcprize.org": 2
+  },
+  "state_aggregate": {
+    "standard_state_count": 60,
+    "distinct_identifier_states": 60,
+    "identifier_keysets": {
+      "原理,原理候補,学習,学習判定,懐疑,更新,照会,経験": 60
+    },
+    "experience_counts": [
+      129
+    ],
+    "principle_counts": [
+      11
+    ],
+    "query_counter_min": 1147,
+    "query_counter_max": 2479,
+    "distinct_nonidentifier_state_hashes": {
+      "33c32878516dc9f3406b4204e5fe7b111bd19197923216232363c07961fe9240": 60
+    }
+  },
+  "limitations": [
+    "Evidence-only static preservation admission; not runtime adoption or authorization to execute source.",
+    "No native HDS, SDK, Query, Teach, Action, fresh run, fresh043 test, replay, Git write or upload was performed.",
+    "Historical first-fresh evidence must not be inflated beyond its established one-level boundary. Resource, compute and goal-ambiguity runs remain failures even if their public scores show intermediate progress. No full-run WIN or new certified level count is established by this inspection.",
+    "Source versions, pure fixtures, failure/HOLD evidence and empty ownership placeholders are preserved unchanged; tests and artifacts are not capability gains.",
+    "SDK-named JSON contains own metadata; official game/SDK bodies and opaque stdout/stderr files are excluded and their references were not followed.",
+    "Static scans found or reported candidates but are not a mathematical proof against arbitrary secret encodings or every possible personal identifier."
+  ],
+  "security_scan_summary": {
+    "unresolved_security_candidates": 0,
+    "unresolved_opaque_candidates": 0,
+    "unknown_member_types": 0
+  },
+  "resources": {
+    "AS_cap_bytes": 536870912,
+    "peak_rss_kib": 84884,
+    "batch_report_cap_bytes": 256000,
+    "disk_available_bytes": 31534080000,
+    "no_extraction_or_copied_archives": true
+  }
+}
