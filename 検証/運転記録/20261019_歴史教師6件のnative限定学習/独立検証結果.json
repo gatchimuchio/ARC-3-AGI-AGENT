@@ -1,0 +1,234 @@
+{
+  "verdict": "BOUNDED_NATIVE_EVIDENCE_PASS",
+  "native_auditor_calls": 0,
+  "all_pins_verified": true,
+  "all_original_previous_prefixes_verified": true,
+  "query_only_semantic_states_unchanged": true,
+  "failed_runs_unchanged": true,
+  "framed_records": 141,
+  "call_records": 132,
+  "snapshot_records": 9,
+  "evidence_used_bytes": 1586947,
+  "max_input_bytes": 505,
+  "max_reply_bytes": 35083,
+  "snapshots": [
+    {
+      "name": "normal_state",
+      "bytes": 5355957,
+      "sha256": "f7e5f8c7518b43c7e53f6a1c43f108469c04f72e5d13eb30aa2fae987e2d6e6a",
+      "observations": 183,
+      "principle_records": 16,
+      "counters": {
+        "経験": 183,
+        "懐疑": 915,
+        "学習": 183,
+        "原理候補": 229,
+        "原理": 16,
+        "更新": 16,
+        "照会": 6660,
+        "学習判定": 6660
+      }
+    },
+    {
+      "name": "before_state",
+      "bytes": 5355957,
+      "sha256": "8dd4d6e8f01c4fc819a9977b8ba7d635a48310a6d9c2103efc771e727d2c1981",
+      "observations": 183,
+      "principle_records": 16,
+      "counters": {
+        "経験": 183,
+        "懐疑": 915,
+        "学習": 183,
+        "原理候補": 229,
+        "原理": 16,
+        "更新": 16,
+        "照会": 6679,
+        "学習判定": 6679
+      }
+    },
+    {
+      "name": "teach_01_state",
+      "bytes": 5377169,
+      "sha256": "575bc143eb7afccd8c0984ff50265ef7268327a304e191ce7a57813c576c8cfa",
+      "observations": 184,
+      "principle_records": 16,
+      "counters": {
+        "経験": 184,
+        "懐疑": 920,
+        "学習": 184,
+        "原理候補": 229,
+        "原理": 16,
+        "更新": 16,
+        "照会": 6679,
+        "学習判定": 6679
+      }
+    },
+    {
+      "name": "teach_02_state",
+      "bytes": 5398627,
+      "sha256": "cd08e5f45e55fcd6b520324af7d3557710a1ff69edec20751c0ff574d83c0e66",
+      "observations": 185,
+      "principle_records": 16,
+      "counters": {
+        "経験": 185,
+        "懐疑": 925,
+        "学習": 185,
+        "原理候補": 229,
+        "原理": 16,
+        "更新": 16,
+        "照会": 6679,
+        "学習判定": 6679
+      }
+    },
+    {
+      "name": "teach_03_state",
+      "bytes": 5441183,
+      "sha256": "9514a9809c6ce003bba409eb06ada6753b0848dd173ecb42e3df12ec3705e5b5",
+      "observations": 186,
+      "principle_records": 17,
+      "counters": {
+        "経験": 186,
+        "懐疑": 930,
+        "学習": 186,
+        "原理候補": 230,
+        "原理": 17,
+        "更新": 17,
+        "照会": 6679,
+        "学習判定": 6679
+      }
+    },
+    {
+      "name": "teach_04_state",
+      "bytes": 5485533,
+      "sha256": "3943ac266a3d01df44e87f23b0261ec82b422316e432d7e57cf6440e7da316d6",
+      "observations": 187,
+      "principle_records": 18,
+      "counters": {
+        "経験": 187,
+        "懐疑": 935,
+        "学習": 187,
+        "原理候補": 231,
+        "原理": 18,
+        "更新": 18,
+        "照会": 6679,
+        "学習判定": 6679
+      }
+    },
+    {
+      "name": "teach_05_state",
+      "bytes": 5531611,
+      "sha256": "4df86c6d38ac61d9a3597629ce78cb2181cd3752efa4e944c5c2628b376d55af",
+      "observations": 188,
+      "principle_records": 19,
+      "counters": {
+        "経験": 188,
+        "懐疑": 940,
+        "学習": 188,
+        "原理候補": 232,
+        "原理": 19,
+        "更新": 19,
+        "照会": 6679,
+        "学習判定": 6679
+      }
+    },
+    {
+      "name": "teach_06_state",
+      "bytes": 5558643,
+      "sha256": "cbde6017d77af721803ab8ae38acc04f7af178924d59d04027738491a27879d6",
+      "observations": 189,
+      "principle_records": 19,
+      "counters": {
+        "経験": 189,
+        "懐疑": 945,
+        "学習": 189,
+        "原理候補": 233,
+        "原理": 19,
+        "更新": 19,
+        "照会": 6679,
+        "学習判定": 6679
+      }
+    },
+    {
+      "name": "post_state",
+      "bytes": 5558643,
+      "sha256": "3a0e57e44cf2385f70be34bd5908bb9b78de0c7251b3a688d2d27b5e1d21ad84",
+      "observations": 189,
+      "principle_records": 19,
+      "counters": {
+        "経験": 189,
+        "懐疑": 945,
+        "学習": 189,
+        "原理候補": 233,
+        "原理": 19,
+        "更新": 19,
+        "照会": 6698,
+        "学習判定": 6698
+      }
+    }
+  ],
+  "goal_after_labels": [
+    false,
+    false,
+    false,
+    false,
+    true,
+    true
+  ],
+  "goal_distinct_conditions": 4,
+  "teacher_statuses": [
+    "接続途上",
+    "接続途上",
+    "成立確認",
+    "成立確認",
+    "成立確認",
+    "接続途上"
+  ],
+  "new_principle_lineages": 1,
+  "new_principle_versions": 3,
+  "final_principle_supports": [
+    "経験-000184",
+    "経験-000185",
+    "経験-000186",
+    "経験-000187",
+    "経験-000188"
+  ],
+  "sixth_candidate_supports": [
+    "経験-000184",
+    "経験-000185",
+    "経験-000186",
+    "経験-000187",
+    "経験-000188",
+    "経験-000189"
+  ],
+  "all13_smoke_relevant_equal": true,
+  "ledger_appends": {
+    "観測台帳": 6,
+    "認知世界台帳": 6,
+    "懐疑台帳": 30,
+    "学習過程台帳": 6,
+    "全体帰還台帳": 6,
+    "推論記録台帳": 4,
+    "証拠台帳": 4,
+    "判断台帳": 4,
+    "原理台帳": 3,
+    "暫定性台帳": 3,
+    "更新台帳": 3
+  },
+  "resource_directory_bytes": {
+    "arc-native-teach-20261019": 96700422,
+    "arc-native-teach-retry-20261019": 96629570,
+    "arc-native-bootstrap-diagnostic-20261019": 2187811,
+    "arc-native-teach-final-20261019": 70488049
+  },
+  "aggregate_bytes": 266005852,
+  "peak_audit_rss_KiB": 84592,
+  "limitations": [
+    "same four training conditions, not held-out generalization",
+    "historical teachers new only to current descendant; zero new independent observations",
+    "fixed geometry/mask/roles and endpoint score labels remain supplied prior/projection",
+    "before reply was output with empty predictions, not native HOLD",
+    "sixth teacher retained/evaluated but no new principle version or support refresh",
+    "13-case smoke is not full prior-success regression",
+    "no SDK/Action/fullgame/crossgame capability evidence"
+  ]
+}
