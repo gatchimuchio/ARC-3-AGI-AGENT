@@ -1,0 +1,133 @@
+{
+  "schema": "arc3-copy70-independent-content-admission-v1",
+  "verdict": "PASS_LOCAL_CONTENT_ADMISSION_ONLY",
+  "admitted_for_lossless_local_archive": true,
+  "publication_authorized": false,
+  "Git_or_Library_writes_authorized": false,
+  "public_write_blocker": "Owner clarification about historical HDS-document disclosure remains unresolved; this content admission does not clear that separate authority gate.",
+  "payload_manifest": {
+    "path": "payload_manifest.json",
+    "bytes": 110676,
+    "sha256": "2ea33604236055cd393f99a3fc42324e4a8d38ed874b7239ed5ddb482c87eff5",
+    "files": 358,
+    "raw_bytes": 95287868
+  },
+  "publisher_README": {
+    "bytes": 7135,
+    "sha256": "78da2d87396dda0625629663939d9a56dd95d785a23b811d7e214ee8aa8b09ef",
+    "content_boundaries_reviewed": true,
+    "baseline_main_remote_identity": "Depends on publisher separate read-only baseline verification; not independently dereferenced in this inspection."
+  },
+  "scope": {
+    "four_closed_roots": [
+      "arc-native-copy-20261019",
+      "arc-copy-pilot-plan-20261019",
+      "arc-copy-bound-review-20261019",
+      "arc-copy-launch-review-20261019"
+    ],
+    "measurement_allowlist_sha256": "2c42b60207e068d7cc9b51061c2dd31daa88d18f19c0db686a7d2b8c87980dd9",
+    "measurement_files": 68,
+    "allowlist_capture_files": 6,
+    "measurement_parent_recursion": false,
+    "external_FileRef_dereferences": 0
+  },
+  "content_review": {
+    "complete_file_contents_inspected": true,
+    "method": "Full UTF-8 own-source/Markdown/log reads, Python AST and string-constant inspection, complete JSON-node/key/scalar traversal, strict typed-state decoding, length-prefixed own-evidence validation, payload hashes and zero-tail verification, then independent semantic crosschecks. Hashes alone were not used as content admission.",
+    "secrets_or_sensitive_personal_data_detected": false,
+    "original_HDS_theory_manuscripts_detected": false,
+    "classification": "Included material is own implementation and test sources, task-derived serialization/resource reasoning and measurement contracts, typed native runtime records, bounded measurement witnesses/provenance, own logs and checkpoint explanations. Resource envelopes and learned relation records are operational derivatives, not original theory manuscripts.",
+    "reviewed_false_positive": "The sole original-manuscript pattern match is the retained sentence saying earlier HDS/native proofs and core were unchanged; no manuscript body is present.",
+    "native_state_max_string_characters": 112,
+    "added_measurement_max_JSON_scalar_characters": 153,
+    "all_358_payload_pins_rechecked": true,
+    "all_284_prior_file_records_unchanged": true,
+    "all74_additions_exactly_allowlisted": true
+  },
+  "native_semantics": {
+    "actual_call_sequence": "32 Query / 6 Teach / 32 Query",
+    "entered_returned_persisted": [
+      70,
+      70,
+      70
+    ],
+    "evidence_frames": 219,
+    "full_states": 9,
+    "experiences": [
+      204,
+      210
+    ],
+    "principle_records": [
+      27,
+      29
+    ],
+    "paired_query_counters": [
+      6758,
+      6822
+    ],
+    "new_principles": "two directed Boolean identity lineages, version1 each",
+    "stored_supports": [
+      205,
+      206,
+      207
+    ],
+    "all_six_teachers_retained": true,
+    "third_teacher_adaptation_only": true,
+    "before_diagnostics": "出力 / 適用外, with no predictions; not HOLD",
+    "after_diagnostics": "one strict Boolean matching prediction for each of true and false",
+    "all30_old_relevant_projections_equal": true,
+    "all30_old_raw_replies_differ": true,
+    "all_old_state_prefixes_retained": true,
+    "query_only_intervals": "only exact paired +32 counter changes",
+    "full_native_delta_rederived_equal": true
+  },
+  "measurement_semantics": {
+    "mixed_ancestor_cohorts": 85,
+    "qualified_cohorts": 6,
+    "full_original_members_equal": true,
+    "exact_teachers_equal_native_plan": true,
+    "candidate_members": 584,
+    "negative_candidates": 483,
+    "actual_palette_click_pairs": 101,
+    "recordings": 3,
+    "changed_tool_clicks": 98,
+    "already_equal_clicks": 3,
+    "native_action_calls_by_inspector": 0
+  },
+  "failure_preservation": {
+    "pre_fix01_bound01_bound02": "all retained; only COPY generator observation-envelope count defect corrected from2 to4",
+    "execution01": "preallocation/preimport path-root interpretation failure retained",
+    "execution02": "corrected admitted wrapper retained",
+    "finalize01": "report-only repeated-read interruption, exit130 retained",
+    "finalize02": "report recovery without native retry retained",
+    "review_failures": "original test-adaptation failure and missing-freeze precheck retained alongside corrected PASS",
+    "generic_measurement_namespace": "original HOLD and superseded qualified proposal retained"
+  },
+  "limitations": [
+    "No fresh environment observation, Action, goal-reference learning, causal uniqueness, broad generalization, game clear, or full prior-success regression is established.",
+    "Both Boolean values were already seen. The inverse relation exists in state but was not separately queried.",
+    "Mixed TURN/MASK ancestor rows remain immutable COPY provenance; no current TURN/MASK adoption is implied.",
+    "External raw recordings, prior native/core archives, original HDS source and SDK/game bodies or SDK stderr were not opened; external historical claims remain dependent on their retained reviewer reports and pins.",
+    "Strict file/type/semantic inspection is not a hostile-code sandbox or a physical-disk/ENOSPC durability guarantee.",
+    "Archived executable own-source files are evidence, not permission to run or import them."
+  ],
+  "resources": {
+    "inspector_AS_limit_bytes": 268435456,
+    "combined_publisher_inspector_AS_limit_bytes": 536870912,
+    "inspector_max_observed_RSS_KiB": 85516,
+    "all_inspector_outputs_cap_bytes": 307200
+  },
+  "inspector_mutations": {
+    "native_calls": 0,
+    "SDK_calls": 0,
+    "Action_calls": 0,
+    "Query_calls": 0,
+    "Teach_calls": 0,
+    "restores": 0,
+    "payload_source_imports": 0,
+    "Git_calls": 0,
+    "Library_calls": 0,
+    "network_calls": 0,
+    "payload_file_writes": 0
+  }
+}
