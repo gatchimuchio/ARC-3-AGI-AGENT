@@ -1,0 +1,233 @@
+{
+  "schema": "independent-original-success-failure-admission-v1",
+  "status": "ADMITTED_FOR_EXACT_HISTORICAL_EVIDENCE_PRESERVATION",
+  "archive": {
+    "name": "ARC3_goal_ambiguity_failure_20261013_volume_02_of_03.tar.gz",
+    "bytes": 9623182,
+    "sha256": "332e51ad20a6553dac2b2ea0da0aaa805095517cecfc67a9d2c2203b6e7be115",
+    "whole_gzip_crc_eof": true,
+    "uncompressed_tar_bytes": 136714240,
+    "final_identity_unchanged": true
+  },
+  "manifest": {
+    "name": "volume_02_manifest.json",
+    "sha256": "bcf6d3864c352695aa433ae30be12eda7294801024825ec2b202e362e7c4192e",
+    "payload_entries": 2255,
+    "all_headers_preclassified": true,
+    "self_bytes_equal": true
+  },
+  "counts": {
+    "members": 2256,
+    "regular_files": 2256,
+    "payload_bytes": 132675057,
+    "extensions": {
+      ".py": 5,
+      ".json": 611,
+      ".json.xz": 1637,
+      ".lock": 1,
+      ".md": 2
+    },
+    "valid_nonempty_json_documents": 2248,
+    "xz_crc64_eof_packets": 1637,
+    "max_decoded_xz_bytes": 10999059,
+    "empty_files_by_extension": {
+      ".lock": 1
+    },
+    "source_ast_pass": 5,
+    "source_syntax_failures": [],
+    "JSON_and_typed_map_duplicate_keys": 0,
+    "typed_shapes_valid": true
+  },
+  "own_source": [
+    {
+      "member": "arc-column-candidate-query-20261013/source/candidate_preservation_v1.py",
+      "sha256": "a57f0490be3c186a072e9e80f41072581c3ecbfc7ef3aaae49283558281799f3",
+      "bytes": 12814,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/independent_failure_087b258c_cause_audit_v1.py",
+      "sha256": "c8eb9aff07bfc1da7c555d6dc976e6aa7bc6cebea3059dd1a96970cea4a716fa",
+      "bytes": 9169,
+      "ast_parse": true,
+      "imports": [
+        "adapter",
+        "ast",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統.型",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "loop_guard_v3",
+        "lzma",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "接続"
+      ]
+    },
+    {
+      "member": "arc-column-live-loop-20261013/source/loop_live_v11.py",
+      "sha256": "a59f08472171d0c2b36b767b366d9516795f32df725aac86fa00a8833ffd87dd",
+      "bytes": 36204,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "loop_fresh_factory_v3",
+        "loop_guard_v3",
+        "lzma",
+        "os",
+        "pathlib",
+        "pilot_semantics_v3",
+        "resource",
+        "shutil",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types",
+        "uuid",
+        "接続"
+      ]
+    },
+    {
+      "member": "arc-column-live-pilot-20261013/source/pilot_semantics_v3.py",
+      "sha256": "1b3f23bfe847cc452fdd9367700686e325025ad9a74194c168ad5d9ba4f076cb",
+      "bytes": 13855,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "json",
+        "types"
+      ]
+    },
+    {
+      "member": "arc-current-family-source-20261013/接続/図式観測.py",
+      "sha256": "417269f9e94ec548c7f727c3e263efe952bbae21cf601021bcfd4d89b1a786d2",
+      "bytes": 1295,
+      "ast_parse": true,
+      "imports": [
+        "collections"
+      ]
+    }
+  ],
+  "frozen_core": [],
+  "exceptions": [],
+  "security_candidates": [],
+  "opaque_candidates": [],
+  "unknown_type_candidates": [],
+  "historical_findings": [],
+  "public_payloads": {
+    "verified_base64_public_64x64_palette_frames": 1028
+  },
+  "scope": {
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "recovered_code_execution": false,
+    "official_implementation_or_opaque_stderr_read": false,
+    "dependency_targets_read": false,
+    "git_or_upload_calls": 0
+  },
+  "member_identity_digest": {
+    "algorithm": "SHA256 sorted JSON [path,bytes,sha256] rows, ensure_ascii=false,separators=(comma,colon), newline joined",
+    "sha256": "7e6d391becc14169f811d6b4bf0184e28365cd365e56510fa37b3a7dc88dc5e3"
+  },
+  "typed_tags": {
+    "__辞書__": 215407,
+    "__データ型__": 56729,
+    "__列挙__": 20987,
+    "__組__": 470861
+  },
+  "data_type_names": {
+    "原理記録": 8122,
+    "学習過程記録": 4743,
+    "懐疑記録": 19995,
+    "経験記録": 3999,
+    "観測事実": 15996,
+    "外部出力": 820,
+    "実行結果": 744,
+    "予測記録": 744,
+    "外部入力": 1566
+  },
+  "enum_names": {
+    "採用状態": 8122,
+    "原理状態": 8122,
+    "学習成立状態": 4743
+  },
+  "SDK_metadata_provenance": {
+    "members": 33,
+    "schema_keyset_counts": {
+      "cache_durability,cache_files,containment,denials,exceptions,make_attempted,make_returned,nonfatal_network_diagnostics,opaque_streams,ordinary_Action_attempted,ordinary_Action_returned,sdk_events,sdk_io": 33
+    },
+    "opaque_targets_not_opened": true,
+    "producer": "Own FreshFactory.diagnostics(), fresh_all25_v1.py IO observer and own pure fixtures; file references and sanitized errors only.",
+    "loopback_probe_address_fields_classified_non_PII": 33
+  },
+  "url_hosts": {
+    "arcprize.org": 2
+  },
+  "state_aggregate": {
+    "standard_state_count": 31,
+    "distinct_identifier_states": 31,
+    "identifier_keysets": {
+      "原理,原理候補,学習,学習判定,懐疑,更新,照会,経験": 31
+    },
+    "experience_counts": [
+      129
+    ],
+    "principle_counts": [
+      11
+    ],
+    "query_counter_min": 2492,
+    "query_counter_max": 4713,
+    "distinct_nonidentifier_state_hashes": {
+      "33c32878516dc9f3406b4204e5fe7b111bd19197923216232363c07961fe9240": 31
+    }
+  },
+  "limitations": [
+    "Evidence-only static preservation admission; not runtime adoption or authorization to execute source.",
+    "No native HDS, SDK, Query, Teach, Action, fresh run, fresh043 test, replay, Git write or upload was performed.",
+    "Historical first-fresh evidence must not be inflated beyond its established one-level boundary. Resource, compute and goal-ambiguity runs remain failures even if their public scores show intermediate progress. No full-run WIN or new certified level count is established by this inspection.",
+    "Source versions, pure fixtures, failure/HOLD evidence and empty ownership placeholders are preserved unchanged; tests and artifacts are not capability gains.",
+    "SDK-named JSON contains own metadata; official game/SDK bodies and opaque stdout/stderr files are excluded and their references were not followed.",
+    "Static scans found or reported candidates but are not a mathematical proof against arbitrary secret encodings or every possible personal identifier."
+  ],
+  "volume_boundary": {
+    "volume": 2,
+    "total_volumes": 3,
+    "original_archive": {
+      "path": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/ARC3_goal_ambiguity_failure_checkpoint_20261013.tar.gz",
+      "bytes": 22304243,
+      "sha256": "93dd03fc79465d07ae0604e91c9a52f2eca1546549f8ca9f3d6377297ba76fec"
+    },
+    "not_self_contained_trace": true,
+    "interpretation": "This is an independently decompressible partition of one failed-run archive. Never interpret its partial file set as a complete run or an additional success."
+  },
+  "security_scan_summary": {
+    "unresolved_security_candidates": 0,
+    "unresolved_opaque_candidates": 0,
+    "unknown_member_types": 0
+  },
+  "resources": {
+    "AS_cap_bytes": 536870912,
+    "peak_rss_kib": 118816,
+    "batch_report_cap_bytes": 256000,
+    "disk_available_bytes": 31533936640,
+    "no_extraction_or_copied_archives": true
+  }
+}

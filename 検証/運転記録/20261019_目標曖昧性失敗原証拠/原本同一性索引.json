@@ -1,0 +1,325 @@
+{
+  "スキーマ版": "arc3-goal-ambiguity-original-identity-index-v1",
+  "用途": "失敗運転の原証拠保存のみ。runtime 採用・実行・能力改善の証明ではない。",
+  "基準": {
+    "commit": "48fea6d044d466daad2a000122db7e95d592356e",
+    "tree": "8b2608c9fa63578b8922e8b26157ca83bd3480ff",
+    "既存blob数": 327,
+    "保存済原本数": 9,
+    "対象原本総数": 14,
+    "出典": "親作業で確認された現行 main。今回の準備作業は Git 操作を行っていない。"
+  },
+  "今回の原本数": 3,
+  "保存完了後の原本数": 12,
+  "原本同一性": [
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_01_of_03.tar.gz",
+      "bytes": 8011780,
+      "sha256": "98cb899e90e2794c4a5403553283399d99c38f78162b14b08b6779781ee48ee4",
+      "git_blob": "e42fa8372e853e67f04b5a0e91daeec2d4390564",
+      "whole_gzip_crc_eof": true,
+      "uncompressed_tar_bytes": 136704000,
+      "header_count": 2252,
+      "archive_identity_unchanged": true,
+      "prior_admission": "independent_goal_ambiguity_volume01_admission.json"
+    },
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_02_of_03.tar.gz",
+      "bytes": 9623182,
+      "sha256": "332e51ad20a6553dac2b2ea0da0aaa805095517cecfc67a9d2c2203b6e7be115",
+      "git_blob": "e83285d57464c744c0af830195de0aa1171b61de",
+      "whole_gzip_crc_eof": true,
+      "uncompressed_tar_bytes": 136714240,
+      "header_count": 2256,
+      "archive_identity_unchanged": true,
+      "prior_admission": "independent_goal_ambiguity_volume02_admission.json"
+    },
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_03_of_03.tar.gz",
+      "bytes": 7740800,
+      "sha256": "26351f31808363d915ab1b4be33e30660810b7015acba9a915148226ad990781",
+      "git_blob": "fae70d5ef9979f58796100a024686e9dac4399fb",
+      "whole_gzip_crc_eof": true,
+      "uncompressed_tar_bytes": 136724480,
+      "header_count": 2255,
+      "archive_identity_unchanged": true,
+      "prior_admission": "independent_goal_ambiguity_volume03_admission.json"
+    }
+  ],
+  "完全目録": [
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_01_of_03.tar.gz",
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/manifest_v1.json",
+      "raw_bytes": 1905844,
+      "raw_sha256": "c6ec4bc3103df35e3f9e57345fe20821e295f5f171b9b2fc1c882ef078b4e844",
+      "bytes": 316462,
+      "sha256": "270766fc1f583f6d6b5e0b54eba4d6ec35aa9c227698e09fc1d36c542ea57222",
+      "git_blob": "e66ac3ac13319eb09d3b654996cc2c773925af1f",
+      "deterministic_gzip": {
+        "mtime": 0,
+        "filename": "",
+        "compresslevel": 9
+      },
+      "gzip_crc_eof": true
+    },
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_01_of_03.tar.gz",
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/delivery_volumes/volume_01_manifest.json",
+      "raw_bytes": 620537,
+      "raw_sha256": "ee42e865f27b466f0bb05651e23fa03a8afdae3ddb42e5fae5cd26d82afcab98",
+      "bytes": 107747,
+      "sha256": "701b91fe7b28b100d5154afe8ed295716bc1f2cfbedf5bdba1035028a1ff8fef",
+      "git_blob": "d8a4a3b4f68f3761c83c84c13675eef127a68a05",
+      "deterministic_gzip": {
+        "mtime": 0,
+        "filename": "",
+        "compresslevel": 9
+      },
+      "gzip_crc_eof": true
+    },
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_02_of_03.tar.gz",
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/delivery_volumes/volume_02_manifest.json",
+      "raw_bytes": 621835,
+      "raw_sha256": "bcf6d3864c352695aa433ae30be12eda7294801024825ec2b202e362e7c4192e",
+      "bytes": 107925,
+      "sha256": "3fe158edb42f90a336ca07e9fb5ef58d11e5032a6ef0abb24e3209b152741b71",
+      "git_blob": "16fd2df329a47a0645281c5d3b58cd6cd4fbbfe7",
+      "deterministic_gzip": {
+        "mtime": 0,
+        "filename": "",
+        "compresslevel": 9
+      },
+      "gzip_crc_eof": true
+    },
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_03_of_03.tar.gz",
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/delivery_volumes/volume_03_manifest.json",
+      "raw_bytes": 621997,
+      "raw_sha256": "f92e24653b8666f2e4b32b6293c740ab09b4e119480276a0cf04e5864e9483f1",
+      "bytes": 107393,
+      "sha256": "63ffc2715179b01861f970ec03e283b3a0be0b5276133017ce37d4700ee4675c",
+      "git_blob": "efc0abe0885571f418d861e707b76e2cb0f740fa",
+      "deterministic_gzip": {
+        "mtime": 0,
+        "filename": "",
+        "compresslevel": 9
+      },
+      "gzip_crc_eof": true
+    }
+  ],
+  "収録証拠": [
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/原本/ARC3_goal_ambiguity_failure_20261013_volume_01_of_03.tar.gz",
+      "bytes": 8011780,
+      "sha256": "98cb899e90e2794c4a5403553283399d99c38f78162b14b08b6779781ee48ee4",
+      "git_blob": "e42fa8372e853e67f04b5a0e91daeec2d4390564",
+      "encoding": "base64",
+      "kind": "exact_original_archive"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/原本/ARC3_goal_ambiguity_failure_20261013_volume_02_of_03.tar.gz",
+      "bytes": 9623182,
+      "sha256": "332e51ad20a6553dac2b2ea0da0aaa805095517cecfc67a9d2c2203b6e7be115",
+      "git_blob": "e83285d57464c744c0af830195de0aa1171b61de",
+      "encoding": "base64",
+      "kind": "exact_original_archive"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/原本/ARC3_goal_ambiguity_failure_20261013_volume_03_of_03.tar.gz",
+      "bytes": 7740800,
+      "sha256": "26351f31808363d915ab1b4be33e30660810b7015acba9a915148226ad990781",
+      "git_blob": "fae70d5ef9979f58796100a024686e9dac4399fb",
+      "encoding": "base64",
+      "kind": "exact_original_archive"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/完全目録/manifest_v1.json.gz",
+      "bytes": 316462,
+      "sha256": "270766fc1f583f6d6b5e0b54eba4d6ec35aa9c227698e09fc1d36c542ea57222",
+      "git_blob": "e66ac3ac13319eb09d3b654996cc2c773925af1f",
+      "encoding": "base64",
+      "kind": "complete_original_manifest_deterministic_gzip"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/完全目録/volume_01_manifest.json.gz",
+      "bytes": 107747,
+      "sha256": "701b91fe7b28b100d5154afe8ed295716bc1f2cfbedf5bdba1035028a1ff8fef",
+      "git_blob": "d8a4a3b4f68f3761c83c84c13675eef127a68a05",
+      "encoding": "base64",
+      "kind": "complete_original_manifest_deterministic_gzip"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/完全目録/volume_02_manifest.json.gz",
+      "bytes": 107925,
+      "sha256": "3fe158edb42f90a336ca07e9fb5ef58d11e5032a6ef0abb24e3209b152741b71",
+      "git_blob": "16fd2df329a47a0645281c5d3b58cd6cd4fbbfe7",
+      "encoding": "base64",
+      "kind": "complete_original_manifest_deterministic_gzip"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/完全目録/volume_03_manifest.json.gz",
+      "bytes": 107393,
+      "sha256": "63ffc2715179b01861f970ec03e283b3a0be0b5276133017ce37d4700ee4675c",
+      "git_blob": "efc0abe0885571f418d861e707b76e2cb0f740fa",
+      "encoding": "base64",
+      "kind": "complete_original_manifest_deterministic_gzip"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/独立監査/independent_goal_ambiguity_volume01_admission.json",
+      "bytes": 10094,
+      "sha256": "5feff3e515274fb1ca656003c0d70d7996a04228f620d8620a1b898704f668cb",
+      "git_blob": "54ced3ab2e98e10d810eb1f408742260e62a88ad",
+      "encoding": "utf-8",
+      "kind": "unchanged_prior_independent_admission"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/独立監査/independent_goal_ambiguity_volume02_admission.json",
+      "bytes": 7699,
+      "sha256": "626e9f9d3f85d67d5af594033264ab3667d1b862beafd46e4041d4f0f09c750a",
+      "git_blob": "31ac248cfa433e82909e24e9997c3e216debba81",
+      "encoding": "utf-8",
+      "kind": "unchanged_prior_independent_admission"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/独立監査/independent_goal_ambiguity_volume03_admission.json",
+      "bytes": 8111,
+      "sha256": "c93f3e738d73c78f2c660b4f26a0b1f7a7ee4aee3a99850702e3928f70e7e76a",
+      "git_blob": "4199a6679046f4155579d935fdaaf9eda8fad92c",
+      "encoding": "utf-8",
+      "kind": "unchanged_prior_independent_admission"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_目標曖昧性失敗原証拠/独立監査/independent_success_failure_batch_closure.json",
+      "bytes": 14022,
+      "sha256": "42b17491aecbe45d6820cabb6f2f619c608a433844adefdf1a3211bcd715e318",
+      "git_blob": "ec6d3fa710705f97882281431a32d85a9217ed4d",
+      "encoding": "utf-8",
+      "kind": "unchanged_prior_independent_batch_closure"
+    }
+  ],
+  "既存独立監査の転用条件": {
+    "原本SHA256再一致": true,
+    "三監査報告のbyte数とSHA256がbatch_closureに一致": true,
+    "全意味監査再実施": false,
+    "今回の検査範囲": "原本 identity、gzip CRC/EOF、完全目録原文 identity、監査報告 identity、規範 identity"
+  },
+  "論理閉包": {
+    "original_manifest_entries": 6755,
+    "original_payload_bytes": 390434744,
+    "original_manifest_bytes": 1905844,
+    "original_manifest_sha256": "c6ec4bc3103df35e3f9e57345fe20821e295f5f171b9b2fc1c882ef078b4e844",
+    "physical_archive_members": 6763,
+    "unique_payload_members_including_original_manifest": 6756,
+    "volume_payload_entries": 6760,
+    "missing": 0,
+    "size_hash_mismatches": 0,
+    "duplicated_shared_members": [
+      {
+        "path": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/checkpoint_ja.md",
+        "copies": 3,
+        "identical_bytes_and_sha256": true
+      },
+      {
+        "path": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/manifest_v1.json",
+        "copies": 3,
+        "identical_bytes_and_sha256": true
+      }
+    ],
+    "extra_members": "Three distinct per-volume manifests; each manifest itself was checked against its extracted original.",
+    "declared_original_archive": {
+      "path": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/ARC3_goal_ambiguity_failure_checkpoint_20261013.tar.gz",
+      "bytes": 22304243,
+      "sha256": "93dd03fc79465d07ae0604e91c9a52f2eca1546549f8ca9f3d6377297ba76fec"
+    },
+    "compressed_original_archive_identity_limitation": "The declared pre-split original tar.gz is metadata, not an independently hashed target of this audit. Closure proves exact logical original payload membership and byte/hash identities across the three supplied volumes; no recompression or original-byte reconstruction is claimed."
+  },
+  "歴史的失敗": {
+    "run_nonce": "087b258ca57e41ff82229797bd8035b4",
+    "source_member": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/checkpoint_ja.md",
+    "status": "CLOSED / failed_closed / actual exit 1.",
+    "primary_cause": "Step 90 produced five goal candidates with different frame assignments/concrete operation effects; the unique complete goal boundary raised ValueError.",
+    "historically_recorded": {
+      "Actions": 90,
+      "Queries": 2234,
+      "Teach": 0,
+      "public_response_phases": 1812,
+      "normal_states": 93,
+      "query_counter_before": 2479,
+      "query_counter_after": 4713,
+      "experiences": 129,
+      "step90_completed_queries": 13,
+      "goal_candidates": 5,
+      "operation_candidates": 9
+    },
+    "boundary": "Step-90 queries/semantics/after-query state are recorded complete, while final adoption/dossier/Action 91 did not occur. The summary generic remaining-candidate wording is not evidence of an unreturned query. Public 6/8 is intermediate progress. Cause-audit 328 phases are distinct from the full run 1812 phases."
+  },
+  "能力境界": {
+    "認定fresh成功": {
+      "previous": 1,
+      "current": 1,
+      "delta": 0,
+      "母数": 183
+    },
+    "今回full_game_WIN確認": 0,
+    "公開表示6_of_8": "途中経過。認定成功には算入しない。",
+    "Action91": false,
+    "新規実行": false
+  },
+  "規範同一性": [
+    {
+      "path": "authority/Owner指示書原文_20261009.md",
+      "bytes": 12787,
+      "sha256": "d884388625d41e761ec845130c8ee3d7930992586973d461306b7d9b8218db9f",
+      "git_blob": "28de1fd35aedc70cc90dff9bbbeec617ebaa2b87",
+      "unchanged": true
+    },
+    {
+      "path": "authority/Owner追加指示原文_20261010T1907.md",
+      "bytes": 778,
+      "sha256": "2cc8cbc8ab2ed802ab970ecce65b1942c92ee5db975f4f8deb6306f52766a576",
+      "git_blob": "8a50da2d4b0eb3fa844c75cc9d4c47bc76f28a42",
+      "unchanged": true
+    },
+    {
+      "path": "authority/Owner追加指示原文_20261011T1904.md",
+      "bytes": 560,
+      "sha256": "d24cfd49b3a45b92356e77af890d193a97f27f33acf81fd6e331ef8955b6634c",
+      "git_blob": "9b7fe032f8215c36d739aaa9298a6006472952db",
+      "unchanged": true
+    },
+    {
+      "path": "main/AGENTS.md",
+      "bytes": 1627,
+      "sha256": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+      "git_blob": "51a807a85106cb80c0ceb482127ab74f287c58eb",
+      "unchanged": true
+    },
+    {
+      "path": "main/運用/権限順序.md",
+      "bytes": 948,
+      "sha256": "fdcef65a4b6ffc2179f76036f52aa2a4c47c69b8298f42678a47c245414bb4a3",
+      "git_blob": "cf7f8b7231c10bdcb57a0599d636e452be67d03a",
+      "unchanged": true
+    },
+    {
+      "path": "main/制御/現在状態.json",
+      "bytes": 358,
+      "sha256": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c",
+      "git_blob": "5e117fbaee33c5609062cdb6015d405950aa21f2",
+      "unchanged": true
+    }
+  ],
+  "限界": [
+    "論理6,755 memberの閉包は、分割前tar.gz圧縮byteの同一性証明ではない。",
+    "完全目録gzip、README、索引は今回の派生metadataであり、回復原本件数に加算しない。",
+    "公式原本は保留。sanitized派生物を14番目の原本に数えない。",
+    "全意味監査・security検査の結果は既存監査から転用し、新規検査結果として扱わない。",
+    "ソース、公式実装、opaque依存先は実行・参照していない。"
+  ],
+  "今回の資源上限": {
+    "AS_bytes": 268435456,
+    "生成metadata_bytes_cap": 1048576,
+    "manifest_recovery_peak_RSS_KiB": 13824
+  }
+}

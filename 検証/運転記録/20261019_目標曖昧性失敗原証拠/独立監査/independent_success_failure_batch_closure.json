@@ -1,0 +1,276 @@
+{
+  "schema": "independent-success-failure-batch-closure-v1",
+  "status": "COMPLETE_EXACT_EVIDENCE_ONLY_ADMISSION",
+  "authority": [
+    {
+      "path": "authority/Owner指示書原文_20261009.md",
+      "bytes": 12787,
+      "sha256": "d884388625d41e761ec845130c8ee3d7930992586973d461306b7d9b8218db9f",
+      "unchanged_since_full_read": true
+    },
+    {
+      "path": "authority/Owner追加指示原文_20261010T1907.md",
+      "bytes": 778,
+      "sha256": "2cc8cbc8ab2ed802ab970ecce65b1942c92ee5db975f4f8deb6306f52766a576",
+      "unchanged_since_full_read": true
+    },
+    {
+      "path": "authority/Owner追加指示原文_20261011T1904.md",
+      "bytes": 560,
+      "sha256": "d24cfd49b3a45b92356e77af890d193a97f27f33acf81fd6e331ef8955b6634c",
+      "unchanged_since_full_read": true
+    },
+    {
+      "path": "main/AGENTS.md",
+      "bytes": 1627,
+      "sha256": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+      "unchanged_since_full_read": true
+    },
+    {
+      "path": "main/運用/権限順序.md",
+      "bytes": 948,
+      "sha256": "fdcef65a4b6ffc2179f76036f52aa2a4c47c69b8298f42678a47c245414bb4a3",
+      "unchanged_since_full_read": true
+    },
+    {
+      "path": "main/制御/現在状態.json",
+      "bytes": 358,
+      "sha256": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c",
+      "unchanged_since_full_read": true
+    }
+  ],
+  "archives": [
+    {
+      "archive": "ARC3_first_fresh_level_checkpoint_20261013.tar.gz",
+      "original_bytes": 3806257,
+      "original_sha256": "5a063272f5eb967c051fb54e0d896f4d774aa54990b97f93627aec0445290b0d",
+      "report": "independent_first_fresh_admission.json",
+      "report_bytes": 42083,
+      "report_sha256": "b2e4c4143ac88d511b4f3c2418f218493dffe921a32cda701d766be59565af4e",
+      "logical_tar_end": 68238336,
+      "decompressed_tar_bytes": 68239360,
+      "tar_terminator_and_padding_bytes": 1024,
+      "tail_all_zero": true,
+      "final_archive_identity_unchanged": true
+    },
+    {
+      "archive": "ARC3_resource_failure_checkpoint_20261013.tar.gz",
+      "original_bytes": 7314242,
+      "original_sha256": "6997ea0290620d809eac4c7c5a727786bc4b4f1c9babcdbd2bc6a07b93fda992",
+      "report": "independent_resource_failure_admission.json",
+      "report_bytes": 28387,
+      "report_sha256": "cdb449b30f16838a32bc785b8dc7da4711d7f929925dde5df0177ddc351d288a",
+      "logical_tar_end": 135385600,
+      "decompressed_tar_bytes": 135393280,
+      "tar_terminator_and_padding_bytes": 7680,
+      "tail_all_zero": true,
+      "final_archive_identity_unchanged": true
+    },
+    {
+      "archive": "ARC3_compute_failure_checkpoint_20261013.tar.gz",
+      "original_bytes": 13696451,
+      "original_sha256": "98bb631629373e59ba642ba65077a1dd3952a038d42331e43a2c483b383d902a",
+      "report": "independent_compute_failure_admission.json",
+      "report_bytes": 13324,
+      "report_sha256": "e36daa1a780302e6eed657a71d96bcff199c895ee3469dd324ff122d86bf5d4e",
+      "logical_tar_end": 256753152,
+      "decompressed_tar_bytes": 256757760,
+      "tar_terminator_and_padding_bytes": 4608,
+      "tail_all_zero": true,
+      "final_archive_identity_unchanged": true
+    },
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_01_of_03.tar.gz",
+      "original_bytes": 8011780,
+      "original_sha256": "98cb899e90e2794c4a5403553283399d99c38f78162b14b08b6779781ee48ee4",
+      "report": "independent_goal_ambiguity_volume01_admission.json",
+      "report_bytes": 10094,
+      "report_sha256": "5feff3e515274fb1ca656003c0d70d7996a04228f620d8620a1b898704f668cb",
+      "logical_tar_end": 136699904,
+      "decompressed_tar_bytes": 136704000,
+      "tar_terminator_and_padding_bytes": 4096,
+      "tail_all_zero": true,
+      "final_archive_identity_unchanged": true
+    },
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_02_of_03.tar.gz",
+      "original_bytes": 9623182,
+      "original_sha256": "332e51ad20a6553dac2b2ea0da0aaa805095517cecfc67a9d2c2203b6e7be115",
+      "report": "independent_goal_ambiguity_volume02_admission.json",
+      "report_bytes": 7699,
+      "report_sha256": "626e9f9d3f85d67d5af594033264ab3667d1b862beafd46e4041d4f0f09c750a",
+      "logical_tar_end": 136709120,
+      "decompressed_tar_bytes": 136714240,
+      "tar_terminator_and_padding_bytes": 5120,
+      "tail_all_zero": true,
+      "final_archive_identity_unchanged": true
+    },
+    {
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_03_of_03.tar.gz",
+      "original_bytes": 7740800,
+      "original_sha256": "26351f31808363d915ab1b4be33e30660810b7015acba9a915148226ad990781",
+      "report": "independent_goal_ambiguity_volume03_admission.json",
+      "report_bytes": 8111,
+      "report_sha256": "c93f3e738d73c78f2c660b4f26a0b1f7a7ee4aee3a99850702e3928f70e7e76a",
+      "logical_tar_end": 136713728,
+      "decompressed_tar_bytes": 136724480,
+      "tar_terminator_and_padding_bytes": 10752,
+      "tail_all_zero": true,
+      "final_archive_identity_unchanged": true
+    }
+  ],
+  "semantic_scope": {
+    "member_occurrences": 15810,
+    "valid_nonempty_JSON_documents": 15587,
+    "XZ_CRC64_EOF_packets": 10717,
+    "own_Python_source_occurrences": 151,
+    "source_AST_passes": 151,
+    "public_64x64_palette_base64_occurrences": 6943,
+    "verified_synthetic_fixture_payloads": 3,
+    "unresolved_secret_PII_opaque_type_candidates": 0,
+    "frozen_HDS_core_files_unchanged_against_baseline": 14,
+    "count_interpretation": "Occurrences include duplicate source, fixtures and saved public frames; these are not unique experiences, new Queries performed, Actions performed or additional solved levels."
+  },
+  "outcome_sources": [
+    {
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_resource_failure/報告書.md",
+      "bytes": 4476,
+      "sha256": "1b9eb29eb5e800c63b29d69043a970e2533f16e6c092da970c8e5757fc4777ea",
+      "archive": "ARC3_resource_failure_checkpoint_20261013.tar.gz"
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_compute_failure/checkpoint_ja.md",
+      "bytes": 2779,
+      "sha256": "d63df9c1035f57b5b0ec381f432ba3d33db814c71997ac94be6bc4eab754d670",
+      "archive": "ARC3_compute_failure_checkpoint_20261013.tar.gz"
+    },
+    {
+      "member": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/checkpoint_ja.md",
+      "bytes": 3715,
+      "sha256": "29503380e3f3db9c55923210761390f1e33d694b246a1c8a0d7134517996519f",
+      "archive": "ARC3_goal_ambiguity_failure_20261013_volume_01_of_03.tar.gz"
+    }
+  ],
+  "goal_ambiguity_volume_closure": {
+    "original_manifest_entries": 6755,
+    "original_payload_bytes": 390434744,
+    "original_manifest_bytes": 1905844,
+    "original_manifest_sha256": "c6ec4bc3103df35e3f9e57345fe20821e295f5f171b9b2fc1c882ef078b4e844",
+    "physical_archive_members": 6763,
+    "unique_payload_members_including_original_manifest": 6756,
+    "volume_payload_entries": 6760,
+    "missing": 0,
+    "size_hash_mismatches": 0,
+    "duplicated_shared_members": [
+      {
+        "path": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/checkpoint_ja.md",
+        "copies": 3,
+        "identical_bytes_and_sha256": true
+      },
+      {
+        "path": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/manifest_v1.json",
+        "copies": 3,
+        "identical_bytes_and_sha256": true
+      }
+    ],
+    "extra_members": "Three distinct per-volume manifests; each manifest itself was checked against its extracted original.",
+    "declared_original_archive": {
+      "path": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/ARC3_goal_ambiguity_failure_checkpoint_20261013.tar.gz",
+      "bytes": 22304243,
+      "sha256": "93dd03fc79465d07ae0604e91c9a52f2eca1546549f8ca9f3d6377297ba76fec"
+    },
+    "compressed_original_archive_identity_limitation": "The declared pre-split original tar.gz is metadata, not an independently hashed target of this audit. Closure proves exact logical original payload membership and byte/hash identities across the three supplied volumes; no recompression or original-byte reconstruction is claimed."
+  },
+  "historical_outcomes": [
+    {
+      "run_nonce": "fbc3a4515a9efd5ed222dcc317e472fa",
+      "source_member": "arc-column-live-loop-20261013/evidence/checkpoint_resource_failure/報告書.md",
+      "status": "Incomplete resource failure; closed with actual exit 130 after the historical authorized Ctrl-C.",
+      "primary_cause": "Cumulative 120-second save deadline during reply saving for Query ordinal 642.",
+      "secondary_cause": "Duplicated all-reply failure packet exceeded the 16 MiB typed raw cap (MemoryError).",
+      "historically_recorded": {
+        "Actions": 29,
+        "Queries": 643,
+        "Teach": 0,
+        "public_response_phases": 450,
+        "normal_states": 31,
+        "saved_regular_replies": 642,
+        "recovered_pending_reply": 1,
+        "query_counter_before": 504,
+        "query_counter_after": 1147,
+        "experiences": 129
+      },
+      "boundary": "Step 29 semantic processing/candidate enumeration/final adoption incomplete. Unsaved locals and complete owner envelope were not recovered; subsequent candidates and steps are unconfirmed. Intermediate public values 0 to 1 to 2 are not additional certified levels."
+    },
+    {
+      "run_nonce": "13666f5950be6c8e93a2510e91b951ed",
+      "source_member": "arc-column-live-loop-20261013/evidence/checkpoint_compute_failure/checkpoint_ja.md",
+      "status": "CLOSED / failed_closed / actual exit 1.",
+      "primary_cause": "Cumulative 900-second compute deadline near step 58, Query ordinal 1331, return/state inspection.",
+      "historically_recorded": {
+        "Actions": 58,
+        "Queries": 1332,
+        "Teach": 0,
+        "public_response_phases": 1052,
+        "normal_states": 60,
+        "query_counter_before": 1147,
+        "query_counter_after": 2479,
+        "experiences": 129
+      },
+      "boundary": "Enumerated operational recovery components were saved and checked before the original exception was rethrown. Arbitrary Python heap and incomplete step-58 locals were not preserved; Action 59 was not issued. Intermediate public level 0 to 4 does not establish run success."
+    },
+    {
+      "run_nonce": "087b258ca57e41ff82229797bd8035b4",
+      "source_member": "arc-column-live-loop-20261013/evidence/checkpoint_goal_ambiguity_failure/checkpoint_ja.md",
+      "status": "CLOSED / failed_closed / actual exit 1.",
+      "primary_cause": "Step 90 produced five goal candidates with different frame assignments/concrete operation effects; the unique complete goal boundary raised ValueError.",
+      "historically_recorded": {
+        "Actions": 90,
+        "Queries": 2234,
+        "Teach": 0,
+        "public_response_phases": 1812,
+        "normal_states": 93,
+        "query_counter_before": 2479,
+        "query_counter_after": 4713,
+        "experiences": 129,
+        "step90_completed_queries": 13,
+        "goal_candidates": 5,
+        "operation_candidates": 9
+      },
+      "boundary": "Step-90 queries/semantics/after-query state are recorded complete, while final adoption/dossier/Action 91 did not occur. The summary generic remaining-candidate wording is not evidence of an unreturned query. Public 6/8 is intermediate progress. Cause-audit 328 phases are distinct from the full run 1812 phases."
+    }
+  ],
+  "outcome_interpretation": [
+    "Historical checkpoint report statements were read as evidence, not re-executed. No new native/replay result is claimed.",
+    "All three failure reports explicitly retain certified achievement 1/183; intermediate level values 2, 4 and 6/8 do not add certified clears.",
+    "First-fresh report remains bounded to the recorded historical one-level result, with no full WIN or fresh043 claim."
+  ],
+  "provenance_resolutions": [
+    {
+      "kind": "SDK-named JSON",
+      "basis": "Own FreshFactory.diagnostics(), own IO observer and pure fixture producer were inspected statically before the associated bodies. JSON carries operational counters, public observation metadata, sanitized errors and file references, not opaque stream bodies. No referenced SDK/game/cache target was opened."
+    },
+    {
+      "kind": "Three pending .bytes members",
+      "basis": "Own failure audit and pure fixture producers identify these as XZ typed JSON replies; all three now pass CRC64, true EOF, JSON and typed-shape checks. The provisional two unknown types were an inspection filename-selector omission, not an archive defect."
+    },
+    {
+      "kind": "Synthetic fixture base64",
+      "member": "arc-column-live-pilot-20261013/evidence/factory_pure_v4.json",
+      "basis": "Own factory_pure_v4.py defines a synthetic public_bytes producer and save callback. Exactly three base64 occurrences decode to the same 35-byte synthetic JSON with SHA256 7f16a9c9eabd902cb5c49ca5a2c1b04192ed57f03325ee91a07d6616f573e452."
+    }
+  ],
+  "limitations": [
+    "Admission is for exact historical evidence preservation only; runtime adoption/execution is outside scope.",
+    "No recovered source imports/execution, native HDS/SDK/Query/Teach/Action, fresh tests, Git operations, upload, archive modification, full extraction or archive copies occurred.",
+    "Every manifest-listed member was hashed and inspected according to its own source/data provenance. JSON and AST parsing validate structures, not algorithm correctness or all historical result claims.",
+    "Credential/PII/encoded-content scans found no unresolved candidate but cannot prove absence of arbitrarily encoded secrets or all possible personal identifiers.",
+    "All SDK/game implementation and opaque stream/cache targets remained excluded/unopened; pathname references do not certify availability of those dependencies."
+  ],
+  "resources": {
+    "AS_cap_bytes": 536870912,
+    "peak_rss_kib": 31412,
+    "disk_available_bytes": 31533477888,
+    "batch_report_cap_bytes": 256000
+  }
+}
