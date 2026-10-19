@@ -1,0 +1,39 @@
+{
+  "schema": "arc3-semantic-publication-supplement-admission-v1",
+  "decision": "PASS_FOR_PRESERVATION_ONLY",
+  "files": [
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/supplemental_public_strict_review.md",
+      "archive_path": "arc-semantic-review-20261019/supplemental_public_strict_review.md",
+      "bytes": 1999,
+      "sha256": "af523c3d7c2924310652b5f2fdbf1a9c3510d25207840394a3ad911818210e2b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/public_strict_stdout.json",
+      "archive_path": "arc-semantic-review-20261019/public_strict_stdout.json",
+      "bytes": 783,
+      "sha256": "1f425da6b20bc7c292b7c5f049d82700481c38ce89379312d5a0b1a966adebc5"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/public_strict_current/public_input_report.json",
+      "archive_path": "arc-semantic-review-20261019/public_strict_current/public_input_report.json",
+      "bytes": 402944,
+      "sha256": "8cb814fc574db32bbf68716b0344a14309c835bf02ca43d860cb868f5bb1a675"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/public_strict_current/selected_whole_public.json",
+      "archive_path": "arc-semantic-review-20261019/public_strict_current/selected_whole_public.json",
+      "bytes": 6627,
+      "sha256": "ce4c2950ac1d3fd1abbd67bb84196397777d080f2f0c6258245be8241b25cdab"
+    }
+  ],
+  "content_review": {
+    "supplemental_review": "Complete UTF-8 prose read: exact before/current test hashes, one-line stronger comparison, independent rerun result and limitations. No credentials, personal data or opaque implementation.",
+    "stdout": "Complete UTF-8 JSON read: original sanitized archive path/bytes/SHA,25packet/27phase counts, selected public member/hash/phase/applicability and PASS. Provenance only.",
+    "public_report_and_packet": "Byte-identical to already scoped reports/public02 counterparts; their original semantic inspection applies without dereferencing any linked body.",
+    "current_test_diff": "One-line normalized-to-strict pack equality; exact current source already in original44 payload.",
+    "native_or_sdk_execution": false,
+    "original_files_modified": false
+  },
+  "review_gap_resolution": "Original reviewed_hashes retained. Supplemental independent rerun covers current test SHA eaed554daa03c6fd1483067f540b3dbcda812415032397a04d900cc92bc71e49."
+}

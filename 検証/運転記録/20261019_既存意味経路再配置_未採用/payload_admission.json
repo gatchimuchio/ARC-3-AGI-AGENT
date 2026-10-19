@@ -1,0 +1,1195 @@
+{
+  "schema": "arc3-semantic-rehost-publication-content-admission-v1",
+  "created_utc": "2026-10-19T02:17:34.962006+00:00",
+  "verdict": "PASS_PRESERVATION_ONLY",
+  "purpose": "Static content admission of original frozen 44-file completed semantic-rehost/review checkpoint for preservation publication. No runtime adoption, behavioral retest or capability certification.",
+  "allowlist": {
+    "source": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/publication_semantic_rehost/payload_manifest.json",
+    "sha256": "c5b89d4c3853db7170f2a803d42b63b9dfab1bfeeb9332d3e8bb342c2247e3f9",
+    "files": 44,
+    "raw_bytes": 21628939,
+    "unique_content_SHA256": 39,
+    "extensions": {
+      ".py": 22,
+      ".json": 19,
+      ".md": 3
+    },
+    "all_hashes_lengths_verified": true,
+    "scope_freeze": "Only original 44 manifest identities admitted. Four later supplemental review files are outside this report; their bodies were not read and require separate admission."
+  },
+  "authority_documents": [
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/authority/Owner追加指示原文_20261011T1904.md",
+      "bytes": 560,
+      "sha256": "d24cfd49b3a45b92356e77af890d193a97f27f33acf81fd6e331ef8955b6634c",
+      "read_before_payload_content_inspection": true
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/authority/Owner指示書原文_20261009.md",
+      "bytes": 12787,
+      "sha256": "d884388625d41e761ec845130c8ee3d7930992586973d461306b7d9b8218db9f",
+      "read_before_payload_content_inspection": true
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/authority/Owner追加指示原文_20261010T1907.md",
+      "bytes": 778,
+      "sha256": "2cc8cbc8ab2ed802ab970ecce65b1942c92ee5db975f4f8deb6306f52766a576",
+      "read_before_payload_content_inspection": true
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/main/AGENTS.md",
+      "bytes": 1627,
+      "sha256": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+      "read_before_payload_content_inspection": true
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/main/運用/権限順序.md",
+      "bytes": 948,
+      "sha256": "fdcef65a4b6ffc2179f76036f52aa2a4c47c69b8298f42678a47c245414bb4a3",
+      "read_before_payload_content_inspection": true
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/main/制御/現在状態.json",
+      "bytes": 358,
+      "sha256": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c",
+      "read_before_payload_content_inspection": true
+    }
+  ],
+  "method": {
+    "AS_bytes": 268435456,
+    "max_file_bytes": 8388608,
+    "hash_chunk_bytes": 65536,
+    "largest_actual_file_bytes": 6518226,
+    "all_22_Python_files_AST_parsed": true,
+    "all_Python_literals_and_JSON_semantic_strings_inspected": true,
+    "all_JSON_values_recursively_inspected": true,
+    "duplicates_reused_only_after_exact_SHA256_equality": true,
+    "pattern_screen": "All unique UTF-8 content screened for credentials/personal fields, credential formats and unusual loaders. Only ordinary authorization prose matched credential keywords. Semantic/AST/literal inspection supplements the screen.",
+    "bounded_embedded_payloads": "No bytes literals in Python; all source string literals are short readable code/path/schema/error text. Only >1000-character encoded JSON field is the validated public frame; other long strings are retained tracebacks.",
+    "peak_RSS_KiB_report_process": 88348
+  },
+  "findings": {
+    "credentials": "None observed: no password, API/access token, private key, auth header or cookie values.",
+    "personal_data": "None observed. Workspace/source paths, hashes and public observation/game/reset identifiers are technical provenance, not personal identity/contact/sensitive records.",
+    "opaque_official_game_or_SDK_implementation": "Absent. Public packet/type names and source/import inventories contain no official implementation bodies.",
+    "hidden_evaluator_or_unknown_embedded_payload": "None observed. Fixture oracles are own mock semantic responses; no hidden evaluator source or unknown encoded executable/answer body found.",
+    "historical_source_execution_risk": "Original snapshots preserve historical absolute-path loaders, native restore/Query references, external decoding logic and an action callback. Admission is for inert preservation only; no referenced opaque body was opened and no source was executed/imported."
+  },
+  "provenance": {
+    "delivery_pins_verified": 36,
+    "own_origin_pins_verified": 7,
+    "authority_pins_verified": 6,
+    "origin_source": "origin_manifest.json identifies seven already-preserved own connection source origins, not official SDK/game source.",
+    "reviewed_hashes": {
+      "total": 21,
+      "match_current_paths": 20,
+      "historical_difference": [
+        {
+          "historical_record": {
+            "path": "arc-semantic-rehost-20261019/tests/check_saved_public_inputs.py",
+            "sha256": "9c5c31c04945f89a93b9bcab0013b32156715a279aa4bc2a0e87747a4a4848be",
+            "bytes": 3869
+          },
+          "current_record": {
+            "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/tests/check_saved_public_inputs.py",
+            "archive_path": "arc-semantic-rehost-20261019/tests/check_saved_public_inputs.py",
+            "bytes": 3845,
+            "sha256": "eaed554daa03c6fd1483067f540b3dbcda812415032397a04d900cc92bc71e49"
+          },
+          "retained_exact_historical_snapshot": {
+            "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public01/check_saved_public_inputs.py",
+            "archive_path": "arc-semantic-rehost-20261019/reports/public01/check_saved_public_inputs.py",
+            "bytes": 3869,
+            "sha256": "9c5c31c04945f89a93b9bcab0013b32156715a279aa4bc2a0e87747a4a4848be"
+          },
+          "sole_static_diff": {
+            "before": "assert pack(normalized(pair[0]))==pack(normalized(pair[1]))",
+            "after": "assert pack(pair[0])==pack(pair[1])"
+          },
+          "meaning": "Earlier review pin belongs to retained prior checker snapshot. Do not claim it pins current checker bytes. This is not a publication-content safety defect."
+        }
+      ]
+    },
+    "public_packet": {
+      "copies": [
+        "arc-semantic-rehost-20261019/reports/public01/selected_whole_public.json",
+        "arc-semantic-rehost-20261019/reports/public02/selected_whole_public.json"
+      ],
+      "bytes_each": 6627,
+      "sha256": "ce4c2950ac1d3fd1abbd67bb84196397777d080f2f0c6258245be8241b25cdab",
+      "original_member": "arc-official-fresh-all25-20261013/observation/af7b768c50cded9162828afbaac6485f.public.json",
+      "archive_reference_SHA256": "ab409c1855768cbf40634ad98236c0782a825ce7a9676ec98ef6c8b3d8212caa",
+      "archive_opened_here": false,
+      "provenance_limit": "Retained completed checker/report establishes sanitized-archive provenance. This admission verifies packet/report hash, length and nonce/member joins without reopening the archive.",
+      "nonce_guid_classification": "Public observation/instance provenance identifiers, not login credentials or personal identity fields.",
+      "public_metadata": [
+        "game_id",
+        "state",
+        "levels_completed",
+        "win_levels",
+        "action_input",
+        "guid",
+        "full_reset",
+        "available_actions"
+      ],
+      "frame_count": 1,
+      "dtype": "|i1",
+      "shape": [
+        64,
+        64
+      ],
+      "order": "C",
+      "base64_characters": 5464,
+      "decoded_bytes": 4096,
+      "pixel_SHA256": "0a2b74b2fece6e590be214a387672a129622285f3e92e9233069470a156e3be8",
+      "palette_values": [
+        0,
+        2,
+        4,
+        5,
+        8,
+        9,
+        11,
+        14,
+        15
+      ],
+      "strict_base64_shape_length_pixel_hash_verified": true
+    }
+  },
+  "failure_preservation": {
+    "equivalence_trace_records": 195,
+    "ordinary_fixture_records": 192,
+    "special_records": [
+      "terminal",
+      "unsupported",
+      "malformed"
+    ],
+    "raw_tracebacks_retained": true,
+    "edge_records": 8,
+    "edge_labels": [
+      "role_integer",
+      "bad_available",
+      "duplicate_slot",
+      "bad_pool_count",
+      "bad_pool_assignment",
+      "input_callback_mutation",
+      "callback_value_error",
+      "callback_memory_error"
+    ],
+    "independent_probe_cases": 32,
+    "inherited_unsafe_variants": [
+      "role_no_support",
+      "goal_dispute",
+      "goal_unknown_state"
+    ],
+    "public_applicability_phases": 27,
+    "public_HOLD_records": 26,
+    "unique_trace_typed_records": {
+      "External": 3288,
+      "Reply": 3288
+    },
+    "unique_trace_execution_permissions": {
+      "False": 2406
+    },
+    "meaning": "All negative evidence, original snapshots and report versions remain unchanged. Mock equivalence and public parsing are not native learning, fresh success, transfer or execution adoption."
+  },
+  "exact_duplicate_groups": [
+    {
+      "sha256": "a57f0490be3c186a072e9e80f41072581c3ecbfc7ef3aaae49283558281799f3",
+      "source_paths": [
+        "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origins/candidate_preservation_v1.py",
+        "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/source/preservation_rehost.py"
+      ],
+      "treatment": "All identities preserved. Repeated content is not independent additional support."
+    },
+    {
+      "sha256": "8cb814fc574db32bbf68716b0344a14309c835bf02ca43d860cb868f5bb1a675",
+      "source_paths": [
+        "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public01/public_input_report.json",
+        "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public02/public_input_report.json"
+      ],
+      "treatment": "All identities preserved. Repeated content is not independent additional support."
+    },
+    {
+      "sha256": "ce4c2950ac1d3fd1abbd67bb84196397777d080f2f0c6258245be8241b25cdab",
+      "source_paths": [
+        "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public01/selected_whole_public.json",
+        "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public02/selected_whole_public.json"
+      ],
+      "treatment": "All identities preserved. Repeated content is not independent additional support."
+    },
+    {
+      "sha256": "35ecc43ba4707bfc3b7f49766aaf2db727d49c0dc66a462137e1e50772fdf2e3",
+      "source_paths": [
+        "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run01/all_output_traces.json",
+        "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run02/all_output_traces.json",
+        "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/supplied_rerun/all_output_traces.json"
+      ],
+      "treatment": "All identities preserved. Repeated content is not independent additional support."
+    }
+  ],
+  "warnings": [
+    "The historical reviewed-checker pin differs from the current checker; the exact older source is retained and its one-line comparison tightening disclosed.",
+    "Static content admission does not prove runtime safety or behavioral correctness.",
+    "References to linked archives/state/core were not followed. Public archive provenance relies on the retained completed source/report chain.",
+    "Saved resource figures describe historical fixture runs, not native capacity.",
+    "Later supplemental review files are outside the original frozen 44-file admission."
+  ],
+  "inspection_attempts": "First report assembly stopped before writing on the historical reviewed-checker mismatch; it was diagnosed read-only. A second inventory equality check stopped before writing because four later supplemental files appeared; parent confirmed original 44-file scope remains frozen. Neither event modified source/evidence.",
+  "actions_not_taken": [
+    "No payload mutation/deletion/normalization.",
+    "No source execution/import, new test or native HDS restore/Query/Teach/SDK/Action.",
+    "No active arc-native-query-20261019 content reads.",
+    "No network/Git/upload/publication.",
+    "No linked opaque archive, native state or official implementation body read."
+  ],
+  "files": [
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/README.md",
+      "archive_path": "arc-semantic-rehost-20261019/README.md",
+      "bytes": 9459,
+      "sha256": "6764851689e00dee6140097b4b2effdb43b62034f7ddf20cc186ac1eb482b5e9",
+      "content_classification": "own_scope_or_review_document",
+      "content_note": "Completed scope/review or unexecuted proposed pilot gates. Inherited weaknesses, failure evidence and capability limits remain explicit.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/build_derivatives.py",
+      "archive_path": "arc-semantic-rehost-20261019/build_derivatives.py",
+      "bytes": 5513,
+      "sha256": "bbe3d8da506e1e1d1afb1eb0ff61528d3ed9ce2900b00ffcd461474d0c279b1a",
+      "content_classification": "own_checker_build_or_mock_test_source",
+      "content_note": "Own build/checker or synthetic-frame/mock-oracle code. Static AST/import/call/literal inspection only; never executed or imported during admission.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1258,
+        "string_literal_count": 126,
+        "max_string_characters": 89,
+        "bytes_literals": 0,
+        "imports": [
+          "import ast, hashlib, json",
+          "from pathlib import Path",
+          "from copy import deepcopy"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/native_pilot_gate.md",
+      "archive_path": "arc-semantic-rehost-20261019/native_pilot_gate.md",
+      "bytes": 8390,
+      "sha256": "bdf6fc74d0e408b4fb98837099fb12ff0314124ac892d65654cb28c54f85943b",
+      "content_classification": "own_scope_or_review_document",
+      "content_note": "Completed scope/review or unexecuted proposed pilot gates. Inherited weaknesses, failure evidence and capability limits remain explicit.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origin_manifest.json",
+      "archive_path": "arc-semantic-rehost-20261019/origin_manifest.json",
+      "bytes": 5837,
+      "sha256": "f58ee643aeed5300fa830679e65b2a32aa0a192c0da59b425271fb2ee480f799",
+      "content_classification": "provenance_manifest",
+      "content_note": "File/source identity metadata. Historical reviewed-checker pin nuance is disclosed separately; nothing is normalized or rewritten.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 2,
+        "node_counts": {
+          "dict": 14,
+          "str": 69,
+          "list": 1,
+          "int": 13,
+          "bool": 6
+        },
+        "max_depth": 3,
+        "unique_key_value_strings": 66,
+        "max_string_characters": 111
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origins/ARC3境界.py",
+      "archive_path": "arc-semantic-rehost-20261019/origins/ARC3境界.py",
+      "bytes": 9941,
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+      "content_classification": "own_original_source_snapshot",
+      "content_note": "Exact own-source provenance, including original limitations. Historical loaders/native references/action callback definitions are inert evidence only; referenced bodies were not opened.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1670,
+        "string_literal_count": 95,
+        "max_string_characters": 127,
+        "bytes_literals": 0,
+        "imports": [
+          "from __future__ import annotations",
+          "from dataclasses import dataclass, field",
+          "from hashlib import sha256",
+          "import json",
+          "from typing import Any, Mapping"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origins/candidate_goalset_v2.py",
+      "archive_path": "arc-semantic-rehost-20261019/origins/candidate_goalset_v2.py",
+      "bytes": 5962,
+      "sha256": "d1bb8a9c7f51ac577c603d49f6f153a68e44c4b32c97b95c43a322fd09835018",
+      "content_classification": "own_original_source_snapshot",
+      "content_note": "Exact own-source provenance, including original limitations. Historical loaders/native references/action callback definitions are inert evidence only; referenced bodies were not opened.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1093,
+        "string_literal_count": 138,
+        "max_string_characters": 108,
+        "bytes_literals": 0,
+        "imports": [
+          "from copy import deepcopy",
+          "import hashlib",
+          "from pathlib import Path",
+          "import types"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origins/candidate_preservation_v1.py",
+      "archive_path": "arc-semantic-rehost-20261019/origins/candidate_preservation_v1.py",
+      "bytes": 12814,
+      "sha256": "a57f0490be3c186a072e9e80f41072581c3ecbfc7ef3aaae49283558281799f3",
+      "content_classification": "own_original_source_snapshot",
+      "content_note": "Exact own-source provenance, including original limitations. Historical loaders/native references/action callback definitions are inert evidence only; referenced bodies were not opened.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 2831,
+        "string_literal_count": 301,
+        "max_string_characters": 75,
+        "bytes_literals": 0,
+        "imports": [
+          "from copy import deepcopy",
+          "import traceback"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origins/candidate_query_v5.py",
+      "archive_path": "arc-semantic-rehost-20261019/origins/candidate_query_v5.py",
+      "bytes": 18574,
+      "sha256": "7e92d5c73d3b3b002c2e2dcb09b526950d9c2c1caf881838ce38f8cbd48b7aba",
+      "content_classification": "own_original_source_snapshot",
+      "content_note": "Exact own-source provenance, including original limitations. Historical loaders/native references/action callback definitions are inert evidence only; referenced bodies were not opened.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 4511,
+        "string_literal_count": 442,
+        "max_string_characters": 103,
+        "bytes_literals": 0,
+        "imports": [
+          "import ast, base64, hashlib, importlib.util, json, lzma, os, resource, shutil, signal, sys, time, traceback",
+          "from pathlib import Path",
+          "from copy import deepcopy",
+          "import hds学習系統 as native",
+          "import hds学習系統.永続化 as persistence",
+          "from 接続 import 列図式規則 as family",
+          "import types",
+          "from 接続.図式観測 import _作用番号",
+          "from 接続 import ARC3境界 as boundary"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origins/goalset_common_v4.py",
+      "archive_path": "arc-semantic-rehost-20261019/origins/goalset_common_v4.py",
+      "bytes": 8937,
+      "sha256": "26b58ae33fc43b16fb1dfeb6ef1d5790a8a2759c3f75700a64924b387b2c75a1",
+      "content_classification": "own_original_source_snapshot",
+      "content_note": "Exact own-source provenance, including original limitations. Historical loaders/native references/action callback definitions are inert evidence only; referenced bodies were not opened.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 2393,
+        "string_literal_count": 176,
+        "max_string_characters": 103,
+        "bytes_literals": 0,
+        "imports": [
+          "import ast",
+          "from collections import Counter",
+          "from copy import deepcopy",
+          "import hashlib",
+          "import itertools",
+          "from pathlib import Path",
+          "import types"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origins/列図式規則.py",
+      "archive_path": "arc-semantic-rehost-20261019/origins/列図式規則.py",
+      "bytes": 20302,
+      "sha256": "d303b314446d22c604008d590636cccf6e1d140fbd365f22ff018b55d97de399",
+      "content_classification": "own_original_source_snapshot",
+      "content_note": "Exact own-source provenance, including original limitations. Historical loaders/native references/action callback definitions are inert evidence only; referenced bodies were not opened.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 5052,
+        "string_literal_count": 530,
+        "max_string_characters": 79,
+        "bytes_literals": 0,
+        "imports": [
+          "from collections import Counter",
+          "from copy import deepcopy",
+          "import itertools",
+          "from hds学習系統 import 外部入力",
+          "from .図式観測 import 成分群",
+          "from .ARC3境界 import 観測"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/origins/図式観測.py",
+      "archive_path": "arc-semantic-rehost-20261019/origins/図式観測.py",
+      "bytes": 1295,
+      "sha256": "417269f9e94ec548c7f727c3e263efe952bbae21cf601021bcfd4d89b1a786d2",
+      "content_classification": "own_original_source_snapshot",
+      "content_note": "Exact own-source provenance, including original limitations. Historical loaders/native references/action callback definitions are inert evidence only; referenced bodies were not opened.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 385,
+        "string_literal_count": 7,
+        "max_string_characters": 71,
+        "bytes_literals": 0,
+        "imports": [
+          "from collections import deque"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/edges01/coverage.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/edges01/coverage.json",
+      "bytes": 233479,
+      "sha256": "889803d96dfb54b3d5d7677fedd82914fe52ae2f7da64d7be13d677e47daa5d5",
+      "content_classification": "saved_mock_result_or_coverage_report",
+      "content_note": "Saved fixture result, resource/counter summary or coverage/provenance-permutation evidence. Historical metrics are not native performance or learning claims.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 3,
+        "node_counts": {
+          "dict": 481,
+          "int": 218,
+          "list": 1731,
+          "str": 1488,
+          "bool": 146,
+          "NoneType": 30
+        },
+        "max_depth": 34,
+        "unique_key_value_strings": 190,
+        "max_string_characters": 50
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/edges01/edge_traces.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/edges01/edge_traces.json",
+      "bytes": 763410,
+      "sha256": "3d6ca25c71f96de7275676ea51b41f48d3d46185419570a8e75f3420b551d392",
+      "content_classification": "mock_failure_trace",
+      "content_note": "Eight malformed-input/callback mutation/ValueError/MemoryError paired cases; failure records retained.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "list",
+        "top_length": 8,
+        "node_counts": {
+          "list": 6227,
+          "dict": 1472,
+          "str": 4846,
+          "NoneType": 148,
+          "int": 1224,
+          "bool": 552
+        },
+        "max_depth": 28,
+        "unique_key_value_strings": 167,
+        "max_string_characters": 545
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/edges01/report.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/edges01/report.json",
+      "bytes": 145,
+      "sha256": "ac846f0abff7e7ed02323fd924bdd6ef5a3809dfcd46ea1a633f0072008c6935",
+      "content_classification": "saved_mock_result_or_coverage_report",
+      "content_note": "Saved fixture result, resource/counter summary or coverage/provenance-permutation evidence. Historical metrics are not native performance or learning claims.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 6,
+        "node_counts": {
+          "dict": 1,
+          "str": 1,
+          "int": 4,
+          "list": 2,
+          "bool": 1
+        },
+        "max_depth": 2,
+        "unique_key_value_strings": 7,
+        "max_string_characters": 12
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/native_api_availability.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/native_api_availability.json",
+      "bytes": 13969,
+      "sha256": "5ba9d1145ab9eab7a3a1a6008ba7958bd2c64bc895be45cb0990e2a94d8c1e79",
+      "content_classification": "source_inventory_metadata",
+      "content_note": "14 frozen-core file identities and 12 import-name summaries; no linked implementation/native-state body included or opened.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 3,
+        "node_counts": {
+          "dict": 15,
+          "str": 174,
+          "list": 13,
+          "int": 15
+        },
+        "max_depth": 4,
+        "unique_key_value_strings": 124,
+        "max_string_characters": 111
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public01/check_saved_public_inputs.py",
+      "archive_path": "arc-semantic-rehost-20261019/reports/public01/check_saved_public_inputs.py",
+      "bytes": 3869,
+      "sha256": "9c5c31c04945f89a93b9bcab0013b32156715a279aa4bc2a0e87747a4a4848be",
+      "content_classification": "own_checker_build_or_mock_test_source",
+      "content_note": "Own build/checker or synthetic-frame/mock-oracle code. Static AST/import/call/literal inspection only; never executed or imported during admission.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1040,
+        "string_literal_count": 82,
+        "max_string_characters": 125,
+        "bytes_literals": 0,
+        "imports": [
+          "import base64, hashlib, json, tarfile, sys",
+          "from pathlib import Path",
+          "from test_equivalence import R, route, External, reference, Machine, pack, normalized"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public01/public_input_report.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/public01/public_input_report.json",
+      "bytes": 402944,
+      "sha256": "8cb814fc574db32bbf68716b0344a14309c835bf02ca43d860cb868f5bb1a675",
+      "content_classification": "public_provenance_and_mock_trace",
+      "content_note": "25 packet identities and 27 applicability phases, including 26 HOLDs, plus one public-frame fixture semantic comparison. Only source identities for other public packets, not their bodies.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 8,
+        "node_counts": {
+          "dict": 770,
+          "str": 2370,
+          "int": 425,
+          "list": 2690,
+          "bool": 238,
+          "NoneType": 68
+        },
+        "max_depth": 31,
+        "unique_key_value_strings": 239,
+        "max_string_characters": 133
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public01/selected_whole_public.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/public01/selected_whole_public.json",
+      "bytes": 6627,
+      "sha256": "ce4c2950ac1d3fd1abbd67bb84196397777d080f2f0c6258245be8241b25cdab",
+      "content_classification": "bounded_public_observation_packet",
+      "content_note": "Known public reset/game metadata and one 64x64 int8 palette frame; bounded base64 decoded and SHA-256 checked. No official implementation body.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 8,
+        "node_counts": {
+          "dict": 11,
+          "str": 36,
+          "list": 20,
+          "int": 19,
+          "NoneType": 2,
+          "bool": 4
+        },
+        "max_depth": 8,
+        "unique_key_value_strings": 47,
+        "max_string_characters": 5464
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public02/public_input_report.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/public02/public_input_report.json",
+      "bytes": 402944,
+      "sha256": "8cb814fc574db32bbf68716b0344a14309c835bf02ca43d860cb868f5bb1a675",
+      "content_classification": "public_provenance_and_mock_trace",
+      "content_note": "25 packet identities and 27 applicability phases, including 26 HOLDs, plus one public-frame fixture semantic comparison. Only source identities for other public packets, not their bodies.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "semantic_inspection_reused_from": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public01/public_input_report.json"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public02/selected_whole_public.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/public02/selected_whole_public.json",
+      "bytes": 6627,
+      "sha256": "ce4c2950ac1d3fd1abbd67bb84196397777d080f2f0c6258245be8241b25cdab",
+      "content_classification": "bounded_public_observation_packet",
+      "content_note": "Known public reset/game metadata and one 64x64 int8 palette frame; bounded base64 decoded and SHA-256 checked. No official implementation body.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "semantic_inspection_reused_from": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/public01/selected_whole_public.json"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run01/all_output_traces.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/run01/all_output_traces.json",
+      "bytes": 6518226,
+      "sha256": "35ecc43ba4707bfc3b7f49766aaf2db727d49c0dc66a462137e1e50772fdf2e3",
+      "content_classification": "mock_equivalence_trace",
+      "content_note": "195 paired fixture cases, 192 ordinary plus terminal/unsupported/malformed cases. Full typed mock replies/counters and raw failure tracebacks retained.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "list",
+        "top_length": 195,
+        "node_counts": {
+          "list": 337213,
+          "dict": 86253,
+          "str": 272166,
+          "int": 54930,
+          "bool": 29542,
+          "NoneType": 11534
+        },
+        "max_depth": 36,
+        "unique_key_value_strings": 446,
+        "max_string_characters": 606
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run01/report.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/run01/report.json",
+      "bytes": 282,
+      "sha256": "b422125805d2e35ffb266c8506e02613b409f11c0ec1c1c37ba437508620ceba",
+      "content_classification": "saved_mock_result_or_coverage_report",
+      "content_note": "Saved fixture result, resource/counter summary or coverage/provenance-permutation evidence. Historical metrics are not native performance or learning claims.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 12,
+        "node_counts": {
+          "dict": 1,
+          "str": 1,
+          "int": 10,
+          "list": 2,
+          "bool": 1
+        },
+        "max_depth": 2,
+        "unique_key_value_strings": 13,
+        "max_string_characters": 28
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run01/test_equivalence.py",
+      "archive_path": "arc-semantic-rehost-20261019/reports/run01/test_equivalence.py",
+      "bytes": 10957,
+      "sha256": "9a9d2c49e627c9a45d3ecb3d77dd9cc113f06ebc7c8f4a84eec9668b52daada7",
+      "content_classification": "own_checker_build_or_mock_test_source",
+      "content_note": "Own build/checker or synthetic-frame/mock-oracle code. Static AST/import/call/literal inspection only; never executed or imported during admission.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 2783,
+        "string_literal_count": 216,
+        "max_string_characters": 76,
+        "bytes_literals": 0,
+        "imports": [
+          "import ast, base64, hashlib, itertools, json, resource, sys, traceback, types",
+          "from collections import Counter",
+          "from copy import deepcopy",
+          "from dataclasses import dataclass",
+          "from pathlib import Path",
+          "import semantic_route_rehost as route",
+          "import fixed_enumeration_rehost as fixed",
+          "import preservation_rehost as preservation",
+          "from goalset_common_rehost import 構成する"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run02/all_output_traces.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/run02/all_output_traces.json",
+      "bytes": 6518226,
+      "sha256": "35ecc43ba4707bfc3b7f49766aaf2db727d49c0dc66a462137e1e50772fdf2e3",
+      "content_classification": "mock_equivalence_trace",
+      "content_note": "195 paired fixture cases, 192 ordinary plus terminal/unsupported/malformed cases. Full typed mock replies/counters and raw failure tracebacks retained.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "semantic_inspection_reused_from": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run01/all_output_traces.json"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run02/report.json",
+      "archive_path": "arc-semantic-rehost-20261019/reports/run02/report.json",
+      "bytes": 283,
+      "sha256": "a9ce8cf9ea2451252844f880c5a7a067e9a5e12e7c7ec8137db94e840e1cd3b5",
+      "content_classification": "saved_mock_result_or_coverage_report",
+      "content_note": "Saved fixture result, resource/counter summary or coverage/provenance-permutation evidence. Historical metrics are not native performance or learning claims.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 12,
+        "node_counts": {
+          "dict": 1,
+          "str": 1,
+          "int": 10,
+          "list": 2,
+          "bool": 1
+        },
+        "max_depth": 2,
+        "unique_key_value_strings": 13,
+        "max_string_characters": 28
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/source/family_rehost.py",
+      "archive_path": "arc-semantic-rehost-20261019/source/family_rehost.py",
+      "bytes": 10558,
+      "sha256": "15d070015b31511b12eeac8da93c3bea3a62daa8f6a3ab271dfb99a89b9acedc",
+      "content_classification": "own_unadopted_derivative_source",
+      "content_note": "Own explicitly injected diagnostic perception/enumeration/query/candidate/preservation closure. No opaque native, SDK, game or evaluator body; no execution adoption.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 2874,
+        "string_literal_count": 180,
+        "max_string_characters": 35,
+        "bytes_literals": 0,
+        "imports": [
+          "from collections import Counter",
+          "from copy import deepcopy",
+          "import itertools",
+          "from types import SimpleNamespace"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/source/fixed_enumeration_rehost.py",
+      "archive_path": "arc-semantic-rehost-20261019/source/fixed_enumeration_rehost.py",
+      "bytes": 3980,
+      "sha256": "43a9ec065d22d8da1502c963a140b60833ac0b06ce0d45c1ac8ba5f59e9932e4",
+      "content_classification": "own_unadopted_derivative_source",
+      "content_note": "Own explicitly injected diagnostic perception/enumeration/query/candidate/preservation closure. No opaque native, SDK, game or evaluator body; no execution adoption.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 876,
+        "string_literal_count": 92,
+        "max_string_characters": 33,
+        "bytes_literals": 0,
+        "imports": [
+          "from collections import Counter",
+          "import itertools"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/source/goalset_candidate_rehost.py",
+      "archive_path": "arc-semantic-rehost-20261019/source/goalset_candidate_rehost.py",
+      "bytes": 5878,
+      "sha256": "c9492a8033ae740811ff0e4f078d773a478b30afa4561277bad6e18144357efe",
+      "content_classification": "own_unadopted_derivative_source",
+      "content_note": "Own explicitly injected diagnostic perception/enumeration/query/candidate/preservation closure. No opaque native, SDK, game or evaluator body; no execution adoption.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1016,
+        "string_literal_count": 126,
+        "max_string_characters": 33,
+        "bytes_literals": 0,
+        "imports": [
+          "from copy import deepcopy",
+          "from types import SimpleNamespace"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/source/goalset_common_rehost.py",
+      "archive_path": "arc-semantic-rehost-20261019/source/goalset_common_rehost.py",
+      "bytes": 7473,
+      "sha256": "3b32cffa4a5210c5a474642a542829bc3cd368ac76dbf9e9f6baafbd076fac87",
+      "content_classification": "own_unadopted_derivative_source",
+      "content_note": "Own explicitly injected diagnostic perception/enumeration/query/candidate/preservation closure. No opaque native, SDK, game or evaluator body; no execution adoption.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1843,
+        "string_literal_count": 137,
+        "max_string_characters": 50,
+        "bytes_literals": 0,
+        "imports": [
+          "from copy import deepcopy",
+          "from collections import Counter",
+          "from types import SimpleNamespace"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/source/preservation_rehost.py",
+      "archive_path": "arc-semantic-rehost-20261019/source/preservation_rehost.py",
+      "bytes": 12814,
+      "sha256": "a57f0490be3c186a072e9e80f41072581c3ecbfc7ef3aaae49283558281799f3",
+      "content_classification": "own_unadopted_derivative_source",
+      "content_note": "Own explicitly injected diagnostic perception/enumeration/query/candidate/preservation closure. No opaque native, SDK, game or evaluator body; no execution adoption.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 2831,
+        "string_literal_count": 301,
+        "max_string_characters": 75,
+        "bytes_literals": 0,
+        "imports": [
+          "from copy import deepcopy",
+          "import traceback"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/source/semantic_entry_rehost.py",
+      "archive_path": "arc-semantic-rehost-20261019/source/semantic_entry_rehost.py",
+      "bytes": 2594,
+      "sha256": "128daa956bd6b04a2d3e75b4b583afde7a8f8bd5d73be86a7d546df62e235bbc",
+      "content_classification": "own_unadopted_derivative_source",
+      "content_note": "Own explicitly injected diagnostic perception/enumeration/query/candidate/preservation closure. No opaque native, SDK, game or evaluator body; no execution adoption.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 553,
+        "string_literal_count": 56,
+        "max_string_characters": 74,
+        "bytes_literals": 0,
+        "imports": [
+          "from copy import deepcopy",
+          "import traceback"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/source/semantic_route_rehost.py",
+      "archive_path": "arc-semantic-rehost-20261019/source/semantic_route_rehost.py",
+      "bytes": 603,
+      "sha256": "597e632766ebbd37b8646a053f5e5464a37700728d070ca799434c53c7e710f6",
+      "content_classification": "own_unadopted_derivative_source",
+      "content_note": "Own explicitly injected diagnostic perception/enumeration/query/candidate/preservation closure. No opaque native, SDK, game or evaluator body; no execution adoption.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 63,
+        "string_literal_count": 2,
+        "max_string_characters": 37,
+        "bytes_literals": 0,
+        "imports": [
+          "import family_rehost",
+          "import preservation_rehost",
+          "import goalset_common_rehost",
+          "import goalset_candidate_rehost",
+          "import fixed_enumeration_rehost",
+          "from semantic_entry_rehost import semantic_entry"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/tests/check_saved_public_inputs.py",
+      "archive_path": "arc-semantic-rehost-20261019/tests/check_saved_public_inputs.py",
+      "bytes": 3845,
+      "sha256": "eaed554daa03c6fd1483067f540b3dbcda812415032397a04d900cc92bc71e49",
+      "content_classification": "own_checker_build_or_mock_test_source",
+      "content_note": "Own build/checker or synthetic-frame/mock-oracle code. Static AST/import/call/literal inspection only; never executed or imported during admission.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1034,
+        "string_literal_count": 82,
+        "max_string_characters": 125,
+        "bytes_literals": 0,
+        "imports": [
+          "import base64, hashlib, json, tarfile, sys",
+          "from pathlib import Path",
+          "from test_equivalence import R, route, External, reference, Machine, pack, normalized"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/tests/test_contract_edges.py",
+      "archive_path": "arc-semantic-rehost-20261019/tests/test_contract_edges.py",
+      "bytes": 5000,
+      "sha256": "322fb00a653655c3efdde6d8da1c0c94ba7257178c2363b288adbd1bbc44563b",
+      "content_classification": "own_checker_build_or_mock_test_source",
+      "content_note": "Own build/checker or synthetic-frame/mock-oracle code. Static AST/import/call/literal inspection only; never executed or imported during admission.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1177,
+        "string_literal_count": 119,
+        "max_string_characters": 80,
+        "bytes_literals": 0,
+        "imports": [
+          "import inspect, json, resource, sys, ast",
+          "from copy import deepcopy",
+          "from pathlib import Path",
+          "from test_equivalence import R, reference, route, External, Machine, frame, pack, normalized, preservation"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/tests/test_equivalence.py",
+      "archive_path": "arc-semantic-rehost-20261019/tests/test_equivalence.py",
+      "bytes": 11043,
+      "sha256": "eb61a89ae1544157df8c8f423dd0e3f8d3b4dc7cc096f665a4437e402dc08e63",
+      "content_classification": "own_checker_build_or_mock_test_source",
+      "content_note": "Own build/checker or synthetic-frame/mock-oracle code. Static AST/import/call/literal inspection only; never executed or imported during admission.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 2803,
+        "string_literal_count": 216,
+        "max_string_characters": 76,
+        "bytes_literals": 0,
+        "imports": [
+          "import ast, base64, hashlib, itertools, json, resource, sys, traceback, types",
+          "from collections import Counter",
+          "from copy import deepcopy",
+          "from dataclasses import dataclass",
+          "from pathlib import Path",
+          "from verify_manifest import verify_origins",
+          "import semantic_route_rehost as route",
+          "import fixed_enumeration_rehost as fixed",
+          "import preservation_rehost as preservation",
+          "from goalset_common_rehost import 構成する"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/verify_manifest.py",
+      "archive_path": "arc-semantic-rehost-20261019/verify_manifest.py",
+      "bytes": 1124,
+      "sha256": "f7b4998c03e44a947c49d3b04e4c10adea72f23f4d8da94d20717bec20e1459a",
+      "content_classification": "own_checker_build_or_mock_test_source",
+      "content_note": "Own build/checker or synthetic-frame/mock-oracle code. Static AST/import/call/literal inspection only; never executed or imported during admission.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 283,
+        "string_literal_count": 22,
+        "max_string_characters": 68,
+        "bytes_literals": 0,
+        "imports": [
+          "import hashlib, json",
+          "from pathlib import Path"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/delivery_manifest.json",
+      "archive_path": "arc-semantic-rehost-20261019/delivery_manifest.json",
+      "bytes": 6056,
+      "sha256": "ba1babc48811350504c183bd5f8b7199d0524dbb84ee4171d0d164311bc47ff8",
+      "content_classification": "provenance_manifest",
+      "content_note": "File/source identity metadata. Historical reviewed-checker pin nuance is disclosed separately; nothing is normalized or rewritten.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 3,
+        "node_counts": {
+          "dict": 37,
+          "str": 73,
+          "list": 1,
+          "int": 37
+        },
+        "max_depth": 3,
+        "unique_key_value_strings": 75,
+        "max_string_characters": 64
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/final_review.md",
+      "archive_path": "arc-semantic-review-20261019/final_review.md",
+      "bytes": 5997,
+      "sha256": "df5494ddae273f421b79a2437ca83fe1061e57d7877eabc741dc267253d390d8",
+      "content_classification": "own_scope_or_review_document",
+      "content_note": "Completed scope/review or unexecuted proposed pilot gates. Inherited weaknesses, failure evidence and capability limits remain explicit.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/probes.json",
+      "archive_path": "arc-semantic-review-20261019/probes.json",
+      "bytes": 34847,
+      "sha256": "7a43468fae30b4ef9bd71d89e4b1630d378c5e2e9c96659b7d17d6651f3b3d0c",
+      "content_classification": "independent_mock_probe_report",
+      "content_note": "32 mock cases and pin/executor receipts, including role_no_support, goal_dispute and goal_unknown_state variants; saved permissions false.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 6,
+        "node_counts": {
+          "dict": 50,
+          "list": 35,
+          "str": 404,
+          "bool": 81,
+          "int": 64
+        },
+        "max_depth": 4,
+        "unique_key_value_strings": 59,
+        "max_string_characters": 105
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/probes.py",
+      "archive_path": "arc-semantic-review-20261019/probes.py",
+      "bytes": 5500,
+      "sha256": "02957a738f230c4d87d780105c676c35d2b804472a9460c825b14f0d818b2c81",
+      "content_classification": "own_checker_build_or_mock_test_source",
+      "content_note": "Own build/checker or synthetic-frame/mock-oracle code. Static AST/import/call/literal inspection only; never executed or imported during admission.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "static_AST": {
+        "parsed": true,
+        "nodes": 1391,
+        "string_literal_count": 139,
+        "max_string_characters": 68,
+        "bytes_literals": 0,
+        "imports": [
+          "import ast, hashlib, importlib.util, json, sys",
+          "from pathlib import Path",
+          "from copy import deepcopy"
+        ]
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/rerun_stdout.json",
+      "archive_path": "arc-semantic-review-20261019/rerun_stdout.json",
+      "bytes": 246,
+      "sha256": "d518af053b4cc5152e5732916413c0ade4db32a8e0d4608f711456bcd44b1dee",
+      "content_classification": "saved_mock_result_or_coverage_report",
+      "content_note": "Saved fixture result, resource/counter summary or coverage/provenance-permutation evidence. Historical metrics are not native performance or learning claims.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 12,
+        "node_counts": {
+          "dict": 1,
+          "str": 1,
+          "int": 10,
+          "list": 2,
+          "bool": 1
+        },
+        "max_depth": 2,
+        "unique_key_value_strings": 13,
+        "max_string_characters": 28
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/reviewed_hashes.json",
+      "archive_path": "arc-semantic-review-20261019/reviewed_hashes.json",
+      "bytes": 3860,
+      "sha256": "19a9157e2de61fde61cc600c02344f511cda7732633bd5fbf72ca2cef20db36e",
+      "content_classification": "provenance_manifest",
+      "content_note": "File/source identity metadata. Historical reviewed-checker pin nuance is disclosed separately; nothing is normalized or rewritten.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "list",
+        "top_length": 21,
+        "node_counts": {
+          "list": 1,
+          "dict": 21,
+          "str": 42,
+          "int": 21
+        },
+        "max_depth": 2,
+        "unique_key_value_strings": 44,
+        "max_string_characters": 65
+      }
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/supplied_rerun/all_output_traces.json",
+      "archive_path": "arc-semantic-review-20261019/supplied_rerun/all_output_traces.json",
+      "bytes": 6518226,
+      "sha256": "35ecc43ba4707bfc3b7f49766aaf2db727d49c0dc66a462137e1e50772fdf2e3",
+      "content_classification": "mock_equivalence_trace",
+      "content_note": "195 paired fixture cases, 192 ordinary plus terminal/unsupported/malformed cases. Full typed mock replies/counters and raw failure tracebacks retained.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "semantic_inspection_reused_from": "/workspace/scratch/a94ff513b3af/arc-semantic-rehost-20261019/reports/run01/all_output_traces.json"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-semantic-review-20261019/supplied_rerun/report.json",
+      "archive_path": "arc-semantic-review-20261019/supplied_rerun/report.json",
+      "bytes": 283,
+      "sha256": "1e93bb6aa32dec71b14ff690232548ef5acbc03273ec0e5d5ac9adc52eae3f8d",
+      "content_classification": "saved_mock_result_or_coverage_report",
+      "content_note": "Saved fixture result, resource/counter summary or coverage/provenance-permutation evidence. Historical metrics are not native performance or learning claims.",
+      "admission": "PASS_PRESERVATION_ONLY",
+      "regular_utf8_file": true,
+      "JSON_inspection": {
+        "top_type": "dict",
+        "top_length": 12,
+        "node_counts": {
+          "dict": 1,
+          "str": 1,
+          "int": 10,
+          "list": 2,
+          "bool": 1
+        },
+        "max_depth": 2,
+        "unique_key_value_strings": 13,
+        "max_string_characters": 28
+      }
+    }
+  ],
+  "errors": []
+}
