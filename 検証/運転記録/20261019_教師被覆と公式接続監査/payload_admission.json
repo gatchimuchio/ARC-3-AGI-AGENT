@@ -1,0 +1,333 @@
+{
+  "schema": "arc3-coverage-network-independent-admission-v1",
+  "status": "CONTENT_SCOPE_PASS_WITH_CAPTURE_PROTOCOL_EXCEPTIONS",
+  "publication_authorization": "Not granted by this report. Parent owns publication and current visibility/Owner-scope reconciliation.",
+  "manifest": {
+    "path": "payload_manifest.json",
+    "sha256": "12c83bce1532bebf9a992477a78151e0ba7fbbf7ef6e02c9209a2dcb7c3c945d",
+    "file_count": 65,
+    "raw_bytes": 6468027,
+    "all_size_sha256_pins_rechecked": true
+  },
+  "authority": {
+    "all_six_documents_read": true,
+    "paths": [
+      "authority/Owner指示書原文_20261009.md",
+      "authority/Owner追加指示原文_20261010T1907.md",
+      "authority/Owner追加指示原文_20261011T1904.md",
+      "main/AGENTS.md",
+      "main/運用/権限順序.md",
+      "main/制御/現在状態.json"
+    ],
+    "strategy": null,
+    "automatic_transition": false,
+    "frozen_core": "HDS/学習系統/v0.4.2"
+  },
+  "content_safety": {
+    "plain_payload_files": 64,
+    "owned_python_sources_ast_parsed": 13,
+    "package_METADATA_files": 2,
+    "receipt_archive_regular_members": 70,
+    "receipt_manifest_pinned_members": 69,
+    "receipt_member_hashes_all_match": true,
+    "receipt_uncompressed_bytes": 622142,
+    "official_game_or_SDK_implementation_bodies_read_or_included": false,
+    "SDK_stderr_read_or_included": false,
+    "secret_or_transport_cookie_candidates": [],
+    "methods": [
+      "Exact name classification before payload reads",
+      "Token/private-key/JWT/Authorization/Cookie pattern scans",
+      "Signed or credential-query URL scan within receipt members",
+      "Sensitive JSON key/value screen including decoded embedded receipt JSON",
+      "Full receipt manifest closure, regular-file and path-traversal checks"
+    ],
+    "limits": "No mathematical guarantee against arbitrary obfuscation; no credential directories or credential sources accessed. Referenced arbitrary files/URLs were not followed."
+  },
+  "hds_original_document_classification": {
+    "canonical_original_specification_or_design_bodies_found": 0,
+    "plain_file_classes": {
+      "owned_audit_document_or_metadata": 31,
+      "owned_implementation_or_audit_source": 13,
+      "coverage_projection_or_pin_metadata": 18,
+      "package_metadata_and_public_docs": 2
+    },
+    "receipt_member_classes": {
+      "publication_metadata_or_operational_document": 60,
+      "owned_publication_source": 10
+    },
+    "reference_examples": [
+      "prior_refs.json and prior_refs_v2.json contain canonical prior-memory path/size/hash pins only",
+      "coverage matrices contain inventory and observation projections",
+      "goal6 sources contain implementation and public HDS import/API references",
+      "base_tree and new_tree receipt contain path/mode/type/SHA/size/URL metadata, including HDS document paths, but no blob bodies",
+      "Long embedded receipt strings decode to Git commit/tree/repository metadata, not canonical document text"
+    ],
+    "tree_schema_checks": [
+      {
+        "location": "receipt:base_tree.json",
+        "entries": 476,
+        "canonical_hds_document_path_references": 2,
+        "file_bodies": 0
+      },
+      {
+        "location": "receipt:new_tree_receipt.json.structuredContent.content<decoded>",
+        "entries": 487,
+        "canonical_hds_document_path_references": 2,
+        "file_bodies": 0
+      },
+      {
+        "location": "receipt:new_tree_receipt.json.structuredContent.structuredContent.content<decoded>",
+        "entries": 487,
+        "canonical_hds_document_path_references": 2,
+        "file_bodies": 0
+      }
+    ],
+    "classification_capture": "inspection_captures/013_hds_original_document_screen/stdout.txt.gz",
+    "inspection_scope": "Only frozen 65 files, the 70 receipt members, and specifically selected public-recording/packet evidence; no whole-repository or arbitrary-reference audit. Authority capture contains operational Owner/AGENTS/current-state documents, not canonical HDS design originals."
+  },
+  "coverage": {
+    "retained_report_recomputation": {
+      "games": 25,
+      "indexed_levels_sum": 183,
+      "level_rows": 183,
+      "unique_level_keys": 183,
+      "aggregate_actions_sum": 5112,
+      "known_sequence_records": 9,
+      "trajectory_games": [
+        "cd82",
+        "sb26",
+        "sk48"
+      ],
+      "without_trajectory_games": [
+        "ar25",
+        "bp35",
+        "cn04",
+        "dc22",
+        "ft09",
+        "g50t",
+        "ka59",
+        "lf52",
+        "lp85",
+        "ls20",
+        "m0r0",
+        "r11l",
+        "re86",
+        "s5i5",
+        "sc25",
+        "sp80",
+        "su15",
+        "tn36",
+        "tr87",
+        "tu93",
+        "vc33",
+        "wa30"
+      ],
+      "initial_report_rows": 50,
+      "initial_unique_packet_hashes": 25,
+      "initial_unique_frames": 27,
+      "failure_report_members": 1797,
+      "failure_report_unique_members": 1797,
+      "failure_packet_kind_counts": {
+        "saved_evidence": 1,
+        "before": 90,
+        "response": 90
+      },
+      "failure_response_frames": 1812,
+      "failure_response_states": {
+        "NOT_FINISHED": 90
+      }
+    },
+    "independent_raw_reverification": {
+      "corpora": [
+        {
+          "member": "arc-column-teacher-recovery-20261013/public-recording-v2.jsonl",
+          "bytes": 67880086,
+          "sha256": "e26ff1df251af042911126a067c08ee25973b01d3389269472eed6859a4383f2",
+          "rows": 258,
+          "frames": 5363,
+          "states": {
+            "NOT_FINISHED": 256,
+            "WIN": 1
+          },
+          "game_ids": {
+            "sb26-7fbdac44": 257
+          },
+          "footers": 1,
+          "parse_errors": [],
+          "invalid_frames": 0
+        },
+        {
+          "member": "arc-column-teacher-recovery-20261013/public-recording.jsonl",
+          "bytes": 50331648,
+          "sha256": "1dd0b8592f48eb391ed301e7eae82d97cb517593932177a6ac23f0c70f0058b4",
+          "rows": 220,
+          "frames": 3855,
+          "states": {
+            "NOT_FINISHED": 219
+          },
+          "game_ids": {
+            "sb26-7fbdac44": 219
+          },
+          "footers": 0,
+          "parse_errors": [
+            {
+              "row": 219,
+              "type": "JSONDecodeError"
+            }
+          ],
+          "invalid_frames": 0
+        },
+        {
+          "member": "arc-recovery-main-20261013/public-recordings/130512d8-1d1b-4ee4-ab4b-9e0397fa6af8.recording.jsonl",
+          "bytes": 6485013,
+          "sha256": "712c5f13f53714bddd0b234e0539660f6a6d6fe9b6a2c4c80196044a30801923",
+          "rows": 155,
+          "frames": 509,
+          "states": {
+            "NOT_FINISHED": 153,
+            "WIN": 1
+          },
+          "game_ids": {
+            "cd82-fb555c5d": 154
+          },
+          "footers": 1,
+          "parse_errors": [],
+          "invalid_frames": 0
+        },
+        {
+          "member": "arc-recovery-main-20261013/public-recordings/2e4399fe-f0f6-421d-bc32-7827ad792b96.recording.jsonl",
+          "bytes": 6279726,
+          "sha256": "85c9503d128bce20cda11542826fe89d1e0f6df5926b754428f7acc3762cb026",
+          "rows": 126,
+          "frames": 494,
+          "states": {
+            "NOT_FINISHED": 124,
+            "WIN": 1
+          },
+          "game_ids": {
+            "cd82-fb555c5d": 125
+          },
+          "footers": 1,
+          "parse_errors": [],
+          "invalid_frames": 0
+        },
+        {
+          "member": "arc-recovery-main-20261013/public-recordings/33f6b2f7-9e0d-41c5-ab94-5f929cdb85c1.recording.jsonl",
+          "bytes": 15995704,
+          "sha256": "d53d72ae638453542fb01556ecb2235eb5b884bd9fda9e96f7e317a6d7004833",
+          "rows": 356,
+          "frames": 1253,
+          "states": {
+            "NOT_FINISHED": 355
+          },
+          "game_ids": {
+            "cd82-fb555c5d": 355
+          },
+          "footers": 1,
+          "parse_errors": [],
+          "invalid_frames": 0
+        },
+        {
+          "member": "arc-chain-public-recording-20261013/api_response_v1.body",
+          "bytes": 26641728,
+          "sha256": "689b90f7968c96e1a08cd2f8bf73f62a404e03a3b5a1586de9b257034771c4e6",
+          "rows": 946,
+          "frames": 2110,
+          "states": {
+            "NOT_FINISHED": 944,
+            "WIN": 1
+          },
+          "game_ids": {
+            "sk48-41055498": 945
+          },
+          "footers": 1,
+          "parse_errors": [],
+          "invalid_frames": 0
+        }
+      ],
+      "initial_packet_copies": 50,
+      "unique_initial_packets": 25,
+      "unique_initial_frames": 27,
+      "initial_games": 25,
+      "failure_members_hash_verified": 1797,
+      "failure_packets_verified": 181,
+      "response_packets": 90,
+      "response_frames": 1812,
+      "response_states": {
+        "NOT_FINISHED": 90
+      },
+      "response_progress": {
+        "0": 8,
+        "1": 15,
+        "3": 15,
+        "2": 15,
+        "4": 17,
+        "5": 19,
+        "6": 1
+      },
+      "AS_limit_bytes": [
+        268435456,
+        268435456
+      ],
+      "RSS_KiB": 50208,
+      "limits": "Compressed/semantic failure evidence hashed only; no memory decompression, replay, or causal certification. No opaque members read."
+    },
+    "boundaries": [
+      "25 games and 183 levels are historical inventory/index coverage, not current fresh success coverage",
+      "5112 is the retained aggregate initial-action count; full raw joins remain unavailable, not zero prior measurements",
+      "Only cd82, sb26, sk48 have verified public temporal recording chains within surveyed assets; the other 22 lack such verified chains within this survey",
+      "Nine known-success sequence records are historical indexed records, not fresh reruns or general learned ability",
+      "Old truncated sb26 recording overlaps the v2 artifact; do not sum both as independent trajectories",
+      "90 response actions and 1812 phases remain NOT_FINISHED; observed progress 6 does not certify six levels",
+      "451 XZ failure members were byte-hashed only; no memory decompression, replay, causality or teacher-boundary certification"
+    ],
+    "not_repeated": [
+      "No SDK/native/HDS/game Action or fresh instance reproduction",
+      "No full 5112 raw reconstruction or per-level raw causal join",
+      "No canonical prior-memory source reopening outside the frozen payload",
+      "No whole-archive source/body inspection; only manifest metadata and selected public members",
+      "No temporal-adjacency/support/witness/applicability proof beyond retained report scope"
+    ]
+  },
+  "network": {
+    "new_requests": 0,
+    "retained_results": "DNS failures, pre-execution platform failure, and web-tool inaccessible/Internal Error; no HTTP response status/body obtained",
+    "current_inventory_obtained": false,
+    "authentication_conclusion": null,
+    "route_boundary": "arcprize.org benchmarking-client root and three.arcprize.org SDK/doc default coexist in retained public-interface observations. No global migration, current availability, or anonymous authorization conclusion. Exact upstream source commit/file bytes were not pinned.",
+    "retained_remote_report_transport_hash_verified_by_payload_pin": true,
+    "historical_privacy_receipt": "Snapshot only, not proof of current repository visibility"
+  },
+  "execution": {
+    "network_calls": 0,
+    "Git_or_Library_writes": 0,
+    "payload_source_imports_or_execution": 0,
+    "SDK_or_native_calls": 0,
+    "Action_calls": 0,
+    "opaque_reads": 0,
+    "bulk_extraction": false,
+    "AS_limit_bytes": 268435456,
+    "raw_recheck_peak_RSS_KiB": 50208
+  },
+  "capture_protocol": {
+    "strict_compliance": false,
+    "initial_deviation": "Before capture 001, a name/size-only pwd/find listing ran without a fresh leaf. It read no payload bodies. Reported immediately to parent.",
+    "initial_exact_command": "pwd; find arc-preservation-recovery-20261019/authority -maxdepth 1 -type f -name '*.md' -print; find arc-preservation-recovery-20261019/publication_coverage_network -maxdepth 2 -type f -printf '%P %s bytes\\n' | sort",
+    "failed_leaves_retained_unchanged": [
+      "002_payload_classify",
+      "003_payload_classify",
+      "004_payload_classify",
+      "005_payload_classify",
+      "010_raw_selected_reverification"
+    ],
+    "failed_run_causes": "Fail-closed missing explicit owned filename classifications in 002-005; member/path manifest-schema mismatch in 010. Corrected only in fresh leaves.",
+    "temporary_disk_budget_exceedance": {
+      "observed_bytes": 270084,
+      "limit_bytes": 204800,
+      "cause": "Successful 006 stdout unintentionally included a long first corpus record",
+      "remedy": "Exact successful stdout retained losslessly as gzip, with original-byte SHA-256 and lossless checks in fresh capture 007; successful 001 and 013 outputs similarly compacted in 011 and 014. Failed leaves and source files never overwritten."
+    },
+    "capture_reads": "Results reviewed only after exit status was persisted. Sources are standalone validators, not executed payload scripts.",
+    "report_plus_capture_limit_bytes": 204800
+  }
+}

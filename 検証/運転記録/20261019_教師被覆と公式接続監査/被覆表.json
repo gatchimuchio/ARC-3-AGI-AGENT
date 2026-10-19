@@ -1,0 +1,5129 @@
+{
+  "scope": "Historical accessible evidence only. IDs index provenance, never runtime policy. No raw5112 identity join. No fresh network inventory.",
+  "games": [
+    {
+      "base_game_id": "ar25",
+      "versioned_prior_game_id": "ar25-0c556536",
+      "indexed_levels": 8,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "aggregate_first_action_count": 25,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 25
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/3ce8f7ce36ea5b9ca17e2cd835012a0c.public.json",
+          "sha256": "f00ffe3763742cf94729c4fddc6533a50aae16f40e795de635490dc5e3bd2d1d",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "bp35",
+      "versioned_prior_game_id": "bp35-0a0ad940",
+      "indexed_levels": 9,
+      "prior_action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "aggregate_first_action_count": 104,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 102,
+        "GAME_OVER": 2
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/3cab86b4d35af62fe5ffd6f96294f8d3.public.json",
+          "sha256": "1015bbc1ff734829af0eda42a3557ec506c8effef6fabf18279a65e895e78730",
+          "frames": 2,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "cd82",
+      "versioned_prior_game_id": "cd82-fb555c5d",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "aggregate_first_action_count": 28,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 28
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/3af56139c3223392d00afc9d738bf8b9.public.json",
+          "sha256": "3d8376b05975fa53c554cb48f803f22a5c6cd155127686061caab836d92da629",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [
+        {
+          "member": "arc-recovery-main-20261013/public-recordings/130512d8-1d1b-4ee4-ab4b-9e0397fa6af8.recording.jsonl",
+          "rows": 155,
+          "frames": 509,
+          "sha256": "712c5f13f53714bddd0b234e0539660f6a6d6fe9b6a2c4c80196044a30801923",
+          "verified": true,
+          "parse_errors": 0,
+          "progress_values": {
+            "0": 55,
+            "1": 6,
+            "2": 41,
+            "3": 18,
+            "4": 17,
+            "5": 16,
+            "6": 1
+          },
+          "action_counts": {
+            "0": 1,
+            "6": 51,
+            "2": 23,
+            "4": 23,
+            "3": 24,
+            "1": 14,
+            "5": 18
+          },
+          "state_counts": {
+            "NOT_FINISHED": 153,
+            "WIN": 1
+          },
+          "prior5112_identity_join": false
+        },
+        {
+          "member": "arc-recovery-main-20261013/public-recordings/2e4399fe-f0f6-421d-bc32-7827ad792b96.recording.jsonl",
+          "rows": 126,
+          "frames": 494,
+          "sha256": "85c9503d128bce20cda11542826fe89d1e0f6df5926b754428f7acc3762cb026",
+          "verified": true,
+          "parse_errors": 0,
+          "progress_values": {
+            "0": 44,
+            "1": 6,
+            "2": 25,
+            "3": 16,
+            "4": 17,
+            "5": 16,
+            "6": 1
+          },
+          "action_counts": {
+            "0": 2,
+            "1": 16,
+            "2": 20,
+            "3": 22,
+            "4": 20,
+            "6": 25,
+            "5": 20
+          },
+          "state_counts": {
+            "NOT_FINISHED": 124,
+            "WIN": 1
+          },
+          "prior5112_identity_join": false
+        },
+        {
+          "member": "arc-recovery-main-20261013/public-recordings/33f6b2f7-9e0d-41c5-ab94-5f929cdb85c1.recording.jsonl",
+          "rows": 356,
+          "frames": 1253,
+          "sha256": "d53d72ae638453542fb01556ecb2235eb5b884bd9fda9e96f7e317a6d7004833",
+          "verified": true,
+          "parse_errors": 0,
+          "progress_values": {
+            "0": 61,
+            "1": 81,
+            "2": 213
+          },
+          "action_counts": {
+            "0": 3,
+            "1": 57,
+            "2": 52,
+            "4": 61,
+            "6": 61,
+            "3": 57,
+            "5": 64
+          },
+          "state_counts": {
+            "NOT_FINISHED": 355
+          },
+          "prior5112_identity_join": false
+        }
+      ],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "six locally joined historical goal6 teacher pairs; 112 phases, 35 interpretable / 77 unknown, see local_teacher_refs",
+      "role_relation_vocabulary": "10x10 reference/target; tool color/direction; fixed geometric overwrite membership is an explicit prior; deficient/satisfied goal relations; repair-all and preserve-all endpoint predicates"
+    },
+    {
+      "base_game_id": "cn04",
+      "versioned_prior_game_id": "cn04-2fe56bfb",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "aggregate_first_action_count": 64,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 64
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/e9663f477d40804be4b8bf251247fd23.public.json",
+          "sha256": "1e60b4f8ccc7aaa7326ed019bbff4030be9e1700cd8fd26ab8e7e3693b7ba9de",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "dc22",
+      "versioned_prior_game_id": "dc22-fdcac232",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "aggregate_first_action_count": 54,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 54
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/36a2556e5b89fb0f29d601edabdfb2e3.public.json",
+          "sha256": "8fa4a71d57af652f7b61e0e7709aaccaf9d13d02e9d99350d7432531535a12e0",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "ft09",
+      "versioned_prior_game_id": "ft09-0d8bbf25",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        6
+      ],
+      "aggregate_first_action_count": 114,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 114
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [
+        {
+          "level": 1,
+          "length": 4,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        }
+      ],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/c8e436b33980f00905e33ec9581a810d.public.json",
+          "sha256": "af32cca6ad763f921a84779d3103f67e43e86c8c230d8d664a521f66366e6dbe",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "g50t",
+      "versioned_prior_game_id": "g50t-5849a774",
+      "indexed_levels": 7,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "aggregate_first_action_count": 35,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 35
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/f8a742299c1416596205ae5520473f80.public.json",
+          "sha256": "04e5ce0ebf74a6c34631671d4bb40ae5c2937c55550cb2669a40910d9e11b0d4",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "ka59",
+      "versioned_prior_game_id": "ka59-38d34dbb",
+      "indexed_levels": 7,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "aggregate_first_action_count": 41,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 41
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/bb7311060c4be9194402c6ef1e168203.public.json",
+          "sha256": "5df59fd29001509be70fd45a2b9228ee8061fcd08f753af86cfd9499e22838d7",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "lf52",
+      "versioned_prior_game_id": "lf52-271a04aa",
+      "indexed_levels": 10,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "aggregate_first_action_count": 103,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 103
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/9b118ff0fe5053f83426d10126e833c8.public.json",
+          "sha256": "4f676910f71f210983a232a75775e3022772f8fecc068f48298f5eecea8cab50",
+          "frames": 2,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "lp85",
+      "versioned_prior_game_id": "lp85-305b61c3",
+      "indexed_levels": 8,
+      "prior_action_ids": [
+        6
+      ],
+      "aggregate_first_action_count": 51,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 51
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/b859fc498a184bc9e552dc1f73b119e3.public.json",
+          "sha256": "c3e5903fea863b083a585046f6473b76e6d691021ef203bceb99e2d01664a325",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "ls20",
+      "versioned_prior_game_id": "ls20-9607627b",
+      "indexed_levels": 7,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "aggregate_first_action_count": 28,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 28
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/97fd123d24dc8f49009517f9383e0a74.public.json",
+          "sha256": "c02878066995272b754baa2003416fd940b78efa2ebf9339d6453e2d2cd3429d",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "m0r0",
+      "versioned_prior_game_id": "m0r0-492f87ba",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "aggregate_first_action_count": 47,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 47
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/da919d48571b5ea074af7f001350f388.public.json",
+          "sha256": "bc462759ba6bac2fb8b26ca50577d81d521d6ed98c9eaf118e021295c740b6a1",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "r11l",
+      "versioned_prior_game_id": "r11l-495a7899",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        6
+      ],
+      "aggregate_first_action_count": 1536,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 1536
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/a3d06a346dfba99804df2e6e8ffabbeb.public.json",
+          "sha256": "0b5bea02886fdea5c9eda2251c184d653125ebd6a1af48dbdafb6f06312a7ef3",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "re86",
+      "versioned_prior_game_id": "re86-8af5384d",
+      "indexed_levels": 8,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "aggregate_first_action_count": 40,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 40
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/bee67f3562980ffe8fc6188433ef4d81.public.json",
+          "sha256": "90849bfdca9ca9d19605f5550f9dda9a52dc1fa0837f00ddbb3aa1e44ef4448b",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "s5i5",
+      "versioned_prior_game_id": "s5i5-18d95033",
+      "indexed_levels": 8,
+      "prior_action_ids": [
+        6
+      ],
+      "aggregate_first_action_count": 78,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 78
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/8de0694a5a9cf800721328cb0e77ca7f.public.json",
+          "sha256": "a9e6f1a47432a8beda6e6f4dfbd82a65b02308dccf778007bbcabedf4b763b14",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "sb26",
+      "versioned_prior_game_id": "sb26-7fbdac44",
+      "indexed_levels": 8,
+      "prior_action_ids": [
+        5,
+        6,
+        7
+      ],
+      "aggregate_first_action_count": 66,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 66
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/af7b768c50cded9162828afbaac6485f.public.json",
+          "sha256": "ce4c2950ac1d3fd1abbd67bb84196397777d080f2f0c6258245be8241b25cdab",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [
+        {
+          "member": "arc-column-teacher-recovery-20261013/public-recording-v2.jsonl",
+          "rows": 258,
+          "frames": 5363,
+          "sha256": "e26ff1df251af042911126a067c08ee25973b01d3389269472eed6859a4383f2",
+          "verified": true,
+          "parse_errors": 0,
+          "progress_values": {
+            "0": 12,
+            "1": 31,
+            "2": 16,
+            "3": 19,
+            "4": 66,
+            "5": 23,
+            "6": 58,
+            "7": 31,
+            "8": 1
+          },
+          "action_counts": {
+            "0": 1,
+            "5": 26,
+            "6": 230
+          },
+          "state_counts": {
+            "NOT_FINISHED": 256,
+            "WIN": 1
+          },
+          "prior5112_identity_join": false
+        },
+        {
+          "member": "arc-column-teacher-recovery-20261013/public-recording.jsonl",
+          "rows": 220,
+          "frames": 3855,
+          "sha256": "1dd0b8592f48eb391ed301e7eae82d97cb517593932177a6ac23f0c70f0058b4",
+          "verified": true,
+          "parse_errors": 1,
+          "progress_values": {
+            "0": 12,
+            "1": 31,
+            "2": 16,
+            "3": 19,
+            "4": 66,
+            "5": 23,
+            "6": 52
+          },
+          "action_counts": {
+            "0": 1,
+            "5": 20,
+            "6": 198
+          },
+          "state_counts": {
+            "NOT_FINISHED": 219
+          },
+          "prior5112_identity_join": false
+        }
+      ],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "four historical teachers fully joined; full 58-relation control pack joined to 59 recording rows / 1530 after phases; separate 90-action failed-closed live run",
+      "role_relation_vocabulary": "structural cell/column/swatches/panel roles; complete goal pool; preparation/effect/repair/preservation queries; disputed or unsupported evidence must gate execution",
+      "historical_failed_run": {
+        "before_packets": 90,
+        "response_packets": 90,
+        "response_phases": 1812,
+        "all_states": "NOT_FINISHED",
+        "public_progress_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "all_selected_1797_member_hashes_verified": true,
+        "semantic_replay_this_unit": false,
+        "certified_new_levels": 0,
+        "detail": "reports_v2/failure_packet_coverage.json"
+      }
+    },
+    {
+      "base_game_id": "sc25",
+      "versioned_prior_game_id": "sc25-635fd71a",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "aggregate_first_action_count": 78,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 78
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/54c7b05b1c2ef056348e73e6751779f4.public.json",
+          "sha256": "4863be98eeecf0d98e0751e8c145fcff5a11e787a1d555bbd2dae7f45bd026ce",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "sk48",
+      "versioned_prior_game_id": "sk48-d8078629",
+      "indexed_levels": 8,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "aggregate_first_action_count": 37,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 37
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/215e92a7f01e3d0cdbe17e6e71ebb19f.public.json",
+          "sha256": "69cb81fd00ef12ceff4015a99a3689e4b515631519f60a1126578068d3ad542c",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [
+        {
+          "member": "arc-chain-public-recording-20261013/api_response_v1.body",
+          "rows": 946,
+          "frames": 2110,
+          "sha256": "689b90f7968c96e1a08cd2f8bf73f62a404e03a3b5a1586de9b257034771c4e6",
+          "verified": true,
+          "parse_errors": 0,
+          "progress_values": {
+            "0": 38,
+            "1": 182,
+            "2": 70,
+            "3": 36,
+            "4": 294,
+            "5": 114,
+            "6": 125,
+            "7": 85,
+            "8": 1
+          },
+          "action_counts": {
+            "0": 13,
+            "4": 286,
+            "3": 222,
+            "1": 166,
+            "2": 175,
+            "6": 83
+          },
+          "state_counts": {
+            "NOT_FINISHED": 944,
+            "WIN": 1
+          },
+          "prior5112_identity_join": false
+        }
+      ],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "complete public recording available; historical chain teachers not fully causally rejoined in this audit",
+      "role_relation_vocabulary": "public directional/click actions and endpoint progress available; chain relation labels require existing producer and phase witness rejoin; version 41055498 differs from prior d8078629"
+    },
+    {
+      "base_game_id": "sp80",
+      "versioned_prior_game_id": "sp80-589a99af",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "aggregate_first_action_count": 50,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 50
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/1dfb2acee2674aa5d260a3aba5497f6a.public.json",
+          "sha256": "5e4c1dad7f737c141f6fcfef130005a17973f4682ddde5bc4d00c96d0ac19cfe",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "su15",
+      "versioned_prior_game_id": "su15-1944f8ab",
+      "indexed_levels": 9,
+      "prior_action_ids": [
+        6,
+        7
+      ],
+      "aggregate_first_action_count": 2016,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 2016
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/3b39b4802bb5cd2aa83d3abb2c8d9c5f.public.json",
+          "sha256": "595fe6ef36039ca95be9137d7404ffe0a4cec61dc3fa94e6801cfd6aae06c046",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "tn36",
+      "versioned_prior_game_id": "tn36-ef4dde99",
+      "indexed_levels": 7,
+      "prior_action_ids": [
+        6
+      ],
+      "aggregate_first_action_count": 364,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 364
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/1d441d0396b6509eec13e80c49afffd7.public.json",
+          "sha256": "47d6845b5f0383cee820707623410ca99a19b6329213b019d4a13017578a1bd2",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "tr87",
+      "versioned_prior_game_id": "tr87-cd924810",
+      "indexed_levels": 6,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "aggregate_first_action_count": 24,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 24
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/217bf16c61881db64fa2b41410003377.public.json",
+          "sha256": "e6721047925a4260bd94d7ebf1964030ccaa18533a0c85f2dd016955650ac164",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "tu93",
+      "versioned_prior_game_id": "tu93-0768757b",
+      "indexed_levels": 9,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "aggregate_first_action_count": 36,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 36
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [
+        {
+          "level": 1,
+          "length": 18,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        },
+        {
+          "level": 2,
+          "length": 10,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        },
+        {
+          "level": 3,
+          "length": 19,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        },
+        {
+          "level": 4,
+          "length": 17,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        },
+        {
+          "level": 7,
+          "length": 14,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        },
+        {
+          "level": 8,
+          "length": 21,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        }
+      ],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/acbf71a565517f4fc541bc91a0227b15.public.json",
+          "sha256": "b18e8844449379979dd7b5d5f08a37a90f9d501e65c3cf8576c5578a854f96be",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "vc33",
+      "versioned_prior_game_id": "vc33-5430563c",
+      "indexed_levels": 7,
+      "prior_action_ids": [
+        6
+      ],
+      "aggregate_first_action_count": 48,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 48
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [
+        {
+          "level": 1,
+          "length": 3,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        },
+        {
+          "level": 2,
+          "length": 7,
+          "historical_reproduced_flag": true,
+          "before_after_witness": "not joined; sequence only, not runtime policy"
+        }
+      ],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/75a9fe78b98f27ea43a4cf6523488dad.public.json",
+          "sha256": "61625878e7ed5706f436adb7161b63fd5163a63ac913f768ef4527eb19e065ac",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    },
+    {
+      "base_game_id": "wa30",
+      "versioned_prior_game_id": "wa30-ee6fef47",
+      "indexed_levels": 9,
+      "prior_action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "aggregate_first_action_count": 45,
+      "aggregate_status_counts": {
+        "NOT_FINISHED": 45
+      },
+      "aggregate_hidden_rates": "present but measurement provenance unavailable; excluded from runtime knowledge",
+      "raw5112_record_join": "not available in verified prior or surveyed corpus indexes",
+      "known_success_records": [],
+      "saved_initial_observations": [
+        {
+          "member": "arc-official-fresh-all25-20261013/observation/e8c60bf6548bc9abac9d75329ff66f01.public.json",
+          "sha256": "0ed1a5b17b936a0b9ab516341af6749070beeb670a131c8203269ecb15e9f345",
+          "frames": 1,
+          "level_position": "levels_completed=0; initial only",
+          "manifest_verified": true
+        }
+      ],
+      "public_corpora": [],
+      "per_level_raw_coverage": "only initial observation level position verified; corpus score is not silently mapped to prior level IDs",
+      "HOLD": "not present as an environment field; native/pure HOLD evidence separate",
+      "causality": "public temporal adjacency only until predicate/witness/applicability joins established",
+      "public_causal_teacher_status": "no complete causal teacher chain verified",
+      "role_relation_vocabulary": "prior index has no grounded role/relation records; initial pixels referenceable; action IDs do not establish effects"
+    }
+  ],
+  "levels": [
+    {
+      "game_id": "ar25",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 32,
+      "board_dimensions_prior_only": [
+        21,
+        21
+      ],
+      "sprite_count_prior_only": 11,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ar25",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 50,
+      "board_dimensions_prior_only": [
+        21,
+        21
+      ],
+      "sprite_count_prior_only": 10,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ar25",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 75,
+      "board_dimensions_prior_only": [
+        21,
+        21
+      ],
+      "sprite_count_prior_only": 29,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ar25",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 37,
+      "board_dimensions_prior_only": [
+        21,
+        21
+      ],
+      "sprite_count_prior_only": 27,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ar25",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 89,
+      "board_dimensions_prior_only": [
+        21,
+        21
+      ],
+      "sprite_count_prior_only": 26,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ar25",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 159,
+      "board_dimensions_prior_only": [
+        21,
+        21
+      ],
+      "sprite_count_prior_only": 56,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ar25",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 233,
+      "board_dimensions_prior_only": [
+        21,
+        21
+      ],
+      "sprite_count_prior_only": 46,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ar25",
+      "level": 8,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 73,
+      "board_dimensions_prior_only": [
+        21,
+        21
+      ],
+      "sprite_count_prior_only": 64,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 1,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 21,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 2,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 48,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 3,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 44,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 4,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 38,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 5,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 33,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 6,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 87,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 7,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 86,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 8,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 131,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "bp35",
+      "level": 9,
+      "action_ids": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 163,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cd82",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 55,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 7,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cd82",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 8,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 8,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cd82",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 41,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cd82",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 21,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cd82",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 23,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cd82",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 23,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cn04",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 29,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 2,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cn04",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 54,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 4,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cn04",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 85,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 3,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cn04",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 300,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 4,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cn04",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 208,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 8,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "cn04",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 113,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "dc22",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 59,
+      "board_dimensions_prior_only": [
+        64,
+        44
+      ],
+      "sprite_count_prior_only": 17,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "dc22",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 102,
+      "board_dimensions_prior_only": [
+        64,
+        48
+      ],
+      "sprite_count_prior_only": 19,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "dc22",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 67,
+      "board_dimensions_prior_only": [
+        64,
+        48
+      ],
+      "sprite_count_prior_only": 24,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "dc22",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 98,
+      "board_dimensions_prior_only": [
+        64,
+        48
+      ],
+      "sprite_count_prior_only": 26,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "dc22",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 324,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 37,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "dc22",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 578,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 72,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ft09",
+      "level": 1,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 43,
+      "board_dimensions_prior_only": [
+        32,
+        32
+      ],
+      "sprite_count_prior_only": 19,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ft09",
+      "level": 2,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 12,
+      "board_dimensions_prior_only": [
+        32,
+        32
+      ],
+      "sprite_count_prior_only": 17,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ft09",
+      "level": 3,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 23,
+      "board_dimensions_prior_only": [
+        32,
+        32
+      ],
+      "sprite_count_prior_only": 28,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ft09",
+      "level": 4,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 28,
+      "board_dimensions_prior_only": [
+        32,
+        32
+      ],
+      "sprite_count_prior_only": 24,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ft09",
+      "level": 5,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 65,
+      "board_dimensions_prior_only": [
+        32,
+        32
+      ],
+      "sprite_count_prior_only": 39,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ft09",
+      "level": 6,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 37,
+      "board_dimensions_prior_only": [
+        32,
+        32
+      ],
+      "sprite_count_prior_only": 28,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "g50t",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 78,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 17,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "g50t",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 175,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 18,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "g50t",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 179,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 22,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "g50t",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 230,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 20,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "g50t",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 96,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 29,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "g50t",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 54,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 33,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "g50t",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 67,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 32,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ka59",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 28,
+      "board_dimensions_prior_only": [
+        45,
+        45
+      ],
+      "sprite_count_prior_only": 6,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ka59",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 109,
+      "board_dimensions_prior_only": [
+        63,
+        63
+      ],
+      "sprite_count_prior_only": 10,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ka59",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 51,
+      "board_dimensions_prior_only": [
+        54,
+        54
+      ],
+      "sprite_count_prior_only": 7,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ka59",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 51,
+      "board_dimensions_prior_only": [
+        54,
+        54
+      ],
+      "sprite_count_prior_only": 8,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ka59",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 33,
+      "board_dimensions_prior_only": [
+        63,
+        63
+      ],
+      "sprite_count_prior_only": 10,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ka59",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 132,
+      "board_dimensions_prior_only": [
+        63,
+        63
+      ],
+      "sprite_count_prior_only": 9,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ka59",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 326,
+      "board_dimensions_prior_only": [
+        63,
+        63
+      ],
+      "sprite_count_prior_only": 10,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 32,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 81,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 60,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 71,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 205,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 148,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 244,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 8,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 109,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 9,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 164,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lf52",
+      "level": 10,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 225,
+      "board_dimensions_prior_only": [
+        8,
+        8
+      ],
+      "sprite_count_prior_only": 1,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lp85",
+      "level": 1,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 17,
+      "board_dimensions_prior_only": [
+        32,
+        19
+      ],
+      "sprite_count_prior_only": 23,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lp85",
+      "level": 2,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 38,
+      "board_dimensions_prior_only": [
+        41,
+        41
+      ],
+      "sprite_count_prior_only": 50,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lp85",
+      "level": 3,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 31,
+      "board_dimensions_prior_only": [
+        39,
+        31
+      ],
+      "sprite_count_prior_only": 36,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lp85",
+      "level": 4,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 16,
+      "board_dimensions_prior_only": [
+        57,
+        57
+      ],
+      "sprite_count_prior_only": 54,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lp85",
+      "level": 5,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 41,
+      "board_dimensions_prior_only": [
+        27,
+        32
+      ],
+      "sprite_count_prior_only": 27,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lp85",
+      "level": 6,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 60,
+      "board_dimensions_prior_only": [
+        60,
+        64
+      ],
+      "sprite_count_prior_only": 114,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lp85",
+      "level": 7,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 26,
+      "board_dimensions_prior_only": [
+        48,
+        36
+      ],
+      "sprite_count_prior_only": 22,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "lp85",
+      "level": 8,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 159,
+      "board_dimensions_prior_only": [
+        63,
+        63
+      ],
+      "sprite_count_prior_only": 84,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ls20",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 22,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 128,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ls20",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 123,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 110,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ls20",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 73,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 96,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ls20",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 84,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 109,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ls20",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 96,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 101,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ls20",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 192,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 102,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "ls20",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 186,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 103,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "m0r0",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 30,
+      "board_dimensions_prior_only": [
+        11,
+        11
+      ],
+      "sprite_count_prior_only": 3,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "m0r0",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 111,
+      "board_dimensions_prior_only": [
+        13,
+        13
+      ],
+      "sprite_count_prior_only": 29,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "m0r0",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 203,
+      "board_dimensions_prior_only": [
+        13,
+        13
+      ],
+      "sprite_count_prior_only": 6,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "m0r0",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 26,
+      "board_dimensions_prior_only": [
+        11,
+        11
+      ],
+      "sprite_count_prior_only": 22,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "m0r0",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 500,
+      "board_dimensions_prior_only": [
+        15,
+        15
+      ],
+      "sprite_count_prior_only": 11,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "m0r0",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 237,
+      "board_dimensions_prior_only": [
+        13,
+        13
+      ],
+      "sprite_count_prior_only": 70,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "r11l",
+      "level": 1,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 22,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 5,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "r11l",
+      "level": 2,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 33,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 11,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "r11l",
+      "level": 3,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 51,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 12,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "r11l",
+      "level": 4,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 26,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 24,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "r11l",
+      "level": 5,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 52,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 19,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "r11l",
+      "level": 6,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 49,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 21,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "re86",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 26,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 3,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "re86",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 42,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 4,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "re86",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 86,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 4,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "re86",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 108,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 9,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "re86",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 189,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 9,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "re86",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 139,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 4,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "re86",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 424,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 10,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "re86",
+      "level": 8,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 241,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 19,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "s5i5",
+      "level": 1,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 20,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 10,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "s5i5",
+      "level": 2,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 89,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 12,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "s5i5",
+      "level": 3,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 106,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 20,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "s5i5",
+      "level": 4,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 54,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 17,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "s5i5",
+      "level": 5,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 162,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 18,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "s5i5",
+      "level": 6,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 38,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 12,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "s5i5",
+      "level": 7,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 86,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 20,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "s5i5",
+      "level": 8,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 83,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 24,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sb26",
+      "level": 1,
+      "action_ids": [
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 18,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 28,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed",
+      "failure_run_public_position_observed": true,
+      "failure_run_position_is_success_certificate": false
+    },
+    {
+      "game_id": "sb26",
+      "level": 2,
+      "action_ids": [
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 28,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 33,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed",
+      "failure_run_public_position_observed": true,
+      "failure_run_position_is_success_certificate": false
+    },
+    {
+      "game_id": "sb26",
+      "level": 3,
+      "action_ids": [
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 18,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 34,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed",
+      "failure_run_public_position_observed": true,
+      "failure_run_position_is_success_certificate": false
+    },
+    {
+      "game_id": "sb26",
+      "level": 4,
+      "action_ids": [
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 19,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 32,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed",
+      "failure_run_public_position_observed": true,
+      "failure_run_position_is_success_certificate": false
+    },
+    {
+      "game_id": "sb26",
+      "level": 5,
+      "action_ids": [
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 31,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 37,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed",
+      "failure_run_public_position_observed": true,
+      "failure_run_position_is_success_certificate": false
+    },
+    {
+      "game_id": "sb26",
+      "level": 6,
+      "action_ids": [
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 23,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 44,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed",
+      "failure_run_public_position_observed": true,
+      "failure_run_position_is_success_certificate": false
+    },
+    {
+      "game_id": "sb26",
+      "level": 7,
+      "action_ids": [
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 58,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 35,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed",
+      "failure_run_public_position_observed": true,
+      "failure_run_position_is_success_certificate": false
+    },
+    {
+      "game_id": "sb26",
+      "level": 8,
+      "action_ids": [
+        5,
+        6,
+        7
+      ],
+      "baseline_actions": 18,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 43,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed",
+      "failure_run_public_position_observed": false,
+      "failure_run_position_is_success_certificate": false
+    },
+    {
+      "game_id": "sc25",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 36,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 26,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sc25",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 6,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 29,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sc25",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 32,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 29,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sc25",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 83,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 31,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sc25",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 143,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 42,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sc25",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "baseline_actions": 50,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 43,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sk48",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 61,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 23,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sk48",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 177,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 26,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sk48",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 101,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 32,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sk48",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 103,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 41,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sk48",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 230,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 29,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sk48",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 181,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 44,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sk48",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 125,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 42,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sk48",
+      "level": 8,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7
+      ],
+      "baseline_actions": 92,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 29,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sp80",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 39,
+      "board_dimensions_prior_only": [
+        16,
+        16
+      ],
+      "sprite_count_prior_only": 7,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sp80",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 58,
+      "board_dimensions_prior_only": [
+        16,
+        16
+      ],
+      "sprite_count_prior_only": 10,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sp80",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 25,
+      "board_dimensions_prior_only": [
+        16,
+        16
+      ],
+      "sprite_count_prior_only": 15,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sp80",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 148,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sp80",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 96,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 16,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "sp80",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "baseline_actions": 152,
+      "board_dimensions_prior_only": [
+        20,
+        20
+      ],
+      "sprite_count_prior_only": 14,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 1,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 22,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 9,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 2,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 42,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 3,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 26,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 16,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 4,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 115,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 14,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 5,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 36,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 15,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 6,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 31,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 8,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 7,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 8,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 8,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 40,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 16,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "su15",
+      "level": 9,
+      "action_ids": [
+        6,
+        7
+      ],
+      "baseline_actions": 41,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 16,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tn36",
+      "level": 1,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 32,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 30,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tn36",
+      "level": 2,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 72,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 76,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tn36",
+      "level": 3,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 26,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 96,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tn36",
+      "level": 4,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 40,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 89,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tn36",
+      "level": 5,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 30,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 91,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tn36",
+      "level": 6,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 55,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 95,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tn36",
+      "level": 7,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 62,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 100,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tr87",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 54,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 53,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tr87",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 58,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 65,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tr87",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 40,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 73,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tr87",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 45,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 69,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tr87",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 71,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 45,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tr87",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 146,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 55,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 19,
+      "board_dimensions_prior_only": [
+        39,
+        39
+      ],
+      "sprite_count_prior_only": 3,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 16,
+      "board_dimensions_prior_only": [
+        45,
+        45
+      ],
+      "sprite_count_prior_only": 4,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 34,
+      "board_dimensions_prior_only": [
+        45,
+        45
+      ],
+      "sprite_count_prior_only": 6,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 42,
+      "board_dimensions_prior_only": [
+        51,
+        51
+      ],
+      "sprite_count_prior_only": 5,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 123,
+      "board_dimensions_prior_only": [
+        49,
+        49
+      ],
+      "sprite_count_prior_only": 8,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 80,
+      "board_dimensions_prior_only": [
+        45,
+        45
+      ],
+      "sprite_count_prior_only": 11,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 14,
+      "board_dimensions_prior_only": [
+        45,
+        45
+      ],
+      "sprite_count_prior_only": 5,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 8,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 23,
+      "board_dimensions_prior_only": [
+        42,
+        42
+      ],
+      "sprite_count_prior_only": 5,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "tu93",
+      "level": 9,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "baseline_actions": 111,
+      "board_dimensions_prior_only": [
+        51,
+        51
+      ],
+      "sprite_count_prior_only": 9,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "vc33",
+      "level": 1,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 7,
+      "board_dimensions_prior_only": [
+        32,
+        32
+      ],
+      "sprite_count_prior_only": 7,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "vc33",
+      "level": 2,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 18,
+      "board_dimensions_prior_only": [
+        32,
+        32
+      ],
+      "sprite_count_prior_only": 11,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": true,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "vc33",
+      "level": 3,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 44,
+      "board_dimensions_prior_only": [
+        52,
+        52
+      ],
+      "sprite_count_prior_only": 23,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "vc33",
+      "level": 4,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 61,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 19,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "vc33",
+      "level": 5,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 131,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 20,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "vc33",
+      "level": 6,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 34,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 13,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "vc33",
+      "level": 7,
+      "action_ids": [
+        6
+      ],
+      "baseline_actions": 152,
+      "board_dimensions_prior_only": [
+        48,
+        48
+      ],
+      "sprite_count_prior_only": 26,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 1,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 71,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 5,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": true,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 2,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 119,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 8,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 3,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 183,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 24,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 4,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 98,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 51,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 5,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 368,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 29,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 6,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 68,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 36,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 7,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 79,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 40,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 8,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 442,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 50,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    },
+    {
+      "game_id": "wa30",
+      "level": 9,
+      "action_ids": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "baseline_actions": 415,
+      "board_dimensions_prior_only": [
+        64,
+        64
+      ],
+      "sprite_count_prior_only": 73,
+      "full_object_role_relation_record": "absent in prior",
+      "first_action_raw_join": "unavailable",
+      "saved_initial_position": false,
+      "known_success_sequence_record": false,
+      "fresh_current_success": null,
+      "causal_teacher_chain": "see per-game verified corpora; score-to-level mapping not assumed"
+    }
+  ],
+  "teacher_reference_file": "reports_v2/local_teacher_refs.json"
+}
