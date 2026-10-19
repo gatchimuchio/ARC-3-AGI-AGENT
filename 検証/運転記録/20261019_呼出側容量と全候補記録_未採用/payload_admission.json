@@ -1,0 +1,1148 @@
+{
+  "schema": "arc3-guard-payload-content-admission-v1",
+  "decision": "ADMIT_BOUNDED_HISTORICAL_EVIDENCE_WITH_DISCLOSURES",
+  "scope": "Exactly the frozen 60 repair/review files, for private GitHub preservation as inert historical evidence. No runtime adoption or new native execution is admitted.",
+  "binding": {
+    "manifest": {
+      "path": "arc-preservation-recovery-20261019/publication_native_guard/payload_manifest.json",
+      "bytes": 18195,
+      "sha256": "94461877c44d481d09fbea4312b06e12b745f02fc8577301541ee8f612b00bb3"
+    },
+    "expected_manifest_sha256": "94461877c44d481d09fbea4312b06e12b745f02fc8577301541ee8f612b00bb3",
+    "base_main_as_declared_by_publisher": "9674d79c3f6801619cb6fa620b93865ab7822e99",
+    "file_count": 60,
+    "bytes": 354515,
+    "all_source_bytes_match_frozen_manifest": true,
+    "exact_tree_membership": true,
+    "new_unfrozen_disclosures_in_scope": false
+  },
+  "instructions_reread": [
+    {
+      "path": "arc-preservation-recovery-20261019/authority/Owner指示書原文_20261009.md",
+      "bytes": 12787,
+      "sha256": "d884388625d41e761ec845130c8ee3d7930992586973d461306b7d9b8218db9f"
+    },
+    {
+      "path": "arc-preservation-recovery-20261019/authority/Owner追加指示原文_20261010T1907.md",
+      "bytes": 778,
+      "sha256": "2cc8cbc8ab2ed802ab970ecce65b1942c92ee5db975f4f8deb6306f52766a576"
+    },
+    {
+      "path": "arc-preservation-recovery-20261019/authority/Owner追加指示原文_20261011T1904.md",
+      "bytes": 560,
+      "sha256": "d24cfd49b3a45b92356e77af890d193a97f27f33acf81fd6e331ef8955b6634c"
+    },
+    {
+      "path": "arc-preservation-recovery-20261019/main/AGENTS.md",
+      "bytes": 1627,
+      "sha256": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42"
+    },
+    {
+      "path": "arc-preservation-recovery-20261019/main/運用/権限順序.md",
+      "bytes": 948,
+      "sha256": "fdcef65a4b6ffc2179f76036f52aa2a4c47c69b8298f42678a47c245414bb4a3"
+    },
+    {
+      "path": "arc-preservation-recovery-20261019/main/制御/現在状態.json",
+      "bytes": 358,
+      "sha256": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+    }
+  ],
+  "method": {
+    "payload_source_imported": false,
+    "payload_source_executed": false,
+    "payload_tests_rerun": false,
+    "native_calls": 0,
+    "SDK_calls": 0,
+    "Action_calls": 0,
+    "Teach_calls": 0,
+    "git_operations": 0,
+    "uploads": 0,
+    "changes_to_inputs": 0,
+    "inspection": "All 37 text files manually inspected; all 23 reserve files parsed with a new independent bounded inert-data parser. Source syntax/imports checked by ast.parse only. SHA-256 verified by 64 KiB streaming reads. Native pilot files read only for exact source pins and streaming hashes; no opaque dependency traversal. No payload code imported, compiled or executed.",
+    "hash_read_chunk_bytes": 65536,
+    "largest_payload_file_bytes": 23572,
+    "reserve_capacity_bytes": 8192,
+    "inspection_AS_limit_bytes": 268435456,
+    "effective_AS_limit_bytes": 268435456,
+    "only_written_artifact": "arc-preservation-recovery-20261019/publication_native_guard/payload_admission.json"
+  },
+  "inventory": {
+    "extensions": {
+      ".log": 13,
+      ".py": 17,
+      ".json": 5,
+      ".md": 2,
+      ".reserve": 23
+    },
+    "regular_files_only": true,
+    "symlinks": 0,
+    "special_files": 0,
+    "pyc_files": 0,
+    "archives_or_opaque_binaries": 0
+  },
+  "identity_checks": {
+    "reviewed_manifest": {
+      "manifest": {
+        "path": "arc-native-guard-review-20261019/reviewed_manifest.json",
+        "bytes": 4698,
+        "sha256": "29c35021a726c575662d6aad991a3dcf66d299a562a1d908c3d2d700614a52cd"
+      },
+      "checked_files": 26,
+      "mismatches": [],
+      "covers_exact_repair_tree": true,
+      "does_not_claim_to_cover_review_tree": true
+    },
+    "prechange_pins": {
+      "manifest": {
+        "path": "arc-native-guard-repair-20261019/prechange_pins.json",
+        "bytes": 23572,
+        "sha256": "139d3d2bc54ba0cfcf31548ccff9828e77e3eaefbeebd456014737c78ac4ff89"
+      },
+      "checked_files": 126,
+      "mismatches": [],
+      "native_pilot_unchanged": true,
+      "files_read_as_inert_bytes_only": true
+    },
+    "semantic_source_pins": {
+      "checked_pairs": 8,
+      "mismatches": [],
+      "changed_files": [
+        "family_rehost.py",
+        "semantic_route_rehost.py"
+      ],
+      "manual_diff_finding": "Only observer keyword plumbing and a detached inline deepcopy record after each existing match evaluation were added. Enumeration, deduplication, match and rejection bodies are unchanged."
+    },
+    "owned_frozen_HDS_hash_references": {
+      "module_pins_checked": 12,
+      "save_method_source_pins_checked": 2,
+      "persistence_source_pin_checked": true,
+      "mismatches": [],
+      "native_modules_imported": false
+    }
+  },
+  "content_screening": {
+    "credentials_found": false,
+    "highly_sensitive_data_found": false,
+    "sensitive_personal_data_found": false,
+    "ordinary_personal_records_found": false,
+    "official_game_source_found": false,
+    "official_SDK_source_found": false,
+    "opaque_dependency_payload_found": false,
+    "pattern_hits": [],
+    "screening_basis": "Full human-readable source/JSON/log review plus byte-level pattern screening and complete reserve-frame inspection; hashes are manifest/source identity values, not credentials. No embedded email addresses, service URLs, provider secret prefixes, PEM material, or literal credential assignments were found. Absence findings apply to these exact 60 files, not referenced external repositories.",
+    "permitted_content": [
+      "Caller-owned Python wrappers, source allowlist hashes and semantic rehosts",
+      "Public-diagnostic fixture schema and references; own frozen HDS metadata/source hashes",
+      "Pure-test/probe history and diagnostic reserve frames"
+    ],
+    "adapter_boundary_note": "The unchanged ARC3境界.py adapter defines a callable environment.step boundary using caller-supplied objects. It bundles no SDK/game implementation and was not invoked; preservation does not activate it. Guard/launch_native expose Query (照会する), not a Teach route."
+  },
+  "historical_evidence": {
+    "pending_review_documents_retained_verbatim": [
+      "guard_repair/README.md",
+      "guard_repair/verification.json"
+    ],
+    "independent_final_review": "guard_review/README.md records BOUNDED PASS, with final logs of 21 pure tests and 2 adversarial tests. These are inspected prior results, not new executions by this auditor.",
+    "retained_attempt_logs": [
+      "guard_repair/pure_tests_attempt01.log",
+      "guard_repair/pure_tests_attempt02.log",
+      "guard_repair/pure_tests_attempt03.log",
+      "guard_repair/pure_tests_attempt04.log",
+      "guard_repair/pure_tests_attempt05.log",
+      "guard_repair/pure_tests_attempt06.log",
+      "guard_repair/pure_tests_attempt07.log"
+    ],
+    "failed_attempt": "guard_repair/pure_tests_attempt04.log retains the total-admission failure before old-directory reuse assertion; no failure log was removed.",
+    "retained_probe": "guard_review/probes.log records fork fallback overwrite; probes.py and all fork_fallback reserves are retained.",
+    "reported_semantic_fixture_result": {
+      "recorded_replies": 13,
+      "inline_assignment_rows": 24,
+      "accepted": 1,
+      "rejected": 23,
+      "whole_semantic_result_byte_equal_as_prior_tests_report": true,
+      "independently_reexecuted_here": false
+    },
+    "historical_source_capture_gap": {
+      "exact_pre_fix_bounded_store_snapshot_present": false,
+      "exact_pre_fix_launcher_snapshot_present": false,
+      "guard_before_is_original_pilot_guard": true,
+      "guard_before_equals_pinned_original": true,
+      "guard_before_does_not_capture_either_review_bug_implementation": true,
+      "fork_bug_evidence_present": [
+        "guard_review/probes.py",
+        "guard_review/probes.log",
+        "guard_review/fork_fallback/supervisor_failure.reserve",
+        "guard_review/README.md"
+      ],
+      "diagnostic_loss_original_output_present": false,
+      "diagnostic_loss_evidence_limit": "Review README reports initial diagnostic-loss reproduction. The retained probes.log has only the fork-overwrite line. encoding_failure_v2 and encoding_failure_final contain fallback records from corrected runs; they do not substitute for the missing original escaped-MemoryError output.",
+      "final_fix_evidence": [
+        "guard_repair/bounded_store.py",
+        "guard_repair/launcher.py",
+        "guard_repair/test_guard.py",
+        "guard_review/adversarial_tests.py",
+        "guard_review/pure_tests_final.log",
+        "guard_review/adversarial_tests_final.log"
+      ],
+      "required_disclosure": "This payload preserves all 60 currently existing files, but is not a complete exact-source snapshot history of both pre-fix bug versions. Do not reconstruct or claim unavailable original source/output was captured. Any later additive disclosure is outside this admission."
+    }
+  },
+  "reserve_summary": {
+    "files_checked": 23,
+    "valid_frames": 6,
+    "all_valid_frame_payload_hashes_verified": true,
+    "expected_failed_probe_anomalies": 1,
+    "other_anomalies": 0,
+    "anomaly": "fork_fallback/supervisor_failure.reserve has a valid supervisor_terminal frame at bytes 0..373, then a 129-byte overwritten child JSON suffix at byte 374, then zeros. This is retained failure evidence, not a clean framed stream or a secret/opaque payload. Never normalize, trim, repair or discard it."
+  },
+  "reserve_details": [
+    {
+      "path": "guard_review/encoding_failure_final/evidence.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_final/failure_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_final/metadata_logs.reserve",
+      "capacity_bytes": 8192,
+      "frames": [
+        {
+          "offset": 0,
+          "header": {
+            "name": "admission",
+            "bytes": 308,
+            "sha256": "5c358091904327189d09d15c3e11b705de41aaecd7341bfedf9f6c7ef89b6f73"
+          },
+          "payload_hash_valid": true,
+          "payload_json": {
+            "existing_bytes": 134004,
+            "reserved_bytes": 65536,
+            "total_limit": 100663296,
+            "mode": "bounded reviewed writers; NOT OS hard quota",
+            "capacities": {
+              "evidence": 8192,
+              "metadata_logs": 8192,
+              "worker_failure": 8192,
+              "supervisor_failure": 8192,
+              "worker_emergency": 8192,
+              "normal_state": 8192,
+              "post_state": 8192,
+              "failure_state": 8192
+            }
+          }
+        }
+      ],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_final/normal_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_final/post_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_final/supervisor_failure.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_final/worker_emergency.reserve",
+      "capacity_bytes": 8192,
+      "frames": [
+        {
+          "offset": 0,
+          "header": {
+            "name": "failure_diagnostic_unavailable",
+            "bytes": 123,
+            "sha256": "03e5519749f9b698bfb96a558d6a3702046f8370463a06f2fdb5a9f7b9b3b453"
+          },
+          "payload_hash_valid": true,
+          "payload_json": {
+            "status": "HOLD",
+            "failure": "diagnostic encoding failed",
+            "call_accounting": "unknown; inspect retained inputs; never resume"
+          }
+        }
+      ],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_final/worker_failure.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_v2/evidence.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_v2/failure_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_v2/metadata_logs.reserve",
+      "capacity_bytes": 8192,
+      "frames": [
+        {
+          "offset": 0,
+          "header": {
+            "name": "admission",
+            "bytes": 307,
+            "sha256": "1f1930b556f3f3381ca6ef58702abf4d2819c666414790e8013da512ae7fb789"
+          },
+          "payload_hash_valid": true,
+          "payload_json": {
+            "existing_bytes": 63183,
+            "reserved_bytes": 65536,
+            "total_limit": 100663296,
+            "mode": "bounded reviewed writers; NOT OS hard quota",
+            "capacities": {
+              "evidence": 8192,
+              "metadata_logs": 8192,
+              "worker_failure": 8192,
+              "supervisor_failure": 8192,
+              "worker_emergency": 8192,
+              "normal_state": 8192,
+              "post_state": 8192,
+              "failure_state": 8192
+            }
+          }
+        }
+      ],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_v2/normal_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_v2/post_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_v2/supervisor_failure.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_v2/worker_emergency.reserve",
+      "capacity_bytes": 8192,
+      "frames": [
+        {
+          "offset": 0,
+          "header": {
+            "name": "failure_diagnostic_unavailable",
+            "bytes": 123,
+            "sha256": "03e5519749f9b698bfb96a558d6a3702046f8370463a06f2fdb5a9f7b9b3b453"
+          },
+          "payload_hash_valid": true,
+          "payload_json": {
+            "status": "HOLD",
+            "failure": "diagnostic encoding failed",
+            "call_accounting": "unknown; inspect retained inputs; never resume"
+          }
+        }
+      ],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/encoding_failure_v2/worker_failure.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/fork_fallback/evidence.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/fork_fallback/failure_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/fork_fallback/metadata_logs.reserve",
+      "capacity_bytes": 8192,
+      "frames": [
+        {
+          "offset": 0,
+          "header": {
+            "name": "admission",
+            "bytes": 279,
+            "sha256": "1ad8ea52187bbc95734accabcbe0b5dd49d84c55ae9bae18ba4afd9f1c4a3e1e"
+          },
+          "payload_hash_valid": true,
+          "payload_json": {
+            "existing_bytes": 3712,
+            "reserved_bytes": 57344,
+            "total_limit": 100000,
+            "mode": "bounded reviewed writers; NOT OS hard quota",
+            "capacities": {
+              "evidence": 8192,
+              "metadata_logs": 8192,
+              "worker_failure": 8192,
+              "supervisor_failure": 8192,
+              "normal_state": 8192,
+              "post_state": 8192,
+              "failure_state": 8192
+            }
+          }
+        }
+      ],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/fork_fallback/normal_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/fork_fallback/post_state.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    },
+    {
+      "path": "guard_review/fork_fallback/supervisor_failure.reserve",
+      "capacity_bytes": 8192,
+      "frames": [
+        {
+          "offset": 0,
+          "header": {
+            "name": "supervisor_terminal",
+            "bytes": 248,
+            "sha256": "290f257a392259c7a3afce4f014e5368e4aa5390a495f1d6310a650afa532ee1"
+          },
+          "payload_hash_valid": true,
+          "payload_json": {
+            "status": "HOLD",
+            "wait_status": 256,
+            "wall_killed": false,
+            "call_frontier": "use exact worker failure record if present; otherwise UNKNOWN, never infer zero",
+            "byte_enforcement": "fixed owned reservations for reviewed writers only; no OS aggregate quota"
+          }
+        }
+      ],
+      "zero_filled_after_last_frame": false,
+      "anomaly": {
+        "offset": 374,
+        "reason": "overwritten_child_record_suffix_is_not_a_new_frame",
+        "declared_next_header_length": 6876840931609174380,
+        "retained_nonzero_extent_bytes": 129,
+        "retained_utf8": "_ordinal\":1,\"remaining_dynamic_count\":\"unknown until route enumeration\",\"maximum_remaining_calls\":null},\"automatic_resume\":false}",
+        "trailing_zero_bytes": 7689
+      }
+    },
+    {
+      "path": "guard_review/fork_fallback/worker_failure.reserve",
+      "capacity_bytes": 8192,
+      "frames": [],
+      "zero_filled_after_last_frame": true,
+      "anomaly": null
+    }
+  ],
+  "json_validation": [
+    {
+      "path": "guard_repair/prechange_pins.json",
+      "parsed": true,
+      "top_level": "list",
+      "entries": 126
+    },
+    {
+      "path": "guard_repair/semantic/source_hashes.json",
+      "parsed": true,
+      "top_level": "dict",
+      "entries": 3
+    },
+    {
+      "path": "guard_repair/verification.json",
+      "parsed": true,
+      "top_level": "dict",
+      "entries": 15
+    },
+    {
+      "path": "guard_review/preservation_check.json",
+      "parsed": true,
+      "top_level": "dict",
+      "entries": 2
+    },
+    {
+      "path": "guard_review/reviewed_manifest.json",
+      "parsed": true,
+      "top_level": "list",
+      "entries": 26
+    }
+  ],
+  "static_source_validation": [
+    {
+      "path": "guard_repair/bounded_store.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "hashlib",
+        "inspect",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "source_allowlist",
+        "struct",
+        "sys",
+        "threading",
+        "types"
+      ]
+    },
+    {
+      "path": "guard_repair/guard.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "bounded_store"
+      ]
+    },
+    {
+      "path": "guard_repair/guard_before.py",
+      "syntax_parsed_without_execution": true,
+      "imports": []
+    },
+    {
+      "path": "guard_repair/launcher.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "bounded_store",
+        "contextlib",
+        "guard",
+        "os",
+        "resource",
+        "signal",
+        "source_allowlist",
+        "time"
+      ]
+    },
+    {
+      "path": "guard_repair/semantic/ARC3境界.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "typing"
+      ]
+    },
+    {
+      "path": "guard_repair/semantic/family_rehost.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "collections",
+        "copy",
+        "itertools",
+        "types"
+      ]
+    },
+    {
+      "path": "guard_repair/semantic/fixed_enumeration_rehost.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "collections",
+        "itertools"
+      ]
+    },
+    {
+      "path": "guard_repair/semantic/goalset_candidate_rehost.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "copy",
+        "types"
+      ]
+    },
+    {
+      "path": "guard_repair/semantic/goalset_common_rehost.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "collections",
+        "copy",
+        "types"
+      ]
+    },
+    {
+      "path": "guard_repair/semantic/preservation_rehost.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ]
+    },
+    {
+      "path": "guard_repair/semantic/semantic_entry_rehost.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "copy",
+        "traceback"
+      ]
+    },
+    {
+      "path": "guard_repair/semantic/semantic_route_rehost.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "family_rehost",
+        "fixed_enumeration_rehost",
+        "goalset_candidate_rehost",
+        "goalset_common_rehost",
+        "preservation_rehost",
+        "semantic_entry_rehost"
+      ]
+    },
+    {
+      "path": "guard_repair/source_allowlist.py",
+      "syntax_parsed_without_execution": true,
+      "imports": []
+    },
+    {
+      "path": "guard_repair/test_guard.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "bounded_store",
+        "copy",
+        "guard",
+        "hashlib",
+        "json",
+        "launcher",
+        "os",
+        "pathlib",
+        "signal",
+        "struct",
+        "tempfile",
+        "test_trace",
+        "time",
+        "unittest"
+      ]
+    },
+    {
+      "path": "guard_repair/test_trace.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "collections",
+        "contextlib",
+        "copy",
+        "dataclasses",
+        "hashlib",
+        "importlib",
+        "importlib.abc",
+        "json",
+        "pathlib",
+        "resource",
+        "sys",
+        "unittest"
+      ]
+    },
+    {
+      "path": "guard_review/adversarial_tests.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "bounded_store",
+        "guard",
+        "json",
+        "launcher",
+        "pathlib",
+        "resource",
+        "sys",
+        "unittest"
+      ]
+    },
+    {
+      "path": "guard_review/probes.py",
+      "syntax_parsed_without_execution": true,
+      "imports": [
+        "bounded_store",
+        "json",
+        "launcher",
+        "os",
+        "pathlib",
+        "resource",
+        "struct",
+        "sys",
+        "tempfile"
+      ]
+    }
+  ],
+  "remaining_limits": [
+    "No native API import, save/readback, Query, Teach, SDK or Action was executed by this admission. Prior pure-test pass is not native-run admission.",
+    "Native Path.write_text can truncate the owned reserve and release its physical allocation. Logical caps and free-space admission do not guarantee arbitrary ENOSPC or full failure retention.",
+    "Exact caught-exception frontier is distinct from process death/SIGKILL or capture exhaustion, where the frontier remains UNKNOWN and automatic resumption is prohibited.",
+    "Known-writer and per-file bounds are not an aggregate OS filesystem quota or hostile-code sandbox.",
+    "A concrete Query-only pilot still needs independently verified witness, growth, full-retention and writer-inventory predicates, exact loaded binding and preserved original state/history prefixes.",
+    "No Teach execution route is supplied by the present guard/launcher. Query budget and fixture counts do not establish Teach growth or learned capability.",
+    "Authority/current-state documents and original pending-review statements must stay unchanged. Publication must mark artifacts as evidence-only, with later independent review status and historical gaps added separately."
+  ],
+  "files": [
+    {
+      "archive_path": "guard_repair/README.md",
+      "bytes": 6664,
+      "sha256": "eda58f7ad2fab5a14d0c34cba569f33388704ec001488bb58d93de40199cede8",
+      "classification": "historical_report",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/bounded_store.py",
+      "bytes": 12026,
+      "sha256": "587d89cf8c1e2af4686a163388c524de0ce6e95157537ffa408db9a7e4b160ce",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/guard.py",
+      "bytes": 2005,
+      "sha256": "bfad85a542210ee5b1af3af7a72fb93555878d56abfa50bc4d9c305f8d19fe97",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/guard_before.py",
+      "bytes": 1181,
+      "sha256": "34ad679422c775c3505f032242ce25e77fc0f75e1b22702b3357cd21da1ce00b",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/launcher.py",
+      "bytes": 5251,
+      "sha256": "4593a7d80ea2df2202a5ff2ce446ab6ddff842a17a025f71a48f508da303e794",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/prechange_pins.json",
+      "bytes": 23572,
+      "sha256": "139d3d2bc54ba0cfcf31548ccff9828e77e3eaefbeebd456014737c78ac4ff89",
+      "classification": "declarative_metadata",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/pure_tests_attempt01.log",
+      "bytes": 1107,
+      "sha256": "882d86f07b5dfdcdb6a5b4a87feeec501c689938a2dc0173b318906314554a8c",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/pure_tests_attempt02.log",
+      "bytes": 1107,
+      "sha256": "0436bf2b7d91c080e9a1b026551be632fa7b0cfc00f1451052942bf852904b08",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/pure_tests_attempt03.log",
+      "bytes": 2235,
+      "sha256": "108ddde22b73ad2d0297fb8fd9dabddb24e363fc27a4afb3865d4530e7804794",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/pure_tests_attempt04.log",
+      "bytes": 3494,
+      "sha256": "240d29ae9b55f434dc1edcce03d7279a6734fb62a7856dac38f7d32733fb22bd",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/pure_tests_attempt05.log",
+      "bytes": 2235,
+      "sha256": "67ef3645828d4309acfb2c8a2da5946e03aeacdcd299e14f8564191eb37dbf10",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/pure_tests_attempt06.log",
+      "bytes": 2469,
+      "sha256": "a7595f244b298eb68f7bbbab7fa682dfa9b7885c7a17a005f790a6bd4038b392",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/pure_tests_attempt07.log",
+      "bytes": 2469,
+      "sha256": "f314f35fea8991ccac1e6c197a8c17b2bee83e18e06761b2dc840d6acd4e43f9",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/ARC3境界.py",
+      "bytes": 9941,
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/family_rehost.py",
+      "bytes": 11079,
+      "sha256": "d9a34843327c7bb51adbf1590b77e6b9d3e18e99cdf966d3d4eca7f72f41f3b8",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/fixed_enumeration_rehost.py",
+      "bytes": 3980,
+      "sha256": "43a9ec065d22d8da1502c963a140b60833ac0b06ce0d45c1ac8ba5f59e9932e4",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/goalset_candidate_rehost.py",
+      "bytes": 5878,
+      "sha256": "c9492a8033ae740811ff0e4f078d773a478b30afa4561277bad6e18144357efe",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/goalset_common_rehost.py",
+      "bytes": 7473,
+      "sha256": "3b32cffa4a5210c5a474642a542829bc3cd368ac76dbf9e9f6baafbd076fac87",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/preservation_rehost.py",
+      "bytes": 12814,
+      "sha256": "a57f0490be3c186a072e9e80f41072581c3ecbfc7ef3aaae49283558281799f3",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/semantic_entry_rehost.py",
+      "bytes": 2594,
+      "sha256": "128daa956bd6b04a2d3e75b4b583afde7a8f8bd5d73be86a7d546df62e235bbc",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/semantic_route_rehost.py",
+      "bytes": 640,
+      "sha256": "fb29348ded3b0eb51fdcd36e04ba1996875349d54f62f771fff0b03c79f54313",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/semantic/source_hashes.json",
+      "bytes": 3336,
+      "sha256": "998ba73f5d365876059f5f6771314ffe2511db28c2451549756ac8cf2624ec05",
+      "classification": "declarative_metadata",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/source_allowlist.py",
+      "bytes": 1275,
+      "sha256": "8d27aa08e0b9844eec243c502460136731f175d3cb7ffeadbbdd09783f526586",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/test_guard.py",
+      "bytes": 6296,
+      "sha256": "b69c00eebb8032566ba38781d4db810bb7846ffbd4e105a3ee6779d33d2894b3",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/test_trace.py",
+      "bytes": 13818,
+      "sha256": "b8cf90d2d93dadcf1f69d196fb7ad322345c196803703e2e83895121679eeb8b",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_repair/verification.json",
+      "bytes": 614,
+      "sha256": "1cc866b842fe5fe66a99eeac4f4a953f93862cd466c5fd8bfdbdc20f9c3c185d",
+      "classification": "declarative_metadata",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/README.md",
+      "bytes": 4623,
+      "sha256": "dd5cf4bae860474012a03f5216e6bc64c51e5ca8d0bc19268aab6e187b9c8d97",
+      "classification": "historical_report",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/adversarial_tests.log",
+      "bytes": 344,
+      "sha256": "5b089376ad412fcb2f9f8097ea94243a2d91b511ab31655dc3d7be82e7614f32",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/adversarial_tests.py",
+      "bytes": 1778,
+      "sha256": "753462e14065f5368299f73fccbe35248b0c5f0317ab8603bc2ceb087f01f627",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/adversarial_tests_final.log",
+      "bytes": 344,
+      "sha256": "0d5bc0d8c1a400319162441aa62b635f7cf8e2026365905ae85e9377c1943417",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_final/evidence.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_final/failure_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_final/metadata_logs.reserve",
+      "bytes": 8192,
+      "sha256": "14aa95c8d628d3e664e6be2ce0ef5c887f4bd84b564636b03ddeb55421a7cc97",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_final/normal_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_final/post_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_final/supervisor_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_final/worker_emergency.reserve",
+      "bytes": 8192,
+      "sha256": "2d18a42f9e1ff28138350806384ae379e82ffca92864b5a02ca9c6fd2b21be94",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_final/worker_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_v2/evidence.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_v2/failure_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_v2/metadata_logs.reserve",
+      "bytes": 8192,
+      "sha256": "9e1fdf7f42f00737fbdd1ec543cff080b9d36e894558d4b22707e4deb6ef2bfb",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_v2/normal_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_v2/post_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_v2/supervisor_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_v2/worker_emergency.reserve",
+      "bytes": 8192,
+      "sha256": "2d18a42f9e1ff28138350806384ae379e82ffca92864b5a02ca9c6fd2b21be94",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/encoding_failure_v2/worker_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/fork_fallback/evidence.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/fork_fallback/failure_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/fork_fallback/metadata_logs.reserve",
+      "bytes": 8192,
+      "sha256": "cbf395233df65ade97d7bf871294c7b2da40a0a38de73dbdda6060a53b957c04",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/fork_fallback/normal_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/fork_fallback/post_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/fork_fallback/supervisor_failure.reserve",
+      "bytes": 8192,
+      "sha256": "6444693c6a21cad173df7c4fd3bdfa843d67cd0d6e48fc958062e01b82b00ec8",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/fork_fallback/worker_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "classification": "owned_diagnostic_reserve",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/preservation_check.json",
+      "bytes": 34,
+      "sha256": "1a76717699e397925b88f6c2606de7e796121d4f125379556a30913bd7d4c9d3",
+      "classification": "declarative_metadata",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/probes.log",
+      "bytes": 75,
+      "sha256": "9a211748732623e8cbf3480fbaacfd6f3aea539c778c9223153fc1a0907e1427",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/probes.py",
+      "bytes": 1477,
+      "sha256": "52a6cef3c98a96cb7ec191462921151ef5dcaa1e6c660fba52f71f86923e5d47",
+      "classification": "owned_static_source",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/pure_tests.log",
+      "bytes": 2235,
+      "sha256": "835505bde7282534fafa6bd233d6ebe71734fbfd9171903730b4d19b3b2ceb87",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/pure_tests_current.log",
+      "bytes": 2469,
+      "sha256": "c6460023c9230a7caafaba99735b85751a462be1a7445e6ac281a9b8bf0c20bd",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/pure_tests_final.log",
+      "bytes": 2469,
+      "sha256": "0ea98dff24ea36b3fb4bb664794f21dbd56c23845fd8edf607fbc4ff94bf3930",
+      "classification": "retained_test_or_probe_log",
+      "content_inspected": true
+    },
+    {
+      "archive_path": "guard_review/reviewed_manifest.json",
+      "bytes": 4698,
+      "sha256": "29c35021a726c575662d6aad991a3dcf66d299a562a1d908c3d2d700614a52cd",
+      "classification": "declarative_metadata",
+      "content_inspected": true
+    }
+  ]
+}

@@ -1,0 +1,388 @@
+{
+  "schema": "arc3-guard-preservation-payload-v2",
+  "base_main": "9674d79c3f6801619cb6fa620b93865ab7822e99",
+  "files": [
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/README.md",
+      "archive_path": "guard_repair/README.md",
+      "bytes": 6664,
+      "sha256": "eda58f7ad2fab5a14d0c34cba569f33388704ec001488bb58d93de40199cede8"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/bounded_store.py",
+      "archive_path": "guard_repair/bounded_store.py",
+      "bytes": 12026,
+      "sha256": "587d89cf8c1e2af4686a163388c524de0ce6e95157537ffa408db9a7e4b160ce"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/guard.py",
+      "archive_path": "guard_repair/guard.py",
+      "bytes": 2005,
+      "sha256": "bfad85a542210ee5b1af3af7a72fb93555878d56abfa50bc4d9c305f8d19fe97"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/guard_before.py",
+      "archive_path": "guard_repair/guard_before.py",
+      "bytes": 1181,
+      "sha256": "34ad679422c775c3505f032242ce25e77fc0f75e1b22702b3357cd21da1ce00b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/launcher.py",
+      "archive_path": "guard_repair/launcher.py",
+      "bytes": 5251,
+      "sha256": "4593a7d80ea2df2202a5ff2ce446ab6ddff842a17a025f71a48f508da303e794"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/prechange_pins.json",
+      "archive_path": "guard_repair/prechange_pins.json",
+      "bytes": 23572,
+      "sha256": "139d3d2bc54ba0cfcf31548ccff9828e77e3eaefbeebd456014737c78ac4ff89"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/pure_tests_attempt01.log",
+      "archive_path": "guard_repair/pure_tests_attempt01.log",
+      "bytes": 1107,
+      "sha256": "882d86f07b5dfdcdb6a5b4a87feeec501c689938a2dc0173b318906314554a8c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/pure_tests_attempt02.log",
+      "archive_path": "guard_repair/pure_tests_attempt02.log",
+      "bytes": 1107,
+      "sha256": "0436bf2b7d91c080e9a1b026551be632fa7b0cfc00f1451052942bf852904b08"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/pure_tests_attempt03.log",
+      "archive_path": "guard_repair/pure_tests_attempt03.log",
+      "bytes": 2235,
+      "sha256": "108ddde22b73ad2d0297fb8fd9dabddb24e363fc27a4afb3865d4530e7804794"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/pure_tests_attempt04.log",
+      "archive_path": "guard_repair/pure_tests_attempt04.log",
+      "bytes": 3494,
+      "sha256": "240d29ae9b55f434dc1edcce03d7279a6734fb62a7856dac38f7d32733fb22bd"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/pure_tests_attempt05.log",
+      "archive_path": "guard_repair/pure_tests_attempt05.log",
+      "bytes": 2235,
+      "sha256": "67ef3645828d4309acfb2c8a2da5946e03aeacdcd299e14f8564191eb37dbf10"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/pure_tests_attempt06.log",
+      "archive_path": "guard_repair/pure_tests_attempt06.log",
+      "bytes": 2469,
+      "sha256": "a7595f244b298eb68f7bbbab7fa682dfa9b7885c7a17a005f790a6bd4038b392"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/pure_tests_attempt07.log",
+      "archive_path": "guard_repair/pure_tests_attempt07.log",
+      "bytes": 2469,
+      "sha256": "f314f35fea8991ccac1e6c197a8c17b2bee83e18e06761b2dc840d6acd4e43f9"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/ARC3境界.py",
+      "archive_path": "guard_repair/semantic/ARC3境界.py",
+      "bytes": 9941,
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/family_rehost.py",
+      "archive_path": "guard_repair/semantic/family_rehost.py",
+      "bytes": 11079,
+      "sha256": "d9a34843327c7bb51adbf1590b77e6b9d3e18e99cdf966d3d4eca7f72f41f3b8"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/fixed_enumeration_rehost.py",
+      "archive_path": "guard_repair/semantic/fixed_enumeration_rehost.py",
+      "bytes": 3980,
+      "sha256": "43a9ec065d22d8da1502c963a140b60833ac0b06ce0d45c1ac8ba5f59e9932e4"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/goalset_candidate_rehost.py",
+      "archive_path": "guard_repair/semantic/goalset_candidate_rehost.py",
+      "bytes": 5878,
+      "sha256": "c9492a8033ae740811ff0e4f078d773a478b30afa4561277bad6e18144357efe"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/goalset_common_rehost.py",
+      "archive_path": "guard_repair/semantic/goalset_common_rehost.py",
+      "bytes": 7473,
+      "sha256": "3b32cffa4a5210c5a474642a542829bc3cd368ac76dbf9e9f6baafbd076fac87"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/preservation_rehost.py",
+      "archive_path": "guard_repair/semantic/preservation_rehost.py",
+      "bytes": 12814,
+      "sha256": "a57f0490be3c186a072e9e80f41072581c3ecbfc7ef3aaae49283558281799f3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/semantic_entry_rehost.py",
+      "archive_path": "guard_repair/semantic/semantic_entry_rehost.py",
+      "bytes": 2594,
+      "sha256": "128daa956bd6b04a2d3e75b4b583afde7a8f8bd5d73be86a7d546df62e235bbc"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/semantic_route_rehost.py",
+      "archive_path": "guard_repair/semantic/semantic_route_rehost.py",
+      "bytes": 640,
+      "sha256": "fb29348ded3b0eb51fdcd36e04ba1996875349d54f62f771fff0b03c79f54313"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/semantic/source_hashes.json",
+      "archive_path": "guard_repair/semantic/source_hashes.json",
+      "bytes": 3336,
+      "sha256": "998ba73f5d365876059f5f6771314ffe2511db28c2451549756ac8cf2624ec05"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/source_allowlist.py",
+      "archive_path": "guard_repair/source_allowlist.py",
+      "bytes": 1275,
+      "sha256": "8d27aa08e0b9844eec243c502460136731f175d3cb7ffeadbbdd09783f526586"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/test_guard.py",
+      "archive_path": "guard_repair/test_guard.py",
+      "bytes": 6296,
+      "sha256": "b69c00eebb8032566ba38781d4db810bb7846ffbd4e105a3ee6779d33d2894b3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/test_trace.py",
+      "archive_path": "guard_repair/test_trace.py",
+      "bytes": 13818,
+      "sha256": "b8cf90d2d93dadcf1f69d196fb7ad322345c196803703e2e83895121679eeb8b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-repair-20261019/verification.json",
+      "archive_path": "guard_repair/verification.json",
+      "bytes": 614,
+      "sha256": "1cc866b842fe5fe66a99eeac4f4a953f93862cd466c5fd8bfdbdc20f9c3c185d"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/README.md",
+      "archive_path": "guard_review/README.md",
+      "bytes": 4623,
+      "sha256": "dd5cf4bae860474012a03f5216e6bc64c51e5ca8d0bc19268aab6e187b9c8d97"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/adversarial_tests.log",
+      "archive_path": "guard_review/adversarial_tests.log",
+      "bytes": 344,
+      "sha256": "5b089376ad412fcb2f9f8097ea94243a2d91b511ab31655dc3d7be82e7614f32"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/adversarial_tests.py",
+      "archive_path": "guard_review/adversarial_tests.py",
+      "bytes": 1778,
+      "sha256": "753462e14065f5368299f73fccbe35248b0c5f0317ab8603bc2ceb087f01f627"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/adversarial_tests_final.log",
+      "archive_path": "guard_review/adversarial_tests_final.log",
+      "bytes": 344,
+      "sha256": "0d5bc0d8c1a400319162441aa62b635f7cf8e2026365905ae85e9377c1943417"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_final/evidence.reserve",
+      "archive_path": "guard_review/encoding_failure_final/evidence.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_final/failure_state.reserve",
+      "archive_path": "guard_review/encoding_failure_final/failure_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_final/metadata_logs.reserve",
+      "archive_path": "guard_review/encoding_failure_final/metadata_logs.reserve",
+      "bytes": 8192,
+      "sha256": "14aa95c8d628d3e664e6be2ce0ef5c887f4bd84b564636b03ddeb55421a7cc97"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_final/normal_state.reserve",
+      "archive_path": "guard_review/encoding_failure_final/normal_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_final/post_state.reserve",
+      "archive_path": "guard_review/encoding_failure_final/post_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_final/supervisor_failure.reserve",
+      "archive_path": "guard_review/encoding_failure_final/supervisor_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_final/worker_emergency.reserve",
+      "archive_path": "guard_review/encoding_failure_final/worker_emergency.reserve",
+      "bytes": 8192,
+      "sha256": "2d18a42f9e1ff28138350806384ae379e82ffca92864b5a02ca9c6fd2b21be94"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_final/worker_failure.reserve",
+      "archive_path": "guard_review/encoding_failure_final/worker_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_v2/evidence.reserve",
+      "archive_path": "guard_review/encoding_failure_v2/evidence.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_v2/failure_state.reserve",
+      "archive_path": "guard_review/encoding_failure_v2/failure_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_v2/metadata_logs.reserve",
+      "archive_path": "guard_review/encoding_failure_v2/metadata_logs.reserve",
+      "bytes": 8192,
+      "sha256": "9e1fdf7f42f00737fbdd1ec543cff080b9d36e894558d4b22707e4deb6ef2bfb"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_v2/normal_state.reserve",
+      "archive_path": "guard_review/encoding_failure_v2/normal_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_v2/post_state.reserve",
+      "archive_path": "guard_review/encoding_failure_v2/post_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_v2/supervisor_failure.reserve",
+      "archive_path": "guard_review/encoding_failure_v2/supervisor_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_v2/worker_emergency.reserve",
+      "archive_path": "guard_review/encoding_failure_v2/worker_emergency.reserve",
+      "bytes": 8192,
+      "sha256": "2d18a42f9e1ff28138350806384ae379e82ffca92864b5a02ca9c6fd2b21be94"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/encoding_failure_v2/worker_failure.reserve",
+      "archive_path": "guard_review/encoding_failure_v2/worker_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/fork_fallback/evidence.reserve",
+      "archive_path": "guard_review/fork_fallback/evidence.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/fork_fallback/failure_state.reserve",
+      "archive_path": "guard_review/fork_fallback/failure_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/fork_fallback/metadata_logs.reserve",
+      "archive_path": "guard_review/fork_fallback/metadata_logs.reserve",
+      "bytes": 8192,
+      "sha256": "cbf395233df65ade97d7bf871294c7b2da40a0a38de73dbdda6060a53b957c04"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/fork_fallback/normal_state.reserve",
+      "archive_path": "guard_review/fork_fallback/normal_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/fork_fallback/post_state.reserve",
+      "archive_path": "guard_review/fork_fallback/post_state.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/fork_fallback/supervisor_failure.reserve",
+      "archive_path": "guard_review/fork_fallback/supervisor_failure.reserve",
+      "bytes": 8192,
+      "sha256": "6444693c6a21cad173df7c4fd3bdfa843d67cd0d6e48fc958062e01b82b00ec8"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/fork_fallback/worker_failure.reserve",
+      "archive_path": "guard_review/fork_fallback/worker_failure.reserve",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/preservation_check.json",
+      "archive_path": "guard_review/preservation_check.json",
+      "bytes": 34,
+      "sha256": "1a76717699e397925b88f6c2606de7e796121d4f125379556a30913bd7d4c9d3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/probes.log",
+      "archive_path": "guard_review/probes.log",
+      "bytes": 75,
+      "sha256": "9a211748732623e8cbf3480fbaacfd6f3aea539c778c9223153fc1a0907e1427"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/probes.py",
+      "archive_path": "guard_review/probes.py",
+      "bytes": 1477,
+      "sha256": "52a6cef3c98a96cb7ec191462921151ef5dcaa1e6c660fba52f71f86923e5d47"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/pure_tests.log",
+      "archive_path": "guard_review/pure_tests.log",
+      "bytes": 2235,
+      "sha256": "835505bde7282534fafa6bd233d6ebe71734fbfd9171903730b4d19b3b2ceb87"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/pure_tests_current.log",
+      "archive_path": "guard_review/pure_tests_current.log",
+      "bytes": 2469,
+      "sha256": "c6460023c9230a7caafaba99735b85751a462be1a7445e6ac281a9b8bf0c20bd"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/pure_tests_final.log",
+      "archive_path": "guard_review/pure_tests_final.log",
+      "bytes": 2469,
+      "sha256": "0ea98dff24ea36b3fb4bb664794f21dbd56c23845fd8edf607fbc4ff94bf3930"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-review-20261019/reviewed_manifest.json",
+      "archive_path": "guard_review/reviewed_manifest.json",
+      "bytes": 4698,
+      "sha256": "29c35021a726c575662d6aad991a3dcf66d299a562a1d908c3d2d700614a52cd"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-history-audit-20261019/README.md",
+      "archive_path": "history_audit/README.md",
+      "bytes": 5053,
+      "sha256": "8a161025c432b31f8b7f1886fe97f600d7c0c690be08db7884c5d4aa12f82f2b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-guard-history-audit-20261019/observed_files.json",
+      "archive_path": "history_audit/observed_files.json",
+      "bytes": 11188,
+      "sha256": "68092b12028bab2d910dec4bbb9282fdf23b9fd61318ba4551c0089a04aacc61"
+    }
+  ],
+  "file_count": 62,
+  "raw_bytes": 370756,
+  "scope": "Two explicitly closed guard repair/review directories, frozen full own file list; no active native Teach/teacher work",
+  "runtime_adopted": false,
+  "prior_manifest": {
+    "path": "payload_manifest.json",
+    "bytes": 18195,
+    "sha256": "94461877c44d481d09fbea4312b06e12b745f02fc8577301541ee8f612b00bb3"
+  },
+  "addendum": "Two closed history-disclosure files only; reconstructed mechanism description is not original source or initial execution proof."
+}
