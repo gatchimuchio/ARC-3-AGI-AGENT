@@ -1,0 +1,150 @@
+{
+  "manifest_verified_files": 156,
+  "goal6": {
+    "raw_source_closures_verified": [
+      [
+        65,
+        66,
+        74,
+        75,
+        92,
+        93
+      ],
+      [
+        23,
+        24,
+        60,
+        61,
+        141,
+        142
+      ]
+    ],
+    "phase_interpretations_recomputed": {
+      "measured": 35,
+      "unknown": 77
+    },
+    "cases": [
+      {
+        "pair": [
+          false,
+          false
+        ],
+        "score": [
+          2,
+          2
+        ],
+        "outcome": false,
+        "phases": [
+          1,
+          15
+        ]
+      },
+      {
+        "pair": [
+          false,
+          false
+        ],
+        "score": [
+          2,
+          2
+        ],
+        "outcome": false,
+        "phases": [
+          1,
+          15
+        ]
+      },
+      {
+        "pair": [
+          true,
+          false
+        ],
+        "score": [
+          2,
+          2
+        ],
+        "outcome": false,
+        "phases": [
+          1,
+          15
+        ]
+      },
+      {
+        "pair": [
+          false,
+          true
+        ],
+        "score": [
+          0,
+          0
+        ],
+        "outcome": false,
+        "phases": [
+          15,
+          15
+        ]
+      },
+      {
+        "pair": [
+          true,
+          true
+        ],
+        "score": [
+          0,
+          1
+        ],
+        "outcome": true,
+        "phases": [
+          1,
+          16
+        ]
+      },
+      {
+        "pair": [
+          true,
+          true
+        ],
+        "score": [
+          1,
+          2
+        ],
+        "outcome": true,
+        "phases": [
+          1,
+          16
+        ]
+      }
+    ],
+    "exact_historical_teachers_queries": true
+  },
+  "control": {
+    "raw_rows": 59,
+    "all_decisions_recomputed": 58,
+    "eligible_rows": [
+      169,
+      171,
+      173,
+      190
+    ],
+    "after_phases_hashed": 1530,
+    "existing_experiences": [
+      130,
+      131,
+      132,
+      133
+    ]
+  },
+  "state": {
+    "bytes": 5355957,
+    "sha256": "f7e5f8c7518b43c7e53f6a1c43f108469c04f72e5d13eb30aa2fae987e2d6e6a",
+    "experiences": 183,
+    "goal6_exact_boundary_absent": true
+  },
+  "resources": {
+    "AS_limit_bytes": 536870912,
+    "max_RSS_KiB": 86580,
+    "native_calls": 0,
+    "SDK_calls": 0,
+    "Action_calls": 0
+  }
+}

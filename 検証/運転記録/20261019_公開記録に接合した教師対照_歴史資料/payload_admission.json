@@ -1,0 +1,1840 @@
+{
+  "schema": "teacher-contrasts-private-preservation-content-admission-v1",
+  "reviewed_at_UTC": "2026-10-19T02:42:48.282292+00:00",
+  "decision": "ADMIT_CLOSED_HISTORICAL_PAYLOAD_WITH_EXPLICIT_LIMITATIONS",
+  "purpose": "Content admission only for the parent-authorized private ARC3 GitHub preservation. This report does not authorize execution, deployment, learning, Action, or performance claims. Parent must independently retain the authorized destination and verify private repository access.",
+  "authority_read": [
+    {
+      "path": "authority/Owner指示書原文_20261009.md",
+      "bytes": 12787,
+      "sha256": "d884388625d41e761ec845130c8ee3d7930992586973d461306b7d9b8218db9f"
+    },
+    {
+      "path": "authority/Owner追加指示原文_20261010T1907.md",
+      "bytes": 778,
+      "sha256": "2cc8cbc8ab2ed802ab970ecce65b1942c92ee5db975f4f8deb6306f52766a576"
+    },
+    {
+      "path": "authority/Owner追加指示原文_20261011T1904.md",
+      "bytes": 560,
+      "sha256": "d24cfd49b3a45b92356e77af890d193a97f27f33acf81fd6e331ef8955b6634c"
+    },
+    {
+      "path": "main/AGENTS.md",
+      "bytes": 1627,
+      "sha256": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42"
+    },
+    {
+      "path": "main/運用/権限順序.md",
+      "bytes": 948,
+      "sha256": "fdcef65a4b6ffc2179f76036f52aa2a4c47c69b8298f42678a47c245414bb4a3"
+    },
+    {
+      "path": "main/制御/現在状態.json",
+      "bytes": 358,
+      "sha256": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+    }
+  ],
+  "scope": {
+    "teacher_root": "arc-teacher-contrasts-20261019",
+    "review_root": "arc-teacher-review-20261019",
+    "teacher_manifest_entries": 183,
+    "teacher_manifest_entry_bytes": 33486188,
+    "additional_manifest_bytes": 33456,
+    "review_files": 3,
+    "review_file_bytes": 17333,
+    "total_files": 187,
+    "total_bytes": 33536977,
+    "frozen_manifest_sha256": "a9a83766227da37248250b9debd1ef085c9bad716a202bf4ef31a07afdce8e95",
+    "source_roots_modified": false,
+    "excluded": [
+      {
+        "path": "__pycache__/inspect_state.cpython-312.pyc",
+        "bytes": 2617,
+        "body_read": false,
+        "reason": "unlisted compiled cache, explicitly excluded"
+      },
+      {
+        "description": "Separate original source archives and original main files",
+        "included": false,
+        "reason": "Parent states originals already preserved exactly in main; no duplicate payload inclusion"
+      }
+    ]
+  },
+  "closure": {
+    "all_183_manifest_size_hash_matches": true,
+    "unique_safe_relative_paths": true,
+    "regular_files_no_symlinks": true,
+    "original_manifest_bytes_unchanged": true,
+    "original_manifest_sha256": "58fb5c71e6fd61d08ab0473f27af45c5601020435423404044aaf2dcf318c617",
+    "original_156_entries_unchanged": true,
+    "removed_or_changed_original_entries": [],
+    "additive_manifest_entries": [
+      "MANIFEST.json",
+      "existing_four_row_control_v2.json",
+      "finalize_regression.py",
+      "recover_regression.py",
+      "regression_v2/README.md",
+      "regression_v2/intent_0.json.xz",
+      "regression_v2/intent_1.json.xz",
+      "regression_v2/intent_2.json.xz",
+      "regression_v2/intent_3.json.xz",
+      "regression_v2/intent_4.json.xz",
+      "regression_v2/intent_5.json.xz",
+      "regression_v2/intent_6.json.xz",
+      "regression_v2/intent_7.json.xz",
+      "regression_v2/intent_8.json.xz",
+      "regression_v2/nine_expected_historical.json",
+      "regression_v2/nine_queries.runtime.json",
+      "regression_v2/query_inventory.json",
+      "regression_v2/reply_0.json.xz",
+      "regression_v2/reply_1.json.xz",
+      "regression_v2/reply_2.json.xz",
+      "regression_v2/reply_3.json.xz",
+      "regression_v2/reply_4.json.xz",
+      "regression_v2/reply_5.json.xz",
+      "regression_v2/reply_6.json.xz",
+      "regression_v2/reply_7.json.xz",
+      "regression_v2/reply_8.json.xz",
+      "regression_v2/selected_preliminary.json"
+    ],
+    "control_status_supersession": {
+      "supersedes": {
+        "path": "existing_four_row_control.json",
+        "sha256": "a52053438639da4a80ce2787b25c2df9d6f34eb6874999a41bf30696a145829b",
+        "reason": "initial preparation snapshot predated completed raw joins; original retained unchanged"
+      },
+      "status": "all four historical teachers joined to public raw witnesses; exact current experiences130–133; valid regression/relearning control, no new independent evidence",
+      "evidence": [
+        "existing_four_row_full_witness_joins.json",
+        "control_source_verification.json",
+        "control_all58_phase_join_verification.json"
+      ],
+      "native_calls": 0
+    },
+    "actual_unlisted_paths": [
+      "MANIFEST_v2.json",
+      "__pycache__/inspect_state.cpython-312.pyc"
+    ]
+  },
+  "content_inspection": {
+    "files_fully_read_as_data": 187,
+    "strict_JSON_documents": 173,
+    "Markdown_text_files": 3,
+    "source_text_files_static_parse_only": 11,
+    "strict_JSON_no_duplicate_keys_or_nonfinite_values": true,
+    "UTF8_and_no_NUL": true,
+    "credential_pattern_matches": 0,
+    "email_address_matches": 0,
+    "URL_matches": 0,
+    "secret_named_JSON_keys": [],
+    "unexpected_long_opaque_strings": [],
+    "personal_data_assessment": "No personal contact, health, financial, identity credential or other sensitive personal data identified. Stored UUIDs, game IDs, run IDs, hashes and local filesystem paths are historical observation/provenance metadata. Pattern scanning is evidence, not an absolute proof that arbitrary secrets cannot exist.",
+    "opaque_source_assessment": "No opaque official/game source or dependency bodies identified in this closed payload. Inventories and source files contain path/hash references to other bodies; those referenced bodies were not opened. Eleven own preparation/review Python sources were inspected as inert text and statically parsed only.",
+    "public_recordings": "Included public frames and complete public metadata are evidence, not hidden state or answer data. Raw original rows and failure/unknown interpretations remain unaltered.",
+    "XZ_checks": [
+      {
+        "path": "pinned/arc-goal-teacher-recovered-20261013/producer/goal6_producer_0ba625e5dc36425ed60002dc6462cc62.typed.json.xz",
+        "decoded_bytes": 3740530,
+        "decoded_sha256": "ff26c099c282432d0e796d9eea34887419e7b321bba78145c5974594b9ded34d",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "pinned/arc-goal-teacher-recovered-20261013/reader/goal6_reader_415b1b15934ffad78311dc739ecf63a0.typed.json.xz",
+        "decoded_bytes": 481837,
+        "decoded_sha256": "c1182a62921f22e2dafa057a0c52d7261f700ec3a0d2467e830f04ae8283bb84",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_0.json.xz",
+        "decoded_bytes": 5339,
+        "decoded_sha256": "855cb38d0955bce48a596125325bf338f994fd12b3ce677b2bf4f97fc04b464f",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_1.json.xz",
+        "decoded_bytes": 5401,
+        "decoded_sha256": "083782226b564ea9c67e45a607abcea099258b3facf210b3a65ad25baae5278a",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_2.json.xz",
+        "decoded_bytes": 5365,
+        "decoded_sha256": "de1e2c7469ef5c5dab59c8d0982d33b5a10e898dc7ec4cbea8b90c799a5aa045",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_3.json.xz",
+        "decoded_bytes": 5427,
+        "decoded_sha256": "5cc1d64399381a55ba64cd0744c4b6d4fd19a500678ac05ac94eb329db88441c",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_4.json.xz",
+        "decoded_bytes": 5383,
+        "decoded_sha256": "2e65b85148554082a1d7a905d51ecd1d0fdf21fa78ee1bb3e9967973195c299d",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_5.json.xz",
+        "decoded_bytes": 5431,
+        "decoded_sha256": "7e6c64a358a27c94a77e9df96322dc0d143a155996dd7c5938ad83ab9d32cf7a",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_6.json.xz",
+        "decoded_bytes": 5424,
+        "decoded_sha256": "8e58e2953cb018fa8a19ebadab5a62c9ce2b3ca4440cd66fbd90169dab5e4055",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_7.json.xz",
+        "decoded_bytes": 6388,
+        "decoded_sha256": "f16bb1a6a02220c13c942e6e70095ab28ba0cf8ae3dc369850fc211a9018a3b2",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/intent_8.json.xz",
+        "decoded_bytes": 6589,
+        "decoded_sha256": "ff08dd6aed840054a2357a1eeba7236954e62a7c29da1e4833e7a10879565475",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_0.json.xz",
+        "decoded_bytes": 49430,
+        "decoded_sha256": "0f531ce9d9fbdecbe302b5ade4bcab12b26e57de4168810b270fa9bbf4d4af0a",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_1.json.xz",
+        "decoded_bytes": 49290,
+        "decoded_sha256": "7dcc0c23bdfab3a7f2bf14b8d22c5fc798cd0f04c1bfdb7e10fb55580944bd6b",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_2.json.xz",
+        "decoded_bytes": 49701,
+        "decoded_sha256": "0cd043bb2d16a01dad4e80162f8daf0a7ff38cca7054b64d0038282421a8fe28",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_3.json.xz",
+        "decoded_bytes": 49712,
+        "decoded_sha256": "901e0796709d079df866b7140e02f71c0a60c69dbfa75c105dce7a3904a0d479",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_4.json.xz",
+        "decoded_bytes": 49406,
+        "decoded_sha256": "8c62607698ec70872768efb9057c83013ac18d3212197dcb323a23d1d0dd27c4",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_5.json.xz",
+        "decoded_bytes": 49579,
+        "decoded_sha256": "e3d694b3ec2130b181879f29470a981574e050020ab24435c0a958a5c5e0c73f",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_6.json.xz",
+        "decoded_bytes": 49438,
+        "decoded_sha256": "73388e0137b2af12be5fef9c2279628d6de051563447aa43433cf04e32bf1569",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_7.json.xz",
+        "decoded_bytes": 50671,
+        "decoded_sha256": "e5b6ac3178681becfee0c25cc4697f482c671f9609edd234671413f125fb3549",
+        "single_CRC64_XZ_stream": true
+      },
+      {
+        "path": "regression_v2/reply_8.json.xz",
+        "decoded_bytes": 51183,
+        "decoded_sha256": "30bbb336d7bffa1e6af68faa60f017fdc906a8e12d319d2271bdf1071ee8b65d",
+        "single_CRC64_XZ_stream": true
+      }
+    ]
+  },
+  "new_regression_v2": {
+    "scope": "Nine historical single-input smoke Query cases only, not current native execution, full regression, fresh-instance success or independent new environmental data.",
+    "runtime_bytes": 2659,
+    "runtime_sha256": "15e83ab6a7caacdcaf62c1585eef3f450de1bd6abc9da78276de9b0d45cec44c",
+    "unique_recorded_existing_boundaries": 9,
+    "phases": {
+      "old62_regression": 7,
+      "new_query": 2
+    },
+    "all_18_selected_archive_members_byte_equal": true,
+    "source_archive": {
+      "name": "preparation_preservation_learning_checkpoint.tar.gz",
+      "bytes": 1545234,
+      "sha256": "272110bf92783dc1ea191a6efd65baabd32d22626bec3a86c6653ec14544bfb8",
+      "hash_independently_verified_in_this_admission": true,
+      "streamed_selected_member_count": 18,
+      "nonselected_member_bodies_semantically_read": 0,
+      "files_extracted": 0,
+      "archive_included_in_payload": false
+    },
+    "query_inventory_entries_retained": 526,
+    "query_inventory_coverage_limit": "Recovery code only considered intent .json/.json.xz members no larger than 150000 stored bytes, skipped parse failures, and selected nine by historical rank. The 526-entry inventory is retained discovery output, not proof of exhaustive source history or all-value regression.",
+    "exact_inputs_match_raw_native_intent_and_reply": true,
+    "runtime_excludes_provenance_selectors_and_expected_answers": true,
+    "expected_answers_type_limit": "nine_expected_historical.json is an ordinary JSON projection: native tuples become JSON lists. It matches the exact retained typed replies after JSON projection. Do not use it as a type-preserving native snapshot; retain and use the original 18 compressed journals for native tag/type provenance.",
+    "rows": [
+      {
+        "ordinal": 0,
+        "boundary": "公開列図式:記号外形と展開役割",
+        "historical_phase": "old62_regression",
+        "historical_ordinal": 128,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0128_intent.json.xz",
+        "intent_sha256": "07a37f2c9a62b3ec1844a774cd88c032931c0182aa20f7f97a6b23b6400f7647",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0128_reply.json.xz",
+        "reply_sha256": "616441fba85f3afc859e9eabdbd3b19d530b80e5b9f7c9c87af697adf523b439",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      },
+      {
+        "ordinal": 1,
+        "boundary": "公開列図式:有限全列または生産的反復の目標長一致と提出受理",
+        "historical_phase": "old62_regression",
+        "historical_ordinal": 130,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0130_intent.json.xz",
+        "intent_sha256": "113d960c550a272bfa2b366f29b861de2c3d9ca9f132677175cb338d22f834cf",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0130_reply.json.xz",
+        "reply_sha256": "f8323a7e4a904b6efc21bc528bda2787c263685601d3eef2bf60cf760173120d",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      },
+      {
+        "ordinal": 2,
+        "boundary": "公開列図式:観測された解答作業と行動ID",
+        "historical_phase": "old62_regression",
+        "historical_ordinal": 132,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0132_intent.json.xz",
+        "intent_sha256": "c326f8fa4242af9b64299240e6d0aa662d866fd38b791e5dbae2831844048fe3",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0132_reply.json.xz",
+        "reply_sha256": "1978ec5e6c66b7f2ccd7bebb89f5223bda5d57cd5f8b175f73c6740418e56e11",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      },
+      {
+        "ordinal": 3,
+        "boundary": "公開列図式・一意目標候補・既充足枠非空・可視対象操作の全相保存",
+        "historical_phase": "old62_regression",
+        "historical_ordinal": 104,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0104_intent.json.xz",
+        "intent_sha256": "f00e6f575f4bc2f5e9d69b547542d95919d6bf988a54fd393b956394eab6ecfe",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0104_reply.json.xz",
+        "reply_sha256": "5703dd7e7d4d23187a640eab85943d4e5510d0bc2eeec7c221ad07f7213693de",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      },
+      {
+        "ordinal": 4,
+        "boundary": "公開列図式・一意目標候補・在庫選択と実枠クリックの末相不足修復",
+        "historical_phase": "old62_regression",
+        "historical_ordinal": 135,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0135_intent.json.xz",
+        "intent_sha256": "4ae4569be46ee2ae1eb06edb2ea2106f1cb43b15f675d50f5b83d5ba1e3c4319",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0135_reply.json.xz",
+        "reply_sha256": "3f833175aaa8727cafede263c216260a2da590054a559bee7113646d44379854",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      },
+      {
+        "ordinal": 5,
+        "boundary": "公開列図式・一意目標候補・在庫選択表示なし・既学習クリック作用の末相準備成立",
+        "historical_phase": "old62_regression",
+        "historical_ordinal": 148,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0148_intent.json.xz",
+        "intent_sha256": "63471ca16cf43888d3e53a9cb29bbffe39f3f23bf4e9922e0f4e45460dbdfa89",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0148_reply.json.xz",
+        "reply_sha256": "3f0e6e43deb42a23ceddec76ca293829be62ba80a44870ae15f910232b9c8c7a",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      },
+      {
+        "ordinal": 6,
+        "boundary": "公開列図式・成立可能目標集合非空・在庫選択済み実空欄クリックの末相可解性保持修復",
+        "historical_phase": "old62_regression",
+        "historical_ordinal": 100,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0100_intent.json.xz",
+        "intent_sha256": "3291a25530ff6e6a63e889a84aa2c8dc8cc3d26fae246290aa2666a1d6f459e9",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0100_reply.json.xz",
+        "reply_sha256": "2d02c4ceb7b10171b2b73a67bc93477caa90a6532e761cb3fbe6238518e2a694",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      },
+      {
+        "ordinal": 7,
+        "boundary": "公開列図式・成立可能目標集合非空・可視在庫未選択・既学習クリック作用の在庫選択準備",
+        "historical_phase": "new_query",
+        "historical_ordinal": 50,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0050_intent.json.xz",
+        "intent_sha256": "a694ec62c9c1fbc822a4977b09037784d405207e9925c707b8b9230732ecb82d",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0050_reply.json.xz",
+        "reply_sha256": "03f3bb8a7c327633f5e57d9dc9a503d680c0bb304cf8a5db4455c3e42a7863c7",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      },
+      {
+        "ordinal": 8,
+        "boundary": "公開列図式・成立可能目標集合非空・既充填枠非空・未選択実在庫または選択済実空欄クリックの全相充填保存",
+        "historical_phase": "new_query",
+        "historical_ordinal": 70,
+        "source_archive": "preparation_preservation_learning_checkpoint.tar.gz",
+        "intent_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0070_intent.json.xz",
+        "intent_sha256": "459f7f61120675a088dd2cbc939bdcfbec708cfc22951d21fd235147971d54f8",
+        "reply_member": "original/arc-column-goalset-prepsave-learning-20261013/evidence/b6752d29848b4a86990c441935ae5363/api_0070_reply.json.xz",
+        "reply_sha256": "4d0b55357ab73b0de2deabf2ee62d0e6ecdbfd14b7a3a4e0aa0252523586e77a",
+        "intent_reply_input_and_context_exact": true,
+        "expected_return_and_summary_equal_JSON_projection": true,
+        "historical_experiences": 183,
+        "historical_principles": 16,
+        "predictions": 1,
+        "HOLD_reason_count": 0
+      }
+    ]
+  },
+  "prior_independent_witness_audit": {
+    "review_files_hash_bound_in_payload": true,
+    "original_scope_files": 156,
+    "goal6_endpoint_pairs": 6,
+    "repair_control_teachers": 4,
+    "phase_interpretations": {
+      "total": 112,
+      "measured": 35,
+      "unknown": 77
+    },
+    "control_recorded_rows": 59,
+    "control_decisions": 58,
+    "control_after_phases": 1530,
+    "existing_experiences": [
+      130,
+      131,
+      132,
+      133
+    ],
+    "new_independent_environment_observations": 0,
+    "scope_boundary": "The earlier independent audit described in teacher_review independently recomputed public perception/eligibility within its stated scope. It covers the original 156-file manifest. It must not be described as auditing the later regression_v2 addition. This admission separately checked additive content/provenance and raw data/hash consistency without executing any stored source or re-running perception semantics.",
+    "this_admission_additional_data_checks": {
+      "goal6_12_pinned_rows_match_typed_packet": true,
+      "goal6_teacher_and_Query_inputs_match_historical_journals": true,
+      "goal6_all_77_unknown_errors_retained": true,
+      "control_all_59_raw_row_hashes_match": true,
+      "control_all_58_metadata_before_hashes_and_1530_after_hashes_match": true,
+      "four_teacher_payloads_match_saved_experiences130_133": true,
+      "original_external_whole_goal6_and_control_corpora_reopened_for_this_admission": false
+    }
+  },
+  "limitations_to_preserve": [
+    "Historical evidence only. No new HDS/native Query or processing, learning, SDK or Action was performed by this admission; no current before/after improvement or full-regression pass is established.",
+    "The six Goal6 outcomes are FF=false, FF=false, TF=false, FT=false, TT=true, TT=true. Four non-progress and two endpoint-score-progress observations remain. All six statuses are NOT_FINISHED; progress is not game completion.",
+    "All 112 raw Goal6 frames are retained, with 35 measured and 77 unknown phase interpretations. Unknowns remain unknown, including their full recorded error descriptions. Empty producer holds do not establish whole-phase causal understanding.",
+    "The two positive Goal6 endpoints have changed reference binding. No continuous preservation, actual fixed-mask correctness, geometric new-problem identity, necessary/sufficient universal causal rule, prerequisite necessity, hidden-delta absence or Action safety is proven.",
+    "Role, scene grammar, membership geometry and full feasible-goal enumeration are existing prior. These historical teachers concern narrow conditional endpoint correspondence, not newly learned role/mask/geometry semantics.",
+    "Six Goal6 rows are historically learned in a different state and absent only from the pinned current-descendant exact boundary. Static absence is not a measured native HOLD. Four control teachers already match experiences130–133 and provide no independent new support.",
+    "Nine historical smoke Queries represent one input per recorded existing boundary and have nine historical predictions with empty HOLD reason lists. They do not cover all values, negative/HOLD behavior, all existing boundaries comprehensively, or prior successful trajectories.",
+    "Native growth/output/whole-state serialization admission remains unresolved. Offline RSS and historical fresh-six growth do not prove future native bounds. No teacher processing is admitted by this report.",
+    "Future current-descendant comparisons require identical admitted inputs and complete before/after predictions, conflicts, HOLD, applicability, support/refutation and history-prefix retention. Full 183 prior record/history preservation is not established by a new run here.",
+    "Full prior-success regression, fresh-instance and cross-game transfer require separately authorized actual execution. Historical IDs, hashes, file paths and replay sequences must remain provenance outside runtime solution routing.",
+    "HDS v0.4.2 stays fixed. AGENTS.md, authority rules and Current State were not modified; strategy remains null and automatic transition remains false.",
+    "This preparation is not the missing historical 358669-byte analysis and does not recreate it. Referenced nonpayload originals remain outside this closed subset."
+  ],
+  "failure_and_missing_evidence": {
+    "retained": "All original manifest entries, historical negative/non-progress outcomes, 77 unknown interpretations with recorded errors, all 58 control decisions including ineligible cases, and the 526-entry discovery inventory are retained unchanged.",
+    "known_missing_within_this_closed_subset": [
+      {
+        "evidence": "Original historical 358669-byte goalset preparation/preservation analysis",
+        "reference_sha256": "a86fb6da4582d5e8db24032cef2fa8f1a661fe55ca48ca2e8643a9ef5faffd85",
+        "status": "Referenced in historical provenance, not included or reconstructed here."
+      },
+      {
+        "evidence": "Initial independent witness audit runner syntax failure and subsequent missing typing-annotation-environment failure",
+        "status": "Teacher review README acknowledges both. No dedicated raw stdout/stderr or failed source revisions for those two attempts are present among its three files. Do not characterize this subset as a complete audit-attempt history; no reconstruction was attempted."
+      },
+      {
+        "evidence": "Historical original failed run and heap loss referenced by control pack limitations",
+        "status": "This subset preserves the reference/limitation, not a reconstructed lost heap or complete standalone failure packet. Main/original archive preservation must not be conflated with this subset."
+      }
+    ],
+    "current_admission_diagnostic": {
+      "event": "One preliminary read-only check exited 1 with AssertionError when comparing JSON-projected historical_external_return directly to a tuple-preserving decoded typed return.",
+      "retained_observed_error": "Traceback (most recent call last):\n  File \"<stdin>\", line 18, in <module>\nAssertionError",
+      "cause_verified": "Expected-answer JSON lists versus exact historical native tuples. Subsequent structural comparison after explicit JSON projection passed for all nine; exact raw typed source-member byte comparisons also passed.",
+      "mutations_from_failed_check": 0,
+      "source_payload_changes": 0,
+      "native_calls": 0
+    },
+    "missing_evidence_is_not_reconstructed_or_claimed_present": true
+  },
+  "execution_and_resources": {
+    "AS_limit_bytes": 268435456,
+    "maximum_plain_or_decoded_file_bytes": 16777216,
+    "XZ_decoder_memory_limit_bytes": 67108864,
+    "read_chunk_bytes": 65536,
+    "output_cap_bytes": 204800,
+    "peak_RSS_KiB": 74380,
+    "stored_source_execution_or_imports": 0,
+    "native_HDS_calls": 0,
+    "SDK_calls": 0,
+    "Action_calls": 0,
+    "opaque_official_game_dependency_body_reads": 0,
+    "pyc_body_reads": 0,
+    "archive_extractions": 0,
+    "uploads": 0,
+    "Git_actions": 0,
+    "sole_output_relative_to_recovery": "publication_teacher_contrasts/payload_admission.json"
+  },
+  "admitted_files": [
+    {
+      "root": "teacher_contrasts",
+      "path": "ARC3_goal_ambiguity_failure_20261013_volume_01_of_03.tar_inventory.json",
+      "bytes": 383442,
+      "sha256": "b81f54e2861acb3bb7cb990b173886e75ef49cc8656518fcef4c5f2f9e650f8a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "ARC3_goal_ambiguity_failure_20261013_volume_02_of_03.tar_inventory.json",
+      "bytes": 384320,
+      "sha256": "e99dd1602598632537a5696f3f64c0ef8a2320ad21dd2e056dbb748d1a5abbff",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "ARC3_goal_ambiguity_failure_20261013_volume_03_of_03.tar_inventory.json",
+      "bytes": 384587,
+      "sha256": "fe0a435fd1929846495eafb0d3d7d6d803280e9bee75564b1e7cd43a47d98588",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "ARC3_goalset4_learning_checkpoint_20261013.tar.gz_inventory.json",
+      "bytes": 41670,
+      "sha256": "0923536ead054b23d439d9a3b95cfbbb26c09f644ffa2247b3838292a2f613fd",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "ARC3_目標相対操作学習_20261013_v2.tar.gz_inventory.json",
+      "bytes": 203669,
+      "sha256": "56018447ff13de1d72f27d04a96893723e6ebd17d6e82f8a1e7604afc11f0214",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "MANIFEST.json",
+      "bytes": 28704,
+      "sha256": "58fb5c71e6fd61d08ab0473f27af45c5601020435423404044aaf2dcf318c617",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "README.md",
+      "bytes": 9866,
+      "sha256": "6923451f5d61e83825dfbb9a925e83437229903d2b4427e7debf8520987b34a8",
+      "content_inspected_as": "text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "all_phase_unknowns.json",
+      "bytes": 65962,
+      "sha256": "b0b435607afceb4a4f6c62b5dff809a893773e3a74a0b70c0932647dc8a35bbc",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "continuity_inventory.json",
+      "bytes": 10320,
+      "sha256": "bfd1db43a29e89198051c674dc358ed46786d6c6691c77dd995c62ade1a3a118",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/goalset_pack_v2.py",
+      "bytes": 9159,
+      "sha256": "0f7fad5a936cda28e200a9cb64433dc936501603be55af512f6411670277e7f2",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/goalset_teacher_pack_v2.json",
+      "bytes": 1986243,
+      "sha256": "c08fe5f0298e7225c4532ccdbf72c94c6499a02e09459e1f00225bed90d312b8",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row167.json",
+      "bytes": 4207628,
+      "sha256": "e9a0461c08867a2c1ce3ceb62a6d5a7fc6372bc3c5902dec81c23c735d258416",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row168.json",
+      "bytes": 12952,
+      "sha256": "0e454eef2c35d86d32f99cf60851ecee21df46550c4a73b16e7f4c844d3cd3fd",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row169.json",
+      "bytes": 88541,
+      "sha256": "ce80b9cce19974c8d07c07ce2d5cf3873c1676838aa489db87d41b1b97016bcc",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row170.json",
+      "bytes": 12953,
+      "sha256": "66dca5fc28bbd7052e3f45a7f56bc79269044e5c996c1e889946ac4d9bdf4abb",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row171.json",
+      "bytes": 88541,
+      "sha256": "2dc96c442ba4a0d74eee883b7e10ea94d9eb84264562154be8f14eaa02a3fe85",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row172.json",
+      "bytes": 12953,
+      "sha256": "70ae5a2aec40d76be0e206d912fb9fad0619d0a638fa320ee62e052ca473b0cf",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row173.json",
+      "bytes": 88541,
+      "sha256": "cfe6679525e727cac8e825c4ad7cd1903bad271d27e221e2ad50ab7a8a5796f3",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row174.json",
+      "bytes": 12953,
+      "sha256": "3212c721ed5a1c8f58508d474fdd990267e1ca142f3b8a4f4fb92cb8633b1223",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row175.json",
+      "bytes": 12953,
+      "sha256": "75052e5201873a171ff2b388e5380c0f00ba03be1577c277fe04e704232fb5f2",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row176.json",
+      "bytes": 12953,
+      "sha256": "f7aa8d2a13b71a511bd2b96f1849d9d2bb23353d8e6473df3cb72eb5d9a8576a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row177.json",
+      "bytes": 12953,
+      "sha256": "2e27602e2f2300ab5581232134d863dce5ded291717b296ca517ce585540da27",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row178.json",
+      "bytes": 88541,
+      "sha256": "c93f1f12697fc8660af7ba8a3ee7e4cc61c095c964912ff3e25989058aef64de",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row179.json",
+      "bytes": 12953,
+      "sha256": "5fd43598e4170364d7f14ce24d136cca4236f18e61309b3d4d95afcb40a93f3c",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row180.json",
+      "bytes": 88541,
+      "sha256": "33bf3c84f56a000c7c133a0e47ea3cb71dcb62848d4125b7ae3bf97c0235bccf",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row181.json",
+      "bytes": 12953,
+      "sha256": "63bbfb8668a462442eacc61b7b93d0e0134a271412531d9ad9fdc7f72ecefed7",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row182.json",
+      "bytes": 88541,
+      "sha256": "c6268c785bbf8029a91189b2377f2969344f20ed408b750acd744ee97c0241c3",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row183.json",
+      "bytes": 12953,
+      "sha256": "5771757d092360105017e8faf5567077300164ffd86781f9ee5554ff8e0c085e",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row184.json",
+      "bytes": 88541,
+      "sha256": "18f141fdb2834e22a84b503cb161006087f645e796908ec7dbf66792e890bf61",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row185.json",
+      "bytes": 12953,
+      "sha256": "c733b701ee4b99e0f29be03fb9fdfd84a3516216b68521e6331b904991b96550",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row186.json",
+      "bytes": 88540,
+      "sha256": "6bccb04585fe279f04495ef6512b27e2b963224ae524b1a0e93db2ceb6cc82ab",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row187.json",
+      "bytes": 12953,
+      "sha256": "8e64574de9e732df079ecc0e492fdd55599e4df8ae77e282257a0058230d1b81",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row188.json",
+      "bytes": 88541,
+      "sha256": "52e6cdf0964f51aca2e5b0ce22e31a28107de535c560a114faf9407ffbe9a8f7",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row189.json",
+      "bytes": 12953,
+      "sha256": "d0477d3017cb03ed75034e26ecbd06afeec7e261e5635f3a1139189576c0abd1",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row190.json",
+      "bytes": 88541,
+      "sha256": "66ee7408228f30edcc7bcb194748c81a18b6f8e375f6c505d7cbdecd5e867e4a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row191.json",
+      "bytes": 12953,
+      "sha256": "b0800ce8d085eb7a577af2635a93be0fb426e0dec4d9fbee0bc0c1818a354a3e",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row192.json",
+      "bytes": 88541,
+      "sha256": "1522325d2d540fb2c5eb98984c1fd0f9ff56c3337bf11341dfea3a6918ccb7d5",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row193.json",
+      "bytes": 12953,
+      "sha256": "c4811811fa9f0606a78eed624c2aba1fb05bce7b8cf916894f5a163ca8e5adc4",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row194.json",
+      "bytes": 88541,
+      "sha256": "dcee646b5a44cb5e4e4547a091c3a5ad886c5eb49c442bef8cd3fa4ded816796",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row195.json",
+      "bytes": 12953,
+      "sha256": "53fa6d7d07088801e8b59556e4422fe1a20a06c5a2fea98636ce8f40cced1d97",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row196.json",
+      "bytes": 88541,
+      "sha256": "d0ae80ade4e74815192607f928dd3c6b632ef7a620d5730dd84b5843440046a4",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row197.json",
+      "bytes": 12953,
+      "sha256": "b9053cfb4ac6d94eb302a13186ac3fa3ca7c960ceee52d6aa3f30d93088829f6",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row198.json",
+      "bytes": 88541,
+      "sha256": "35b5a298f358766131377b1e5bd84816acb3455aba349344dffc11a3bb77b3e8",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row199.json",
+      "bytes": 12953,
+      "sha256": "204231127b5436805b6f559fb1ee63f6739bceb29ecd9588dc047c0bb3097429",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row200.json",
+      "bytes": 88541,
+      "sha256": "1bf12cfd5fe62c3ccf40f0a508b147a8daa0433ab4ebcb09ff4f478b5d0f4eef",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row201.json",
+      "bytes": 12953,
+      "sha256": "9b383a67d92550f1951b0ac23242eb408969997d9f29d053e61a54f54cad01bb",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row202.json",
+      "bytes": 88541,
+      "sha256": "b264be09b461777fbb730846e0a1505e9d37a9242b9530c12409e63edd523d56",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row203.json",
+      "bytes": 12952,
+      "sha256": "2ea28c5568379dc8f4c9932387bdf3fd71af3b5fe19fc2e6b4736461300e1454",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row204.json",
+      "bytes": 88541,
+      "sha256": "ff5acffade4a483fb5a5b9566ead5c545a780e1c3eb4c4c5272816f3a6ffcc48",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row205.json",
+      "bytes": 1096328,
+      "sha256": "ee51f8898dc203a3a40417f017d5e2547700837485bf0a31c3f323356ef00a3e",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row206.json",
+      "bytes": 12953,
+      "sha256": "333fbd7449a22267ed4b94202b57fb47f99a8c6058107578aeef1260ef5c715e",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row207.json",
+      "bytes": 88541,
+      "sha256": "19e29141c80745d71edfed4b9f9e961abfaee15189f755540e7be52a74d23a17",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row208.json",
+      "bytes": 1903124,
+      "sha256": "b623d768f7b78ef56ae91fac5ff204edd4f88ff1b56bf3fffa840cbe551dcaf1",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row209.json",
+      "bytes": 1903124,
+      "sha256": "6912b7c8f8352597d6ebb20b99d77039d5e0a225de6c69258886c3d9e18d6001",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row210.json",
+      "bytes": 12953,
+      "sha256": "a6dc69d5d55f1dd0633d3862cdb3c3118363b188e24abd9545f3a7e84dea4b23",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row211.json",
+      "bytes": 88541,
+      "sha256": "7787b27e171a9db2555107242d4a6113b664442a3be9da1bd58d2ee5e10eda0a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row212.json",
+      "bytes": 1398656,
+      "sha256": "c4a06e059da682c104f3949cf3b5c73e51c94d67e6fbafdad01df1622542bf44",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row213.json",
+      "bytes": 1398656,
+      "sha256": "f5144c338bf2ad96de5873c4e6e807e8d575ec4940e0490b8e33cd757ac5dc93",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row214.json",
+      "bytes": 12953,
+      "sha256": "9e7550a56cba0b4fdc58dc268e0a75a743b8939a2e7e34b77e1e4e79cf4327fd",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row215.json",
+      "bytes": 88541,
+      "sha256": "864c488d15dd77f7e36b596b7c63eb8ef88c2107473a3a4f8381b3f067a44f83",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row216.json",
+      "bytes": 1966462,
+      "sha256": "5001464030517907657b1dff244b884ff300bf6098f47803bbdb51c5313018e5",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row217.json",
+      "bytes": 12953,
+      "sha256": "83603257a4dd46ab1b5df02e96f6fe8bbbb75e25566677e3765e461dd34d0aa1",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row218.json",
+      "bytes": 88541,
+      "sha256": "b50c29088759aeb295df2f941f9b8890e305e6ccf74d6f5be097f92ac14e903f",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row219.json",
+      "bytes": 1663230,
+      "sha256": "ca666a92099fa6a29335ec497a4800873124056efe602d28f3eed767b965b3b8",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row220.json",
+      "bytes": 12953,
+      "sha256": "e60da3c289df3dcf2bbd3fd73561e222de921081fb6aafc59fc4b6aa23861fad",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row221.json",
+      "bytes": 88541,
+      "sha256": "cfcd6108920b28a0d50ead64951088e0d7f50e1c565c71e4c002d4d9831549fe",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row222.json",
+      "bytes": 2269418,
+      "sha256": "3c577a2b830abc3685555b4033b8798c78d0aa4d0ac1d13c61d82bf2c4c460ff",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row223.json",
+      "bytes": 12953,
+      "sha256": "d7b1c194dc9af303c0f04abc9c0ebcd48b7eb4116eacfe4eb4350087678cc220",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row224.json",
+      "bytes": 88541,
+      "sha256": "244679594a582e3dbb2ec42997fcdd6e465105227e5d68d2749719ad329ce503",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control/raw_row225.json",
+      "bytes": 3332139,
+      "sha256": "a420778003aaf92d54fa3f026c3c8aaf8691cf45ceecf07820ed52fdb6df3ef2",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control_all58_phase_join_verification.json",
+      "bytes": 169,
+      "sha256": "13330fd00bf8bccd7efede34c7a33993b1d44f8745ef6fe3a9ffb8d7a1151277",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "control_source_verification.json",
+      "bytes": 12324,
+      "sha256": "99f8fff5b1ecd997eee02b48268a66a7f02661eb76a88bc095063d164f94d006",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "existing_four_row_control.json",
+      "bytes": 6786,
+      "sha256": "a52053438639da4a80ce2787b25c2df9d6f34eb6874999a41bf30696a145829b",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "existing_four_row_control_v2.json",
+      "bytes": 613,
+      "sha256": "8de87921738e0d58de6aeddb6de99ce7b72aa773e43c540c3d7c12e6f6781ede",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "existing_four_row_full_witness_joins.json",
+      "bytes": 391448,
+      "sha256": "601bf61f7678d4c951f484b79e6e8b5d8e00631160bdf68a54370f69953d8c8d",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "existing_four_row_queries.runtime.json",
+      "bytes": 1315,
+      "sha256": "34ce46f2450eb399ff8af902abdbb7304e9b8f48a528729cfc8cd330597f8c21",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "existing_four_row_teachers.runtime.json",
+      "bytes": 1644,
+      "sha256": "a56cb051b9dd55a46510d91a290330128011b7cad42ed252d44993620ee6abfe",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "finalize.py",
+      "bytes": 1751,
+      "sha256": "27558271f01fd855965d498682f7e58bb0343b0edb81cf43c62fd26b52f76df5",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "finalize_regression.py",
+      "bytes": 4083,
+      "sha256": "40404f69bfa0b9ffe373e673f292377fb1a4373d511247750152c5fed56522fb",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "goal6_case_summary.json",
+      "bytes": 28136,
+      "sha256": "9239e75743c2766b4390e8e75318ef887a951fce41887de38d5223a578652f03",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "goal6_full_witness_joins.json",
+      "bytes": 266700,
+      "sha256": "5d8361a89c4987df4aa29fc48853b4f4488a099a6c248553f762becb1021b480",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "goal6_inventory.json",
+      "bytes": 25149,
+      "sha256": "53512a5ab74d835928742a58880ceaaba96dcad80d3881b541177decd93162ea",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "goal6_matched_queries.runtime.json",
+      "bytes": 1760,
+      "sha256": "83405b775920faa0c5e5b9730a3a2674c1f495035ae2146a5b69a486aadf4f97",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "goal6_teachers.runtime.json",
+      "bytes": 1986,
+      "sha256": "1af03f812e95b688492ed40f65fc09e0518bffe7416b830de7619c2ded37e1c7",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "historical_learning_replies.json",
+      "bytes": 10579,
+      "sha256": "f7413db34fd3c404ea7c073ae02404fa406abd05308348791b510d463920a01a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "historical_queries.json",
+      "bytes": 51010,
+      "sha256": "09f5a0bf5f888e7583064c6a3f74782c3516e0662b067a2aecc9bb592728f3be",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "inspect_state.py",
+      "bytes": 847,
+      "sha256": "98a99f987db2dd5372bcd0c42c712d1902f6e725312223d71b7a7f62248e513e",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "official_inventory.json",
+      "bytes": 151160,
+      "sha256": "9ec104081ab35dc0390d0c1fdd6dd70928694b1e8b506d128028e630cb8ec1bf",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_intent_0.json",
+      "bytes": 62830,
+      "sha256": "1f27247de8957fdf239915fc375eba9a23999309504e6732fe8e29c89704df01",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_intent_1.json",
+      "bytes": 61194,
+      "sha256": "f0a5bba23e4ca537f76addc4070344987cd970931267ab0c47ca05f1333101ac",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_intent_2.json",
+      "bytes": 62674,
+      "sha256": "a4fafab53c55dd6520f514d53fa8e24010d341bac6e9ab54d3d9b7551433475a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_intent_3.json",
+      "bytes": 77550,
+      "sha256": "e7a98c308e528285d2411857853e9580828a20ee90ce43c30628b55d76cb9c40",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_intent_4.json",
+      "bytes": 61217,
+      "sha256": "f2c0496183d59b004e3f934e2fd23b684f78aa0296bde0b4186bfc4368274fe5",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_intent_5.json",
+      "bytes": 65094,
+      "sha256": "bf998e2c7cc372122f48dbbccf51aa0fd0c064d67a073176b30b3b54af2c2dfc",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_reply_0.json",
+      "bytes": 2735,
+      "sha256": "02570d4e24545a56fcb380714fec645ce834e3a8d7298c9d03a965d557b4b9fe",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_reply_1.json",
+      "bytes": 2753,
+      "sha256": "da7105087d746eb693b36a4bf906a43d89e00110ef99f491749573c9c79d5fdf",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_reply_2.json",
+      "bytes": 5126,
+      "sha256": "de6c487480519f9baed43580b772c1c917e05fe9a5ff2a468affe3afb9200829",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_reply_3.json",
+      "bytes": 5485,
+      "sha256": "cc3c813edd7e9342c4cb4906a392f183e0fe07bf77c56d40ac7cbc65498f1c07",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_reply_4.json",
+      "bytes": 5621,
+      "sha256": "c5729946db2dd9d4dae8904cfc7b21228ba77ed86e8ed0683cf966ddc45a3d93",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/3d60b4ab113bb6df1f9a27629c4405df_reply_5.json",
+      "bytes": 5714,
+      "sha256": "686b22e48b999a56e89d4766264dcceefc01ad32fb79e681645c6923068adef7",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_intent_0.json",
+      "bytes": 62830,
+      "sha256": "1f27247de8957fdf239915fc375eba9a23999309504e6732fe8e29c89704df01",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_intent_1.json",
+      "bytes": 61194,
+      "sha256": "f0a5bba23e4ca537f76addc4070344987cd970931267ab0c47ca05f1333101ac",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_intent_2.json",
+      "bytes": 62674,
+      "sha256": "a4fafab53c55dd6520f514d53fa8e24010d341bac6e9ab54d3d9b7551433475a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_intent_3.json",
+      "bytes": 77550,
+      "sha256": "e7a98c308e528285d2411857853e9580828a20ee90ce43c30628b55d76cb9c40",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_intent_4.json",
+      "bytes": 61217,
+      "sha256": "f2c0496183d59b004e3f934e2fd23b684f78aa0296bde0b4186bfc4368274fe5",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_intent_5.json",
+      "bytes": 65094,
+      "sha256": "bf998e2c7cc372122f48dbbccf51aa0fd0c064d67a073176b30b3b54af2c2dfc",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_reply_0.json",
+      "bytes": 2735,
+      "sha256": "b32725a76f4be50f150fb37facf90e8fe318170bfc3f3b7fbcece2351f33c0ff",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_reply_1.json",
+      "bytes": 2753,
+      "sha256": "1373b6eab08e3129010c66169539a4a98ebe0065f347427dadfac570a686b0ae",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_reply_2.json",
+      "bytes": 5126,
+      "sha256": "12fbaf30c4c80151e27c9716967882dba74eb05977eb606990173b1e4b9c0f00",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_reply_3.json",
+      "bytes": 5485,
+      "sha256": "71377d3e44e344de3626506a9e5cad532aba698921791b8d129ce78e36549a30",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_reply_4.json",
+      "bytes": 5621,
+      "sha256": "649768de85e5c3ca180f5f9b2ee45264442184ebd6c220e31092d937590533d9",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/7fe7332cb9f2afcae9c1dd6c59e018c2_reply_5.json",
+      "bytes": 5714,
+      "sha256": "42537e2fdda12255c14a973c417d52346c703570061323b5d4a9bf550f636e38",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/journal/profile_fixture_141582fab5ea7ac88a1be974e3dda9ef.json",
+      "bytes": 10628,
+      "sha256": "52f999c927a4fb4f73541df48146dbc3ffc2528c79dca8529d217edba4dcf010",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-learning-recovered-20261013/source/goal6_contract_v3.json",
+      "bytes": 17037,
+      "sha256": "e71c8d550e10dfb92f54a516ac1f40dd70026006135916d6496cacde7a6d6a42",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_intent_0.json",
+      "bytes": 62798,
+      "sha256": "c35ea9023be8c14cc7e30649f7214a2939efe6096b7e953614a28cd1c482db18",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_intent_1.json",
+      "bytes": 61162,
+      "sha256": "0de329084ad3d2ff799c28ebea72e7fe9e69bcf06e417501634da89852166507",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_intent_2.json",
+      "bytes": 62642,
+      "sha256": "da2b1bbc7c64107db427820d7baa99bb2c69c13c275a87f682176d617d6c84f1",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_intent_3.json",
+      "bytes": 77518,
+      "sha256": "292eb9c106510e045713195f27e561d0e8b576043a0e3840a4cb3be4f8714f7e",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_intent_4.json",
+      "bytes": 61186,
+      "sha256": "d51d636ceefcf31d17cb5d8e783c8c7c7b42ae2d53072684895d5b92eb8929ea",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_intent_5.json",
+      "bytes": 65063,
+      "sha256": "2d820fd3ff4c1d53bd03fe8ed783a495c39ef304258c9de3b27c139e11a20816",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_reply_0.json",
+      "bytes": 5216,
+      "sha256": "5aa0a297d547b9fecab673c265407688bf2c0f3fd3dcab5885cbcab6ab1ac648",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_reply_1.json",
+      "bytes": 5216,
+      "sha256": "0cb66941e4d9a0f6e51c38a66e501a3ae3e3c15836edfe9a4d1226a226d0dcf0",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_reply_2.json",
+      "bytes": 5214,
+      "sha256": "073e8cc49c82bf5812e80fcd8098a06f9aa8fc2dc066f68dc5d7f85d3e08b687",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_reply_3.json",
+      "bytes": 5214,
+      "sha256": "0a17cc7216ea2560a44f32170b326fb065efb243427a95981f30eaf86c43f2c4",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_reply_4.json",
+      "bytes": 5210,
+      "sha256": "2c0cbfac3b5f0993aa389cc1a00946d8395e72d1f2cb22beb00dca3165a26854",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_reply_5.json",
+      "bytes": 5210,
+      "sha256": "a4ed63b1a1e6dccbacb6a5a8c1297edbeacb6713a4410037b5b19a793ede6ca4",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-query-recovered-20261013/journal/2a935efe68e17ebf9e7ee20448f53e6a_scoring.json",
+      "bytes": 5983,
+      "sha256": "f7bc00ee8b91c449f794fee9f37a8fda995da8848f4769203deeefff91a0fdb1",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-teacher-recovered-20261013/producer/goal6_producer_0ba625e5dc36425ed60002dc6462cc62.typed.json.xz",
+      "bytes": 47744,
+      "sha256": "510d3b58a2b6c21a14aeddfca765133447b6f50d55efd534d140f944a8dced54",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-teacher-recovered-20261013/reader/goal6_reader_415b1b15934ffad78311dc739ecf63a0.typed.json.xz",
+      "bytes": 16132,
+      "sha256": "3fdf0d21b2ba347e94282d6fbc59bfbe96f598f9009e2f4a66afacdf6b4752e4",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-teacher-recovered-20261013/source/goal6_common_v1.py",
+      "bytes": 11371,
+      "sha256": "c4f693f1a9106b43bd7a2fffb8775042de6925854807fe3ba784641b2af58697",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-teacher-recovered-20261013/source/goal6_contract_v1.json",
+      "bytes": 11551,
+      "sha256": "d8aa98cb903588944411d2396dcb0b38b76ef8d669c6bf941f14788a3111b5e1",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-teacher-recovered-20261013/source/goal6_contract_v2.json",
+      "bytes": 4294,
+      "sha256": "ca43331b94cc30c9f4fb5c6a143f5c3c5cc5127591f3e7e90b1f465729ae3cf0",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-teacher-recovered-20261013/source/goal6_producer_v1.py",
+      "bytes": 9405,
+      "sha256": "d26f08cb59588670be2fa8abd493efe7678c3a421a036ffaf1e54db8d290a979",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "pinned/arc-goal-teacher-recovered-20261013/source/goal6_reader_v1.py",
+      "bytes": 12011,
+      "sha256": "80714ea32922b5f246c4d87d86ff35dc5a97b41dc3793d8926f4751aa2e94e54",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "preparation_resources.json",
+      "bytes": 469,
+      "sha256": "0a5c3d4feb1aabdf7bb671585accd7e6cfb71cbacf91d71d124a2289b2aee0bf",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "prepare.py",
+      "bytes": 6459,
+      "sha256": "4f8a2cb60a6aa0c91a19329d85f3474da8b632ca5d37b84b1ce07c08b43aaff8",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "prepare_control.py",
+      "bytes": 3760,
+      "sha256": "a2f41cc1b2c481d67a1906ada60caf743806abe56629f0e2c85766d9e8296644",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "recover_regression.py",
+      "bytes": 2129,
+      "sha256": "3a48334fa98ece7fdc0b78e195a72160af285bacd482175fcd07bb5bb389032f",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "recovery_inventory.json",
+      "bytes": 20051,
+      "sha256": "b84039cfebd60fedb7be05f8becd8552636d28ae97a34bf5526e87f76ca41af9",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/README.md",
+      "bytes": 1352,
+      "sha256": "b504c9cea0be8706999327ee82f90942740ad34b888d04de2d0cfffe2e428414",
+      "content_inspected_as": "text"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_0.json.xz",
+      "bytes": 1744,
+      "sha256": "07a37f2c9a62b3ec1844a774cd88c032931c0182aa20f7f97a6b23b6400f7647",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_1.json.xz",
+      "bytes": 1744,
+      "sha256": "113d960c550a272bfa2b366f29b861de2c3d9ca9f132677175cb338d22f834cf",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_2.json.xz",
+      "bytes": 1756,
+      "sha256": "c326f8fa4242af9b64299240e6d0aa662d866fd38b791e5dbae2831844048fe3",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_3.json.xz",
+      "bytes": 1748,
+      "sha256": "f00e6f575f4bc2f5e9d69b547542d95919d6bf988a54fd393b956394eab6ecfe",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_4.json.xz",
+      "bytes": 1736,
+      "sha256": "4ae4569be46ee2ae1eb06edb2ea2106f1cb43b15f675d50f5b83d5ba1e3c4319",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_5.json.xz",
+      "bytes": 1756,
+      "sha256": "63471ca16cf43888d3e53a9cb29bbffe39f3f23bf4e9922e0f4e45460dbdfa89",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_6.json.xz",
+      "bytes": 1744,
+      "sha256": "3291a25530ff6e6a63e889a84aa2c8dc8cc3d26fae246290aa2666a1d6f459e9",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_7.json.xz",
+      "bytes": 2060,
+      "sha256": "a694ec62c9c1fbc822a4977b09037784d405207e9925c707b8b9230732ecb82d",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/intent_8.json.xz",
+      "bytes": 2112,
+      "sha256": "459f7f61120675a088dd2cbc939bdcfbec708cfc22951d21fd235147971d54f8",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/nine_expected_historical.json",
+      "bytes": 192849,
+      "sha256": "a308a127d790aad04f4a9b4b9f2646b63591759717bd190a193bc5f5063ba66c",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/nine_queries.runtime.json",
+      "bytes": 2659,
+      "sha256": "15e83ab6a7caacdcaf62c1585eef3f450de1bd6abc9da78276de9b0d45cec44c",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/query_inventory.json",
+      "bytes": 2013735,
+      "sha256": "3494a713679730861f4cdbe4d47405e983b09eba588b644b4a42d798ab297697",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_0.json.xz",
+      "bytes": 4496,
+      "sha256": "616441fba85f3afc859e9eabdbd3b19d530b80e5b9f7c9c87af697adf523b439",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_1.json.xz",
+      "bytes": 4464,
+      "sha256": "f8323a7e4a904b6efc21bc528bda2787c263685601d3eef2bf60cf760173120d",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_2.json.xz",
+      "bytes": 4516,
+      "sha256": "1978ec5e6c66b7f2ccd7bebb89f5223bda5d57cd5f8b175f73c6740418e56e11",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_3.json.xz",
+      "bytes": 4524,
+      "sha256": "5703dd7e7d4d23187a640eab85943d4e5510d0bc2eeec7c221ad07f7213693de",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_4.json.xz",
+      "bytes": 4472,
+      "sha256": "3f833175aaa8727cafede263c216260a2da590054a559bee7113646d44379854",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_5.json.xz",
+      "bytes": 4488,
+      "sha256": "3f0e6e43deb42a23ceddec76ca293829be62ba80a44870ae15f910232b9c8c7a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_6.json.xz",
+      "bytes": 4464,
+      "sha256": "2d02c4ceb7b10171b2b73a67bc93477caa90a6532e761cb3fbe6238518e2a694",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_7.json.xz",
+      "bytes": 4808,
+      "sha256": "03f3bb8a7c327633f5e57d9dc9a503d680c0bb304cf8a5db4455c3e42a7863c7",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/reply_8.json.xz",
+      "bytes": 4848,
+      "sha256": "4d0b55357ab73b0de2deabf2ee62d0e6ecdbfd14b7a3a4e0aa0252523586e77a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "regression_v2/selected_preliminary.json",
+      "bytes": 57962,
+      "sha256": "b6aafb731459c9ccbb5cec06c28f0f89beaf54a09582e03c3818d16b750d32c7",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "runtime_payload_sizes.json",
+      "bytes": 592,
+      "sha256": "28675504b3290a5150c5371d8af17a74cc0713e28ae7ed2e1df092ccbbbe3166",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "source_closure_checks.json",
+      "bytes": 683,
+      "sha256": "f76222d3e3a76e8093e3feff6da33e21d535efdd7dce824596e1735b899cf622",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "state_boundary_inventory.json",
+      "bytes": 34089,
+      "sha256": "7871493f4ed03ea6581bbf8cc9b16af16a0aeabd0e77b48804bf4a4f1fc65d28",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/case0_all_phase_pixel_deltas.json",
+      "bytes": 33208,
+      "sha256": "ebeb3795bb605819aa2e0e29b35b729e3b48eea430cc71c9c5524fcf74a03855",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/case1_all_phase_pixel_deltas.json",
+      "bytes": 49699,
+      "sha256": "8f4ab6006f4b8840e65026c6af62039a827b232b8b49ec2e6525a7ba8aa75639",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/case2_all_phase_pixel_deltas.json",
+      "bytes": 32553,
+      "sha256": "efafc3cb41875ba1e5c0aed3e3bb46ae57cdc5e086432752d341dbea8d7ced03",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/case3_all_phase_pixel_deltas.json",
+      "bytes": 30018,
+      "sha256": "c43562226ecaa2c2c6c2ccf738ecbb2e652024ea93376bced2dcbb55ef232b7d",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/case4_all_phase_pixel_deltas.json",
+      "bytes": 54746,
+      "sha256": "33050bcd6b26e89d03d0e3a0abd00f5b401797bd71a2e4204ad540d23f257bdb",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/case5_all_phase_pixel_deltas.json",
+      "bytes": 88740,
+      "sha256": "84cca838b4ae5f2474fb2fc93fcae7ded0884b19e2b225094ffbb93eda767c36",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source0_row65.json",
+      "bytes": 13058,
+      "sha256": "93416076b0721e8f991ab27539c8fc5618fd3d07d2b5990af3d5d22bf6cd7a50",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source0_row66.json",
+      "bytes": 190611,
+      "sha256": "54168b6069a734ee10433a53d616aad3d7efa8254ba411cdc730783eccb5166b",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source0_row74.json",
+      "bytes": 13040,
+      "sha256": "36706df3be2402dd11151ac7a24b5a5d7c9fd78ec8105991f3f7894863c6b430",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source0_row75.json",
+      "bytes": 190904,
+      "sha256": "7bc048440ad8f540798255109dbacbb7a33a0697f8c4a3f34eb14d557675fbc4",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source0_row92.json",
+      "bytes": 13069,
+      "sha256": "80dd1e294e100ac858ce6603e70382868f8e983ca0ed259972b69a5f08c7061a",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source0_row93.json",
+      "bytes": 190921,
+      "sha256": "53415298906d9fa45363a84cc99d6e9a00c0db2db976d3b1127b5a2eff2a7c6c",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source2_row141.json",
+      "bytes": 13064,
+      "sha256": "5a84c9ccebeec8818fa564be55be4f3de0752a8572522b52db67d859dcd6f314",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source2_row142.json",
+      "bytes": 203306,
+      "sha256": "702cbd3ab26bcc5e434a40e755242026a90ebcf9f5930c6c2eaa031c939f19e8",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source2_row23.json",
+      "bytes": 189761,
+      "sha256": "5ea84a327308babd98f99d40e3380d0b6ec8ed8e92230ce1c81c461aa2e6c415",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source2_row24.json",
+      "bytes": 190011,
+      "sha256": "ae4a86f6c0071cf98dac245797c92b1ca9a9ba60008e7071ec885627504227dc",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source2_row60.json",
+      "bytes": 12923,
+      "sha256": "02f301ff57e7023bad725919b842a373552ffe421e83e0db934109ef9ad1776c",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "witnesses/source2_row61.json",
+      "bytes": 201111,
+      "sha256": "61aba15d1a5eedaa9935079a54ba1792b17f3118ca1aafb7b26eaa7d4aa91c09",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_contrasts",
+      "path": "MANIFEST_v2.json",
+      "bytes": 33456,
+      "sha256": "a9a83766227da37248250b9debd1ef085c9bad716a202bf4ef31a07afdce8e95",
+      "content_inspected_as": "bounded_JSON_data"
+    },
+    {
+      "root": "teacher_review",
+      "path": "README.md",
+      "bytes": 6761,
+      "sha256": "17228e1593caf64f01f6d8560e1395ee7e8fe0b6b4be29e28afee07da8b59f9c",
+      "content_inspected_as": "text"
+    },
+    {
+      "root": "teacher_review",
+      "path": "audit_witnesses.py",
+      "bytes": 8256,
+      "sha256": "e55d696466cba6f3eb3b9d5c736765063a2ef122587020999c35b4962e443b93",
+      "content_inspected_as": "inert_source_text"
+    },
+    {
+      "root": "teacher_review",
+      "path": "witness_audit.json",
+      "bytes": 2316,
+      "sha256": "9d7bf1857886c4d020abe9e0b9f002b8e650afb677b9843a8ab7ea90e581a12c",
+      "content_inspected_as": "bounded_JSON_data"
+    }
+  ]
+}
