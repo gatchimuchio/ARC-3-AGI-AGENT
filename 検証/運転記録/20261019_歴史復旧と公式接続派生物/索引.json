@@ -1,0 +1,52 @@
+{
+  "schema": "arc3-recovery-sanitized-official-index-v1",
+  "original_archive_on_main_target": 13,
+  "recovered_original_archives": 14,
+  "official_original_on_main": false,
+  "derivative_counted_as_original": false,
+  "files": [
+    {
+      "name": "arc-recovery-20261013-evidence.tar.gz",
+      "bytes": 3920259,
+      "sha256": "64199f3f35772f39f0849f254ac6f3a1c9e52807ea476dbf542c1ff39c571ed9"
+    },
+    {
+      "name": "復旧原manifest.json.gz",
+      "bytes": 10361,
+      "sha256": "62ca90b94ec27cd68f039e990a53f6f73c9ef7dbfef8a30c50a5e057c777502b"
+    },
+    {
+      "name": "復旧外側独立検査.json",
+      "bytes": 25618,
+      "sha256": "3a205991cffcccdb27ca606b0fa05c45c2db0c6af8c711bc584dcc779ce31e26"
+    },
+    {
+      "name": "復旧内包独立検査.json",
+      "bytes": 41159,
+      "sha256": "cb50f88fa0f85c131c46b1563d96ed05b11f4049faea54a2e66d580a36390d3b"
+    },
+    {
+      "name": "official-connection-checkpoint-sanitized-20261016.tar.gz",
+      "bytes": 1302802,
+      "sha256": "ab409c1855768cbf40634ad98236c0782a825ce7a9676ec98ef6c8b3d8212caa"
+    },
+    {
+      "name": "公式原本保留理由.json",
+      "bytes": 52842,
+      "sha256": "90276641663d9955d964484ceb4c351eb3660f5f181dff9426662d470c40408d"
+    },
+    {
+      "name": "安全化派生物独立検査.json",
+      "bytes": 3964,
+      "sha256": "709eb819801be250151f73861fc7ed46194f93ede26bec16ed71330a2befd7da"
+    },
+    {
+      "name": "除外置換manifest.json",
+      "bytes": 29881,
+      "sha256": "158798fbb9991ee28bcb738dcc14cb0331b9aba4e321e83e01257745dd2a5e90"
+    }
+  ],
+  "missing_historical_evidence_remains": true,
+  "runtime_adoption": false,
+  "no_new_native_operations": true
+}

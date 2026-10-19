@@ -1,0 +1,939 @@
+{
+  "schema": "independent-remaining-original-admission-v1",
+  "archive": {
+    "name": "arc-recovery-20261013-evidence.tar.gz",
+    "bytes": 3920259,
+    "sha256": "64199f3f35772f39f0849f254ac6f3a1c9e52807ea476dbf542c1ff39c571ed9",
+    "whole_gzip_crc_eof_verified": true,
+    "tar_uncompressed_bytes": 33802240,
+    "final_identity_recheck": true
+  },
+  "status": "ADMITTED_FOR_EXACT_EVIDENCE_ONLY_PRESERVATION_WITH_EXPLICIT_PARTIAL_RECOVERY_LIMIT",
+  "scope": {
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "recovered_source_executed": false,
+    "official_game_SDK_implementation_read": false,
+    "opaque_SDK_stderr_bodies_read": false,
+    "git_or_upload_operations": 0,
+    "original_files_modified": false
+  },
+  "resources": {
+    "AS_limit_bytes": 268435456,
+    "combined_inspector_RSS_budget_bytes": 536870912,
+    "peak_RSS_KiB": 163552
+  },
+  "counts": {
+    "verified_files": 196,
+    "verified_payload_bytes": 33628866,
+    "json_nodes": 18806976,
+    "json_strings": 8262,
+    "text_chars_scanned": 1350636,
+    "json_documents": 784,
+    "source_files": 38,
+    "other_text_members": 7,
+    "inner_gzip_verified": 1
+  },
+  "header_errors": [],
+  "hash_mismatches": [],
+  "parse_errors": [],
+  "typed_errors": [],
+  "source": [
+    {
+      "member": "arc-recovery-20261013/.library-helper-20261013T0750/library_file_transfer.py",
+      "bytes": 11084,
+      "ast_parse": true,
+      "imports": [
+        "argparse",
+        "dataclasses",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "shutil",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "urllib.error",
+        "urllib.parse",
+        "urllib.request"
+      ],
+      "risk_call_counts": {
+        "load": 1,
+        "run": 2,
+        "urlopen": 1,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-audit-captures-20261013/color_audit_outer.py.txt",
+      "bytes": 1370,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec_module": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-audit-captures-20261013/color_audit_source.py.txt",
+      "bytes": 20424,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "signal",
+        "sys",
+        "time"
+      ],
+      "risk_call_counts": {
+        "decompress": 2,
+        "loads": 1,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-audit-captures-20261013/cq_outer.py.txt",
+      "bytes": 1376,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec_module": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-audit-captures-20261013/cq_source.py.txt",
+      "bytes": 15835,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "signal",
+        "sys",
+        "time"
+      ],
+      "risk_call_counts": {
+        "decompress": 1,
+        "exec": 3,
+        "loads": 1,
+        "compile": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-audit-captures-20261013/q1addon.py.txt",
+      "bytes": 6651,
+      "ast_parse": true,
+      "imports": [],
+      "risk_call_counts": {
+        "decompress": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-audit-captures-20261013/q1save_script.py.txt",
+      "bytes": 17059,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec_module": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-audit-captures-20261013/q1source.py.txt",
+      "bytes": 10829,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "sys",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-audit-captures-20261013/q3capture_save_script.py.txt",
+      "bytes": 10523,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys"
+      ],
+      "risk_call_counts": {
+        "exec_module": 1,
+        "decompress": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-drafts-20261013/goal6_outer.unverified.py.txt",
+      "bytes": 1714,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-drafts-20261013/goal6_producer.unverified.py.txt",
+      "bytes": 22869,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec": 3,
+        "decompress": 1,
+        "load": 1,
+        "compile": 3
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-drafts-20261013/goal6_reader.unverified.py.txt",
+      "bytes": 18966,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/color12_build_script.py.txt",
+      "bytes": 15667,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "textwrap",
+        "time",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "loads": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/color12_prep_header.py.txt",
+      "bytes": 1083,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "time",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/color12_reader_command.py.txt",
+      "bytes": 643,
+      "ast_parse": false,
+      "syntax_error": {
+        "line": 1,
+        "message": "invalid syntax"
+      }
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/color12_run_command.py.txt",
+      "bytes": 631,
+      "ast_parse": false,
+      "syntax_error": {
+        "line": 1,
+        "message": "invalid syntax"
+      }
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/color3_prepare_script.py.txt",
+      "bytes": 25974,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/seq_fixture_outer3_prepare_script.py.txt",
+      "bytes": 7361,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/seq_fixture_outer4_prepare_script.py.txt",
+      "bytes": 5711,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/seq_fixture_prepare_script.py.txt",
+      "bytes": 28479,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 2,
+        "compile": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-material-captures-20261013/seq_fixture_source.py.txt",
+      "bytes": 17760,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "contextlib",
+        "copy",
+        "hashlib",
+        "io",
+        "json",
+        "lzma",
+        "pathlib",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 2,
+        "load": 1,
+        "compile": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/cq_body.py.txt",
+      "bytes": 7967,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "types"
+      ],
+      "risk_call_counts": {
+        "load": 2,
+        "exec": 1,
+        "loads": 2,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/cq_build.py.txt",
+      "bytes": 16178,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/cq_outer.py.txt",
+      "bytes": 1259,
+      "ast_parse": true,
+      "imports": [
+        "datetime",
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/cqfx_build.py.txt",
+      "bytes": 17145,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/cqfx_cases.py.txt",
+      "bytes": 7328,
+      "ast_parse": true,
+      "imports": [],
+      "risk_call_counts": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/cqfx_launch_source.py.txt",
+      "bytes": 985,
+      "ast_parse": true,
+      "imports": [
+        "datetime",
+        "hashlib",
+        "pathlib",
+        "resource",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "run": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/cqn_launch_source.py.txt",
+      "bytes": 836,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "resource",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "run": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1_build_script.py.txt",
+      "bytes": 15951,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "types"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1_extra.py.txt",
+      "bytes": 6276,
+      "ast_parse": true,
+      "imports": [],
+      "risk_call_counts": {
+        "decompress": 1,
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1_fix_cmd.py.txt",
+      "bytes": 2602,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1_outer_v2.py.txt",
+      "bytes": 577,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1f_build.py.txt",
+      "bytes": 21586,
+      "ast_parse": false,
+      "syntax_error": {
+        "line": 17,
+        "message": "invalid syntax. Perhaps you forgot a comma?"
+      }
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1f_build_corrected.py.txt",
+      "bytes": 21586,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1f_cases.py.txt",
+      "bytes": 10849,
+      "ast_parse": true,
+      "imports": [],
+      "risk_call_counts": {
+        "exec": 1,
+        "loads": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1f_run_command.py.txt",
+      "bytes": 1056,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "run": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1f_v2_build.py.txt",
+      "bytes": 4916,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-query-captures-20261013/q1n_command.py.txt",
+      "bytes": 1075,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "run": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    }
+  ],
+  "fixed_core": [],
+  "security_candidates": [],
+  "opaque_candidates": [],
+  "nested_archives": [
+    {
+      "member": "arc-recovery-20261013/goal-role-checkpoint-e167d2a95510326c7217eca0b3003a1e.tar.xz",
+      "bytes": 3105444,
+      "sha256": "716e2668bbc1ec16adf4364e33e6dd66938f7388461ed9ef030b56bc287a4d2c",
+      "status": "FULLY_CLASSIFIED_AND_ADMITTED_HISTORICAL_NESTED_ARCHIVE",
+      "report": {
+        "path": "remaining_origin_recovery_nested.json",
+        "bytes": 41159,
+        "sha256": "cb50f88fa0f85c131c46b1563d96ed05b11f4049faea54a2e66d580a36390d3b"
+      }
+    }
+  ],
+  "summary_records": [
+    {
+      "member": "arc-recovery-incident-20261013/incident.json",
+      "summary": {
+        "schema": "arc-environment-evidence-loss-and-recovery-v1",
+        "created_utc": "2026-10-13T08:00:01.063307+00:00",
+        "purpose": "固定Learning Machineの運転記録を環境不在故障も含めて保存し、目的付き教師の作業再開可否を確認する。",
+        "baseline_commit": "9ce1830494bb80f5d820fbad61ca9096954a04c6",
+        "goal6_status": "未検証草稿のみ。新測定/Teach未実行。before修復見込みと保全見込みを固定上書き仮説から別々に作り、after公開進捗との関係を通常Teachする予定。AND正答は注入しない。",
+        "next": "最新mainの必要部分・既存知覚と作用域の依存を回収し、目的付き6教師の測定経路を新環境で再確認する。"
+      }
+    }
+  ],
+  "manifest": {
+    "member": "MANIFEST.json",
+    "bytes": 38015,
+    "sha256": "a2f7a74b8431ce34f8ae2b8969d76a4abc26c467bb30dd51db71561e8244db0e",
+    "entry_count": 195,
+    "membership_complete": true,
+    "metadata_members": [],
+    "external_manifest_equal": false
+  },
+  "header_roots": {
+    "MANIFEST.json": 1,
+    "arc-recovery-20261013": 2,
+    "arc-recovery-audit-captures-20261013": 78,
+    "arc-recovery-drafts-20261013": 6,
+    "arc-recovery-incident-20261013": 1,
+    "arc-recovery-main-20261013": 5,
+    "arc-recovery-material-captures-20261013": 16,
+    "arc-recovery-query-captures-20261013": 87
+  },
+  "header_count": 196,
+  "provenance_whitelist": "All exact declared relative regular-file headers validated before semantic bodies; own ARC3 evidence/source/repository roots only. External source references are not followed.",
+  "recordings": [
+    {
+      "member": "arc-recovery-main-20261013/public-recordings/130512d8-1d1b-4ee4-ab4b-9e0397fa6af8.recording.jsonl",
+      "rows": 155,
+      "frames": 509,
+      "shapes": {
+        "(64, 64)": 509
+      },
+      "states": {
+        "NOT_FINISHED": 153,
+        "WIN": 1
+      },
+      "nonnull_reasonings": 0
+    },
+    {
+      "member": "arc-recovery-main-20261013/public-recordings/2e4399fe-f0f6-421d-bc32-7827ad792b96.recording.jsonl",
+      "rows": 126,
+      "frames": 494,
+      "shapes": {
+        "(64, 64)": 494
+      },
+      "states": {
+        "NOT_FINISHED": 124,
+        "WIN": 1
+      },
+      "nonnull_reasonings": 0
+    },
+    {
+      "member": "arc-recovery-main-20261013/public-recordings/33f6b2f7-9e0d-41c5-ab94-5f929cdb85c1.recording.jsonl",
+      "rows": 356,
+      "frames": 1253,
+      "shapes": {
+        "(64, 64)": 1253
+      },
+      "states": {
+        "NOT_FINISHED": 355
+      },
+      "nonnull_reasonings": 0
+    }
+  ],
+  "typed_tags": {},
+  "schemas": {
+    "arc-recovery-checkpoint-v1": 1,
+    "audit-store-exact-report-addition-v1": 1,
+    "audit-store-data-recovery-v1": 1,
+    "color-prefix1-independent-actual-tools-v1": 1,
+    "color-prefix2-independent-actual-tools-v1": 1,
+    "color-prefix3-independent-actual-tools-v1": 1,
+    "color-selection-independent-audit-contract-v1": 1,
+    "color-query3-independent-audit-contract-v1": 1,
+    "color-query3-independent-source-preparation-tools-v1": 1,
+    "goal-relation-query-independent-completion-v1": 1,
+    "color-query1-transfer-independent-audit-contract-v1": 1,
+    "query1-independent-source-preparation-tools-v1": 1,
+    "query1-independent-runtime-actual-tools-v1": 1,
+    "color-query3-audit-actual-tools-v1": 1,
+    "goal6-unverified-draft-recovery-v1": 1,
+    "arc-environment-evidence-loss-and-recovery-v1": 1,
+    "arc-public-recording-recovery-v1": 1,
+    "color12-measurement-actual-tools-v1": 1,
+    "material-capture-memory-recovery-v1": 1,
+    "arc-query-functions-store-recovery-v1": 1,
+    "color-query1-source-preparation-actual-tools-v1": 2,
+    "color-query1-pure-preparation-actual-tools-v1": 2,
+    "color-query1-entry-runtime-actual-tools-v1": 1,
+    "color-query1-entry-resource-v2-prep-actual-tools": 1,
+    "color-query1-native-actual-tools-v1": 1
+  },
+  "member_identity_digest_algorithm": "SHA256 sorted compact UTF8 JSON arrays [path,bytes,sha256], joined by newline",
+  "member_identity_digest": "f2bdef5547de68bd26ed63e2cdfbf02d66aa9da9b69324550dc4d0cf7a409620",
+  "public_recording_source_closure": [
+    {
+      "member": "arc-recovery-main-20261013/public-recordings/130512d8-1d1b-4ee4-ab4b-9e0397fa6af8.recording.jsonl",
+      "bytes": 6485013,
+      "sha256": "712c5f13f53714bddd0b234e0539660f6a6d6fe9b6a2c4c80196044a30801923",
+      "rows": 155,
+      "source_gzip_full_row_serialization_exact": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/public-recordings/2e4399fe-f0f6-421d-bc32-7827ad792b96.recording.jsonl",
+      "bytes": 6279726,
+      "sha256": "85c9503d128bce20cda11542826fe89d1e0f6df5926b754428f7acc3762cb026",
+      "rows": 126,
+      "source_gzip_full_row_serialization_exact": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/public-recordings/33f6b2f7-9e0d-41c5-ab94-5f929cdb85c1.recording.jsonl",
+      "bytes": 15995704,
+      "sha256": "d53d72ae638453542fb01556ecb2235eb5b884bd9fda9e96f7e317a6d7004833",
+      "rows": 356,
+      "source_gzip_full_row_serialization_exact": true
+    }
+  ],
+  "historical_archive_identity": {
+    "original_historical_hash_available": false,
+    "current_Library_payload_and_supplied_identity_verified": true,
+    "note": "The manifest and exact current payload close internally; no absent earlier archive identity is invented."
+  },
+  "actual_verified_scope": {
+    "outer_members": 196,
+    "nested_members": 1950,
+    "public_recordings": 3,
+    "public_rows": 637,
+    "public_palette_frames": 2256,
+    "source_capture_files": 38,
+    "missing_historical_material": [
+      "Color3/Query3/Color12/Query1 full material/state/journal XZ originals",
+      "Old owner memory/execution environment",
+      "New Color checkpoint archive (not created)"
+    ],
+    "new_game_clears_established": 0,
+    "runtime_adoption": false
+  },
+  "semantic_admission": [
+    "All 196 outer member sizes/hashes, manifest membership and full gzip CRC/EOF verified. All 784 outer JSON documents validate, including every public recording row and a complete inner gzip document.",
+    "Three public JSONL files contain 637 rows and 2256 valid 64x64 palette frames; all action reasoning fields are null. Re-serialization of every archived public full-row source exactly reproduces all three original byte lengths/SHA256 values. Historical teacher WIN values are preserved as teacher data, not new agent achievements.",
+    "All 38 outer source/source-evidence files and seven command-text files are inert historical preparation/diagnostic/transfer-helper evidence. The helper contains credential environment/key names but no stored credential candidate; it was not imported or executed.",
+    "The nested 3105444-byte goal-role checkpoint is fully classified separately: 1950 members, 332 static source files, 1570 JSON documents and all1186 XZ streams verified. It remains an overlapping historical dependency snapshot, not an adopted environment.",
+    "Incident and capture manifests explicitly preserve partial recovery and missing state/material/journal originals. Captured earlier audit PASS messages cannot substitute for missing original packets or a fresh re-audit."
+  ],
+  "limitations": [
+    "No historical original hash for this recovery outer archive was available; only exact current Library payload identity and manifest closure are verified.",
+    "Color3/Query3/Color12/Query1 full material/state/journal XZ originals and old runtime heap/environment were not recovered by this archive. Existing capture logs and partial drafts do not make the recovery complete.",
+    "Nested cutoff excludes all Painting and references four external inputs and three prior archives rather than containing them. No referenced dependency was opened merely because a path appeared.",
+    "Historical native29489/fixture18870 remain unresolved; no later archive or PASS summary silently closes their chain.",
+    "No HDS/SDK/Query/Teach/Action execution, game/source inspection, native deserialization, new game clear, full-run WIN certification or runtime adoption occurred. Static review cannot prove absence of all arbitrarily encoded sensitive data."
+  ]
+}

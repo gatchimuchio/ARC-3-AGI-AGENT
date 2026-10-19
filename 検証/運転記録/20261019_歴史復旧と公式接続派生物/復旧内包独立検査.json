@@ -1,0 +1,965 @@
+{
+  "schema": "independent-remaining-original-admission-v1",
+  "archive": {
+    "outer": "arc-recovery-20261013-evidence.tar.gz",
+    "member": "arc-recovery-20261013/goal-role-checkpoint-e167d2a95510326c7217eca0b3003a1e.tar.xz",
+    "bytes": 3105444,
+    "sha256": "716e2668bbc1ec16adf4364e33e6dd66938f7388461ed9ef030b56bc287a4d2c",
+    "whole_xz_crc_eof_verified": true,
+    "tar_uncompressed_bytes": 23132160
+  },
+  "status": "ADMITTED_AS_NESTED_HISTORICAL_EVIDENCE_ONLY",
+  "scope": {
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "recovered_source_executed": false,
+    "official_game_SDK_implementation_read": false,
+    "opaque_SDK_stderr_bodies_read": false,
+    "git_or_upload_operations": 0,
+    "original_files_modified": false
+  },
+  "resources": {
+    "AS_limit_bytes": 268435456,
+    "combined_inspector_RSS_budget_bytes": 536870912,
+    "peak_RSS_KiB": 89852
+  },
+  "counts": {
+    "verified_files": 1950,
+    "verified_payload_bytes": 19852832,
+    "json_nodes": 3555721,
+    "json_strings": 1673326,
+    "text_chars_scanned": 23858569,
+    "json_documents": 1570,
+    "xz_streams_verified": 1186,
+    "max_decoded_bytes": 11235854,
+    "source_files": 332,
+    "other_text_members": 42,
+    "diff_xz": 1
+  },
+  "header_errors": [],
+  "hash_mismatches": [],
+  "parse_errors": [],
+  "typed_errors": [],
+  "fixed_core": [
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+      "git_blob": "ef58e4969fcd4ba4c4310285c4d45cc740f8150c",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+      "git_blob": "31f6e4d86c42448d90a6e829b86ab99e441982dc",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+      "git_blob": "81ffd4ea6e1a2f611020faeb5d28416ab0d79172",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/型.py",
+      "git_blob": "0ade344cf314d710ace16d4e53907b89ee47d742",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "git_blob": "7dc89687e75d00b7b0b87f5fa23d950649a514f6",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+      "git_blob": "82016fb3fc15f0baa7af3b5b7c792420c95188ca",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+      "git_blob": "54f3bec51663dde9dedd38f8bf007d336d40b9ea",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+      "git_blob": "e394dc97f4986ca3212b1e10398060ac2495d3e6",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+      "git_blob": "28e5ac81be2160a705e7edef016f92702640b5a8",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+      "git_blob": "68a4f62d4dfea55b481de0f36b8e2436afa6b0a2",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "git_blob": "ef2088692ae333bca598fa5e7cd4b10de58c5ad1",
+      "baseline_equal": true
+    },
+    {
+      "member": "workspace/scratch/a94ff513b3af/arc-teacher-event-scope-candidate/HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+      "git_blob": "7af4f016518df38207e9b66d075846fa7efdea0d",
+      "baseline_equal": true
+    }
+  ],
+  "security_candidates": [],
+  "opaque_candidates": [],
+  "nested_archives": [],
+  "summary_records": [
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/action701_tool_capture_ace2438c4ac3409bbd405bb1de3e45f0.json",
+      "summary": {
+        "command": "python -B /tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/source/action701_material_v1.py /tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/root_action701_material_ace2438c4ac3409bbd405bb1de3e45f0.json 649bbcc17742e782091fa3c40594b5992d371387fbaf5929785bb1d5619f97b0"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/action702_tool_capture_3a639889ca734474aa726aeda09eb6ee.json",
+      "summary": {
+        "schema": "actual-tool-capture-v1"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/action703_tool_capture_cfbc70baf53ace8ce0a45cdff1df6626.json",
+      "summary": {
+        "schema": "actual-tool-capture-v1",
+        "source_sha256": "9dacb437fd3107d04a900f3bf06baba60ff7f3a91dda77889ddd0b7a2b13d3f4",
+        "gate_sha256": "cb9f779fe0a1c881c75471d9788a553bb0d1b486e5cd68e278cac76de7e9bcad"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/all30_tool_capture_75aef58137ffc573984ac19d4bb4d5f2_exit.json",
+      "summary": {
+        "schema": "actual-tool-capture-v1"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/all30_tool_capture_75aef58137ffc573984ac19d4bb4d5f2_launch.json",
+      "summary": {
+        "schema": "actual-tool-capture-v1"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/all30_tool_capture_75aef58137ffc573984ac19d4bb4d5f2_poll1.json",
+      "summary": {
+        "schema": "actual-tool-capture-v1"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/before_pure30_provenance_v1.json",
+      "summary": {
+        "schema": "existing-before-pure-audit-provenance-v1",
+        "session": 46829,
+        "actual_exit": 0,
+        "result_chunk": "8baf43",
+        "targets": 30,
+        "all_saved_before_fields_match": true,
+        "all_pair_count": 435,
+        "nonempty_intersections": 0,
+        "original_reference_count": 64,
+        "initial_analysis_writes": 0,
+        "limitations": [
+          "実計算script自体はstore/ファイルに保存されていない。全tool返却objectと既存source pinsを保持。再構成scriptの実行原本一致は主張しない。",
+          "未参照対象(22,20)の元参照制約数0を保持。common v4の正整数契約には未接続で、許容集合制約1へ読み替えない。",
+          "共有対象数0は観測された異なる構成対象の非共有についてのみ。隣接連動や因果独立を証明しない。",
+          "同じmask内の座標対応の因果同一性は未確定。候補1役割一致は未確認。",
+          "phase1目標判定unknownを保持。今回after解析・HDS API・教示は0。",
+          "RESULT表示は省略されたがstore上の75234文字出力から全JSON parse成功。保存は全toolobjectを省略なし。"
+        ]
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/build_b98450d2e91c952ca4d482a9c6e2c74a.json",
+      "summary": {
+        "archive_bytes": 1721224,
+        "archive_sha256": "912e2df1d7057bfda928d236808463f0ad4135b818724ea93a5f382d62e5e5ce",
+        "tar_bytes": 42670080,
+        "members": 880,
+        "member_bytes": 41178054,
+        "member_manifest_sha256": "318dc2e832f569d1b7296f4178df34c5bb08977bc5e7b75a27b6226f0f1d1a74",
+        "path": "/tmp/arc-existing926-cycle166-native-20261011/operation_transfer71_archive_20261012/archives/goal-checkpoint-b98450d2e91c952ca4d482a9c6e2c74a.tar.xz",
+        "operation": "build",
+        "nonce": "b98450d2e91c952ca4d482a9c6e2c74a",
+        "source_sha256": "c79e09810dd289e17b2d339a62e7062d9621fbf70e429f5c382ce2cdf0966caf",
+        "contract_sha256": "ddb9478eb9b72d8d1c1a87698e952b1e637a059ce73b468beeaf462293a00c15",
+        "whitelist_sha256": "770726fbea54f04aa6d5de06e999e613e6afa94ee7e70cad7a1ad2caddf6fc98",
+        "verified": {
+          "verified": true,
+          "members": 880,
+          "member_bytes": 41178054,
+          "tar_bytes": 42670080,
+          "archive_bytes": 1721224,
+          "archive_sha256": "912e2df1d7057bfda928d236808463f0ad4135b818724ea93a5f382d62e5e5ce",
+          "all_members_hashed": true,
+          "no_extraction_or_HDS_parse": true
+        }
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/control_3801eba4a10cfc31e12bcf5cbb1c442b.json",
+      "summary": {
+        "nonce": "3801eba4a10cfc31e12bcf5cbb1c442b",
+        "command": "ack_close",
+        "independent_standard_and_journal_audit": true
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/control_3c1a21a26d06267f2bfade707bc10c96.json",
+      "summary": {
+        "nonce": "3c1a21a26d06267f2bfade707bc10c96",
+        "command": "ack_close",
+        "independent_standard_and_journal_audit": true
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/control_4f68e168d8cb403bbb60bffef895de28.json",
+      "summary": {
+        "nonce": "4f68e168d8cb403bbb60bffef895de28",
+        "command": "ack_close",
+        "independent_standard_and_journal_audit": true
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/control_8fadcd5dba4f46d6ab8c8c3828c6eb0b.json",
+      "summary": {
+        "nonce": "8fadcd5dba4f46d6ab8c8c3828c6eb0b",
+        "command": "ack_close",
+        "independent_standard_and_journal_audit": true
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/count_ee41c50aefa94017a9d0e5023f925de5.json",
+      "summary": {
+        "archive_bytes": 1721224,
+        "archive_sha256": "912e2df1d7057bfda928d236808463f0ad4135b818724ea93a5f382d62e5e5ce",
+        "tar_bytes": 42670080,
+        "members": 880,
+        "member_bytes": 41178054,
+        "member_manifest_sha256": "318dc2e832f569d1b7296f4178df34c5bb08977bc5e7b75a27b6226f0f1d1a74",
+        "archive_written": false,
+        "operation": "count",
+        "nonce": "ee41c50aefa94017a9d0e5023f925de5",
+        "source_sha256": "c79e09810dd289e17b2d339a62e7062d9621fbf70e429f5c382ce2cdf0966caf",
+        "contract_sha256": "ddb9478eb9b72d8d1c1a87698e952b1e637a059ce73b468beeaf462293a00c15",
+        "whitelist_sha256": "770726fbea54f04aa6d5de06e999e613e6afa94ee7e70cad7a1ad2caddf6fc98"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal11_tool_capture_4af2e8d181eb440382af457a42a6b43d.json",
+      "summary": {
+        "command": "python -B /tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/source/goal11_revalidate_v1.py /tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/root_goal11_4af2e8d181eb440382af457a42a6b43d.json f21cae72351c5270b9ac8c254b2a9544c234eebc5f614ca7e1ef277860eba394"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_archive_build_actual_tool_capture_v1.json",
+      "summary": {
+        "archive_postexit_hash_verified": true,
+        "library_uploaded": false
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_archive_count_actual_tool_capture_v1.json",
+      "summary": {
+        "archive_built": false
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix2_fixture_exact_tool_901cf4.json",
+      "summary": {
+        "chunk_id": "901cf4",
+        "wall_time_seconds": 1.76975228,
+        "exit_code": 0,
+        "original_token_count": 20559
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix2_native_exit_exact_tool_e7a1cf.json",
+      "summary": {
+        "chunk_id": "e7a1cf",
+        "wall_time_seconds": 2.6941e-05,
+        "exit_code": 0,
+        "original_token_count": 2385
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix2_native_poll_exact_tool_54e5b1.json",
+      "summary": {
+        "chunk_id": "54e5b1",
+        "wall_time_seconds": 5.000997178,
+        "session_id": 37164,
+        "original_token_count": 2384
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix2_native_start_exact_tool_6b74cf.json",
+      "summary": {
+        "chunk_id": "6b74cf",
+        "wall_time_seconds": 1.000748247,
+        "session_id": 37164,
+        "original_token_count": 11,
+        "output": "UTCSTART 2026-10-12T13:40:24.953431+00:00\n"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_count_exact_tool_b2a5d6.json",
+      "summary": {
+        "chunk_id": "b2a5d6",
+        "wall_time_seconds": 1.687331161,
+        "exit_code": 0,
+        "original_token_count": 7037
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_count_f31a751cd64880b4e800c719f4e2a29f.json",
+      "summary": {
+        "schema": "goal-prefix3-count-envelope-v1",
+        "complete": true,
+        "native_calls": 0,
+        "new_independent_support": 0,
+        "limitations": [
+          "No existing principles assumed before prefix3; require independently closed prefix2 to verify.",
+          "All union paths/maxconditions2 counted, regardless of actual suspicion subset.",
+          "No candidate object creation, validation/adoption, continuation or same-instance state.",
+          "Count envelope does not bound serialized size, state deepcopy, JSON full-string or runtime peak.",
+          "Postcontradiction count is read-only budget arithmetic, not an HDS learning result."
+        ]
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_native_exit_exact_tool_907a67.json",
+      "summary": {
+        "chunk_id": "907a67",
+        "wall_time_seconds": 4.3657e-05,
+        "exit_code": 0,
+        "original_token_count": 1288
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_native_poll_exact_tool_1395de.json",
+      "summary": {
+        "chunk_id": "1395de",
+        "wall_time_seconds": 5.0005596,
+        "session_id": 68505,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_native_poll_exact_tool_7a099e.json.xz",
+      "summary": {
+        "chunk_id": "7a099e",
+        "wall_time_seconds": 60.0013187,
+        "session_id": 68505,
+        "original_token_count": 18012
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_native_poll_exact_tool_82551c.json",
+      "summary": {
+        "chunk_id": "82551c",
+        "wall_time_seconds": 60.001101838,
+        "session_id": 68505,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_native_poll_exact_tool_a24587.json",
+      "summary": {
+        "chunk_id": "a24587",
+        "wall_time_seconds": 60.001196397,
+        "session_id": 68505,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_native_poll_exact_tool_e3182e.json",
+      "summary": {
+        "chunk_id": "e3182e",
+        "wall_time_seconds": 60.001646668,
+        "session_id": 68505,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_native_poll_exact_tool_f822ee.json",
+      "summary": {
+        "chunk_id": "f822ee",
+        "wall_time_seconds": 5.000606073,
+        "session_id": 68505,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix3_native_start_exact_tool_cae750.json",
+      "summary": {
+        "chunk_id": "cae750",
+        "wall_time_seconds": 1.001338201,
+        "session_id": 68505,
+        "original_token_count": 11,
+        "output": "UTCSTART 2026-10-12T14:12:03.682466+00:00\n"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_common_fixture_exact_tool_1c1308.json",
+      "summary": {
+        "chunk_id": "1c1308",
+        "wall_time_seconds": 1.890697124,
+        "exit_code": 0,
+        "original_token_count": 24992
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_fixture_10e5b9184ed648ebb5535f00e8eb8187.json",
+      "summary": {
+        "schema": "goal-prefix-pure-orchestration-fixture-v1",
+        "complete": true,
+        "native_imports": 0,
+        "native_state_parse": 0,
+        "native_codec_math_tested": false,
+        "OS_durability_tested": false,
+        "all_fake_journal_bytes_persisted": false
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_fixture_865cb401e56e745fb6cb9dd5b97b74c3.json",
+      "summary": {
+        "schema": "goal-prefix-pure-orchestration-fixture-v1",
+        "complete": true,
+        "native_imports": 0,
+        "native_state_parse": 0,
+        "native_codec_math_tested": false,
+        "OS_durability_tested": false,
+        "all_fake_journal_bytes_persisted": false
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_fixture_af1f94d64bbf2253af7a340e8f4eace3.json",
+      "summary": {
+        "schema": "goal-prefix-pure-orchestration-fixture-v1",
+        "complete": true,
+        "native_imports": 0,
+        "native_state_parse": 0,
+        "native_codec_math_tested": false,
+        "OS_durability_tested": false,
+        "all_fake_journal_bytes_persisted": false
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_fixture_c098aade11dba3b81e19187cc30e639a.json",
+      "summary": {
+        "schema": "goal-prefix-pure-orchestration-fixture-v1",
+        "complete": true,
+        "native_imports": 0,
+        "native_state_parse": 0,
+        "native_codec_math_tested": false,
+        "OS_durability_tested": false,
+        "all_fake_journal_bytes_persisted": false
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_fixture_d027ef099d9fe9a045f6d14648b40046.json",
+      "summary": {
+        "schema": "goal-prefix-pure-orchestration-fixture-v1",
+        "complete": true,
+        "native_imports": 0,
+        "native_state_parse": 0,
+        "native_codec_math_tested": false,
+        "OS_durability_tested": false,
+        "all_fake_journal_bytes_persisted": false
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_fixture_exact_tool_2c4227.json",
+      "summary": {
+        "chunk_id": "2c4227",
+        "wall_time_seconds": 1.4571506140000001,
+        "exit_code": 0,
+        "original_token_count": 16589
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_native_exit_exact_tool_55f6ed.json",
+      "summary": {
+        "chunk_id": "55f6ed",
+        "wall_time_seconds": 2.8482e-05,
+        "exit_code": 0,
+        "original_token_count": 1996
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_native_polls_exact_tool_97fb87_6b5bbb.json",
+      "summary": {}
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_prefix_native_start_exact_tool_5e5871.json",
+      "summary": {
+        "chunk_id": "5e5871",
+        "wall_time_seconds": 1.000842491,
+        "session_id": 25122,
+        "original_token_count": 11,
+        "output": "UTCSTART 2026-10-12T13:19:37.113156+00:00\n"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_fixture_exact_tool_08757a.json.xz",
+      "summary": {
+        "chunk_id": "08757a",
+        "wall_time_seconds": 2.524533888,
+        "exit_code": 0,
+        "original_token_count": 21616
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_native_exit_exact_tool_1c243d.json",
+      "summary": {
+        "chunk_id": "1c243d",
+        "wall_time_seconds": 3.9209e-05,
+        "exit_code": 0,
+        "original_token_count": 2016
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_native_poll_exact_tool_27ff72.json",
+      "summary": {
+        "chunk_id": "27ff72",
+        "wall_time_seconds": 60.00088152,
+        "session_id": 92523,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_native_poll_exact_tool_3b65a1.json",
+      "summary": {
+        "chunk_id": "3b65a1",
+        "wall_time_seconds": 60.000516101,
+        "session_id": 92523,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_native_poll_exact_tool_67acf3.json",
+      "summary": {
+        "chunk_id": "67acf3",
+        "wall_time_seconds": 60.001399965,
+        "session_id": 92523,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_native_poll_exact_tool_69d138.json.xz",
+      "summary": {
+        "chunk_id": "69d138",
+        "wall_time_seconds": 60.007567029,
+        "session_id": 92523,
+        "original_token_count": 21409
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_native_poll_exact_tool_7941dd.json",
+      "summary": {
+        "chunk_id": "7941dd",
+        "wall_time_seconds": 60.000740327,
+        "session_id": 92523,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_native_poll_exact_tool_c861f4.json",
+      "summary": {
+        "chunk_id": "c861f4",
+        "wall_time_seconds": 60.001323868,
+        "session_id": 92523,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query768_native_start_exact_tool_ffdd32.json",
+      "summary": {
+        "chunk_id": "ffdd32",
+        "wall_time_seconds": 1.001286483,
+        "session_id": 92523,
+        "original_token_count": 11,
+        "output": "UTCSTART 2026-10-12T14:52:42.062536+00:00\n"
+      }
+    },
+    {
+      "member": "tmp/arc-existing926-cycle166-native-20261011/goal_relation_teaching_20261012/reports/goal_query_fixture_exact_tool_35c318.json.xz",
+      "summary": {
+        "chunk_id": "35c318",
+        "wall_time_seconds": 2.254494883,
+        "exit_code": 0,
+        "original_token_count": 20496
+      }
+    }
+  ],
+  "manifest": {
+    "member": "MANIFEST.json",
+    "bytes": 880343,
+    "sha256": "3ef9c9e0941743447c84978d852c65aeba59e45cae3672930f69cfac99191ad3",
+    "entry_count": 1949,
+    "membership_complete": true,
+    "cutoff": "Closed H A/B and Aremaining prefixes1..3 plus Query10; AQuery native exit6af0f8fa, main evidence5cf27918d95e246a40a792a651d43a6e088eca73; all painting excluded.",
+    "limitations": [
+      "Original public JSONL required for independent remeasurement is an external exact reference; not distributed here.",
+      "All original state/journal files retained, no live owner RAM recovery or new native/HDS calls.",
+      "Historical unrelated experiments referenced by reusable helpers are not claimed fully rerunnable.",
+      "Archive count/build/independent verification not yet executed; source-only frozen input proposal."
+    ],
+    "excluded_entries": 70,
+    "external_references": [
+      {
+        "bytes": 26641728,
+        "path": "/workspace/shared/arc_official_teachers/20fb75ad-57fa-4c94-b030-9316f4e61313.recording.jsonl",
+        "role": "external original public JSONL; not copied",
+        "sha256": "689b90f7968c96e1a08cd2f8bf73f62a404e03a3b5a1586de9b257034771c4e6"
+      },
+      {
+        "bytes": 1721224,
+        "path": "/tmp/arc-existing926-cycle166-native-20261011/operation_transfer71_archive_20261012/archives/goal-checkpoint-b98450d2e91c952ca4d482a9c6e2c74a.tar.xz",
+        "role": "prior archive payload; not nested",
+        "sha256": "912e2df1d7057bfda928d236808463f0ad4135b818724ea93a5f382d62e5e5ce"
+      },
+      {
+        "bytes": 20014180,
+        "path": "/tmp/arc-existing926-cycle166-native-20261011/operation_transfer71_archive_20261012/archives/operation71-c313324bd98c16158ee2426c5561af6c.tar.xz",
+        "role": "prior archive payload; not nested",
+        "sha256": "089c6368a7d65804188dbd7b2711a31c781b34eb2cd7f3b9b4f75906cb5da60b"
+      },
+      {
+        "bytes": 14794596,
+        "path": "/tmp/arc-existing926-cycle166-native-20261011/operation_transfer71_archive_20261012/archives/operation71-ff141b54f278dedd14fefd00cb424c3e.tar.xz",
+        "role": "prior archive payload; not nested",
+        "sha256": "77d0590b9c1dd8c134eda2801bb34580f4356cff5b4f3e0d51c9fb9e1347dd20"
+      }
+    ],
+    "prior_archive_reference": [
+      {
+        "bytes": 1721224,
+        "path": "/tmp/arc-existing926-cycle166-native-20261011/operation_transfer71_archive_20261012/archives/goal-checkpoint-b98450d2e91c952ca4d482a9c6e2c74a.tar.xz",
+        "role": "prior archive payload; not nested",
+        "sha256": "912e2df1d7057bfda928d236808463f0ad4135b818724ea93a5f382d62e5e5ce"
+      },
+      {
+        "bytes": 20014180,
+        "path": "/tmp/arc-existing926-cycle166-native-20261011/operation_transfer71_archive_20261012/archives/operation71-c313324bd98c16158ee2426c5561af6c.tar.xz",
+        "role": "prior archive payload; not nested",
+        "sha256": "089c6368a7d65804188dbd7b2711a31c781b34eb2cd7f3b9b4f75906cb5da60b"
+      },
+      {
+        "bytes": 14794596,
+        "path": "/tmp/arc-existing926-cycle166-native-20261011/operation_transfer71_archive_20261012/archives/operation71-ff141b54f278dedd14fefd00cb424c3e.tar.xz",
+        "role": "prior archive payload; not nested",
+        "sha256": "77d0590b9c1dd8c134eda2801bb34580f4356cff5b4f3e0d51c9fb9e1347dd20"
+      }
+    ]
+  },
+  "header_roots": {
+    "checkpoint/whitelist.json": 1,
+    "tmp/arc-existing926-cycle166-native-20261011": 1761,
+    "tmp/arc-existing926-cycle166-preparation-20261011": 1,
+    "tmp/arc-goal-relation-transfer-preparation-20261011": 3,
+    "tmp/arc-goal166-runtime-preparation-20261011": 1,
+    "tmp/arc-ls-geometry-checkpoint-20261011": 1,
+    "tmp/arc-ls-success42-corpus-20261011": 26,
+    "workspace/scratch": 155,
+    "MANIFEST.json": 1
+  },
+  "header_count": 1950,
+  "provenance_whitelist": "Exact nested manifest membership checked before bodies; own temporary ARC3 experiments, own repository/source dependencies, checkpoint metadata and owner copies. No official SDK/game implementation or opaque stream member header exists. References are not followed.",
+  "fragment_reassembly": {
+    "members": 6,
+    "decoded_bytes": 118353,
+    "sha256": "8684e74ee06ed82f5de0f29f7c70468fd57ae22deb407a30fe97e220d70e8e27",
+    "prefix": "{\"chunk_id\":\"489c33\",\"wall_time_seconds\":5.001896725,\"session_id\":77339,\"origina",
+    "suffix": "ebd22a66a557b1b6b185ad823c8e66de8ee8ea19d5cb00\\\"}, \\\"status\\\": \\\"complete\\\"}\\n\"}"
+  },
+  "source_static_summary": {
+    "count": 332,
+    "ast_pass": 332,
+    "syntax_failures": [],
+    "imports": {
+      "copy": 62,
+      "hashlib": 276,
+      "importlib.util": 176,
+      "json": 206,
+      "os": 124,
+      "pathlib": 277,
+      "resource": 145,
+      "signal": 88,
+      "sys": 169,
+      "traceback": 161,
+      "ast": 57,
+      "time": 92,
+      "datetime": 37,
+      "re": 10,
+      "lzma": 110,
+      "hds学習系統": 40,
+      "itertools": 27,
+      "math": 24,
+      "contextlib": 25,
+      "io": 43,
+      "builtins": 11,
+      "dataclasses": 41,
+      "fnmatch": 2,
+      "types": 53,
+      "enum": 23,
+      "pickle": 38,
+      "collections": 26,
+      "pickletools": 3,
+      "stat": 3,
+      "codecs": 6,
+      "typing": 15,
+      "tarfile": 6,
+      "goal_relation_adapter_v3": 1,
+      "goal_relation_fixture_v3": 1,
+      "goal_relation_adapter_v2": 2,
+      "threading": 2,
+      "__future__": 13,
+      "接続.ARC3境界": 2,
+      "接続.公開記録形式": 3,
+      "図式観測": 5,
+      "接続.サンプル教師": 3,
+      "接続.変位教師": 1,
+      "argparse": 1,
+      "gzip": 5,
+      "接続.観測履歴教師": 1,
+      "hds学習系統.永続化": 5,
+      "unittest.mock": 4,
+      "secrets": 4,
+      "experiment": 1,
+      "action_evidence": 1,
+      "inspect": 2,
+      "textwrap": 2,
+      "struct": 6,
+      "共通": 1,
+      "外側単一space": 1,
+      "吸気系": 2,
+      "型": 9,
+      "実行系": 2,
+      "排気系": 2,
+      "系統": 1,
+      "台帳": 1,
+      "懐疑": 1,
+      "推論": 3,
+      "検証": 1,
+      "永続化": 1,
+      "適応": 1,
+      "": 3,
+      "図式解答教師": 2,
+      "図式作用教師": 2,
+      "複合図式規則": 1,
+      "functools": 1,
+      "形状配置知覚": 1,
+      "形状配置規則": 1,
+      "ARC3境界": 2,
+      "tempfile": 1,
+      "uuid": 1,
+      "共通観測経路": 1,
+      "応答相照合": 1,
+      "作用抽出": 1,
+      "端子構造": 1,
+      "観測台帳": 1
+    },
+    "risk_call_counts": {
+      "exec_module": 182,
+      "loads": 626,
+      "load": 415,
+      "run": 52,
+      "exec": 142,
+      "compile": 152,
+      "decompress": 124,
+      "照会する": 29,
+      "eval": 10,
+      "make": 5
+    },
+    "opaque_literals": [],
+    "complete_per_source_inspection_digest": "8229c6677234d3d65be8c077f4e5cc47ffd40cd9a049d066176fd2e23dbffe58"
+  },
+  "schemas": {
+    "goal-checkpoint-whitelist-v1": 3,
+    "goal-relation-query-native-result-v1": 4,
+    "goal-relation-action-material-v1": 1,
+    "goal-relation-action-material-v2": 2,
+    "all-target-material-evidence-v1": 1,
+    "goal-relation-ab-pure-ack-v1": 1,
+    "actual-tool-capture-v1": 12,
+    "existing-before-pure-audit-provenance-v1": 1,
+    "goal-prefix3-count-envelope-v1": 1,
+    "goal-prefix-pure-orchestration-fixture-v1": 5,
+    "goal-relation-ab-independent-readback-v1": 1,
+    "goal-relation-material-independent-audit-v1": 3,
+    "independent-action701-actual-tool-capture-v1": 1,
+    "independent-action702-tool-capture-v1": 1,
+    "independent-all30-audit-v1": 1,
+    "goal-relation-prefix-independent-completion-v1": 7,
+    "goal-prefix-independent-audit-actual-tool-v1": 3,
+    "goal-prefix-independent-audit-tool-v2": 3,
+    "goal-relation-query-independent-completion-v1": 3,
+    "independent-query5-audit-v1": 1,
+    "goal-relation-prefix-native-result-v1": 6,
+    "all-target-material-ack-v1": 1,
+    "goal-query-material-ack-v1": 1,
+    "goal-relation-fixture-ack-v5": 1,
+    "action701-material-release-v1": 1,
+    "action-material-release-v2": 1,
+    "independent-all30-release-v1": 1,
+    "all-target-material-release-v1": 1,
+    "goal11-pure-revalidation-release-v1": 1,
+    "goal-checkpoint-archive-release-v1": 2,
+    "goal-relation-fixture-release-v5": 1,
+    "goal-query-material-release-v1": 1,
+    "goal-relation-v5-root-audit-v1": 1,
+    "action-material-release-v3": 1,
+    "independent-query5-release-v1": 1,
+    "action701-material-source-v1": 1,
+    "action-material-source-v2": 1,
+    "action-material-source-v3": 1,
+    "all-target-material-source-v1": 1,
+    "all-target-projection-source-v1": 1,
+    "goal-checkpoint-archive-contract-v1": 1,
+    "goal-checkpoint-archive-contract-v2": 1,
+    "goal-relation-second-native-source-contract-v1": 1,
+    "goal-prefix2-pure-fixture-contract-v2": 1,
+    "goal-relation-common-prefix-source-contract-v1": 1,
+    "goal-relation-common-prefix-source-contract-v2": 1,
+    "goal-common-prefix-pure-fixture-contract-v2": 1,
+    "goal-relation-first-native-source-contract-v1": 1,
+    "goal-relation-first-native-source-contract-v2": 1,
+    "goal-relation-fixed-core-manifest-v1": 1,
+    "goal-prefix-pure-fixture-contract-v2": 1,
+    "goal-query-source-contract-v1": 3,
+    "goal-query-pure-fixture-contract-v1": 2,
+    "goal-query-material-source-v1": 1,
+    "goal-relation-ab-source-only-v1": 1,
+    "goal-relation-ab-fixture-supplement-v2": 1,
+    "ab-retained-launcher-contract-v1": 1,
+    "goal-relation-ab-retained-contract-v1": 2,
+    "goal-relation-fixture-source-v5": 1,
+    "goal-relation-zero-count-source-v5": 1,
+    "goal-relation-G-source-contract-v1": 1,
+    "goal-relation-ab-independent-source-v1": 1,
+    "goal-relation-ab-audit-release-v1": 1,
+    "goal-relation-ab-pure-release-v1": 1,
+    "goal-prefix-audit-release-v1": 7,
+    "goal-query-audit-release-v1": 1,
+    "goal-remaining-A-query-material-v1": 1,
+    "goal-remaining-A-teaching-material-v1": 1,
+    "goal-role-B-query-material-v1": 1,
+    "actual-tool-capture-boundary-v1": 1,
+    "capture-unit-overrun-supplement-v1": 1,
+    "A-material-failure-diagnosis-actual-tools-v1": 1,
+    "A-material-launch-result-v1": 1,
+    "A-query-material-launch-result-v1": 1,
+    "B-material-launch-result-v1": 1,
+    "B-query-pure-seam-result-v1": 1,
+    "A1-pure-entry-independent-v1": 1,
+    "A2-pure-entry-independent-v1": 1,
+    "A3-pure-entry-independent-v1": 1,
+    "AQuery-pure-entry-independent-v1": 1,
+    "A-material-independent-readback-v1": 2,
+    "A-material-independent-actual-tools-v1": 1,
+    "A-material-independent-actual-tools-v2": 1,
+    "A-query-material-independent-readback-v1": 1,
+    "A-query-prior-trials-evidence-v1": 1,
+    "source-preparation-transcription-correction-v1": 1,
+    "A-query-v2-source-preparation-tools-v1": 1,
+    "B-material-independent-readback-v1": 1,
+    "B-material-independent-actual-tools-v1": 1,
+    "A1-pure-entry-independent-release-v1": 1,
+    "A1-pure-entry-fixture-release-v1": 1,
+    "A2-pure-entry-fixture-release-v1": 1,
+    "A2-pure-entry-independent-release-v1": 1,
+    "A3-pure-entry-independent-release-v1": 1,
+    "A3-pure-entry-fixture-release-v1": 1,
+    "AQuery-pure-entry-fixture-release-v1": 1,
+    "AQuery-pure-entry-independent-release-v1": 1,
+    "goal-remaining-A-material-release-v1": 1,
+    "A-material-independent-release-v1": 2,
+    "goal-remaining-A-query-material-release-v1": 1,
+    "A-query-material-independent-release-v1": 2,
+    "goal-role-B-material-release-v1": 1,
+    "goal-role-B-material-audit-release-v1": 1,
+    "A1-pure-entry-root-ack-v1": 1,
+    "A2-pure-entry-root-ack-v1": 1,
+    "A3-pure-entry-root-ack-v1": 1,
+    "AQuery-pure-entry-root-ack-v1": 1,
+    "A-material-root-ack-v1": 1,
+    "A-query-material-root-ack-v1": 1,
+    "B-material-root-ack-v1": 1,
+    "root-preparation-failure-v1": 1,
+    "A1-retained-cap-supplement-v1": 1,
+    "A1-retained-fixture-contract-v1": 1,
+    "A1-pure-entry-fixture-source-v1": 1,
+    "A2-retained-fixture-contract-v1": 1,
+    "A2-pure-entry-fixture-source-v1": 2,
+    "A3-retained-fixture-contract-v1": 1,
+    "A3-pure-entry-fixture-source-v1": 1,
+    "A-material-launch-contract-v1": 1,
+    "goal-remaining-A-material-source-v1": 1,
+    "A1-native-contract-v1": 2,
+    "A2-native-contract-v1": 1,
+    "A3-native-contract-v1": 1,
+    "goal-remaining-A-query-native-contract-v1": 1,
+    "AQuery-pure-retained-source-v1": 2,
+    "A-query-material-launch-contract-v1": 1,
+    "A-query-material-source-v1": 1,
+    "AQuery-pure-fixture-source-v1": 2,
+    "B-material-retained-launch-contract-v1": 1,
+    "goal-role-B-material-source-v1": 1,
+    "goal-role-B-native-contract-v1": 2,
+    "B-query-pure-fixture-contract-v1": 2,
+    "goal-role-checkpoint-archive-contract-v1": 1,
+    "A3-independent-pure-audit-source-v1": 1,
+    "AQuery-independent-snapshot-source-v1": 1,
+    "A-cumulative-independent-audit-source-v1": 1,
+    "independent-A-query-source-contract-v1": 1,
+    "independent-A-query-report-split-source-v2": 1,
+    "A-query-material-independent-source-v1": 1,
+    "A3-independent-audit-source-v1": 1,
+    "goal-role-B-query-audit-source-v1": 1,
+    "goal-role-B-query-audit-source-v2": 1,
+    "goal-role-remaining-resource-contract-v1": 1,
+    "goal-remaining-A-query-audit-release-v1": 2,
+    "goal-role-B-query-audit-release-v1": 1,
+    "goal-role-checkpoint-current-accounting-v1": 1,
+    "root-current-peer-future-accounting-v1": 1,
+    "operation36-sealed-old-scope-reallocation-v1": 1,
+    "goal3-terminal-observation-summary-v1": 1,
+    "goal-cross-domain-saved-material-audit-v1": 1,
+    "goal-cross-domain-saved-material-audit-v2": 1,
+    "goal-relation-fixture-ack-v4": 1,
+    "goal3-pure-revalidation-release-v1": 1,
+    "goal-relation-fixture-release-v4": 1,
+    "root-goal-relation-fixture-audit-v1": 1,
+    "goal3-revalidation-source-contract-v1": 2,
+    "source-only-goal-relation-v3": 1,
+    "goal-relation-pure-v4": 1,
+    "goal-checkpoint-archive-v1": 1
+  },
+  "typed_tags": {
+    "__辞書__": 132195,
+    "__組__": 228292,
+    "__データ型__": 5749,
+    "__列挙__": 3280
+  },
+  "member_identity_digest": "25d81816c022808693cf45fc32dab9bbba5a0132cf5f388c4d653578af281e4f",
+  "member_identity_digest_algorithm": "SHA256 sorted compact UTF8 JSON arrays [path,bytes,sha256], joined by newline",
+  "semantic_admission": [
+    "All 1950 regular headers, 1949 manifest-declared payloads plus manifest self, exact sizes/hashes and full outer XZ stream CRC/EOF pass. No extraction or nested runtime execution occurred.",
+    "All 1570 JSON documents, 1185 JSON XZ streams and one compressed own diff are fully decoded and structurally inspected. Six poll fragments reassemble into one valid original JSON receipt. Typed dictionaries/tuples/dataclasses/enums validate inertly; duplicate keys and malformed tags are absent.",
+    "All 332 own Python source files AST parse; static source/literal/security review leaves no unresolved candidate. Twelve fixed-core source files match the repository baseline Git blobs. Imports of pickle, eval/exec and native APIs are archived source text only and were never executed or used for deserialization.",
+    "Every non-JSON text member is an own diff, report, authority copy or source excerpt. External public recording/prior archive references remain references; the manifest explicitly limits coverage to closed H A/B and Aremaining prefixes1–3 plus Query10 and excludes Painting."
+  ],
+  "limitations": [
+    "Evidence-preservation admission does not independently reproduce every historical capability assertion or establish live API closure.",
+    "The older native29489/fixture18870 chain remains unresolved outside this archived cutoff. External source dependencies and prior archives were not fetched through recorded paths.",
+    "No current solution ability, new level success, unseen cross-game transfer, original owner heap or runtime adoption is certified."
+  ]
+}

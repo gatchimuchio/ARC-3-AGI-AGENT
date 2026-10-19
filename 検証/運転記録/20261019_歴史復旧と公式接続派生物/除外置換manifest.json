@@ -1,0 +1,465 @@
+{
+  "schema": "official-connection-sanitized-derivative-v1",
+  "kind": "SANITIZED_DERIVATIVE_NOT_EXACT_ORIGINAL",
+  "created_utc_date": "2026-10-16",
+  "original_archive": {
+    "filename": "official-connection-checkpoint.tar.gz",
+    "bytes": 1305364,
+    "sha256": "8be89e9ba3e64f174a362acd9c231267cee2f8afe4541bd73d5a3f52d823fa9b",
+    "historical_earlier_hash": "unavailable; not invented"
+  },
+  "original_archive_immutable": true,
+  "counts": {
+    "source_members": 1193,
+    "unchanged_body_members": 1137,
+    "cookie_redacted_body_members": 2,
+    "opaque_omitted_members": 54,
+    "added_derivative_metadata_members": 2,
+    "derivative_members": 1141
+  },
+  "membership_rule": "All original regular-member names, except listed excluded members, plus DERIVATIVE_README.md and DERIVATIVE_MANIFEST.json. Only listed two changed members have modified bodies. Original manifest.json/README.md remain historical provenance and cannot validate changed or missing bodies.",
+  "original_metadata": [
+    {
+      "member": "README.md",
+      "bytes": 4218,
+      "sha256": "f74a7e590400cf90fedad08bb812da7bc58f6c3c910c2d64f78fddadf98dccef",
+      "role": "Original historical provenance; not derivative membership authority."
+    },
+    {
+      "member": "excluded_game_sources.json",
+      "bytes": 11139,
+      "sha256": "8f5f7685c34ebdf5354adb1825869c87c30db9511ccc45826cdad4a4e097a7c5",
+      "role": "Original historical provenance; not derivative membership authority."
+    },
+    {
+      "member": "manifest.json",
+      "bytes": 643288,
+      "sha256": "e353a363962959c458440eaf22de12fe173be12e11bce1ce34ea5647a109fbb9",
+      "role": "Original historical provenance; not derivative membership authority."
+    }
+  ],
+  "changes": [
+    {
+      "member": "arc-chain-public-recording-20261013/actual_tools_v1.json",
+      "original": {
+        "bytes": 8396,
+        "sha256": "4a73b535fdf6be254c9330aa383acda92f335aea3f5c6f748ae9de7faf5e9a85"
+      },
+      "derivative": {
+        "bytes": 8241,
+        "sha256": "e32f94ea48955d23a0974742d56f10da9a24d6eb928dd1d4680c369011d11ca1"
+      },
+      "transformation": "Exact full Set-Cookie header string replaced once with explicit redaction marker; all other bytes unchanged.",
+      "occurrences": 1
+    },
+    {
+      "member": "arc-chain-public-recording-20261013/api_response_v1.metadata.json",
+      "original": {
+        "bytes": 1383,
+        "sha256": "ba4f74d54ab79a0110fedb9738851374b54f9a637e07d0516703fdaeeb23a30c"
+      },
+      "derivative": {
+        "bytes": 1228,
+        "sha256": "79fe5a612658d8522ddfc4d34e0e2b52eef6b007827b251a1bfb434098656e09"
+      },
+      "transformation": "Exact full Set-Cookie header string replaced once with explicit redaction marker; all other bytes unchanged.",
+      "occurrences": 1
+    }
+  ],
+  "excluded": {
+    "arc-official-fresh-all25-20261013/prep/1d441d0396b6509eec13e80c49afffd7_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/1d441d0396b6509eec13e80c49afffd7_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/1d441d0396b6509eec13e80c49afffd7_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/1d441d0396b6509eec13e80c49afffd7_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/1dfb2acee2674aa5d260a3aba5497f6a_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/1dfb2acee2674aa5d260a3aba5497f6a_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/1dfb2acee2674aa5d260a3aba5497f6a_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/1dfb2acee2674aa5d260a3aba5497f6a_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/215e92a7f01e3d0cdbe17e6e71ebb19f_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/215e92a7f01e3d0cdbe17e6e71ebb19f_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/215e92a7f01e3d0cdbe17e6e71ebb19f_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/215e92a7f01e3d0cdbe17e6e71ebb19f_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/217bf16c61881db64fa2b41410003377_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/217bf16c61881db64fa2b41410003377_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/217bf16c61881db64fa2b41410003377_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/217bf16c61881db64fa2b41410003377_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/36a2556e5b89fb0f29d601edabdfb2e3_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/36a2556e5b89fb0f29d601edabdfb2e3_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/36a2556e5b89fb0f29d601edabdfb2e3_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/36a2556e5b89fb0f29d601edabdfb2e3_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/3af56139c3223392d00afc9d738bf8b9_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/3af56139c3223392d00afc9d738bf8b9_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/3af56139c3223392d00afc9d738bf8b9_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/3af56139c3223392d00afc9d738bf8b9_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/3b39b4802bb5cd2aa83d3abb2c8d9c5f_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/3b39b4802bb5cd2aa83d3abb2c8d9c5f_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/3b39b4802bb5cd2aa83d3abb2c8d9c5f_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/3b39b4802bb5cd2aa83d3abb2c8d9c5f_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/3cab86b4d35af62fe5ffd6f96294f8d3_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/3cab86b4d35af62fe5ffd6f96294f8d3_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/3cab86b4d35af62fe5ffd6f96294f8d3_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/3cab86b4d35af62fe5ffd6f96294f8d3_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/3ce8f7ce36ea5b9ca17e2cd835012a0c_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/3ce8f7ce36ea5b9ca17e2cd835012a0c_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/3ce8f7ce36ea5b9ca17e2cd835012a0c_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/3ce8f7ce36ea5b9ca17e2cd835012a0c_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/54c7b05b1c2ef056348e73e6751779f4_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/54c7b05b1c2ef056348e73e6751779f4_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/54c7b05b1c2ef056348e73e6751779f4_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/54c7b05b1c2ef056348e73e6751779f4_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/75a9fe78b98f27ea43a4cf6523488dad_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/75a9fe78b98f27ea43a4cf6523488dad_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/75a9fe78b98f27ea43a4cf6523488dad_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/75a9fe78b98f27ea43a4cf6523488dad_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/8de0694a5a9cf800721328cb0e77ca7f_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/8de0694a5a9cf800721328cb0e77ca7f_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/8de0694a5a9cf800721328cb0e77ca7f_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/8de0694a5a9cf800721328cb0e77ca7f_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/97fd123d24dc8f49009517f9383e0a74_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/97fd123d24dc8f49009517f9383e0a74_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/97fd123d24dc8f49009517f9383e0a74_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/97fd123d24dc8f49009517f9383e0a74_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/9b118ff0fe5053f83426d10126e833c8_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/9b118ff0fe5053f83426d10126e833c8_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/9b118ff0fe5053f83426d10126e833c8_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/9b118ff0fe5053f83426d10126e833c8_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/a3d06a346dfba99804df2e6e8ffabbeb_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/a3d06a346dfba99804df2e6e8ffabbeb_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/a3d06a346dfba99804df2e6e8ffabbeb_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/a3d06a346dfba99804df2e6e8ffabbeb_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/acbf71a565517f4fc541bc91a0227b15_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/acbf71a565517f4fc541bc91a0227b15_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/acbf71a565517f4fc541bc91a0227b15_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/acbf71a565517f4fc541bc91a0227b15_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/af7b768c50cded9162828afbaac6485f_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/af7b768c50cded9162828afbaac6485f_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/af7b768c50cded9162828afbaac6485f_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/af7b768c50cded9162828afbaac6485f_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/b859fc498a184bc9e552dc1f73b119e3_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/b859fc498a184bc9e552dc1f73b119e3_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/b859fc498a184bc9e552dc1f73b119e3_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/b859fc498a184bc9e552dc1f73b119e3_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/bb7311060c4be9194402c6ef1e168203_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/bb7311060c4be9194402c6ef1e168203_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/bb7311060c4be9194402c6ef1e168203_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/bb7311060c4be9194402c6ef1e168203_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/bee67f3562980ffe8fc6188433ef4d81_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/bee67f3562980ffe8fc6188433ef4d81_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/bee67f3562980ffe8fc6188433ef4d81_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/bee67f3562980ffe8fc6188433ef4d81_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/c8e436b33980f00905e33ec9581a810d_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/c8e436b33980f00905e33ec9581a810d_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/c8e436b33980f00905e33ec9581a810d_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/c8e436b33980f00905e33ec9581a810d_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/da919d48571b5ea074af7f001350f388_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/da919d48571b5ea074af7f001350f388_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/da919d48571b5ea074af7f001350f388_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/da919d48571b5ea074af7f001350f388_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/e8c60bf6548bc9abac9d75329ff66f01_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/e8c60bf6548bc9abac9d75329ff66f01_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/e8c60bf6548bc9abac9d75329ff66f01_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/e8c60bf6548bc9abac9d75329ff66f01_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/e9663f477d40804be4b8bf251247fd23_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/e9663f477d40804be4b8bf251247fd23_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/e9663f477d40804be4b8bf251247fd23_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/e9663f477d40804be4b8bf251247fd23_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/f8a742299c1416596205ae5520473f80_stderr.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/f8a742299c1416596205ae5520473f80_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-all25-20261013/prep/f8a742299c1416596205ae5520473f80_stdout.opaque": {
+      "member": "arc-official-fresh-all25-20261013/prep/f8a742299c1416596205ae5520473f80_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-initial-20261013/prep/4dd151cc8ffba3a2e00bbc36060c1fee_stderr.opaque": {
+      "member": "arc-official-fresh-initial-20261013/prep/4dd151cc8ffba3a2e00bbc36060c1fee_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-initial-20261013/prep/4dd151cc8ffba3a2e00bbc36060c1fee_stdout.opaque": {
+      "member": "arc-official-fresh-initial-20261013/prep/4dd151cc8ffba3a2e00bbc36060c1fee_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-initial-20261013/prep/531729fb9086c9111e4611e627a68ad0_stderr.opaque": {
+      "member": "arc-official-fresh-initial-20261013/prep/531729fb9086c9111e4611e627a68ad0_stderr.opaque",
+      "bytes": 0,
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    },
+    "arc-official-fresh-initial-20261013/prep/531729fb9086c9111e4611e627a68ad0_stdout.opaque": {
+      "member": "arc-official-fresh-initial-20261013/prep/531729fb9086c9111e4611e627a68ad0_stdout.opaque",
+      "bytes": 107,
+      "manifest_sha256": "8d1e063b8424c1f1a6d491c56a8edaba110cfabc4de91ae97039fe49b7fb8373",
+      "body_opened": false,
+      "exclusion_reason": "Opaque native/SDK output; outside permitted semantic inspection. Omit even empty members from derivative."
+    }
+  },
+  "unchanged_body_identity_digest": "286d7bf5a607ee1ce6baa60dcaf5f4aab4c1d03c5bd8657184c9bfa00a5f558a",
+  "identity_digest_algorithm": "SHA256 of sorted compact UTF8 JSON arrays [path,bytes,sha256], joined by newline",
+  "readme": {
+    "member": "DERIVATIVE_README.md",
+    "bytes": 2248,
+    "sha256": "873e7d94a35d8b40c5574b43a1fea5b13f2679b3e38a17626adbb8cbe2de878e"
+  },
+  "self_manifest_identity": "Computed by independent external admission report; manifest does not contain its own hash.",
+  "scope": "Evidence only; no source/native execution or new abilities. Cookie role not inferred. Opaque output bodies unopened.",
+  "limitations": [
+    "Not an exact original archive and not a self-contained runnable checkpoint.",
+    "25 initial games and metadata183 are not183 solved levels.",
+    "Old46 teacher mapping/completion-label provenance remains unproved.",
+    "All historical failures, synthetic fixtures and old source versions among permitted bodies retained.",
+    "No current HDS/Query/Teach/SDK/Action or fresh full-run result established."
+  ]
+}

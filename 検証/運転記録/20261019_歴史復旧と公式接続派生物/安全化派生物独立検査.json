@@ -1,0 +1,99 @@
+{
+  "schema": "official-sanitized-derivative-admission-v1",
+  "status": "ADMITTED_SANITIZED_DERIVATIVE_EVIDENCE_ONLY",
+  "output": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261016/archives/official-connection-checkpoint-sanitized-20261016.tar.gz",
+    "bytes": 1302802,
+    "sha256": "ab409c1855768cbf40634ad98236c0782a825ce7a9676ec98ef6c8b3d8212caa"
+  },
+  "original": {
+    "path": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261016/archives/official-connection-checkpoint.tar.gz",
+    "bytes": 1305364,
+    "sha256": "8be89e9ba3e64f174a362acd9c231267cee2f8afe4541bd73d5a3f52d823fa9b",
+    "unchanged_after": true,
+    "exact_original_withheld": true
+  },
+  "counts": {
+    "source_members": 1193,
+    "unchanged_body_members": 1137,
+    "cookie_redacted_body_members": 2,
+    "opaque_omitted_members": 54,
+    "added_derivative_metadata_members": 2,
+    "derivative_members": 1141
+  },
+  "changes": [
+    {
+      "member": "arc-chain-public-recording-20261013/actual_tools_v1.json",
+      "original": {
+        "bytes": 8396,
+        "sha256": "4a73b535fdf6be254c9330aa383acda92f335aea3f5c6f748ae9de7faf5e9a85"
+      },
+      "derivative": {
+        "bytes": 8241,
+        "sha256": "e32f94ea48955d23a0974742d56f10da9a24d6eb928dd1d4680c369011d11ca1"
+      },
+      "transformation": "Exact full Set-Cookie header string replaced once with explicit redaction marker; all other bytes unchanged.",
+      "occurrences": 1
+    },
+    {
+      "member": "arc-chain-public-recording-20261013/api_response_v1.metadata.json",
+      "original": {
+        "bytes": 1383,
+        "sha256": "ba4f74d54ab79a0110fedb9738851374b54f9a637e07d0516703fdaeeb23a30c"
+      },
+      "derivative": {
+        "bytes": 1228,
+        "sha256": "79fe5a612658d8522ddfc4d34e0e2b52eef6b007827b251a1bfb434098656e09"
+      },
+      "transformation": "Exact full Set-Cookie header string replaced once with explicit redaction marker; all other bytes unchanged.",
+      "occurrences": 1
+    }
+  ],
+  "excluded_count": 54,
+  "excluded_body_bytes": 2889,
+  "opaque_member_body_read_count": 0,
+  "excluded_inventory_authority": "DERIVATIVE_MANIFEST.json /excluded; declared original hashes not body-read verification",
+  "lineage_manifest": {
+    "member": "DERIVATIVE_MANIFEST.json",
+    "bytes": 29881,
+    "sha256": "158798fbb9991ee28bcb738dcc14cb0331b9aba4e321e83e01257745dd2a5e90"
+  },
+  "lineage_readme": {
+    "member": "DERIVATIVE_README.md",
+    "bytes": 2248,
+    "sha256": "873e7d94a35d8b40c5574b43a1fea5b13f2679b3e38a17626adbb8cbe2de878e"
+  },
+  "verification": {
+    "all1141_safe_headers_and_sizes_hashes_equal": true,
+    "expected_membership_exact": true,
+    "all54_opaque_members_absent": true,
+    "known_cookie_header_absent_from_all_members": true,
+    "two_changed_json_and_nested_log_json_valid": true,
+    "whole_gzip_crc_eof_verified": true,
+    "tar_uncompressed_bytes": 41943040,
+    "unchanged_body_identity_digest": "286d7bf5a607ee1ce6baa60dcaf5f4aab4c1d03c5bd8657184c9bfa00a5f558a"
+  },
+  "resources": {
+    "AS_limit_bytes": 268435456,
+    "peak_RSS_KiB": 18796,
+    "output_hard_cap_bytes": 2097152,
+    "lineage_metadata_bytes": 32129,
+    "lineage_metadata_cap_bytes": 32768,
+    "archive_directory_before_bytes": 77313237,
+    "archive_directory_after_bytes": 78616039,
+    "archive_directory_cap_bytes": 83886080
+  },
+  "scope": {
+    "source_executed": false,
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "git_or_upload_operations": 0,
+    "runtime_adoption": false
+  },
+  "limitations": [
+    "Not an exact original archive and not a self-contained runnable checkpoint.",
+    "25 initial games and metadata183 are not183 solved levels.",
+    "Old46 teacher mapping/completion-label provenance remains unproved.",
+    "All historical failures, synthetic fixtures and old source versions among permitted bodies retained.",
+    "No current HDS/Query/Teach/SDK/Action or fresh full-run result established."
+  ]
+}
