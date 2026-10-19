@@ -1,0 +1,240 @@
+{
+  "status": "BOUNDED_NATIVE_QUERY_SAVE_PASS_REVIEW_PENDING",
+  "actual_native_queries": 13,
+  "results": {
+    "profile": {
+      "mode": "profile",
+      "returncode": 0,
+      "outer_reason": null,
+      "wall_seconds": 1.1726213470028597,
+      "child_user_seconds": 1.015553,
+      "child_system_seconds": 0.1049,
+      "peak_child_rss_KiB": 70024,
+      "peak_directory_bytes_sampled": 27717749,
+      "status": "PASS",
+      "AS_limit_bytes": 536870912,
+      "directory_limit_bytes": 100663296,
+      "compute_seconds_limit": 120,
+      "finalization_seconds_limit": 120
+    },
+    "query": {
+      "mode": "query",
+      "returncode": 1,
+      "outer_reason": null,
+      "wall_seconds": 1.1771285379945766,
+      "child_user_seconds": 1.082403,
+      "child_system_seconds": 0.077952,
+      "peak_child_rss_KiB": 70204,
+      "peak_directory_bytes_sampled": 49863248,
+      "status": "HOLD",
+      "AS_limit_bytes": 536870912,
+      "directory_limit_bytes": 100663296,
+      "compute_seconds_limit": 120,
+      "finalization_seconds_limit": 120
+    },
+    "query_retry02": {
+      "mode": "query_retry02",
+      "returncode": 0,
+      "outer_reason": null,
+      "wall_seconds": 1.7920298059980269,
+      "child_user_seconds": 1.652782,
+      "child_system_seconds": 0.074374,
+      "peak_child_rss_KiB": 88452,
+      "peak_directory_bytes_sampled": 94294341,
+      "status": "PASS",
+      "AS_limit_bytes": 536870912,
+      "directory_limit_bytes": 117440512,
+      "compute_seconds_limit": 120,
+      "finalization_seconds_limit": 120
+    }
+  },
+  "pre_child_allocation_failure": {
+    "status": "HOLD_BEFORE_CHILD_LAUNCH",
+    "native_calls": 0,
+    "child_created": false,
+    "cause": "Conservative 49 MiB remaining allocation exceeds 96 MiB aggregate with retained original profile and failure files",
+    "current_file_bytes_at_check": 49950318,
+    "planned_remaining_bytes": 51380224,
+    "directory_ceiling": 100663296
+  },
+  "correction_tests": {
+    "resource_child_returncode": 0,
+    "stdout": "PASS\n",
+    "stderr": "",
+    "guard_tests": [
+      {
+        "kind": "normal",
+        "calls": 1,
+        "records": [
+          [
+            "01.input",
+            "{\"x\": 1}"
+          ],
+          [
+            "01.output",
+            "{\"x\": 1}"
+          ],
+          [
+            "01.input_after",
+            "{\"x\": 1}"
+          ]
+        ],
+        "pass": true
+      },
+      {
+        "kind": "mutation",
+        "calls": 1,
+        "records": [
+          [
+            "01.input",
+            "{\"x\": 1}"
+          ],
+          [
+            "01.output",
+            "{\"x\": 2}"
+          ],
+          [
+            "01.input_after",
+            "{\"x\": 2}"
+          ]
+        ],
+        "pass": true
+      },
+      {
+        "kind": "native_failure",
+        "calls": 1,
+        "records": [
+          [
+            "01.input",
+            "{\"x\": 1}"
+          ]
+        ],
+        "pass": true
+      },
+      {
+        "kind": "reentry",
+        "calls": 1,
+        "records": [
+          [
+            "01.input",
+            "{\"x\": 1}"
+          ]
+        ],
+        "pass": true
+      },
+      {
+        "kind": "input_recorder_failure",
+        "calls": 0,
+        "records": [],
+        "pass": true
+      },
+      {
+        "kind": "output_recorder_failure",
+        "calls": 1,
+        "records": [
+          [
+            "01.input",
+            "{\"x\": 1}"
+          ]
+        ],
+        "pass": true
+      }
+    ]
+  },
+  "trace_summary": {
+    "status": "PASS",
+    "codec_readback_all_records": 40,
+    "native_inputs": 13,
+    "native_outputs": 13,
+    "query_boundaries": {
+      "公開列図式:記号外形と展開役割": 2,
+      "公開列図式:有限全列または生産的反復の目標長一致と提出受理": 2,
+      "公開列図式:観測された解答作業と行動ID": 5,
+      "公開列図式・一意目標候補・在庫選択表示なし・既学習クリック作用の末相準備成立": 4
+    },
+    "reply_states": {
+      "出力": 13
+    },
+    "execution_flags_checked": 9,
+    "all_flags_false": true,
+    "exact_serialized_state_deltas": [
+      [
+        [
+          "__辞書__",
+          3,
+          1,
+          "__辞書__",
+          6,
+          1
+        ],
+        6647,
+        6660
+      ],
+      [
+        [
+          "__辞書__",
+          3,
+          1,
+          "__辞書__",
+          7,
+          1
+        ],
+        6647,
+        6660
+      ]
+    ],
+    "whole_candidate_result_keys": [
+      "目標pool全件",
+      "学習役割",
+      "選択観測",
+      "全候補",
+      "未対応作用群",
+      "列判定",
+      "全体理由",
+      "助言順序",
+      "自動選択",
+      "実行許可",
+      "順序の由来",
+      "実行後条件",
+      "既充足走査完了",
+      "既充足枠全件",
+      "全要求枠",
+      "学習効果支持候補",
+      "規則不確実性",
+      "全体採否"
+    ],
+    "goal_pool_status": "唯一解答候補",
+    "all_assignments_examined": 24,
+    "candidate_summary": [
+      {
+        "理由": [],
+        "効果状態": "効果支持",
+        "実行許可": false
+      },
+      {
+        "理由": [],
+        "効果状態": "効果支持",
+        "実行許可": false
+      },
+      {
+        "理由": [],
+        "効果状態": "効果支持",
+        "実行許可": false
+      },
+      {
+        "理由": [],
+        "効果状態": "効果支持",
+        "実行許可": false
+      },
+      {
+        "理由": [
+          "現在列またはAction対応UNKNOWN"
+        ],
+        "効果状態": "UNKNOWN",
+        "実行許可": false
+      }
+    ]
+  },
+  "scope": "saved diagnostic only; no Teach, Action, SDK, adoption or capability claim",
+  "per_assignment_trace_limitation": "Original enumeration preserves tested count and aggregate rejection counts, not each rejected assignment/HOLD detail. Independent pure retrospective audit is separate; future inline complete assignment capture is gated."
+}

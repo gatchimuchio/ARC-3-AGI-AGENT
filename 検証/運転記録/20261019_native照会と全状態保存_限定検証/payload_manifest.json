@@ -1,0 +1,793 @@
+{
+  "schema": "arc3-native-query-preservation-payload-v1",
+  "base_main": "32c2f6be80216e3685c022941c6a80a606e8442e",
+  "files": [
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/README.md",
+      "archive_path": "native_query/README.md",
+      "bytes": 12101,
+      "sha256": "6e03933eebb9486f5b4338e729394689a06331c3a84618298edb47c361c04d77"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/authority/AGENTS.md",
+      "archive_path": "native_query/authority/AGENTS.md",
+      "bytes": 1627,
+      "sha256": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/authority/Owner指示書原文_20261009.md",
+      "archive_path": "native_query/authority/Owner指示書原文_20261009.md",
+      "bytes": 12787,
+      "sha256": "d884388625d41e761ec845130c8ee3d7930992586973d461306b7d9b8218db9f"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/authority/Owner追加指示原文_20261010T1907.md",
+      "archive_path": "native_query/authority/Owner追加指示原文_20261010T1907.md",
+      "bytes": 778,
+      "sha256": "2cc8cbc8ab2ed802ab970ecce65b1942c92ee5db975f4f8deb6306f52766a576"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/authority/Owner追加指示原文_20261011T1904.md",
+      "archive_path": "native_query/authority/Owner追加指示原文_20261011T1904.md",
+      "bytes": 560,
+      "sha256": "d24cfd49b3a45b92356e77af890d193a97f27f33acf81fd6e331ef8955b6634c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/authority/制御/現在状態.json",
+      "archive_path": "native_query/authority/制御/現在状態.json",
+      "bytes": 358,
+      "sha256": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/authority/運用/権限順序.md",
+      "archive_path": "native_query/authority/運用/権限順序.md",
+      "bytes": 948,
+      "sha256": "fdcef65a4b6ffc2179f76036f52aa2a4c47c69b8298f42678a47c245414bb4a3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/budget_change.json",
+      "archive_path": "native_query/budget_change.json",
+      "bytes": 522,
+      "sha256": "32b2b884ea12e7080ff765e4c96f7f2c897f2f3e9438e0952aa84e34e38f82ec"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/correction_tests.json",
+      "archive_path": "native_query/correction_tests.json",
+      "bytes": 1349,
+      "sha256": "8830bc0594a9885debaf481fb4bfb74140b58a68cf7734cb348178955e2b686f"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/final_gate_report.json",
+      "archive_path": "native_query/final_gate_report.json",
+      "bytes": 6029,
+      "sha256": "9d5a052a6dbeb7bf71fff0b8ce8ffea04191b357bb47667512c4d80996c17b5c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/README.md",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/README.md",
+      "bytes": 622,
+      "sha256": "fcb579bf30bf51a3d45d1935ba6c58c79baeef9c2c95df3c27046641e6f176d6"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+      "bytes": 527,
+      "sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+      "bytes": 2815,
+      "sha256": "a6cab8fca7cb591c42fa7444f9678fe0003da69faafcce852598286dceb522e2"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+      "bytes": 3061,
+      "sha256": "50c48e5a9a8aa39158d0cdaacc0501608a829486960d41cb2fea6cb02e5660a4"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/型.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/型.py",
+      "bytes": 6575,
+      "sha256": "aa1241708655280b36564f5e3ff6968849b4d09790b8932aabad1570cbca302c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "bytes": 34178,
+      "sha256": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+      "bytes": 3392,
+      "sha256": "bb7e85c2dbafbd430f1b7733bf3a2d307dc24e3227e79994b491cf711322f715"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+      "bytes": 2779,
+      "sha256": "2ba7ceb8d0d6c784d092f91fe484477127f044e50f68c54c977374b17f2f6361"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+      "bytes": 11404,
+      "sha256": "315dd0d23a9682cdf14be71346341976cbdbcd2cbd924a250afc4ad53058dba6"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+      "bytes": 2696,
+      "sha256": "e23f271d38e1f52d75557dbf3342abf7b59a85fbdc315a06c0040fd7ca204eb3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+      "bytes": 3125,
+      "sha256": "8aa431b3012424fd8347c5b3d93a5fbf2218d35020836f5d40abb427f9d6da0d"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "bytes": 1951,
+      "sha256": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+      "bytes": 10139,
+      "sha256": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/frozen/HDS/学習系統/v0.4.2/pyproject.toml",
+      "archive_path": "native_query/frozen/HDS/学習系統/v0.4.2/pyproject.toml",
+      "bytes": 173,
+      "sha256": "c0d318c4a533f7ad7a2fe6f141cc44480a718def8c9794caf4a866e89b63961e"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/guard.py",
+      "archive_path": "native_query/guard.py",
+      "bytes": 1181,
+      "sha256": "34ad679422c775c3505f032242ce25e77fc0f75e1b22702b3357cd21da1ce00b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/inputs/public.json",
+      "archive_path": "native_query/inputs/public.json",
+      "bytes": 6627,
+      "sha256": "ce4c2950ac1d3fd1abbd67bb84196397777d080f2f0c6258245be8241b25cdab"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/pins.json",
+      "archive_path": "native_query/pins.json",
+      "bytes": 29405,
+      "sha256": "3f57449a90d5cb40ea00006fdb0e3f4305d5069c963d7c519251bfff33b6a514"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/prepare.py",
+      "archive_path": "native_query/prepare.py",
+      "bytes": 2334,
+      "sha256": "8386e8045c50967a347252854acb7a5e0ff9db6ab6d3ab5643273a87b452ec4c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/codec.json",
+      "archive_path": "native_query/profile/codec.json",
+      "bytes": 288,
+      "sha256": "4ccad00a65b6fc591193f66a8fd1e28501045bf5062dca932493332809ab2b65"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/failure.reserve",
+      "archive_path": "native_query/profile/failure.reserve",
+      "bytes": 16777216,
+      "sha256": "b8afa926a7c59525eac86a9455517900da526099eaaf534c01bc1769f58cf67c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/normal_roundtrip.json",
+      "archive_path": "native_query/profile/normal_roundtrip.json",
+      "bytes": 5355957,
+      "sha256": "5b0550a80f1981e5fa8200409e3454cb5916349f0d38cc7b28068d01017e5f09"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/result.json",
+      "archive_path": "native_query/profile/result.json",
+      "bytes": 539,
+      "sha256": "2012a49a0952df629f7a147f877287521a84beecb3857116b00d6a40df60c911"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/stderr.log",
+      "archive_path": "native_query/profile/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/stdout.log",
+      "archive_path": "native_query/profile/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/supervisor.json",
+      "archive_path": "native_query/profile/supervisor.json",
+      "bytes": 405,
+      "sha256": "e77c32eaf073a3bc27360acfab14be182efe22ada5959035f89f62f1b12446d2"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/supervisor_source.py",
+      "archive_path": "native_query/profile/supervisor_source.py",
+      "bytes": 2357,
+      "sha256": "c9ae967e720b03ad00d7dc0a9a1b02127282d305376acb32589c42288af8921d"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/profile/worker_source.py",
+      "archive_path": "native_query/profile/worker_source.py",
+      "bytes": 2991,
+      "sha256": "9ae135a6b3ed9da2bdffa6b84daa9d81b2ba2c63e969791877c5f82d2970e773"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/provenance/README.md",
+      "archive_path": "native_query/provenance/README.md",
+      "bytes": 9459,
+      "sha256": "6764851689e00dee6140097b4b2effdb43b62034f7ddf20cc186ac1eb482b5e9"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/provenance/delivery_manifest.json",
+      "archive_path": "native_query/provenance/delivery_manifest.json",
+      "bytes": 6056,
+      "sha256": "ba1babc48811350504c183bd5f8b7199d0524dbb84ee4171d0d164311bc47ff8"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/provenance/native_pilot_gate.md",
+      "archive_path": "native_query/provenance/native_pilot_gate.md",
+      "bytes": 8390,
+      "sha256": "bdf6fc74d0e408b4fb98837099fb12ff0314124ac892d65654cb28c54f85943b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/provenance/origin_manifest.json",
+      "archive_path": "native_query/provenance/origin_manifest.json",
+      "bytes": 5837,
+      "sha256": "f58ee643aeed5300fa830679e65b2a32aa0a192c0da59b425271fb2ee480f799"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/codec.json",
+      "archive_path": "native_query/query/codec.json",
+      "bytes": 288,
+      "sha256": "4ccad00a65b6fc591193f66a8fd1e28501045bf5062dca932493332809ab2b65"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/evidence.bin",
+      "archive_path": "native_query/query/evidence.bin",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/failure.json",
+      "archive_path": "native_query/query/failure.json",
+      "bytes": 604,
+      "sha256": "d74350d47dbf34115dbac1262541b952c874270189d941439869b9596987b0a2"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/failure.reserve",
+      "archive_path": "native_query/query/failure.reserve",
+      "bytes": 16777216,
+      "sha256": "6b184161c8ccccd3f89779985fd507eccd11cf2e7dd1ea6a87e15c927767f640"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/normal_roundtrip.json",
+      "archive_path": "native_query/query/normal_roundtrip.json",
+      "bytes": 5355957,
+      "sha256": "5b0550a80f1981e5fa8200409e3454cb5916349f0d38cc7b28068d01017e5f09"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/observation.json",
+      "archive_path": "native_query/query/observation.json",
+      "bytes": 55348,
+      "sha256": "b2277336a2da7b9ba659f9d64025a47826e7c2e7c5a82f5cc873df2a1d1fbe9a"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/stderr.log",
+      "archive_path": "native_query/query/stderr.log",
+      "bytes": 431,
+      "sha256": "8bd84cd0c3b96dc64816393d1c46151f1cdbeb90a2573b1f5a919501c9f50ae9"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/stdout.log",
+      "archive_path": "native_query/query/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/supervisor.json",
+      "archive_path": "native_query/query/supervisor.json",
+      "bytes": 405,
+      "sha256": "2b071c1ba1a3fd9b2dbbd9704cee41c6ae55ab6e42639372e929c5796c196096"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/supervisor_source.py",
+      "archive_path": "native_query/query/supervisor_source.py",
+      "bytes": 2595,
+      "sha256": "eae8e0347ab350d39665f6f4b31f91994a03f31334fe9b35e5c855364f35fadf"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query/worker_source.py",
+      "archive_path": "native_query/query/worker_source.py",
+      "bytes": 7857,
+      "sha256": "81b7ac026f8d4120d5088e013eec5781ac510294e31291429b81034987974d9f"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry01/README_at_hold.md",
+      "archive_path": "native_query/query_retry01/README_at_hold.md",
+      "bytes": 7335,
+      "sha256": "97dc5441e0a433cac17edcce690696a63dc74907b34580d2f8eaf3b409ab6654"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry01/admission_failure.json",
+      "archive_path": "native_query/query_retry01/admission_failure.json",
+      "bytes": 334,
+      "sha256": "2618a4b9761878b443a577976ead785ca25f3e363b369fa832852970fefc7320"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry01/gate_report_at_hold.json",
+      "archive_path": "native_query/query_retry01/gate_report_at_hold.json",
+      "bytes": 1668,
+      "sha256": "584823b031d85eb3da7090ba85358609aa7c3254a9cb6f8bfa0133b801dd3222"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry01/supervisor_source.py",
+      "archive_path": "native_query/query_retry01/supervisor_source.py",
+      "bytes": 3193,
+      "sha256": "db92dea883dcda3142e95d06aa925a004b3884271495146548bdedf3a89e76f3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/01.input.receipt.json",
+      "archive_path": "native_query/query_retry02/01.input.receipt.json",
+      "bytes": 135,
+      "sha256": "5203e96bd7a34c836566520722ee820895ac87379511d8cc07626badc31f3073"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/01.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/01.input_after.receipt.json",
+      "bytes": 144,
+      "sha256": "32c67d19823b0db3f74f39457eb4d1eb91b5e5089d84329bbe0bbc26c32102bc"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/01.output.receipt.json",
+      "archive_path": "native_query/query_retry02/01.output.receipt.json",
+      "bytes": 139,
+      "sha256": "8cf9d455e371f79cb38e2ea92f7e6e3d653e84dd052905ea928f8cf883401405"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/02.input.receipt.json",
+      "archive_path": "native_query/query_retry02/02.input.receipt.json",
+      "bytes": 138,
+      "sha256": "55e2807633bd60fb1b02788d0f71ee418132a6527f5a25f33de369a94ca6bc93"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/02.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/02.input_after.receipt.json",
+      "bytes": 145,
+      "sha256": "fd3d0787219ee425cf5b3c11587bb86a74d4a63c21291f6206ab816af82b0306"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/02.output.receipt.json",
+      "archive_path": "native_query/query_retry02/02.output.receipt.json",
+      "bytes": 141,
+      "sha256": "1cd12894558d75b43a8114fdbaade428caf271bc71d4c4acb1d3f3fb19100ad1"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/03.input.receipt.json",
+      "archive_path": "native_query/query_retry02/03.input.receipt.json",
+      "bytes": 139,
+      "sha256": "0dc0fa259095557f757e4dc5d2f146c6616adbbfe151ba8de6d09959fa9e89e9"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/03.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/03.input_after.receipt.json",
+      "bytes": 145,
+      "sha256": "6502d6c331438f1dc655e1b44f1fe31ea4b1faaa799ceebe2f24f352a88f731f"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/03.output.receipt.json",
+      "archive_path": "native_query/query_retry02/03.output.receipt.json",
+      "bytes": 141,
+      "sha256": "e5334354aeb2d2620f423bf00811cbb43ee3b641a7457abc2ab335360cae270d"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/04.input.receipt.json",
+      "archive_path": "native_query/query_retry02/04.input.receipt.json",
+      "bytes": 139,
+      "sha256": "84412ea22de1756825f277122b9d7a163eb00fbdcec25d59eae2d19ee4893e79"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/04.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/04.input_after.receipt.json",
+      "bytes": 145,
+      "sha256": "b1b92b450dab246cea015f06ad53b967fa75db3a2255af1230894916877912c1"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/04.output.receipt.json",
+      "archive_path": "native_query/query_retry02/04.output.receipt.json",
+      "bytes": 141,
+      "sha256": "b60a3aacff1e57a1541aacfc625bb04814ed36c5b5775ff9df145c4c2193cc53"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/05.input.receipt.json",
+      "archive_path": "native_query/query_retry02/05.input.receipt.json",
+      "bytes": 139,
+      "sha256": "f503dac50e069711b5ec1015f7a8d26afad5ef019835f1b0b5631bf6aee010f0"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/05.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/05.input_after.receipt.json",
+      "bytes": 145,
+      "sha256": "0a3ce194bb89b8e9ee80baf738d728721ed3b42f20d63124229010d09d6edfad"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/05.output.receipt.json",
+      "archive_path": "native_query/query_retry02/05.output.receipt.json",
+      "bytes": 141,
+      "sha256": "56bf92ee972fe45f4d51a128bdccbb7af443fd29f2d3aa0e5a54ce35d686b67b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/06.input.receipt.json",
+      "archive_path": "native_query/query_retry02/06.input.receipt.json",
+      "bytes": 139,
+      "sha256": "a4b5116389f7f9fb859283d34211a421f222560d0a8de4b6e060425a01fd760b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/06.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/06.input_after.receipt.json",
+      "bytes": 145,
+      "sha256": "dec5ffb2f9ed137a8790401fc28f78a9307e6c4b37a47cde575fe166d7fbef88"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/06.output.receipt.json",
+      "archive_path": "native_query/query_retry02/06.output.receipt.json",
+      "bytes": 141,
+      "sha256": "65f39f0f96c03c5aa59a67bccd1b3c2bb7de17df263c8f62e7a8ba57dabc971e"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/07.input.receipt.json",
+      "archive_path": "native_query/query_retry02/07.input.receipt.json",
+      "bytes": 139,
+      "sha256": "1358628aaab47412471a9b854098fbc08609ba12697ac3119c36407af6e5fdcb"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/07.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/07.input_after.receipt.json",
+      "bytes": 145,
+      "sha256": "8cec416a61a418a3bfd01fd03dcdbbb77e52e319ec1f6219363d3acd5d184486"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/07.output.receipt.json",
+      "archive_path": "native_query/query_retry02/07.output.receipt.json",
+      "bytes": 141,
+      "sha256": "5ca397e5058459ee6e33f1349209cd6b13f5b1b546c23f8c6598b536f10839fc"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/08.input.receipt.json",
+      "archive_path": "native_query/query_retry02/08.input.receipt.json",
+      "bytes": 139,
+      "sha256": "23e46b12040eb32ab5837c1b8c3fef28961ed44dc569666def6e27fc90728400"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/08.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/08.input_after.receipt.json",
+      "bytes": 145,
+      "sha256": "1d415dae74b9c9eb081ba0cbefa7bc0c1eff3f6dd7266bf78c1eb8fee2884e0b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/08.output.receipt.json",
+      "archive_path": "native_query/query_retry02/08.output.receipt.json",
+      "bytes": 141,
+      "sha256": "a9c420f2e2084980f783a72ae10c752f80346b8928ada357872cc082634c3e22"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/09.input.receipt.json",
+      "archive_path": "native_query/query_retry02/09.input.receipt.json",
+      "bytes": 139,
+      "sha256": "605e0e52da1aa053a19a7bea0d1fda2e733311155546d22b7127c4d43e832049"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/09.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/09.input_after.receipt.json",
+      "bytes": 145,
+      "sha256": "4de3ec3f773f6083f3a51c660df9d3b2084ce7c799f1088aa88c5d290f4ed69e"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/09.output.receipt.json",
+      "archive_path": "native_query/query_retry02/09.output.receipt.json",
+      "bytes": 141,
+      "sha256": "ecbfe42cc809afc754fefdb84ded1e0882551485cb90da15c315fa01e541d60e"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/10.input.receipt.json",
+      "archive_path": "native_query/query_retry02/10.input.receipt.json",
+      "bytes": 139,
+      "sha256": "c0a9483f3dd5efb2f3131e9457cb9f8bf658d68c97d4eb4e5af28d44c1d4256d"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/10.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/10.input_after.receipt.json",
+      "bytes": 146,
+      "sha256": "39bf05931a955058aacd3e05cfb33d613ee70b2f0fcf15cbde554d26034677e6"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/10.output.receipt.json",
+      "archive_path": "native_query/query_retry02/10.output.receipt.json",
+      "bytes": 141,
+      "sha256": "63eaa3ee472b0f5b61d8118492e016dc8b77f2dcc9f2889512e423c7c030408c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/11.input.receipt.json",
+      "archive_path": "native_query/query_retry02/11.input.receipt.json",
+      "bytes": 140,
+      "sha256": "44e3ef2b2b6a594b3100a8db3198096fd1347f14b0bf2033f3fcb850d71b13eb"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/11.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/11.input_after.receipt.json",
+      "bytes": 146,
+      "sha256": "12e14aad81aaf8c6cc4704d77a7221b3aaecbdc3bb338dde7be71a5f1030979a"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/11.output.receipt.json",
+      "archive_path": "native_query/query_retry02/11.output.receipt.json",
+      "bytes": 142,
+      "sha256": "1d7af101e20f09af726d2726c840c6e059f9cc9f430d9aaead225475308e5682"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/12.input.receipt.json",
+      "archive_path": "native_query/query_retry02/12.input.receipt.json",
+      "bytes": 140,
+      "sha256": "6ec763446bd020facd96ddc36f095a33358a10da894a7bea3b7822d90cffa785"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/12.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/12.input_after.receipt.json",
+      "bytes": 146,
+      "sha256": "80089b5e4609f06798d079e49919abdd9c12def243bb269a3d45f6d39b3ebe9b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/12.output.receipt.json",
+      "archive_path": "native_query/query_retry02/12.output.receipt.json",
+      "bytes": 142,
+      "sha256": "0fa5efe393a96ce2940af46d889372fded407c8d91cde619dbb201b92ffb1ed3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/13.input.receipt.json",
+      "archive_path": "native_query/query_retry02/13.input.receipt.json",
+      "bytes": 140,
+      "sha256": "300b34f5c1a3709a7a7246134101e6393dd3e8b7ddf5112214eb43a32d48776d"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/13.input_after.receipt.json",
+      "archive_path": "native_query/query_retry02/13.input_after.receipt.json",
+      "bytes": 146,
+      "sha256": "4c3434437117cdce5fe9158892f1a0737ca1b2dac4ea7e5fe35adf03aeba581a"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/13.output.receipt.json",
+      "archive_path": "native_query/query_retry02/13.output.receipt.json",
+      "bytes": 142,
+      "sha256": "b5bf6760d9a8b27dc326c3470396a33de5c98373a0eef3d2f8f3f2681c999398"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/admission.json",
+      "archive_path": "native_query/query_retry02/admission.json",
+      "bytes": 410,
+      "sha256": "59681abffe96e2055c746c5326388fc7f622059dc9ac46314de2e1f4c24e4601"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/codec.json",
+      "archive_path": "native_query/query_retry02/codec.json",
+      "bytes": 288,
+      "sha256": "4ccad00a65b6fc591193f66a8fd1e28501045bf5062dca932493332809ab2b65"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/evidence.bin",
+      "archive_path": "native_query/query_retry02/evidence.bin",
+      "bytes": 16777216,
+      "sha256": "119e4a4d36f7be05dea51b25197e908ff7f14bfe77451a84eae84f8891f02a4c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/evidence_index.json",
+      "archive_path": "native_query/query_retry02/evidence_index.json",
+      "bytes": 6239,
+      "sha256": "f53b323272bd6c4624da80edf53bdecd47b3c0abec1213d6dcf7bc6654239b61"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/failure.reserve",
+      "archive_path": "native_query/query_retry02/failure.reserve",
+      "bytes": 16777216,
+      "sha256": "6b8f992bebb82b1153f5015d5b7a7201157b7faaead9573467be8dbe133e6af4"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/guard_source.py",
+      "archive_path": "native_query/query_retry02/guard_source.py",
+      "bytes": 1181,
+      "sha256": "34ad679422c775c3505f032242ce25e77fc0f75e1b22702b3357cd21da1ce00b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/normal_roundtrip.json",
+      "archive_path": "native_query/query_retry02/normal_roundtrip.json",
+      "bytes": 5355957,
+      "sha256": "5b0550a80f1981e5fa8200409e3454cb5916349f0d38cc7b28068d01017e5f09"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/observation.json",
+      "archive_path": "native_query/query_retry02/observation.json",
+      "bytes": 55348,
+      "sha256": "b2277336a2da7b9ba659f9d64025a47826e7c2e7c5a82f5cc873df2a1d1fbe9a"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/poststate.json",
+      "archive_path": "native_query/query_retry02/poststate.json",
+      "bytes": 5355957,
+      "sha256": "f7e5f8c7518b43c7e53f6a1c43f108469c04f72e5d13eb30aa2fae987e2d6e6a"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/result.json",
+      "archive_path": "native_query/query_retry02/result.json",
+      "bytes": 1122,
+      "sha256": "6790a27e28244f9e74aea6114fc64408ea19ad40fa76d476858491870469d761"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/semantic_result.receipt.json",
+      "archive_path": "native_query/query_retry02/semantic_result.receipt.json",
+      "bytes": 150,
+      "sha256": "e318821c5fb989ebea542517de26eea73ac5dd25a3f75971217c05dd0607ce32"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/stderr.log",
+      "archive_path": "native_query/query_retry02/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/stdout.log",
+      "archive_path": "native_query/query_retry02/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/supervisor.json",
+      "archive_path": "native_query/query_retry02/supervisor.json",
+      "bytes": 413,
+      "sha256": "f49ce6676b7a23f8a005bb166335ab04e9b7471a6d5c69609a9d9ce1dbc9d334"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/supervisor_source.py",
+      "archive_path": "native_query/query_retry02/supervisor_source.py",
+      "bytes": 3298,
+      "sha256": "3ad906b5662de939719c01ce40fc5f16414c8209f0d12cb55628b72b98329f81"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/query_retry02/worker_source.py",
+      "archive_path": "native_query/query_retry02/worker_source.py",
+      "bytes": 8250,
+      "sha256": "a61aeaa63c8eab98867712c6f1a00fc60cdee460d0cf745eb2866166d797ea6c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/semantic/ARC3境界.py",
+      "archive_path": "native_query/semantic/ARC3境界.py",
+      "bytes": 9941,
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/semantic/family_rehost.py",
+      "archive_path": "native_query/semantic/family_rehost.py",
+      "bytes": 10558,
+      "sha256": "15d070015b31511b12eeac8da93c3bea3a62daa8f6a3ab271dfb99a89b9acedc"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/semantic/fixed_enumeration_rehost.py",
+      "archive_path": "native_query/semantic/fixed_enumeration_rehost.py",
+      "bytes": 3980,
+      "sha256": "43a9ec065d22d8da1502c963a140b60833ac0b06ce0d45c1ac8ba5f59e9932e4"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/semantic/goalset_candidate_rehost.py",
+      "archive_path": "native_query/semantic/goalset_candidate_rehost.py",
+      "bytes": 5878,
+      "sha256": "c9492a8033ae740811ff0e4f078d773a478b30afa4561277bad6e18144357efe"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/semantic/goalset_common_rehost.py",
+      "archive_path": "native_query/semantic/goalset_common_rehost.py",
+      "bytes": 7473,
+      "sha256": "3b32cffa4a5210c5a474642a542829bc3cd368ac76dbf9e9f6baafbd076fac87"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/semantic/preservation_rehost.py",
+      "archive_path": "native_query/semantic/preservation_rehost.py",
+      "bytes": 12814,
+      "sha256": "a57f0490be3c186a072e9e80f41072581c3ecbfc7ef3aaae49283558281799f3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/semantic/semantic_entry_rehost.py",
+      "archive_path": "native_query/semantic/semantic_entry_rehost.py",
+      "bytes": 2594,
+      "sha256": "128daa956bd6b04a2d3e75b4b583afde7a8f8bd5d73be86a7d546df62e235bbc"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/semantic/semantic_route_rehost.py",
+      "archive_path": "native_query/semantic/semantic_route_rehost.py",
+      "bytes": 603,
+      "sha256": "597e632766ebbd37b8646a053f5e5464a37700728d070ca799434c53c7e710f6"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/state/after_all_queries.standard.json",
+      "archive_path": "native_query/state/after_all_queries.standard.json",
+      "bytes": 5355957,
+      "sha256": "5b0550a80f1981e5fa8200409e3454cb5916349f0d38cc7b28068d01017e5f09"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/supervise.py",
+      "archive_path": "native_query/supervise.py",
+      "bytes": 3298,
+      "sha256": "3ad906b5662de939719c01ce40fc5f16414c8209f0d12cb55628b72b98329f81"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/test_gate_correction.py",
+      "archive_path": "native_query/test_gate_correction.py",
+      "bytes": 2169,
+      "sha256": "4eb0427a95552d1463e95167a797442c543b903dcda96593dbe907f94d09aab3"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/trace_summary.json",
+      "archive_path": "native_query/trace_summary.json",
+      "bytes": 1989,
+      "sha256": "370c6ca5f267a050ca24a7f7b79902f68c67674a63e1cef0a28a999baa78f2f6"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/verify_results.py",
+      "archive_path": "native_query/verify_results.py",
+      "bytes": 2470,
+      "sha256": "357ee3389bfa47d7e8612cfd409b8077c0f8eb7f3caf025909f7e5a7d4edd5bc"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/worker.py",
+      "archive_path": "native_query/worker.py",
+      "bytes": 8250,
+      "sha256": "a61aeaa63c8eab98867712c6f1a00fc60cdee460d0cf745eb2866166d797ea6c"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-query-20261019/delivery_manifest.json",
+      "archive_path": "native_query/delivery_manifest.json",
+      "bytes": 21075,
+      "sha256": "01f8b30423945b1a491a3fbb542eb2e4bdc714188cd738757d8b8b3503a0ff81"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-review-20261019/README.md",
+      "archive_path": "native_review/README.md",
+      "bytes": 5467,
+      "sha256": "26c22fa5ef6c7a12f1e098b97e928484914ed5fff9d0397c8696b1b41547b96b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-review-20261019/audit.py",
+      "archive_path": "native_review/audit.py",
+      "bytes": 5470,
+      "sha256": "5280f1fd8335c68d6fa5604810e5fab3d40e78056b8adacaaa46e947ff82f06b"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-review-20261019/reconstructed_assignments.json",
+      "archive_path": "native_review/reconstructed_assignments.json",
+      "bytes": 23474,
+      "sha256": "8c42f8fc760773cfc4492cafc9cc13bc359f7bb7e18fb1d15f490884a89c4fce"
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-native-review-20261019/verification.json",
+      "archive_path": "native_review/verification.json",
+      "bytes": 2412,
+      "sha256": "434f9a1fe930f6aaf39bf7ccdd43638b56fffd248ba97cb11016a1b88bc824c1"
+    }
+  ],
+  "file_count": 130,
+  "raw_bytes": 94377213,
+  "manifest_members_frozen": true,
+  "source_manifest_status_preserved": "BOUNDED_NATIVE_QUERY_SAVE_PASS_REVIEW_PENDING",
+  "completed_review_status": "BOUNDED_PASS",
+  "runtime_adopted": false,
+  "excluded": "All paths outside the exact native query delivery manifest and four closed review files; no active guard or teacher work."
+}
