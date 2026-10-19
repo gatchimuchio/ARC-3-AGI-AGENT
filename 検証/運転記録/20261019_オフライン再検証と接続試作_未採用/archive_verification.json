@@ -1,0 +1,301 @@
+{
+  "schema": "arc3-offline-checkpoint-archive-verification-v1",
+  "archive": {
+    "name": "arc-offline-restart-checkpoint-20261019.tar.gz",
+    "bytes": 303217,
+    "sha256": "0244cae02317e535708b248f8b6e6eb978334a761350e9ddd6bdf7fe45c88077",
+    "git_blob": "f1a2dd4e1405a108f9829efe8d405849371e6b30"
+  },
+  "members": 57,
+  "files": [
+    {
+      "path": "arc-pinned-restart-20261019/README.md",
+      "bytes": 11186,
+      "sha256": "786d475553491ef69452cf0f9e2fbedbbc60903738e8df2849e4541321ff7a02"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/dependencies/ARC3境界.py",
+      "bytes": 9941,
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/dependencies/図式観測.py",
+      "bytes": 1295,
+      "sha256": "417269f9e94ec548c7f727c3e263efe952bbae21cf601021bcfd4d89b1a786d2"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/prior_bytes_recheck.json",
+      "bytes": 106,
+      "sha256": "85d037fcf7e22bfd93733f577d7af5a1dc2a190beae8bb8407ea3596057f207d"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run01/connection.py",
+      "bytes": 14092,
+      "sha256": "5137572ee2a1527775b60c9faf828246708681141e154bff2eb6ecab72bb48ea"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run01/failure_evidence.json",
+      "bytes": 1388546,
+      "sha256": "4eda51aed83f55bdcb9c481ad56e9f26cb1f8037804f224ca2a6d9dad0fe7380"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run01/runner.py",
+      "bytes": 14241,
+      "sha256": "8aa6b1d2cd1df93bc05931dd5ffaf50bfc0220b7d241f229b79da6f9213f2bd3"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run01/summary.json",
+      "bytes": 175,
+      "sha256": "bc406c37dbcf5b59fe54d19c8a7052e9a84e7021e6469e442efc6fffab5fbee7"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run01/tests.log",
+      "bytes": 4904,
+      "sha256": "7bbf487e29101d33885554930684c627cee7d8af8cef9fb3f93f33b8b217fa81"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run02/connection.py",
+      "bytes": 14092,
+      "sha256": "5137572ee2a1527775b60c9faf828246708681141e154bff2eb6ecab72bb48ea"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run02/failure_evidence.json",
+      "bytes": 1388546,
+      "sha256": "4eda51aed83f55bdcb9c481ad56e9f26cb1f8037804f224ca2a6d9dad0fe7380"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run02/runner.py",
+      "bytes": 14281,
+      "sha256": "44d520d66ee3849fc1cc7e6d0f17ac95da3f10d6b59722c09d06709c10df0e6d"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run02/summary.json",
+      "bytes": 175,
+      "sha256": "be5abca42c7d647c152076b2127d3739a9f54c2e858d844f535948546e027741"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run02/tests.log",
+      "bytes": 2945,
+      "sha256": "515c566eb78aed81ce606acf010db3365547016e590831a2a8bf12c4c1afede9"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run03/failure_evidence.json",
+      "bytes": 1406734,
+      "sha256": "09ba7c1a458c33ec37cfc0431189f8cf382813733ea4c1c4f3bdcde59e6430f8"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run03/summary.json",
+      "bytes": 175,
+      "sha256": "fea393e067af41859ad94573150fdc3f1766826e455d87a521137ce71999e2e2"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run03/tests.log",
+      "bytes": 3569,
+      "sha256": "ffd0d74a0e818f0eb231768d3972d8070aa64e63a083c869582ef847a2201035"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run04/failure_evidence.json",
+      "bytes": 1429376,
+      "sha256": "90bb36522c2f25e5f43c79e092467ebbeaab9e5bf772f0dae3f861ccd75a586a"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run04/summary.json",
+      "bytes": 175,
+      "sha256": "c97026589e2184fac1f07b62ecf4cbd19b4807d25ec25659cb903cfece8d7df2"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/reports/run04/tests.log",
+      "bytes": 3799,
+      "sha256": "79e425553c04cbbe0832ba0145fbbc3351173397f90ec6a6cbd43405c40f6c42"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/source/目標相対再始動_v1.py",
+      "bytes": 14866,
+      "sha256": "1ba0afffb4c119056ed0454c19085afa3e73dd06ec63ad13d4fa610e071ba824"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/tests/test_connection.py",
+      "bytes": 17159,
+      "sha256": "d1edaf39cf790dc9d8fe78a7e484f8573b3aaa99534dc39c58211e97209ae4f7"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/verify_manifest.py",
+      "bytes": 793,
+      "sha256": "508c0e583fea7b6d8ccd42837d8d936925a67574945ac251d6b4cffa4ad3abd3"
+    },
+    {
+      "path": "arc-pinned-restart-20261019/dependency_manifest.json",
+      "bytes": 12573,
+      "sha256": "ed3adaa2fc7214c2317c29ab2142a515ba8a907fe1aa0582efe3a318fc0d0289"
+    },
+    {
+      "path": "arc-pinned-review-20261019/final_review.md",
+      "bytes": 2770,
+      "sha256": "6969d5d14ca835863047194f3e96bf67defa59c7712e68e9c599f664b68c5760"
+    },
+    {
+      "path": "arc-pinned-review-20261019/manifest_verification_before_fixes.json",
+      "bytes": 95,
+      "sha256": "a1a054569039a8fed14cc88882f9dc3049dafebfbc7ee2d90394dea41ea4adea"
+    },
+    {
+      "path": "arc-pinned-review-20261019/probes.json",
+      "bytes": 722,
+      "sha256": "2619bb4e1fbcc1d838f806a832f32dd7af9cf0bb86b7203ff550a61358c138a3"
+    },
+    {
+      "path": "arc-pinned-review-20261019/probes.py",
+      "bytes": 2278,
+      "sha256": "13e6befdaba4274b822699873ba8ca990e04c7c423b224de49d5301e3ae52dc1"
+    },
+    {
+      "path": "arc-pinned-review-20261019/probes_corrected.json",
+      "bytes": 503,
+      "sha256": "b80dfbe3750c2e7d650e16402351ea886223ce30f3417fdf439b4a3ff15745d1"
+    },
+    {
+      "path": "arc-pinned-review-20261019/probes_corrected.py",
+      "bytes": 2328,
+      "sha256": "68c9057e9776566542d43f8d6408d2f6136d2d84e05693877ec673bc53ca8ca7"
+    },
+    {
+      "path": "arc-pinned-review-20261019/review_report.md",
+      "bytes": 4857,
+      "sha256": "f077dde46d7cd10ee34e2fb33eada3cff45400aa7b0b8fc70288a82aa2c13de5"
+    },
+    {
+      "path": "arc-pinned-review-20261019/reviewed_manifest_before_fixes.json",
+      "bytes": 11268,
+      "sha256": "2f4e8fb629a413a31286d98ae98b7e68e7664b11b210f432a390bf0bd27a7f13"
+    },
+    {
+      "path": "arc-pinned-review-20261019/reviewed_source_before_fixes.py",
+      "bytes": 14092,
+      "sha256": "5137572ee2a1527775b60c9faf828246708681141e154bff2eb6ecab72bb48ea"
+    },
+    {
+      "path": "arc-pinned-review-20261019/run01/failure_evidence.json",
+      "bytes": 1388546,
+      "sha256": "4eda51aed83f55bdcb9c481ad56e9f26cb1f8037804f224ca2a6d9dad0fe7380"
+    },
+    {
+      "path": "arc-pinned-review-20261019/run01/summary.json",
+      "bytes": 175,
+      "sha256": "be5abca42c7d647c152076b2127d3739a9f54c2e858d844f535948546e027741"
+    },
+    {
+      "path": "arc-pinned-review-20261019/run01/tests.log",
+      "bytes": 2945,
+      "sha256": "610ea32e3616aa0c0ad3170b874b7f796c860ac67d9858a8480d379b9771e6de"
+    },
+    {
+      "path": "arc-pinned-review-20261019/run02_corrected/failure_evidence.json",
+      "bytes": 1429376,
+      "sha256": "90bb36522c2f25e5f43c79e092467ebbeaab9e5bf772f0dae3f861ccd75a586a"
+    },
+    {
+      "path": "arc-pinned-review-20261019/run02_corrected/summary.json",
+      "bytes": 175,
+      "sha256": "c97026589e2184fac1f07b62ecf4cbd19b4807d25ec25659cb903cfece8d7df2"
+    },
+    {
+      "path": "arc-pinned-review-20261019/run02_corrected/tests.log",
+      "bytes": 3799,
+      "sha256": "3f7338fb7d10d1464db888a7c7e01442d6fde539773187a194b747873d190cd7"
+    },
+    {
+      "path": "arc-offline-restart-20261019/reports/attempt01_relocated_not_run.txt",
+      "bytes": 1077,
+      "sha256": "d03419f5860c577c8fe97c603b0883299b75d9fadb8b4b5c1941c71b642acffa"
+    },
+    {
+      "path": "arc-offline-restart-20261019/reports/baseline_stdout.log",
+      "bytes": 233,
+      "sha256": "62b6b7c823bb0141244e252d25efa67bdf3b526e2027bfbb59824a458dfbac5c"
+    },
+    {
+      "path": "arc-offline-restart-20261019/reports/byte_verification.json",
+      "bytes": 19956,
+      "sha256": "7945a5f32b6be54ad9a361e22d540a22d80002694df05bf7531dd972d6f01555"
+    },
+    {
+      "path": "arc-offline-restart-20261019/reports/capture_stdout.log",
+      "bytes": 94,
+      "sha256": "70cb2005f36f22b480f6db9cae5fb5350a526e8a9a060c345596815aa1cec560"
+    },
+    {
+      "path": "arc-offline-restart-20261019/reports/envelope_verification.json",
+      "bytes": 1334,
+      "sha256": "e01f6e71ddbb185022a42f7f501bfbe4612aa40c17ca0d7672732854c98ee155"
+    },
+    {
+      "path": "arc-offline-restart-20261019/reports/validation_report.md",
+      "bytes": 8733,
+      "sha256": "b3f435f2fd114c2324c18ed1905e3f5b87e147f48ff52f55d067dda7ed6fc68e"
+    },
+    {
+      "path": "arc-offline-restart-20261019/reports/verify_bytes_attempt01.py",
+      "bytes": 2052,
+      "sha256": "d0a17f058c222a517a26c5bf219af48302aed1d966e1b9874fa5d152460837b0"
+    },
+    {
+      "path": "arc-offline-restart-20261019/verify_bytes.py",
+      "bytes": 2227,
+      "sha256": "ec51b5622a6b9f1a84043f2c40a6c00705a49bf4b02ce20936cf6d0ae8fa0409"
+    },
+    {
+      "path": "arc-offline-restart-20261019/extracted/arc-restart-baseline-20261016/test_results/independent_restart_20261019/pure_save_boundaries.json",
+      "bytes": 26701,
+      "sha256": "3bc2587c475c2c4ac057f2aab69130eb0d4bbd3b5b679fe3d29a2393dd1fdbff"
+    },
+    {
+      "path": "arc-offline-restart-20261019/extracted/arc-restart-baseline-20261016/test_results/independent_restart_20261019/pure_save_boundaries.log",
+      "bytes": 5272,
+      "sha256": "ae8f7ab8033dfb3b0479ecbd6601931c314464230cc669e7a9d75ecece75d0de"
+    },
+    {
+      "path": "arc-offline-restart-20261019/extracted/arc-save-capture-repair-20261016/evidence/independent_restart_20261019/results.json",
+      "bytes": 80245,
+      "sha256": "86cf13817d50f6e065bfb901e465cc07d96d1ed4a6402fad37575030b1345441"
+    },
+    {
+      "path": "arc-offline-restart-20261019/extracted/arc-save-capture-repair-20261016/evidence/independent_restart_20261019/test.log",
+      "bytes": 9283,
+      "sha256": "ce3474a17458198709348d90d593f11dac511ac30214e96de232c3ba9e1cc1d1"
+    },
+    {
+      "path": "checkpoint/README.md",
+      "bytes": 4741,
+      "sha256": "f38db20755eb7d3e656008100286660a0528d80f2e454cef7d64a8f71a72ef22"
+    },
+    {
+      "path": "checkpoint/payload_manifest.json",
+      "bytes": 17298,
+      "sha256": "4132315478e546a882b7cba1603c7e2cef7ae26d6ae4a95a90e92a0311cfdda3"
+    },
+    {
+      "path": "checkpoint/resource_ledger.json",
+      "bytes": 626,
+      "sha256": "4a4f68791aab344c852216a2e902e065a81e8d06ff2d3fdbbd61187567fcefc6"
+    },
+    {
+      "path": "checkpoint/originals_readback.json",
+      "bytes": 144,
+      "sha256": "701f778d1e033f3aad19ca89fd020b03d795666c02887d7e4b90249ac57dcb12"
+    },
+    {
+      "path": "checkpoint/payload_admission.json",
+      "bytes": 94622,
+      "sha256": "5059cdcf508b1c1b2f684c347d2a40745c468ef601bbd853e7632dd9fa1e3fc0"
+    },
+    {
+      "path": "MANIFEST.json",
+      "bytes": 10887,
+      "sha256": "3c4bea3420f864e79df4d59235b4867614c75527a7a82eb74cf44f7995075d44"
+    }
+  ],
+  "complete_member_readback": true,
+  "gzip_crc_eof_validated": true,
+  "source_allowlist_bytes_unchanged": true,
+  "native_operations": 0
+}
