@@ -1,0 +1,37 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/publication_native_inverse/captures/08_package/source.py", line 59, in <module>
+    with p.open('rb') as inp:tf.addfile(ti,inp)
+                             ^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/tarfile.py", line 2290, in addfile
+    copyfileobj(fileobj, self.fileobj, tarinfo.size, bufsize=bufsize)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/tarfile.py", line 254, in copyfileobj
+    dst.write(buf)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/tarfile.py", line 443, in write
+    self.__write(s)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/tarfile.py", line 451, in __write
+    self.fileobj.write(self.buf[:self.bufsize])
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/gzip.py", line 314, in write
+    return self._buffer.write(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/gzip.py", line 137, in write
+    return gzip_file._write_raw(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/gzip.py", line 326, in _write_raw
+    self.fileobj.write(self.compress.compress(data))
+  File "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/publication_native_inverse/captures/08_package/source.py", line 48, in write
+    if self.n+len(b)>self.cap:raise RuntimeError('Archive cap reached; partial retained, do not retry without allocation')
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Archive cap reached; partial retained, do not retry without allocation
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/publication_native_inverse/captures/08_package/source.py", line 55, in <module>
+    with gzip.GzipFile(filename='',mode='wb',compresslevel=6,mtime=0,fileobj=Capped(f,3*1024**2-256*1024)) as gz:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/gzip.py", line 371, in close
+    fileobj.write(self.compress.flush())
+  File "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/publication_native_inverse/captures/08_package/source.py", line 48, in write
+    if self.n+len(b)>self.cap:raise RuntimeError('Archive cap reached; partial retained, do not retry without allocation')
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Archive cap reached; partial retained, do not retry without allocation

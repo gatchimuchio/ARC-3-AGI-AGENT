@@ -1,0 +1,16 @@
+{
+  "schema": "inverse78-gzip-cap-failure-v1",
+  "status": "FAILED_PARTIAL_NOT_DELIVERABLE",
+  "original_path": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/publication_native_inverse/arc-native-inverse78-checkpoint-20261019.tar.gz",
+  "retained_path": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/publication_native_inverse/inverse78-gzip-cap-failure.partial.tar.gz",
+  "bytes": 2875902,
+  "sha256": "3d8a8a7e6320b8f858ec4b1c1d1fb8fec3f8793cb58aa15c32b047d06b2f2050",
+  "source": "captures/08_package/source.py",
+  "stdout": "captures/08_package/stdout.log",
+  "stderr": "captures/08_package/stderr.log",
+  "exit_status": 1,
+  "manifest": "archive_manifest_failed_gzip.json",
+  "cause": "explicit 2.75 MiB payload cap; full gzip measured 2959019 B",
+  "change": "new separately named complete xz; no original input changes",
+  "not_a_native_experiment_failure": true
+}
