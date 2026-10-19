@@ -1,0 +1,124 @@
+{
+  "manifest_files": 45,
+  "archived_origins_verified": [
+    "ARC3境界.py",
+    "__init__.py",
+    "予測.py",
+    "受理.py",
+    "図式観測.py",
+    "固定文法.py",
+    "応答.py",
+    "手順.py",
+    "知覚.py",
+    "関係.py"
+  ],
+  "phase_records": 112,
+  "candidate_records_exactly_recomputed": 459312,
+  "all_HOLD": true,
+  "query_proposals": 21,
+  "endpoint_attributions": [
+    {
+      "case": 0,
+      "counts": {
+        "informative_inside_change": 50,
+        "informative_outside_preserved": 50
+      },
+      "independent_action_count": 1
+    },
+    {
+      "case": 1,
+      "counts": {
+        "informative_outside_preserved": 45,
+        "informative_inside_change": 55
+      },
+      "independent_action_count": 1
+    },
+    {
+      "case": 2,
+      "counts": {
+        "informative_outside_preserved": 50,
+        "informative_inside_change": 40,
+        "prior_equal_tool_unidentifiable": 10
+      },
+      "independent_action_count": 1
+    },
+    {
+      "case": 3,
+      "counts": {
+        "prior_equal_tool_unidentifiable": 100
+      },
+      "independent_action_count": 1
+    },
+    {
+      "case": 4,
+      "counts": {
+        "informative_inside_change": 50,
+        "informative_outside_preserved": 50
+      },
+      "independent_action_count": 1
+    },
+    {
+      "case": 5,
+      "counts": {
+        "informative_outside_preserved": 45,
+        "informative_inside_change": 15,
+        "prior_equal_tool_unidentifiable": 40
+      },
+      "independent_action_count": 1
+    }
+  ],
+  "probes": [
+    {
+      "name": "unavailable_action5",
+      "available": [],
+      "action": {
+        "id": 5,
+        "data": {}
+      },
+      "result": {
+        "action": {
+          "id": 5,
+          "data": {}
+        },
+        "role_hypothesis": {
+          "役割": "未確認"
+        },
+        "goal6_query_proposal": null,
+        "state": "HOLD",
+        "execution_permission": false,
+        "reason": "action unavailable or invalid"
+      }
+    },
+    {
+      "name": "malformed_action5_arguments",
+      "available": [
+        5
+      ],
+      "action": {
+        "id": 5,
+        "data": {
+          "x": 999
+        }
+      },
+      "result": {
+        "action": {
+          "id": 5,
+          "data": {
+            "x": 999
+          }
+        },
+        "role_hypothesis": {
+          "役割": "未確認"
+        },
+        "goal6_query_proposal": null,
+        "state": "HOLD",
+        "execution_permission": false,
+        "reason": "non-click action takes no arguments"
+      }
+    }
+  ],
+  "native_calls": 0,
+  "SDK_calls": 0,
+  "Action_calls": 0,
+  "max_RSS_KiB": 23400
+}

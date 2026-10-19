@@ -1,0 +1,1023 @@
+{
+  "schema": "arc3-goal6-bridge-content-admission-v1",
+  "created_at_utc": "2026-10-19T03:15:58.578721+00:00",
+  "verdict": "PASS_FOR_ARCHIVAL_EVIDENCE_ONLY",
+  "scope": "Exact 64-file payload; complete inert text/JSON/Python AST inspection and full streaming JSONL validation. No payload source execution, extraction, import, Query, Teach, SDK, Action, restore, Git or Library operation.",
+  "payload_manifest_sha256": "e9dfaa62aac355993939db81e10ad8612ea7f60eca9c00424b235d5a6b62897b",
+  "payload_file_count": 64,
+  "payload_raw_bytes": 8420785,
+  "latest_manifest_closure": {
+    "bridge_entries_plus_self": 46,
+    "review_entries_plus_self": 18,
+    "all_entry_pins_match": true
+  },
+  "authority_reread": [
+    "authority/Owner指示書原文_20261009.md",
+    "authority/Owner追加指示原文_20261010T1907.md",
+    "authority/Owner追加指示原文_20261011T1904.md",
+    "main/AGENTS.md",
+    "main/運用/権限順序.md",
+    "main/制御/現在状態.json"
+  ],
+  "files": [
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/MANIFEST.json",
+      "bytes": 3028,
+      "sha256": "fa31817a9a46e2f1110a16a0e20719fe5658f3db0094887c434dd897afc3b54c",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/MANIFEST_v2.json",
+      "bytes": 5860,
+      "sha256": "eb2384d4fc4c4d4a6c0ee25c739df8f9abbfd4ce0237715d0664b536df104db1",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/README.md",
+      "bytes": 10835,
+      "sha256": "ab2f825997e574bb2463754701af8b75f12e300dc143af4379a1cb7e05da5e21",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/TEACHER_PLAN.md",
+      "bytes": 7216,
+      "sha256": "b519633c242a903e07d1270005c7f7ba14640fd262b607b6748d11591959032d",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/all6_full_attribution_v2.json",
+      "bytes": 1832951,
+      "sha256": "8fc6f24e3693ac3278e4571aa1b20e26e6ae406e7a2fe196bcd0de887fdb51d3",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/all_legal_candidates.jsonl.gz",
+      "bytes": 1643401,
+      "sha256": "ab4ade4e4166986cf78481c296d9cbff21e8e445e484cf92601faafdac17c0b6",
+      "pin_verified": true,
+      "inspection": "full streaming UTF-8 JSONL; semantic/order checks below"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/all_phases.json",
+      "bytes": 1356462,
+      "sha256": "9aa345771798f362d83a8d9e08288f135dc52b8b2ceb5a5e0ba2191e64b9cfa4",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/ambiguous_instrument_probe_v3.json",
+      "bytes": 1153,
+      "sha256": "954ddaeeb7335be0de3820599d1bdca703a0adef6a3d6b96700bfdaf52a6f59d",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/attribution_summary_v2.json",
+      "bytes": 1621,
+      "sha256": "3e91238cde3dfe06ecc426be771058f2112f8b1bc1925e42934de8867146f1e5",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/bridge.py",
+      "bytes": 6112,
+      "sha256": "72b9c900c4e82a72962c97e6aa13da15e344c2c13c824591ecad089b1bc61c5b",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1595,
+      "imports": [
+        "import ast, json, pathlib",
+        "from collections import Counter, deque",
+        "from typing import Any"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/mask_endpoint_checks.json",
+      "bytes": 6107,
+      "sha256": "e605dbbb555d71c1fb94666c195262c43c944141f28dc1d668f0c47266f995e8",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/ARC3境界.py",
+      "bytes": 9941,
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1670,
+      "imports": [
+        "from __future__ import annotations",
+        "from dataclasses import dataclass, field",
+        "from hashlib import sha256",
+        "import json",
+        "from typing import Any, Mapping"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/__init__.py",
+      "bytes": 43,
+      "sha256": "62eed0265c7a5afe9e26b840dd7d9e2f6cbb39aba60bf0c5da136ef3ca9219ff",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 3,
+      "imports": []
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/予測.py",
+      "bytes": 6578,
+      "sha256": "2f0939f24027ebe55c8659ca53ab2d29fbba8cb56ba66e8be7a60f19a671a6a7",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1940,
+      "imports": [
+        "import json",
+        "from collections import defaultdict, Counter",
+        "from .知覚 import ROOT, read, classify",
+        "from .関係 import *",
+        "from .手順 import DIRECTIONS, solve",
+        "from .固定文法 import クリック支持相対位置"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/受理.py",
+      "bytes": 2868,
+      "sha256": "db621c383cc7e29b1876b1e74c5b2e651794b2b0194d028111316fa3ce486009",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 989,
+      "imports": [
+        "from .関係 import query"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/図式観測.py",
+      "bytes": 1295,
+      "sha256": "417269f9e94ec548c7f727c3e263efe952bbae21cf601021bcfd4d89b1a786d2",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 385,
+      "imports": [
+        "from collections import deque"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/固定文法.py",
+      "bytes": 27046,
+      "sha256": "23bd3a1a8caa2e5b7abfece2b98cae83788db4743d5786af2d4c2b0b57495bc5",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 10033,
+      "imports": [],
+      "fixed_grammar_assignments": [
+        "配置文法",
+        "受理文法",
+        "クリック支持相対位置"
+      ],
+      "device_template_keys": 12
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/応答.py",
+      "bytes": 3627,
+      "sha256": "24541b0838ae89047b54a47634ad2c2a48bfefd892e3fea82e8fa220a7ff9ddb",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 930,
+      "imports": [
+        "from .知覚 import read",
+        "from .予測 import predict",
+        "from 接続.共通観測経路 import 作用応答を相別に記録する"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/手順.py",
+      "bytes": 5862,
+      "sha256": "7a2c322c7845df1a4f00a9ba869ae68c18f40d72c838254601a3a8ad822ff662",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1779,
+      "imports": [
+        "from collections import deque",
+        "from .知覚 import read",
+        "from .関係 import query, COPY, X, Y, MASK, MX, MY, TURN, TX, TY, membership, sig"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/知覚.py",
+      "bytes": 4081,
+      "sha256": "24cf101fe67f8dd15c928751c8b63e8e79d33dadecd39655bf7745ec1154c950",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1800,
+      "imports": [
+        "import sys",
+        "from pathlib import Path",
+        "from collections import Counter, deque",
+        "from 接続.ARC3境界 import _盤面列",
+        "from 接続.図式観測 import 成分群"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/origins/関係.py",
+      "bytes": 1224,
+      "sha256": "29860d6afbd34cef8a835fbc5b7fab815146e8f717f104a4e2b3983fa72d3349",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 316,
+      "imports": [
+        "import json, time, resource, hashlib",
+        "from collections import defaultdict, deque",
+        "from dataclasses import asdict",
+        "from .知覚 import ROOT, BASE",
+        "from hds学習系統 import HDS学習系統, 外部入力"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/MANIFEST.json",
+      "bytes": 3028,
+      "sha256": "fa31817a9a46e2f1110a16a0e20719fe5658f3db0094887c434dd897afc3b54c",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/README.md",
+      "bytes": 7954,
+      "sha256": "35efc017cf9ce67dcee73221e734d8de90737c2e1834771cf814180c80c3bbe7",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/TEACHER_PLAN.md",
+      "bytes": 6428,
+      "sha256": "fd957d6bec29c44f1577447f53c36b741c7747ce087c19f3c849938cc8881cd4",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/all_legal_candidates.jsonl.gz",
+      "bytes": 1643401,
+      "sha256": "c40cdeb6741576e01c449aa44faaf1f21f7ec4bd961ef950e74e1bb40fbcabb7",
+      "pin_verified": true,
+      "inspection": "full streaming UTF-8 JSONL; semantic/order checks below"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/all_phases.json",
+      "bytes": 1356462,
+      "sha256": "9aa345771798f362d83a8d9e08288f135dc52b8b2ceb5a5e0ba2191e64b9cfa4",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/bridge.py",
+      "bytes": 3844,
+      "sha256": "bad861202d33c498a05195b8a268e7c40cdbf9b59cc23ce897886cab5a489172",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 851,
+      "imports": [
+        "import ast, json, pathlib",
+        "from collections import Counter, deque",
+        "from typing import Any"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/invalid_scope_probes.json",
+      "bytes": 2526,
+      "sha256": "1fe6dc4f04645beaf91a9cea02ef9c826ddd2a0e7c6683aad17d356d1b029f69",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/test_bridge.py",
+      "bytes": 3627,
+      "sha256": "3f311107c27084e1a7b0171b40eff5125262e91a9f178a5357a718ac51f9b2ec",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 965,
+      "imports": [
+        "import resource",
+        "import json, gzip, pathlib, lzma, sys, hashlib, time, traceback",
+        "from bridge import phase, candidate, legal_candidates, sig",
+        "from inspect_state import decode"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/test_result.json",
+      "bytes": 305,
+      "sha256": "c8344f2ce2c8d787152191d39253daf5f30a067410bc7d9299c691ec6f87f83f",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/test_run01.log",
+      "bytes": 280,
+      "sha256": "1f09b5430201da135c2710b9ba77454cd41f805ae18a4388026300eb18702c2c",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_red_guard_v2/MANIFEST_v2.json",
+      "bytes": 5860,
+      "sha256": "eb2384d4fc4c4d4a6c0ee25c739df8f9abbfd4ce0237715d0664b536df104db1",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_red_guard_v2/bridge.py",
+      "bytes": 4863,
+      "sha256": "d67f752bd67548940134d8f768d166905bb75044032c63e2903ced44466df224",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1096,
+      "imports": [
+        "import ast, json, pathlib",
+        "from collections import Counter, deque",
+        "from typing import Any"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_red_guard_v2/test_result.json",
+      "bytes": 305,
+      "sha256": "fa6587c89798f64e9a552a42f7ff5a55d528044e87bdb614245a433584ec8649",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/reviewer_attribution_join.json",
+      "bytes": 428,
+      "sha256": "db6918b4a979d78de932cd0d7e29f4f13a4dfc8c2edbd5a1f2e3b9b4dc98451b",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/reviewer_pixel_attribution.json",
+      "bytes": 117622,
+      "sha256": "b4e306c08f2c213210c44eaf6b350caf1452b5ee80a6407207249715d6f59fd7",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/scope_attribution_run_v2.log",
+      "bytes": 1206,
+      "sha256": "11f43604cdee6c7058cdb04df3cb9141084bee4b359619b7ddeca5050379ec78",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/scope_attribution_run_v3.log",
+      "bytes": 1206,
+      "sha256": "11f43604cdee6c7058cdb04df3cb9141084bee4b359619b7ddeca5050379ec78",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/scope_regression_v2.json",
+      "bytes": 7562,
+      "sha256": "8a0c6af374805c7a4ea137f7890edfe2d86a515852e239e6b60eae087cb49a23",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/test_bridge.py",
+      "bytes": 3627,
+      "sha256": "3f311107c27084e1a7b0171b40eff5125262e91a9f178a5357a718ac51f9b2ec",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 965,
+      "imports": [
+        "import resource",
+        "import json, gzip, pathlib, lzma, sys, hashlib, time, traceback",
+        "from bridge import phase, candidate, legal_candidates, sig",
+        "from inspect_state import decode"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/test_result.json",
+      "bytes": 305,
+      "sha256": "495659523f9fa5cf79e3126003538fb509c87d2976cadd232ca82185bc0f4c06",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/test_run01.log",
+      "bytes": 280,
+      "sha256": "1f09b5430201da135c2710b9ba77454cd41f805ae18a4388026300eb18702c2c",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/test_run02.log",
+      "bytes": 280,
+      "sha256": "5a3df39a56844198acf8225d2a0df62ae729de3ffa489b977d7baaecd1dcb851",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/test_run03.log",
+      "bytes": 280,
+      "sha256": "4c9a2138e95744cbffc72f0b8e75fcac67bb0264e6af3f11afd86b5b30cb90e4",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/test_scope_and_attribution.py",
+      "bytes": 4283,
+      "sha256": "7f2206601c002c2f2b9cfb938f46d689a02ffd82c84f5222712867fe8eb1f5d4",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1110,
+      "imports": [
+        "import resource",
+        "import pathlib, json, gzip, lzma, sys, hashlib, collections",
+        "from bridge import phase, candidate",
+        "from inspect_state import decode"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/MANIFEST_v3.json",
+      "bytes": 7323,
+      "sha256": "d4ced7691d6709775e55d0f2b84b724c7bb59fabf799b4a951105f92144371e9",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/FINAL_RECHECK_v3.md",
+      "bytes": 3445,
+      "sha256": "b489a0bcd6da3593773c711f3c70f36c984a8003b9e465a048de131649b0056b",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/MANIFEST.json",
+      "bytes": 1265,
+      "sha256": "22fc5119d01cc56d375d14d94e3ca18cacffb2e55174ace7afa541db2facfd60",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/README.md",
+      "bytes": 6448,
+      "sha256": "c85753c68890fa255104762c191d9a59da6f87ac69752aedcd2991167f6e0f39",
+      "pin_verified": true,
+      "inspection": "complete UTF-8 text scan and contextual chronology review"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/additional_probes_v3.json",
+      "bytes": 2726,
+      "sha256": "aa57b93ddf62eb1d1916d3b1289ad6532dd5f980cdc02e93ec74f2eb819f5a56",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/pixel_attribution.json",
+      "bytes": 117622,
+      "sha256": "b4e306c08f2c213210c44eaf6b350caf1452b5ee80a6407207249715d6f59fd7",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/pixel_attribution_v3.json",
+      "bytes": 117622,
+      "sha256": "b4e306c08f2c213210c44eaf6b350caf1452b5ee80a6407207249715d6f59fd7",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/prefix/MANIFEST.json",
+      "bytes": 3028,
+      "sha256": "fa31817a9a46e2f1110a16a0e20719fe5658f3db0094887c434dd897afc3b54c",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/prefix/bridge.py",
+      "bytes": 3844,
+      "sha256": "bad861202d33c498a05195b8a268e7c40cdbf9b59cc23ce897886cab5a489172",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 851,
+      "imports": [
+        "import ast, json, pathlib",
+        "from collections import Counter, deque",
+        "from typing import Any"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/prefix/review_initial.py",
+      "bytes": 5263,
+      "sha256": "5f6a862087287a493d22f6ed800ccdc44f3e59d4f5fb243903413e3cacee959b",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1413,
+      "imports": [
+        "import resource",
+        "import pathlib, json, gzip, hashlib, collections, tarfile"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/prefix/reviewed_v3_MANIFEST_v3.json",
+      "bytes": 7323,
+      "sha256": "d4ced7691d6709775e55d0f2b84b724c7bb59fabf799b4a951105f92144371e9",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/prefix/reviewed_v3_bridge.py",
+      "bytes": 6112,
+      "sha256": "72b9c900c4e82a72962c97e6aa13da15e344c2c13c824591ecad089b1bc61c5b",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1595,
+      "imports": [
+        "import ast, json, pathlib",
+        "from collections import Counter, deque",
+        "from typing import Any"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/prefix/test_bridge.py",
+      "bytes": 3627,
+      "sha256": "3f311107c27084e1a7b0171b40eff5125262e91a9f178a5357a718ac51f9b2ec",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 965,
+      "imports": [
+        "import resource",
+        "import json, gzip, pathlib, lzma, sys, hashlib, time, traceback",
+        "from bridge import phase, candidate, legal_candidates, sig",
+        "from inspect_state import decode"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/probe_v3.py",
+      "bytes": 2496,
+      "sha256": "94c2b933e3f5a03bbe9c721303888dc02e3bc911c89d013bebd073bed0af7bd2",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 768,
+      "imports": [
+        "import resource",
+        "import pathlib, json, gzip, hashlib, copy"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/review.py",
+      "bytes": 5285,
+      "sha256": "d64e45db570a95843741641ee0db87314308be2e9f39b80b02ebd1d51a103c32",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1425,
+      "imports": [
+        "import resource",
+        "import pathlib, json, gzip, hashlib, collections, tarfile"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/review_result.json",
+      "bytes": 3484,
+      "sha256": "b47f68bf62c97e6683ebdfddbf39f646ea9453fc7ace4a4ad593becb9307ba63",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/review_result_v3.json",
+      "bytes": 2634,
+      "sha256": "87b6685e95607b54c0761c7c1d63cfa90fd811b12aae29628bdd4bd95b5d5d21",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/review_v3.py",
+      "bytes": 5294,
+      "sha256": "793289a9ddf2dc3185540922a636c36fbfad72f973223c47e1f40655c4955d8c",
+      "pin_verified": true,
+      "inspection": "complete inert Python AST; no import, compile or execution of payload",
+      "ast_nodes": 1425,
+      "imports": [
+        "import resource",
+        "import pathlib, json, gzip, hashlib, collections, tarfile"
+      ]
+    },
+    {
+      "archive_path": "arc-goal6-bridge-review-20261019/FINAL_MANIFEST_v3.json",
+      "bytes": 2671,
+      "sha256": "01bfa23baa0a8137f0b271ba5257c5f00c44c18d0ac3f7b66c567e095e8b73ff",
+      "pin_verified": true,
+      "inspection": "complete JSON parse and recursive scalar/schema inspection"
+    }
+  ],
+  "body_inspection": {
+    "python_ast_nodes": 34869,
+    "recursive_scalar_types": {
+      "dict": 3695193,
+      "list": 22295,
+      "str": 2781704,
+      "int": 4702580,
+      "bool": 938441,
+      "NoneType": 926072,
+      "float": 3
+    },
+    "string_occurrences_scanned": 14835877,
+    "credential_findings": [],
+    "opaque_findings": [],
+    "classification": "Own diagnostic/source/test/review text, fixed visible structural-prior literals, and public-observation-derived projections and attributions. No opaque official/game/SDK body, native state, binary executable or credential found. Imported API names in archived source are inert interfaces, not included official package bodies.",
+    "provenance_limit": "Historical archived-origin byte joins are retained in review reports; this allowlist-only admission does not reread excluded external raw witnesses or archives.",
+    "maximum_whole_text_or_scalar_length": 1832951,
+    "maximum_nonstream_JSON_or_AST_scalar_length": 127,
+    "nonstream_JSON_files_duplicate_key_checked": 27,
+    "candidate_JSONL_duplicate_key_checked_records": 459312,
+    "pre_fix_JSONL_duplicate_key_check_basis": "Both complete uncompressed streams have identical SHA-256; current stream duplicate-key check therefore applies to the byte-identical preserved stream."
+  },
+  "phase_checks": {
+    "phases": 112,
+    "source_rows": 12,
+    "measured": 35,
+    "unknown": 77,
+    "candidate_proposals": 21,
+    "phase_bytes_preserved": true,
+    "status_counts": {
+      "NOT_FINISHED": 112
+    },
+    "retained_parse_errors": [
+      {
+        "type": "ValueError",
+        "message": "器具遮蔽/対象正方形不確定",
+        "count": 77
+      }
+    ],
+    "all_measured_target_mask_predictions_and_tuple_projections_verified": true
+  },
+  "candidate_streams": [
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/all_legal_candidates.jsonl.gz",
+      "records": 459312,
+      "uncompressed_bytes": 130800473,
+      "uncompressed_sha256": "a125fecde927e6b18d27f61e7ba70a14d7569a787462d3effd807414cfa13b8a",
+      "max_line_bytes": 509,
+      "phase_refs": 112,
+      "query_proposals": 21,
+      "all_HOLD": true,
+      "execution_permissions": 0,
+      "all_exact_ordered_legal_candidates": true,
+      "all_roles_and_diagnostic_proposals_match_public_scene_projection": true,
+      "schema_keys": [
+        "action",
+        "execution_permission",
+        "goal6_query_proposal",
+        "phase_ref",
+        "reason",
+        "role_hypothesis",
+        "state"
+      ],
+      "gzip_CRC_and_EOF_verified": true,
+      "compressed_original_pin_verified": true
+    },
+    {
+      "archive_path": "arc-goal6-action-bridge-20261019/pre_fix_v1/all_legal_candidates.jsonl.gz",
+      "records": 459312,
+      "uncompressed_bytes": 130800473,
+      "uncompressed_sha256": "a125fecde927e6b18d27f61e7ba70a14d7569a787462d3effd807414cfa13b8a",
+      "max_line_bytes": 509,
+      "phase_refs": 112,
+      "query_proposals": 21,
+      "all_HOLD": true,
+      "execution_permissions": 0,
+      "all_exact_ordered_legal_candidates": true,
+      "all_roles_and_diagnostic_proposals_match_public_scene_projection": true,
+      "schema_keys": [
+        "action",
+        "execution_permission",
+        "goal6_query_proposal",
+        "phase_ref",
+        "reason",
+        "role_hypothesis",
+        "state"
+      ],
+      "gzip_CRC_and_EOF_verified": true,
+      "compressed_original_pin_verified": true
+    }
+  ],
+  "attribution_checks": {
+    "rows": 600,
+    "all_after_phase_cell_views": 9200,
+    "counts": {
+      "observed_change_to_tool": 210,
+      "observed_prior_preserved": 240,
+      "unidentifiable_prior_equals_tool": 150
+    },
+    "cases": [
+      {
+        "case": 0,
+        "counts": {
+          "observed_change_to_tool": 50,
+          "observed_prior_preserved": 50
+        },
+        "independent_historical_actions": 1
+      },
+      {
+        "case": 1,
+        "counts": {
+          "observed_prior_preserved": 45,
+          "observed_change_to_tool": 55
+        },
+        "independent_historical_actions": 1
+      },
+      {
+        "case": 2,
+        "counts": {
+          "observed_prior_preserved": 50,
+          "observed_change_to_tool": 40,
+          "unidentifiable_prior_equals_tool": 10
+        },
+        "independent_historical_actions": 1
+      },
+      {
+        "case": 3,
+        "counts": {
+          "unidentifiable_prior_equals_tool": 100
+        },
+        "independent_historical_actions": 1
+      },
+      {
+        "case": 4,
+        "counts": {
+          "observed_change_to_tool": 50,
+          "observed_prior_preserved": 50
+        },
+        "independent_historical_actions": 1
+      },
+      {
+        "case": 5,
+        "counts": {
+          "observed_prior_preserved": 45,
+          "observed_change_to_tool": 15,
+          "unidentifiable_prior_equals_tool": 40
+        },
+        "independent_historical_actions": 1
+      }
+    ],
+    "case3_all100_unidentifiable": true,
+    "reviewer_copies_and_full_phase_values_match": true,
+    "independent_historical_actions": 6,
+    "new_independent_actions": 0,
+    "all_after_phase_label_counts": {
+      "observed_prior_preserved": 1380,
+      "unknown_phase": 6600,
+      "observed_change_to_tool": 420,
+      "unidentifiable_prior_equals_tool": 600,
+      "new_problem_unbound": 200
+    }
+  },
+  "chronology_preserved": [
+    "v1 invalid Action5 availability/argument proposals retained while permission remained false",
+    "Initial reviewer tuple/list assertion harness failure retained as exact prefix/review_initial.py source plus README narrative. No original first-failure traceback/stdout file is included in this closed payload.",
+    "v2 exact scope checks and 15 negative probes retained; pre-fix source/results/manifests/candidates preserved",
+    "v3 rejects multiple plausible/equal-size red instruments; pre-red-guard v2 preserved",
+    "Final v3 report supersedes unresolved-fix status only; original adverse findings remain"
+  ],
+  "limitations": [
+    "All candidates remain HOLD; no execution permission, current fresh packet authority or performance gain is established.",
+    "Masks, Action-number roles, 12 visible device templates and goal-reference equality are fixed priors/hypotheses, not newly learned causal rules.",
+    "600 cells are correlated views of six historical actions; 150 prior-equals-tool cells and all case3 cells do not identify overwrite versus no-op.",
+    "Endpoint phases13/14 agreement does not establish continuous/all-phase preservation; unknown intermediate phases and changed-problem phase15 remain separate.",
+    "COPY/MASK/TURN historical learned-state/source/support closure remains unverified, not absent everywhere.",
+    "Source/probe behavior is inspected and historical results checked; archived source/tests were not rerun for this admission.",
+    "Older manifests describe historical versions and are intentionally not asserted against superseding live file bodies.",
+    "This report admits inert evidence content only and supplies no upload, runtime, fresh Action, Query or Teach authorization.",
+    "The initial review harness failure lacks its original traceback/stdout in this payload; only exact pre-fix runner and narrative survive here. Do not claim complete raw failure-output retention."
+  ],
+  "excluded_unread": [
+    {
+      "path": "/workspace/scratch/a94ff513b3af/arc-goal6-action-bridge-20261019/__pycache__/bridge.cpython-312.pyc",
+      "bytes": 11772,
+      "reason": "Unlisted derived bytecode; source included; not read or executed"
+    }
+  ],
+  "resource_use": {
+    "address_space_limit_bytes": 268435456,
+    "peak_RSS_KiB": 32908,
+    "bulk_temp_files": 0,
+    "only_written_file": "/workspace/scratch/a94ff513b3af/arc-preservation-recovery-20261019/publication_goal6_bridge/payload_admission.json",
+    "output_limit_bytes": 204800
+  },
+  "errors": [],
+  "admission_validator_corrections": [
+    {
+      "issue": "Independent admission comparator initially used different_problem_binding instead of the payload schema name new_problem_unbound for changed-problem phase15.",
+      "initial_false_mismatch_count": 200,
+      "initial_report_sha256": "4918b6b0b0e8d9b6072c5cec2ec3b5fb4333fd291c31a2eabb5100d2c824d243",
+      "initial_errors": [
+        "all after-phase attribution (4, 0, 0)",
+        "all after-phase attribution (4, 1, 0)",
+        "all after-phase attribution (4, 2, 0)",
+        "all after-phase attribution (4, 3, 0)",
+        "all after-phase attribution (4, 4, 0)",
+        "all after-phase attribution (4, 5, 0)",
+        "all after-phase attribution (4, 6, 0)",
+        "all after-phase attribution (4, 7, 0)",
+        "all after-phase attribution (4, 8, 0)",
+        "all after-phase attribution (4, 9, 0)",
+        "all after-phase attribution (4, 0, 1)",
+        "all after-phase attribution (4, 1, 1)",
+        "all after-phase attribution (4, 2, 1)",
+        "all after-phase attribution (4, 3, 1)",
+        "all after-phase attribution (4, 4, 1)",
+        "all after-phase attribution (4, 5, 1)",
+        "all after-phase attribution (4, 6, 1)",
+        "all after-phase attribution (4, 7, 1)",
+        "all after-phase attribution (4, 8, 1)",
+        "all after-phase attribution (4, 9, 1)",
+        "all after-phase attribution (4, 0, 2)",
+        "all after-phase attribution (4, 1, 2)",
+        "all after-phase attribution (4, 2, 2)",
+        "all after-phase attribution (4, 3, 2)",
+        "all after-phase attribution (4, 4, 2)",
+        "all after-phase attribution (4, 5, 2)",
+        "all after-phase attribution (4, 6, 2)",
+        "all after-phase attribution (4, 7, 2)",
+        "all after-phase attribution (4, 8, 2)",
+        "all after-phase attribution (4, 9, 2)",
+        "all after-phase attribution (4, 0, 3)",
+        "all after-phase attribution (4, 1, 3)",
+        "all after-phase attribution (4, 2, 3)",
+        "all after-phase attribution (4, 3, 3)",
+        "all after-phase attribution (4, 4, 3)",
+        "all after-phase attribution (4, 5, 3)",
+        "all after-phase attribution (4, 6, 3)",
+        "all after-phase attribution (4, 7, 3)",
+        "all after-phase attribution (4, 8, 3)",
+        "all after-phase attribution (4, 9, 3)",
+        "all after-phase attribution (4, 0, 4)",
+        "all after-phase attribution (4, 1, 4)",
+        "all after-phase attribution (4, 2, 4)",
+        "all after-phase attribution (4, 3, 4)",
+        "all after-phase attribution (4, 4, 4)",
+        "all after-phase attribution (4, 5, 4)",
+        "all after-phase attribution (4, 6, 4)",
+        "all after-phase attribution (4, 7, 4)",
+        "all after-phase attribution (4, 8, 4)",
+        "all after-phase attribution (4, 9, 4)",
+        "all after-phase attribution (4, 0, 5)",
+        "all after-phase attribution (4, 1, 5)",
+        "all after-phase attribution (4, 2, 5)",
+        "all after-phase attribution (4, 3, 5)",
+        "all after-phase attribution (4, 4, 5)",
+        "all after-phase attribution (4, 5, 5)",
+        "all after-phase attribution (4, 6, 5)",
+        "all after-phase attribution (4, 7, 5)",
+        "all after-phase attribution (4, 8, 5)",
+        "all after-phase attribution (4, 9, 5)",
+        "all after-phase attribution (4, 0, 6)",
+        "all after-phase attribution (4, 1, 6)",
+        "all after-phase attribution (4, 2, 6)",
+        "all after-phase attribution (4, 3, 6)",
+        "all after-phase attribution (4, 4, 6)",
+        "all after-phase attribution (4, 5, 6)",
+        "all after-phase attribution (4, 6, 6)",
+        "all after-phase attribution (4, 7, 6)",
+        "all after-phase attribution (4, 8, 6)",
+        "all after-phase attribution (4, 9, 6)",
+        "all after-phase attribution (4, 0, 7)",
+        "all after-phase attribution (4, 1, 7)",
+        "all after-phase attribution (4, 2, 7)",
+        "all after-phase attribution (4, 3, 7)",
+        "all after-phase attribution (4, 4, 7)",
+        "all after-phase attribution (4, 5, 7)",
+        "all after-phase attribution (4, 6, 7)",
+        "all after-phase attribution (4, 7, 7)",
+        "all after-phase attribution (4, 8, 7)",
+        "all after-phase attribution (4, 9, 7)",
+        "all after-phase attribution (4, 0, 8)",
+        "all after-phase attribution (4, 1, 8)",
+        "all after-phase attribution (4, 2, 8)",
+        "all after-phase attribution (4, 3, 8)",
+        "all after-phase attribution (4, 4, 8)",
+        "all after-phase attribution (4, 5, 8)",
+        "all after-phase attribution (4, 6, 8)",
+        "all after-phase attribution (4, 7, 8)",
+        "all after-phase attribution (4, 8, 8)",
+        "all after-phase attribution (4, 9, 8)",
+        "all after-phase attribution (4, 0, 9)",
+        "all after-phase attribution (4, 1, 9)",
+        "all after-phase attribution (4, 2, 9)",
+        "all after-phase attribution (4, 3, 9)",
+        "all after-phase attribution (4, 4, 9)",
+        "all after-phase attribution (4, 5, 9)",
+        "all after-phase attribution (4, 6, 9)",
+        "all after-phase attribution (4, 7, 9)",
+        "all after-phase attribution (4, 8, 9)",
+        "all after-phase attribution (4, 9, 9)",
+        "all after-phase attribution (5, 0, 0)",
+        "all after-phase attribution (5, 1, 0)",
+        "all after-phase attribution (5, 2, 0)",
+        "all after-phase attribution (5, 3, 0)",
+        "all after-phase attribution (5, 4, 0)",
+        "all after-phase attribution (5, 5, 0)",
+        "all after-phase attribution (5, 6, 0)",
+        "all after-phase attribution (5, 7, 0)",
+        "all after-phase attribution (5, 8, 0)",
+        "all after-phase attribution (5, 9, 0)",
+        "all after-phase attribution (5, 0, 1)",
+        "all after-phase attribution (5, 1, 1)",
+        "all after-phase attribution (5, 2, 1)",
+        "all after-phase attribution (5, 3, 1)",
+        "all after-phase attribution (5, 4, 1)",
+        "all after-phase attribution (5, 5, 1)",
+        "all after-phase attribution (5, 6, 1)",
+        "all after-phase attribution (5, 7, 1)",
+        "all after-phase attribution (5, 8, 1)",
+        "all after-phase attribution (5, 9, 1)",
+        "all after-phase attribution (5, 0, 2)",
+        "all after-phase attribution (5, 1, 2)",
+        "all after-phase attribution (5, 2, 2)",
+        "all after-phase attribution (5, 3, 2)",
+        "all after-phase attribution (5, 4, 2)",
+        "all after-phase attribution (5, 5, 2)",
+        "all after-phase attribution (5, 6, 2)",
+        "all after-phase attribution (5, 7, 2)",
+        "all after-phase attribution (5, 8, 2)",
+        "all after-phase attribution (5, 9, 2)",
+        "all after-phase attribution (5, 0, 3)",
+        "all after-phase attribution (5, 1, 3)",
+        "all after-phase attribution (5, 2, 3)",
+        "all after-phase attribution (5, 3, 3)",
+        "all after-phase attribution (5, 4, 3)",
+        "all after-phase attribution (5, 5, 3)",
+        "all after-phase attribution (5, 6, 3)",
+        "all after-phase attribution (5, 7, 3)",
+        "all after-phase attribution (5, 8, 3)",
+        "all after-phase attribution (5, 9, 3)",
+        "all after-phase attribution (5, 0, 4)",
+        "all after-phase attribution (5, 1, 4)",
+        "all after-phase attribution (5, 2, 4)",
+        "all after-phase attribution (5, 3, 4)",
+        "all after-phase attribution (5, 4, 4)",
+        "all after-phase attribution (5, 5, 4)",
+        "all after-phase attribution (5, 6, 4)",
+        "all after-phase attribution (5, 7, 4)",
+        "all after-phase attribution (5, 8, 4)",
+        "all after-phase attribution (5, 9, 4)",
+        "all after-phase attribution (5, 0, 5)",
+        "all after-phase attribution (5, 1, 5)",
+        "all after-phase attribution (5, 2, 5)",
+        "all after-phase attribution (5, 3, 5)",
+        "all after-phase attribution (5, 4, 5)",
+        "all after-phase attribution (5, 5, 5)",
+        "all after-phase attribution (5, 6, 5)",
+        "all after-phase attribution (5, 7, 5)",
+        "all after-phase attribution (5, 8, 5)",
+        "all after-phase attribution (5, 9, 5)",
+        "all after-phase attribution (5, 0, 6)",
+        "all after-phase attribution (5, 1, 6)",
+        "all after-phase attribution (5, 2, 6)",
+        "all after-phase attribution (5, 3, 6)",
+        "all after-phase attribution (5, 4, 6)",
+        "all after-phase attribution (5, 5, 6)",
+        "all after-phase attribution (5, 6, 6)",
+        "all after-phase attribution (5, 7, 6)",
+        "all after-phase attribution (5, 8, 6)",
+        "all after-phase attribution (5, 9, 6)",
+        "all after-phase attribution (5, 0, 7)",
+        "all after-phase attribution (5, 1, 7)",
+        "all after-phase attribution (5, 2, 7)",
+        "all after-phase attribution (5, 3, 7)",
+        "all after-phase attribution (5, 4, 7)",
+        "all after-phase attribution (5, 5, 7)",
+        "all after-phase attribution (5, 6, 7)",
+        "all after-phase attribution (5, 7, 7)",
+        "all after-phase attribution (5, 8, 7)",
+        "all after-phase attribution (5, 9, 7)",
+        "all after-phase attribution (5, 0, 8)",
+        "all after-phase attribution (5, 1, 8)",
+        "all after-phase attribution (5, 2, 8)",
+        "all after-phase attribution (5, 3, 8)",
+        "all after-phase attribution (5, 4, 8)",
+        "all after-phase attribution (5, 5, 8)",
+        "all after-phase attribution (5, 6, 8)",
+        "all after-phase attribution (5, 7, 8)",
+        "all after-phase attribution (5, 8, 8)",
+        "all after-phase attribution (5, 9, 8)",
+        "all after-phase attribution (5, 0, 9)",
+        "all after-phase attribution (5, 1, 9)",
+        "all after-phase attribution (5, 2, 9)",
+        "all after-phase attribution (5, 3, 9)",
+        "all after-phase attribution (5, 4, 9)",
+        "all after-phase attribution (5, 5, 9)",
+        "all after-phase attribution (5, 6, 9)",
+        "all after-phase attribution (5, 7, 9)",
+        "all after-phase attribution (5, 8, 9)",
+        "all after-phase attribution (5, 9, 9)"
+      ],
+      "resolution": "Read preserved attribution-producer AST/text contract and reran all600 target rows / every after phase using exact retained vocabulary. No source, evidence or probe result was changed.",
+      "rechecked_phase_cell_views": 9200,
+      "remaining_mismatches": 0,
+      "artifact_retention_limit": "The original inline admission-validator source, first-run stdout, and initial BLOCKED report bytes were not separately persisted. This final report retains the actual200 mismatch labels and initial report hash, plus the corrected comparison result; it does not claim complete original audit-failure artifacts.",
+      "all64_payload_hashes_unchanged_after_correction": true
+    }
+  ],
+  "final_pin_recheck_utc": "2026-10-19T03:16:29.096295+00:00"
+}

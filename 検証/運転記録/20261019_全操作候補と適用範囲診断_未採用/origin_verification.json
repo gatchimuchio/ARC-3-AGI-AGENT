@@ -1,0 +1,200 @@
+{
+  "schema": "arc3-goal6-bridge-origin-verification-v1",
+  "base_main": "93b9d0def82eddcd86626bb64ef06350b245d81d",
+  "archive_dependencies": [
+    {
+      "repository_path": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "bytes": 635597,
+      "sha256": "52bd271ff10bf5e12fdfff6205215f94240a85e7e90cda02444b633545118563",
+      "git_blob": "1c7642e722539c1addf6ca9c9ea1ed9b22024632"
+    },
+    {
+      "repository_path": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "bytes": 830527,
+      "sha256": "b24207bfdf7c2a6e319e03a0e2dd71f91896e6ef83d5f5d4d0ea08c8a8b73901",
+      "git_blob": "71d0d73f29422cb2dfba114f97ef2d5d07232dd2"
+    }
+  ],
+  "exact_archived_own_sources": [
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/ARC3境界.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/ARC3境界.py",
+      "bytes": 9941,
+      "sha256": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/図式観測.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/図式観測.py",
+      "bytes": 1295,
+      "sha256": "417269f9e94ec548c7f727c3e263efe952bbae21cf601021bcfd4d89b1a786d2"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/__init__.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/配色内部/__init__.py",
+      "bytes": 43,
+      "sha256": "62eed0265c7a5afe9e26b840dd7d9e2f6cbb39aba60bf0c5da136ef3ca9219ff"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/予測.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/配色内部/予測.py",
+      "bytes": 6578,
+      "sha256": "2f0939f24027ebe55c8659ca53ab2d29fbba8cb56ba66e8be7a60f19a671a6a7"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/受理.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/配色内部/受理.py",
+      "bytes": 2868,
+      "sha256": "db621c383cc7e29b1876b1e74c5b2e651794b2b0194d028111316fa3ce486009"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/固定文法.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/配色内部/固定文法.py",
+      "bytes": 27046,
+      "sha256": "23bd3a1a8caa2e5b7abfece2b98cae83788db4743d5786af2d4c2b0b57495bc5"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/応答.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/配色内部/応答.py",
+      "bytes": 3627,
+      "sha256": "24541b0838ae89047b54a47634ad2c2a48bfefd892e3fea82e8fa220a7ff9ddb"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/手順.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/配色内部/手順.py",
+      "bytes": 5862,
+      "sha256": "7a2c322c7845df1a4f00a9ba869ae68c18f40d72c838254601a3a8ad822ff662"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/知覚.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/配色内部/知覚.py",
+      "bytes": 4081,
+      "sha256": "24cf101fe67f8dd15c928751c8b63e8e79d33dadecd39655bf7745ec1154c950"
+    },
+    {
+      "current_archive_member": "arc-goal6-action-bridge-20261019/origins/関係.py",
+      "repository_archive": "検証/運転記録/20261017_六教師学習と照会原証拠/goal6-checkpoint.tar.gz",
+      "original_archive_member": "arc-recovery-main-20261013/repository/接続/配色内部/関係.py",
+      "bytes": 1224,
+      "sha256": "29860d6afbd34cef8a835fbc5b7fab815146e8f717f104a4e2b3983fa72d3349"
+    }
+  ],
+  "existing_public_input_members": [
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/pinned/arc-goal-teacher-recovered-20261013/producer/goal6_producer_0ba625e5dc36425ed60002dc6462cc62.typed.json.xz",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/pinned/arc-goal-teacher-recovered-20261013/producer/goal6_producer_0ba625e5dc36425ed60002dc6462cc62.typed.json.xz",
+      "bytes": 47744,
+      "sha256": "510d3b58a2b6c21a14aeddfca765133447b6f50d55efd534d140f944a8dced54",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source0_row65.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source0_row65.json",
+      "bytes": 13058,
+      "sha256": "93416076b0721e8f991ab27539c8fc5618fd3d07d2b5990af3d5d22bf6cd7a50",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source0_row66.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source0_row66.json",
+      "bytes": 190611,
+      "sha256": "54168b6069a734ee10433a53d616aad3d7efa8254ba411cdc730783eccb5166b",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source0_row74.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source0_row74.json",
+      "bytes": 13040,
+      "sha256": "36706df3be2402dd11151ac7a24b5a5d7c9fd78ec8105991f3f7894863c6b430",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source0_row75.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source0_row75.json",
+      "bytes": 190904,
+      "sha256": "7bc048440ad8f540798255109dbacbb7a33a0697f8c4a3f34eb14d557675fbc4",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source0_row92.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source0_row92.json",
+      "bytes": 13069,
+      "sha256": "80dd1e294e100ac858ce6603e70382868f8e983ca0ed259972b69a5f08c7061a",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source0_row93.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source0_row93.json",
+      "bytes": 190921,
+      "sha256": "53415298906d9fa45363a84cc99d6e9a00c0db2db976d3b1127b5a2eff2a7c6c",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source2_row141.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source2_row141.json",
+      "bytes": 13064,
+      "sha256": "5a84c9ccebeec8818fa564be55be4f3de0752a8572522b52db67d859dcd6f314",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source2_row142.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source2_row142.json",
+      "bytes": 203306,
+      "sha256": "702cbd3ab26bcc5e434a40e755242026a90ebcf9f5930c6c2eaa031c939f19e8",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source2_row23.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source2_row23.json",
+      "bytes": 189761,
+      "sha256": "5ea84a327308babd98f99d40e3380d0b6ec8ed8e92230ce1c81c461aa2e6c415",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source2_row24.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source2_row24.json",
+      "bytes": 190011,
+      "sha256": "ae4a86f6c0071cf98dac245797c92b1ca9a9ba60008e7071ec885627504227dc",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source2_row60.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source2_row60.json",
+      "bytes": 12923,
+      "sha256": "02f301ff57e7023bad725919b842a373552ffe421e83e0db934109ef9ad1776c",
+      "included_again": false
+    },
+    {
+      "source": "/workspace/scratch/a94ff513b3af/arc-teacher-contrasts-20261019/witnesses/source2_row61.json",
+      "repository_archive": "検証/運転記録/20261019_公開記録に接合した教師対照_歴史資料/arc-teacher-contrasts-checkpoint-20261019.tar.gz",
+      "archive_member": "teacher_contrasts/witnesses/source2_row61.json",
+      "bytes": 201111,
+      "sha256": "61aba15d1a5eedaa9935079a54ba1792b17f3118ca1aafb7b26eaa7d4aa91c09",
+      "included_again": false
+    }
+  ],
+  "all112_phase_rawfile_pins_verified": true,
+  "native_execution": 0,
+  "source_execution": false,
+  "limitations": "Historical COPY/MASK/TURN learned-state/support closure not recovered by this verification; matching copied source is not proof of learned causal applicability."
+}
