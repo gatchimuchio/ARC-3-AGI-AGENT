@@ -1,0 +1,377 @@
+{
+  "schema": "independent-remaining-original-admission-v1",
+  "archive": {
+    "name": "goal6-query-checkpoint.tar.gz",
+    "bytes": 862122,
+    "sha256": "483d69377cd9c82743e86e7c54b41b2bbb65fa615cc0dc89aedf34159a8c1500",
+    "whole_gzip_crc_eof_verified": true,
+    "tar_uncompressed_bytes": 3440640,
+    "final_identity_recheck": true
+  },
+  "status": "ADMITTED_FOR_EXACT_EVIDENCE_ONLY_PRESERVATION",
+  "scope": {
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "recovered_source_executed": false,
+    "official_game_SDK_implementation_read": false,
+    "opaque_SDK_stderr_bodies_read": false,
+    "git_or_upload_operations": 0,
+    "original_files_modified": false
+  },
+  "resources": {
+    "AS_limit_bytes": 268435456,
+    "combined_inspector_RSS_budget_bytes": 536870912,
+    "peak_RSS_KiB": 23212
+  },
+  "counts": {
+    "verified_files": 48,
+    "verified_payload_bytes": 3392752,
+    "json_nodes": 113784,
+    "json_strings": 36359,
+    "text_chars_scanned": 807764,
+    "json_documents": 39,
+    "xz_streams_verified": 3,
+    "max_decoded_bytes": 217046,
+    "other_text_members": 3,
+    "source_files": 5
+  },
+  "header_errors": [],
+  "hash_mismatches": [],
+  "parse_errors": [],
+  "typed_errors": [],
+  "source": [
+    {
+      "member": "arc-goal-query-recovered-20261013/source/goal6_query_once_v1.py",
+      "bytes": 38997,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 10,
+        "exec_module": 1,
+        "decompress": 1,
+        "run": 1,
+        "照会する": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-query-recovered-20261013/source/goal6_query_outer_v1.py",
+      "bytes": 1606,
+      "ast_parse": true,
+      "imports": [
+        "datetime",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "exec_module": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-query-recovered-20261013/source/resource_guard_v1.py",
+      "bytes": 5188,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "stat"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-query-recovered-audit-20261013/source/goal6_query_independent_outer_v1.py",
+      "bytes": 214,
+      "ast_parse": true,
+      "imports": [
+        "pathlib",
+        "resource",
+        "runpy"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-query-recovered-audit-20261013/source/goal6_query_independent_v1.py",
+      "bytes": 40050,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "lzma",
+        "math",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "decompress": 2,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    }
+  ],
+  "fixed_core": [],
+  "security_candidates": [],
+  "opaque_candidates": [],
+  "nested_archives": [
+    {
+      "member": "arc-goal6-checkpoint-20261013/goal6-checkpoint.tar.gz",
+      "bytes": 635597,
+      "sha256": "52bd271ff10bf5e12fdfff6205215f94240a85e7e90cda02444b633545118563",
+      "status": "EXACT_BYTE_IDENTICAL_TO_SEPARATELY_ADMITTED_ORIGINAL",
+      "admission_report": {
+        "path": "remaining_origin_goal6.json",
+        "bytes": 54258,
+        "sha256": "c129971d130d0f6a9bf42207ac942862116263af12bef901e7dc0385478209bc"
+      },
+      "overlap": "Intentional exact original goal6-checkpoint archive; all 200 inner members are preserved again, not deduplicated away."
+    }
+  ],
+  "summary_records": [
+    {
+      "member": "arc-goal-query-recovered-20261013/reports/2a935efe68e17ebf9e7ee20448f53e6a_receipt.json",
+      "summary": {
+        "schema": "goal6-query-completion-v1",
+        "nonce": "2a935efe68e17ebf9e7ee20448f53e6a",
+        "status": "complete",
+        "Teach_attempted": 0,
+        "Query_attempted": 6,
+        "Query_returned": 6,
+        "completed": 6,
+        "new_independent_support": 0,
+        "standard_full_ledger_history": true,
+        "whole_ledgers_histories_frozen": true,
+        "paired_counter_delta": 6,
+        "counts": {
+          "correct": 6,
+          "wrong": 0,
+          "missing": 0,
+          "extra": 0,
+          "HOLD": 0
+        }
+      }
+    },
+    {
+      "member": "arc-goal-query-recovered-20261013/reports/control_2a935efe68e17ebf9e7ee20448f53e6a.json",
+      "summary": {
+        "command": "ack_close",
+        "nonce": "2a935efe68e17ebf9e7ee20448f53e6a"
+      }
+    },
+    {
+      "member": "arc-goal-query-recovered-20261013/reports/query_release_2a935efe68e17ebf9e7ee20448f53e6a.json",
+      "summary": {
+        "schema": "goal6-query-release-v1",
+        "operation": "restored_Teach0_Query6",
+        "nonce": "2a935efe68e17ebf9e7ee20448f53e6a",
+        "support": 3,
+        "conditions": 2,
+        "boundary": "公開100対象・広域塗布・固定幾何上書き仮説の修復保全条件組と公開進捗"
+      }
+    },
+    {
+      "member": "arc-goal-query-recovered-audit-20261013/reports/2a935efe68e17ebf9e7ee20448f53e6a.json",
+      "summary": {
+        "schema": "goal6-query-independent-completion-v1",
+        "nonce": "2a935efe68e17ebf9e7ee20448f53e6a",
+        "status": "PASS",
+        "counts": {
+          "queries": 6,
+          "teachers": 0,
+          "states": 12,
+          "journals": 13,
+          "training_experiences": 6,
+          "new_support": 0,
+          "correct": 6,
+          "wrong": 0,
+          "missing": 0,
+          "extra": 0,
+          "HOLD": 0
+        },
+        "verified": {
+          "all_six_before_only_queries": true,
+          "all_before_after_standard_states": true,
+          "all_returns_ledgers_histories": true
+        },
+        "limitations": [
+          "saved original six training cases: regression only, no unseen transfer or game success",
+          "all raw/external replies and missing/extra/wrong/HOLD retained; no expected success assumed",
+          "fixed reversible joint condition is not universal learned Boolean AND",
+          "read-only standard decoding, no HDS import/restore/API/inference replay"
+        ]
+      }
+    },
+    {
+      "member": "arc-goal-query-recovered-audit-20261013/reports/audit_release_2a935efe68e17ebf9e7ee20448f53e6a.json",
+      "summary": {
+        "schema": "goal6-query-independent-release-v1",
+        "enabled": true,
+        "nonce": "2a935efe68e17ebf9e7ee20448f53e6a"
+      }
+    }
+  ],
+  "manifest": {
+    "member": "QUERY_CHECKPOINT/manifest.json",
+    "bytes": 25423,
+    "sha256": "bde49fc510127098fb6ba0c68cc23ee4bb74e983fa7d14c8d5e1fbf0fff8c059",
+    "entry_count": 46,
+    "membership_complete": true,
+    "metadata_members": [
+      "QUERY_CHECKPOINT/README.ja.md"
+    ],
+    "external_manifest_equal": true
+  },
+  "header_roots": {
+    "arc-goal-query-recovered-20261013": 36,
+    "arc-goal-query-recovered-audit-20261013": 9,
+    "arc-goal6-checkpoint-20261013": 1,
+    "QUERY_CHECKPOINT": 2
+  },
+  "header_count": 48,
+  "provenance_whitelist": "All exact declared relative regular-file headers validated before semantic bodies; own ARC3 evidence/source/repository roots only. External source references are not followed.",
+  "typed_tags": {
+    "__辞書__": 2421,
+    "__組__": 11770,
+    "__データ型__": 1134,
+    "__列挙__": 300
+  },
+  "schemas": {
+    "goal6-query-actual-tools-v1": 1,
+    "goal6-query-completion-v1": 1,
+    "goal6-query-release-v1": 1,
+    "goal6-query-source-contract-v1": 1,
+    "goal6-query-audit-preparation-tools-v1": 1,
+    "goal6-query-independent-completion-v1": 1,
+    "goal6-query-independent-release-v1": 1,
+    "goal6-query-independent-contract-v1": 1,
+    "goal6-query-independent-actual-tools-v1": 1,
+    "goal6-query-checkpoint-manifest-v1": 1
+  },
+  "member_identity_digest_algorithm": "SHA256 sorted compact UTF8 JSON arrays [path,bytes,sha256], joined by newline",
+  "member_identity_digest": "d73f5c056ce4d8d37443e66d1f89f4086bdec0efa31b5403547da6c9b8628bb8",
+  "independent_inert_semantics": {
+    "query_initial_state_equals_goal6_successful_final_state": true,
+    "six_pairs": [
+      {
+        "index": 0,
+        "input": {
+          "作用前の修復保全条件組": "[false,false]"
+        },
+        "expected_and_actual": false,
+        "counter_before": 0,
+        "counter_after": 1,
+        "whole_state_other_than_two_counters_unchanged": true
+      },
+      {
+        "index": 1,
+        "input": {
+          "作用前の修復保全条件組": "[false,false]"
+        },
+        "expected_and_actual": false,
+        "counter_before": 1,
+        "counter_after": 2,
+        "whole_state_other_than_two_counters_unchanged": true
+      },
+      {
+        "index": 2,
+        "input": {
+          "作用前の修復保全条件組": "[true,false]"
+        },
+        "expected_and_actual": false,
+        "counter_before": 2,
+        "counter_after": 3,
+        "whole_state_other_than_two_counters_unchanged": true
+      },
+      {
+        "index": 3,
+        "input": {
+          "作用前の修復保全条件組": "[false,true]"
+        },
+        "expected_and_actual": false,
+        "counter_before": 3,
+        "counter_after": 4,
+        "whole_state_other_than_two_counters_unchanged": true
+      },
+      {
+        "index": 4,
+        "input": {
+          "作用前の修復保全条件組": "[true,true]"
+        },
+        "expected_and_actual": true,
+        "counter_before": 4,
+        "counter_after": 5,
+        "whole_state_other_than_two_counters_unchanged": true
+      },
+      {
+        "index": 5,
+        "input": {
+          "作用前の修復保全条件組": "[true,true]"
+        },
+        "expected_and_actual": true,
+        "counter_before": 5,
+        "counter_after": 6,
+        "whole_state_other_than_two_counters_unchanged": true
+      }
+    ],
+    "whole_ledgers_histories_frozen": true,
+    "scoring": {
+      "correct": 6,
+      "wrong": 0,
+      "missing": 0,
+      "extra": 0,
+      "HOLD": 0
+    }
+  },
+  "semantic_admission": [
+    "All 48 outer members, manifest identities and gzip CRC/EOF verified. Three XZ streams decode completely; all 39 JSON documents and typed tags validate without native reconstruction. Five own sources AST parse. Static text/structured-data scanning left no credential, email-pattern or opaque-string candidate.",
+    "The nested 635597-byte Goal6 original has identical SHA256 to the separately fully admitted archive; its overlap is retained explicitly.",
+    "Inert comparisons independently establish that Query initial state exactly equals the successful Goal6 final state. All six before/after states differ only by +1 query and learning-judgment counters; all ledgers and histories stay equal. Every next-before equals prior-after.",
+    "Each query input is solely the fixed reversible joint-key encoding of its two saved before-only conditions and omits the teacher result. Each raw reply has one prediction matching the measured teacher; original scoring preserves correct6, wrong0, missing0, extra0 and HOLD0."
+  ],
+  "actual_verified_scope": {
+    "historical_training_case_regressions": 6,
+    "historical_Query": 6,
+    "historical_Teach": 0,
+    "new_independent_support": 0,
+    "experience_count_unchanged": 6,
+    "new_game_clears_established": 0,
+    "runtime_adoption": false
+  },
+  "limitations": [
+    "This is regression on the same six historical teaching examples, not unseen transfer, learned Boolean AND or new game success.",
+    "Nested Goal6 retains the older audit failure and unresolved native29489/fixture18870 history unchanged; this Query package does not close those chains.",
+    "No live HDS, Query, Teach, SDK or Action executed. No original owner heap, opaque implementation, dependency target or new experiment was inspected or reconstructed.",
+    "Marker/schema/source inspection cannot prove absence of arbitrarily encoded secrets or every possible private datum. Admission is exact preservation only."
+  ]
+}

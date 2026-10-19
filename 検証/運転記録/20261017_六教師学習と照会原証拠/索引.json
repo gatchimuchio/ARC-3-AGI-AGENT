@@ -1,0 +1,59 @@
+{
+  "schema": "arc3-goal6-original-publication-index-v1",
+  "archives": [
+    {
+      "name": "goal6-checkpoint.tar.gz",
+      "bytes": 635597,
+      "sha256": "52bd271ff10bf5e12fdfff6205215f94240a85e7e90cda02444b633545118563",
+      "manifest_member": "CHECKPOINT/manifest.json",
+      "manifest_sha256": "da0dc8858a650df17fafc7d04273230d3d5b03ee61df91ffdd565799e2d905d5",
+      "scope": {
+        "historical_examples": 6,
+        "material_selected_public_rows": 12,
+        "response_phases": 112,
+        "historical_teach_runs": 2,
+        "historical_teaches_each_run": 6,
+        "historical_queries": 0,
+        "new_independent_support_from_rerun": 0,
+        "new_game_clears_established": 0,
+        "runtime_adoption": false
+      },
+      "limitations": [
+        "Goal6 means six historical teaching examples, not six solved levels. Joint-key mapping does not establish learned AND causality, unseen transfer, or current runnable capability.",
+        "Historical native29489 remains unresolved/unclosed; fixture18870 remains a failed launch/retained state. Later reproduction does not close or erase either historical chain.",
+        "The principle has one lineage and three versions; support six is in candidate/evidence ledgers, not silently appended to the principle-version support list.",
+        "The original archive references the separate recovery archive for three complete public recordings. No external dependency target, SDK/game source, live HDS/Query/Teach/SDK/Action or original owner heap was opened/executed/reconstructed.",
+        "Static schema/source/marker inspection is not proof against arbitrarily encoded secrets or every possible private datum. Exact preservation admission is separate from runtime adoption."
+      ]
+    },
+    {
+      "name": "goal6-query-checkpoint.tar.gz",
+      "bytes": 862122,
+      "sha256": "483d69377cd9c82743e86e7c54b41b2bbb65fa615cc0dc89aedf34159a8c1500",
+      "manifest_member": "QUERY_CHECKPOINT/manifest.json",
+      "manifest_sha256": "bde49fc510127098fb6ba0c68cc23ee4bb74e983fa7d14c8d5e1fbf0fff8c059",
+      "scope": {
+        "historical_training_case_regressions": 6,
+        "historical_Query": 6,
+        "historical_Teach": 0,
+        "new_independent_support": 0,
+        "experience_count_unchanged": 6,
+        "new_game_clears_established": 0,
+        "runtime_adoption": false
+      },
+      "limitations": [
+        "This is regression on the same six historical teaching examples, not unseen transfer, learned Boolean AND or new game success.",
+        "Nested Goal6 retains the older audit failure and unresolved native29489/fixture18870 history unchanged; this Query package does not close those chains.",
+        "No live HDS, Query, Teach, SDK or Action executed. No original owner heap, opaque implementation, dependency target or new experiment was inspected or reconstructed.",
+        "Marker/schema/source inspection cannot prove absence of arbitrarily encoded secrets or every possible private datum. Admission is exact preservation only."
+      ]
+    }
+  ],
+  "overlap": "goal6-query archive contains exact goal6-checkpoint.tar.gz; both original identities intentionally retained.",
+  "new_native_operations": 0,
+  "runtime_adoption": false,
+  "certified_fresh_levels": "1/183",
+  "originals_on_main_after_this_checkpoint": 9,
+  "total_recovered_originals": 14,
+  "official_exact_original_withheld": true
+}

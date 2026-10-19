@@ -1,0 +1,1888 @@
+{
+  "schema": "independent-remaining-original-admission-v1",
+  "archive": {
+    "name": "goal6-checkpoint.tar.gz",
+    "bytes": 635597,
+    "sha256": "52bd271ff10bf5e12fdfff6205215f94240a85e7e90cda02444b633545118563",
+    "whole_gzip_crc_eof_verified": true,
+    "tar_uncompressed_bytes": 4229120,
+    "final_identity_recheck": true
+  },
+  "status": "ADMITTED_FOR_EXACT_EVIDENCE_ONLY_PRESERVATION",
+  "scope": {
+    "native_HDS_SDK_Query_Teach_Action": 0,
+    "recovered_source_executed": false,
+    "official_game_SDK_implementation_read": false,
+    "opaque_SDK_stderr_bodies_read": false,
+    "git_or_upload_operations": 0,
+    "original_files_modified": false
+  },
+  "resources": {
+    "AS_limit_bytes": 268435456,
+    "combined_inspector_RSS_budget_bytes": 536870912,
+    "peak_RSS_KiB": 50384
+  },
+  "counts": {
+    "verified_files": 200,
+    "verified_payload_bytes": 4024863,
+    "json_nodes": 1504660,
+    "json_strings": 136747,
+    "text_chars_scanned": 4201244,
+    "json_documents": 128,
+    "xz_streams_verified": 17,
+    "max_decoded_bytes": 3740530,
+    "other_text_members": 16,
+    "source_files": 51,
+    "inner_gzip_verified": 3
+  },
+  "header_errors": [],
+  "hash_mismatches": [],
+  "parse_errors": [],
+  "typed_errors": [],
+  "source": [
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_profile_fixture_outer_v1.py",
+      "bytes": 1336,
+      "ast_parse": true,
+      "imports": [
+        "datetime",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "exec_module": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_profile_fixture_outer_v2.py",
+      "bytes": 1475,
+      "ast_parse": true,
+      "imports": [
+        "datetime",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "exec_module": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_profile_fixture_v1.py",
+      "bytes": 11198,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "loads": 3,
+        "exec_module": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_profile_fixture_v2.py",
+      "bytes": 13532,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1,
+        "loads": 4,
+        "exec_module": 2
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_retained_outer_v1.py",
+      "bytes": 1603,
+      "ast_parse": true,
+      "imports": [
+        "datetime",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "exec_module": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_retained_outer_v2.py",
+      "bytes": 1603,
+      "ast_parse": true,
+      "imports": [
+        "datetime",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "exec_module": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_retained_outer_v3.py",
+      "bytes": 1603,
+      "ast_parse": true,
+      "imports": [
+        "datetime",
+        "hashlib",
+        "importlib.util",
+        "json",
+        "pathlib",
+        "resource",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "exec_module": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_teach_once_v1.py",
+      "bytes": 30061,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 7,
+        "exec_module": 1,
+        "decompress": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_teach_once_v2.py",
+      "bytes": 32321,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 7,
+        "exec_module": 1,
+        "decompress": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/goal6_teach_once_v3.py",
+      "bytes": 32321,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 7,
+        "exec_module": 1,
+        "decompress": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/resource_guard_v1.py",
+      "bytes": 5181,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "stat"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/resource_guard_v2.py",
+      "bytes": 5181,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "stat"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/resource_guard_v3.py",
+      "bytes": 5191,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "os",
+        "pathlib",
+        "stat"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/source/unexecuted_three_leaf_draft.py.txt",
+      "bytes": 15508,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "hds学習系統",
+        "hds学習系統.永続化",
+        "importlib.util",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 5,
+        "exec_module": 1,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/source/goal6_independent_outer_v1.py",
+      "bytes": 283,
+      "ast_parse": true,
+      "imports": [
+        "resource",
+        "runpy"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/source/goal6_independent_outer_v2.py",
+      "bytes": 283,
+      "ast_parse": true,
+      "imports": [
+        "resource",
+        "runpy"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/source/goal6_independent_outer_v3.py",
+      "bytes": 283,
+      "ast_parse": true,
+      "imports": [
+        "resource",
+        "runpy"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/source/goal6_independent_v1.py",
+      "bytes": 27659,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "lzma",
+        "math",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "decompress": 2,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/source/goal6_independent_v2.py",
+      "bytes": 29722,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "lzma",
+        "math",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "decompress": 2,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/source/goal6_independent_v3.py",
+      "bytes": 33949,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "hashlib",
+        "json",
+        "lzma",
+        "math",
+        "os",
+        "pathlib",
+        "resource",
+        "signal",
+        "stat",
+        "sys",
+        "time",
+        "traceback"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "decompress": 2,
+        "run": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_common_v1.py",
+      "bytes": 11371,
+      "ast_parse": true,
+      "imports": [
+        "ast",
+        "collections",
+        "dataclasses",
+        "enum",
+        "hashlib",
+        "json",
+        "lzma",
+        "os",
+        "pathlib",
+        "resource",
+        "shutil",
+        "signal",
+        "time",
+        "traceback",
+        "typing"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "decompress": 1,
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_fixture_outer_v1.py",
+      "bytes": 3841,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec": 1,
+        "run": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_fixture_outer_v2.py",
+      "bytes": 999,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "resource"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_outer_v1.py",
+      "bytes": 9322,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "resource",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "loads": 1,
+        "exec": 1,
+        "run": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_outer_v2.py",
+      "bytes": 2754,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_producer_v1.py",
+      "bytes": 9405,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "json",
+        "pathlib",
+        "signal",
+        "sys",
+        "time",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "load": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_pure_fixture_v1.py",
+      "bytes": 14340,
+      "ast_parse": true,
+      "imports": [
+        "copy",
+        "hashlib",
+        "json",
+        "pathlib",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "load": 4,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_pure_fixture_v2.py",
+      "bytes": 1793,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-goal-teacher-recovered-20261013/source/goal6_reader_v1.py",
+      "bytes": 12011,
+      "ast_parse": true,
+      "imports": [
+        "hashlib",
+        "pathlib",
+        "traceback",
+        "types"
+      ],
+      "risk_call_counts": {
+        "exec": 1,
+        "load": 1,
+        "compile": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+      "bytes": 527,
+      "ast_parse": true,
+      "imports": [
+        "吸気系",
+        "型",
+        "実行系",
+        "排気系",
+        "系統"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+      "bytes": 2815,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "copy",
+        "dataclasses",
+        "typing"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+      "bytes": 3061,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "copy",
+        "json",
+        "typing",
+        "型"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/型.py",
+      "bytes": 6575,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "enum",
+        "typing"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "bytes": 34178,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "datetime",
+        "pathlib",
+        "台帳",
+        "型",
+        "懐疑",
+        "推論",
+        "検証",
+        "永続化",
+        "適応"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+      "bytes": 3392,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "typing",
+        "型"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+      "bytes": 2779,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "typing",
+        "型"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+      "bytes": 11404,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "itertools",
+        "json",
+        "typing",
+        "型"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+      "bytes": 2696,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "typing",
+        "型",
+        "推論"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+      "bytes": 3125,
+      "ast_parse": true,
+      "imports": [
+        "",
+        "__future__",
+        "dataclasses",
+        "enum",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "risk_call_counts": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "bytes": 1951,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "pathlib",
+        "吸気系",
+        "型",
+        "実行系",
+        "排気系"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+      "bytes": 10139,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "typing",
+        "型",
+        "推論"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/ARC3境界.py",
+      "bytes": 9941,
+      "ast_parse": true,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "typing"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/図式観測.py",
+      "bytes": 1295,
+      "ast_parse": true,
+      "imports": [
+        "collections"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/配色内部/__init__.py",
+      "bytes": 43,
+      "ast_parse": true,
+      "imports": [],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/配色内部/予測.py",
+      "bytes": 6578,
+      "ast_parse": true,
+      "imports": [
+        "collections",
+        "json",
+        "固定文法",
+        "手順",
+        "知覚",
+        "関係"
+      ],
+      "risk_call_counts": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/配色内部/受理.py",
+      "bytes": 2868,
+      "ast_parse": true,
+      "imports": [
+        "関係"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/配色内部/固定文法.py",
+      "bytes": 27046,
+      "ast_parse": true,
+      "imports": [],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/配色内部/応答.py",
+      "bytes": 3627,
+      "ast_parse": true,
+      "imports": [
+        "予測",
+        "接続.共通観測経路",
+        "知覚"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/配色内部/手順.py",
+      "bytes": 5862,
+      "ast_parse": true,
+      "imports": [
+        "collections",
+        "知覚",
+        "関係"
+      ],
+      "risk_call_counts": {
+        "loads": 1
+      },
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/配色内部/知覚.py",
+      "bytes": 4081,
+      "ast_parse": true,
+      "imports": [
+        "collections",
+        "pathlib",
+        "sys",
+        "接続.ARC3境界",
+        "接続.図式観測"
+      ],
+      "risk_call_counts": {},
+      "opaque_literal_lengths": []
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/接続/配色内部/関係.py",
+      "bytes": 1224,
+      "ast_parse": true,
+      "imports": [
+        "collections",
+        "dataclasses",
+        "hashlib",
+        "hds学習系統",
+        "json",
+        "resource",
+        "time",
+        "知覚"
+      ],
+      "risk_call_counts": {
+        "照会する": 1
+      },
+      "opaque_literal_lengths": []
+    }
+  ],
+  "fixed_core": [
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/README.md",
+      "git_blob": "a04811b7c2c4af80d022bed2e92de47359abb285",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+      "git_blob": "ef58e4969fcd4ba4c4310285c4d45cc740f8150c",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+      "git_blob": "31f6e4d86c42448d90a6e829b86ab99e441982dc",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+      "git_blob": "81ffd4ea6e1a2f611020faeb5d28416ab0d79172",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/型.py",
+      "git_blob": "0ade344cf314d710ace16d4e53907b89ee47d742",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "git_blob": "7dc89687e75d00b7b0b87f5fa23d950649a514f6",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+      "git_blob": "82016fb3fc15f0baa7af3b5b7c792420c95188ca",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+      "git_blob": "54f3bec51663dde9dedd38f8bf007d336d40b9ea",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+      "git_blob": "e394dc97f4986ca3212b1e10398060ac2495d3e6",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+      "git_blob": "28e5ac81be2160a705e7edef016f92702640b5a8",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+      "git_blob": "68a4f62d4dfea55b481de0f36b8e2436afa6b0a2",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "git_blob": "ef2088692ae333bca598fa5e7cd4b10de58c5ad1",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+      "git_blob": "7af4f016518df38207e9b66d075846fa7efdea0d",
+      "baseline_equal": true
+    },
+    {
+      "member": "arc-recovery-main-20261013/repository/HDS/学習系統/v0.4.2/pyproject.toml",
+      "git_blob": "a37ffd808c861d4a150cdbbd4b98f0f0db115716",
+      "baseline_equal": true
+    }
+  ],
+  "security_candidates": [],
+  "opaque_candidates": [],
+  "nested_archives": [],
+  "summary_records": [
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/3d60b4ab113bb6df1f9a27629c4405df_receipt.json",
+      "summary": {
+        "schema": "goal6-native-completion-v1",
+        "nonce": "3d60b4ab113bb6df1f9a27629c4405df",
+        "status": "complete",
+        "Teach_attempted": 6,
+        "Teach_returned": 6,
+        "Query_attempted": 0,
+        "completed": 6,
+        "new_independent_support": 0,
+        "standard_full_ledger_history": true
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/7fe7332cb9f2afcae9c1dd6c59e018c2_receipt.json",
+      "summary": {
+        "schema": "goal6-native-completion-v1",
+        "nonce": "7fe7332cb9f2afcae9c1dd6c59e018c2",
+        "status": "complete",
+        "Teach_attempted": 6,
+        "Teach_returned": 6,
+        "Query_attempted": 0,
+        "completed": 6,
+        "new_independent_support": 0,
+        "standard_full_ledger_history": true
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/control_7fe7332cb9f2afcae9c1dd6c59e018c2.json",
+      "summary": {
+        "command": "ack_close",
+        "nonce": "7fe7332cb9f2afcae9c1dd6c59e018c2"
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/native3_actual_exit_7fe7332c.json",
+      "summary": {
+        "chunk_id": "40fa2a",
+        "wall_time_seconds": 2.68e-05,
+        "exit_code": 0,
+        "original_token_count": 83,
+        "output": "{\"stage\": \"closed_after_root_ack\", \"receipt\": {\"path\": \"/workspace/scratch/a94ff513b3af/arc-goal-learning-recovered-20261013/reports/7fe7332cb9f2afcae9c1dd6c59e018c2_receipt.json\", \"bytes\": 10437, \"sha256\": \"80092c167103d935ba0c344a6d1f51ec4682c52d49c30809c45a401882664b4a\"}, \"errors\": []}\nUTCEND 2026-10-13T09:07:56.137241+00:00\n"
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/native3_launch_complete_7fe7332c_tools.json.xz",
+      "summary": {
+        "schema": "goal6-native3-actual-tools-v1",
+        "command": "python -B /workspace/scratch/a94ff513b3af/arc-goal-learning-recovered-20261013/source/goal6_retained_outer_v3.py /workspace/scratch/a94ff513b3af/arc-goal-learning-recovered-20261013/reports/native_release_7fe7332cb9f2afcae9c1dd6c59e018c2.json 55ba0465f7b0a7255f9399380d9b2f399813a76065359ff3d2021f015fc10d84"
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/native_release_3d60b4ab113bb6df1f9a27629c4405df.json",
+      "summary": {
+        "schema": "goal6-native-release-v1",
+        "operation": "fresh_Teach6_Query0",
+        "nonce": "3d60b4ab113bb6df1f9a27629c4405df",
+        "support": 3,
+        "conditions": 2,
+        "boundary": "公開100対象・広域塗布・固定幾何上書き仮説の修復保全条件組と公開進捗"
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/native_release_7fe7332cb9f2afcae9c1dd6c59e018c2.json",
+      "summary": {
+        "schema": "goal6-native-release-v1",
+        "operation": "fresh_Teach6_Query0",
+        "nonce": "7fe7332cb9f2afcae9c1dd6c59e018c2",
+        "support": 3,
+        "conditions": 2,
+        "boundary": "公開100対象・広域塗布・固定幾何上書き仮説の修復保全条件組と公開進捗"
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/profile_fixture_release_141582fab5ea7ac88a1be974e3dda9ef.json",
+      "summary": {
+        "schema": "goal6-profile-pure-release-v1",
+        "operation": "three_synthetic_profile_cases",
+        "nonce": "141582fab5ea7ac88a1be974e3dda9ef",
+        "AS": 134217728,
+        "compute_seconds": 120,
+        "save_seconds": 120
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-20261013/reports/root_ack_profile_fixture_141582fab5ea7ac88a1be974e3dda9ef.json",
+      "summary": {
+        "schema": "goal6-profile-pure-root-ack-v1",
+        "nonce": "141582fab5ea7ac88a1be974e3dda9ef",
+        "decision": "ACK"
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/reports/7fe7332cb9f2afcae9c1dd6c59e018c2.json",
+      "summary": {
+        "schema": "goal6-native-independent-completion-v1",
+        "nonce": "7fe7332cb9f2afcae9c1dd6c59e018c2",
+        "status": "PASS",
+        "counts": {
+          "teachers": 6,
+          "queries": 0,
+          "states": 12,
+          "journals": 12,
+          "experiences": 6,
+          "HOLD": 0,
+          "active_principles": 1,
+          "isolated_principles": 0
+        },
+        "verified": {
+          "all_six_original_teachers": true,
+          "all_before_after_standard_states": true,
+          "all_returns_ledgers_histories": true
+        },
+        "limitations": [
+          "joint condition is fixed reversible encoding, not learned AND",
+          "no queryability or game success asserted",
+          "principle version evidence and later evidence ledger separately preserved",
+          "all raw original files retained via exact refs; no API/restore/import"
+        ]
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/reports/audit_release_3d60b4ab113bb6df1f9a27629c4405df.json",
+      "summary": {
+        "schema": "goal6-native-independent-release-v1",
+        "enabled": true,
+        "nonce": "3d60b4ab113bb6df1f9a27629c4405df"
+      }
+    },
+    {
+      "member": "arc-goal-learning-recovered-audit-20261013/reports/audit_release_7fe7332cb9f2afcae9c1dd6c59e018c2.json",
+      "summary": {
+        "schema": "goal6-native-independent-release-v1",
+        "enabled": true,
+        "nonce": "7fe7332cb9f2afcae9c1dd6c59e018c2"
+      }
+    }
+  ],
+  "manifest": {
+    "member": "CHECKPOINT/manifest.json",
+    "bytes": 107139,
+    "sha256": "da0dc8858a650df17fafc7d04273230d3d5b03ee61df91ffdd565799e2d905d5",
+    "entry_count": 198,
+    "membership_complete": true,
+    "metadata_members": [
+      "CHECKPOINT/README.ja.md"
+    ],
+    "external_manifest_equal": true
+  },
+  "header_roots": {
+    "arc-goal-learning-recovered-20261013": 94,
+    "arc-goal-learning-recovered-audit-20261013": 22,
+    "arc-goal-teacher-recovered-20261013": 49,
+    "arc-recovery-authority-20261013": 4,
+    "arc-recovery-main-20261013": 29,
+    "CHECKPOINT": 2
+  },
+  "header_count": 200,
+  "provenance_whitelist": "All exact declared relative regular-file headers validated before semantic bodies; own ARC3 evidence/source/repository roots only. External source references are not followed.",
+  "fragment_reassembly": {
+    "members": 6,
+    "decoded_bytes": 159445,
+    "sha256": "5da737c1ab1063f81003840625bb25848142216ee2e39cda417be279a3e77dc4",
+    "valid_json": true
+  },
+  "typed_tags": {
+    "__辞書__": 13235,
+    "__組__": 25141,
+    "__データ型__": 1078,
+    "__列挙__": 278
+  },
+  "schemas": {
+    "goal6-profile-pure-result-v1": 1,
+    "goal6-native-actual-tools-v1": 1,
+    "goal6-profile-fixture-actual-tools-v1": 1,
+    "goal6-profile-fixture-preparation-actual-tools-v1": 1,
+    "goal6-source-prep-capture-manifest-v1": 1,
+    "goal6-v2-source-preparation-actual-tools-v1": 1,
+    "goal6-native-completion-v1": 2,
+    "goal6-native3-actual-tools-v1": 1,
+    "goal6-native-release-v1": 2,
+    "goal6-profile-pure-release-v1": 1,
+    "goal6-profile-pure-root-ack-v1": 1,
+    "goal6-single-owner-source-contract-v1": 3,
+    "goal6-profile-pure-source-contract-v1": 2,
+    "goal6-native-independent-failure-v1": 1,
+    "goal6-audit-preparation-tools-v1": 1,
+    "goal6-audit-preparation-tools-v2": 1,
+    "goal6-audit-v3-preparation-tools-v1": 1,
+    "goal6-native-independent-completion-v1": 1,
+    "goal6-native-independent-release-v1": 2,
+    "goal6-native-independent-contract-v1": 3,
+    "goal6-native-independent-actual-tools-v1": 1,
+    "goal6-native-independent-actual-tools-v3": 1,
+    "goal6-evidence-schema-diagnostic-v1": 1,
+    "goal6-pure-fixture-release-v1": 3,
+    "goal6-producer-actual-tools-v1": 1,
+    "goal6-material-closed-tools-v1": 2,
+    "goal6-admission-log-v1": 2,
+    "goal6-producer-receipt-v1": 1,
+    "goal6-reader-receipt-v1": 1,
+    "goal6-reader-actual-tools-v1": 1,
+    "goal6-recovered-release-v1": 2,
+    "goal6-pure-fixture-root-ack-v1": 1,
+    "goal6-recovered-root-ack-v1": 2,
+    "goal6-fixture-closed-tools-v1": 1,
+    "goal6-fixture-actual-tools-v2": 1,
+    "goal6-fixture-actual-tools-v1": 1,
+    "goal6-failed-launch-supplement-v1": 1,
+    "goal6-fixture-retention-preparation-tools-v1": 1,
+    "goal6-pure-fixture-receipt-v1": 1,
+    "goal6-source-preparation-actual-tools-v1": 2,
+    "goal6-v2-source-preparation-tools-v1": 1,
+    "goal6-recovered-contract-v1": 2,
+    "goal6-pure-fixture-source-contract-v1": 1,
+    "goal6-pure-fixture-retention-amendment-v2": 1,
+    "goal6-finite-resource-v1": 1,
+    "arc-public-recording-recovery-v1": 1,
+    "arc-main-recovery-subset-v1": 1,
+    "goal6-checkpoint-manifest-v1": 1
+  },
+  "member_identity_digest_algorithm": "SHA256 sorted compact UTF8 JSON arrays [path,bytes,sha256], joined by newline",
+  "member_identity_digest": "137f13a1f29ed14b98fd438c280ce81b778c698bccc57435216aba78072e9c6f",
+  "independent_inert_semantics": {
+    "two_runs_each_six_steps": [
+      {
+        "nonce": "3d60b4ab113bb6df1f9a27629c4405df",
+        "steps": [
+          {
+            "index": 0,
+            "counters_before": {},
+            "counters_after": {
+              "経験": 1,
+              "懐疑": 5,
+              "学習": 1
+            },
+            "ledger_lengths": {
+              "観測台帳": 1,
+              "認知世界台帳": 1,
+              "懐疑台帳": 5,
+              "学習過程台帳": 1,
+              "全体帰還台帳": 1
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 1,
+            "counters_before": {
+              "経験": 1,
+              "懐疑": 5,
+              "学習": 1
+            },
+            "counters_after": {
+              "経験": 2,
+              "懐疑": 10,
+              "学習": 2
+            },
+            "ledger_lengths": {
+              "観測台帳": 2,
+              "認知世界台帳": 2,
+              "懐疑台帳": 10,
+              "学習過程台帳": 2,
+              "全体帰還台帳": 2
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 2,
+            "counters_before": {
+              "経験": 2,
+              "懐疑": 10,
+              "学習": 2
+            },
+            "counters_after": {
+              "経験": 3,
+              "懐疑": 15,
+              "学習": 3,
+              "原理候補": 1,
+              "原理": 1,
+              "更新": 1
+            },
+            "ledger_lengths": {
+              "観測台帳": 3,
+              "認知世界台帳": 3,
+              "懐疑台帳": 15,
+              "学習過程台帳": 3,
+              "全体帰還台帳": 3,
+              "推論記録台帳": 1,
+              "証拠台帳": 1,
+              "判断台帳": 1,
+              "原理台帳": 1,
+              "暫定性台帳": 1,
+              "更新台帳": 1
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 3,
+            "counters_before": {
+              "経験": 3,
+              "懐疑": 15,
+              "学習": 3,
+              "原理候補": 1,
+              "原理": 1,
+              "更新": 1
+            },
+            "counters_after": {
+              "経験": 4,
+              "懐疑": 20,
+              "学習": 4,
+              "原理候補": 2,
+              "原理": 2,
+              "更新": 2
+            },
+            "ledger_lengths": {
+              "観測台帳": 4,
+              "認知世界台帳": 4,
+              "懐疑台帳": 20,
+              "学習過程台帳": 4,
+              "全体帰還台帳": 4,
+              "推論記録台帳": 2,
+              "証拠台帳": 2,
+              "判断台帳": 2,
+              "原理台帳": 2,
+              "暫定性台帳": 2,
+              "更新台帳": 2
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 4,
+            "counters_before": {
+              "経験": 4,
+              "懐疑": 20,
+              "学習": 4,
+              "原理候補": 2,
+              "原理": 2,
+              "更新": 2
+            },
+            "counters_after": {
+              "経験": 5,
+              "懐疑": 25,
+              "学習": 5,
+              "原理候補": 3,
+              "原理": 3,
+              "更新": 3
+            },
+            "ledger_lengths": {
+              "観測台帳": 5,
+              "認知世界台帳": 5,
+              "懐疑台帳": 25,
+              "学習過程台帳": 5,
+              "全体帰還台帳": 5,
+              "推論記録台帳": 3,
+              "証拠台帳": 3,
+              "判断台帳": 3,
+              "原理台帳": 3,
+              "暫定性台帳": 3,
+              "更新台帳": 3
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 5,
+            "counters_before": {
+              "経験": 5,
+              "懐疑": 25,
+              "学習": 5,
+              "原理候補": 3,
+              "原理": 3,
+              "更新": 3
+            },
+            "counters_after": {
+              "経験": 6,
+              "懐疑": 30,
+              "学習": 6,
+              "原理候補": 4,
+              "原理": 3,
+              "更新": 3
+            },
+            "ledger_lengths": {
+              "観測台帳": 6,
+              "認知世界台帳": 6,
+              "懐疑台帳": 30,
+              "学習過程台帳": 6,
+              "全体帰還台帳": 6,
+              "推論記録台帳": 4,
+              "証拠台帳": 4,
+              "判断台帳": 4,
+              "原理台帳": 3,
+              "暫定性台帳": 3,
+              "更新台帳": 3
+            },
+            "external_status": "出力"
+          }
+        ],
+        "adjacent_states_byte_semantics_equal": true
+      },
+      {
+        "nonce": "7fe7332cb9f2afcae9c1dd6c59e018c2",
+        "steps": [
+          {
+            "index": 0,
+            "counters_before": {},
+            "counters_after": {
+              "経験": 1,
+              "懐疑": 5,
+              "学習": 1
+            },
+            "ledger_lengths": {
+              "観測台帳": 1,
+              "認知世界台帳": 1,
+              "懐疑台帳": 5,
+              "学習過程台帳": 1,
+              "全体帰還台帳": 1
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 1,
+            "counters_before": {
+              "経験": 1,
+              "懐疑": 5,
+              "学習": 1
+            },
+            "counters_after": {
+              "経験": 2,
+              "懐疑": 10,
+              "学習": 2
+            },
+            "ledger_lengths": {
+              "観測台帳": 2,
+              "認知世界台帳": 2,
+              "懐疑台帳": 10,
+              "学習過程台帳": 2,
+              "全体帰還台帳": 2
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 2,
+            "counters_before": {
+              "経験": 2,
+              "懐疑": 10,
+              "学習": 2
+            },
+            "counters_after": {
+              "経験": 3,
+              "懐疑": 15,
+              "学習": 3,
+              "原理候補": 1,
+              "原理": 1,
+              "更新": 1
+            },
+            "ledger_lengths": {
+              "観測台帳": 3,
+              "認知世界台帳": 3,
+              "懐疑台帳": 15,
+              "学習過程台帳": 3,
+              "全体帰還台帳": 3,
+              "推論記録台帳": 1,
+              "証拠台帳": 1,
+              "判断台帳": 1,
+              "原理台帳": 1,
+              "暫定性台帳": 1,
+              "更新台帳": 1
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 3,
+            "counters_before": {
+              "経験": 3,
+              "懐疑": 15,
+              "学習": 3,
+              "原理候補": 1,
+              "原理": 1,
+              "更新": 1
+            },
+            "counters_after": {
+              "経験": 4,
+              "懐疑": 20,
+              "学習": 4,
+              "原理候補": 2,
+              "原理": 2,
+              "更新": 2
+            },
+            "ledger_lengths": {
+              "観測台帳": 4,
+              "認知世界台帳": 4,
+              "懐疑台帳": 20,
+              "学習過程台帳": 4,
+              "全体帰還台帳": 4,
+              "推論記録台帳": 2,
+              "証拠台帳": 2,
+              "判断台帳": 2,
+              "原理台帳": 2,
+              "暫定性台帳": 2,
+              "更新台帳": 2
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 4,
+            "counters_before": {
+              "経験": 4,
+              "懐疑": 20,
+              "学習": 4,
+              "原理候補": 2,
+              "原理": 2,
+              "更新": 2
+            },
+            "counters_after": {
+              "経験": 5,
+              "懐疑": 25,
+              "学習": 5,
+              "原理候補": 3,
+              "原理": 3,
+              "更新": 3
+            },
+            "ledger_lengths": {
+              "観測台帳": 5,
+              "認知世界台帳": 5,
+              "懐疑台帳": 25,
+              "学習過程台帳": 5,
+              "全体帰還台帳": 5,
+              "推論記録台帳": 3,
+              "証拠台帳": 3,
+              "判断台帳": 3,
+              "原理台帳": 3,
+              "暫定性台帳": 3,
+              "更新台帳": 3
+            },
+            "external_status": "出力"
+          },
+          {
+            "index": 5,
+            "counters_before": {
+              "経験": 5,
+              "懐疑": 25,
+              "学習": 5,
+              "原理候補": 3,
+              "原理": 3,
+              "更新": 3
+            },
+            "counters_after": {
+              "経験": 6,
+              "懐疑": 30,
+              "学習": 6,
+              "原理候補": 4,
+              "原理": 3,
+              "更新": 3
+            },
+            "ledger_lengths": {
+              "観測台帳": 6,
+              "認知世界台帳": 6,
+              "懐疑台帳": 30,
+              "学習過程台帳": 6,
+              "全体帰還台帳": 6,
+              "推論記録台帳": 4,
+              "証拠台帳": 4,
+              "判断台帳": 4,
+              "原理台帳": 3,
+              "暫定性台帳": 3,
+              "更新台帳": 3
+            },
+            "external_status": "出力"
+          }
+        ],
+        "adjacent_states_byte_semantics_equal": true
+      }
+    ],
+    "material_original_rows": [
+      {
+        "source_row": [
+          0,
+          65
+        ],
+        "bytes": 13058,
+        "sha256": "93416076b0721e8f991ab27539c8fc5618fd3d07d2b5990af3d5d22bf6cd7a50",
+        "frames": 1
+      },
+      {
+        "source_row": [
+          0,
+          66
+        ],
+        "bytes": 190611,
+        "sha256": "54168b6069a734ee10433a53d616aad3d7efa8254ba411cdc730783eccb5166b",
+        "frames": 15
+      },
+      {
+        "source_row": [
+          0,
+          74
+        ],
+        "bytes": 13040,
+        "sha256": "36706df3be2402dd11151ac7a24b5a5d7c9fd78ec8105991f3f7894863c6b430",
+        "frames": 1
+      },
+      {
+        "source_row": [
+          0,
+          75
+        ],
+        "bytes": 190904,
+        "sha256": "7bc048440ad8f540798255109dbacbb7a33a0697f8c4a3f34eb14d557675fbc4",
+        "frames": 15
+      },
+      {
+        "source_row": [
+          0,
+          92
+        ],
+        "bytes": 13069,
+        "sha256": "80dd1e294e100ac858ce6603e70382868f8e983ca0ed259972b69a5f08c7061a",
+        "frames": 1
+      },
+      {
+        "source_row": [
+          0,
+          93
+        ],
+        "bytes": 190921,
+        "sha256": "53415298906d9fa45363a84cc99d6e9a00c0db2db976d3b1127b5a2eff2a7c6c",
+        "frames": 15
+      },
+      {
+        "source_row": [
+          2,
+          23
+        ],
+        "bytes": 189761,
+        "sha256": "5ea84a327308babd98f99d40e3380d0b6ec8ed8e92230ce1c81c461aa2e6c415",
+        "frames": 15
+      },
+      {
+        "source_row": [
+          2,
+          24
+        ],
+        "bytes": 190011,
+        "sha256": "ae4a86f6c0071cf98dac245797c92b1ca9a9ba60008e7071ec885627504227dc",
+        "frames": 15
+      },
+      {
+        "source_row": [
+          2,
+          60
+        ],
+        "bytes": 12923,
+        "sha256": "02f301ff57e7023bad725919b842a373552ffe421e83e0db934109ef9ad1776c",
+        "frames": 1
+      },
+      {
+        "source_row": [
+          2,
+          61
+        ],
+        "bytes": 201111,
+        "sha256": "61aba15d1a5eedaa9935079a54ba1792b17f3118ca1aafb7b26eaa7d4aa91c09",
+        "frames": 16
+      },
+      {
+        "source_row": [
+          2,
+          141
+        ],
+        "bytes": 13064,
+        "sha256": "5a84c9ccebeec8818fa564be55be4f3de0752a8572522b52db67d859dcd6f314",
+        "frames": 1
+      },
+      {
+        "source_row": [
+          2,
+          142
+        ],
+        "bytes": 203306,
+        "sha256": "702cbd3ab26bcc5e434a40e755242026a90ebcf9f5930c6c2eaa031c939f19e8",
+        "frames": 16
+      }
+    ],
+    "material_frame_count": 112,
+    "material_cases": [
+      {
+        "selection": [
+          0,
+          65,
+          66
+        ],
+        "before_phases": 1,
+        "after_phases": 15,
+        "query_input": {
+          "不足対象は全て修復見込み": false,
+          "既充足対象は全て保存見込み": false
+        },
+        "teacher": {
+          "不足対象は全て修復見込み": false,
+          "既充足対象は全て保存見込み": false,
+          "公開進捗が増加": false
+        },
+        "public_progress": {
+          "before_score": 2,
+          "after_score": 2,
+          "increased": false,
+          "before_state": "NOT_FINISHED",
+          "after_state": "NOT_FINISHED",
+          "before_win_score": 6,
+          "after_win_score": 6,
+          "definition": "strict public score endpoint increase; no hidden state inference"
+        }
+      },
+      {
+        "selection": [
+          0,
+          74,
+          75
+        ],
+        "before_phases": 1,
+        "after_phases": 15,
+        "query_input": {
+          "不足対象は全て修復見込み": false,
+          "既充足対象は全て保存見込み": false
+        },
+        "teacher": {
+          "不足対象は全て修復見込み": false,
+          "既充足対象は全て保存見込み": false,
+          "公開進捗が増加": false
+        },
+        "public_progress": {
+          "before_score": 2,
+          "after_score": 2,
+          "increased": false,
+          "before_state": "NOT_FINISHED",
+          "after_state": "NOT_FINISHED",
+          "before_win_score": 6,
+          "after_win_score": 6,
+          "definition": "strict public score endpoint increase; no hidden state inference"
+        }
+      },
+      {
+        "selection": [
+          0,
+          92,
+          93
+        ],
+        "before_phases": 1,
+        "after_phases": 15,
+        "query_input": {
+          "不足対象は全て修復見込み": true,
+          "既充足対象は全て保存見込み": false
+        },
+        "teacher": {
+          "不足対象は全て修復見込み": true,
+          "既充足対象は全て保存見込み": false,
+          "公開進捗が増加": false
+        },
+        "public_progress": {
+          "before_score": 2,
+          "after_score": 2,
+          "increased": false,
+          "before_state": "NOT_FINISHED",
+          "after_state": "NOT_FINISHED",
+          "before_win_score": 6,
+          "after_win_score": 6,
+          "definition": "strict public score endpoint increase; no hidden state inference"
+        }
+      },
+      {
+        "selection": [
+          2,
+          23,
+          24
+        ],
+        "before_phases": 15,
+        "after_phases": 15,
+        "query_input": {
+          "不足対象は全て修復見込み": false,
+          "既充足対象は全て保存見込み": true
+        },
+        "teacher": {
+          "不足対象は全て修復見込み": false,
+          "既充足対象は全て保存見込み": true,
+          "公開進捗が増加": false
+        },
+        "public_progress": {
+          "before_score": 0,
+          "after_score": 0,
+          "increased": false,
+          "before_state": "NOT_FINISHED",
+          "after_state": "NOT_FINISHED",
+          "before_win_score": 6,
+          "after_win_score": 6,
+          "definition": "strict public score endpoint increase; no hidden state inference"
+        }
+      },
+      {
+        "selection": [
+          2,
+          60,
+          61
+        ],
+        "before_phases": 1,
+        "after_phases": 16,
+        "query_input": {
+          "不足対象は全て修復見込み": true,
+          "既充足対象は全て保存見込み": true
+        },
+        "teacher": {
+          "不足対象は全て修復見込み": true,
+          "既充足対象は全て保存見込み": true,
+          "公開進捗が増加": true
+        },
+        "public_progress": {
+          "before_score": 0,
+          "after_score": 1,
+          "increased": true,
+          "before_state": "NOT_FINISHED",
+          "after_state": "NOT_FINISHED",
+          "before_win_score": 6,
+          "after_win_score": 6,
+          "definition": "strict public score endpoint increase; no hidden state inference"
+        }
+      },
+      {
+        "selection": [
+          2,
+          141,
+          142
+        ],
+        "before_phases": 1,
+        "after_phases": 16,
+        "query_input": {
+          "不足対象は全て修復見込み": true,
+          "既充足対象は全て保存見込み": true
+        },
+        "teacher": {
+          "不足対象は全て修復見込み": true,
+          "既充足対象は全て保存見込み": true,
+          "公開進捗が増加": true
+        },
+        "public_progress": {
+          "before_score": 1,
+          "after_score": 2,
+          "increased": true,
+          "before_state": "NOT_FINISHED",
+          "after_state": "NOT_FINISHED",
+          "before_win_score": 6,
+          "after_win_score": 6,
+          "definition": "strict public score endpoint increase; no hidden state inference"
+        }
+      }
+    ],
+    "material_phase_count": 112,
+    "new_independent_support": 0
+  },
+  "semantic_admission": [
+    "All 200 member sizes and SHA256 values, exact manifest equality, safe headers and full outer gzip CRC/EOF are verified; no archive extraction occurred.",
+    "All 128 JSON documents are valid including 17 fully decoded XZ streams, three inner gzip streams, and six fragments reassembled in source order into one complete own preparation-tool receipt. All typed data tags are validated inertly; no native object reconstruction or import occurs.",
+    "51 source/source-evidence files AST parse. All sources, diffs, authority copies, logs, receipts and structured strings were statically scanned; no unresolved credential, email-pattern or long encoded-string candidate remained. Fourteen fixed-core files match the baseline Git blob identities exactly.",
+    "Independent inert checks confirm two historical six-teaching runs retain every before/after state and raw/external reply. Each run increments experience/learning once and skepticism five times per example, with adjacent state continuity. Twelve original selected public JSONL rows match their byte/hash references; all 112 public response frames have valid 64x64 palette arrays.",
+    "The original material retains all six ordered examples and before-only query conditions, with result added only to the teacher. Stored reports retain the older independent-audit failure and later PASS/closed-after-ACK exit0 separately."
+  ],
+  "actual_verified_scope": {
+    "historical_examples": 6,
+    "material_selected_public_rows": 12,
+    "response_phases": 112,
+    "historical_teach_runs": 2,
+    "historical_teaches_each_run": 6,
+    "historical_queries": 0,
+    "new_independent_support_from_rerun": 0,
+    "new_game_clears_established": 0,
+    "runtime_adoption": false
+  },
+  "limitations": [
+    "Goal6 means six historical teaching examples, not six solved levels. Joint-key mapping does not establish learned AND causality, unseen transfer, or current runnable capability.",
+    "Historical native29489 remains unresolved/unclosed; fixture18870 remains a failed launch/retained state. Later reproduction does not close or erase either historical chain.",
+    "The principle has one lineage and three versions; support six is in candidate/evidence ledgers, not silently appended to the principle-version support list.",
+    "The original archive references the separate recovery archive for three complete public recordings. No external dependency target, SDK/game source, live HDS/Query/Teach/SDK/Action or original owner heap was opened/executed/reconstructed.",
+    "Static schema/source/marker inspection is not proof against arbitrarily encoded secrets or every possible private datum. Exact preservation admission is separate from runtime adoption."
+  ]
+}
