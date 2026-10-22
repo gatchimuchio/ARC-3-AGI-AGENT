@@ -1,4 +1,4 @@
-import sys,unittest,copy,json,resource
+import sys,unittest,copy,json
 from pathlib import Path
 from 接続.連動内部.順序境界 import 初期RESET待受を登録する,作用待受を登録する,順序付きHUDを進める,順序境界付き全候補
 from hds学習系統 import HDS学習系統

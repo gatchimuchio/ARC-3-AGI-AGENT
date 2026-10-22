@@ -1,5 +1,6 @@
 """公開661教師の再現用CLI。runtime入口は教材も実状態pathも読み込まない。"""
-import argparse,gzip,json,hashlib,os,time,resource,shutil,traceback
+import argparse,gzip,json,hashlib,os,time,shutil,traceback
+from .資源計測 import 最大常駐記憶量KiB
 from pathlib import Path
 from dataclasses import asdict
 from .輪郭内部.モデル import 符号,照会
@@ -31,7 +32,7 @@ def main():
   except BaseException:
    report['例外']=traceback.format_exc();report['保存'].append(_save(h,out,'例外実状態'));raise
   finally:
-   report.update({'完了入力数':done,'経過秒':time.monotonic()-start,'最大RSSKiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss});(out/'資源結果.json').write_text(符号(report))
+   report.update({'完了入力数':done,'経過秒':time.monotonic()-start,'最大RSSKiB':最大常駐記憶量KiB()});(out/'資源結果.json').write_text(符号(report))
  else:
   if not a.状態:raise ValueError('--状態が必要。推論時は外部実状態を明示する')
   source=Path(a.状態)

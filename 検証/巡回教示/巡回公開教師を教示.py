@@ -3,6 +3,7 @@ import argparse,gzip,json,hashlib,os,tempfile,copy
 from datetime import datetime
 from pathlib import Path
 from hds学習系統 import HDS学習系統,外部入力
+from 接続.証拠保存 import 証拠を確定する
 
 def 意味SHA(data,d):
  normalized=copy.deepcopy(data)
@@ -31,6 +32,9 @@ def 教示する(fixture):
   h.処理する(外部入力(**t['入力']))
  return h,d
 
+def _最終名へ確定する(temporary,output):
+ 証拠を確定する(temporary,output,置換を許可=False)
+
 def 検証して新規保存する(h,d,output):
  output=Path(output)
  if output.exists():raise FileExistsError('既存状態を上書きしない')
@@ -42,12 +46,9 @@ def 検証して新規保存する(h,d,output):
   if meaning!=d['具体時刻復元後SHA256']:raise AssertionError('時刻を除く全保存意味が原94と一致しない')
   # HDS公開読込でも保存形式の再読込を確認する。
   HDS学習系統.読み込む(temporary)
-  with temporary.open('rb') as f:os.fsync(f.fileno())
-  # 同一filesystemのhardlinkは既存destinationを上書きしない。競合時は失敗。
-  os.link(temporary,output)
-  parent=os.open(output.parent,os.O_RDONLY|os.O_DIRECTORY)
-  try:os.fsync(parent)
-  finally:os.close(parent)
+  # WindowsのFlushFileBuffersに必要な書込権限だけ確保し、内容は変更しない。
+  with temporary.open('r+b') as f:os.fsync(f.fileno())
+  _最終名へ確定する(temporary,output)
   temporary.unlink();temporary=None
   return {'具体1576時刻位置だけ復元した全保存意味一致':True,'保存意味SHA256':meaning,'入力数':94,'出力SHA256':sha,'原94完全一致':sha==d['原94保存SHA256']}
  except Exception as e:

@@ -4,13 +4,13 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import resource
 import sys
 import time
 
 根=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(根),str(根/'HDS/学習系統/v0.4.2')]
 from hds学習系統 import HDS学習系統
+from 接続.資源計測 import 最大常駐記憶量KiB
 from 接続.形状配置規則 import 目標対応全候補を読む,公開教師を教える,学習状態を保存する,規則を照会する,投射境界,局所境界,局所前提を符号化する
 from 接続.形状配置探索 import 形状配置を構成する,全体最短経路を読む
 from 接続.形状配置検証 import 公開前後でモデルを検証する
@@ -45,7 +45,7 @@ def 再現する(出力,教師先,照合先,比較先=None):
     出力.mkdir(parents=True,exist_ok=False)
     資源=[];開始=time.perf_counter()
     def 計測(段階):
-        資源.append({'段階':段階,'開始から秒':time.perf_counter()-開始,'最大常駐記憶量KiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss})
+        資源.append({'段階':段階,'開始から秒':time.perf_counter()-開始,'最大常駐記憶量KiB':最大常駐記憶量KiB()})
         書く(出力/'資源計測.json',資源)
     教師資料=json.loads(教師先.read_text());照合資料=json.loads(照合先.read_text())
     由来={'教師ファイル':教師先.name,'教師sha256':hashlib.sha256(教師先.read_bytes()).hexdigest(),

@@ -1,4 +1,4 @@
-import sys,unittest,copy,tempfile,json,resource
+import sys,unittest,copy,tempfile,json
 from pathlib import Path
 from 接続.ARC3境界 import 観測する
 from 接続.連動規則 import 観測から候補を構成する,順序付きHUDを進める,作用待受を登録する

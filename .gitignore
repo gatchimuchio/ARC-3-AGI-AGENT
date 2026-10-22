@@ -10,9 +10,19 @@ build/
 dist/
 *.egg-info/
 .env
+.env.*
+!.env.example
+.ipynb_checkpoints/
+.jupyter/
+.kaggle/
+kaggle.json
+access_token
 .DS_Store
 Thumbs.db
 
 # 実行時生成物
 出力/
 一時/
+入力/Kaggle/
+environment_files/
+recordings/

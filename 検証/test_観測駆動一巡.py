@@ -1,8 +1,9 @@
-import pathlib,sys,tempfile,json,unittest,os
+import pathlib,sys,tempfile,json,unittest
 from unittest.mock import patch
 根=pathlib.Path(__file__).resolve().parents[1];sys.path[:0]=[str(根),str(根/'HDS/学習系統/v0.4.2')]
 from 接続.ARC3境界 import 観測する
 from 接続.観測駆動一巡 import 記録観測の一巡を処理する,原記憶保存失敗,_候補予測を復元する,_公開報酬を記録する
+from 接続 import 観測駆動一巡 as M
 
 def obs(n=0,guid='A',actions=(5,6)):
  return 観測する({'game_id':'fixture','guid':guid,'state':'NOT_FINISHED','frame':[[[0,0],[0,0]]],'available_actions':list(actions),'levels_completed':0,'win_levels':1},観測通番=n)
@@ -31,17 +32,30 @@ class 一巡試験(unittest.TestCase):
     with self.assertRaises(RuntimeError):記録観測の一巡を処理する(object(),obs(),{'作用番号':5,'引数':{}},obs(1),記憶先=d,出所={})
    self.assertEqual(len(list(pathlib.Path(d).glob('*/原票.json'))),1);r=json.loads(next(pathlib.Path(d).glob('*/結果.json')).read_text());self.assertEqual(r['処理状態'],'途中例外');self.assertEqual(r['失敗']['型'],'RuntimeError')
  def test_初回保存失敗ならHDS照会を始めない(self):
-  with tempfile.TemporaryDirectory() as d,patch('接続.観測駆動一巡.os.replace',side_effect=OSError('disk failure')),patch('接続.観測駆動一巡.公開観測から候補を照会する') as q:
+  with tempfile.TemporaryDirectory() as d,patch('接続.観測駆動一巡.証拠を確定する',side_effect=OSError('disk failure')),patch('接続.観測駆動一巡.公開観測から候補を照会する') as q:
    with self.assertRaises(原記憶保存失敗) as e:記録観測の一巡を処理する(object(),obs(),{'作用番号':5,'引数':{}},obs(1),記憶先=d,出所={})
    q.assert_not_called();self.assertIn('観測後状態',e.exception.未保存記録);self.assertTrue(pathlib.Path(e.exception.保存参照['一時証拠']).exists())
  def test_最終保存失敗でも原票と未保存結果を失わない(self):
-  replace=os.replace
-  def fail(src,dst):
+  replace=M.証拠を確定する
+  def fail(src,dst,**kwargs):
    if pathlib.Path(dst).name=='結果.json':raise OSError('result failure')
-   return replace(src,dst)
-  with tempfile.TemporaryDirectory() as d,patch('接続.観測駆動一巡.os.replace',side_effect=fail):
+   return replace(src,dst,**kwargs)
+  with tempfile.TemporaryDirectory() as d,patch('接続.観測駆動一巡.証拠を確定する',side_effect=fail):
    with self.assertRaises(原記憶保存失敗) as e:self.run_case(d)
    self.assertEqual(len(list(pathlib.Path(d).glob('*/原票.json'))),1);self.assertIn('次観測候補',e.exception.未保存記録);self.assertTrue(pathlib.Path(e.exception.保存参照['一時証拠']).exists())
+ def test_既存結果の更新を許可する(self):
+  with tempfile.TemporaryDirectory()as d:
+   path=pathlib.Path(d)/'結果.json';M._保存する(path,{'状態':'受領'});M._保存する(path,{'状態':'照会完了'})
+   self.assertEqual(json.loads(path.read_text()),{'状態':'照会完了'})
+ def test_公開後故障でも元仮証拠と未保存記録を保持する(self):
+  real=M.証拠を確定する
+  def bad(src,dst,**kwargs):
+   real(src,dst,**kwargs)
+   raise OSError('人工公開後同期故障')
+  with tempfile.TemporaryDirectory()as d,patch.object(M,'証拠を確定する',side_effect=bad):
+   path=pathlib.Path(d)/'結果.json'
+   with self.assertRaises(原記憶保存失敗)as e:M._保存する(path,{'状態':'照会完了'})
+   self.assertTrue(path.exists());self.assertTrue(pathlib.Path(e.exception.保存参照['一時証拠']).exists());self.assertEqual(e.exception.未保存記録,{'状態':'照会完了'})
  def test_実行順序可用性の不整合を保存(self):
   for b,action in [(obs(1,'B'),{'作用番号':5,'引数':{}}),(obs(0),{'作用番号':5,'引数':{}}),(obs(1),{'作用番号':1,'引数':{}})]:
    with tempfile.TemporaryDirectory() as d:

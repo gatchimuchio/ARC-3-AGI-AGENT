@@ -34,30 +34,37 @@ class 保存境界(unittest.TestCase):
   with self.assertRaises(M.保存失敗)as e:M.検証して新規保存する(None,GOOD,self.out)
   self.assertEvidence(e,final=True);self.assertEqual(self.out.read_text(),'既存')
  def test_確定時競合を上書きしない(self):
-  actual=os.link
+  actual=M._最終名へ確定する
   def race(src,dst):Path(dst).write_text('競合');return actual(src,dst)
-  with patch.object(M,'_圧縮仮保存',side_effect=self.fake),patch.object(M,'_標準再読込',return_value=None),patch.object(M,'_bytes',return_value=iter([b'{}'])),patch.object(M.os,'link',side_effect=race):
+  with patch.object(M,'_圧縮仮保存',side_effect=self.fake),patch.object(M,'_標準再読込',return_value=None),patch.object(M,'_bytes',return_value=iter([b'{}'])),patch.object(M,'_最終名へ確定する',side_effect=race):
    with self.assertRaises(M.保存失敗)as e:M.検証して新規保存する(None,GOOD,self.out)
   self.assertEvidence(e,final=True);self.assertEqual(self.out.read_text(),'競合')
  def test_再符号化型byte不一致は未確定(self):
   with patch.object(M,'_圧縮仮保存',side_effect=self.fake),patch.object(M,'_標準再読込',return_value=None),patch.object(M,'_bytes',return_value=iter([b'wrong'])):
    with self.assertRaises(M.保存失敗)as e:M.検証して新規保存する(None,GOOD,self.out)
   self.assertEvidence(e)
- def test_確定後dir同期失敗も成功にしない(self):
-  calls=0;real=M.os.fsync
-  def bad(fd):
-   nonlocal calls
-   calls+=1
-   if calls==2:raise OSError('人工dir同期失敗')
-   return real(fd)
-  with patch.object(M,'_圧縮仮保存',side_effect=self.fake),patch.object(M,'_標準再読込',return_value=None),patch.object(M,'_bytes',return_value=iter([b'{}'])),patch.object(M.os,'fsync',side_effect=bad):
+ def test_確定後失敗も成功にしない(self):
+  real=M._最終名へ確定する
+  def bad(src,dst):
+   real(src,dst)
+   raise OSError('人工確定後失敗')
+  with patch.object(M,'_圧縮仮保存',side_effect=self.fake),patch.object(M,'_標準再読込',return_value=None),patch.object(M,'_bytes',return_value=iter([b'{}'])),patch.object(M,'_最終名へ確定する',side_effect=bad):
    with self.assertRaises(M.保存失敗)as e:M.検証して新規保存する(None,GOOD,self.out)
   self.assertEvidence(e,final=True)
  def test_教示前fixture例外も逐次証拠を保持(self):
   log=self.p/'progress.jsonl.gz'
-  with patch.object(M,'教示する',side_effect=ValueError('人工fixture検証失敗')),patch.object(sys,'argv',['cli','--fixture',str(self.p/'bad.gz'),'--output',str(self.out),'--log',str(log)]):
+  with patch.object(M,'アドレス空間制限を設定する'),patch.object(M,'教示する',side_effect=ValueError('人工fixture検証失敗')),patch.object(sys,'argv',['cli','--fixture',str(self.p/'bad.gz'),'--output',str(self.out),'--log',str(log)]):
    with self.assertRaises(M.保存失敗)as e:M.main()
   self.assertEvidence(e);self.assertEqual(Path(e.exception.失敗記録['未完証拠path']),log)
+ def test_対応外OSで無制限の実教示へ代替しない(self):
+  log=self.p/'progress.jsonl.gz'
+  with patch.object(M.sys,'platform','win32'),patch.object(M,'教示する')as train,patch.object(sys,'argv',['cli','--output',str(self.out),'--log',str(log)]):
+   with self.assertRaises(M.保存失敗)as e:M.main()
+  self.assertEvidence(e);self.assertIn('Linux専用',str(e.exception));train.assert_not_called();self.assertFalse(log.exists())
+ def test_確定API故障時も元仮証拠を保持(self):
+  with patch.object(M,'_圧縮仮保存',side_effect=self.fake),patch.object(M,'_標準再読込',return_value=None),patch.object(M,'_bytes',return_value=iter([b'{}'])),patch.object(M,'_最終名へ確定する',side_effect=OSError('人工確定API失敗')):
+   with self.assertRaises(M.保存失敗)as e:M.検証して新規保存する(None,GOOD,self.out)
+  self.assertEvidence(e);self.assertFalse(self.out.exists())
  def test_指定外の同名時点も差分になる(self):
   d={'具体時刻位置':[{'path':['x'],'原時刻':'2026-01-01T00:00:00+00:00'}]};a={'x':'2026-01-02T00:00:00+00:00','時点':'A'};b={**a,'時点':'B'}
   self.assertNotEqual(M.意味SHA(a,d),M.意味SHA(b,d));(self.p/'検査結果.json').write_text('{"指定外同名key差分検出":true}')

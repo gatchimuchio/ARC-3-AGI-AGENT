@@ -9,6 +9,20 @@ ARC Prize 2026 / ARC-3を対象に、学習機械・事前記憶・公式入力�
 - 公式入力: `入力/`
 - 現在状態: `制御/現在状態.json`
 
+## 開発環境
+
+Python 3.12.10 / uv 0.12.19で依存を固定している。
+Windowsでの復元、公式環境25個の取得、オフライン動作確認、試験手順は
+[接続/開発環境.md](接続/開発環境.md) を参照する。
+
+```powershell
+$env:PYTHONUTF8 = '1'
+python -m uv sync --locked
+python -m uv run --locked python 道具/開発環境確認.py --offline-game
+```
+
+初回は手順書に従ってKaggle配布物を取得する。認証情報・配布本体・実行生成物はGit管理対象外。
+
 ## Repository Map
 
 ```text

@@ -1,5 +1,5 @@
 """固定HDS公開APIで関係を学習。raw参照の集約と提示順を完全保存。"""
-import json,time,resource,hashlib
+import json,time,hashlib
 from collections import defaultdict,deque
 from dataclasses import asdict
 from .知覚 import ROOT,BASE

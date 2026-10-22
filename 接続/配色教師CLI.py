@@ -1,6 +1,7 @@
 """配色教材の入力順・処理結果・保存を保持する。既定は保存状態の読込。"""
 from pathlib import Path
-import sys,json,gzip,tempfile,hashlib,os,argparse,time,resource
+import sys,json,gzip,tempfile,hashlib,os,argparse,time
+from .資源計測 import 最大常駐記憶量KiB
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'HDS/学習系統/v0.4.2'))
 from hds学習系統 import HDS学習系統,外部入力
@@ -99,6 +100,6 @@ def main():
  else:h=保存状態を読む(a.保存状態)
  result=検証する(h,全原票=a.全原票)
  if a.状態出力:result['保存']=確認保存(h,a.状態出力)
- result['再学習なし']=not a.全再学習;result['資源']={'秒':time.perf_counter()-start,'peak_RSS_KiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss}
+ result['再学習なし']=not a.全再学習;result['資源']={'秒':time.perf_counter()-start,'peak_RSS_KiB':最大常駐記憶量KiB()}
  結果保存(a.出力,result);print(json.dumps(result['集計'],ensure_ascii=False))
 if __name__=='__main__':main()

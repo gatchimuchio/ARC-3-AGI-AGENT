@@ -1,10 +1,11 @@
 """字形教師の公開HDS投入/保存済み実状態検証。既定で再学習しない。"""
-import argparse,hashlib,json,resource,sys,time
+import argparse,hashlib,json,sys,time
 from dataclasses import asdict
 from pathlib import Path
 根=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(根),str(根/'HDS/学習系統/v0.4.2')]
 from hds学習系統 import HDS学習系統,外部入力
+from 接続.資源計測 import 最大常駐記憶量KiB
 from 接続.字形.欄観測 import query
 
 資料=根/'検証/資料/字形'
@@ -29,7 +30,7 @@ def 全量教示(dest):
  with (dest/'運転記録.jsonl').open('x') as f:
   def log(x):f.write(json.dumps(x,ensure_ascii=False)+'\n');f.flush()
   def save(name):
-   t=time.perf_counter();p=dest/name;h.保存する(p);log({'実記憶保存':name,'入力済み数':count,'保存バイト数':p.stat().st_size,'秒':time.perf_counter()-t,'SHA256':digest(p),'プロセス最大常駐KiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss})
+   t=time.perf_counter();p=dest/name;h.保存する(p);log({'実記憶保存':name,'入力済み数':count,'保存バイト数':p.stat().st_size,'秒':time.perf_counter()-t,'SHA256':digest(p),'プロセス最大常駐KiB':最大常駐記憶量KiB()})
   try:
    for i,t in enumerate(teachers,1):
     log({'入力開始':i,'教師':t});r=h.処理する(外部入力(t['内容'],t['境界']));count=i;log({'入力完了':i,'全処理結果':asdict(r)})
@@ -40,7 +41,7 @@ def 全量教示(dest):
       value,q=query(h,x,b,y);log({'段階':'作用保存教示前' if i==391 else '作用保存教示後','照会境界':b,'条件':x,'結果名':y,'予測':value,'HDS照会':q})
      if i==1992:save('実状態_'+str(i)+'.json')
     elif i in (791,1191,1591):save('実状態_'+str(i)+'.json')
-   result={'状態':'全量教示保存完了','HDS入力数':count,'経過秒':time.perf_counter()-start,'プロセス最大常駐KiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'実行許可':False};log(result);return result
+   result={'状態':'全量教示保存完了','HDS入力数':count,'経過秒':time.perf_counter()-start,'プロセス最大常駐KiB':最大常駐記憶量KiB(),'実行許可':False};log(result);return result
   except BaseException as e:
    log({'処理例外':type(e).__name__,'内容':str(e),'入力済み数':count})
    try:save('例外実状態.json')

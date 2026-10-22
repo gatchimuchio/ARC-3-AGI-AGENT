@@ -9,8 +9,15 @@ from pathlib import Path
     "HDS/学習系統/v0.4.2/README.md","記憶/事前記憶/v0.4/マニフェスト.json",
     "入力/README.md","戦略/README.md","検証/README.md",
 )
-許可ルートファイル = {".gitattributes",".gitignore","AGENTS.md","README.md"}
-許可トップレベル = {".github","HDS","入力","制御","戦略","接続","検証","記憶","運用","道具"}
+許可ルートファイル = {
+    ".gitattributes", ".gitignore", "AGENTS.md", "README.md",
+    ".python-version", "pyproject.toml", "uv.lock",
+}
+許可トップレベル = {
+    ".github", "HDS", "入力", "制御", "戦略", "接続", "検証", "記憶", "運用", "道具",
+    ".venv", ".pytest_cache", ".ruff_cache", ".ipynb_checkpoints",
+    "出力", "一時",
+}
 
 def 失敗(msg):
     raise SystemExit("リポジトリ環境監査失敗: " + msg)

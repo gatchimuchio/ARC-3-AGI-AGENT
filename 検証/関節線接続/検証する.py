@@ -17,6 +17,7 @@ if HDS_ROOT.is_dir():sys.path.insert(0,str(HDS_ROOT))
 from hds学習系統 import HDS学習系統,外部入力
 from 接続 import 関節線接続 as A
 from 接続 import 関節線因子 as F
+from 接続.資源計測 import 最大常駐記憶量KiB
 FIXTURE=ROOT/'検証/資料/関節線'
 STATE_ENV='ARC_JOINTED_LINE_HDS_STATE'
 COUNTER_ENV='ARC_JOINTED_LINE_COUNTER_STATE'
@@ -57,13 +58,16 @@ def 資源を確認():
     # Linux ru_maxrss は fork/exec 前の親高水位も引き継ぎ得る。
     # 現在の exec 後アドレス空間の実測最大RSSを使う。取得不能なら省略しない。
     try:
-        rows=[line.split() for line in Path('/proc/self/status').read_text().splitlines()
-              if line.startswith('VmHWM:')]
-        if len(rows)!=1 or len(rows[0])!=3 or rows[0][2]!='kB':
-            raise ValueError('VmHWMの単位/形式が不明')
-        if not rows[0][1].isascii() or not rows[0][1].isdecimal():
-            raise ValueError('VmHWMの数値形式が不明')
-        rss=int(rows[0][1])
+        if sys.platform=='win32':
+            rss=最大常駐記憶量KiB()
+        else:
+            rows=[line.split() for line in Path('/proc/self/status').read_text().splitlines()
+                  if line.startswith('VmHWM:')]
+            if len(rows)!=1 or len(rows[0])!=3 or rows[0][2]!='kB':
+                raise ValueError('VmHWMの単位/形式が不明')
+            if not rows[0][1].isascii() or not rows[0][1].isdecimal():
+                raise ValueError('VmHWMの数値形式が不明')
+            rss=int(rows[0][1])
         if rss<=0:raise ValueError('VmHWMが正でない')
     except (OSError,ValueError) as error:
         raise RuntimeError('検証過程の最大RSSを取得できない') from error

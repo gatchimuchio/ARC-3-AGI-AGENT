@@ -26,11 +26,27 @@ class 保存境界(unittest.TestCase):
   class Fake:
    def 保存する(self,p):p.write_text('{}')
   with tempfile.TemporaryDirectory() as td:
-   p=pathlib.Path(td)/'state.json';real=m.os.link
+   p=pathlib.Path(td)/'state.json';real=m._最終名へ確定する
    def raced(src,dst):p.write_text('競合');return real(src,dst)
-   with patch.object(m.HDS学習系統,'読み込む',return_value=None),patch.object(m.os,'link',side_effect=raced):
+   with patch.object(m.HDS学習系統,'読み込む',return_value=None),patch.object(m,'_最終名へ確定する',side_effect=raced):
     with self.assertRaises(m.保存失敗) as caught:m.検証して新規保存する(Fake(),GOOD,p)
    self.assertEqual(p.read_text(),'競合');self.assertEqual(pathlib.Path(caught.exception.失敗記録['未完証拠path']).read_text(),'{}')
+ def test_小人工stateの標準保存と再読込が成立する(self):
+  with tempfile.TemporaryDirectory()as td:
+   root=pathlib.Path(td);h=m.HDS学習系統();h.処理する(m.外部入力({'保存対照':1},'人工保存試験'))
+   original=root/'original.json';h.保存する(original);raw=original.read_bytes();data=json.loads(raw)
+   d={**GOOD,'具体時刻復元後SHA256':m.意味SHA(data,GOOD),'原94保存SHA256':hashlib.sha256(raw).hexdigest()};dest=root/'state.json'
+   result=m.検証して新規保存する(h,d,dest)
+   self.assertTrue(result['原94完全一致']);self.assertEqual(json.loads(dest.read_bytes()),data)
+ def test_公開後故障は成功にせず元仮証拠を保持する(self):
+  class Fake:
+   def 保存する(self,p):p.write_text('{}')
+  real=m._最終名へ確定する
+  def bad(src,dst):real(src,dst);raise OSError('人工公開後同期故障')
+  with tempfile.TemporaryDirectory()as td,patch.object(m.HDS学習系統,'読み込む',return_value=None),patch.object(m,'_最終名へ確定する',side_effect=bad):
+   dest=pathlib.Path(td)/'state.json'
+   with self.assertRaises(m.保存失敗)as caught:m.検証して新規保存する(Fake(),GOOD,dest)
+   record=caught.exception.失敗記録;self.assertTrue(dest.exists());self.assertEqual(pathlib.Path(record['未完証拠path']).read_text(),'{}');self.assertTrue(pathlib.Path(record['失敗理由path']).exists())
  def test_標準再読込故障も未確定(self):
   class Fake:
    def 保存する(self,p):p.write_text('{}')

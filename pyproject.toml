@@ -1,0 +1,46 @@
+[project]
+name = "arc-3-agi-agent"
+version = "0.0.0"
+description = "ARC-AGI-3のローカル開発・公式環境接続・検証環境"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "arc-agi==0.9.8",
+    "arcengine==0.9.3",
+    "hds-learning-system",
+    "numpy==2.4.4",
+    "pandas",
+    "pyarrow",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel",
+    "jupyterlab",
+    "kaggle==2.2.4",
+    "kagglesdk==0.1.37",
+    "pytest",
+    "ruff",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+hds-learning-system = { path = "HDS/学習系統/v0.4.2", editable = true }
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = [
+    "入力/Kaggle", "検証/運転記録", "出力", "一時",
+    # Ruffは合法な「;match=」を構文エラーと判定する。CPython compileallで別途検査する。
+    "接続/配色内部/応答.py",
+]
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]
+
+[tool.pytest.ini_options]
+testpaths = ["検証"]
+pythonpath = ["."]
+norecursedirs = ["運転記録", ".git", ".venv", "入力"]

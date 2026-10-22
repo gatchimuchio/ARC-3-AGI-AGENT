@@ -4,6 +4,7 @@ import json,os,pathlib,tempfile,uuid,math
 from .ARC3境界 import 観測,_作用番号,_整数,境界違反
 from .共通観測経路 import 公開観測から候補を照会する,作用応答を相別に記録する
 from .応答相照合 import 公開応答相を照合する
+from .証拠保存 import 証拠を確定する
 
 class 原記憶保存失敗(RuntimeError):
     def __init__(self,理由,記録,参照):
@@ -16,10 +17,8 @@ def _保存する(宛先,記録):
         内容=json.dumps(記録,ensure_ascii=False,indent=2,allow_nan=False).encode('utf-8')
         with tempfile.NamedTemporaryFile(dir=宛先.parent,prefix=宛先.name+'.',suffix='.未完了',delete=False) as f:
             一時=f.name;f.write(内容);f.flush();os.fsync(f.fileno())
-        os.replace(一時,宛先)
-        親=os.open(宛先.parent,os.O_RDONLY | os.O_DIRECTORY)
-        try:os.fsync(親)
-        finally:os.close(親)
+        証拠を確定する(一時,宛先,置換を許可=True)
+        os.unlink(一時)
     except Exception as e:
         raise 原記憶保存失敗(str(e),記録,{'宛先':str(宛先),'一時証拠':一時}) from e
 

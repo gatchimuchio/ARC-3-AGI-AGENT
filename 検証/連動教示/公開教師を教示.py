@@ -1,5 +1,7 @@
 """明示起動専用268教示CLI。runtimeから参照しない。core不変・新規保存限定。"""
-import argparse,gzip,json,hashlib,os,tempfile,uuid,gc,resource,time
+import argparse,gzip,json,hashlib,os,tempfile,uuid,gc,time,sys
+from 接続.資源計測 import 最大常駐記憶量KiB
+from 接続.証拠保存 import 証拠を確定する
 from pathlib import Path
 from datetime import datetime
 from unittest.mock import patch
@@ -63,6 +65,9 @@ def _標準再読込(path):
   return original(p,*args,**kw)
  with patch.object(Path,'read_text',read):return HDS学習系統.読み込む(path)
 
+def _最終名へ確定する(temporary,output):
+ 証拠を確定する(temporary,output,置換を許可=False)
+
 def 検証して新規保存する(h,d,output):
  output=_新規先(output);temporary=None
  try:
@@ -80,11 +85,9 @@ def 検証して新規保存する(h,d,output):
   for b in _bytes(reloaded):again.update(b)
   del reloaded;gc.collect()
   if again.hexdigest()!=sha:raise ValueError('標準core再読込後の全型/全byte再符号化が不一致')
-  with temporary.open('rb')as f:os.fsync(f.fileno())
-  os.link(temporary,output) # 同filesystem・既存先を上書きしないatomic link
-  parent=os.open(output.parent,os.O_RDONLY|os.O_DIRECTORY)
-  try:os.fsync(parent)
-  finally:os.close(parent)
+  # WindowsのFlushFileBuffersは書込権限が必要。内容はここでは変更しない。
+  with temporary.open('r+b')as f:os.fsync(f.fileno())
+  _最終名へ確定する(temporary,output)
   temporary.unlink();temporary=None
   return {'成功':True,'入力数':268,'保存意味SHA256':meaning,'原268と具体時刻leaf以外全一致':True,'全型標準再読込再符号化一致':True,'復号SHA256':sha,'復号bytes':size,'gzipbytes':output.stat().st_size,'具体時刻leaf数':len(d['具体時刻位置']),'原268復号byte一致':sha==d['原state復号SHA256']}
  except Exception as exc:raise _失敗(exc,output,temporary)from exc
@@ -103,16 +106,24 @@ def 教示する(fixture,progress=None):
   if progress:progress({'投入順':t['投入順'],'入力':t['入力'],'全由来':t['全由来'],'状態':result.状態,'内容':result.内容,'追跡情報':result.追跡情報})
  return h,d
 
+def アドレス空間制限を設定する():
+ """350MiBの実制限を要求する。対応外OSで無制限の再学習へ代替しない。"""
+ if sys.platform!='linux':
+  raise RuntimeError('350MiB制限付き連動教示はLinux専用。WindowsではWSL/Linuxを使用してください。')
+ import resource
+ resource.setrlimit(resource.RLIMIT_AS,(350*1024*1024,350*1024*1024))
+
 def main():
- resource.setrlimit(resource.RLIMIT_AS,(350*1024*1024,350*1024*1024));start=time.monotonic()
+ start=time.monotonic()
  p=argparse.ArgumentParser();p.add_argument('--fixture',type=Path,default=Path(__file__).with_name('公開教師268.json.gz'));p.add_argument('--output',type=Path,required=True);p.add_argument('--log',type=Path,required=True);a=p.parse_args()
  try:
+  アドレス空間制限を設定する()
   _新規先(a.output)
   if a.log.exists():raise _失敗(FileExistsError('逐次logを上書きしない'),a.output)
   with a.log.open('xb')as raw,gzip.GzipFile(fileobj=raw,mode='wb')as log:
    def progress(r):log.write((json.dumps(r,ensure_ascii=False,separators=(',',':'))+'\n').encode());log.flush()
    h,d=教示する(a.fixture,progress)
-  result=検証して新規保存する(h,d,a.output);result.update({'fixtureSHA256':hashlib.sha256(a.fixture.read_bytes()).hexdigest(),'秒':time.monotonic()-start,'最大RSSKiB':resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,'追加学習対象':'独立空系のみ。旧268/現mainstate不変','実行許可':False});print(json.dumps(result,ensure_ascii=False))
+  result=検証して新規保存する(h,d,a.output);result.update({'fixtureSHA256':hashlib.sha256(a.fixture.read_bytes()).hexdigest(),'秒':time.monotonic()-start,'最大RSSKiB':最大常駐記憶量KiB(),'追加学習対象':'独立空系のみ。旧268/現mainstate不変','実行許可':False});print(json.dumps(result,ensure_ascii=False))
  except 保存失敗:raise
  except Exception as exc:raise _失敗(exc,a.output,a.log if a.log.exists()else None)from exc
 
