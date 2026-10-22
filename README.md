@@ -23,6 +23,9 @@ python -m uv run --locked python 道具/開発環境確認.py --offline-game
 
 初回は手順書に従ってKaggle配布物を取得する。認証情報・配布本体・実行生成物はGit管理対象外。
 
+Kaggle Notebookの提出基線、保存・実行とCompetition Rerunの区別は
+[接続/ARC3提出.md](接続/ARC3提出.md) を参照する。
+
 ## Repository Map
 
 ```text
