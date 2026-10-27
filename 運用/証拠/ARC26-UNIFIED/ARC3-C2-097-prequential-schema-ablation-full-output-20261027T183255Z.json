@@ -1,0 +1,254 @@
+{
+  "schema": "arc3-hds-public-prequential-postaction-feature-ablation.v1",
+  "source_run": "C2-088 B-v3 sequential version 4",
+  "games": [
+    "m0r0-492f87ba",
+    "sk48-d8078629",
+    "tn36-ef4dde99"
+  ],
+  "boundary": "ARC3視覚公開作用応答候補",
+  "target": "公開応答区分",
+  "removed_candidate_feature": "公開作用点効果区分",
+  "comparison": "same ordered public transitions; query before each update; fresh prior-loaded HDS per game",
+  "baseline": {
+    "exclude_post_action_feature_from_updates": false,
+    "per_game": {
+      "m0r0-492f87ba": {
+        "input_state_sha256": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22",
+        "updates": 80,
+        "queries": 80,
+        "query_update_state_had_prior_context": 5,
+        "step39": {
+          "public_step_before": 39,
+          "action_number": 1,
+          "observed_response": "盤面変化",
+          "predicted_response": null,
+          "prediction_count": 0,
+          "active_rule_count": 0,
+          "observation_request_count": 0,
+          "native_status": "断定保留",
+          "post_action_effect_condition_rules": 0,
+          "correct": null
+        },
+        "metrics": {
+          "transitions": 80,
+          "forecasted": 31,
+          "coverage": 0.3875,
+          "correct": 29,
+          "precision": 0.9354838709677419
+        },
+        "action6_metrics": {
+          "transitions": 1,
+          "forecasted": 0,
+          "coverage": 0.0,
+          "correct": 0,
+          "precision": null
+        },
+        "post_action_effect_condition_rules_seen": 0
+      },
+      "sk48-d8078629": {
+        "input_state_sha256": "36f49e579ce154747c727baa4e98f643c0bd005f209c53029e68b3295d2ccf44",
+        "updates": 79,
+        "queries": 79,
+        "query_update_state_had_prior_context": 5,
+        "step39": {
+          "public_step_before": 39,
+          "action_number": 4,
+          "observed_response": "盤面変化",
+          "predicted_response": null,
+          "prediction_count": 0,
+          "active_rule_count": 0,
+          "observation_request_count": 0,
+          "native_status": "断定保留",
+          "post_action_effect_condition_rules": 0,
+          "correct": null
+        },
+        "metrics": {
+          "transitions": 79,
+          "forecasted": 1,
+          "coverage": 0.012658227848101266,
+          "correct": 0,
+          "precision": 0.0
+        },
+        "action6_metrics": {
+          "transitions": 0,
+          "forecasted": 0,
+          "coverage": 0.0,
+          "correct": 0,
+          "precision": null
+        },
+        "post_action_effect_condition_rules_seen": 0
+      },
+      "tn36-ef4dde99": {
+        "input_state_sha256": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f",
+        "updates": 80,
+        "queries": 80,
+        "query_update_state_had_prior_context": 5,
+        "step39": {
+          "public_step_before": 39,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "predicted_response": null,
+          "prediction_count": 0,
+          "active_rule_count": 3,
+          "observation_request_count": 1,
+          "native_status": "断定保留",
+          "post_action_effect_condition_rules": 3,
+          "correct": null
+        },
+        "metrics": {
+          "transitions": 80,
+          "forecasted": 15,
+          "coverage": 0.1875,
+          "correct": 14,
+          "precision": 0.9333333333333333
+        },
+        "action6_metrics": {
+          "transitions": 80,
+          "forecasted": 15,
+          "coverage": 0.1875,
+          "correct": 14,
+          "precision": 0.9333333333333333
+        },
+        "post_action_effect_condition_rules_seen": 157
+      }
+    },
+    "aggregate": {
+      "transitions": 239,
+      "forecasted": 47,
+      "coverage": 0.19665271966527198,
+      "correct": 43,
+      "precision": 0.9148936170212766
+    },
+    "action6_aggregate": {
+      "transitions": 81,
+      "forecasted": 15,
+      "coverage": 0.18518518518518517,
+      "correct": 14,
+      "precision": 0.9333333333333333
+    },
+    "post_action_effect_condition_rules_seen": 157
+  },
+  "candidate": {
+    "exclude_post_action_feature_from_updates": true,
+    "per_game": {
+      "m0r0-492f87ba": {
+        "input_state_sha256": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22",
+        "updates": 80,
+        "queries": 80,
+        "query_update_state_had_prior_context": 5,
+        "step39": {
+          "public_step_before": 39,
+          "action_number": 1,
+          "observed_response": "盤面変化",
+          "predicted_response": null,
+          "prediction_count": 0,
+          "active_rule_count": 0,
+          "observation_request_count": 0,
+          "native_status": "断定保留",
+          "post_action_effect_condition_rules": 0,
+          "correct": null
+        },
+        "metrics": {
+          "transitions": 80,
+          "forecasted": 31,
+          "coverage": 0.3875,
+          "correct": 29,
+          "precision": 0.9354838709677419
+        },
+        "action6_metrics": {
+          "transitions": 1,
+          "forecasted": 0,
+          "coverage": 0.0,
+          "correct": 0,
+          "precision": null
+        },
+        "post_action_effect_condition_rules_seen": 0
+      },
+      "sk48-d8078629": {
+        "input_state_sha256": "36f49e579ce154747c727baa4e98f643c0bd005f209c53029e68b3295d2ccf44",
+        "updates": 79,
+        "queries": 79,
+        "query_update_state_had_prior_context": 5,
+        "step39": {
+          "public_step_before": 39,
+          "action_number": 4,
+          "observed_response": "盤面変化",
+          "predicted_response": null,
+          "prediction_count": 0,
+          "active_rule_count": 0,
+          "observation_request_count": 0,
+          "native_status": "断定保留",
+          "post_action_effect_condition_rules": 0,
+          "correct": null
+        },
+        "metrics": {
+          "transitions": 79,
+          "forecasted": 1,
+          "coverage": 0.012658227848101266,
+          "correct": 0,
+          "precision": 0.0
+        },
+        "action6_metrics": {
+          "transitions": 0,
+          "forecasted": 0,
+          "coverage": 0.0,
+          "correct": 0,
+          "precision": null
+        },
+        "post_action_effect_condition_rules_seen": 0
+      },
+      "tn36-ef4dde99": {
+        "input_state_sha256": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f",
+        "updates": 80,
+        "queries": 80,
+        "query_update_state_had_prior_context": 5,
+        "step39": {
+          "public_step_before": 39,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "predicted_response": null,
+          "prediction_count": 0,
+          "active_rule_count": 0,
+          "observation_request_count": 0,
+          "native_status": "断定保留",
+          "post_action_effect_condition_rules": 0,
+          "correct": null
+        },
+        "metrics": {
+          "transitions": 80,
+          "forecasted": 15,
+          "coverage": 0.1875,
+          "correct": 14,
+          "precision": 0.9333333333333333
+        },
+        "action6_metrics": {
+          "transitions": 80,
+          "forecasted": 15,
+          "coverage": 0.1875,
+          "correct": 14,
+          "precision": 0.9333333333333333
+        },
+        "post_action_effect_condition_rules_seen": 0
+      }
+    },
+    "aggregate": {
+      "transitions": 239,
+      "forecasted": 47,
+      "coverage": 0.19665271966527198,
+      "correct": 43,
+      "precision": 0.9148936170212766
+    },
+    "action6_aggregate": {
+      "transitions": 81,
+      "forecasted": 15,
+      "coverage": 0.18518518518518517,
+      "correct": 14,
+      "precision": 0.9333333333333333
+    },
+    "post_action_effect_condition_rules_seen": 0
+  },
+  "score_effect": "NOT_MEASURED",
+  "action_or_score_improvement_proven": false,
+  "official_submission_or_kernel_run": false
+}

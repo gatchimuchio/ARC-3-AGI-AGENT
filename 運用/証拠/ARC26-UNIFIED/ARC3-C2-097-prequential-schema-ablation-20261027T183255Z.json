@@ -1,0 +1,128 @@
+{
+  "schema": "arc3-hds-public-prequential-postaction-feature-ablation.v1",
+  "run_id": "ARC3-RUN-003-C2-097",
+  "completed_at_utc": "2026-10-27T18:32:55Z",
+  "observed_at_utc": "2026-10-27T18:34:38Z",
+  "source_revision": "1fa93db3dbc660008f1b43f75da61546d89e551f",
+  "source_run": "C2-088 B-v3 sequential exact-output version 4",
+  "execution": {
+    "command": ".venv/Scripts/python.exe 検証/ARC3HDS_public-prequential-postaction-feature-ablation.py --output 出力/ARC3-RUN-003-local/C2-097/prequential-schema-ablation.json",
+    "script_sha256": "913824F04625FEEA51E07051CF5CB7B462DB4B3501BFFB83A203B7B2ECC0861C",
+    "result_sha256": "E983547DF2AA0BB1F22EABCFCEB36E58A2ACE05848E7F6655E4B31A0620B6FFE",
+    "tracked_full_output": "運用/証拠/ARC26-UNIFIED/ARC3-C2-097-prequential-schema-ablation-full-output-20261027T183255Z.json",
+    "tracked_full_output_sha256": "E983547DF2AA0BB1F22EABCFCEB36E58A2ACE05848E7F6655E4B31A0620B6FFE",
+    "comparison": "baseline and candidate each queried before updating on the same ordered public transitions; each game/arm loaded the same five fixed prior principles",
+    "baseline_query_update_counts": {
+      "queries": 239,
+      "updates": 239
+    },
+    "candidate_query_update_counts": {
+      "queries": 239,
+      "updates": 239
+    }
+  },
+  "source_inputs": {
+    "m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version4-20261027T151952Z/artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json",
+      "sha256": "802E91FE0F50CBE46D273D40E35BBC01E1860F0A5EF89884762663F2EB490D22",
+      "transitions": 80
+    },
+    "sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version4-20261027T151952Z/artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json",
+      "sha256": "36F49E579CE154747C727BAA4E98F643C0BD005F209C53029E68B3295D2CCF44",
+      "transitions": 79
+    },
+    "tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version4-20261027T151952Z/artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json",
+      "sha256": "3E99A29D497BE3A3124822E55F0AB506CEF404DD48EF45087CC1EE235629106F",
+      "transitions": 80
+    }
+  },
+  "arms": {
+    "baseline": {
+      "update_includes_post_action_feature": true,
+      "all_transitions": {
+        "transitions": 239,
+        "forecasted": 47,
+        "correct": 43,
+        "coverage": 0.19665271966527198,
+        "precision": 0.9148936170212766
+      },
+      "action6": {
+        "transitions": 81,
+        "forecasted": 15,
+        "correct": 14,
+        "coverage": 0.18518518518518517,
+        "precision": 0.9333333333333333
+      },
+      "post_action_condition_rule_matches": 157,
+      "per_game_forecasted_correct": {
+        "m0r0-492f87ba": "31/80, 29 correct",
+        "sk48-d8078629": "1/79, 0 correct",
+        "tn36-ef4dde99": "15/80, 14 correct"
+      }
+    },
+    "candidate": {
+      "update_includes_post_action_feature": false,
+      "all_transitions": {
+        "transitions": 239,
+        "forecasted": 47,
+        "correct": 43,
+        "coverage": 0.19665271966527198,
+        "precision": 0.9148936170212766
+      },
+      "action6": {
+        "transitions": 81,
+        "forecasted": 15,
+        "correct": 14,
+        "coverage": 0.18518518518518517,
+        "precision": 0.9333333333333333
+      },
+      "post_action_condition_rule_matches": 0,
+      "per_game_forecasted_correct": {
+        "m0r0-492f87ba": "31/80, 29 correct",
+        "sk48-d8078629": "1/79, 0 correct",
+        "tn36-ef4dde99": "15/80, 14 correct"
+      }
+    }
+  },
+  "exact_followup": {
+    "game": "tn36-ef4dde99",
+    "public_step_before": 39,
+    "action_number": 6,
+    "observed_response": "境界領域変化のみ",
+    "baseline": {
+      "forecast_count": 0,
+      "active_rule_count": 3,
+      "additional_observation_request_count": 1,
+      "post_action_feature_condition_rule_count": 3,
+      "native_status": "断定保留"
+    },
+    "candidate": {
+      "forecast_count": 0,
+      "active_rule_count": 0,
+      "additional_observation_request_count": 0,
+      "post_action_feature_condition_rule_count": 0,
+      "native_status": "断定保留"
+    }
+  },
+  "decision": "HOLD_NO_PROMOTION_FOR_SCORE_GAIN",
+  "finding": "Omitting the post-action feature removes 157 post-action-conditioned rule matches in this trace set, but adds no forecasts and changes no per-game, aggregate, or Action 6 forecast counts or correctness. It does not resolve the no-forecast HOLD at tn36 step 39.",
+  "score_effect": "NOT_MEASURED",
+  "controls": {
+    "runtime_code_changed": false,
+    "tests_run": false,
+    "public_kernel_push_or_rerun": false,
+    "official_submission": false,
+    "submission_quota_consumed": false,
+    "hidden_state_used": false,
+    "answer_lookup_or_game_id_branching": false,
+    "protected_files_modified": false
+  },
+  "limitations": [
+    "one archived stochastic public trace per each of three games",
+    "239 public transitions; no additional game actions were executed",
+    "no game-level score or action-selection delta was measured",
+    "no official score effect was measured"
+  ]
+}
