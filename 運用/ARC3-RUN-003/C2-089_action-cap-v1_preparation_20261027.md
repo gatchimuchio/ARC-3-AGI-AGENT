@@ -42,3 +42,9 @@ The earlier preparation record's “45 actions after first four per analysis ste
 B-v3 version 4 now has an exact COMPLETE output scored by the extended-outcome adapter with gameplay and integration validity true. The same-package version 5 reproduction is running. C2-089 remains unpushed until version 5 is retrieved, scored with that adapter, and compared to version 4 on the same public games and limits. The candidate package hashes still match its prepared manifest; the action-cap score effect remains unmeasured. Today's official quota is treated as exhausted based on the current CLI history and Kaggle Staff's one-per-day statement.
 
 Gate evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-parent-v5-preflight-20261027T160910Z.json.
+
+## Parent v4/v5 comparison — 2026-10-27T16:26:19Z
+
+The parent comparison is complete but not reproducible: identical initial public frames and first prompts produced different first actions in two games. The public offline mean RHAE moved from 2.206345 to 5.952381, with the same 3/21 levels and 240 actions but a substantially different per-game distribution. A private C2-089 run can now serve only as a diagnostic against this noisy reference. Do not label one run an improvement; require a repeated candidate result and interpret it against both parent observations. No Competition Rerun or quota was used.
+
+Comparison evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-v5-reproducibility-audit-20261027T162619Z.json.
