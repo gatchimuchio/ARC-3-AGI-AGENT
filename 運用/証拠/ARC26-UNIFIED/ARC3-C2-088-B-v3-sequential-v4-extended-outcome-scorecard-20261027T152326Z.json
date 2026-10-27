@@ -1,0 +1,242 @@
+{
+  "schema": "arc3-native-game-learning-scorecard.v1",
+  "observed_at_utc": "2026-10-27T15:25:21.786215+00:00",
+  "inspection": "single",
+  "arm": {
+    "requested_kernel": "tecchannn/arc3-v6-online-official-c2-088",
+    "actual_kernel": "tecchannn/arc3-v6-online-official-c2-088",
+    "identity_alias_applied": false,
+    "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+    "version": 4,
+    "status": "KernelWorkerStatus.COMPLETE",
+    "mode": "shadow",
+    "evidence_visibility": "shown",
+    "build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556",
+    "retrieval_manifest_sha256": "14f116fca2043546ce45bc55e5ed5894efc2955c3d00cfb3863f9d685de67bb8",
+    "selected_output_manifest_sha256": "b1928e6b7848abe2ed3696357c5dcb7e43f2d4b9b9c34b4333132b51ed1697d4",
+    "benchmark_sha256": "affd0194f16dbb076803fb36d0a9726ebc943c8cd9f25cf29de9089b28abc6de",
+    "games": 3,
+    "public_offline_RHAE_mean": 2.2063453421498442,
+    "saved_scores_match_recomputed": true,
+    "levels_completed": 3,
+    "levels_total": 21,
+    "actual_actions": 240,
+    "run_state_counts": {
+      "gave_up": 3
+    },
+    "history_generated_tokens": 222595,
+    "games_with_visual_model_generation": 3,
+    "generation_flags_in_benchmark_order_when_invalid": null,
+    "job_elapsed_seconds": 1590.444436,
+    "max_game_elapsed_seconds": 595.8759252569998,
+    "gameplay_valid": true,
+    "integration_valid": true,
+    "HDS": {
+      "integration_valid": true,
+      "integration_failures": [],
+      "errors": {
+        "update_errors": 0,
+        "query_errors": 0,
+        "summary_errors": 0,
+        "prior_update_errors": 0,
+        "rejected_requests": 0
+      },
+      "learning_mode": "enabled",
+      "counters": {
+        "action_after_distinct_tool_call_query": 4,
+        "actual_action_calls_seen": 240,
+        "distinct_model_response_after_query": 4,
+        "executed_candidate_was_queried": 3,
+        "game_response_teacher_inputs_computed": 239,
+        "game_response_update_enabled_requests": 239,
+        "order_event:action_after_query": 4,
+        "order_event:action_call_requested": 246,
+        "order_event:query_returned": 5,
+        "public_outcome:レベル進行": 3,
+        "public_outcome:境界領域変化のみ": 34,
+        "public_outcome:盤面変化": 201,
+        "query_helper_calls": 5,
+        "query_native:断定保留": 4,
+        "query_status:queried": 4,
+        "skipped_RESET_or_automatic": 1,
+        "update_status:updated": 239,
+        "query_cache_hits": 1,
+        "public_outcome:可視変化なし": 1
+      },
+      "operations": {
+        "updates_attempted": 239,
+        "updates_succeeded": 239,
+        "queries_attempted": 4,
+        "queries_succeeded": 4,
+        "update_errors": 0,
+        "query_errors": 0,
+        "summary_errors": 0,
+        "prior_updates_attempted": 15,
+        "prior_updates_succeeded": 15,
+        "prior_update_errors": 0,
+        "skipped_resets": 0,
+        "rejected_requests": 0,
+        "budget_exhaustion_requests": 0
+      },
+      "seconds": {
+        "update_seconds": 30.119400999999996,
+        "query_seconds": 0.014574,
+        "total_hds_seconds": 30.166725,
+        "prior_load_seconds": 0.03275
+      },
+      "game_response_update_evidence": {
+        "nonRESET_callbacks": 239,
+        "computed_game_teachers": 239,
+        "expected_disabled_skips": 0,
+        "native_budget_skips": 0
+      },
+      "prior_native_updates_are_separate": true,
+      "budgets_per_game": {
+        "update_budget": 80,
+        "query_budget": 80,
+        "hds_seconds_budget": 120.0
+      },
+      "budget_exhausted_game_counts": {
+        "update_budget_exhausted": 2,
+        "query_budget_exhausted": 0,
+        "time_budget_exhausted": 0
+      },
+      "max_soft_HDS_time_overrun_seconds": 0.0,
+      "native_query_status_counts": {
+        "断定保留": 4
+      },
+      "matched_candidate_ordering": {
+        "matched_candidate_receipts": 3,
+        "matched_candidate_trace_joins": 3,
+        "distinct_model_response_observation_opportunity": 3
+      },
+      "native_target_count_sums_on_matched_responses": {
+        "予測群": 0,
+        "有効原理群": 3,
+        "競合群": 0,
+        "追加観測要求群": 1,
+        "係争中原理群": 2,
+        "識別不能群": 1
+      },
+      "native_target_UNKNOWN_query_counts": {},
+      "strict_past_prediction_measurement": {
+        "complete_game_streams": 3,
+        "counts": {
+          "nonreset_public_responses": 239,
+          "outcome:盤面変化": 201,
+          "forecast_blocked:UNMEASURED_UNQUERIED_UNKNOWN_CLIPPED_OR_NONUNIQUE": 239,
+          "outcome:境界領域変化のみ": 34,
+          "outcome:レベル進行": 3,
+          "outcome:可視変化なし": 1
+        },
+        "forecast_precision": null,
+        "same_covered_steps": 0,
+        "same_covered_native_precision": null,
+        "same_covered_past_majority_precision": null,
+        "native_guard_qualification": "UNKNOWN_NOT_INFERRED_FROM_ACTIVE_REF_LINKS",
+        "qualification": "Descriptive actual active/adopted-reference forecasts; native HOLD/uncertainty retained. Unknown/clipped/nonunique forecasts unmeasured.",
+        "native_status_forecast_counts": {}
+      },
+      "Action6_effect_prediction_measurement": {
+        "complete_game_streams": 3,
+        "counts": {
+          "nonreset_public_responses": 81,
+          "outcome:局所なし・局所以外あり": 31,
+          "forecast_blocked:UNMEASURED": 81,
+          "outcome:局所あり・局所以外あり": 49,
+          "outcome:局所なし・局所以外なし": 1
+        },
+        "forecast_precision": null,
+        "same_covered_steps": 0,
+        "same_covered_native_precision": null,
+        "same_covered_past_majority_precision": null,
+        "native_guard_qualification": "UNKNOWN_NOT_INFERRED_FROM_ACTIVE_REF_LINKS",
+        "qualification": "Descriptive actual active/adopted-reference forecasts; native HOLD/uncertainty retained. Unknown/clipped/nonunique forecasts unmeasured.",
+        "majority_tie_break_order": [
+          "局所なし・局所以外なし",
+          "局所なし・局所以外あり",
+          "局所あり・局所以外なし",
+          "局所あり・局所以外あり"
+        ]
+      },
+      "exposure_classification": "SHOWN_RPC_NATIVE_AVAILABLE_MODEL_RENDERING_UNKNOWN",
+      "rendered_model_evidence_exposure": "UNKNOWN",
+      "comprehension_or_adoption_proven": false,
+      "same_response_unreviewed_is_gameplay_failure": false
+    },
+    "environment_seed_evidence": {
+      "explicitly_requested_by_notebook": true,
+      "value": 0,
+      "scope": "OFFLINE private pilot only",
+      "GPU_SDK_actual_version": "not yet observed; record runtime stamp",
+      "local_pinned_SDK_default_separate": {
+        "arc-agi": "0.9.8",
+        "default_seed": 0
+      },
+      "runtime_initial_state_equivalence": "pending public-frame comparison"
+    },
+    "native_game_response_learning_mode": "enabled",
+    "runtime_software_and_seed": {
+      "status": "OBSERVED_COMPLETE",
+      "stamp": {
+        "schema": "arc3-runtime-software.v1",
+        "python": {
+          "version": "3.12.13",
+          "implementation": "CPython"
+        },
+        "packages": {
+          "arc-agi": "0.9.8",
+          "arcengine": "0.9.3"
+        },
+        "public_Arcade_make_signature": "(self, game_id: str, seed: int = 0, scorecard_id: Optional[str] = None, save_recording: bool = False, include_frame_data: bool = True, render_mode: Optional[str] = None, renderer: Optional[Callable[[int, arcengine.enums.FrameDataRaw], NoneType]] = None) -> Optional[arc_agi.wrapper.EnvironmentWrapper]",
+        "environment_seed": {
+          "declared_offline_seed": 0,
+          "explicit_keyword_scope": "OFFLINE private pilot only",
+          "competition_rerun_allowed": false
+        },
+        "observation_errors": {}
+      },
+      "actual_versions": {
+        "arc-agi": "0.9.8",
+        "arcengine": "0.9.3"
+      },
+      "declared_seed_settings": {
+        "declared_offline_seed": 0,
+        "explicit_keyword_scope": "OFFLINE private pilot only",
+        "competition_rerun_allowed": false
+      },
+      "full_reproducibility_proven": false
+    }
+  },
+  "frozen_C2_081_scorecard_sha256": "ac5250d5a36d846205166e7aed36715a81e8341efe227aae395a185672cb7520",
+  "common_scorecard_sha256": "6ca19fcb4860b257e71c292ca77e7d775660f0c8f2f759bc4a0c984d6544db6a",
+  "official_RHAE_helper_sha256": "d19754a0e8df5aaeb73a5b763517bc4c5aa5a413fd4b08e8f11d0725f8e066ac",
+  "scorecard_source_sha256": "81a6e542473eb97d854952d512d8d61f12f414497ae3f471bb1bf61e1bf55080",
+  "official_score_observed": false,
+  "official_submission_or_quota_use": false,
+  "learning_effect_proven": false,
+  "learning_benefit": "UNPROVEN",
+  "limitation": "Both arms SHOWN. RPC return does not prove rendered model exposure, comprehension or adoption. Prior5 and game teachers are separate. Descriptive single-run comparison is not a repeated learning-effect demonstration; missing runtime software/seed evidence stays UNKNOWN.",
+  "public_outcome_schema_extension": {
+    "added_label": "境界領域変化のみ",
+    "base_outcome_order": [
+      "可視変化なし",
+      "盤面変化",
+      "レベル進行",
+      "GAME_OVER",
+      "勝利"
+    ],
+    "extended_majority_tie_break_order": [
+      "可視変化なし",
+      "盤面変化",
+      "レベル進行",
+      "GAME_OVER",
+      "勝利",
+      "境界領域変化のみ"
+    ],
+    "class_aliasing": false,
+    "scope": "scorecard-only; runtime game/HDS behavior unchanged",
+    "tie_policy": "append the new class after all five frozen labels, preserving their prior precedence",
+    "adapter_source_sha256": "420df5f83313b25de9ec91e9767412eee1eaf9f40d6f790a27e7ced8f01ac442"
+  }
+}

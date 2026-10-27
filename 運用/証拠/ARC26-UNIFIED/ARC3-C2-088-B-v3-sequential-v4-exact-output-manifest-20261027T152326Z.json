@@ -1,0 +1,200 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-output.v1",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "version": 4,
+  "status": "KernelWorkerStatus.COMPLETE",
+  "terminal": true,
+  "status_command": "kaggle kernels status tecchannn/arc3-v6-online-official-c2-088",
+  "status_exit_code": 0,
+  "status_observed_at_utc": "2026-10-27T15:23:49Z",
+  "kaggle_cli_version": "2.2.5",
+  "requested_output_version": 4,
+  "api_version_label": "v4",
+  "output_command": ".venv/Scripts/kaggle.exe kernels output tecchannn/arc3-v6-online-official-c2-088/4 --path 出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version4-20261027T151952Z",
+  "output_exit_code": 0,
+  "retrieval_recorded_at_utc": "2026-10-27T15:23:26Z",
+  "output_directory": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version4-20261027T151952Z",
+  "candidate_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+  "candidate_metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+  "output_files": [
+    {
+      "path": ".per_game_cards.pkl",
+      "bytes": 180142,
+      "sha256": "a6f1431585c0b33b1ae175c8ffed75a22cf41c53e282420977bc8d8d8770383e"
+    },
+    {
+      "path": "arc3-runtime-software.json",
+      "bytes": 717,
+      "sha256": "0d16415f16477f218c256aed7048b908a962579d2a25e9d930d10f99eb46b455"
+    },
+    {
+      "path": "arc3-v6-online-official-c2-088.log",
+      "bytes": 35426,
+      "sha256": "21079b42cc407de5089159c392d75de4e85ebdd2a83597006d3e9168fece5986"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "bytes": 2476579,
+      "sha256": "aeb540d4db0c513ffea18bbf3fa1818dec5698d3722f32dfa5e8cb9df5e4936b"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 156481,
+      "sha256": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_viewer_data.json",
+      "bytes": 835,
+      "sha256": "7a0788e83a9453a2e9e09adb429e9d02e7aa28d7f012b877b09c56e9e5f7514a"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_events.jsonl",
+      "bytes": 2274151,
+      "sha256": "5d3ffe06cb2b5e762549bf6eb737c19674bc03496dcba410bdbe03a6d8342241"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 154479,
+      "sha256": "36f49e579ce154747c727baa4e98f643c0bd005f209c53029e68b3295d2ccf44"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_viewer_data.json",
+      "bytes": 850,
+      "sha256": "47278a9d450b4e204a0dab729d63b7780f62f81d203cac84b80c253eb7493784"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "bytes": 2144495,
+      "sha256": "123eb1b66a64c4efa7bd4f20461532b6716c2131d66250f88ceae313d3d7f588"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 199830,
+      "sha256": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_viewer_data.json",
+      "bytes": 861,
+      "sha256": "792391cc0db409735d0ddd76cf6a8043db591fea2092bb4c68a635ed43b4b393"
+    },
+    {
+      "path": "benchmark.json",
+      "bytes": 62067,
+      "sha256": "affd0194f16dbb076803fb36d0a9726ebc943c8cd9f25cf29de9089b28abc6de"
+    },
+    {
+      "path": "diagnostics.html",
+      "bytes": 666628,
+      "sha256": "a45701f3f132cef62a14b61501275c53804046118008f233933add43f9a0bbbf"
+    },
+    {
+      "path": "games.pkl",
+      "bytes": 581,
+      "sha256": "4bf87705fd3c0117855d2ef1963a5101db3d94c8852fcdba9612b539eb09bd68"
+    },
+    {
+      "path": "git_status.txt",
+      "bytes": 356,
+      "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+    },
+    {
+      "path": "intermediate_states.pkl",
+      "bytes": 1769811,
+      "sha256": "639c283198a3ea6b0eae40f3f17082c174e2db8802ae30d4cb015b9ee1941b9a"
+    },
+    {
+      "path": "movies/gm0r0-492f87ba_p0.html",
+      "bytes": 6761,
+      "sha256": "09aaa2c547774112b31ee07b1d0d3511386c936996c3026f2ec802cf8d2554f5"
+    },
+    {
+      "path": "movies/gm0r0-492f87ba_p0.mp4",
+      "bytes": 14426,
+      "sha256": "bfac700f7d8bb60e75a6708ca271f49638f6f3d0c98c1661666634a953aba616"
+    },
+    {
+      "path": "movies/gsk48-d8078629_p0.html",
+      "bytes": 6761,
+      "sha256": "9f75340d6e784bb76c039f388860da761840af8a35ae1ed0bd9ee70a4dd2be4f"
+    },
+    {
+      "path": "movies/gsk48-d8078629_p0.mp4",
+      "bytes": 11133,
+      "sha256": "e9602ff70103b99ee5f740d0536f4d28298f8b05ec8d8183956630d05acf0f7d"
+    },
+    {
+      "path": "movies/gtn36-ef4dde99_p0.html",
+      "bytes": 6761,
+      "sha256": "2b5b65ce20b690cdf550d32b0d2626f9288d3080bf6d2115177ad06eacf33dd8"
+    },
+    {
+      "path": "movies/gtn36-ef4dde99_p0.mp4",
+      "bytes": 8233,
+      "sha256": "d39dceedd704dcc286222e1bbb7cfa9c38bbeee574aa08289132d490e69e1866"
+    },
+    {
+      "path": "prompts/prompt.log",
+      "bytes": 220090,
+      "sha256": "8c7ac5225d1c425663c41ede60847f3baa9faa3f2904782df36af7da3fdc9ea3"
+    },
+    {
+      "path": "requests.jsonl",
+      "bytes": 59251457,
+      "sha256": "0b8d329aeee424363dc87135c4aa0c84f4f9e1742800f39e32109207cf75999a"
+    },
+    {
+      "path": "serve.log",
+      "bytes": 633813,
+      "sha256": "d65b09f296951aa315bc88b95d282144d9e24b20ebad1254dd0453ce15a3424c"
+    },
+    {
+      "path": "solver.pkl",
+      "bytes": 1909,
+      "sha256": "c80ef4f09f6741739033c1226374ed09d2527e5feffb3b794e27a961891c5eed"
+    },
+    {
+      "path": "solver_analysis/m0r0-492f87ba_p0.html",
+      "bytes": 923158,
+      "sha256": "445a63a6f1afb21dc2cc202d8a4a196e913e5865e9c6cd83260d7b2b57c464be"
+    },
+    {
+      "path": "solver_analysis/sk48-d8078629_p0.html",
+      "bytes": 928995,
+      "sha256": "a59a6dc0f8161db65c904de0fee1201426e80f00130339ee8367953971576e6d"
+    },
+    {
+      "path": "solver_analysis/tn36-ef4dde99_p0.html",
+      "bytes": 833644,
+      "sha256": "a7ec8ebf4a730a1825fdfba7f241b131f71b711c42b6dd6217d62e247c028a32"
+    },
+    {
+      "path": "submission.parquet",
+      "bytes": 2648,
+      "sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb"
+    },
+    {
+      "path": "summary.txt",
+      "bytes": 571,
+      "sha256": "c371c1413228ce03909e39078922e7d901f59a39431f3a149fa2185448079c44"
+    },
+    {
+      "path": "transcripts/m0r0-492f87ba_p0.txt",
+      "bytes": 880077,
+      "sha256": "bc279c8c574a045f6bb37223669b29817a536f6ba9baa49fa4295cac3550af74"
+    },
+    {
+      "path": "transcripts/sk48-d8078629_p0.txt",
+      "bytes": 893696,
+      "sha256": "19d7e011f72874f308a1950ab9405853c43a6fcecdb794bc34055e067a5d1170"
+    },
+    {
+      "path": "transcripts/tn36-ef4dde99_p0.txt",
+      "bytes": 797238,
+      "sha256": "5c00db88fcaf4dc5ea3906d049a12257f9a826110900ca642d08e1638273c9d0"
+    }
+  ],
+  "output_manifest_sha256": "b1928e6b7848abe2ed3696357c5dcb7e43f2d4b9b9c34b4333132b51ed1697d4",
+  "retrieval_scope": "complete exact-version output download",
+  "official_submission_or_rerun_performed": false,
+  "submission_quota_used": false
+}

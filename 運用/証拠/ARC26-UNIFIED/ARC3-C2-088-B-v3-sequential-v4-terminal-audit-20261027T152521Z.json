@@ -1,0 +1,99 @@
+{
+  "schema": "arc3-private-kernel-run-terminal-audit.v1",
+  "run_id": "ARC3-RUN-003-C2-088-B-v3-sequential-reproduction-v4-20261027T144019Z",
+  "status_observed_at_utc": "2026-10-27T15:23:49Z",
+  "terminal_status": "KernelWorkerStatus.COMPLETE",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "kernel_version": 4,
+  "execution_scope": "Private normal kernel run; no Competition Rerun.",
+  "git_commit_at_launch": "43fd3bb620a792c8321abeb9c0cc9580ba1f5059",
+  "learner_code_version": "HDS/学習系統/v0.4.2",
+  "memory_manifest_hash": null,
+  "memory_hash_status": "UNKNOWN; package has no standalone memory manifest.",
+  "input_dataset_versions": [
+    "dfranzen/pennyroyal-v253",
+    "dfranzen/taaf-kaggle-source-bundle-copy/1",
+    "arc-prize-2026-arc-agi-3"
+  ],
+  "runtime_stamp": {
+    "python": "3.12.13",
+    "arc-agi": "0.9.8",
+    "arcengine": "0.9.3",
+    "environment_seed": 0,
+    "shared_model_seed": 0,
+    "full_reproducibility_proven": false
+  },
+  "limits": {
+    "games": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_per_game": 80,
+    "runtime_seconds_per_game": 1200,
+    "scoring_grace_seconds": 5,
+    "HDS_seconds_per_game": 120
+  },
+  "package_hashes": {
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+    "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556"
+  },
+  "evidence": {
+    "preflight_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-preflight-20261027T144019Z.json",
+    "preflight_sha256": "6d5f4eec10b9b6e61f3d9f7ea27bf1849ba4d99d65fd7b703aee77bb864169d1",
+    "launch_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-launch-20261027T144158Z.json",
+    "launch_sha256": "f6ee2948097b4a045471d38d5d76d0f119dca2017d69ede1f176017aa3e6e176",
+    "retrieval_manifest_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-exact-output-manifest-20261027T152326Z.json",
+    "retrieval_manifest_sha256": "14f116fca2043546ce45bc55e5ed5894efc2955c3d00cfb3863f9d685de67bb8",
+    "output_manifest_sha256": "b1928e6b7848abe2ed3696357c5dcb7e43f2d4b9b9c34b4333132b51ed1697d4",
+    "output_file_count": 35,
+    "output_total_bytes": 75545660,
+    "scorecard_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-extended-outcome-scorecard-20261027T152326Z.json",
+    "scorecard_sha256": "aeb70ab4fe383c427f72de6813f484c08b35bf93bca45614372108131fd39ebe"
+  },
+  "local_result": {
+    "score_name": "public_offline_RHAE_mean",
+    "mean_RHAE": 2.2063453421498442,
+    "per_game_RHAE": {
+      "sk48-d8078629": 2.6888946699040357,
+      "tn36-ef4dde99": 2.404433173663943,
+      "m0r0-492f87ba": 1.525708182881554
+    },
+    "levels_completed": 3,
+    "levels_total": 21,
+    "games": 3,
+    "actions": 240,
+    "generated_tokens": 222595,
+    "game_run_states": {
+      "gave_up": 3
+    },
+    "job_elapsed_seconds": 1590.444436,
+    "max_game_elapsed_seconds": 595.8759252569998,
+    "gameplay_valid": true,
+    "integration_valid": true,
+    "HDS_updates_succeeded": 239,
+    "HDS_queries_succeeded": 4,
+    "learning_effect_proven": false,
+    "learning_benefit": "UNPROVEN"
+  },
+  "previous_B_v3_overlapped_run": {
+    "mean_RHAE": 3.204297592052694,
+    "gameplay_valid": false,
+    "max_game_elapsed_seconds": 1210.3266942159999,
+    "integration_valid_after_adapter": true,
+    "A_B_overlap": true,
+    "descriptive_delta_v4_minus_v3": -0.9979522499028498,
+    "interpretation": "Not an accepted improvement comparison: the prior run was gameplay-invalid and overlapped the A arm."
+  },
+  "official_submission_id": null,
+  "official_score": null,
+  "official_submission_or_quota_use": false,
+  "decision": "VALID_PROVISIONAL_PARENT_BASELINE; REPRODUCTION_REQUIRED",
+  "limitations": [
+    "All three games ended gave_up and only 3/21 levels were completed; gameplay_valid indicates the run respected the evaluator's runtime and integration gates, not that the games were cleared.",
+    "This is one sequential run. Same-condition reproducibility is not established until a second B-v3 package run is scored.",
+    "A/B comparison with the overlapped v3 result is descriptive only.",
+    "A standalone memory manifest hash is unavailable.",
+    "No learning effect or benefit is established by this scorecard."
+  ]
+}
