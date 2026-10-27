@@ -55,3 +55,23 @@ The prepared private candidate was pushed once with the pinned Kaggle CLI. Kaggl
 - No official submission or Competition Rerun was attempted; this operation used 0 official daily submissions.
 - No retry until fresh weekly GPU capacity evidence. Continue local score improvement work while capacity is unavailable.
 - Push evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-105-private-push-rejection-20261027T204849Z.json.
+
+## 2026-10-27T20:55:53Z — action-batch exposure refinement
+
+The original motivation grouped actions by analysis_step. That is only a coarse diagnostic and does not measure the candidate's action-list exposure. A new read-only analyzer groups the v29 traces by the harness-recorded batch_index/batch_size fields instead:
+
+| Trace | Action events | Action batches | Batches over 8 | Executed actions after 8 |
+|---|---:|---:|---:|---:|
+| m0r0-492f87ba | 160 | 160 | 0 | 0 |
+| sk48-d8078629 | 94 | 54 | 2 | 3 |
+| tn36-ef4dde99 | 135 | 67 | 3 | 8 |
+| Total | 389 | 281 | 5 | 11 |
+
+All 11 post-cap actions changed the public board; none returned nonzero reward, completed a level, or ended a game. Thus the cap would touch 5/281 logged action batches (1.8%) and 11/389 actions (2.8%) in these traces. Earlier analysis_step counts of 15/106 and 60 tail actions are not the cap's measured batch exposure. Whether earlier re-observation changes the next plan or score remains unknown.
+
+Decision: keep C2-105 unscored and unpromoted, and deprioritize it versus changes that cover a larger share of observed failures. Do not push again until fresh weekly GPU capacity evidence. This analysis does not establish a score effect.
+
+The first analyzer invocation stopped on its own batch-start validation (Invalid action batch sequence in m0r0-492f87ba_p0_events.jsonl: index=1, size=1). The start check was corrected; the metrics above come only from the successful rerun over unchanged trace files. Ruff passed.
+
+- Analyzer: [C2-105-action-batch-exposure.py](../../検証/ARC3-RUN-003/C2-105-action-batch-exposure.py), SHA-256 `cd6ed70875a644b8a8cd0667e7fe4f5ca8786cc5a800e06e137869446c1c1a19`.
+- Evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-105-action-batch-exposure-20261027T205525Z.json`, SHA-256 `ba55d6ec9a30a662c4f2e09311615b4f0f778d4c760276af08fb706d6888ac2a`.

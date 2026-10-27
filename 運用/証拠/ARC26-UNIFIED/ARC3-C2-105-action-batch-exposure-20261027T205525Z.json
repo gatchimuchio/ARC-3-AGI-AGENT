@@ -1,0 +1,97 @@
+{
+  "schema": "arc3-c2-105-action-batch-exposure.v1",
+  "observed_at_utc": "2026-10-27T20:55:53Z",
+  "track": "ARC3",
+  "candidate": "C2-105 action-plan cap 8",
+  "base_kernel": "tecchannn/arc3-model-guided-c2-025 version 29",
+  "cap": 8,
+  "batch_boundary": "Harness action batch_index/batch_size fields; analysis_step is not used as an action-batch boundary.",
+  "traces": [
+    {
+      "source_file": "出力\\ARC3-RUN-003-local\\C2-060-outputcap-20480-context139264\\remote-v29\\output\\artifacts\\m0r0-492f87ba_p0_events.jsonl",
+      "source_sha256": "d532b2749e95347cbdc61b8ad8b38ec14383388078c3810c0f8feeeb0d06a3c5",
+      "action_events": 160,
+      "action_batches": 160,
+      "batch_size_distribution": {
+        "1": 160
+      },
+      "batches_over_cap": 0,
+      "planned_actions_after_cap": 0,
+      "executed_actions_after_cap": 0,
+      "tail_outcomes": {
+        "board_changed": 0,
+        "nonzero_reward": 0,
+        "level_completed": 0,
+        "game_over": 0
+      }
+    },
+    {
+      "source_file": "出力\\ARC3-RUN-003-local\\C2-060-outputcap-20480-context139264\\remote-v29\\output\\artifacts\\sk48-d8078629_p0_events.jsonl",
+      "source_sha256": "e67a94ba0aba46855d61ff147a9e4fcf3e8101b68c626bb9b6240d3a6b71c239",
+      "action_events": 94,
+      "action_batches": 54,
+      "batch_size_distribution": {
+        "1": 45,
+        "2": 1,
+        "3": 2,
+        "4": 1,
+        "6": 3,
+        "9": 1,
+        "10": 1
+      },
+      "batches_over_cap": 2,
+      "planned_actions_after_cap": 3,
+      "executed_actions_after_cap": 3,
+      "tail_outcomes": {
+        "board_changed": 3,
+        "nonzero_reward": 0,
+        "level_completed": 0,
+        "game_over": 0
+      }
+    },
+    {
+      "source_file": "出力\\ARC3-RUN-003-local\\C2-060-outputcap-20480-context139264\\remote-v29\\output\\artifacts\\tn36-ef4dde99_p0_events.jsonl",
+      "source_sha256": "50c6b69bbdf0403f9db17104b7021f9ce36af33436ec8a298e3ff0a70be70490",
+      "action_events": 135,
+      "action_batches": 67,
+      "batch_size_distribution": {
+        "1": 52,
+        "2": 3,
+        "3": 2,
+        "4": 4,
+        "7": 1,
+        "8": 2,
+        "10": 2,
+        "12": 1
+      },
+      "batches_over_cap": 3,
+      "planned_actions_after_cap": 8,
+      "executed_actions_after_cap": 8,
+      "tail_outcomes": {
+        "board_changed": 8,
+        "nonzero_reward": 0,
+        "level_completed": 0,
+        "game_over": 0
+      }
+    }
+  ],
+  "totals": {
+    "action_events": 389,
+    "action_batches": 281,
+    "batches_over_cap": 5,
+    "planned_actions_after_cap": 11,
+    "executed_actions_after_cap": 11,
+    "tail_outcomes": {
+      "board_changed": 11,
+      "nonzero_reward": 0,
+      "level_completed": 0,
+      "game_over": 0
+    }
+  },
+  "interpretation": "Five logged action batches exceeded eight actions; their eleven executed tail actions all changed the board, while none completed a level, ended a game, or returned nonzero reward. A capped rerun could reobserve earlier, but its subsequent model actions and score cannot be inferred from static traces.",
+  "limitations": [
+    "Retrospective public trace analysis only; no game was rerun.",
+    "Logged action batch boundaries are not asserted to equal every Python snippet boundary.",
+    "No private kernel run, official Competition Rerun, or score measurement occurred."
+  ]
+}
