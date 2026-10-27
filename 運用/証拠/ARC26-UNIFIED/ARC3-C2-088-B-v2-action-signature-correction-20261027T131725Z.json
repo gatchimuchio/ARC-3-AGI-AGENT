@@ -1,0 +1,51 @@
+{
+  "schema": "arc3-c2-088-action-signature-metric-correction.v1",
+  "observed_at_utc": "2026-10-27T13:17:25Z",
+  "run_id": "ARC3-RUN-003/C2-088-B-v2-action-signature-correction",
+  "track": "ARC3",
+  "correction": {
+    "prior_metric_name": "same_exact_action_adjacent_repeats",
+    "prior_report_claim": "78 adjacent exact repeats",
+    "prior_value": 78,
+    "corrected_metric": "adjacent_equal_full_mouse_action_display_pairs",
+    "corrected_value": 2,
+    "reason": "The prior count compared action kind only (MOUSE), not the full action_display containing row and col."
+  },
+  "recomputed_trace": {
+    "path": "出力/ARC3-RUN-003-local/C2-088/matched-online-learning-B-v2-exact-output/artifacts/tn36-ef4dde99_p0_events.jsonl",
+    "sha256": "08a41222b770c9bd284527dc3ff95acbd448a8446a5567bd02bfe98f51c4f413",
+    "total_action_event_rows": 80,
+    "mouse_action_event_count": 79,
+    "reset_action_event_count": 1,
+    "mouse_action_kind_adjacent_matches": 78,
+    "distinct_mouse_action_displays": 28,
+    "adjacent_equal_full_mouse_action_display_pairs": [
+      {
+        "previous_action_num": 64,
+        "action_num": 65,
+        "action_display": "MOUSE(row=34, col=31)"
+      },
+      {
+        "previous_action_num": 66,
+        "action_num": 67,
+        "action_display": "MOUSE(row=14, col=31)"
+      }
+    ],
+    "comparison_method": "Filter MOUSE action events in event order. Compare adjacent entries by the full action_display string including row and col."
+  },
+  "supersedes": {
+    "report_path": "運用/ARC3-RUN-003/C2-088_公式採点と並行開発_20261027.md",
+    "report_line": 234,
+    "work_ledger_path": "運用/ARC26-UNIFIED/work-ledger.jsonl",
+    "work_ledger_line": 327,
+    "bottleneck_evidence_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v2-learning-bottleneck-20261027T125359Z.json",
+    "bottleneck_evidence_sha256": "925d30ea9fcaf5ca97fa2a9be1612f9559c789e69e4efd96e65396ae97862c31"
+  },
+  "interpretation": {
+    "identical_click_coordinates_are_not_evidence_of_noop": true,
+    "score_or_hds_measurements_changed": false,
+    "causal_effect_established": false,
+    "optimization_followup": "Measure an ID-independent cap on actions executed per Python tool call, then re-observe/replan; do not claim benefit before matched evaluation."
+  },
+  "git_head_before_correction": "289c649cd1b597c284e368c595db96e15107ee9c"
+}
