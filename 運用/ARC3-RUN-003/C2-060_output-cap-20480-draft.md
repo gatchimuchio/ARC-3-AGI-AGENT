@@ -1,6 +1,6 @@
 # C2-060 draft — output reserve 20,480 with 118,272 input allowance
 
-Status: **draft only; not pushed**. C2-059 version 28 is still running. This candidate tests whether two 16,384-token `finish_reason=length` responses seen in the partial C2-058 transcript matter for performance. It raises `LOCAL_ANALYZER_MAX_OUTPUT` from 16,384 to 20,480 and raises context from 135,168 to 139,264 so the effective input allowance remains 118,272. The context setting reaches the observed server limit, so startup feasibility must be rechecked before any future push.
+Status: **C2-060 private version 29 is COMPLETE and rejected by the predeclared paired-score gate; it is not an official competition submission.** This candidate tests whether two 16,384-token `finish_reason=length` responses seen in the partial C2-058 transcript matter for performance. It raises `LOCAL_ANALYZER_MAX_OUTPUT` from 16,384 to 20,480 and raises context from 135,168 to 139,264 so the effective input allowance remains 118,272. The context setting reaches the observed server limit, so startup feasibility must be rechecked before any future push.
 
 Score v28 against the predeclared C2-046 gate first. Do not push C2-060 while v28 runs. Private, GPU-enabled, Internet-disabled; no official submission or quota use.
 
@@ -59,3 +59,21 @@ Readiness evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-post-v28-readiness-
 - The official history read at 10:42 UTC still shows submission `57688735` PENDING with no scores; `numToday=1`, `numTotal=8`. The confirmed official best remains submission `57577905`, public 23.86.
 - Do not push again. On terminal completion, retrieve exact version 29 output and score it against C2-046 slim using the same three public starts and the predeclared gate (>19.309155944 and positive paired mean delta).
 - Push/source/status evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-v29-push-20261027T104223Z.json`.
+
+
+## 2026-10-27T11:55Z: private version 29 terminal paired scorecard
+
+Exact kernel `tecchannn/arc3-model-guided-c2-025/29` reported `KernelWorkerStatus.COMPLETE` at 2026-10-27T11:55:20.961696+00:00. Kaggle output is retained under `出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/remote-v29/output`; the completed manifest contains 31 files / 151225601 bytes and matches the scorecard SHA-256 `68d9a4541b34b0748a157518ca9b00fab1e681f3b2e63abe74cd623978e74dba`. `benchmark.json` is complete; `requests.jsonl.kaggle-partial` marks the request transcript incomplete, so the score uses the complete benchmark, recomputed official ARC SDK scorecard, and paired initial event records.
+
+The same three public starts (seed 0, 160-action cap, 1,200 seconds/game) were checked field-by-field against both references. The official `EnvironmentScoreCalculator` recomputation matches each saved per-game score.
+
+- C2-060 v29 mean: **6.793535827960**; C2-046 slim mean: **19.309155943771**; paired delta: **-12.515620115812**. All three games regressed against C2-046; completed levels were 4 versus 7 with the same 389 total actions.
+- Against C2-058 v27, mean was **12.471062097130**, delta **-5.677526269171**; two games improved and one regressed.
+- Compared with the prior C2-059 v28 mean of 5.351788828051, v29 rose by **1.441746999909**, but remains 12.515620115812 below C2-046 and fails the declared acceptance gate (`mean > 19.309155943771326` and positive paired delta). **Decision: REJECT C2-060; do not promote this version as a higher-scoring candidate.**
+
+The official submission `57688735` is still `SubmissionStatus.PENDING` with public/private scores blank at 2026-10-27T11:58:31.571410+00:00. Its description identifies the earlier C2-046 v13 fallback, not this private v29 run. Kaggle reports `numToday=1`, `numTotal=8`, `remainingToday=0`. The confirmed official best remains submission `57577905`, public **23.86**. No Competition Rerun, new official submission, or quota use occurred for C2-060.
+
+- Scorecard script: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-v29-scorecard.py` (SHA-256 `3c14602e206ffcdee4efda77d281713f235db84b2e5d2d2835e001b1de9b6cd8`).
+- Scorecard result: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-v29-terminal-scorecard.json` (SHA-256 `19a45df2dc0e55a5bb5140b718a12941b3218edbd939c7e48388aa61cf3d59cb`).
+- Terminal-status evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-v29-terminal-status-20261027T115520Z.json` (SHA-256 `c59d3b7ecb61da4e5ae7347cb5fc6ee2883178118a457d0147f2b9eb6a64dabc`).
+- Official history/quota evidence: `運用/証拠/ARC26-UNIFIED/official-cli-observation-20261027T115831Z.json` (SHA-256 `13bd5cfd8c426759397dd73bfd2bb5a2d60250e41b2d2af737774efcdf291a0a`).

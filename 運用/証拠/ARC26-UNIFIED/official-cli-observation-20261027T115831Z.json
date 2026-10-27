@@ -1,0 +1,40 @@
+{
+  "schema": "arc26-unified-kaggle-cli-observation-v1",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-27T11:58:31.571410+00:00",
+  "started_at_utc": "2026-10-27T11:58:19.060421+00:00",
+  "retrieval_method": "pinned per-repo .venv Kaggle CLI, read-only",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "commands": [
+    {
+      "command": "kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json",
+      "exit_code": 0,
+      "stdout": "[\n  {\n    \"ref\": 57688735,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-10-27T04:20:12.220000\",\n    \"description\": \"ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13\",\n    \"status\": \"SubmissionStatus.PENDING\",\n    \"publicScore\": \"\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 57612586,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-10-25T01:16:07.830000\",\n    \"description\": \"ARC3 prior-memory coefficient public-25 scorecard candidate 2026-10-25\",\n    \"status\": \"SubmissionStatus.COMPLETE\",\n    \"publicScore\": \"0.03\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 57577905,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-10-24T01:15:49.963000\",\n    \"description\": \"ARC3-RUN-003 C1-018 paired public scorecard validated v5\",\n    \"status\": \"SubmissionStatus.COMPLETE\",\n    \"publicScore\": \"23.86\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 57541830,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-10-23T00:03:01.330000\",\n    \"description\": \"ARC3-RUN-002 observation-driven exploration v4\",\n    \"status\": \"SubmissionStatus.COMPLETE\",\n    \"publicScore\": \"0.25\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 57527856,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-10-22T14:19:24.727000\",\n    \"description\": \"ARC3-RUN-002 baseline v5 f8ace66\",\n    \"status\": \"SubmissionStatus.COMPLETE\",\n    \"publicScore\": \"0.00\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 55206302,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-08-03T07:58:07.073000\",\n    \"description\": \"ARC3CompletionAgent rev5.1 frozen release v4 git daa91d8 M4-P06\",\n    \"status\": \"SubmissionStatus.COMPLETE\",\n    \"publicScore\": \"0.06\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 55070928,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-07-29T03:29:04.383000\",\n    \"description\": \"GenericAGIRuntime P15 v11 retry same source git baa03f3\",\n    \"status\": \"SubmissionStatus.ERROR\",\n    \"publicScore\": \"\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 55069307,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-07-29T01:53:16.290000\",\n    \"description\": \"GenericAGIRuntime P15 v11 competition-source bound git baa03f3\",\n    \"status\": \"SubmissionStatus.ERROR\",\n    \"publicScore\": \"\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 55049227,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-07-28T08:12:23.727000\",\n    \"description\": \"GenericAGIRuntime P15 sequential git c60ac41 runtime dce9f434\",\n    \"status\": \"SubmissionStatus.ERROR\",\n    \"publicScore\": \"\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 55045360,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-07-28T04:43:31.867000\",\n    \"description\": \"GenericAGIRuntime P15 official-format fix git d71fb08 runtime a24a632a\",\n    \"status\": \"SubmissionStatus.ERROR\",\n    \"publicScore\": \"\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 55043205,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-07-28T02:33:21.277000\",\n    \"description\": \"GenericAGIRuntime P15 fix git 5464753 runtime a24a632a\",\n    \"status\": \"SubmissionStatus.ERROR\",\n    \"publicScore\": \"\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 55040966,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-07-28T00:24:55.823000\",\n    \"description\": \"GenericAGIRuntime P15 git 19fadde runtime a24a632a\",\n    \"status\": \"SubmissionStatus.ERROR\",\n    \"publicScore\": \"\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 53996483,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-06-24T01:49:00.300000\",\n    \"description\": \"\",\n    \"status\": \"SubmissionStatus.COMPLETE\",\n    \"publicScore\": \"0.12\",\n    \"privateScore\": \"\"\n  },\n  {\n    \"ref\": 53966647,\n    \"fileName\": \"submission.parquet\",\n    \"date\": \"2026-06-23T04:11:29.717000\",\n    \"description\": \"\",\n    \"status\": \"SubmissionStatus.COMPLETE\",\n    \"publicScore\": \"0.24\",\n    \"privateScore\": \"\"\n  }\n]\n",
+      "stderr": ""
+    },
+    {
+      "command": "kaggle competitions submission-limits arc-prize-2026-arc-agi-3",
+      "exit_code": 0,
+      "stdout": "Submissions today: 1\nLifetime submissions: 8\nRemaining today: 0\n",
+      "stderr": ""
+    }
+  ],
+  "submission_id": "57688735",
+  "official_status": "SubmissionStatus.PENDING",
+  "publicScore": "",
+  "privateScore": "",
+  "submission_date": "2026-10-27T04:20:12.220000",
+  "submission_description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13",
+  "submission_limits": {
+    "numToday": 1,
+    "numTotal": 8,
+    "remainingToday": 0
+  },
+  "previous_confirmed_best": {
+    "submission_id": 57577905,
+    "publicScore": "23.86",
+    "privateScore": ""
+  },
+  "official_submission_or_rerun_performed": false,
+  "quota_used_by_this_observation": false
+}
