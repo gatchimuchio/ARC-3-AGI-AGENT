@@ -88,3 +88,28 @@ Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-v5-analysis-batch-cap4-parent-
 Within action-batches longer than four, neither v5 nor v13 had a visible no-change action in the first four actions. In the remaining tails, v5 had 10 visible no-change actions and one level transition; v13 had one no-change action and two level transitions. This strengthens the rationale to test earlier observation on v5, but also shows cap4 may interrupt successful action sequences on v13. It remains an experiment, not a score claim.
 
 Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-v5-cap4-tail-outcome-audit-20261027T172059Z.json (SHA-256 313d1a437edd7ad85072cf3b124aade449c7a15dae5e8275e7b3c4208123570a).
+
+## Cap-threshold sensitivity on the matched trace prefix — 2026-10-27T17:28:01Z
+
+| Reference | Cap | Long batches | Actions returned for later observation | Visible no-change actions in tails | Level transitions in tails |
+|---|---:|---:|---:|---:|---:|
+| v13 | 4 | 10 | 66 | 1 | 2 |
+| v13 | 8 | 6 | 33 | 1 | 2 |
+| v13 | 12 | 2 | 18 | 1 | 1 |
+| v5 | 4 | 17 | 92 | 10 | 1 |
+| v5 | 8 | 7 | 49 | 8 | 1 |
+| v5 | 12 | 6 | 24 | 7 | 0 |
+
+v5 cap12 retains every observed level transition within the first 80 actions while still returning 24 actions from long batches to later observation and covering 7 of 13 visible no-change actions. Cap4 returns 92 actions and crosses one observed level transition; cap8 returns 49 and also crosses one. The C2-046 v13 reference shows a different tradeoff, so this is not a score forecast.
+
+Decision: prefer cap12 for the first private diagnostic if the cap can be isolated to one setting; keep cap4 as the prepared alternative. No private kernel push is allowed until weekly GPU quota is available, and no score improvement is claimed.
+
+Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-v5-cap-threshold-sensitivity-20261027T172801Z.json (SHA-256 763ee44f7ce6dd5a71cf8a89a3ad66f6f88ae5faf1d6e84e48a2d22ed93bc6e0).
+
+## Cap12 local candidate prepared — 2026-10-27T17:31:04Z
+
+The prior cap4 Notebook was copied to 出力/ARC3-RUN-003-local/C2-089/action-cap-v2/submission.ipynb; only cell 5’s ARC3_MAX_ACTIONS_PER_PYTHON_CALL value changed from 4 to 12. Candidate SHA-256: 86bd236528fa0172ef33b14f73156fbd5821e0420fac8c629858b6adebd870a0. The generic patch and HDS payload are unchanged. The notebook JSON parses and the config diff contains exactly one changed value.
+
+This candidate has not received synthetic runtime validation, has no Kaggle kernel version, has no score, and used no private or official quota. It is prepared for one private diagnostic after quota recovery and after the C2-088 v5 official result is terminal. No gain is claimed.
+
+Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-candidate-prepared-20261027T173104Z.json (SHA-256 495d07767adce077b51142f52d3733145fceb41fb5fcde6a70cf0ee5a5c5d041).

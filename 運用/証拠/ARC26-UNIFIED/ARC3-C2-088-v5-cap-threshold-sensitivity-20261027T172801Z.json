@@ -1,0 +1,246 @@
+{
+  "evidence_id": "ARC3-C2-088-v5-cap-threshold-sensitivity-20261027T172801Z",
+  "observed_at_utc": "2026-10-27T17:28:01Z",
+  "comparison": "Offline action grouping sensitivity for caps 4, 8, and 12 over the first 80 actions in three matched public starts.",
+  "method": {
+    "analysis_step": "Recorded action-batch grouping; count actions beyond threshold, not actions removed from the episode.",
+    "visible_nochange": "post-action public board hash equals immediately preceding public board hash.",
+    "progress": "Count recorded level and score transitions after threshold within each batch.",
+    "limitations": [
+      "Single stochastic trajectories; changing the cap changes future model outputs, so these are not counterfactual scores.",
+      "v13 is a different policy variant and is only used as a high-scoring reference."
+    ]
+  },
+  "inputs": {
+    "v13_sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/sk48-d8078629_p0_events.jsonl",
+      "sha256": "261bbf454b94a0058770a7bcaf37ab13ad65be2e6c5d787e840af2e5c4071021"
+    },
+    "v13_tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "sha256": "966c9d03ef3fb61758c8936be5a3d73ca0e9066c2ffe0966a5a87da34f9f410f"
+    },
+    "v13_m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "sha256": "1f1569bad11346caa3b43f8634551374ab7e246b6c9733ef5bfac2cabd3e481f"
+    },
+    "v5_sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/sk48-d8078629_p0_events.jsonl",
+      "sha256": "63bf66f574aec7ceca65230724eda7d4d1f8289388a4cb4c3defe22c9efa6336"
+    },
+    "v5_tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "sha256": "85e98edea9a56485bbb2f096d874e6dab41265c39779686feb889db12a4db55f"
+    },
+    "v5_m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "sha256": "2e6c3d4ec4869a98dd5c731e417ade966e4cee098e9f3577573557716c2f3d58"
+    }
+  },
+  "initial_board_hashes": {
+    "sk48-d8078629": {
+      "v13": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+      "v5": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2"
+    },
+    "tn36-ef4dde99": {
+      "v13": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "v5": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b"
+    },
+    "m0r0-492f87ba": {
+      "v13": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+      "v5": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9"
+    }
+  },
+  "results": {
+    "v13": {
+      "4": {
+        "over_cap_batches": 10,
+        "actions_after_cap": 66,
+        "visible_nochange_after_cap": 1,
+        "level_transitions_after_cap": 2,
+        "score_transitions_after_cap": 2,
+        "by_game": {
+          "sk48-d8078629": {
+            "over_cap_batches": 3,
+            "actions_after_cap": 8,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          },
+          "tn36-ef4dde99": {
+            "over_cap_batches": 3,
+            "actions_after_cap": 12,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 1,
+            "score_transitions_after_cap": 1
+          },
+          "m0r0-492f87ba": {
+            "over_cap_batches": 4,
+            "actions_after_cap": 46,
+            "visible_nochange_after_cap": 1,
+            "level_transitions_after_cap": 1,
+            "score_transitions_after_cap": 1
+          }
+        }
+      },
+      "8": {
+        "over_cap_batches": 6,
+        "actions_after_cap": 33,
+        "visible_nochange_after_cap": 1,
+        "level_transitions_after_cap": 2,
+        "score_transitions_after_cap": 2,
+        "by_game": {
+          "sk48-d8078629": {
+            "over_cap_batches": 0,
+            "actions_after_cap": 0,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          },
+          "tn36-ef4dde99": {
+            "over_cap_batches": 2,
+            "actions_after_cap": 3,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 1,
+            "score_transitions_after_cap": 1
+          },
+          "m0r0-492f87ba": {
+            "over_cap_batches": 4,
+            "actions_after_cap": 30,
+            "visible_nochange_after_cap": 1,
+            "level_transitions_after_cap": 1,
+            "score_transitions_after_cap": 1
+          }
+        }
+      },
+      "12": {
+        "over_cap_batches": 2,
+        "actions_after_cap": 18,
+        "visible_nochange_after_cap": 1,
+        "level_transitions_after_cap": 1,
+        "score_transitions_after_cap": 1,
+        "by_game": {
+          "sk48-d8078629": {
+            "over_cap_batches": 0,
+            "actions_after_cap": 0,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          },
+          "tn36-ef4dde99": {
+            "over_cap_batches": 0,
+            "actions_after_cap": 0,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          },
+          "m0r0-492f87ba": {
+            "over_cap_batches": 2,
+            "actions_after_cap": 18,
+            "visible_nochange_after_cap": 1,
+            "level_transitions_after_cap": 1,
+            "score_transitions_after_cap": 1
+          }
+        }
+      }
+    },
+    "v5": {
+      "4": {
+        "over_cap_batches": 17,
+        "actions_after_cap": 92,
+        "visible_nochange_after_cap": 10,
+        "level_transitions_after_cap": 1,
+        "score_transitions_after_cap": 1,
+        "by_game": {
+          "sk48-d8078629": {
+            "over_cap_batches": 5,
+            "actions_after_cap": 38,
+            "visible_nochange_after_cap": 8,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          },
+          "tn36-ef4dde99": {
+            "over_cap_batches": 7,
+            "actions_after_cap": 11,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 1,
+            "score_transitions_after_cap": 1
+          },
+          "m0r0-492f87ba": {
+            "over_cap_batches": 5,
+            "actions_after_cap": 43,
+            "visible_nochange_after_cap": 2,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          }
+        }
+      },
+      "8": {
+        "over_cap_batches": 7,
+        "actions_after_cap": 49,
+        "visible_nochange_after_cap": 8,
+        "level_transitions_after_cap": 1,
+        "score_transitions_after_cap": 1,
+        "by_game": {
+          "sk48-d8078629": {
+            "over_cap_batches": 3,
+            "actions_after_cap": 22,
+            "visible_nochange_after_cap": 6,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          },
+          "tn36-ef4dde99": {
+            "over_cap_batches": 1,
+            "actions_after_cap": 1,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 1,
+            "score_transitions_after_cap": 1
+          },
+          "m0r0-492f87ba": {
+            "over_cap_batches": 3,
+            "actions_after_cap": 26,
+            "visible_nochange_after_cap": 2,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          }
+        }
+      },
+      "12": {
+        "over_cap_batches": 6,
+        "actions_after_cap": 24,
+        "visible_nochange_after_cap": 7,
+        "level_transitions_after_cap": 0,
+        "score_transitions_after_cap": 0,
+        "by_game": {
+          "sk48-d8078629": {
+            "over_cap_batches": 3,
+            "actions_after_cap": 10,
+            "visible_nochange_after_cap": 5,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          },
+          "tn36-ef4dde99": {
+            "over_cap_batches": 0,
+            "actions_after_cap": 0,
+            "visible_nochange_after_cap": 0,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          },
+          "m0r0-492f87ba": {
+            "over_cap_batches": 3,
+            "actions_after_cap": 14,
+            "visible_nochange_after_cap": 2,
+            "level_transitions_after_cap": 0,
+            "score_transitions_after_cap": 0
+          }
+        }
+      }
+    }
+  },
+  "decision": "For a first private diagnostic, cap 12 has the least observed progress interruption on v5 (zero level transitions in its post-cap tails) while still moving 24 actions from long batches back to a later observation and covering 7 of v5s 13 visible no-change actions. Recheck candidate configuration before preparing; retain cap4 as an alternate if the cap12 change cannot be isolated.",
+  "official_reference": {
+    "submission_id": 57688735,
+    "status": "COMPLETE",
+    "public_score": 28.07
+  }
+}

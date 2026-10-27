@@ -1,0 +1,25 @@
+{
+  "evidence_id": "ARC3-C2-089-cap12-candidate-prepared-20261027T173104Z",
+  "observed_at_utc": "2026-10-27T17:31:04Z",
+  "candidate": {
+    "kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+    "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/submission.ipynb",
+    "sha256": "86bd236528fa0172ef33b14f73156fbd5821e0420fac8c629858b6adebd870a0",
+    "parent_cap4_sha256": "16cb7b2f291a0f964a7e4bec0df901594a07b09f473a8b6efba10344fa368df7",
+    "reviewable_generic_patch": "検証/ARC3-RUN-003/C2-089-action-cap-v1.patch",
+    "patch_sha256": "810dd3e53cfd47d9a43b4dbcd9378de1ac49642c2611bed83aecf5269f4afff3",
+    "config_location": "Notebook cell 5, ARC3_MAX_ACTIONS_PER_PYTHON_CALL",
+    "value": 12
+  },
+  "change_scope": "Copied the previously prepared cap4 private Notebook and changed exactly the single default environment value from 4 to 12. HDS payload and generic action-cap implementation are unchanged.",
+  "validation": {
+    "notebook_json_parse": "PASS",
+    "single_setting_change": "PASS",
+    "synthetic_runtime_validation": "NOT_RUN",
+    "kaggle_kernel_version": "NONE",
+    "private_score": "UNKNOWN",
+    "official_submission_or_rerun_performed": false,
+    "quota_used": false
+  },
+  "decision": "Use this cap12 candidate as the first C2-089 private diagnostic after weekly GPU quota is confirmed available and C2-088 v5 official result is terminal. Keep the cap4 local artifact as an alternate. This is preparation only; no performance gain is claimed."
+}
