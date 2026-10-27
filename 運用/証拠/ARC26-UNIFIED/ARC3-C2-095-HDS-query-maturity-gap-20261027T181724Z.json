@@ -1,0 +1,135 @@
+{
+  "schema": "arc3-hds-query-maturity-gap.v1",
+  "run_id": "ARC3-RUN-003-C2-095",
+  "observed_at_utc": "2026-10-27T18:17:24Z",
+  "source_runs": {
+    "v5": "C2-088 B-v3 sequential version 5",
+    "v4": "C2-088 B-v3 sequential version 4"
+  },
+  "aggregate": {
+    "v5": {
+      "successful_updates": 239,
+      "successful_queries": 2
+    },
+    "v4": {
+      "successful_updates": 239,
+      "successful_queries": 4
+    }
+  },
+  "output_state_files": [
+    {
+      "query_steps": [
+        35
+      ],
+      "game": "m0r0-492f87ba",
+      "updates": 80,
+      "version": 4,
+      "queries": 1,
+      "sha256": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22"
+    },
+    {
+      "query_steps": [
+        31
+      ],
+      "game": "sk48-d8078629",
+      "updates": 79,
+      "target_query_counts": {
+        "additional_observation_requests": 0,
+        "disputed_principles": 1,
+        "predictions": 0,
+        "active_principles": 0,
+        "conflicts": 0,
+        "unidentifiable": 0
+      },
+      "version": 4,
+      "queries": 1,
+      "sha256": "36f49e579ce154747c727ba4e98f643c0bd005f209c53029e68b3295d2ccf44"
+    },
+    {
+      "sha256": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f",
+      "second_query_cache_hit": true,
+      "updates": 80,
+      "step39_target_query_counts": {
+        "additional_observation_requests": 1,
+        "disputed_principles": 1,
+        "predictions": 0,
+        "active_principles": 3,
+        "conflicts": 0,
+        "unidentifiable": 1
+      },
+      "queries": 2,
+      "version": 4,
+      "query_steps": [
+        0,
+        39
+      ],
+      "game": "tn36-ef4dde99"
+    },
+    {
+      "query_steps": [],
+      "game": "m0r0-492f87ba",
+      "updates": 80,
+      "version": 5,
+      "queries": 0,
+      "sha256": "e57306f8af2cf23080df5c76e1c7f7ba0d2ed68a6538b607fb3fe9b7550edccd"
+    },
+    {
+      "query_steps": [
+        1
+      ],
+      "game": "sk48-d8078629",
+      "updates": 79,
+      "target_query_counts": {
+        "additional_observation_requests": 0,
+        "disputed_principles": 0,
+        "predictions": 0,
+        "active_principles": 0,
+        "conflicts": 0,
+        "unidentifiable": 0
+      },
+      "version": 5,
+      "queries": 1,
+      "sha256": "c3529d25dd4afe8355580031c34f4009a687fe69a85d7ecfa89c7299c6fd6482"
+    },
+    {
+      "query_steps": [
+        0
+      ],
+      "game": "tn36-ef4dde99",
+      "updates": 80,
+      "target_query_counts": {
+        "additional_observation_requests": 0,
+        "disputed_principles": 0,
+        "predictions": 0,
+        "active_principles": 0,
+        "conflicts": 0,
+        "unidentifiable": 0
+      },
+      "version": 5,
+      "queries": 1,
+      "sha256": "aa15619a073cec7e4aa90e735682101290e2cf7c3cadb9fce936caff908abd74"
+    }
+  ],
+  "findings": [
+    "v5 queries occurred only at public steps 0 and 1; no query followed a substantial accumulation of game-response updates.",
+    "Both v5 queries returned native HOLD with zero target-filtered forecasts and zero active principles; errors, budget exhaustion, and summary truncation were absent.",
+    "In v4 tn36, the step-39 query after prior updates had three active target principles but zero predictions, plus one additional-observation request, one disputed principle, and one unidentifiable principle.",
+    "The repeated step-39 v4 query was a same-state cache hit; the v4 run is stochastic and is diagnostic evidence, not a matched score comparison.",
+    "Source inspection confirms query returns only predictions generated from currently active provisional principles; update counters alone do not show decision-useful learning."
+  ],
+  "source_code_sha256": {
+    "HDS/学習系統/v0.4.2/hds学習系統/適応.py": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac",
+    "HDS/学習系統/v0.4.2/hds学習系統/実行系.py": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429",
+    "検証/ARC3視覚HDS接続候補.py": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617"
+  },
+  "guardrails": {
+    "code_changed": false,
+    "native_HOLD_preserved": true,
+    "kernel_push_or_rerun": false,
+    "official_submission_or_rerun": false,
+    "score_effect": "NOT_MEASURED",
+    "tests_run": false,
+    "game_id_or_level_id_branching": false,
+    "action_authorization": false
+  }
+}
