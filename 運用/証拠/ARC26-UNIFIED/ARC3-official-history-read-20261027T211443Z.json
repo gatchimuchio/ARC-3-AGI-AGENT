@@ -1,0 +1,50 @@
+{
+  "schema": "arc3-official-history-read.v1",
+  "run_id": "ARC3-RUN-003-official-history-20261027T211443Z",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-27T21:14:43Z",
+  "three_point_set_version": "v6.0",
+  "three_point_documents_sha256": {
+    "common_codex": "e5f5c66f6391af6866211f9030b4cb08a0f0296063ab5bc53246529dc925a0c0",
+    "common_plan": "08c51299981c468712f66a560a50ab862843897d45ebbd965e0a032f35f71a25",
+    "common_spec": "3a03343306aaf71cc9aa33100064f5476d8a7dad8b63567e5578c1a84d489141",
+    "arc3_codex": "47dd0ed72818e975af1fc9545808291effbf1b2ff7b524da9112f1ab8299a060",
+    "arc3_plan": "34061bc53a228bcdc2b94cce7235ac96aa0e67f6bc74d2abb1757fe18af612b6",
+    "arc3_spec": "07ff22715feba930763fc01d10c1989e827aa6206cd45974d1fefed7d2060b67"
+  },
+  "source": {
+    "cli": "Kaggle CLI 2.2.5 via isolated uv tool run; the repo .venv Kaggle entry point was unavailable",
+    "command": "python -m uv tool run --from kaggle==2.2.5 kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json",
+    "access": "authenticated read-only CLI"
+  },
+  "submissions": [
+    {
+      "id": 57688735,
+      "status": "SubmissionStatus.COMPLETE",
+      "public_score": 28.07,
+      "private_score": null,
+      "date_utc": "2026-10-27T04:20:12.220Z",
+      "kernel": "C2-046 v13"
+    },
+    {
+      "id": 57577905,
+      "status": "SubmissionStatus.COMPLETE",
+      "public_score": 23.86,
+      "private_score": null,
+      "date_utc": "2026-10-24T01:15:49.963Z"
+    }
+  ],
+  "quota": {
+    "current_utc_day": "2026-10-27",
+    "daily_limit": 1,
+    "used": 1,
+    "remaining": 0,
+    "basis": "Confirmed one-submission-per-day competition limit in prior Kaggle Staff observation; current submission history contains one submission on this UTC date."
+  },
+  "no_action": {
+    "new_submission": false,
+    "competition_rerun": false,
+    "kernel_push": false,
+    "gpu_quota_used": 0
+  }
+}
