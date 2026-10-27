@@ -1,0 +1,72 @@
+{
+  "schema": "arc3-c2-088-normal-run-summary.v1",
+  "run_id": "ARC3-RUN-003-C2-088-NORMAL-RUN-COMPLETE-20261027T082743Z",
+  "observed_at_utc": "2026-10-27T08:27:43.569Z",
+  "kernel": {
+    "slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "version": 1,
+    "status": "KernelWorkerStatus.COMPLETE",
+    "cli_version": "Kaggle CLI 2.2.5"
+  },
+  "retrieval": {
+    "command": "uvx --offline --from kaggle==2.2.5 kaggle kernels output tecchannn/arc3-v6-online-official-c2-088/1",
+    "output_directory": "出力/ARC3-RUN-003-local/C2-088/official-online-v1-output",
+    "redacted_per_game_identifiers_and_traces_from_this_summary": true,
+    "raw_output_files_retained_locally_for_audit": true
+  },
+  "normal_private_pilot_config": {
+    "games_max": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_max": 80,
+    "runtime_seconds_max": 1200,
+    "competition_rerun_allowed": false,
+    "explicit_environment_seed": 0,
+    "explicit_seed_scope": "OFFLINE private pilot only"
+  },
+  "runtime": {
+    "python": "3.12.13",
+    "arc_agi": "0.9.8",
+    "arcengine": "0.9.3",
+    "observation_errors": {}
+  },
+  "pilot_metrics_not_official_score": {
+    "benchmark": "duck-harness-kaggle",
+    "episodes": 3,
+    "wins": 0,
+    "terminal_state_counts": {
+      "gave_up": 3
+    },
+    "levels_completed": 3,
+    "levels_available": 21,
+    "mean_score": 5.27,
+    "median_score": 2.05,
+    "actions_total": 238,
+    "tokens_total": 256957,
+    "job_duration_seconds": 2344,
+    "wallclock_total_seconds": 5219
+  },
+  "official_competition": {
+    "competition_rerun_id": null,
+    "c2_088_official_score": null,
+    "tracked_submission_id": 57688735,
+    "tracked_submission_status": "SubmissionStatus.PENDING",
+    "tracked_submission_score": null,
+    "tracked_submission_is_older_fallback": true,
+    "historical_best_submission_id": 57577905,
+    "historical_best_public_score": 23.86,
+    "submissions_today": 1,
+    "remaining_today": 0,
+    "lifetime_submissions_count": 8,
+    "submission_or_rerun_performed": false,
+    "quota_used": false
+  },
+  "output_hashes_sha256": {
+    "benchmark.json": "94b496cfda5693cb51aa97885a55f1e5bbba0b6ba534a73c44aa252558f3720f",
+    "arc3-runtime-software.json": "0d16415f16477f218c256aed7048b908a962579d2a25e9d930d10f99eb46b455",
+    "summary.txt": "880f430e0cd4ae51df28127043d9f04707708efd397548bb064b19815edc7fa5",
+    "submission.parquet": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb",
+    "submitted_notebook.ipynb": "00d1fec9600b904810061d0b54e4083468706fe834be054dea6a5b19c5b386e3"
+  },
+  "limitation": "Kaggle normal private-pilot completion and its three-game score summary are not an ARC-AGI-3 Competition Rerun or official leaderboard score. The version is explicitly marked competition_rerun_allowed=false and its explicit seed is limited to offline private pilot use."
+}

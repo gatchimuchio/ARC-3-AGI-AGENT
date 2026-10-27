@@ -1,0 +1,41 @@
+{
+  "schema": "arc3-kaggle-status-followup.v1",
+  "observed_at_utc": "2026-10-27T08:27:43.569Z",
+  "cli": "Kaggle CLI 2.2.5 via uvx --offline",
+  "history_count": 14,
+  "latest_submission": {
+    "ref": 57688735,
+    "status": "SubmissionStatus.PENDING",
+    "public_score": "",
+    "private_score": ""
+  },
+  "tracked_pending_submission": {
+    "ref": 57688735,
+    "status": "SubmissionStatus.PENDING",
+    "public_score": null,
+    "private_score": null,
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13"
+  },
+  "historical_best": {
+    "ref": 57577905,
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": "23.86",
+    "private_score": null
+  },
+  "limits": {
+    "Submissions today": 1,
+    "Remaining today": 0,
+    "Lifetime submissions": 8
+  },
+  "kernel": {
+    "status": "tecchannn/arc3-v6-online-official-c2-088 has status \"KernelWorkerStatus.COMPLETE\"",
+    "slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "version": 1
+  },
+  "raw_history_path": "運用/証拠/ARC26-UNIFIED/official-cli-history-raw-20261027T082723Z.json",
+  "raw_history_sha256": "f62b60821020be5a0ecae752e0e93d67144c0ec12e40612e39c1455e720ef452",
+  "raw_limits_path": "運用/証拠/ARC26-UNIFIED/official-cli-limits-raw-20261027T082723Z.txt",
+  "raw_limits_sha256": "522f6ba380cf22100fffe2263d7497e3e346856ef2c0b7fd68df664b25bf4a72",
+  "submission_or_rerun_performed": false,
+  "quota_used": false
+}

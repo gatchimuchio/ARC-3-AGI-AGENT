@@ -1,0 +1,163 @@
+{
+  "schema": "arc3-human-action6-hds-prediction-dev.v1",
+  "run_id": "C2-094_human-public-demo-action6-hds-prediction-dev",
+  "observed_at_utc": "2026-10-27T17:46:35+09:00",
+  "source": {
+    "archive_sha256": "347a4fdba7075babc84b263273122d623fadbe5183b76daa6850534d72039a7c",
+    "archive_bytes": 157114630,
+    "kaggle_license_label": "other",
+    "official_article_replays": 342,
+    "mirror_recording_files": 340,
+    "current_version_recordings": 163,
+    "stale_version_recordings_excluded": 177,
+    "human_reasoning_used": false,
+    "game_and_session_ids_used_as_features": false,
+    "raw_coordinates_used_as_features": false
+  },
+  "split": {
+    "seed": 20261027,
+    "train_groups": 7,
+    "dev_groups": 3,
+    "train_group_digest": "7efd0d9e8b1f552b4582211c4227458129f1fbf27d12abf7a6e372d8e2261e9c",
+    "dev_group_digest": "cb5aa32cd1a3847478e2f46c119bb1a8dc1b1ae1009bccb4b739a9f9bb568f93",
+    "train_groups_with_action6": 4,
+    "dev_groups_with_action6": 2
+  },
+  "features": [
+    "legal_action_count",
+    "distinct_color_count",
+    "dominant_color_occupancy_band",
+    "action_number_6",
+    "has_action_arguments"
+  ],
+  "hds": {
+    "version": "HDS/学習系統/v0.4.2",
+    "prior_memory_version": "arc3-prior-context-v0.1",
+    "source_tree_sha256": "a6fbdd20b82b5f0c01a768f0c295f1f0c6ac03835c3942994c117aabdc8c40e7",
+    "agent_sha256": "b0643f6d6bfff7fa1520a86248d77963ffeff465b9674df2aa62acdd8a20bbba",
+    "minimum_support": 3,
+    "maximum_conditions": 2,
+    "training_per_group_limit": 32,
+    "development_per_group_limit": 100,
+    "training_input_digest_sha256": "108b15c9378ef69cff8d7023251e72d9b985537de3c7f6cf8c471c43718ba1eb",
+    "training_examples_total": 128,
+    "development_examples_total": 200,
+    "no_development_updates": true
+  },
+  "evaluation": {
+    "baseline_and_candidate": "train-majority outcome versus HDS prediction with majority fallback",
+    "baseline": {
+      "prior_memory": {
+        "version": "arc3-prior-context-v0.1",
+        "loaded_count": 5,
+        "boundary": "ARC3事前記憶",
+        "action_authorization": false,
+        "visible_change_coefficient": 0.0
+      },
+      "trained_state_version": 19,
+      "training_examples": 128,
+      "training_outcome_counts": {
+        "盤面変化": 113,
+        "可視変化なし": 14,
+        "勝利": 1
+      },
+      "learning_state_counts": {
+        "断定保留": 128
+      },
+      "development_examples": 200,
+      "development_outcome_counts": {
+        "盤面変化": 183,
+        "可視変化なし": 16,
+        "レベル進行": 1
+      },
+      "hds_query_state_counts": {
+        "断定保留": 200
+      },
+      "hds_prediction_counts": {},
+      "hds_coverage": 0.0,
+      "hds_covered_accuracy": 0.0,
+      "majority_baseline_label": "盤面変化",
+      "majority_baseline_accuracy": 0.915,
+      "hds_with_majority_fallback_accuracy": 0.915,
+      "fallback_accuracy_delta": 0.0,
+      "prediction_digest_sha256": "09b13fd3406fbe777c94c73a4ce7a791158ac3c4094d405e3254f3bfba258d62"
+    },
+    "repeat": {
+      "prior_memory": {
+        "version": "arc3-prior-context-v0.1",
+        "loaded_count": 5,
+        "boundary": "ARC3事前記憶",
+        "action_authorization": false,
+        "visible_change_coefficient": 0.0
+      },
+      "trained_state_version": 19,
+      "training_examples": 128,
+      "training_outcome_counts": {
+        "盤面変化": 113,
+        "可視変化なし": 14,
+        "勝利": 1
+      },
+      "learning_state_counts": {
+        "断定保留": 128
+      },
+      "development_examples": 200,
+      "development_outcome_counts": {
+        "盤面変化": 183,
+        "可視変化なし": 16,
+        "レベル進行": 1
+      },
+      "hds_query_state_counts": {
+        "断定保留": 200
+      },
+      "hds_prediction_counts": {},
+      "hds_coverage": 0.0,
+      "hds_covered_accuracy": 0.0,
+      "majority_baseline_label": "盤面変化",
+      "majority_baseline_accuracy": 0.915,
+      "hds_with_majority_fallback_accuracy": 0.915,
+      "fallback_accuracy_delta": 0.0,
+      "prediction_digest_sha256": "09b13fd3406fbe777c94c73a4ce7a791158ac3c4094d405e3254f3bfba258d62"
+    },
+    "same_run_reproduced": true,
+    "minimum_fallback_delta": 0.05,
+    "minimum_hds_coverage": 0.1,
+    "gate_passed": false,
+    "decision": "REJECT_HDS_PRIOR",
+    "elapsed_seconds": 559.444
+  },
+  "source_counts": {
+    "source_counts": {
+      "recording_files": 340,
+      "recordings_with_version_id": 340,
+      "stale_version_recordings": 177,
+      "current_version_recordings": 163,
+      "current_version_groups": 10,
+      "stale_version_groups": 15
+    },
+    "extraction_counts": {
+      "action6_transitions": 26080,
+      "usable_action6_transitions": 26080
+    },
+    "current_version_environment_groups": 10,
+    "train_groups": 7,
+    "dev_groups": 3,
+    "train_group_digest": "7efd0d9e8b1f552b4582211c4227458129f1fbf27d12abf7a6e372d8e2261e9c",
+    "dev_group_digest": "cb5aa32cd1a3847478e2f46c119bb1a8dc1b1ae1009bccb4b739a9f9bb568f93",
+    "train_groups_with_action6": 4,
+    "dev_groups_with_action6": 2
+  },
+  "official_submission_made": false,
+  "notebook_or_kernel_changed": false,
+  "limitations": [
+    "Predicting human public Action 6 outcome categories is a diagnostic, not an ARC3 game score.",
+    "The Kaggle dataset mirror has 340 recordings while the official article reports 342; the gap is unresolved.",
+    "The Kaggle mirror license label is other; the learned HDS state is local-only and is not packaged for competition."
+  ],
+  "runner_source_sha256": "7c8537a11c2d77346d0bcee719d89ac8d5feb788f395658d6d94ce796417da46",
+  "execution_command": "& \"$env:TEMP\\arc3-v6-locked-20261027\\Scripts\\python.exe\" '検証/ARC3人間公開遷移HDS予測dev.py' --human-archive \"$env:TEMP\\arc-agi-3-public-demo-human-testing.zip\" --expected-archive-sha256 347a4fdba7075babc84b263273122d623fadbe5183b76daa6850534d72039a7c --output '運用/証拠/ARC26-UNIFIED/ARC3-C2-094-human-action6-hds-prediction-dev-20261027.json'",
+  "runtime": {
+    "python": "3.12.10",
+    "arc_agi": "0.9.8",
+    "arcengine": "0.9.3"
+  }
+}
