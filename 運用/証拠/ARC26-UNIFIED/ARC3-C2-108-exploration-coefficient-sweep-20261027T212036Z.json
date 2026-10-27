@@ -1,0 +1,792 @@
+{
+  "schema": "arc3-local-action-policy-paired-sweep.v1",
+  "run_id": "ARC3-RUN-003-C2-108-exploration-coefficient-20261027T212036Z",
+  "observed_at_utc": "2026-10-27T21:20:36Z",
+  "track": "ARC3",
+  "three_point_set_version": "v6.0",
+  "three_point_document_sha256": {
+    "common_codex": "e5f5c66f6391af6866211f9030b4cb08a0f0296063ab5bc53246529dc925a0c0",
+    "common_plan": "08c51299981c468712f66a560a50ab862843897d45ebbd965e0a032f35f71a25",
+    "common_spec": "3a03343306aaf71cc9aa33100064f5476d8a7dad8b63567e5578c1a84d489141",
+    "arc3_codex": "47dd0ed72818e975af1fc9545808291effbf1b2ff7b524da9112f1ab8299a060",
+    "arc3_plan": "34061bc53a228bcdc2b94cce7235ac96aa0e67f6bc74d2abb1757fe18af612b6",
+    "arc3_spec": "07ff22715feba930763fc01d10c1989e827aa6206cd45974d1fefed7d2060b67"
+  },
+  "protected_file_sha256": {
+    "AGENTS.md": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+    "制御/現在状態.json": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+  },
+  "command": ".venv/Scripts/python.exe 検証/ARC3C2-108_exploration-coefficient-paired-evaluation.py",
+  "runner_sha256": "4166e488ca8dbdf6d103f7bb01a2981f3c3d0751d53711277e2762780b4ccd2c",
+  "policy_sha256": "7879f85b5a3434dc2f5426c4837914c41054cbe56360ed4324167dab93de0575",
+  "local_evaluator_sha256": "ddcd523af222a95eb7a3ad1ae73351b011eccbcd25359eaa6b9c7a69792718e9",
+  "scorer_sha256": "3e0edd03dfc81715191d6eb5a8a098eaddb1fd3eeb88205dd638d0b624b8c502",
+  "decision": "NO_PROMOTION; both candidate coefficients tied the baseline on all 15 pairs and failed the predeclared +0.01 mean RHAE gate.",
+  "result": {
+    "split_seed": 20261022,
+    "policy_seeds": [
+      7,
+      31,
+      73
+    ],
+    "max_actions_per_game": 80,
+    "dev_games": [
+      "su15-1944f8ab",
+      "r11l-495a7899",
+      "s5i5-18d95033",
+      "ls20-9607627b",
+      "sc25-635fd71a"
+    ],
+    "baseline_coefficient": 0.8,
+    "candidate_coefficients": [
+      0.4,
+      1.6
+    ],
+    "score_summaries": [
+      {
+        "coefficient": 0.4,
+        "pairs": 15,
+        "matched_start_pairs": 15,
+        "mean_previous": 0.24059665606825012,
+        "mean_candidate": 0.24059665606825012,
+        "mean_delta": 0.0,
+        "positive_pairs": 0,
+        "negative_pairs": 0,
+        "tied_pairs": 15,
+        "levels_delta": 0,
+        "wins_delta": 0,
+        "actions_previous": 832,
+        "actions_candidate": 848,
+        "noops_previous": 23,
+        "noops_candidate": 22,
+        "illegal_actions": 0,
+        "pair_deltas": [
+          {
+            "seed": 7,
+            "game_id": "su15-1944f8ab",
+            "delta": 0.0
+          },
+          {
+            "seed": 7,
+            "game_id": "r11l-495a7899",
+            "delta": 0.0
+          },
+          {
+            "seed": 7,
+            "game_id": "s5i5-18d95033",
+            "delta": 0.0
+          },
+          {
+            "seed": 7,
+            "game_id": "ls20-9607627b",
+            "delta": 0.0
+          },
+          {
+            "seed": 7,
+            "game_id": "sc25-635fd71a",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "su15-1944f8ab",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "r11l-495a7899",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "s5i5-18d95033",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "ls20-9607627b",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "sc25-635fd71a",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "su15-1944f8ab",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "r11l-495a7899",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "s5i5-18d95033",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "ls20-9607627b",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "sc25-635fd71a",
+            "delta": 0.0
+          }
+        ]
+      },
+      {
+        "coefficient": 1.6,
+        "pairs": 15,
+        "matched_start_pairs": 15,
+        "mean_previous": 0.24059665606825012,
+        "mean_candidate": 0.24059665606825012,
+        "mean_delta": 0.0,
+        "positive_pairs": 0,
+        "negative_pairs": 0,
+        "tied_pairs": 15,
+        "levels_delta": 0,
+        "wins_delta": 0,
+        "actions_previous": 832,
+        "actions_candidate": 841,
+        "noops_previous": 23,
+        "noops_candidate": 39,
+        "illegal_actions": 0,
+        "pair_deltas": [
+          {
+            "seed": 7,
+            "game_id": "su15-1944f8ab",
+            "delta": 0.0
+          },
+          {
+            "seed": 7,
+            "game_id": "r11l-495a7899",
+            "delta": 0.0
+          },
+          {
+            "seed": 7,
+            "game_id": "s5i5-18d95033",
+            "delta": 0.0
+          },
+          {
+            "seed": 7,
+            "game_id": "ls20-9607627b",
+            "delta": 0.0
+          },
+          {
+            "seed": 7,
+            "game_id": "sc25-635fd71a",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "su15-1944f8ab",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "r11l-495a7899",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "s5i5-18d95033",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "ls20-9607627b",
+            "delta": 0.0
+          },
+          {
+            "seed": 31,
+            "game_id": "sc25-635fd71a",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "su15-1944f8ab",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "r11l-495a7899",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "s5i5-18d95033",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "ls20-9607627b",
+            "delta": 0.0
+          },
+          {
+            "seed": 73,
+            "game_id": "sc25-635fd71a",
+            "delta": 0.0
+          }
+        ]
+      }
+    ],
+    "raw_rows": [
+      {
+        "coefficient": 0.8,
+        "seed": 7,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 36,
+        "noops": 4,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 7,
+        "game_id": "r11l-495a7899",
+        "score": 1.1904761904761905,
+        "levels": 1,
+        "actions": 52,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 7,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 7,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 7,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 53,
+        "noops": 2,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 31,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 37,
+        "noops": 5,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 31,
+        "game_id": "r11l-495a7899",
+        "score": 0.7349368318756073,
+        "levels": 1,
+        "actions": 68,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 31,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 31,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 31,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 53,
+        "noops": 2,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 73,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 36,
+        "noops": 4,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 73,
+        "game_id": "r11l-495a7899",
+        "score": 1.6835368186719541,
+        "levels": 1,
+        "actions": 54,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 73,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 73,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 0.8,
+        "seed": 73,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 53,
+        "noops": 6,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 7,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 36,
+        "noops": 4,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 7,
+        "game_id": "r11l-495a7899",
+        "score": 1.1904761904761905,
+        "levels": 1,
+        "actions": 51,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 7,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 7,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 7,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 53,
+        "noops": 2,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 31,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 36,
+        "noops": 4,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 31,
+        "game_id": "r11l-495a7899",
+        "score": 0.7349368318756073,
+        "levels": 1,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 31,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 31,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 31,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 53,
+        "noops": 2,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 73,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 36,
+        "noops": 4,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 73,
+        "game_id": "r11l-495a7899",
+        "score": 1.6835368186719541,
+        "levels": 1,
+        "actions": 60,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 73,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 73,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 0.4,
+        "seed": 73,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 53,
+        "noops": 6,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 7,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 42,
+        "noops": 10,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 7,
+        "game_id": "r11l-495a7899",
+        "score": 1.1904761904761905,
+        "levels": 1,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 7,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 7,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 7,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 54,
+        "noops": 3,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 31,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 43,
+        "noops": 10,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 31,
+        "game_id": "r11l-495a7899",
+        "score": 0.7349368318756073,
+        "levels": 1,
+        "actions": 68,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 31,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 31,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 31,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 54,
+        "noops": 3,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 73,
+        "game_id": "su15-1944f8ab",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 42,
+        "noops": 10,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "8146d7b71baa6d0cb813ff23b7bc7d4dfcf791550a1c03edaf09136d62d5ae91"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 73,
+        "game_id": "r11l-495a7899",
+        "score": 1.6835368186719541,
+        "levels": 1,
+        "actions": 44,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "cc2e6f3a2934eb9c9b01327ef3750e03199262ff6c37fb5158836fee5a84af80"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 73,
+        "game_id": "s5i5-18d95033",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 50,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "7f177c5c5f3dfc62112372195a598c0740e066828b4854ec9814cb7a2770ed4d"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 73,
+        "game_id": "ls20-9607627b",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "noops": 0,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "4f9541431c81e71f709827f80e8d476837d60e57570459c044cbc5372b5576ed"
+      },
+      {
+        "coefficient": 1.6,
+        "seed": 73,
+        "game_id": "sc25-635fd71a",
+        "score": 0.0,
+        "levels": 0,
+        "actions": 54,
+        "noops": 3,
+        "wins": 0,
+        "illegal_actions": 0,
+        "initial_public_state_sha256": "c9e81b9e99d2f055a1421d19f59ab238ff2fa25e39c467876fef3a3ba85fa052"
+      }
+    ],
+    "decision_gate": {
+      "minimum_mean_rhae_delta": 0.01,
+      "require_nonnegative_levels_and_wins": true,
+      "holdout_or_promotion_if_gate_fails": false
+    },
+    "input_manifest_sha256": {
+      "入力/Kaggle/environment_files/su15/1944f8ab/metadata.json": "5465b9b5d13effcf1d63950ed5a29e17f80ca194645b582ad5a6e7ecd4c9bd87",
+      "入力/Kaggle/environment_files/r11l/495a7899/metadata.json": "37a0ea9f76955b4177a550b6ac5cbd4e6a39907961f967ce4c2b006598161f93",
+      "入力/Kaggle/environment_files/s5i5/18d95033/metadata.json": "1b4f3bfa7472ae0d9071f83183ecdcde04fa041e1530d868964829b5f7ed4a68",
+      "入力/Kaggle/environment_files/ls20/9607627b/metadata.json": "181e2f8a540962461a1c799160bdd11963d7276d6c42a368324dd84f3573803f",
+      "入力/Kaggle/environment_files/sc25/635fd71a/metadata.json": "07fd2772925d73810fd3f3afb11a441e2f66f6ebe050dc684a2269111b056510"
+    }
+  }
+}
