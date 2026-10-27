@@ -45,3 +45,13 @@ C2-105は PREPARED_LOCAL_ONLY。スコア改善は未確認のため採用・昇
 - Review/trace/official snapshot: 運用/証拠/ARC26-UNIFIED/ARC3-C2-105-action-plan-cap8-review-20261027T201741Z.json
 - Official raw history: 運用\証拠\ARC26-UNIFIED\ARC3-C2-105-official-history-raw-20261027T201741Z.json
 - Latest official score and quota source: 運用\証拠\ARC26-UNIFIED\ARC3-C2-102-official-limits-raw-20261027T191807Z.txt
+
+## 2026-10-27 UTC follow-up — private push rejected
+
+The prepared private candidate was pushed once with the pinned Kaggle CLI. Kaggle returned the exact message: Kernel push error: Maximum weekly GPU quota of 30.00 hours reached. The process exit code was 0 despite that rejection message. No candidate version ID or score was returned. A read-only kaggle kernels status tecchannn/arc3-model-guided-c2-025 query returned KernelWorkerStatus.COMPLETE without a version number, so that status cannot be attributed to candidate version 30.
+
+- Candidate Notebook SHA-256: 64c07c3c7988043533430683f9df32c5e6776946e2fcd4578dde0678de5b1a1e; metadata confirms private=true, GPU=true, internet=false.
+- Private score: NOT_MEASURED; candidate execution/version creation: NOT_CONFIRMED.
+- No official submission or Competition Rerun was attempted; this operation used 0 official daily submissions.
+- No retry until fresh weekly GPU capacity evidence. Continue local score improvement work while capacity is unavailable.
+- Push evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-105-private-push-rejection-20261027T204849Z.json.
