@@ -1,0 +1,60 @@
+{
+  "track": "ARC3",
+  "run_id": "ARC3-RUN-003-C2-114-capacity-check-20261027T234316Z",
+  "observed_at_utc": "2026-10-27T23:43:16Z",
+  "three_point_set_rechecked": true,
+  "three_point_set_version": "v6.0",
+  "three_point_document_sha256": {
+    "common_codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "arc3_codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "arc3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "arc3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67"
+  },
+  "protected_file_sha256": {
+    "AGENTS.md": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "制御/現在状態.json": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "repo_branch": "codex/arc3-v6-progress-20261027",
+  "repo_head": "bd60ac4db17c007125529391517f0ecaa1aa79bd",
+  "kaggle_quota_command": "kaggle quota",
+  "kaggle_quota_exit_code": 0,
+  "kaggle_quota": {
+    "gpu": {
+      "used_hours": 30.13,
+      "remaining_hours": 0.0,
+      "total_hours": 30.0,
+      "refresh_at_utc": "2026-10-31T00:00:00Z"
+    },
+    "tpu": {
+      "used_hours": 0.0,
+      "remaining_hours": 20.0,
+      "total_hours": 20.0,
+      "refresh_at_utc": "2026-10-31T00:00:00Z"
+    }
+  },
+  "c2_114_candidate": {
+    "sha256": "5E5D92994533303DE46F11145EBC07A62CC36D26FF9DAB6AA191446668B8B539",
+    "status": "PREPARED_LOCAL_ONLY",
+    "kernel_push": false,
+    "official_submission": false,
+    "decision": "WAIT_FOR_GPU_QUOTA_REFRESH"
+  },
+  "selective_output_retrieval": {
+    "command": "kaggle kernels output tecchannn/arc3-model-guided-c2-025/29 --path <new-directory> --file-pattern '^benchmark\\.json$' --quiet",
+    "exit_code": 0,
+    "downloaded_files": [
+      {
+        "name": "benchmark.json",
+        "bytes": 99849,
+        "sha256": "9619e3f916b66e807b2f71bb7c62fe1d0559fe98ede2eb26f4c2c2d16b037e2c"
+      },
+      {
+        "name": "arc3-model-guided-c2-025.log",
+        "bytes": 44119
+      }
+    ],
+    "interpretation": "Exact version 29 output filtering retrieved the requested benchmark and a small run log; no full output bundle, GPU time, kernel push, or competition quota was used."
+  }
+}

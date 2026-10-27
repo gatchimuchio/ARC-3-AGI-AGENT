@@ -27,3 +27,11 @@ The last recorded private GPU push rejection is C2-105 at 2026-10-27T20:48:49Z, 
 The v6.0 three-point set was rechecked for this work item. All six hashes and the protected AGENTS.md / 制御/現在状態.json hashes are recorded in the evidence JSON. None were modified.
 
 Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-114-undo-streak-diagnostic-20261027T233055Z.json (SHA-256 5e9f86f06f501110d54ca1a93746ea56c6f4ec0e59f398391ce6562884cb8848).
+
+## 2026-10-27T23:43:16Z capacity and output retrieval checkpoint
+
+The pinned Kaggle CLI `kaggle quota` read returned GPU 30.13h used / 0.00h remaining / 30.00h total, refreshing at `2026-10-31T00:00:00Z`. TPU remains 20.00h, but C2-114 uses the existing GPU model path, so it remains unrun and unpushed pending GPU refresh. No official submission quota was used.
+
+To keep future private output collection within the available local disk, exact kernel version 29 was queried with `--file-pattern '^benchmark\.json$'`. The CLI returned `benchmark.json` (99,849 bytes, SHA-256 `9619e3f916b66e807b2f71bb7c62fe1d0559fe98ede2eb26f4c2c2d16b037e2c`) and its 44,119-byte run log; it did not download the full output bundle or use compute quota.
+
+Evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-114-capacity-and-selective-output-20261027T234316Z.json` (SHA-256 `9d357655a27d895aECB7c8af8c90bb7c3398dd9d21b9596bacf2c6e5711c00a5`).
