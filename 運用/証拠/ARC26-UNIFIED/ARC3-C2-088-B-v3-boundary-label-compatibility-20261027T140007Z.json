@@ -1,0 +1,68 @@
+{
+  "schema": "arc26-arc3-public-outcome-enum-compatibility-audit.v1",
+  "observed_at_utc": "2026-10-27T14:00:07Z",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "version": 3,
+  "scorecard_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-terminal-scorecard-20261027T1346Z.json",
+  "frozen_legacy_outcome_set": [
+    "GAME_OVER",
+    "レベル進行",
+    "勝利",
+    "可視変化なし",
+    "盤面変化"
+  ],
+  "candidate_added_outcome": "境界領域変化のみ",
+  "per_game": [
+    {
+      "game_id": "m0r0-492f87ba",
+      "source_file": "artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json",
+      "source_sha256": "18167297028a085fe9bb0d09a7000df2b2ca0f7804cf2f91f7805b2e2da11afd",
+      "row_count": 80,
+      "outcome_counts": {
+        "盤面変化": 73,
+        "可視変化なし": 5,
+        "レベル進行": 1,
+        "境界領域変化のみ": 1
+      },
+      "new_boundary_only_label_count": 1,
+      "legacy_unknown_outcome_count": 1,
+      "all_unknown_labels_have_authorization_false_and_endorsement_false": true
+    },
+    {
+      "game_id": "sk48-d8078629",
+      "source_file": "artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json",
+      "source_sha256": "540eef3da114f329383be40c64314cc8da5ac8a1ed66ac13198a376b3c548f9b",
+      "row_count": 59,
+      "outcome_counts": {
+        "盤面変化": 56,
+        "可視変化なし": 2,
+        "レベル進行": 1
+      },
+      "new_boundary_only_label_count": 0,
+      "legacy_unknown_outcome_count": 0,
+      "all_unknown_labels_have_authorization_false_and_endorsement_false": true
+    },
+    {
+      "game_id": "tn36-ef4dde99",
+      "source_file": "artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json",
+      "source_sha256": "7f687db66a59efcf9b031b2eb76ba525b684e90e117879f7428e7963cad9ff6d",
+      "row_count": 80,
+      "outcome_counts": {
+        "境界領域変化のみ": 32,
+        "盤面変化": 47,
+        "レベル進行": 1
+      },
+      "new_boundary_only_label_count": 32,
+      "legacy_unknown_outcome_count": 32,
+      "all_unknown_labels_have_authorization_false_and_endorsement_false": true
+    }
+  ],
+  "totals": {
+    "response_rows": 219,
+    "candidate_boundary_only_labels": 33,
+    "streams_with_unknown_labels": 2,
+    "authorization_true_among_candidate_boundary_only_labels": 0,
+    "endorsement_true_among_candidate_boundary_only_labels": 0
+  },
+  "interpretation": "The two integration failures come from the frozen evaluator rejecting a candidate refinement label outside its five-value enum. The 33 records retain authorization=false and endorsement=false; this audit does not establish gameplay benefit."
+}

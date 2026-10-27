@@ -1,0 +1,119 @@
+{
+  "schema": "arc26-arc3-matched-native-learning-result-details.v1",
+  "observed_at_utc": "2026-10-27T14:14:52Z",
+  "scorecard": {
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-matched-A-v3-vs-B-v3-terminal-scorecard-20261027T1410Z.json",
+    "sha256": "d585b2302230039a43c4ce777936fe046f093c92640966483696c4981123e74c",
+    "learning_effect_proven": false,
+    "learning_benefit": "UNPROVEN",
+    "official_score_observed": false,
+    "official_submission_or_quota_use": false
+  },
+  "arms": {
+    "prior_only_A": {
+      "kernel": "tecchannn/arc3-v6-boundary-prior-only-c2-088",
+      "version": 1,
+      "public_offline_RHAE_mean": 5.952380952380952,
+      "per_game": {
+        "sk48-d8078629": 0.0,
+        "tn36-ef4dde99": 3.571428571428571,
+        "m0r0-492f87ba": 14.285714285714285
+      },
+      "levels_completed": 3,
+      "levels_total": 21,
+      "actions": 240,
+      "generated_tokens": 398563,
+      "run_states": {
+        "gave_up": 3
+      },
+      "job_elapsed_seconds": 2783.655728,
+      "max_game_elapsed_seconds": 1002.4304613639999,
+      "gameplay_valid": true,
+      "integration_valid": false,
+      "updates_succeeded": 0,
+      "queries_succeeded": 4
+    },
+    "online_learning_B": {
+      "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+      "version": 3,
+      "public_offline_RHAE_mean": 3.204297592052694,
+      "per_game": {
+        "sk48-d8078629": 2.7777777777777777,
+        "tn36-ef4dde99": 2.0732102364755423,
+        "m0r0-492f87ba": 4.761904761904762
+      },
+      "levels_completed": 3,
+      "levels_total": 21,
+      "actions": 220,
+      "generated_tokens": 284460,
+      "run_states": {
+        "gave_up": 3
+      },
+      "job_elapsed_seconds": 2461.305156,
+      "max_game_elapsed_seconds": 1210.3266942159999,
+      "gameplay_valid": false,
+      "integration_valid": false,
+      "updates_attempted": 219,
+      "updates_succeeded": 219,
+      "queries_succeeded": 3
+    }
+  },
+  "paired_delta": {
+    "online_minus_prior_mean": -2.7480833603282577,
+    "per_game": {
+      "sk48-d8078629": 2.7777777777777777,
+      "tn36-ef4dde99": -1.4982183349530287,
+      "m0r0-492f87ba": -9.523809523809524
+    },
+    "direction_counts": {
+      "higher": 1,
+      "equal": 0,
+      "lower": 2
+    }
+  },
+  "matched_fields": {
+    "source_model_observer_prompt_budget_initial_fields": true,
+    "runtime_software_seed": true
+  },
+  "invalidity_and_confound": {
+    "B_runtime_limit_seconds": 1200,
+    "scorecard_grace_seconds": 5,
+    "B_max_game_elapsed_exceeds_grace": true,
+    "integration_failure": "Frozen five-outcome comparator rejects the shared boundary-only refinement label in A and B.",
+    "A_boundary_audit": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-A-v3-boundary-label-compatibility-20261027T141151Z.json",
+      "sha256": "635d064748a35d903b368377524bce5df64b95b161bd2311842534a4a847b3e9",
+      "new_label_count": 23
+    },
+    "B_boundary_audit": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-boundary-label-compatibility-20261027T140007Z.json",
+      "sha256": "c8414219b93336783b678714538e69e4483b14572544eafb40e9ff29971b82cb",
+      "new_label_count": 33
+    },
+    "gpu_runtime_overlap_confirmed": true,
+    "A_start_evidence": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-matched-A-v3-start-20261027T130559Z.json",
+      "sha256": "ce46660daeee669aef9a7a435d14ba960a7e03dca06fdc5fb0e86a946644590b",
+      "observed_at_utc": "2026-10-27T13:05:59Z",
+      "B_status_at_A_start": "KernelWorkerStatus.RUNNING"
+    },
+    "B_launch_evidence": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-run-launch-20261027T122627Z.json",
+      "sha256": "5f1876e45ebc3876f3d63279f5245e9e5941e7da8776b8f5e79404f23b4efd7a",
+      "observed_at_utc": "2026-10-27T12:26:27.169460+00:00"
+    }
+  },
+  "retrievals": {
+    "A": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-A-v3-exact-output-manifest-20261027T1409Z.json",
+      "sha256": "f98aecb474b1e0085cad1c208062334d844c2f9bb63ab248af25e4a073c5dcde",
+      "output_manifest_sha256": "5927a5769adda868737f859217e60b8b29f0fbf5d45f5b70f3d7443cba52c288"
+    },
+    "B": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-exact-output-manifest-20261027T1345Z.json",
+      "sha256": "65111b84e0b9c6dd30eca8972633d2c93749f5fb6e101e912f6d4dd23eadf610",
+      "output_manifest_sha256": "25a227ae8d7bb9690fd38d579dce25ae278b1696bea9e7ce42e53907bfeab859"
+    }
+  },
+  "decision": "Do not accept B-v3 as an improvement. This one-run paired result is descriptive only: B exceeded runtime, both arms failed frozen integration scoring due to the shared refined label, and the GPU runs overlapped. Learning benefit remains UNPROVEN."
+}

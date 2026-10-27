@@ -1,0 +1,47 @@
+{
+  "schema": "arc26-unified-kaggle-submission-attribution-observation.v1",
+  "history_command": "kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json",
+  "kaggle_cli_version": "Kaggle CLI 2.2.5",
+  "read_only": true,
+  "submission": {
+    "id": "57688735",
+    "fileName": "submission.parquet",
+    "date_raw": "2026-10-27T04:20:12.220000",
+    "submitted_at_utc": "2026-10-27T04:20:12Z",
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13",
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "notebook_slug": null,
+    "notebook_version": null
+  },
+  "source_attribution": "Kaggle history description identifies the fallback as legacy visual C2-046 v13; the history response exposes no exact notebook slug/version.",
+  "previous_best_confirmed_official": {
+    "submission_id": "57577905",
+    "public_score": 23.86,
+    "evidence": "検証/運転記録/ARC3-RUN-003_C1-018_modelv5公式Rerun_20261024.md"
+  },
+  "comparison": {
+    "delta_vs_previous_best": 4.21,
+    "delta_vs_immediate_numeric_predecessor": 28.04,
+    "immediate_numeric_predecessor": {
+      "submission_id": "57612586",
+      "public_score": 0.03
+    }
+  },
+  "quota": {
+    "numToday": 1,
+    "numTotal": 8,
+    "remainingToday": 0,
+    "evidence": "運用/証拠/ARC26-UNIFIED/official-cli-observation-20261027T134302Z.json",
+    "observed_at_utc": "2026-10-27T13:43:02Z"
+  },
+  "submission_or_rerun_performed": false,
+  "current_C2_088_experiment_attribution": "This score is not attributed to C2-088 B-v3; it is the separate legacy C2-046 v13 fallback described by Kaggle history.",
+  "recorded_at_utc": "2026-10-27T13:56:05Z",
+  "official_score_status_observed_at_utc": "2026-10-27T13:43:02Z",
+  "history_attribution_observation_window_utc": {
+    "not_before": "2026-10-27T13:45:54Z",
+    "not_after": "2026-10-27T13:51:54Z"
+  }
+}

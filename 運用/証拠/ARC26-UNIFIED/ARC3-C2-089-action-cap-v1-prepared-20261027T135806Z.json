@@ -1,0 +1,74 @@
+{
+  "schema": "arc26-arc3-action-tranche-candidate-preparation.v1",
+  "recorded_at_utc": "2026-10-27T13:58:06Z",
+  "candidate_manifest_sha256": "c631c66524e966afc04558a6ffefa1509ae4bba9cba7d093f16c8329afa5a3b0",
+  "candidate": {
+    "experiment_id": "ARC3-RUN-003/C2-089-action-tranche-cap-v1",
+    "parent_kernel": "tecchannn/arc3-v6-online-official-c2-088/3",
+    "candidate_kernel": "tecchannn/arc3-v6-action-tranche-c2-089",
+    "parent_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "candidate_notebook_sha256": "16cb7b2f291a0f964a7e4bec0df901594a07b09f473a8b6efba10344fa368df7",
+    "candidate_metadata_sha256": "9aff09ff942d321b87a913015435080a653ba45d43bbf0883462cf0daf63e17d",
+    "changed_notebook_cell_indices": [
+      3,
+      5
+    ],
+    "other_cells_unchanged": true,
+    "HDS_payload_cell_unchanged": true,
+    "private_HDS_source_embedded_in_notebook": true,
+    "private_source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "status": "PREPARED_LOCAL_NOT_UPLOADED",
+    "score": null,
+    "private_kernel_uploaded": false,
+    "official_submission_or_competition_rerun": false,
+    "official_quota_used": false,
+    "learning_or_gameplay_gain_proven": false
+  },
+  "treatment": {
+    "max_executed_actions_per_python_call": 4,
+    "default_when_unset": 0,
+    "counter": "executed_count reported by game callback",
+    "scope": "generic across games; no game/level ID branches",
+    "includes_model_requested_reset_actions": true
+  },
+  "runtime_patch": {
+    "public_patch_path": "検証/ARC3-RUN-003/C2-089-action-cap-v1.patch",
+    "incremental_patch_sha256": "810dd3e53cfd47d9a43b4dbcd9378de1ac49642c2611bed83aecf5269f4afff3",
+    "combined_patch_sha256": "22f8463c84ad677adb6845306de60c3156d350a42af79ecc5b584138fbc59b11",
+    "patched_tool_agent_sha256": "cf9ebbde8c50e0b85fa093508d7791b786fb047090fb3a125362923f1626a206"
+  },
+  "matched_conditions_inherited_from_Bv3": {
+    "games": 3,
+    "seed": 0,
+    "actions_per_game": 80,
+    "seconds_per_game": 1200,
+    "same_models_data_source_runtime_source_bundle": true,
+    "HDS_game_response_updates": "enabled"
+  },
+  "local_validation": {
+    "combined_patch_applies_to_v5_raw_source": true,
+    "postimage_matches_candidate": true,
+    "python_compile_pass": true,
+    "synthetic_repeated_calls": "PASS: 4 executed; remaining blocked with explicit reason",
+    "synthetic_oversized_batch": "PASS: only first 4/6 passed; requested count retained",
+    "synthetic_default_unset": "PASS: 6/6 unchanged"
+  },
+  "trace_counterfactual_not_score": {
+    "source_trace_sha256": "08a41222b770c9bd284527dc3ff95acbd448a8446a5567bd02bfe98f51c4f413",
+    "analysis_steps": 10,
+    "steps_with_more_than_four_mouse_actions": 6,
+    "mouse_actions_after_first_four_per_step": 45,
+    "largest_step_action_count": 37,
+    "largest_step_id": "6",
+    "score_effect": "NOT MEASURED"
+  },
+  "post_Bv3_gate": {
+    "Bv3_scorecard": "COMPLETE but gameplay_valid=false and integration_valid=false",
+    "Bv3_max_game_elapsed_seconds": 1210.3266942159999,
+    "Bv3_unsupported_boundary_only_labels": 33,
+    "Av3_status_as_of_utc": "2026-10-27T13:51:54Z",
+    "Av3_status": "KernelWorkerStatus.RUNNING",
+    "decision": "Keep candidate local until A-v3 terminal output is scored and action-cap comparison can be interpreted."
+  },
+  "publication_boundary": "Only the incremental public patch, hashes, report, and this evidence are published. The full Notebook and embedded private HDS source ZIP are excluded."
+}

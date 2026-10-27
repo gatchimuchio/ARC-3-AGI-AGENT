@@ -414,3 +414,31 @@
 - Submission 57688735: SubmissionStatus.PENDING, public score unobserved.
 - Limits: today=1, lifetime=8, remaining=0. No submit, rerun, push, or Notebook edit was performed.
 - Evidence: 運用/証拠/ARC26-UNIFIED/official-cli-observation-20261027T104302Z.json. Next scheduled query: 2026-10-27T11:43:02Z UTC.
+
+## 2026-10-27T11:43:02Z scheduled read-only Kaggle observation
+
+- Submission 57688735: SubmissionStatus.PENDING, public score unobserved.
+- Limits: today=1, lifetime=8, remaining=0. No submit, rerun, push, or Notebook edit was performed.
+- Evidence: 運用/証拠/ARC26-UNIFIED/official-cli-observation-20261027T114302Z.json. Next scheduled query: 2026-10-27T12:43:02Z UTC.
+
+## 2026-10-27T12:43:02Z scheduled read-only Kaggle observation
+
+- Submission 57688735: SubmissionStatus.PENDING, public score unobserved.
+- Limits: today=1, lifetime=8, remaining=0. No submit, rerun, push, or Notebook edit was performed.
+- Evidence: 運用/証拠/ARC26-UNIFIED/official-cli-observation-20261027T124302Z.json. Next scheduled query: 2026-10-27T13:43:02Z UTC.
+
+## 2026-10-27T13:43:02Z scheduled read-only Kaggle observation
+
+- Submission 57688735: SubmissionStatus.COMPLETE, public score 28.07.
+- Limits: today=1, lifetime=8, remaining=0. No submit, rerun, push, or Notebook edit was performed.
+- Evidence: 運用/証拠/ARC26-UNIFIED/official-cli-observation-20261027T134302Z.json. Next scheduled query: 2026-10-28T13:43:02Z UTC.
+
+
+## 2026-10-27T13:56:05Z — separate 57688735 attribution
+
+The official history observation at 13:43Z is terminal COMPLETE with public score 28.07 and private score absent. The history description identifies submission 57688735 as “ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13”; Kaggle returned no exact notebook slug/version. This is a separate submission from C1-018 submission 57577905 (23.86), and the difference is +4.21. Quota was 1/8 used with remainingToday=0. Do not poll or duplicate this terminal submission. The broader ARC3 optimization follow-up remains active.
+
+Attribution evidence: 運用/証拠/ARC26-UNIFIED/official-cli-attribution-20261027T135605Z.json (SHA-256 a5d2e8375f528ddca698fb5ca3a9f5504642e881f85159ffb4f728c92b839cc7).
+
+
+Windows Task Scheduler task ARC3-Kaggle-Score-Monitor was disabled at 2026-10-27T14:05:37Z after submission 57688735 became terminal COMPLETE. The independent ARC3 optimization follow-up remains active; the monitor can be re-enabled for a future official candidate.

@@ -1,0 +1,95 @@
+diff --git a/ARC3-Inference/inference/agent/tool_agent.py b/ARC3-Inference/inference/agent/tool_agent.py
+--- a/ARC3-Inference/inference/agent/tool_agent.py
++++ b/ARC3-Inference/inference/agent/tool_agent.py
+@@ -5761,6 +5761,13 @@
+ 
+         terminal_action_result: dict[str, Any] | None = None
+         snippet_executed_actions = 0
++        try:
++            snippet_action_limit = max(
++                0,
++                int(os.environ.get("ARC3_MAX_ACTIONS_PER_PYTHON_CALL", "0").strip() or "0"),
++            )
++        except (TypeError, ValueError):
++            snippet_action_limit = 0
+ 
+         def _handle_animation(request: dict[str, Any]) -> dict[str, Any]:
+             if self._step_env_callback is None:
+@@ -5840,7 +5847,47 @@
+             # places consumed the override slot twice - the pre-check armed it,
+             # the retry cleared it, and the hook then blocked the very action
+             # the model had been invited to repeat.
+-            step_arguments: dict[str, Any] = {"actions": normalized_actions}
++            step_actions = normalized_actions
++            limit_truncated = False
++            if snippet_action_limit:
++                remaining = snippet_action_limit - snippet_executed_actions
++                if remaining <= 0:
++                    previous = self._last_action_call_result
++                    previous = previous if isinstance(previous, dict) else {}
++                    compact_payload = {
++                        "executed": False,
++                        "action_num": previous.get("action_num"),
++                        "level": previous.get("level"),
++                        "score": previous.get("score"),
++                        "state": previous.get("state"),
++                        "valid_actions": list(self._current_valid_actions),
++                        "board_changed": False,
++                        "done": bool(previous.get("done")),
++                        "level_completed": bool(previous.get("level_completed")),
++                        "game_over": bool(previous.get("game_over")),
++                        "run_complete": bool(previous.get("run_complete")),
++                        "requested_count": len(normalized_actions),
++                        "executed_count": 0,
++                        "stopped_early": True,
++                        "stop_reason": "python_tool_action_limit",
++                        "stop_detail": (
++                            f"Reached the limit of {snippet_action_limit} executed game actions in this Python snippet. "
++                            "This request was not executed. End the snippet and inspect the returned observation "
++                            "before planning further actions."
++                        ),
++                    }
++                    self._last_action_call_result = dict(compact_payload)
++                    return {
++                        "action_result": compact_payload,
++                        "state": _serialized_runtime_state(
++                            next_valid_actions=list(self._current_valid_actions),
++                            last_action_call_result=compact_payload,
++                        ),
++                    }
++                if len(normalized_actions) > remaining:
++                    step_actions = normalized_actions[:remaining]
++                    limit_truncated = True
++            step_arguments: dict[str, Any] = {"actions": step_actions}
+             if stale_after:
+                 # forwarded as an argument so the solver can weigh it AFTER its
+                 # own per-position guards, which name a specific action and
+@@ -5849,10 +5896,25 @@
+             raw_payload = self._step_env_callback(step_arguments)
+             if not isinstance(raw_payload, dict):
+                 raise RuntimeError("action(actions) did not return a JSON-like payload.")
+-            if reset_exposed() and raw_payload.get("executed"):
+-                # Use actual execution, not submitted batch size: a refused
+-                # call does not consume the snippet's first-action allowance.
++            if raw_payload.get("executed"):
++                # Count actual executions so refused calls do not consume the cap.
+                 snippet_executed_actions += max(1, int(raw_payload.get("executed_count") or 1))
++            if limit_truncated:
++                existing_reason = str(raw_payload.get("stop_reason") or "").strip()
++                existing_detail = str(raw_payload.get("stop_detail") or "").strip()
++                raw_payload["requested_count"] = len(normalized_actions)
++                raw_payload["stopped_early"] = True
++                if _terminal_action_reason(raw_payload) is None:
++                    raw_payload["stop_reason"] = "python_tool_action_limit"
++                limit_detail = (
++                    f"Only the first {len(step_actions)} of {len(normalized_actions)} requested actions "
++                    f"were passed through because a Python snippet is limited to {snippet_action_limit} "
++                    "executed game actions. End the snippet and inspect the returned observation before "
++                    "planning further actions."
++                )
++                if existing_reason or existing_detail:
++                    limit_detail += f" Engine stop: {existing_reason} {existing_detail}".strip()
++                raw_payload["stop_detail"] = limit_detail
+             if _animation_enabled():
+                 # Held on the agent, not routed through the sandbox: the chain
+                 # is dropped by compaction so the raw grids never become text,
