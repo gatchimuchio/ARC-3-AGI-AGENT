@@ -1,0 +1,1502 @@
+{
+  "schema": "arc3-hds-target-unidentifiability-support-map.v1",
+  "game": "tn36-ef4dde99",
+  "public_input_state_sha256": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f",
+  "transitions_replayed": 14,
+  "prior_count": 5,
+  "query_before_each_update": true,
+  "post_action_effect_excluded_from_updates": true,
+  "action_authorization_false": true,
+  "target_unidentifiable_query_count": 11,
+  "distinct_support_experience_refs": 13,
+  "support_refs_without_public_step_mapping": [],
+  "records": [
+    {
+      "query_public_step": 3,
+      "action_number": 6,
+      "observed_response_after_action": "境界領域変化のみ",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000025",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000032",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "色種類数"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008"
+        ],
+        "support_refs_count": 3,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 3,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 4,
+      "action_number": 6,
+      "observed_response_after_action": "盤面変化",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000040",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000032",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "色種類数"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009"
+        ],
+        "support_refs_count": 4,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 4,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 5,
+      "action_number": 6,
+      "observed_response_after_action": "盤面変化",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000049",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000054",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010"
+        ],
+        "support_refs_count": 5,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 5,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 6,
+      "action_number": 6,
+      "observed_response_after_action": "盤面変化",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000049",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000054",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010",
+          "経験-000011"
+        ],
+        "support_refs_count": 6,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 6,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 7,
+      "action_number": 6,
+      "observed_response_after_action": "盤面変化",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000049",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000066",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010",
+          "経験-000011",
+          "経験-000012"
+        ],
+        "support_refs_count": 7,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 7,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000012",
+          "source_public_step": 6,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 8,
+      "action_number": 6,
+      "observed_response_after_action": "境界領域変化のみ",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000072",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000077",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010",
+          "経験-000011",
+          "経験-000012",
+          "経験-000013"
+        ],
+        "support_refs_count": 8,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 8,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000012",
+          "source_public_step": 6,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000013",
+          "source_public_step": 7,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 353,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 9,
+      "action_number": 6,
+      "observed_response_after_action": "盤面変化",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000072",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000083",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010",
+          "経験-000011",
+          "経験-000012",
+          "経験-000013",
+          "経験-000014"
+        ],
+        "support_refs_count": 9,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 9,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000012",
+          "source_public_step": 6,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000013",
+          "source_public_step": 7,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 353,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000014",
+          "source_public_step": 8,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=different|S=different|SW=same|W=same|NW=same"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 10,
+      "action_number": 6,
+      "observed_response_after_action": "盤面変化",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000072",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000083",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010",
+          "経験-000011",
+          "経験-000012",
+          "経験-000013",
+          "経験-000014",
+          "経験-000015"
+        ],
+        "support_refs_count": 10,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 10,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000012",
+          "source_public_step": 6,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000013",
+          "source_public_step": 7,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 353,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000014",
+          "source_public_step": 8,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=different|S=different|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000015",
+          "source_public_step": 9,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 11,
+      "action_number": 6,
+      "observed_response_after_action": "境界領域変化のみ",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000072",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000083",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010",
+          "経験-000011",
+          "経験-000012",
+          "経験-000013",
+          "経験-000014",
+          "経験-000015",
+          "経験-000016"
+        ],
+        "support_refs_count": 11,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 11,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000012",
+          "source_public_step": 6,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000013",
+          "source_public_step": 7,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 353,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000014",
+          "source_public_step": 8,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=different|S=different|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000015",
+          "source_public_step": 9,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000016",
+          "source_public_step": 10,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 12,
+      "action_number": 6,
+      "observed_response_after_action": "境界領域変化のみ",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000090",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000083",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010",
+          "経験-000011",
+          "経験-000012",
+          "経験-000013",
+          "経験-000014",
+          "経験-000015",
+          "経験-000016",
+          "経験-000017"
+        ],
+        "support_refs_count": 12,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 12,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000012",
+          "source_public_step": 6,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000013",
+          "source_public_step": 7,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 353,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000014",
+          "source_public_step": 8,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=different|S=different|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000015",
+          "source_public_step": 9,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000016",
+          "source_public_step": 10,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000017",
+          "source_public_step": 11,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 2431,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        }
+      ]
+    },
+    {
+      "query_public_step": 13,
+      "action_number": 6,
+      "observed_response_after_action": "境界領域変化のみ",
+      "unidentifiable_record": {
+        "result_path": [
+          "公開応答区分"
+        ],
+        "principles": [
+          {
+            "principle_ref": "原理-000090",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "作用点同色4連結成分面積"
+              ]
+            ]
+          },
+          {
+            "principle_ref": "原理-000096",
+            "condition_paths": [
+              [
+                "作用前公開状態",
+                "対象局所配置"
+              ]
+            ]
+          }
+        ],
+        "support_refs": [
+          "経験-000006",
+          "経験-000007",
+          "経験-000008",
+          "経験-000009",
+          "経験-000010",
+          "経験-000011",
+          "経験-000012",
+          "経験-000013",
+          "経験-000014",
+          "経験-000015",
+          "経験-000016",
+          "経験-000017",
+          "経験-000018"
+        ],
+        "support_refs_count": 13,
+        "counterevidence_refs": [],
+        "counterevidence_refs_count": 0,
+        "reason": "現観測では複数の関係候補を識別できない"
+      },
+      "support_experience_count": 13,
+      "support_experiences": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000012",
+          "source_public_step": 6,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000013",
+          "source_public_step": 7,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 353,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000014",
+          "source_public_step": 8,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=different|S=different|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000015",
+          "source_public_step": 9,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000016",
+          "source_public_step": 10,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000017",
+          "source_public_step": 11,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 2431,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000018",
+          "source_public_step": 12,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 2431,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        }
+      ]
+    }
+  ],
+  "score_effect": "NOT_MEASURED",
+  "official_submission_or_kernel_run": false
+}

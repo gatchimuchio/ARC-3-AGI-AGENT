@@ -56,16 +56,47 @@ def _bounded_unidentifiable_records(result: Any) -> list[dict[str, Any]]:
     for row in selected[:4]:
         conditions = row.get("条件経路群")
         conditions = conditions if isinstance(conditions, (list, tuple)) else ()
+        principle_refs = [
+            value[:80]
+            for value in row.get("原理参照群", ())
+            if isinstance(value, str)
+        ][:4]
+        condition_path_groups: list[list[list[str]]] = []
+        for group in conditions[:4]:
+            if not isinstance(group, (list, tuple)):
+                continue
+            paths: list[list[str]] = []
+            for path in group[:8]:
+                if isinstance(path, (list, tuple)):
+                    paths.append(
+                        [part[:64] for part in path[:8] if isinstance(part, str)]
+                    )
+            condition_path_groups.append(paths)
+        support_refs = [
+            value[:100]
+            for value in row.get("支持参照群", ())
+            if isinstance(value, str)
+        ][:32]
+        counterevidence_refs = [
+            value[:100]
+            for value in row.get("反証参照群", ())
+            if isinstance(value, str)
+        ][:32]
         bounded.append(
             {
                 "result_path": [TARGET],
-                "principle_refs": [x[:80] for x in row.get("原理参照群", ()) if isinstance(x, str)][:4],
-                "condition_paths": [
-                    [part[:64] for part in path[:4] if isinstance(part, str)]
-                    for path in conditions[:4]
-                    if isinstance(path, (list, tuple))
+                "principles": [
+                    {
+                        "principle_ref": ref,
+                        "condition_paths": condition_path_groups[index]
+                        if index < len(condition_path_groups)
+                        else [],
+                    }
+                    for index, ref in enumerate(principle_refs)
                 ],
+                "support_refs": support_refs,
                 "support_refs_count": len(row.get("支持参照群", ())),
+                "counterevidence_refs": counterevidence_refs,
                 "counterevidence_refs_count": len(row.get("反証参照群", ())),
                 "reason": row.get("理由", "")[:160] if isinstance(row.get("理由"), str) else "",
             }
@@ -184,7 +215,7 @@ def run(artifacts: Path, games: tuple[str, ...]) -> dict[str, Any]:
         all_rows.extend(trace_rows)
 
     return {
-        "schema": "arc3-hds-target-unidentifiability-audit.v1",
+        "schema": "arc3-hds-target-unidentifiability-audit.v2",
         "source_run": "C2-088 B-v3 sequential exact output version 4",
         "games": list(games),
         "transitions": len(all_rows),

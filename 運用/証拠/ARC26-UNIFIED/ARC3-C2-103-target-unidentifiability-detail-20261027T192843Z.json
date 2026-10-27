@@ -1,0 +1,334 @@
+{
+  "run_id": "ARC3-RUN-003-C2-103",
+  "observed_at_utc": "2026-10-27T19:28:43Z",
+  "track": "ARC3",
+  "work_item": "Correct nested target condition-path projection and map support refs to exact public experiences",
+  "git": {
+    "branch": "codex/arc3-v6-progress-20261027",
+    "head_before": "3fd961d4886583eff369bd3d07fbc2e15f19ee3b"
+  },
+  "three_point_set_rechecked": true,
+  "three_point_set_sha256": {
+    "common_Codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "ARC3_Codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "ARC3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "ARC3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67",
+    "AGENTS": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "environment": {
+    "hds_version": "HDS/学習系統/v0.4.2",
+    "hds_package_manifest_sha256": "F41A4B890E4905FA0F87C9FFE685BD9EFCC70D5F7767FC3AECC056085EE2C487"
+  },
+  "source": {
+    "detail_runner": "検証/ARC3HDS_target-unidentifiability-audit.py",
+    "detail_runner_sha256": "282901FC14F5477A0DF9E37612E732121560D8147F085ED0AC3DEBAC6F2CCA71",
+    "support_map_runner": "検証/ARC3HDS_target-unidentifiability-support-map.py",
+    "support_map_runner_sha256": "6D726EB94E63F7EC9383BC6C00DA4B2D5E07893E4FA5E1E25A02E7EC0CF7272A",
+    "native_HDS_modified": false,
+    "action_authorization_changed": false
+  },
+  "execution": {
+    "detail_command": ".venv/Scripts/python.exe 検証/ARC3HDS_target-unidentifiability-audit.py --output 出力/ARC3-RUN-003-local/C2-103/target-unidentifiability-detail.json",
+    "support_map_command": ".venv/Scripts/python.exe 検証/ARC3HDS_target-unidentifiability-support-map.py --output 出力/ARC3-RUN-003-local/C2-103/target-unidentifiability-support-map.json",
+    "source_run": "C2-088 B-v3 sequential exact output version 4",
+    "games": [
+      "m0r0-492f87ba",
+      "sk48-d8078629",
+      "tn36-ef4dde99"
+    ],
+    "transitions": 239,
+    "input_state_sha256": {
+      "m0r0-492f87ba": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22",
+      "sk48-d8078629": "36f49e579ce154747c727baa4e98f643c0bd005f209c53029e68b3295d2ccf44",
+      "tn36-ef4dde99": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f"
+    },
+    "support_map_scope": {
+      "game": "tn36-ef4dde99",
+      "transitions": 14,
+      "prior_count": 5
+    }
+  },
+  "diagnostic_correction": {
+    "prior_C2_101_issue": "condition-path serializer flattened a tuple-of-tuples and displayed empty paths; counts/statuses were unaffected",
+    "C2_103_correction": "condition paths now retain one group per principle; support and counterevidence refs are shown",
+    "aggregate_unchanged_from_C2_101": true
+  },
+  "results": {
+    "aggregate": {
+      "transitions": 239,
+      "native_HOLD": 239,
+      "target_unidentifiable_present": 12,
+      "target_unidentifiable_records": 12,
+      "target_prediction_present": 55,
+      "unique_prediction_correct_on_executed_action": 49,
+      "unique_prediction_wrong_on_executed_action": 6,
+      "target_active_rule_present": 71,
+      "target_conflict_present": 0,
+      "target_observation_request_present": 23,
+      "native_status_counts": {
+        "断定保留": 239
+      },
+      "target_unidentifiable_reason_counts_from_bounded_evidence": {
+        "現観測では複数の関係候補を識別できない": 12
+      },
+      "global_native_hold_reason_counts": {
+        "原因未確定で隔離中の原理が存在する": 227,
+        "現行暫定原理の適用に必要な観測が不足している": 23,
+        "現観測だけでは複数の関係候補を識別できない": 239
+      }
+    },
+    "unidentifiable_condition_pattern_counts": [
+      {
+        "count": 9,
+        "principle_condition_groups": [
+          [
+            [
+              "作用前公開状態",
+              "作用点同色4連結成分面積"
+            ]
+          ],
+          [
+            [
+              "作用前公開状態",
+              "対象局所配置"
+            ]
+          ]
+        ]
+      },
+      {
+        "count": 2,
+        "principle_condition_groups": [
+          [
+            [
+              "作用前公開状態",
+              "作用点同色4連結成分面積"
+            ]
+          ],
+          [
+            [
+              "作用前公開状態",
+              "色種類数"
+            ]
+          ]
+        ]
+      },
+      {
+        "count": 1,
+        "principle_condition_groups": [
+          [
+            [
+              "作用",
+              "番号"
+            ]
+          ],
+          [
+            [
+              "作用前公開状態",
+              "色種類数"
+            ]
+          ]
+        ]
+      }
+    ],
+    "all_12_records_have_two_principles_and_zero_counterevidence": true,
+    "tn36_support_mapping": {
+      "unidentifiable_queries": 11,
+      "unique_support_experiences": 13,
+      "all_support_refs_mapped": true,
+      "support_steps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "support_actions": {
+        "6": 13
+      },
+      "all_support_examples": [
+        {
+          "experience_ref": "経験-000006",
+          "source_public_step": 0,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 6,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000007",
+          "source_public_step": 1,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000008",
+          "source_public_step": 2,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 16,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000009",
+          "source_public_step": 3,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 69,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000010",
+          "source_public_step": 4,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000011",
+          "source_public_step": 5,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000012",
+          "source_public_step": 6,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000013",
+          "source_public_step": 7,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 353,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000014",
+          "source_public_step": 8,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 14,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=different|S=different|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000015",
+          "source_public_step": 9,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=different|NE=different|E=same|SE=different|S=different|SW=different|W=same|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000016",
+          "source_public_step": 10,
+          "action_number": 6,
+          "observed_response": "盤面変化",
+          "features": {
+            "component_area": 3,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=different|W=different|NW=different"
+          }
+        },
+        {
+          "experience_ref": "経験-000017",
+          "source_public_step": 11,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 2431,
+            "color_count": 7,
+            "local_layout": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+          }
+        },
+        {
+          "experience_ref": "経験-000018",
+          "source_public_step": 12,
+          "action_number": 6,
+          "observed_response": "境界領域変化のみ",
+          "features": {
+            "component_area": 2431,
+            "color_count": 7,
+            "local_layout": "N=same|NE=different|E=different|SE=different|S=same|SW=same|W=same|NW=same"
+          }
+        }
+      ]
+    },
+    "native_HOLD_preserved": true,
+    "action_authorization_false": true,
+    "score_effect": "NOT_MEASURED",
+    "official_submission_or_kernel_run": false
+  },
+  "superseded_display_output": {
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-101-target-unidentifiability-full-output-20261027T191440Z.json",
+    "note": "Count/status evidence retained; condition path display is superseded by C2-103."
+  },
+  "full_outputs": [
+    {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-103-target-unidentifiability-detail-full-output-20261027T192843Z.json",
+      "sha256": "B70FD4E266F71E97F6BCC4DD99EE8A861063EF78E04568813D1B297B2FB4C8B4"
+    },
+    {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-103-target-unidentifiability-support-map-full-output-20261027T192843Z.json",
+      "sha256": "72E72B45D76A1950084A26E8A3728A3F7A842DBC4CAB22474F92A8D0F9F5EB1D"
+    }
+  ],
+  "local_outputs": [
+    {
+      "path": "出力/ARC3-RUN-003-local/C2-103/target-unidentifiability-detail.json",
+      "sha256": "B70FD4E266F71E97F6BCC4DD99EE8A861063EF78E04568813D1B297B2FB4C8B4"
+    },
+    {
+      "path": "出力/ARC3-RUN-003-local/C2-103/target-unidentifiability-support-map.json",
+      "sha256": "72E72B45D76A1950084A26E8A3728A3F7A842DBC4CAB22474F92A8D0F9F5EB1D"
+    }
+  ]
+}
