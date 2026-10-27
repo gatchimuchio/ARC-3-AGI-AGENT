@@ -1,0 +1,188 @@
+{
+  "schema": "arc3-native-game-learning-failure-analysis.v1",
+  "experiment_id": "ARC3-RUN-003/C2-087",
+  "arm": "prior-only",
+  "kernel": "tecchannn/arc3-v6-learning-prior-only-c2-087-r3",
+  "version": 1,
+  "offline_public_pilot_only": true,
+  "analysis_scope": "public benchmark, event traces and HDS telemetry; no hidden data or game-specific action branches",
+  "action_budget_max_per_game": 80,
+  "games": [
+    {
+      "game_index_in_public_pilot": 1,
+      "levels_total": 8,
+      "levels_completed": 0,
+      "actions_per_level": [
+        80,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actual_actions": 80,
+      "final_score": 0.0,
+      "terminal_state": "gave_up",
+      "pilot_action_cap": 80,
+      "action_kinds": {
+        "discrete": 80
+      },
+      "distinct_action_strings": 5,
+      "most_common_actions": [
+        [
+          "RIGHT",
+          31
+        ],
+        [
+          "LEFT",
+          28
+        ],
+        [
+          "DOWN",
+          11
+        ],
+        [
+          "UP",
+          9
+        ],
+        [
+          "RESET",
+          1
+        ]
+      ],
+      "observable_outcome_counts": {
+        "盤面変化": 79
+      },
+      "native_query_count": 1,
+      "native_hold_count": 1,
+      "game_response_updates_attempted": 0,
+      "game_response_updates_expected_disabled": 79,
+      "model_generated_tokens": 122049
+    },
+    {
+      "game_index_in_public_pilot": 2,
+      "levels_total": 7,
+      "levels_completed": 1,
+      "actions_per_level": [
+        29,
+        51,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actual_actions": 80,
+      "final_score": 3.571428571428571,
+      "terminal_state": "gave_up",
+      "pilot_action_cap": 80,
+      "action_kinds": {
+        "pointer": 80
+      },
+      "distinct_action_strings": 51,
+      "most_common_actions": [
+        [
+          "MOUSE(row=42, col=21)",
+          6
+        ],
+        [
+          "MOUSE(row=58, col=47)",
+          5
+        ],
+        [
+          "MOUSE(row=36, col=39)",
+          3
+        ],
+        [
+          "MOUSE(row=33, col=44)",
+          3
+        ],
+        [
+          "MOUSE(row=33, col=49)",
+          3
+        ]
+      ],
+      "observable_outcome_counts": {
+        "レベル進行": 1,
+        "盤面変化": 79
+      },
+      "native_query_count": 1,
+      "native_hold_count": 1,
+      "game_response_updates_attempted": 0,
+      "game_response_updates_expected_disabled": 80,
+      "model_generated_tokens": 85216
+    },
+    {
+      "game_index_in_public_pilot": 3,
+      "levels_total": 6,
+      "levels_completed": 0,
+      "actions_per_level": [
+        80,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "actual_actions": 80,
+      "final_score": 0.0,
+      "terminal_state": "gave_up",
+      "pilot_action_cap": 80,
+      "action_kinds": {
+        "discrete": 79,
+        "pointer": 1
+      },
+      "distinct_action_strings": 6,
+      "most_common_actions": [
+        [
+          "UP",
+          27
+        ],
+        [
+          "DOWN",
+          18
+        ],
+        [
+          "RIGHT",
+          18
+        ],
+        [
+          "LEFT",
+          14
+        ],
+        [
+          "SPACE",
+          2
+        ]
+      ],
+      "observable_outcome_counts": {
+        "可視変化なし": 4,
+        "盤面変化": 76
+      },
+      "native_query_count": 1,
+      "native_hold_count": 1,
+      "game_response_updates_attempted": 0,
+      "game_response_updates_expected_disabled": 80,
+      "model_generated_tokens": 78793
+    }
+  ],
+  "aggregate": {
+    "levels_completed": 1,
+    "levels_total": 21,
+    "win_count": 0,
+    "actual_actions": 240,
+    "run_state_counts": {
+      "gave_up": 3
+    },
+    "history_generated_tokens": 286058,
+    "visual_model_games": 3
+  },
+  "evidence": {
+    "benchmark_sha256": "fdb382832237577b3311671cca6b1b121e2e9d65086ad9fe726e30917edcf1b9",
+    "terminal_output_manifest_sha256": "c98150bdbc0af5f847193d871f801283bc3d59c3b19cde6a6fb0ae121df0e11a",
+    "scorecard_sha256": "9b6714cfeccf42019b42ff920c5896ec67b96645456ff15a638b4f19f1b00ead"
+  },
+  "interpretation": "All three episodes ended at the 80-action pilot cap while still NOT_FINISHED; one of three advanced one level. The trace shows many visible board changes, so this is not simply an invalid-action/no-op failure. Prior-only HDS native query was HOLD once per game and game-response updates were disabled by design. These data do not establish that raising the action cap alone improves score; action selection and response-based adaptation remain candidate failure mechanisms. Wait for the matched online-learning arm before changing shared inference policy."
+}

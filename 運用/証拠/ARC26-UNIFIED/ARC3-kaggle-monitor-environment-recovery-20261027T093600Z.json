@@ -1,0 +1,24 @@
+{
+  "schema": "arc3-kaggle-monitor-environment-recovery-observation.v1",
+  "observed_at_utc": "2026-10-27T09:38:19Z",
+  "repo_uv_sync_locked": {
+    "exit_code": 1,
+    "summary": "Resolved 131 packages in 54ms",
+    "warnings": [
+      "Failed to uninstall kaggle-2.2.4.dist-info: missing RECORD file",
+      "Failed to uninstall kaggle-2.2.5.dist-info: missing RECORD file",
+      "Failed to uninstall kagglesdk-0.1.37.dist-info: missing RECORD file"
+    ],
+    "error": "failed to remove directory C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\.venv\\Lib\\site-packages\\kagglesdk-0.1.38.dist-info\\licenses: Access denied (os error 5)"
+  },
+  "project_venv_kaggle_executable_exists": false,
+  "manifest_path": "運用/ARC26-UNIFIED/kaggle-cli-environment.json",
+  "manifest_kaggle_cli": "Kaggle CLI 2.2.5",
+  "manifest_kagglesdk": "0.1.38",
+  "manifest_venv_path": "C:\\Users\\ohira\\AppData\\Local\\Codex\\arc26-kaggle-envs\\arc3",
+  "manifest_kaggle_executable_exists": true,
+  "monitor_cli_prefix_resolved_to": "C:\\Users\\ohira\\AppData\\Local\\Codex\\arc26-kaggle-envs\\arc3\\Scripts\\kaggle.exe",
+  "pinned_uvx_fallback_version_output": "Kaggle CLI 2.2.5",
+  "git_lockfile_changed": false,
+  "interpretation": "The repository .venv did not sync due Windows access denied; do not retry destructive cleanup. The repo monitor resolver succeeds in this local workspace through the pinned manifest venv. Prior scheduled FileNotFoundError rows therefore likely come from a different runner context/path; this is an inference, not a confirmed root cause."
+}
