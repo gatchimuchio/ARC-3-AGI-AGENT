@@ -1,0 +1,119 @@
+{
+  "schema": "arc3-c2-114-undo-off-diagnostic-preparation.v1",
+  "track": "ARC3",
+  "run_id": "ARC3-RUN-003-C2-114-UNDO-OFF-20261027T233055Z",
+  "observed_at_utc": "2026-10-27T23:30:55Z",
+  "three_point_set_rechecked": true,
+  "three_point_set_version": "v6.0",
+  "three_point_document_sha256": {
+    "common_codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "arc3_codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "arc3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "arc3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67"
+  },
+  "protected_file_sha256": {
+    "AGENTS.md": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "制御/現在状態.json": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "hypothesis": "C2-060 v29 used 17 consecutive Undo actions on the sk48 public start with no reward or level completion. Hiding Undo may prevent this specific waste pattern; this is a diagnostic hypothesis, not a score claim.",
+  "base": {
+    "kernel": "tecchannn/arc3-model-guided-c2-025",
+    "version": 29,
+    "candidate_notebook_path": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/source/cap20k-context139264/submission.ipynb",
+    "candidate_notebook_sha256": "d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26",
+    "remote_source_sha256": "b983cfdc7064854bef5fde666fae84bbff7f01f50ce821d91ebd54095447c722",
+    "v29_scorecard_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-060-v29-terminal-scorecard.json",
+    "v29_scorecard_sha256": "19a45df2dc0e55a5bb5140b718a12941b3218edbd939c7e48388aa61cf3d59cb",
+    "v29_candidate_mean": 6.793535827959656,
+    "c2_046_mean": 19.309155943771326,
+    "v29_paired_mean_delta_vs_c2_046": -12.515620115811672,
+    "v29_game_scores": {
+      "sk48": 2.523464626736111,
+      "tn36": 3.571428571428571,
+      "m0r0": 14.285714285714285
+    }
+  },
+  "trace_diagnostic": {
+    "v13_sk48_undo_actions": 0,
+    "v29_sk48_undo_actions": 17,
+    "v29_sk48_consecutive_undo_action_numbers": [
+      44,
+      60
+    ],
+    "v29_sk48_rewards_during_undo_streak": 0,
+    "v29_sk48_level_completions_during_undo_streak": 0,
+    "first_level_completion_action": {
+      "v13": 43,
+      "v29": 64
+    },
+    "v13_v29_undo_actions": {
+      "sk48": [
+        0,
+        17
+      ],
+      "tn36": [
+        0,
+        0
+      ],
+      "m0r0": [
+        0,
+        0
+      ]
+    },
+    "trace_file_sha256": {
+      "v13_sk48": "261bbf454b94a0058770a7bcaf37ab13ad65be2e6c5d787e840af2e5c4071021",
+      "v29_sk48": "e67a94ba0aba46855d61ff147a9e4fcf3e8101b68c626bb9b6240d3a6b71c239",
+      "v13_tn36": "966c9d03ef3fb61758c8936be5a3d73ca0e9066c2ffe0966a5a87da34f9f410f",
+      "v29_tn36": "50c6b69bbdf0403f9db17104b7021f9ce36af33436ec8a298e3ff0a70be70490",
+      "v13_m0r0": "1f1569bad11346caa3b43f8634551374ab7e246b6c9733ef5bfac2cabd3e481f",
+      "v29_m0r0": "d532b2749e95347cbdc61b8ad8b38ec14383388078c3810c0f8feeeb0d06a3c5"
+    },
+    "interpretation_limit": "Observational trace evidence only. C2-114 has not been run; the v29-v13 score gap is not attributed to Undo alone."
+  },
+  "candidate": {
+    "status": "PREPARED_LOCAL_ONLY_NOT_RUN",
+    "notebook_path": "出力/ARC3-RUN-003-local/C2-114-expose-undo-off/source/undo-off/submission.ipynb",
+    "notebook_sha256": "5e5d92994533303de46f11145ebc07a62cc36d26ff9dab6aa191446668b8b539",
+    "metadata_path": "出力/ARC3-RUN-003-local/C2-114-expose-undo-off/source/undo-off/kernel-metadata.json",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "changed_cells": [
+      5
+    ],
+    "config_delta": [
+      "EXPOSE_UNDO on->off"
+    ],
+    "held_constant": {
+      "LOCAL_ANALYZER_CONTEXT_WINDOW": 139264,
+      "LOCAL_ANALYZER_MAX_OUTPUT": 20480,
+      "effective_input_allowance": 118272
+    },
+    "patch_path": "検証/ARC3C2-114_EXPOSE_UNDO_off.patch",
+    "patch_sha256": "548e00b52768c955a154b0e4c7cef0707127e59ff963b353584b69a7c3d747e1"
+  },
+  "evaluation_gate": {
+    "same_three_public_starts": [
+      "sk48-d8078629",
+      "tn36-ef4dde99",
+      "m0r0-492f87ba"
+    ],
+    "compare_to": "C2-060 version 29 for Undo effect; C2-046 slim mean 19.309155943771326 for promotion",
+    "promotion_requires": "mean above C2-046 and positive paired mean delta, with exact matched start verification",
+    "run_status": "NOT_RUN_NO_SCORE"
+  },
+  "remote_capacity": {
+    "latest_weekly_gpu_rejection_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-105-private-push-rejection-20261027T204849Z.json",
+    "decision": "NO_RETRY_UNTIL_FRESH_WEEKLY_GPU_CAPACITY_EVIDENCE",
+    "kernel_push_performed": false,
+    "official_submission_performed": false,
+    "quota_used": 0
+  },
+  "official_history_observation": {
+    "latest_submission_id": 57688735,
+    "status": "COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13"
+  }
+}
