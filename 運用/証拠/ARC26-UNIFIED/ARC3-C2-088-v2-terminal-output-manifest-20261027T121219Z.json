@@ -1,0 +1,200 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-output.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-088-matched-B-v2",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "version": 2,
+  "observed_at_utc": "2026-10-27T12:12:19.325986Z",
+  "command": "kaggle kernels status tecchannn/arc3-v6-online-official-c2-088/2",
+  "cli_output": "tecchannn/arc3-v6-online-official-c2-088/2 has status \"KernelWorkerStatus.COMPLETE\"",
+  "status": "KernelWorkerStatus.COMPLETE",
+  "terminal": true,
+  "candidate_notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "candidate_metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+  "output_directory": "出力/ARC3-RUN-003-local/C2-088/matched-online-learning-B-v2-exact-output",
+  "output_file_count": 35,
+  "output_total_bytes": 102538625,
+  "output_manifest_sha256": "e9ff7fde003d3feb941c7e8f71ab66fc72c3760eeef4ce75f8ebcad4f176f372",
+  "output_files": [
+    {
+      "path": ".per_game_cards.pkl",
+      "bytes": 177165,
+      "sha256": "13a6eb0e21b060c6d51858dce8057478ccbf33e5c59c19451bc6c0c9c7073ae4"
+    },
+    {
+      "path": "arc3-runtime-software.json",
+      "bytes": 717,
+      "sha256": "0d16415f16477f218c256aed7048b908a962579d2a25e9d930d10f99eb46b455"
+    },
+    {
+      "path": "arc3-v6-online-official-c2-088.log",
+      "bytes": 39139,
+      "sha256": "2c21d039de5e442928d62e54ea45f712084ce524872bdcf048bbac12b5ab2658"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "bytes": 3580906,
+      "sha256": "045817c24fcc9c9114a195c8ad6495ad5e931a5a238dd93449d7fe221f6f4435"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 157146,
+      "sha256": "ad7d8c0fff1a027e9ae4ca801a282b3a360a53b75d7ab9b443e3d64c26a61db7"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_viewer_data.json",
+      "bytes": 856,
+      "sha256": "c1693e022a7988d55e62e50a91845cd3820efdebe59b76b80d9090209f8f48be"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_events.jsonl",
+      "bytes": 2935124,
+      "sha256": "38d3bb876e3371124ee9224f0b5b03ef1d8299d1cac71db4525fc15589aaadab"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 152586,
+      "sha256": "4a747fe7c4c38535183d085268d8799b11d8a5450c0679c463cd995478cd89d9"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_viewer_data.json",
+      "bytes": 853,
+      "sha256": "148115fa6ba47828d9c8f33d30725ab434fe34e1aaab89328466964a11c34dd0"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "bytes": 1806814,
+      "sha256": "08a41222b770c9bd284527dc3ff95acbd448a8446a5567bd02bfe98f51c4f413"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 197261,
+      "sha256": "a071f85579bbfce5a78d5df459449ae79f2877ef741c37441376a5650eb71365"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_viewer_data.json",
+      "bytes": 845,
+      "sha256": "3a74dea1e7071fb3a1efa9a59889cf5f8f813a2e106a864bf3a405da6733f9d0"
+    },
+    {
+      "path": "benchmark.json",
+      "bytes": 61990,
+      "sha256": "8e167f24166ddb0b5e5b638feae93b08e935b18e69105f6170cdebcb9c7b1a0f"
+    },
+    {
+      "path": "diagnostics.html",
+      "bytes": 663997,
+      "sha256": "203fce2a7c5b28d54139ff5b2c785743772589b0c606333f7f9e8653c7cf6d08"
+    },
+    {
+      "path": "games.pkl",
+      "bytes": 581,
+      "sha256": "4bf87705fd3c0117855d2ef1963a5101db3d94c8852fcdba9612b539eb09bd68"
+    },
+    {
+      "path": "git_status.txt",
+      "bytes": 356,
+      "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+    },
+    {
+      "path": "intermediate_states.pkl",
+      "bytes": 1630022,
+      "sha256": "239d2c49abce02bb5d2454b882d8bf14c530f89fe97a28cded84ccfcee3f5633"
+    },
+    {
+      "path": "movies/gm0r0-492f87ba_p0.html",
+      "bytes": 6761,
+      "sha256": "09aaa2c547774112b31ee07b1d0d3511386c936996c3026f2ec802cf8d2554f5"
+    },
+    {
+      "path": "movies/gm0r0-492f87ba_p0.mp4",
+      "bytes": 14725,
+      "sha256": "49469123d3b101c731a4c0b80f253aa5af05ab084b41e273d4b8e6b8942b6a90"
+    },
+    {
+      "path": "movies/gsk48-d8078629_p0.html",
+      "bytes": 6761,
+      "sha256": "9f75340d6e784bb76c039f388860da761840af8a35ae1ed0bd9ee70a4dd2be4f"
+    },
+    {
+      "path": "movies/gsk48-d8078629_p0.mp4",
+      "bytes": 10006,
+      "sha256": "1434252b300f3a0a3c3222f24749dd51b62e4b0d434b552dd0b57e4df829a02e"
+    },
+    {
+      "path": "movies/gtn36-ef4dde99_p0.html",
+      "bytes": 6761,
+      "sha256": "2b5b65ce20b690cdf550d32b0d2626f9288d3080bf6d2115177ad06eacf33dd8"
+    },
+    {
+      "path": "movies/gtn36-ef4dde99_p0.mp4",
+      "bytes": 6632,
+      "sha256": "f91c42ac1d4cd377407f4110781b02bed1112aa086aaa8027975391f8afca3f8"
+    },
+    {
+      "path": "prompts/prompt.log",
+      "bytes": 369592,
+      "sha256": "53935eefed2e57a08623cd7bc167b5db3d5f4d8ea1ad82e66eaa7dba96577f1b"
+    },
+    {
+      "path": "requests.jsonl",
+      "bytes": 82474278,
+      "sha256": "7dd9cf137e528b1df0007cc76f7bcbf722a9560ab597547c1b5299d5b8a817cd"
+    },
+    {
+      "path": "serve.log",
+      "bytes": 865541,
+      "sha256": "65d1802e014b302e8b026bd55159c1f065d5e971c59ccc56b21d84378eafeab0"
+    },
+    {
+      "path": "solver.pkl",
+      "bytes": 1909,
+      "sha256": "c4f6cacae77ef169afa9d9e6f8ca824979a4fcdc4aca19863a8b0e6f9f992827"
+    },
+    {
+      "path": "solver_analysis/m0r0-492f87ba_p0.html",
+      "bytes": 1746981,
+      "sha256": "a8f23815b999433289a76fc6773c3c689d7daeda01b7f7c1f54f83b2398cd5af"
+    },
+    {
+      "path": "solver_analysis/sk48-d8078629_p0.html",
+      "bytes": 1424491,
+      "sha256": "39f5d4720ec49d6b538056a9887af1d4af2af0dd7aef120360d3bf7812627e3a"
+    },
+    {
+      "path": "solver_analysis/tn36-ef4dde99_p0.html",
+      "bytes": 580526,
+      "sha256": "2c1c022e9b3f674712449d69e5e9ce0e6031613b58dccfe97e7620b363c06c29"
+    },
+    {
+      "path": "submission.parquet",
+      "bytes": 2648,
+      "sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb"
+    },
+    {
+      "path": "summary.txt",
+      "bytes": 573,
+      "sha256": "d50fce69264b6c464dded767b583ca0ee2264d766ef03d0a9e10698145b3274c"
+    },
+    {
+      "path": "transcripts/m0r0-492f87ba_p0.txt",
+      "bytes": 1684292,
+      "sha256": "640ed0431bf623a122182e3caa33a2845a70b3359cf6b94dc3aecd06053826ef"
+    },
+    {
+      "path": "transcripts/sk48-d8078629_p0.txt",
+      "bytes": 1375472,
+      "sha256": "5030de6e3c5d6914e185cbbc42b98691ee718d762f82d20371063478f5f2f3ac"
+    },
+    {
+      "path": "transcripts/tn36-ef4dde99_p0.txt",
+      "bytes": 554318,
+      "sha256": "27e9c8004668f5f8852329b1d1b771d59bf3b81c149272f0f44acaa658818510"
+    }
+  ],
+  "output_exit_code": 0,
+  "output_command": ".venv/Scripts/kaggle.exe kernels output tecchannn/arc3-v6-online-official-c2-088/2 --path 出力/ARC3-RUN-003-local/C2-088/matched-online-learning-B-v2-exact-output --quiet",
+  "selected_file_pattern": null,
+  "retrieval_is_complete_cli_success": true,
+  "note": "Output manifest is computed from all files returned by exact version 2; requests.jsonl.kaggle-partial records transcript truncation, while benchmark and event/telemetry artifacts are complete."
+}
