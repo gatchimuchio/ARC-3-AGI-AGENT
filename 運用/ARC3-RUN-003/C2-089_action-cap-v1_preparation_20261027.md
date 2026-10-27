@@ -60,3 +60,11 @@ Preflight evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-privat
 Before launching C2-089, the read-only status refresh showed that `tecchannn/arc3-v6-learning-online-c2-087-r3` is `KernelWorkerStatus.ERROR`, not COMPLETE as stated in the preflight. This is terminal and not running; the remaining four checked ARC3 v6 kernels are COMPLETE. No candidate launch had occurred when this correction was recorded. The preflight is retained unchanged and this correction supersedes only that status field.
 
 Correction evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-capacity-status-correction-20261027T163629Z.json.
+
+## Private kernel push rejected by weekly GPU quota — 2026-10-27T16:38:26Z
+
+The private C2-089 push was rejected with the exact CLI output `Kernel push error: Maximum weekly GPU quota of 30.00 hours reached.` The CLI created no kernel version, a subsequent read-only kernel list still did not contain the candidate slug, and no retry was performed. The reset time was not provided, so the candidate remains NOT_STARTED and its score effect NOT_MEASURED. This did not attempt a Competition Rerun or use official submission quota.
+
+The read-only official history still shows submission 57688735 COMPLETE with public score 28.07 and no private score; it was submitted 2026-10-27T04:20:12.220000 UTC. The current UTC date already has one submission in history, so no official submission was attempted.
+
+Rejection evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-kernel-push-rejection-20261027T163826Z.json.

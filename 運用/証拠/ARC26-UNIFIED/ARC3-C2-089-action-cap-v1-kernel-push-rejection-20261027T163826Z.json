@@ -1,0 +1,42 @@
+{
+  "schema": "arc3-private-kernel-push-rejection.v1",
+  "run_id": "ARC3-RUN-003-C2-089-action-cap-v1-private-push-20261027T163826Z",
+  "observed_at_utc": "2026-10-27T16:38:26Z",
+  "track": "ARC3",
+  "candidate": {
+    "kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+    "expected_version": 1,
+    "visibility": "private",
+    "notebook_sha256": "16cb7b2f291a0f964a7e4bec0df901594a07b09f473a8b6efba10344fa368df7",
+    "metadata_sha256": "9aff09ff942d321b87a913015435080a653ba45d43bbf0883462cf0daf63e17d",
+    "preflight_sha256": "87b46afb3bfe227f9d836efbe5dac25b71f7909dd3c4aaa06137bdcb5a844e43",
+    "capacity_status_correction_sha256": "c1640a57c483a47af4efdb9fe625694322b63dc2ac5afb9b96091e941a9510b3"
+  },
+  "kaggle_cli": "2.2.5",
+  "command": ".venv/Scripts/kaggle.exe kernels push --path 出力/ARC3-RUN-003-local/C2-089/action-cap-v1",
+  "process_exit_code": 0,
+  "exact_cli_output": "Kernel push error: Maximum weekly GPU quota of 30.00 hours reached.",
+  "kernel_version_created": false,
+  "post_rejection_read_only_kernel_list_check": {
+    "command": ".venv/Scripts/kaggle.exe kernels list --user tecchannn --format json --page-size 200",
+    "candidate_slug_present": false
+  },
+  "interpretation": {
+    "candidate_execution": "NOT_STARTED",
+    "candidate_score": "NOT_MEASURED",
+    "weekly_gpu_quota": "MAXIMUM_30_HOURS_REACHED; reset time was not provided",
+    "retry_performed": false
+  },
+  "official_competition_history_read_only": {
+    "command": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 --format json --page-size 50",
+    "latest_submission_id": 57688735,
+    "latest_status": "SubmissionStatus.COMPLETE",
+    "latest_public_score": 28.07,
+    "latest_private_score": null,
+    "latest_submitted_at_utc": "2026-10-27T04:20:12.220000",
+    "current_utc_day_submission_count_observed": 1,
+    "official_submission_or_competition_rerun_attempted": false,
+    "official_quota_used_by_this_operation": false
+  },
+  "next_action": "Do not retry the private kernel push until Kaggle GPU capacity is available; continue local-only optimization and preserve the official submission quota."
+}
