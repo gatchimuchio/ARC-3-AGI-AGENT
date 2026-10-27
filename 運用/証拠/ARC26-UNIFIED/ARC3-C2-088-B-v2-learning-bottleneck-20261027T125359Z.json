@@ -1,0 +1,88 @@
+{
+  "schema": "arc3-c2-088-online-v2-failure-signature.v1",
+  "observed_at_utc": "2026-10-27T12:53:59.587551+00:00",
+  "run_id": "ARC3-RUN-003/C2-088-matched-B-v2",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088/2",
+  "scorecard_sha256": "30a60d79a61d0287c8432b3f55132e0f8e5252f5346a8ebbd4a223cbdfce96eb",
+  "retrieval_manifest_sha256": "471917ff22abe529119ad73b6909193f438fcee921c8b1373c48c2d1988fc55f",
+  "benchmark_sha256": "8e167f24166ddb0b5e5b638feae93b08e935b18e69105f6170cdebcb9c7b1a0f",
+  "paired_games": [
+    {
+      "game_id": "sk48-d8078629",
+      "score": 2.7777777777777777,
+      "levels_completed": 1,
+      "levels_total": 8,
+      "actions": 79,
+      "action_id_counts": {
+        "ACTION1": 12,
+        "ACTION4": 32,
+        "ACTION3": 28,
+        "ACTION7": 3,
+        "ACTION2": 4
+      },
+      "same_exact_action_adjacent_repeats": 49,
+      "unique_post_action_boards": 78,
+      "post_action_board_hashes_reused": 2,
+      "hds_updates_succeeded": 79,
+      "hds_queries_succeeded": 0,
+      "query_native_status_counts": {},
+      "query_actions_after_query": 0,
+      "matched_candidate_receipts": 0,
+      "learning_action_or_score_improvement_proven": false
+    },
+    {
+      "game_id": "tn36-ef4dde99",
+      "score": 0.0,
+      "levels_completed": 0,
+      "levels_total": 7,
+      "actions": 79,
+      "action_id_counts": {
+        "ACTION6": 79
+      },
+      "same_exact_action_adjacent_repeats": 78,
+      "unique_post_action_boards": 77,
+      "post_action_board_hashes_reused": 3,
+      "hds_updates_succeeded": 79,
+      "hds_queries_succeeded": 2,
+      "query_native_status_counts": {
+        "断定保留": 2
+      },
+      "query_actions_after_query": 2,
+      "matched_candidate_receipts": 1,
+      "learning_action_or_score_improvement_proven": false
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "score": 14.285714285714285,
+      "levels_completed": 2,
+      "levels_total": 6,
+      "actions": 80,
+      "action_id_counts": {
+        "ACTION1": 21,
+        "ACTION5": 2,
+        "ACTION4": 20,
+        "ACTION3": 14,
+        "ACTION2": 19,
+        "ACTION6": 4
+      },
+      "same_exact_action_adjacent_repeats": 34,
+      "unique_post_action_boards": 78,
+      "post_action_board_hashes_reused": 2,
+      "hds_updates_succeeded": 80,
+      "hds_queries_succeeded": 0,
+      "query_native_status_counts": {},
+      "query_actions_after_query": 0,
+      "matched_candidate_receipts": 0,
+      "learning_action_or_score_improvement_proven": false
+    }
+  ],
+  "overall": {
+    "actions": 238,
+    "hds_updates_succeeded": 238,
+    "hds_queries_succeeded": 2,
+    "levels_completed": 3,
+    "levels_total": 21
+  },
+  "interpretation": "The zero-score tn36 run repeated one exact ACTION6 input 78 adjacent times while producing distinct visible post-action board states; this is not established as a no-op or invalid action. It shows no level progress in this pilot. Across all three games, HDS completed 238 game-response updates but only two queries; both returned native HOLD and the runtime marks learning action/score effect unproven. This supports a hypothesis of weak decision refresh/goal inference, not a causal conclusion.",
+  "next": "Complete B-v3 boundary-classifier run and matched update-disabled control first; then consider the already prepared ID-free query cadence experiment after every eight actions without level progress."
+}
