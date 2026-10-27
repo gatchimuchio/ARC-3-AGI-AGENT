@@ -149,3 +149,14 @@ The exact C2-088 v5 Notebook (parent SHA-256 8ca755c12e89ae117af160267d8471f8980
 The proposed next diagnostic is the existing generic NoopRepeatGuard enabled from level 1 (ARC3_NOOP_REPEAT_GUARD=1, ARC3_GUARDS_FROM_LEVEL=1). The first repeat would force a fresh model turn; its immediate insist-and-execute override remains available. The trace cannot predict the model's next response, later actions, or score. No gain is claimed and no notebook setting has been changed.
 
 Reproducible command: .venv/Scripts/python.exe 検証/ARC3-RUN-003/C2-088-noop-guard-opportunity.py. Runner SHA-256: 398821a36c01fb470d03e3a224ad2cd788eadbab53ee03c674c67db45b9a1f68. Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-v5-noop-guard-opportunity-20261027T180739Z.json (SHA-256 b77b149d0565a2f3209b01e5bc1e16461fe6cd798ecbfc4e9d28d047c6514d7c). No Kaggle run or quota was used.
+
+
+## Cap12 plus level-1 no-op guard candidate — 2026-10-27T18:11:37Z
+
+Prepared a local-only C2-089 variant from cap12 v2. Compared with v2, only Notebook cell 5 changed: ARC3_GUARDS_FROM_LEVEL 2 to 1, and ARC3_NOOP_REPEAT_GUARD added as 1; cap12 remains unchanged. Notebook SHA-256: 15cd94b3a2702f6154a8c8dfe9771288b4800628a9f8f6222eb030249eeb17e6. The private Notebook remains local and was not pushed.
+
+The exact cell-3 source patch was reapplied to the pinned archive. Synthetic checks passed for level-1 known-no-op refusal, the immediate insist-and-execute override, clearing a no-op after contradictory change, and the three cap12 boundaries (partial execution, refused action, and unset-cap behavior). The first preflight fixture omitted _guard_hook_trace; after adding that fixture field, the same candidate passed. No candidate assertion failed.
+
+This is a local synthetic preflight only. No game, private kernel, or official Rerun was run; score effect remains NOT MEASURED. At 2026-10-27T18:09:01Z, the official reference was submission 57688735 COMPLETE at public 28.07 (private blank), C2-088 kernel COMPLETE, and C2-089 still had no Kaggle version. No quota was used. The candidate waits for fresh weekly GPU quota evidence before any push.
+
+Reproducible command: .venv/Scripts/python.exe 検証/ARC3-RUN-003/C2-089-cap12-level1-guard-preflight.py. Runner SHA-256: 25fff352c3de087ffb8938e10be186b3cbd9e9f7ed577d973cf7b748423d3d1c. Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-level1-noop-preflight-20261027T181137Z.json (SHA-256 a421f20e42c6d657d7e0e5afda818f8d4f841a81f8366405b7de210290211b3c).

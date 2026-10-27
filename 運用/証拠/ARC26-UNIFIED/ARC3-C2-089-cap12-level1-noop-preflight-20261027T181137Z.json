@@ -1,0 +1,162 @@
+{
+  "evidence_id": "ARC3-C2-089-cap12-level1-noop-preflight-20261027T181137Z",
+  "observed_at_utc": "2026-10-27T18:11:37Z",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-089-cap12-level1-noop-guard-v3",
+  "candidate_kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+  "candidate_status": "LOCAL_ONLY_NOT_PUSHED_NO_VERSION_NO_SCORE",
+  "candidate_directory": "出力\\ARC3-RUN-003-local\\C2-089\\action-cap-v3-level1-noop",
+  "candidate_notebook_sha256": "15cd94b3a2702f6154a8c8dfe9771288b4800628a9f8f6222eb030249eeb17e6",
+  "candidate_manifest_sha256": "6909e68cf74193064ff9804322fb59c03a6d430f318186a6cc7f8659f65d5eef",
+  "parent_cap12_notebook_sha256": "88b619063c485f5c46163d64df86d83c542ebe1559d05c53ef669a625099586e",
+  "original_parent_kernel": "tecchannn/arc3-v6-online-official-c2-088/5",
+  "original_parent_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+  "changed_notebook_cells_vs_cap12_v2": [
+    5
+  ],
+  "settings": {
+    "ARC3_GUARDS_FROM_LEVEL": 1,
+    "ARC3_NOOP_REPEAT_GUARD": "1",
+    "ARC3_MAX_ACTIONS_PER_PYTHON_CALL": "12"
+  },
+  "source_preflight_and_synthetic_results": {
+    "status": "PASS",
+    "candidate_notebook_sha256": "15cd94b3a2702f6154a8c8dfe9771288b4800628a9f8f6222eb030249eeb17e6",
+    "parent_notebook_sha256": "88b619063c485f5c46163d64df86d83c542ebe1559d05c53ef669a625099586e",
+    "changed_cells_vs_cap12_v2": [
+      5
+    ],
+    "candidate_guard_settings": {
+      "ARC3_GUARDS_FROM_LEVEL": 1,
+      "ARC3_NOOP_REPEAT_GUARD": "1",
+      "ARC3_MAX_ACTIONS_PER_PYTHON_CALL": "12"
+    },
+    "source_hashes": {
+      "notebook_sha256": "15cd94b3a2702f6154a8c8dfe9771288b4800628a9f8f6222eb030249eeb17e6",
+      "source_archive_sha256": "cd687f4bc10b2128ea9895024cd2e990b24a1070607a071901cccd1638606187",
+      "notebook_cell3_patch_sha256": "22f8463c84ad677adb6845306de60c3156d350a42af79ecc5b584138fbc59b11",
+      "manifest_sha256": "6909e68cf74193064ff9804322fb59c03a6d430f318186a6cc7f8659f65d5eef"
+    },
+    "guard_behavior": {
+      "level1_active": true,
+      "known_noop_first_attempt": "known_noop",
+      "immediate_insist_override": true,
+      "contradictory_change_clears_known_noop": true
+    },
+    "cap12_scenarios": [
+      {
+        "name": "partial_execution_accumulates",
+        "configured_cap": 12,
+        "engine_action_counts": [
+          8,
+          7
+        ],
+        "results": [
+          {
+            "executed": true,
+            "requested_count": 8,
+            "executed_count": 5,
+            "stop_reason": null
+          },
+          {
+            "executed": true,
+            "requested_count": 10,
+            "executed_count": 7,
+            "stop_reason": "python_tool_action_limit"
+          },
+          {
+            "executed": false,
+            "requested_count": 1,
+            "executed_count": 0,
+            "stop_reason": "python_tool_action_limit"
+          }
+        ],
+        "dispatch_step_executed": true
+      },
+      {
+        "name": "refused_action_does_not_consume",
+        "configured_cap": 12,
+        "engine_action_counts": [
+          1,
+          12
+        ],
+        "results": [
+          {
+            "executed": false,
+            "requested_count": null,
+            "executed_count": null,
+            "stop_reason": null
+          },
+          {
+            "executed": true,
+            "requested_count": 15,
+            "executed_count": 12,
+            "stop_reason": "python_tool_action_limit"
+          },
+          {
+            "executed": false,
+            "requested_count": 1,
+            "executed_count": 0,
+            "stop_reason": "python_tool_action_limit"
+          }
+        ],
+        "dispatch_step_executed": true
+      },
+      {
+        "name": "unset_cap_preserves_uncapped_behavior",
+        "configured_cap": null,
+        "engine_action_counts": [
+          15,
+          1
+        ],
+        "results": [
+          {
+            "executed": true,
+            "requested_count": 15,
+            "executed_count": 15,
+            "stop_reason": null
+          },
+          {
+            "executed": true,
+            "requested_count": null,
+            "executed_count": null,
+            "stop_reason": null
+          }
+        ],
+        "dispatch_step_executed": true
+      }
+    ],
+    "limitations": [
+      "Only synthetic runtime callbacks were used",
+      "No public game, private Kaggle kernel, or official score was produced",
+      "The proposed guard changes model turns; gameplay effect is unknown"
+    ]
+  },
+  "test_runner_path": "検証\\ARC3-RUN-003\\C2-089-cap12-level1-guard-preflight.py",
+  "test_runner_sha256": "25fff352c3de087ffb8938e10be186b3cbd9e9f7ed577d973cf7b748423d3d1c",
+  "test_runner_command": ".venv/Scripts/python.exe 検証/ARC3-RUN-003/C2-089-cap12-level1-guard-preflight.py",
+  "earlier_fixture_setup_error": {
+    "error": "AttributeError: 'ToolAgent' object has no attribute '_guard_hook_trace'",
+    "classification": "synthetic ToolAgent fixture omitted an initialized trace list; corrected; candidate guard behavior then passed"
+  },
+  "motivation_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-089-v5-noop-guard-opportunity-20261027T180739Z.json",
+  "official_reference": {
+    "submission_id": 57688735,
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "observed_at_utc": "2026-10-27T18:09:01Z"
+  },
+  "kaggle_state_at_utc": "2026-10-27T18:09:01Z: C2-089 slug returned 404; C2-088 kernel COMPLETE; no new official submission",
+  "score_effect": "NOT_MEASURED",
+  "quota_use": {
+    "official_submission_or_rerun": false,
+    "private_kernel_push_or_run": false
+  },
+  "limitations": [
+    "Synthetic callbacks only; no game engine or public game rerun",
+    "No private Kaggle kernel version or score exists",
+    "No official score delta from 28.07 is measured"
+  ],
+  "git_head_before_evidence": "2e367832456e5613c4996c900245a2c41751214c"
+}
