@@ -1,0 +1,214 @@
+{
+  "evidence_id": "ARC3-C2-088-v5-analysis-batch-cap4-parent-audit-20261027T171656Z",
+  "observed_at_utc": "2026-10-27T17:16:56Z",
+  "comparison": "First 80 recorded action transitions per game for C2-046 v13 and C2-088 B-v3 sequential v5.",
+  "method": {
+    "call_grouping": "Group action events by analysis_step; calculate per-step actions beyond the first four.",
+    "board_no_change": "Compare each post-action public board hash with the immediately preceding public board, starting from the initial event.",
+    "level_progress": "Count completed benchmark levels whose cumulative actions_per_level fit within 80.",
+    "limitations": [
+      "Archived stochastic single runs; action batching statistics are descriptive and do not establish score causality.",
+      "The cap4 candidate changes when feedback is observed, so actions beyond four are not predictions of score or actions saved.",
+      "v13 itself has 66 actions beyond four across its first 80-action-per-game prefixes; cap4 is only a diagnostic candidate, not presumed better."
+    ]
+  },
+  "inputs": {
+    "v13_benchmark": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/benchmark.json",
+      "sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e"
+    },
+    "v13_events_sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/sk48-d8078629_p0_events.jsonl",
+      "sha256": "261bbf454b94a0058770a7bcaf37ab13ad65be2e6c5d787e840af2e5c4071021"
+    },
+    "v13_events_tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "sha256": "966c9d03ef3fb61758c8936be5a3d73ca0e9066c2ffe0966a5a87da34f9f410f"
+    },
+    "v13_events_m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "sha256": "1f1569bad11346caa3b43f8634551374ab7e246b6c9733ef5bfac2cabd3e481f"
+    },
+    "v5_benchmark": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/benchmark.json",
+      "sha256": "8bb66e47eac212eea61eb51c544a543c20c9f706faa1f1a99ff947bc77e0671e"
+    },
+    "v5_events_sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/sk48-d8078629_p0_events.jsonl",
+      "sha256": "63bf66f574aec7ceca65230724eda7d4d1f8289388a4cb4c3defe22c9efa6336"
+    },
+    "v5_events_tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "sha256": "85e98edea9a56485bbb2f096d874e6dab41265c39779686feb889db12a4db55f"
+    },
+    "v5_events_m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "sha256": "2e6c3d4ec4869a98dd5c731e417ade966e4cee098e9f3577573557716c2f3d58"
+    }
+  },
+  "initial_public_board_sha256_by_game": {
+    "sk48-d8078629": {
+      "v13": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+      "v5": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2"
+    },
+    "tn36-ef4dde99": {
+      "v13": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "v5": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b"
+    },
+    "m0r0-492f87ba": {
+      "v13": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+      "v5": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9"
+    }
+  },
+  "results": {
+    "v13": {
+      "prefix_action_total": 240,
+      "analysis_step_total": 80,
+      "analysis_steps_over_4_total": 10,
+      "actions_after_first_four_per_step_total": 66,
+      "visible_board_unchanged_after_action_total": 5,
+      "completed_levels_by_80_total": 4,
+      "by_game": {
+        "sk48-d8078629": {
+          "actions_in_prefix": 80,
+          "analysis_steps_with_actions": 35,
+          "max_actions_in_analysis_step": 7,
+          "analysis_steps_over_4": 3,
+          "actions_after_first_four_per_step": 8,
+          "visible_board_unchanged_after_action": 3,
+          "completed_levels_by_80": 1,
+          "benchmark_levels_completed": 1,
+          "actions_per_level": [
+            43,
+            56,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "tn36-ef4dde99": {
+          "actions_in_prefix": 80,
+          "analysis_steps_with_actions": 30,
+          "max_actions_in_analysis_step": 10,
+          "analysis_steps_over_4": 3,
+          "actions_after_first_four_per_step": 12,
+          "visible_board_unchanged_after_action": 0,
+          "completed_levels_by_80": 1,
+          "benchmark_levels_completed": 2,
+          "actions_per_level": [
+            23,
+            104,
+            3,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "m0r0-492f87ba": {
+          "actions_in_prefix": 80,
+          "analysis_steps_with_actions": 15,
+          "max_actions_in_analysis_step": 23,
+          "analysis_steps_over_4": 4,
+          "actions_after_first_four_per_step": 46,
+          "visible_board_unchanged_after_action": 2,
+          "completed_levels_by_80": 2,
+          "benchmark_levels_completed": 4,
+          "actions_per_level": [
+            19,
+            23,
+            71,
+            11,
+            36,
+            0
+          ]
+        }
+      }
+    },
+    "v5": {
+      "prefix_action_total": 240,
+      "analysis_step_total": 55,
+      "analysis_steps_over_4_total": 17,
+      "actions_after_first_four_per_step_total": 92,
+      "visible_board_unchanged_after_action_total": 13,
+      "completed_levels_by_80_total": 3,
+      "by_game": {
+        "sk48-d8078629": {
+          "actions_in_prefix": 80,
+          "analysis_steps_with_actions": 15,
+          "max_actions_in_analysis_step": 16,
+          "analysis_steps_over_4": 5,
+          "actions_after_first_four_per_step": 38,
+          "visible_board_unchanged_after_action": 10,
+          "completed_levels_by_80": 0,
+          "benchmark_levels_completed": 0,
+          "actions_per_level": [
+            80,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "tn36-ef4dde99": {
+          "actions_in_prefix": 80,
+          "analysis_steps_with_actions": 26,
+          "max_actions_in_analysis_step": 9,
+          "analysis_steps_over_4": 7,
+          "actions_after_first_four_per_step": 11,
+          "visible_board_unchanged_after_action": 0,
+          "completed_levels_by_80": 1,
+          "benchmark_levels_completed": 1,
+          "actions_per_level": [
+            27,
+            53,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "m0r0-492f87ba": {
+          "actions_in_prefix": 80,
+          "analysis_steps_with_actions": 14,
+          "max_actions_in_analysis_step": 20,
+          "analysis_steps_over_4": 5,
+          "actions_after_first_four_per_step": 43,
+          "visible_board_unchanged_after_action": 3,
+          "completed_levels_by_80": 2,
+          "benchmark_levels_completed": 2,
+          "actions_per_level": [
+            35,
+            39,
+            6,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  },
+  "candidate_reference": {
+    "kernel": "tecchannn/arc3-v6-action-tranche-c2-089",
+    "cap_actions_per_python_call": 4,
+    "notebook_sha256": "16cb7b2f291a0f964a7e4bec0df901594a07b09f473a8b6efba10344fa368df7",
+    "metadata_sha256": "9aff09ff942d321b87a913015435080a653ba45d43bbf0883462cf0daf63e17d",
+    "manifest_sha256": "c631c66524e966afc04558a6ffefa1509ae4bba9cba7d093f16c8329afa5a3b0",
+    "status": "PRIVATE_PUSH_REJECTED_WEEKLY_GPU_QUOTA; NO_KERNEL_VERSION_CREATED"
+  },
+  "official_reference": {
+    "submission_id": 57688735,
+    "status": "COMPLETE",
+    "public_score": 28.07,
+    "private_score": null
+  },
+  "conclusion": "The v5 sk48 first-80 prefix has more over-cap actions (38 vs 8) and visible no-change transitions (10 vs 3) than v13, while tn36 and m0r0 do not show the same difference. This supports running the prepared generic cap4 as a diagnostic after GPU quota permits, but does not support a score-improvement claim."
+}

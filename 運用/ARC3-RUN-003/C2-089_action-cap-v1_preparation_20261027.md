@@ -68,3 +68,17 @@ The private C2-089 push was rejected with the exact CLI output `Kernel push erro
 The read-only official history still shows submission 57688735 COMPLETE with public score 28.07 and no private score; it was submitted 2026-10-27T04:20:12.220000 UTC. The current UTC date already has one submission in history, so no official submission was attempted.
 
 Rejection evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-kernel-push-rejection-20261027T163826Z.json.
+
+## Exact v5 parent action-batch audit — 2026-10-27T17:16:56Z
+
+The first 80 transitions per game were compared on the same three public starting boards. Grouping action events by analysis_step, C2-088 v5 has 55 action-bearing steps and 92 actions beyond the first four per step; C2-046 v13 has 80 steps and 66 such actions. Visible-board no-change counts are 13 for v5 versus 5 for v13. At action 80, v5 completed 3 levels and v13 completed 4.
+
+| Game | v13 steps / over-cap actions / no-change | v5 steps / over-cap actions / no-change |
+|---|---:|---:|
+| sk48-d8078629 | 35 / 8 / 3 | 15 / 38 / 10 |
+| tn36-ef4dde99 | 30 / 12 / 0 | 26 / 11 / 0 |
+| m0r0-492f87ba | 15 / 46 / 2 | 14 / 43 / 3 |
+
+The excess-action count is not a score prediction: cap4 would return to observation sooner and change later model outputs. v13 also contains 66 over-cap actions, so these data justify only a bounded diagnostic, not promotion. Keep the prepared C2-089 cap4 candidate blocked until Kaggle weekly GPU quota permits a private run; do not retry the rejected push before then. Compare per game against both v4 and v5, and repeat before claiming a gain.
+
+Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-v5-analysis-batch-cap4-parent-audit-20261027T171656Z.json (SHA-256 b21635862a94a489146330b0bb8f694041372c85d3991859a0f5fc14c4c9ab70).
