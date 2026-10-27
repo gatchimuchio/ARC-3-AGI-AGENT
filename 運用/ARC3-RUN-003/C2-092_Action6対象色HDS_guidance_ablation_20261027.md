@@ -28,3 +28,10 @@
 - 既存submission 57688735は2026-10-27T06:34:58.191Z時点で`PENDING`、score欄空。旧C2-046 v13 fallbackであり、このC2-092候補ではない。別提出・quota使用なし。
 - 既存submission 57577905は`COMPLETE 23.86`（private未提供）。これは既存Notebook版の公式値で、C2-092とは紐付かない。
 - 次: session `86393`を監視し、残り12組の同条件比較を完了。全15組の差・費用・再現性を基に採否を決める。
+
+
+## 15組評価の進捗更新（2026-10-27T06:42:13Z）
+
+- 5/15組完了。baseline/candidateの累積RHAEは`1.190476190` / `1.190476190`、平均は`0.238095238` / `0.238095238`。5組すべて同点で、改善0・悪化0。
+- HDS update秒合計はbaseline `167.471` / candidate `245.515`。色照会 `106`、cache hit `1167`、prediction use `1247`、guided choices `179`。
+- 不変snapshot `運用/証拠/ARC26-UNIFIED/ARC3-C2-092-target-color-guidance-dev-progress-5pairs-20261027T064213Z.jsonl` SHA-256 `9f420ca5d00dcb3ed5b9d9e717dcafd55a7c18f02373f9ec13a56c6c180dd145`。live checkpointは引き続き更新中。
