@@ -1,0 +1,39 @@
+{
+  "schema": "arc3-official-history-and-quota-observation.v1",
+  "run_id": "ARC3-RUN-003-official-history-quota-observation-20261027T154020Z",
+  "observed_at_utc": "2026-10-27T15:40:20Z",
+  "competition": "arc-prize-2026-arc-agi-3",
+  "history_command": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 --format json --page-size 50",
+  "history_returned": 14,
+  "latest_submission": {
+    "id": 57688735,
+    "date_as_returned_by_cli": "2026-10-27T04:20:12.220000",
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13",
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null
+  },
+  "current_utc_date_submission_count_in_returned_history": 1,
+  "submission_limit": {
+    "daily_limit": 1,
+    "limit_source": "Kaggle Staff response in ARC-AGI-3 discussion 705198",
+    "source_url": "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/705198",
+    "remaining_estimate": 0,
+    "assessment": "Treat today's Competition Rerun quota as exhausted. The CLI submission-history command does not expose an account quota counter; the estimate combines the returned submission dated today with the Kaggle Staff statement that ARC-AGI-3 allows one submission per day.",
+    "reset_time": "Not exposed by the queried CLI; not inferred."
+  },
+  "other_recent_submissions": [
+    {"id": 57612586, "date": "2026-10-25T01:16:07.830000", "status": "SubmissionStatus.COMPLETE", "public_score": 0.03, "private_score": null},
+    {"id": 57577905, "date": "2026-10-24T01:15:49.963000", "status": "SubmissionStatus.COMPLETE", "public_score": 23.86, "private_score": null},
+    {"id": 57541830, "date": "2026-10-23T00:03:01.330000", "status": "SubmissionStatus.COMPLETE", "public_score": 0.25, "private_score": null},
+    {"id": 57527856, "date": "2026-10-22T14:19:24.727000", "status": "SubmissionStatus.COMPLETE", "public_score": 0.0, "private_score": null}
+  ],
+  "private_kernel_run_version5_status": "RUNNING",
+  "official_submission_attempted_this_turn": false,
+  "official_submission_or_quota_use_this_turn": false,
+  "limitations": [
+    "The official CLI history is the observed account data; it reports no remaining-quota field.",
+    "The one-per-day limit is from a Kaggle Staff response, while the CLI shows one submission dated on the current UTC date.",
+    "The private B-v3 version 5 kernel has no official score yet."
+  ]
+}
