@@ -1,0 +1,31 @@
+{
+  "schema": "arc3-private-kernel-launch-receipt.v1",
+  "run_id": "ARC3-RUN-003-C2-088-B-v3-sequential-reproduction-v5-20261027T153210Z",
+  "launched_at_utc": "2026-10-27T15:35:09Z",
+  "track": "ARC3",
+  "experiment": "C2-088 B-v3 same-package sequential reproducibility run",
+  "git_commit": "3c61aa854713fc1ba80a80fc0476cba75c979755",
+  "kernel": {
+    "slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "version": 5,
+    "visibility": "private",
+    "competition_rerun_allowed": false,
+    "launch_response": "Kernel version 5 successfully pushed."
+  },
+  "status_at_launch_observation": {
+    "observed_at_utc": "2026-10-27T15:35:09Z",
+    "status": "KernelWorkerStatus.RUNNING",
+    "command": ".venv/Scripts/kaggle.exe kernels status tecchannn/arc3-v6-online-official-c2-088"
+  },
+  "package": {
+    "path": "出力/ARC3-RUN-003-local/C2-088/outcome-aware-HDS-update-B-v3",
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "kernel_metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+    "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "scorecard_build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556"
+  },
+  "execution_command": ".venv/Scripts/kaggle.exe kernels push --path 出力/ARC3-RUN-003-local/C2-088/outcome-aware-HDS-update-B-v3",
+  "official_submission_or_quota_use": false,
+  "output_retrieval": "Pending terminal status; retrieve exact kernel version 5 only.",
+  "result": "PENDING"
+}
