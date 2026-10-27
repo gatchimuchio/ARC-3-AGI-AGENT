@@ -43,3 +43,14 @@
 - seed別累積点（baseline/candidate）: `{"7":{"baseline":1.1904761904761905,"candidate":1.1904761904761905,"pairs":5},"31":{"baseline":0.7349368318756073,"candidate":0.7349368318756073,"pairs":5}}`。
 - HDS update秒合計はbaseline `304.015` / candidate `464.271`。対象色照会 `210`、cache hit `2291`、prediction use `2447`、guided choices `353`。
 - 不変snapshot `運用/証拠/ARC26-UNIFIED/ARC3-C2-092-target-color-guidance-dev-progress-10pairs-20261027T065749Z.jsonl` SHA-256 `9333d13317c23315b543e2618af78028f7ca6b02d832bf0eec209d1547398990`。live checkpointと残り5組評価は継続中。
+
+
+## 最終判定 — 2026-10-27T07:17:44Z
+
+- **15/15組完了**。同じ15組・seed・最大80手の比較で、baseline RHAE `0.240596656`、candidate `0.240596656`、差 `0.000000000`。改善0、同点15、悪化0。level/win/no-op差は全て0。
+- **dev gate不通過**（必要平均差≥0.01、実測差0）。対象色候補は採用せず、HDS/runtime/agent/Notebookへ昇格しない。公式提出・Rerunなし。
+- HDS色ruleは実際にprediction use `3234`回、guided choice `460`回使われ、誘導後の結果は`{"盤面変化":460}`。それでも進行点は変わらず、学習効果は未実証。
+- HDS update秒合計はbaseline `465.936` / candidate `702.112`（差`+236.176`秒、候補側`50.7%`増）。全評価elapsed `2870.081`秒。
+- seed別: `[{"seed":7,"pairs":5,"baseline_mean":0.23809523809523808,"candidate_mean":0.23809523809523808,"delta_mean":0.0,"improvements":0,"ties":5,"regressions":0},{"seed":31,"pairs":5,"baseline_mean":0.14698736637512147,"candidate_mean":0.14698736637512147,"delta_mean":0.0,"improvements":0,"ties":5,"regressions":0},{"seed":73,"pairs":5,"baseline_mean":0.3367073637343908,"candidate_mean":0.3367073637343908,"delta_mean":0.0,"improvements":0,"ties":5,"regressions":0}]`。
+- 完全scorecard `運用/証拠/ARC26-UNIFIED/ARC3-C2-092-target-color-guidance-dev-20261027.json` SHA-256 `2f94e9b90c03c7a446eb519035262c5e370784fdff01eaa9aa15b23e157cdfdf`、15組checkpoint `運用/証拠/ARC26-UNIFIED/ARC3-C2-092-target-color-guidance-dev-20261027.jsonl` SHA-256 `ab41e74edbbbe986f7b6c2de2bd36e96e34ed3f35be47fb92525faeb9159dd4c`。runner SHA-256 `df97bd0fb4a2bb0c2910101d36a0f8dffb11450e4f8263227ee5b9ce8c0f1c0d`、HDS SHA-256 `eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57`、prior memory manifest SHA-256 `d1b6e0cc3d14ce7c40c26567fefa226a2975c2e6d02725fb8bb404833963a1bd`、environment manifest SHA-256 `0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80`。
+- 判定原因: 色別にboard-change/no-opを予測し行動を変えたが、score改善が15組で一度もなかった。追加HDS queryは費用を増やすため、この機構は棄却。
