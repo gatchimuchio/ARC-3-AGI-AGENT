@@ -1,0 +1,242 @@
+{
+  "run_id": "ARC3-RUN-003-C2-100",
+  "observed_at_utc": "2026-10-27T19:08:21Z",
+  "track": "ARC3",
+  "work_item": "Target-scoped HDS query evidence and native HOLD-reason audit, with outcome-display schema correction",
+  "git": {
+    "branch": "codex/arc3-v6-progress-20261027",
+    "head_before": "936d4a17d7c212c97d4f8266e3fb29abdf49d709"
+  },
+  "three_point_set_rechecked": true,
+  "three_point_set_sha256": {
+    "common_Codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "ARC3_Codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "ARC3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "ARC3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67",
+    "AGENTS": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "environment": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "hds_version": "HDS/学習系統/v0.4.2",
+    "fixed_prior_count": 5,
+    "hds_package_manifest_sha256": "f41a4b890e4905fa0f87c9ffe685bd9efcc70d5f7767fc3aecc056085ee2c487",
+    "hds_module_files": [
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+        "sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+        "sha256": "a6cab8fca7cb591c42fa7444f9678fe0003da69faafcce852598286dceb522e2"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+        "sha256": "50c48e5a9a8aa39158d0cdaacc0501608a829486960d41cb2fea6cb02e5660a4"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/型.py",
+        "sha256": "aa1241708655280b36564f5e3ff6968849b4d09790b8932aabad1570cbca302c"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+        "sha256": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+        "sha256": "bb7e85c2dbafbd430f1b7733bf3a2d307dc24e3227e79994b491cf711322f715"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+        "sha256": "2ba7ceb8d0d6c784d092f91fe484477127f044e50f68c54c977374b17f2f6361"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+        "sha256": "315dd0d23a9682cdf14be71346341976cbdbcd2cbd924a250afc4ad53058dba6"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+        "sha256": "e23f271d38e1f52d75557dbf3342abf7b59a85fbdc315a06c0040fd7ca204eb3"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+        "sha256": "8aa431b3012424fd8347c5b3d93a5fbf2218d35020836f5d40abb427f9d6da0d"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+        "sha256": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+        "sha256": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac"
+      }
+    ]
+  },
+  "source": {
+    "runner": "検証/ARC3HDS_mature-query-hold-reason-audit.py",
+    "runner_sha256": "d8baa630162f861a4e019fb268c82d9110b2ff1720dd200f4fb4db50c24a7fd3",
+    "shared_prequential_helpers": "検証/ARC3HDS_prequential-bounded-guidance-audit.py",
+    "shared_helpers_sha256": "36dfd255eda99b360a4300cc4f76ade2d86b7e4929441c6e649da8f66ff2e0f0",
+    "bridge": "検証/ARC3視覚HDS接続候補.py",
+    "bridge_sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617"
+  },
+  "execution": {
+    "command": ".venv/Scripts/python.exe 検証/ARC3HDS_mature-query-hold-reason-audit.py --output 出力/ARC3-RUN-003-local/C2-100/mature-hold-reasons-schema-corrected.json",
+    "source_run": "C2-088 B-v3 sequential exact output version 4",
+    "games": [
+      "m0r0-492f87ba",
+      "sk48-d8078629",
+      "tn36-ef4dde99"
+    ],
+    "transitions": 239,
+    "input_state_sha256": {
+      "m0r0-492f87ba": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22",
+      "sk48-d8078629": "36f49e579ce154747c727baa4e98f643c0bd005f209c53029e68b3295d2ccf44",
+      "tn36-ef4dde99": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f"
+    },
+    "query_before_every_update": true,
+    "post_action_effect_excluded_from_updates": true
+  },
+  "prior_attempts": [
+    "The first C2-100 replay used the unchanged five-class display whitelist; inspection then found the archived public target also contains 境界領域変化のみ. Its output remains local and is superseded for prediction counts.",
+    "The first schema-corrected replay completed all transitions but failed while serializing the vocabulary delta with AttributeError: module 'c2_099_bounded_guidance' has no attribute '_OUTCOMES'. No corrected result artifact was emitted; the delta now uses the original bridge-module vocabulary captured before replay."
+  ],
+  "superseded_first_output": {
+    "path": "出力/ARC3-RUN-003-local/C2-100/mature-hold-reasons.json",
+    "sha256": "a0a7a60e21d21314b8b2aa0011d3936859a64d1a7f0ccfd79f885afdea762f83",
+    "reason": "Used old display whitelist and undercounted public boundary-only outcome predictions."
+  },
+  "display_schema": {
+    "labels_in_public_trace": {
+      "レベル進行": 3,
+      "可視変化なし": 1,
+      "境界領域変化のみ": 34,
+      "盤面変化": 201
+    },
+    "display_only_extension": [
+      "境界領域変化のみ"
+    ],
+    "learner_input_or_HDS_judgment_changed": false,
+    "note": "The boundary-only label was already a distinct public outcome in earlier C2-088 v3 evidence; this diagnostic serializer whitelist had not been extended."
+  },
+  "results": {
+    "aggregate": {
+      "transitions": 239,
+      "native_HOLD": 239,
+      "target_prediction_present": 55,
+      "target_active_rule_present": 71,
+      "target_conflict_present": 0,
+      "target_observation_request_present": 23,
+      "unique_prediction_correct_on_executed_action": 49,
+      "unique_prediction_wrong_on_executed_action": 6,
+      "native_status_counts": {
+        "断定保留": 239
+      },
+      "native_hold_reason_counts": {
+        "原因未確定で隔離中の原理が存在する": 227,
+        "現行暫定原理の適用に必要な観測が不足している": 23,
+        "現観測だけでは複数の関係候補を識別できない": 239
+      },
+      "target_observation_request_reason_counts": {
+        "条件経路は観測済みだが、この条件値は暫定原理の確認範囲外。結果観測が必要": 24
+      },
+      "target_rule_condition_path_counts": {
+        "作用/番号": 35,
+        "作用前公開状態/作用点同色4連結成分面積": 36,
+        "作用前公開状態/対象局所配置": 34,
+        "作用前公開状態/色種類数": 3
+      },
+      "by_step_band": {
+        "developing_5_19": {
+          "transitions": 45,
+          "native_HOLD": 45,
+          "target_prediction_present": 22,
+          "target_active_rule_present": 30,
+          "target_conflict_present": 0,
+          "target_observation_request_present": 12,
+          "unique_prediction_correct_on_executed_action": 21,
+          "unique_prediction_wrong_on_executed_action": 1
+        },
+        "early_0_4": {
+          "transitions": 14,
+          "native_HOLD": 14,
+          "target_prediction_present": 5,
+          "target_active_rule_present": 5,
+          "target_conflict_present": 0,
+          "target_observation_request_present": 3,
+          "unique_prediction_correct_on_executed_action": 2,
+          "unique_prediction_wrong_on_executed_action": 3
+        },
+        "mature_20_plus": {
+          "transitions": 180,
+          "native_HOLD": 180,
+          "target_prediction_present": 28,
+          "target_active_rule_present": 36,
+          "target_conflict_present": 0,
+          "target_observation_request_present": 8,
+          "unique_prediction_correct_on_executed_action": 26,
+          "unique_prediction_wrong_on_executed_action": 2
+        }
+      }
+    },
+    "action6": {
+      "transitions": 81,
+      "prediction_present": 23,
+      "unique_prediction_correct": 20,
+      "unique_prediction_wrong": 3,
+      "target_active_rule_present": 37,
+      "target_request_present": 20,
+      "target_conflicts": 0,
+      "native_HOLD": 81
+    },
+    "mature_step20_plus": {
+      "transitions": 180,
+      "native_HOLD": 180,
+      "target_prediction_present": 28,
+      "target_active_rule_present": 36,
+      "target_conflict_present": 0,
+      "target_observation_request_present": 8,
+      "unique_prediction_correct_on_executed_action": 26,
+      "unique_prediction_wrong_on_executed_action": 2
+    },
+    "all_native_HOLD": true,
+    "target_conflicts": 0,
+    "target_observation_request_reason_counts": {
+      "条件経路は観測済みだが、この条件値は暫定原理の確認範囲外。結果観測が必要": 24
+    },
+    "global_native_hold_reason_counts_not_target_scoped": {
+      "原因未確定で隔離中の原理が存在する": 227,
+      "現行暫定原理の適用に必要な観測が不足している": 23,
+      "現観測だけでは複数の関係候補を識別できない": 239
+    },
+    "target_rule_condition_path_counts": {
+      "作用/番号": 35,
+      "作用前公開状態/作用点同色4連結成分面積": 36,
+      "作用前公開状態/対象局所配置": 34,
+      "作用前公開状態/色種類数": 3
+    },
+    "bounded_hint_count_by_native_status_gate": 0
+  },
+  "correction_to_C2_097_and_C2_099": "Their 47/43 forecast counts were filtered through the old display whitelist and omit this candidate-arm replay's boundary-only predictions. The schema-corrected replay has 55 unique prediction rows, 49 correct and 6 incorrect. Do not replace the earlier baseline/candidate comparison: only this post-action-feature-excluded arm was re-run. The prior zero-hint conclusion remains because all 239 native statuses are HOLD and the renderer requires native 出力.",
+  "interpretation": "The measured target learner has mature active rules and some unique predictions, but native status remains HOLD globally on every query. Target-scoped conflicts are absent; target-scoped requests occur in 23 transitions (24 total requests) because observed conditions fall outside provisional confirmation scope. Native hold reasons include unidentifiable relations on all 239 queries and isolated principles on 227; these generic reasons are not target-scoped and cannot be attributed to the action-response target.",
+  "limitations": [
+    "The wrapper exposes global native hold reason strings but does not export target-scoped unidentifiable records; attribution of those reasons remains unknown.",
+    "The archived trace labels only executed actions, so alternatives lack counterfactual outcomes.",
+    "Widening the display vocabulary used public outcome labels only for serialization, not as learner features or updates.",
+    "No score or action-ranking benefit was measured."
+  ],
+  "official": {
+    "notebook_or_kernel_changed": false,
+    "private_kernel_push_or_run": false,
+    "competition_rerun_or_submission": false,
+    "quota_consumed": false,
+    "score_effect": "NOT_MEASURED"
+  },
+  "full_output": {
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-100-mature-hold-reason-audit-full-output-20261027T190821Z.json",
+    "sha256": "c5ae260d0cca01fdc11e953c4d4fdb4dabc89ead767b20b38e813cc3cce41214"
+  }
+}
