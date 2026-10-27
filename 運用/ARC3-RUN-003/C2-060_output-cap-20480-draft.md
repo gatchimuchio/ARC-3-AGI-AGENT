@@ -39,3 +39,12 @@ A clean C2-061 `slim`→`off` memory ablation is now prepared from the C2-059 ca
 C2-061 is held based on the prior matched `off`/`slim` ablation. C2-060 remains a conditional candidate after exact v28 completion. A read-only version-28 `.log` output query returned no files while the kernel remained RUNNING. Before any C2-060 push, require v28 prompt sizes to fit the 118,272-token input allowance, confirm server context/startup/readiness/resource support at 139,264 tokens, and verify repeated 16,384-token cap hits. A cap hypothesis alone is not a score claim. No push or quota use.
 
 - Sequencing evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-sequencing-refinement-20261025T150450Z.json` (SHA256 `d47baceb84c0e5232ca06219bdfeaa64a2bc667daa0aa25eddcb2655fff6952b`).
+
+
+## Updated readiness after C2-059 version 28 completed (2026-10-27T04:44:47.991112+00:00)
+
+C2-059 was rejected by the fixed paired score gate. Its complete request log contains 393 JSON lines (0 invalid), 196 responses, and one `finish_reason=length` at action 43 / analysis step 22 with completion 16,384. Maximum observed prompt was 118276 tokens. The candidate server log reports `context_length=139264`. C2-060 tests the remaining output-cap hypothesis (16,384→20,480) at the same measured server context; it does not repeat the rejected context-only change. At the observed maximum prompt, prompt plus 20,480 output is 138756, 508 below that reported context. The observed prompt exceeds the proposed 118,272 effective input budget by 4 tokens, so this remains a one-pilot hypothesis with a narrow measured margin; changed trajectories may use longer prompts.
+
+C2-060 local Notebook hash `d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26` remains a one-cell source delta from C2-059 (`cell 5` only); its metadata hash is `e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372`. Its declared context is 139,264, output cap 20,480, and memory mode remains `slim`. Current read-only Kaggle statuses show C2-087 A and C2-088 version 1 both QUEUED; C2-087 B has no remote kernel (status query 404). No free batch session is confirmed, and an earlier B push was rejected at the two-session cap. Therefore C2-060 remains a local draft and is **not pushed**. Before its one private pilot, recheck the GPU session slot, exact source/config diff, prompt budget, and run budget.
+
+Readiness evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-post-v28-readiness-20261027T044447Z.json`.
