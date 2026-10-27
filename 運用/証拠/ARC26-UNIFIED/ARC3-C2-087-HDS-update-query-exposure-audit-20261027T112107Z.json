@@ -1,0 +1,111 @@
+{
+  "observedAtUtc": "2026-10-27T11:21:07Z",
+  "notebookSha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "bundleSha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "sourcePrompt": {
+    "path": "出力\\ARC3-RUN-003-local\\C2-087\\online-learning-r3\\preflight-source\\src\\ARC3-Inference\\inference\\agent\\tool_agent.py",
+    "sha256": "ff3ee9207b96941d875b3c236590d4cff399aa0fb2e890fa7d46ca27b3528f77",
+    "line": 5107,
+    "queryGuidance": "hds_query is optional; after new observations alter visual hypothesis, consider a fresh optional query."
+  },
+  "callFlow": {
+    "solverDispatch": "solver.py:996-997 dispatches hds_query only on an explicit query=hds tool request.",
+    "perActionUpdate": "arc3_python_hds_query_base.py:319-330 initializes bridge before action; :379+ after_action observes outcome and :456 calls learner.update.",
+    "ablationGate": "arc3_visual_hds_runtime.py:160-186 gates native update calls; enabled passes through, disabled skips only game-response update."
+  },
+  "sourceFileSha256": {
+    "arc3_visual_hds_runtime.py": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d",
+    "arc3_python_hds_query_base.py": "34a5c02fddc7caf7648c1b15d9369d2bdb2535b652b3868faa55fdce24853a8b"
+  },
+  "matchedPilotTelemetry": {
+    "online_m0r0": {
+      "actions": 80,
+      "updates_succeeded": 80,
+      "queries_succeeded": 1,
+      "query_steps": [
+        0
+      ],
+      "query_statuses": [
+        "断定保留"
+      ],
+      "sha256": "470c5760c8d2e7b7b64c4973e42141aa0f17c32c7effa8447b296935932343ae"
+    },
+    "online_sk48": {
+      "actions": 77,
+      "updates_succeeded": 77,
+      "queries_succeeded": 0,
+      "query_steps": [],
+      "query_statuses": [],
+      "sha256": "44d90b4a2e3a7d9c695e94bb0c212c720b2585f88827692641914f9024166cd8"
+    },
+    "online_tn36": {
+      "actions": 79,
+      "updates_succeeded": 79,
+      "queries_succeeded": 2,
+      "query_steps": [
+        0,
+        79
+      ],
+      "query_statuses": [
+        "断定保留",
+        "断定保留"
+      ],
+      "sha256": "cd194f89bfc6ab09e20ea81381badd3564f591cfdb031b7c44de58ae746448d5"
+    },
+    "prior_m0r0": {
+      "actions": 80,
+      "updates_succeeded": 0,
+      "queries_succeeded": 1,
+      "query_steps": [
+        36
+      ],
+      "query_statuses": [
+        "断定保留"
+      ],
+      "sha256": "c399b2602a2790726524554f4683ae1646fd0d58ac15e76c25677603fec581df"
+    },
+    "prior_sk48": {
+      "actions": 79,
+      "updates_succeeded": 0,
+      "queries_succeeded": 1,
+      "query_steps": [
+        1
+      ],
+      "query_statuses": [
+        "断定保留"
+      ],
+      "sha256": "6df71d013cab66777633021be4da79f5ed88c987ee6fc26617d535ee1f49f4da"
+    },
+    "prior_tn36": {
+      "actions": 80,
+      "updates_succeeded": 0,
+      "queries_succeeded": 1,
+      "query_steps": [
+        0
+      ],
+      "query_statuses": [
+        "断定保留"
+      ],
+      "sha256": "f18069530ac5b8b613909142f2ba4eb902973e8ca9d8be8385ac18802b4e6b6d"
+    }
+  },
+  "aggregate": {
+    "online_cross_build": {
+      "actions": 236,
+      "successfulNativeGameUpdates": 236,
+      "successfulHdsQueries": 3,
+      "queryRate": 0.012711864406779662,
+      "allQueryStatuses": "断定保留 (HOLD)"
+    },
+    "prior_only_A": {
+      "actions": 239,
+      "nativeGameUpdates": 0,
+      "gameUpdatesDisabledByTreatment": 239,
+      "successfulHdsQueries": 3,
+      "queryRate": 0.012552301255230125,
+      "allQueryStatuses": "断定保留 (HOLD)"
+    }
+  },
+  "interpretation": "The learner receives nearly one native update per public action, while the policy explicitly requests native evidence on only about 1.3% of actions. This is a measured exposure gap and a next-experiment hypothesis, not evidence that update frequency caused the score difference.",
+  "nextExperimentCandidate": "After direct matched B-v2 scorecard, test a prompt-only policy that requests one HDS query after each visible level transition and after eight consecutive public actions without level progress since the last query; retain legal candidate selection, no duplicate query in an unchanged state, and existing query/action/time budgets. Do not use game IDs or replayed action sequences."
+}
