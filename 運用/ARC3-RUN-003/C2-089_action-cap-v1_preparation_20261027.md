@@ -121,3 +121,11 @@ The local C2-089 cap12 folder now contains submission.ipynb, private kernel-meta
 Notebook, metadata, and manifest parse successfully. The cap12-specific synthetic runtime check has not been run; cap4 generic logic checks are inherited evidence only. No GPU quota or official submission quota was used, and score effect remains unmeasured.
 
 Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-launch-package-ready-20261027T173754Z.json (SHA-256 1b94793a14828ca1a692dd68c6ce52a89c57475c0291629ffe67fc16eb4c4f16).
+
+## Cap12 source postimage guard repair — 2026-10-27T17:51:19Z
+
+The first full source preflight found that cap12 changed tool_agent.py while the copied cell6 startup guard still expected the parent v5 postimage (ff3ee920...). The parent v5 passes that guard; cap12 produces 71fee64c.... Updated only the expected hash in cell6. The candidate Notebook SHA-256 is now 88b619063c485f5c46163d64df86d83c542ebe1559d05c53ef669a625099586e.
+
+Replayed the exact Notebook patch against the pinned taaf source archive and then applied the cell6 overlays. Source patch application, Python compilation, and both post-overlay hashes now pass. This validates source assembly and startup hash guards; cap12-specific action-count behavior has not been synthetically exercised, and no Kaggle run or score exists.
+
+Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-postimage-guard-repair-20261027T175119Z.json (SHA-256 f351cabfab5a9b486b1c1a38f15e67a00fbe886c307ba03b66ccd5d306fb9390).

@@ -1,0 +1,57 @@
+{
+  "evidence_id": "ARC3-C2-089-cap12-postimage-guard-repair-20261027T175119Z",
+  "observed_at_utc": "2026-10-27T17:51:19Z",
+  "candidate_kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+  "previous_candidate_sha256": "86bd236528fa0172ef33b14f73156fbd5821e0420fac8c629858b6adebd870a0",
+  "candidate_sha256_after_repair": "88b619063c485f5c46163d64df86d83c542ebe1559d05c53ef669a625099586e",
+  "package_files": {
+    "action-cap-runtime.patch": {
+      "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/action-cap-runtime.patch",
+      "sha256": "810dd3e53cfd47d9a43b4dbcd9378de1ac49642c2611bed83aecf5269f4afff3",
+      "size_bytes": 5622
+    },
+    "candidate-manifest.json": {
+      "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/candidate-manifest.json",
+      "sha256": "89407a1f434b31bfc44693dbe19af21d96d3692ee8e3a8b2d81c8afd734b73ef",
+      "size_bytes": 3173
+    },
+    "kernel-metadata.json": {
+      "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/kernel-metadata.json",
+      "sha256": "9aff09ff942d321b87a913015435080a653ba45d43bbf0883462cf0daf63e17d",
+      "size_bytes": 797
+    },
+    "submission.ipynb": {
+      "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/submission.ipynb",
+      "sha256": "88b619063c485f5c46163d64df86d83c542ebe1559d05c53ef669a625099586e",
+      "size_bytes": 760635
+    }
+  },
+  "finding": {
+    "parent_v5_post_overlay_tool_agent_sha256": "ff3ee9207b96941d875b3c236590d4cff399aa0fb2e890fa7d46ca27b3528f77",
+    "cap12_actual_post_overlay_tool_agent_sha256": "71fee64c4a5444798510ed610dddc57049956123aa03df25a89ace99947960e9",
+    "candidate_cell6_expected_hash_before_repair": "ff3ee9207b96941d875b3c236590d4cff399aa0fb2e890fa7d46ca27b3528f77",
+    "cause": "The generic cap patch changes tool_agent.py, but the copied cell6 startup hash guard still expected the parent v5 postimage."
+  },
+  "repair": {
+    "changed_cell": 6,
+    "expected_tool_agent_post_overlay_hash": "71fee64c4a5444798510ed610dddc57049956123aa03df25a89ace99947960e9",
+    "source_patch_sha256": "810dd3e53cfd47d9a43b4dbcd9378de1ac49642c2611bed83aecf5269f4afff3"
+  },
+  "preflight": {
+    "base_source_archive_sha256": "cd687f4bc10b2128ea9895024cd2e990b24a1070607a071901cccd1638606187",
+    "source_patch_apply": "PASS",
+    "cell6_overlays": "PASS",
+    "tool_agent_hash_guard": "PASS",
+    "python_tool_sandbox_hash_guard": "PASS",
+    "compile": "PASS",
+    "cap12_specific_action_count_synthetic": "NOT_RUN"
+  },
+  "limits": {
+    "kaggle_kernel_status": "404_NOT_FOUND_NO_VERSION",
+    "private_kernel_pushed": false,
+    "private_gpu_quota_used": false,
+    "official_submission_or_rerun": false,
+    "score": "UNKNOWN",
+    "gain_proven": false
+  }
+}
