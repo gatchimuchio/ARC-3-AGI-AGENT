@@ -1,0 +1,132 @@
+{
+  "evidence_id": "ARC3-C2-089-cap12-synthetic-boundary-20261027T180021Z",
+  "observed_at_utc": "2026-10-27T18:00:21Z",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-089-action-tranche-cap12-v2",
+  "candidate_kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+  "candidate_kernel_status": "404_NOT_FOUND at 2026-10-27T17:54:02Z; no version",
+  "candidate_notebook_sha256": "88b619063c485f5c46163d64df86d83c542ebe1559d05c53ef669a625099586e",
+  "candidate_manifest_sha256": "89407a1f434b31bfc44693dbe19af21d96d3692ee8e3a8b2d81c8afd734b73ef",
+  "pinned_source_archive_sha256": "cd687f4bc10b2128ea9895024cd2e990b24a1070607a071901cccd1638606187",
+  "notebook_cell3_patch_sha256": "22f8463c84ad677adb6845306de60c3156d350a42af79ecc5b584138fbc59b11",
+  "test_runner_path": "検証\\ARC3-RUN-003\\C2-089-cap12-synthetic-boundary.py",
+  "test_runner_sha256": "f7c673c8d2db6d72120d916d93cf774366edc870b3a814f0037beaa794b70b55",
+  "test_runner_command": ".venv/Scripts/python.exe 検証/ARC3-RUN-003/C2-089-cap12-synthetic-boundary.py",
+  "test_method": "Exact candidate Notebook cell 3 patch applied to pinned source archive; synthetic sandbox callback",
+  "test_status": "PASS",
+  "scenarios": [
+    {
+      "name": "partial_execution_accumulates",
+      "configured_cap": 12,
+      "engine_action_counts": [
+        8,
+        7
+      ],
+      "results": [
+        {
+          "executed": true,
+          "requested_count": 8,
+          "executed_count": 5,
+          "stop_reason": null
+        },
+        {
+          "executed": true,
+          "requested_count": 10,
+          "executed_count": 7,
+          "stop_reason": "python_tool_action_limit"
+        },
+        {
+          "executed": false,
+          "requested_count": 1,
+          "executed_count": 0,
+          "stop_reason": "python_tool_action_limit"
+        }
+      ],
+      "dispatch_step_executed": true
+    },
+    {
+      "name": "refused_action_does_not_consume",
+      "configured_cap": 12,
+      "engine_action_counts": [
+        1,
+        12
+      ],
+      "results": [
+        {
+          "executed": false,
+          "requested_count": null,
+          "executed_count": null,
+          "stop_reason": null
+        },
+        {
+          "executed": true,
+          "requested_count": 15,
+          "executed_count": 12,
+          "stop_reason": "python_tool_action_limit"
+        },
+        {
+          "executed": false,
+          "requested_count": 1,
+          "executed_count": 0,
+          "stop_reason": "python_tool_action_limit"
+        }
+      ],
+      "dispatch_step_executed": true
+    },
+    {
+      "name": "unset_cap_preserves_uncapped_behavior",
+      "configured_cap": null,
+      "engine_action_counts": [
+        15,
+        1
+      ],
+      "results": [
+        {
+          "executed": true,
+          "requested_count": 15,
+          "executed_count": 15,
+          "stop_reason": null
+        },
+        {
+          "executed": true,
+          "requested_count": null,
+          "executed_count": null,
+          "stop_reason": null
+        }
+      ],
+      "dispatch_step_executed": true
+    }
+  ],
+  "initial_harness_setup_errors": [
+    {
+      "error": "AttributeError: 'ToolAgent' object has no attribute '_repeat_state_seen'",
+      "classification": "synthetic fixture omitted an initialized agent field; corrected; no candidate assertion failure"
+    },
+    {
+      "error": "ValueError: Action 1 is missing an action field.",
+      "classification": "synthetic sandbox passed the wrong callback shape; corrected to the sandbox action-list protocol; no candidate assertion failure"
+    }
+  ],
+  "limitations": [
+    "No real game engine or public game was run",
+    "No private Kaggle kernel was pushed or run",
+    "No score effect was measured"
+  ],
+  "score_effect": "NOT_MEASURED",
+  "official_reference": {
+    "submission_id": 57688735,
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "observed_at_utc": "2026-10-27T17:54:02Z"
+  },
+  "official_c2_088_v5_kernel_status": {
+    "status": "KernelWorkerStatus.COMPLETE",
+    "observed_at_utc": "2026-10-27T17:54:02Z"
+  },
+  "quota_use": {
+    "official_submission": false,
+    "private_kernel_push_or_run": false
+  },
+  "git_head_before_evidence": "0f902fd483aa710a23e7aaad820e4f8e7872fe9a"
+}

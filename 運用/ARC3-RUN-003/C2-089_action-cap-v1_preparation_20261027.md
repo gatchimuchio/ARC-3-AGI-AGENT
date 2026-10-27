@@ -129,3 +129,14 @@ The first full source preflight found that cap12 changed tool_agent.py while the
 Replayed the exact Notebook patch against the pinned taaf source archive and then applied the cell6 overlays. Source patch application, Python compilation, and both post-overlay hashes now pass. This validates source assembly and startup hash guards; cap12-specific action-count behavior has not been synthetically exercised, and no Kaggle run or score exists.
 
 Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-postimage-guard-repair-20261027T175119Z.json (SHA-256 f351cabfab5a9b486b1c1a38f15e67a00fbe886c307ba03b66ccd5d306fb9390).
+
+
+## Cap12 synthetic runtime boundary preflight — 2026-10-27T18:00:21Z
+
+The saved preflight reapplied the exact C2-089 Notebook cell 3 patch to the pinned source archive, imported the resulting ToolAgent, and exercised _run_python_tool with a synthetic sandbox callback. Three boundary cases passed: (1) 8 requested / 5 executed actions left 7 of the cap for the next request, which was truncated from 10 to 7; (2) a refused call executing zero actions did not consume the cap, so the next request passed 12 of 15 and subsequent calls were stopped with python_tool_action_limit; (3) with the cap environment variable unset, 15 then 1 actions remained uncapped.
+
+Two earlier ad hoc harness attempts failed in fixture setup (one omitted _repeat_state_seen; one passed a dict instead of the sandbox action-list callback shape). The persisted runner corrected those harness defects; neither was a candidate assertion failure.
+
+This is a synthetic runtime-boundary PASS only. No game engine, public evaluation, private Kaggle kernel, or official Competition Rerun was run; score effect remains NOT MEASURED. At 2026-10-27T17:54:02Z, official submission 57688735 remained COMPLETE at public 28.07 (private blank), C2-088 v5 kernel was COMPLETE, and C2-089 still had no Kaggle version. No quota was used.
+
+Reproducible command: .venv/Scripts/python.exe 検証/ARC3-RUN-003/C2-089-cap12-synthetic-boundary.py. Test runner SHA-256: f7c673c8d2db6d72120d916d93cf774366edc870b3a814f0037beaa794b70b55. Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-synthetic-boundary-20261027T180021Z.json (SHA-256 0541493f41b07b7ef63bdd337058251abd615d47187598994ff139712dabcb9e).
