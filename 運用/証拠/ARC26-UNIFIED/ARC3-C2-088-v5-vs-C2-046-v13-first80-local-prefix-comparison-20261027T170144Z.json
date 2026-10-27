@@ -1,0 +1,186 @@
+{
+  "evidence_id": "ARC3-C2-088-v5-vs-C2-046-v13-first80-local-prefix-comparison-20261027T170144Z",
+  "observed_at_utc": "2026-10-27T17:01:44Z",
+  "comparison_scope": "Descriptive local public-play prefix comparison; first 80 action transitions per game.",
+  "inputs": {
+    "v13_events_sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/sk48-d8078629_p0_events.jsonl",
+      "sha256": "261bbf454b94a0058770a7bcaf37ab13ad65be2e6c5d787e840af2e5c4071021"
+    },
+    "v13_events_tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "sha256": "966c9d03ef3fb61758c8936be5a3d73ca0e9066c2ffe0966a5a87da34f9f410f"
+    },
+    "v13_events_m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "sha256": "1f1569bad11346caa3b43f8634551374ab7e246b6c9733ef5bfac2cabd3e481f"
+    },
+    "v13_benchmark": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/benchmark.json",
+      "sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e"
+    },
+    "v5_events_sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/sk48-d8078629_p0_events.jsonl",
+      "sha256": "63bf66f574aec7ceca65230724eda7d4d1f8289388a4cb4c3defe22c9efa6336"
+    },
+    "v5_events_tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "sha256": "85e98edea9a56485bbb2f096d874e6dab41265c39779686feb889db12a4db55f"
+    },
+    "v5_events_m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "sha256": "2e6c3d4ec4869a98dd5c731e417ade966e4cee098e9f3577573557716c2f3d58"
+    },
+    "v5_benchmark": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/benchmark.json",
+      "sha256": "8bb66e47eac212eea61eb51c544a543c20c9f706faa1f1a99ff947bc77e0671e"
+    }
+  },
+  "initial_public_board_sha256_by_game": {
+    "sk48-d8078629": {
+      "v13": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+      "v5": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2"
+    },
+    "tn36-ef4dde99": {
+      "v13": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "v5": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b"
+    },
+    "m0r0-492f87ba": {
+      "v13": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+      "v5": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9"
+    }
+  },
+  "method": {
+    "prefix_actions_per_game": 80,
+    "completed_levels": "Count completed levels whose cumulative actions_per_level is at most 80, capped by benchmark levels_completed.",
+    "scores": "Full-run final_score values are copied from existing benchmark.json files; no prefix score was recomputed.",
+    "limitations": [
+      "Single run per candidate; stochastic temperature was used.",
+      "C2-046 v13 ran with a 160-action per-game budget and C2-088 v5 with an 80-action budget, so full-run means are not an action-matched comparison.",
+      "This local comparison does not establish a reproducible gain or predict official Kaggle score."
+    ]
+  },
+  "results": {
+    "v13": {
+      "benchmark_path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/benchmark.json",
+      "benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+      "benchmark_run_start": "2026-10-24T14:53:49.559627",
+      "benchmark_run_end": "2026-10-24T15:46:57.424734",
+      "full_run_total_actions": 389,
+      "full_run_mean_final_score": 19.309155943771326,
+      "first_80_action_levels_completed_total": 4,
+      "by_game": {
+        "sk48-d8078629": {
+          "levels_completed_full_run": 1,
+          "actions_per_level": [
+            43,
+            56,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_80_action_levels_completed": 1,
+          "full_run_final_score": 2.7777777777777777,
+          "number_of_levels": 8
+        },
+        "tn36-ef4dde99": {
+          "levels_completed_full_run": 2,
+          "actions_per_level": [
+            23,
+            104,
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_80_action_levels_completed": 1,
+          "full_run_final_score": 7.5306424344885885,
+          "number_of_levels": 7
+        },
+        "m0r0-492f87ba": {
+          "levels_completed_full_run": 4,
+          "actions_per_level": [
+            19,
+            23,
+            71,
+            11,
+            36,
+            0
+          ],
+          "first_80_action_levels_completed": 2,
+          "full_run_final_score": 47.61904761904761,
+          "number_of_levels": 6
+        }
+      }
+    },
+    "v5": {
+      "benchmark_path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/benchmark.json",
+      "benchmark_sha256": "8bb66e47eac212eea61eb51c544a543c20c9f706faa1f1a99ff947bc77e0671e",
+      "benchmark_run_start": "2026-10-27T15:46:54.655616",
+      "benchmark_run_end": "2026-10-27T16:12:03.990269",
+      "full_run_total_actions": 240,
+      "full_run_mean_final_score": 5.952380952380952,
+      "first_80_action_levels_completed_total": 3,
+      "by_game": {
+        "sk48-d8078629": {
+          "levels_completed_full_run": 0,
+          "actions_per_level": [
+            80,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_80_action_levels_completed": 0,
+          "full_run_final_score": 0.0,
+          "number_of_levels": 8
+        },
+        "tn36-ef4dde99": {
+          "levels_completed_full_run": 1,
+          "actions_per_level": [
+            27,
+            53,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "first_80_action_levels_completed": 1,
+          "full_run_final_score": 3.571428571428571,
+          "number_of_levels": 7
+        },
+        "m0r0-492f87ba": {
+          "levels_completed_full_run": 2,
+          "actions_per_level": [
+            35,
+            39,
+            6,
+            0,
+            0,
+            0
+          ],
+          "first_80_action_levels_completed": 2,
+          "full_run_final_score": 14.285714285714285,
+          "number_of_levels": 6
+        }
+      }
+    }
+  },
+  "official_reference": {
+    "submission_id": 57688735,
+    "kernel": "tecchannn/arc3-v6-online-official-c2-046",
+    "version": 13,
+    "status": "COMPLETE",
+    "public_score": 28.07,
+    "private_score": null
+  },
+  "decision": "The exact C2-088 v5 official rerun remains queued for the next quota-available check per Owner direction; submit at most once and compare its official score with 28.07."
+}

@@ -1,0 +1,25 @@
+{
+  "evidence_id": "ARC3-C2-088-v5-official-quota-recheck-20261027T170708Z",
+  "observed_at_utc": "2026-10-27T17:07:08Z",
+  "read_only_command": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 -v",
+  "history_latest": {
+    "submission_id": 57688735,
+    "date_utc": "2026-10-27T04:20:12.220Z",
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13"
+  },
+  "daily_limit": {
+    "limit_per_day": 1,
+    "successful_submissions_on_cli_date": 1,
+    "remaining_today": 0,
+    "basis": "Derived by combining the CLI submission history with Kaggle Staff statement; the CLI history output does not expose a numeric remaining quota.",
+    "source_url": "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/705198"
+  },
+  "action": {
+    "c2_088_version5_submitted": false,
+    "reason": "The only daily submission is already used by submission 57688735. Recheck quota before attempting the prepared exact-version run.",
+    "quota_consumed_by_this_check": false
+  }
+}
