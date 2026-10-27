@@ -1,0 +1,175 @@
+{
+  "schema": "arc3-c2-105-review.v1",
+  "run_id": "ARC3-RUN-003-C2-105",
+  "observed_at_utc": "2026-10-27T20:17:41Z",
+  "three_point_set_rechecked": true,
+  "three_point_set_version": "v6",
+  "three_point_document_sha256": {
+    "common_codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "arc3_codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "arc3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "arc3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67"
+  },
+  "protected_file_sha256": {
+    "AGENTS.md": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state.json": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "base_private_kernel": {
+    "slug": "tecchannn/arc3-model-guided-c2-025",
+    "version": 29,
+    "status": "KernelWorkerStatus.COMPLETE",
+    "observed_at_utc": "2026-10-27T20:17:41Z"
+  },
+  "candidate": {
+    "notebook": "出力\\ARC3-RUN-003-local\\C2-105-action-plan-cap8\\submission.ipynb",
+    "notebook_sha256": "64C07C3C7988043533430683F9DF32C5E6776946E2FCD4578DDE0678DE5B1A1E",
+    "metadata_sha256": "E31A7418A9430D0A343CAC1DAD9E408A3BAFA64970D830D3F1BE82742ED49372",
+    "builder": "検証\\ARC3-RUN-003\\C2-105-build-action-plan-cap8.py",
+    "builder_sha256": "1A86FC4E9A5D8E023AD244D16B7B46D3FD3E5EFD7B29A2FDA620BA4CA5B29749",
+    "build_evidence": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-105-action-plan-cap8-prepared-20261027T201256Z.json",
+    "build_evidence_sha256": "18848A12A36DF2A570E1D348C5F13059DD6279E61B53246E9090889B98F2E15A",
+    "changed_notebook_cells": [
+      3
+    ],
+    "private_status": "NOT_PUSHED",
+    "private_score": "NOT_MEASURED",
+    "official_score": "NOT_MEASURED"
+  },
+  "trace_evidence": {
+    "grouping": "Count type=action records grouped by analysis_step; not asserted as exact Python-call boundaries.",
+    "v28_v29": {
+      "v28": {
+        "per_game": {
+          "m0r0": {
+            "event_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-outputcheck/artifacts/m0r0-492f87ba_p0_events.jsonl",
+            "sha256": "FA73FDD35D8D42D991E9ED99CFD951ED3B825C5022058A8488B7EF0DFAB3F3D9",
+            "action_events": 144,
+            "analysis_steps": 37,
+            "steps_over_8": 4,
+            "actions_in_steps_over_8": 55,
+            "actions_after_step_8": 23,
+            "max_actions_in_step": 19,
+            "median_actions_per_step": 2,
+            "p90_nearest_rank": 10
+          },
+          "sk48": {
+            "event_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-outputcheck/artifacts/sk48-d8078629_p0_events.jsonl",
+            "sha256": "520DC6C639740312D11CCE5076D9804B7EE01C65332A308D08EFC35377C94E90",
+            "action_events": 62,
+            "analysis_steps": 24,
+            "steps_over_8": 1,
+            "actions_in_steps_over_8": 16,
+            "actions_after_step_8": 8,
+            "max_actions_in_step": 16,
+            "median_actions_per_step": 1.5,
+            "p90_nearest_rank": 4
+          },
+          "tn36": {
+            "event_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-outputcheck/artifacts/tn36-ef4dde99_p0_events.jsonl",
+            "sha256": "4D4DF178AB97F6F2C39C46B43F7FC119687972914E875C32B5A55AAA08F47EAA",
+            "action_events": 160,
+            "analysis_steps": 34,
+            "steps_over_8": 7,
+            "actions_in_steps_over_8": 74,
+            "actions_after_step_8": 18,
+            "max_actions_in_step": 17,
+            "median_actions_per_step": 4.0,
+            "p90_nearest_rank": 9
+          }
+        },
+        "totals": {
+          "action_events": 366,
+          "analysis_steps": 95,
+          "steps_over_8": 12,
+          "actions_in_steps_over_8": 145,
+          "actions_after_step_8": 49
+        }
+      },
+      "v29": {
+        "per_game": {
+          "m0r0": {
+            "event_file": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/remote-v29/output/artifacts/m0r0-492f87ba_p0_events.jsonl",
+            "sha256": "D532B2749E95347CBDC61B8AD8B38EC14383388078C3810C0F8FEEEB0D06A3C5",
+            "action_events": 160,
+            "analysis_steps": 38,
+            "steps_over_8": 7,
+            "actions_in_steps_over_8": 94,
+            "actions_after_step_8": 38,
+            "max_actions_in_step": 24,
+            "median_actions_per_step": 2.0,
+            "p90_nearest_rank": 12
+          },
+          "sk48": {
+            "event_file": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/remote-v29/output/artifacts/sk48-d8078629_p0_events.jsonl",
+            "sha256": "E67A94BA0ABA46855D61FF147A9E4FCF3E8101B68C626BB9B6240D3A6B71C239",
+            "action_events": 94,
+            "analysis_steps": 25,
+            "steps_over_8": 3,
+            "actions_in_steps_over_8": 35,
+            "actions_after_step_8": 11,
+            "max_actions_in_step": 16,
+            "median_actions_per_step": 3,
+            "p90_nearest_rank": 9
+          },
+          "tn36": {
+            "event_file": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/remote-v29/output/artifacts/tn36-ef4dde99_p0_events.jsonl",
+            "sha256": "50C6B69BBDF0403F9DB17104B7021F9CE36AF33436EC8A298E3FF0A70BE70490",
+            "action_events": 135,
+            "analysis_steps": 43,
+            "steps_over_8": 5,
+            "actions_in_steps_over_8": 51,
+            "actions_after_step_8": 11,
+            "max_actions_in_step": 12,
+            "median_actions_per_step": 1,
+            "p90_nearest_rank": 9
+          }
+        },
+        "totals": {
+          "action_events": 389,
+          "analysis_steps": 106,
+          "steps_over_8": 15,
+          "actions_in_steps_over_8": 180,
+          "actions_after_step_8": 60
+        }
+      }
+    },
+    "interpretation": "Diagnostic motivation only; does not predict replanned behavior or score."
+  },
+  "official": {
+    "history_command": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 --format json --page-size 50",
+    "history_raw_file": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-105-official-history-raw-20261027T201741Z.json",
+    "history_raw_sha256": "D1188F4F0AB19C64E83E2A82206509BB69F9D4C24EA157EF0AAB3ED3F801B314",
+    "latest_submission_id": 57688735,
+    "latest_status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13",
+    "prior_public_score": 23.86,
+    "delta_vs_prior": 4.21,
+    "quota_snapshot_file": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-102-official-limits-raw-20261027T191807Z.txt",
+    "quota_snapshot_sha256": "522F6BA380CF22100FFFE2263D7497E3E346856EF2C0B7FD68DF664B25BF4A72",
+    "quota_observed_at_utc": "2026-10-27T19:18:07Z",
+    "submissions_today": 1,
+    "remaining_today": 0,
+    "lifetime_submission_count": 8,
+    "quota_consumed_by_this_operation": 0
+  },
+  "private_gpu_quota": {
+    "candidate_push": "NOT_ATTEMPTED",
+    "fresh_capacity_evidence_required_before_retry": true,
+    "last_rejection_file": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-089-action-cap-v1-kernel-push-rejection-20261027T163826Z.json",
+    "last_rejection_sha256": "A258E8D4D7C644DE99C0A8AA6CA92733DBE03C4A2CF9596DCA229F729A2E667B",
+    "last_rejection_observed_at_utc": "2026-10-27T16:38:26Z",
+    "last_error": "Kernel push error: Maximum weekly GPU quota of 30.00 hours reached.",
+    "reset_time": "NOT_PROVIDED"
+  },
+  "preflight": {
+    "hunk_counts_valid": true,
+    "only_cell_3_changed": true,
+    "synthetic_cap_boundary": "PASS"
+  },
+  "official_submission_or_rerun_performed": false,
+  "decision": "PREPARED_LOCAL_ONLY; score effect NOT_MEASURED; await fresh GPU capacity evidence"
+}

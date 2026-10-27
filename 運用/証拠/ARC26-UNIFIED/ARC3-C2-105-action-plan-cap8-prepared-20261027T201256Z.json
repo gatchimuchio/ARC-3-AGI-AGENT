@@ -1,0 +1,76 @@
+{
+  "schema": "arc3-candidate-build.v1",
+  "candidate": {
+    "notebook_path": "出力\\ARC3-RUN-003-local\\C2-105-action-plan-cap8\\submission.ipynb",
+    "notebook_sha256": "64c07c3c7988043533430683f9df32c5e6776946e2fcd4578dde0678de5b1a1e",
+    "metadata_path": "出力\\ARC3-RUN-003-local\\C2-105-action-plan-cap8\\kernel-metadata.json",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "changed_notebook_cells": [
+      3
+    ],
+    "patched_file": "ARC3-Inference/inference/agent/python_tool_sandbox.py",
+    "action_limit_per_python_snippet": 8,
+    "hunk_validation": {
+      "modified_hunks": [
+        {
+          "old_start": 350,
+          "new_start_before": 406,
+          "new_start_after": 406,
+          "old_count": 12,
+          "new_count_before": 98,
+          "new_count_after": 117,
+          "added_lines": 19
+        },
+        {
+          "old_start": 363,
+          "new_start_before": 505,
+          "new_start_after": 524,
+          "old_count": 28,
+          "new_count_before": 225,
+          "new_count_after": 236,
+          "added_lines": 11
+        }
+      ],
+      "downstream_new_start_shift": 30
+    },
+    "private_score": "NOT_MEASURED",
+    "official_score": "NOT_MEASURED"
+  },
+  "observed_at_utc": "20261027T201256Z",
+  "base": {
+    "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+    "kernel_version": 29,
+    "kernel_status_observed": "COMPLETE",
+    "notebook_sha256": "d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372"
+  },
+  "trace_motivation": {
+    "method": "Count type=action records grouped by analysis_step; not asserted as exact Python-call boundaries.",
+    "v28": {
+      "analysis_steps": 95,
+      "steps_over_8": 12,
+      "actions_in_over_8_steps": 145,
+      "actions_after_step_8": 49
+    },
+    "v29": {
+      "analysis_steps": 106,
+      "steps_over_8": 15,
+      "actions_in_over_8_steps": 180,
+      "actions_after_step_8": 60
+    },
+    "interpretation": "Diagnostic motivation only; the action trace does not predict replanned model behavior or score."
+  },
+  "private_push": {
+    "status": "NOT_ATTEMPTED",
+    "fresh_gpu_capacity_evidence_required_before_retry": true,
+    "last_rejection_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-kernel-push-rejection-20261027T163826Z.json",
+    "last_observed_error": "Maximum weekly GPU quota of 30.00 hours reached."
+  },
+  "official_submission_or_quota_use": false,
+  "boundary_preflight": "PASS",
+  "limitations": [
+    "Synthetic cap-boundary assertions only; no real game was run.",
+    "No Kaggle private kernel execution or score was measured.",
+    "No official competition rerun or submission was made."
+  ]
+}
