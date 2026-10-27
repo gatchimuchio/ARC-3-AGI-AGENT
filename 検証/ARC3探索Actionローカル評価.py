@@ -206,6 +206,57 @@ class _初期観測hashseedablation(観測駆動探索方針):
         return super().選ぶ(現在)
 
 
+class _同一Action停滞上限ablation(観測駆動探索方針):
+    """レベル未進行で同じ合法Actionを8回続けた後、別Actionがあれば切り替える。"""
+
+    _連続上限 = 8
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._直前Action番号: int | None = None
+        self._無進行連続数 = 0
+        self._上限介入action位置: list[int] = []
+        self._今回上限有効 = False
+
+    def 選ぶ(self, 現在):
+        合法 = tuple(sorted(a for a in 現在.作用可能番号 if 1 <= a <= 7))
+        代替 = tuple(a for a in 合法 if a != self._直前Action番号)
+        未試行代替 = any(self._回数.get(a, 0) == 0 for a in 代替)
+        self._今回上限有効 = (
+            self._無進行連続数 >= self._連続上限
+            and self._直前Action番号 in 合法
+            and bool(代替)
+            and not 未試行代替
+        )
+        選択 = super().選ぶ(現在)
+        if (
+            self._今回上限有効
+            and 選択 is not None
+            and 選択.作用番号 != self._直前Action番号
+        ):
+            self._上限介入action位置.append(self._総作用数)
+        return 選択
+
+    def _追加行動価値(self, 現在, 作用番号: int) -> float:
+        if self._今回上限有効 and 作用番号 == self._直前Action番号:
+            return float("-inf")
+        return super()._追加行動価値(現在, 作用番号)
+
+    def 応答を記録する(self, 作用前, action, 作用後):
+        response = super().応答を記録する(作用前, action, 作用後)
+        進行 = 作用後.完了レベル数 > 作用前.完了レベル数
+        if 進行 or 作用後.状態 in ("GAME_OVER", "WIN"):
+            self._直前Action番号 = None
+            self._無進行連続数 = 0
+        elif action.作用番号 == self._直前Action番号:
+            self._無進行連続数 += 1
+        else:
+            self._直前Action番号 = action.作用番号
+            self._無進行連続数 = 1
+        self._今回上限有効 = False
+        return response
+
+
 def _初期公開観測seed(現在) -> int:
     material = json.dumps(
         {
@@ -493,6 +544,14 @@ def _run_game(
         "stop_reason": stop_reason,
         "action_responses": records,
         "policy_action_stats": policy.統計() if policy is not None else {},
+        "policy_diagnostics": {
+            "same_action_streak_cap": getattr(policy, "_連続上限", None),
+            "same_action_streak_cap_intervention_positions": getattr(
+                policy, "_上限介入action位置", []
+            ),
+        }
+        if policy is not None
+        else {},
         "middle_frequency_color_deferrals": (
             int(getattr(policy, "_middle_frequency_color_deferrals", 0))
             if policy is not None

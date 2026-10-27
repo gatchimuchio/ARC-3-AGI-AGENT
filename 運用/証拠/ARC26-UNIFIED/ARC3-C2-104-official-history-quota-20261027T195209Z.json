@@ -1,0 +1,44 @@
+{
+  "run_id": "ARC3-RUN-003-C2-104",
+  "observed_at_utc": "2026-10-27T19:52:09Z",
+  "source": "configured local .venv Kaggle CLI; read-only",
+  "history_command": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 --format json --page-size 50 -q",
+  "submission_history_first_three": [
+    {
+      "ref": 57688735,
+      "fileName": "submission.parquet",
+      "date": "2026-10-27T04:20:12.22",
+      "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "28.07",
+      "privateScore": ""
+    },
+    {
+      "ref": 57612586,
+      "fileName": "submission.parquet",
+      "date": "2026-10-25T01:16:07.83",
+      "description": "ARC3 prior-memory coefficient public-25 scorecard candidate 2026-10-25",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.03",
+      "privateScore": ""
+    },
+    {
+      "ref": 57577905,
+      "fileName": "submission.parquet",
+      "date": "2026-10-24T01:15:49.963",
+      "description": "ARC3-RUN-003 C1-018 paired public scorecard validated v5",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "23.86",
+      "privateScore": ""
+    }
+  ],
+  "limits_command": ".venv/Scripts/kaggle.exe competitions submission-limits arc-prize-2026-arc-agi-3 --json -q",
+  "submission_limits": {
+    "numToday": 1,
+    "numTotal": 8
+  },
+  "remaining_daily_submissions": 0,
+  "submission_or_rerun_performed": false,
+  "kernel_push_or_rerun": false,
+  "quota_consumed_by_this_work": false
+}
