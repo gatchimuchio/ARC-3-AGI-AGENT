@@ -1,0 +1,78 @@
+{
+  "schema": "arc3-private-kernel-rerun-preflight.v1",
+  "run_id": "ARC3-RUN-003-C2-088-B-v3-sequential-reproduction-v5-20261027T153210Z",
+  "prepared_at_utc": "2026-10-27T15:32:10Z",
+  "track": "ARC3",
+  "experiment": "C2-088 B-v3 same-package sequential reproducibility run",
+  "purpose": "Repeat the exact valid provisional B-v3 sequential parent package once under the same conditions before launching C2-089, as required by the v6 reproducibility criteria.",
+  "git_head": "bc6ed76560d8a2a68cd09f2023157cfce33d53aa",
+  "learner_code_version": "HDS/学習系統/v0.4.2",
+  "memory_manifest_hash": null,
+  "memory_hash_status": "UNKNOWN; the package has no standalone memory manifest; do not infer one from the bundle hash.",
+  "kernel": {
+    "slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "prior_version": 4,
+    "prior_version_status": "KernelWorkerStatus.COMPLETE",
+    "version_expected": 5,
+    "private": true,
+    "competition_rerun_allowed": false
+  },
+  "package": {
+    "path": "出力/ARC3-RUN-003-local/C2-088/outcome-aware-HDS-update-B-v3",
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "kernel_metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+    "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "scorecard_build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556"
+  },
+  "input_dataset_versions": [
+    "dfranzen/pennyroyal-v253",
+    "dfranzen/taaf-kaggle-source-bundle-copy/1",
+    "arc-prize-2026-arc-agi-3"
+  ],
+  "runtime_and_evaluation": {
+    "games_max": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_max_per_game": 80,
+    "runtime_seconds_max_per_game": 1200,
+    "runtime_grace_seconds": 5,
+    "HDS_seconds_budget_per_game": 120,
+    "shared_model_seed": 0,
+    "environment_seed": 0,
+    "runtime_stamp_expected_from_prior": {
+      "python": "3.12.13",
+      "arc-agi": "0.9.8",
+      "arcengine": "0.9.3"
+    }
+  },
+  "command": [
+    ".venv/Scripts/kaggle.exe",
+    "kernels",
+    "push",
+    "--path",
+    "出力/ARC3-RUN-003-local/C2-088/outcome-aware-HDS-update-B-v3"
+  ],
+  "previous_sequential_baseline": {
+    "version": 4,
+    "mean_RHAE": 2.2063453421498442,
+    "per_game_RHAE": {
+      "sk48-d8078629": 2.6888946699040357,
+      "tn36-ef4dde99": 2.404433173663943,
+      "m0r0-492f87ba": 1.525708182881554
+    },
+    "levels_completed": 3,
+    "levels_total": 21,
+    "gameplay_valid": true,
+    "integration_valid": true,
+    "max_game_elapsed_seconds": 595.8759252569998,
+    "scorecard_sha256": "aeb70ab4fe383c427f72de6813f484c08b35bf93bca45614372108131fd39ebe",
+    "output_manifest_sha256": "b1928e6b7848abe2ed3696357c5dcb7e43f2d4b9b9c34b4333132b51ed1697d4"
+  },
+  "official_submission_or_quota_use": false,
+  "limitations": [
+    "The repeat measures same-package run variation; GPU determinism remains unproven.",
+    "The first sequential run completed only 3/21 levels and all games ended gave_up.",
+    "This repeat uses no Competition Rerun or official submission quota."
+  ],
+  "status": "PREFLIGHT_COMPLETE; not yet pushed"
+}
