@@ -1,0 +1,78 @@
+{
+  "schema": "arc3-c2-089-python-call-boundary-relevance-audit.v1",
+  "observed_at_utc": "2026-10-27T14:26:42Z",
+  "run_id": "ARC3-RUN-003/C2-089-action-tranche-cap-v1/trace-boundary-audit",
+  "source": {
+    "path": "出力/ARC3-RUN-003-local/C2-088/matched-online-learning-B-v2-exact-output/artifacts/tn36-ef4dde99_p0_events.jsonl",
+    "sha256": "08a41222b770c9bd284527dc3ff95acbd448a8446a5567bd02bfe98f51c4f413",
+    "trace_action_rows": 80
+  },
+  "method": "For each selected completed analysis snapshot, parse the final explicit Python tool-call code block and its tool result. Count returned action rows and match their cumulative action_num range back to exact event rows. These are tool-call boundaries, not analysis-step groupings.",
+  "confirmed_oversized_calls": [
+    {
+      "transcript_event_row": 64,
+      "analysis_step": 6,
+      "python_call_count_in_selected_snapshot": 1,
+      "executed_action_count_in_tool_result": 37,
+      "action_num_range": [
+        20,
+        56
+      ],
+      "action_name_counts": {
+        "ACTION6": 37
+      },
+      "code_sha256": "a09a0c7e582763ef984c148ae5c29ce74b93c226bb665a8f4c927bc84efaa002",
+      "transcript_result_action_rows_match_event_log": true
+    },
+    {
+      "transcript_event_row": 81,
+      "analysis_step": 8,
+      "python_call_count_in_selected_snapshot": 1,
+      "executed_action_count_in_tool_result": 8,
+      "action_num_range": [
+        63,
+        70
+      ],
+      "action_name_counts": {
+        "ACTION6": 8
+      },
+      "code_sha256": "ea4f4214879aae1f67ed24df3361e5ef914538404adafb942f889243851d946f",
+      "transcript_result_action_rows_match_event_log": true
+    },
+    {
+      "transcript_event_row": 95,
+      "analysis_step": 10,
+      "python_call_count_in_selected_snapshot": 1,
+      "executed_action_count_in_tool_result": 8,
+      "action_num_range": [
+        73,
+        80
+      ],
+      "action_name_counts": {
+        "ACTION6": 8
+      },
+      "code_sha256": "c1bc4fafdc6d94c3d34a5a0fecdd6fd57189f998b0eeacf5e041ebc030b7b5b4",
+      "transcript_result_action_rows_match_event_log": true
+    }
+  ],
+  "counterfactual_for_confirmed_calls_only": {
+    "cap_per_python_call": 4,
+    "requested_actions": 53,
+    "max_actions_in_original_snippets": 12,
+    "actions_that_would_not_execute_in_original_snippets": 41,
+    "score_effect": "NOT MEASURED; later model calls could replan and issue different actions"
+  },
+  "candidate": {
+    "kernel": "tecchannn/arc3-v6-action-tranche-c2-089",
+    "notebook_sha256": "16cb7b2f291a0f964a7e4bec0df901594a07b09f473a8b6efba10344fa368df7",
+    "patch_sha256": "810dd3e53cfd47d9a43b4dbcd9378de1ac49642c2611bed83aecf5269f4afff3",
+    "private_kernel_uploaded": false,
+    "official_submission_or_quota_used": false
+  },
+  "limitations": [
+    "Only three confirmed calls are quantified here; this is not a score counterfactual.",
+    "C2-088 B-v3's scorecard had integration_valid=false due an unsupported boundary-only label and gameplay_valid=false due runtime overrun; any C2-089 score must retain those comparator/runtime cautions until resolved.",
+    "No causal performance gain is established."
+  ],
+  "decision": "The exact trace now confirms the action-cap treatment targets real multi-action Python snippets (including 37 actions in one call), so a private normal run is experimentally justified after the scorecard compatibility gate is handled. Do not call it an improvement or use competition quota."
+}

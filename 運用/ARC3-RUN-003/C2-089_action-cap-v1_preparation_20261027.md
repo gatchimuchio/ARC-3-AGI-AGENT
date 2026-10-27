@@ -28,3 +28,11 @@ PREPARED_LOCAL_NOT_UPLOADED. No Kaggle kernel was uploaded, no official submissi
 The full candidate Notebook embeds the private HDS source bundle and is excluded from the public repo. The reviewable incremental patch is at 検証/ARC3-RUN-003/C2-089-action-cap-v1.patch.
 
 Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-prepared-20261027T135806Z.json (SHA-256 6f0108672bab603c441ec1b922213165c519dedf674646d6fbaf7ac16513ae4c).
+
+## C2-089 exact Python-call boundary audit — 2026-10-27T14:26Z
+
+This resolves the earlier limitation that the candidate rationale grouped actions by analysis step rather than verified Python tool-call boundaries. The exact B-v2 transcript and event trace confirm three completed Python calls that each executed more than four game actions: 37 actions (action numbers 20–56), 8 (63–70), and 8 (73–80). For these three calls, cap=4 would have allowed 12 of the 53 actions in their original snippets and blocked 41 from those snippets. The model could then re-observe and issue different calls; this counterfactual is not a score prediction. The full trace may contain other oversized calls; this audit reports only these three directly confirmed examples.
+
+Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-python-call-boundary-relevance-20261027T142642Z.json (SHA-256 d562a2f4f2c405be09d82ada69d24fb72181662d0255bb85630bddc5d5e0ca73); source trace SHA-256 08a41222b770c9bd284527dc3ff95acbd448a8446a5567bd02bfe98f51c4f413.
+
+The earlier preparation record's “45 actions after first four per analysis step” remains a per-step counterfactual, not a call-level measurement; do not use it as the exact expected treatment count. The direct trace now supports testing the generic action cap. However, C2-089 inherits B-v3's unsupported boundary-only outcome label, whose frozen comparator currently marks integration invalid. Before using a C2-089 run for accepted score comparison, repair and re-evaluate that compatibility and establish a sequential valid parent baseline. A private normal kernel run may be used for diagnosis only; no official Competition Rerun/quota, and no gain claim until the gates pass.
