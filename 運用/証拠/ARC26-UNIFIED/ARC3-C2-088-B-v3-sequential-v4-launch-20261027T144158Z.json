@@ -1,0 +1,26 @@
+{
+  "schema": "arc3-private-kernel-rerun-launch.v1",
+  "run_id": "ARC3-RUN-003-C2-088-B-v3-sequential-reproduction-v4-20261027T144019Z",
+  "launched_at_utc": "2026-10-27T14:41:58Z",
+  "track": "ARC3",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "version": 4,
+  "push_command": ".venv/Scripts/kaggle.exe kernels push --path 出力/ARC3-RUN-003-local/C2-088/outcome-aware-HDS-update-B-v3",
+  "push_result": "Kernel version 4 successfully pushed.",
+  "status_observed_at_utc": "2026-10-27T14:41:58Z",
+  "initial_status_observed": "KernelWorkerStatus.RUNNING",
+  "preflight_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-preflight-20261027T144019Z.json",
+  "preflight_sha256": "6d5f4eec10b9b6e61f3d9f7ea27bf1849ba4d99d65fd7b703aee77bb864169d1",
+  "package_hashes": {
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "kernel_metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+    "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "scorecard_build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556"
+  },
+  "competition_rerun": false,
+  "official_submission_id": null,
+  "official_score": null,
+  "official_quota_used": false,
+  "exact_version_output": "PENDING",
+  "status": "RUNNING"
+}
