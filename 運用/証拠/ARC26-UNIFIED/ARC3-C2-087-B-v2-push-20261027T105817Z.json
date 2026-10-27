@@ -1,0 +1,105 @@
+{
+  "schema": "arc26-arc3-private-kernel-retry-push.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-087 online-learning B retry",
+  "observed_at_utc": "2026-10-27T10:58:17Z",
+  "operation": "one private version push after terminal pre-game mount failure",
+  "kernel": {
+    "slug": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+    "version": 2,
+    "status": "KernelWorkerStatus.QUEUED"
+  },
+  "retry_of": {
+    "version": 1,
+    "terminal_status": "KernelWorkerStatus.ERROR",
+    "error_log_sha256": "8fd04cbd6aef1856c2310600487b8d96299c3300ab49fa9648fb29d363bcf52e",
+    "error": "cp: cannot stat /kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy; subsequent FileNotFoundError for /kaggle/taaf-kaggle-source-share/src"
+  },
+  "candidate": {
+    "notebook_path": "出力/ARC3-RUN-003-local/C2-087/online-learning-r3-mount-retry-v2/submission.ipynb",
+    "notebook_sha256": "ac3d181536619cc3bd40077cd73fd44d39be39e4a0eeba8d14919b4649f468d7",
+    "metadata_path": "出力/ARC3-RUN-003-local/C2-087/online-learning-r3-mount-retry-v2/kernel-metadata.json",
+    "metadata_sha256": "ee088db354d9618b445e1fc6a2da6bd77556c5ec2c998d50d13a86751b4deca9",
+    "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "build_manifest_path": "出力/ARC3-RUN-003-local/C2-087/online-learning-r3-mount-retry-v2/build-manifest.json",
+    "build_manifest_sha256": "f2bf9d2f1667bc3b4b05baccb552f3e71ee2ab4378afcb78c55699ddbc554922"
+  },
+  "remote_verification": {
+    "pulled_version": 2,
+    "remote_notebook_path": "出力/ARC3-RUN-003-local/C2-087/online-learning-r3-mount-retry-v2/remote-v2/arc3-v6-learning-online-c2-087-r3.ipynb",
+    "remote_notebook_raw_sha256": "dc220d4b9354862680213a3df9d58554682821716e358e29ccee2e986b13eca1",
+    "ordered_cell_count_local": 28,
+    "ordered_cell_count_remote": 28,
+    "all_ordered_cell_sources_match": true
+  },
+  "matched_arm_contract": {
+    "prior_only_notebook_sha256": "f0b10932cf8cc688dbeb22e192cbaf3bba345649c59bd0ad7455390eda3a2646",
+    "prior_only_cell_count": 26,
+    "online_cell_count_before_retry_note": 28,
+    "treatment_diff_indices": [
+      6
+    ],
+    "only_treatment": "ARC3_HDS_GAME_RESPONSE_UPDATES disabled vs enabled",
+    "additional_retry_cells": [
+      "markdown note",
+      "comment-only code cell"
+    ],
+    "metadata_nonidentity_matches": true,
+    "same_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525"
+  },
+  "mount_diagnostic": {
+    "dataset_ref": "dfranzen/taaf-kaggle-source-bundle-copy",
+    "kaggle_dataset_search_found": true,
+    "dataset_bytes": 449765,
+    "last_updated": "2026-09-28T11:10:25.463",
+    "dataset_files_listing_included_expected_bundle_files": true,
+    "same_source_path_prior_kernel": "tecchannn/arc3-v6-online-official-c2-088/1",
+    "prior_kernel_status": "KernelWorkerStatus.COMPLETE",
+    "root_cause": "unresolved; retry tests whether the version-1 mount failure was transient"
+  },
+  "current_concurrent_run": {
+    "slug": "tecchannn/arc3-model-guided-c2-025",
+    "version": 29,
+    "status": "KernelWorkerStatus.RUNNING"
+  },
+  "local_score_context": {
+    "C2_087_A_mean_RHAE": 1.1904761904761905,
+    "C2_087_A_levels_completed": "1/21",
+    "C2_087_A_wins": 0,
+    "C2_088_online_cross_build_mean_RHAE": 5.273495,
+    "cross_build_delta": 4.083019,
+    "cross_build_is_not_causal": true,
+    "C2_087_B_v2_score": "PENDING"
+  },
+  "official": {
+    "best_public_score": 23.86,
+    "best_submission_id": 57577905,
+    "latest_submission_id": 57688735,
+    "latest_status": "SubmissionStatus.PENDING",
+    "latest_public_score": null,
+    "quota": {
+      "numToday": 1,
+      "numTotal": 8,
+      "remainingToday": 0
+    },
+    "official_submission_or_rerun_performed": false,
+    "competition_quota_used": false
+  },
+  "runtime_constraints": {
+    "is_private": true,
+    "enable_gpu": true,
+    "enable_internet": false,
+    "competition_source_attached": true,
+    "pilot": {
+      "games_max": 3,
+      "passes": 1,
+      "concurrency": 1,
+      "actions_max": 80,
+      "runtime_seconds_max": 1200,
+      "competition_rerun_allowed": false
+    },
+    "one_push_success": true,
+    "duplicate_push": false
+  },
+  "next": "Wait for exact version 2 to become terminal; retrieve exact outputs; run matched scorecard against A only after start-state and observed runtime checks; do not repush or trigger a competition rerun from this private pilot."
+}
