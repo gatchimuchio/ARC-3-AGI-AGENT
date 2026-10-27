@@ -1,0 +1,20 @@
+{
+  "schema": "arc3.c2_092.pilot.measurement_failure.v1",
+  "run_id": "ARC3-C2-092-target-color-guidance-pilot-v1-20261027",
+  "status": "INVALID_MEASUREMENT_ATTEMPT",
+  "failure_stage": "summary serialization after checkpoint was written",
+  "exception": "KeyError: target_color_rule_predictions",
+  "measurement_defect": "The first target-color rule extractor incorrectly required an Action-number condition to coexist with the target-color condition. HDS stores the target-color rule on Action6 updates with target color as its only condition, so the extractor reported zero active rules and emitted no prediction counts.",
+  "checkpoint_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-092-target-color-guidance-pilot-20261027.jsonl",
+  "checkpoint_sha256": "7ab37d370fef707ab02401b3e14d5fe8d4a6d2754bbc7ba7ffaa3beabf10e6a9",
+  "observed_pair": {
+    "seed": 7,
+    "public_start_index": 1,
+    "baseline_score": 0.0,
+    "candidate_score": 0.0,
+    "actions": 80,
+    "guided_choices": 0,
+    "active_target_color_rules_reported": 0
+  },
+  "interpretation": "Do not use as a valid scorecard or for adoption/rejection. The checkpoint is preserved as an incomplete diagnostic record; v2 corrected rule extraction and v3 added query caching."
+}

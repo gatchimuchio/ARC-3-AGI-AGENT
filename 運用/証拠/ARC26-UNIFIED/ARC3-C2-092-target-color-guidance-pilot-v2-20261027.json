@@ -1,0 +1,123 @@
+{
+  "schema": "arc3-hds-action6-target-color-guidance-dev.v1",
+  "observed_at_utc": "2026-10-27T06:25:11+00:00",
+  "evaluation": "paired public dev; current exploration policy versus one HDS target-color pseudo-observation in color-level UCB",
+  "split_seed": 20261022,
+  "public_environments": 25,
+  "selected_public_starts": 5,
+  "seed_groups": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_episode": 80,
+  "pair_limit": 1,
+  "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+  "python_version": "3.12.10",
+  "arc_agi_version": "0.9.8",
+  "arcengine_version": "0.9.3",
+  "base_agent_source_sha256": "b0643f6d6bfff7fa1520a86248d77963ffeff465b9674df2aa62acdd8a20bbba",
+  "policy_source_sha256": "7879f85b5a3434dc2f5426c4837914c41054cbe56360ed4324167dab93de0575",
+  "hds_source_sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57",
+  "hds_prior_memory_manifest_sha256": "d1b6e0cc3d14ce7c40c26567fefa226a2975c2e6d02725fb8bb404833963a1bd",
+  "target_color_prior": {
+    "evidence": "one virtual observation per target color with a fresh active HDS rule conditioned on target color and Action 6",
+    "response_to_policy_reward": {
+      "可視変化なし": -1.0,
+      "盤面変化": 0.25,
+      "レベル進行": 4.0,
+      "勝利": 4.0
+    },
+    "exploration": "base UCB exploration term is retained; unseen colors continue first-visit coverage"
+  },
+  "rows": [
+    {
+      "seed": 7,
+      "public_start_index": 1,
+      "baseline": {
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 2,
+        "no_ops": 1,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 78,
+        "hds_update_seconds": 39.300877,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      "candidate": {
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 2,
+        "no_ops": 1,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 78,
+        "hds_update_seconds": 67.59713,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      "target_color_query_attempts": 479,
+      "target_color_query_status_counts": {
+        "断定保留": 479
+      },
+      "target_color_rule_prediction_counts": {
+        "可視変化なし": 223,
+        "盤面変化": 226
+      },
+      "active_target_color_rules_after_episode": 1,
+      "target_color_guided_choices": 70,
+      "target_color_guided_outcome_counts": {
+        "盤面変化": 70
+      },
+      "missing_target_colors": 0
+    }
+  ],
+  "overall": {
+    "pairs": 1,
+    "baseline_rhae_mean": 0.0,
+    "candidate_rhae_mean": 0.0,
+    "score_delta_mean": 0.0,
+    "score_improvements": 0,
+    "score_regressions": 0,
+    "score_ties": 1,
+    "levels_delta_total": 0,
+    "wins_delta_total": 0,
+    "no_ops_delta_total": 0,
+    "target_color_query_attempts": 479,
+    "target_color_rule_predictions": 449,
+    "target_color_guided_choices": 70
+  },
+  "by_seed": [
+    {
+      "seed": 7,
+      "pairs": 1,
+      "baseline_rhae_mean": 0.0,
+      "candidate_rhae_mean": 0.0,
+      "score_delta_mean": 0.0,
+      "score_improvements": 0,
+      "score_regressions": 0,
+      "score_ties": 1,
+      "levels_delta_total": 0,
+      "wins_delta_total": 0,
+      "no_ops_delta_total": 0,
+      "target_color_query_attempts": 479,
+      "target_color_rule_predictions": 449,
+      "target_color_guided_choices": 70
+    }
+  ],
+  "gates": {
+    "dev_mean_delta_at_least_0_01": false,
+    "improvements_at_least_regressions": true,
+    "levels_not_regressed": true,
+    "wins_not_regressed": true
+  },
+  "passes_dev_gate": false,
+  "elapsed_seconds": 221.81421,
+  "official_submission_made": false,
+  "runtime_modified": false,
+  "interpretation": "local public-dev evidence only; passing requires fresh-seed holdout and full public evaluation before any runtime promotion"
+}
