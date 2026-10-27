@@ -1,0 +1,179 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-scorecard.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-058",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 27,
+  "status_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-complete-20261025T141624Z.json",
+  "candidate_notebook_sha256": "b72c8105c1916337d6016e224762afe3d9a0c3be24a4abb539b83591e6ca48d0",
+  "candidate_output_directory": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z",
+  "candidate_output_file_count": 23,
+  "candidate_output_total_bytes": 111767942,
+  "candidate_output_manifest_sha256": "eccd612c2f083969536b9bf53addc5e7f7c647c607e08cdeef21c7f2a457a205",
+  "candidate_benchmark_sha256": "cfe7c7c70ef06c719a01011a527ee9cd6742299f60cf40f615bfaf73fdc2596b",
+  "control": "C2-046 slim",
+  "control_output_directory": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim",
+  "control_benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+  "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+  "score_source_file": ".venv/Lib/site-packages/arc_agi/scorecard.py",
+  "score_source_file_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7",
+  "scorecard_source_sha256": "4d72fbe3dc13b9ce0d5c2ed6d2b28216eb24bdc4b73f7c06a6fbdaf463602729",
+  "paired_games": 3,
+  "paired_start_checks": {
+    "m0r0-492f87ba": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "all_initial_event_fields_match": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true
+    },
+    "sk48-d8078629": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "all_initial_event_fields_match": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true
+    },
+    "tn36-ef4dde99": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "all_initial_event_fields_match": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true
+    }
+  },
+  "candidate_per_game": {
+    "sk48-d8078629": {
+      "state": "gave_up",
+      "levels_completed": 1,
+      "levels_total": 8,
+      "score": 1.6989005771057053,
+      "actions": 100,
+      "generated_tokens_reported_field": 0,
+      "generated_tokens_history_sum": 152442,
+      "uncached_input_tokens_history_sum": 0,
+      "wallclock_seconds": 1200.178331184
+    },
+    "tn36-ef4dde99": {
+      "state": "gave_up",
+      "levels_completed": 4,
+      "levels_total": 7,
+      "score": 35.714285714285715,
+      "actions": 160,
+      "generated_tokens_reported_field": 0,
+      "generated_tokens_history_sum": 125441,
+      "uncached_input_tokens_history_sum": 0,
+      "wallclock_seconds": 2057.457126318
+    },
+    "m0r0-492f87ba": {
+      "state": "gave_up",
+      "levels_completed": 0,
+      "levels_total": 6,
+      "score": 0.0,
+      "actions": 160,
+      "generated_tokens_reported_field": 0,
+      "generated_tokens_history_sum": 136837,
+      "uncached_input_tokens_history_sum": 0,
+      "wallclock_seconds": 3060.267372359
+    }
+  },
+  "control_per_game": {
+    "sk48-d8078629": {
+      "state": "gave_up",
+      "levels_completed": 1,
+      "levels_total": 8,
+      "score": 2.7777777777777777,
+      "actions": 99,
+      "generated_tokens_reported_field": 0,
+      "generated_tokens_history_sum": 166375,
+      "uncached_input_tokens_history_sum": 0,
+      "wallclock_seconds": 1200.140454033
+    },
+    "tn36-ef4dde99": {
+      "state": "gave_up",
+      "levels_completed": 2,
+      "levels_total": 7,
+      "score": 7.5306424344885885,
+      "actions": 130,
+      "generated_tokens_reported_field": 0,
+      "generated_tokens_history_sum": 165870,
+      "uncached_input_tokens_history_sum": 0,
+      "wallclock_seconds": 2400.1527289500004
+    },
+    "m0r0-492f87ba": {
+      "state": "gave_up",
+      "levels_completed": 4,
+      "levels_total": 6,
+      "score": 47.61904761904761,
+      "actions": 160,
+      "generated_tokens_reported_field": 0,
+      "generated_tokens_history_sum": 107503,
+      "uncached_input_tokens_history_sum": 0,
+      "wallclock_seconds": 3187.6819675549996
+    }
+  },
+  "candidate_scores": {
+    "m0r0-492f87ba": 0.0,
+    "sk48-d8078629": 1.6989005771057053,
+    "tn36-ef4dde99": 35.714285714285715
+  },
+  "control_scores": {
+    "m0r0-492f87ba": 47.61904761904761,
+    "sk48-d8078629": 2.7777777777777777,
+    "tn36-ef4dde99": 7.5306424344885885
+  },
+  "paired_deltas": {
+    "m0r0-492f87ba": -47.61904761904761,
+    "sk48-d8078629": -1.0788772006720724,
+    "tn36-ef4dde99": 28.183643279797128
+  },
+  "candidate_mean": 12.471062097130472,
+  "control_mean": 19.309155943771326,
+  "paired_mean_delta": -6.838093846640854,
+  "improved_unchanged_regressed": [
+    1,
+    0,
+    2
+  ],
+  "candidate_levels_completed": 5,
+  "control_levels_completed": 7,
+  "candidate_total_actions": 420,
+  "control_total_actions": 389,
+  "candidate_total_generated_tokens": 414720,
+  "control_total_generated_tokens": 439748,
+  "candidate_run_states": {
+    "gave_up": 3
+  },
+  "candidate_saved_scores_match_recomputed": true,
+  "control_saved_scores_match_recomputed": true,
+  "acceptance": "candidate mean > 19.309155943771326 and paired mean delta > 0",
+  "decision": "REJECT_C2-058",
+  "official_submission_or_quota_use": false,
+  "supersedes": [
+    "ARC3-C2-058-v27-terminal-scorecard.json",
+    "ARC3-C2-058-v27-terminal-scorecard-v2.json"
+  ],
+  "correction_note": "v1 had zero token fields, and v2 per-game control token fields were not history sums. v3 reports per-action history sums for both runs.",
+  "note": "Kaggle requests.jsonl download is partial; the local score uses complete benchmark.json and paired initial event records, not the request transcript."
+}

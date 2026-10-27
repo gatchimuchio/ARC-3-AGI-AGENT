@@ -1,0 +1,61 @@
+{
+  "schema": "arc26-arc3-candidate-preflight-v1",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-25T00:50:31Z",
+  "candidate": "generic prior-memory context coefficient 0.25 -> 0.0",
+  "local_paired_evaluation": {
+    "evidence_file": "運用/証拠/ARC26-UNIFIED/ARC3-prior-memory-coefficient-paired-eval-20261025T004422Z.json",
+    "evidence_sha256": "0bbd902a19ed8d3d22f860164acdb2494e9553f981f93ad6cda2453a47fba722",
+    "paired_public_starter_episodes": 25,
+    "previous_levels": 2,
+    "candidate_levels": 3,
+    "level_delta": 1,
+    "previous_wins": 0,
+    "candidate_wins": 0,
+    "episode_level_regressions": 0,
+    "episode_level_improvements": 1,
+    "episode_level_ties": 24,
+    "episode_ids_or_rows_persisted": false
+  },
+  "candidate_artifact": {
+    "output_dir": "出力/ARC3-SUBMIT-012-prior-memory-20261025",
+    "kernel_id": "tecchannn/arc3-observation-driven-exploration-candidate",
+    "kernel_version": 6,
+    "kernel_status": "KernelWorkerStatus.COMPLETE",
+    "notebook_sha256": "957182aee3420dfa2687cfe6a5ca95e5b47af69fd3f29dfb7402bb2f5dd0a3f4",
+    "source_bundle_sha256": "d802bdad39437e5e31617cba4653b69dae447450d172f29281716859165a3319",
+    "metadata": {
+      "private": true,
+      "internet": false,
+      "gpu": false,
+      "competition_source": "arc-prize-2026-arc-agi-3"
+    },
+    "targeted_tests": "5 passed in 9.02s",
+    "private_run_output": {
+      "file": "出力/ARC3-SUBMIT-012-prior-memory-20261025/kaggle-output-v6/submission.parquet",
+      "sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+      "rows": 1,
+      "columns": [
+        "row_id",
+        "game_id",
+        "end_of_game",
+        "score"
+      ],
+      "kind": "Save & Run All placeholder only; no competition score evaluated"
+    }
+  },
+  "official_gate": {
+    "latest_submission_id": "57577905",
+    "latest_status": "SubmissionStatus.COMPLETE",
+    "latest_public_score": 23.86,
+    "latest_submitted_at_utc": "2026-10-24T01:15:49.963Z",
+    "quota_observation_at_utc": "2026-10-25T00:50:31Z",
+    "num_today": 0,
+    "num_total": 6,
+    "num_allowed_now": 1,
+    "limited_by_total": false,
+    "next_eligible_at_utc": "2026-10-25T01:15:49.963Z",
+    "official_submission_or_rerun_performed": false,
+    "decision": "WAIT_FOR_24H_GATE_AND_REFRESH_OFFICIAL_RULES_HISTORY_QUOTA"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "task_id": "ARC3-RUN-003-C1-020",
+  "scope": {
+    "public_runs": 25,
+    "action_responses": 1906,
+    "positive_public_level_transitions": 47,
+    "grouped_folds": 5,
+    "split_seed": 20261024,
+    "group_names_retained": false,
+    "trajectory_replayed": false
+  },
+  "feature_policy": {
+    "visual_feature_count": 14,
+    "visual_features": [
+      "distinct_value_count",
+      "ranked_value_frequency_1",
+      "ranked_value_frequency_2",
+      "ranked_value_frequency_3",
+      "ranked_value_frequency_4",
+      "ranked_value_frequency_5",
+      "ranked_value_frequency_6",
+      "ranked_value_frequency_7",
+      "ranked_value_frequency_8",
+      "value_entropy_bits",
+      "active_row_fraction",
+      "active_column_fraction",
+      "horizontal_inequality_fraction",
+      "vertical_inequality_fraction"
+    ],
+    "action_categories": 9,
+    "color_label_invariant": true,
+    "pre_action_board_only": true,
+    "absolute_level_excluded": true,
+    "coordinates_and_display_excluded": true
+  },
+  "positive_rate": 0.02465897166841553,
+  "oof_metrics": {
+    "base_rate": {
+      "pr_auc": 0.023248667829133905,
+      "brier": 0.02405459391917134
+    },
+    "action_only": {
+      "pr_auc": 0.024711286858358158,
+      "brier": 0.024062433964786935
+    },
+    "visual_only": {
+      "pr_auc": 0.03168096913315084,
+      "brier": 0.02408799103190373
+    },
+    "action_visual": {
+      "pr_auc": 0.022116063308231234,
+      "brier": 0.024105400566506868
+    }
+  },
+  "delta_action_visual_vs_base_rate": {
+    "pr_auc": -0.0011326045209026706,
+    "brier": 5.080664733552939e-05
+  },
+  "delta_action_visual_vs_action_only": {
+    "pr_auc": -0.002595223550126924,
+    "brier": 4.2966601719932745e-05
+  },
+  "folds_where_action_visual_beats_action_only_on_both": 0,
+  "visual_signal_supported": false,
+  "cross_checks": {
+    "action_count_matches_C1_019": true,
+    "public_level_transitions_match_C1_019": true,
+    "same_run_never_crosses_fold": true,
+    "no_zero_positive_heldout_fold": true
+  },
+  "limitations": [
+    "Grouped prediction is observational; it does not establish a causal action improvement.",
+    "The 47 positive transitions are sparse and come from one saved model/prompt run per public environment.",
+    "Only this fixed generic feature set and regularization were evaluated; no post-result tuning was performed.",
+    "No predictions or per-run observations are retained in the aggregate."
+  ]
+}

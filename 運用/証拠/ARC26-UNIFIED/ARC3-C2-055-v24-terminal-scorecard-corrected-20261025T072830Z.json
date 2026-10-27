@@ -1,0 +1,113 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-scorecard.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-055",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 24,
+  "kernel_status": "KernelWorkerStatus.COMPLETE",
+  "terminal_status_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-055-v24-terminal-status-20261025T071808Z.json",
+  "benchmark_started_at": "2026-10-25T06:50:58.118917",
+  "benchmark_ended_at": "2026-10-25T07:16:10.582603",
+  "benchmark_runtime_seconds": 1512.463686,
+  "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+  "score_source_file_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7",
+  "remote_notebook_sha256": "a101e824985ad30a19c610569faacf24b0b5b1d46b0acf71c0223a641adea5fc",
+  "output_directory": "出力/ARC3-RUN-003-local/C2-055-low-thinking-mode/kaggle-output/v24-terminal-20261025T0718Z",
+  "output_file_count": 31,
+  "output_manifest_sha256": "a2118d164840644de3f744a215e5ee64ffa41afe84dbbb0964c07cb97da62d99",
+  "benchmark_sha256": "6e454c83de2fe80473fd3dae6ffc7f84dbfa564ff9d2cb7dcbbff7a4f436a588",
+  "summary_sha256": "afd57047198c5e92e0ff5f1159e1f28e017c8c977aa8c4decaeb21ac23290522",
+  "request_log_sha256": "d6aac3a604b0853824164b2e64f16458c342d2b3870c44a29045778ce2c3002f",
+  "event_log_sha256": {
+    "m0r0-492f87ba": "692f7eea647fe83642fec12acc36251c36b2ae6089c543f579d6a49086d812a2",
+    "sk48-d8078629": "87ba2338d79ad7cb993d1a5cf5fb881b39349cc60c1115b6c3cd3cc4f7f24ea8",
+    "tn36-ef4dde99": "600da31830a3d947c3cf7120d56f1b8a25bf6a63665970d9354e42cb4f772dfe"
+  },
+  "control_benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+  "control_source": "C2-046 slim, confirmed by saved public-baseline scorecard reference",
+  "paired_games": 3,
+  "paired_start_checks": {
+    "m0r0-492f87ba": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "full_initial_event_record": true,
+      "public_baseline_actions": true
+    },
+    "sk48-d8078629": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "full_initial_event_record": true,
+      "public_baseline_actions": true
+    },
+    "tn36-ef4dde99": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "full_initial_event_record": true,
+      "public_baseline_actions": true
+    }
+  },
+  "candidate_scores": {
+    "m0r0-492f87ba": 0.0,
+    "sk48-d8078629": 0.0,
+    "tn36-ef4dde99": 0.0
+  },
+  "control_C2_046_slim_scores": {
+    "m0r0-492f87ba": 47.61904761904761,
+    "sk48-d8078629": 2.7777777777777777,
+    "tn36-ef4dde99": 7.5306424344885885
+  },
+  "paired_deltas_vs_C2_046_slim": {
+    "m0r0-492f87ba": -47.61904761904761,
+    "sk48-d8078629": -2.7777777777777777,
+    "tn36-ef4dde99": -7.5306424344885885
+  },
+  "candidate_mean": 0.0,
+  "control_mean": 19.309155943771326,
+  "paired_mean_delta_vs_C2_046_slim": -19.309155943771326,
+  "improved_unchanged_regressed": [
+    0,
+    0,
+    3
+  ],
+  "candidate_total_completed_levels": 0,
+  "control_total_completed_levels": 7,
+  "candidate_total_actions": 472,
+  "control_total_actions": 389,
+  "candidate_total_generated_tokens": 0,
+  "candidate_wins": 0,
+  "candidate_states": {
+    "gave_up": 3
+  },
+  "candidate_saved_scores_match_recomputed": true,
+  "control_saved_scores_match_recomputed": true,
+  "earlier_audit_correction": {
+    "superseded_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-055-v24-terminal-scorecard-20261025T072735Z.json",
+    "superseded_sha256": "60b12039601598f265336ae6df6666d2f508805c8c9807e51ac9e5cb1220390f",
+    "reason": "The initial one-off audit used C2-046 off instead of the specified C2-046 slim comparator. The candidate score of 0.00 was correct, but its comparator/delta was invalid. This record uses the verified slim benchmark."
+  },
+  "score_decision": "REJECT_C2-055; candidate mean is below C2-046 slim and paired mean delta is negative.",
+  "official_submission_or_quota_use": false,
+  "observed_at_utc": "2026-10-25T07:28:30Z",
+  "candidate_notebook_sha256": "c88af3f37aa9e6ff13a972f9fc07fbff1ae5042fa1d7be694d991305a6168777"
+}

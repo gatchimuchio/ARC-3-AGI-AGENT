@@ -1,0 +1,95 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-052",
+  "observed_at_utc": "2026-10-25T01:25:18Z",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "kernel_version": 21,
+  "kernel_status": "KernelWorkerStatus.COMPLETE",
+  "notebook_sha256": "77f99e38bd8f674d05027d814348db6934f63ab9a0917fd702a406155128842b",
+  "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "benchmark_started_utc": "2026-10-25T00:24:07Z",
+  "benchmark_ended_utc": "2026-10-25T01:16:29Z",
+  "benchmark_duration_seconds": 3142,
+  "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+  "scorecard_source_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7",
+  "dataset": "same 3 public games, seed 0, one pass; paired to C2-046 slim; identities omitted",
+  "paired_games": 3,
+  "public_metadata_matches": 3,
+  "initial_boards_match": 3,
+  "control_saved_scores_match_recomputed": 3,
+  "candidate_saved_scores_match_recomputed": 3,
+  "control_mean": 19.309155943771326,
+  "candidate_mean": 6.334139442172682,
+  "median_candidate_score": 3.571428571428571,
+  "paired_mean_delta": -12.975016501598644,
+  "improved": 0,
+  "unchanged": 0,
+  "regressed": 3,
+  "candidate_per_game_scores_anonymous": [
+    14.285714285714285,
+    1.1452754693751923,
+    3.571428571428571
+  ],
+  "paired_deltas_anonymous": [
+    -33.33333333333333,
+    -1.6325023084025854,
+    -3.9592138630600173
+  ],
+  "candidate_actions": 480,
+  "candidate_completed_levels": 4,
+  "candidate_wins": 0,
+  "candidate_states": {
+    "gave_up": 3
+  },
+  "candidate_actions_per_game": [
+    160,
+    160,
+    160
+  ],
+  "candidate_completed_levels_per_game": [
+    2,
+    1,
+    1
+  ],
+  "total_generated_tokens": 453536,
+  "benchmark_summary_mean": 6.33,
+  "benchmark_summary_median": 3.57,
+  "trace_audit": {
+    "level_transition_counts_anonymous": [
+      2,
+      1,
+      1
+    ],
+    "total_level_transitions": 4,
+    "nudge_user_prompt_blocks": 56,
+    "nudge_blocks_with_both_sections": 56,
+    "nudge_followed_by_world_model_or_plan_update": 52,
+    "assistant_world_model_update_lines_total": 9,
+    "assistant_plan_update_lines_total": 100,
+    "world_model_update_snippets_seen_in_next_prompt": 7,
+    "plan_update_snippets_seen_in_next_prompt": 70,
+    "nudge_prompts_by_game_anonymous": [
+      36,
+      3,
+      17
+    ],
+    "update_blocks_after_nudge_by_game_anonymous": [
+      36,
+      0,
+      16
+    ],
+    "explicit_memory_rejection_markers_in_nudged_assistant_blocks": 0,
+    "interpretation": "nudge delivery confirmed; some fresh section text carried into later prompts, but rebuild behavior was inconsistent across games; no explicit rejection markers found in audited transcript blocks"
+  },
+  "output_files_count": 31,
+  "output_total_bytes": 136666078,
+  "output_sha256": {
+    "benchmark_json": "b5cfdfb7eaf1c4b501560525a6404efe90def33b51ef2363417680b8122b2160",
+    "summary_txt": "8c7b4feef6505d6994cce06acf3fa533b3e4bf540200136e4540f673f49b24b5",
+    "requests_jsonl": "8c20a5a03808d1423b7a9c731f27ed06f5264ee9dc516c6bab667f50f2bccc44",
+    "submission_parquet": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb",
+    "event_artifacts_bundle": "56df647136e6ee66730692af3947be62985babd9c30a3189653865f61dbe6616",
+    "transcript_bundle": "e12650c56040441728ff40687623193d4dc635dc70daf3b12eb9a24e86da3a98"
+  },
+  "decision": "rejected: candidate mean is below the C2-046 slim pilot reference; do not promote or use an official submission/quota",
+  "official_submission_or_quota_use": false
+}

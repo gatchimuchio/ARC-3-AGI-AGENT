@@ -1,0 +1,179 @@
+{
+  "schema": "arc3-pre4cc-locality-observer-arms-preflight.v1",
+  "observed_at_utc": "2026-10-27T01:18:47+00:00",
+  "sources": {
+    "検証/ARC3局所応答observer候補構築.py": "1d10bbce0082c79a802b9425b243fdd91e194402c24802ec3854c2d6391a47df",
+    "検証/候補/ARC3Action6局所応答observer.py": "42f7596610f89e54a0fd9c0645f18546e3799ec0719f87f845c2b42f739fcc13",
+    "検証/候補/ARC3PythonHDS局所応答runtime.py": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8",
+    "検証/test_ARC3局所応答observer候補.py": "2f90f2cbaaa8568c4f1c8c9f3fe9369e7b1330df8ecbbb53aadafcf1bc731c0b"
+  },
+  "arms": [
+    {
+      "visibility": "masked",
+      "kernel_id": "tecchannn/arc3-v6-pre4cc-locality-masked-c2-085",
+      "title": "arc3-v6-pre4cc-locality-masked-c2-085",
+      "notebook_sha256": "3c5f1b74ca489fd565df8f8fe557de51b36502625ff2b297c79233971c0a1c4b",
+      "metadata_sha256": "cdc6f62021f780f033c1bed9eb38351d76c8cbd9efce7a4f444afb73492d3002",
+      "manifest_sha256": "b695824bff67d0d934bf7ba4308769c23c88d198682d6fdcc19c0e995c2df1a1",
+      "bundle_sha256": "d66a348026852a9a8e3286d22ae7dfacb10b7cf7d7b26ae8c8cbf33862418312",
+      "runtime_sha256": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8",
+      "pilot": {
+        "games_max": 3,
+        "passes": 1,
+        "concurrency": 1,
+        "actions_max": 80,
+        "runtime_seconds_max": 1200,
+        "competition_rerun_allowed": false
+      },
+      "budgets": {
+        "update_budget": 80,
+        "query_budget": 80,
+        "hds_seconds_budget": 120.0
+      },
+      "seed": 0,
+      "cpu": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "masked",
+        "native_HDS_patched": false
+      }
+    },
+    {
+      "visibility": "shown",
+      "kernel_id": "tecchannn/arc3-v6-pre4cc-locality-shown-c2-085",
+      "title": "arc3-v6-pre4cc-locality-shown-c2-085",
+      "notebook_sha256": "14ad90b5dd4c5ee4fa373420431f01ec0526b2613788efb1a8276b738b5c1bc9",
+      "metadata_sha256": "cd32070f03a8236e8f2187bc38f017ef4c99ec3fadf96f2701bc6cb17d49bfaf",
+      "manifest_sha256": "78dec12f8e11658c636f7ce36ffd5aa692c1a5af118574d3f314e75deb0c1d4a",
+      "bundle_sha256": "d66a348026852a9a8e3286d22ae7dfacb10b7cf7d7b26ae8c8cbf33862418312",
+      "runtime_sha256": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8",
+      "pilot": {
+        "games_max": 3,
+        "passes": 1,
+        "concurrency": 1,
+        "actions_max": 80,
+        "runtime_seconds_max": 1200,
+        "competition_rerun_allowed": false
+      },
+      "budgets": {
+        "update_budget": 80,
+        "query_budget": 80,
+        "hds_seconds_budget": 120.0
+      },
+      "seed": 0,
+      "cpu": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false
+      }
+    }
+  ],
+  "focused_pytest": {
+    "passed": 14,
+    "elapsed_seconds": 9.73,
+    "pure_math_oracle_pairs": 32,
+    "fixed7x7_flag_classes": 4
+  },
+  "ruff": "PASS",
+  "arms_identical_source_prompt_model_config_bundle": true,
+  "notebooks_differ_only_evidence_visibility": true,
+  "metadata_differ_only_id_title": true,
+  "model_seed_shared": 0,
+  "C2_081_r2_sources_and_both_artifact_triples_unchanged": true,
+  "frozen_R2_runtime_reused_exactly": true,
+  "solver_and_Python_RPC_sources_byte_identical_to_R2": true,
+  "ToolAgent_AST_changed_functions_only": [
+    "_build_user_prompt"
+  ],
+  "native_prior_bridge_unchanged": [
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+      "sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+      "sha256": "a6cab8fca7cb591c42fa7444f9678fe0003da69faafcce852598286dceb522e2"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+      "sha256": "50c48e5a9a8aa39158d0cdaacc0501608a829486960d41cb2fea6cb02e5660a4"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/型.py",
+      "sha256": "aa1241708655280b36564f5e3ff6968849b4d09790b8932aabad1570cbca302c"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "sha256": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+      "sha256": "bb7e85c2dbafbd430f1b7733bf3a2d307dc24e3227e79994b491cf711322f715"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+      "sha256": "2ba7ceb8d0d6c784d092f91fe484477127f044e50f68c54c977374b17f2f6361"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+      "sha256": "315dd0d23a9682cdf14be71346341976cbdbcd2cbd924a250afc4ad53058dba6"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+      "sha256": "e23f271d38e1f52d75557dbf3342abf7b59a85fbdc315a06c0040fd7ca204eb3"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+      "sha256": "8aa431b3012424fd8347c5b3d93a5fbf2218d35020836f5d40abb427f9d6da0d"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "sha256": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+      "sha256": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac"
+    },
+    {
+      "path": "接続/ARC3事前記憶.py",
+      "sha256": "518456b3b4cdaeb352a093c65d14eb0eb1a30ce70576d6298d501ec75b2b5bc1"
+    },
+    {
+      "path": "検証/ARC3視覚HDS接続候補.py",
+      "sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617"
+    }
+  ],
+  "native_python_files_unchanged": 12,
+  "C2_079_native_scope_patch_used": false,
+  "GPU_offline_loader_imports_included": false,
+  "one_PRE_integer_feature": [
+    "作用前公開状態",
+    "作用点同色4連結成分面積"
+  ],
+  "same_PRE_area_in_actual_native_query_and_teacher_verified": true,
+  "actual_after_only_teacher_target": "公開作用点効果区分",
+  "query_contains_no_teacher_fields": true,
+  "nonAction6_new_fields_omitted": true,
+  "locality_4classes_are_geometry_not_progress_causality_or_noop_failure": true,
+  "shape_mismatch_or_empty_AFTER": "UNKNOWN neweffect omitted; original public outcome retained",
+  "original_WIN_GAME_OVER_progress_RESET_contract_preserved": true,
+  "native_HOLD_and_missing_unknown_preserved": true,
+  "linked_locality_values_are_not_guarded_qualified_forecasts": true,
+  "offline_positive_evidence_context": "Reduced availability-absent; one reusedgame only",
+  "candidate_context": "Full original before-context including public action count plus ONE exact PREarea integer",
+  "runtime_score_gain_or_causal_action_improvement_proven": false,
+  "action_authorization": false,
+  "endorsement": false,
+  "Kaggle_GPU_or_main_promotion_performed": false,
+  "adoption_status": "LOCAL_VERIFICATION_CANDIDATE_ONLY; no push/promotion",
+  "CPU_RPC_note": "RPC source unchanged from frozen C2-081r2. Its previously reported Windows65KB -c launcher limit and identical-bootstrap TEMP-file CPU adapter remain; no Linux/GPU launch claim."
+}

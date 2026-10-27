@@ -12,8 +12,8 @@ def 独立過程で実行(kind):
     # 本試験の950MiB上限と混同しないよう、同じCLIを直列の新規過程で実行する。
     root=Path(__file__).resolve().parents[1]
     completed=subprocess.run(
-        [sys.executable,'-m','検証.関節線接続.検証する','--kind',kind],
-        cwd=root,env=os.environ.copy(),capture_output=True,text=True)
+        [sys.executable,'-X','utf8','-m','検証.関節線接続.検証する','--kind',kind],
+        cwd=root,env=os.environ.copy(),capture_output=True,text=True,encoding='utf-8')
     if completed.returncode:
         raise RuntimeError('独立検証過程が失敗: '+str(completed.returncode)+'\n'+completed.stdout+'\n'+completed.stderr)
     report=json.loads(completed.stdout)

@@ -1,0 +1,110 @@
+{
+  "schema": "arc3-native-game-learning-ablation-preflight.v1",
+  "created_at_utc": "2026-10-27T01:46:10.200641+00:00",
+  "scope": "LOCAL CPU preparation only; no model inference, real SDK game execution, Kaggle operation or promotion",
+  "sources": {
+    "検証/ARC3native学習差分候補構築.py": "eed35c7bf2ac128ac946508ba170c4cf17125a80fba272f4ba8ec600f87030f6",
+    "検証/候補/ARC3PythonHDS学習有効無効runtime.py": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d",
+    "検証/test_ARC3native学習差分候補.py": "5ce7e3f375e3983f7f87f7991b4434afe7b4ed519ec63f36379dfc5108831d36"
+  },
+  "targeted_pytest": {
+    "command": "uv run --locked pytest -q 検証/test_ARC3native学習差分候補.py",
+    "passed": 7,
+    "elapsed_seconds": 17.75
+  },
+  "ruff_check_passed": true,
+  "cpu_compile_scope": "53 public Python source files and generated Python patch cell6; original notebook shell/IPython cells preserved",
+  "runtime_contracts": {
+    "actual_original_native_spy_enabled_game_teachers": 4,
+    "actual_original_native_spy_disabled_game_teachers": 0,
+    "computed_actual_teacher_rows_each_arm": 4,
+    "actual_native_queries_each_arm": 4,
+    "prior_updates_succeeded_each_arm": 5,
+    "disabled_native_knowledge_unchanged_through_actual_teacher_sequence": true,
+    "disabled_renderer_contains_no_new_target_predictions_from_teacher_rows": true,
+    "enabled_exactly_one_native_game_update_per_valid_response_in_fixture": true,
+    "disabled_status": "game_response_update_disabled",
+    "disabled_skip_is_expected_not_budget_exhaustion_or_judgment": true,
+    "query_budget_failure_preserves_actual_legal_action": true,
+    "configuration_drift_cannot_silently_enable_learning": true,
+    "prior_initialization_honestly_separate": true,
+    "frozen_observer_lifecycle_and_native_uncertainty_prefix_preserved": true,
+    "native_judgment_or_action_authorization_overridden": false
+  },
+  "artifact_comparison": {
+    "both_visibility": "shown",
+    "bundle_bytes_identical": true,
+    "only_notebook_difference": "cell6 explicit ARC3_HDS_GAME_RESPONSE_UPDATES disabled/enabled",
+    "metadata_difference_only": [
+      "id",
+      "title"
+    ],
+    "id_title_normalize_identically": true,
+    "same_prompt_model_seed_config_observer_helper_and_budget": true,
+    "same_preflight_public_source_as_frozen085": true,
+    "bundle_changed_members_from085": [
+      "ARC3-VISUAL-HDS-MANIFEST.json",
+      "arc3_visual_hds_runtime.py"
+    ],
+    "native12_prior_bridge_R3base_and081base_bytes_equal_frozen085": true,
+    "new_runtime_exact_frozen085_prefix": true,
+    "C2_081_active_shown_r2_notebook_preserved": true,
+    "C2_085_sources_snapshots_and_proof_preserved": true
+  },
+  "arms": [
+    {
+      "folder": "出力/ARC3-RUN-003-local/C2-087/prior-only",
+      "kernel_id": "tecchannn/arc3-v6-learning-prior-only-c2-087",
+      "title": "arc3-v6-learning-prior-only-c2-087",
+      "mode": "disabled",
+      "notebook_sha256": "4f9b890ce41f7bd6b52037189a7e98d21fdba642d74a56e8547807b723ba48e4",
+      "metadata_sha256": "3e6a587ad32d37046cc7167f287bb1c3072e6449d990688b987c294830077739",
+      "manifest_sha256": "8c7966d0e18378db2dc723e6b15d4a4b6cca9eeb3571556d87edaba8d41f386e",
+      "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+      "CPU_generated_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false,
+        "game_response_learning_mode": "disabled",
+        "prior_initialization_separate_from_game_update_gate": true
+      }
+    },
+    {
+      "folder": "出力/ARC3-RUN-003-local/C2-087/online-learning",
+      "kernel_id": "tecchannn/arc3-v6-learning-online-c2-087",
+      "title": "arc3-v6-learning-online-c2-087",
+      "mode": "enabled",
+      "notebook_sha256": "181f9d469c12081ba818ad92838a85f189bbc9476cee53456b7c71db42d56f9b",
+      "metadata_sha256": "a2ccde6acc6d63b226f3018bdb2eac9649a047f5675c1b51f6589c721730266f",
+      "manifest_sha256": "6652206a114a6e116bf151485f4ddfedfafdc0f08bcc271c97d6262d7ac18129",
+      "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+      "CPU_generated_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false,
+        "game_response_learning_mode": "enabled",
+        "prior_initialization_separate_from_game_update_gate": true
+      }
+    }
+  ],
+  "limits": [
+    "GPU/model inference and learning effect score gain remain UNPROVEN.",
+    "Original full context includes action availability; old C2-084 positive probe used reduced context.",
+    "Identical model seed does not prove deterministic GPU outputs or initial state equivalence.",
+    "A disabled update is an explicit experimental skip, not an HDS HOLD/PASS decision.",
+    "Prior initialization updates and query ID advancement remain real operations.",
+    "Original Windows python -c sandbox launch length limit remains; Linux/GPU RPC not verified.",
+    "C2-085 visibility-only study is not completed by this learning ablation.",
+    "No Kaggle operation, official submission, active-kernel edit, promotion or canonical source edit."
+  ]
+}

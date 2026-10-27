@@ -1,0 +1,82 @@
+{
+  "aggregate": {
+    "candidate_actions": 420,
+    "candidate_board_change_rate": 0.9571428571428572,
+    "candidate_board_changes": 402,
+    "candidate_no_change_actions": 18,
+    "control_actions": 389,
+    "control_board_change_rate": 0.974293059125964,
+    "control_board_changes": 379,
+    "control_no_change_actions": 10
+  },
+  "candidate_benchmark": {
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/benchmark.json",
+    "sha256": "cfe7c7c70ef06c719a01011a527ee9cd6742299f60cf40f615bfaf73fdc2596b"
+  },
+  "control_benchmark": {
+    "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/benchmark.json",
+    "sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e"
+  },
+  "definition": "Count only type=action events; compare each board to the previous initial/action event, ignoring analysis events. Action counts were cross-checked against benchmark action totals for each game.",
+  "experiment_id": "ARC3-RUN-003/C2-058-v27-board-change-diagnostic",
+  "games": {
+    "m0r0-492f87ba": {
+      "candidate": {
+        "action_events": 160,
+        "board_changes": 149,
+        "event_file_sha256": "59d364e2699efbfb869f6946a3259db0a4da2473ebb7b418ecae61f73ee9d5a5",
+        "levels_completed": 0,
+        "no_change_actions": 11,
+        "score": 0.0
+      },
+      "control": {
+        "action_events": 160,
+        "board_changes": 153,
+        "event_file_sha256": "1f1569bad11346caa3b43f8634551374ab7e246b6c9733ef5bfac2cabd3e481f",
+        "levels_completed": 4,
+        "no_change_actions": 7,
+        "score": 47.61904761904761
+      }
+    },
+    "sk48-d8078629": {
+      "candidate": {
+        "action_events": 100,
+        "board_changes": 93,
+        "event_file_sha256": "c55b7f4be5ca9e2ad2630c1971ebb5f436634f3ad378e98c8cfa2b88fa0d02dc",
+        "levels_completed": 1,
+        "no_change_actions": 7,
+        "score": 1.6989005771057053
+      },
+      "control": {
+        "action_events": 99,
+        "board_changes": 96,
+        "event_file_sha256": "261bbf454b94a0058770a7bcaf37ab13ad65be2e6c5d787e840af2e5c4071021",
+        "levels_completed": 1,
+        "no_change_actions": 3,
+        "score": 2.7777777777777777
+      }
+    },
+    "tn36-ef4dde99": {
+      "candidate": {
+        "action_events": 160,
+        "board_changes": 160,
+        "event_file_sha256": "fd6fb2dc097b7ec929c458e2c51b78a6d807d0e83982f8a3e5729ff2bf616439",
+        "levels_completed": 4,
+        "no_change_actions": 0,
+        "score": 35.714285714285715
+      },
+      "control": {
+        "action_events": 130,
+        "board_changes": 130,
+        "event_file_sha256": "966c9d03ef3fb61758c8936be5a3d73ca0e9066c2ffe0966a5a87da34f9f410f",
+        "levels_completed": 2,
+        "no_change_actions": 0,
+        "score": 7.5306424344885885
+      }
+    }
+  },
+  "interpretation": "C2-058 candidate actions changed the board in 402/420 cases (95.71%), close to control 379/389 (97.43%). The largest score loss, m0r0, still had 149/160 board-changing actions but completed zero levels versus four control levels. This weakens a simple no-op-suppression explanation; it is more consistent with a progression/planning failure, but does not identify its cause. Diagnostic only; no capability claim.",
+  "observed_at_utc": "2026-10-25T14:48:14Z",
+  "official_submission_or_quota_use": false,
+  "schema": "arc3-c2-058-v27-board-change-diagnostic.v1"
+}

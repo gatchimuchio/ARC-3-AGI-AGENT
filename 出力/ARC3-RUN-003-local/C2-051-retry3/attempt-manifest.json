@@ -1,0 +1,109 @@
+{
+  "experiment": "ARC3-RUN-003/C2-051",
+  "attempt": 3,
+  "attempt_kind": "same-treatment infrastructure retry",
+  "status": "Kaggle version 20 COMPLETE; C2-051 rejected by terminal scorecard",
+  "previous_attempts": [
+    {
+      "attempt": 1,
+      "reported_version": 18,
+      "terminal_status": "ERROR before benchmark",
+      "reason": "1800s startup deadline; model precache 1718.07s",
+      "score": null
+    },
+    {
+      "attempt": 2,
+      "reported_version": 19,
+      "terminal_status": "ERROR before benchmark",
+      "reason": "2400s deadline during CUDA graph capture at 0/7 after 02:05; model precache 2214.69s",
+      "score": null
+    }
+  ],
+  "candidate": {
+    "base_attempt_notebook_sha256": "021bc357fb2ad7205165fe740894dd27380360faffb04b56780c769369def55d",
+    "notebook_sha256": "a10d620db0ef2a6bcc29a6db003b41bbb6951aa584f03fbc5a88199d79c0ed2f",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+    "gameplay_treatment_unchanged": true
+  },
+  "source_audit": {
+    "changed_cells_vs_attempt2": [
+      5,
+      13
+    ],
+    "cell5": "SERVER_STARTUP_TIMEOUT 2400 -> 2700 seconds",
+    "cell13": "SGLang watchdog timeout 2400 -> 2700 seconds",
+    "all_other_cell_sources_equal": true,
+    "metadata_bytes_identical": true
+  },
+  "controls": {
+    "offline_games": 3,
+    "seed": 0,
+    "passes": 1,
+    "concurrency": 1,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "server_startup_timeout_seconds": 2700,
+    "watchdog_timeout_seconds": 2700,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_submission_or_rerun": false,
+    "submission_quota_use": false
+  },
+  "acceptance_gate": {
+    "strict_mean_above_C2_046_slim": 19.309155943771326,
+    "positive_paired_mean_delta": true,
+    "pilot_only": true
+  },
+  "push_result": {
+    "reported_version": 20,
+    "push_exit_code": 0,
+    "status": "KernelWorkerStatus.RUNNING",
+    "observed_at_utc": "2026-10-24T21:51:39Z",
+    "push_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v20-push-20261024T215139Z.json"
+  },
+  "benchmark_start_observation": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v20-benchmark-start-20261024T223739Z.json",
+  "terminal_status": "KernelWorkerStatus.COMPLETE",
+  "terminal_observed_at_utc": "2026-10-24T23:32:02Z",
+  "terminal_scorecard": {
+    "games": [
+      "sk48-d8078629",
+      "tn36-ef4dde99",
+      "m0r0-492f87ba"
+    ],
+    "per_game": {
+      "sk48-d8078629": {
+        "C2-046_slim": 2.7777777777777777,
+        "C2-048": 2.7777777777777777,
+        "C2-051_v20": 1.9395967556973375,
+        "delta_vs_C2-046_slim": -0.8381810220804402
+      },
+      "tn36-ef4dde99": {
+        "C2-046_slim": 7.5306424344885885,
+        "C2-048": 19.31611570247934,
+        "C2-051_v20": 3.571428571428571,
+        "delta_vs_C2-046_slim": -3.9592138630600173
+      },
+      "m0r0-492f87ba": {
+        "C2-046_slim": 47.61904761904761,
+        "C2-048": 28.57142857142857,
+        "C2-051_v20": 28.57142857142857,
+        "delta_vs_C2-046_slim": -19.047619047619044
+      }
+    },
+    "means": {
+      "C2-046 slim": 19.309155943771326,
+      "C2-048": 16.88844068389523,
+      "C2-051 v20": 11.360817966184825
+    },
+    "delta_mean_vs_C2-046_slim": -7.948337977586501,
+    "delta_mean_vs_C2-048": -5.527622717710404,
+    "improved_vs_C2-046_slim": 0,
+    "unchanged_vs_C2-046_slim": 0,
+    "regressed_vs_C2-046_slim": 3,
+    "official_recalculation_matches_saved_final_score": true
+  },
+  "terminal_evidence": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-051-v20-terminal-scorecard-20261024T234025Z.json",
+  "no_official_submission_or_quota_use": true
+}

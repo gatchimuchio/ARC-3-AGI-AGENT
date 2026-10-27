@@ -1,0 +1,18 @@
+{
+  "schema": "arc3-source-dataset-version-observation.v1",
+  "observed_at_utc": "2026-10-26T22:13:06Z",
+  "command_arguments": [
+    "datasets",
+    "status",
+    "dfranzen/taaf-kaggle-source-bundle-copy",
+    "--format",
+    "json(current_version_number)"
+  ],
+  "exit_code": 0,
+  "data": {
+    "current_version_number": 1
+  },
+  "listed_files": 73,
+  "listed_total_bytes": 1518896,
+  "weights_or_wheels_in_listing": false
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "arc26-private-kernel-status-observation.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-050",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 17,
+  "observed_at_utc": "2026-10-24T19:54:36Z",
+  "status": "KernelWorkerStatus.RUNNING",
+  "query": "..\\ARC２\\.venv\\Scripts\\python.exe -m kaggle kernels status tecchannn/arc3-model-guided-c2-025/17",
+  "source": "Kaggle CLI official status endpoint",
+  "output_recovered": false,
+  "terminal_scorecard": false,
+  "official_submission_or_rerun": false,
+  "candidate_eligible_for_adoption": false,
+  "concurrency_gate_breached": true,
+  "next_due_utc": "2026-10-24T19:59:36Z",
+  "next_action": "Recheck exact version 17 status; start no new run or submission."
+}

@@ -1,0 +1,56 @@
+{
+  "evaluation": "public-offline-rhae",
+  "stage": "holdout",
+  "split_seed": 20261022,
+  "environment_seeds": [
+    7,
+    31,
+    73
+  ],
+  "policy_seed_rule": "policy seed equals environment seed",
+  "max_actions_per_game": 80,
+  "public_environments": 20,
+  "public_baseline_metadata_count": 20,
+  "runs": [
+    {
+      "seed": 7,
+      "games": 20,
+      "RHAE_score": 0.138889,
+      "completed_levels": 1,
+      "wins": 0,
+      "actions": 1600,
+      "no_ops": 150,
+      "game_over": 10,
+      "resets": 10,
+      "level_event_count_mismatches": 0,
+      "scorecard_contract_errors": 0
+    },
+    {
+      "seed": 31,
+      "games": 20,
+      "RHAE_score": 0.247668,
+      "completed_levels": 2,
+      "wins": 0,
+      "actions": 1600,
+      "no_ops": 128,
+      "game_over": 9,
+      "resets": 9,
+      "level_event_count_mismatches": 0,
+      "scorecard_contract_errors": 0
+    },
+    {
+      "seed": 73,
+      "games": 20,
+      "RHAE_score": 0.162013,
+      "completed_levels": 2,
+      "wins": 0,
+      "actions": 1600,
+      "no_ops": 137,
+      "game_over": 10,
+      "resets": 10,
+      "level_event_count_mismatches": 0,
+      "scorecard_contract_errors": 0
+    }
+  ],
+  "mean_RHAE_score_across_seeds": 0.182857
+}

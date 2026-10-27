@@ -1,0 +1,22 @@
+{
+  "schema": "arc26-private-kernel-status.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-057",
+  "observed_at_utc": "2026-10-25T10:17:24.096Z",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "kernel_version": 26,
+  "status": "KernelWorkerStatus.RUNNING",
+  "status_source": "Kaggle CLI read-only exact version status",
+  "candidate_notebook_sha256": "d05fffd9168217d7cd30f2e6f8e472a60f20ac7268f9f683e2998ae203e8725a",
+  "remote_notebook_sha256": "5bceca28e889a3f6483224f0e6f96b8191c1c142270e7b3a0f890bd8eb908632",
+  "remote_source_verified": true,
+  "source_verification_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-057-v26-remote-verification.json",
+  "source_verification_sha256": "d66c6ca9b43cb348fe0e6941c325ad12a82551f68cd3a2456c1e9c22b621996e",
+  "preflight_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-057-preflight-20261025.json",
+  "preflight_sha256": "b2d9a9557c8d7eda9c4ab2029236354f5c5853763ea239ed54eb817e11a4004c",
+  "official_submission_or_quota_use": false,
+  "output_recovered": false,
+  "candidate_scores_eligible_for_adoption": false,
+  "next_action": "Track exact version 26 to terminal; do not push. On COMPLETE, retrieve versioned output and score the same three paired public starts against C2-046 slim.",
+  "next_check_at_utc": "2026-10-25T10:32:24.096Z"
+}

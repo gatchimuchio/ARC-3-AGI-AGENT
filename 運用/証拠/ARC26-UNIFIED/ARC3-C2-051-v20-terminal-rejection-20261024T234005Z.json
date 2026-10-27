@@ -1,0 +1,45 @@
+{
+  "baseline": {
+    "benchmark_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-046-v13-benchmark/benchmark.json",
+    "benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+    "games": 3,
+    "kernel_version": 13,
+    "levels_completed": 7,
+    "mean_score": 19.309155943771326,
+    "passes": 1
+  },
+  "benchmark_bytes": 102542,
+  "benchmark_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v20-output/benchmark.json",
+  "benchmark_sha256": "fa9d556eceb55dc638f25fef3741698453a1d6f96441428f81bc42e02a823227",
+  "candidate": {
+    "games": 3,
+    "levels_completed": 5,
+    "mean_score": 11.360817966184825,
+    "passes": 1
+  },
+  "candidate_scores_eligible_for_adoption": false,
+  "comparison": {
+    "matched_games": 3,
+    "mean_delta": -7.948337977586501,
+    "mean_gate_passed": false,
+    "negative_deltas": 3,
+    "paired_delta_gate_passed": false,
+    "paired_mean_delta": -7.9483379775865,
+    "positive_deltas": 0,
+    "strict_mean_threshold": 19.309155944,
+    "zero_deltas": 0
+  },
+  "data_handling": "Only aggregate metrics are recorded here; per-game IDs, boards, prompts, and responses are not reproduced in this evidence. Raw Kaggle outputs remain local under the output directory.",
+  "decision": "REJECTED_NO_ADOPTION",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+  "kernel_status": "KernelWorkerStatus.COMPLETE",
+  "kernel_status_observed_at_utc": "2026-10-24T23:35:35Z",
+  "kernel_version": 20,
+  "observed_at_utc": "2026-10-24T23:40:05Z",
+  "official_submission_or_rerun": false,
+  "output_directory": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v20-output",
+  "output_recovered": true,
+  "schema": "arc3-c2-051-attempt3-terminal-evaluation.v1",
+  "track": "ARC3"
+}

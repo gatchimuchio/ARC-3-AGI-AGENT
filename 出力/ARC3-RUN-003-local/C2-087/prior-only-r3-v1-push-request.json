@@ -1,0 +1,53 @@
+{
+  "schema": "arc3-private-kernel-push-request.v1",
+  "run_id": "ARC3-RUN-003-C2-087-PRIOR-ONLY-R3-V1",
+  "recorded_at_utc": "2026-10-27T03:10:38.155443+00:00",
+  "command": [
+    "C:\\Users\\ohira\\AppData\\Local\\Temp\\arc3-v6-locked-20261027\\Scripts\\kaggle.exe",
+    "kernels",
+    "push",
+    "--path",
+    "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\出力\\ARC3-RUN-003-local\\C2-087\\prior-only-r3",
+    "--timeout",
+    "10800",
+    "--accelerator",
+    "NvidiaRtxPro6000"
+  ],
+  "kernel": "tecchannn/arc3-v6-learning-prior-only-c2-087-r3",
+  "expected_version": 1,
+  "notebook_sha256": "f0b10932cf8cc688dbeb22e192cbaf3bba345649c59bd0ad7455390eda3a2646",
+  "metadata_sha256": "c322e88aa970fe3298c9cedd9cd93144c68ac92213ccbc326634065d1d06f851",
+  "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "preflight_sha256": "e3610eebd70b9b4eb6a526f231e48d93784a4d2187239d0e73fef5a37c3b1416",
+  "build_manifest_sha256": "a556e93de704b9d3af92954104bb1c0713363e6e3539b6d80a2a7ae3b7410298",
+  "prelaunch_quota": "出力/ARC3-RUN-003-local/C2-087/prior-only-r3-prelaunch-quota-20261027T031036Z.json",
+  "prelaunch_quota_sha256": "3397eb87b2fdd97abc3cdb26da7253408e834292e5c9c9a2ef1276eab6b07ea1",
+  "own_kernel_listing": {
+    "rows": 37,
+    "page_size": 100,
+    "target_matches": 0,
+    "exhausted_first_page": true
+  },
+  "configuration": {
+    "is_private": true,
+    "enable_internet": false,
+    "machine_shape": "NvidiaRtxPro6000",
+    "global_timeout_seconds": 10800,
+    "pilot": {
+      "games_max": 3,
+      "passes": 1,
+      "concurrency": 1,
+      "actions_max": 80,
+      "runtime_seconds_max": 1200,
+      "competition_rerun_allowed": false
+    },
+    "model_seed": 0,
+    "explicit_OFFLINE_seed": 0,
+    "native_game_response_updates_enabled": false,
+    "evidence_visibility": "shown"
+  },
+  "only_this_private_arm_authorized": true,
+  "official_submission_or_rerun": false,
+  "no_retry_or_duplicate_on_unknown_outcome": true,
+  "launch_not_yet_performed": true
+}

@@ -1,0 +1,154 @@
+{
+  "schema": "arc3-python-hds-query-scorecard.v1",
+  "observed_at_utc": "2026-10-27T02:36:32.112882+00:00",
+  "inspection": "single",
+  "arm": {
+    "requested_kernel": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2",
+    "actual_kernel": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2",
+    "identity_alias_applied": false,
+    "kernel": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2",
+    "version": 1,
+    "status": "KernelWorkerStatus.COMPLETE",
+    "mode": "shadow",
+    "evidence_visibility": "shown",
+    "build_manifest_sha256": "83f36d8200c44c7b24536b82849226c53da5b5ac3b2c010e1548037d18ec60b1",
+    "retrieval_manifest_sha256": "36eeb7359a348f663eefd3fe6cd05ea03e3be19185bcd41cb35eec2d221f436d",
+    "selected_output_manifest_sha256": "b8d5e71f66ba3f159a4eb7d997b430975a9ad4cae93b53577ce817285d3a8be8",
+    "benchmark_sha256": "233a9197f0fcc87149a9448c551d65fdd54990cc4f7d4e104c3f4ec4cd97aec0",
+    "games": 3,
+    "public_offline_RHAE_mean": 6.58155742615202,
+    "saved_scores_match_recomputed": true,
+    "levels_completed": 4,
+    "levels_total": 21,
+    "actual_actions": 240,
+    "run_state_counts": {
+      "gave_up": 3
+    },
+    "history_generated_tokens": 271592,
+    "games_with_visual_model_generation": 3,
+    "generation_flags_in_benchmark_order_when_invalid": null,
+    "job_elapsed_seconds": 1993.365665,
+    "max_game_elapsed_seconds": 834.2598917550001,
+    "gameplay_valid": true,
+    "integration_valid": true,
+    "HDS": {
+      "integration_valid": true,
+      "integration_failures": [],
+      "counters": {
+        "action_after_distinct_tool_call_query": 2,
+        "actual_action_calls_seen": 240,
+        "distinct_model_response_after_query": 2,
+        "executed_candidate_was_queried": 1,
+        "order_event:action_after_query": 2,
+        "order_event:action_call_requested": 247,
+        "order_event:query_returned": 3,
+        "public_outcome:レベル進行": 4,
+        "public_outcome:盤面変化": 232,
+        "query_helper_calls": 5,
+        "query_native:断定保留": 3,
+        "query_status:queried": 3,
+        "skipped_RESET_or_automatic": 1,
+        "update_status:updated": 239,
+        "public_outcome:可視変化なし": 3
+      },
+      "operations": {
+        "updates_attempted": 239,
+        "updates_succeeded": 239,
+        "queries_attempted": 3,
+        "queries_succeeded": 3,
+        "update_errors": 0,
+        "query_errors": 0,
+        "summary_errors": 0,
+        "prior_updates_attempted": 15,
+        "prior_updates_succeeded": 15,
+        "prior_update_errors": 0,
+        "skipped_resets": 0,
+        "rejected_requests": 0,
+        "budget_exhaustion_requests": 0
+      },
+      "seconds": {
+        "update_seconds": 18.526636,
+        "query_seconds": 0.002128,
+        "total_hds_seconds": 18.560838,
+        "prior_load_seconds": 0.032074
+      },
+      "prior_status_counts": {
+        "loaded": 3
+      },
+      "errors": {
+        "update_errors": 0,
+        "query_errors": 0,
+        "summary_errors": 0,
+        "prior_update_errors": 0,
+        "rejected_requests": 0
+      },
+      "error_type_counts": {},
+      "native_query_status_counts": {
+        "断定保留": 3
+      },
+      "budgets_per_game": {
+        "update_budget": 80,
+        "query_budget": 80,
+        "hds_seconds_budget": 120.0
+      },
+      "budget_exhausted_game_counts": {
+        "update_budget_exhausted": 2,
+        "query_budget_exhausted": 0,
+        "time_budget_exhausted": 0
+      },
+      "games_with_game_response_updates": 3,
+      "game_response_updates_success_coverage": 1.0,
+      "max_soft_HDS_time_overrun_seconds": 0.0,
+      "strict_past_prediction_measurement": {
+        "complete_game_streams": 3,
+        "counts": {
+          "nonreset_public_responses": 239,
+          "outcome:盤面変化": 232,
+          "forecast_blocked:UNMEASURED_UNQUERIED_UNKNOWN_CLIPPED_OR_NONUNIQUE": 239,
+          "outcome:レベル進行": 4,
+          "outcome:可視変化なし": 3
+        },
+        "native_status_forecast_counts": {},
+        "forecast_precision": null,
+        "same_covered_steps": 0,
+        "same_covered_native_precision": null,
+        "same_covered_past_majority_precision": null,
+        "scope": "Partial native active/adopted-ref forecasts; HOLD and target uncertainty remain separate. Unknown/clipped/nonunique forecasts unmeasured."
+      },
+      "matched_candidate_ordering": {
+        "matched_candidate_receipts": 1,
+        "matched_candidate_trace_joins": 1,
+        "distinct_model_response_observation_opportunity": 1
+      },
+      "exposure_classification": "SHOWN_RPC_NATIVE_AVAILABLE_MODEL_RENDERING_UNKNOWN",
+      "native_target_count_sums_on_matched_responses": {
+        "予測群": 0,
+        "有効原理群": 0,
+        "競合群": 0,
+        "追加観測要求群": 0,
+        "係争中原理群": 0,
+        "識別不能群": 0
+      },
+      "native_target_UNKNOWN_query_counts": {},
+      "rendered_model_evidence_exposure": "UNKNOWN",
+      "comprehension_or_adoption_proven": false,
+      "same_response_unreviewed_is_gameplay_failure": false
+    },
+    "environment_seed_evidence": {
+      "explicitly_requested_by_notebook": false,
+      "SDK_default": "unverified",
+      "runtime_verified": false,
+      "initial_state_equivalence_runtime_check": "pending"
+    }
+  },
+  "common_scorecard_sha256": "6ca19fcb4860b257e71c292ca77e7d775660f0c8f2f759bc4a0c984d6544db6a",
+  "official_RHAE_helper_sha256": "d19754a0e8df5aaeb73a5b763517bc4c5aa5a413fd4b08e8f11d0725f8e066ac",
+  "strict_past_baseline_source_sha256": "b49524127e53254bc00bc3498eb3ee45ee29332900beee1969a3d0e009b7ada1",
+  "score_source_file_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7",
+  "scorecard_source_sha256": "ac5250d5a36d846205166e7aed36715a81e8341efe227aae395a185672cb7520",
+  "official_score_observed": false,
+  "official_submission_or_quota_use": false,
+  "visibility_effect_proven": false,
+  "learning_effect_proven": false,
+  "limitation": "Shown may alter model-visible context. RPC return is programmatic availability; rendered model exposure, comprehension and adoption remain unverified. Visibility alone does not isolate learning; comparisons are descriptive and require repeats."
+}

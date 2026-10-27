@@ -1,0 +1,73 @@
+{
+  "schema": "arc3-native-game-learning-scorecard-preflight.v1",
+  "observed_at_utc": "2026-10-27T02:16:55.663821+00:00",
+  "scorecard": "検証/ARC3視覚HDS学習比較採点.py",
+  "scorecard_sha256": "5b564e67d88c25a23dd7fb565590da086bf05c87fe0f8cef8b6ca1539c8091f8",
+  "test": "検証/test_ARC3視覚HDS学習比較採点.py",
+  "test_sha256": "245f4e03ac0dcbf698a8ca285f671fe7fafa2a4956684a7405f5a2568f622b03",
+  "python_version": "3.12.10",
+  "python_executable": "C:\\Users\\ohira\\AppData\\Local\\Temp\\arc3-v6-locked-20261027\\Scripts\\python.exe",
+  "frozen_dependencies_unchanged": true,
+  "frozen_dependency_sha256": {
+    "検証/ARC3視覚HDS対応採点.py": "6ca19fcb4860b257e71c292ca77e7d775660f0c8f2f759bc4a0c984d6544db6a",
+    "検証/ARC3視覚HDS照会対応採点.py": "ac5250d5a36d846205166e7aed36715a81e8341efe227aae395a185672cb7520",
+    "検証/候補/ARC3PythonHDS照会runtime.py": "34a5c02fddc7caf7648c1b15d9369d2bdb2535b652b3868faa55fdce24853a8b",
+    "検証/候補/ARC3PythonHDS局所応答runtime.py": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8",
+    "検証/候補/ARC3PythonHDS学習有効無効runtime.py": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d",
+    "出力/ARC3-RUN-003-local/C2-081/arms-preflight-r2.json": "ba2a5c7b7371c5ef1020c23939cfe3eae239b8cc465bf4b8485fd94769e272e0",
+    "出力/ARC3-RUN-003-local/C2-085/arms-preflight.json": "4ebce39be17f0e9207d7c17155c6f8d016845547d4acee30361cf3dbddd45656",
+    "出力/ARC3-RUN-003-local/C2-087/arms-preflight.json": "17fb863eae0c2655a3466a50efeda599fc291fc9136566f0647fdea95db59771",
+    "出力/ARC3-RUN-003-local/C2-087/arms-preflight-r2.json": "3c687d030b656c6ec0e318d3d42ff772736e3cb1af16a7e5f91f9e65084a6144"
+  },
+  "first_targeted_run": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "検証/test_ARC3視覚HDS学習比較採点.py"
+    ],
+    "exit_code": 1,
+    "summary": "16 passed, 1 failed in 37.99s",
+    "failure": "IndexError in frozen majority helper: locality four-class labels were passed directly to its five-class domain.",
+    "correction": "Scoring-only bijective categorical encoding to the frozen comparator, decoded output labels; fixed observer class tie order. Runtime, native HDS and frozen source files unchanged."
+  },
+  "final_targeted_run": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "検証/test_ARC3視覚HDS学習比較採点.py"
+    ],
+    "session_id": 63256,
+    "exit_code": 0,
+    "summary": "20 passed in 33.17s"
+  },
+  "ruff": {
+    "command": [
+      "ruff",
+      "check",
+      "検証/ARC3視覚HDS学習比較採点.py",
+      "検証/test_ARC3視覚HDS学習比較採点.py"
+    ],
+    "exit_code": 0,
+    "summary": "All checks passed!"
+  },
+  "validation_scope": "Synthetic scorecard contracts using copies of frozen r1/r2 source artifacts; no native learner, SDK game, model, GPU or Kaggle execution.",
+  "contracts": [
+    "A native game updates zero valid only with all explicit expected-disabled receipts; prior5 separate",
+    "B one native success per eligible teacher or honestly evidenced budget skip; real errors retained",
+    "Raw native counts never projected to fake legacy updates",
+    "Exact COMPLETE/version/raw source/metadata/output checksums and official RHAE/clocks reused from frozen 081/common",
+    "Both SHOWN; only cell6 update flag and metadata id/title differ between matched pair; source/model/observer/prompt/budget/init fields strict",
+    "First past-majority remains abstention; same-covered baseline; missing/clipped native forecasts unmeasured and guard qualification UNKNOWN",
+    "Runtime stamp absent/partial remains UNKNOWN; observed package versions compared without guessed version gate",
+    "RPC availability is not rendered evidence/comprehension/adoption; same response UNREVIEWED is not gameplay failure",
+    "Learning benefit remains UNPROVEN; descriptive score delta only"
+  ],
+  "runtime_or_candidate_edits": false,
+  "Kaggle_operation_performed": false,
+  "official_submission_or_quota_use": false,
+  "real_terminal_output_scored": false
+}

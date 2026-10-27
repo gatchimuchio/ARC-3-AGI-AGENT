@@ -1,0 +1,29 @@
+{
+  "schema": "arc3-official-accelerator-quota-snapshot.v1",
+  "observed_at_utc": "2026-10-27T02:31:56.817654+00:00",
+  "method": "KaggleApi.quota_view -> GetAcceleratorQuotaStatistics",
+  "kaggle_version": "2.2.5",
+  "kagglesdk_version": "0.1.38",
+  "as_returned_by_official_SDK": {
+    "quotaRefreshTime": "2026-10-31T00:00:00.000Z",
+    "gpuQuota": {
+      "timeUsed": "83940.699.0s",
+      "timeReserved": "0s",
+      "totalTimeAllowed": "21600s",
+      "minimumTimeAllowed": "21600s",
+      "isPayToScaleEnabled": false,
+      "hasEverRun": true
+    },
+    "tpuQuota": {
+      "timeUsed": "0s",
+      "timeReserved": "0s",
+      "totalTimeAllowed": "72000s",
+      "minimumTimeAllowed": "72000s",
+      "isPayToScaleEnabled": false,
+      "hasEverRun": false
+    }
+  },
+  "remote_mutation_performed": false,
+  "kernel_status_queried": false,
+  "machine_aliases_or_wallclock_estimates_added": false
+}

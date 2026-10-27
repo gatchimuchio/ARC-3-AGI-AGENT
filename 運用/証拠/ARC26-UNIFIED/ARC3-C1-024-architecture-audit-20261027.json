@@ -1,0 +1,152 @@
+{
+  "schema": "arc3-c1-024-visual-learning-architecture-audit.v1",
+  "observed_at_utc": "2026-10-26T22:22:30Z",
+  "official_scores": {
+    "refresh_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-v6-official-refresh-20261027-20261026T215618Z.json",
+    "historical_best": {
+      "submission_id": "57577905",
+      "kernel": "tecchannn/arc3-model-guided-c2-025",
+      "version": 5,
+      "public_score": 23.86,
+      "status": "COMPLETE",
+      "private_score": null
+    },
+    "latest_submission": {
+      "submission_id": "57612586",
+      "kernel": "tecchannn/arc3-observation-driven-exploration-candidate",
+      "version": 6,
+      "public_score": 0.03,
+      "status": "COMPLETE",
+      "private_score": null
+    },
+    "current_worktree_official_score_established": false
+  },
+  "v5_provenance": {
+    "local_notebook": "出力\\ARC3-RUN-002-local\\C2-029-source\\v5-submission.ipynb",
+    "local_notebook_sha256": "5763f69d0794d7161dbe81a967edd2c10a6810c92ed1a28208bd47222fd5dfbc",
+    "exact_remote_notebook": "運用\\証拠\\ARC26-UNIFIED\\ARC3-P1-v5-remote-version5\\arc3-model-guided-c2-025.ipynb",
+    "exact_remote_notebook_sha256": "d0927468aefdc22183ac1ca0bf84ccd2a46ea526e349c342e876683393bd3cff",
+    "joined_cell_sources_match_all": true,
+    "cells": 25,
+    "source_dataset": "dfranzen/taaf-kaggle-source-bundle-copy/1",
+    "wheelhouse_dataset": "dfranzen/pennyroyal-v253",
+    "models": [
+      "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1",
+      "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1"
+    ],
+    "source_manifest": "入力\\モデル実行基底\\v5\\taaf-source-v1\\source-manifest.json",
+    "source_manifest_sha256": "2c9daf710a75154256e42dcf77a59cd4c580421a08d4bf434a913ef15bf66c12",
+    "whole_runtime_bit_identity_established": false,
+    "limit": "framework/run.py differs from the patch index preimage and postimage; the declared dataset v1 plus exact notebook patch applies contextually. This is not proof of whole-runtime bit identity. Preserve snapshot and patch; do not replace run.py from guessed git history."
+  },
+  "architecture": {
+    "v5": "Qwen visual reasoning from current-grid PNG and public frame differences; generated Python inspection/search/planning; Python action(actions) callback; per-game persistent source-only functions; model history retained; HDS absent; explicit memory sections off",
+    "latest_official_v6": "HDS online update/query as diagnostic plus UCB action/color selection; query return not used as action ranking; no visual model or generated Python planning; 80 total request cap",
+    "latest_official_notebook_sha256": "957182aee3420dfa2687cfe6a5ca95e5b47af69fd3f29dfb7402bb2f5dd0a3f4",
+    "current_worktree_agent_has_later_schema_changes_not_officially_scored": true,
+    "v5_hds_usage_found": false,
+    "fixed_answer_or_id_lookup_found_in_visible_execution_path": false,
+    "audit_limit": "No claim about training-data provenance of model weights; they were not downloaded. Framework/run.py patch-index parity remains unresolved."
+  },
+  "runtime": {
+    "v5_competition": {
+      "notebook_cell": 17,
+      "passes": 1,
+      "concurrency": 120,
+      "per_game_seconds": 31920,
+      "action_cap": null,
+      "gpu": "NvidiaRtxPro6000",
+      "internet_enabled": false
+    },
+    "v5_offline_pilot": {
+      "notebook_cell": 18,
+      "games": 25,
+      "passes": 1,
+      "concurrency": 1,
+      "actions_per_game": 80,
+      "seconds_per_game": 1200
+    },
+    "latest_official_v6": {
+      "actions_per_game": 80,
+      "visual_model": false
+    },
+    "model_endpoint": "http://127.0.0.1:8001/v1",
+    "model_id": "flashnext",
+    "endpoint_protocol": "OpenAI-compatible /chat/completions",
+    "model_auth": "Optional explicit api_key or LOCAL_ANALYZER_API_KEY/OPENROUTER_API_KEY/OPENAI_API_KEY; Authorization header only if configured. Historical Kaggle local server used no API key. No credential values inspected.",
+    "local_port_8001_listener_observed": false,
+    "local_model_inference_verified": false,
+    "source_package_python_requirement": "==3.12.12",
+    "current_locked_environment_python": "3.12.10"
+  },
+  "matched_public25_evidence": {
+    "record": "検証/運転記録/ARC3-RUN-003_C1-017_modelv5公開25scorecard再採点_20261024.md",
+    "same_start_matches": 25,
+    "both_action_cap": 80,
+    "previous_mean": 0.2275316149,
+    "model_v5_mean": 11.5232172832,
+    "delta": 11.2956856683,
+    "improved_tied_regressed": [
+      22,
+      2,
+      1
+    ],
+    "levels_previous": 3,
+    "levels_model_v5": 47,
+    "wins_model_v5": 0
+  },
+  "later_visual_variants": {
+    "C2-046": {
+      "source_notebook": "出力/ARC3-RUN-003-local/C2-046/source/slim/submission.ipynb",
+      "source_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+      "same_source_versions": {
+        "12": 15.848342,
+        "13": 19.309155943771326
+      },
+      "games": 3,
+      "wins": 0,
+      "promotion": "HOLD; observed repeat variability; not validated public25 or official"
+    },
+    "C2-054_v23": {
+      "mean": 6.878306878306878,
+      "decision": "REJECT"
+    },
+    "C2-059_v28": {
+      "terminal_status_evidence": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-059-v28-terminal-status.json",
+      "terminal_status_sha256": "5793442800ad7be856c2e0e3310b2bd51e337f84882ada184be827c652e99b35",
+      "scorecard_evidence": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-059-v28-terminal-scorecard.json",
+      "scorecard_sha256": "9259e4d1e251f865115e4536b438388833fcfbd5092c0fdd32293d9c2827e939",
+      "pairwise_v27_evidence": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-059-v28-vs-C2-058-scorecard.json",
+      "pairwise_v27_sha256": "8357058060b7095c753fcf56687a982f734b830110592a4bf6c16a8d39826067",
+      "status": "COMPLETE",
+      "mean": 5.3517888280507115,
+      "delta_vs_C2-046": -13.957367115720615,
+      "delta_vs_C2-058": -7.119273269079761,
+      "decision": "REJECT"
+    },
+    "C2-060": "prepared only; output20k/context139264 hypothesis; no score",
+    "C2-061": "prepared only, held after prior off/slim evidence; no score"
+  },
+  "restoration_direction": "Use verified v5 ToolAgent/solver/sandbox source in a new candidate copy, preserve v5 off memory baseline, add per-action HDS public transition/update and bounded prior-knowledge hint at the public action callback. Preserve SDK legality as execution authority. Compare model baseline vs model+HDS under identical fixed starts/seed/action/time/token budgets, then public25 and official gate. Do not promote rejected v23/v28 or assume slim improvement from three-game stochastic runs.",
+  "source_recovery": {
+    "archive_bytes": 449765,
+    "archive_sha256": "cd687f4bc10b2128ea9895024cd2e990b24a1070607a071901cccd1638606187",
+    "raw_files": 73,
+    "raw_bytes": 1518896,
+    "patch_preimage_prefix_matches": 15,
+    "patch_postimage_prefix_matches": 15,
+    "patch_files": 16,
+    "syntax_parsed_python_files": 53,
+    "weights_or_wheels_downloaded": false,
+    "pickles_executed": false,
+    "dataset_license": [
+      {
+        "name": "unknown"
+      }
+    ],
+    "source_package_license_classifier": "MIT",
+    "notebook_upstream_license": "Apache-2.0 copy retained separately"
+  },
+  "notebook_kernel_or_submission_changed": false,
+  "ledger_modified": false
+}

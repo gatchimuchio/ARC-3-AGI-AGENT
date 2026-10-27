@@ -1,0 +1,459 @@
+{
+  "instruction_id": "ARC3-RUN-002-C2-020",
+  "evaluation": "public development split only; no runtime changes",
+  "split_seed": 20261022,
+  "action_seeds": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_game": 80,
+  "retry_game_over": true,
+  "runs": 15,
+  "initial_metadata_matches": {
+    "7": 5,
+    "31": 5,
+    "73": 5
+  },
+  "baseline_metric_deltas": {
+    "7": {
+      "actions": {
+        "previous": 400,
+        "current": 400,
+        "delta": 0
+      },
+      "gameplay_actions": {
+        "previous": 394,
+        "current": 394,
+        "delta": 0
+      },
+      "reset_actions": {
+        "previous": 6,
+        "current": 6,
+        "delta": 0
+      },
+      "game_over_events": {
+        "previous": 6,
+        "current": 6,
+        "delta": 0
+      },
+      "levels_completed": {
+        "previous": 1,
+        "current": 1,
+        "delta": 0
+      },
+      "no_op_actions": {
+        "previous": 9,
+        "current": 9,
+        "delta": 0
+      },
+      "duplicate_observation_steps": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "illegal_action_attempts": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "wins": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "policy_holds": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      }
+    },
+    "31": {
+      "actions": {
+        "previous": 400,
+        "current": 400,
+        "delta": 0
+      },
+      "gameplay_actions": {
+        "previous": 394,
+        "current": 394,
+        "delta": 0
+      },
+      "reset_actions": {
+        "previous": 6,
+        "current": 6,
+        "delta": 0
+      },
+      "game_over_events": {
+        "previous": 6,
+        "current": 6,
+        "delta": 0
+      },
+      "levels_completed": {
+        "previous": 1,
+        "current": 1,
+        "delta": 0
+      },
+      "no_op_actions": {
+        "previous": 9,
+        "current": 9,
+        "delta": 0
+      },
+      "duplicate_observation_steps": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "illegal_action_attempts": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "wins": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "policy_holds": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      }
+    },
+    "73": {
+      "actions": {
+        "previous": 400,
+        "current": 400,
+        "delta": 0
+      },
+      "gameplay_actions": {
+        "previous": 394,
+        "current": 394,
+        "delta": 0
+      },
+      "reset_actions": {
+        "previous": 6,
+        "current": 6,
+        "delta": 0
+      },
+      "game_over_events": {
+        "previous": 6,
+        "current": 6,
+        "delta": 0
+      },
+      "levels_completed": {
+        "previous": 1,
+        "current": 1,
+        "delta": 0
+      },
+      "no_op_actions": {
+        "previous": 17,
+        "current": 17,
+        "delta": 0
+      },
+      "duplicate_observation_steps": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "illegal_action_attempts": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "wins": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      },
+      "policy_holds": {
+        "previous": 0,
+        "current": 0,
+        "delta": 0
+      }
+    }
+  },
+  "context_summary": {
+    "total_actions": 1182,
+    "distinct_available_action_sets": 4,
+    "eligible_available_action_sets": [
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "actions": 240,
+        "seed_count": 3
+      },
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "actions": 237,
+        "seed_count": 3
+      },
+      {
+        "available_actions": [
+          6
+        ],
+        "actions": 471,
+        "seed_count": 3
+      },
+      {
+        "available_actions": [
+          6,
+          7
+        ],
+        "actions": 234,
+        "seed_count": 3
+      }
+    ],
+    "eligible_context_action_count": 10,
+    "eligible_context_actions": [
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "action_id": 1,
+        "actions": 60,
+        "seed_count": 3,
+        "no_op_rate": 0.0,
+        "game_over_rate": 0.0,
+        "level_progress_rate": 0.0
+      },
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "action_id": 2,
+        "actions": 60,
+        "seed_count": 3,
+        "no_op_rate": 0.0,
+        "game_over_rate": 0.0,
+        "level_progress_rate": 0.0
+      },
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "action_id": 3,
+        "actions": 60,
+        "seed_count": 3,
+        "no_op_rate": 0.0,
+        "game_over_rate": 0.0,
+        "level_progress_rate": 0.0
+      },
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "action_id": 4,
+        "actions": 60,
+        "seed_count": 3,
+        "no_op_rate": 0.0,
+        "game_over_rate": 0.0,
+        "level_progress_rate": 0.0
+      },
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "action_id": 1,
+        "actions": 48,
+        "seed_count": 2,
+        "no_op_rate": 0.083333,
+        "game_over_rate": 0.0,
+        "level_progress_rate": 0.0
+      },
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "action_id": 2,
+        "actions": 72,
+        "seed_count": 3,
+        "no_op_rate": 0.041667,
+        "game_over_rate": 0.013889,
+        "level_progress_rate": 0.0
+      },
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "action_id": 3,
+        "actions": 33,
+        "seed_count": 2,
+        "no_op_rate": 0.121212,
+        "game_over_rate": 0.0,
+        "level_progress_rate": 0.0
+      },
+      {
+        "available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "action_id": 4,
+        "actions": 78,
+        "seed_count": 3,
+        "no_op_rate": 0.025641,
+        "game_over_rate": 0.025641,
+        "level_progress_rate": 0.0
+      },
+      {
+        "available_actions": [
+          6
+        ],
+        "action_id": 6,
+        "actions": 471,
+        "seed_count": 3,
+        "no_op_rate": 0.0,
+        "game_over_rate": 0.019108,
+        "level_progress_rate": 0.006369
+      },
+      {
+        "available_actions": [
+          6,
+          7
+        ],
+        "action_id": 6,
+        "actions": 228,
+        "seed_count": 3,
+        "no_op_rate": 0.04386,
+        "game_over_rate": 0.026316,
+        "level_progress_rate": 0.0
+      }
+    ],
+    "repeated_action_context_pairs": [
+      {
+        "action_id": 1,
+        "left_available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "right_available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "compared_seed_count": 2,
+        "consistent_no_op_direction_seeds": 2,
+        "consistent_game_over_direction_seeds": 0
+      },
+      {
+        "action_id": 2,
+        "left_available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "right_available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "compared_seed_count": 3,
+        "consistent_no_op_direction_seeds": 2,
+        "consistent_game_over_direction_seeds": 1
+      },
+      {
+        "action_id": 3,
+        "left_available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "right_available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "compared_seed_count": 2,
+        "consistent_no_op_direction_seeds": 2,
+        "consistent_game_over_direction_seeds": 0
+      },
+      {
+        "action_id": 4,
+        "left_available_actions": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "right_available_actions": [
+          1,
+          2,
+          3,
+          4,
+          6
+        ],
+        "compared_seed_count": 3,
+        "consistent_no_op_direction_seeds": 1,
+        "consistent_game_over_direction_seeds": 2
+      },
+      {
+        "action_id": 6,
+        "left_available_actions": [
+          6
+        ],
+        "right_available_actions": [
+          6,
+          7
+        ],
+        "compared_seed_count": 3,
+        "consistent_no_op_direction_seeds": 3,
+        "consistent_game_over_direction_seeds": 3
+      }
+    ]
+  },
+  "source_sha256": {
+    "diagnostic_runner": "1c7ed3d72a123dd128f7f340276973296e18af70af9be5db1e2d2d9f9a1d967a",
+    "evaluation_runner": "9f936fe5e12bd545e33df7bf1c0911efdbba04ea362ab6fd05027d3e783294d8",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "baseline_seed_7": "989e2f9116f2576796beaf5e4ee3c532218102b2b54e48c02a25c7e0a5d8e603",
+    "baseline_seed_31": "98d554d32ba53db992e333a723909694f2dba9dc2d4105729899bb7a74a4891e",
+    "baseline_seed_73": "7ba9c6c225f9bc7a1515adab4eaf6ca422bc32d12fad430469a275168f110628"
+  }
+}

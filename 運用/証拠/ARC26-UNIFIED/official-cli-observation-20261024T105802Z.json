@@ -1,0 +1,35 @@
+{
+  "commands": [
+    ".venv/Scripts/python.exe -m kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json",
+    ".venv/Scripts/python.exe -m kaggle competitions submission-limits arc-prize-2026-arc-agi-3"
+  ],
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "history": {
+    "error_description_present": false,
+    "notebook_slug": "tecchannn/arc3-model-guided-c2-025",
+    "notebook_version": 5,
+    "official_status": "SubmissionStatus.COMPLETE",
+    "privateScore": "",
+    "publicScore": "23.86",
+    "submitted_at_utc": "2026-10-24T01:15:49Z"
+  },
+  "monitor_source_sha256": "064c4b719bec7877d5239ff31ee7225f9a1176d5d147c5b57590644f5fe4edef",
+  "next_check_at_utc": "2026-10-25T10:58:02Z",
+  "observed_at_utc": "2026-10-24T10:58:02Z",
+  "official_score_is_unobserved_not_zero": false,
+  "previous_numeric_submission": {
+    "publicScore": "0.25",
+    "submission_id": 57541830
+  },
+  "retrieval_method": "Configured local .venv Kaggle CLI; read-only",
+  "schema": "arc26-unified-kaggle-cli-observation-v1",
+  "submission_id": "57577905",
+  "submission_limits": {
+    "numToday": 1,
+    "numTotal": 6,
+    "remainingToday": 0
+  },
+  "submission_limits_error": null,
+  "submission_or_rerun_performed": false,
+  "track": "ARC3"
+}

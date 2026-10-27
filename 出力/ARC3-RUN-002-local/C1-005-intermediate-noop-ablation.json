@@ -1,0 +1,511 @@
+{
+  "evaluation": "ARC3-RUN-002-C1-005",
+  "scope": "fixed development split: 5 public environments, seeds 7/31/73, max 80 requests, SDK RESET after GAME_OVER",
+  "split_seed": 20261022,
+  "public_environment_count": 25,
+  "development_environment_count": 5,
+  "conditions": {
+    "previous": "candidate v4 reward; no-op penalty -1.0",
+    "candidate": "cancel only the -1.0 no-op penalty when an intermediate grid differs from the unchanged final grid and clamped level delta is zero"
+  },
+  "all_public_starts_match": true,
+  "all_previous_baselines_match_C2-003": true,
+  "by_seed": {
+    "7": {
+      "public_start_matches": 5,
+      "baseline_artifact_expected": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 9,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "previous": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 9,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "candidate": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 11,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "delta": {
+        "actions": 0,
+        "gameplay_actions": 0,
+        "reset_actions": 0,
+        "game_over_events": 0,
+        "levels_completed": 0,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 2,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "previous_matches_C2-003": {
+        "games": true,
+        "actions": true,
+        "gameplay_actions": true,
+        "reset_actions": true,
+        "game_over_events": true,
+        "levels_completed": true,
+        "wins": true,
+        "game_over": true,
+        "no_op_actions": true,
+        "policy_holds": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true
+      }
+    },
+    "31": {
+      "public_start_matches": 5,
+      "baseline_artifact_expected": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 9,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "previous": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 9,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "candidate": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 11,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "delta": {
+        "actions": 0,
+        "gameplay_actions": 0,
+        "reset_actions": 0,
+        "game_over_events": 0,
+        "levels_completed": 0,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 2,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "previous_matches_C2-003": {
+        "games": true,
+        "actions": true,
+        "gameplay_actions": true,
+        "reset_actions": true,
+        "game_over_events": true,
+        "levels_completed": true,
+        "wins": true,
+        "game_over": true,
+        "no_op_actions": true,
+        "policy_holds": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true
+      }
+    },
+    "73": {
+      "public_start_matches": 5,
+      "baseline_artifact_expected": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 17,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "previous": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 17,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "candidate": {
+        "games": 5,
+        "actions": 400,
+        "gameplay_actions": 394,
+        "reset_actions": 6,
+        "game_over_events": 6,
+        "levels_completed": 1,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": 12,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "delta": {
+        "actions": 0,
+        "gameplay_actions": 0,
+        "reset_actions": 0,
+        "game_over_events": 0,
+        "levels_completed": 0,
+        "wins": 0,
+        "game_over": 0,
+        "no_op_actions": -5,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "previous_matches_C2-003": {
+        "games": true,
+        "actions": true,
+        "gameplay_actions": true,
+        "reset_actions": true,
+        "game_over_events": true,
+        "levels_completed": true,
+        "wins": true,
+        "game_over": true,
+        "no_op_actions": true,
+        "policy_holds": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true
+      }
+    }
+  },
+  "by_seed_condition_and_action": {
+    "7": {
+      "previous": {
+        "ACTION7": {
+          "actions": 2,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION6": {
+          "actions": 234,
+          "no_op_actions": 4,
+          "level_progress_responses": 1,
+          "levels_completed": 1
+        },
+        "RESET": {
+          "actions": 6,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION3": {
+          "actions": 21,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION1": {
+          "actions": 44,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION4": {
+          "actions": 46,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION2": {
+          "actions": 47,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        }
+      },
+      "candidate": {
+        "ACTION7": {
+          "actions": 2,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION6": {
+          "actions": 240,
+          "no_op_actions": 7,
+          "level_progress_responses": 1,
+          "levels_completed": 1
+        },
+        "RESET": {
+          "actions": 6,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION3": {
+          "actions": 37,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION1": {
+          "actions": 39,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION4": {
+          "actions": 37,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION2": {
+          "actions": 39,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        }
+      }
+    },
+    "31": {
+      "previous": {
+        "ACTION6": {
+          "actions": 234,
+          "no_op_actions": 4,
+          "level_progress_responses": 1,
+          "levels_completed": 1
+        },
+        "ACTION7": {
+          "actions": 2,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "RESET": {
+          "actions": 6,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION1": {
+          "actions": 21,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION3": {
+          "actions": 43,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION2": {
+          "actions": 47,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION4": {
+          "actions": 47,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        }
+      },
+      "candidate": {
+        "ACTION6": {
+          "actions": 239,
+          "no_op_actions": 7,
+          "level_progress_responses": 1,
+          "levels_completed": 1
+        },
+        "ACTION7": {
+          "actions": 2,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "RESET": {
+          "actions": 6,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION1": {
+          "actions": 38,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION3": {
+          "actions": 39,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION2": {
+          "actions": 38,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION4": {
+          "actions": 38,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        }
+      }
+    },
+    "73": {
+      "previous": {
+        "ACTION7": {
+          "actions": 2,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION6": {
+          "actions": 235,
+          "no_op_actions": 6,
+          "level_progress_responses": 1,
+          "levels_completed": 1
+        },
+        "RESET": {
+          "actions": 6,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION3": {
+          "actions": 30,
+          "no_op_actions": 3,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION1": {
+          "actions": 44,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION4": {
+          "actions": 45,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION2": {
+          "actions": 38,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        }
+      },
+      "candidate": {
+        "ACTION7": {
+          "actions": 2,
+          "no_op_actions": 2,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION6": {
+          "actions": 237,
+          "no_op_actions": 8,
+          "level_progress_responses": 1,
+          "levels_completed": 1
+        },
+        "RESET": {
+          "actions": 6,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION3": {
+          "actions": 38,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION1": {
+          "actions": 41,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION4": {
+          "actions": 38,
+          "no_op_actions": 0,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        },
+        "ACTION2": {
+          "actions": 38,
+          "no_op_actions": 1,
+          "level_progress_responses": 0,
+          "levels_completed": 0
+        }
+      }
+    }
+  },
+  "interpretation_boundary": "development-only local ablation; no causal claim outside this controlled comparison and no official score inference",
+  "source_sha256": {
+    "ablation_runner": "26a947323f5cb9ad56eadc0c4048a1790f4e4266d0714bc6affe5b82b800ade3",
+    "evaluation_runner": "8a45dbc0c1e6ac9829a83ebfcbf11f905b972c8711eefe411e9c859faadbd7a0",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "boundary": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+    "starter_agent": "85655f7a11a105e50bba76efd00bebf8056d02ddbae827a8f8a5b46e849fc087"
+  }
+}

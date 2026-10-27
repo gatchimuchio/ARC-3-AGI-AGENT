@@ -1,0 +1,300 @@
+{
+  "stage": "holdout",
+  "split_seed": 20261022,
+  "holdout_games_per_seed": 20,
+  "max_actions_per_policy": 80,
+  "game_over_reset": true,
+  "seed_semantics": "The evaluation seed controls LocalEnvironmentWrapper, exploration policy, and random-baseline RNG; this measures combined run-seed sensitivity, not policy RNG alone.",
+  "exploration": [
+    {
+      "seed": 7,
+      "actions": 1600,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 150,
+      "game_over_events": 10,
+      "reset_actions": 10,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 31,
+      "actions": 1600,
+      "levels_completed": 2,
+      "wins": 0,
+      "no_op_actions": 128,
+      "game_over_events": 9,
+      "reset_actions": 9,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 73,
+      "actions": 1600,
+      "levels_completed": 2,
+      "wins": 0,
+      "no_op_actions": 137,
+      "game_over_events": 10,
+      "reset_actions": 10,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 11,
+      "actions": 1600,
+      "levels_completed": 3,
+      "wins": 0,
+      "no_op_actions": 119,
+      "game_over_events": 9,
+      "reset_actions": 8,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 17,
+      "actions": 1600,
+      "levels_completed": 3,
+      "wins": 0,
+      "no_op_actions": 123,
+      "game_over_events": 9,
+      "reset_actions": 9,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 29,
+      "actions": 1600,
+      "levels_completed": 4,
+      "wins": 0,
+      "no_op_actions": 169,
+      "game_over_events": 11,
+      "reset_actions": 11,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 43,
+      "actions": 1600,
+      "levels_completed": 3,
+      "wins": 0,
+      "no_op_actions": 137,
+      "game_over_events": 8,
+      "reset_actions": 8,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 59,
+      "actions": 1600,
+      "levels_completed": 3,
+      "wins": 0,
+      "no_op_actions": 130,
+      "game_over_events": 10,
+      "reset_actions": 10,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 83,
+      "actions": 1600,
+      "levels_completed": 3,
+      "wins": 0,
+      "no_op_actions": 119,
+      "game_over_events": 11,
+      "reset_actions": 11,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 101,
+      "actions": 1600,
+      "levels_completed": 3,
+      "wins": 0,
+      "no_op_actions": 118,
+      "game_over_events": 9,
+      "reset_actions": 9,
+      "policy_holds": 0,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    }
+  ],
+  "exploration_metrics": {
+    "levels_completed": {
+      "min": 1,
+      "median": 3.0,
+      "max": 4,
+      "mean": 2.7
+    },
+    "wins": {
+      "min": 0,
+      "median": 0.0,
+      "max": 0,
+      "mean": 0
+    },
+    "actions": {
+      "min": 1600,
+      "median": 1600.0,
+      "max": 1600,
+      "mean": 1600
+    },
+    "no_op_actions": {
+      "min": 118,
+      "median": 129.0,
+      "max": 169,
+      "mean": 133
+    },
+    "game_over_events": {
+      "min": 8,
+      "median": 9.5,
+      "max": 11,
+      "mean": 9.6
+    },
+    "reset_actions": {
+      "min": 8,
+      "median": 9.5,
+      "max": 11,
+      "mean": 9.5
+    },
+    "policy_holds": {
+      "min": 0,
+      "median": 0.0,
+      "max": 0,
+      "mean": 0
+    },
+    "illegal_action_attempts": {
+      "min": 0,
+      "median": 0.0,
+      "max": 0,
+      "mean": 0
+    },
+    "duplicate_observation_steps": {
+      "min": 0,
+      "median": 0.0,
+      "max": 0,
+      "mean": 0
+    }
+  },
+  "additional_seed_random_baseline": [
+    {
+      "seed": 11,
+      "actions": 1600,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 348,
+      "game_over_events": 7,
+      "reset_actions": 7,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 17,
+      "actions": 1600,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 358,
+      "game_over_events": 8,
+      "reset_actions": 8,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 29,
+      "actions": 1600,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 322,
+      "game_over_events": 7,
+      "reset_actions": 7,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 43,
+      "actions": 1600,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 345,
+      "game_over_events": 9,
+      "reset_actions": 9,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 59,
+      "actions": 1600,
+      "levels_completed": 0,
+      "wins": 0,
+      "no_op_actions": 365,
+      "game_over_events": 8,
+      "reset_actions": 8,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 83,
+      "actions": 1600,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 329,
+      "game_over_events": 7,
+      "reset_actions": 7,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    },
+    {
+      "seed": 101,
+      "actions": 1600,
+      "levels_completed": 0,
+      "wins": 0,
+      "no_op_actions": 327,
+      "game_over_events": 7,
+      "reset_actions": 7,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "same_public_starts": 20
+    }
+  ],
+  "additional_seed_delta_exploration_minus_random": {
+    "levels_completed": 17,
+    "wins": 0,
+    "actions": 0,
+    "no_op_actions": -1479,
+    "game_over_events": 14
+  },
+  "artifact_sha256": {
+    "11": "7b08bc21a4097e0f57a524d129bea005710ca44d606d01c972d819bd55a0fdc9",
+    "17": "e4053f40153d5d686f9c23dee6ef0069b43ace187d89d325ddb8cbe5819b92d8",
+    "29": "9dcd6bdaad04c2fe8c8206b765b6ffb345066d013ba66322235a0ee591d8a069",
+    "43": "1bc1bb241102a8375d986e909fcd5e670139719e1b12c165623915a0bbf7f60f",
+    "59": "04e09dc748a9977a15a7ce4af702d79d0ec05becf83a1b53677dff44bcbb399b",
+    "83": "603a0842fe47dd07c2c07f651777192f6e8847c593da1d102dbdfeea39269300",
+    "101": "2a22ba32fef61731c64c83f3b340dc420e8ab14db16171800501183efb68df65"
+  },
+  "prior_c6_001_artifact_sha256": "fb170668dabd9d19c22c67b8f66a4882917c60478bd9b6b32649727b7d38b91d",
+  "game_ids_or_trajectories_in_summary": false
+}

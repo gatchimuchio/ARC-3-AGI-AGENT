@@ -1,0 +1,19 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-055",
+  "corrected_at_utc": "2026-10-25T04:38:00Z",
+  "reason": "the earlier environment-only draft did not put enable_thinking in vLLM chat_template_kwargs; baseline logs show it absent and SGLang default is enabled",
+  "baseline_log_entries": 496,
+  "baseline_enable_thinking_kwarg_entries": 0,
+  "baseline_provider": "vllm",
+  "server_default_enabled": true,
+  "superseded_candidate_notebook_sha256": "f3b3191acbfedc3ee0a2924a242d741fe80eb49f49a21e68433c8c153699cf41",
+  "corrected_candidate_notebook_sha256": "c88af3f37aa9e6ff13a972f9fc07fbff1ae5042fa1d7be694d991305a6168777",
+  "corrected_candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "changed_cells": [
+    3
+  ],
+  "embedded_patch_hunks_valid": 150,
+  "effective_toggle_source": "shared request helper adds enable_thinking=False; same helper is used by request builder and request snapshot logger",
+  "status": "prepared_not_pushed_waiting_for_C2-054_v23_terminal_scorecard",
+  "official_submission_or_quota_use": false
+}

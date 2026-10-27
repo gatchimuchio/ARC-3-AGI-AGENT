@@ -1,0 +1,1949 @@
+{
+  "schema": "arc3-noop-penalty-scale-paired-rhae.v1",
+  "evaluation": "public offline paired; ARC scorecard; identical environment/action seeds",
+  "stage": "holdout",
+  "split_seed": 20261022,
+  "games": 20,
+  "seeds": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_game": 80,
+  "conditions": {
+    "baseline": {
+      "no_op_penalty": -1.0,
+      "runs": [
+        {
+          "seed": 7,
+          "games": 20,
+          "rhae_score_mean": 0.138888889,
+          "levels": 1,
+          "no_ops": 150,
+          "game_over": 10,
+          "resets": 10,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "games": 20,
+          "rhae_score_mean": 0.247667677,
+          "levels": 2,
+          "no_ops": 128,
+          "game_over": 9,
+          "resets": 9,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "games": 20,
+          "rhae_score_mean": 0.162013287,
+          "levels": 2,
+          "no_ops": 137,
+          "game_over": 10,
+          "resets": 10,
+          "wins": 0
+        }
+      ],
+      "per_game_aggregates": [
+        {
+          "seed": 7,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 1,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 10,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 24,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 10,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 65,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 16,
+          "score": 2.777777778,
+          "levels": 1,
+          "no_ops": 11,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 15,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 1,
+          "score": 2.175575763,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 8,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 8,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 74,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 16,
+          "score": 2.777777778,
+          "levels": 1,
+          "no_ops": 10,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 11,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 27,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 1,
+          "score": 2.285714286,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 3,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 7,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 7,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 3,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 68,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 16,
+          "score": 0.95455146,
+          "levels": 1,
+          "no_ops": 11,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        }
+      ]
+    },
+    "penalty_1.5": {
+      "no_op_penalty": -1.5,
+      "runs": [
+        {
+          "seed": 7,
+          "games": 20,
+          "rhae_score_mean": 0.138888889,
+          "levels": 1,
+          "no_ops": 145,
+          "game_over": 10,
+          "resets": 10,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "games": 20,
+          "rhae_score_mean": 0.247667677,
+          "levels": 2,
+          "no_ops": 120,
+          "game_over": 9,
+          "resets": 9,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "games": 20,
+          "rhae_score_mean": 0.162013287,
+          "levels": 2,
+          "no_ops": 143,
+          "game_over": 10,
+          "resets": 10,
+          "wins": 0
+        }
+      ],
+      "per_game_aggregates": [
+        {
+          "seed": 7,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 1,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 14,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 25,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 7,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 64,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 16,
+          "score": 2.777777778,
+          "levels": 1,
+          "no_ops": 10,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 14,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 1,
+          "score": 2.175575763,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 6,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 6,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 6,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 74,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 16,
+          "score": 2.777777778,
+          "levels": 1,
+          "no_ops": 10,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 8,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 33,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 1,
+          "score": 2.285714286,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 3,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 5,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 7,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 72,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 16,
+          "score": 0.95455146,
+          "levels": 1,
+          "no_ops": 11,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        }
+      ]
+    },
+    "penalty_2.0": {
+      "no_op_penalty": -2.0,
+      "runs": [
+        {
+          "seed": 7,
+          "games": 20,
+          "rhae_score_mean": 0.138888889,
+          "levels": 1,
+          "no_ops": 146,
+          "game_over": 10,
+          "resets": 10,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "games": 20,
+          "rhae_score_mean": 0.247667677,
+          "levels": 2,
+          "no_ops": 110,
+          "game_over": 9,
+          "resets": 9,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "games": 20,
+          "rhae_score_mean": 0.162013287,
+          "levels": 2,
+          "no_ops": 146,
+          "game_over": 9,
+          "resets": 9,
+          "wins": 0
+        }
+      ],
+      "per_game_aggregates": [
+        {
+          "seed": 7,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 3,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 1,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 11,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 26,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 8,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 67,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 16,
+          "score": 2.777777778,
+          "levels": 1,
+          "no_ops": 10,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 14,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 3,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 1,
+          "score": 2.175575763,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 7,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 71,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 16,
+          "score": 2.777777778,
+          "levels": 1,
+          "no_ops": 10,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 5,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 39,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 1,
+          "score": 2.285714286,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 1,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 3,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 5,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 6,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 7,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 8,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 9,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 10,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 11,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 7,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 12,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 13,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 3,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 14,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 15,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 72,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 16,
+          "score": 0.95455146,
+          "levels": 1,
+          "no_ops": 10,
+          "game_over": 1,
+          "resets": 1,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 17,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 18,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 2,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 19,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0,
+          "wins": 0
+        }
+      ]
+    }
+  },
+  "paired_delta_vs_baseline": {
+    "penalty_1.5": {
+      "pairs": 60,
+      "score_improvements": 0,
+      "score_regressions": 0,
+      "score_ties": 60,
+      "score_delta_mean": 0.0,
+      "levels_delta_total": 0,
+      "no_ops_delta_total": -7,
+      "game_over_delta_total": 0
+    },
+    "penalty_2.0": {
+      "pairs": 60,
+      "score_improvements": 0,
+      "score_regressions": 0,
+      "score_ties": 60,
+      "score_delta_mean": 0.0,
+      "levels_delta_total": 0,
+      "no_ops_delta_total": -13,
+      "game_over_delta_total": -1
+    }
+  },
+  "elapsed_seconds": 175.8002
+}

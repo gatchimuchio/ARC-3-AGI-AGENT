@@ -1,0 +1,59 @@
+{
+  "schema": "arc3-hds-public-transfer-shadow.v1",
+  "evaluation": "public offline paired shadow; one held-out public environment, same seed and action cap",
+  "environment_count": 25,
+  "split_seed": 20261022,
+  "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+  "training_games": 5,
+  "training_actions_per_game_cap": 40,
+  "training_summary": {
+    "actions": 200,
+    "levels": 0,
+    "hds_updates": 199,
+    "hds_update_seconds": 172.895832,
+    "elapsed_seconds": 179.711412
+  },
+  "trained_hds": {
+    "active_public_action_outcome_rules": 0,
+    "serialized_bytes": 83453095,
+    "sha256": "ab6b28650c25542835239ee93cff6a866968dc4a4993ef57ee992a88f708e7f3",
+    "contains_game_id_key": false,
+    "contains_board_key": false,
+    "round_trip_loaded": true
+  },
+  "holdout_action_cap": 40,
+  "baseline": {
+    "score": 0.0,
+    "levels": 0,
+    "actions": 40,
+    "resets": 0,
+    "no_ops": 8,
+    "wins": 0,
+    "stop_reason": "action_limit",
+    "hds_updates": 40,
+    "hds_update_seconds": 8.161125,
+    "hds_predicted_candidates": 4,
+    "hds_guided_actions": 2
+  },
+  "candidate": {
+    "score": 0.0,
+    "levels": 0,
+    "actions": 40,
+    "resets": 0,
+    "no_ops": 1,
+    "wins": 0,
+    "stop_reason": "action_limit",
+    "hds_updates": 40,
+    "hds_update_seconds": 79.467324,
+    "hds_predicted_candidates": 0,
+    "hds_guided_actions": 0
+  },
+  "delta": {
+    "score": 0.0,
+    "levels": 0,
+    "no_ops": -7,
+    "wins": 0,
+    "guided_actions": 0
+  },
+  "interpretation": "diagnostic only; one holdout environment is insufficient for a performance claim"
+}

@@ -1,0 +1,26 @@
+{
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-056",
+  "observed_at_utc": "2026-10-25T07:30:08Z",
+  "readiness": "READY_TO_PUSH",
+  "prior_version": 24,
+  "prior_status": "KernelWorkerStatus.COMPLETE",
+  "prior_decision": "REJECTED",
+  "candidate_notebook_sha256": "e240d98eac956330e4f1daae8ec73ac05ba611934ce3af4c1c7f5e2f19a6c447",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "control_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+  "control_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "notebook_cell_count": 25,
+  "changed_cell_indices": [
+    5
+  ],
+  "only_behavior_change": "LOCAL_ANALYZER_TEMPERATURE 0.7 -> 0.2",
+  "private": true,
+  "gpu": true,
+  "internet": false,
+  "dataset_sources_match_control": true,
+  "model_sources_match_control": true,
+  "competition_sources_match_control": true,
+  "official_submission_or_quota_use": false,
+  "acceptance": "same 3 public starts, mean > 19.309155943771326 and paired delta > 0; exact terminal benchmark only"
+}

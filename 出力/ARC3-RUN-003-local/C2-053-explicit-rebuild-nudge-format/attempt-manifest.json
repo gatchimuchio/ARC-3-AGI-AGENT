@@ -1,0 +1,81 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-053",
+  "status": "rejected: C2-046 paired pilot gate failed",
+  "hypothesis": "C2-052 repeatedly prompted for reconstruction, but its traces contained 100 Plan updates and only 9 World model updates across 4 transitions. A rebuild nudge that explicitly requires exact section labels on separate lines may help the model restore World model as well as Plan. This is a pilot hypothesis, not a performance claim.",
+  "base": "C2-052 version 21; same slim-memory and post-wipe nudge behavior",
+  "single_factor": "nudge wording now explicitly asks for each fresh memory section on its own line with its exact label and a colon; nudge frequency, reset behavior, and memory mode are unchanged",
+  "source": {
+    "notebook": "出力/ARC3-RUN-003-local/C2-053-explicit-rebuild-nudge-format/source/explicit-format/submission.ipynb",
+    "notebook_sha256": "292dbb5ede29e97c2111129e7eea49ea00ad84e148cc6a5cdbadb77daf0bd0a0",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "changed_cell_sources": [
+      3
+    ],
+    "metadata_byte_identical_to_C2-052": true
+  },
+  "settings": {
+    "memory_sections": "slim",
+    "post_wipe_rebuild_nudge": true,
+    "wipe_on_level_transition": true,
+    "revise_nudge": false,
+    "private_kernel": true,
+    "gpu": true,
+    "internet": false,
+    "games": 3,
+    "passes": 1,
+    "seed": 0,
+    "concurrency": 1,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "startup_timeout_seconds": 3300
+  },
+  "control": {
+    "experiment_id": "C2-046 slim",
+    "mean_scorecard": 19.309155943771326
+  },
+  "acceptance_gate": {
+    "strict_mean_above_control": 19.309155943771326,
+    "positive_paired_mean_delta": true,
+    "initial_public_boards_must_match": 3,
+    "candidate_filter_only": true
+  },
+  "if_pass": "proceed to matched public-25 evaluation. If supported, the best eligible version may proceed to at most one official Phase-B submission after fresh rule, eligibility, pending-status, and quota checks; compare the official score with 23.86 and continue optimizing.",
+  "if_fail": "reject C2-053 and choose another evidence-backed one-factor candidate",
+  "official_submission_or_quota_use": false,
+  "pre_run_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-053-pre-run-review-20261025T012828Z.json",
+  "kernel_version": 22,
+  "kernel_id": "tecchannn/arc3-model-guided-c2-025/22",
+  "run_started_at_utc": "2026-10-25T01:31:29Z",
+  "status_observations": [
+    {
+      "observed_at_utc": "2026-10-25T01:31:34Z",
+      "status": "KernelWorkerStatus.RUNNING",
+      "command": "kaggle kernels status tecchannn/arc3-model-guided-c2-025/22"
+    },
+    {
+      "observed_at_utc": "2026-10-25T01:47:19Z",
+      "status": "KernelWorkerStatus.RUNNING",
+      "command": "kaggle kernels status tecchannn/arc3-model-guided-c2-025/22"
+    },
+    {
+      "observed_at_utc": "2026-10-25T02:02:32Z",
+      "status": "KernelWorkerStatus.RUNNING",
+      "command": "kaggle kernels status tecchannn/arc3-model-guided-c2-025/22"
+    }
+  ],
+  "kernel_status": "KernelWorkerStatus.COMPLETE",
+  "kernel_terminal_observed_at_utc": "2026-10-25T03:35:39Z",
+  "benchmark_started_at_utc": "2026-10-25T02:08:04Z",
+  "benchmark_ended_at_utc": "2026-10-25T03:01:27Z",
+  "terminal_scorecard": {
+    "candidate_mean": 10.247474797989396,
+    "control_mean": 19.309155943771326,
+    "paired_mean_delta": -9.06168114578193,
+    "improved": 0,
+    "unchanged": 0,
+    "regressed": 3,
+    "candidate_vs_C2_052_mean_delta": 3.9133353558167125,
+    "decision": "reject for promotion; C2-046 remains local pilot reference",
+    "official_submission_or_quota_use": false
+  }
+}

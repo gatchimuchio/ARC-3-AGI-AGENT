@@ -1,0 +1,32 @@
+{
+  "schema": "arc26-kaggle-environment-sync-v1",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-25T01:50:09.702519+00:00",
+  "uv_sync_locked_exit_code": 0,
+  "sync_result": {
+    "kaggle": "2.2.4 -> 2.2.5",
+    "kagglesdk": "0.1.37 -> 0.1.38",
+    "warnings": "old dist-info directories lacked RECORD; package install proceeded"
+  },
+  "post_sync_cli_version": "Kaggle CLI 2.2.5",
+  "post_sync_read_only_history": {
+    "competition": "arc-prize-2026-arc-agi-3",
+    "latest_submission_id": 57612586,
+    "status": "PENDING",
+    "public_score": null
+  },
+  "remaining_one_drive_metadata_issue": {
+    "paths": [
+      ".venv/Lib/site-packages/kaggle-2.2.4.dist-info",
+      ".venv/Lib/site-packages/kagglesdk-0.1.37.dist-info"
+    ],
+    "observation": "CloudFiles reparse-point directories without METADATA or RECORD remain; importlib.metadata.version returns None and uv sync dry-run proposes reinstalling these two packages.",
+    "cleanup": "not removed; Windows denied rmdir on the CloudFiles placeholder. No repeated deletion attempt."
+  },
+  "runtime_imports": {
+    "kaggle_module_imports": true,
+    "kagglesdk_module_imports": true
+  },
+  "source_or_lockfile_changed": false,
+  "next_action": "Use pinned uvx Kaggle 2.2.5 for official operations; diagnose isolated ARC3 venv metadata only if it blocks a runtime command."
+}

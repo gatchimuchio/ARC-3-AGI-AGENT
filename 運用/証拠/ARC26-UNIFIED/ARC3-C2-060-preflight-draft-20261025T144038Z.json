@@ -1,0 +1,43 @@
+{
+  "C2_059_input_budget_tokens": 118272,
+  "acceptance_gate": "Same three starts: mean must exceed C2-046 19.309155943771326 and paired mean delta must be positive. Improvement over C2-058/C2-059 alone is diagnostic only.",
+  "base_candidate_notebook_sha256": "627ce824f4e3f72d00303223c549d7d0dbbe311bc8b026351b7c186559daf0b2",
+  "base_kernel": "tecchannn/arc3-model-guided-c2-025",
+  "base_version": 28,
+  "candidate_metadata_path": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/source/cap20k-context139264/kernel-metadata.json",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "candidate_notebook_path": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/source/cap20k-context139264/submission.ipynb",
+  "candidate_notebook_sha256": "d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26",
+  "config_delta": {
+    "LOCAL_ANALYZER_CONTEXT_WINDOW": {
+      "from": 135168,
+      "to": 139264
+    },
+    "LOCAL_ANALYZER_MAX_OUTPUT": {
+      "from": 16384,
+      "to": 20480
+    }
+  },
+  "experiment_id": "ARC3-RUN-003/C2-060-outputcap-20480",
+  "feasibility_risk": "Configured context equals the observed server context limit. Before any push, revalidate runtime context support and startup margin against completed v28 output/log.",
+  "gpu_enabled": true,
+  "input_budget_calculation": "139264 - 20480 - 512 = 118272",
+  "input_budget_tokens": 118272,
+  "internet_enabled": false,
+  "motivation_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-request-log-audit-20261025T143831Z.json",
+  "motivation_summary": "The partial v27 request transcript records two finish_reason=length responses with exactly 16384 completion tokens. Diagnostic only; not evidence of performance gain.",
+  "next_action": "Do not push while version 28 is running.",
+  "observed_at_utc": "2026-10-25T14:40:38Z",
+  "official_submission_or_quota_use": false,
+  "primary_treatment": "Increase output reserve by 4096 while holding effective input allowance constant; context window rises to offset output reserve.",
+  "private": true,
+  "push_performed": false,
+  "requires_prior": "Wait until C2-059 v28 is terminal and score it first. If it passes, reconsider whether C2-060 is still useful; if it fails, check startup feasibility before considering one private pilot.",
+  "schema": "arc26-arc3-private-kernel-preflight.v1",
+  "server_context_length_tokens": 139264,
+  "source_cell_delta": [
+    5
+  ],
+  "status": "DRAFT_ONLY_WAITING_FOR_C2_059_TERMINAL_RESULT",
+  "track": "ARC3"
+}

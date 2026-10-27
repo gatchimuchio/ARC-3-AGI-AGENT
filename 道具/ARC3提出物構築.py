@@ -14,8 +14,8 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 AGENT_SOURCE = ROOT / "接続" / "ARC3提出agent.py"
-DEFAULT_OUTPUT = ROOT / "出力" / "ARC3-SUBMIT-001"
-KERNEL_SLUG = "arc3-hds-hold-baseline"
+DEFAULT_OUTPUT = ROOT / "出力" / "ARC3-SUBMIT-010"
+KERNEL_SLUG = "arc3-observation-driven-exploration-candidate"
 COMPETITION = "arc-prize-2026-arc-agi-3"
 EPOCH = (2026, 10, 22, 0, 0, 0)
 
@@ -116,8 +116,9 @@ def _bundle() -> tuple[bytes, dict[str, Any]]:
     return payload, manifest
 
 
-def _code_cell(source: str) -> dict[str, Any]:
+def _code_cell(cell_id: str, source: str) -> dict[str, Any]:
     return {
+        "id": cell_id,
         "cell_type": "code",
         "metadata": {"trusted": True},
         "outputs": [],
@@ -126,8 +127,8 @@ def _code_cell(source: str) -> dict[str, Any]:
     }
 
 
-def _markdown_cell(source: str) -> dict[str, Any]:
-    return {"cell_type": "markdown", "metadata": {}, "source": source}
+def _markdown_cell(cell_id: str, source: str) -> dict[str, Any]:
+    return {"id": cell_id, "cell_type": "markdown", "metadata": {}, "source": source}
 
 
 def _notebook(owner: str, payload: bytes) -> dict[str, Any]:
@@ -259,15 +260,17 @@ else:
         },
         "cells": [
             _markdown_cell(
-                "# ARC3 HDS HOLD baseline\n\n"
-                "現行HDS候補を照会し、確定作用が存在しない場合は操作せず終了する基線です。"
+                "overview",
+                "# ARC3 observation-driven exploration candidate\n\n"
+                "HDS候補照会と独立した出所を持ち、公開盤面と直前の公開応答から合法Actionを一手ずつ選ぶ候補です。"
+                "HDSのHOLDはActionの認可へ変換しません。"
                 "Save & Run Allはdummy parquetを作るだけで、Competition Rerunの結果ではありません。"
-                "HDS/接続ソースのみを埋め込み、入力・事前記憶・認証情報は含めません。"
+                "HDS/接続ソースのみを埋め込み、入力・事前記憶・評価記録・認証情報は含めません。"
             ),
-            _code_cell(setup),
-            _code_cell(extract),
-            _code_cell(write_agent),
-            _code_cell(run),
+            _code_cell("install-sdk", setup),
+            _code_cell("extract-and-verify", extract),
+            _code_cell("write-agent", write_agent),
+            _code_cell("run-agent", run),
         ],
     }
 
@@ -286,7 +289,7 @@ def _owner_from_kaggle_config() -> str:
 def _kernel_metadata(owner: str) -> dict[str, Any]:
     return {
         "id": f"{owner}/{KERNEL_SLUG}",
-        "title": "ARC3 HDS HOLD baseline",
+        "title": "ARC3 observation-driven exploration candidate",
         "code_file": "submission.ipynb",
         "language": "python",
         "kernel_type": "notebook",

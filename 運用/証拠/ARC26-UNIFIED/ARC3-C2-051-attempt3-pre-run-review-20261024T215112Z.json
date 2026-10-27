@@ -1,0 +1,38 @@
+{
+  "schema": "arc3-c2-051-attempt3-pre-run-review.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "attempt": 3,
+  "observed_at_utc": "2026-10-24T21:51:12Z",
+  "latest_status": "KernelWorkerStatus.ERROR",
+  "latest_status_query_exit_code": 0,
+  "latest_status_query_observed_at_utc": "2026-10-24T21:51:12Z",
+  "no_active_run_observed": true,
+  "previous_attempt_terminal_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v19-terminal-startup-error-20261024T215027Z.json",
+  "candidate": {
+    "notebook_sha256": "a10d620db0ef2a6bcc29a6db003b41bbb6951aa584f03fbc5a88199d79c0ed2f",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "attempt_manifest_sha256": "86464119d26c07448e5a39753254a7ff4930e3eb71d92d29a351ff136fdc8295"
+  },
+  "changes_vs_attempt2_only": {
+    "cell5": "SERVER_STARTUP_TIMEOUT 2400 -> 2700 seconds",
+    "cell13": "--watchdog-timeout 2400 -> 2700 seconds"
+  },
+  "gameplay_treatment_unchanged": true,
+  "controls_unchanged": {
+    "games": 3,
+    "seed": 0,
+    "passes": 1,
+    "concurrency": 1,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "private": true,
+    "gpu": true,
+    "internet": false
+  },
+  "rationale": "Completed v17 proceeded from capture at 0/7 after 02:03 to first compile at 02:06, capture completion and server-ready; v19 hit 2400s at 0/7 after 02:05. Add a bounded 300-second startup allowance.",
+  "push_count_for_attempt3": 0,
+  "official_submission_or_rerun": false,
+  "submission_quota_used": false,
+  "status": "READY_FOR_SINGLE_PUSH"
+}

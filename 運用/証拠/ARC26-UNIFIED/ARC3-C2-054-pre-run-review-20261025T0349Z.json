@@ -1,0 +1,30 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-054",
+  "reviewed_at_utc": "2026-10-25T03:49:00Z",
+  "base_kernel": "tecchannn/arc3-model-guided-c2-025/22",
+  "base_kernel_status": "KernelWorkerStatus.COMPLETE",
+  "latest_remote_pull_matches_base_v22_cell_sources_and_runtime_metadata": true,
+  "hypothesis": "reduce repeated rebuild-prompt interruptions by showing the explicit nudge once per reset event",
+  "candidate_notebook_sha256": "69af507def65ab5da70634c9777ec64a33a76210f822f298a2e2dd887adcf6fe",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "changed_cell_sources": [
+    3
+  ],
+  "metadata_byte_identical_to_C2_053": true,
+  "static_checks": {
+    "notebook_schema": "PASS",
+    "unified_patch_hunks": "150; counts validated",
+    "only_semantic_change": "single-shot nudge display flag and gating",
+    "remote_latest_matches_base_v22_cell_sources_and_runtime_metadata": true
+  },
+  "prior_scorecard": {
+    "C2_053_mean": 10.247474797989396,
+    "C2_046_mean": 19.309155943771326,
+    "C2_053_paired_delta_vs_C2_046": -9.06168114578193,
+    "C2_053_vs_C2_052_mean_delta": 3.9133353558167125,
+    "nudge_prompts": 53,
+    "same_step_level_repeats_observed": true
+  },
+  "private_offline_three_game_pilot": true,
+  "official_submission_or_quota_use": false
+}

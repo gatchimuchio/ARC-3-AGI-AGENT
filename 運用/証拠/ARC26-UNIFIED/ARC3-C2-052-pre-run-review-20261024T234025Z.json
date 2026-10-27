@@ -1,0 +1,101 @@
+{
+  "experiment": "ARC3-RUN-003/C2-052",
+  "status": "prepared; not pushed",
+  "hypothesis": "C2-046 slim clears all carried memory at level transitions and is the best matched 3-game reference. A single post-wipe rebuild nudge may make the model reconstruct fresh level-scoped memory without carrying stale plan/world state.",
+  "base": {
+    "experiment": "C2-046 slim",
+    "kernel_version": 12,
+    "notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "scorecard_mean": 19.309155943771326
+  },
+  "prior_result": {
+    "experiment": "C2-051",
+    "mean": 11.360817966184825,
+    "delta_vs_base": -7.948337977586501,
+    "decision": "rejected"
+  },
+  "treatment": {
+    "ARC3_MEMORY_SECTIONS": "slim",
+    "ARC3_WM_WIPE_ON_LEVEL": "default 1, unchanged",
+    "ARC3_WM_REBUILD_NUDGE": true,
+    "ARC3_WM_REVISE_NUDGES": "default false, unchanged",
+    "description": "enable only the existing post-wipe rebuild nudge; all memory sections are still cleared on level transition"
+  },
+  "source_audit": {
+    "changed_cell_indices": [
+      5,
+      13
+    ],
+    "cell5_changes": [
+      "SERVER_STARTUP_TIMEOUT 1800 -> 3300 seconds",
+      "ARC3_WM_REBUILD_NUDGE false(default) -> true"
+    ],
+    "cell13_changes": [
+      "SGLang watchdog timeout 1800 -> 3300 seconds"
+    ],
+    "all_other_cell_sources_equal": true,
+    "metadata_bytes_identical": true,
+    "notebook_sha256": "77f99e38bd8f674d05027d814348db6934f63ab9a0917fd702a406155128842b",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372"
+  },
+  "kernel_metadata": {
+    "id": "tecchannn/arc3-model-guided-c2-025",
+    "kernel_type": "notebook",
+    "is_private": true,
+    "enable_gpu": true,
+    "enable_internet": false,
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "dataset_sources": [
+      "dfranzen/pennyroyal-v253",
+      "dfranzen/taaf-kaggle-source-bundle-copy"
+    ],
+    "code_file": "submission.ipynb"
+  },
+  "controls": {
+    "offline_public_games": 3,
+    "seed": 0,
+    "passes": 1,
+    "concurrency": 1,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "server_startup_timeout_seconds": 3300,
+    "watchdog_timeout_seconds": 3300,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_submission": false,
+    "competition_rerun": false,
+    "quota_use": false
+  },
+  "acceptance_gate": {
+    "strict_mean_above_C2_046_slim": 19.309155943771326,
+    "positive_paired_mean_delta": true,
+    "public_starts_match": 3,
+    "candidate_filter_only": true,
+    "if_pass": "run matched public-25 control/treatment before any promotion",
+    "if_fail": "reject and design next one-factor test"
+  },
+  "evidence": {
+    "terminal_status_C2_051": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-051-v20-terminal-scorecard-20261024T234025Z.json"
+  },
+  "evidence_type": "pre-run review",
+  "reviewed_at_utc": "2026-10-24T23:40:25Z",
+  "latest_kernel_status_before_candidate": "KernelWorkerStatus.COMPLETE",
+  "prior_version20_terminal_evidence": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-051-v20-terminal-scorecard-20261024T234025Z.json",
+  "push_authorized_by_user_request": "continue optimization",
+  "pushes_for_C2_052": 0,
+  "review_status": "PASS",
+  "review_checks": {
+    "source_only_cells_5_and_13_changed": true,
+    "only_gameplay_toggle_is_rebuild_nudge": true,
+    "memory_wipe_default_unchanged": true,
+    "control_settings_match": true,
+    "private_gpu_internet_off": true,
+    "latest_kernel_status_read_before_push": "COMPLETE",
+    "no_official_submission_or_quota_use": true
+  },
+  "push_count_before_launch": 0
+}

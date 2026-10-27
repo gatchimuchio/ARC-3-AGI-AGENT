@@ -1,0 +1,181 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-output.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-059",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 28,
+  "observed_at_utc": "2026-10-25T22:01:55Z",
+  "command": "uvx --python 3.12 --from kaggle==2.2.5 kaggle kernels status tecchannn/arc3-model-guided-c2-025/28",
+  "cli_output": "tecchannn/arc3-model-guided-c2-025/28 has status \"KernelWorkerStatus.COMPLETE\"",
+  "status": "KernelWorkerStatus.COMPLETE",
+  "terminal": true,
+  "candidate_notebook_sha256": "627ce824f4e3f72d00303223c549d7d0dbbe311bc8b026351b7c186559daf0b2",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "output_command": "uvx --python 3.12 --from kaggle==2.2.5 kaggle kernels output tecchannn/arc3-model-guided-c2-025/28 -p 運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-outputcheck",
+  "output_exit_code": 0,
+  "output_directory": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-outputcheck",
+  "output_file_count": 31,
+  "output_total_bytes": 140762127,
+  "output_manifest_sha256": "171b33702ce530c1ffcf4166716ba26abd41bdd8657dce1127a529c914485478",
+  "output_files": [
+    {
+      "path": ".per_game_cards.pkl",
+      "bytes": 180461,
+      "sha256": "16e3e8bbefb132b26dd48a87b63981ddc70b6dcf1c887888da31bb7c57868f4e"
+    },
+    {
+      "path": "arc3-model-guided-c2-025.log",
+      "bytes": 45142,
+      "sha256": "77d89f6edd83959b4dfd4d2314a7251eeaa75b9887421be9bbb0f560844e9fd0"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "bytes": 5353962,
+      "sha256": "fa73fdd35d8d42d991e9ed99cfd951ed3b825c5022058a8488b7ef0dfab3f3d9"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_viewer_data.json",
+      "bytes": 841,
+      "sha256": "38ac4ed1ad5113e1be73d6b7fdacbc99d4f5c6aca1f89d0be588b2b0e7066ce4"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_events.jsonl",
+      "bytes": 2889963,
+      "sha256": "520dc6c639740312d11cce5076d9804b7ee01c65332a308d08efc35377c94e90"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_viewer_data.json",
+      "bytes": 852,
+      "sha256": "9292ae882211a395bcdf596f7e5ba051426fb90788f1a0446f0ef7154682d240"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "bytes": 4261749,
+      "sha256": "4d4df178ab97f6f2c39c46b43f7fc119687972914e875c32b5a55aaa08f47eaa"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_viewer_data.json",
+      "bytes": 865,
+      "sha256": "261534fb071b020c0823b0058569ce7595e7f04f1997be05ae4a6368cf0a146d"
+    },
+    {
+      "path": "benchmark.json",
+      "bytes": 95776,
+      "sha256": "91ac8704b062dbe3e58aa2389039b111c84205f245f66d6ea08902ef29452ccd"
+    },
+    {
+      "path": "diagnostics.html",
+      "bytes": 670174,
+      "sha256": "162006e7f29e3e2b859356c63a7ebbc0f69c5a4b9dbfbd88e33dc33c65165229"
+    },
+    {
+      "path": "games.pkl",
+      "bytes": 581,
+      "sha256": "4bf87705fd3c0117855d2ef1963a5101db3d94c8852fcdba9612b539eb09bd68"
+    },
+    {
+      "path": "git_status.txt",
+      "bytes": 356,
+      "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+    },
+    {
+      "path": "intermediate_states.pkl",
+      "bytes": 2572840,
+      "sha256": "62293ea64dd5a11a06d10da996232e583ee12219ab4de6d5f53f045dd1669b7a"
+    },
+    {
+      "path": "movies/gm0r0-492f87ba_p0.html",
+      "bytes": 6761,
+      "sha256": "09aaa2c547774112b31ee07b1d0d3511386c936996c3026f2ec802cf8d2554f5"
+    },
+    {
+      "path": "movies/gm0r0-492f87ba_p0.mp4",
+      "bytes": 21685,
+      "sha256": "118d22d95afcb1fbf191f038c69f51fbee042d9da9ec79dd9149bac3b455d3ee"
+    },
+    {
+      "path": "movies/gsk48-d8078629_p0.html",
+      "bytes": 6761,
+      "sha256": "9f75340d6e784bb76c039f388860da761840af8a35ae1ed0bd9ee70a4dd2be4f"
+    },
+    {
+      "path": "movies/gsk48-d8078629_p0.mp4",
+      "bytes": 9331,
+      "sha256": "bad47f291bc306aaf88d7f787640e0fa012b3dc211622ef057ba9e36ebbc8cdc"
+    },
+    {
+      "path": "movies/gtn36-ef4dde99_p0.html",
+      "bytes": 6761,
+      "sha256": "2b5b65ce20b690cdf550d32b0d2626f9288d3080bf6d2115177ad06eacf33dd8"
+    },
+    {
+      "path": "movies/gtn36-ef4dde99_p0.mp4",
+      "bytes": 13921,
+      "sha256": "e7d0926205cb59bdd6dc6652f03842af6178b81e89b23656e9c55d5ddd89aee7"
+    },
+    {
+      "path": "prompts/prompt.log",
+      "bytes": 222954,
+      "sha256": "579d9d7484ad6eebf35988b52652d557fe38d7abf038090164d2d40c0373850f"
+    },
+    {
+      "path": "requests.jsonl",
+      "bytes": 112119864,
+      "sha256": "26ae3ba297594a8b298b34b59b8f12a574dde22e779f4bf79afe9be42850429e"
+    },
+    {
+      "path": "serve.log",
+      "bytes": 1329679,
+      "sha256": "f07e68a76aee27b15f8a23d1e30f8a635074d1c297e1fe8ce81199b9b034b7da"
+    },
+    {
+      "path": "solver.pkl",
+      "bytes": 1909,
+      "sha256": "6b150bfb49d362ccb1bc6ef45a938c14aeed50bdb634ba425fefccde8133a4c2"
+    },
+    {
+      "path": "solver_analysis/m0r0-492f87ba_p0.html",
+      "bytes": 2310231,
+      "sha256": "91a753bec832f0c26f8c3c1983fa1f30d356c7c294086cf968fd298076847703"
+    },
+    {
+      "path": "solver_analysis/sk48-d8078629_p0.html",
+      "bytes": 1591142,
+      "sha256": "43979ef56f6ec823834949a8d5eb2248e1d8dc3972dcb2e37ab78445433f9f26"
+    },
+    {
+      "path": "solver_analysis/tn36-ef4dde99_p0.html",
+      "bytes": 1685557,
+      "sha256": "d448386ff7141720202b6a7cbe038dc4e31eed3c6fdb1209a2c7708fff1c720a"
+    },
+    {
+      "path": "submission.parquet",
+      "bytes": 2648,
+      "sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb"
+    },
+    {
+      "path": "summary.txt",
+      "bytes": 577,
+      "sha256": "71e22b09047762efe1a2e7d960676fae0927acb4c13729c73ed0364bc8050ff2"
+    },
+    {
+      "path": "transcripts/m0r0-492f87ba_p0.txt",
+      "bytes": 2209088,
+      "sha256": "6442e1101d42f1ee325a853cd9a2e3f86edfd5b7521f52fc282ab768fe709d2c"
+    },
+    {
+      "path": "transcripts/sk48-d8078629_p0.txt",
+      "bytes": 1536001,
+      "sha256": "d9a9a9c0a9a1f52c9df25181d7d93adf86d2aeafedae9ef18f77e2d49bce06ee"
+    },
+    {
+      "path": "transcripts/tn36-ef4dde99_p0.txt",
+      "bytes": 1613695,
+      "sha256": "e348c7fc0a71d04bdfb2bdf33f90573ce03eeebdbb727c4f26cb603f0e0b4083"
+    }
+  ],
+  "private": true,
+  "gpu_enabled": true,
+  "internet_enabled": false,
+  "official_submission_or_quota_use": false
+}

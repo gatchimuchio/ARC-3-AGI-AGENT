@@ -1,0 +1,45 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-058",
+  "hypothesis": "The C2-046 slim control had one 12,288-token response ending with finish_reason=length and no tool call. Raising only the per-response output cap to 16,384 may let that deliberation finish an action; it may also cost more runtime.",
+  "status": "pushed once; version 27 RUNNING as observed 2026-10-25T12:50:00Z",
+  "candidate_source": "出力/ARC3-RUN-003-local/C2-058-output-cap-16384/source/cap-16384",
+  "control_source": "出力/ARC3-RUN-003-local/C2-046/source/slim",
+  "one_factor_change": {
+    "cell": 5,
+    "behavior": "LOCAL_ANALYZER_MAX_OUTPUT 12*1024 -> 16*1024; no other notebook source or metadata bytes change"
+  },
+  "same_public_games_seed_and_limits": true,
+  "private": true,
+  "gpu": true,
+  "internet": false,
+  "official_submission_or_quota_use": false,
+  "base_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+  "candidate_notebook_sha256": "b72c8105c1916337d6016e224762afe3d9a0c3be24a4abb539b83591e6ca48d0",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "changed_cells": [
+    5
+  ],
+  "notebook_cells": 25,
+  "metadata_equal": true,
+  "paired_acceptance": {
+    "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+    "game_starts": 3,
+    "mean_strictly_greater_than": 19.309155943771326,
+    "paired_mean_delta_vs_C2-046": "positive"
+  },
+  "required_comparisons": [
+    "per-game score",
+    "completed levels",
+    "wins",
+    "actions",
+    "runtime",
+    "generated tokens",
+    "terminal states",
+    "matched initial states"
+  ],
+  "promotion_requires": "If the pilot gate passes, run matched public-25 validation before promotion; continue score optimization after any pass.",
+  "prepared_at_utc": "2026-10-25T12:47:06Z",
+  "kaggle_version": 27,
+  "status_observed_at_utc": "2026-10-25T12:50:00Z",
+  "push_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-push-20261025T125000Z.json"
+}

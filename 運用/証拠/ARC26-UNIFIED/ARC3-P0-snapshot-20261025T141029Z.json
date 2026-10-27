@@ -1,0 +1,142 @@
+{
+  "snapshot_id": "ARC3-P0-v4-20261025-141029Z",
+  "observed_at_utc": "2026-10-25T14:10:29Z",
+  "purpose": "P0 baseline immediately before recording/applying the Owner-provided ARC26 v4.0 document set.",
+  "repository": {
+    "path": "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT",
+    "origin": "gatchimuchio/ARC-3-AGI-AGENT",
+    "branch": "main",
+    "head": "8667e9b9512e328084050007d3bdedb1ae5e245f",
+    "head_matches_v4_audit_reference": true
+  },
+  "working_tree_before_snapshot_files_and_v4_document_install": {
+    "status_porcelain_v1_sha256": "e624b6abad4506336fa0f219345672083099360b3e91fff157fbae635fb8ce51",
+    "status_bytes": 88378,
+    "status_entries": 659,
+    "status_codes": {
+      " M": 10,
+      "??": 649
+    },
+    "tracked_diff_binary_sha256": "855c2205b92afe98a4c2f6947534c0531dea30e53e0010b6d62e0085f7e004b2",
+    "tracked_diff_bytes": 81075,
+    "status_capture": "saved verbatim alongside this JSON",
+    "status_capture_path": "運用/証拠/ARC26-UNIFIED/ARC3-P0-working-tree-status-20261025T141029Z.txt",
+    "status_capture_sha256": "e624b6abad4506336fa0f219345672083099360b3e91fff157fbae635fb8ce51"
+  },
+  "protected_files": {
+    "AGENTS.md": {
+      "sha256": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+      "bytes": 1627
+    },
+    "制御/現在状態.json": {
+      "sha256": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c",
+      "bytes": 358,
+      "parsed": {
+        "スキーマ版": "arc3-current-state-ja-v2",
+        "状態": "再設計中",
+        "基底言語": "日本語",
+        "戦略": null,
+        "現在作業": "学習機械基底・公式入力・評価環境の再整理",
+        "自動遷移": false,
+        "学習機械正本": "HDS/学習系統/v0.4.2",
+        "公式入力": "入力",
+        "旧資産": "現行権威から除外"
+      }
+    }
+  },
+  "source_manifests": {
+    "接続": {
+      "exists": true,
+      "files": 204,
+      "bytes": 2487157,
+      "manifest_sha256": "bc152fc7e3dd6c2b8535671ff6834abb8a4b0fce8b9b2361d7ebedda0cf31b39"
+    },
+    "道具": {
+      "exists": true,
+      "files": 23,
+      "bytes": 231424,
+      "manifest_sha256": "5db130afd1732b8fe4601d2cc61bc4f53619e19eef22485a578d2573eea3a538"
+    },
+    "検証": {
+      "exists": true,
+      "files": 682,
+      "bytes": 108456981,
+      "manifest_sha256": "50aee49026829c9773545b383b79b35c1f8a638fc91be26c858eccf2d1c844f4"
+    }
+  },
+  "learning_machine": {
+    "path": "HDS/学習系統/v0.4.2",
+    "exists": true,
+    "files": 30,
+    "bytes": 200960,
+    "manifest_sha256": "8d7f63e1b66065e5185ca2c492411ffc1bfb9aea018f44f9ec929d9e399b0b61"
+  },
+  "official_inputs": {
+    "path": "入力",
+    "exists": true,
+    "files": 174,
+    "bytes": 112111598,
+    "manifest_sha256": "04147c8a0c796373ca548e8e06c4c338a308ef14bce33b421bbc5065a62cd969"
+  },
+  "pretraining_memory": {
+    "path": "記憶/事前記憶/v0.4",
+    "exists": true,
+    "files": 4,
+    "bytes": 20990,
+    "manifest_sha256": "d81dcaa9c76f9442ccea10c13afc19017545fa52ca3220cf9779937629c593d2"
+  },
+  "dependencies": {
+    "pyproject.toml": {
+      "sha256": "b345cd6f1791355a795c7745c09190b0d339ae8f813f5aab831453b9e715574f",
+      "bytes": 1045
+    },
+    "uv.lock": {
+      "sha256": "5f68afaa2b663657c5705ed39e58ef231bd675a95ef8318de3c34b57018ac5e7",
+      "bytes": 186332
+    }
+  },
+  "current_document_index": {
+    "path": "運用/ARC3文書正本.md",
+    "sha256": "2a2d0179900062d9035c55d1ad8c8c8bd9ca134b4753f7cbe5cff68ba7a828fd",
+    "bytes": 3441,
+    "declared_current": "ARC26-UNIFIED v3.0 (2026-10-24 JST)"
+  },
+  "current_official_report": {
+    "path": "運用/ARC3-RUN-003/C1-018_モデルv5競技実行適合性と公式評価.md",
+    "sha256": "2639352aa717b6573d4ded2fe8e01456f9a68f1352d9227c72a86fc602ef937a",
+    "bytes": 2913
+  },
+  "owner_supplied_v4": {
+    "zip_path": "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC２\\.codex-attachments\\e8208605-66e1-41e6-bd23-4eb3db244105\\3ff996f1-b852-4221-89cf-aa7396f714f8\\ARC26_再現性優先_v4_3点セット.zip",
+    "zip_sha256": "aeba755872429df889c39a09b7c13a923779aa732194aa5fa90514c39d2f31e0",
+    "zip_bytes": 22265,
+    "documents": [
+      {
+        "name": "ARC26_再現性優先_v4_仕様書.md",
+        "bytes": 16955,
+        "sha256": "c5938497688a94eb3e01c80c9d61583f38a23c200174987773568b1bc5d0362a"
+      },
+      {
+        "name": "ARC26_再現性優先_v4_工程表.md",
+        "bytes": 14666,
+        "sha256": "cf9037370617ed899dee039e67720713ac62f58e76dc2ec3055cb36360807d3b"
+      },
+      {
+        "name": "ARC26_再現性優先_v4_Codex指示書.md",
+        "bytes": 16622,
+        "sha256": "fe553ee2f77022a2ba331bcd525792ab20e5fdda5126141bf656d4dc4be52480"
+      }
+    ]
+  },
+  "active_private_pilot": {
+    "experiment_id": "ARC3-RUN-003/C2-058",
+    "kernel": "tecchannn/arc3-model-guided-c2-025",
+    "version": 27,
+    "candidate_notebook_sha256": "b72c8105c1916337d6016e224762afe3d9a0c3be24a4abb539b83591e6ca48d0",
+    "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "status_observed_at_utc": "2026-10-25T14:09:55Z",
+    "status": "KernelWorkerStatus.RUNNING",
+    "official_submission_or_quota_use": false
+  },
+  "scope_note": "This is a baseline record only. It does not declare HDS/memory use or official-score version identity verified."
+}

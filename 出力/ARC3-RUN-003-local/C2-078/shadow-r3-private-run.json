@@ -1,0 +1,47 @@
+{
+  "schema": "arc3-private-visual-hds-run.v1",
+  "run_id": "ARC3-RUN-003-C2-078-SHADOW-R3-V1",
+  "created_at_utc": "2026-10-26T23:39:15.321492+00:00",
+  "kernel": "tecchannn/arc3-visual-hds-v6-shadow-pilot",
+  "requested_kernel": "tecchannn/arc3-visual-hds-v6-shadow-r3-pilot",
+  "version": 1,
+  "status": "KernelWorkerStatus.RUNNING",
+  "status_observation": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-observation-20261026T233915Z.json",
+  "status_observation_sha256": "83f0cb4bfce54df83a4eaa405edb26a240f0218b2ee76fb60216fb393064601f",
+  "push_count": 1,
+  "push_request": {
+    "path": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-v1-push-request.json",
+    "sha256": "f09c5b3be1c7acd4055a79db55e818710b1a61bd723dd8a15f0499e14d03b52e"
+  },
+  "push_receipt": {
+    "path": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-v1-push-receipt.json",
+    "sha256": "53f7a6ba8907e28b15cc684c4f5c6b6f1a407bacd9311da4aaaf9053990eb7cd"
+  },
+  "identity_verification": {
+    "path": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-v1-identity-verification.json",
+    "sha256": "c2435ad16d7f3b45315744ce638052f8c3fb6bb04a977f990262125d41d8cb47"
+  },
+  "notebook_sha256": "2c44859bc5754198ce154c4ffb540708d5b5fe5d17a84440ace34902642ebfbe",
+  "metadata_sha256": "a916314e3948fca32692b01c0088c9913e0af38ba145a866f3a91894c5cd5ef6",
+  "bundle_sha256": "ed0c13e329c948e774424ebc738eaf2a8c3bb83c0bcdbcf71945a0ac3c5f3766",
+  "pilot": {
+    "games_max": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_max": 80,
+    "runtime_seconds_max": 1200,
+    "competition_rerun_allowed": false
+  },
+  "model_seed": 0,
+  "environment_seed_requested_by_notebook": null,
+  "hds_budgets_per_game": {
+    "update_budget": 80,
+    "query_budget": 80,
+    "hds_seconds_budget": 120.0
+  },
+  "global_timeout_seconds": 10800,
+  "scoring_scope": "standalone prequential HDS observation; NOT paired r2/r3 score comparison",
+  "model_context_or_actions_changed_by_HDS": false,
+  "official_submission_or_rerun_performed": false,
+  "do_not_duplicate_or_edit_active_kernel": true
+}

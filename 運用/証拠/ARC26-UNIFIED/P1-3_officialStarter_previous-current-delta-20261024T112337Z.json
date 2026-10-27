@@ -1,0 +1,166 @@
+{
+  "schema": "arc3.starter.previous-current-delta.v1",
+  "observed_at_utc": "2026-10-24 11:23:37 UTC",
+  "event": "ARC3 official Starter local current-versus-previous-HEAD public-25 operational delta",
+  "runner": "official agents.agent.Agent.main + arc_agi Arcade/LocalEnvironmentWrapper OFFLINE",
+  "network_calls_blocked": true,
+  "submission_or_rerun_performed": false,
+  "same_25_environment_manifest": true,
+  "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+  "previous": {
+    "git_head": "8667e9b9512e328084050007d3bdedb1ae5e245f",
+    "agent_source_sha256": "a37a4f9761b40f93e0b2aa95b82b797452ff9fa973c89d96862791c42c9aa1bb",
+    "evidence_file": "運用/証拠/ARC26-UNIFIED/P1-3_officialStarter_public25_previous-HEAD-20261024T111950Z.json",
+    "evidence_sha256": "17291c82e7a9d7b855e090e7ba7daca70e767a65171933feceab9919df3fa37d",
+    "aggregate": {
+      "action_cap": 0,
+      "action_ids": {},
+      "game_over": 0,
+      "illegal": 0,
+      "levels": 0,
+      "steps": 0,
+      "wins": 0
+    }
+  },
+  "current": {
+    "source_bundle_sha256": "d00ab4af0613a4949e13a886fbaf12a5b61c868c3aaaac42320ba38d1268301e",
+    "agent_source_sha256": "47539cd3c0a19b033fb782df61e4275062b8f7b2343eca3376fbda9b50237486",
+    "evidence_file": "運用/証拠/ARC26-UNIFIED/P1-3_officialStarter_public25-20261024T111429Z.json",
+    "evidence_sha256": "f29629b467c13e5219b173937c75a158107f685fbf230cb23d4383f202028b63",
+    "aggregate": {
+      "action_cap_ends": 25,
+      "elapsed_seconds": 589.788,
+      "game_over_ends": 0,
+      "games": 25,
+      "games_with_non_reset_actions": 25,
+      "games_with_two_or_more_non_reset_actions": 25,
+      "games_won": 0,
+      "hds_state_queries": 2000,
+      "hds_updates": 1986,
+      "illegal_actions": 0,
+      "levels_completed": 4,
+      "max_actions_per_game": 80,
+      "non_reset_actions": 1986,
+      "reset_actions": 14,
+      "sdk_steps": 2000,
+      "single_sdk_step_per_agent_request_all": true
+    },
+    "exploration_policy_random_seed": null
+  },
+  "previous_current_delta": {
+    "agent_action_requests": [
+      0,
+      2000,
+      2000
+    ],
+    "non_reset_actions": [
+      0,
+      1986,
+      1986
+    ],
+    "reset_actions": [
+      0,
+      14,
+      14
+    ],
+    "levels_completed": [
+      0,
+      4,
+      4
+    ],
+    "wins": [
+      0,
+      0,
+      0
+    ],
+    "illegal_actions": [
+      0,
+      0,
+      0
+    ],
+    "action_cap_ends": [
+      0,
+      25,
+      25
+    ]
+  },
+  "interpretation": "The previous HEAD implementation did not issue actions. The current version exercised the official action path and produced 4 level-completion events without illegal actions, but wins stayed at 0. This is an operational-path delta, not a matched gameplay-capability or score comparison: the previous policy was inert, current policy RNG seed was None, and no official score is attributable to the current local source.",
+  "policy_candidate_rejections": {
+    "policy_seed_sweep": {
+      "summary_file": "出力/ARC3-RUN-002-local/C6-003-policy-seed-summary.json",
+      "summary_sha256": "7b5b8af263b9d0fb0509f259d16cb6d16268db4e085e0f7c492503885241834f",
+      "policy_seeds": [
+        7,
+        11,
+        17,
+        29,
+        31,
+        43,
+        59,
+        73,
+        83,
+        101
+      ],
+      "holdout_games_per_policy_seed": 20,
+      "levels_completed": {
+        "min": 1,
+        "median": 3.0,
+        "max": 4,
+        "mean": 2.7
+      },
+      "wins": {
+        "min": 0,
+        "median": 0.0,
+        "max": 0,
+        "mean": 0
+      },
+      "no_op_actions": {
+        "min": 118,
+        "median": 129.0,
+        "max": 169,
+        "mean": 133
+      },
+      "decision": "No policy seed produced a win in the 20-game matched-start holdout; seed selection is not adopted as a demonstrated gameplay improvement."
+    },
+    "initial_observation_hashseed_ablation": {
+      "summary_file": "出力/ARC3-RUN-002-local/C2-022-hashseed-dev-summary.json",
+      "summary_sha256": "0bb462e7e7e980e0805219c8ecf8d5d095c9578dea7bcbd5618bfa38b8df303d",
+      "baseline": {
+        "actions": 1200,
+        "levels_completed": 3,
+        "wins": 0,
+        "no_op_actions": 35,
+        "game_over_events": 18,
+        "reset_actions": 18,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "candidate": {
+        "actions": 1200,
+        "levels_completed": 0,
+        "wins": 0,
+        "no_op_actions": 27,
+        "game_over_events": 15,
+        "reset_actions": 15,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "delta": {
+        "actions": 0,
+        "levels_completed": -3,
+        "wins": 0,
+        "no_op_actions": -8,
+        "game_over_events": -3,
+        "reset_actions": -3,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "decision": "Rejected: the 5-game development evaluation lost 3 level-completion events despite 8 fewer no-op actions."
+    }
+  },
+  "accuracy_claim": false,
+  "official_current_local_agent_score_established": false
+}

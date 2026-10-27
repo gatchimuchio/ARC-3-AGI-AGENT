@@ -1,0 +1,104 @@
+{
+  "evaluation": "candidate_v4_workspace_default_cross_holdout_equivalence",
+  "stage": "public_holdout",
+  "split_seed": 20261022,
+  "holdout_games": 20,
+  "seeds": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_game": 80,
+  "retry_game_over": true,
+  "candidate_bundle_sha256": "974029af7f66b774c96af3cf86b2344905bf68a0c83445fd366c74dd779e54d9",
+  "candidate_policy_sha256": "1a89f01a84ed5a3cf3df1e07a9b16c1d74d027960108c82cf5fae5d8dd0b90e5",
+  "workspace_policy_sha256": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+  "changed_policy_source_count": 1,
+  "policy_changed": false,
+  "per_seed": {
+    "7": {
+      "runs": 20,
+      "same_public_start": 20,
+      "identical_action_response_runs": 20,
+      "workspace_default": {
+        "actions": 1600,
+        "levels_completed": 1,
+        "no_op_actions": 150,
+        "game_over_events": 10,
+        "reset_actions": 10,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "wins": 0
+      },
+      "candidate_v4": {
+        "actions": 1600,
+        "levels_completed": 1,
+        "no_op_actions": 150,
+        "game_over_events": 10,
+        "reset_actions": 10,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "wins": 0
+      }
+    },
+    "31": {
+      "runs": 20,
+      "same_public_start": 20,
+      "identical_action_response_runs": 20,
+      "workspace_default": {
+        "actions": 1600,
+        "levels_completed": 2,
+        "no_op_actions": 128,
+        "game_over_events": 9,
+        "reset_actions": 9,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "wins": 0
+      },
+      "candidate_v4": {
+        "actions": 1600,
+        "levels_completed": 2,
+        "no_op_actions": 128,
+        "game_over_events": 9,
+        "reset_actions": 9,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "wins": 0
+      }
+    },
+    "73": {
+      "runs": 20,
+      "same_public_start": 20,
+      "identical_action_response_runs": 20,
+      "workspace_default": {
+        "actions": 1600,
+        "levels_completed": 2,
+        "no_op_actions": 137,
+        "game_over_events": 10,
+        "reset_actions": 10,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "wins": 0
+      },
+      "candidate_v4": {
+        "actions": 1600,
+        "levels_completed": 2,
+        "no_op_actions": 137,
+        "game_over_events": 10,
+        "reset_actions": 10,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "wins": 0
+      }
+    }
+  },
+  "all_starts_match": true,
+  "all_action_response_records_match": true,
+  "saved_run_trajectories": false
+}

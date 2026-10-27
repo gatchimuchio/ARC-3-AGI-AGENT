@@ -1,0 +1,66 @@
+{
+  "experiment": "ARC3-RUN-003/C2-051",
+  "attempt": 2,
+  "attempt_kind": "infrastructure recovery; same selective current_plan clearing treatment",
+  "status": "pushed once as Kaggle kernel version 19; latest status RUNNING",
+  "previous_attempt": {
+    "reported_version": 18,
+    "terminal_status": "KernelWorkerStatus.ERROR",
+    "benchmark_started": false,
+    "exact_reason": "SGLang inference readiness was not confirmed before 1800-second deadline after 185.40 GB precache completed in 1718.07 seconds",
+    "evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v18-terminal-startup-error-20261024T210540Z.json"
+  },
+  "candidate": {
+    "base_candidate_notebook_sha256": "0caf246e690489e225a4a1fe6b2de6e04c56ffdfc0b3ba310fc192ecfd9ca482",
+    "notebook_sha256": "021bc357fb2ad7205165fe740894dd27380360faffb04b56780c769369def55d",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+    "gameplay_treatment_unchanged": true
+  },
+  "source_audit": {
+    "changed_cells_vs_attempt_1": [
+      5,
+      13
+    ],
+    "cell_source_changes": {
+      "5": {
+        "from": "SERVER_STARTUP_TIMEOUT = 30 * 60",
+        "to": "SERVER_STARTUP_TIMEOUT = 40 * 60"
+      },
+      "13": {
+        "from": "--watchdog-timeout 1800",
+        "to": "--watchdog-timeout 2400"
+      }
+    },
+    "all_other_cell_sources_equal": true,
+    "metadata_bytes_identical": true,
+    "private_gpu_internet_off": true
+  },
+  "controls": {
+    "offline_games": 3,
+    "seed": 0,
+    "passes": 1,
+    "concurrency": 1,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "server_startup_timeout_seconds": 2400,
+    "watchdog_timeout_seconds": 2400,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_submission_or_rerun": false,
+    "submission_quota_use": false
+  },
+  "acceptance_gate": {
+    "strict_mean_above_C2_046_slim": 19.309155943771326,
+    "positive_paired_mean_delta": true,
+    "pilot_only": true
+  },
+  "push_result": {
+    "reported_version": 19,
+    "push_exit_code": 0,
+    "status": "KernelWorkerStatus.RUNNING",
+    "observed_at_utc": "2026-10-24T21:07:23Z",
+    "push_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v19-push-20261024T210723Z.json"
+  }
+}

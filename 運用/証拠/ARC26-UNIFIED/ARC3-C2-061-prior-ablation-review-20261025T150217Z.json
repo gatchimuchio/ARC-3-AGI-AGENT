@@ -1,0 +1,46 @@
+{
+  "candidate_manifest_file": "出力/ARC3-RUN-003-local/C2-046/candidate-manifest.json",
+  "candidate_manifest_sha256": "b0bdb249cfe992794cec959ffe3e1e7380386f59c0fbfefe8dcd4467002f481f",
+  "conditions": {
+    "initial_states_matched": 3,
+    "off_completed_levels": 6,
+    "off_v11_mean": 12.735566518051387,
+    "official_competition_rerun": false,
+    "per_game_action_cap": 160,
+    "same_three_public_starts": true,
+    "seed": 0,
+    "slim_v12_completed_levels": 6,
+    "slim_v12_delta_vs_off": 3.112775481948613,
+    "slim_v12_mean": 15.848342,
+    "slim_v13_completed_levels": 7,
+    "slim_v13_delta_vs_off": 6.573589481948613,
+    "slim_v13_mean": 19.309156,
+    "wins_each_arm": 0
+  },
+  "current_C2_059_vs_C2_046_slim_source_delta": {
+    "changed_cells": [
+      5
+    ],
+    "changes": [
+      "LOCAL_ANALYZER_CONTEXT_WINDOW: 128 KiB to 132 KiB",
+      "LOCAL_ANALYZER_MAX_OUTPUT: 12 KiB to 16 KiB"
+    ]
+  },
+  "decision": "DEPRIORITIZE_C2_061_DUPLICATE_MODE_ABLATION",
+  "experiment_id": "ARC3-RUN-003/C2-061-prior-ablation-review",
+  "kernel_push_performed": false,
+  "notebook_source_changed_cells": [
+    5
+  ],
+  "observed_at_utc": "2026-10-25T15:02:17Z",
+  "off_notebook_sha256": "b5a77e0e01906c52fd706ff31b3f73473fdf62f8e719af3d54747f3d90fbd828",
+  "official_submission_or_quota_use": false,
+  "paired_preflight_only_memory_mode_differs": true,
+  "prior_experiment_id": "ARC3-RUN-003/C2-046",
+  "reason": "The prior controlled three-start ablation already tested off versus slim on current lineage with identical source except cell 5. Both slim replications scored above off. C2-061 changes memory mode on a context/output configuration modified since that ablation, so an interaction remains possible but has no current evidence; do not spend the next private run on it unless v28 creates a concrete interaction hypothesis. Prioritize inspecting v28 output-cap events; only then consider C2-060.",
+  "schema": "arc3-c2-061-prior-ablation-review.v1",
+  "slim_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+  "status": "DRAFT_HELD_NO_PUSH",
+  "versioned_output_attribution_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-046-versioned-output-attribution-20261024T1739Z.json",
+  "versioned_output_attribution_sha256": "8185542aee9e0d5f32b417b53d131792313d54c4e90a850ea37dc0919909672f"
+}

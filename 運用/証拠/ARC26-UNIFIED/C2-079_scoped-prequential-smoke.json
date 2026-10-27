@@ -1,0 +1,75 @@
+{
+  "HDS_forecasts_changed_chosen_action": false,
+  "ability_or_score_improvement_proven": false,
+  "budget_semantics": "80 shared updates, 80 queries per arm, 120 seconds combined actual HDS work per game including prior; one update per actual response",
+  "canonical_bridge_R3_or_notebook_sources_changed": false,
+  "costs_per_anonymous_game": [],
+  "cpu_smoke": {
+    "actual_SDK_or_model_called": false,
+    "cost": {
+      "combined_actual_hds_seconds": 0.11702910004532896,
+      "combined_actual_seconds_budget": 20.0,
+      "combined_time_budget_exhausted": false,
+      "scoped_queries_attempted": 4,
+      "scoped_queries_succeeded": 4,
+      "scoped_query_budget": 8,
+      "scoped_query_errors": 0,
+      "scoped_query_seconds": 0.0064530000381637365,
+      "shared_prior_seconds": 0.046838,
+      "shared_prior_updates": 5,
+      "shared_update_budget": 8,
+      "shared_update_seconds": 0.057055,
+      "shared_updates_attempted": 3,
+      "shared_updates_succeeded": 3,
+      "whole_queries_attempted": 4,
+      "whole_queries_succeeded": 4,
+      "whole_query_budget": 8,
+      "whole_query_errors": 0,
+      "whole_query_seconds": 0.006682
+    },
+    "passed": true,
+    "same_input_and_learning_state_query_pairs": 4,
+    "scoped_status": "出力",
+    "strict_previous_counter_steps": 3,
+    "whole_status": "断定保留"
+  },
+  "knowledge_fingerprint": "all ledger counts; full observations/current state/active and quarantined principles; no query identifiers",
+  "legacy_global_HOLD_preserved_alongside_native_scoped_status": true,
+  "model_GPU_Kaggle_called": false,
+  "native_pre_post_hashes": [
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "post_sha256": "5ba2c6435b436b2a3b8e16785726efeff4380afd378237da2c9dcd62ebf4e259",
+      "pre_sha256": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "post_sha256": "358a1d48a8f22b95ec239e1265a334a972de69d77c8e7438479fc69ff1aecc26",
+      "pre_sha256": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+    }
+  ],
+  "paired_counts": {},
+  "query_identifier_allocation_allowed_and_excluded_from_knowledge_fingerprint": true,
+  "raw_stream_persisted": false,
+  "run_id": "C2-079_scoped-prequential-smoke",
+  "same_C2_078_configuration_but_exact_old_stream_identity_unproven": true,
+  "schema": "arc3-native-scoped-public-prequential-comparison.v1",
+  "scoped_arm": {
+    "counts": {},
+    "coverage": null,
+    "precision": null,
+    "same_covered_previous_majority_precision": null
+  },
+  "shared_nonreset_stream_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "shared_update_streams": 0,
+  "smoke_only": true,
+  "source_sha256": {
+    "CPU_proof": "a9c90a4fdeb5f7f125850d3db11590b92acafff05652c88d60e730485137df7a",
+    "R3_bundle": "ed0c13e329c948e774424ebc738eaf2a8c3bb83c0bcdbcf71945a0ac3c5f3766",
+    "candidate_patch": "df5f071ac51820200b3e95f1f65a50d4697619a8bab00fe19e7fe6c855ca28fb",
+    "reused_C2_078_diagnostic": "b49524127e53254bc00bc3498eb3ee45ee29332900beee1969a3d0e009b7ada1",
+    "runner": "861bce445f9f4342952dd8394d418990c2a6ba3d201bc2e3d3a1b62bba0527cc"
+  },
+  "stream_digest_contains_no_game_identity": true,
+  "whole_arm": null
+}

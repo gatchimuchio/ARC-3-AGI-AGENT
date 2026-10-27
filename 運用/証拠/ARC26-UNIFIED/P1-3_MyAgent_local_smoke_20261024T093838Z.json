@@ -1,0 +1,48 @@
+{
+  "schema": "arc3-myagent-public-local-smoke.v1",
+  "environment": "official arc_agi LocalEnvironmentWrapper",
+  "agent_framework": "lightweight shim from test_ARC3提出agent.py; local venv lacks Kaggle agents.agent",
+  "split": "public dev partition; first 1 games after split seed 20261022",
+  "split_seed": 20261022,
+  "action_seeds": [
+    31
+  ],
+  "max_sdk_actions_per_game": 80,
+  "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+  "agent_source_sha256": "47c967d73918e5b4d08114e494b5c742064ef3fc4dc6b768ad374608626e802b",
+  "exploration_policy_source_sha256": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+  "aggregate": {
+    "games": 1,
+    "games_with_two_or_more_non_reset_actions": 1,
+    "non_reset_actions": 78,
+    "reset_actions": 2,
+    "illegal_actions": 0,
+    "levels_completed": 0,
+    "wins": 0,
+    "hds_observation_updates": 78,
+    "hds_state_queries": 80,
+    "hds_update_seconds": 31.869777,
+    "hds_state_query_seconds": 1.804939,
+    "hds_candidate_query_seconds": 0.131397,
+    "hds_update_count_matches_non_reset_actions": true
+  },
+  "per_game_aggregates": [
+    {
+      "non_reset_actions": 78,
+      "reset_actions": 2,
+      "legal_action_count": 78,
+      "levels_completed": 0,
+      "final_state": "NOT_FINISHED",
+      "agent_stop_reason": "GAME_OVER",
+      "hds_observation_updates": 78,
+      "hds_state_queries": 80,
+      "hds_last_learning_state": "断定保留",
+      "hds_update_seconds": 31.869777,
+      "hds_state_query_seconds": 1.804939,
+      "hds_candidate_query_seconds": 0.131397,
+      "two_or_more_non_reset_actions": true
+    }
+  ],
+  "elapsed_seconds": 38.456,
+  "game_ids_or_boards_saved": false
+}

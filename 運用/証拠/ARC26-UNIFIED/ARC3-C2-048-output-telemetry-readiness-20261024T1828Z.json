@@ -1,0 +1,52 @@
+{
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-048-OUTPUT-TELEMETRY-READINESS",
+  "observed_at_utc": "2026-10-24T18:28:17Z",
+  "reference_kernel_version": 14,
+  "reference_output_directory": "出力\\Kaggle\\arc3-kernel-v14-output-versioned-20261024",
+  "reference_output_files": [
+    {
+      "name": "arc3-model-guided-c2-025.log",
+      "sha256": "c51e1cc0bab91e13f4941f6a682b1ceb292d7c380e79a20896d253bc199c02d3",
+      "bytes": 45633
+    },
+    {
+      "name": "benchmark.json",
+      "sha256": "4a1ccd5f546592446e0e490ad07a4ee89694ba68f82fb3fbec42d96c3520f5f4",
+      "bytes": 55304
+    },
+    {
+      "name": "summary.txt",
+      "sha256": "884abb3a6d451e160abd9a191a7392b6f8d5c70419dcee493ad14a2105591c2c",
+      "bytes": 576
+    }
+  ],
+  "benchmark_top_level_keys": [
+    "label",
+    "n_passes",
+    "solver_label",
+    "start_time",
+    "end_time",
+    "game_weights",
+    "periodic_save_interval_s",
+    "game_runs"
+  ],
+  "game_run_count": 3,
+  "benchmark_recursive_string_marker_counts": {
+    "LEVEL CHANGED": 0,
+    "World model:": 0,
+    "Plan:": 0,
+    "memory update rejected": 0
+  },
+  "log_marker_counts": {
+    "LEVEL CHANGED": 0,
+    "World model:": 0,
+    "Plan:": 0,
+    "memory update rejected": 0
+  },
+  "request_transcript_file_present": false,
+  "interpretation": "Version 14 remote output provides log, benchmark.json, and summary.txt but no requests.jsonl; its benchmark and log do not contain the level-change marker or World model/Plan prompt text. If v15 output lacks an equivalent trace, C2-048 prompt-delivery/stale-memory audit remains unverified and cannot be waived.",
+  "v15_status": "KernelWorkerStatus.RUNNING",
+  "v15_output_pulled": false,
+  "official_submission_or_rerun": false
+}

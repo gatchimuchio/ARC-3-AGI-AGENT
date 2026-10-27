@@ -1,0 +1,31 @@
+{
+  "task_id": "ARC3-RUN-003-C2-055",
+  "observed_at_utc": "2026-10-25T05:49:16Z",
+  "source": "C2-046 slim baseline requests.jsonl",
+  "source_sha256": "041c2aeee7dc283fd8324eff6932cea0938c63917ffa6173e706933c8c2c026f",
+  "response_count": 247,
+  "completion_tokens_total": 439748,
+  "reasoning_tokens_total": 362725,
+  "reasoning_share_of_completion": 0.8248474126090397,
+  "finish_reason_counts": {
+    "tool_calls": 246,
+    "length": 1
+  },
+  "completion_threshold_counts": {
+    "4096": {
+      "count_strictly_greater": 20,
+      "share": 0.08097165991902834
+    },
+    "8192": {
+      "count_strictly_greater": 2,
+      "share": 0.008097165991902834
+    },
+    "12288": {
+      "count_strictly_greater": 0,
+      "share": 0.0
+    }
+  },
+  "max_completion_tokens": 12288,
+  "max_output_tokens_configured": 12288,
+  "interpretation": "A 4096-token output cap would constrain 20/247 observed responses; an 8192 cap would constrain 2/247. Preserve the output cap while C2-055 isolates explicit thinking=false. Token reduction alone is not a score improvement."
+}

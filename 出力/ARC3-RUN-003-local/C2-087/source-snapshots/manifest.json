@@ -1,0 +1,95 @@
+{
+  "sources": [
+    {
+      "source": "検証/ARC3局所応答observer候補構築.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-087/source-snapshots/ARC3局所応答observer候補構築.py",
+      "sha256": "1d10bbce0082c79a802b9425b243fdd91e194402c24802ec3854c2d6391a47df"
+    },
+    {
+      "source": "検証/候補/ARC3Action6局所応答observer.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-087/source-snapshots/ARC3Action6局所応答observer.py",
+      "sha256": "42f7596610f89e54a0fd9c0645f18546e3799ec0719f87f845c2b42f739fcc13"
+    },
+    {
+      "source": "検証/候補/ARC3PythonHDS局所応答runtime.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-087/source-snapshots/ARC3PythonHDS局所応答runtime.py",
+      "sha256": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8"
+    },
+    {
+      "source": "検証/test_ARC3局所応答observer候補.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-087/source-snapshots/test_ARC3局所応答observer候補.py",
+      "sha256": "2f90f2cbaaa8568c4f1c8c9f3fe9369e7b1330df8ecbbb53aadafcf1bc731c0b"
+    }
+  ],
+  "frozen_C2_085_proof_sha256": "4ebce39be17f0e9207d7c17155c6f8d016845547d4acee30361cf3dbddd45656",
+  "artifacts": [
+    {
+      "visibility": "masked",
+      "kernel_id": "tecchannn/arc3-v6-pre4cc-locality-masked-c2-085",
+      "title": "arc3-v6-pre4cc-locality-masked-c2-085",
+      "notebook_sha256": "3c5f1b74ca489fd565df8f8fe557de51b36502625ff2b297c79233971c0a1c4b",
+      "metadata_sha256": "cdc6f62021f780f033c1bed9eb38351d76c8cbd9efce7a4f444afb73492d3002",
+      "manifest_sha256": "b695824bff67d0d934bf7ba4308769c23c88d198682d6fdcc19c0e995c2df1a1",
+      "bundle_sha256": "d66a348026852a9a8e3286d22ae7dfacb10b7cf7d7b26ae8c8cbf33862418312",
+      "runtime_sha256": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8",
+      "pilot": {
+        "games_max": 3,
+        "passes": 1,
+        "concurrency": 1,
+        "actions_max": 80,
+        "runtime_seconds_max": 1200,
+        "competition_rerun_allowed": false
+      },
+      "budgets": {
+        "update_budget": 80,
+        "query_budget": 80,
+        "hds_seconds_budget": 120.0
+      },
+      "seed": 0,
+      "cpu": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "masked",
+        "native_HDS_patched": false
+      }
+    },
+    {
+      "visibility": "shown",
+      "kernel_id": "tecchannn/arc3-v6-pre4cc-locality-shown-c2-085",
+      "title": "arc3-v6-pre4cc-locality-shown-c2-085",
+      "notebook_sha256": "14ad90b5dd4c5ee4fa373420431f01ec0526b2613788efb1a8276b738b5c1bc9",
+      "metadata_sha256": "cd32070f03a8236e8f2187bc38f017ef4c99ec3fadf96f2701bc6cb17d49bfaf",
+      "manifest_sha256": "78dec12f8e11658c636f7ce36ffd5aa692c1a5af118574d3f314e75deb0c1d4a",
+      "bundle_sha256": "d66a348026852a9a8e3286d22ae7dfacb10b7cf7d7b26ae8c8cbf33862418312",
+      "runtime_sha256": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8",
+      "pilot": {
+        "games_max": 3,
+        "passes": 1,
+        "concurrency": 1,
+        "actions_max": 80,
+        "runtime_seconds_max": 1200,
+        "competition_rerun_allowed": false
+      },
+      "budgets": {
+        "update_budget": 80,
+        "query_budget": 80,
+        "hds_seconds_budget": 120.0
+      },
+      "seed": 0,
+      "cpu": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)
+[{"stream_name":"stderr","time":4.485293536,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":4.485317626,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":4.485319566,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":4.485320686,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":4.796522008,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":4.796545318,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":4.796547638,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":4.796549248,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":5.600628537,"data":"Writing /kaggle/harness-changes.patch\n"}
+,{"stream_name":"stderr","time":7.554473398,"data":"Checking patch ARC3-Inference/inference/agent/action_names.py...\n"}
+,{"stream_name":"stderr","time":7.554485858,"data":"Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...\n"}
+,{"stream_name":"stderr","time":7.554487478,"data":"Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...\n"}
+,{"stream_name":"stderr","time":7.554488478,"data":"Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...\n"}
+,{"stream_name":"stderr","time":7.554489288,"data":"Checking patch ARC3-Inference/inference/agent/prompts.py...\n"}
+,{"stream_name":"stderr","time":7.554490078,"data":"Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...\n"}
+,{"stream_name":"stderr","time":7.554623048,"data":"Checking patch ARC3-Inference/inference/agent/runtime_state.py...\n"}
+,{"stream_name":"stderr","time":7.554628968,"data":"Checking patch ARC3-Inference/inference/agent/tool_agent.py...\n"}
+,{"stream_name":"stderr","time":7.557265598,"data":"Checking patch ARC3-Inference/inference/agent/vision_context.py...\n"}
+,{"stream_name":"stderr","time":7.557278278,"data":"Checking patch ARC3-Inference/inference/framework/run.py...\n"}
+,{"stream_name":"stderr","time":7.557420428,"data":"Hunk #1 succeeded at 467 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":7.557421398,"data":"Hunk #2 succeeded at 1271 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":7.557422198,"data":"Checking patch ARC3-Inference/inference/framework/solver.py...\n"}
+,{"stream_name":"stderr","time":7.557660978,"data":"Checking patch ARC3-Inference/inference/utils/animation.py...\n"}
+,{"stream_name":"stderr","time":7.557685718,"data":"Checking patch ARC3-Inference/inference/utils/frame_diff.py...\n"}
+,{"stream_name":"stderr","time":7.557723598,"data":"Checking patch ARC3-Inference/inference/utils/openai_compat.py...\n"}
+,{"stream_name":"stderr","time":7.557758488,"data":"Checking patch ARC3-Inference/inference/utils/retained_functions.py...\n"}
+,{"stream_name":"stderr","time":7.557794038,"data":"Checking patch ARC3-Inference/inference/utils/segmentation.py...\n"}
+,{"stream_name":"stderr","time":7.5579228579999995,"data":"Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.557929438,"data":"Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.5579387879999995,"data":"Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.\n"}
+,{"stream_name":"stderr","time":7.557951718,"data":"Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.557967808,"data":"Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.557979748,"data":"Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.557990308,"data":"Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558039438,"data":"Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558049908,"data":"Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558064148,"data":"Applied patch ARC3-Inference/inference/framework/run.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558077288,"data":"Applied patch ARC3-Inference/inference/framework/solver.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558088278,"data":"Applied patch ARC3-Inference/inference/utils/animation.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558098628,"data":"Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558108418,"data":"Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558122948,"data":"Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.558131418,"data":"Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.\n"}
+,{"stream_name":"stdout","time":7.559911378,"data":"harness patch applied successfully\n"}
+,{"stream_name":"stdout","time":7.559913258,"data":"taaf.kaggle: TRUE_SUBMISSION=False\n"}
+,{"stream_name":"stderr","time":7.560340348,"data":"Checking patch ARC3-Inference/inference/agent/action_names.py...\n"}
+,{"stream_name":"stderr","time":7.560341908,"data":"Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...\n"}
+,{"stream_name":"stderr","time":7.560342808,"data":"Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...\n"}
+,{"stream_name":"stderr","time":7.560343558,"data":"Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...\n"}
+,{"stream_name":"stderr","time":7.560344348,"data":"Checking patch ARC3-Inference/inference/agent/prompts.py...\n"}
+,{"stream_name":"stderr","time":7.560345178,"data":"Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...\n"}
+,{"stream_name":"stderr","time":7.560345978,"data":"Checking patch ARC3-Inference/inference/agent/runtime_state.py...\n"}
+,{"stream_name":"stderr","time":7.560346828,"data":"Checking patch ARC3-Inference/inference/agent/tool_agent.py...\n"}
+,{"stream_name":"stderr","time":7.560347578,"data":"Checking patch ARC3-Inference/inference/agent/vision_context.py...\n"}
+,{"stream_name":"stderr","time":7.560348578,"data":"Checking patch ARC3-Inference/inference/framework/run.py...\n"}
+,{"stream_name":"stderr","time":7.560349328,"data":"Hunk #1 succeeded at 467 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":7.560350168,"data":"Hunk #2 succeeded at 1271 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":7.560350888,"data":"Checking patch ARC3-Inference/inference/framework/solver.py...\n"}
+,{"stream_name":"stderr","time":7.560351628,"data":"Checking patch ARC3-Inference/inference/utils/animation.py...\n"}
+,{"stream_name":"stderr","time":7.560352358,"data":"Checking patch ARC3-Inference/inference/utils/frame_diff.py...\n"}
+,{"stream_name":"stderr","time":7.560353088,"data":"Checking patch ARC3-Inference/inference/utils/openai_compat.py...\n"}
+,{"stream_name":"stderr","time":7.5603575880000005,"data":"Checking patch ARC3-Inference/inference/utils/retained_functions.py...\n"}
+,{"stream_name":"stderr","time":7.560358618,"data":"Checking patch ARC3-Inference/inference/utils/segmentation.py...\n"}
+,{"stream_name":"stderr","time":7.560359368,"data":"Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560360118,"data":"Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560360848,"data":"Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.\n"}
+,{"stream_name":"stderr","time":7.560361598,"data":"Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560362328,"data":"Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560363058,"data":"Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560363788,"data":"Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560364518,"data":"Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560365238,"data":"Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560365988,"data":"Applied patch ARC3-Inference/inference/framework/run.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560366718,"data":"Applied patch ARC3-Inference/inference/framework/solver.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560367438,"data":"Applied patch ARC3-Inference/inference/utils/animation.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560368368,"data":"Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560369098,"data":"Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560369828,"data":"Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560370558,"data":"Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560371318,"data":"\n"}
+,{"stream_name":"stderr","time":7.5603720679999995,"data":"Checking patch ARC3-Inference/inference/agent/action_names.py...\n"}
+,{"stream_name":"stderr","time":7.560372828,"data":"Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...\n"}
+,{"stream_name":"stderr","time":7.560373578,"data":"Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...\n"}
+,{"stream_name":"stderr","time":7.560374408,"data":"Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...\n"}
+,{"stream_name":"stderr","time":7.560375158,"data":"Checking patch ARC3-Inference/inference/agent/prompts.py...\n"}
+,{"stream_name":"stderr","time":7.560375978,"data":"Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...\n"}
+,{"stream_name":"stderr","time":7.560376708,"data":"Checking patch ARC3-Inference/inference/agent/runtime_state.py...\n"}
+,{"stream_name":"stderr","time":7.560377568,"data":"Checking patch ARC3-Inference/inference/agent/tool_agent.py...\n"}
+,{"stream_name":"stderr","time":7.560378288,"data":"Checking patch ARC3-Inference/inference/agent/vision_context.py...\n"}
+,{"stream_name":"stderr","time":7.560379028,"data":"Checking patch ARC3-Inference/inference/framework/run.py...\n"}
+,{"stream_name":"stderr","time":7.560379778,"data":"Hunk #1 succeeded at 467 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":7.560381418,"data":"Hunk #2 succeeded at 1271 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":7.560382168,"data":"Checking patch ARC3-Inference/inference/framework/solver.py...\n"}
+,{"stream_name":"stderr","time":7.560382888,"data":"Checking patch ARC3-Inference/inference/utils/animation.py...\n"}
+,{"stream_name":"stderr","time":7.560383618,"data":"Checking patch ARC3-Inference/inference/utils/frame_diff.py...\n"}
+,{"stream_name":"stderr","time":7.560384348,"data":"Checking patch ARC3-Inference/inference/utils/openai_compat.py...\n"}
+,{"stream_name":"stderr","time":7.560385208,"data":"Checking patch ARC3-Inference/inference/utils/retained_functions.py...\n"}
+,{"stream_name":"stderr","time":7.560386008,"data":"Checking patch ARC3-Inference/inference/utils/segmentation.py...\n"}
+,{"stream_name":"stderr","time":7.560386748,"data":"Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560387498,"data":"Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560388228,"data":"Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.\n"}
+,{"stream_name":"stderr","time":7.560388968,"data":"Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560389698,"data":"Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560390468,"data":"Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560391198,"data":"Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560391938,"data":"Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560392818,"data":"Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560393568,"data":"Applied patch ARC3-Inference/inference/framework/run.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560394288,"data":"Applied patch ARC3-Inference/inference/framework/solver.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560395028,"data":"Applied patch ARC3-Inference/inference/utils/animation.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560395748,"data":"Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560396478,"data":"Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560397198,"data":"Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.\n"}
+,{"stream_name":"stderr","time":7.560397948,"data":"Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.\n"}
+,{"stream_name":"stdout","time":7.630262316,"data":"Precaching: Started...\n"}
+,{"stream_name":"stdout","time":24.770363332,"data":"Precaching: loaded 211 files (6.70 GB) in 17.18 seconds.\n"}
+,{"stream_name":"stdout","time":24.770389272,"data":"\n"}
+,{"stream_name":"stdout","time":27.538487153,"data":"taaf.kaggle: wrote /usr/local/lib/python3.12/dist-packages/taaf_kaggle_sources.pth (3 source roots)\n"}
+,{"stream_name":"stdout","time":27.739051158,"data":"=== installing Pennyroyal (offline) ===\n"}
+,{"stream_name":"stdout","time":27.787081782,"data":"$ /tmp/sgl-intel/bin/uv venv --python /usr/bin/python3 /tmp/sgl-intel/venv\n"}
+,{"stream_name":"stdout","time":27.987002976,"data":"$ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels -r /kaggle/input/datasets/dfranzen/pennyroyal-v253/requirements.lock\n"}
+,{"stream_name":"stdout","time":30.703014158,"data":"$ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels --reinstall --no-deps /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels/sglang-0.5.19+gd00d88efc8d6-cp312-cp312-linux_x86_64.whl\n"}
+,{"stream_name":"stdout","time":30.910589951,"data":"$ /tmp/sgl-intel/venv/lib/python3.12/site-packages/nvidia/cu13/bin/nvcc --version\n"}
+,{"stream_name":"stdout","time":30.910600121,"data":"nvcc: NVIDIA (R) Cuda compiler driver\n"}
+,{"stream_name":"stdout","time":30.910601631,"data":"Copyright (c) 2005-2025 NVIDIA Corporation\n"}
+,{"stream_name":"stdout","time":30.910602671,"data":"Built on Wed_Aug_20_01:58:59_PM_PDT_2025\n"}
+,{"stream_name":"stdout","time":30.910603541,"data":"Cuda compilation tools, release 13.0, V13.0.88\n"}
+,{"stream_name":"stdout","time":30.910604371,"data":"Build cuda_13.0.r13.0/compiler.36424714_0\n"}
+,{"stream_name":"stdout","time":30.910605181,"data":"Host compiler: g++-11\n"}
+,{"stream_name":"stdout","time":30.910606001,"data":"$ /tmp/sgl-intel/venv/bin/python -c 'import pathlib, sglang, torch\n"}
+,{"stream_name":"stdout","time":30.910606841,"data":"print(\"sglang\", sglang.__version__, \"| torch\", torch.__version__)\n"}
+,{"stream_name":"stdout","time":30.910607831,"data":"assert torch.cuda.is_available(), \"CUDA unavailable\"\n"}
+,{"stream_name":"stdout","time":30.910608791,"data":"print(\"GPU:\", torch.cuda.get_device_name(0), \"capability:\", torch.cuda.get_device_capability(0))\n"}
+,{"stream_name":"stdout","time":30.910609751,"data":"'\n"}
+,{"stream_name":"stdout","time":66.965244376,"data":"sglang 0.5.19+gd00d88efc8d6 | torch 2.13.0+cu130\n"}
+,{"stream_name":"stdout","time":66.965265736,"data":"GPU: NVIDIA RTX PRO 6000 Blackwell Server Edition capability: (12, 0)\n"}
+,{"stream_name":"stdout","time":68.071824726,"data":"Target: /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 | shards: 38 | PLE dtype: checkpoint default (typically BF16)\n"}
+,{"stream_name":"stdout","time":68.071840456,"data":"Draft source: /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1\n"}
+,{"stream_name":"stdout","time":68.071842976,"data":"SGLang draft view: /tmp/sgl-intel/draft-view-746747f37bf36968 (2 linked weight shards)\n"}
+,{"stream_name":"stdout","time":68.83596153,"data":"\n"}
+,{"stream_name":"stdout","time":68.83597514,"data":"/tmp/sgl-intel/venv/bin/sglang serve --model-path /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 --load-format safetensors --model-loader-extra-config '{\"enable_multithread_load\":true,\"num_threads\":8}' --served-model-name flashnext --host 127.0.0.1 --port 8001 --tensor-parallel-size 1 --dtype bfloat16 --quantization auto-round --kv-cache-dtype fp8_e4m3 --mem-fraction-static 0.96 --context-length 139264 --page-size 64 --max-running-requests 10 --chunked-prefill-size 8192 --max-prefill-tokens 16384 --cuda-graph-max-bs-decode 10 --cuda-graph-bs-decode 1 2 4 7 8 9 10 --mamba-ssm-dtype bfloat16 --max-mamba-cache-size 60 --mamba-radix-cache-strategy extra_buffer --mamba-track-interval 64 --mamba-backend flashinfer --linear-attn-decode-backend flashinfer --linear-attn-prefill-backend flashinfer --moe-runner-backend auto --ple-offload-embedding --trust-remote-code --mm-feature-transport cpu --image-processor-backend pil --reasoning-parser qwen3 --tool-call-parser qwen3_coder --default-chat-template-kwargs '{\"preserve_thinking\":true}' --watchdog-timeout 1800 --schedule-policy lpm --warmups structured_output --enable-cache-report --enable-metrics --enable-request-time-stats-logging --weight-loader-prefetch-checkpoints --weight-loader-drop-cache-after-load --chat-template /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1/chat_template.jinja --gdn-mtp-cache-mode none --speculative-algorithm NEXTN --speculative-num-steps 3 --speculative-eagle-topk 1 --speculative-num-draft-tokens 4 --speculative-draft-model-path /tmp/sgl-intel/draft-view-746747f37bf36968 --speculative-draft-model-quantization compressed-tensors --speculative-moe-runner-backend auto --speculative-draft-kv-cache-dtype fp8_e4m3 --speculative-accept-threshold-single 1.0 --speculative-accept-threshold-acc 1.0 --speculative-token-map /kaggle/input/datasets/dfranzen/pennyroyal-v253/hot_tokens_64k.pt\n"}
+,{"stream_name":"stdout","time":68.83598704,"data":"\n"}
+,{"stream_name":"stdout","time":68.83598839,"data":"pid 502 -\u003e /kaggle/working/serve.log\n"}
+,{"stream_name":"stdout","time":68.83598965,"data":"  0s ...\n"}
+,{"stream_name":"stdout","time":98.850749398,"data":"  30s ...\n"}
+,{"stream_name":"stdout","time":128.843438511,"data":"Precaching: Started...\n"}
+,{"stream_name":"stdout","time":128.843460721,"data":"  60s ...\n"}
+,{"stream_name":"stdout","time":158.854637638,"data":"  90s ...\n"}
+,{"stream_name":"stdout","time":188.850766476,"data":"  120s ...\n"}
+,{"stream_name":"stdout","time":218.861492648,"data":"  150s ...\n"}
+,{"stream_name":"stdout","time":248.857782253,"data":"  180s ...\n"}
+,{"stream_name":"stdout","time":278.868153507,"data":"  210s ...\n"}
+,{"stream_name":"stdout","time":308.864356811,"data":"  240s ...\n"}
+,{"stream_name":"stdout","time":338.874996184,"data":"  270s ...\n"}
+,{"stream_name":"stdout","time":368.871054221,"data":"  300s ...\n"}
+,{"stream_name":"stdout","time":398.881823427,"data":"  330s ...\n"}
+,{"stream_name":"stdout","time":428.877999794,"data":"  360s ...\n"}
+,{"stream_name":"stdout","time":458.888606716,"data":"  390s ...\n"}
+,{"stream_name":"stdout","time":488.884697026,"data":"  420s ...\n"}
+,{"stream_name":"stdout","time":518.895447602,"data":"  450s ...\n"}
+,{"stream_name":"stdout","time":548.891519377,"data":"  480s ...\n"}
+,{"stream_name":"stdout","time":578.902421023,"data":"  510s ...\n"}
+,{"stream_name":"stdout","time":608.898297067,"data":"  540s ...\n"}
+,{"stream_name":"stdout","time":638.90900709,"data":"  570s ...\n"}
+,{"stream_name":"stdout","time":668.905255694,"data":"  600s ...\n"}
+,{"stream_name":"stdout","time":698.915963899,"data":"  630s ...\n"}
+,{"stream_name":"stdout","time":728.912049014,"data":"  660s ...\n"}
+,{"stream_name":"stdout","time":758.922667995,"data":"  690s ...\n"}
+,{"stream_name":"stdout","time":788.918698132,"data":"  720s ...\n"}
+,{"stream_name":"stdout","time":818.929446465,"data":"  750s ...\n"}
+,{"stream_name":"stdout","time":848.925307429,"data":"  780s ...\n"}
+,{"stream_name":"stdout","time":878.936124615,"data":"  810s ...\n"}
+,{"stream_name":"stdout","time":908.932016712,"data":"  840s ...\n"}
+,{"stream_name":"stdout","time":938.942864258,"data":"  870s ...\n"}
+,{"stream_name":"stdout","time":968.938506125,"data":"  900s ...\n"}
+,{"stream_name":"stdout","time":998.94924551,"data":"  930s ...\n"}
+,{"stream_name":"stdout","time":1028.945084576,"data":"  960s ...\n"}
+,{"stream_name":"stdout","time":1058.955289292,"data":"  990s ...\n"}
+,{"stream_name":"stdout","time":1088.950827258,"data":"  1020s ...\n"}
+,{"stream_name":"stdout","time":1118.961799172,"data":"  1050s ...\n"}
+,{"stream_name":"stdout","time":1148.957289756,"data":"  1080s ...\n"}
+,{"stream_name":"stdout","time":1178.969106459,"data":"  1110s ...\n"}
+,{"stream_name":"stdout","time":1208.963944873,"data":"  1140s ...\n"}
+,{"stream_name":"stdout","time":1238.974981677,"data":"  1170s ...\n"}
+,{"stream_name":"stdout","time":1268.970616963,"data":"  1200s ...\n"}
+,{"stream_name":"stdout","time":1298.981626993,"data":"  1230s ...\n"}
+,{"stream_name":"stdout","time":1328.977242014,"data":"  1260s ...\n"}
+,{"stream_name":"stdout","time":1358.988495004,"data":"  1290s ...\n"}
+,{"stream_name":"stdout","time":1388.984055897,"data":"  1320s ...\n"}
+,{"stream_name":"stdout","time":1418.995206053,"data":"  1350s ...\n"}
+,{"stream_name":"stdout","time":1449.00641674,"data":"  1380s ...\n"}
+,{"stream_name":"stdout","time":1479.001421537,"data":"  1410s ...\n"}
+,{"stream_name":"stdout","time":1509.011977421,"data":"  1440s ...\n"}
+,{"stream_name":"stdout","time":1539.006889647,"data":"  1470s ...\n"}
+,{"stream_name":"stdout","time":1569.017393472,"data":"  1500s ...\n"}
+,{"stream_name":"stdout","time":1599.012385165,"data":"  1530s ...\n"}
+,{"stream_name":"stdout","time":1629.023023733,"data":"  1560s ...\n"}
+,{"stream_name":"stdout","time":1659.018071635,"data":"  1590s ...\n"}
+,{"stream_name":"stdout","time":1689.028716069,"data":"  1620s ...\n"}
+,{"stream_name":"stdout","time":1719.023509252,"data":"  1650s ...\n"}
+,{"stream_name":"stdout","time":1749.034701366,"data":"  1680s ...\n"}
+,{"stream_name":"stdout","time":1779.030044179,"data":"  1710s ...\n"}
+,{"stream_name":"stdout","time":1809.041463159,"data":"  1740s ...\n"}
+,{"stream_name":"stdout","time":1839.036655819,"data":"  1770s ...\n"}
+,{"stream_name":"stdout","time":1847.109579034,"data":"Precaching: loaded 62 files (185.40 GB) in 1718.07 seconds.\n"}
+,{"stream_name":"stdout","time":1847.109604294,"data":"\n"}
+,{"stream_name":"stdout","time":1869.043964719,"data":"\n"}
+,{"stream_name":"stdout","time":1869.043990989,"data":"DEADLINE after 1800s from server launch; server inference readiness was not confirmed\n"}
+,{"stream_name":"stderr","time":1869.382783104,"data":"Traceback (most recent call last):\n"}
+,{"stream_name":"stderr","time":1869.382805734,"data":"  File \"\u003cstring\u003e\", line 1, in \u003cmodule\u003e\n"}
+,{"stream_name":"stderr","time":1869.382808254,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 131, in execute_notebook\n"}
+,{"stream_name":"stderr","time":1869.383485204,"data":"    raise_for_execution_errors(nb, output_path)\n"}
+,{"stream_name":"stderr","time":1869.383523234,"data":"  File \"/usr/local/lib/python3.12/dist-packages/papermill/execute.py\", line 251, in raise_for_execution_errors\n"}
+,{"stream_name":"stderr","time":1869.383537224,"data":"    raise error\n"}
+,{"stream_name":"stderr","time":1869.383623864,"data":"papermill.exceptions.PapermillExecutionError: \n"}
+,{"stream_name":"stderr","time":1869.383636604,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":1869.383638764,"data":"Exception encountered at \"In [6]\":\n"}
+,{"stream_name":"stderr","time":1869.383640574,"data":"---------------------------------------------------------------------------\n"}
+,{"stream_name":"stderr","time":1869.383641694,"data":"RuntimeError                              Traceback (most recent call last)\n"}
+,{"stream_name":"stderr","time":1869.383642704,"data":"/tmp/ipykernel_65/3643703636.py in \u003ccell line: 0\u003e()\n"}
+,{"stream_name":"stderr","time":1869.383644034,"data":"    354 \n"}
+,{"stream_name":"stderr","time":1869.383645154,"data":"    355 if not server_ready and not TRUE_SUBMISSION:\n"}
+,{"stream_name":"stderr","time":1869.383646334,"data":"--\u003e 356     raise RuntimeError(\"SGLang inference readiness was not confirmed; offline benchmark not started\")\n"}
+,{"stream_name":"stderr","time":1869.383651644,"data":"\n"}
+,{"stream_name":"stderr","time":1869.383652634,"data":"RuntimeError: SGLang inference readiness was not confirmed; offline benchmark not started\n"}
+,{"stream_name":"stderr","time":1869.383653514,"data":"\n"}
+,{"stream_name":"stderr","time":1870.957143514,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":1870.957161284,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":1871.104938816,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":1871.104948496,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":1871.530545652,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":1871.685237824,"data":"[NbConvertApp] Writing 672972 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":1872.815239109,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":1873.828987102,"data":"[NbConvertApp] Writing 2266059 bytes to __results__.html\n"}
+]

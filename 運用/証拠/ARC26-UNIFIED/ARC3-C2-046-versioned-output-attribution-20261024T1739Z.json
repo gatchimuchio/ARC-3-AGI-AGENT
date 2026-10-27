@@ -1,0 +1,102 @@
+{
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-046-VERSIONED-OUTPUT-ATTRIBUTION",
+  "observed_at_utc": "2026-10-24T17:39:23Z",
+  "retrieval": {
+    "kaggle_cli_version": "2.2.5",
+    "version_specific_requests_used": true,
+    "version_12_and_13_outputs_are_distinct": true,
+    "old_cli_version": "2.2.4",
+    "old_cli_version_suffix_behavior": "ignored version; returned latest session output"
+  },
+  "source": {
+    "local_c2_046_slim_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+    "remote_v12_notebook_sha256": "c4376f109f5d10413cfbb53ad02c8a67d2c7f55f8e82c3b151e5faee066e94f9",
+    "remote_v13_notebook_sha256": "c4376f109f5d10413cfbb53ad02c8a67d2c7f55f8e82c3b151e5faee066e94f9",
+    "normalized_cell_source_sha256": "f2e757fd0344c894ab80df91d9b43486edf325a973e4020a1fc7f3d80cfdc50c",
+    "local_remote_logical_source_match": true,
+    "v12_v13_source_match": true
+  },
+  "conditions": {
+    "off_control_v11": {
+      "benchmark_sha256": "9ee4b8b85fe6afdb58cf702acca576947be52c808cabcccb3f75188e3ba4da64",
+      "games": 3,
+      "passes": 1,
+      "wins": 0,
+      "mean_score": 12.735566518051387,
+      "levels_completed": 6,
+      "levels_available": 21,
+      "actions": 480
+    },
+    "slim_v12": {
+      "benchmark_sha256": "02b10aac9e5dfb681aff586e6b364522412b261ead057d2d9a9dc4ce44fd7e04",
+      "summary_sha256": "7fd608a945c6bee749ce339fbc76dcf58957fcdfc86bb920fca0af9f3489d5f8",
+      "games": 3,
+      "passes": 1,
+      "wins": 0,
+      "mean_score": 15.848342,
+      "levels_completed": 6,
+      "levels_available": 21,
+      "actions": 363,
+      "delta_vs_off": {
+        "mean_score": 3.112775,
+        "levels_completed": 0,
+        "actions": -117
+      }
+    },
+    "slim_v13": {
+      "benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+      "summary_sha256": "38642abd77bb0cbc42a3dac9e7e7cac0393a84e995be39997d05a5394be2812d",
+      "games": 3,
+      "passes": 1,
+      "wins": 0,
+      "mean_score": 19.309156,
+      "levels_completed": 7,
+      "levels_available": 21,
+      "actions": 389,
+      "delta_vs_off": {
+        "mean_score": 6.573589,
+        "levels_completed": 1,
+        "actions": -91
+      }
+    }
+  },
+  "pairing": {
+    "same_three_game_set": true,
+    "initial_public_state_match_count": 3,
+    "evaluation_answers_or_hidden_solutions_read": false,
+    "per_game_id_or_state_used_for_solver_branching": false
+  },
+  "correction": {
+    "previous_unattributed_slim_benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+    "actually_version": 13,
+    "prior_attribution_to_version_12": false,
+    "explanation": "The earlier v2.2.4 output request ignored the supplied version suffix. The previously saved 19.309156 slim result is version 13; version 12 is the separate 15.848342 run."
+  },
+  "later_kernel_lineage": {
+    "v14": {
+      "source_sha256": "588d5f79e6c44e25389904ac532842dae5de833353d5bf4d01a56059dfc5430c",
+      "changed_cell_indexes_vs_c2_046_slim": [
+        6
+      ],
+      "status": "COMPLETE",
+      "benchmark_sha256": "4a1ccd5f546592446e0e490ad07a4ee89694ba68f82fb3fbec42d96c3520f5f4",
+      "mean_score": 5.952381,
+      "levels_completed": 3,
+      "levels_available": 21,
+      "actions": 211,
+      "part_of_c2_046_comparison": false
+    },
+    "v15": {
+      "source_sha256": "19cce0304bdd71fb72cfea66906574182ca832276ab7e41b23be255a55e14636",
+      "changed_cell_indexes_vs_c2_046_slim": [
+        6
+      ],
+      "status": "RUNNING",
+      "output_pulled": false,
+      "part_of_c2_046_comparison": false
+    }
+  },
+  "decision": "HOLD_NOT_PROMOTED",
+  "reason": "The exact v12 and v13 C2-046 runs match the same three public starts and show positive score deltas; level progress is 0/+1 and each is only one pass over three games with zero wins. This is insufficient for promotion. v14/v15 source differs and is tracked separately."
+}

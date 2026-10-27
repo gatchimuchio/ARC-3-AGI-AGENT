@@ -1,0 +1,35 @@
+{
+  "commands": [
+    "uvx --from kaggle==2.2.5 kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json",
+    "uvx --from kaggle==2.2.5 kaggle competitions submission-limits arc-prize-2026-arc-agi-3"
+  ],
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "history": {
+    "error_description_present": false,
+    "notebook_slug": null,
+    "notebook_version": null,
+    "official_status": "SubmissionStatus.PENDING",
+    "privateScore": "",
+    "publicScore": "",
+    "submitted_at_utc": "2026-10-25T01:16:07Z"
+  },
+  "monitor_source_sha256": "61c062005ee635327ad6166337aec57481e5d91018ff830a52b2b8b1ed2bdabe",
+  "next_check_at_utc": "2026-10-25T01:21:45Z",
+  "observed_at_utc": "2026-10-25T01:16:45Z",
+  "official_score_is_unobserved_not_zero": true,
+  "previous_numeric_submission": {
+    "publicScore": "23.86",
+    "submission_id": 57577905
+  },
+  "retrieval_method": "Pinned Kaggle CLI 2.2.5 via uvx/uv; read-only",
+  "schema": "arc26-unified-kaggle-cli-observation-v1",
+  "submission_id": "57612586",
+  "submission_limits": {
+    "numToday": 1,
+    "numTotal": 7,
+    "remainingToday": 0
+  },
+  "submission_limits_error": null,
+  "submission_or_rerun_performed": false,
+  "track": "ARC3"
+}

@@ -1,0 +1,28 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-058",
+  "observed_at_utc": "2026-10-25T13:05:57Z",
+  "control_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+  "control_request_log_sha256": "041c2aeee7dc283fd8324eff6932cea0938c63917ffa6173e706933c8c2c026f",
+  "context_window_tokens": 131072,
+  "safety_margin_tokens": 512,
+  "old_output_reserve_tokens": 12288,
+  "candidate_output_reserve_tokens": 16384,
+  "old_max_input_tokens": 118272,
+  "candidate_max_input_tokens": 114176,
+  "control_max_observed_prompt_tokens": 116437,
+  "max_prompt_response": {
+    "line": 426,
+    "analysis_step": 13,
+    "action": 66,
+    "finish_reason": "tool_calls",
+    "completion_tokens": 822
+  },
+  "control_responses_exceeding_candidate_input_limit": 1,
+  "max_excess_tokens": 2261,
+  "server_context_length_tokens": 139264,
+  "candidate_context_setting_if_preserving_old_input_budget": 135168,
+  "latest_kernel_status": "KernelWorkerStatus.RUNNING",
+  "latest_kernel_status_observed_at_utc": "2026-10-25T13:05:07Z",
+  "official_submission_or_quota_use": false,
+  "interpretation": "This one-knob max-output treatment also reduces the input-history budget by 4096 tokens. One baseline prompt (line 426) exceeds the new limit by 2261 tokens and may be pruned earlier. If v27 score changes, attribute the treatment to this tradeoff; a follow-up can hold the old input budget constant by raising the configured context window to 135168, still below the server context length."
+}

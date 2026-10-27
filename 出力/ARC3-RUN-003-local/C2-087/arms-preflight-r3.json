@@ -1,0 +1,105 @@
+{
+  "schema": "arc3-learning-reconsult-r3-preflight.v1",
+  "created_at_utc": "2026-10-27T02:53:02.878766+00:00",
+  "scope": "LOCAL CPU generated-cell/source/AST/pair identity only; no Kaggle/GPU/Git mutation or native fixture rerun",
+  "builder": {
+    "path": "検証/ARC3native学習再照会候補構築.py",
+    "snapshot": "出力/ARC3-RUN-003-local/C2-087/source-snapshots-r3/ARC3native学習再照会候補構築.py",
+    "sha256": "55d5926b02debaab89e654b22efbd65f4e57de51da2743c5d46405338a7e7b1f"
+  },
+  "shared_three_sentence_addition": "After new observed responses alter your visual hypothesis, consider a fresh optional hds_query for one legal candidate rather than treating an early HOLD or empty packet as conclusive. Print the bounded returned packet without manual slicing. At most two distinct candidates are supported for one current state.",
+  "shared_addition_sha256": "0417c38fb6e33abf2e4bfb68d501e18b5709abda9396fe6cc4046e2436393180",
+  "ruff_check_passed": true,
+  "new_mirroring_unit_tests_added": false,
+  "unchanged_native_fixtures_rerun": false,
+  "checks": {
+    "r3_only_common_prompt_note_append": true,
+    "r2_to_r3_public_source_changed_files": [
+      "src/ARC3-Inference/inference/agent/tool_agent.py"
+    ],
+    "AST_only_build_user_prompt_one_string_constant_appended": true,
+    "all_other_ToolAgent_AST_identical": true,
+    "bundle_runtime_native_observer_R3base_081base_prior_all_bytes_identical_r2_r1": true,
+    "render_algorithm_features_budget_model_seed_stamp_unchanged": true,
+    "r2_to_r3_notebook_changed_cells": [
+      6
+    ],
+    "after_wheel_install_stamp_cell10_bytes_identical": true,
+    "r3_pair_notebook_difference_only_cell6_learningflag": true,
+    "r3_pair_metadata_difference_only_id_title": true,
+    "both_shown_prompt_model_source_budgets_equal": true,
+    "own_r3_slug_matches_title": true,
+    "private_gpu_nointernet_preserved": true,
+    "no_mandatory_all_game_all_step_or_action_gate_added": true,
+    "native_HOLD_and_action_authorization_unchanged": true
+  },
+  "arms": [
+    {
+      "folder": "出力/ARC3-RUN-003-local/C2-087/prior-only-r3",
+      "kernel_id": "tecchannn/arc3-v6-learning-prior-only-c2-087-r3",
+      "title": "arc3-v6-learning-prior-only-c2-087-r3",
+      "mode": "disabled",
+      "notebook_sha256": "f0b10932cf8cc688dbeb22e192cbaf3bba345649c59bd0ad7455390eda3a2646",
+      "metadata_sha256": "c322e88aa970fe3298c9cedd9cd93144c68ac92213ccbc326634065d1d06f851",
+      "manifest_sha256": "a556e93de704b9d3af92954104bb1c0713363e6e3539b6d80a2a7ae3b7410298",
+      "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+      "CPU_generated_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false,
+        "game_response_learning_mode": "disabled",
+        "prior_initialization_separate_from_game_update_gate": true,
+        "OFFLINE_explicit_seed_postimage_verified": true,
+        "OFFLINE_declared_seed": 0
+      }
+    },
+    {
+      "folder": "出力/ARC3-RUN-003-local/C2-087/online-learning-r3",
+      "kernel_id": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+      "title": "arc3-v6-learning-online-c2-087-r3",
+      "mode": "enabled",
+      "notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+      "metadata_sha256": "ee088db354d9618b445e1fc6a2da6bd77556c5ec2c998d50d13a86751b4deca9",
+      "manifest_sha256": "5d2c8bd431079c22b1ee15016f96161ab8eac38ddc0d7cea64ed686763fab218",
+      "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+      "CPU_generated_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false,
+        "game_response_learning_mode": "enabled",
+        "prior_initialization_separate_from_game_update_gate": true,
+        "OFFLINE_explicit_seed_postimage_verified": true,
+        "OFFLINE_declared_seed": 0
+      }
+    }
+  ],
+  "actual081_query_audit": {
+    "path": "出力/ARC3-RUN-003-local/C2-081/query-timeline-audit-20261027.json",
+    "sha256": "e7814ae0a09e261736a9f579e8dfbe52f43e8bf841d710eb4c8591c7d817cc1a",
+    "native_unmatched_partial_forecasts_not_all_no_forecast": true,
+    "actual_printed_prefixes_not_full_packets": true,
+    "comprehension_or_causal_adoption_unproven": true
+  },
+  "preservation": {
+    "087r1_r2_all_source_proof_arm_bytes_unchanged": true,
+    "085proof_unchanged": true,
+    "081shownr2_notebook_unchanged": true
+  },
+  "limits": [
+    "The optional shared prompt is untested with the visual model/GPU; greater useful consultation is not yet observed.",
+    "No learning-effect score gain or main/core promotion established.",
+    "Original native HOLD and missing evidence remain unresolved; all exposure is uncertain and action authorization remains false.",
+    "Future GPU software stamp and initial public-condition equality still require observation.",
+    "No Kaggle/GPU/Git operation or existing artifact edit."
+  ]
+}

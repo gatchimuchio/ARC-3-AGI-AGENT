@@ -1,0 +1,39 @@
+{
+  "experiment": "ARC3-RUN-003/C2-049",
+  "base": "C2-047 summary compaction; only ARC3_SUMMARY_TURN_CONTEXT enabled",
+  "arm": {
+    "summary_context": {
+      "notebook_sha256": "ed85f5a045237bec275845b2fdcf6590c2cc8ccfa8ca933f48e6e9602766bdda",
+      "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+      "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+      "memory_mode": "slim",
+      "rolling_summary_interval_tokens": 32768,
+      "rolling_summary_replaces_history": true,
+      "rolling_summary_turn_context": true,
+      "summary_thinking_default": false,
+      "context_drain_tokens": 59392,
+      "loader": "enable_multithread_load=true,num_threads=8",
+      "startup_guard": true,
+      "readiness_gate": true,
+      "offline_guard": true
+    }
+  },
+  "comparison": {
+    "control": "C2-047 version 14, if completed with valid local scorecard",
+    "games": 3,
+    "seed": 0
+  },
+  "controls": {
+    "startup_timeout_seconds": 1800,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "passes": 1,
+    "concurrency": 1,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_competition_rerun": false,
+    "official_submission": false
+  },
+  "state": "prepared_local_only_not_pushed"
+}

@@ -1,0 +1,40 @@
+{
+  "C2_058_candidate_server_log": {
+    "explicit_context_overflow_or_truncation_error_in_serve_log": false,
+    "input_budget_tokens": 114176,
+    "margin_under_budget": 1792,
+    "max_full_token_counter": 116928,
+    "max_full_token_line": 2095,
+    "max_prefill_line": 2767,
+    "max_prefill_tokens": 112384
+  },
+  "conclusion": "The C2-046 control transcript contains one 116437-token prompt above the C2-058 input budget, but C2-058 v27 serve.log shows no prefill above that budget and no explicit truncation/overflow error. Therefore actual pruning in v27 is not established; the preflight wording that it had pruned the prompt is stronger than available evidence. C2-059 remains a controlled 4096-token input-headroom experiment, not a confirmed repair. Keep the predeclared score gate unchanged.",
+  "control_prompt_observation": {
+    "C2_058_effective_input_budget_tokens": 114176,
+    "excess_tokens": 2261,
+    "source": "C2-058 context-budget-risk evidence; baseline request log line 426",
+    "status": "observed on the control transcript; indicates possible pruning if the same prompt occurred in the candidate trajectory",
+    "tokens": 116437
+  },
+  "experiment_id": "ARC3-RUN-003/C2-059-context-hypothesis-audit",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "latest_version": 28,
+  "observed_at_utc": "2026-10-25T14:34:27Z",
+  "official_submission_or_quota_use": false,
+  "read_only_status": "KernelWorkerStatus.RUNNING",
+  "schema": "arc3-c2-059-context-hypothesis-audit.v1",
+  "sources": {
+    "C2-058_context_budget_risk": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-context-budget-risk-20261025T130557Z.json",
+      "sha256": "f0255cdf8b4c94f369b7a4455de3d0960f8b72eacd5fe8ee63dd9fbd9438a430"
+    },
+    "C2-058_v27_serve_log": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/serve.log",
+      "sha256": "e4e7888e214ab9fceec25ddad4d0dc49c1a271de9812d5ed74b8d6493f485558"
+    },
+    "C2-059_preflight": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-preflight-20261025T142506Z.json",
+      "sha256": "79397624e01237bca203265f9d43323485172a762d142a10509a5b860fb911b9"
+    }
+  }
+}

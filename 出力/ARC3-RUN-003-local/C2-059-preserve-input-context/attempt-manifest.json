@@ -1,0 +1,30 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-059",
+  "status": "prepared only; not pushed; await C2-058 v27 terminal score and trace review",
+  "hypothesis": "C2-058 raises output reserve to 16384 but reduces allowed prompt tokens by 4096 under the fixed 131072 context window. Raising the context window to 135168 preserves C2-046 input budget while keeping the 16384 output reserve; test whether this improves on C2-058 without losing score against C2-046.",
+  "base_candidate": "ARC3-RUN-003/C2-058, version 27 expected",
+  "base_notebook_sha256": "b72c8105c1916337d6016e224762afe3d9a0c3be24a4abb539b83591e6ca48d0",
+  "candidate_notebook_sha256": "627ce824f4e3f72d00303223c549d7d0dbbe311bc8b026351b7c186559daf0b2",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "one_factor_change_relative_to_C2-058": "cell 5 LOCAL_ANALYZER_CONTEXT_WINDOW 131072 -> 135168; output reserve remains 16384",
+  "changed_cells": [
+    5
+  ],
+  "notebook_cells": 25,
+  "private": true,
+  "gpu": true,
+  "internet": false,
+  "official_submission_or_quota_use": false,
+  "comparison_gates": {
+    "same_three_public_starts_as_C2-046_and_C2-058": true,
+    "mean_strictly_greater_than_C2-046": 19.309155943771326,
+    "positive_paired_delta_vs_C2-046": true,
+    "also_compare_paired_delta_vs_C2-058": true
+  },
+  "server_context_length_tokens": 139264,
+  "configured_context_tokens": 135168,
+  "max_output_tokens": 16384,
+  "input_budget_tokens": 118272,
+  "prepared_at_utc": "2026-10-25T13:21:13Z",
+  "next_action": "Do not push while C2-058 v27 is running. After its terminal score, decide whether this one private offline pilot is the next run."
+}

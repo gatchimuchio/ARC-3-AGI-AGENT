@@ -1,0 +1,72 @@
+{
+  "schema": "arc3.current-submission-bundle-audit.v1",
+  "observed_at_utc": "2026-10-24 11:29:30 UTC",
+  "task_id": "ARC3-RUN-003-C2-042",
+  "event": "current ARC3 agent local candidate bundle regenerated and audited",
+  "candidate_output_dir": "出力/ARC3-SUBMIT-011",
+  "kernel_id": "tecchannn/arc3-observation-driven-exploration-candidate",
+  "source_file_count": 35,
+  "source_bundle_bytes": 96894,
+  "source_bundle_sha256": "d00ab4af0613a4949e13a886fbaf12a5b61c868c3aaaac42320ba38d1268301e",
+  "notebook_sha256": "bb34b2a0b6d04e84d2a27cacb44db623233d2e367a800b2ab59e0a0383ca8e80",
+  "manifest_sha256": "998b1da8c847688a68a5dff9066ab59bf5bfb441d31c52c7d25cd3123d1e3615",
+  "agent_source_sha256": "47539cd3c0a19b033fb782df61e4275062b8f7b2343eca3376fbda9b50237486",
+  "builder_sha256": "12898230c8d4f509cba9a18853721f3772cf3835d9d4866d3df9ced5bb52e072",
+  "builder_task_instruction_sha256": "0b34923732e4d6bc8f4c4ef2e5675260ac4ea54cb4e941fe3fb428eadf38b04a",
+  "targeted_test_sha256": "0f43d1b427a89a4822017692839e65a59d7e84aa20b016d070b4bc6b59d1b958",
+  "targeted_tests": "5 passed in 9.80s",
+  "kernel_metadata": {
+    "private": true,
+    "internet": false,
+    "gpu": false,
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ]
+  },
+  "existing_candidate_010": {
+    "source_bundle_sha256": "974029af7f66b774c96af3cf86b2344905bf68a0c83445fd366c74dd779e54d9",
+    "agent_source_sha256": "c334797618dcb154b32f0797adac6a18fa3752a715d28f5f520c95c14cbbdc95",
+    "preserved": true
+  },
+  "same_source_bundle_as_prior_official_starter_public25": true,
+  "public25_evidence_file": "運用/証拠/ARC26-UNIFIED/P1-3_officialStarter_public25-20261024T111429Z.json",
+  "public25_evidence_sha256": "f29629b467c13e5219b173937c75a158107f685fbf230cb23d4383f202028b63",
+  "public25_result": {
+    "games": 25,
+    "sdk_steps": 2000,
+    "non_reset_actions": 1986,
+    "reset_actions": 14,
+    "levels_completed": 4,
+    "games_won": 0,
+    "illegal_actions": 0,
+    "action_cap_ends": 25,
+    "elapsed_seconds": 589.788
+  },
+  "protected_files_sha256": {
+    "AGENTS.md": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+    "制御/現在状態.json": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+  },
+  "checks": {
+    "protected_files_unchanged": true,
+    "bundle_matches_public25": true,
+    "notebook_hash_matches": true,
+    "agent_hash_matches": true,
+    "private": true,
+    "internet_disabled": true,
+    "gpu_disabled": true,
+    "competition_source_matches": true,
+    "only_runtime_source_prefixes": true
+  },
+  "kaggle_operations": {
+    "kernel_push": false,
+    "save_and_run_all": false,
+    "competition_rerun": false,
+    "submission": false,
+    "last_official_quota_observation_utc": "2026-10-24T10:48:04Z",
+    "last_official_remaining_today": 0,
+    "current_quota_rechecked": false
+  },
+  "git_commit_or_push": false,
+  "official_score_claim": false,
+  "decision": "LOCAL_CANDIDATE_BUNDLE_REPRODUCED_TESTS_PASS_OFFICIAL_COMPETITION_ELIGIBILITY_NOT_ESTABLISHED"
+}

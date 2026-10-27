@@ -1,0 +1,48 @@
+{
+  "comparison": {
+    "current_agent_official_score_attribution_established": false,
+    "current_bundle_sha_embedded_in_remote_notebook": false,
+    "remote_matches_SUBMIT_010": false,
+    "remote_matches_SUBMIT_011": false
+  },
+  "decision": "Remote private kernel is a different revision from both local candidates. Current local candidate was not uploaded or scored.",
+  "experiment_id": "ARC3-RUN-003/C2-043",
+  "local_candidates": {
+    "ARC3-SUBMIT-010_notebook_sha256": "c07059b242eccd77dcf1c482662e852db77edd86b80e7a5e231f138773f3b10b",
+    "ARC3-SUBMIT-011_agent_sha256": "47539cd3c0a19b033fb782df61e4275062b8f7b2343eca3376fbda9b50237486",
+    "ARC3-SUBMIT-011_notebook_sha256": "bb34b2a0b6d04e84d2a27cacb44db623233d2e367a800b2ab59e0a0383ca8e80",
+    "ARC3-SUBMIT-011_source_bundle_sha256": "d00ab4af0613a4949e13a886fbaf12a5b61c868c3aaaac42320ba38d1268301e"
+  },
+  "observed_at_utc": "2026-10-24T11:38:36Z",
+  "operation": "read-only Kaggle private kernel pull and digest/source metadata audit",
+  "remote_kernel": {
+    "cell_count": 5,
+    "code_cell_count": 4,
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "enable_gpu": false,
+    "enable_internet": false,
+    "kernel_type": "notebook",
+    "metadata_sha256": "cfba11f3983ce18a8bdfe48cd19256a73e3cd1526cc0807384eecd282c278f92",
+    "notebook_sha256": "404bd92b146dd9fffc0375b6a52b4a914988a05374d6b9c17f1eacf6d794aa46",
+    "output_count": 0,
+    "private": true,
+    "secret_pattern_scan": {
+      "KAGGLE_API_TOKEN": false,
+      "KGAT_token": false,
+      "bearer_credential": false,
+      "private_key_header": false
+    },
+    "slug": "tecchannn/arc3-observation-driven-exploration-candidate",
+    "status": "KernelWorkerStatus.COMPLETE"
+  },
+  "scope_result": {
+    "competition_rerun": false,
+    "kernel_push": false,
+    "quota_consumed": false,
+    "save_run_all": false,
+    "submission": false
+  },
+  "track": "ARC3"
+}

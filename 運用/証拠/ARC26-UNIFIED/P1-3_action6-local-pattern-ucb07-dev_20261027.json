@@ -1,0 +1,99 @@
+{
+  "schema": "arc3-action6-local-pattern-transfer.v1",
+  "stage": "dev",
+  "split_seed": 20261027,
+  "train_games": 5,
+  "train_actions_per_game": 40,
+  "dev_games": 5,
+  "evaluation_seeds": [
+    7,
+    31,
+    73
+  ],
+  "evaluation_actions_per_game": 80,
+  "features": [
+    "target_color_frequency_band",
+    "same_color_8_neighbor_band",
+    "edge_or_interior"
+  ],
+  "memory": {
+    "ucb_weight": 0.7,
+    "training_action6_updates": 91,
+    "feature_categories": 7,
+    "trained_sha256": "49b1a665f7764c706c0c3fc84c4d2597b3a9d78af6200ecc35944d1e611b5f29",
+    "holdout_online_action6_updates": 327,
+    "model_supported_coordinate_selections": 317,
+    "holdout_episode_hashes_sha256": "b3594e59e29b5221c120b47b1c481fa189e03ef295c4c46020fa6e5f8f8a5f55",
+    "game_ids_level_ids_and_raw_coordinates_persisted": false
+  },
+  "comparison": {
+    "pairs": 15,
+    "previous_score_mean": 0.09268632720218604,
+    "candidate_score_mean": 0.09704718556150653,
+    "score_delta_mean": 0.004360858359320482,
+    "score_improvements": 1,
+    "score_regressions": 0,
+    "score_ties": 14,
+    "levels_delta_total": 0,
+    "wins_delta_total": 0,
+    "noops_delta_total": -2,
+    "start_matches": 15,
+    "trace_changed_pairs": 10,
+    "by_seed": [
+      {
+        "seed": 7,
+        "pairs": 5,
+        "previous_score_mean": 0.1080246913580247,
+        "candidate_score_mean": 0.12110726643598616,
+        "score_delta_mean": 0.013082575077961445,
+        "score_improvements": 1,
+        "score_regressions": 0,
+        "score_ties": 4,
+        "levels_delta_total": 0,
+        "wins_delta_total": 0,
+        "noops_delta_total": 0,
+        "start_matches": 5,
+        "trace_changed_pairs": 3
+      },
+      {
+        "seed": 31,
+        "pairs": 5,
+        "previous_score_mean": 0.0,
+        "candidate_score_mean": 0.0,
+        "score_delta_mean": 0.0,
+        "score_improvements": 0,
+        "score_regressions": 0,
+        "score_ties": 5,
+        "levels_delta_total": 0,
+        "wins_delta_total": 0,
+        "noops_delta_total": -2,
+        "start_matches": 5,
+        "trace_changed_pairs": 3
+      },
+      {
+        "seed": 73,
+        "pairs": 5,
+        "previous_score_mean": 0.17003429024853345,
+        "candidate_score_mean": 0.17003429024853345,
+        "score_delta_mean": 0.0,
+        "score_improvements": 0,
+        "score_regressions": 0,
+        "score_ties": 5,
+        "levels_delta_total": 0,
+        "wins_delta_total": 0,
+        "noops_delta_total": 0,
+        "start_matches": 5,
+        "trace_changed_pairs": 4
+      }
+    ]
+  },
+  "errors": 0,
+  "illegal_actions": 0,
+  "duplicate_observations": 0,
+  "official_submission_made": false,
+  "notebook_or_kernel_changed": false,
+  "environment_manifest_sha256": "924f0da0af3bd3b8ac4fa742f35a48f0bf367567f55e8a299588ea710202d97a",
+  "policy_source_sha256": "7879f85b5a3434dc2f5426c4837914c41054cbe56360ed4324167dab93de0575",
+  "runner_source_sha256": "3e1a1cf10d52b7fa8aa7ad08caa56058cd5dcfb1c62eb57294c747f85684837d",
+  "elapsed_seconds": 21.59
+}

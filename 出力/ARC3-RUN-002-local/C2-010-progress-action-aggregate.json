@@ -1,0 +1,112 @@
+{
+  "evaluation": "public_holdout_progress_action_aggregate",
+  "input_stage": "holdout",
+  "action_seeds": [
+    7,
+    31,
+    73
+  ],
+  "games": 60,
+  "per_action": {
+    "0": {
+      "actions": 29,
+      "no_op": 0,
+      "visible_change": 29,
+      "new_visible_board": 0,
+      "level_progress": 0,
+      "game_over": 0,
+      "no_op_rate": 0.0,
+      "progress_rate": 0.0
+    },
+    "1": {
+      "actions": 614,
+      "no_op": 29,
+      "visible_change": 585,
+      "new_visible_board": 573,
+      "level_progress": 0,
+      "game_over": 3,
+      "no_op_rate": 0.047231,
+      "progress_rate": 0.0
+    },
+    "2": {
+      "actions": 693,
+      "no_op": 32,
+      "visible_change": 661,
+      "new_visible_board": 649,
+      "level_progress": 0,
+      "game_over": 3,
+      "no_op_rate": 0.046176,
+      "progress_rate": 0.0
+    },
+    "3": {
+      "actions": 768,
+      "no_op": 21,
+      "visible_change": 747,
+      "new_visible_board": 722,
+      "level_progress": 0,
+      "game_over": 3,
+      "no_op_rate": 0.027344,
+      "progress_rate": 0.0
+    },
+    "4": {
+      "actions": 805,
+      "no_op": 22,
+      "visible_change": 783,
+      "new_visible_board": 769,
+      "level_progress": 0,
+      "game_over": 3,
+      "no_op_rate": 0.027329,
+      "progress_rate": 0.0
+    },
+    "5": {
+      "actions": 524,
+      "no_op": 25,
+      "visible_change": 499,
+      "new_visible_board": 459,
+      "level_progress": 0,
+      "game_over": 6,
+      "no_op_rate": 0.04771,
+      "progress_rate": 0.0
+    },
+    "6": {
+      "actions": 1183,
+      "no_op": 278,
+      "visible_change": 905,
+      "new_visible_board": 871,
+      "level_progress": 5,
+      "game_over": 11,
+      "no_op_rate": 0.234996,
+      "progress_rate": 0.004227
+    },
+    "7": {
+      "actions": 184,
+      "no_op": 8,
+      "visible_change": 176,
+      "new_visible_board": 156,
+      "level_progress": 0,
+      "game_over": 0,
+      "no_op_rate": 0.043478,
+      "progress_rate": 0.0
+    }
+  },
+  "progress_transition_aggregate": {
+    "count": 5,
+    "previous_action_counts": {
+      "6": 5
+    },
+    "after_state_counts": {
+      "NOT_FINISHED": 5
+    },
+    "changed_cell_count_counts": {
+      "1505": 2,
+      "1515": 1,
+      "2645": 1,
+      "2646": 1
+    }
+  },
+  "input_sha256": {
+    "7": "27f7b066493c958f6daf64c186d5e9e1b314b948a98066ea74079fca32521b40",
+    "31": "ab08d93ccd5a83c18236cc1ad3d59b3375d828fa3aa607d7ea8d442a6c856cb5",
+    "73": "8cb81180e3ad0050568a7f8f3e00790a4667539838b9345a2af4bcd8852b9a96"
+  }
+}

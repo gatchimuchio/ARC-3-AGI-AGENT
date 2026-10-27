@@ -1,0 +1,17 @@
+{
+  "schema": "arc3-c2-051-startup-observation.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "observed_at_utc": "2026-10-24T20:41:03Z",
+  "source": "configured .venv Kaggle CLI: kernels logs -f latest session",
+  "observed_log_events": [
+    "candidate embedded patch checked against configured source tree",
+    "model server launch command emitted",
+    "weight precaching active; latest visible elapsed marker 420 seconds"
+  ],
+  "status_at_last_status_query": "KernelWorkerStatus.RUNNING",
+  "status_query_observed_at_utc": "2026-10-24T20:40:09Z",
+  "benchmark_started": false,
+  "score_available": false,
+  "official_submission_or_rerun": false
+}

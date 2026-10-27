@@ -1,0 +1,37 @@
+{
+  "inspected_at_utc": "2026-10-24T10:01:39Z",
+  "interactive_session_limit": "Task runs as ohira only while an interactive user session is available.",
+  "monitor_source_sha256": "ed69b05f2971beba0d05d12b12ec10c3c13cc5795609589fb95a12008b1c6651",
+  "recovery_scope": "StartWhenAvailable and ledger-based due gate verified; machine reboot itself was not performed.",
+  "scheduled_invocation": {
+    "checked_at_utc": "2026-10-24T10:00:36Z",
+    "ledger_next_due_utc": "2026-10-24T10:48:47Z",
+    "network_query_performed": false,
+    "state": "not_due"
+  },
+  "schema": "arc26-windows-task-scheduler-monitor-v1",
+  "self_test": "PASS: no network or submission",
+  "submission_or_rerun_performed": false,
+  "task": {
+    "action": "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\.venv\\Scripts\\pythonw.exe",
+    "arguments": "\"C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\運用\\ARC26-UNIFIED\\ARC3_Kaggleスコア監視.py\" --tick",
+    "execution_time_limit": "PT5M",
+    "last_result": 0,
+    "last_run_utc": "2026-10-24T10:00:36Z",
+    "logon_type": "Interactive",
+    "missed_runs": 0,
+    "multiple_instances": "IgnoreNew",
+    "name": "ARC3-Kaggle-Score-Monitor",
+    "next_run_utc": "2026-10-24T10:03:00Z",
+    "run_level": "Limited",
+    "start_when_available": true,
+    "state": "Ready",
+    "trigger_repetition_duration": "P10DT5M59S",
+    "trigger_repetition_interval": "PT5M",
+    "trigger_start_boundary": "2026-10-24T08:53:00+09:00",
+    "user_id": "ohira",
+    "working_directory": "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT"
+  },
+  "track": "ARC3",
+  "unit_test": "4 passed in 0.15s"
+}

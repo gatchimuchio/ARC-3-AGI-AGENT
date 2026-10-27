@@ -1,0 +1,383 @@
+{
+  "schema": "arc3-source-dataset-file-listing.v1",
+  "observed_at_utc": "2026-10-26T22:11:52Z",
+  "command_arguments": [
+    "datasets",
+    "files",
+    "dfranzen/taaf-kaggle-source-bundle-copy",
+    "--format",
+    "json",
+    "--page-size",
+    "200"
+  ],
+  "exit_code": 0,
+  "data": [
+    {
+      "name": "README.dataset.md",
+      "size": 211,
+      "creationDate": "2026-09-28T11:10:26.555000"
+    },
+    {
+      "name": "benchmark_initial.pkl",
+      "size": 3281,
+      "creationDate": "2026-09-28T11:10:26.524000"
+    },
+    {
+      "name": "deploy_target.pkl",
+      "size": 823,
+      "creationDate": "2026-09-28T11:10:26.560000"
+    },
+    {
+      "name": "git_status.txt",
+      "size": 356,
+      "creationDate": "2026-09-28T11:10:26.566000"
+    },
+    {
+      "name": "preamble.txt",
+      "size": 976,
+      "creationDate": "2026-09-28T11:10:26.576000"
+    },
+    {
+      "name": "setup_commands.json",
+      "size": 10359,
+      "creationDate": "2026-09-28T11:10:26.592000"
+    },
+    {
+      "name": "src/ARC3-Inference/Makefile",
+      "size": 26654,
+      "creationDate": "2026-09-28T11:10:26.597000"
+    },
+    {
+      "name": "src/ARC3-Inference/README.md",
+      "size": 12709,
+      "creationDate": "2026-09-28T11:10:26.593000"
+    },
+    {
+      "name": "src/ARC3-Inference/configs/eval.json",
+      "size": 39,
+      "creationDate": "2026-09-28T11:10:26.598000"
+    },
+    {
+      "name": "src/ARC3-Inference/configs/inference.json",
+      "size": 1901,
+      "creationDate": "2026-09-28T11:10:26.587000"
+    },
+    {
+      "name": "src/ARC3-Inference/configs/inference.openrouter.json",
+      "size": 1818,
+      "creationDate": "2026-09-28T11:10:26.607000"
+    },
+    {
+      "name": "src/ARC3-Inference/configs/significance.json",
+      "size": 316,
+      "creationDate": "2026-09-28T11:10:26.613000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/__init__.py",
+      "size": 90,
+      "creationDate": "2026-09-28T11:10:26.605000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/agent/__init__.py",
+      "size": 216,
+      "creationDate": "2026-09-28T11:10:26.606000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/agent/action_names.py",
+      "size": 1045,
+      "creationDate": "2026-09-28T11:10:26.623000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/agent/prompts.py",
+      "size": 13574,
+      "creationDate": "2026-09-28T11:10:26.605000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/agent/python_tool_sandbox.py",
+      "size": 18723,
+      "creationDate": "2026-09-28T11:10:26.622000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/agent/runtime_state.py",
+      "size": 3656,
+      "creationDate": "2026-09-28T11:10:26.654000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/agent/tool_agent.py",
+      "size": 89299,
+      "creationDate": "2026-09-28T11:10:26.625000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/agent/vision_context.py",
+      "size": 2311,
+      "creationDate": "2026-09-28T11:10:26.645000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/framework/__init__.py",
+      "size": 56,
+      "creationDate": "2026-09-28T11:10:26.664000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/framework/kaggle.py",
+      "size": 17688,
+      "creationDate": "2026-09-28T11:10:26.654000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/framework/run.py",
+      "size": 53700,
+      "creationDate": "2026-09-28T11:10:26.678000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/framework/solver.py",
+      "size": 49315,
+      "creationDate": "2026-09-28T11:10:26.638000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/tools/__init__.py",
+      "size": 53,
+      "creationDate": "2026-09-28T11:10:26.645000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/tools/chat.py",
+      "size": 7135,
+      "creationDate": "2026-09-28T11:10:26.663000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/tools/config_value.py",
+      "size": 1184,
+      "creationDate": "2026-09-28T11:10:26.664000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/tools/eval.py",
+      "size": 28385,
+      "creationDate": "2026-09-28T11:10:26.672000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/tools/eval_plot.py",
+      "size": 9848,
+      "creationDate": "2026-09-28T11:10:26.673000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/tools/significance.py",
+      "size": 33491,
+      "creationDate": "2026-09-28T11:10:26.672000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/tools/traces.py",
+      "size": 27525,
+      "creationDate": "2026-09-28T11:10:26.661000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/tools/vllm_runtime_lora_guard.py",
+      "size": 3889,
+      "creationDate": "2026-09-28T11:10:26.676000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/utils/__init__.py",
+      "size": 0,
+      "creationDate": "2026-09-28T11:10:26.672000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/utils/grid_utils.py",
+      "size": 662,
+      "creationDate": "2026-09-28T11:10:26.693000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/utils/openai_compat.py",
+      "size": 1905,
+      "creationDate": "2026-09-28T11:10:26.703000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/utils/rearc_baselines.py",
+      "size": 1187,
+      "creationDate": "2026-09-28T11:10:26.688000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/utils/rearc_version.py",
+      "size": 1829,
+      "creationDate": "2026-09-28T11:10:26.706000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/utils/run_artifacts.py",
+      "size": 4769,
+      "creationDate": "2026-09-28T11:10:26.691000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/utils/segmentation.py",
+      "size": 8505,
+      "creationDate": "2026-09-28T11:10:26.690000"
+    },
+    {
+      "name": "src/ARC3-Inference/inference/utils/viewer_artifacts.py",
+      "size": 3855,
+      "creationDate": "2026-09-28T11:10:26.707000"
+    },
+    {
+      "name": "src/ARC3-Inference/pyproject.toml",
+      "size": 2019,
+      "creationDate": "2026-09-28T11:10:26.715000"
+    },
+    {
+      "name": "src/ARC3-Inference/scripts/ensure_server_api_key.sh",
+      "size": 562,
+      "creationDate": "2026-09-28T11:10:26.725000"
+    },
+    {
+      "name": "src/ARC3-Inference/scripts/server_curl.sh",
+      "size": 476,
+      "creationDate": "2026-09-28T11:10:26.703000"
+    },
+    {
+      "name": "src/ARC3-Inference/uv.lock",
+      "size": 362326,
+      "creationDate": "2026-09-28T11:10:26.731000"
+    },
+    {
+      "name": "src/ARC3-Inference/viewer/__init__.py",
+      "size": 32,
+      "creationDate": "2026-09-28T11:10:26.714000"
+    },
+    {
+      "name": "src/ARC3-Inference/viewer/data.py",
+      "size": 73347,
+      "creationDate": "2026-09-28T11:10:26.742000"
+    },
+    {
+      "name": "src/ARC3-Inference/viewer/index.html",
+      "size": 54595,
+      "creationDate": "2026-09-28T11:10:26.740000"
+    },
+    {
+      "name": "src/ARC3-Inference/viewer/server.py",
+      "size": 8933,
+      "creationDate": "2026-09-28T11:10:26.737000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/Makefile",
+      "size": 3759,
+      "creationDate": "2026-09-28T11:10:26.737000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/README.md",
+      "size": 1741,
+      "creationDate": "2026-09-28T11:10:26.754000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/pyproject.toml",
+      "size": 2383,
+      "creationDate": "2026-09-28T11:10:26.740000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/scripts/refresh_examples.py",
+      "size": 3596,
+      "creationDate": "2026-09-28T11:10:26.805000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/__init__.py",
+      "size": 1146,
+      "creationDate": "2026-09-28T11:10:26.732000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/benchmark.py",
+      "size": 21393,
+      "creationDate": "2026-09-28T11:10:26.763000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/competition_arcade.py",
+      "size": 9568,
+      "creationDate": "2026-09-28T11:10:26.753000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/deploy.py",
+      "size": 22835,
+      "creationDate": "2026-09-28T11:10:26.742000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/deploy_inline.py",
+      "size": 6070,
+      "creationDate": "2026-09-28T11:10:26.774000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/deploy_kaggle.py",
+      "size": 36121,
+      "creationDate": "2026-09-28T11:10:26.756000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/deploy_slurm.py",
+      "size": 23285,
+      "creationDate": "2026-09-28T11:10:26.752000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/diagnostics.py",
+      "size": 128557,
+      "creationDate": "2026-09-28T11:10:26.760000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/game.py",
+      "size": 30002,
+      "creationDate": "2026-09-28T11:10:26.775000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/game_api.py",
+      "size": 14742,
+      "creationDate": "2026-09-28T11:10:26.777000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/game_examples.py",
+      "size": 3673,
+      "creationDate": "2026-09-28T11:10:26.773000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/kaggle/taaf_kaggle_run.ipynb",
+      "size": 18698,
+      "creationDate": "2026-09-28T11:10:26.772000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/kaggle/taaf_kaggle_run_share.ipynb",
+      "size": 26879,
+      "creationDate": "2026-09-28T11:10:26.807000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/kaggle_random.py",
+      "size": 10435,
+      "creationDate": "2026-09-28T11:10:26.825000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/solver.py",
+      "size": 3337,
+      "creationDate": "2026-09-28T11:10:26.814000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/solver_examples.py",
+      "size": 12105,
+      "creationDate": "2026-09-28T11:10:26.807000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/standard_benchmarks.py",
+      "size": 5063,
+      "creationDate": "2026-09-28T11:10:26.826000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/src/taaf/support.py",
+      "size": 974,
+      "creationDate": "2026-09-28T11:10:26.825000"
+    },
+    {
+      "name": "src/tufa-arc-agi-framework/uv.lock",
+      "size": 185724,
+      "creationDate": "2026-09-28T11:10:26.823000"
+    },
+    {
+      "name": "taaf-kaggle-bundle.json",
+      "size": 161,
+      "creationDate": "2026-09-28T11:10:26.841000"
+    },
+    {
+      "name": "teardown_commands.json",
+      "size": 1021,
+      "creationDate": "2026-09-28T11:10:26.828000"
+    }
+  ],
+  "read_only": true,
+  "download_performed": false
+}

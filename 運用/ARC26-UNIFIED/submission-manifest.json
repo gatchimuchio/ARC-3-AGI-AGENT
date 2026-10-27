@@ -1,0 +1,110 @@
+{
+  "track": "ARC3",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "submission_id": "57612586",
+  "submitted_at_utc": "2026-10-25T01:16:07.830Z",
+  "submission_file": "submission.parquet",
+  "notebook_slug": "tecchannn/arc3-observation-driven-exploration-candidate",
+  "notebook_version": 6,
+  "notebook_sha256": "957182aee3420dfa2687cfe6a5ca95e5b47af69fd3f29dfb7402bb2f5dd0a3f4",
+  "source_commit": null,
+  "input_sha256": null,
+  "output_sha256": null,
+  "latest_observation": {
+    "observed_at_utc": "2026-10-25T01:16:45Z",
+    "official_status": "SubmissionStatus.PENDING",
+    "raw_public_score": "",
+    "raw_private_score": "",
+    "public_score": null,
+    "private_score": null,
+    "private_score_state": "not provided",
+    "score_unit": "public_score",
+    "quota": {
+      "observed_at_utc": "2026-10-25T01:16:45Z",
+      "num_today": 1,
+      "num_total": 7,
+      "remaining_today": 0
+    },
+    "source_evidence": "ARC26-UNIFIED/official-cli-observation-20261025T011645Z.json",
+    "retrieval_method": "Pinned Kaggle CLI 2.2.5 via uvx/uv; read-only",
+    "terminal_result": false,
+    "comparison": {
+      "previous_submission_id": "57577905",
+      "previous_public_score": 23.86,
+      "delta": null
+    },
+    "next_check_at_utc": "2026-10-25T01:21:45Z",
+    "why_unobserved": {
+      "official_score": "Kaggle returned PENDING with blank publicScore and privateScore."
+    }
+  },
+  "evidence_files": [
+    "ARC26-UNIFIED/score-ledger.jsonl",
+    "検証/運転記録/ARC3-RUN-003_C1-018_modelv5公式Rerun_20261024.md",
+    "検証/運転記録/ARC3-RUN-003_運転台帳_20261024.md",
+    "運用/証拠/ARC26-UNIFIED/official-cli-observation-20261024T104804Z.json",
+    "ARC26-UNIFIED/official-cli-observation-20261025T011645Z.json",
+    "運用\\証拠\\ARC26-UNIFIED\\ARC3-official-submission-57612586.json"
+  ],
+  "why_unobserved": {
+    "source_commit": "No source commit was supplied by Kaggle; exact source bundle SHA is recorded separately.",
+    "input_sha256": "Kaggle submission history does not return input SHA.",
+    "output_sha256": "Official rerun output is not available while submission is PENDING."
+  },
+  "supplemental_observations": [
+    {
+      "observed_at_utc": "2026-10-24T07:00:20Z",
+      "official_status": "SubmissionStatus.PENDING",
+      "raw_public_score": "",
+      "raw_private_score": "",
+      "quota": {
+        "observed_at_utc": "2026-10-24T07:00:20Z",
+        "num_today": 1,
+        "num_total": 6,
+        "remaining_today": 0
+      },
+      "source_evidence": "ARC26-UNIFIED/official-cli-observation-20261024T070020Z.json",
+      "note": "Off-cycle read 29 seconds before the scheduled 07:00:49Z poll; superseded by the 07:01:25Z scheduled observation."
+    },
+    {
+      "observed_at_utc": "2026-10-24T08:49:12Z",
+      "official_status": "SubmissionStatus.PENDING",
+      "raw_public_score": "",
+      "raw_private_score": "",
+      "quota": {
+        "observed_at_utc": "2026-10-24T08:49:12Z",
+        "num_today": 1,
+        "num_total": 6,
+        "remaining_today": 0
+      },
+      "source_evidence": "ARC26-UNIFIED/official-cli-observation-20261024T084912Z.json",
+      "note": "Off-cycle read 25 seconds after the scheduled 08:48:47Z observation; both CLI commands exited 0 and confirmed the same status and quota."
+    },
+    {
+      "observed_at_utc": "2026-10-24T09:49:11Z",
+      "official_status": "SubmissionStatus.PENDING",
+      "raw_public_score": "",
+      "raw_private_score": "",
+      "quota": {
+        "observed_at_utc": "2026-10-24T09:49:11Z",
+        "num_today": 1,
+        "num_total": 6,
+        "remaining_today": 0
+      },
+      "source_evidence": "ARC26-UNIFIED/official-cli-observation-20261024T094911Z.json",
+      "note": "Read-only history and limits confirmation 14 seconds after the scheduled 09:48:57Z history observation; both commands exited 0."
+    },
+    {
+      "submission_id": "57577905",
+      "observed_at_utc": "2026-10-25T00:45:00Z",
+      "official_status": "SubmissionStatus.COMPLETE",
+      "public_score": 23.86,
+      "private_score": null,
+      "source_evidence": "ARC26-UNIFIED/official-cli-observation-20261025T004500Z.json",
+      "superseded_by_submission_id": "57612586"
+    }
+  ],
+  "source_bundle_sha256": "d802bdad39437e5e31617cba4653b69dae447450d172f29281716859165a3319",
+  "lineage_evidence_file": "運用/証拠/ARC26-UNIFIED/ARC3-official-submission-57612586.json",
+  "lineage_evidence_sha256": "861f3181d3e012f452efbea9ea7e722d8fbec690853bc9e4ecebc50d288aa906"
+}

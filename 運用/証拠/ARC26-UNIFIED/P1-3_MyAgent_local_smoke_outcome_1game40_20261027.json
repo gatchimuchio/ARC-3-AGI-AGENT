@@ -1,0 +1,62 @@
+{
+  "schema": "arc3-myagent-public-local-smoke.v1",
+  "environment": "official arc_agi LocalEnvironmentWrapper",
+  "agent_framework": "lightweight shim from test_ARC3提出agent.py; local venv lacks Kaggle agents.agent",
+  "population": "project-described public ARC3 local environment set; metadata does not label a train/dev split",
+  "environment_count": 25,
+  "selection_seed": 20261022,
+  "action_seeds": [
+    31
+  ],
+  "max_sdk_actions_per_game": 40,
+  "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+  "agent_source_sha256": "2636cc38137872eb1cb5be789a0315d007203472fbcb2bafba19b9dc75adba05",
+  "exploration_policy_source_sha256": "a86af8296bf5438c92b1249f9643bc12bf546227a60f0633cc2dc3805b0b1bc8",
+  "aggregate": {
+    "games": 1,
+    "games_with_two_or_more_non_reset_actions": 1,
+    "non_reset_actions": 39,
+    "reset_actions": 1,
+    "illegal_actions": 0,
+    "levels_completed": 0,
+    "wins": 0,
+    "hds_observation_updates": 39,
+    "hds_state_queries": 40,
+    "hds_candidate_action_queries": 40,
+    "hds_predicted_outcome_candidates": 0,
+    "hds_guided_action_selections": 0,
+    "hds_update_seconds": 8.216811,
+    "hds_state_query_seconds": 0.442844,
+    "hds_candidate_query_seconds": 0.12001,
+    "hds_update_count_matches_non_reset_actions": true
+  },
+  "per_game_aggregates": [
+    {
+      "non_reset_actions": 39,
+      "reset_actions": 1,
+      "legal_action_count": 39,
+      "levels_completed": 0,
+      "final_state": "NOT_FINISHED",
+      "agent_stop_reason": "GAME_OVER",
+      "hds_observation_updates": 39,
+      "hds_state_queries": 40,
+      "hds_last_learning_state": "断定保留",
+      "hds_update_seconds": 8.216811,
+      "hds_state_query_seconds": 0.442844,
+      "hds_candidate_query_seconds": 0.12001,
+      "hds_candidate_action_queries": 40,
+      "hds_predicted_outcome_candidates": 0,
+      "hds_guided_action_selections": 0,
+      "hds_prior_memory_version": "arc3-prior-context-v0.1",
+      "hds_prior_memory_loaded_count": 5,
+      "hds_prior_memory_boundary": "ARC3事前記憶",
+      "hds_prior_memory_action_authorization": false,
+      "hds_prior_memory_visible_change_coefficient": 0.0,
+      "action_trace_length": 40,
+      "action_trace_sha256": "85794762d2aebaec9a38bf7ad57935a596fc27077ae175f1cc70b2733f53c16a",
+      "two_or_more_non_reset_actions": true
+    }
+  ],
+  "elapsed_seconds": 10.708,
+  "game_ids_or_boards_saved": false
+}

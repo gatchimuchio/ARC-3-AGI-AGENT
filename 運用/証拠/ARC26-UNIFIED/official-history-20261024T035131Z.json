@@ -1,0 +1,78 @@
+{
+  "schema": "arc26-unified-kaggle-history-observation-v1",
+  "track": "ARC3",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "retrieved_at_utc": "2026-10-24T03:51:31.378063Z",
+  "retrieval": {
+    "method": "Kaggle SDK competition_submissions(slug, page_size=100)",
+    "read_only": true,
+    "history_rows_returned": 12,
+    "credential_values_saved": false
+  },
+  "submissions": [
+    {
+      "submission_id": "57527856",
+      "submitted_at_source_raw": "2026-10-22 14:19:24.727000",
+      "submitted_at_utc": "2026-10-22T14:19:24.727000Z",
+      "official_status": "COMPLETE",
+      "official_score_raw": "0.00",
+      "official_score_numeric": 0.0,
+      "score_unit": "public_score",
+      "error_description": null,
+      "execution_link": {
+        "notebook_slug": "tecchannn/arc3-hds-hold-baseline",
+        "notebook_version": 5,
+        "notebook_sha256": "6e6a50063b16e05de2a7725bfa0bc4b58065a4cb452f37116221941ac60c0fe3",
+        "source_commit": "f8ace66bec06440c21362b1afbf0dec0da99dd7f",
+        "source_linkage_basis": "ARC3-RUN-003 v3 §2.1 and existing ARC3-SUBMIT bundle manifest; source commit exists locally; history API did not return this metadata"
+      },
+      "history_evidence": "運用/証拠/ARC26-UNIFIED/official-history-20261024T035131Z.json"
+    },
+    {
+      "submission_id": "57541830",
+      "submitted_at_source_raw": "2026-10-23 00:03:01.330000",
+      "submitted_at_utc": "2026-10-23T00:03:01.330000Z",
+      "official_status": "COMPLETE",
+      "official_score_raw": "0.25",
+      "official_score_numeric": 0.25,
+      "score_unit": "public_score",
+      "error_description": null,
+      "execution_link": {
+        "notebook_slug": "tecchannn/arc3-observation-driven-exploration-candidate",
+        "notebook_version": 4,
+        "source_commit": null,
+        "input_sha256": null,
+        "output_sha256": null,
+        "linkage_basis": "C1-019/C2-026 local records identify this official B1 as candidate v4; exact source/output hash not observed"
+      },
+      "history_evidence": "運用/証拠/ARC26-UNIFIED/official-history-20261024T035131Z.json"
+    },
+    {
+      "submission_id": "57577905",
+      "submitted_at_source_raw": "2026-10-24 01:15:49.963000",
+      "submitted_at_utc": "2026-10-24T01:15:49.963000Z",
+      "official_status": "PENDING",
+      "official_score_raw": "",
+      "official_score_numeric": null,
+      "score_unit": null,
+      "error_description": null,
+      "execution_link": {
+        "notebook_slug": "tecchannn/arc3-model-guided-c2-025",
+        "notebook_version": 5,
+        "notebook_sha256": "5763f69d0794d7161dbe81a967edd2c10a6810c92ed1a28208bd47222fd5dfbc",
+        "source_commit": null,
+        "input_sha256": null,
+        "output_sha256": null,
+        "linkage_basis": "C1-018 record; Kaggle history API did not return source/output metadata"
+      },
+      "why_unobserved": {
+        "official_score": "Official history still PENDING with empty score fields.",
+        "score_unit": "No numeric official score was supplied.",
+        "source_commit": "Not returned by the Kaggle history query; not inferred from checkout HEAD.",
+        "input_sha256": "Not returned by the Kaggle history query.",
+        "output_sha256": "Not returned by the Kaggle history query."
+      },
+      "history_evidence": "運用/証拠/ARC26-UNIFIED/official-history-20261024T035131Z.json"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "candidate": {
+    "agent_sha256": "47539cd3c0a19b033fb782df61e4275062b8f7b2343eca3376fbda9b50237486",
+    "metadata_sha256": "643fbfc56b71fe4ed426c0966311c9a84957280f02a96d966cb981acfef1c678",
+    "notebook_sha256": "bb34b2a0b6d04e84d2a27cacb44db623233d2e367a800b2ab59e0a0383ca8e80",
+    "source_bundle_sha256": "d00ab4af0613a4949e13a886fbaf12a5b61c868c3aaaac42320ba38d1268301e"
+  },
+  "decision": "Phase A PASS: version 5 executed and generated only the documented placeholder. This establishes Kaggle runtime wiring, not score or agent performance.",
+  "experiment_id": "ARC3-RUN-003/C2-044",
+  "kernel_slug": "tecchannn/arc3-observation-driven-exploration-candidate",
+  "kernel_status": "KernelWorkerStatus.COMPLETE",
+  "observed_at_utc": "2026-10-24T11:44:47Z",
+  "official_history_after_phase_a": {
+    "evidence_file": "運用/証拠/ARC26-UNIFIED/official-history-ARC3-phaseA-20261024T1144Z.json",
+    "evidence_sha256": "450387fc490ea5f122185153198cc12e2ad3c3801bccdb034e5d5c7b417eeb98",
+    "last_quota_observation": {
+      "observed_at_utc": "2026-10-24T10:48:04Z",
+      "quota_field_rechecked_after_Phase_A": false,
+      "remaining_today": 0
+    },
+    "latest_public_score": "23.86",
+    "latest_ref": 57577905,
+    "latest_status": "SubmissionStatus.COMPLETE",
+    "new_submission_ref_created": false,
+    "score_attributable_to_current_candidate": false
+  },
+  "phase": "A_SAVE_AND_RUN_ALL_ONLY",
+  "phase_a_output": {
+    "columns": [
+      "row_id",
+      "game_id",
+      "end_of_game",
+      "score"
+    ],
+    "dtypes": {
+      "end_of_game": "bool",
+      "game_id": "string",
+      "row_id": "string",
+      "score": "int64"
+    },
+    "hds_import_verified": true,
+    "is_official_score": false,
+    "log_bytes": 9109,
+    "log_mentions_no_competition_score_evaluated": true,
+    "log_sha256": "51a4b7cc4c85878a232809a8a1897955481da34030fa5487d7cacd1273d50357",
+    "matches_documented_placeholder": true,
+    "parquet_bytes": 2648,
+    "parquet_sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+    "row_count": 1,
+    "secret_pattern_scan": {
+      "KAGGLE_API_TOKEN": false,
+      "KGAT_token": false,
+      "bearer_credential": false,
+      "private_key_header": false
+    },
+    "source_file_count_verified": 35,
+    "status": "COMPLETE"
+  },
+  "protected_sha256": {
+    "AGENTS.md": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+    "制御/現在状態.json": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+  },
+  "pushed_version": 5,
+  "remote_latest_pull": {
+    "cell_count": 5,
+    "cell_source_matches_candidate": true,
+    "cell_source_sha256": "263ccaeda6435573295deb444db01934da7e5ad26f3f81e4784eeaf552a43c2e",
+    "code_cell_count": 4,
+    "core_metadata_matches": {
+      "competition_sources": true,
+      "enable_gpu": true,
+      "enable_internet": true,
+      "enable_tpu": true,
+      "id": true,
+      "is_private": true,
+      "kernel_type": true
+    },
+    "metadata_sha256": "cfba11f3983ce18a8bdfe48cd19256a73e3cd1526cc0807384eecd282c278f92",
+    "notebook_sha256": "d9f6ac6b36f3fbfa535c8a8906bef10982aefba11c9b51cc8fef634a486e92db",
+    "output_count": 0,
+    "platform_metadata_fields_normalized": [
+      "machine_shape",
+      "keywords",
+      "id_no",
+      "code_file",
+      "docker_image"
+    ],
+    "secret_pattern_scan": {
+      "KAGGLE_API_TOKEN": false,
+      "KGAT_token": false,
+      "bearer_credential": false,
+      "private_key_header": false
+    }
+  },
+  "scope_result": {
+    "competition_rerun": false,
+    "daily_quota_consumed_by_this_task": false,
+    "official_score_for_candidate": false,
+    "official_submission": false,
+    "source_or_HDS_changed": false
+  },
+  "track": "ARC3",
+  "version_pull_note": "Explicit slug/version=5 pull returned HTTP 403; unversioned current kernel pull succeeded and its cell-source digest matches local candidate."
+}

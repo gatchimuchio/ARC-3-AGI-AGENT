@@ -1,0 +1,56 @@
+{
+  "schema": "arc26-arc3-public-scorecard-paired-evaluation-v1",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-25T01:14:53Z",
+  "candidate": "generic prior-memory visible-change coefficient 0.25 -> 0.0",
+  "dataset": "25 official public Starter environments; each condition ran in a fresh process",
+  "score_unit": "official local ARC3 EnvironmentScoreCalculator RHAE points",
+  "previous": {
+    "mean_score": 0.190256343,
+    "levels_completed": 2,
+    "wins": 0,
+    "legal_non_reset_actions": 1986,
+    "episodes": 25,
+    "action_authorization_false_all": true
+  },
+  "candidate_result": {
+    "mean_score": 0.209349227,
+    "levels_completed": 3,
+    "wins": 0,
+    "legal_non_reset_actions": 1986,
+    "episodes": 25,
+    "action_authorization_false_all": true
+  },
+  "delta": {
+    "mean_score": 0.019092884,
+    "levels_completed": 1,
+    "wins": 0,
+    "score_regressions": 1,
+    "score_improvements": 1,
+    "score_ties": 23,
+    "level_regressions": 0,
+    "level_improvements": 1,
+    "level_ties": 24,
+    "legal_non_reset_actions": 0
+  },
+  "exceptions": 0,
+  "scorecard_contract_errors": 0,
+  "hidden_or_evaluation_answers_read": false,
+  "game_ids_or_per_episode_rows_persisted": false,
+  "source_bundle_sha256": "d802bdad39437e5e31617cba4653b69dae447450d172f29281716859165a3319",
+  "bundle_files": 36,
+  "paired_runner_file": "検証/ARC3事前記憶係数ペア評価.py",
+  "paired_runner_sha256": "336e289c796a4f5c9962096ef6589998614e2c0aa4cb7fd4bca1e1a473e5dbdc",
+  "preflight_evidence_file": "運用/証拠/ARC26-UNIFIED/ARC3-prior-memory-candidate-preflight-20261025T0050Z.json",
+  "preflight_evidence_sha256": "bc6306d7dde86ff3343884655d8a5338556a6b8c12fe0b9284210366ac2b7f4b",
+  "kaggle_kernel": {
+    "id": "tecchannn/arc3-observation-driven-exploration-candidate",
+    "version": 6,
+    "status": "KernelWorkerStatus.COMPLETE",
+    "notebook_sha256": "957182aee3420dfa2687cfe6a5ca95e5b47af69fd3f29dfb7402bb2f5dd0a3f4",
+    "private_run_output_sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+    "output_is_placeholder": true
+  },
+  "decision": "LOCAL_SCORECARD_GAIN_WITH_LIMITS; one score regression and one improvement, 23 ties, no level or win regression; proceed only to one official evaluation after fresh rules/history/quota/24h gate",
+  "official_submission_or_rerun": false
+}

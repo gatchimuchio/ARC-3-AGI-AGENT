@@ -1,0 +1,47 @@
+{
+  "schema": "arc3-c2-078-private-control-run.v1",
+  "run_id": "ARC3-RUN-003-C2-078-OFF-R2-V1",
+  "observed_at_utc": "2026-10-26T22:44:32+00:00",
+  "kernel": "tecchannn/arc3-visual-hds-v6-off-pilot",
+  "version": 1,
+  "url": "https://www.kaggle.com/code/tecchannn/arc3-visual-hds-v6-off-pilot",
+  "state": "KernelWorkerStatus.RUNNING",
+  "command": [
+    "%TEMP%/arc3-v6-locked-20261027/Scripts/kaggle.exe",
+    "kernels",
+    "push",
+    "--path",
+    "出力/ARC3-RUN-003-local/C2-078/off-r2",
+    "--timeout",
+    "10800"
+  ],
+  "push_count": 1,
+  "global_kernel_timeout_seconds": 10800,
+  "notebook_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+  "metadata_sha256": "3c6537a086acb9990166049555c51f73d0a8a162069f0788711e122b1e521113",
+  "build_manifest_sha256": "175808d149c9da773de00b578dd15f58b5e07ae099ca9cf64cdae4e513e2db11",
+  "push_receipt_sha256": "98dcb4fecffea2a1aa5a7846e487a96bfb638e6048aaf0c4b499615e99e00e0a",
+  "status_receipt_sha256": "35cfc7944766771bb8b5ffb748963e5f44cd74b2fadaf199bf0b54ade7b57cce",
+  "arms_preflight_sha256": "3d91c27e27c187dde7ebac494446597f403e638682c5b7d14c40439d29bf9e37",
+  "actual_bundled_hds_cpu_smoke_sha256": "35d8d74514b55780f359a2d44a077374db1289ca86d226c22c31562d242ea47f",
+  "pilot": {
+    "games_max": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_max": 80,
+    "runtime_seconds_max": 1200,
+    "competition_rerun_allowed": false
+  },
+  "shared_model_seed": 0,
+  "environment_seed": {
+    "explicitly_requested_by_notebook": false,
+    "SDK_default": "unverified",
+    "runtime_verified": false,
+    "initial_state_equivalence_runtime_check": "pending"
+  },
+  "GPU_model_ready_or_game_progress_confirmed": false,
+  "official_submission_or_competition_rerun": false,
+  "official_score_for_this_version": null,
+  "shadow_kernel_pushed": false,
+  "next_action": "Read status for this same exact newkernel/version1; do notpushagain. AfterterminalCOMPLETE retrieveexactv1output, validatepublicstarts/budgets/source, thenexecuteidenticalshadow-r2onlyifcontrolvalid."
+}

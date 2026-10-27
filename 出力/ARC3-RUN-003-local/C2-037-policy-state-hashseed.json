@@ -1,0 +1,173 @@
+{
+  "指示ID": "ARC3-RUN-003-C2-037",
+  "評価": "public_local_environment_paired_policy_rng_ablation",
+  "split": "development",
+  "split_seed": 20261022,
+  "environments_per_seed": 5,
+  "environment_seeds": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_run": 80,
+  "retry_game_over": true,
+  "conditions": {
+    "previous": "existing policy RNG seeded from environment seed",
+    "current": "per-selection SHA256 seed from current public observation and policy statistics"
+  },
+  "previous": {
+    "7": {
+      "actions": 400,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 9,
+      "game_over_events": 6,
+      "reset_actions": 6,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0,
+      "games": 5
+    },
+    "31": {
+      "actions": 400,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 9,
+      "game_over_events": 6,
+      "reset_actions": 6,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0,
+      "games": 5
+    },
+    "73": {
+      "actions": 400,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 17,
+      "game_over_events": 6,
+      "reset_actions": 6,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0,
+      "games": 5
+    }
+  },
+  "current": {
+    "7": {
+      "actions": 400,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 10,
+      "game_over_events": 7,
+      "reset_actions": 7,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0,
+      "games": 5
+    },
+    "31": {
+      "actions": 400,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 10,
+      "game_over_events": 7,
+      "reset_actions": 7,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0,
+      "games": 5
+    },
+    "73": {
+      "actions": 400,
+      "levels_completed": 1,
+      "wins": 0,
+      "no_op_actions": 10,
+      "game_over_events": 7,
+      "reset_actions": 7,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0,
+      "games": 5
+    }
+  },
+  "delta": {
+    "7": {
+      "actions": 0,
+      "levels_completed": 0,
+      "wins": 0,
+      "no_op_actions": 1,
+      "game_over_events": 1,
+      "reset_actions": 1,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0
+    },
+    "31": {
+      "actions": 0,
+      "levels_completed": 0,
+      "wins": 0,
+      "no_op_actions": 1,
+      "game_over_events": 1,
+      "reset_actions": 1,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0
+    },
+    "73": {
+      "actions": 0,
+      "levels_completed": 0,
+      "wins": 0,
+      "no_op_actions": -7,
+      "game_over_events": 1,
+      "reset_actions": 1,
+      "illegal_action_attempts": 0,
+      "duplicate_observation_steps": 0,
+      "policy_holds": 0
+    }
+  },
+  "paired_start_match_counts": {
+    "7": 5,
+    "31": 5,
+    "73": 5
+  },
+  "paired_run_counts": {
+    "7": 5,
+    "31": 5,
+    "73": 5
+  },
+  "acceptance_checks": {
+    "7": {
+      "paired_starts_match": true,
+      "levels_not_lower": true,
+      "wins_not_lower": true,
+      "game_over_not_higher": false,
+      "legal_lifecycle_no_hold_or_duplicate": true
+    },
+    "31": {
+      "paired_starts_match": true,
+      "levels_not_lower": true,
+      "wins_not_lower": true,
+      "game_over_not_higher": false,
+      "legal_lifecycle_no_hold_or_duplicate": true
+    },
+    "73": {
+      "paired_starts_match": true,
+      "levels_not_lower": true,
+      "wins_not_lower": true,
+      "game_over_not_higher": false,
+      "legal_lifecycle_no_hold_or_duplicate": true
+    }
+  },
+  "decision": "reject",
+  "public_input": {
+    "file_count": 50,
+    "content_set_sha256": "d40c652dfffda990a1a32c65da3d873a36bb9c4b6bd06598704596af3c2ead79"
+  },
+  "source_sha256": {
+    "evaluator": "bd9c9c47ba6a6b2ecdd990dc19ca6533cba5173cafc2ce79721fbd58ee643968",
+    "local_policy_evaluator": "ba8f89bf09077622f5c67e0ba310b5c2ac68d240412178a371b7e2a3f6c22088",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510"
+  },
+  "elapsed_seconds": 27.9
+}

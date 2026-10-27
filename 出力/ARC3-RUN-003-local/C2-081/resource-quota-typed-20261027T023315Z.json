@@ -1,0 +1,78 @@
+{
+  "schema": "arc3-official-accelerator-quota-typed-snapshot.v1",
+  "observed_at_utc": "2026-10-27T02:33:15.275315+00:00",
+  "method": "KaggleApi.quota_view -> GetAcceleratorQuotaStatistics",
+  "kaggle_version": "2.2.5",
+  "kagglesdk_version": "0.1.38",
+  "quota_refresh_time": "2026-10-31T00:00:00",
+  "gpu_quota": {
+    "reported_durations": {
+      "time_used": {
+        "total_seconds": 83940.699,
+        "days": 0,
+        "seconds_within_day": 83940,
+        "microseconds": 699000
+      },
+      "time_reserved": {
+        "total_seconds": 0.0,
+        "days": 0,
+        "seconds_within_day": 0,
+        "microseconds": 0
+      },
+      "total_time_allowed": {
+        "total_seconds": 108000.0,
+        "days": 1,
+        "seconds_within_day": 21600,
+        "microseconds": 0
+      },
+      "minimum_time_allowed": {
+        "total_seconds": 108000.0,
+        "days": 1,
+        "seconds_within_day": 21600,
+        "microseconds": 0
+      }
+    },
+    "remaining_seconds_arithmetic": 24059.301000000007,
+    "remaining_definition": "total_time_allowed minus time_used minus time_reserved, using typed timedelta.total_seconds; not hardware wallclock estimate",
+    "is_pay_to_scale_enabled": false,
+    "has_ever_run": true
+  },
+  "tpu_quota": {
+    "reported_durations": {
+      "time_used": {
+        "total_seconds": 0.0,
+        "days": 0,
+        "seconds_within_day": 0,
+        "microseconds": 0
+      },
+      "time_reserved": {
+        "total_seconds": 0.0,
+        "days": 0,
+        "seconds_within_day": 0,
+        "microseconds": 0
+      },
+      "total_time_allowed": {
+        "total_seconds": 72000.0,
+        "days": 0,
+        "seconds_within_day": 72000,
+        "microseconds": 0
+      },
+      "minimum_time_allowed": {
+        "total_seconds": 72000.0,
+        "days": 0,
+        "seconds_within_day": 72000,
+        "microseconds": 0
+      }
+    },
+    "remaining_seconds_arithmetic": 72000.0,
+    "remaining_definition": "total_time_allowed minus time_used minus time_reserved, using typed timedelta.total_seconds; not hardware wallclock estimate",
+    "is_pay_to_scale_enabled": false,
+    "has_ever_run": false
+  },
+  "machine_specific_fields_provided": false,
+  "typed_duration_preservation_required": "SDK0.1.38 to_dict() emitted day-truncated and malformed duration strings in preceding receipt; use typed totals here",
+  "supersedes_for_duration_interpretation": "resource-quota-20261027T023156Z.json",
+  "remote_mutation_performed": false,
+  "kernel_status_queried": false,
+  "aliases_multipliers_or_wallclock_hours_estimated": false
+}

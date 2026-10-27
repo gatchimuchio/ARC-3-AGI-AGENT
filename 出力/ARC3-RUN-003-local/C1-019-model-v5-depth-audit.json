@@ -1,0 +1,105 @@
+{
+  "task_id": "ARC3-RUN-003-C1-019",
+  "scope": {
+    "public_runs": 25,
+    "source": "saved OFFLINE model-v5 output",
+    "replayed_actions": false
+  },
+  "source_sha256": {
+    "candidate_notebook_v5": "5763f69d0794d7161dbe81a967edd2c10a6810c92ed1a28208bd47222fd5dfbc",
+    "saved_prompt_log": "3b88cf83db372a2c92644be47e2f4265513393e58f5957f12ab4f9d3555c553a",
+    "benchmark": "7237a2d2150820ee2aadc8ba986dcb67a12e495bd934bd686583b1cd32ebdcd2",
+    "comparison": "4bd0bf8b3f966f098d0a8ddca98038f1abdd8a5836af02718d528fb2282a730b",
+    "output_manifest": "1d7b5e3edce18cfd166b2040235d03f0a8bc030711e1c763a72a9687799f7372",
+    "event_log_content_set": "ae4f9546de60c5e6f6bec9c8058aebcaf1ed19a43a1383caf4c3430152814bbc"
+  },
+  "totals": {
+    "public_runs": 25,
+    "actions": 1906,
+    "visible_changes": 1838,
+    "no_visible_change": 68,
+    "level_advance_events": 47,
+    "win_runs": 0,
+    "no_visible_change_rate": 0.035676810073452254
+  },
+  "depth": [
+    {
+      "depth": 1,
+      "actions": 815,
+      "visible_changes": 774,
+      "no_visible_change": 41,
+      "level_advance_events": 22,
+      "started_runs": 25,
+      "completed_runs": 22,
+      "completion_rate": 0.88,
+      "no_visible_change_rate": 0.05030674846625767
+    },
+    {
+      "depth": 2,
+      "actions": 664,
+      "visible_changes": 650,
+      "no_visible_change": 14,
+      "level_advance_events": 14,
+      "started_runs": 22,
+      "completed_runs": 14,
+      "completion_rate": 0.6363636363636364,
+      "no_visible_change_rate": 0.02108433734939759
+    },
+    {
+      "depth": 3,
+      "actions": 275,
+      "visible_changes": 265,
+      "no_visible_change": 10,
+      "level_advance_events": 7,
+      "started_runs": 14,
+      "completed_runs": 7,
+      "completion_rate": 0.5,
+      "no_visible_change_rate": 0.03636363636363636
+    },
+    {
+      "depth": 4,
+      "actions": 92,
+      "visible_changes": 91,
+      "no_visible_change": 1,
+      "level_advance_events": 3,
+      "started_runs": 7,
+      "completed_runs": 3,
+      "completion_rate": 0.42857142857142855,
+      "no_visible_change_rate": 0.010869565217391304
+    },
+    {
+      "depth": 5,
+      "actions": 54,
+      "visible_changes": 52,
+      "no_visible_change": 2,
+      "level_advance_events": 1,
+      "started_runs": 3,
+      "completed_runs": 1,
+      "completion_rate": 0.3333333333333333,
+      "no_visible_change_rate": 0.037037037037037035
+    },
+    {
+      "depth": 6,
+      "actions": 6,
+      "visible_changes": 6,
+      "no_visible_change": 0,
+      "level_advance_events": 0,
+      "started_runs": 1,
+      "completed_runs": 0,
+      "completion_rate": 0.0,
+      "no_visible_change_rate": 0.0
+    }
+  ],
+  "cross_checks": {
+    "event_actions_match_benchmark_history": true,
+    "event_actions_match_saved_candidate_actions": true,
+    "public_level_advances_match_saved_candidate_level_total": true,
+    "public_WIN_states_match_saved_candidate_wins": true,
+    "all_runs_gave_up": true
+  },
+  "limits": [
+    "Aggregate only; no per-game identifier, board, coordinate, action trace, score, or reward retained.",
+    "Level completion is derived only from consecutive public current_frame.level values; visible change is derived from public board and level comparisons.",
+    "Local public behavior does not explain the official score or establish a causal improvement."
+  ]
+}

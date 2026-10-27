@@ -1,0 +1,42 @@
+{
+  "schema": "arc3-private-model-hds-inspection-run.v1",
+  "run_id": "ARC3-RUN-003-C2-081-SHOWN-R2-V1",
+  "created_at_utc": "2026-10-27T00:45:43.755555+00:00",
+  "kernel": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2",
+  "version": 1,
+  "status": "KernelWorkerStatus.QUEUED",
+  "push_count": 1,
+  "notebook_sha256": "0d0726b2607e063be526b8c05e840d40b99515f6753e7d00bcbbf7123b670262",
+  "metadata_sha256": "a4abdfebffced03924f7fe49deba87c023a911bcf86c6281a06d5b1db5bd130a",
+  "bundle_sha256": "c0b955fc6ae184440d8c1243ca27b451f83975cf434f632b51b93a31faf77604",
+  "build_manifest_sha256": "83f36d8200c44c7b24536b82849226c53da5b5ac3b2c010e1548037d18ec60b1",
+  "preflight_sha256": "ba2a5c7b7371c5ef1020c23939cfe3eae239b8cc465bf4b8485fd94769e272e0",
+  "source_verification": "出力/ARC3-RUN-003-local/C2-081/shown-r2-v1-source-verification.json",
+  "source_verification_sha256": "965ca439e16734dd61a1bfde3eddebff5240c5b954ebede3867860882d861bb1",
+  "status_observation": "出力/ARC3-RUN-003-local/C2-081/shown-r2-observation-20261027T004543Z.json",
+  "status_observation_sha256": "39508ed94d05e4920a95867e755883f7f5814f1589e26ebb9283a1a1c4ae5119",
+  "evidence_visibility": "shown",
+  "native_HDS": "original_0.4.2",
+  "native_judgment_modified": false,
+  "pilot": {
+    "games_max": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_max": 80,
+    "runtime_seconds_max": 1200,
+    "competition_rerun_allowed": false
+  },
+  "HDS_budgets_per_game": {
+    "update_budget": 80,
+    "query_budget": 80,
+    "hds_seconds_budget": 120.0
+  },
+  "global_timeout_seconds": 10800,
+  "model_seed": 0,
+  "environment_seed_requested_by_notebook": null,
+  "feature_scope": "original public-outcome evidence; no locality/area or scoped-core patch",
+  "next_control": "masked-r2 SAME frozen source after integration result; not pushed yet",
+  "official_submission_or_rerun": false,
+  "score_or_learning_effect_proven": false,
+  "do_not_duplicate_or_edit_active_kernel": true
+}

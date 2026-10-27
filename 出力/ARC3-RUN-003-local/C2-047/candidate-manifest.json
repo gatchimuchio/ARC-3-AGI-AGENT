@@ -1,0 +1,40 @@
+{
+  "experiment": "ARC3-RUN-003/C2-047",
+  "base": "C2-046 slim version 12; only rolling-summary compaction settings added",
+  "arm": {
+    "summary": {
+      "notebook_sha256": "9339fc194f8db3124b610fd24075d91745c796185e6274c670e80c6caa58c1fd",
+      "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+      "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+      "memory_mode": "slim",
+      "rolling_summary_interval_tokens": 32768,
+      "rolling_summary_replaces_history": true,
+      "loader": "enable_multithread_load=true,num_threads=8",
+      "startup_guard": true,
+      "readiness_gate": true,
+      "offline_guard": true,
+      "rolling_summary_turn_context_default": false,
+      "summary_thinking_default": false
+    }
+  },
+  "historical_control": {
+    "experiment": "ARC3-RUN-003/C2-046",
+    "arm": "slim",
+    "kernel_version": 12,
+    "notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e"
+  },
+  "controls": {
+    "startup_timeout_seconds": 1800,
+    "offline_games": 3,
+    "seed": 0,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "passes": 1,
+    "concurrency": 1,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_competition_rerun": false,
+    "official_submission": false
+  }
+}

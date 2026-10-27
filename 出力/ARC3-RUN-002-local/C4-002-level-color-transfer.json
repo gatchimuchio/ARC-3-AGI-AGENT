@@ -1,0 +1,188 @@
+{
+  "evaluation": "ARC3-RUN-002-C4-002",
+  "scope": "public local environments; fixed split seed 20261022; dev action seeds 7/31/73; holdout seed 31; 80 requests; SDK RESET after GAME_OVER",
+  "split_seed": 20261022,
+  "public_environment_count": 25,
+  "candidate_rule": "clear only color UCB count/reward maps after positive level progress; preserve Action statistics, RNG, and all other policy state",
+  "development": {
+    "stage": "dev",
+    "environments_per_seed": 5,
+    "seeds": [
+      7,
+      31,
+      73
+    ],
+    "previous": {
+      "7": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "31": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "73": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 17,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      }
+    },
+    "candidate": {
+      "7": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "31": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 5,
+        "reset_actions": 5,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "73": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 17,
+        "game_over_events": 5,
+        "reset_actions": 5,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      }
+    },
+    "previous_matches_C2-003": {
+      "7": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      },
+      "31": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      },
+      "73": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      }
+    },
+    "same_public_start_pairs": {
+      "7": 5,
+      "31": 5,
+      "73": 5
+    },
+    "paired_environment_runs": {
+      "7": 5,
+      "31": 5,
+      "73": 5
+    }
+  },
+  "development_gate": {
+    "checks": {
+      "all_previous_runs_match_C2-003": true,
+      "all_paired_public_starts_match": true,
+      "levels_not_lower_each_seed": true,
+      "game_over_not_higher_each_seed": true,
+      "holds_illegal_duplicates_zero": true,
+      "total_no_op_lower": false,
+      "no_op_lower_in_at_least_two_seeds": false
+    },
+    "by_seed": {
+      "7": {
+        "levels_not_lower": true,
+        "no_op_not_higher": true,
+        "no_op_lower": false,
+        "game_over_not_higher": true,
+        "holds_zero": true,
+        "illegal_zero": true,
+        "duplicates_zero": true
+      },
+      "31": {
+        "levels_not_lower": true,
+        "no_op_not_higher": true,
+        "no_op_lower": false,
+        "game_over_not_higher": true,
+        "holds_zero": true,
+        "illegal_zero": true,
+        "duplicates_zero": true
+      },
+      "73": {
+        "levels_not_lower": true,
+        "no_op_not_higher": true,
+        "no_op_lower": false,
+        "game_over_not_higher": true,
+        "holds_zero": true,
+        "illegal_zero": true,
+        "duplicates_zero": true
+      }
+    },
+    "passed": false
+  },
+  "holdout": null,
+  "holdout_gate": null,
+  "decision": "reject_no_holdout",
+  "source_sha256": {
+    "experiment_runner": "6ef2034065e7ef81b0c08570fe05bba072317d029338410ce0522be2a3cf1ef2",
+    "evaluation_runner": "e7d87ff3df4ef1e1aab1d226fdb6fdc0a9a46bede5c450c71f31ae57c1239fb0",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "boundary": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+    "starter_agent": "85655f7a11a105e50bba76efd00bebf8056d02ddbae827a8f8a5b46e849fc087"
+  }
+}

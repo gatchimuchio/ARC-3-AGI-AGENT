@@ -1,0 +1,16 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-058",
+  "observed_at_utc": "2026-10-25T12:50:00Z",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 27,
+  "push_command": "uvx --python 3.12 --from kaggle==2.2.5 kaggle kernels push --path 出力/ARC3-RUN-003-local/C2-058-output-cap-16384/source/cap-16384",
+  "push_cli_output": "Kernel version 27 successfully pushed. Please check progress at https://www.kaggle.com/code/tecchannn/arc3-model-guided-c2-025",
+  "status_command": "uvx --python 3.12 --from kaggle==2.2.5 kaggle kernels status tecchannn/arc3-model-guided-c2-025",
+  "status_cli_output": "tecchannn/arc3-model-guided-c2-025 has status \"KernelWorkerStatus.RUNNING\"",
+  "status": "KernelWorkerStatus.RUNNING",
+  "candidate_notebook_sha256": "b72c8105c1916337d6016e224762afe3d9a0c3be24a4abb539b83591e6ca48d0",
+  "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "official_competition_submission_made": false,
+  "official_submission_quota": "not queried in this action; no official submission made",
+  "preflight_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-preflight-20261025T124914Z.json"
+}

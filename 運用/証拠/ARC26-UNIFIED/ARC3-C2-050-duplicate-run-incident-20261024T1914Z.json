@@ -1,0 +1,47 @@
+{
+  "schema": "arc3-c2-050-duplicate-run-incident.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-050",
+  "observed_at_utc": "2026-10-24T19:14:14Z",
+  "push_result": {
+    "version": 17,
+    "status": "success",
+    "command": "kaggle kernels push -p C2-050 source/summary",
+    "official_competition_submission": false,
+    "private_kernel_run_started": true
+  },
+  "version16": {
+    "status": "KernelWorkerStatus.RUNNING",
+    "origin": "unknown"
+  },
+  "version17": {
+    "status": "KernelWorkerStatus.RUNNING",
+    "origin": "pushed by this task"
+  },
+  "exact_source_comparison": {
+    "v16_v17_serialized_notebook_equal": true,
+    "v16_v17_notebook_sha256": "a68159dd111779f9058876d1c732058d98fdd3da01c860539621ee5a787c495c",
+    "v16_v17_serialized_metadata_equal": true,
+    "v16_v17_metadata_sha256": "24510cb150142a2ee5787ba9626912da0ff349f7b0960255683c95f32f93ffdb",
+    "cell_count": 25,
+    "cell_sources_equal_to_local_c2_050": true,
+    "cell_sources_sha256": "f71c29856e083e14933af69361b5640931ecfa7c24e8ae6d221f47ab52da5f51",
+    "local_candidate_notebook_sha256": "c5ea749ff7048c448c8a20d8815137a734d6a8e29dffc8dc95677d3c55f3db86"
+  },
+  "contract_impact": {
+    "expected_concurrency": 1,
+    "observed_concurrent_running_versions": 2,
+    "concurrency_gate_breached": true,
+    "scores_eligible_for_candidate_adoption": false,
+    "no_further_push_or_run": true
+  },
+  "mitigation": {
+    "kaggle_cli_cancel_command_available": false,
+    "sdk_cancel_endpoint_requires_session_id": true,
+    "exact_status_response_provided_session_id": false,
+    "cancel_sent": false,
+    "computer_use_ui_action_performed": false,
+    "computer_use_initialization_error": "failed to write kernel assets: path not found (os error 3)"
+  },
+  "next_action": "Track both exact versions through terminal status and retrieve each output separately. Treat results as diagnostic only; start no new GPU run until the duplicate condition is resolved."
+}

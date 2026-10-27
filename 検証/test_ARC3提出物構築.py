@@ -34,6 +34,7 @@ class ARC3SubmissionBuilderTests(unittest.TestCase):
         paths = [item["パス"] for item in manifest["含有"]]
         self.assertEqual(paths, sorted(paths))
         self.assertIn("接続/ARC3提出agent.py", paths)
+        self.assertIn("接続/観測駆動探索Action.py", paths)
         self.assertTrue(all(path.startswith(("接続/", "HDS/学習系統/v0.4.2/hds学習系統/")) for path in paths))
         self.assertFalse(any("__pycache__" in path or path.endswith(".pyc") for path in paths))
         with zipfile.ZipFile(io.BytesIO(payload)) as archive:
@@ -46,6 +47,7 @@ class ARC3SubmissionBuilderTests(unittest.TestCase):
         notebook = BUILDER._notebook("tecchannn", payload)
         metadata = notebook["metadata"]["kaggle"]
         self.assertEqual(notebook["nbformat"], 4)
+        self.assertIn("observation-driven exploration candidate", "".join(notebook["cells"][0]["source"]))
         self.assertFalse(metadata["isGpuEnabled"])
         self.assertFalse(metadata["isInternetEnabled"])
         kernel_metadata = BUILDER._kernel_metadata("tecchannn")
@@ -56,6 +58,7 @@ class ARC3SubmissionBuilderTests(unittest.TestCase):
         self.assertNotIn("keywords", kernel_metadata)
 
         cells = notebook["cells"]
+        self.assertEqual([cell["id"] for cell in cells], ["overview", "install-sdk", "extract-and-verify", "write-agent", "run-agent"])
         self.assertIn("PurePosixPath", "".join(cells[2]["source"]))
         self.assertIn("/tmp/arc3-hds-source", "".join(cells[2]["source"]))
         self.assertNotIn("/kaggle/working/arc3-hds-source", "".join(cells[2]["source"]))
@@ -89,6 +92,15 @@ class ARC3SubmissionBuilderTests(unittest.TestCase):
                 "/tmp/arc3-hds-source", extraction.as_posix()
             )
             original_path = list(sys.path)
+            source_prefixes = ("接続", "hds学習系統")
+            original_modules = {
+                name: module
+                for name, module in sys.modules.items()
+                if any(name == prefix or name.startswith(prefix + ".") for prefix in source_prefixes)
+            }
+            for name in list(sys.modules):
+                if any(name == prefix or name.startswith(prefix + ".") for prefix in source_prefixes):
+                    del sys.modules[name]
             try:
                 exec(compile(extraction_cell, "notebook-extract-cell", "exec"), {})
                 self.assertTrue((extraction / "ARC3-SOURCE-MANIFEST.json").is_file())
@@ -106,10 +118,11 @@ class ARC3SubmissionBuilderTests(unittest.TestCase):
             finally:
                 sys.path[:] = original_path
                 for name in list(sys.modules):
-                    if name == "接続" or name.startswith("接続.") or name == "hds学習系統" or name.startswith("hds学習系統."):
+                    if any(name == prefix or name.startswith(prefix + ".") for prefix in source_prefixes):
                         del sys.modules[name]
+                sys.modules.update(original_modules)
 
-    def test_packaged_agent_holds_in_official_offline_runner_without_network(self):
+    def test_packaged_agent_explores_in_official_offline_runner_without_network(self):
         from arc_agi import Arcade, OperationMode
 
         payload, _ = BUILDER._bundle()
@@ -121,7 +134,15 @@ class ARC3SubmissionBuilderTests(unittest.TestCase):
             with zipfile.ZipFile(io.BytesIO(payload)) as archive:
                 archive.extractall(package_root)
             original_path = list(sys.path)
-            source_prefixes = ("接続", "hds学習系統")
+            source_prefixes = ("接続", "hds学習系統", "agents")
+            original_modules = {
+                name: module
+                for name, module in sys.modules.items()
+                if any(name == prefix or name.startswith(prefix + ".") for prefix in source_prefixes)
+            }
+            for name in list(sys.modules):
+                if any(name == prefix or name.startswith(prefix + ".") for prefix in source_prefixes):
+                    del sys.modules[name]
             try:
                 sys.path[:0] = [
                     str(package_root),
@@ -156,19 +177,25 @@ class ARC3SubmissionBuilderTests(unittest.TestCase):
                     self.assertTrue(issubclass(agent_module.MyAgent, base.Agent))
                     with patch.object(socket.socket, "connect", side_effect=AssertionError("network disabled")), patch(
                         "socket.create_connection", side_effect=AssertionError("network disabled")
-                    ):
+                    ), patch.object(agent_module.MyAgent, "MAX_ACTIONS", 2):
                         agent.main()
-                    self.assertEqual(agent.action_counter, 0)
+                    self.assertEqual(agent.action_counter, 3)
+                    self.assertTrue(agent.exploration_stats)
                     self.assertEqual(agent.last_hold["状態"], "HOLD")
                     self.assertEqual(agent.last_hold["次作用候補数"], 0)
                     self.assertFalse(agent.last_hold["候補側申告実行許可"])
+                    self.assertEqual(agent.hds_runtime_stats["観測更新数"], 3)
+                    self.assertEqual(agent.hds_runtime_stats["状態照会数"], 3)
+                    self.assertEqual(agent.hds_runtime_stats["事前記憶読込件数"], 5)
+                    self.assertFalse(agent.hds_runtime_stats["事前記憶Action認可"])
+                    self.assertEqual(agent.hds_runtime_stats["事前記憶反映可視変化係数"], 0.0)
+                    self.assertIsNotNone(agent.hds_runtime_stats["最終学習状態"])
             finally:
                 sys.path[:] = original_path
                 for name in list(sys.modules):
-                    if name == "agents" or name.startswith("agents."):
+                    if any(name == prefix or name.startswith(prefix + ".") for prefix in source_prefixes):
                         del sys.modules[name]
-                    elif any(name == prefix or name.startswith(prefix + ".") for prefix in source_prefixes):
-                        del sys.modules[name]
+                sys.modules.update(original_modules)
 
     def test_build_records_hashes_and_refuses_overwrite(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -178,7 +205,7 @@ class ARC3SubmissionBuilderTests(unittest.TestCase):
             metadata = output / "kernel-metadata.json"
             manifest = output / "bundle-manifest.json"
             record = json.loads(manifest.read_text(encoding="utf-8"))
-            self.assertEqual(result["kernel_id"], "tecchannn/arc3-hds-hold-baseline")
+            self.assertEqual(result["kernel_id"], "tecchannn/arc3-observation-driven-exploration-candidate")
             self.assertEqual(record["notebook_sha256"], hashlib.sha256(notebook.read_bytes()).hexdigest())
             self.assertEqual(json.loads(metadata.read_text(encoding="utf-8"))["id"], result["kernel_id"])
             with self.assertRaises(FileExistsError):

@@ -1,0 +1,14 @@
+{
+  "schema": "arc26-unified-kaggle-cli-observation-v1",
+  "track": "ARC3",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "observed_at_utc": "2026-10-25T15:02:39.955Z",
+  "cli_version": "Kaggle CLI 2.2.5",
+  "submissions_command": "kaggle competitions submissions -c arc-prize-2026-arc-agi-3 --csv",
+  "submissions_exit_code": 0,
+  "submissions_raw": "ref,fileName,date,description,status,publicScore,privateScore\r\n\r\n57612586,submission.parquet,2026-10-25 01:16:07.830000,ARC3 prior-memory coefficient public-25 scorecard candidate 2026-10-25,SubmissionStatus.COMPLETE,0.03,\r\n\r\n57577905,submission.parquet,2026-10-24 01:15:49.963000,ARC3-RUN-003 C1-018 paired public scorecard validated v5,SubmissionStatus.COMPLETE,23.86,\r\n\r\n57541830,submission.parquet,2026-10-23 00:03:01.330000,ARC3-RUN-002 observation-driven exploration v4,SubmissionStatus.COMPLETE,0.25,\r\n\r\n57527856,submission.parquet,2026-10-22 14:19:24.727000,ARC3-RUN-002 baseline v5 f8ace66,SubmissionStatus.COMPLETE,0.00,\r\n\r\n55206302,submission.parquet,2026-08-03 07:58:07.073000,ARC3CompletionAgent rev5.1 frozen release v4 git daa91d8 M4-P06,SubmissionStatus.COMPLETE,0.06,\r\n\r\n55070928,submission.parquet,2026-07-29 03:29:04.383000,GenericAGIRuntime P15 v11 retry same source git baa03f3,SubmissionStatus.ERROR,,\r\n\r\n55069307,submission.parquet,2026-07-29 01:53:16.290000,GenericAGIRuntime P15 v11 competition-source bound git baa03f3,SubmissionStatus.ERROR,,\r\n\r\n55049227,submission.parquet,2026-07-28 08:12:23.727000,GenericAGIRuntime P15 sequential git c60ac41 runtime dce9f434,SubmissionStatus.ERROR,,\r\n\r\n55045360,submission.parquet,2026-07-28 04:43:31.867000,GenericAGIRuntime P15 official-format fix git d71fb08 runtime a24a632a,SubmissionStatus.ERROR,,\r\n\r\n55043205,submission.parquet,2026-07-28 02:33:21.277000,GenericAGIRuntime P15 fix git 5464753 runtime a24a632a,SubmissionStatus.ERROR,,\r\n\r\n55040966,submission.parquet,2026-07-28 00:24:55.823000,GenericAGIRuntime P15 git 19fadde runtime a24a632a,SubmissionStatus.ERROR,,\r\n\r\n53996483,submission.parquet,2026-06-24 01:49:00.300000,,SubmissionStatus.COMPLETE,0.12,\r\n\r\n53966647,submission.parquet,2026-06-23 04:11:29.717000,,SubmissionStatus.COMPLETE,0.24,",
+  "submission_limits_command": "kaggle competitions submission-limits arc-prize-2026-arc-agi-3",
+  "submission_limits_exit_code": 0,
+  "submission_limits_raw": "Submissions today: 1\r\nLifetime submissions: 7\r\nRemaining today: 0",
+  "submission_or_rerun_performed": false
+}

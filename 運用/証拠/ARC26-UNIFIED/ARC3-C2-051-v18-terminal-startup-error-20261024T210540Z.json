@@ -1,0 +1,38 @@
+{
+  "schema": "arc3-c2-051-terminal-startup-error.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "observed_at_utc": "2026-10-24T21:05:40Z",
+  "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+  "reported_version": 18,
+  "terminal_status": "KernelWorkerStatus.ERROR",
+  "terminal_status_observed_at_utc": "2026-10-24T21:04:09Z",
+  "kaggle_logs_exit_code": 0,
+  "output_artifacts": {
+    "arc3-model-guided-c2-025.log": {
+      "bytes": 27598,
+      "sha256": "29100d175ae614e698878958c56cfe48400d46a9e66c9b95815726de3e1e30a1"
+    },
+    "serve.log": {
+      "bytes": 29048,
+      "sha256": "45d30c3681a6454a27df3c146319a63ec0f6bf82f77c03c5a5131c0bf1b17222"
+    }
+  },
+  "benchmark_started": false,
+  "score": null,
+  "official_submission_or_rerun": false,
+  "submission_quota_used": false,
+  "exact_failure": [
+    "Precaching: loaded 62 files (185.40 GB) in 1718.07 seconds.",
+    "DEADLINE after 1800s from server launch; server inference readiness was not confirmed",
+    "RuntimeError: SGLang inference readiness was not confirmed; offline benchmark not started"
+  ],
+  "log_times_seconds": {
+    "precache_started": 128.843,
+    "precache_loaded": 1847.11,
+    "deadline": 1869.044,
+    "papermill_error": 1869.384
+  },
+  "source_setting": "SERVER_STARTUP_TIMEOUT = 30 * 60",
+  "interpretation": "runner startup failure; C2-051 game treatment is unevaluated"
+}

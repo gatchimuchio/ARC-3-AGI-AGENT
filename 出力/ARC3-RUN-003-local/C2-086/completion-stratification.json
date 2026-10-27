@@ -1,0 +1,76 @@
+{
+  "schema": "arc3-public-native-prediction-posthoc-completion-strata.v1",
+  "created_at_utc": "2026-10-27T01:59:55.143894+00:00",
+  "source": {
+    "path": "運用/証拠/ARC26-UNIFIED/C2-086_25-public-fullschema-seed3701-native-area.json",
+    "sha256": "2776d4a2aa70d6b46162e75b7f256a8cd880954d4410cd48b23b138803e5411e"
+  },
+  "scope": "POSTHOC descriptive recomputation; no rerun, no changed prediction rule or runtime adoption",
+  "groups": {
+    "COMPLETE_80_CALLS": {
+      "environments": 12,
+      "SDK_calls": 960,
+      "matched_scored_points": 73,
+      "previous_correct": 59,
+      "current_correct": 59,
+      "strict_previous_majority_correct": 59,
+      "delta_correct": 0
+    },
+    "BUDGET_PARTIAL": {
+      "environments": 13,
+      "SDK_calls": 917,
+      "matched_scored_points": 550,
+      "previous_correct": 489,
+      "current_correct": 493,
+      "strict_previous_majority_correct": 491,
+      "delta_correct": 4
+    }
+  },
+  "nonzero_delta_environments": [
+    {
+      "anonymous_ordinal": 13,
+      "completion": "BUDGET_PARTIAL",
+      "matched_scored_points": 67,
+      "previous_correct": 46,
+      "current_correct": 49,
+      "strict_previous_majority_correct": 46
+    },
+    {
+      "anonymous_ordinal": 24,
+      "completion": "BUDGET_PARTIAL",
+      "matched_scored_points": 71,
+      "previous_correct": 69,
+      "current_correct": 70,
+      "strict_previous_majority_correct": 70
+    }
+  ],
+  "SDK_calls_total": 1877,
+  "native_cost_totals": {
+    "previous:queries_attempted": 643,
+    "previous:updates_succeeded": 1867,
+    "previous:prior_updates_succeeded": 125,
+    "previous:total_hds_seconds": 1117.125937,
+    "current:queries_attempted": 642,
+    "current:updates_succeeded": 1861,
+    "current:prior_updates_succeeded": 125,
+    "current:total_hds_seconds": 1463.4020090000004
+  },
+  "public_checks_totals": {
+    "Action6_pairs_scored_before_both_teachers": 642,
+    "SDK_calls_attempted": 1877,
+    "SDK_responses_received": 1877,
+    "both_Action6_queries_BEFORE_SDK_action": 642,
+    "current_public_updates": 1861,
+    "nonAction6_optional_area_and_effect_omitted": 1221,
+    "nonRESET_responses_observed": 1867,
+    "original_public_outcome:可視変化なし": 384,
+    "original_public_outcome:盤面変化": 1472,
+    "previous_public_updates": 1867,
+    "same_teacher_with_only_optional_PRE_area_difference": 1861,
+    "strict_previous_Action6_counter_advanced_once_after_teachers": 640,
+    "RESET_calls_excluded_from_learning": 10,
+    "original_public_outcome:GAME_OVER": 10,
+    "original_public_outcome:レベル進行": 1
+  },
+  "no_new_Kaggle_GPU_SDK_or_native_operations": true
+}

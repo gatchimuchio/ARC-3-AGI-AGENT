@@ -1,0 +1,26 @@
+{
+  "C2_060_candidate_sha256": "d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26",
+  "C2_060_preflight": "運用/証拠/ARC26-UNIFIED/ARC3-C2-060-preflight-draft-20261025T144038Z.json",
+  "active_kernel": "tecchannn/arc3-model-guided-c2-025",
+  "decision": "C2-061 held; C2-060 remains conditional next pilot, no push while v28 active",
+  "experiment_id": "ARC3-RUN-003/C2-060-sequencing-refinement",
+  "kernel_push_performed": false,
+  "observed_at_utc": "2026-10-25T15:04:50Z",
+  "official_submission_or_quota_use": false,
+  "pre_push_gates": [
+    "wait for v28 terminal output and scorecard",
+    "inspect all prompt sizes against 118272 effective-input budget",
+    "confirm max-model-context and startup/readiness/resource evidence support 139264 context",
+    "require repeated 16384 output-cap hits to justify cap increase; otherwise derive next experiment from observed result"
+  ],
+  "prior_memory_ablation_review": "運用/証拠/ARC26-UNIFIED/ARC3-C2-061-prior-ablation-review-20261025T150217Z.json",
+  "prior_memory_ablation_review_sha256": "70bf95862de115009805614212eb4f7fd8c8a2f5ebc49bb340e6f22747e42f98",
+  "read_only_output_check": {
+    "cli_exit_code": 0,
+    "command": "kaggle kernels output tecchannn/arc3-model-guided-c2-025/28 --file-pattern \\\"\\.log$\\\"",
+    "matched_log_file_count": 0
+  },
+  "schema": "arc3-c2-060-sequencing-refinement.v1",
+  "status": "KernelWorkerStatus.RUNNING",
+  "version": 28
+}

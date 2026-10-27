@@ -1,0 +1,81 @@
+{
+  "schema": "arc3-myagent-public-local-smoke.v1",
+  "environment": "official arc_agi LocalEnvironmentWrapper",
+  "agent_framework": "lightweight shim from test_ARC3提出agent.py; local venv lacks Kaggle agents.agent",
+  "population": "project-described public ARC3 local environment set; metadata does not label a train/dev split",
+  "environment_count": 25,
+  "selection_seed": 20261022,
+  "action_seeds": [
+    31,
+    32,
+    33
+  ],
+  "max_sdk_actions_per_game": 4,
+  "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+  "agent_source_sha256": "47539cd3c0a19b033fb782df61e4275062b8f7b2343eca3376fbda9b50237486",
+  "exploration_policy_source_sha256": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+  "aggregate": {
+    "games": 3,
+    "games_with_two_or_more_non_reset_actions": 3,
+    "non_reset_actions": 12,
+    "reset_actions": 0,
+    "illegal_actions": 0,
+    "levels_completed": 0,
+    "wins": 0,
+    "hds_observation_updates": 12,
+    "hds_state_queries": 12,
+    "hds_update_seconds": 0.210063,
+    "hds_state_query_seconds": 0.021394,
+    "hds_candidate_query_seconds": 0.384469,
+    "hds_update_count_matches_non_reset_actions": true
+  },
+  "per_game_aggregates": [
+    {
+      "non_reset_actions": 4,
+      "reset_actions": 0,
+      "legal_action_count": 4,
+      "levels_completed": 0,
+      "final_state": "NOT_FINISHED",
+      "agent_stop_reason": "action_limit",
+      "hds_observation_updates": 4,
+      "hds_state_queries": 4,
+      "hds_last_learning_state": "断定保留",
+      "hds_update_seconds": 0.081246,
+      "hds_state_query_seconds": 0.01013,
+      "hds_candidate_query_seconds": 0.110915,
+      "two_or_more_non_reset_actions": true
+    },
+    {
+      "non_reset_actions": 4,
+      "reset_actions": 0,
+      "legal_action_count": 4,
+      "levels_completed": 0,
+      "final_state": "NOT_FINISHED",
+      "agent_stop_reason": "action_limit",
+      "hds_observation_updates": 4,
+      "hds_state_queries": 4,
+      "hds_last_learning_state": "断定保留",
+      "hds_update_seconds": 0.070176,
+      "hds_state_query_seconds": 0.005707,
+      "hds_candidate_query_seconds": 0.073439,
+      "two_or_more_non_reset_actions": true
+    },
+    {
+      "non_reset_actions": 4,
+      "reset_actions": 0,
+      "legal_action_count": 4,
+      "levels_completed": 0,
+      "final_state": "NOT_FINISHED",
+      "agent_stop_reason": "action_limit",
+      "hds_observation_updates": 4,
+      "hds_state_queries": 4,
+      "hds_last_learning_state": "断定保留",
+      "hds_update_seconds": 0.058641,
+      "hds_state_query_seconds": 0.005557,
+      "hds_candidate_query_seconds": 0.200115,
+      "two_or_more_non_reset_actions": true
+    }
+  ],
+  "elapsed_seconds": 1.297,
+  "game_ids_or_boards_saved": false
+}

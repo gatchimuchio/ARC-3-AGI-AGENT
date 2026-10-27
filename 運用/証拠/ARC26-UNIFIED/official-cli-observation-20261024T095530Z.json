@@ -1,0 +1,46 @@
+{
+  "schema": "arc26-unified-kaggle-cli-observation-v1",
+  "track": "ARC3",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "submission_id": "57577905",
+  "observed_at_utc": "2026-10-24T09:55:30Z",
+  "retrieval_method": "Configured local .venv Kaggle CLI; read-only",
+  "commands": [
+    ".\\.venv\\Scripts\\python.exe -m kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json",
+    ".\\.venv\\Scripts\\python.exe -m kaggle competitions submission-limits arc-prize-2026-arc-agi-3"
+  ],
+  "command_exit_codes": {
+    "history": 0,
+    "submission_limits": 0
+  },
+  "cli_warning": "Installed Kaggle CLI 2.2.4; query succeeded, update notice reports 2.2.5.",
+  "history": {
+    "notebook_slug": "tecchannn/arc3-model-guided-c2-025",
+    "notebook_version": 5,
+    "official_status": "SubmissionStatus.PENDING",
+    "publicScore": "",
+    "privateScore": ""
+  },
+  "baseline_submissions": [
+    {
+      "submission_id": "57541830",
+      "official_status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.25"
+    },
+    {
+      "submission_id": "57527856",
+      "official_status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.00"
+    }
+  ],
+  "submission_limits": {
+    "numToday": 1,
+    "numTotal": 6,
+    "remainingToday": 0
+  },
+  "official_score_is_unobserved_not_zero": true,
+  "why_unobserved": "Kaggle CLI history returned PENDING with empty publicScore and privateScore.",
+  "next_check_at_utc": "2026-10-24T10:48:47Z",
+  "terminal_result": false,
+  "submission_or_rerun_performed": false
+}

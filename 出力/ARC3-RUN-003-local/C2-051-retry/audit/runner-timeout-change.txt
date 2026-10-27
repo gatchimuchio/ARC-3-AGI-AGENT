@@ -1,0 +1,6 @@
+C2-051 retry runner configuration only (version 18 timed out before benchmark)
+
+Cell 5: SERVER_STARTUP_TIMEOUT = 30 * 60 -> 40 * 60 (1800 -> 2400 seconds)
+Cell 13: --watchdog-timeout 1800 -> 2400 seconds
+No gameplay code, treatment logic, model, loader, seed, game list, action budget, or per-game budget changed.
+Kernel metadata is byte-identical to C2-051.

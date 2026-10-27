@@ -1,0 +1,160 @@
+{
+  "schema": "arc3-python-hds-query-arms-cpu-preflight.v1",
+  "observed_at_utc": "2026-10-27T00:24:33+00:00",
+  "sources": {
+    "検証/ARC3視覚HDS照会候補構築.py": "8d612b108937575c27de5e2fe0e48773f545a18106371af567373bddaf95d992",
+    "検証/候補/ARC3PythonHDS照会runtime.py": "beb792b5f0aa04763d51c3b2886b88c17f105f04ce9263c488675ee0cfe395df",
+    "検証/test_ARC3視覚HDS照会候補.py": "af22063dd11456cd41e178da4d2eefb4cd1dc8a71f6205c778f7e4ef7d76b30a"
+  },
+  "arms": [
+    {
+      "visibility": "masked",
+      "kernel_id": "tecchannn/arc3-v6-python-hds-masked-c2-081",
+      "title": "arc3-v6-python-hds-masked-c2-081",
+      "notebook_sha256": "863bd5086818245d660859f12ef8760891caec7fe16f9e18e60fdb532488ccf1",
+      "metadata_sha256": "e7492a08b2928f613edb17ed359b02fc90972c35175f864b178b222e2b208c17",
+      "manifest_sha256": "7200ca8540d2b19c7753db5025127be88c6ec246891097f1914675361d800a38",
+      "bundle_sha256": "8cdde173a2b86534dfc1175baeee1eb919e7006375a767cd851b9dd119424efd",
+      "runtime_sha256": "beb792b5f0aa04763d51c3b2886b88c17f105f04ce9263c488675ee0cfe395df",
+      "shared_model_seed": 0,
+      "pilot": {
+        "games_max": 3,
+        "passes": 1,
+        "concurrency": 1,
+        "actions_max": 80,
+        "runtime_seconds_max": 1200,
+        "competition_rerun_allowed": false
+      },
+      "cpu": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "masked",
+        "native_HDS_patched": false
+      }
+    },
+    {
+      "visibility": "shown",
+      "kernel_id": "tecchannn/arc3-v6-python-hds-shown-c2-081",
+      "title": "arc3-v6-python-hds-shown-c2-081",
+      "notebook_sha256": "7e0afcc480419ed9dceea9f306a98a6ef0abd5abbe0862f0b2efbe003a7b33d7",
+      "metadata_sha256": "5dce9d0d95520c17c1cd15d13581f48ffe6b1a571c97726ea68c27851f9f5187",
+      "manifest_sha256": "defdead4fd94530a7fe24c9b444cbd8c290bf4cb5631f10745a1bb583246b5a7",
+      "bundle_sha256": "8cdde173a2b86534dfc1175baeee1eb919e7006375a767cd851b9dd119424efd",
+      "runtime_sha256": "beb792b5f0aa04763d51c3b2886b88c17f105f04ce9263c488675ee0cfe395df",
+      "shared_model_seed": 0,
+      "pilot": {
+        "games_max": 3,
+        "passes": 1,
+        "concurrency": 1,
+        "actions_max": 80,
+        "runtime_seconds_max": 1200,
+        "competition_rerun_allowed": false
+      },
+      "cpu": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false
+      }
+    }
+  ],
+  "bundle_source_and_model_prompt_config_identical": true,
+  "notebooks_differ_only_evidence_visibility": true,
+  "metadata_differ_only_id_title": true,
+  "original_canonical_native_python_files_identical_to_R3": 12,
+  "unchanged_native_prior_bridge": [
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+      "sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+      "sha256": "a6cab8fca7cb591c42fa7444f9678fe0003da69faafcce852598286dceb522e2"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+      "sha256": "50c48e5a9a8aa39158d0cdaacc0501608a829486960d41cb2fea6cb02e5660a4"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/型.py",
+      "sha256": "aa1241708655280b36564f5e3ff6968849b4d09790b8932aabad1570cbca302c"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+      "sha256": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+      "sha256": "bb7e85c2dbafbd430f1b7733bf3a2d307dc24e3227e79994b491cf711322f715"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+      "sha256": "2ba7ceb8d0d6c784d092f91fe484477127f044e50f68c54c977374b17f2f6361"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+      "sha256": "315dd0d23a9682cdf14be71346341976cbdbcd2cbd924a250afc4ad53058dba6"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+      "sha256": "e23f271d38e1f52d75557dbf3342abf7b59a85fbdc315a06c0040fd7ca204eb3"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+      "sha256": "8aa431b3012424fd8347c5b3d93a5fbf2218d35020836f5d40abb427f9d6da0d"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+      "sha256": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+    },
+    {
+      "path": "HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+      "sha256": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac"
+    },
+    {
+      "path": "接続/ARC3事前記憶.py",
+      "sha256": "518456b3b4cdaeb352a093c65d14eb0eb1a30ce70576d6298d501ec75b2b5bc1"
+    },
+    {
+      "path": "検証/ARC3視覚HDS接続候補.py",
+      "sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617"
+    }
+  ],
+  "frozen_R3_runtime_reused_as_base_bytes": true,
+  "R3_source_snapshots_and_current_sources_match": true,
+  "focused_pytest": {
+    "passed": 22,
+    "elapsed_seconds": 10.83
+  },
+  "ruff": "PASS",
+  "actual_RPC_and_ToolAgent_runtime_helpers_executed": true,
+  "CPU_Windows_launch_adapter": {
+    "required_due_observed_existing_v5_WinError": 206,
+    "existing_bootstrap_chars": 65756,
+    "method": "Identical bootstrap bytes executed from a TEMP Python file with -I -S. Linux draft original -c launcher remains unchanged.",
+    "Linux_process_launch_and_GPU_inference_verified": false
+  },
+  "query_side_effect_boundary": "Lazy learner construction loads fixed prior5. Subsequent native query performs no game-response update or SDK action; legacy query identifiers advance.",
+  "ordering_limits": [
+    "Same Python call or same assistant response query+action is flagged UNREVIEWED.",
+    "Distinct model response is an observation opportunity, not proof of understanding or causal adoption.",
+    "Trace inspection_id identifies latest returned context; if candidates A/B were queried then A executed, last context can be B. executed_candidate_was_queried only certifies cache membership."
+  ],
+  "game_session_learner_and_exact_step_state_candidate_cache": true,
+  "automatic_pre_execute_query_removed_in_both_arms": true,
+  "action_authorization": false,
+  "endorsement": false,
+  "native_HOLD_modified": false,
+  "C2_079_native_scope_patch_used": false,
+  "Kaggle_GPU_or_official_operations_performed": false,
+  "HDS_useful_action_or_score_improvement_proven": false,
+  "adoption_status": "LOCAL_CPU_PROTOTYPE_ONLY; no push/promotion"
+}

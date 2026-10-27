@@ -1,0 +1,143 @@
+{
+  "schema": "arc3-learning-repro-r2-preflight.v1",
+  "created_at_utc": "2026-10-27T02:04:49.489866+00:00",
+  "scope": "LOCAL CPU packaging only; no Kaggle/GPU or game/evaluator implementation inspection",
+  "candidate_sources": [
+    {
+      "source": "検証/ARC3native学習差分再現候補構築.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-087/source-snapshots-r2/ARC3native学習差分再現候補構築.py",
+      "sha256": "8632af8c96af77bdb4836cc191a6ea9c18997b8985d72cd143510d0ba7e30ead"
+    },
+    {
+      "source": "検証/test_ARC3native学習差分再現候補.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-087/source-snapshots-r2/test_ARC3native学習差分再現候補.py",
+      "sha256": "8978bd12148ed365d767fae37a24f0886f4a702f9e995a845fe19fb33f454291"
+    }
+  ],
+  "targeted_pytest": {
+    "passed": 9,
+    "elapsed_seconds": 26.46,
+    "command": "uv run --locked pytest -q 検証/test_ARC3native学習差分再現候補.py",
+    "unchanged_native_fixtures_rerun": false
+  },
+  "ruff_check_passed": true,
+  "seed_contract": {
+    "preimage_sha256": "51639e22cc0d35db49137f0168b2de557b1848482a4c2cf65ade2a1202511221",
+    "postimage_sha256": "f405130d6f490a4b6351961cd73b755c64e2385d959f1e88cfb3b590a2db6586",
+    "exact_preimage_and_anchor_refusal_tested": true,
+    "OFFLINE_actual_patched_expression_forwards_seed0": true,
+    "nonOFFLINE_actual_expression_preserves_old_kwargs": true,
+    "existing_competition_rerun_refusal_before_patch_tested": true,
+    "local_pinned_default_separate": {
+      "arc-agi": "0.9.8",
+      "public_make_default_seed": 0
+    },
+    "GPU_installed_version_unobserved": true
+  },
+  "stamp_contract": {
+    "filename": "arc3-runtime-software.json",
+    "schema": "arc3-runtime-software.v1",
+    "source_sha256": "28264f952c177076217760939c5fe0ce38c98c78da0bddcc60b7b05a49e3cada",
+    "after_wheel_install_cell_index": 10,
+    "observed_fields": [
+      "python.version",
+      "python.implementation",
+      "packages.arc-agi",
+      "packages.arcengine",
+      "public_Arcade_make_signature",
+      "environment_seed",
+      "observation_errors"
+    ],
+    "missing_versions_null_not_guessed": true,
+    "different_version_accepted_no_value_gate": true,
+    "no_envvars_or_secrets_in_stamp": true,
+    "no_client_or_game_constructed": true,
+    "GPU_actual_stamp_observed": false,
+    "local_CPU_metadata": {
+      "arc-agi": "0.9.8",
+      "arcengine": "0.9.3"
+    }
+  },
+  "pair_identity": {
+    "both_shown": true,
+    "same_learning_runtime_native_observer_helper_prompt_model_budgets_as_r1": true,
+    "bundle_bytes_identical_r1_and_both_r2": true,
+    "notebook_different_cells_between_r2_arms": [
+      6
+    ],
+    "r2_arm_difference_only_learning_flag_id_title": true,
+    "r1_to_r2_notebook_changed_cells": [
+      6,
+      10
+    ],
+    "r1_to_r2_public_source_changed_files": [
+      "src/tufa-arc-agi-framework/src/taaf/game_api.py"
+    ],
+    "id_title_own_r2_slug_exact": true,
+    "private_gpu_nointernet_preserved": true
+  },
+  "arms": [
+    {
+      "folder": "出力/ARC3-RUN-003-local/C2-087/prior-only-r2",
+      "kernel_id": "tecchannn/arc3-v6-learning-prior-only-c2-087-r2",
+      "title": "arc3-v6-learning-prior-only-c2-087-r2",
+      "mode": "disabled",
+      "notebook_sha256": "62e8cdf3576edf4155cd90c12e99b03e4302149b052bac8b2b04efb0dca53f6b",
+      "metadata_sha256": "adcbf2dcf8949d537ea6c60533fd884effa52431ca93301abf5696f3041a1b70",
+      "manifest_sha256": "e2111708fd7cc34c6587a7a1f23c71acfde75a577cc7be6065e919aa5add8d03",
+      "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+      "CPU_generated_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false,
+        "game_response_learning_mode": "disabled",
+        "prior_initialization_separate_from_game_update_gate": true,
+        "OFFLINE_explicit_seed_postimage_verified": true,
+        "OFFLINE_declared_seed": 0
+      }
+    },
+    {
+      "folder": "出力/ARC3-RUN-003-local/C2-087/online-learning-r2",
+      "kernel_id": "tecchannn/arc3-v6-learning-online-c2-087-r2",
+      "title": "arc3-v6-learning-online-c2-087-r2",
+      "mode": "enabled",
+      "notebook_sha256": "ae0cb6d37f73300fbedbbeff0d895b97a05030dbb3f917fac28d975ee5265746",
+      "metadata_sha256": "1789d101024e12d622739a6563e1157311d28b13569d5e6dcc3fc2883528ecee",
+      "manifest_sha256": "b843ec574b69beaaf53d4aabcfd86afdc2b946a4ee83377736b5feedb0f1ecdb",
+      "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+      "CPU_generated_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false,
+        "game_response_learning_mode": "enabled",
+        "prior_initialization_separate_from_game_update_gate": true,
+        "OFFLINE_explicit_seed_postimage_verified": true,
+        "OFFLINE_declared_seed": 0
+      }
+    }
+  ],
+  "preservation": {
+    "r1_sources_proof_and_all_83_files_per_arm_unchanged": true,
+    "C2_085_proof_unchanged": true,
+    "C2_081_active_shown_notebook_unchanged": true,
+    "original_native_HDS_canonical_0_4_2_unchanged": true
+  },
+  "limits": [
+    "Runtime software versions must be observed and compared between future arms; no GPU version is guessed/pinned.",
+    "Explicit seed0 does not prove initial public-state equivalence or deterministic GPU/model output.",
+    "Model seed0 unchanged; environment seed is separately configured.",
+    "No learning effect score gain or main/core promotion established.",
+    "A expecteddisabled callback is preserved but does not ingest native game teachers.",
+    "No Kaggle operation, official submission or active-kernel edit."
+  ]
+}

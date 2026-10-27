@@ -1,0 +1,622 @@
+{
+  "schema": "arc3-v5-visual-source-reconstruction.v1",
+  "observed_at_utc": "2026-10-26T22:19:31Z",
+  "dataset": "dfranzen/taaf-kaggle-source-bundle-copy/1",
+  "current_dataset_version_observed": 1,
+  "source_archive": "入力\\モデル実行基底\\v5\\taaf-source-v1\\taaf-kaggle-source-bundle-copy.zip",
+  "source_archive_bytes": 449765,
+  "source_archive_sha256": "cd687f4bc10b2128ea9895024cd2e990b24a1070607a071901cccd1638606187",
+  "source_files": 73,
+  "uncompressed_source_bytes": 1518896,
+  "archive_file_names_and_sizes_match_dataset_listing": true,
+  "dataset_listing_evidence": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C1-024-source-dataset-files-20261026T221152Z.json",
+  "dataset_metadata_path": "入力\\モデル実行基底\\v5\\taaf-source-v1\\dataset-metadata\\dataset-metadata.json",
+  "dataset_metadata_sha256": "7f005bae2c7d19f40a1ec93aa4044b7cc8a0e0e6ec3d0034fe7f8c521bb5e937",
+  "dataset_license_metadata": [
+    {
+      "name": "unknown"
+    }
+  ],
+  "source_package_license_classifier": "MIT",
+  "notebook_upstream_license_copy": "NOTEBOOK-UPSTREAM-LICENSE-APACHE-2.0.txt",
+  "notebook_path": "出力\\ARC3-RUN-002-local\\C2-029-source\\v5-submission.ipynb",
+  "notebook_sha256": "5763f69d0794d7161dbe81a967edd2c10a6810c92ed1a28208bd47222fd5dfbc",
+  "extracted_patch_path": "入力\\モデル実行基底\\v5\\taaf-source-v1\\harness-changes-v5.patch",
+  "extracted_patch_sha256": "80aef535ee80970622127f3ee1917e1b127db22ebe07ece40fc8558a63b4484d",
+  "patch_source_cell_index": 3,
+  "trailing_lf_added_to_writefile_body": true,
+  "raw_source_path": "入力\\モデル実行基底\\v5\\taaf-source-v1\\raw",
+  "patched_source_path": "入力\\モデル実行基底\\v5\\taaf-source-v1\\patched",
+  "patch_check_exit_code": 0,
+  "patch_apply_exit_code": 0,
+  "git_discovery_isolated_from_parent_checkout": true,
+  "patched_files": [
+    {
+      "path": "ARC3-Inference/inference/agent/action_names.py",
+      "old_git_blob_prefix": "4b8dfa3",
+      "new_git_blob_prefix": "1ef0773",
+      "preimage_git_blob": "4b8dfa32c4cebb3170bab24f1fd3a02011d455a8",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "1ef07730aaaf9f780a6ec667840564af963bc197",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 67,
+      "postimage_before_lf_git_blob": "01b9c91b572998c6e943bad35c2a2d56abb7dfbc"
+    },
+    {
+      "path": "ARC3-Inference/inference/agent/noop_repeat_guard.py",
+      "old_git_blob_prefix": "0000000",
+      "new_git_blob_prefix": "314e47a",
+      "preimage_git_blob": null,
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "314e47adfc98296f0743f21d626bd40df3e6c6dc",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 178,
+      "postimage_before_lf_git_blob": "976196ade280306c975f5285d1c1f7c4577a24c7"
+    },
+    {
+      "path": "ARC3-Inference/inference/agent/priority_pace_reference.json",
+      "old_git_blob_prefix": "0000000",
+      "new_git_blob_prefix": "9c624f8",
+      "preimage_git_blob": null,
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "9c624f858cd1dbba1cc71ce64ae65942f5a24dfb",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 16,
+      "postimage_before_lf_git_blob": "8e1dfa5d29b0fc63609ca6c80c164857a1eae3c1"
+    },
+    {
+      "path": "ARC3-Inference/inference/agent/priority_scheduler.py",
+      "old_git_blob_prefix": "0000000",
+      "new_git_blob_prefix": "14bb787",
+      "preimage_git_blob": null,
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "14bb787f2fa28ae8f868956d08a85db73b925479",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 134,
+      "postimage_before_lf_git_blob": "e0e35953aa8167374ded0a233327327bdf79e314"
+    },
+    {
+      "path": "ARC3-Inference/inference/agent/prompts.py",
+      "old_git_blob_prefix": "2e59574",
+      "new_git_blob_prefix": "52351db",
+      "preimage_git_blob": "2e595744973829dcdc1c7190488788d7158c5e65",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "52351dba06d48ae9125ba6d4548879abf631f72f",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 346,
+      "postimage_before_lf_git_blob": "10117c8c2bbec36bedc495ae81e7f5e413b7406c"
+    },
+    {
+      "path": "ARC3-Inference/inference/agent/python_tool_sandbox.py",
+      "old_git_blob_prefix": "ac24747",
+      "new_git_blob_prefix": "58a94b3",
+      "preimage_git_blob": "ac247477455d47c620f77dc6e22b5995046361ee",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "58a94b390414806e5bc9c27e12cd7b66d98029c1",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 974,
+      "postimage_before_lf_git_blob": "0e1f2f872a7bd610fddfd7324fa9c5149804bd63"
+    },
+    {
+      "path": "ARC3-Inference/inference/agent/runtime_state.py",
+      "old_git_blob_prefix": "03edebb",
+      "new_git_blob_prefix": "5a00139",
+      "preimage_git_blob": "03edebb6bf716cf64efa4409dfddadfe6fb41fb1",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "5a00139063f64e9c0f192e717f214f893af9bd0b",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 140,
+      "postimage_before_lf_git_blob": "f53f8bd9b30c9bd72871f61b7192ab9d565f5f4f"
+    },
+    {
+      "path": "ARC3-Inference/inference/agent/tool_agent.py",
+      "old_git_blob_prefix": "59655e9",
+      "new_git_blob_prefix": "84a9cdd",
+      "preimage_git_blob": "59655e985cbe1c2e7756e3a76976a7d6a5916195",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "84a9cdda9c851ea2dcf3eea9f0b3158d437bea16",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 7259,
+      "postimage_before_lf_git_blob": "5dea088a90a8f3e768904629c45292a6e13ddcc4"
+    },
+    {
+      "path": "ARC3-Inference/inference/agent/vision_context.py",
+      "old_git_blob_prefix": "bb8232f",
+      "new_git_blob_prefix": "e3dadff",
+      "preimage_git_blob": "bb8232f6878cf836a09672d7589da39f5178657f",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "e3dadfffdfeb98ef3cf53110c829546c15679de0",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 332,
+      "postimage_before_lf_git_blob": "dbeacf3c5968597aa3457cc64d050efdb6b576ab"
+    },
+    {
+      "path": "ARC3-Inference/inference/framework/run.py",
+      "old_git_blob_prefix": "4d4accf",
+      "new_git_blob_prefix": "fc7d80c",
+      "preimage_git_blob": "4855356980d7753f34a7ec80979195ba04688dc4",
+      "preimage_matches_patch_index": false,
+      "postimage_git_blob": "ffbf7d8982b498d2277e47d7f585fd0986ca212b",
+      "postimage_matches_patch_index": false,
+      "git_apply_generated_crlf_count": 1432,
+      "postimage_before_lf_git_blob": "20fc9d02115719fa22f472a45189e11d6e30ad59"
+    },
+    {
+      "path": "ARC3-Inference/inference/framework/solver.py",
+      "old_git_blob_prefix": "0b69d62",
+      "new_git_blob_prefix": "e40976c",
+      "preimage_git_blob": "0b69d624a00f93995b0bb4e0cf6aeeb1bcadcd5a",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "e40976c69db03c39b0b3c3a3295813a58efcb7c8",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 1925,
+      "postimage_before_lf_git_blob": "be8e1ed38d8e0042277ff6a24f6bd7651452161a"
+    },
+    {
+      "path": "ARC3-Inference/inference/utils/animation.py",
+      "old_git_blob_prefix": "0000000",
+      "new_git_blob_prefix": "d2a1484",
+      "preimage_git_blob": null,
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "d2a1484736df39c01b67b3cecaaf3d800e87da66",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 333,
+      "postimage_before_lf_git_blob": "4b36c739be6b613e45fbd7637571be48b6025561"
+    },
+    {
+      "path": "ARC3-Inference/inference/utils/frame_diff.py",
+      "old_git_blob_prefix": "0000000",
+      "new_git_blob_prefix": "a49b067",
+      "preimage_git_blob": null,
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "a49b067a9a8bcde588456d2075d17dfb047e273e",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 307,
+      "postimage_before_lf_git_blob": "d4664a5fdf6dfc5531c92079eecd44720792e8c2"
+    },
+    {
+      "path": "ARC3-Inference/inference/utils/openai_compat.py",
+      "old_git_blob_prefix": "157e113",
+      "new_git_blob_prefix": "2fadb51",
+      "preimage_git_blob": "157e1137da43799189371642cbe44b59c74262ba",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "2fadb51dd92ffe3fe425b7d74c80db06fd435a86",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 196,
+      "postimage_before_lf_git_blob": "6bf8241a769923779610a44c5041cf046fea1c46"
+    },
+    {
+      "path": "ARC3-Inference/inference/utils/retained_functions.py",
+      "old_git_blob_prefix": "0000000",
+      "new_git_blob_prefix": "66aa5a2",
+      "preimage_git_blob": null,
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "66aa5a2f10a885bd29af51fa0dcf02770f7340df",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 301,
+      "postimage_before_lf_git_blob": "0be9dc9797ca705522cb2884d0a543a0c59ae6e3"
+    },
+    {
+      "path": "ARC3-Inference/inference/utils/segmentation.py",
+      "old_git_blob_prefix": "20f10ed",
+      "new_git_blob_prefix": "33f8848",
+      "preimage_git_blob": "20f10ed14f4c92ee893c67c1f4401c1a28f1a4d9",
+      "preimage_matches_patch_index": true,
+      "postimage_git_blob": "33f8848cf1ad796713e214ef8770e14c997c1684",
+      "postimage_matches_patch_index": true,
+      "git_apply_generated_crlf_count": 252,
+      "postimage_before_lf_git_blob": "982e5d6342ac7d509a27615fb2b58afd8cb58f39"
+    }
+  ],
+  "preimage_prefix_matches": 15,
+  "postimage_prefix_matches": 15,
+  "raw_git_status_matches_saved_v5_run": true,
+  "patched_source_manifest": [
+    {
+      "path": "benchmark_initial.pkl",
+      "bytes": 3281,
+      "sha256": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67"
+    },
+    {
+      "path": "deploy_target.pkl",
+      "bytes": 823,
+      "sha256": "f0dc4b59f390862326b0e40a6ff0f8910d9e6487ae244efb1ae9ab495f79ba19"
+    },
+    {
+      "path": "git_status.txt",
+      "bytes": 356,
+      "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+    },
+    {
+      "path": "preamble.txt",
+      "bytes": 976,
+      "sha256": "3aefbd3aa7d3a1c5c610b42d13476de509e06834b029f5c88eb6c0980081d6ea"
+    },
+    {
+      "path": "README.dataset.md",
+      "bytes": 211,
+      "sha256": "21abef2e39a887c8ffa024ce87f5cd5614a6dc5e87c9b5edf75db2c9c4295abe"
+    },
+    {
+      "path": "setup_commands.json",
+      "bytes": 10359,
+      "sha256": "650c2cfe94b972c38883861a2c648e4e32f35d7eefb6af43afaa5b844d0a6bf6"
+    },
+    {
+      "path": "src/ARC3-Inference/configs/eval.json",
+      "bytes": 39,
+      "sha256": "ecd210094502c47eabb26d5dcf2995d3b2c069f66fe772016d9b164832f8c5e9"
+    },
+    {
+      "path": "src/ARC3-Inference/configs/inference.json",
+      "bytes": 1901,
+      "sha256": "6902224082ad6dc6c824fdef68010c9beea5b8d7097a422cbdc7c1a2172aa44e"
+    },
+    {
+      "path": "src/ARC3-Inference/configs/inference.openrouter.json",
+      "bytes": 1818,
+      "sha256": "d60d45e4a5a18fcb17338b2b1c316de83b36390dd5afb93031884491a6ca1c7e"
+    },
+    {
+      "path": "src/ARC3-Inference/configs/significance.json",
+      "bytes": 316,
+      "sha256": "41bae6010678729ba11d356f7c8e01fd8361f392ddcbf7a260fc6280f8ae35fc"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/__init__.py",
+      "bytes": 90,
+      "sha256": "d9244cc613220677e2c47b8cd5a218786b918a542bcba63682a3d0778006cf8a"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/__init__.py",
+      "bytes": 216,
+      "sha256": "0c0a18c681d1f6c035848048af21405b36021f93bdd465e44896494454886813"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/action_names.py",
+      "bytes": 1988,
+      "sha256": "baeb20a43e5873cd1e109637e65d1f2fd62c72f03603a8e06c858130c020284d"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/noop_repeat_guard.py",
+      "bytes": 8327,
+      "sha256": "7f35f1d60ed3dfac65b09e66b2e45e60a71aa08fbb0716b974ed953fc98189c8"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/priority_pace_reference.json",
+      "bytes": 700,
+      "sha256": "313c779a28988aac3ee66b01d0dea7cc3b105fdd45e4f7b8c41de6c23762fa9c"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/priority_scheduler.py",
+      "bytes": 5792,
+      "sha256": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/prompts.py",
+      "bytes": 28185,
+      "sha256": "eae27f2b9b07b0b87dc5a6e88a27110f72d53ad0a18bebb9b432b03e1f5bad92"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/python_tool_sandbox.py",
+      "bytes": 38731,
+      "sha256": "3900b7255842df04be9ad08f91b521279a2e63f8226ac4bc77fb6de7a4e36943"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/runtime_state.py",
+      "bytes": 3886,
+      "sha256": "371e211ac2e364829f44acd1bd9de85284c365445c8bb4669445ac4a7545ac73"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/tool_agent.py",
+      "bytes": 343911,
+      "sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/vision_context.py",
+      "bytes": 12590,
+      "sha256": "b30cadfacdf23524b19f6993f7a3c8bb68d13d01d5b68c0504b8fccd35195bf8"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/__init__.py",
+      "bytes": 56,
+      "sha256": "97c7fcfe9e5f8b109b90416413b052099ab628e8c1c6a8c888612b3074a1b6bf"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/kaggle.py",
+      "bytes": 17688,
+      "sha256": "d600a993a8642a808fb83080be40bfc3fd9ababa6b84e15abba713e8e2d7ebbe"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/run.py",
+      "bytes": 54176,
+      "sha256": "69756c29ee5bba3d7be8b519b1d3eac25bdfd347a092bbea7aff42344f9f0780"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/solver.py",
+      "bytes": 81223,
+      "sha256": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/__init__.py",
+      "bytes": 53,
+      "sha256": "36ac2d2804aa381c402ee585e9c45f3d58d9a8b3075510cdd772df2eec2ef889"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/chat.py",
+      "bytes": 7135,
+      "sha256": "f9ac5aa9459ef11161020b275e0af6595b255fc35a1f8d4966a505d955e4cd31"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/config_value.py",
+      "bytes": 1184,
+      "sha256": "a10980e5e708f68cfdef0d065a0907137d6f26749ab6f2ba5f7135421847a5c6"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/eval.py",
+      "bytes": 28385,
+      "sha256": "28df9899d6bcb5d02c068934d5828e217deddaebb29a12a706be5fe2a0f3c447"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/eval_plot.py",
+      "bytes": 9848,
+      "sha256": "2e8a426161a230eb748bcc1db30ed2605c16351f6f5a51e77cae8d1cc19124f3"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/significance.py",
+      "bytes": 33491,
+      "sha256": "d3d19d4b9f95c4ca0dda099f04857f5f6507c6a3a3479dd5cea20c6b8e2eb6af"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/traces.py",
+      "bytes": 27525,
+      "sha256": "d8a4941558fb7117951474b1a72ad744eccfc330cef58187981556a2e00768b4"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/vllm_runtime_lora_guard.py",
+      "bytes": 3889,
+      "sha256": "a5c3e4a06b8706d9c0f05f28d7395ae93e90c6774fbe2e15194e69536f6b6e2e"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/animation.py",
+      "bytes": 13473,
+      "sha256": "b835584ead6d449c3bfb72f1c1df03186907ae882e4325cfc97dd584684c3824"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/frame_diff.py",
+      "bytes": 13626,
+      "sha256": "843be0ce9225ae19de91dd34409bd7b7cf69ebad1ff73e69759c506c161bdeee"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/grid_utils.py",
+      "bytes": 662,
+      "sha256": "2c96de5a6e0da2ae0390ab191b39a154784089b00fce8e2da98ebb3960715b67"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/openai_compat.py",
+      "bytes": 7254,
+      "sha256": "1d8a85edfabe1d7577348db2aed6dff6a858095e5c99a819cf0f45b123e2b1ce"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/rearc_baselines.py",
+      "bytes": 1187,
+      "sha256": "c05d98e40704ae02b487862607964a18719ff96cc5c1d66bfd678a2c0bf4e4fb"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/rearc_version.py",
+      "bytes": 1829,
+      "sha256": "2548c1b2ba4b3bdd65de8b6255ece8d3317a06f9d4bbc25ed58aa46ed1da8826"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/retained_functions.py",
+      "bytes": 14928,
+      "sha256": "9450d8c73fa5f84f40f7bd7bc3868ab63fadde2c68e4546de7b041b387be0b37"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/run_artifacts.py",
+      "bytes": 4769,
+      "sha256": "c1a0c1a0bd994ae712dffe182b7c92af9fdd2dc68cccc8b472a356dbc3ad3b3b"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/segmentation.py",
+      "bytes": 10590,
+      "sha256": "1bd1346e4b87a8eca5f1b67df88237cb7527f96132de84772b2094de95353aed"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/viewer_artifacts.py",
+      "bytes": 3855,
+      "sha256": "21f948f7398bdc16b8eaf9771edf0a3c6505349794c9c44154870b075f07a52f"
+    },
+    {
+      "path": "src/ARC3-Inference/Makefile",
+      "bytes": 26654,
+      "sha256": "03194bbee6d93be4d469090a620da9169e6a34c7940505074db750cdda021eba"
+    },
+    {
+      "path": "src/ARC3-Inference/pyproject.toml",
+      "bytes": 2019,
+      "sha256": "5538b502bdedf7bf206f645731498ca5858571b148d05a89e4514e2934f54d0a"
+    },
+    {
+      "path": "src/ARC3-Inference/README.md",
+      "bytes": 12709,
+      "sha256": "3547705bad40217d199f8ddab8b0904286a98ae24a3b9e0829a8afec8ed612b8"
+    },
+    {
+      "path": "src/ARC3-Inference/scripts/ensure_server_api_key.sh",
+      "bytes": 562,
+      "sha256": "77b7ddfbb851b728a6aab5654c770f0e0669327d7209216436ef694516f6ff0b"
+    },
+    {
+      "path": "src/ARC3-Inference/scripts/server_curl.sh",
+      "bytes": 476,
+      "sha256": "89c1433fe8357543fccaeb5b84b4504f26299d1f77affbfdf21b2c8a5b4f3907"
+    },
+    {
+      "path": "src/ARC3-Inference/uv.lock",
+      "bytes": 362326,
+      "sha256": "ce317cea860fef6b066e6c795a0b67fc4d32a9612d77746f17fec1da2b0fd9f2"
+    },
+    {
+      "path": "src/ARC3-Inference/viewer/__init__.py",
+      "bytes": 32,
+      "sha256": "4cbb695abe781a6161423cba58afadb3128aa0b38b8db3b5f25f5bad8b513f10"
+    },
+    {
+      "path": "src/ARC3-Inference/viewer/data.py",
+      "bytes": 73347,
+      "sha256": "fba85b9466760662c622e1952662014b6d6e891bca1733110d985c38e77f39f6"
+    },
+    {
+      "path": "src/ARC3-Inference/viewer/index.html",
+      "bytes": 54595,
+      "sha256": "1ed5561d8d63574d4e1b4196fcccf0291deda1d4954125fb74c0529a3237cb1d"
+    },
+    {
+      "path": "src/ARC3-Inference/viewer/server.py",
+      "bytes": 8933,
+      "sha256": "6e4a3d4d3f7a28e5a4ff0866d6e11fb5d40190ec71a388418024dc07a77f3069"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/Makefile",
+      "bytes": 3759,
+      "sha256": "f52dc1fba0db556626e10e56f86c4ff229e94ada6e2c35b6724e7be97fae0c00"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/pyproject.toml",
+      "bytes": 2383,
+      "sha256": "ec6fa0c8c192e0b384fdace109f87ac7afbdb18b08caa10d0c603a5d685973db"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/README.md",
+      "bytes": 1741,
+      "sha256": "d35cec21c37539efa15aef2cbff62e09d318d79df3d6950d66329378881fe9ca"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/scripts/refresh_examples.py",
+      "bytes": 3596,
+      "sha256": "941c7a84f9bc186edf125b583aa2d0773f67d9919b500ea18b4b88b401886909"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/__init__.py",
+      "bytes": 1146,
+      "sha256": "f7f02949ee64cdaf6d1b0ae83f2096ace20acdc40fd3cacb4efd2f312101cedc"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/benchmark.py",
+      "bytes": 21393,
+      "sha256": "d273e8056f83a3d1557d31c50c9716ed205258c8b1ba31747367a743d51c9497"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/competition_arcade.py",
+      "bytes": 9568,
+      "sha256": "1d5adf9290ed8700fa15a4d0494944320403bb45906b263de195adf74a43abfa"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/deploy.py",
+      "bytes": 22835,
+      "sha256": "d17296cad0178ab1ce34990152157d32f6e267fcd890093284b23ad1b5d94d7d"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/deploy_inline.py",
+      "bytes": 6070,
+      "sha256": "e21e43e0457b4a5d140b3be3953c98afbf358a33d0b713cfba5b0276f4631a31"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/deploy_kaggle.py",
+      "bytes": 36121,
+      "sha256": "e3a8517d021818fdced11dd35865304de79e69f9081b8a4619a5b807f98a03de"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/deploy_slurm.py",
+      "bytes": 23285,
+      "sha256": "30b326ee4292fae799f9e439c513a5e199092790f364bed53d0d9259b5b9bfb4"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/diagnostics.py",
+      "bytes": 128557,
+      "sha256": "b78e534f2a0f54eb92cae430106773f60f968eda5c8ac17791b511732642b6eb"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/game.py",
+      "bytes": 30002,
+      "sha256": "8609e0646e96616decc936daf4bff102afd480beb69ef1e9e778cd2c1c7df225"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/game_api.py",
+      "bytes": 14742,
+      "sha256": "51639e22cc0d35db49137f0168b2de557b1848482a4c2cf65ade2a1202511221"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/game_examples.py",
+      "bytes": 3673,
+      "sha256": "9d349f8dfd5a9842a5e71d084a9e0b38aeaa4de29a4d5977da5bb8ddabd935f5"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/kaggle/taaf_kaggle_run.ipynb",
+      "bytes": 18698,
+      "sha256": "717db2d0ef76ddbffb8fa646e5b618a5b9cdaa122bfbb693353669b3f49725d7"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/kaggle/taaf_kaggle_run_share.ipynb",
+      "bytes": 26879,
+      "sha256": "a843f24f935c1828f82d37547ec955e8c95face8119622daef9e47c0a7ee7213"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/kaggle_random.py",
+      "bytes": 10435,
+      "sha256": "26739fbac70efdf527f5d81e0f878ffeb4ed734540f0de872daefee07042d5c1"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/solver.py",
+      "bytes": 3337,
+      "sha256": "8c126b6e762768ef5ee51e8a6b7bac2153d7f24a262f6d16a9e472817232d64f"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/solver_examples.py",
+      "bytes": 12105,
+      "sha256": "1b6b47956c0e5ec9bdfda7f35d9b1f3e7a4834041ca1fc3c16a2586ac9d6b9d4"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/standard_benchmarks.py",
+      "bytes": 5063,
+      "sha256": "a21b7d02369491fbed5872a28defb79b14afe9a2603ebb5fd6925ec43924087a"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/support.py",
+      "bytes": 974,
+      "sha256": "4c41b13970867b745124ef43ffeec41481eb61ab25a73e225fca3d03b155bc7f"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/uv.lock",
+      "bytes": 185724,
+      "sha256": "912c88e380a859bcd5801d1bf5c87c202519594c9fca031b2c3950129f5f796f"
+    },
+    {
+      "path": "taaf-kaggle-bundle.json",
+      "bytes": 161,
+      "sha256": "52f844965b2b80de6e6ef759dfc9ffa3258f42407e0ed1788ec28ff250a7a8cb"
+    },
+    {
+      "path": "teardown_commands.json",
+      "bytes": 1021,
+      "sha256": "25d8cb3f3217baaaf5d671f5f6bc1a1e7e52dc14af2c8676fb1e565d9f36c73c"
+    }
+  ],
+  "python_source_syntax_parsed_files": 53,
+  "runtime_import_or_model_inference_verified": false,
+  "provenance_caveat": "framework/run.py differs from the patch index preimage and postimage; the declared dataset v1 plus exact notebook patch applies contextually. This is not proof of whole-runtime bit identity. Preserve snapshot and patch; do not replace run.py from guessed git history.",
+  "disk_free_observed_after_download_bytes": 1582153728,
+  "weights_downloaded": false,
+  "wheels_downloaded": false,
+  "pickles_executed": false,
+  "notebook_modified_or_executed": false,
+  "kernel_or_submission_changed": false,
+  "git_apply_line_ending_correction": "Host core.autocrlf=true generated CRLF. Only newly prepared patch targets were restored to LF, then all target git blob hashes were rechecked.",
+  "source_preparation_finalized_at_utc": "2026-10-26T22:20:14Z"
+}

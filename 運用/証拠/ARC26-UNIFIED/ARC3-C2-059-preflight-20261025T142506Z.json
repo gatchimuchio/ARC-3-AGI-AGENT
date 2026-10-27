@@ -1,0 +1,65 @@
+{
+  "schema": "arc26-arc3-private-kernel-preflight.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-059",
+  "observed_at_utc": "2026-10-25T14:25:06Z",
+  "status": "prepared for one private pilot; not pushed yet",
+  "base_kernel": "tecchannn/arc3-model-guided-c2-025",
+  "base_version": 27,
+  "base_status": "KernelWorkerStatus.COMPLETE",
+  "base_status_observed_at_utc": "2026-10-25T14:24:10Z",
+  "kernel_list_observation": {
+    "search": "tecchannn/arc3-model-guided-c2-025",
+    "lastRunTime": "2026-10-25T12:49:58.800000",
+    "note": "Latest kernel search and exact version-27 pull agree with v27 as the current run; no later version was pushed during this work."
+  },
+  "base_exact_version_notebook_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v27-base-readonly/arc3-model-guided-c2-025.ipynb",
+  "base_exact_version_notebook_sha256": "68acd275b94b688f3c3c37fbb5c90d8a7c0af07bbe1ff73c7fb965fcbed038f6",
+  "base_exact_version_metadata_sha256": "24510cb150142a2ee5787ba9626912da0ff349f7b0960255683c95f32f93ffdb",
+  "candidate_notebook_path": "出力/ARC3-RUN-003-local/C2-059-preserve-input-context/source/cap16k-context135168/submission.ipynb",
+  "candidate_notebook_sha256": "627ce824f4e3f72d00303223c549d7d0dbbe311bc8b026351b7c186559daf0b2",
+  "candidate_metadata_path": "出力/ARC3-RUN-003-local/C2-059-preserve-input-context/source/cap16k-context135168/kernel-metadata.json",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "candidate_cells": 25,
+  "changed_cells_from_remote_v27": [
+    5
+  ],
+  "changed_code_line": {
+    "old": "'LOCAL_ANALYZER_CONTEXT_WINDOW': (116+12)*1024",
+    "new": "'LOCAL_ANALYZER_CONTEXT_WINDOW': (132)*1024"
+  },
+  "candidate_is_single_cell_delta_from_C2_058": true,
+  "context_window_old": 131072,
+  "context_window_new": 135168,
+  "output_cap_tokens": 16384,
+  "effective_input_budget_tokens": 118272,
+  "previous_C2_058_input_budget_tokens": 114176,
+  "baseline_prompt_tokens": 116437,
+  "baseline_prompt_fits_new_budget_by_tokens": 1835,
+  "server_context_length_tokens": 139264,
+  "private": true,
+  "gpu_enabled": true,
+  "internet_enabled": false,
+  "competition_source": [
+    "arc-prize-2026-arc-agi-3"
+  ],
+  "model_sources": [
+    "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+    "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "hypothesis": "Restoring the 4,096-token context window headroom restores 4,096 tokens of input allowance while preserving the 16,384 output cap; C2-058 had pruned a 116,437-token prompt above its 114,176 input limit.",
+  "prior_result": {
+    "C2-046_mean": 19.309155943771326,
+    "C2-058_mean": 12.471062097130472,
+    "C2-058_delta_vs_C2-046": -6.838093846640854,
+    "C2-058_completed_levels": 5,
+    "C2-046_completed_levels": 7
+  },
+  "acceptance_gate": "For local candidate acceptance, mean must exceed C2-046 19.309155943771326 and paired mean delta must be positive on the same three starts. Improvement over C2-058 alone is diagnostic, not sufficient for adoption.",
+  "p0_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-P0-snapshot-20261025T141029Z.json",
+  "p1_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-P1-official-score-lineage-20261025T142027Z.json",
+  "c2_058_scorecard": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-terminal-scorecard-v3.json",
+  "official_submission_or_quota_use": false,
+  "push_performed": false,
+  "next_action": "Push this exact candidate once as a private Kaggle kernel version; then read exact-version status/output and pair-score against C2-046 and C2-058."
+}

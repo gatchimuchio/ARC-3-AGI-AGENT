@@ -1,0 +1,233 @@
+{
+  "decision": "diagnostic_only_no_promotion",
+  "experiment_id": "ARC3-RUN-003/C2-058-v27-level-diagnostic",
+  "games": [
+    {
+      "candidate": {
+        "actions_used": 160,
+        "levels_completed": 0,
+        "score": 0.0
+      },
+      "control": {
+        "actions_used": 160,
+        "levels_completed": 4,
+        "score": 47.61904761904761
+      },
+      "game_id": "m0r0-492f87ba",
+      "per_level": [
+        {
+          "base_actions": 30,
+          "candidate_actions": 160,
+          "candidate_completed": false,
+          "control_actions": 19,
+          "control_completed": true,
+          "level": 1
+        },
+        {
+          "base_actions": 111,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 23,
+          "control_completed": true,
+          "level": 2
+        },
+        {
+          "base_actions": 203,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 71,
+          "control_completed": true,
+          "level": 3
+        },
+        {
+          "base_actions": 26,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 11,
+          "control_completed": true,
+          "level": 4
+        },
+        {
+          "base_actions": 500,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 36,
+          "control_completed": false,
+          "level": 5
+        },
+        {
+          "base_actions": 237,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 6
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "actions_used": 100,
+        "levels_completed": 1,
+        "score": 1.6989005771057053
+      },
+      "control": {
+        "actions_used": 99,
+        "levels_completed": 1,
+        "score": 2.7777777777777777
+      },
+      "game_id": "sk48-d8078629",
+      "per_level": [
+        {
+          "base_actions": 61,
+          "candidate_actions": 78,
+          "candidate_completed": true,
+          "control_actions": 43,
+          "control_completed": true,
+          "level": 1
+        },
+        {
+          "base_actions": 177,
+          "candidate_actions": 22,
+          "candidate_completed": false,
+          "control_actions": 56,
+          "control_completed": false,
+          "level": 2
+        },
+        {
+          "base_actions": 101,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 3
+        },
+        {
+          "base_actions": 103,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 4
+        },
+        {
+          "base_actions": 230,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 5
+        },
+        {
+          "base_actions": 181,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 6
+        },
+        {
+          "base_actions": 125,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 7
+        },
+        {
+          "base_actions": 92,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 8
+        }
+      ]
+    },
+    {
+      "candidate": {
+        "actions_used": 160,
+        "levels_completed": 4,
+        "score": 35.714285714285715
+      },
+      "control": {
+        "actions_used": 130,
+        "levels_completed": 2,
+        "score": 7.5306424344885885
+      },
+      "game_id": "tn36-ef4dde99",
+      "per_level": [
+        {
+          "base_actions": 32,
+          "candidate_actions": 17,
+          "candidate_completed": true,
+          "control_actions": 23,
+          "control_completed": true,
+          "level": 1
+        },
+        {
+          "base_actions": 72,
+          "candidate_actions": 43,
+          "candidate_completed": true,
+          "control_actions": 104,
+          "control_completed": true,
+          "level": 2
+        },
+        {
+          "base_actions": 26,
+          "candidate_actions": 9,
+          "candidate_completed": true,
+          "control_actions": 3,
+          "control_completed": false,
+          "level": 3
+        },
+        {
+          "base_actions": 40,
+          "candidate_actions": 33,
+          "candidate_completed": true,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 4
+        },
+        {
+          "base_actions": 30,
+          "candidate_actions": 58,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 5
+        },
+        {
+          "base_actions": 55,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 6
+        },
+        {
+          "base_actions": 62,
+          "candidate_actions": 0,
+          "candidate_completed": false,
+          "control_actions": 0,
+          "control_completed": false,
+          "level": 7
+        }
+      ]
+    }
+  ],
+  "instruction_id": "ARC26-REPRODUCIBILITY-FIRST-20261025",
+  "interpretation": "The mean regression is heterogeneous: m0r0 used all 160 candidate actions on level 1 and completed 0 levels, while control completed 4 using 160 actions; sk48 used 78 candidate vs 43 control actions on level 1 and both completed 1; tn36 improved from 2 to 4 completed levels. This pattern motivates checking context recovery but does not establish context truncation as the cause.",
+  "observed_at_utc": "2026-10-25T14:33:02Z",
+  "schema": "arc3-c2-058-level-diagnostic-v1",
+  "sources": {
+    "candidate_benchmark": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/benchmark.json",
+      "sha256": "cfe7c7c70ef06c719a01011a527ee9cd6742299f60cf40f615bfaf73fdc2596b"
+    },
+    "control_benchmark": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/benchmark.json",
+      "sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e"
+    }
+  }
+}

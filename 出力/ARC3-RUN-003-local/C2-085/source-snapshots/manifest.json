@@ -1,0 +1,80 @@
+{
+  "sources": [
+    {
+      "source": "検証/ARC3視覚HDS照会候補構築.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-085/source-snapshots/ARC3視覚HDS照会候補構築.py",
+      "sha256": "0a69f1bd43aabbba0746c8269228399dae0f0a87ed71b3cc2d13f164c881098e"
+    },
+    {
+      "source": "検証/候補/ARC3PythonHDS照会runtime.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-085/source-snapshots/ARC3PythonHDS照会runtime.py",
+      "sha256": "34a5c02fddc7caf7648c1b15d9369d2bdb2535b652b3868faa55fdce24853a8b"
+    },
+    {
+      "source": "検証/test_ARC3視覚HDS照会候補.py",
+      "snapshot": "出力/ARC3-RUN-003-local/C2-085/source-snapshots/test_ARC3視覚HDS照会候補.py",
+      "sha256": "0b7dd6fc411caffd1a1f9d4712dcdda4dd61e800eb63bd984e22842eb68d9bea"
+    }
+  ],
+  "frozen_C2_081_r2_proof_sha256": "ba2a5c7b7371c5ef1020c23939cfe3eae239b8cc465bf4b8485fd94769e272e0",
+  "artifacts": [
+    {
+      "visibility": "masked",
+      "kernel_id": "tecchannn/arc3-v6-python-hds-masked-c2-081-r2",
+      "title": "arc3-v6-python-hds-masked-c2-081-r2",
+      "notebook_sha256": "19bddf4b86b2b19b17455080ed026d6b4b1421d9eb76ce8ebe2cca609ceb93bf",
+      "metadata_sha256": "22bb3dc62ff00a8adf773c3c73bc6cfb504609c466e3d40527edec25b1053ef5",
+      "manifest_sha256": "9478c2e803130da3263b6f712acfb77e88399633b53e99a3a56342a8d080a610",
+      "bundle_sha256": "c0b955fc6ae184440d8c1243ca27b451f83975cf434f632b51b93a31faf77604",
+      "runtime_sha256": "34a5c02fddc7caf7648c1b15d9369d2bdb2535b652b3868faa55fdce24853a8b",
+      "shared_model_seed": 0,
+      "pilot": {
+        "games_max": 3,
+        "passes": 1,
+        "concurrency": 1,
+        "actions_max": 80,
+        "runtime_seconds_max": 1200,
+        "competition_rerun_allowed": false
+      },
+      "cpu": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "masked",
+        "native_HDS_patched": false
+      }
+    },
+    {
+      "visibility": "shown",
+      "kernel_id": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2",
+      "title": "arc3-v6-python-hds-shown-c2-081-r2",
+      "notebook_sha256": "0d0726b2607e063be526b8c05e840d40b99515f6753e7d00bcbbf7123b670262",
+      "metadata_sha256": "a4abdfebffced03924f7fe49deba87c023a911bcf86c6281a06d5b1db5bd130a",
+      "manifest_sha256": "83f36d8200c44c7b24536b82849226c53da5b5ac3b2c010e1548037d18ec60b1",
+      "bundle_sha256": "c0b955fc6ae184440d8c1243ca27b451f83975cf434f632b51b93a31faf77604",
+      "runtime_sha256": "34a5c02fddc7caf7648c1b15d9369d2bdb2535b652b3868faa55fdce24853a8b",
+      "shared_model_seed": 0,
+      "pilot": {
+        "games_max": 3,
+        "passes": 1,
+        "concurrency": 1,
+        "actions_max": 80,
+        "runtime_seconds_max": 1200,
+        "competition_rerun_allowed": false
+      },
+      "cpu": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true,
+        "RPC_postimage_hashes_verified": true,
+        "evidence_visibility": "shown",
+        "native_HDS_patched": false
+      }
+    }
+  ]
+}

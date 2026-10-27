@@ -1,0 +1,163 @@
+{
+  "action_seed": 0,
+  "analyzer_sha256": "4229c9098efcb8867b5656c1a59f5b60ad41132ae3508f64823f71284694bb11",
+  "environment_manifest_sha256": "924f0da0af3bd3b8ac4fa742f35a48f0bf367567f55e8a299588ea710202d97a",
+  "errors": 0,
+  "exploration_action_response_effects": [
+    {
+      "action_id": 1,
+      "actions": 235,
+      "game_over_events": 1,
+      "level_events": 0,
+      "levels_completed": 0,
+      "mean_public_response_reward": 0.44042553191489364,
+      "new_visible_boards": 225,
+      "noops": 9,
+      "public_response_reward_counts": {
+        "-1.000": 9,
+        "0.000": 1,
+        "0.500": 225
+      },
+      "visible_change_actions": 226
+    },
+    {
+      "action_id": 2,
+      "actions": 234,
+      "game_over_events": 0,
+      "level_events": 0,
+      "levels_completed": 0,
+      "mean_public_response_reward": 0.4423076923076923,
+      "new_visible_boards": 223,
+      "noops": 8,
+      "public_response_reward_counts": {
+        "-1.000": 8,
+        "0.000": 3,
+        "0.500": 223
+      },
+      "visible_change_actions": 226
+    },
+    {
+      "action_id": 3,
+      "actions": 251,
+      "game_over_events": 2,
+      "level_events": 0,
+      "levels_completed": 0,
+      "mean_public_response_reward": 0.4402390438247012,
+      "new_visible_boards": 239,
+      "noops": 9,
+      "public_response_reward_counts": {
+        "-1.000": 9,
+        "0.000": 3,
+        "0.500": 239
+      },
+      "visible_change_actions": 242
+    },
+    {
+      "action_id": 4,
+      "actions": 287,
+      "game_over_events": 2,
+      "level_events": 0,
+      "levels_completed": 0,
+      "mean_public_response_reward": 0.4616724738675958,
+      "new_visible_boards": 277,
+      "noops": 6,
+      "public_response_reward_counts": {
+        "-1.000": 6,
+        "0.000": 4,
+        "0.500": 277
+      },
+      "visible_change_actions": 281
+    },
+    {
+      "action_id": 5,
+      "actions": 166,
+      "game_over_events": 2,
+      "level_events": 0,
+      "levels_completed": 0,
+      "mean_public_response_reward": 0.4457831325301205,
+      "new_visible_boards": 160,
+      "noops": 6,
+      "public_response_reward_counts": {
+        "-1.000": 6,
+        "0.500": 160
+      },
+      "visible_change_actions": 160
+    },
+    {
+      "action_id": 6,
+      "actions": 464,
+      "game_over_events": 5,
+      "level_events": 3,
+      "levels_completed": 3,
+      "mean_public_response_reward": 0.20581896551724138,
+      "new_visible_boards": 365,
+      "noops": 99,
+      "public_response_reward_counts": {
+        "-1.000": 99,
+        "0.500": 362,
+        "4.500": 3
+      },
+      "visible_change_actions": 365
+    },
+    {
+      "action_id": 7,
+      "actions": 52,
+      "game_over_events": 0,
+      "level_events": 0,
+      "levels_completed": 0,
+      "mean_public_response_reward": 0.3076923076923077,
+      "new_visible_boards": 40,
+      "noops": 4,
+      "public_response_reward_counts": {
+        "-1.000": 4,
+        "0.000": 8,
+        "0.500": 40
+      },
+      "visible_change_actions": 48
+    }
+  ],
+  "game_ids_or_per_game_rows_persisted": false,
+  "games": 25,
+  "hidden_or_answer_data_read": false,
+  "local_runner_sha256": "c77d1445deaf84348fe212188f12f9f16312f6f8fe4fa986818a1984afa21d32",
+  "max_actions_per_policy": 80,
+  "notebook_or_kernel_changed": false,
+  "official_submission_made": false,
+  "policies": {
+    "exploration": {
+      "actions_total": 1689,
+      "game_over_events_total": 12,
+      "games": 25,
+      "levels_completed_total": 3,
+      "noops_total": 141,
+      "rhae_mean": 0.30697478682933227,
+      "wins": 0
+    },
+    "exploration_minus_random": {
+      "actions_total": -30,
+      "game_over_events_total": 2,
+      "levels_completed_total": 2,
+      "noops_total": -255,
+      "rhae_mean": 0.1164985963531418,
+      "wins": 0
+    },
+    "random": {
+      "actions_total": 1719,
+      "game_over_events_total": 10,
+      "games": 25,
+      "levels_completed_total": 1,
+      "noops_total": 396,
+      "rhae_mean": 0.19047619047619047,
+      "wins": 0
+    }
+  },
+  "policy_seed": 0,
+  "policy_sha256": "7879f85b5a3434dc2f5426c4837914c41054cbe56360ed4324167dab93de0575",
+  "same_public_starts": 25,
+  "schema": "arc3-public-action-response-attribution.v1",
+  "scorer_sha256": "3e0edd03dfc81715191d6eb5a8a098eaddb1fd3eeb88205dd638d0b624b8c502",
+  "split_seed": 20261027,
+  "stage": "all",
+  "trace_sha256": "712bda856e7865e0cb4f644e69a0e9bfdda3fde53ea45085348bc150b4759bd1",
+  "visible_change_coefficient": 0.0
+}

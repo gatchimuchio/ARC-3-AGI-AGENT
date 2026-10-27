@@ -1,0 +1,1499 @@
+[{"stream_name":"stderr","time":4.906384598,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":4.906408888,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":4.906410708,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":4.906411948,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stderr","time":5.238206426,"data":"0.00s - Debugger warning: It seems that frozen modules are being used, which may\n"}
+,{"stream_name":"stderr","time":5.238225276,"data":"0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off\n"}
+,{"stream_name":"stderr","time":5.238227076,"data":"0.00s - to python to disable frozen modules.\n"}
+,{"stream_name":"stderr","time":5.238228306,"data":"0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.\n"}
+,{"stream_name":"stdout","time":6.067286596,"data":"Writing /kaggle/harness-changes.patch\n"}
+,{"stream_name":"stderr","time":8.286256148,"data":"Checking patch ARC3-Inference/inference/agent/action_names.py...\n"}
+,{"stream_name":"stderr","time":8.286273738,"data":"Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...\n"}
+,{"stream_name":"stderr","time":8.286275398,"data":"Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...\n"}
+,{"stream_name":"stderr","time":8.286276678,"data":"Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...\n"}
+,{"stream_name":"stderr","time":8.286277488,"data":"Checking patch ARC3-Inference/inference/agent/prompts.py...\n"}
+,{"stream_name":"stderr","time":8.286278298,"data":"Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...\n"}
+,{"stream_name":"stderr","time":8.286359128,"data":"Checking patch ARC3-Inference/inference/agent/runtime_state.py...\n"}
+,{"stream_name":"stderr","time":8.286361118,"data":"Checking patch ARC3-Inference/inference/agent/tool_agent.py...\n"}
+,{"stream_name":"stderr","time":8.289030928,"data":"Checking patch ARC3-Inference/inference/agent/vision_context.py...\n"}
+,{"stream_name":"stderr","time":8.289061008000001,"data":"Checking patch ARC3-Inference/inference/framework/run.py...\n"}
+,{"stream_name":"stderr","time":8.289183318,"data":"Hunk #1 succeeded at 467 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":8.289184768,"data":"Hunk #2 succeeded at 1271 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":8.289186278,"data":"Checking patch ARC3-Inference/inference/framework/solver.py...\n"}
+,{"stream_name":"stderr","time":8.289433478,"data":"Checking patch ARC3-Inference/inference/utils/animation.py...\n"}
+,{"stream_name":"stderr","time":8.289461898,"data":"Checking patch ARC3-Inference/inference/utils/frame_diff.py...\n"}
+,{"stream_name":"stderr","time":8.289496948,"data":"Checking patch ARC3-Inference/inference/utils/openai_compat.py...\n"}
+,{"stream_name":"stderr","time":8.289528448,"data":"Checking patch ARC3-Inference/inference/utils/retained_functions.py...\n"}
+,{"stream_name":"stderr","time":8.289564348,"data":"Checking patch ARC3-Inference/inference/utils/segmentation.py...\n"}
+,{"stream_name":"stderr","time":8.289695248,"data":"Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289704358,"data":"Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289712508,"data":"Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.\n"}
+,{"stream_name":"stderr","time":8.289724298,"data":"Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289733868,"data":"Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289752838,"data":"Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289761138,"data":"Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289811838,"data":"Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289813318,"data":"Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289827108,"data":"Applied patch ARC3-Inference/inference/framework/run.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289844688,"data":"Applied patch ARC3-Inference/inference/framework/solver.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289855168,"data":"Applied patch ARC3-Inference/inference/utils/animation.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289864198,"data":"Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289875138,"data":"Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289887568,"data":"Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.289896518,"data":"Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.\n"}
+,{"stream_name":"stdout","time":8.291612228,"data":"harness patch applied successfully\n"}
+,{"stream_name":"stdout","time":8.291626778,"data":"taaf.kaggle: TRUE_SUBMISSION=False\n"}
+,{"stream_name":"stderr","time":8.292016268,"data":"Checking patch ARC3-Inference/inference/agent/action_names.py...\n"}
+,{"stream_name":"stderr","time":8.292024188,"data":"Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...\n"}
+,{"stream_name":"stderr","time":8.292025698,"data":"Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...\n"}
+,{"stream_name":"stderr","time":8.292026898,"data":"Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...\n"}
+,{"stream_name":"stderr","time":8.292027818,"data":"Checking patch ARC3-Inference/inference/agent/prompts.py...\n"}
+,{"stream_name":"stderr","time":8.292028718,"data":"Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...\n"}
+,{"stream_name":"stderr","time":8.292029508,"data":"Checking patch ARC3-Inference/inference/agent/runtime_state.py...\n"}
+,{"stream_name":"stderr","time":8.292030378,"data":"Checking patch ARC3-Inference/inference/agent/tool_agent.py...\n"}
+,{"stream_name":"stderr","time":8.292031138,"data":"Checking patch ARC3-Inference/inference/agent/vision_context.py...\n"}
+,{"stream_name":"stderr","time":8.292031998,"data":"Checking patch ARC3-Inference/inference/framework/run.py...\n"}
+,{"stream_name":"stderr","time":8.292032748,"data":"Hunk #1 succeeded at 467 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":8.292033598,"data":"Hunk #2 succeeded at 1271 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":8.292034358,"data":"Checking patch ARC3-Inference/inference/framework/solver.py...\n"}
+,{"stream_name":"stderr","time":8.292035218,"data":"Checking patch ARC3-Inference/inference/utils/animation.py...\n"}
+,{"stream_name":"stderr","time":8.292035948,"data":"Checking patch ARC3-Inference/inference/utils/frame_diff.py...\n"}
+,{"stream_name":"stderr","time":8.292036808,"data":"Checking patch ARC3-Inference/inference/utils/openai_compat.py...\n"}
+,{"stream_name":"stderr","time":8.292041838,"data":"Checking patch ARC3-Inference/inference/utils/retained_functions.py...\n"}
+,{"stream_name":"stderr","time":8.292042918,"data":"Checking patch ARC3-Inference/inference/utils/segmentation.py...\n"}
+,{"stream_name":"stderr","time":8.292043688,"data":"Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292044568,"data":"Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292045358,"data":"Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.\n"}
+,{"stream_name":"stderr","time":8.292046228,"data":"Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292047008,"data":"Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292047868,"data":"Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292048638,"data":"Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292049398,"data":"Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292050328,"data":"Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292051108,"data":"Applied patch ARC3-Inference/inference/framework/run.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292051848,"data":"Applied patch ARC3-Inference/inference/framework/solver.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292052608,"data":"Applied patch ARC3-Inference/inference/utils/animation.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292053788,"data":"Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292054578,"data":"Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292055348,"data":"Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292056188,"data":"Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292056948,"data":"\n"}
+,{"stream_name":"stderr","time":8.292058068,"data":"Checking patch ARC3-Inference/inference/agent/action_names.py...\n"}
+,{"stream_name":"stderr","time":8.292059138,"data":"Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...\n"}
+,{"stream_name":"stderr","time":8.292059968,"data":"Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...\n"}
+,{"stream_name":"stderr","time":8.292060728,"data":"Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...\n"}
+,{"stream_name":"stderr","time":8.292061588,"data":"Checking patch ARC3-Inference/inference/agent/prompts.py...\n"}
+,{"stream_name":"stderr","time":8.292062338,"data":"Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...\n"}
+,{"stream_name":"stderr","time":8.292063168,"data":"Checking patch ARC3-Inference/inference/agent/runtime_state.py...\n"}
+,{"stream_name":"stderr","time":8.292063928,"data":"Checking patch ARC3-Inference/inference/agent/tool_agent.py...\n"}
+,{"stream_name":"stderr","time":8.292064668,"data":"Checking patch ARC3-Inference/inference/agent/vision_context.py...\n"}
+,{"stream_name":"stderr","time":8.292065428,"data":"Checking patch ARC3-Inference/inference/framework/run.py...\n"}
+,{"stream_name":"stderr","time":8.292066188,"data":"Hunk #1 succeeded at 467 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":8.292068108,"data":"Hunk #2 succeeded at 1271 (offset 48 lines).\n"}
+,{"stream_name":"stderr","time":8.292068898,"data":"Checking patch ARC3-Inference/inference/framework/solver.py...\n"}
+,{"stream_name":"stderr","time":8.292069678,"data":"Checking patch ARC3-Inference/inference/utils/animation.py...\n"}
+,{"stream_name":"stderr","time":8.292070438,"data":"Checking patch ARC3-Inference/inference/utils/frame_diff.py...\n"}
+,{"stream_name":"stderr","time":8.292071208,"data":"Checking patch ARC3-Inference/inference/utils/openai_compat.py...\n"}
+,{"stream_name":"stderr","time":8.292071968,"data":"Checking patch ARC3-Inference/inference/utils/retained_functions.py...\n"}
+,{"stream_name":"stderr","time":8.292072738,"data":"Checking patch ARC3-Inference/inference/utils/segmentation.py...\n"}
+,{"stream_name":"stderr","time":8.292073488,"data":"Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292074248,"data":"Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292074998,"data":"Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.\n"}
+,{"stream_name":"stderr","time":8.292075768,"data":"Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292076518,"data":"Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292077268,"data":"Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292078018,"data":"Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292078778,"data":"Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292079708,"data":"Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292080498,"data":"Applied patch ARC3-Inference/inference/framework/run.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292081238,"data":"Applied patch ARC3-Inference/inference/framework/solver.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292081998,"data":"Applied patch ARC3-Inference/inference/utils/animation.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292082748,"data":"Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292083508,"data":"Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292084258,"data":"Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.\n"}
+,{"stream_name":"stderr","time":8.292085038,"data":"Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.\n"}
+,{"stream_name":"stdout","time":8.337242209,"data":"Precaching: Started...\n"}
+,{"stream_name":"stdout","time":38.831343154,"data":"Precaching: loaded 211 files (6.70 GB) in 30.50 seconds.\n"}
+,{"stream_name":"stdout","time":38.831364414,"data":"\n"}
+,{"stream_name":"stdout","time":41.388158562,"data":"taaf.kaggle: wrote /usr/local/lib/python3.12/dist-packages/taaf_kaggle_sources.pth (3 source roots)\n"}
+,{"stream_name":"stdout","time":41.590443046,"data":"=== installing Pennyroyal (offline) ===\n"}
+,{"stream_name":"stdout","time":41.878620063,"data":"$ /tmp/sgl-intel/bin/uv venv --python /usr/bin/python3 /tmp/sgl-intel/venv\n"}
+,{"stream_name":"stdout","time":41.878639833,"data":"$ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels -r /kaggle/input/datasets/dfranzen/pennyroyal-v253/requirements.lock\n"}
+,{"stream_name":"stdout","time":45.474400564,"data":"$ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels --reinstall --no-deps /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels/sglang-0.5.19+gd00d88efc8d6-cp312-cp312-linux_x86_64.whl\n"}
+,{"stream_name":"stdout","time":45.73609493,"data":"$ /tmp/sgl-intel/venv/lib/python3.12/site-packages/nvidia/cu13/bin/nvcc --version\n"}
+,{"stream_name":"stdout","time":45.73610412,"data":"nvcc: NVIDIA (R) Cuda compiler driver\n"}
+,{"stream_name":"stdout","time":45.73610552,"data":"Copyright (c) 2005-2025 NVIDIA Corporation\n"}
+,{"stream_name":"stdout","time":45.73610654,"data":"Built on Wed_Aug_20_01:58:59_PM_PDT_2025\n"}
+,{"stream_name":"stdout","time":45.73610738,"data":"Cuda compilation tools, release 13.0, V13.0.88\n"}
+,{"stream_name":"stdout","time":45.73610828,"data":"Build cuda_13.0.r13.0/compiler.36424714_0\n"}
+,{"stream_name":"stdout","time":45.7361105,"data":"Host compiler: g++-11\n"}
+,{"stream_name":"stdout","time":45.73611131,"data":"$ /tmp/sgl-intel/venv/bin/python -c 'import pathlib, sglang, torch\n"}
+,{"stream_name":"stdout","time":45.73611216,"data":"print(\"sglang\", sglang.__version__, \"| torch\", torch.__version__)\n"}
+,{"stream_name":"stdout","time":45.73611321,"data":"assert torch.cuda.is_available(), \"CUDA unavailable\"\n"}
+,{"stream_name":"stdout","time":45.73611412,"data":"print(\"GPU:\", torch.cuda.get_device_name(0), \"capability:\", torch.cuda.get_device_capability(0))\n"}
+,{"stream_name":"stdout","time":45.73611517,"data":"'\n"}
+,{"stream_name":"stdout","time":76.059549171,"data":"sglang 0.5.19+gd00d88efc8d6 | torch 2.13.0+cu130\n"}
+,{"stream_name":"stdout","time":76.059571021,"data":"GPU: NVIDIA RTX PRO 6000 Blackwell Server Edition capability: (12, 0)\n"}
+,{"stream_name":"stdout","time":76.968333101,"data":"Target: /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 | shards: 38 | PLE dtype: checkpoint default (typically BF16)\n"}
+,{"stream_name":"stdout","time":76.968346091,"data":"Draft source: /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1\n"}
+,{"stream_name":"stdout","time":76.968347821,"data":"SGLang draft view: /tmp/sgl-intel/draft-view-746747f37bf36968 (2 linked weight shards)\n"}
+,{"stream_name":"stdout","time":77.495708793,"data":"\n"}
+,{"stream_name":"stdout","time":77.495732533,"data":"/tmp/sgl-intel/venv/bin/sglang serve --model-path /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 --load-format safetensors --model-loader-extra-config '{\"enable_multithread_load\":false}' --served-model-name flashnext --host 127.0.0.1 --port 8001 --tensor-parallel-size 1 --dtype bfloat16 --quantization auto-round --kv-cache-dtype fp8_e4m3 --mem-fraction-static 0.96 --context-length 139264 --page-size 64 --max-running-requests 10 --chunked-prefill-size 8192 --max-prefill-tokens 16384 --cuda-graph-max-bs-decode 10 --cuda-graph-bs-decode 1 2 4 7 8 9 10 --mamba-ssm-dtype bfloat16 --max-mamba-cache-size 60 --mamba-radix-cache-strategy extra_buffer --mamba-track-interval 64 --mamba-backend flashinfer --linear-attn-decode-backend flashinfer --linear-attn-prefill-backend flashinfer --moe-runner-backend auto --ple-offload-embedding --trust-remote-code --mm-feature-transport cpu --image-processor-backend pil --reasoning-parser qwen3 --tool-call-parser qwen3_coder --default-chat-template-kwargs '{\"preserve_thinking\":true}' --watchdog-timeout 1800 --schedule-policy lpm --warmups structured_output --enable-cache-report --enable-metrics --enable-request-time-stats-logging --weight-loader-prefetch-checkpoints --weight-loader-drop-cache-after-load --chat-template /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1/chat_template.jinja --gdn-mtp-cache-mode none --speculative-algorithm NEXTN --speculative-num-steps 3 --speculative-eagle-topk 1 --speculative-num-draft-tokens 4 --speculative-draft-model-path /tmp/sgl-intel/draft-view-746747f37bf36968 --speculative-draft-model-quantization compressed-tensors --speculative-moe-runner-backend auto --speculative-draft-kv-cache-dtype fp8_e4m3 --speculative-accept-threshold-single 1.0 --speculative-accept-threshold-acc 1.0 --speculative-token-map /kaggle/input/datasets/dfranzen/pennyroyal-v253/hot_tokens_64k.pt\n"}
+,{"stream_name":"stdout","time":77.495745533,"data":"\n"}
+,{"stream_name":"stdout","time":77.495746713,"data":"pid 502 -\u003e /kaggle/working/serve.log\n"}
+,{"stream_name":"stdout","time":77.495747983,"data":"  0s ...\n"}
+,{"stream_name":"stdout","time":107.506457155,"data":"  30s ...\n"}
+,{"stream_name":"stdout","time":137.502873946,"data":"Precaching: Started...\n"}
+,{"stream_name":"stdout","time":137.502900216,"data":"  60s ...\n"}
+,{"stream_name":"stdout","time":167.513340082,"data":"  90s ...\n"}
+,{"stream_name":"stdout","time":197.509913393,"data":"  120s ...\n"}
+,{"stream_name":"stdout","time":227.520391813,"data":"  150s ...\n"}
+,{"stream_name":"stdout","time":257.51699051,"data":"  180s ...\n"}
+,{"stream_name":"stdout","time":287.527597217,"data":"  210s ...\n"}
+,{"stream_name":"stdout","time":317.524153897,"data":"  240s ...\n"}
+,{"stream_name":"stdout","time":347.534994301,"data":"  270s ...\n"}
+,{"stream_name":"stdout","time":377.531415649,"data":"  300s ...\n"}
+,{"stream_name":"stdout","time":407.542213686,"data":"  330s ...\n"}
+,{"stream_name":"stdout","time":437.538664507,"data":"  360s ...\n"}
+,{"stream_name":"stdout","time":467.549519782,"data":"  390s ...\n"}
+,{"stream_name":"stdout","time":497.546043432,"data":"  420s ...\n"}
+,{"stream_name":"stdout","time":527.557895387,"data":"  450s ...\n"}
+,{"stream_name":"stdout","time":557.553124812,"data":"  480s ...\n"}
+,{"stream_name":"stdout","time":587.564044933,"data":"  510s ...\n"}
+,{"stream_name":"stdout","time":617.560369239,"data":"  540s ...\n"}
+,{"stream_name":"stdout","time":647.57124006,"data":"  570s ...\n"}
+,{"stream_name":"stdout","time":677.567545022,"data":"  600s ...\n"}
+,{"stream_name":"stdout","time":707.578368954,"data":"  630s ...\n"}
+,{"stream_name":"stdout","time":728.57396205,"data":"\n"}
+,{"stream_name":"stdout","time":728.57398863,"data":"DEADLINE at 722s from notebook start; releasing the benchmark with the server still loading\n"}
+,{"stream_name":"stdout","time":730.854999444,"data":"benchmark.solver: HarnessSolver(label='duck-harness', runtime_environment=None, job_dir=None, soft_end_time=None, minimal_diagnostics=False, model='local', analyzer_timeout=900.0, max_actions_per_game=None, max_runtime_s_per_game=29018, max_generated_tokens_per_game=None, concurrency=100, save_request_logs=True, start_local_server=False, local_server_config='', local_server_api_key_file='', local_server_repo_dir='/Users/jeroencottaar/code/ARC3-Inference', local_server_port=None, local_server_tensor_parallel_size=None, local_server_count=1, cancel_drain_timeout_s=120.0)\n"}
+,{"stream_name":"stdout","time":730.871357184,"data":"C2-027 offline pilot cap: games=25, passes=1, per-game-seconds=1200\n"}
+,{"stream_name":"stdout","time":730.972600435,"data":"[sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 64 threads, 68 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":730.972813475,"data":"[sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 64 threads, 68 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":731.055655415,"data":"Starting benchmark...\n"}
+,{"stream_name":"stdout","time":733.977806314,"data":"C2-025 offline development run selected 25 environment(s) by list order.\n"}
+,{"stream_name":"stderr","time":736.173580718,"data":"priority gate active: 10 concurrent streams\n"}
+,{"stream_name":"stderr","time":736.173604968,"data":"\n"}
+,{"stream_name":"stderr","time":736.173606768,"data":"priority gate active: 10 concurrent streams\n"}
+,{"stream_name":"stderr","time":736.174503128,"data":"sk48-d8078629: warmup RESET issued before the analyzer is reachable\n"}
+,{"stream_name":"stderr","time":736.174510488,"data":"\n"}
+,{"stream_name":"stderr","time":736.174511808,"data":"sk48-d8078629: warmup RESET issued before the analyzer is reachable\n"}
+,{"stream_name":"stderr","time":736.226896239,"data":"first analyzer request failed (ConnectionError); retrying for up to 900s while the endpoint comes up, then falling back to 3 retries per request\n"}
+,{"stream_name":"stderr","time":736.226903439,"data":"\n"}
+,{"stream_name":"stderr","time":736.226904539,"data":"first analyzer request failed (ConnectionError); retrying for up to 900s while the endpoint comes up, then falling back to 3 retries per request\n"}
+,{"stream_name":"stdout","time":851.003373337,"data":"[sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 65 threads, 69 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":971.015676044,"data":"[sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 65 threads, 69 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":1091.029219868,"data":"[sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 65 threads, 69 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":1211.044236182,"data":"[sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 65 threads, 69 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":1292.26978132,"data":"Precaching: loaded 62 files (185.40 GB) in 1154.57 seconds.\n"}
+,{"stream_name":"stdout","time":1292.26980725,"data":"\n"}
+,{"stream_name":"stdout","time":1331.055818681,"data":"[sys] RAM 105.5/176.9 | swap none | proc 0.3 GB, 61 threads, 65 fds | GPU0 89.8/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":1338.865694786,"data":"benchmark: regenerated diagnostics in /kaggle/working in 2.44s\n"}
+,{"stream_name":"stdout","time":1338.865714716,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":1338.865716586,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":1338.865717986,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":1338.865719056,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":1338.865719996,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":1338.865721036,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":1338.865721986,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":1338.865722936,"data":"mean score:    0.00\n"}
+,{"stream_name":"stdout","time":1338.865724156,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":1338.865725126,"data":"total actions: 1\n"}
+,{"stream_name":"stdout","time":1338.865726066,"data":"total tokens:  0\n"}
+,{"stream_name":"stdout","time":1338.865727026,"data":"generated tokens/sec: 0.00 (job wallclock)\n"}
+,{"stream_name":"stdout","time":1338.865728106,"data":"total wallclock: 1.5s\n"}
+,{"stream_name":"stdout","time":1338.865735476,"data":"\n"}
+,{"stream_name":"stdout","time":1338.865736506,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":1338.865737266,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865738056,"data":"  bp35-0a0ad940: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865738896,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865739716,"data":"  cn04-2fe56bfb: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865740466,"data":"  dc22-fdcac232: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865741216,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865741946,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865742696,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865743436,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865744206,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865744916,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865745636,"data":"  m0r0-492f87ba: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865746386,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865747126,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865747856,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865748596,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865749336,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865750086,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=1, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865750806,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865751546,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865752286,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865753016,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865753746,"data":"  tu93-0768757b: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865754486,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865755246,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1338.865756016,"data":"\n"}
+,{"stream_name":"stdout","time":1451.068644164,"data":"[sys] RAM 106.0/176.9 | swap none | proc 0.3 GB, 61 threads, 66 fds | GPU0 90.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":1571.08153664,"data":"[sys] RAM 105.9/176.9 | swap none | proc 0.3 GB, 61 threads, 68 fds | GPU0 92.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":1691.098175275,"data":"[sys] RAM 106.2/176.9 | swap none | proc 0.3 GB, 61 threads, 67 fds | GPU0 92.9/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":1811.112512386,"data":"[sys] RAM 106.6/176.9 | swap none | proc 0.3 GB, 61 threads, 67 fds | GPU0 93.1/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":1931.125585156,"data":"[sys] RAM 106.7/176.9 | swap none | proc 0.4 GB, 61 threads, 67 fds | GPU0 93.1/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stderr","time":1935.859144652,"data":"tail fade phase after 20.0 minutes: 0.0 minutes remaining; fading tail B to zero over the final 4.0 minutes, retaining hazard C\n"}
+,{"stream_name":"stderr","time":1935.859166312,"data":"\n"}
+,{"stream_name":"stderr","time":1935.859168142,"data":"tail fade phase after 20.0 minutes: 0.0 minutes remaining; fading tail B to zero over the final 4.0 minutes, retaining hazard C\n"}
+,{"stream_name":"stderr","time":1936.225988761,"data":"analyzer request timed out at action 70; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=0.36325077600008626)\n"}
+,{"stream_name":"stderr","time":1936.225998031,"data":"\n"}
+,{"stream_name":"stderr","time":1936.225999441,"data":"analyzer request timed out at action 70; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=0.36325077600008626)\n"}
+,{"stream_name":"stdout","time":1936.4299832,"data":"[finished] sk48-d8078629 state=gave_up level=0/8 score=0.00 actions=69 tokens=65983 per-level=69/61,0/177,0/101,0/103,0/230,0/181,0/125,0/92 note=\"tokens=65983\"\n"}
+,{"stream_name":"stdout","time":1939.624906921,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.75s\n"}
+,{"stream_name":"stdout","time":1939.624926431,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":1939.624928371,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":1939.624929871,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":1939.624930961,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":1939.624931971,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":1939.624932951,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":1939.624933991,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":1939.624934951,"data":"mean score:    0.00\n"}
+,{"stream_name":"stdout","time":1939.624935911,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":1939.624936831,"data":"total actions: 69\n"}
+,{"stream_name":"stdout","time":1939.624938061,"data":"total tokens:  65983\n"}
+,{"stream_name":"stdout","time":1939.624957451,"data":"generated tokens/sec: 54.73 (job wallclock)\n"}
+,{"stream_name":"stdout","time":1939.624958721,"data":"total wallclock: 1201.5s\n"}
+,{"stream_name":"stdout","time":1939.624959721,"data":"\n"}
+,{"stream_name":"stdout","time":1939.624960761,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":1939.624961791,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624962781,"data":"  bp35-0a0ad940: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624964331,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624965681,"data":"  cn04-2fe56bfb: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624966981,"data":"  dc22-fdcac232: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624968271,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624976931,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624977901,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624978651,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624979441,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624980181,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624981021,"data":"  m0r0-492f87ba: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624981761,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624982491,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624983241,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624984051,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624984791,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624985571,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":1939.624986381,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624987141,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624987861,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624988621,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624989341,"data":"  tu93-0768757b: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624990081,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624990861,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":1939.624991641,"data":"\n"}
+,{"stream_name":"stdout","time":2051.140004465,"data":"[sys] RAM 106.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":2171.155097694,"data":"[sys] RAM 106.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5\n"}
+,{"stream_name":"stdout","time":2291.170182165,"data":"[sys] RAM 106.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":2404.427225574,"data":"[finished] tn36-ef4dde99 state=gave_up level=0/7 score=0.00 actions=80 tokens=68926 per-level=80/32,0/72,0/26,0/40,0/30,0/55,0/62 note=\"tokens=68926\"\n"}
+,{"stream_name":"stdout","time":2411.177589845,"data":"[sys] RAM 106.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":2531.200131414,"data":"[sys] RAM 106.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":2540.340005721,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.61s\n"}
+,{"stream_name":"stdout","time":2540.340027731,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":2540.340029591,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":2540.340035161,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":2540.340036201,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":2540.340037021,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":2540.340037791,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":2540.340038551,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":2540.340039361,"data":"mean score:    0.00\n"}
+,{"stream_name":"stdout","time":2540.340040101,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":2540.340040901,"data":"total actions: 155\n"}
+,{"stream_name":"stdout","time":2540.340041631,"data":"total tokens:  153922\n"}
+,{"stream_name":"stdout","time":2540.340042421,"data":"generated tokens/sec: 85.21 (job wallclock)\n"}
+,{"stream_name":"stdout","time":2540.340043241,"data":"total wallclock: 4662.0s\n"}
+,{"stream_name":"stdout","time":2540.340044011,"data":"\n"}
+,{"stream_name":"stdout","time":2540.340044781,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":2540.340045571,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340046401,"data":"  bp35-0a0ad940: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340047181,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340047951,"data":"  cn04-2fe56bfb: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340048711,"data":"  dc22-fdcac232: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340049431,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340050181,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340050931,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340051701,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340052461,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340053221,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340053991,"data":"  m0r0-492f87ba: score=0.00, levels=0.0/6, actions=6, tokens=19013\n"}
+,{"stream_name":"stdout","time":2540.340054751,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340055521,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340056241,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340056991,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340057731,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340058501,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":2540.340059301,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340060071,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340060831,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":2540.340061581,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340063701,"data":"  tu93-0768757b: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340064501,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340065311,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":2540.340066111,"data":"\n"}
+,{"stream_name":"stdout","time":2651.21602494,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":2771.230958957,"data":"[sys] RAM 106.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":2891.246781908,"data":"[sys] RAM 106.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3011.261718829,"data":"[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3131.277243861,"data":"[sys] RAM 106.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3132.422467218,"data":"[finished] m0r0-492f87ba state=gave_up level=2/6 score=14.29 actions=80 tokens=100874 per-level=26/30,38/111,16/203,0/26,0/500,0/237 note=\"tokens=100874\"\n"}
+,{"stream_name":"stdout","time":3140.955612724,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.60s\n"}
+,{"stream_name":"stdout","time":3140.955630414,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":3140.955632394,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":3140.955633874,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":3140.955634854,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":3140.955635794,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":3140.955636824,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":3140.955637794,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":3140.955638754,"data":"mean score:    0.57\n"}
+,{"stream_name":"stdout","time":3140.955639704,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":3140.955640644,"data":"total actions: 229\n"}
+,{"stream_name":"stdout","time":3140.955641574,"data":"total tokens:  235783\n"}
+,{"stream_name":"stdout","time":3140.955642574,"data":"generated tokens/sec: 97.96 (job wallclock)\n"}
+,{"stream_name":"stdout","time":3140.955643584,"data":"total wallclock: 5268.3s\n"}
+,{"stream_name":"stdout","time":3140.955644574,"data":"\n"}
+,{"stream_name":"stdout","time":3140.955645794,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":3140.955646754,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955647764,"data":"  bp35-0a0ad940: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955648724,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955649684,"data":"  cn04-2fe56bfb: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955650634,"data":"  dc22-fdcac232: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955651594,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955658514,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955659494,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955660264,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955661004,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955661754,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955662564,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":3140.955663344,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955664124,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955664864,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955665614,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955666364,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955667164,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":3140.955667954,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955668694,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955669464,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":3140.955670344,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955671094,"data":"  tu93-0768757b: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955671854,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955672634,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3140.955673404,"data":"\n"}
+,{"stream_name":"stdout","time":3251.292623843,"data":"[sys] RAM 106.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3371.305804309,"data":"[sys] RAM 106.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3491.321160924,"data":"[sys] RAM 106.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3611.336180088,"data":"[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3731.351800968,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3741.561534881,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.50s\n"}
+,{"stream_name":"stdout","time":3741.561550831,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":3741.561552751,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":3741.561554171,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":3741.561555161,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":3741.561561001,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":3741.561561931,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":3741.561562771,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":3741.561563511,"data":"mean score:    0.63\n"}
+,{"stream_name":"stdout","time":3741.561564241,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":3741.561564961,"data":"total actions: 263\n"}
+,{"stream_name":"stdout","time":3741.561565761,"data":"total tokens:  310254\n"}
+,{"stream_name":"stdout","time":3741.561566551,"data":"generated tokens/sec: 103.16 (job wallclock)\n"}
+,{"stream_name":"stdout","time":3741.561567341,"data":"total wallclock: 8172.1s\n"}
+,{"stream_name":"stdout","time":3741.561568101,"data":"\n"}
+,{"stream_name":"stdout","time":3741.561568871,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":3741.561569631,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561570451,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=34, tokens=74471\n"}
+,{"stream_name":"stdout","time":3741.561571241,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561571991,"data":"  cn04-2fe56bfb: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561572711,"data":"  dc22-fdcac232: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561573421,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561574151,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561574871,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561575591,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561576341,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561577061,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561577801,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":3741.561578741,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561579501,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561580231,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561580951,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561581671,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561582411,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":3741.561583161,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561583891,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561584631,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":3741.561585341,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561586071,"data":"  tu93-0768757b: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561588121,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561588931,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":3741.561589691,"data":"\n"}
+,{"stream_name":"stdout","time":3851.370337267,"data":"[sys] RAM 106.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":3971.386307006,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":4091.401948544,"data":"[sys] RAM 106.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":4211.417497553,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":4331.433694912,"data":"[sys] RAM 106.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stderr","time":4332.316477316,"data":"analyzer request timed out at action 58; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=50.69328753100035)\n"}
+,{"stream_name":"stderr","time":4332.316499476,"data":"\n"}
+,{"stream_name":"stderr","time":4332.316501446,"data":"analyzer request timed out at action 58; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=50.69328753100035)\n"}
+,{"stream_name":"stdout","time":4332.520366675,"data":"[finished] bp35-0a0ad940 state=gave_up level=1/9 score=1.57 actions=57 tokens=174352 per-level=25/21,32/48,0/44,0/38,0/33,0/87,0/86,0/131,0/163 note=\"tokens=176501\"\n"}
+,{"stream_name":"stdout","time":4342.142118692,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.57s\n"}
+,{"stream_name":"stdout","time":4342.142141762,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":4342.142143672,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":4342.142145072,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":4342.142146142,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":4342.142147162,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":4342.142148112,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":4342.142149082,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":4342.142150032,"data":"mean score:    0.63\n"}
+,{"stream_name":"stdout","time":4342.142150972,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":4342.142151932,"data":"total actions: 286\n"}
+,{"stream_name":"stdout","time":4342.142152862,"data":"total tokens:  410135\n"}
+,{"stream_name":"stdout","time":4342.142153852,"data":"generated tokens/sec: 113.67 (job wallclock)\n"}
+,{"stream_name":"stdout","time":4342.142154852,"data":"total wallclock: 8865.8s\n"}
+,{"stream_name":"stdout","time":4342.142155832,"data":"\n"}
+,{"stream_name":"stdout","time":4342.142156782,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":4342.142157742,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142158772,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":4342.142159802,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142167442,"data":"  cn04-2fe56bfb: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142168422,"data":"  dc22-fdcac232: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142169182,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142169942,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142170662,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142171422,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142172202,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142172942,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142173692,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":4342.142174482,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142175252,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142175972,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142176732,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142177462,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142178222,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":4342.142178992,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142179752,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142180502,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":4342.142181262,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142182252,"data":"  tu93-0768757b: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142183022,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142183772,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4342.142184562,"data":"\n"}
+,{"stream_name":"stdout","time":4451.449073031,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":4571.46478399,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":4691.480010869,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5\n"}
+,{"stream_name":"stdout","time":4811.495638703,"data":"[sys] RAM 107.3/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":4931.511017913,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":4942.832450911,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.59s\n"}
+,{"stream_name":"stdout","time":4942.832472781,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":4942.832474521,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":4942.832475571,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":4942.832476441,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":4942.832477281,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":4942.832478051,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":4942.832478901,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":4942.832479731,"data":"mean score:    0.63\n"}
+,{"stream_name":"stdout","time":4942.832480551,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":4942.832481251,"data":"total actions: 336\n"}
+,{"stream_name":"stdout","time":4942.832482151,"data":"total tokens:  501719\n"}
+,{"stream_name":"stdout","time":4942.832482891,"data":"generated tokens/sec: 119.21 (job wallclock)\n"}
+,{"stream_name":"stdout","time":4942.832483681,"data":"total wallclock: 13067.6s\n"}
+,{"stream_name":"stdout","time":4942.832484451,"data":"\n"}
+,{"stream_name":"stdout","time":4942.832485211,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":4942.832485971,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832486791,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":4942.832487601,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832488381,"data":"  cn04-2fe56bfb: score=0.00, levels=0.0/6, actions=50, tokens=91584\n"}
+,{"stream_name":"stdout","time":4942.832489171,"data":"  dc22-fdcac232: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832489911,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832490661,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832491401,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832492121,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832492881,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832493631,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832494391,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":4942.832495151,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832495901,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832496621,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832497351,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832498101,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832498921,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":4942.832499721,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832500441,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832502431,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":4942.832503261,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832504021,"data":"  tu93-0768757b: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832504761,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832505521,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":4942.832506311,"data":"\n"}
+,{"stream_name":"stdout","time":5051.526295402,"data":"[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":5171.541952252,"data":"[sys] RAM 107.3/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":5291.556850772,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":5411.572457511,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":5432.033375017,"data":"[finished] cn04-2fe56bfb state=gave_up level=1/6 score=1.04 actions=80 tokens=166346 per-level=62/29,18/54,0/85,0/300,0/208,0/113 note=\"tokens=166346\"\n"}
+,{"stream_name":"stdout","time":5531.587883141,"data":"[sys] RAM 106.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":5543.528272146,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.64s\n"}
+,{"stream_name":"stdout","time":5543.528289136,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":5543.528290986,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":5543.528292456,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":5543.528293646,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":5543.528294646,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":5543.528295616,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":5543.528296746,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":5543.528297696,"data":"mean score:    0.68\n"}
+,{"stream_name":"stdout","time":5543.528298656,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":5543.528299586,"data":"total actions: 387\n"}
+,{"stream_name":"stdout","time":5543.528300536,"data":"total tokens:  591539\n"}
+,{"stream_name":"stdout","time":5543.528301536,"data":"generated tokens/sec: 122.99 (job wallclock)\n"}
+,{"stream_name":"stdout","time":5543.528302536,"data":"total wallclock: 18361.3s\n"}
+,{"stream_name":"stdout","time":5543.528303506,"data":"\n"}
+,{"stream_name":"stdout","time":5543.528304456,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":5543.528305466,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528306516,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":5543.528307536,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528308526,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":5543.528309486,"data":"  dc22-fdcac232: score=0.00, levels=0.0/6, actions=21, tokens=15058\n"}
+,{"stream_name":"stdout","time":5543.528316666,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528317666,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528318446,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528319196,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528319936,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528320696,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528321456,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":5543.528322246,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528322996,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528323896,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528324676,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528325436,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528326196,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":5543.528326956,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528327706,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528328456,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":5543.528329206,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528329926,"data":"  tu93-0768757b: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528330666,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528331416,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":5543.528332186,"data":"\n"}
+,{"stream_name":"stdout","time":5651.603164291,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":5771.61885507,"data":"[sys] RAM 107.2/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":5891.634404306,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6011.650289172,"data":"[sys] RAM 106.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6023.868977972,"data":"[finished] dc22-fdcac232 state=gave_up level=1/6 score=4.76 actions=80 tokens=85320 per-level=57/59,23/102,0/67,0/98,0/324,0/578 note=\"tokens=85320\"\n"}
+,{"stream_name":"stdout","time":6131.665618941,"data":"[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6144.265273468,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.73s\n"}
+,{"stream_name":"stdout","time":6144.265295198,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":6144.265296968,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":6144.265298168,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":6144.265298938,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":6144.265299668,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":6144.265300408,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":6144.265301238,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":6144.265301948,"data":"mean score:    0.95\n"}
+,{"stream_name":"stdout","time":6144.265302698,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":6144.265303428,"data":"total actions: 478\n"}
+,{"stream_name":"stdout","time":6144.265304148,"data":"total tokens:  677877\n"}
+,{"stream_name":"stdout","time":6144.265304898,"data":"generated tokens/sec: 125.29 (job wallclock)\n"}
+,{"stream_name":"stdout","time":6144.265305708,"data":"total wallclock: 24252.0s\n"}
+,{"stream_name":"stdout","time":6144.265306438,"data":"\n"}
+,{"stream_name":"stdout","time":6144.265307178,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":6144.265307918,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265308718,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":6144.265309508,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265310298,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":6144.265311058,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":6144.265311818,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265312558,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265313308,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265314048,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265314798,"data":"  lp85-305b61c3: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265315528,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265316268,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":6144.265317018,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265317768,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265318488,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265319198,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265319928,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265320658,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":6144.265321418,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265322138,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265328578,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":6144.265329458,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265330238,"data":"  tu93-0768757b: score=2.01, levels=1.0/9, actions=32, tokens=16076\n"}
+,{"stream_name":"stdout","time":6144.265330988,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265331768,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6144.265332518,"data":"\n"}
+,{"stream_name":"stdout","time":6251.681122539,"data":"[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6371.693943808,"data":"[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6491.709826037,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6611.725191665,"data":"[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6630.594381587,"data":"[finished] tu93-0768757b state=gave_up level=3/9 score=11.12 actions=80 tokens=92180 per-level=20/19,28/16,19/34,13/42,0/123,0/80,0/14,0/23,0/111 note=\"tokens=92180\"\n"}
+,{"stream_name":"stdout","time":6731.740522514,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6745.036237388,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.67s\n"}
+,{"stream_name":"stdout","time":6745.036257868,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":6745.036259668,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":6745.036261018,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":6745.036262098,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":6745.036263178,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":6745.036264138,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":6745.036265108,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":6745.036266068,"data":"mean score:    1.42\n"}
+,{"stream_name":"stdout","time":6745.036267018,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":6745.036267948,"data":"total actions: 537\n"}
+,{"stream_name":"stdout","time":6745.036268878,"data":"total tokens:  768212\n"}
+,{"stream_name":"stdout","time":6745.036269878,"data":"generated tokens/sec: 127.80 (job wallclock)\n"}
+,{"stream_name":"stdout","time":6745.036270888,"data":"total wallclock: 30733.3s\n"}
+,{"stream_name":"stdout","time":6745.036271868,"data":"\n"}
+,{"stream_name":"stdout","time":6745.036272818,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":6745.036273798,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036274848,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":6745.036275858,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036276858,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":6745.036283358,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":6745.036284328,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036285108,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036285858,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036286588,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036287358,"data":"  lp85-305b61c3: score=2.78, levels=1.0/8, actions=11, tokens=14231\n"}
+,{"stream_name":"stdout","time":6745.036288098,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036288858,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":6745.036289648,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036290378,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036291118,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036291848,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036292598,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036293328,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":6745.036294058,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036294798,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036295548,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":6745.036296268,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036297008,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":6745.036297728,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036298488,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":6745.036299238,"data":"\n"}
+,{"stream_name":"stdout","time":6851.755636356,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":6971.770731374,"data":"[sys] RAM 106.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5\n"}
+,{"stream_name":"stdout","time":7091.785742961,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":7211.800939789,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":7327.207348393,"data":"[finished] lp85-305b61c3 state=gave_up level=5/8 score=41.59 actions=80 tokens=98809 per-level=9/17,11/38,20/31,21/16,13/41,6/60,0/26,0/159 note=\"tokens=98809\"\n"}
+,{"stream_name":"stdout","time":7331.807012247,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":7345.810701697,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.75s\n"}
+,{"stream_name":"stdout","time":7345.810723167,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":7345.810724757,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":7345.810725997,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":7345.810726837,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":7345.810727607,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":7345.810728367,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":7345.810729247,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":7345.810729967,"data":"mean score:    2.97\n"}
+,{"stream_name":"stdout","time":7345.810730767,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":7345.810731467,"data":"total actions: 607\n"}
+,{"stream_name":"stdout","time":7345.810732287,"data":"total tokens:  853792\n"}
+,{"stream_name":"stdout","time":7345.810733057,"data":"generated tokens/sec: 129.13 (job wallclock)\n"}
+,{"stream_name":"stdout","time":7345.810733867,"data":"total wallclock: 37936.4s\n"}
+,{"stream_name":"stdout","time":7345.810734607,"data":"\n"}
+,{"stream_name":"stdout","time":7345.810735347,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":7345.810736117,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810736947,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":7345.810737767,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810738517,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":7345.810739257,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":7345.810740037,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810740787,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810741547,"data":"  ka59-38d34dbb: score=0.00, levels=0.0/7, actions=1, tokens=1002\n"}
+,{"stream_name":"stdout","time":7345.810742317,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810743087,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":7345.810743867,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810744617,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":7345.810745377,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810746117,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810746857,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810747577,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810748327,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810749077,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":7345.810777817,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810779417,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810780267,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":7345.810781017,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810781757,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":7345.810782507,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810783267,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7345.810784017,"data":"\n"}
+,{"stream_name":"stdout","time":7451.831506955,"data":"[sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":7571.847170562,"data":"[sys] RAM 107.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":7691.86670409,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":7811.882056768,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":7864.973698171,"data":"[finished] ka59-38d34dbb state=gave_up level=1/7 score=2.29 actions=80 tokens=83042 per-level=35/28,45/109,0/51,0/51,0/33,0/132,0/326 note=\"tokens=83042\"\n"}
+,{"stream_name":"stdout","time":7931.8972327,"data":"[sys] RAM 107.3/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":7946.496058006,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.68s\n"}
+,{"stream_name":"stdout","time":7946.496076466,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":7946.496078376,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":7946.496079976,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":7946.496081046,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":7946.496081996,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":7946.496082956,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":7946.496083986,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":7946.496084926,"data":"mean score:    3.07\n"}
+,{"stream_name":"stdout","time":7946.496085866,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":7946.496086836,"data":"total actions: 705\n"}
+,{"stream_name":"stdout","time":7946.496087766,"data":"total tokens:  947242\n"}
+,{"stream_name":"stdout","time":7946.496088746,"data":"generated tokens/sec: 131.33 (job wallclock)\n"}
+,{"stream_name":"stdout","time":7946.496089746,"data":"total wallclock: 45676.8s\n"}
+,{"stream_name":"stdout","time":7946.496090706,"data":"\n"}
+,{"stream_name":"stdout","time":7946.496091666,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":7946.496092616,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496093686,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":7946.496094706,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496101646,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":7946.496102606,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":7946.496103406,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496104166,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496104906,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":7946.496105646,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496106406,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":7946.496107166,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496107946,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":7946.496108716,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496109476,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496110186,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496110906,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496111626,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496112366,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":7946.496113116,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496113846,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496114596,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":7946.496115316,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496116046,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":7946.496116776,"data":"  vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":7946.496117626,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=19, tokens=11410\n"}
+,{"stream_name":"stdout","time":7946.496118426,"data":"\n"}
+,{"stream_name":"stdout","time":8051.91230935,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":8171.92782962,"data":"[sys] RAM 107.2/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":8231.206035259,"data":"[finished] wa30-ee6fef47 state=gave_up level=0/9 score=0.00 actions=80 tokens=52631 per-level=80/71,0/119,0/183,0/98,0/368,0/68,0/79,0/442,0/415 note=\"tokens=52631\"\n"}
+,{"stream_name":"stdout","time":8291.942574139,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":8411.958047109,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":8531.973803229,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":8547.266660851,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.66s\n"}
+,{"stream_name":"stdout","time":8547.266681541,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":8547.266683341,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":8547.266684751,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":8547.266686051,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":8547.266687221,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":8547.266688181,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":8547.266689151,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":8547.266690091,"data":"mean score:    3.42\n"}
+,{"stream_name":"stdout","time":8547.266691051,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":8547.266691971,"data":"total actions: 822\n"}
+,{"stream_name":"stdout","time":8547.266692921,"data":"total tokens:  1032322\n"}
+,{"stream_name":"stdout","time":8547.266693911,"data":"generated tokens/sec: 132.12 (job wallclock)\n"}
+,{"stream_name":"stdout","time":8547.266694911,"data":"total wallclock: 53748.2s\n"}
+,{"stream_name":"stdout","time":8547.266695891,"data":"\n"}
+,{"stream_name":"stdout","time":8547.266696841,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":8547.266697801,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266698861,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":8547.266699881,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266700881,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":8547.266701861,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":8547.266702871,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266703851,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266704821,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":8547.266705791,"data":"  lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266706791,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":8547.266708031,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266709031,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":8547.266710031,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266710981,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266711971,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266712921,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266713871,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266720051,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":8547.266721011,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266721791,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266722521,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":8547.266723331,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":8547.266724061,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":8547.266724841,"data":"  vc33-5430563c: score=8.75, levels=2.0/7, actions=56, tokens=43859\n"}
+,{"stream_name":"stdout","time":8547.266725631,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":8547.266726421,"data":"\n"}
+,{"stream_name":"stdout","time":8651.989105999,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":8772.004158899,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":8813.223556004,"data":"[finished] vc33-5430563c state=gave_up level=3/7 score=21.08 actions=80 tokens=87801 per-level=18/7,14/18,33/44,15/61,0/131,0/34,0/152 note=\"tokens=87801\"\n"}
+,{"stream_name":"stdout","time":8892.019392719,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":9012.034761455,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":9132.050838249,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.3/19.5\n"}
+,{"stream_name":"stdout","time":9148.141470455,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.77s\n"}
+,{"stream_name":"stdout","time":9148.141491105,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":9148.141493015,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":9148.141494395,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":9148.141495575,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":9148.141496545,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":9148.141497505,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":9148.141498445,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":9148.141499415,"data":"mean score:    3.98\n"}
+,{"stream_name":"stdout","time":9148.141500365,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":9148.141501315,"data":"total actions: 880\n"}
+,{"stream_name":"stdout","time":9148.141502255,"data":"total tokens:  1122663\n"}
+,{"stream_name":"stdout","time":9148.141503225,"data":"generated tokens/sec: 133.43 (job wallclock)\n"}
+,{"stream_name":"stdout","time":9148.141504225,"data":"total wallclock: 62442.4s\n"}
+,{"stream_name":"stdout","time":9148.141505175,"data":"\n"}
+,{"stream_name":"stdout","time":9148.141506115,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":9148.141507095,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141508145,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":9148.141514645,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141515655,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":9148.141516445,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":9148.141517205,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141517965,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141518695,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":9148.141519425,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=34, tokens=46399\n"}
+,{"stream_name":"stdout","time":9148.141520175,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":9148.141520915,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141521655,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":9148.141522405,"data":"  r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141523145,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141523885,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141524605,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141525345,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141526095,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":9148.141526825,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141527715,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141528465,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":9148.141529205,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9148.141529945,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":9148.141530675,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":9148.141531995,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":9148.141532795,"data":"\n"}
+,{"stream_name":"stdout","time":9252.064017743,"data":"[sys] RAM 108.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":9256.319321858,"data":"[finished] lf52-271a04aa state=gave_up level=1/10 score=1.82 actions=80 tokens=59806 per-level=18/32,62/81,0/60,0/71,0/205,0/148,0/244,0/109,0/164,0/225 note=\"tokens=59806\"\n"}
+,{"stream_name":"stdout","time":9372.079139427,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":9492.092184402,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":9612.104873295,"data":"[sys] RAM 107.9/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":9732.119975729,"data":"[sys] RAM 108.3/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":9749.02289854,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.77s\n"}
+,{"stream_name":"stdout","time":9749.02291769,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":9749.02291956,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":9749.02292091,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":9749.02292197,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":9749.02292294,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":9749.02292412,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":9749.02292511,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":9749.02292614,"data":"mean score:    4.17\n"}
+,{"stream_name":"stdout","time":9749.0229271,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":9749.02292812,"data":"total actions: 950\n"}
+,{"stream_name":"stdout","time":9749.02292907,"data":"total tokens:  1206678\n"}
+,{"stream_name":"stdout","time":9749.02293006,"data":"generated tokens/sec: 133.85 (job wallclock)\n"}
+,{"stream_name":"stdout","time":9749.02293107,"data":"total wallclock: 71552.5s\n"}
+,{"stream_name":"stdout","time":9749.02293205,"data":"\n"}
+,{"stream_name":"stdout","time":9749.02293301,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":9749.02293399,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02293504,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":9749.0229361,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02293712,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":9749.02293809,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":9749.02293911,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.0229401,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.0229411,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":9749.02294208,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":9749.02294306,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":9749.02294404,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02294503,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":9749.02294602,"data":"  r11l-495a7899: score=4.76, levels=1.0/6, actions=24, tokens=70608\n"}
+,{"stream_name":"stdout","time":9749.02294701,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02294798,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02294898,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02295541,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02295633,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":9749.02295712,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02295788,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02295865,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":9749.02295946,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":9749.02296024,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":9749.02296102,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":9749.02296248,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":9749.02296331,"data":"\n"}
+,{"stream_name":"stdout","time":9852.135991633,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":9972.148623545,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10092.164552121,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10212.180546988,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10332.193053324,"data":"[sys] RAM 107.9/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10349.697709612,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.65s\n"}
+,{"stream_name":"stdout","time":10349.697731692,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":10349.697733652,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":10349.697735002,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":10349.697736112,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":10349.697737162,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":10349.697738122,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":10349.697739112,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":10349.697740082,"data":"mean score:    4.55\n"}
+,{"stream_name":"stdout","time":10349.697741062,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":10349.697742002,"data":"total actions: 964\n"}
+,{"stream_name":"stdout","time":10349.697742942,"data":"total tokens:  1268603\n"}
+,{"stream_name":"stdout","time":10349.697743912,"data":"generated tokens/sec: 131.93 (job wallclock)\n"}
+,{"stream_name":"stdout","time":10349.697744912,"data":"total wallclock: 72026.8s\n"}
+,{"stream_name":"stdout","time":10349.697745892,"data":"\n"}
+,{"stream_name":"stdout","time":10349.697746862,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":10349.697747852,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697748932,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":10349.697759032,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697760042,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":10349.697760992,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":10349.697761772,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697762512,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697763262,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":10349.697764012,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":10349.697764762,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":10349.697765542,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697766282,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":10349.697767022,"data":"  r11l-495a7899: score=14.29, levels=2.0/6, actions=38, tokens=132533\n"}
+,{"stream_name":"stdout","time":10349.697767782,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697779702,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697780512,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697781252,"data":"  sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697781982,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":10349.697782732,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697783472,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697784202,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":10349.697784942,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10349.697785682,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":10349.697786432,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":10349.697787742,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":10349.697788562,"data":"\n"}
+,{"stream_name":"stdout","time":10452.20546474,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10458.038885593,"data":"[finished] r11l-495a7899 state=gave_up level=3/6 score=28.57 actions=46 tokens=159041 per-level=6/22,23/33,17/51,0/26,0/52,0/49 note=\"tokens=167087\"\n"}
+,{"stream_name":"stdout","time":10572.218144026,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10692.234167492,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10812.249278448,"data":"[sys] RAM 108.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10932.306798347,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":10932.497372546,"data":"[finished] sc25-635fd71a state=gave_up level=2/6 score=14.29 actions=80 tokens=67491 per-level=43/36,5/6,32/32,0/83,0/143,0/50 note=\"tokens=67491\"\n"}
+,{"stream_name":"stdout","time":10950.553505454,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.82s\n"}
+,{"stream_name":"stdout","time":10950.553528144,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":10950.553530044,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":10950.553531364,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":10950.553532554,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":10950.553533494,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":10950.553534474,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":10950.553535444,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":10950.553536474,"data":"mean score:    5.70\n"}
+,{"stream_name":"stdout","time":10950.553537434,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":10950.553538364,"data":"total actions: 1055\n"}
+,{"stream_name":"stdout","time":10950.553539274,"data":"total tokens:  1364935\n"}
+,{"stream_name":"stdout","time":10950.553540324,"data":"generated tokens/sec: 133.60 (job wallclock)\n"}
+,{"stream_name":"stdout","time":10950.553541304,"data":"total wallclock: 92694.1s\n"}
+,{"stream_name":"stdout","time":10950.554424684,"data":"\n"}
+,{"stream_name":"stdout","time":10950.554426554,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":10950.554427754,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554428834,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":10950.554429894,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554430924,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":10950.554431894,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":10950.554432914,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554433884,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554434904,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":10950.554435874,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":10950.554437194,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":10950.554438194,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554439164,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":10950.554440144,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":10950.554441124,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554446914,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554447914,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554448684,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":10950.554449474,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":10950.554450274,"data":"  sp80-589a99af: score=0.00, levels=0.0/6, actions=3, tokens=2333\n"}
+,{"stream_name":"stdout","time":10950.554451034,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554451824,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":10950.554452604,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":10950.554453364,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":10950.554454144,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":10950.554455634,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":10950.554456454,"data":"\n"}
+,{"stream_name":"stdout","time":11052.3207761,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":11172.335698978,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":11292.350765857,"data":"[sys] RAM 107.3/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":11412.366077855,"data":"[sys] RAM 108.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":11532.381122933,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.4/19.5\n"}
+,{"stream_name":"stdout","time":11551.215231819,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.58s\n"}
+,{"stream_name":"stdout","time":11551.215255299,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":11551.215257429,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":11551.215258849,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":11551.215259849,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":11551.215260809,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":11551.215261869,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":11551.215262859,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":11551.215264459,"data":"mean score:    5.89\n"}
+,{"stream_name":"stdout","time":11551.215276889,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":11551.215277939,"data":"total actions: 1089\n"}
+,{"stream_name":"stdout","time":11551.215278899,"data":"total tokens:  1453841\n"}
+,{"stream_name":"stdout","time":11551.215279979,"data":"generated tokens/sec: 134.40 (job wallclock)\n"}
+,{"stream_name":"stdout","time":11551.215281009,"data":"total wallclock: 93265.7s\n"}
+,{"stream_name":"stdout","time":11551.215281969,"data":"\n"}
+,{"stream_name":"stdout","time":11551.215282899,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":11551.215291389,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215292429,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":11551.215293349,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215294149,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":11551.215294889,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":11551.215295649,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215296459,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215297199,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":11551.215297929,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":11551.215298659,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":11551.215299419,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215300149,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":11551.215300909,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":11551.215301679,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215302439,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215303169,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215303879,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":11551.215304629,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":11551.215305479,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=37, tokens=91239\n"}
+,{"stream_name":"stdout","time":11551.215306409,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215307169,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":11551.215307939,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":11551.215308689,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":11551.215309409,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":11551.215310729,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":11551.215311529,"data":"\n"}
+,{"stream_name":"stdout","time":11652.39710743,"data":"[sys] RAM 108.1/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":11772.412845658,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":11892.428363276,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12012.441077894,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12132.456329522,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12135.190219757,"data":"[finished] sp80-589a99af state=gave_up level=1/6 score=4.76 actions=54 tokens=149610 per-level=8/39,46/58,0/25,0/148,0/96,0/152 note=\"tokens=167644\"\n"}
+,{"stream_name":"stdout","time":12151.940240515,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.70s\n"}
+,{"stream_name":"stdout","time":12151.940258755,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":12151.940260565,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":12151.940262035,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":12151.940263175,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":12151.940264145,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":12151.940265125,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":12151.940266165,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":12151.940267125,"data":"mean score:    5.89\n"}
+,{"stream_name":"stdout","time":12151.940268075,"data":"median score:  0.00\n"}
+,{"stream_name":"stdout","time":12151.940269015,"data":"total actions: 1107\n"}
+,{"stream_name":"stdout","time":12151.940269935,"data":"total tokens:  1514055\n"}
+,{"stream_name":"stdout","time":12151.940270935,"data":"generated tokens/sec: 132.60 (job wallclock)\n"}
+,{"stream_name":"stdout","time":12151.940271965,"data":"total wallclock: 105291.7s\n"}
+,{"stream_name":"stdout","time":12151.940272945,"data":"\n"}
+,{"stream_name":"stdout","time":12151.940273925,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":12151.940274935,"data":"  ar25-0c556536: score=0.00, levels=0.0/8, actions=1, tokens=1843\n"}
+,{"stream_name":"stdout","time":12151.940275935,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":12151.940276945,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940277945,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":12151.940278915,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":12151.940279915,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940280895,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940281855,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":12151.940282815,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":12151.940283815,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":12151.940284805,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940285765,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":12151.940286745,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":12151.940287735,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940300705,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940301645,"data":"  sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940302425,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":12151.940303185,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":12151.940303955,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":12151.940304765,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940305535,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":12151.940306315,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12151.940307085,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":12151.940307865,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":12151.940309405,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":12151.940310245,"data":"\n"}
+,{"stream_name":"stdout","time":12252.47180134,"data":"[sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12372.486916698,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12412.517788837,"data":"[finished] ar25-0c556536 state=gave_up level=2/8 score=8.33 actions=80 tokens=39552 per-level=20/32,24/50,36/75,0/37,0/89,0/159,0/233,0/73 note=\"tokens=39552\"\n"}
+,{"stream_name":"stdout","time":12492.502057126,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12612.517138814,"data":"[sys] RAM 108.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12620.40254825,"data":"[finished] sb26-7fbdac44 state=gave_up level=4/8 score=27.78 actions=80 tokens=29351 per-level=11/18,26/28,15/18,15/19,13/31,0/23,0/58,0/18 note=\"tokens=29351\"\n"}
+,{"stream_name":"stdout","time":12732.532232032,"data":"[sys] RAM 108.0/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12752.896529359,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.85s\n"}
+,{"stream_name":"stdout","time":12752.896549239,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":12752.896551309,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":12752.896552689,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":12752.896553869,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":12752.896554869,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":12752.896555899,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":12752.896556889,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":12752.896558139,"data":"mean score:    7.33\n"}
+,{"stream_name":"stdout","time":12752.896559149,"data":"median score:  1.57\n"}
+,{"stream_name":"stdout","time":12752.896560109,"data":"total actions: 1285\n"}
+,{"stream_name":"stdout","time":12752.896573529,"data":"total tokens:  1597145\n"}
+,{"stream_name":"stdout","time":12752.896574559,"data":"generated tokens/sec: 132.89 (job wallclock)\n"}
+,{"stream_name":"stdout","time":12752.896575429,"data":"total wallclock: 129436.7s\n"}
+,{"stream_name":"stdout","time":12752.896576199,"data":"\n"}
+,{"stream_name":"stdout","time":12752.896576949,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":12752.896577759,"data":"  ar25-0c556536: score=8.33, levels=2.0/8, actions=80, tokens=39552\n"}
+,{"stream_name":"stdout","time":12752.896578609,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":12752.896579419,"data":"  cd82-fb555c5d: score=0.00, levels=0.0/6, actions=19, tokens=16030\n"}
+,{"stream_name":"stdout","time":12752.896580189,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":12752.896580979,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":12752.896581759,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12752.896582559,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12752.896583319,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":12752.896584099,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":12752.896584889,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":12752.896585659,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12752.896586409,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":12752.896587189,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":12752.896587979,"data":"  re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12752.896588769,"data":"  s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12752.896589589,"data":"  sb26-7fbdac44: score=27.78, levels=4.0/8, actions=80, tokens=29351\n"}
+,{"stream_name":"stdout","time":12752.896590339,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":12752.896591099,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":12752.896591839,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":12752.896592589,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12752.896593319,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":12752.896594079,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":12752.896594819,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":12752.896595569,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":12752.896596939,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":12752.896597789,"data":"\n"}
+,{"stream_name":"stdout","time":12852.547258079,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":12972.562002417,"data":"[sys] RAM 107.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13026.896263468,"data":"[finished] cd82-fb555c5d state=gave_up level=2/6 score=6.63 actions=80 tokens=58686 per-level=44/55,23/8,13/41,0/21,0/23,0/23 note=\"tokens=58686\"\n"}
+,{"stream_name":"stdout","time":13092.574834033,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13212.691082765,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13220.421711862,"data":"[finished] re86-8af5384d state=gave_up level=2/8 score=8.06 actions=80 tokens=26179 per-level=29/26,41/42,10/86,0/108,0/189,0/139,0/424,0/241 note=\"tokens=26179\"\n"}
+,{"stream_name":"stdout","time":13332.701026467,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13353.89236603,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.88s\n"}
+,{"stream_name":"stdout","time":13353.89238594,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":13353.8923878,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":13353.89238924,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":13353.89239036,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":13353.89239142,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":13353.89239236,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":13353.89239329,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":13353.89239423,"data":"mean score:    7.98\n"}
+,{"stream_name":"stdout","time":13353.89239519,"data":"median score:  2.29\n"}
+,{"stream_name":"stdout","time":13353.89239612,"data":"total actions: 1452\n"}
+,{"stream_name":"stdout","time":13353.89239728,"data":"total tokens:  1684127\n"}
+,{"stream_name":"stdout","time":13353.89240763,"data":"generated tokens/sec: 133.45 (job wallclock)\n"}
+,{"stream_name":"stdout","time":13353.89240876,"data":"total wallclock: 154824.0s\n"}
+,{"stream_name":"stdout","time":13353.89240974,"data":"\n"}
+,{"stream_name":"stdout","time":13353.89241067,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":13353.89241169,"data":"  ar25-0c556536: score=8.33, levels=2.0/8, actions=80, tokens=39552\n"}
+,{"stream_name":"stdout","time":13353.89241273,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":13353.89241373,"data":"  cd82-fb555c5d: score=6.63, levels=2.0/6, actions=80, tokens=58686\n"}
+,{"stream_name":"stdout","time":13353.89241469,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":13353.89241566,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":13353.89241665,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13353.89241765,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13353.89241862,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":13353.89241959,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":13353.89242635,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":13353.89242733,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13353.89242811,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":13353.89242887,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":13353.89242985,"data":"  re86-8af5384d: score=8.06, levels=2.0/8, actions=80, tokens=26179\n"}
+,{"stream_name":"stdout","time":13353.89243062,"data":"  s5i5-18d95033: score=1.64, levels=1.0/8, actions=26, tokens=18147\n"}
+,{"stream_name":"stdout","time":13353.89243144,"data":"  sb26-7fbdac44: score=27.78, levels=4.0/8, actions=80, tokens=29351\n"}
+,{"stream_name":"stdout","time":13353.8924322,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":13353.89243293,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":13353.89243368,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":13353.89243443,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13353.89243517,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":13353.89243594,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13353.89243669,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":13353.89243747,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":13353.89243914,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":13353.89243996,"data":"\n"}
+,{"stream_name":"stdout","time":13452.71648599,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13572.732056682,"data":"[sys] RAM 107.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13692.747315275,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13812.762781897,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13832.872699975,"data":"[finished] s5i5-18d95033 state=gave_up level=2/8 score=8.03 actions=80 tokens=93076 per-level=26/20,39/89,15/106,0/54,0/162,0/38,0/86,0/83 note=\"tokens=93076\"\n"}
+,{"stream_name":"stdout","time":13932.775912209,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.5/19.5\n"}
+,{"stream_name":"stdout","time":13954.743997697,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.74s\n"}
+,{"stream_name":"stdout","time":13954.744019547,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":13954.744021427,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":13954.744022827,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":13954.744023907,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":13954.744024947,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":13954.744032097,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":13954.744033067,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":13954.744033817,"data":"mean score:    8.24\n"}
+,{"stream_name":"stdout","time":13954.744034547,"data":"median score:  4.76\n"}
+,{"stream_name":"stdout","time":13954.744035277,"data":"total actions: 1522\n"}
+,{"stream_name":"stdout","time":13954.744035987,"data":"total tokens:  1774557\n"}
+,{"stream_name":"stdout","time":13954.744036767,"data":"generated tokens/sec: 134.22 (job wallclock)\n"}
+,{"stream_name":"stdout","time":13954.744037537,"data":"total wallclock: 168510.5s\n"}
+,{"stream_name":"stdout","time":13954.744038347,"data":"\n"}
+,{"stream_name":"stdout","time":13954.744039077,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":13954.744039867,"data":"  ar25-0c556536: score=8.33, levels=2.0/8, actions=80, tokens=39552\n"}
+,{"stream_name":"stdout","time":13954.744041067,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":13954.744041857,"data":"  cd82-fb555c5d: score=6.63, levels=2.0/6, actions=80, tokens=58686\n"}
+,{"stream_name":"stdout","time":13954.744042627,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":13954.744043457,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":13954.744044237,"data":"  ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13954.744045007,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13954.744045747,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":13954.744046507,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":13954.744047277,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":13954.744048037,"data":"  ls20-9607627b: score=0.00, levels=0.0/7, actions=16, tokens=15501\n"}
+,{"stream_name":"stdout","time":13954.744048807,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":13954.744049567,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":13954.744050327,"data":"  re86-8af5384d: score=8.06, levels=2.0/8, actions=80, tokens=26179\n"}
+,{"stream_name":"stdout","time":13954.744051077,"data":"  s5i5-18d95033: score=8.03, levels=2.0/8, actions=80, tokens=93076\n"}
+,{"stream_name":"stdout","time":13954.744051817,"data":"  sb26-7fbdac44: score=27.78, levels=4.0/8, actions=80, tokens=29351\n"}
+,{"stream_name":"stdout","time":13954.744052567,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":13954.744053317,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":13954.744054067,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":13954.744054827,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13954.744055577,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":13954.744056347,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":13954.744057087,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":13954.744059337,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":13954.744061017,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":13954.744061837,"data":"\n"}
+,{"stream_name":"stdout","time":14052.791821679,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":14172.806695001,"data":"[sys] RAM 107.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":14237.636884081,"data":"[finished] ls20-9607627b state=gave_up level=1/7 score=3.27 actions=80 tokens=59937 per-level=23/22,57/123,0/73,0/84,0/96,0/192,0/186 note=\"tokens=59937\"\n"}
+,{"stream_name":"stdout","time":14292.821969504,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":14412.837243056,"data":"[sys] RAM 107.5/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":14532.852210629,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":14555.601349132,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.77s\n"}
+,{"stream_name":"stdout","time":14555.601370182,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":14555.601372072,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":14555.601373402,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":14555.601374402,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":14555.601375382,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":14555.601376402,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":14555.601377362,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":14555.601378312,"data":"mean score:    10.28\n"}
+,{"stream_name":"stdout","time":14555.601379252,"data":"median score:  4.76\n"}
+,{"stream_name":"stdout","time":14555.601380182,"data":"total actions: 1641\n"}
+,{"stream_name":"stdout","time":14555.601381112,"data":"total tokens:  1866018\n"}
+,{"stream_name":"stdout","time":14555.601382092,"data":"generated tokens/sec: 135.01 (job wallclock)\n"}
+,{"stream_name":"stdout","time":14555.601383122,"data":"total wallclock: 182622.3s\n"}
+,{"stream_name":"stdout","time":14555.601384092,"data":"\n"}
+,{"stream_name":"stdout","time":14555.601385042,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":14555.601386052,"data":"  ar25-0c556536: score=8.33, levels=2.0/8, actions=80, tokens=39552\n"}
+,{"stream_name":"stdout","time":14555.601387082,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":14555.601388082,"data":"  cd82-fb555c5d: score=6.63, levels=2.0/6, actions=80, tokens=58686\n"}
+,{"stream_name":"stdout","time":14555.601389052,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":14555.601390032,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":14555.601391002,"data":"  ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=55, tokens=47025\n"}
+,{"stream_name":"stdout","time":14555.601391982,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":14555.601399592,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":14555.601400572,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":14555.601401352,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":14555.601402112,"data":"  ls20-9607627b: score=3.27, levels=1.0/7, actions=80, tokens=59937\n"}
+,{"stream_name":"stdout","time":14555.601402842,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":14555.601403592,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":14555.601404322,"data":"  re86-8af5384d: score=8.06, levels=2.0/8, actions=80, tokens=26179\n"}
+,{"stream_name":"stdout","time":14555.601405062,"data":"  s5i5-18d95033: score=8.03, levels=2.0/8, actions=80, tokens=93076\n"}
+,{"stream_name":"stdout","time":14555.601405792,"data":"  sb26-7fbdac44: score=27.78, levels=4.0/8, actions=80, tokens=29351\n"}
+,{"stream_name":"stdout","time":14555.601406522,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":14555.601407262,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":14555.601408032,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":14555.601408792,"data":"  su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":14555.601409562,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":14555.601410322,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":14555.601411062,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":14555.601411832,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":14555.601413172,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":14555.601414042,"data":"\n"}
+,{"stream_name":"stdout","time":14652.867520881,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":14743.333451958,"data":"[finished] ft09-0d8bbf25 state=gave_up level=4/6 score=47.62 actions=80 tokens=76094 per-level=4/43,9/12,14/23,25/28,28/65,0/37 note=\"tokens=76094\"\n"}
+,{"stream_name":"stdout","time":14772.871623564,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":14892.896748216,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15012.912000708,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15132.927450292,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15156.437121937,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.77s\n"}
+,{"stream_name":"stdout","time":15156.437142637,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":15156.437144347,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":15156.437151637,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":15156.437152607,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":15156.437153377,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":15156.437154127,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":15156.437154967,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":15156.437155697,"data":"mean score:    10.34\n"}
+,{"stream_name":"stdout","time":15156.437156397,"data":"median score:  4.76\n"}
+,{"stream_name":"stdout","time":15156.437157117,"data":"total actions: 1706\n"}
+,{"stream_name":"stdout","time":15156.437157837,"data":"total tokens:  1954724\n"}
+,{"stream_name":"stdout","time":15156.437158597,"data":"generated tokens/sec: 135.53 (job wallclock)\n"}
+,{"stream_name":"stdout","time":15156.437159357,"data":"total wallclock: 197237.6s\n"}
+,{"stream_name":"stdout","time":15156.437160127,"data":"\n"}
+,{"stream_name":"stdout","time":15156.437160857,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":15156.437161637,"data":"  ar25-0c556536: score=8.33, levels=2.0/8, actions=80, tokens=39552\n"}
+,{"stream_name":"stdout","time":15156.437162437,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":15156.437163217,"data":"  cd82-fb555c5d: score=6.63, levels=2.0/6, actions=80, tokens=58686\n"}
+,{"stream_name":"stdout","time":15156.437163987,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":15156.437164747,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":15156.437165507,"data":"  ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=80, tokens=76094\n"}
+,{"stream_name":"stdout","time":15156.437166287,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":15156.437167067,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":15156.437167817,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":15156.437168537,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":15156.437169307,"data":"  ls20-9607627b: score=3.27, levels=1.0/7, actions=80, tokens=59937\n"}
+,{"stream_name":"stdout","time":15156.437170047,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":15156.437170797,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":15156.437171557,"data":"  re86-8af5384d: score=8.06, levels=2.0/8, actions=80, tokens=26179\n"}
+,{"stream_name":"stdout","time":15156.437172307,"data":"  s5i5-18d95033: score=8.03, levels=2.0/8, actions=80, tokens=93076\n"}
+,{"stream_name":"stdout","time":15156.437173027,"data":"  sb26-7fbdac44: score=27.78, levels=4.0/8, actions=80, tokens=29351\n"}
+,{"stream_name":"stdout","time":15156.437173757,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":15156.437174487,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":15156.437175227,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":15156.437175957,"data":"  su15-1944f8ab: score=1.72, levels=1.0/9, actions=40, tokens=59637\n"}
+,{"stream_name":"stdout","time":15156.437176667,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":15156.437178837,"data":"  tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":15156.437179637,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":15156.437180417,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":15156.437181777,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":15156.437182687,"data":"\n"}
+,{"stream_name":"stdout","time":15252.943596945,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15372.959097987,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15418.285461866,"data":"[finished] su15-1944f8ab state=gave_up level=3/9 score=13.33 actions=80 tokens=96322 per-level=25/22,31/42,21/26,3/115,0/36,0/31,0/8,0/40,0/41 note=\"tokens=96322\"\n"}
+,{"stream_name":"stdout","time":15492.97416685,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15612.988670103,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15733.001431186,"data":"[sys] RAM 107.9/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15758.240126263,"data":"benchmark: regenerated diagnostics in /kaggle/working in 1.67s\n"}
+,{"stream_name":"stdout","time":15758.240155093,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":15758.240157013,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":15758.240158343,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":15758.240159373,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":15758.240160453,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":15758.240161523,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":15758.240162513,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":15758.240163623,"data":"mean score:    11.38\n"}
+,{"stream_name":"stdout","time":15758.240164613,"data":"median score:  8.03\n"}
+,{"stream_name":"stdout","time":15758.240165593,"data":"total actions: 1826\n"}
+,{"stream_name":"stdout","time":15758.240166543,"data":"total tokens:  2039157\n"}
+,{"stream_name":"stdout","time":15758.240167563,"data":"generated tokens/sec: 135.72 (job wallclock)\n"}
+,{"stream_name":"stdout","time":15758.240168583,"data":"total wallclock: 212516.5s\n"}
+,{"stream_name":"stdout","time":15758.240169573,"data":"\n"}
+,{"stream_name":"stdout","time":15758.240170543,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":15758.240171583,"data":"  ar25-0c556536: score=8.33, levels=2.0/8, actions=80, tokens=39552\n"}
+,{"stream_name":"stdout","time":15758.240172633,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":15758.240173663,"data":"  cd82-fb555c5d: score=6.63, levels=2.0/6, actions=80, tokens=58686\n"}
+,{"stream_name":"stdout","time":15758.240174653,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":15758.240175653,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":15758.240187363,"data":"  ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=80, tokens=76094\n"}
+,{"stream_name":"stdout","time":15758.240188643,"data":"  g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0\n"}
+,{"stream_name":"stdout","time":15758.240189463,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":15758.240190313,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":15758.240191073,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":15758.240191913,"data":"  ls20-9607627b: score=3.27, levels=1.0/7, actions=80, tokens=59937\n"}
+,{"stream_name":"stdout","time":15758.240192763,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":15758.240193543,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":15758.240194453,"data":"  re86-8af5384d: score=8.06, levels=2.0/8, actions=80, tokens=26179\n"}
+,{"stream_name":"stdout","time":15758.240195223,"data":"  s5i5-18d95033: score=8.03, levels=2.0/8, actions=80, tokens=93076\n"}
+,{"stream_name":"stdout","time":15758.240195963,"data":"  sb26-7fbdac44: score=27.78, levels=4.0/8, actions=80, tokens=29351\n"}
+,{"stream_name":"stdout","time":15758.240196713,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":15758.240197443,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":15758.240198183,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":15758.240198913,"data":"  su15-1944f8ab: score=13.33, levels=3.0/9, actions=80, tokens=96322\n"}
+,{"stream_name":"stdout","time":15758.240199643,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":15758.240200403,"data":"  tr87-cd924810: score=14.29, levels=2.0/6, actions=80, tokens=47748\n"}
+,{"stream_name":"stdout","time":15758.240201173,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":15758.240202793,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":15758.240203613,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":15758.240204403,"data":"\n"}
+,{"stream_name":"stdout","time":15764.036587725,"data":"[finished] tr87-cd924810 state=gave_up level=2/6 score=14.29 actions=80 tokens=47748 per-level=33/54,33/58,14/40,0/45,0/71,0/146 note=\"tokens=47748\"\n"}
+,{"stream_name":"stdout","time":15853.015626509,"data":"[sys] RAM 107.8/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":15973.031256453,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":16093.044877116,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 17 threads, 69 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":16213.060510708,"data":"[sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.6/19.5\n"}
+,{"stream_name":"stdout","time":16333.076189663,"data":"[sys] RAM 107.6/176.9 | swap none | proc 0.4 GB, 16 threads, 67 fds | GPU0 93.5/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.7/19.5\n"}
+,{"stream_name":"stdout","time":16359.369161876,"data":"benchmark: regenerated diagnostics in /kaggle/working in 0.99s\n"}
+,{"stream_name":"stdout","time":16359.369190466,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":16359.369192076,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":16359.369193146,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":16359.369193986,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":16359.369194766,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":16359.369195576,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":16359.369196296,"data":"ended:     in progress\n"}
+,{"stream_name":"stdout","time":16359.369197016,"data":"mean score:    11.52\n"}
+,{"stream_name":"stdout","time":16359.369197756,"data":"median score:  8.03\n"}
+,{"stream_name":"stdout","time":16359.369198486,"data":"total actions: 1890\n"}
+,{"stream_name":"stdout","time":16359.369199216,"data":"total tokens:  2129286\n"}
+,{"stream_name":"stdout","time":16359.369199986,"data":"generated tokens/sec: 136.27 (job wallclock)\n"}
+,{"stream_name":"stdout","time":16359.369200776,"data":"total wallclock: 228154.4s\n"}
+,{"stream_name":"stdout","time":16359.369201536,"data":"\n"}
+,{"stream_name":"stdout","time":16359.369202276,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":16359.369203066,"data":"  ar25-0c556536: score=8.33, levels=2.0/8, actions=80, tokens=39552\n"}
+,{"stream_name":"stdout","time":16359.369203866,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":16359.369204656,"data":"  cd82-fb555c5d: score=6.63, levels=2.0/6, actions=80, tokens=58686\n"}
+,{"stream_name":"stdout","time":16359.369205416,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":16359.369206156,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":16359.369206896,"data":"  ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=80, tokens=76094\n"}
+,{"stream_name":"stdout","time":16359.369207636,"data":"  g50t-5849a774: score=3.57, levels=1.0/7, actions=64, tokens=90129\n"}
+,{"stream_name":"stdout","time":16359.369208756,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":16359.369209526,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":16359.369210286,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":16359.369211046,"data":"  ls20-9607627b: score=3.27, levels=1.0/7, actions=80, tokens=59937\n"}
+,{"stream_name":"stdout","time":16359.369211796,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":16359.369212576,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":16359.369213326,"data":"  re86-8af5384d: score=8.06, levels=2.0/8, actions=80, tokens=26179\n"}
+,{"stream_name":"stdout","time":16359.369214086,"data":"  s5i5-18d95033: score=8.03, levels=2.0/8, actions=80, tokens=93076\n"}
+,{"stream_name":"stdout","time":16359.369214846,"data":"  sb26-7fbdac44: score=27.78, levels=4.0/8, actions=80, tokens=29351\n"}
+,{"stream_name":"stdout","time":16359.369215616,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":16359.369216356,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":16359.369228326,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":16359.369229256,"data":"  su15-1944f8ab: score=13.33, levels=3.0/9, actions=80, tokens=96322\n"}
+,{"stream_name":"stdout","time":16359.369230026,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":16359.369230766,"data":"  tr87-cd924810: score=14.29, levels=2.0/6, actions=80, tokens=47748\n"}
+,{"stream_name":"stdout","time":16359.369231496,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":16359.369233226,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":16359.369234026,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":16359.369234806,"data":"\n"}
+,{"stream_name":"stdout","time":16391.677534794,"data":"[finished] g50t-5849a774 state=gave_up level=1/7 score=3.57 actions=80 tokens=94880 per-level=44/78,36/175,0/179,0/230,0/96,0/54,0/67 note=\"tokens=94880\"\n"}
+,{"stream_name":"stdout","time":16395.058599645,"data":"benchmark: regenerated diagnostics in /kaggle/working in 3.05s\n"}
+,{"stream_name":"stdout","time":16395.058617085,"data":"benchmark: duck-harness-kaggle\n"}
+,{"stream_name":"stdout","time":16395.058618845,"data":"solver:    duck-harness\n"}
+,{"stream_name":"stdout","time":16395.058620155,"data":"games:     25\n"}
+,{"stream_name":"stdout","time":16395.058621145,"data":"passes:    1\n"}
+,{"stream_name":"stdout","time":16395.058622215,"data":"runs:      25 (won: 0)\n"}
+,{"stream_name":"stdout","time":16395.058623155,"data":"started:   2026-10-23 15:09:50\n"}
+,{"stream_name":"stdout","time":16395.058624105,"data":"ended:     2026-10-23 19:30:48\n"}
+,{"stream_name":"stdout","time":16395.058625045,"data":"duration:  4h 20m 57s\n"}
+,{"stream_name":"stdout","time":16395.058625975,"data":"mean score:    11.52\n"}
+,{"stream_name":"stdout","time":16395.058626975,"data":"median score:  8.03\n"}
+,{"stream_name":"stdout","time":16395.058627975,"data":"total actions: 1906\n"}
+,{"stream_name":"stdout","time":16395.058628965,"data":"total tokens:  2134037\n"}
+,{"stream_name":"stdout","time":16395.058629945,"data":"generated tokens/sec: 136.29 (job wallclock)\n"}
+,{"stream_name":"stdout","time":16395.058630965,"data":"total wallclock: 228187.6s\n"}
+,{"stream_name":"stdout","time":16395.058631915,"data":"\n"}
+,{"stream_name":"stdout","time":16395.058632875,"data":"per-game (mean across passes):\n"}
+,{"stream_name":"stdout","time":16395.058633835,"data":"  ar25-0c556536: score=8.33, levels=2.0/8, actions=80, tokens=39552\n"}
+,{"stream_name":"stdout","time":16395.058634845,"data":"  bp35-0a0ad940: score=1.57, levels=1.0/9, actions=57, tokens=174352\n"}
+,{"stream_name":"stdout","time":16395.058635855,"data":"  cd82-fb555c5d: score=6.63, levels=2.0/6, actions=80, tokens=58686\n"}
+,{"stream_name":"stdout","time":16395.058636845,"data":"  cn04-2fe56bfb: score=1.04, levels=1.0/6, actions=80, tokens=166346\n"}
+,{"stream_name":"stdout","time":16395.058637815,"data":"  dc22-fdcac232: score=4.76, levels=1.0/6, actions=80, tokens=85320\n"}
+,{"stream_name":"stdout","time":16395.058638775,"data":"  ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=80, tokens=76094\n"}
+,{"stream_name":"stdout","time":16395.058639735,"data":"  g50t-5849a774: score=3.57, levels=1.0/7, actions=80, tokens=94880\n"}
+,{"stream_name":"stdout","time":16395.058640695,"data":"  ka59-38d34dbb: score=2.29, levels=1.0/7, actions=80, tokens=83042\n"}
+,{"stream_name":"stdout","time":16395.058641665,"data":"  lf52-271a04aa: score=1.82, levels=1.0/10, actions=80, tokens=59806\n"}
+,{"stream_name":"stdout","time":16395.058649075,"data":"  lp85-305b61c3: score=41.59, levels=5.0/8, actions=80, tokens=98809\n"}
+,{"stream_name":"stdout","time":16395.058649955,"data":"  ls20-9607627b: score=3.27, levels=1.0/7, actions=80, tokens=59937\n"}
+,{"stream_name":"stdout","time":16395.058650735,"data":"  m0r0-492f87ba: score=14.29, levels=2.0/6, actions=80, tokens=100874\n"}
+,{"stream_name":"stdout","time":16395.058651525,"data":"  r11l-495a7899: score=28.57, levels=3.0/6, actions=46, tokens=159041\n"}
+,{"stream_name":"stdout","time":16395.058652275,"data":"  re86-8af5384d: score=8.06, levels=2.0/8, actions=80, tokens=26179\n"}
+,{"stream_name":"stdout","time":16395.058653045,"data":"  s5i5-18d95033: score=8.03, levels=2.0/8, actions=80, tokens=93076\n"}
+,{"stream_name":"stdout","time":16395.058653825,"data":"  sb26-7fbdac44: score=27.78, levels=4.0/8, actions=80, tokens=29351\n"}
+,{"stream_name":"stdout","time":16395.058654595,"data":"  sc25-635fd71a: score=14.29, levels=2.0/6, actions=80, tokens=67491\n"}
+,{"stream_name":"stdout","time":16395.058655325,"data":"  sk48-d8078629: score=0.00, levels=0.0/8, actions=69, tokens=65983\n"}
+,{"stream_name":"stdout","time":16395.058656065,"data":"  sp80-589a99af: score=4.76, levels=1.0/6, actions=54, tokens=149610\n"}
+,{"stream_name":"stdout","time":16395.058656805,"data":"  su15-1944f8ab: score=13.33, levels=3.0/9, actions=80, tokens=96322\n"}
+,{"stream_name":"stdout","time":16395.058657535,"data":"  tn36-ef4dde99: score=0.00, levels=0.0/7, actions=80, tokens=68926\n"}
+,{"stream_name":"stdout","time":16395.058658275,"data":"  tr87-cd924810: score=14.29, levels=2.0/6, actions=80, tokens=47748\n"}
+,{"stream_name":"stdout","time":16395.058658995,"data":"  tu93-0768757b: score=11.12, levels=3.0/9, actions=80, tokens=92180\n"}
+,{"stream_name":"stdout","time":16395.058660585,"data":"  vc33-5430563c: score=21.08, levels=3.0/7, actions=80, tokens=87801\n"}
+,{"stream_name":"stdout","time":16395.058661395,"data":"  wa30-ee6fef47: score=0.00, levels=0.0/9, actions=80, tokens=52631\n"}
+,{"stream_name":"stdout","time":16395.058662155,"data":"\n"}
+,{"stream_name":"stdout","time":16395.058662855,"data":"diagnostics: /kaggle/working/diagnostics.html\n"}
+,{"stream_name":"stderr","time":16395.93224325,"data":"/usr/local/lib/python3.12/dist-packages/IPython/core/display.py:724: UserWarning: Consider using IPython.display.IFrame instead\n"}
+,{"stream_name":"stderr","time":16395.93225931,"data":"  warnings.warn(\"Consider using IPython.display.IFrame instead\")\n"}
+,{"stream_name":"stderr","time":16395.93226069,"data":"\n"}
+,{"stream_name":"stderr","time":16395.93226149,"data":"/usr/local/lib/python3.12/dist-packages/IPython/core/display.py:724: UserWarning: Consider using IPython.display.IFrame instead\n"}
+,{"stream_name":"stderr","time":16395.93226246,"data":"  warnings.warn(\"Consider using IPython.display.IFrame instead\")\n"}
+,{"stream_name":"stderr","time":16398.182580167,"data":"/usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":16398.182597017,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":16398.375240036,"data":"/usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":16398.375250986,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":16399.744255918,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to notebook\n"}
+,{"stream_name":"stderr","time":16399.916462937,"data":"[NbConvertApp] Writing 2851332 bytes to __notebook__.ipynb\n"}
+,{"stream_name":"stderr","time":16401.32126329,"data":"[NbConvertApp] Converting notebook __notebook__.ipynb to html\n"}
+,{"stream_name":"stderr","time":16402.356710264,"data":"[NbConvertApp] Writing 4428718 bytes to __results__.html\n"}
+]

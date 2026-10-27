@@ -1,0 +1,48 @@
+{
+  "change": "Ignore only the known Kaggle CLI version notice before parsing JSON; unexpected output still fails parsing.",
+  "experiment_id": "P3_ARC3_scheduled_score_monitor_stdout_json_warning_fix",
+  "files": {
+    "monitor_source": "運用/ARC26-UNIFIED/ARC3_Kaggleスコア監視.py",
+    "monitor_source_sha256": "064c4b719bec7877d5239ff31ee7225f9a1176d5d147c5b57590644f5fe4edef",
+    "targeted_test": "検証/test_ARC3KaggleScoreMonitor.py",
+    "targeted_test_sha256": "a1295f25a3431d1881f4e7a581bed2b5ef8edfade4501529179278a16dd849b6"
+  },
+  "format": "arc26-arc3-kaggle-history-monitor-repair-v1",
+  "observed_at_utc": "2026-10-24T11:00:16Z",
+  "protected_files_unchanged": {
+    "AGENTS.md_sha256": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+    "制御/現在状態.json_sha256": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+  },
+  "root_cause": {
+    "command": ".venv/Scripts/python.exe -m kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json",
+    "history_parser_before_fix": "json.loads(result.stdout)",
+    "json_array_starts_on_next_line": true,
+    "notice": "Warning: Looks like you're using an outdated `kaggle` version (installed: 2.2.4), please consider upgrading to the latest version (2.2.5)",
+    "stdout_begins_with_known_cli_version_notice": true
+  },
+  "scheduler": {
+    "enabled": false,
+    "last_run_result": 0,
+    "reason": "Tracked submission is terminal with numeric public score; preserve task but stop redundant polling.",
+    "task_name": "ARC3-Kaggle-Score-Monitor"
+  },
+  "submission_or_rerun_performed": false,
+  "track": "ARC3",
+  "triggering_failure": {
+    "error_type": "JSONDecodeError",
+    "observed_at_utc": "2026-10-24T10:53:01Z",
+    "submission_created": false
+  },
+  "verification": {
+    "latest_history_row": {
+      "date": "2026-10-24T01:15:49.963000",
+      "privateScore": "",
+      "publicScore": "23.86",
+      "ref": 57577905,
+      "status": "SubmissionStatus.COMPLETE"
+    },
+    "live_query_read_only": true,
+    "targeted_test_command": ".venv/Scripts/python.exe -m pytest 検証/test_ARC3KaggleScoreMonitor.py -q",
+    "targeted_test_result": "5 passed"
+  }
+}

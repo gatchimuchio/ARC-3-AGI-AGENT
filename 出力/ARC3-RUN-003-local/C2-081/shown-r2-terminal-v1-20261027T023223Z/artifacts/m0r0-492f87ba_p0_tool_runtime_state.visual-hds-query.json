@@ -1,0 +1,4994 @@
+{
+  "schema": "arc3-python-hds-query-telemetry.v1",
+  "visibility": "shown",
+  "authorization": false,
+  "endorsement": false,
+  "native_judgment_modified": false,
+  "native_scope": "whole_query_original_0.4.2",
+  "counts": {
+    "actual_action_calls_seen": 80,
+    "order_event:action_call_requested": 87,
+    "public_outcome:レベル進行": 2,
+    "public_outcome:可視変化なし": 3,
+    "public_outcome:盤面変化": 75,
+    "update_status:updated": 80
+  },
+  "hds": {
+    "updates_attempted": 80,
+    "updates_succeeded": 80,
+    "queries_attempted": 0,
+    "queries_succeeded": 0,
+    "update_errors": 0,
+    "query_errors": 0,
+    "summary_errors": 0,
+    "prior_updates_attempted": 5,
+    "prior_updates_succeeded": 5,
+    "prior_update_errors": 0,
+    "skipped_resets": 0,
+    "rejected_requests": 0,
+    "budget_exhaustion_requests": 0,
+    "update_seconds": 5.49295,
+    "query_seconds": 0,
+    "total_hds_seconds": 5.503763,
+    "prior_load_seconds": 0.010813,
+    "update_budget": 80,
+    "query_budget": 80,
+    "hds_seconds_budget": 120.0,
+    "update_budget_exhausted": true,
+    "query_budget_exhausted": false,
+    "time_budget_exhausted": false,
+    "time_budget_can_overrun_one_inflight_call": true,
+    "last_error_type": null
+  },
+  "prior": {
+    "version": "arc3-prior-context-v0.1",
+    "loaded_count": 5,
+    "boundary": "ARC3事前記憶",
+    "action_authorization": false,
+    "visible_change_coefficient": 0.0,
+    "expected_count": 5,
+    "load_status": "loaded"
+  },
+  "ordering_trace": [
+    {
+      "sequence": 1,
+      "event": "action_call_requested",
+      "step": 0,
+      "tool_call_id": "python-3:call_33e98976020d4ff58fed3997",
+      "model_turn_id": "model-3"
+    },
+    {
+      "sequence": 2,
+      "event": "action_call_requested",
+      "step": 1,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 3,
+      "event": "action_call_requested",
+      "step": 2,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 4,
+      "event": "action_call_requested",
+      "step": 3,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 5,
+      "event": "action_call_requested",
+      "step": 4,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 6,
+      "event": "action_call_requested",
+      "step": 5,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 7,
+      "event": "action_call_requested",
+      "step": 6,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 8,
+      "event": "action_call_requested",
+      "step": 7,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 9,
+      "event": "action_call_requested",
+      "step": 8,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 10,
+      "event": "action_call_requested",
+      "step": 9,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 11,
+      "event": "action_call_requested",
+      "step": 10,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 12,
+      "event": "action_call_requested",
+      "step": 11,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 13,
+      "event": "action_call_requested",
+      "step": 12,
+      "tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "model_turn_id": "model-9"
+    },
+    {
+      "sequence": 14,
+      "event": "action_call_requested",
+      "step": 13,
+      "tool_call_id": "python-11:call_141e019ffd9a40fd999bf087",
+      "model_turn_id": "model-11"
+    },
+    {
+      "sequence": 15,
+      "event": "action_call_requested",
+      "step": 14,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 16,
+      "event": "action_call_requested",
+      "step": 15,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 17,
+      "event": "action_call_requested",
+      "step": 16,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 18,
+      "event": "action_call_requested",
+      "step": 17,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 19,
+      "event": "action_call_requested",
+      "step": 18,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 20,
+      "event": "action_call_requested",
+      "step": 19,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 21,
+      "event": "action_call_requested",
+      "step": 20,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 22,
+      "event": "action_call_requested",
+      "step": 21,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 23,
+      "event": "action_call_requested",
+      "step": 22,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 24,
+      "event": "action_call_requested",
+      "step": 23,
+      "tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "model_turn_id": "model-14"
+    },
+    {
+      "sequence": 25,
+      "event": "action_call_requested",
+      "step": 24,
+      "tool_call_id": "python-18:call_c9d80f919b534bd4ad25918b",
+      "model_turn_id": "model-18"
+    },
+    {
+      "sequence": 26,
+      "event": "action_call_requested",
+      "step": 25,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 27,
+      "event": "action_call_requested",
+      "step": 26,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 28,
+      "event": "action_call_requested",
+      "step": 27,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 29,
+      "event": "action_call_requested",
+      "step": 28,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 30,
+      "event": "action_call_requested",
+      "step": 29,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 31,
+      "event": "action_call_requested",
+      "step": 30,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 32,
+      "event": "action_call_requested",
+      "step": 31,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 33,
+      "event": "action_call_requested",
+      "step": 32,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 34,
+      "event": "action_call_requested",
+      "step": 33,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 35,
+      "event": "action_call_requested",
+      "step": 34,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 36,
+      "event": "action_call_requested",
+      "step": 35,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 37,
+      "event": "action_call_requested",
+      "step": 36,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 38,
+      "event": "action_call_requested",
+      "step": 37,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 39,
+      "event": "action_call_requested",
+      "step": 38,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 40,
+      "event": "action_call_requested",
+      "step": 39,
+      "tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "model_turn_id": "model-23"
+    },
+    {
+      "sequence": 41,
+      "event": "action_call_requested",
+      "step": 39,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 42,
+      "event": "action_call_requested",
+      "step": 40,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 43,
+      "event": "action_call_requested",
+      "step": 41,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 44,
+      "event": "action_call_requested",
+      "step": 42,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 45,
+      "event": "action_call_requested",
+      "step": 43,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 46,
+      "event": "action_call_requested",
+      "step": 44,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 47,
+      "event": "action_call_requested",
+      "step": 45,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 48,
+      "event": "action_call_requested",
+      "step": 46,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 49,
+      "event": "action_call_requested",
+      "step": 47,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 50,
+      "event": "action_call_requested",
+      "step": 48,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 51,
+      "event": "action_call_requested",
+      "step": 49,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 52,
+      "event": "action_call_requested",
+      "step": 50,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 53,
+      "event": "action_call_requested",
+      "step": 51,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 54,
+      "event": "action_call_requested",
+      "step": 52,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 55,
+      "event": "action_call_requested",
+      "step": 53,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 56,
+      "event": "action_call_requested",
+      "step": 54,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 57,
+      "event": "action_call_requested",
+      "step": 55,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 58,
+      "event": "action_call_requested",
+      "step": 56,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 59,
+      "event": "action_call_requested",
+      "step": 57,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 60,
+      "event": "action_call_requested",
+      "step": 58,
+      "tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "model_turn_id": "model-26"
+    },
+    {
+      "sequence": 61,
+      "event": "action_call_requested",
+      "step": 59,
+      "tool_call_id": "python-27:call_302ca2ba6c2e4f23b74d8626",
+      "model_turn_id": "model-27"
+    },
+    {
+      "sequence": 62,
+      "event": "action_call_requested",
+      "step": 60,
+      "tool_call_id": "python-27:call_302ca2ba6c2e4f23b74d8626",
+      "model_turn_id": "model-27"
+    },
+    {
+      "sequence": 63,
+      "event": "action_call_requested",
+      "step": 61,
+      "tool_call_id": "python-27:call_302ca2ba6c2e4f23b74d8626",
+      "model_turn_id": "model-27"
+    },
+    {
+      "sequence": 64,
+      "event": "action_call_requested",
+      "step": 62,
+      "tool_call_id": "python-31:call_0d003c6036884862b00c2355",
+      "model_turn_id": "model-31"
+    },
+    {
+      "sequence": 65,
+      "event": "action_call_requested",
+      "step": 63,
+      "tool_call_id": "python-32:call_4e4d7fa773dd4ba7894b6108",
+      "model_turn_id": "model-32"
+    },
+    {
+      "sequence": 66,
+      "event": "action_call_requested",
+      "step": 64,
+      "tool_call_id": "python-32:call_4e4d7fa773dd4ba7894b6108",
+      "model_turn_id": "model-32"
+    },
+    {
+      "sequence": 67,
+      "event": "action_call_requested",
+      "step": 65,
+      "tool_call_id": "python-32:call_4e4d7fa773dd4ba7894b6108",
+      "model_turn_id": "model-32"
+    },
+    {
+      "sequence": 68,
+      "event": "action_call_requested",
+      "step": 65,
+      "tool_call_id": "python-33:call_4fd99824b4b64d4e81bdee83",
+      "model_turn_id": "model-33"
+    },
+    {
+      "sequence": 69,
+      "event": "action_call_requested",
+      "step": 66,
+      "tool_call_id": "python-33:call_4fd99824b4b64d4e81bdee83",
+      "model_turn_id": "model-33"
+    },
+    {
+      "sequence": 70,
+      "event": "action_call_requested",
+      "step": 66,
+      "tool_call_id": "python-37:call_7ece51c8059d48baae71ee29",
+      "model_turn_id": "model-37"
+    },
+    {
+      "sequence": 71,
+      "event": "action_call_requested",
+      "step": 67,
+      "tool_call_id": "python-39:call_e74c004eaa2b4ce0975f648b",
+      "model_turn_id": "model-39"
+    },
+    {
+      "sequence": 72,
+      "event": "action_call_requested",
+      "step": 68,
+      "tool_call_id": "python-40:call_d8e0235e8b2e479bb913618b",
+      "model_turn_id": "model-40"
+    },
+    {
+      "sequence": 73,
+      "event": "action_call_requested",
+      "step": 69,
+      "tool_call_id": "python-41:call_891bb30cf4f34b0692e1f012",
+      "model_turn_id": "model-41"
+    },
+    {
+      "sequence": 74,
+      "event": "action_call_requested",
+      "step": 70,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 75,
+      "event": "action_call_requested",
+      "step": 71,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 76,
+      "event": "action_call_requested",
+      "step": 72,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 77,
+      "event": "action_call_requested",
+      "step": 73,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 78,
+      "event": "action_call_requested",
+      "step": 74,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 79,
+      "event": "action_call_requested",
+      "step": 75,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 80,
+      "event": "action_call_requested",
+      "step": 76,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 81,
+      "event": "action_call_requested",
+      "step": 77,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 82,
+      "event": "action_call_requested",
+      "step": 78,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 83,
+      "event": "action_call_requested",
+      "step": 79,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 84,
+      "event": "action_call_requested",
+      "step": 80,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 85,
+      "event": "action_call_requested",
+      "step": 80,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 86,
+      "event": "action_call_requested",
+      "step": 80,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    },
+    {
+      "sequence": 87,
+      "event": "action_call_requested",
+      "step": 80,
+      "tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "model_turn_id": "model-44"
+    }
+  ],
+  "public_response_rows": [
+    {
+      "public_step_before": 0,
+      "public_step_after": 1,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 4,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-3:call_33e98976020d4ff58fed3997",
+      "action_model_turn_id": "model-3",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 1,
+      "public_step_after": 2,
+      "actual_action_number": 3,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 4,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 2,
+      "public_step_after": 3,
+      "actual_action_number": 3,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 3,
+      "public_step_after": 4,
+      "actual_action_number": 2,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 4,
+      "public_step_after": 5,
+      "actual_action_number": 4,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 5,
+      "public_step_after": 6,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 6,
+      "public_step_after": 7,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 7,
+      "public_step_after": 8,
+      "actual_action_number": 4,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 8,
+      "public_step_after": 9,
+      "actual_action_number": 2,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 9,
+      "public_step_after": 10,
+      "actual_action_number": 2,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 10,
+      "public_step_after": 11,
+      "actual_action_number": 3,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 11,
+      "public_step_after": 12,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 12,
+      "public_step_after": 13,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-9:call_1de5a134bbe147d0accfed65",
+      "action_model_turn_id": "model-9",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 13,
+      "public_step_after": 14,
+      "actual_action_number": 5,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 5,
+          "引数あり": false
+        },
+        "公開応答区分": "可視変化なし"
+      },
+      "observed_public_outcome": "可視変化なし",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-11:call_141e019ffd9a40fd999bf087",
+      "action_model_turn_id": "model-11",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 14,
+      "public_step_after": 15,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 15,
+      "public_step_after": 16,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 16,
+      "public_step_after": 17,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 17,
+      "public_step_after": 18,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 18,
+      "public_step_after": 19,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 19,
+      "public_step_after": 20,
+      "actual_action_number": 4,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 20,
+      "public_step_after": 21,
+      "actual_action_number": 4,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 21,
+      "public_step_after": 22,
+      "actual_action_number": 4,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 22,
+      "public_step_after": 23,
+      "actual_action_number": 1,
+      "before_levels_completed": 0,
+      "after_levels_completed": 0,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 23,
+      "public_step_after": 24,
+      "actual_action_number": 4,
+      "before_levels_completed": 0,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "レベル進行"
+      },
+      "observed_public_outcome": "レベル進行",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-14:call_ca8d140ed0d042198bf29921",
+      "action_model_turn_id": "model-14",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 24,
+      "public_step_after": 25,
+      "actual_action_number": 3,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-18:call_c9d80f919b534bd4ad25918b",
+      "action_model_turn_id": "model-18",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 25,
+      "public_step_after": 26,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 26,
+      "public_step_after": 27,
+      "actual_action_number": 3,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 27,
+      "public_step_after": 28,
+      "actual_action_number": 3,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 28,
+      "public_step_after": 29,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 29,
+      "public_step_after": 30,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 30,
+      "public_step_after": 31,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 31,
+      "public_step_after": 32,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 32,
+      "public_step_after": 33,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 33,
+      "public_step_after": 34,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 34,
+      "public_step_after": 35,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 35,
+      "public_step_after": 36,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 36,
+      "public_step_after": 37,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 37,
+      "public_step_after": 38,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 38,
+      "public_step_after": 39,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "可視変化なし"
+      },
+      "observed_public_outcome": "可視変化なし",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-23:call_474e0118084e4b4f844bf0e4",
+      "action_model_turn_id": "model-23",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 39,
+      "public_step_after": 40,
+      "actual_action_number": 3,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 40,
+      "public_step_after": 41,
+      "actual_action_number": 3,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 41,
+      "public_step_after": 42,
+      "actual_action_number": 3,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 42,
+      "public_step_after": 43,
+      "actual_action_number": 3,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 43,
+      "public_step_after": 44,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 44,
+      "public_step_after": 45,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 45,
+      "public_step_after": 46,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 46,
+      "public_step_after": 47,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 47,
+      "public_step_after": 48,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 48,
+      "public_step_after": 49,
+      "actual_action_number": 1,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 49,
+      "public_step_after": 50,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 50,
+      "public_step_after": 51,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 51,
+      "public_step_after": 52,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 52,
+      "public_step_after": 53,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 53,
+      "public_step_after": 54,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 54,
+      "public_step_after": 55,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 55,
+      "public_step_after": 56,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 56,
+      "public_step_after": 57,
+      "actual_action_number": 2,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 57,
+      "public_step_after": 58,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 58,
+      "public_step_after": 59,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-26:call_ebbde39ceac74c33952de316",
+      "action_model_turn_id": "model-26",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 59,
+      "public_step_after": 60,
+      "actual_action_number": 4,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-27:call_302ca2ba6c2e4f23b74d8626",
+      "action_model_turn_id": "model-27",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 60,
+      "public_step_after": 61,
+      "actual_action_number": 1,
+      "before_levels_completed": 1,
+      "after_levels_completed": 1,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-27:call_302ca2ba6c2e4f23b74d8626",
+      "action_model_turn_id": "model-27",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 61,
+      "public_step_after": 62,
+      "actual_action_number": 3,
+      "before_levels_completed": 1,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中高"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "レベル進行"
+      },
+      "observed_public_outcome": "レベル進行",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-27:call_302ca2ba6c2e4f23b74d8626",
+      "action_model_turn_id": "model-27",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 62,
+      "public_step_after": 63,
+      "actual_action_number": 3,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-31:call_0d003c6036884862b00c2355",
+      "action_model_turn_id": "model-31",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 63,
+      "public_step_after": 64,
+      "actual_action_number": 1,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 5,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-32:call_4e4d7fa773dd4ba7894b6108",
+      "action_model_turn_id": "model-32",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 64,
+      "public_step_after": 65,
+      "actual_action_number": 1,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "可視変化なし"
+      },
+      "observed_public_outcome": "可視変化なし",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-32:call_4e4d7fa773dd4ba7894b6108",
+      "action_model_turn_id": "model-32",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 65,
+      "public_step_after": 66,
+      "actual_action_number": 5,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 5,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-33:call_4fd99824b4b64d4e81bdee83",
+      "action_model_turn_id": "model-33",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 66,
+      "public_step_after": 67,
+      "actual_action_number": 6,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中低",
+          "対象局所配置": "N=different|NE=different|E=same|SE=same|S=same|SW=different|W=different|NW=different"
+        },
+        "作用": {
+          "番号": 6,
+          "引数あり": true
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-37:call_7ece51c8059d48baae71ee29",
+      "action_model_turn_id": "model-37",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 67,
+      "public_step_after": 68,
+      "actual_action_number": 3,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 3,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-39:call_e74c004eaa2b4ce0975f648b",
+      "action_model_turn_id": "model-39",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 68,
+      "public_step_after": 69,
+      "actual_action_number": 1,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 1,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-40:call_d8e0235e8b2e479bb913618b",
+      "action_model_turn_id": "model-40",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 69,
+      "public_step_after": 70,
+      "actual_action_number": 6,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低",
+          "対象局所配置": "N=same|NE=same|E=same|SE=same|S=same|SW=same|W=same|NW=same"
+        },
+        "作用": {
+          "番号": 6,
+          "引数あり": true
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-41:call_891bb30cf4f34b0692e1f012",
+      "action_model_turn_id": "model-41",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 70,
+      "public_step_after": 71,
+      "actual_action_number": 6,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 6,
+          "最多色占有帯": "中低",
+          "対象局所配置": "N=different|NE=different|E=same|SE=same|S=same|SW=different|W=different|NW=different"
+        },
+        "作用": {
+          "番号": 6,
+          "引数あり": true
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 71,
+      "public_step_after": 72,
+      "actual_action_number": 2,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 72,
+      "public_step_after": 73,
+      "actual_action_number": 2,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 73,
+      "public_step_after": 74,
+      "actual_action_number": 2,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 74,
+      "public_step_after": 75,
+      "actual_action_number": 2,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 75,
+      "public_step_after": 76,
+      "actual_action_number": 2,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 2,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 76,
+      "public_step_after": 77,
+      "actual_action_number": 4,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 77,
+      "public_step_after": 78,
+      "actual_action_number": 4,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 78,
+      "public_step_after": 79,
+      "actual_action_number": 4,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    },
+    {
+      "public_step_before": 79,
+      "public_step_after": 80,
+      "actual_action_number": 4,
+      "before_levels_completed": 2,
+      "after_levels_completed": 2,
+      "after_public_state": "NOT_FINISHED",
+      "before_public_state": "NOT_FINISHED",
+      "before_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "after_available_actions": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "projected_query_input_at_matching_inspection": null,
+      "projected_update_input": {
+        "作用前公開状態": {
+          "作用可能数": 6,
+          "色種類数": 7,
+          "最多色占有帯": "中低"
+        },
+        "作用": {
+          "番号": 4,
+          "引数あり": false
+        },
+        "公開応答区分": "盤面変化"
+      },
+      "observed_public_outcome": "盤面変化",
+      "matching_candidate_was_queried_before_action": false,
+      "matching_inspection_id": null,
+      "query_tool_call_id": null,
+      "query_model_turn_id": null,
+      "action_tool_call_id": "python-44:call_8df5d64fb15440e4b02ea5dd",
+      "action_model_turn_id": "model-44",
+      "native_status_at_query": null,
+      "native_active_ref_forecast_values_at_query": null,
+      "native_target_counts_at_query": null,
+      "native_summary_truncated_at_query": null,
+      "update_bridge_status": "updated",
+      "endorsement": false,
+      "authorization": false
+    }
+  ],
+  "response_measurement_revision": "matched-query-before-actual-outcome.v1",
+  "past_majority_coverage": "All nonRESET public responses retained, including unqueried preceding outcomes; no future label is included in query evidence.",
+  "last_error_type": null,
+  "raw_boards_coordinates_game_ids_persisted": false,
+  "same_tool_call_query_action_is_not_model_reviewed": true,
+  "learning_action_or_score_improvement_proven": false
+}

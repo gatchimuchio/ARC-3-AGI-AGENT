@@ -1,0 +1,35 @@
+{
+  "experiment": "ARC3-RUN-003/C2-046",
+  "base": "C2-035 v10/v11 prepared notebooks",
+  "arms": {
+    "off": {
+      "notebook_sha256": "b5a77e0e01906c52fd706ff31b3f73473fdf62f8e719af3d54747f3d90fbd828",
+      "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+      "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+      "memory_mode": "off",
+      "loader": "enable_multithread_load=true,num_threads=8",
+      "startup_guard": true,
+      "readiness_gate": true,
+      "offline_guard": true
+    },
+    "slim": {
+      "notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+      "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+      "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+      "memory_mode": "slim",
+      "loader": "enable_multithread_load=true,num_threads=8",
+      "startup_guard": true,
+      "readiness_gate": true,
+      "offline_guard": true
+    }
+  },
+  "controls": {
+    "startup_timeout_seconds": 1800,
+    "offline_games": 3,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "passes": 1,
+    "concurrency": 1,
+    "official_competition_rerun": false
+  }
+}

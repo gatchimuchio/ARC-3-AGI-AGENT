@@ -1,0 +1,325 @@
+{
+  "evaluation": "ARC3-RUN-002-C1-003",
+  "scope": "25 public environments, current exploration policy, action seed 31, max 80 requests, SDK RESET after GAME_OVER",
+  "split_seed": 20261022,
+  "public_environment_count": 25,
+  "all_game_runs_same_public_policy": true,
+  "game_count_with_multiframe_response": 15,
+  "aggregate": {
+    "response_count": 2000,
+    "response_frame_count": 7833,
+    "multi_frame_responses": 654,
+    "distinct_response_grids": 4443,
+    "intermediate_grids_different_from_final": 2443,
+    "transient_cells_returning_to_prior_value": 43632,
+    "uncomparable_transitions": 0
+  },
+  "by_action_name": {
+    "ACTION6": {
+      "response_count": 631,
+      "response_frame_count": 1838,
+      "multi_frame_responses": 241,
+      "distinct_response_grids": 1213,
+      "intermediate_grids_different_from_final": 582,
+      "transient_cells_returning_to_prior_value": 25021,
+      "uncomparable_transitions": 0
+    },
+    "ACTION7": {
+      "response_count": 56,
+      "response_frame_count": 89,
+      "multi_frame_responses": 33,
+      "distinct_response_grids": 56,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    "RESET": {
+      "response_count": 15,
+      "response_frame_count": 16,
+      "multi_frame_responses": 1,
+      "distinct_response_grids": 15,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    "ACTION1": {
+      "response_count": 236,
+      "response_frame_count": 374,
+      "multi_frame_responses": 40,
+      "distinct_response_grids": 318,
+      "intermediate_grids_different_from_final": 82,
+      "transient_cells_returning_to_prior_value": 585,
+      "uncomparable_transitions": 0
+    },
+    "ACTION3": {
+      "response_count": 292,
+      "response_frame_count": 476,
+      "multi_frame_responses": 65,
+      "distinct_response_grids": 411,
+      "intermediate_grids_different_from_final": 119,
+      "transient_cells_returning_to_prior_value": 5003,
+      "uncomparable_transitions": 0
+    },
+    "ACTION2": {
+      "response_count": 262,
+      "response_frame_count": 417,
+      "multi_frame_responses": 44,
+      "distinct_response_grids": 376,
+      "intermediate_grids_different_from_final": 114,
+      "transient_cells_returning_to_prior_value": 437,
+      "uncomparable_transitions": 0
+    },
+    "ACTION4": {
+      "response_count": 334,
+      "response_frame_count": 775,
+      "multi_frame_responses": 103,
+      "distinct_response_grids": 713,
+      "intermediate_grids_different_from_final": 379,
+      "transient_cells_returning_to_prior_value": 996,
+      "uncomparable_transitions": 0
+    },
+    "ACTION5": {
+      "response_count": 174,
+      "response_frame_count": 3848,
+      "multi_frame_responses": 127,
+      "distinct_response_grids": 1341,
+      "intermediate_grids_different_from_final": 1167,
+      "transient_cells_returning_to_prior_value": 11590,
+      "uncomparable_transitions": 0
+    }
+  },
+  "per_game_anonymous_counts": [
+    {
+      "response_count": 80,
+      "response_frame_count": 372,
+      "multi_frame_responses": 73,
+      "distinct_response_grids": 372,
+      "intermediate_grids_different_from_final": 292,
+      "transient_cells_returning_to_prior_value": 7744,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 368,
+      "multi_frame_responses": 45,
+      "distinct_response_grids": 136,
+      "intermediate_grids_different_from_final": 56,
+      "transient_cells_returning_to_prior_value": 1355,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 85,
+      "multi_frame_responses": 1,
+      "distinct_response_grids": 81,
+      "intermediate_grids_different_from_final": 1,
+      "transient_cells_returning_to_prior_value": 3958,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 143,
+      "multi_frame_responses": 3,
+      "distinct_response_grids": 92,
+      "intermediate_grids_different_from_final": 12,
+      "transient_cells_returning_to_prior_value": 108,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 620,
+      "multi_frame_responses": 71,
+      "distinct_response_grids": 509,
+      "intermediate_grids_different_from_final": 429,
+      "transient_cells_returning_to_prior_value": 371,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 167,
+      "multi_frame_responses": 16,
+      "distinct_response_grids": 166,
+      "intermediate_grids_different_from_final": 86,
+      "transient_cells_returning_to_prior_value": 5466,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 3155,
+      "multi_frame_responses": 75,
+      "distinct_response_grids": 830,
+      "intermediate_grids_different_from_final": 750,
+      "transient_cells_returning_to_prior_value": 3600,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 206,
+      "multi_frame_responses": 9,
+      "distinct_response_grids": 171,
+      "intermediate_grids_different_from_final": 91,
+      "transient_cells_returning_to_prior_value": 1548,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 345,
+      "multi_frame_responses": 80,
+      "distinct_response_grids": 139,
+      "intermediate_grids_different_from_final": 59,
+      "transient_cells_returning_to_prior_value": 4658,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 149,
+      "multi_frame_responses": 67,
+      "distinct_response_grids": 149,
+      "intermediate_grids_different_from_final": 69,
+      "transient_cells_returning_to_prior_value": 814,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 444,
+      "multi_frame_responses": 52,
+      "distinct_response_grids": 340,
+      "intermediate_grids_different_from_final": 260,
+      "transient_cells_returning_to_prior_value": 468,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 261,
+      "multi_frame_responses": 80,
+      "distinct_response_grids": 192,
+      "intermediate_grids_different_from_final": 112,
+      "transient_cells_returning_to_prior_value": 1444,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 368,
+      "multi_frame_responses": 72,
+      "distinct_response_grids": 152,
+      "intermediate_grids_different_from_final": 72,
+      "transient_cells_returning_to_prior_value": 5760,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 81,
+      "multi_frame_responses": 1,
+      "distinct_response_grids": 81,
+      "intermediate_grids_different_from_final": 1,
+      "transient_cells_returning_to_prior_value": 2,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 269,
+      "multi_frame_responses": 9,
+      "distinct_response_grids": 233,
+      "intermediate_grids_different_from_final": 153,
+      "transient_cells_returning_to_prior_value": 6336,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    },
+    {
+      "response_count": 80,
+      "response_frame_count": 80,
+      "multi_frame_responses": 0,
+      "distinct_response_grids": 80,
+      "intermediate_grids_different_from_final": 0,
+      "transient_cells_returning_to_prior_value": 0,
+      "uncomparable_transitions": 0
+    }
+  ],
+  "interpretation_boundary": "frame order and grid differences are measured; animation or gameplay meaning is not inferred",
+  "source_sha256": {
+    "runner": "56e7032e6a45a74a75ffae72dc2000608140ee2d2f0a98c67b367c652a20a0ad",
+    "boundary": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "starter_agent": "85655f7a11a105e50bba76efd00bebf8056d02ddbae827a8f8a5b46e849fc087"
+  }
+}

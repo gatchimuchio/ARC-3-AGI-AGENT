@@ -1,0 +1,48 @@
+{
+  "schema": "arc3-c2-051-pre-run-review.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "observed_at_utc": "2026-10-24T20:32:15Z",
+  "candidate": {
+    "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+    "notebook_sha256": "0caf246e690489e225a4a1fe6b2de6e04c56ffdfc0b3ba310fc192ecfd9ca482",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "base_experiment": "C2-048 version 15"
+  },
+  "source_review": {
+    "changed_notebook_cells": [
+      3
+    ],
+    "all_other_cell_sources_equal_to_base": true,
+    "kernel_metadata_identical_to_base": true,
+    "change": "clear current_plan on level transition while retaining world_model",
+    "embedded_patch_parse": "git apply --numstat parsed all 17 patched paths",
+    "patch_sha256": "136479ee749a812176c320388f80563364fce227202b7f42d161d17a7711e321"
+  },
+  "metadata_controls": {
+    "is_private": true,
+    "enable_gpu": true,
+    "enable_internet": false,
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "local_offline_benchmark": true
+  },
+  "resource_gate": {
+    "previous_latest_status": "KernelWorkerStatus.COMPLETE",
+    "previous_lastRunTime": "2026-10-24T19:08:17.393Z",
+    "previous_v16_failure_artifact": "運用/証拠/ARC26-UNIFIED/ARC3-C2-050-v16-terminal-error-20261024T192335Z.json",
+    "previous_v17_terminal_record": "運用/証拠/ARC26-UNIFIED/ARC3-C2-050-v17-terminal-scorecard-20261024T202855Z.json",
+    "concurrency_limit": 1,
+    "no_previous_active_run_observed": true
+  },
+  "acceptance_gate": {
+    "same_public_start_states": 3,
+    "reference_mean": 19.309155943771326,
+    "strictly_higher_mean_required": true,
+    "positive_paired_delta_required": true,
+    "official_competition_submission_or_rerun": false,
+    "quota_use": false
+  },
+  "status": "READY_FOR_SINGLE_PRIVATE_PILOT; not pushed at review time"
+}

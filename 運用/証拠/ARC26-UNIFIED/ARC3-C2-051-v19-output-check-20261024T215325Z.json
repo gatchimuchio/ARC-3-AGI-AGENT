@@ -1,0 +1,22 @@
+{
+  "schema": "arc3-c2-051-attempt2-output-check.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+  "kernel_version": 19,
+  "observed_at_utc": "2026-10-24T21:53:25Z",
+  "query": "kaggle kernels output tecchannn/arc3-model-guided-c2-025/19 --file-pattern ^(benchmark\\.json|summary\\.txt)$",
+  "downloaded_file": "運用/証拠/ARC26-UNIFIED/C2-051-v19-score-artifacts/arc3-model-guided-c2-025.log",
+  "downloaded_file_bytes": 28887,
+  "downloaded_file_sha256": "4b017beed41114d03e90e68c2833a3c9dcec396100be77acf8c5237700efd1d1",
+  "matching_score_artifacts_found": [],
+  "local_output_directory_files": [
+    "arc3-model-guided-c2-025.log"
+  ],
+  "log_terminal_marker_seconds": 2468.241,
+  "log_failure": "SGLang inference readiness was not confirmed; offline benchmark not started",
+  "benchmark_started": false,
+  "score_available": false,
+  "official_submission_or_rerun": false,
+  "duplicate_push": false
+}

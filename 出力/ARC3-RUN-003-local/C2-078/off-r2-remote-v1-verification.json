@@ -1,0 +1,24 @@
+{
+  "schema": "arc3-exact-remote-source-verification.v1",
+  "run_id": "ARC3-RUN-003-C2-078-OFF-R2-V1-SOURCE",
+  "observed_at_utc": "2026-10-26T22:49:33+00:00",
+  "kernel": "tecchannn/arc3-visual-hds-v6-off-pilot",
+  "version": 1,
+  "command": [
+    "kaggle",
+    "kernels",
+    "pull",
+    "tecchannn/arc3-visual-hds-v6-off-pilot/1",
+    "--metadata"
+  ],
+  "local_notebook": "出力/ARC3-RUN-003-local/C2-078/off-r2/submission.ipynb",
+  "local_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+  "remote_notebook": "出力/ARC3-RUN-003-local/C2-078/off-r2-remote-v1/arc3-visual-hds-v6-off-pilot.ipynb",
+  "remote_raw_sha256": "2bd0dbf4d6146e6dfff1a9d7ca1b45e32e69cc202423f82744710ad8e9033603",
+  "cell_count": 26,
+  "all_cell_types_and_joined_sources_match": true,
+  "local_metadata_sha256": "3c6537a086acb9990166049555c51f73d0a8a162069f0788711e122b1e521113",
+  "remote_metadata_sha256": "d3d89f51fe5ab7df06020af64aa893a00db5745520c15482a20b81bbd84c9f27",
+  "raw_notebook_identity_claimed": false,
+  "model_or_game_execution_confirmed": false
+}

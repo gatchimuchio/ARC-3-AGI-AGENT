@@ -1,0 +1,100 @@
+{
+  "schema": "arc3-visual-hds-matched-scorecard.v1",
+  "observed_at_utc": "2026-10-26T23:30:22.787326+00:00",
+  "inspection": "single_off",
+  "score_helper_sha256": "d19754a0e8df5aaeb73a5b763517bc4c5aa5a413fd4b08e8f11d0725f8e066ac",
+  "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+  "score_source_file_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7",
+  "scorecard_source_sha256": "49874aff3eb2f5b188d5d09ab0f61f44e7f69b02b93e2c6ee8c137b57dfcc530",
+  "official_score_observed": false,
+  "official_submission_or_quota_use": false,
+  "causal_learning_or_score_improvement_proven": false,
+  "limitation": "Shadow does not alter model context/actions; fixed model seed does not prove GPU determinism. Repeats are required for causal comparisons.",
+  "arm": {
+    "kernel": "tecchannn/arc3-visual-hds-v6-off-pilot",
+    "version": 1,
+    "status": "KernelWorkerStatus.COMPLETE",
+    "mode": "off",
+    "build_manifest_sha256": "175808d149c9da773de00b578dd15f58b5e07ae099ca9cf64cdae4e513e2db11",
+    "retrieval_manifest_sha256": "5ba043dd55eb22e243866550efb6ac95a176755318dad20703dd569c39c93092",
+    "notebook_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+    "selected_output_manifest_sha256": "919fe472c53ab5cd2e2bee5d372a6a00d3b9caff49cf86ab20826e8fb994cd03",
+    "selected_output_file_count": 11,
+    "retrieval_scope": "Selected benchmark, events, visual-HDS sidecars, git status, and logs only; not all kernel output files. No pickles/videos/requests loaded.",
+    "benchmark_sha256": "1b83e9bc402a278171f3db76c1d3bd476908857563a89d3e330ba6a41ce5d0fc",
+    "games": 3,
+    "public_offline_RHAE_mean": 8.333333333333332,
+    "saved_scores_match_recomputed": true,
+    "run_state_counts": {
+      "gave_up": 3
+    },
+    "levels_completed": 4,
+    "levels_total": 21,
+    "actual_actions": 240,
+    "history_generated_tokens": 195480,
+    "visual_model_generation_observed": true,
+    "all_games_visual_model_generation_observed": true,
+    "games_with_visual_model_generation": 3,
+    "visual_generation_flags_in_benchmark_order_when_invalid": null,
+    "job_elapsed_seconds": 1464.962677,
+    "max_game_elapsed_seconds": 581.2594804390001,
+    "runtime_budget_compliant_with_5s_grace": true,
+    "pilot": {
+      "games_max": 3,
+      "passes": 1,
+      "concurrency": 1,
+      "actions_max": 80,
+      "runtime_seconds_max": 1200,
+      "competition_rerun_allowed": false
+    },
+    "shared_model_seed": 0,
+    "HDS": {
+      "sidecars": 3,
+      "integration_valid": true,
+      "games_with_prior_and_actual_query_update": 0,
+      "counters": {
+        "actual_action_calls_seen": 240
+      },
+      "operations": {},
+      "seconds": {},
+      "prior_status_counts": {},
+      "error_type_counts": {},
+      "adapter_error_count": 0,
+      "HDS_error_count": 0,
+      "budget_exhausted_game_counts": {},
+      "budgets_per_game": {
+        "update_budget": 80,
+        "query_budget": 80,
+        "hds_seconds_budget": 120.0
+      },
+      "max_soft_time_budget_overrun_seconds": 0.0,
+      "soft_time_budget_can_overrun_one_inflight_call": true,
+      "off_zero_HDS_confirmed": true,
+      "prediction_measurement_revision_counts": {
+        "render_hint_only": 3
+      },
+      "prediction_match_measurement": {
+        "status": "NOT_APPLICABLE_OFF",
+        "observations": 0,
+        "matches": 0,
+        "conditional_match_fraction": null,
+        "limitation": "Rendered-context telemetry uses render_hint; a global native HOLD can suppress target-supported predictions. Zero observed matches do not establish absence of learned rules."
+      },
+      "target_qualified_prediction_measurement": {
+        "status": "NOT_APPLICABLE_OFF",
+        "forecast_queries": 0,
+        "unique_predictions_observed": 0,
+        "matches": 0,
+        "conditional_match_fraction": null,
+        "multiple_prediction_values": 0,
+        "native_status_counts": {},
+        "blocked_reason_counts": {},
+        "causal_learning_or_score_improvement_proven": false
+      }
+    },
+    "execution_valid": true,
+    "integration_valid": true
+  },
+  "integration_valid": true,
+  "paired_comparison_performed": false
+}

@@ -1,0 +1,195 @@
+{
+  "評価": "作用前盤面色分布を使ったHDS shadow予測",
+  "範囲": "固定dev先頭5公開環境、environment seed 31、policy seed 7/31/73、各80要求",
+  "splitSeed": 20261022,
+  "trainFraction": 0.75,
+  "developmentEnvironmentCount": 5,
+  "allPublicStartsMatch": true,
+  "byPolicySeed": {
+    "7": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 394,
+      "学習件数": 294,
+      "後半照会件数": 100,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 99,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "BoardHDS単一予測": 40,
+          "BoardHDS正答": 40,
+          "共通coverage": 20,
+          "共通ActionOnlyHDS正答": 20,
+          "共通BoardHDS正答": 20,
+          "共通Action多数派正答": 20,
+          "BoardHDSが多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 100,
+          "ActionOnlyHDS単一予測": 60,
+          "ActionOnlyHDS正答": 60,
+          "BoardHDS単一予測": 60,
+          "BoardHDS正答": 60,
+          "共通coverage": 60,
+          "共通ActionOnlyHDS正答": 60,
+          "共通BoardHDS正答": 60,
+          "共通Action多数派正答": 60,
+          "BoardHDSが多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 85,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "BoardHDS単一予測": 20,
+          "BoardHDS正答": 20,
+          "共通coverage": 20,
+          "共通ActionOnlyHDS正答": 20,
+          "共通BoardHDS正答": 20,
+          "共通Action多数派正答": 20,
+          "BoardHDSが多数派誤りを正答": 0
+        }
+      }
+    },
+    "31": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 394,
+      "学習件数": 294,
+      "後半照会件数": 100,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 99,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "BoardHDS単一予測": 40,
+          "BoardHDS正答": 40,
+          "共通coverage": 20,
+          "共通ActionOnlyHDS正答": 20,
+          "共通BoardHDS正答": 20,
+          "共通Action多数派正答": 20,
+          "BoardHDSが多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 100,
+          "ActionOnlyHDS単一予測": 60,
+          "ActionOnlyHDS正答": 60,
+          "BoardHDS単一予測": 60,
+          "BoardHDS正答": 60,
+          "共通coverage": 60,
+          "共通ActionOnlyHDS正答": 60,
+          "共通BoardHDS正答": 60,
+          "共通Action多数派正答": 60,
+          "BoardHDSが多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 81,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "BoardHDS単一予測": 40,
+          "BoardHDS正答": 40,
+          "共通coverage": 20,
+          "共通ActionOnlyHDS正答": 20,
+          "共通BoardHDS正答": 20,
+          "共通Action多数派正答": 20,
+          "BoardHDSが多数派誤りを正答": 0
+        }
+      }
+    },
+    "73": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 394,
+      "学習件数": 294,
+      "後半照会件数": 100,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 93,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "BoardHDS単一予測": 40,
+          "BoardHDS正答": 40,
+          "共通coverage": 20,
+          "共通ActionOnlyHDS正答": 20,
+          "共通BoardHDS正答": 20,
+          "共通Action多数派正答": 20,
+          "BoardHDSが多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 100,
+          "ActionOnlyHDS単一予測": 60,
+          "ActionOnlyHDS正答": 60,
+          "BoardHDS単一予測": 60,
+          "BoardHDS正答": 60,
+          "共通coverage": 60,
+          "共通ActionOnlyHDS正答": 60,
+          "共通BoardHDS正答": 60,
+          "共通Action多数派正答": 60,
+          "BoardHDSが多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 75,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "BoardHDS単一予測": 40,
+          "BoardHDS正答": 39,
+          "共通coverage": 20,
+          "共通ActionOnlyHDS正答": 20,
+          "共通BoardHDS正答": 20,
+          "共通Action多数派正答": 20,
+          "BoardHDSが多数派誤りを正答": 0
+        }
+      }
+    }
+  },
+  "features": {
+    "ActionOnlyHDS": [
+      "条件.Action番号"
+    ],
+    "BoardHDS追加条件": [
+      "条件.事前盤面色分布帯"
+    ],
+    "targets": [
+      "結果.可視変化あり",
+      "結果.level進行あり",
+      "結果.新規盤面あり"
+    ]
+  },
+  "input": {
+    "publicEnvironmentFileCount": 50,
+    "contentSetSha256": "d40c652dfffda990a1a32c65da3d873a36bb9c4b6bd06598704596af3c2ead79"
+  },
+  "source_sha256": {
+    "evaluation_runner": "1bb6e3546546ae79434033cc49e04f7e5de9a9e8b8a116589615648421ec0698",
+    "local_evaluation_runner": "ba8f89bf09077622f5c67e0ba310b5c2ac68d240412178a371b7e2a3f6c22088",
+    "frame_parser": "fd940efb544e09c8a7a07bdf7d81c791f4dfd755382dc355f29e8f9c7fec4b98",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510"
+  },
+  "exclusion": [
+    "game/level identifiers",
+    "GUID",
+    "raw board and color values",
+    "coordinates",
+    "same-response outcome features",
+    "trajectory"
+  ],
+  "interpretation_boundary": "within-environment sequential dev split only; no cross-game transfer or official-score claim"
+}

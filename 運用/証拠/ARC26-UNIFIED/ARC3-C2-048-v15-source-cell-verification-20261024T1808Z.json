@@ -1,0 +1,58 @@
+{
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-048-V15-SOURCE-ATTRIBUTION",
+  "observed_at_utc": "2026-10-24T18:08:00Z",
+  "kaggle_kernel": "tecchannn/arc3-model-guided-c2-025/15",
+  "kernel_status": "KernelWorkerStatus.RUNNING",
+  "local_candidate": {
+    "path": "出力\\ARC3-RUN-003-local\\C2-048\\source\\retention\\submission.ipynb",
+    "notebook_sha256": "ba2977ced60f1a37e1a795c8c872afa81a7b2644f16069f45615bbe499403aad",
+    "metadata_path": "出力\\ARC3-RUN-003-local\\C2-048\\source\\retention\\kernel-metadata.json",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372"
+  },
+  "versioned_kaggle_source": {
+    "path": "出力\\Kaggle\\arc3-kernel-v15-source-versioned-20261024\\arc3-model-guided-c2-025.ipynb",
+    "notebook_sha256": "19cce0304bdd71fb72cfea66906574182ca832276ab7e41b23be255a55e14636",
+    "metadata_path": "出力\\Kaggle\\arc3-kernel-v15-source-versioned-20261024\\kernel-metadata.json",
+    "metadata_sha256": "24510cb150142a2ee5787ba9626912da0ff349f7b0960255683c95f32f93ffdb"
+  },
+  "cell_source_comparison": {
+    "local_cell_count": 25,
+    "kaggle_cell_count": 25,
+    "cell_sources_equal": true,
+    "local_cell_sources_sha256": "a7ae8e7a85caff652fe2a26d3eea97dbb3fcf589a917b8c7935f27d908375225",
+    "kaggle_cell_sources_sha256": "a7ae8e7a85caff652fe2a26d3eea97dbb3fcf589a917b8c7935f27d908375225"
+  },
+  "metadata_comparison": {
+    "shared_execution_fields_equal": true,
+    "compared_fields": [
+      "competition_sources",
+      "dataset_sources",
+      "docker_image",
+      "enable_gpu",
+      "enable_internet",
+      "id",
+      "is_private",
+      "kernel_sources",
+      "kernel_type",
+      "language",
+      "machine_shape",
+      "model_sources",
+      "title"
+    ],
+    "known_serialization_differences": {
+      "code_file": [
+        "submission.ipynb",
+        "arc3-model-guided-c2-025.ipynb"
+      ],
+      "server_added_fields": [
+        "enable_tpu",
+        "id_no",
+        "keywords"
+      ]
+    }
+  },
+  "output_files_read": false,
+  "official_submission_or_rerun": false,
+  "interpretation": "Raw notebook and metadata hashes differ after Kaggle serialization, but all 25 cell source strings and shared execution metadata match. This attributes version 15 source content to the local C2-048 candidate; the run remains nonterminal."
+}

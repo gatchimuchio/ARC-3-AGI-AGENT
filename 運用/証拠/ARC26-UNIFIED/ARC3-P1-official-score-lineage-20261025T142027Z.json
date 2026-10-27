@@ -1,0 +1,122 @@
+{
+  "schema": "arc26-arc3-p1-official-score-lineage.v1",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-25T14:20:27Z",
+  "objective": "Link observed official scores to exact kernel versions and verify remote/local Notebook cell source identity without altering or rerunning kernels.",
+  "official_history_evidence": {
+    "path": "運用/証拠/ARC26-UNIFIED/official-history-20261025T141313Z.json",
+    "sha256": "6cfe53a064df891f02c39cfb69fe45ab50b2341abf39fd8ebd3fd8eda737ff11",
+    "retrieved_at_utc": "2026-10-25T14:13:13.502Z",
+    "latest_submission_refs": [
+      "57612586",
+      "57577905",
+      "57541830",
+      "57527856"
+    ],
+    "submission_limits_raw": "Submissions today: 1\r\nLifetime submissions: 7\r\nRemaining today: 0",
+    "submission_or_rerun_performed": false
+  },
+  "score_lineage": [
+    {
+      "submission_id": "57577905",
+      "status": "SubmissionStatus.COMPLETE",
+      "public_score": 23.86,
+      "private_score": "not provided",
+      "submitted_at_utc": "2026-10-24T01:15:49.963000Z",
+      "official_description": "ARC3-RUN-003 C1-018 paired public scorecard validated v5",
+      "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+      "kernel_version": 5,
+      "score_comparisons": {
+        "B1_submission_57541830_public_score": 0.25,
+        "delta_vs_B1": 23.61,
+        "B0_submission_57527856_public_score": 0.0,
+        "delta_vs_B0": 23.86
+      },
+      "notebook_cell_source_comparison": {
+        "local": {
+          "path": "出力/ARC3-RUN-002-local/C2-029-source/v5-submission.ipynb",
+          "raw_sha256": "5763f69d0794d7161dbe81a967edd2c10a6810c92ed1a28208bd47222fd5dfbc",
+          "bytes": 574910,
+          "cells": 25,
+          "code_cells": 12,
+          "ordered_cell_source_sha256": "891a4889c57c3ac1cae3faba8384108d9d8a47096b3a76eaee72cd18e14c36dc"
+        },
+        "remote_exact_version_pull": {
+          "path": "運用/証拠/ARC26-UNIFIED/ARC3-P1-v5-remote-version5/arc3-model-guided-c2-025.ipynb",
+          "raw_sha256": "d0927468aefdc22183ac1ca0bf84ccd2a46ea526e349c342e876683393bd3cff",
+          "bytes": 571184,
+          "cells": 25,
+          "code_cells": 12,
+          "ordered_cell_source_sha256": "891a4889c57c3ac1cae3faba8384108d9d8a47096b3a76eaee72cd18e14c36dc"
+        },
+        "all_ordered_cell_sources_match": true,
+        "raw_notebook_bytes_match": false
+      },
+      "official_result_linkage": "Kaggle history description names C1-018 paired public scorecard v5; C1-018 execution record names kernel version 5 and local source SHA. Raw Notebook bytes differ after Kaggle pull, while all 25 ordered cell sources (12 code cells) match. The official score is version-linked; source commit/input/output hashes were not present in the score ledger."
+    },
+    {
+      "submission_id": "57612586",
+      "status": "SubmissionStatus.COMPLETE",
+      "public_score": 0.03,
+      "private_score": "not provided",
+      "submitted_at_utc": "2026-10-25T01:16:07.830000Z",
+      "official_description": "ARC3 prior-memory coefficient public-25 scorecard candidate 2026-10-25",
+      "kernel_slug": "tecchannn/arc3-observation-driven-exploration-candidate",
+      "kernel_version": 6,
+      "score_delta_vs_57577905": -23.83,
+      "notebook_cell_source_comparison": {
+        "local": {
+          "path": "出力/ARC3-SUBMIT-012-prior-memory-20261025/submission.ipynb",
+          "raw_sha256": "957182aee3420dfa2687cfe6a5ca95e5b47af69fd3f29dfb7402bb2f5dd0a3f4",
+          "bytes": 155213,
+          "cells": 5,
+          "code_cells": 4,
+          "ordered_cell_source_sha256": "3dbad0cf74f8537224ba3ffe6a5f9cf7f5a4ff561995f5e2582384a46d410be6"
+        },
+        "remote_exact_version_pull": {
+          "path": "運用/証拠/ARC26-UNIFIED/ARC3-P1-v6-remote-version6/arc3-observation-driven-exploration-candidate.ipynb",
+          "raw_sha256": "ed82fa9c37271f27b4aaf497a657ea9175f7d73240df2e26fa4cd9498fcd021b",
+          "bytes": 154838,
+          "cells": 5,
+          "code_cells": 4,
+          "ordered_cell_source_sha256": "3dbad0cf74f8537224ba3ffe6a5f9cf7f5a4ff561995f5e2582384a46d410be6"
+        },
+        "all_ordered_cell_sources_match": true,
+        "raw_notebook_bytes_match": false
+      },
+      "embedded_source_bundle_sha256": "d802bdad39437e5e31617cba4653b69dae447450d172f29281716859165a3319",
+      "manifest_source_bundle_sha256": "d802bdad39437e5e31617cba4653b69dae447450d172f29281716859165a3319",
+      "source_bundle_match": true,
+      "source_identity_note": "Raw Notebook hashes differ, but all 5 ordered cell sources (4 code cells) match. Remote pull is preserved under ARC3-P1-v6-remote-version6. Official rerun output was not retrieved; the saved Run submission.parquet was a placeholder, so source-cell lineage is verified while exact scored output bytes are unavailable."
+    }
+  ],
+  "local_evaluation_context": {
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-prior-memory-scorecard-paired-eval-20261025T011453Z.json",
+    "sha256": "06adcede7756767598bcf712abb68cac015e7dabb94d6ef6dfed470cd7eb599f",
+    "previous_mean": 0.190256343,
+    "candidate_mean": 0.209349227,
+    "delta": 0.019092884,
+    "previous_wins": 0,
+    "candidate_wins": 0,
+    "is_official_score": false
+  },
+  "c1_018_execution_record": {
+    "path": "検証/運転記録/ARC3-RUN-003_C1-018_modelv5公式Rerun_20261024.md",
+    "sha256": "81af44e2b37dbe98a40ab81cc442d9665a2732501c4c5749aec03a7e4b1ee739",
+    "local_v5_notebook_sha256": "5763f69d0794d7161dbe81a967edd2c10a6810c92ed1a28208bd47222fd5dfbc",
+    "kernel_version": 5,
+    "submission_id": "57577905"
+  },
+  "limitations": [
+    "Private scores were not provided for either completed submission.",
+    "C1-018 official output parquet and source commit/input SHA are not captured in the score ledger.",
+    "C1-018 and v6 scores are separate versions with different code; the public-25 local scorecard does not predict or replace official competition score.",
+    "Neither official score is evidence that current main, HDS/memory use, hidden-set transfer, or wins were verified."
+  ],
+  "read_only_actions": [
+    "Pulled Kaggle kernel tecchannn/arc3-model-guided-c2-025/5 into a new evidence directory.",
+    "Copied the already-pulled exact v6 notebook byte-for-byte into this repo.",
+    "Compared ordered cell_type and source text for local vs remote notebooks.",
+    "No kernel edit, push, rerun, competition submission, or quota use."
+  ]
+}

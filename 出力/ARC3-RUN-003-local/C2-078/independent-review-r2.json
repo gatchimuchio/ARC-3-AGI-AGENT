@@ -1,0 +1,118 @@
+{
+  "schema": "arc3-c2-078-independent-review-r2.v1",
+  "evidence_written_at_utc": "2026-10-26T22:44:53Z",
+  "reviewer": "paired_audit",
+  "decision": "READY_FOR_ONE_PRIVATE_OFF_CONTROL_PREFLIGHT",
+  "material_blockers_found": [],
+  "arms": {
+    "off-r2": {
+      "notebook_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+      "metadata_sha256": "3c6537a086acb9990166049555c51f73d0a8a162069f0788711e122b1e521113",
+      "source_bundle_sha256": "c21517f22af814571982df1412934074b5ff67132715e98419e9e5d85b06d9c4",
+      "build_manifest_sha256": "175808d149c9da773de00b578dd15f58b5e07ae099ca9cf64cdae4e513e2db11",
+      "hashes_match_build_manifest": true,
+      "changed_base_source_cell_indices": [
+        18
+      ],
+      "model_config_cell5_unchanged": true,
+      "tool_agent_sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+      "patched_solver_sha256": "6a05212fc955020db8fd2027aa5c16626c593ad83a95b967d3e1c92372bdc5bc",
+      "generated_patch_cell_has_model_seed_zero": true,
+      "generated_pth_uses_real_newline": true
+    },
+    "shadow-r2": {
+      "notebook_sha256": "7fc83b748b3db2f8881e26ada0e8a8732b7b400220f4dd3809fa8a525da16037",
+      "metadata_sha256": "8e196d18c580ff43ec5d4ba3f0d4c35bb90431e68532b394814d1fcc18480682",
+      "source_bundle_sha256": "c21517f22af814571982df1412934074b5ff67132715e98419e9e5d85b06d9c4",
+      "build_manifest_sha256": "59500af374c7358c5123b0e3f33d824f625ddf30941d3debd1fe61cec9d1d0c3",
+      "hashes_match_build_manifest": true,
+      "changed_base_source_cell_indices": [
+        18
+      ],
+      "model_config_cell5_unchanged": true,
+      "tool_agent_sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82",
+      "patched_solver_sha256": "6a05212fc955020db8fd2027aa5c16626c593ad83a95b967d3e1c92372bdc5bc",
+      "generated_patch_cell_has_model_seed_zero": true,
+      "generated_pth_uses_real_newline": true
+    }
+  },
+  "builder_path": "検証/ARC3視覚HDS候補構築.py",
+  "builder_sha256": "5ad204658e7d15191b51294e5d3a989938fccb55c04c113c130e82675ba1ed45",
+  "paired_static_controls": {
+    "all_non_patch_cells_equal_between_arms": true,
+    "model_and_runtime_metadata_equal_except_id_title": true,
+    "source_bundles_identical": true,
+    "shared_model_seed": 0,
+    "SDK_seed_is_separate": true,
+    "current_local_SDK_Arcade_make_default_seed_observed": 0,
+    "Kaggle_runtime_SDK_seed_or_initial_equivalence_verified": false
+  },
+  "source_review": {
+    "hook_location": "_HarnessGameSession._execute_action, individual executed action method",
+    "pre_query_before_actual_SDK_call": true,
+    "post_update_after_explicit_new_state": true,
+    "batch_skipped_actions_not_taught": true,
+    "fatal_state_captured_before_auto_RESET": true,
+    "automatic_and_RESET_excluded": true,
+    "HDS_import_constructor_query_update_errors_leave_visual_action_path": true,
+    "off_mode_lazy_no_HDS_API_calls": true,
+    "model_prompts_or_context_not_modified": true,
+    "unsupported_hint_mode_rejected": true,
+    "competition_rerun_rejected_before_benchmark": true,
+    "SDK_legality_remains_action_authority": true
+  },
+  "CPU_actual_ToolAgent_seed_check": {
+    "executed_in_prior_tool_call": true,
+    "tool_output_chunk_id": "4c811c",
+    "test_rerun_for_this_evidence": false,
+    "test_observed_at_utc": null,
+    "time_note": "The original tool result did not include a UTC timestamp; evidence creation time is recorded separately.",
+    "python": "%TEMP%/arc3-v6-locked-20261027/Scripts/python.exe",
+    "arguments": [
+      "-I",
+      "-B",
+      "-X",
+      "utf8",
+      "-c",
+      "<python_source>"
+    ],
+    "cwd": "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\出力\\ARC3-RUN-003-local\\C2-078\\off-r2\\preflight-source\\src\\ARC3-Inference",
+    "environment_whitelisted_from_host": [
+      "SYSTEMROOT",
+      "PATH",
+      "TEMP",
+      "TMP"
+    ],
+    "explicit_environment": {
+      "LOCAL_ANALYZER_SEED": "0",
+      "LOCAL_ANALYZER_MODEL_ID": "flashnext",
+      "LOCAL_ANALYZER_PROVIDER": "vllm",
+      "LOCAL_ANALYZER_BASE_URL": "http://127.0.0.1:8001/v1",
+      "CUDA_VISIBLE_DEVICES": "",
+      "HF_HUB_OFFLINE": "1"
+    },
+    "seed_value_origin": "AST literal assignment in actual off-r2 Notebook cell6, asserted equal to string 0 before child import",
+    "python_source": "import json,pathlib,sys\nfrom unittest.mock import Mock,patch\nsys.path.insert(0,'C:\\\\Users\\\\ohira\\\\OneDrive\\\\ドキュメント\\\\ChatGPT\\\\ARC-3-AGI-AGENT\\\\出力\\\\ARC3-RUN-003-local\\\\C2-078\\\\off-r2\\\\preflight-source\\\\src\\\\ARC3-Inference')\nfrom inference.agent import tool_agent as tool\nassert tool._LOCAL_ANALYZER_SEED==0\nagent=tool.ToolAgent(model=\"flashnext\",provider=\"vllm\",base_url=\"http://127.0.0.1:8001/v1\")\nresponse=Mock(status_code=200,headers={},text=\"\")\nresponse.json.return_value={\"choices\":[{\"message\":{\"role\":\"assistant\",\"content\":\"synthetic audit reply\"},\"finish_reason\":\"stop\"}],\"usage\":{}}\nwith patch.object(tool.requests,\"post\",return_value=response) as post:\n result=agent._chat_completion([{\"role\":\"user\",\"content\":\"synthetic seed plumbing audit\"}],tools=None,request_timeout_seconds=1)\n assert post.call_count==1\n payload=post.call_args.kwargs[\"json\"]\n assert payload[\"seed\"]==0 and payload[\"model\"]==\"flashnext\"\n assert pathlib.Path(tool.__file__).is_relative_to(pathlib.Path('C:\\\\Users\\\\ohira\\\\OneDrive\\\\ドキュメント\\\\ChatGPT\\\\ARC-3-AGI-AGENT\\\\出力\\\\ARC3-RUN-003-local\\\\C2-078\\\\off-r2\\\\preflight-source\\\\src\\\\ARC3-Inference'))\n print(json.dumps({\"actual_ToolAgent_import\":True,\"import_time_seed\":tool._LOCAL_ANALYZER_SEED,\"actual_chat_method_request_payload_seed\":payload[\"seed\"],\"actual_model_id\":payload[\"model\"],\"HTTP_network_call\":False,\"requests_post_mocked\":True,\"HDS_or_GPU_instance_created\":False}))\n",
+    "exit_code": 0,
+    "stdout": {
+      "actual_ToolAgent_import": true,
+      "import_time_seed": 0,
+      "actual_chat_method_request_payload_seed": 0,
+      "actual_model_id": "flashnext",
+      "HTTP_network_call": false,
+      "requests_post_mocked": true,
+      "HDS_or_GPU_instance_created": false
+    },
+    "stderr": ""
+  },
+  "remaining_limits": [
+    "GPU inference and historical v5 score reproduction are unverified.",
+    "Fixed model seed does not prove GPU determinism; repeated matched runs are needed before causal score claims.",
+    "Public initial-state equivalence is pending runtime outputs.",
+    "One inflight HDS call can exceed the soft HDS time budget.",
+    "framework/run.py preimage/postimage patch-index parity remains unresolved as recorded in source-manifest."
+  ],
+  "official_submission_or_promotion_approved": false,
+  "Kaggle_operations_performed_by_review": false,
+  "existing_sources_or_notebooks_modified_by_review": false
+}

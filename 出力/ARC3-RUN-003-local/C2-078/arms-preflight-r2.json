@@ -1,0 +1,58 @@
+{
+  "schema": "arc3-visual-hds-arm-preflight.v1",
+  "observed_at_utc": "2026-10-26T22:41:52+00:00",
+  "revision": "r2",
+  "builder_sha256": "5ad204658e7d15191b51294e5d3a989938fccb55c04c113c130e82675ba1ed45",
+  "focused_test_source_sha256": "a94ea6325953bb20994befa45b03807850f5ec3274f1499d286b9f35bf59d87b",
+  "focused_tests": {
+    "passed": 8,
+    "subtests_passed": 7
+  },
+  "arms": [
+    {
+      "arm": "off-r2",
+      "notebook_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+      "manifest_sha256": "175808d149c9da773de00b578dd15f58b5e07ae099ca9cf64cdae4e513e2db11",
+      "bundle_sha256": "c21517f22af814571982df1412934074b5ff67132715e98419e9e5d85b06d9c4",
+      "metadata_sha256": "3c6537a086acb9990166049555c51f73d0a8a162069f0788711e122b1e521113",
+      "kernel_id": "tecchannn/arc3-visual-hds-v6-off-pilot",
+      "compiled_source_files": 53,
+      "cpu_generated_patch_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true
+      }
+    },
+    {
+      "arm": "shadow-r2",
+      "notebook_sha256": "7fc83b748b3db2f8881e26ada0e8a8732b7b400220f4dd3809fa8a525da16037",
+      "manifest_sha256": "59500af374c7358c5123b0e3f33d824f625ddf30941d3debd1fe61cec9d1d0c3",
+      "bundle_sha256": "c21517f22af814571982df1412934074b5ff67132715e98419e9e5d85b06d9c4",
+      "metadata_sha256": "8e196d18c580ff43ec5d4ba3f0d4c35bb90431e68532b394814d1fcc18480682",
+      "kernel_id": "tecchannn/arc3-visual-hds-v6-shadow-pilot",
+      "compiled_source_files": 53,
+      "cpu_generated_patch_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true
+      }
+    }
+  ],
+  "source_cells_preserved_except_shared_guard_and_new_cell": true,
+  "source_cell_count_preserved": 24,
+  "all_notebook_metadata_preserved": true,
+  "arms_differ_only_mode_and_local_draft_id_title": true,
+  "model_seed_explicit_common": 0,
+  "environment_seed": "unspecified / SDKdefault unverified",
+  "initial_state_equivalence_runtime_check": "pending",
+  "private_GPU_no_internet_preserved": true,
+  "blind_MyAgent_excluded": true,
+  "native_HDS_predictive_or_causal_improvement_proven": false,
+  "GPU_model_execution_performed_by_builder": false,
+  "Kaggle_operations_performed_by_builder": false,
+  "historical_v5_full_runtime_bit_parity": "unproven; framework/run.py mismatch preserved"
+}

@@ -22,8 +22,8 @@ from tempfile import TemporaryDirectory
     "arc-agi": "0.9.8",
     "arcengine": "0.9.3",
     "numpy": "2.4.4",
-    "kaggle": "2.2.4",
-    "kagglesdk": "0.1.37",
+    "kaggle": "2.2.5",
+    "kagglesdk": "0.1.38",
     "hds-learning-system": "0.4.2",
 }
 

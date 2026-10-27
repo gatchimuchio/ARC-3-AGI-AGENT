@@ -1,0 +1,64 @@
+{
+  "schema": "arc3-c2-050-pre-run-review.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-050",
+  "observed_at_utc": "2026-10-24T19:07:40Z",
+  "decision": "Proceed with the contracted private three-game pilot; this is a private kernel run, not an official competition rerun or submission.",
+  "prior_candidate_v14": {
+    "benchmark_sha256": "4a1ccd5f546592446e0e490ad07a4ee89694ba68f82fb3fbec42d96c3520f5f4",
+    "mean": 5.952380952380952,
+    "baseline_v13_mean": 19.309155943771326,
+    "paired_deltas": [
+      -33.33333333333333,
+      -2.7777777777777777,
+      -3.9592138630600173
+    ],
+    "all_three_regressed": true
+  },
+  "dependency_c2_048_v15": {
+    "status": "COMPLETE",
+    "mean": 16.88844068389523,
+    "paired_mean_delta_vs_v13": -2.420715259876097,
+    "adopted": false,
+    "25_game_expansion": false,
+    "audit_evidence_sha256": "efa6f9f27285834be1918d86cabd2746e0df9cd73562ac0c2bb9b93472162392"
+  },
+  "candidate_integrity": {
+    "base": "C2-047 version14",
+    "candidate_notebook_sha256": "c5ea749ff7048c448c8a20d8815137a734d6a8e29dffc8dc95677d3c55f3db86",
+    "manifest_notebook_sha256_matches": true,
+    "manifest_sha256": "59674c29d71ef3cdff54005b37b4bdaed27b36a1a34ebfa104a8088c10216103",
+    "source_cell_count": 25,
+    "changed_cell_indices": [
+      3
+    ],
+    "single_changed_line": "tools=tools to tools=None in _maybe_append_rolling_summary",
+    "all_other_source_lines_equal": true,
+    "metadata_bytes_equal_to_base": true,
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372"
+  },
+  "controls": {
+    "startup_timeout_seconds": 1800,
+    "offline_games": 3,
+    "seed": 0,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "passes": 1,
+    "concurrency": 1,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_competition_rerun": false,
+    "official_submission": false
+  },
+  "acceptance_gate": {
+    "paired_games": 3,
+    "reference_mean": 19.309155943771326,
+    "require_mean_strictly_above_reference": true,
+    "require_positive_paired_mean_delta": true,
+    "require_summary_replacement_evidence": true,
+    "official_competition_submission": false,
+    "official_competition_rerun": false
+  },
+  "status": "READY_FOR_PRIVATE_PILOT; PUSH_NOT_YET_PERFORMED"
+}

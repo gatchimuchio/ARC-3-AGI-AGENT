@@ -1,0 +1,113 @@
+{
+  "指示ID": "ARC3-RUN-003-C1-015",
+  "評価": "public_local_state_action6_color_outcome_repeatability_audit",
+  "split": "development",
+  "split_seed": 20261022,
+  "environments_per_seed": 5,
+  "environment_seeds": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_run": 80,
+  "retry_game_over": true,
+  "監査counter_各seed": {
+    "7": {
+      "decisions": 394,
+      "action6_selections": 234,
+      "repeated_board_color_selections": 3,
+      "repeated_board_color_with_alternative_color": 3,
+      "repeated_outcome_category_match": 3,
+      "repeated_outcome_category_mismatch": 0,
+      "eligible_color_opportunities": 234
+    },
+    "31": {
+      "decisions": 394,
+      "action6_selections": 234,
+      "repeated_board_color_selections": 6,
+      "repeated_board_color_with_alternative_color": 6,
+      "repeated_outcome_category_match": 6,
+      "repeated_outcome_category_mismatch": 0,
+      "eligible_color_opportunities": 234
+    },
+    "73": {
+      "decisions": 394,
+      "action6_selections": 235,
+      "repeated_board_color_selections": 3,
+      "repeated_board_color_with_alternative_color": 3,
+      "repeated_outcome_category_match": 3,
+      "repeated_outcome_category_mismatch": 0,
+      "eligible_color_opportunities": 235
+    }
+  },
+  "runs_per_seed": {
+    "7": 5,
+    "31": 5,
+    "73": 5
+  },
+  "actions_per_seed": {
+    "7": 400,
+    "31": 400,
+    "73": 400
+  },
+  "levels_per_seed": {
+    "7": 1,
+    "31": 1,
+    "73": 1
+  },
+  "no_op_per_seed": {
+    "7": 9,
+    "31": 9,
+    "73": 17
+  },
+  "game_over_per_seed": {
+    "7": 6,
+    "31": 6,
+    "73": 6
+  },
+  "reset_per_seed": {
+    "7": 6,
+    "31": 6,
+    "73": 6
+  },
+  "illegal_per_seed": {
+    "7": 0,
+    "31": 0,
+    "73": 0
+  },
+  "duplicate_per_seed": {
+    "7": 0,
+    "31": 0,
+    "73": 0
+  },
+  "policy_holds_per_seed": {
+    "7": 0,
+    "31": 0,
+    "73": 0
+  },
+  "C2候補支持条件": {
+    "threshold_reselected_board_color_with_alternative": 10,
+    "seeds_required": 2,
+    "outcome_category_match_rate_minimum": 0.8,
+    "reselected_pairs_by_seed": {
+      "7": 3,
+      "31": 6,
+      "73": 3
+    },
+    "outcome_category_match_rate": 1.0,
+    "compared_repeat_outcomes": 12,
+    "supported": true
+  },
+  "decision": "open_separate_C2_instruction",
+  "public_input": {
+    "file_count": 50,
+    "content_set_sha256": "d40c652dfffda990a1a32c65da3d873a36bb9c4b6bd06598704596af3c2ead79"
+  },
+  "source_sha256": {
+    "evaluator": "53fb866cf6246934473bae4404cafa8be46cac56970b90328f6b4c3aed6df8c4",
+    "targeted_test": "e9eb522d200b4e662df6d8cb09178d31f97cb8610cf9d48637dc38817fb0fe95",
+    "local_policy_evaluator": "ba8f89bf09077622f5c67e0ba310b5c2ac68d240412178a371b7e2a3f6c22088",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510"
+  },
+  "elapsed_seconds": 15.404
+}

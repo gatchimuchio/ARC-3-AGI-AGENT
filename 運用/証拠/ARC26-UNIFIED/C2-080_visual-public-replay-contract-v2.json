@@ -1,0 +1,247 @@
+{
+  "schema": "arc3-visual-public-trace-reduced-schema-native-paired-replay.v1",
+  "run_id": "C2-080_visual-public-replay-contract-v2",
+  "observed_at": "2026-10-27T00:07:21.533419+00:00",
+  "result": "CONTRACT_ONLY",
+  "source": {
+    "retrieval_path": "出力/ARC3-RUN-003-local/C2-078/off-r2-terminal-v1-retrieval-20261026T232820Z.json",
+    "retrieval_sha256": "5ba043dd55eb22e243866550efb6ac95a176755318dad20703dd569c39c93092",
+    "output_manifest_sha256": "919fe472c53ab5cd2e2bee5d372a6a00d3b9caff49cf86ab20826e8fb994cd03",
+    "all_declared_output_files_hash_verified": 11,
+    "all_240_action_history_joins_verified": true,
+    "source_build_manifest_sha256": "175808d149c9da773de00b578dd15f58b5e07ae099ca9cf64cdae4e513e2db11",
+    "source_notebook_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+    "source_metadata_sha256": "3c6537a086acb9990166049555c51f73d0a8a162069f0788711e122b1e521113",
+    "actual_recording_source_bundle_sha256": "c21517f22af814571982df1412934074b5ff67132715e98419e9e5d85b06d9c4",
+    "recording_solver_declared_sha256_from_build": "6a05212fc955020db8fd2027aa5c16626c593ad83a95b967d3e1c92372bdc5bc",
+    "recording_solver_is_not_separate_bundle_member": true,
+    "all_recording_source_members_hash_verified": 15,
+    "public_event_definition_original_source_sha256": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52",
+    "source_event_writer_public_levels_line": 782,
+    "immediate_action_response_source_line": 1251,
+    "exact_kernel_version": 1,
+    "kernel_identity_verified": true,
+    "source_counts": {
+      "action6_coordinate_joins": 80,
+      "actual_action_records": 240,
+      "analysis_records_excluded": 76,
+      "initial_records": 3,
+      "nonreset_transitions": 239,
+      "public_outcome:レベル進行": 4,
+      "public_outcome:可視変化なし": 12,
+      "public_outcome:盤面変化": 223,
+      "reset_actions_excluded": 1
+    },
+    "public_level_provenance": "event.score = int(new_state.raw.levels_completed); not benchmark RHAE/reward",
+    "available_action_fields_absent": 240,
+    "automatic_flags_absent": true,
+    "initial_RESET_display_not_an_actual_action": true,
+    "benchmark_fields_used": [
+      "game_runs.game_id (join only)",
+      "game_runs.history.action"
+    ]
+  },
+  "software_sha256": {
+    "検証/ARC3HDS視覚公開記録逐次比較.py": "4d917e5007c88eb510664b872535dc016417d9b7d728113242f612f2b7cdee37",
+    "検証/ARC3HDS対象経路公開逐次比較.py": "861bce445f9f4342952dd8394d418990c2a6ba3d201bc2e3d3a1b62bba0527cc",
+    "検証/ARC3視覚HDS公開逐次予測診断.py": "b49524127e53254bc00bc3498eb3ee45ee29332900beee1969a3d0e009b7ada1",
+    "検証/ARC3視覚HDS対応採点.py": "6ca19fcb4860b257e71c292ca77e7d775660f0c8f2f759bc4a0c984d6544db6a"
+  },
+  "frozen_bundle_sha256": "ed0c13e329c948e774424ebc738eaf2a8c3bb83c0bcdbcf71945a0ac3c5f3766",
+  "frozen_bridge_sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617",
+  "frozen_runtime_qualifier_sha256": "2499e1d42c9176e8cd5c1096d0ebef9374a806ff067dae63d43ae5d5638a2701",
+  "native_scope_patch_sha256": "df5f071ac51820200b3e95f1f65a50d4697619a8bab00fe19e7fe6c855ca28fb",
+  "native_default_compatibility_proof_sha256": "a9c90a4fdeb5f7f125850d3db11590b92acafff05652c88d60e730485137df7a",
+  "native_default_whole_compatibility_preserved": null,
+  "schema_limitation": "Declared reduced schema: omit 作用可能数 from BOTH query/update; no available actions invented; not canonical bridge replay",
+  "shared_before_action_after_stream_sha256": null,
+  "whole": {
+    "counts": {},
+    "coverage": null,
+    "precision": null,
+    "same_covered_previous_majority_precision": null
+  },
+  "scoped": {
+    "counts": {},
+    "coverage": null,
+    "precision": null,
+    "same_covered_previous_majority_precision": null
+  },
+  "stratified_from_first_response": {
+    "whole": {
+      "native_status": {
+        "出力": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "断定保留": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        }
+      },
+      "predicted_class": {
+        "勝利": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "GAME_OVER": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "レベル進行": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "盤面変化": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "可視変化なし": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        }
+      },
+      "observed_class": {
+        "勝利": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "GAME_OVER": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "レベル進行": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "盤面変化": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "可視変化なし": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        }
+      }
+    },
+    "scoped": {
+      "native_status": {
+        "出力": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "断定保留": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        }
+      },
+      "predicted_class": {
+        "勝利": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "GAME_OVER": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "レベル進行": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "盤面変化": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "可視変化なし": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        }
+      },
+      "observed_class": {
+        "勝利": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "GAME_OVER": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "レベル進行": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "盤面変化": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        },
+        "可視変化なし": {
+          "counts": {},
+          "precision": null,
+          "same_covered_strict_past_majority_precision": null,
+          "forecast_coverage": null
+        }
+      }
+    }
+  },
+  "native_target_hold_causes": {},
+  "paired_checks": {},
+  "shared_and_per_arm_costs": [],
+  "prior_load_status_counts": {},
+  "partial_bridge_stats_if_failure": [],
+  "errors": [],
+  "wall_seconds": 1.410643,
+  "no_canonical_hds_bridge_runtime_or_notebook_edits": true,
+  "no_sdk_model_kaggle_gpu_calls": true,
+  "no_game_ids_boards_coordinates_or_action_sequences_persisted": true,
+  "all_public_games_reused": true,
+  "not_closed_loop_score_or_causal_action_improvement_proof": true,
+  "no_causal_comparison_with_random_policy_diagnostic": true,
+  "native_HOLD_and_authorization_unchanged": true,
+  "scope_and_strata_add_no_applicability_filter": true
+}

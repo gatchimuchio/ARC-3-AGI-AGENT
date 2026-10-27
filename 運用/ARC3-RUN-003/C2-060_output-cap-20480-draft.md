@@ -1,0 +1,41 @@
+# C2-060 draft — output reserve 20,480 with 118,272 input allowance
+
+Status: **draft only; not pushed**. C2-059 version 28 is still running. This candidate tests whether two 16,384-token `finish_reason=length` responses seen in the partial C2-058 transcript matter for performance. It raises `LOCAL_ANALYZER_MAX_OUTPUT` from 16,384 to 20,480 and raises context from 135,168 to 139,264 so the effective input allowance remains 118,272. The context setting reaches the observed server limit, so startup feasibility must be rechecked before any future push.
+
+Score v28 against the predeclared C2-046 gate first. Do not push C2-060 while v28 runs. Private, GPU-enabled, Internet-disabled; no official submission or quota use.
+
+- Notebook: `出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/source/cap20k-context139264/submission.ipynb` (SHA256 `d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26`).
+- Metadata: `出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/source/cap20k-context139264/kernel-metadata.json` (SHA256 `e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372`).
+- Preflight: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-preflight-draft-20261025T144038Z.json` (SHA256 `10b3060869951f6ed3503b9ad15fff362dbaa628808b84b2a06c1eb5bd7e99b2`).
+- Delta: cell 5 only; context 135168→139264 and output reserve 16384→20480.
+- Gate: mean > C2-046 `19.309155943771326` and positive paired mean delta on the same three starts.
+
+
+## Matched request-budget evidence (2026-10-25T14:42:00Z)
+
+The complete C2-046 control transcript has one output terminated at its 12,288-token cap. The partial C2-058 transcript has two outputs terminated at its 16,384-token cap. This supports an output-headroom experiment but does not predict a score gain. The different actions and trajectories prevent a direct behavioral comparison; output-cap hits are diagnostic only. C2-058 logs still do not establish that input pruning occurred.
+
+- Cross-run evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-output-cap-evidence-comparison-20261025T144200Z.json` (SHA256 `02d3421e8fe649b277a0db2f9f43f1dd380b71f1014c5090ef79a2a2a6c3ee02`).
+
+
+## Output-cap sequence interpretation (2026-10-25T14:55:24Z)
+
+The action-79 / step-24 sequence shows two 16,384-token length terminations, followed by a tool-call response and then action 88. The cap therefore caused extra reasoning continuations in this trace but did not permanently block actions. C2-060 may reduce repeated calls; it is not assumed to improve score. Judge it with paired score, level progress, actions, and token totals.
+
+- Sanitized sequence evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-cap-sequence-diagnostic-20261025T145524Z.json` (SHA256 `faeaebf859d0d8d1ba3776226a0f45c7e714c247c32d63fac82c1e33baa218d1`); prompt and board content were not saved.
+
+
+## Next-pilot ordering update (2026-10-25T14:58:43Z)
+
+A clean C2-061 `slim`→`off` memory ablation is now prepared from the C2-059 candidate with only cell 5 changed. The historical v5→C2-046 comparison shows this setting differed on the official 23.86 Notebook and current local baseline, but the versions have other differences; that is motivation only. After v28 terminates, prioritize deciding on C2-061 before C2-060 because it isolates one persistent-memory setting without moving the output/context budget to the server limit. C2-060 remains a later hypothesis, not a simultaneous push.
+
+- C2-061 notebook: `出力/ARC3-RUN-003-local/C2-061-memory-sections-off/source/context135168-cap16k-memoryoff/submission.ipynb`.
+- C2-061 report: `運用/ARC3-RUN-003/C2-061-memory-sections-off-draft.md`.
+- C2-061 preflight: `運用/証拠/ARC26-UNIFIED/ARC3-C2-061-preflight-draft-20261025T145742Z.json`.
+
+
+## Sequencing refinement after prior memory-mode evidence (2026-10-25T15:04:50Z)
+
+C2-061 is held based on the prior matched `off`/`slim` ablation. C2-060 remains a conditional candidate after exact v28 completion. A read-only version-28 `.log` output query returned no files while the kernel remained RUNNING. Before any C2-060 push, require v28 prompt sizes to fit the 118,272-token input allowance, confirm server context/startup/readiness/resource support at 139,264 tokens, and verify repeated 16,384-token cap hits. A cap hypothesis alone is not a score claim. No push or quota use.
+
+- Sequencing evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-sequencing-refinement-20261025T150450Z.json` (SHA256 `d47baceb84c0e5232ca06219bdfeaa64a2bc667daa0aa25eddcb2655fff6952b`).

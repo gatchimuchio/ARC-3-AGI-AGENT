@@ -1,0 +1,103 @@
+{
+  "authority": {
+    "codex_instructions": {
+      "path": "運用/ARC26-UNIFIED/v3_0/03_共通Codex指示書.md",
+      "sha256": "d5898129f8aa22b4f195ae01caec1dc67f541fac451a340dcd547980de74bfe9"
+    },
+    "engineering_table": {
+      "path": "運用/ARC26-UNIFIED/v3_0/02_共通工程表.md",
+      "sha256": "810c7de74ad650e1578ec845503add638e3de741f4d85a761712cffb5ebb736a"
+    }
+  },
+  "changes": {
+    "code_changed": false,
+    "kaggle_push_or_submission": false,
+    "protected_files_changed": false
+  },
+  "observed_at_utc": "2026-10-24T23:06:13Z",
+  "official_score_relation": "This local action-loop evidence is not an official score. The current ARC3 official score remains separately tracked.",
+  "overall_status": "HOLD_P1-3_FORMAL_MEMORY_GATE",
+  "recorded_at_utc": "2026-10-24T23:06:51Z",
+  "schema": "arc3-p1-3-acceptance-review-v1",
+  "scope": "The action-loop subcriteria are evidenced. P1-3 is not accepted overall until an eligible, ID-free HDS-compatible memory asset is supplied and fresh-process load/learning/action is verified.",
+  "source": {
+    "path": "接続/ARC3提出agent.py",
+    "relevant_lines": {
+      "SDK_step_and_result_update": "289-346",
+      "fresh_observation_and_pending_guard": "260-279",
+      "new_empty_HDS_instance": "29,72"
+    },
+    "sha256": "47539cd3c0a19b033fb782df61e4275062b8f7b2343eca3376fbda9b50237486"
+  },
+  "subcriteria": [
+    {
+      "criterion": "multiple independent official-starter episodes; each has at least two legal nonRESET actions",
+      "evidence": {
+        "bundle_sha256": "d00ab4af0613a4949e13a886fbaf12a5b61c868c3aaaac42320ba38d1268301e",
+        "path": "運用/証拠/ARC26-UNIFIED/P1-3_officialStarter_public25-20261024T111429Z.json",
+        "sha256": "f29629b467c13e5219b173937c75a158107f685fbf230cb23d4383f202028b63"
+      },
+      "limitation": "The evidence metadata does not label a train/dev split; no generalization or game-winning claim is made.",
+      "observed": {
+        "episodes": 25,
+        "episodes_with_two_or_more_nonreset_actions": 25,
+        "illegal_actions": 0,
+        "levels_completed": 4,
+        "max_nonreset_actions_per_episode": 80,
+        "min_nonreset_actions_per_episode": 78,
+        "sdk_steps": 2000,
+        "single_sdk_step_per_agent_request_all": true,
+        "wins": 0
+      },
+      "status": "PASS_ACTION_LOOP_ONLY"
+    },
+    {
+      "criterion": "state -> action -> result -> fresh next decision; failures/termination recorded",
+      "evidence": {
+        "path": "運用/証拠/ARC26-UNIFIED/P1-3_officialStarter_transition-probe-20261024T111654Z.json",
+        "sha256": "a64dfccc7f6c5a02197d4dfc939ad1f643157940ff9a234f2856a3791e8da4ac"
+      },
+      "observed": {
+        "agent_requests_per_episode": 80,
+        "hds_state_queries_per_episode": 80,
+        "illegal_actions": 0,
+        "independent_probe_episodes": 3,
+        "sdk_steps_per_episode": 80,
+        "terminal_events_across_probe": {
+          "game_over": 2,
+          "level_progression": 1,
+          "wins": 0
+        },
+        "visible_board_changes_per_episode": 78
+      },
+      "source_flow": "choose_action parses latest_frame and rejects a pending prior action; do_action_request refreshes SDK observation, validates and steps one action, records public before/after response into current-process HDS, advances observation counter, and clears pending before the next decision.",
+      "status": "PASS_ACTION_LOOP_ONLY"
+    },
+    {
+      "criterion": "formally supply eligible prior memory in bundle and verify fresh-process load/learning/action",
+      "evidence": {
+        "bundle_manifest": {
+          "path": "出力/ARC3-SUBMIT-011-HDS-compact-20261024T0940Z/bundle-manifest.json",
+          "sha256": "998b1da8c847688a68a5dff9066ab59bf5bfb441d31c52c7d25cd3123d1e3615",
+          "source_bundle_sha256": "d00ab4af0613a4949e13a886fbaf12a5b61c868c3aaaac42320ba38d1268301e"
+        },
+        "prior_memory_boundary_audit": {
+          "path": "検証/運転記録/ARC3-RUN-002_C4-004_事前記憶runtime適用境界監査_20261023.md",
+          "sha256": "9272fdc7d984d1057e30c5bf775990b7f9a39fd0fc4ef7950f6dae668cdff3f3"
+        },
+        "prior_memory_manifest_sha256": "d1b6e0cc3d14ce7c40c26567fefa226a2975c2e6d02725fb8bb404833963a1bd"
+      },
+      "observed": {
+        "bundle_excludes": [
+          "入力/",
+          "記憶/"
+        ],
+        "current_agent_hds": "new empty HDS instance; online updates occur only from observed transitions",
+        "new_process_prior_memory_load_proven": false,
+        "prior_memory_loaded": false
+      },
+      "reason": "The prior-memory files combine ID/level-linked statistics and verified trajectories with ID-free prose principles; existing audit found they do not match the HDS native state schema, and prose is not a validated executable rule set. The v0.4 README/manifest do not establish per-asset source/license/publication approval. No memory was injected or published.",
+      "status": "HOLD"
+    }
+  ]
+}

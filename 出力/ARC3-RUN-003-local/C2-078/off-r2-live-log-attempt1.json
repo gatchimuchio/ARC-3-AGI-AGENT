@@ -1,0 +1,22 @@
+{
+  "schema": "arc3-live-log-read-attempt.v1",
+  "run_id": "ARC3-RUN-003-C2-078-OFF-R2-V1-LIVELOG1",
+  "recorded_at_utc": "2026-10-26T22:53:08+00:00",
+  "kernel": "tecchannn/arc3-visual-hds-v6-off-pilot",
+  "version": 1,
+  "command": [
+    "kaggle",
+    "kernels",
+    "output",
+    "tecchannn/arc3-visual-hds-v6-off-pilot/1",
+    "--file-pattern",
+    ".*\\.log$",
+    "--page-size",
+    "200"
+  ],
+  "exit_code": 0,
+  "downloaded_files": 0,
+  "model_readiness": "not observable from this attempt",
+  "terminal_state_inferred": false,
+  "repeat_before_terminal": false
+}

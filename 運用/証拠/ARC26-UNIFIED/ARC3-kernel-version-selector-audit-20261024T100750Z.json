@@ -1,0 +1,45 @@
+{
+  "schema": "arc3-kaggle-kernel-version-selector-audit.v1",
+  "observed_at_utc": "2026-10-24T10:07:50Z",
+  "event": "corrected kernel-version attribution; not an official submission failure",
+  "track": "ARC3",
+  "kaggle_cli_version": "2.2.4",
+  "api_source_sha256": "210e589ab1f7359ffb560aacfe1c003ac1bc844c366f4ff709bf3d13de4d5458",
+  "api_methods": {
+    "kernels_status": "parses a version suffix but sends only owner_name and kernel_slug",
+    "kernels_output": "parses a version suffix but sends only owner_name and kernel_slug"
+  },
+  "version_pin_effective": false,
+  "prior_attribution_corrected": "The 10:03 log folder suffix '/5' and prior runbook phrase 'same version' did not establish version 5; Kaggle 2.2.4 status/output methods ignore the parsed version.",
+  "captured_output": {
+    "directory": "運用\\証拠\\ARC26-UNIFIED\\ARC3-kernel-output-57577905-v5-20261024T100350Z",
+    "main_log_sha256": "6588c4c2a985b31dd7a4d09868e3d66be9882a21cb0406d3852338e1569eef4c",
+    "serve_log_sha256": "46ca97a7cfe418394c89074cb231a0c8dcd441b07ac1a9bf1c7df8e15cabaded",
+    "main_log_markers": {
+      "true_submission": false,
+      "readiness_deadline_seconds": 1800,
+      "offline_benchmark_started": false
+    },
+    "serve_log_wrapt_errors_observed": true,
+    "wrapt_causality": "unestablished"
+  },
+  "version_attribution": "The two log hashes exactly match the v10 private control recorded in 検証/運転記録/ARC3-RUN-003_C2-035_bounded-startup-memory-pilot_20261024.md; they are not evidence for submission 57577905's competition rerun.",
+  "official_submission": {
+    "submission_id": "57577905",
+    "notebook_version_recorded_in_history": 5,
+    "last_official_observation_at_utc": "2026-10-24T09:55:30Z",
+    "last_status": "SubmissionStatus.PENDING",
+    "official_score": null,
+    "score_is_unobserved_not_zero": true,
+    "next_due_utc": "2026-10-24T10:48:47Z",
+    "daily_quota_remaining": 0,
+    "this_event_queried_history": false,
+    "submission_or_rerun_performed": false
+  },
+  "evidence_files": [
+    "運用/証拠/ARC26-UNIFIED/ARC3-kernel-output-57577905-v5-20261024T100350Z/arc3-model-guided-c2-025.log",
+    "運用/証拠/ARC26-UNIFIED/ARC3-kernel-output-57577905-v5-20261024T100350Z/serve.log",
+    "検証/運転記録/ARC3-RUN-003_C2-035_bounded-startup-memory-pilot_20261024.md"
+  ],
+  "correction_note": "Additive correction to ARC3-RUN-003_C1-018_modelv5公式Rerun_20261024.md: its earlier same-version wording is superseded by this selector audit; the official submission remains pending and unlinked to this private run."
+}

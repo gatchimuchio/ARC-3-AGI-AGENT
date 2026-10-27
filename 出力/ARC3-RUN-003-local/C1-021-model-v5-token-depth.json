@@ -1,0 +1,81 @@
+{
+  "run_count": 25,
+  "event_history_aligned_runs": 25,
+  "action_count": 1906,
+  "action_limit": 80,
+  "termination_groups": {
+    "action_limit_reached": {
+      "run_count": 21,
+      "action_count": 1680,
+      "generated_tokens_total": 1585051,
+      "actions_with_generated_tokens": 471,
+      "mean_generated_tokens_per_action": 943.48
+    },
+    "below_action_limit": {
+      "run_count": 4,
+      "action_count": 226,
+      "generated_tokens_total": 548986,
+      "actions_with_generated_tokens": 83,
+      "mean_generated_tokens_per_action": 2429.14
+    }
+  },
+  "public_level_depth": [
+    {
+      "depth": 1,
+      "action_count": 815,
+      "generated_tokens_total": 829604,
+      "actions_with_generated_tokens": 271,
+      "mean_generated_tokens_per_action": 1017.92
+    },
+    {
+      "depth": 2,
+      "action_count": 664,
+      "generated_tokens_total": 828680,
+      "actions_with_generated_tokens": 175,
+      "mean_generated_tokens_per_action": 1248.01
+    },
+    {
+      "depth": 3,
+      "action_count": 275,
+      "generated_tokens_total": 275588,
+      "actions_with_generated_tokens": 65,
+      "mean_generated_tokens_per_action": 1002.14
+    },
+    {
+      "depth": 4,
+      "action_count": 92,
+      "generated_tokens_total": 133382,
+      "actions_with_generated_tokens": 30,
+      "mean_generated_tokens_per_action": 1449.8
+    },
+    {
+      "depth": 5,
+      "action_count": 54,
+      "generated_tokens_total": 55898,
+      "actions_with_generated_tokens": 10,
+      "mean_generated_tokens_per_action": 1035.15
+    },
+    {
+      "depth": 6,
+      "action_count": 6,
+      "generated_tokens_total": 10885,
+      "actions_with_generated_tokens": 3,
+      "mean_generated_tokens_per_action": 1814.17
+    }
+  ],
+  "telemetry": {
+    "generated_tokens_total": 2134037,
+    "summary_reported_tokens": 2134037,
+    "generated_tokens_match_summary": true,
+    "solver_note_tokens_total": 2162266,
+    "solver_note_count": 25,
+    "solver_note_minus_history_tokens": 28229,
+    "uncached_input_tokens_total": 0,
+    "uncached_input_tokens_nonzero_actions": 0,
+    "wallclock_observation_count": 1906,
+    "wallclock_field_max_seconds": 15654.225,
+    "benchmark_elapsed_seconds": 15657.695,
+    "wallclock_max_minus_benchmark_elapsed_seconds": -3.47,
+    "wallclock_used_as_per_action_latency": false
+  }
+}

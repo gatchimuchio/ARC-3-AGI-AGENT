@@ -1,0 +1,32 @@
+{
+  "schema": "arc3-c2-051-push-observation.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "observed_at_utc": "2026-10-24T20:33:13Z",
+  "push_invoked_once": true,
+  "push_started_between_utc": [
+    "2026-10-24T20:32:15Z",
+    "2026-10-24T20:32:42Z"
+  ],
+  "push_command": [
+    ".venv/Scripts/python.exe",
+    "-B",
+    "-m",
+    "kaggle",
+    "kernels",
+    "push",
+    "-p",
+    "出力/ARC3-RUN-003-local/C2-051/source/selective"
+  ],
+  "push_exit_code": 0,
+  "push_output": "Kernel version 18 successfully pushed. Please check progress at https://www.kaggle.com/code/tecchannn/arc3-model-guided-c2-025",
+  "post_push_latest_status": "KernelWorkerStatus.RUNNING",
+  "post_push_status_observed_at_utc": "2026-10-24T20:32:42Z",
+  "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+  "reported_version": 18,
+  "notebook_sha256": "0caf246e690489e225a4a1fe6b2de6e04c56ffdfc0b3ba310fc192ecfd9ca482",
+  "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "run_scope": "single private offline three-game pilot",
+  "official_competition_submission_or_rerun": false,
+  "official_submission_quota_used": false
+}

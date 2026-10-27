@@ -1,0 +1,167 @@
+{
+  "split_seed": 20261022,
+  "dev_games_per_seed": 5,
+  "environment_seeds": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_policy": 80,
+  "game_over_reset": true,
+  "per_seed": [
+    {
+      "environment_seed": 7,
+      "baseline": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "hashseed": {
+        "actions": 400,
+        "levels_completed": 0,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 5,
+        "reset_actions": 5,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "delta": {
+        "actions": 0,
+        "levels_completed": -1,
+        "wins": 0,
+        "no_op_actions": 0,
+        "game_over_events": -1,
+        "reset_actions": -1,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      }
+    },
+    {
+      "environment_seed": 31,
+      "baseline": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "hashseed": {
+        "actions": 400,
+        "levels_completed": 0,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 5,
+        "reset_actions": 5,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "delta": {
+        "actions": 0,
+        "levels_completed": -1,
+        "wins": 0,
+        "no_op_actions": 0,
+        "game_over_events": -1,
+        "reset_actions": -1,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      }
+    },
+    {
+      "environment_seed": 73,
+      "baseline": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 17,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "hashseed": {
+        "actions": 400,
+        "levels_completed": 0,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 5,
+        "reset_actions": 5,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      },
+      "delta": {
+        "actions": 0,
+        "levels_completed": -1,
+        "wins": 0,
+        "no_op_actions": -8,
+        "game_over_events": -1,
+        "reset_actions": -1,
+        "policy_holds": 0,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0
+      }
+    }
+  ],
+  "total_baseline": {
+    "actions": 1200,
+    "levels_completed": 3,
+    "wins": 0,
+    "no_op_actions": 35,
+    "game_over_events": 18,
+    "reset_actions": 18,
+    "policy_holds": 0,
+    "illegal_action_attempts": 0,
+    "duplicate_observation_steps": 0
+  },
+  "total_hashseed": {
+    "actions": 1200,
+    "levels_completed": 0,
+    "wins": 0,
+    "no_op_actions": 27,
+    "game_over_events": 15,
+    "reset_actions": 15,
+    "policy_holds": 0,
+    "illegal_action_attempts": 0,
+    "duplicate_observation_steps": 0
+  },
+  "total_delta": {
+    "actions": 0,
+    "levels_completed": -3,
+    "wins": 0,
+    "no_op_actions": -8,
+    "game_over_events": -3,
+    "reset_actions": -3,
+    "policy_holds": 0,
+    "illegal_action_attempts": 0,
+    "duplicate_observation_steps": 0
+  },
+  "hashseed_repeat_seed31_exact_exploration_records": 5,
+  "hashseed_repeat_seed31_games": 5,
+  "all_start_pairs_match": true,
+  "artifact_sha256": {
+    "baseline_7": "8455b13f80bc98bb9f4a1b83c28e6914210347556d2fd0d318c8997475971314",
+    "hashseed_7": "ea61147691fb663951dcdff67efaf5e2169243482e85efa53b59dbb9048a85c2",
+    "hashseed_31_repeat": "8e47eceef6a343367d3e048361c771adff3974a284c6855118576dbb45316b38",
+    "baseline_31": "8cf7815acb51877a7cf0aca58a5ae25096a73993aa1cbd397376db421e743bc1",
+    "hashseed_31": "8e47eceef6a343367d3e048361c771adff3974a284c6855118576dbb45316b38",
+    "baseline_73": "8bc10d91ff5315775c78e5cdced1ac0a3537c8733285987a7e592b871df37de0",
+    "hashseed_73": "81bfab6d72e66cbc8091772beb72d62108d627bc01988229de24d874ef66d937"
+  },
+  "summary_has_no_game_ids_or_trajectories": true
+}

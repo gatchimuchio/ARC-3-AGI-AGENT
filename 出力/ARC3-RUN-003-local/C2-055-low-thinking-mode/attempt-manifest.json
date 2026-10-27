@@ -1,0 +1,50 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-055",
+  "hypothesis": "disable explicit model thinking to reduce reasoning-token latency while preserving or improving score/action throughput",
+  "status": "pushed v24; exact version source verified; status QUEUED",
+  "candidate_source": "出力/ARC3-RUN-003-local/C2-055-low-thinking-mode/source/low-thinking",
+  "control_source": "出力/ARC3-RUN-003-local/C2-046/source/slim",
+  "one_factor_change": {
+    "cell": 3,
+    "behavior": "set enable_thinking=false in shared vLLM chat-template kwargs; same helper feeds request logging and request construction"
+  },
+  "same_public_games_seed_and_limits": true,
+  "private": true,
+  "gpu": true,
+  "internet": false,
+  "official_submission_or_quota_use": false,
+  "candidate_notebook_sha256": "c88af3f37aa9e6ff13a972f9fc07fbff1ae5042fa1d7be694d991305a6168777",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "baseline_requests_sha256": "041c2aeee7dc283fd8324eff6932cea0938c63917ffa6173e706933c8c2c026f",
+  "baseline_request_diagnostics": {
+    "responses": 247,
+    "prompt_tokens": 17277615,
+    "completion_tokens": 439748,
+    "reasoning_tokens": 362725,
+    "cached_prompt_tokens": 16285184,
+    "median_completion_tokens": 1240,
+    "median_reasoning_tokens": 950,
+    "reasoning_share_of_completion": 0.8248474126090397
+  },
+  "changed_cells": [
+    3
+  ],
+  "prepared_at_utc": "2026-10-25T04:30:00Z",
+  "superseded_env_only_candidate_sha256": "f3b3191acbfedc3ee0a2924a242d741fe80eb49f49a21e68433c8c153699cf41",
+  "explicit_thinking_toggle_verified_in_request_path": true,
+  "validated_patch_hunk_count": 150,
+  "predecessor_gate": {
+    "experiment_id": "ARC3-RUN-003/C2-054",
+    "kernel_version": 23,
+    "terminal_status": "KernelWorkerStatus.COMPLETE",
+    "mean_score": 6.878306878306878,
+    "control_mean_score": 19.309155943771326,
+    "paired_mean_delta": -12.430849065464335,
+    "decision": "rejected for score improvement",
+    "scorecard": "運用/証拠/ARC26-UNIFIED/ARC3-C2-054-v23-terminal-scorecard-20261025T053740Z.json"
+  },
+  "kaggle_kernel_version": 24,
+  "status_observed_at_utc": "2026-10-25T05:44:16Z",
+  "remote_notebook_sha256": "a101e824985ad30a19c610569faacf24b0b5b1d46b0acf71c0223a641adea5fc",
+  "remote_source_verification": "運用/証拠/ARC26-UNIFIED/ARC3-C2-055-v24-remote-source-verification-20261025T054416Z.json"
+}

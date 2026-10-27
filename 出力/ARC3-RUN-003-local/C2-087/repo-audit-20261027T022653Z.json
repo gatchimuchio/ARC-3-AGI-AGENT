@@ -1,0 +1,28 @@
+{
+  "schema": "arc3-local-candidate-diff-audit.v1",
+  "observed_at_utc": "2026-10-27T02:26:53.482588+00:00",
+  "HEAD": {
+    "exit_code": 0,
+    "stdout": "8667e9b9512e328084050007d3bdedb1ae5e245f",
+    "stderr": ""
+  },
+  "diff_check": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "warning: in the working copy of '接続/ARC3提出.md', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '検証/test_ARC3提出agent.py', CRLF will be replaced by LF the next time Git touches it\nwarning: in the working copy of '道具/ARC3提出物構築.py', CRLF will be replaced by LF the next time Git touches it"
+  },
+  "protected": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "staged": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "original_native_sha256": {
+    "系統.py": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5",
+    "実行系.py": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "arc26-arc3-scorecard-correction.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-059",
+  "version": 28,
+  "observed_at_utc": "2026-10-25T22:01:55Z",
+  "corrects_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-terminal-scorecard.json",
+  "corrects_sha256": "9259e4d1e251f865115e4536b438388833fcfbd5092c0fdd32293d9c2827e939",
+  "corrected_field": "note",
+  "original_note": "Kaggle requests.jsonl download is partial; the local score uses complete benchmark.json and paired initial event records, not the request transcript.",
+  "corrected_note": "The exact version 28 output bundle was downloaded successfully, including the complete requests.jsonl file. Scoring used benchmark.json and the three initial event records; the requests transcript was not read for score calculation.",
+  "output_file": "requests.jsonl",
+  "output_file_bytes": 112119864,
+  "output_file_sha256": "26ae3ba297594a8b298b34b59b8f12a574dde22e779f4bf79afe9be42850429e",
+  "output_manifest_sha256": "171b33702ce530c1ffcf4166716ba26abd41bdd8657dce1127a529c914485478",
+  "status_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-terminal-status.json",
+  "status_evidence_sha256": "5793442800ad7be856c2e0e3310b2bd51e337f84882ada184be827c652e99b35",
+  "metrics_changed": false,
+  "official_submission_or_quota_use": false
+}

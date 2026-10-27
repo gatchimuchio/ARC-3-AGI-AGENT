@@ -1,0 +1,55 @@
+{
+  "experiment": "ARC3-RUN-003/C2-050",
+  "status": "closed: v16 readiness deadline error; v17 COMPLETE with diagnostic-only 4.909114956 mean; duplicate-run concurrency gate breached; candidate rejected",
+  "hypothesis": "The rolling-summary request receives the active turn tool schema even though it runs outside the tool loop. Logs show unsupported python calls, including empty responses that skip summary replacement. Sending tools=None should prevent those calls and avoid wasted/failed summary attempts.",
+  "base": "C2-047 version 14; only the rolling-summary completion now passes tools=None",
+  "arm": {
+    "summary_no_tools": {
+      "notebook_sha256": "c5ea749ff7048c448c8a20d8815137a734d6a8e29dffc8dc95677d3c55f3db86",
+      "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+      "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+      "memory_mode": "slim",
+      "rolling_summary_interval_tokens": 32768,
+      "rolling_summary_replaces_history": true,
+      "summary_turn_context": false,
+      "summary_thinking_default": false,
+      "summary_tools": "none",
+      "change": "tools=None in _maybe_append_rolling_summary only"
+    }
+  },
+  "historical_control": {
+    "experiment": "ARC3-RUN-003/C2-046",
+    "arm": "slim",
+    "kernel_version": 12,
+    "notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+    "official_local_scorecard_mean": 19.309156,
+    "paired_public_games": 3
+  },
+  "controls": {
+    "startup_timeout_seconds": 1800,
+    "offline_games": 3,
+    "seed": 0,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "passes": 1,
+    "concurrency": 1,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_competition_rerun": false,
+    "official_submission": false
+  },
+  "terminal_observation": {
+    "observed_at_utc": "2026-10-24T20:28:55Z",
+    "latest_kernel_version": 17,
+    "latest_status": "KernelWorkerStatus.COMPLETE",
+    "summary_mean": 4.91,
+    "official_local_scorecard_mean": 4.909114956,
+    "paired_delta_vs_C2_047": -1.043265996,
+    "paired_delta_vs_C2_046_slim": -14.400040988,
+    "duplicate_run_concurrency_gate_breached": true,
+    "candidate_adoption_eligible": false,
+    "summary_request": "timed out; successful replacement unverified",
+    "official_submission_or_rerun": false
+  }
+}

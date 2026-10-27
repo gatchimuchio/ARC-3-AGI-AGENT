@@ -1,0 +1,656 @@
+{
+  "schema": "arc3-native-game-learning-ablation-build.v1",
+  "builder_source_sha256": "eed35c7bf2ac128ac946508ba170c4cf17125a80fba272f4ba8ec600f87030f6",
+  "runtime_adapter_sha256": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d",
+  "built_at_utc": "2026-10-27T01:43:34+00:00",
+  "mode": "shadow",
+  "budgets_per_game": {
+    "update_budget": 80,
+    "query_budget": 80,
+    "hds_seconds_budget": 120.0
+  },
+  "pilot": {
+    "games_max": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_max": 80,
+    "runtime_seconds_max": 1200,
+    "competition_rerun_allowed": false
+  },
+  "base_notebook_sha256": "5763f69d0794d7161dbe81a967edd2c10a6810c92ed1a28208bd47222fd5dfbc",
+  "source_preparation_manifest_sha256": "2c9daf710a75154256e42dcf77a59cd4c580421a08d4bf434a913ef15bf66c12",
+  "bridge_sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617",
+  "metadata_template_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "output_notebook_sha256": "181f9d469c12081ba818ad92838a85f189bbc9476cee53456b7c71db42d56f9b",
+  "kernel_metadata_sha256": "a2ccde6acc6d63b226f3018bdb2eac9649a047f5675c1b51f6589c721730266f",
+  "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "bundle_manifest": {
+    "schema": "arc3-visual-hds-source-bundle.v1",
+    "existing_builder_sha256": "12898230c8d4f509cba9a18853721f3772cf3835d9d4866d3df9ced5bb52e072",
+    "original_builder_bundle_sha256": "35347745865b12e735e623b29dd9f3a8ba25acb946804fd568b960eeaea9099f",
+    "files": [
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+        "bytes": 527,
+        "sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+        "bytes": 2815,
+        "sha256": "a6cab8fca7cb591c42fa7444f9678fe0003da69faafcce852598286dceb522e2"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+        "bytes": 3061,
+        "sha256": "50c48e5a9a8aa39158d0cdaacc0501608a829486960d41cb2fea6cb02e5660a4"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/型.py",
+        "bytes": 6575,
+        "sha256": "aa1241708655280b36564f5e3ff6968849b4d09790b8932aabad1570cbca302c"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+        "bytes": 34178,
+        "sha256": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+        "bytes": 3392,
+        "sha256": "bb7e85c2dbafbd430f1b7733bf3a2d307dc24e3227e79994b491cf711322f715"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+        "bytes": 2779,
+        "sha256": "2ba7ceb8d0d6c784d092f91fe484477127f044e50f68c54c977374b17f2f6361"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+        "bytes": 11404,
+        "sha256": "315dd0d23a9682cdf14be71346341976cbdbcd2cbd924a250afc4ad53058dba6"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+        "bytes": 2696,
+        "sha256": "e23f271d38e1f52d75557dbf3342abf7b59a85fbdc315a06c0040fd7ca204eb3"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+        "bytes": 3125,
+        "sha256": "8aa431b3012424fd8347c5b3d93a5fbf2218d35020836f5d40abb427f9d6da0d"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+        "bytes": 1951,
+        "sha256": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+        "bytes": 10139,
+        "sha256": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac"
+      },
+      {
+        "path": "arc3_action6_locality_observer.py",
+        "bytes": 6189,
+        "sha256": "42f7596610f89e54a0fd9c0645f18546e3799ec0719f87f845c2b42f739fcc13"
+      },
+      {
+        "path": "arc3_python_hds_query_base.py",
+        "bytes": 20203,
+        "sha256": "34a5c02fddc7caf7648c1b15d9369d2bdb2535b652b3868faa55fdce24853a8b"
+      },
+      {
+        "path": "arc3_visual_hds_base.py",
+        "bytes": 9661,
+        "sha256": "2499e1d42c9176e8cd5c1096d0ebef9374a806ff067dae63d43ae5d5638a2701"
+      },
+      {
+        "path": "arc3_visual_hds_runtime.py",
+        "bytes": 9190,
+        "sha256": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d"
+      },
+      {
+        "path": "接続/ARC3事前記憶.py",
+        "bytes": 3003,
+        "sha256": "518456b3b4cdaeb352a093c65d14eb0eb1a30ce70576d6298d501ec75b2b5bc1"
+      },
+      {
+        "path": "検証/ARC3視覚HDS接続候補.py",
+        "bytes": 20139,
+        "sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617"
+      }
+    ],
+    "blind_exploration_agent_included": false,
+    "frozen_R3_runtime_base_sha256": "2499e1d42c9176e8cd5c1096d0ebef9374a806ff067dae63d43ae5d5638a2701",
+    "frozen_C2_081_r2_runtime_sha256": "34a5c02fddc7caf7648c1b15d9369d2bdb2535b652b3868faa55fdce24853a8b",
+    "observer_projection_revision": "Action6-PRE4CC-area-and-7x7-actual-effect.v1"
+  },
+  "patched_solver_sha256": "a1f96f782acc6133b485ddca9821a11b141e5ff2fdc350d78a0ee3e4d2a7d14f",
+  "base_cells_preserved_except_offline_guard": true,
+  "system_prompt_unchanged": true,
+  "model_configuration_unchanged_except_shared_explicit_seed": true,
+  "shared_model_seed": 0,
+  "model_seed_set_before_ToolAgent_import": true,
+  "model_seed_passed_to_build_chat_payload": true,
+  "environment_seed": {
+    "explicitly_requested_by_notebook": false,
+    "SDK_default": "unverified",
+    "runtime_verified": false,
+    "initial_state_equivalence_runtime_check": "pending"
+  },
+  "GPU_determinism_proven": false,
+  "inserted_after_base_cell": 5,
+  "per_actual_action_query_before_execute_update_after_public_response": false,
+  "RESET_and_automatic_actions_excluded": true,
+  "fatal_response_uses_explicit_new_state": true,
+  "mode_hints_rejected": true,
+  "model_context_modified": true,
+  "action_authorization": false,
+  "cpu_source_files_compiled_without_import": 53,
+  "cpu_bundled_import": {
+    "bundle_import": true,
+    "hds_instance_created": false,
+    "gpu_import_or_call": false
+  },
+  "cpu_generated_patch_cell": {
+    "generated_cell_executed": true,
+    "pth_newline_paths": 3,
+    "model_seed_before_import": 0,
+    "GPU_or_framework_import": false,
+    "public_source_hashguards_passed": true,
+    "RPC_postimage_hashes_verified": true,
+    "evidence_visibility": "shown",
+    "native_HDS_patched": false,
+    "game_response_learning_mode": "enabled",
+    "prior_initialization_separate_from_game_update_gate": true
+  },
+  "source_parity_limit": "framework/run.py differs from the patch index preimage and postimage; the declared dataset v1 plus exact notebook patch applies contextually. This is not proof of whole-runtime bit identity. Preserve snapshot and patch; do not replace run.py from guessed git history. Shared Python RPC/helper and prompt note are new experimental changes.",
+  "historical_v5_score_reproduced": false,
+  "native_HDS_predictive_or_causal_improvement_proven": false,
+  "native_target_prediction_measurement": "uncertain-native-query-evidence.v1",
+  "render_hint_statistics_preserved_and_separate": false,
+  "GPU_model_inference_run": false,
+  "Kaggle_operation_performed": false,
+  "source_inputs": [
+    {
+      "path": "benchmark_initial.pkl",
+      "bytes": 3281,
+      "sha256": "7f619ac0831bfc4d138365681fc46de2f7107b54e2d62bbb3194b65d9aec1d67"
+    },
+    {
+      "path": "deploy_target.pkl",
+      "bytes": 823,
+      "sha256": "f0dc4b59f390862326b0e40a6ff0f8910d9e6487ae244efb1ae9ab495f79ba19"
+    },
+    {
+      "path": "git_status.txt",
+      "bytes": 356,
+      "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+    },
+    {
+      "path": "preamble.txt",
+      "bytes": 976,
+      "sha256": "3aefbd3aa7d3a1c5c610b42d13476de509e06834b029f5c88eb6c0980081d6ea"
+    },
+    {
+      "path": "README.dataset.md",
+      "bytes": 211,
+      "sha256": "21abef2e39a887c8ffa024ce87f5cd5614a6dc5e87c9b5edf75db2c9c4295abe"
+    },
+    {
+      "path": "setup_commands.json",
+      "bytes": 10359,
+      "sha256": "650c2cfe94b972c38883861a2c648e4e32f35d7eefb6af43afaa5b844d0a6bf6"
+    },
+    {
+      "path": "src/ARC3-Inference/configs/eval.json",
+      "bytes": 39,
+      "sha256": "ecd210094502c47eabb26d5dcf2995d3b2c069f66fe772016d9b164832f8c5e9"
+    },
+    {
+      "path": "src/ARC3-Inference/configs/inference.json",
+      "bytes": 1901,
+      "sha256": "6902224082ad6dc6c824fdef68010c9beea5b8d7097a422cbdc7c1a2172aa44e"
+    },
+    {
+      "path": "src/ARC3-Inference/configs/inference.openrouter.json",
+      "bytes": 1818,
+      "sha256": "d60d45e4a5a18fcb17338b2b1c316de83b36390dd5afb93031884491a6ca1c7e"
+    },
+    {
+      "path": "src/ARC3-Inference/configs/significance.json",
+      "bytes": 316,
+      "sha256": "41bae6010678729ba11d356f7c8e01fd8361f392ddcbf7a260fc6280f8ae35fc"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/__init__.py",
+      "bytes": 90,
+      "sha256": "d9244cc613220677e2c47b8cd5a218786b918a542bcba63682a3d0778006cf8a"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/__init__.py",
+      "bytes": 216,
+      "sha256": "0c0a18c681d1f6c035848048af21405b36021f93bdd465e44896494454886813"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/action_names.py",
+      "bytes": 1988,
+      "sha256": "baeb20a43e5873cd1e109637e65d1f2fd62c72f03603a8e06c858130c020284d"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/noop_repeat_guard.py",
+      "bytes": 8327,
+      "sha256": "7f35f1d60ed3dfac65b09e66b2e45e60a71aa08fbb0716b974ed953fc98189c8"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/priority_pace_reference.json",
+      "bytes": 700,
+      "sha256": "313c779a28988aac3ee66b01d0dea7cc3b105fdd45e4f7b8c41de6c23762fa9c"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/priority_scheduler.py",
+      "bytes": 5792,
+      "sha256": "f9f8a4bd21a1066073bb97d50639be2c2410d481a97e5b1cab9d6214ebe70bbe"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/prompts.py",
+      "bytes": 28185,
+      "sha256": "eae27f2b9b07b0b87dc5a6e88a27110f72d53ad0a18bebb9b432b03e1f5bad92"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/python_tool_sandbox.py",
+      "bytes": 38731,
+      "sha256": "3900b7255842df04be9ad08f91b521279a2e63f8226ac4bc77fb6de7a4e36943"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/runtime_state.py",
+      "bytes": 3886,
+      "sha256": "371e211ac2e364829f44acd1bd9de85284c365445c8bb4669445ac4a7545ac73"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/tool_agent.py",
+      "bytes": 343911,
+      "sha256": "053556f4a2d19bbb0f04d3ecde14bad2d76abfe91e89254740b763136a5a8e82"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/agent/vision_context.py",
+      "bytes": 12590,
+      "sha256": "b30cadfacdf23524b19f6993f7a3c8bb68d13d01d5b68c0504b8fccd35195bf8"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/__init__.py",
+      "bytes": 56,
+      "sha256": "97c7fcfe9e5f8b109b90416413b052099ab628e8c1c6a8c888612b3074a1b6bf"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/kaggle.py",
+      "bytes": 17688,
+      "sha256": "d600a993a8642a808fb83080be40bfc3fd9ababa6b84e15abba713e8e2d7ebbe"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/run.py",
+      "bytes": 54176,
+      "sha256": "69756c29ee5bba3d7be8b519b1d3eac25bdfd347a092bbea7aff42344f9f0780"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/framework/solver.py",
+      "bytes": 81223,
+      "sha256": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/__init__.py",
+      "bytes": 53,
+      "sha256": "36ac2d2804aa381c402ee585e9c45f3d58d9a8b3075510cdd772df2eec2ef889"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/chat.py",
+      "bytes": 7135,
+      "sha256": "f9ac5aa9459ef11161020b275e0af6595b255fc35a1f8d4966a505d955e4cd31"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/config_value.py",
+      "bytes": 1184,
+      "sha256": "a10980e5e708f68cfdef0d065a0907137d6f26749ab6f2ba5f7135421847a5c6"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/eval.py",
+      "bytes": 28385,
+      "sha256": "28df9899d6bcb5d02c068934d5828e217deddaebb29a12a706be5fe2a0f3c447"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/eval_plot.py",
+      "bytes": 9848,
+      "sha256": "2e8a426161a230eb748bcc1db30ed2605c16351f6f5a51e77cae8d1cc19124f3"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/significance.py",
+      "bytes": 33491,
+      "sha256": "d3d19d4b9f95c4ca0dda099f04857f5f6507c6a3a3479dd5cea20c6b8e2eb6af"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/traces.py",
+      "bytes": 27525,
+      "sha256": "d8a4941558fb7117951474b1a72ad744eccfc330cef58187981556a2e00768b4"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/tools/vllm_runtime_lora_guard.py",
+      "bytes": 3889,
+      "sha256": "a5c3e4a06b8706d9c0f05f28d7395ae93e90c6774fbe2e15194e69536f6b6e2e"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/animation.py",
+      "bytes": 13473,
+      "sha256": "b835584ead6d449c3bfb72f1c1df03186907ae882e4325cfc97dd584684c3824"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/frame_diff.py",
+      "bytes": 13626,
+      "sha256": "843be0ce9225ae19de91dd34409bd7b7cf69ebad1ff73e69759c506c161bdeee"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/grid_utils.py",
+      "bytes": 662,
+      "sha256": "2c96de5a6e0da2ae0390ab191b39a154784089b00fce8e2da98ebb3960715b67"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/openai_compat.py",
+      "bytes": 7254,
+      "sha256": "1d8a85edfabe1d7577348db2aed6dff6a858095e5c99a819cf0f45b123e2b1ce"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/rearc_baselines.py",
+      "bytes": 1187,
+      "sha256": "c05d98e40704ae02b487862607964a18719ff96cc5c1d66bfd678a2c0bf4e4fb"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/rearc_version.py",
+      "bytes": 1829,
+      "sha256": "2548c1b2ba4b3bdd65de8b6255ece8d3317a06f9d4bbc25ed58aa46ed1da8826"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/retained_functions.py",
+      "bytes": 14928,
+      "sha256": "9450d8c73fa5f84f40f7bd7bc3868ab63fadde2c68e4546de7b041b387be0b37"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/run_artifacts.py",
+      "bytes": 4769,
+      "sha256": "c1a0c1a0bd994ae712dffe182b7c92af9fdd2dc68cccc8b472a356dbc3ad3b3b"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/segmentation.py",
+      "bytes": 10590,
+      "sha256": "1bd1346e4b87a8eca5f1b67df88237cb7527f96132de84772b2094de95353aed"
+    },
+    {
+      "path": "src/ARC3-Inference/inference/utils/viewer_artifacts.py",
+      "bytes": 3855,
+      "sha256": "21f948f7398bdc16b8eaf9771edf0a3c6505349794c9c44154870b075f07a52f"
+    },
+    {
+      "path": "src/ARC3-Inference/Makefile",
+      "bytes": 26654,
+      "sha256": "03194bbee6d93be4d469090a620da9169e6a34c7940505074db750cdda021eba"
+    },
+    {
+      "path": "src/ARC3-Inference/pyproject.toml",
+      "bytes": 2019,
+      "sha256": "5538b502bdedf7bf206f645731498ca5858571b148d05a89e4514e2934f54d0a"
+    },
+    {
+      "path": "src/ARC3-Inference/README.md",
+      "bytes": 12709,
+      "sha256": "3547705bad40217d199f8ddab8b0904286a98ae24a3b9e0829a8afec8ed612b8"
+    },
+    {
+      "path": "src/ARC3-Inference/scripts/ensure_server_api_key.sh",
+      "bytes": 562,
+      "sha256": "77b7ddfbb851b728a6aab5654c770f0e0669327d7209216436ef694516f6ff0b"
+    },
+    {
+      "path": "src/ARC3-Inference/scripts/server_curl.sh",
+      "bytes": 476,
+      "sha256": "89c1433fe8357543fccaeb5b84b4504f26299d1f77affbfdf21b2c8a5b4f3907"
+    },
+    {
+      "path": "src/ARC3-Inference/uv.lock",
+      "bytes": 362326,
+      "sha256": "ce317cea860fef6b066e6c795a0b67fc4d32a9612d77746f17fec1da2b0fd9f2"
+    },
+    {
+      "path": "src/ARC3-Inference/viewer/__init__.py",
+      "bytes": 32,
+      "sha256": "4cbb695abe781a6161423cba58afadb3128aa0b38b8db3b5f25f5bad8b513f10"
+    },
+    {
+      "path": "src/ARC3-Inference/viewer/data.py",
+      "bytes": 73347,
+      "sha256": "fba85b9466760662c622e1952662014b6d6e891bca1733110d985c38e77f39f6"
+    },
+    {
+      "path": "src/ARC3-Inference/viewer/index.html",
+      "bytes": 54595,
+      "sha256": "1ed5561d8d63574d4e1b4196fcccf0291deda1d4954125fb74c0529a3237cb1d"
+    },
+    {
+      "path": "src/ARC3-Inference/viewer/server.py",
+      "bytes": 8933,
+      "sha256": "6e4a3d4d3f7a28e5a4ff0866d6e11fb5d40190ec71a388418024dc07a77f3069"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/Makefile",
+      "bytes": 3759,
+      "sha256": "f52dc1fba0db556626e10e56f86c4ff229e94ada6e2c35b6724e7be97fae0c00"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/pyproject.toml",
+      "bytes": 2383,
+      "sha256": "ec6fa0c8c192e0b384fdace109f87ac7afbdb18b08caa10d0c603a5d685973db"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/README.md",
+      "bytes": 1741,
+      "sha256": "d35cec21c37539efa15aef2cbff62e09d318d79df3d6950d66329378881fe9ca"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/scripts/refresh_examples.py",
+      "bytes": 3596,
+      "sha256": "941c7a84f9bc186edf125b583aa2d0773f67d9919b500ea18b4b88b401886909"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/__init__.py",
+      "bytes": 1146,
+      "sha256": "f7f02949ee64cdaf6d1b0ae83f2096ace20acdc40fd3cacb4efd2f312101cedc"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/benchmark.py",
+      "bytes": 21393,
+      "sha256": "d273e8056f83a3d1557d31c50c9716ed205258c8b1ba31747367a743d51c9497"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/competition_arcade.py",
+      "bytes": 9568,
+      "sha256": "1d5adf9290ed8700fa15a4d0494944320403bb45906b263de195adf74a43abfa"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/deploy.py",
+      "bytes": 22835,
+      "sha256": "d17296cad0178ab1ce34990152157d32f6e267fcd890093284b23ad1b5d94d7d"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/deploy_inline.py",
+      "bytes": 6070,
+      "sha256": "e21e43e0457b4a5d140b3be3953c98afbf358a33d0b713cfba5b0276f4631a31"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/deploy_kaggle.py",
+      "bytes": 36121,
+      "sha256": "e3a8517d021818fdced11dd35865304de79e69f9081b8a4619a5b807f98a03de"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/deploy_slurm.py",
+      "bytes": 23285,
+      "sha256": "30b326ee4292fae799f9e439c513a5e199092790f364bed53d0d9259b5b9bfb4"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/diagnostics.py",
+      "bytes": 128557,
+      "sha256": "b78e534f2a0f54eb92cae430106773f60f968eda5c8ac17791b511732642b6eb"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/game.py",
+      "bytes": 30002,
+      "sha256": "8609e0646e96616decc936daf4bff102afd480beb69ef1e9e778cd2c1c7df225"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/game_api.py",
+      "bytes": 14742,
+      "sha256": "51639e22cc0d35db49137f0168b2de557b1848482a4c2cf65ade2a1202511221"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/game_examples.py",
+      "bytes": 3673,
+      "sha256": "9d349f8dfd5a9842a5e71d084a9e0b38aeaa4de29a4d5977da5bb8ddabd935f5"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/kaggle/taaf_kaggle_run.ipynb",
+      "bytes": 18698,
+      "sha256": "717db2d0ef76ddbffb8fa646e5b618a5b9cdaa122bfbb693353669b3f49725d7"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/kaggle/taaf_kaggle_run_share.ipynb",
+      "bytes": 26879,
+      "sha256": "a843f24f935c1828f82d37547ec955e8c95face8119622daef9e47c0a7ee7213"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/kaggle_random.py",
+      "bytes": 10435,
+      "sha256": "26739fbac70efdf527f5d81e0f878ffeb4ed734540f0de872daefee07042d5c1"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/solver.py",
+      "bytes": 3337,
+      "sha256": "8c126b6e762768ef5ee51e8a6b7bac2153d7f24a262f6d16a9e472817232d64f"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/solver_examples.py",
+      "bytes": 12105,
+      "sha256": "1b6b47956c0e5ec9bdfda7f35d9b1f3e7a4834041ca1fc3c16a2586ac9d6b9d4"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/standard_benchmarks.py",
+      "bytes": 5063,
+      "sha256": "a21b7d02369491fbed5872a28defb79b14afe9a2603ebb5fd6925ec43924087a"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/src/taaf/support.py",
+      "bytes": 974,
+      "sha256": "4c41b13970867b745124ef43ffeec41481eb61ab25a73e225fca3d03b155bc7f"
+    },
+    {
+      "path": "src/tufa-arc-agi-framework/uv.lock",
+      "bytes": 185724,
+      "sha256": "912c88e380a859bcd5801d1bf5c87c202519594c9fca031b2c3950129f5f796f"
+    },
+    {
+      "path": "taaf-kaggle-bundle.json",
+      "bytes": 161,
+      "sha256": "52f844965b2b80de6e6ef759dfc9ffa3258f42407e0ed1788ec28ff250a7a8cb"
+    },
+    {
+      "path": "teardown_commands.json",
+      "bytes": 1021,
+      "sha256": "25d8cb3f3217baaaf5d671f5f6bc1a1e7e52dc14af2c8676fb1e565d9f36c73c"
+    }
+  ],
+  "frozen_R3_builder_sha256": "3b1b87bf7075c015c41f0378d7e8b5b42135ec1fa6868886f555565ee270eb1d",
+  "candidate_runtime_source_sha256": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d",
+  "evidence_visibility": "shown",
+  "shared_user_prompt_and_tool_description_extended": true,
+  "shared_prompt_note": "Optional hds_query(candidate) inspects ONE legal action without executing it. Use an inspection-only Python call, read its returned UNCERTAIN native evidence, then visually reason and choose your action in a separate Python call. Native HOLD and missing evidence remain unresolved; there is no endorsement or action authorization. Continue independent legal exploration on HOLD, errors, or budget exhaustion. For MOUSE use exact integer row/col; do not enumerate coordinates. Board change is not proof of level progress. For MOUSE only, native context additionally observes the PRE-target same-color 4-connected component pixel area. The separate actual-effect target distinguishes changes within the fixed7x7 PRE-target square and outside it. These are observed geometry, not established mechanisms or progress. Remote-only is not a no-op, failure or HUD classification. Missing/shape-incomparable effect stays unknown.",
+  "shared_Python_tool_API_extended": true,
+  "automatic_execute_time_query_removed_in_both_arms": true,
+  "one_after_response_update_per_actual_nonRESET_action": true,
+  "native_HDS_version": "original canonical 0.4.2; no C2-079 patch",
+  "native_judgment_modified": false,
+  "uncertain_native_HOLD_and_partial_forecasts_may_be_shown": true,
+  "endorsement": false,
+  "distinct_candidate_queries_max_per_public_state": 2,
+  "same_call_query_action_flag": "UNREVIEWED; no causal adoption claim",
+  "per_actual_response_measurement": "matched-query-before-actual-outcome.v1",
+  "all_preceding_nonRESET_outcomes_retained_for_same_covered_past_majority": true,
+  "clipped_or_unknown_forecasts_remain_unmeasured": true,
+  "public_available_actions_before_after_and_projected_inputs_preserved": true,
+  "query_scope": "whole_query_original_0.4.2",
+  "kernel_id_and_title_normalize_identically": true,
+  "patched_additional_source_sha256": {
+    "src/ARC3-Inference/inference/agent/tool_agent.py": "3b7527b146216a761107c16f494fdc41c9ffbbce2007272985d27233eab7daeb",
+    "src/ARC3-Inference/inference/agent/python_tool_sandbox.py": "b2b6cfd9d0a507512a0f20147e3f5f4d0db5ac963ae38eb75a89eb41eb97f2ec"
+  },
+  "frozen_C2_081_r2_builder_sha256": "0a69f1bd43aabbba0746c8269228399dae0f0a87ed71b3cc2d13f164c881098e",
+  "frozen_C2_081_r2_runtime_sha256": "34a5c02fddc7caf7648c1b15d9369d2bdb2535b652b3868faa55fdce24853a8b",
+  "observer_source_sha256": "42f7596610f89e54a0fd9c0645f18546e3799ec0719f87f845c2b42f739fcc13",
+  "observer_runtime_source_sha256": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d",
+  "observer_projection_revision": "Action6-PRE4CC-area-and-7x7-actual-effect.v1",
+  "observer_provenance": {
+    "area_source": "検証/ARC3作用点成分面積HDS比較.py",
+    "area_source_sha256": "cf3f783c39501b2887eb41acba20dd865854c00fc23d21127952cda8490c91e1",
+    "components_source": "検証/ARC3公開画素効果診断.py",
+    "components_source_sha256": "003cbbae82e6da73919341496faaab47ad353fd6a2f9b1697375a4b5aea10d7c",
+    "effect_source": "検証/ARC3作用点効果HDS学習診断.py",
+    "effect_source_sha256": "331245be4dbffb17826fecc081c38ec68957e22992163e763cf97c6bfbb69dff",
+    "positive_offline_proof_sha256": "8a24087d6a2e445a1e3991e155a3a63025d1b917c4f35f8bb20fdb542227ec24",
+    "prior_positive_context": "REDUCED before-context without action availability; one reused game only",
+    "runtime_context": "FULL original before-context plus exactly ONE PRE-area integer"
+  },
+  "additional_PRE_features": [
+    [
+      "作用前公開状態",
+      "作用点同色4連結成分面積"
+    ]
+  ],
+  "PRE_area_used_for_both_query_and_update": true,
+  "new_actual_teacher_target": "公開作用点効果区分",
+  "new_teacher_classes": [
+    "局所なし・局所以外なし",
+    "局所なし・局所以外あり",
+    "局所あり・局所以外なし",
+    "局所あり・局所以外あり"
+  ],
+  "teacher_fields_absent_from_query": [
+    "公開応答区分",
+    "公開作用点効果区分"
+  ],
+  "nonAction6_new_fields": "omitted",
+  "shape_mismatch_or_empty_effect": "UNKNOWN; omit new target, retain original public outcome",
+  "component_shape_identity_or_color_ids_added_as_features": false,
+  "native_HDS_or_helper_action_policy_changed": false,
+  "offline_positive_evidence_is_runtime_improvement_proof": false,
+  "runtime_context_is_full_not_the_positive_reduced_schema": true,
+  "locality_forecast_values_are_descriptive_active_ref_links_not_guarded_qualification": true,
+  "shared_user_prompt_note": "Optional hds_query(candidate) inspects ONE legal action without executing it. Use an inspection-only Python call, read its returned UNCERTAIN native evidence, then visually reason and choose your action in a separate Python call. Native HOLD and missing evidence remain unresolved; there is no endorsement or action authorization. Continue independent legal exploration on HOLD, errors, or budget exhaustion. For MOUSE use exact integer row/col; do not enumerate coordinates. Board change is not proof of level progress. For MOUSE only, native context additionally observes the PRE-target same-color 4-connected component pixel area. The separate actual-effect target distinguishes changes within the fixed7x7 PRE-target square and outside it. These are observed geometry, not established mechanisms or progress. Remote-only is not a no-op, failure or HUD classification. Missing/shape-incomparable effect stays unknown.",
+  "frozen_C2_085_builder_sha256": "1d10bbce0082c79a802b9425b243fdd91e194402c24802ec3854c2d6391a47df",
+  "frozen_C2_085_runtime_prefix_sha256": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8",
+  "learning_runtime_source_sha256": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d",
+  "learning_treatment_flag": "ARC3_HDS_GAME_RESPONSE_UPDATES",
+  "native_game_response_updates_enabled": true,
+  "native_game_response_learning_mode": "enabled",
+  "initial_prior_records_both_arms": 5,
+  "evidence_visibility_both_arms": "shown",
+  "only_treatment": "native game-response update ingestion enabled versus disabled",
+  "actual_public_observer_teachers_computed_and_logged_in_both": true,
+  "disabled_update_status": "game_response_update_disabled",
+  "disabled_update_is_expected_not_native_rejection_or_budget_exhaustion": true,
+  "query_renderer_uses_actual_native_return_not_new_teacher_history": true,
+  "prior_native_updates_separate_from_game_update_counts": true,
+  "learning_configuration_frozen_in_manifest_and_telemetry": true,
+  "observer_helper_action_policy_prompt_and_model_same_in_both": true,
+  "offline_majority_fallback_used_as_action_policy": false,
+  "C2_085_visibility_study_completed": false,
+  "actual_learning_effect_score_gain_proven": false
+}

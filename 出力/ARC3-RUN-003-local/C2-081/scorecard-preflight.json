@@ -1,0 +1,50 @@
+{
+  "schema": "arc3-python-hds-query-scorecard-preflight.v1",
+  "observed_at_utc": "2026-10-27T00:55:05.6137382Z",
+  "sources": {
+    "scorer_sha256": "ac5250d5a36d846205166e7aed36715a81e8341efe227aae395a185672cb7520",
+    "tests_sha256": "0d9fe301f2b553f559d9900ff9d85f23733a8b3f159460f91bc08534c6a4bd7d",
+    "unchanged_common_sha256": "6ca19fcb4860b257e71c292ca77e7d775660f0c8f2f759bc4a0c984d6544db6a",
+    "official_RHAE_helper_sha256": "d19754a0e8df5aaeb73a5b763517bc4c5aa5a413fd4b08e8f11d0725f8e066ac",
+    "strictly_past_comparator_source_sha256": "b49524127e53254bc00bc3498eb3ee45ee29332900beee1969a3d0e009b7ada1"
+  },
+  "test_command": [
+    "TEMP/arc3-v6-locked-20261027/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "検証/test_ARC3視覚HDS照会対応採点.py"
+  ],
+  "focused_pytest": {
+    "exit_code": 0,
+    "passed": 14,
+    "elapsed_seconds": 14.34
+  },
+  "ruff": "PASS",
+  "fixture_scope": "Synthetic benchmark/events/response rows, joined to copied real frozen C2-081-r2 notebook/metadata/bundle/build sources. No current private C2-081 terminal output scored.",
+  "actual_frozen_arm_preflight_sha256": "ba2a5c7b7371c5ef1020c23939cfe3eae239b8cc465bf4b8485fd94769e272e0",
+  "reused_contracts": [
+    "exact terminal COMPLETE/version/selected-file hashes/alias proof",
+    "official score_run and public START_FIELDS/first_event",
+    "cumulative clock audit",
+    "strictly previous same-covered comparator"
+  ],
+  "added_contracts": [
+    "C2-081 schema and shadow+visibility",
+    "actual native12/prior/bridge byte equality to frozen originalR3",
+    "masked/shown shared source/prompt/bundle/model/pilot/public initial fields",
+    "zero queries retains gameplay and HDS learning-connection validity",
+    "integration failure preserves numeric scores and differs from NO_QUERY",
+    "same-model-response UNREVIEWED is not gameplay failure",
+    "exact candidate receipt/projection/order-trace joins",
+    "unknown or clipped or nonunique forecasts unmeasured",
+    "all preceding nonRESET outcomes enter future majority, RESET excluded",
+    "per-response update receipt/stat parity"
+  ],
+  "rendered_model_packet_exposure": "UNKNOWN unless separately verified from actual rendered tool output; RPC return alone is not model visibility",
+  "comprehension_or_adoption_proven": false,
+  "visibility_effect_proven": false,
+  "learning_effect_proven": false,
+  "common_code_candidate_notebook_metadata_or_ledgers_modified": false,
+  "Kaggle_GPU_or_model_operations_performed": false
+}

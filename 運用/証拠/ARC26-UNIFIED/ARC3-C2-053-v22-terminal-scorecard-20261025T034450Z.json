@@ -1,0 +1,106 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-053",
+  "kernel_id": "tecchannn/arc3-model-guided-c2-025/22",
+  "kernel_status": "KernelWorkerStatus.COMPLETE",
+  "terminal_status_observed_at_utc": "2026-10-25T03:35:39Z",
+  "benchmark_started_at_utc": "2026-10-25T02:08:04Z",
+  "benchmark_ended_at_utc": "2026-10-25T03:01:27Z",
+  "benchmark_runtime": "53m23s",
+  "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+  "score_source_file_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7",
+  "notebook_sha256": "292dbb5ede29e97c2111129e7eea49ea00ad84e148cc6a5cdbadb77daf0bd0a0",
+  "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "benchmark_sha256": "707657d6df33a50b0283ecd14576a9c1fb5422ad3824d494917b1d6190135586",
+  "summary_sha256": "c9655279459ce7d55afae68a1a6a06e81a1dc39246bc8d708fa18bddab9afe83",
+  "request_log_sha256": "34715b773eef4aa857c75d660e1dc43d6f1d3cbcd6d1de5ed61dcaaba91c2a75",
+  "candidate_saved_scores_match_recomputed": 3,
+  "control_saved_scores_match_recomputed": 3,
+  "paired_games": 3,
+  "game_ids": [
+    "m0r0-492f87ba",
+    "sk48-d8078629",
+    "tn36-ef4dde99"
+  ],
+  "candidate_scores": {
+    "m0r0-492f87ba": 28.57142857142857,
+    "sk48-d8078629": 2.170995822539616,
+    "tn36-ef4dde99": 0.0
+  },
+  "control_C2_046_scores": {
+    "m0r0-492f87ba": 47.61904761904761,
+    "sk48-d8078629": 2.7777777777777777,
+    "tn36-ef4dde99": 7.5306424344885885
+  },
+  "paired_deltas_vs_C2_046": {
+    "m0r0-492f87ba": -19.047619047619044,
+    "sk48-d8078629": -0.6067819552381617,
+    "tn36-ef4dde99": -7.5306424344885885
+  },
+  "candidate_mean": 10.247474797989396,
+  "candidate_median": 2.170995822539616,
+  "control_mean": 19.309155943771326,
+  "paired_mean_delta_vs_C2_046": -9.06168114578193,
+  "improved_unchanged_regressed": [
+    0,
+    0,
+    3
+  ],
+  "candidate_vs_C2_052_scores": {
+    "m0r0-492f87ba": 14.285714285714285,
+    "sk48-d8078629": 1.1452754693751923,
+    "tn36-ef4dde99": 3.571428571428571
+  },
+  "paired_deltas_vs_C2_052": {
+    "m0r0-492f87ba": 14.285714285714285,
+    "sk48-d8078629": 1.0257203531644237,
+    "tn36-ef4dde99": -3.571428571428571
+  },
+  "candidate_mean_delta_vs_C2_052": 3.9133353558167125,
+  "paired_starts_match": {
+    "m0r0-492f87ba": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true
+    },
+    "sk48-d8078629": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true
+    },
+    "tn36-ef4dde99": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true
+    }
+  },
+  "candidate_total_completed_levels": 4,
+  "control_total_completed_levels": 7,
+  "candidate_total_actions": 384,
+  "control_total_actions": 389,
+  "candidate_wins": 0,
+  "candidate_states": {
+    "gave_up": 3
+  },
+  "trace_scan": {
+    "method": "transcripts split by USER PROMPT and ASSISTANT markers; inspect first assistant response after each prompt containing Rebuild them NOW; tolerant heading matcher mirrors source acceptance of a trailing parenthetical or one-word decoration",
+    "C2_052_nudge_prompts": 56,
+    "C2_052_next_response_parseable_World_model_and_Plan": 55,
+    "C2_052_next_response_exact_bare_World_model_and_Plan": 2,
+    "C2_053_nudge_prompts": 53,
+    "C2_053_next_response_parseable_World_model_and_Plan": 47,
+    "C2_053_next_response_exact_bare_World_model_and_Plan": 3,
+    "C2_053_all_assistant_exact_bare_World_model_headers": 26,
+    "C2_053_all_assistant_exact_bare_Plan_headers": 89
+  },
+  "decision": "reject C2-053 for promotion: mean 10.247 < 19.309 gate and paired delta -9.062; all three games regressed versus C2-046. It is +3.913 over C2-052 on the same three IDs but remains substantially below C2-046.",
+  "official_submission_or_quota_use": false
+}

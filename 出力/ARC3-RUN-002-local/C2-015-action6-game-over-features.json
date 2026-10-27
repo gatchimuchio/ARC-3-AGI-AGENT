@@ -1,0 +1,381 @@
+{
+  "evaluation": "ARC3-RUN-002-C2-015",
+  "scope": "fixed development split: 5 public environments, seeds 7/31/73, current policy, max 80 requests, SDK RESET after GAME_OVER",
+  "split_seed": 20261022,
+  "public_environment_count": 25,
+  "development_environment_count": 5,
+  "condition": "previous: unmodified candidate-v4-equivalent local exploration policy",
+  "outcome_priority": [
+    "game_over",
+    "level_progress",
+    "level_decrease",
+    "no_op",
+    "board_change"
+  ],
+  "outcome_definition": "GAME_OVER state first; otherwise completed-level delta; otherwise visible latest-board changed-cell count",
+  "feature_definitions": {
+    "selected_color_frequency": "same public-board frequency buckets as C2-011",
+    "same_color_neighbors_4": "same four-neighbor buckets as C2-011",
+    "relative_center_distance": "same normalized center-distance buckets as C2-011"
+  },
+  "all_baselines_match_C2-003": true,
+  "by_seed": {
+    "7": {
+      "baseline_expected": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0
+      },
+      "current": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "baseline_matches": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      },
+      "action6_feature_counts": {
+        "selected_color_frequency": {
+          "dominant": {
+            "action6_responses": 46,
+            "game_over": 1,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 0,
+            "board_change": 45
+          },
+          "rare_lt_10pct": {
+            "action6_responses": 172,
+            "game_over": 3,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 3,
+            "board_change": 165
+          },
+          "middle_10_to_50pct": {
+            "action6_responses": 16,
+            "game_over": 1,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 1,
+            "board_change": 14
+          }
+        },
+        "same_color_neighbors_4": {
+          "3_4": {
+            "action6_responses": 107,
+            "game_over": 4,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 1,
+            "board_change": 102
+          },
+          "1_2": {
+            "action6_responses": 82,
+            "game_over": 1,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 3,
+            "board_change": 77
+          },
+          "0": {
+            "action6_responses": 45,
+            "game_over": 0,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 0,
+            "board_change": 45
+          }
+        },
+        "relative_center_distance": {
+          "outer": {
+            "action6_responses": 48,
+            "game_over": 0,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 2,
+            "board_change": 46
+          },
+          "middle": {
+            "action6_responses": 134,
+            "game_over": 4,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 2,
+            "board_change": 128
+          },
+          "central": {
+            "action6_responses": 52,
+            "game_over": 1,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 0,
+            "board_change": 50
+          }
+        }
+      }
+    },
+    "31": {
+      "baseline_expected": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0
+      },
+      "current": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "baseline_matches": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      },
+      "action6_feature_counts": {
+        "selected_color_frequency": {
+          "dominant": {
+            "action6_responses": 51,
+            "game_over": 1,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 0,
+            "board_change": 49
+          },
+          "rare_lt_10pct": {
+            "action6_responses": 167,
+            "game_over": 2,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 3,
+            "board_change": 162
+          },
+          "middle_10_to_50pct": {
+            "action6_responses": 16,
+            "game_over": 2,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 1,
+            "board_change": 13
+          }
+        },
+        "same_color_neighbors_4": {
+          "3_4": {
+            "action6_responses": 109,
+            "game_over": 4,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 3,
+            "board_change": 101
+          },
+          "1_2": {
+            "action6_responses": 82,
+            "game_over": 1,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 1,
+            "board_change": 80
+          },
+          "0": {
+            "action6_responses": 43,
+            "game_over": 0,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 0,
+            "board_change": 43
+          }
+        },
+        "relative_center_distance": {
+          "outer": {
+            "action6_responses": 55,
+            "game_over": 1,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 2,
+            "board_change": 52
+          },
+          "middle": {
+            "action6_responses": 121,
+            "game_over": 4,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 2,
+            "board_change": 114
+          },
+          "central": {
+            "action6_responses": 58,
+            "game_over": 0,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 0,
+            "board_change": 58
+          }
+        }
+      }
+    },
+    "73": {
+      "baseline_expected": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 17,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0
+      },
+      "current": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 17,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "baseline_matches": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      },
+      "action6_feature_counts": {
+        "selected_color_frequency": {
+          "rare_lt_10pct": {
+            "action6_responses": 178,
+            "game_over": 4,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 4,
+            "board_change": 169
+          },
+          "dominant": {
+            "action6_responses": 41,
+            "game_over": 1,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 1,
+            "board_change": 39
+          },
+          "middle_10_to_50pct": {
+            "action6_responses": 16,
+            "game_over": 0,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 1,
+            "board_change": 15
+          }
+        },
+        "same_color_neighbors_4": {
+          "3_4": {
+            "action6_responses": 99,
+            "game_over": 2,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 3,
+            "board_change": 94
+          },
+          "1_2": {
+            "action6_responses": 92,
+            "game_over": 1,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 3,
+            "board_change": 87
+          },
+          "0": {
+            "action6_responses": 44,
+            "game_over": 2,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 0,
+            "board_change": 42
+          }
+        },
+        "relative_center_distance": {
+          "middle": {
+            "action6_responses": 143,
+            "game_over": 5,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 5,
+            "board_change": 133
+          },
+          "outer": {
+            "action6_responses": 47,
+            "game_over": 0,
+            "level_progress": 0,
+            "level_decrease": 0,
+            "no_op": 1,
+            "board_change": 46
+          },
+          "central": {
+            "action6_responses": 45,
+            "game_over": 0,
+            "level_progress": 1,
+            "level_decrease": 0,
+            "no_op": 0,
+            "board_change": 44
+          }
+        }
+      }
+    }
+  },
+  "interpretation_boundary": "anonymous observational aggregates only; no action, reward, HDS, or runtime change; no causal, safety, or score claim",
+  "source_sha256": {
+    "diagnostic_runner": "8ed4682874959e670ff3729817d8682a3406d979c649c811f7d3055f1b71f1ad",
+    "feature_helper": "e6235ef38ac63694e9afbb8b7973fde57a48e8145e06fd64803f7c509db71d2f",
+    "evaluation_runner": "e9ca33c3b50b0e3b7aea1bd218aafce12418769c382ae3cecee6d37ea4f02290",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "boundary": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+    "starter_agent": "85655f7a11a105e50bba76efd00bebf8056d02ddbae827a8f8a5b46e849fc087"
+  }
+}

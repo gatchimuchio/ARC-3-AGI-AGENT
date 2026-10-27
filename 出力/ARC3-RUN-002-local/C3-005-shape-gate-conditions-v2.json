@@ -1,0 +1,79 @@
+{
+  "評価": "初回公開観測での形状作用ゲート条件別診断",
+  "範囲": "固定dev先頭5公開環境、environment seed 31、各1回の初回観測",
+  "splitSeed": 20261022,
+  "環境seed": 31,
+  "初回進行中観測件数": 5,
+  "条件別成立件数": {
+    "盤面寸法支持": {
+      "成立": 5,
+      "不成立": 0
+    },
+    "対象と目標を検出": {
+      "成立": 2,
+      "不成立": 3
+    },
+    "目標が二つ": {
+      "成立": 0,
+      "不成立": 5
+    },
+    "目標が支持形状かつ完全可視": {
+      "成立": 1,
+      "不成立": 4
+    },
+    "対象が二つ": {
+      "成立": 0,
+      "不成立": 5
+    },
+    "対象が支持形状": {
+      "成立": 0,
+      "不成立": 5
+    },
+    "対象色がモデル支持": {
+      "成立": 1,
+      "不成立": 4
+    },
+    "搬送候補なし": {
+      "成立": 3,
+      "不成立": 2
+    },
+    "選択対象が一意": {
+      "成立": 0,
+      "不成立": 5
+    },
+    "結合分解分岐に非該当": {
+      "成立": 5,
+      "不成立": 0
+    }
+  },
+  "作用ゲート状態件数": {
+    "構造上不適用": 5
+  },
+  "安全境界": {
+    "HDS照会": 0,
+    "HDS学習": 0,
+    "Action要求": 0,
+    "候補実行": 0
+  },
+  "elapsedSeconds": 0.873675,
+  "input": {
+    "publicEnvironmentFileCount": 50,
+    "contentSetSha256": "d40c652dfffda990a1a32c65da3d873a36bb9c4b6bd06598704596af3c2ead79"
+  },
+  "source_sha256": {
+    "evaluation": "ead86de767dd5035250fcf5272e284751d3066a174685fbfcc5786acb116f88b",
+    "input_loader": "ba8f89bf09077622f5c67e0ba310b5c2ac68d240412178a371b7e2a3f6c22088",
+    "boundary": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+    "shape_perception": "0682a14e82fc9133e49c655a17e17bf683218ccb36d394b2b14d90066bacf852",
+    "shape_gate": "9e95ccd50d4fbd2d7aaafc7e9ec94b716b166fc446f48adada28844514ee93e1"
+  },
+  "exclusion": [
+    "game/level identifiers",
+    "GUID and observation fingerprint",
+    "raw board and pixel values",
+    "coordinates, shapes and object/target records",
+    "action arguments and trajectories",
+    "gate reason text"
+  ],
+  "interpretation_boundary": "initial public observations only; no action, HDS inference or learning, transfer, runtime or official-score claim"
+}

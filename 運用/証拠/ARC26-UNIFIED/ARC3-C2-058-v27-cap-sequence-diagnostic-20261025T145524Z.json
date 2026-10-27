@@ -1,0 +1,147 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-058-v27-cap-sequence-diagnostic",
+  "interpretation": "At action 79 / analysis step 24, two responses hit the 16384 completion-token cap; a later response for that same action returned tool_calls, followed by an action-88 / step-25 response. Thus the cap caused at least two extra length-terminated reasoning responses in the captured trace, but did not permanently prevent tool calls. More output headroom may reduce repeated calls, but score benefit is unproven and could go either way. Use paired score, level progress, action count, and generated-token totals to judge C2-060.",
+  "no_prompt_or_board_content_saved": true,
+  "observed_at_utc": "2026-10-25T14:55:24Z",
+  "official_submission_or_quota_use": false,
+  "sanitized_sequence": [
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": null,
+      "event": "request",
+      "finish_reason": null,
+      "line": 69,
+      "prompt_tokens": null,
+      "reasoning_tokens": null,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": 546,
+      "event": "response",
+      "finish_reason": "tool_calls",
+      "line": 70,
+      "prompt_tokens": 63022,
+      "reasoning_tokens": 352,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": null,
+      "event": "request",
+      "finish_reason": null,
+      "line": 71,
+      "prompt_tokens": null,
+      "reasoning_tokens": null,
+      "request_index_within_turn": 2
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": 16384,
+      "event": "response",
+      "finish_reason": "length",
+      "line": 72,
+      "prompt_tokens": 64128,
+      "reasoning_tokens": 16216,
+      "request_index_within_turn": 2
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": null,
+      "event": "request",
+      "finish_reason": null,
+      "line": 73,
+      "prompt_tokens": null,
+      "reasoning_tokens": null,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": 7289,
+      "event": "response",
+      "finish_reason": "tool_calls",
+      "line": 74,
+      "prompt_tokens": 81798,
+      "reasoning_tokens": 6301,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": null,
+      "event": "request",
+      "finish_reason": null,
+      "line": 75,
+      "prompt_tokens": null,
+      "reasoning_tokens": null,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": 16384,
+      "event": "response",
+      "finish_reason": "length",
+      "line": 76,
+      "prompt_tokens": 90445,
+      "reasoning_tokens": 16384,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": null,
+      "event": "request",
+      "finish_reason": null,
+      "line": 77,
+      "prompt_tokens": null,
+      "reasoning_tokens": null,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 79,
+      "analysis_step": 24,
+      "completion_tokens": 582,
+      "event": "response",
+      "finish_reason": "tool_calls",
+      "line": 78,
+      "prompt_tokens": 108009,
+      "reasoning_tokens": 366,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 88,
+      "analysis_step": 25,
+      "completion_tokens": 4039,
+      "event": "response",
+      "finish_reason": "tool_calls",
+      "line": 80,
+      "prompt_tokens": 110656,
+      "reasoning_tokens": 3855,
+      "request_index_within_turn": 1
+    },
+    {
+      "action": 88,
+      "analysis_step": 25,
+      "completion_tokens": 589,
+      "event": "response",
+      "finish_reason": "tool_calls",
+      "line": 82,
+      "prompt_tokens": 40297,
+      "reasoning_tokens": 475,
+      "request_index_within_turn": 1
+    }
+  ],
+  "schema": "arc3-c2-058-v27-cap-sequence-diagnostic.v1",
+  "source": {
+    "capture_complete": false,
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/requests.jsonl",
+    "sha256": "1d254fb0ee08730c434464f2d86a68ba011810d24c426e48382155f2de45cb16"
+  }
+}

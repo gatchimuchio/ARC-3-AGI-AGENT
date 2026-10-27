@@ -1,0 +1,30 @@
+{
+  "schema": "arc3-private-kernel-push-request.v1",
+  "run_id": "ARC3-RUN-003-C2-081-SHOWN-R2-V1",
+  "recorded_at_utc": "2026-10-27T00:39:31.761021+00:00",
+  "command": [
+    "C:\\Users\\ohira\\AppData\\Local\\Temp\\arc3-v6-locked-20261027\\Scripts\\kaggle.exe",
+    "kernels",
+    "push",
+    "--path",
+    "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\出力\\ARC3-RUN-003-local\\C2-081\\shown-r2",
+    "--timeout",
+    "10800"
+  ],
+  "kernel": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2",
+  "notebook_sha256": "0d0726b2607e063be526b8c05e840d40b99515f6753e7d00bcbbf7123b670262",
+  "metadata_sha256": "a4abdfebffced03924f7fe49deba87c023a911bcf86c6281a06d5b1db5bd130a",
+  "bundle_sha256": "c0b955fc6ae184440d8c1243ca27b451f83975cf434f632b51b93a31faf77604",
+  "preflight_sha256": "ba2a5c7b7371c5ef1020c23939cfe3eae239b8cc465bf4b8485fd94769e272e0",
+  "own_kernel_listing": {
+    "exit_code": 0,
+    "rows": 36,
+    "page_size": 100,
+    "target_matches": 0,
+    "known_completed_R3_present": true
+  },
+  "execution_order": "shown first for actual model/RPC integration; masked exact-source control follows; no effect conclusion before both",
+  "feature_scope": "original HDS0.4.2 public-outcome evidence only; no C2-079scope patch or C2-083/084locality feature",
+  "official_submission_or_rerun": false,
+  "do_not_duplicate_on_unknown_outcome": true
+}

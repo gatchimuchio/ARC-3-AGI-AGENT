@@ -1,0 +1,62 @@
+{
+  "評価": "公開Action応答後のHDS学習有無によるAction候補shadow比較",
+  "範囲": "公開dev split 5環境、固定split/environment/policy seed 20261022/31/31、最大80 Action、live policy生成。HDS候補はpolicyへ未接続。",
+  "公開入力": {
+    "ファイル数": 50,
+    "content_set_SHA256": "d40c652dfffda990a1a32c65da3d873a36bb9c4b6bd06598704596af3c2ead79"
+  },
+  "source_SHA256": {
+    "evaluator": "1c40cb69a96baa71622ad1f6c2bf6e481f904174c28226b616dbc1c88d4bda51",
+    "local_policy_evaluator": "ba8f89bf09077622f5c67e0ba310b5c2ac68d240412178a371b7e2a3f6c22088",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "candidate_router": "46cf5686483fb332ad234b4c76785c95853dd938c993fff86eb63d45b8ad71e9",
+    "boundary": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+    "hds_learning_evaluator": "bee10877fdf3960db886f4cdc33d208f884337d2d7fdbbb26e5f7b1dfac91e02",
+    "hds_core": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+  },
+  "条件": {
+    "development_games": 5,
+    "environment_seed": 31,
+    "policy_seed": 31,
+    "max_actions": 80,
+    "retry_game_over": true,
+    "trajectory_replay": false,
+    "HDS_input_fields": [
+      "条件.Action番号",
+      "結果.可視変化あり",
+      "結果.level進行あり",
+      "結果.新規盤面あり"
+    ]
+  },
+  "公開探索Action結果": {
+    "Action要求": 400,
+    "non_RESET_Action": 394,
+    "RESET": 6,
+    "完了level合計": 1,
+    "WIN": 0,
+    "illegal_Action": 0,
+    "no_op": 9,
+    "NOT_FINISHED以外の開始": 0
+  },
+  "HDS_shadow": {
+    "learned処理呼出数": 394,
+    "empty_control処理呼出数": 0,
+    "学習呼出後に状態版が変化した回数": 12,
+    "同一観測paired_query数": 394,
+    "query後の観測台帳安定確認数": 788,
+    "previous_empty_control": {
+      "候補数": 0,
+      "Action番号別候補数": {}
+    },
+    "current_learned_HDS": {
+      "候補数": 0,
+      "Action番号別候補数": {}
+    },
+    "delta_candidates": 0,
+    "learned_only_candidate_count": 0,
+    "control_only_candidate_count": 0,
+    "paired_observations_with_changed_candidate_set": 0,
+    "candidate_permission_or_legality_violations": 0
+  },
+  "経過秒": 193.12
+}

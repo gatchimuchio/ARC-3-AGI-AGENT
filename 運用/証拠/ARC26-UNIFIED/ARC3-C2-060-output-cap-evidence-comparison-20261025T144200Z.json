@@ -1,0 +1,61 @@
+{
+  "C2_046_control": {
+    "bytes": 146502312,
+    "complete_json_lines": 496,
+    "input_allowance_tokens": 118272,
+    "invalid_lines": 0,
+    "length_terminated_outputs": [
+      {
+        "action": 69,
+        "analysis_step": 30,
+        "completion_tokens": 12288,
+        "line": 84,
+        "prompt_tokens": 85543,
+        "reasoning_tokens": 12288
+      }
+    ],
+    "max_prompt_tokens": 116437,
+    "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/requests.jsonl",
+    "responses_with_usage": 247,
+    "sha256": "041c2aeee7dc283fd8324eff6932cea0938c63917ffa6173e706933c8c2c026f"
+  },
+  "C2_058_v27_candidate": {
+    "bytes": 93323264,
+    "complete_capture": false,
+    "complete_json_lines": 368,
+    "input_allowance_tokens": 114176,
+    "invalid_lines": 1,
+    "length_terminated_outputs": [
+      {
+        "action": 79,
+        "analysis_step": 24,
+        "completion_tokens": 16384,
+        "line": 72,
+        "prompt_tokens": 64128,
+        "reasoning_tokens": 16216
+      },
+      {
+        "action": 79,
+        "analysis_step": 24,
+        "completion_tokens": 16384,
+        "line": 76,
+        "prompt_tokens": 90445,
+        "reasoning_tokens": 16384
+      }
+    ],
+    "max_observed_prompt_tokens": 112371,
+    "observed_prompt_over_budget_count": 0,
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/requests.jsonl",
+    "remote_size": 103567872,
+    "responses_with_usage": 183,
+    "sha256": "1d254fb0ee08730c434464f2d86a68ba011810d24c426e48382155f2de45cb16"
+  },
+  "C2_059_v28_last_status": "KernelWorkerStatus.RUNNING",
+  "C2_060_push_performed": false,
+  "C2_060_treatment": "Raise output reserve 16384 to 20480 while preserving effective input allowance 118272; candidate context is 139264, the observed server limit, and feasibility must be rechecked after v28 terminal.",
+  "experiment_id": "ARC3-RUN-003/C2-060-outputcap-evidence-comparison",
+  "interpretation": "Both control and candidate logs contain at least one length-terminated output at the configured output cap. This justifies testing extra output headroom, but truncation count is not an outcome metric and does not predict score improvement. Candidate prompt overrun is not observed in the available partial request log or complete serve log; context-pruning in v27 remains unproven. The two runs have different trajectories/actions, so this is motivation only.",
+  "observed_at_utc": "2026-10-25T14:42:00Z",
+  "official_submission_or_quota_use": false,
+  "schema": "arc3-c2-060-output-cap-evidence-comparison.v1"
+}

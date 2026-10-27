@@ -1,0 +1,72 @@
+{
+  "schema": "arc26-arc3-official-submission-receipt-v1",
+  "track": "ARC3",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "submission_id": "57612586",
+  "submitted_at_utc": "2026-10-25T01:16:07.830Z",
+  "status_at_first_observation": "SubmissionStatus.PENDING",
+  "public_score": null,
+  "private_score": null,
+  "official_score_is_unobserved_not_zero": true,
+  "previous_official_submission": {
+    "submission_id": "57577905",
+    "status": "COMPLETE",
+    "public_score": 23.86,
+    "submitted_at_utc": "2026-10-24T01:15:49.963Z"
+  },
+  "rolling_24h_gate": {
+    "eligible_at_utc": "2026-10-25T01:15:49.963Z",
+    "submitted_after_eligible": true,
+    "submitted_at_utc": "2026-10-25T01:16:07.830Z"
+  },
+  "quota_before": {
+    "observed_at_utc": "2026-10-25T01:15:51Z",
+    "numToday": 0,
+    "numTotal": 6,
+    "numAllowedNow": 1
+  },
+  "quota_after": {
+    "observed_at_utc": "2026-10-25T01:16:45Z",
+    "numToday": 1,
+    "numTotal": 7,
+    "remainingToday": 0
+  },
+  "official_rules_checked_before_submit": true,
+  "rules_sources": [
+    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/overview",
+    "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/713634"
+  ],
+  "kernel": {
+    "id": "tecchannn/arc3-observation-driven-exploration-candidate",
+    "version": 6,
+    "private_run_status": "KernelWorkerStatus.COMPLETE",
+    "notebook_sha256": "957182aee3420dfa2687cfe6a5ca95e5b47af69fd3f29dfb7402bb2f5dd0a3f4",
+    "source_bundle_sha256": "d802bdad39437e5e31617cba4653b69dae447450d172f29281716859165a3319",
+    "source_bundle_file_count": 36
+  },
+  "private_run_output": {
+    "file": "submission.parquet",
+    "sha256": "688e716e8f9ad967f6211a3796070b69c74a5adb5ce93e9f1c0ba77701ea3194",
+    "is_placeholder": true,
+    "note": "Save & Run All output only; official code rerun generates the scored submission"
+  },
+  "local_paired_scorecard": {
+    "evidence_file": "運用/証拠/ARC26-UNIFIED/ARC3-prior-memory-scorecard-paired-eval-20261025T011453Z.json",
+    "evidence_sha256": "06adcede7756767598bcf712abb68cac015e7dabb94d6ef6dfed470cd7eb599f",
+    "previous_mean": 0.190256343,
+    "candidate_mean": 0.209349227,
+    "delta": 0.019092884,
+    "regressions": 1,
+    "improvements": 1,
+    "ties": 23,
+    "level_regressions": 0,
+    "wins_previous": 0,
+    "wins_candidate": 0
+  },
+  "submission_command_exit_code": 0,
+  "history_confirmation": "Kaggle read-only history returned this new submission as PENDING; no retry was issued",
+  "first_observation_file": "運用/証拠/ARC26-UNIFIED/official-cli-observation-20261025T011645Z.json",
+  "first_observed_at_utc": "2026-10-25T01:16:45Z",
+  "next_check_at_utc": "2026-10-25T01:21:45Z",
+  "submission_or_rerun_performed": true
+}

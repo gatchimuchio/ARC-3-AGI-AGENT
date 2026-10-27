@@ -1,0 +1,58 @@
+{
+  "schema": "arc26-arc3-candidate-preflight.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-058",
+  "observed_at_utc": "2026-10-25T12:49:14Z",
+  "candidate": "The C2-046 slim control had one 12,288-token response ending with finish_reason=length and no tool call. Raising only the per-response output cap to 16,384 may let that deliberation finish an action; it may also cost more runtime.",
+  "candidate_notebook_sha256": "b72c8105c1916337d6016e224762afe3d9a0c3be24a4abb539b83591e6ca48d0",
+  "base_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+  "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "changed_cells": [
+    5
+  ],
+  "notebook_cells": 25,
+  "metadata_equal": true,
+  "kernel": {
+    "id": "tecchannn/arc3-model-guided-c2-025",
+    "current_latest_version": 26,
+    "current_latest_notebook_sha256": "5bceca28e889a3f6483224f0e6f96b8191c1c142270e7b3a0f890bd8eb908632",
+    "matches_version26_remote_pull": true,
+    "current_status": "KernelWorkerStatus.COMPLETE",
+    "next_expected_version": 27,
+    "private": true,
+    "gpu": true,
+    "internet": false
+  },
+  "baseline": {
+    "experiment_id": "ARC3-RUN-003/C2-046-slim",
+    "mean_score": 19.309155943771326,
+    "request_log_sha256": "041c2aeee7dc283fd8324eff6932cea0938c63917ffa6173e706933c8c2c026f",
+    "responses": 247,
+    "finish_reason_counts": {
+      "tool_calls": 246,
+      "length": 1
+    },
+    "responses_over_4096": 20,
+    "responses_over_8192": 2,
+    "max_output_tokens": 12288,
+    "one_length_response": {
+      "completion_tokens": 12288,
+      "reasoning_tokens": 12288,
+      "analysis_step": 30
+    }
+  },
+  "inference_capacity": {
+    "server_context_length_tokens": 139264,
+    "server_max_total_tokens": 1011264,
+    "candidate_max_output_tokens": 16384,
+    "within_server_context": true
+  },
+  "paired_acceptance": {
+    "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+    "game_starts": 3,
+    "mean_strictly_greater_than": 19.309155943771326,
+    "paired_mean_delta_vs_C2-046": "positive"
+  },
+  "official_submission_or_quota_use": false,
+  "decision": "PREFLIGHT_PASS_READY_FOR_ONE_PRIVATE_OFFLINE_PILOT"
+}

@@ -1,0 +1,118 @@
+{
+  "task_id": "C2-029",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "kernel_version": 6,
+  "kernel_status": "COMPLETE",
+  "run_started_at": "2026-10-23T20:04:46.340108",
+  "run_ended_at": "2026-10-23T20:58:07.134504",
+  "elapsed_seconds": 3200.794,
+  "expected_game_ids_first3_v5_order": [
+    "sk48-d8078629",
+    "tn36-ef4dde99",
+    "m0r0-492f87ba"
+  ],
+  "game_ids_exact_v5_first3": true,
+  "initial_board_state_level_matches_v5": 3,
+  "v5_total_levels": 2,
+  "v6_total_levels": 4,
+  "v6_minus_v5_total_levels": 2,
+  "v5_total_actions": 229,
+  "v6_total_actions": 361,
+  "v6_wins": 0,
+  "v6_runtime_cap_games": [
+    "sk48-d8078629"
+  ],
+  "v6_action_cap_games": [
+    "tn36-ef4dde99",
+    "m0r0-492f87ba"
+  ],
+  "event_counts": {
+    "initial": 3,
+    "action": 361,
+    "analysis": 129
+  },
+  "previous_benchmark_sha256": "7237a2d2150820ee2aadc8ba986dcb67a12e495bd934bd686583b1cd32ebdcd2",
+  "candidate_benchmark_sha256": "0731805ffb39f93a4962d7da248b9258f506438d3d57db53d71b8b810377bf75",
+  "candidate_log_sha256": "465b19c609c68262a131a682e098452179e985869325eb9b05a8a1434955df17",
+  "candidate_notebook_sha256": "fba57e12050751ab6b5ca0b31846110418a27a4e16da6fe82e52e0ae63c5345a",
+  "games": [
+    {
+      "game_id": "sk48-d8078629",
+      "start_board_match_v5": true,
+      "start_state_match_v5": true,
+      "start_level_match_v5": true,
+      "baseline_v4_levels": 0,
+      "v5_levels": 0,
+      "v6_levels": 1,
+      "v6_minus_v5_levels": 1,
+      "v6_minus_baseline_levels_descriptive_only": 1,
+      "v5_actions": 69,
+      "v6_actions": 41,
+      "v6_state": "gave_up",
+      "v6_win": false,
+      "v6_runtime_seconds_derived": 1200.173,
+      "v6_runtime_cap_1200s": true,
+      "v6_action_cap_160": false,
+      "v6_history_tokens": 76709,
+      "v6_solver_note_tokens": 108388,
+      "v6_final_generated_tokens_field": 0,
+      "v6_event_counts": {
+        "initial": 1,
+        "action": 41,
+        "analysis": 25
+      }
+    },
+    {
+      "game_id": "tn36-ef4dde99",
+      "start_board_match_v5": true,
+      "start_state_match_v5": true,
+      "start_level_match_v5": true,
+      "baseline_v4_levels": 1,
+      "v5_levels": 0,
+      "v6_levels": 3,
+      "v6_minus_v5_levels": 3,
+      "v6_minus_baseline_levels_descriptive_only": 2,
+      "v5_actions": 80,
+      "v6_actions": 160,
+      "v6_state": "gave_up",
+      "v6_win": false,
+      "v6_runtime_seconds_derived": 1072.853,
+      "v6_runtime_cap_1200s": false,
+      "v6_action_cap_160": true,
+      "v6_history_tokens": 152902,
+      "v6_solver_note_tokens": 152902,
+      "v6_final_generated_tokens_field": 0,
+      "v6_event_counts": {
+        "initial": 1,
+        "action": 160,
+        "analysis": 54
+      }
+    },
+    {
+      "game_id": "m0r0-492f87ba",
+      "start_board_match_v5": true,
+      "start_state_match_v5": true,
+      "start_level_match_v5": true,
+      "baseline_v4_levels": 0,
+      "v5_levels": 2,
+      "v6_levels": 0,
+      "v6_minus_v5_levels": -2,
+      "v6_minus_baseline_levels_descriptive_only": 0,
+      "v5_actions": 80,
+      "v6_actions": 160,
+      "v6_state": "gave_up",
+      "v6_win": false,
+      "v6_runtime_seconds_derived": 927.513,
+      "v6_runtime_cap_1200s": false,
+      "v6_action_cap_160": true,
+      "v6_history_tokens": 128587,
+      "v6_solver_note_tokens": 128587,
+      "v6_final_generated_tokens_field": 0,
+      "v6_event_counts": {
+        "initial": 1,
+        "action": 160,
+        "analysis": 50
+      }
+    }
+  ]
+}

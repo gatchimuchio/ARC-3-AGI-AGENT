@@ -1,0 +1,221 @@
+{
+  "評価": "直前公開Frame特徴を使ったHDS shadow予測",
+  "範囲": "固定dev split先頭5公開環境、environment seed 31、policy seed 7/31/73、各80要求",
+  "splitSeed": 20261022,
+  "trainFraction": 0.75,
+  "environmentCount": 25,
+  "developmentEnvironmentCount": 5,
+  "allPublicStartsMatch": true,
+  "byPolicySeed": {
+    "7": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 389,
+      "学習件数": 289,
+      "後半照会件数": 100,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 100,
+          "Action多数派適用": 99,
+          "Action多数派正答": 98,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "FrameHDS単一予測": 40,
+          "FrameHDS正答": 40,
+          "matchedCoverage": 20,
+          "matchedActionOnlyHDS正答": 20,
+          "matchedFrameHDS正答": 20,
+          "matchedAction多数派適用": 20,
+          "matchedAction多数派正答": 20,
+          "FrameHDSがAction多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 100,
+          "Action多数派適用": 99,
+          "Action多数派正答": 99,
+          "ActionOnlyHDS単一予測": 40,
+          "ActionOnlyHDS正答": 40,
+          "FrameHDS単一予測": 60,
+          "FrameHDS正答": 60,
+          "matchedCoverage": 40,
+          "matchedActionOnlyHDS正答": 40,
+          "matchedFrameHDS正答": 40,
+          "matchedAction多数派適用": 40,
+          "matchedAction多数派正答": 40,
+          "FrameHDSがAction多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 100,
+          "Action多数派適用": 99,
+          "Action多数派正答": 84,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "FrameHDS単一予測": 20,
+          "FrameHDS正答": 20,
+          "matchedCoverage": 20,
+          "matchedActionOnlyHDS正答": 20,
+          "matchedFrameHDS正答": 20,
+          "matchedAction多数派適用": 20,
+          "matchedAction多数派正答": 20,
+          "FrameHDSがAction多数派誤りを正答": 0
+        }
+      }
+    },
+    "31": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 389,
+      "学習件数": 289,
+      "後半照会件数": 100,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 99,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "FrameHDS単一予測": 40,
+          "FrameHDS正答": 40,
+          "matchedCoverage": 20,
+          "matchedActionOnlyHDS正答": 20,
+          "matchedFrameHDS正答": 20,
+          "matchedAction多数派適用": 20,
+          "matchedAction多数派正答": 20,
+          "FrameHDSがAction多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 100,
+          "ActionOnlyHDS単一予測": 60,
+          "ActionOnlyHDS正答": 60,
+          "FrameHDS単一予測": 60,
+          "FrameHDS正答": 60,
+          "matchedCoverage": 60,
+          "matchedActionOnlyHDS正答": 60,
+          "matchedFrameHDS正答": 60,
+          "matchedAction多数派適用": 60,
+          "matchedAction多数派正答": 60,
+          "FrameHDSがAction多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 100,
+          "Action多数派適用": 100,
+          "Action多数派正答": 81,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "FrameHDS単一予測": 40,
+          "FrameHDS正答": 40,
+          "matchedCoverage": 20,
+          "matchedActionOnlyHDS正答": 20,
+          "matchedFrameHDS正答": 20,
+          "matchedAction多数派適用": 20,
+          "matchedAction多数派正答": 20,
+          "FrameHDSがAction多数派誤りを正答": 0
+        }
+      }
+    },
+    "73": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 389,
+      "学習件数": 289,
+      "後半照会件数": 100,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 100,
+          "Action多数派適用": 91,
+          "Action多数派正答": 91,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "FrameHDS単一予測": 40,
+          "FrameHDS正答": 40,
+          "matchedCoverage": 20,
+          "matchedActionOnlyHDS正答": 20,
+          "matchedFrameHDS正答": 20,
+          "matchedAction多数派適用": 20,
+          "matchedAction多数派正答": 20,
+          "FrameHDSがAction多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 100,
+          "Action多数派適用": 91,
+          "Action多数派正答": 91,
+          "ActionOnlyHDS単一予測": 51,
+          "ActionOnlyHDS正答": 51,
+          "FrameHDS単一予測": 60,
+          "FrameHDS正答": 60,
+          "matchedCoverage": 51,
+          "matchedActionOnlyHDS正答": 51,
+          "matchedFrameHDS正答": 51,
+          "matchedAction多数派適用": 51,
+          "matchedAction多数派正答": 51,
+          "FrameHDSがAction多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 100,
+          "Action多数派適用": 91,
+          "Action多数派正答": 73,
+          "ActionOnlyHDS単一予測": 20,
+          "ActionOnlyHDS正答": 20,
+          "FrameHDS単一予測": 40,
+          "FrameHDS正答": 39,
+          "matchedCoverage": 20,
+          "matchedActionOnlyHDS正答": 20,
+          "matchedFrameHDS正答": 20,
+          "matchedAction多数派適用": 20,
+          "matchedAction多数派正答": 20,
+          "FrameHDSがAction多数派誤りを正答": 0
+        }
+      }
+    }
+  },
+  "features": {
+    "ActionOnlyHDS": [
+      "条件.Action番号"
+    ],
+    "FrameHDS追加条件": [
+      "条件.直前複数Frame",
+      "条件.直前中間Grid差分",
+      "条件.直前一時Cell差分"
+    ],
+    "targets": [
+      "結果.可視変化あり",
+      "結果.level進行あり",
+      "結果.新規盤面あり"
+    ]
+  },
+  "exclusion": [
+    "RESET result",
+    "game_id",
+    "level_id",
+    "GUID",
+    "observation fingerprint",
+    "raw board/frame",
+    "coordinates",
+    "color values",
+    "trajectory",
+    "same-response frame features"
+  ],
+  "source_sha256": {
+    "shadow_runner": "dbd31f79d4609377db230abdbbb5c5cb31c7eb4c0338fa7eccfa2fe745b7c09f",
+    "evaluation_runner": "ba8f89bf09077622f5c67e0ba310b5c2ac68d240412178a371b7e2a3f6c22088",
+    "frame_diagnostic": "fd940efb544e09c8a7a07bdf7d81c791f4dfd755382dc355f29e8f9c7fec4b98",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "hds_python_sources": {
+      "__init__.py": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57",
+      "台帳.py": "a6cab8fca7cb591c42fa7444f9678fe0003da69faafcce852598286dceb522e2",
+      "吸気系.py": "50c48e5a9a8aa39158d0cdaacc0501608a829486960d41cb2fea6cb02e5660a4",
+      "型.py": "aa1241708655280b36564f5e3ff6968849b4d09790b8932aabad1570cbca302c",
+      "実行系.py": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429",
+      "懐疑.py": "bb7e85c2dbafbd430f1b7733bf3a2d307dc24e3227e79994b491cf711322f715",
+      "排気系.py": "2ba7ceb8d0d6c784d092f91fe484477127f044e50f68c54c977374b17f2f6361",
+      "推論.py": "315dd0d23a9682cdf14be71346341976cbdbcd2cbd924a250afc4ad53058dba6",
+      "検証.py": "e23f271d38e1f52d75557dbf3342abf7b59a85fbdc315a06c0040fd7ca204eb3",
+      "永続化.py": "8aa431b3012424fd8347c5b3d93a5fbf2218d35020836f5d40abb427f9d6da0d",
+      "系統.py": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5",
+      "適応.py": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac"
+    }
+  },
+  "interpretation_boundary": "fixed public development split only; sequential within-environment prediction; no causal, cross-game transfer, or official-score claim"
+}

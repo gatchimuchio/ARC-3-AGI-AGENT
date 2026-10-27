@@ -1,0 +1,84 @@
+{
+  "schema": "arc3-visual-hds-arm-preflight.v1",
+  "observed_at_utc": "2026-10-26T23:06:04+00:00",
+  "revision": "r3",
+  "builder_sha256": "3b1b87bf7075c015c41f0378d7e8b5b42135ec1fa6868886f555565ee270eb1d",
+  "focused_test_source_sha256": "05e7bec3d53aadc13b0970ef580b657588e2cb231f94334f430810e3d2e947ec",
+  "focused_tests": {
+    "passed": 11,
+    "subtests_passed": 17
+  },
+  "arms": [
+    {
+      "arm": "off-r3",
+      "notebook_sha256": "8d371b04bfb2dbc207307e86d03dcc2ab7271bdb4805fc28b5acea939af01d73",
+      "manifest_sha256": "1f819819a817f48a74b3bc2871e99d0ad04b9bb9eb92002275870fc575a3b9ad",
+      "bundle_sha256": "ed0c13e329c948e774424ebc738eaf2a8c3bb83c0bcdbcf71945a0ac3c5f3766",
+      "runtime_adapter_sha256": "2499e1d42c9176e8cd5c1096d0ebef9374a806ff067dae63d43ae5d5638a2701",
+      "kernel_id": "tecchannn/arc3-visual-hds-v6-off-r3-pilot",
+      "source_file_guards": 79,
+      "compiled_source_files": 53,
+      "cpu_generated_patch_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true
+      }
+    },
+    {
+      "arm": "shadow-r3",
+      "notebook_sha256": "2c44859bc5754198ce154c4ffb540708d5b5fe5d17a84440ace34902642ebfbe",
+      "manifest_sha256": "7f2682d38da13e702f5a5049dec90e0980bd40f180ff09f880aa75f81300f67d",
+      "bundle_sha256": "ed0c13e329c948e774424ebc738eaf2a8c3bb83c0bcdbcf71945a0ac3c5f3766",
+      "runtime_adapter_sha256": "2499e1d42c9176e8cd5c1096d0ebef9374a806ff067dae63d43ae5d5638a2701",
+      "kernel_id": "tecchannn/arc3-visual-hds-v6-shadow-r3-pilot",
+      "source_file_guards": 79,
+      "compiled_source_files": 53,
+      "cpu_generated_patch_cell": {
+        "generated_cell_executed": true,
+        "pth_newline_paths": 3,
+        "model_seed_before_import": 0,
+        "GPU_or_framework_import": false,
+        "public_source_hashguards_passed": true
+      }
+    }
+  ],
+  "arms_differ_only_mode_and_local_draft_id_title": true,
+  "source_cells_preserved_except_shared_guard_and_new_cell": true,
+  "source_cell_count_preserved": 24,
+  "all_notebook_metadata_preserved": true,
+  "r2_bundle_files_changed": [
+    "ARC3-VISUAL-HDS-MANIFEST.json",
+    "arc3_visual_hds_runtime.py"
+  ],
+  "HDS_bridge_prior_file_bytes_unchanged_from_r2": true,
+  "global_native_HOLD_and_hint_gate_unchanged": true,
+  "real_native_probe_sha256": "b11ca86bb4cb8229accf20ba5b95863cf10d50911dcfabc3cd269dff0b3654a3",
+  "native_probe_target_measurement": [
+    {
+      "generic_action_number": 1,
+      "native_status": "断定保留",
+      "target_values": [
+        "盤面変化"
+      ],
+      "rendered_hint_remains_empty": true,
+      "native_result_unmodified": true
+    },
+    {
+      "generic_action_number": 2,
+      "native_status": "断定保留",
+      "target_values": [
+        "可視変化なし"
+      ],
+      "rendered_hint_remains_empty": true,
+      "native_result_unmodified": true
+    }
+  ],
+  "model_context_modified": false,
+  "action_authorization": false,
+  "GPU_model_execution_performed_by_builder": false,
+  "Kaggle_operations_performed_by_builder": false,
+  "paired_r2_r3_score_comparison_valid": false,
+  "limitation": "R3 only changes prequential target-outcome measurement. It does not demonstrate actual-game prediction utility, causal action improvement, score gain, or whole-runtime v5 bit parity."
+}

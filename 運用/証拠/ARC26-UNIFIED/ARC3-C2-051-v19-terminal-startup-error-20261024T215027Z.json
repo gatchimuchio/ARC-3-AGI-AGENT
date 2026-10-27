@@ -1,0 +1,39 @@
+{
+  "schema": "arc3-c2-051-attempt2-terminal-startup-error.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "attempt": 2,
+  "observed_at_utc": "2026-10-24T21:50:27Z",
+  "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+  "reported_version": 19,
+  "terminal_status": "KernelWorkerStatus.ERROR",
+  "terminal_status_observed_at_utc": "2026-10-24T21:49:26Z",
+  "output_artifacts": {
+    "arc3-model-guided-c2-025.log": {
+      "bytes": 28887,
+      "sha256": "4b017beed41114d03e90e68c2833a3c9dcec396100be77acf8c5237700efd1d1"
+    },
+    "serve.log": {
+      "bytes": 29752,
+      "sha256": "ba1b8d81fd684806871df8c7c907cb382c2381668f61839b05bb820b2c90f808"
+    }
+  },
+  "benchmark_started": false,
+  "score": null,
+  "exact_failure": [
+    "Precaching: loaded 62 files (185.40 GB) in 2214.69 seconds.",
+    "DEADLINE after 2400s from server launch; server inference readiness was not confirmed",
+    "RuntimeError: SGLang inference readiness was not confirmed; offline benchmark not started"
+  ],
+  "log_times_seconds": {
+    "model_precache_loaded": 2342.526,
+    "deadline": 2467.902,
+    "papermill_runtime_error": 2468.241
+  },
+  "serve_log_last_capture_progress": "Capturing batches (bs=10 ...): 0% 0/7 [02:05<?, ?it/s]",
+  "server_ready_marker_seen": false,
+  "comparison_to_completed_v17": "v17 showed 0/7 at 02:03, TileLang compilation at 02:06, first capture at 02:18, and server ready at 19:17:53; this supports allowing more time for the same capture stage.",
+  "interpretation": "infrastructure startup failure; C2-051 gameplay treatment remains unevaluated",
+  "official_submission_or_rerun": false,
+  "submission_quota_used": false
+}

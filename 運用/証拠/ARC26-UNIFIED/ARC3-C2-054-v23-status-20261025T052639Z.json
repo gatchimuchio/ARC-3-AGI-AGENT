@@ -1,0 +1,17 @@
+{
+  "schema": "arc26-arc3-private-kernel-status.v1",
+  "experiment_id": "ARC3-RUN-003/C2-054",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 23,
+  "observed_at_utc": "2026-10-25T05:26:39Z",
+  "status": "KernelWorkerStatus.RUNNING",
+  "status_command": "uvx --from kaggle==2.2.5 kaggle kernels status tecchannn/arc3-model-guided-c2-025/23",
+  "version_evidence_path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/attempt-manifest.json",
+  "version_evidence_sha256": "ab474ca0f910d1255543a22de1ac20e8b1eec8a563dc3db5a208a522ca66ab2b",
+  "output_recovered": false,
+  "benchmark_terminal": false,
+  "candidate_scores_eligible_for_adoption": false,
+  "candidate_acceptance": "Only after terminal output is recovered and recomputed with official EnvironmentScoreCalculator: 3 matched game starts; mean > 19.309155943771326 and paired mean delta vs C2-046 positive.",
+  "kernel_push_performed": false,
+  "official_submission_or_rerun_performed": false
+}

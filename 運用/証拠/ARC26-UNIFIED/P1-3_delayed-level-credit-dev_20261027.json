@@ -1,0 +1,81 @@
+{
+  "schema": "arc3-delayed-level-credit-paired-rhae.v1",
+  "stage": "dev",
+  "split_seed": 20261022,
+  "environment_seed_and_policy_seed": [
+    7,
+    31,
+    73
+  ],
+  "evaluation": "public offline paired local policy scorecard; no HDS query or update",
+  "previous": {
+    "max_actions": 80,
+    "delayed_credit": false
+  },
+  "candidate": {
+    "max_actions": 80,
+    "credit_budget": 2.0,
+    "prior_action_window": 4,
+    "geometric_decay": 0.5,
+    "delayed_credit": true
+  },
+  "comparison": {
+    "episodes_per_condition": 15,
+    "previous_score_mean": 0.240596656,
+    "candidate_score_mean": 0.240596656,
+    "score_delta_mean": 0.0,
+    "score_improvements": 0,
+    "score_regressions": 0,
+    "score_ties": 15,
+    "levels_delta_total": 0,
+    "noops_delta_total": 0,
+    "game_over_delta_total": -1,
+    "start_matches": 15,
+    "pre_intervention_prefix_matches": 15,
+    "contract_errors": 0,
+    "illegal_actions": 0,
+    "duplicate_observations": 0,
+    "by_seed": [
+      {
+        "seed": 7,
+        "episodes": 5,
+        "score_delta_mean": 0.0,
+        "previous_levels": 1,
+        "candidate_levels": 1,
+        "levels_delta": 0,
+        "previous_noops": 9,
+        "candidate_noops": 9,
+        "previous_game_over": 6,
+        "candidate_game_over": 6
+      },
+      {
+        "seed": 31,
+        "episodes": 5,
+        "score_delta_mean": 0.0,
+        "previous_levels": 1,
+        "candidate_levels": 1,
+        "levels_delta": 0,
+        "previous_noops": 9,
+        "candidate_noops": 9,
+        "previous_game_over": 6,
+        "candidate_game_over": 5
+      },
+      {
+        "seed": 73,
+        "episodes": 5,
+        "score_delta_mean": 0.0,
+        "previous_levels": 1,
+        "candidate_levels": 1,
+        "levels_delta": 0,
+        "previous_noops": 17,
+        "candidate_noops": 17,
+        "previous_game_over": 6,
+        "candidate_game_over": 6
+      }
+    ]
+  },
+  "agent_source_sha256": "a86af8296bf5438c92b1249f9643bc12bf546227a60f0633cc2dc3805b0b1bc8",
+  "elapsed_seconds": 38.233,
+  "official_submission_made": false,
+  "notebook_or_kernel_changed": false
+}

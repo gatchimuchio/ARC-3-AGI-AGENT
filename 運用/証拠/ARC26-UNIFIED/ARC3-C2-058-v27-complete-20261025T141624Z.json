@@ -1,0 +1,142 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-output.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-058",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 27,
+  "observed_at_utc": "2026-10-25T14:16:24Z",
+  "command": "uvx --python 3.12 --from kaggle==2.2.5 kaggle kernels status tecchannn/arc3-model-guided-c2-025",
+  "cli_output": "tecchannn/arc3-model-guided-c2-025 has status \"KernelWorkerStatus.COMPLETE\"",
+  "status": "KernelWorkerStatus.COMPLETE",
+  "terminal": true,
+  "candidate_notebook_sha256": "b72c8105c1916337d6016e224762afe3d9a0c3be24a4abb539b83591e6ca48d0",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "output_directory": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z",
+  "output_file_count": 23,
+  "output_total_bytes": 111767942,
+  "output_manifest_sha256": "eccd612c2f083969536b9bf53addc5e7f7c647c607e08cdeef21c7f2a457a205",
+  "output_files": [
+    {
+      "path": ".per_game_cards.pkl",
+      "bytes": 186348,
+      "sha256": "e206e8ecec779996b20a3a896d991424d44d4008e29775ea415c0d1f440d329b"
+    },
+    {
+      "path": "arc3-model-guided-c2-025.log",
+      "bytes": 45625,
+      "sha256": "19f9cf0bb9087ef4f9dc22e67015ee08e9a1628d00a96635b2ccf7ca07dee7b5"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "bytes": 5224933,
+      "sha256": "59d364e2699efbfb869f6946a3259db0a4da2473ebb7b418ecae61f73ee9d5a5"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_viewer_data.json",
+      "bytes": 823,
+      "sha256": "328ff6d01cc1d1dfecad0f27bbe356be6cb52bd0041c7cc07768052f4399855a"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_events.jsonl",
+      "bytes": 3535864,
+      "sha256": "c55b7f4be5ca9e2ad2630c1971ebb5f436634f3ad378e98c8cfa2b88fa0d02dc"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_viewer_data.json",
+      "bytes": 872,
+      "sha256": "090b484a8101a0aa9c8908e88ad34e2140489ce10366c7b91c363b7062871fb8"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "bytes": 4078244,
+      "sha256": "fd6fb2dc097b7ec929c458e2c51b78a6d807d0e83982f8a3e5729ff2bf616439"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_viewer_data.json",
+      "bytes": 867,
+      "sha256": "c97e8fadd8139d2b1ff5ebe6eabc7f84a26f1f01959227f0dc4c5d16d0647305"
+    },
+    {
+      "path": "benchmark.json",
+      "bytes": 108113,
+      "sha256": "cfe7c7c70ef06c719a01011a527ee9cd6742299f60cf40f615bfaf73fdc2596b"
+    },
+    {
+      "path": "diagnostics.html",
+      "bytes": 702443,
+      "sha256": "43601e9ad998966a5041765630b816a65f2acd2b8e6362898d51ec61d9336508"
+    },
+    {
+      "path": "games.pkl",
+      "bytes": 581,
+      "sha256": "4bf87705fd3c0117855d2ef1963a5101db3d94c8852fcdba9612b539eb09bd68"
+    },
+    {
+      "path": "git_status.txt",
+      "bytes": 356,
+      "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+    },
+    {
+      "path": "intermediate_states.pkl",
+      "bytes": 3065819,
+      "sha256": "034fc0a74fdd82ded9396742b77d9e1dc9e8ac710236ccf1e6d77295b3027c1b"
+    },
+    {
+      "path": "movies/gm0r0-492f87ba_p0.html",
+      "bytes": 6761,
+      "sha256": "09aaa2c547774112b31ee07b1d0d3511386c936996c3026f2ec802cf8d2554f5"
+    },
+    {
+      "path": "movies/gm0r0-492f87ba_p0.mp4",
+      "bytes": 22405,
+      "sha256": "c57a3b79787419628c6e07c861b7d26addb57162a3af96e2772a865608c76b75"
+    },
+    {
+      "path": "movies/gsk48-d8078629_p0.html",
+      "bytes": 6761,
+      "sha256": "9f75340d6e784bb76c039f388860da761840af8a35ae1ed0bd9ee70a4dd2be4f"
+    },
+    {
+      "path": "movies/gsk48-d8078629_p0.mp4",
+      "bytes": 11155,
+      "sha256": "4c233749487086d7188e3bda46a7286d70c001eeaab8ea0a48c8b626dfdf2f47"
+    },
+    {
+      "path": "movies/gtn36-ef4dde99_p0.html",
+      "bytes": 6761,
+      "sha256": "2b5b65ce20b690cdf550d32b0d2626f9288d3080bf6d2115177ad06eacf33dd8"
+    },
+    {
+      "path": "movies/gtn36-ef4dde99_p0.mp4",
+      "bytes": 18570,
+      "sha256": "0dec96e4ab8535c33d9be9c93393d29af2f841e26e8918125868c5351d66d59c"
+    },
+    {
+      "path": "prompts/prompt.log",
+      "bytes": 259641,
+      "sha256": "eb40c2d27b94b72a5a93f64f0c8018122e3a0ecd82212250002bb75e3e11241b"
+    },
+    {
+      "path": "requests.jsonl",
+      "bytes": 93323264,
+      "sha256": "1d254fb0ee08730c434464f2d86a68ba011810d24c426e48382155f2de45cb16"
+    },
+    {
+      "path": "requests.jsonl.kaggle-partial",
+      "bytes": 65,
+      "sha256": "8bf8b8e4ab3eef7189cee95e1bf0fdabbc20f591b886e2635bb05967018c38bc"
+    },
+    {
+      "path": "serve.log",
+      "bytes": 1161671,
+      "sha256": "e4e7888e214ab9fceec25ddad4d0dc49c1a271de9812d5ed74b8d6493f485558"
+    }
+  ],
+  "download_note": "Kaggle version-specific output retrieval returned benchmark.json, per-game event/viewer artifacts, diagnostics and logs. requests.jsonl is partial: local file is 12,582,912 bytes and Kaggle partial sidecar reports source size 103,567,872 bytes. The exact-version read-only download stalled on that oversized log; only its verified local process tree was stopped. All other retrieved outputs were preserved.",
+  "requests_jsonl_partial": {
+    "validator": "Sun, 25 Oct 2026 14:12:37 GMT",
+    "size": 103567872
+  },
+  "official_competition_submission_made": false,
+  "official_quota_used": false
+}

@@ -1,0 +1,42 @@
+{
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-046",
+  "event": "slim treatment push pending run completion",
+  "observed_at_utc": "2026-10-24T14:31:25Z",
+  "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+  "kernel_version": 13,
+  "push_result": "Kernel version 13 successfully pushed",
+  "kernel_session_status": "KernelWorkerStatus.RUNNING",
+  "candidate_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+  "candidate_manifest_sha256": "b0bdb249cfe992794cec959ffe3e1e7380386f59c0fbfefe8dcd4467002f481f",
+  "candidate_source_matches_manifest": true,
+  "paired_preflight": {
+    "metadata_identical": true,
+    "only_memory_mode_differs": true,
+    "private": true,
+    "gpu": true,
+    "internet_disabled": true
+  },
+  "controls": {
+    "startup_timeout_seconds": 1800,
+    "offline_games": 3,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "passes": 1,
+    "concurrency": 1,
+    "official_competition_rerun": false
+  },
+  "comparison": "pending treatment output; compare to saved off control after completion",
+  "version12_observation": {
+    "status_endpoint": "RUNNING (kernel-session status is not version-specific)",
+    "pull_attempt": "GET /12 returned HTTP 403; source attribution unresolved"
+  },
+  "version13_pull_attempt": "GET /13 returned HTTP 403; no version-specific source downloaded",
+  "official_competition_score_claim": false,
+  "competition_rerun_or_submission": false,
+  "official_candidate_changed": false,
+  "protected_files_sha256": {
+    "AGENTS.md": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+    "制御/現在状態.json": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+  }
+}

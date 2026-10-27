@@ -1,0 +1,54 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-058-v27-request-log-audit",
+  "interpretation": "In the available partial candidate transcript, no recorded model prompt exceeds the 114176-token input budget (maximum 112371); this does not establish that the missing tail also did not. Two responses at action 79 / analysis step 24 ended with finish_reason=length at exactly 16384 completion tokens, showing the configured output cap was binding at least twice. This is a diagnostic clue for a later output-budget experiment, not a performance result.",
+  "next_candidate_direction_if_C2_059_rejected": "Consider a private +4096 output-reserve pilot at 20480 tokens while keeping effective input allowance 118272 by setting context window 139264 (the observed server limit); first verify startup feasibility and preflight. Do not push while version 28 is running.",
+  "observed_at_utc": "2026-10-25T14:38:31Z",
+  "official_submission_or_quota_use": false,
+  "parse": {
+    "finish_reasons": {
+      "length": 2,
+      "tool_calls": 181
+    },
+    "invalid_json_lines": 1,
+    "invalid_line_numbers": [
+      369
+    ],
+    "length_terminated_outputs": [
+      {
+        "action": 79,
+        "analysis_step": 24,
+        "completion_tokens": 16384,
+        "line": 72,
+        "prompt_tokens": 64128,
+        "reasoning_tokens": 16216
+      },
+      {
+        "action": 79,
+        "analysis_step": 24,
+        "completion_tokens": 16384,
+        "line": 76,
+        "prompt_tokens": 90445,
+        "reasoning_tokens": 16384
+      }
+    ],
+    "max_prompt_tokens": {
+      "action": 49,
+      "analysis_step": 14,
+      "line": 181,
+      "tokens": 112371
+    },
+    "observed_prompts_over_114176": 0,
+    "responses_with_prompt_usage": 183,
+    "valid_json_lines": 368
+  },
+  "schema": "arc3-c2-058-v27-request-log-audit.v1",
+  "source": {
+    "complete_capture": false,
+    "local_bytes": 93323264,
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/requests.jsonl",
+    "remote_size_from_partial_sidecar": 103567872,
+    "sha256": "1d254fb0ee08730c434464f2d86a68ba011810d24c426e48382155f2de45cb16",
+    "sidecar_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/requests.jsonl.kaggle-partial",
+    "sidecar_sha256": "8bf8b8e4ab3eef7189cee95e1bf0fdabbc20f591b886e2635bb05967018c38bc"
+  }
+}

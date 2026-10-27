@@ -1,0 +1,20 @@
+{
+  "schema": "arc26-arc3-scorecard-correction.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-055",
+  "observed_at_utc": "2026-10-25T07:28:30Z",
+  "superseded_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-055-v24-terminal-scorecard-20261025T072735Z.json",
+  "superseded_sha256": "60b12039601598f265336ae6df6666d2f508805c8c9807e51ac9e5cb1220390f",
+  "reason": "The initial audit compared against C2-046 off, while the required reference is C2-046 slim.",
+  "corrected_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-055-v24-terminal-scorecard-corrected-20261025T072830Z.json",
+  "corrected_sha256": "72b0e6d03f42b47405a2bedca65affc8042d5e0afaad8166756853213fa74f89",
+  "candidate_mean": 0.0,
+  "control_mean": 19.309155943771326,
+  "paired_mean_delta": -19.309155943771326,
+  "improved_unchanged_regressed": [
+    0,
+    0,
+    3
+  ],
+  "official_submission_or_quota_use": false
+}

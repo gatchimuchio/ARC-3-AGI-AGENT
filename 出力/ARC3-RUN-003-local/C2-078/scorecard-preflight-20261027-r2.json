@@ -1,0 +1,108 @@
+{
+  "schema": "arc3-visual-hds-scorecard-preflight.v1",
+  "observed_at_utc": "2026-10-26T23:10:46.4279466Z",
+  "scope": "Local CPU contract validation only; no C2-078 terminal output was scored in this evidence.",
+  "scorecard_source_sha256": "49874aff3eb2f5b188d5d09ab0f61f44e7f69b02b93e2c6ee8c137b57dfcc530",
+  "tests_source_sha256": "cf84cea36c95c086edf1c3e396cee956ea99ca6db552d11fe2b3597d23858c75",
+  "reused_score_helper_sha256": "d19754a0e8df5aaeb73a5b763517bc4c5aa5a413fd4b08e8f11d0725f8e066ac",
+  "python": "TEMP/arc3-v6-locked-20261027/Scripts/python.exe",
+  "pytest": {
+    "arguments": [
+      "-m",
+      "pytest",
+      "-q",
+      "検証/test_ARC3視覚HDS対応採点.py"
+    ],
+    "exit_code": 0,
+    "passed": 21,
+    "seconds": 15.9
+  },
+  "ruff": {
+    "arguments": [
+      "-m",
+      "ruff",
+      "check",
+      "検証/ARC3視覚HDS対応採点.py",
+      "検証/test_ARC3視覚HDS対応採点.py"
+    ],
+    "exit_code": 0,
+    "result": "All checks passed"
+  },
+  "inspected_modes": [
+    "off control-only",
+    "standalone off or shadow",
+    "strict identical-source paired comparison"
+  ],
+  "enforced_contracts": [
+    "terminal COMPLETE plus requested exact kernel version",
+    "local build and retrieved source hashes",
+    "selected file hashes and manifest digest",
+    "three games and initial events and HDS sidecars",
+    "pilot and model seed and actual action budget",
+    "private offline GPU metadata",
+    "paired public initial fields and model/source/budget equality"
+  ],
+  "runtime_budget_policy": "1200 seconds per game; cumulative game clocks differenced; 5 seconds measurement grace; violation retains score and marks execution invalid",
+  "HDS_failure_policy": "Retain aggregate RHAE and error evidence; mark integration invalid. Require actual succeeded shadow queries/updates per game.",
+  "target_forecast_contract": "native-target-outcome-prequential.v1 numeric counters supported separately from rendered-hint counters; no actual R3 output evaluated yet",
+  "no_rendered_support_policy": "Accuracy is UNMEASURED; zero matches do not prove no learned rules",
+  "causal_learning_or_score_improvement_proven": false,
+  "official_submission_or_quota_use": false,
+  "modified_notebooks_runtimes_ledgers": false,
+  "revision": "r2-per-game-visual-generation-gate",
+  "supersedes_evidence": {
+    "path": "出力/ARC3-RUN-003-local/C2-078/scorecard-preflight-20261027.json",
+    "preserved": true,
+    "sha256": "445162d5f97af3df9bfd253a18bdb36a535407ba984086bcf305288067bdcbb1"
+  },
+  "visual_control_generation_gate": "Every one of the three games requires positive history_generated_tokens; job totals and zero RHAE scores preserved; failed-game boolean flags emitted in benchmark order without game IDs.",
+  "R3_independent_read_only_review": {
+    "material_blockers": [],
+    "arms_preflight_sha256": "7de8ad245854516ca611f1534df4c7330d1ae44976385c5c22467ac514166c3d",
+    "actual_r3_runtime_sha256": "2499e1d42c9176e8cd5c1096d0ebef9374a806ff067dae63d43ae5d5638a2701",
+    "actual_r3_bundle_sha256": "ed0c13e329c948e774424ebc738eaf2a8c3bb83c0bcdbcf71945a0ac3c5f3766",
+    "actual_off_r3_notebook_sha256": "8d371b04bfb2dbc207307e86d03dcc2ab7271bdb4805fc28b5acea939af01d73",
+    "actual_shadow_r3_notebook_sha256": "2c44859bc5754198ce154c4ffb540708d5b5fe5d17a84440ace34902642ebfbe",
+    "notebook_metadata_bundle_runtime_hashes_match_each_build": true,
+    "r2_to_r3_bundle_changed_members": [
+      "ARC3-VISUAL-HDS-MANIFEST.json",
+      "arc3_visual_hds_runtime.py"
+    ],
+    "r2_to_r3_changed_notebook_cell_indices": [
+      6
+    ],
+    "r3_off_shadow_patch_cell_mode_only": true,
+    "all_other_notebook_cells_and_metadata_equal": true,
+    "all_79_public_preflight_source_files_equal": true,
+    "bridge_HDS_prior_bytes_unchanged": true,
+    "solver_hook_and_tool_agent_hashes_unchanged": true,
+    "model_context_prompt_and_shared_model_seed_preserved": true,
+    "r2_r3_strict_pair_mismatch_keys": [
+      "builder_source_sha256",
+      "runtime_adapter_sha256",
+      "bundle_sha256"
+    ],
+    "r3_draft_kernel_ids": [
+      "tecchannn/arc3-visual-hds-v6-off-r3-pilot",
+      "tecchannn/arc3-visual-hds-v6-shadow-r3-pilot"
+    ],
+    "live_off_r2_local_notebook_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+    "live_off_r2_local_metadata_sha256": "3c6537a086acb9990166049555c51f73d0a8a162069f0788711e122b1e521113",
+    "r2_builder_snapshot_sha256": "5ad204658e7d15191b51294e5d3a989938fccb55c04c113c130e82675ba1ed45",
+    "independent_pure_function_probe": {
+      "source": "AST extracted actual bundled _target_forecast and unchanged bridge render_hint; two frozen query objects only",
+      "probe_sha256": "b11ca86bb4cb8229accf20ba5b95863cf10d50911dcfabc3cd269dff0b3654a3",
+      "query_count": 2,
+      "native_global_HOLD_preserved": true,
+      "qualified_target_values": [
+        "盤面変化",
+        "可視変化なし"
+      ],
+      "both_rendered_hints_empty": true,
+      "both_query_objects_unmodified": true,
+      "HDS_GPU_network_execution": false
+    },
+    "review_scope": "Ready for standalone private target-prediction measurement after valid control readiness; actual-game utility, score gain, and causal improvement unverified.",
+    "Kaggle_operations_performed": false
+  }
+}

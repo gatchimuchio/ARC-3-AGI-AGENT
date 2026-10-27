@@ -1,0 +1,49 @@
+{
+  "probe": "first_action_after_sdk_initial_reset",
+  "stage": "fixed_dev_public_environments",
+  "split_seed": 20261022,
+  "dev_games": 5,
+  "seeds": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_run": 1,
+  "runs": 15,
+  "initial_reset_true": 15,
+  "first_action_true_to_false": 15,
+  "first_action_noop": 5,
+  "noop_true_to_false": 5,
+  "c2_018_reconciliation": {
+    "source_artifact_sha256": "c5c1f8fb552b3aaacb00725ce0c14a0ecf3655022567bfa5af7839a666ea7876",
+    "per_seed": {
+      "7": {
+        "runs_compared": 5,
+        "run_order_counts_match": true,
+        "first_action_noop_full_reset_changes": 2,
+        "c2_018_noop_full_reset_changes": 2,
+        "initial_reset_true_runs": 5,
+        "first_action_true_to_false_runs": 5
+      },
+      "31": {
+        "runs_compared": 5,
+        "run_order_counts_match": true,
+        "first_action_noop_full_reset_changes": 1,
+        "c2_018_noop_full_reset_changes": 1,
+        "initial_reset_true_runs": 5,
+        "first_action_true_to_false_runs": 5
+      },
+      "73": {
+        "runs_compared": 5,
+        "run_order_counts_match": true,
+        "first_action_noop_full_reset_changes": 2,
+        "c2_018_noop_full_reset_changes": 2,
+        "initial_reset_true_runs": 5,
+        "first_action_true_to_false_runs": 5
+      }
+    },
+    "exact_run_order_match": true,
+    "policy_changed": false,
+    "per_run_events_saved": false
+  }
+}

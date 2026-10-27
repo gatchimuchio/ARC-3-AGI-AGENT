@@ -1,0 +1,90 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-output.v1",
+  "run_id": "ARC3-RUN-003-C2-078-SHADOW-R3-V1",
+  "kernel": "tecchannn/arc3-visual-hds-v6-shadow-pilot",
+  "requested_kernel": "tecchannn/arc3-visual-hds-v6-shadow-r3-pilot",
+  "version": 1,
+  "status": "KernelWorkerStatus.COMPLETE",
+  "terminal": true,
+  "observed_at_utc": "2026-10-27T00:18:14.903966+00:00",
+  "retrieved_at_utc": "2026-10-27T00:22:04.109001+00:00",
+  "candidate_notebook_sha256": "2c44859bc5754198ce154c4ffb540708d5b5fe5d17a84440ace34902642ebfbe",
+  "candidate_metadata_sha256": "a916314e3948fca32692b01c0088c9913e0af38ba145a866f3a91894c5cd5ef6",
+  "output_directory": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-terminal-v1-20261027T001814Z",
+  "output_exit_code": 0,
+  "command": [
+    "C:\\Users\\ohira\\AppData\\Local\\Temp\\arc3-v6-locked-20261027\\Scripts\\kaggle.exe",
+    "kernels",
+    "output",
+    "tecchannn/arc3-visual-hds-v6-shadow-pilot/1",
+    "--path",
+    "出力/ARC3-RUN-003-local/C2-078/shadow-r3-terminal-v1-20261027T001814Z",
+    "--file-pattern",
+    "^(benchmark\\.json|git_status\\.txt|.*_events\\.jsonl|.*\\.visual-hds\\.json|.*\\.log)$",
+    "--page-size",
+    "200"
+  ],
+  "retrieval_scope": "Selected benchmark, per-action events, visual-HDS sidecars, git status and logs only; no all-output claim; no pickle/video/request loading.",
+  "output_files": [
+    {
+      "path": "arc3-visual-hds-v6-shadow-pilot.log",
+      "bytes": 35529,
+      "sha256": "e713fab040f9a7691f6676919448659d4eee55b6f5b4ba25e37e2efb9a18e801"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "bytes": 2354031,
+      "sha256": "0ddbe13046bf4478a980f57c5fd2342afb09abdf3073a44fe00596b3e4444082"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds.json",
+      "bytes": 2411,
+      "sha256": "e45b8596a7dec5da7897e64f71f837eabab0a3910279bad5edc40b2205fe7b02"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_events.jsonl",
+      "bytes": 2254362,
+      "sha256": "3a7ac5f60aebf3c7089eea3346656ab427e5f333cf05ed464ebd2f3ee55bcf75"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds.json",
+      "bytes": 2277,
+      "sha256": "fdd20248513bb30818b4442dfb7e1ee71317e3b69a1d055faa93f4dc45c90904"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "bytes": 2320055,
+      "sha256": "3c2b9b2af940ffedc9d67d71b4bc83740a94c7013d7e4174493d9d7ec2ecc0d3"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds.json",
+      "bytes": 2476,
+      "sha256": "872acd0dd30b041ca3b143f3febe5fcdd8ad197ad7f158576adbee13629ff77f"
+    },
+    {
+      "path": "benchmark.json",
+      "bytes": 62143,
+      "sha256": "59c026cc26ebe33707dc685618428d46a3e760d1a827e622eda30ac6f11ccb19"
+    },
+    {
+      "path": "git_status.txt",
+      "bytes": 356,
+      "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+    },
+    {
+      "path": "prompts/prompt.log",
+      "bytes": 328301,
+      "sha256": "0bf973ed615342c59ed4be8720cccb4ee3a64c5ded0ab664a85425f48b963700"
+    },
+    {
+      "path": "serve.log",
+      "bytes": 623958,
+      "sha256": "5e253479a71a99a6654a669fa1e5ae253efee4984c0dbc625ab63997617311b8"
+    }
+  ],
+  "output_manifest_sha256": "3e01d83599dd296a317ac7bff2bb9a335b9a5d805cd1660073cdc86227359b27",
+  "identity_verification": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-v1-identity-verification.json",
+  "identity_verification_sha256": "c2435ad16d7f3b45315744ce638052f8c3fb6bb04a977f990262125d41d8cb47",
+  "status_observation": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-observation-20261027T001814Z.json",
+  "official_submission_or_rerun_performed": false
+}

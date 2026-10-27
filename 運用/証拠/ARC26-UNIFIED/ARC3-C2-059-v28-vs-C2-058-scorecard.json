@@ -1,0 +1,87 @@
+{
+  "schema": "arc26-arc3-private-kernel-pairwise-scorecard.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-059",
+  "candidate_kernel": "tecchannn/arc3-model-guided-c2-025",
+  "candidate_version": 28,
+  "baseline_experiment": "ARC3-RUN-003/C2-058",
+  "baseline_version": 27,
+  "paired_games": 3,
+  "paired_start_checks": {
+    "m0r0-492f87ba": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true,
+      "all_match": true
+    },
+    "sk48-d8078629": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true,
+      "all_match": true
+    },
+    "tn36-ef4dde99": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true,
+      "all_match": true
+    }
+  },
+  "candidate_scores": {
+    "m0r0-492f87ba": 11.62202380952381,
+    "sk48-d8078629": 2.7777777777777777,
+    "tn36-ef4dde99": 1.6555648968505463
+  },
+  "baseline_scores": {
+    "sk48-d8078629": 1.6989005771057053,
+    "tn36-ef4dde99": 35.714285714285715,
+    "m0r0-492f87ba": 0.0
+  },
+  "paired_deltas": {
+    "m0r0-492f87ba": 11.62202380952381,
+    "sk48-d8078629": 1.0788772006720724,
+    "tn36-ef4dde99": -34.058720817435166
+  },
+  "candidate_mean": 5.3517888280507115,
+  "baseline_mean": 12.471062097130472,
+  "paired_mean_delta": -7.119273269079761,
+  "improved_unchanged_regressed": [
+    2,
+    0,
+    1
+  ],
+  "candidate_output_manifest_sha256": "171b33702ce530c1ffcf4166716ba26abd41bdd8657dce1127a529c914485478",
+  "baseline_output_manifest_sha256": "eccd612c2f083969536b9bf53addc5e7f7c647c607e08cdeef21c7f2a457a205",
+  "score_source_file_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7",
+  "candidate_scorecard_sha256": "9259e4d1e251f865115e4536b438388833fcfbd5092c0fdd32293d9c2827e939",
+  "baseline_scorecard_sha256": "1e485df14da71fc82ce3ed2f2e7a82d92daa72b8f67497ea93e2813be52b655f",
+  "baseline_score_recomputation_matches_saved": true,
+  "baseline_output_retrieval_complete": false,
+  "decision": "REJECT_C2-059_vs_C2-058",
+  "official_submission_or_quota_use": false,
+  "note": "Paired comparison uses same three game IDs, matching initial event fields, exact v28 benchmark/events, and validated v27 C2-058 scorecard logic."
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "arc26-official-cli-observation.v1",
+  "track": "ARC3",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "submission_id": "57577905",
+  "observed_at_utc": "2026-10-24T09:48:57Z",
+  "observation_method": ".venv/Scripts/kaggle.exe competitions submissions --format json --page-size 20 (read-only)",
+  "official_status": "SubmissionStatus.PENDING",
+  "publicScore": "",
+  "privateScore": "",
+  "official_score": null,
+  "score_state": "UNOBSERVED_PENDING",
+  "previous_completed_submissions": [
+    {
+      "submission_id": "57541830",
+      "official_status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.25"
+    },
+    {
+      "submission_id": "57527856",
+      "official_status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.00"
+    }
+  ],
+  "quota": {
+    "last_official_observation_at_utc": "2026-10-24T08:48:47Z",
+    "num_today": 1,
+    "num_total": 6,
+    "remaining_today": 0,
+    "current_cli_query_returns_limits": false
+  },
+  "next_due_utc": "2026-10-24T10:48:47Z",
+  "new_submission_created": false,
+  "rerun_or_push_performed": false
+}

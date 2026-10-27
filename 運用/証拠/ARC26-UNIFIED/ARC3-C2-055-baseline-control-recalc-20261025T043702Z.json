@@ -1,0 +1,37 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-055",
+  "verified_at_utc": "2026-10-25T04:37:02Z",
+  "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+  "control": "C2-046 slim saved benchmark.json",
+  "benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+  "per_game_scores": {
+    "sk48-d8078629": 2.7777777777777777,
+    "tn36-ef4dde99": 7.5306424344885885,
+    "m0r0-492f87ba": 47.61904761904761
+  },
+  "mean_score": 19.309155943771326,
+  "level_summaries": {
+    "sk48-d8078629": {
+      "completed_levels": 1,
+      "actions": 99,
+      "levels": 8,
+      "state": "gave_up"
+    },
+    "tn36-ef4dde99": {
+      "completed_levels": 2,
+      "actions": 130,
+      "levels": 7,
+      "state": "gave_up"
+    },
+    "m0r0-492f87ba": {
+      "completed_levels": 4,
+      "actions": 160,
+      "levels": 6,
+      "state": "gave_up"
+    }
+  },
+  "matches_prior_terminal_scorecard": true,
+  "prior_scorecard_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-053-v22-terminal-scorecard-20261025T034450Z.json",
+  "candidate_notebook_sha256": "c88af3f37aa9e6ff13a972f9fc07fbff1ae5042fa1d7be694d991305a6168777",
+  "candidate_status": "prepared_not_pushed"
+}

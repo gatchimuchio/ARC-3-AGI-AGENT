@@ -1,0 +1,48 @@
+{
+  "run_count": 25,
+  "event_history_aligned_runs": 25,
+  "groups": {
+    "action_limit_reached": {
+      "run_count": 21,
+      "action_count": 1680,
+      "history_generated_tokens": 1585051,
+      "solver_note_tokens": 1585051,
+      "positive_difference_runs": 0,
+      "equal_runs": 21,
+      "negative_difference_runs": 0,
+      "analysis_events": 599,
+      "token_difference": 0
+    },
+    "runtime_cap_before_action_limit": {
+      "run_count": 4,
+      "action_count": 226,
+      "history_generated_tokens": 548986,
+      "solver_note_tokens": 577215,
+      "positive_difference_runs": 3,
+      "equal_runs": 1,
+      "negative_difference_runs": 0,
+      "analysis_events": 163,
+      "token_difference": 28229
+    }
+  },
+  "total": {
+    "action_count": 1906,
+    "history_generated_tokens": 2134037,
+    "solver_note_tokens": 2162266,
+    "positive_difference_runs": 3,
+    "equal_runs": 22,
+    "negative_difference_runs": 0,
+    "analysis_events": 762,
+    "token_difference": 28229
+  },
+  "counter_scope": {
+    "history_generated_tokens": "per-action deltas recorded when actions execute",
+    "solver_note_tokens": "final cumulative session generated tokens",
+    "aggregate_difference": "session tokens after the last recorded action",
+    "specific_request_type": "not distinguishable in saved aggregates"
+  },
+  "source": {
+    "runner_source_sha256": "65ddfcdbe8c24fdc31246ff018b51469827b21c38995243a36a818adbed33370",
+    "upstream_commit": "7652836056c59e044f093e3c13ed7438c814169e"
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "schema": "arc3-hds-condition-count-paired-rhae.v1",
+  "observed_at_utc": "2026-10-26T19:28:43+00:00",
+  "evaluation": "public dev paired; HDS max conditions 2 versus 3; support fixed at 3; online guidance enabled",
+  "split_seed": 20261022,
+  "games": 5,
+  "seeds": [
+    31
+  ],
+  "max_actions_per_game": 80,
+  "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+  "agent_source_sha256": "b0643f6d6bfff7fa1520a86248d77963ffeff465b9674df2aa62acdd8a20bbba",
+  "baseline_max_conditions_2": {
+    "runs": [
+      {
+        "seed": 31,
+        "games": 5,
+        "rhae_score_mean": 0.146987366,
+        "levels": 1,
+        "no_ops": 6,
+        "guided_actions": 0,
+        "predicted_candidates": 0,
+        "hds_update_seconds": 103.170841
+      }
+    ],
+    "per_game_aggregates": [
+      {
+        "seed": 31,
+        "game_index": 0,
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 2,
+        "no_ops": 4,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 78,
+        "hds_update_seconds": 26.928309,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      {
+        "seed": 31,
+        "game_index": 1,
+        "score": 0.7349368318756073,
+        "levels": 1,
+        "actions": 80,
+        "resets": 2,
+        "no_ops": 0,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 78,
+        "hds_update_seconds": 19.836311,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      {
+        "seed": 31,
+        "game_index": 2,
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 1,
+        "no_ops": 0,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 79,
+        "hds_update_seconds": 9.593875,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      {
+        "seed": 31,
+        "game_index": 3,
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 0,
+        "no_ops": 0,
+        "wins": 0,
+        "stop_reason": "action_limit",
+        "hds_updates": 80,
+        "hds_update_seconds": 20.804885,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      {
+        "seed": 31,
+        "game_index": 4,
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 1,
+        "no_ops": 2,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 79,
+        "hds_update_seconds": 26.007461,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      }
+    ]
+  },
+  "candidate_max_conditions_3": {
+    "runs": [
+      {
+        "seed": 31,
+        "games": 5,
+        "rhae_score_mean": 0.146987366,
+        "levels": 1,
+        "no_ops": 6,
+        "guided_actions": 0,
+        "predicted_candidates": 0,
+        "hds_update_seconds": 190.127096
+      }
+    ],
+    "per_game_aggregates": [
+      {
+        "seed": 31,
+        "game_index": 0,
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 2,
+        "no_ops": 4,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 78,
+        "hds_update_seconds": 49.522508,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      {
+        "seed": 31,
+        "game_index": 1,
+        "score": 0.7349368318756073,
+        "levels": 1,
+        "actions": 80,
+        "resets": 2,
+        "no_ops": 0,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 78,
+        "hds_update_seconds": 39.950886,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      {
+        "seed": 31,
+        "game_index": 2,
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 1,
+        "no_ops": 0,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 79,
+        "hds_update_seconds": 13.954947,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      {
+        "seed": 31,
+        "game_index": 3,
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 0,
+        "no_ops": 0,
+        "wins": 0,
+        "stop_reason": "action_limit",
+        "hds_updates": 80,
+        "hds_update_seconds": 37.901918,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      },
+      {
+        "seed": 31,
+        "game_index": 4,
+        "score": 0.0,
+        "levels": 0,
+        "actions": 80,
+        "resets": 1,
+        "no_ops": 2,
+        "wins": 0,
+        "stop_reason": "GAME_OVER",
+        "hds_updates": 79,
+        "hds_update_seconds": 48.796837,
+        "hds_predicted_candidates": 0,
+        "hds_guided_actions": 0
+      }
+    ]
+  },
+  "paired_delta_conditions3_minus_conditions2": {
+    "pairs": 5,
+    "score_improvements": 0,
+    "score_regressions": 0,
+    "score_ties": 5,
+    "score_delta_mean": 0.0,
+    "levels_delta_total": 0,
+    "no_ops_delta_total": 0,
+    "guided_action_delta_total": 0
+  },
+  "elapsed_seconds": 345.227505,
+  "official_submission_made": false
+}

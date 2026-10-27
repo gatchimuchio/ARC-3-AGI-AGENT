@@ -1,0 +1,26 @@
+{
+  "schema": "arc26-arc3-private-kernel-status.v1",
+  "experiment_id": "ARC3-RUN-003/C2-054",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 23,
+  "observed_at_utc": "2026-10-25T05:23:43Z",
+  "status": "KernelWorkerStatus.RUNNING",
+  "status_command": ".venv\\Scripts\\kaggle.exe kernels status tecchannn/arc3-model-guided-c2-025/23",
+  "version_evidence_path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/attempt-manifest.json",
+  "version_evidence_sha256": "a19f4c3ea07aa5b24e3ef7f18de412c0a5c3cc42df7109d60229435e2d5b5407",
+  "run_elapsed_seconds_since_running": 4062,
+  "kaggle_logs_available": false,
+  "output_file_count": 0,
+  "output_recovered": false,
+  "benchmark_terminal": false,
+  "candidate_scores_eligible_for_adoption": false,
+  "candidate_acceptance": "Only after terminal output is recovered and recomputed with official EnvironmentScoreCalculator: 3 matched game starts; mean > 19.309155943771326 and paired mean delta vs C2-046 positive.",
+  "live_read_only_watcher_session_id": 18107,
+  "kernel_push_performed": false,
+  "official_submission_or_rerun_performed": false,
+  "runtime_comparison": {
+    "C2-053_benchmark_runtime_seconds": 3203,
+    "C2-053_benchmark_end_to_terminal_observation_seconds": 2052,
+    "interpretation": "C2-054 remains within the prior observed post-benchmark completion interval; no stall or score inferred."
+  }
+}

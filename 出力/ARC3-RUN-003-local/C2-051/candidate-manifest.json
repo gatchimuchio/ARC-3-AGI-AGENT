@@ -1,0 +1,96 @@
+{
+  "experiment": "ARC3-RUN-003/C2-051",
+  "status": "rejected: terminal v20 mean below C2-046 slim",
+  "hypothesis": "C2-048 kept both World model and level-specific Plan across level transitions. Preserve the durable World model while clearing current_plan on a level transition to reduce stale-plan interference and retain reusable mechanics.",
+  "base": {
+    "experiment": "C2-048",
+    "kernel_version": 15,
+    "notebook_sha256": "ba2977ced60f1a37e1a795c8c872afa81a7b2644f16069f45615bbe499403aad",
+    "scorecard_mean": 16.88844068389523
+  },
+  "reference": {
+    "experiment": "C2-046 slim",
+    "kernel_version": 12,
+    "notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+    "scorecard_mean": 19.309155943771326
+  },
+  "arm": {
+    "selective_level_memory": {
+      "notebook_sha256": "0caf246e690489e225a4a1fe6b2de6e04c56ffdfc0b3ba310fc192ecfd9ca482",
+      "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+      "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+      "memory_mode": "slim",
+      "ARC3_WM_WIPE_ON_LEVEL": 0,
+      "ARC3_WM_REVISE_NUDGES": true,
+      "level_transition_effect": "preserve world_model; clear current_plan",
+      "change": "two added patch lines in the level-transition revise block"
+    }
+  },
+  "source_audit": {
+    "base_notebook_cell_count": 25,
+    "changed_cell_indices": [
+      3
+    ],
+    "metadata_bytes_identical": true,
+    "unified_patch_hunk_count_adjusted": true,
+    "patch_parse_with_git_apply_numstat": true
+  },
+  "controls": {
+    "offline_games": 3,
+    "seed": 0,
+    "passes": 1,
+    "concurrency": 1,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "startup_timeout_seconds": 1800,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_competition_rerun": false,
+    "official_submission": false,
+    "quota_use": false
+  },
+  "acceptance_gate": {
+    "same_public_start_states": 3,
+    "official_local_scorecard_mean_strictly_above": 19.309155943771326,
+    "paired_mean_delta_vs_C2_046_slim_strictly_positive": true,
+    "candidate_is_filter_not_official_score": true
+  },
+  "pre_run_state": {
+    "C2_050_v16": "terminal inference readiness deadline failure; benchmark did not start",
+    "C2_050_v17": "latest kernel run COMPLETE at 2026-10-24T20:28:55Z",
+    "no_official_submission_or_quota_use": true
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "reported_version": 18,
+      "status": "ERROR before benchmark; no score",
+      "evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v18-terminal-startup-error-20261024T210540Z.json"
+    },
+    {
+      "attempt": 2,
+      "reported_version": 19,
+      "status": "ERROR before benchmark; no score",
+      "evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v19-terminal-startup-error-20261024T215027Z.json"
+    },
+    {
+      "attempt": 3,
+      "status": "benchmark started; latest status RUNNING",
+      "notebook_sha256": "a10d620db0ef2a6bcc29a6db003b41bbb6951aa584f03fbc5a88199d79c0ed2f",
+      "runner_startup_timeout_seconds": 2700,
+      "watchdog_timeout_seconds": 2700,
+      "reported_version": 20
+    }
+  ],
+  "terminal_result": {
+    "kernel_version": 20,
+    "status": "COMPLETE",
+    "mean_score": 11.360817966184825,
+    "reference_mean_score": 19.309155943771326,
+    "delta_mean": -7.948337977586501,
+    "paired_regressions": 3,
+    "paired_improvements": 0,
+    "evidence": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-051-v20-terminal-scorecard-20261024T234025Z.json"
+  }
+}

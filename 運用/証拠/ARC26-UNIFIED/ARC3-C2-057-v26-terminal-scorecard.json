@@ -1,0 +1,101 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-scorecard.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-057",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 26,
+  "kernel_status": "KernelWorkerStatus.COMPLETE",
+  "status_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-057-v26-status-20261025T111732Z.json",
+  "candidate_notebook_sha256": "d05fffd9168217d7cd30f2e6f8e472a60f20ac7268f9f683e2998ae203e8725a",
+  "candidate_output_directory": "運用/証拠/ARC26-UNIFIED/ARC3-C2-057-v26-output",
+  "candidate_output_file_count": 31,
+  "candidate_output_total_bytes": 125442225,
+  "candidate_output_manifest_sha256": "fc934adb9400c21a1748dc254093b8358fb4479c0c0949957d8bf595e6de275d",
+  "candidate_benchmark_sha256": "bbe3aba950025b3280b34b9125f568e92d3c5eec8b9ed432aed9a1f4a49148b1",
+  "control": "C2-046 slim",
+  "control_output_directory": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim",
+  "control_benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+  "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+  "score_source_file_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7",
+  "scorecard_source_sha256": "6849a98278a2301609e3e19c937a4489c49915efb17dad7d60d06a4772d24afe",
+  "paired_games": 3,
+  "paired_start_checks": {
+    "m0r0-492f87ba": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "all_initial_event_fields_match": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true
+    },
+    "sk48-d8078629": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "all_initial_event_fields_match": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true
+    },
+    "tn36-ef4dde99": {
+      "board": true,
+      "board_ascii": true,
+      "level": true,
+      "title": true,
+      "run_status": true,
+      "score": true,
+      "state": true,
+      "type": true,
+      "reward": true,
+      "all_initial_event_fields_match": true,
+      "number_of_levels_match": true,
+      "public_baseline_actions_match": true
+    }
+  },
+  "candidate_scores": {
+    "m0r0-492f87ba": 47.61904761904761,
+    "sk48-d8078629": 0.9199102092480518,
+    "tn36-ef4dde99": 3.571428571428571
+  },
+  "control_C2_046_slim_scores": {
+    "m0r0-492f87ba": 47.61904761904761,
+    "sk48-d8078629": 2.7777777777777777,
+    "tn36-ef4dde99": 7.5306424344885885
+  },
+  "paired_deltas_vs_C2_046_slim": {
+    "m0r0-492f87ba": 0.0,
+    "sk48-d8078629": -1.857867568529726,
+    "tn36-ef4dde99": -3.9592138630600173
+  },
+  "candidate_mean": 17.370128799908077,
+  "control_mean": 19.309155943771326,
+  "paired_mean_delta_vs_C2_046_slim": -1.9390271438632496,
+  "improved_unchanged_regressed": [
+    0,
+    1,
+    2
+  ],
+  "candidate_levels_completed": 6,
+  "control_levels_completed": 7,
+  "candidate_total_actions": 393,
+  "control_total_actions": 389,
+  "candidate_run_states": {
+    "gave_up": 3
+  },
+  "candidate_saved_scores_match_recomputed": true,
+  "control_saved_scores_match_recomputed": true,
+  "acceptance": "mean > 19.309155943771326 and paired mean delta > 0",
+  "decision": "REJECT_C2-057",
+  "official_submission_or_quota_use": false
+}

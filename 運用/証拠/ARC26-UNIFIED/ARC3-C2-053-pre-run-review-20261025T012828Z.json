@@ -1,0 +1,58 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-053",
+  "reviewed_at_utc": "2026-10-25T01:28:28Z",
+  "previous_candidate": "C2-052 version 21 COMPLETE; rejected by matched three-game scorecard",
+  "previous_result": {
+    "candidate_mean": 6.334139442172682,
+    "control_mean": 19.309155943771326,
+    "paired_mean_delta": -12.975016501598644,
+    "regressed_games": 3,
+    "public_level_transitions": 4,
+    "nudge_prompt_blocks": 56,
+    "assistant_world_model_update_lines": 9,
+    "assistant_plan_update_lines": 100,
+    "nudge_followed_by_update": 52
+  },
+  "reason_for_next_factor": "C2-052 trace shows the generic nudge was repeated while the World model was rarely emitted. The pending nudge clears only after an accepted World model update. C2-053 keeps cadence and memory reset fixed and tests only explicit, separate section-label formatting.",
+  "candidate_notebook_sha256": "292dbb5ede29e97c2111129e7eea49ea00ad84e148cc6a5cdbadb77daf0bd0a0",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "changed_cell_sources": [
+    3
+  ],
+  "metadata": {
+    "id": "tecchannn/arc3-model-guided-c2-025",
+    "title": "ARC3 Model Guided C2-025",
+    "code_file": "submission.ipynb",
+    "language": "python",
+    "kernel_type": "notebook",
+    "is_private": true,
+    "enable_gpu": true,
+    "enable_internet": false,
+    "machine_shape": "NvidiaRtxPro6000",
+    "dataset_sources": [
+      "dfranzen/pennyroyal-v253",
+      "dfranzen/taaf-kaggle-source-bundle-copy"
+    ],
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "kernel_sources": [],
+    "model_sources": [
+      "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+      "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+    ],
+    "docker_image": "gcr.io/kaggle-private-byod/python@sha256:57e612b484cf3df5026ee4dcc3cb176974b22b2bc0937fb1e16132a8be4cb13c"
+  },
+  "static_checks": {
+    "notebook_schema": "PASS",
+    "unified_patch_hunks": "150; counts validated",
+    "changed_cell_sources_only": [
+      3
+    ],
+    "metadata_byte_identical_to_C2-052": true
+  },
+  "private_offline_three_game_pilot": true,
+  "official_submission_or_quota_use": false,
+  "control_mean_scorecard": 19.309155943771326,
+  "decision_pending_terminal_scorecard": true
+}

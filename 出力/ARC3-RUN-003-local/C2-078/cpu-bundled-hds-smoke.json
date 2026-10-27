@@ -1,0 +1,51 @@
+{
+  "schema": "arc3-c2-078-isolated-actual-hds-bundle-smoke.v1",
+  "run_id": "ARC3-RUN-003-C2-078-CPU-BUNDLE",
+  "observed_at_utc": "2026-10-26T22:37:14+00:00",
+  "bundle_sha256": "c21517f22af814571982df1412934074b5ff67132715e98419e9e5d85b06d9c4",
+  "result": {
+    "isolated_without_site_packages": true,
+    "loaded_from_extracted_bundle": true,
+    "prior": {
+      "version": "arc3-prior-context-v0.1",
+      "loaded_count": 5,
+      "boundary": "ARC3事前記憶",
+      "action_authorization": false,
+      "visible_change_coefficient": 0.0,
+      "expected_count": 5,
+      "load_status": "loaded"
+    },
+    "stats": {
+      "updates_attempted": 1,
+      "updates_succeeded": 1,
+      "queries_attempted": 1,
+      "queries_succeeded": 1,
+      "update_errors": 0,
+      "query_errors": 0,
+      "summary_errors": 0,
+      "prior_updates_attempted": 5,
+      "prior_updates_succeeded": 5,
+      "prior_update_errors": 0,
+      "skipped_resets": 0,
+      "rejected_requests": 0,
+      "budget_exhaustion_requests": 0,
+      "update_seconds": 0.015659,
+      "query_seconds": 0.000952,
+      "total_hds_seconds": 0.06753,
+      "prior_load_seconds": 0.050919,
+      "update_budget": 2,
+      "query_budget": 2,
+      "hds_seconds_budget": 30.0,
+      "update_budget_exhausted": false,
+      "query_budget_exhausted": false,
+      "time_budget_exhausted": false,
+      "time_budget_can_overrun_one_inflight_call": true,
+      "last_error_type": null
+    },
+    "query_status": "queried",
+    "update_status": "updated",
+    "gpu_model_called": false
+  },
+  "exit_code": 0,
+  "HDS_predictive_or_score_improvement_proven": false
+}

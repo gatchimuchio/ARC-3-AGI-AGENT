@@ -1,0 +1,111 @@
+{
+  "accuracy_claim": false,
+  "agent_source_sha256": "47539cd3c0a19b033fb782df61e4275062b8f7b2343eca3376fbda9b50237486",
+  "aggregate": {
+    "actions": {
+      "0": 2,
+      "1": 35,
+      "2": 32,
+      "3": 32,
+      "4": 32,
+      "5": 14,
+      "6": 80,
+      "7": 13
+    },
+    "board_changes": 237,
+    "game_over_events": 2,
+    "illegal": 0,
+    "level_events": 1,
+    "noop_nonreset": 3,
+    "steps": 240,
+    "visible_changes": 237,
+    "win_events": 0
+  },
+  "boards_or_game_ids_saved": false,
+  "elapsed_seconds": 61.151,
+  "network_calls_blocked": true,
+  "observed_at_utc": "2026-10-24T11:16:54Z",
+  "official_agent_subclass_verified": true,
+  "per_environment_aggregates_without_ids": [
+    {
+      "action_counts": {
+        "0": 1,
+        "1": 13,
+        "2": 13,
+        "3": 13,
+        "4": 13,
+        "5": 13,
+        "6": 1,
+        "7": 13
+      },
+      "action_requests": 80,
+      "board_change_steps": 78,
+      "environment_ordinal": 1,
+      "final_state": "NOT_FINISHED",
+      "game_over_events": 1,
+      "hds_queries": 80,
+      "hds_updates": 79,
+      "illegal_actions": 0,
+      "level_progress_events": 0,
+      "levels_completed": 0,
+      "nonreset_noop_steps": 2,
+      "sdk_steps": 80,
+      "step_request_match": true,
+      "visible_state_change_steps": 78,
+      "win_events": 0
+    },
+    {
+      "action_counts": {
+        "0": 1,
+        "6": 79
+      },
+      "action_requests": 80,
+      "board_change_steps": 80,
+      "environment_ordinal": 13,
+      "final_state": "NOT_FINISHED",
+      "game_over_events": 1,
+      "hds_queries": 80,
+      "hds_updates": 79,
+      "illegal_actions": 0,
+      "level_progress_events": 1,
+      "levels_completed": 1,
+      "nonreset_noop_steps": 0,
+      "sdk_steps": 80,
+      "step_request_match": true,
+      "visible_state_change_steps": 80,
+      "win_events": 0
+    },
+    {
+      "action_counts": {
+        "1": 22,
+        "2": 19,
+        "3": 19,
+        "4": 19,
+        "5": 1
+      },
+      "action_requests": 80,
+      "board_change_steps": 79,
+      "environment_ordinal": 25,
+      "final_state": "NOT_FINISHED",
+      "game_over_events": 0,
+      "hds_queries": 80,
+      "hds_updates": 80,
+      "illegal_actions": 0,
+      "level_progress_events": 0,
+      "levels_completed": 0,
+      "nonreset_noop_steps": 1,
+      "sdk_steps": 80,
+      "step_request_match": true,
+      "visible_state_change_steps": 79,
+      "win_events": 0
+    }
+  ],
+  "runner": "official agents.agent.Agent.main + arc_agi Arcade/LocalEnvironmentWrapper OFFLINE",
+  "sample_environment_ordinals": [
+    1,
+    13,
+    25
+  ],
+  "schema": "arc3-official-starter-transition-probe.v1",
+  "source_bundle_sha256": "d00ab4af0613a4949e13a886fbaf12a5b61c868c3aaaac42320ba38d1268301e"
+}

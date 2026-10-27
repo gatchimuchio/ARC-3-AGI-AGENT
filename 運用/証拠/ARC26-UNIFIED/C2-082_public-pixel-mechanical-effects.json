@@ -1,0 +1,1052 @@
+{
+  "schema": "arc3-verified-public-trace-pixel-effect-diagnostic.v1",
+  "run_id": "C2-082_public-pixel-mechanical-effects",
+  "observed_at": "2026-10-27T00:18:14.445061+00:00",
+  "result": "OBSERVATIONAL_ONLY",
+  "software_sha256": {
+    "検証/ARC3公開画素効果診断.py": "003cbbae82e6da73919341496faaab47ad353fd6a2f9b1697375a4b5aea10d7c",
+    "検証/ARC3HDS視覚公開記録逐次比較.py": "4d917e5007c88eb510664b872535dc016417d9b7d728113242f612f2b7cdee37",
+    "検証/ARC3視覚HDS対応採点.py": "6ca19fcb4860b257e71c292ca77e7d775660f0c8f2f759bc4a0c984d6544db6a"
+  },
+  "source": {
+    "retrieval_path": "出力/ARC3-RUN-003-local/C2-078/off-r2-terminal-v1-retrieval-20261026T232820Z.json",
+    "retrieval_sha256": "5ba043dd55eb22e243866550efb6ac95a176755318dad20703dd569c39c93092",
+    "output_manifest_sha256": "919fe472c53ab5cd2e2bee5d372a6a00d3b9caff49cf86ab20826e8fb994cd03",
+    "all_declared_output_files_hash_verified": 11,
+    "all_240_action_history_joins_verified": true,
+    "source_build_manifest_sha256": "175808d149c9da773de00b578dd15f58b5e07ae099ca9cf64cdae4e513e2db11",
+    "source_notebook_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+    "source_metadata_sha256": "3c6537a086acb9990166049555c51f73d0a8a162069f0788711e122b1e521113",
+    "actual_recording_source_bundle_sha256": "c21517f22af814571982df1412934074b5ff67132715e98419e9e5d85b06d9c4",
+    "recording_solver_declared_sha256_from_build": "6a05212fc955020db8fd2027aa5c16626c593ad83a95b967d3e1c92372bdc5bc",
+    "recording_solver_is_not_separate_bundle_member": true,
+    "all_recording_source_members_hash_verified": 15,
+    "public_event_definition_original_source_sha256": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52",
+    "source_event_writer_public_levels_line": 782,
+    "immediate_action_response_source_line": 1251,
+    "exact_kernel_version": 1,
+    "kernel_identity_verified": true,
+    "source_counts": {
+      "action6_coordinate_joins": 80,
+      "actual_action_records": 240,
+      "analysis_records_excluded": 76,
+      "initial_records": 3,
+      "nonreset_transitions": 239,
+      "public_outcome:レベル進行": 4,
+      "public_outcome:可視変化なし": 12,
+      "public_outcome:盤面変化": 223,
+      "reset_actions_excluded": 1
+    },
+    "public_level_provenance": "event.score = int(new_state.raw.levels_completed); not benchmark RHAE/reward",
+    "available_action_fields_absent": 240,
+    "automatic_flags_absent": true,
+    "initial_RESET_display_not_an_actual_action": true,
+    "benchmark_fields_used": [
+      "game_runs.game_id (join only)",
+      "game_runs.history.action"
+    ]
+  },
+  "actual_source_notebook_and_metadata_hashes_asserted": true,
+  "border_band_width_pixels": 2,
+  "component_method": "same-color 4-connectivity; exact normalized shape; only one-before/one-after signatures matched; duplicate signatures UNKNOWN, without spatial tie resolution",
+  "translation_interpretation": "geometric correspondence only; creation/destruction cannot be excluded; no inferred physical identity or HUD semantics",
+  "shape_change_and_unmatched_components": "UNKNOWN mechanical cause; not evidence that no motion occurred",
+  "local_windows": "3x3 and 7x7 centered on actual PRE-action Action6 target, clipped to visible board bounds",
+  "strata": {
+    "all": {
+      "counts": {
+        "action6_global_change_without_3x3_local_change": 30,
+        "action6_global_change_without_7x7_local_change": 26,
+        "action6_responses": 80,
+        "after_components": 26245,
+        "ambiguous_after_components": 23601,
+        "ambiguous_before_components": 23618,
+        "ambiguous_shape_groups": 1803,
+        "before_components": 26200,
+        "border_only_changed_responses": 28,
+        "full_height_changed_bbox_responses": 35,
+        "full_width_changed_bbox_responses": 5,
+        "responses": 239,
+        "responses_with_ambiguous_shape_matches": 236,
+        "responses_with_unique_translation": 24,
+        "translated_component_area_sum": 804,
+        "unique_stationary_correspondences": 1599,
+        "unique_translated_correspondences": 33,
+        "unmatched_after_components": 1012,
+        "unmatched_before_components": 950
+      },
+      "measurements": {
+        "affected_color_union_count": {
+          "n": 227,
+          "min": 2,
+          "median": 3,
+          "mean": 3.6299559471365637,
+          "max": 9
+        },
+        "affected_destination_color_count": {
+          "n": 227,
+          "min": 1,
+          "median": 2,
+          "mean": 2.7400881057268722,
+          "max": 9
+        },
+        "affected_source_color_count": {
+          "n": 227,
+          "min": 1,
+          "median": 2,
+          "mean": 2.616740088105727,
+          "max": 9
+        },
+        "bbox_area": {
+          "n": 227,
+          "min": 1,
+          "median": 286,
+          "mean": 914.2511013215859,
+          "max": 4096
+        },
+        "bbox_changed_fill_share": {
+          "n": 227,
+          "min": 0.0005040322580645161,
+          "median": 0.14171122994652408,
+          "mean": 0.39262879501258113,
+          "max": 1.0
+        },
+        "bbox_height": {
+          "n": 227,
+          "min": 1,
+          "median": 17,
+          "mean": 26.26431718061674,
+          "max": 64
+        },
+        "bbox_width": {
+          "n": 227,
+          "min": 1,
+          "median": 17,
+          "mean": 23.11453744493392,
+          "max": 64
+        },
+        "border_changed_pixels": {
+          "n": 227,
+          "min": 0,
+          "median": 1,
+          "mean": 5.431718061674009,
+          "max": 398
+        },
+        "border_share_of_changes": {
+          "n": 227,
+          "min": 0.0,
+          "median": 0.0196078431372549,
+          "mean": 0.18537415575424873,
+          "max": 1.0
+        },
+        "changed_pixels": {
+          "n": 239,
+          "min": 0,
+          "median": 32,
+          "mean": 75.0376569037657,
+          "max": 2972
+        },
+        "changed_pixels_in_unique_translation_union": {
+          "n": 239,
+          "min": 0,
+          "median": 0,
+          "mean": 5.96652719665272,
+          "max": 292
+        },
+        "target_local_3x3_available_pixels": {
+          "n": 80,
+          "min": 9,
+          "median": 9.0,
+          "mean": 9.0,
+          "max": 9
+        },
+        "target_local_3x3_changed_pixels": {
+          "n": 80,
+          "min": 0,
+          "median": 3.0,
+          "mean": 1.925,
+          "max": 9
+        },
+        "target_local_3x3_share_of_all_changes": {
+          "n": 80,
+          "min": 0.0,
+          "median": 0.5,
+          "mean": 0.39803592026363244,
+          "max": 0.75
+        },
+        "target_local_7x7_available_pixels": {
+          "n": 80,
+          "min": 49,
+          "median": 49.0,
+          "mean": 49.0,
+          "max": 49
+        },
+        "target_local_7x7_changed_pixels": {
+          "n": 80,
+          "min": 0,
+          "median": 3.0,
+          "mean": 3.6875,
+          "max": 47
+        },
+        "target_local_7x7_share_of_all_changes": {
+          "n": 80,
+          "min": 0.0,
+          "median": 0.75,
+          "mean": 0.4305176112371366,
+          "max": 0.75
+        },
+        "unique_translation_share_of_changes": {
+          "n": 227,
+          "min": 0.0,
+          "median": 0.0,
+          "mean": 0.07017179277298828,
+          "max": 0.9655172413793104
+        }
+      },
+      "changed_pixel_count_histogram": [
+        {
+          "pixels": 0,
+          "responses": 12
+        },
+        {
+          "pixels": 1,
+          "responses": 30
+        },
+        {
+          "pixels": 2,
+          "responses": 3
+        },
+        {
+          "pixels": 4,
+          "responses": 47
+        },
+        {
+          "pixels": 8,
+          "responses": 6
+        },
+        {
+          "pixels": 9,
+          "responses": 2
+        },
+        {
+          "pixels": 12,
+          "responses": 9
+        },
+        {
+          "pixels": 13,
+          "responses": 2
+        },
+        {
+          "pixels": 29,
+          "responses": 2
+        },
+        {
+          "pixels": 32,
+          "responses": 10
+        },
+        {
+          "pixels": 34,
+          "responses": 7
+        },
+        {
+          "pixels": 36,
+          "responses": 14
+        },
+        {
+          "pixels": 37,
+          "responses": 7
+        },
+        {
+          "pixels": 50,
+          "responses": 1
+        },
+        {
+          "pixels": 52,
+          "responses": 4
+        },
+        {
+          "pixels": 53,
+          "responses": 1
+        },
+        {
+          "pixels": 64,
+          "responses": 22
+        },
+        {
+          "pixels": 66,
+          "responses": 16
+        },
+        {
+          "pixels": 72,
+          "responses": 5
+        },
+        {
+          "pixels": 73,
+          "responses": 4
+        },
+        {
+          "pixels": 96,
+          "responses": 3
+        },
+        {
+          "pixels": 97,
+          "responses": 1
+        },
+        {
+          "pixels": 100,
+          "responses": 8
+        },
+        {
+          "pixels": 102,
+          "responses": 5
+        },
+        {
+          "pixels": 105,
+          "responses": 4
+        },
+        {
+          "pixels": 117,
+          "responses": 2
+        },
+        {
+          "pixels": 120,
+          "responses": 2
+        },
+        {
+          "pixels": 121,
+          "responses": 1
+        },
+        {
+          "pixels": 129,
+          "responses": 1
+        },
+        {
+          "pixels": 160,
+          "responses": 2
+        },
+        {
+          "pixels": 161,
+          "responses": 1
+        },
+        {
+          "pixels": 224,
+          "responses": 1
+        },
+        {
+          "pixels": 603,
+          "responses": 1
+        },
+        {
+          "pixels": 2639,
+          "responses": 1
+        },
+        {
+          "pixels": 2946,
+          "responses": 1
+        },
+        {
+          "pixels": 2972,
+          "responses": 1
+        }
+      ],
+      "relative_translation_delta_histogram": [
+        {
+          "dx": -20,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": -16,
+          "dy": 0,
+          "correspondences": 2
+        },
+        {
+          "dx": -10,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": -8,
+          "dy": -4,
+          "correspondences": 1
+        },
+        {
+          "dx": -6,
+          "dy": 0,
+          "correspondences": 15
+        },
+        {
+          "dx": 0,
+          "dy": 6,
+          "correspondences": 3
+        },
+        {
+          "dx": 8,
+          "dy": 4,
+          "correspondences": 1
+        },
+        {
+          "dx": 10,
+          "dy": 0,
+          "correspondences": 5
+        },
+        {
+          "dx": 10,
+          "dy": 3,
+          "correspondences": 1
+        },
+        {
+          "dx": 11,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": 14,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": 15,
+          "dy": -34,
+          "correspondences": 1
+        }
+      ],
+      "translated_component_area_histogram": [
+        {
+          "area": 12,
+          "correspondences": 1
+        },
+        {
+          "area": 14,
+          "correspondences": 2
+        },
+        {
+          "area": 16,
+          "correspondences": 18
+        },
+        {
+          "area": 32,
+          "correspondences": 8
+        },
+        {
+          "area": 41,
+          "correspondences": 2
+        },
+        {
+          "area": 69,
+          "correspondences": 2
+        }
+      ]
+    },
+    "progress": {
+      "counts": {
+        "action6_global_change_without_3x3_local_change": 0,
+        "action6_global_change_without_7x7_local_change": 0,
+        "action6_responses": 2,
+        "after_components": 606,
+        "ambiguous_after_components": 158,
+        "ambiguous_before_components": 169,
+        "ambiguous_shape_groups": 14,
+        "before_components": 565,
+        "border_only_changed_responses": 0,
+        "full_height_changed_bbox_responses": 2,
+        "full_width_changed_bbox_responses": 2,
+        "responses": 4,
+        "responses_with_ambiguous_shape_matches": 2,
+        "responses_with_unique_translation": 2,
+        "translated_component_area_sum": 294,
+        "unique_stationary_correspondences": 1,
+        "unique_translated_correspondences": 8,
+        "unmatched_after_components": 439,
+        "unmatched_before_components": 387
+      },
+      "measurements": {
+        "affected_color_union_count": {
+          "n": 4,
+          "min": 7,
+          "median": 8.0,
+          "mean": 8.0,
+          "max": 9
+        },
+        "affected_destination_color_count": {
+          "n": 4,
+          "min": 5,
+          "median": 6.5,
+          "mean": 6.5,
+          "max": 8
+        },
+        "affected_source_color_count": {
+          "n": 4,
+          "min": 5,
+          "median": 6.0,
+          "mean": 6.25,
+          "max": 8
+        },
+        "bbox_area": {
+          "n": 4,
+          "min": 3782,
+          "median": 3939.0,
+          "mean": 3939.0,
+          "max": 4096
+        },
+        "bbox_changed_fill_share": {
+          "n": 4,
+          "min": 0.15943945002644103,
+          "median": 0.7085086170924775,
+          "mean": 0.5755106554278491,
+          "max": 0.7255859375
+        },
+        "bbox_height": {
+          "n": 4,
+          "min": 62,
+          "median": 63.0,
+          "mean": 63.0,
+          "max": 64
+        },
+        "bbox_width": {
+          "n": 4,
+          "min": 61,
+          "median": 62.5,
+          "mean": 62.5,
+          "max": 64
+        },
+        "border_changed_pixels": {
+          "n": 4,
+          "min": 67,
+          "median": 244.0,
+          "mean": 238.25,
+          "max": 398
+        },
+        "border_share_of_changes": {
+          "n": 4,
+          "min": 0.03940886699507389,
+          "median": 0.12015851652459997,
+          "mean": 0.10370608465125854,
+          "max": 0.13509843856076034
+        },
+        "changed_pixels": {
+          "n": 4,
+          "min": 603,
+          "median": 2792.5,
+          "mean": 2290.0,
+          "max": 2972
+        },
+        "changed_pixels_in_unique_translation_union": {
+          "n": 4,
+          "min": 0,
+          "median": 81.0,
+          "mean": 113.5,
+          "max": 292
+        },
+        "target_local_3x3_available_pixels": {
+          "n": 2,
+          "min": 9,
+          "median": 9.0,
+          "mean": 9.0,
+          "max": 9
+        },
+        "target_local_3x3_changed_pixels": {
+          "n": 2,
+          "min": 9,
+          "median": 9.0,
+          "mean": 9.0,
+          "max": 9
+        },
+        "target_local_3x3_share_of_all_changes": {
+          "n": 2,
+          "min": 0.0034103827207275484,
+          "median": 0.009167877927527953,
+          "mean": 0.009167877927527953,
+          "max": 0.014925373134328358
+        },
+        "target_local_7x7_available_pixels": {
+          "n": 2,
+          "min": 49,
+          "median": 49.0,
+          "mean": 49.0,
+          "max": 49
+        },
+        "target_local_7x7_changed_pixels": {
+          "n": 2,
+          "min": 47,
+          "median": 47.0,
+          "mean": 47.0,
+          "max": 47
+        },
+        "target_local_7x7_share_of_all_changes": {
+          "n": 2,
+          "min": 0.017809776430466086,
+          "median": 0.04787669584375709,
+          "mean": 0.04787669584375709,
+          "max": 0.0779436152570481
+        },
+        "unique_translation_share_of_changes": {
+          "n": 4,
+          "min": 0.0,
+          "median": 0.030693444486547934,
+          "mean": 0.13640808211060398,
+          "max": 0.4842454394693201
+        }
+      },
+      "changed_pixel_count_histogram": [
+        {
+          "pixels": 603,
+          "responses": 1
+        },
+        {
+          "pixels": 2639,
+          "responses": 1
+        },
+        {
+          "pixels": 2946,
+          "responses": 1
+        },
+        {
+          "pixels": 2972,
+          "responses": 1
+        }
+      ],
+      "relative_translation_delta_histogram": [
+        {
+          "dx": -16,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": -8,
+          "dy": -4,
+          "correspondences": 1
+        },
+        {
+          "dx": -6,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": 8,
+          "dy": 4,
+          "correspondences": 1
+        },
+        {
+          "dx": 10,
+          "dy": 3,
+          "correspondences": 1
+        },
+        {
+          "dx": 11,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": 14,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": 15,
+          "dy": -34,
+          "correspondences": 1
+        }
+      ],
+      "translated_component_area_histogram": [
+        {
+          "area": 12,
+          "correspondences": 1
+        },
+        {
+          "area": 14,
+          "correspondences": 1
+        },
+        {
+          "area": 16,
+          "correspondences": 1
+        },
+        {
+          "area": 32,
+          "correspondences": 1
+        },
+        {
+          "area": 41,
+          "correspondences": 2
+        },
+        {
+          "area": 69,
+          "correspondences": 2
+        }
+      ]
+    },
+    "noop": {
+      "counts": {
+        "after_components": 479,
+        "ambiguous_after_components": 402,
+        "ambiguous_before_components": 402,
+        "ambiguous_shape_groups": 95,
+        "before_components": 479,
+        "border_only_changed_responses": 0,
+        "full_height_changed_bbox_responses": 0,
+        "full_width_changed_bbox_responses": 0,
+        "responses": 12,
+        "responses_with_ambiguous_shape_matches": 12,
+        "responses_with_unique_translation": 0,
+        "unique_stationary_correspondences": 77
+      },
+      "measurements": {
+        "changed_pixels": {
+          "n": 12,
+          "min": 0,
+          "median": 0.0,
+          "mean": 0.0,
+          "max": 0
+        },
+        "changed_pixels_in_unique_translation_union": {
+          "n": 12,
+          "min": 0,
+          "median": 0.0,
+          "mean": 0.0,
+          "max": 0
+        }
+      },
+      "changed_pixel_count_histogram": [
+        {
+          "pixels": 0,
+          "responses": 12
+        }
+      ],
+      "relative_translation_delta_histogram": [],
+      "translated_component_area_histogram": []
+    },
+    "other": {
+      "counts": {
+        "action6_global_change_without_3x3_local_change": 30,
+        "action6_global_change_without_7x7_local_change": 26,
+        "action6_responses": 78,
+        "after_components": 25160,
+        "ambiguous_after_components": 23041,
+        "ambiguous_before_components": 23047,
+        "ambiguous_shape_groups": 1694,
+        "before_components": 25156,
+        "border_only_changed_responses": 28,
+        "full_height_changed_bbox_responses": 33,
+        "full_width_changed_bbox_responses": 3,
+        "responses": 223,
+        "responses_with_ambiguous_shape_matches": 222,
+        "responses_with_unique_translation": 22,
+        "translated_component_area_sum": 510,
+        "unique_stationary_correspondences": 1521,
+        "unique_translated_correspondences": 25,
+        "unmatched_after_components": 573,
+        "unmatched_before_components": 563
+      },
+      "measurements": {
+        "affected_color_union_count": {
+          "n": 223,
+          "min": 2,
+          "median": 3,
+          "mean": 3.5515695067264574,
+          "max": 9
+        },
+        "affected_destination_color_count": {
+          "n": 223,
+          "min": 1,
+          "median": 2,
+          "mean": 2.672645739910314,
+          "max": 9
+        },
+        "affected_source_color_count": {
+          "n": 223,
+          "min": 1,
+          "median": 2,
+          "mean": 2.5515695067264574,
+          "max": 9
+        },
+        "bbox_area": {
+          "n": 223,
+          "min": 1,
+          "median": 286,
+          "mean": 859.9955156950673,
+          "max": 4096
+        },
+        "bbox_changed_fill_share": {
+          "n": 223,
+          "min": 0.0005040322580645161,
+          "median": 0.11180555555555556,
+          "mean": 0.38934840289750905,
+          "max": 1.0
+        },
+        "bbox_height": {
+          "n": 223,
+          "min": 1,
+          "median": 17,
+          "mean": 25.605381165919283,
+          "max": 64
+        },
+        "bbox_width": {
+          "n": 223,
+          "min": 1,
+          "median": 16,
+          "mean": 22.408071748878925,
+          "max": 64
+        },
+        "border_changed_pixels": {
+          "n": 223,
+          "min": 0,
+          "median": 1,
+          "mean": 1.2556053811659194,
+          "max": 27
+        },
+        "border_share_of_changes": {
+          "n": 223,
+          "min": 0.0,
+          "median": 0.0196078431372549,
+          "mean": 0.18683905389062522,
+          "max": 1.0
+        },
+        "changed_pixels": {
+          "n": 223,
+          "min": 1,
+          "median": 34,
+          "mean": 39.34529147982063,
+          "max": 224
+        },
+        "changed_pixels_in_unique_translation_union": {
+          "n": 223,
+          "min": 0,
+          "median": 0,
+          "mean": 4.358744394618834,
+          "max": 64
+        },
+        "target_local_3x3_available_pixels": {
+          "n": 78,
+          "min": 9,
+          "median": 9.0,
+          "mean": 9.0,
+          "max": 9
+        },
+        "target_local_3x3_changed_pixels": {
+          "n": 78,
+          "min": 0,
+          "median": 3.0,
+          "mean": 1.7435897435897436,
+          "max": 3
+        },
+        "target_local_3x3_share_of_all_changes": {
+          "n": 78,
+          "min": 0.0,
+          "median": 0.5,
+          "mean": 0.40800689570814797,
+          "max": 0.75
+        },
+        "target_local_7x7_available_pixels": {
+          "n": 78,
+          "min": 49,
+          "median": 49.0,
+          "mean": 49.0,
+          "max": 49
+        },
+        "target_local_7x7_changed_pixels": {
+          "n": 78,
+          "min": 0,
+          "median": 3.0,
+          "mean": 2.576923076923077,
+          "max": 14
+        },
+        "target_local_7x7_share_of_all_changes": {
+          "n": 78,
+          "min": 0.0,
+          "median": 0.75,
+          "mean": 0.4403289167600438,
+          "max": 0.75
+        },
+        "unique_translation_share_of_changes": {
+          "n": 223,
+          "min": 0.0,
+          "median": 0.0,
+          "mean": 0.06898369789697724,
+          "max": 0.9655172413793104
+        }
+      },
+      "changed_pixel_count_histogram": [
+        {
+          "pixels": 1,
+          "responses": 30
+        },
+        {
+          "pixels": 2,
+          "responses": 3
+        },
+        {
+          "pixels": 4,
+          "responses": 47
+        },
+        {
+          "pixels": 8,
+          "responses": 6
+        },
+        {
+          "pixels": 9,
+          "responses": 2
+        },
+        {
+          "pixels": 12,
+          "responses": 9
+        },
+        {
+          "pixels": 13,
+          "responses": 2
+        },
+        {
+          "pixels": 29,
+          "responses": 2
+        },
+        {
+          "pixels": 32,
+          "responses": 10
+        },
+        {
+          "pixels": 34,
+          "responses": 7
+        },
+        {
+          "pixels": 36,
+          "responses": 14
+        },
+        {
+          "pixels": 37,
+          "responses": 7
+        },
+        {
+          "pixels": 50,
+          "responses": 1
+        },
+        {
+          "pixels": 52,
+          "responses": 4
+        },
+        {
+          "pixels": 53,
+          "responses": 1
+        },
+        {
+          "pixels": 64,
+          "responses": 22
+        },
+        {
+          "pixels": 66,
+          "responses": 16
+        },
+        {
+          "pixels": 72,
+          "responses": 5
+        },
+        {
+          "pixels": 73,
+          "responses": 4
+        },
+        {
+          "pixels": 96,
+          "responses": 3
+        },
+        {
+          "pixels": 97,
+          "responses": 1
+        },
+        {
+          "pixels": 100,
+          "responses": 8
+        },
+        {
+          "pixels": 102,
+          "responses": 5
+        },
+        {
+          "pixels": 105,
+          "responses": 4
+        },
+        {
+          "pixels": 117,
+          "responses": 2
+        },
+        {
+          "pixels": 120,
+          "responses": 2
+        },
+        {
+          "pixels": 121,
+          "responses": 1
+        },
+        {
+          "pixels": 129,
+          "responses": 1
+        },
+        {
+          "pixels": 160,
+          "responses": 2
+        },
+        {
+          "pixels": 161,
+          "responses": 1
+        },
+        {
+          "pixels": 224,
+          "responses": 1
+        }
+      ],
+      "relative_translation_delta_histogram": [
+        {
+          "dx": -20,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": -16,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": -10,
+          "dy": 0,
+          "correspondences": 1
+        },
+        {
+          "dx": -6,
+          "dy": 0,
+          "correspondences": 14
+        },
+        {
+          "dx": 0,
+          "dy": 6,
+          "correspondences": 3
+        },
+        {
+          "dx": 10,
+          "dy": 0,
+          "correspondences": 5
+        }
+      ],
+      "translated_component_area_histogram": [
+        {
+          "area": 14,
+          "correspondences": 1
+        },
+        {
+          "area": 16,
+          "correspondences": 17
+        },
+        {
+          "area": 32,
+          "correspondences": 7
+        }
+      ]
+    }
+  },
+  "native_HDS_learners_constructed": 0,
+  "native_HDS_query_update_calls": 0,
+  "no_gpu_model_sdk_kaggle_or_game_internals": true,
+  "no_runtime_native_or_protected_files_changed": true,
+  "no_raw_boards_absolute_coordinates_game_ids_or_action_sequences_persisted": true,
+  "relative_displacements_are_aggregate_not_absolute_coordinates": true,
+  "not_learned_feature_adoption_or_performance_proof": true,
+  "all_public_games_reused": true,
+  "errors": [],
+  "wall_seconds": 14.795826
+}

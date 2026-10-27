@@ -1,0 +1,125 @@
+{
+  "schema": "arc3-c2-048-v15-terminal-score-prompt-audit.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-048-V15-FINAL-AUDIT",
+  "observed_at_utc": "2026-10-24T19:03:12Z",
+  "kernel": {
+    "slug": "tecchannn/arc3-model-guided-c2-025",
+    "version": 15,
+    "status": "KernelWorkerStatus.COMPLETE",
+    "official_competition_submission": false
+  },
+  "source_attribution": {
+    "local_notebook_sha256": "ba2977ced60f1a37e1a795c8c872afa81a7b2644f16069f45615bbe499403aad",
+    "local_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "cell_count": 25,
+    "local_and_remote_cell_sources_equal": true,
+    "cell_sources_sha256": "a7ae8e7a85caff652fe2a26d3eea97dbb3fcf589a917b8c7935f27d908375225",
+    "shared_execution_metadata_equal": true,
+    "remote_raw_notebook_hash_comparison": "serialization differs; cell source and shared execution metadata verified equal"
+  },
+  "scorecard": {
+    "evaluator": "arc_agi.scorecard.EnvironmentScoreCalculator",
+    "same_public_game_ids_paired": true,
+    "public_game_ids_written": false,
+    "pair_order": "sorted by public game_id",
+    "baseline_v12": {
+      "mean": 15.84834227058247,
+      "benchmark_sha256": "02b10aac9e5dfb681aff586e6b364522412b261ead057d2d9a9dc4ce44fd7e04"
+    },
+    "best_baseline_v13": {
+      "mean": 19.309155943771326,
+      "benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e"
+    },
+    "candidate_v15": {
+      "mean": 16.88844068389523,
+      "benchmark_sha256": "f54441bac1173782acf4ac097f329ae2e6006c98d70a5319562b5726d37ee7e8"
+    },
+    "mean_delta_vs_v13": -2.420715259876097,
+    "mean_delta_vs_v12": 1.0400984133127587,
+    "paired_v13_to_v15": [
+      {
+        "pair": 1,
+        "previous_score": 47.61904761904761,
+        "current_score": 28.57142857142857,
+        "delta": -19.047619047619044,
+        "levels_delta": -1,
+        "actions_delta": -3
+      },
+      {
+        "pair": 2,
+        "previous_score": 2.7777777777777777,
+        "current_score": 2.7777777777777777,
+        "delta": 0.0,
+        "levels_delta": 0,
+        "actions_delta": -46
+      },
+      {
+        "pair": 3,
+        "previous_score": 7.5306424344885885,
+        "current_score": 19.31611570247934,
+        "delta": 11.785473267990753,
+        "levels_delta": 1,
+        "actions_delta": 30
+      }
+    ]
+  },
+  "acceptance_gate": {
+    "required_mean_strictly_above_v13": true,
+    "required_positive_delta_on_each_paired_game": true,
+    "result": "FAIL",
+    "candidate_adopted": false,
+    "25_game_expansion_performed": false
+  },
+  "run_health": {
+    "games": 3,
+    "benchmark_states": {
+      "gave_up": 3
+    },
+    "wins": 0,
+    "completed_levels": [
+      3,
+      1,
+      3
+    ],
+    "levels_per_game": [
+      4,
+      4,
+      4
+    ],
+    "final_event_statuses": [
+      "NOT_FINISHED",
+      "NOT_FINISHED",
+      "NOT_FINISHED"
+    ],
+    "final_wallclock_seconds": [
+      3528.035280012,
+      1200.1382554020001,
+      2327.916481393
+    ]
+  },
+  "prompt_trace": {
+    "remote_file": "requests.jsonl",
+    "http_status": 200,
+    "content_length_bytes": 120184640,
+    "streamed_bytes": 120184640,
+    "raw_sha256": "7e4bdced063f342c93d458781b3f50db27034051f48a76211c63ff38ce1f4e0c",
+    "valid_jsonl_records": 412,
+    "invalid_records": 0,
+    "request_records": 207,
+    "response_records": 205,
+    "unpaired_request_records": 2,
+    "segments": 3,
+    "level_transitions": 7,
+    "transition_marker_present_within_next_3_requests": 7,
+    "world_model_and_plan_present_after_all_transitions": true,
+    "plan_section_hash_changed_after_transitions": 7,
+    "world_model_section_hash_changed_after_transitions": 4,
+    "recorded_memory_update_rejections_in_user_assistant_or_tool_messages": 0,
+    "rejection_audit_limit": "Two request records have no paired response, so absence of a recorded rejection is not proof about unrecorded responses.",
+    "full_trace_saved_locally": false,
+    "existing_local_cli_copy_is_incomplete": true
+  },
+  "decision": "Do not adopt C2-048 v15. The best-baseline paired gate failed; do not run its 25-game expansion.",
+  "next_step": "Review the separately gated C2-050 candidate after this terminal result; no C2-050 push or run is represented by this evidence."
+}

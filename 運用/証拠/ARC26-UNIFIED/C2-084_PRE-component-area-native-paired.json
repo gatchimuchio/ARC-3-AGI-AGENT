@@ -1,0 +1,776 @@
+{
+  "schema": "arc3-native-locality-learning-one-PRE-component-area-comparison.v1",
+  "run_id": "C2-084_PRE-component-area-native-paired",
+  "observed_at": "2026-10-27T00:47:53.857074+00:00",
+  "result": "OBSERVATIONAL_ONLY",
+  "software_sha256": {
+    "検証/ARC3作用点成分面積HDS比較.py": "cf3f783c39501b2887eb41acba20dd865854c00fc23d21127952cda8490c91e1",
+    "検証/ARC3作用点効果HDS学習診断.py": "331245be4dbffb17826fecc081c38ec68957e22992163e763cf97c6bfbb69dff",
+    "検証/ARC3公開画素効果診断.py": "003cbbae82e6da73919341496faaab47ad353fd6a2f9b1697375a4b5aea10d7c",
+    "検証/ARC3HDS視覚公開記録逐次比較.py": "4d917e5007c88eb510664b872535dc016417d9b7d728113242f612f2b7cdee37",
+    "検証/ARC3視覚HDS対応採点.py": "6ca19fcb4860b257e71c292ca77e7d775660f0c8f2f759bc4a0c984d6544db6a"
+  },
+  "source": {
+    "retrieval_path": "出力/ARC3-RUN-003-local/C2-078/off-r2-terminal-v1-retrieval-20261026T232820Z.json",
+    "retrieval_sha256": "5ba043dd55eb22e243866550efb6ac95a176755318dad20703dd569c39c93092",
+    "output_manifest_sha256": "919fe472c53ab5cd2e2bee5d372a6a00d3b9caff49cf86ab20826e8fb994cd03",
+    "all_declared_output_files_hash_verified": 11,
+    "all_240_action_history_joins_verified": true,
+    "source_build_manifest_sha256": "175808d149c9da773de00b578dd15f58b5e07ae099ca9cf64cdae4e513e2db11",
+    "source_notebook_sha256": "dc2946f11604511becbd0ad9b897eaec4cfc9252a72733fd5b824646e9418d1b",
+    "source_metadata_sha256": "3c6537a086acb9990166049555c51f73d0a8a162069f0788711e122b1e521113",
+    "actual_recording_source_bundle_sha256": "c21517f22af814571982df1412934074b5ff67132715e98419e9e5d85b06d9c4",
+    "recording_solver_declared_sha256_from_build": "6a05212fc955020db8fd2027aa5c16626c593ad83a95b967d3e1c92372bdc5bc",
+    "recording_solver_is_not_separate_bundle_member": true,
+    "all_recording_source_members_hash_verified": 15,
+    "public_event_definition_original_source_sha256": "42b4794f0447e071ba118194c64d009f7fa59df0b84f3d9c35da4dd215824c52",
+    "source_event_writer_public_levels_line": 782,
+    "immediate_action_response_source_line": 1251,
+    "exact_kernel_version": 1,
+    "kernel_identity_verified": true,
+    "source_counts": {
+      "action6_coordinate_joins": 80,
+      "actual_action_records": 240,
+      "analysis_records_excluded": 76,
+      "initial_records": 3,
+      "nonreset_transitions": 239,
+      "public_outcome:レベル進行": 4,
+      "public_outcome:可視変化なし": 12,
+      "public_outcome:盤面変化": 223,
+      "reset_actions_excluded": 1
+    },
+    "public_level_provenance": "event.score = int(new_state.raw.levels_completed); not benchmark RHAE/reward",
+    "available_action_fields_absent": 240,
+    "automatic_flags_absent": true,
+    "initial_RESET_display_not_an_actual_action": true,
+    "benchmark_fields_used": [
+      "game_runs.game_id (join only)",
+      "game_runs.history.action"
+    ]
+  },
+  "original_native_source_sha256": {
+    "系統.py": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5",
+    "実行系.py": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+  },
+  "C2_083_reference_sha256": "1ddc5a2b43a06710984a482f80f0d0384894b7265cb1a79e93f7e0560549ed05",
+  "baseline_reproduction": {
+    "status": "MATCHED",
+    "previous_measured": {
+      "counts": {
+        "blocked:native_target_observation_request": 3,
+        "blocked:no_active_adopted_target_rule": 72,
+        "forecasts": 5,
+        "matches": 4,
+        "previous_majority_matches": 3,
+        "queries": 80,
+        "same_covered_with_previous_majority": 5
+      },
+      "coverage": 0.0625,
+      "precision": 0.8,
+      "precision_status": "MEASURED",
+      "same_covered_strict_previous_majority_precision": 0.6,
+      "majority_precision_status": "MEASURED"
+    },
+    "frozen_C2_083_expected": {
+      "counts": {
+        "blocked:native_target_observation_request": 3,
+        "blocked:no_active_adopted_target_rule": 72,
+        "forecasts": 5,
+        "matches": 4,
+        "previous_majority_matches": 3,
+        "queries": 80,
+        "same_covered_with_previous_majority": 5
+      },
+      "coverage": 0.0625,
+      "precision": 0.8,
+      "precision_status": "MEASURED",
+      "same_covered_strict_previous_majority_precision": 0.6,
+      "majority_precision_status": "MEASURED"
+    }
+  },
+  "additional_feature": {
+    "path": [
+      "作用前公開状態",
+      "作用点同色4連結成分面積"
+    ],
+    "definition": "exact pixel area of4-connected same-color component containing PRE-action Action6 target",
+    "nonAction6": "omitted",
+    "thresholds_bins_shapes_directions_color_ids": false
+  },
+  "fallback_preregistered_before_results": "Without prior Action6 effect BOTH abstain; otherwise guarded unique native effect forecast, else STRICTLYprevious Action6 effect majority with C2-083 fixed tie order",
+  "fallback_is_offline_diagnostic_not_native_PASS_or_action_policy": true,
+  "arms": {
+    "previous": {
+      "overall": {
+        "counts": {
+          "blocked:native_target_observation_request": 3,
+          "blocked:no_active_adopted_target_rule": 72,
+          "forecasts": 5,
+          "matches": 4,
+          "previous_majority_matches": 3,
+          "queries": 80,
+          "same_covered_with_previous_majority": 5
+        },
+        "coverage": 0.0625,
+        "precision": 0.8,
+        "precision_status": "MEASURED",
+        "same_covered_strict_previous_majority_precision": 0.6,
+        "majority_precision_status": "MEASURED"
+      },
+      "native_counts": {
+        "hold_reason:原因未確定で隔離中の原理が存在する": 73,
+        "hold_reason:現行暫定原理の適用に必要な観測が不足している": 77,
+        "hold_reason:現観測だけでは複数の関係候補を識別できない": 80,
+        "status:断定保留": 80,
+        "target_count_sum:予測群": 10,
+        "target_count_sum:係争中原理群": 141,
+        "target_count_sum:有効原理群": 13,
+        "target_count_sum:競合群": 0,
+        "target_count_sum:識別不能群": 5,
+        "target_count_sum:追加観測要求群": 3,
+        "target_queries_nonzero:予測群": 7,
+        "target_queries_nonzero:係争中原理群": 72,
+        "target_queries_nonzero:有効原理群": 8,
+        "target_queries_nonzero:競合群": 0,
+        "target_queries_nonzero:識別不能群": 5,
+        "target_queries_nonzero:追加観測要求群": 3
+      },
+      "strata": {
+        "native_status": {
+          "出力": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "断定保留": {
+            "counts": {
+              "forecasts": 5,
+              "matches": 4,
+              "previous_majority_matches": 3,
+              "queries": 80,
+              "same_covered_with_previous_majority": 5
+            },
+            "coverage": 0.0625,
+            "precision": 0.8,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.6,
+            "majority_precision_status": "MEASURED"
+          }
+        },
+        "predicted_class": {
+          "局所なし・局所以外なし": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "局所なし・局所以外あり": {
+            "counts": {
+              "forecasts": 1,
+              "matches": 1,
+              "previous_majority_matches": 0,
+              "same_covered_with_previous_majority": 1
+            },
+            "coverage": null,
+            "precision": 1.0,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.0,
+            "majority_precision_status": "MEASURED"
+          },
+          "局所あり・局所以外なし": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "局所あり・局所以外あり": {
+            "counts": {
+              "forecasts": 4,
+              "matches": 3,
+              "previous_majority_matches": 3,
+              "same_covered_with_previous_majority": 4
+            },
+            "coverage": null,
+            "precision": 0.75,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.75,
+            "majority_precision_status": "MEASURED"
+          }
+        },
+        "observed_class": {
+          "局所なし・局所以外なし": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "局所なし・局所以外あり": {
+            "counts": {
+              "forecasts": 2,
+              "matches": 1,
+              "previous_majority_matches": 0,
+              "queries": 26,
+              "same_covered_with_previous_majority": 2
+            },
+            "coverage": 0.07692307692307693,
+            "precision": 0.5,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.0,
+            "majority_precision_status": "MEASURED"
+          },
+          "局所あり・局所以外なし": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "局所あり・局所以外あり": {
+            "counts": {
+              "forecasts": 3,
+              "matches": 3,
+              "previous_majority_matches": 3,
+              "queries": 54,
+              "same_covered_with_previous_majority": 3
+            },
+            "coverage": 0.05555555555555555,
+            "precision": 1.0,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 1.0,
+            "majority_precision_status": "MEASURED"
+          }
+        }
+      }
+    },
+    "current": {
+      "overall": {
+        "counts": {
+          "blocked:native_target_conflict": 1,
+          "blocked:native_target_observation_request": 11,
+          "blocked:no_active_adopted_target_rule": 49,
+          "forecasts": 19,
+          "matches": 17,
+          "previous_majority_matches": 9,
+          "queries": 80,
+          "same_covered_with_previous_majority": 19
+        },
+        "coverage": 0.2375,
+        "precision": 0.8947368421052632,
+        "precision_status": "MEASURED",
+        "same_covered_strict_previous_majority_precision": 0.47368421052631576,
+        "majority_precision_status": "MEASURED"
+      },
+      "native_counts": {
+        "hold_reason:原因未確定で隔離中の原理が存在する": 73,
+        "hold_reason:現行暫定原理の適用に必要な観測が不足している": 77,
+        "hold_reason:現観測だけでは複数の関係候補を識別できない": 80,
+        "hold_reason:複数の有効暫定原理が異なる出力を予測したため断定保留": 1,
+        "status:断定保留": 80,
+        "target_count_sum:予測群": 29,
+        "target_count_sum:係争中原理群": 121,
+        "target_count_sum:有効原理群": 44,
+        "target_count_sum:競合群": 1,
+        "target_count_sum:識別不能群": 8,
+        "target_count_sum:追加観測要求群": 13,
+        "target_queries_nonzero:予測群": 22,
+        "target_queries_nonzero:係争中原理群": 72,
+        "target_queries_nonzero:有効原理群": 31,
+        "target_queries_nonzero:競合群": 1,
+        "target_queries_nonzero:識別不能群": 8,
+        "target_queries_nonzero:追加観測要求群": 12
+      },
+      "strata": {
+        "native_status": {
+          "出力": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "断定保留": {
+            "counts": {
+              "forecasts": 19,
+              "matches": 17,
+              "previous_majority_matches": 9,
+              "queries": 80,
+              "same_covered_with_previous_majority": 19
+            },
+            "coverage": 0.2375,
+            "precision": 0.8947368421052632,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.47368421052631576,
+            "majority_precision_status": "MEASURED"
+          }
+        },
+        "predicted_class": {
+          "局所なし・局所以外なし": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "局所なし・局所以外あり": {
+            "counts": {
+              "forecasts": 9,
+              "matches": 7,
+              "previous_majority_matches": 6,
+              "same_covered_with_previous_majority": 9
+            },
+            "coverage": null,
+            "precision": 0.7777777777777778,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.6666666666666666,
+            "majority_precision_status": "MEASURED"
+          },
+          "局所あり・局所以外なし": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "局所あり・局所以外あり": {
+            "counts": {
+              "forecasts": 10,
+              "matches": 10,
+              "previous_majority_matches": 3,
+              "same_covered_with_previous_majority": 10
+            },
+            "coverage": null,
+            "precision": 1.0,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.3,
+            "majority_precision_status": "MEASURED"
+          }
+        },
+        "observed_class": {
+          "局所なし・局所以外なし": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "局所なし・局所以外あり": {
+            "counts": {
+              "forecasts": 7,
+              "matches": 7,
+              "previous_majority_matches": 6,
+              "queries": 26,
+              "same_covered_with_previous_majority": 7
+            },
+            "coverage": 0.2692307692307692,
+            "precision": 1.0,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.8571428571428571,
+            "majority_precision_status": "MEASURED"
+          },
+          "局所あり・局所以外なし": {
+            "counts": {},
+            "coverage": null,
+            "precision": null,
+            "precision_status": "UNMEASURED",
+            "same_covered_strict_previous_majority_precision": null,
+            "majority_precision_status": "UNMEASURED"
+          },
+          "局所あり・局所以外あり": {
+            "counts": {
+              "forecasts": 12,
+              "matches": 10,
+              "previous_majority_matches": 3,
+              "queries": 54,
+              "same_covered_with_previous_majority": 12
+            },
+            "coverage": 0.2222222222222222,
+            "precision": 0.8333333333333334,
+            "precision_status": "MEASURED",
+            "same_covered_strict_previous_majority_precision": 0.25,
+            "majority_precision_status": "MEASURED"
+          }
+        }
+      }
+    }
+  },
+  "paired_forecast_comparison": {
+    "raw_common_covered": {
+      "common_native_covered": 3,
+      "common_with_strict_previous_majority": 3,
+      "current_correct_on_common": 3,
+      "current_only_native_covered": 16,
+      "neither_native_covered": 59,
+      "previous_correct_on_common": 3,
+      "previous_only_native_covered": 2,
+      "same_Action6_points": 80,
+      "strict_previous_majority_correct_on_common": 3,
+      "value_agreement_on_common": 3,
+      "current_minus_previous_correct_on_common": 0
+    },
+    "fixed_offline_all_point_fallback": {
+      "both_abstain_no_prior_Action6_effect": 1,
+      "current_correct": 58,
+      "current_majority_fallback_used": 60,
+      "current_native_used": 19,
+      "matched_scored_points": 79,
+      "previous_correct": 51,
+      "previous_majority_fallback_used": 74,
+      "previous_native_used": 5,
+      "same_Action6_points": 80,
+      "strict_previous_majority_correct": 50,
+      "current_minus_previous_correct": 7,
+      "previous_accuracy": 0.6455696202531646,
+      "current_accuracy": 0.7341772151898734
+    }
+  },
+  "observational_context_alias_analysis": {
+    "previous": {
+      "distinct_contexts": 23,
+      "mixed_effect_contexts": 6,
+      "points_in_mixed_effect_contexts": 24,
+      "context_support_histogram": {
+        "1": 9,
+        "2": 3,
+        "3": 4,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 1,
+        "10": 1,
+        "13": 1
+      }
+    },
+    "current": {
+      "distinct_contexts": 28,
+      "mixed_effect_contexts": 4,
+      "points_in_mixed_effect_contexts": 14,
+      "context_support_histogram": {
+        "1": 15,
+        "2": 3,
+        "3": 3,
+        "4": 1,
+        "5": 2,
+        "6": 1,
+        "7": 1,
+        "10": 1,
+        "13": 1
+      }
+    },
+    "previous_contexts_split_into_multiple_areas": 4,
+    "diagnostic_only_no_oracle_predictions_or_group_keys_saved": true
+  },
+  "observed_Action6_effect_counts": {
+    "局所なし・局所以外あり": 26,
+    "局所あり・局所以外あり": 54
+  },
+  "causal_and_one_feature_checks": {
+    "RESET_excluded": 1,
+    "both_queries_and_scores_before_teachers": 80,
+    "current_updates": 239,
+    "nonAction6_area_and_effect_omitted": 159,
+    "past_Action6_effect_added_once_after_both_teachers": 80,
+    "previous_updates": 239,
+    "same_query_point_only_one_PRE_area_difference": 80,
+    "same_teacher_only_one_optional_PRE_area_difference": 239
+  },
+  "source_and_teacher_stream_sha256": {
+    "input": "c583f71ec531d9f1a5858ef465d8dc0a55dc76ace50ca8190a58167794d2892e",
+    "previous": "c583f71ec531d9f1a5858ef465d8dc0a55dc76ace50ca8190a58167794d2892e",
+    "current": "c583f71ec531d9f1a5858ef465d8dc0a55dc76ace50ca8190a58167794d2892e"
+  },
+  "shared_and_per_arm_costs": [
+    {
+      "previous": {
+        "arm": "previous",
+        "stats": {
+          "updates_attempted": 79,
+          "updates_succeeded": 79,
+          "queries_attempted": 0,
+          "queries_succeeded": 0,
+          "update_errors": 0,
+          "query_errors": 0,
+          "summary_errors": 0,
+          "prior_updates_attempted": 5,
+          "prior_updates_succeeded": 5,
+          "prior_update_errors": 0,
+          "skipped_resets": 0,
+          "rejected_requests": 0,
+          "budget_exhaustion_requests": 0,
+          "update_seconds": 20.924149,
+          "query_seconds": 0,
+          "total_hds_seconds": 21.001028,
+          "prior_load_seconds": 0.076879,
+          "update_budget": 80,
+          "query_budget": 80,
+          "hds_seconds_budget": 120.0,
+          "update_budget_exhausted": false,
+          "query_budget_exhausted": false,
+          "time_budget_exhausted": false,
+          "time_budget_can_overrun_one_inflight_call": true,
+          "last_error_type": null
+        },
+        "prior_report": {
+          "version": "arc3-prior-context-v0.1",
+          "loaded_count": 5,
+          "boundary": "ARC3事前記憶",
+          "action_authorization": false,
+          "visible_change_coefficient": 0.0,
+          "expected_count": 5,
+          "load_status": "loaded"
+        },
+        "query_memory_invariance_checks": 0,
+        "prior_only_memory_unchanged": null,
+        "one_additional_PRE_area_feature": false
+      },
+      "current": {
+        "arm": "current",
+        "stats": {
+          "updates_attempted": 79,
+          "updates_succeeded": 79,
+          "queries_attempted": 0,
+          "queries_succeeded": 0,
+          "update_errors": 0,
+          "query_errors": 0,
+          "summary_errors": 0,
+          "prior_updates_attempted": 5,
+          "prior_updates_succeeded": 5,
+          "prior_update_errors": 0,
+          "skipped_resets": 0,
+          "rejected_requests": 0,
+          "budget_exhaustion_requests": 0,
+          "update_seconds": 21.0995,
+          "query_seconds": 0,
+          "total_hds_seconds": 21.179117,
+          "prior_load_seconds": 0.079617,
+          "update_budget": 80,
+          "query_budget": 80,
+          "hds_seconds_budget": 120.0,
+          "update_budget_exhausted": false,
+          "query_budget_exhausted": false,
+          "time_budget_exhausted": false,
+          "time_budget_can_overrun_one_inflight_call": true,
+          "last_error_type": null
+        },
+        "prior_report": {
+          "version": "arc3-prior-context-v0.1",
+          "loaded_count": 5,
+          "boundary": "ARC3事前記憶",
+          "action_authorization": false,
+          "visible_change_coefficient": 0.0,
+          "expected_count": 5,
+          "load_status": "loaded"
+        },
+        "query_memory_invariance_checks": 0,
+        "prior_only_memory_unchanged": null,
+        "one_additional_PRE_area_feature": true
+      },
+      "combined_actual_hds_seconds": 42.18014589996892,
+      "combined_hds_seconds_limit": 120.0,
+      "time_budget_exhausted": false
+    },
+    {
+      "previous": {
+        "arm": "previous",
+        "stats": {
+          "updates_attempted": 80,
+          "updates_succeeded": 80,
+          "queries_attempted": 80,
+          "queries_succeeded": 80,
+          "update_errors": 0,
+          "query_errors": 0,
+          "summary_errors": 0,
+          "prior_updates_attempted": 5,
+          "prior_updates_succeeded": 5,
+          "prior_update_errors": 0,
+          "skipped_resets": 0,
+          "rejected_requests": 0,
+          "budget_exhaustion_requests": 0,
+          "update_seconds": 45.884546,
+          "query_seconds": 2.18578,
+          "total_hds_seconds": 48.12083,
+          "prior_load_seconds": 0.050504,
+          "update_budget": 80,
+          "query_budget": 80,
+          "hds_seconds_budget": 120.0,
+          "update_budget_exhausted": true,
+          "query_budget_exhausted": true,
+          "time_budget_exhausted": false,
+          "time_budget_can_overrun_one_inflight_call": true,
+          "last_error_type": null
+        },
+        "prior_report": {
+          "version": "arc3-prior-context-v0.1",
+          "loaded_count": 5,
+          "boundary": "ARC3事前記憶",
+          "action_authorization": false,
+          "visible_change_coefficient": 0.0,
+          "expected_count": 5,
+          "load_status": "loaded"
+        },
+        "query_memory_invariance_checks": 80,
+        "prior_only_memory_unchanged": null,
+        "one_additional_PRE_area_feature": false
+      },
+      "current": {
+        "arm": "current",
+        "stats": {
+          "updates_attempted": 80,
+          "updates_succeeded": 80,
+          "queries_attempted": 80,
+          "queries_succeeded": 80,
+          "update_errors": 0,
+          "query_errors": 0,
+          "summary_errors": 0,
+          "prior_updates_attempted": 5,
+          "prior_updates_succeeded": 5,
+          "prior_update_errors": 0,
+          "skipped_resets": 0,
+          "rejected_requests": 0,
+          "budget_exhaustion_requests": 0,
+          "update_seconds": 66.184329,
+          "query_seconds": 2.59124,
+          "total_hds_seconds": 68.829631,
+          "prior_load_seconds": 0.054062,
+          "update_budget": 80,
+          "query_budget": 80,
+          "hds_seconds_budget": 120.0,
+          "update_budget_exhausted": true,
+          "query_budget_exhausted": true,
+          "time_budget_exhausted": false,
+          "time_budget_can_overrun_one_inflight_call": true,
+          "last_error_type": null
+        },
+        "prior_report": {
+          "version": "arc3-prior-context-v0.1",
+          "loaded_count": 5,
+          "boundary": "ARC3事前記憶",
+          "action_authorization": false,
+          "visible_change_coefficient": 0.0,
+          "expected_count": 5,
+          "load_status": "loaded"
+        },
+        "query_memory_invariance_checks": 80,
+        "prior_only_memory_unchanged": null,
+        "one_additional_PRE_area_feature": true
+      },
+      "combined_actual_hds_seconds": 116.95046140009072,
+      "combined_hds_seconds_limit": 120.0,
+      "time_budget_exhausted": false
+    },
+    {
+      "previous": {
+        "arm": "previous",
+        "stats": {
+          "updates_attempted": 80,
+          "updates_succeeded": 80,
+          "queries_attempted": 0,
+          "queries_succeeded": 0,
+          "update_errors": 0,
+          "query_errors": 0,
+          "summary_errors": 0,
+          "prior_updates_attempted": 5,
+          "prior_updates_succeeded": 5,
+          "prior_update_errors": 0,
+          "skipped_resets": 0,
+          "rejected_requests": 0,
+          "budget_exhaustion_requests": 0,
+          "update_seconds": 15.396522,
+          "query_seconds": 0,
+          "total_hds_seconds": 15.442155,
+          "prior_load_seconds": 0.045633,
+          "update_budget": 80,
+          "query_budget": 80,
+          "hds_seconds_budget": 120.0,
+          "update_budget_exhausted": true,
+          "query_budget_exhausted": false,
+          "time_budget_exhausted": false,
+          "time_budget_can_overrun_one_inflight_call": true,
+          "last_error_type": null
+        },
+        "prior_report": {
+          "version": "arc3-prior-context-v0.1",
+          "loaded_count": 5,
+          "boundary": "ARC3事前記憶",
+          "action_authorization": false,
+          "visible_change_coefficient": 0.0,
+          "expected_count": 5,
+          "load_status": "loaded"
+        },
+        "query_memory_invariance_checks": 0,
+        "prior_only_memory_unchanged": null,
+        "one_additional_PRE_area_feature": false
+      },
+      "current": {
+        "arm": "current",
+        "stats": {
+          "updates_attempted": 80,
+          "updates_succeeded": 80,
+          "queries_attempted": 0,
+          "queries_succeeded": 0,
+          "update_errors": 0,
+          "query_errors": 0,
+          "summary_errors": 0,
+          "prior_updates_attempted": 5,
+          "prior_updates_succeeded": 5,
+          "prior_update_errors": 0,
+          "skipped_resets": 0,
+          "rejected_requests": 0,
+          "budget_exhaustion_requests": 0,
+          "update_seconds": 15.417622,
+          "query_seconds": 0,
+          "total_hds_seconds": 15.464481,
+          "prior_load_seconds": 0.04686,
+          "update_budget": 80,
+          "query_budget": 80,
+          "hds_seconds_budget": 120.0,
+          "update_budget_exhausted": true,
+          "query_budget_exhausted": false,
+          "time_budget_exhausted": false,
+          "time_budget_can_overrun_one_inflight_call": true,
+          "last_error_type": null
+        },
+        "prior_report": {
+          "version": "arc3-prior-context-v0.1",
+          "loaded_count": 5,
+          "boundary": "ARC3事前記憶",
+          "action_authorization": false,
+          "visible_change_coefficient": 0.0,
+          "expected_count": 5,
+          "load_status": "loaded"
+        },
+        "query_memory_invariance_checks": 0,
+        "prior_only_memory_unchanged": null,
+        "one_additional_PRE_area_feature": true
+      },
+      "combined_actual_hds_seconds": 30.90663609985495,
+      "combined_hds_seconds_limit": 120.0,
+      "time_budget_exhausted": false
+    }
+  ],
+  "native_HOLD_action_authorization_false_and_missing_statistics_UNKNOWN_preserved": true,
+  "C2_079_native_patch_applied": false,
+  "original_public_outcome_and_locality_teacher_preserved": true,
+  "observed_class_precision_is_accuracy_on_covered_steps_of_that_true_class": true,
+  "no_raw_boards_absolute_coordinates_game_ids_action_sequences_context_keys_or_shapes_persisted": true,
+  "no_runtime_core_protected_edits_gpu_model_sdk_kaggle_or_game_internals": true,
+  "not_gameplay_score_gain_or_feature_promotion_proof": true,
+  "all_public_games_reused": true,
+  "budget_can_overrun_one_inflight_native_call": true,
+  "errors": [],
+  "wall_seconds": 339.609479
+}

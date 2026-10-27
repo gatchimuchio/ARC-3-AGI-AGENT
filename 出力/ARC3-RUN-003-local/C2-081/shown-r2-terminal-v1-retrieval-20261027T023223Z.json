@@ -1,0 +1,105 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-output.v1",
+  "run_id": "ARC3-RUN-003-C2-081-SHOWN-R2-V1",
+  "kernel": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2",
+  "version": 1,
+  "status": "KernelWorkerStatus.COMPLETE",
+  "terminal": true,
+  "observed_at_utc": "2026-10-27T02:32:23.964723+00:00",
+  "retrieved_at_utc": "2026-10-27T02:32:55.733584+00:00",
+  "candidate_notebook_sha256": "0d0726b2607e063be526b8c05e840d40b99515f6753e7d00bcbbf7123b670262",
+  "candidate_metadata_sha256": "a4abdfebffced03924f7fe49deba87c023a911bcf86c6281a06d5b1db5bd130a",
+  "candidate_bundle_sha256": "c0b955fc6ae184440d8c1243ca27b451f83975cf434f632b51b93a31faf77604",
+  "output_directory": "出力/ARC3-RUN-003-local/C2-081/shown-r2-terminal-v1-20261027T023223Z",
+  "output_exit_code": 0,
+  "command": [
+    "C:\\Users\\ohira\\AppData\\Local\\Temp\\arc3-v6-locked-20261027\\Scripts\\kaggle.exe",
+    "kernels",
+    "output",
+    "tecchannn/arc3-v6-python-hds-shown-c2-081-r2/1",
+    "--path",
+    "出力\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z",
+    "--file-pattern",
+    "^(benchmark\\.json|git_status\\.txt|.*_events\\.jsonl|.*\\.visual-hds(?:-query)?\\.json|.*\\.log)$",
+    "--page-size",
+    "200"
+  ],
+  "additional_page_commands": [],
+  "retrieval_scope": "Exactversion1 selected benchmark/events/visual-HDS+query sidecars/gitstatus/logs only; no Notebook/HTML/pickle/video retrieved or loaded.",
+  "output_files": [
+    {
+      "path": "arc3-v6-python-hds-shown-c2-081-r2.log",
+      "bytes": 37602,
+      "sha256": "0dc935e678736e91dc3215ecd2f156cd6d9f9854f7d991bc23314a6d80a797f2"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "bytes": 2342110,
+      "sha256": "8e4cb5ba056df61713ae31063e0e827e51e5e860d7870022054306c789bd0efb"
+    },
+    {
+      "path": "artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 139871,
+      "sha256": "0d931cd79e36fe8af863ddc3be64296e2282d6c19a3fbe45240dad20b0fcbde8"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_events.jsonl",
+      "bytes": 2277875,
+      "sha256": "9d87e5337c61ef9f0a7d2b4eb7186c4ded227d774da56d18fb5c4dc6e68fe21e"
+    },
+    {
+      "path": "artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 139116,
+      "sha256": "7aeb7cd88995a6fa3c53c3d365bd31acfb1f28778feca256cae2685b2c9280d5"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "bytes": 2694070,
+      "sha256": "d55e6e9977cccc1cd0b2b7de602c0b2fde9592a87e44a2d95f760947030167fe"
+    },
+    {
+      "path": "artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json",
+      "bytes": 140316,
+      "sha256": "49bca5483f9cb7dad6634c247e792dd1882c20595461e83ea1e578f4423b91b8"
+    },
+    {
+      "path": "benchmark.json",
+      "bytes": 62036,
+      "sha256": "233a9197f0fcc87149a9448c551d65fdd54990cc4f7d4e104c3f4ec4cd97aec0"
+    },
+    {
+      "path": "git_status.txt",
+      "bytes": 356,
+      "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+    },
+    {
+      "path": "prompts/prompt.log",
+      "bytes": 318381,
+      "sha256": "297319924cdbf9b1c42c74dc3785c7e044599115f72eea0575c201b1e38cfe98"
+    },
+    {
+      "path": "serve.log",
+      "bytes": 729609,
+      "sha256": "175d0f878b21e464d858100ac272808c8fba7cd7cab1d48cb0499ee756dbbfa5"
+    }
+  ],
+  "output_manifest_sha256": "b8d5e71f66ba3f159a4eb7d997b430975a9ad4cae93b53577ce817285d3a8be8",
+  "status_observation": "出力/ARC3-RUN-003-local/C2-081/shown-r2-v1-status-20261027T023223Z.json",
+  "status_observation_sha256": "b69db7d65e580ccaae5f58775f43b384e0cd69ef0ad553e5618e2722b5d794c9",
+  "retrieval_receipts": [
+    {
+      "page": 1,
+      "exit_code": 0,
+      "stdout": "Downloading m0r0-492f87ba_p0_events.jsonl to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts/m0r0-492f87ba_p0_events.jsonl\nDownloading m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json\nDownloading sk48-d8078629_p0_events.jsonl to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts/sk48-d8078629_p0_events.jsonl\nDownloading sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json\nDownloading tn36-ef4dde99_p0_events.jsonl to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts/tn36-ef4dde99_p0_events.jsonl\nDownloading tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json\nDownloading benchmark.json to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\benchmark.json\nDownloading git_status.txt to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\git_status.txt\nDownloading prompt.log to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\prompts\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\prompts/prompt.log\nDownloading serve.log to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\n\nOutput file downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\serve.log\nKernel log downloaded to �o��\\ARC3-RUN-003-local\\C2-081\\shown-r2-terminal-v1-20261027T023223Z\\arc3-v6-python-hds-shown-c2-081-r2.log \n",
+      "stderr": "\n  0%|          | 0.00/2.23M [00:00<?, ?B/s]\n 45%|####4     | 1.00M/2.23M [00:01<00:01, 974kB/s]\n 90%|########9 | 2.00M/2.23M [00:01<00:00, 1.10MB/s]\n100%|##########| 2.23M/2.23M [00:01<00:00, 1.18MB/s]\n\n  0%|          | 0.00/137k [00:00<?, ?B/s]\n100%|##########| 137k/137k [00:00<00:00, 352kB/s]\n100%|##########| 137k/137k [00:00<00:00, 352kB/s]\n\n  0%|          | 0.00/2.17M [00:00<?, ?B/s]\n 46%|####6     | 1.00M/2.17M [00:01<00:01, 850kB/s]\n 92%|#########2| 2.00M/2.17M [00:02<00:00, 1.04MB/s]\n100%|##########| 2.17M/2.17M [00:02<00:00, 1.09MB/s]\n\n  0%|          | 0.00/136k [00:00<?, ?B/s]\n100%|##########| 136k/136k [00:00<00:00, 374kB/s]\n100%|##########| 136k/136k [00:00<00:00, 374kB/s]\n\n  0%|          | 0.00/2.57M [00:00<?, ?B/s]\n 39%|###8      | 1.00M/2.57M [00:01<00:01, 923kB/s]\n 78%|#######7  | 2.00M/2.57M [00:01<00:00, 1.42MB/s]\n100%|##########| 2.57M/2.57M [00:01<00:00, 1.59MB/s]\n\n  0%|          | 0.00/137k [00:00<?, ?B/s]\n100%|##########| 137k/137k [00:00<00:00, 372kB/s]\n100%|##########| 137k/137k [00:00<00:00, 370kB/s]\n\n  0%|          | 0.00/60.6k [00:00<?, ?B/s]\n100%|##########| 60.6k/60.6k [00:00<00:00, 309kB/s]\n100%|##########| 60.6k/60.6k [00:00<00:00, 308kB/s]\n\n  0%|          | 0.00/356 [00:00<?, ?B/s]\n100%|##########| 356/356 [00:00<00:00, 176kB/s]\n\n  0%|          | 0.00/311k [00:00<?, ?B/s]\n100%|##########| 311k/311k [00:00<00:00, 556kB/s]\n100%|##########| 311k/311k [00:00<00:00, 556kB/s]\n\n  0%|          | 0.00/713k [00:00<?, ?B/s]\n100%|##########| 713k/713k [00:00<00:00, 843kB/s]\n100%|##########| 713k/713k [00:00<00:00, 843kB/s]\n",
+      "stdout_sha256": "1fdd5e4133474acd8df106322ba78fe60911f1d686116813f8ddb59356efc706"
+    }
+  ],
+  "visual_hds_query_file_count": 3,
+  "retrieval_contract_errors": [],
+  "unverified_console_summary": "6.58 (parent-provided console summary only; UNVERIFIED, not scored here)",
+  "actual_kernel_id_matches_frozen_metadata": true,
+  "identity_alias_applied": false,
+  "official_submission_or_rerun_performed": false,
+  "no_push_cancel_edit_or_scoring_performed": true
+}

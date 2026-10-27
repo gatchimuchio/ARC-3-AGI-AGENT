@@ -1,0 +1,103 @@
+{
+  "schema": "arc26-v4-reproduction-report-v1",
+  "track": "ARC3",
+  "reproduction_id": "ARC26-ARC3-V4-RB-current-agent-local-smoke-20261025T142330Z",
+  "observed_at_utc": "2026-10-25T14:23:30Z",
+  "status": "REPRODUCED_LIMITED_SAMPLE",
+  "baseline_manifest": "運用/ARC26-UNIFIED/p0-baseline-v4-corrected-20261025T141349Z.json",
+  "baseline_manifest_sha256": "cc7b2fdc7ce16152a54eb379bdb639313d1c1f89f0df564d1421d6d06d7270aa",
+  "environment": {
+    "runner": "project .venv / official arc_agi LocalEnvironmentWrapper",
+    "python_version": "3.12.10",
+    "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+    "environment_population": 25,
+    "population_split": "metadata does not label train/dev split",
+    "selection_seed": 20261022,
+    "action_seeds": [
+      31,
+      32,
+      33
+    ],
+    "games": null,
+    "max_sdk_actions_per_game": 16
+  },
+  "implementation": {
+    "runner": "検証/ARC3MyAgent_local_smoke.py",
+    "runner_sha256": "903a6cd187367f37793b629aa25ba8287843e481927606bb3baa7a9604db5bdd",
+    "agent": "接続/ARC3提出agent.py",
+    "agent_sha256": "f446645fe7226f91d284f0a0277189bc571d8ed726991a99d4900c5a60ce085a",
+    "policy": "接続/観測駆動探索Action.py",
+    "policy_sha256": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "memory_loader": "接続/ARC3事前記憶.py",
+    "memory_loader_sha256": "518456b3b4cdaeb352a093c65d14eb0eb1a30ce70576d6298d501ec75b2b5bc1"
+  },
+  "runs": [
+    {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-V4-RB-current-agent-instrumented-20261025T142330Z-run1.json",
+      "sha256": "bce66424f2d7b7d47e63c8b9c8ca2267c1a35fe7d323648b8470cdfb7c18946e",
+      "elapsed_seconds": 4.383
+    },
+    {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-V4-RB-current-agent-instrumented-20261025T142330Z-run2.json",
+      "sha256": "8fc47bb4c3d05499757b45de479b57c9eaed642141bceb43e6b238135f6b6be2",
+      "elapsed_seconds": 4.756
+    }
+  ],
+  "same_transition_trace_sha256": true,
+  "per_game_transition_trace_sha256": [
+    "d092a041c687745a21a5b4468573068f0d324f031a722b9e4a3c76b503c9e75c",
+    "ed51939b568ed52b372fedb9f76578aa488f9477726289d4cbe40c11a8df25ff",
+    "ed51939b568ed52b372fedb9f76578aa488f9477726289d4cbe40c11a8df25ff"
+  ],
+  "same_sources_seeds_and_environment": true,
+  "aggregate": {
+    "run1": {
+      "games": 3,
+      "games_with_two_or_more_non_reset_actions": 3,
+      "non_reset_actions": 48,
+      "reset_actions": 0,
+      "illegal_actions": 0,
+      "levels_completed": 0,
+      "wins": 0,
+      "hds_observation_updates": 48,
+      "hds_state_queries": 48,
+      "hds_update_seconds": 2.611977,
+      "hds_state_query_seconds": 0.174816,
+      "hds_candidate_query_seconds": 0.300162,
+      "hds_update_count_matches_non_reset_actions": true
+    },
+    "run2": {
+      "games": 3,
+      "games_with_two_or_more_non_reset_actions": 3,
+      "non_reset_actions": 48,
+      "reset_actions": 0,
+      "illegal_actions": 0,
+      "levels_completed": 0,
+      "wins": 0,
+      "hds_observation_updates": 48,
+      "hds_state_queries": 48,
+      "hds_update_seconds": 2.833634,
+      "hds_state_query_seconds": 0.196988,
+      "hds_candidate_query_seconds": 0.318101,
+      "hds_update_count_matches_non_reset_actions": true
+    }
+  },
+  "prior_memory": {
+    "version": [
+      "arc3-prior-context-v0.1"
+    ],
+    "loaded_count_per_fresh_agent": [
+      5,
+      5,
+      5
+    ],
+    "action_authorization": [
+      false,
+      false,
+      false
+    ],
+    "trace_effect_on_actions_not_established": "Loaded memory is observed; a memory-off ablation is still needed before attributing action choices to it."
+  },
+  "limits": "Sample is only 3 of 25 environments, 16 actions each. No game completed a level; raw game IDs and boards are not stored. This is a limited R-B reproducibility result, not competition capability acceptance.",
+  "capability_status": "PARTIAL_LEGAL_ACTIONS_NO_LEVEL_PROGRESS"
+}

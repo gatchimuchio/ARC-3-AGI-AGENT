@@ -1,0 +1,33 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-057",
+  "hypothesis": "C2-056 temperature 0.2 lost against 0.7 by -5.359420 mean points with a mixed 1/1/1 paired result and six rather than seven completed levels. A one-factor 0.9 sample tests whether the high side preserves more action diversity than 0.2; this is exploratory, not an expected improvement.",
+  "candidate_source": "出力/ARC3-RUN-003-local/C2-057-temperature-high/source/temperature-high/submission.ipynb",
+  "control_source": "出力/ARC3-RUN-003-local/C2-046/source/slim/submission.ipynb",
+  "one_factor_change": {
+    "cell": 5,
+    "control": "0.7",
+    "candidate": "0.9",
+    "other_cells_changed": false
+  },
+  "same_public_games_seed_and_limits": true,
+  "private": true,
+  "gpu": true,
+  "internet": false,
+  "official_submission_or_quota_use": false,
+  "base_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+  "candidate_notebook_sha256": "d05fffd9168217d7cd30f2e6f8e472a60f20ac7268f9f683e2998ae203e8725a",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "changed_cells": [
+    5
+  ],
+  "notebook_cells": 25,
+  "paired_acceptance": {
+    "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+    "game_starts": 3,
+    "mean_strictly_greater_than": 19.309155943771326,
+    "paired_mean_delta_vs_C2_046_slim": "positive"
+  },
+  "promotion_requires": "If the private pilot passes, run matched public-25 validation before promotion.",
+  "preflight_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-057-preflight-20261025.json",
+  "preflight_evidence_sha256": "b2d9a9557c8d7eda9c4ab2029236354f5c5853763ea239ed54eb817e11a4004c"
+}

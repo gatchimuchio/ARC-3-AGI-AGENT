@@ -1,0 +1,41 @@
+{
+  "verified_at_utc": "2026-10-25T03:57:55Z",
+  "kernel_id": "tecchannn/arc3-model-guided-c2-025/23",
+  "exact_version_pulled": true,
+  "notebook_cell_sources_and_notebook_metadata_match": true,
+  "cell_count_candidate": 25,
+  "cell_count_remote": 25,
+  "candidate_notebook_sha256": "69af507def65ab5da70634c9777ec64a33a76210f822f298a2e2dd887adcf6fe",
+  "remote_notebook_sha256": "101d7c600194ae95472ed374af82c156cd6732398dfb351b71784431179e8274",
+  "candidate_kernel_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "remote_kernel_metadata_sha256": "24510cb150142a2ee5787ba9626912da0ff349f7b0960255683c95f32f93ffdb",
+  "runtime_metadata_core_match": true,
+  "runtime_metadata_core_fields": {
+    "id": true,
+    "title": true,
+    "language": true,
+    "kernel_type": true,
+    "is_private": true,
+    "enable_gpu": true,
+    "enable_internet": true,
+    "machine_shape": true,
+    "dataset_sources": true,
+    "competition_sources": true,
+    "kernel_sources": true,
+    "model_sources": true,
+    "docker_image": true
+  },
+  "shared_metadata_differences": {
+    "code_file": {
+      "candidate": "submission.ipynb",
+      "remote": "arc3-model-guided-c2-025.ipynb"
+    }
+  },
+  "candidate_only_metadata_keys": [],
+  "kaggle_generated_remote_only_metadata_keys": [
+    "enable_tpu",
+    "id_no",
+    "keywords"
+  ],
+  "source_conclusion": "version 23 runs the prepared C2-054 source; Kaggle normalized code_file and added generated metadata only"
+}

@@ -1,0 +1,199 @@
+{
+  "評価": "直前公開Frame特徴のleave-one-environment-out転移評価",
+  "範囲": "fixed dev先頭5公開環境、environment seed 31、policy seed 7/31/73、各80要求",
+  "splitSeed": 20261022,
+  "trainEnvironmentCountPerFold": 4,
+  "maximumTrainingSamplesPerEnvironment": 15,
+  "trainingSampleSelection": "evenly spaced eligible samples across each training sequence",
+  "testEnvironmentCountPerFold": 1,
+  "allPublicStartsMatch": true,
+  "developmentEnvironmentCount": 5,
+  "policySeeds": [
+    7,
+    31,
+    73
+  ],
+  "特徴": {
+    "ActionOnlyHDS": [
+      "条件.Action番号"
+    ],
+    "FrameHDS追加条件": [
+      "直前複数Frame",
+      "直前中間Grid差分",
+      "直前一時Cell差分"
+    ],
+    "結果": [
+      "可視変化あり",
+      "level進行あり",
+      "新規盤面あり"
+    ]
+  },
+  "byPolicySeed": {
+    "7": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 389,
+      "fold数": 5,
+      "学習件数合計": 300,
+      "照会件数合計": 389,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 389,
+          "Action多数派適用": 369,
+          "Action多数派正答": 363,
+          "ActionOnlyHDS単一予測": 76,
+          "ActionOnlyHDS正答": 73,
+          "FrameHDS単一予測": 77,
+          "FrameHDS正答": 73,
+          "共通coverage": 76,
+          "共通ActionOnlyHDS正答": 73,
+          "共通FrameHDS正答": 73,
+          "共通Action多数派正答": 73,
+          "FrameHDSが多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 389,
+          "Action多数派適用": 369,
+          "Action多数派正答": 368,
+          "ActionOnlyHDS単一予測": 369,
+          "ActionOnlyHDS正答": 368,
+          "FrameHDS単一予測": 389,
+          "FrameHDS正答": 388,
+          "共通coverage": 369,
+          "共通ActionOnlyHDS正答": 368,
+          "共通FrameHDS正答": 368,
+          "共通Action多数派正答": 368,
+          "FrameHDSが多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 389,
+          "Action多数派適用": 369,
+          "Action多数派正答": 323,
+          "ActionOnlyHDS単一予測": 0,
+          "ActionOnlyHDS正答": 0,
+          "FrameHDS単一予測": 0,
+          "FrameHDS正答": 0,
+          "共通coverage": 0,
+          "共通ActionOnlyHDS正答": 0,
+          "共通FrameHDS正答": 0,
+          "共通Action多数派正答": 0,
+          "FrameHDSが多数派誤りを正答": 0
+        }
+      }
+    },
+    "31": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 389,
+      "fold数": 5,
+      "学習件数合計": 300,
+      "照会件数合計": 389,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 389,
+          "Action多数派適用": 368,
+          "Action多数派正答": 362,
+          "ActionOnlyHDS単一予測": 78,
+          "ActionOnlyHDS正答": 75,
+          "FrameHDS単一予測": 78,
+          "FrameHDS正答": 75,
+          "共通coverage": 78,
+          "共通ActionOnlyHDS正答": 75,
+          "共通FrameHDS正答": 75,
+          "共通Action多数派正答": 75,
+          "FrameHDSが多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 389,
+          "Action多数派適用": 368,
+          "Action多数派正答": 367,
+          "ActionOnlyHDS単一予測": 77,
+          "ActionOnlyHDS正答": 76,
+          "FrameHDS単一予測": 77,
+          "FrameHDS正答": 76,
+          "共通coverage": 77,
+          "共通ActionOnlyHDS正答": 76,
+          "共通FrameHDS正答": 76,
+          "共通Action多数派正答": 76,
+          "FrameHDSが多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 389,
+          "Action多数派適用": 368,
+          "Action多数派正答": 331,
+          "ActionOnlyHDS単一予測": 0,
+          "ActionOnlyHDS正答": 0,
+          "FrameHDS単一予測": 0,
+          "FrameHDS正答": 0,
+          "共通coverage": 0,
+          "共通ActionOnlyHDS正答": 0,
+          "共通FrameHDS正答": 0,
+          "共通Action多数派正答": 0,
+          "FrameHDSが多数派誤りを正答": 0
+        }
+      }
+    },
+    "73": {
+      "環境数": 5,
+      "公開開始状態一致数": 5,
+      "適格サンプル": 389,
+      "fold数": 5,
+      "学習件数合計": 300,
+      "照会件数合計": 389,
+      "結果": {
+        "可視変化あり": {
+          "照会件数": 389,
+          "Action多数派適用": 388,
+          "Action多数派正答": 374,
+          "ActionOnlyHDS単一予測": 0,
+          "ActionOnlyHDS正答": 0,
+          "FrameHDS単一予測": 0,
+          "FrameHDS正答": 0,
+          "共通coverage": 0,
+          "共通ActionOnlyHDS正答": 0,
+          "共通FrameHDS正答": 0,
+          "共通Action多数派正答": 0,
+          "FrameHDSが多数派誤りを正答": 0
+        },
+        "level進行あり": {
+          "照会件数": 389,
+          "Action多数派適用": 388,
+          "Action多数派正答": 387,
+          "ActionOnlyHDS単一予測": 388,
+          "ActionOnlyHDS正答": 387,
+          "FrameHDS単一予測": 389,
+          "FrameHDS正答": 388,
+          "共通coverage": 388,
+          "共通ActionOnlyHDS正答": 387,
+          "共通FrameHDS正答": 387,
+          "共通Action多数派正答": 387,
+          "FrameHDSが多数派誤りを正答": 0
+        },
+        "新規盤面あり": {
+          "照会件数": 389,
+          "Action多数派適用": 368,
+          "Action多数派正答": 332,
+          "ActionOnlyHDS単一予測": 0,
+          "ActionOnlyHDS正答": 0,
+          "FrameHDS単一予測": 0,
+          "FrameHDS正答": 0,
+          "共通coverage": 0,
+          "共通ActionOnlyHDS正答": 0,
+          "共通FrameHDS正答": 0,
+          "共通Action多数派正答": 0,
+          "FrameHDSが多数派誤りを正答": 0
+        }
+      }
+    }
+  },
+  "input": {
+    "publicEnvironmentFileCount": 50,
+    "contentSetSha256": "d40c652dfffda990a1a32c65da3d873a36bb9c4b6bd06598704596af3c2ead79"
+  },
+  "source_sha256": {
+    "transfer_runner": "f141596a333185241e04cbe84ccaa741c3f11f6317356f0cf54bf780de15d98d",
+    "shadow_runner": "dbd31f79d4609377db230abdbbb5c5cb31c7eb4c0338fa7eccfa2fe745b7c09f",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510"
+  },
+  "interpretation_boundary": "fixed development environments only; heldout environment is excluded from all training; no official-score claim"
+}

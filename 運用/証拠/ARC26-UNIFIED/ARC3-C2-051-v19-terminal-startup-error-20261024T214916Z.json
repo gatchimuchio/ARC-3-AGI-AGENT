@@ -1,0 +1,32 @@
+{
+  "schema": "arc3-c2-051-attempt2-terminal-startup-error.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-051",
+  "attempt": 2,
+  "kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+  "kernel_version": 19,
+  "observed_at_utc": "2026-10-24T21:49:16Z",
+  "query_environment": "ARC3 locked external environment; Kaggle CLI 2.2.5",
+  "status": "KernelWorkerStatus.ERROR",
+  "status_exit_code": 0,
+  "configured_readiness_and_watchdog_deadline_seconds": 2400,
+  "latest_log_elapsed_marker_seconds": 2473.104,
+  "precached_model_file_count": 62,
+  "precached_model_total_gb": 185.4,
+  "precached_elapsed_seconds": 2214.69,
+  "server_ready_marker_seen": false,
+  "benchmark_started": false,
+  "score_available": false,
+  "failure": "RuntimeError: SGLang inference readiness was not confirmed; offline benchmark not started",
+  "log_excerpt": [
+    "time=2468.241176459 RuntimeError: SGLang inference readiness was not confirmed; offline benchmark not started",
+    "time=2470.793428325 [NbConvertApp] Converting notebook __notebook__.ipynb to notebook",
+    "time=2470.944852033 [NbConvertApp] Writing 673431 bytes to __notebook__.ipynb",
+    "time=2472.084300337 [NbConvertApp] Converting notebook __notebook__.ipynb to html",
+    "time=2473.104204204 [NbConvertApp] Writing 2266299 bytes to __results__.html"
+  ],
+  "official_submission_or_rerun": false,
+  "duplicate_push": false,
+  "candidate_scores_eligible_for_adoption": false,
+  "interpretation": "Infrastructure startup failure; no benchmark or game score was produced. This attempt provides neither pass nor failure evidence for the gameplay hypothesis."
+}

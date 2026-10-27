@@ -1,0 +1,51 @@
+{
+  "schema": "arc3-c2-050-terminal-scorecard.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-050",
+  "observed_at_utc": "2026-10-24T20:28:55Z",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "latest_version": 17,
+  "status": "KernelWorkerStatus.COMPLETE",
+  "version17_run_started_utc": "2026-10-24T19:17:56Z",
+  "version17_run_ended_utc": "2026-10-24T20:18:00Z",
+  "scorecard": {
+    "games": 3,
+    "passes": 1,
+    "wins": 0,
+    "mean_saved": 4.91,
+    "mean_official_local_scorer": 4.909114956,
+    "saved_final_score_matches": 3,
+    "actions": 243,
+    "generated_tokens": 453182
+  },
+  "paired": {
+    "C2-047_mean": 5.952380952,
+    "delta_vs_C2-047": -1.043265996,
+    "C2-046_slim_mean": 19.309155944,
+    "delta_vs_C2-046_slim": -14.400040988,
+    "same_public_starts": 3
+  },
+  "eligibility": {
+    "concurrency_limit": 1,
+    "v16_and_v17_concurrent_observed": true,
+    "gate_breached": true,
+    "candidate_adoption_eligible": false,
+    "official_competition_submission_or_rerun": false
+  },
+  "summary_audit": {
+    "rolling_summary_read_timeout_seconds": 12.751783304,
+    "successful_summary_replacement_verified": false,
+    "requests_records": 350,
+    "identifiable_summary_request_in_requests_trace": false
+  },
+  "artifacts": {
+    "directory": "出力/ARC3-RUN-003-local/C2-050/kaggle-output/v17/",
+    "benchmark.json": "913e4bfa2b56c846a75d16bdacf05fd16797df89a75c78619fe1102d9d404e96",
+    "summary.txt": "3f1c67d4cc64241d46b1aaa22d9b4734a1d01f8c84b24b899588773cf9c9d04e",
+    "requests.jsonl": "9560923f9b97acb65202c479fc07a40904a1a159c7002499eab9458838ca460c",
+    "kernel_log": "3f204177b6e3f0e25f8f22f1eac0aaedfe8407b6307ea3fe3e0437f590d8fb8e"
+  },
+  "version16_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-050-v16-terminal-error-20261024T192335Z.json",
+  "quota_use": false,
+  "next": "Prepare C2-051 selective cross-level memory pilot; do not adopt without positive paired score evidence."
+}

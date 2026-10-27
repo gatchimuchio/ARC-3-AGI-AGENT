@@ -1,0 +1,281 @@
+{
+  "schema": "arc3-prior-public-transition-inventory.v1",
+  "observed_at_utc": "2026-10-26T22:15:06+00:00",
+  "inventory_only": true,
+  "training_performed": false,
+  "environment_or_sdk_actions_performed": false,
+  "network_or_competition_api_called": false,
+  "environment_implementation_or_hidden_state_used": false,
+  "raw_game_ids_coordinates_boards_or_fixed_action_sequences_persisted": false,
+  "inputs": [
+    {
+      "path": "記憶/事前記憶/v0.4/README.md",
+      "bytes": 1036,
+      "sha256": "020018ae96f36bc7670c7215c469b83d2c8ebf06cf524831206d7a3bd38b29c8"
+    },
+    {
+      "path": "記憶/事前記憶/v0.4/マニフェスト.json",
+      "bytes": 902,
+      "sha256": "d1b6e0cc3d14ce7c40c26567fefa226a2975c2e6d02725fb8bb404833963a1bd"
+    },
+    {
+      "path": "記憶/事前記憶/v0.4/183レベル_HDS索引.json",
+      "bytes": 6553,
+      "sha256": "5848a8947eed806a61531b963ea9113e53ef5e3db028f406d010b02af9a41ffd"
+    },
+    {
+      "path": "記憶/事前記憶/v0.4/機構作用既知解_HDS正本.json",
+      "bytes": 12499,
+      "sha256": "b8cc8f90479bb08dbe119a62da3f608156f86be9cdb4084db5277bdbea7e6359"
+    },
+    {
+      "path": "接続/ARC3事前記憶.py",
+      "bytes": 3003,
+      "sha256": "518456b3b4cdaeb352a093c65d14eb0eb1a30ce70576d6298d501ec75b2b5bc1"
+    },
+    {
+      "path": "入力/配色教師/公開原票.json.gz",
+      "bytes": 213718,
+      "sha256": "ce57e5b15e3e2fbdc3ecc9d1b2cb57723086d570b6bef1286e9740b7617e35b1"
+    },
+    {
+      "path": "入力/鏡像教師/全公開原票.json.gz",
+      "bytes": 435041,
+      "sha256": "295828f9c30172f3f656f78f79cbfa93afc2c1cb41314222863ddc074700b80b"
+    },
+    {
+      "path": "入力/鏡像教師/旧実験証拠.tar.gz",
+      "bytes": 12467596,
+      "sha256": "3e23d94f325bfc4b5d482ff79680b5c748ca70aa2c983ee9537f1c9096a76860"
+    },
+    {
+      "path": "入力/鎖教師/214作用原画素.json.gz",
+      "bytes": 38312,
+      "sha256": "86dcf144f3a3a158927cf838568dcd229b3a318f4b9ad055b36cb5e27032cfae"
+    },
+    {
+      "path": "入力/鎖教師/関係教材.json",
+      "bytes": 970958,
+      "sha256": "828dbb48c677ab2b365097d72535f7bcdff68f113e548a4e966da7c5f05a9149"
+    },
+    {
+      "path": "検証/運転記録/20261019_教師被覆と公式接続監査/被覆表.json",
+      "bytes": 156206,
+      "sha256": "f499fa808e69e15a7411f56d086df605f306cafb21ba533901fd73f3be7d806c"
+    },
+    {
+      "path": "検証/運転記録/20261019_教師被覆と公式接続監査/被覆監査README.md",
+      "bytes": 5696,
+      "sha256": "1df8e1cf3ffb43dd57f38b2d85a05974a383365a18ad06677b1f02f369fecbca"
+    },
+    {
+      "path": "検証/運転記録/20261019_教師被覆と公式接続監査/接続監査README.md",
+      "bytes": 15134,
+      "sha256": "b7d6db2570e1d5834b1a58554acacd8595efcab8694634ac69b8fc29c15c3aae"
+    }
+  ],
+  "canonical_v0_4": {
+    "files": 4,
+    "level_index_rows": 183,
+    "level_index_columns": [
+      "ゲームID",
+      "レベル",
+      "作用ID",
+      "baseline_actions",
+      "盤面寸法",
+      "Sprite数"
+    ],
+    "game_mechanism_rows": 25,
+    "action_aggregate_rows": 92,
+    "aggregate_observation_count": 5112,
+    "action_aggregate_columns": [
+      "観測数",
+      "画面変化率",
+      "Hidden変化率",
+      "例外数",
+      "状態"
+    ],
+    "raw_before_action_after_frames_available": false,
+    "source_derived_mechanisms_and_hidden_change_rates_eligible_as_training_labels": false,
+    "known_sequence_records": 9,
+    "known_sequence_distinct_games": 3,
+    "known_records_declared_beyond_first_level": 6,
+    "known_sequence_command_count": 113,
+    "known_sequence_Action6_command_count": 14,
+    "known_sequence_joined_frames_available": false,
+    "known_sequence_replay_performed": false
+  },
+  "current_loader": {
+    "principle_context_records": 5,
+    "loads_v0_4_public_transition_rows": false,
+    "boundary": "ARC3事前記憶",
+    "game_outcome_boundary": "ARC3公開作用応答",
+    "context_causal_confirmed": false,
+    "action_authorization": false,
+    "interpretation": "Five process-principle strings are recorded in a separate HDS boundary; this is not loading public transition experience."
+  },
+  "public_recording_cohorts": [
+    {
+      "label": "color_teacher_public_recordings",
+      "source_streams": 3,
+      "counts": {
+        "stored_rows": 637,
+        "frame_packets": 634,
+        "adjacent_packet_pairs": 631,
+        "public_frames": 2256,
+        "streams_starting_with_RESET_and_public_score_zero": 3,
+        "action6_target_pairs": 137,
+        "action6_valid_integer_xy_0_63": 137,
+        "action6_before_NOT_FINISHED": 137,
+        "action6_same_public_guid_and_game": 137,
+        "action6_in_before_public_available_actions": 137,
+        "action6_target_inside_before_public_frame": 137,
+        "action6_before_legacy_public_score_positive": 110
+      },
+      "action6_immediate_outcomes": {
+        "board_change": 127,
+        "visible_no_op": 8,
+        "WIN": 2
+      },
+      "distinct_versioned_public_games": 1,
+      "exact_current_public_version_matches": 1,
+      "current_base_game_matches": 1,
+      "public_packet_fields": [
+        "action_input",
+        "available_actions",
+        "frame",
+        "full_reset",
+        "game_id",
+        "guid",
+        "score",
+        "state",
+        "win_score"
+      ],
+      "legacy_score_semantics": "Not mapped to levels_completed; positive values describe saved public progress fields only.",
+      "label_scope": "Only latest public frame comparison and public terminal state; visible_no_op does not assert absence of hidden effect."
+    },
+    {
+      "label": "mirror_teacher_public_recordings",
+      "source_streams": 3,
+      "counts": {
+        "stored_rows": 3248,
+        "frame_packets": 3245,
+        "adjacent_packet_pairs": 3242,
+        "public_frames": 3282,
+        "streams_starting_with_RESET_and_public_score_zero": 3,
+        "action6_target_pairs": 98,
+        "action6_valid_integer_xy_0_63": 98,
+        "action6_before_NOT_FINISHED": 98,
+        "action6_same_public_guid_and_game": 98,
+        "action6_in_before_public_available_actions": 98,
+        "action6_target_inside_before_public_frame": 98,
+        "action6_before_legacy_public_score_positive": 83
+      },
+      "action6_immediate_outcomes": {
+        "visible_no_op": 85,
+        "board_change": 13
+      },
+      "distinct_versioned_public_games": 1,
+      "exact_current_public_version_matches": 0,
+      "current_base_game_matches": 1,
+      "public_packet_fields": [
+        "action_input",
+        "available_actions",
+        "frame",
+        "full_reset",
+        "game_id",
+        "guid",
+        "score",
+        "state",
+        "win_score"
+      ],
+      "legacy_score_semantics": "Not mapped to levels_completed; positive values describe saved public progress fields only.",
+      "label_scope": "Only latest public frame comparison and public terminal state; visible_no_op does not assert absence of hidden effect."
+    }
+  ],
+  "distinct_games_across_coordinate_cohorts": 2,
+  "provenance": {
+    "color": {
+      "local_source_fields": [
+        "session",
+        "path",
+        "sha256"
+      ],
+      "source_hashes_join_historical_coverage_recordings": 3,
+      "expected_source_count": 3,
+      "all_historical_coverage_verified_flags": true,
+      "explicit_official_recording_urls_in_packaged_fixture": false,
+      "limit": "Historical byte/provenance audit join, not a fresh independent re-download or acquisition-pipeline audit."
+    },
+    "mirror": {
+      "source_metadata_records": [
+        {
+          "source_group": "success",
+          "source_blog": "arcprize.org/blog/arc-agi-3-human-dataset",
+          "replay_origin": "arcprize.org",
+          "recording_origin": "arcprize.org",
+          "recording_path_kind": "/api/recordings/...",
+          "original_recording_sha256": "4bd6b2bc090fd49c2fe5ee2189fd7acb38ec3e7329a881ba0ef5e034930eb27d",
+          "packaged_source_pin_matches_provenance": true,
+          "original_recording_member_present_under_pinned_basename": false
+        },
+        {
+          "source_group": "holdout",
+          "source_blog": "arcprize.org/blog/arc-agi-3-human-dataset",
+          "replay_origin": "arcprize.org",
+          "recording_origin": "arcprize.org",
+          "recording_path_kind": "/api/recordings/...",
+          "original_recording_sha256": "5341049dee8d1a0b92fc7d2d464fd322bd9d401e85e7d2ef657b3df96065cbbf",
+          "packaged_source_pin_matches_provenance": true,
+          "original_recording_member_present_under_pinned_basename": false
+        },
+        {
+          "source_group": "failure",
+          "source_blog": "arcprize.org/blog/arc-agi-3-human-dataset",
+          "replay_origin": "arcprize.org",
+          "recording_origin": "arcprize.org",
+          "recording_path_kind": "/api/recordings/...",
+          "original_recording_sha256": "3fe7d52c0ac412915639a53d1d7b865cfd0811812858317936ba208fdcd51d2a",
+          "packaged_source_pin_matches_provenance": true,
+          "original_recording_member_present_under_pinned_basename": false
+        }
+      ],
+      "historical_provenance_live": false,
+      "limit": "Explicit official human-dataset/replay/API URLs and matching source pins exist; exact original recording bytes are not members of this packaged archive, so their original byte hashes were not independently revalidated now."
+    },
+    "initialization": {
+      "all_six_streams_start_public_RESET_and_public_score_zero": true,
+      "direct_level_selection_or_state_injection_used_by_this_inventory": false,
+      "historical_initialization_pipeline_proven_clean": false,
+      "limit": "Public packets show consecutive observed trajectories from RESET; they do not by themselves prove every historical acquisition/internal initialization choice."
+    }
+  },
+  "chain_pixel_fixture": {
+    "rows": 214,
+    "fields": [
+      "作用",
+      "前画素",
+      "後フレーム",
+      "後画素",
+      "行"
+    ],
+    "Action6_rows": 21,
+    "contains_action_coordinate_parameters": false,
+    "contains_public_terminal_or_progress_metadata": false,
+    "interpretation": "Public before/after pixel contrasts with generic action number; no coordinate target or public terminal/progress label in this projection."
+  },
+  "admission": {
+    "usable_labels_after_source_admission": [
+      "latest_public_board_change",
+      "latest_public_visible_no_op",
+      "public_WIN",
+      "public_GAME_OVER"
+    ],
+    "legacy_score_admitted_as_level_progress": false,
+    "acquisition_provenance_fully_revalidated": false,
+    "all_cohorts_previously_used_as_development_material": true,
+    "not_an_independent_game_holdout": true,
+    "candidate_training_admitted_now": false,
+    "next_step": "Restore/hash-check original official recording bytes and verify public schema/version/initialization provenance before generic feature training. Retain all phases and reset boundaries; strip task/level identifiers and raw coordinate values from learned reusable memory."
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "arc26-arc3-p1-3-prior-memory-local-review-v1",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-25T05:12:58Z",
+  "authority": {
+    "engineering_table": "運用/ARC26-UNIFIED/v3_0/02_共通工程表.md",
+    "codex_instructions": "運用/ARC26-UNIFIED/v3_0/03_共通Codex指示書.md",
+    "spec": "運用/ARC26-UNIFIED/v3_0/01_共通仕様書.md"
+  },
+  "status": {
+    "overall_p1_3": "HOLD_FINAL_PROMOTION",
+    "ability_improvement_claimed": false,
+    "local_load_learning_action": "PASS_LOCAL",
+    "official_score_claimed": false
+  },
+  "source_and_permission": {
+    "local_competition_archive_sha256": "c72400a32db5e48da9014baf893b48016b300e9a6a77bd5d505de2b1ec61d645",
+    "permission_assessment": "Official sources permit public external data use and identify the Kaggle data as Apache 2.0; the selected ID-free derived principles are suitable for the local/private runtime. The source README does not record an exact source release or generator, so full derivation reproducibility is not established.",
+    "memory_module_sha256": "518456b3b4cdaeb352a093c65d14eb0eb1a30ce70576d6298d501ec75b2b5bc1",
+    "selected_memory_content": [
+      "role_relation_first",
+      "preserve_competing_hypotheses",
+      "update_from_observed_deltas",
+      "strip_identifiers_from_cross_episode_memory",
+      "retain_unresolved_causality"
+    ],
+    "local_public_environment_metadata_files": 25,
+    "official_sources": [
+      {
+        "url": "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/overview",
+        "claim": "The competition overview permits freely and publicly available external data."
+      },
+      {
+        "url": "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/data",
+        "claim": "The official competition dataset metadata lists Apache 2.0."
+      },
+      {
+        "url": "https://github.com/arcprize/ARC-AGI/blob/main/LICENSE",
+        "claim": "The official ARC-AGI toolkit source repository is MIT licensed."
+      }
+    ],
+    "local_competition_archive": "入力/Kaggle/arc-prize-2026-arc-agi-3.zip",
+    "source_manifest_sha256": "d1b6e0cc3d14ce7c40c26567fefa226a2975c2e6d02725fb8bb404833963a1bd",
+    "memory_module": "接続/ARC3事前記憶.py",
+    "distribution_scope": "Private runtime only per the existing connector declaration; no public release performed. Final source/license obligations remain open.",
+    "source_memory": "記憶/事前記憶/v0.4/機構作用既知解_HDS正本.json",
+    "local_engine_package": {
+      "name": "arc-agi",
+      "version": "0.9.8",
+      "license": "MIT"
+    },
+    "source_readme_sha256": "020018ae96f36bc7670c7215c469b83d2c8ebf06cf524831206d7a3bd38b29c8",
+    "source_memory_sha256": "b8cc8f90479bb08dbe119a62da3f608156f86be9cdb4084db5277bdbea7e6359",
+    "excluded_content": [
+      "game/level-indexed records",
+      "answer/trajectory reuse",
+      "ID-routed action selection",
+      "raw memory directory"
+    ]
+  },
+  "integration_evidence": {
+    "bundle_manifest_sha256": "f15f56e823e6e5a7c0490c146a31c944534a6fdc5d6453c935c4f801bb3ef3e4",
+    "bundle_manifest": "出力/ARC3-SUBMIT-012-prior-memory-20261025/bundle-manifest.json",
+    "observed": {
+      "per_episode_ids_persisted": false,
+      "candidate": {
+        "online_hds_updates": 25,
+        "prior_records_loaded": 25,
+        "legal_non_reset_actions": 1986,
+        "action_authorization_false": 25
+      },
+      "hidden_or_evaluation_answers_read": false,
+      "exceptions": 0,
+      "previous": {
+        "online_hds_updates": 25,
+        "prior_records_loaded": 25,
+        "legal_non_reset_actions": 1986,
+        "action_authorization_false": 25
+      }
+    },
+    "process_scope": "Fresh child process per condition; each loaded the packaged connector and ran all 25 official public Starter environments.",
+    "local_eval_sha256": "ef52d62789183f16511535bf07fdc45d23ecd09159fad96dea88f6b27372a73d",
+    "local_eval": "運用/証拠/ARC26-UNIFIED/ARC3-prior-memory-coefficient-local-eval-20261024T234914Z.json",
+    "source_bundle_sha256": "d802bdad39437e5e31617cba4653b69dae447450d172f29281716859165a3319",
+    "limits": [
+      "Memory load/learning/action path is verified only in local public Starter evaluation, not in a terminal Kaggle competition run of this source bundle.",
+      "The paired coefficient comparison is not a memory-versus-no-memory experiment and does not establish a causal performance gain.",
+      "Candidate bundle excludes the raw input and memory directories; the selected five ID-free principles are embedded in the connector source."
+    ],
+    "notebook_sha256": "957182aee3420dfa2687cfe6a5ca95e5b47af69fd3f29dfb7402bb2f5dd0a3f4"
+  },
+  "next_action": "Keep the evidence as local integration PASS only; do not claim performance gain. Before promotion, obtain a terminal private-kernel run with this exact bundle and settle source-publication requirements."
+}

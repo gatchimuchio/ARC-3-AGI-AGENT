@@ -1,0 +1,16 @@
+{
+  "schema": "arc3-visual-hds-build-supersession.v1",
+  "superseded_arms": [
+    "off",
+    "shadow"
+  ],
+  "reason": "Initial generated cell wrote literal backslash-n in .pth; child process package loading was not valid. No GPU launch was authorized for those artifacts.",
+  "replacement_arms": [
+    "off-r2",
+    "shadow-r2"
+  ],
+  "corrected_cell_real_newline_CPU_execution_verified": true,
+  "old_bytes_preserved": true,
+  "replacement_proof": "arms-preflight-r2.json",
+  "replacement_proof_sha256": "3d91c27e27c187dde7ebac494446597f403e638682c5b7d14c40439d29bf9e37"
+}

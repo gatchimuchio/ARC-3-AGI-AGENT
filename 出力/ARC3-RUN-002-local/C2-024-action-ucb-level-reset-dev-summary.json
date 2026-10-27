@@ -1,0 +1,33 @@
+{
+  "split_seed": 20261022,
+  "stage": "dev",
+  "environment_seeds": [7, 31, 73],
+  "dev_games_per_seed": 5,
+  "max_actions_per_game": 80,
+  "retry_game_over": true,
+  "policy": "action_number_ucb_stats_reset_after_level_progress",
+  "same_public_starts": "15/15",
+  "identical_action_response_logs": "15/15",
+  "per_seed": [
+    {"seed": 7, "actions": [400, 400], "levels_completed": [1, 1], "no_op_actions": [9, 9], "game_over_events": [6, 6], "reset_actions": [6, 6], "wins": [0, 0], "holds": [0, 0], "illegal": [0, 0], "duplicate": [0, 0], "same_starts": 5, "identical_response_logs": 5, "raw_json_saved": false},
+    {"seed": 31, "actions": [400, 400], "levels_completed": [1, 1], "no_op_actions": [9, 9], "game_over_events": [6, 6], "reset_actions": [6, 6], "wins": [0, 0], "holds": [0, 0], "illegal": [0, 0], "duplicate": [0, 0], "same_starts": 5, "identical_response_logs": 5, "raw_json_saved": true},
+    {"seed": 73, "actions": [400, 400], "levels_completed": [1, 1], "no_op_actions": [17, 17], "game_over_events": [6, 6], "reset_actions": [6, 6], "wins": [0, 0], "holds": [0, 0], "illegal": [0, 0], "duplicate": [0, 0], "same_starts": 5, "identical_response_logs": 5, "raw_json_saved": true}
+  ],
+  "totals": {
+    "actions": [1200, 1200],
+    "levels_completed": [3, 3],
+    "no_op_actions": [35, 35],
+    "game_over_events": [18, 18],
+    "reset_actions": [18, 18],
+    "wins": [0, 0],
+    "holds": [0, 0],
+    "illegal": [0, 0],
+    "duplicate": [0, 0]
+  },
+  "raw_artifact_sha256": {
+    "seed_31": "FEB33454FF57BCAFF4019B4788CEADCA36E15722FC302EF59DD72D31C6D26530",
+    "seed_73": "E9DAE49FC927F1A353F99FF6D7B5A22E38D4EC4CF580D0CFDCC014E03B095D2D",
+    "seed_7": null
+  },
+  "seed_7_note": "Completed read-only in-memory after C: ran out of free space; only aggregate values were retained."
+}

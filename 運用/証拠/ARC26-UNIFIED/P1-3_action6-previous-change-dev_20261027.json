@@ -1,0 +1,196 @@
+{
+  "schema": "arc3-action6-previous-public-change-observation.v1",
+  "run_id": "P1-3_action6-previous-change-dev_20261027",
+  "observed_at_utc": "2026-10-26T22:00:13+00:00",
+  "stage": "dev",
+  "split_seed": 20261027,
+  "split_rule": "first five shuffled public games are dev; remaining twenty are remainder",
+  "games_per_seed": 5,
+  "seeds": [
+    2203,
+    2309,
+    2411
+  ],
+  "seed_interpretation": "trajectory/RNG confirmation; every public game has been reused",
+  "all_public_games_previously_used": true,
+  "max_actions_per_episode": 80,
+  "retry_game_over": true,
+  "visible_change_coefficient": 0.0,
+  "level_progress_reward": 4.0,
+  "python_hash_seed": "0",
+  "summary": {
+    "episodes": 15,
+    "levels_completed": 3,
+    "wins": 0,
+    "actions": 1200,
+    "noops": 278,
+    "action6_responses": 524,
+    "reset_actions": 12,
+    "game_over_events": 12,
+    "illegal_actions": 0,
+    "duplicate_observations": 0,
+    "rhae_mean": 0.5555555555555555
+  },
+  "stop_reason_counts": {
+    "action_limit": 15
+  },
+  "per_seed_aggregate": [
+    {
+      "seed": 2203,
+      "episodes": 5,
+      "levels_completed": 1,
+      "wins": 0,
+      "actions": 400,
+      "noops": 85,
+      "action6_responses": 172,
+      "reset_actions": 4,
+      "game_over_events": 4,
+      "illegal_actions": 0,
+      "duplicate_observations": 0,
+      "rhae_mean": 0.5555555555555556
+    },
+    {
+      "seed": 2309,
+      "episodes": 5,
+      "levels_completed": 1,
+      "wins": 0,
+      "actions": 400,
+      "noops": 106,
+      "action6_responses": 179,
+      "reset_actions": 4,
+      "game_over_events": 4,
+      "illegal_actions": 0,
+      "duplicate_observations": 0,
+      "rhae_mean": 0.5555555555555556
+    },
+    {
+      "seed": 2411,
+      "episodes": 5,
+      "levels_completed": 1,
+      "wins": 0,
+      "actions": 400,
+      "noops": 87,
+      "action6_responses": 173,
+      "reset_actions": 4,
+      "game_over_events": 4,
+      "illegal_actions": 0,
+      "duplicate_observations": 0,
+      "rhae_mean": 0.5555555555555556
+    }
+  ],
+  "feature_observation": {
+    "counts": {
+      "action6_responses": 524,
+      "comparable_response": 1173,
+      "eligible_changed_coordinates": 223,
+      "eligible_unchanged_coordinates": 166154,
+      "eligible_unknown_coordinates": 5069,
+      "level_transition_clear": 3,
+      "sdk_reset_observation_clear": 12,
+      "selected_color_both_groups_opportunities": 9,
+      "terminal_clear": 12
+    },
+    "both_groups_distinct_public_games": 2,
+    "selected_feature_outcomes": [
+      {
+        "feature": "changed",
+        "selections": 6,
+        "both_groups_opportunities": 1,
+        "outcomes": {
+          "win": {
+            "responses": 0,
+            "distinct_public_games": 0
+          },
+          "game_over": {
+            "responses": 0,
+            "distinct_public_games": 0
+          },
+          "level_progress": {
+            "responses": 0,
+            "distinct_public_games": 0
+          },
+          "board_change": {
+            "responses": 2,
+            "distinct_public_games": 1
+          },
+          "no_op": {
+            "responses": 4,
+            "distinct_public_games": 2
+          }
+        }
+      },
+      {
+        "feature": "unchanged",
+        "selections": 500,
+        "both_groups_opportunities": 8,
+        "outcomes": {
+          "win": {
+            "responses": 0,
+            "distinct_public_games": 0
+          },
+          "game_over": {
+            "responses": 3,
+            "distinct_public_games": 1
+          },
+          "level_progress": {
+            "responses": 3,
+            "distinct_public_games": 1
+          },
+          "board_change": {
+            "responses": 258,
+            "distinct_public_games": 4
+          },
+          "no_op": {
+            "responses": 236,
+            "distinct_public_games": 3
+          }
+        }
+      },
+      {
+        "feature": "unknown",
+        "selections": 18,
+        "both_groups_opportunities": 0,
+        "outcomes": {
+          "win": {
+            "responses": 0,
+            "distinct_public_games": 0
+          },
+          "game_over": {
+            "responses": 0,
+            "distinct_public_games": 0
+          },
+          "level_progress": {
+            "responses": 0,
+            "distinct_public_games": 0
+          },
+          "board_change": {
+            "responses": 13,
+            "distinct_public_games": 3
+          },
+          "no_op": {
+            "responses": 5,
+            "distinct_public_games": 2
+          }
+        }
+      }
+    ]
+  },
+  "score_interpretation": "descriptive baseline exploration only; no paired causal effect",
+  "feature_definition": "selected target changed in the preceding comparable public response",
+  "context_clear_rule": "RESET observation, terminal response, level transition, or shape change",
+  "selection_intervention": false,
+  "completed_without_exception": true,
+  "exception_handling": "fail immediately; incomplete evaluation does not write a result",
+  "raw_boards_masks_coordinates_game_ids_or_per_game_rows_persisted": false,
+  "only_public_observations_used": true,
+  "official_submission_made": false,
+  "competition_api_called": false,
+  "notebook_or_kernel_changed": false,
+  "environment_manifest_sha256": "924f0da0af3bd3b8ac4fa742f35a48f0bf367567f55e8a299588ea710202d97a",
+  "source_sha256": {
+    "diagnostic": "bad21a3156c3f0541b822c98da34ef0e380833da5a1f7273a57a476f4b54f13c",
+    "policy": "7879f85b5a3434dc2f5426c4837914c41054cbe56360ed4324167dab93de0575",
+    "local_evaluator": "c77d1445deaf84348fe212188f12f9f16312f6f8fe4fa986818a1984afa21d32",
+    "scorer": "3e0edd03dfc81715191d6eb5a8a098eaddb1fd3eeb88205dd638d0b624b8c502"
+  }
+}

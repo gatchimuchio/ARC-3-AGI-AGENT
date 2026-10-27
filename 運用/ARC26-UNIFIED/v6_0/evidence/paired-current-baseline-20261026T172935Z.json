@@ -1,0 +1,91 @@
+{
+  "schema": "arc26-v6-local-scorecard-v1",
+  "run_id": "ARC3-v6-current-agent-action-paired-20261027-01",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-26T17:29:35Z",
+  "source_head": "8667e9b9512e328084050007d3bdedb1ae5e245f",
+  "source_bundle_sha256": "d802bdad39437e5e31617cba4653b69dae447450d172f29281716859165a3319",
+  "source_bundle_manifest_file_count": 36,
+  "local_public_input": {
+    "root": "入力/Kaggle/environment_files",
+    "metadata_count": 25,
+    "file_count": 50,
+    "aggregate_sha256": "5d673a8486f0516cd84570a7712ba6b701ab0aa7b0da1cd66a102d79cdcb3e02",
+    "per_game_rows_persisted": false
+  },
+  "runtime": {
+    "environment": "%TEMP%/arc3-v6-locked-20261027",
+    "lock_mode": "uv run --locked",
+    "python": "3.12.10",
+    "arc-agi": "0.9.8",
+    "arcengine": "0.9.3",
+    "hds-learning-system": "0.4.2",
+    "kaggle": "2.2.5",
+    "kagglesdk": "0.1.38"
+  },
+  "command": "$env:UV_PROJECT_ENVIRONMENT = Join-Path $env:TEMP 'arc3-v6-locked-20261027'; uv run --locked python -X utf8 '検証/ARC3事前記憶係数ペア評価.py'",
+  "conditions": {
+    "episodes_per_condition": 25,
+    "seed": 0,
+    "max_requests": 80,
+    "previous": {
+      "visible_change_coefficient": 0.25,
+      "levels_completed": 2,
+      "wins": 0,
+      "public_starter_rhae_score_mean": 0.190256343,
+      "legal_non_reset_actions": 1986
+    },
+    "current": {
+      "visible_change_coefficient": 0.0,
+      "levels_completed": 3,
+      "wins": 0,
+      "public_starter_rhae_score_mean": 0.209349227,
+      "legal_non_reset_actions": 1986
+    },
+    "delta": {
+      "levels_completed": 1,
+      "wins": 0,
+      "public_starter_rhae_score_mean": 0.019092884,
+      "score_improvements": 1,
+      "score_regressions": 1,
+      "score_ties": 23,
+      "episode_level_improvements": 1,
+      "episode_level_regressions": 0,
+      "episode_level_ties": 24,
+      "identical_action_traces": 2
+    }
+  },
+  "integrity": {
+    "exceptions": 0,
+    "scorecard_contract_errors": 0,
+    "answers_or_hidden_data_read": false,
+    "game_ids_or_per_episode_rows_persisted": false,
+    "log_file": "運用/証拠/ARC26-UNIFIED/ARC3-v6-current-agent-action-paired-20261027-01.log",
+    "log_sha256": "1560bde493907e9d84b89dac4ec5345f3f010b1c86ca5c09a9c8a00ead7ba493"
+  },
+  "hds": {
+    "version": "0.4.2",
+    "prior_memory_version": "v0.4",
+    "prior_memory_manifest_sha256": "d1b6e0cc3d14ce7c40c26567fefa226a2975c2e6d02725fb8bb404833963a1bd",
+    "prior_records_loaded_per_episode": 25,
+    "action_authorization": false
+  },
+  "official": {
+    "latest_observation_utc": "2026-10-26T16:48:03Z",
+    "latest_submission_id": "57612586",
+    "latest_status": "SubmissionStatus.COMPLETE",
+    "latest_public_score": 0.03,
+    "latest_private_score": null,
+    "previous_submission_id": "57577905",
+    "previous_public_score": 23.86,
+    "quota_at_latest_observation": {
+      "today": 0,
+      "lifetime": 7,
+      "remaining_today": 1
+    },
+    "history_evidence": "運用/証拠/ARC26-UNIFIED/official-cli-observation-20261026T164803Z.json",
+    "history_evidence_sha256": "405561cc0039b0569cace62289d96440dff7707ea30b6951f4dbc76c975c403f",
+    "new_submission_or_rerun": false
+  },
+  "interpretation": "Local public scorecard only; no Kaggle score claim. The previous-vs-current coefficient comparison does not test HDS-guided action selection."
+}

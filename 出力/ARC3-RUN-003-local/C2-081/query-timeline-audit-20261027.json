@@ -1,0 +1,196 @@
+{
+  "schema": "arc3-actual-model-hds-query-timeline-audit.v1",
+  "observed_at_utc": "2026-10-27T02:49:26.050067+00:00",
+  "scope": "READ ONLY exact version1 public event transcripts/sidecars; no replay, game implementation, hidden state, GPU or Kaggle operation",
+  "kernel": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2",
+  "version": 1,
+  "input_sha256": {
+    "出力/ARC3-RUN-003-local/C2-081/shown-r2-terminal-v1-scorecard-20261027T023223Z.json": "b0ae6bd05ec904e8ace331eb6f8cf916ffa7339687a0dbc97c350eb7dc98b829",
+    "出力/ARC3-RUN-003-local/C2-081/shown-r2-terminal-v1-20261027T023223Z/artifacts/m0r0-492f87ba_p0_events.jsonl": "8e4cb5ba056df61713ae31063e0e827e51e5e860d7870022054306c789bd0efb",
+    "出力/ARC3-RUN-003-local/C2-081/shown-r2-terminal-v1-20261027T023223Z/artifacts/sk48-d8078629_p0_events.jsonl": "9d87e5337c61ef9f0a7d2b4eb7186c4ded227d774da56d18fb5c4dc6e68fe21e",
+    "出力/ARC3-RUN-003-local/C2-081/shown-r2-terminal-v1-20261027T023223Z/artifacts/tn36-ef4dde99_p0_events.jsonl": "d55e6e9977cccc1cd0b2b7de602c0b2fde9592a87e44a2d95f760947030167fe",
+    "出力/ARC3-RUN-003-local/C2-081/shown-r2-terminal-v1-20261027T023223Z/artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json": "0d931cd79e36fe8af863ddc3be64296e2282d6c19a3fbe45240dad20b0fcbde8",
+    "出力/ARC3-RUN-003-local/C2-081/shown-r2-terminal-v1-20261027T023223Z/artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json": "7aeb7cd88995a6fa3c53c3d365bd31acfb1f28778feca256cae2685b2c9280d5",
+    "出力/ARC3-RUN-003-local/C2-081/shown-r2-terminal-v1-20261027T023223Z/artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json": "49bca5483f9cb7dad6634c247e792dd1882c20595461e83ea1e578f4423b91b8"
+  },
+  "helper_native_difference": {
+    "helper_calls": 5,
+    "native_queries": 3,
+    "distinct_candidate_limit_rejections": 2,
+    "cache_hits": 0,
+    "stale_step_rejections": 0,
+    "adapter_errors": 0,
+    "actual_evidence": "sk48 event JSONL line7: LEFT/DOWN/RIGHT/UP loop and printed TOOL RESULT statuses"
+  },
+  "queries": [
+    {
+      "source_events": "artifacts/sk48-d8078629_p0_events.jsonl",
+      "event_line": 7,
+      "source_sidecar": "artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json",
+      "trace_line": 77,
+      "public_step": 3,
+      "candidate": "LEFT",
+      "inspection_id": 1,
+      "prior_updates": 5,
+      "preceding_successful_game_updates": 2,
+      "preceding_update_steps": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "native_status": "断定保留",
+      "printed_prefix_limit_chars": 900,
+      "printed_HOLD_reason_visible": true,
+      "printed_prediction_list_empty": true,
+      "printed_active_rule_list_empty": true,
+      "printed_target_counts_visible": false,
+      "printed_truncation_metadata_visible": false,
+      "executed_candidate_match": true,
+      "actual_response_steps": [
+        3,
+        4
+      ],
+      "query_model_response": "model-6",
+      "action_model_response": "model-8",
+      "observed_outcome": "盤面変化",
+      "matched_prediction_values": []
+    },
+    {
+      "source_events": "artifacts/sk48-d8078629_p0_events.jsonl",
+      "event_line": 7,
+      "source_sidecar": "artifacts/sk48-d8078629_p0_tool_runtime_state.visual-hds-query.json",
+      "trace_line": 107,
+      "public_step": 3,
+      "candidate": "DOWN",
+      "inspection_id": 2,
+      "prior_updates": 5,
+      "preceding_successful_game_updates": 2,
+      "native_status": "断定保留",
+      "printed_prefix_limit_chars": 900,
+      "printed_HOLD_reason_visible": true,
+      "printed_prediction_list_empty": true,
+      "printed_active_rule_list_empty": true,
+      "printed_target_counts_visible": false,
+      "printed_truncation_metadata_visible": false,
+      "executed_candidate_match": false
+    },
+    {
+      "source_events": "artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "event_line": 17,
+      "source_sidecar": "artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json",
+      "trace_line": 104,
+      "public_step": 6,
+      "candidate": "MOUSE",
+      "inspection_id": 1,
+      "prior_updates": 5,
+      "preceding_successful_game_updates": 6,
+      "preceding_update_steps": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "native_status": "断定保留",
+      "printed_prefix_limit_chars": 1500,
+      "printed_HOLD_reason_visible": true,
+      "printed_distinct_prediction_values": [
+        "盤面変化"
+      ],
+      "printed_active_adopted_rule_records": 2,
+      "printed_identifiability_detail": "beginning visible; supporting-ref list cut off",
+      "printed_target_counts_visible": false,
+      "printed_truncation_metadata_visible": false,
+      "executed_candidate_match": false,
+      "query_model_response": "model-15",
+      "next_action_model_response": "model-16",
+      "same_response_unreviewed": false,
+      "printed_active_ref_linked_prediction_records": 2,
+      "native_global_HOLD_not_overridden": true,
+      "qualification_not_inferred_from_printed_active_links": true
+    }
+  ],
+  "prior_and_update_count_method": "Prior5 is final actual prior evidence plus unchanged constructor-before-query lifecycle. Game-update counts reconstructed from successful strict-past public_response_rows ending<=query step; no per-query native counter snapshot claimed.",
+  "unqueried_game": {
+    "source_sidecar": "artifacts/m0r0-492f87ba_p0_tool_runtime_state.visual-hds-query.json",
+    "helper_calls": 0,
+    "successful_game_updates": 80
+  },
+  "after_early_queries": {
+    "latest_query_step_any_game": 6,
+    "later_queries_observed": 0,
+    "total_successful_game_updates": 239
+  },
+  "exposure": {
+    "actual_printed_TOOL_RESULT_confirmed": true,
+    "partial_prefixes_not_full_packets": true,
+    "writer_source": "出力/ARC3-RUN-003-local/C2-081/shown-r2/preflight-source/src/ARC3-Inference/inference/agent/tool_agent.py",
+    "model_observation_opportunity": true,
+    "comprehension_adoption_or_causal_score_gain_proven": false,
+    "unmatched_native_forecasts_must_not_be_reported_as_all_no_forecasts": true,
+    "writer_source_sha256": "98be8197336f70116e844992663a7465aad3c9657500d2cbd2f274c648a1132d",
+    "transcript_same_dispatch_content_line": 7102,
+    "actual_role_tool_context_append_lines": [
+      7103,
+      7109
+    ]
+  },
+  "current_085_087_prompt": {
+    "already_adds_geometry_semantics": true,
+    "explicit_reconsult_after_new_observations_instruction": false,
+    "manual_slice_avoidance_instruction": false,
+    "future_locality_field_order_risk": "Action6_locality_evidence appended after original evidence (observer runtime44-49); leading-prefix slices may omit it. This is prospective, not observed087 evidence."
+  },
+  "minimal_future_common_prompt_proposal": "After new observed responses alter your visual hypothesis, consider a fresh optional hds_query for one legal candidate rather than treating an early HOLD or empty packet as conclusive. Print the bounded returned packet without manual slicing. At most two distinct candidates are supported for one current state.",
+  "no_all_game_step_or_action_gate_proposed": true,
+  "source_provenance": {
+    "current_081_prompt": {
+      "path": "検証/ARC3視覚HDS照会候補構築.py",
+      "sha256": "0a69f1bd43aabbba0746c8269228399dae0f0a87ed71b3cc2d13f164c881098e",
+      "lines": [
+        20,
+        27
+      ]
+    },
+    "current_085_087_geometry_prompt": {
+      "path": "検証/ARC3局所応答observer候補構築.py",
+      "sha256": "1d10bbce0082c79a802b9425b243fdd91e194402c24802ec3854c2d6391a47df",
+      "lines": [
+        20,
+        25
+      ]
+    },
+    "locality_formatter_field_append": {
+      "path": "検証/候補/ARC3PythonHDS局所応答runtime.py",
+      "sha256": "6ddb8b29fe4f52576fea8cadbb0c8450c470fb730640df527ebb5d6cc1db48b8",
+      "lines": [
+        44,
+        49
+      ]
+    }
+  }
+}

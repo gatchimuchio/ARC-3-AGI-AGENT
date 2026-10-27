@@ -1,0 +1,47 @@
+{
+  "schema": "arc3-c2-050-v16-terminal-observation.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-050",
+  "observed_at_utc": "2026-10-24T19:23:35Z",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "versions": {
+    "16": {
+      "status": "KernelWorkerStatus.ERROR",
+      "origin": "unknown",
+      "output_files": [
+        {
+          "path": "出力/ARC3-RUN-003-local/C2-050/remote-v16/serve.log",
+          "size_bytes": 24718,
+          "sha256": "44e8c15beecbe378525f1abdb34b60d9b6f19b64f4e30e75ca7893eea62b825e"
+        },
+        {
+          "path": "出力/ARC3-RUN-003-local/C2-050/remote-v16/arc3-model-guided-c2-025.log",
+          "size_bytes": 27415,
+          "sha256": "bb8814ffd5b7f3571cca2fcf4f9333e9edecc1f75ab67171fbb45c36a19fc43f"
+        }
+      ],
+      "failure_signature": "DEADLINE after 1800s from server launch; server inference readiness was not confirmed; offline benchmark not started",
+      "secondary_observation": "serve.log repeats sitecustomize ModuleNotFoundError: No module named wrapt; causal relation to readiness timeout is unproven"
+    },
+    "17": {
+      "status": "KernelWorkerStatus.RUNNING",
+      "origin": "pushed by this task"
+    }
+  },
+  "candidate": {
+    "local_notebook_sha256": "c5ea749ff7048c448c8a20d8815137a734d6a8e29dffc8dc95677d3c55f3db86",
+    "remote_serialized_notebook_sha256": "a68159dd111779f9058876d1c732058d98fdd3da01c860539621ee5a787c495c",
+    "remote_cell_sources_sha256": "f71c29856e083e14933af69361b5640931ecfa7c24e8ae6d221f47ab52da5f51",
+    "benchmark_started_in_version_16": false,
+    "local_scorecard_available_for_version_16": false,
+    "candidate_adoption_eligible": false,
+    "official_competition_submission": false
+  },
+  "concurrency_incident": {
+    "versions_16_and_17_were_both_running_at_2026-10-24T19:14:14Z": true,
+    "concurrency_limit": 1,
+    "gate_breached": true,
+    "outputs_are_diagnostic_only": true
+  },
+  "next_action": "Track version 17 to terminal and retrieve its outputs separately; start no new run or official submission."
+}

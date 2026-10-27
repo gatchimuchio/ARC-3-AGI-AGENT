@@ -1,0 +1,329 @@
+{
+  "evaluation": "ARC3-RUN-002-C2-012",
+  "scope": "public local environments; fixed split seed 20261022; action seeds 7/31/73; 80 requests per run; SDK RESET after GAME_OVER",
+  "split_seed": 20261022,
+  "public_environment_count": 25,
+  "dev_rule": "retain UCB color selection and uniformly choose among nearest-center untried same-color coordinates",
+  "one_factor_boundary": "only ACTION6 untried coordinate selection differs; policy, HDS, runtime, notebook, and kernel source are unchanged",
+  "development": {
+    "stage": "dev",
+    "environments_per_seed": 5,
+    "previous": {
+      "7": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "31": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 9,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "73": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 17,
+        "game_over_events": 6,
+        "reset_actions": 6,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      }
+    },
+    "candidate": {
+      "7": {
+        "actions": 400,
+        "levels_completed": 1,
+        "wins": 0,
+        "no_op_actions": 10,
+        "game_over_events": 6,
+        "reset_actions": 5,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "31": {
+        "actions": 400,
+        "levels_completed": 0,
+        "wins": 0,
+        "no_op_actions": 10,
+        "game_over_events": 5,
+        "reset_actions": 5,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      },
+      "73": {
+        "actions": 400,
+        "levels_completed": 0,
+        "wins": 0,
+        "no_op_actions": 17,
+        "game_over_events": 5,
+        "reset_actions": 5,
+        "illegal_action_attempts": 0,
+        "duplicate_observation_steps": 0,
+        "policy_holds": 0,
+        "games": 5
+      }
+    },
+    "previous_matches_C2-003": {
+      "7": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      },
+      "31": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      },
+      "73": {
+        "actions": true,
+        "levels_completed": true,
+        "wins": true,
+        "no_op_actions": true,
+        "game_over_events": true,
+        "reset_actions": true,
+        "illegal_action_attempts": true,
+        "duplicate_observation_steps": true,
+        "policy_holds": true
+      }
+    },
+    "same_public_start_pairs": {
+      "7": 5,
+      "31": 5,
+      "73": 5
+    },
+    "paired_environment_runs": {
+      "7": 5,
+      "31": 5,
+      "73": 5
+    },
+    "action6_center_distance_outcomes": {
+      "previous": {
+        "7": {
+          "outer": {
+            "action6_responses": 48,
+            "no_op": 2,
+            "board_change": 46,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "middle": {
+            "action6_responses": 134,
+            "no_op": 2,
+            "board_change": 132,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "central": {
+            "action6_responses": 52,
+            "no_op": 0,
+            "board_change": 51,
+            "level_progress": 1,
+            "level_decrease": 0
+          }
+        },
+        "31": {
+          "outer": {
+            "action6_responses": 55,
+            "no_op": 2,
+            "board_change": 53,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "middle": {
+            "action6_responses": 121,
+            "no_op": 2,
+            "board_change": 118,
+            "level_progress": 1,
+            "level_decrease": 0
+          },
+          "central": {
+            "action6_responses": 58,
+            "no_op": 0,
+            "board_change": 58,
+            "level_progress": 0,
+            "level_decrease": 0
+          }
+        },
+        "73": {
+          "middle": {
+            "action6_responses": 143,
+            "no_op": 5,
+            "board_change": 138,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "outer": {
+            "action6_responses": 47,
+            "no_op": 1,
+            "board_change": 46,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "central": {
+            "action6_responses": 45,
+            "no_op": 0,
+            "board_change": 44,
+            "level_progress": 1,
+            "level_decrease": 0
+          }
+        }
+      },
+      "candidate": {
+        "7": {
+          "central": {
+            "action6_responses": 170,
+            "no_op": 1,
+            "board_change": 168,
+            "level_progress": 1,
+            "level_decrease": 0
+          },
+          "outer": {
+            "action6_responses": 4,
+            "no_op": 2,
+            "board_change": 2,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "middle": {
+            "action6_responses": 61,
+            "no_op": 2,
+            "board_change": 59,
+            "level_progress": 0,
+            "level_decrease": 0
+          }
+        },
+        "31": {
+          "central": {
+            "action6_responses": 170,
+            "no_op": 1,
+            "board_change": 169,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "outer": {
+            "action6_responses": 4,
+            "no_op": 2,
+            "board_change": 2,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "middle": {
+            "action6_responses": 61,
+            "no_op": 2,
+            "board_change": 59,
+            "level_progress": 0,
+            "level_decrease": 0
+          }
+        },
+        "73": {
+          "middle": {
+            "action6_responses": 62,
+            "no_op": 3,
+            "board_change": 59,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "central": {
+            "action6_responses": 170,
+            "no_op": 1,
+            "board_change": 169,
+            "level_progress": 0,
+            "level_decrease": 0
+          },
+          "outer": {
+            "action6_responses": 4,
+            "no_op": 2,
+            "board_change": 2,
+            "level_progress": 0,
+            "level_decrease": 0
+          }
+        }
+      }
+    }
+  },
+  "development_gate": {
+    "checks": {
+      "all_previous_runs_match_C2-003": true,
+      "all_paired_public_starts_match": true,
+      "levels_not_lower_each_seed": false,
+      "game_over_not_higher_each_seed": true,
+      "holds_illegal_duplicates_zero": true,
+      "total_no_op_lower": false,
+      "no_op_lower_in_at_least_two_seeds": false
+    },
+    "by_seed": {
+      "7": {
+        "levels_not_lower": true,
+        "game_over_not_higher": true,
+        "no_op_not_higher": false,
+        "no_op_lower": false,
+        "holds_zero": true,
+        "illegal_zero": true,
+        "duplicates_zero": true
+      },
+      "31": {
+        "levels_not_lower": false,
+        "game_over_not_higher": true,
+        "no_op_not_higher": false,
+        "no_op_lower": false,
+        "holds_zero": true,
+        "illegal_zero": true,
+        "duplicates_zero": true
+      },
+      "73": {
+        "levels_not_lower": false,
+        "game_over_not_higher": true,
+        "no_op_not_higher": true,
+        "no_op_lower": false,
+        "holds_zero": true,
+        "illegal_zero": true,
+        "duplicates_zero": true
+      }
+    },
+    "passed": false
+  },
+  "holdout": null,
+  "holdout_gate": null,
+  "decision": "reject_no_holdout",
+  "source_sha256": {
+    "experiment_runner": "ee0ada24e5307f0e2b3a435b6a45a81ebdcebe87320422d6d541e7dcaeb55a19",
+    "evaluation_runner": "0885ebec6186d55dadbaeeb810798d4cd425905fe830e7a34221892a1df062ad",
+    "diagnostic_runner": "e6235ef38ac63694e9afbb8b7973fde57a48e8145e06fd64803f7c509db71d2f",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510",
+    "boundary": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+    "starter_agent": "85655f7a11a105e50bba76efd00bebf8056d02ddbae827a8f8a5b46e849fc087"
+  }
+}

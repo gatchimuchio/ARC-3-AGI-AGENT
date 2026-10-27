@@ -1,0 +1,140 @@
+{
+  "schema": "arc3-v6-official-history-quota-refresh.v1",
+  "observed_at_utc": "2026-10-26T21:56:18Z",
+  "completed_at_utc": "2026-10-26T21:56:33Z",
+  "competition": "arc-prize-2026-arc-agi-3",
+  "cli_version": "2.2.5",
+  "cli_location": "%TEMP%/arc3-v6-locked-20261027/Scripts/kaggle.exe",
+  "history_read": {
+    "command_arguments": [
+      "competitions",
+      "submissions",
+      "arc-prize-2026-arc-agi-3",
+      "--format",
+      "json",
+      "--page-size",
+      "20"
+    ],
+    "started_at_utc": "2026-10-26T21:56:18Z",
+    "exit_code": 0,
+    "finished_at_utc": "2026-10-26T21:56:26Z",
+    "state": "read_succeeded",
+    "returned_submission_count": 13
+  },
+  "submissions": [
+    {
+      "submission_id": "57612586",
+      "status_raw": "SubmissionStatus.COMPLETE",
+      "public_score": 0.03,
+      "private_score": null,
+      "submission_date_raw": "2026-10-25T01:16:07.830000"
+    },
+    {
+      "submission_id": "57577905",
+      "status_raw": "SubmissionStatus.COMPLETE",
+      "public_score": 23.86,
+      "private_score": null,
+      "submission_date_raw": "2026-10-24T01:15:49.963000"
+    },
+    {
+      "submission_id": "57541830",
+      "status_raw": "SubmissionStatus.COMPLETE",
+      "public_score": 0.25,
+      "private_score": null,
+      "submission_date_raw": "2026-10-23T00:03:01.330000"
+    },
+    {
+      "submission_id": "57527856",
+      "status_raw": "SubmissionStatus.COMPLETE",
+      "public_score": 0.0,
+      "private_score": null,
+      "submission_date_raw": "2026-10-22T14:19:24.727000"
+    },
+    {
+      "submission_id": "55206302",
+      "status_raw": "SubmissionStatus.COMPLETE",
+      "public_score": 0.06,
+      "private_score": null,
+      "submission_date_raw": "2026-08-03T07:58:07.073000"
+    },
+    {
+      "submission_id": "55070928",
+      "status_raw": "SubmissionStatus.ERROR",
+      "public_score": null,
+      "private_score": null,
+      "submission_date_raw": "2026-07-29T03:29:04.383000"
+    },
+    {
+      "submission_id": "55069307",
+      "status_raw": "SubmissionStatus.ERROR",
+      "public_score": null,
+      "private_score": null,
+      "submission_date_raw": "2026-07-29T01:53:16.290000"
+    },
+    {
+      "submission_id": "55049227",
+      "status_raw": "SubmissionStatus.ERROR",
+      "public_score": null,
+      "private_score": null,
+      "submission_date_raw": "2026-07-28T08:12:23.727000"
+    },
+    {
+      "submission_id": "55045360",
+      "status_raw": "SubmissionStatus.ERROR",
+      "public_score": null,
+      "private_score": null,
+      "submission_date_raw": "2026-07-28T04:43:31.867000"
+    },
+    {
+      "submission_id": "55043205",
+      "status_raw": "SubmissionStatus.ERROR",
+      "public_score": null,
+      "private_score": null,
+      "submission_date_raw": "2026-07-28T02:33:21.277000"
+    },
+    {
+      "submission_id": "55040966",
+      "status_raw": "SubmissionStatus.ERROR",
+      "public_score": null,
+      "private_score": null,
+      "submission_date_raw": "2026-07-28T00:24:55.823000"
+    },
+    {
+      "submission_id": "53996483",
+      "status_raw": "SubmissionStatus.COMPLETE",
+      "public_score": 0.12,
+      "private_score": null,
+      "submission_date_raw": "2026-06-24T01:49:00.300000"
+    },
+    {
+      "submission_id": "53966647",
+      "status_raw": "SubmissionStatus.COMPLETE",
+      "public_score": 0.24,
+      "private_score": null,
+      "submission_date_raw": "2026-06-23T04:11:29.717000"
+    }
+  ],
+  "submission_limits_read": {
+    "command_arguments": [
+      "competitions",
+      "submission-limits",
+      "arc-prize-2026-arc-agi-3",
+      "--json"
+    ],
+    "started_at_utc": "2026-10-26T21:56:26Z",
+    "exit_code": 0,
+    "finished_at_utc": "2026-10-26T21:56:33Z",
+    "state": "read_succeeded"
+  },
+  "quota": {
+    "numTotal": 7,
+    "numAllowedNow": 1
+  },
+  "official_submission_made": false,
+  "rerun_performed": false,
+  "notebook_or_kernel_changed": false,
+  "push_performed": false,
+  "read_commands_retried": false,
+  "interactive_login_or_auth_setup_performed": false,
+  "credential_values_inspected_or_printed": false
+}

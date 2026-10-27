@@ -1,0 +1,40 @@
+{
+  "acceptance_gate": "Same three starts: mean must exceed C2-046 19.309155943771326 and paired mean delta must be positive. Improvement over C2-059 alone is diagnostic only.",
+  "base_candidate_notebook_sha256": "627ce824f4e3f72d00303223c549d7d0dbbe311bc8b026351b7c186559daf0b2",
+  "base_kernel": "tecchannn/arc3-model-guided-c2-025",
+  "base_version": 28,
+  "candidate_metadata_path": "出力/ARC3-RUN-003-local/C2-061-memory-sections-off/source/context135168-cap16k-memoryoff/kernel-metadata.json",
+  "candidate_metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+  "candidate_notebook_path": "出力/ARC3-RUN-003-local/C2-061-memory-sections-off/source/context135168-cap16k-memoryoff/submission.ipynb",
+  "candidate_notebook_sha256": "0e080dfeca3539e3d8dfa0a3766c8f997ae9f7756d21e3fb60f8fb722eeddedf",
+  "config_delta": {
+    "ARC3_MEMORY_SECTIONS": {
+      "from": "slim",
+      "to": "off"
+    }
+  },
+  "experiment_id": "ARC3-RUN-003/C2-061-memory-sections-off",
+  "held_constant": {
+    "LOCAL_ANALYZER_CONTEXT_WINDOW": 135168,
+    "LOCAL_ANALYZER_MAX_OUTPUT": 16384,
+    "LOCAL_ANALYZER_SEED": 0,
+    "effective_input_budget_tokens": 118272,
+    "gpu_enabled": true,
+    "internet_enabled": false,
+    "private": true
+  },
+  "historical_motivation": "Official v5 public score 23.86 used ARC3_MEMORY_SECTIONS=off; this is a historical clue only. P1 evidence lacks official output parquet/source commit/input SHA, and v5 has other code differences, so no causal or local-transfer claim is made.",
+  "mechanic": "Current patched cell 3 explicitly supports off mode by removing the persistent world-model block and its section guidance/nudges/parsing; the model then reasons from conversation history. This candidate uses current prompt logic and changes only the mode setting.",
+  "next_action": "After C2-059 terminal, compare C2-059 result with C2-046 and decide whether to run this memory ablation before C2-060 output reserve.",
+  "observed_at_utc": "2026-10-25T14:57:42Z",
+  "official_submission_or_quota_use": false,
+  "purpose": "Private one-variable ablation of current slim world-model memory sections to measure effect on same three public starts. This does not claim HDS prior-memory v0.4 is loaded/used and is not a main-promotion candidate without separate v4 connection/reproducibility gates.",
+  "push_performed": false,
+  "requires_prior": "Wait for C2-059 version 28 terminal status and score. Choose next single private run only after that; no concurrent push.",
+  "schema": "arc26-arc3-private-kernel-preflight.v1",
+  "source_cell_delta": [
+    5
+  ],
+  "status": "DRAFT_ONLY_WAITING_FOR_C2_059_TERMINAL_RESULT",
+  "track": "ARC3"
+}

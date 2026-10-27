@@ -1,0 +1,172 @@
+{
+  "schema": "arc26-arc3-private-kernel-terminal-status.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-054",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 23,
+  "status": "KernelWorkerStatus.COMPLETE",
+  "status_observed_at_utc": "2026-10-25T05:48:35Z",
+  "benchmark_terminal_at_utc": "2026-10-25T05:36:12.891231",
+  "output_recovered_at_utc": "2026-10-25T05:41:54Z",
+  "status_command": "uvx --from kaggle==2.2.5 kaggle kernels status tecchannn/arc3-model-guided-c2-025/23",
+  "status_output": "tecchannn/arc3-model-guided-c2-025/23 has status \"KernelWorkerStatus.COMPLETE\"",
+  "source": {
+    "candidate_notebook_sha256": "69af507def65ab5da70634c9777ec64a33a76210f822f298a2e2dd887adcf6fe",
+    "remote_source_verification_sha256": "8d45fd0511b06a5c668976a28a9c5dd602f1324ab9725c22b50b763679552d97",
+    "attempt_manifest_sha256": "a19f4c3ea07aa5b24e3ef7f18de412c0a5c3cc42df7109d60229435e2d5b5407",
+    "remote_source_verification": "運用/証拠/ARC26-UNIFIED/ARC3-C2-054-v23-remote-source-verification-20261025T035755Z.json",
+    "attempt_manifest": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/attempt-manifest.json"
+  },
+  "output": {
+    "benchmark_sha256": "0459185ca2caacc8912f7e45e9a1f7beccedde8c14b9a95dd3805d90aea868fe",
+    "request_log_sha256": "ca6bcf5da1e104b42b18ec50358f96d22411ecb86f2fb4571600726bbcabcbcf",
+    "manifest_sha256": "719954cf2980e40854ab0c1bbd62091a8729dfa0b9bd2ab326f70b419bcf08c4",
+    "directory": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z",
+    "file_count": 31,
+    "summary_sha256": "cfbfc3c2271febd115a8f75849830caae287cba03f70351a62963dee875a71cc",
+    "files": [
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/.per_game_cards.pkl",
+        "sha256": "537272d04e80a8210299e1a9f01c3c0df8f0b8e799921879549a0a29c2d0a332"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/arc3-model-guided-c2-025.log",
+        "sha256": "4bf67f606197e718344a04cfbdb3623a6eeead2e9a7590cff2525cb14833c024"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/artifacts/m0r0-492f87ba_p0_events.jsonl",
+        "sha256": "a9cc32b6afd72c39cefff4a47825f812d5b96418c925c6423aa3665614ad00d6"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/artifacts/m0r0-492f87ba_p0_viewer_data.json",
+        "sha256": "9830f06af46304d9119c5c6ea82aa58375a14152488ad8eecb93f807a264e086"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/artifacts/sk48-d8078629_p0_events.jsonl",
+        "sha256": "47155026e92135961cad3dd4655a463725fea2f9f4e24273cc52d75b839d861d"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/artifacts/sk48-d8078629_p0_viewer_data.json",
+        "sha256": "4b6cd62ec607808fec2888fb79c0406dfea2db1ac48d0e96d4fa1a4123ccc33f"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/artifacts/tn36-ef4dde99_p0_events.jsonl",
+        "sha256": "2a57b78ea5b3efd052699e224cf07016fdd1f956f5eb63b1833840cb03e58f67"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/artifacts/tn36-ef4dde99_p0_viewer_data.json",
+        "sha256": "566a69acd5fa7396e46f38201730af37fc6c1c227f7c4c217f18100c68d47b3a"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/benchmark.json",
+        "sha256": "0459185ca2caacc8912f7e45e9a1f7beccedde8c14b9a95dd3805d90aea868fe"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/diagnostics.html",
+        "sha256": "b125f1004fce5dfa6cf89411d8bec3035a38187593644000abfc87fb4db4a971"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/games.pkl",
+        "sha256": "4bf87705fd3c0117855d2ef1963a5101db3d94c8852fcdba9612b539eb09bd68"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/git_status.txt",
+        "sha256": "ae9637bab0ed488c0ce3d9db93810c7d2b6759db665791429e7a3befe7143f3a"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/intermediate_states.pkl",
+        "sha256": "edff8a5fbc6ddb07de7e1f5934ec6c53916282777cb7c5451cda428e9c4365f7"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/movies/gm0r0-492f87ba_p0.html",
+        "sha256": "09aaa2c547774112b31ee07b1d0d3511386c936996c3026f2ec802cf8d2554f5"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/movies/gm0r0-492f87ba_p0.mp4",
+        "sha256": "2c0db4f5b6bc92a8d40ca245e364e8238460cdf6636b1eff71a7198ff6621e1d"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/movies/gsk48-d8078629_p0.html",
+        "sha256": "9f75340d6e784bb76c039f388860da761840af8a35ae1ed0bd9ee70a4dd2be4f"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/movies/gsk48-d8078629_p0.mp4",
+        "sha256": "624344dad0e4713b1b9f9d449eb68538209d7157e175fecd830597230176ce37"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/movies/gtn36-ef4dde99_p0.html",
+        "sha256": "2b5b65ce20b690cdf550d32b0d2626f9288d3080bf6d2115177ad06eacf33dd8"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/movies/gtn36-ef4dde99_p0.mp4",
+        "sha256": "7e3e01ee2ace3cdcf37720aff429091e05a9279da9bdb57663f3c233ac97221c"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/prompts/prompt.log",
+        "sha256": "d941193b45a44e8af236fbf49aeb6c56bf92ca10329b53f1158cafcbdf8d4c8f"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/requests.jsonl",
+        "sha256": "ca6bcf5da1e104b42b18ec50358f96d22411ecb86f2fb4571600726bbcabcbcf"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/serve.log",
+        "sha256": "fc8a4e3fa27fb26dc5e2c5672f3aa771e71173d596fb8548a507c89c43afd2a6"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/solver_analysis/m0r0-492f87ba_p0.html",
+        "sha256": "ce86f40ff12dc75450f1bed64f2b47977c4445bcb87bed8a64dd01f3be43fa30"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/solver_analysis/sk48-d8078629_p0.html",
+        "sha256": "56a8722cc8e65566ab1a2ed758f97973272fe5abcc606c160bcb2f2b26b054fe"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/solver_analysis/tn36-ef4dde99_p0.html",
+        "sha256": "b533423b5add14a7543121e497b73da0b19f7f81a4b21af11243696731f35860"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/solver.pkl",
+        "sha256": "550bf3d05d21c8e70cdc68e320bd1d3a527003f8fdec235c6e28c0c3e6025a29"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/submission.parquet",
+        "sha256": "71bfd543030e339d87bd9ff744d466218398a1259650b2c255626d27049c88bb"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/summary.txt",
+        "sha256": "cfbfc3c2271febd115a8f75849830caae287cba03f70351a62963dee875a71cc"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/transcripts/m0r0-492f87ba_p0.txt",
+        "sha256": "14db80c0aa7ddb003706db15c60fdc5a7879d67911234560f151ee62911f8d07"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/transcripts/sk48-d8078629_p0.txt",
+        "sha256": "e97f91b548cf065d7d014884f297ab474b007ae6f588bdedd4ac37d108770449"
+      },
+      {
+        "path": "出力/ARC3-RUN-003-local/C2-054-single-nudge-per-reset/kaggle-output/v23-terminal-20261025T054154Z/transcripts/tn36-ef4dde99_p0.txt",
+        "sha256": "65086f91a12d8d0b3e6c0719dc61ee47915779aa924ab21cdd037fd8bef1f96a"
+      }
+    ]
+  },
+  "scorecard": {
+    "paired_games": 3,
+    "file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-054-v23-terminal-scorecard-20261025T053740Z.json",
+    "control_mean": 19.309155943771326,
+    "improved_unchanged_regressed": [
+      0,
+      1,
+      2
+    ],
+    "decision": "REJECT_C2_054",
+    "score_source": "arc_agi.scorecard.EnvironmentScoreCalculator",
+    "candidate_saved_scores_match_recomputed": 3,
+    "candidate_mean": 6.878306878306878,
+    "sha256": "969d083bf0163bc73e24a36af1f6faacefbc0cc9371dbf907b38e2be999555f8",
+    "control_saved_scores_match_recomputed": 3,
+    "paired_mean_delta_vs_C2_046": -12.430849065464335
+  },
+  "official_submission_or_quota_use": false
+}

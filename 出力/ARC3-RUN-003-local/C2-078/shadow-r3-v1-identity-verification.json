@@ -1,0 +1,47 @@
+{
+  "schema": "arc3-returned-kernel-identity-source-verification.v1",
+  "observed_at_utc": "2026-10-26T23:37:34.636381+00:00",
+  "requested_kernel": "tecchannn/arc3-visual-hds-v6-shadow-r3-pilot",
+  "actual_kernel": "tecchannn/arc3-visual-hds-v6-shadow-pilot",
+  "version": 1,
+  "push_receipt": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-v1-push-receipt.json",
+  "push_receipt_sha256": "53f7a6ba8907e28b15cc684c4f5c6b6f1a407bacd9311da4aaaf9053990eb7cd",
+  "local_notebook": "出力/ARC3-RUN-003-local/C2-078/shadow-r3/submission.ipynb",
+  "local_notebook_sha256": "2c44859bc5754198ce154c4ffb540708d5b5fe5d17a84440ace34902642ebfbe",
+  "remote_notebook": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-remote-v1-returned-slug/arc3-visual-hds-v6-shadow-pilot.ipynb",
+  "remote_notebook_sha256": "2d25b34cf75c1a0baed9e8abc5a63ea57decc280065232f7332014b726cc8fb9",
+  "local_cells": 26,
+  "remote_cells": 26,
+  "all_cell_types_and_joined_sources_match": true,
+  "canonical_cell_source_sha256": "02ff98d8bd70bcd042ca39cdf21b48f6653f9f242a1e400f70b533907aa4b305",
+  "local_metadata_sha256": "a916314e3948fca32692b01c0088c9913e0af38ba145a866f3a91894c5cd5ef6",
+  "remote_metadata": "出力/ARC3-RUN-003-local/C2-078/shadow-r3-remote-v1-returned-slug/kernel-metadata.json",
+  "remote_metadata_sha256": "082c11d34c02c60cb26c76a0c3a149cd8b1880ee871cc1f5dd6c9ebdd68a22d4",
+  "metadata_differences": {
+    "code_file": {
+      "requested": "submission.ipynb",
+      "returned": "arc3-visual-hds-v6-shadow-pilot.ipynb"
+    },
+    "enable_tpu": {
+      "requested": null,
+      "returned": false
+    },
+    "id": {
+      "requested": "tecchannn/arc3-visual-hds-v6-shadow-r3-pilot",
+      "returned": "tecchannn/arc3-visual-hds-v6-shadow-pilot"
+    },
+    "id_no": {
+      "requested": null,
+      "returned": 141065470
+    },
+    "keywords": {
+      "requested": null,
+      "returned": []
+    }
+  },
+  "status_observed": "KernelWorkerStatus.RUNNING",
+  "status_command_exit_code": 0,
+  "read_only_pull_exit_code": 0,
+  "notebook_resubmitted_or_edited": false,
+  "official_submission_or_rerun_performed": false
+}

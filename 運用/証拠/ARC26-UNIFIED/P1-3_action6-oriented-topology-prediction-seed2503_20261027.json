@@ -1,0 +1,457 @@
+{
+  "aggregate": {
+    "distinct_topology_categories": 94,
+    "forecast_coverage": 0.7140575079872205,
+    "forecast_eligible_samples": 447,
+    "macro_brier_delta_forecast_minus_marginal": 0.013369738028141342,
+    "macro_forecast_brier": 0.3489744931239166,
+    "macro_marginal_brier": 0.33560475509577525,
+    "nonempty_folds": 5,
+    "outcomes": {
+      "board_change": {
+        "distinct_game_groups": 14,
+        "samples": 524
+      },
+      "game_over": {
+        "distinct_game_groups": 5,
+        "samples": 9
+      },
+      "level_progress": {
+        "distinct_game_groups": 3,
+        "samples": 3
+      },
+      "no_op": {
+        "distinct_game_groups": 12,
+        "samples": 90
+      },
+      "win": {
+        "distinct_game_groups": 0,
+        "samples": 0
+      }
+    },
+    "sample_weighted_forecast_brier": 0.3518151053473441,
+    "sample_weighted_marginal_brier": 0.33101896627957933,
+    "samples": 626
+  },
+  "baseline_policy_observation_totals": {
+    "actions": 2000,
+    "duplicate_observations": 0,
+    "episodes": 25,
+    "game_over_events": 17,
+    "illegal_actions": 0,
+    "noops": 143,
+    "reset_actions": 16
+  },
+  "closed_loop_score_gain_measured": false,
+  "competition_api_called": false,
+  "elapsed_seconds": 48.751,
+  "environment_manifest_sha256": "924f0da0af3bd3b8ac4fa742f35a48f0bf367567f55e8a299588ea710202d97a",
+  "exploratory_prerequisite_gate": {
+    "checks": {
+      "all_five_folds_nonempty": true,
+      "at_least_four_folds_non_worse": false,
+      "forecast_coverage_at_least_quarter": true,
+      "macro_brier_relative_reduction_at_least_five_percent": false
+    },
+    "frozen_before_data_run": true,
+    "observed_non_worse_folds": 3,
+    "observed_relative_macro_brier_reduction": -0.039837749093649975,
+    "passed": false,
+    "permits": "closed_loop_candidate_work_only",
+    "runtime_adoption_justified": false,
+    "score_gain_claim_justified": false,
+    "thresholds": {
+      "minimum_forecast_coverage": 0.25,
+      "minimum_non_worse_folds": 4,
+      "minimum_relative_macro_brier_reduction": 0.05,
+      "numeric_tolerance": 1e-12,
+      "required_nonempty_folds": 5
+    }
+  },
+  "feature": {
+    "color_ids_raw_coordinates_and_board_hashes_used_as_keys": false,
+    "directions": [
+      "N",
+      "NE",
+      "E",
+      "SE",
+      "S",
+      "SW",
+      "W",
+      "NW"
+    ],
+    "orientation_preserved": true,
+    "source": "pre_action_target_public_board",
+    "values": [
+      "same",
+      "different",
+      "outside"
+    ]
+  },
+  "folds": [
+    {
+      "brier_delta_forecast_minus_marginal": -0.01911585556924522,
+      "fold": 0,
+      "forecast_brier": 0.7696238466325757,
+      "forecast_coverage": 0.8439306358381503,
+      "forecast_eligible_test_game_groups": 4,
+      "forecast_eligible_test_samples": 146,
+      "marginal_brier": 0.7887397022018209,
+      "test_game_groups": 5,
+      "test_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 3,
+          "samples": 98
+        },
+        "game_over": {
+          "distinct_game_groups": 1,
+          "samples": 1
+        },
+        "level_progress": {
+          "distinct_game_groups": 1,
+          "samples": 1
+        },
+        "no_op": {
+          "distinct_game_groups": 3,
+          "samples": 73
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "test_sample_training_support_bins": {
+        "one_or_two": 24,
+        "three_plus_multiple_games": 146,
+        "zero": 3
+      },
+      "test_samples": 173,
+      "test_topology_categories": 25,
+      "training_game_groups": 20,
+      "training_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 11,
+          "samples": 426
+        },
+        "game_over": {
+          "distinct_game_groups": 4,
+          "samples": 8
+        },
+        "level_progress": {
+          "distinct_game_groups": 2,
+          "samples": 2
+        },
+        "no_op": {
+          "distinct_game_groups": 9,
+          "samples": 17
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "training_samples": 453,
+      "training_topology_categories": 91
+    },
+    {
+      "brier_delta_forecast_minus_marginal": 0.06461113631025163,
+      "fold": 1,
+      "forecast_brier": 0.18529055535110245,
+      "forecast_coverage": 0.7055214723926381,
+      "forecast_eligible_test_game_groups": 4,
+      "forecast_eligible_test_samples": 115,
+      "marginal_brier": 0.12067941904085082,
+      "test_game_groups": 5,
+      "test_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 3,
+          "samples": 158
+        },
+        "game_over": {
+          "distinct_game_groups": 2,
+          "samples": 2
+        },
+        "level_progress": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        },
+        "no_op": {
+          "distinct_game_groups": 2,
+          "samples": 3
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "test_sample_training_support_bins": {
+        "one_or_two": 19,
+        "three_plus_multiple_games": 115,
+        "three_plus_one_game": 3,
+        "zero": 26
+      },
+      "test_samples": 163,
+      "test_topology_categories": 41,
+      "training_game_groups": 20,
+      "training_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 11,
+          "samples": 366
+        },
+        "game_over": {
+          "distinct_game_groups": 3,
+          "samples": 7
+        },
+        "level_progress": {
+          "distinct_game_groups": 3,
+          "samples": 3
+        },
+        "no_op": {
+          "distinct_game_groups": 10,
+          "samples": 87
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "training_samples": 463,
+      "training_topology_categories": 79
+    },
+    {
+      "brier_delta_forecast_minus_marginal": 0.03397951295343479,
+      "fold": 2,
+      "forecast_brier": 0.19864640235666772,
+      "forecast_coverage": 0.5617977528089888,
+      "forecast_eligible_test_game_groups": 5,
+      "forecast_eligible_test_samples": 100,
+      "marginal_brier": 0.16466688940323293,
+      "test_game_groups": 5,
+      "test_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 5,
+          "samples": 167
+        },
+        "game_over": {
+          "distinct_game_groups": 1,
+          "samples": 4
+        },
+        "level_progress": {
+          "distinct_game_groups": 2,
+          "samples": 2
+        },
+        "no_op": {
+          "distinct_game_groups": 2,
+          "samples": 5
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "test_sample_training_support_bins": {
+        "one_or_two": 24,
+        "three_plus_multiple_games": 100,
+        "three_plus_one_game": 12,
+        "zero": 42
+      },
+      "test_samples": 178,
+      "test_topology_categories": 56,
+      "training_game_groups": 20,
+      "training_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 9,
+          "samples": 357
+        },
+        "game_over": {
+          "distinct_game_groups": 4,
+          "samples": 5
+        },
+        "level_progress": {
+          "distinct_game_groups": 1,
+          "samples": 1
+        },
+        "no_op": {
+          "distinct_game_groups": 10,
+          "samples": 85
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "training_samples": 448,
+      "training_topology_categories": 67
+    },
+    {
+      "brier_delta_forecast_minus_marginal": -0.01170018683194951,
+      "fold": 3,
+      "forecast_brier": 0.43355514841761866,
+      "forecast_coverage": 0.8571428571428571,
+      "forecast_eligible_test_game_groups": 3,
+      "forecast_eligible_test_samples": 12,
+      "marginal_brier": 0.4452553352495682,
+      "test_game_groups": 5,
+      "test_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 1,
+          "samples": 10
+        },
+        "game_over": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        },
+        "level_progress": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        },
+        "no_op": {
+          "distinct_game_groups": 3,
+          "samples": 4
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "test_sample_training_support_bins": {
+        "three_plus_multiple_games": 12,
+        "zero": 2
+      },
+      "test_samples": 14,
+      "test_topology_categories": 6,
+      "training_game_groups": 20,
+      "training_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 13,
+          "samples": 514
+        },
+        "game_over": {
+          "distinct_game_groups": 5,
+          "samples": 9
+        },
+        "level_progress": {
+          "distinct_game_groups": 3,
+          "samples": 3
+        },
+        "no_op": {
+          "distinct_game_groups": 9,
+          "samples": 86
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "training_samples": 612,
+      "training_topology_categories": 92
+    },
+    {
+      "brier_delta_forecast_minus_marginal": -0.000925916721785297,
+      "fold": 4,
+      "forecast_brier": 0.15775651286161826,
+      "forecast_coverage": 0.7551020408163265,
+      "forecast_eligible_test_game_groups": 3,
+      "forecast_eligible_test_samples": 74,
+      "marginal_brier": 0.15868242958340356,
+      "test_game_groups": 5,
+      "test_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 2,
+          "samples": 91
+        },
+        "game_over": {
+          "distinct_game_groups": 1,
+          "samples": 2
+        },
+        "level_progress": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        },
+        "no_op": {
+          "distinct_game_groups": 2,
+          "samples": 5
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "test_sample_training_support_bins": {
+        "one_or_two": 9,
+        "three_plus_multiple_games": 74,
+        "three_plus_one_game": 3,
+        "zero": 12
+      },
+      "test_samples": 98,
+      "test_topology_categories": 31,
+      "training_game_groups": 20,
+      "training_outcomes": {
+        "board_change": {
+          "distinct_game_groups": 12,
+          "samples": 433
+        },
+        "game_over": {
+          "distinct_game_groups": 4,
+          "samples": 7
+        },
+        "level_progress": {
+          "distinct_game_groups": 3,
+          "samples": 3
+        },
+        "no_op": {
+          "distinct_game_groups": 10,
+          "samples": 85
+        },
+        "win": {
+          "distinct_game_groups": 0,
+          "samples": 0
+        }
+      },
+      "training_samples": 528,
+      "training_topology_categories": 85
+    }
+  ],
+  "interpretation": "exploratory public-game cross-validation; not unseen holdout evidence",
+  "max_actions_per_episode": 80,
+  "method": {
+    "all_public_games_reused_across_folds": true,
+    "brier_definition": "sum_over_five_outcomes_squared_probability_error",
+    "game_group_folds": 5,
+    "insufficient_support_fallback": "training_marginal",
+    "lower_brier_is_better": true,
+    "minimum_distinct_training_games": 2,
+    "minimum_training_support": 3,
+    "outcome_precedence": [
+      "win",
+      "game_over",
+      "level_progress",
+      "board_change",
+      "no_op"
+    ],
+    "prior_strength_times_training_marginal": 3.0,
+    "split_seed": 20261027,
+    "test_games_per_fold": 5,
+    "training_games_per_fold": 20
+  },
+  "observed_at_utc": "2026-10-26T22:13:15+00:00",
+  "observer_overrides_response_only": true,
+  "official_submission_made": false,
+  "only_public_observations_used": true,
+  "public_games": 25,
+  "python_hash_seed": "0",
+  "retry_game_over": true,
+  "run_id": "P1-3_action6-oriented-topology-prediction-seed2503_20261027",
+  "samples_per_game_rows_and_feature_tables_persisted": false,
+  "schema": "arc3-action6-oriented-topology-outcome-diagnostic.v1",
+  "seeds": [
+    2503
+  ],
+  "source_sha256": {
+    "diagnostic": "010998bb4b7b8ddc077f551d851541a8624d7f4d46419aca6a4fcd9404a3a0ab",
+    "local_evaluator": "c77d1445deaf84348fe212188f12f9f16312f6f8fe4fa986818a1984afa21d32",
+    "policy": "7879f85b5a3434dc2f5426c4837914c41054cbe56360ed4324167dab93de0575",
+    "test": "ffe1f46752faa6ff3b795f855973bd11471efabe9c898886a18c72810824dfe9"
+  },
+  "visible_change_coefficient": 0.0
+}

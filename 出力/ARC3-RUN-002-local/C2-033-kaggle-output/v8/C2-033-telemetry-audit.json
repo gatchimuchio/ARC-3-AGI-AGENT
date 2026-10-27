@@ -1,0 +1,36 @@
+{
+  "benchmark_label": "duck-harness-kaggle",
+  "start_time": "2026-10-23T21:53:38.986224",
+  "end_time": "2026-10-23T22:13:39.158078",
+  "job_elapsed_seconds": 1200.171854,
+  "run_count": 1,
+  "game_runs": [
+    {
+      "game_id": "sk48-d8078629",
+      "state": "gave_up",
+      "levels_completed": 1,
+      "actions_in_history": 88,
+      "history_generated_tokens": 106659,
+      "solver_note_tokens": 173415,
+      "solver_note_minus_history_tokens": 66756,
+      "final_generated_tokens_field": 0,
+      "cumulative_wallclock_seconds": 1200.0592239430007,
+      "elapsed_since_previous_game_seconds": 1200.0592239430007
+    }
+  ],
+  "total_history_generated_tokens": 106659,
+  "total_solver_note_tokens": 173415,
+  "solver_note_count": 1,
+  "total_final_generated_tokens_field": 0,
+  "sum_of_cumulative_wallclocks_seconds": 1200.0592239430007,
+  "summary_reported_total_wallclock_seconds": 1200.1,
+  "summary_reported_total_tokens": 106659,
+  "summary_wallclock_matches_job_elapsed_1s_tolerance": true,
+  "summary_wallclock_matches_cumulative_sum_0_11s_tolerance": true,
+  "summary_tokens_match_history_1_token_tolerance": true,
+  "output_manifest": {
+    "checked_files": 19,
+    "failures": [],
+    "all_match": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "arc3-private-kernel-push-request.v1",
+  "run_id": "ARC3-RUN-003-C2-078-SHADOW-R3-V1",
+  "recorded_at_utc": "2026-10-26T23:34:07.380384+00:00",
+  "command": [
+    "C:\\Users\\ohira\\AppData\\Local\\Temp\\arc3-v6-locked-20261027\\Scripts\\kaggle.exe",
+    "kernels",
+    "push",
+    "--path",
+    "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\出力\\ARC3-RUN-003-local\\C2-078\\shadow-r3",
+    "--timeout",
+    "10800"
+  ],
+  "kernel": "tecchannn/arc3-visual-hds-v6-shadow-r3-pilot",
+  "notebook_sha256": "2c44859bc5754198ce154c4ffb540708d5b5fe5d17a84440ace34902642ebfbe",
+  "metadata_sha256": "a916314e3948fca32692b01c0088c9913e0af38ba145a866f3a91894c5cd5ef6",
+  "bundle_sha256": "ed0c13e329c948e774424ebc738eaf2a8c3bb83c0bcdbcf71945a0ac3c5f3766",
+  "preflight": {
+    "own_kernels_list_exit_code": 0,
+    "own_kernels_rows_page1_size100": 35,
+    "own_kernels_list_included_known_off_control": true,
+    "target_slug_found": false,
+    "new_slug_status_returned_kernels_get_denied": true,
+    "interpretation": "Own complete listing succeeded and excludes target; new slug absent. Existing exact off/1 readable and complete."
+  },
+  "official_submission_or_rerun": false,
+  "paired_r2_r3_comparison_permitted": false,
+  "do_not_duplicate_on_unknown_outcome": true
+}

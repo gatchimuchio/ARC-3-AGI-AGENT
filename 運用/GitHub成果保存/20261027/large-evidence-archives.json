@@ -1,0 +1,71 @@
+{
+  "schema": "arc3-lossless-git-evidence-archives.v1",
+  "created_at_utc": "2026-10-27T02:53:27.877761+00:00",
+  "compression": "gzip level6, mtime0, no filename header",
+  "restore_one": "python -m gzip -d <gzip_path>; verify original_sha256 before using evidence",
+  "scope": "Large own-run text evidence only; originals kept locally, exact paths excluded from Git in favor of reversible gzip. No weights, credentials, wheelhouse or competition source data added.",
+  "files": [
+    {
+      "original_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-050-v17-artifacts/requests.jsonl",
+      "original_bytes": 31886344,
+      "original_sha256": "9560923f9b97acb65202c479fc07a40904a1a159c7002499eab9458838ca460c",
+      "gzip_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-050-v17-artifacts/requests.jsonl.gz",
+      "gzip_bytes": 8524575,
+      "gzip_sha256": "309dc72517f69cf74d9a517f488ba29fac2503f61574373a78ba74209abd9770",
+      "restored_stream_sha256_verified": true,
+      "original_retained_locally": true
+    },
+    {
+      "original_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v20-output/requests.jsonl",
+      "original_bytes": 121023655,
+      "original_sha256": "86787f19f0384ff22076ef16867f6747304b24521cbffc1cbe053b42a1703d8d",
+      "gzip_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-051-v20-output/requests.jsonl.gz",
+      "gzip_bytes": 26769578,
+      "gzip_sha256": "0dda525a83cbd84db4da643ef7a991ff573c67501c59cbb4f8cff97dfbbc5080",
+      "restored_stream_sha256_verified": true,
+      "original_retained_locally": true
+    },
+    {
+      "original_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-056-v25-output/requests.jsonl",
+      "original_bytes": 113106465,
+      "original_sha256": "96f971ab8c384b698a40e57f8b171d825cacd113b18dd8a17b199a6803e47a7c",
+      "gzip_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-056-v25-output/requests.jsonl.gz",
+      "gzip_bytes": 23720525,
+      "gzip_sha256": "d6225e7203cc19bb060ead5dd63726c9f822ea721c814b54ea404472f5231fcc",
+      "restored_stream_sha256_verified": true,
+      "original_retained_locally": true
+    },
+    {
+      "original_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-057-v26-output/requests.jsonl",
+      "original_bytes": 98963100,
+      "original_sha256": "8e0ed678db4d8a25dd008f0c7fefa0691d4aad81d09d2d02370781c856b09ff8",
+      "gzip_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-057-v26-output/requests.jsonl.gz",
+      "gzip_bytes": 23058879,
+      "gzip_sha256": "983017404063425e57d09e6c361ca08f226ce9aef1ab085d482ecda6d2c755f0",
+      "restored_stream_sha256_verified": true,
+      "original_retained_locally": true
+    },
+    {
+      "original_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/requests.jsonl",
+      "original_bytes": 93323264,
+      "original_sha256": "1d254fb0ee08730c434464f2d86a68ba011810d24c426e48382155f2de45cb16",
+      "gzip_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-058-v27-outputcheck-20261025T1412Z/requests.jsonl.gz",
+      "gzip_bytes": 21249821,
+      "gzip_sha256": "adea33d6fda582542830769e3338df22ad06ea335bcfbf4d23093f94b2068bd5",
+      "restored_stream_sha256_verified": true,
+      "original_retained_locally": true
+    },
+    {
+      "original_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-outputcheck/requests.jsonl",
+      "original_bytes": 112119864,
+      "original_sha256": "26ae3ba297594a8b298b34b59b8f12a574dde22e779f4bf79afe9be42850429e",
+      "gzip_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-059-v28-outputcheck/requests.jsonl.gz",
+      "gzip_bytes": 25426644,
+      "gzip_sha256": "404b5f87bf4fec6c23af7d582ca601842baf9eb747eb0aac29ea5f762abc000d",
+      "restored_stream_sha256_verified": true,
+      "original_retained_locally": true
+    }
+  ],
+  "superseded_by": "運用/GitHub成果保存/20261027/large-evidence-archives-xz.json",
+  "own_temporary_gzip_files_removed_after_verified_XZ": true
+}

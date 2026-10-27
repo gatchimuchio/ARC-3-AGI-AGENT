@@ -1,0 +1,61 @@
+{
+  "C2_046_local_baseline": {
+    "LOCAL_ANALYZER_SEED": 0,
+    "local_three_game_mean": 19.309155943771326,
+    "memory_mode": "slim",
+    "notebook_path": "出力/ARC3-RUN-003-local/C2-046/source/slim/submission.ipynb",
+    "notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e"
+  },
+  "C2_061_candidate": {
+    "LOCAL_ANALYZER_SEED": 0,
+    "base_notebook_sha256": "627ce824f4e3f72d00303223c549d7d0dbbe311bc8b026351b7c186559daf0b2",
+    "candidate_notebook_path": "出力/ARC3-RUN-003-local/C2-061-memory-sections-off/source/context135168-cap16k-memoryoff/submission.ipynb",
+    "candidate_notebook_sha256": "0e080dfeca3539e3d8dfa0a3766c8f997ae9f7756d21e3fb60f8fb722eeddedf",
+    "changed_source_cells_from_base": [
+      5
+    ],
+    "context_window_tokens": 135168,
+    "effective_input_tokens": 118272,
+    "output_reserve_tokens": 16384,
+    "single_setting_delta": {
+      "ARC3_MEMORY_SECTIONS": {
+        "from": "slim",
+        "to": "off"
+      }
+    }
+  },
+  "experiment_id": "ARC3-RUN-003/C2-061-memory-mode-source-audit",
+  "interpretation": "The official v5 score and mode difference are a useful hypothesis source but v5 is not a causal control. C2-061 is a clean private ablation of the current memory mode; no HDS prior-memory v0.4 usage is inferred. Score and paired level progress decide.",
+  "mode_semantics_from_current_source": {
+    "implementation_note": "Current code contains an explicit off-mode prompt path; historical v5 cell 3 used a different prompt implementation. C2-061 uses current code.",
+    "off": "disables persistent world-model block and its section guidance/nudges/parsing; model reasons from conversation history",
+    "slim": "keeps World model and Plan sections"
+  },
+  "observed_at_utc": "2026-10-25T14:59:39Z",
+  "official_submission_or_quota_use": false,
+  "official_v5": {
+    "memory_mode": "off",
+    "notebook_path": "運用/証拠/ARC26-UNIFIED/ARC3-P1-v5-remote-version5/arc3-model-guided-c2-025.ipynb",
+    "notebook_sha256": "d0927468aefdc22183ac1ca0bf84ccd2a46ea526e349c342e876683393bd3cff",
+    "official_history_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-P1-official-score-lineage-20261025T142027Z.json",
+    "official_public_score": 23.86
+  },
+  "push_performed": false,
+  "schema": "arc3-arc26-memory-mode-ablation-source-audit.v1",
+  "status": "DRAFT_ONLY_WAITING_FOR_C2_059_VERSION_28",
+  "v5_to_C2_046_source_comparison": {
+    "causal_attribution_to_memory_mode": "not supported",
+    "changed_source_cells": [
+      5,
+      13,
+      18
+    ],
+    "code_cell_count": 12,
+    "confounders": [
+      "cell 5 changes startup timeout, memory mode, and adds LOCAL_ANALYZER_SEED=0",
+      "cell 13 changes model-loader threading and readiness probe/deadline behavior",
+      "cell 18 changes offline-only game/action limits"
+    ],
+    "ordered_cell_count": 25
+  }
+}

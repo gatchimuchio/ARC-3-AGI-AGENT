@@ -1,0 +1,563 @@
+{
+  "schema": "arc3-exploration-coefficient-paired-rhae.v1",
+  "evaluation": "public offline paired; ARC scorecard; identical environment/action seeds",
+  "stage": "dev",
+  "split_seed": 20261022,
+  "games": 5,
+  "seeds": [
+    7,
+    31,
+    73
+  ],
+  "max_actions_per_game": 80,
+  "conditions": {
+    "baseline": {
+      "parameters": {
+        "action_ucb": 0.8,
+        "color_ucb": null
+      },
+      "runs": [
+        {
+          "seed": 7,
+          "games": 5,
+          "rhae_score_mean": 0.238095238,
+          "completed_levels": 1,
+          "no_ops": 9,
+          "game_over": 6,
+          "resets": 6,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "games": 5,
+          "rhae_score_mean": 0.146987366,
+          "completed_levels": 1,
+          "no_ops": 9,
+          "game_over": 6,
+          "resets": 6,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "games": 5,
+          "rhae_score_mean": 0.336707364,
+          "completed_levels": 1,
+          "no_ops": 17,
+          "game_over": 6,
+          "resets": 6,
+          "wins": 0
+        }
+      ],
+      "rows": [
+        {
+          "seed": 7,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 5,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 7,
+          "game_index": 1,
+          "score": 1.19047619,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 7,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 7,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 31,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 5,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 31,
+          "game_index": 1,
+          "score": 0.734936832,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 31,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 31,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 73,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 6,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 73,
+          "game_index": 1,
+          "score": 1.683536819,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 73,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 73,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 11,
+          "game_over": 1,
+          "resets": 1
+        }
+      ]
+    },
+    "action_ucb_1.2": {
+      "parameters": {
+        "action_ucb": 1.2,
+        "color_ucb": null
+      },
+      "runs": [
+        {
+          "seed": 7,
+          "games": 5,
+          "rhae_score_mean": 0.238095238,
+          "completed_levels": 1,
+          "no_ops": 13,
+          "game_over": 6,
+          "resets": 6,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "games": 5,
+          "rhae_score_mean": 0.146987366,
+          "completed_levels": 1,
+          "no_ops": 13,
+          "game_over": 6,
+          "resets": 6,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "games": 5,
+          "rhae_score_mean": 0.336707364,
+          "completed_levels": 1,
+          "no_ops": 14,
+          "game_over": 5,
+          "resets": 5,
+          "wins": 0
+        }
+      ],
+      "rows": [
+        {
+          "seed": 7,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 9,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 7,
+          "game_index": 1,
+          "score": 1.19047619,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 7,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 7,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 31,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 9,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 31,
+          "game_index": 1,
+          "score": 0.734936832,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 31,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 31,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 73,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 9,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 73,
+          "game_index": 1,
+          "score": 1.683536819,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 73,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 73,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 5,
+          "game_over": 1,
+          "resets": 1
+        }
+      ]
+    },
+    "coordinate_color_ucb_1.2": {
+      "parameters": {
+        "action_ucb": 0.8,
+        "color_ucb": 1.2
+      },
+      "runs": [
+        {
+          "seed": 7,
+          "games": 5,
+          "rhae_score_mean": 0.238095238,
+          "completed_levels": 1,
+          "no_ops": 12,
+          "game_over": 6,
+          "resets": 6,
+          "wins": 0
+        },
+        {
+          "seed": 31,
+          "games": 5,
+          "rhae_score_mean": 0.146987366,
+          "completed_levels": 1,
+          "no_ops": 12,
+          "game_over": 6,
+          "resets": 6,
+          "wins": 0
+        },
+        {
+          "seed": 73,
+          "games": 5,
+          "rhae_score_mean": 0.336707364,
+          "completed_levels": 1,
+          "no_ops": 21,
+          "game_over": 5,
+          "resets": 5,
+          "wins": 0
+        }
+      ],
+      "rows": [
+        {
+          "seed": 7,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 8,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 7,
+          "game_index": 1,
+          "score": 1.19047619,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 7,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 7,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 7,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 31,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 8,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 31,
+          "game_index": 1,
+          "score": 0.734936832,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 31,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 31,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 31,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 4,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 73,
+          "game_index": 0,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 10,
+          "game_over": 2,
+          "resets": 2
+        },
+        {
+          "seed": 73,
+          "game_index": 1,
+          "score": 1.683536819,
+          "levels": 1,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 73,
+          "game_index": 2,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 1,
+          "resets": 1
+        },
+        {
+          "seed": 73,
+          "game_index": 3,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 0,
+          "game_over": 0,
+          "resets": 0
+        },
+        {
+          "seed": 73,
+          "game_index": 4,
+          "score": 0.0,
+          "levels": 0,
+          "no_ops": 11,
+          "game_over": 1,
+          "resets": 1
+        }
+      ]
+    }
+  },
+  "paired_deltas_vs_baseline": {
+    "action_ucb_1.2": {
+      "pairs": 15,
+      "score_improvements": 0,
+      "score_regressions": 0,
+      "score_ties": 15,
+      "score_delta_mean": 0.0,
+      "levels_delta_total": 0,
+      "no_ops_delta_total": 5,
+      "game_over_delta_total": -1
+    },
+    "coordinate_color_ucb_1.2": {
+      "pairs": 15,
+      "score_improvements": 0,
+      "score_regressions": 0,
+      "score_ties": 15,
+      "score_delta_mean": 0.0,
+      "levels_delta_total": 0,
+      "no_ops_delta_total": 10,
+      "game_over_delta_total": -1
+    }
+  },
+  "elapsed_seconds": 33.359547
+}

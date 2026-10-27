@@ -1,0 +1,126 @@
+{
+  "評価": "初回公開観測でのHDS語彙別保留理由分類",
+  "範囲": "固定dev先頭5公開環境、environment seed 31、各1回照会",
+  "splitSeed": 20261022,
+  "環境seed": 31,
+  "初期状態件数": {
+    "NOT_FINISHED": 5
+  },
+  "共通経路aggregate": {
+    "候補状態件数": {
+      "適用語彙なし": 5
+    },
+    "次作用候補数合計": 0,
+    "保留理由カテゴリ": {},
+    "規則不確実性件数": 0,
+    "未採用理由件数": 20
+  },
+  "初回進行中観測件数": 5,
+  "語彙別aggregate": {
+    "列展開": {
+      "照会件数": 5,
+      "目標候補数合計": 0,
+      "作用候補数合計": 0,
+      "局所保留件数": 0,
+      "規則不確実性件数": 0,
+      "未採用理由件数": 0,
+      "実行許可申告件数": 0,
+      "適用性状態": {
+        "構造上不適用": 5
+      },
+      "作用適用性状態": {
+        "構造上不適用": 5
+      },
+      "保留理由カテゴリ": {
+        "段階:その他": 5
+      },
+      "規則不確実性カテゴリ": {},
+      "未採用理由カテゴリ": {}
+    },
+    "複合配色": {
+      "照会件数": 5,
+      "目標候補数合計": 0,
+      "作用候補数合計": 0,
+      "局所保留件数": 0,
+      "規則不確実性件数": 0,
+      "未採用理由件数": 0,
+      "実行許可申告件数": 0,
+      "適用性状態": {
+        "構造上不適用": 5
+      },
+      "作用適用性状態": {
+        "構造上不適用": 5
+      },
+      "保留理由カテゴリ": {},
+      "規則不確実性カテゴリ": {},
+      "未採用理由カテゴリ": {}
+    },
+    "根付き順序鎖": {
+      "照会件数": 5,
+      "目標候補数合計": 0,
+      "作用候補数合計": 0,
+      "局所保留件数": 0,
+      "規則不確実性件数": 0,
+      "未採用理由件数": 0,
+      "実行許可申告件数": 0,
+      "適用性状態": {
+        "構造上不適用": 5
+      },
+      "作用適用性状態": {
+        "構造上不適用": 5
+      },
+      "保留理由カテゴリ": {},
+      "規則不確実性カテゴリ": {},
+      "未採用理由カテゴリ": {}
+    },
+    "形状目標対応": {
+      "照会件数": 5,
+      "目標候補数合計": 25,
+      "作用候補数合計": 0,
+      "局所保留件数": 25,
+      "規則不確実性件数": 0,
+      "未採用理由件数": 0,
+      "実行許可申告件数": 0,
+      "適用性状態": {
+        "構造上不適用": 3,
+        "適用可能": 2
+      },
+      "作用適用性状態": {
+        "構造上不適用": 5
+      },
+      "保留理由カテゴリ": {},
+      "規則不確実性カテゴリ": {},
+      "未採用理由カテゴリ": {}
+    }
+  },
+  "安全境界": {
+    "HDS学習呼出し": 0,
+    "action要求": 0,
+    "readOnly照会後に観測台帳不変": 5,
+    "候補の実行許可申告件数": 0,
+    "語彙の実行許可申告件数": 0
+  },
+  "elapsedSeconds": 2.09823,
+  "input": {
+    "publicEnvironmentFileCount": 50,
+    "contentSetSha256": "d40c652dfffda990a1a32c65da3d873a36bb9c4b6bd06598704596af3c2ead79"
+  },
+  "source_sha256": {
+    "evaluation": "fc7ec0d6e73ccd08de8d81ba517a9278a5ea2a2d9544cc26fab994e1ae7b6e68",
+    "agent": "c334797618dcb154b32f0797adac6a18fa3752a715d28f5f520c95c14cbbdc95",
+    "common_observation": "46cf5686483fb332ad234b4c76785c95853dd938c993fff86eb63d45b8ad71e9",
+    "boundary": "ed95bb80f2326827c3f1237537a3df33203af8cac7881e46fd8b4d17e439d358",
+    "column_vocabulary": "d303b314446d22c604008d590636cccf6e1d140fbd365f22ff018b55d97de399",
+    "composite_vocabulary": "c8e12caa21399a2a0f63f19cc1a2642b8fae38f2dc71ddb3460ec793bf6c124e",
+    "additional_vocabulary": "9e95ccd50d4fbd2d7aaafc7e9ec94b716b166fc446f48adada28844514ee93e1",
+    "hds_core": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+  },
+  "exclusion": [
+    "game/level identifiers",
+    "GUID and observation fingerprint",
+    "raw board, color values and coordinates",
+    "action arguments and trajectories",
+    "hold reason text and candidate payload"
+  ],
+  "interpretation_boundary": "initial public observations only; no action, learning, transfer, runtime or official-score claim"
+}

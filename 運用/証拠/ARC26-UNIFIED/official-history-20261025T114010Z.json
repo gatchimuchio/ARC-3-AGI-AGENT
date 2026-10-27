@@ -1,0 +1,138 @@
+{
+  "schema": "arc26-official-history-observation.v1",
+  "track": "ARC3",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "retrieved_at_utc": "2026-10-25T11:40:10.060Z",
+  "source": "project-specific Kaggle CLI venv",
+  "command": "kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json --page-size 100 -q",
+  "environment_manifest": "運用/ARC26-UNIFIED/kaggle-cli-environment.json",
+  "environment_manifest_sha256": "fe6f5180f5c958dda3b491a296ed567278901d1b3ef6f78236085bbb2a4c33f8",
+  "observed_submission": {
+    "ref": 57612586,
+    "fileName": "submission.parquet",
+    "date": "2026-10-25T01:16:07.83",
+    "description": "ARC3 prior-memory coefficient public-25 scorecard candidate 2026-10-25",
+    "status": "SubmissionStatus.COMPLETE",
+    "publicScore": "0.03",
+    "privateScore": ""
+  },
+  "history": [
+    {
+      "ref": 57612586,
+      "fileName": "submission.parquet",
+      "date": "2026-10-25T01:16:07.83",
+      "description": "ARC3 prior-memory coefficient public-25 scorecard candidate 2026-10-25",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.03",
+      "privateScore": ""
+    },
+    {
+      "ref": 57577905,
+      "fileName": "submission.parquet",
+      "date": "2026-10-24T01:15:49.963",
+      "description": "ARC3-RUN-003 C1-018 paired public scorecard validated v5",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "23.86",
+      "privateScore": ""
+    },
+    {
+      "ref": 57541830,
+      "fileName": "submission.parquet",
+      "date": "2026-10-23T00:03:01.33",
+      "description": "ARC3-RUN-002 observation-driven exploration v4",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.25",
+      "privateScore": ""
+    },
+    {
+      "ref": 57527856,
+      "fileName": "submission.parquet",
+      "date": "2026-10-22T14:19:24.727",
+      "description": "ARC3-RUN-002 baseline v5 f8ace66",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.00",
+      "privateScore": ""
+    },
+    {
+      "ref": 55206302,
+      "fileName": "submission.parquet",
+      "date": "2026-08-03T07:58:07.073",
+      "description": "ARC3CompletionAgent rev5.1 frozen release v4 git daa91d8 M4-P06",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.06",
+      "privateScore": ""
+    },
+    {
+      "ref": 55070928,
+      "fileName": "submission.parquet",
+      "date": "2026-07-29T03:29:04.383",
+      "description": "GenericAGIRuntime P15 v11 retry same source git baa03f3",
+      "status": "SubmissionStatus.ERROR",
+      "publicScore": "",
+      "privateScore": ""
+    },
+    {
+      "ref": 55069307,
+      "fileName": "submission.parquet",
+      "date": "2026-07-29T01:53:16.29",
+      "description": "GenericAGIRuntime P15 v11 competition-source bound git baa03f3",
+      "status": "SubmissionStatus.ERROR",
+      "publicScore": "",
+      "privateScore": ""
+    },
+    {
+      "ref": 55049227,
+      "fileName": "submission.parquet",
+      "date": "2026-07-28T08:12:23.727",
+      "description": "GenericAGIRuntime P15 sequential git c60ac41 runtime dce9f434",
+      "status": "SubmissionStatus.ERROR",
+      "publicScore": "",
+      "privateScore": ""
+    },
+    {
+      "ref": 55045360,
+      "fileName": "submission.parquet",
+      "date": "2026-07-28T04:43:31.867",
+      "description": "GenericAGIRuntime P15 official-format fix git d71fb08 runtime a24a632a",
+      "status": "SubmissionStatus.ERROR",
+      "publicScore": "",
+      "privateScore": ""
+    },
+    {
+      "ref": 55043205,
+      "fileName": "submission.parquet",
+      "date": "2026-07-28T02:33:21.277",
+      "description": "GenericAGIRuntime P15 fix git 5464753 runtime a24a632a",
+      "status": "SubmissionStatus.ERROR",
+      "publicScore": "",
+      "privateScore": ""
+    },
+    {
+      "ref": 55040966,
+      "fileName": "submission.parquet",
+      "date": "2026-07-28T00:24:55.823",
+      "description": "GenericAGIRuntime P15 git 19fadde runtime a24a632a",
+      "status": "SubmissionStatus.ERROR",
+      "publicScore": "",
+      "privateScore": ""
+    },
+    {
+      "ref": 53996483,
+      "fileName": "submission.parquet",
+      "date": "2026-06-24T01:49:00.3",
+      "description": "",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.12",
+      "privateScore": ""
+    },
+    {
+      "ref": 53966647,
+      "fileName": "submission.parquet",
+      "date": "2026-06-23T04:11:29.717",
+      "description": "",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "0.24",
+      "privateScore": ""
+    }
+  ]
+}

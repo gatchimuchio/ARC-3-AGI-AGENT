@@ -1,0 +1,121 @@
+{
+  "audit": "public-level1-completion-action-outcomes",
+  "split_seed": 20261022,
+  "environment_seeds": [
+    7,
+    31,
+    73
+  ],
+  "policy_seed_rule": "policy seed equals environment seed",
+  "max_actions_per_game": 80,
+  "public_environments": 25,
+  "public_input": {
+    "file_count": 50,
+    "content_set_sha256": "d40c652dfffda990a1a32c65da3d873a36bb9c4b6bd06598704596af3c2ead79"
+  },
+  "source_sha256": {
+    "evaluator": "1e1da0a629ae3b2c259689564aa4dc15c3d95867a826cf7e83a4e7d884c968e4",
+    "targeted_test": "1c2a3d28d8de92a633c29fa119f2402428404a2798c5c4b9427380b0f5c67314",
+    "local_policy_evaluator": "ba8f89bf09077622f5c67e0ba310b5c2ac68d240412178a371b7e2a3f6c22088",
+    "policy": "325666ae54197474e33b4ff46306abc7ad12c7a489d2c2c3c59585d887e26510"
+  },
+  "runs_by_seed": [
+    {
+      "seed": 7,
+      "games": 25,
+      "level1_completed_runs": 2,
+      "level2_reached_runs": 0,
+      "wins": 0,
+      "action_outcomes": {
+        "discrete": {
+          "selected": 1352,
+          "no_op": 63,
+          "board_change_without_progress": 1282,
+          "level_progress": 0,
+          "game_over": 7
+        },
+        "coordinate": {
+          "selected": 632,
+          "no_op": 95,
+          "board_change_without_progress": 526,
+          "level_progress": 2,
+          "game_over": 9
+        }
+      },
+      "game_over": 16,
+      "resets": 16,
+      "illegal": 0,
+      "duplicate": 0
+    },
+    {
+      "seed": 31,
+      "games": 25,
+      "level1_completed_runs": 3,
+      "level2_reached_runs": 0,
+      "wins": 0,
+      "action_outcomes": {
+        "discrete": {
+          "selected": 1354,
+          "no_op": 37,
+          "board_change_without_progress": 1310,
+          "level_progress": 0,
+          "game_over": 7
+        },
+        "coordinate": {
+          "selected": 631,
+          "no_op": 99,
+          "board_change_without_progress": 521,
+          "level_progress": 3,
+          "game_over": 8
+        }
+      },
+      "game_over": 15,
+      "resets": 15,
+      "illegal": 0,
+      "duplicate": 0
+    },
+    {
+      "seed": 73,
+      "games": 25,
+      "level1_completed_runs": 3,
+      "level2_reached_runs": 0,
+      "wins": 0,
+      "action_outcomes": {
+        "discrete": {
+          "selected": 1361,
+          "no_op": 56,
+          "board_change_without_progress": 1298,
+          "level_progress": 0,
+          "game_over": 7
+        },
+        "coordinate": {
+          "selected": 623,
+          "no_op": 97,
+          "board_change_without_progress": 514,
+          "level_progress": 3,
+          "game_over": 9
+        }
+      },
+      "game_over": 16,
+      "resets": 16,
+      "illegal": 0,
+      "duplicate": 0
+    }
+  ],
+  "all_seed_action_outcomes": {
+    "discrete": {
+      "selected": 4067,
+      "no_op": 156,
+      "board_change_without_progress": 3890,
+      "level_progress": 0,
+      "game_over": 21
+    },
+    "coordinate": {
+      "selected": 1886,
+      "no_op": 291,
+      "board_change_without_progress": 1561,
+      "level_progress": 8,
+      "game_over": 26
+    }
+  }
+}

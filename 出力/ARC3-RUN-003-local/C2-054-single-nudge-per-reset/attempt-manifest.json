@@ -1,0 +1,81 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-054",
+  "status": "Kaggle version 23 running private offline three-game pilot",
+  "hypothesis": "C2-053 repeated the same rebuild nudge 53 times across three games, including repeated prompts at the same step/level. Displaying it once per memory-wipe event may reduce repeated interruption while keeping the same rebuild request. This is a pilot hypothesis, not a performance claim.",
+  "base": "C2-053 version 22; explicit-format nudge and the same slim memory/reset behavior",
+  "single_factor": "show the rebuild nudge only on the first prompt after each wipe event; keep the pending reason and clear-on-accepted-world-model behavior unchanged; reset the shown flag on each new wipe event",
+  "control": "C2-046 slim; 3 matched public games; mean score 19.309155943771326",
+  "acceptance_gate": "recompute with official EnvironmentScoreCalculator; verify 3/3 starts; accept only if mean > 19.309155943771326 and paired mean delta vs C2-046 is positive; inspect level progress, actions, terminal states, and nudge trace",
+  "settings": {
+    "memory_sections": "slim",
+    "post_wipe_rebuild_nudge": true,
+    "nudge_frequency": "once per reset event",
+    "wipe_on_level_transition": true,
+    "private_kernel": true,
+    "gpu": true,
+    "internet": false,
+    "games": 3,
+    "passes": 1,
+    "seed": 0,
+    "concurrency": 1
+  },
+  "source": {
+    "notebook": "C2-054/source/single-nudge/submission.ipynb",
+    "notebook_sha256": "69af507def65ab5da70634c9777ec64a33a76210f822f298a2e2dd887adcf6fe",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "changed_cell_sources": [
+      3
+    ],
+    "metadata_byte_identical_to_C2_053": true
+  },
+  "static_checks": {
+    "notebook_schema": "PASS",
+    "unified_patch_hunks": "150; counts validated",
+    "only_semantic_change": "single-shot nudge display flag and gating",
+    "remote_latest_matches_base_v22_cell_sources_and_runtime_metadata": true
+  },
+  "prior_candidate": {
+    "id": "C2-053",
+    "kernel_version": 22,
+    "status": "COMPLETE",
+    "mean": 10.247474797989396,
+    "control_mean": 19.309155943771326,
+    "paired_delta_vs_control": -9.06168114578193,
+    "rebuild_nudge_prompts": 53,
+    "nudge_responses_with_parseable_headers": 47
+  },
+  "official_submission_or_quota_use": false,
+  "kernel_version": 23,
+  "kernel_id": "tecchannn/arc3-model-guided-c2-025/23",
+  "run_started_at_utc": "2026-10-25T03:50:24Z",
+  "status_observations": [
+    {
+      "observed_at_utc": "2026-10-25T03:50:31Z",
+      "status": "KernelWorkerStatus.QUEUED",
+      "command": "kaggle kernels status tecchannn/arc3-model-guided-c2-025/23"
+    },
+    {
+      "observed_at_utc": "2026-10-25T04:16:01Z",
+      "status": "KernelWorkerStatus.RUNNING",
+      "command": "kaggle kernels status tecchannn/arc3-model-guided-c2-025/23"
+    },
+    {
+      "observed_at_utc": "2026-10-25T04:38:19Z",
+      "status": "KernelWorkerStatus.RUNNING",
+      "command": "kaggle kernels status tecchannn/arc3-model-guided-c2-025/23"
+    },
+    {
+      "observed_at_utc": "2026-10-25T04:53:26Z",
+      "status": "KernelWorkerStatus.RUNNING",
+      "command": "kaggle kernels status tecchannn/arc3-model-guided-c2-025/23"
+    },
+    {
+      "observed_at_utc": "2026-10-25T05:08:03Z",
+      "status": "KernelWorkerStatus.RUNNING",
+      "command": "kaggle kernels status tecchannn/arc3-model-guided-c2-025/23"
+    }
+  ],
+  "remote_source_verified_at_utc": "2026-10-25T03:57:55Z",
+  "remote_cell_source_match": true,
+  "remote_runtime_metadata_core_match": true
+}

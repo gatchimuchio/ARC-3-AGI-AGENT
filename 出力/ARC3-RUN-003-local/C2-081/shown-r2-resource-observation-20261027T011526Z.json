@@ -1,0 +1,36 @@
+{
+  "schema": "arc3-own-kernel-accelerator-readonly-observation.v1",
+  "kernel_exact": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2/1",
+  "started_at_utc": "2026-10-27T01:15:23.151584+00:00",
+  "packages": {
+    "kaggle": "2.2.5",
+    "kagglesdk": "0.1.38"
+  },
+  "read_only_calls": [
+    "KaggleApi.quota_view",
+    "KaggleApi.kernels_status(exact owner/slug/1)"
+  ],
+  "mutation_or_auth_setup_performed": false,
+  "accelerator_scope": "account weekly generic GPU quota; no machine-specific eligibility, queue position, ETA, or causal queue reason exposed",
+  "quota": {
+    "observed_at_utc": "2026-10-27T01:15:25.069723+00:00",
+    "call_succeeded": true,
+    "refresh_at_utc": "2026-10-31T00:00:00+00:00",
+    "GPU": {
+      "used_seconds": 81208.451,
+      "reserved_seconds_current_running_sessions": 0.0,
+      "total_allowed_seconds": 108000.0,
+      "minimum_guaranteed_seconds": 108000.0,
+      "remaining_after_used_seconds": 26791.549,
+      "remaining_after_used_and_reserved_seconds": 26791.549,
+      "has_ever_run": true
+    }
+  },
+  "exact_session": {
+    "observed_at_utc": "2026-10-27T01:15:26.199497+00:00",
+    "call_succeeded": true,
+    "status": "KernelWorkerStatus.QUEUED",
+    "failure_message": ""
+  },
+  "finished_at_utc": "2026-10-27T01:15:26.199497+00:00"
+}

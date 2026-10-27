@@ -1,0 +1,136 @@
+{
+  "experiment": "ARC3-RUN-003/C2-051",
+  "candidate": "C2-051 selective level-transition memory",
+  "kaggle_kernel_slug": "tecchannn/arc3-model-guided-c2-025",
+  "kernel_version": 20,
+  "terminal_status": "KernelWorkerStatus.COMPLETE",
+  "terminal_observed_at_utc": "2026-10-24T23:32:02Z",
+  "score_unit": "EnvironmentScoreCalculator points",
+  "score_method": {
+    "class": "arc_agi.scorecard.EnvironmentScoreCalculator",
+    "source_path": "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\.venv\\Lib\\site-packages\\arc_agi\\scorecard.py",
+    "source_sha256": "1cc830e48008bec60b8a98ae14d3e9312e8408f102a9878bad42744aa9e489b7"
+  },
+  "controls": {
+    "offline_public_games": 3,
+    "seed": 0,
+    "passes": 1,
+    "concurrency": 1,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "private": true,
+    "gpu": true,
+    "internet": false,
+    "official_submission": false,
+    "competition_rerun": false,
+    "quota_used": false
+  },
+  "scorecard": {
+    "games": [
+      "sk48-d8078629",
+      "tn36-ef4dde99",
+      "m0r0-492f87ba"
+    ],
+    "per_game": {
+      "sk48-d8078629": {
+        "C2-046_slim": 2.7777777777777777,
+        "C2-048": 2.7777777777777777,
+        "C2-051_v20": 1.9395967556973375,
+        "delta_vs_C2-046_slim": -0.8381810220804402
+      },
+      "tn36-ef4dde99": {
+        "C2-046_slim": 7.5306424344885885,
+        "C2-048": 19.31611570247934,
+        "C2-051_v20": 3.571428571428571,
+        "delta_vs_C2-046_slim": -3.9592138630600173
+      },
+      "m0r0-492f87ba": {
+        "C2-046_slim": 47.61904761904761,
+        "C2-048": 28.57142857142857,
+        "C2-051_v20": 28.57142857142857,
+        "delta_vs_C2-046_slim": -19.047619047619044
+      }
+    },
+    "means": {
+      "C2-046 slim": 19.309155943771326,
+      "C2-048": 16.88844068389523,
+      "C2-051 v20": 11.360817966184825
+    },
+    "delta_mean_vs_C2-046_slim": -7.948337977586501,
+    "delta_mean_vs_C2-048": -5.527622717710404,
+    "improved_vs_C2-046_slim": 0,
+    "unchanged_vs_C2-046_slim": 0,
+    "regressed_vs_C2-046_slim": 3,
+    "official_recalculation_matches_saved_final_score": true
+  },
+  "run_summary": {
+    "sk48-d8078629": {
+      "levels_completed": 1,
+      "number_of_levels": 8,
+      "actions_per_level": [
+        73,
+        69,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_score": 1.9395967556973375
+    },
+    "tn36-ef4dde99": {
+      "levels_completed": 1,
+      "number_of_levels": 7,
+      "actions_per_level": [
+        16,
+        91,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "final_score": 3.571428571428571
+    },
+    "m0r0-492f87ba": {
+      "levels_completed": 3,
+      "number_of_levels": 6,
+      "actions_per_level": [
+        28,
+        35,
+        93,
+        4,
+        0,
+        0
+      ],
+      "final_score": 28.57142857142857
+    }
+  },
+  "same_public_start_boards": {
+    "matched_count": 3,
+    "sha256_by_candidate": {
+      "sk48-d8078629": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+      "tn36-ef4dde99": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "m0r0-492f87ba": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9"
+    },
+    "matches_C2-046_slim": true,
+    "matches_C2-048": true,
+    "basis_hashes": {
+      "C2-046 slim": "3a25dc034066953d4e592d90a7874e2b05aa1a7265866ce7a7a21e5f099dbc4e",
+      "C2-048": "3a25dc034066953d4e592d90a7874e2b05aa1a7265866ce7a7a21e5f099dbc4e",
+      "C2-051 v20": "3a25dc034066953d4e592d90a7874e2b05aa1a7265866ce7a7a21e5f099dbc4e"
+    },
+    "basis_hash_method": "SHA-256 of sorted rows containing public game_id, number_of_levels, base_actions_per_level, and hint",
+    "basis_hash_matches_all_three": true
+  },
+  "artifacts": {
+    "出力\\ARC3-RUN-003-local\\C2-051-retry3\\kaggle-output\\v20-output\\benchmark.json": "fa9d556eceb55dc638f25fef3741698453a1d6f96441428f81bc42e02a823227",
+    "出力\\ARC3-RUN-003-local\\C2-051-retry3\\kaggle-output\\v20-output\\summary.txt": "044e132020eea09b2515869cb7c3911647c28d92f43584d833a0bb963dcfea2b",
+    "出力\\ARC3-RUN-003-local\\C2-051-retry3\\kaggle-output\\v20-output\\requests.jsonl": "86787f19f0384ff22076ef16867f6747304b24521cbffc1cbe053b42a1703d8d",
+    "出力\\ARC3-RUN-003-local\\C2-051-retry3\\kaggle-output\\v20-output\\artifacts\\sk48-d8078629_p0_events.jsonl": "ab4a1efff9f2a927e22efa594f45c653e62b324d306a4b5b7427b6b725ef6041",
+    "出力\\ARC3-RUN-003-local\\C2-051-retry3\\kaggle-output\\v20-output\\artifacts\\tn36-ef4dde99_p0_events.jsonl": "52f571d420bf777080271fe7b6276f56615b2961df105885e89e7415fed91a3b",
+    "出力\\ARC3-RUN-003-local\\C2-051-retry3\\kaggle-output\\v20-output\\artifacts\\m0r0-492f87ba_p0_events.jsonl": "0c1cfd581bbfda323fd1a1ecb931fafcc8a7ac4ecb4fb373741a76978b520955"
+  },
+  "decision": "Reject C2-051 treatment: all three paired environments regressed and mean was below C2-046 slim. Continue optimization from C2-046 slim; do not treat this private pilot as official competition score."
+}

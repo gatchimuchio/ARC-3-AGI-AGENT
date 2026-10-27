@@ -1,0 +1,57 @@
+{
+  "schema": "arc3-native-game-learning-scorecard-preflight.v1",
+  "revision": "r3-ABI",
+  "observed_at_utc": "2026-10-27T03:03:44.874185+00:00",
+  "scorecard": "検証/ARC3視覚HDS学習比較採点.py",
+  "scorecard_sha256": "81a6e542473eb97d854952d512d8d61f12f414497ae3f471bb1bf61e1bf55080",
+  "test": "検証/test_ARC3視覚HDS学習比較採点.py",
+  "test_sha256": "245f4e03ac0dcbf698a8ca285f671fe7fafa2a4956684a7405f5a2568f622b03",
+  "previous_source_snapshots": "出力/ARC3-RUN-003-local/C2-087/scorecard-source-snapshots-r2/manifest.json",
+  "previous_scorecard_sha256": "5b564e67d88c25a23dd7fb565590da086bf05c87fe0f8cef8b6ca1539c8091f8",
+  "previous_preflight_sha256": "6d609486f69fc220f1ce08258826da6fe6d4f2fff0128f556a59a9dbe0553acd",
+  "previous_source_test_and_preflight_preserved_exact": true,
+  "frozen_dependency_sha256": {
+    "検証/ARC3視覚HDS対応採点.py": "6ca19fcb4860b257e71c292ca77e7d775660f0c8f2f759bc4a0c984d6544db6a",
+    "検証/ARC3視覚HDS照会対応採点.py": "ac5250d5a36d846205166e7aed36715a81e8341efe227aae395a185672cb7520",
+    "検証/候補/ARC3PythonHDS学習有効無効runtime.py": "94c8bba2494d7d81212fef775f67b3be5591ddbba2b50fb3e9a06d15b194195d",
+    "検証/ARC3native学習再照会候補構築.py": "55d5926b02debaab89e654b22efbd65f4e57de51da2743c5d46405338a7e7b1f",
+    "出力/ARC3-RUN-003-local/C2-087/arms-preflight-r3.json": "e3610eebd70b9b4eb6a526f231e48d93784a4d2187239d0e73fef5a37c3b1416"
+  },
+  "source_change": "Accept r3 reconsult build schema and its honest shared-prompt/r2-runtime-preservation flags; retain all existing seed/stamp/native count/exact-source/paired contracts.",
+  "final_targeted_tests": {
+    "command": [
+      "python",
+      "-m",
+      "pytest",
+      "-q",
+      "検証/test_ARC3視覚HDS学習比較採点.py"
+    ],
+    "session_id": 8304,
+    "exit_code": 0,
+    "summary": "20 passed in 26.21s"
+  },
+  "ruff": {
+    "exit_code": 0,
+    "summary": "All checks passed!",
+    "files": [
+      "検証/ARC3視覚HDS学習比較採点.py",
+      "検証/test_ARC3視覚HDS学習比較採点.py"
+    ]
+  },
+  "r3_actual_source_ABI": {
+    "both_actual_r3_build_contracts_accepted": true,
+    "pairing_contract_accepted_using_synthetic_start_fields_only": true,
+    "unrelated_notebook_source_drift_rejected": true,
+    "false_r2_runtime_preservation_flag_rejected": true,
+    "only_public_source_changed": "src/ARC3-Inference/inference/agent/tool_agent.py",
+    "only_one_prompt_string_constant_changed_AST_equivalent_after_replacement": true,
+    "new_note_exact_three_sentence_append_in_both_arms": true,
+    "runtime_zip_same_as_r1_r2": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "stamp_cell10_exact_r2_source": true
+  },
+  "actual_scores_initial_state_exposure_or_learning_effect_observed": false,
+  "native_fixture_or_public_game_rerun": false,
+  "Kaggle_GPU_or_model_execution": false,
+  "runtime_native_observer_seed_stamp_or_candidate_edits_by_this_task": false,
+  "research_archive_only_not_runtime_promotion": true
+}

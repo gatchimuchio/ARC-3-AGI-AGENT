@@ -1,0 +1,52 @@
+{
+  "schema": "arc3-visual-hds-scorecard-preflight.v1",
+  "observed_at_utc": "2026-10-26T23:03:11.6039004Z",
+  "scope": "Local CPU contract validation only; no C2-078 terminal output was scored in this evidence.",
+  "scorecard_source_sha256": "a10b1f400770a8fe376f4e22a030a97c8ca3827c5140f1b9188a852e21d50919",
+  "tests_source_sha256": "0f5d2378283dcb4ac82c9b879de34252eb8388438c112584ce8e890c5d575350",
+  "reused_score_helper_sha256": "d19754a0e8df5aaeb73a5b763517bc4c5aa5a413fd4b08e8f11d0725f8e066ac",
+  "python": "TEMP/arc3-v6-locked-20261027/Scripts/python.exe",
+  "pytest": {
+    "arguments": [
+      "-m",
+      "pytest",
+      "-q",
+      "検証/test_ARC3視覚HDS対応採点.py"
+    ],
+    "exit_code": 0,
+    "passed": 20,
+    "seconds": 17.83
+  },
+  "ruff": {
+    "arguments": [
+      "-m",
+      "ruff",
+      "check",
+      "検証/ARC3視覚HDS対応採点.py",
+      "検証/test_ARC3視覚HDS対応採点.py"
+    ],
+    "exit_code": 0,
+    "result": "All checks passed"
+  },
+  "inspected_modes": [
+    "off control-only",
+    "standalone off or shadow",
+    "strict identical-source paired comparison"
+  ],
+  "enforced_contracts": [
+    "terminal COMPLETE plus requested exact kernel version",
+    "local build and retrieved source hashes",
+    "selected file hashes and manifest digest",
+    "three games and initial events and HDS sidecars",
+    "pilot and model seed and actual action budget",
+    "private offline GPU metadata",
+    "paired public initial fields and model/source/budget equality"
+  ],
+  "runtime_budget_policy": "1200 seconds per game; cumulative game clocks differenced; 5 seconds measurement grace; violation retains score and marks execution invalid",
+  "HDS_failure_policy": "Retain aggregate RHAE and error evidence; mark integration invalid. Require actual succeeded shadow queries/updates per game.",
+  "target_forecast_contract": "native-target-outcome-prequential.v1 numeric counters supported separately from rendered-hint counters; no actual R3 output evaluated yet",
+  "no_rendered_support_policy": "Accuracy is UNMEASURED; zero matches do not prove no learned rules",
+  "causal_learning_or_score_improvement_proven": false,
+  "official_submission_or_quota_use": false,
+  "modified_notebooks_runtimes_ledgers": false
+}

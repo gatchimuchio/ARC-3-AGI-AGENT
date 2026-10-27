@@ -1,0 +1,47 @@
+{
+  "experiment_id": "ARC3-RUN-003/C2-058",
+  "observed_at_utc": "2026-10-25T12:56:33Z",
+  "purpose": "Use C2-046 slim control diagnostics to choose a follow-on optimization direction after the output-cap pilot.",
+  "control_benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+  "control_action_event_files": {
+    "m0r0-492f87ba_p0_events.jsonl": "1f1569bad11346caa3b43f8634551374ab7e246b6c9733ef5bfac2cabd3e481f",
+    "sk48-d8078629_p0_events.jsonl": "261bbf454b94a0058770a7bcaf37ab13ad65be2e6c5d787e840af2e5c4071021",
+    "tn36-ef4dde99_p0_events.jsonl": "966c9d03ef3fb61758c8936be5a3d73ca0e9066c2ffe0966a5a87da34f9f410f"
+  },
+  "control_mean_score": 19.309155943771326,
+  "completed_levels_total": 7,
+  "wins_total": 0,
+  "ACTION1_to_ACTION6_count": 387,
+  "ACTION1_to_ACTION6_board_changed_count": 378,
+  "ACTION1_to_ACTION6_no_board_change_count": 9,
+  "per_action": {
+    "ACTION1": {
+      "count": 64,
+      "board_changed": 62
+    },
+    "ACTION2": {
+      "count": 38,
+      "board_changed": 37
+    },
+    "ACTION3": {
+      "count": 60,
+      "board_changed": 59
+    },
+    "ACTION4": {
+      "count": 79,
+      "board_changed": 79
+    },
+    "ACTION5": {
+      "count": 3,
+      "board_changed": 2
+    },
+    "ACTION6": {
+      "count": 143,
+      "board_changed": 139
+    }
+  },
+  "status_observed_at_utc": "2026-10-25T12:56:33Z",
+  "status": "KernelWorkerStatus.RUNNING",
+  "official_submission_or_quota_use": false,
+  "interpretation": "Board-changing actions were 378/387 (97.67%), while total completed levels were 7 across the three runs and wins were 0. Board-change rate is not a score measure; a simple no-op suppression factor is not an evident next target compared with improving progression/planning."
+}
