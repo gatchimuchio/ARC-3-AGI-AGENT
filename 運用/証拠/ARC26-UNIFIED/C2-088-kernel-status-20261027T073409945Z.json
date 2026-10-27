@@ -1,0 +1,25 @@
+{
+  "schema": "arc3.kaggle.kernel.status.readonly.v1",
+  "observed_at_utc": "2026-10-27T07:34:09.945Z",
+  "started_at_utc": "2026-10-27T07:34:03.381Z",
+  "command": [
+    "uvx",
+    "--offline",
+    "--from",
+    "kaggle==2.2.5",
+    "kaggle",
+    "kernels",
+    "status",
+    "tecchannn/arc3-v6-online-official-c2-088"
+  ],
+  "cli_version": "2.2.5",
+  "exit_code": 0,
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "status_text": "tecchannn/arc3-v6-online-official-c2-088 has status \"KernelWorkerStatus.RUNNING\"",
+  "status": "KernelWorkerStatus.RUNNING",
+  "raw_stdout_sha256": "0249a4043fb00750e33758779d7f7d139afed1419010a4e19982ded75c708069",
+  "raw_stdout_bytes": 82,
+  "read_only": true,
+  "competition_submission_created": false,
+  "quota_used": false
+}
