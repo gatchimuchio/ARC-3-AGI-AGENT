@@ -1,0 +1,164 @@
+{
+  "run_id": "ARC3-RUN-003-C2-101",
+  "observed_at_utc": "2026-10-27T19:14:40Z",
+  "track": "ARC3",
+  "work_item": "Expose target-scoped HDS unidentifiability records through a diagnostic-only bridge summary",
+  "git": {
+    "branch": "codex/arc3-v6-progress-20261027",
+    "head_before": "63efadba7fe8c45f7c12f3350a447bbc7bb80fbe"
+  },
+  "three_point_set_rechecked": true,
+  "three_point_set_sha256": {
+    "common_Codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "ARC3_Codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "ARC3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "ARC3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67",
+    "AGENTS": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "environment": {
+    "python": "Python 3.12.10",
+    "hds_version": "HDS/学習系統/v0.4.2",
+    "hds_package_manifest_sha256": "F41A4B890E4905FA0F87C9FFE685BD9EFCC70D5F7767FC3AECC056085EE2C487"
+  },
+  "source": {
+    "runner": "検証/ARC3HDS_target-unidentifiability-audit.py",
+    "runner_sha256": "9DFBE51CDE8E380BC72DC58D1A8C904D830537E81A0FFC4EAA77A20FF8992D9B",
+    "shared_helpers": "検証/ARC3HDS_prequential-bounded-guidance-audit.py",
+    "shared_helpers_sha256": "36DFD255EDA99B360A4300CC4F76ADE2D86B7E4929441C6E649DA8F66FF2E0F0",
+    "bridge": "検証/ARC3視覚HDS接続候補.py",
+    "bridge_sha256": "1A1C48AD03A3C38668E8B8EBA85EF61D8FB86A50143C80C221BA586C22D08617",
+    "core_HDS_modified": false,
+    "current_state_or_AGENTS_modified": false,
+    "runtime_judgment_or_action_authorization_changed": false
+  },
+  "execution": {
+    "command": ".venv/Scripts/python.exe 検証/ARC3HDS_target-unidentifiability-audit.py --output 出力/ARC3-RUN-003-local/C2-101/target-unidentifiability.json",
+    "source_run": "C2-088 B-v3 sequential exact output version 4",
+    "games": [
+      "m0r0-492f87ba",
+      "sk48-d8078629",
+      "tn36-ef4dde99"
+    ],
+    "transitions": 239,
+    "display_only_vocabulary_extension": "境界領域変化のみ",
+    "same_ordered_public_transitions": true,
+    "query_before_every_update": true,
+    "post_action_effect_excluded_from_updates": true,
+    "fresh_prior_count_per_game": 5,
+    "input_state_sha256": {
+      "m0r0-492f87ba": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22",
+      "sk48-d8078629": "36f49e579ce154747c727baa4e98f643c0bd005f209c53029e68b3295d2ccf44",
+      "tn36-ef4dde99": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f"
+    }
+  },
+  "results": {
+    "aggregate": {
+      "transitions": 239,
+      "native_HOLD": 239,
+      "target_unidentifiable_present": 12,
+      "target_unidentifiable_records": 12,
+      "target_prediction_present": 55,
+      "unique_prediction_correct_on_executed_action": 49,
+      "unique_prediction_wrong_on_executed_action": 6,
+      "target_active_rule_present": 71,
+      "target_conflict_present": 0,
+      "target_observation_request_present": 23,
+      "native_status_counts": {
+        "断定保留": 239
+      },
+      "target_unidentifiable_reason_counts_from_bounded_evidence": {
+        "現観測では複数の関係候補を識別できない": 12
+      },
+      "global_native_hold_reason_counts": {
+        "原因未確定で隔離中の原理が存在する": 227,
+        "現行暫定原理の適用に必要な観測が不足している": 23,
+        "現観測だけでは複数の関係候補を識別できない": 239
+      }
+    },
+    "per_game": {
+      "m0r0-492f87ba": {
+        "transitions": 80,
+        "native_HOLD": 80,
+        "target_unidentifiable_present": 1,
+        "target_unidentifiable_records": 1,
+        "target_prediction_present": 31,
+        "unique_prediction_correct_on_executed_action": 29,
+        "unique_prediction_wrong_on_executed_action": 2,
+        "target_active_rule_present": 34,
+        "target_conflict_present": 0,
+        "target_observation_request_present": 4,
+        "native_status_counts": {
+          "断定保留": 80
+        },
+        "target_unidentifiable_reason_counts_from_bounded_evidence": {
+          "現観測では複数の関係候補を識別できない": 1
+        },
+        "global_native_hold_reason_counts": {
+          "原因未確定で隔離中の原理が存在する": 76,
+          "現行暫定原理の適用に必要な観測が不足している": 4,
+          "現観測だけでは複数の関係候補を識別できない": 80
+        }
+      },
+      "sk48-d8078629": {
+        "transitions": 79,
+        "native_HOLD": 79,
+        "target_unidentifiable_present": 0,
+        "target_unidentifiable_records": 0,
+        "target_prediction_present": 1,
+        "unique_prediction_correct_on_executed_action": 0,
+        "unique_prediction_wrong_on_executed_action": 1,
+        "target_active_rule_present": 1,
+        "target_conflict_present": 0,
+        "target_observation_request_present": 0,
+        "native_status_counts": {
+          "断定保留": 79
+        },
+        "target_unidentifiable_reason_counts_from_bounded_evidence": {},
+        "global_native_hold_reason_counts": {
+          "原因未確定で隔離中の原理が存在する": 75,
+          "現観測だけでは複数の関係候補を識別できない": 79
+        }
+      },
+      "tn36-ef4dde99": {
+        "transitions": 80,
+        "native_HOLD": 80,
+        "target_unidentifiable_present": 11,
+        "target_unidentifiable_records": 11,
+        "target_prediction_present": 23,
+        "unique_prediction_correct_on_executed_action": 20,
+        "unique_prediction_wrong_on_executed_action": 3,
+        "target_active_rule_present": 36,
+        "target_conflict_present": 0,
+        "target_observation_request_present": 19,
+        "native_status_counts": {
+          "断定保留": 80
+        },
+        "target_unidentifiable_reason_counts_from_bounded_evidence": {
+          "現観測では複数の関係候補を識別できない": 11
+        },
+        "global_native_hold_reason_counts": {
+          "原因未確定で隔離中の原理が存在する": 76,
+          "現行暫定原理の適用に必要な観測が不足している": 19,
+          "現観測だけでは複数の関係候補を識別できない": 80
+        }
+      }
+    },
+    "native_HOLD_preserved_for_all_transitions": true,
+    "action_authorization_false_for_all_transitions": true,
+    "native_HOLD_reasons_remain_global_counts_not_target_attributions": true,
+    "target_unidentifiable_rows_not_truncated": true,
+    "score_effect": "NOT_MEASURED",
+    "official_submission_or_kernel_run": false
+  },
+  "full_output": {
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-101-target-unidentifiability-full-output-20261027T191440Z.json",
+    "sha256": "C4B6E94BC15D1C93B22482625CF331DFE498AEB7FB4808C6A8168675342B97D8"
+  },
+  "local_output": {
+    "path": "出力/ARC3-RUN-003-local/C2-101/target-unidentifiability.json",
+    "sha256": "C4B6E94BC15D1C93B22482625CF331DFE498AEB7FB4808C6A8168675342B97D8"
+  }
+}
