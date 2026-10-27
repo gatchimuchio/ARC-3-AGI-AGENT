@@ -1,0 +1,60 @@
+{
+  "schema": "arc3-native-game-learning-arm-scorecard-summary.v1",
+  "experiment_id": "ARC3-RUN-003/C2-087",
+  "observed_at_utc": "2026-10-27T08:59:22.696911Z",
+  "arm": "prior-only",
+  "kernel": "tecchannn/arc3-v6-learning-prior-only-c2-087-r3",
+  "version": 1,
+  "status": "KernelWorkerStatus.COMPLETE",
+  "mode": "shadow",
+  "evidence_visibility": "shown",
+  "build_manifest_sha256": "a556e93de704b9d3af92954104bb1c0713363e6e3539b6d80a2a7ae3b7410298",
+  "retrieval_manifest_sha256": "7cc8ea8e0eef8e4211db8e6db38c022155a1dc3e46d821a61560f863fd058996",
+  "selected_output_manifest_sha256": "c98150bdbc0af5f847193d871f801283bc3d59c3b19cde6a6fb0ae121df0e11a",
+  "scorecard_sha256": "9b6714cfeccf42019b42ff920c5896ec67b96645456ff15a638b4f19f1b00ead",
+  "public_offline_RHAE_mean": 1.1904761904761905,
+  "levels_completed": 1,
+  "levels_total": 21,
+  "win_count": 0,
+  "actual_actions": 240,
+  "run_state_counts": {
+    "gave_up": 3
+  },
+  "history_generated_tokens": 286058,
+  "games_with_visual_model_generation": 3,
+  "job_elapsed_seconds": 2285.865977,
+  "max_game_elapsed_seconds": 1160.0869422290002,
+  "learning_mode": "disabled",
+  "operations": {
+    "updates_attempted": 0,
+    "updates_succeeded": 0,
+    "queries_attempted": 3,
+    "queries_succeeded": 3,
+    "update_errors": 0,
+    "query_errors": 0,
+    "summary_errors": 0,
+    "prior_updates_attempted": 15,
+    "prior_updates_succeeded": 15,
+    "prior_update_errors": 0,
+    "skipped_resets": 0,
+    "rejected_requests": 0,
+    "budget_exhaustion_requests": 0
+  },
+  "query_native_hold_count": 3,
+  "expected_disabled_game_updates": 239,
+  "update_errors": 0,
+  "query_errors": 0,
+  "environment_seed_evidence": {
+    "explicitly_requested_by_notebook": true,
+    "value": 0,
+    "scope": "OFFLINE private pilot only",
+    "GPU_SDK_actual_version": "not yet observed; record runtime stamp",
+    "local_pinned_SDK_default_separate": {
+      "arc-agi": "0.9.8",
+      "default_seed": 0
+    },
+    "runtime_initial_state_equivalence": "pending public-frame comparison"
+  },
+  "official_score": false,
+  "competition_rerun_performed": false
+}

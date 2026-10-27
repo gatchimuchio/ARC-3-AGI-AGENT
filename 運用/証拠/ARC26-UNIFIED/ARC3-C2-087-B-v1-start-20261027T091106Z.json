@@ -1,0 +1,41 @@
+{
+  "schema": "arc3-native-game-learning-arm-start-summary.v1",
+  "experiment_id": "ARC3-RUN-003/C2-087",
+  "observed_at_utc": "2026-10-27T09:11:00.104725Z",
+  "arm": "online-learning",
+  "kernel": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+  "version": 1,
+  "status": "KernelWorkerStatus.QUEUED",
+  "notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "metadata_sha256": "ee088db354d9618b445e1fc6a2da6bd77556c5ec2c998d50d13a86751b4deca9",
+  "build_manifest_sha256": "5d2c8bd431079c22b1ee15016f96161ab8eac38ddc0d7cea64ed686763fab218",
+  "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "learning_mode": "enabled",
+  "pilot": {
+    "games_max": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_max": 80,
+    "runtime_seconds_max": 1200,
+    "competition_rerun_allowed": false
+  },
+  "initial_state_pairing": "pending until B output scorecard",
+  "push_command_exit_code": 0,
+  "push_command_stdout": "Kernel version 1 successfully pushed. Please check progress at https://www.kaggle.com/code/tecchannn/arc3-v6-learning-online-c2-087-r3",
+  "push_attempt_history": [
+    {
+      "attempt": 1,
+      "exit_code": 1,
+      "error": "Expecting value: line 1 column 1 (char 0)",
+      "followup_exact_status": "404 Not Found"
+    },
+    {
+      "attempt": 2,
+      "exit_code": 0,
+      "result": "version 1 successfully pushed"
+    }
+  ],
+  "quota_preflight_hours_remaining": 4.99,
+  "quota_preflight_observed_at_utc": "2026-10-27T09:05:26.399045Z",
+  "competition_submission_or_rerun": false
+}

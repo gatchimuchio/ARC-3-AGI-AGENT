@@ -1,0 +1,27 @@
+{
+  "schema": "arc3-kaggle-private-run-preflight.v1",
+  "observed_at_utc": "2026-10-27T09:05:26.399045Z",
+  "kaggle_cli": "2.2.5",
+  "quota_command": "kaggle quota",
+  "quota_exit_code": 0,
+  "gpu_quota": {
+    "used_hours": 25.01,
+    "remaining_hours": 4.99,
+    "total_hours": 30.0,
+    "refresh_at": "2026-10-31T00:00:00+00:00"
+  },
+  "quota_raw_stdout": "resource  used    remaining  total   refreshAt                  \n--------  ------  ---------  ------  -------------------------  \nGPU       25.01h  4.99h      30.00h  2026-10-31T00:00:00+00:00  \nTPU       0.00h   20.00h     20.00h  2026-10-31T00:00:00+00:00  \n",
+  "candidate_kernel": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+  "candidate_status_command": "kaggle kernels status tecchannn/arc3-v6-learning-online-c2-087-r3",
+  "candidate_status_exit_code": 1,
+  "candidate_status_stdout": "",
+  "candidate_status_stderr": "404 Client Error: Not Found for url: https://api.kaggle.com/v1/kernels.KernelsApiService/GetKernelSessionStatus\n\nThe resource was not found. Check the spelling of the reference you passed.\nReferences are usually '<owner>/<slug>', which you can find in the resource's URL.\nTo search for one, try 'kaggle search <query>'.\n",
+  "candidate_absent_before_push": true,
+  "prior_only_r3_version": 1,
+  "prior_only_scorecard": "出力/ARC3-RUN-003-local/C2-087/prior-only-r3-v1-scorecard.json",
+  "prior_only_scorecard_sha256": "9b6714cfeccf42019b42ff920c5896ec67b96645456ff15a638b4f19f1b00ead",
+  "candidate_notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "paired_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "normal_run_only": true,
+  "competition_rerun_allowed": false
+}

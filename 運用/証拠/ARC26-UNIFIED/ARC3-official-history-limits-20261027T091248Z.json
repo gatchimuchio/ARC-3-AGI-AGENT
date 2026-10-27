@@ -1,0 +1,37 @@
+{
+  "schema": "arc3-official-history-limits-observation.v1",
+  "observed_at_utc": "2026-10-27T09:12:48.527961Z",
+  "competition": "arc-prize-2026-arc-agi-3",
+  "kaggle_cli": "2.2.5",
+  "history_command": "kaggle competitions submissions arc-prize-2026-arc-agi-3 --format json",
+  "history_exit_code": 0,
+  "history_file": "運用/証拠/ARC26-UNIFIED/official-cli-history-raw-20261027T091248Z.json",
+  "limits_command": "kaggle competitions submission-limits arc-prize-2026-arc-agi-3 --json",
+  "limits_exit_code": 0,
+  "limits_file": "運用/証拠/ARC26-UNIFIED/official-cli-limits-raw-20261027T091248Z.json",
+  "selected_submissions": [
+    {
+      "ref": 57688735,
+      "fileName": "submission.parquet",
+      "date": "2026-10-27T04:20:12.220000",
+      "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13",
+      "status": "SubmissionStatus.PENDING",
+      "publicScore": "",
+      "privateScore": ""
+    },
+    {
+      "ref": 57577905,
+      "fileName": "submission.parquet",
+      "date": "2026-10-24T01:15:49.963000",
+      "description": "ARC3-RUN-003 C1-018 paired public scorecard validated v5",
+      "status": "SubmissionStatus.COMPLETE",
+      "publicScore": "23.86",
+      "privateScore": ""
+    }
+  ],
+  "submission_limits": {
+    "numToday": 1,
+    "numTotal": 8
+  },
+  "submission_or_rerun_performed": false
+}

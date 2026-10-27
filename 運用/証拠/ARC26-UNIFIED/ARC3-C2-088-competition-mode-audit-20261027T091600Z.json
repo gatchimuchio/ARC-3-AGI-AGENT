@@ -1,0 +1,29 @@
+{
+  "schema": "arc3-competition-rerun-mode-audit.v1",
+  "observed_at_utc": "2026-10-27T09:16:00Z",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "version": 1,
+  "normal_run_complete": true,
+  "normal_run_scope": "offline private pilot; 3 games, seed 0, up to 80 actions and 1200 seconds per game",
+  "normal_run_score_is_official": false,
+  "build_manifest_sha256": "d1e0773d1c14897e488229bbe0aa8fea9c66660c68b19c40266fc3fa682235f9",
+  "notebook_sha256": "00d1fec9600b904810061d0b54e4083468706fe834be054dea6a5b19c5b386e3",
+  "base_online_learning_notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "competition_rerun_allowed": true,
+  "official_notebook_budget_seconds": 32400,
+  "official_configuration": {
+    "TRUE_SUBMISSION": true,
+    "n_passes": 1,
+    "game_limit": null,
+    "max_actions_per_game": null,
+    "max_runtime_s_per_game": 31920,
+    "concurrency": 120,
+    "analyzer_timeout": 900.0,
+    "save_request_logs": false
+  },
+  "competition_flag_detection_present": true,
+  "official_mode_uses_live_competition_gateway": true,
+  "official_submission_or_rerun_performed": false,
+  "daily_limit_currently_exhausted": true,
+  "interpretation": "The completed normal run is an offline pilot and is not a competition score. The saved Notebook has a competition branch configured; prior wording that pilot-only normal execution structurally blocked Competition Rerun is superseded by this source audit. A real rerun remains unverified."
+}
