@@ -1,0 +1,97 @@
+{
+  "schema": "arc3-hds-post-action-condition-audit.v1",
+  "run_id": "ARC3-RUN-003-C2-096",
+  "observed_at_utc": "2026-10-27T18:24:29Z",
+  "source_run": "C2-088 B-v3 sequential version 4; tn36-ef4dde99; public step 39",
+  "exact_query": {
+    "native_status": "断定保留",
+    "candidate_action": "MOUSE/Action 6",
+    "tool_call_id": "python-18:call_aa4e2b9d67cf434cb6a7e372",
+    "target_result_path": [
+      "公開応答区分"
+    ],
+    "target_forecasts": 0,
+    "model_turn": "model-18",
+    "candidate_was_queried_before_action": true
+  },
+  "native_hold_reasons": [
+    "原因未確定で隔離中の原理が存在する",
+    "現行暫定原理の適用に必要な観測が不足している",
+    "現観測だけでは複数の関係候補を識別できない"
+  ],
+  "active_principles": [
+    {
+      "id": "原理-000218",
+      "conditions": [
+        [
+          "作用前公開状態",
+          "作用点同色4連結成分面積"
+        ],
+        [
+          "公開作用点効果区分"
+        ]
+      ]
+    },
+    {
+      "id": "原理-000220",
+      "conditions": [
+        [
+          "作用前公開状態",
+          "対象局所配置"
+        ],
+        [
+          "公開作用点効果区分"
+        ]
+      ]
+    },
+    {
+      "id": "原理-000222",
+      "conditions": [
+        [
+          "作用前公開状態",
+          "色種類数"
+        ],
+        [
+          "公開作用点効果区分"
+        ]
+      ]
+    }
+  ],
+  "diagnosis": "All three active rules forecasting 公開応答区分 require 公開作用点効果区分, which is computed from the after-action board. The pre-action query cannot observe this condition, so HDS correctly requests more observations and emits no action-time forecast. The query projection includes pre-action area/topology; the missing path is the post-action effect feature.",
+  "source_evidence": {
+    "runtime_state": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version4-20261027T151952Z/artifacts/tn36-ef4dde99_p0_tool_runtime_state.visual-hds-query.json",
+      "sha256": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f"
+    },
+    "request_trace": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version4-20261027T151952Z/requests.jsonl",
+      "sha256": "0b8d329aeee424363dc87135c4aa0c84f4f9e1742800f39e32109207cf75999a"
+    },
+    "visual_hds_source": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/C2-088-B-v3-run-package/visual-hds-source.zip",
+      "sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525"
+    },
+    "bridge": {
+      "sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617",
+      "relevant": "query uses enrich(... after=None); update uses enrich(... after=public post-action frame)",
+      "path": "検証/ARC3視覚HDS接続候補.py"
+    }
+  },
+  "next_step": "Build one isolated local query/update schema candidate where action-time forecasts condition only on pre-action observable context; keep effect class as a separate post-action target or exclude it from predictors. Capture forecast coverage and score on the same public start states before any remote run.",
+  "limitations": [
+    "one stochastic public trace",
+    "no code change",
+    "no local or official score comparison",
+    "cause established for this exact HOLD query only"
+  ],
+  "controls": {
+    "action_authorization": false,
+    "native_HOLD_preserved": true,
+    "score_effect": "NOT_MEASURED",
+    "tests_run": false,
+    "official_submission": false,
+    "game_or_level_id_branching": false,
+    "hidden_state_used": false,
+    "kernel_push_or_rerun": false
+  }
+}
