@@ -1,0 +1,31 @@
+{
+  "schema": "arc3-private-kernel-push-request.v1",
+  "run_id": "ARC3-RUN-003-C2-087-ONLINE-R3-V1-LAUNCH",
+  "recorded_at_utc": "2026-10-27T04:24:47.7581733Z",
+  "command": [
+    "C:\\Users\\ohira\\AppData\\Local\\Temp\\arc3-v6-locked-20261027\\Scripts\\kaggle.exe",
+    "kernels",
+    "push",
+    "--path",
+    "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\出力\\ARC3-RUN-003-local\\C2-087\\online-learning-r3",
+    "--timeout",
+    "10800",
+    "--accelerator",
+    "NvidiaRtxPro6000"
+  ],
+  "kernel": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+  "expected_version": 1,
+  "notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "metadata_sha256": "ee088db354d9618b445e1fc6a2da6bd77556c5ec2c998d50d13a86751b4deca9",
+  "build_manifest_sha256": "5d2c8bd431079c22b1ee15016f96161ab8eac38ddc0d7cea64ed686763fab218",
+  "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "quota_observation_path": "出力/ARC3-RUN-003-local/C2-087/resource-quota-typed-20261027T042254Z.json",
+  "reported_gpu_remaining_seconds": 24059.301000000007,
+  "timeout_seconds": 10800,
+  "online_native_game_response_updates_enabled": true,
+  "control_A_kernel_status": "tecchannn/arc3-v6-learning-prior-only-c2-087-r3 has status \"KernelWorkerStatus.QUEUED\"",
+  "official_C2_088_kernel_status": "tecchannn/arc3-v6-online-official-c2-088 has status \"KernelWorkerStatus.QUEUED\"",
+  "user_authorizes_parallel_development": true,
+  "official_submission_or_rerun_performed_by_this_push": false,
+  "retry_policy": "No retry after an ambiguous outcome"
+}

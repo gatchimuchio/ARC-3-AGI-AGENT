@@ -1,0 +1,41 @@
+{
+  "schema": "arc3-c2-088-legacy-v13-source-comparison.v1",
+  "observed_at_utc": "2026-10-27T04:11:09.852097+00:00",
+  "kernel": "tecchannn/arc3-model-guided-c2-025",
+  "version": 13,
+  "local_notebook": "出力\\ARC3-RUN-003-local\\C2-046\\source\\slim\\submission.ipynb",
+  "local_notebook_sha256": "453231dd960b2be929d15f1eaad43d856cc64faa12c699d34e088f6b16a7925e",
+  "remote_notebook": "出力\\ARC3-RUN-003-local\\C2-088\\legacy-v13-eligibility\\source\\arc3-model-guided-c2-025.ipynb",
+  "remote_notebook_sha256": "c4376f109f5d10413cfbb53ad02c8a67d2c7f55f8e82c3b151e5faee066e94f9",
+  "local_cells": 25,
+  "remote_cells": 25,
+  "cell_types_match": true,
+  "ordered_normalized_cell_sources_match": true,
+  "raw_ordered_cell_sources_match": true,
+  "metadata": {
+    "id": "tecchannn/arc3-model-guided-c2-025",
+    "is_private": true,
+    "enable_gpu": true,
+    "enable_internet": false,
+    "competition_sources": [
+      "arc-prize-2026-arc-agi-3"
+    ],
+    "docker_image": "gcr.io/kaggle-private-byod/python@sha256:57e612b484cf3df5026ee4dcc3cb176974b22b2bc0937fb1e16132a8be4cb13c",
+    "timeout_seconds": null,
+    "max_runtime_seconds": null,
+    "machine_shape": "NvidiaRtxPro6000"
+  },
+  "remote_mutations": false,
+  "latest_hds_candidate": false,
+  "competition_rerun_permission_claim": false,
+  "pilot_competition_refusal_found": false,
+  "competition_branch_markers": {
+    "if TRUE_SUBMISSION:": true,
+    "bm.games = _competition_games()": true,
+    "bm.solver.concurrency = 120": true,
+    "bm.solver.max_runtime_s_per_game = 532*60": true,
+    "bm.solver.max_actions_per_game = None": true,
+    "if not TRUE_SUBMISSION:": true,
+    "submission.parquet": true
+  }
+}

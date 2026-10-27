@@ -1,0 +1,15 @@
+{
+  "schema": "arc3-private-kernel-push-receipt.v1",
+  "request": "online-learning-r3-v1-push-request.json",
+  "request_sha256": "a2798e3832a2f71b7ad6f45cb72d28d8e9a33917a583d7dcf8bfb28ca09b9d29",
+  "attempt_started_at_utc": "2026-10-27T04:24:47.8886253Z",
+  "finished_at_utc": "2026-10-27T04:24:56.4056782Z",
+  "exit_code": 0,
+  "stdout_stderr": "Kernel push error: Maximum batch GPU session count of 2 reached.",
+  "exception_type": null,
+  "confirmed_requested_identity_version1": false,
+  "outcome_ambiguous_or_identity_block": true,
+  "actual_push_command_attempts": 1,
+  "do_not_retry_or_duplicate": true,
+  "official_submission_or_rerun_performed_by_this_agent": false
+}

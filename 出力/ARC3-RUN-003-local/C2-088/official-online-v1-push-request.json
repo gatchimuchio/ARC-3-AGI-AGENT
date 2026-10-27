@@ -1,0 +1,63 @@
+{
+  "schema": "arc3-private-kernel-push-request.v1",
+  "run_id": "ARC3-RUN-003-C2-088-OFFICIAL-ONLINE-V1",
+  "recorded_at_utc": "2026-10-27T04:11:16.531688+00:00",
+  "command": [
+    "C:\\Users\\ohira\\AppData\\Local\\Temp\\arc3-v6-locked-20261027\\Scripts\\kaggle.exe",
+    "kernels",
+    "push",
+    "--path",
+    "C:\\Users\\ohira\\OneDrive\\ドキュメント\\ChatGPT\\ARC-3-AGI-AGENT\\出力\\ARC3-RUN-003-local\\C2-088\\official-online",
+    "--timeout",
+    "32400",
+    "--accelerator",
+    "NvidiaRtxPro6000"
+  ],
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "expected_version": 1,
+  "notebook_sha256": "00d1fec9600b904810061d0b54e4083468706fe834be054dea6a5b19c5b386e3",
+  "metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+  "build_manifest_sha256": "d1e0773d1c14897e488229bbe0aa8fea9c66660c68b19c40266fc3fa682235f9",
+  "preflight_sha256": "d224fcb0da26c7ac25979ec573792497d7fa0855d8e6c8bab1712827cfb29ca8",
+  "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "own_kernel_listing": {
+    "rows": 38,
+    "page_size": 100,
+    "target_matches": 0,
+    "exhausted_first_page": true
+  },
+  "configuration": {
+    "is_private": true,
+    "enable_internet": false,
+    "machine_shape": "NvidiaRtxPro6000",
+    "global_timeout_seconds": 32400,
+    "normal_private_pilot": {
+      "games_max": 3,
+      "passes": 1,
+      "concurrency": 1,
+      "actions_max": 80,
+      "runtime_seconds_max": 1200,
+      "competition_rerun_allowed": false
+    },
+    "official_notebook_budget_seconds": 32400,
+    "native_game_response_updates_enabled": true,
+    "model_seed": 0,
+    "explicit_seed_scope": {
+      "explicitly_requested_by_notebook": true,
+      "value": 0,
+      "scope": "OFFLINE private pilot only",
+      "GPU_SDK_actual_version": "not yet observed; record runtime stamp",
+      "local_pinned_SDK_default_separate": {
+        "arc-agi": "0.9.8",
+        "default_seed": 0
+      },
+      "runtime_initial_state_equivalence": "pending public-frame comparison"
+    }
+  },
+  "owner_authorizes_single_private_upload_for_root_immediate_codeSubmit_test": true,
+  "server_codeSubmission_eligibility_proven": false,
+  "no_wait_for_private_COMPLETE_required_before_root_handoff": true,
+  "official_submission_or_rerun_performed_by_this_agent": false,
+  "do_not_retry_or_duplicate_on_unknown_outcome": true,
+  "C2_087_A_untouched_and_B_not_pushed": true
+}

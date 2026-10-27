@@ -1,0 +1,62 @@
+{
+  "schema": "arc3-official-online-candidate-preflight.v1",
+  "case_id": "C2-088",
+  "observed_at_utc": "2026-10-27T04:09:13.563894+00:00",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "notebook_sha256": "00d1fec9600b904810061d0b54e4083468706fe834be054dea6a5b19c5b386e3",
+  "metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+  "build_manifest_sha256": "d1e0773d1c14897e488229bbe0aa8fea9c66660c68b19c40266fc3fa682235f9",
+  "builder_sha256": "1832f5ac635dce3ee58bd3bca2e5195adb09518053b5e037ceabcc90352013b5",
+  "base_online_r3_manifest_sha256": "5d2c8bd431079c22b1ee15016f96161ab8eac38ddc0d7cea64ed686763fab218",
+  "notebook_delta_only_cell6_official_refusal_removed": true,
+  "metadata_delta_only_id_title": true,
+  "notebook_metadata_other_cells_and_runtime_zip_unchanged": true,
+  "normal_and_official_configurations": [
+    {
+      "TRUE_SUBMISSION": false,
+      "n_passes": 1,
+      "game_limit": 3,
+      "max_actions_per_game": 80,
+      "max_runtime_s_per_game": 1200.0,
+      "concurrency": 1,
+      "analyzer_timeout": 180.0,
+      "save_request_logs": true
+    },
+    {
+      "TRUE_SUBMISSION": true,
+      "n_passes": 1,
+      "game_limit": null,
+      "max_actions_per_game": null,
+      "max_runtime_s_per_game": 31920,
+      "concurrency": 120,
+      "analyzer_timeout": 900.0,
+      "save_request_logs": false
+    }
+  ],
+  "generated_actual_packaging_cell_EXECUTED_false_and_true": [
+    {
+      "TRUE_SUBMISSION": false,
+      "generated_cell_executed": true,
+      "public_postimages_verified": 79,
+      "GPU_framework_native_instance_or_game": false
+    },
+    {
+      "TRUE_SUBMISSION": true,
+      "generated_cell_executed": true,
+      "public_postimages_verified": 79,
+      "GPU_framework_native_instance_or_game": false
+    }
+  ],
+  "public_postimages_each_mode": 79,
+  "python_sources_compiled": 53,
+  "notebook_code_compiled": true,
+  "ruff_exit_code": 0,
+  "ruff_result": "All checks passed!",
+  "cpu_python_version": "3.12.10",
+  "execution_route": "existing workspace .venv/Scripts/python.exe, no sync; original TEMP interpreter executable missing",
+  "original_v5_official_detection_configuration_Run_exact_source_verified": true,
+  "HDS_caps_preserved_distinct_from_game_action_budget": true,
+  "OFFLINE_seed0_only_no_COMPETITION_seed_override": true,
+  "Kaggle_push_submit_GPU_model_native_instance_or_actual_game_execution": false,
+  "official_score_or_runtime_success_claim": false
+}

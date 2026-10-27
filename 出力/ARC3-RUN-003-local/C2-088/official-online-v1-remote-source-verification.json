@@ -1,0 +1,37 @@
+{
+  "schema": "arc3-c2-088-remote-v1-source-verification.v1",
+  "observed_at_utc": "2026-10-27T04:26:04.452443+00:00",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "version": 1,
+  "local_notebook_sha256": "00d1fec9600b904810061d0b54e4083468706fe834be054dea6a5b19c5b386e3",
+  "remote_pulled_notebook_sha256": "d52c97a57420f04cc6146fc8733efff682e5f3c09c22790612fd24e1c92fcc33",
+  "remote_notebook_raw_hash_equals_local": false,
+  "local_cells": 26,
+  "remote_cells": 26,
+  "ordered_cell_types_and_source_text_exact": true,
+  "local_metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+  "remote_metadata_sha256": "ea8b97dc09fb29da5505fdbca4912072f382285ce975b98ff281c77941052520",
+  "metadata_match_fields": [
+    "id",
+    "title",
+    "language",
+    "kernel_type",
+    "is_private",
+    "enable_gpu",
+    "enable_internet",
+    "machine_shape",
+    "dataset_sources",
+    "competition_sources",
+    "kernel_sources",
+    "model_sources",
+    "docker_image"
+  ],
+  "metadata_differences_expected": [
+    "code_file filename changed to remote kernel slug",
+    "Kaggle-added id_no and keywords"
+  ],
+  "all_execution_and_competition_config_match": true,
+  "remote_status": "KernelWorkerStatus.QUEUED",
+  "remote_status_observation_reference": "online-learning-r3-v1-push-request.json preflight captured status before 2026-10-27T04:24:47Z",
+  "remote_mutation_performed": false
+}

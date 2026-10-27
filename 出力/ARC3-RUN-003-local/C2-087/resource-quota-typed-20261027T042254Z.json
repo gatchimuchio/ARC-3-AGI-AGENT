@@ -1,0 +1,27 @@
+{
+  "schema": "arc3-private-resource-quota-read.v1",
+  "observed_at_utc": "2026-10-27T04:23:01.309701+00:00",
+  "method": "KaggleApi.quota_view -> GetAcceleratorQuotaStatistics",
+  "quota_refresh_time": "2026-10-31 00:00:00",
+  "gpu_quota": {
+    "time_used_seconds": 83940.699,
+    "time_reserved_seconds": 0.0,
+    "total_allowed_seconds": 108000.0,
+    "minimum_allowed_seconds": 108000.0,
+    "remaining_before_reserved_seconds": 24059.301000000007,
+    "remaining_after_reserved_seconds": 24059.301000000007,
+    "is_pay_to_scale_enabled": false,
+    "has_ever_run": true
+  },
+  "tpu_quota": {
+    "time_used_seconds": 0.0,
+    "time_reserved_seconds": 0.0,
+    "total_allowed_seconds": 72000.0,
+    "minimum_allowed_seconds": 72000.0,
+    "remaining_before_reserved_seconds": 72000.0,
+    "remaining_after_reserved_seconds": 72000.0,
+    "is_pay_to_scale_enabled": false,
+    "has_ever_run": false
+  },
+  "remote_mutation_performed": false
+}

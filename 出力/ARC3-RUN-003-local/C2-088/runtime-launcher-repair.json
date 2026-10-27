@@ -1,0 +1,10 @@
+{
+  "schema": "arc3-pinned-runtime-launcher-repair.v1",
+  "observed_at_utc": "2026-10-27T04:09:04.924694+00:00",
+  "cause": "UNKNOWN launcher disappeared while package tree and system Python remained",
+  "repair": "restore official CPython3.12 venv launcher only",
+  "created": true,
+  "launcher_sha256": "0b471133e110cfb53a061cad528ce8e517d7b9ac41a0a396c39ad795a487fc14",
+  "dependencies_or_lock_modified": false,
+  "credentials_accessed": false
+}
