@@ -1,0 +1,71 @@
+{
+  "schema": "arc3-action-cap-parent-gated-preflight.v1",
+  "run_id": "ARC3-RUN-003-C2-089-action-cap-v1-parent-v5-20261027T160910Z",
+  "prepared_at_utc": "2026-10-27T16:09:10Z",
+  "track": "ARC3",
+  "experiment": "C2-089 generic per-Python-call action cap v1",
+  "purpose": "Prepare a private matched diagnostic run against the exact sequential B-v3 package, gated on the v5 same-package parent reproduction becoming terminal and being scored.",
+  "git_head": "25472ccac07f9b3b1cea3aa504248c0fe8c46050",
+  "candidate": {
+    "kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+    "version_expected": 1,
+    "visibility": "private",
+    "notebook_sha256": "16cb7b2f291a0f964a7e4bec0df901594a07b09f473a8b6efba10344fa368df7",
+    "metadata_sha256": "9aff09ff942d321b87a913015435080a653ba45d43bbf0883462cf0daf63e17d",
+    "candidate_manifest_sha256": "c631c66524e966afc04558a6ffefa1509ae4bba9cba7d093f16c8329afa5a3b0",
+    "incremental_patch_sha256": "810dd3e53cfd47d9a43b4dbcd9378de1ac49642c2611bed83aecf5269f4afff3",
+    "parent_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "private_source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "scorecard_build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556",
+    "action_cap_per_python_call": 4,
+    "scope": "generic across games; no game/level ID branches; includes model-requested RESET actions",
+    "prior_local_validation": "Candidate manifest records Python compile and synthetic repeated-call, oversized-batch, and default-unset checks as PASS."
+  },
+  "matched_conditions": {
+    "games": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_per_game_max": 80,
+    "runtime_seconds_per_game_max": 1200,
+    "grace_seconds": 5,
+    "HDS_seconds_per_game_max": 120,
+    "shared_model_seed": 0,
+    "environment_seed": 0,
+    "input_dataset_versions": [
+      "dfranzen/pennyroyal-v253",
+      "dfranzen/taaf-kaggle-source-bundle-copy/1",
+      "arc-prize-2026-arc-agi-3"
+    ]
+  },
+  "parent_gate": {
+    "kernel_slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "exact_version": 5,
+    "status_at_preflight": "KernelWorkerStatus.RUNNING",
+    "same_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "required_before_candidate_push": [
+      "Version 5 reaches terminal status and exact /5 output is retrieved.",
+      "The same extended-outcome scorecard adapter used for v4 yields a complete scorecard.",
+      "Compare v4 and v5 on mean and per-game RHAE, levels, actions, terminal state, runtime, token use, and HDS counters.",
+      "Do not claim baseline reproducibility or candidate gain if the two parent runs are materially inconsistent or invalid."
+    ],
+    "v4_reference_mean_RHAE": 2.2063453421498442,
+    "v4_reference_levels_completed": 3,
+    "v4_reference_levels_total": 21,
+    "v4_reference_gameplay_valid": true,
+    "v4_reference_integration_valid": true
+  },
+  "official_submission_or_quota_use": false,
+  "official_quota_observation": {
+    "latest_existing_submission_id": 57688735,
+    "latest_existing_public_score": 28.07,
+    "current_utc_day_remaining_estimate": 0,
+    "no_submission_attempted": true
+  },
+  "status": "WAITING_FOR_PARENT_VERSION_5_REPRODUCTION; candidate not pushed",
+  "score_effect": "NOT MEASURED",
+  "limitations": [
+    "The action-cap treatment has no gameplay or score effect measured yet.",
+    "The trace counterfactual does not predict how model replanning will change after truncation.",
+    "An isolated private kernel diagnostic is not an official Competition Rerun."
+  ]
+}

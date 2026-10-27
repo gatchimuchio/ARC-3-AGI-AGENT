@@ -36,3 +36,9 @@ This resolves the earlier limitation that the candidate rationale grouped action
 Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-python-call-boundary-relevance-20261027T142642Z.json (SHA-256 d562a2f4f2c405be09d82ada69d24fb72181662d0255bb85630bddc5d5e0ca73); source trace SHA-256 08a41222b770c9bd284527dc3ff95acbd448a8446a5567bd02bfe98f51c4f413.
 
 The earlier preparation record's “45 actions after first four per analysis step” remains a per-step counterfactual, not a call-level measurement; do not use it as the exact expected treatment count. The direct trace now supports testing the generic action cap. However, C2-089 inherits B-v3's unsupported boundary-only outcome label, whose frozen comparator currently marks integration invalid. Before using a C2-089 run for accepted score comparison, repair and re-evaluate that compatibility and establish a sequential valid parent baseline. A private normal kernel run may be used for diagnosis only; no official Competition Rerun/quota, and no gain claim until the gates pass.
+
+## Parent-v5 reproduction gate — 2026-10-27T16:09:10Z
+
+B-v3 version 4 now has an exact COMPLETE output scored by the extended-outcome adapter with gameplay and integration validity true. The same-package version 5 reproduction is running. C2-089 remains unpushed until version 5 is retrieved, scored with that adapter, and compared to version 4 on the same public games and limits. The candidate package hashes still match its prepared manifest; the action-cap score effect remains unmeasured. Today's official quota is treated as exhausted based on the current CLI history and Kaggle Staff's one-per-day statement.
+
+Gate evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-parent-v5-preflight-20261027T160910Z.json.
