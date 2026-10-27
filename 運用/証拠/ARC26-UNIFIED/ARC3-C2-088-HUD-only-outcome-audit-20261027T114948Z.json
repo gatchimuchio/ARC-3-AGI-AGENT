@@ -1,0 +1,114 @@
+{
+  "track": "ARC3",
+  "run_id": "ARC3-RUN-003-C2-088-HUD-outcome-audit-20261027T114948Z",
+  "observed_at_utc": "2026-10-27T11:49:48Z",
+  "source_run": "tecchannn/arc3-v6-online-official-c2-088/1",
+  "source_run_type": "private normal offline pilot; cross-build relative to C2-087 A; not a causal matched score comparison",
+  "source_run_score_summary": {
+    "games": 3,
+    "wins": 0,
+    "levels_completed": 3,
+    "levels_total": 21,
+    "actions": 238,
+    "mean_score": 5.2734949824202575,
+    "native_hds_updates": 236,
+    "native_hds_queries": 3
+  },
+  "official_score": null,
+  "source_entry": "visual-hds-source.zip:検証/ARC3視覚HDS接続候補.py",
+  "source_entry_sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617",
+  "observed_outcome_source_logic": "Baseline outcome compares complete PublicFrame.board arrays; timer/HUD pixels in the outer margin are labeled 盤面変化.",
+  "existing_gameplay_change_rule": "The runtime already defines gameplay_changed by ignoring ARC3_NOOP_GUARD_BORDER cells (default 4); see inference/framework/solver.py and its prompt addendum.",
+  "recorded_public_transition_replay": [
+    {
+      "game": "sk48-d8078629",
+      "paired_rows": 77,
+      "original_rows": 77,
+      "old_classifier_matches_sidecar": 77,
+      "reclassified_edge_only": 1,
+      "changed_labels": 1,
+      "candidate_outcome_counts": {
+        "盤面変化": 72,
+        "可視変化なし": 3,
+        "レベル進行": 1,
+        "境界領域変化のみ": 1
+      },
+      "sidecar_sha256": "44d90b4a2e3a7d9c695e94bb0c212c720b2585f88827692641914f9024166cd8"
+    },
+    {
+      "game": "tn36-ef4dde99",
+      "paired_rows": 79,
+      "original_rows": 79,
+      "old_classifier_matches_sidecar": 79,
+      "reclassified_edge_only": 14,
+      "changed_labels": 14,
+      "candidate_outcome_counts": {
+        "境界領域変化のみ": 14,
+        "盤面変化": 64,
+        "GAME_OVER": 1
+      },
+      "sidecar_sha256": "cd194f89bfc6ab09e20ea81381badd3564f591cfdb031b7c44de58ae746448d5"
+    },
+    {
+      "game": "m0r0-492f87ba",
+      "paired_rows": 80,
+      "original_rows": 80,
+      "old_classifier_matches_sidecar": 80,
+      "reclassified_edge_only": 2,
+      "changed_labels": 2,
+      "candidate_outcome_counts": {
+        "盤面変化": 73,
+        "境界領域変化のみ": 2,
+        "可視変化なし": 3,
+        "レベル進行": 2
+      },
+      "sidecar_sha256": "470c5760c8d2e7b7b64c4973e42141aa0f17c32c7effa8447b296935932343ae"
+    }
+  ],
+  "total_public_response_rows": 236,
+  "original_classifier_matches_existing_sidecar_rows": 236,
+  "border_only_changes_labeled_as_gameplay_board_change": 17,
+  "reclassifications_by_game": {
+    "sk48-d8078629": 1,
+    "tn36-ef4dde99": 14,
+    "m0r0-492f87ba": 2
+  },
+  "candidate": {
+    "status": "prepared_local_not_uploaded",
+    "path": "出力/ARC3-RUN-003-local/C2-088/outcome-aware-HDS-update-B-v3",
+    "parent_kernel_version": "tecchannn/arc3-v6-online-official-c2-088/2",
+    "parent_kernel_status_observed_at_utc": "2026-10-27T11:49:48Z",
+    "parent_kernel_status": "KernelWorkerStatus.RUNNING",
+    "base_notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+    "candidate_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "candidate_manifest_sha256": "99632119024cea6da12b01f19d30dd0af798d2ffc2c1e9c562c3fafe44dd2330",
+    "source_preimage_sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617",
+    "source_postimage_sha256": "9acc1da775adbc327814e0df1850f167c953e63c16d3e21e31d05e7b1a4ca92f",
+    "changed_notebook_cells": [
+      6
+    ],
+    "all_other_cells_unchanged": true,
+    "kernel_metadata_unchanged": true,
+    "source_zip_unchanged": true,
+    "cell_6_compile": "PASS",
+    "classifier_cases": {
+      "unchanged": true,
+      "edge_only": true,
+      "interior": true,
+      "level_priority": true,
+      "game_over_priority": true,
+      "win_priority": true
+    },
+    "outcome_set_addition": "境界領域変化のみ",
+    "runtime_patch_method": "Hash-guarded replacement in extracted ARC3 visual-HDS source before framework import; archive/manifest remains unchanged."
+  },
+  "query_cadence_candidate": "Previously prepared query-cadence prompt candidate remains local and is deferred pending this outcome-label correction and the B-v2 scorecard.",
+  "limitations": [
+    "This proves an outcome-label mismatch and validates the correction on recorded public frames; it does not prove increased game score.",
+    "C2-088 version 2 matched B run was RUNNING at observation time; do not push a newer version over it.",
+    "The 4-cell boundary is the runtime’s existing gameplay_changed policy; border-localized legitimate game mechanics remain a semantic risk."
+  ],
+  "official_submission_or_rerun_performed": false,
+  "competition_quota_used": false,
+  "next": "Wait for exact C2-088/2 terminal output; score against matched C2-087 A; then consider one private normal run of this outcome-aware candidate."
+}
