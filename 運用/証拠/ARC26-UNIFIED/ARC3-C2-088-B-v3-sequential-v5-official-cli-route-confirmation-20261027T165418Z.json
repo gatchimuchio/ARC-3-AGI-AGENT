@@ -1,0 +1,36 @@
+{
+  "schema": "arc3-official-kernel-submit-cli-route-confirmation.v1",
+  "run_id": "ARC3-RUN-003-C2-088-B-v3-sequential-v5-official-cli-route-20261027T165418Z",
+  "confirmed_at_utc": "2026-10-27T16:54:18Z",
+  "track": "ARC3",
+  "cli": {
+    "version": "2.2.5",
+    "help_command": ".venv/Scripts/kaggle.exe competitions submit --help",
+    "confirmed_options": ["-k/--kernel", "-v/--version", "-m/--message", "--wait"],
+    "confirmed_usage": "kaggle competitions submit [competition] -k KERNEL -m MESSAGE [-v VERSION]"
+  },
+  "target": {
+    "competition": "arc-prize-2026-arc-agi-3",
+    "kernel_slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "exact_version": 5,
+    "kernel_status": "KernelWorkerStatus.COMPLETE",
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154"
+  },
+  "prepared_command_not_executed": ".venv/Scripts/kaggle.exe competitions submit arc-prize-2026-arc-agi-3 -k tecchannn/arc3-v6-online-official-c2-088 -v 5 -m \"ARC3-RUN-003 C2-088 B-v3 sequential v5 official\"",
+  "quota_check": {
+    "history_command": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 --format json --page-size 50",
+    "latest_submission_id": 57688735,
+    "latest_status": "SubmissionStatus.COMPLETE",
+    "latest_public_score": 28.07,
+    "latest_private_score": null,
+    "latest_submitted_at_utc": "2026-10-27T04:20:12.220000",
+    "submissions_on_current_utc_date": 1,
+    "daily_limit": 1,
+    "official_attempt_made": false,
+    "safe_recheck_at_or_after_utc": "2026-10-28T04:20:13Z",
+    "recheck_time_is_not_a_promised_reset": true
+  },
+  "score_effect": "NOT_MEASURED",
+  "next_action": "After the recheck time, refresh history. Execute the prepared exact-version CLI command only when the new day's official quota is available; then record the submission id and monitor its terminal score without duplication."
+}
