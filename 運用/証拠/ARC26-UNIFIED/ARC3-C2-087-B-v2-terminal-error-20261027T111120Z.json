@@ -1,0 +1,23 @@
+{
+  "observedAtUtc": "2026-10-27T11:11:20Z",
+  "kernel": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+  "version": 2,
+  "status": "KernelWorkerStatus.ERROR",
+  "statusCommand": "kaggle kernels status tecchannn/arc3-v6-learning-online-c2-087-r3/2",
+  "statusOutput": "tecchannn/arc3-v6-learning-online-c2-087-r3/2 has status \"KernelWorkerStatus.ERROR\"",
+  "outputLogPath": "出力/ARC3-RUN-003-local/C2-087/online-learning-r3-mount-retry-v2/remote-v2-output/arc3-v6-learning-online-c2-087-r3.log",
+  "outputLogSha256": "357f978e95bc5d206ff2ba2c03b3cbcb135723325fcc89b8248d31a035cb22e3",
+  "exactFailureEvidence": [
+    "cp: cannot stat '/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy': No such file or directory",
+    "FileNotFoundError: [Errno 2] No such file or directory: '/kaggle/taaf-kaggle-source-share/src'"
+  ],
+  "errorTimesSeconds": [
+    5.457659196,
+    5.801869056
+  ],
+  "score": null,
+  "gameplayStarted": false,
+  "competitionRerun": false,
+  "officialQuotaUsed": false,
+  "decision": "Stop retrying this kernel identity; the same mount failure occurred on versions 1 and 2."
+}

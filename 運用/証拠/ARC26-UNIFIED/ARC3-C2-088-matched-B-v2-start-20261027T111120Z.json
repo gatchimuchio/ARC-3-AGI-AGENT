@@ -1,0 +1,37 @@
+{
+  "observedAtUtc": "2026-10-27T11:10:53Z",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "version": 2,
+  "title": "arc3-v6-online-official-c2-088",
+  "status": "KernelWorkerStatus.RUNNING",
+  "pushCommand": "kaggle kernels push --path '出力/ARC3-RUN-003-local/C2-088/matched-online-learning-B-v2'",
+  "pushOutput": "Kernel version 2 successfully pushed. Please check progress at https://www.kaggle.com/code/tecchannn/arc3-v6-online-official-c2-088",
+  "statusCommand": "kaggle kernels status tecchannn/arc3-v6-online-official-c2-088/2",
+  "statusOutput": "tecchannn/arc3-v6-online-official-c2-088/2 has status \"KernelWorkerStatus.RUNNING\"",
+  "private": true,
+  "internetEnabled": false,
+  "datasetSources": [
+    "dfranzen/pennyroyal-v253",
+    "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "modelSources": [
+    "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+    "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "competitionRerun": false,
+  "officialSubmissionCreated": false,
+  "quotaUsed": false,
+  "aNotebookSha256": "f0b10932cf8cc688dbeb22e192cbaf3bba345649c59bd0ad7455390eda3a2646",
+  "bNotebookSha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "changedNotebookCells": [
+    6
+  ],
+  "treatment": "ARC3_HDS_GAME_RESPONSE_UPDATES disabled -> enabled",
+  "matchedConditions": "Same 26 ordered notebook cells except the single treatment flag; same dataset/model sources, GPU, no internet, seed 0, 3 public games, 80 actions/game, 1200 seconds/game.",
+  "remoteNotebookSha256": "eba673fe60b0bed8278ee68c333ab651d67e6c669d64c393d41c8ed01fdbb496",
+  "remoteCodeCellSourcesMatchLocalCandidate": true,
+  "remoteMetadataSha256": "42508a6173ad93c9de16daa205aa4ae6a978d44c75610e0249b042f67952bb3a",
+  "localBuildManifestSha256": "718461efc207520e87bb03b66a7ec01d5f854568b588591a65fab4945113b93d",
+  "priorMountEvidence": "C2-088 version 1 completed using the same declared taaf-kaggle-source-bundle-copy mount; C2-087 versions 1 and 2 both failed to mount it. Root cause remains unknown.",
+  "score": null
+}
