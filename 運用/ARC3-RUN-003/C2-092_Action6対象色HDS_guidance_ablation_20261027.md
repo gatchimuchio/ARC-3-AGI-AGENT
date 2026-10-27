@@ -35,3 +35,11 @@
 - 5/15組完了。baseline/candidateの累積RHAEは`1.190476190` / `1.190476190`、平均は`0.238095238` / `0.238095238`。5組すべて同点で、改善0・悪化0。
 - HDS update秒合計はbaseline `167.471` / candidate `245.515`。色照会 `106`、cache hit `1167`、prediction use `1247`、guided choices `179`。
 - 不変snapshot `運用/証拠/ARC26-UNIFIED/ARC3-C2-092-target-color-guidance-dev-progress-5pairs-20261027T064213Z.jsonl` SHA-256 `9f420ca5d00dcb3ed5b9d9e717dcafd55a7c18f02373f9ec13a56c6c180dd145`。live checkpointは引き続き更新中。
+
+
+## 15組評価の進捗更新（2026-10-27T06:57:49Z）
+
+- 10/15組完了。baseline/candidate累積RHAEは`1.925413022` / `1.925413022`、平均は`0.192541302` / `0.192541302`。10組すべて同点、改善0・悪化0。
+- seed別累積点（baseline/candidate）: `{"7":{"baseline":1.1904761904761905,"candidate":1.1904761904761905,"pairs":5},"31":{"baseline":0.7349368318756073,"candidate":0.7349368318756073,"pairs":5}}`。
+- HDS update秒合計はbaseline `304.015` / candidate `464.271`。対象色照会 `210`、cache hit `2291`、prediction use `2447`、guided choices `353`。
+- 不変snapshot `運用/証拠/ARC26-UNIFIED/ARC3-C2-092-target-color-guidance-dev-progress-10pairs-20261027T065749Z.jsonl` SHA-256 `9333d13317c23315b543e2618af78028f7ca6b02d832bf0eec209d1547398990`。live checkpointと残り5組評価は継続中。
