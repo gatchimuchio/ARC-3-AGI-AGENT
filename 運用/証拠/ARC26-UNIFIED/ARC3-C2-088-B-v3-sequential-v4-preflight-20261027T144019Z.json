@@ -1,0 +1,83 @@
+{
+  "schema": "arc3-private-kernel-rerun-preflight.v1",
+  "run_id": "ARC3-RUN-003-C2-088-B-v3-sequential-reproduction-v4-20261027T144019Z",
+  "prepared_at_utc": "2026-10-27T14:40:19Z",
+  "track": "ARC3",
+  "experiment": "C2-088 B-v3 sequential parent baseline reproduction",
+  "purpose": "Re-run the exact B-v3 package without a concurrent matched arm to check whether A/B overlap caused the prior online arm to exceed the gameplay runtime limit. This is a private normal kernel run, not a Competition Rerun.",
+  "git_head": "ce740eca36173afef181f92d8ab97a3e0a8c8762",
+  "learner_code_version": "HDS/学習系統/v0.4.2",
+  "memory_manifest_hash": null,
+  "memory_hash_status": "UNKNOWN; no standalone memory manifest is recorded in this package. The exact source bundle hash is recorded below.",
+  "kernel": {
+    "slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "current_status_before_push": "KernelWorkerStatus.COMPLETE",
+    "version_expected": 4,
+    "private": true,
+    "competition_rerun_allowed": false
+  },
+  "package": {
+    "path": "出力/ARC3-RUN-003-local/C2-088/outcome-aware-HDS-update-B-v3",
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "kernel_metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+    "candidate_manifest_sha256": "99632119024cea6da12b01f19d30dd0af798d2ffc2c1e9c562c3fafe44dd2330",
+    "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "scorecard_build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556"
+  },
+  "input_dataset_versions": [
+    "dfranzen/pennyroyal-v253",
+    "dfranzen/taaf-kaggle-source-bundle-copy/1",
+    "arc-prize-2026-arc-agi-3"
+  ],
+  "runtime_and_evaluation": {
+    "games_max": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_max_per_game": 80,
+    "runtime_seconds_max_per_game": 1200,
+    "runtime_grace_seconds": 5,
+    "HDS_seconds_budget_per_game": 120,
+    "shared_model_seed": 0,
+    "environment_seed": 0,
+    "previous_run_runtime_stamp": {
+      "python": "3.12.13",
+      "arc-agi": "0.9.8",
+      "arcengine": "0.9.3",
+      "new_run_stamp_must_be_retrieved": true
+    }
+  },
+  "command": [
+    ".venv/Scripts/kaggle.exe",
+    "kernels",
+    "push",
+    "--path",
+    "出力/ARC3-RUN-003-local/C2-088/outcome-aware-HDS-update-B-v3"
+  ],
+  "concurrency_check": {
+    "observed_at_utc": "2026-10-27T14:38Z",
+    "arc3_v6_private_kernel_statuses": {
+      "tecchannn/arc3-v6-boundary-prior-only-c2-088": "KernelWorkerStatus.COMPLETE",
+      "tecchannn/arc3-v6-online-official-c2-088": "KernelWorkerStatus.COMPLETE",
+      "tecchannn/arc3-v6-learning-online-c2-087-r3": "KernelWorkerStatus.ERROR",
+      "tecchannn/arc3-v6-learning-prior-only-c2-087-r3": "KernelWorkerStatus.COMPLETE",
+      "tecchannn/arc3-v6-python-hds-shown-c2-081-r2": "KernelWorkerStatus.COMPLETE",
+      "tecchannn/arc3-visual-hds-v6-shadow-pilot": "KernelWorkerStatus.COMPLETE",
+      "tecchannn/arc3-visual-hds-v6-off-pilot": "KernelWorkerStatus.COMPLETE"
+    },
+    "active_arc3_v6_kernel_seen": false
+  },
+  "previous_B_v3_observation": {
+    "online_mean_RHAE": 3.204297592052694,
+    "max_game_elapsed_seconds": 1210.3266942159999,
+    "gameplay_valid": false,
+    "integration_valid_after_schema_adapter": true,
+    "A_B_overlap_confound": true
+  },
+  "official_submission_or_quota_use": false,
+  "limitations": [
+    "The previous A-v3/B-v3 run overlapped; this reproduction removes that known concurrency confound but does not alone prove a learning effect.",
+    "The standalone memory manifest hash is UNKNOWN and must not be inferred from the source bundle hash.",
+    "An online package runtime stamp and exact output are required before scoring this run."
+  ],
+  "status": "PREFLIGHT_COMPLETE; not yet pushed"
+}
