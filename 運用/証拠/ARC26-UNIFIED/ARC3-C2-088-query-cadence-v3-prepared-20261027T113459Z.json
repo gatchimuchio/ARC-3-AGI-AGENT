@@ -1,0 +1,47 @@
+{
+  "track": "ARC3",
+  "run_id": "ARC3-RUN-003-C2-088-query-cadence-v3-20261027T113459Z",
+  "recorded_at_utc": "2026-10-27T11:34:59Z",
+  "status": "prepared_local_not_uploaded",
+  "parent_kernel_version": "tecchannn/arc3-v6-online-official-c2-088/2",
+  "parent_kernel_status_observed_at_utc": "2026-10-27T11:31:37Z",
+  "parent_kernel_status": "KernelWorkerStatus.RUNNING",
+  "concurrent_kernel": "tecchannn/arc3-model-guided-c2-025/29",
+  "concurrent_kernel_status_observed_at_utc": "2026-10-27T11:31:37Z",
+  "concurrent_kernel_status": "KernelWorkerStatus.RUNNING",
+  "gpu_quota_observed_at_utc": "2026-10-27T11:31:37Z",
+  "gpu_quota_remaining_hours": 3.75,
+  "base_notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "candidate_notebook_sha256": "f48ee82449179ef0786cc41fb983552fba6d814c79506d167bdc810fce8a64f9",
+  "base_tool_agent_sha256_after_parent_patches": "ff3ee9207b96941d875b3c236590d4cff399aa0fb2e890fa7d46ca27b3528f77",
+  "candidate_tool_agent_sha256": "c734bcd1a9af04438b3a769f6d0eea723047c7c617c18564cbfb8e5049b5daad",
+  "candidate_path": "出力/ARC3-RUN-003-local/C2-088/query-cadence-online-B-v3",
+  "changed_notebook_cell_indices": [
+    6
+  ],
+  "other_cells_unchanged": true,
+  "metadata_byte_identical": true,
+  "source_bundle_byte_identical": true,
+  "cell_6_compile": "PASS",
+  "intervention_type": "prompt-only; optional evidence query scheduling; no action authorization",
+  "replacement_pairs": [
+    [
+      "hds_query(candidate) for optional UNCERTAIN native evidence, ",
+      "hds_query(candidate) for scheduled UNCERTAIN native evidence, "
+    ],
+    [
+      "After new observed responses alter your visual hypothesis, consider a fresh optional hds_query for one legal candidate rather than treating an early HOLD or empty packet as conclusive.",
+      "Schedule one optional hds_query at the next decision opportunity after a visible level transition. Also schedule one after each eight consecutive public action calls since the previous query or level transition if no visible level progress occurred in that interval; issue it only once per interval. This is an evidence check, not action authorization. Do not query the same candidate again at an unchanged state; at most two distinct candidates are supported for one state. Skip the query if no legal candidate exists or if the remaining action budget requires the planned legal move. Continue independent legal exploration on HOLD, missing evidence, or query-budget exhaustion."
+    ]
+  ],
+  "measurement_rationale": "C2-088 version 1 telemetry recorded 236 native HDS updates but only 3 HDS queries across the offline pilot. This is an exposure gap observation, not causal evidence that query cadence improves score.",
+  "limitations": [
+    "Model may not reliably follow cadence instructions; measure actual query counts and action outcomes.",
+    "No local score or learning gain measured for this candidate.",
+    "C2-088 version 2 direct matched A/B is still RUNNING; do not upload version 3 until version 2 is terminal and scored."
+  ],
+  "official_submission_or_rerun_performed": false,
+  "competition_quota_used": false,
+  "official_score": null,
+  "next": "Wait for exact C2-088/2 terminal output, score it against the matched C2-087 A arm, then decide whether to upload this candidate as the next private normal-run version."
+}
