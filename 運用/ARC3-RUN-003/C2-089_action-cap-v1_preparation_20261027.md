@@ -82,3 +82,9 @@ The first 80 transitions per game were compared on the same three public startin
 The excess-action count is not a score prediction: cap4 would return to observation sooner and change later model outputs. v13 also contains 66 over-cap actions, so these data justify only a bounded diagnostic, not promotion. Keep the prepared C2-089 cap4 candidate blocked until Kaggle weekly GPU quota permits a private run; do not retry the rejected push before then. Compare per game against both v4 and v5, and repeat before claiming a gain.
 
 Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-v5-analysis-batch-cap4-parent-audit-20261027T171656Z.json (SHA-256 b21635862a94a489146330b0bb8f694041372c85d3991859a0f5fc14c4c9ab70).
+
+## Tail-action outcome check — 2026-10-27T17:20:59Z
+
+Within action-batches longer than four, neither v5 nor v13 had a visible no-change action in the first four actions. In the remaining tails, v5 had 10 visible no-change actions and one level transition; v13 had one no-change action and two level transitions. This strengthens the rationale to test earlier observation on v5, but also shows cap4 may interrupt successful action sequences on v13. It remains an experiment, not a score claim.
+
+Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-v5-cap4-tail-outcome-audit-20261027T172059Z.json (SHA-256 313d1a437edd7ad85072cf3b124aade449c7a15dae5e8275e7b3c4208123570a).

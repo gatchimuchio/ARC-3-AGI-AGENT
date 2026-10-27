@@ -1,0 +1,130 @@
+{
+  "evidence_id": "ARC3-C2-088-v5-cap4-tail-outcome-audit-20261027T172059Z",
+  "observed_at_utc": "2026-10-27T17:20:59Z",
+  "comparison": "For action-bearing analysis_step groups longer than four within each matched 80-action public-play prefix.",
+  "method": {
+    "batch": "analysis_step is the recorded action grouping used by the C2-089 cap4 preflight. Tail means actions after the first four in each group.",
+    "visible_nochange": "Post-action public board equals the immediately preceding public board.",
+    "limitations": [
+      "These are single stochastic local traces.",
+      "A cap4-triggered observation can change later model outputs; tail counts do not predict score or actions saved.",
+      "The official-best v13 itself has two level transitions after its first four actions in long groups; a cap can affect successful decisions as well as no-op tail actions."
+    ]
+  },
+  "inputs": {
+    "v13_sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/sk48-d8078629_p0_events.jsonl",
+      "sha256": "261bbf454b94a0058770a7bcaf37ab13ad65be2e6c5d787e840af2e5c4071021"
+    },
+    "v13_tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "sha256": "966c9d03ef3fb61758c8936be5a3d73ca0e9066c2ffe0966a5a87da34f9f410f"
+    },
+    "v13_m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-046/kaggle-output/slim/artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "sha256": "1f1569bad11346caa3b43f8634551374ab7e246b6c9733ef5bfac2cabd3e481f"
+    },
+    "v5_sk48-d8078629": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/sk48-d8078629_p0_events.jsonl",
+      "sha256": "63bf66f574aec7ceca65230724eda7d4d1f8289388a4cb4c3defe22c9efa6336"
+    },
+    "v5_tn36-ef4dde99": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/tn36-ef4dde99_p0_events.jsonl",
+      "sha256": "85e98edea9a56485bbb2f096d874e6dab41265c39779686feb889db12a4db55f"
+    },
+    "v5_m0r0-492f87ba": {
+      "path": "出力/ARC3-RUN-003-local/C2-088/B-v3-sequential-exact-output-version5-20261027T161329Z/artifacts/m0r0-492f87ba_p0_events.jsonl",
+      "sha256": "2e6c3d4ec4869a98dd5c731e417ade966e4cee098e9f3577573557716c2f3d58"
+    }
+  },
+  "initial_board_hashes": {
+    "sk48-d8078629": {
+      "v13": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+      "v5": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2"
+    },
+    "tn36-ef4dde99": {
+      "v13": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "v5": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b"
+    },
+    "m0r0-492f87ba": {
+      "v13": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+      "v5": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9"
+    }
+  },
+  "results": {
+    "v13": {
+      "long_batches": 10,
+      "tail_actions_after_first_four": 66,
+      "long_batches_with_visible_nochange_in_first_four": 0,
+      "visible_nochange_actions_in_tail": 1,
+      "level_transitions_in_tail": 2,
+      "score_transitions_in_tail": 2,
+      "by_game": {
+        "sk48-d8078629": {
+          "long_batches": 3,
+          "tail_actions_after_first_four": 8,
+          "long_batches_with_visible_nochange_in_first_four": 0,
+          "visible_nochange_actions_in_tail": 0,
+          "level_transitions_in_tail": 0,
+          "score_transitions_in_tail": 0
+        },
+        "tn36-ef4dde99": {
+          "long_batches": 3,
+          "tail_actions_after_first_four": 12,
+          "long_batches_with_visible_nochange_in_first_four": 0,
+          "visible_nochange_actions_in_tail": 0,
+          "level_transitions_in_tail": 1,
+          "score_transitions_in_tail": 1
+        },
+        "m0r0-492f87ba": {
+          "long_batches": 4,
+          "tail_actions_after_first_four": 46,
+          "long_batches_with_visible_nochange_in_first_four": 0,
+          "visible_nochange_actions_in_tail": 1,
+          "level_transitions_in_tail": 1,
+          "score_transitions_in_tail": 1
+        }
+      }
+    },
+    "v5": {
+      "long_batches": 17,
+      "tail_actions_after_first_four": 92,
+      "long_batches_with_visible_nochange_in_first_four": 0,
+      "visible_nochange_actions_in_tail": 10,
+      "level_transitions_in_tail": 1,
+      "score_transitions_in_tail": 1,
+      "by_game": {
+        "sk48-d8078629": {
+          "long_batches": 5,
+          "tail_actions_after_first_four": 38,
+          "long_batches_with_visible_nochange_in_first_four": 0,
+          "visible_nochange_actions_in_tail": 8,
+          "level_transitions_in_tail": 0,
+          "score_transitions_in_tail": 0
+        },
+        "tn36-ef4dde99": {
+          "long_batches": 7,
+          "tail_actions_after_first_four": 11,
+          "long_batches_with_visible_nochange_in_first_four": 0,
+          "visible_nochange_actions_in_tail": 0,
+          "level_transitions_in_tail": 1,
+          "score_transitions_in_tail": 1
+        },
+        "m0r0-492f87ba": {
+          "long_batches": 5,
+          "tail_actions_after_first_four": 43,
+          "long_batches_with_visible_nochange_in_first_four": 0,
+          "visible_nochange_actions_in_tail": 2,
+          "level_transitions_in_tail": 0,
+          "score_transitions_in_tail": 0
+        }
+      }
+    }
+  },
+  "interpretation": "No long batch in either candidate had a visible no-change action among its first four. C2-088 v5 had 10 no-change actions in long-batch tails versus 1 for v13, but v13 also had two level transitions in tails versus one for v5. The cap4 candidate is therefore a feedback-timing diagnostic, not an established score fix.",
+  "official_reference": {
+    "submission_id": 57688735,
+    "public_score": 28.07,
+    "status": "COMPLETE"
+  }
+}
