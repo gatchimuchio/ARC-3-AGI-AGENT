@@ -140,3 +140,12 @@ Two earlier ad hoc harness attempts failed in fixture setup (one omitted _repeat
 This is a synthetic runtime-boundary PASS only. No game engine, public evaluation, private Kaggle kernel, or official Competition Rerun was run; score effect remains NOT MEASURED. At 2026-10-27T17:54:02Z, official submission 57688735 remained COMPLETE at public 28.07 (private blank), C2-088 v5 kernel was COMPLETE, and C2-089 still had no Kaggle version. No quota was used.
 
 Reproducible command: .venv/Scripts/python.exe 検証/ARC3-RUN-003/C2-089-cap12-synthetic-boundary.py. Test runner SHA-256: f7c673c8d2db6d72120d916d93cf774366edc870b3a814f0037beaa794b70b55. Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-synthetic-boundary-20261027T180021Z.json (SHA-256 0541493f41b07b7ef63bdd337058251abd615d47187598994ff139712dabcb9e).
+
+
+## Parent v5 exact no-op repeat opportunities — 2026-10-27T18:07:39Z
+
+The exact C2-088 v5 Notebook (parent SHA-256 8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf) sets ARC3_GUARDS_FROM_LEVEL=2 and ARC3_BATCH_NOOP_BLOCK=1, while ARC3_NOOP_REPEAT_GUARD is unset (runtime default false). The v5 action traces show the first exact full-frame state/action repeat after an unchanged public board at action 4 (UP, level 1) in m0r0, and action 32 (LEFT, level 1) in sk48. All 80 sk48 action events have batch_size=1, so the batch-only no-op stop does not catch these singleton repeats. C2-088 v5 scored 0.00/8 levels on sk48 in this local three-game run; this is not an official score.
+
+The proposed next diagnostic is the existing generic NoopRepeatGuard enabled from level 1 (ARC3_NOOP_REPEAT_GUARD=1, ARC3_GUARDS_FROM_LEVEL=1). The first repeat would force a fresh model turn; its immediate insist-and-execute override remains available. The trace cannot predict the model's next response, later actions, or score. No gain is claimed and no notebook setting has been changed.
+
+Reproducible command: .venv/Scripts/python.exe 検証/ARC3-RUN-003/C2-088-noop-guard-opportunity.py. Runner SHA-256: 398821a36c01fb470d03e3a224ad2cd788eadbab53ee03c674c67db45b9a1f68. Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-v5-noop-guard-opportunity-20261027T180739Z.json (SHA-256 b77b149d0565a2f3209b01e5bc1e16461fe6cd798ecbfc4e9d28d047c6514d7c). No Kaggle run or quota was used.

@@ -1,0 +1,148 @@
+{
+  "evidence_id": "ARC3-C2-089-v5-noop-guard-opportunity-20261027T180739Z",
+  "observed_at_utc": "2026-10-27T18:07:39Z",
+  "track": "ARC3",
+  "analysis_type": "retrospective public trace; first-divergence-only exact no-op guard audit",
+  "candidate_kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+  "parent_kernel_version": "tecchannn/arc3-v6-online-official-c2-088/5",
+  "candidate_notebook_sha256": "88b619063c485f5c46163d64df86d83c542ebe1559d05c53ef669a625099586e",
+  "parent_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+  "parent_notebook_guard_settings": {
+    "ARC3_GUARDS_FROM_LEVEL": 2,
+    "ARC3_BATCH_NOOP_BLOCK": "1",
+    "ARC3_NOOP_REPEAT_GUARD": "unset; runtime default false",
+    "ARC3_STATE_IDENTITY_BORDER": "unset; runtime default 0/full frame"
+  },
+  "trace_analysis_runner": "検証\\ARC3-RUN-003\\C2-088-noop-guard-opportunity.py",
+  "trace_analysis_runner_sha256": "398821a36c01fb470d03e3a224ad2cd788eadbab53ee03c674c67db45b9a1f68",
+  "trace_analysis_command": ".venv/Scripts/python.exe 検証/ARC3-RUN-003/C2-088-noop-guard-opportunity.py",
+  "analysis": {
+    "schema": "arc3-exact-noop-guard-opportunity.v1",
+    "candidate_notebook_sha256": "88b619063c485f5c46163d64df86d83c542ebe1559d05c53ef669a625099586e",
+    "candidate_guard_configuration": {
+      "ARC3_NOOP_REPEAT_GUARD": "unset; runtime default false",
+      "ARC3_GUARDS_FROM_LEVEL": 2,
+      "ARC3_STATE_IDENTITY_BORDER": "unset; runtime default 0/full frame"
+    },
+    "analysis": "Count only the first exact full-frame state/action repeat after a public board, score, level, and state no-change. Stop each trace at that first counterfactual divergence.",
+    "traces": {
+      "v4": {
+        "m0r0-492f87ba": {
+          "trace_path": "出力\\ARC3-RUN-003-local\\C2-088\\B-v3-sequential-exact-output-version4-20261027T151952Z\\artifacts\\m0r0-492f87ba_p0_events.jsonl",
+          "trace_sha256": "aeb540d4db0c513ffea18bbf3fa1818dec5698d3722f32dfa5e8cb9df5e4936b",
+          "action_events": 80,
+          "batch_size_counts": {
+            "1": 80
+          },
+          "exact_same_public_outcome_actions": 1,
+          "first_potential_guard_interception": null
+        },
+        "sk48-d8078629": {
+          "trace_path": "出力\\ARC3-RUN-003-local\\C2-088\\B-v3-sequential-exact-output-version4-20261027T151952Z\\artifacts\\sk48-d8078629_p0_events.jsonl",
+          "trace_sha256": "5d3ffe06cb2b5e762549bf6eb737c19674bc03496dcba410bdbe03a6d8342241",
+          "action_events": 80,
+          "batch_size_counts": {
+            "1": 80
+          },
+          "exact_same_public_outcome_actions": 0,
+          "first_potential_guard_interception": null
+        },
+        "tn36-ef4dde99": {
+          "trace_path": "出力\\ARC3-RUN-003-local\\C2-088\\B-v3-sequential-exact-output-version4-20261027T151952Z\\artifacts\\tn36-ef4dde99_p0_events.jsonl",
+          "trace_sha256": "123eb1b66a64c4efa7bd4f20461532b6716c2131d66250f88ceae313d3d7f588",
+          "action_events": 80,
+          "batch_size_counts": {
+            "1": 80
+          },
+          "exact_same_public_outcome_actions": 0,
+          "first_potential_guard_interception": null
+        }
+      },
+      "v5": {
+        "m0r0-492f87ba": {
+          "trace_path": "出力\\ARC3-RUN-003-local\\C2-088\\B-v3-sequential-exact-output-version5-20261027T161329Z\\artifacts\\m0r0-492f87ba_p0_events.jsonl",
+          "trace_sha256": "2e6c3d4ec4869a98dd5c731e417ade966e4cee098e9f3577573557716c2f3d58",
+          "action_events": 80,
+          "batch_size_counts": {
+            "1": 80
+          },
+          "exact_same_public_outcome_actions": 1,
+          "first_potential_guard_interception": {
+            "action_num": 4,
+            "analysis_step": 2,
+            "level": 1,
+            "action": "UP",
+            "prior_noop_state_hash": "83a39a1aa023014a18e633136b84f7275310ac9bf93b488c85afb000218d7103",
+            "counterfactual": "would refuse once and force a fresh model turn; subsequent model response is unknown"
+          }
+        },
+        "sk48-d8078629": {
+          "trace_path": "出力\\ARC3-RUN-003-local\\C2-088\\B-v3-sequential-exact-output-version5-20261027T161329Z\\artifacts\\sk48-d8078629_p0_events.jsonl",
+          "trace_sha256": "63bf66f574aec7ceca65230724eda7d4d1f8289388a4cb4c3defe22c9efa6336",
+          "action_events": 80,
+          "batch_size_counts": {
+            "1": 80
+          },
+          "exact_same_public_outcome_actions": 3,
+          "first_potential_guard_interception": {
+            "action_num": 32,
+            "analysis_step": 7,
+            "level": 1,
+            "action": "LEFT",
+            "prior_noop_state_hash": "e4b2c447ca98b1fe8d3083774d76b22b72a4fb3b9d0b19180fbbcbb43f097fa8",
+            "counterfactual": "would refuse once and force a fresh model turn; subsequent model response is unknown"
+          }
+        },
+        "tn36-ef4dde99": {
+          "trace_path": "出力\\ARC3-RUN-003-local\\C2-088\\B-v3-sequential-exact-output-version5-20261027T161329Z\\artifacts\\tn36-ef4dde99_p0_events.jsonl",
+          "trace_sha256": "85e98edea9a56485bbb2f096d874e6dab41265c39779686feb889db12a4db55f",
+          "action_events": 80,
+          "batch_size_counts": {
+            "1": 39,
+            "2": 4,
+            "3": 12,
+            "5": 25
+          },
+          "exact_same_public_outcome_actions": 0,
+          "first_potential_guard_interception": null
+        }
+      }
+    },
+    "limitations": [
+      "This is a retrospective public-trace analysis, not a rerun",
+      "A guard refusal changes the next model context; later actions and scores are unknown",
+      "No score improvement is inferred"
+    ]
+  },
+  "observed_v5_local_scores": {
+    "m0r0-492f87ba": {
+      "score": 14.29,
+      "levels_completed": "2/6"
+    },
+    "sk48-d8078629": {
+      "score": 0.0,
+      "levels_completed": "0/8"
+    },
+    "tn36-ef4dde99": {
+      "score": 3.57,
+      "levels_completed": "1/7"
+    },
+    "overall_public_offline_RHAE_mean": 5.952380952380952
+  },
+  "interpretation": {
+    "finding": "The first exact full-frame state/action repeat after a no-change occurred at action 4 (UP, level 1) in m0r0 and action 32 (LEFT, level 1) in sk48; all 80 sk48 action events had batch_size 1, so ARC3_BATCH_NOOP_BLOCK does not catch these singleton repeats.",
+    "proposed_next_diagnostic": "Test the existing generic NoopRepeatGuard with ARC3_NOOP_REPEAT_GUARD=1 and ARC3_GUARDS_FROM_LEVEL=1; this would force a fresh model turn at the first repeated known-noop, while retaining its immediate insist-and-execute override.",
+    "score_effect": "NOT_MEASURED",
+    "no_score_claim": true
+  },
+  "limitations": [
+    "A guard refusal changes the model context; all later actions and score are unknown.",
+    "The analysis does not infer a score improvement or justify a public/official result.",
+    "No game rerun, private kernel push/run, or official Competition Rerun occurred."
+  ],
+  "quota_use": {
+    "private_kernel_push_or_run": false,
+    "official_submission_or_rerun": false
+  },
+  "git_head_before_evidence": "b943d01e4660d4bd5f5e5750c4b55c3cb9eb01c6"
+}
