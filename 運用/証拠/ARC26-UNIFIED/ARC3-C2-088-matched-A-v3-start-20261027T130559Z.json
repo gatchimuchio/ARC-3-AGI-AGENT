@@ -1,0 +1,36 @@
+{
+  "schema": "arc3-c2-088-private-kernel-start.v1",
+  "observed_at_utc": "2026-10-27T13:05:59Z",
+  "run_id": "ARC3-RUN-003/C2-088-matched-A-v3",
+  "track": "ARC3",
+  "kernel": "tecchannn/arc3-v6-boundary-prior-only-c2-088/1",
+  "kernel_version": 1,
+  "kernel_status": "KernelWorkerStatus.RUNNING",
+  "push_command": "kaggle kernels push --path 出力/ARC3-RUN-003-local/C2-088/A-v3-control-run-package",
+  "push_exit_code": 0,
+  "push_receipt": "Kernel version 1 successfully pushed.",
+  "git_commit_at_launch": "97242c65afdd69512a6283e4c7fbcacd9b1ff262",
+  "candidate_notebook_sha256": "0c63ed69483cb3657eb79d984eab94f0933c66baac11e457d2868f8a55e88c77",
+  "candidate_metadata_sha256": "7715d561650c2e92c342b37501cba771e50330c7119e976acb843610c8f384a3",
+  "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "candidate_manifest_sha256": "e036e3bc889d93d0ded9d1d2b629d690f308cb7c2c15962aac20e14427bb962a",
+  "scorecard_build_manifest_sha256": "2882a77630aee7dce684f5de46b52b21053170f9ddfcd30da33de413e7708d52",
+  "paired_B": {
+    "kernel": "tecchannn/arc3-v6-online-official-c2-088/3",
+    "status": "KernelWorkerStatus.RUNNING",
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "scorecard_build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556"
+  },
+  "paired_contract": "PASS",
+  "treatment": "same experiment configuration as B-v3; ARC3_HDS_GAME_RESPONSE_UPDATES disabled in A and enabled in B",
+  "matched_conditions": {
+    "same_game_set_seed_budgets_prompts_model_runtime_source_bundle": true,
+    "actions_per_game": 80,
+    "seconds_per_game": 1200,
+    "seed": 0
+  },
+  "private_kernel": true,
+  "competition_rerun_launched": false,
+  "official_submission_or_quota_use": false,
+  "score": "NOT RUN; wait for exact terminal outputs from A-v3 and B-v3"
+}
