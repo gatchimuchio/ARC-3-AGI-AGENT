@@ -1,0 +1,106 @@
+{
+  "schema": "arc3-c2-098-action-path-and-official-safe-preflight.v1",
+  "run_id": "ARC3-RUN-003-C2-098",
+  "observed_at_utc": "2026-10-27T18:45:46Z",
+  "source_revision": "8766935ff44cd9a2dbe34e86ce250a340294fe07",
+  "exact_kernel_candidate": {
+    "slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "version": 5,
+    "status": "COMPLETE private run; no Competition Rerun performed",
+    "notebook_path": "出力/ARC3-RUN-003-local/C2-088/C2-088-B-v3-run-package/submission.ipynb",
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "preflight_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+    "visual_hds_source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525"
+  },
+  "action_path_audit": {
+    "notebook_true_submission_detection": {
+      "cell_index": 5,
+      "source": "TRUE_SUBMISSION = os.environ.get(\"KAGGLE_IS_COMPETITION_RERUN\", \"\").strip().lower() in {\"1\", \"true\"}"
+    },
+    "fatal_competition_rerun_guard": {
+      "cell_index": 6,
+      "line_indices_1_based": [4, 5],
+      "source": "if TRUE_SUBMISSION: raise RuntimeError(\"C2-078 is an offline pilot; competition rerun is not enabled.\")",
+      "finding": "The exact C2-088 v5 notebook exits when its own competition-rerun flag is true. This is a source-level blocker; no official rerun was attempted."
+    },
+    "automatic_hds_observer": {
+      "mode": "shadow",
+      "validated_modes": ["off", "shadow"],
+      "automatic_hint_support": false,
+      "model_context_modified": false,
+      "action_authorization": false,
+      "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525"
+    },
+    "optional_model_hds_query": {
+      "available": true,
+      "model_may_choose_not_to_call": true,
+      "exact_v5_queries": 2,
+      "query_steps": {
+        "sk48-d8078629": [1],
+        "tn36-ef4dde99": [0],
+        "m0r0-492f87ba": []
+      },
+      "predictions_at_these_queries": 0,
+      "active_target_rules_at_these_queries": 0,
+      "source_evidence": "C2-095 exact v4/v5 query maturity audit"
+    },
+    "manual_prequential_result_is_not_agent_guidance": {
+      "source_evidence": "C2-097 exact public-transition prequential ablation",
+      "queries": 239,
+      "raw_forecasts": 47,
+      "correct_raw_forecasts": 43,
+      "action6_raw_forecasts": 15,
+      "action6_correct_raw_forecasts": 14,
+      "model_action_choices_replayed": false,
+      "official_or_game_score_effect": "NOT_MEASURED"
+    },
+    "diagnosis": "The C2-088 v5 score path used a shadow observer and only two early optional HDS queries, both without target forecasts. The 47/239 prequential predictions came from a separate manual local query/update replay and did not influence v5 model actions. HDS action guidance therefore remains unproven in the official candidate."
+  },
+  "corrected_local_candidate": {
+    "preparation_script": "検証/ARC3-C2-098-prepare-official-safe-candidate.py",
+    "preparation_script_sha256": "0ed03deb9f43bd80120bc7f003d2c652f80489685ce64594c40977dee0ebb5b",
+    "candidate_dir": "出力/ARC3-RUN-003-local/C2-098/official-safe-v1",
+    "candidate_notebook_sha256": "03e11a517590a9ab9c3617dcdc0f38fad85514e64e6bac25249111097e5c42d3",
+    "candidate_metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+    "candidate_visual_hds_source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "change": "Removed the two-line fatal guard from notebook cell 6; no other parsed notebook content changed.",
+    "static_preflight": {
+      "source_hash_matches_exact_v5": true,
+      "changed_cell_index": 6,
+      "only_guard_changed": true,
+      "cell_6_compiles": true,
+      "true_submission_detection_preserved": true,
+      "hds_mode_remains_shadow": true
+    },
+    "kernel_push_or_run": false,
+    "official_submission": false,
+    "score_effect": "NOT_MEASURED"
+  },
+  "quota": {
+    "latest_daily_observation": "2026-10-27T18:20:15Z",
+    "utc_date": "2026-10-27",
+    "daily_limit": 1,
+    "submissions_observed_today": 1,
+    "daily_slot_available": false,
+    "previous_private_gpu_quota_error": "Maximum weekly GPU quota of 30.00 hours reached",
+    "fresh_private_gpu_quota_available_evidence": false,
+    "reset_time_known": false
+  },
+  "decision": "DO_NOT_SUBMIT_EXACT_C2-088_V5; WAIT_FOR_FRESH_PRIVATE_GPU_QUOTA_TO_CREATE_AND_RUN_CORRECTED_VERSION",
+  "controls": {
+    "official_submission_or_rerun": false,
+    "kernel_push_or_edit": false,
+    "private_gpu_quota_consumed": false,
+    "daily_submission_quota_consumed": false,
+    "hidden_state_used": false,
+    "game_id_answer_branching": false,
+    "protected_files_modified": false
+  },
+  "limitations": [
+    "competition-rerun failure is inferred from the exact notebook source guard; no failing official run was executed",
+    "the corrected notebook passed only static source and cell compilation checks",
+    "corrected candidate still uses HDS shadow mode and has no measured action or official-score effect",
+    "weekly GPU quota reset time is unknown"
+  ]
+}
