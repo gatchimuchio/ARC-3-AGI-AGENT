@@ -1,0 +1,19 @@
+{
+  "run_id": "ARC3-RUN-003-C2-088-boundary-aware-v3-20261027T122154Z",
+  "event": "private normal Kaggle run launched",
+  "observed_at_utc": "2026-10-27T12:26:27.169460+00:00",
+  "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "kernel_version": 3,
+  "kernel_status": "KernelWorkerStatus.RUNNING",
+  "push_result": "Kernel version 3 successfully pushed",
+  "command": "kaggle kernels push --path 出力/ARC3-RUN-003-local/C2-088/C2-088-B-v3-run-package",
+  "competition_rerun": false,
+  "official_submission_created": false,
+  "official_quota_used_by_this_event": false,
+  "candidate_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+  "source_bundle_sha256_private_runtime_only": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "preflight_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-preflight-20261027T122154Z.json",
+  "preflight_evidence_sha256": "fe27fb1c5f522711a0f30abee981d1574077afe0df44d424b18c1a8de62a09c6",
+  "git_head_at_launch": "1b613d59830244f618870c89e6e0d08db5552ea0",
+  "next": "Wait for version 3 terminal status; when COMPLETE retrieve exact output and run frozen paired scorecard against C2-088 B-v2 and prior-only A. Do not submit official until a scored candidate is selected and daily quota is available."
+}

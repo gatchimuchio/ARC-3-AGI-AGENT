@@ -1,0 +1,97 @@
+{
+  "run_id": "ARC3-RUN-003-C2-088-boundary-aware-v3-20261027T122154Z",
+  "prepared_at_utc": "2026-10-27T12:21:54.096776+00:00",
+  "track": "ARC3",
+  "git_head": "1b613d59830244f618870c89e6e0d08db5552ea0",
+  "experiment_id": "ARC3-RUN-003/C2-088-boundary-aware-HDS-outcome-v3",
+  "parent_kernel": "tecchannn/arc3-v6-online-official-c2-088/2",
+  "candidate_kernel": "tecchannn/arc3-v6-online-official-c2-088",
+  "candidate_version_expected": 3,
+  "candidate_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+  "base_notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+  "candidate_manifest_sha256": "99632119024cea6da12b01f19d30dd0af798d2ffc2c1e9c562c3fafe44dd2330",
+  "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+  "runtime_source_preimage_sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617",
+  "runtime_source_postimage_sha256": "9acc1da775adbc327814e0df1850f167c953e63c16d3e21e31d05e7b1a4ca92f",
+  "changed_notebook_cell_indices": [
+    6
+  ],
+  "notebook_metadata_equal": true,
+  "source_bundle_unchanged": true,
+  "runtime_source_patch_replacements": 3,
+  "runtime_source_compiles": true,
+  "classifier_checks": {
+    "unchanged": true,
+    "edge_only": true,
+    "interior": true,
+    "level_priority": true,
+    "game_over_priority": true,
+    "win_priority": true
+  },
+  "recorded_public_transition_replay": [
+    {
+      "game": "sk48-d8078629",
+      "paired_rows": 77,
+      "original_rows": 77,
+      "old_classifier_matches_sidecar": 77,
+      "reclassified_edge_only": 1,
+      "changed_labels": 1,
+      "candidate_outcome_counts": {
+        "盤面変化": 72,
+        "可視変化なし": 3,
+        "レベル進行": 1,
+        "境界領域変化のみ": 1
+      },
+      "sidecar_sha256": "44d90b4a2e3a7d9c695e94bb0c212c720b2585f88827692641914f9024166cd8"
+    },
+    {
+      "game": "tn36-ef4dde99",
+      "paired_rows": 79,
+      "original_rows": 79,
+      "old_classifier_matches_sidecar": 79,
+      "reclassified_edge_only": 14,
+      "changed_labels": 14,
+      "candidate_outcome_counts": {
+        "境界領域変化のみ": 14,
+        "盤面変化": 64,
+        "GAME_OVER": 1
+      },
+      "sidecar_sha256": "cd194f89bfc6ab09e20ea81381badd3564f591cfdb031b7c44de58ae746448d5"
+    },
+    {
+      "game": "m0r0-492f87ba",
+      "paired_rows": 80,
+      "original_rows": 80,
+      "old_classifier_matches_sidecar": 80,
+      "reclassified_edge_only": 2,
+      "changed_labels": 2,
+      "candidate_outcome_counts": {
+        "盤面変化": 73,
+        "境界領域変化のみ": 2,
+        "可視変化なし": 3,
+        "レベル進行": 2
+      },
+      "sidecar_sha256": "470c5760c8d2e7b7b64c4973e42141aa0f17c32c7effa8447b296935932343ae"
+    }
+  ],
+  "total_edge_only_relabels": 17,
+  "baseline_b2_private_public_game_score_mean": 5.6878306878306875,
+  "matched_prior_only_a_score_mean": 1.1904761904761905,
+  "candidate_private_game_score": null,
+  "candidate_score_status": "NOT_RUN",
+  "official_submission_created": false,
+  "official_quota_snapshot": {
+    "numToday": 1,
+    "numTotal": 8,
+    "daily_limit": 1,
+    "source": "Kaggle staff response to official competition discussion https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/705198"
+  },
+  "limitations": [
+    "B-v3 local game score has not been measured yet.",
+    "Classifier replay reclassifies 17 transitions; it does not establish improved gameplay.",
+    "B-v2 single paired pilot had 238/238 online updates but did not prove learning benefit."
+  ],
+  "source_bundle_distribution_scope": "private competition runtime only; do not publish this source during competition",
+  "source_bundle_in_public_git": false,
+  "source_bundle_reason": "The included ARC3 prior-memory connector declares the source package private during the competition; preserve only its hash and keep the package in the private Kaggle runtime."
+}
