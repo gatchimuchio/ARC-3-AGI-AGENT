@@ -1,0 +1,84 @@
+{
+  "schema": "arc3-scorecard-outcome-extension-rescore.v1",
+  "observed_at_utc": "2026-10-27T14:32:07.659106+00:00",
+  "purpose": "Re-score the existing C2-088 matched A-v3/B-v3 exact outputs with the emitted public outcome label recognized by an explicit scorecard-only adapter.",
+  "adapter": {
+    "path": "検証/ARC3視覚HDS学習比較採点_応答区分拡張.py",
+    "sha256": "420df5f83313b25de9ec91e9767412eee1eaf9f40d6f790a27e7ced8f01ac442",
+    "core_scorecard_source_sha256": "81a6e542473eb97d854952d512d8d61f12f414497ae3f471bb1bf61e1bf55080",
+    "frozen_legacy_scorer_source_sha256": "ac5250d5a36d846205166e7aed36715a81e8341efe227aae395a185672cb7520",
+    "added_outcome": "境界領域変化のみ",
+    "base_tie_break_order": [
+      "可視変化なし",
+      "盤面変化",
+      "レベル進行",
+      "GAME_OVER",
+      "勝利"
+    ],
+    "extended_tie_break_order": [
+      "可視変化なし",
+      "盤面変化",
+      "レベル進行",
+      "GAME_OVER",
+      "勝利",
+      "境界領域変化のみ"
+    ],
+    "class_aliasing": false,
+    "scope": "Scorecard process only; frozen scorer source, Notebook, HDS runtime, game behavior, and competition state unchanged."
+  },
+  "inputs": {
+    "prior_only": {
+      "kernel": "tecchannn/arc3-v6-boundary-prior-only-c2-088",
+      "version": 1,
+      "retrieval_manifest_sha256": "f98aecb474b1e0085cad1c208062334d844c2f9bb63ab248af25e4a073c5dcde",
+      "build_manifest_sha256": "2882a77630aee7dce684f5de46b52b21053170f9ddfcd30da33de413e7708d52",
+      "selected_output_manifest_sha256": "5927a5769adda868737f859217e60b8b29f0fbf5d45f5b70f3d7443cba52c288"
+    },
+    "online_learning": {
+      "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+      "version": 3,
+      "retrieval_manifest_sha256": "65111b84e0b9c6dd30eca8972633d2c93749f5fb6e101e912f6d4dd23eadf610",
+      "build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556",
+      "selected_output_manifest_sha256": "25a227ae8d7bb9690fd38d579dce25ae278b1696bea9e7ce42e53907bfeab859"
+    },
+    "original_scorecard": {
+      "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-matched-A-v3-vs-B-v3-terminal-scorecard-20261027T1410Z.json",
+      "sha256": "d585b2302230039a43c4ce777936fe046f093c92640966483696c4981123e74c",
+      "overwritten": false
+    }
+  },
+  "result": {
+    "scorecard_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-matched-A-v3-vs-B-v3-extended-outcome-scorecard-20261027T143133Z.json",
+    "scorecard_sha256": "cae3e6ace644ad8884fb9a3c639662d9001bfc31b997fd93bc9873a52fa00e1b",
+    "inspection": "paired",
+    "prior_only_mean_RHAE": 5.952380952380952,
+    "prior_only_gameplay_valid": true,
+    "prior_only_integration_valid": true,
+    "online_mean_RHAE": 3.204297592052694,
+    "online_gameplay_valid": false,
+    "online_integration_valid": true,
+    "online_max_game_elapsed_seconds": 1210.3266942159999,
+    "runtime_limit_seconds": 1200,
+    "runtime_grace_seconds": 5,
+    "online_minus_prior_mean_RHAE": -2.7480833603282577,
+    "game_directions": {
+      "higher": 1,
+      "equal": 0,
+      "lower": 2
+    },
+    "both_gameplay_valid": false,
+    "both_integration_valid": true,
+    "learning_effect_proven": false,
+    "learning_benefit": "UNPROVEN",
+    "interpretation": "The new outcome is now accepted by the integration scorer without merging classes. The online arm still exceeds the runtime limit including grace, and the paired runs overlapped; this descriptive score difference is not an accepted improvement."
+  },
+  "first_invocation": {
+    "result": "failed before scoring and before creating an output",
+    "stderr": "ModuleNotFoundError: No module named '検証'",
+    "cause": "Direct script execution placed the verification directory rather than the repository root on sys.path.",
+    "correction": "The adapter now adds its repository root to sys.path before importing the comparison scorer. The same exact inputs then scored successfully."
+  },
+  "official_submission_or_quota_use": false,
+  "notebook_or_kernel_edit": false,
+  "hds_runtime_change": false
+}
