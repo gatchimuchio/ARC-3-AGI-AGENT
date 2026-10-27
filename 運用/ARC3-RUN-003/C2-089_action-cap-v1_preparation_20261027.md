@@ -48,3 +48,9 @@ Gate evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-parent-v5-p
 The parent comparison is complete but not reproducible: identical initial public frames and first prompts produced different first actions in two games. The public offline mean RHAE moved from 2.206345 to 5.952381, with the same 3/21 levels and 240 actions but a substantially different per-game distribution. A private C2-089 run can now serve only as a diagnostic against this noisy reference. Do not label one run an improvement; require a repeated candidate result and interpret it against both parent observations. No Competition Rerun or quota was used.
 
 Comparison evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-v5-reproducibility-audit-20261027T162619Z.json.
+
+## Private diagnostic launch preflight — 2026-10-27T16:31:39Z
+
+The exact C2-089 candidate hashes still match its prepared manifest. Kaggle status checks found the five known ARC3 v6 kernels in terminal COMPLETE state, with no running ARC3 v6 kernel observed. The parent v5 exact output is complete and scored, but its same-package result differs materially from v4; baseline reproducibility remains NOT_ESTABLISHED. A single private C2-089 run is therefore authorized only as a diagnostic of the generic four-actions-per-Python-call cap. Its output must be compared per game against both parent runs, and no gain may be claimed without a repeated candidate result. No Competition Rerun or official quota is used.
+
+Preflight evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-private-diagnostic-preflight-20261027T163139Z.json.

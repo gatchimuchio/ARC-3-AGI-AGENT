@@ -1,0 +1,89 @@
+{
+  "schema": "arc3-private-kernel-diagnostic-preflight.v1",
+  "run_id": "ARC3-RUN-003-C2-089-action-cap-v1-private-diagnostic-20261027T163139Z",
+  "prepared_at_utc": "2026-10-27T16:31:39Z",
+  "track": "ARC3",
+  "experiment": "C2-089 generic per-Python-call action cap v1",
+  "purpose": "Run one private matched diagnostic of the generic four-action cap after the exact parent package completed; parent v4/v5 are materially inconsistent, so this run cannot establish an improvement.",
+  "git_head_before_preflight_commit": "137ef71202362fddb84ac8575fb4ea569da12dc0",
+  "candidate": {
+    "kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+    "expected_version": 1,
+    "visibility": "private",
+    "notebook_sha256": "16cb7b2f291a0f964a7e4bec0df901594a07b09f473a8b6efba10344fa368df7",
+    "metadata_sha256": "9aff09ff942d321b87a913015435080a653ba45d43bbf0883462cf0daf63e17d",
+    "candidate_manifest_sha256": "c631c66524e966afc04558a6ffefa1509ae4bba9cba7d093f16c8329afa5a3b0",
+    "incremental_patch_sha256": "810dd3e53cfd47d9a43b4dbcd9378de1ac49642c2611bed83aecf5269f4afff3",
+    "parent_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "private_source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "scorecard_build_manifest_sha256": "94d3af9a9fd358f215515f2dde38005f45d67e6def9602d7dfc27f689336a556",
+    "treatment": "At most four game actions are executed per Python tool call; generic across games, includes RESET, default disabled when the cap setting is unset.",
+    "local_validation": {
+      "combined_patch_applies_to_v5_source": true,
+      "postimage_matches_candidate": true,
+      "python_compile": "PASS",
+      "synthetic_repeated_calls": "PASS",
+      "synthetic_oversized_batch": "PASS",
+      "default_unset": "PASS"
+    }
+  },
+  "matched_conditions": {
+    "games": 3,
+    "passes": 1,
+    "concurrency": 1,
+    "actions_per_game_max": 80,
+    "runtime_seconds_per_game_max": 1200,
+    "grace_seconds": 5,
+    "HDS_seconds_per_game_max": 120,
+    "shared_model_seed": 0,
+    "environment_seed": 0,
+    "input_dataset_versions": [
+      "dfranzen/pennyroyal-v253",
+      "dfranzen/taaf-kaggle-source-bundle-copy/1",
+      "arc-prize-2026-arc-agi-3"
+    ]
+  },
+  "parent_reference": {
+    "kernel_slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "exact_versions": [4, 5],
+    "same_notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "v4_mean_public_offline_RHAE": 2.2063453421498442,
+    "v5_mean_public_offline_RHAE": 5.952380952380952,
+    "v4_levels_completed": 3,
+    "v5_levels_completed": 3,
+    "v4_actions": 240,
+    "v5_actions": 240,
+    "reproducibility": "NOT_ESTABLISHED",
+    "evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-v5-reproducibility-audit-20261027T162619Z.json"
+  },
+  "capacity_preflight": {
+    "observed_at_preflight": true,
+    "status_command": ".venv/Scripts/kaggle.exe kernels status <slug>",
+    "known_arc3_v6_kernels_checked": [
+      {"slug": "tecchannn/arc3-v6-boundary-prior-only-c2-088", "status": "KernelWorkerStatus.COMPLETE"},
+      {"slug": "tecchannn/arc3-v6-online-official-c2-088", "status": "KernelWorkerStatus.COMPLETE"},
+      {"slug": "tecchannn/arc3-v6-learning-prior-only-c2-087-r3", "status": "KernelWorkerStatus.COMPLETE"},
+      {"slug": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2", "status": "KernelWorkerStatus.COMPLETE"},
+      {"slug": "tecchannn/arc3-v6-learning-online-c2-087-r3", "status": "KernelWorkerStatus.COMPLETE"}
+    ],
+    "running_arc3_v6_kernel_observed": false
+  },
+  "official_competition": {
+    "competition_rerun_or_submission_performed": false,
+    "submission_quota_used": false,
+    "latest_history_entry_observed": {"submission_id": 57688735, "status": "COMPLETE", "public_score": 28.07, "private_score": null, "submitted_at_utc": "2026-10-27T04:20:12.220000"},
+    "current_utc_day_quota_estimate": 0,
+    "quota_basis": "One submission per day per Kaggle Staff discussion 705198; one submission was already present for 2026-10-27 UTC."
+  },
+  "launch_command": ".venv/Scripts/kaggle.exe kernels push --path 出力/ARC3-RUN-003-local/C2-089/action-cap-v1",
+  "post_launch": [
+    "Record the returned exact version and read-only status.",
+    "When terminal, retrieve only the exact versioned output and score it with the pinned extended-outcome adapter.",
+    "Compare all game outcomes against parent v4 and v5; do not claim improvement from this single candidate run.",
+    "Repeat the candidate before making an optimization claim.",
+    "Do not perform Competition Rerun or consume official quota in this diagnostic."
+  ],
+  "decision": "READY_FOR_PRIVATE_DIAGNOSTIC_ONLY",
+  "score_effect": "NOT_MEASURED",
+  "learning_or_gameplay_gain_proven": false
+}
