@@ -1,0 +1,124 @@
+{
+  "schema": "arc3-c2-087-b-v1-error-and-c2-088-query-use-audit.v1",
+  "observed_at_utc": "2026-10-27T10:03:47Z",
+  "C2_087_B_v1": {
+    "kernel": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+    "version": 1,
+    "status": "KernelWorkerStatus.ERROR",
+    "status_command": "kaggle kernels status tecchannn/arc3-v6-learning-online-c2-087-r3",
+    "output_command": "kaggle kernels output tecchannn/arc3-v6-learning-online-c2-087-r3/1",
+    "output_log_path": "出力/ARC3-RUN-003-local/C2-087/online-learning-r3-v1-error-output/arc3-v6-learning-online-c2-087-r3.log",
+    "output_log_sha256": "8fd04cbd6aef1856c2310600487b8d96299c3300ab49fa9648fb29d363bcf52e",
+    "output_log_bytes": 7492,
+    "exact_failure_lines": [
+      "cp: cannot stat '/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy': No such file or directory",
+      "FileNotFoundError: [Errno 2] No such file or directory: '/kaggle/taaf-kaggle-source-share/src'"
+    ],
+    "papermill_cell": "In [2]",
+    "runtime_seconds_at_failure": 5.957993467,
+    "kernel_metadata_sha256": "ee088db354d9618b445e1fc6a2da6bd77556c5ec2c998d50d13a86751b4deca9",
+    "declared_dataset_sources": [
+      "dfranzen/pennyroyal-v253",
+      "dfranzen/taaf-kaggle-source-bundle-copy"
+    ],
+    "dataset_source_declared_in_metadata": true,
+    "failure_classification": "The expected dataset path was absent in the runtime mount although the dataset is declared in kernel metadata; exact infrastructure cause remains unknown.",
+    "scored_output_observed": false,
+    "competition_rerun_performed": false,
+    "official_submission_quota_used": false,
+    "retry_performed": false
+  },
+  "C2_088_online_HDS_query_use": {
+    "source_kernel": "tecchannn/arc3-v6-online-official-c2-088",
+    "version": 1,
+    "source_notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+    "cross_build_scorecard_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-087-cross-build-pilot-scorecard-20261027T095727Z.json",
+    "cross_build_scorecard_sha256": "e377415e7867d24fc478dda9d0d33961905d9efce8939eaf8850dadad31567ed",
+    "output_manifest_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-online-output-manifest-20261027T095727Z.json",
+    "output_manifest_sha256": "144db86ea4de62c23ae28bddc2204c44b5e4ae02d064268560f6205d4077e687",
+    "games": [
+      {
+        "game_id": "sk48-d8078629",
+        "query_count": 0,
+        "query_events": [],
+        "action_after_query": [],
+        "actions_in_history": 78,
+        "updates_succeeded": 77,
+        "queries_succeeded": 0,
+        "telemetry_sha256": "44d90b4a2e3a7d9c695e94bb0c212c720b2585f88827692641914f9024166cd8"
+      },
+      {
+        "game_id": "tn36-ef4dde99",
+        "query_count": 2,
+        "query_events": [
+          {
+            "step": 0,
+            "sequence": 1,
+            "native_status": "断定保留",
+            "model_turn_id": "model-4"
+          },
+          {
+            "step": 79,
+            "sequence": 80,
+            "native_status": "断定保留",
+            "model_turn_id": "model-21"
+          }
+        ],
+        "action_after_query": [
+          {
+            "step": 0,
+            "model_observation_opportunity": true,
+            "matched_candidate_inspection_id": null
+          },
+          {
+            "step": 79,
+            "model_observation_opportunity": true,
+            "matched_candidate_inspection_id": null
+          }
+        ],
+        "actions_in_history": 80,
+        "updates_succeeded": 79,
+        "queries_succeeded": 2,
+        "telemetry_sha256": "cd194f89bfc6ab09e20ea81381badd3564f591cfdb031b7c44de58ae746448d5"
+      },
+      {
+        "game_id": "m0r0-492f87ba",
+        "query_count": 1,
+        "query_events": [
+          {
+            "step": 0,
+            "sequence": 1,
+            "native_status": "断定保留",
+            "model_turn_id": "model-2"
+          }
+        ],
+        "action_after_query": [
+          {
+            "step": 0,
+            "model_observation_opportunity": true,
+            "matched_candidate_inspection_id": 1
+          }
+        ],
+        "actions_in_history": 80,
+        "updates_succeeded": 80,
+        "queries_succeeded": 1,
+        "telemetry_sha256": "470c5760c8d2e7b7b64c4973e42141aa0f17c32c7effa8447b296935932343ae"
+      }
+    ],
+    "aggregate": {
+      "actions": 238,
+      "hds_updates_succeeded": 236,
+      "hds_update_errors": 0,
+      "hds_queries_succeeded": 3,
+      "hds_query_errors": 0,
+      "native_status_counts": {
+        "断定保留": 3
+      },
+      "queries_per_action": 0.012605042016806723,
+      "query_distribution": "sk48-d8078629=0; tn36-ef4dde99=2 at steps 0 and 79; m0r0-492f87ba=1 at step 0",
+      "late_query_note": "tn36-ef4dde99 query at step 79 occurred with a maximum of 80 actions, leaving at most one subsequent action in the pilot."
+    },
+    "prompt_policy": "The overlay describes hds_query(candidate) as optional, requests an inspection-only Python call before action, and does not impose a cadence. This is a plausible underuse hypothesis, not proof that more calls would improve scores.",
+    "interpretation": "HDS updates are recorded after observed actions, but active candidate re-query is sparse; results HOLD and telemetry does not prove model comprehension/adoption. Test a bounded cadence only after comparing direct B run."
+  }
+}
