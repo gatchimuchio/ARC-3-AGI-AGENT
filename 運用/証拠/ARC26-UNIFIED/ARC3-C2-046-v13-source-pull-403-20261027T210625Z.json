@@ -1,0 +1,49 @@
+{
+  "schema": "kaggle-readonly-kernel-pull.v1",
+  "run_id": "ARC3-RUN-003-C2-046-v13-source-pull-20261027T210625Z",
+  "track": "ARC3",
+  "observed_at_utc": "2026-10-27T21:06:25Z",
+  "three_point_set_rechecked": true,
+  "three_point_set_version": "v6.0",
+  "three_point_document_sha256": {
+    "common_codex": "e5f5c66f6391af6866211f9030b4cb08a0f0296063ab5bc53246529dc925a0c0",
+    "common_plan": "08c51299981c468712f66a560a50ab862843897d45ebbd965e0a032f35f71a25",
+    "common_spec": "3a03343306aaf71cc9aa33100064f5476d8a7dad8b63567e5578c1a84d489141",
+    "arc3_codex": "47dd0ed72818e975af1fc9545808291effbf1b2ff7b524da9112f1ab8299a060",
+    "arc3_plan": "34061bc53a228bcdc2b94cce7235ac96aa0e67f6bc74d2abb1757fe18af612b6",
+    "arc3_spec": "07ff22715feba930763fc01d10c1989e827aa6206cd45974d1fefed7d2060b67"
+  },
+  "protected_file_sha256": {
+    "AGENTS.md": "dff057d8f6ac88c688ec1d950640dc88b706d5ed9184119deda226d0109a8d42",
+    "制御/現在状態.json": "0e4b29319d727896e244fe32f9726f0933f63fe007f59480272e76d46508c93c"
+  },
+  "request": {
+    "operation": "Read-only source pull",
+    "kernel_slug": "tecchannn/arc3-v6-online-official-c2-046",
+    "kernel_version": 13,
+    "command": "python -m uv run --locked kaggle kernels pull tecchannn/arc3-v6-online-official-c2-046/13 --path %TEMP%\\arc3-c2-046-v13-readonly-20261027 --metadata",
+    "process_exit_code": 1,
+    "exact_error": "403 Client Error: Forbidden for url: https://api.kaggle.com/v1/kernels.KernelsApiService/GetKernel\n\nYou don't have access to this resource.\nIf this is a competition, you may need to accept its rules first at\n  https://www.kaggle.com/competitions/<competition>/rules",
+    "access_denial_cause": "NOT_CONFIRMED; response includes generic competition-rules notice",
+    "destination_folder_empty": true,
+    "files_received": 0
+  },
+  "side_effects": {
+    "kernel_run_or_push": false,
+    "official_submission_or_competition_rerun": false,
+    "gpu_quota_used": 0,
+    "official_daily_submission_quota_used": 0
+  },
+  "local_fallback_evidence": {
+    "benchmark_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-046-v13-benchmark/benchmark.json",
+    "benchmark_sha256": "6535b5240dd5160eaa0b3d0afec3d6d2660cb7e12915bb487ab206167369a72e",
+    "comparison_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-v5-vs-C2-046-v13-first80-local-prefix-comparison-20261027T170144Z.json",
+    "comparison_sha256": "300cc88c41bb47f6eb679f1c751c88ff8a7d2091eb17236b289233ab079611ce",
+    "event_trace_sha256": {
+      "sk48": "261bbf454b94a0058770a7bcaf37ab13ad65be2e6c5d787e840af2e5c4071021",
+      "tn36": "966c9d03ef3fb61758c8936be5a3d73ca0e9066c2ffe0966a5a87da34f9f410f",
+      "m0r0": "1f1569bad11346caa3b43f8634551374ab7e246b6c9733ef5bfac2cabd3e481f"
+    }
+  },
+  "decision": "STOP_REMOTE_PULL; continue analysis using existing local benchmark and public traces"
+}
