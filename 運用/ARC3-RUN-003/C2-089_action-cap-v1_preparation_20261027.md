@@ -113,3 +113,11 @@ The prior cap4 Notebook was copied to 出力/ARC3-RUN-003-local/C2-089/action-ca
 This candidate has not received synthetic runtime validation, has no Kaggle kernel version, has no score, and used no private or official quota. It is prepared for one private diagnostic after quota recovery and after the C2-088 v5 official result is terminal. No gain is claimed.
 
 Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-candidate-prepared-20261027T173104Z.json (SHA-256 495d07767adce077b51142f52d3733145fceb41fb5fcde6a70cf0ee5a5c5d041).
+
+## Cap12 launch package completed locally — 2026-10-27T17:37:54Z
+
+The local C2-089 cap12 folder now contains submission.ipynb, private kernel-metadata.json, candidate-manifest.json, and the generic runtime patch. The manifest points to C2-088 version 5 as parent. Kaggle read-only status returned 404 Not Found for the C2-089 slug at 2026-10-27T17:36:43Z, so no candidate version exists. No push was retried after the weekly GPU-quota rejection.
+
+Notebook, metadata, and manifest parse successfully. The cap12-specific synthetic runtime check has not been run; cap4 generic logic checks are inherited evidence only. No GPU quota or official submission quota was used, and score effect remains unmeasured.
+
+Evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-cap12-launch-package-ready-20261027T173754Z.json (SHA-256 1b94793a14828ca1a692dd68c6ce52a89c57475c0291629ffe67fc16eb4c4f16).

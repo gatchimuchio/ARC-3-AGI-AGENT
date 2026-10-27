@@ -1,0 +1,60 @@
+{
+  "evidence_id": "ARC3-C2-089-cap12-launch-package-ready-20261027T173754Z",
+  "observed_at_utc": "2026-10-27T17:37:54Z",
+  "candidate_kernel_slug": "tecchannn/arc3-v6-action-tranche-c2-089",
+  "package_path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2",
+  "files": {
+    "action-cap-runtime.patch": {
+      "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/action-cap-runtime.patch",
+      "sha256": "810dd3e53cfd47d9a43b4dbcd9378de1ac49642c2611bed83aecf5269f4afff3",
+      "size_bytes": 5622
+    },
+    "candidate-manifest.json": {
+      "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/candidate-manifest.json",
+      "sha256": "83a255208c7c866d95f232618363dbe76e4ff434e8e020cd92fa0744b4c7412a",
+      "size_bytes": 2866
+    },
+    "kernel-metadata.json": {
+      "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/kernel-metadata.json",
+      "sha256": "9aff09ff942d321b87a913015435080a653ba45d43bbf0883462cf0daf63e17d",
+      "size_bytes": 797
+    },
+    "submission.ipynb": {
+      "path": "出力/ARC3-RUN-003-local/C2-089/action-cap-v2/submission.ipynb",
+      "sha256": "86bd236528fa0172ef33b14f73156fbd5821e0420fac8c629858b6adebd870a0",
+      "size_bytes": 760635
+    }
+  },
+  "parent_reference": {
+    "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+    "version": 5,
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf"
+  },
+  "cap12": {
+    "notebook_cell": 5,
+    "setting": "ARC3_MAX_ACTIONS_PER_PYTHON_CALL",
+    "value": 12,
+    "only_change_from_cap4_notebook": "environment value 4 -> 12",
+    "score_effect": "NOT_MEASURED"
+  },
+  "kaggle_read_only_status": {
+    "observed_at_utc": "2026-10-27T17:36:43Z",
+    "kernel_status_exit_code": 1,
+    "exact_error": "404 Client Error: Not Found for url: https://api.kaggle.com/v1/kernels.KernelsApiService/GetKernelSessionStatus",
+    "interpretation": "Candidate slug has no Kaggle kernel version as of observation."
+  },
+  "validation": {
+    "notebook_json": "PASS",
+    "kernel_metadata_json": "PASS",
+    "candidate_manifest_json": "PASS",
+    "generic_patch_hash_matches": "PASS",
+    "cap4_logic_validation": "INHERITED_ONLY",
+    "cap12_runtime_validation": "NOT_RUN"
+  },
+  "quota_and_submission": {
+    "private_gpu_quota_used": false,
+    "private_kernel_pushed": false,
+    "official_submission_or_rerun": false
+  },
+  "publication_boundary": "Full Notebook embeds private HDS source; publish package hashes, generic patch, evidence, report, and operation ledger only."
+}
