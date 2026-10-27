@@ -1,0 +1,25 @@
+{
+  "schema": "arc3-kernel-capacity-preflight-correction.v1",
+  "correction_id": "ARC3-RUN-003-C2-089-capacity-status-correction-20261027T163629Z",
+  "recorded_at_utc": "2026-10-27T16:36:29Z",
+  "supersedes_preflight": "運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-private-diagnostic-preflight-20261027T163139Z.json",
+  "superseded_preflight_sha256": "87b46afb3bfe227f9d836efbe5dac25b71f7909dd3c4aaa06137bdcb5a844e43",
+  "correction": {
+    "kernel_slug": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+    "incorrect_status_in_preflight": "KernelWorkerStatus.COMPLETE",
+    "confirmed_status": "KernelWorkerStatus.ERROR",
+    "exact_status_output": "tecchannn/arc3-v6-learning-online-c2-087-r3 has status \"KernelWorkerStatus.ERROR\"",
+    "interpretation": "Terminal ERROR; this kernel is not running. The earlier preflight misreported its terminal status, but its no-running-kernel conclusion remains unchanged."
+  },
+  "current_capacity_statuses": [
+    {"slug": "tecchannn/arc3-v6-boundary-prior-only-c2-088", "status": "KernelWorkerStatus.COMPLETE"},
+    {"slug": "tecchannn/arc3-v6-online-official-c2-088", "status": "KernelWorkerStatus.COMPLETE"},
+    {"slug": "tecchannn/arc3-v6-learning-prior-only-c2-087-r3", "status": "KernelWorkerStatus.COMPLETE"},
+    {"slug": "tecchannn/arc3-v6-python-hds-shown-c2-081-r2", "status": "KernelWorkerStatus.COMPLETE"},
+    {"slug": "tecchannn/arc3-v6-learning-online-c2-087-r3", "status": "KernelWorkerStatus.ERROR"}
+  ],
+  "running_arc3_v6_kernel_observed": false,
+  "candidate_launch_performed": false,
+  "official_submission_or_quota_use": false,
+  "decision": "C2-089 private diagnostic remains capacity-ready; launch only after this correction is committed and pushed."
+}

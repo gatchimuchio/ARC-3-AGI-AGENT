@@ -54,3 +54,9 @@ Comparison evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-088-B-v3-sequential-v4-
 The exact C2-089 candidate hashes still match its prepared manifest. Kaggle status checks found the five known ARC3 v6 kernels in terminal COMPLETE state, with no running ARC3 v6 kernel observed. The parent v5 exact output is complete and scored, but its same-package result differs materially from v4; baseline reproducibility remains NOT_ESTABLISHED. A single private C2-089 run is therefore authorized only as a diagnostic of the generic four-actions-per-Python-call cap. Its output must be compared per game against both parent runs, and no gain may be claimed without a repeated candidate result. No Competition Rerun or official quota is used.
 
 Preflight evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-private-diagnostic-preflight-20261027T163139Z.json.
+
+## Capacity-status correction — 2026-10-27T16:36:29Z
+
+Before launching C2-089, the read-only status refresh showed that `tecchannn/arc3-v6-learning-online-c2-087-r3` is `KernelWorkerStatus.ERROR`, not COMPLETE as stated in the preflight. This is terminal and not running; the remaining four checked ARC3 v6 kernels are COMPLETE. No candidate launch had occurred when this correction was recorded. The preflight is retained unchanged and this correction supersedes only that status field.
+
+Correction evidence: 運用/証拠/ARC26-UNIFIED/ARC3-C2-089-action-cap-v1-capacity-status-correction-20261027T163629Z.json.
