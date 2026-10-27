@@ -1,0 +1,92 @@
+{
+  "schema": "arc3-c2-060-private-kernel-push.v1",
+  "track": "ARC3",
+  "experiment_id": "ARC3-RUN-003/C2-060-outputcap-20480",
+  "observed_at_utc": "2026-10-27T10:42:23Z",
+  "kernel": {
+    "slug": "tecchannn/arc3-model-guided-c2-025",
+    "kernel_id": 140391884,
+    "version": 29,
+    "status": "KernelWorkerStatus.RUNNING",
+    "status_observed_at_utc": "2026-10-27T10:41:34Z"
+  },
+  "candidate": {
+    "path": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/source/cap20k-context139264/submission.ipynb",
+    "sha256": "d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26",
+    "metadata_path": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/source/cap20k-context139264/kernel-metadata.json",
+    "metadata_sha256": "e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372",
+    "config_delta_vs_v28": [
+      "LOCAL_ANALYZER_CONTEXT_WINDOW 135168->139264",
+      "LOCAL_ANALYZER_MAX_OUTPUT 16384->20480"
+    ],
+    "effective_input_budget_tokens": 118272,
+    "offline_games": 3,
+    "max_actions_per_game": 160,
+    "max_runtime_seconds_per_game": 1200,
+    "seed": 0,
+    "private": true,
+    "gpu": true,
+    "internet": false
+  },
+  "push_observation": {
+    "cli_command": "kaggle kernels push --path <C2-060 candidate folder>",
+    "cli_exit_code": 1,
+    "cli_error": "Expecting value: line 1 column 1 (char 0)",
+    "direct_sdk_request_http_status": 200,
+    "content_type": "application/json",
+    "response_bytes": 161,
+    "kernel_id": 140391884,
+    "version_number": 29,
+    "duplicate_push_performed": false,
+    "root_cause_of_first_cli_error": "unresolved"
+  },
+  "remote_source_verification": {
+    "pulled_exact_version": 29,
+    "remote_notebook_path": "出力/ARC3-RUN-003-local/C2-060-outputcap-20480-context139264/remote-v29/arc3-model-guided-c2-025.ipynb",
+    "remote_raw_notebook_sha256": "b983cfdc7064854bef5fde666fae84bbff7f01f50ce821d91ebd54095447c722",
+    "ordered_cells": [
+      25,
+      25
+    ],
+    "cell_source_differences": [],
+    "source_matches_candidate": true,
+    "shared_metadata_fields_checked": [
+      "id",
+      "title",
+      "language",
+      "kernel_type",
+      "is_private",
+      "enable_gpu",
+      "enable_internet",
+      "machine_shape",
+      "dataset_sources",
+      "competition_sources",
+      "model_sources",
+      "docker_image"
+    ],
+    "metadata_differences": [],
+    "shared_metadata_matches": true,
+    "remote_metadata_sha256": "24510cb150142a2ee5787ba9626912da0ff349f7b0960255683c95f32f93ffdb"
+  },
+  "official": {
+    "latest_pending_submission_id": 57688735,
+    "latest_pending_status": "SubmissionStatus.PENDING",
+    "latest_pending_public_score": null,
+    "latest_pending_private_score": null,
+    "historical_best_submission_id": 57577905,
+    "historical_best_public_score": 23.86,
+    "quota": {
+      "observed_at_utc": "2026-10-27T10:42:23Z",
+      "numToday": 1,
+      "numTotal": 8
+    },
+    "competition_submission_or_rerun_performed": false,
+    "competition_quota_used": false
+  },
+  "acceptance_gate": {
+    "baseline": "C2-046 slim",
+    "required_mean_score_gt": 19.309155943771326,
+    "required_positive_paired_mean_delta": true
+  },
+  "next_action": "Monitor exact kernel version 29. On terminal state, retrieve exact output and score with EnvironmentScoreCalculator against C2-046 on the same three starts; do not push a duplicate."
+}

@@ -48,3 +48,14 @@ C2-059 was rejected by the fixed paired score gate. Its complete request log con
 C2-060 local Notebook hash `d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26` remains a one-cell source delta from C2-059 (`cell 5` only); its metadata hash is `e31a7418a9430d0a343cac1dad9e408a3bafa64970d830d3f1be82742ed49372`. Its declared context is 139,264, output cap 20,480, and memory mode remains `slim`. Current read-only Kaggle statuses show C2-087 A and C2-088 version 1 both QUEUED; C2-087 B has no remote kernel (status query 404). No free batch session is confirmed, and an earlier B push was rejected at the two-session cap. Therefore C2-060 remains a local draft and is **not pushed**. Before its one private pilot, recheck the GPU session slot, exact source/config diff, prompt budget, and run budget.
 
 Readiness evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-post-v28-readiness-20261027T044447Z.json`.
+
+
+## 2026-10-27T10:42:23Z: private version 29 launched and source verified
+
+- The first `.venv` CLI push returned `Expecting value: line 1 column 1 (char 0)`. A remote status/list check showed no version after that response. One direct call to the same pinned Kaggle SDK then returned HTTP 200 and created kernel version 29 (`kernel_id=140391884`). The first CLI error's cause is unresolved; no duplicate version was created.
+- This later launch supersedes the 04:44 UTC readiness note that described C2-060 as an unpushed local draft.
+- Exact version 29 was pulled read-only. Its 25 ordered cell sources match the candidate exactly, and all checked execution metadata fields match. Local notebook SHA-256: `d610d79e44e0974cf18f3f29c9521c7407e4c6fa047d38456f1a9a67f8a65e26`; remote raw Notebook SHA-256 differs because Kaggle serializes it.
+- Exact version 29 status was `RUNNING` at 2026-10-27T10:41:34Z. It is a private GPU run with Internet disabled; 3 public offline games, seed 0, 160 actions/game, 1,200 seconds/game. No Competition Rerun, official submission, or submission-quota use occurred.
+- The official history read at 10:42 UTC still shows submission `57688735` PENDING with no scores; `numToday=1`, `numTotal=8`. The confirmed official best remains submission `57577905`, public 23.86.
+- Do not push again. On terminal completion, retrieve exact version 29 output and score it against C2-046 slim using the same three public starts and the predeclared gate (>19.309155944 and positive paired mean delta).
+- Push/source/status evidence: `運用/証拠/ARC26-UNIFIED/ARC3-C2-060-v29-push-20261027T104223Z.json`.
