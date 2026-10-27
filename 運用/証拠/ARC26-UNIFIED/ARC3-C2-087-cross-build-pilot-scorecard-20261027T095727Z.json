@@ -1,0 +1,239 @@
+{
+  "schema": "arc3-cross-build-matched-learning-pilot-scorecard.v1",
+  "experiment_id": "ARC3-RUN-003/C2-087",
+  "observed_at_utc": "2026-10-27T09:57:27Z",
+  "comparison_class": "cross-build matched offline pilot; not the strict C2-087 A/B pair",
+  "official_score_observed": false,
+  "competition_rerun_performed": false,
+  "submission_or_quota_used": false,
+  "arms": {
+    "prior_only": {
+      "kernel": "tecchannn/arc3-v6-learning-prior-only-c2-087-r3",
+      "version": 1,
+      "build_manifest_sha256": "a556e93de704b9d3af92954104bb1c0713363e6e3539b6d80a2a7ae3b7410298",
+      "output_notebook_sha256": "f0b10932cf8cc688dbeb22e192cbaf3bba345649c59bd0ad7455390eda3a2646",
+      "benchmark_sha256": "fdb382832237577b3311671cca6b1b121e2e9d65086ad9fe726e30917edcf1b9",
+      "output_manifest_sha256": "c98150bdbc0af5f847193d871f801283bc3d59c3b19cde6a6fb0ae121df0e11a",
+      "learning_updates": 0,
+      "queries": 3,
+      "score_mean": 1.1904761904761905,
+      "levels_completed": 1,
+      "wins": 0,
+      "actions": 240,
+      "history_generated_tokens": 286058,
+      "solver_note_tokens": 286058,
+      "states": {
+        "gave_up": 3
+      }
+    },
+    "online_cross_build": {
+      "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+      "version": 1,
+      "build_manifest_sha256": "d1e0773d1c14897e488229bbe0aa8fea9c66660c68b19c40266fc3fa682235f9",
+      "base_notebook_sha256": "b671ba45688df1c490ca2eb1f6b954cfa71b7440f83c206baf03227c84d6fa78",
+      "base_matches_C2_087_B_exact_notebook_sha256": true,
+      "wrapper_output_notebook_sha256": "00d1fec9600b904810061d0b54e4083468706fe834be054dea6a5b19c5b386e3",
+      "benchmark_sha256": "94b496cfda5693cb51aa97885a55f1e5bbba0b6ba534a73c44aa252558f3720f",
+      "output_manifest_path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-088-online-output-manifest-20261027T095727Z.json",
+      "output_manifest_sha256": "144db86ea4de62c23ae28bddc2204c44b5e4ae02d064268560f6205d4077e687",
+      "learning_updates": 236,
+      "queries": 3,
+      "score_mean": 5.2734949824202575,
+      "levels_completed": 3,
+      "wins": 0,
+      "actions": 238,
+      "history_generated_tokens": 256957,
+      "solver_note_tokens": 299697,
+      "states": {
+        "gave_up": 3
+      }
+    }
+  },
+  "matched_conditions": {
+    "game_order": [
+      "sk48-d8078629",
+      "tn36-ef4dde99",
+      "m0r0-492f87ba"
+    ],
+    "initial_public_fields_equal_per_game": {
+      "sk48-d8078629": true,
+      "tn36-ef4dde99": true,
+      "m0r0-492f87ba": true
+    },
+    "initial_public_fields": [
+      "board",
+      "board_ascii",
+      "level",
+      "title",
+      "run_status",
+      "score",
+      "state",
+      "type",
+      "reward"
+    ],
+    "initial_public_fields_sha256_by_game": {
+      "sk48-d8078629": "6e26eb21cc6da631b55a144ff7005f5e70d753f8aa98d813875cc29a8b01bfcb",
+      "tn36-ef4dde99": "9e8983a0d228251f4b768b8fe68bef56a4d08e9efe737e09bd6d620ad37fbf82",
+      "m0r0-492f87ba": "753888246b84cff4f92735562d5258df11a9e260e91d4926f3596e0936719412"
+    },
+    "bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "same_bundle": true,
+    "pilot_config_equal": true,
+    "pilot_config": {
+      "games_max": 3,
+      "passes": 1,
+      "concurrency": 1,
+      "actions_max": 80,
+      "runtime_seconds_max": 1200,
+      "competition_rerun_allowed": false
+    },
+    "hds_budgets_equal": true,
+    "hds_budgets": {
+      "update_budget": 80,
+      "query_budget": 80,
+      "hds_seconds_budget": 120.0
+    },
+    "shared_model_seed_equal": true,
+    "runtime_equal": true,
+    "runtime": {
+      "python": "3.12.13",
+      "packages": {
+        "arc-agi": "0.9.8",
+        "arcengine": "0.9.3"
+      },
+      "environment_seed": {
+        "declared_offline_seed": 0,
+        "explicit_keyword_scope": "OFFLINE private pilot only",
+        "competition_rerun_allowed": false
+      }
+    }
+  },
+  "score_method": {
+    "helper_sha256": "d19754a0e8df5aaeb73a5b763517bc4c5aa5a413fd4b08e8f11d0725f8e066ac",
+    "recomputed_from_saved_game_runs": true,
+    "saved_final_scores_match_helper": true
+  },
+  "results": {
+    "prior_only_mean_rhae": 1.1904761904761905,
+    "online_cross_build_mean_rhae": 5.2734949824202575,
+    "delta_online_minus_prior": 4.083018791944067,
+    "direction_counts": {
+      "higher": 2,
+      "equal": 0,
+      "lower": 1
+    },
+    "per_game": [
+      {
+        "game_id": "sk48-d8078629",
+        "prior_only_rhae": 0.0,
+        "online_cross_build_rhae": 2.0504088694923848,
+        "delta_online_minus_prior": 2.0504088694923848,
+        "direction": "higher",
+        "prior_levels_completed": 0,
+        "online_levels_completed": 1,
+        "prior_actions": 80,
+        "online_actions": 78,
+        "prior_state": "gave_up",
+        "online_state": "gave_up",
+        "initial_public_fields_sha256": "6e26eb21cc6da631b55a144ff7005f5e70d753f8aa98d813875cc29a8b01bfcb"
+      },
+      {
+        "game_id": "tn36-ef4dde99",
+        "prior_only_rhae": 3.571428571428571,
+        "online_cross_build_rhae": 0.0,
+        "delta_online_minus_prior": -3.571428571428571,
+        "direction": "lower",
+        "prior_levels_completed": 1,
+        "online_levels_completed": 0,
+        "prior_actions": 80,
+        "online_actions": 80,
+        "prior_state": "gave_up",
+        "online_state": "gave_up",
+        "initial_public_fields_sha256": "9e8983a0d228251f4b768b8fe68bef56a4d08e9efe737e09bd6d620ad37fbf82"
+      },
+      {
+        "game_id": "m0r0-492f87ba",
+        "prior_only_rhae": 0.0,
+        "online_cross_build_rhae": 13.770076077768387,
+        "delta_online_minus_prior": 13.770076077768387,
+        "direction": "higher",
+        "prior_levels_completed": 0,
+        "online_levels_completed": 2,
+        "prior_actions": 80,
+        "online_actions": 80,
+        "prior_state": "gave_up",
+        "online_state": "gave_up",
+        "initial_public_fields_sha256": "753888246b84cff4f92735562d5258df11a9e260e91d4926f3596e0936719412"
+      }
+    ]
+  },
+  "hds_operations": {
+    "prior_only": {
+      "updates_attempted": 0,
+      "updates_succeeded": 0,
+      "queries_attempted": 3,
+      "queries_succeeded": 3,
+      "update_errors": 0,
+      "query_errors": 0,
+      "summary_errors": 0
+    },
+    "online_cross_build": {
+      "updates_attempted": 236,
+      "updates_succeeded": 236,
+      "queries_attempted": 3,
+      "queries_succeeded": 3,
+      "update_errors": 0,
+      "query_errors": 0,
+      "summary_errors": 0
+    },
+    "query_native_hold_count_prior": 3,
+    "query_native_hold_count_online": 3
+  },
+  "token_audit": {
+    "prior_only_by_game": {
+      "sk48-d8078629": {
+        "history_generated_tokens": 122049,
+        "solver_note_tokens": 122049
+      },
+      "tn36-ef4dde99": {
+        "history_generated_tokens": 85216,
+        "solver_note_tokens": 85216
+      },
+      "m0r0-492f87ba": {
+        "history_generated_tokens": 78793,
+        "solver_note_tokens": 78793
+      }
+    },
+    "online_cross_build_by_game": {
+      "sk48-d8078629": {
+        "history_generated_tokens": 98482,
+        "solver_note_tokens": 141222
+      },
+      "tn36-ef4dde99": {
+        "history_generated_tokens": 63014,
+        "solver_note_tokens": 63014
+      },
+      "m0r0-492f87ba": {
+        "history_generated_tokens": 95461,
+        "solver_note_tokens": 95461
+      }
+    },
+    "metric_used_for_comparison": "history_generated_tokens",
+    "online_solver_note_discrepancy": 42740,
+    "efficiency_conclusion": "withheld because online solver_note token sum differs from saved history_generated_tokens"
+  },
+  "strict_pair_followup": {
+    "C2_087_B_kernel": "tecchannn/arc3-v6-learning-online-c2-087-r3",
+    "version": 1,
+    "status_at_last_observation": "KernelWorkerStatus.QUEUED",
+    "status_observed_at_utc": "2026-10-27T09:34:48Z",
+    "interpretation": "direct same-build A/B confirmation pending"
+  },
+  "limitations": [
+    "One run per arm; all six episodes ended gave_up and neither arm won.",
+    "C2-088 is a normal offline pilot whose base notebook matches C2-087 B, but its wrapper output notebook differs; treat this as provisional cross-build matched evidence.",
+    "Two games scored higher and one lower; the third game regressed to zero.",
+    "No causal learning-benefit claim until direct C2-087 B completes and replication/generalization is measured.",
+    "This is not an official Competition Rerun score."
+  ]
+}
