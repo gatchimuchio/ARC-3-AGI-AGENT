@@ -1,0 +1,122 @@
+{
+  "schema": "arc3-hds-prequential-bounded-guidance-audit.v1",
+  "source_run": "C2-088 B-v3 sequential exact output version 4",
+  "initial_attempt_note": "The first C2-099 runner attempt exited with KeyError: 'raw_prediction' because the metrics reader used a mismatched row key. The field reference was corrected before the successful evaluation; the failed attempt produced no result artifact.",
+  "games": [
+    "m0r0-492f87ba",
+    "sk48-d8078629",
+    "tn36-ef4dde99"
+  ],
+  "transitions": 239,
+  "comparison": "same archived public transitions; query before each update; fresh prior-loaded HDS per game; post-action effect excluded from updates",
+  "aggregate": {
+    "transitions": 239,
+    "raw_unique_forecasts": 47,
+    "raw_unique_forecast_coverage": 0.19665271966527198,
+    "raw_unique_forecasts_correct": 43,
+    "bounded_hints": 0,
+    "bounded_hint_coverage": 0.0,
+    "bounded_hint_predictions_correct": 0,
+    "legal_actions_recorded": 1034,
+    "states_with_alternative_legal_actions": 159,
+    "actual_action_present_in_recorded_legal_set": 239
+  },
+  "action6_aggregate": {
+    "transitions": 81,
+    "raw_unique_forecasts": 15,
+    "raw_unique_forecast_coverage": 0.18518518518518517,
+    "raw_unique_forecasts_correct": 14,
+    "bounded_hints": 0,
+    "bounded_hint_coverage": 0.0,
+    "bounded_hint_predictions_correct": 0,
+    "legal_actions_recorded": 86,
+    "states_with_alternative_legal_actions": 1,
+    "actual_action_present_in_recorded_legal_set": 81
+  },
+  "action_ranking_effect_evaluable": false,
+  "action_ranking_limitation": "Only the actually executed action has an outcome label in each recorded state; alternatives were not counterfactually executed or queried with state-complete inputs.",
+  "native_hold_and_action_authorization_preserved": true,
+  "official_score_effect": "NOT_MEASURED",
+  "notebook_or_kernel_changed": false,
+  "official_submission_or_kernel_run": false,
+  "per_game": {
+    "m0r0-492f87ba": {
+      "input_state_sha256": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22",
+      "transitions": 80,
+      "loaded_prior_principles": 5,
+      "post_action_effect_excluded_from_updates": true,
+      "bridge_status_counts": {
+        "queried": 80
+      },
+      "native_status_counts": {
+        "断定保留": 80
+      },
+      "metrics": {
+        "transitions": 80,
+        "raw_unique_forecasts": 31,
+        "raw_unique_forecast_coverage": 0.3875,
+        "raw_unique_forecasts_correct": 29,
+        "bounded_hints": 0,
+        "bounded_hint_coverage": 0.0,
+        "bounded_hint_predictions_correct": 0,
+        "legal_actions_recorded": 480,
+        "states_with_alternative_legal_actions": 80,
+        "actual_action_present_in_recorded_legal_set": 80
+      },
+      "candidate_action_rows_have_compared_alternatives": 0,
+      "bounded_hint_values_per_transition": []
+    },
+    "sk48-d8078629": {
+      "input_state_sha256": "36f49e579ce154747c727baa4e98f643c0bd005f209c53029e68b3295d2ccf44",
+      "transitions": 79,
+      "loaded_prior_principles": 5,
+      "post_action_effect_excluded_from_updates": true,
+      "bridge_status_counts": {
+        "queried": 79
+      },
+      "native_status_counts": {
+        "断定保留": 79
+      },
+      "metrics": {
+        "transitions": 79,
+        "raw_unique_forecasts": 1,
+        "raw_unique_forecast_coverage": 0.012658227848101266,
+        "raw_unique_forecasts_correct": 0,
+        "bounded_hints": 0,
+        "bounded_hint_coverage": 0.0,
+        "bounded_hint_predictions_correct": 0,
+        "legal_actions_recorded": 474,
+        "states_with_alternative_legal_actions": 79,
+        "actual_action_present_in_recorded_legal_set": 79
+      },
+      "candidate_action_rows_have_compared_alternatives": 0,
+      "bounded_hint_values_per_transition": []
+    },
+    "tn36-ef4dde99": {
+      "input_state_sha256": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f",
+      "transitions": 80,
+      "loaded_prior_principles": 5,
+      "post_action_effect_excluded_from_updates": true,
+      "bridge_status_counts": {
+        "queried": 80
+      },
+      "native_status_counts": {
+        "断定保留": 80
+      },
+      "metrics": {
+        "transitions": 80,
+        "raw_unique_forecasts": 15,
+        "raw_unique_forecast_coverage": 0.1875,
+        "raw_unique_forecasts_correct": 14,
+        "bounded_hints": 0,
+        "bounded_hint_coverage": 0.0,
+        "bounded_hint_predictions_correct": 0,
+        "legal_actions_recorded": 80,
+        "states_with_alternative_legal_actions": 0,
+        "actual_action_present_in_recorded_legal_set": 80
+      },
+      "candidate_action_rows_have_compared_alternatives": 0,
+      "bounded_hint_values_per_transition": []
+    }
+  }
+}

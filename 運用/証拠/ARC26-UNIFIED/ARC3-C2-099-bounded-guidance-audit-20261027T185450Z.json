@@ -1,0 +1,209 @@
+{
+  "run_id": "ARC3-RUN-003-C2-099",
+  "observed_at_utc": "2026-10-27T18:54:50Z",
+  "track": "ARC3",
+  "work_item": "C2-099 bounded HDS guidance availability on exact public transitions",
+  "git": {
+    "branch": "codex/arc3-v6-progress-20261027",
+    "head_before": "9b0bf5b7d85198a788598072e45703f3385e7ee5"
+  },
+  "three_point_set_rechecked": true,
+  "three_point_set_sha256": {
+    "common_Codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "ARC3_Codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "ARC3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "ARC3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67",
+    "AGENTS": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "environment": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "hds_version": "HDS/学習系統/v0.4.2",
+    "fixed_prior_count": 5,
+    "hds_package_manifest_sha256": "f41a4b890e4905fa0f87c9ffe685bd9efcc70d5f7767fc3aecc056085ee2c487",
+    "hds_module_files": [
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/__init__.py",
+        "sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/台帳.py",
+        "sha256": "a6cab8fca7cb591c42fa7444f9678fe0003da69faafcce852598286dceb522e2"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/吸気系.py",
+        "sha256": "50c48e5a9a8aa39158d0cdaacc0501608a829486960d41cb2fea6cb02e5660a4"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/型.py",
+        "sha256": "aa1241708655280b36564f5e3ff6968849b4d09790b8932aabad1570cbca302c"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/実行系.py",
+        "sha256": "11d253705181873bcc22e312a0d0a2198fe16a82e3d7289ea8746fdc14695429"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/懐疑.py",
+        "sha256": "bb7e85c2dbafbd430f1b7733bf3a2d307dc24e3227e79994b491cf711322f715"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/排気系.py",
+        "sha256": "2ba7ceb8d0d6c784d092f91fe484477127f044e50f68c54c977374b17f2f6361"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/推論.py",
+        "sha256": "315dd0d23a9682cdf14be71346341976cbdbcd2cbd924a250afc4ad53058dba6"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/検証.py",
+        "sha256": "e23f271d38e1f52d75557dbf3342abf7b59a85fbdc315a06c0040fd7ca204eb3"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/永続化.py",
+        "sha256": "8aa431b3012424fd8347c5b3d93a5fbf2218d35020836f5d40abb427f9d6da0d"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/系統.py",
+        "sha256": "f57e34fcab9249ad7fef72d7b9088fbb440c01afcd4313c9447b7a31427bd4a5"
+      },
+      {
+        "path": "HDS/学習系統/v0.4.2/hds学習系統/適応.py",
+        "sha256": "c74797d49472646010ed0b37bd17dfa602084ba3347ac9386dec265e78a797ac"
+      }
+    ]
+  },
+  "source": {
+    "runner": "検証/ARC3HDS_prequential-bounded-guidance-audit.py",
+    "runner_sha256": "36dfd255eda99b360a4300cc4f76ade2d86b7e4929441c6e649da8f66ff2e0f0",
+    "bridge": "検証/ARC3視覚HDS接続候補.py",
+    "bridge_sha256": "1a1c48ad03a3c38668e8b8eba85ef61d8fb86a50143c80c221ba586c22d08617",
+    "prior": "接続/ARC3事前記憶.py",
+    "prior_sha256": "518456b3b4cdaeb352a093c65d14eb0eb1a30ce70576d6298d501ec75b2b5bc1"
+  },
+  "execution": {
+    "command": ".venv/Scripts/python.exe 検証/ARC3HDS_prequential-bounded-guidance-audit.py --output 出力/ARC3-RUN-003-local/C2-099/bounded-guidance-audit.json",
+    "source_run": "C2-088 B-v3 sequential exact output version 4",
+    "games": [
+      "m0r0-492f87ba",
+      "sk48-d8078629",
+      "tn36-ef4dde99"
+    ],
+    "transitions": 239,
+    "per_game_input_state_sha256": {
+      "m0r0-492f87ba": "802e91fe0f50cbe46d273d40e35bbc01e1860f0a5ef89884762663f2eb490d22",
+      "sk48-d8078629": "36f49e579ce154747c727baa4e98f643c0bd005f209c53029e68b3295d2ccf44",
+      "tn36-ef4dde99": "3e99a29d497be3a3124822e55f0ab506cef404dd48ef45087cc1ee235629106f"
+    },
+    "queries_before_updates": true,
+    "post_action_effect_excluded_from_updates": true
+  },
+  "initial_attempt": {
+    "result": "FAILED",
+    "exact_error": "KeyError: 'raw_prediction'",
+    "disposition": "metrics key corrected; failed attempt emitted no result artifact"
+  },
+  "results": {
+    "aggregate": {
+      "transitions": 239,
+      "raw_unique_forecasts": 47,
+      "raw_unique_forecast_coverage": 0.19665271966527198,
+      "raw_unique_forecasts_correct": 43,
+      "bounded_hints": 0,
+      "bounded_hint_coverage": 0.0,
+      "bounded_hint_predictions_correct": 0,
+      "legal_actions_recorded": 1034,
+      "states_with_alternative_legal_actions": 159,
+      "actual_action_present_in_recorded_legal_set": 239
+    },
+    "action6_aggregate": {
+      "transitions": 81,
+      "raw_unique_forecasts": 15,
+      "raw_unique_forecast_coverage": 0.18518518518518517,
+      "raw_unique_forecasts_correct": 14,
+      "bounded_hints": 0,
+      "bounded_hint_coverage": 0.0,
+      "bounded_hint_predictions_correct": 0,
+      "legal_actions_recorded": 86,
+      "states_with_alternative_legal_actions": 1,
+      "actual_action_present_in_recorded_legal_set": 81
+    },
+    "per_game": {
+      "m0r0-492f87ba": {
+        "native_status_counts": {
+          "断定保留": 80
+        },
+        "metrics": {
+          "transitions": 80,
+          "raw_unique_forecasts": 31,
+          "raw_unique_forecast_coverage": 0.3875,
+          "raw_unique_forecasts_correct": 29,
+          "bounded_hints": 0,
+          "bounded_hint_coverage": 0.0,
+          "bounded_hint_predictions_correct": 0,
+          "legal_actions_recorded": 480,
+          "states_with_alternative_legal_actions": 80,
+          "actual_action_present_in_recorded_legal_set": 80
+        }
+      },
+      "sk48-d8078629": {
+        "native_status_counts": {
+          "断定保留": 79
+        },
+        "metrics": {
+          "transitions": 79,
+          "raw_unique_forecasts": 1,
+          "raw_unique_forecast_coverage": 0.012658227848101266,
+          "raw_unique_forecasts_correct": 0,
+          "bounded_hints": 0,
+          "bounded_hint_coverage": 0.0,
+          "bounded_hint_predictions_correct": 0,
+          "legal_actions_recorded": 474,
+          "states_with_alternative_legal_actions": 79,
+          "actual_action_present_in_recorded_legal_set": 79
+        }
+      },
+      "tn36-ef4dde99": {
+        "native_status_counts": {
+          "断定保留": 80
+        },
+        "metrics": {
+          "transitions": 80,
+          "raw_unique_forecasts": 15,
+          "raw_unique_forecast_coverage": 0.1875,
+          "raw_unique_forecasts_correct": 14,
+          "bounded_hints": 0,
+          "bounded_hint_coverage": 0.0,
+          "bounded_hint_predictions_correct": 0,
+          "legal_actions_recorded": 80,
+          "states_with_alternative_legal_actions": 0,
+          "actual_action_present_in_recorded_legal_set": 80
+        }
+      }
+    },
+    "native_hold_preserved": true,
+    "action_authorization_false": true,
+    "action_ranking_effect_evaluable": false,
+    "action_ranking_limitation": "Only the actually executed action has an outcome label in each recorded state; alternatives were not counterfactually executed or queried with state-complete inputs."
+  },
+  "interpretation": "All 239 query results remained native 断定保留. The 47 raw unique forecasts (43 correct on executed actions) did not pass render_hint native-output eligibility; bounded hints emitted: 0. This HDS hint path could not affect action ranking in the recorded states. No counterfactual action value or score gain is established.",
+  "limitations": [
+    "Archive labels only actions actually executed; alternative action outcomes are unobserved.",
+    "The trace contains projected public features, not complete state for counterfactual queries over every legal action.",
+    "This fresh-prior prequential replay is not the official notebook model-interaction schedule.",
+    "No same-condition game score or official score was measured."
+  ],
+  "official": {
+    "notebook_or_kernel_changed": false,
+    "private_kernel_push_or_run": false,
+    "competition_rerun_or_submission": false,
+    "quota_consumed": false,
+    "score_effect": "NOT_MEASURED"
+  },
+  "full_output": {
+    "path": "運用/証拠/ARC26-UNIFIED/ARC3-C2-099-bounded-guidance-audit-full-output-20261027T185450Z.json",
+    "sha256": "941b8da8f21b5359f109cf6e7de36396b16eac27336eaa535527c7cfcb616379"
+  }
+}
