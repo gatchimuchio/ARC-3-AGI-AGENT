@@ -1,0 +1,62 @@
+{
+  "schema": "arc3-official-competition-rerun-preflight.v1",
+  "run_id": "ARC3-RUN-003-C2-088-B-v3-sequential-v5-official-rerun-20261027T164653Z",
+  "prepared_at_utc": "2026-10-27T16:46:53Z",
+  "track": "ARC3",
+  "purpose": "Prepare an official Kaggle Competition Rerun of the exact completed C2-088 B-v3 version 5 to obtain an official score while local optimization continues independently.",
+  "git_head_before_preflight_commit": "f5758f5e053c85cff7373995e37564e6b0674bf8",
+  "target_kernel": {
+    "slug": "tecchannn/arc3-v6-online-official-c2-088",
+    "exact_version": 5,
+    "status_observed": "KernelWorkerStatus.COMPLETE",
+    "visibility": "private",
+    "notebook_sha256": "8ca755c12e89ae117af160267d8471f8980574d19e687bdd50f146ef36b103bf",
+    "metadata_sha256": "dd411943b8b8f75e857ed49ab751b2324be1499ed5ccf81d9e2ff178cfb71154",
+    "source_bundle_sha256": "b2c6904d5c104b8609a991b4582f23a4bfeec07a4b693a47dfcb6e6c12170525",
+    "completed_private_run_output_manifest_sha256": "7b045483af43a76f5850684db7e09c6df71ae32ed6f601b390cf66402c575c71",
+    "offline_scorecard_sha256": "f4dcb4174c26eb9f6593cd2a2fc95dc8631581fb27bdae2938a30cb1afaf5010",
+    "local_public_offline_mean_RHAE": 5.952380952380952,
+    "local_levels_completed": "3/21",
+    "official_score_for_this_exact_version": "UNKNOWN"
+  },
+  "official_history_read_only": {
+    "command": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 --format json --page-size 50",
+    "observed_at_utc": "2026-10-27T16:46:53Z",
+    "latest_submission_id": 57688735,
+    "latest_status": "SubmissionStatus.COMPLETE",
+    "latest_public_score": 28.07,
+    "latest_private_score": null,
+    "latest_submitted_at_utc": "2026-10-27T04:20:12.220000",
+    "latest_description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13",
+    "current_utc_day_submissions_observed": 1,
+    "daily_limit": 1,
+    "daily_limit_source": "Kaggle Staff discussion 705198",
+    "official_quota_available_at_preflight": false,
+    "no_official_attempt_made": true
+  },
+  "execution_route": {
+    "method": "Official Kaggle competition Notebook Submit / Competition Rerun for the exact version 5 kernel.",
+    "competition_url": "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/overview/evaluation",
+    "competition_staff_daily_limit_url": "https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3/discussion/705198",
+    "must_refresh_history_before_submit": true,
+    "must_confirm_submit_is_enabled": true,
+    "do_not_submit_an_offline_submission_file": true
+  },
+  "quota_and_safety": {
+    "current_utc_day_quota_already_used": true,
+    "do_not_attempt_until_history_and_competition_ui_confirm_quota_available": true,
+    "earliest_conservative_recheck_after_24h_utc": "2026-10-28T04:20:13Z",
+    "24h_time_is_a_recheck_guard_not_a_promised_reset_time": true,
+    "weekly_gpu_quota_push_error_observed": "Maximum weekly GPU quota of 30.00 hours reached.",
+    "whether_official_competition_rerun_uses_the_same_weekly_gpu_quota": "UNKNOWN; re-evaluate at official submission readiness",
+    "official_submission_or_quota_use_performed": false
+  },
+  "result_handling": [
+    "After the official rerun is accepted, poll only its exact official submission history record.",
+    "Record terminal status, numeric public score including 0, private score if supplied, UTC observation time, and quota observation.",
+    "Compare with existing official C2-046 v13 public score 28.07; do not substitute the local offline RHAE for an official score.",
+    "Do not duplicate or retry the same official submission. Record any terminal ERROR or quota rejection exactly."
+  ],
+  "decision": "PREPARED_WAITING_FOR_OFFICIAL_QUOTA",
+  "official_score_effect": "NOT_MEASURED"
+}
