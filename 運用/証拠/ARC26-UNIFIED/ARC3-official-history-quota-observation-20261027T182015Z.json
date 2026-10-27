@@ -1,0 +1,33 @@
+{
+  "schema": "arc3-official-history-quota-observation.v1",
+  "run_id": "ARC3-RUN-003-official-history-quota-observation-20261027T182015Z",
+  "observed_at_utc": "2026-10-27T18:20:15Z",
+  "command": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 --format json --page-size 50",
+  "latest_submission": {
+    "private_score": null,
+    "submitted_at_utc": "2026-10-27T04:20:12.220Z",
+    "status": "SubmissionStatus.COMPLETE",
+    "id": 57688735,
+    "public_score": 28.07,
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13"
+  },
+  "quota": {
+    "remaining_counter_in_cli": false,
+    "submissions_on_utc_date": 1,
+    "remaining_today": 0,
+    "official_daily_limit": 1,
+    "availability": "USED_FOR_2026-10-27_UTC",
+    "source": "Kaggle Staff discussion 705198"
+  },
+  "candidate": {
+    "present_in_history": false,
+    "kernel": "tecchannn/arc3-v6-online-official-c2-088",
+    "version": 5,
+    "submitted_in_this_observation": false
+  },
+  "operations": {
+    "kernel_push_or_rerun": false,
+    "submission_attempted": false,
+    "competition_quota_consumed_by_this_observation": false
+  }
+}
