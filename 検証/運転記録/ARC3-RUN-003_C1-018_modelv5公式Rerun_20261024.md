@@ -395,3 +395,10 @@
 - Submission 57612586: SubmissionStatus.COMPLETE, public score 0.03.
 - Limits: today=0, lifetime=7, remaining=1. No submit, rerun, push, or Notebook edit was performed.
 - Evidence: 運用/証拠/ARC26-UNIFIED/official-cli-observation-20261026T173802Z.json. Next scheduled query: 2026-10-27T17:38:02Z UTC.
+
+
+## 2026-10-27T06:03:40Z terminal status confirmation
+
+- Submission 57577905 is `SubmissionStatus.COMPLETE`, public score 23.86, private score not provided. Delta is +23.61 versus B1 0.25 and +23.86 versus B0 0.00. C1-018 follow-up is terminal.
+- The history also shows newer submission 57688735 still `PENDING`; this does not change the C1-018 result. Latest separate raw quota observation is 2026-10-27T04:32:59.503936Z (`numToday=1`, `numTotal=8`); no quota used by this read.
+- Read-only evidence: `運用/証拠/ARC26-UNIFIED/official-cli-history-observation-20261027T060340Z.json`. The app automation id `arc3-submission-57577905-status-check` was not found, so no active app automation remained to disable.

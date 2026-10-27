@@ -1,0 +1,220 @@
+{
+  "schema": "arc3-hds-action6-feature-feasibility.v1",
+  "observed_at_utc": "2026-10-27T05:53:34+00:00",
+  "evaluation": "single public dev episode; aggregate public feature-outcome coverage; policy unchanged",
+  "split_seed": 20261022,
+  "selected_public_start_index": 1,
+  "game_seed": 7,
+  "max_actions": 80,
+  "environment_count": 25,
+  "environment_metadata_manifest_sha256": "0311d965528bae4e0f58c53ea3f77d2d3c59caa47c5b00588eaa15ce1c058e80",
+  "agent_source_sha256": "b0643f6d6bfff7fa1520a86248d77963ffeff465b9674df2aa62acdd8a20bbba",
+  "hds_source_sha256": "eaed97760656afc40088ad7e0d85a02fbd59a0d0034054956e9ead63319fba57",
+  "episode": {
+    "score": 0.0,
+    "levels": 0,
+    "actions": 80,
+    "resets": 2,
+    "no_ops": 1,
+    "wins": 0,
+    "stop_reason": "GAME_OVER",
+    "hds_updates": 78,
+    "hds_update_seconds": 46.269402,
+    "hds_predicted_candidates": 0,
+    "hds_guided_actions": 0
+  },
+  "selected_action_counts": {
+    "0": 2,
+    "6": 76,
+    "7": 2
+  },
+  "action6_observed_outcome_counts": {
+    "可視変化なし": 3,
+    "盤面変化": 73
+  },
+  "action6_feature_feasibility": {
+    "作用可能数": {
+      "observations": 76,
+      "categories": 1,
+      "conflicting_categories": 1,
+      "stable_categories": 0,
+      "stable_support": 0,
+      "outcomes_by_category": {
+        "2": {
+          "可視変化なし": 3,
+          "盤面変化": 73
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": false
+    },
+    "同色4近傍数": {
+      "observations": 76,
+      "categories": 4,
+      "conflicting_categories": 2,
+      "stable_categories": 2,
+      "stable_support": 35,
+      "outcomes_by_category": {
+        "0": {
+          "盤面変化": 16
+        },
+        "2": {
+          "可視変化なし": 2,
+          "盤面変化": 5
+        },
+        "3": {
+          "盤面変化": 19
+        },
+        "4": {
+          "可視変化なし": 1,
+          "盤面変化": 33
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": false
+    },
+    "対象同色成分帯": {
+      "observations": 76,
+      "categories": 2,
+      "conflicting_categories": 1,
+      "stable_categories": 1,
+      "stable_support": 16,
+      "outcomes_by_category": {
+        "\"1\"": {
+          "盤面変化": 16
+        },
+        "\"8+\"": {
+          "可視変化なし": 3,
+          "盤面変化": 57
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": false
+    },
+    "対象色": {
+      "observations": 76,
+      "categories": 6,
+      "conflicting_categories": 0,
+      "stable_categories": 6,
+      "stable_support": 76,
+      "outcomes_by_category": {
+        "0": {
+          "可視変化なし": 1
+        },
+        "15": {
+          "可視変化なし": 1
+        },
+        "3": {
+          "盤面変化": 23
+        },
+        "4": {
+          "可視変化なし": 1
+        },
+        "5": {
+          "盤面変化": 27
+        },
+        "9": {
+          "盤面変化": 23
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": true
+    },
+    "最多色占有帯": {
+      "observations": 76,
+      "categories": 1,
+      "conflicting_categories": 1,
+      "stable_categories": 0,
+      "stable_support": 0,
+      "outcomes_by_category": {
+        "\"高\"": {
+          "可視変化なし": 3,
+          "盤面変化": 73
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": false
+    },
+    "横位置帯": {
+      "observations": 76,
+      "categories": 3,
+      "conflicting_categories": 2,
+      "stable_categories": 1,
+      "stable_support": 14,
+      "outcomes_by_category": {
+        "0": {
+          "盤面変化": 14
+        },
+        "1": {
+          "可視変化なし": 1,
+          "盤面変化": 21
+        },
+        "2": {
+          "可視変化なし": 2,
+          "盤面変化": 38
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": false
+    },
+    "盤面外周": {
+      "observations": 76,
+      "categories": 2,
+      "conflicting_categories": 2,
+      "stable_categories": 0,
+      "stable_support": 0,
+      "outcomes_by_category": {
+        "false": {
+          "可視変化なし": 2,
+          "盤面変化": 72
+        },
+        "true": {
+          "可視変化なし": 1,
+          "盤面変化": 1
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": false
+    },
+    "縦位置帯": {
+      "observations": 76,
+      "categories": 3,
+      "conflicting_categories": 2,
+      "stable_categories": 1,
+      "stable_support": 20,
+      "outcomes_by_category": {
+        "0": {
+          "可視変化なし": 2,
+          "盤面変化": 40
+        },
+        "1": {
+          "盤面変化": 20
+        },
+        "2": {
+          "可視変化なし": 1,
+          "盤面変化": 13
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": false
+    },
+    "色種類数": {
+      "observations": 76,
+      "categories": 1,
+      "conflicting_categories": 1,
+      "stable_categories": 0,
+      "stable_support": 0,
+      "outcomes_by_category": {
+        "6": {
+          "可視変化なし": 3,
+          "盤面変化": 73
+        }
+      },
+      "single_feature_rule_feasible_under_min_support_3": false
+    }
+  },
+  "generic_query": {
+    "attempts": 80,
+    "status_counts": {
+      "断定保留": 80
+    },
+    "eligible_action6_rules_after_episode": 0,
+    "matching_current_rule_states": {}
+  },
+  "elapsed_seconds": 58.006416,
+  "official_submission_or_quota_used": false,
+  "runtime_modified": false,
+  "interpretation": "feature feasibility is a one-episode diagnostic, not a score or transfer claim"
+}
