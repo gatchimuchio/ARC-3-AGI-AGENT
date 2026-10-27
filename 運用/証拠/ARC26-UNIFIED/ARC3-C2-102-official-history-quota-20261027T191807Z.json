@@ -1,0 +1,68 @@
+{
+  "run_id": "ARC3-RUN-003-C2-102",
+  "observed_at_utc": "2026-10-27T19:18:07Z",
+  "track": "ARC3",
+  "work_item": "Read current Kaggle official history and daily/lifetime submission limits while local optimization continues",
+  "three_point_set_rechecked": true,
+  "three_point_set_sha256": {
+    "common_Codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "ARC3_Codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "ARC3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "ARC3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67",
+    "AGENTS": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "command": {
+    "history": ".venv/Scripts/kaggle.exe competitions submissions arc-prize-2026-arc-agi-3 --format json",
+    "limits": ".venv/Scripts/kaggle.exe competitions submission-limits arc-prize-2026-arc-agi-3",
+    "history_exit_code": 0,
+    "limits_exit_code": 0
+  },
+  "latest_submission": {
+    "id": 57688735,
+    "submitted_at_utc": "2026-10-27T04:20:12.220000Z",
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13"
+  },
+  "comparison_to_57577905": {
+    "id": 57577905,
+    "public_score": 23.86,
+    "delta": 4.210000000000001
+  },
+  "limits": {
+    "submissions_today": 1,
+    "lifetime_submissions": 8,
+    "remaining_today": 0,
+    "source": "Kaggle CLI submission-limits"
+  },
+  "candidate_readiness": {
+    "corrected_local_notebook": "出力/ARC3-RUN-003-local/C2-098/official-safe-v1/submission.ipynb",
+    "corrected_notebook_present": true,
+    "corrected_notebook_sha256": "03E11A517590A9AB9C3617DCDC0F38FAD85514E64E6BAC25249111097E5C42D3",
+    "corrected_candidate_pushed_or_run": false,
+    "reason": "The exact C2-088 v5 competition guard was documented by C2-098; its corrected local copy has not received a fresh exact-version Kaggle run/output. C2-101 changed diagnostics only."
+  },
+  "actions_performed": {
+    "history_read": true,
+    "limits_read": true,
+    "submit": false,
+    "competition_rerun": false,
+    "kernel_push": false,
+    "notebook_edit": false,
+    "quota_consumed": false
+  },
+  "raw_evidence": {
+    "history": {
+      "path": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-102-official-history-raw-20261027T191807Z.json",
+      "sha256": "D1188F4F0AB19C64E83E2A82206509BB69F9D4C24EA157EF0AAB3ED3F801B314"
+    },
+    "limits": {
+      "path": "運用\\証拠\\ARC26-UNIFIED\\ARC3-C2-102-official-limits-raw-20261027T191807Z.txt",
+      "sha256": "522F6BA380CF22100FFFE2263D7497E3E346856EF2C0B7FD68DF664B25BF4A72"
+    }
+  }
+}
