@@ -1,0 +1,414 @@
+{
+  "experiment": "v3_component_representative_sdk_scorecard",
+  "reference_commit": "4f37b4bbeaafcca736a57c17b02d51febcad56da",
+  "reference_tracked_worktree_dirty": false,
+  "main_base_commit": "2e227533f037185a725c3e34ed8a4bb79b35db01",
+  "candidate_files_uncommitted": true,
+  "runner_sha256": "9dea253f5569ae8c93dcaf768d3b9f40c2209a8adf2476dbec3f28565ad20d52",
+  "bundle": {
+    "reference_bundle_sha256": "35347745865b12e735e623b29dd9f3a8ba25acb946804fd568b960eeaea9099f",
+    "evaluation_bundle_sha256": "2c3d9cfbab05690f82c7400f0e2e1df49078a89ed97f3f1aa0510368a84876dc",
+    "component_overlay_sha256": "7508e56e93e82dd44dd786d277cea3f4ab8a4ce92bcb8508b7d55b82ae7b9c0e",
+    "candidate_helper_sha256": "014b297cc03895a491cb4a533312b46772ff988d4fce61754e0c96c2ddfd21fc"
+  },
+  "input_manifest": {
+    "sha256": "a31a1da89a00032a91007599b71024a72caa812f784786e08605098393985367",
+    "file_count": 70
+  },
+  "selected_games_sha256": "72bc40cd20bf57a847d131173c6f6e423cb6650c32585b2d91f140f77a4fbc55",
+  "python": "3.12.10",
+  "arc_agi": "0.9.8",
+  "arcengine": "0.9.3",
+  "split_seed": 20261022,
+  "environment_seed": 0,
+  "policy_seed": 31025,
+  "episodes_per_arm": 5,
+  "concurrent_reference_run": false,
+  "summary": {
+    "valid_pairs": 5,
+    "error_pairs": 0,
+    "matched_starts": 5,
+    "score_delta_mean": 0.15238095238095242,
+    "level_delta_total": 1,
+    "win_delta_total": 0,
+    "positive_negative_tied": [
+      1,
+      0,
+      4
+    ],
+    "step_dispatch_mismatches": 0,
+    "agent_warning_events": 0,
+    "authorization_true": 0,
+    "trace_divergent_pairs": 4,
+    "noops_previous": 7,
+    "noops_candidate": 7
+  },
+  "pairs": [
+    {
+      "case": 1,
+      "matched_start": true,
+      "first_trace_divergence": 0,
+      "previous": {
+        "case": 1,
+        "initial_sha256": "a29f1cd7578d54035e6fdfed87b307ccc9bf097df1fb1bb70b9a2eab014541b7",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 9,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 2
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 5,
+        "game_over_events": 2,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 0,
+        "coordinate_replacements": 0,
+        "fallbacks": 0,
+        "representative_seconds": 0.0,
+        "first_action_seconds": 0.48840329999802634,
+        "elapsed_seconds": 35.66345929999807,
+        "trace_sha256": "d8197563c8394dce66d58913c28457c607c2564dd8732abf36d3b7e64e2648cb"
+      },
+      "candidate": {
+        "case": 1,
+        "initial_sha256": "a29f1cd7578d54035e6fdfed87b307ccc9bf097df1fb1bb70b9a2eab014541b7",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 9,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 2
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 5,
+        "game_over_events": 2,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 60,
+        "coordinate_replacements": 58,
+        "fallbacks": 16,
+        "representative_seconds": 2.166854400005832,
+        "first_action_seconds": 0.5359305000019958,
+        "elapsed_seconds": 59.84989130000031,
+        "trace_sha256": "5193ecd779b62ab3364c10e8227f9b4e214a0e1bab8420269fc3fd77cd3551ca"
+      },
+      "score_delta": 0.0,
+      "level_delta": 0
+    },
+    {
+      "case": 2,
+      "matched_start": true,
+      "first_trace_divergence": 0,
+      "previous": {
+        "case": 2,
+        "initial_sha256": "75758c4f05d7f522e86a4020220403e8a63e4f5a64ad59086a98b4fdc8b53c3b",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 6,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 1
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 0,
+        "game_over_events": 1,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 0,
+        "coordinate_replacements": 0,
+        "fallbacks": 0,
+        "representative_seconds": 0.0,
+        "first_action_seconds": 0.5849654000048758,
+        "elapsed_seconds": 36.81777910000528,
+        "trace_sha256": "be727eabe48a708a0d7a2f2273afbc8fabe666989a1d8daa5c5e747224850fd3"
+      },
+      "candidate": {
+        "case": 2,
+        "initial_sha256": "75758c4f05d7f522e86a4020220403e8a63e4f5a64ad59086a98b4fdc8b53c3b",
+        "score": 0.7619047619047621,
+        "levels": 1,
+        "available_levels": 6,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 1,
+            "score": 0.7619047619047621,
+            "resets": 2
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 0,
+        "game_over_events": 2,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 54,
+        "coordinate_replacements": 50,
+        "fallbacks": 24,
+        "representative_seconds": 2.2039454999903683,
+        "first_action_seconds": 0.4467905999990762,
+        "elapsed_seconds": 48.59615959999792,
+        "trace_sha256": "7f13181b960d4d7dcca3b2f3a57b5b2aab50904549890cee52dac4e35f29fd89"
+      },
+      "score_delta": 0.7619047619047621,
+      "level_delta": 1
+    },
+    {
+      "case": 3,
+      "matched_start": true,
+      "first_trace_divergence": 0,
+      "previous": {
+        "case": 3,
+        "initial_sha256": "31e5404d65bab290e55e3b54f152fa56d9642148ded456a5e5f46c12fcbcccf8",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 8,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 1
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 0,
+        "game_over_events": 1,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 0,
+        "coordinate_replacements": 0,
+        "fallbacks": 0,
+        "representative_seconds": 0.0,
+        "first_action_seconds": 0.7226133000003756,
+        "elapsed_seconds": 17.47388659999706,
+        "trace_sha256": "0fa2b4e00e6148f35ce398aead8e852a75c721a52fdc9aafc1dde354cb754fd0"
+      },
+      "candidate": {
+        "case": 3,
+        "initial_sha256": "31e5404d65bab290e55e3b54f152fa56d9642148ded456a5e5f46c12fcbcccf8",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 8,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 1
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 0,
+        "game_over_events": 1,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 66,
+        "coordinate_replacements": 65,
+        "fallbacks": 13,
+        "representative_seconds": 2.3253984000039054,
+        "first_action_seconds": 0.7443296999990707,
+        "elapsed_seconds": 23.735043900000164,
+        "trace_sha256": "4b1109891b9c0a5cdea1cbb8a2410471e6cdd888e569ad2006328a47c2eeb219"
+      },
+      "score_delta": 0.0,
+      "level_delta": 0
+    },
+    {
+      "case": 4,
+      "matched_start": true,
+      "first_trace_divergence": null,
+      "previous": {
+        "case": 4,
+        "initial_sha256": "32bb9f01576c9b56cfa76d0459c928ecb813735ae019bf207852544ecea70779",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 7,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 0
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 0,
+        "game_over_events": 0,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 0,
+        "coordinate_replacements": 0,
+        "fallbacks": 0,
+        "representative_seconds": 0.0,
+        "first_action_seconds": 0.7795317999989493,
+        "elapsed_seconds": 50.90966139999364,
+        "trace_sha256": "f506b8915eb6d8bab449138ce87cbbbfb4f0d0c827c2dd4af6e03deae1adeb30"
+      },
+      "candidate": {
+        "case": 4,
+        "initial_sha256": "32bb9f01576c9b56cfa76d0459c928ecb813735ae019bf207852544ecea70779",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 7,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 0
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 0,
+        "game_over_events": 0,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 0,
+        "coordinate_replacements": 0,
+        "fallbacks": 0,
+        "representative_seconds": 0.0,
+        "first_action_seconds": 0.7621251000018674,
+        "elapsed_seconds": 55.02593909999996,
+        "trace_sha256": "f506b8915eb6d8bab449138ce87cbbbfb4f0d0c827c2dd4af6e03deae1adeb30"
+      },
+      "score_delta": 0.0,
+      "level_delta": 0
+    },
+    {
+      "case": 5,
+      "matched_start": true,
+      "first_trace_divergence": 0,
+      "previous": {
+        "case": 5,
+        "initial_sha256": "41ec6db3f97d593d6bb80b86210eaa25a6feb9584aecc83f320bb478cc6238d0",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 6,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 1
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 2,
+        "game_over_events": 1,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 0,
+        "coordinate_replacements": 0,
+        "fallbacks": 0,
+        "representative_seconds": 0.0,
+        "first_action_seconds": 0.581723499999498,
+        "elapsed_seconds": 63.89816779999819,
+        "trace_sha256": "7cc6567589179aaa4e7cff0cd2194fef3cafa414d0cf3c98b18fe519b7fc90ee"
+      },
+      "candidate": {
+        "case": 5,
+        "initial_sha256": "41ec6db3f97d593d6bb80b86210eaa25a6feb9584aecc83f320bb478cc6238d0",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 6,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 1
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 2,
+        "game_over_events": 1,
+        "agent_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 1,
+        "coordinate_replacements": 1,
+        "fallbacks": 0,
+        "representative_seconds": 0.026406700002553407,
+        "first_action_seconds": 0.682244499999797,
+        "elapsed_seconds": 71.30386569999973,
+        "trace_sha256": "c9bb18ffeeafb9999337f45b98a1d6c49bee3896379917d71f01a2141ff37894"
+      },
+      "score_delta": 0.0,
+      "level_delta": 0
+    }
+  ],
+  "limitations": "Public games reused in prior development; this is not untouched holdout or a Kaggle score. No-op uses the last public frame; warning capture covers the agent logger. Concurrent load prevents reliable timing comparison."
+}
