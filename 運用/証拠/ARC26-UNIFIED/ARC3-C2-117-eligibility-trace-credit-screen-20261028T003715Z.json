@@ -1,0 +1,95 @@
+{
+  "track": "ARC3",
+  "run_id": "ARC3-RUN-003-C2-117-ELIGIBILITY-TRACE-CREDIT-20261028T003715Z",
+  "observed_at_utc": "2026-10-28T00:37:15.226Z",
+  "git_head": "db43b31",
+  "experiment": "Paired local-development 5-game screen of generic short eligibility trace for sparse level-progress reward",
+  "candidate": {
+    "method": "On public level progress, add half-scale prior level reward to up to three preceding actions, with 0.5 decay per action distance; retain action/color outcome aggregation, clear trace on level progress or terminal state.",
+    "trace_depth": 3,
+    "trace_decay": 0.5,
+    "trace_scale": 0.5,
+    "game_id_branching": false,
+    "hidden_state_used": false,
+    "production_agent_changed": false,
+    "hds_or_memory_changed": false
+  },
+  "conditions": {
+    "control": "C2-111 retained online exploration policy",
+    "control_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-111-reset-after-game-over-20261027T215948Z.json",
+    "control_sha256": "F9AF6F91668055A49E9D9DA164B70B5373B32C954B661A743E62ADBE6EE97D61",
+    "baseline_runner": "検証/ARC3C2-109_ACTION6-family-HDS-paired-evaluation.py",
+    "baseline_runner_sha256": "13C18DDBA7C5777C3E6C5038CC2A0AD00F5B16498E9AE08A0ABFB3862AB76CD1",
+    "seed": 7,
+    "matched_public_starts": 5,
+    "actions_per_game": 80,
+    "max_actions_include_reset": true,
+    "screen_only": true
+  },
+  "results": {
+    "baseline_mean_rhae": 0.23809523809523808,
+    "candidate_mean_rhae": 0.23809523809523808,
+    "mean_delta": 0.0,
+    "positive_pairs": 0,
+    "negative_pairs": 0,
+    "tied_pairs": 5,
+    "matched_start_pairs": 5,
+    "levels_delta": 0,
+    "wins_delta": 0,
+    "actions_previous": 400,
+    "actions_candidate": 400,
+    "noops_previous": 9,
+    "noops_candidate": 9,
+    "game_over_events_previous": 6,
+    "game_over_events_candidate": 6,
+    "illegal_actions": 0,
+    "eligibility_trace_progress_events": 1,
+    "credited_previous_action_events": 3,
+    "propagated_reward_total": 1.75,
+    "wall_seconds": 132.93
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "outcome": "FAILED_BEFORE_SCORE_EXECUTION",
+      "error_type": "NameError",
+      "error_text": "name 'ComponentPruningPolicy' is not defined",
+      "cause": "Copied screen runner retained the previous class name in its return statement",
+      "output_created": false,
+      "included_in_score_metrics": false
+    },
+    {
+      "attempt": 2,
+      "outcome": "COMPLETED",
+      "result_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-117-eligibility-trace-credit-result-20261028T003715Z.json",
+      "result_sha256": "03B86508E909E174ACCE9C06340E60DB0AF9334D1844A80900DAE2E5E47E5A05"
+    }
+  ],
+  "gate": {
+    "minimum_mean_rhae_delta": 0.01,
+    "passed": false,
+    "decision": "REJECT_AFTER_SCREEN; no 15-pair expansion, no holdout, no promotion"
+  },
+  "runner_file": "検証/ARC3C2-117_eligibility-trace-credit-screen.py",
+  "runner_sha256": "E0BB858D81FBD2AB218A7BBEB6BB77E61969905FD4F3C69F0019307CF6C6C71A",
+  "result_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-117-eligibility-trace-credit-result-20261028T003715Z.json",
+  "result_sha256": "03B86508E909E174ACCE9C06340E60DB0AF9334D1844A80900DAE2E5E47E5A05",
+  "three_point_set_version": "v6.0",
+  "three_point_document_sha256": {
+    "common_codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "arc3_codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "arc3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "arc3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67"
+  },
+  "protected_file_sha256": {
+    "AGENTS_md": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "learning_effect": "NOT_MEASURED; policy reward credit only",
+  "official_kaggle_submission": false,
+  "kernel_push": false,
+  "gpu_quota_used": 0,
+  "official_competition_quota_used": 0
+}
