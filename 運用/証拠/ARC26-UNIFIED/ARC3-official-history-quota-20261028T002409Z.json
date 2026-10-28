@@ -1,0 +1,60 @@
+{
+  "run_id": "ARC3-RUN-003-official-followup-20261028T002409Z",
+  "observed_at_utc": "2026-10-28T00:24:09.063Z",
+  "cli": "Kaggle CLI 2.2.5",
+  "competition_slug": "arc-prize-2026-arc-agi-3",
+  "commands": [
+    "competitions submissions -c arc-prize-2026-arc-agi-3",
+    "competitions submission-limits -c arc-prize-2026-arc-agi-3",
+    "quota"
+  ],
+  "read_only": true,
+  "latest_submission": {
+    "submission_id": 57688735,
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "private_score_state": "not provided",
+    "submitted_at_utc": "2026-10-27T04:20:12.220Z",
+    "description": "ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13"
+  },
+  "prior_tracked_submission": {
+    "submission_id": 57577905,
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 23.86
+  },
+  "quota": {
+    "submissions_today": 0,
+    "lifetime_submissions": 8,
+    "remaining_today": 1,
+    "gpu_used_hours": 30.13,
+    "gpu_remaining_hours": 0.0,
+    "gpu_total_hours": 30.0,
+    "tpu_used_hours": 0.0,
+    "tpu_remaining_hours": 20.0,
+    "tpu_total_hours": 20.0,
+    "accelerator_refresh_at_utc": "2026-10-31T00:00:00Z"
+  },
+  "raw_cli": {
+    "history": "ref  fileName            date                        description                                                                    status                     publicScore  privateScore\n57688735  submission.parquet  2026-10-27 04:20:12.220000  ARC3 v6 immediate official score fallback: completed legacy visual C2-046 v13  SubmissionStatus.COMPLETE  28.07\n57612586  submission.parquet  2026-10-25 01:16:07.830000  ARC3 prior-memory coefficient public-25 scorecard candidate 2026-10-25         SubmissionStatus.COMPLETE  0.03\n57577905  submission.parquet  2026-10-24 01:15:49.963000  ARC3-RUN-003 C1-018 paired public scorecard validated v5                       SubmissionStatus.COMPLETE  23.86\n57541830  submission.parquet  2026-10-23 00:03:01.330000  ARC3-RUN-002 observation-driven exploration v4                                 SubmissionStatus.COMPLETE  0.25\n57527856  submission.parquet  2026-10-22 14:19:24.727000  ARC3-RUN-002 baseline v5 f8ace66                                               SubmissionStatus.COMPLETE  0.00\n55206302  submission.parquet  2026-08-03 07:58:07.073000  ARC3CompletionAgent rev5.1 frozen release v4 git daa91d8 M4-P06                SubmissionStatus.COMPLETE  0.06\n55070928  submission.parquet  2026-07-29 03:29:04.383000  GenericAGIRuntime P15 v11 retry same source git baa03f3                        SubmissionStatus.ERROR\n55069307  submission.parquet  2026-07-29 01:53:16.290000  GenericAGIRuntime P15 v11 competition-source bound git baa03f3                 SubmissionStatus.ERROR\n55049227  submission.parquet  2026-07-28 08:12:23.727000  GenericAGIRuntime P15 sequential git c60ac41 runtime dce9f434                  SubmissionStatus.ERROR\n55045360  submission.parquet  2026-07-28 04:43:31.867000  GenericAGIRuntime P15 official-format fix git d71fb08 runtime a24a632a         SubmissionStatus.ERROR\n55043205  submission.parquet  2026-07-28 02:33:21.277000  GenericAGIRuntime P15 fix git 5464753 runtime a24a632a                         SubmissionStatus.ERROR\n55040966  submission.parquet  2026-07-28 00:24:55.823000  GenericAGIRuntime P15 git 19fadde runtime a24a632a                         SubmissionStatus.ERROR\n53996483  submission.parquet  2026-06-24 01:49:00.300000                                                    SubmissionStatus.COMPLETE  0.12\n53966647  submission.parquet  2026-06-23 04:11:29.717000                                                    SubmissionStatus.COMPLETE  0.24",
+    "submission_limits": "Submissions today: 0\nLifetime submissions: 8\nRemaining today: 1",
+    "accelerator_quota": "resource  used    remaining  total   refreshAt\nGPU       30.13h  0.00h      30.00h  2026-10-31T00:00:00+00:00\nTPU       0.00h   20.00h     20.00h  2026-10-31T00:00:00+00:00"
+  },
+  "three_point_set_version": "v6.0",
+  "three_point_document_sha256": {
+    "common_codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "arc3_codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "arc3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "arc3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67"
+  },
+  "protected_file_sha256": {
+    "AGENTS_md": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "submission_or_rerun_performed": false,
+  "kernel_push_performed": false,
+  "quota_consumed_by_observation": false,
+  "decision": "OFFICIAL_SCORE_UNCHANGED; daily competition quota reset to 0 used / 1 remaining; GPU remains exhausted"
+}
