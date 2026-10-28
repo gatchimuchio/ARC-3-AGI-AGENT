@@ -1,0 +1,111 @@
+{
+  "track": "ARC3",
+  "run_id": "ARC3-RUN-003-C2-118-UNDO-SUPPRESSION-PROXY-20261028T004642Z",
+  "observed_at_utc": "2026-10-28T00:46:42.523Z",
+  "git_head": "a7930b667fcb55c7ee295ceda72b9188b2e9253f",
+  "experiment": "Paired local-development screen of a generic policy-side ACTION7 suppression proxy",
+  "candidate": {
+    "method": "For NOT_FINISHED observations, remove legal action 7 from the evaluation policy observation before HDS ranking and UCB action selection; restore original observation for action-response validation.",
+    "scope": "Local proxy only; not the exact C2-114 EXPOSE_UNDO notebook edit",
+    "sdk_legality_unchanged": true,
+    "game_id_branching": false,
+    "hidden_state_used": false,
+    "production_agent_changed": false,
+    "hds_or_memory_changed": false
+  },
+  "conditions": {
+    "control": "C2-111 retained online exploration policy",
+    "control_evidence": "運用/証拠/ARC26-UNIFIED/ARC3-C2-111-reset-after-game-over-20261027T215948Z.json",
+    "control_sha256": "F9AF6F91668055A49E9D9DA164B70B5373B32C954B661A743E62ADBE6EE97D61",
+    "baseline_runner": "検証/ARC3C2-109_ACTION6-family-HDS-paired-evaluation.py",
+    "baseline_runner_sha256": "13C18DDBA7C5777C3E6C5038CC2A0AD00F5B16498E9AE08A0ABFB3862AB76CD1",
+    "seed": 7,
+    "matched_public_starts": 5,
+    "actions_per_game": 80,
+    "max_actions_include_reset": true,
+    "screen_only": true
+  },
+  "results": {
+    "baseline_mean_rhae": 0.23809523809523808,
+    "candidate_mean_rhae": 0.23809523809523808,
+    "mean_delta": 0.0,
+    "positive_pairs": 0,
+    "negative_pairs": 0,
+    "tied_pairs": 5,
+    "matched_start_pairs": 5,
+    "levels_delta": 0,
+    "wins_delta": 0,
+    "actions_previous": 400,
+    "actions_candidate": 400,
+    "noops_previous": 9,
+    "noops_candidate": 10,
+    "game_over_events_previous": 6,
+    "game_over_events_candidate": 6,
+    "illegal_actions": 0,
+    "action7_filtered_decisions": 78,
+    "candidate_action7_selected": 0,
+    "control_action7_count": "not retained in C2-111 aggregate evidence",
+    "wall_seconds": 201.619
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "outcome": "FAILED_BEFORE_SCORE_EXECUTION",
+      "error": "NameError: name 'ComponentPruningPolicy' is not defined",
+      "cause": "Copied runner retained stale class return name",
+      "output_created": false,
+      "included_in_score_metrics": false
+    },
+    {
+      "attempt": 2,
+      "outcome": "FAILED_BEFORE_SCORE_EXECUTION",
+      "error": "TypeError: _HDSRankingPolicy.選ぶ() got an unexpected keyword argument 'HDS優先作用番号群'",
+      "cause": "Subclass forwarded a keyword unsupported by the HDS-ranking policy override",
+      "output_created": false,
+      "included_in_score_metrics": false
+    },
+    {
+      "attempt": 3,
+      "outcome": "COMPLETED",
+      "result_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-118-undo-suppression-proxy-result-20261028T004642Z.json",
+      "result_sha256": "1B9D7720D16FD28A52E71B3B2A86B253EA23362C879F1D14D9E8F499EF7E1655"
+    }
+  ],
+  "gate": {
+    "minimum_mean_rhae_delta": 0.01,
+    "passed": false,
+    "decision": "REJECT_LOCAL_PROXY_AFTER_SCREEN; no 15-pair expansion, no holdout, no promotion"
+  },
+  "runner_file": "検証/ARC3C2-118_undo-suppression-proxy-screen.py",
+  "runner_sha256": "103A311DCCDBE192C3D27B814CD4798315930AC078D9B15DD8A48DEB7528F630",
+  "result_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-118-undo-suppression-proxy-result-20261028T004642Z.json",
+  "result_sha256": "1B9D7720D16FD28A52E71B3B2A86B253EA23362C879F1D14D9E8F499EF7E1655",
+  "three_point_set_version": "v6.0",
+  "three_point_document_sha256": {
+    "common_codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "arc3_codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "arc3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "arc3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67"
+  },
+  "protected_file_sha256": {
+    "AGENTS_md": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "current_state": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "official_kaggle_submission": false,
+  "kernel_push": false,
+  "gpu_quota_used": 0,
+  "official_competition_quota_used": 0,
+  "latest_official_observation": {
+    "observed_at_utc": "2026-10-28T00:41:16.448Z",
+    "submission_id": 57688735,
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "gpu_remaining_hours": 0.0,
+    "tpu_remaining_hours": 20.0,
+    "daily_submissions_used": 0,
+    "daily_submissions_remaining": 1
+  }
+}
