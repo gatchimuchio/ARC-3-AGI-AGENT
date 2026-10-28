@@ -1,0 +1,85 @@
+{
+  "experiment": "private_no_prior_control_vs_physical_no_prior_candidate",
+  "candidate_sha256": "a4688baff1d76d9a13ffd1fb5d33352003f02b2845fbb76330165ec30cbd4ba5",
+  "candidate_base_main_sha": "bef4d20a3f2d69959ecbb45fd51349120c6cda24",
+  "control_evaluator_sha256": "5c8b5759f6ffa67f5bf2a861a97c298f5dd1a5d43f4e6da8673bca09ef0461e4",
+  "candidate_guard_sha256": "6751352a6a3580705f5ef585df126b75992a538b9872bd46c3c862134062265d",
+  "candidate_preflight": {
+    "candidate_policy_identity": true,
+    "candidate_adapter_identity": true,
+    "candidate_agent_constructor_adapter_calls": 1,
+    "candidate_helper_calls_per_selection": 1,
+    "candidate_report": {
+      "version": "no-prior-experimental-v1",
+      "loaded_count": 0,
+      "boundary": "no-prior",
+      "action_authorization": false,
+      "visible_change_coefficient": 0.0
+    },
+    "candidate_source_sha256": {
+      "agent": "1475c1a0ec45a1f1bd7837b6233a96bf8c53c4a1e9b348f2c058b93bb62fcaf1",
+      "policy": "3bdc2a4df1bcf614a4b77d2634b099676ea8c42157a4f05d1e90f52d851098d2",
+      "adapter": "5b1ac4f88183bc345e5528b23264624d9f8534cb78062a0a9ca2f4d0c220775e",
+      "helper": "014b297cc03895a491cb4a533312b46772ff988d4fce61754e0c96c2ddfd21fc"
+    }
+  },
+  "control_bundle_sha256": "2c3d9cfbab05690f82c7400f0e2e1df49078a89ed97f3f1aa0510368a84876dc",
+  "main_sha_at_evaluation": "ba0f3732e45fad236a04dec35feeb1bbf29d0e18",
+  "reference_sha": "4f37b4bbeaafcca736a57c17b02d51febcad56da",
+  "input_manifest": {
+    "sha256": "a31a1da89a00032a91007599b71024a72caa812f784786e08605098393985367",
+    "file_count": 70
+  },
+  "episodes_per_arm": 1,
+  "matched_starts": 1,
+  "errors": 0,
+  "trace_differences": 0,
+  "pairs": [
+    {
+      "case": 1,
+      "matched_start": true,
+      "first_trace_divergence": null,
+      "score_delta": 0.0,
+      "level_delta": 0,
+      "control": {
+        "score": 0.0,
+        "levels": 0,
+        "win": false,
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 5,
+        "sdk_actions": 80,
+        "sdk_play_count": 1,
+        "sdk_counter_matches": true,
+        "agent_warning_events": 0,
+        "sdk_warning_events": 0,
+        "authorization": false,
+        "prior_loaded_count": 0,
+        "hds_updates": 78,
+        "hds_queries": 80,
+        "hds_guided_selections": 0
+      },
+      "candidate": {
+        "score": 0.0,
+        "levels": 0,
+        "win": false,
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 5,
+        "sdk_actions": 80,
+        "sdk_play_count": 1,
+        "sdk_counter_matches": true,
+        "agent_warning_events": 0,
+        "sdk_warning_events": 0,
+        "authorization": false,
+        "prior_loaded_count": 0,
+        "hds_updates": 78,
+        "hds_queries": 80,
+        "hds_guided_selections": 0
+      }
+    }
+  ],
+  "limitations": "Rejected representative policy; packaging/dependency equivalence only. Public games previously used; no untouched holdout, learning-effect proof, publication approval, or Kaggle score. Runtime and hardware load are not controlled."
+}

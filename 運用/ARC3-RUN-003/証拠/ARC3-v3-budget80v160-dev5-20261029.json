@@ -1,0 +1,62 @@
+{
+  "experiment": "representative_policy_request_budget_80_vs_160_dev5",
+  "main_base_commit": "ba0f3732e45fad236a04dec35feeb1bbf29d0e18",
+  "reference_commit": "4f37b4bbeaafcca736a57c17b02d51febcad56da",
+  "runner_sha256": "58f16e0ce777f3f2ad466e1bd94858962ad0198edc8694a13c6848dceffa3e9a",
+  "source_result_sha256": "3e4ed68f3bb529d6f9f9a8c4d7d4033fdca00890376fdd8ab6574ae299539136",
+  "python": "3.12.10",
+  "arc_agi": "0.9.8",
+  "arcengine": "0.9.3",
+  "split_seed": 20261022,
+  "environment_seed": 0,
+  "policy_seed": 31025,
+  "matched_starts": 5,
+  "prefix_matches": 5,
+  "prefix_length": 80,
+  "summary": {
+    "valid_pairs": 5,
+    "error_pairs": 0,
+    "matched_starts": 5,
+    "score_delta_mean": 0.0,
+    "level_delta_total": 0,
+    "win_delta_total": 0,
+    "positive_negative_tied": [
+      0,
+      0,
+      5
+    ],
+    "step_dispatch_mismatches": 0,
+    "sdk_counter_mismatches": 0,
+    "agent_warning_events": 0,
+    "sdk_warning_events": 0,
+    "authorization_true": 0,
+    "common_action_divergent_pairs": 0,
+    "noops_previous": 7,
+    "noops_candidate": 19,
+    "prefix_matches": 5,
+    "prefix_mismatches": 0
+  },
+  "arms": {
+    "previous": {
+      "mean_sdk_score": 0.15238095238095242,
+      "levels": 1,
+      "actions": 400,
+      "dispatches": 400,
+      "steps": 400,
+      "noops": 7,
+      "game_over_events": 6,
+      "wins": 0
+    },
+    "candidate": {
+      "mean_sdk_score": 0.15238095238095242,
+      "levels": 1,
+      "actions": 800,
+      "dispatches": 800,
+      "steps": 800,
+      "noops": 19,
+      "game_over_events": 17,
+      "wins": 0
+    }
+  },
+  "limitations": "Public games reused in prior development; this is not untouched holdout or a Kaggle score. No-op uses the last public frame. Runtime depends on concurrent system load and is not controlled."
+}
