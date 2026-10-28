@@ -1,0 +1,70 @@
+{
+  "scope": "public games reused in development; prior-memory ablation within private bundle",
+  "source_result_sha256": "c5da5f29ff287ad40125783c7a492ba63380551ddf961194c0a329369b281de5",
+  "runner_sha256": "5c8b5759f6ffa67f5bf2a861a97c298f5dd1a5d43f4e6da8673bca09ef0461e4",
+  "reference_commit": "4f37b4bbeaafcca736a57c17b02d51febcad56da",
+  "main_base_commit": "bef4d20a3f2d69959ecbb45fd51349120c6cda24",
+  "input_manifest": {
+    "sha256": "a31a1da89a00032a91007599b71024a72caa812f784786e08605098393985367",
+    "file_count": 70
+  },
+  "python": "3.12.10",
+  "arc_agi": "0.9.8",
+  "arcengine": "0.9.3",
+  "environment_seed": 0,
+  "policy_seed": 31025,
+  "episodes_per_arm": 5,
+  "summary": {
+    "valid_pairs": 5,
+    "error_pairs": 0,
+    "matched_starts": 5,
+    "score_delta_mean": 0.0,
+    "level_delta_total": 0,
+    "win_delta_total": 0,
+    "positive_negative_tied": [
+      0,
+      0,
+      5
+    ],
+    "step_dispatch_mismatches": 0,
+    "sdk_counter_mismatches": 0,
+    "agent_warning_events": 0,
+    "sdk_warning_events": 0,
+    "authorization_true": 0,
+    "trace_divergent_pairs": 0,
+    "noops_previous": 7,
+    "noops_candidate": 7
+  },
+  "arms": {
+    "previous": {
+      "score_mean": 0.15238095238095242,
+      "levels": 1,
+      "actions": 400,
+      "prior_loaded_counts": [
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "hds_updates": 394,
+      "hds_queries": 400,
+      "hds_guided_selections": 0
+    },
+    "candidate": {
+      "score_mean": 0.15238095238095242,
+      "levels": 1,
+      "actions": 400,
+      "prior_loaded_counts": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "hds_updates": 394,
+      "hds_queries": 400,
+      "hds_guided_selections": 0
+    }
+  }
+}

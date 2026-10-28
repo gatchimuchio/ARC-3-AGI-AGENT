@@ -20,20 +20,34 @@ COMPETITION = "arc-prize-2026-arc-agi-3"
 EPOCH = (2026, 10, 22, 0, 0, 0)
 
 
-def _source_files() -> list[Path]:
+def _source_files(*, namespace_entries: set[str] | None = None) -> list[Path]:
     roots = (
         ROOT / "接続",
         ROOT / "HDS" / "学習系統" / "v0.4.2" / "hds学習系統",
     )
     modules: dict[str, Path] = {}
+    directories: dict[str, Path] = {}
     for root in roots:
         if not root.is_dir():
             raise FileNotFoundError(f"必要なソースディレクトリがありません: {root}")
         package = "接続" if root == roots[0] else "hds学習系統"
+        directories[package] = root
+        for directory in sorted(root.rglob("*")):
+            if not directory.is_dir() or directory.is_symlink() or "__pycache__" in directory.parts:
+                continue
+            folder_parts = directory.relative_to(root).parts
+            directories[".".join((package, *folder_parts))] = directory
         for path in sorted(root.rglob("*.py")):
             relative = path.relative_to(root).with_suffix("")
             parts = relative.parts[:-1] if relative.name == "__init__" else relative.parts
             modules[".".join((package, *parts))] = path
+            for depth in range(1, len(relative.parent.parts) + 1):
+                folder_parts = relative.parent.parts[:depth]
+                directories[".".join((package, *folder_parts))] = root.joinpath(*folder_parts)
+
+    # __init__.pyのないディレクトリもPythonのnamespace packageとして有効。
+    namespaces = {name: path for name, path in directories.items() if name not in modules}
+    selected_namespaces: set[str] = set()
 
     # AgentとHDSの公開packageから始め、静的importで到達するrepo内moduleだけを同梱。
     pending = ["接続.ARC3提出agent", "hds学習系統"]
@@ -50,6 +64,9 @@ def _source_files() -> list[Path]:
             targets: list[str] = []
             if isinstance(node, ast.Import):
                 targets.extend(alias.name for alias in node.names)
+                for target in targets:
+                    if target.split(".", 1)[0] in {"接続", "hds学習系統"} and target not in modules and target not in namespaces:
+                        raise ModuleNotFoundError(f"未解決の内部import: {module} -> {target}")
             elif isinstance(node, ast.ImportFrom):
                 if node.level:
                     parts = package.split(".") if package else []
@@ -59,9 +76,15 @@ def _source_files() -> list[Path]:
                 else:
                     target = node.module or ""
                 if target:
+                    if target.split(".", 1)[0] in {"接続", "hds学習系統"} and target not in modules and target not in namespaces:
+                        raise ModuleNotFoundError(f"未解決の内部import: {module} -> {target}")
                     targets.append(target)
-                    targets.extend(f"{target}.{alias.name}" for alias in node.names)
+                    # from package import name は属性か子モジュールか静的には曖昧。
+                    # 物理的に存在する子モジュールのみ同梱し、属性の存在判定はimport時に委ねる。
+                    targets.extend(f"{target}.{alias.name}" for alias in node.names if f"{target}.{alias.name}" in modules or f"{target}.{alias.name}" in namespaces)
             for target in targets:
+                if target in namespaces:
+                    selected_namespaces.add(target)
                 for candidate in modules:
                     if target == candidate or target.startswith(candidate + "."):
                         if candidate not in included:
@@ -80,11 +103,17 @@ def _source_files() -> list[Path]:
             raise ValueError(f"生成キャッシュは梱包できません: {rel}")
     if AGENT_SOURCE not in result:
         raise ValueError("提出Agentのソースが梱包対象にありません")
+    if namespace_entries is not None:
+        for name in selected_namespaces:
+            # 依存ファイルがディレクトリを作らない場合、ZIP展開時に空のnamespaceを復元する。
+            if not any(module.startswith(name + ".") for module in included):
+                namespace_entries.add(namespaces[name].relative_to(ROOT).as_posix() + "/")
     return result
 
 
 def _bundle() -> tuple[bytes, dict[str, Any]]:
-    files = _source_files()
+    namespace_entries: set[str] = set()
+    files = _source_files(namespace_entries=namespace_entries)
     records = []
     archive_buffer = BytesIO()
     with zipfile.ZipFile(archive_buffer, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
@@ -100,11 +129,17 @@ def _bundle() -> tuple[bytes, dict[str, Any]]:
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
             archive.writestr(info, raw, compress_type=zipfile.ZIP_DEFLATED, compresslevel=9)
+        for directory in sorted(namespace_entries):
+            info = zipfile.ZipInfo(directory, date_time=EPOCH)
+            info.external_attr = (0o40755 << 16) | 0x10
+            archive.writestr(info, b"")
         manifest = {
             "形式": "arc3-submission-source-v1",
             "含有": records,
             "除外": ["入力/", "記憶/", "検証/運転記録/", ".git/", "認証情報"],
         }
+        if namespace_entries:
+            manifest["名前空間ディレクトリ"] = sorted(namespace_entries)
         manifest_raw = json.dumps(
             manifest, ensure_ascii=False, sort_keys=True, separators=(",", ":")
         ).encode("utf-8")
