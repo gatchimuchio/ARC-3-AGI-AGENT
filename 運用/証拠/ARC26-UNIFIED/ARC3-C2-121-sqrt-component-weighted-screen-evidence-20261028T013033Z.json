@@ -1,0 +1,101 @@
+{
+  "track": "ARC3",
+  "run_id": "ARC3-RUN-003-C2-121-SQRT-COMPONENT-WEIGHTED-SCREEN-20261028T013033Z",
+  "observed_at_utc": "2026-10-28T01:30:33Z",
+  "event": "Paired five-start seed-7 screen of square-root component sampling regressed score and level; candidate rejected without expansion",
+  "three_point_set_rechecked": true,
+  "three_point_set_version": "v6.0",
+  "three_point_document_sha256": {
+    "common_codex": "E5F5C66F6391AF6866211F9030B4CB08A0F0296063AB5BC53246529DC925A0C0",
+    "common_plan": "08C51299981C468712F66A560A50AB862843897D45EBBD965E0A032F35F71A25",
+    "common_spec": "3A03343306AAF71CC9AA33100064F5476D8A7DAD8B63567E5578C1A84D489141",
+    "arc3_codex": "47DD0ED72818E975AF1FC9545808291EFFBF1B2FF7B524DA9112F1AB8299A060",
+    "arc3_plan": "34061BC53A228BCDC2B94CCE7235AC96AA0E67F6BC74D2ABB1757FE18AF612B6",
+    "arc3_spec": "07FF22715FEBA930763FC01D10C1989E827AA6206CD45974D1FEFED7D2060B67"
+  },
+  "protected_file_sha256": {
+    "AGENTS.md": "DFF057D8F6AC88C688EC1D950640DC88B706D5ED9184119DEDA226D0109A8D42",
+    "制御/現在状態.json": "0E4B29319D727896E244FE32F9726F0933F63FE007F59480272E76D46508C93C"
+  },
+  "candidate": "For ACTION6, select a public 4-neighbor same-color component proportional to square root of its unseen-cell count, then sample an unseen cell uniformly within it.",
+  "evaluation": {
+    "baseline": "C2-111 legal RESET with retained online exploration statistics",
+    "pairs": 5,
+    "matched_start_pairs": 5,
+    "mean_previous": 0.23809523809523808,
+    "mean_candidate": 0.0,
+    "mean_delta": -0.23809523809523808,
+    "positive_pairs": 0,
+    "negative_pairs": 1,
+    "tied_pairs": 4,
+    "levels_delta": -1,
+    "wins_delta": 0,
+    "actions_previous": 400,
+    "actions_candidate": 400,
+    "noops_previous": 9,
+    "noops_candidate": 17,
+    "game_over_events_previous": 6,
+    "game_over_events_candidate": 5,
+    "component_selected_unseen_cells": 237,
+    "illegal_actions": 0,
+    "wall_seconds": 83.131,
+    "gate_mean_delta_required": 0.01,
+    "gate_nonnegative_levels_required": true,
+    "gate_passed": false,
+    "decision": "REJECT_SCREEN_NO_EXPANSION"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "outcome": "FAILED_BEFORE_SCORE_EXECUTION",
+      "error": "NameError: name 'ComponentBalancedPolicy' is not defined"
+    },
+    {
+      "attempt": 2,
+      "outcome": "SCORED_BUT_AGGREGATE_INSTRUMENTATION_KEY_STALE",
+      "final_result_used": false
+    },
+    {
+      "attempt": 3,
+      "outcome": "COMPLETED_FINAL_RESULT",
+      "result_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-121-sqrt-component-weighted-screen-result-20261028T013033Z.json",
+      "result_sha256": "40613719f8dad3b196f7a5a36c0d7bce538b8967da2f8247d17efc439b3911d1"
+    }
+  ],
+  "runner_file": "検証/ARC3C2-121_sqrt-component-weighted-coordinate-screen.py",
+  "runner_sha256": "23d284f136f3e89348619628389aa51131be0a86db7cd4645b4462f676e65de3",
+  "control_evidence_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-111-reset-after-game-over-20261027T215948Z.json",
+  "control_evidence_sha256": "f9af6f91668055a49e9d9da164b70b5373b32c954b661a743e62adbe6ee97d61",
+  "result_file": "運用/証拠/ARC26-UNIFIED/ARC3-C2-121-sqrt-component-weighted-screen-result-20261028T013033Z.json",
+  "result_sha256": "40613719f8dad3b196f7a5a36c0d7bce538b8967da2f8247d17efc439b3911d1",
+  "report_file": "運用/ARC3-RUN-003/C2-121_sqrt-component-weighted-coordinate_screen_20261028.md",
+  "report_sha256": "d0f702b379281e9c47aaece86fad5298d201f9c6ec89410ef67297c1b4abc579",
+  "official_observation": {
+    "observed_between_utc": [
+      "2026-10-28T01:30:24Z",
+      "2026-10-28T01:30:33Z"
+    ],
+    "submission_id": 57688735,
+    "status": "SubmissionStatus.COMPLETE",
+    "public_score": 28.07,
+    "private_score": null,
+    "legacy_description": "C2-046 v13",
+    "exact_notebook_slug_version": "not provided",
+    "comparison_submission_id": 57577905,
+    "comparison_public_score": 23.86,
+    "daily_submissions_used": 0,
+    "daily_submissions_remaining": 1,
+    "lifetime_submissions": 8,
+    "gpu_used_hours": 30.13,
+    "gpu_remaining_hours": 0.0,
+    "tpu_used_hours": 0.0,
+    "tpu_remaining_hours": 20.0,
+    "accelerator_refresh_at_utc": "2026-10-31T00:00:00Z",
+    "read_only": true
+  },
+  "official_kaggle_submission": false,
+  "competition_rerun": false,
+  "kernel_push": false,
+  "gpu_quota_used": 0,
+  "official_quota_used": 0
+}
