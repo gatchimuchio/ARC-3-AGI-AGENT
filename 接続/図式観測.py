@@ -17,8 +17,11 @@ def _作用番号(値):
 def 成分群(盤面):
     残 = {(x,y) for y in range(len(盤面)) for x in range(len(盤面[y]))}
     結果 = []
-    while 残:
-        始 = min(残)
+    # min(残) を成分ごとに繰り返すと、微小成分が多い盤面では二乗時間になる。
+    # 最初に一度だけ同じ順序へ並べ、探索済みの点を飛ばす。
+    for 始 in sorted(残):
+        if 始 not in 残:
+            continue
         色 = 盤面[始[1]][始[0]]
         点群,待機 = {始},deque([始])
         残.remove(始)
