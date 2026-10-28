@@ -1,10 +1,14 @@
 """pinned SDKのplay分割と採点警告を検証する。"""
 
 from types import SimpleNamespace
+import logging
 
 from arc_agi.models import EnvironmentInfo
 from arc_agi.scorecard import EnvironmentScorecard, Scorecard
+from arc_agi.wrapper import EnvironmentWrapper
 from arcengine import GameState
+
+from 検証.ARC3実Agent成分代表paired import _WarningCounter
 
 
 def _event(card, guid, action, completed=0, state=GameState.NOT_FINISHED, full_reset=False):
@@ -46,3 +50,21 @@ def test_missing_baseline_emits_diagnostic_not_a_clean_zero_score():
     assert result is not None
     assert result.runs[0].score == 0.0
     assert result.runs[0].message
+
+
+def test_sdk_scorecard_update_failure_is_counted():
+    class FailedScorecard:
+        def add_game(self, card_id, guid):
+            raise RuntimeError("synthetic scorecard failure")
+
+    counter = _WarningCounter()
+    logger = logging.getLogger("arc3-test-scorecard-failure")
+    logger.handlers.clear()
+    logger.addHandler(counter)
+    logger.setLevel(logging.WARNING)
+    logger.propagate = False
+    wrapper = EnvironmentWrapper(
+        EnvironmentInfo(game_id="synthetic-test"), logger, "synthetic-card", scorecard_manager=FailedScorecard()
+    )
+    wrapper._set_last_response(SimpleNamespace(guid="synthetic", frame=[[]], full_reset=True))
+    assert counter.count == 1

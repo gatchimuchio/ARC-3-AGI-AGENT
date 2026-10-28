@@ -1,0 +1,128 @@
+{
+  "experiment": "v3_component_representative_sdk_scorecard",
+  "reference_commit": "4f37b4bbeaafcca736a57c17b02d51febcad56da",
+  "reference_tracked_worktree_dirty": false,
+  "main_base_commit": "d2911ac300db89581eb29d41d004ad4998aefe98",
+  "candidate_files_uncommitted": true,
+  "runner_sha256": "e57726ec7392b3c24512c4af478cfd6dc18fc5a45745bb436e2a6011d4d5983c",
+  "bundle": {
+    "reference_bundle_sha256": "35347745865b12e735e623b29dd9f3a8ba25acb946804fd568b960eeaea9099f",
+    "evaluation_bundle_sha256": "2c3d9cfbab05690f82c7400f0e2e1df49078a89ed97f3f1aa0510368a84876dc",
+    "component_overlay_sha256": "7508e56e93e82dd44dd786d277cea3f4ab8a4ce92bcb8508b7d55b82ae7b9c0e",
+    "candidate_helper_sha256": "014b297cc03895a491cb4a533312b46772ff988d4fce61754e0c96c2ddfd21fc"
+  },
+  "input_manifest": {
+    "sha256": "a31a1da89a00032a91007599b71024a72caa812f784786e08605098393985367",
+    "file_count": 70
+  },
+  "selected_games_sha256": "44db6ac12fa925b4f5b84732b96f45fd472561961f4ce35cfee3ff87d8baf67b",
+  "python": "3.12.10",
+  "arc_agi": "0.9.8",
+  "arcengine": "0.9.3",
+  "split_seed": 20261022,
+  "environment_seed": 0,
+  "policy_seed": 31025,
+  "episodes_per_arm": 1,
+  "concurrent_reference_run": false,
+  "summary": {
+    "valid_pairs": 1,
+    "error_pairs": 0,
+    "matched_starts": 1,
+    "score_delta_mean": 0.0,
+    "level_delta_total": 0,
+    "win_delta_total": 0,
+    "positive_negative_tied": [
+      0,
+      0,
+      1
+    ],
+    "step_dispatch_mismatches": 0,
+    "sdk_counter_mismatches": 0,
+    "agent_warning_events": 0,
+    "sdk_warning_events": 0,
+    "authorization_true": 0,
+    "trace_divergent_pairs": 1,
+    "noops_previous": 5,
+    "noops_candidate": 5
+  },
+  "pairs": [
+    {
+      "case": 1,
+      "matched_start": true,
+      "first_trace_divergence": 0,
+      "previous": {
+        "case": 1,
+        "initial_sha256": "a29f1cd7578d54035e6fdfed87b307ccc9bf097df1fb1bb70b9a2eab014541b7",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 9,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_counter_matches": true,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 2
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 5,
+        "game_over_events": 2,
+        "agent_warning_events": 0,
+        "sdk_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 0,
+        "coordinate_replacements": 0,
+        "fallbacks": 0,
+        "representative_seconds": 0.0,
+        "first_action_seconds": 0.33614019999367883,
+        "elapsed_seconds": 62.392149299994344,
+        "trace_sha256": "d8197563c8394dce66d58913c28457c607c2564dd8732abf36d3b7e64e2648cb"
+      },
+      "candidate": {
+        "case": 1,
+        "initial_sha256": "a29f1cd7578d54035e6fdfed87b307ccc9bf097df1fb1bb70b9a2eab014541b7",
+        "score": 0.0,
+        "levels": 0,
+        "available_levels": 9,
+        "win": false,
+        "final_state": "NOT_FINISHED",
+        "sdk_play_count": 1,
+        "sdk_actions": 80,
+        "sdk_counter_matches": true,
+        "sdk_runs": [
+          {
+            "actions": 80,
+            "levels": 0,
+            "score": 0.0,
+            "resets": 2
+          }
+        ],
+        "actions": 80,
+        "dispatches": 80,
+        "steps": 80,
+        "noops": 5,
+        "game_over_events": 2,
+        "agent_warning_events": 0,
+        "sdk_warning_events": 0,
+        "authorization": false,
+        "representative_choices": 60,
+        "coordinate_replacements": 58,
+        "fallbacks": 16,
+        "representative_seconds": 2.280798099935055,
+        "first_action_seconds": 0.5219925999990664,
+        "elapsed_seconds": 63.363330200001656,
+        "trace_sha256": "5193ecd779b62ab3364c10e8227f9b4e214a0e1bab8420269fc3fd77cd3551ca"
+      },
+      "score_delta": 0.0,
+      "level_delta": 0
+    }
+  ],
+  "limitations": "Public games reused in prior development; this is not untouched holdout or a Kaggle score. No-op uses the last public frame. Concurrent load prevents reliable timing comparison."
+}
