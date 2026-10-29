@@ -1,0 +1,111 @@
+{
+  "experiment": "arc3_lm_same_board_animation_paired_screen_r4",
+  "decision": "REJECT",
+  "registered_utc": "2026-10-29T11:21:34Z",
+  "started_utc": "2026-10-29T11:22:12Z",
+  "completed_utc": "2026-10-29T11:52:38Z",
+  "main_commit": "fac9167853cf2e18a3b334b61f44e946a64100fa",
+  "reference_commit": "4f37b4bbeaafcca736a57c17b02d51febcad56da",
+  "official_starter_commit": "135f20aaf44f13341ebc425666bf03b5cac58d3c",
+  "python": "3.12.10",
+  "arc_agi": "0.9.8",
+  "arcengine": "0.9.3",
+  "split_seed": 20261022,
+  "environment_seed": 0,
+  "policy_seed": 31025,
+  "episodes_per_arm": 5,
+  "action_budget_per_game": 80,
+  "input_manifest_sha256": "1c0404acdab55c91951911cc68c070eb25a5919c26846ba7f0d2f1b90897f4f7",
+  "source_sha256": {
+    "cpu_agent": "32addefe36a2db754b71d71f58d2fb49893c52143bad2fb33985f1e1b5fb1c0c",
+    "lm_candidate": "b332cc4004e286dd11797ac6817d3364a9a2d711c3747d5c0c3da48b02766752",
+    "paired_runner": "10a416c4de05419453e0efe7bc79eb0a851439319fce66cbc5cec7baa095962f",
+    "targeted_tests": "745f0e4163e142a76ed65f5c88295a2dc79a7aca76dff717a4d9383d3766d137",
+    "hds_package": "43d76d203127c95d7eed257ab5eb48edd5a9d13a49ae60060fbc327c91d528d9"
+  },
+  "arms": {
+    "A": {
+      "mean_local_sdk_score": 0.5879494655004859,
+      "levels_total": 1,
+      "wins": 0,
+      "dispatches": 400,
+      "final_board_noops": 60,
+      "elapsed_seconds": 13.72
+    },
+    "B": {
+      "mean_local_sdk_score": 0.5879494655004859,
+      "levels_total": 1,
+      "wins": 0,
+      "dispatches": 400,
+      "final_board_noops": 60,
+      "elapsed_seconds": 22.7
+    },
+    "D": {
+      "mean_local_sdk_score": 0.5879494655004859,
+      "mean_score_delta_vs_A": 0.0,
+      "paired_score_deltas": [0.0, 0.0, 0.0, 0.0, 0.0],
+      "positive_negative_tied": [0, 0, 5],
+      "levels_total": 1,
+      "level_delta_vs_A": 0,
+      "wins": 0,
+      "win_delta_vs_A": 0,
+      "dispatches": 400,
+      "final_board_noops": 59,
+      "elapsed_seconds": 1783.76,
+      "experience_updates": 396,
+      "hds_selection_decisions": 0,
+      "hds_overrides": 0,
+      "same_board_without_transient_animation": 58,
+      "same_board_transient_animation_observed": 0,
+      "same_board_novel_animation_deferred_noop": 0,
+      "same_board_repeated_animation_noop": 0
+    }
+  },
+  "paired_integrity": {
+    "valid_pairs": 5,
+    "error_pairs": 0,
+    "matched_initial_states": 5,
+    "A_B_trace_matches": 5,
+    "D_A_trace_divergent_pairs": 3,
+    "step_dispatch_mismatches": 0,
+    "sdk_action_mismatches": 0,
+    "agent_warnings": 0,
+    "sdk_warnings": 0
+  },
+  "gate": {
+    "required_mean_score_delta": 0.01,
+    "observed_mean_score_delta": 0.0,
+    "level_or_win_regression": false,
+    "passed": false
+  },
+  "raw_result": {
+    "local_path": "%TEMP%\\arc3-lm-animation-state-screen-20261029-r4\\result.json",
+    "sha256": "9c033aa4555f0df04e6832e737c86760fa145f10995f9000e55c3f53193bb994",
+    "contains_per_game_identifiers": true,
+    "committed": false
+  },
+  "official_read_only_observation": {
+    "observed_utc": "2026-10-29T11:54:13Z",
+    "submission_57749444": {
+      "status": "COMPLETE",
+      "public_score": 0.13,
+      "private_score": null
+    },
+    "submission_57688735": {
+      "status": "COMPLETE",
+      "public_score": 28.07,
+      "private_score": null
+    },
+    "submission_limit": {
+      "used_today": 0,
+      "remaining_today": 1,
+      "lifetime_submissions": 9
+    }
+  },
+  "limitations": [
+    "Previously used public games; this was a development rescreen, not a holdout or Kaggle score.",
+    "No same-board transient animation was observed in the evaluated public responses; absence in five games does not prove global absence.",
+    "D trace changes did not improve score, levels, or wins; HDS selection decisions remained zero.",
+    "No official notebook edit, kernel push/run, Competition Rerun, or submission occurred."
+  ]
+}
