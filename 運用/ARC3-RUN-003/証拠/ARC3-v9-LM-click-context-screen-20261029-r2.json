@@ -1,0 +1,97 @@
+{
+  "schema": "arc3-v9-public-lm-screen-aggregate-v1",
+  "run_id": "ARC3-v9-LM-click-context-screen-20261029-r2",
+  "decision": "REJECT",
+  "observed_utc": "2026-10-29T10:15:16Z",
+  "main_commit": "7081f482cbb83cea3e8ff6f6cbbeffe420fd9fda",
+  "reference_commit": "4f37b4bbeaafcca736a57c17b02d51febcad56da",
+  "official_starter_commit": "4743e7d0aaae0ded0d98a89a7e282e63564cd58b",
+  "source_sha256": {
+    "cpu_agent": "32addefe36a2db754b71d71f58d2fb49893c52143bad2fb33985f1e1b5fb1c0c",
+    "lm_candidate": "2d7652dc1f92e6c0aa6a2d196e5a9d77154f71e14eaeaf71e8492221487ab303",
+    "hds_package": "43d76d203127c95d7eed257ab5eb48edd5a9d13a49ae60060fbc327c91d528d9",
+    "runner": "e359a0d2effba38c54d1ef345d1e2d83f975667c245877a7d33108c9234d8217",
+    "targeted_test": "8800cc0f72c6aacf2675a41b7a5f089eac52e259bb38a727f09255b3aaa9e404"
+  },
+  "input_manifest_sha256": "1c0404acdab55c91951911cc68c070eb25a5919c26846ba7f0d2f1b90897f4f7",
+  "selected_public_set_sha256": "72bc40cd20bf57a847d131173c6f6e423cb6650c32585b2d91f140f77a4fbc55",
+  "raw_result_sha256": "54e9b7726dc9cb3af6c51751e9a1c4ec1039426f3da2af751a969e6deaebb947",
+  "environment": {
+    "python": "3.12.10",
+    "arc_agi": "0.9.8",
+    "arcengine": "0.9.3",
+    "split_seed": 20261022,
+    "environment_seed": 0,
+    "policy_seed": 31025,
+    "episodes_per_arm": 5,
+    "actions_per_game": 80,
+    "main_arm": "A: CPU public exploration",
+    "query_arm": "B: same actions, HDS query/log only",
+    "learning_arm": "D: HDS learning and action selection",
+    "candidate_features": [
+      "click_area_log2",
+      "click_fill_percent",
+      "click_touches_border",
+      "click_anchor_role"
+    ]
+  },
+  "results": {
+    "valid_pairs": 5,
+    "errors": 0,
+    "matched_initials": 5,
+    "A_local_sdk_mean": 0.588,
+    "B_local_sdk_mean": 0.588,
+    "D_local_sdk_mean": 0.2,
+    "D_minus_A_local_sdk_mean": -0.387883327934348,
+    "paired_delta_distribution_sorted": [
+      -1.94,
+      0,
+      0,
+      0,
+      0
+    ],
+    "D_A_positive_negative_tied": [
+      0,
+      1,
+      4
+    ],
+    "levels_A_total": 1,
+    "levels_D_total": 1,
+    "wins_A": 0,
+    "wins_D": 0,
+    "actions_A": 400,
+    "actions_B": 400,
+    "actions_D": 400,
+    "noops_A": 60,
+    "noops_D": 42,
+    "D_updates": 397,
+    "D_hds_selection_decisions": 271,
+    "D_level_progress_selection_decisions": 0,
+    "D_visible_change_selection_decisions": 271,
+    "D_hds_overrides": 217,
+    "D_click_overrides": 162,
+    "D_trace_divergent_pairs": 5,
+    "B_trace_equals_A_pairs": 5,
+    "step_dispatch_mismatches": 0,
+    "sdk_action_mismatches": 0,
+    "agent_warnings": 0,
+    "sdk_warnings": 0,
+    "D_elapsed_seconds": 2356.4801361,
+    "whole_screen_elapsed_seconds": 2420.2635761
+  },
+  "official_readonly": {
+    "observed_utc": "2026-10-29T10:15:16Z",
+    "submission_57749444": "COMPLETE",
+    "public_score_57749444": 0.13,
+    "private_score_57749444": null,
+    "submission_57688735": "COMPLETE",
+    "public_score_57688735": 28.07,
+    "private_score_57688735": null
+  },
+  "limitations": [
+    "五件とも過去に使用済みの公開ゲーム。holdoutではない。",
+    "得点はarc-agi 0.9.8 / arcengine 0.9.3のローカルSDK scorecardで、Kaggle公式scoreではない。",
+    "Agent/HDS状態はゲームごとに新規化。ゲーム間転移を測定していない。",
+    "各D選択は可視変化予測のみ。点数回帰の原因とは断定できない。"
+  ]
+}
