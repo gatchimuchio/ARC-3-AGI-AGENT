@@ -1,0 +1,127 @@
+{
+  "schema": "arc3-v9-public-lm-screen-aggregate-v1",
+  "run_id": "ARC3-v9-LM-click-point-only-screen-20261029-r3",
+  "decision": "REJECT",
+  "observed_utc": "2026-10-29T10:58:24Z",
+  "main_commit": "91dfe97ada67212d7778ecdc34ab4e6f28fef65b",
+  "reference_commit": "4f37b4bbeaafcca736a57c17b02d51febcad56da",
+  "official_starter_commit": "4743e7d0aaae0ded0d98a89a7e282e63564cd58b",
+  "source_sha256": {
+    "cpu_agent": "32addefe36a2db754b71d71f58d2fb49893c52143bad2fb33985f1e1b5fb1c0c",
+    "lm_candidate": "d8c49b1e3fb4d1a6ece4d01554f6ab66b341f3b98f0f14432e83d8048d645a74",
+    "hds_package": "43d76d203127c95d7eed257ab5eb48edd5a9d13a49ae60060fbc327c91d528d9",
+    "runner": "10a416c4de05419453e0efe7bc79eb0a851439319fce66cbc5cec7baa095962f",
+    "targeted_test": "fee6d2efcdb83d508175ea87c93bdc4bdc08a1d8851e0b5d0b7809b38d4b53e0"
+  },
+  "input_manifest_sha256": "1c0404acdab55c91951911cc68c070eb25a5919c26846ba7f0d2f1b90897f4f7",
+  "selected_public_set_sha256": "72bc40cd20bf57a847d131173c6f6e423cb6650c32585b2d91f140f77a4fbc55",
+  "raw_result_sha256": "eb214e997f20f444e6a22cb42b489b8c4344bd2cb698b54d54cae61091a88493",
+  "environment": {
+    "python": "3.12.10",
+    "arc_agi": "0.9.8",
+    "arcengine": "0.9.3",
+    "split_seed": 20261022,
+    "environment_seed": 0,
+    "policy_seed": 31025,
+    "episodes_per_arm": 5,
+    "actions_per_game": 80,
+    "main_arm": "A: CPU public exploration",
+    "query_arm": "B: same actions, HDS query/log only",
+    "learning_arm": "D: HDS learning, action class fixed to A, click point selection only",
+    "candidate_features": [
+      "click_area_log2",
+      "click_fill_percent",
+      "click_touches_border",
+      "click_anchor_role"
+    ]
+  },
+  "results": {
+    "valid_pairs": 5,
+    "errors": 0,
+    "matched_initials": 5,
+    "A_local_sdk_mean": 0.5879494655004859,
+    "B_local_sdk_mean": 0.5879494655004859,
+    "D_local_sdk_mean": 0.17722121528349905,
+    "D_minus_A_local_sdk_mean": -0.4107282502169868,
+    "paired_delta_distribution_sorted": [
+      -2.05364125108493,
+      0,
+      0,
+      0,
+      0
+    ],
+    "D_A_positive_negative_tied": [
+      0,
+      1,
+      4
+    ],
+    "levels_A_total": 1,
+    "levels_D_total": 1,
+    "wins_A": 0,
+    "wins_D": 0,
+    "actions_A": 400,
+    "actions_B": 400,
+    "actions_D": 400,
+    "action_counts_identical": true,
+    "action_histogram_A": {
+      "0": 3,
+      "1": 42,
+      "2": 26,
+      "3": 30,
+      "4": 42,
+      "5": 0,
+      "6": 217,
+      "7": 40
+    },
+    "action_histogram_B": {
+      "0": 3,
+      "1": 42,
+      "2": 26,
+      "3": 30,
+      "4": 42,
+      "5": 0,
+      "6": 217,
+      "7": 40
+    },
+    "action_histogram_D": {
+      "0": 3,
+      "1": 42,
+      "2": 26,
+      "3": 30,
+      "4": 42,
+      "5": 0,
+      "6": 217,
+      "7": 40
+    },
+    "noops_A": 60,
+    "noops_D": 54,
+    "D_updates": 397,
+    "D_hds_selection_decisions": 175,
+    "D_hds_overrides": 136,
+    "D_action_class_overrides": 0,
+    "D_point_only_overrides": 136,
+    "D_trace_divergent_pairs": 4,
+    "B_trace_equals_A_pairs": 5,
+    "step_dispatch_mismatches": 0,
+    "sdk_action_mismatches": 0,
+    "agent_warnings": 0,
+    "sdk_warnings": 0,
+    "D_elapsed_seconds": 2030.7003218,
+    "whole_screen_elapsed_seconds": 2069.0105499
+  },
+  "official_readonly": {
+    "observed_utc": "2026-10-29T10:58:24Z",
+    "submission_57749444": "COMPLETE",
+    "public_score_57749444": 0.13,
+    "private_score_57749444": null,
+    "submission_57688735": "COMPLETE",
+    "public_score_57688735": 28.07,
+    "private_score_57688735": null
+  },
+  "limitations": [
+    "五件とも過去に使用済みの公開ゲーム。holdoutではない。",
+    "得点はarc-agi 0.9.8 / arcengine 0.9.3のローカルSDK scorecardで、Kaggle公式scoreではない。",
+    "Agent/HDS状態はゲームごとに新規化。ゲーム間転移を測定していない。",
+    "Action histogramは腕間で一致したが、click pointの変更がSDK score低下を引き起こす一般原因とは5件だけでは断定できない。"
+  ]
+}
